@@ -16,6 +16,6 @@ class HomeController
             $data['payments'][] = (new $payment)->handle();
         }
 
-        return view('welcome', $data);
+        return view('home', $data);
     }
 }
