@@ -9,5 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['price', 'status'];
+    protected $fillable = ['image', 'video', 'sort_order', 'status', 'variable'];
+
+    public function skus()
+    {
+        return $this->hasMany(ProductSku::class);
+    }
 }

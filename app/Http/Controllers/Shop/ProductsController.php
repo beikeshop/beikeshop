@@ -10,6 +10,7 @@ class ProductsController extends Controller
 {
     public function show(Request $request, Product $product)
     {
-
+        $product->load('skus');
+        dd($product);
     }
 }
