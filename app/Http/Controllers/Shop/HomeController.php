@@ -1,11 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
-class HomeController
+use App\Http\Controllers\Controller;
+use Plugin\Guangda\Seller\Models\Product;
+
+class HomeController extends Controller
 {
     public function index()
     {
+        $data = [
+            'price' => 1,
+            'status' => true,
+            'seller_id' => 100,
+        ];
+
+        $product = new Product($data);
+
         $payments = [
             '\Plugin\Guangda\WeChat\WeChat',
             '\Plugin\Guangda\Alipay\Alipay',
