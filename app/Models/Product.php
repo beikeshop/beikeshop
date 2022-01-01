@@ -15,4 +15,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductSku::class);
     }
+
+    public function getVariableDecodedAttribute()
+    {
+        return json_decode($this->variable, true);
+    }
 }
