@@ -15,11 +15,11 @@ class CreateTables extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
-            $table->string('image');
-            $table->string('video');
-            $table->integer('sort_order');
-            $table->boolean('status');
-            $table->json('variable');
+            $table->string('image')->default('');
+            $table->string('video')->default('');
+            $table->integer('position')->default(0);
+            $table->boolean('active');
+            $table->json('variables')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -27,11 +27,15 @@ class CreateTables extends Migration
         Schema::create('product_skus', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->unsignedBigInteger('product_id');
-            $table->string('image');
-            $table->string('model');
-            $table->string('sku');
-            $table->double('price');
-            $table->integer('quantity');
+            $table->string('variants')->default(0);
+            $table->integer('position')->default(0);
+            $table->string('image')->default('');
+            $table->string('model')->default('');
+            $table->string('sku')->default('');
+            $table->double('price')->default(0);
+            $table->double('origin_price')->default(0);
+            $table->double('cost_price')->default(0);
+            $table->integer('quantity')->default(0);
             $table->boolean('is_default');
             $table->timestamps();
         });

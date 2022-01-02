@@ -6,7 +6,7 @@
         @foreach ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
-                <td>{{ $product->variable ? '多规格' : '单规格' }}</td>
+                <td>{{ $product->variables ? '多规格' : '单规格' }}</td>
                 <td>
                     <a href="{{ route('admin.products.edit', $product) }}">编辑</a>
                 </td>

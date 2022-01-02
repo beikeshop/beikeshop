@@ -9,15 +9,15 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image', 'video', 'sort_order', 'status', 'variable'];
+    protected $fillable = ['image', 'video', 'position', 'active', 'variables'];
 
     public function skus()
     {
         return $this->hasMany(ProductSku::class);
     }
 
-    public function getVariableDecodedAttribute()
+    public function getVariablesDecodedAttribute()
     {
-        return json_decode($this->variable, true);
+        return json_decode($this->variables, true);
     }
 }

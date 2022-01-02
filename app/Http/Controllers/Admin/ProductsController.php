@@ -48,9 +48,11 @@ class ProductsController extends Controller
         return view('admin.pages.products.form.form', $data);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product = (new ProductService)->update($product, $request->all());
+
+        return redirect()->route('admin.products.index')->with('success', 'product updated');
     }
 
     public function destroy($id)

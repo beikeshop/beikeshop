@@ -7,24 +7,35 @@ use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
-    public function create($data)
+    public function create(array $data): Product
     {
+        $product = new Product;
+        return $this->createOrUpdate($product, $data);
+    }
+
+    public function update(Product $product, array $data): Product
+    {
+        return $this->createOrUpdate($product, $data);
+    }
+
+    protected function createOrUpdate(Product $product, array $data): Product
+    {
+        $isUpdating = $product->id > 0;
+
         try {
             DB::beginTransaction();
 
-            $product = new Product($data);
-            if (isset($data['variant'])) {
-                $product->variable = json_encode($data['variant']);
-            }
+            $product->fill($data);
             $product->saveOrFail();
 
             $skus = [];
             foreach ($data['skus'] as $index => $rawSku) {
-                $sku = $rawSku;
-                $sku['is_default'] = $index == 0;
-                $skus[] = $sku;
+                $skus[] = $rawSku;
             }
 
+            if ($isUpdating) {
+                $product->skus()->delete();
+            }
             $product->skus()->createMany($skus);
 
             DB::commit();

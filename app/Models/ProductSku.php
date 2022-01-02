@@ -9,5 +9,9 @@ class ProductSku extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'image', 'model', 'sku', 'price', 'quantity', 'is_default'];
+    protected $fillable = ['product_id', 'variants', 'position', 'image', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'quantity', 'is_default'];
+
+    protected $casts = [
+        'variants' => 'array',
+    ];
 }
