@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Models\ProductDescription;
 use Illuminate\Support\Facades\DB;
 
 class ProductService
@@ -28,13 +29,24 @@ class ProductService
             $product->fill($data);
             $product->saveOrFail();
 
-            $skus = [];
-            foreach ($data['skus'] as $index => $rawSku) {
-                $skus[] = $rawSku;
-            }
-
             if ($isUpdating) {
                 $product->skus()->delete();
+                $product->description()->delete();
+            }
+
+            $descriptions = [];
+            foreach ($data['descriptions'] as $locale => $description) {
+                $description['locale'] = $locale;
+                $description['content'] = $description['content'] ?? '';
+
+                $descriptions[] = $description;
+            }
+            $product->descriptions()->createMany($descriptions);
+
+            $skus = [];
+            foreach ($data['skus'] as $index => $sku) {
+                $sku->position = $index;
+                $skus[] = $sku;
             }
             $product->skus()->createMany($skus);
 

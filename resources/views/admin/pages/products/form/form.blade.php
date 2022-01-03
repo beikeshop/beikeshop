@@ -10,11 +10,18 @@
         @csrf
         @method(($product ?? null) ? 'PUT' : 'POST')
 
-        <input type="text" name="name" placeholder="Name" value="{{ old('name', $product->name ?? '') }}">
-        <input type="text" name="image" placeholder="image" value="{{ old('image', $product->image ?? '') }}">
-        <input type="text" name="video" placeholder="video" value="{{ old('video', $product->video ?? '') }}">
-        <input type="text" name="position" placeholder="position" value="{{ old('position', $product->position ?? 0) }}">
-        <input type="text" name="active" placeholder="active" value="{{ old('active', $product->active ?? 1) }}">
+        <div>
+            @foreach (locales() as $locale)
+                <input type="text" name="descriptions[{{ $locale['code'] }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('name', $product->descriptions->name ?? '') }}">
+            @endforeach
+        </div>
+
+        <div>
+            <input type="text" name="image" placeholder="image" value="{{ old('image', $product->image ?? '') }}">
+            <input type="text" name="video" placeholder="video" value="{{ old('video', $product->video ?? '') }}">
+            <input type="text" name="position" placeholder="position" value="{{ old('position', $product->position ?? 0) }}">
+            <input type="text" name="active" placeholder="active" value="{{ old('active', $product->active ?? 1) }}">
+        </div>
         
         <div>
             <h2>skus</h2>
@@ -60,7 +67,6 @@
                                   </template>
                                 <td>
                                     <input type="text" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'" placeholder="image">
-                                    <input type="hidden" :name="'skus[' + skuIndex + '][position]'" :value="skuIndex">
                                     <input type="hidden" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
                                     <input v-for="(variantValueIndex, j) in sku.variants" type="hidden" :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
                                 </td>

@@ -24,6 +24,18 @@ class CreateTables extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('product_descriptions', function (Blueprint $table) {
+            $table->id()->startingValue(100_000);
+            $table->unsignedBigInteger('product_id');
+            $table->string('locale');
+            $table->string('name');
+            $table->text('content');
+            $table->string('meta_title')->default('');
+            $table->string('meta_description')->default('');
+            $table->string('meta_keyword')->default('');
+            $table->timestamps();
+        });
+
         Schema::create('product_skus', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->unsignedBigInteger('product_id');
@@ -49,6 +61,7 @@ class CreateTables extends Migration
     public function down()
     {
         Schema::dropIfExists('products');
+        Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');
     }
 }

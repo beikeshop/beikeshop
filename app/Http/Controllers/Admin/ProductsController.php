@@ -13,6 +13,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::query()
+            ->with('description')
             ->withCount('skus')
             ->paginate();
 
