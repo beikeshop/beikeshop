@@ -43,6 +43,8 @@ class ProductsController extends Controller
 
     public function edit(Product $product)
     {
+        $product->loadMissing('descriptions');
+
         $data = [
             'product' => $product,
         ];

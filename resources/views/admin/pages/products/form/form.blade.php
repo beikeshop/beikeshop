@@ -10,9 +10,18 @@
         @csrf
         @method(($product ?? null) ? 'PUT' : 'POST')
 
+        @php
+            if ($product ?? null) {
+                $descriptions = $product->descriptions->keyBy('locale');
+            } else {
+                $descriptions = [];
+            }
+
+        @endphp
+
         <div>
             @foreach (locales() as $locale)
-                <input type="text" name="descriptions[{{ $locale['code'] }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('name', $product->descriptions->name ?? '') }}">
+                <input type="text" name="descriptions[{{ $locale['code'] }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('descriptions.'.$locale['code'].'.name', $descriptions[$locale['code']]->name ?? '') }}">
             @endforeach
         </div>
 

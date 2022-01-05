@@ -51,6 +51,16 @@ class CreateTables extends Migration
             $table->boolean('is_default');
             $table->timestamps();
         });
+
+        Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+            $table->integer('customer_id');
+            $table->boolean('selected');
+            $table->integer('product_id');
+            $table->integer('product_sku_id');
+            $table->unsignedInteger('quantity');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -63,5 +73,6 @@ class CreateTables extends Migration
         Schema::dropIfExists('products');
         Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');
+        Schema::dropIfExists('carts');
     }
 }

@@ -45,7 +45,7 @@ class ProductService
 
             $skus = [];
             foreach ($data['skus'] as $index => $sku) {
-                $sku->position = $index;
+                $sku['position'] = $index;
                 $skus[] = $sku;
             }
             $product->skus()->createMany($skus);

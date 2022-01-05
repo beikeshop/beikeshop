@@ -14,4 +14,9 @@ class ProductSku extends Model
     protected $casts = [
         'variants' => 'array',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
