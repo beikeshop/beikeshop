@@ -2,6 +2,9 @@
 
 @section('content')
     <a href="{{ route('admin.products.create') }}">Create</a>
+
+    <x-filter :url="route('admin.products.index')" />
+
     <table>
         @foreach ($products as $product)
             <tr>
@@ -15,3 +18,4 @@
         @endforeach
     </table>
 @endsection
+
