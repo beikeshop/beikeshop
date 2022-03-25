@@ -10,6 +10,9 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['image', 'video', 'position', 'active', 'variables'];
+    protected $attributes = [
+        'image' => ''
+    ];
 
     public function description()
     {

@@ -18,7 +18,7 @@ class CreateTables extends Migration
             $table->string('image')->default('');
             $table->string('video')->default('');
             $table->integer('position')->default(0);
-            $table->boolean('active');
+            $table->boolean('active')->default(0);
             $table->json('variables')->nullable();
             $table->timestamps();
             $table->softDeletes();

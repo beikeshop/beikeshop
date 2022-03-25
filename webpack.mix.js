@@ -11,10 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/build/js')
-    .postCss('resources/css/app.css', 'public/build/css', [
-        //
-    ]);
+// mix.js('resources/js/app.js', 'public/build/js')
+//     .postCss('resources/css/app.css', 'public/build/css', [
+//         //
+//     ]);
+
+mix.sass('resources/css/app.scss', 'public/build/css');
 
 
 if (mix.inProduction()) {

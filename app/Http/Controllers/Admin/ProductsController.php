@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::query()
             ->with('description')
@@ -24,8 +24,9 @@ class ProductsController extends Controller
         return view('admin.pages.products.index', $data);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+
         return view('admin.pages.products.form.form');
     }
 
@@ -33,7 +34,8 @@ class ProductsController extends Controller
     {
         $product = (new ProductService)->create($request->all());
 
-        return redirect()->route('admin.products.index')->with('success', 'product created');
+        $redirect = $request->_redirect ?? route('admin.products.index');
+        return redirect($redirect)->with('success', 'product created');
     }
 
     public function show($id)
