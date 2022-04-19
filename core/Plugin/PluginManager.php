@@ -9,7 +9,7 @@
  * @modified   2022-04-18 16:21:06
  */
 
-namespace App\Services;
+namespace Beike\Plugin;
 
 use App\Exceptions\PrettyPageException;
 use App\Repositories\SettingRepository;
@@ -34,6 +34,7 @@ class PluginManager
         Filesystem        $fileSystem
     )
     {
+        throw new \Exception(222);
         $this->app = $app;
         $this->setting = $setting;
         $this->dispatcher = $dispatcher;
@@ -60,14 +61,14 @@ class PluginManager
             }
 
             // traverse plugins dir
-            while($filename = @readdir($resource)) {
+            while ($filename = @readdir($resource)) {
                 if ($filename == '.' || $filename == '..')
                     continue;
 
-                $path = $this->getPluginsDir().DIRECTORY_SEPARATOR.$filename;
+                $path = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $filename;
 
                 if (is_dir($path)) {
-                    $packageJsonPath = $path.DIRECTORY_SEPARATOR.'package.json';
+                    $packageJsonPath = $path . DIRECTORY_SEPARATOR . 'package.json';
 
                     if (file_exists($packageJsonPath)) {
                         // load packages installed
@@ -81,7 +82,7 @@ class PluginManager
             foreach ($installed as $dirname => $package) {
 
                 // Instantiates an Plugin object using the package path and package.json file.
-                $plugin = new Plugin($this->getPluginsDir().DIRECTORY_SEPARATOR.$dirname, $package);
+                $plugin = new Plugin($this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname, $package);
 
                 // Per default all plugins are installed if they are registered in composer.
                 $plugin->setDirname($dirname);
@@ -106,5 +107,44 @@ class PluginManager
         }
 
         return $this->plugins;
+    }
+
+    /**
+     * The id's of the enabled plugins.
+     *
+     * @return array
+     */
+    public function getEnabled()
+    {
+        return (array) json_decode($this->setting->get('plugins_enabled'), true);
+    }
+
+
+    /**
+     * Get only enabled plugins.
+     *
+     * @return Collection
+     */
+    public function getEnabledPlugins()
+    {
+        return $this->getPlugins()->only($this->getEnabled());
+    }
+
+    /**
+     * Loads all bootstrap.php files of the enabled plugins.
+     *
+     * @return Collection
+     */
+    public function getEnabledBootstrappers(): Collection
+    {
+        $bootstrappers = new Collection;
+
+        foreach ($this->getEnabledPlugins() as $plugin) {
+            if ($this->filesystem->exists($file = $plugin->getPath() . '/bootstrap.php')) {
+                $bootstrappers->push($file);
+            }
+        }
+
+        return $bootstrappers;
     }
 }

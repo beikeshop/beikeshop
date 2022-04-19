@@ -9,7 +9,7 @@
  * @modified   2022-04-18 16:20:43
  */
 
-namespace App\Services;
+namespace Beike\Plugin;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
