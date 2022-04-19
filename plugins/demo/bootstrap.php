@@ -1,15 +1,17 @@
 <?php
-
 /**
- * Kernel.php
+ * bootstrap.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
  * @author     Edward Yang <yangjin@opencart.cn>
- * @created    2022-03-18 18:46:29
- * @modified   2022-03-18 18:46:29
+ * @created    2022-04-19 18:59:04
+ * @modified   2022-04-19 18:59:04
  */
-class Kernel extends BkKernel
+
+namespace Plugin\demo;
+
+class bootstrap
 {
 
 }

@@ -1,0 +1,12 @@
+{
+    "name": "demo",
+    "version": "1.0.0",
+    "title": "demo::general.title",
+    "description": "demo::general.description",
+    "author": "yushine",
+    "url": "https://beike.shop/",
+    "namespace": "demo",
+    "require": {
+        "beike": "^1.0.0"
+    }
+}

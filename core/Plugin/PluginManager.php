@@ -11,13 +11,12 @@
 
 namespace Beike\Plugin;
 
-use App\Exceptions\PrettyPageException;
 use App\Repositories\SettingRepository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 class PluginManager
 {
@@ -34,7 +33,6 @@ class PluginManager
         Filesystem        $fileSystem
     )
     {
-        throw new \Exception(222);
         $this->app = $app;
         $this->setting = $setting;
         $this->dispatcher = $dispatcher;
@@ -49,62 +47,47 @@ class PluginManager
      */
     public function getPlugins(): Collection
     {
-        if (is_null($this->plugins)) {
-            $plugins = new Collection();
-
-            $installed = [];
-
-            try {
-                $resource = opendir($this->getPluginsDir());
-            } catch (\Exception $e) {
-                throw new PrettyPageException(trans('errors.plugins.directory', ['msg' => $e->getMessage()]), 500);
-            }
-
-            // traverse plugins dir
-            while ($filename = @readdir($resource)) {
-                if ($filename == '.' || $filename == '..')
-                    continue;
-
-                $path = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $filename;
-
-                if (is_dir($path)) {
-                    $packageJsonPath = $path . DIRECTORY_SEPARATOR . 'package.json';
-
-                    if (file_exists($packageJsonPath)) {
-                        // load packages installed
-                        $installed[$filename] = json_decode($this->filesystem->get($packageJsonPath), true);
-                    }
-                }
-
-            }
-            closedir($resource);
-
-            foreach ($installed as $dirname => $package) {
-
-                // Instantiates an Plugin object using the package path and package.json file.
-                $plugin = new Plugin($this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname, $package);
-
-                // Per default all plugins are installed if they are registered in composer.
-                $plugin->setDirname($dirname);
-                $plugin->setInstalled(true);
-                $plugin->setNameSpace(Arr::get($package, 'namespace'));
-                $plugin->setVersion(Arr::get($package, 'version'));
-                $plugin->setEnabled($this->isEnabled($plugin->name));
-
-                if ($plugins->has($plugin->name)) {
-                    throw new PrettyPageException(trans('errors.plugins.duplicate', [
-                        'dir1' => $plugin->getDirname(),
-                        'dir2' => $plugins->get($plugin->name)->getDirname()
-                    ]), 5);
-                }
-
-                $plugins->put($plugin->name, $plugin);
-            }
-
-            $this->plugins = $plugins->sortBy(function ($plugin, $name) {
-                return $plugin->name;
-            });
+        if ($this->plugins) {
+            return $this->plugins;
         }
+
+        $plugins = new Collection();
+        $installed = [];
+        $resource = opendir($this->getPluginsDir());
+
+        while ($filename = @readdir($resource)) {
+            if ($filename == '.' || $filename == '..') {
+                continue;
+            }
+
+            $path = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $filename;
+            if (is_dir($path)) {
+                $packageJsonPath = $path . DIRECTORY_SEPARATOR . 'package.json';
+                if (file_exists($packageJsonPath)) {
+                    $installed[$filename] = json_decode($this->filesystem->get($packageJsonPath), true);
+                }
+            }
+        }
+        closedir($resource);
+dd($installed);
+        foreach ($installed as $dirname => $package) {
+            $plugin = new Plugin($this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname, $package);
+            $plugin->setDirname($dirname);
+            $plugin->setInstalled(true);
+            $plugin->setNameSpace(Arr::get($package, 'namespace'));
+            $plugin->setVersion(Arr::get($package, 'version'));
+            $plugin->setEnabled($this->isEnabled($plugin->name));
+
+            if ($plugins->has($plugin->name)) {
+                throw new \Exception("有重名插件：" . $plugin->name);
+            }
+
+            $plugins->put($plugin->name, $plugin);
+        }
+
+        $this->plugins = $plugins->sortBy(function ($plugin, $name) {
+            return $plugin->name;
+        });
 
         return $this->plugins;
     }
@@ -116,7 +99,33 @@ class PluginManager
      */
     public function getEnabled()
     {
-        return (array) json_decode($this->setting->get('plugins_enabled'), true);
+        return (array)json_decode($this->setting->get('plugins_enabled'), true);
+    }
+
+    /**
+     * Persist the currently enabled plugins.
+     *
+     * @param array $enabled
+     */
+    protected function setEnabled(array $enabled)
+    {
+        $enabled = array_values(array_unique($enabled));
+
+        $this->option->set('plugins_enabled', json_encode($enabled));
+
+        // ensure to save options
+        $this->option->save();
+    }
+
+    /**
+     * Whether the plugin is enabled.
+     *
+     * @param string $pluginName
+     * @return bool
+     */
+    public function isEnabled($pluginName)
+    {
+        return in_array($pluginName, $this->getEnabled());
     }
 
 
@@ -146,5 +155,15 @@ class PluginManager
         }
 
         return $bootstrappers;
+    }
+
+    /**
+     * The plugins path.
+     *
+     * @return string
+     */
+    public function getPluginsDir(): string
+    {
+        return config('plugins.directory') ?: base_path('plugins');
     }
 }
