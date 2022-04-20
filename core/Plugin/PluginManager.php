@@ -69,7 +69,7 @@ class PluginManager
             }
         }
         closedir($resource);
-dd($installed);
+// dd($installed);
         foreach ($installed as $dirname => $package) {
             $plugin = new Plugin($this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname, $package);
             $plugin->setDirname($dirname);

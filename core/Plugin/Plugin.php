@@ -21,54 +21,54 @@ class Plugin implements Arrayable, \ArrayAccess
      * The full directory of the plugin.
      * @var string
      */
-    protected string $path;
+    protected $path;
 
     /**
      * The directory name of the plugin.
      *
      * @var string
      */
-    protected string $dirName;
+    protected $dirName;
 
     /**
      * The information of package.json of the package.
      *
      * @var array
      */
-    protected array $packageInfo;
+    protected $packageInfo;
 
     /**
      * Whether the plugin is installed.
      *
      * @var bool
      */
-    protected bool $installed = true;
+    protected $installed = true;
 
     /**
      * The installed version of the plugin.
      *
      * @var string
      */
-    protected string $version;
+    protected $version;
 
     /**
      * The namespace used by the plugin.
      *
      * @var string
      */
-    protected string $namespace;
+    protected $namespace;
 
     /**
      * Whether the plugin is enabled.
      *
      * @var bool
      */
-    protected bool $enabled = false;
+    protected $enabled = false;
 
     /**
      * @var array
      */
-    private array $require;
+    private $require;
 
 
     /**
