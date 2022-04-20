@@ -43,7 +43,6 @@ class PluginManager
      * Get all plugins
      *
      * @return Collection
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function getPlugins(): Collection
     {
@@ -69,7 +68,7 @@ class PluginManager
             }
         }
         closedir($resource);
-// dd($installed);
+
         foreach ($installed as $dirname => $package) {
             $plugin = new Plugin($this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname, $package);
             $plugin->setDirname($dirname);
@@ -85,7 +84,7 @@ class PluginManager
             $plugins->put($plugin->name, $plugin);
         }
 
-        $this->plugins = $plugins->sortBy(function ($plugin, $name) {
+        $this->plugins = $plugins->sortBy(function ($plugin) {
             return $plugin->name;
         });
 
@@ -97,7 +96,7 @@ class PluginManager
      *
      * @return array
      */
-    public function getEnabled()
+    public function getEnabled(): array
     {
         return (array)json_decode($this->setting->get('plugins_enabled'), true);
     }
@@ -111,10 +110,7 @@ class PluginManager
     {
         $enabled = array_values(array_unique($enabled));
 
-        $this->option->set('plugins_enabled', json_encode($enabled));
-
-        // ensure to save options
-        $this->option->save();
+        $this->setting->set('plugins_enabled', json_encode($enabled));
     }
 
     /**
@@ -123,7 +119,7 @@ class PluginManager
      * @param string $pluginName
      * @return bool
      */
-    public function isEnabled($pluginName)
+    public function isEnabled(string $pluginName): bool
     {
         return in_array($pluginName, $this->getEnabled());
     }
@@ -133,8 +129,9 @@ class PluginManager
      * Get only enabled plugins.
      *
      * @return Collection
+     * @throws \Exception
      */
-    public function getEnabledPlugins()
+    public function getEnabledPlugins(): Collection
     {
         return $this->getPlugins()->only($this->getEnabled());
     }
@@ -143,6 +140,7 @@ class PluginManager
      * Loads all bootstrap.php files of the enabled plugins.
      *
      * @return Collection
+     * @throws \Exception
      */
     public function getEnabledBootstrappers(): Collection
     {
