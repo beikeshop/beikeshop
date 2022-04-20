@@ -75,7 +75,8 @@ class PluginManager
             $plugin->setInstalled(true);
             $plugin->setNameSpace(Arr::get($package, 'namespace'));
             $plugin->setVersion(Arr::get($package, 'version'));
-            $plugin->setEnabled($this->isEnabled($plugin->name));
+            // $plugin->setEnabled($this->isEnabled($plugin->name));
+            $plugin->setEnabled(true);
 
             if ($plugins->has($plugin->name)) {
                 throw new \Exception("有重名插件：" . $plugin->name);
@@ -133,7 +134,7 @@ class PluginManager
      */
     public function getEnabledPlugins(): Collection
     {
-        return $this->getPlugins()->only($this->getEnabled());
+        return $this->getPlugins();//->only($this->getEnabled());
     }
 
     /**

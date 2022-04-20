@@ -9,9 +9,22 @@
  * @modified   2022-04-19 18:59:04
  */
 
-namespace Plugin\demo;
+namespace Beike\Demo;
 
-class bootstrap
-{
+use Illuminate\Routing\Route;
 
-}
+return function () {
+    // dd('demo bootstrap');
+    // Hook::addMenuItem('user', 3, [
+    //     'title' => 'Blessing\ConfigGenerator::config.generate-config',
+    //     'link' => 'user/config',
+    //     'icon' => 'fa-book',
+    // ]);
+
+    // Hook::addRoute(function () {
+        Route::get(
+            'demo',
+            'Blessing\ConfigGenerator\Controller@generate'
+        )->middleware(['web', 'auth']);
+    // });
+};

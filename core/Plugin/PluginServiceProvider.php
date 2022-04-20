@@ -44,7 +44,7 @@ class PluginServiceProvider extends ServiceProvider
         foreach ($pluginManager->getPlugins() as $plugin) {
             if ($plugin->isEnabled()) {
                 $srcPaths[$plugin->getNameSpace()] = $plugin->getPath() . '/src';
-                $viewFinder->addNamespace($plugin->getNameSapace(), $plugin->getPath() . '/views');
+                $viewFinder->addNamespace($plugin->getNameSpace(), $plugin->getPath() . '/views');
             }
             $loader->addNamespace($plugin->getNameSpace(), $plugin->getPath() . "/lang");
         }

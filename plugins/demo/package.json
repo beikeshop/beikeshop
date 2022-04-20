@@ -5,7 +5,7 @@
     "description": "demo::general.description",
     "author": "yushine",
     "url": "https://beike.shop/",
-    "namespace": "demo",
+    "namespace": "Beike\\Demo",
     "require": {
         "beike": "^1.0.0"
     }
