@@ -27,8 +27,8 @@ class Demo2ServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-// return;
-        Eventy::addFilter('home.data', function($data) {
+
+        Eventy::addFilter('home.data', function ($data) {
             dump($data);
             $data['price'] = 9999;
             $data['message'] = '首页替换后第二句话 YYY';
