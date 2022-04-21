@@ -10,7 +10,8 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "yxx/laravel-plugin": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
