@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    @foreach($payments as $payment)
+    @foreach($payments ?? '' as $payment)
         <p>{{ $payment }}</p>
     @endforeach
 </body>

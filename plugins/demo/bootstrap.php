@@ -11,6 +11,7 @@
 
 namespace Beike\Demo;
 
+use Beike\Plugin\Hook;
 use Illuminate\Routing\Route;
 
 return function () {
@@ -21,10 +22,11 @@ return function () {
     //     'icon' => 'fa-book',
     // ]);
 
-    // Hook::addRoute(function () {
+    Hook::addRoute(function () {
         Route::get(
-            'demo',
+            'demo1',
             'Beike\Demo\DemoController@index'
         )->middleware(['web', 'auth']);
-    // });
+    });
+    app()->make('router')->get('demo2', 'Beike\Demo\DemoController@index');
 };
