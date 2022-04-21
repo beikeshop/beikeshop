@@ -24,7 +24,7 @@ return function () {
     // Hook::addRoute(function () {
         Route::get(
             'demo',
-            'Blessing\ConfigGenerator\Controller@generate'
+            'Beike\Demo\DemoController@index'
         )->middleware(['web', 'auth']);
     // });
 };
