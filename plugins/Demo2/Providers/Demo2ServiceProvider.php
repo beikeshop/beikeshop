@@ -3,6 +3,7 @@
 namespace Plugins\Demo2\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use TorMorten\Eventy\Facades\Events as Eventy;
 
 class Demo2ServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,15 @@ class Demo2ServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+// return;
+        Eventy::addFilter('home.data', function($data) {
+            dump($data);
+            $data['price'] = 9999;
+            $data['message'] = '首页替换后第二句话 YYY';
+            dump($data);
+            return $data;
+        }, 20, 1);
+
     }
 
     /**

@@ -10,5 +10,7 @@
 <body>
     <h1>welcome acme</h1>
     @include('header')
+   price: {{ $price }}
+    message: {{ $message }}
 </body>
 </html>

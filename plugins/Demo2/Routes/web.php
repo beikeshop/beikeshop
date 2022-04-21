@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/')->group(function() {
-    Route::get('/', 'Demo2Controller@index');
+    Route::get('/demo2', 'Demo2Controller@index');
 });

@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/tinker": "^2.5",
+        "tormjens/eventy": "^0.8.0",
         "yxx/laravel-plugin": "^1.0"
     },
     "require-dev": {

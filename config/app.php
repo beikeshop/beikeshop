@@ -178,7 +178,7 @@ return [
         /**
          * Custom Service Providers
          */
-        \Beike\Plugin\PluginServiceProvider::class,
+        // \Beike\Plugin\PluginServiceProvider::class,
 
     ],
 
