@@ -1,0 +1,15 @@
+{
+    "name": "Demo2",
+    "alias": "demo2",
+    "description": "",
+    "logo": "",
+    "version": "1.0.0",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Plugins\\Demo2\\Providers\\Demo2ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 mix-manifest.json
+plugin_statuses.json
