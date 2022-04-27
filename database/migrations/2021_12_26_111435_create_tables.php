@@ -13,6 +13,15 @@ class CreateTables extends Migration
      */
     public function up()
     {
+        Schema::create('admin_users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->boolean('active');
+            $table->timestamps();
+        });
+
         Schema::create('products', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->string('image')->default('');
@@ -70,6 +79,7 @@ class CreateTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('admin_users');
         Schema::dropIfExists('products');
         Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');

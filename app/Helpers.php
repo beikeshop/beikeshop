@@ -1,5 +1,10 @@
 <?php
 
+function admin_route($route, $params = []): string
+{
+    return route('admin.' . $route, $params);
+}
+
 function locales(): array
 {
     $locales = [];
