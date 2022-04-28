@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "axios": "^0.21",
+        "bootstrap": "^4.6.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "resolve-url-loader": "^4.0.0",

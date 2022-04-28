@@ -1,24 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
-  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="{{ mix('build/css/app.css') }}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+{{--   <script src="{{ asset('vendor/vue/2.6.12/vue' . (config('app.debug') ? '' : '.min') . '.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <script src="{{ asset('vendor/jquery/3.6.0/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/axios/0.21.1/axios.min.js') }}"></script>
+  <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
+  <script src="{{ mix('build/js/app.js') }}"></script> --}}
+
+  <link href="{{ mix('build/css/bootstrap.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <link href="{{ mix('build/css/admin/app.css') }}" rel="stylesheet">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>beike admin</title>
   @stack('header')
+  {{-- <x-analytics /> --}}
 </head>
-<body>
-  <div>
-    <div>sidebar</div>
-    <div>
-      @yield('content')
+<body class="@yield('body-class')">
+  <!-- <div style="height: 80px; background: white;"></div> -->
+
+  @include('admin.layouts.header')
+  <div class="main-content">
+    <aside class="sidebar navbar-expand-xs border-radius-xl">
+      @include('admin.layouts.sidebar')
+    </aside>
+    <div id="content">
+      <div class="container-fluid p-0">
+        <div class="page-title-box"><h4 class="page-title">@yield('title')</h4></div>
+        @yield('content')
+      </div>
     </div>
   </div>
-
+  @stack('footer')
 </body>
-
-@stack('footer')
 </html>

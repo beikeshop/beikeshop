@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
 
+@section('title', '商品管理')
+
 @section('content')
   <div class="card">
     <div class="card-body">
