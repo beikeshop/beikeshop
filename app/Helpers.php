@@ -7,7 +7,7 @@ function admin_route($route, $params = []): string
 
 function image_thumbnail($path): string
 {
-    return asset($path);
+    return 'https://dummyimage.com/100.jpg';
 }
 
 function locales(): array

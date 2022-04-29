@@ -17,8 +17,10 @@ class ProductResource extends JsonResource
         $data = [
             'id' => $this->id,
             'image' => image_thumbnail($this->image),
-            'name' => $this->translation->name ?? '',
+            'name' => $this->description->name ?? '',
+            'price_formatted' => $this->price_formatted,
             'active' => $this->active,
+            'created_at' => (string)$this->created_at,
             'url_edit' => route('admin.products.edit', $this->id),
         ];
 

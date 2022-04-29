@@ -70,6 +70,14 @@ class CreateTables extends Migration
             $table->unsignedInteger('quantity');
             $table->timestamps();
         });
+
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('value');
+            $table->boolean('json')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -84,5 +92,6 @@ class CreateTables extends Migration
         Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');
         Schema::dropIfExists('carts');
+        Schema::dropIfExists('settings');
     }
 }

@@ -34,6 +34,11 @@ class Product extends Model
         return $this->hasMany(ProductSku::class);
     }
 
+    public function getPriceFormattedAttribute(): string
+    {
+        return '$' . $this->price;
+    }
+
     public function getVariablesDecodedAttribute()
     {
         return json_decode($this->variables, true);
