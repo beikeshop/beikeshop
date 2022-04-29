@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\ProductResource;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProductsController extends Controller
             ->paginate();
 
         $data = [
-            'products' => $products,
+            'products' => ProductResource::collection($products),
         ];
 
         return view('admin.pages.products.index', $data);

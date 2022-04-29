@@ -5,6 +5,11 @@ function admin_route($route, $params = []): string
     return route('admin.' . $route, $params);
 }
 
+function image_thumbnail($path): string
+{
+    return asset($path);
+}
+
 function locales(): array
 {
     $locales = [];

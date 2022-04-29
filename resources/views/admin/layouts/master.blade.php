@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <script src="//cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
 {{--   <script src="{{ asset('vendor/vue/2.6.12/vue' . (config('app.debug') ? '' : '.min') . '.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <script src="{{ asset('vendor/jquery/3.6.0/jquery.min.js') }}"></script>
@@ -24,7 +25,7 @@
   @include('admin.layouts.header')
   <div class="main-content">
     <aside class="sidebar navbar-expand-xs border-radius-xl">
-      @include('admin.layouts.sidebar')
+      <x-admin.sidebar />
     </aside>
     <div id="content">
       <div class="container-fluid p-0">

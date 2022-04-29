@@ -7,10 +7,12 @@
   </div>
   <div class="header-right">
     <ul class="navbar navbar-right">
-      <li class="nav-item active"><a href="" class="nav-link">导航1</a></li>
-      <li class="nav-item"><a href="" class="nav-link">导航2</a></li>
-      <li class="nav-item"><a href="" class="nav-link">导航3</a></li>
-      <li class="nav-item"><a href="" class="nav-link">导航4</a></li>
+      <li class="nav-item"><a href="{{ admin_route('home.index') }}" class="nav-link">管理首页</a></li>
+      <li class="nav-item active"><a href="{{ admin_route('products.index') }}" class="nav-link">商品管理</a></li>
+      <li class="nav-item"><a href="" class="nav-link">订单管理</a></li>
+      <li class="nav-item"><a href="" class="nav-link">会员管理</a></li>
+      <li class="nav-item"><a href="" class="nav-link">营销管理</a></li>
+      <li class="nav-item"><a href="" class="nav-link">系统设置</a></li>
     </ul>
     <ul class="navbar">
       <li class="nav-item"><a href="" class="nav-link">dasda</a></li>
