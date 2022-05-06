@@ -27,7 +27,7 @@ class Sidebar extends Component
     {
         $this->addLink('商品分类', admin_route('products.index'), 'fa fa-tachometer-alt', false);
         $this->addLink('商品列表', admin_route('products.index'), 'fa fa-tachometer-alt', false);
-        $this->addLink('回收站', admin_route('products.index'), 'fa fa-tachometer-alt', false);
+        $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
 
         $data = [
             'links' => $this->links,

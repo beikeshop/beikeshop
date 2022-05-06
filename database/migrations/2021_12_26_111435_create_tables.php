@@ -48,7 +48,7 @@ class CreateTables extends Migration
         Schema::create('product_skus', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->unsignedBigInteger('product_id');
-            $table->string('variants')->default(0);
+            $table->string('variants')->nullable();
             $table->integer('position')->default(0);
             $table->string('image')->default('');
             $table->string('model')->default('');

@@ -12,6 +12,7 @@ Route::prefix('admin')
             ->group(function () {
                 Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home.index');
 
+                Route::put('products/restore', [\App\Http\Controllers\Admin\ProductsController::class, 'restore']);
                 Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
             });
     });
