@@ -26,7 +26,8 @@
 <body class="@yield('body-class')">
   <!-- <div style="height: 80px; background: white;"></div> -->
 
-  @include('admin.layouts.header')
+  <x-admin.header />
+
   <div class="main-content">
     <aside class="sidebar navbar-expand-xs border-radius-xl">
       <x-admin.sidebar />

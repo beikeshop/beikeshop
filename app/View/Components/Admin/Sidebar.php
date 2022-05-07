@@ -2,11 +2,12 @@
 
 namespace App\View\Components\Admin;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Sidebar extends Component
 {
-    protected array $links;
+    public array $links = [];
 
     /**
      * Create a new component instance.
@@ -25,14 +26,15 @@ class Sidebar extends Component
      */
     public function render()
     {
-        $this->addLink('商品分类', admin_route('categories.index'), 'fa fa-tachometer-alt', false);
-        $this->addLink('商品列表', admin_route('products.index'), 'fa fa-tachometer-alt', false);
-        $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
+        $routeName = request()->route()->getName();
 
-        $data = [
-            'links' => $this->links,
-        ];
-        return view('components.admin.sidebar', $data);
+        if (Str::startsWith($routeName, ['admin.products.', 'admin.categories.'])) {
+            $this->addLink('商品分类', admin_route('categories.index'), 'fa fa-tachometer-alt', false);
+            $this->addLink('商品列表', admin_route('products.index'), 'fa fa-tachometer-alt', false);
+            $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
+        }
+
+        return view('components.admin.sidebar');
     }
 
     public function addLink($title, $url, $icon, $active)
