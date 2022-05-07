@@ -1,1 +1,3 @@
-<h2>child</h2>
+<div>
+  <a href="{{ shop_route('home.index') }}">Home</a>
+</div>

@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <p>{{ $product->description->name }}</p>
+@extends('layout.master')
+
+@section('content')
+<p>{{ $product->description->name }}</p>
 
     <h2>SKUs</h2>
     <table>
@@ -32,5 +26,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection

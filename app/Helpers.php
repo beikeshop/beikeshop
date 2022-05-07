@@ -5,7 +5,12 @@ function admin_route($route, $params = []): string
     return route('admin.' . $route, $params);
 }
 
-function image_thumbnail($path): string
+function shop_route($route, $params = []): string
+{
+    return route('shop.' . $route, $params);
+}
+
+function thumbnail($path): string
 {
     return 'https://dummyimage.com/100.jpg';
 }
