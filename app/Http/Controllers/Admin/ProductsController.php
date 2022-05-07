@@ -3,29 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\ProductResource;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::query()
+        $query = Product::query()
             ->with('description')
-            ->withCount('skus')
-            ->paginate();
+            ->withCount('skus');
+        if ($request->trashed) {
+            $query->onlyTrashed();
+        }
+
+        $products = $query->paginate();
 
         $data = [
-            'products' => $products,
+            'products' => ProductResource::collection($products),
         ];
 
         return view('admin.pages.products.index', $data);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+
         return view('admin.pages.products.form.form');
     }
 
@@ -33,7 +38,8 @@ class ProductsController extends Controller
     {
         $product = (new ProductService)->create($request->all());
 
-        return redirect()->route('admin.products.index')->with('success', 'product created');
+        $redirect = $request->_redirect ?? route('admin.products.index');
+        return redirect($redirect)->with('success', 'product created');
     }
 
     public function show($id)
@@ -58,8 +64,18 @@ class ProductsController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'product updated');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, Product $product)
     {
-        //
+        $product->delete();
+
+        return ['success' => true];
+    }
+
+    public function restore(Request $request)
+    {
+        $productId = $request->id ?? 0;
+        Product::withTrashed()->find($productId)->restore();
+
+        return ['success' => true];
     }
 }

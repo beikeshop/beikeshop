@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+//
+// @copyright        2020 opencart.cn - All Rights Reserved
+// @link             http://www.guangdawangluo.com
+// @author           Sam Chen <sam.chen@opencart.cn>
+// @created          2021-08-24 14:38:09
+// @modified         2021-10-13 10:38:17
+//
+
+hr.horizontal {
+  background-color: transparent;
+  height: 1px;
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  opacity: .25;
+}
+
+hr.horizontal.dark {
+  background-image: linear-gradient(90deg,transparent,rgba(0,0,0,.4),transparent);
+}
+
+.card {
+  // box-shadow: 0 20px 27px 0 rgba(0, 0, 0, .05);
+  box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
+  // border: 0 solid rgba(0,0,0,.125);
+  border: 1px solid #edf2f9;
+  // border-radius: 0.5rem;
+
+  .card-header {
+    padding: 1rem 1rem .3rem;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: .8rem;
+    border-bottom: 0 solid rgba(0,0,0,.125);
+
+    &:first-child {
+      border-radius: 1rem 1rem 0 0;
+    }
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+}
+
+table.table {
+  thead {
+    th {
+      background-color: #f9fbfd;
+      color: #74859e;
+      font-size: .825rem;
+      border-top-width: 0;
+      border-bottom: none;
+      white-space:nowrap;
+    }
+  }
+
+  td {
+    border-bottom: 0;
+    font-size: .8125rem;
+    vertical-align: middle;
+    border-top: 1px solid #edf2f9;
+  }
+
+  &.table-striped>tbody>tr {
+    &:nth-of-type(odd) {
+      background: transparent;
+    }
+    &:nth-of-type(2n) {
+      background: #f9fbfd;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 1.375rem;
+}
+
+.btn {
+  font-size: 0.8rem;
+}
+
+.btn-check {
+  position: absolute;
+  clip: rect(0,0,0,0);
+  pointer-events: none;
+}
+
+.btn-group-radio {
+  .btn-group {
+    label {
+      &:first-of-type {
+        border-top-left-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+      }
+    }
+  }
+
+  .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+
+  &.btn-group-radio-pay {
+    .btn-check:active+.btn, .btn-check:checked+.btn, .btn.active, .btn.dropdown-toggle.show, .btn:active {
+      color: #fff;
+      background-color: transparent;
+      padding: .32rem .70rem;
+      border: 2px solid #0d6efd;
+      // border-color: #0d6efd;
+    }
+
+    .btn-group-radios {
+      display: flex;
+    }
+
+    label.btn {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ddd;
+
+      &:hover {
+        border-color: #0d6efd;
+      }
+    }
+
+    img {
+      max-width: 140px;
+      height: 42px;
+    }
+  }
+}
+
+.bd-callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #eee;
+  border-left-width: .25rem;
+  border-radius: .25rem;
+
+  &.bd-callout-info {
+    border-left-color: #5bc0de;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}

@@ -1,6 +1,9 @@
 <div id="filter-app">
-  <input type="text" v-model="keyword">
-  <button type="button" @click="search">筛选</button>
+  <form class="form-inline">
+    <input type="text" v-model="keyword" class="form-control mr-2">
+    <button type="button" @click="search" class="btn btn-primary">筛选</button>
+  </form>
+  
 </div>
 
 @push('footer')
