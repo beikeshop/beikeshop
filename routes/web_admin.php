@@ -15,6 +15,6 @@ Route::prefix('admin')
                 Route::put('products/restore', [\App\Http\Controllers\Admin\ProductsController::class, 'restore']);
                 Route::resource('products', \App\Http\Controllers\Admin\ProductsController::class);
 
-                Route::get('categories', [\App\Http\Controllers\Admin\CategoriesController::class, 'index'])->name('categories.index');
+                Route::Resource('categories', \App\Http\Controllers\Admin\CategoriesController::class);
             });
     });

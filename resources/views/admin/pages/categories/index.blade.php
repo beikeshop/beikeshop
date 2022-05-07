@@ -8,7 +8,20 @@
       所有分类
     </div>
     <div class="card-body">
-      <el-tree :data="data" :props="defaultProps" :default-expand-all="true" @node-click="handleNodeClick"></el-tree>
+      <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建分类</a>
+      <div class="mt-4" style="max-width: 800px;">
+        <el-tree :data="categories" default-expand-all :expand-on-click-node="false">
+          <div class="custom-tree-node" slot-scope="{ node, data }" style="flex:1;display:flex">
+            <span>@{{ data.name }}</span>
+            <div style="flex:1"></div>
+            <span class="mr-4">@{{ data.active ? '启用' : '禁用' }}</span>
+            <div>
+              <a :href="data.url_edit">Edit</a>
+              <a>Delete</a>
+            </div>
+          </div>
+        </el-tree>
+      </div>
     </div>
   </div>
 @endsection
@@ -17,48 +30,12 @@
   <script>
     new Vue({
       el: '#category-app',
-      data() {
-        return {
-          data: [{
-            label: '一级 1',
-            children: [{
-              label: '二级 1-1',
-              children: [{
-                label: '三级 1-1-1'
-              }]
-            }]
-          }, {
-            label: '一级 2',
-            children: [{
-              label: '二级 2-1',
-              children: [{
-                label: '三级 2-1-1'
-              }]
-            }, {
-              label: '二级 2-2',
-              children: [{
-                label: '三级 2-2-1'
-              }]
-            }]
-          }, {
-            label: '一级 3',
-            children: [{
-              label: '二级 3-1',
-              children: [{
-                label: '三级 3-1-1'
-              }]
-            }, {
-              label: '二级 3-2',
-              children: [{
-                label: '三级 3-2-1'
-              }]
-            }]
-          }],
-          defaultProps: {
-            children: 'children',
-            label: 'label'
-          }
-        };
+      data: {
+        categories: @json($categories),
+        defaultProps: {
+          children: 'children',
+          label: 'name'
+        }
       },
 
       methods: {

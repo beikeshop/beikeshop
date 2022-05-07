@@ -21,7 +21,7 @@ class Product extends Model
 
     public function description()
     {
-        return $this->hasOne(ProductDescription::class)->where('locale', 'zh_cn');
+        return $this->hasOne(ProductDescription::class)->where('locale', locale());
     }
 
     public function descriptions()

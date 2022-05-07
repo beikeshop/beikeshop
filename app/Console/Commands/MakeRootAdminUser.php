@@ -7,16 +7,11 @@ use Illuminate\Console\Command;
 
 class MakeRootAdminUser extends Command
 {
-    protected $signature = 'make:root_admin_user';
+    protected $signature = 'make:admin';
     protected $description = '生成第 1 个 root admin 账号';
 
     public function handle()
     {
-        if (AdminUser::find(1)) {
-            $this->info('ID 为 1 的 Admin 账号已存在，退出');
-            return;
-        }
-
         $email = $this->ask('请输入登录邮箱地址');
         $password = $this->ask('请输入密码');
 
@@ -26,7 +21,7 @@ class MakeRootAdminUser extends Command
         }
 
         $admin = AdminUser::create([
-            'name' => 'root',
+            'name' => 'John Doe',
             'email' => $email,
             'password' => bcrypt($password),
             'active' => true,

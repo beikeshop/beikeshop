@@ -24,3 +24,9 @@ function locales(): array
 
     return $locales;
 }
+
+function locale(): string
+{
+    return 'zh_cn';
+}
+

@@ -22,6 +22,34 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id()->startingValue(100_000);
+            $table->unsignedBigInteger('parent_id')->default(0);
+            $table->integer('position')->default(0);
+            $table->boolean('active');
+            $table->timestamps();
+        });
+
+        Schema::create('category_descriptions', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->string('locale');
+            $table->string('name');
+            $table->text('content');
+            $table->string('meta_title')->default('');
+            $table->string('meta_description')->default('');
+            $table->string('meta_keyword')->default('');
+            $table->timestamps();
+        });
+
+        Schema::create('category_paths', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('path_id');
+            $table->integer('level');
+            $table->timestamps();
+        });
+
         Schema::create('products', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->string('image')->default('');
@@ -34,7 +62,7 @@ class CreateTables extends Migration
         });
 
         Schema::create('product_descriptions', function (Blueprint $table) {
-            $table->id()->startingValue(100_000);
+            $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('locale');
             $table->string('name');
@@ -88,6 +116,9 @@ class CreateTables extends Migration
     public function down()
     {
         Schema::dropIfExists('admin_users');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('category_descriptions');
+        Schema::dropIfExists('category_paths');
         Schema::dropIfExists('products');
         Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');
