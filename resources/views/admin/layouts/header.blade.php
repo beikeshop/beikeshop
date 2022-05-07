@@ -15,7 +15,7 @@
       <li class="nav-item"><a href="" class="nav-link">系统设置</a></li>
     </ul>
     <ul class="navbar">
-      <li class="nav-item"><a href="" class="nav-link">退出登录</a></li>
+      <li class="nav-item"><a href="{{ admin_route('logout.index') }}" class="nav-link">退出登录</a></li>
       <li class="nav-item">
 
         <a href="" class="nav-link">
