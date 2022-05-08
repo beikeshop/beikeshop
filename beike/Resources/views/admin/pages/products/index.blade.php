@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('beike::admin.layouts.master')
 
 @section('title', '商品管理')
 
@@ -9,7 +9,7 @@
 @section('content')
   <div class="card">
     <div class="card-body">
-      <x-filter :url="route('admin.products.index')" />
+      <x-beike-admin-filter :url="route('admin.products.index')" />
     </div>
   </div>
 

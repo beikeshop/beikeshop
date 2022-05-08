@@ -26,7 +26,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Plugin\\": "plugins/"
+            "Plugin\\": "plugins/",
+            "Beike\\": "beike/"
         },
         "files": [
             "app/Helpers.php"

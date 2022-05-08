@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('beike::admin.layouts.master')
 
 @section('title', '分类管理')
 
@@ -20,7 +20,7 @@
         @foreach (locales() as $index => $locale)
           <input type="text" name="descriptions[{{ $index }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('descriptions.'.$index.'.name', $descriptions[$locale['code']]->name ?? '') }}">
           @error('descriptions.'.$index.'.name')
-            <x-form.error :message="$message" />
+            <x-beike::form.error :message="$message" />
           @enderror
           <input type="text" name="descriptions[{{ $index }}][content]" placeholder="content {{ $locale['name'] }}" value="{{ old('descriptions.'.$index.'.content', $descriptions[$locale['code']]->content ?? '') }}">
           <hr>

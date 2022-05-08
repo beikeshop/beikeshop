@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('beike::admin.layouts.master')
 
 @section('title', '分类管理')
 
