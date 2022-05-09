@@ -2,14 +2,15 @@
 
 namespace Beike\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Beike\Http\Resources\Admin\ProductResource;
 use Beike\Models\Product;
 use Beike\Services\ProductService;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductsController extends FormController
 {
+    protected string $defaultRoute = 'products.index';
+
     public function index(Request $request)
     {
         $query = Product::query()
@@ -75,8 +76,6 @@ class ProductsController extends Controller
 
     public function form(Request $request, Product $product)
     {
-        $_redirect = $request->header('referer', admin_route('products.index'));
-
         if ($product->id) {
             $descriptions = $product->descriptions()->keyBy('locale');
         }
@@ -84,7 +83,7 @@ class ProductsController extends Controller
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
-            '_redirect' => $_redirect,
+            '_redirect' => $this->_redirect,
         ];
 
         return view('beike::admin.pages.products.form.form', $data);

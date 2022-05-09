@@ -2,15 +2,16 @@
 
 namespace Beike\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Beike\Http\Requests\Admin\CategoryRequest;
 use Beike\Http\Resources\Admin\CategoryResource;
 use Beike\Models\Category;
 use Beike\Services\CategoryService;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoriesController extends FormController
 {
+    protected string $defaultRoute = 'categories.index';
+
     public function index()
     {
         $categories = Category::with('description', 'children.description', 'children.children.description')
@@ -50,12 +51,10 @@ class CategoriesController extends Controller
             $descriptions = $category->descriptions->keyBy('locale');
         }
 
-        $_redirect = $request->header('referer', admin_route('categories.index'));
-
         $data = [
             'category' => $category ?? new Category(),
             'descriptions' => $descriptions ?? null,
-            '_redirect' => $_redirect,
+            '_redirect' => $this->_redirect,
         ];
 
         return view('beike::admin.pages.categories.form', $data);
@@ -69,7 +68,6 @@ class CategoriesController extends Controller
             $category = (new CategoryService())->create($request->all());
         }
 
-        $_redirect = $request->_redirect ?? admin_route('categories.index');
-        return redirect($_redirect)->with('success', 'Category created successfully');
+        return redirect($this->_redirect)->with('success', 'Category created successfully');
     }
 }
