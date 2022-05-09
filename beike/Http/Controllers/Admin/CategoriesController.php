@@ -8,7 +8,7 @@ use Beike\Models\Category;
 use Beike\Services\CategoryService;
 use Illuminate\Http\Request;
 
-class CategoriesController extends FormController
+class CategoriesController extends Controller
 {
     protected string $defaultRoute = 'categories.index';
 
@@ -54,7 +54,7 @@ class CategoriesController extends FormController
         $data = [
             'category' => $category ?? new Category(),
             'descriptions' => $descriptions ?? null,
-            '_redirect' => $this->_redirect,
+            '_redirect' => $this->getRedirect(),
         ];
 
         return view('beike::admin.pages.categories.form', $data);
@@ -68,6 +68,6 @@ class CategoriesController extends FormController
             $category = (new CategoryService())->create($request->all());
         }
 
-        return redirect($this->_redirect)->with('success', 'Category created successfully');
+        return redirect($this->getRedirect())->with('success', 'Category created successfully');
     }
 }

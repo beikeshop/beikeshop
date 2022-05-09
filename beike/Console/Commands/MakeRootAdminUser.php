@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Beike\Console\Commands;
 
-use App\Models\AdminUser;
+use Beike\Models\AdminUser;
 use Illuminate\Console\Command;
 
 class MakeRootAdminUser extends Command

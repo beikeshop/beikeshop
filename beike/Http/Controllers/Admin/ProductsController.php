@@ -7,7 +7,7 @@ use Beike\Models\Product;
 use Beike\Services\ProductService;
 use Illuminate\Http\Request;
 
-class ProductsController extends FormController
+class ProductsController extends Controller
 {
     protected string $defaultRoute = 'products.index';
 
@@ -16,6 +16,8 @@ class ProductsController extends FormController
         $query = Product::query()
             ->with('description')
             ->withCount('skus');
+
+        // 回收站
         if ($request->trashed) {
             $query->onlyTrashed();
         }
@@ -36,15 +38,7 @@ class ProductsController extends FormController
 
     public function store(Request $request)
     {
-        $product = (new ProductService)->create($request->all());
-
-        $redirect = $request->_redirect ?? route('admin.products.index');
-        return redirect($redirect)->with('success', 'product created');
-    }
-
-    public function show($id)
-    {
-        //
+        return $this->save($request, new Product());
     }
 
     public function edit(Request $request, Product $product)
@@ -54,9 +48,7 @@ class ProductsController extends FormController
 
     public function update(Request $request, Product $product)
     {
-        $product = (new ProductService)->update($product, $request->all());
-
-        return redirect()->route('admin.products.index')->with('success', 'product updated');
+        return $this->save($request, $product);
     }
 
     public function destroy(Request $request, Product $product)
@@ -74,18 +66,29 @@ class ProductsController extends FormController
         return ['success' => true];
     }
 
-    public function form(Request $request, Product $product)
+    protected function form(Request $request, Product $product)
     {
         if ($product->id) {
-            $descriptions = $product->descriptions()->keyBy('locale');
+            $descriptions = $product->descriptions->keyBy('locale');
         }
 
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
-            '_redirect' => $this->_redirect,
+            '_redirect' => $this->getRedirect(),
         ];
 
         return view('beike::admin.pages.products.form.form', $data);
+    }
+
+    protected function save(Request $request, Product $product)
+    {
+        if ($product->id) {
+            $product = (new ProductService)->update($product, $request->all());
+        } else {
+            $product = (new ProductService)->create($request->all());
+        }
+
+        return redirect($this->getRedirect())->with('success', 'product created');
     }
 }

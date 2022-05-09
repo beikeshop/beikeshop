@@ -2,6 +2,7 @@
 
 namespace Beike\Providers;
 
+use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Models\AdminUser;
 use Beike\Models\Setting;
 use Beike\View\Components\Admin\Filter;
@@ -22,7 +23,6 @@ class BeikeServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../Config/beike.php', 'beike');
 
-
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'beike');
 
         $this->loadViewComponentsAs('beike', [
@@ -36,6 +36,12 @@ class BeikeServiceProvider extends ServiceProvider
 
         $this->loadSettings();
         $this->registerGuard();
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeRootAdminUser::class,
+            ]);
+        }
     }
 
     protected function loadSettings()

@@ -35,8 +35,7 @@ class ProductService
             }
 
             $descriptions = [];
-            foreach ($data['descriptions'] as $locale => $description) {
-                $description['locale'] = $locale;
+            foreach ($data['descriptions'] as $description) {
                 $description['content'] = $description['content'] ?? '';
 
                 $descriptions[] = $description;
