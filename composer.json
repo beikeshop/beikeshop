@@ -30,7 +30,7 @@
             "Beike\\": "beike/"
         },
         "files": [
-            "app/Helpers.php"
+            "beike/Helpers.php"
         ]
     },
     "autoload-dev": {

@@ -12,12 +12,12 @@
   <script src="{{ mix('build/js/app.js') }}"></script> --}}
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
-  <link href="{{ mix('build/css/bootstrap.css') }}" rel="stylesheet">
+  <link href="{{ mix('beike/build/css/bootstrap.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   @if (0)
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   @endif
-  <link href="{{ mix('build/css/admin/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('beike/build/css/admin/app.css') }}" rel="stylesheet">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>beike admin</title>
   @stack('header')
