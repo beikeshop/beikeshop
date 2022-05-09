@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\AdminUser;
-
 return [
 
     /*
@@ -42,11 +40,6 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
-        AdminUser::AUTH_GUARD => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
     ],
 
     /*
@@ -76,11 +69,6 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => AdminUser::class,
-        ],
     ],
 
     /*

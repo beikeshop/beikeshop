@@ -3,10 +3,10 @@
 namespace Beike\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CategoryRequest;
-use App\Http\Resources\Admin\CategoryResource;
-use App\Models\Category;
-use App\Services\CategoryService;
+use Beike\Http\Requests\Admin\CategoryRequest;
+use Beike\Http\Resources\Admin\CategoryResource;
+use Beike\Models\Category;
+use Beike\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
             $descriptions = $category->descriptions->keyBy('locale');
         }
 
-        $_redirect = $request->header('referer') ?? admin_route('categories.index');
+        $_redirect = $request->header('referer', admin_route('categories.index'));
 
         $data = [
             'category' => $category ?? new Category(),
