@@ -11,7 +11,7 @@
       <form action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}" method="POST">
         @csrf
         @method($category->id ? 'PUT' : 'POST')
-        <input type="hidden" name="_redirect" value="{{ request()->header('referer') ?? admin_route('categories.index') }}">
+        <input type="hidden" name="_redirect" value="{{ $_redirect }}">
 
         @foreach (locales() as $index => $locale)
           <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}">

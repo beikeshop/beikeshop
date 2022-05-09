@@ -26,42 +26,50 @@ class CategoriesController extends Controller
 
     public function create(Request $request)
     {
-        $category = new Category();
-
-        $data = [
-            'category' => $category,
-        ];
-
-        return view('beike::admin.pages.categories.form', $data);
+        return $this->form($request);
     }
 
     public function store(CategoryRequest $request)
     {
-        $redirect = $request->_redirect ?? admin_route('categories.index');
-
-        $category = (new CategoryService())->create($request->all());
-
-        return redirect($redirect)->with('success', 'Category created successfully');
+        return $this->save($request);
     }
 
-    public function edit(Category $category)
+    public function edit(Request $request, Category $category)
     {
+        return $this->form($request, $category);
+    }
 
-        $descriptions = $category->descriptions->keyBy('locale');
+    public function update(CategoryRequest $request, Category $category)
+    {
+        return $this->save($request, $category);
+    }
+
+    protected function form(Request $request, Category $category = null)
+    {
+        if ($category) {
+            $descriptions = $category->descriptions->keyBy('locale');
+        }
+
+        $_redirect = $request->header('referer') ?? admin_route('categories.index');
+
         $data = [
-            'category' => $category,
-            'descriptions' => $descriptions,
+            'category' => $category ?? new Category(),
+            'descriptions' => $descriptions ?? null,
+            '_redirect' => $_redirect,
         ];
 
         return view('beike::admin.pages.categories.form', $data);
     }
 
-    public function update(CategoryRequest $request, Category $category)
+    protected function save(Request $request, Category $category = null)
     {
-        $redirect = $request->_redirect ?? admin_route('categories.index');
+        if ($category) {
+            $category = (new CategoryService())->update($category, $request->all());
+        } else {
+            $category = (new CategoryService())->create($request->all());
+        }
 
-        $category = (new CategoryService())->update($category, $request->all());
-
-        return redirect($redirect)->with('success', 'Category created successfully');
+        $_redirect = $request->_redirect ?? admin_route('categories.index');
+        return redirect($_redirect)->with('success', 'Category created successfully');
     }
 }
