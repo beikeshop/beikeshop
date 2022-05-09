@@ -30,8 +30,7 @@ class ProductsController extends Controller
 
     public function create(Request $request)
     {
-
-        return view('beike::admin.pages.products.form.form');
+        return $this->form($request, new Product());
     }
 
     public function store(Request $request)
@@ -47,14 +46,9 @@ class ProductsController extends Controller
         //
     }
 
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        $product->loadMissing('descriptions');
-
-        $data = [
-            'product' => $product,
-        ];
-        return view('admin.pages.products.form.form', $data);
+        return $this->form($request, $product);
     }
 
     public function update(Request $request, Product $product)
@@ -77,5 +71,22 @@ class ProductsController extends Controller
         Product::withTrashed()->find($productId)->restore();
 
         return ['success' => true];
+    }
+
+    public function form(Request $request, Product $product)
+    {
+        $_redirect = $request->header('referer', admin_route('products.index'));
+
+        if ($product->id) {
+            $descriptions = $product->descriptions()->keyBy('locale');
+        }
+
+        $data = [
+            'product' => $product,
+            'descriptions' => $descriptions ?? [],
+            '_redirect' => $_redirect,
+        ];
+
+        return view('beike::admin.pages.products.form.form', $data);
     }
 }

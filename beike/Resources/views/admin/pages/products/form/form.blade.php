@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('beike::admin.layouts.master')
 
 @push('header')
   <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
@@ -8,33 +8,20 @@
   <div class="card">
     <div class="card-body">
       <h2>product</h2>
-      <form action="{{ ($product ?? null) ? route('admin.products.update', $product) : route('admin.products.store') }}" method="POST" id="app">
+      <form action="{{ $product->id ? route('admin.products.update', $product) : route('admin.products.store') }}" method="POST" id="app">
         @csrf
-        @method(($product ?? null) ? 'PUT' : 'POST')
+        @method($product->id ? 'PUT' : 'POST')
+        <input type="hidden" name="_redirect" value="{{ $_redirect }}" />
 
-        <input type="hidden" name="_redirect" value="{{ old('_redirect', request()->header('referer')) }}" />
+        @foreach (locales() as $index => $locale)
+          <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}">
+        @endforeach
 
-        @php
-          if ($product ?? null) {
-            $descriptions = $product->descriptions->keyBy('locale');
-          } else {
-            $descriptions = [];
-          }
-
-        @endphp
-
-        <div>
-          @foreach (locales() as $locale)
-            <input type="text" name="descriptions[{{ $locale['code'] }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('descriptions.'.$locale['code'].'.name', $descriptions[$locale['code']]->name ?? '') }}">
-          @endforeach
-        </div>
-
-        <div>
-          <input type="text" name="image" placeholder="image" value="{{ old('image', $product->image ?? '') }}">
-          <input type="text" name="video" placeholder="video" value="{{ old('video', $product->video ?? '') }}">
-          <input type="text" name="position" placeholder="position" value="{{ old('position', $product->position ?? 0) }}">
-          <input type="text" name="active" placeholder="active" value="{{ old('active', $product->active ?? 1) }}">
-        </div>
+        <x-beike-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
+        <x-beike-form-input name="image" title="主图" :value="old('image', $product->image ?? '')" />
+        <x-beike-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" />
+        <x-beike-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
+        <x-beike-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
         <div>
           <h2>skus</h2>

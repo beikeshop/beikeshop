@@ -5,7 +5,7 @@
 @section('content')
   <div id="category-app" class="card">
     <div class="card-header">
-      所有分类
+      编辑分类
     </div>
     <div class="card-body">
       <form action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}" method="POST">
@@ -17,19 +17,15 @@
           <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}">
         @endforeach
 
-        @foreach (locales() as $index => $locale)
-          <input type="text" name="descriptions[{{ $index }}][name]" placeholder="Name {{ $locale['name'] }}" value="{{ old('descriptions.'.$index.'.name', $descriptions[$locale['code']]->name ?? '') }}">
-          @error('descriptions.'.$index.'.name')
-            <x-beike::form.error :message="$message" />
-          @enderror
-          <input type="text" name="descriptions[{{ $index }}][content]" placeholder="content {{ $locale['name'] }}" value="{{ old('descriptions.'.$index.'.content', $descriptions[$locale['code']]->content ?? '') }}">
-          <hr>
-        @endforeach
+        <x-beike-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
+        <x-beike-form-input-locale name="descriptions.*.content" title="内容" :value="$descriptions" />
+        <x-beike-form-input name="parent_id" title="上级分类" :value="old('parent_id', $category->parent_id ?? 0)" />
+        <x-beike-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)" />
 
-        <input type="text" name="parent_id" value="{{ old('parent_id', $category->parent_id ?? 0) }}" placeholder="上级分类">
-        <input type="text" name="active" value="{{ old('active', $category->active ?? 1) }}" placeholder="状态">
-
-        <button type="submit" class="btn btn-primary">保存</button>
+        <div>
+          <button type="submit" class="btn btn-primary">保存</button>
+          <a href="{{ $_redirect }}" class="btn btn-danger">返回</a>
+        </div>
       </form>
 
     </div>
