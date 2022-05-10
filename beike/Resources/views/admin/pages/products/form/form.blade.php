@@ -23,6 +23,14 @@
         <x-beike-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
         <x-beike-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
+        <x-beike::form.row title="分类">
+          <select name="category_id" id="" class="form-control form-control-sm short">
+            @foreach ($categories as $category)
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+          </select>
+        </x-beike::form.row>
+
         <div>
           <h2>skus</h2>
           <input type="radio" v-model="editing.isVariable" :value="false"> 单规格

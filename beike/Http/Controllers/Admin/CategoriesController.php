@@ -5,6 +5,7 @@ namespace Beike\Http\Controllers\Admin;
 use Beike\Http\Requests\Admin\CategoryRequest;
 use Beike\Http\Resources\Admin\CategoryResource;
 use Beike\Models\Category;
+use Beike\Repositories\CategoryRepo;
 use Beike\Services\CategoryService;
 use Illuminate\Http\Request;
 
@@ -54,20 +55,16 @@ class CategoriesController extends Controller
         $data = [
             'category' => $category ?? new Category(),
             'descriptions' => $descriptions ?? null,
+            'categories' => CategoryRepo::flatten(locale()),
             '_redirect' => $this->getRedirect(),
         ];
 
         return view('beike::admin.pages.categories.form', $data);
     }
 
-    protected function save(Request $request, Category $category = null)
+    protected function save(Request $request, ?Category $category = null)
     {
-        if ($category) {
-            $category = (new CategoryService())->update($category, $request->all());
-        } else {
-            $category = (new CategoryService())->create($request->all());
-        }
-
+        (new CategoryService())->createOrUpdate($request->all(), $category);
         return redirect($this->getRedirect())->with('success', 'Category created successfully');
     }
 }

@@ -17,45 +17,18 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryService
 {
-    public function create(array $data)
+    public function createOrUpdate(array $data, ?Category $category)
     {
-        try {
-            DB::beginTransaction();
-
-            $category = new \Beike\Models\Category();
-            $category->fill($data);
-            $category->saveOrFail();
-
-            $descriptions = [];
-            foreach ($data['descriptions'] as $description) {
-                $descriptions[] = [
-                    'locale' => $description['locale'],
-                    'name' => $description['name'],
-                    'content' => $description['content'] ?? '',
-                    'meta_title' => $description['meta_title'] ?? '',
-                    'meta_description' => $description['meta_description'] ?? '',
-                    'meta_keyword' => $description['meta_keyword'] ?? '',
-                ];
-            }
-            $category->descriptions()->createMany($descriptions);
-
-            $this->createPath($category);
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
+        $isUpdating = $category !== null;
+        if ($category === null) {
+            $category = new Category();
         }
 
-        return $category;
-    }
-
-    public function update(Category $category, array $data)
-    {
         try {
             DB::beginTransaction();
 
-            $category->updateOrFail($data);
+            $category->fill($data);
+            $category->save();
 
             $descriptions = [];
             foreach ($data['descriptions'] as $description) {
@@ -68,10 +41,16 @@ class CategoryService
                     'meta_keyword' => $description['meta_keyword'] ?? '',
                 ];
             }
-            $category->descriptions()->delete();
+            if ($isUpdating) {
+                $category->descriptions()->delete();
+            }
             $category->descriptions()->createMany($descriptions);
 
-            $this->updatePath($category);
+            if ($isUpdating) {
+                $this->updatePath($category);
+            } else {
+                $this->createPath($category);
+            }
 
             DB::commit();
         } catch (\Exception $e) {

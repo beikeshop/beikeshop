@@ -4,6 +4,7 @@ namespace Beike\Http\Controllers\Admin;
 
 use Beike\Http\Resources\Admin\ProductResource;
 use Beike\Models\Product;
+use Beike\Repositories\CategoryRepo;
 use Beike\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -75,6 +76,7 @@ class ProductsController extends Controller
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
+            'categories' => CategoryRepo::flatten(locale()),
             '_redirect' => $this->getRedirect(),
         ];
 

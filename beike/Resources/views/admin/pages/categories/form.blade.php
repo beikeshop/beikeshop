@@ -19,7 +19,21 @@
 
         <x-beike-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
         <x-beike-form-input-locale name="descriptions.*.content" title="内容" :value="$descriptions" />
-        <x-beike-form-input name="parent_id" title="上级分类" :value="old('parent_id', $category->parent_id ?? 0)" />
+
+        <x-beike::form.row title="上级分类">
+          @php
+            $_parent_id = old('parent_id', $category->parent_id ?? 0);
+          @endphp
+          <select name="parent_id" id="" class="form-control form-control-sm short">
+            <option value="0">--请选择--</option>
+            @foreach ($categories as $_category)
+              <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : ''}}>
+                {{ $_category->name }}
+              </option>
+            @endforeach
+          </select>
+        </x-beike::form.row>
+
         <x-beike-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)" />
 
         <div>
