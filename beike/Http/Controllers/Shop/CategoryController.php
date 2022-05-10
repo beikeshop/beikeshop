@@ -6,7 +6,7 @@ use Beike\Models\Category;
 use Beike\Models\Product;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     public function show(Request $request, Category $category)
     {

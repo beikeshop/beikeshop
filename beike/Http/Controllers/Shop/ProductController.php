@@ -5,7 +5,7 @@ namespace Beike\Http\Controllers\Shop;
 use Beike\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     public function show(Request $request, Product $product)
     {

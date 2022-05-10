@@ -6,7 +6,7 @@ use Beike\Models\ProductSku;
 use Beike\Services\CartService;
 use Illuminate\Http\Request;
 
-class CartsController extends Controller
+class CartController extends Controller
 {
     public function store(Request $request)
     {

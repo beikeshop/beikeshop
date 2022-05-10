@@ -9,7 +9,7 @@ use Beike\Repositories\CategoryRepo;
 use Beike\Services\CategoryService;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     protected string $defaultRoute = 'categories.index';
 

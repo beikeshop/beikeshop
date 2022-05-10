@@ -13,10 +13,10 @@ Route::prefix('admin')
             ->group(function () {
                 Route::get('/', [\Beike\Http\Controllers\Admin\HomeController::class, 'index'])->name('home.index');
 
-                Route::Resource('categories', \Beike\Http\Controllers\Admin\CategoriesController::class);
+                Route::Resource('categories', \Beike\Http\Controllers\Admin\CategoryController::class);
 
-                Route::put('products/restore', [\Beike\Http\Controllers\Admin\ProductsController::class, 'restore']);
-                Route::resource('products', \Beike\Http\Controllers\Admin\ProductsController::class);
+                Route::put('products/restore', [\Beike\Http\Controllers\Admin\ProductController::class, 'restore']);
+                Route::resource('products', \Beike\Http\Controllers\Admin\ProductController::class);
 
                 Route::get('logout', [\Beike\Http\Controllers\Admin\LogoutController::class, 'index'])->name('logout.index');
 

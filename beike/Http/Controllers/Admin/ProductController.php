@@ -8,7 +8,7 @@ use Beike\Repositories\CategoryRepo;
 use Beike\Services\ProductService;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     protected string $defaultRoute = 'products.index';
 
