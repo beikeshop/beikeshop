@@ -4,6 +4,8 @@ namespace Beike\Http\Controllers\Admin;
 
 use Beike\Http\Resources\Admin\ProductResource;
 use Beike\Models\Product;
+use Beike\Models\ProductDescription;
+use Beike\Models\ProductSku;
 use Beike\Repositories\CategoryRepo;
 use Beike\Services\ProductService;
 use Illuminate\Http\Request;
@@ -14,21 +16,37 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $query = Product::query()
-            ->with('description')
-            ->withCount('skus');
+        if ($request->expectsJson()) {
+            $query = Product::query()
+                ->with('description')
+                ->withCount('skus');
 
-        // 回收站
-        if ($request->trashed) {
-            $query->onlyTrashed();
+            if ($request->sku) {
+                $query->whereHas('skus', function ($q) {
+                    $q->where('sku', 'like', '%'.request('sku').'%');
+                });
+            }
+
+            // 关键字搜索：名称
+            if ($request->keyword) {
+                $query->whereHas('description', function ($q) {
+                    $q->where('name', 'like', '%'.request('keyword').'%');
+                });
+            }
+
+            // 回收站
+            if ($request->trashed) {
+                $query->onlyTrashed();
+            }
+
+            $products = $query->paginate();
+
+            return ProductResource::collection($products);
         }
 
-        $products = $query->paginate();
-
         $data = [
-            'products' => ProductResource::collection($products),
+            'categories' => CategoryRepo::flatten(locale()),
         ];
-
         return view('beike::admin.pages.products.index', $data);
     }
 
