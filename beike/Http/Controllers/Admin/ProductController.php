@@ -18,6 +18,7 @@ class ProductController extends Controller
     {
         if ($request->expectsJson()) {
             $query = Product::query()
+                ->select('products.*')
                 ->with('description')
                 ->withCount('skus');
 
@@ -34,12 +35,21 @@ class ProductController extends Controller
                 });
             }
 
+            $query->when($request->active !== null, function ($q) {
+                $q->where('active', (int)request('active'));
+            });
+
             // 回收站
             if ($request->trashed) {
                 $query->onlyTrashed();
             }
 
-            $products = $query->paginate();
+            // 排序
+            $orderBy = $request->orderBy ?? 'products.id:desc';
+            $orderBy = explode(':', $orderBy);
+            $query->orderBy($orderBy[0], $orderBy[1] ?? 'desc');
+
+            $products = $query->paginate($request->per_page ?? 10);
 
             return ProductResource::collection($products);
         }

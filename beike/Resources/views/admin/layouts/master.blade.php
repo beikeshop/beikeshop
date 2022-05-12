@@ -10,10 +10,10 @@
   <script src="{{ asset('vendor/axios/0.21.1/axios.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ mix('build/js/app.js') }}"></script> --}}
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/index.min.js"></script>
 
   <link href="{{ mix('beike/build/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/theme-chalk/index.min.css" rel="stylesheet">
   @if (0)
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   @endif
