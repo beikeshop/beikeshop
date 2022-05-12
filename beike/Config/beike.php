@@ -1,6 +1,6 @@
 <?php
 /**
- * beike.php
+ * Resources.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com

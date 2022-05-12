@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        \Beike\Providers\BeikeServiceProvider::class,
+        \Beike\Admin\Providers\AdminServiceProvider::class,
 
     ],
 
