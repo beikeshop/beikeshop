@@ -14,7 +14,7 @@
         <input type="hidden" name="_redirect" value="{{ $_redirect }}">
 
         @foreach (locales() as $index => $locale)
-          <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}">
+          {{-- <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}"> --}}
         @endforeach
 
         <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />

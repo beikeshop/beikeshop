@@ -7,7 +7,7 @@ use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Product;
 use Beike\Models\ProductDescription;
 use Beike\Models\ProductSku;
-use Beike\Services\ProductService;
+use Beike\Admin\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

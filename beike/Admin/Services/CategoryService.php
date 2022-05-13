@@ -31,9 +31,9 @@ class CategoryService
             $category->save();
 
             $descriptions = [];
-            foreach ($data['descriptions'] as $description) {
+            foreach ($data['descriptions'] as $locale => $description) {
                 $descriptions[] = [
-                    'locale' => $description['locale'],
+                    'locale' => $locale,
                     'name' => $description['name'],
                     'content' => $description['content'] ?? '',
                     'meta_title' => $description['meta_title'] ?? '',

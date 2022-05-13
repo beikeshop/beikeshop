@@ -1,6 +1,6 @@
 <?php
 
-namespace Beike\Services;
+namespace Beike\Admin\Services;
 
 use Beike\Models\Product;
 use Beike\Models\ProductDescription;
@@ -35,7 +35,8 @@ class ProductService
             }
 
             $descriptions = [];
-            foreach ($data['descriptions'] as $description) {
+            foreach ($data['descriptions'] as $locale => $description) {
+                $description['locale'] = $locale;
                 $description['content'] = $description['content'] ?? '';
 
                 $descriptions[] = $description;

@@ -23,16 +23,16 @@ class InputLocale extends Component
         return view('admin::components.form.input-locale');
     }
 
-    public function formatName($index)
+    public function formatName(string $code)
     {
-        // descriptions.*.name => descriptions[0][name]
+        // descriptions.*.name => descriptions[zh_cn][name]
 
         $segments = explode('.', $this->name);
         $key = $segments[0];
         for ($i = 1; $i < count($segments); $i++) {
             $segment = $segments[$i];
             if ($segment == '*') {
-                $key .= '[' . $index . ']';
+                $key .= '[' . $code . ']';
             } else {
                 $key .= '[' . $segment . ']';
             }
@@ -40,22 +40,21 @@ class InputLocale extends Component
         return $key;
     }
 
-    public function formatValue($index)
+    public function formatValue($code)
     {
-        $locale = locales()[$index];
-        $oldKey = str_replace('*', $index, $this->name);
+        $oldKey = str_replace('*', $code, $this->name);
 
         // descriptions.*.name
         $segments = explode('.', $this->name);
         array_shift($segments);
         $valueKey = implode('.', $segments);
-        $valueKey = str_replace('*', $locale['code'], $valueKey);
+        $valueKey = str_replace('*', $code, $valueKey);
 
         return old($oldKey,  Arr::get($this->value, $valueKey, ''));
     }
 
-    public function errorKey($index)
+    public function errorKey($code)
     {
-        return str_replace('*', $index, $this->name);
+        return str_replace('*', $code, $this->name);
     }
 }
