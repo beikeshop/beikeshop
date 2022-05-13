@@ -19,6 +19,6 @@ class SwitchRadio extends Component
 
     public function render()
     {
-        return view('beike::components.form.switch-radio');
+        return view('admin::components.form.switch-radio');
     }
 }

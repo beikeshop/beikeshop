@@ -23,7 +23,7 @@ class CategoryController extends Controller
             'categories' => CategoryResource::collection($categories),
         ];
 
-        return view('beike::admin.pages.categories.index', $data);
+        return view('admin::pages.categories.index', $data);
     }
 
     public function create(Request $request)
@@ -59,7 +59,7 @@ class CategoryController extends Controller
             '_redirect' => $this->getRedirect(),
         ];
 
-        return view('beike::admin.pages.categories.form', $data);
+        return view('admin::pages.categories.form', $data);
     }
 
     protected function save(Request $request, ?Category $category = null)

@@ -34,7 +34,7 @@ class Sidebar extends Component
             $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
         }
 
-        return view('beike::components.admin.sidebar');
+        return view('admin::components.sidebar');
     }
 
     public function addLink($title, $url, $icon, $active)

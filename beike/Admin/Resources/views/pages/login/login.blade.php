@@ -17,7 +17,7 @@
         <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="邮箱地址">
       </div>
       @error('email')
-        <x-beike::form.error :message="$message" />
+        <x-admin::form.error :message="$message" />
       @enderror
     </div>
 
@@ -29,7 +29,7 @@
         <input type="password" name="password" class="form-control" placeholder="密码">
       </div>
       @error('password')
-        <x-beike::form.error :message="$message" />
+        <x-admin::form.error :message="$message" />
       @enderror
     </div>
 

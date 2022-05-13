@@ -20,7 +20,7 @@ class InputLocale extends Component
 
     public function render()
     {
-        return view('beike::components.form.input-locale');
+        return view('admin::components.form.input-locale');
     }
 
     public function formatName($index)

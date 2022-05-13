@@ -57,7 +57,7 @@ class ProductController extends Controller
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
         ];
-        return view('beike::admin.pages.products.index', $data);
+        return view('admin::pages.products.index', $data);
     }
 
     public function create(Request $request)
@@ -108,7 +108,7 @@ class ProductController extends Controller
             '_redirect' => $this->getRedirect(),
         ];
 
-        return view('beike::admin.pages.products.form.form', $data);
+        return view('admin::pages.products.form.form', $data);
     }
 
     protected function save(Request $request, Product $product)

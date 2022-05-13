@@ -28,14 +28,14 @@ class AdminServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
 
-        $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'Resources');
+        $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'beike');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
 
-        $this->loadViewComponentsAs('beike', [
-            'admin-header' => Header::class,
-            'admin-sidebar' => Sidebar::class,
-            'admin-filter' => Filter::class,
+        $this->loadViewComponentsAs('admin', [
+            'header' => Header::class,
+            'sidebar' => Sidebar::class,
+            'filter' => Filter::class,
             'form-input-locale' => InputLocale::class,
             'form-switch' => SwitchRadio::class,
             'form-input' => Input::class,

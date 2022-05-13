@@ -30,7 +30,7 @@ class Header extends Component
      */
     public function render()
     {
-        return view('beike::components.admin.header');
+        return view('admin::components.header');
     }
 
     public function addLink($title, $url, $active = false)

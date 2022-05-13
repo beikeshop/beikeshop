@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function show()
     {
-        return view('beike::admin.pages.login.login');
+        return view('admin::pages.login.login');
     }
 
     public function store(Request $request)

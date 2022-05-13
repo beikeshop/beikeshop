@@ -19,6 +19,6 @@ class Input extends Component
 
     public function render()
     {
-        return view('beike::components.form.input');
+        return view('admin::components.form.input');
     }
 }

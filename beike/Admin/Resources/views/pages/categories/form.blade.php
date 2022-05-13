@@ -1,4 +1,4 @@
-@extends('beike::admin.layouts.master')
+@extends('admin::layouts.master')
 
 @section('title', '分类管理')
 
@@ -17,10 +17,10 @@
           <input type="hidden" name="descriptions[{{ $index }}][locale]" value="{{ $locale['code'] }}">
         @endforeach
 
-        <x-beike-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
-        <x-beike-form-input-locale name="descriptions.*.content" title="内容" :value="$descriptions" />
+        <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
+        <x-admin-form-input-locale name="descriptions.*.content" title="内容" :value="$descriptions" />
 
-        <x-beike::form.row title="上级分类">
+        <x-admin::form.row title="上级分类">
           @php
             $_parent_id = old('parent_id', $category->parent_id ?? 0);
           @endphp
@@ -32,9 +32,9 @@
               </option>
             @endforeach
           </select>
-        </x-beike::form.row>
+        </x-admin::form.row>
 
-        <x-beike-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)" />
+        <x-admin-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)" />
 
         <div>
           <button type="submit" class="btn btn-primary">保存</button>

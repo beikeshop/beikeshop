@@ -26,11 +26,11 @@
 <body class="@yield('body-class')">
   <!-- <div style="height: 80px; background: white;"></div> -->
 
-  <x-beike-admin-header />
+  <x-admin-header />
 
   <div class="main-content">
     <aside class="sidebar navbar-expand-xs border-radius-xl">
-      <x-beike-admin-sidebar />
+      <x-admin-sidebar />
     </aside>
     <div id="content">
       <div class="container-fluid p-0">
