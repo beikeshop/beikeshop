@@ -10,7 +10,10 @@ class CategoryController extends Controller
 {
     public function show(Request $request, Category $category)
     {
-        $products = Product::query()->with('description')->paginate();
+        $products = Product::query()
+            ->with('description')
+            ->latest()
+            ->paginate();
 
         $data = [
             'category' => $category,
