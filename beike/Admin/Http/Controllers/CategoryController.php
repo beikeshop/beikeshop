@@ -6,7 +6,7 @@ use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
 use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Category;
-use Beike\Services\CategoryService;
+use Beike\Admin\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace Beike\Http\Controllers\Shop;
+namespace Beike\Shop\Http\Controllers;
 
 class Controller extends \App\Http\Controllers\Controller
 {

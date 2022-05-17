@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         \Beike\Admin\Providers\AdminServiceProvider::class,
+        \Beike\Shop\Providers\ShopServiceProvider::class,
 
     ],
 

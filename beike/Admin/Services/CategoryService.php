@@ -9,7 +9,7 @@
  * @modified   2022-05-07 15:15:25
  */
 
-namespace Beike\Services;
+namespace Beike\Admin\Services;
 
 use Beike\Models\Category;
 use Beike\Models\CategoryPath;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Beike\Http\Controllers\Shop;
+namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Product;
 use Illuminate\Http\Request;
