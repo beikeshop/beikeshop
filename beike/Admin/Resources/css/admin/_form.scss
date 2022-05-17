@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+//
+// @copyright        2020 opencart.cn - All Rights Reserved
+// @link             http://www.guangdawangluo.com
+// @author           Sam Chen <sam.chen@opencart.cn>
+// @created          2022-05-09 11:35:44
+// @modified         2022-05-09 13:48:22
+//
+
+.form-group {
+  .form-control {
+    &.short {
+      max-width: 300px;
+    }
+  }
+
+  .input-group {
+    &.short {
+      max-width: 300px;
+    }
+  }
+
+  .col-form-label {
+    text-align: right;
+  }
+}

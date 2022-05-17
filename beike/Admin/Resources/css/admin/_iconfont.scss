@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+//
+// @copyright        2020 opencart.cn - All Rights Reserved
+// @link             http://www.guangdawangluo.com
+// @author           Sam Chen <sam.chen@opencart.cn>
+// @created          2021-08-24 14:38:09
+// @modified         2021-08-24 15:07:05
+//
+
+
+@font-face {
+  font-family: 'iconfont';  /* Project id 2787822 */
+  src: url('//at.alicdn.com/t/font_2787822_7mtbg56vojp.woff2?t=1634612961708') format('woff2'),
+       url('//at.alicdn.com/t/font_2787822_7mtbg56vojp.woff?t=1634612961708') format('woff'),
+       url('//at.alicdn.com/t/font_2787822_7mtbg56vojp.ttf?t=1634612961708') format('truetype');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  // -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-width: 0;
+  -moz-osx-font-smoothing: grayscale;
+}

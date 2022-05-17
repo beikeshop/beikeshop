@@ -15,3 +15,5 @@ yarn-error.log
 /.vscode
 mix-manifest.json
 package-lock.json
+public/beike
+beike/node_modules
