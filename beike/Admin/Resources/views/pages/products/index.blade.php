@@ -55,7 +55,7 @@
                 <input type="checkbox" :value="item.id" v-model="selected" />
               </td>
               <td>@{{ item.id }}</td>
-              <td><img :src="item.image" alt="" srcset=""></td>
+              <td><img :src="item.image" style="max-width: 100px;" alt="" srcset=""></td>
               <td>@{{ item.name || '无名称' }}</td>
               <td>@{{ item.price_formatted }}</td>
               <td>@{{ item.created_at }}</td>
@@ -100,7 +100,7 @@
         selected: [],
         page: @json((int)request('page') ?? 1),
         totals: 0,
-        perPage: @json((int)(request('per_page') ?? 1)),
+        perPage: @json((int)(request('per_page') ?? 10)),
         loading: false,
         orderBy: @json(request('order_by', 'products.id:desc')),
       },

@@ -12,7 +12,7 @@ function shop_route($route, $params = []): string
 
 function thumbnail($path): string
 {
-    return 'https://dummyimage.com/100.jpg';
+    return $path;
 }
 
 function locales(): array

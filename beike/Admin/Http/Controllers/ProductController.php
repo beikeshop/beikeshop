@@ -19,8 +19,7 @@ class ProductController extends Controller
         if ($request->expectsJson()) {
             $query = Product::query()
                 ->select('products.*')
-                ->with('description')
-                ->withCount('skus');
+                ->with('description', 'skus');
 
             if ($request->sku) {
                 $query->whereHas('skus', function ($q) {

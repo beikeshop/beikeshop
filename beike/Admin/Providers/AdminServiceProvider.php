@@ -22,7 +22,7 @@ class AdminServiceProvider extends ServiceProvider
         $uri = request()->getRequestUri();
 
         if (! Str::startsWith($uri, '/admin')) {
-            return;
+            // return;
         }
 
         // $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
@@ -48,6 +48,8 @@ class AdminServiceProvider extends ServiceProvider
             $this->commands([
                 MakeRootAdminUser::class,
             ]);
+
+            $this->publishResources();
         }
     }
 
@@ -76,6 +78,13 @@ class AdminServiceProvider extends ServiceProvider
             'driver' => 'eloquent',
             'model' => AdminUser::class,
         ]);
+    }
+
+    protected function publishResources()
+    {
+        $this->publishes([
+            __DIR__ . '/../Database/Seeders/ProductSeeder.php' => database_path('seeders/ProductSeeder.php'),
+        ], 'beike-seeders');
     }
 
 }
