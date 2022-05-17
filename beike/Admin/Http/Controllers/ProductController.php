@@ -44,7 +44,7 @@ class ProductController extends Controller
             }
 
             // 排序
-            $orderBy = $request->orderBy ?? 'products.id:desc';
+            $orderBy = $request->order_by ?? 'products.id:desc';
             $orderBy = explode(':', $orderBy);
             $query->orderBy($orderBy[0], $orderBy[1] ?? 'desc');
 

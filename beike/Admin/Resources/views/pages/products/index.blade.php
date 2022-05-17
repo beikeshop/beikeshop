@@ -34,6 +34,13 @@
     <div class="card mt-4">
       <div class="card-header">
         <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Create</a>
+
+        <div class="right">
+          <button class="btn btn-primary">批量删除</button>
+          <button class="btn btn-primary">批量上架</button>
+          <button class="btn btn-primary">批量下架</button>
+          <button class="btn btn-primary">批量改价</button>
+        </div>
       </div>
       <div class="card-body">
         <template v-if="items.length">
@@ -45,7 +52,16 @@
                 <th>图片</th>
                 <th>商品名称</th>
                 <th>价格</th>
-                <th>创建时间</th>
+                <th>
+                  创建时间
+                  <span @click="orderBy = 'created_at:desc'">desc</span>
+                  <span @click="orderBy = 'created_at:asc'">asc</span>
+                </th>
+                <th>
+                  排序
+                  <span @click="orderBy = 'position:desc'">desc</span>
+                  <span @click="orderBy = 'position:asc'">asc</span>
+                </th>
                 <th>上架</th>
                 <th>操作</th>
               </tr>
@@ -59,6 +75,7 @@
               <td>@{{ item.name || '无名称' }}</td>
               <td>@{{ item.price_formatted }}</td>
               <td>@{{ item.created_at }}</td>
+              <td>@{{ item.position }}</td>
               <td>@{{ item.active ? '上架' : '下架' }}</td>
               <td>
                 <a :href="item.url_edit">编辑</a>
@@ -133,6 +150,9 @@
       },
       watch: {
         page: function () {
+          this.load();
+        },
+        orderBy: function () {
           this.load();
         }
       },
