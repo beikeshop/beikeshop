@@ -11,35 +11,52 @@
   <div id="product-app">
     <div class="card">
       <div class="card-body">
-        <div class="form-inline">
-          <input type="text" v-model="filter.keyword" class="form-control mr-2" placeholder="keyword">
-          <input type="text" v-model="filter.sku" class="form-control mr-2" placeholder="sku">
-          <select v-model="filter.category_id" class="form-control">
-            <option value="0">全部</option>
-            @foreach ($categories as $_category)
-              <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
-            @endforeach
-          </select>
-          <select v-model="filter.active" class="form-control">
-            <option value="">全部</option>
-            <option value="1">上架</option>
-            <option value="0">下架</option>
-          </select>
+        <div class="row">
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">商品名称</label>
+            <input type="text" v-model="filter.keyword" class="form-control" placeholder="keyword">
+          </div>
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">sku</label>
+            <input type="text" v-model="filter.sku" class="form-control" placeholder="sku">
+          </div>
 
-          <button type="button" @click="search" class="btn btn-primary">筛选</button>
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">分类</label>
+            <select v-model="filter.category_id" class="form-control">
+              <option value="0">全部</option>
+              @foreach ($categories as $_category)
+                <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">排序</label>
+            <select v-model="filter.active" class="form-control">
+              <option value="">全部</option>
+              <option value="1">上架</option>
+              <option value="0">下架</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="filter-title"></label>
+          <div class="col-auto"><button type="button" @click="search" class="btn btn-primary">筛选</button></div>
         </div>
       </div>
     </div>
 
     <div class="card mt-4">
-      <div class="card-header">
-        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Create</a>
+      <div class="card-header d-flex justify-content-between">
+        <a href="{{ route('admin.products.create') }}"><el-button size="small" type="primary" plain icon="el-icon-plus">创建商品</el-button></a>
 
         <div class="right">
-          <button class="btn btn-primary">批量删除</button>
-          <button class="btn btn-primary">批量上架</button>
-          <button class="btn btn-primary">批量下架</button>
-          <button class="btn btn-primary">批量改价</button>
+          <el-button size="small">批量删除</el-button>
+          <el-button size="small">批量上架</el-button>
+          <el-button size="small">批量下架</el-button>
+          <el-button size="small">批量改价</el-button>
         </div>
       </div>
       <div class="card-body">
@@ -53,14 +70,23 @@
                 <th>商品名称</th>
                 <th>价格</th>
                 <th>
-                  创建时间
-                  <span @click="orderBy = 'created_at:desc'">desc</span>
-                  <span @click="orderBy = 'created_at:asc'">asc</span>
+                  <div class="d-flex align-items-center">
+                    创建时间
+                    <div class="d-flex flex-column ml-1 order-by-wrap">
+                      <i class="el-icon-caret-top" @click="orderBy = 'created_at:asc'"></i>
+                      <i class="el-icon-caret-bottom" @click="orderBy = 'created_at:desc'"></i>
+                    </div>
+                  </div>
                 </th>
-                <th>
-                  排序
-                  <span @click="orderBy = 'position:desc'">desc</span>
-                  <span @click="orderBy = 'position:asc'">asc</span>
+
+                <th class="d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    排序
+                    <div class="d-flex flex-column ml-1 order-by-wrap">
+                      <i class="el-icon-caret-top" @click="orderBy = 'position:asc'"></i>
+                      <i class="el-icon-caret-bottom" @click="orderBy = 'position:desc'"></i>
+                    </div>
+                  </div>
                 </th>
                 <th>上架</th>
                 <th>操作</th>

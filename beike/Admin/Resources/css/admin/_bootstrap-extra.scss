@@ -152,3 +152,20 @@ table.table {
     margin-bottom: 0;
   }
 }
+
+
+.col-xxl-20 {
+  @media (min-width: 1400px) {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+.form-control {
+  border-radius: 2px;
+  font-size: 0.7rem;
+
+  &:focus {
+    box-shadow: none;
+  }
+}

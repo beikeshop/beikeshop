@@ -8,6 +8,8 @@
 // @modified         2021-08-24 15:07:05
 //
 
+$main_color: #fd560f;
+
 body {
   // min-height: 100vh;
   // background-color: #f9f9f9;
@@ -50,7 +52,6 @@ body {
     }
   }
 }
-
 
 .page-title-box {
   .page-title {
@@ -165,6 +166,27 @@ body.page-seller-product {
       img {
         max-width: 100%;
       }
+    }
+  }
+}
+
+.filter-title {
+  flex: 0 0 56px;
+  margin-right: 10px;
+  text-align: right;
+  margin-bottom: 0;
+}
+
+.order-by-wrap {
+  i {
+    line-height: 0.6;
+    cursor: pointer;
+    &:hover {
+      color: #000;
+    }
+
+    &:active {
+      color: $main_color;
     }
   }
 }

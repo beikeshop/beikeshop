@@ -18,10 +18,10 @@ const mix = require('laravel-mix');
 
 mix.setPublicPath('../public');
 
-mix.sass('Resources/css/app.scss', 'Resources/build/css/shop/app.css');
-mix.sass('Resources/css/bootstrap/bootstrap.scss', 'Resources/build/css/bootstrap.css');
+mix.sass('Admin/Resources/css/app.scss', 'beike/build/css/shop/app.css');
+mix.sass('Admin/Resources/css/bootstrap/bootstrap.scss', 'beike/build/css/bootstrap.css');
 
-mix.sass('Resources/css/admin/app.scss', 'Resources/build/css/admin/app.css');
+mix.sass('Admin/Resources/css/admin/app.scss', 'beike/build/css/admin/app.css');
 
 if (mix.inProduction()) {
     mix.version();

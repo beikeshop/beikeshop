@@ -31,6 +31,10 @@
       li {
         padding: 0.5rem 1.3rem;
 
+        @media (max-width: 1200px) and (min-width: 992px) {
+          padding: 0.5rem 1rem;
+        }
+
         a {
           color: #333;
           padding: 0.5rem 0;
