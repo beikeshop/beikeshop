@@ -30,7 +30,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'admin');
+        $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
 
         $this->loadViewComponentsAs('admin', [
             'header' => Header::class,
