@@ -51,6 +51,11 @@ class AdminServiceProvider extends ServiceProvider
 
             $this->publishResources();
         }
+
+        Config::set('filesystems.disks.upload', [
+            'driver' => 'local',
+            'root' => public_path('upload'),
+        ]);
     }
 
     protected function loadSettings()

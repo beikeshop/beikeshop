@@ -6,8 +6,20 @@ use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
-    public function upload(Request $request)
+    public function index()
     {
-        $path = $request->file('file')->store('avatars');
+        return view('admin::pages.file.index');
+    }
+
+    public function store(Request $request)
+    {
+        // $user = logged_admin_user();
+        $file = $request->file('file');
+        $path = $file->store('', 'upload');
+
+        return [
+            'name' => $file->getClientOriginalName(),
+            'url' => asset('upload/' . $path),
+        ];
     }
 }
