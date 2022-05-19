@@ -37,10 +37,11 @@
 
                 <x-admin-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)"/>
 
-                <div>
-                    <button type="submit" class="btn btn-primary">保存</button>
-                    <a href="{{ $_redirect }}" class="btn btn-danger">返回</a>
-                </div>
+
+                <x-admin::form.row>
+                  <button type="submit" class="btn btn-primary">保存</button>
+                  <a href="{{ $_redirect }}" class="btn btn-danger">返回</a>
+                </x-admin::form.row>
             </form>
 
         </div>
