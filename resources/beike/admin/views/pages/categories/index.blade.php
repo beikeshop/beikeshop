@@ -4,9 +4,6 @@
 
 @section('content')
     <div id="category-app" class="card">
-        <div class="card-header">
-            所有分类
-        </div>
         <div class="card-body">
             <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建分类</a>
             <div class="mt-4" style="max-width: 800px;">
