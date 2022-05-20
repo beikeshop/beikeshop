@@ -25,7 +25,7 @@
                     @php
                         $_parent_id = old('parent_id', $category->parent_id ?? 0);
                     @endphp
-                    <select name="parent_id" id="" class="form-control form-control-sm short">
+                    <select name="parent_id" id="" class="form-control short">
                         <option value="0">--请选择--</option>
                         @foreach ($categories as $_category)
                             <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : ''}}>
@@ -37,10 +37,9 @@
 
                 <x-admin-form-switch title="状态" name="active" :value="old('active', $category->active ?? 1)"/>
 
-
                 <x-admin::form.row>
                   <button type="submit" class="btn btn-primary">保存</button>
-                  <a href="{{ $_redirect }}" class="btn btn-danger">返回</a>
+                  <a href="{{ $_redirect }}" class="btn btn-outline-secondary">返回</a>
                 </x-admin::form.row>
             </form>
 

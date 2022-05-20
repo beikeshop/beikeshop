@@ -1,10 +1,8 @@
 <x-admin::form.row :title="$title">
   @foreach (locales() as $index => $locale)
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">{{ $locale['name'] }}</span>
-      </div>
-      <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}" class="form-control" placeholder="{{ $locale['name'] }}">
+    <div class="d-flex align-items-center mb-1">
+      <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}" class="form-control short" placeholder="{{ $locale['name'] }}">
+      <span class="ml-1 text-muted">{{ $locale['name'] }}</span>
     </div>
     @if ($attributes->has('required'))
       @error($errorKey($locale['code']))

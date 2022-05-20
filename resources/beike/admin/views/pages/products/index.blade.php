@@ -11,59 +11,61 @@
     <div id="product-app">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-                        <label class="filter-title">商品名称</label>
-                        <input type="text" v-model="filter.keyword" class="form-control" placeholder="keyword">
-                    </div>
-                    <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-                        <label class="filter-title">sku</label>
-                        <input type="text" v-model="filter.sku" class="form-control" placeholder="sku">
+
+
+                <div class="bg-light p-4">
+                    <div class="row">
+                        <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+                            <label class="filter-title">商品名称</label>
+                            <input type="text" v-model="filter.keyword" class="form-control" placeholder="keyword">
+                        </div>
+                        <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+                            <label class="filter-title">sku</label>
+                            <input type="text" v-model="filter.sku" class="form-control" placeholder="sku">
+                        </div>
+
+                        <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+                            <label class="filter-title">分类</label>
+                            <select v-model="filter.category_id" class="form-control">
+                                <option value="0">全部</option>
+                                @foreach ($categories as $_category)
+                                    <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+                            <label class="filter-title">排序</label>
+                            <select v-model="filter.active" class="form-control">
+                                <option value="">全部</option>
+                                <option value="1">上架</option>
+                                <option value="0">下架</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-                        <label class="filter-title">分类</label>
-                        <select v-model="filter.category_id" class="form-control">
-                            <option value="0">全部</option>
-                            @foreach ($categories as $_category)
-                                <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-                        <label class="filter-title">排序</label>
-                        <select v-model="filter.active" class="form-control">
-                            <option value="">全部</option>
-                            <option value="1">上架</option>
-                            <option value="0">下架</option>
-                        </select>
+                    <div class="row">
+                        <label class="filter-title"></label>
+                        <div class="col-auto">
+                            <button type="button" @click="search" class="btn btn-primary">筛选</button>
+                            <button type="button" @click="search" class="btn btn-outline-primary">重置</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <label class="filter-title"></label>
-                    <div class="col-auto">
-                        <button type="button" @click="search" class="btn btn-primary">筛选</button>
+                <div class="d-flex justify-content-between my-4">
+                    <a href="{{ route('admin.products.create') }}">
+                        <button class="btn btn-primary">创建商品</button>
+                    </a>
+
+                    <div class="right">
+                        <button class="btn btn-outline-secondary">批量删除</button>
+                        <button class="btn btn-outline-secondary">批量上架</button>
+                        <button class="btn btn-outline-secondary">批量下架</button>
+                        <button class="btn btn-outline-secondary">批量改价</button>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="card mt-4">
-            <div class="card-header d-flex justify-content-between">
-                <a href="{{ route('admin.products.create') }}">
-                    <el-button size="small" type="primary" plain icon="el-icon-plus">创建商品</el-button>
-                </a>
-
-                <div class="right">
-                    <el-button size="small">批量删除</el-button>
-                    <el-button size="small">批量上架</el-button>
-                    <el-button size="small">批量下架</el-button>
-                    <el-button size="small">批量改价</el-button>
-                </div>
-            </div>
-            <div class="card-body">
                 <template v-if="items.length">
                     <table class="table" v-loading="loading">
                         <thead>
