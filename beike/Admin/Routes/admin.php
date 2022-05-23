@@ -15,6 +15,8 @@ Route::prefix('admin')
 
                 Route::Resource('categories', \Beike\Admin\Http\Controllers\CategoryController::class);
 
+                Route::Resource('files', \Beike\Admin\Http\Controllers\FileController::class);
+
                 Route::put('products/restore', [\Beike\Admin\Http\Controllers\ProductController::class, 'restore']);
                 Route::resource('products', \Beike\Admin\Http\Controllers\ProductController::class);
 

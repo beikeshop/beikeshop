@@ -10,6 +10,11 @@ function shop_route($route, $params = []): string
     return route('shop.' . $route, $params);
 }
 
+function logged_admin_user()
+{
+    return auth()->guard(\Beike\Models\AdminUser::AUTH_GUARD)->user();
+}
+
 function thumbnail($path): string
 {
     return $path;

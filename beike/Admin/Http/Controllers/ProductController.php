@@ -44,7 +44,7 @@ class ProductController extends Controller
             }
 
             // 排序
-            $orderBy = $request->orderBy ?? 'products.id:desc';
+            $orderBy = $request->order_by ?? 'products.id:desc';
             $orderBy = explode(':', $orderBy);
             $query->orderBy($orderBy[0], $orderBy[1] ?? 'desc');
 
@@ -98,12 +98,16 @@ class ProductController extends Controller
     {
         if ($product->id) {
             $descriptions = $product->descriptions->keyBy('locale');
+            $categoryIds = $product->categories->pluck('id')->toArray();
         }
 
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
-            'categories' => CategoryRepo::flatten(locale()),
+            'category_ids' => $categoryIds ?? [],
+            'source' => [
+                'categories' => CategoryRepo::flatten(locale()),
+            ],
             '_redirect' => $this->getRedirect(),
         ];
 

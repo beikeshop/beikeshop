@@ -16,11 +16,10 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.sass('resources/css/app.scss', 'public/build/css');
-mix.sass('resources/css/bootstrap/bootstrap.scss', 'public/build/css/bootstrap.css');
+// mix.sass('resources/css/app.scss', 'public/build/css');
+mix.sass('resources//beike/css/bootstrap/bootstrap.scss', 'public/build/beike/css/bootstrap.css');
 
-mix.sass('resources/css/admin/app.scss', 'public/build/css/admin');
-
+mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/css/admin.css');
 
 if (mix.inProduction()) {
     mix.version();

@@ -60,6 +60,7 @@ class CategoryController extends Controller
         ];
 
         return view('admin::pages.categories.form', $data);
+        return view('admin::pages.categories.form-vue', $data);
     }
 
     protected function save(Request $request, ?Category $category = null)

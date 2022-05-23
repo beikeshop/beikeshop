@@ -61,6 +61,13 @@ class CreateTables extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('product_categories', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('category_id');
+            $table->timestamps();
+        });
+
         Schema::create('product_descriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
@@ -120,6 +127,7 @@ class CreateTables extends Migration
         Schema::dropIfExists('category_descriptions');
         Schema::dropIfExists('category_paths');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('product_categories');
         Schema::dropIfExists('product_descriptions');
         Schema::dropIfExists('product_skus');
         Schema::dropIfExists('carts');

@@ -19,6 +19,11 @@ class Product extends Model
         'active' => 'boolean',
     ];
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, ProductCategory::class)->withTimestamps();
+    }
+
     public function description()
     {
         return $this->hasOne(ProductDescription::class)->where('locale', locale());

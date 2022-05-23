@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+//
+// @copyright        2020 opencart.cn - All Rights Reserved
+// @link             http://www.guangdawangluo.com
+// @author           Sam Chen <sam.chen@opencart.cn>
+// @created          2021-08-24 14:38:09
+// @modified         2021-08-24 15:07:05
+//
+
+$main_color: #fd560f;
+
+body {
+  // min-height: 100vh;
+  // background-color: #f9f9f9;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 0.875rem;
+  background-color: #f9fbfd;
+}
+
+@for $i from 1 through 6 {
+  .min-h#{$i} {
+    min-height: #{$i}00px;
+  }
+}
+
+.main-content {
+  display: flex;
+  // flex-direction: column;
+  // min-height: 100vh;
+  transition: margin-left .25s ease-in-out,left .25s ease-in-out,margin-right .25s ease-in-out,right .25s ease-in-out;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+
+  @media screen and (max-width: 991px) {
+    margin-left: 260px;
+  }
+
+  &:not(.active) {
+    margin-left: 0;
+  }
+
+  > #content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+
+    @media screen and (max-width: 991px) {
+      padding: 0 1rem 1.5rem;
+    }
+  }
+}
+
+.page-title-box {
+  .page-title {
+    font-size: 15px;
+    margin: 0;
+    // line-height: 35px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: inherit;
+  }
+}
+
+.switch-plus {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  margin-bottom: 1rem;
+
+  input {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    height: 20px;
+    width: 50px;
+    left: 0;
+    margin: 0;
+
+    &:checked {
+      z-index: 1;
+
+      & + label {
+        opacity: 1;
+        cursor: default;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+
+      ~ .toggle-outside .toggle-inside {
+        left: 0.25rem;
+        background-color: #fff;
+        box-shadow: 0 3px 6px 0 rgba(140,152,164,.25);
+      }
+    }
+
+    & ~ input:checked ~ .toggle-outside  {
+      background-color: $main_color;
+
+      .toggle-inside {
+        left: 23px;
+        background-color: #fff;
+      }
+    }
+  }
+
+  label {
+    color: #fff;
+    opacity: 0.33;
+    transition: opacity 0.25s ease;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    display: inline-block;
+    width: 50px;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+
+    &:last-of-type {
+      margin-left: 50px;
+    }
+  }
+
+  .toggle-outside {
+    height: 100%;
+    border-radius: 2rem;
+    padding: 2px;
+    overflow: hidden;
+    transition: 0.25s ease all;
+    // background: #f1f3fa;
+    background-color: #e7eaf3;
+    position: absolute;
+    width: 46px;
+    left: 0;
+  }
+
+  .toggle-inside {
+    border-radius: 50%;
+    // background: #4a4a4a;
+    position: absolute;
+    transition: 0.25s ease all;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+body.page-seller-product {
+  .share-link-pop {
+    .share-links-td {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    .share-links-code {
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.filter-title {
+  flex: 0 0 56px;
+  margin-right: 10px;
+  text-align: right;
+  margin-bottom: 0;
+}
+
+.order-by-wrap {
+  i {
+    line-height: 0.6;
+    cursor: pointer;
+    &:hover {
+      color: #000;
+    }
+
+    &:active {
+      color: $main_color;
+    }
+  }
+}
