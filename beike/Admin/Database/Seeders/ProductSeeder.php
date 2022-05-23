@@ -14,15 +14,15 @@ class ProductSeeder extends Seeder
         $date = Carbon::create(2021);
 
         for ($i = 0; $i < 1000; $i++) {
-            $today = $date->addDay();
+            $time = $date->addMinute();
             $productId = DB::table('products')->insertGetId([
                 'image' => $faker->imageUrl(100, 100),
                 'video' => '',
                 'position' => 0,
                 'active' => 1,
                 'variables' => null,
-                'created_at' => $today,
-                'updated_at' => $today,
+                'created_at' => $time,
+                'updated_at' => $time,
             ]);
 
             $descriptions = [];
@@ -35,8 +35,8 @@ class ProductSeeder extends Seeder
                     'meta_title' => $faker->words(10, true),
                     'meta_description' => $faker->sentence(10),
                     'meta_keyword' => $faker->words(10, true),
-                    'created_at' => $today,
-                    'updated_at' => $today,
+                    'created_at' => $time,
+                    'updated_at' => $time,
                 ];
             }
             DB::table('product_descriptions')->insert($descriptions);
@@ -54,8 +54,8 @@ class ProductSeeder extends Seeder
                 'cost_price' => $costPrice,
                 'quantity' => $faker->numberBetween(100, 1000),
                 'is_default' => 1,
-                'created_at' => $today,
-                'updated_at' => $today,
+                'created_at' => $time,
+                'updated_at' => $time,
             ]);
         }
     }
