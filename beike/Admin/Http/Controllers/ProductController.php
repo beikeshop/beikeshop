@@ -98,12 +98,16 @@ class ProductController extends Controller
     {
         if ($product->id) {
             $descriptions = $product->descriptions->keyBy('locale');
+            $categoryIds = $product->categories->pluck('id')->toArray();
         }
 
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
-            'categories' => CategoryRepo::flatten(locale()),
+            'category_ids' => $categoryIds ?? [],
+            'source' => [
+                'categories' => CategoryRepo::flatten(locale()),
+            ],
             '_redirect' => $this->getRedirect(),
         ];
 

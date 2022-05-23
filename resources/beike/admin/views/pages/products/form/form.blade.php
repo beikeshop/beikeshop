@@ -25,11 +25,14 @@
                 <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)"/>
 
                 <x-admin::form.row title="分类">
-                    <select name="category_id" id="" class="form-control form-control-sm short">
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                  @foreach ($source['categories'] as $_category)
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}" id="category-{{ $_category->id }}" {{ in_array($_category->id, $category_ids) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="category-{{ $_category->id }}">
+                      {{ $_category->name }}
+                    </label>
+                  </div>
+                  @endforeach
                 </x-admin::form.row>
 
                 <div>

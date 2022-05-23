@@ -27,7 +27,7 @@ class ProductService
             DB::beginTransaction();
 
             $product->fill($data);
-            $product->saveOrFail();
+            $product->save();
 
             if ($isUpdating) {
                 $product->skus()->delete();
@@ -49,6 +49,8 @@ class ProductService
                 $skus[] = $sku;
             }
             $product->skus()->createMany($skus);
+
+            $product->categories()->sync($data['categories'] ?? []);
 
             DB::commit();
 
