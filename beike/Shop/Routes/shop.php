@@ -10,6 +10,7 @@ Route::prefix('/')
 
         Route::get('carts', [Beike\Shop\Http\Controllers\CartController::class, 'store'])->name('carts.store');
 
+        Route::get('categories', [Beike\Shop\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [Beike\Shop\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
         Route::get('products/{product}', [Beike\Shop\Http\Controllers\ProductController::class, 'show'])->name('products.show');
