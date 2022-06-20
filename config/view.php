@@ -14,8 +14,7 @@ return [
     */
 
     'paths' => [
-        base_path('themes/acme-child'),
-        base_path('themes/acme'),
+        base_path('themes/default'),
         resource_path('views'),
     ],
 
