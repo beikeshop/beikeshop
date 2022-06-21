@@ -3,8 +3,9 @@
 </a>
 </p>
 
-## 关于 BeikeCMS
+## 关于 BeikeShop
 BeikeShop - 开源好用的跨境电商系统
+
 BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外贸，跨境行业提供了商品管理、订单管理、会员管理、支付、物流、系统管理等功能。
 
 
