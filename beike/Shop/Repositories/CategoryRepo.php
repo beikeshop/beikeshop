@@ -12,23 +12,24 @@
 namespace Beike\Shop\Repositories;
 
 use Beike\Models\Category;
-use Beike\Shop\Http\Resources\CategoryItem;
 use Illuminate\Database\Eloquent\Builder;
+use Beike\Shop\Http\Resources\CategoryItem;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryRepo
 {
     /**
-     * 获取所有分类
+     * 获取顶级及其子分类
      */
-    public static function getTwoLevelCategories()
+    public static function getTwoLevelCategories(): AnonymousResourceCollection
     {
         $topCategories = Category::query()
             ->from('categories as c')
             ->with(['description', 'children.description'])
             ->where('parent_id', 0)
             ->get();
-        
+
         return CategoryItem::collection($topCategories);
     }
 
