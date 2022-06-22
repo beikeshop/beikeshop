@@ -1,0 +1,58 @@
+{
+  "id": "3478615",
+  "name": "beikeshop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14992",
+      "name": "购物袋",
+      "font_class": "gouwudai",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "887903",
+      "name": "个人中心",
+      "font_class": "gerenzhongxin",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "918721",
+      "name": "空爱心",
+      "font_class": "kongaixin",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "1110402",
+      "name": "爱心_线",
+      "font_class": "aixinxian",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "1901648",
+      "name": "购物袋",
+      "font_class": "gouwudai1",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2076426",
+      "name": "搜索小",
+      "font_class": "sousuoxiao",
+      "unicode": "e8d6",
+      "unicode_decimal": 59606
+    },
+    {
+      "icon_id": "3232533",
+      "name": "001购物袋",
+      "font_class": "gouwudai2",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}
