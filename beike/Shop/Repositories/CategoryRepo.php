@@ -12,11 +12,27 @@
 namespace Beike\Shop\Repositories;
 
 use Beike\Models\Category;
+use Beike\Shop\Http\Resources\CategoryItem;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepo
 {
+    /**
+     * 获取所有分类
+     */
+    public static function getTwoLevelCategories()
+    {
+        $topCategories = Category::query()
+            ->from('categories as c')
+            ->with(['description', 'children.description'])
+            ->where('parent_id', 0)
+            ->get();
+        
+        return CategoryItem::collection($topCategories);
+    }
+
+
     /**
      * 获取产品分类列表
      *
@@ -25,7 +41,7 @@ class CategoryRepo
      */
     public static function list(array $filter = [])
     {
-        $keyword = $filter['keyword']??'';
+        $keyword = $filter['keyword'] ?? '';
         $builder = Category::query()->with(['description']);
         if ($keyword) {
             // $builder->whereExists('name')

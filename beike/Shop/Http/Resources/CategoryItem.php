@@ -14,9 +14,14 @@ class CategoryItem extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $item = [
             'id' => $this->id,
-            'name' => $this->description->name ?? ''
+            'name' => $this->description->name ?? '',
+
         ];
+        if ($this->children) {
+            $item['children'] = self::collection($this->children);
+        }
+        return $item;
     }
 }
