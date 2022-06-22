@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.product-wrap {
+  margin-bottom: 26px;
+  text-align: center;
+
+  .image {
+    margin-bottom: 10px;
+  }
+
+  .product-name {
+    margin-bottom: 6px;
+  }
+
+  .product-price {
+    .price-new {
+      color: $primary;
+      font-weight: bold;
+    }
+
+    .price-lod {
+      color: #aaa;
+      margin-left: 4px;
+      text-decoration: line-through;
+    }
+  }
+}

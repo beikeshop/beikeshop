@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
 .module-image-plus {
+  .module-image-plus-top {
+    display: flex;
 
+    .right {
+      margin-left: 20px;
+    }
+  }
+
+  .module-image-plus-bottom {
+    margin-top: 20px;
+  }
 }

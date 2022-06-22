@@ -1,4 +1,11 @@
 @charset "UTF-8";
 
-@import './header';
+$primary: #fd560f;
+
 @import './iconfont';
+@import './global';
+
+@import './header';
+@import './module-image-plus';
+@import './product-style';
+@import './module-brand';

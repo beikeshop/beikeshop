@@ -10018,3 +10018,7 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  padding-right: 50px;
+  padding-left: 50px;
+}

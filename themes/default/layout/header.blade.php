@@ -39,24 +39,21 @@
       <div class="logo"><a href="http://"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
       <div class="menu-wrap">
         <ul class="navbar-nav mx-auto">
+          @foreach ($categories as $category)
           <li class="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ $category['name'] }}</a>
+            @if ($category['children'])
             <ul class="dropdown-menu">
-              <li><a href="" class="dropdown-item">sssss</a></li>
-              <li><a href="" class="dropdown-item">sssss</a></li>
-              <li><a href="" class="dropdown-item">sssss</a></li>
-              <li><a href="" class="dropdown-item">sssss</a></li>
+              @forelse ($category['children'] as $children)
+                <li><a href="" class="dropdown-item">{{ $children['name'] }}</a></li>
+              @endforeach
             </ul>
+            @endif
           </li>
-          <li><a class="nav-link" href="#">夏季新品</a></li>
-          <li><a class="nav-link" href="#">今日上心</a></li>
-          <li><a class="nav-link" href="#">今日上心</a></li>
-          <li><a class="nav-link" href="#">今日上心</a></li>
+          @endforeach
         </ul>
 
-        @foreach ($categories as $category)
-          <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a>
-        @endforeach
+          {{-- <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a> --}}
       </div>
       <div class="right-btn">
         <ul class="navbar-nav flex-row">

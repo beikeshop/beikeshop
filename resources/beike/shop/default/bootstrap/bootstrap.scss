@@ -12,3 +12,8 @@ $primary: #fd560f;
 $font-size-base: 0.8rem;
 
 @import 'node_modules/bootstrap/scss/bootstrap';
+
+.container-fluid {
+  padding-right: 50px;
+  padding-left: 50px;
+}
