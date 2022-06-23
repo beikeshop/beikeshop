@@ -1,25 +1,57 @@
 <?php
 
-function admin_route($route, $params = []): string
+use Illuminate\Contracts\Auth\Authenticatable;
+
+/**
+ * 获取后台链接
+ *
+ * @param $route
+ * @param array $params
+ * @return string
+ */
+function admin_route($route, array $params = []): string
 {
     return route('admin.' . $route, $params);
 }
 
-function shop_route($route, $params = []): string
+/**
+ * 获取前台链接
+ *
+ * @param $route
+ * @param array $params
+ * @return string
+ */
+function shop_route($route, array $params = []): string
 {
     return route('shop.' . $route, $params);
 }
 
-function logged_admin_user()
+/**
+ * 获取后台当前登录用户
+ *
+ * @return Authenticatable|null
+ */
+function logged_admin_user(): ?Authenticatable
 {
     return auth()->guard(\Beike\Models\AdminUser::AUTH_GUARD)->user();
 }
 
+/**
+ * 获取缩略图
+ *
+ * @param $path
+ * @return string
+ */
 function thumbnail($path): string
 {
     return $path;
 }
 
+/**
+ * 获取语言列表
+ *
+ * @return array
+ */
 function locales(): array
 {
     $locales = [];
@@ -35,6 +67,12 @@ function locales(): array
     return $locales;
 }
 
+
+/**
+ * 获取当前语言
+ *
+ * @return string
+ */
 function locale(): string
 {
     return 'zh_cn';
@@ -66,4 +104,3 @@ function image_resize($image, int $width = 100, int $height = 100)
     }
     return asset($image);
 }
-
