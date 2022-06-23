@@ -13,6 +13,7 @@ namespace Beike\Shop\Repositories;
 
 use Beike\Models\Product;
 use Beike\Shop\Http\Resources\ProductList;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductRepo
 {
@@ -38,18 +39,29 @@ class ProductRepo
      */
     public static function getProductsByCategory($categoryId): array
     {
+        $builder = self::getProductsBuilder($categoryId);
+        $products = $builder->get();
+        $items = ProductList::collection($products)->jsonSerialize();
+        return $items;
+    }
+
+
+    /**
+     * 获取 Builder
+     * @param $categoryId
+     * @return Builder
+     */
+    public static function getProductsBuilder($categoryId): Builder
+    {
         if (is_int($categoryId)) {
             $categoryId[] = $categoryId;
         }
-        $products = Product::query()
+        $builder = Product::query()
             ->select(['products.*', 'pc.category_id'])
             ->with(['description'])
             ->join('product_categories as pc', 'products.id', '=', 'pc.product_id')
             ->join('categories as c', 'pc.category_id', '=', 'c.id')
-            ->whereIn('c.id', $categoryId)
-            ->get();
-
-        $items = ProductList::collection($products)->jsonSerialize();
-        return $items;
+            ->whereIn('c.id', $categoryId);
+        return $builder;
     }
 }

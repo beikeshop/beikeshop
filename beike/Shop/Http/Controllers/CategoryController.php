@@ -3,25 +3,20 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Category;
-use Beike\Models\Product;
-use Beike\Shop\Http\Resources\CategoryItem;
-use Beike\Shop\Repositories\CategoryRepo;
 use Illuminate\Http\Request;
+use Beike\Shop\Repositories\CategoryRepo;
+use Beike\Shop\Repositories\ProductRepo;
 
 class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $items = CategoryRepo::list();
-        return CategoryItem::collection($items);
+        return CategoryRepo::list();
     }
 
     public function show(Request $request, Category $category)
     {
-        $products = Product::query()
-            ->with('description')
-            ->latest()
-            ->paginate();
+        $products = ProductRepo::getProductsBuilder($category)->paginate();
 
         $data = [
             'category' => $category,
