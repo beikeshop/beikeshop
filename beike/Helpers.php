@@ -1,15 +1,17 @@
 <?php
 
+use Beike\Models\AdminUser;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * 获取后台链接
  *
  * @param $route
- * @param array $params
+ * @param mixed $params
  * @return string
  */
-function admin_route($route, array $params = []): string
+function admin_route($route, $params): string
 {
     return route('admin.' . $route, $params);
 }
@@ -18,10 +20,10 @@ function admin_route($route, array $params = []): string
  * 获取前台链接
  *
  * @param $route
- * @param array $params
+ * @param mixed $params
  * @return string
  */
-function shop_route($route, array $params = []): string
+function shop_route($route, $params): string
 {
     return route('shop.' . $route, $params);
 }
@@ -33,7 +35,7 @@ function shop_route($route, array $params = []): string
  */
 function logged_admin_user(): ?Authenticatable
 {
-    return auth()->guard(\Beike\Models\AdminUser::AUTH_GUARD)->user();
+    return auth()->guard(AdminUser::AUTH_GUARD)->user();
 }
 
 /**
@@ -99,7 +101,7 @@ function currency_format($price): string
  */
 function image_resize($image, int $width = 100, int $height = 100)
 {
-    if (\Illuminate\Support\Str::startsWith($image, 'http')) {
+    if (Str::startsWith($image, 'http')) {
         return $image;
     }
     return asset($image);
