@@ -12,7 +12,6 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'categories' => CategoryRepo::getTwoLevelCategories(),
             'category_products' => ProductRepo::getProductsByCategories([100002, 100003, 100004, 100005]),
         ];
 

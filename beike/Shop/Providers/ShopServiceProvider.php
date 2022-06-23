@@ -2,18 +2,11 @@
 
 namespace Beike\Shop\Providers;
 
-use Beike\Console\Commands\MakeRootAdminUser;
-use Beike\Models\AdminUser;
 use Beike\Models\Setting;
-use Beike\Admin\View\Components\Filter;
-use Beike\Admin\View\Components\Header;
-use Beike\Admin\View\Components\Sidebar;
-use Beike\Admin\View\Components\Form\Input;
-use Beike\Admin\View\Components\Form\InputLocale;
-use Beike\Admin\View\Components\Form\SwitchRadio;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use Beike\Shop\Repositories\CategoryRepo;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -26,10 +19,9 @@ class ShopServiceProvider extends ServiceProvider
         }
 
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
-
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-
         $this->loadSettings();
+        $this->loadShareView();
     }
 
     protected function loadSettings()
@@ -46,4 +38,9 @@ class ShopServiceProvider extends ServiceProvider
         config(['global' => $settings]);
     }
 
+    protected function loadShareView()
+    {
+        $menuCategories = CategoryRepo::getTwoLevelCategories();
+        View::share('categories', $menuCategories);
+    }
 }
