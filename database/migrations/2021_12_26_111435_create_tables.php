@@ -53,6 +53,7 @@ class CreateTables extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id()->startingValue(100_000);
             $table->string('image')->default('');
+            $table->decimal('price')->default(0);
             $table->string('video')->default('');
             $table->integer('position')->default(0);
             $table->boolean('active')->default(0);

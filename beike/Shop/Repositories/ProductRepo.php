@@ -13,7 +13,6 @@ namespace Beike\Shop\Repositories;
 
 use Beike\Models\Product;
 use Beike\Shop\Http\Resources\ProductList;
-use Illuminate\Support\Collection;
 
 class ProductRepo
 {
@@ -21,12 +20,12 @@ class ProductRepo
      * 通过多个产品分类获取产品列表
      *
      * @param $categoryIds
-     * @return Collection
+     * @return array
      */
-    public static function getProductsByCategories($categoryIds): Collection
+    public static function getProductsByCategories($categoryIds): array
     {
         $products = self::getProductsByCategory($categoryIds);
-        $items = collect($products)->groupBy('category_id');
+        $items = collect($products)->groupBy('category_id')->jsonSerialize();
         return $items;
     }
 
@@ -49,6 +48,7 @@ class ProductRepo
             ->whereIn('c.id', $categoryId)
             ->get();
 
-        return ProductList::collection($products)->jsonSerialize();
+        $items = ProductList::collection($products)->jsonSerialize();
+        return $items;
     }
 }

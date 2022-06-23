@@ -20,6 +20,9 @@ class ProductList extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->description->name ?? '',
+            'price' => $this->price,
+            'image' => image_resize($this->image),
+            'price_format' => currency_format($this->price),
             'category_id' => $this->category_id ?? null,
         ];
     }
