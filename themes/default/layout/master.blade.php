@@ -16,6 +16,7 @@
   @include('layout.header')
 
   @yield('content')
-  @stack('footer')
+
+  @include('layout.footer')
 </body>
 </html>

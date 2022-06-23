@@ -57,7 +57,7 @@
     <div class="row">
       @for ($i = 0; $i < 8; $i++)
       <div class="col-6 col-md-4 col-lg-3">
-        <div class="brand-item"><img src="{{ asset('image/default/image_plus_4.png') }}" class="img-fluid"></div>
+        <div class="brand-item"><img src="{{ asset('image/default/banner-1.png') }}" class="img-fluid"></div>
       </div>
       @endfor
     </div>
