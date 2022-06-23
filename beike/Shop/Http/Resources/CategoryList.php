@@ -2,6 +2,7 @@
 
 namespace Beike\Shop\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryList extends JsonResource
@@ -9,17 +10,17 @@ class CategoryList extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $item = [
             'id' => $this->id,
             'name' => $this->description->name ?? '',
-
         ];
-        if ($this->children->count() > 0) {
+
+        if ($this->relationLoaded('children') && $this->children->count() > 0) {
             $item['children'] = self::collection($this->children);
         }
         return $item;

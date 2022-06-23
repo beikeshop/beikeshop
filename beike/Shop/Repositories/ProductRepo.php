@@ -43,6 +43,7 @@ class ProductRepo
         }
         $products = Product::query()
             ->select(['products.*', 'pc.category_id'])
+            ->with(['description'])
             ->join('product_categories as pc', 'products.id', '=', 'pc.product_id')
             ->join('categories as c', 'pc.category_id', '=', 'c.id')
             ->whereIn('c.id', $categoryId)
