@@ -14,4 +14,12 @@ Route::prefix('/')
         Route::get('categories/{category}', [Beike\Shop\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
         Route::get('products/{product}', [Beike\Shop\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+
+        Route::get('login', [Beike\Shop\Http\Controllers\LoginController::class, 'index'])->name('login.index');
+        Route::post('login', [Beike\Shop\Http\Controllers\LoginController::class, 'store'])->name('login.store');
+
+        Route::middleware('auth:'.\Beike\Models\Customer::AUTH_GUARD)
+            ->group(function () {
+
+            });
     });

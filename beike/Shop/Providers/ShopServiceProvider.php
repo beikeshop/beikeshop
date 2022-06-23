@@ -2,7 +2,9 @@
 
 namespace Beike\Shop\Providers;
 
+use Beike\Models\Customer;
 use Beike\Models\Setting;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +24,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->loadSettings();
         $this->loadShareView();
+        $this->registerGuard();
     }
 
     protected function loadSettings()
@@ -42,5 +45,18 @@ class ShopServiceProvider extends ServiceProvider
     {
         $menuCategories = CategoryRepo::getTwoLevelCategories();
         View::share('categories', $menuCategories);
+    }
+
+    protected function registerGuard()
+    {
+        Config::set('auth.guards.'.Customer::AUTH_GUARD, [
+            'driver' => 'session',
+            'provider' => 'shop_customer',
+        ]);
+
+        Config::set('auth.providers.shop_customer', [
+            'driver' => 'eloquent',
+            'model' => Customer::class,
+        ]);
     }
 }
