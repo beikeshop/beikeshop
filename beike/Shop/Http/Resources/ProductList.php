@@ -20,6 +20,7 @@ class ProductList extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->description->name ?? '',
+            'url' => url()->route('shop.products.show', ['product' => $this]),
             'price' => $this->price,
             'image' => image_resize($this->image),
             'price_format' => currency_format($this->price),

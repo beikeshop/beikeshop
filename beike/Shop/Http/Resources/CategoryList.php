@@ -18,6 +18,7 @@ class CategoryList extends JsonResource
         $item = [
             'id' => $this->id,
             'name' => $this->description->name ?? '',
+            'url' => url()->route('shop.categories.show', ['category' => $this])
         ];
 
         if ($this->relationLoaded('children') && $this->children->count() > 0) {
