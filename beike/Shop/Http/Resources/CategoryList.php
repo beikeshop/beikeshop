@@ -4,7 +4,7 @@ namespace Beike\Shop\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryItem extends JsonResource
+class CategoryList extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class CategoryItem extends JsonResource
             'name' => $this->description->name ?? '',
 
         ];
-        if ($this->children) {
+        if ($this->children->count() > 0) {
             $item['children'] = self::collection($this->children);
         }
         return $item;

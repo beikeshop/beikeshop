@@ -12,6 +12,7 @@
 namespace Beike\Shop\Repositories;
 
 use Beike\Models\Category;
+use Beike\Shop\Http\Resources\CategoryList;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -22,30 +23,14 @@ class CategoryRepo
      */
     public static function getTwoLevelCategories()
     {
-        $items = [];
         $topCategories = Category::query()
             ->from('categories as c')
             ->with(['description', 'children.description'])
             ->where('parent_id', 0)
             ->get();
 
-        foreach ($topCategories as $index => $topCategory) {
-            $items[$index] = [
-                'id' => $topCategory->id,
-                'name' => $topCategory->description->name
-            ];
-            $children = $topCategory->children;
-            if ($children->count() > 0) {
-                foreach ($children as $itemIndex => $item) {
-                    $items[$index]['children'][$itemIndex] = [
-                        'id' => $item->id,
-                        'name' => $item->description->name
-                    ];
-                }
-            }
-        }
-
-        return $items;
+        $categoryList = CategoryList::collection($topCategories);
+        return json_decode($categoryList->toJson(), true);
     }
 
 
@@ -63,23 +48,6 @@ class CategoryRepo
             // $builder->whereExists('name')
         }
         return $builder->get();
-    }
-
-    /**
-     * @param $categoryData
-     */
-    public static function create($categoryData)
-    {
-        // Category::query()->create($categoryData);
-        $category = new Category();
-        $category->parent_id = 12;
-    }
-
-    public static function update(Category $category)
-    {
-        $category->update([
-
-        ]);
     }
 
     public static function updateViewNumber()

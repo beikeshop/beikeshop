@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Repositories;
 
+use Beike\Models\Category;
 use Illuminate\Support\Facades\DB;
 
 class CategoryRepo
@@ -17,5 +18,22 @@ class CategoryRepo
         $results = DB::select($sql);
 
         return $results;
+    }
+
+    /**
+     * @param $categoryData
+     */
+    public static function create($categoryData)
+    {
+        // Category::query()->create($categoryData);
+        $category = new Category();
+        $category->parent_id = 12;
+    }
+
+    public static function update(Category $category)
+    {
+        $category->update([
+
+        ]);
     }
 }
