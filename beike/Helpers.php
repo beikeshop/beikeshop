@@ -23,7 +23,7 @@ function admin_route($route, $params = []): string
  * @param mixed $params
  * @return string
  */
-function shop_route($route, array $params = []): string
+function shop_route($route, $params = []): string
 {
     return route('shop.' . $route, $params);
 }
