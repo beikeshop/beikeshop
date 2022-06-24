@@ -11,7 +11,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
  * @param mixed $params
  * @return string
  */
-function admin_route($route, $params): string
+function admin_route($route, $params = []): string
 {
     return route('admin.' . $route, $params);
 }
@@ -23,7 +23,7 @@ function admin_route($route, $params): string
  * @param mixed $params
  * @return string
  */
-function shop_route($route, $params): string
+function shop_route($route, array $params = []): string
 {
     return route('shop.' . $route, $params);
 }

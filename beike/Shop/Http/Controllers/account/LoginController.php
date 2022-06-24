@@ -9,10 +9,15 @@
  * @modified   2022-06-22 20:22:54
  */
 
-namespace Beike\Shop\Http\Controllers;
+namespace Beike\Shop\Http\Controllers\account;
 
 use Beike\Models\Customer;
+use Beike\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use function auth;
+use function back;
+use function redirect;
+use function view;
 
 class LoginController extends Controller
 {
@@ -29,7 +34,7 @@ class LoginController extends Controller
         ]);
 
         if (auth(Customer::AUTH_GUARD)->attempt($credentials)) {
-            return redirect(route('home'));
+            return redirect(shop_route('account.index'));
         }
 
         return back()->withErrors([

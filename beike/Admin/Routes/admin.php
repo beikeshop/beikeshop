@@ -9,7 +9,7 @@ Route::prefix('admin')
         Route::get('login', [\Beike\Admin\Http\Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [\Beike\Admin\Http\Controllers\LoginController::class, 'store'])->name('login.store');
 
-        Route::middleware('auth:'.\Beike\Models\AdminUser::AUTH_GUARD)
+        Route::middleware('admin_auth:'.\Beike\Models\AdminUser::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [\Beike\Admin\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 

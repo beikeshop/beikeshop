@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-    <h1>Login</h1>
-        <form action="{{ route('shop.login.store') }}" method="post">
+        <h1>Register</h1>
+        <form action="{{ route('shop.register.store') }}" method="post">
             @csrf
 
             <div class="form-group">
@@ -14,7 +14,7 @@
                     <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="邮箱地址">
                 </div>
                 @error('email')
-                <x-admin::form.error :message="$message" />
+                <x-admin::form.error :message="$message"/>
                 @enderror
             </div>
 
@@ -26,7 +26,7 @@
                     <input type="password" name="password" class="form-control" placeholder="密码">
                 </div>
                 @error('password')
-                <x-admin::form.error :message="$message" />
+                <x-admin::form.error :message="$message"/>
                 @enderror
             </div>
 

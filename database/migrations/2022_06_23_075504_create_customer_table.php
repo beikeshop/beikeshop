@@ -18,13 +18,13 @@ class CreateCustomerTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('name');
-            $table->string('avatar');
+            $table->string('avatar')->default('');
             $table->unsignedInteger('customer_group_id');
             $table->unsignedInteger('language_id');
-            $table->text('cart');
-            $table->tinyInteger('status');
-            $table->string('code', 40);
-            $table->string('from', 16);
+            $table->text('cart')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->string('code', 40)->default('');
+            $table->string('from', 16)->default('');
             $table->timestamps();
         });
 
