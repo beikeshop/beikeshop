@@ -12,6 +12,7 @@
 namespace Beike\Shop\Http\Controllers\account;
 
 use Beike\Models\Customer;
+use Beike\Shop\Services\AccountService;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Hash;
@@ -27,13 +28,7 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        $customer = new Customer();
-        $customer->name = $request->get('name', '');
-        $customer->email = $request->get('email');
-        $customer->customer_group_id = 0;
-        $customer->language_id = 0;
-        $customer->password = Hash::make($request->get('password'));
-        $customer->save();
+        AccountService::register($request->all());
 
         return redirect(shop_route('login.index'));
     }

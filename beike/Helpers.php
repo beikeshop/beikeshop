@@ -119,3 +119,8 @@ function image_resize($image, int $width = 100, int $height = 100)
     }
     return asset($image);
 }
+
+function current_language_id()
+{
+    return 1;
+}
