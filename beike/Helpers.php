@@ -4,6 +4,19 @@ use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable;
 
+
+/**
+ * 获取后台设置到 settings 表的值
+ *
+ * @param $key
+ * @param null $default
+ * @return mixed
+ */
+function setting($key, $default = null)
+{
+    return config("bk.{$key}", $default);
+}
+
 /**
  * 获取后台链接
  *

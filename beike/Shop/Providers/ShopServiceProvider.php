@@ -38,7 +38,7 @@ class ShopServiceProvider extends ServiceProvider
                 return $setting->value;
             })
             ->toArray();
-        config(['global' => $settings]);
+        config(['bk' => $settings]);
     }
 
     protected function loadShareView()
