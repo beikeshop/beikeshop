@@ -23,8 +23,11 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->loadSettings();
-        $this->loadShareView();
         $this->registerGuard();
+
+        $this->app->booted(function () {
+            $this->loadShareView();
+        });
     }
 
     protected function loadSettings()
@@ -49,7 +52,7 @@ class ShopServiceProvider extends ServiceProvider
 
     protected function registerGuard()
     {
-        Config::set('auth.guards.'.Customer::AUTH_GUARD, [
+        Config::set('auth.guards.' . Customer::AUTH_GUARD, [
             'driver' => 'session',
             'provider' => 'shop_customer',
         ]);
