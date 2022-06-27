@@ -4,8 +4,9 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Category;
 use Illuminate\Http\Request;
-use Beike\Shop\Repositories\CategoryRepo;
 use Beike\Shop\Repositories\ProductRepo;
+use Beike\Shop\Repositories\CategoryRepo;
+use Beike\Shop\Http\Resources\ProductList;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,7 @@ class CategoryController extends Controller
 
         $data = [
             'category' => $category,
-            'products' => $products,
+            'products' => ProductList::collection($products),
         ];
 
         return view('category', $data);
