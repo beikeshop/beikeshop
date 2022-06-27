@@ -22,7 +22,7 @@
           <div class="right"><img src="http://fpoimg.com/560x560?bg_color=f3f3f3" class="img-fluid"></div>
         </div>
       </div>
-      <div class=" ps-lg-5 col-xl-5 col-lg-6 order-lg-2">
+      <div class="ps-lg-5 col-xl-5 col-lg-6 order-lg-2">
         <div class="peoduct-info">
           <h1>Super Oversized T-Shirt With Raw Sleeves In Brown</h1>
           <div class="rating-wrap d-flex">
