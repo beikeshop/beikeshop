@@ -36,10 +36,10 @@ class ProductRepo
      * @param $categoryIds
      * @return array
      */
-    public static function getProductsByCategories($categoryIds): array
+    public static function getProductsByCategories($categoryIds)
     {
         $products = self::getProductsByCategory($categoryIds);
-        $items = collect($products)->groupBy('category_id')->jsonSerialize();
+        $items = $products->groupBy('category_id');
         return $items;
     }
 
@@ -50,11 +50,11 @@ class ProductRepo
      * @param $categoryId
      * @return array
      */
-    public static function getProductsByCategory($categoryId): array
+    public static function getProductsByCategory($categoryId)
     {
         $builder = self::getProductsBuilder($categoryId);
         $products = $builder->get();
-        $items = ProductList::collection($products)->jsonSerialize();
+        $items = ProductList::collection($products);
         return $items;
     }
 
