@@ -12,7 +12,7 @@
     </nav>
 
     <div class="row justify-content-center">
-      <div class="col-12 col-md-9">@include('layout.steps', ['steps' => 1])</div>
+      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
 
     <div class="row mt-5">

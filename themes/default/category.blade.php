@@ -9,10 +9,9 @@
       <li class="breadcrumb-item active" aria-current="page">Library</li>
     </ol>
   </nav>
-
     <div class="row">
       @foreach ($products as $product)
-      <div class="col-6 col-md-3">@include('layout.product')</div>
+      <div class="col-6 col-md-3">@include('shared.product')</div>
       @endforeach
     </div>
 </div>
