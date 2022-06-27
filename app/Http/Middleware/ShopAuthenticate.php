@@ -16,7 +16,7 @@ class ShopAuthenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             // 后台
-            return shop_route('login.show');
+            return shop_route('login.index');
         }
     }
 }
