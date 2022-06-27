@@ -4,7 +4,7 @@ namespace Beike\Shop\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns|unique:customers,email',
-            'password' => 'required|confirmed',
+            'email' => 'required|email:rfc,dns',
+            'password' => 'required',
         ];
     }
 

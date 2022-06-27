@@ -24,17 +24,7 @@ class CustomerRepo
      */
     public static function create($customerData)
     {
-        return Customer::query()->insertGetId([
-            'name' => $customerData['name'],
-            'email' => $customerData['email'],
-            'password' => $customerData['password'],
-            'status' => $customerData['status'],
-            'avatar' => $customerData['avatar'],
-            'customer_group_id' => $customerData['customer_group_id'],
-            'language_id' => $customerData['language_id'],
-            'status' => $customerData['status'],
-            'from' => $customerData['from'],
-        ]);
+        return Customer::query()->insertGetId($customerData);
     }
 
 }

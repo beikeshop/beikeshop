@@ -13,6 +13,7 @@ namespace Beike\Shop\Http\Controllers\account;
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use function auth;
 use function back;
@@ -26,12 +27,9 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->only('email', 'password');
 
         if (auth(Customer::AUTH_GUARD)->attempt($credentials)) {
             return redirect(shop_route('account.index'));

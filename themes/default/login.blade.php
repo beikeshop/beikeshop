@@ -89,9 +89,9 @@
                 </div>
 
                 <div class="mb-4">
-                  <label class="form-label" for="name">密码</label>
-                  <input type="password" name="password" class="form-control" placeholder="密码">
-                  @error('password')
+                  <label class="form-label" for="name">确认密码</label>
+                  <input type="password" name="password_confirmation" class="form-control" placeholder="密码">
+                  @error('password_confirmation')
                     <x-admin::form.error :message="$message" />
                   @enderror
                 </div>
