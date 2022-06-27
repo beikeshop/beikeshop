@@ -30,37 +30,37 @@
             <div class="col-6 col-sm">
               <h6 class="text-uppercase text-dark mb-3">Hot links</h6>
               <ul class="list-unstyled">
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
               </ul>
             </div>
             <div class="col-6 col-sm">
               <h6 class="text-uppercase text-dark mb-3">Hot links</h6>
               <ul class="list-unstyled">
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
               </ul>
             </div>
             <div class="col-6 col-sm">
               <h6 class="text-uppercase text-dark mb-3">Hot links</h6>
               <ul class="list-unstyled">
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
-                <li><a href="" class="text-muted">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
+                <li><a href="">adsdasd</a></li>
               </ul>
             </div>
             <div class="col-6 col-sm">
               <h6 class="text-uppercase text-dark mb-3">Hot links</h6>
               <ul class="list-unstyled">
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
-                <li><a href="" class="text-muted">dsddslkdjccxz</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
+                <li><a href="">dsddslkdjccxz</a></li>
               </ul>
             </div>
           </div>

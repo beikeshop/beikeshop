@@ -12,7 +12,7 @@
     </nav>
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-12 col-md-3">
         <div class="account-info">
           <div class="head">
             <div class="portrait"><img src="http://fpoimg.com/120x120" class="img-fluid"></div>
@@ -37,14 +37,14 @@
           </nav>
         </div>
       </div>
-      <div class="col-9">
+      <div class="col-12 col-md-9">
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h6 class="mb-0">个人中心</h6>
             <a href="http://" class="text-muted">修改休息</a>
           </div>
           <div class="card-body">
-            <div class="d-flex flex-nowrap card-items">
+            <div class="d-flex flex-nowrap card-items py-2">
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xe77f;</i><span
                   class="text-muted">收藏</span></a>
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xe6a3;</i><span
@@ -60,7 +60,7 @@
             <a href="http://" class="text-muted">全部订单</a>
           </div>
           <div class="card-body">
-            <div class="d-flex flex-nowrap card-items mb-4">
+            <div class="d-flex flex-nowrap card-items mb-4 py-2">
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf12f;</i><span
                   class="text-muted">待付款</span></a>
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf130;</i><span

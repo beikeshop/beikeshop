@@ -4,7 +4,8 @@ header {
   // box-shadow: 0px 1px 10px  rgba(0, 0, 0, .04);
   background: #fff;
   body:not(.page-home) & {
-    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .04);
+    // border-bottom: 1px solid #e5e5e5;
   }
 
   .top-wrap {
@@ -45,7 +46,7 @@ header {
 
     .logo {
       img {
-        max-width: 170px;
+        max-width: 140px;
         max-height: 30px;
       }
     }

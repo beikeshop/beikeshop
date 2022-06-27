@@ -10,9 +10,8 @@ body.page-product {
       }
     }
   }
-  .peoduct-info {
-    padding-left: 3rem;
 
+  .peoduct-info {
     .rating-wrap {
       margin-bottom: 2rem;
 
@@ -25,10 +24,50 @@ body.page-product {
     }
 
     .price-wrap {
+      margin-bottom: 2rem;
+
       .new-price {
         margin-right: .6rem;
         font-size: 1.6rem;
         line-height: 1;
+      }
+    }
+
+    .attribute-wrap {
+      margin-bottom: 2rem;
+
+      .table {
+
+      }
+    }
+
+    .quantity-wrap {
+      .quantity-input {
+        max-width: 5rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .product-description {
+    .nav-tabs {
+      .nav-link {
+        border: none;
+
+        &.active {
+          position: relative;
+          background-color: transparent;
+          color: $primary;
+
+          &:before {
+            border-top: 1px solid $primary;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+          }
+        }
       }
     }
   }

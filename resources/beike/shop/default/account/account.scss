@@ -4,7 +4,7 @@ body.page-account {
   background-color: #F7F8FA;
 
   footer {
-    background-color: #fff;
+    // background-color: #fff;
   }
 
   .account-info {
@@ -16,8 +16,8 @@ body.page-account {
       background-color: #fff;
 
       .portrait {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
         border: 2px solid #FFFFFF;
@@ -66,11 +66,13 @@ body.page-account {
     .card-header {
       border: none;
       background-color: #fff;
+      padding-top: 1rem;
 
       h6 {
         border-left: 3px solid $primary;
         padding-left: 6px;
-        font-size: 0.9rem;
+        font-weight: bold;
+        font-size: 1rem;
       }
     }
 

@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 footer {
-  background: #F8F9FA;
-  margin-top: 3rem;
+  // background: #F8F9FA;
+  background: #fafafa;
+  margin-top: 5rem;
 
   .footer-top {
     padding: 2.2rem 0;
@@ -36,6 +37,14 @@ footer {
 
   .footer-content {
     padding: 3rem 0;
+
+    a {
+      color: #666;
+
+      &:hover {
+        color: $primary;
+      }
+    }
 
     .footer-content-left {
       @media (min-width: 768px) {

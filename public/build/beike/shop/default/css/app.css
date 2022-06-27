@@ -36,7 +36,7 @@ header {
   background: #fff;
 }
 body:not(.page-home) header {
-  border-bottom: 1px solid #e5e5e5;
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.04);
 }
 header .top-wrap {
   height: 44px;
@@ -59,7 +59,7 @@ header .header-content .menu-wrap .nav-link {
   padding-right: 1rem;
 }
 header .header-content .logo img {
-  max-width: 170px;
+  max-width: 140px;
   max-height: 30px;
 }
 header .header-content .right-btn .nav-link {
@@ -72,8 +72,8 @@ header .header-content .right-btn .nav-link i {
 }
 
 footer {
-  background: #F8F9FA;
-  margin-top: 3rem;
+  background: #fafafa;
+  margin-top: 5rem;
 }
 footer .footer-top {
   padding: 2.2rem 0;
@@ -101,6 +101,12 @@ footer .footer-top .service-item .sub-title {
 }
 footer .footer-content {
   padding: 3rem 0;
+}
+footer .footer-content a {
+  color: #666;
+}
+footer .footer-content a:hover {
+  color: #fd560f;
 }
 @media (min-width: 768px) {
   footer .footer-content .footer-content-left {
@@ -194,9 +200,6 @@ body.page-login .card {
 body.page-account {
   background-color: #F7F8FA;
 }
-body.page-account footer {
-  background-color: #fff;
-}
 body.page-account .account-info .head {
   display: flex;
   flex-direction: column;
@@ -205,8 +208,8 @@ body.page-account .account-info .head {
   background-color: #fff;
 }
 body.page-account .account-info .head .portrait {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
   border: 2px solid #FFFFFF;
@@ -244,11 +247,13 @@ body.page-account .account-card {
 body.page-account .account-card .card-header {
   border: none;
   background-color: #fff;
+  padding-top: 1rem;
 }
 body.page-account .account-card .card-header h6 {
   border-left: 3px solid #fd560f;
   padding-left: 6px;
-  font-size: 0.9rem;
+  font-weight: bold;
+  font-size: 1rem;
 }
 body.page-account .account-card .card-items > a {
   width: 25%;
@@ -279,9 +284,6 @@ body.page-product .product-image .left {
 body.page-product .product-image .left > div {
   margin-bottom: 1rem;
 }
-body.page-product .peoduct-info {
-  padding-left: 3rem;
-}
 body.page-product .peoduct-info .rating-wrap {
   margin-bottom: 2rem;
 }
@@ -291,8 +293,34 @@ body.page-product .peoduct-info .rating-wrap .rating {
 body.page-product .peoduct-info .rating-wrap .rating i {
   color: #fd560f;
 }
+body.page-product .peoduct-info .price-wrap {
+  margin-bottom: 2rem;
+}
 body.page-product .peoduct-info .price-wrap .new-price {
   margin-right: 0.6rem;
   font-size: 1.6rem;
   line-height: 1;
+}
+body.page-product .peoduct-info .attribute-wrap {
+  margin-bottom: 2rem;
+}
+body.page-product .peoduct-info .quantity-wrap .quantity-input {
+  max-width: 5rem;
+  text-align: center;
+}
+body.page-product .product-description .nav-tabs .nav-link {
+  border: none;
+}
+body.page-product .product-description .nav-tabs .nav-link.active {
+  position: relative;
+  background-color: transparent;
+  color: #fd560f;
+}
+body.page-product .product-description .nav-tabs .nav-link.active:before {
+  border-top: 1px solid #fd560f;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

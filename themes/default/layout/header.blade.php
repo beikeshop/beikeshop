@@ -3,7 +3,7 @@
     <div class="container d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
         <div class="dropdown">
-          <a class="btn dropdown-toggle" href="#" role="button" id="currency-dropdown" data-toggle="dropdown"
+          <a class="btn dropdown-toggle ps-0" href="#" role="button" id="currency-dropdown" data-toggle="dropdown"
             aria-expanded="false">
             $ USD
           </a>
@@ -27,10 +27,10 @@
           </div>
         </div>
       </div>
-      <div class="right">
-        <a href="">Delivery</a>
-        <a href="">Help</a>
-        <span>028-0000000</span>
+      <div class="right nav">
+        <a href="" class="px-2">Delivery</a>
+        <a href="" class="px-2">Help</a>
+        <span class="px-2">028-0000000</span>
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@
           <li class="nav-item"><a href="" class="nav-link"><i class="iconfont">&#xe662;</i></a></li>
           <li class="nav-item dropdown">
             <a href="" class="nav-link"><i class="iconfont">&#xe619;</i></a>
-            <ul class="dropdown-menu dropdown-menu-right">
+            <ul class="dropdown-menu dropdown-menu-end">
               <li><a href="/accounts" class="dropdown-item">个人中心</a></li>
               <li><a href="{{ shop_route('login.index') }}" class="dropdown-item">登录/注册</a></li>
             </ul>

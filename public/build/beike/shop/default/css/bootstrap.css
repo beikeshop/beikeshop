@@ -225,11 +225,11 @@ sup {
 }
 
 a {
-  color: #fd560f;
-  text-decoration: underline;
+  color: #1f1f1f;
+  text-decoration: none;
 }
 a:hover {
-  color: #ca450c;
+  color: #fd560f;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -2987,7 +2987,6 @@ textarea.form-control-lg {
   line-height: 1.5;
   color: #212529;
   text-align: center;
-  text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
@@ -3460,11 +3459,11 @@ textarea.form-control-lg {
 
 .btn-link {
   font-weight: 400;
-  color: #fd560f;
-  text-decoration: underline;
+  color: #1f1f1f;
+  text-decoration: none;
 }
 .btn-link:hover {
-  color: #ca450c;
+  color: #fd560f;
 }
 .btn-link:disabled, .btn-link.disabled {
   color: #6c757d;
@@ -3757,7 +3756,6 @@ textarea.form-control-lg {
   font-weight: 400;
   color: #212529;
   text-align: inherit;
-  text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
   border: 0;
@@ -3932,8 +3930,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #fd560f;
-  text-decoration: none;
+  color: #1f1f1f;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3942,7 +3939,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: #ca450c;
+  color: #fd560f;
 }
 .nav-link.disabled {
   color: #6c757d;
@@ -4043,7 +4040,6 @@ textarea.form-control-lg {
   padding-bottom: 0.35rem;
   margin-right: 1rem;
   font-size: 1rem;
-  text-decoration: none;
   white-space: nowrap;
 }
 .navbar-nav {
@@ -4794,8 +4790,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #fd560f;
-  text-decoration: none;
+  color: #1f1f1f;
   background-color: #fff;
   border: 1px solid #dee2e6;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4807,13 +4802,13 @@ textarea.form-control-lg {
 }
 .page-link:hover {
   z-index: 2;
-  color: #ca450c;
+  color: #fd560f;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
 .page-link:focus {
   z-index: 3;
-  color: #ca450c;
+  color: #fd560f;
   background-color: #e9ecef;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
@@ -5085,7 +5080,6 @@ textarea.form-control-lg {
   display: block;
   padding: 0.5rem 1rem;
   color: #212529;
-  text-decoration: none;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
