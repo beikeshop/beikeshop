@@ -44,8 +44,8 @@
             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ $category['name'] }}</a>
             @if ($category['children'])
             <ul class="dropdown-menu">
-              @forelse ($category['children'] as $children)
-                <li><a href="" class="dropdown-item">{{ $children['name'] }}</a></li>
+              @forelse ($category['children'] as $child)
+                <li><a href="{{ $child['url'] }}" class="dropdown-item">{{ $child['name'] }}</a></li>
               @endforeach
             </ul>
             @endif
