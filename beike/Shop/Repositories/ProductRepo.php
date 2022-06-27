@@ -26,7 +26,6 @@ class ProductRepo
             $product = Product::query()->findOrFail($product);
         }
         $product->load('description', 'skus', 'master_sku');
-        dd($product);
         return $product;
     }
 

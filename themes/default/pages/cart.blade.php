@@ -73,7 +73,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><span>总数</span><span>20</span></li>
               <li class="list-group-item"><span>总价</span><span>¥223.33</span></li>
-              <li class="list-group-item"></li>
+              <li class="list-group-item d-grid"><button class="btn btn-primary">去结账</button></li>
             </ul>
           </div>
         </div>

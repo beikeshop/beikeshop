@@ -75,5 +75,13 @@ body.page-cart {
       border-bottom: none;
       background-color: transparent;
     }
+
+    .list-group {
+      li {
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: space-between; // flex-end | center | space-between
+      }
+    }
   }
 }

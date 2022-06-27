@@ -430,3 +430,8 @@ body.page-cart .total-wrap .card-header {
   border-bottom: none;
   background-color: transparent;
 }
+body.page-cart .total-wrap .list-group li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
