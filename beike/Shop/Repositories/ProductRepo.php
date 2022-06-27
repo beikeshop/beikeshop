@@ -14,6 +14,7 @@ namespace Beike\Shop\Repositories;
 use Beike\Models\Product;
 use Beike\Shop\Http\Resources\ProductList;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductRepo
 {
@@ -34,7 +35,7 @@ class ProductRepo
      * 通过多个产品分类获取产品列表
      *
      * @param $categoryIds
-     * @return array
+     * @return mixed
      */
     public static function getProductsByCategories($categoryIds)
     {
@@ -48,9 +49,9 @@ class ProductRepo
      * 通过单个产品分类获取产品列表
      *
      * @param $categoryId
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public static function getProductsByCategory($categoryId)
+    public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
         $builder = self::getProductsBuilder($categoryId);
         $products = $builder->get();
@@ -71,7 +72,7 @@ class ProductRepo
         }
         $builder = Product::query()
             ->select(['products.*', 'pc.category_id'])
-            ->with(['description'])
+            ->with(['description', 'skus', 'master_sku'])
             ->join('product_categories as pc', 'products.id', '=', 'pc.product_id')
             ->join('categories as c', 'pc.category_id', '=', 'c.id')
             ->whereIn('c.id', $categoryId);
