@@ -39,6 +39,11 @@ class Product extends Model
         return $this->hasMany(ProductSku::class);
     }
 
+    public function master_sku()
+    {
+        return $this->hasOne(ProductSku::Class)->where('is_default', 1);
+    }
+
     public function getPriceFormattedAttribute(): string
     {
         return '$' . $this->price;

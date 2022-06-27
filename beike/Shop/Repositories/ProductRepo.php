@@ -18,6 +18,20 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductRepo
 {
     /**
+     * 获取产品详情
+     */
+    public static function getProductDetail($product)
+    {
+        if (is_int($product)) {
+            $product = Product::query()->findOrFail($product);
+        }
+        $product->load('description', 'skus', 'master_sku');
+        dd($product);
+        return $product;
+    }
+
+
+    /**
      * 通过多个产品分类获取产品列表
      *
      * @param $categoryIds
