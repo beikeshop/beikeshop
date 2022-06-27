@@ -7,12 +7,12 @@
   <title>首页</title>
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/bootstrap.css') }}">
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap-4.6.1/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap-4.6.1/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.min.js') }}"></script>
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/app.css') }}">
   @stack('header')
 </head>
-<body>
+<body class="@yield('body-class')">
   @include('layout.header')
 
   @yield('content')

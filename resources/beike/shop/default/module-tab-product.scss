@@ -3,7 +3,12 @@
 .module-tab-product {
   .nav {
     .nav-link {
-      color: #333;
+      color: #6c757d;
+
+      &.active {
+        color: #111;
+        font-weight: bold;
+      }
     }
   }
 }

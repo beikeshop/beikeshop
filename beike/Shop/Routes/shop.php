@@ -24,6 +24,8 @@ Route::prefix('/')
         Route::middleware('shop_auth:'.\Beike\Models\Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('account', [\Beike\Shop\Http\Controllers\account\AccountController::class, 'index'])->name('account.index');
-
             });
+
+
+        Route::get('/{url_key}',[Beike\Shop\Http\Controllers\PagesController::class, 'show'])->name('pages.show');
     });

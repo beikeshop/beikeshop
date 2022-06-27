@@ -36,7 +36,7 @@
   </div>
   <div class="header-content py-3">
     <div class="container navbar-expand-lg">
-      <div class="logo"><a href="http://"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
+      <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
       <div class="menu-wrap">
         <ul class="navbar-nav mx-auto">
           @foreach ($categories as $category)
@@ -59,8 +59,16 @@
         <ul class="navbar-nav flex-row">
           <li class="nav-item"><a href="" class="nav-link"><i class="iconfont">&#xe8d6;</i></a></li>
           <li class="nav-item"><a href="" class="nav-link"><i class="iconfont">&#xe662;</i></a></li>
-          <li class="nav-item"><a href="" class="nav-link"><i class="iconfont">&#xe619;</i></a></li>
-          <li class="nav-item"><a href="" class="nav-link"><i class="iconfont">&#xe634;</i></a></li>
+          <li class="nav-item dropdown">
+            <a href="" class="nav-link"><i class="iconfont">&#xe619;</i></a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="/accounts" class="dropdown-item">个人中心</a></li>
+              <li><a href="{{ shop_route('login.index') }}" class="dropdown-item">登录/注册</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="" class="nav-link"><i class="iconfont">&#xe634;</i></a>
+          </li>
         </ul>
       </div>
     </div>

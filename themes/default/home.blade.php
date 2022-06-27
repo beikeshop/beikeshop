@@ -1,5 +1,5 @@
 @extends('layout.master')
-
+@section('body-class', 'page-home')
 @section('content')
 <section class="module-wrap mb-5"><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></section>
 {{-- @foreach ($categories as $category)
@@ -19,30 +19,27 @@
     </div>
   </div>
 </section>
+
 <section class="module-tab-product mb-4">
   <div class="module-title">推荐商品模块</div>
   <div class="container">
     <div class="nav justify-content-center mb-3">
-      <a class="nav-link active" href="#tab-product-1" data-bs-toggle="tab">Women</a>
-      <a class="nav-link" href="#tab-product-2" data-bs-toggle="tab">Men</a>
-      <a class="nav-link" href="#tab-product-3" data-bs-toggle="tab">Kids</a>
+      @foreach ($category_products as $key => $category)
+      <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $key }}</a>
+      @endforeach
     </div>
     <div class="tab-content">
-      <div class="tab-pane fade show active" id="tab-product-1">
+      @foreach ($category_products as $products)
+      <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-product-{{ $loop->index }}">
         <div class="row">
-          @for ($i = 0; $i < 10; $i++)
+          @foreach ($products as $product)
           <div class="col-6 col-md-4 col-lg-3">
             @include('layout.product')
           </div>
-          @endfor
+          @endforeach
         </div>
       </div>
-      <div class="tab-pane fade" id="tab-product-2">
-        22222
-      </div>
-      <div class="tab-pane fade" id="tab-product-3">
-        33333
-      </div>
+      @endforeach
     </div>
   </div>
 </section>

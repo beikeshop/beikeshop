@@ -32,6 +32,12 @@
   background: #FD560F;
 }
 
+header {
+  background: #fff;
+}
+body:not(.page-home) header {
+  border-bottom: 1px solid #e5e5e5;
+}
 header .top-wrap {
   height: 44px;
   background: #F7F8FA;
@@ -42,21 +48,24 @@ header .header-content .container {
   align-items: center;
   justify-content: space-between;
 }
-header .header-content .menu-wrap .navbar-nav li:hover .dropdown-menu {
+header .header-content .navbar-nav li:hover .dropdown-menu {
+  margin: 0;
   display: block;
 }
 header .header-content .menu-wrap .nav-link {
   color: #333;
-  font-weight: bold;
+  font-size: 0.9rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 header .header-content .logo img {
-  max-width: 180px;
+  max-width: 170px;
   max-height: 30px;
 }
 header .header-content .right-btn .nav-link {
   color: #333;
+  padding-right: 0.7rem;
+  padding-left: 0.7rem;
 }
 header .header-content .right-btn .nav-link i {
   font-size: 1.1rem;
@@ -64,6 +73,7 @@ header .header-content .right-btn .nav-link i {
 
 footer {
   background: #F8F9FA;
+  margin-top: 3rem;
 }
 footer .footer-top {
   padding: 2.2rem 0;
@@ -158,4 +168,131 @@ footer .footer-bottom {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
   margin-bottom: 30px;
   height: 90px;
+}
+
+.module-tab-product .nav .nav-link {
+  color: #6c757d;
+}
+.module-tab-product .nav .nav-link.active {
+  color: #111;
+  font-weight: bold;
+}
+
+body.page-login .login-item-header {
+  background: #f8f9fa;
+  border-bottom: none;
+  padding: 1.2rem 1.5rem;
+}
+body.page-login .login-item-header h6 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+body.page-login .card {
+  border: none;
+}
+
+body.page-account {
+  background-color: #F7F8FA;
+}
+body.page-account footer {
+  background-color: #fff;
+}
+body.page-account .account-info .head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #fff;
+}
+body.page-account .account-info .head .portrait {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
+  border: 2px solid #FFFFFF;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+body.page-account .account-info .head .account-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+body.page-account .account-info .head .account-email {
+  color: #666666;
+}
+body.page-account .account-info .account-links > a {
+  color: #4B566B;
+  border: none;
+  border-bottom: 1px solid #EEEEEE;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none !important;
+}
+body.page-account .account-info .account-links > a:hover {
+  background-color: #E9ECEF;
+}
+body.page-account .account-info .account-links > a.active {
+  background-color: #E9ECEF;
+  color: #4B566B;
+}
+body.page-account .account-info .account-links > a .badge {
+  color: #fff;
+}
+body.page-account .account-card {
+  border: none;
+}
+body.page-account .account-card .card-header {
+  border: none;
+  background-color: #fff;
+}
+body.page-account .account-card .card-header h6 {
+  border-left: 3px solid #fd560f;
+  padding-left: 6px;
+  font-size: 0.9rem;
+}
+body.page-account .account-card .card-items > a {
+  width: 25%;
+  color: #444444;
+  text-decoration: none !important;
+}
+body.page-account .account-card .card-items > a i {
+  font-size: 2rem;
+}
+body.page-account .account-card .card-items > a span {
+  display: flex;
+}
+body.page-account .account-card .order-wrap {
+  background-color: #f6f8f9;
+  padding: 2rem 1rem;
+}
+body.page-account .account-card .order-wrap .icon i {
+  font-size: 4.5rem;
+  color: #777;
+}
+body.page-account .account-card .order-wrap .text {
+  font-size: 1rem;
+}
+
+body.page-product .product-image .left {
+  margin-right: 1rem;
+}
+body.page-product .product-image .left > div {
+  margin-bottom: 1rem;
+}
+body.page-product .peoduct-info {
+  padding-left: 3rem;
+}
+body.page-product .peoduct-info .rating-wrap {
+  margin-bottom: 2rem;
+}
+body.page-product .peoduct-info .rating-wrap .rating {
+  margin-right: 0.5rem;
+}
+body.page-product .peoduct-info .rating-wrap .rating i {
+  color: #fd560f;
+}
+body.page-product .peoduct-info .price-wrap .new-price {
+  margin-right: 0.6rem;
+  font-size: 1.6rem;
+  line-height: 1;
 }

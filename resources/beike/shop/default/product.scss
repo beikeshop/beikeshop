@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+body.page-product {
+  .product-image {
+    .left {
+      margin-right: 1rem;
+
+      > div {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  .peoduct-info {
+    padding-left: 3rem;
+
+    .rating-wrap {
+      margin-bottom: 2rem;
+
+      .rating {
+        margin-right: .5rem;
+        i {
+          color: $primary;
+        }
+      }
+    }
+
+    .price-wrap {
+      .new-price {
+        margin-right: .6rem;
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+    }
+  }
+}

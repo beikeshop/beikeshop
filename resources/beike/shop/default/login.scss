@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+body.page-login {
+  .login-item-header {
+    background: #f8f9fa;
+    border-bottom: none;
+    padding: 1.2rem 1.5rem;
+    h6 {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  .card {
+    border: none;
+  }
+}

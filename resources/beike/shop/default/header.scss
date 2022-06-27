@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
 header {
+  // box-shadow: 0px 1px 10px  rgba(0, 0, 0, .04);
+  background: #fff;
+  body:not(.page-home) & {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
   .top-wrap {
     // padding: 10px;
     height: 44px;
@@ -16,20 +22,22 @@ header {
       justify-content: space-between;
     }
 
-    .menu-wrap {
-      .navbar-nav {
-        li {
-          &:hover {
-            .dropdown-menu {
-              display: block;
-            }
+    .navbar-nav {
+      li {
+        &:hover {
+          .dropdown-menu {
+            margin: 0;
+            display: block;
           }
         }
       }
+    }
 
+    .menu-wrap {
       .nav-link {
         color: #333;
-        font-weight: bold;
+        // font-weight: bold;
+        font-size: .9rem;
         padding-left: 1rem;
         padding-right: 1rem;
       }
@@ -37,7 +45,7 @@ header {
 
     .logo {
       img {
-        max-width: 180px;
+        max-width: 170px;
         max-height: 30px;
       }
     }
@@ -45,6 +53,8 @@ header {
     .right-btn {
       .nav-link {
         color: #333;
+        padding-right: 0.7rem;
+        padding-left: 0.7rem;
         i {
           font-size: 1.1rem;
         }
