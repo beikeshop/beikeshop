@@ -53,4 +53,9 @@ class Product extends Model
     {
         return json_decode($this->variables, true);
     }
+
+    public function getUrlAttribute()
+    {
+        return shop_route('products.show', ['product' => $this]);
+    }
 }
