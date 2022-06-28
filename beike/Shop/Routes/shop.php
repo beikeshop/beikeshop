@@ -1,16 +1,18 @@
 <?php
 
-use Beike\Shop\Http\Controllers\Account\AccountController;
-use Beike\Shop\Http\Controllers\Account\LoginController;
-use Beike\Shop\Http\Controllers\Account\LogoutController;
-use Beike\Shop\Http\Controllers\Account\RegisterController;
+use Beike\Models\Customer;
+use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\CartController;
-use Beike\Shop\Http\Controllers\CategoryController;
-use Beike\Shop\Http\Controllers\CheckoutController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\PagesController;
 use Beike\Shop\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
+use Beike\Shop\Http\Controllers\CategoryController;
+use Beike\Shop\Http\Controllers\CheckoutController;
+use Beike\Shop\Http\Controllers\Account\LoginController;
+use Beike\Shop\Http\Controllers\Account\LogoutController;
+use Beike\Shop\Http\Controllers\Account\AccountController;
+use Beike\Shop\Http\Controllers\Account\RegisterController;
+
 
 Route::prefix('/')
     ->name('shop.')
@@ -35,7 +37,7 @@ Route::prefix('/')
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
-        Route::middleware('shop_auth:' . \Beike\Models\Customer::AUTH_GUARD)
+        Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('account', [AccountController::class, 'index'])->name('account.index');
             });
