@@ -8,6 +8,14 @@ use Beike\Shop\Services\CartService;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        $data = [
+            'carts' => CartService::list(current_customer())
+        ];
+        return view("cart", $data);
+    }
+
     public function store(Request $request)
     {
         $skuId = $request->sku_id;

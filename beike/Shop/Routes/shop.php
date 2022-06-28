@@ -6,6 +6,7 @@ use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\CategoryController;
+use Beike\Shop\Http\Controllers\CheckoutController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\PagesController;
 use Beike\Shop\Http\Controllers\ProductController;
@@ -17,8 +18,11 @@ Route::prefix('/')
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
+        Route::get('carts', [CartController::class, 'index'])->name('carts.index');
         Route::post('carts', [CartController::class, 'store'])->name('carts.store');
         Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
+
+        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
