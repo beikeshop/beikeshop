@@ -25,6 +25,7 @@ class CreateCustomerTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->string('code', 40)->default('');
             $table->string('from', 16)->default('');
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -46,15 +47,6 @@ class CreateCustomerTable extends Migration
             $table->text('description');
             $table->timestamps();
         });
-
-        // Schema::create('customer_spending', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedInteger('customer_id');
-        //     $table->unsignedInteger('order_id');
-        //     $table->string('order_number', 32);
-        //     $table->decimal('total', 12, 4);
-        //     $table->timestamps();
-        // });
     }
 
     /**
