@@ -19,6 +19,9 @@ class CartService
 {
     public static function list($customer)
     {
+        if (empty($customer)) {
+            return [];
+        }
         $cartList = Cart::query()->where('customer_id', $customer->id)->get();
         return $cartList;
     }
