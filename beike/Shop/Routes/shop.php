@@ -18,6 +18,7 @@ Route::prefix('/')
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
         Route::post('carts', [CartController::class, 'store'])->name('carts.store');
+        Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');

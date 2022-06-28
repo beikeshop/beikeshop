@@ -3,8 +3,8 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\ProductSku;
-use Beike\Services\CartService;
 use Illuminate\Http\Request;
+use Beike\Shop\Services\CartService;
 
 class CartController extends Controller
 {
@@ -12,13 +12,20 @@ class CartController extends Controller
     {
         $skuId = $request->sku_id;
         $quantity = $request->quantity ?? 1;
+        $customer = current_customer();
 
         $sku = ProductSku::query()
             ->whereRelation('product', 'active', '=', true)
             ->findOrFail($skuId);
 
-        $cart = (new CartService)->add($sku, $quantity);
+        $cart = CartService::add($customer, $sku, $quantity);
 
         return $cart;
+    }
+
+    public function miniCart()
+    {
+        $customer = current_customer();
+        return CartService::list($customer);
     }
 }

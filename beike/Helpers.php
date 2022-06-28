@@ -1,6 +1,7 @@
 <?php
 
 use Beike\Models\AdminUser;
+use Beike\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -46,9 +47,19 @@ function shop_route($route, $params = []): string
  *
  * @return Authenticatable|null
  */
-function logged_admin_user(): ?Authenticatable
+function current_user(): ?Authenticatable
 {
     return auth()->guard(AdminUser::AUTH_GUARD)->user();
+}
+
+/**
+ * 获取前台当前登录客户
+ *
+ * @return Authenticatable|null
+ */
+function current_customer(): ?Authenticatable
+{
+    return auth()->guard(Customer::AUTH_GUARD)->user();
 }
 
 /**

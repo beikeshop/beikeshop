@@ -9,7 +9,7 @@
  * @modified   2022-01-05 10:12:57
  */
 
-namespace Beike\Services;
+namespace Beike\Shop\Services;
 
 
 use Beike\Models\Cart;
@@ -17,10 +17,17 @@ use Beike\Models\ProductSku;
 
 class CartService
 {
-    public function add(ProductSku $sku, int $quantity)
+    public static function list($customer)
+    {
+        $cartList = Cart::query()->where('customer_id', $customer->id)->get();
+        return $cartList;
+    }
+
+
+    public static function add($customer, ProductSku $sku, int $quantity)
     {
         $cart = Cart::query()->create([
-            'customer_id' => 0,
+            'customer_id' => $customer->id,
             'product_id' => $sku->product_id,
             'product_sku_id' => $sku->id,
             'quantity' => $quantity,
