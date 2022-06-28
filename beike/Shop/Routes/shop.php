@@ -17,7 +17,7 @@ Route::prefix('/')
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-        Route::get('carts', [CartController::class, 'store'])->name('carts.store');
+        Route::post('carts', [CartController::class, 'store'])->name('carts.store');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
@@ -30,11 +30,10 @@ Route::prefix('/')
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
-        Route::middleware('shop_auth:'.\Beike\Models\Customer::AUTH_GUARD)
+        Route::middleware('shop_auth:' . \Beike\Models\Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('account', [AccountController::class, 'index'])->name('account.index');
             });
 
-
-        Route::get('/{url_key}',[PagesController::class, 'show'])->name('pages.show');
+        Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
     });
