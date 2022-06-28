@@ -92,7 +92,7 @@
     $('.add-cart').on('click', function(event) {
       $.ajax({
         url: '/carts',
-        data: {id: '{{ $product->master_sku->id }}', quantity: 1},
+        data: {sku_id: '{{ $product->master_sku->id }}', quantity: 1},
         type: 'POST',
       })
       .done(function(e) {

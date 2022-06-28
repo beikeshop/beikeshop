@@ -13,6 +13,7 @@ namespace Beike\Shop\Services;
 
 
 use Beike\Models\Cart;
+use Beike\Models\Customer;
 use Beike\Models\ProductSku;
 
 class CartService
@@ -27,16 +28,30 @@ class CartService
     }
 
 
-    public static function add($customer, ProductSku $sku, int $quantity)
+    public static function add(Customer $customer, ProductSku $sku, int $quantity)
     {
-        $cart = Cart::query()->create([
-            'customer_id' => $customer->id,
-            'product_id' => $sku->product_id,
-            'product_sku_id' => $sku->id,
-            'quantity' => $quantity,
-            'selected' => true,
-        ]);
+        $customerId = $customer->id;
+        $productId = $sku->product_id;
+        $skuId = $sku->id;
 
+        $cart = Cart::query()
+            ->where('customer_id', $customerId)
+            ->where('product_id', $productId)
+            ->where('product_sku_id', $skuId)
+            ->first();
+
+        if ($cart) {
+            $cart->selected = true;
+            $cart->increment('quantity', $quantity);
+        } else {
+            $cart = Cart::query()->create([
+                'customer_id' => $customerId,
+                'product_id' => $productId,
+                'product_sku_id' => $skuId,
+                'quantity' => $quantity,
+                'selected' => true,
+            ]);
+        }
         return $cart;
     }
 }
