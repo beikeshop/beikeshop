@@ -34,28 +34,28 @@
               </tr>
             </thead>
             <tbody>
-              @for ($i = 0; $i < 5; $i++)
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" type="checkbox" value="">
-                    <img src="http://fpoimg.com/100x100?bg_color=f3f3f3" class="img-fluid">
-                  </div>
-                </td>
-                <td>
-                  <div class="name mb-1 fw-bold">Camera Canon EOS M50 Kit</div>
-                  <div class="price">$1156.00</div>
-                </td>
-                <td>
-                  @include('shared.quantity', ['quantity'=>'2'])
-                </td>
-                <td>$1156.00</td>
-                <td>
-                  <button type="button" class="btn btn-link btn-sm">删除</button><br>
-                  <button type="button" class="btn btn-link btn-sm">加入收藏</button>
-                </td>
-              </tr>
-              @endfor
+              @foreach ($carts as $cart)
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center p-image">
+                      <input class="form-check-input" type="checkbox" value="">
+                      <img src="http://fpoimg.com/100x100?bg_color=f3f3f3" class="img-fluid">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="name mb-1 fw-bold">Camera Canon EOS M50 Kit</div>
+                    <div class="price">$1156.00</div>
+                  </td>
+                  <td>
+                    @include('shared.quantity', ['quantity'=>'2'])
+                  </td>
+                  <td>$1156.00</td>
+                  <td>
+                    <button type="button" class="btn btn-link btn-sm">删除</button><br>
+                    <button type="button" class="btn btn-link btn-sm">加入收藏</button>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
