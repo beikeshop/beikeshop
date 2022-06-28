@@ -28,7 +28,8 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        AccountService::register($request->only('email', 'password'));
+        $data = $request->only('register');
+        AccountService::register($data['register']);
 
         return redirect(shop_route('login.index'));
     }

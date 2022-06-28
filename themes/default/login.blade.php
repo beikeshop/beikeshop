@@ -29,16 +29,16 @@
 
               <div class="mb-4">
                 <label class="form-label" for="email_1">Email</label>
-                <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="邮箱地址">
-                @error('email')
+                <input type="text" name="login[email]" class="form-control" value="{{ old('login.email') }}" placeholder="邮箱地址">
+                @error('login.email')
                   <x-admin::form.error :message="$message" />
                 @enderror
               </div>
 
               <div class="mb-4">
                 <label class="form-label" for="email_1">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="密码">
-                @error('password')
+                <input type="password" name="login[password]" class="form-control" placeholder="密码">
+                @error('login.password')
                   <x-admin::form.error :message="$message" />
                 @enderror
               </div>

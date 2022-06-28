@@ -24,16 +24,16 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns|unique:customers,email',
-            'password' => 'required|confirmed',
+            'register.email' => 'required|email:rfc,dns|unique:customers,email',
+            'register.password' => 'required|confirmed',
         ];
     }
 
     public function attributes()
     {
         return [
-            'email' => '邮箱地址',
-            'password' => '密码'
+            'register.email' => '邮箱地址',
+            'register.password' => '密码'
         ];
     }
 }

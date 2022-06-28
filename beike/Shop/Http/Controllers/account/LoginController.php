@@ -29,9 +29,9 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('login');
 
-        if (auth(Customer::AUTH_GUARD)->attempt($credentials)) {
+        if (auth(Customer::AUTH_GUARD)->attempt($credentials['login'])) {
             return redirect(shop_route('account.index'));
         }
 

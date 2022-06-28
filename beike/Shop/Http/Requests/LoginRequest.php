@@ -24,16 +24,16 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required',
+            'login.email' => 'required|email:rfc,dns',
+            'login.password' => 'required',
         ];
     }
 
     public function attributes()
     {
         return [
-            'email' => '邮箱地址',
-            'password' => '密码'
+            'login.email' => '邮箱地址',
+            'login.password' => '密码'
         ];
     }
 }
