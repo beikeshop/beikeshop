@@ -34,6 +34,7 @@
       </div>
     </div>
   </div>
+
   <div class="header-content py-3">
     <div class="container navbar-expand-lg">
       <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
@@ -62,8 +63,12 @@
           <li class="nav-item dropdown">
             <a href="" class="nav-link"><i class="iconfont">&#xe619;</i></a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a href="/accounts" class="dropdown-item">个人中心</a></li>
-              <li><a href="{{ shop_route('login.index') }}" class="dropdown-item">登录/注册</a></li>
+              @if ($customer)
+                <li><a href="{{ shop_route('account.index') }}" class="dropdown-item">个人中心</a></li>
+                <li><a href="{{ shop_route('logout') }}" class="dropdown-item">退出登录</a></li>
+              @else
+                <li><a href="{{ shop_route('login.index') }}" class="dropdown-item">登录/注册</a></li>
+              @endif
             </ul>
           </li>
           <li class="nav-item">

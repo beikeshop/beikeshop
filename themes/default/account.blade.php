@@ -34,6 +34,8 @@
               <span>我的收藏</span></a>
             <a class="list-group-item d-flex justify-content-between align-items-center" href="">
               <span>我的收藏</span></a>
+            <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
+              <span>退出登录</span></a>
           </nav>
         </div>
       </div>
