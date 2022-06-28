@@ -28,12 +28,15 @@ class CartService
     }
 
 
-    public static function add(Customer $customer, ProductSku $sku, int $quantity)
+    public static function add($sku, int $quantity, $customer = null)
     {
-        $customerId = $customer->id;
+        $customerId = $customer->id ?? 0;
         $productId = $sku->product_id;
         $skuId = $sku->id;
 
+        if (empty($sku)) {
+            throw new \Exception("无效的SKU ID");
+        }
         $cart = Cart::query()
             ->where('customer_id', $customerId)
             ->where('product_id', $productId)

@@ -18,7 +18,7 @@ class CartController extends Controller
             ->whereRelation('product', 'active', '=', true)
             ->findOrFail($skuId);
 
-        $cart = CartService::add($customer, $sku, $quantity);
+        $cart = CartService::add($sku, $quantity, $customer);
 
         return $cart;
     }
