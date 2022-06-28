@@ -63,12 +63,12 @@
           <li class="nav-item dropdown">
             <a href="" class="nav-link"><i class="iconfont">&#xe619;</i></a>
             <ul class="dropdown-menu dropdown-menu-end">
-              @if ($customer)
+              @auth('web_shop')
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item">个人中心</a></li>
                 <li><a href="{{ shop_route('logout') }}" class="dropdown-item">退出登录</a></li>
               @else
                 <li><a href="{{ shop_route('login.index') }}" class="dropdown-item">登录/注册</a></li>
-              @endif
+              @endauth
             </ul>
           </li>
           <li class="nav-item">
