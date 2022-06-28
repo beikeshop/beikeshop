@@ -11,7 +11,21 @@
 
 namespace Beike\Shop\Http\Controllers;
 
+use Beike\Shop\Services\CartService;
+use Illuminate\Http\Request;
+
 class CheckoutController extends Controller
 {
-
+    public function index(Request $request)
+    {
+        $carts = CartService::list(current_customer());
+        $amount = collect($carts)->sum('subtotal');
+        $data = [
+            'carts' => $carts,
+            'quantity' => collect($carts)->sum('quantity'),
+            'amount' => $amount,
+            'amount_format' => currency_format($amount)
+        ];
+        return view('checkout', $data);
+    }
 }
