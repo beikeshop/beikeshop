@@ -54,10 +54,11 @@
             </table>
           </div>
 
-          <div class="quantity-wrap d-flex">
-            <div class="quantity-wrap">
+          <div class="quantity-btns d-flex">
+            @include('shared.quantity', ['quantity' => '1'])
+{{--             <div class="quantity-wrap">
               <input  class="form-control quantity-input" type="number" value="1">
-            </div>
+            </div> --}}
             <button class="btn btn-outline-secondary ms-3 add-cart"><i class="bi bi-cart-fill me-1"></i>加入购物车</button>
             <button class="btn btn-dark ms-3"><i class="bi bi-bag-fill me-1"></i>立即购买</button>
           </div>
@@ -92,8 +93,11 @@
     $('.add-cart').on('click', function(event) {
       $.ajax({
         url: '/carts',
-        data: {sku_id: '{{ $product->master_sku->id }}', quantity: 1},
         type: 'POST',
+        data: {
+          sku_id: '{{ $product->master_sku->id }}',
+          quantity: $('input[name="quantity"]').val()
+        },
       })
       .done(function(e) {
         console.log(e);

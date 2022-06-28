@@ -47,13 +47,7 @@
                   <div class="price">$1156.00</div>
                 </td>
                 <td>
-                  <div class="quantity-wrap">
-                    <input type="text" class="form-control" value="1">
-                    <div class="right">
-                      <i class="bi bi-chevron-up"></i>
-                      <i class="bi bi-chevron-down"></i>
-                    </div>
-                  </div>
+                  @include('shared.quantity', ['quantity'=>'2'])
                 </td>
                 <td>$1156.00</td>
                 <td>

@@ -41,10 +41,14 @@ body.page-product {
       }
     }
 
-    .quantity-wrap {
+    .quantity-btns {
       .quantity-input {
         max-width: 5rem;
         text-align: center;
+      }
+
+      .quantity-wrap {
+        height: 43px;
       }
     }
   }

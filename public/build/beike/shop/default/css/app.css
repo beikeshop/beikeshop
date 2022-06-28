@@ -78,6 +78,36 @@
   color: #848484;
 }
 
+.quantity-wrap {
+  width: 80px;
+  height: 37px;
+  display: flex;
+  align-content: space-between;
+  border: 1px solid #ced4da;
+}
+.quantity-wrap input {
+  border: none;
+  padding: 0.5rem;
+}
+.quantity-wrap > .right {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ced4da;
+}
+.quantity-wrap > .right i {
+  flex: 1;
+  width: 20px;
+  height: 17px;
+  text-align: center;
+  cursor: pointer;
+}
+.quantity-wrap > .right i:last-of-type {
+  border-top: 1px solid #ced4da;
+}
+.quantity-wrap > .right i:hover {
+  background-color: #eee;
+}
+
 header {
   background: #fff;
 }
@@ -354,9 +384,12 @@ body.page-product .peoduct-info .price-wrap .new-price {
 body.page-product .peoduct-info .attribute-wrap {
   margin-bottom: 2rem;
 }
-body.page-product .peoduct-info .quantity-wrap .quantity-input {
+body.page-product .peoduct-info .quantity-btns .quantity-input {
   max-width: 5rem;
   text-align: center;
+}
+body.page-product .peoduct-info .quantity-btns .quantity-wrap {
+  height: 43px;
 }
 body.page-product .product-description .nav-tabs .nav-link {
   border: none;
@@ -396,35 +429,6 @@ body.page-cart .cart-products-wrap .table .p-image input {
 body.page-cart .cart-products-wrap .table .p-image img {
   max-width: 80px;
   margin-left: 10px;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap {
-  width: 80px;
-  height: 37px;
-  display: flex;
-  align-content: space-between;
-  border: 1px solid #ced4da;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap input {
-  border: none;
-  padding: 0.5rem;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap > .right {
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid #ced4da;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap > .right i {
-  flex: 1;
-  width: 20px;
-  height: 17px;
-  text-align: center;
-  cursor: pointer;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap > .right i:last-of-type {
-  border-top: 1px solid #ced4da;
-}
-body.page-cart .cart-products-wrap .table .quantity-wrap > .right i:hover {
-  background-color: #eee;
 }
 body.page-cart .total-wrap {
   border: none;
