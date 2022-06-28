@@ -3,7 +3,7 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Product;
-use Beike\Shop\Repositories\ProductRepo;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

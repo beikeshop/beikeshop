@@ -12,9 +12,7 @@
 namespace Beike\Shop\Services;
 
 
-use Beike\Models\Cart;
-use Beike\Models\ProductSku;
-use Beike\Shop\Repositories\CustomerRepo;
+use Beike\Repositories\CustomerRepo;
 use Illuminate\Support\Facades\Hash;
 
 class AccountService

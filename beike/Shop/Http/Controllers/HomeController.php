@@ -2,10 +2,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Models\Category;
-use Beike\Shop\Repositories\CategoryRepo;
-use Beike\Shop\Repositories\ProductRepo;
-use Plugin\Guangda\Seller\Models\Product;
+use Beike\Repositories\ProductRepo;
 
 class HomeController extends Controller
 {

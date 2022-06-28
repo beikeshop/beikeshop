@@ -4,11 +4,11 @@ namespace Beike\Shop\Providers;
 
 use Beike\Models\Customer;
 use Beike\Models\Setting;
+use Beike\Repositories\CategoryRepo;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Beike\Shop\Repositories\CategoryRepo;
+use Illuminate\Support\Str;
 
 class ShopServiceProvider extends ServiceProvider
 {

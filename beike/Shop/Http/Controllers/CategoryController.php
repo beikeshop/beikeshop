@@ -3,10 +3,10 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Category;
-use Illuminate\Http\Request;
-use Beike\Shop\Repositories\ProductRepo;
-use Beike\Shop\Repositories\CategoryRepo;
+use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\ProductList;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {

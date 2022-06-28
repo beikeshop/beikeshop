@@ -9,7 +9,7 @@
  * @modified   2022-06-23 11:19:23
  */
 
-namespace Beike\Shop\Repositories;
+namespace Beike\Repositories;
 
 use Beike\Models\Product;
 use Beike\Shop\Http\Resources\ProductList;

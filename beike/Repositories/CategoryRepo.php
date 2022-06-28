@@ -9,7 +9,7 @@
  * @modified   2022-06-16 17:45:41
  */
 
-namespace Beike\Shop\Repositories;
+namespace Beike\Repositories;
 
 use Beike\Models\Category;
 use Beike\Shop\Http\Resources\CategoryList;
