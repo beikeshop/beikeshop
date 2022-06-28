@@ -43,7 +43,7 @@
               <tr v-for="product, index in products" :key="index">
                 <td>
                   <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" @change="selectedBtnDelete" type="checkbox" v-model="product.selected">
+                    <input class="form-check-input" @change="selectedBtnSelected" type="checkbox" v-model="product.selected">
                     <img :src="product.image" class="img-fluid">
                   </div>
                 </td>
@@ -53,7 +53,7 @@
                 </td>
                 <td>
                   <div class="quantity-wrap">
-                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.product_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
+                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
                     <div class="right">
                       <i class="bi bi-chevron-up"></i>
                       <i class="bi bi-chevron-down"></i>
@@ -62,7 +62,7 @@
                 </td>
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
-                  <button type="button" class="btn btn-link btn-sm" @click="checkedBtnDelete(product.product_id)">删除</button><br>
+                  <button type="button" class="btn btn-link btn-sm" @click="checkedBtnDelete(product.cart_id)">删除</button><br>
                   <button type="button" class="btn btn-link btn-sm">加入收藏</button>
                 </td>
               </tr>
@@ -123,47 +123,58 @@
           }
         },
 
-        quantityChange(quantity, product_id) {
+        quantityChange(quantity, cart_id) {
+          const self = this;
           $.ajax({
-            url: `/carts/${product_id}`,
+            url: `/carts/${cart_id}`,
             type: 'PUT',
             data: {quantity: quantity,},
             success: function(res) {
-              console.log(res)
+              self.setUpdateData(res);
             }
           })
         },
 
-        checkedBtnDelete(product_id) {
+        checkedBtnDelete(cart_id) {
+          const self = this;
+
           $.ajax({
-            url: `/carts/${product_id}`,
+            url: `/carts/${cart_id}`,
             type: 'DELETE',
             success: function(res) {
-              console.log(res)
+              self.setUpdateData(res);
             }
           })
         },
 
-        selectedBtnDelete() {
+        selectedBtnSelected() {
+          const self = this;
           const product_ids = this.products.filter(e => e.selected).map(x => x.product_id)
 
           $.ajax({
             url: `/carts/select`,
             type: 'POST',
-            data: {ku_ids: product_ids},
+            data: {sku_ids: product_ids},
             success: function(res) {
-              console.log(res)
+              self.setUpdateData(res);
             }
           })
         },
+
+        setUpdateData(res) {
+          console.log(res)
+          this.products = res.carts
+          this.amount_format = res.amount_format
+          this.total_quantity = res.quantity
+        }
       },
       // 实例被挂载后调用
       mounted () {
-        if (this.products.length) {
-          this.products.forEach((e) => {
-            this.$set(e, 'selected', false)
-          })
-        }
+        // if (this.products.length) {
+        //   this.products.forEach((e) => {
+        //     this.$set(e, 'selected', false)
+        //   })
+        // }
       },
     })
   </script>
