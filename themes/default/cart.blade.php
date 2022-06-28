@@ -149,12 +149,12 @@
 
         selectedBtnSelected() {
           const self = this;
-          const product_ids = this.products.filter(e => e.selected).map(x => x.product_id)
+          const cart_ids = this.products.filter(e => e.selected).map(x => x.cart_id)
 
           $.ajax({
             url: `/carts/select`,
             type: 'POST',
-            data: {sku_ids: product_ids},
+            data: {sku_ids: cart_ids},
             success: function(res) {
               self.setUpdateData(res);
             }
@@ -162,7 +162,6 @@
         },
 
         setUpdateData(res) {
-          console.log(res)
           this.products = res.carts
           this.amount_format = res.amount_format
           this.total_quantity = res.quantity
