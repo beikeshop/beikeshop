@@ -10,8 +10,13 @@ class CartController extends Controller
 {
     public function index()
     {
+        $carts = CartService::list(current_customer());
+        $amount = collect($carts)->sum('subtotal');
         $data = [
-            'carts' => CartService::list(current_customer())
+            'carts' => $carts,
+            'quantity' => collect($carts)->sum('quantity'),
+            'amount' => $amount,
+            'amount_format' => currency_format($amount)
         ];
         return view("cart", $data);
     }
