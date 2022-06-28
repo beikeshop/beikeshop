@@ -56,7 +56,7 @@ class CartController extends Controller
      * @param $cartId
      * @return array
      */
-    public function destroy(Request $request,$cartId): array
+    public function destroy(Request $request, $cartId): array
     {
         $customer = current_customer();
         CartService::delete($customer, $cartId);

@@ -86,6 +86,10 @@ class CartService
         Cart::query()->where('customer_id', $customer->id)
             ->whereIn('product_sku_id', $productSkuIds)
             ->update(['selected' => 1]);
+
+        Cart::query()->where('customer_id', $customer->id)
+            ->whereNotIn('product_sku_id', $productSkuIds)
+            ->update(['selected' => 0]);
     }
 
 
