@@ -103,6 +103,17 @@ class CartService
     }
 
 
+    public static function delete($customer, $cartId)
+    {
+        if (empty($cartId)) {
+            return;
+        }
+        Cart::query()->where('customer_id', $customer->id)
+            ->where('id', $cartId)
+            ->delete();
+    }
+
+
     /**
      * 获取购物车相关数据
      *

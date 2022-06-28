@@ -25,6 +25,7 @@ Route::prefix('/')
         Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
         Route::put('carts/{cart}', [CartController::class, 'update'])->name('carts.update');
         Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
+        Route::delete('carts/destroy', [CartController::class, 'destroy'])->name('carts.destroy');
 
         Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 

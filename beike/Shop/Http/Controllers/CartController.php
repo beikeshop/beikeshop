@@ -53,10 +53,15 @@ class CartController extends Controller
     /**
      * DELETE /carts/{cart_id}
      * @param Request $request
+     * @param $cartId
+     * @return array
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$cartId): array
     {
+        $customer = current_customer();
+        CartService::delete($customer, $cartId);
 
+        return CartService::reloadData();
     }
 
 
