@@ -108,7 +108,9 @@
             return !this.products.length ? false : this.products.every(s => s.selected)
           },
           set(val) {
-            return this.products.map(e => e.selected = val)
+            // return
+            this.products.map(e => e.selected = val)
+            this.selectedBtnSelected()
           }
         },
       },
@@ -154,7 +156,7 @@
           $.ajax({
             url: `/carts/select`,
             type: 'POST',
-            data: {sku_ids: cart_ids},
+            data: {cart_ids: cart_ids},
             success: function(res) {
               self.setUpdateData(res);
             }
