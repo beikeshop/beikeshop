@@ -19,7 +19,7 @@ class CartService
 {
     public function add(ProductSku $sku, int $quantity)
     {
-        $cart = Cart::create([
+        $cart = Cart::query()->create([
             'customer_id' => 0,
             'product_id' => $sku->product_id,
             'product_sku_id' => $sku->id,
