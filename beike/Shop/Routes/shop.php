@@ -23,6 +23,8 @@ Route::prefix('/')
         Route::get('carts', [CartController::class, 'index'])->name('carts.index');
         Route::post('carts', [CartController::class, 'store'])->name('carts.store');
         Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
+        Route::put('carts/{cart}', [CartController::class, 'update'])->name('carts.update');
+        Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
 
         Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 

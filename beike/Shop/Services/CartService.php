@@ -80,9 +80,12 @@ class CartService
      */
     public static function select($customer, $productSkuIds)
     {
+        if (empty($productSkuIds)) {
+            return;
+        }
         Cart::query()->where('customer_id', $customer->id)
             ->whereIn('product_sku_id', $productSkuIds)
-            ->update(['selected', 1]);
+            ->update(['selected' => 1]);
     }
 
 
@@ -91,9 +94,12 @@ class CartService
      */
     public static function updateQuantity($customer, $cartId, $quantity)
     {
+        if (empty($cartId)) {
+            return;
+        }
         Cart::query()->where('customer_id', $customer->id)
             ->where('id', $cartId)
-            ->update(['quantity', $quantity]);
+            ->update(['quantity' => $quantity]);
     }
 
 

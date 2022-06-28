@@ -23,32 +23,30 @@ class CartController extends Controller
      *
      * POST /carts/select {sku_ids:[product_sku_id, product_sku_id]}
      * @param Request $request
-     * @return View
+     * @return array
      */
-    public function select(Request $request): View
+    public function select(Request $request): array
     {
         $productSkuIds = $request->get('sku_ids');
         $customer = current_customer();
         CartService::select($customer, $productSkuIds);
 
-        $data = CartService::reloadData();
-        return view("cart", $data);
+        return CartService::reloadData();
     }
 
     /**
      * PUT /carts/{cart_id} {quantity: 123}
      * @param Request $request
      * @param $cartId
-     * @return View
+     * @return array
      */
-    public function update(Request $request, $cartId): View
+    public function update(Request $request, $cartId): array
     {
         $customer = current_customer();
         $quantity = $request->get('quantity');
         CartService::updateQuantity($customer, $cartId, $quantity);
 
-        $data = CartService::reloadData();
-        return view("cart", $data);
+        return CartService::reloadData();
     }
 
 

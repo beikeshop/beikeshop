@@ -21,6 +21,7 @@ class CartList extends JsonResource
         $description = $sku->product->description;
         $subTotal = $price * $this->quantity;
         return [
+            'cart_id' => $this->id,
             'product_id' => $this->product_id,
             'sku_id' => $this->product_sku_id,
             'name' => $description->name,
