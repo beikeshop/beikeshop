@@ -26,6 +26,7 @@ $(document).ready(function ($) {
 
     if ($(this).hasClass('bi-chevron-up')) {
       input.val(input.val() * 1 + 1);
+      input.get(0).dispatchEvent(new Event('input'));
       return;
     }
 
@@ -34,6 +35,7 @@ $(document).ready(function ($) {
     }
 
     input.val(input.val() * 1 - 1);
+    input.get(0).dispatchEvent(new Event('input'));
   });
 });
 

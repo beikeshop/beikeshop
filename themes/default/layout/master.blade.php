@@ -21,5 +21,7 @@
   @yield('content')
 
   @include('layout.footer')
+
+  @stack('add-scripts')
 </body>
 </html>
