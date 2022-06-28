@@ -4,40 +4,51 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\ProductSku;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 use Beike\Shop\Services\CartService;
 
 class CartController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
-        $carts = CartService::list(current_customer());
-        $amount = collect($carts)->sum('subtotal');
-        $data = [
-            'carts' => $carts,
-            'quantity' => collect($carts)->sum('quantity'),
-            'amount' => $amount,
-            'amount_format' => currency_format($amount)
-        ];
+        $data = CartService::reloadData();
         return view("cart", $data);
     }
 
     /**
+     * 选中购物车商品
+     *
      * POST /carts/select {sku_ids:[product_sku_id, product_sku_id]}
      * @param Request $request
+     * @return View
      */
-    public function select(Request $request)
+    public function select(Request $request): View
     {
+        $productSkuIds = $request->get('sku_ids');
+        $customer = current_customer();
+        CartService::select($customer, $productSkuIds);
 
+        $data = CartService::reloadData();
+        return view("cart", $data);
     }
-
 
     /**
      * PUT /carts/{cart_id} {quantity: 123}
      * @param Request $request
+     * @param $cartId
+     * @return View
      */
-    public function update(Request $request)
+    public function update(Request $request, $cartId): View
     {
+        $customer = current_customer();
+        $quantity = $request->get('quantity');
+        CartService::updateQuantity($customer, $cartId, $quantity);
 
+        $data = CartService::reloadData();
+        return view("cart", $data);
     }
 
 

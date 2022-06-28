@@ -11,11 +11,18 @@
 
 namespace Beike\Shop\Services;
 
+use Exception;
 use Beike\Models\Cart;
 use Beike\Shop\Http\Resources\CartList;
 
 class CartService
 {
+    /**
+     * 获取购物车商品列表
+     *
+     * @param $customer
+     * @return array
+     */
     public static function list($customer): array
     {
         if (empty($customer)) {
@@ -30,6 +37,10 @@ class CartService
     }
 
 
+    /**
+     * 创建购物车或者更新购物车数量
+     * @throws Exception
+     */
     public static function add($sku, int $quantity, $customer = null)
     {
         $customerId = $customer->id ?? 0;
@@ -37,7 +48,7 @@ class CartService
         $skuId = $sku->id;
 
         if (empty($sku)) {
-            throw new \Exception("无效的SKU ID");
+            throw new Exception("无效的SKU ID");
         }
         $cart = Cart::query()
             ->where('customer_id', $customerId)
@@ -58,5 +69,52 @@ class CartService
             ]);
         }
         return $cart;
+    }
+
+
+    /**
+     * 选择购物车商品
+     *
+     * @param $customer
+     * @param $productSkuIds
+     */
+    public static function select($customer, $productSkuIds)
+    {
+        Cart::query()->where('customer_id', $customer->id)
+            ->whereIn('product_sku_id', $productSkuIds)
+            ->update(['selected', 1]);
+    }
+
+
+    /**
+     * 更新购物车数量
+     */
+    public static function updateQuantity($customer, $cartId, $quantity)
+    {
+        Cart::query()->where('customer_id', $customer->id)
+            ->where('id', $cartId)
+            ->update(['quantity', $quantity]);
+    }
+
+
+    /**
+     * 获取购物车相关数据
+     *
+     * @param array $carts
+     * @return array
+     */
+    public static function reloadData(array $carts = []): array
+    {
+        if (empty($carts)) {
+            $carts = CartService::list(current_customer());
+        }
+        $amount = collect($carts)->sum('subtotal');
+        $data = [
+            'carts' => $carts,
+            'quantity' => collect($carts)->sum('quantity'),
+            'amount' => $amount,
+            'amount_format' => currency_format($amount)
+        ];
+        return $data;
     }
 }

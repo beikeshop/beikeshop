@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Hash;
 class AccountService
 {
     /**
+     * 注册用户
+     *
      * @param array $data // ['email', 'password']
      * @return int
      */
-    public static function register(array $data)
+    public static function register(array $data): int
     {
         $data['password'] = Hash::make($data['password']);
         $data['customer_group_id'] = setting('default_customer_group_id', 1); // default_customer_group_id为默认客户组名称
