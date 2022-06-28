@@ -26,7 +26,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->registerGuard();
 
         $this->app->booted(function () {
-            $this->loadShareView();
+            $this->loadShareViewData();
         });
     }
 
@@ -44,12 +44,6 @@ class ShopServiceProvider extends ServiceProvider
         config(['bk' => $settings]);
     }
 
-    protected function loadShareView()
-    {
-        $menuCategories = CategoryRepo::getTwoLevelCategories();
-        View::share('categories', $menuCategories);
-    }
-
     protected function registerGuard()
     {
         Config::set('auth.guards.' . Customer::AUTH_GUARD, [
@@ -61,5 +55,11 @@ class ShopServiceProvider extends ServiceProvider
             'driver' => 'eloquent',
             'model' => Customer::class,
         ]);
+    }
+
+    protected function loadShareViewData()
+    {
+        $menuCategories = CategoryRepo::getTwoLevelCategories();
+        View::share('categories', $menuCategories);
     }
 }
