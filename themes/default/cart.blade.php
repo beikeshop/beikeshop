@@ -49,7 +49,7 @@
                 </td>
                 <td>
                   <div class="name mb-1 fw-bold" v-text="product.name"></div>
-                  <div class="price">@{{ product.price }}</div>
+                  <div class="price">@{{ product.price_format }}</div>
                 </td>
                 <td>
                   <div class="quantity-wrap">
@@ -60,7 +60,7 @@
                     </div>
                   </div>
                 </td>
-                <td>$1156.00</td>
+                <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
                   <button type="button" class="btn btn-link btn-sm">删除</button><br>
                   <button type="button" class="btn btn-link btn-sm">加入收藏</button>
