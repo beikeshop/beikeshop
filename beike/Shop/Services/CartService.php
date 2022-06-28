@@ -21,7 +21,10 @@ class CartService
         if (empty($customer)) {
             return [];
         }
-        $cartItems = Cart::query()->where('customer_id', $customer->id)->get();
+        $cartItems = Cart::query()
+            ->with(['sku.product.description'])
+            ->where('customer_id', $customer->id)
+            ->get();
         $cartList = CartList::collection($cartItems)->jsonSerialize();
         return $cartList;
     }

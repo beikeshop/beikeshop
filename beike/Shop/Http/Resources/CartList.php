@@ -18,10 +18,12 @@ class CartList extends JsonResource
     {
         $sku = $this->sku;
         $price = $sku->price;
+        $description = $sku->product->description;
         $subTotal = $price * $this->quantity;
         return [
             'product_id' => $this->product_id,
             'sku_id' => $this->product_sku_id,
+            'name' => $description->name,
             'image' => image_resize($sku->image),
             'price' => $price,
             'price_format' => currency_format($price),
