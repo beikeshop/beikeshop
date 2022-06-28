@@ -43,17 +43,17 @@
               <tr v-for="product, index in products" :key="index">
                 <td>
                   <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" type="checkbox" v-model="product.selected">
+                    <input class="form-check-input" @change="selectedBtnDelete" type="checkbox" v-model="product.selected">
                     <img :src="product.image" class="img-fluid">
                   </div>
                 </td>
                 <td>
                   <div class="name mb-1 fw-bold" v-text="product.name"></div>
-                  <div class="price">@{{ product.price_format }}</div>
+                  <div class="price text-muted">@{{ product.price_format }}</div>
                 </td>
                 <td>
                   <div class="quantity-wrap">
-                    <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
+                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.product_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
                     <div class="right">
                       <i class="bi bi-chevron-up"></i>
                       <i class="bi bi-chevron-down"></i>
@@ -62,7 +62,7 @@
                 </td>
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
-                  <button type="button" class="btn btn-link btn-sm">删除</button><br>
+                  <button type="button" class="btn btn-link btn-sm" @click="checkedBtnDelete(product.product_id)">删除</button><br>
                   <button type="button" class="btn btn-link btn-sm">加入收藏</button>
                 </td>
               </tr>
@@ -94,14 +94,13 @@
   <script>
     var app = new Vue({
       el: "#app-cart",
-      // delimiters: ['${', '}'],
-      components: {},
       data: {
         products: @json($carts),
         total_quantity: @json($quantity),
         amount: @json($amount),
         amount_format: @json($amount_format),
       },
+      // components: {},
       // 计算属性
       computed: {
         allSelected: {
@@ -122,7 +121,41 @@
             layer.msg('请选择至少一个商品', ()=>{})
             return
           }
-        }
+        },
+
+        quantityChange(quantity, product_id) {
+          $.ajax({
+            url: `/carts/${product_id}`,
+            type: 'PUT',
+            data: {quantity: quantity,},
+            success: function(res) {
+              console.log(res)
+            }
+          })
+        },
+
+        checkedBtnDelete(product_id) {
+          $.ajax({
+            url: `/carts/${product_id}`,
+            type: 'DELETE',
+            success: function(res) {
+              console.log(res)
+            }
+          })
+        },
+
+        selectedBtnDelete() {
+          const product_ids = this.products.filter(e => e.selected).map(x => x.product_id)
+
+          $.ajax({
+            url: `/carts/select`,
+            type: 'POST',
+            data: {ku_ids: product_ids},
+            success: function(res) {
+              console.log(res)
+            }
+          })
+        },
       },
       // 实例被挂载后调用
       mounted () {
