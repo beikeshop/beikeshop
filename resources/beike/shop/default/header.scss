@@ -8,6 +8,18 @@ header {
     // border-bottom: 1px solid #e5e5e5;
   }
 
+  .dropdown {
+    &:hover {
+      .dropdown-menu {
+        margin: 0;
+        display: block;
+        &.dropdown-menu-end {
+          right: 0;
+        }
+      }
+    }
+  }
+
   .top-wrap {
     // padding: 10px;
     height: 44px;
@@ -24,14 +36,6 @@ header {
     }
 
     .navbar-nav {
-      li {
-        &:hover {
-          .dropdown-menu {
-            margin: 0;
-            display: block;
-          }
-        }
-      }
     }
 
     .menu-wrap {

@@ -72,8 +72,10 @@
           <div class="card-body">
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><span>总数</span><span>20</span></li>
-              <li class="list-group-item"><span>总价</span><span>¥223.33</span></li>
-              <li class="list-group-item d-grid"><button class="btn btn-primary">去结账</button></li>
+              <li class="list-group-item border-bottom-0"><span>总价</span><span class="total-price">¥223.33</span></li>
+              <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
+                <button class="btn btn-primary">去结账</button>
+              </li>
             </ul>
           </div>
         </div>

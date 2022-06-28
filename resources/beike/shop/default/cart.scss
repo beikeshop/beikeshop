@@ -7,6 +7,7 @@ body.page-cart {
         border-top: none;
         td {
           vertical-align: middle;
+          border-color: #f0f2f4;
         }
       }
 
@@ -72,15 +73,28 @@ body.page-cart {
     background-color: #F8F9FA;
 
     .card-header {
+      padding-top: 1rem;
       border-bottom: none;
       background-color: transparent;
     }
 
     .list-group {
       li {
-        display: flex;
-        align-items: center; // flex-start | center
-        justify-content: space-between; // flex-end | center | space-between
+        background-color: transparent;
+        padding: 0.7rem 0;
+        border-color: #EEEEEE;
+
+        &:not(.d-grid) {
+          display: flex;
+          align-items: center; // flex-start | center
+          justify-content: space-between; // flex-end | center | space-between
+        }
+
+        .total-price {
+          color: #222222;
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
       }
     }
   }

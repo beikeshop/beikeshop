@@ -33,10 +33,14 @@ $input-btn-font-size:         0.9rem;
 
 $link-decoration: none;
 $link-color: #1f1f1f;
-// $link-hover-color: $primary;
+$link-hover-color: $primary;
 
-@import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
 @import './bootstrap-icons';
+@import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
+
+.btn-primary {
+  color: #fff;
+}
 
 .container-fluid {
   padding-right: 50px;

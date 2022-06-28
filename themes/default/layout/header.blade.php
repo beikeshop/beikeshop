@@ -72,7 +72,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link"><i class="iconfont">&#xe634;</i></a>
+            <a href="{{ shop_route('pages.show', 'cart') }}" class="nav-link"><i class="iconfont">&#xe634;</i></a>
           </li>
         </ul>
       </div>
