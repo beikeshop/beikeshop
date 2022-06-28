@@ -21,15 +21,15 @@ class CartController extends Controller
     /**
      * 选中购物车商品
      *
-     * POST /carts/select {sku_ids:[product_sku_id, product_sku_id]}
+     * POST /carts/select {cart_ids:[1, 2]}
      * @param Request $request
      * @return array
      */
     public function select(Request $request): array
     {
-        $productSkuIds = $request->get('sku_ids');
+        $cartIds = $request->get('cart_ids');
         $customer = current_customer();
-        CartService::select($customer, $productSkuIds);
+        CartService::select($customer, $cartIds);
 
         return CartService::reloadData();
     }

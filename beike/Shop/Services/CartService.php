@@ -76,19 +76,19 @@ class CartService
      * 选择购物车商品
      *
      * @param $customer
-     * @param $productSkuIds
+     * @param $cartIds
      */
-    public static function select($customer, $productSkuIds)
+    public static function select($customer, $cartIds)
     {
-        if (empty($productSkuIds)) {
+        if (empty($cartIds)) {
             return;
         }
         Cart::query()->where('customer_id', $customer->id)
-            ->whereIn('product_sku_id', $productSkuIds)
+            ->whereIn('id', $cartIds)
             ->update(['selected' => 1]);
 
         Cart::query()->where('customer_id', $customer->id)
-            ->whereNotIn('product_sku_id', $productSkuIds)
+            ->whereNotIn('id', $cartIds)
             ->update(['selected' => 0]);
     }
 
