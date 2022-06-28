@@ -22,8 +22,9 @@ mix.sass('resources/beike/css/bootstrap/bootstrap.scss', 'public/build/beike/css
 mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/css/admin.css');
 
 // 前端 default 模版
-mix.sass('resources/beike/shop/default/bootstrap/bootstrap.scss', 'public/build/beike/shop/default/css/bootstrap.css');
-mix.sass('resources/beike/shop/default/app.scss', 'public/build/beike/shop/default/css/app.css');
+mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/default/css/bootstrap.css');
+mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');
+mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
 if (mix.inProduction()) {
     mix.version();
