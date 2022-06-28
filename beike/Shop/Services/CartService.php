@@ -83,13 +83,11 @@ class CartService
         if (empty($cartIds)) {
             return;
         }
+        Cart::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
+
         Cart::query()->where('customer_id', $customer->id)
             ->whereIn('id', $cartIds)
             ->update(['selected' => 1]);
-
-        Cart::query()->where('customer_id', $customer->id)
-            ->whereNotIn('id', $cartIds)
-            ->update(['selected' => 0]);
     }
 
 
