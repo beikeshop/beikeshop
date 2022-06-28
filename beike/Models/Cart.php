@@ -13,6 +13,6 @@ class Cart extends Model
 
     public function sku()
     {
-        return $this->belongsTo(ProductSku::class);
+        return $this->belongsTo(ProductSku::class, 'product_sku_id', 'id');
     }
 }

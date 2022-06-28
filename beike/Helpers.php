@@ -112,7 +112,7 @@ function locale(): string
  */
 function currency_format($price): string
 {
-    return '$' . $price;
+    return '$' . number_format($price, 2);
 }
 
 /**

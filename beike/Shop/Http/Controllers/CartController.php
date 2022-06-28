@@ -13,6 +13,7 @@ class CartController extends Controller
         $data = [
             'carts' => CartService::list(current_customer())
         ];
+        dump($data);
         return view("cart", $data);
     }
 

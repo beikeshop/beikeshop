@@ -11,19 +11,18 @@
 
 namespace Beike\Shop\Services;
 
-
 use Beike\Models\Cart;
-use Beike\Models\Customer;
-use Beike\Models\ProductSku;
+use Beike\Shop\Http\Resources\CartList;
 
 class CartService
 {
-    public static function list($customer)
+    public static function list($customer): array
     {
         if (empty($customer)) {
             return [];
         }
-        $cartList = Cart::query()->where('customer_id', $customer->id)->get();
+        $cartItems = Cart::query()->where('customer_id', $customer->id)->get();
+        $cartList = CartList::collection($cartItems)->jsonSerialize();
         return $cartList;
     }
 
