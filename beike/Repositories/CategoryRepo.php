@@ -27,6 +27,7 @@ class CategoryRepo
             ->from('categories as c')
             ->with(['description', 'children.description'])
             ->where('parent_id', 0)
+            ->orderBy('position')
             ->get();
 
         $categoryList = CategoryList::collection($topCategories);

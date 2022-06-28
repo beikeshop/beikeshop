@@ -2,8 +2,10 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -19,22 +21,22 @@ class Category extends Model
         'active' => 'boolean',
     ];
 
-    public function children()
+    public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function descriptions()
+    public function descriptions(): HasMany
     {
         return $this->hasMany(CategoryDescription::class);
     }
 
-    public function description()
+    public function description(): HasOne
     {
         return $this->hasOne(CategoryDescription::class)->where('locale', locale());
     }
 
-    public function paths()
+    public function paths(): HasMany
     {
         return $this->hasMany(CategoryPath::class);
     }

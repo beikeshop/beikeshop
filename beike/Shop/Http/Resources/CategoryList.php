@@ -23,6 +23,8 @@ class CategoryList extends JsonResource
 
         if ($this->relationLoaded('children') && $this->children->count() > 0) {
             $item['children'] = self::collection($this->children);
+        } else {
+            $item['children'] = [];
         }
         return $item;
     }
