@@ -11,6 +11,14 @@ $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    beforeSend: function beforeSend() {
+      layer.load(2, {
+        shade: [0.3, '#fff']
+      });
+    },
+    complete: function complete() {
+      layer.closeAll('loading');
     }
   });
   $('.quantity-wrap .right i').on('click', function (event) {
