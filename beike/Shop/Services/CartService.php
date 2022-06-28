@@ -80,11 +80,10 @@ class CartService
      */
     public static function select($customer, $cartIds)
     {
+        Cart::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
         if (empty($cartIds)) {
             return;
         }
-        Cart::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
-
         Cart::query()->where('customer_id', $customer->id)
             ->whereIn('id', $cartIds)
             ->update(['selected' => 1]);
