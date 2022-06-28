@@ -25,9 +25,10 @@ class CartList extends JsonResource
             'sku_id' => $this->product_sku_id,
             'name' => $description->name,
             'image' => image_resize($sku->image),
+            'quantity' => $this->quantity,
+            'selected' => $this->selected,
             'price' => $price,
             'price_format' => currency_format($price),
-            'quantity' => $this->quantity,
             'subtotal' => $subTotal,
             'subtotal_format' => currency_format($subTotal),
         ];

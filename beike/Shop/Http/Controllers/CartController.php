@@ -21,6 +21,36 @@ class CartController extends Controller
         return view("cart", $data);
     }
 
+    /**
+     * POST /carts/select {sku_ids:[product_sku_id, product_sku_id]}
+     * @param Request $request
+     */
+    public function select(Request $request)
+    {
+
+    }
+
+
+    /**
+     * PUT /carts/{cart_id} {quantity: 123}
+     * @param Request $request
+     */
+    public function update(Request $request)
+    {
+
+    }
+
+
+    /**
+     * DELETE /carts/{cart_id}
+     * @param Request $request
+     */
+    public function destroy(Request $request)
+    {
+
+    }
+
+
     public function store(Request $request)
     {
         $skuId = $request->sku_id;
