@@ -9,7 +9,7 @@
  * @modified   2022-06-23 20:22:54
  */
 
-namespace Beike\Shop\Http\Controllers\account;
+namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Controller;
