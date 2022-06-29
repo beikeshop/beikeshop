@@ -11,18 +11,18 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Address;
+use Beike\Models\CustomerGroup;
 
-class AddressRepo
+class CustomerGroupRepo
 {
     /**
-     * 创建一个address记录
+     * 创建一个CustomerGroup记录
      * @param $data
      * @return int
      */
     public static function create($data)
     {
-        $id = Address::query()->insertGetId($data);
+        $id = CustomerGroup::query()->insertGetId($data);
         return self::find($id);
     }
 
@@ -33,12 +33,12 @@ class AddressRepo
      */
     public static function update($id, $data)
     {
-        $address = Address::query()->find($id);
-        if (!$address) {
-            throw new \Exception("地址id {$id} 不存在");
+        $group = CustomerGroup::query()->find($id);
+        if (!$group) {
+            throw new \Exception("Customer Group id {$id} 不存在");
         }
-        $address->update($data);
-        return $address;
+        $group->update($data);
+        return $group;
     }
 
     /**
@@ -47,7 +47,7 @@ class AddressRepo
      */
     public static function find($id)
     {
-        return Address::query()->find($id);
+        return CustomerGroup::query()->find($id);
     }
 
     /**
@@ -56,19 +56,20 @@ class AddressRepo
      */
     public static function delete($id)
     {
-        $address = Address::query()->find($id);
-        if ($address) {
-            $address->delete();
+        $group = CustomerGroup::query()->find($id);
+        if ($group) {
+            $group->delete();
         }
     }
 
-    public static function listByCustomer($customer)
+    public static function list($onlyEnabled = false)
     {
-        if (gettype($customer) != 'object') {
-            $customer = CustomerRepo::find($customer);
+        $builder = CustomerGroup::query();
+        if ($onlyEnabled) {
+            $builder->where('stauts', 1);
         }
-        if ($customer) {
-            return $customer->addresses;
-        }
+        $groups = $builder->get();
+
+        return $groups;
     }
 }

@@ -13,6 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Models\Customer;
+use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,7 @@ class CustomerController extends Controller
     {
         $data = [
             'customer' => $customer,
+            'customer_groups' => CustomerGroupRepo::list(true),
             '_redirect' => $this->getRedirect(),
         ];
 
