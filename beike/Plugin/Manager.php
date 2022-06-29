@@ -43,7 +43,9 @@ class Manager
             $pluginPath = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
             $plugin = new Plugin($pluginPath, $package);
             $plugin->setDirname($dirname);
+            $plugin->setName(Arr::get($package, 'name'));
             $plugin->setInstalled(true);
+            $plugin->setEnabled(false);
             $plugin->setVersion(Arr::get($package, 'version'));
 
             if ($plugins->has($plugin->code)) {

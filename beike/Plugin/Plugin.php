@@ -54,6 +54,12 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this;
     }
 
+    public function setName(string $name): Plugin
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     public function setInstalled(bool $installed): Plugin
     {
         $this->installed = $installed;
