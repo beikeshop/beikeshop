@@ -23,6 +23,9 @@ Route::prefix('admin')
                 Route::put('products/restore', [\Beike\Admin\Http\Controllers\ProductController::class, 'restore']);
                 Route::resource('products', \Beike\Admin\Http\Controllers\ProductController::class);
 
+                Route::get('settings', [\Beike\Admin\Http\Controllers\SettingController::class,'index'])->name('settings.index');
+                Route::get('plugins', [\Beike\Admin\Http\Controllers\PluginController::class,'index'])->name('plugins.index');
+
                 Route::get('logout', [\Beike\Admin\Http\Controllers\LogoutController::class, 'index'])->name('logout.index');
 
 
