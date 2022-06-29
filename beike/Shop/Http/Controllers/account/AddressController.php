@@ -26,7 +26,7 @@ class AddressController extends Controller
             'addresses' => CustomerResource::collection($addresses),
         ];
 
-        return $data;
+        return view('account/address', $data);
     }
 
     public function store(Request $request)

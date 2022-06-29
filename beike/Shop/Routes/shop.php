@@ -1,6 +1,7 @@
 <?php
 
 use Beike\Models\Customer;
+use Beike\Shop\Http\Controllers\Account\AddressController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
@@ -43,6 +44,8 @@ Route::prefix('/')
         Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('account', [AccountController::class, 'index'])->name('account.index');
+
+                Route::resource('account/addresses', AddressController::class);
             });
 
         Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
