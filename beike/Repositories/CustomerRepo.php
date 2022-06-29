@@ -34,6 +34,9 @@ class CustomerRepo
      */
     public static function update($id, $data)
     {
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
         return Customer::query()->find($id)->update($data);
     }
 

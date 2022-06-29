@@ -56,9 +56,12 @@ class CustomerController extends Controller
         return view('admin::pages.customers.form', $data);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, int $customerId)
     {
-        $customerId = $request->id ?? 0;
+        $params = $request->only(['email', 'name', 'status', 'customer_group_id']);
+        if ($request->get('password')) {
+            $params['password'] = $request->get('password');
+        }
         CustomerRepo::update($customerId, $request->all());
 
         return redirect($this->getRedirect())->with('success', 'customer created');
