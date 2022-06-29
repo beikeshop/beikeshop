@@ -41,10 +41,10 @@ $(document).ready(function ($) {
 
 /***/ }),
 
-/***/ "./resources/beike/css/bootstrap/bootstrap.scss":
-/*!******************************************************!*\
-  !*** ./resources/beike/css/bootstrap/bootstrap.scss ***!
-  \******************************************************/
+/***/ "./resources/beike/admin/css/bootstrap/bootstrap.scss":
+/*!************************************************************!*\
+  !*** ./resources/beike/admin/css/bootstrap/bootstrap.scss ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/shop/default/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/css/bootstrap/bootstrap.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/admin/css/bootstrap/bootstrap.scss")))
 /******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/admin/css/app.scss")))
 /******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/shop/default/css/bootstrap/bootstrap.scss")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/css/admin","build/beike/css/bootstrap"], () => (__webpack_require__("./resources/beike/shop/default/css/app.scss")))

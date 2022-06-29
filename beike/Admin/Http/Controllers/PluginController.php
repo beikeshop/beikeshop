@@ -15,6 +15,6 @@ class PluginController extends Controller
 {
     public function index()
     {
-        
+        return view('admin::pages.plugins.index', []);
     }
 }

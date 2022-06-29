@@ -9,5 +9,17 @@
 //
 
 $primary: #fd560f;
+$border-radius:  0;
+$form-check-input-width: 1.2em;
+$form-switch-width: 2.6em;
 
-@import '../../../../node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
+// @import 'node_modules/bootstrap/scss/bootstrap';
+
+.table > :not(:first-child) {
+  border-top: none;
+}
+
+.btn-primary {
+  color: #fff;
+}
