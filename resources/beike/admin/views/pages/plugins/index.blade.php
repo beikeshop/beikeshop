@@ -38,7 +38,7 @@
                             </div>
                         </td>
                         <td>
-                            <a class="btn btn-outline-secondary btn-sm" href="">编辑</a>
+                            <a class="btn btn-outline-secondary btn-sm" href="{{ $plugin->getEditUrl() }}">编辑</a>
                         </td>
                       </tr>
                     @endforeach

@@ -11,6 +11,7 @@
 
 namespace Beike\Plugin;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
@@ -47,6 +48,7 @@ class Manager
             $plugin->setInstalled(true);
             $plugin->setEnabled(false);
             $plugin->setVersion(Arr::get($package, 'version'));
+            $plugin->setColumns();
 
             if ($plugins->has($plugin->code)) {
                 throw new \Exception("有重名插件：" . $plugin->code);
@@ -56,12 +58,29 @@ class Manager
         }
 
         $this->plugins = $plugins->sortBy(function ($plugin) {
-            return $plugin->name;
+            return $plugin->code;
         });
 
         return $this->plugins;
     }
 
+    /**
+     * 获取单个插件
+     *
+     * @throws \Exception
+     */
+    public function getPlugin($code)
+    {
+        $plugins = $this->getPlugins();
+        return $plugins[$code] ?? null;
+    }
+
+    /**
+     * 获取插件目录以及配置
+     *
+     * @return array
+     * @throws FileNotFoundException
+     */
     protected function getPluginsConfig(): array
     {
         $installed = [];

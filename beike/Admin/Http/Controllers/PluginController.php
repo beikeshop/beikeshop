@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Plugin\Manager;
+use Illuminate\Http\Request;
 
 class PluginController extends Controller
 {
@@ -22,5 +23,17 @@ class PluginController extends Controller
     {
         $data['plugins'] = (new Manager)->getPlugins();
         return view('admin::pages.plugins.index', $data);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $code
+     * @throws \Exception
+     */
+    public function edit(Request $request, $code)
+    {
+       $plugin = (new Manager)->getPlugin($code);
+       dd($plugin);
     }
 }

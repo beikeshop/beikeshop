@@ -24,6 +24,7 @@ class Plugin implements Arrayable, \ArrayAccess
     protected $installed;
     protected $enabled;
     protected $version;
+    protected $columns;
 
 
     public function __construct(string $path, array $packageInfo)
@@ -78,10 +79,25 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this;
     }
 
+    public function setColumns(): Plugin
+    {
+        $columnsPath = $this->path . DIRECTORY_SEPARATOR . 'columns.php';
+        if (!file_exists($columnsPath)) {
+            return $this;
+        }
+        $this->columns = require_once $columnsPath;
+        return $this;
+    }
+
 
     public function getVersion(): string
     {
         return $this->version;
+    }
+
+    public function getEditUrl(): string
+    {
+        return admin_route('plugins.edit', ['code' => $this->code]);
     }
 
     public function toArray(): array
