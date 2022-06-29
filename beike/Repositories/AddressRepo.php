@@ -22,7 +22,8 @@ class AddressRepo
      */
     public static function create($data)
     {
-        return Address::query()->insertGetId($data);
+        $id = Address::query()->insertGetId($data);
+        return self::find($id);
     }
 
     /**
@@ -32,7 +33,12 @@ class AddressRepo
      */
     public static function update($id, $data)
     {
-        return Address::query()->find($id)->update($data);
+        $address = Address::query()->find($id);
+        if (!$address) {
+            throw new \Exception("地址id {$id} 不存在");
+        }
+        $address->update($data);
+        return $address;
     }
 
     /**
@@ -51,5 +57,15 @@ class AddressRepo
     public static function delete($id)
     {
         Address::query()->find($id)->delete();
+    }
+
+    public static function listByCustomer($customer)
+    {
+        if (gettype($customer) != 'object') {
+            $customer = CustomerRepo::find($customer);
+        }
+        if ($customer) {
+            return $customer->addresses;
+        }
     }
 }
