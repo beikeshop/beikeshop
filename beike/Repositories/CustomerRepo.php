@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Customer;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerRepo
 {
@@ -22,6 +23,7 @@ class CustomerRepo
      */
     public static function create($customerData)
     {
+        $customerData['password'] = Hash::make($customerData['password']);
         return Customer::query()->insertGetId($customerData);
     }
 

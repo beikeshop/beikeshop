@@ -25,7 +25,6 @@ class AccountService
      */
     public static function register(array $data): int
     {
-        $data['password'] = Hash::make($data['password']);
         $data['customer_group_id'] = setting('default_customer_group_id', 1); // default_customer_group_id为默认客户组名称
         $data['status'] = !setting('approve_customer'); // approve_customer为是否需要审核客户
         $data['from'] = $data['from'] ?? 'pc';
