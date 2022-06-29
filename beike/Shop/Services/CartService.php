@@ -31,6 +31,7 @@ class CartService
         $cartItems = Cart::query()
             ->with(['sku.product.description'])
             ->where('customer_id', $customer->id)
+            ->orderByDesc('id')
             ->get();
         $cartList = CartList::collection($cartItems)->jsonSerialize();
         return $cartList;
