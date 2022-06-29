@@ -100,7 +100,7 @@ class CartService
         }
         Cart::query()->where('customer_id', $customer->id)
             ->where('id', $cartId)
-            ->update(['quantity' => $quantity]);
+            ->update(['quantity' => $quantity, 'selected' => 1]);
     }
 
 
@@ -126,10 +126,12 @@ class CartService
         if (empty($carts)) {
             $carts = CartService::list(current_customer());
         }
-        $amount = collect($carts)->sum('subtotal');
+        $selected = collect($carts)->where('selected', 1);
+        $quantity = $selected->sum('quantity');
+        $amount = $selected->sum('subtotal');
         $data = [
             'carts' => $carts,
-            'quantity' => collect($carts)->sum('quantity'),
+            'quantity' => $quantity,
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
