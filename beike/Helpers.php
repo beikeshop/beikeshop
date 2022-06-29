@@ -131,7 +131,37 @@ function image_resize($image, int $width = 100, int $height = 100)
     return asset($image);
 }
 
-function current_language_id()
+/**
+ * 当前语言ID
+ * @return int
+ */
+function current_language_id(): int
 {
     return 1;
+}
+
+/**
+ * 返回json序列化结果
+ */
+function json_success($message, $data = []): array
+{
+    $result = [
+        'status' => 'success',
+        'message' => $message,
+        'data' => $data,
+    ];
+    return $result;
+}
+
+/**
+ * 返回json序列化结果
+ */
+function json_fail($message, $data = []): array
+{
+    $result = [
+        'status' => 'fail',
+        'message' => $message,
+        'data' => $data,
+    ];
+    return $result;
 }

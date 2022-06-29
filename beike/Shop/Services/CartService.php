@@ -130,12 +130,13 @@ class CartService
         $selected = collect($carts)->where('selected', 1);
         $quantity = $selected->sum('quantity');
         $amount = $selected->sum('subtotal');
+
         $data = [
             'carts' => $carts,
             'quantity' => $quantity,
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
-        return $data;
+        return json_success('获取成功', $data);
     }
 }
