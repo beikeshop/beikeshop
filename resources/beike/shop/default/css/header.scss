@@ -10,9 +10,15 @@ header {
 
   .dropdown {
     &:hover {
+      background-color: #fff;
+
       .dropdown-menu {
         margin: 0;
         display: block;
+        // box-shadow: 0 6px 6px 0 rgb(0, 0, 0, .08);
+        box-shadow: 0 0 15px rgb(0, 0, 0, .1);
+        border: none;
+
         &.dropdown-menu-end {
           right: 0;
         }

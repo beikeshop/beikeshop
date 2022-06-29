@@ -9207,18 +9207,18 @@ textarea.form-control-lg {
 .form-check {
   display: block;
   min-height: 1.2rem;
-  padding-left: 1.5em;
+  padding-left: 1.7em;
   margin-bottom: 0.125rem;
 }
 .form-check .form-check-input {
   float: left;
-  margin-left: -1.5em;
+  margin-left: -1.7em;
 }
 
 .form-check-input {
-  width: 1em;
-  height: 1em;
-  margin-top: 0.25em;
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.15em;
   vertical-align: top;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -9232,7 +9232,7 @@ textarea.form-control-lg {
           color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
-  border-radius: 0.25em;
+  border-radius: 0;
 }
 .form-check-input[type=radio] {
   border-radius: 50%;
@@ -10306,7 +10306,7 @@ textarea.form-control-lg {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0;
 }
 .dropdown-menu[data-bs-popper] {
@@ -10496,13 +10496,13 @@ textarea.form-control-lg {
   height: 0;
   margin: 0.5rem 0;
   overflow: hidden;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1rem;
+  padding: 0.4rem 1rem;
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -10541,14 +10541,14 @@ textarea.form-control-lg {
 
 .dropdown-item-text {
   display: block;
-  padding: 0.25rem 1rem;
+  padding: 0.4rem 1rem;
   color: #212529;
 }
 
 .dropdown-menu-dark {
   color: #dee2e6;
   background-color: #343a40;
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 .dropdown-menu-dark .dropdown-item {
   color: #dee2e6;
@@ -10565,7 +10565,7 @@ textarea.form-control-lg {
   color: #adb5bd;
 }
 .dropdown-menu-dark .dropdown-divider {
-  border-color: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 .dropdown-menu-dark .dropdown-item-text {
   color: #dee2e6;
@@ -18025,4 +18025,10 @@ textarea.form-control-lg {
 .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
   padding-right: 50px;
   padding-left: 50px;
+}
+
+.dropdown .dropdown-divider {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  opacity: 0.1;
 }

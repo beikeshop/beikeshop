@@ -92,6 +92,22 @@
 
 @push('add-scripts')
   <script>
+    $(function() {
+      const totalWrapTop = $('.total-wrap').offset().top;
+      const totalWrapWidth = $('.total-wrap').outerWidth();
+      const totalWrapLeft = $('.total-wrap').offset().left;
+
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > totalWrapTop) {
+          $('.total-wrap').addClass('total-wrap-fixed').css({'left': totalWrapLeft, 'width': totalWrapWidth})
+        } else {
+          $('.total-wrap').removeClass('total-wrap-fixed').css({'left': 0, 'width': 'auto'})
+        }
+      })
+    });
+  </script>
+
+  <script>
     var app = new Vue({
       el: "#app-cart",
       data: {
@@ -123,6 +139,8 @@
             layer.msg('请选择至少一个商品', ()=>{})
             return
           }
+
+          location = '{{ shop_route("checkout.index") }}'
         },
 
         quantityChange(quantity, cart_id) {

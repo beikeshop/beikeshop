@@ -11,8 +11,11 @@
 $primary: #fd560f;
 $font-size-base: 0.8rem;
 
-// Breadcrumbs
+$border-radius: 0;
+$form-check-input-width: 1.2em;
+$form-check-input-border-radius: 0;
 
+// Breadcrumbs
 // scss-docs-start breadcrumb-variables
 // $breadcrumb-font-size:              null !default;
 $breadcrumb-padding-y:              1.4rem;
@@ -34,6 +37,7 @@ $input-btn-font-size:         0.9rem;
 $link-decoration: none;
 $link-color: #1f1f1f;
 $link-hover-color: $primary;
+$btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 $input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
 $form-select-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
@@ -43,6 +47,9 @@ $form-floating-input-padding-b:   .625rem;
 $form-floating-padding-y:         .8rem;
 $form-floating-height:        50px;
 
+$dropdown-border-color: rgba(0, 0, 0, 0.1);
+$dropdown-item-padding-y: .4rem;
+// $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
 
@@ -53,4 +60,12 @@ $form-floating-height:        50px;
 .container-fluid {
   padding-right: 50px;
   padding-left: 50px;
+}
+
+.dropdown {
+  .dropdown-divider {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    opacity: .1;
+  }
 }

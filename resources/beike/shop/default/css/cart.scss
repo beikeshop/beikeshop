@@ -28,7 +28,7 @@ body.page-cart {
 
         img {
           max-width: 80px;
-          margin-left: 10px;
+          margin-left: 14px;
         }
       }
     }
@@ -37,6 +37,12 @@ body.page-cart {
   .total-wrap {
     border: none;
     background-color: #F8F9FA;
+
+    &.total-wrap-fixed {
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
 
     .card-header {
       padding-top: 1rem;

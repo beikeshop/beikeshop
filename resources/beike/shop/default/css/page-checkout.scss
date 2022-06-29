@@ -11,6 +11,11 @@ body.page-checkout {
     padding: 1.4rem;
     border: 3px solid #efefef;
 
+    &.total-wrap-fixed {
+      position: fixed;
+      top: 0;
+    }
+
     .card-body {
       padding: 0;
     }
@@ -29,12 +34,14 @@ body.page-checkout {
       border-bottom: 1px solid #E6E6E6;
       margin-bottom: 1.3rem;
       padding-bottom: .3rem;
+      max-height: 380px;
+      overflow-y: auto;
 
       .item {
         display: flex;
         align-items: center; // flex-start | center
         justify-content: space-between; // flex-end | center | space-between
-        margin-bottom: 1rem;
+        margin-bottom: .8rem;
 
         .image {
           display: flex;
