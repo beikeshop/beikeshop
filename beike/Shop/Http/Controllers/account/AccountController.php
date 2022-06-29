@@ -21,7 +21,7 @@ class AccountController extends Controller
     public function index()
     {
         $data = auth(Customer::AUTH_GUARD)->user()->toArray();
-        return view('account', $data);
+        return view('account/account', $data);
     }
 
 }

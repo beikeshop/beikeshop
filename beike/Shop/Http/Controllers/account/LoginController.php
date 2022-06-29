@@ -24,7 +24,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login');
+        return view('account/login');
     }
 
     public function store(LoginRequest $request)
