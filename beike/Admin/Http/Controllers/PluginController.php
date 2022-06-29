@@ -11,10 +11,17 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Plugin\Manager;
+
 class PluginController extends Controller
 {
+    /**
+     * @throws \Exception
+     */
     public function index()
     {
+        $data = (new Manager)->getPlugins();
+        dd($data);
         return view('admin::pages.plugins.index', []);
     }
 }
