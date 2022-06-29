@@ -48,8 +48,8 @@ class CartService
         $productId = $sku->product_id;
         $skuId = $sku->id;
 
-        if (empty($sku)) {
-            throw new Exception("无效的SKU ID");
+        if (empty($sku) || $quantity == 0) {
+            return null;
         }
         $cart = Cart::query()
             ->where('customer_id', $customerId)
@@ -96,7 +96,7 @@ class CartService
      */
     public static function updateQuantity($customer, $cartId, $quantity)
     {
-        if (empty($cartId)) {
+        if (empty($cartId) || $quantity == 0) {
             return;
         }
         Cart::query()->where('customer_id', $customer->id)

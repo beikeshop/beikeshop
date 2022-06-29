@@ -43,7 +43,7 @@ class CartController extends Controller
     public function update(Request $request, $cartId): array
     {
         $customer = current_customer();
-        $quantity = $request->get('quantity');
+        $quantity = (int)$request->get('quantity');
         CartService::updateQuantity($customer, $cartId, $quantity);
 
         return CartService::reloadData();
