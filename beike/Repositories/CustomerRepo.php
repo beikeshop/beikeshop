@@ -61,26 +61,26 @@ class CustomerRepo
      */
     public static function list($data)
     {
-        $builder = Customer::query()->from('customers AS c')
-            ->leftJoin('customer_groups AS cg', 'c.customer_group_id', 'cg.id')
+        $builder = Customer::query()
+            ->leftJoin('customer_groups AS cg', 'customers.customer_group_id', 'cg.id')
             ->leftJoin('customer_group_descriptions AS cgd', function ($join) {
                 $join->on('cgd.customer_group_id', 'cg.id')
                     ->where('cgd.language_id', current_language_id());
             })
-            ->select(['c.id', 'c.email', 'c.name', 'c.avatar', 'c.status', 'c.from', 'cgd.name AS customer_group_name']);
+            ->select(['customers.id', 'customers.email', 'customers.name', 'customers.avatar', 'customers.status', 'customers.from', 'cgd.name AS customer_group_name']);
 
 
         if (isset($data['name'])) {
-            $builder->where('c.name', 'like', "%{$data['name']}%");
+            $builder->where('customers.name', 'like', "%{$data['name']}%");
         }
         if (isset($data['email'])) {
-            $builder->where('c.email', 'like', "%{$data['email']}%");
+            $builder->where('customers.email', 'like', "%{$data['email']}%");
         }
         if (isset($data['status'])) {
-            $builder->where('c.status', $data['status']);
+            $builder->where('customers.status', $data['status']);
         }
         if (isset($data['from'])) {
-            $builder->where('c.from', $data['from']);
+            $builder->where('customers.from', $data['from']);
         }
         if (isset($data['customer_group_name'])) {
             $builder->where('cgd.name', 'like', "%{$data['name']}%");
