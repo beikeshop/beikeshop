@@ -74,24 +74,24 @@
 
                 <div class="mb-4">
                   <label class="form-label" for="name">邮箱</label>
-                  <input type="text" name="email" class="form-control" value="{{ old('email') }}" placeholder="邮箱地址">
-                  @error('email')
+                  <input type="text" name="register[email]" class="form-control" value="{{ old('register.email') }}" placeholder="邮箱地址">
+                  @error('register.email')
                     <x-admin::form.error :message="$message" />
                   @enderror
                 </div>
 
                 <div class="mb-4">
                   <label class="form-label" for="name">密码</label>
-                  <input type="password" name="password" class="form-control" placeholder="密码">
-                  @error('password')
+                  <input type="password" name="register[password]" class="form-control" placeholder="密码">
+                  @error('register.password')
                     <x-admin::form.error :message="$message" />
                   @enderror
                 </div>
 
                 <div class="mb-4">
                   <label class="form-label" for="name">确认密码</label>
-                  <input type="password" name="password_confirmation" class="form-control" placeholder="密码">
-                  @error('password_confirmation')
+                  <input type="password" name="register[password_confirmation]" class="form-control" placeholder="密码">
+                  @error('register.password_confirmation')
                     <x-admin::form.error :message="$message" />
                   @enderror
                 </div>
