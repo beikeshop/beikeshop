@@ -20,8 +20,7 @@ class PluginController extends Controller
      */
     public function index()
     {
-        $data = (new Manager)->getPlugins();
-        dd($data);
-        return view('admin::pages.plugins.index', []);
+        $data['plugins'] = (new Manager)->getPlugins();
+        return view('admin::pages.plugins.index', $data);
     }
 }

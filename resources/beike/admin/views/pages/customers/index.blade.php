@@ -2,57 +2,43 @@
 
 @section('title', '顾客管理')
 
-@push('header')
-    <style>
-        .el-tree-node__content {
-            height: 32px;
-            border-bottom: 1px solid #f9f9f9;
-        }
-    </style>
-@endpush
-
 @section('content')
     <div id="customer-app" class="card">
         <div class="card-body">
-            <a href="{{ admin_route('customers.create') }}" class="btn btn-primary">创建顾客</a>
-            <div class="mt-4" style="">
-                <el-tree :data="categories" default-expand-all :expand-on-click-node="false">
-                    <div class="custom-tree-node" slot-scope="{ node, data }" style="flex:1;display:flex">
-                        <span>@{{ data.id }}</span>
-                        <span>@{{ data.email }}</span>
-                        <span>@{{ data.avatar }}</span>
-                        <span>@{{ data.from }}</span>
-                        <div style="flex:1"></div>
-                        <span class="mr-4">@{{ data.status ? '启用' : '禁用' }}</span>
-                        <div>
-                            <a :href="data.url_edit">编辑</a>
-                            <a>删除</a>
-                        </div>
-                    </div>
-                </el-tree>
+            <div class="d-flex justify-content-between my-4">
+                <a href="{{ admin_route('customers.create') }}" class="btn btn-primary">创建顾客</a>
             </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>邮箱</th>
+                  <th>名称</th>
+                  <th>注册来源</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($customers as $customer)
+                    <tr v-for="customer, index in customers" :key="index">
+                      <td>{{ $customer['id'] }}</td>
+                      <td>{{ $customer['email'] }}</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ $customer['avatar'] }}" class="img-fluid rounded-circle me-2" style="width: 40px;">
+                            <div>{{ $customer['name'] }}</div>
+                        </div>
+                      </td>
+                      <td>{{ $customer['from'] }}</td>
+                      <td>{{ $customer['status'] }}</td>
+                      <td>
+                          <a class="btn btn-outline-secondary btn-sm" href="{{ admin_route('customers.edit', [$customer['id']]) }}">编辑</a>
+                      </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
         </div>
     </div>
 @endsection
-
-@push('footer')
-    <script>
-    new Vue({
-      el: '#customer-app',
-      data: {
-        categories: @json($customers),
-        defaultProps: {
-          children: 'children',
-          label: 'name'
-        }
-      },
-
-      methods: {
-        handleNodeClick(data) {
-          console.log(data);
-        }
-      }
-    });
-
-    </script>
-@endpush
