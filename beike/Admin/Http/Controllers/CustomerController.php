@@ -51,7 +51,7 @@ class CustomerController extends Controller
     {
         $data = [
             'customer' => $customer,
-            'customer_groups' => CustomerGroupRepo::list(true),
+            'customer_groups' => CustomerGroupRepo::list(),
             '_redirect' => $this->getRedirect(),
         ];
 

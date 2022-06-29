@@ -62,12 +62,9 @@ class CustomerGroupRepo
         }
     }
 
-    public static function list($onlyEnabled = false)
+    public static function list()
     {
         $builder = CustomerGroup::query();
-        if ($onlyEnabled) {
-            $builder->where('stauts', 1);
-        }
         $groups = $builder->get();
 
         return $groups;
