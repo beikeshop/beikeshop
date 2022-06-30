@@ -53,7 +53,13 @@ class SettingRepo
 
     public static function update($type, $code, $fields)
     {
-        Setting::query()->where('type', $type)->where('space', $code)->delete();
+        $columns = array_keys($fields);
+        Setting::query()
+            ->where('type', $type)
+            ->where('space', $code)
+            ->whereIn('name', $columns)
+            ->delete();
+
         $rows = [];
         foreach ($fields as $name => $value) {
             $rows[] = [
