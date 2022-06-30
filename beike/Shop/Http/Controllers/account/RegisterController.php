@@ -31,6 +31,6 @@ class RegisterController extends Controller
         $data = $request->only('register.email', 'register.password');
         AccountService::register($data['register']);
 
-        return redirect(shop_route('login.index'));
+        return redirect(shop_route('login.index'))->with('success',"注册成功，您现在可以使用您的账号登录网站!");
     }
 }
