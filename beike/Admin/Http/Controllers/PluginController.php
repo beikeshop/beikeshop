@@ -55,6 +55,7 @@ class PluginController extends Controller
             throw new Exception("无效的插件");
         }
         $fields = $request->all();
+        dd($fields);
         SettingRepo::update('plugin', $code, $fields);
         return json_success("编辑成功");
     }
@@ -73,7 +74,7 @@ class PluginController extends Controller
             throw new Exception("无效的插件");
         }
         $status = $request->get('status');
-        SettingRepo::update('plugin', $code, ['name' => 'status', 'value' => $status]);
+        SettingRepo::update('plugin', $code, ['status' => $status]);
         return json_success("编辑成功");
     }
 }
