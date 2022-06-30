@@ -27,10 +27,10 @@
               </el-option>
             </el-select>
           </el-form-item>
+          <el-form-item :label="form[column.label]" v-if="column.type == 'bool'">
+            <el-switch v-model="form[column.name]"></el-switch>
+          </el-form-item>
         </div>
-        <el-form-item label="状态" prop="status">
-          <el-switch v-model="form.status"></el-switch>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('form')">提交</el-button>
         </el-form-item>
