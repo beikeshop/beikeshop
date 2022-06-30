@@ -100,6 +100,12 @@ class Plugin implements Arrayable, \ArrayAccess
         return admin_route('plugins.edit', ['code' => $this->code]);
     }
 
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+
     public function toArray(): array
     {
         return (array)array_merge([

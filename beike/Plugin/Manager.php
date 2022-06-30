@@ -69,7 +69,7 @@ class Manager
      *
      * @throws \Exception
      */
-    public function getPlugin($code)
+    public function getPlugin($code): ?Plugin
     {
         $plugins = $this->getPlugins();
         return $plugins[$code] ?? null;
