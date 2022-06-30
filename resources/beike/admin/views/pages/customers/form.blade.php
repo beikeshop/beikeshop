@@ -158,6 +158,7 @@
           this.$refs[form].validate((valid) => {
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
+              return;
             }
           });
         },
@@ -178,6 +179,7 @@
           this.$refs[form].validate((valid) => {
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
+              return;
             }
 
             if (this.dialogAddress.index === null) {
