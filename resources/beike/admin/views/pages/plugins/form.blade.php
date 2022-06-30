@@ -17,7 +17,7 @@
           </el-form-item>
 
           <el-form-item :label="column.label" v-if="column.type == 'text'" style="max-width: 900px;">
-            <textarea v-model="form[column.name]" id="input-tinymce"></textarea>
+            <textarea v-model="form[column.name]" :data-key="column.name" id="input-tinymce"></textarea>
           </el-form-item>
 
           <el-form-item :label="column.label" v-if="column.type == 'select'" class="form-max-w">
@@ -41,7 +41,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#plugins-app-form',
       data: {
         customerTab: 'customer',
@@ -111,8 +111,12 @@
         "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
       fontsize_formats: "10px 12px 14px 18px 24px 36px",
       relative_urls : true,
-      setup : function(ed) {
-         // console.log(111)
+      setup:function(ed) {
+        ed.on('change', function(e) {
+          if (e.target.targetElm.dataset.key) {
+            app.form[e.target.targetElm.dataset.key] = ed.getContent()
+          }
+        });
       }
     });
   </script>
