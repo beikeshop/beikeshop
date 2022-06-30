@@ -433,3 +433,7 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 .el-button {
   border-radius: 0;
 }
+
+.el-tabs__header {
+  margin-bottom: 25px;
+}
