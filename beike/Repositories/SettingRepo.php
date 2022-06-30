@@ -68,4 +68,14 @@ class SettingRepo
         }
         Setting::query()->insert($rows);
     }
+
+    public static function getShipments()
+    {
+        return [];
+    }
+
+    public static function getPayments()
+    {
+        return [];
+    }
 }

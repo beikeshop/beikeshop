@@ -21,18 +21,22 @@ class CartService
      * 获取购物车商品列表
      *
      * @param $customer
+     * @param bool $selected
      * @return array
      */
-    public static function list($customer): array
+    public static function list($customer, bool $selected = false): array
     {
         if (empty($customer)) {
             return [];
         }
-        $cartItems = Cart::query()
+        $cartBuilder = Cart::query()
             ->with(['sku.product.description'])
             ->where('customer_id', $customer->id)
-            ->orderByDesc('id')
-            ->get();
+            ->orderByDesc('id');
+        if ($selected) {
+            $cartBuilder->where('selected', true);
+        }
+        $cartItems = $cartBuilder->get();
         $cartList = CartList::collection($cartItems)->jsonSerialize();
         return $cartList;
     }
@@ -137,6 +141,6 @@ class CartService
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
-        return json_success('获取成功', $data);
+        return $data;
     }
 }

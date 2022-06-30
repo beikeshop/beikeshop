@@ -14,7 +14,9 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $data = CartService::reloadData();
+        $data = [
+            'data' => CartService::reloadData()
+        ];
         return view("cart", $data);
     }
 
@@ -31,7 +33,8 @@ class CartController extends Controller
         $customer = current_customer();
         CartService::select($customer, $cartIds);
 
-        return CartService::reloadData();
+        $data = CartService::reloadData();
+        return json_success('获取成功', $data);
     }
 
     /**
@@ -46,7 +49,8 @@ class CartController extends Controller
         $quantity = (int)$request->get('quantity');
         CartService::updateQuantity($customer, $cartId, $quantity);
 
-        return CartService::reloadData();
+        $data = CartService::reloadData();
+        return json_success('获取成功', $data);
     }
 
 
@@ -61,10 +65,29 @@ class CartController extends Controller
         $customer = current_customer();
         CartService::delete($customer, $cartId);
 
-        return CartService::reloadData();
+        $data = CartService::reloadData();
+        return json_success('获取成功', $data);
     }
 
 
+    /**
+     * 右上角购物车
+     * @return array
+     */
+    public function miniCart(): array
+    {
+        $data = CartService::reloadData();
+        return json_success('获取成功', $data);
+    }
+
+
+    /**
+     * 创建购物车
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     */
     public function store(Request $request)
     {
         $skuId = $request->sku_id;
@@ -76,13 +99,6 @@ class CartController extends Controller
             ->findOrFail($skuId);
 
         $cart = CartService::add($sku, $quantity, $customer);
-
-        return $cart;
-    }
-
-    public function miniCart()
-    {
-        $customer = current_customer();
-        return CartService::list($customer);
+        return json_success('获取成功', $cart);
     }
 }
