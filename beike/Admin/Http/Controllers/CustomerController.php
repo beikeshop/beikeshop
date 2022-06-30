@@ -66,7 +66,7 @@ class CustomerController extends Controller
         if ($request->get('password')) {
             $params['password'] = $request->get('password');
         }
-        CustomerRepo::update($customerId, $request->all());
+        CustomerRepo::update($customerId, $params);
 
         return redirect($this->getRedirect())->with('success', 'customer created');
     }
