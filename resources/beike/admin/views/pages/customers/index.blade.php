@@ -21,7 +21,7 @@
               </thead>
               <tbody>
                 @foreach ($customers as $customer)
-                    <tr v-for="customer, index in customers" :key="index">
+                    <tr>
                       <td>{{ $customer['id'] }}</td>
                       <td>{{ $customer['email'] }}</td>
                       <td>

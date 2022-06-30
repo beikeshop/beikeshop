@@ -284,8 +284,8 @@ hr.horizontal.dark {
 }
 
 .card {
-  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.03);
-  border: 1px solid #edf2f9;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
+  border: none;
 }
 .card .card-header {
   padding: 1rem 1rem 0.3rem;
@@ -398,6 +398,10 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
   box-shadow: none;
 }
 
+.form-max-w {
+  max-width: 560px;
+}
+
 @font-face {
   font-family: "iconfont";
   /* Project id 2787822 */
@@ -420,4 +424,12 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 }
 .form-group .col-form-label {
   text-align: right;
+}
+
+.el-input__inner {
+  border-radius: 0;
+}
+
+.el-button {
+  border-radius: 0;
 }
