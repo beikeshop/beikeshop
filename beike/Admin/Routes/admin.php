@@ -23,6 +23,7 @@ Route::prefix('admin')
 
                 Route::put('products/restore', [\Beike\Admin\Http\Controllers\ProductController::class, 'restore']);
                 Route::resource('products', \Beike\Admin\Http\Controllers\ProductController::class);
+                Route::resource('currencies', \Beike\Admin\Http\Controllers\CurrencyController::class);
 
                 Route::get('settings', [\Beike\Admin\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
 
