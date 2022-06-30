@@ -13,6 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Models\Customer;
+use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\CustomerRepo;
