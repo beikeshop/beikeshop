@@ -121,13 +121,13 @@ class Plugin implements Arrayable, \ArrayAccess
     {
         $this->columns[] = SettingRepo::getPluginStatusColumn();
         $existValues = SettingRepo::getPluginColumns($this->code);
-        foreach ($this->columns as &$column) {
+        foreach ($this->columns as $index => $column) {
             $dbColumn = $existValues[$column['name']] ?? null;
-            if (empty($dbColumn)) {
-                $column['value'] = null;
-                continue;
+            $value = $dbColumn ? $dbColumn->value : null;
+            if ($column['name'] == 'status') {
+                $value = (int)$value;
             }
-            $column['value'] = $dbColumn->value;
+            $this->columns[$index]['value'] = $value;
         }
         return $this->columns;
     }
