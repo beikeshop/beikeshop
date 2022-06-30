@@ -11,6 +11,7 @@
 
 namespace Beike\Plugin;
 
+use Beike\Models\Setting;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -100,9 +101,34 @@ class Plugin implements Arrayable, \ArrayAccess
         return admin_route('plugins.edit', ['code' => $this->code]);
     }
 
-    public function getColumns()
+    /**
+     * 获取插件对应的设置字段, 并获取已存储在DB的字段值
+     *
+     * @return array
+     */
+    public function getColumns(): array
     {
+        if (empty($this->columns)) {
+            return [];
+        }
+        $existValues = $this->getColumnsFromDb();
+        foreach ($this->columns as &$column) {
+            $dbColumn = $existValues[$column['name']] ?? null;
+            if (empty($dbColumn)) {
+                $column['value'] = null;
+                continue;
+            }
+            $column['value'] = $dbColumn->value;
+        }
         return $this->columns;
+    }
+
+
+    private function getColumnsFromDb()
+    {
+        return Setting::query()->where('type', 'plugin')
+            ->where('space', $this->code)
+            ->get()->keyBy('name');
     }
 
 

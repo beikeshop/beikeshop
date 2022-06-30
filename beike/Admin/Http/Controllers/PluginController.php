@@ -34,7 +34,7 @@ class PluginController extends Controller
     public function edit(Request $request, $code)
     {
        $plugin = (new Manager)->getPlugin($code);
-       dd($plugin);
+       dd($plugin, $plugin->getColumns());
     }
 
 
