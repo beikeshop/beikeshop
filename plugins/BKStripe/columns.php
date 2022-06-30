@@ -1,6 +1,6 @@
 <?php
 /**
- * columns.php
+ * Stripe 字段
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
