@@ -31,7 +31,10 @@ return [
         'name' => 'country',
         'label' => '国家',
         'type' => 'select',
-        'option' => ['China', 'USA'],
+        'options' => [
+            ['value' => 'china', 'label' => 'China'],
+            ['value' => 'usa', 'label' => 'USA']
+        ],
         'required' => true,
     ]
 ];

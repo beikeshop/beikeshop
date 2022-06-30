@@ -14,7 +14,10 @@ return [
         'name' => 'type',
         'label' => '方式',
         'type' => 'select',
-        'option' => ['固定运费', '百分比'],
+        'options' => [
+            ['value' => 'fixed', 'label' => '固定运费'],
+            ['value' => 'percent', 'label' => '百分比']
+        ],
         'required' => true,
     ],
     [
