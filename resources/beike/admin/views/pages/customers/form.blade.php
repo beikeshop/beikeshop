@@ -46,8 +46,8 @@
                   <th>操作</th>
                 </tr>
               </thead>
-              <tbody v-if="form.address.length">
-                <tr v-for="address, index in form.address" :key="index">
+              <tbody v-if="addresses.length">
+                <tr v-for="address, index in addresses" :key="index">
                   <td>@{{ index }}</td>
                   <td>@{{ address.name }}</td>
                   <td>@{{ address.phone }}</td>
@@ -55,7 +55,7 @@
                   <td>222</td>
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(index)">删除</button>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(address.id, index)">删除</button>
                   </td>{{--
                 </tr> --}}
               </tbody>
@@ -139,14 +139,16 @@
           password: '',
           customer_group_id: 1,
           status: @json($customer['status']) * 1,
-          address: []
         },
+
+        addresses: @json($customer['addresses'] ?? []),
 
         source: {
           customer_group: @json($customer_groups ?? []),
           countries: @json($countries ?? []),
           zones: []
         },
+
         dialogAddress: {
           show: false,
           index: null,
@@ -161,9 +163,11 @@
             address_2: '',
           }
         },
+
         rules: {
           name: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
         },
+
         addressRules: {
           name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
           phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
@@ -202,44 +206,52 @@
         editAddress(index) {
           if (typeof index == 'number') {
             this.dialogAddress.index = index;
-
-            this.$nextTick(() => {
-              this.dialogAddress.form = JSON.parse(JSON.stringify(this.form.address[index]))
-            })
+            this.dialogAddress.form = JSON.parse(JSON.stringify(this.addresses[index]))
           }
 
           this.dialogAddress.show = true
         },
 
-        deleteAddress(index) {
-          this.form.address.splice(index, 1)
+        deleteAddress(id, index) {
+          const self = this;
+
+          $.ajax({
+            url: `/admin/customers/{{ $customer['id'] }}/addresses/${id}`,
+            type: 'delete',
+            success: function(res) {
+              self.$message.success(res.message);
+              self.addresses.splice(index, 1)
+            }
+          })
         },
 
         addressFormSubmit(form) {
+          const self = this;
+
           this.$refs[form].validate((valid) => {
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
               return;
             }
 
-            if (this.dialogAddress.index === null) {
-              this.form.address.push(JSON.parse(JSON.stringify(this.dialogAddress.form)));
-            } else {
-              this.form.address[this.dialogAddress.index] = JSON.parse(JSON.stringify(this.dialogAddress.form));
-            }
+            const type = this.dialogAddress.form.id ? 'put' : 'post';
 
             $.ajax({
-              url: `/admin/countries/{{ $customer['id'] }}/addresses`,
-              data: this.dialogAddress.form,
-              type: 'post',
+              url: `/admin/customers/{{ $customer['id'] }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`,
+              data: self.dialogAddress.form,
+              type: type,
               success: function(res) {
-                console.log(res)
+                if (type == 'post') {
+                  self.addresses.push(res.data)
+                } else {
+                  self.addresses[self.dialogAddress.index] = res.data
+                }
+                self.$message.success(res.message);
+                self.$refs[form].resetFields();
+                self.dialogAddress.show = false
+                self.dialogAddress.index = null;
               }
             })
-
-            this.$refs[form].resetFields();
-            this.dialogAddress.show = false
-            this.dialogAddress.index = null;
           });
         },
 

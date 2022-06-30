@@ -35,7 +35,7 @@
                 <td>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="switch-1"
-                      {{ $plugin->enabled ? 'checked' : '' }} data-code="{{ $plugin->code }}">
+                      {{ $plugin->getEnabled() ? 'checked' : '' }} data-code="{{ $plugin->code }}">
                     <label class="form-check-label" for="switch-1"></label>
                   </div>
                 </td>

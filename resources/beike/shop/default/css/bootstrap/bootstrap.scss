@@ -69,3 +69,7 @@ $dropdown-item-padding-y: .4rem;
     opacity: .1;
   }
 }
+
+.table > :not(:first-child) {
+  border-top: none;
+}

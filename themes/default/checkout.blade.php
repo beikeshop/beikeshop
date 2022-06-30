@@ -2,8 +2,14 @@
 
 @section('body-class', 'page-checkout')
 
+@push('header')
+  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+@endpush
+
 @section('content')
-  <div class="container">
+  <div class="container" id="checkout-app" v-cloak>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -20,7 +26,7 @@
         <form action="">
           <div class="checkout-address">
             <h4 class="title">地址</h4>
-            <div class="row mb-3">
+{{--             <div class="row mb-3">
               <div class="col-12 col-md-6 mb-3">
                 <div class="form-floating">
                   <input type="text" name="email" class="form-control" value="" placeholder="姓名">
@@ -77,7 +83,40 @@
                   <label class="form-label" for="email_1">address 2</label>
                 </div>
               </div>
-            </div>
+            </div> --}}
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>名称</th>
+                  <th>电话</th>
+                  <th>注册来源</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody v-if="source.address.length">
+                <tr v-for="address, index in source.address" :key="index">
+                  <td>@{{ index }}</td>
+                  <td>@{{ address.name }}</td>
+                  <td>@{{ address.phone }}</td>
+                  <td>222</td>
+                  <td>222</td>
+                  <td>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button">删除</button>
+                  </td>{{--
+                </tr> --}}
+              </tbody>
+              <tbody v-else>
+                <tr>
+                  <td colspan="6" class="text-center">
+                    <span class="me-2">当前账号无地址</span> <el-link type="primary" @click="editAddress">新增地址</el-link>
+                  </td>{{--
+                </tr> --}}
+              </tbody>
+            </table>
 
             <h4 class="title">支付方式</h4>
             <div class="row mb-3">
@@ -137,6 +176,52 @@
 @endsection
 @push('add-scripts')
   <script>
+    new Vue({
+      el: '#checkout-app',
+
+      data: {
+        form: {
+        },
+
+        source: {
+          address: []
+        },
+
+        dialogAddress: {
+          show: false,
+          index: null,
+          form: {
+            name: '',
+            phone: '',
+            country_id: @json(setting('country_id')) * 1,
+            zipcode: '',
+            zone_id: '',
+            city_id: '',
+            address_1: '',
+            address_2: '',
+          }
+        },
+      },
+
+      beforeMount () {
+      },
+
+      methods: {
+        editAddress(index) {
+          if (typeof index == 'number') {
+            this.dialogAddress.index = index;
+
+            this.$nextTick(() => {
+              this.dialogAddress.form = JSON.parse(JSON.stringify(this.form.address[index]))
+            })
+          }
+
+          this.dialogAddress.show = true
+        },
+      }
+    })
+
+
     $(function() {
       const totalWrapTop = $('.total-wrap').offset().top;
       const totalWrapWidth = $('.total-wrap').outerWidth();
