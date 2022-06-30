@@ -2,6 +2,7 @@
 
 use Beike\Models\AdminUser;
 use Beike\Models\Customer;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -40,6 +41,17 @@ function admin_route($route, $params = []): string
 function shop_route($route, $params = []): string
 {
     return route('shop.' . $route, $params);
+}
+
+/**
+ * 是否为当前访问路由
+ *
+ * @param $routeName
+ * @return bool
+ */
+function equal_route($routeName): bool
+{
+    return $routeName == Route::getCurrentRoute()->getName();
 }
 
 /**
