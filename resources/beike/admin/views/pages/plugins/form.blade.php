@@ -22,13 +22,13 @@
 
           <el-form-item :label="column.label" v-if="column.type == 'select'" class="form-max-w">
             <el-select v-model="form[column.name]" placeholder="请选择" >
-              <el-option v-for="option, o_i in column.option" :key="o_i" :label="option"
-                :value="option">
+              <el-option v-for="option, o_i in column.options" :key="o_i" :label="option.label"
+                :value="option.value">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item :label="form[column.label]" v-if="column.type == 'bool'">
-            <el-switch v-model="form[column.name]"></el-switch>
+          <el-form-item :label="column.label" v-if="column.type == 'bool'">
+            <el-switch v-model="form[column.name]" :active-value="1" :inactive-value="0"></el-switch>
           </el-form-item>
         </div>
         <el-form-item>
