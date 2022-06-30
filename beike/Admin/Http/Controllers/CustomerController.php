@@ -53,7 +53,8 @@ class CustomerController extends Controller
         $data = [
             'customer' => $customer,
             'customer_groups' => CustomerGroupRepo::list(),
-            'country' => CountryRepo::all(),
+            'countries' => CountryRepo::all(),
+            'country_id' => setting('country_id'),
             '_redirect' => $this->getRedirect(),
         ];
 

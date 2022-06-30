@@ -3,6 +3,7 @@
 @section('title', '插件列表')
 
 @section('content')
+
   <div id="category-app" class="card">
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建插件</a>

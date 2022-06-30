@@ -18,8 +18,8 @@ class Header extends Component
         $this->addLink('管理首页', admin_route('home.index'), true);
         $this->addLink('订单管理', admin_route('home.index'));
         $this->addLink('商品管理', admin_route('products.index'));
-        $this->addLink('会员管理', admin_route('home.index'));
-        $this->addLink('营销管理', admin_route('home.index'));
+        $this->addLink('会员管理', admin_route('customers.index'));
+        $this->addLink('插件管理', admin_route('plugins.index'));
         $this->addLink('系统设置', admin_route('home.index'));
     }
 

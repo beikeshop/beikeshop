@@ -16,13 +16,14 @@ class ShopServiceProvider extends ServiceProvider
     {
         $uri = request()->getRequestUri();
 
+        $this->loadSettings();
+
         if (Str::startsWith($uri, '/admin')) {
             return;
         }
 
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-        $this->loadSettings();
         $this->registerGuard();
 
         $this->app->booted(function () {

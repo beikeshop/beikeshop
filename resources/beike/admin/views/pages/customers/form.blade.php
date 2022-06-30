@@ -26,14 +26,14 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="状态" prop="status">
-                <el-switch v-model="form.status"></el-switch>
+                <el-switch v-model="form.status" :active-value="1" :inactive-value="0"></el-switch>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('form')">提交</el-button>
               </el-form-item>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="地址管理" name="address">
+          <el-tab-pane label="地址管理" name="address" v-if="form.id">
             <button class="btn btn-primary mb-3" type="button" @click="editAddress">添加地址</button>
             <table class="table">
               <thead>
@@ -55,6 +55,7 @@
                   <td>222</td>
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(index)">删除</button>
                   </td>{{--
                 </tr> --}}
               </tbody>
@@ -71,7 +72,7 @@
       </el-form>
     </div>
 
-    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="580px">
+    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
@@ -79,16 +80,35 @@
         <el-form-item label="联系电话" prop="phone">
           <el-input maxlength="11" v-model="dialogAddress.form.phone"></el-input>
         </el-form-item>
-        <el-form-item label="地址">
-          <el-row>
-            <el-col :span="8">
-              <el-select v-model="dialogAddress.form.country_id" placeholder="请选择">
-                <el-option v-for="item in source.countrys" :key="item.country_id" :label="item.name"
-                  :value="item.country_id">
-                </el-option>
-              </el-select>
-            </el-col>
-          </el-row>
+        <el-form-item label="地址" required>
+          <div class="row">
+            <div class="col-4">
+              <el-form-item>
+                <el-select v-model="dialogAddress.form.country_id" filterable placeholder="选择国家" @change="countryChange">
+                  <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div class="col-4">
+              <el-form-item prop="zone_id">
+                <el-select v-model="dialogAddress.form.zone_id" filterable placeholder="选择省份">
+                  <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div class="col-4">
+              <el-form-item prop="city_id">
+                <el-input v-model="dialogAddress.form.city_id" placeholder="输入 city"></el-input>
+              </el-form-item>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="邮编" prop="zipcode">
+          <el-input v-model="dialogAddress.form.zipcode"></el-input>
         </el-form-item>
         <el-form-item label="详细地址 1" prop="address_1">
           <el-input v-model="dialogAddress.form.address_1"></el-input>
@@ -113,23 +133,19 @@
       data: {
         customerTab: 'customer',
         form: {
-          id: '',
-          name: '',
-          email: '',
+          id: @json($customer['id'] ?? null),
+          name: @json($customer['name']),
+          email: @json($customer['email']),
           password: '',
           customer_group_id: 1,
-          status: false,
+          status: @json($customer['status']) * 1,
           address: []
         },
+
         source: {
-          customer_group: @json($customer_groups),
-          countrys: [
-            {country_id: 44, name: "中国"},
-            {country_id: 22, name: "美国"},
-            {country_id: 122, name: "俄罗斯"},
-            {country_id: 123, name: "英国"},
-            {country_id: 113, name: "法国"},
-          ]
+          customer_group: @json($customer_groups ?? []),
+          countries: @json($countries ?? []),
+          zones: []
         },
         dialogAddress: {
           show: false,
@@ -137,9 +153,10 @@
           form: {
             name: '',
             phone: '',
-            country_id: 44,
-            city_id: '',
+            country_id: @json(setting('country_id')) * 1,
+            zipcode: '',
             zone_id: '',
+            city_id: '',
             address_1: '',
             address_2: '',
           }
@@ -151,16 +168,34 @@
           name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
           phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
           address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
+          zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
+          city_id: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
         }
+      },
+
+      // 在挂载开始之前被调用:相关的 render 函数首次被调用
+      beforeMount () {
+        this.countryChange(this.dialogAddress.form.country_id);
       },
 
       methods: {
         submitForm(form) {
+          const self = this;
+
           this.$refs[form].validate((valid) => {
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
               return;
             }
+
+
+            $.ajax({
+              url: `/admin/countries/${e}/zones`,
+              type: 'get',
+              success: function(res) {
+                this.$message.success('提交成功');
+              }
+            })
           });
         },
 
@@ -176,6 +211,10 @@
           this.dialogAddress.show = true
         },
 
+        deleteAddress(index) {
+          this.form.address.splice(index, 1)
+        },
+
         addressFormSubmit(form) {
           this.$refs[form].validate((valid) => {
             if (!valid) {
@@ -189,6 +228,15 @@
               this.form.address[this.dialogAddress.index] = JSON.parse(JSON.stringify(this.dialogAddress.form));
             }
 
+            $.ajax({
+              url: `/admin/countries/{{ $customer['id'] }}/addresses`,
+              data: this.dialogAddress.form,
+              type: 'post',
+              success: function(res) {
+                console.log(res)
+              }
+            })
+
             this.$refs[form].resetFields();
             this.dialogAddress.show = false
             this.dialogAddress.index = null;
@@ -200,6 +248,18 @@
           this.dialogAddress.show = false
           this.dialogAddress.index = null;
         },
+
+        countryChange(e) {
+          const self = this;
+
+          $.ajax({
+            url: `/admin/countries/${e}/zones`,
+            type: 'get',
+            success: function(res) {
+              self.source.zones = res.data.zones;
+            }
+          })
+        }
       }
     });
   </script>
