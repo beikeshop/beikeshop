@@ -56,15 +56,13 @@
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(address.id, index)">删除</button>
-                  </td>{{--
-                </tr> --}}
+                  </td>
               </tbody>
               <tbody v-else>
                 <tr>
                   <td colspan="6" class="text-center">
                     <span class="me-2">当前账号无地址</span> <el-link type="primary" @click="editAddress">新增地址</el-link>
-                  </td>{{--
-                </tr> --}}
+                  </td>
               </tbody>
             </table>
           </el-tab-pane>

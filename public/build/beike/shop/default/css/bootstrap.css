@@ -18032,3 +18032,7 @@ textarea.form-control-lg {
   margin-right: 1rem;
   opacity: 0.1;
 }
+
+.table > :not(:first-child) {
+  border-top: none;
+}

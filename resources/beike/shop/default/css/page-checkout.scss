@@ -93,4 +93,78 @@ body.page-checkout {
       }
     }
   }
+
+  .addresses-wrap {
+    margin-bottom: 2rem;
+
+    .item {
+      position: relative;
+      padding: 20px 20px 30px;
+      margin-bottom: 10px;
+      border: 1px solid #e8e8e8;
+      height: 155px;
+      cursor: pointer;
+
+      &.add-addres {
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: center; // flex-end | center | space-between
+        flex-direction: column;
+        font-size: 1rem;
+        color: #666;
+
+        i {
+          font-size: 2rem;
+        }
+        // flex-wrap: wrap;
+      }
+
+      &:hover {
+        border-color: #222;
+      }
+
+      &.active {
+        border-left: none;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: -1px;
+          left: 0;
+          width: 4px;
+          height: calc(100% + 2px);
+          background-color: #4991F4;
+          background: repeating-linear-gradient(-45deg, #d60404 0, #d60404 10px, #fff 10px, #fff 20px, #4991F4 20px, #4991F4 30px, #fff 30px, #fff 40px);
+        }
+      }
+
+      .name-wrap {
+        margin-bottom: .5rem;
+
+        .name {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+
+        .phone {
+          font-size: .8rem;
+          color: #666;
+        }
+      }
+
+      .zipcode {
+        margin-bottom: .5rem;
+      }
+
+      .address-info {
+        margin-bottom: .5rem;
+      }
+
+      .address-bottom {
+        a {
+          color: #2d68a8;
+        }
+      }
+    }
+  }
 }

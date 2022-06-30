@@ -85,7 +85,7 @@
               </div>
             </div> --}}
 
-            <table class="table">
+{{--             <table class="table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -96,8 +96,8 @@
                   <th>操作</th>
                 </tr>
               </thead>
-              <tbody v-if="source.address.length">
-                <tr v-for="address, index in source.address" :key="index">
+              <tbody v-if="source.addresses.length">
+                <tr v-for="address, index in source.addresses" :key="index">
                   <td>@{{ index }}</td>
                   <td>@{{ address.name }}</td>
                   <td>@{{ address.phone }}</td>
@@ -106,17 +106,36 @@
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button">删除</button>
-                  </td>{{--
-                </tr> --}}
+                  </td>
               </tbody>
               <tbody v-else>
                 <tr>
                   <td colspan="6" class="text-center">
                     <span class="me-2">当前账号无地址</span> <el-link type="primary" @click="editAddress">新增地址</el-link>
-                  </td>{{--
-                </tr> --}}
+                  </td>
               </tbody>
-            </table>
+            </table> --}}
+
+            <div class="addresses-wrap">
+              <div class="row">
+                <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
+                  <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']">
+                    <div class="name-wrap">
+                      <span class="name">@{{ address.name }}</span>
+                      <span class="phone">@{{ address.phone }}</span>
+                    </div>
+                    <div class="zipcode">@{{ address.zipcode }}</div>
+                    <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
+                    <div class="address-bottom">
+                      <a class="">编辑</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="item add-addres"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
+                </div>
+              </div>
+            </div>
 
             <h4 class="title">支付方式</h4>
             <div class="row mb-3">
@@ -181,10 +200,11 @@
 
       data: {
         form: {
+          shipping_address_id: 7,
         },
 
         source: {
-          address: []
+          addresses: @json($addresses ?? []),
         },
 
         dialogAddress: {
