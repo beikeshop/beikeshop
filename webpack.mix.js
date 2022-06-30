@@ -17,9 +17,11 @@ const mix = require('laravel-mix');
 //     ]);
 
 // mix.sass('resources/css/app.scss', 'public/build/css');
-mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/beike/css/bootstrap.css');
+// 后台
 
-mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/css/admin.css');
+mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/beike/admin/css/bootstrap.css');
+mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/admin/css/app.css');
+mix.js('resources/beike/admin/js/app.js', 'public/build/beike/admin/js/app.js');
 
 // 前端 default 模版
 mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/default/css/bootstrap.css');

@@ -139,6 +139,7 @@
             phone: '',
             country_id: 44,
             city_id: '',
+            zone_id: '',
             address_1: '',
             address_2: '',
           }

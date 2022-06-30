@@ -40,6 +40,11 @@
         </div>
       </div>
       <div class="col-12 col-md-9">
+        @if (\Session::has('success'))
+          <div class="alert alert-success">
+            <ul><li>{!! \Session::get('success') !!}</li></ul>
+          </div>
+        @endif
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h6 class="mb-0">个人中心</h6>

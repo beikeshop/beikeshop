@@ -33,8 +33,8 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code)
     {
-       $plugin = (new Manager)->getPlugin($code);
-       dd($plugin, $plugin->getColumns());
+       $data['plugin'] = (new Manager)->getPlugin($code);
+       return view('admin::pages.plugins.form', $data);
     }
 
 
