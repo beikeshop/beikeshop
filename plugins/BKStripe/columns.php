@@ -12,11 +12,28 @@
 return [
     [
         'name' => 'api_key',
+        'label' => 'API Key',
         'type' => 'string',
     ],
     [
-        'name' => 'gender',
+        'name' => 'api_secret',
+        'label' => 'API Secret',
+        'type' => 'string',
+    ],
+    [
+        'name' => 'description',
+        'label' => '描述',
+        'type' => 'text',
+    ],
+    [
+        'name' => 'country',
+        'label' => '国家',
         'type' => 'select',
-        'option' => ['male', 'female']
+        'option' => ['China', 'USA']
+    ],
+    [
+        'name' => 'active',
+        'label' => '是否开启',
+        'type' => 'bool',
     ]
 ];
