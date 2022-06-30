@@ -23,7 +23,7 @@ class SettingRepo
     public static function getPluginStatusColumn(): array
     {
         return [
-            'name' => 'active',
+            'name' => 'status',
             'label' => '是否开启',
             'type' => 'bool',
             'required' => true,
