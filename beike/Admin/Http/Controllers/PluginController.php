@@ -42,9 +42,10 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
+     * @return array
      * @throws \Exception
      */
-    public function update(Request $request, $code)
+    public function update(Request $request, $code): array
     {
         $plugin = (new Manager)->getPlugin($code);
         if (empty($plugin)) {
