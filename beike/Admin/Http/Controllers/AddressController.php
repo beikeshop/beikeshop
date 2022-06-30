@@ -12,9 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerResource;
-use Beike\Models\Customer;
 use Beike\Repositories\AddressRepo;
-use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
