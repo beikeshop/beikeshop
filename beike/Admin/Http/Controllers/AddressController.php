@@ -66,7 +66,7 @@ class AddressController extends Controller
         return json_success("地址成功修改", $address);
     }
 
-    public function destroy(Request $request, int $addressId)
+    public function destroy(Request $request, int $customerId, int $addressId)
     {
         AddressRepo::delete($addressId);
 
