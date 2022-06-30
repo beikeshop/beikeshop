@@ -11,7 +11,9 @@
 
 namespace Beike\Repositories;
 
+use Beike\Models\Cart;
 use Beike\Models\Setting;
+use Carbon\Carbon;
 
 class SettingRepo
 {
@@ -59,7 +61,9 @@ class SettingRepo
                 'space' => $code,
                 'name' => $name,
                 'value' => (string)$value,
-                'json' => 0
+                'json' => 0,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         Setting::query()->insert($rows);

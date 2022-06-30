@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Setting extends Model
 {
     use HasFactory;
+
     protected $table = 'settings';
-    protected $fillable = ['name', 'value', 'json'];
+    protected $fillable = ['type', 'space', 'name', 'value', 'json'];
 }
