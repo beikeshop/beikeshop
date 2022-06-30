@@ -106,6 +106,11 @@ class Plugin implements Arrayable, \ArrayAccess
         return SettingRepo::getPluginStatus($this->code);
     }
 
+    public function getEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
 
     /**
      * 获取插件对应的设置字段, 并获取已存储在DB的字段值
