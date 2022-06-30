@@ -11,11 +11,10 @@
 
 namespace Beike\Plugin;
 
-use Beike\Models\Setting;
-use Beike\Repositories\SettingRepo;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Beike\Repositories\SettingRepo;
+use Illuminate\Contracts\Support\Arrayable;
 
 class Plugin implements Arrayable, \ArrayAccess
 {
