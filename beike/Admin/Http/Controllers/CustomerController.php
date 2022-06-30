@@ -50,9 +50,11 @@ class CustomerController extends Controller
 
     public function edit(Request $request, Customer $customer)
     {
+        $addresses = AddressRepo::listByCustomer($customer->id);
         $data = [
             'customer' => $customer,
             'customer_groups' => CustomerGroupRepo::list(),
+            'addresses' => CustomerResource::collection($addresses),
             'countries' => CountryRepo::all(),
             'country_id' => setting('country_id'),
             '_redirect' => $this->getRedirect(),
