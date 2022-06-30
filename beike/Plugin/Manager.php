@@ -43,10 +43,11 @@ class Manager
         foreach ($existed as $dirname => $package) {
             $pluginPath = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
             $plugin = new Plugin($pluginPath, $package);
+            $status = $plugin->getStatus();
             $plugin->setDirname($dirname);
             $plugin->setName(Arr::get($package, 'name'));
             $plugin->setInstalled(true);
-            $plugin->setEnabled(false);
+            $plugin->setEnabled($status);
             $plugin->setVersion(Arr::get($package, 'version'));
             $plugin->setColumns();
 

@@ -101,6 +101,12 @@ class Plugin implements Arrayable, \ArrayAccess
         return admin_route('plugins.edit', ['code' => $this->code]);
     }
 
+    public function getStatus(): bool
+    {
+        return SettingRepo::getPluginStatus($this->code);
+    }
+
+
     /**
      * 获取插件对应的设置字段, 并获取已存储在DB的字段值
      *

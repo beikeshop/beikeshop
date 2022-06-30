@@ -39,6 +39,16 @@ class SettingRepo
             ->keyBy('name');
     }
 
+    public static function getPluginStatus($pluginCode): bool
+    {
+        $status = Setting::query()
+            ->where('type', 'plugin')
+            ->where('space', $pluginCode)
+            ->where('name', 'status')
+            ->value('value');
+        return (bool)$status;
+    }
+
     public static function update($type, $code, $fields)
     {
         Setting::query()->where('type', $type)->where('space', $code)->delete();
