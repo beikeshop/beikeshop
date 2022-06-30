@@ -62,8 +62,7 @@
         data: {status: checked},
         success: function(res) {
           layer.msg(res.message)
-          $input.removeAttr('checked')
-          console.log($input)
+          // $input.removeAttr('checked')
         },
         error: function() {
         }
