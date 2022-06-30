@@ -20,7 +20,7 @@ class CreateCustomerTable extends Migration
             $table->string('name');
             $table->string('avatar')->default('');
             $table->unsignedInteger('customer_group_id');
-            $table->unsignedInteger('language_id');
+            $table->string('locale', 10);
             $table->text('cart')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('code', 40)->default('');
@@ -42,7 +42,7 @@ class CreateCustomerTable extends Migration
         Schema::create('customer_group_descriptions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('customer_group_id');
-            $table->unsignedInteger('language_id');
+            $table->string('locale', 10);
             $table->string('name', 256);
             $table->text('description');
             $table->timestamps();

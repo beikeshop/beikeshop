@@ -68,7 +68,7 @@ class CustomerRepo
             ->leftJoin('customer_groups AS cg', 'customers.customer_group_id', 'cg.id')
             ->leftJoin('customer_group_descriptions AS cgd', function ($join) {
                 $join->on('cgd.customer_group_id', 'cg.id')
-                    ->where('cgd.language_id', current_language_id());
+                    ->where('cgd.locale', locale());
             })
             ->select(['customers.id', 'customers.email', 'customers.name', 'customers.avatar', 'customers.status', 'customers.from', 'cgd.name AS customer_group_name']);
 

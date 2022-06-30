@@ -14,7 +14,7 @@ class Customer extends Authenticatable
 
     const AUTH_GUARD = 'web_shop';
 
-    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'language_id', 'status', 'from'];
+    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'status', 'from'];
 
     public function addresses(): HasMany
     {
