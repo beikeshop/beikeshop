@@ -38,4 +38,20 @@ class SettingRepo
             ->get()
             ->keyBy('name');
     }
+
+    public static function update($type, $code, $fields)
+    {
+        Setting::query()->where('type', $type)->where('space', $code)->delete();
+        $rows = [];
+        foreach ($fields as $name => $value) {
+            $rows[] = [
+                'type' => $type,
+                'space' => $code,
+                'name' => $name,
+                'value' => (string)$value,
+                'json' => 0
+            ];
+        }
+        Setting::query()->insert($rows);
+    }
 }

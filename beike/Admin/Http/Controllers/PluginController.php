@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Plugin\Manager;
+use Beike\Repositories\SettingRepo;
 use Illuminate\Http\Request;
 
 class PluginController extends Controller
@@ -33,8 +34,8 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code)
     {
-       $data['plugin'] = (new Manager)->getPlugin($code);
-       return view('admin::pages.plugins.form', $data);
+        $data['plugin'] = (new Manager)->getPlugin($code);
+        return view('admin::pages.plugins.form', $data);
     }
 
 
@@ -46,7 +47,12 @@ class PluginController extends Controller
     public function update(Request $request, $code)
     {
         $plugin = (new Manager)->getPlugin($code);
-        dd($plugin);
+        if (empty($plugin)) {
+            throw new \Exception("无效的插件");
+        }
+        $fields = $request->all();
+        SettingRepo::update('plugin', $code, $fields);
+        return json_success("编辑成功");
     }
 
 
