@@ -62,9 +62,9 @@
         data: {status: checked},
         success: function(res) {
           layer.msg(res.message)
-          // $input.removeAttr('checked')
         },
         error: function() {
+          $input.prop("checked", false);
         }
       })
     });
