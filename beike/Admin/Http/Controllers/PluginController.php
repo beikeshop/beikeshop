@@ -11,14 +11,16 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Exception;
 use Beike\Plugin\Manager;
-use Beike\Repositories\SettingRepo;
 use Illuminate\Http\Request;
+use Beike\Repositories\SettingRepo;
+use Illuminate\Contracts\View\View;
 
 class PluginController extends Controller
 {
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function index()
     {
@@ -30,9 +32,10 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @throws \Exception
+     * @return View
+     * @throws Exception
      */
-    public function edit(Request $request, $code)
+    public function edit(Request $request, $code): View
     {
         $data['plugin'] = (new Manager)->getPlugin($code);
         return view('admin::pages.plugins.form', $data);
@@ -43,13 +46,13 @@ class PluginController extends Controller
      * @param Request $request
      * @param $code
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function update(Request $request, $code): array
     {
         $plugin = (new Manager)->getPlugin($code);
         if (empty($plugin)) {
-            throw new \Exception("无效的插件");
+            throw new Exception("无效的插件");
         }
         $fields = $request->all();
         SettingRepo::update('plugin', $code, $fields);
@@ -60,11 +63,17 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @throws \Exception
+     * @return array
+     * @throws Exception
      */
-    public function updateStatus(Request $request, $code)
+    public function updateStatus(Request $request, $code): array
     {
         $plugin = (new Manager)->getPlugin($code);
-        dd($plugin);
+        if (empty($plugin)) {
+            throw new Exception("无效的插件");
+        }
+        $status = $request->get('status');
+        SettingRepo::update('plugin', $code, ['name' => 'status', 'value' => $status]);
+        return json_success("编辑成功");
     }
 }
