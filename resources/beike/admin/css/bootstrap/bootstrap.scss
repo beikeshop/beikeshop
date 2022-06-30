@@ -25,3 +25,12 @@ $link-color: #1890ff;
 .btn-primary {
   color: #fff;
 }
+
+.form-switch {
+  margin-bottom: 0;
+
+  .form-check-input {
+    width: 3em;
+    height: 1.6em;
+  }
+}

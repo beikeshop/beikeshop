@@ -34,7 +34,7 @@
                 <td>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="switch-1"
-                      {{ $plugin->enabled ? 'checked' : '' }}>
+                      {{ $plugin->enabled ? 'checked' : '' }} data-code="{{ $plugin->code }}">
                     <label class="form-check-label" for="switch-1"></label>
                   </div>
                 </td>
@@ -53,7 +53,20 @@
 @push('footer')
   <script>
     $('.form-switch input[type="checkbox"]').change(function(event) {
-      console.log($(this).prop('checked'))
+      const $input = $(this);
+      const checked = $(this).prop('checked') ? 1 : 0;
+      const code = $(this).data('code')
+      $.ajax({
+        url: `/admin/plugins/${code}/status`,
+        type: 'PUT',
+        data: {status: checked},
+        success: function(res) {
+          layer.msg(res.message)
+          $input.removeAttr('checked')
+        },
+        error: function() {
+        }
+      })
     });
   </script>
 @endpush
