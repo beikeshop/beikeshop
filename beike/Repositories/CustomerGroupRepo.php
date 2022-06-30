@@ -64,7 +64,12 @@ class CustomerGroupRepo
 
     public static function list()
     {
-        $builder = CustomerGroup::query();
+        $builder = CustomerGroup::query()
+            ->leftJoin('customer_group_descriptions AS cgd', function ($join) {
+                $join->on('cgd.customer_group_id', 'customer_group.id')
+                    ->where('cgd.language_id', current_language_id());
+            })
+            ->select(['customer_group.*', 'cgd.name', 'cgd.description']);
         $groups = $builder->get();
 
         return $groups;
