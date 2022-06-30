@@ -32,7 +32,18 @@ class AddressController extends Controller
 
     public function store(Request $request, int $customerId)
     {
-        $data = $request->only(['name', 'phone', 'country_id', 'state_id', 'state', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']);
+        $data = [
+            'name' => $request->get('name', ''),
+            'phone' => $request->get('phone', ''),
+            'country_id' => (int)$request->get('country_id', 0),
+            'zone_id' => (int)$request->get('zone_id', 0),
+            'zone' => $request->get('zone', ''),
+            'city_id' => (int)$request->get('city_id', 0),
+            'city' => $request->get('city', ''),
+            'zipcode' => $request->get('zipcode', ''),
+            'address_1' => $request->get('address_1', ''),
+            'address_2' => $request->get('address_2', ''),
+            ];
         $data['customer_id'] = $customerId;
         $address = AddressRepo::create($data);
         return json_success("地址创建成功", $address);
@@ -40,7 +51,19 @@ class AddressController extends Controller
 
     public function update(Request $request, int $customerId, int $addressId)
     {
-        $address = AddressRepo::update($addressId, $request->only(['name', 'phone', 'country_id', 'state_id', 'state', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']));
+        $data = [
+            'name' => $request->get('name', ''),
+            'phone' => $request->get('phone', ''),
+            'country_id' => (int)$request->get('country_id', 0),
+            'zone_id' => (int)$request->get('zone_id', 0),
+            'zone' => $request->get('zone', ''),
+            'city_id' => (int)$request->get('city_id', 0),
+            'city' => $request->get('city', ''),
+            'zipcode' => $request->get('zipcode', ''),
+            'address_1' => $request->get('address_1', ''),
+            'address_2' => $request->get('address_2', ''),
+        ];
+        $address = AddressRepo::update($addressId, $data);
 
         return json_success("地址成功修改", $address);
     }
