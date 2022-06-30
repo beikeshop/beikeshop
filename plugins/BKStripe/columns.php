@@ -14,11 +14,13 @@ return [
         'name' => 'api_key',
         'label' => 'API Key',
         'type' => 'string',
+        'required' => true,
     ],
     [
         'name' => 'api_secret',
         'label' => 'API Secret',
         'type' => 'string',
+        'required' => true,
     ],
     [
         'name' => 'description',
@@ -29,11 +31,13 @@ return [
         'name' => 'country',
         'label' => '国家',
         'type' => 'select',
-        'option' => ['China', 'USA']
+        'option' => ['China', 'USA'],
+        'required' => true,
     ],
     [
         'name' => 'active',
         'label' => '是否开启',
         'type' => 'bool',
+        'required' => true,
     ]
 ];
