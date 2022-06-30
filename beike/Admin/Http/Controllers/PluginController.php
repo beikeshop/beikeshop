@@ -36,4 +36,28 @@ class PluginController extends Controller
        $plugin = (new Manager)->getPlugin($code);
        dd($plugin);
     }
+
+
+    /**
+     * @param Request $request
+     * @param $code
+     * @throws \Exception
+     */
+    public function update(Request $request, $code)
+    {
+        $plugin = (new Manager)->getPlugin($code);
+        dd($plugin);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $code
+     * @throws \Exception
+     */
+    public function updateStatus(Request $request, $code)
+    {
+        $plugin = (new Manager)->getPlugin($code);
+        dd($plugin);
+    }
 }
