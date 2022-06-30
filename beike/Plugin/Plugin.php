@@ -12,6 +12,7 @@
 namespace Beike\Plugin;
 
 use Beike\Models\Setting;
+use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -108,10 +109,8 @@ class Plugin implements Arrayable, \ArrayAccess
      */
     public function getColumns(): array
     {
-        if (empty($this->columns)) {
-            return [];
-        }
-        $existValues = $this->getColumnsFromDb();
+        $this->columns[] = SettingRepo::getPluginStatusColumn();
+        $existValues = SettingRepo::getPluginColumns($this->code);
         foreach ($this->columns as &$column) {
             $dbColumn = $existValues[$column['name']] ?? null;
             if (empty($dbColumn)) {
@@ -121,14 +120,6 @@ class Plugin implements Arrayable, \ArrayAccess
             $column['value'] = $dbColumn->value;
         }
         return $this->columns;
-    }
-
-
-    private function getColumnsFromDb()
-    {
-        return Setting::query()->where('type', 'plugin')
-            ->where('space', $this->code)
-            ->get()->keyBy('name');
     }
 
 

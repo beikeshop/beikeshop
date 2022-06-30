@@ -33,11 +33,5 @@ return [
         'type' => 'select',
         'option' => ['China', 'USA'],
         'required' => true,
-    ],
-    [
-        'name' => 'active',
-        'label' => '是否开启',
-        'type' => 'bool',
-        'required' => true,
     ]
 ];
