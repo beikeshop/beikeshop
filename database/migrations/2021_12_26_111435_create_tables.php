@@ -109,8 +109,10 @@ class CreateTables extends Migration
 
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('value');
+            $table->string('type')->comment('类型,包括 system、plugin');
+            $table->string('space')->comment('配置组, 比如 bk_stripe, flat_shipping');
+            $table->string('name')->comment('配置名称, 类似字段名');
+            $table->string('value')->comment('配置值');
             $table->boolean('json')->default(false);
             $table->timestamps();
         });
