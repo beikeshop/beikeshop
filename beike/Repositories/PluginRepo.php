@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Plugin;
+use Beike\Plugin\Manager;
 use Illuminate\Database\Eloquent\Collection;
 
 class PluginRepo
@@ -63,8 +64,17 @@ class PluginRepo
      */
     public static function installed($code): bool
     {
-        $plugins = self::listByCode();
+        $plugins = self::getPluginsByCode();
         return $plugins->has($code);
+    }
+
+
+    public static function allPlugins()
+    {
+        if (self::$installedPlugins !== null) {
+            return self::$installedPlugins;
+        }
+        return self::$installedPlugins = Plugin::all();
     }
 
 
@@ -72,11 +82,37 @@ class PluginRepo
      * 获取所有已安装插件
      * @return Plugin[]|Collection
      */
-    public static function listByCode()
+    public static function getPluginsByCode()
     {
-        if (self::$installedPlugins !== null) {
-            return self::$installedPlugins;
-        }
-        return self::$installedPlugins = Plugin::all()->keyBy('code');
+        $allPlugins = self::allPlugins();
+        return $allPlugins->keyBy('code');
+    }
+
+
+    /**
+     * 获取所有配送方式
+     */
+    public static function getShippingMethods()
+    {
+        $allPlugins = self::allPlugins();
+        return $allPlugins->where('type', 'shipping')->filter(function ($item) {
+            $plugin = (new Manager)->getPlugin($item->code);
+            $item->plugin = $plugin;
+            return $plugin && $plugin->getEnabled();
+        });
+    }
+
+
+    /**
+     * 获取所有支付方式
+     */
+    public static function getPaymentMethods()
+    {
+        $allPlugins = self::allPlugins();
+        return $allPlugins->where('type', 'payment')->filter(function ($item) {
+            $plugin = (new Manager)->getPlugin($item->code);
+            $item->plugin = $plugin;
+            return $plugin && $plugin->getEnabled();
+        });
     }
 }

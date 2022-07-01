@@ -11,10 +11,10 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\PluginRepo;
 use Exception;
 use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
+use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\View\View;
 use Beike\Admin\Http\Resources\PluginResource;

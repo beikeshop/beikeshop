@@ -12,6 +12,7 @@
 namespace Beike\Shop\Services;
 
 use Beike\Repositories\AddressRepo;
+use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\CountryRepo;
 
@@ -22,8 +23,8 @@ class CheckoutService
         $customer = current_customer();
 
         $addresses = AddressRepo::listByCustomer(current_customer());
-        $shipments = SettingRepo::getShipments();
-        $payments = SettingRepo::getPayments();
+        $shipments = PluginRepo::getShippingMethods();
+        $payments = PluginRepo::getPaymentMethods();
 
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
