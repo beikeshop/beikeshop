@@ -92,31 +92,31 @@ class PluginRepo
     /**
      * 获取所有配送方式
      */
-    public static function getShippingMethods(): array
+    public static function getShippingMethods()
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'shipping')->filter(function ($item) {
             $plugin = (new Manager)->getPlugin($item->code);
             if ($plugin) {
-                $item->plugin = $plugin->toArray();
+                $item->plugin = $plugin;
             }
             return $plugin && $plugin->getEnabled();
-        })->toArray();
+        });
     }
 
 
     /**
      * 获取所有支付方式
      */
-    public static function getPaymentMethods(): array
+    public static function getPaymentMethods()
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'payment')->filter(function ($item) {
             $plugin = (new Manager)->getPlugin($item->code);
             if ($plugin) {
-                $item->plugin = $plugin->toArray();
+                $item->plugin = $plugin;
             }
             return $plugin && $plugin->getEnabled();
-        })->toArray();
+        });
     }
 }

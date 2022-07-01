@@ -15,6 +15,8 @@ use Beike\Repositories\AddressRepo;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\CountryRepo;
+use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
+use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
 
 class CheckoutService
 {
@@ -23,8 +25,8 @@ class CheckoutService
         $customer = current_customer();
 
         $addresses = AddressRepo::listByCustomer(current_customer());
-        $shipments = PluginRepo::getShippingMethods();
-        $payments = PluginRepo::getPaymentMethods();
+        $shipments = ShippingMethodItem::collection(PluginRepo::getShippingMethods())->jsonSerialize();
+        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
