@@ -31,26 +31,28 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @return View
+     * @return array
      * @throws Exception
      */
-    public function install(Request $request, $code): View
+    public function install(Request $request, $code): array
     {
         $plugin = (new Manager)->getPlugin($code);
-        dd($plugin);
+        // dd($plugin);
+        return json_success("安装成功");
     }
 
 
     /**
      * @param Request $request
      * @param $code
-     * @return View
+     * @return array
      * @throws Exception
      */
-    public function uninstall(Request $request, $code): View
+    public function uninstall(Request $request, $code): array
     {
         $plugin = (new Manager)->getPlugin($code);
-        dd($plugin);
+        // dd($plugin);
+        return json_success("卸载成功");
     }
 
 
