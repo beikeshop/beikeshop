@@ -30,12 +30,12 @@ class CheckoutService
         $carts = CartService::reloadData($cartList);
 
         $data = [
-            'addresses' => $addresses,
-            'shipments' => $shipments,
             'country_id' => setting('country_id'),
             'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
-            'payments' => $payments,
+            'addresses' => $addresses,
+            'shipping_methods' => $shipments,
+            'payment_methods' => $payments,
             'carts' => $carts
         ];
         return $data;
