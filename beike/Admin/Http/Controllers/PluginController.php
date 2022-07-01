@@ -27,7 +27,7 @@ class PluginController extends Controller
     public function index()
     {
         $plugins = (new Manager)->getPlugins();
-        $data['plugins'] = PluginResource::collection($plugins)->jsonSerialize();
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         return view('admin::pages.plugins.index', $data);
     }
 
