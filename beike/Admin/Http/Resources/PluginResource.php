@@ -25,6 +25,7 @@ class PluginResource extends JsonResource
             'icon' => $this->icon,
             'author' => $this->author,
             'status' => $this->getStatus(),
+            'installed' => $this->getInstalled(),
             'edit_url' => $this->getEditUrl(),
         ];
 

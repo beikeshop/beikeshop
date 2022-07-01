@@ -106,6 +106,11 @@ class Plugin implements Arrayable, \ArrayAccess
         return SettingRepo::getPluginStatus($this->code);
     }
 
+    public function getInstalled(): bool
+    {
+        return true;
+    }
+
     public function getEnabled(): bool
     {
         return $this->enabled;

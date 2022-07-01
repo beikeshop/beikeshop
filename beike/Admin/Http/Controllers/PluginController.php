@@ -11,7 +11,6 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Models\Customer;
 use Exception;
 use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
