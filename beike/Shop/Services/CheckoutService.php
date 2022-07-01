@@ -32,6 +32,12 @@ class CheckoutService
         $carts = CartService::reloadData($cartList);
 
         $data = [
+            'current' => [
+                'shipping_address_id' => 2,
+                'payment_address_id' => 3,
+                'shipping_method' => 'flat_shipping',
+                'payment_method' => 'bk_stripe',
+            ],
             'country_id' => (int)setting('country_id'),
             'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
