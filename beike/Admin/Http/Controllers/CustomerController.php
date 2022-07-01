@@ -33,20 +33,11 @@ class CustomerController extends Controller
         return view('admin::pages.customers.index', $data);
     }
 
-    public function create()
-    {
-        $data = [
-            'customer' => new Customer(),
-            '_redirect' => $this->getRedirect(),
-        ];
-        return view('admin::pages.customers.form', $data);
-    }
-
     public function store(Request $request)
     {
-        CustomerRepo::create($request->all());
+        $customer = CustomerRepo::create($request->all());
 
-        return redirect($this->getRedirect())->with('success', 'customer created');
+        return json_success('创建成功！', $customer);
     }
 
     public function edit(Request $request, Customer $customer)
@@ -70,9 +61,9 @@ class CustomerController extends Controller
         if ($request->get('password')) {
             $params['password'] = $request->get('password');
         }
-        CustomerRepo::update($customerId, $params);
+        $customer = CustomerRepo::update($customerId, $params);
 
-        return redirect($this->getRedirect())->with('success', 'customer created');
+        return json_success('创建成功！', $customer);
     }
 
     public function destroy(Request $request)
