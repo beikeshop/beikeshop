@@ -11,18 +11,17 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Resources\CustomerResource;
+use Beike\Admin\Http\Resources\AddressResource;
 use Beike\Repositories\AddressRepo;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
-    protected string $defaultRoute = 'addresses.index';
     public function index(Request $request, int $customerId)
     {
         $addresses = AddressRepo::listByCustomer($customerId);
         $data = [
-            'addresses' => CustomerResource::collection($addresses),
+            'addresses' => AddressResource::collection($addresses),
         ];
 
         return $data;

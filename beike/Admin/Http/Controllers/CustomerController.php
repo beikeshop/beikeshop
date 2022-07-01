@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CustomerRequest;
+use Beike\Admin\Http\Resources\AddressResource;
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerService;
 use Beike\Models\Customer;
@@ -50,7 +51,7 @@ class CustomerController extends Controller
         $data = [
             'customer' => $customer,
             'customer_groups' => CustomerGroupRepo::list(),
-            'addresses' => CustomerResource::collection($addresses),
+            'addresses' => AddressResource::collection($addresses),
             'countries' => CountryRepo::all(),
             'country_id' => setting('country_id'),
             '_redirect' => $this->getRedirect(),

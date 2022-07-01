@@ -68,7 +68,7 @@ class AddressRepo
             $customer = CustomerRepo::find($customer);
         }
         if ($customer) {
-            return $customer->addresses;
+            return $customer->addresses()->with('country')->get();
         }
     }
 }

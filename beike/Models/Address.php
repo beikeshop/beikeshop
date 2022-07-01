@@ -13,11 +13,22 @@ namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Address extends Model
 {
     use HasFactory;
 
     protected $fillable = ['customer_id', 'name', 'phone', 'country_id', 'state_id', 'state', 'city_id', 'city', 'zipcode', 'address_1', 'address_2'];
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function zone(): BelongsTo
+    {
+        return $this->belongsTo(Zone::class);
+    }
 }
 
