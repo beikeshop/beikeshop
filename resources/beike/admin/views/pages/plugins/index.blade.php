@@ -86,7 +86,7 @@
             type: 'post',
             success: function(res) {
               layer.msg(res.message)
-              self.plugins[index].installed = true;
+              self.plugins[index].installed = type == 'install' ? true : false;
             },
           })
         }
