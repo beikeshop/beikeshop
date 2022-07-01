@@ -44,16 +44,16 @@
     </div>
 
     <el-dialog title="创建顾客" :visible.sync="dialogCustomers.show" width="600px"
-      @close="closeCustomersDialog('form')">
+      @close="closeCustomersDialog('form')" :close-on-click-modal="false">
       <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="100px">
         <el-form-item label="用户名" prop="name">
-          <el-input v-model="dialogCustomers.form.name"></el-input>
+          <el-input v-model="dialogCustomers.form.name" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="dialogCustomers.form.email"></el-input>
+          <el-input v-model="dialogCustomers.form.email" placeholder="邮箱"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="dialogCustomers.form.password"></el-input>
+          <el-input v-model="dialogCustomers.form.password" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item label="用户组">
           <el-select v-model="dialogCustomers.form.customer_group_id" placeholder="请选择">
@@ -100,7 +100,10 @@
 
         rules: {
           name: [{required: true,message: '请输入用户名',trigger: 'blur'}, ],
-          email: [{required: true,message: '请输入邮箱',trigger: 'blur'}, ],
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
+            {type: 'email', message: '请输入正确邮箱格式' ,trigger: 'blur'},
+          ],
           password: [{required: true,message: '请输入密码',trigger: 'blur'}, ],
         }
       },

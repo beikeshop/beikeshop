@@ -10,13 +10,13 @@
           <el-tab-pane label="用户信息" name="customer">
             <div class="form-max-w">
               <el-form-item label="用户名" prop="name">
-                <el-input v-model="form.name"></el-input>
+                <el-input v-model="form.name" placeholder="用户名"></el-input>
               </el-form-item>
               <el-form-item label="邮箱" prop="email">
-                <el-input v-model="form.email"></el-input>
+                <el-input v-model="form.email" placeholder="邮箱"></el-input>
               </el-form-item>
               <el-form-item label="密码" prop="password">
-                <el-input v-model="form.password"></el-input>
+                <el-input v-model="form.password" placeholder="留空则保持原密码不变"></el-input>
               </el-form-item>
               <el-form-item label="用户组">
                 <el-select v-model="form.customer_group_id" placeholder="请选择">
@@ -167,11 +167,11 @@
         },
 
         rules: {
-          name: [{
-            required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          }, ],
+          name: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
+            {type: 'email', message: '请输入正确邮箱格式' ,trigger: 'blur'},
+          ],
         },
 
         addressRules: {

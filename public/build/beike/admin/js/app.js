@@ -19,6 +19,11 @@ $(document).ready(function ($) {
     },
     complete: function complete() {
       layer.closeAll('loading');
+    },
+    error: function error(xhr, ajaxOptions, thrownError) {
+      if (xhr.responseJSON.message) {
+        layer.msg(xhr.responseJSON.message, function () {});
+      }
     }
   });
 });

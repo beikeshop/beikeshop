@@ -23,57 +23,70 @@
 
     <div class="row mt-5">
       <div class="col-12 col-md-8">
-        <form action="">
-          <div class="checkout-address">
-            <h5 class="checkout-title">地址</h5>
-            <div class="addresses-wrap">
-              <div class="row">
-                <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
-                  <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']">
-                    <div class="name-wrap">
-                      <span class="name">@{{ address.name }}</span>
-                      <span class="phone">@{{ address.phone }}</span>
-                    </div>
-                    <div class="zipcode">@{{ address.zipcode }}</div>
-                    <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
-                    <div class="address-bottom">
-                      <span class="badge bg-success">已选择</span>
-                      <a class="" @click="editAddress(index)">编辑</a>
-                    </div>
+        <div class="checkout-black">
+          <h5 class="checkout-title">地址</h5>
+          <div class="addresses-wrap">
+            <div class="row">
+              <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
+                <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']">
+                  <div class="name-wrap">
+                    <span class="name">@{{ address.name }}</span>
+                    <span class="phone">@{{ address.phone }}</span>
+                  </div>
+                  <div class="zipcode">@{{ address.zipcode }}</div>
+                  <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
+                  <div class="address-bottom">
+                    <span class="badge bg-success">已选择</span>
+                    <a class="" @click="editAddress(index)">编辑</a>
                   </div>
                 </div>
-                <div class="col-4">
-                  <div class="item add-addres" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
-                </div>
               </div>
-            </div>
-
-            <h5 class="checkout-title">支付方式</h5>
-            <div class="row mb-3">
-              <div class="mb-4">
-                <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="success-outlined">支付方式 - 1</label>
-
-                <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                <label class="btn btn-outline-primary" for="danger-outlined">支付方式 - 2</label>
-              </div>
-            </div>
-
-            <h5 class="checkout-title">配送方式</h5>
-            <div class="row mb-3">
-              <div class="mb-4">
-                <input type="radio" class="btn-check" name="peisong_name" id="peisong-1" autocomplete="off" checked>
-                <label class="btn btn-outline-primary" for="peisong-1">配送方式 - 1</label>
-
-                <input type="radio" class="btn-check" name="peisong_name" id="peisong-2" autocomplete="off">
-                <label class="btn btn-outline-primary" for="peisong-2">配送方式 - 2</label>
+              <div class="col-4">
+                <div class="item add-addres" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
               </div>
             </div>
           </div>
-        </form>
+        </div>
+
+        <div class="checkout-black">
+          <h5 class="checkout-title">支付方式</h5>
+          <div class="radio-line-wrap">
+            <div class="radio-line-item">
+              {{-- <i class="bi bi-record"></i> --}}
+              {{-- <i class="bi bi-record-circle"></i> --}}
+              <div class="left">
+                <input name="payment" type="radio" id="payment-method-1" class="form-check-input">
+                <img src="https://via.placeholder.com/100x100.png/00ee99?text=aperiam" class="img-fluid">
+              </div>
+              <div class="right">
+                <div class="title">插件名称</div>
+                <div class="sub-title">插件名称，插件名称，插件名称，插件名称，插件名称，</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-black">
+          <h5 class="checkout-title">配送方式</h5>
+          <div class="radio-line-wrap">
+            <div class="radio-line-item">
+              {{-- <i class="bi bi-record"></i> --}}
+              {{-- <i class="bi bi-record-circle"></i> --}}
+              <div class="left">
+                <input name="payment" type="radio" id="payment-method-1" class="form-check-input">
+                <img src="https://via.placeholder.com/100x100.png/00ee99?text=aperiam" class="img-fluid">
+              </div>
+              <div class="right">
+                <div class="title">插件名称</div>
+                <div class="sub-title">插件名称，插件名称，插件名称，插件名称，插件名称，</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="col-12 col-md-4">
-        <div class="card total-wrap">
+        <div class="card total-wrap fixed-top-line">
           <div class="card-header"><h5 class="mb-0">CART TOTALS</h5></div>
           <div class="card-body">
             <div class="products-wrap">
@@ -82,10 +95,12 @@
                   <img :src="cart.image" class="img-fluid">
                   <div class="name">
                     <span v-text="cart.name"></span>
-                    <span class="quantity">x @{{ cart.quantity }}</span>
                   </div>
                 </div>
-                <div class="price" v-text="cart.price_format"></div>
+                <div class="price text-end">
+                  <div>@{{ cart.price_format }}</div>
+                  <div class="quantity">x @{{ cart.quantity }}</div>
+                </div>
               </div>
             </div>
             <ul class="totals">
@@ -101,7 +116,7 @@
       </div>
     </div>
 
-    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px" @close="closeAddressDialog('addressForm')">
+    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
@@ -161,11 +176,14 @@
       data: {
         form: {
           shipping_address_id: 7,
+          payment_methods: 7,
         },
 
         source: {
           addresses: @json($addresses ?? []),
           countries: @json($countries ?? []),
+          shipping_methods: @json($shipping_methods ?? []),
+          payment_methods: @json($payment_methods ?? []),
           carts: @json($carts ?? null),
           zones: []
         },
@@ -264,20 +282,5 @@
         }
       }
     })
-
-
-    $(function() {
-      const totalWrapTop = $('.total-wrap').offset().top;
-      const totalWrapWidth = $('.total-wrap').outerWidth();
-      const totalWrapLeft = $('.total-wrap').offset().left;
-
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > totalWrapTop) {
-          $('.total-wrap').addClass('total-wrap-fixed').css({'left': totalWrapLeft, 'width': totalWrapWidth})
-        } else {
-          $('.total-wrap').removeClass('total-wrap-fixed').css({'left': 0, 'width': 'auto'})
-        }
-      })
-    });
   </script>
 @endpush

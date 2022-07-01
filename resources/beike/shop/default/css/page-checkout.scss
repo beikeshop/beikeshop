@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
 body.page-checkout {
+  .checkout-black {
+    margin-bottom: 2.6rem;
+  }
   .checkout-title {
-    // border-bottom: 1px solid #e5e5e5;
-    // padding-bottom: 16px;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 16px;
     margin-bottom: 16px;
     position: relative;
     padding-left: 10px;
@@ -22,11 +25,6 @@ body.page-checkout {
   .total-wrap {
     padding: 1.4rem;
     border: 3px solid #efefef;
-
-    &.total-wrap-fixed {
-      position: fixed;
-      top: 0;
-    }
 
     .card-body {
       padding: 0;
@@ -107,8 +105,6 @@ body.page-checkout {
   }
 
   .addresses-wrap {
-    margin-bottom: 2rem;
-
     .item {
       position: relative;
       padding: 10px 20px;
@@ -180,6 +176,35 @@ body.page-checkout {
         // flex-wrap: wrap;
         a {
           color: #2d68a8;
+        }
+      }
+    }
+  }
+
+  .radio-line-wrap {
+    .radio-line-item {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      &:not(:last-of-type) {
+        margin-bottom: 1rem;
+      }
+
+      .left {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 60px;
+          margin-left: 10px;
+        }
+      }
+
+      .right {
+        .title {
+          font-weight: bold;
+          margin-bottom: 10px;
         }
       }
     }

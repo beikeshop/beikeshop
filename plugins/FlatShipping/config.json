@@ -4,7 +4,7 @@
     "description": "按订单总额收取固定运费",
     "type": "shipping",
     "version": "v1.0.0",
-    "icon": "https://via.placeholder.com/30x30.png/002299?text=flat",
+    "icon": "https://via.placeholder.com/100x100.png/002299?text=flat",
     "author": {
         "name": "成都光大网络科技有限公司",
         "email": "yangjin@opencart.cn"

@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="col-12 col-md-3">
-        <div class="card total-wrap">
+        <div class="card total-wrap fixed-top-line">
           <div class="card-header"><h5 class="mb-0">商品总计</h5></div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -91,22 +91,6 @@
 @endsection
 
 @push('add-scripts')
-  <script>
-    $(function() {
-      const totalWrapTop = $('.total-wrap').offset().top;
-      const totalWrapWidth = $('.total-wrap').outerWidth();
-      const totalWrapLeft = $('.total-wrap').offset().left;
-
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > totalWrapTop) {
-          $('.total-wrap').addClass('total-wrap-fixed').css({'left': totalWrapLeft, 'width': totalWrapWidth})
-        } else {
-          $('.total-wrap').removeClass('total-wrap-fixed').css({'left': 0, 'width': 'auto'})
-        }
-      })
-    });
-  </script>
-
   <script>
     var app = new Vue({
       el: "#app-cart",
