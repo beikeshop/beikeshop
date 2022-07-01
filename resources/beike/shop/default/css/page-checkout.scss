@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body.page-checkout {
-  h4.title {
+  .module-title {
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 16px;
     margin-bottom: 16px;
@@ -99,10 +99,10 @@ body.page-checkout {
 
     .item {
       position: relative;
-      padding: 20px 20px 30px;
+      padding: 10px 20px;
       margin-bottom: 10px;
       border: 1px solid #e8e8e8;
-      height: 155px;
+      height: 125px;
       cursor: pointer;
 
       &.add-addres {
@@ -140,6 +140,7 @@ body.page-checkout {
 
       .name-wrap {
         margin-bottom: .5rem;
+        line-height: 1;
 
         .name {
           font-size: 1rem;
@@ -153,14 +154,18 @@ body.page-checkout {
       }
 
       .zipcode {
-        margin-bottom: .5rem;
+        margin-bottom: .1rem;
       }
 
       .address-info {
-        margin-bottom: .5rem;
+        margin-bottom: .9rem;
       }
 
       .address-bottom {
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: space-between; // flex-end | center | space-between
+        // flex-wrap: wrap;
         a {
           color: #2d68a8;
         }

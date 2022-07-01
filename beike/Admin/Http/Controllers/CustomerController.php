@@ -28,6 +28,7 @@ class CustomerController extends Controller
 
         $data = [
             'customers' => CustomerResource::collection($customers),
+            'customer_groups' => CustomerGroupRepo::list(),
         ];
 
         return view('admin::pages.customers.index', $data);

@@ -437,3 +437,7 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 .el-tabs__header {
   margin-bottom: 25px;
 }
+
+.el-tabs__item {
+  padding: 0 10px;
+}

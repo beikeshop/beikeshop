@@ -54,14 +54,17 @@
                   <td>222</td>
                   <td>222</td>
                   <td>
-                    <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(address.id, index)">删除</button>
+                    <button class="btn btn-outline-secondary btn-sm" type="button"
+                      @click="editAddress(index)">编辑</button>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button"
+                      @click="deleteAddress(address.id, index)">删除</button>
                   </td>
               </tbody>
               <tbody v-else>
                 <tr>
                   <td colspan="6" class="text-center">
-                    <span class="me-2">当前账号无地址</span> <el-link type="primary" @click="editAddress">新增地址</el-link>
+                    <span class="me-2">当前账号无地址</span>
+                    <el-link type="primary" @click="editAddress">新增地址</el-link>
                   </td>
               </tbody>
             </table>
@@ -70,7 +73,8 @@
       </el-form>
     </div>
 
-    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px">
+    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px"
+      @close="closeAddressDialog('addressForm')">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
         <el-form-item label="姓名" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
@@ -163,20 +167,44 @@
         },
 
         rules: {
-          name: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+          name: [{
+            required: true,
+            message: '请输入用户名',
+            trigger: 'blur'
+          }, ],
         },
 
         addressRules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
-          phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
-          address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
-          zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
-          city_id: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
+          name: [{
+            required: true,
+            message: '请输入姓名',
+            trigger: 'blur'
+          }, ],
+          phone: [{
+            required: true,
+            message: '请输入联系电话',
+            trigger: 'blur'
+          }, ],
+          address_1: [{
+            required: true,
+            message: '请输入详细地址 1',
+            trigger: 'blur'
+          }, ],
+          zone_id: [{
+            required: true,
+            message: '请选择省份',
+            trigger: 'blur'
+          }, ],
+          city_id: [{
+            required: true,
+            message: '请填写 city',
+            trigger: 'blur'
+          }, ],
         }
       },
 
       // 在挂载开始之前被调用:相关的 render 函数首次被调用
-      beforeMount () {
+      beforeMount() {
         this.countryChange(this.dialogAddress.form.country_id);
       },
 
@@ -190,12 +218,12 @@
               return;
             }
 
-
             $.ajax({
-              url: `/admin/countries/${e}/zones`,
-              type: 'get',
+              url: `/admin/customers/{{ $customer['id'] }}`,
+              type: 'put',
+              data: self.form,
               success: function(res) {
-                this.$message.success('提交成功');
+                self.$message.success(res.message);
               }
             })
           });

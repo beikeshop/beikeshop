@@ -13,6 +13,7 @@ namespace Beike\Shop\Services;
 
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\SettingRepo;
+use Beike\Repositories\CountryRepo;
 
 class CheckoutService
 {
@@ -30,6 +31,9 @@ class CheckoutService
         $data = [
             'addresses' => $addresses,
             'shipments' => $shipments,
+            'country_id' => setting('country_id'),
+            'customer_id' => $customer->id,
+            'countries' => CountryRepo::all(),
             'payments' => $payments,
             'carts' => $carts
         ];

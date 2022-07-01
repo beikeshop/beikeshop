@@ -25,97 +25,7 @@
       <div class="col-12 col-md-8">
         <form action="">
           <div class="checkout-address">
-            <h4 class="title">地址</h4>
-{{--             <div class="row mb-3">
-              <div class="col-12 col-md-6 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="姓名">
-                  <label class="form-label" for="email_1">姓名</label>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="电话">
-                  <label class="form-label" for="email_1">电话</label>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 mb-3">
-                <div class="form-floating">
-                  <select class="form-select" aria-label="Default select example" name="county">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label class="form-label" for="email_1">county</label>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 mb-3">
-                <div class="form-floating">
-                  <select class="form-select" aria-label="Default select example" name="zone">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <label class="form-label" for="email_1">zone</label>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="city">
-                  <label class="form-label" for="email_1">city</label>
-                </div>
-              </div>
-              <div class="col-12 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="city">
-                  <label class="form-label" for="email_1">邮编</label>
-                </div>
-              </div>
-              <div class="col-12 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="city">
-                  <label class="form-label" for="email_1">address 1</label>
-                </div>
-              </div>
-              <div class="col-12 mb-3">
-                <div class="form-floating">
-                  <input type="text" name="email" class="form-control" value="" placeholder="city">
-                  <label class="form-label" for="email_1">address 2</label>
-                </div>
-              </div>
-            </div> --}}
-
-{{--             <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>名称</th>
-                  <th>电话</th>
-                  <th>注册来源</th>
-                  <th>状态</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody v-if="source.addresses.length">
-                <tr v-for="address, index in source.addresses" :key="index">
-                  <td>@{{ index }}</td>
-                  <td>@{{ address.name }}</td>
-                  <td>@{{ address.phone }}</td>
-                  <td>222</td>
-                  <td>222</td>
-                  <td>
-                    <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">编辑</button>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button">删除</button>
-                  </td>
-              </tbody>
-              <tbody v-else>
-                <tr>
-                  <td colspan="6" class="text-center">
-                    <span class="me-2">当前账号无地址</span> <el-link type="primary" @click="editAddress">新增地址</el-link>
-                  </td>
-              </tbody>
-            </table> --}}
-
+            <h4 class="module-title">地址</h4>
             <div class="addresses-wrap">
               <div class="row">
                 <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
@@ -127,17 +37,18 @@
                     <div class="zipcode">@{{ address.zipcode }}</div>
                     <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
                     <div class="address-bottom">
-                      <a class="">编辑</a>
+                      <span class="badge bg-success">已选择</span>
+                      <a class="" @click="editAddress(index)">编辑</a>
                     </div>
                   </div>
                 </div>
                 <div class="col-4">
-                  <div class="item add-addres"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
+                  <div class="item add-addres" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
                 </div>
               </div>
             </div>
 
-            <h4 class="title">支付方式</h4>
+            <h4 class="module-title">支付方式</h4>
             <div class="row mb-3">
               <div class="mb-4">
                 <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
@@ -148,7 +59,7 @@
               </div>
             </div>
 
-            <h4 class="title">配送方式</h4>
+            <h4 class="module-title">配送方式</h4>
             <div class="row mb-3">
               <div class="mb-4">
                 <input type="radio" class="btn-check" name="peisong_name" id="peisong-1" autocomplete="off" checked>
@@ -166,31 +77,80 @@
           <div class="card-header"><h5 class="mb-0">CART TOTALS</h5></div>
           <div class="card-body">
             <div class="products-wrap">
-              @for ($i = 0; $i < 4; $i++)
-              <div class="item">
+              <div class="item" v-for="cart, index in source.carts.carts" :key="index">
                 <div class="image">
-                  <img src="http://fpoimg.com/100x100?bg_color=f3f3f3" class="img-fluid">
+                  <img :src="cart.image" class="img-fluid">
                   <div class="name">
-                    <span>Camera Canon EOS M50 Kit</span>
-                    <span class="quantity">x2</span>
+                    <span v-text="cart.name"></span>
+                    <span class="quantity">x @{{ cart.quantity }}</span>
                   </div>
                 </div>
-                <div class="price">$1156.00</div>
+                <div class="price" v-text="cart.price_format"></div>
               </div>
-              @endfor
             </div>
             <ul class="totals">
-              <li><span>总数</span><span>1120</span></li>
-              <li><span>运费</span><span>20</span></li>
-              <li><span>总价</span><span>2220</span></li>
+              <li><span>总数</span><span v-text="source.carts.quantity"></span></li>
+              <li><span>运费</span><span v-text="source.carts.quantity"></span></li>
+              <li><span>总价</span><span v-text="source.carts.amount_format"></span></li>
             </ul>
             <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary">提交订单</button>
+              <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">提交订单</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px" @close="closeAddressDialog('addressForm')">
+      <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="dialogAddress.form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="联系电话" prop="phone">
+          <el-input maxlength="11" v-model="dialogAddress.form.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="地址" required>
+          <div class="row">
+            <div class="col-4">
+              <el-form-item>
+                <el-select v-model="dialogAddress.form.country_id" filterable placeholder="选择国家" @change="countryChange">
+                  <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div class="col-4">
+              <el-form-item prop="zone_id">
+                <el-select v-model="dialogAddress.form.zone_id" filterable placeholder="选择省份">
+                  <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </div>
+            <div class="col-4">
+              <el-form-item prop="city_id">
+                <el-input v-model="dialogAddress.form.city_id" placeholder="输入 city"></el-input>
+              </el-form-item>
+            </div>
+          </div>
+        </el-form-item>
+        <el-form-item label="邮编" prop="zipcode">
+          <el-input v-model="dialogAddress.form.zipcode"></el-input>
+        </el-form-item>
+        <el-form-item label="详细地址 1" prop="address_1">
+          <el-input v-model="dialogAddress.form.address_1"></el-input>
+        </el-form-item>
+        <el-form-item label="详细地址 2">
+          <el-input v-model="dialogAddress.form.address_2"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="addressFormSubmit('addressForm')">保存</el-button>
+          <el-button @click="closeAddressDialog('addressForm')">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 @endsection
 @push('add-scripts')
@@ -205,6 +165,9 @@
 
         source: {
           addresses: @json($addresses ?? []),
+          countries: @json($countries ?? []),
+          carts: @json($carts ?? null),
+          zones: []
         },
 
         dialogAddress: {
@@ -221,6 +184,14 @@
             address_2: '',
           }
         },
+
+        addressRules: {
+          name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
+          phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
+          address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
+          zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
+          city_id: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
+        }
       },
 
       beforeMount () {
@@ -232,12 +203,64 @@
             this.dialogAddress.index = index;
 
             this.$nextTick(() => {
-              this.dialogAddress.form = JSON.parse(JSON.stringify(this.form.address[index]))
+              this.dialogAddress.form = JSON.parse(JSON.stringify(this.source.addresses[index]))
             })
           }
 
           this.dialogAddress.show = true
         },
+
+        addressFormSubmit(form) {
+          const self = this;
+
+          this.$refs[form].validate((valid) => {
+            if (!valid) {
+              this.$message.error('请检查表单是否填写正确');
+              return;
+            }
+
+            const type = this.dialogAddress.form.id ? 'put' : 'post';
+
+            $.ajax({
+              url: `/admin/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`,
+              data: self.dialogAddress.form,
+              type: type,
+              success: function(res) {
+                if (type == 'post') {
+                  self.source.addresses.push(res.data)
+                } else {
+                  self.source.addresses[self.dialogAddress.index] = res.data
+                }
+                self.$message.success(res.message);
+                self.$refs[form].resetFields();
+                self.dialogAddress.show = false
+                self.dialogAddress.index = null;
+              }
+            })
+          });
+        },
+
+        closeAddressDialog(form) {
+          this.$refs[form].resetFields();
+          this.dialogAddress.show = false
+          this.dialogAddress.index = null;
+        },
+
+        countryChange(e) {
+          const self = this;
+
+          $.ajax({
+            url: `/admin/countries/${e}/zones`,
+            type: 'get',
+            success: function(res) {
+              self.source.zones = res.data.zones;
+            }
+          })
+        },
+
+        checkedBtnCheckoutConfirm() {
+          console.log(1)
+        }
       }
     })
 

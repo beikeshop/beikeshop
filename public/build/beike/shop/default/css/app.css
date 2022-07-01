@@ -469,7 +469,7 @@ body.page-cart .total-wrap .list-group li .total-price {
   font-weight: bold;
 }
 
-body.page-checkout h4.title {
+body.page-checkout .module-title {
   border-bottom: 1px solid #e5e5e5;
   padding-bottom: 16px;
   margin-bottom: 16px;
@@ -551,10 +551,10 @@ body.page-checkout .addresses-wrap {
 }
 body.page-checkout .addresses-wrap .item {
   position: relative;
-  padding: 20px 20px 30px;
+  padding: 10px 20px;
   margin-bottom: 10px;
   border: 1px solid #e8e8e8;
-  height: 155px;
+  height: 125px;
   cursor: pointer;
 }
 body.page-checkout .addresses-wrap .item.add-addres {
@@ -586,6 +586,7 @@ body.page-checkout .addresses-wrap .item.active:before {
 }
 body.page-checkout .addresses-wrap .item .name-wrap {
   margin-bottom: 0.5rem;
+  line-height: 1;
 }
 body.page-checkout .addresses-wrap .item .name-wrap .name {
   font-size: 1rem;
@@ -596,10 +597,15 @@ body.page-checkout .addresses-wrap .item .name-wrap .phone {
   color: #666;
 }
 body.page-checkout .addresses-wrap .item .zipcode {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 body.page-checkout .addresses-wrap .item .address-info {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+body.page-checkout .addresses-wrap .item .address-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 body.page-checkout .addresses-wrap .item .address-bottom a {
   color: #2d68a8;
