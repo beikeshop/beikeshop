@@ -11,11 +11,13 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Models\Customer;
 use Exception;
 use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\View\View;
+use Beike\Admin\Http\Resources\PluginResource;
 
 class PluginController extends Controller
 {
@@ -24,7 +26,8 @@ class PluginController extends Controller
      */
     public function index()
     {
-        $data['plugins'] = (new Manager)->getPlugins();
+        $plugins = (new Manager)->getPlugins();
+        $data['plugins'] = PluginResource::collection($plugins)->jsonSerialize();
         return view('admin::pages.plugins.index', $data);
     }
 
