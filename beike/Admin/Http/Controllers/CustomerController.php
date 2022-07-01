@@ -26,7 +26,7 @@ class CustomerController extends Controller
     protected string $defaultRoute = 'customers.index';
     public function index(Request $request)
     {
-        $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_name']));
+        $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_id']));
 
         $data = [
             'customers' => CustomerResource::collection($customers),

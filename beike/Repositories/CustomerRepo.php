@@ -64,14 +64,7 @@ class CustomerRepo
      */
     public static function list($data)
     {
-        $builder = Customer::query()
-            ->leftJoin('customer_groups AS cg', 'customers.customer_group_id', 'cg.id')
-            ->leftJoin('customer_group_descriptions AS cgd', function ($join) {
-                $join->on('cgd.customer_group_id', 'cg.id')
-                    ->where('cgd.locale', locale());
-            })
-            ->select(['customers.id', 'customers.email', 'customers.name', 'customers.avatar', 'customers.status', 'customers.from', 'cgd.name AS customer_group_name']);
-
+        $builder = Customer::query()->with("customerGroup.description");
 
         if (isset($data['name'])) {
             $builder->where('customers.name', 'like', "%{$data['name']}%");
@@ -85,8 +78,8 @@ class CustomerRepo
         if (isset($data['from'])) {
             $builder->where('customers.from', $data['from']);
         }
-        if (isset($data['customer_group_name'])) {
-            $builder->where('cgd.name', 'like', "%{$data['name']}%");
+        if (isset($data['customer_group_id'])) {
+            $builder->where('customers.customer_group_id', $data['customer_group_id']);
         }
 
         return $builder->paginate(20)->withQueryString();
