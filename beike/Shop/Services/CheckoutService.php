@@ -38,7 +38,7 @@ class CheckoutService
 
         $data = [
             'current' => [
-                'shipping_address_id' => 2,
+                'shipping_address_id' => 7,
                 'payment_address_id' => 3,
                 'shipping_method' => 'flat_shipping',
                 'payment_method' => 'bk_stripe',

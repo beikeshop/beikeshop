@@ -36,7 +36,7 @@
                   <div class="zipcode">@{{ address.zipcode }}</div>
                   <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
                   <div class="address-bottom">
-                    <span class="badge bg-success">已选择</span>
+                    <span class="badge bg-success" v-if="form.shipping_address_id == address.id">已选择</span>
                     <a class="" @click="editAddress(index)">编辑</a>
                   </div>
                 </div>
@@ -175,8 +175,10 @@
 
       data: {
         form: {
-          shipping_address_id: 7,
-          payment_methods: 7,
+          shipping_address_id: @json($current['shipping_address_id']),
+          payment_address_id: @json($current['payment_address_id']),
+          payment_method: @json($current['payment_method']),
+          shipping_method: @json($current['shipping_method']),
         },
 
         source: {
