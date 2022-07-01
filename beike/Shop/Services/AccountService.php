@@ -30,7 +30,10 @@ class AccountService
         $data['status'] = !setting('approve_customer'); // approve_customer为是否需要审核客户
         $data['from'] = $data['from'] ?? 'pc';
         $data['locale'] = locale();
-        $data['name'] = '';
+
+        if ($data['email'] ?? 0) {
+            $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));;
+        }
         $data['avatar'] = '';
 
         return CustomerRepo::create($data);
