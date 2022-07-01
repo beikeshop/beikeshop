@@ -470,9 +470,18 @@ body.page-cart .total-wrap .list-group li .total-price {
 }
 
 body.page-checkout .checkout-title {
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom: 16px;
   margin-bottom: 16px;
+  position: relative;
+  padding-left: 10px;
+}
+body.page-checkout .checkout-title:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  background-color: #fd560f;
+  width: 3px;
+  height: 16px;
 }
 body.page-checkout .total-wrap {
   padding: 1.4rem;

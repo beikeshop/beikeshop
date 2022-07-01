@@ -35,8 +35,8 @@
             <td>
               <el-tag :type="customer.status ? 'success' : 'info'" size="small">@{{ customer.status ? '启用' : '禁用' }}</el-tag>
             <td>
-              <a class="btn btn-outline-secondary btn-sm" :href="customer.href">编辑</a>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.id, index)">删除</button>
+              <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">编辑</a>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">删除</button>
             </td>
           </tr>
         </tbody>
@@ -134,8 +134,15 @@
           });
         },
 
-        deleteCustomer(id, index) {
-          console.log(id, index)
+        deleteCustomer(url, index) {
+          $.ajax({
+            url: url,
+            type: 'delete',
+            success: function(res) {
+              self.$message.success(res.message);
+              this.customers.splice(index, 1)
+            }
+          })
         },
 
         closeCustomersDialog(form) {
