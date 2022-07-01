@@ -13,6 +13,7 @@ namespace Beike\Plugin;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -108,7 +109,7 @@ class Plugin implements Arrayable, \ArrayAccess
 
     public function getInstalled(): bool
     {
-        return true;
+        return PluginRepo::installed($this->code);
     }
 
     public function getEnabled(): bool
