@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <div id="category-app" class="card">
+  <div id="plugins-app" class="card">
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建插件</a>
       <div class="mt-4" style="">
@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             @foreach ($plugins as $plugin)
-              <tr>
+              <tr v-for="plugin, index in plugins" :key="index" v-if="plugins.length">
                 <td>{{ $plugin->code }}</td>
                 <td>{{ $plugin->type }}</td>
                 <td>
@@ -53,6 +53,24 @@
 
 @push('footer')
   <script>
+    new Vue({
+      el: '#plugins-app',
+
+      data: {
+        plugins: @json($plugins ?? []),
+      },
+
+      beforeMount() {
+
+      },
+
+      methods: {
+
+      }
+    })
+  </script>
+
+{{--   <script>
     $('.form-switch input[type="checkbox"]').change(function(event) {
       const $input = $(this);
       const checked = $(this).prop('checked') ? 1 : 0;
@@ -69,5 +87,5 @@
         }
       })
     });
-  </script>
+  </script> --}}
 @endpush

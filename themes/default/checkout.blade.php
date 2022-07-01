@@ -25,7 +25,7 @@
       <div class="col-12 col-md-8">
         <form action="">
           <div class="checkout-address">
-            <h4 class="module-title">地址</h4>
+            <h5 class="checkout-title">地址</h5>
             <div class="addresses-wrap">
               <div class="row">
                 <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
@@ -48,7 +48,7 @@
               </div>
             </div>
 
-            <h4 class="module-title">支付方式</h4>
+            <h5 class="checkout-title">支付方式</h5>
             <div class="row mb-3">
               <div class="mb-4">
                 <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
@@ -59,7 +59,7 @@
               </div>
             </div>
 
-            <h4 class="module-title">配送方式</h4>
+            <h5 class="checkout-title">配送方式</h5>
             <div class="row mb-3">
               <div class="mb-4">
                 <input type="radio" class="btn-check" name="peisong_name" id="peisong-1" autocomplete="off" checked>
