@@ -36,7 +36,7 @@ class CustomerRequest extends FormRequest
             'name' => 'required|max:64',
             'email' => 'required|email:rfc,dns|unique:customers',
             'password' => 'required|max:64',
-            'customer_group_id' => 'required|unique:customer_groups',
+            'customer_group_id' => 'required|exists:customer_groups,id',
         ];
     }
 
