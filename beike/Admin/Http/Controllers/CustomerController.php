@@ -41,7 +41,7 @@ class CustomerController extends Controller
         $data = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
         $customer = CustomerService::create($data);
 
-        return json_success('创建成功！', $customer);
+        return json_success('创建成功！', new CustomerResource($customer));
     }
 
     public function edit(Request $request, Customer $customer)
