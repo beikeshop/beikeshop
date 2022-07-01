@@ -19,7 +19,6 @@ class CheckoutController extends Controller
     public function index(Request $request)
     {
         $data = CheckoutService::checkoutData();
-        dd($data);
         return view('checkout', $data);
     }
 }
