@@ -135,14 +135,21 @@
         },
 
         deleteCustomer(url, index) {
-          $.ajax({
-            url: url,
-            type: 'delete',
-            success: function(res) {
-              self.$message.success(res.message);
-              this.customers.splice(index, 1)
-            }
-          })
+          const self = this;
+          this.$confirm('确定要删除用户码？', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            $.ajax({
+              url: url,
+              type: 'delete',
+              success: function(res) {
+                self.$message.success(res.message);
+                self.customers.splice(index, 1)
+              }
+            })
+          }).catch(()=>{})
         },
 
         closeCustomersDialog(form) {
