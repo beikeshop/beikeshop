@@ -11,9 +11,8 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Cart;
-use Beike\Models\Setting;
 use Carbon\Carbon;
+use Beike\Models\Setting;
 
 class SettingRepo
 {
