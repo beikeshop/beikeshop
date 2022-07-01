@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Repositories\PluginRepo;
 use Exception;
 use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
@@ -38,8 +39,8 @@ class PluginController extends Controller
      */
     public function install(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPlugin($code);
-        // dd($plugin);
+        $plugin = (new Manager)->getPluginOrFail($code);
+        PluginRepo::installPlugin($plugin);
         return json_success("安装成功");
     }
 
@@ -52,8 +53,8 @@ class PluginController extends Controller
      */
     public function uninstall(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPlugin($code);
-        // dd($plugin);
+        $plugin = (new Manager)->getPluginOrFail($code);
+        PluginRepo::uninstallPlugin($plugin);
         return json_success("卸载成功");
     }
 
@@ -66,7 +67,7 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code): View
     {
-        $data['plugin'] = (new Manager)->getPlugin($code);
+        $data['plugin'] = (new Manager)->getPluginOrFail($code);
         return view('admin::pages.plugins.form', $data);
     }
 
@@ -79,10 +80,7 @@ class PluginController extends Controller
      */
     public function update(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPlugin($code);
-        if (empty($plugin)) {
-            throw new Exception("无效的插件");
-        }
+        (new Manager)->getPluginOrFail($code);
         $fields = $request->all();
         SettingRepo::update('plugin', $code, $fields);
         return json_success("编辑成功");
@@ -97,10 +95,7 @@ class PluginController extends Controller
      */
     public function updateStatus(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPlugin($code);
-        if (empty($plugin)) {
-            throw new Exception("无效的插件");
-        }
+        (new Manager)->getPluginOrFail($code);
         $status = $request->get('status');
         SettingRepo::update('plugin', $code, ['status' => $status]);
         return json_success("编辑成功");

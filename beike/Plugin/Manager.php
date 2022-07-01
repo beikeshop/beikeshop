@@ -77,6 +77,20 @@ class Manager
     }
 
     /**
+     * 获取单个插件
+     *
+     * @throws \Exception
+     */
+    public function getPluginOrFail($code): ?Plugin
+    {
+        $plugin = $this->getPlugin($code);
+        if (empty($plugin)) {
+            throw new \Exception('无效的插件');
+        }
+        return $plugin;
+    }
+
+    /**
      * 获取插件目录以及配置
      *
      * @return array

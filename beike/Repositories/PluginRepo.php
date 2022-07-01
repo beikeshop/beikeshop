@@ -18,6 +18,43 @@ class PluginRepo
 {
     public static $installedPlugins;
 
+
+    /**
+     * 安装插件到系统: 插入数据
+     * @param $plugin
+     */
+    public static function installPlugin($plugin)
+    {
+        $type = $plugin->type;
+        $code = $plugin->code;
+        $plugin = Plugin::query()
+            ->where('type', $type)
+            ->where('code', $code)
+            ->first();
+        if (empty($plugin)) {
+            Plugin::query()->create([
+                'type' => $type,
+                'code' => $code,
+            ]);
+        }
+    }
+
+
+    /**
+     * 从系统卸载插件: 删除数据
+     * @param $plugin
+     */
+    public static function uninstallPlugin($plugin)
+    {
+        $type = $plugin->type;
+        $code = $plugin->code;
+        Plugin::query()
+            ->where('type', $type)
+            ->where('code', $code)
+            ->delete();
+    }
+
+
     /**
      * 判断插件是否安装
      *
