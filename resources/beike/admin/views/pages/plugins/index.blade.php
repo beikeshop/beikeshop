@@ -13,33 +13,32 @@
             <tr>
               <th>#</th>
               <th>插件类型</th>
-              <th width="55%">插件描述</th>
+              <th width="50%">插件描述</th>
               <th>状态</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="plugin, index in plugins" :key="index" v-if="plugins.length">
-              <td>@{{ plugin->code }}</td>
-              <td>@{{ plugin->type }}</td>
+              <td>@{{ plugin.code }}</td>
+              <td>@{{ plugin.type }}</td>
               <td>
                 <div class="plugin-describe d-flex align-items-center">
-                  <div class="me-2" style="width: 50px;"><img src="@{{ plugin->icon }}" class="img-fluid"></div>
+                  <div class="me-2" style="width: 50px;"><img :src="plugin.icon" class="img-fluid"></div>
                   <div>
-                    <h6>@{{ plugin->name }}</h6>
-                    <div class="" v-html="plugin->description"></div>
+                    <h6>@{{ plugin.name }}</h6>
+                    <div class="" v-html="plugin.description"></div>
                   </div>
                 </div>
               </td>
               <td>
-{{--                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="switch-1"
-                    @{{ plugin->getEnabled() ? 'checked' : '' }} data-code="@{{ plugin->code }}">
-                  <label class="form-check-label" for="switch-1"></label>
-                </div> --}}
+                <el-switch v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code)}"></el-switch>
               </td>
               <td>
-                <a class="btn btn-outline-secondary btn-sm" href="">编辑</a>
+                <a class="btn btn-outline-secondary btn-sm" :href="plugin.edit_url">编辑</a>
+                <a class="btn btn-outline-success btn-sm" @click="installedPlugin(plugin.code, 'install')">安装</a>
+                <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall')">卸载</a>
+                {{-- <el-button type="success" plain size="mini" @click="">安装</el-button> --}}
               </td>
             </tr>
           </tbody>
@@ -63,27 +62,31 @@
       },
 
       methods: {
+        pluginStatusChange(e, code) {
+          const self = this;
 
+          $.ajax({
+            url: `/admin/plugins/${code}/status`,
+            type: 'PUT',
+            data: {status: e * 1},
+            success: function(res) {
+              layer.msg(res.message)
+            },
+          })
+        },
+
+        installedPlugin(code, type) {
+          const self = this;
+
+          $.ajax({
+            url: `/admin/plugins/${code}/${type}`,
+            type: 'post',
+            success: function(res) {
+              layer.msg(res.message)
+            },
+          })
+        }
       }
     })
   </script>
-
-{{--   <script>
-    $('.form-switch input[type="checkbox"]').change(function(event) {
-      const $input = $(this);
-      const checked = $(this).prop('checked') ? 1 : 0;
-      const code = $(this).data('code')
-      $.ajax({
-        url: `/admin/plugins/${code}/status`,
-        type: 'PUT',
-        data: {status: checked},
-        success: function(res) {
-          layer.msg(res.message)
-        },
-        error: function() {
-          $input.prop("checked", false);
-        }
-      })
-    });
-  </script> --}}
 @endpush
