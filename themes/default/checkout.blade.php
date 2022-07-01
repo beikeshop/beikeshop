@@ -207,6 +207,7 @@
             })
           }
 
+          this.countryChange(this.dialogAddress.form.country_id);
           this.dialogAddress.show = true
         },
 

@@ -3,7 +3,7 @@
 @section('title', '顾客管理')
 
 @section('content')
-  <div id="customer-app-form" class="card">
+  <div id="customer-app-form" class="card" v-cloak>
     <div class="card-body">
       <el-form :model="form" :rules="rules" ref="form" label-width="100px">
         <el-tabs v-model="customerTab">

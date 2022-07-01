@@ -32,7 +32,7 @@ class CheckoutService
             'addresses' => $addresses,
             'shipments' => $shipments,
             'country_id' => setting('country_id'),
-            'customer_id' => $customer->id,
+            'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
             'payments' => $payments,
             'carts' => $carts

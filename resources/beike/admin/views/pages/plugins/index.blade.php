@@ -4,7 +4,7 @@
 
 @section('content')
 
-  <div id="plugins-app" class="card">
+  <div id="plugins-app" class="card" v-cloak>
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建插件</a>
       <div class="mt-4" style="">
@@ -19,31 +19,29 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($plugins as $plugin)
-              <tr v-for="plugin, index in plugins" :key="index" v-if="plugins.length">
-                <td>{{ $plugin->code }}</td>
-                <td>{{ $plugin->type }}</td>
-                <td>
-                  <div class="plugin-describe d-flex align-items-center">
-                    <div class="me-2" style="width: 50px;"><img src="{{ $plugin->icon }}" class="img-fluid"></div>
-                    <div>
-                      <h6>{{ $plugin->name }}</h6>
-                      <div class="">{!! $plugin->description !!}</div>
-                    </div>
+            <tr v-for="plugin, index in plugins" :key="index" v-if="plugins.length">
+              <td>@{{ plugin->code }}</td>
+              <td>@{{ plugin->type }}</td>
+              <td>
+                <div class="plugin-describe d-flex align-items-center">
+                  <div class="me-2" style="width: 50px;"><img src="@{{ plugin->icon }}" class="img-fluid"></div>
+                  <div>
+                    <h6>@{{ plugin->name }}</h6>
+                    <div class="" v-html="plugin->description"></div>
                   </div>
-                </td>
-                <td>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switch-1"
-                      {{ $plugin->getEnabled() ? 'checked' : '' }} data-code="{{ $plugin->code }}">
-                    <label class="form-check-label" for="switch-1"></label>
-                  </div>
-                </td>
-                <td>
-                  <a class="btn btn-outline-secondary btn-sm" href="{{ $plugin->getEditUrl() }}">编辑</a>
-                </td>
-              </tr>
-            @endforeach
+                </div>
+              </td>
+              <td>
+{{--                 <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="switch-1"
+                    @{{ plugin->getEnabled() ? 'checked' : '' }} data-code="@{{ plugin->code }}">
+                  <label class="form-check-label" for="switch-1"></label>
+                </div> --}}
+              </td>
+              <td>
+                <a class="btn btn-outline-secondary btn-sm" href="">编辑</a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
