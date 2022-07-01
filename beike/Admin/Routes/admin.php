@@ -31,6 +31,8 @@ Route::prefix('admin')
                 Route::get('plugins/{code}/edit', [\Beike\Admin\Http\Controllers\PluginController::class, 'edit'])->name('plugins.edit');
                 Route::put('plugins/{code}', [\Beike\Admin\Http\Controllers\PluginController::class, 'update'])->name('plugins.update');
                 Route::put('plugins/{code}/status', [\Beike\Admin\Http\Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
+                Route::post('plugins/{code}/install', [\Beike\Admin\Http\Controllers\PluginController::class, 'install'])->name('plugins.install');
+                Route::post('plugins/{code}/uninstall', [\Beike\Admin\Http\Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
                 Route::get('logout', [\Beike\Admin\Http\Controllers\LogoutController::class, 'index'])->name('logout.index');
 

@@ -28,6 +28,31 @@ class PluginController extends Controller
         return view('admin::pages.plugins.index', $data);
     }
 
+    /**
+     * @param Request $request
+     * @param $code
+     * @return View
+     * @throws Exception
+     */
+    public function install(Request $request, $code): View
+    {
+        $plugin = (new Manager)->getPlugin($code);
+        dd($plugin);
+    }
+
+
+    /**
+     * @param Request $request
+     * @param $code
+     * @return View
+     * @throws Exception
+     */
+    public function uninstall(Request $request, $code): View
+    {
+        $plugin = (new Manager)->getPlugin($code);
+        dd($plugin);
+    }
+
 
     /**
      * @param Request $request
