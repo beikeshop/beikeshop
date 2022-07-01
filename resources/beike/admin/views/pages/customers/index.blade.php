@@ -129,6 +129,8 @@
               data: self.dialogCustomers.form,
               success: function(res) {
                 self.$message.success(res.message);
+                self.customers.push(res.data);
+                self.dialogCustomers.show = false
               }
             })
           });
