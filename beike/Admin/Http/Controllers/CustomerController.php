@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerResource;
+use Beike\Admin\Services\CustomerService;
 use Beike\Models\Customer;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
@@ -36,7 +37,8 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $customer = CustomerRepo::create($request->all());
+        $data = $request->only(['email', 'name', 'status', 'customer_group_id']);
+        $customer = CustomerService::create($data);
 
         return json_success('创建成功！', $customer);
     }
@@ -58,11 +60,11 @@ class CustomerController extends Controller
 
     public function update(Request $request, int $customerId)
     {
-        $params = $request->only(['email', 'name', 'status', 'customer_group_id']);
+        $data = $request->only(['email', 'name', 'status', 'customer_group_id']);
         if ($request->get('password')) {
-            $params['password'] = $request->get('password');
+            $data['password'] = $request->get('password');
         }
-        $customer = CustomerRepo::update($customerId, $params);
+        $customer = CustomerRepo::update($customerId, $data);
 
         return json_success('创建成功！', $customer);
     }
