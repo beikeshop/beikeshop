@@ -33,16 +33,24 @@ class ShopServiceProvider extends ServiceProvider
 
     protected function loadSettings()
     {
-        $settings = Setting::all(['name', 'value', 'json'])
-            ->keyBy('name')
-            ->transform(function ($setting) {
-                if ($setting->json) {
-                    return \json_decode($setting->value, true);
+        $settings = Setting::all(['type', 'space', 'name', 'value', 'json'])
+            ->groupBy('space');
+
+        $result = [];
+        foreach ($settings as $space => $groupSettings) {
+            $space = $space ?: 'system';
+            foreach ($groupSettings as $groupSetting) {
+                $name = $groupSetting->name;
+                $value = $groupSetting->value;
+                if ($groupSetting->json) {
+
+                    $result[$space][$name] = json_encode($value);
+                } else {
+                    $result[$space][$name] = $value;
                 }
-                return $setting->value;
-            })
-            ->toArray();
-        config(['bk' => $settings]);
+            }
+        }
+        config(['bk' => $result]);
     }
 
     protected function registerGuard()

@@ -43,11 +43,7 @@ class SettingRepo
 
     public static function getPluginStatus($pluginCode): bool
     {
-        $status = Setting::query()
-            ->where('type', 'plugin')
-            ->where('space', $pluginCode)
-            ->where('name', 'status')
-            ->value('value');
+        $status = setting("bk.{$pluginCode}");
         return (bool)$status;
     }
 
