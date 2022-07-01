@@ -23,7 +23,7 @@ class Customer extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
-    public function group(): BelongsTo
+    public function customerGroup(): BelongsTo
     {
         return $this->belongsTo(CustomerGroup::class);
     }

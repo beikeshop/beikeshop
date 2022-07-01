@@ -21,7 +21,7 @@ class CustomerResource extends JsonResource
             'status' => $this->status ? '启用' : '禁用',
             'avatar' => image_resize($this->avatar),
             'from' => $this->from,
-            'customer_group_name' => $this->customer_group_name ?? $this->group->description->name,
+            'customer_group_name' => $this->customer_group_name ?? $this->customerGroup->description->name,
             'edit' => admin_route('customers.edit', $this->id),
             'delete' => admin_route('customers.destroy', $this->id),
         ];
