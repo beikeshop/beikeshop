@@ -91,5 +91,10 @@ class CustomerRepo
 
         return $builder->paginate(20)->withQueryString();
     }
+
+    public static function restore($id)
+    {
+        Customer::withTrashed()->find($id)->restore();
+    }
 }
 

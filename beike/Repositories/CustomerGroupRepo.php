@@ -22,8 +22,7 @@ class CustomerGroupRepo
      */
     public static function create($data)
     {
-        $id = CustomerGroup::query()->insertGetId($data);
-        return self::find($id);
+        return CustomerGroup::query()->create($data);
     }
 
     /**

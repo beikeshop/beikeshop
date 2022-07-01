@@ -66,19 +66,17 @@ class CustomerController extends Controller
         return json_success('创建成功！', $customer);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, int $customerId)
     {
-        $customerId = $request->id ?? 0;
         CustomerRepo::delete($customerId);
 
-        return ['success' => true];
+        return json_success('删除成功！');
     }
 
-    public function restore(Request $request)
+    public function restore(Request $request, int $customerId)
     {
-        $customerId = $request->id ?? 0;
-        Customer::withTrashed()->find($customerId)->restore();
+        CustomerRepo::restore($customerId);
 
-        return ['success' => true];
+        return json_success('恢复成功！');
     }
 }
