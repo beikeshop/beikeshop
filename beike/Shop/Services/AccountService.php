@@ -12,6 +12,7 @@
 namespace Beike\Shop\Services;
 
 
+use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,9 +22,9 @@ class AccountService
      * 注册用户
      *
      * @param array $data // ['email', 'password']
-     * @return int
+     * @return Customer
      */
-    public static function register(array $data): int
+    public static function register(array $data): Customer
     {
         $data['customer_group_id'] = setting('default_customer_group_id', 1); // default_customer_group_id为默认客户组名称
         $data['status'] = !setting('approve_customer'); // approve_customer为是否需要审核客户
