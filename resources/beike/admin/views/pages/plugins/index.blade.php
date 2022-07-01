@@ -32,13 +32,16 @@
                 </div>
               </td>
               <td>
-                <el-switch v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code)}"></el-switch>
+                <el-switch :disabled="!plugin.installed" v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code)}"></el-switch>
               </td>
               <td>
-                <a class="btn btn-outline-secondary btn-sm" :href="plugin.edit_url">编辑</a>
-                <a class="btn btn-outline-success btn-sm" @click="installedPlugin(plugin.code, 'install')">安装</a>
-                <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall')">卸载</a>
-                {{-- <el-button type="success" plain size="mini" @click="">安装</el-button> --}}
+                <div v-if="plugin.installed">
+                  <a class="btn btn-outline-secondary btn-sm" :href="plugin.edit_url">编辑</a>
+                  <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">卸载</a>
+                </div>
+                <div v-else>
+                  <a class="btn btn-outline-success btn-sm" @click="installedPlugin(plugin.code, 'install', index)">安装</a>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -75,7 +78,7 @@
           })
         },
 
-        installedPlugin(code, type) {
+        installedPlugin(code, type, index) {
           const self = this;
 
           $.ajax({
@@ -83,6 +86,7 @@
             type: 'post',
             success: function(res) {
               layer.msg(res.message)
+              self.plugins[index].installed = true;
             },
           })
         }
