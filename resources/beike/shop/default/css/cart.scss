@@ -9,6 +9,12 @@ body.page-cart {
           vertical-align: middle;
           border-color: #f0f2f4;
         }
+
+        tr {
+          &.active {
+            background-color: #fff6f1;
+          }
+        }
       }
 
       thead {

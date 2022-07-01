@@ -18,6 +18,7 @@ $(document).ready(function ($) {
     }
   });
   $('.quantity-wrap .right i').on('click', function (event) {
+    event.stopPropagation();
     var input = $(this).parent().siblings('input');
 
     if ($(this).hasClass('bi-chevron-up')) {

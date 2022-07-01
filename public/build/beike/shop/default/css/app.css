@@ -104,6 +104,7 @@
   height: 17px;
   text-align: center;
   cursor: pointer;
+  background-color: #fff;
 }
 .quantity-wrap > .right i:last-of-type {
   border-top: 1px solid #ced4da;
@@ -428,6 +429,9 @@ body.page-cart .cart-products-wrap .table tbody {
 body.page-cart .cart-products-wrap .table tbody td {
   vertical-align: middle;
   border-color: #f0f2f4;
+}
+body.page-cart .cart-products-wrap .table tbody tr.active {
+  background-color: #fff6f1;
 }
 body.page-cart .cart-products-wrap .table thead {
   background-color: #F8F9FA;

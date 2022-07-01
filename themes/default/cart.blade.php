@@ -40,10 +40,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="product, index in products" :key="index">
+              <tr v-for="product, index in products" :key="index" @click="checkedCartTr(index)"
+                :class="product.selected ? 'active' : ''">
                 <td>
                   <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" @change="selectedBtnSelected" type="checkbox" v-model="product.selected">
+                    <input class="form-check-input" type="checkbox" v-model="product.selected">
                     <img :src="product.image" class="img-fluid">
                   </div>
                 </td>
@@ -75,7 +76,8 @@
           <div class="card-header"><h5 class="mb-0">商品总计</h5></div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><span>总数</span><span>@{{ total_quantity }}</span></li>
+              <li class="list-group-item"><span>全部</span><span>@{{ products.length }}</span></li>
+              <li class="list-group-item"><span>已选</span><span>@{{ total_quantity }}</span></li>
               <li class="list-group-item border-bottom-0"><span>总价</span><span class="total-price">@{{ amount_format }}</span></li>
               <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
                 {{-- <a href="{{ shop_route('checkout.index', 'checkout') }}" class="btn btn-primary">去结账</a> --}}
@@ -149,6 +151,11 @@
               self.setUpdateData(res);
             }
           })
+        },
+
+        checkedCartTr(index) {
+          this.products[index].selected = !this.products[index].selected;
+          this.selectedBtnSelected();
         },
 
         selectedBtnSelected() {

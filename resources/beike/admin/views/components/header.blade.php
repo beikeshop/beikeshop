@@ -1,8 +1,8 @@
 <div class="header-wrap">
   <div class="header-left">
     <div class="logo">
-      {{-- <img src="http://dummyimage.com/200x50" class="img-fluid"> --}}
-      <div class="text-center"><h5 class="mb-0">beike admin</h5></div>
+      <img src="{{ asset('image/logo.png') }}" class="img-fluid">
+      {{-- <div class="text-center"><h5 class="mb-0">beike admin</h5></div> --}}
     </div>
   </div>
   <div class="header-right">

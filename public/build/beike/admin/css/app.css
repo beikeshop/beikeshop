@@ -46,7 +46,7 @@ body {
 }
 .main-content > #content {
   flex: 1;
-  padding: 1rem;
+  padding: 1rem 1rem 4rem;
   overflow-y: auto;
 }
 @media screen and (max-width: 991px) {
@@ -224,6 +224,12 @@ body.page-seller-product .share-link-pop .share-links-code img {
 }
 .header-wrap .header-left {
   width: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-wrap .header-left .logo {
+  max-width: 76%;
 }
 .header-wrap .header-right {
   display: flex;

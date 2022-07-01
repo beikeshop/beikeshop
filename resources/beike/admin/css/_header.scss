@@ -17,6 +17,14 @@
 
   .header-left {
     width: 190px;
+    display: flex;
+    align-items: center; // flex-start | center
+    justify-content: center; // flex-end | center | space-between
+    // flex-wrap: wrap;
+
+    .logo {
+      max-width: 76%;
+    }
   }
 
   .header-right {
