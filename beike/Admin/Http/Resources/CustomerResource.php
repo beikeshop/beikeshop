@@ -22,7 +22,7 @@ class CustomerResource extends JsonResource
             'avatar' => image_resize($this->avatar),
             'from' => $this->from,
             'customer_group_name' => $this->customer_group_name,
-            'edit' => admin_route('customers.update', $this->id),
+            'edit' => admin_route('customers.edit', $this->id),
             'delete' => admin_route('customers.destroy', $this->id),
         ];
 

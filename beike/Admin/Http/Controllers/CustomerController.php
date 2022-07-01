@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\CustomerRequest;
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerService;
 use Beike\Models\Customer;
@@ -35,7 +36,7 @@ class CustomerController extends Controller
         return view('admin::pages.customers.index', $data);
     }
 
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         $data = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
         $customer = CustomerService::create($data);
@@ -58,7 +59,7 @@ class CustomerController extends Controller
         return view('admin::pages.customers.form', $data);
     }
 
-    public function update(Request $request, int $customerId)
+    public function update(CustomerRequest $request, int $customerId)
     {
         $data = $request->only(['email', 'name', 'status', 'customer_group_id']);
         if ($request->get('password')) {
