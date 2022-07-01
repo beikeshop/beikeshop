@@ -29,6 +29,7 @@ Route::prefix('/')
         Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
 
         Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');

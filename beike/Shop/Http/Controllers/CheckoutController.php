@@ -21,4 +21,11 @@ class CheckoutController extends Controller
         $data = CheckoutService::checkoutData();
         return view('checkout', $data);
     }
+
+    public function update(Request $request)
+    {
+        $requestData = $request->all();
+        $data = CheckoutService::update($requestData);
+        return view('checkout', $data);
+    }
 }

@@ -20,6 +20,11 @@ use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
 
 class CheckoutService
 {
+    /**
+     * 获取结账页数据
+     *
+     * @return array
+     */
     public static function checkoutData(): array
     {
         $customer = current_customer();
@@ -47,5 +52,52 @@ class CheckoutService
             'carts' => $carts
         ];
         return $data;
+    }
+
+    /**
+     * 更新结账页数据
+     *
+     * @param $requestData ['shipping_address_id'=>1, 'payment_address_id'=>2, 'shipping_method'=>'code', 'payment_method'=>'code']
+     * @return array
+     */
+    public static function update($requestData): array
+    {
+        $shippingAddressId = $requestData['shipping_address_id'] ?? 0;
+        $paymentAddressId = $requestData['payment_address_id'] ?? 0;
+        $shippingMethod = $requestData['shipping_method'] ?? '';
+        $paymentMethod = $requestData['payment_method'] ?? '';
+        if ($shippingAddressId) {
+            self::updateShippingAddressId($shippingAddressId);
+        }
+        if ($paymentAddressId) {
+            self::updatePaymentAddressId($shippingAddressId);
+        }
+        if ($shippingMethod) {
+            self::updateShippingMethod($shippingMethod);
+        }
+        if ($paymentMethod) {
+            self::updatePaymentMethod($paymentMethod);
+        }
+        return self::checkoutData();
+    }
+
+    private static function updateShippingAddressId($shippingAddressId)
+    {
+
+    }
+
+    private static function updatePaymentAddressId($shippingAddressId)
+    {
+
+    }
+
+    private static function updateShippingMethod($shippingAddressId)
+    {
+
+    }
+
+    private static function updatePaymentMethod($paymentMethod)
+    {
+
     }
 }
