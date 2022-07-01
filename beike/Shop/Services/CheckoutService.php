@@ -30,7 +30,7 @@ class CheckoutService
         $carts = CartService::reloadData($cartList);
 
         $data = [
-            'country_id' => setting('country_id'),
+            'country_id' => (int)setting('country_id'),
             'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
             'addresses' => $addresses,
