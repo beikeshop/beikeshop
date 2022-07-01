@@ -37,7 +37,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->only(['email', 'name', 'status', 'customer_group_id']);
+        $data = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
         $customer = CustomerService::create($data);
 
         return json_success('创建成功！', $customer);
