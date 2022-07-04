@@ -120,7 +120,7 @@ class CheckoutService
                 'payment_address_id' => $this->cart->payment_address_id,
                 'payment_method_code' => $this->cart->payment_method_code,
             ],
-            'country_id' => (int)setting('country_id'),
+            'country_id' => (int)setting('system.country_id'),
             'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
             'addresses' => $addresses,
