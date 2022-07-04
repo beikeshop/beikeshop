@@ -11,21 +11,86 @@
 
 namespace Beike\Shop\Services;
 
-use Beike\Repositories\AddressRepo;
+use Beike\Models\Cart;
+use Beike\Models\Customer;
 use Beike\Repositories\PluginRepo;
-use Beike\Repositories\SettingRepo;
+use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
 use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
 
 class CheckoutService
 {
+    private $customer;
+    private $cart;
+
+    public function __construct($customer = null)
+    {
+        if (is_int($customer) || empty($customer)) {
+            $this->customer = current_customer();
+        }
+        if (empty($this->customer) && !($this->customer instanceof Customer)) {
+            throw new \Exception("购物车客户无效");
+        }
+        $this->cart = Cart::query()
+            ->where('customer_id', $customer->id)
+            ->firstOrCreate();
+    }
+
+    /**
+     * 更新结账页数据
+     *
+     * @param $requestData ['shipping_address_id'=>1, 'payment_address_id'=>2, 'shipping_method'=>'code', 'payment_method'=>'code']
+     * @return array
+     */
+    public function update($requestData): array
+    {
+        $shippingAddressId = $requestData['shipping_address_id'] ?? 0;
+        $paymentAddressId = $requestData['payment_address_id'] ?? 0;
+        $shippingMethod = $requestData['shipping_method'] ?? '';
+        $paymentMethod = $requestData['payment_method'] ?? '';
+        if ($shippingAddressId) {
+            $this->updateShippingAddressId($shippingAddressId);
+        }
+        if ($paymentAddressId) {
+            $this->updatePaymentAddressId($shippingAddressId);
+        }
+        if ($shippingMethod) {
+            $this->updateShippingMethod($shippingMethod);
+        }
+        if ($paymentMethod) {
+            $this->updatePaymentMethod($paymentMethod);
+        }
+        return $this->checkoutData();
+    }
+
+
+    private function updateShippingAddressId($shippingAddressId)
+    {
+        $this->cart->update(['shipping_address_id', $shippingAddressId]);
+    }
+
+    private function updatePaymentAddressId($paymentAddressId)
+    {
+        $this->cart->update(['payment_address_id', $paymentAddressId]);
+    }
+
+    private function updateShippingMethod($shippingMethod)
+    {
+        $this->cart->update(['shipping_method_code', $shippingMethod]);
+    }
+
+    private function updatePaymentMethod($paymentMethod)
+    {
+        $this->cart->update(['payment_method_code', $paymentMethod]);
+    }
+
     /**
      * 获取结账页数据
      *
      * @return array
      */
-    public static function checkoutData(): array
+    public function checkoutData(): array
     {
         $customer = current_customer();
 
@@ -52,52 +117,5 @@ class CheckoutService
             'carts' => $carts
         ];
         return $data;
-    }
-
-    /**
-     * 更新结账页数据
-     *
-     * @param $requestData ['shipping_address_id'=>1, 'payment_address_id'=>2, 'shipping_method'=>'code', 'payment_method'=>'code']
-     * @return array
-     */
-    public static function update($requestData): array
-    {
-        $shippingAddressId = $requestData['shipping_address_id'] ?? 0;
-        $paymentAddressId = $requestData['payment_address_id'] ?? 0;
-        $shippingMethod = $requestData['shipping_method'] ?? '';
-        $paymentMethod = $requestData['payment_method'] ?? '';
-        if ($shippingAddressId) {
-            self::updateShippingAddressId($shippingAddressId);
-        }
-        if ($paymentAddressId) {
-            self::updatePaymentAddressId($shippingAddressId);
-        }
-        if ($shippingMethod) {
-            self::updateShippingMethod($shippingMethod);
-        }
-        if ($paymentMethod) {
-            self::updatePaymentMethod($paymentMethod);
-        }
-        return self::checkoutData();
-    }
-
-    private static function updateShippingAddressId($shippingAddressId)
-    {
-
-    }
-
-    private static function updatePaymentAddressId($shippingAddressId)
-    {
-
-    }
-
-    private static function updateShippingMethod($shippingAddressId)
-    {
-
-    }
-
-    private static function updatePaymentMethod($paymentMethod)
-    {
-
     }
 }

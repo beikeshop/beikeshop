@@ -18,14 +18,14 @@ class CheckoutController extends Controller
 {
     public function index(Request $request)
     {
-        $data = CheckoutService::checkoutData();
+        $data = (new CheckoutService)->checkoutData();
         return view('checkout', $data);
     }
 
     public function update(Request $request)
     {
         $requestData = $request->all();
-        $data = CheckoutService::update($requestData);
+        $data = (new CheckoutService)->update($requestData);
         return view('checkout', $data);
     }
 }
