@@ -12,9 +12,10 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Shop\Http\Controllers\Controller;
-use Beike\Shop\Http\Resources\CustomerResource;
+use Beike\Shop\Http\Requests\AddressRequest;
+use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Repositories\AddressRepo;
-use Beike\Repositories\CustomerRepo;
+use Beike\Shop\Services\AddressService;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -23,28 +24,36 @@ class AddressController extends Controller
     {
         $addresses = AddressRepo::listByCustomer(current_customer());
         $data = [
-            'addresses' => CustomerResource::collection($addresses),
+            'addresses' => AddressResource::collection($addresses),
         ];
 
         return view('account/address', $data);
     }
 
-    public function store(Request $request)
+    public function show(Request $request, $id)
     {
-        $data = $request->only(['name', 'phone', 'country_id', 'state_id', 'state', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']);
-        $data['customer_id'] = current_customer()->customer_id;
-        return AddressRepo::create($data);
+        $address = AddressRepo::find($id);
+
+        return json_success('获取成功', new AddressResource($address));
     }
 
-    public function update(Request $request, int $addressId)
+    public function store(AddressRequest $request)
     {
-        return AddressRepo::update($addressId, $request->only(['name', 'phone', 'country_id', 'state_id', 'state', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']));
+        $data = $request->only(['name', 'phone', 'country_id', 'zone_id', 'zone', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']);
+        $address = AddressService::create($data);
+        return json_success('创建成功', new AddressResource($address));
     }
 
-    public function destroy(Request $request, int $addressId)
+    public function update(AddressRequest $request, int $id)
     {
-        AddressRepo::delete($addressId);
+        $address = AddressRepo::update($id, $request->only(['name', 'phone', 'country_id', 'zone_id', 'zone', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']));
+        return json_success('更新成功', new AddressResource($address));
+    }
 
-        return ['success' => true];
+    public function destroy(Request $request, int $id)
+    {
+        AddressRepo::delete($id);
+
+        return json_success('删除成功');
     }
 }

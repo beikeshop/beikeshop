@@ -47,7 +47,7 @@ class ZoneRepo
      */
     public static function find($id)
     {
-        return Zone::query()->find($id);
+        return Zone::query()->findOrFail($id);
     }
 
     /**

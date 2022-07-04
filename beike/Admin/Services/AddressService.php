@@ -15,6 +15,7 @@ use Beike\Models\Category;
 use Beike\Models\CategoryPath;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CustomerRepo;
+use Beike\Repositories\ZoneRepo;
 use Illuminate\Support\Facades\DB;
 
 class AddressService
@@ -45,7 +46,7 @@ class AddressService
             'phone' => $data['phone'] ?? '',
             'country_id' => (int)$data['country_id'] ?? 0,
             'zone_id' => (int)$data['zone_id'] ?? 0,
-            'zone' => $data['zone'] ?? '',
+            'zone' => ZoneRepo::find($data['zone_id'])->name,
             'city_id' => (int)$data['city_id'] ?? 0,
             'city' => $data['city'] ?? '',
             'zipcode' => $data['zipcode'] ?? '',

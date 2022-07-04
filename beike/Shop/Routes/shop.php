@@ -43,11 +43,12 @@ Route::prefix('/')
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
-        Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
+        Route::prefix('account/')
+            ->middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
-                Route::get('account', [AccountController::class, 'index'])->name('account.index');
+                Route::get('/', [AccountController::class, 'index'])->name('account.index');
 
-                Route::resource('account/addresses', AddressController::class);
+                Route::resource('addresses', AddressController::class);
             });
 
         Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
