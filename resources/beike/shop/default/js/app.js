@@ -1,3 +1,9 @@
+const instance = axios.create({
+  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+  // baseURL: 'https://api.example.com'
+});
+
+
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

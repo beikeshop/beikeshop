@@ -3,6 +3,12 @@ var __webpack_exports__ = {};
 /*!************************************************!*\
   !*** ./resources/beike/shop/default/js/app.js ***!
   \************************************************/
+var instance = axios.create({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  } // baseURL: 'https://api.example.com'
+
+});
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {

@@ -2,8 +2,15 @@
 
 @section('body-class', 'page-login')
 
+@push('header')
+  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+@endpush
+
+
 @section('content')
-  <div class="container">
+  <div class="container" id="page-login" v-cloak>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb justify-content-center">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -14,46 +21,30 @@
     <div class="justify-content-center row mb-5">
       <div class="col-lg-5">
         <div class="card">
-          <div class="login-item-header card-header">
-            <h6 class="text-uppercase mb-0">Login</h6>
-          </div>
-          <div class="card-body">
-            <p class="lead">Already our customer?</p>
-            <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-              egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
-              amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-            <hr>
+          <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
+            <div class="login-item-header card-header">
+              <h6 class="text-uppercase mb-0">Login</h6>
+            </div>
+            <div class="card-body">
+              <p class="lead">Already our customer?</p>
+              <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+                egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+              <hr>
 
-            <form action="{{ route('shop.login.store') }}" method="post">
-              @csrf
+              <el-form-item label="邮箱" prop="email">
+                <el-input v-model="loginForm.email" placeholder="邮箱地址"></el-input>
+              </el-form-item>
 
-              <div class="mb-4">
-                <label class="form-label" for="email_1">Email</label>
-                <input type="text" name="login[email]" class="form-control" value="{{ old('login.email') }}" placeholder="邮箱地址">
-                @error('login.email')
-                  <x-admin::form.error :message="$message" />
-                @enderror
+              <el-form-item label="密码" prop="password">
+                <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
+              </el-form-item>
+
+              <div class="mt-5 mb-3">
+                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> 登录</button>
               </div>
-
-              <div class="mb-4">
-                <label class="form-label" for="email_1">Password</label>
-                <input type="password" name="login[password]" class="form-control" placeholder="密码">
-                @error('login.password')
-                  <x-admin::form.error :message="$message" />
-                @enderror
-              </div>
-
-              @if (session('error'))
-                <div class="alert alert-success">
-                  {{ session('error') }}
-                </div>
-              @endif
-
-              <div class="mb-4">
-                <button type="submit" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> 登录</button>
-              </div>
-            </form>
-          </div>
+            </div>
+          </el-form>
         </div>
       </div>
       <div class="col-lg-5">
@@ -69,46 +60,98 @@
               customer service center is working for you 24/7.</p>
               <hr>
 
-              <form action="{{ route('shop.register.store') }}" method="post">
-                @csrf
+              <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
+                <el-form-item label="邮箱" prop="email">
+                  <el-input v-model="registerForm.email" placeholder="邮箱地址"></el-input>
+                </el-form-item>
 
-                <div class="mb-4">
-                  <label class="form-label" for="name">邮箱</label>
-                  <input type="text" name="register[email]" class="form-control" value="{{ old('register.email') }}" placeholder="邮箱地址">
-                  @error('register.email')
-                    <x-admin::form.error :message="$message" />
-                  @enderror
+                <el-form-item label="密码" prop="password">
+                  <el-input type="password" v-model="registerForm.password" placeholder="密码"></el-input>
+                </el-form-item>
+
+                <el-form-item label="确认密码" prop="password_confirmation">
+                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="确认密码"></el-input>
+                </el-form-item>
+
+
+                <div class="mt-5 mb-3">
+                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> 注册</button>
                 </div>
-
-                <div class="mb-4">
-                  <label class="form-label" for="name">密码</label>
-                  <input type="password" name="register[password]" class="form-control" placeholder="密码">
-                  @error('register.password')
-                    <x-admin::form.error :message="$message" />
-                  @enderror
-                </div>
-
-                <div class="mb-4">
-                  <label class="form-label" for="name">确认密码</label>
-                  <input type="password" name="register[password_confirmation]" class="form-control" placeholder="密码">
-                  @error('register.password_confirmation')
-                    <x-admin::form.error :message="$message" />
-                  @enderror
-                </div>
-
-                @if (session('error'))
-                  <div class="alert alert-success">
-                    {{ session('error') }}
-                  </div>
-                @endif
-
-                <div class="mb-4">
-                  <button type="submit" class="btn btn-outline-dark"><i class="bi bi-person"></i> 注册</button>
-                </div>
-              </form>
+              </el-form>
           </div>
         </div>
       </div>
     </div>
   </div>
 @endsection
+
+@push('add-scripts')
+  <script>
+    new Vue({
+      el: '#page-login',
+
+      data: {
+        loginForm: {
+          email: '',
+          password: '',
+        },
+
+        registerForm: {
+          email: '',
+          password: '',
+          password_confirmation: '',
+        },
+
+        loginRules: {
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
+            {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ]
+        },
+
+        registeRules: {
+          email: [
+            {required: true, message: '请输入邮箱', trigger: 'blur'},
+            {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ],
+          password_confirmation: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ]
+        }
+      },
+
+      beforeMount () {
+      },
+
+      methods: {
+        checkedBtnLogin(form) {
+          let _data = this.loginForm, url = '/login'
+
+          if (form == 'registerForm') {
+            _data = this.registerForm, url = '/register'
+          }
+
+          this.$refs[form].validate((valid) => {
+            if (!valid) {
+              layer.msg('请检查表单是否填写正确', () =>{})
+              return;
+            }
+
+            axios.post(url, _data).then((res) => {
+              this.$message.success(res.data.message);
+              location = "{{ shop_route('account.index') }}"
+            }).catch(function (error) {
+              layer.msg(error.message, () =>{})
+            });
+          });
+        }
+      }
+    })
+  </script>
+@endpush

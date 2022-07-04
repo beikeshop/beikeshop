@@ -655,3 +655,7 @@ body.page-checkout .radio-line-wrap .radio-line-item .right .title {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
+.el-input__inner {
+  border-radius: 0 !important;
+}

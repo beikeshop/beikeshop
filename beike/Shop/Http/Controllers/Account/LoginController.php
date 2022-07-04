@@ -29,12 +29,10 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
-        $credentials = $request->only('login');
-
-        if (!auth(Customer::AUTH_GUARD)->attempt($credentials['login'])) {
+        if (!auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
             throw new \Exception("账号密码错误！");
         }
 
-        json_success("登录成功!");
+        return json_success("登录成功!");
     }
 }
