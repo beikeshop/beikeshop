@@ -4,6 +4,14 @@ body.page-checkout {
   .checkout-black {
     margin-bottom: 2.6rem;
   }
+
+  .right-column {
+    position: relative;
+    @media (min-width: 992px) {
+      padding-left: 2rem;
+    }
+  }
+
   .checkout-title {
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 16px;

@@ -42,21 +42,41 @@ $(document).ready(function ($) {
     var totalWrapWidth = $('.fixed-top-line').outerWidth();
     var totalWrapHeight = $('.fixed-top-line').outerHeight();
     var totalWrapLeft = $('.fixed-top-line').offset().left;
+    var footerTop = $('footer').offset().top;
+    var footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
     $(window).scroll(function () {
       if ($(this).scrollTop() > totalWrapTop) {
-        $('.fixed-top-line').addClass('fixed-top-line-fixed').css({
-          'left': totalWrapLeft,
+        $('.fixed-top-line').css({
+          position: 'fixed',
+          top: 0,
+          bottom: 'auto',
           'width': totalWrapWidth
         });
-        if ($('.total-old').length > 0) return;
-        $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
+
+        if (!$('.total-old').length) {
+          $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
+        }
+
+        if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
+          $('.fixed-top-line').css({
+            position: 'absolute',
+            top: 'auto',
+            bottom: '0',
+            'width': totalWrapWidth
+          });
+        }
       } else {
         $('.total-old').remove();
-        $('.fixed-top-line').removeClass('fixed-top-line-fixed').css({
-          'left': 0,
-          'width': 'auto'
-        });
-      }
+        $('.fixed-top-line').removeAttr('style');
+      } // if ($(this).scrollTop() > totalWrapTop) {
+      //   $('.fixed-top-line').addClass('fixed-top-line-fixed').css({'left': totalWrapLeft, 'width': totalWrapWidth})
+      //   if ($('.total-old').length > 0) return;
+      //   $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
+      // } else {
+      //   $('.total-old').remove();
+      //   $('.fixed-top-line').removeClass('fixed-top-line-fixed').css({'left': 0, 'width': 'auto'})
+      // }
+
     });
   })(window.jQuery);
 });

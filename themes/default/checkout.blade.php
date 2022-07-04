@@ -85,7 +85,7 @@
         </div>
       </div>
 
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-4 right-column">
         <div class="card total-wrap fixed-top-line">
           <div class="card-header"><h5 class="mb-0">CART TOTALS</h5></div>
           <div class="card-body">
