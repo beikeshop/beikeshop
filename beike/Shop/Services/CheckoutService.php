@@ -46,20 +46,23 @@ class CheckoutService
     public function update($requestData): array
     {
         $shippingAddressId = $requestData['shipping_address_id'] ?? 0;
+        $shippingMethodCode = $requestData['shipping_method_code'] ?? '';
+
         $paymentAddressId = $requestData['payment_address_id'] ?? 0;
-        $shippingMethod = $requestData['shipping_method'] ?? '';
-        $paymentMethod = $requestData['payment_method'] ?? '';
+        $paymentMethodCode = $requestData['payment_method_code'] ?? '';
+
         if ($shippingAddressId) {
             $this->updateShippingAddressId($shippingAddressId);
         }
+        if ($shippingMethodCode) {
+            $this->updateShippingMethod($shippingMethodCode);
+        }
+
         if ($paymentAddressId) {
             $this->updatePaymentAddressId($shippingAddressId);
         }
-        if ($shippingMethod) {
-            $this->updateShippingMethod($shippingMethod);
-        }
-        if ($paymentMethod) {
-            $this->updatePaymentMethod($paymentMethod);
+        if ($paymentMethodCode) {
+            $this->updatePaymentMethod($paymentMethodCode);
         }
         return $this->checkoutData();
     }
@@ -85,14 +88,14 @@ class CheckoutService
         $this->cart->update(['payment_address_id' => $paymentAddressId]);
     }
 
-    private function updateShippingMethod($shippingMethod)
+    private function updateShippingMethod($shippingMethodCode)
     {
-        $this->cart->update(['shipping_method_code' => $shippingMethod]);
+        $this->cart->update(['shipping_method_code' => $shippingMethodCode]);
     }
 
-    private function updatePaymentMethod($paymentMethod)
+    private function updatePaymentMethod($paymentMethodCode)
     {
-        $this->cart->update(['payment_method_code' => $paymentMethod]);
+        $this->cart->update(['payment_method_code' => $paymentMethodCode]);
     }
 
     /**
