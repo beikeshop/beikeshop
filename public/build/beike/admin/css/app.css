@@ -447,3 +447,47 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 .el-tabs__item {
   padding: 0 10px;
 }
+
+body.page-login {
+  background-image: url("/image/login-bg.svg");
+  background-size: cover;
+  background-position: 50%;
+}
+body.page-login .form-text.text-danger {
+  font-size: 0.8rem;
+}
+body.page-login.seller-register .form-group, body.page-login.password-reset .form-group {
+  margin-bottom: 1.5rem;
+}
+body.page-login.seller-register .form-group label, body.page-login.password-reset .form-group label {
+  display: none;
+}
+body.page-login .card {
+  box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  body.page-login .card .w-480 {
+    width: 420px;
+    margin: 2rem 0;
+  }
+}
+body.page-login button[type=submit] {
+  font-size: 1rem;
+  background-image: linear-gradient(310deg, #fd560f, #fdb504);
+  border: none;
+}
+body.page-login .btn:not(.btn-link) {
+  padding: 0.7rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.15s ease-in;
+  box-shadow: 0 4px 7px -1px rgba(0, 0, 0, 0.11), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+}
+body.page-login .btn:not(.btn-link):hover {
+  transform: scale(1.02);
+  color: #fff;
+}
