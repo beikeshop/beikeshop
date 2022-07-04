@@ -12,6 +12,7 @@
 namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -24,4 +25,9 @@ class Order extends Model
         'payment_calling_code', 'payment_telephone', 'payment_country', 'payment_zone', 'payment_city',
         'payment_address_1', 'payment_address_2',
     ];
+
+    public function orderProducts(): HasMany
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }

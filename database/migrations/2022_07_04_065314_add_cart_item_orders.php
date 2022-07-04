@@ -68,7 +68,7 @@ class AddCartItemOrders extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('orders_products', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
             $table->integer('order_id');
             $table->integer('product_id');

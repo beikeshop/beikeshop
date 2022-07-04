@@ -77,7 +77,7 @@ class OrderRepo
         ]);
         $order->saveOrFail();
 
-        // OrderProductRepo::create($order);
+        OrderProductRepo::create($order, $carts['carts']);
         // OrderHistoryRepo::create($order);
 
         return $order;
@@ -91,7 +91,7 @@ class OrderRepo
      */
     public static function generateOrderNumber(): string
     {
-        $orderNumber = Carbon::now()->format('Ymd') . rand(10000, 9999);
+        $orderNumber = Carbon::now()->format('Ymd') . rand(10000, 99999);
         $exist = Order::query()->where('number', $orderNumber)->exists();
         if ($exist) {
             return self::generateOrderNumber();
