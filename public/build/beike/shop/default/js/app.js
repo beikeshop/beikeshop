@@ -122,24 +122,22 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
     }
 
     return new Promise(function (resolve, reject) {
-      // axios({method: method, url: url, data: QS.stringify(params)}).then((res) => {
       axios(_defineProperty({
         method: method,
         url: url
       }, method == 'get' ? 'params' : 'data', params)).then(function (res) {
         if (res) {
-          resolve(res);
+          resolve(res.data);
         } else {
           // 其他情况返回错误信息，根据需要处理
-          reject(res);
+          reject(res.data);
           if (!hmsg) return layer.msg(res.data.message, function () {});
         }
       })["catch"](function (res) {
-        console.log(res);
         reject(res);
 
         if (!hmsg && res.message) {
-          layer.msg(res.message, function () {});
+          layer.msg(res.response.data.message, function () {});
         }
       })["finally"](function () {
         layer.closeAll('loading');

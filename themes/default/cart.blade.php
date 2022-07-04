@@ -63,7 +63,7 @@
                 </td>
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
-                  <button type="button" class="btn btn-link btn-sm" @click="checkedBtnDelete(product.cart_id)">删除</button><br>
+                  <button type="button" class="btn btn-link btn-sm" @click.stop="checkedBtnDelete(product.cart_id)">删除</button><br>
                   <button type="button" class="btn btn-link btn-sm">加入收藏</button>
                 </td>
               </tr>
@@ -131,25 +131,16 @@
 
         quantityChange(quantity, cart_id) {
           const self = this;
-          $.ajax({
-            url: `/carts/${cart_id}`,
-            type: 'PUT',
-            data: {quantity: quantity,},
-            success: function(res) {
-              self.setUpdateData(res);
-            }
+          $http.put(`/carts/${cart_id}`, {quantity: quantity}).then((res) => {
+            this.setUpdateData(res);
           })
         },
 
         checkedBtnDelete(cart_id) {
           const self = this;
 
-          $.ajax({
-            url: `/carts/${cart_id}`,
-            type: 'DELETE',
-            success: function(res) {
-              self.setUpdateData(res);
-            }
+          $http.delete(`/carts/${cart_id}`).then((res) => {
+            this.setUpdateData(res);
           })
         },
 
@@ -162,13 +153,8 @@
           const self = this;
           const cart_ids = this.products.filter(e => e.selected).map(x => x.cart_id)
 
-          $.ajax({
-            url: `/carts/select`,
-            type: 'POST',
-            data: {cart_ids: cart_ids},
-            success: function(res) {
-              self.setUpdateData(res);
-            }
+          $http.post(`/carts/select`, {cart_ids: cart_ids}).then((res) => {
+            this.setUpdateData(res);
           })
         },
 
@@ -180,11 +166,6 @@
       },
       // 实例被挂载后调用
       mounted () {
-        // if (this.products.length) {
-        //   this.products.forEach((e) => {
-        //     this.$set(e, 'selected', false)
-        //   })
-        // }
       },
     })
   </script>

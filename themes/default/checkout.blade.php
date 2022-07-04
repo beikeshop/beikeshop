@@ -241,7 +241,7 @@
             }
 
             const type = this.dialogAddress.form.id ? 'put' : 'post';
-            const url = `/admin/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`;
+            const url = `/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`;
 
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
@@ -269,22 +269,26 @@
         countryChange(e) {
           const self = this;
 
-          $http.get(`/admin/countries/${e}/zones`).then((res) => {
-            this.source.zones = res.data.data.zones;
+          $http.get(`/countries/${e}/zones`).then((res) => {
+            this.source.zones = res.zones;
           })
         },
 
         updateCheckout(id, key) {
+          if (this.form[key] === id) {
+            return
+          }
+
           this.form[key] = id
 
           $http.put('/checkout', this.form).then((res) => {
-            this.form = res.data.current
+            this.form = res.current
           })
         },
 
         checkedBtnCheckoutConfirm() {
           $http.post('/checkout/confirm', this.form).then((res) => {
-            console.log(res)
+            {{-- location = '{{ shop_route("orders.index", [1]) }}' --}}
           })
         }
       }
