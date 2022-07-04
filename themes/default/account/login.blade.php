@@ -139,16 +139,14 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              layer.msg('请检查表单是否填写正确', () =>{})
+              layer.msg('请检查表单是否填写正确', () => {})
               return;
             }
 
-            axios.post(url, _data).then((res) => {
+            $http.post(url, _data).then((res) => {
               this.$message.success(res.data.message);
               location = "{{ shop_route('account.index') }}"
-            }).catch(function (error) {
-              layer.msg(error.message, () =>{})
-            });
+            })
           });
         }
       }

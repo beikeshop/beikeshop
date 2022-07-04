@@ -1,8 +1,10 @@
-const instance = axios.create({
-  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-  // baseURL: 'https://api.example.com'
-});
+// const instance = axios.create({
+//   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+//   // baseURL: 'https://api.example.com'
+// });
 
+import http from "./http";
+window.$http = http;
 
 $(document).ready(function ($) {
   $.ajaxSetup({
