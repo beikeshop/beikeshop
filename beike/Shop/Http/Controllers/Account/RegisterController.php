@@ -28,7 +28,10 @@ class RegisterController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        AccountService::register($request->only('email', 'password'));
+        $credentials = $request->only('email', 'password');
+
+        AccountService::register($credentials);
+        auth(Customer::AUTH_GUARD)->attempt($credentials);
 
         return json_success("注册成功，您现在可以使用您的账号登录网站!");
     }
