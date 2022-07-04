@@ -13,6 +13,7 @@ namespace Beike\Shop\Services;
 
 use Beike\Models\Cart;
 use Beike\Models\Customer;
+use Beike\Repositories\CartRepo;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
@@ -29,12 +30,10 @@ class CheckoutService
         if (is_int($customer) || empty($customer)) {
             $this->customer = current_customer();
         }
-        if (empty($this->customer) && !($this->customer instanceof Customer)) {
+        if (empty($this->customer) || !($this->customer instanceof Customer)) {
             throw new \Exception("购物车客户无效");
         }
-        $this->cart = Cart::query()
-            ->where('customer_id', $customer->id)
-            ->firstOrCreate();
+        $this->cart = CartRepo::createCart($this->customer->id);
     }
 
     /**

@@ -19,9 +19,9 @@ class AddCartItemOrders extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->integer('shipping_address_id');
-            $table->integer('shipping_method_code');
+            $table->string('shipping_method_code');
             $table->integer('payment_address_id');
-            $table->integer('payment_method_code');
+            $table->string('payment_method_code');
             $table->timestamps();
         });
 
