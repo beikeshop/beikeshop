@@ -270,7 +270,7 @@
           const self = this;
 
           $http.get(`/countries/${e}/zones`).then((res) => {
-            this.source.zones = res.zones;
+            this.source.zones = res.data.zones;
           })
         },
 

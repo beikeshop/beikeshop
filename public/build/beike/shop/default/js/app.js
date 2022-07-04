@@ -126,6 +126,8 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
         method: method,
         url: url
       }, method == 'get' ? 'params' : 'data', params)).then(function (res) {
+        console.log(res);
+
         if (res) {
           resolve(res.data);
         } else {
@@ -136,8 +138,8 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
       })["catch"](function (res) {
         reject(res);
 
-        if (!hmsg && res.message) {
-          layer.msg(res.response.data.message, function () {});
+        if (!hmsg) {
+          layer.msg(res.response.data.message || res.message, function () {});
         }
       })["finally"](function () {
         layer.closeAll('loading');
