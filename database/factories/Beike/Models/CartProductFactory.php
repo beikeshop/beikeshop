@@ -1,17 +1,18 @@
 <?php
 /**
  * 创建购物车商品记录
- * \Beike\Models\Cart::factory(300)->create(['customer_id'=>2])
+ * \Beike\Models\CartProduct::factory(300)->create(['customer_id'=>2])
  */
 
 namespace Database\Factories\Beike\Models;
 
 use Beike\Models\Cart;
+use Beike\Models\CartProduct;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CartFactory extends Factory
+class CartProductFactory extends Factory
 {
-    protected $model = Cart::class;
+    protected $model = CartProduct::class;
 
     /**
      * Define the model's default state.

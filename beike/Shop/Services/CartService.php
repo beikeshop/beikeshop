@@ -56,7 +56,7 @@ class CartService
         if (empty($sku) || $quantity == 0) {
             return null;
         }
-        $cart = Cart::query()
+        $cart = CartProduct::query()
             ->where('customer_id', $customerId)
             ->where('product_id', $productId)
             ->where('product_sku_id', $skuId)
@@ -66,7 +66,7 @@ class CartService
             $cart->selected = true;
             $cart->increment('quantity', $quantity);
         } else {
-            $cart = Cart::query()->create([
+            $cart = CartProduct::query()->create([
                 'customer_id' => $customerId,
                 'product_id' => $productId,
                 'product_sku_id' => $skuId,
@@ -86,11 +86,11 @@ class CartService
      */
     public static function select($customer, $cartIds)
     {
-        Cart::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
+        CartProduct::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
         if (empty($cartIds)) {
             return;
         }
-        Cart::query()->where('customer_id', $customer->id)
+        CartProduct::query()->where('customer_id', $customer->id)
             ->whereIn('id', $cartIds)
             ->update(['selected' => 1]);
     }
@@ -104,7 +104,7 @@ class CartService
         if (empty($cartId) || $quantity == 0) {
             return;
         }
-        Cart::query()->where('customer_id', $customer->id)
+        CartProduct::query()->where('customer_id', $customer->id)
             ->where('id', $cartId)
             ->update(['quantity' => $quantity, 'selected' => 1]);
     }
@@ -115,7 +115,7 @@ class CartService
         if (empty($cartId)) {
             return;
         }
-        Cart::query()->where('customer_id', $customer->id)
+        CartProduct::query()->where('customer_id', $customer->id)
             ->where('id', $cartId)
             ->delete();
     }
