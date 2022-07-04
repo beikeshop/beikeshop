@@ -22,16 +22,28 @@ class CheckoutController extends Controller
         return view('checkout', $data);
     }
 
-    public function update(Request $request)
+
+    /**
+     * 更改结算信息
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function update(Request $request): array
     {
         $requestData = $request->all();
-        $data = (new CheckoutService)->update($requestData);
-        return view('checkout', $data);
+        return (new CheckoutService)->update($requestData);
     }
 
-    public function confirm(Request $request)
+
+    /**
+     * 确认提交订单
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function confirm(Request $request): array
     {
-        $data = (new CheckoutService)->confirm();
-        return view('checkout', $data);
+        return (new CheckoutService)->confirm();
     }
 }

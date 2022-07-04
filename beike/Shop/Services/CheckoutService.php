@@ -68,11 +68,10 @@ class CheckoutService
     /**
      * 确认提交订单
      */
-    public function confirm(): array
+    public function confirm(): \Beike\Models\Order
     {
         $data = [];
-        OrderRepo::createOrder($data);
-        return $this->checkoutData();
+        return OrderRepo::createOrder($data);
     }
 
 
