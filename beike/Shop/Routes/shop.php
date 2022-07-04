@@ -30,6 +30,7 @@ Route::prefix('/')
 
         Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
         Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
+        Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
