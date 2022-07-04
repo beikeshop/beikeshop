@@ -77,22 +77,22 @@ class CheckoutService
 
     private function updateShippingAddressId($shippingAddressId)
     {
-        $this->cart->update(['shipping_address_id', $shippingAddressId]);
+        $this->cart->update(['shipping_address_id' => $shippingAddressId]);
     }
 
     private function updatePaymentAddressId($paymentAddressId)
     {
-        $this->cart->update(['payment_address_id', $paymentAddressId]);
+        $this->cart->update(['payment_address_id' => $paymentAddressId]);
     }
 
     private function updateShippingMethod($shippingMethod)
     {
-        $this->cart->update(['shipping_method_code', $shippingMethod]);
+        $this->cart->update(['shipping_method_code' => $shippingMethod]);
     }
 
     private function updatePaymentMethod($paymentMethod)
     {
-        $this->cart->update(['payment_method_code', $paymentMethod]);
+        $this->cart->update(['payment_method_code' => $paymentMethod]);
     }
 
     /**
