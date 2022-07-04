@@ -31,12 +31,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('login');
 
-        if (auth(Customer::AUTH_GUARD)->attempt($credentials['login'])) {
-            return redirect(shop_route('account.index'));
+        if (!auth(Customer::AUTH_GUARD)->attempt($credentials['login'])) {
+            throw new \Exception("账号密码错误！");
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        json_success("登录成功!");
     }
 }
