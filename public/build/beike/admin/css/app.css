@@ -469,10 +469,17 @@ body.page-login .card {
   overflow: hidden;
   align-items: center;
   flex-wrap: wrap;
+  width: 480px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  body.page-login .card {
+    width: 100%;
+  }
 }
 @media (min-width: 768px) {
   body.page-login .card .w-480 {
-    width: 420px;
+    width: 86%;
     margin: 2rem 0;
   }
 }
