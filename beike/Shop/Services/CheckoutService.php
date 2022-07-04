@@ -102,9 +102,8 @@ class CheckoutService
      */
     public function checkoutData(): array
     {
-        $customer = current_customer();
-
-        $addresses = AddressRepo::listByCustomer(current_customer());
+        $customer = $this->customer;
+        $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodItem::collection(PluginRepo::getShippingMethods())->jsonSerialize();
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
@@ -113,10 +112,10 @@ class CheckoutService
 
         $data = [
             'current' => [
-                'shipping_address_id' => 7,
-                'payment_address_id' => 3,
-                'shipping_method' => 'flat_shipping',
-                'payment_method' => 'bk_stripe',
+                'shipping_address_id' => $this->cart->shipping_address_id,
+                'shipping_method_code' => $this->cart->shipping_method_code,
+                'payment_address_id' => $this->cart->payment_address_id,
+                'payment_method_code' => $this->cart->payment_method_code,
             ],
             'country_id' => (int)setting('country_id'),
             'customer_id' => $customer->id ?? null,
