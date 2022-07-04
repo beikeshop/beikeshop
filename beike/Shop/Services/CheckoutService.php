@@ -14,6 +14,7 @@ namespace Beike\Shop\Services;
 use Beike\Models\Cart;
 use Beike\Models\Customer;
 use Beike\Repositories\CartRepo;
+use Beike\Repositories\OrderRepo;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
@@ -60,6 +61,17 @@ class CheckoutService
         if ($paymentMethod) {
             $this->updatePaymentMethod($paymentMethod);
         }
+        return $this->checkoutData();
+    }
+
+
+    /**
+     * 确认提交订单
+     */
+    public function confirm(): array
+    {
+        $data = [];
+        OrderRepo::createOrder($data);
         return $this->checkoutData();
     }
 

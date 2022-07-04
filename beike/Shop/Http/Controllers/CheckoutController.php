@@ -28,4 +28,10 @@ class CheckoutController extends Controller
         $data = (new CheckoutService)->update($requestData);
         return view('checkout', $data);
     }
+
+    public function confirm(Request $request)
+    {
+        $data = (new CheckoutService)->confirm();
+        return view('checkout', $data);
+    }
 }
