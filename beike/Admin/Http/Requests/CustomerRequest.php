@@ -32,12 +32,15 @@ class CustomerRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|max:64',
             'email' => 'required|email:rfc,dns|unique:customers',
-            'password' => 'required|max:64',
             'customer_group_id' => 'required|exists:customer_groups,id',
         ];
+        if (!$this->request->get('id')) {
+            $rules['password'] = 'required|max:64';
+        }
+        return $rules;
     }
 
     public function attributes()
