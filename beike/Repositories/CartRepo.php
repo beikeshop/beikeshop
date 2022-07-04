@@ -17,14 +17,18 @@ class CartRepo
 {
     public static function createCart(int $customerId)
     {
+        $customer = CustomerRepo::find($customerId);
         $cart = Cart::query()->where('customer_id', $customerId)->first();
         if (empty($cart)) {
+            $shippingMethod = PluginRepo::getShippingMethods()->first();
+            $paymentMethod = PluginRepo::getPaymentMethods()->first();
+            $defaultAddress = AddressRepo::listByCustomer($customer)->first();
             $cart = Cart::query()->create([
                 'customer_id' => $customerId,
-                'shipping_address_id' => 0,
-                'shipping_method_code' => '',
-                'payment_address_id' => 0,
-                'payment_method_code' => ''
+                'shipping_address_id' => $defaultAddress->id,
+                'shipping_method_code' => $shippingMethod->code,
+                'payment_address_id' => $defaultAddress->id,
+                'payment_method_code' => $paymentMethod->code
             ]);
         }
         return $cart;
