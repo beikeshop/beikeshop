@@ -22,20 +22,23 @@ class AddressRepo
      */
     public static function create($data)
     {
-        $id = Address::query()->insertGetId($data);
-        return self::find($id);
+        $address = Address::query()->create($data);
+        return $address;
     }
 
     /**
-     * @param $id
+     * @param $address
      * @param $data
-     * @return bool|int
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
+     * @throws \Exception
      */
-    public static function update($id, $data)
+    public static function update($address, $data)
     {
-        $address = Address::query()->find($id);
+        if (!$address instanceof Address) {
+            $address = Address::query()->find($address);
+        }
         if (!$address) {
-            throw new \Exception("地址id {$id} 不存在");
+            throw new \Exception("地址id {$address} 不存在");
         }
         $address->update($data);
         return $address;

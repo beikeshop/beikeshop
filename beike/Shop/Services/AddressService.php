@@ -26,8 +26,10 @@ class AddressService
 
     public static function update($id, $data)
     {
-        $address = AddressRepo::update($id, $data);
-
-        return $address;
+        $address = AddressRepo::find($id);
+        if ($address->customer_id != current_customer()->customer_id) {
+            $address;
+        }
+        return AddressRepo::update($address, $data);
     }
 }
