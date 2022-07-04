@@ -2,6 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\AddressController;
+use Beike\Shop\Http\Controllers\Account\ZoneController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
@@ -42,6 +43,7 @@ Route::prefix('/')
         Route::get('register', [RegisterController::class, 'index'])->name('register.index');
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
+        Route::resource('countries.zones', ZoneController::class);
 
         Route::prefix('account/')
             ->middleware('shop_auth:' . Customer::AUTH_GUARD)
