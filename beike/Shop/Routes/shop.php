@@ -2,7 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\AddressController;
-use Beike\Shop\Http\Controllers\Account\ZoneController;
+use Beike\Shop\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;

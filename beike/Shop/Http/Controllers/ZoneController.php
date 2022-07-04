@@ -9,7 +9,7 @@
  * @modified   2022-07-04 16:21:14
  */
 
-namespace Beike\Shop\Http\Controllers\Account;
+namespace Beike\Shop\Http\Controllers;
 
 use Beike\Repositories\ZoneRepo;
 use Illuminate\Http\Request;
