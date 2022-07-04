@@ -71,7 +71,6 @@ export default {
 
     return new Promise((resolve, reject) => {
       axios({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
-        console.log(res)
         if (res) {
           resolve(res.data);
         } else { // 其他情况返回错误信息，根据需要处理

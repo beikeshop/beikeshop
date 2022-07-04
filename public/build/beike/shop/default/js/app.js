@@ -126,8 +126,6 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
         method: method,
         url: url
       }, method == 'get' ? 'params' : 'data', params)).then(function (res) {
-        console.log(res);
-
         if (res) {
           resolve(res.data);
         } else {
