@@ -15,8 +15,8 @@
       <div class="col-12 col-md-3">
         <div class="account-info">
           <div class="head">
-            <div class="portrait"><img src="http://fpoimg.com/120x120" class="img-fluid"></div>
-            <div class="account-name">Pu shuo</div>
+            <div class="portrait"><img src="{{ $avatar }}" class="img-fluid"></div>
+            <div class="account-name">{{ $name }}</div>
             <div class="account-email">{{ $email }}</div>
           </div>
           <nav class="list-group account-links">

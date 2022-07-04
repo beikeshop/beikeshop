@@ -21,6 +21,7 @@ class AccountController extends Controller
     public function index()
     {
         $data = auth(Customer::AUTH_GUARD)->user()->toArray();
+        $data['avatar'] = image_resize($data['avatar']);
         return view('account/account', $data);
     }
 
