@@ -18,9 +18,9 @@ class AddCartItemOrders extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
-            $table->integer('ship_address_id');
-            $table->integer('pay_address_id');
+            $table->integer('shipping_address_id');
             $table->integer('shipping_method_code');
+            $table->integer('payment_address_id');
             $table->integer('payment_method_code');
             $table->timestamps();
         });

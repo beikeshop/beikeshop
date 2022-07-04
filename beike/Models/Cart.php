@@ -10,10 +10,7 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['customer_id', 'selected', 'product_id', 'product_sku_id', 'quantity'];
-
-    public function sku(): BelongsTo
-    {
-        return $this->belongsTo(ProductSku::class, 'product_sku_id', 'id');
-    }
+    protected $fillable = [
+        'customer_id', 'shipping_address_id', 'shipping_method_code', 'payment_address_id', 'payment_method_code'
+    ];
 }
