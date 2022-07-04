@@ -28,7 +28,7 @@
           <div class="addresses-wrap">
             <div class="row">
               <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
-                <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']">
+                <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'shipping_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
                     <span class="phone">@{{ address.phone }}</span>
@@ -37,7 +37,7 @@
                   <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
                   <div class="address-bottom">
                     <span class="badge bg-success" v-if="form.shipping_address_id == address.id">已选择</span>
-                    <a class="" @click="editAddress(index)">编辑</a>
+                    <a class="" @click.stop="editAddress(index)">编辑</a>
                   </div>
                 </div>
               </div>
@@ -51,16 +51,14 @@
         <div class="checkout-black">
           <h5 class="checkout-title">支付方式</h5>
           <div class="radio-line-wrap">
-            <div class="radio-line-item">
-              {{-- <i class="bi bi-record"></i> --}}
-              {{-- <i class="bi bi-record-circle"></i> --}}
+            <div class="radio-line-item" v-for="payment, index in source.payment_methods" :key="index" @click="updateCheckout(payment.code, 'payment_method_code')">
               <div class="left">
-                <input name="payment" type="radio" id="payment-method-1" class="form-check-input">
-                <img src="https://via.placeholder.com/100x100.png/00ee99?text=aperiam" class="img-fluid">
+                <input name="payment" type="radio" v-model="form.payment_method_code" :value="payment.code" :id="'payment-method-' + index" class="form-check-input">
+                <img :src="payment.icon" class="img-fluid">
               </div>
               <div class="right">
-                <div class="title">插件名称</div>
-                <div class="sub-title">插件名称，插件名称，插件名称，插件名称，插件名称，</div>
+                <div class="title">@{{ payment.name }}</div>
+                <div class="sub-title" v-html="payment.description"></div>
               </div>
             </div>
           </div>
@@ -69,16 +67,14 @@
         <div class="checkout-black">
           <h5 class="checkout-title">配送方式</h5>
           <div class="radio-line-wrap">
-            <div class="radio-line-item">
-              {{-- <i class="bi bi-record"></i> --}}
-              {{-- <i class="bi bi-record-circle"></i> --}}
+            <div class="radio-line-item" v-for="shipping, index in source.shipping_methods" :key="index" @click="updateCheckout(shipping.code, 'shipping_method_code')">
               <div class="left">
-                <input name="payment" type="radio" id="payment-method-1" class="form-check-input">
-                <img src="https://via.placeholder.com/100x100.png/00ee99?text=aperiam" class="img-fluid">
+                <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code" :id="'shipping-method-' + index" class="form-check-input">
+                <img :src="shipping.icon" class="img-fluid">
               </div>
               <div class="right">
-                <div class="title">插件名称</div>
-                <div class="sub-title">插件名称，插件名称，插件名称，插件名称，插件名称，</div>
+                <div class="title">@{{ shipping.name }}</div>
+                <div class="sub-title" v-html="shipping.description"></div>
               </div>
             </div>
           </div>
@@ -177,8 +173,8 @@
         form: {
           shipping_address_id: @json($current['shipping_address_id']),
           payment_address_id: @json($current['payment_address_id']),
-          payment_method: @json($current['payment_method']),
-          shipping_method: @json($current['shipping_method']),
+          payment_method_code: @json($current['payment_method_code']),
+          shipping_method_code: @json($current['shipping_method_code']),
         },
 
         source: {
@@ -241,22 +237,18 @@
             }
 
             const type = this.dialogAddress.form.id ? 'put' : 'post';
+            const url = `/admin/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`;
 
-            $.ajax({
-              url: `/admin/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`,
-              data: self.dialogAddress.form,
-              type: type,
-              success: function(res) {
-                if (type == 'post') {
-                  self.source.addresses.push(res.data)
-                } else {
-                  self.source.addresses[self.dialogAddress.index] = res.data
-                }
-                self.$message.success(res.message);
-                self.$refs[form].resetFields();
-                self.dialogAddress.show = false
-                self.dialogAddress.index = null;
+            $http[type](url, this.dialogAddress.form).then((res) => {
+              if (type == 'post') {
+                this.source.addresses.push(res.data)
+              } else {
+                this.source.addresses[this.dialogAddress.index] = res.data
               }
+              this.$message.success(res.message);
+              this.$refs[form].resetFields();
+              this.dialogAddress.show = false
+              this.dialogAddress.index = null;
             })
           });
         },
@@ -279,8 +271,19 @@
           })
         },
 
+        updateCheckout(id, key) {
+          this.form[key] = id
+
+          $http.put('/checkout', this.form).then((res) => {
+            // console.log(res)
+            this.form = res.data.current
+          })
+        },
+
         checkedBtnCheckoutConfirm() {
-          console.log(1)
+          $http.post('/checkout', this.form).then((res) => {
+            // console.log(res)
+          })
         }
       }
     })
