@@ -12,12 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CurrencyRequest;
-use Beike\Admin\Http\Resources\CustomerResource;
-use Beike\Models\Customer;
-use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
-use Beike\Repositories\CustomerGroupRepo;
-use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
