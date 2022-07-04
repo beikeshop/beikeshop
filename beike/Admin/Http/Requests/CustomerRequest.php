@@ -37,8 +37,10 @@ class CustomerRequest extends FormRequest
             'email' => 'required|email:rfc,dns|unique:customers',
             'customer_group_id' => 'required|exists:customer_groups,id',
         ];
-        if (!$this->request->get('id')) {
+        if (!$this->id) {
             $rules['password'] = 'required|max:64';
+        } else {
+            $rules['email'] = 'required|email:rfc,dns|unique:customers,email,' . $this->id;
         }
         return $rules;
     }
