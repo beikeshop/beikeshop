@@ -11,21 +11,91 @@
 
 namespace Beike\Repositories;
 
+use Beike\Models\Customer;
 use Beike\Models\Order;
+use Carbon\Carbon;
+use http\Client;
 
 class OrderRepo
 {
     /**
-     * @param $data
+     * @param array $data
      * @return Order
      * @throws \Throwable
      */
-    public static function createOrder($data): Order
+    public static function create(array $data): Order
     {
-        $order = new Order([
+        $customer = $data['customer'] ?? null;
+        $current = $data['checkout']['current'] ?? [];
+        $carts = $data['checkout']['carts'] ?? [];
+        $shippingAddressId = $current['shipping_address_id'] ?? 0;
+        $paymentAddressId = $current['payment_address_id'] ?? 0;
 
+        $shippingAddress = AddressRepo::find($shippingAddressId);
+        $paymentAddress = AddressRepo::find($paymentAddressId);
+
+        $shippingMethodCode = $data['shipping_method_code'] ?? '';
+        $paymentMethodCode = $data['payment_method_code'] ?? '';
+
+        $order = new Order([
+            'number' => self::generateOrderNumber(),
+            'customer_id' => $customer->id,
+            'customer_group_id' => $customer->customer_group_id,
+            'shipping_address_id' => $shippingAddress->id,
+            'payment_address_id' => $paymentAddress->id,
+            'customer_name' => $customer->name,
+            'email' => $customer->email,
+            'calling_code' => $customer->calling_code ?? 0,
+            'telephone' => $customer->telephone ?? '',
+            'total' => $carts['amount'],
+            'locale' => locale(),
+            'currency_code' => current_currency_code(),
+            'currency_value' => 1,
+            'ip' => request()->getClientIp(),
+            'user_agent' => request()->userAgent(),
+            'status' => 'UNPAID',
+            'shipping_method_code' => $shippingMethodCode,
+            'shipping_method_name' => trans($shippingMethodCode),
+            'shipping_customer_name' => $shippingAddress->name,
+            'shipping_calling_code' => $shippingAddress->calling_code ?? 0,
+            'shipping_telephone' => $shippingAddress->telephone ?? '',
+            'shipping_country' => $shippingAddress->country->name ?? '',
+            'shipping_zone' => $shippingAddress->zone,
+            'shipping_city' => $shippingAddress->city,
+            'shipping_address_1' => $shippingAddress->address_1,
+            'shipping_address_2' => $shippingAddress->address_2,
+            'payment_method_code' => $paymentMethodCode,
+            'payment_method_name' => trans($paymentMethodCode),
+            'payment_customer_name' => $paymentAddress->name,
+            'payment_calling_code' => $paymentAddress->calling_code ?? 0,
+            'payment_telephone' => $paymentAddress->telephone ?? '',
+            'payment_country' => $paymentAddress->country->name ?? '',
+            'payment_zone' => $paymentAddress->zone,
+            'payment_city' => $paymentAddress->city,
+            'payment_address_1' => $paymentAddress->address_1,
+            'payment_address_2' => $paymentAddress->address_2,
         ]);
         $order->saveOrFail();
+
+        // OrderProductRepo::create($order);
+        // OrderHistoryRepo::create($order);
+
         return $order;
+    }
+
+
+    /**
+     * 生成订单号
+     *
+     * @return string
+     */
+    public static function generateOrderNumber(): string
+    {
+        $orderNumber = Carbon::now()->format('Ymd') . rand(10000, 9999);
+        $exist = Order::query()->where('number', $orderNumber)->exists();
+        if ($exist) {
+            return self::generateOrderNumber();
+        }
+        return $orderNumber;
     }
 }

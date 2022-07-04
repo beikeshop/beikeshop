@@ -12,7 +12,9 @@
 namespace Beike\Shop\Services;
 
 use Beike\Models\Cart;
+use Beike\Models\CartProduct;
 use Beike\Models\Customer;
+use Beike\Models\Order;
 use Beike\Repositories\CartRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Repositories\PluginRepo;
@@ -70,11 +72,17 @@ class CheckoutService
 
     /**
      * 确认提交订单
+     * @throws \Throwable
      */
-    public function confirm(): \Beike\Models\Order
+    public function confirm($data): \Beike\Models\Order
     {
-        $data = [];
-        return OrderRepo::createOrder($data);
+        $customer = current_customer();
+        $data['customer'] = $customer;
+        $data['checkout'] = self::checkoutData();
+        $order = OrderRepo::create($data);
+        // Notification::endmail();
+        // Notification::sendsms();
+        return $order;
     }
 
 

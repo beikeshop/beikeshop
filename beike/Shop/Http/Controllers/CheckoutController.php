@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
+use Beike\Models\Order;
 use Beike\Shop\Services\CheckoutService;
 use Illuminate\Http\Request;
 
@@ -40,10 +41,12 @@ class CheckoutController extends Controller
      * 确认提交订单
      *
      * @param Request $request
-     * @return array
+     * @return Order
+     * @throws \Throwable
      */
-    public function confirm(Request $request): array
+    public function confirm(Request $request): Order
     {
-        return (new CheckoutService)->confirm();
+        $data = $request->all();
+        return (new CheckoutService)->confirm($data);
     }
 }

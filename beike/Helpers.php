@@ -145,11 +145,22 @@ function image_resize($image, int $width = 100, int $height = 100)
 
 /**
  * 当前语言ID
+ *
  * @return int
  */
 function current_language_id(): int
 {
     return 1;
+}
+
+/**
+ * 获取当前货币
+ *
+ * @return string
+ */
+function current_currency_code(): string
+{
+    return 'CNY';
 }
 
 /**
