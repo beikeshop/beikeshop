@@ -46,7 +46,8 @@ class AddressController extends Controller
 
     public function update(AddressRequest $request, int $id)
     {
-        $address = AddressRepo::update($id, $request->only(['name', 'phone', 'country_id', 'zone_id', 'zone', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']));
+        $data = $request->only(['name', 'phone', 'country_id', 'zone_id', 'zone', 'city_id', 'city', 'zipcode', 'address_1', 'address_2']);
+        $address = AddressService::update($id, $data);
         return json_success('更新成功', new AddressResource($address));
     }
 
