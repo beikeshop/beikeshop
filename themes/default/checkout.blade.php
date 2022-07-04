@@ -83,7 +83,10 @@
 
       <div class="col-12 col-md-4 right-column">
         <div class="card total-wrap fixed-top-line">
-          <div class="card-header"><h5 class="mb-0">CART TOTALS</h5></div>
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h5 class="mb-0">CART TOTALS</h5>
+            <span class="rounded-circle bg-primary">@{{ source.carts.quantity }}</span>
+          </div>
           <div class="card-body">
             <div class="products-wrap">
               <div class="item" v-for="cart, index in source.carts.carts" :key="index">
@@ -100,9 +103,10 @@
               </div>
             </div>
             <ul class="totals">
-              <li><span>总数</span><span v-text="source.carts.quantity"></span></li>
-              <li><span>运费</span><span v-text="source.carts.quantity"></span></li>
-              <li><span>总价</span><span v-text="source.carts.amount_format"></span></li>
+              {{-- <li><span>总数</span><span v-text="source.carts.quantity"></span></li> --}}
+              <li><span>商品总额</span><span>2341.00</span></li>
+              <li><span>运费</span><span>15</span></li>
+              <li><span>应付总金额</span><span v-text="source.carts.amount_format"></span></li>
             </ul>
             <div class="d-grid gap-2 mt-3">
               <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">提交订单</button>

@@ -79,6 +79,7 @@ export default {
           if (!hmsg) return layer.msg(res.data.message, ()=>{});
         }
       }).catch((res) => {
+        console.log(res)
         reject(res);
         if (!hmsg && res.message) {
           layer.msg(res.message, ()=>{});

@@ -46,6 +46,13 @@ body.page-checkout {
       h5 {
         font-weight: bold;
       }
+
+      span {
+        line-height: 24px;
+        min-width: 24px;
+        color: #fff;
+        text-align: center;
+      }
     }
 
     .products-wrap {
@@ -155,7 +162,7 @@ body.page-checkout {
       }
 
       .name-wrap {
-        margin-bottom: .5rem;
+        margin-bottom: .6rem;
         line-height: 1;
 
         .name {
@@ -170,7 +177,7 @@ body.page-checkout {
       }
 
       .zipcode {
-        margin-bottom: .1rem;
+        margin-bottom: .3rem;
       }
 
       .address-info {

@@ -521,6 +521,12 @@ body.page-checkout .total-wrap .card-header {
 body.page-checkout .total-wrap .card-header h5 {
   font-weight: bold;
 }
+body.page-checkout .total-wrap .card-header span {
+  line-height: 24px;
+  min-width: 24px;
+  color: #fff;
+  text-align: center;
+}
 body.page-checkout .total-wrap .products-wrap {
   border-bottom: 1px solid #E6E6E6;
   margin-bottom: 1.3rem;
@@ -609,7 +615,7 @@ body.page-checkout .addresses-wrap .item.active:before {
   background: repeating-linear-gradient(-45deg, #d60404 0, #d60404 10px, #fff 10px, #fff 20px, #4991F4 20px, #4991F4 30px, #fff 30px, #fff 40px);
 }
 body.page-checkout .addresses-wrap .item .name-wrap {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   line-height: 1;
 }
 body.page-checkout .addresses-wrap .item .name-wrap .name {
@@ -621,7 +627,7 @@ body.page-checkout .addresses-wrap .item .name-wrap .phone {
   color: #666;
 }
 body.page-checkout .addresses-wrap .item .zipcode {
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.3rem;
 }
 body.page-checkout .addresses-wrap .item .address-info {
   margin-bottom: 0.9rem;

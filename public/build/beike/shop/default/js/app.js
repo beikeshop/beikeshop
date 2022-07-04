@@ -135,6 +135,7 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
           if (!hmsg) return layer.msg(res.data.message, function () {});
         }
       })["catch"](function (res) {
+        console.log(res);
         reject(res);
 
         if (!hmsg && res.message) {
