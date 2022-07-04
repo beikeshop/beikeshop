@@ -27,7 +27,7 @@
           <h5 class="checkout-title">地址</h5>
           <div class="addresses-wrap">
             <div class="row">
-              <div class="col-4" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
                 <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'shipping_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <div class="item add-addres" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
               </div>
             </div>
@@ -192,7 +192,7 @@
           form: {
             name: '',
             phone: '',
-            country_id: @json(setting('country_id')) * 1,
+            country_id: @json($country_id),
             zipcode: '',
             zone_id: '',
             city_id: '',
@@ -241,9 +241,9 @@
 
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
-                this.source.addresses.push(res.data)
+                this.source.addresses.push(res.data.data)
               } else {
-                this.source.addresses[this.dialogAddress.index] = res.data
+                this.source.addresses[this.dialogAddress.index] = res.data.data
               }
               this.$message.success(res.message);
               this.$refs[form].resetFields();
@@ -257,17 +257,16 @@
           this.$refs[form].resetFields();
           this.dialogAddress.show = false
           this.dialogAddress.index = null;
+
+          Object.keys(this.dialogAddress.form).forEach(key => this.dialogAddress.form[key] = '')
+          this.dialogAddress.form.country_id =  @json($country_id)
         },
 
         countryChange(e) {
           const self = this;
 
-          $.ajax({
-            url: `/admin/countries/${e}/zones`,
-            type: 'get',
-            success: function(res) {
-              self.source.zones = res.data.zones;
-            }
+          $http.get(`/admin/countries/${e}/zones`).then((res) => {
+            this.source.zones = res.data.data.zones;
           })
         },
 
@@ -275,14 +274,13 @@
           this.form[key] = id
 
           $http.put('/checkout', this.form).then((res) => {
-            // console.log(res)
             this.form = res.data.current
           })
         },
 
         checkedBtnCheckoutConfirm() {
-          $http.post('/checkout', this.form).then((res) => {
-            // console.log(res)
+          $http.post('/checkout/confirm', this.form).then((res) => {
+            console.log(res)
           })
         }
       }
