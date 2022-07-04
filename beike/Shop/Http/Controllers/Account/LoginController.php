@@ -24,6 +24,9 @@ class LoginController extends Controller
 {
     public function index()
     {
+        if (current_customer()) {
+            return redirect(shop_route('account.index'));
+        }
         return view('account/login');
     }
 
