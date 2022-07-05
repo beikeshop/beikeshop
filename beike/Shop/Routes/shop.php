@@ -41,6 +41,13 @@ Route::prefix('/')
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
         Route::resource('countries.zones', ZoneController::class);
 
+        Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
+            ->group(function () {
+                Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+                Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
+                Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+            });
+
         Route::prefix('account/')
             ->middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
@@ -48,13 +55,6 @@ Route::prefix('/')
 
                 Route::resource('addresses', AddressController::class);
             });
-    });
-
-Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
-    ->group(function () {
-        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-        Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
-        Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
     });
 
 Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
