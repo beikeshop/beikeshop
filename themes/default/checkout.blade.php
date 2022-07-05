@@ -241,13 +241,13 @@
             }
 
             const type = this.dialogAddress.form.id ? 'put' : 'post';
-            const url = `/customers/{{ $customer_id }}/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`;
+            const url = `/account/addresses${type == 'put' ? '/' + this.dialogAddress.form.id : ''}`;
 
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
-                this.source.addresses.push(res.data.data)
+                this.source.addresses.push(res.data)
               } else {
-                this.source.addresses[this.dialogAddress.index] = res.data.data
+                this.source.addresses[this.dialogAddress.index] = res.data
               }
               this.$message.success(res.message);
               this.$refs[form].resetFields();

@@ -91,23 +91,14 @@
 
   <script>
     $('.add-cart').on('click', function(event) {
-      $.ajax({
-        url: '/carts',
-        type: 'POST',
-        data: {
-          sku_id: '{{ $product->master_sku->id }}',
-          quantity: $('input[name="quantity"]').val()
-        },
+      const data = {
+        sku_id: '{{ $product->master_sku->id }}',
+        quantity: $('input[name="quantity"]').val()
+      };
+
+      $http.post('/carts', data).then((res) => {
+        layer.msg(res.message)
       })
-      .done(function(e) {
-        console.log(e);
-      })
-      .fail(function(e) {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
     });
   </script>
 @endsection
