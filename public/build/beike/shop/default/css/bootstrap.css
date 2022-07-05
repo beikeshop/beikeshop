@@ -6976,7 +6976,7 @@ sup {
 }
 
 a {
-  color: #1f1f1f;
+  color: #3480e7;
   text-decoration: none;
 }
 a:hover {
@@ -10210,7 +10210,7 @@ textarea.form-control-lg {
 
 .btn-link {
   font-weight: 400;
-  color: #1f1f1f;
+  color: #3480e7;
   text-decoration: none;
 }
 .btn-link:hover {
@@ -10681,7 +10681,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #1f1f1f;
+  color: #3480e7;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -11541,7 +11541,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #1f1f1f;
+  color: #3480e7;
   background-color: #fff;
   border: 1px solid #dee2e6;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;

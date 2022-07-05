@@ -670,3 +670,43 @@ body.page-checkout .radio-line-wrap .radio-line-item .right .title {
 .el-input__inner {
   border-radius: 0 !important;
 }
+
+body.page-order-success .order-wrap .card-body {
+  padding: 3rem;
+  padding-left: 7rem;
+}
+body.page-order-success .order-wrap .card-body .order-top {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 2.7rem;
+  margin-bottom: 2.7rem;
+  display: flex;
+  justify-content: center;
+}
+body.page-order-success .order-wrap .card-body .order-top .left {
+  margin-top: -6px;
+}
+body.page-order-success .order-wrap .card-body .order-top .left i {
+  color: #4caf50;
+  font-size: 80px;
+  line-height: 1;
+}
+body.page-order-success .order-wrap .card-body .order-top .right {
+  flex: 1;
+  margin-left: 2rem;
+}
+body.page-order-success .order-wrap .card-body .order-top .right .table {
+  margin-bottom: 0;
+}
+body.page-order-success .order-wrap .card-body .order-top .right .order-title {
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+body.page-order-success .order-wrap .card-body .order-top .right .order-info {
+  padding: 0.7rem;
+  background-color: #fffaf0;
+  border: 1px solid #ffe1ad;
+}
+body.page-order-success .order-wrap .card-body .order-bottom {
+  margin-left: calc(2rem + 80px);
+  line-height: 2;
+}

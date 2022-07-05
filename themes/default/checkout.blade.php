@@ -288,8 +288,7 @@
 
         checkedBtnCheckoutConfirm() {
           $http.post('/checkout/confirm', this.form).then((res) => {
-
-            location = 'orders/' + res.number + '/success&type=create'
+            location = 'orders/' + res.number + '/success?type=create'
           })
         }
       }

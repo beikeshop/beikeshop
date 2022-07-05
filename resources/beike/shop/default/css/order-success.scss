@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+body.page-order-success {
+  .order-wrap {
+    .card-body {
+      padding: 3rem;
+      padding-left: 7rem;
+
+      .order-top {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 2.7rem;
+        margin-bottom: 2.7rem;
+        display: flex;
+        justify-content: center; // flex-end | center | space-between
+
+        .left {
+          margin-top: -6px;
+
+          i {
+            color: #4caf50;
+            font-size: 80px;
+            line-height: 1;
+          }
+        }
+
+        .right {
+          flex: 1;
+          margin-left: 2rem;
+
+          .table {
+            margin-bottom: 0;
+          }
+
+          .order-title {
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+          }
+
+          .order-info {
+            padding: .7rem;
+            background-color: #fffaf0;
+            border: 1px solid #ffe1ad;
+          }
+        }
+      }
+
+      .order-bottom {
+        margin-left: calc(2rem + 80px);
+        line-height: 2;
+      }
+    }
+  }
+}
