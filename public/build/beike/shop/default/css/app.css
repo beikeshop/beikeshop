@@ -630,7 +630,8 @@ body.page-checkout .addresses-wrap .item .zipcode {
   margin-bottom: 0.3rem;
 }
 body.page-checkout .addresses-wrap .item .address-info {
-  margin-bottom: 0.9rem;
+  height: 32px;
+  line-height: 1.3;
 }
 body.page-checkout .addresses-wrap .item .address-bottom {
   display: flex;

@@ -181,7 +181,9 @@ body.page-checkout {
       }
 
       .address-info {
-        margin-bottom: .9rem;
+        // margin-bottom: .9rem;
+        height: 32px;
+        line-height: 1.3;
       }
 
       .address-bottom {

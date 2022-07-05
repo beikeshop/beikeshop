@@ -145,8 +145,8 @@
               </el-form-item>
             </div>
             <div class="col-4">
-              <el-form-item prop="city_id">
-                <el-input v-model="dialogAddress.form.city_id" placeholder="输入 city"></el-input>
+              <el-form-item prop="city">
+                <el-input v-model="dialogAddress.form.city" placeholder="输入 city"></el-input>
               </el-form-item>
             </div>
           </div>
@@ -199,7 +199,7 @@
             country_id: @json($country_id),
             zipcode: '',
             zone_id: '',
-            city_id: '',
+            city: '',
             address_1: '',
             address_2: '',
           }
@@ -210,7 +210,7 @@
           phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
           address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
           zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
-          city_id: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
+          city: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
         }
       },
 
