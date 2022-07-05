@@ -581,10 +581,10 @@ body.page-checkout .total-wrap .totals > li > span:last-of-type {
 }
 body.page-checkout .addresses-wrap .item {
   position: relative;
-  padding: 10px 20px;
+  padding: 14px 14px 14px 18px;
   margin-bottom: 1.3rem;
   border: 1px solid #e8e8e8;
-  height: 125px;
+  height: 130px;
   cursor: pointer;
 }
 body.page-checkout .addresses-wrap .item.add-addres {

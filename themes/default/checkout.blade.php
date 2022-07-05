@@ -34,7 +34,7 @@
                     <span class="phone">@{{ address.phone }}</span>
                   </div>
                   <div class="zipcode">@{{ address.zipcode }}</div>
-                  <div class="address-info">@{{ address.country_id }} @{{ address.zone_id }}</div>
+                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
                   <div class="address-bottom">
                     <span class="badge bg-success" v-if="form.shipping_address_id == address.id">已选择</span>
                     <a class="" @click.stop="editAddress(index)">编辑</a>
