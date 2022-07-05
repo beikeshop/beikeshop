@@ -288,7 +288,8 @@
 
         checkedBtnCheckoutConfirm() {
           $http.post('/checkout/confirm', this.form).then((res) => {
-            {{-- location = '{{ shop_route("orders.index", [1]) }}' --}}
+
+            location = 'orders/' + res.number + '/success&type=create'
           })
         }
       }

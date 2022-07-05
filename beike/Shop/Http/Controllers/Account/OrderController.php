@@ -34,4 +34,14 @@ class OrderController extends Controller
 
         return view('account/order', $data);
     }
+
+    public function success(Request $request): View
+    {
+        $orders = OrderRepo::getListByCustomer(current_customer());
+        $data = [
+            'orders' => OrderList::collection($orders),
+        ];
+
+        return view('account/order_success', $data);
+    }
 }

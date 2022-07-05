@@ -57,6 +57,8 @@ Route::prefix('/')
 
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
             });
+
+        Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('account.order_success.index');
     });
 
 Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
