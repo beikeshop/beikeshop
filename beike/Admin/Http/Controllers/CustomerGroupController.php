@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Http\Requests\CustomerGroupRequest;
 use Beike\Admin\Services\CustomerGroupService;
 use Beike\Repositories\CustomerGroupRepo;
+use Beike\Repositories\LanguageRepo;
 use Illuminate\Http\Request;
 
 class CustomerGroupController extends Controller
@@ -25,6 +26,7 @@ class CustomerGroupController extends Controller
 
         $data = [
             'customer_groups' => $customers,
+            'languages' => LanguageRepo::all(),
         ];
 
         return view('admin::pages.customer_groups.index', $data);
