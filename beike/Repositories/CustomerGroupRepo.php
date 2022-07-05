@@ -63,7 +63,7 @@ class CustomerGroupRepo
 
     public static function list()
     {
-        $builder = CustomerGroup::query()->with('description');
+        $builder = CustomerGroup::query()->with('description', 'descriptions');
         $groups = $builder->get();
 
         return $groups;
