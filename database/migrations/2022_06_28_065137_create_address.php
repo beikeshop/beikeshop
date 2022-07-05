@@ -21,7 +21,7 @@ class CreateAddress extends Migration
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('zone_id');
             $table->string('zone');
-            $table->unsignedInteger('city_id');
+            $table->unsignedInteger('city_id')->nullable();
             $table->string('city');
             $table->string('zipcode');
             $table->string('address_1');

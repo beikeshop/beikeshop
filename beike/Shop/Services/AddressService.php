@@ -14,12 +14,14 @@ namespace Beike\Shop\Services;
 
 
 use Beike\Repositories\AddressRepo;
+use Beike\Repositories\ZoneRepo;
 
 class AddressService
 {
     public static function create($data)
     {
-        $data['customer_id'] = current_customer()->customer_id;
+        $data['customer_id'] = current_customer()->id;
+        $data['zone'] = ZoneRepo::find($data['zone_id'])->name;
         $address = AddressRepo::create($data);
         return $address;
     }
@@ -27,7 +29,8 @@ class AddressService
     public static function update($id, $data)
     {
         $address = AddressRepo::find($id);
-        if ($address->customer_id != current_customer()->customer_id) {
+        $data['zone'] = ZoneRepo::find($data['zone_id'])->name;
+        if ($address->customer_id != current_customer()->id) {
             $address;
         }
         return AddressRepo::update($address, $data);
