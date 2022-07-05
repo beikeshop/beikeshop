@@ -29,10 +29,6 @@ Route::prefix('/')
         Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
         Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
 
-        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-        Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
-        Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
-
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
@@ -52,6 +48,13 @@ Route::prefix('/')
 
                 Route::resource('addresses', AddressController::class);
             });
-
-        Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
     });
+
+Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
+    ->group(function () {
+        Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
+        Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+    });
+
+Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
