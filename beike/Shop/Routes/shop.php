@@ -56,6 +56,7 @@ Route::prefix('/')
                 Route::resource('addresses', AddressController::class);
 
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
+                Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
             });
 
         Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('account.order_success.index');

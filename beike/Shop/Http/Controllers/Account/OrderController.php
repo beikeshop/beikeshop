@@ -35,6 +35,21 @@ class OrderController extends Controller
         return view('account/order', $data);
     }
 
+    /**
+     * 获取当前客户订单列表
+     *
+     * @param Request $request
+     * @param $number
+     * @return View
+     */
+    public function show(Request $request, $number): View
+    {
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($number, $customer);
+        dd($order);
+        return view('account/order_show', ['data' => $order]);
+    }
+
     public function success(Request $request, $number): View
     {
         $customer = current_customer();
