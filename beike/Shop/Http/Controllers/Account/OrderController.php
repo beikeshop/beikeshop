@@ -35,13 +35,11 @@ class OrderController extends Controller
         return view('account/order', $data);
     }
 
-    public function success(Request $request): View
+    public function success(Request $request, $number): View
     {
-        $orders = OrderRepo::getListByCustomer(current_customer());
-        $data = [
-            'orders' => OrderList::collection($orders),
-        ];
-
-        return view('account/order_success', $data);
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($number, $customer);
+        dd($order);
+        return view('account/order_success', ['data' => $order]);
     }
 }
