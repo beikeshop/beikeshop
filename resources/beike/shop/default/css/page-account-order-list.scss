@@ -2,4 +2,51 @@
 
 body.page-account-order-list {
   background-color: #F7F8FA;
+
+  .order-wrap {
+    .table {
+      .sep-row {
+        height: 20px;
+        // border: 0;
+
+        td {
+          border: 0;
+        }
+      }
+
+      .head-tr {
+        // border: 0;
+        background: #f5f5f5;
+        td {
+          // border: 0;
+          border-bottom-color: #f5f5f5;
+        }
+      }
+
+      thead {
+        background: #f5f5f5;
+        th {
+          font-weight: 500;
+          border: 0;
+        }
+      }
+
+      tbody {
+        td {
+          border: 1px solid #e5e5e5;
+        }
+      }
+
+      .product-info {
+        display: flex;
+        align-items: center; // flex-start | center
+        // justify-content: space-between; // flex-end | center | space-between
+        // flex-wrap: wrap;
+        .img {
+          width: 60px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
 }

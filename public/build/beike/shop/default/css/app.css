@@ -715,3 +715,33 @@ body.page-order-success .order-wrap .card-body .order-bottom {
 body.page-account-order-list {
   background-color: #F7F8FA;
 }
+body.page-account-order-list .order-wrap .table .sep-row {
+  height: 20px;
+}
+body.page-account-order-list .order-wrap .table .sep-row td {
+  border: 0;
+}
+body.page-account-order-list .order-wrap .table .head-tr {
+  background: #f5f5f5;
+}
+body.page-account-order-list .order-wrap .table .head-tr td {
+  border-bottom-color: #f5f5f5;
+}
+body.page-account-order-list .order-wrap .table thead {
+  background: #f5f5f5;
+}
+body.page-account-order-list .order-wrap .table thead th {
+  font-weight: 500;
+  border: 0;
+}
+body.page-account-order-list .order-wrap .table tbody td {
+  border: 1px solid #e5e5e5;
+}
+body.page-account-order-list .order-wrap .table .product-info {
+  display: flex;
+  align-items: center;
+}
+body.page-account-order-list .order-wrap .table .product-info .img {
+  width: 60px;
+  margin-right: 10px;
+}

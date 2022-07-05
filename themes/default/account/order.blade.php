@@ -10,45 +10,62 @@
         <li class="breadcrumb-item active" aria-current="page">Library</li>
       </ol>
     </nav>
-{{--     @foreach ($orders as $order)
-        <div class="col-6 col-md-3">{{ $order->number }}</div>
-    @endforeach --}}
+    {{-- {{ dd($orders) }} --}}
+
 
     <div class="row">
-      <div class="col-12 col-md-3">
-        <div class="account-sides-info">
-          <div class="head">
-            <div class="portrait"><img src="" class="img-fluid"></div>
-            <div class="account-name"></div>
-            <div class="account-email"></div>
-          </div>
-          <nav class="list-group account-links">
-            <a class="list-group-item d-flex justify-content-between align-items-center active" href="">
-              <span>个人中心</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('account.order.index') }}">
-              <span>我的订单</span><span class="px-3 badge rounded-pill bg-dark">5</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="">
-              <span>我的收藏</span><span class="px-3 badge rounded-pill bg-dark">5</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="">
-              <span>我的收藏</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="">
-              <span>我的收藏</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="">
-              <span>我的收藏</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="">
-              <span>我的收藏</span></a>
-            <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
-              <span>退出登录</span></a>
-          </nav>
-        </div>
-      </div>
+      <x-shop-sidebar/>
+
       <div class="col-12 col-md-9">
-        <div class="card mb-4 account-card">
+        <div class="card mb-4 account-card order-wrap">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h6 class="mb-0">我的订单</h6>
           </div>
           <div class="card-body">
-
+            {{-- table-bordered --}}
+            <table class="table ">
+              <thead>
+                <tr>
+                  {{-- <th>订单号</th> --}}
+                  <th>订单详情</th>
+                  <th>金额</th>
+                  <th>状态</th>
+                  <th class="text-end">操作</th>
+                </tr>
+              </thead>
+              @foreach ($orders as $order)
+                <tbody>
+                  <tr class="sep-row"><td colspan="4"></td></tr>
+                  <tr class="head-tr">
+                    <td colspan="4">
+                      <span class="order-created me-4">{{ $order->created_at }}</span>
+                      <span class="order-number">订单号：{{ $order->number }}</span>
+                    </td>
+                  </tr>
+                  {{-- {{ dd($order->orderProducts) }} --}}
+                  @foreach ($order->orderProducts as $product)
+                  <tr class="{{ $loop->first ? 'first-tr' : '' }}">
+                    <td>
+                      <div class="product-info">
+                        <div class="img"><img src="{{ $product->image }}" class="img-fluid"></div>
+                        <div class="name">
+                          <span>{{ $product->name }}</span>
+                        </div>
+                        <div class="quantity">{{ $product->quantity }}</div>
+                      </div>
+                    </td>
+                    @if ($loop->first)
+                      <td rowspan="{{ $loop->count }}">{{ $order->total }}</td>
+                      <td rowspan="{{ $loop->count }}">{{ $order->status }}</td>
+                      <td rowspan="{{ $loop->count }}" class="text-end">
+                        <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">查看</a>
+                      </td>
+                    @endif
+                  </tr>
+                  @endforeach
+                </tbody>
+              @endforeach
+            </table>
           </div>
         </div>
       </div>
