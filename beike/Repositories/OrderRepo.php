@@ -19,7 +19,19 @@ use Illuminate\Database\Eloquent\Builder;
 class OrderRepo
 {
     /**
-     * 获取订单列表
+     * 获取所有客户订单列表
+     *
+     * @return LengthAwarePaginator
+     */
+    public static function getListAll(): LengthAwarePaginator
+    {
+        $builder = self::getListBuilder();
+        return $builder->paginate();
+    }
+
+
+    /**
+     * 获取特定客户订单列表
      *
      * @param null $customer
      * @return LengthAwarePaginator

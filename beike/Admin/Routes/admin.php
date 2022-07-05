@@ -25,6 +25,9 @@ Route::prefix('admin')
                 Route::resource('products', \Beike\Admin\Http\Controllers\ProductController::class);
                 Route::resource('currencies', \Beike\Admin\Http\Controllers\CurrencyController::class);
 
+                Route::get('orders', [\Beike\Admin\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+                Route::get('orders/{order}', [\Beike\Admin\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+
                 Route::get('settings', [\Beike\Admin\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
 
                 Route::get('plugins', [\Beike\Admin\Http\Controllers\PluginController::class, 'index'])->name('plugins.index');
