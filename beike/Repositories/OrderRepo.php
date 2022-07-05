@@ -11,13 +11,40 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Customer;
-use Beike\Models\Order;
 use Carbon\Carbon;
-use http\Client;
+use Beike\Models\Order;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrderRepo
 {
+    /**
+     * 获取订单列表
+     *
+     * @param null $customer
+     * @return LengthAwarePaginator
+     */
+    public static function getListByCustomer($customer): LengthAwarePaginator
+    {
+        $builder = self::getListBuilder($customer);
+        return $builder->paginate();
+    }
+
+
+    /**
+     * @param null $customer
+     * @return Builder
+     */
+    private static function getListBuilder($customer = null): Builder
+    {
+        $builder = Order::query();
+        if ($customer) {
+            $builder->where('customer_id', $customer->id);
+        }
+        return $builder;
+    }
+
+
     /**
      * @param array $data
      * @return Order

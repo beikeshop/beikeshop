@@ -2,6 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\AddressController;
+use Beike\Shop\Http\Controllers\Account\OrderController;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\CartController;
@@ -48,12 +49,13 @@ Route::prefix('/')
                 Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
             });
 
-        Route::prefix('account/')
+        Route::prefix('account')
             ->middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [AccountController::class, 'index'])->name('account.index');
-
                 Route::resource('addresses', AddressController::class);
+
+                Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
             });
     });
 
