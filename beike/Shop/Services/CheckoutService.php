@@ -20,6 +20,7 @@ use Beike\Repositories\OrderRepo;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
+use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
 use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
 
@@ -132,7 +133,7 @@ class CheckoutService
             'country_id' => (int)setting('system.country_id'),
             'customer_id' => $customer->id ?? null,
             'countries' => CountryRepo::all(),
-            'addresses' => $addresses,
+            'addresses' => AddressResource::collection($addresses),
             'shipping_methods' => $shipments,
             'payment_methods' => $payments,
             'carts' => $carts
