@@ -34,6 +34,11 @@ class Sidebar extends Component
             $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
         }
 
+        if (Str::startsWith($routeName, ['admin.customers.', 'admin.customer_groups.'])) {
+            $this->addLink('会员管理', admin_route('customers.index'), 'fa fa-tachometer-alt', false);
+            $this->addLink('用户组', admin_route('customer_groups.index'), 'fa fa-tachometer-alt', false);
+        }
+
         return view('admin::components.sidebar');
     }
 

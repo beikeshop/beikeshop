@@ -15,3 +15,29 @@
 .el-tabs__item {
   padding: 0 10px;
 }
+
+.el-input-group__append, .el-input-group__prepend {
+  border-radius: 0;
+}
+
+.language-inputs {
+  .el-form-item__content {
+    line-height: 1 !important;
+    &:before, &:after {
+      display: none;
+    }
+  }
+
+  .el-form-item {
+    &:before, &:after {
+      display: none;
+    }
+
+    .el-form-item__content {
+      .el-input-group__prepend {
+        width: 80px;
+        padding: 0 10px;
+      }
+    }
+  }
+}

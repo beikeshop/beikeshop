@@ -1,3 +1,5 @@
+window.axios = require('axios');
+
 const instance = axios.create({
   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
   // baseURL: 'https://api.example.com'

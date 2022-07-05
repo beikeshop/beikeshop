@@ -24,7 +24,7 @@ class OrderController extends Controller
         $data = [
             'orders' => OrderList::collection($orders),
         ];
-        return view('admin::account/order', $data);
+        return view('admin::pages.orders.index', $data);
     }
 
     public function show(Request $request, Order $order)
