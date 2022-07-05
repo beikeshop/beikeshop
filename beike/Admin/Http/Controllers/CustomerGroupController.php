@@ -43,6 +43,7 @@ class CustomerGroupController extends Controller
             'descriptions' => $request->get('descriptions', [])
         ];
         $customerGroup = CustomerGroupService::create($data);
+        $customerGroup->load('descriptions');
 
         return json_success('创建成功！', $customerGroup);
     }
@@ -58,6 +59,7 @@ class CustomerGroupController extends Controller
             'descriptions' => $request->get('descriptions', [])
             ];
         $customerGroup = CustomerGroupService::update($id, $data);
+        $customerGroup->load('descriptions');
 
         return json_success('更新成功！', $customerGroup);
     }
