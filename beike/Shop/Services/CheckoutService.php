@@ -36,7 +36,7 @@ class CheckoutService
         if (empty($this->customer) || !($this->customer instanceof Customer)) {
             throw new \Exception("购物车客户无效");
         }
-        $this->cart = CartRepo::createCart($this->customer->id);
+        $this->cart = CartRepo::createCart($this->customer);
     }
 
     /**
@@ -80,6 +80,7 @@ class CheckoutService
         $data['customer'] = $customer;
         $data['checkout'] = self::checkoutData();
         $order = OrderRepo::create($data);
+        CartRepo::clearSelectedCartProducts($customer);
         // Notification::endmail();
         // Notification::sendsms();
         return $order;
