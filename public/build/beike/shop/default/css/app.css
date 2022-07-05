@@ -644,9 +644,13 @@ body.page-checkout .radio-line-wrap .radio-line-item {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 20px;
 }
 body.page-checkout .radio-line-wrap .radio-line-item:not(:last-of-type) {
   margin-bottom: 1rem;
+}
+body.page-checkout .radio-line-wrap .radio-line-item.active {
+  border: 1px solid #e5e5e5;
 }
 body.page-checkout .radio-line-wrap .radio-line-item .left {
   margin-right: 10px;

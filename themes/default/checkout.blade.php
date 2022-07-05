@@ -51,7 +51,7 @@
         <div class="checkout-black">
           <h5 class="checkout-title">支付方式</h5>
           <div class="radio-line-wrap">
-            <div class="radio-line-item" v-for="payment, index in source.payment_methods" :key="index" @click="updateCheckout(payment.code, 'payment_method_code')">
+            <div :class="['radio-line-item', payment.code == form.payment_method_code ? 'active' : '']" v-for="payment, index in source.payment_methods" :key="index" @click="updateCheckout(payment.code, 'payment_method_code')">
               <div class="left">
                 <input name="payment" type="radio" v-model="form.payment_method_code" :value="payment.code" :id="'payment-method-' + index" class="form-check-input">
                 <img :src="payment.icon" class="img-fluid">
@@ -67,7 +67,7 @@
         <div class="checkout-black">
           <h5 class="checkout-title">配送方式</h5>
           <div class="radio-line-wrap">
-            <div class="radio-line-item" v-for="shipping, index in source.shipping_methods" :key="index" @click="updateCheckout(shipping.code, 'shipping_method_code')">
+            <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']" v-for="shipping, index in source.shipping_methods" :key="index" @click="updateCheckout(shipping.code, 'shipping_method_code')">
               <div class="left">
                 <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code" :id="'shipping-method-' + index" class="form-check-input">
                 <img :src="shipping.icon" class="img-fluid">

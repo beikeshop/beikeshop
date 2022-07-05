@@ -144,7 +144,7 @@
             }
 
             $http.post(url, _data).then((res) => {
-              this.$message.success(res.data.message);
+              this.$message.success(res.message);
               location = "{{ shop_route('account.index') }}"
             })
           });

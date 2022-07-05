@@ -201,8 +201,18 @@ body.page-checkout {
       display: flex;
       align-items: center;
       cursor: pointer;
+      padding: 20px;
+
       &:not(:last-of-type) {
         margin-bottom: 1rem;
+      }
+
+      &:hover {
+
+      }
+
+      &.active {
+        border: 1px solid #e5e5e5;
       }
 
       .left {
