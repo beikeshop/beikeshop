@@ -20,6 +20,7 @@ Route::prefix('admin')
                 Route::Resource('customers', \Beike\Admin\Http\Controllers\CustomerController::class);
                 Route::resource('customers.addresses', \Beike\Admin\Http\Controllers\AddressController::class);
                 Route::resource('countries.zones', \Beike\Admin\Http\Controllers\ZoneController::class);
+                Route::Resource('customer_groups', \Beike\Admin\Http\Controllers\CustomerGroupController::class);
 
                 Route::put('products/restore', [\Beike\Admin\Http\Controllers\ProductController::class, 'restore']);
                 Route::resource('products', \Beike\Admin\Http\Controllers\ProductController::class);
