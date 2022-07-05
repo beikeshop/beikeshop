@@ -12,15 +12,8 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CustomerGroupRequest;
-use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerGroupService;
-use Beike\Admin\Services\CustomerService;
-use Beike\Models\Customer;
-use Beike\Models\CustomerGroup;
-use Beike\Repositories\AddressRepo;
-use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CustomerGroupRepo;
-use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Request;
 
 class CustomerGroupController extends Controller
