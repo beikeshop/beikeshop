@@ -2,13 +2,14 @@
 
 namespace Beike\Shop\Providers;
 
-use Beike\Models\Customer;
 use Beike\Models\Setting;
-use Beike\Repositories\CategoryRepo;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
+use Beike\Models\Customer;
 use Illuminate\Support\Str;
+use Beike\Repositories\CategoryRepo;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
+use Beike\Shop\View\Components\AccountSidebar;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,10 @@ class ShopServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             $this->loadShareViewData();
         });
+
+        $this->loadViewComponentsAs('shop', [
+            'sidebar' => AccountSidebar::class,
+        ]);
     }
 
     protected function loadSettings()

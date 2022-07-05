@@ -12,6 +12,11 @@
     </nav>
 
     <div class="row">
+
+        <span>x-shop-sidebar start</span>
+        <x-shop-sidebar/>
+        <span>x-shop-sidebar end</span>
+
       <div class="col-12 col-md-3">
         <div class="account-sides-info">
           <div class="head">
