@@ -22,6 +22,7 @@ class CustomerGroupService
      */
     public static function create($data)
     {
+        $data = self::getParams($data);
         $customerGroup = CustomerGroupRepo::create($data);
 
         $descriptions = [];
@@ -36,6 +37,7 @@ class CustomerGroupService
 
     public static function update($id, $data)
     {
+        $data = self::getParams($data);
         $customerGroup = CustomerGroupRepo::find($id);
         if (!$customerGroup) {
             throw New \Exception("您更新的ID不存在");
@@ -52,5 +54,27 @@ class CustomerGroupService
         $customerGroup->descriptions()->createMany($descriptions);
 
         return $customerGroup;
+    }
+
+    private static function getParams($data)
+    {
+        $descriptions = [];
+        foreach ($data['name'] as $locale => $value) {
+            $descriptions[$locale]['name'] = $value;
+        }
+        foreach ($data['description'] as $locale => $value) {
+            $descriptions[$locale]['description'] = $value;
+        }
+
+        $params = [
+            'total' => (int)$data['total'] ?? 0,
+            'reward_point_factor' => (float)$data['reward_point_factor'] ?? 0,
+            'use_point_factor' => (float)$data['use_point_factor'] ?? 0,
+            'discount_factor' => (float)$data['discount_factor'] ?? 0,
+            'level' => (int)$data['level'] ?? 0,
+            'descriptions' => $descriptions,
+        ];
+
+        return $params;
     }
 }

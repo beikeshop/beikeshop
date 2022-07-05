@@ -34,15 +34,7 @@ class CustomerGroupController extends Controller
 
     public function store(CustomerGroupRequest $request)
     {
-        $data = [
-            'total' => (int)$request->get('total', 0),
-            'reward_point_factor' => (float)$request->get('reward_point_factor', 0),
-            'use_point_factor' => (float)$request->get('use_point_factor', 0),
-            'discount_factor' => (float)$request->get('discount_factor', 0),
-            'level' => (int)$request->get('level', 0),
-            'descriptions' => $request->get('descriptions', [])
-        ];
-        $customerGroup = CustomerGroupService::create($data);
+        $customerGroup = CustomerGroupService::create($request->all());
         $customerGroup->load('descriptions');
 
         return json_success('创建成功！', $customerGroup);
@@ -50,15 +42,7 @@ class CustomerGroupController extends Controller
 
     public function update(CustomerGroupRequest $request, int $id)
     {
-        $data = [
-            'total' => (int)$request->get('total', 0),
-            'reward_point_factor' => (float)$request->get('reward_point_factor', 0),
-            'use_point_factor' => (float)$request->get('use_point_factor', 0),
-            'discount_factor' => (float)$request->get('discount_factor', 0),
-            'level' => (int)$request->get('level', 0),
-            'descriptions' => $request->get('descriptions', [])
-            ];
-        $customerGroup = CustomerGroupService::update($id, $data);
+        $customerGroup = CustomerGroupService::update($id, $request->all());
         $customerGroup->load('descriptions');
 
         return json_success('更新成功！', $customerGroup);
