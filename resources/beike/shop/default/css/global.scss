@@ -117,3 +117,104 @@
   position: fixed;
   top: 0;
 }
+
+.account-sides-info {
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    background-color: #fff;
+
+    .portrait {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
+      border: 2px solid #FFFFFF;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .account-name {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .account-email {
+      color: #666666;
+    }
+  }
+
+  .account-links {
+    > a {
+      color: #4B566B;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #EEEEEE;
+      transition: all .2s ease-in-out;
+      text-decoration: none !important;
+
+      &:hover {
+        background-color: #E9ECEF;
+      }
+
+      &.active {
+        background-color: #E9ECEF;
+        color: #4B566B;
+      }
+
+      .badge {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.account-card {
+  border: none;
+
+  .card-header {
+    border: none;
+    background-color: #fff;
+    padding-top: 1rem;
+
+    h6 {
+      border-left: 3px solid $primary;
+      padding-left: 6px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  }
+
+  .card-items {
+    > a {
+      width: 25%;
+      color: #444444;
+      text-decoration: none !important;
+      i {
+        font-size: 2rem;
+      }
+
+      span {
+        display: flex;
+      }
+    }
+  }
+
+  .order-wrap {
+    background-color: #f6f8f9;
+    padding: 2rem 1rem;
+    .icon {
+      i {
+        font-size: 4.5rem;
+        color: #777;
+      }
+    }
+
+    .text {
+      font-size: 1rem;
+    }
+  }
+}

@@ -118,6 +118,86 @@
   top: 0;
 }
 
+.account-sides-info .head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: #fff;
+}
+.account-sides-info .head .portrait {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
+  border: 2px solid #FFFFFF;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.account-sides-info .head .account-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.account-sides-info .head .account-email {
+  color: #666666;
+}
+.account-sides-info .account-links > a {
+  color: #4B566B;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #EEEEEE;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none !important;
+}
+.account-sides-info .account-links > a:hover {
+  background-color: #E9ECEF;
+}
+.account-sides-info .account-links > a.active {
+  background-color: #E9ECEF;
+  color: #4B566B;
+}
+.account-sides-info .account-links > a .badge {
+  color: #fff;
+}
+
+.account-card {
+  border: none;
+}
+.account-card .card-header {
+  border: none;
+  background-color: #fff;
+  padding-top: 1rem;
+}
+.account-card .card-header h6 {
+  border-left: 3px solid #fd560f;
+  padding-left: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.account-card .card-items > a {
+  width: 25%;
+  color: #444444;
+  text-decoration: none !important;
+}
+.account-card .card-items > a i {
+  font-size: 2rem;
+}
+.account-card .card-items > a span {
+  display: flex;
+}
+.account-card .order-wrap {
+  background-color: #f6f8f9;
+  padding: 2rem 1rem;
+}
+.account-card .order-wrap .icon i {
+  font-size: 4.5rem;
+  color: #777;
+}
+.account-card .order-wrap .text {
+  font-size: 1rem;
+}
+
 header {
   background: #fff;
 }
@@ -294,85 +374,6 @@ body.page-login .card {
 body.page-account {
   background-color: #F7F8FA;
 }
-body.page-account .account-info .head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 1rem;
-  background-color: #fff;
-}
-body.page-account .account-info .head .portrait {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
-  border: 2px solid #FFFFFF;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-body.page-account .account-info .head .account-name {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 0.4rem;
-}
-body.page-account .account-info .head .account-email {
-  color: #666666;
-}
-body.page-account .account-info .account-links > a {
-  color: #4B566B;
-  border: none;
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid #EEEEEE;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none !important;
-}
-body.page-account .account-info .account-links > a:hover {
-  background-color: #E9ECEF;
-}
-body.page-account .account-info .account-links > a.active {
-  background-color: #E9ECEF;
-  color: #4B566B;
-}
-body.page-account .account-info .account-links > a .badge {
-  color: #fff;
-}
-body.page-account .account-card {
-  border: none;
-}
-body.page-account .account-card .card-header {
-  border: none;
-  background-color: #fff;
-  padding-top: 1rem;
-}
-body.page-account .account-card .card-header h6 {
-  border-left: 3px solid #fd560f;
-  padding-left: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-}
-body.page-account .account-card .card-items > a {
-  width: 25%;
-  color: #444444;
-  text-decoration: none !important;
-}
-body.page-account .account-card .card-items > a i {
-  font-size: 2rem;
-}
-body.page-account .account-card .card-items > a span {
-  display: flex;
-}
-body.page-account .account-card .order-wrap {
-  background-color: #f6f8f9;
-  padding: 2rem 1rem;
-}
-body.page-account .account-card .order-wrap .icon i {
-  font-size: 4.5rem;
-  color: #777;
-}
-body.page-account .account-card .order-wrap .text {
-  font-size: 1rem;
-}
-
 body.page-product .product-image .left {
   margin-right: 1rem;
 }
@@ -709,4 +710,8 @@ body.page-order-success .order-wrap .card-body .order-top .right .order-info {
 body.page-order-success .order-wrap .card-body .order-bottom {
   margin-left: calc(2rem + 80px);
   line-height: 2;
+}
+
+body.page-account-order-list {
+  background-color: #F7F8FA;
 }

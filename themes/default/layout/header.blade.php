@@ -67,7 +67,7 @@
                 <li class="dropdown-item"><h6 class="mb-0">Pu Shuo</h6></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-person me-1"></i> 个人中心</a></li>
-                <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-clipboard-check me-1"></i> 我的订单</a></li>
+                <li><a href="{{ shop_route('account.order.index') }}" class="dropdown-item"><i class="bi bi-clipboard-check me-1"></i> 我的订单</a></li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-heart me-1"></i> 我的收藏</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a href="{{ shop_route('logout') }}" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i> 退出登录</a></li>
