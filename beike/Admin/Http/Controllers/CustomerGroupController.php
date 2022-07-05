@@ -35,7 +35,7 @@ class CustomerGroupController extends Controller
     public function store(CustomerGroupRequest $request)
     {
         $customerGroup = CustomerGroupService::create($request->all());
-        $customerGroup->load('descriptions');
+        $customerGroup->load('descriptions', 'description');
 
         return json_success('创建成功！', $customerGroup);
     }
@@ -43,7 +43,7 @@ class CustomerGroupController extends Controller
     public function update(CustomerGroupRequest $request, int $id)
     {
         $customerGroup = CustomerGroupService::update($id, $request->all());
-        $customerGroup->load('descriptions');
+        $customerGroup->load('descriptions', 'description');
 
         return json_success('更新成功！', $customerGroup);
     }
