@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 class LanguageController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         $languages = LanguageRepo::all();
 
