@@ -25,4 +25,9 @@ class CartProduct extends Model
     {
         return $this->belongsTo(ProductSku::class, 'product_sku_id', 'id');
     }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }

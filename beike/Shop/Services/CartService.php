@@ -31,13 +31,23 @@ class CartService
             return [];
         }
         $cartBuilder = CartProduct::query()
-            ->with(['sku.product.description'])
+            ->with(['product', 'sku.product.description'])
             ->where('customer_id', $customer->id)
             ->orderByDesc('id');
         if ($selected) {
             $cartBuilder->where('selected', true);
         }
         $cartItems = $cartBuilder->get();
+
+        $cartItems = $cartItems->filter(function ($item) {
+            $description = $item->sku->product->description ?? '';
+            $product = $item->product ?? null;
+            if (empty($description) || empty($product)) {
+                $item->delete();
+            }
+            return $description && $product;
+        });
+
         $cartList = CartList::collection($cartItems)->jsonSerialize();
         return $cartList;
     }
