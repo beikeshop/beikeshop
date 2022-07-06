@@ -81,17 +81,18 @@ header {
       border-top: 1px solid #eee;
 
       .left {
-        width: 100px;
+        width: 90px;
         margin-right: 10px;
 
         img {
-          max-height: 100px;
+          max-height: 90px;
         }
       }
 
       .right {
-        .name {
-
+        .offcanvas-products-delete {
+          cursor: pointer;
+          color: #999;
         }
       }
     }

@@ -8,7 +8,38 @@ $(document).ready(function ($) {
     complete: function() { layer.closeAll('loading'); },
   });
 
-  $('.quantity-wrap .right i').on('click', function(event) {
+  $http.get('/carts/mini', null, {hload: true}).then((res) => {
+    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
+
+    if (res.data.carts.length) {
+      let html = '';
+      res.data.carts.forEach(e => {
+        html += '<div class="product-list d-flex align-items-center">';
+          html += `<div class="left"><img src="${e.image}" calss="img-fluid"></div>`;
+          html += '<div class="right flex-grow-1">';
+            html += `<div class="name fs-sm fw-bold mb-2">${e.name}</div>`;
+            html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+              html += `<div class="price">${e.price_format}</div>`;
+              html += `<span class="offcanvas-products-delete" data-id="${e.cart_id}"><i class="bi bi-x-lg"></i> 删除</span>`;
+            html += '</div>';
+          html += '</div>';
+        html += '</div>';
+      })
+
+      $('.offcanvas-right-products').html(html)
+    }
+  })
+
+  $(document).on('click', '.offcanvas-products-delete', function(event) {
+    const $this = $(this)
+    const cartId = $(this).data('id')
+
+    $http.delete(`/carts/${cartId}`).then((res) => {
+      $this.parents('.product-list').remove()
+    })
+  })
+
+  $(document).on('click', '.quantity-wrap .right i', function(event) {
     event.stopPropagation();
     let input = $(this).parent().siblings('input')
 

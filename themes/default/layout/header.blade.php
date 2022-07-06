@@ -1,3 +1,7 @@
+@push('header')
+  {{-- <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script> --}}
+@endpush
+
 <header>
   <div class="top-wrap">
     <div class="container d-flex justify-content-between align-items-center">
@@ -95,7 +99,7 @@
   </div>
   <div class="offcanvas-body">
     <div class="offcanvas-right-products">
-      @for ($i = 0; $i < 20; $i++)
+{{--       @for ($i = 0; $i < 20; $i++)
         <div class="product-list d-flex align-items-center">
           <div class="left"><img src="https://via.placeholder.com/140x140.png/eeeeee" calss="img-fluid"></div>
           <div class="right flex-grow-1">
@@ -107,13 +111,13 @@
             </div>
           </div>
         </div>
-      @endfor
+      @endfor --}}
     </div>
   </div>
   <div class="offcanvas-footer">
     <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
       <strong>小计</strong>
-      <strong class="ms-auto">2222</strong>
+      <strong class="ms-auto offcanvas-right-cart-amount"></strong>
     </div>
     <div class="p-4">
       <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">去结账</a>

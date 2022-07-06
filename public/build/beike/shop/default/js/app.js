@@ -2488,7 +2488,36 @@ $(document).ready(function ($) {
       layer.closeAll('loading');
     }
   });
-  $('.quantity-wrap .right i').on('click', function (event) {
+  $http.get('/carts/mini', null, {
+    hload: true
+  }).then(function (res) {
+    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
+
+    if (res.data.carts.length) {
+      var html = '';
+      res.data.carts.forEach(function (e) {
+        html += '<div class="product-list d-flex align-items-center">';
+        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
+        html += '<div class="right flex-grow-1">';
+        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
+        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+        html += "<div class=\"price\">".concat(e.price_format, "</div>");
+        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      $('.offcanvas-right-products').html(html);
+    }
+  });
+  $(document).on('click', '.offcanvas-products-delete', function (event) {
+    var $this = $(this);
+    var cartId = $(this).data('id');
+    $http["delete"]("/carts/".concat(cartId)).then(function (res) {
+      $this.parents('.product-list').remove();
+    });
+  });
+  $(document).on('click', '.quantity-wrap .right i', function (event) {
     event.stopPropagation();
     var input = $(this).parent().siblings('input');
 

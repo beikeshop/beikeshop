@@ -213,12 +213,17 @@ header .header-content .right-btn .nav-link i {
   border-top: 1px solid #eee;
 }
 #offcanvas-right-cart .offcanvas-right-products .product-list .left {
-  width: 100px;
+  width: 90px;
   margin-right: 10px;
 }
 #offcanvas-right-cart .offcanvas-right-products .product-list .left img {
-  max-height: 100px;
+  max-height: 90px;
 }
+#offcanvas-right-cart .offcanvas-right-products .product-list .right .offcanvas-products-delete {
+  cursor: pointer;
+  color: #999;
+}
+
 footer {
   background: #fafafa;
   margin-top: 5rem;
