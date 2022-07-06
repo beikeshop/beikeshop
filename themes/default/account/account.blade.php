@@ -23,7 +23,7 @@
         @endif
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">个人中心</h6>
+            <h6 class="card-title">个人中心</h6>
             <a href="http://" class="text-muted">修改休息</a>
           </div>
           <div class="card-body">
@@ -39,7 +39,7 @@
         </div>
         <div class="card account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">我的订单</h6>
+            <h6 class="card-title">我的订单</h6>
             <a href="http://" class="text-muted">全部订单</a>
           </div>
           <div class="card-body">

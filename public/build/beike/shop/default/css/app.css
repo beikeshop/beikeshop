@@ -161,43 +161,6 @@
   color: #fff;
 }
 
-.account-card {
-  border: none;
-}
-.account-card .card-header {
-  border: none;
-  background-color: #fff;
-  padding-top: 1rem;
-}
-.account-card .card-header h6 {
-  border-left: 3px solid #fd560f;
-  padding-left: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-}
-.account-card .card-items > a {
-  width: 25%;
-  color: #444444;
-  text-decoration: none !important;
-}
-.account-card .card-items > a i {
-  font-size: 2rem;
-}
-.account-card .card-items > a span {
-  display: flex;
-}
-.account-card .order-wrap {
-  background-color: #f6f8f9;
-  padding: 2rem 1rem;
-}
-.account-card .order-wrap .icon i {
-  font-size: 4.5rem;
-  color: #777;
-}
-.account-card .order-wrap .text {
-  font-size: 1rem;
-}
-
 header {
   background: #fff;
 }
@@ -374,6 +337,32 @@ body.page-login .card {
 body.page-account {
   background-color: #F7F8FA;
 }
+body.page-account .account-card {
+  border: none;
+}
+body.page-account .account-card .card-items > a {
+  width: 25%;
+  color: #444444;
+  text-decoration: none !important;
+}
+body.page-account .account-card .card-items > a i {
+  font-size: 2rem;
+}
+body.page-account .account-card .card-items > a span {
+  display: flex;
+}
+body.page-account .account-card .order-wrap {
+  background-color: #f6f8f9;
+  padding: 2rem 1rem;
+}
+body.page-account .account-card .order-wrap .icon i {
+  font-size: 4.5rem;
+  color: #777;
+}
+body.page-account .account-card .order-wrap .text {
+  font-size: 1rem;
+}
+
 body.page-product .product-image .left {
   margin-right: 1rem;
 }
@@ -744,4 +733,31 @@ body.page-account-order-list .order-wrap .table .product-info {
 body.page-account-order-list .order-wrap .table .product-info .img {
   width: 60px;
   margin-right: 10px;
+}
+
+body.page-account-order-info {
+  background-color: #F7F8FA;
+}
+body.page-account-order-info .product-list {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+body.page-account-order-info .product-list .left {
+  width: 90px;
+  margin-right: 10px;
+}
+body.page-account-order-info .product-list .right {
+  color: #767676;
+  font-size: 0.9375rem;
+}
+body.page-account-order-info .product-list .right .name {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  color: #1a1a1a;
+}
+body.page-account-order-info .product-list .right .price {
+  font-weight: bold;
 }

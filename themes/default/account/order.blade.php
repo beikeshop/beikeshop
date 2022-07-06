@@ -22,11 +22,9 @@
             <h6 class="mb-0">我的订单</h6>
           </div>
           <div class="card-body">
-            {{-- table-bordered --}}
             <table class="table ">
               <thead>
                 <tr>
-                  {{-- <th>订单号</th> --}}
                   <th>订单详情</th>
                   <th>金额</th>
                   <th>状态</th>
@@ -42,7 +40,6 @@
                       <span class="order-number">订单号：{{ $order->number }}</span>
                     </td>
                   </tr>
-                  {{-- {{ dd($order->orderProducts) }} --}}
                   @foreach ($order->orderProducts as $product)
                   <tr class="{{ $loop->first ? 'first-tr' : '' }}">
                     <td>

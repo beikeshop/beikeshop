@@ -46,8 +46,7 @@ class OrderController extends Controller
     {
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($number, $customer);
-        dd($order);
-        return view('account/order_show', ['data' => $order]);
+        return view('account/order_info', ['order' => $order]);
     }
 
     public function success(Request $request, $number): View

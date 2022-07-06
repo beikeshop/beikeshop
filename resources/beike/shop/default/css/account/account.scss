@@ -3,7 +3,37 @@
 body.page-account {
   background-color: #F7F8FA;
 
-  footer {
-    // background-color: #fff;
+  .account-card {
+    border: none;
+
+    .card-items {
+      > a {
+        width: 25%;
+        color: #444444;
+        text-decoration: none !important;
+        i {
+          font-size: 2rem;
+        }
+
+        span {
+          display: flex;
+        }
+      }
+    }
+
+    .order-wrap {
+      background-color: #f6f8f9;
+      padding: 2rem 1rem;
+      .icon {
+        i {
+          font-size: 4.5rem;
+          color: #777;
+        }
+      }
+
+      .text {
+        font-size: 1rem;
+      }
+    }
   }
 }

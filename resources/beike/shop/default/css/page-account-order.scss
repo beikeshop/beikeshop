@@ -7,7 +7,6 @@ body.page-account-order-list {
     .table {
       .sep-row {
         height: 20px;
-        // border: 0;
 
         td {
           border: 0;
@@ -15,10 +14,8 @@ body.page-account-order-list {
       }
 
       .head-tr {
-        // border: 0;
         background: #f5f5f5;
         td {
-          // border: 0;
           border-bottom-color: #f5f5f5;
         }
       }
@@ -39,13 +36,49 @@ body.page-account-order-list {
 
       .product-info {
         display: flex;
-        align-items: center; // flex-start | center
-        // justify-content: space-between; // flex-end | center | space-between
-        // flex-wrap: wrap;
+        align-items: center;
+
         .img {
           width: 60px;
           margin-right: 10px;
         }
+      }
+    }
+  }
+}
+
+body.page-account-order-info {
+  background-color: #F7F8FA;
+
+  .order-head {
+
+  }
+
+  .product-list {
+    display: flex;
+    align-items: center; // flex-start | center
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    // justify-content: space-between; // flex-end | center | space-between
+
+    .left {
+      width: 90px;
+      margin-right: 10px;
+    }
+
+    .right {
+      color: #767676;
+      font-size: .9375rem;
+
+      .name {
+        font-weight: bold;
+        margin-bottom: .4rem;
+        color: #1a1a1a;
+      }
+
+      .price {
+        font-weight: bold;
       }
     }
   }

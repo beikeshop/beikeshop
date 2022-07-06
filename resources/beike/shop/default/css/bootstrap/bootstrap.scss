@@ -32,15 +32,16 @@ $breadcrumb-bg:                     transparent;
 $border-radius:               0;
 $input-btn-padding-y:         .6rem;
 $input-btn-font-size:         0.9rem;
+$input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
+
 // $input-btn-padding-x:         .75rem !default;
+$btn-focus-width: 0;
+// $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
 $link-decoration: none;
 $link-color: #3480e7;
 $link-hover-color: $primary;
-$btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
-$input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
 $form-select-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
-$btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
 $form-floating-input-padding-t:   1.325rem;
 $form-floating-input-padding-b:   .625rem;
@@ -72,4 +73,29 @@ $dropdown-item-padding-y: .4rem;
 
 .table > :not(:first-child) {
   border-top: none;
+}
+
+.card {
+  // box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
+  border: none;
+
+  .card-header {
+    padding: 1rem 1rem .3rem;
+    background-color: #fff;
+    // font-weight: bold;
+    // font-size: .8rem;
+    border-bottom: 0 solid rgba(0,0,0,.125);
+
+    &:first-child {
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      padding-left: 10px;
+      border-left: 3px solid $primary;
+      line-height: 1;
+      font-size: 14px;
+    }
+  }
 }
