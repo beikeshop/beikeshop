@@ -47,6 +47,7 @@ body {
 .main-content > #content {
   flex: 1;
   padding: 1rem 1rem 4rem;
+  margin-top: 42px;
   overflow-y: auto;
 }
 @media screen and (max-width: 991px) {
@@ -55,10 +56,23 @@ body {
   }
 }
 
+.page-title-box {
+  position: fixed;
+  top: 60px;
+  left: 190px;
+  z-index: 9;
+  right: 0;
+  height: 43px;
+  line-height: 43px;
+  padding: 0 28px;
+  background-color: #fff;
+  border-bottom: 1px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+}
 .page-title-box .page-title {
   font-size: 15px;
   margin: 0;
-  margin-bottom: 20px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

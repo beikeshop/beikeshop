@@ -39,6 +39,10 @@ class Sidebar extends Component
             $this->addLink('用户组', admin_route('customer_groups.index'), 'fa fa-tachometer-alt', false);
         }
 
+        if (Str::startsWith($routeName, ['admin.orders.'])) {
+            $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', false);
+        }
+
         return view('admin::components.sidebar');
     }
 

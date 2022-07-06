@@ -30,9 +30,9 @@
     <aside class="sidebar navbar-expand-xs border-radius-xl">
       <x-admin-sidebar />
     </aside>
+    <div class="page-title-box"><h4 class="page-title">@yield('title')</h4></div>
     <div id="content">
       <div class="container-fluid p-0">
-        <div class="page-title-box"><h4 class="page-title">@yield('title')</h4></div>
         @yield('content')
       </div>
     </div>

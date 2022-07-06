@@ -16,7 +16,7 @@ class Header extends Component
     public function __construct()
     {
         $this->addLink('管理首页', admin_route('home.index'), equal_route('admin.home.index'));
-        $this->addLink('订单管理', admin_route('home.index'), equal_route('admin.orders.index'));
+        $this->addLink('订单管理', admin_route('orders.index'), equal_route('admin.orders.index'));
         $this->addLink('商品管理', admin_route('products.index'), equal_route('admin.products.index'));
         $this->addLink('会员管理', admin_route('customers.index'), equal_route('admin.customers.index'));
         $this->addLink('营销管理', admin_route('home.index'), equal_route('admin.promotions.index'));
