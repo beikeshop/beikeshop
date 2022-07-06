@@ -2494,6 +2494,8 @@ $(document).ready(function ($) {
     $('.offcanvas-right-cart-amount').html(res.data.amount_format);
 
     if (res.data.carts.length) {
+      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
+      $('.offcanvas-right-cart-count').html(res.data.carts.length);
       var html = '';
       res.data.carts.forEach(function (e) {
         html += '<div class="product-list d-flex align-items-center">';

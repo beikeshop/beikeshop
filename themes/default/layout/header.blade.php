@@ -1,7 +1,3 @@
-@push('header')
-  {{-- <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script> --}}
-@endpush
-
 <header>
   <div class="top-wrap">
     <div class="container d-flex justify-content-between align-items-center">
@@ -84,6 +80,7 @@
             {{-- <a href="javascript:vido(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-right-cart" aria-controls="offcanvas-right-cart" class="nav-link"><i class="iconfont">&#xe634;</i></a> --}}
             <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvas-right-cart" role="button" aria-controls="offcanvasExample">
               <i class="iconfont">&#xe634;</i>
+              <div class="navbar-icon-link-badge"></div>
             </a>
           </li>
         </ul>
@@ -116,7 +113,7 @@
   </div>
   <div class="offcanvas-footer">
     <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
-      <strong>小计</strong>
+      <strong>小计（<span class="offcanvas-right-cart-count"></span>）</strong>
       <strong class="ms-auto offcanvas-right-cart-amount"></strong>
     </div>
     <div class="p-4">
