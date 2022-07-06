@@ -11,30 +11,28 @@
 
 return [
     [
-        'name' => 'api_key',
-        'label' => 'API Key',
+        'name' => 'publishable_key',
+        'label' => '公钥',
         'type' => 'string',
         'required' => true,
+        'description' => '公钥(Publishable key)',
     ],
     [
-        'name' => 'api_secret',
-        'label' => 'API Secret',
+        'name' => 'secret_key',
+        'label' => '密钥',
         'type' => 'string',
         'required' => true,
+        'description' => '密钥(Secret key)',
     ],
     [
-        'name' => 'description',
-        'label' => '描述',
-        'type' => 'text',
-    ],
-    [
-        'name' => 'country',
-        'label' => '国家',
+        'name' => 'test_mode',
+        'label' => '测试模式',
         'type' => 'select',
         'options' => [
-            ['value' => 'china', 'label' => 'China'],
-            ['value' => 'usa', 'label' => 'USA']
+            ['value' => '1', 'label' => '开启'],
+            ['value' => '0', 'label' => '关闭']
         ],
         'required' => true,
+        'description' => '如开启测试模式请填写测试公钥和密钥, 关闭测试模式则填写正式公钥和密钥',
     ]
 ];
