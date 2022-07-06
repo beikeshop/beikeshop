@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '顾客管理')
+@section('title', '用户组')
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>

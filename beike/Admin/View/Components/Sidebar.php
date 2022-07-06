@@ -27,20 +27,23 @@ class Sidebar extends Component
     public function render()
     {
         $routeName = request()->route()->getName();
-
         if (Str::startsWith($routeName, ['admin.products.', 'admin.categories.'])) {
             $this->addLink('商品分类', admin_route('categories.index'), 'fa fa-tachometer-alt', false);
             $this->addLink('商品列表', admin_route('products.index'), 'fa fa-tachometer-alt', false);
             $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
         }
 
+        if (Str::startsWith($routeName, ['admin.plugins.'])) {
+            $this->addLink('插件列表', admin_route('categories.index'), 'fa fa-tachometer-alt', $routeName == 'admin.plugins.index');
+        }
+
         if (Str::startsWith($routeName, ['admin.customers.', 'admin.customer_groups.'])) {
-            $this->addLink('会员管理', admin_route('customers.index'), 'fa fa-tachometer-alt', false);
-            $this->addLink('用户组', admin_route('customer_groups.index'), 'fa fa-tachometer-alt', false);
+            $this->addLink('会员管理', admin_route('customers.index'), 'fa fa-tachometer-alt', $routeName == 'admin.customers.index');
+            $this->addLink('用户组', admin_route('customer_groups.index'), 'fa fa-tachometer-alt', $routeName == 'admin.customer_groups.index');
         }
 
         if (Str::startsWith($routeName, ['admin.orders.'])) {
-            $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', true);
+            $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', $routeName == 'admin.orders.index');
         }
 
         return view('admin::components.sidebar');
