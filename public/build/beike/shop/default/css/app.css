@@ -208,6 +208,17 @@ header .header-content .right-btn .nav-link i {
   font-size: 1.1rem;
 }
 
+#offcanvas-right-cart .offcanvas-right-products .product-list {
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+}
+#offcanvas-right-cart .offcanvas-right-products .product-list .left {
+  width: 100px;
+  margin-right: 10px;
+}
+#offcanvas-right-cart .offcanvas-right-products .product-list .left img {
+  max-height: 100px;
+}
 footer {
   background: #fafafa;
   margin-top: 5rem;
