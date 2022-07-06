@@ -29,6 +29,10 @@ class OrderController extends Controller
 
     public function show(Request $request, Order $order)
     {
-        dd($order);
+        $data = [
+            'order' => $order,
+        ];
+
+        return view('admin::pages.orders.form', $data);
     }
 }

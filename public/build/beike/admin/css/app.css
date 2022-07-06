@@ -47,7 +47,7 @@ body {
 .main-content > #content {
   flex: 1;
   padding: 1rem 1rem 4rem;
-  margin-top: 42px;
+  margin-top: 44px;
   overflow-y: auto;
 }
 @media screen and (max-width: 991px) {
@@ -62,8 +62,7 @@ body {
   left: 190px;
   z-index: 9;
   right: 0;
-  height: 43px;
-  line-height: 43px;
+  height: 44px;
   padding: 0 28px;
   background-color: #fff;
   border-bottom: 1px solid #f1f1f1;
@@ -311,11 +310,16 @@ hr.horizontal.dark {
   padding: 1rem 1rem 0.3rem;
   background-color: #fff;
   font-weight: bold;
-  font-size: 0.8rem;
   border-bottom: 0 solid rgba(0, 0, 0, 0.125);
 }
 .card .card-header:first-child {
   border-radius: 1rem 1rem 0 0;
+}
+.card .card-header .card-title {
+  margin-bottom: 0;
+  padding-left: 10px;
+  border-left: 3px solid #fd560f;
+  line-height: 1;
 }
 .card .card-body {
   padding: 1rem;
@@ -329,10 +333,8 @@ table.table thead th {
   white-space: nowrap;
 }
 table.table td {
-  border-bottom: 0;
   font-size: 0.8125rem;
   vertical-align: middle;
-  border-top: 1px solid #edf2f9;
 }
 table.table.table-striped > tbody > tr:nth-of-type(odd) {
   background: transparent;

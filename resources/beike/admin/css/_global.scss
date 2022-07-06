@@ -8,8 +8,6 @@
 // @modified         2021-08-24 15:07:05
 //
 
-$main_color: #fd560f;
-
 body {
   // min-height: 100vh;
   // background-color: #f9f9f9;
@@ -45,7 +43,7 @@ body {
   > #content {
     flex: 1;
     padding: 1rem 1rem 4rem;
-    margin-top: 42px;
+    margin-top: 44px;
     overflow-y: auto;
 
     @media screen and (max-width: 991px) {
@@ -60,8 +58,7 @@ body {
   left: 190px;
   z-index: 9;
   right: 0;
-  height: 43px;
-  line-height: 43px;
+  height: 44px;
   padding: 0 28px;
   background-color: #fff;
   border-bottom: 1px solid #f1f1f1;
@@ -116,7 +113,7 @@ body {
     }
 
     & ~ input:checked ~ .toggle-outside  {
-      background-color: $main_color;
+      background-color: $primary;
 
       .toggle-inside {
         left: 23px;
@@ -199,7 +196,7 @@ body.page-seller-product {
     }
 
     &:active {
-      color: $main_color;
+      color: $primary;
     }
   }
 }

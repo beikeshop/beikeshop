@@ -10,6 +10,7 @@
 
 $primary: #fd560f;
 $border-radius:  0;
+$font-size-base: 0.92rem;
 $form-check-input-width: 1.2em;
 $form-switch-width: 2.6em;
 $link-decoration: none;
@@ -18,6 +19,8 @@ $form-floating-input-padding-t:   1.325rem;
 $form-floating-input-padding-b:   .625rem;
 $form-floating-padding-y:         .8rem;
 $form-floating-height:        50px;
+
+$table-border-color: #e9ecef;
 
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap-5.1.3/scss/bootstrap';

@@ -22,23 +22,25 @@ hr.horizontal.dark {
 }
 
 .card {
-  // box-shadow: 0 20px 27px 0 rgba(0, 0, 0, .05);
-  // box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%);
   box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
-  // border: 0 solid rgba(0,0,0,.125);
-  // border: 1px solid #edf2f9;
   border: none;
-  // border-radius: 0.5rem;
 
   .card-header {
     padding: 1rem 1rem .3rem;
     background-color: #fff;
     font-weight: bold;
-    font-size: .8rem;
+    // font-size: .8rem;
     border-bottom: 0 solid rgba(0,0,0,.125);
 
     &:first-child {
       border-radius: 1rem 1rem 0 0;
+    }
+
+    .card-title {
+      margin-bottom: 0;
+      padding-left: 10px;
+      border-left: 3px solid $primary;
+      line-height: 1;
     }
   }
 
@@ -60,10 +62,10 @@ table.table {
   }
 
   td {
-    border-bottom: 0;
+    // border-bottom: 0;
     font-size: .8125rem;
     vertical-align: middle;
-    border-top: 1px solid #edf2f9;
+    // border-top: 1px solid #edf2f9;
   }
 
   &.table-striped>tbody>tr {

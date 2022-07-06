@@ -39,7 +39,7 @@
 
       &.active, &:hover {
         a {
-          color: $main_color;
+          color: $primary;
           background-color: #f4f4f4;
         }
       }
@@ -53,7 +53,7 @@
           width: 2px;
           height: 100%;
           z-index: 1;
-          background: $main_color;
+          background: $primary;
         }
       }
     }

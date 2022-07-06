@@ -40,7 +40,7 @@ class Sidebar extends Component
         }
 
         if (Str::startsWith($routeName, ['admin.orders.'])) {
-            $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', false);
+            $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', true);
         }
 
         return view('admin::components.sidebar');
