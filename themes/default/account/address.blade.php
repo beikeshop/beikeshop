@@ -118,7 +118,7 @@
         },
 
         deleteAddress(index) {
-          this.$confirm('确定要删除用户码？', '提示', {
+          this.$confirm('确定要删除地址吗？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
@@ -143,6 +143,10 @@
             const url = `/account/addresses${type == 'put' ? '/' + this.form.id : ''}`;
 
             $http[type](url, this.form).then((res) => {
+              if (res.data.default) {
+                this.addresses.map(e => e.default = false)
+              }
+
               if (type == 'post') {
                 this.addresses.push(res.data)
               } else {
