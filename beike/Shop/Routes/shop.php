@@ -2,6 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\AddressController;
+use Beike\Shop\Http\Controllers\Account\ForgottenController;
 use Beike\Shop\Http\Controllers\Account\OrderController;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,9 @@ Route::prefix('/')
         Route::get('register', [RegisterController::class, 'index'])->name('register.index');
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
+        Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
+        Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
+        Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
         Route::resource('countries.zones', ZoneController::class);
 
         Route::middleware('shop_auth:' . Customer::AUTH_GUARD)

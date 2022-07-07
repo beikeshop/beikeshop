@@ -12,9 +12,13 @@
 namespace Beike\Shop\Services;
 
 
+use Beike\Libraries\Notification;
 use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
+use Beike\Repositories\VerifyCodeRepo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AccountService
 {
@@ -37,5 +41,55 @@ class AccountService
         $data['avatar'] = '';
 
         return CustomerRepo::create($data);
+    }
+
+    /**
+     * 发送验证码通过$type方式，type为email或telephone
+     * @param $email
+     * @param $type
+     * @return void
+     */
+    public static function sendVerifyCodeForForgotten($email, $type) {
+        $code = str_pad(mt_rand(10, 999999), 6, '0', STR_PAD_LEFT);
+
+        VerifyCodeRepo::create([
+            'account' => $email,
+            'code' => $code,
+        ]);
+
+        Log::info("找回密码验证码：{$code}");
+
+        Notification::verifyCode($code, "您的验证码是%s,该验证码仅用于找回密码。", $type);
+    }
+
+    /**
+     * 验证验证码是否正确，并修改密码为新密码
+     * @param $code
+     * @param $account
+     * @param $password
+     * @param $type  $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
+     * @return void
+     */
+    public static function verifyAndChangePassword($code, $account, $password, $type = 'email')
+    {
+        $verifyCode = VerifyCodeRepo::findByAccount($account);
+        if ($verifyCode->created_at->addMinutes(10) < Carbon::now()) {
+            $verifyCode->delete();
+            throw new \Exception("您的验证码已过期（10分钟），请重新获取");
+        }
+
+        if ($verifyCode->code != $code) {
+            throw new \Exception("您的验证码错误");
+        }
+
+        if ($type == 'email') {
+            $customer = CustomerRepo::findByEmail($account);
+        } elseif ($type == 'telephone') {
+            throw new \Exception("暂不支持手机号码找回密码");
+        } else {
+            throw new \Exception("找回密码类型错误");
+        }
+        CustomerRepo::update($customer, ['password' => $password]);
+
     }
 }

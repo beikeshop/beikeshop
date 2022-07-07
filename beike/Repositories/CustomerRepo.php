@@ -28,16 +28,24 @@ class CustomerRepo
     }
 
     /**
-     * @param $id
+     * @param $customer
      * @param $data
      * @return bool|int
      */
-    public static function update($id, $data)
+    public static function update($customer, $data)
     {
+        if (!$customer instanceof Customer) {
+            $customer = Customer::query()->findOrFail($customer);
+        }
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-        return Customer::query()->find($id)->update($data);
+        return $customer->update($data);
+    }
+
+    public static function findByEmail($email)
+    {
+        return Customer::query()->where('email', $email)->first();
     }
 
     /**
