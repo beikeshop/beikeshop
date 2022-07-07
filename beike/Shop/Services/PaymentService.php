@@ -98,7 +98,7 @@ class PaymentService
         $total = round($this->order->total, 2) * 100;
         $stripeChargeParameters = array(
             'amount' => $total,
-            'currency' => 'USD',
+            'currency' => $this->order->currency_code,
             'metadata' => array(
                 'orderId' => $this->order->id,
             ),
