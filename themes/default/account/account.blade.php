@@ -13,7 +13,7 @@
 
     <div class="row">
 
-      <x-hop-sidebars/>
+      <x-shop-sidebar/>
 
       <div class="col-12 col-md-9">
         @if (\Session::has('success'))
