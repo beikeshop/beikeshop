@@ -43,9 +43,10 @@
                 <el-input type="password" v-model="form.password_confirmation" placeholder="确认密码"></el-input>
               </el-form-item>
 
-              <div class="mt-5 mb-3">
+              <div class="mt-5 mb-3 d-flex justify-content-between">
                 <button type="button" @click="submitForm('form')" class="btn w-50 btn-dark">@{{ !isCode ? '发送验证码' : '提交' }}</button>
               </div>
+              <a href="javascript:void(0)" v-if="isCode" @click="isCode = false" class="text-muted">返回上一步</a>
             </div>
           </el-form>
         </div>
@@ -126,8 +127,12 @@
 
             $http.post(url, this.form).then((res) => {
               this.$message.success(res.message);
+              this.$refs[form].clearValidate();
+
+              if (this.isCode) {
+                location = "{{ shop_route('login.index') }}"
+              }
               this.isCode = true
-              this.$refs[form].resetFields();
             })
           });
         }

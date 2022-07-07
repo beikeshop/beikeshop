@@ -29,6 +29,10 @@ body {
   min-height: 600px;
 }
 
+.font-size-12 {
+  font-size: 12px;
+}
+
 .main-content {
   display: flex;
   transition: margin-left 0.25s ease-in-out, left 0.25s ease-in-out, margin-right 0.25s ease-in-out, right 0.25s ease-in-out;

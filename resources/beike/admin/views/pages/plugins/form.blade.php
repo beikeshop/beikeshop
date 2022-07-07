@@ -12,12 +12,14 @@
     <div class="card-body pt-5">
       <el-form :model="form" :rules="rules" ref="form" label-width="110px">
         <div v-for="column, index in source.columns">
-          <el-form-item :label="column.label" v-if="column.type == 'string'" class="form-max-w">
+          <el-form-item :label="column.label" v-if="column.type == 'string'" class="form-max-w" :prop="column.required ? column.name : ''">
             <el-input v-model="form[column.name]" :placeholder="column.label"></el-input>
+            <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
 
-          <el-form-item :label="column.label" v-if="column.type == 'text'" style="max-width: 900px;">
+          <el-form-item :label="column.label" v-if="column.type == 'text'" style="max-width: 900px;" :prop="column.required ? column.name : ''">
             <textarea v-model="form[column.name]" :data-key="column.name" id="input-tinymce"></textarea>
+            <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
 
           <el-form-item :label="column.label" v-if="column.type == 'select'" class="form-max-w">
@@ -26,9 +28,11 @@
                 :value="option.value">
               </el-option>
             </el-select>
+            <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
           <el-form-item :label="column.label" v-if="column.type == 'bool'">
             <el-switch v-model="form[column.name]" :active-value="1" :inactive-value="0"></el-switch>
+            <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
         </div>
         <el-form-item>
@@ -64,6 +68,9 @@
       beforeMount () {
         this.source.columns.forEach((e) => {
           this.$set(this.form, e.name, e.value)
+          if (e.required) {
+            this.rules[e.name] = [{required: true, message: `请输入${e.label}`, trigger: 'blur'}]
+          }
         })
       },
       // 实例被挂载后调用
@@ -79,13 +86,8 @@
               return;
             }
 
-            $.ajax({
-              url: `/admin/plugins/{{ $plugin->code }}`,
-              type: 'PUT',
-              data: this.form,
-              success: function(res) {
-                console.log(res)
-              }
+            $http.put(`/admin/plugins/{{ $plugin->code }}`, this.form).then((res) => {
+              this.$message.success(res.message);
             })
           });
         },
