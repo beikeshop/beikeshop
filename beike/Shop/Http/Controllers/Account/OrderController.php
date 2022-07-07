@@ -81,4 +81,32 @@ class OrderController extends Controller
         $order = OrderRepo::getOrderByNumber($number, $customer);
         return (new PaymentService($order))->pay();
     }
+
+
+    /**
+     * 订单支付页面
+     *
+     * @param Request $request
+     * @param $number
+     * @return array
+     * @throws \Exception
+     */
+    public function capture(Request $request, $number): array
+    {
+        try {
+            $customer = current_customer();
+            $order = OrderRepo::getOrderByNumber($number, $customer);
+            $creditCardData = $request->all();
+            $result = (new PaymentService($order))->capture($creditCardData);
+            if ($result) {
+                $order->status = 'paid';
+                $order->save();
+                return json_success('支付成功');
+            } else {
+                return json_success('支付失败');
+            }
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
 }

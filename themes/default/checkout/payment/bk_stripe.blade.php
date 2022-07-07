@@ -123,7 +123,9 @@
               return;
             }
 
-            $http.post(`orders/${this.source.order.number}/pay`, this.form).then((res) => {
+            console.log(this.form);
+
+            $http.post(`/orders/${this.source.order.number}/pay`, this.form).then((res) => {
               console.log(res)
             })
           });

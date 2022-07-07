@@ -13,7 +13,10 @@ namespace Beike\Shop\Services;
 
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
-use Cartalyst\Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Exception\ApiErrorException;
+use Stripe\Stripe;
+use Stripe\Token;
 
 class PaymentService
 {
@@ -43,24 +46,67 @@ class PaymentService
     {
         if ($this->paymentMethodCode == 'bk_stripe') {
             $apiKey = setting('bk_stripe.secret_key');
-            $stripe = Stripe::make($apiKey, '2020-08-27');
+            Stripe::setApiKey($apiKey);
+            // Stripe::setApiVersion('2020-08-27');
 
             /**
-            $customer = $stripe->customers()->create([
-                'email' => $this->order->email,
-            ]);
-
-            $customers = $stripe->customers()->all();
-
-            $charge = $stripe->charges()->create([
-                'customer' => $customer['id'],
-                'currency' => 'USD',
-                'amount'   => 50.49,
-            ]);
+             * $customer = $stripe->customers()->create([
+             * 'email' => $this->order->email,
+             * ]);
+             *
+             * $customers = $stripe->customers()->all();
+             *
+             * $charge = $stripe->charges()->create([
+             * 'customer' => $customer['id'],
+             * 'currency' => 'USD',
+             * 'amount'   => 50.49,
+             * ]);
              **/
 
             return view("checkout.payment.{$this->paymentMethodCode}", ['order' => $this->order]);
             // echo $charge['id'];
+        } else {
+            return view('没有支付方式');
         }
+    }
+
+    /**
+     * @throws ApiErrorException
+     */
+    public function capture($creditCardData): bool
+    {
+        if ($this->order->status != 'unpaid') {
+            throw new \Exception('订单已支付');
+        }
+        $apiKey = setting('bk_stripe.secret_key');
+        Stripe::setApiKey($apiKey);
+        $token = Token::create([
+            'card' => [
+                'number' => $creditCardData['cardnum'],
+                'exp_year' => $creditCardData['year'],
+                'exp_month' => $creditCardData['month'],
+                'cvc' => $creditCardData['cvv'],
+            ],
+        ]);
+
+        // $customer = Customer::create([
+        //     'email' => $this->order->email,
+        // ]);
+        // $customerId = $customer['id'];
+
+        $tokenId = $token['id'];
+        $total = round($this->order->total, 2) * 100;
+        $stripeChargeParameters = array(
+            'amount' => $total,
+            'currency' => 'USD',
+            'metadata' => array(
+                'orderId' => $this->order->id,
+            ),
+            'source' => $tokenId,
+            // 'customer' => $customerId,
+        );
+
+        $charge = \Stripe\Charge::create($stripeChargeParameters);
+        return $charge['paid'] && $charge['captured'];
     }
 }

@@ -54,6 +54,7 @@ Route::prefix('/')
 
                 Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('orders.success');
                 Route::get('orders/{number}/pay', [OrderController::class, 'pay'])->name('orders.pay');
+                Route::post('orders/{number}/pay', [OrderController::class, 'capture'])->name('orders.capture');
             });
 
         Route::prefix('account')

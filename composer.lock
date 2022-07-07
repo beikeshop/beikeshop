@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e50a922b00db84582eaa827333fe7da",
+    "content-hash": "c52e9e1b5b722611e7a5c8632e2611df",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -133,69 +133,6 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
-        },
-        {
-            "name": "cartalyst/stripe",
-            "version": "v2.4.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cartalyst/stripe.git",
-                "reference": "e75b4d714fec5f034d533e55f5365f0229b5686d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/stripe/zipball/e75b4d714fec5f034d533e55f5365f0229b5686d",
-                "reference": "e75b4d714fec5f034d533e55f5365f0229b5686d",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.0|~7.0",
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "2.4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cartalyst\\Stripe\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com",
-                    "homepage": "https://cartalyst.com"
-                }
-            ],
-            "description": "A comprehensive Stripe API package.",
-            "keywords": [
-                "cartalyst",
-                "php",
-                "stripe"
-            ],
-            "support": {
-                "issues": "https://github.com/cartalyst/stripe/issues",
-                "source": "https://github.com/cartalyst/stripe/tree/v2.4.6"
-            },
-            "time": "2021-10-09T10:40:49+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
