@@ -20,19 +20,32 @@ class AddressService
 {
     public static function create($data)
     {
-        $data['customer_id'] = current_customer()->id;
+        $customer = current_customer();
+        $data['customer_id'] = $customer->id;
         $data['zone'] = ZoneRepo::find($data['zone_id'])->name;
         $address = AddressRepo::create($data);
+
+        if ($data['default']) {
+            $customer->address_id = $address->id;
+            $customer->save();
+        }
         return $address;
     }
 
     public static function update($id, $data)
     {
+        $customer = current_customer();
         $address = AddressRepo::find($id);
-        $data['zone'] = ZoneRepo::find($data['zone_id'])->name;
-        if ($address->customer_id != current_customer()->id) {
-            $address;
+        if ($address->customer_id != $customer->id) {
+            return null;
         }
-        return AddressRepo::update($address, $data);
+        $data['zone'] = ZoneRepo::find($data['zone_id'])->name;
+        $address = AddressRepo::update($address, $data);
+        if ($data['default'] && $customer->address_id != $address->id) {
+            $customer->address_id = $address->id;
+            $customer->save();
+        }
+
+        return $address;
     }
 }

@@ -26,6 +26,7 @@ class AddressResource extends JsonResource
             'zipcode' => $this->zipcode,
             'address_1' => $this->address_1,
             'address_2' => $this->address_2,
+            'default' => (current_customer()->address_id == $this->id),
         ];
 
         return $data;
