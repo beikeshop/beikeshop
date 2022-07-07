@@ -15,7 +15,7 @@
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 3])</div>
     </div>
 
-    <div class="card order-wrap">
+    <div class="card order-wrap border">
       <div class="card-body">
         <div class="order-top">
           <div class="left">
@@ -33,6 +33,9 @@
                   <tr>
                     <td>支付方式：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
                     <td><a href="/">查看订单详情</a></td>
+                  </tr>
+                  <tr>
+                    <td><a href="{{ shop_route('orders.pay', [$order['number']]) }}" class="btn btn-primary btn-sm">立即支付</a></td>
                   </tr>
                 </tbody>
               </table>

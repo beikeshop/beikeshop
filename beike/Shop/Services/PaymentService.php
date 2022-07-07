@@ -59,7 +59,7 @@ class PaymentService
             ]);
              **/
 
-            return view("checkout.payment.{$this->paymentMethodCode}");
+            return view("checkout.payment.{$this->paymentMethodCode}", ['order' => $this->order]);
             // echo $charge['id'];
         }
     }
