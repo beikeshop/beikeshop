@@ -116,56 +116,7 @@
       </div>
     </div>
 
-    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
-      <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
-        <el-form-item label="姓名" prop="name">
-          <el-input v-model="dialogAddress.form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="联系电话" prop="phone">
-          <el-input maxlength="11" v-model="dialogAddress.form.phone"></el-input>
-        </el-form-item>
-        <el-form-item label="地址" required>
-          <div class="row">
-            <div class="col-4">
-              <el-form-item>
-                <el-select v-model="dialogAddress.form.country_id" filterable placeholder="选择国家" @change="countryChange">
-                  <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </div>
-            <div class="col-4">
-              <el-form-item prop="zone_id">
-                <el-select v-model="dialogAddress.form.zone_id" filterable placeholder="选择省份">
-                  <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </div>
-            <div class="col-4">
-              <el-form-item prop="city">
-                <el-input v-model="dialogAddress.form.city" placeholder="输入 city"></el-input>
-              </el-form-item>
-            </div>
-          </div>
-        </el-form-item>
-        <el-form-item label="邮编" prop="zipcode">
-          <el-input v-model="dialogAddress.form.zipcode"></el-input>
-        </el-form-item>
-        <el-form-item label="详细地址 1" prop="address_1">
-          <el-input v-model="dialogAddress.form.address_1"></el-input>
-        </el-form-item>
-        <el-form-item label="详细地址 2">
-          <el-input v-model="dialogAddress.form.address_2"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="addressFormSubmit('addressForm')">保存</el-button>
-          <el-button @click="closeAddressDialog('addressForm')">取消</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
+    @include('shared.address-form')
   </div>
 @endsection
 @push('add-scripts')
@@ -202,6 +153,7 @@
             city: '',
             address_1: '',
             address_2: '',
+            default: false,
           }
         },
 
@@ -228,6 +180,7 @@
             })
           }
 
+          console.log(1)
           this.dialogAddress.show = true
         },
 

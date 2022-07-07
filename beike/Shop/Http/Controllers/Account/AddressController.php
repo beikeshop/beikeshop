@@ -17,6 +17,7 @@ use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Repositories\AddressRepo;
 use Beike\Shop\Services\AddressService;
 use Illuminate\Http\Request;
+use Beike\Repositories\CountryRepo;
 
 class AddressController extends Controller
 {
@@ -24,6 +25,7 @@ class AddressController extends Controller
     {
         $addresses = AddressRepo::listByCustomer(current_customer());
         $data = [
+            'countries' => CountryRepo::all(),
             'addresses' => AddressResource::collection($addresses),
         ];
 

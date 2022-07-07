@@ -17,7 +17,7 @@
       {{-- {{ dd($order) }} --}}
       <div class="col-12 col-md-9">
         <div class="card mb-4 order-head">
-          <div class="card-header"><h6 class="card-title">订单详情</h6></div>
+          <div class="card-header"><h5 class="card-title">订单详情</h5></div>
           <div class="card-body">
             <div class="bg-light p-2">
               <table class="table table-borderless mb-0">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="card mb-4">
-          <div class="card-header"><h6 class="card-title">订购商品</h6></div>
+          <div class="card-header"><h5 class="card-title">订购商品</h5></div>
           <div class="card-body">
             @foreach ($order->orderProducts as $product)
             <div class="product-list">
@@ -58,14 +58,14 @@
         </div>
 
         <div class="card mb-4">
-          <div class="card-header"><h6 class="card-title">物流状态</h6></div>
+          <div class="card-header"><h5 class="card-title">物流状态</h5></div>
           <div class="card-body">
 
           </div>
         </div>
 
         <div class="card mb-4">
-          <div class="card-header"><h6 class="card-title">订单状态</h6></div>
+          <div class="card-header"><h5 class="card-title">订单状态</h5></div>
           <div class="card-body">
 
           </div>
