@@ -1,6 +1,6 @@
 
-<script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
-<script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+<script src="{{ asset('bk_stripe/vue/2.6.14/vue.js') }}"></script>
+<script src="{{ asset('bk_stripe/element-ui/2.15.6/js.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 
 <div class="row mt-5" id="bk-stripe-app" v-cloak>
