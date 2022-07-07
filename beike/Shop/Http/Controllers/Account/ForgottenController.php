@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
+use Beike\Shop\Http\Requests\ForgottenRequest;
 use Beike\Shop\Services\AccountService;
 use Illuminate\Http\Request;
 
