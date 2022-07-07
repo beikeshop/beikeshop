@@ -41,6 +41,11 @@ class VerifyCodeRepo
         return VerifyCode::query()->where('account', $account)->first();
     }
 
+    public static function deleteByAccount($account)
+    {
+        return VerifyCode::query()->where('account', $account)->delete();
+    }
+
     /**
      * @param $id
      * @return void

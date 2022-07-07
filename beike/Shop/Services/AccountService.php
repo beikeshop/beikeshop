@@ -52,6 +52,7 @@ class AccountService
     public static function sendVerifyCodeForForgotten($email, $type) {
         $code = str_pad(mt_rand(10, 999999), 6, '0', STR_PAD_LEFT);
 
+        VerifyCodeRepo::deleteByAccount($email);
         VerifyCodeRepo::create([
             'account' => $email,
             'code' => $code,
@@ -90,6 +91,6 @@ class AccountService
             throw new \Exception("找回密码类型错误");
         }
         CustomerRepo::update($customer, ['password' => $password]);
-
+        $verifyCode->delete();
     }
 }
