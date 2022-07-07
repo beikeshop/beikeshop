@@ -13,8 +13,9 @@ namespace Beike\Repositories;
 
 use Carbon\Carbon;
 use Beike\Models\Order;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class OrderRepo
 {
@@ -57,10 +58,37 @@ class OrderRepo
     }
 
 
+    /**
+     * 通过订单号获取订单
+     *
+     * @param $number
+     * @param $customer
+     * @return Builder|Model|object|null
+     */
     public static function getOrderByNumber($number, $customer)
     {
         $order = Order::query()
             ->where('number', $number)
+            ->where('customer_id', $customer->id)
+            ->first();
+        return $order;
+    }
+
+
+    /**
+     * 通过订单ID或者订单号获取订单
+     *
+     * @param $number
+     * @param $customer
+     * @return Builder|Model|object|null
+     */
+    public static function getOrderByIdOrNumber($number, $customer)
+    {
+        $order = Order::query()
+            ->where(function ($query) use ($number) {
+                $query->where('number', $number)
+                    ->orWhere('id', $number);
+            })
             ->where('customer_id', $customer->id)
             ->first();
         return $order;

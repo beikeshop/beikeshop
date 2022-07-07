@@ -14,6 +14,8 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
 use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Beike\Shop\Services\PaymentService;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\OrderList;
 
@@ -49,10 +51,34 @@ class OrderController extends Controller
         return view('account/order_info', ['order' => $order]);
     }
 
+
+    /**
+     * 订单提交成功页
+     *
+     * @param Request $request
+     * @param $number
+     * @return View
+     */
     public function success(Request $request, $number): View
     {
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($number, $customer);
         return view('account/order_success', ['order' => $order]);
+    }
+
+
+    /**
+     * 订单支付页面
+     *
+     * @param Request $request
+     * @param $number
+     * @return Factory|View
+     * @throws \Exception
+     */
+    public function pay(Request $request, $number)
+    {
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($number, $customer);
+        return (new PaymentService($order))->pay();
     }
 }

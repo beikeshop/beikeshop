@@ -47,6 +47,9 @@ Route::prefix('/')
                 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
                 Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
                 Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
+
+                Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('orders.success');
+                Route::get('orders/{number}/pay', [OrderController::class, 'pay'])->name('orders.pay');
             });
 
         Route::prefix('account')
@@ -58,8 +61,6 @@ Route::prefix('/')
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
             });
-
-        Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('account.order_success.index');
     });
 
 Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');
