@@ -1,27 +1,9 @@
-@extends('layout.master')
 
-@section('body-class', 'page-bk-stripe')
+<script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+<script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 
-@push('header')
-  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
-@endpush
-
-@section('content')
-  <div class="container" id="bk-stripe-app" v-cloak>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav>
-
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 4])</div>
-    </div>
-
-    <div class="row mt-5">
+<div class="row mt-5" id="bk-stripe-app" v-cloak>
       <div class="col-12 col-md-8">
         <div class="checkout-black">
           <h5 class="checkout-title">卡信息</h5>
@@ -84,9 +66,7 @@
         </div>
       </div>
     </div>
-  </div>
-@endsection
-@push('add-scripts')
+
   <script>
     new Vue({
       el: '#bk-stripe-app',
@@ -133,4 +113,4 @@
       }
     })
   </script>
-@endpush
+
