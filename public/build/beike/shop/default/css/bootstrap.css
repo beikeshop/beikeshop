@@ -18043,7 +18043,7 @@ textarea.form-control-lg {
   border-bottom: 0 solid rgba(0, 0, 0, 0.125);
 }
 .card .card-header:first-child {
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0;
 }
 .card .card-header .card-title {
   margin-bottom: 0;

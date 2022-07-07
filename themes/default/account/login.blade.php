@@ -36,11 +36,13 @@
                 <el-input v-model="loginForm.email" placeholder="邮箱地址"></el-input>
               </el-form-item>
 
-              <el-form-item label="密码" prop="password">
+              <el-form-item label="密码" prop="password" class="mb-1">
                 <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
               </el-form-item>
 
-              <div class="mt-5 mb-3">
+              <a class="text-muted" href="{{ shop_route('forgotten.index') }}">Forgot Your Password?</a>
+
+              <div class="mt-4 mb-3">
                 <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> 登录</button>
               </div>
             </div>
@@ -87,7 +89,28 @@
 
 @push('add-scripts')
   <script>
-    new Vue({
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (value !== '') {
+          app.$refs.registerForm.validateField('password_confirmation');
+        }
+        callback();
+      }
+    };
+
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入确认密码'));
+      } else if (value !== app.registerForm.password) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+
+    let app = new Vue({
       el: '#page-login',
 
       data: {
@@ -118,10 +141,10 @@
             {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
           ],
           password: [
-            {required: true, message: '请输入密码', trigger: 'blur'}
+            {required: true, validator: validatePass, trigger: 'blur'}
           ],
           password_confirmation: [
-            {required: true, message: '请输入密码', trigger: 'blur'}
+            {required: true, validator: validatePass2, trigger: 'blur'}
           ]
         }
       },

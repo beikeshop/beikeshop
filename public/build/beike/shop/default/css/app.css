@@ -360,16 +360,16 @@ footer .footer-bottom {
   font-weight: bold;
 }
 
-body.page-login .login-item-header {
+body.page-login .login-item-header, body.page-forgotten .login-item-header {
   background: #f8f9fa;
   border-bottom: none;
   padding: 1.2rem 1.5rem;
 }
-body.page-login .login-item-header h6 {
+body.page-login .login-item-header h6, body.page-forgotten .login-item-header h6 {
   font-weight: bold;
   font-size: 1rem;
 }
-body.page-login .card {
+body.page-login .card, body.page-forgotten .card {
   border: none;
 }
 

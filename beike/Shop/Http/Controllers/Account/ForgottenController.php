@@ -44,7 +44,7 @@ class ForgottenController
      */
     public function changePassword(ForgottenRequest $request)
     {
-        AccountService::verifyAndChangePassword($request->get('code'), $request->get('account'), $request->get('password'));
+        AccountService::verifyAndChangePassword($request->get('code'), $request->get('email'), $request->get('password'));
 
         return json_success('密码已修改');
     }

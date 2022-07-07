@@ -85,6 +85,9 @@ class AccountService
 
         if ($type == 'email') {
             $customer = CustomerRepo::findByEmail($account);
+            if (!$customer) {
+                throw new \Exception("账号不存在");
+            }
         } elseif ($type == 'telephone') {
             throw new \Exception("暂不支持手机号码找回密码");
         } else {
