@@ -24,10 +24,13 @@
     <div class="row mt-5">
       <div class="col-12 col-md-8">
         <div class="checkout-black">
-          <h5 class="checkout-title">地址</h5>
+          <div class="checkout-title">
+            <h5 class="mb-0">地址</h5>
+            <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
+          </div>
           <div class="addresses-wrap">
             <div class="row">
-              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
                 <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'shipping_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
@@ -41,8 +44,11 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
-                <div class="item add-addres" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</div>
+              <div class="col-6" v-if="!isAllAddress">
+                <div class="item address-right">
+                  <button class="btn btn-outline-dark w-100 mb-3" @click="isAllAddress = true">选择其他地址</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</button>
+                </div>
               </div>
             </div>
           </div>
@@ -132,6 +138,8 @@
           shipping_method_code: @json($current['shipping_method_code']),
         },
 
+        isAllAddress: false,
+
         source: {
           addresses: @json($addresses ?? []),
           countries: @json($countries ?? []),
@@ -166,6 +174,13 @@
         }
       },
 
+      // 计算属性
+      computed: {
+        // isAddress: {
+        //   this.form.shipping_address_id ==
+        // }
+      },
+
       beforeMount () {
         this.countryChange(this.dialogAddress.form.country_id);
       },
@@ -180,7 +195,6 @@
             })
           }
 
-          console.log(1)
           this.dialogAddress.show = true
         },
 
@@ -199,6 +213,9 @@
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
                 this.source.addresses.push(res.data)
+                this.updateCheckout(res.data.id, 'shipping_address_id')
+                this.form.shipping_address_id = res.data.id
+
               } else {
                 this.source.addresses[this.dialogAddress.index] = res.data
               }

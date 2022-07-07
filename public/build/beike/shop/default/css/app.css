@@ -532,6 +532,15 @@ body.page-checkout .radio-line-wrap .radio-line-item .right .title {
   font-weight: bold;
   margin-bottom: 10px;
 }
+body.page-checkout .addresses-wrap .item.address-right {
+  padding: 0 2.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: auto;
+  border: none;
+}
 
 body.page-checkout .checkout-black, body.page-bk-stripe .checkout-black {
   margin-bottom: 2.6rem;
@@ -550,6 +559,9 @@ body.page-checkout .checkout-title, body.page-bk-stripe .checkout-title {
   margin-bottom: 16px;
   position: relative;
   padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 body.page-checkout .checkout-title:before, body.page-bk-stripe .checkout-title:before {
   content: "";
@@ -559,6 +571,12 @@ body.page-checkout .checkout-title:before, body.page-bk-stripe .checkout-title:b
   background-color: #fd560f;
   width: 3px;
   height: 16px;
+}
+body.page-checkout .checkout-title .btn, body.page-bk-stripe .checkout-title .btn {
+  margin-bottom: -10px;
+}
+body.page-checkout .checkout-title .btn.icon, body.page-bk-stripe .checkout-title .btn.icon {
+  font-size: 1rem;
 }
 body.page-checkout .total-wrap, body.page-bk-stripe .total-wrap {
   padding: 1.4rem;
@@ -749,17 +767,6 @@ body.page-account-address .addresses-wrap .item, body.page-checkout .addresses-w
   border: 1px solid #e8e8e8;
   height: 130px;
   cursor: pointer;
-}
-body.page-account-address .addresses-wrap .item.add-addres, body.page-checkout .addresses-wrap .item.add-addres {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-size: 1rem;
-  color: #666;
-}
-body.page-account-address .addresses-wrap .item.add-addres i, body.page-checkout .addresses-wrap .item.add-addres i {
-  font-size: 2rem;
 }
 body.page-account-address .addresses-wrap .item:hover, body.page-checkout .addresses-wrap .item:hover {
   border-color: #222;
