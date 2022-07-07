@@ -61,6 +61,7 @@ Route::prefix('/')
             ->middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [AccountController::class, 'index'])->name('account.index');
+                Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
                 Route::resource('addresses', AddressController::class);
 
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
