@@ -1,8 +1,13 @@
 body.page-design {
   background-color: #fff;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 body.page-design .design-box {
   display: flex;
+  height: 100vh;
 }
 body.page-design .design-box .sidebar-edit-wrap {
   width: 300px;
