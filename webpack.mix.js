@@ -28,6 +28,9 @@ mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/bu
 mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
+// design
+mix.sass('resources/beike/shop/default/css/design/app.scss', 'public/build/beike/shop/default/css/design/app.css');
+
 if (mix.inProduction()) {
     mix.version();
 }
