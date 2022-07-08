@@ -32,6 +32,13 @@ class Editor extends Component
      */
     public function render(): View
     {
-        return view('design.module.slideshow.editor.index');
+        $data['register'] = [
+            'code' => 'slideshow',
+            'sort' => 0,
+            'name' => '幻灯片模块',
+            'icon' => '&#xe61b;',
+        ];
+
+        return view('design.module.slideshow.editor.index', $data);
     }
 }

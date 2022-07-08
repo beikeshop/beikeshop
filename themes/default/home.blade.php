@@ -3,15 +3,15 @@
 @section('content')
 
 
-    @foreach($renders as $render)
-        <x-dynamic-component :component="$render"/>
-    @endforeach
+@foreach($renders as $render)
+  <x-dynamic-component :component="$render"/>
+@endforeach
 
-<section class="module-wrap mb-5"><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></section>
+{{-- <section class="module-wrap mb-5"><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></section> --}}
 {{-- @foreach ($categories as $category)
   <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a>
 @endforeach --}}
-<section class="module-image-plus mb-5">
+{{-- <section class="module-image-plus mb-5">
   <div class="container">
     <div class="row">
       <div class="col-6"><img src="{{ asset('image/default/image_plus_1.png') }}" class="img-fluid"></div>
@@ -65,5 +65,5 @@
       @endfor
     </div>
   </div>
-</section>
+</section> --}}
 @endsection

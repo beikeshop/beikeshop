@@ -20,15 +20,97 @@
 
 <body class="page-design">
   <div class="design-box">
-    <div class="sidebar-edit-wrap">
-        @foreach($editors as $editor)
-            <x-dynamic-component :component="$editor" class="mt-4" />
-        @endforeach
+    <div class="sidebar-edit-wrap" id="app" v-cloak>
+      <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
+        <component
+          :is="editingModuleComponent"
+          :key="design.editingModuleIndex"
+          :module="form.modules[design.editingModuleIndex].content"
+          @on-changed="moduleUpdated"
+        ></component>
+      </div>
+
+      <el-row v-if="design.editType == 'add'" class="modules-list">
+        <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
+          <div @click="addModuleButtonClicked(item.code)" class="module-list">
+            <div class="module-info">
+              <div class="icon"><img src="https://via.placeholder.com/100x100.png/dddddd" class="img-fluid"></div>
+              <div class="name">@{{ item.name }}</div>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
     </div>
     <div class="preview-iframe">
       <iframe src="{{ shop_route('home.index') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
-</body>
 
+  @foreach($editors as $editor)
+    <x-dynamic-component :component="$editor" />
+  @endforeach
+
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        form: {
+          modules: [
+            {"content":{"style":{"background_color":""},"full":true,"floor":{"2":"","3":""},"images":[{"image":{"2":"catalog/demo/slideshow/2.jpg","3":"catalog/demo/slideshow/2.jpg"},"show":true,"link":{"type":"product","value":"","link":""}},{"image":{"2":"catalog/demo/slideshow/1.jpg","3":"catalog/demo/slideshow/1.jpg"},"show":false,"link":{"type":"product","value":"","link":""}}]},"code":"slideshow","name":"幻灯片","module_id":"b0448efb0989"}
+          ]
+        },
+
+        design: {
+          type: 'pc',
+          editType: 'add',
+          sidebar: false,
+          editingModuleIndex: 0,
+          ready: false,
+          moduleLoadCount: 0, // 第一次选择已配置模块时，不需要请求数据，
+        },
+
+        source: {
+          modules: [],
+          config: []
+        },
+      },
+      // 计算属性
+      computed: {
+        // 编辑中的模块编辑组件
+        editingModuleComponent() {
+          return 'module-editor-' + this.editingModuleCode.replace('_', '-');
+        },
+
+        // 编辑中的模块 code
+        editingModuleCode() {
+          return this.form.modules[this.design.editingModuleIndex].code;
+        },
+
+        // editingConfigCodeFormat() {
+        //   return 'config-' + this.config.editingConfigCode;
+        // },
+      },
+      // 侦听器
+      watch: {},
+      // 组件方法
+      methods: {
+        moduleUpdated() {
+          console.log('moduleUpdated')
+        }
+      },
+      // 在实例初始化之后，组件属性计算之前，如data属性等
+      beforeCreate () {
+      },
+      // 在实例创建完成后被立即同步调用
+      created () {
+      },
+      // 在挂载开始之前被调用:相关的 render 函数首次被调用
+      beforeMount () {
+      },
+      // 实例被挂载后调用
+      mounted () {
+      },
+    })
+  </script>
+</body>
 </html>
