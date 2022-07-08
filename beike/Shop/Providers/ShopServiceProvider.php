@@ -88,14 +88,22 @@ class ShopServiceProvider extends ServiceProvider
             $folderName = basename($builderFolder, '.php');
             $aliasName = Str::snake($folderName);
             $componentName = Str::studly($folderName);
+            $classBaseName = "\\Beike\\Shop\\View\\DesignBuilders\\{$componentName}";
 
-            $fullName = "\\Beike\\Shop\\View\\DesignBuilders\\{$componentName}";
+            $editorClass = $classBaseName . '\\Editor';
+            if (!class_exists($editorClass)) {
+                throw new \Exception("请先定义自定义模板类 {$editorClass}");
+            }
             $this->loadViewComponentsAs('editor', [
-                $aliasName => $fullName . '\\Editor',
+                $aliasName => $editorClass
             ]);
 
+            $renderClass = $classBaseName . '\\Render';
+            if (!class_exists($renderClass)) {
+                throw new \Exception("请先定义自定义模板类 {$renderClass}");
+            }
             $this->loadViewComponentsAs('render', [
-                $aliasName => $fullName . '\\Render',
+                $aliasName => $renderClass
             ]);
         }
     }
