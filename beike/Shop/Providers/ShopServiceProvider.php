@@ -13,6 +13,9 @@ use Beike\Shop\View\Components\AccountSidebar;
 
 class ShopServiceProvider extends ServiceProvider
 {
+    /**
+     * @throws \Exception
+     */
     public function boot()
     {
         $uri = request()->getRequestUri();
@@ -78,6 +81,11 @@ class ShopServiceProvider extends ServiceProvider
         View::share('categories', $menuCategories);
     }
 
+    /**
+     * 加载首页 page builder 相关组件
+     *
+     * @throws \Exception
+     */
     protected function loadDesignComponents()
     {
         $viewPath = base_path() . '/beike/Shop/View';
