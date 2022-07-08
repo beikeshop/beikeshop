@@ -15,7 +15,7 @@ use Beike\Models\Plugin;
 use Beike\Plugin\Manager;
 use Beike\Plugin\Plugin as BPlugin;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\File;
+use Illuminate\Support\Facades\File;
 
 class PluginRepo
 {
@@ -53,23 +53,39 @@ class PluginRepo
         $path = $bPlugin->getPath();
         $staticPath = $path . '/static';
         if (is_dir($staticPath)) {
-            \Illuminate\Support\Facades\File::copyDirectory($staticPath, public_path('plugin/' . $code));
+            File::copyDirectory($staticPath, public_path('plugin/' . $code));
         }
     }
 
 
     /**
      * 从系统卸载插件: 删除数据
-     * @param $plugin
+     * @param BPlugin $bPlugin
      */
-    public static function uninstallPlugin($plugin)
+    public static function uninstallPlugin(BPlugin $bPlugin)
     {
-        $type = $plugin->type;
-        $code = $plugin->code;
+        self::removeStaticFiles($bPlugin);
+        $type = $bPlugin->type;
+        $code = $bPlugin->code;
         Plugin::query()
             ->where('type', $type)
             ->where('code', $code)
             ->delete();
+    }
+
+
+    /**
+     * 从 public 删除静态资源
+     * @param BPlugin $bPlugin
+     */
+    public static function removeStaticFiles(BPlugin $bPlugin)
+    {
+        $code = $bPlugin->code;
+        $path = $bPlugin->getPath();
+        $staticPath = $path . '/static';
+        if (is_dir($staticPath)) {
+            File::deleteDirectory(public_path('plugin/' . $code));
+        }
     }
 
 
@@ -86,6 +102,11 @@ class PluginRepo
     }
 
 
+    /**
+     * 获取所有已安装插件列表
+     *
+     * @return Plugin[]|Collection
+     */
     public static function allPlugins()
     {
         if (self::$installedPlugins !== null) {
@@ -109,7 +130,7 @@ class PluginRepo
     /**
      * 获取所有配送方式
      */
-    public static function getShippingMethods()
+    public static function getShippingMethods(): Collection
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'shipping')->filter(function ($item) {
@@ -125,7 +146,7 @@ class PluginRepo
     /**
      * 获取所有支付方式
      */
-    public static function getPaymentMethods()
+    public static function getPaymentMethods(): Collection
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'payment')->filter(function ($item) {
