@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/beike
+/public/plugin
 /storage/*.key
 /vendor
 .env
@@ -15,5 +17,4 @@ yarn-error.log
 /.vscode
 mix-manifest.json
 package-lock.json
-public/beike
 beike/node_modules

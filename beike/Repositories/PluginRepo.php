@@ -51,9 +51,9 @@ class PluginRepo
     {
         $code = $bPlugin->code;
         $path = $bPlugin->getPath();
-        $staticPath = $path . DIRECTORY_SEPARATOR . 'static';
+        $staticPath = $path . '/static';
         if (is_dir($staticPath)) {
-            \Illuminate\Support\Facades\File::copyDirectory($staticPath, public_path($code));
+            \Illuminate\Support\Facades\File::copyDirectory($staticPath, public_path('plugin/' . $code));
         }
     }
 
