@@ -2,6 +2,9 @@
 <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 
+<script src="{{ asset('plugin/bk_stripe/js/demo.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('plugin/bk_stripe/css/demo.css') }}">
+
 <div class="row mt-5" id="bk-stripe-app" v-cloak>
   <div class="col-12 col-md-8">
     <div class="checkout-black">
