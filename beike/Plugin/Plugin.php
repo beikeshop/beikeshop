@@ -92,6 +92,11 @@ class Plugin implements Arrayable, \ArrayAccess
     }
 
 
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
     public function getVersion(): string
     {
         return $this->version;

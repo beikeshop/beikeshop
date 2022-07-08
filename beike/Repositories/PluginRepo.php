@@ -13,21 +13,23 @@ namespace Beike\Repositories;
 
 use Beike\Models\Plugin;
 use Beike\Plugin\Manager;
+use Beike\Plugin\Plugin as BPlugin;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\File;
 
 class PluginRepo
 {
     public static $installedPlugins;
 
-
     /**
      * 安装插件到系统: 插入数据
-     * @param $plugin
+     * @param BPlugin $bPlugin
      */
-    public static function installPlugin($plugin)
+    public static function installPlugin(BPlugin $bPlugin)
     {
-        $type = $plugin->type;
-        $code = $plugin->code;
+        self::publishStaticFiles($bPlugin);
+        $type = $bPlugin->type;
+        $code = $bPlugin->code;
         $plugin = Plugin::query()
             ->where('type', $type)
             ->where('code', $code)
@@ -37,6 +39,21 @@ class PluginRepo
                 'type' => $type,
                 'code' => $code,
             ]);
+        }
+    }
+
+
+    /**
+     * 发布静态资源到 public
+     * @param BPlugin $bPlugin
+     */
+    public static function publishStaticFiles(BPlugin $bPlugin)
+    {
+        $code = $bPlugin->code;
+        $path = $bPlugin->getPath();
+        $staticPath = $path . DIRECTORY_SEPARATOR . 'static';
+        if (is_dir($staticPath)) {
+            \Illuminate\Support\Facades\File::copyDirectory($staticPath, public_path($code));
         }
     }
 
