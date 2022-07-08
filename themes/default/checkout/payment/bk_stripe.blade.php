@@ -8,9 +8,13 @@
 <div class="row mt-5" id="bk-stripe-app" v-cloak>
   <div class="col-12 col-md-8">
     <div class="checkout-black">
-      {{-- <img src="" class="img-fluid"> --}}
       <h5 class="checkout-title">卡信息</h5>
       <div class="border px-3 py-2">
+        <div class="pay-iamges">
+          @for ($i = 1; $i <= 5; $i++)
+            <img src="{{ asset("plugin/bk_stripe/image/pay-$i.png") }}" class="img-fluid">
+          @endfor
+        </div>
         <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap">
           <el-form-item label="卡号" prop="cardnum">
             <el-input v-model="form.cardnum"></el-input>
@@ -101,7 +105,9 @@
       }
     },
 
-    beforeMount() {},
+    beforeMount() {
+      // console.log(33)
+    },
 
     methods: {
       checkedBtnCheckoutConfirm(form) {

@@ -1,3 +1,17 @@
 body.page-design {
   background-color: #fff;
+
+  .design-box {
+    display: flex;
+
+    .sidebar-edit-wrap {
+      // flex: 1;
+      width: 300px;
+      background-color: #f5f5f5;
+    }
+
+    .preview-iframe {
+      flex: 1;
+    }
+  }
 }

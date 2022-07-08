@@ -756,10 +756,6 @@ body.page-account-order-info .product-list .right .price {
   font-weight: bold;
 }
 
-body.page-bk-stripe .form-wrap {
-  max-width: 400px;
-}
-
 body.page-account-address .addresses-wrap .item, body.page-checkout .addresses-wrap .item {
   position: relative;
   padding: 14px 14px 14px 18px;
