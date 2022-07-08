@@ -34,6 +34,8 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
         ]);
+
+        $this->loadDesignComponents();
     }
 
     protected function loadSettings()
@@ -74,5 +76,12 @@ class ShopServiceProvider extends ServiceProvider
     {
         $menuCategories = CategoryRepo::getTwoLevelCategories();
         View::share('categories', $menuCategories);
+    }
+
+    protected function loadDesignComponents()
+    {
+        $this->loadViewComponentsAs('de', [
+            'slide_show' => \Beike\Shop\View\DesignEditor\SlideShow::class,
+        ]);
     }
 }

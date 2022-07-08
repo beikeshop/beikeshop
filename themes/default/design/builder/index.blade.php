@@ -21,7 +21,9 @@
 <body class="page-design">
   <div class="design-box">
     <div class="sidebar-edit-wrap">
-
+        @foreach($editors as $editor)
+            <x-dynamic-component :component="$editor" class="mt-4" />
+        @endforeach
     </div>
     <div class="preview-iframe">
       <iframe src="{{ shop_route('home.index') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
