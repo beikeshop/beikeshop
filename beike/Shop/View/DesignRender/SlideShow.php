@@ -21,8 +21,9 @@ class SlideShow extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($modules)
     {
+        
     }
 
     /**
@@ -32,6 +33,7 @@ class SlideShow extends Component
      */
     public function render(): View
     {
-        return view('design.module.slideshow.editor.index');
+
+        return view('design.module.slideshow.render.index');
     }
 }

@@ -1,6 +1,12 @@
 @extends('layout.master')
 @section('body-class', 'page-home')
 @section('content')
+
+
+    @foreach($renders as $render)
+        <x-dynamic-component :component="$render"/>
+    @endforeach
+
 <section class="module-wrap mb-5"><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></section>
 {{-- @foreach ($categories as $category)
   <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a>

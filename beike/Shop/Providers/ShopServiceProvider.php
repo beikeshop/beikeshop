@@ -80,8 +80,30 @@ class ShopServiceProvider extends ServiceProvider
 
     protected function loadDesignComponents()
     {
-        $this->loadViewComponentsAs('de', [
-            'slide_show' => \Beike\Shop\View\DesignEditor\SlideShow::class,
-        ]);
+        $viewPath = base_path() . '/beike/Shop/View';
+        $editorPath = $viewPath . '/DesignEditor/';
+        $renderPath = $viewPath . '/DesignRender/';
+
+        $editorFiles = glob($editorPath . '*');
+        foreach ($editorFiles as $editorFile) {
+            $editorName = basename($editorFile, '.php');
+            $editorAliasName = Str::snake($editorName);
+            $editorComponentName = Str::studly($editorName);
+            $fullName = "\\Beike\\Shop\\View\\DesignEditor\\{$editorComponentName}";
+            $this->loadViewComponentsAs('de', [
+                $editorAliasName => $fullName,
+            ]);
+        }
+
+        $renderFiles = glob($renderPath . '*');
+        foreach ($renderFiles as $renderFile) {
+            $editorName = basename($renderFile, '.php');
+            $editorAliasName = Str::snake($editorName);
+            $editorComponentName = Str::studly($editorName);
+            $fullName = "\\Beike\\Shop\\View\\DesignRender\\{$editorComponentName}";
+            $this->loadViewComponentsAs('dr', [
+                $editorAliasName => $fullName,
+            ]);
+        }
     }
 }

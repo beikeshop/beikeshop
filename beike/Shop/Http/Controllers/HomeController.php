@@ -10,6 +10,7 @@ class HomeController extends Controller
     {
         $data = [
             'category_products' => ProductRepo::getProductsByCategories([100002, 100003, 100004, 100005]),
+            'renders' => ['dr-slide_show']
         ];
 
         return view('home', $data);
