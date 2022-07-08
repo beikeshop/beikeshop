@@ -21,9 +21,9 @@ class SlideShow extends Component
      *
      * @return void
      */
-    public function __construct($modules)
+    public function __construct()
     {
-        
+
     }
 
     /**
