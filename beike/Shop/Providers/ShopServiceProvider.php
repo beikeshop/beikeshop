@@ -81,28 +81,21 @@ class ShopServiceProvider extends ServiceProvider
     protected function loadDesignComponents()
     {
         $viewPath = base_path() . '/beike/Shop/View';
-        $editorPath = $viewPath . '/DesignEditor/';
-        $renderPath = $viewPath . '/DesignRender/';
+        $builderPath = $viewPath . '/DesignBuilders/';
 
-        $editorFiles = glob($editorPath . '*');
-        foreach ($editorFiles as $editorFile) {
-            $editorName = basename($editorFile, '.php');
-            $editorAliasName = Str::snake($editorName);
-            $editorComponentName = Str::studly($editorName);
-            $fullName = "\\Beike\\Shop\\View\\DesignEditor\\{$editorComponentName}";
-            $this->loadViewComponentsAs('de', [
-                $editorAliasName => $fullName,
+        $builderFolders = glob($builderPath . '*');
+        foreach ($builderFolders as $builderFolder) {
+            $folderName = basename($builderFolder, '.php');
+            $aliasName = Str::snake($folderName);
+            $componentName = Str::studly($folderName);
+
+            $fullName = "\\Beike\\Shop\\View\\DesignBuilders\\{$componentName}";
+            $this->loadViewComponentsAs('editor', [
+                $aliasName => $fullName . '\\Editor',
             ]);
-        }
 
-        $renderFiles = glob($renderPath . '*');
-        foreach ($renderFiles as $renderFile) {
-            $editorName = basename($renderFile, '.php');
-            $editorAliasName = Str::snake($editorName);
-            $editorComponentName = Str::studly($editorName);
-            $fullName = "\\Beike\\Shop\\View\\DesignRender\\{$editorComponentName}";
-            $this->loadViewComponentsAs('dr', [
-                $editorAliasName => $fullName,
+            $this->loadViewComponentsAs('render', [
+                $aliasName => $fullName . '\\Render',
             ]);
         }
     }

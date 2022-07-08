@@ -1,20 +1,20 @@
 <?php
 /**
- * SlideShow.php
+ * Render.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
  * @author     Edward Yang <yangjin@opencart.cn>
- * @created    2022-07-08 15:23:18
- * @modified   2022-07-08 15:23:18
+ * @created    2022-07-08 17:09:15
+ * @modified   2022-07-08 17:09:15
  */
 
-namespace Beike\Shop\View\DesignEditor;
+namespace Beike\Shop\View\DesignBuilders\SlideShow;
 
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
-class SlideShow extends Component
+class Editor extends Component
 {
     /**
      * Create a new component instance.
@@ -28,7 +28,7 @@ class SlideShow extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return View|
+     * @return View
      */
     public function render(): View
     {

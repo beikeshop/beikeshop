@@ -13,7 +13,7 @@ class DesignController extends Controller
     public function index(Request $request)
     {
         $data = [
-            'editors' => ['de-slide_show']
+            'editors' => ['editor-slide_show']
         ];
         return view('design.builder.index', $data);
     }
