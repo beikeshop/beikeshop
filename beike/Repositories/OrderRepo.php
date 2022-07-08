@@ -130,7 +130,7 @@ class OrderRepo
             'currency_value' => 1,
             'ip' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
-            'status' => 'UNPAID',
+            'status' => 'unpaid',
             'shipping_method_code' => $shippingMethodCode,
             'shipping_method_name' => trans($shippingMethodCode),
             'shipping_customer_name' => $shippingAddress->name,
