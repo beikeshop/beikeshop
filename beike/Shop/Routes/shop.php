@@ -17,6 +17,8 @@ use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\AccountController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 
+use Beike\Shop\Http\Controllers\DesignController;
+
 
 Route::prefix('/')
     ->name('shop.')
@@ -69,4 +71,5 @@ Route::prefix('/')
             });
     });
 
+Route::get('design/builder', [DesignController::class, 'index'])->name('design.index');
 Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');

@@ -157,7 +157,7 @@
           form: {
             name: '',
             phone: '',
-            country_id: @json(setting('country_id')) * 1,
+            country_id: @json((int)setting('system.country_id')),
             zipcode: '',
             zone_id: '',
             city_id: '',
