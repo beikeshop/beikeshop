@@ -23,6 +23,9 @@ mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/bei
 mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/admin/css/app.css');
 mix.js('resources/beike/admin/js/app.js', 'public/build/beike/admin/js/app.js');
 
+// filemanager
+mix.sass('resources/beike/admin/css/filemanager/app.scss', 'public/build/beike/admin/css/filemanager.css');
+
 // 前端 default 模版
 mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/default/css/bootstrap.css');
 mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');

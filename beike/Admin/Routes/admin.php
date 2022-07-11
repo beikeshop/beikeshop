@@ -17,6 +17,8 @@ Route::prefix('admin')
 
                 Route::Resource('files', \Beike\Admin\Http\Controllers\FileController::class);
 
+                Route::Resource('filemanager', \Beike\Admin\Http\Controllers\FilemanagerController::class);
+
                 Route::Resource('customers', \Beike\Admin\Http\Controllers\CustomerController::class);
                 Route::resource('customers.addresses', \Beike\Admin\Http\Controllers\AddressController::class);
                 Route::resource('countries.zones', \Beike\Admin\Http\Controllers\ZoneController::class);

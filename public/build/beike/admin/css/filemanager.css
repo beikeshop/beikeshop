@@ -1,0 +1,98 @@
+[v-cloak] {
+  display: none;
+}
+
+body.page-filemanager {
+  height: 100vh;
+  overflow: hidden;
+}
+body.page-filemanager .filemanager-wrap {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar {
+  width: 20%;
+}
+body.page-filemanager .filemanager-wrap .filemanager-divider {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: 20%;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: move;
+}
+body.page-filemanager .filemanager-wrap .filemanager-divider:hover {
+  background: red;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content {
+  width: 80%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-head {
+  height: 56px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a {
+  margin-right: 20px;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
+  height: calc(100% - 56px);
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background: #f9fafa;
+  padding: 20px;
+  margin-right: -10px;
+  overflow-y: auto;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list {
+  width: calc(20% - 10px);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  background: #fff;
+  margin-right: 10px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list.active {
+  outline: 1px solid #fd560f;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text {
+  border-top: 1px solid #eee;
+  font-size: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text .el-icon-check {
+  color: #fd560f;
+  font-size: 18px;
+  font-weight: 600;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-footer {
+  height: 56px;
+  padding: 0 16px;
+  display: flex;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  justify-content: center;
+}
