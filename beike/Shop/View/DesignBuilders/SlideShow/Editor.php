@@ -36,7 +36,7 @@ class Editor extends Component
             'code' => 'slideshow',
             'sort' => 0,
             'name' => '幻灯片模块',
-            'icon' => '&#xe61b;',
+            'icon' => '&#xe634;',
         ];
 
         return view('design.module.slideshow.editor.index', $data);

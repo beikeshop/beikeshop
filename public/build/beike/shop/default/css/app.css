@@ -807,3 +807,73 @@ body.page-account-address .addresses-wrap .item .address-bottom, body.page-check
 body.page-account-address .addresses-wrap .item .address-bottom a, body.page-checkout .addresses-wrap .item .address-bottom a {
   color: #2d68a8;
 }
+
+.module-item {
+  position: relative;
+}
+.module-item:hover .module-edit {
+  display: flex;
+}
+.module-item:hover:after {
+  display: block;
+}
+.module-item:after {
+  content: "";
+  display: none;
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  outline: 2px solid #fd560f;
+}
+.module-item .module-edit {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.module-item .module-edit .edit-wrap {
+  background-color: #fd560f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.module-item .module-edit .edit-wrap > div {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 10px;
+  cursor: pointer;
+  position: relative;
+}
+.module-item .module-edit .edit-wrap > div:first-of-type:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  border: solid rgba(0, 0, 0, 0);
+  border-right: solid #fd560f;
+  border-width: 24px 10px 0 0;
+  right: 100%;
+}
+.module-item .module-edit .edit-wrap > div:first-of-type:hover:after {
+  border-right-color: #eb4802;
+}
+.module-item .module-edit .edit-wrap > div:last-of-type:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  border: solid rgba(0, 0, 0, 0);
+  border-left: solid #fd560f;
+  border-width: 24px 0 0 10px;
+  left: 100%;
+}
+.module-item .module-edit .edit-wrap > div:last-of-type:hover:after {
+  border-left-color: #eb4802;
+}
+.module-item .module-edit .edit-wrap > div:hover {
+  background-color: #eb4802;
+}

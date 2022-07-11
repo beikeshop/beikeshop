@@ -12,6 +12,8 @@
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('/build/beike/shop/default/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
+  <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/design/app.css') }}">
@@ -21,6 +23,10 @@
 <body class="page-design">
   <div class="design-box">
     <div class="sidebar-edit-wrap" id="app" v-cloak>
+      <div class="design-head">
+        <div>保存</div>
+        <div>退出</div>
+      </div>
       <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
         <component
           :is="editingModuleComponent"
@@ -34,7 +40,7 @@
         <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
           <div @click="addModuleButtonClicked(item.code)" class="module-list">
             <div class="module-info">
-              <div class="icon"><img src="https://via.placeholder.com/100x100.png/dddddd" class="img-fluid"></div>
+              <div class="icon"><i class="iconfont" v-html="item.icon"></i></div>
               <div class="name">@{{ item.name }}</div>
             </div>
           </div>
@@ -96,7 +102,17 @@
       methods: {
         moduleUpdated() {
           console.log('moduleUpdated')
-        }
+        },
+
+        addModuleButtonClicked(code) {
+          console.log(code)
+        },
+
+        // 编辑模块
+        editModuleButtonClicked(index) {
+          this.design.editingModuleIndex = index;
+          this.design.editType = 'module';
+        },
       },
       // 在实例初始化之后，组件属性计算之前，如data属性等
       beforeCreate () {
@@ -111,6 +127,13 @@
       mounted () {
       },
     })
+
+    window.addEventListener('message', (event) => {
+      event.stopPropagation()
+      if (typeof(event.data.index) !== 'undefined') {
+        app.editModuleButtonClicked(event.data.index)
+      }
+    }, false)
   </script>
 </body>
 </html>

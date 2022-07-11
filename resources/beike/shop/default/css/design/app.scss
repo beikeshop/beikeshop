@@ -1,7 +1,12 @@
+@import '../iconfont';
+
+$main_color: #0072ff;
+
 body.page-design {
   background-color: #fff;
   padding: 0;
   margin: 0;
+  font-size: 14px;
   height: 100vh;
   overflow: hidden;
 
@@ -9,10 +14,78 @@ body.page-design {
     display: flex;
     height: 100vh;
 
+    .design-head {
+      display: flex;
+      align-items: center; // flex-start | center
+      justify-content: space-between; // flex-end | center | space-between
+      // flex-wrap: wrap;
+      > div {
+        flex: 1;
+        height: 40px;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $main_color;
+        text-align: center;
+        font-size: .8rem;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          background-color: darken($main_color, 10%);
+        }
+      }
+    }
+
     .sidebar-edit-wrap {
       // flex: 1;
       width: 300px;
-      background-color: #f5f5f5;
+      background-color: #fff;
+
+      .module-edit {
+        padding: 0 10px 14px;
+
+        .module-editor-row {
+          height: 47px;
+          line-height: 47px;
+          background-color: #f5f5f5;
+          padding: 0 20px;
+          margin: 0 -14px 14px;
+          font-size: 16px;
+          color: #212121;
+        }
+
+        .module-edit-group {
+          margin-bottom: 20px;
+
+          &:last-of-type {
+            border-bottom: none;
+          }
+
+          .module-edit-title {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 6px;
+            display: flex;
+            justify-content: space-between;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 3px;
+              width: 2px;
+              height: 14px;
+              background: #0072ff;
+            }
+          }
+
+          .module-edit-sub-title {
+
+          }
+        }
+      }
 
       .modules-list {
         background: #e6e9ec;
@@ -38,7 +111,7 @@ body.page-design {
         }
 
         .icon {
-          padding: 7px 0;
+          padding: 12px 0 7px;
           width: 36px;
           height: 36px;
           display: inline-block;
@@ -62,6 +135,123 @@ body.page-design {
 
     .preview-iframe {
       flex: 1;
+    }
+  }
+
+
+  .pb-images-selector {
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    // overflow: hidden;
+    &:hover {
+      border-color: #ddd;
+
+      .selector-head {
+        background: #eee;
+      }
+    }
+
+    .pb-images-selector-add {
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px 20px;
+    }
+
+    .selector-head {
+      display: flex;
+      align-items: center;
+      background-color: #f5f5f5;
+      padding: 4px 10px;
+      cursor: pointer;
+      justify-content: space-between;
+
+      > div.left {
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 10px;
+        }
+
+        img {
+          width: 24px;
+        }
+      }
+
+      > div.right {
+        display: flex;
+        align-items: center;
+
+        i {
+          color: #999;
+          font-size: 20px;
+        }
+
+        .remove-item {
+          margin-right: 8px;
+          padding-right: 8px;
+          position: relative;
+
+          &:after {
+            content: '';
+            border-right: 1px solid #ccc;
+            position: absolute;
+            right: 1px;
+            top: 20%;
+            height: 60%;
+          }
+
+          i {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    .pb-images-list {
+      padding: 7px;
+      padding-bottom: 8px;
+      position: relative;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      .pb-image-selector {
+      }
+
+      .remove-item {
+        margin-top: 20px;
+        background: #ffc8c8;
+        color: #c70000;
+        z-index: 9;
+        height: 20px;
+        line-height: 20px;
+        padding: 5px 10px;
+        text-align: center;
+        cursor: pointer;
+
+        i {
+          font-size: 14px;
+        }
+      }
+
+      .pb-image-selector {
+        cursor: pointer;
+        min-width: 50px;
+        min-height: 50px;
+        // background: #f5f5f5;
+      }
+
+      .pb-images-btns button {
+        margin-left: 0 !important;
+        padding: 9px 10px;
+      }
+      .el-input-group__prepend {
+        padding: 0 10px;
+      }
     }
   }
 }
