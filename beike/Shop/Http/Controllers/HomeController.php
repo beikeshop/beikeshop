@@ -19,7 +19,7 @@ class HomeController extends Controller
         foreach ($modules as $module) {
             $code = $module['code'];
             $content = $module['content'];
-            $viewPath = "design.module.{$code}.render.index";
+            $viewPath = "design.{$code}";
             if (view()->exists($viewPath)) {
                 $html .= view($viewPath, $content)->render();
             }

@@ -14,7 +14,7 @@ class DesignController extends Controller
             'editors' => ['editor-slide_show'],
             'design_settings' => setting('system.design_setting'),
         ];
-        return view('design.builder.index', $data);
+        return view('admin::pages.design.builder.index', $data);
     }
 
 

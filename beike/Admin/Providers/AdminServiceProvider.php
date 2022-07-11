@@ -99,21 +99,11 @@ class AdminServiceProvider extends ServiceProvider
             $componentName = Str::studly($folderName);
             $classBaseName = "\\Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
 
-            $editorClass = $classBaseName . '\\Editor';
-            if (!class_exists($editorClass)) {
-                throw new \Exception("请先定义自定义模板类 {$editorClass}");
+            if (!class_exists($classBaseName)) {
+                throw new \Exception("请先定义自定义模板类 {$classBaseName}");
             }
             $this->loadViewComponentsAs('editor', [
-                $aliasName => $editorClass
-            ]);
-
-            $renderClass = $classBaseName . '\\Render';
-            if (!class_exists($renderClass)) {
-                throw new \Exception("请先定义自定义模板类 {$renderClass}");
-            }
-
-            $this->loadViewComponentsAs('render', [
-                $aliasName => $renderClass
+                $aliasName => $classBaseName
             ]);
         }
     }

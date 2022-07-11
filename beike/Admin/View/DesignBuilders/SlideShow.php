@@ -9,12 +9,12 @@
  * @modified   2022-07-08 17:09:15
  */
 
-namespace Beike\Admin\View\DesignBuilders\SlideShow;
+namespace Beike\Admin\View\DesignBuilders;
 
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class Editor extends Component
+class SlideShow extends Component
 {
     /**
      * Create a new component instance.
@@ -39,6 +39,6 @@ class Editor extends Component
             'icon' => '&#xe634;',
         ];
 
-        return view('design.module.slideshow.editor.index', $data);
+        return view('admin::pages.design.module.slideshow', $data);
     }
 }
