@@ -11,3 +11,5 @@
     <img src="{{ asset('image/default/banner.png') }}" class="img-fluid">
   </div>
 </section>
+
+@dump($style, $images)
