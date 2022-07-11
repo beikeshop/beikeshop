@@ -15,19 +15,39 @@
   <title>beike filemanager</title>
 </head>
 <body class="page-filemanager">
-  <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak>
-    <div class="filemanager-navbar" ref='letfDom'>
-      <el-tree :data="tree" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak ref="splitPane">
+    <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
+      <el-tree
+        :data="tree"
+        :props="defaultProps"
+        @node-click="handleNodeClick"
+        class="tree-wrap">
+        <div class="custom-tree-node" slot-scope="{ node, data }">
+          <div>@{{ node.label }}</div>
+          <div class="right">
+            <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
+              <span><i class="el-icon-circle-plus-outline"></i></span>
+            </el-tooltip>
+
+            <el-tooltip class="item" effect="dark" content="重命名" placement="top">
+              <span><i class="el-icon-edit"></i></span>
+            </el-tooltip>
+
+            <el-tooltip class="item" effect="dark" content="删除" placement="top">
+              <span><i class="el-icon-delete"></i></span>
+            </el-tooltip>
+
+          </div>
+        </div>
+      </el-tree>
     </div>
-    <div class="filemanager-divider" draggable="true" @dragstart="myFunction(event)" ref='moveDom'></div>
-    <div class="filemanager-content">
+    <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
+    <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
         <div class="left">
-          <el-link :underline="false" icon="el-icon-edit">下载</el-link>
-          <el-link :underline="false" icon="el-icon-edit">删除</el-link>
-          <el-link :underline="false" icon="el-icon-edit">重命名</el-link>
-          {{-- <el-link :underline="false" icon="el-icon-edit">无下划线</el-link> --}}
-          {{-- <el-link :underline="false" icon="el-icon-edit">无下划线</el-link> --}}
+          <el-link :underline="false" :disabled="editingFileIndex === null" icon="el-icon-edit">下载</el-link>
+          <el-link :underline="false" :disabled="editingFileIndex === null" icon="el-icon-edit">删除</el-link>
+          <el-link :underline="false" :disabled="editingFileIndex === null" icon="el-icon-edit">重命名</el-link>
         </div>
         <div class="right"><el-button size="mini" type="primary">上传文件</el-button></div>
       </div>
@@ -41,12 +61,14 @@
         </div>
       </div>
       <div class="content-footer">
+        <div class="right"></div>
         <div class="pagination-wrap">
           <el-pagination
             layout="prev, pager, next"
             :total="50">
           </el-pagination>
         </div>
+        <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingFileIndex === null">选择</el-button></div>
       </div>
     </div>
   </div>
@@ -56,8 +78,14 @@
     el: '#filemanager-wrap-app',
     components: {},
     data: {
-      letfDom: null,
-      clientStartX: 0,
+      min: 10,
+      max: 40,
+      paneLengthPercent: 20,
+      triggerLength: 10,
+
+      loading: false,
+
+      editingFileIndex: null,
 
       tree: [
         {
@@ -99,6 +127,8 @@
         label: 'label'
       },
 
+      triggerLeftOffset: 0,
+
       files: [
         {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
         {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
@@ -131,36 +161,71 @@
       ]
     },
     // 计算属性
-    computed: {},
+    computed: {
+      // isFileSelected() {
+      //   return this.files.some(file => file.selected);
+      // },
+
+      paneLengthValue() {
+        return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
+      },
+    },
     // 侦听器
     watch: {},
     // 组件方法
     methods: {
       handleNodeClick(e) {
         console.log(e)
+        this.loading = true
+
+        setTimeout(() => {
+          this.loading = false
+        },1000)
       },
 
-      moveHandle(nowClientX, letfDom) {
-        let computedX = nowClientX - this.clientStartX;
-        let leftBoxWidth = parseInt(letfDom.style.width);
-        let changeWidth = leftBoxWidth + computedX;
+      loadNode(node, resolve) {
+        console.log(node, resolve)
+        resolve(this.tree)
+      },
 
-        if (changeWidth < 280) {
-          changeWidth = 280;
+      // 按下滑动器
+      handleMouseDown(e) {
+        document.addEventListener('mousemove', this.handleMouseMove)
+        document.addEventListener('mouseup', this.handleMouseUp)
+
+        this.triggerLeftOffset = e.pageX - e.srcElement.getBoundingClientRect().left
+      },
+
+      // 按下滑动器后移动鼠标
+      handleMouseMove(e) {
+        const clientRect = this.$refs.splitPane.getBoundingClientRect()
+        let paneLengthPercent = 0
+
+        const offset = e.pageX - clientRect.left - this.triggerLeftOffset + this.triggerLength / 2
+        paneLengthPercent = (offset / clientRect.width) * 100
+
+        if (paneLengthPercent < this.min) {
+          paneLengthPercent = this.min
         }
-
-        if (changeWidth > 400) {
-          changeWidth = 400;
+        if (paneLengthPercent > this.max) {
+          paneLengthPercent = this.max
         }
+        this.paneLengthPercent = paneLengthPercent;
+      },
 
-        letfDom.style.width = changeWidth + "px";
-
-        this.clientStartX = nowClientX;
+      // 松开滑动器
+      handleMouseUp() {
+        document.removeEventListener('mousemove', this.handleMouseMove)
       },
 
       checkedImage(index) {
+        this.editingFileIndex = index;
         this.files.map(e => !e.index ? e.selected = false : '')
         this.files[index].selected = !this.files[index].selected
+      },
+
+      fileChecked() {
+        console.log(this.editingFileIndex)
       }
     },
     // 在实例初始化之后，组件属性计算之前，如data属性等
@@ -174,27 +239,17 @@
     },
     // 实例被挂载后调用
     mounted () {
-      this.letfDom = this.$refs.letfDom;
-      let moveDom = this.$refs.moveDom;
-
-      moveDom.onmousedown = e => {
-        this.clientStartX = e.clientX;
-        e.preventDefault();
-
-        document.onmousemove = e => {
-          this.moveHandle(e.clientX, this.letfDom);
-        };
-
-        document.onmouseup = e => {
-          document.onmouseup = null;
-          document.onmousemove = null;
-        };
-      };
     },
   })
-document.ondragover=function(e){
-  e.preventDefault();
-}
+
+  $(document).ready(function() {
+    $(document).on('click', function (e) {
+      if ($(e.target).closest('.content-center .image-list').length === 0) {
+        app.editingFileIndex = null;
+        app.files.map(e => e.selected = false)
+      }
+    })
+  });
   </script>
 </body>
 </html>
