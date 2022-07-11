@@ -53,7 +53,7 @@ class ShopServiceProvider extends ServiceProvider
                 $name = $groupSetting->name;
                 $value = $groupSetting->value;
                 if ($groupSetting->json) {
-                    $result[$space][$name] = json_encode($value);
+                    $result[$space][$name] = json_decode($value, true);
                 } else {
                     $result[$space][$name] = $value;
                 }

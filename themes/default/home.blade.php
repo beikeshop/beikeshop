@@ -3,9 +3,11 @@
 @section('content')
 
 
-@foreach($renders as $render)
-  <x-dynamic-component :component="$render"/>
-@endforeach
+{{--@foreach($renders as $render)--}}
+{{--  <x-dynamic-component :component="$render"/>--}}
+{{--@endforeach--}}
+
+{!! $html !!}
 
 <script>
   $(function() {

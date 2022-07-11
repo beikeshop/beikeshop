@@ -16,13 +16,18 @@ use Illuminate\Contracts\View\View;
 
 class Render extends Component
 {
+    private $settings;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($settings = [])
     {
+        if ($settings) {
+            $this->settings = $settings;
+        }
     }
 
     /**
@@ -32,6 +37,6 @@ class Render extends Component
      */
     public function render(): View
     {
-        return view('design.module.slideshow.render.index');
+        return view('design.module.slideshow.render.index', $this->settings);
     }
 }

@@ -41,7 +41,6 @@ class AdminServiceProvider extends ServiceProvider
             'form-input' => Input::class,
         ]);
 
-        $this->loadSettings();
         $this->registerGuard();
 
         if ($this->app->runningInConsole()) {
@@ -56,20 +55,6 @@ class AdminServiceProvider extends ServiceProvider
             'driver' => 'local',
             'root' => public_path('upload'),
         ]);
-    }
-
-    protected function loadSettings()
-    {
-        $settings = Setting::all(['name', 'value', 'json'])
-            ->keyBy('name')
-            ->transform(function ($setting) {
-                if ($setting->json) {
-                    return \json_decode($setting->value, true);
-                }
-                return $setting->value;
-            })
-            ->toArray();
-        config(['global' => $settings]);
     }
 
     protected function registerGuard()

@@ -10,8 +10,21 @@ class HomeController extends Controller
     {
         $data = [
             'category_products' => ProductRepo::getProductsByCategories([100002, 100003, 100004, 100005]),
-            'renders' => ['render-slide_show']
         ];
+
+        $html = '';
+        $designSettings = setting('system.design_setting');
+        $modules = $designSettings['form']['modules'] ?? [];
+
+        foreach ($modules as $module) {
+            $code = $module['code'];
+            $content = $module['content'];
+            $viewPath = "design.module.{$code}.render.index";
+            if (view()->exists($viewPath)) {
+                $html .= view($viewPath, $content)->render();
+            }
+        }
+        $data['html'] = $html;
 
         return view('home', $data);
     }
