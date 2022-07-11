@@ -15,6 +15,8 @@ Route::prefix('admin')
 
                 Route::Resource('categories', \Beike\Admin\Http\Controllers\CategoryController::class);
                 Route::get('design/builder', [\Beike\Admin\Http\Controllers\DesignController::class, 'index'])->name('design.index');
+                Route::put('design/builder', [\Beike\Admin\Http\Controllers\DesignController::class, 'update'])->name('design.update');
+                Route::put('design/builder/module', [\Beike\Admin\Http\Controllers\DesignController::class, 'showModule'])->name('design.module.show');
 
                 Route::Resource('files', \Beike\Admin\Http\Controllers\FileController::class);
 
