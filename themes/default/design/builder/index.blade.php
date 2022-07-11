@@ -48,7 +48,7 @@
       </el-row>
     </div>
     <div class="preview-iframe">
-      <iframe src="{{ shop_route('home.index') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
+      <iframe src="{{ url('/') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
 

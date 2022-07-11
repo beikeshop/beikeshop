@@ -9,36 +9,34 @@
  * @modified   2022-07-08 17:09:15
  */
 
-namespace Beike\Shop\View\DesignBuilders\SlideShow;
+namespace Beike\Admin\View\DesignBuilders\SlideShow;
 
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class Editor extends Component
+class Render extends Component
 {
+    private $settings;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($settings = [])
     {
+        if ($settings) {
+            $this->settings = $settings;
+        }
     }
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return View
+     * @return View|
      */
     public function render(): View
     {
-        $data['register'] = [
-            'code' => 'slideshow',
-            'sort' => 0,
-            'name' => '幻灯片模块',
-            'icon' => '&#xe634;',
-        ];
-
-        return view('design.module.slideshow.editor.index', $data);
+        return view('design.module.slideshow.render.index', $this->settings);
     }
 }

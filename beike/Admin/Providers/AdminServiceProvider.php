@@ -17,15 +17,18 @@ use Illuminate\Support\Str;
 
 class AdminServiceProvider extends ServiceProvider
 {
+    /**
+     * @throws \Exception
+     */
     public function boot()
     {
         $uri = request()->getRequestUri();
 
-        if (! Str::startsWith($uri, '/admin')) {
-            // return;
+        if (!Str::startsWith($uri, '/admin')) {
+            return;
         }
 
-        // $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
+
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
@@ -55,11 +58,13 @@ class AdminServiceProvider extends ServiceProvider
             'driver' => 'local',
             'root' => public_path('upload'),
         ]);
+
+        $this->loadDesignComponents();
     }
 
     protected function registerGuard()
     {
-        Config::set('auth.guards.'.AdminUser::AUTH_GUARD, [
+        Config::set('auth.guards.' . AdminUser::AUTH_GUARD, [
             'driver' => 'session',
             'provider' => 'admin_users',
         ]);
@@ -75,6 +80,42 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Database/Seeders/ProductSeeder.php' => database_path('seeders/ProductSeeder.php'),
         ], 'beike-seeders');
+    }
+
+    /**
+     * 加载首页 page builder 相关组件
+     *
+     * @throws \Exception
+     */
+    protected function loadDesignComponents()
+    {
+        $viewPath = base_path() . '/beike/Admin/View';
+        $builderPath = $viewPath . '/DesignBuilders/';
+
+        $builderFolders = glob($builderPath . '*');
+        foreach ($builderFolders as $builderFolder) {
+            $folderName = basename($builderFolder, '.php');
+            $aliasName = Str::snake($folderName);
+            $componentName = Str::studly($folderName);
+            $classBaseName = "\\Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
+
+            $editorClass = $classBaseName . '\\Editor';
+            if (!class_exists($editorClass)) {
+                throw new \Exception("请先定义自定义模板类 {$editorClass}");
+            }
+            $this->loadViewComponentsAs('editor', [
+                $aliasName => $editorClass
+            ]);
+
+            $renderClass = $classBaseName . '\\Render';
+            if (!class_exists($renderClass)) {
+                throw new \Exception("请先定义自定义模板类 {$renderClass}");
+            }
+
+            $this->loadViewComponentsAs('render', [
+                $aliasName => $renderClass
+            ]);
+        }
     }
 
 }

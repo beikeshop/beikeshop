@@ -1,6 +1,6 @@
 <?php
 
-namespace Beike\Shop\Http\Controllers;
+namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Category;
 use Beike\Repositories\CategoryRepo;

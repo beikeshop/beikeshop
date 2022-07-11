@@ -14,6 +14,7 @@ Route::prefix('admin')
                 Route::get('/', [\Beike\Admin\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
                 Route::Resource('categories', \Beike\Admin\Http\Controllers\CategoryController::class);
+                Route::get('design/builder', [\Beike\Admin\Http\Controllers\DesignController::class, 'index'])->name('design.index');
 
                 Route::Resource('files', \Beike\Admin\Http\Controllers\FileController::class);
 

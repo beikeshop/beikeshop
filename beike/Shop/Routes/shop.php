@@ -1,11 +1,8 @@
 <?php
 
 use Beike\Models\Customer;
-use Beike\Shop\Http\Controllers\Account\AddressController;
-use Beike\Shop\Http\Controllers\Account\ForgottenController;
-use Beike\Shop\Http\Controllers\Account\OrderController;
-use Beike\Shop\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
+use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\PagesController;
@@ -13,11 +10,12 @@ use Beike\Shop\Http\Controllers\ProductController;
 use Beike\Shop\Http\Controllers\CategoryController;
 use Beike\Shop\Http\Controllers\CheckoutController;
 use Beike\Shop\Http\Controllers\Account\LoginController;
+use Beike\Shop\Http\Controllers\Account\OrderController;
 use Beike\Shop\Http\Controllers\Account\LogoutController;
+use Beike\Shop\Http\Controllers\Account\AddressController;
 use Beike\Shop\Http\Controllers\Account\AccountController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
-
-use Beike\Shop\Http\Controllers\DesignController;
+use Beike\Shop\Http\Controllers\Account\ForgottenController;
 
 
 Route::prefix('/')
@@ -71,5 +69,4 @@ Route::prefix('/')
             });
     });
 
-Route::get('design/builder', [DesignController::class, 'index'])->name('design.index');
 Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');

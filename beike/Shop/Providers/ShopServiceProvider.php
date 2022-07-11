@@ -37,8 +37,6 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
         ]);
-
-        $this->loadDesignComponents();
     }
 
     protected function loadSettings()
@@ -79,40 +77,5 @@ class ShopServiceProvider extends ServiceProvider
     {
         $menuCategories = CategoryRepo::getTwoLevelCategories();
         View::share('categories', $menuCategories);
-    }
-
-    /**
-     * 加载首页 page builder 相关组件
-     *
-     * @throws \Exception
-     */
-    protected function loadDesignComponents()
-    {
-        $viewPath = base_path() . '/beike/Shop/View';
-        $builderPath = $viewPath . '/DesignBuilders/';
-
-        $builderFolders = glob($builderPath . '*');
-        foreach ($builderFolders as $builderFolder) {
-            $folderName = basename($builderFolder, '.php');
-            $aliasName = Str::snake($folderName);
-            $componentName = Str::studly($folderName);
-            $classBaseName = "\\Beike\\Shop\\View\\DesignBuilders\\{$componentName}";
-
-            $editorClass = $classBaseName . '\\Editor';
-            if (!class_exists($editorClass)) {
-                throw new \Exception("请先定义自定义模板类 {$editorClass}");
-            }
-            $this->loadViewComponentsAs('editor', [
-                $aliasName => $editorClass
-            ]);
-
-            $renderClass = $classBaseName . '\\Render';
-            if (!class_exists($renderClass)) {
-                throw new \Exception("请先定义自定义模板类 {$renderClass}");
-            }
-            $this->loadViewComponentsAs('render', [
-                $aliasName => $renderClass
-            ]);
-        }
     }
 }
