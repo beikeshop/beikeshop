@@ -227,3 +227,19 @@ function json_fail($message, $data = []): array
     ];
     return $result;
 }
+
+if (!function_exists('to_sql')) {
+    /**
+     * @param mixed $builder
+     * @return string|string[]|null
+     */
+    function to_sql($builder)
+    {
+        $sql = $builder->toSql();
+        foreach ($builder->getBindings() as $binding) {
+            $value = is_numeric($binding) ? $binding : "'" . $binding . "'";
+            $sql = preg_replace('/\?/', $value, $sql, 1);
+        }
+        return $sql;
+    }
+}
