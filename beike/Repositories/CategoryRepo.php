@@ -60,5 +60,24 @@ class CategoryRepo
     {
 
     }
+
+
+    public static function autocomplete($name)
+    {
+        $categories = Category::query()->with('description')
+            ->whereHas('description', function ($query) use ($name) {
+                $query->where('name', 'like', "{$name}%");
+            })->limit(10)->get();
+        $results = [];
+        foreach ($categories as $category) {
+            $results[] = [
+                'id' => $category->id,
+                'name' => $category->description->name,
+                'image' => $category->image,
+            ];
+        }
+        return $results;
+    }
+
 }
 

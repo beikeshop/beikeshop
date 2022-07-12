@@ -26,4 +26,11 @@ class CategoryController extends Controller
 
         return view('category', $data);
     }
+
+    public function autocomplete(Request $request)
+    {
+        $categories = CategoryRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success('获取成功！', $categories);
+    }
 }

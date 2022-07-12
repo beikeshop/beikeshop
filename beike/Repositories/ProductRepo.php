@@ -91,4 +91,21 @@ class ProductRepo
     {
         return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
+
+    public static function autocomplete($name)
+    {
+        $products = Product::query()->with('description')
+            ->whereHas('description', function ($query) use ($name) {
+                $query->where('name', 'like', "{$name}%");
+            })->limit(10)->get();
+        $results = [];
+        foreach ($products as $product) {
+            $results[] = [
+                'id' => $product->id,
+                'name' => $product->description->name,
+                'image' => $product->image,
+            ];
+        }
+        return $results;
+    }
 }
