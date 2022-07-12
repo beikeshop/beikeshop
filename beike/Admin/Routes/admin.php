@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')
+$adminName = admin_name();
+Route::prefix($adminName)
     ->middleware(['web'])
-    ->name('admin.')
+    ->name("{$adminName}.")
     ->group(function () {
         Route::get('login', [\Beike\Admin\Http\Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [\Beike\Admin\Http\Controllers\LoginController::class, 'store'])->name('login.store');

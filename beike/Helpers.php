@@ -20,6 +20,17 @@ function setting($key, $default = null)
 }
 
 /**
+ * 获取后台管理前缀名称, 默认为 admin
+ */
+function admin_name(): string
+{
+    if ($envAdminName = env('ADMIN_NAME')) {
+        return Str::snake($envAdminName);
+    }
+    return 'admin';
+}
+
+/**
  * 获取后台链接
  *
  * @param $route
@@ -28,7 +39,8 @@ function setting($key, $default = null)
  */
 function admin_route($route, $params = []): string
 {
-    return route('admin.' . $route, $params);
+    $adminName = admin_name();
+    return route("{$adminName}.{$route}", $params);
 }
 
 /**

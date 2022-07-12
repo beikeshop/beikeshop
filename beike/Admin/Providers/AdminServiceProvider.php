@@ -24,15 +24,13 @@ class AdminServiceProvider extends ServiceProvider
     {
         $uri = request()->getRequestUri();
 
-        if (!Str::startsWith($uri, '/admin')) {
+        $adminName = admin_name();
+        if (!Str::startsWith($uri, "/{$adminName}")) {
             return;
         }
 
-
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
-
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-
         $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
 
         $this->loadViewComponentsAs('admin', [
