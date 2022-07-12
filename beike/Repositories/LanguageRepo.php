@@ -13,13 +13,16 @@ namespace Beike\Repositories;
 
 
 use Beike\Models\Language;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class LanguageRepo
 {
     /**
      * 创建一个language记录
      * @param $data
-     * @return int
+     * @return Builder|Model
      */
     public static function create($data)
     {
@@ -29,7 +32,8 @@ class LanguageRepo
     /**
      * @param $id
      * @param $data
-     * @return bool|int
+     * @return Builder|Builder[]|Collection|Model
+     * @throws \Exception
      */
     public static function update($id, $data)
     {
@@ -43,7 +47,7 @@ class LanguageRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return Builder|Builder[]|Collection|Model|null
      */
     public static function find($id)
     {
@@ -62,6 +66,10 @@ class LanguageRepo
         }
     }
 
+    /**
+     * 获取所有语言
+     * @return Builder[]|Collection
+     */
     public static function all()
     {
         return Language::query()->get();
