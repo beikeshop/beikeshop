@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'category_products' => ProductRepo::getProductsByCategories([100002, 100003, 100004, 100005]),
+            'category_products' => [],
         ];
 
         $html = '';

@@ -17,11 +17,11 @@ class CategoryController extends Controller
 
     public function show(Request $request, Category $category)
     {
-        $products = ProductRepo::getProductsBuilder($category)->paginate();
+        $products = ProductRepo::getProductsByCategory($category->id);
 
         $data = [
             'category' => $category,
-            'products' => ProductList::collection($products),
+            'products' => $products,
         ];
 
         return view('category', $data);

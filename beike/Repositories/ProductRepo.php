@@ -32,50 +32,63 @@ class ProductRepo
 
 
     /**
-     * 通过多个产品分类获取产品列表
-     *
-     * @param $categoryIds
-     * @return mixed
-     */
-    public static function getProductsByCategories($categoryIds)
-    {
-        $products = self::getProductsByCategory($categoryIds);
-        $items = $products->groupBy('category_id');
-        return $items;
-    }
-
-
-    /**
-     * 通过单个产品分类获取产品列表
+     * 通过单个或多个产品分类获取产品列表
      *
      * @param $categoryId
      * @return AnonymousResourceCollection
      */
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
-        $builder = self::getProductsBuilder($categoryId);
+        $builder = self::getBuilder(['category_id' => $categoryId]);
         $products = $builder->get();
         $items = ProductList::collection($products);
         return $items;
     }
 
 
-    /**
-     * 获取 Builder
-     * @param $categoryId
-     * @return Builder
-     */
-    public static function getProductsBuilder($categoryId): Builder
+    public static function getBuilder($data = []) :Builder
     {
-        if (is_int($categoryId)) {
-            $categoryId[] = $categoryId;
+        $builder = Product::query()->with('description', 'skus', 'master_sku');
+
+        if (isset($data['category_id'])) {
+            $builder->whereHas('categories', function ($query) use ($data) {
+                if (is_array($data['category_id'])) {
+                    $query->whereIn('category_id', $data['category_id']);
+                } else {
+                    $query->where('category_id', $data['category_id']);
+                }
+            });
         }
-        $builder = Product::query()
-            ->select(['products.*', 'pc.category_id'])
-            ->with(['description', 'skus', 'master_sku'])
-            ->join('product_categories as pc', 'products.id', '=', 'pc.product_id')
-            ->join('categories as c', 'pc.category_id', '=', 'c.id')
-            ->whereIn('c.id', $categoryId);
+        if (isset($data['sku']) || isset($data['model'])) {
+            $builder->whereHas('skus', function ($query) use ($data) {
+                if (isset($data['sku'])) {
+                    $query->where('sku', 'like', "%{$data['sku']}%");
+                }
+                if (isset($data['model'])) {
+                    $query->where('model', 'like', "%{$data['model']}%");
+                }
+
+            });
+        }
+        if (isset($data['model'])) {
+            $builder->whereHas('skus', function ($query) use ($data) {
+                $query->where('sku', 'like', "%{$data['sku']}%");
+            });
+        }
+        if (isset($data['name'])) {
+            $builder->whereHas('description', function ($query) use ($data) {
+                $query->where('name', 'like', "%{$data['name']}%");
+            });
+        }
+        if (isset($data['active'])) {
+            $builder->where('active', (int)$data['active']);
+        }
+
         return $builder;
+    }
+
+    public static function list($data)
+    {
+        return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
 }

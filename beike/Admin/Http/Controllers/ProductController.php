@@ -8,6 +8,7 @@ use Beike\Models\Product;
 use Beike\Models\ProductDescription;
 use Beike\Models\ProductSku;
 use Beike\Admin\Services\ProductService;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -17,38 +18,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if ($request->expectsJson()) {
-            $query = Product::query()
-                ->select('products.*')
-                ->with('description', 'skus');
-
-            if ($request->sku) {
-                $query->whereHas('skus', function ($q) {
-                    $q->where('sku', 'like', '%'.request('sku').'%');
-                });
-            }
-
-            // 关键字搜索：名称
-            if ($request->keyword) {
-                $query->whereHas('description', function ($q) {
-                    $q->where('name', 'like', '%'.request('keyword').'%');
-                });
-            }
-
-            $query->when($request->active !== null, function ($q) {
-                $q->where('active', (int)request('active'));
-            });
-
-            // 回收站
-            if ($request->trashed) {
-                $query->onlyTrashed();
-            }
-
-            // 排序
-            $orderBy = $request->order_by ?? 'products.id:desc';
-            $orderBy = explode(':', $orderBy);
-            $query->orderBy($orderBy[0], $orderBy[1] ?? 'desc');
-
-            $products = $query->paginate($request->per_page ?? 10);
+            $products = ProductRepo::list($request->all());
 
             return ProductResource::collection($products);
         }
