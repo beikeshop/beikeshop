@@ -33,7 +33,7 @@
           </div>
           <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
             <div class="pb-images-top">
-              {{-- <pb-image-selector v-model="item.image"></pb-image-selector> --}}
+              <pb-image-selector v-model="item.image"></pb-image-selector>
               <div class="tag">建议尺寸 1920 x 600</div>
             </div>
             {{-- <link-selector v-model="item.link"></link-selector> --}}

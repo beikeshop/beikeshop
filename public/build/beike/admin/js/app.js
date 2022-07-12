@@ -2065,6 +2065,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/http */ "./resources/js/http.js");
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+function randomString(length) {
+  var str = '';
+
+  for (; str.length < length; str += Math.random().toString(36).substr(2)) {
+    ;
+  }
+
+  return str.substr(0, length);
+}
+
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {

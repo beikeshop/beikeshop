@@ -51,9 +51,9 @@
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
         <div class="left">
-          <el-link :underline="false" :disabled="editingFileIndex === null" icon="el-icon-download">下载</el-link>
-          <el-link :underline="false" :disabled="editingFileIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
-          <el-link :underline="false" :disabled="editingFileIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
+          <el-link :underline="false" :disabled="editingImageIndex === null" icon="el-icon-download">下载</el-link>
+          <el-link :underline="false" :disabled="editingImageIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
+          <el-link :underline="false" :disabled="editingImageIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
         </div>
         <div class="right"><el-button size="mini" type="primary">上传文件</el-button></div>
       </div>
@@ -76,7 +76,7 @@
             :total="image_total">
           </el-pagination>
         </div>
-        <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingFileIndex === null">选择</el-button></div>
+        <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingImageIndex === null">选择</el-button></div>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
 
       loading: false,
 
-      editingFileIndex: null,
+      editingImageIndex: null,
 
       treeInit: [
         {
@@ -205,20 +205,25 @@
       },
 
       checkedImage(index) {
-        this.editingFileIndex = index;
+        this.editingImageIndex = index;
         this.images.map(e => !e.index ? e.selected = false : '')
         this.images[index].selected = !this.images[index].selected
       },
 
       fileChecked() {
-        console.log(this.editingFileIndex)
+        // console.log(this.editingImageIndex)
+        console.log(this.images[this.editingImageIndex])
+
+        // 关闭弹窗
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
       },
 
       deleteFile() {
         this.$confirm('是否要删除选中文件', '提示', {
           type: 'warning'
         }).then(() => {
-          this.images.splice(this.editingFileIndex, 1);
+          this.images.splice(this.editingImageIndex, 1);
           this.$message({type: 'success',message: '删除成功!'});
         }).catch(_=>{});
       },
@@ -235,7 +240,7 @@
 
       openInputBox(type, data) {
         // console.log(data)
-        // console.log(this.editingFileIndex)
+        // console.log(this.editingImageIndex)
         this.$prompt('', type=='addFolder' ? '新建文件夹' : '重命名', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -266,7 +271,7 @@
   $(document).ready(function() {
     $(document).on('click', function (e) {
       if ($(e.target).closest('.content-center .image-list, .content-head, .content-footer').length === 0) {
-        app.editingFileIndex = null;
+        app.editingImageIndex = null;
         app.images.map(e => e.selected = false)
       }
     })

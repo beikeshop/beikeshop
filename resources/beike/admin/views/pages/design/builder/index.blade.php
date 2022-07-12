@@ -58,6 +58,9 @@
   @endforeach
 
   <script>
+    var $language = @json($languages);
+    var $language_id = {{ current_language_id() }};
+
     let app = new Vue({
       el: '#app',
       data: {
