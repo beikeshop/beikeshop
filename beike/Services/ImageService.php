@@ -42,14 +42,20 @@ class ImageService
     public function resize(int $width = 100, int $height = 100): string
     {
         $extension = pathinfo($this->imagePath, PATHINFO_EXTENSION);
-        $newImage = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
+        $newImage = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
 
         $newImagePath = public_path($newImage);
         if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
             $this->createDirectories($newImage);
             $img = Image::make($this->imagePath);
-            $img->resize($width, $height);
-            $img->save($newImagePath);
+
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $canvas = Image::canvas($width, $height);
+            $canvas->insert($img, 'center');
+            $canvas->save($newImagePath);
         }
         return asset($newImage);
     }
