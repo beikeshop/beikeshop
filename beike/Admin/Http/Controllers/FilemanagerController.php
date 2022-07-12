@@ -2,11 +2,18 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class FileManagerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $baseFolder = $request->get('base_folder');
+
         $fileBasePath = public_path('catalog');
+        if ($baseFolder) {
+            $fileBasePath .= '/' . $baseFolder;
+        }
         $files = glob($fileBasePath . '/*');
 
         $folders = $images = [];
@@ -28,6 +35,9 @@ class FileManagerController extends Controller
             'folders' => $folders,
             'images' => $images
         ];
+        if ($request->ajax()) {
+            return $data;
+        }
         return view('admin::pages.filemanager.index', $data);
     }
 }
