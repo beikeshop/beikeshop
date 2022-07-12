@@ -70,6 +70,8 @@
         <div class="right"></div>
         <div class="pagination-wrap">
           <el-pagination
+            @current-change="pageCurrentChange"
+            :page-size="20"
             layout="prev, pager, next"
             :total="image_total">
           </el-pagination>
@@ -115,6 +117,8 @@
         label: 'name'
       },
 
+      folderCurrent: '/catalog',
+
       triggerLeftOffset: 0,
 
       images: @json($images),
@@ -136,7 +140,21 @@
     // 组件方法
     methods: {
       handleNodeClick(e) {
-        $http.get(`/panel/file_manager?base_folder=${e.path}`).then((res) => {
+        if (e.path == this.folderCurrent) {
+          return;
+        }
+
+        this.folderCurrent = e.path
+        this.loadData()
+      },
+
+      pageCurrentChange(e) {
+        this.image_page = e
+        this.loadData()
+      },
+
+      loadData() {
+        $http.get(`/panel/file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
@@ -145,7 +163,6 @@
 
       loadNode(node, resolve) {
         let treeInit = [{name: '图片空间', path: '/catalog', selected: true, children: []}]
-        console.log(resolve)
         if (node.level === 0) {
           return resolve(treeInit);
         }
