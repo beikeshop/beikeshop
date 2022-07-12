@@ -172,13 +172,14 @@ function currency_format($price): string
  * @param int $width
  * @param int $height
  * @return mixed|void
+ * @throws Exception
  */
 function image_resize($image, int $width = 100, int $height = 100)
 {
     if (Str::startsWith($image, 'http')) {
         return $image;
     }
-    return asset($image);
+    return (new \Beike\Services\ImageService($image))->resize($width, $height);
 }
 
 /**

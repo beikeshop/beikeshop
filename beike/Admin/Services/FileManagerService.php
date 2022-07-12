@@ -28,6 +28,7 @@ class FileManagerService
      * @param $baseFolder
      * @param int $page
      * @return array
+     * @throws \Exception
      */
     public function getFiles($baseFolder, int $page = 1): array
     {
@@ -91,6 +92,7 @@ class FileManagerService
      * @param $filePath
      * @param $baseName
      * @return array
+     * @throws \Exception
      */
     private function handleImage($filePath, $baseName): array
     {

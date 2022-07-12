@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ImageService.php
  *
@@ -9,23 +8,67 @@
  * @created    2022-07-12 17:30:20
  * @modified   2022-07-12 17:30:20
  */
+
+namespace Beike\Services;
+
+use Intervention\Image\Facades\Image;
+
 class ImageService
 {
+    private $image;
+    private $imagePath;
 
-    public function resize($image, $width = 100, $height = 100)
+    /**
+     * @param string $image
+     * @throws \Exception
+     */
+    public function __construct(string $image)
     {
+        $this->image = $image;
         $imagePath = public_path($image);
-        $img = \Intervention\Image\Facades\Image::make($imagePath);
-        $img->resize($width, $height);
-        // $img->insert('public/watermark.png');
+        if (!file_exists($imagePath)) {
+            throw new \Exception("图片不存在");
+        }
+        $this->imagePath = $imagePath;
+    }
 
-        $baseName = basename($imagePath);
-        $imageInfo = explode('.', $image);
-        $imageName = $imageInfo[0];
-        $imageExt = $imageInfo[1];
-        $newImagePath = public_path("cache/{$imageName}-{$width}x{$height}.{$imageExt}");
-        \Illuminate\Support\Facades\File::ensureDirectoryExists($newImagePath, 0755, true);
-        $img->save($newImagePath);
-        dd($newImagePath);
+
+    /**
+     * 生成并获取缩略图
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
+    public function resize(int $width = 100, int $height = 100): string
+    {
+        $extension = pathinfo($this->imagePath, PATHINFO_EXTENSION);
+        $newImage = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
+
+        $newImagePath = public_path($newImage);
+        if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
+            $this->createDirectories($newImage);
+            $img = Image::make($this->imagePath);
+            $img->resize($width, $height);
+            $img->save($newImagePath);
+        }
+        return asset($newImage);
+    }
+
+
+    /**
+     * 递归创建缓存文件夹
+     *
+     * @param $imagePath
+     */
+    private function createDirectories($imagePath)
+    {
+        $path = '';
+        $directories = explode('/', dirname($imagePath));
+        foreach ($directories as $directory) {
+            $path = $path . '/' . $directory;
+            if (!is_dir(public_path($path))) {
+                @mkdir(public_path($path), 0755);
+            }
+        }
     }
 }
