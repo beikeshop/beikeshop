@@ -1,12 +1,11 @@
 <?php
 
-use Beike\Models\AdminUser;
-use Beike\Models\Customer;
 use Beike\Models\Setting;
-use Illuminate\Support\Facades\Route;
+use Beike\Models\Customer;
+use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Auth\Authenticatable;
-
 
 /**
  * 获取后台设置到 settings 表的值

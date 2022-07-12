@@ -97,7 +97,7 @@ class FileManagerService
         return [
             'path' => $filePath,
             'name' => $baseName,
-            'url' => image_resize("catalog{$filePath}", 100, 100),
+            'url' => image_resize("catalog{$filePath}"),
             'selected' => false,
         ];
     }

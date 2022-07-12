@@ -13,7 +13,7 @@ class FileManagerController extends Controller
         $page = (int)$request->get('page');
         $data = (new FileManagerService)->getFiles($baseFolder, $page);
 
-        if ($request->ajax()) {
+        if ($request->expectsJson()) {
             return $data;
         }
         return view('admin::pages.filemanager.index', $data);
