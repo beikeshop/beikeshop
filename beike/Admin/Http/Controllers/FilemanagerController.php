@@ -10,7 +10,8 @@ class FileManagerController extends Controller
     public function index(Request $request)
     {
         $baseFolder = $request->get('base_folder');
-        $data = (new FileManagerService)->getFiles($baseFolder);
+        $page = (int)$request->get('page');
+        $data = (new FileManagerService)->getFiles($baseFolder, $page);
 
         if ($request->ajax()) {
             return $data;

@@ -26,9 +26,10 @@ class FileManagerService
      * 获取某个目录下的文件和文件夹
      *
      * @param $baseFolder
+     * @param int $page
      * @return array
      */
-    public function getFiles($baseFolder): array
+    public function getFiles($baseFolder, int $page = 1): array
     {
         $fileBasePath = $this->fileBasePath;
         if ($baseFolder) {
@@ -53,9 +54,15 @@ class FileManagerService
             }
         }
 
+        $page = $page > 0 ? $page : 1;
+        $perPage = 20;
+
+        $imageCollection = collect($images);
         $data = [
             'folders' => $folders,
-            'images' => $images
+            'images' => $imageCollection->forPage($page, $perPage)->values()->toArray(),
+            'image_total' => $imageCollection->count(),
+            'image_page' => $page,
         ];
         return $data;
     }
