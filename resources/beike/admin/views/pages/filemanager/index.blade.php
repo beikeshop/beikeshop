@@ -20,6 +20,9 @@
       <el-tree
         :data="tree"
         :props="defaultProps"
+        node-key="key"
+        highlight-current
+        ref="tree"
         @node-click="handleNodeClick"
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
@@ -34,7 +37,7 @@
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="删除" placement="top">
-              <span><i class="el-icon-delete"></i></span>
+              <span @click.stop="() => {deleteFolder(node, data)}"><i class="el-icon-delete"></i></span>
             </el-tooltip>
 
           </div>
@@ -88,37 +91,28 @@
       editingFileIndex: null,
 
       tree: [
+        // {
+        //   label: '一级 1',
+        //   id: '31231',
+        //   children: [
+        //     {
+        //       label: '二级 1-1',
+        //       id: 'fsdf22',
+        //       children: [
+        //         {
+        //           label: '三级 1-1-1',
+        //           id: '78978922',
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
         {
-          label: '一级 1',
-          id: '2222',
+          label: '图片空间',
+          key: '/catalog',
+          selected: true,
           children: [
-            {
-              label: '二级 1-1',
-              id: '2222',
-              children: [
-                {
-                  label: '三级 1-1-1',
-                  id: '2222',
-                }
-              ]
-            }
           ]
-        },
-        {
-          label: '一级 2',
-          id: '423423',
-        },
-        {
-          label: '一级 2',
-          id: '423423',
-        },
-        {
-          label: '一级 2',
-          id: '423423',
-        },
-        {
-          label: '一级 2',
-          id: '423423',
         },
       ],
 
@@ -237,10 +231,20 @@
         }).catch(_=>{});
       },
 
+      deleteFolder(node, data) {
+        console.log(node, data)
+        // console.log(node.parent.data.id)
+        if (node.parent.data.key) {
+          this.$nextTick(() => {
+            this.$refs.tree.setCurrentKey(node.parent.data.key)
+          })
+        }
+      },
+
       openInputBox(type, data) {
         // console.log(data)
         // console.log(this.editingFileIndex)
-        this.$prompt('', '重命名', {
+        this.$prompt('', type=='addFolder' ? '新建文件夹' : '重命名', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
@@ -250,12 +254,7 @@
             type: 'success',
             message: '你的邮箱是: ' + value
           });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });
-        });
+        }).catch(() => {});
       }
     },
     // 在实例初始化之后，组件属性计算之前，如data属性等
