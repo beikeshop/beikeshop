@@ -74,7 +74,7 @@
         form: {
           name: '',
           phone: '',
-          country_id: @json((int)setting('base.country_id')),
+          country_id: @json((int)system_setting('base.country_id')),
           zipcode: '',
           zone_id: '',
           city: '',

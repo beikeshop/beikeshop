@@ -13,7 +13,7 @@ class HomeController extends Controller
         ];
 
         $html = '';
-        $designSettings = setting('base.design_setting');
+        $designSettings = system_setting('base.design_setting');
         $modules = $designSettings['form']['modules'] ?? [];
 
         foreach ($modules as $module) {

@@ -22,27 +22,25 @@ function setting($key, $default = null)
 /**
  * 获取系统 settings
  *
- * @param $group
  * @param $key
  * @param null $default
  * @return mixed
  */
-function system_setting($group, $key, $default = null)
+function system_setting($key, $default = null)
 {
-    return config("bk.{$group}.{$key}", $default);
+    return setting("system.{$key}", $default);
 }
 
 /**
  * 获取后台设置到 settings 表的值
  *
- * @param $plugin
  * @param $key
  * @param null $default
  * @return mixed
  */
-function plugin_setting($plugin, $key, $default = null)
+function plugin_setting($key, $default = null)
 {
-    return config("bk.{$plugin}.{$key}", $default);
+    return setting("plugin.{$key}", $default);
 }
 
 /**
@@ -52,7 +50,7 @@ function admin_name(): string
 {
     if ($envAdminName = env('ADMIN_NAME')) {
         return Str::snake($envAdminName);
-    } elseif ($settingAdminName = setting('base.admin_name')) {
+    } elseif ($settingAdminName = system_setting('base.admin_name')) {
         return Str::snake($settingAdminName);
     }
     return 'admin';
