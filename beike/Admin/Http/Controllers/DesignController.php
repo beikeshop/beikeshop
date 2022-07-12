@@ -5,6 +5,7 @@ namespace Beike\Admin\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
+use Beike\Repositories\LanguageRepo;
 
 class DesignController extends Controller
 {
@@ -12,6 +13,7 @@ class DesignController extends Controller
     {
         $data = [
             'editors' => ['editor-slide_show'],
+            'languages' => LanguageRepo::all(),
             'design_settings' => system_setting('base.design_setting'),
         ];
         return view('admin::pages.design.builder.index', $data);

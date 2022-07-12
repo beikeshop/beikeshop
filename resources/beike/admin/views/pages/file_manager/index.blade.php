@@ -82,6 +82,8 @@
   </div>
 
   <script>
+  var callback = null;
+
   var app = new Vue({
     el: '#filemanager-wrap-app',
     components: {},
@@ -211,8 +213,11 @@
       },
 
       fileChecked() {
-        // console.log(this.editingImageIndex)
-        console.log(this.images[this.editingImageIndex])
+        let typedFiles = this.images[this.editingImageIndex];
+
+        if (callback !== null) {
+          callback(typedFiles);
+        }
 
         // 关闭弹窗
         var index = parent.layer.getFrameIndex(window.name);

@@ -58,9 +58,19 @@
   @endforeach
 
   <script>
-    var $language = @json($languages);
+    var $languages = @json($languages);
     var $language_id = {{ current_language_id() }};
 
+    function randomString(length) {
+      let str = '';
+      for (; str.length < length; str += Math.random().toString(36).substr(2));
+      return str.substr(0, length);
+    }
+  </script>
+
+  @include('admin::pages.design.builder.component.image_selector')
+
+  <script>
     let app = new Vue({
       el: '#app',
       data: {
