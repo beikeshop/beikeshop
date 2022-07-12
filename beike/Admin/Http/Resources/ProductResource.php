@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'position' => $this->position,
             'created_at' => (string)$this->created_at,
             'deleted_at' => (string)$this->deleted_at,
-            'url_edit' => route('admin.products.edit', $this->id),
+            'url_edit' => admin_route('products.edit', $this->id),
         ];
 
         return $data;

@@ -3,8 +3,7 @@
 @section('title', '后台管理')
 
 @section('content')
-  {{-- <a href="{{ route('admin.products.index') }}">Products</a> --}}
-  @for ($i = 0; $i < 10; $i++)
+  @for ($i = 0; $i < 5; $i++)
     <div class="card mb-3">
       <div class="card-header">订单统计</div>
       <div class="card-body">

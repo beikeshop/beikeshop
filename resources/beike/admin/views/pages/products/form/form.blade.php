@@ -8,7 +8,7 @@
   <div class="card">
     <div class="card-body">
       <h2>product</h2>
-      <form action="{{ $product->id ? route('admin.products.update', $product) : route('admin.products.store') }}"
+      <form action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
         method="POST" id="app">
         @csrf
         @method($product->id ? 'PUT' : 'POST')

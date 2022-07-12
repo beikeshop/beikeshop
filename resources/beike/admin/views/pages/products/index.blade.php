@@ -54,7 +54,7 @@
         </div>
 
         <div class="d-flex justify-content-between my-4">
-          <a href="{{ route('admin.products.create') }}">
+          <a href="{{ admin_route('products.create') }}">
             <button class="btn btn-primary">创建商品</button>
           </a>
 
