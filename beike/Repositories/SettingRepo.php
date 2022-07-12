@@ -68,7 +68,7 @@ class SettingRepo
 
     public static function getPluginStatus($pluginCode): bool
     {
-        $status = setting("{$pluginCode}.status");
+        $status = plugin_setting("{$pluginCode}.status");
         return (bool)$status;
     }
 

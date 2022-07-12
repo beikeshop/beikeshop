@@ -66,7 +66,7 @@ class PaymentService
      */
     public function capture($creditCardData): bool
     {
-        $apiKey = setting('bk_stripe.secret_key');
+        $apiKey = plugin_setting('bk_stripe.secret_key');
         Stripe::setApiKey($apiKey);
         $token = Token::create([
             'card' => [
