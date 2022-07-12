@@ -74,6 +74,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
   background: #f9fafa;
   padding: 20px 10px;
   overflow-y: auto;
+  align-content: flex-start;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar {
   width: 8px;
@@ -94,6 +95,16 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
   margin: 0 10px 20px;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .img {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .img img {
+  max-width: 100%;
+  max-height: 100%;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list.active {
   outline: 1px solid #fd560f;

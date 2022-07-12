@@ -22,6 +22,7 @@ class FileManagerController extends Controller
         if ($request->expectsJson()) {
             return $data;
         }
-        return view('admin::pages.filemanager.index', $data);
+
+        return view('admin::pages.file_manager.index', $data);
     }
 }

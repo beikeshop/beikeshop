@@ -18,26 +18,29 @@
   <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak ref="splitPane">
     <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
       <el-tree
-        :data="tree"
         :props="defaultProps"
-        node-key="key"
+        node-key="path"
+        :load="loadNode"
+        lazy
+        :default-expanded-keys="['/catalog']"
+        :render-after-expand="false"
         highlight-current
         ref="tree"
         @node-click="handleNodeClick"
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
           <div>@{{ node.label }}</div>
-          <div class="right">
+          <div class="right" v-if="node.isCurrent">
             <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
               <span @click.stop="() => {openInputBox('addFolder', data)}"><i class="el-icon-circle-plus-outline"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="重命名" placement="top">
-              <span @click.stop="() => {openInputBox('folder', data)}"><i class="el-icon-edit"></i></span>
+              <span v-if="node.level != 1" @click.stop="() => {openInputBox('folder', data)}"><i class="el-icon-edit"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="删除" placement="top">
-              <span @click.stop="() => {deleteFolder(node, data)}"><i class="el-icon-delete"></i></span>
+              <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i class="el-icon-delete"></i></span>
             </el-tooltip>
 
           </div>
@@ -55,8 +58,8 @@
         <div class="right"><el-button size="mini" type="primary">上传文件</el-button></div>
       </div>
       <div class="content-center">
-        <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in files" :key="index" @click="checkedImage(index)">
-          <img :src="file.src">
+        <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index" @click="checkedImage(index)">
+          <div class="img"><img :src="file.url"></div>
           <div class="text">
             <span :title="file.name">@{{ file.name }}</span>
             <i v-if="file.selected" class="el-icon-check"></i>
@@ -68,7 +71,7 @@
         <div class="pagination-wrap">
           <el-pagination
             layout="prev, pager, next"
-            :total="50">
+            :total="image_total">
           </el-pagination>
         </div>
         <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingFileIndex === null">选择</el-button></div>
@@ -90,74 +93,38 @@
 
       editingFileIndex: null,
 
-      tree: [
-        // {
-        //   label: '一级 1',
-        //   id: '31231',
-        //   children: [
-        //     {
-        //       label: '二级 1-1',
-        //       id: 'fsdf22',
-        //       children: [
-        //         {
-        //           label: '三级 1-1-1',
-        //           id: '78978922',
-        //         }
-        //       ]
-        //     }
-        //   ]
-        // },
+      treeInit: [
         {
-          label: '图片空间',
-          key: '/catalog',
+          name: '图片空间',
+          path: '/catalog',
           selected: true,
           children: [
+          {
+            name: '图片空间',
+            path: '/catalog',
+            selected: true,
+            children: [
+            ]
+          },
           ]
         },
       ],
 
       defaultProps: {
         children: 'children',
-        label: 'label'
+        label: 'name'
       },
 
       triggerLeftOffset: 0,
 
-      files: [
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-        {type: 'image', src: 'https://via.placeholder.com/140x140.png/eeeeee', name: '文件名称', selected: false},
-      ]
+      images: @json($images),
+      image_total: 0,
+      image_page: 1,
     },
     // 计算属性
     computed: {
       // isFileSelected() {
-      //   return this.files.some(file => file.selected);
+      //   return this.images.some(file => file.selected);
       // },
 
       paneLengthValue() {
@@ -169,17 +136,25 @@
     // 组件方法
     methods: {
       handleNodeClick(e) {
-        console.log(e)
-        this.loading = true
-
-        setTimeout(() => {
-          this.loading = false
-        },1000)
+        $http.get(`/panel/file_manager?base_folder=${e.path}`).then((res) => {
+          this.images = res.images
+          this.image_page = res.image_page
+          this.image_total = res.image_total
+        })
       },
 
       loadNode(node, resolve) {
-        console.log(node, resolve)
-        resolve(this.tree)
+        let treeInit = [{name: '图片空间', path: '/catalog', selected: true, children: []}]
+        console.log(resolve)
+        if (node.level === 0) {
+          return resolve(treeInit);
+        }
+
+        if (node.level === 1) return resolve(@json($folders));
+
+        $http.get(`/panel/file_manager?base_folder=${node.data.path}`).then((res) => {
+          resolve(res.folders);
+        })
       },
 
       // 按下滑动器
@@ -214,8 +189,8 @@
 
       checkedImage(index) {
         this.editingFileIndex = index;
-        this.files.map(e => !e.index ? e.selected = false : '')
-        this.files[index].selected = !this.files[index].selected
+        this.images.map(e => !e.index ? e.selected = false : '')
+        this.images[index].selected = !this.images[index].selected
       },
 
       fileChecked() {
@@ -226,7 +201,7 @@
         this.$confirm('是否要删除选中文件', '提示', {
           type: 'warning'
         }).then(() => {
-          this.files.splice(this.editingFileIndex, 1);
+          this.images.splice(this.editingFileIndex, 1);
           this.$message({type: 'success',message: '删除成功!'});
         }).catch(_=>{});
       },
@@ -275,7 +250,7 @@
     $(document).on('click', function (e) {
       if ($(e.target).closest('.content-center .image-list, .content-head, .content-footer').length === 0) {
         app.editingFileIndex = null;
-        app.files.map(e => e.selected = false)
+        app.images.map(e => e.selected = false)
       }
     })
   });

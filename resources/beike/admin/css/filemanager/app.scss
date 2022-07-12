@@ -105,6 +105,7 @@ body.page-filemanager {
         // flex-wrap: wrap;
         // margin-right: -20px;
         overflow-y: auto;
+        align-content: flex-start;
 
         &::-webkit-scrollbar {
           width: 8px;
@@ -129,6 +130,19 @@ body.page-filemanager {
           box-shadow: 0 0 2px 1px rgba(0, 0, 0, .1);
           cursor: pointer;
           // border: 1px solid transparent;
+
+          .img {
+            // width: 100px;
+            height: 140px;
+            display: flex;
+            align-items: center; // flex-start | center
+            justify-content: center; // flex-end | center | space-between
+
+            img {
+              max-width: 100%;
+              max-height: 100%;
+            }
+          }
 
           &.active {
             outline: 1px solid  $primary;
