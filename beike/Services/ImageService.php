@@ -18,14 +18,16 @@ class ImageService
     private $image;
     private $imagePath;
 
+    const PLACEHOLDER_IMAGE = 'catalog/placeholder.png';
+
     /**
      * @param string $image
      * @throws \Exception
      */
     public function __construct(string $image)
     {
-        $this->image = $image;
-        $imagePath = public_path($image);
+        $this->image = $image ?: self::PLACEHOLDER_IMAGE;
+        $imagePath = public_path($this->image);
         if (!file_exists($imagePath)) {
             throw new \Exception("图片不存在");
         }
