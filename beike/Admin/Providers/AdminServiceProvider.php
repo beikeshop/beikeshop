@@ -2,18 +2,18 @@
 
 namespace Beike\Admin\Providers;
 
-use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Models\AdminUser;
-use Beike\Models\Setting;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Admin\View\Components\Form\Input;
+use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -33,6 +33,10 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
+
+        $this->app->booted(function () {
+            $this->loadShareViewData();
+        });
 
         $this->loadViewComponentsAs('admin', [
             'header' => Header::class,
@@ -107,4 +111,12 @@ class AdminServiceProvider extends ServiceProvider
         }
     }
 
+
+    /**
+     * 后台公共数据
+     */
+    protected function loadShareViewData()
+    {
+        View::share('admin_base_url', admin_route('home.index'));
+    }
 }
