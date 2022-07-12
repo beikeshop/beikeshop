@@ -2,6 +2,7 @@
 
 use Beike\Models\AdminUser;
 use Beike\Models\Customer;
+use Beike\Models\Setting;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -26,8 +27,34 @@ function admin_name(): string
 {
     if ($envAdminName = env('ADMIN_NAME')) {
         return Str::snake($envAdminName);
+    } elseif ($settingAdminName = setting('base.admin_name')) {
+        return Str::snake($settingAdminName);
     }
     return 'admin';
+}
+
+/**
+ * 获取后台设置项
+ */
+function load_settings()
+{
+    $settings = Setting::all(['type', 'space', 'name', 'value', 'json'])
+        ->groupBy('space');
+
+    $result = [];
+    foreach ($settings as $space => $groupSettings) {
+        $space = $space ?: 'system';
+        foreach ($groupSettings as $groupSetting) {
+            $name = $groupSetting->name;
+            $value = $groupSetting->value;
+            if ($groupSetting->json) {
+                $result[$space][$name] = json_decode($value, true);
+            } else {
+                $result[$space][$name] = $value;
+            }
+        }
+    }
+    config(['bk' => $result]);
 }
 
 /**

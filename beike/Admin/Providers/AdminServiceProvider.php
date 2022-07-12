@@ -23,6 +23,7 @@ class AdminServiceProvider extends ServiceProvider
     public function boot()
     {
         $uri = request()->getRequestUri();
+        load_settings();
 
         $adminName = admin_name();
         if (!Str::startsWith($uri, "/{$adminName}")) {

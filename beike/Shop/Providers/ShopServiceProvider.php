@@ -19,8 +19,7 @@ class ShopServiceProvider extends ServiceProvider
     public function boot()
     {
         $uri = request()->getRequestUri();
-
-        $this->loadSettings();
+        load_settings();
 
         if (Str::startsWith($uri, '/admin')) {
             return;
@@ -37,27 +36,6 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
         ]);
-    }
-
-    protected function loadSettings()
-    {
-        $settings = Setting::all(['type', 'space', 'name', 'value', 'json'])
-            ->groupBy('space');
-
-        $result = [];
-        foreach ($settings as $space => $groupSettings) {
-            $space = $space ?: 'system';
-            foreach ($groupSettings as $groupSetting) {
-                $name = $groupSetting->name;
-                $value = $groupSetting->value;
-                if ($groupSetting->json) {
-                    $result[$space][$name] = json_decode($value, true);
-                } else {
-                    $result[$space][$name] = $value;
-                }
-            }
-        }
-        config(['bk' => $result]);
     }
 
     protected function registerGuard()
