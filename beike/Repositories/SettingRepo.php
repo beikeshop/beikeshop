@@ -17,6 +17,32 @@ use Beike\Models\Setting;
 class SettingRepo
 {
     /**
+     * 按照类型分组获取设置
+     */
+    public static function getGroupedSettings(): array
+    {
+        $settings = Setting::all(['type', 'space', 'name', 'value', 'json']);
+
+        $result = [];
+        foreach ($settings as $setting) {
+            $type = $setting->type;
+            if (!in_array($type, Setting::TYPES)) {
+                continue;
+            }
+
+            $space = $setting->space;
+            $name = $setting->name;
+            $value = $setting->value;
+            if ($setting->json) {
+                $result[$type][$space][$name] = json_decode($value, true);
+            } else {
+                $result[$type][$space][$name] = $value;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * 获取插件默认字段
      *
      * @return array

@@ -9,6 +9,8 @@ class Setting extends Model
 {
     use HasFactory;
 
+    const TYPES = ['system', 'plugin'];
+
     protected $table = 'settings';
     protected $fillable = ['type', 'space', 'name', 'value', 'json'];
 }

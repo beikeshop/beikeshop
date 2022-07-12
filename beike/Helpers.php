@@ -20,6 +20,32 @@ function setting($key, $default = null)
 }
 
 /**
+ * 获取系统 settings
+ *
+ * @param $group
+ * @param $key
+ * @param null $default
+ * @return mixed
+ */
+function system_setting($group, $key, $default = null)
+{
+    return config("bk.{$group}.{$key}", $default);
+}
+
+/**
+ * 获取后台设置到 settings 表的值
+ *
+ * @param $plugin
+ * @param $key
+ * @param null $default
+ * @return mixed
+ */
+function plugin_setting($plugin, $key, $default = null)
+{
+    return config("bk.{$plugin}.{$key}", $default);
+}
+
+/**
  * 获取后台管理前缀名称, 默认为 admin
  */
 function admin_name(): string
@@ -37,22 +63,7 @@ function admin_name(): string
  */
 function load_settings()
 {
-    $settings = Setting::all(['type', 'space', 'name', 'value', 'json'])
-        ->groupBy('space');
-
-    $result = [];
-    foreach ($settings as $space => $groupSettings) {
-        $space = $space ?: 'system';
-        foreach ($groupSettings as $groupSetting) {
-            $name = $groupSetting->name;
-            $value = $groupSetting->value;
-            if ($groupSetting->json) {
-                $result[$space][$name] = json_decode($value, true);
-            } else {
-                $result[$space][$name] = $value;
-            }
-        }
-    }
+    $result = \Beike\Repositories\SettingRepo::getGroupedSettings();
     config(['bk' => $result]);
 }
 
