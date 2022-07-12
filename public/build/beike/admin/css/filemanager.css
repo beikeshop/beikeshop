@@ -54,7 +54,17 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-head {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a {
-  margin-right: 20px;
+  margin-right: 30px;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a:not(.is-disabled) {
+  color: #17191c;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a.is-disabled i {
+  color: #fe9d74;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a i {
+  color: #fd560f;
+  font-weight: 600;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
   height: calc(100% - 56px);
@@ -62,17 +72,26 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
   align-items: flex-start;
   flex-wrap: wrap;
   background: #f9fafa;
-  padding: 20px;
-  margin-right: -20px;
+  padding: 20px 10px;
   overflow-y: auto;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: #fd560f;
+}
+body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-track {
+  background: transparent;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list {
   width: calc(20% - 20px);
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   background: #fff;
-  margin-right: 20px;
+  margin: 0 10px 20px;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }

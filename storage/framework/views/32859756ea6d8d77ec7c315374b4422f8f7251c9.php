@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-  <script src="{{ asset('vendor/vue/2.6.12/vue.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.6.2/js.js') }}"></script>
-  <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
-  <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.6.2/css.css') }}">
-  <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
-  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <script src="<?php echo e(asset('vendor/vue/2.6.12/vue.js')); ?>"></script>
+  <script src="<?php echo e(asset('vendor/element-ui/2.6.2/js.js')); ?>"></script>
+  <script src="<?php echo e(asset('vendor/jquery/jquery-3.6.0.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('vendor/layer/3.5.1/layer.js')); ?>"></script>
+  <link href="<?php echo e(mix('/build/beike/admin/css/bootstrap.css')); ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo e(asset('vendor/element-ui/2.6.2/css.css')); ?>">
+  <link href="<?php echo e(mix('build/beike/admin/css/filemanager.css')); ?>" rel="stylesheet">
+  <script src="<?php echo e(mix('build/beike/admin/js/app.js')); ?>"></script>
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
   <title>beike filemanager</title>
 </head>
 <body class="page-filemanager">
@@ -23,10 +23,10 @@
         @node-click="handleNodeClick"
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
-          <div>@{{ node.label }}</div>
+          <div>{{ node.label }}</div>
           <div class="right">
             <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
-              <span @click.stop="() => {openInputBox('addFolder', data)}"><i class="el-icon-circle-plus-outline"></i></span>
+              <span><i class="el-icon-circle-plus-outline"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="重命名" placement="top">
@@ -55,7 +55,7 @@
         <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in files" :key="index" @click="checkedImage(index)">
           <img :src="file.src">
           <div class="text">
-            <span :title="file.name">@{{ file.name }}</span>
+            <span :title="file.name">{{ file.name }}</span>
             <i v-if="file.selected" class="el-icon-check"></i>
           </div>
         </div>
@@ -238,8 +238,7 @@
       },
 
       openInputBox(type, data) {
-        // console.log(data)
-        // console.log(this.editingFileIndex)
+        console.log(data)
         this.$prompt('', '重命名', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -283,3 +282,4 @@
   </script>
 </body>
 </html>
+<?php /**PATH /Users/pushuo/www/product/beikeshop/resources//beike/admin/views/pages/filemanager/index.blade.php ENDPATH**/ ?>
