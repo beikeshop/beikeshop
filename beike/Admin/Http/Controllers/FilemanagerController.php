@@ -18,7 +18,7 @@ class FileManagerController extends Controller
         $baseFolder = $request->get('base_folder');
         $page = (int)$request->get('page');
         $data = (new FileManagerService)->getFiles($baseFolder, $page);
-dd($data);
+
         if ($request->expectsJson()) {
             return $data;
         }
