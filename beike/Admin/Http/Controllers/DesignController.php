@@ -12,7 +12,7 @@ class DesignController extends Controller
     {
         $data = [
             'editors' => ['editor-slide_show'],
-            'design_settings' => setting('system.design_setting'),
+            'design_settings' => setting('base.design_setting'),
         ];
         return view('admin::pages.design.builder.index', $data);
     }

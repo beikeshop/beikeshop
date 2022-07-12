@@ -52,7 +52,7 @@ class CustomerController extends Controller
             'customer_groups' => CustomerGroupRepo::list(),
             'addresses' => AddressResource::collection($addresses),
             'countries' => CountryRepo::all(),
-            'country_id' => setting('system.country_id'),
+            'country_id' => setting('base.country_id'),
             '_redirect' => $this->getRedirect(),
         ];
 

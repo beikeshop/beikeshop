@@ -74,7 +74,7 @@
         form: {
           name: '',
           phone: '',
-          country_id: @json((int)setting('system.country_id')),
+          country_id: @json((int)setting('base.country_id')),
           zipcode: '',
           zone_id: '',
           city: '',
@@ -166,7 +166,7 @@
           this.editIndex = null;
 
           Object.keys(this.form).forEach(key => this.form[key] = '')
-          this.form.country_id =  @json((int)setting('system.country_id'))
+          this.form.country_id =  @json((int)setting('base.country_id'))
         },
 
         countryChange(e) {
