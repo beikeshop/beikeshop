@@ -263,6 +263,7 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
+          closeOnClickModal: false,
           inputValue: data ? data.name : '',
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
@@ -277,6 +278,7 @@
             $http.post(`file_manager/rename`, {origin_name: this.folderCurrent, new_name: value}).then((res) => {
               layer.msg(res.message)
               data.name = value;
+              data.path = data.path.replace(/\/[^\/]*$/, '/' + value);
               this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
             })
           }
