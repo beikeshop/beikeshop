@@ -282,27 +282,28 @@
               data.path = data.path.replace(/\/[^\/]*$/, '/' + value);
               this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
               // 递归 修改 data 内 所有 children
-              changeChildren(data);
-              function changeChildren(data) {
-                if (data.children) {
-                  data.children.map(e => {
-                    if (e.path) {
-                      // 将字符串转换为数组
-                      let path = e.path.split('/')
-                      path[node.level - 1] = value
-                      // 将数组转换为字符串
-                      e.path = path.join('/')
-                    }
-
-                    if (e.children) {
-                      changeChildren(e)
-                    }
-                  })
-                }
-              }
+              this.changeChildren(data, node, value);
             })
           }
         }).catch(() => {});
+      },
+
+      changeChildren(data, node, value) {
+        if (data.children) {
+          data.children.map(e => {
+            if (e.path) {
+              // 将字符串转换为数组
+              let path = e.path.split('/')
+              path[node.level - 1] = value
+              // 将数组转换为字符串
+              e.path = path.join('/')
+            }
+
+            if (e.children) {
+              this.changeChildren(e, node, value)
+            }
+          })
+        }
       }
     },
     // 在实例初始化之后，组件属性计算之前，如data属性等
