@@ -11,6 +11,8 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Support\Facades\File;
+
 class FileManagerService
 {
     private $fileBasePath = '';
@@ -136,7 +138,27 @@ class FileManagerService
         return [
             'path' => $folderPath,
             'name' => $baseName,
+            'leaf' => $this->hasSubFolders($folderPath),
         ];
+    }
+
+
+    /**
+     * 检测是否含有子文件夹
+     *
+     * @param $folderPath
+     * @return bool
+     */
+    private function hasSubFolders($folderPath): bool
+    {
+        $path = public_path("catalog/{$folderPath}");
+        $subFiles = glob($path . '/*');
+        foreach ($subFiles as $subFile) {
+            if (is_dir($subFile)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
