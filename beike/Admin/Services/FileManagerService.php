@@ -85,6 +85,8 @@ class FileManagerService
 
 
     /**
+     * 批量删除文件或文件夹
+     *
      * @param $filePath
      * @throws \Exception
      */
@@ -103,6 +105,13 @@ class FileManagerService
     }
 
 
+    /**
+     * 修改文件夹或者文件名称
+     *
+     * @param $originPath
+     * @param $newPath
+     * @throws \Exception
+     */
     public function updateName($originPath, $newPath)
     {
         $originPath = public_path("catalog/{$originPath}");
