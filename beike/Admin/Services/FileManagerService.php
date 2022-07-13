@@ -70,6 +70,46 @@ class FileManagerService
 
 
     /**
+     * 创建目录
+     * @param $folderName
+     * @throws \Exception
+     */
+    public function createDirectory($folderName)
+    {
+        $folderPath = public_path("catalog/{$folderName}");
+        if (is_dir($folderPath)) {
+            throw new \Exception("目录已存在");
+        }
+        createDirectories(dirname($folderName));
+    }
+
+
+    /**
+     * @param $filePath
+     * @throws \Exception
+     */
+    public function deleteDirectoryOrFile($filePath)
+    {
+        $filePath = public_path("catalog/{$filePath}");
+        if (is_dir($filePath)) {
+            $files = glob($filePath . '/*');
+            if ($files) {
+                throw new \Exception("该目录不为空");
+            }
+            @rmdir($filePath, 0755);
+        } elseif (file_exists($filePath)) {
+            @unlink($filePath);
+        }
+    }
+
+
+    public function updateName()
+    {
+
+    }
+
+
+    /**
      * 处理文件夹
      *
      * @param $folderPath

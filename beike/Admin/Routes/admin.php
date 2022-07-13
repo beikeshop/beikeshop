@@ -22,6 +22,7 @@ Route::prefix($adminName)
                 Route::Resource('files', \Beike\Admin\Http\Controllers\FileController::class);
 
                 Route::Resource('file_manager', \Beike\Admin\Http\Controllers\FileManagerController::class);
+                Route::post('file_manager/upload', [\Beike\Admin\Http\Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
 
                 Route::Resource('customers', \Beike\Admin\Http\Controllers\CustomerController::class);
                 Route::resource('customers.addresses', \Beike\Admin\Http\Controllers\AddressController::class);

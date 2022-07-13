@@ -48,7 +48,7 @@ class ImageService
 
         $newImagePath = public_path($newImage);
         if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
-            $this->createDirectories($newImage);
+            createDirectories(dirname($newImage));
             $img = Image::make($this->imagePath);
 
             $img->resize($width, $height, function ($constraint) {
@@ -60,23 +60,5 @@ class ImageService
             $canvas->save($newImagePath);
         }
         return asset($newImage);
-    }
-
-
-    /**
-     * 递归创建缓存文件夹
-     *
-     * @param $imagePath
-     */
-    private function createDirectories($imagePath)
-    {
-        $path = '';
-        $directories = explode('/', dirname($imagePath));
-        foreach ($directories as $directory) {
-            $path = $path . '/' . $directory;
-            if (!is_dir(public_path($path))) {
-                @mkdir(public_path($path), 0755);
-            }
-        }
     }
 }

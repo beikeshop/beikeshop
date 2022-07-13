@@ -1,6 +1,5 @@
 <?php
 
-use Beike\Models\Setting;
 use Beike\Models\Customer;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
@@ -237,18 +236,34 @@ function json_fail($message, $data = []): array
     return $result;
 }
 
-if (!function_exists('to_sql')) {
-    /**
-     * @param mixed $builder
-     * @return string|string[]|null
-     */
-    function to_sql($builder)
-    {
-        $sql = $builder->toSql();
-        foreach ($builder->getBindings() as $binding) {
-            $value = is_numeric($binding) ? $binding : "'" . $binding . "'";
-            $sql = preg_replace('/\?/', $value, $sql, 1);
+/**
+ * 根据 $builder 对象输出SQL语句
+ * @param mixed $builder
+ * @return string|string[]|null
+ */
+function to_sql($builder)
+{
+    $sql = $builder->toSql();
+    foreach ($builder->getBindings() as $binding) {
+        $value = is_numeric($binding) ? $binding : "'" . $binding . "'";
+        $sql = preg_replace('/\?/', $value, $sql, 1);
+    }
+    return $sql;
+}
+
+
+/**
+ * 递归创建文件夹
+ * @param $directoryPath
+ */
+function createDirectories($directoryPath)
+{
+    $path = '';
+    $directories = explode('/', $directoryPath);
+    foreach ($directories as $directory) {
+        $path = $path . '/' . $directory;
+        if (!is_dir(public_path($path))) {
+            @mkdir(public_path($path), 0755);
         }
-        return $sql;
     }
 }
