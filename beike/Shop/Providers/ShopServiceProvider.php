@@ -2,7 +2,6 @@
 
 namespace Beike\Shop\Providers;
 
-use Beike\Models\Setting;
 use Beike\Models\Customer;
 use Illuminate\Support\Str;
 use Beike\Repositories\CategoryRepo;
