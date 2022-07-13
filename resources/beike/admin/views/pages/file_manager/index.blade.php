@@ -251,8 +251,8 @@
             $http.delete(`file_manager/delete_files`, {name: this.folderCurrent}).then((res) => {
               layer.msg(res.message)
               this.$refs.tree.setCurrentKey(node.parent.data.path)
-              this.$refs.tree.remove(data.path)
               this.folderCurrent = node.parent.data.path;
+              this.$refs.tree.remove(data.path)
               this.loadData()
             })
           }).catch(_=>{});
@@ -265,7 +265,7 @@
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
           closeOnClickModal: false,
-          // inputValue: data ? data.name : '',
+          inputValue: data ? data.name : '',
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
           if (type == 'addFolder') {
@@ -281,9 +281,13 @@
               data.name = value;
               data.path = data.path.replace(/\/[^\/]*$/, '/' + value);
               this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
-              // 递归 修改 data 内 所有 children
+              // 递归修改 data 内所有 children -> path 的对应 level = value
               this.changeChildren(data, node, value);
             })
+          }
+
+          if (type == 'image') {
+            console.log(value)
           }
         }).catch(() => {});
       },
