@@ -41,26 +41,28 @@ class FileManagerController extends Controller
 
 
     /**
-     * 删除文件或文件夹
-     * DELETE    /admin/file_manager/{file_manager}
+     * 文件或文件夹改名
+     * PUT       /admin/file_manager/rename
      * @throws \Exception
      */
-    public function destroy(Request $request): array
+    public function rename(Request $request): array
     {
-        $folderName = $request->get('name');
-        (new FileManagerService)->deleteDirectoryOrFile($folderName);
+        $originPath = $request->get('origin_name');
+        $newPath = $request->get('new_name');
+        (new FileManagerService)->updateName($originPath, $newPath);
         return json_success('删除成功');
     }
 
 
     /**
-     * 文件或文件夹改名
-     * PUT       /admin/file_manager/{file_manager}
+     * 删除文件或文件夹
+     * DELETE    /admin/file_manager/delete
+     * @throws \Exception
      */
-    public function update(Request $request)
+    public function destroyFiles(Request $request): array
     {
         $folderName = $request->get('name');
-        (new FileManagerService)->updateName($folderName);
+        (new FileManagerService)->deleteDirectoryOrFile($folderName);
         return json_success('删除成功');
     }
 
