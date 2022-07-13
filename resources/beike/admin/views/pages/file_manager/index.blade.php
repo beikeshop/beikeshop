@@ -144,7 +144,7 @@
     // 组件方法
     methods: {
       handleNodeClick(e, node, data) {
-        if (e.path == this.folderCurrent) {
+        if (e.path == this.folderCurrent || e.children) {
           return;
         }
 
@@ -163,6 +163,7 @@
           if (node) {
             this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
             node.expanded = !node.expanded;
+            // node.expanded = true;
           }
 
           this.images = res.images
@@ -242,10 +243,18 @@
       },
 
       deleteFolder(node, data) {
-        if (node.parent.data.key) {
-          this.$nextTick(() => {
-            this.$refs.tree.setCurrentKey(node.parent.data.key)
-          })
+        if (data.path) {
+          this.$confirm('正在进行删除文件夹操作，文件夹内所有文件都将被删除，是否确认？', '提示', {
+            type: 'warning'
+          }).then(() => {
+            $http.delete(`file_manager/delete_files`, {name: this.folderCurrent}).then((res) => {
+              layer.msg(res.message)
+              this.$refs.tree.setCurrentKey(node.parent.data.path)
+              this.$refs.tree.remove(data.path)
+              this.folderCurrent = node.parent.data.path;
+              this.loadData()
+            })
+          }).catch(_=>{});
         }
       },
 
