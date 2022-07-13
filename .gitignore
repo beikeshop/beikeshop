@@ -1,8 +1,5 @@
 /node_modules
-/public/beike
-/public/cache
 /public/hot
-/public/plugin
 /public/storage
 /storage/*.key
 /vendor
