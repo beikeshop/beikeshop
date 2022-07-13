@@ -11,8 +11,6 @@
 
 namespace Beike\Admin\Services;
 
-use Illuminate\Support\Facades\File;
-
 class FileManagerService
 {
     private $fileBasePath = '';
@@ -176,6 +174,7 @@ class FileManagerService
             'path' => $filePath,
             'name' => $baseName,
             'url' => image_resize("catalog{$filePath}"),
+            'origin_url' => image_origin("catalog{$filePath}"),
             'selected' => false,
         ];
     }

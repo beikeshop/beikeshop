@@ -61,4 +61,13 @@ class ImageService
         }
         return asset($newImage);
     }
+
+
+    /**
+     * 获取原图地址
+     */
+    public function originUrl(): string
+    {
+        return asset($this->image);
+    }
 }

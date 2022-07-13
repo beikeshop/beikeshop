@@ -190,6 +190,20 @@ function image_resize($image, int $width = 100, int $height = 100)
     return (new \Beike\Services\ImageService($image))->resize($width, $height);
 }
 
+
+/**
+ * 获取原图地址
+ * @throws Exception
+ */
+function image_origin($image)
+{
+    if (Str::startsWith($image, 'http')) {
+        return $image;
+    }
+    return (new \Beike\Services\ImageService($image))->originUrl();
+}
+
+
 /**
  * 当前语言ID
  *
