@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>details-black</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="60.0119231%" y1="-2.28317149%" x2="60.0119231%" y2="97.3736075%" id="linearGradient-1">
+            <stop stop-color="#666666" offset="0%"></stop>
+            <stop stop-color="#3F3F3F" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.7 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.613768116 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path d="M6.5510235,14 L0.835261224,14 L0.835261224,13.3397933 C0.992023421,13.3277347 1.14576865,13.3126616 1.29650153,13.2945736 C1.44723442,13.2764857 1.57686275,13.2463396 1.68539042,13.2041344 C1.87832851,13.1317826 2.01398607,13.0277785 2.09236717,12.8921189 C2.17074827,12.7564593 2.20993823,12.5770898 2.20993823,12.3540052 L2.20993823,7.09043928 C2.20993823,6.87941324 2.16170443,6.69401458 2.06523538,6.53423773 C1.96876634,6.37446087 1.84818184,6.24633984 1.70347828,6.1498708 C1.5949506,6.07751902 1.43065423,6.00818293 1.21058422,5.94186047 C0.990514215,5.875538 0.79004249,5.83333342 0.609163033,5.81524548 L0.609163033,5.15503876 L5.04068758,4.91989664 L5.1763465,5.05555556 L5.1763465,12.2364341 C5.1763465,12.4474601 5.22156568,12.6268296 5.31200541,12.7745478 C5.40244514,12.922266 5.53207347,13.0322994 5.7008943,13.1046512 C5.8214806,13.158915 5.95412355,13.2071488 6.09882712,13.249354 C6.24353068,13.2915592 6.3942613,13.3217053 6.5510235,13.3397933 L6.5510235,14 Z M5.23061006,1.66408269 C5.23061006,2.12231065 5.05425524,2.51270295 4.70154029,2.83527132 C4.34882535,3.15783968 3.93130153,3.31912145 3.44895631,3.31912145 C2.96058178,3.31912145 2.54004335,3.15783968 2.18732841,2.83527132 C1.83461347,2.51270295 1.65825864,2.12231065 1.65825864,1.66408269 C1.65825864,1.20585473 1.83461347,0.813955116 2.18732841,0.488372093 C2.54004335,0.16278907 2.96058178,0 3.44895631,0 C3.93733085,0 4.35636197,0.16278907 4.70606226,0.488372093 C5.05576254,0.813955116 5.23061006,1.20585473 5.23061006,1.66408269 L5.23061006,1.66408269 Z" id="path-3"></path>
+    </defs>
+    <g id="icons-moono" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="details" sketch:type="MSArtboardGroup" filter="url(#filter-2)">
+            <g id="i" sketch:type="MSLayerGroup" transform="translate(5.000000, 1.000000)">
+                <g>
+                    <use fill="url(#linearGradient-1)" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                    <use fill="none" xlink:href="#path-3"></use>
+                    <use fill="none" xlink:href="#path-3"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <path id="resize-a" d="M2.25,3.75 L2.25,6.75 L3.75,6.75 L3.75,3.75 L6.75,3.75 L6.75,2.25 L3.75,2.25 C2.925,2.25 2.25,2.925 2.25,3.75 Z M3.75,11.25 L2.25,11.25 L2.25,14.25 C2.25,15.075 2.925,15.75 3.75,15.75 L6.75,15.75 L6.75,14.25 L3.75,14.25 L3.75,11.25 Z M14.25,14.25 L11.25,14.25 L11.25,15.75 L14.25,15.75 C15.075,15.75 15.75,15.075 15.75,14.25 L15.75,11.25 L14.25,11.25 L14.25,14.25 Z M14.25,2.25 L11.25,2.25 L11.25,3.75 L14.25,3.75 L14.25,6.75 L15.75,6.75 L15.75,3.75 C15.75,2.925 15.075,2.25 14.25,2.25 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <mask id="resize-b" fill="#fff">
+      <use xlink:href="#resize-a"/>
+    </mask>
+    <use fill="#000" fill-rule="nonzero" xlink:href="#resize-a"/>
+    <g fill="#3B474E" mask="url(#resize-b)">
+      <polygon points="0 0 18 0 18 18 0 18"/>
+    </g>
+  </g>
+</svg>

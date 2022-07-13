@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2007-2019, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or https://ckeditor.com/sales/license/ckfinder
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKFinder 3 Samples</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<![endif]-->
+	<link href="css/sample.css" rel="stylesheet">
+</head>
+<body>
+<header class="header-a">
+	<div class="grid-container">
+		<h1 class="header-a-logo grid-width-30">
+			<a href="index.html"><img src="img/logo.png" alt="CKFinder Logo"></a>
+		</h1>
+		<nav class="navigation-b grid-width-70">
+			<ul>
+				<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/" class="button-a">Documentation</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<main class="grid-container">
+	<nav class="tree-a tree-a-layout grid-width-30">
+		<h1>CKFinder Samples</h1>
+		<h2>Website Integration</h2>
+		<ul>
+			<li><a href="widget.html">Widget</a></li>
+			<li><a href="popups.html">Popup</a></li>
+			<li><a href="modals.html">Modal</a></li>
+			<li><a href="full-page.html">Full Page</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="ckeditor.html">CKEditor Integration</a></h2>
+		<h2>Skins</h2>
+		<ul>
+			<li><a href="skins-neko.html">Neko</a></li>
+			<li><a href="skins-moono.html">Moono</a></li>
+			<li><a href="skins-jquery-mobile.html">jQuery Mobile</a></li>
+		</ul>
+		<h2>User Interface</h2>
+		<ul>
+			<li><a href="user-interface-default.html">Default</a></li>
+			<li><a href="user-interface-compact.html">Compact</a></li>
+			<li><a href="user-interface-mobile.html">Mobile</a></li>
+			<li><a href="user-interface-listview.html">List View</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="localization.html">Localization</a></h2>
+		<h2 class="tree-a-active">Other</h2>
+		<ul>
+			<li><a href="other-read-only.html">Read-only Mode</a></li>
+			<li class="tree-a-active"><a href="other-custom-configuration.html">Custom Configuration</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="plugin-examples.html">Plugin Examples</a></h2>
+	</nav>
+	<section class="content grid-width-70">
+		<h1>Custom Configuration</h1>
+		<p>CKFinder provides many configuration options that can be changed to customize the application.
+		For details please check the <a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/api/CKFinder.Config">documentation</a>.</p>
+		<p>In the example below the following options are set:</p>
+		<ul>
+			<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/api/CKFinder.Config-cfg-id"><code>id</code></a> sets the instance ID to <code>custom-instance-id</code>,</li>
+			<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/api/CKFinder.Config-cfg-thumbnailDefaultSize"><code>thumbnailDefaultSize</code></a> sets the default thumbnail size to 400px after CKFinder is started,</li>
+			<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/api/CKFinder.Config-cfg-width"><code>width</code></a> sets the widget width to 100% to use all available space,</li>
+			<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/api/CKFinder.Config-cfg-height"><code>height</code></a> sets the widget height to 500 pixels.</li>
+		</ul>
+<pre class="prettyprint"><code>CKFinder.widget( 'ckfinder-widget', {
+	id: 'custom-instance-id',
+	thumbnailDefaultSize: 400,
+	width: '100%',
+	height: 500
+} );</code></pre>
+		<div id="ckfinder-widget"></div>
+	</section>
+</main>
+<footer class="footer-a grid-container">
+	<div class="grid-container">
+		<p class="grid-width-100">
+			CKFinder 3 &ndash; <a href="https://ckeditor.com/ckfinder/">https://ckeditor.com/ckfinder/</a>
+		</p>
+		<p class="grid-width-100">
+			Copyright &copy; 2003-2019, <a class="samples" href="http://cksource.com/">CKSource</a> &ndash; Frederico
+			Knabben. <a href="https://ckeditor.com/sales/license/ckfinder">All rights reserved</a>.
+		</p>
+	</div>
+</footer>
+<nav class="navigation-a">
+	<div class="grid-container">
+		<ul class="navigation-a-left grid-width-70">
+			<li><a href="https://ckeditor.com/ckfinder/">Project Homepage</a></li>
+			<li class="global-is-mobile-hidden"><a href="https://github.com/ckfinder/ckfinder/issues">I found a bug in CKFinder</a></li>
+			<li class="global-is-mobile-hidden"><a class="icon-pos-right icon-navigation-a-github" href="https://github.com/ckfinder/ckfinder-docs-samples">Sample Plugins on GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+
+<script src="js/sf.js"></script>
+<script src="js/tree-a.js"></script>
+<script src="../ckfinder.js"></script>
+<script>
+	CKFinder.widget( 'ckfinder-widget', {
+		id: 'custom-instance-id',
+		thumbnailDefaultSize: 400,
+		width: '100%',
+		height: 500
+	} );
+</script>
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <path id="crop-a" d="M12.75,11.25 L14.25,11.25 L14.25,5.25 C14.25,4.425 13.575,3.75 12.75,3.75 L6.75,3.75 L6.75,5.25 L12.75,5.25 L12.75,11.25 Z M5.25,12.75 L5.25,0.75 L3.75,0.75 L3.75,3.75 L0.75,3.75 L0.75,5.25 L3.75,5.25 L3.75,12.75 C3.75,13.575 4.425,14.25 5.25,14.25 L12.75,14.25 L12.75,17.25 L14.25,17.25 L14.25,14.25 L17.25,14.25 L17.25,12.75 L5.25,12.75 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <mask id="crop-b" fill="#fff">
+      <use xlink:href="#crop-a"/>
+    </mask>
+    <use fill="#000" fill-rule="nonzero" xlink:href="#crop-a"/>
+    <g fill="#3B474E" mask="url(#crop-b)">
+      <polygon points="0 0 18 0 18 18 0 18"/>
+    </g>
+  </g>
+</svg>

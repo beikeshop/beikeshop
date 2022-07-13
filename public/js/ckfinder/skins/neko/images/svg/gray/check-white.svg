@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="11" viewBox="0 0 14 11">
+  <defs>
+    <polygon id="ico-check-gray-a" points="4.75 8.127 1.623 5 .557 6.058 4.75 10.25 13.75 1.25 12.693 .193"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-2 -4)">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <g transform="translate(2 4)">
+      <mask id="ico-check-gray-b" fill="#fff">
+        <use xlink:href="#ico-check-gray-a"/>
+      </mask>
+      <use fill="#000" fill-rule="nonzero" xlink:href="#ico-check-gray-a"/>
+      <g fill="#ffffff" mask="url(#ico-check-gray-b)">
+        <polygon points="0 0 18 0 18 18 0 18" transform="translate(-1 -1)"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2007-2019, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or https://ckeditor.com/sales/license/ckfinder
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKFinder 3 Samples</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<![endif]-->
+	<link href="css/sample.css" rel="stylesheet">
+</head>
+<body>
+<header class="header-a">
+	<div class="grid-container">
+		<h1 class="header-a-logo grid-width-30">
+			<a href="index.html"><img src="img/logo.png" alt="CKFinder Logo"></a>
+		</h1>
+		<nav class="navigation-b grid-width-70">
+			<ul>
+				<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/" class="button-a">Documentation</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<main class="grid-container">
+	<nav class="tree-a tree-a-layout grid-width-30">
+		<h1>CKFinder Samples</h1>
+		<h2>Website Integration</h2>
+		<ul>
+			<li><a href="widget.html">Widget</a></li>
+			<li><a href="popups.html">Popup</a></li>
+			<li><a href="modals.html">Modal</a></li>
+			<li><a href="full-page.html">Full Page</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub tree-a-active"><a href="ckeditor.html">CKEditor Integration</a></h2>
+		<h2>Skins</h2>
+		<ul>
+			<li><a href="skins-neko.html">Neko</a></li>
+			<li><a href="skins-moono.html">Moono</a></li>
+			<li><a href="skins-jquery-mobile.html">jQuery Mobile</a></li>
+		</ul>
+		<h2>User Interface</h2>
+		<ul>
+			<li><a href="user-interface-default.html">Default</a></li>
+			<li><a href="user-interface-compact.html">Compact</a></li>
+			<li><a href="user-interface-mobile.html">Mobile</a></li>
+			<li><a href="user-interface-listview.html">List View</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="localization.html">Localization</a></h2>
+		<h2>Other</h2>
+		<ul>
+			<li><a href="other-read-only.html">Read-only Mode</a></li>
+			<li><a href="other-custom-configuration.html">Custom Configuration</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="plugin-examples.html">Plugin Examples</a></h2>
+
+	</nav>
+	<section class="content grid-width-70">
+		<h1>CKEditor Integration</h1>
+		<h2 id="integration-ckeditor5">CKEditor 5</h2>
+		<p>To integrate CKFinder with CKEditor 5
+			all you have to do is pass some additional configuration options to CKEditor:</p>
+		<pre class="prettyprint"><code style="overflow-x: scroll">ClassicEditor
+	.create( document.querySelector( '#editor1' ), {
+		ckfinder: {
+			uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
+		},
+		toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+	} )
+	.catch( error => {
+		console.error( error );
+	} );
+</code></pre>
+		<p>
+			The sample below presents the result of the integration. Try pasting images from clipboard directly into the editing area as well as dropping images &mdash; the files will be saved on the fly by CKFinder.
+		</p>
+		<p>
+			You can use the <svg width="20" height="20" viewBox="0 0 20 20"><path d="M11.627 16.5a3.496 3.496 0 0 1 0 0zm5.873-.196a3.484 3.484 0 0 1 0 0zm0-7.001V8h-13v8.5h4.341c.191.54.457 1.044.785 1.5H2a1.5 1.5 0 0 1-1.5-1.5v-13A1.5 1.5 0 0 1 2 2h4.5a1.5 1.5 0 0 1 1.06.44L9.122 4H16a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 19 8v2.531a6.027 6.027 0 0 0-1.5-1.228zM16 6.5v-1H8.5l-2-2H2v13h1V8a1.5 1.5 0 0 1 1.5-1.5H16z"></path><path d="M14.5 19.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zM15 14v-2h-1v2h-2v1h2v2h1v-2h2v-1h-2z"></path></svg>
+			(Insert image or file) toolbar button to open a CKFinder window. Then you can mange your files or choose an asset that
+			should be added to the edited content.
+		</p>
+		<div id="editor1"></div>
+		<p>
+			For detailed information about the integration between CKEditor 5 and CKFinder, please refer to the <a href="https://ckeditor.com/docs/ckeditor5/latest/features/image-upload/ckfinder.html">CKFinder integration</a>
+			article in the <a href="https://ckeditor.com/docs/ckeditor5/latest/index.html">CKEditor 5 documentation</a>.
+		</p>
+
+		<h2 id="integration-ckeditor4">CKEditor 4</h2>
+		<p>To <a href="https://ckeditor.com/docs/ckfinder/ckfinder3/#!/guide/dev_ckeditor">integrate CKFinder with CKEditor 4</a>
+			all you have to do is pass some additional configuration options to CKEditor:</p>
+		<pre class="prettyprint"><code>CKEDITOR.replace( 'editor2', {
+	filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
+	filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
+} );</code></pre>
+		<p>It is also possible to use <code>CKFinder.setupCKEditor()</code> as shown below:</p>
+		<pre class="prettyprint"><code>var editor = CKEDITOR.replace( 'ckfinder' );
+CKFinder.setupCKEditor( editor );</code></pre>
+		<p>The sample below presents the result of the integration. You can manage and select files from your server when creating links or embedding images in CKEditor 4 content. In modern browsers you may also try <strong>pasting images from clipboard</strong> directly into the editing area as well as <strong>dropping images</strong> &mdash; the files will be saved on the fly by CKFinder.</p>
+		<div id="editor2"></div>
+	</section>
+</main>
+<footer class="footer-a grid-container">
+	<div class="grid-container">
+		<p class="grid-width-100">
+			CKFinder 3 &ndash; <a href="https://ckeditor.com/ckfinder/">https://ckeditor.com/ckfinder/</a>
+		</p>
+		<p class="grid-width-100">
+			Copyright &copy; 2003-2019, <a class="samples" href="http://cksource.com/">CKSource</a> &ndash; Frederico
+			Knabben. <a href="https://ckeditor.com/sales/license/ckfinder">All rights reserved</a>.
+		</p>
+	</div>
+</footer>
+<nav class="navigation-a">
+	<div class="grid-container">
+		<ul class="navigation-a-left grid-width-70">
+			<li><a href="https://ckeditor.com/ckfinder/">Project Homepage</a></li>
+			<li class="global-is-mobile-hidden"><a href="https://github.com/ckfinder/ckfinder/issues">I found a bug in CKFinder</a></li>
+			<li class="global-is-mobile-hidden"><a class="icon-pos-right icon-navigation-a-github" href="https://github.com/ckfinder/ckfinder-docs-samples">Sample Plugins on GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+
+<style>div.ck-editor__editable { min-height: 200px;}</style>
+<script src="js/sf.js"></script>
+<script src="js/tree-a.js"></script>
+<script src="https://cdn.ckeditor.com/4.12.1/standard-all/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+<script src="../ckfinder.js"></script>
+<script>
+	if ( typeof ClassicEditor !== 'undefined' ) {
+		ClassicEditor
+			.create( document.querySelector( '#editor1' ), {
+				ckfinder: {
+					// To avoid issues, set it to an absolute path that does not start with dots, e.g. '/ckfinder/core/php/(...)'
+					uploadUrl: '../core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+				},
+				toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+
+			} )
+			.then( function( editor ) {
+				// console.log( editor );
+			} )
+			.catch( function( error ) {
+				console.error( error );
+			} );
+	} else {
+		document.getElementById( 'editor1' ).innerHTML =
+			'<div class="tip-a tip-a-alert">This sample requires working Internet connection to load CKEditor 5 from CDN.</div>'
+	}
+
+	// Note: in this sample we use CKEditor with two extra plugins:
+	// - uploadimage to support pasting and dragging images,
+	// - image2 (instead of image) to provide images with captions.
+	// Additionally, the CSS style for the editing area has been slightly modified to provide responsive images during editing.
+	// All these modifications are not required by CKFinder, they just provide better user experience.
+	if ( typeof CKEDITOR !== 'undefined' ) {
+		CKEDITOR.disableAutoInline = true;
+		CKEDITOR.addCss( 'img {max-width:100%; height: auto;}' );
+		var editor = CKEDITOR.replace( 'editor2', {
+			extraPlugins: 'uploadimage,image2',
+			removePlugins: 'image',
+			height:250
+		} );
+		CKFinder.setupCKEditor( editor );
+	} else {
+		document.getElementById( 'editor2' ).innerHTML =
+			'<div class="tip-a tip-a-alert">This sample requires working Internet connection to load CKEditor 4 from CDN.</div>'
+	}
+
+</script>
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <polygon id="close-a" points="14.25 4.808 13.193 3.75 9 7.942 4.808 3.75 3.75 4.808 7.942 9 3.75 13.193 4.808 14.25 9 10.057 13.193 14.25 14.25 13.193 10.057 9"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <mask id="close-b" fill="#fff">
+      <use xlink:href="#close-a"/>
+    </mask>
+    <use fill="#000" fill-rule="nonzero" xlink:href="#close-a"/>
+    <g fill="#3B474E" mask="url(#close-b)">
+      <polygon points="0 0 18 0 18 18 0 18"/>
+    </g>
+  </g>
+</svg>

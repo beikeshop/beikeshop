@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="5px" viewBox="0 0 10 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>baseline-arrow_right-24px</title>
+    <desc>Created with Sketch.</desc>
+    <g id="light" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ckfinder-right" transform="translate(-1069.000000, -288.000000)">
+            <g id="baseline-arrow_right-24px" transform="translate(1074.000000, 290.000000) rotate(90.000000) translate(-1074.000000, -290.000000) translate(1064.000000, 280.000000)">
+                <polygon id="Shape" fill="#787C7F" fill-rule="nonzero" points="8.33333333 14.1666667 12.5 10 8.33333333 5.83333333"></polygon>
+                <polygon id="Shape" points="0 20 0 0 20 0 20 20"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

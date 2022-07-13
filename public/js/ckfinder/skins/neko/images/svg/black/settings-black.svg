@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+    <title>settings-black</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="60.0119231%" y1="-2.28317149%" x2="60.0119231%" y2="97.3736075%" id="linearGradient-1">
+            <stop stop-color="#666666" offset="0%"></stop>
+            <stop stop-color="#3F3F3F" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.7 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.613768116 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <path d="M2.22766095,8 C2.34837995,8.57905304 2.5718306,9.12041053 2.87808672,9.60414633 L0.939339828,11.5428932 L2.35355339,12.9571068 L4.27069756,11.0399626 L4.27069756,11.0399626 C4.78550995,11.3884386 5.37047861,11.6410986 6,11.7723391 L6,14 L8,14 L8,11.7723391 L8,11.7723391 C8.48162076,11.6719324 8.93716415,11.5004571 9.35516491,11.2693785 L9.35516491,11.2693785 L11.0428932,12.9571068 L12.4571068,11.5428932 L10.8739912,9.95977762 C11.3085777,9.39181776 11.6210903,8.72549531 11.7723391,8 L11.7723391,8 L14,8 L14,6 L11.7723391,6 C11.6410986,5.37047861 11.3884386,4.78550995 11.0399626,4.27069756 L11.0399626,4.27069756 L12.9053301,2.40533009 L11.4911165,0.991116524 L9.60414633,2.87808672 C9.12041053,2.5718306 8.57905304,2.34837995 8,2.22766095 L8,2.22766095 L8,0 L6,0 L6,2.22766095 C5.27450469,2.37890974 4.60818224,2.69142227 4.04022238,3.12600882 L2.35355339,1.43933983 L0.939339828,2.85355339 L2.73062152,4.64483509 L2.73062152,4.64483509 C2.49954288,5.06283585 2.3280676,5.51837924 2.22766095,6 L0,6 L0,8 L2.22766095,8 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" id="path-3"></path>
+    </defs>
+    <g id="icons-moono" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="settings" sketch:type="MSArtboardGroup" filter="url(#filter-2)">
+            <g sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)" id="Oval-14">
+                <g>
+                    <use fill="url(#linearGradient-1)" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                    <use fill="none" xlink:href="#path-3"></use>
+                    <use fill="none" xlink:href="#path-3"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

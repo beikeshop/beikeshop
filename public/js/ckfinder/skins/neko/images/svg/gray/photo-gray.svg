@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <path id="photo-a" d="M15.75,2.25 L2.25,2.25 C1.5,2.25 0.75,3 0.75,3.75 L0.75,14.25 C0.75,15.075 1.425,15.75 2.25,15.75 L15.75,15.75 C16.5,15.75 17.25,15 17.25,14.25 L17.25,3.75 C17.25,3 16.5,2.25 15.75,2.25 Z M3.75,12.75 L6.375,9.375 L8.25,11.6325 L10.875,8.25 L14.25,12.75 L3.75,12.75 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <mask id="photo-b" fill="#fff">
+      <use xlink:href="#photo-a"/>
+    </mask>
+    <use fill="#000" fill-rule="nonzero" xlink:href="#photo-a"/>
+    <g fill="#3B474E" mask="url(#photo-b)">
+      <polygon points="0 0 18 0 18 18 0 18"/>
+    </g>
+  </g>
+</svg>

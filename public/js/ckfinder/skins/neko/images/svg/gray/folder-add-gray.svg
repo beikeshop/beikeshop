@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
+  <defs>
+    <path id="folder-add-a" d="M15.75,4.1875 L9,4.1875 L7.3125,2.5 L2.25,2.5 C1.3134375,2.5 0.5709375,3.2509375 0.5709375,4.1875 L0.5625,14.3125 C0.5625,15.2490625 1.3134375,16 2.25,16 L15.75,16 C16.6865625,16 17.4375,15.2490625 17.4375,14.3125 L17.4375,5.875 C17.4375,4.9384375 16.6865625,4.1875 15.75,4.1875 Z M14.90625,10.9375 L12.375,10.9375 L12.375,13.46875 L10.6875,13.46875 L10.6875,10.9375 L8.15625,10.9375 L8.15625,9.25 L10.6875,9.25 L10.6875,6.71875 L12.375,6.71875 L12.375,9.25 L14.90625,9.25 L14.90625,10.9375 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon points="0 0 18 0 18 18 0 18"/>
+    <mask id="folder-add-b" fill="#fff">
+      <use xlink:href="#folder-add-a"/>
+    </mask>
+    <use fill="#000" fill-rule="nonzero" xlink:href="#folder-add-a"/>
+    <g fill="#3B474E" mask="url(#folder-add-b)">
+      <polygon points="0 0 18 0 18 18 0 18"/>
+    </g>
+  </g>
+</svg>

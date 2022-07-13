@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2007-2019, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or https://ckeditor.com/sales/license/ckfinder
+-->
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CKFinder 3 Samples</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<![endif]-->
+	<link href="css/sample.css" rel="stylesheet">
+</head>
+<body>
+<header class="header-a">
+	<div class="grid-container">
+		<h1 class="header-a-logo grid-width-30">
+			<a href="index.html"><img src="img/logo.png" alt="CKFinder Logo"></a>
+		</h1>
+		<nav class="navigation-b grid-width-70">
+			<ul>
+				<li><a href="https://ckeditor.com/docs/ckfinder/ckfinder3/" class="button-a">Documentation</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+<main class="grid-container">
+	<nav class="tree-a tree-a-layout grid-width-30">
+		<h1>CKFinder Samples</h1>
+		<h2 class="tree-a-active">Website Integration</h2>
+		<ul>
+			<li><a href="widget.html">Widget</a></li>
+			<li><a href="popups.html">Popup</a></li>
+			<li class="tree-a-active"><a href="modals.html">Modal</a></li>
+			<li><a href="full-page.html">Full Page</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="ckeditor.html">CKEditor Integration</a></h2>
+		<h2>Skins</h2>
+		<ul>
+			<li><a href="skins-neko.html">Neko</a></li>
+			<li><a href="skins-moono.html">Moono</a></li>
+			<li><a href="skins-jquery-mobile.html">jQuery Mobile</a></li>
+		</ul>
+		<h2>User Interface</h2>
+		<ul>
+			<li><a href="user-interface-default.html">Default</a></li>
+			<li><a href="user-interface-compact.html">Compact</a></li>
+			<li><a href="user-interface-mobile.html">Mobile</a></li>
+			<li><a href="user-interface-listview.html">List View</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="localization.html">Localization</a></h2>
+		<h2>Other</h2>
+		<ul>
+			<li><a href="other-read-only.html">Read-only Mode</a></li>
+			<li><a href="other-custom-configuration.html">Custom Configuration</a></li>
+		</ul>
+		<h2 class="tree-a-no-sub"><a href="plugin-examples.html">Plugin Examples</a></h2>
+	</nav>
+	<section class="content grid-width-70">
+		<h1>Modal Mode</h1>
+
+		<p>The modal mode is similar to <a href="popups.html">popup</a>. The difference is that popups are opened using a separate browser window while in modal mode CKFinder is opened inside a modal container that is appended to current page document.</p>
+
+		<div class="modal-example">
+			<button id="ckfinder-modal" class="button-a button-a-background" style="float: left">Open Modal</button>
+			<div id="output" style="float: left;font-size: 0.8em;line-height: 1.4em;margin: 3px 7px;"></div>
+		</div>
+		<div style="clear: both"></div>
+
+		<h2>Multiple Modals</h2>
+
+		<p>In some cases you may need more than one modal to handle multiple places that require selecting a file.
+			Below you can find an example that fills each of the inputs with the URL of the selected file.</p>
+
+		<input id="ckfinder-input-1" type="text" style="width:60%">
+		<button id="ckfinder-modal-1" class="button-a button-a-background">Browse Server</button>
+
+		<div style="height: 5px"></div>
+
+		<input id="ckfinder-input-2" type="text" style="width:60%">
+		<button id="ckfinder-modal-2" class="button-a button-a-background">Browse Server</button>
+
+<pre class="prettyprint"><code>var button1 = document.getElementById( 'ckfinder-popup-1' );
+var button2 = document.getElementById( 'ckfinder-popup-2' );
+
+button1.onclick = function() {
+	selectFileWithCKFinder( 'ckfinder-input-1' );
+};
+button2.onclick = function() {
+	selectFileWithCKFinder( 'ckfinder-input-2' );
+};
+
+function selectFileWithCKFinder( elementId ) {
+	CKFinder.modal( {
+		chooseFiles: true,
+		width: 800,
+		height: 600,
+		onInit: function( finder ) {
+			finder.on( 'files:choose', function( evt ) {
+				var file = evt.data.files.first();
+				var output = document.getElementById( elementId );
+				output.value = file.getUrl();
+			} );
+
+			finder.on( 'file:choose:resizedImage', function( evt ) {
+				var output = document.getElementById( elementId );
+				output.value = evt.data.resizedUrl;
+			} );
+		}
+	} );
+}
+</code></pre>
+
+	</section>
+</main>
+<footer class="footer-a grid-container">
+	<div class="grid-container">
+		<p class="grid-width-100">
+			CKFinder 3 &ndash; <a href="https://ckeditor.com/ckfinder/">https://ckeditor.com/ckfinder/</a>
+		</p>
+		<p class="grid-width-100">
+			Copyright &copy; 2003-2019, <a class="samples" href="http://cksource.com/">CKSource</a> &ndash; Frederico
+			Knabben. <a href="https://ckeditor.com/sales/license/ckfinder">All rights reserved</a>.
+		</p>
+	</div>
+</footer>
+<nav class="navigation-a">
+	<div class="grid-container">
+		<ul class="navigation-a-left grid-width-70">
+			<li><a href="https://ckeditor.com/ckfinder/">Project Homepage</a></li>
+			<li class="global-is-mobile-hidden"><a href="https://github.com/ckfinder/ckfinder/issues">I found a bug in CKFinder</a></li>
+			<li class="global-is-mobile-hidden"><a class="icon-pos-right icon-navigation-a-github" href="https://github.com/ckfinder/ckfinder-docs-samples">Sample Plugins on GitHub</a></li>
+		</ul>
+	</div>
+</nav>
+
+<script src="js/sf.js"></script>
+<script src="js/tree-a.js"></script>
+<script src="../ckfinder.js"></script>
+<script>
+	function escapeHtml(unsafe) {
+		return unsafe
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;");
+	}
+
+	var button = document.getElementById( 'ckfinder-modal' );
+
+	button.onclick = function() {
+		CKFinder.modal( {
+			chooseFiles: true,
+			width: 800,
+			height: 600,
+			onInit: function( finder ) {
+				finder.on( 'files:choose', function( evt ) {
+					var file = evt.data.files.first();
+					var output = document.getElementById( 'output' );
+					output.innerHTML = 'Selected: ' + escapeHtml( file.get( 'name' ) ) + '<br>URL: ' + escapeHtml( file.getUrl() );
+				} );
+
+				finder.on( 'file:choose:resizedImage', function( evt ) {
+					var output = document.getElementById( 'output' );
+					output.innerHTML = 'Selected resized image: ' + escapeHtml( evt.data.file.get( 'name' ) ) + '<br>url: ' + escapeHtml( evt.data.resizedUrl );
+				} );
+			}
+		} );
+	};
+
+	var button1 = document.getElementById( 'ckfinder-modal-1' );
+	var button2 = document.getElementById( 'ckfinder-modal-2' );
+
+	button1.onclick = function() {
+		selectFileWithCKFinder( 'ckfinder-input-1' );
+	};
+	button2.onclick = function() {
+		selectFileWithCKFinder( 'ckfinder-input-2' );
+	};
+
+	function selectFileWithCKFinder( elementId ) {
+		CKFinder.modal( {
+			chooseFiles: true,
+			width: 800,
+			height: 600,
+			onInit: function( finder ) {
+				finder.on( 'files:choose', function( evt ) {
+					var file = evt.data.files.first();
+					var output = document.getElementById( elementId );
+					output.value = file.getUrl();
+				} );
+
+				finder.on( 'file:choose:resizedImage', function( evt ) {
+					var output = document.getElementById( elementId );
+					output.value = evt.data.resizedUrl;
+				} );
+			}
+		} );
+	}
+</script>
+<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
+
+</body>
+</html>

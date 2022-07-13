@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/folder</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M5.66666633,1.666667 L1.66666633,1.666667 C0.933333,1.666667 0.339999667,2.266667 0.339999667,3.00000033 L0.333333,11.0000003 C0.333333,11.7333337 0.933333,12.3333337 1.66666633,12.3333337 L12.333333,12.3333337 C13.0666663,12.3333337 13.6666663,11.7333337 13.6666663,11.0000003 L13.6666663,4.33333367 C13.6666663,3.60000033 13.0666663,3.00000033 12.333333,3.00000033 L6.99999967,3.00000033 L5.66666633,1.666667 Z" id="path-1"></path>
+    </defs>
+    <g id="icons/folder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="baseline-folder-24px" transform="translate(1.000000, 1.000000)">
+            <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#0A90EB" fill-rule="nonzero" xlink:href="#path-1"></use>
+            <g id="colors/blue" mask="url(#mask-2)" fill="#0A90EB">
+                <g transform="translate(-1.000000, -1.000000)" id="Shape">
+                    <polygon points="0 0 16 0 16 16 0 16"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

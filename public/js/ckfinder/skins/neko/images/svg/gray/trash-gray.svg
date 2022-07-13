@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/trash</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.64285714,13.4285714 C2.64285714,14.2666667 3.44642857,14.952381 4.42857143,14.952381 L11.5714286,14.952381 C12.5535714,14.952381 13.3571429,14.2666667 13.3571429,13.4285714 L13.3571429,4.28571429 L2.64285714,4.28571429 L2.64285714,13.4285714 Z M11.125,1.9047619 L10.2321429,1.11111111 L5.76785714,1.11111111 L4.875,1.9047619 L1.75,1.9047619 L1.75,3.49206349 L14.25,3.49206349 L14.25,1.9047619 L11.125,1.9047619 Z" id="path-1"></path>
+    </defs>
+    <g id="icons/trash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Shape" points="0 1 16 1 16 15.2222222 0 15.2222222"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="colors/grey-2" mask="url(#mask-2)" fill="#3B474E">
+            <g transform="translate(0.000000, 1.000000)" id="Shape">
+                <polygon points="0 0 16 0 16 14 0 14"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
