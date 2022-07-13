@@ -277,6 +277,7 @@
             $http.post(`file_manager/rename`, {origin_name: this.folderCurrent, new_name: value}).then((res) => {
               layer.msg(res.message)
               data.name = value;
+              this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
             })
           }
         }).catch(() => {});
