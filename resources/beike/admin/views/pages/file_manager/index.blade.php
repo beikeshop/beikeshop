@@ -22,7 +22,7 @@
         node-key="path"
         :load="loadNode"
         lazy
-        :default-expanded-keys="['/catalog']"
+        :default-expanded-keys="['/']"
         :render-after-expand="false"
         highlight-current
         ref="tree"
@@ -32,11 +32,11 @@
           <div>@{{ node.label }}</div>
           <div class="right" v-if="node.isCurrent">
             <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
-              <span @click.stop="() => {openInputBox('addFolder', data)}"><i class="el-icon-circle-plus-outline"></i></span>
+              <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i class="el-icon-circle-plus-outline"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="重命名" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {openInputBox('folder', data)}"><i class="el-icon-edit"></i></span>
+              <span v-if="node.level != 1" @click.stop="() => {openInputBox('folder', node, data)}"><i class="el-icon-edit"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="删除" placement="top">
@@ -97,29 +97,14 @@
 
       editingImageIndex: null,
 
-      treeInit: [
-        {
-          name: '图片空间',
-          path: '/catalog',
-          selected: true,
-          children: [
-          {
-            name: '图片空间',
-            path: '/catalog',
-            selected: true,
-            children: [
-            ]
-          },
-          ]
-        },
-      ],
+      treeInit: [],
 
       defaultProps: {
         children: 'children',
         label: 'name'
       },
 
-      folderCurrent: '/catalog',
+      folderCurrent: '/',
 
       triggerLeftOffset: 0,
 
@@ -156,7 +141,7 @@
       },
 
       loadData() {
-        $http.get(`/panel/file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
+        $http.get(`file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
@@ -164,14 +149,14 @@
       },
 
       loadNode(node, resolve) {
-        let treeInit = [{name: '图片空间', path: '/catalog', selected: true, children: []}]
+        let treeInit = [{name: '图片空间', path: '/', selected: true, children: []}]
         if (node.level === 0) {
           return resolve(treeInit);
         }
 
         if (node.level === 1) return resolve(@json($folders));
 
-        $http.get(`/panel/file_manager?base_folder=${node.data.path}`).then((res) => {
+        $http.get(`file_manager?base_folder=${node.data.path}`).then((res) => {
           resolve(res.folders);
         })
       },
@@ -243,8 +228,9 @@
         }
       },
 
-      openInputBox(type, data) {
-        // console.log(data)
+      openInputBox(type, node, data) {
+        // console.log(node,data)
+        // this.$refs.tree.append({name: '图片空间',path: '/dasdasdasdas', children: false, leaf: false}, node);
         // console.log(this.editingImageIndex)
         this.$prompt('', type=='addFolder' ? '新建文件夹' : '重命名', {
           confirmButtonText: '确定',
@@ -252,10 +238,15 @@
           inputPattern: /^.+$/,
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
-          this.$message({
-            type: 'success',
-            message: '你的邮箱是: ' + value
-          });
+          console.log(value)
+          $http.post(`file_manager/directory`, {name: this.folderCurrent + value}).then((res) => {
+            console.log(res)
+            // resolve(res.folders);
+          })
+          // this.$message({
+          //   type: 'success',
+          //   message: '你的邮箱是: ' + value
+          // });
         }).catch(() => {});
       }
     },

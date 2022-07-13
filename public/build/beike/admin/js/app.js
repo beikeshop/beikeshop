@@ -2099,25 +2099,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var instance = axios.create({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  } // baseURL: 'https://api.example.com'
-
-}); // import axios from "axios";
-// import {Message} from 'element-ui';
-// import QS from 'qs';
-
+  }
+});
 axios.defaults.timeout = 5000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
+// console.log(process.env.VUE_APP_BASE_URL)
 
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
-
+console.log($('base').attr('href'));
+axios.defaults.baseURL = $('base').attr('href');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /**
    * get 请求
@@ -2236,10 +2231,10 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers
 
 /***/ }),
 
-/***/ "./resources/beike/shop/default/css/design/app.scss":
-/*!**********************************************************!*\
-  !*** ./resources/beike/shop/default/css/design/app.scss ***!
-  \**********************************************************/
+/***/ "./resources/beike/admin/css/design/app.scss":
+/*!***************************************************!*\
+  !*** ./resources/beike/admin/css/design/app.scss ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2623,7 +2618,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			"build/beike/admin/css/filemanager": 0,
 /******/ 			"build/beike/admin/css/app": 0,
 /******/ 			"build/beike/admin/css/bootstrap": 0,
-/******/ 			"build/beike/shop/default/css/design/app": 0
+/******/ 			"build/beike/admin/css/design": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -2673,13 +2668,13 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/admin/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/admin/css/bootstrap/bootstrap.scss")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/admin/css/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/admin/css/filemanager/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/shop/default/css/bootstrap/bootstrap.scss")))
-/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/shop/default/css/app.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/shop/default/css/design/app"], () => (__webpack_require__("./resources/beike/shop/default/css/design/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/admin/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/admin/css/bootstrap/bootstrap.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/admin/css/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/admin/css/filemanager/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/shop/default/css/bootstrap/bootstrap.scss")))
+/******/ 	__webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/shop/default/css/app.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["build/beike/shop/default/css/app","build/beike/shop/default/css/bootstrap","build/beike/admin/css/filemanager","build/beike/admin/css/app","build/beike/admin/css/bootstrap","build/beike/admin/css/design"], () => (__webpack_require__("./resources/beike/admin/css/design/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

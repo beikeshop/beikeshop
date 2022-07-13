@@ -10,6 +10,16 @@ body.page-design {
   height: 100vh;
   overflow: hidden;
 
+  .tag {
+    margin: 8px 0;
+    color: #777;
+    font-size: 12px;
+  }
+
+  .icon-rank {
+    cursor: move;
+  }
+
   .design-box {
     display: flex;
     height: 100vh;

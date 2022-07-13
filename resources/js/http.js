@@ -1,17 +1,14 @@
 window.axios = require('axios');
 
 const instance = axios.create({
-  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-  // baseURL: 'https://api.example.com'
+  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 });
-// import axios from "axios";
-// import {Message} from 'element-ui';
-// import QS from 'qs';
+
 axios.defaults.timeout = 5000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
+// console.log(process.env.VUE_APP_BASE_URL)
+console.log($('base').attr('href'))
+axios.defaults.baseURL = $('base').attr('href');
 export default {
   /**
    * get 请求

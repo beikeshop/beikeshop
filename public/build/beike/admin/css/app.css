@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-weight: 400;
   line-height: 1.6;
@@ -430,8 +431,8 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 
 @font-face {
   font-family: "iconfont";
-  /* Project id 2787822 */
-  src: url("//at.alicdn.com/t/font_2787822_7mtbg56vojp.woff2?t=1634612961708") format("woff2"), url("//at.alicdn.com/t/font_2787822_7mtbg56vojp.woff?t=1634612961708") format("woff"), url("//at.alicdn.com/t/font_2787822_7mtbg56vojp.ttf?t=1634612961708") format("truetype");
+  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype");
+  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
 .iconfont {
   font-family: "iconfont" !important;

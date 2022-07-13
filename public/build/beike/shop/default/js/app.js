@@ -2065,25 +2065,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var instance = axios.create({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  } // baseURL: 'https://api.example.com'
-
-}); // import axios from "axios";
-// import {Message} from 'element-ui';
-// import QS from 'qs';
-
+  }
+});
 axios.defaults.timeout = 5000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
+// console.log(process.env.VUE_APP_BASE_URL)
 
-axios.defaults.baseURL = process.env.VUE_APP_BASE_URL; // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
-
+console.log($('base').attr('href'));
+axios.defaults.baseURL = $('base').attr('href');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /**
    * get 请求
@@ -2488,7 +2483,7 @@ $(document).ready(function ($) {
       layer.closeAll('loading');
     }
   });
-  $http.get('/carts/mini', null, {
+  $http.get('carts/mini', null, {
     hload: true
   }).then(function (res) {
     $('.offcanvas-right-cart-amount').html(res.data.amount_format);

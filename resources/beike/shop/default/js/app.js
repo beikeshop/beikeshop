@@ -8,7 +8,7 @@ $(document).ready(function ($) {
     complete: function() { layer.closeAll('loading'); },
   });
 
-  $http.get('/carts/mini', null, {hload: true}).then((res) => {
+  $http.get('carts/mini', null, {hload: true}).then((res) => {
     $('.offcanvas-right-cart-amount').html(res.data.amount_format);
 
     if (res.data.carts.length) {

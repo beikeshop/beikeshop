@@ -32,7 +32,7 @@ mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/d
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
 // design
-mix.sass('resources/beike/shop/default/css/design/app.scss', 'public/build/beike/shop/default/css/design/app.css');
+mix.sass('resources/beike/admin/css/design/app.scss', 'public/build/beike/admin/css/design.css');
 
 if (mix.inProduction()) {
     mix.version();

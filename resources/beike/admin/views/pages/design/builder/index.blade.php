@@ -7,17 +7,17 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-    <base href="{{$admin_base_url}}">
+  <base href="{{$admin_base_url}}">
   <title>首页编辑器</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <script src="{{ asset('/build/beike/shop/default/js/app.js') }}"></script>
+  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/design/app.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
   @stack('header')
 </head>
 
@@ -25,8 +25,8 @@
   <div class="design-box">
     <div class="sidebar-edit-wrap" id="app" v-cloak>
       <div class="design-head">
-        <div>保存</div>
-        <div>退出</div>
+        <div @click="saveButtonClicked">保存</div>
+        <div @click="exitDesign">退出</div>
       </div>
       <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
         <component
@@ -61,6 +61,10 @@
     var $languages = @json($languages);
     var $language_id = {{ current_language_id() }};
 
+    Vue.prototype.thumbnail = function thumbnail(image, width, height) {
+      return '{{ asset('catalog') }}' + image;
+    };
+
     function randomString(length) {
       let str = '';
       for (; str.length < length; str += Math.random().toString(36).substr(2));
@@ -69,6 +73,7 @@
   </script>
 
   @include('admin::pages.design.builder.component.image_selector')
+  @include('admin::pages.design.builder.component.link_selector')
 
   <script>
     let app = new Vue({
@@ -127,17 +132,19 @@
           this.design.editingModuleIndex = index;
           this.design.editType = 'module';
         },
+
+        saveButtonClicked() {
+          $http.put('design/builder', this.form).then((res) => {
+            layer.msg(res.message)
+          })
+        },
+
+        exitDesign() {
+          location = '/';
+        }
       },
-      // 在实例初始化之后，组件属性计算之前，如data属性等
-      beforeCreate () {
-      },
-      // 在实例创建完成后被立即同步调用
       created () {
       },
-      // 在挂载开始之前被调用:相关的 render 函数首次被调用
-      beforeMount () {
-      },
-      // 实例被挂载后调用
       mounted () {
       },
     })
