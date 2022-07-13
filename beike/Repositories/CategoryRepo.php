@@ -64,16 +64,27 @@ class CategoryRepo
 
     public static function autocomplete($name)
     {
-        $categories = Category::query()->with('description')
-            ->whereHas('description', function ($query) use ($name) {
-                $query->where('name', 'like', "{$name}%");
-            })->limit(10)->get();
+        $categories = Category::query()->with('paths.pathCategory.description')
+            ->whereHas('paths', function ($query) use ($name) {
+                $query->whereHas('pathCategory', function ($query) use ($name) {
+                    $query->whereHas('description', function ($query) use ($name) {
+                        $query->where('name', 'like', "{$name}%");
+                    });
+                });
+            })
+            ->limit(10)->get();
         $results = [];
         foreach ($categories as $category) {
+            $pathName = '';
+            foreach ($category->paths->sortBy('level') as $path) {
+                if ($pathName) {
+                    $pathName .= ' > ';
+                }
+                $pathName .= $path->pathCategory->description->name;
+            }
             $results[] = [
                 'id' => $category->id,
-                'name' => $category->description->name,
-                'image' => $category->image,
+                'name' => $pathName,
             ];
         }
         return $results;

@@ -4,6 +4,7 @@ namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CategoryPath extends Model
 {
@@ -14,4 +15,14 @@ class CategoryPath extends Model
         'path_id',
         'level',
     ];
+
+    public function category(): HasOne
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    public function pathCategory(): HasOne
+    {
+        return $this->hasOne(Category::class, 'id', 'path_id');
+    }
 }
