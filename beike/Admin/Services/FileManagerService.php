@@ -76,11 +76,12 @@ class FileManagerService
      */
     public function createDirectory($folderName)
     {
-        $folderPath = public_path("catalog/{$folderName}");
+        $catalogFolderPath = "catalog/{$folderName}";
+        $folderPath = public_path($catalogFolderPath);
         if (is_dir($folderPath)) {
             throw new \Exception("目录已存在");
         }
-        createDirectories(dirname($folderName));
+        createDirectories($catalogFolderPath);
     }
 
 
