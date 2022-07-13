@@ -116,9 +116,13 @@ class FileManagerService
     public function updateName($originPath, $newPath)
     {
         $originPath = public_path("catalog/{$originPath}");
-        $newPath = public_path("catalog/{$newPath}");
         if (!is_dir($originPath) || !file_exists($originPath)) {
             throw new \Exception('原始文件或者文件夹无效');
+        }
+        $originBase = dirname($originPath);
+        $newPath = $originBase . '/' . $newPath;
+        if ($originPath == $newPath) {
+            return;
         }
         @rename($originPath, $newPath);
     }

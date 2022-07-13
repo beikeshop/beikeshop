@@ -50,7 +50,7 @@ class FileManagerController extends Controller
         $originPath = $request->get('origin_name');
         $newPath = $request->get('new_name');
         (new FileManagerService)->updateName($originPath, $newPath);
-        return json_success('删除成功');
+        return json_success('修改成功');
     }
 
 
