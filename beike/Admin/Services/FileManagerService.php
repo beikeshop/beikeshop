@@ -11,6 +11,8 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Support\Facades\File;
+
 class FileManagerService
 {
     private $fileBasePath = '';
@@ -99,7 +101,7 @@ class FileManagerService
             if ($files) {
                 throw new \Exception("该目录不为空");
             }
-            @rmdir($filePath, 0755);
+            @rmdir($filePath);
         } elseif (file_exists($filePath)) {
             @unlink($filePath);
         }

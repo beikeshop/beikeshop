@@ -26,7 +26,7 @@ Route::prefix($adminName)
                 Route::post('file_manager/directory', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
                 Route::post('file_manager/upload', [Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
                 Route::post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
-                Route::delete('file_manager/delete_files', [Controllers\FileManagerController::class, 'deleteFiles'])->name('file_manager.delete_files');
+                Route::delete('file_manager/delete_files', [Controllers\FileManagerController::class, 'destroyFiles'])->name('file_manager.delete_files');
 
                 Route::Resource('customers', Controllers\CustomerController::class);
                 Route::resource('customers.addresses', Controllers\AddressController::class);
