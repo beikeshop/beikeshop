@@ -32,7 +32,7 @@ class FileManagerController extends Controller
      * POST      /admin/file_manager
      * @throws \Exception
      */
-    public function store(Request $request): array
+    public function createDirectory(Request $request): array
     {
         $folderName = $request->get('name');
         (new FileManagerService)->createDirectory($folderName);
