@@ -20,14 +20,18 @@
       <el-tree
         :props="defaultProps"
         node-key="path"
-        :data="treeInit"
+        :data="treeData"
         {{-- :load="loadNod1e" --}}
         {{-- lazy --}}
-        :default-expanded-keys="['/']"
+        :default-expanded-keys="defaultkeyarr"
         :expand-on-click-node="false"
         highlight-current
         ref="tree"
         @node-click="handleNodeClick"
+        {{-- @node-expand="nodeExpand" --}}
+        @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
+        @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}"
+        {{-- @node-collapse="nodeCollapse" --}}
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
           <div>@{{ node.label }}</div>
@@ -51,25 +55,14 @@
     <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
+        <el-progress status="exception" :percentage="50"></el-progress>
         <div class="left">
           <el-link :underline="false" :disabled="editingImageIndex === null" icon="el-icon-download">下载</el-link>
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
         </div>
         <div class="right">
-          {{-- <el-button size="mini" type="primary">上传文件</el-button> --}}
-{{--           <el-upload
-            class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="3"
-            :on-exceed="handleExceed"
-            :file-list="fileList">
-            <el-button size="small" type="primary">上传文件</el-button>
-          </el-upload> --}}
+          <el-button size="mini" type="primary" @click="openUploadFile">上传文件</el-button>
         </div>
       </div>
       <div class="content-center">
@@ -94,6 +87,37 @@
         <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingImageIndex === null">选择</el-button></div>
       </div>
     </div>
+
+    <el-dialog
+      title="上传文件"
+      :visible.sync="uploadFileDialog.show"
+      width="500px"
+      custom-class="upload-wrap">
+        <el-upload
+          class="photos-upload"
+          target="photos-upload"
+          id="photos-upload"
+          element-loading-text="图片上传中..."
+          element-loading-background="rgba(0, 0, 0, 0.6)"
+          drag
+          action=""
+          :show-file-list="false"
+          accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG"
+          :before-upload="beforePhotoUpload"
+          :on-success="handlePhotoSuccess"
+          :on-change="handleUploadChange"
+          :http-request="uploadFile"
+          :multiple="true">
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">点击上传，或将图片拖到此处</div>
+        </el-upload>
+        <div class="upload-image">
+          <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
+            <div class="name"><span>@{{ image.name }}</span> <span class="percent">@{{ image.percent }}</span></div>
+            <div class="progress"><el-progress :show-text="false" style="width:100%" :percentage="image.percent"></el-progress></div>
+          </div>
+        </div>
+    </el-dialog>
   </div>
 
   <script>
@@ -112,7 +136,7 @@
 
       editingImageIndex: null,
 
-      treeInit: [{name: '图片空间', path: '/', children: @json($folders)}],
+      treeData: [{name: '图片空间', path: '/', children: @json($folders)}],
 
       defaultProps: {
         children: 'children',
@@ -120,7 +144,13 @@
         isLeaf: 'leaf'
       },
 
+      uploadFileDialog: {
+        show: false,
+        images: [{name:'dasdas.png', percent: 90}]
+      },
+
       folderCurrent: '/',
+      defaultkeyarr: ['/'],
 
       triggerLeftOffset: 0,
 
@@ -130,24 +160,20 @@
     },
     // 计算属性
     computed: {
-      // isFileSelected() {
-      //   return this.images.some(file => file.selected);
-      // },
-
       paneLengthValue() {
         return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
       },
     },
     // 侦听器
-    watch: {},
+    watch: {
+
+    },
     // 组件方法
     methods: {
       handleNodeClick(e, node, data) {
         if (e.path == this.folderCurrent) {
           return;
         }
-
-        console.log(e.path,node)
         this.folderCurrent = e.path
         this.image_page = 1;
         this.loadData(e, node)
@@ -156,6 +182,56 @@
       pageCurrentChange(e) {
         this.image_page = e
         this.loadData()
+      },
+
+      openUploadFile() {
+        this.uploadFileDialog.show = true
+      },
+
+      beforePhotoUpload(file) {
+        // this.editing.photoLoading = true;
+      },
+
+      handlePhotoSuccess(data) {
+        // this.editing.photoLoading = false;
+
+        if (data.images) {
+          this.images.push(data.images);
+        }
+      },
+
+      // 文件上传
+      uploadFile(file) {
+        const that = this;
+        let newFile = {};
+        if (file.file.type != 'image/png' && file.file.type != 'image/jpeg') {
+          return;
+        }
+
+        newFile = {
+          index: this.images.length,
+          percent: 0,
+        };
+
+        this.uploadFileDialog.push(newFile);
+
+        console.log(file.file)
+      },
+
+      handleUploadChange() {
+        // console.log('handleUploadChange');
+      },
+
+      updateDefaultExpandedKeys(node, type) {
+        const isExist = this.defaultkeyarr.some(item => item === node.path)
+        if (!isExist) {
+          if (type == 'expand') return this.defaultkeyarr.push(node.path)
+        } else {
+          const index = this.defaultkeyarr.findIndex(e => e == node.path);
+          if (type == 'collapse') return this.defaultkeyarr.splice(index, 1);
+        }
+
+        sessionStorage.setItem('defaultkeyarr', this.defaultkeyarr);
       },
 
       loadData(e, node) {
@@ -174,9 +250,9 @@
       },
 
       loadNode(node, resolve) {
-        let treeInit = [{name: '图片空间', path: '/'}]
+        let treeData = [{name: '图片空间', path: '/'}]
         if (node.level === 0) {
-          return resolve(treeInit);
+          return resolve(treeData);
         }
 
         if (node.level === 1) return resolve(@json($folders));
@@ -265,13 +341,16 @@
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
           closeOnClickModal: false,
-          inputValue: data ? data.name : '',
+          inputValue: type == 'image' ? this.images[this.editingImageIndex].name : (type == 'renameFolder' ? data.name : '新建文件夹'),
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
+
+          let fileAllPathName = this.folderCurrent + '/' + value;
+
           if (type == 'addFolder') {
-            $http.post(`file_manager/directory`, {name: this.folderCurrent + '/' + value}).then((res) => {
+            $http.post(`file_manager/directory`, {name: fileAllPathName}).then((res) => {
               layer.msg(res.message)
-              this.$refs.tree.append({name: value, path: this.folderCurrent + '/' + value, leaf: true}, node);
+              this.$refs.tree.append({name: value, path: fileAllPathName, leaf: true}, node);
             })
           }
 
@@ -287,7 +366,9 @@
           }
 
           if (type == 'image') {
-            console.log(value)
+            $http.post(`file_manager/rename`, {origin_name: fileAllPathNamet, new_name: value}).then((res) => {
+              layer.msg(res.message)
+            })
           }
         }).catch(() => {});
       },
@@ -315,6 +396,11 @@
     },
     // 在实例创建完成后被立即同步调用
     created () {
+      const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
+
+      if (defaultkeyarr) {
+        this.defaultkeyarr = defaultkeyarr.split(',');
+      }
     },
     // 在挂载开始之前被调用:相关的 render 函数首次被调用
     beforeMount () {

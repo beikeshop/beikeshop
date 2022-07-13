@@ -136,3 +136,50 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-footer {
   align-items: center;
   justify-content: space-between;
 }
+body.page-filemanager .upload-wrap .upload-image {
+  height: 300px;
+  overflow-y: auto;
+}
+body.page-filemanager .upload-wrap .upload-image .list {
+  background-color: #f4f4f4;
+  padding: 10px 10px;
+  border-radius: 4px;
+}
+body.page-filemanager .upload-wrap .upload-image .list .name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+body.page-filemanager .upload-wrap .el-progress-bar__outer {
+  background-color: #ccc;
+}
+body.page-filemanager .photos-upload {
+  overflow: hidden;
+}
+body.page-filemanager .photos-upload .el-upload {
+  width: 100%;
+  display: block;
+}
+body.page-filemanager .photos-upload .el-loading-spinner {
+  top: 35%;
+}
+body.page-filemanager .photos-upload .el-upload-dragger {
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+body.page-filemanager .photos-upload .el-upload-dragger:hover {
+  border-color: #8874d8;
+}
+body.page-filemanager .photos-upload .el-upload-dragger .el-icon-upload {
+  margin: 10px 0;
+}
+body.page-filemanager .photos-upload .el-upload-dragger .el-upload__text {
+  margin-bottom: 10px;
+  color: #aaa;
+}
+body.page-filemanager .photos-upload input[type=file] {
+  display: none;
+}

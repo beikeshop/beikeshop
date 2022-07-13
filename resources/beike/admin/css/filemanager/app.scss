@@ -182,4 +182,67 @@ body.page-filemanager {
       }
     }
   }
+
+  .upload-wrap {
+    .upload-image {
+      height: 300px;
+      overflow-y: auto;
+
+      .list {
+        background-color: #f4f4f4;
+        padding: 10px 10px;
+        border-radius: 4px;
+
+        .name {
+          display: flex;
+          align-items: center; // flex-start | center
+          justify-content: space-between; // flex-end | center | space-between
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    .el-progress-bar__outer {
+      background-color: #ccc;
+    }
+  }
+
+  .photos-upload {
+    overflow: hidden;
+
+
+    .el-upload {
+      width: 100%;
+      display: block;
+    }
+
+    .el-loading-spinner {
+      top: 35%;
+    }
+
+    .el-upload-dragger {
+      width: 100%;
+      height: auto;
+      // border: 2px dashed #666;
+      background-color: transparent;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        border-color: #8874d8;
+      }
+
+      .el-icon-upload {
+        margin: 10px 0;
+      }
+
+      .el-upload__text {
+        margin-bottom: 10px;
+        color: #aaa;
+      }
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  }
 }
