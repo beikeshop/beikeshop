@@ -24,8 +24,7 @@
         {{-- :load="loadNod1e" --}}
         {{-- lazy --}}
         :default-expanded-keys="['/']"
-        {{-- :render-after-expand="false" --}}
-        {{-- :expand-on-click-node="false" --}}
+        :expand-on-click-node="false"
         highlight-current
         ref="tree"
         @node-click="handleNodeClick"
@@ -144,13 +143,13 @@
     // 组件方法
     methods: {
       handleNodeClick(e, node, data) {
-        if (e.path == this.folderCurrent || e.children) {
+        if (e.path == this.folderCurrent) {
           return;
         }
 
         this.folderCurrent = e.path
         this.image_page = 1;
-        this.loadData(node)
+        this.loadData(e, node)
       },
 
       pageCurrentChange(e) {
@@ -158,12 +157,13 @@
         this.loadData()
       },
 
-      loadData(node) {
+      loadData(e, node) {
         $http.get(`file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
           if (node) {
+            if (!e.children) {
+              node.expanded = !node.expanded;
+            }
             this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
-            node.expanded = !node.expanded;
-            // node.expanded = true;
           }
 
           this.images = res.images
@@ -263,6 +263,7 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
+          inputValue: data ? data.name : '',
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
           if (type == 'addFolder') {
