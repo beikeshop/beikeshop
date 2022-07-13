@@ -147,6 +147,7 @@
           return;
         }
 
+        console.log(e.path,node)
         this.folderCurrent = e.path
         this.image_page = 1;
         this.loadData(e, node)
@@ -162,8 +163,8 @@
           if (node) {
             if (!e.children) {
               node.expanded = !node.expanded;
+              this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
             }
-            this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
           }
 
           this.images = res.images
@@ -264,7 +265,7 @@
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
           closeOnClickModal: false,
-          inputValue: data ? data.name : '',
+          // inputValue: data ? data.name : '',
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
           if (type == 'addFolder') {
@@ -280,6 +281,25 @@
               data.name = value;
               data.path = data.path.replace(/\/[^\/]*$/, '/' + value);
               this.folderCurrent = this.folderCurrent.replace(/\/[^\/]*$/, '/' + value);
+              // 递归 修改 data 内 所有 children
+              changeChildren(data);
+              function changeChildren(data) {
+                if (data.children) {
+                  data.children.map(e => {
+                    if (e.path) {
+                      // 将字符串转换为数组
+                      let path = e.path.split('/')
+                      path[node.level - 1] = value
+                      // 将数组转换为字符串
+                      e.path = path.join('/')
+                    }
+
+                    if (e.children) {
+                      changeChildren(e)
+                    }
+                  })
+                }
+              }
             })
           }
         }).catch(() => {});
