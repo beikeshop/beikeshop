@@ -55,5 +55,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $menuCategories = CategoryRepo::getTwoLevelCategories();
         View::share('categories', $menuCategories);
+
+        View::share('shop_base_url', shop_route('home.index'));
     }
 }
