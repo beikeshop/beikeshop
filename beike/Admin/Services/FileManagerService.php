@@ -138,7 +138,7 @@ class FileManagerService
         return [
             'path' => $folderPath,
             'name' => $baseName,
-            'leaf' => $this->hasSubFolders($folderPath),
+            'leaf' => !$this->hasSubFolders($folderPath),
         ];
     }
 
