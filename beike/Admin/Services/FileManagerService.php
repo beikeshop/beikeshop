@@ -136,7 +136,6 @@ class FileManagerService
         return [
             'path' => $folderPath,
             'name' => $baseName,
-            'selected' => false,
         ];
     }
 
