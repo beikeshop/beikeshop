@@ -83,7 +83,7 @@ class FileManagerService
         if (is_dir($folderPath)) {
             throw new \Exception("目录已存在");
         }
-        createDirectories($catalogFolderPath);
+        create_directories($catalogFolderPath);
     }
 
 

@@ -256,7 +256,7 @@ function to_sql($builder)
  * 递归创建文件夹
  * @param $directoryPath
  */
-function createDirectories($directoryPath)
+function create_directories($directoryPath)
 {
     $path = '';
     $directories = explode('/', $directoryPath);

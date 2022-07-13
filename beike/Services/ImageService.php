@@ -48,7 +48,7 @@ class ImageService
 
         $newImagePath = public_path($newImage);
         if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
-            createDirectories(dirname($newImage));
+            create_directories(dirname($newImage));
             $img = Image::make($this->imagePath);
 
             $img->resize($width, $height, function ($constraint) {
