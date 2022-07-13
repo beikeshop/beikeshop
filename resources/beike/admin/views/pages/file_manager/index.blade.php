@@ -20,10 +20,12 @@
       <el-tree
         :props="defaultProps"
         node-key="path"
-        :load="loadNode"
-        lazy
+        :data="treeInit"
+        {{-- :load="loadNod1e" --}}
+        {{-- lazy --}}
         :default-expanded-keys="['/']"
-        :render-after-expand="false"
+        {{-- :render-after-expand="false" --}}
+        {{-- :expand-on-click-node="false" --}}
         highlight-current
         ref="tree"
         @node-click="handleNodeClick"
@@ -36,7 +38,7 @@
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="重命名" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {openInputBox('folder', node, data)}"><i class="el-icon-edit"></i></span>
+              <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i class="el-icon-edit"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="删除" placement="top">
@@ -55,7 +57,21 @@
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
         </div>
-        <div class="right"><el-button size="mini" type="primary">上传文件</el-button></div>
+        <div class="right">
+          {{-- <el-button size="mini" type="primary">上传文件</el-button> --}}
+{{--           <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList">
+            <el-button size="small" type="primary">上传文件</el-button>
+          </el-upload> --}}
+        </div>
       </div>
       <div class="content-center">
         <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index" @click="checkedImage(index)">
@@ -97,11 +113,12 @@
 
       editingImageIndex: null,
 
-      treeInit: [],
+      treeInit: [{name: '图片空间', path: '/', children: @json($folders)}],
 
       defaultProps: {
         children: 'children',
-        label: 'name'
+        label: 'name',
+        isLeaf: 'leaf'
       },
 
       folderCurrent: '/',
@@ -126,13 +143,14 @@
     watch: {},
     // 组件方法
     methods: {
-      handleNodeClick(e) {
+      handleNodeClick(e, node, data) {
         if (e.path == this.folderCurrent) {
           return;
         }
 
         this.folderCurrent = e.path
-        this.loadData()
+        this.image_page = 1;
+        this.loadData(node)
       },
 
       pageCurrentChange(e) {
@@ -140,8 +158,13 @@
         this.loadData()
       },
 
-      loadData() {
+      loadData(node) {
         $http.get(`file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
+          if (node) {
+            this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
+            node.expanded = !node.expanded;
+          }
+
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
@@ -149,7 +172,7 @@
       },
 
       loadNode(node, resolve) {
-        let treeInit = [{name: '图片空间', path: '/', selected: true, children: []}]
+        let treeInit = [{name: '图片空间', path: '/'}]
         if (node.level === 0) {
           return resolve(treeInit);
         }
@@ -219,8 +242,6 @@
       },
 
       deleteFolder(node, data) {
-        console.log(node, data)
-        // console.log(node.parent.data.id)
         if (node.parent.data.key) {
           this.$nextTick(() => {
             this.$refs.tree.setCurrentKey(node.parent.data.key)
@@ -229,24 +250,25 @@
       },
 
       openInputBox(type, node, data) {
-        // console.log(node,data)
-        // this.$refs.tree.append({name: '图片空间',path: '/dasdasdasdas', children: false, leaf: false}, node);
-        // console.log(this.editingImageIndex)
-        this.$prompt('', type=='addFolder' ? '新建文件夹' : '重命名', {
+        this.$prompt('', type == 'addFolder' ? '新建文件夹' : '重命名', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
-          console.log(value)
-          $http.post(`file_manager/directory`, {name: this.folderCurrent + value}).then((res) => {
-            console.log(res)
-            // resolve(res.folders);
-          })
-          // this.$message({
-          //   type: 'success',
-          //   message: '你的邮箱是: ' + value
-          // });
+          if (type == 'addFolder') {
+            $http.post(`file_manager/directory`, {name: this.folderCurrent + '/' + value}).then((res) => {
+              layer.msg(res.message)
+              this.$refs.tree.append({name: value, path: this.folderCurrent + '/' + value, leaf: true}, node);
+            })
+          }
+
+          if (type == 'renameFolder') {
+            $http.post(`file_manager/rename`, {origin_name: this.folderCurrent, new_name: value}).then((res) => {
+              layer.msg(res.message)
+              data.name = value;
+            })
+          }
         }).catch(() => {});
       }
     },
