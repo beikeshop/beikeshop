@@ -68,6 +68,7 @@ Vue.component('module-editor-slideshow', {
   watch: {
     module: {
       handler: function (val) {
+        console.log(222)
         this.$emit('on-changed', val);
       },
       deep: true

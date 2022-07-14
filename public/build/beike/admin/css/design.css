@@ -57,6 +57,7 @@ body.page-design .design-box .design-head > div:hover {
 body.page-design .design-box .sidebar-edit-wrap {
   width: 300px;
   background-color: #fff;
+  border-right: 1px solid #eee;
 }
 body.page-design .design-box .sidebar-edit-wrap .module-edit {
   padding: 0 10px 14px;
