@@ -51,6 +51,9 @@ Route::prefix($adminName)
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
+                Route::get('forgotten', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'index'])->name('forgotten.index');
+                Route::post('forgotten/send_code', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
+                Route::post('forgotten/password', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'changePassword'])->name('forgotten.password');
 
             });
     });
