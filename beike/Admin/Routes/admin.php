@@ -23,7 +23,7 @@ Route::prefix($adminName)
                 Route::Resource('categories', Controllers\CategoryController::class);
                 Route::get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
                 Route::put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
-                Route::put('design/builder/module', [Controllers\DesignController::class, 'showModule'])->name('design.module.show');
+                Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
                 Route::Resource('files', Controllers\FileController::class);
 
