@@ -82,6 +82,7 @@ $config['backends']['laravel_logs'] = array(
 
 // Backends
 
+/*
 $config['backends']['default'] = array(
     'name'         => 'default',
     'adapter'      => 'local',
@@ -91,6 +92,20 @@ $config['backends']['default'] = array(
     'chmodFolders' => 0755,
     'filesystemEncoding' => 'UTF-8'
 );
+*/
+
+
+$config['backends']['default'] = array(
+    'name'         => 'default',
+    'adapter'      => 's3',
+    'bucket'       => env('S3_BUCKET'),
+    'region'       => env('S3_REGION'),
+    'key'          => env('S3_KEY'),
+    'secret'       => env('S3_SECRET'),
+    'visibility'   => 'public',
+    'baseUrl'      => env('S3_BASE_URL'),
+);
+
 
 /*================================ Resource Types =====================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_resourceTypes
@@ -156,7 +171,7 @@ $config['forceAscii'] = false;
 $config['xSendfile'] = false;
 
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_debug
-$config['debug'] = false;
+$config['debug'] = true;
 
 /*==================================== Plugins ========================================*/
 // http://docs.cksource.com/ckfinder3-php/configuration.html#configuration_options_plugins
