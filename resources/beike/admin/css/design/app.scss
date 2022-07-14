@@ -266,7 +266,13 @@ body.page-design {
   }
 }
 
-
+.file-manager-box {
+  .layui-layer-title {
+    background-color: #293042;
+    color: #fff;
+    border-color: #404e72;
+  }
+}
 
 .link-selector-wrap {
   > .title {

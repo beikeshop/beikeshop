@@ -81,13 +81,13 @@
       data: {
         form: {
           modules: [
-            {"content":{"style":{"background_color":""},"full":true,"floor":{"2":"","3":""},"images":[{"image":{"2":"catalog/demo/slideshow/2.jpg","3":"catalog/demo/slideshow/2.jpg"},"show":true,"link":{"type":"product","value":"","link":""}},{"image":{"2":"catalog/demo/slideshow/1.jpg","3":"catalog/demo/slideshow/1.jpg"},"show":false,"link":{"type":"product","value":"","link":""}}]},"code":"slideshow","name":"幻灯片","module_id":"b0448efb0989"}
+            // {"content":{"style":{"background_color":""},"full":true,"floor":{"2":"","3":""},"images":[{"image":{"2":"catalog/demo/slideshow/2.jpg","3":"catalog/demo/slideshow/2.jpg"},"show":true,"link":{"type":"product","value":"","link":""}},{"image":{"2":"catalog/demo/slideshow/1.jpg","3":"catalog/demo/slideshow/1.jpg"},"show":false,"link":{"type":"product","value":"","link":""}}]},"code":"slideshow","name":"幻灯片","module_id":"b0448efb0989"}
           ]
         },
 
         design: {
           type: 'pc',
-          editType: 'module',
+          editType: 'add',
           sidebar: false,
           editingModuleIndex: 0,
           ready: false,
@@ -144,6 +144,7 @@
         }
       },
       created () {
+        this.form = @json($design_settings)
       },
       mounted () {
       },

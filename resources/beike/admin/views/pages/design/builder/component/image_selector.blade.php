@@ -2,11 +2,16 @@
     <div class="pb-image-selector">
       <el-tabs v-if="isLanguage" @tab-click="tabClick" value="language-{{ current_language_id() }}" :stretch="languages.length > 5 ? true : false" type="card" :class="languages.length <= 1 ? 'languages-a' : ''">
         <el-tab-pane v-for="(item, index) in languages" :key="index" :label="item.name" :name="'language-' + item.id">
-          <span slot="label" style="padding: 0 2px">@{{ item.name }}</span>
+          <span slot="label" style="padding: 0 4px; font-size: 12px">@{{ item.name }}</span>
 
           <div class="i18n-inner">
             <div class="img">
-              <img :src="type == 'image' ? thumbnail(value[item.id]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked">
+              {{-- <img :src="type == 'image' ? thumbnail(value[item.id]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked"> --}}
+              <el-image :src="type == 'image' ? thumbnail(value[item.id]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked">
+                <div slot="error" class="image-slot">
+                  <i class="el-icon-picture-outline"></i>
+                </div>
+              </el-image>
             </div>
             <div class="btns">
               <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
@@ -96,6 +101,7 @@
             type: 2,
             title: '图片管理器',
             shadeClose: false,
+            skin: 'file-manager-box',
             scrollbar: false,
             shade: 0.8,
             area: ['80%', '80%'],
@@ -164,8 +170,7 @@
     }
 
     .pb-image-selector .i18n-inner {
-      margin-top: 5px;
-
+      /*margin-top: 5px;*/
       display: flex;
       align-items: center;
       background: whitesmoke;

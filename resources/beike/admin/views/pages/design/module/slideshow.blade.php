@@ -28,7 +28,7 @@
               <el-tooltip class="" effect="dark" content="删除" placement="left">
                 <div class="remove-item" @click.stop="removeImage(index)"><i class="iconfont">&#xe63a;</i></div>
               </el-tooltip>
-              <i :class="'fa fa-angle-'+(item.show ? 'up' : 'down')"></i>
+              <i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i>
             </div>
           </div>
           <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
@@ -89,7 +89,7 @@ Vue.component('module-editor-slideshow', {
 
     addImage() {
       this.module.images.find(e => e.show = false);
-      this.module.images.push({image: 'catalog/demo/slideshow/2.jpg', show: true, link: {type: 'product', value:''}});
+      this.module.images.push({image: '', show: true, link: {type: 'product', value:''}});
     }
   }
 });
