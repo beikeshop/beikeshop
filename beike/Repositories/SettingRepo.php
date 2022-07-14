@@ -95,4 +95,41 @@ class SettingRepo
         }
         Setting::query()->insert($rows);
     }
+
+
+    /**
+     * 创建或更新单条记录
+     *
+     * @param $data
+     * @throws \Throwable
+     */
+    public static function createOrUpdate($data)
+    {
+        $type = $data['type'] ?? '';
+        $space = $data['space'] ?? '';
+        $name = $data['name'] ?? '';
+        $value = (string)$data['value'] ?? '';
+        $json = (bool)$data['json'] ?? '';
+
+        $setting = Setting::query()
+            ->where('type', $type)
+            ->where('space', $space)
+            ->where('name', $name)
+            ->first();
+
+        $settingData = [
+            'type' => $type,
+            'space' => $space,
+            'name' => $name,
+            'value' => $value,
+            'json' => $json,
+        ];
+
+        if (empty($setting)) {
+            $setting = new Setting($settingData);
+            $setting->saveOrFail();
+        } else {
+            $setting->update($settingData);
+        }
+    }
 }

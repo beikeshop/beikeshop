@@ -23,13 +23,18 @@ class DesignController extends Controller
     /**
      * @param Request $request
      * @return array
+     * @throws \Throwable
      */
     public function update(Request $request): array
     {
-        $fields = [
-            'design_setting' => $request->getContent()
+        $data = [
+            'type' => 'system',
+            'space' => 'base',
+            'name' => 'design_setting',
+            'value' => $request->getContent(),
+            'json' => 1
         ];
-        SettingRepo::update('system', 'base', $fields);
+        SettingRepo::createOrUpdate($data);
         return json_success("保存成功");
     }
 
