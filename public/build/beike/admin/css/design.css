@@ -232,6 +232,11 @@ body.page-design .pb-images-selector .pb-images-list .el-input-group__prepend {
   color: #fff;
   border-color: #404e72;
 }
+.file-manager-box .layui-layer-ico {
+  background: url("/image/close.png") no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 
 .link-selector-wrap > .title {
   margin-bottom: 6px;

@@ -103,8 +103,8 @@
             shadeClose: false,
             skin: 'file-manager-box',
             scrollbar: false,
-            shade: 0.8,
-            area: ['80%', '80%'],
+            shade: 0.4,
+            area: ['1060px', '680px'],
             content: '/{{ admin_name() }}/file_manager',
             success: function(layerInstance, index) {
               var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
@@ -184,7 +184,16 @@
       border: 1px solid #eee;
       padding: 2px;
       background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .image-slot {
+      font-size: 26px;
+      color: #939ab3;
+    }
+
 
     .pb-image-selector .i18n-inner .img img {
       max-width: 100%;

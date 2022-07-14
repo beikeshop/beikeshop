@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <script src="{{ asset('vendor/vue/2.6.12/vue.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.6.2/js.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
+  {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.6.2/css.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.9/index.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,17 +22,14 @@
         :props="defaultProps"
         node-key="path"
         :data="treeData"
-        {{-- :load="loadNod1e" --}}
-        {{-- lazy --}}
+        :current-node-key="folderCurrent"
         :default-expanded-keys="defaultkeyarr"
         :expand-on-click-node="false"
         highlight-current
         ref="tree"
         @node-click="handleNodeClick"
-        {{-- @node-expand="nodeExpand" --}}
         @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
         @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}"
-        {{-- @node-collapse="nodeCollapse" --}}
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
           <div>@{{ node.label }}</div>
@@ -89,8 +87,10 @@
 
     <el-dialog
       title="上传文件"
+      top="12vh"
       :visible.sync="uploadFileDialog.show"
       width="500px"
+      @close="uploadFileDialogClose"
       custom-class="upload-wrap">
         <el-upload
           class="photos-upload"
@@ -112,8 +112,11 @@
         </el-upload>
         <div class="upload-image">
           <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
-            <div class="name">@{{ image.name }}</div>
-            <div class="status">上传中</div>
+            <div class="info">
+              <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
+              <div class="status">@{{ image.status == 'complete' ? '完成' : '上传中' }}</div>
+            </div>
+            <el-progress :percentage="image.progre" :show-text="false" :stroke-width="4"></el-progress>
           </div>
         </div>
     </el-dialog>
@@ -128,7 +131,7 @@
     data: {
       min: 10,
       max: 40,
-      paneLengthPercent: 20,
+      paneLengthPercent: 26,
       triggerLength: 10,
 
       loading: false,
@@ -145,7 +148,7 @@
 
       uploadFileDialog: {
         show: false,
-        images: [{name:'dasdas.png', percent: 90}]
+        images: []
       },
 
       folderCurrent: '/',
@@ -183,6 +186,11 @@
         this.loadData()
       },
 
+      uploadFileDialogClose() {
+        this.uploadFileDialog.images = [];
+        $('.content-center').animate({ scrollTop: 1000} , 'fast');
+      },
+
       openUploadFile() {
         this.uploadFileDialog.show = true
       },
@@ -207,14 +215,25 @@
           return;
         }
 
+        var formData = new FormData();
+        formData.append("file", file.file, file.file.name);
+
         newFile = {
-          index: this.images.length,
-          percent: 0,
+          // index: this.images.length,
+          name: file.file.name,
+          progre: 0,
+          status: 'padding'
         };
 
-        this.uploadFileDialog.push(newFile);
+        this.uploadFileDialog.images.push(newFile);
 
-        console.log(file.file)
+        let index = this.uploadFileDialog.images.length - 1;
+
+        $http.post('file_manager/upload', formData).then((res) => {
+          this.uploadFileDialog.images[index].status = 'complete';
+          this.uploadFileDialog.images[index].progre = 100;
+          index += 1;
+        })
       },
 
       handleUploadChange() {
@@ -245,19 +264,6 @@
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
-        })
-      },
-
-      loadNode(node, resolve) {
-        let treeData = [{name: '图片空间', path: '/'}]
-        if (node.level === 0) {
-          return resolve(treeData);
-        }
-
-        if (node.level === 1) return resolve(@json($folders));
-
-        $http.get(`file_manager?base_folder=${node.data.path}`).then((res) => {
-          resolve(res.folders);
         })
       },
 
@@ -411,7 +417,7 @@
 
   $(document).ready(function() {
     $(document).on('click', function (e) {
-      if ($(e.target).closest('.content-center .image-list, .content-head, .content-footer').length === 0) {
+      if ($(e.target).closest('.content-center .image-list, .content-head, .content-footer, .el-message-box').length === 0) {
         app.editingImageIndex = null;
         app.images.map(e => e.selected = false)
       }

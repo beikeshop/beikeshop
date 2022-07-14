@@ -27,6 +27,7 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree .el-tree-no
 body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
   background-color: #434d66;
   color: #fff;
+  border-left: 2px solid #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .el-tree-node__content {
   height: 36px;
@@ -38,18 +39,18 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-t
   justify-content: space-between;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-tree-node .right span {
-  margin-right: 8px;
+  margin-right: 6px;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-tree-node .right span:hover {
-  color: #0b68ff;
+  color: #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-divider {
   top: 0;
-  width: 3px;
+  width: 4px;
   cursor: col-resize;
 }
 body.page-filemanager .filemanager-wrap .filemanager-divider:hover {
-  background: #0b68ff;
+  background: #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content {
   flex: 1;
@@ -65,53 +66,49 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-head {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a {
-  margin-right: 30px;
+  margin-right: 36px;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a:not(.is-disabled) {
   color: #17191c;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a.is-disabled i {
-  color: #71a7ff;
+  color: #a6d2ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a i {
-  color: #0b68ff;
+  color: #409EFF;
   font-weight: 600;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
   height: calc(100% - 56px);
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
   background: #f7f9fc;
-  padding: 20px 10px;
+  padding: 16px 6px;
   overflow-y: auto;
   align-content: flex-start;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
   height: 1px;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-thumb {
   border-radius: 2px;
-  background: #0b68ff;
+  background: #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-track {
   background: transparent;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list {
-  width: calc(20% - 20px);
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
   background: #fff;
-  margin: 0 10px 20px;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  margin: 0 8px 16px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.07);
   cursor: pointer;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .img {
-  height: 140px;
+  width: 137px;
+  height: 137px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,12 +118,13 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
   max-height: 100%;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list.active {
-  outline: 1px solid #0b68ff;
+  outline: 1px solid #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text {
   border-top: 1px solid #eee;
   font-size: 12px;
-  padding: 10px;
+  width: 137px;
+  padding: 6px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -137,7 +135,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
   white-space: nowrap;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text .el-icon-check {
-  color: #0b68ff;
+  color: #409EFF;
   font-size: 18px;
   font-weight: 600;
 }
@@ -146,7 +144,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-footer {
   padding: 0 16px;
   background-color: #fff;
   display: flex;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.04);
   align-items: center;
   justify-content: space-between;
 }
@@ -154,20 +152,30 @@ body.page-filemanager .upload-wrap .el-dialog__body {
   padding-top: 10px;
 }
 body.page-filemanager .upload-wrap .upload-image {
-  height: 300px;
+  height: 200px;
   overflow-y: auto;
 }
 body.page-filemanager .upload-wrap .upload-image .list {
-  background-color: #f4f4f4;
-  padding: 4px 10px;
+  background-color: #f2f2f2;
+  padding: 6px 10px;
   border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+body.page-filemanager .upload-wrap .upload-image .list .info {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 body.page-filemanager .upload-wrap .upload-image .list .name {
   color: #111111;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+body.page-filemanager .upload-wrap .upload-image .list .status {
+  white-space: nowrap;
 }
 body.page-filemanager .upload-wrap .el-progress-bar__outer {
   background-color: #ccc;

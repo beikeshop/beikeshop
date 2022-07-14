@@ -309,10 +309,10 @@
 
         switch(this.link.type) {
           case 'product':
-            url = 'products/autocomplete?name=';
+            url = `products/${this.link.value}/name`;
             break;
           case 'category':
-            url = 'categories/autocomplete?name=';
+            url = `categories/${this.link.value}/autocomplete`;
             break;
           case 'manufacturer':
             url = '';
@@ -321,20 +321,17 @@
             null;
         }
 
-        $.ajax({
-          url: url,
-          data: {id: this.link.value},
-          type: 'post',
-          dataType: 'json',
-          complete: function() { self.nameLoading = false; },
-          success: function (json) {
-            if (json) {
-              self.name = json;
-            } else {
-              self.name = '数据不存在或已被删除';
-            }
+        // beforeSend: function() { self.loading = true;; },
+
+        // complete: function() { self.loading = false; },
+        // this.loading = true;
+        $http.get(url, null, {hload: true}).then((res) => {
+          if (res.data) {
+            self.name = res.data;
+          } else {
+            self.name = '数据不存在或已被删除';
           }
-        });
+        }).finally(() => {this.nameLoading = false});
       },
     }
   });
