@@ -23,7 +23,7 @@ class ForgottenController
      */
     public function index()
     {
-        return view('account/forgotten');
+        return view('admin::pages.user.forgotten');
     }
 
     /**

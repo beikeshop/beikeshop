@@ -23,10 +23,9 @@ class UserService
     /**
      * 发送验证码通过$type方式，type为email或telephone
      * @param $email
-     * @param $type
      * @return void
      */
-    public static function sendVerifyCodeForForgotten($email, $type) {
+    public static function sendVerifyCodeForForgotten($email) {
         $code = str_pad(mt_rand(10, 999999), 6, '0', STR_PAD_LEFT);
 
         VerifyCodeRepo::deleteByAccount($email);
@@ -37,7 +36,7 @@ class UserService
 
         Log::info("找回密码验证码：{$code}");
 
-        Notification::verifyCode($code, "您的验证码是%s,该验证码仅用于找回密码。", $type);
+        Notification::verifyCode($code, "您的验证码是%s,该验证码仅用于找回密码。", 'email');
     }
 
     /**

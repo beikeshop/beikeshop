@@ -1,6 +1,7 @@
 <?php
 
 use Beike\Admin\Http\Controllers;
+use Beike\Admin\Http\Controllers\ForgottenController;
 use Illuminate\Support\Facades\Route;
 
 $adminName = admin_name();
@@ -10,6 +11,10 @@ Route::prefix($adminName)
     ->group(function () {
         Route::get('login', [Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [Controllers\LoginController::class, 'store'])->name('login.store');
+
+        Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
+        Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
+        Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
 
         Route::middleware('admin_auth:' . \Beike\Models\AdminUser::AUTH_GUARD)
             ->group(function () {
@@ -52,10 +57,6 @@ Route::prefix($adminName)
                 Route::post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
-
-                Route::get('forgotten', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'index'])->name('forgotten.index');
-                Route::post('forgotten/send_code', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
-                Route::post('forgotten/password', [\Beike\Admin\Http\Controllers\ForgottenController::class, 'changePassword'])->name('forgotten.password');
 
             });
     });
