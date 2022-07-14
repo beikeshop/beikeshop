@@ -34,6 +34,8 @@ Route::prefix($adminName)
                 Route::Resource('customer_groups', Controllers\CustomerGroupController::class);
 
                 Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
+                Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+                Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
                 Route::resource('products', Controllers\ProductController::class);
                 Route::resource('currencies', Controllers\CurrencyController::class);
 

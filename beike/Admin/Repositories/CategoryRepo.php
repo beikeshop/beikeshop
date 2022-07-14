@@ -36,4 +36,14 @@ class CategoryRepo
 
         ]);
     }
+
+    public static function getName($id)
+    {
+        $category = Category::query()->find($id);
+
+        if ($category) {
+            return $category->description->name;
+        }
+        return '';
+    }
 }

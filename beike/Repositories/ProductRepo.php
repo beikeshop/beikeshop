@@ -109,4 +109,19 @@ class ProductRepo
         }
         return $results;
     }
+
+    /**
+     * 获取商品名称
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed|string
+     */
+    public static function getName($id)
+    {
+        $product = Product::query()->find($id);
+
+        if ($product) {
+            return $product->description->name;
+        }
+        return '';
+    }
 }

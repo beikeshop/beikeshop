@@ -7,6 +7,7 @@ use Beike\Admin\Http\Resources\CategoryResource;
 use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Category;
 use Beike\Admin\Services\CategoryService;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -44,6 +45,13 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         return $this->save($request, $category);
+    }
+
+    public function name(int $id)
+    {
+        $name = CategoryRepo::getName($id);
+
+        return json_success('获取成功', $name);
     }
 
     protected function form(Request $request, Category $category = null)

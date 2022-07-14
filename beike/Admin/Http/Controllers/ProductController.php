@@ -5,8 +5,6 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Http\Resources\ProductResource;
 use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Product;
-use Beike\Models\ProductDescription;
-use Beike\Models\ProductSku;
 use Beike\Admin\Services\ProductService;
 use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
@@ -93,5 +91,12 @@ class ProductController extends Controller
         }
 
         return redirect($this->getRedirect())->with('success', 'product created');
+    }
+
+    public function name(int $id)
+    {
+        $name = ProductRepo::getName($id);
+
+        return json_success('获取成功', $name);
     }
 }
