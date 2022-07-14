@@ -36,7 +36,7 @@ class DesignController extends Controller
     {
         $moduleName = $request->get('module');
         $content = $request->get('content');
-        $viewPath = "design.module.{$moduleName}.render.index";
+        $viewPath = "design.{$moduleName}";
         return view($viewPath, $content);
     }
 
