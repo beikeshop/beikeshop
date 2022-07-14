@@ -103,6 +103,7 @@ class ProductRepo
             $results[] = [
                 'id' => $product->id,
                 'name' => $product->description->name,
+                'status' => $product->active,
                 'image' => $product->image,
             ];
         }

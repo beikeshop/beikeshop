@@ -87,7 +87,7 @@
 
         design: {
           type: 'pc',
-          editType: 'add',
+          editType: 'module',
           sidebar: false,
           editingModuleIndex: 0,
           ready: false,

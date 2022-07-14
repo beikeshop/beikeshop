@@ -55,14 +55,13 @@
     <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
-        <el-progress status="exception" :percentage="50"></el-progress>
         <div class="left">
           <el-link :underline="false" :disabled="editingImageIndex === null" icon="el-icon-download">下载</el-link>
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
           <el-link :underline="false" :disabled="editingImageIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
         </div>
         <div class="right">
-          <el-button size="mini" type="primary" @click="openUploadFile">上传文件</el-button>
+          <el-button size="small" type="primary" @click="openUploadFile" icon="el-icon-upload2">上传文件</el-button>
         </div>
       </div>
       <div class="content-center">
@@ -84,7 +83,7 @@
             :total="image_total">
           </el-pagination>
         </div>
-        <div class="right"><el-button size="mini" type="primary" @click="fileChecked" :disabled="editingImageIndex === null">选择</el-button></div>
+        <div class="right"><el-button size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="editingImageIndex === null">选择</el-button></div>
       </div>
     </div>
 
@@ -113,8 +112,8 @@
         </el-upload>
         <div class="upload-image">
           <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
-            <div class="name"><span>@{{ image.name }}</span> <span class="percent">@{{ image.percent }}</span></div>
-            <div class="progress"><el-progress :show-text="false" style="width:100%" :percentage="image.percent"></el-progress></div>
+            <div class="name">@{{ image.name }}</div>
+            <div class="status">上传中</div>
           </div>
         </div>
     </el-dialog>
@@ -399,7 +398,7 @@
       const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
 
       if (defaultkeyarr) {
-        this.defaultkeyarr = defaultkeyarr.split(',');
+        // this.defaultkeyarr = defaultkeyarr.split(',');
       }
     },
     // 在挂载开始之前被调用:相关的 render 函数首次被调用

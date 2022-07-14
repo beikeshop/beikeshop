@@ -13,6 +13,20 @@ body.page-filemanager .filemanager-wrap {
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar {
   width: 20%;
+  background-color: #293042;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree {
+  background-color: transparent;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree .el-tree-node__content {
+  color: #eee;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree .el-tree-node__content:hover {
+  background-color: #434d66;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+  background-color: #434d66;
+  color: #fff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .el-tree-node__content {
   height: 36px;
@@ -27,7 +41,7 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-t
   margin-right: 8px;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-tree-node .right span:hover {
-  color: #fd560f;
+  color: #0b68ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-divider {
   top: 0;
@@ -35,7 +49,7 @@ body.page-filemanager .filemanager-wrap .filemanager-divider {
   cursor: col-resize;
 }
 body.page-filemanager .filemanager-wrap .filemanager-divider:hover {
-  background: #fd560f;
+  background: #0b68ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content {
   flex: 1;
@@ -60,10 +74,10 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left
   color: #17191c;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a.is-disabled i {
-  color: #fe9d74;
+  color: #71a7ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-head .left a i {
-  color: #fd560f;
+  color: #0b68ff;
   font-weight: 600;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
@@ -71,7 +85,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  background: #f9fafa;
+  background: #f7f9fc;
   padding: 20px 10px;
   overflow-y: auto;
   align-content: flex-start;
@@ -82,7 +96,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-w
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-thumb {
   border-radius: 2px;
-  background: #fd560f;
+  background: #0b68ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center::-webkit-scrollbar-track {
   background: transparent;
@@ -107,7 +121,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
   max-height: 100%;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list.active {
-  outline: 1px solid #fd560f;
+  outline: 1px solid #0b68ff;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text {
   border-top: 1px solid #eee;
@@ -123,7 +137,7 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
   white-space: nowrap;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text .el-icon-check {
-  color: #fd560f;
+  color: #0b68ff;
   font-size: 18px;
   font-weight: 600;
 }
@@ -136,20 +150,24 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-footer {
   align-items: center;
   justify-content: space-between;
 }
+body.page-filemanager .upload-wrap .el-dialog__body {
+  padding-top: 10px;
+}
 body.page-filemanager .upload-wrap .upload-image {
   height: 300px;
   overflow-y: auto;
 }
 body.page-filemanager .upload-wrap .upload-image .list {
   background-color: #f4f4f4;
-  padding: 10px 10px;
+  padding: 4px 10px;
   border-radius: 4px;
-}
-body.page-filemanager .upload-wrap .upload-image .list .name {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+}
+body.page-filemanager .upload-wrap .upload-image .list .name {
+  color: #111111;
 }
 body.page-filemanager .upload-wrap .el-progress-bar__outer {
   background-color: #ccc;
@@ -160,6 +178,7 @@ body.page-filemanager .photos-upload {
 body.page-filemanager .photos-upload .el-upload {
   width: 100%;
   display: block;
+  margin-bottom: 10px;
 }
 body.page-filemanager .photos-upload .el-loading-spinner {
   top: 35%;

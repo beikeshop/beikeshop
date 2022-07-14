@@ -265,3 +265,314 @@ body.page-design {
     }
   }
 }
+
+
+
+.link-selector-wrap {
+  > .title {
+    margin-bottom: 6px;
+    position: relative;
+    font-size: 12px;
+    i {
+      margin-right: 4px;
+      color: #0072ff;
+    }
+  }
+
+  .selector-type {
+    position: relative;
+    outline: none;
+
+    .title {
+      border: 1px solid #eee;
+      padding: 6px 16px 6px 6px;
+      font-size: 12px;
+      cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      border-radius: 2px;
+      background-color: #fff;
+      &:hover {
+        border-color: #ddd;
+      }
+
+      &:before {
+        content: '\f107';
+        font-family: fontawesome;
+        position: absolute;
+        right: 10px;
+        top: 8px;
+      }
+    }
+
+    .selector-content {
+      position: absolute;
+      z-index: 999;
+      top: calc(100% + 2px);
+      border-radius: 2px;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+      display: none;
+      &.active {
+        display: block;
+      }
+
+      > div {
+        padding: 6px 10px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e0fcf6;
+        }
+      }
+    }
+  }
+}
+
+.link-dialog-box {
+  .el-dialog__header {
+    padding: 0;
+
+    .el-dialog__headerbtn {
+      top: 14px;
+      font-size: 20px;
+      i {
+        color: #fff;
+      }
+    }
+  }
+
+  .el-dialog__body {
+    padding-bottom: 10px;
+  }
+
+  .el-dialog__footer {
+    .el-button {
+      padding: 10px 20px;
+      min-width: 80px;
+    }
+  }
+
+  .link-dialog-header {
+    padding: 10px 20px;
+    background-color: #409eff;
+
+    .title {
+      font-weight: bold;
+      color: #fff;
+      font-size: 16px;
+    }
+
+
+    div.input-with-select {
+      margin-top: 16px;
+      display: flex;
+      align-items:center;
+
+      input {
+        height: 34px;
+        border: none;
+        border-radius: 4px 0 0 4px;
+        flex: 1;
+        padding: 0 10px;
+        outline: none;
+      }
+
+      button {
+        color: #333;
+        border: none;
+        background-color: #eee;
+        height: 34px;
+        line-height: 36px;
+        border-radius: 0 4px 4px 0;
+        padding: 0 14px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .link-dialog-content {
+    .product-search {
+      margin: -30px -20px 10px;
+      padding: 6px 20px;
+      text-align: left;
+      background-color: #f3f4f7;
+      display: flex;
+      justify-content: space-between;
+      align-items:center;
+
+      > a {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 0 10px;
+        border-radius: 4px;
+        height: 26px;
+        line-height: 26px;
+        color: #333;
+      }
+
+      .link-top-new {
+
+      }
+
+      .el-input-group__append {
+        background-color: #0072ff;
+        color: #fff;
+        margin-top: -1px;
+      }
+    }
+
+    .product-info {
+      height: 340px;
+      // overflow-y: auto;
+
+      .product-info-title {
+        background-color: #dee1e9;
+        display: flex;
+        justify-content: space-between;
+        padding: 6px 20px 6px 38px;
+        text-align: left;
+        color: #30344f;
+        font-size: 14px;
+      }
+
+      .product-list {
+        padding-left: 0;
+        list-style: none;
+        margin-top: 4px;
+        margin-bottom: 0;
+        height: 314px;
+        overflow-y: auto;
+
+        &.static {
+          height: 340px;
+        }
+
+        li {
+          display: flex;
+          justify-content:space-between;
+          align-items: center;
+          padding: 5px 10px;
+          border-bottom: 1px solid #eee;
+          &:not(.no-status) {
+            cursor: pointer;
+            &:hover {
+              background-color: #e0fcf6;
+            }
+          }
+
+          .left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+
+            .checkbox-plus {
+              // width: 16px;
+              margin-right: 12px;
+              flex: 0 0 14px;
+              height: 14px;
+              border: 1px solid #ddd;
+              border-radius: 50%;
+              display: flex;
+              position: relative;
+              justify-content: center;
+              align-items: center;
+
+              &:not(.no-status) {
+                cursor: pointer;
+              }
+
+              &:before {
+                content: "";
+                width: 10px;
+                height: 10px;
+                background-color: #0072ff;
+                border-radius: 50%;
+                display: none;
+              }
+
+              &.active {
+                border-color: #0072ff;
+                box-shadow: 0px 0px 4px #0072ff;
+
+                &:before {
+                  display: block;
+                }
+              }
+
+              &.no-status {
+                background-color: #ddd;
+              }
+            }
+
+            > div {
+              // padding-left: 10px;
+              display: -webkit-box;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              word-break: break-all;
+              overflow: hidden;
+            }
+          }
+
+          .right {
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            padding: 2px 6px;
+            color: #aaa;
+            font-size: 12px;
+            background-color: #fff;
+
+            &.ok {
+              color: #52c41a;
+              border-color: #b7eb8f;
+            }
+          }
+
+          img {
+            width: 46px;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    .product-info-no {
+      text-align: center;
+      font-size: 14px;
+      > div {
+        display: block;
+      }
+      .icon {
+        margin: 50px 0 20px;
+        i {
+          font-size: 100px;
+          color: #8c8c8c;
+        }
+      }
+
+      .no-text {
+        font-size: 16px;
+      }
+
+      a {
+        color: #0072ff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    background-color: #f6f6f6;
+    padding: 10px 20px;
+  }
+
+  .link-dialog-footer {
+
+  }
+}

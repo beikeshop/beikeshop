@@ -84,6 +84,7 @@ class CategoryRepo
             }
             $results[] = [
                 'id' => $category->id,
+                'status' => $category->active,
                 'name' => $pathName,
             ];
         }
