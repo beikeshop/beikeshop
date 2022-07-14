@@ -9,7 +9,13 @@ use Beike\Repositories\LanguageRepo;
 
 class DesignController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * 展示所有模块编辑器
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function index(Request $request): View
     {
         $data = [
             'editors' => ['editor-slide_show'],
@@ -21,6 +27,23 @@ class DesignController extends Controller
 
 
     /**
+     * 预览模块显示结果
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function showModule(Request $request): View
+    {
+        $moduleName = $request->get('module');
+        $content = $request->get('content');
+        $viewPath = "design.module.{$moduleName}.render.index";
+        return view($viewPath, $content);
+    }
+
+
+    /**
+     * 更新所有数据
+     *
      * @param Request $request
      * @return array
      * @throws \Throwable
@@ -36,18 +59,5 @@ class DesignController extends Controller
         ];
         SettingRepo::createOrUpdate($data);
         return json_success("保存成功");
-    }
-
-
-    /**
-     * @param Request $request
-     * @return View
-     */
-    public function showModule(Request $request): View
-    {
-        $moduleName = $request->get('module');
-        $content = $request->get('content');
-        $viewPath = "design.module.{$moduleName}.render.index";
-        return view($viewPath, $content);
     }
 }
