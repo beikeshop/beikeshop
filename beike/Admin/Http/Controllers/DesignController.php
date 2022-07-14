@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Services\DesignService;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
@@ -50,11 +51,12 @@ class DesignController extends Controller
      */
     public function update(Request $request): array
     {
+        $moduleData = DesignService::handleModules($request->getContent());
         $data = [
             'type' => 'system',
             'space' => 'base',
             'name' => 'design_setting',
-            'value' => $request->getContent(),
+            'value' => $moduleData,
             'json' => 1
         ];
         SettingRepo::createOrUpdate($data);
