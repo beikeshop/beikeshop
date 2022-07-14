@@ -82,6 +82,7 @@ Vue.component('module-editor-slideshow', {
     removeImage(index) {
       this.module.images.splice(index, 1);
     },
+
     itemShow(index) {
       this.module.images.find((e, key) => {if (index != key) return e.show = false});
       this.module.images[index].show = !this.module.images[index].show;

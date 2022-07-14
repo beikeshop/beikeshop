@@ -119,8 +119,16 @@
       watch: {},
       // 组件方法
       methods: {
-        moduleUpdated() {
-          console.log('moduleUpdated')
+        moduleUpdated(module) {
+          const data = {
+            module: this.editingModuleCode,
+            content: this.form.modules[this.design.editingModuleIndex].content
+          };
+
+          $http.post('design/builder/preview', data).then((res) => {
+            layer.msg(res.message)
+          })
+          // console.log(module)
         },
 
         addModuleButtonClicked(code) {
