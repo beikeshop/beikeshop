@@ -27,7 +27,7 @@ class DesignController extends Controller
     public function update(Request $request): array
     {
         $fields = [
-            'design_setting' => $request->get('design_setting')
+            'design_setting' => $request->getContent()
         ];
         SettingRepo::update('system', 'base', $fields);
         return json_success("保存成功");
