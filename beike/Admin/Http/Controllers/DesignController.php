@@ -32,7 +32,7 @@ class DesignController extends Controller
      * @param Request $request
      * @return View
      */
-    public function showModule(Request $request): View
+    public function preview(Request $request): View
     {
         $moduleName = $request->get('module');
         $content = $request->get('content');
