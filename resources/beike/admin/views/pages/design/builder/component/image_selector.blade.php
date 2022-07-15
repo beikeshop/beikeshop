@@ -1,13 +1,13 @@
   <template id="pb-image-selector">
     <div class="pb-image-selector">
-      <el-tabs v-if="isLanguage" @tab-click="tabClick" value="language-{{ current_language_id() }}" :stretch="languages.length > 5 ? true : false" type="card" :class="languages.length <= 1 ? 'languages-a' : ''">
-        <el-tab-pane v-for="(item, index) in languages" :key="index" :label="item.name" :name="'language-' + item.id">
+      <el-tabs v-if="isLanguage" @tab-click="tabClick" value="language-{{ current_language_code() }}" :stretch="languages.length > 5 ? true : false" type="card" :class="languages.length <= 1 ? 'languages-a' : ''">
+        <el-tab-pane v-for="(item, index) in languages" :key="index" :label="item.name" :name="'language-' + item.code">
           <span slot="label" style="padding: 0 4px; font-size: 12px">@{{ item.name }}</span>
 
           <div class="i18n-inner">
             <div class="img">
-              {{-- <img :src="type == 'image' ? thumbnail(value[item.id]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked"> --}}
-              <el-image :src="type == 'image' ? thumbnail(value[item.id]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked">
+              {{-- <img :src="type == 'image' ? thumbnail(value[item.code]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked"> --}}
+              <el-image :src="type == 'image' ? thumbnail(value[item.code]) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked">
                 <div slot="error" class="image-slot">
                   <i class="el-icon-picture-outline"></i>
                 </div>
@@ -23,12 +23,12 @@
       </el-tabs>
 
       <div class="i18n-inner" v-else>
-        <img :src="type == 'image' ? thumbnail(value) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked" style="max-width: 60px; cursor: pointer;border: 1px solid #eee;">
+        <img :src="type == 'image' ? thumbnail(value) : 'image/video.png'" :id="'thumb-' + code" @click="selectButtonClicked" style="max-width: 60px; cursor: pointer;border: 1px solid #eee;">
         <div class="btns">
           <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
           <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">删除</el-button>
         </div>
-        <input type="hidden" value="" v-model="src" :id="'input-' + id">
+        <input type="hidden" value="" v-model="src" :id="'input-' + code">
       </div>
     </div>
   </template>
@@ -90,7 +90,7 @@
         },
 
         tabClick(e) {
-          this.tabActiveId = this.languages[e.index * 1].id;
+          this.tabActiveId = this.languages[e.index * 1].code;
         },
 
         selectButtonClicked() {

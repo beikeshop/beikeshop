@@ -59,7 +59,7 @@
 
   <script>
     var $languages = @json($languages);
-    var $language_id = {{ current_language_id() }};
+    var $language_id = '{{ current_language_code() }}';
 
     Vue.prototype.thumbnail = function thumbnail(image, width, height) {
       return '{{ asset('catalog') }}' + image;

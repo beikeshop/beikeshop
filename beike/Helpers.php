@@ -223,6 +223,16 @@ function current_language_id(): int
 }
 
 /**
+ * 当前语言code
+ *
+ * @return int
+ */
+function current_language_code(): string
+{
+    return 'zh_cn';
+}
+
+/**
  * 获取当前货币
  *
  * @return string

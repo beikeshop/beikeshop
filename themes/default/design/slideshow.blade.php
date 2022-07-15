@@ -1,4 +1,5 @@
 <section class="module-item" id="module-dasuybkdas">
+  @if (true)
   <div class="module-edit">
     <div class="edit-wrap">
       <div class=""><i class="bi bi-chevron-down"></i></div>
@@ -7,6 +8,7 @@
       <div class="edit"><i class="bi bi-pencil-square"></i></div>
     </div>
   </div>
+  @endif
   <div class="module-info">
     <div class="swiper module-swiper-dasuybkdas module-slideshow">
       <div class="swiper-wrapper">
