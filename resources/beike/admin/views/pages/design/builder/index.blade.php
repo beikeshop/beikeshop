@@ -77,8 +77,11 @@
       previewWindow = document.getElementById("preview-iframe").contentWindow;
       app.design.ready = true;
       app.design.sidebar = true;
+      $(previewWindow.document).find('.module-edit .edit').on('click', function(event) {
+        // console.log($(this).parents('.module-item').prop('id'))
+        window.parent.postMessage({index: 0}, '*')
+      });
     });
-
   </script>
 
   @include('admin::pages.design.builder.component.image_selector')

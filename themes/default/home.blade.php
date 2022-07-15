@@ -9,13 +9,13 @@
 
 {!! $html !!}
 
-<script>
+{{-- <script>
   $(function() {
     $(document).on('click', '.module-edit .edit', function(event) {
       window.parent.postMessage({index: 0}, '*')
     });
   });
-</script>
+</script> --}}
 {{-- <section class="module-wrap mb-5"><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></section> --}}
 {{-- @foreach ($categories as $category)
   <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a>
