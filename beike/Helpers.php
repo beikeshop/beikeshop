@@ -151,7 +151,6 @@ function locales(): array
     return $locales;
 }
 
-
 /**
  * 获取当前语言
  *
@@ -190,7 +189,6 @@ function image_resize($image, int $width = 100, int $height = 100)
     return (new \Beike\Services\ImageService($image))->resize($width, $height);
 }
 
-
 /**
  * 获取原图地址
  * @throws Exception
@@ -203,6 +201,16 @@ function image_origin($image)
     return (new \Beike\Services\ImageService($image))->originUrl();
 }
 
+/**
+ * 获取当前所有语言列表
+ *
+ * @return array|false
+ */
+function languages()
+{
+    $languageDir = resource_path('lang');
+    return array_diff(scandir($languageDir), array('..', '.'));
+}
 
 /**
  * 当前语言ID

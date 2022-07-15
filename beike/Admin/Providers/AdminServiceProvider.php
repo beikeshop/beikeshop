@@ -117,6 +117,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function loadShareViewData()
     {
+        View::share('languages', languages());
         View::share('admin_base_url', admin_route('home.index'));
     }
 }
