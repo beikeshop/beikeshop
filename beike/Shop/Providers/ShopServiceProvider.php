@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Beike\Shop\View\Components\AccountSidebar;
+use Illuminate\View\FileViewFinder;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,13 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->registerGuard();
+
+        $this->app->bind('view.finder', function ($app) {
+            $paths = $app['config']['view.paths'];
+            $customTheme[] = base_path('themes/black');
+            $paths = array_merge($customTheme, $paths);
+            return new FileViewFinder($app['files'], $paths);
+        });
 
         $this->app->booted(function () {
             $this->loadShareViewData();
