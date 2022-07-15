@@ -26,7 +26,7 @@
 
             <div class="right">
               <el-tooltip class="" effect="dark" content="删除" placement="left">
-                <div class="remove-item" @click.stop="removeImage(index)"><i class="iconfont">&#xe63a;</i></div>
+                <div class="remove-item" @click.stop="removeImage(index)"><i class="el-icon-delete"></i></div>
               </el-tooltip>
               <i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i>
             </div>
@@ -68,9 +68,9 @@ Vue.component('module-editor-slideshow', {
   watch: {
     module: {
       handler: function (val) {
-        console.log(previewWindow)
+        // console.log(previewWindow)
         // $(previewWindow.document).find('.product-description h1').css('font-size', newValue);
-        // this.$emit('on-changed', val);
+        this.$emit('on-changed', val);
       },
       deep: true,
     }
