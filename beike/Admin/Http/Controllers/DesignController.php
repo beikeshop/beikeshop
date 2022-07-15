@@ -2,11 +2,11 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Services\DesignService;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\LanguageRepo;
+use Beike\Admin\Services\DesignService;
 
 class DesignController extends Controller
 {
