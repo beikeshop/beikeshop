@@ -51,12 +51,13 @@ class DesignController extends Controller
      */
     public function update(Request $request): array
     {
-        $moduleData = DesignService::handleModules($request->getContent());
+        $content = json_decode($request->getContent(), true);
+        $moduleData = DesignService::handleModules($content);
         $data = [
             'type' => 'system',
             'space' => 'base',
             'name' => 'design_setting',
-            'value' => $moduleData,
+            'value' => json_encode($moduleData),
             'json' => 1
         ];
         SettingRepo::createOrUpdate($data);

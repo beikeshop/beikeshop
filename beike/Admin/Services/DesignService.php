@@ -11,10 +11,24 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Support\Str;
+
 class DesignService
 {
-    public static function handleModules($moduleData)
+    public static function handleModules($modulesData): array
     {
-        return $moduleData;
+        $modulesData = $modulesData['modules'];
+        if (empty($modulesData)) {
+            return [];
+        }
+
+        foreach ($modulesData as $index => $moduleData) {
+            $moduleId = $moduleData['module_id'] ?? '';
+            if (empty($moduleId)) {
+                $moduleData['module_id'] = Str::random(16);
+            }
+            $modulesData[$index] = $moduleData;
+        }
+        return ['modules' => $modulesData];
     }
 }
