@@ -10,6 +10,7 @@ $primary: #409EFF;
 body.page-filemanager {
   height: 100vh;
   overflow: hidden;
+  font-size: 12px;
 
   .filemanager-wrap {
     display: flex;
@@ -19,6 +20,7 @@ body.page-filemanager {
     .filemanager-navbar {
       width: 20%;
       background-color: #293042;
+      overflow-y: auto;
 
       .el-tree {
         background-color: transparent;
@@ -43,7 +45,7 @@ body.page-filemanager {
         }
 
         .el-tree-node__content {
-          height: 36px;
+          height: 32px;
         }
 
         .custom-tree-node {

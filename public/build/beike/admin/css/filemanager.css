@@ -5,6 +5,7 @@
 body.page-filemanager {
   height: 100vh;
   overflow: hidden;
+  font-size: 12px;
 }
 body.page-filemanager .filemanager-wrap {
   display: flex;
@@ -14,6 +15,7 @@ body.page-filemanager .filemanager-wrap {
 body.page-filemanager .filemanager-wrap .filemanager-navbar {
   width: 20%;
   background-color: #293042;
+  overflow-y: auto;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree {
   background-color: transparent;
@@ -30,7 +32,7 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree--highlight-
   border-left: 2px solid #409EFF;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .el-tree-node__content {
-  height: 36px;
+  height: 32px;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-tree-node {
   width: 100%;

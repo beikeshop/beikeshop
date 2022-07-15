@@ -52,7 +52,7 @@
 
 setTimeout(() => {
   app.source.modules.push(@json($register))
-}, 0)
+}, 100)
 
 Vue.component('module-editor-slideshow', {
   template: '#module-editor-slideshow-template',
