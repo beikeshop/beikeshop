@@ -64,10 +64,10 @@
           this.languages.forEach(e => {
             let value = this.value;
             if (typeof(this.value) == 'object') {
-              value = this.value[e.id];
+              value = this.value[e.code];
             }
 
-            Vue.set(this.internalValues, e.id, value || '');
+            Vue.set(this.internalValues, e.code, value || '');
           })
           this.$emit('input', this.internalValues);
         }
