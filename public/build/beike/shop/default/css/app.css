@@ -784,10 +784,10 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
 .module-item {
   position: relative;
 }
-.module-item:hover .module-edit {
+.module-item.module-item-design:hover .module-edit {
   display: flex;
 }
-.module-item:hover:after {
+.module-item.module-item-design:hover:after {
   display: block;
 }
 .module-item:after {

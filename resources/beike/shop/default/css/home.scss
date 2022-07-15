@@ -3,13 +3,15 @@
 .module-item {
   position: relative;
 
-  &:hover {
-    .module-edit {
-      display: flex;
-    }
+  &.module-item-design {
+    &:hover {
+      .module-edit {
+        display: flex;
+      }
 
-    &:after {
-      display: block;
+      &:after {
+        display: block;
+      }
     }
   }
 

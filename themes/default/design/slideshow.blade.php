@@ -1,5 +1,5 @@
-<section class="module-item" id="module-dasuybkdas">
-  @if (true)
+<section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-dasuybkdas">
+  @if ($design)
   <div class="module-edit">
     <div class="edit-wrap">
       <div class=""><i class="bi bi-chevron-down"></i></div>

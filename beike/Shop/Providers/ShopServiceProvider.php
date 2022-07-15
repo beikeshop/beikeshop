@@ -60,6 +60,9 @@ class ShopServiceProvider extends ServiceProvider
 
     protected function loadShareViewData()
     {
+
+        View::share('design', request('design') == 1);
+
         View::share('languages', languages());
 
         $menuCategories = CategoryRepo::getTwoLevelCategories();
