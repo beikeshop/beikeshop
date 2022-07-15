@@ -313,16 +313,6 @@ footer .footer-bottom {
   color: #666;
 }
 
-.module-image-plus .module-image-plus-top {
-  display: flex;
-}
-.module-image-plus .module-image-plus-top .right {
-  margin-left: 20px;
-}
-.module-image-plus .module-image-plus-bottom {
-  margin-top: 20px;
-}
-
 .product-wrap {
   margin-bottom: 26px;
   text-align: center;
@@ -341,23 +331,6 @@ footer .footer-bottom {
   color: #aaa;
   margin-left: 4px;
   text-decoration: line-through;
-}
-
-.module-brand .brand-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
-  margin-bottom: 30px;
-  height: 90px;
-}
-
-.module-tab-product .nav .nav-link {
-  color: #6c757d;
-}
-.module-tab-product .nav .nav-link.active {
-  color: #111;
-  font-weight: bold;
 }
 
 body.page-login .login-item-header, body.page-forgotten .login-item-header {
@@ -825,6 +798,7 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
   right: 2px;
   top: 2px;
   bottom: 2px;
+  z-index: 9;
   outline: 2px solid #fd560f;
 }
 .module-item .module-edit {
@@ -876,4 +850,46 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
 }
 .module-item .module-edit .edit-wrap > div:hover {
   background-color: #eb4802;
+}
+
+.module-image-plus .module-image-plus-top {
+  display: flex;
+}
+.module-image-plus .module-image-plus-top .right {
+  margin-left: 20px;
+}
+.module-image-plus .module-image-plus-bottom {
+  margin-top: 20px;
+}
+
+.module-brand .brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  margin-bottom: 30px;
+  height: 90px;
+}
+
+.module-tab-product .nav .nav-link {
+  color: #6c757d;
+}
+.module-tab-product .nav .nav-link.active {
+  color: #111;
+  font-weight: bold;
+}
+
+.swiper.module-slideshow {
+  --swiper-theme-color: #ff6600;
+  /* 设置Swiper风格 */
+  --swiper-navigation-color: #ff6600;
+  /* 单独设置按钮颜色 */
+  --swiper-navigation-size: 30px;
+  /* 设置按钮大小 */
+}
+.swiper.module-slideshow .swiper-button-prev, .swiper.module-slideshow .swiper-button-next {
+  display: none;
+}
+.swiper.module-slideshow:hover .swiper-button-prev, .swiper.module-slideshow:hover .swiper-button-next {
+  display: block;
 }

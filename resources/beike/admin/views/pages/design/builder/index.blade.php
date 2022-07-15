@@ -70,6 +70,15 @@
       for (; str.length < length; str += Math.random().toString(36).substr(2));
       return str.substr(0, length);
     }
+
+    // iframe 操作
+    var previewWindow = null;
+    $('#preview-iframe').on('load', function(event) {
+      previewWindow = document.getElementById("preview-iframe").contentWindow;
+      app.design.ready = true;
+      app.design.sidebar = true;
+    });
+
   </script>
 
   @include('admin::pages.design.builder.component.image_selector')
@@ -125,8 +134,8 @@
             content: this.form.modules[this.design.editingModuleIndex].content
           };
 
-          $http.post('design/builder/preview', data).then((res) => {
-            layer.msg(res.message)
+          $http.post('design/builder/preview', data, {hload: true}).then((res) => {
+            // layer.msg(res.message)
           })
           // console.log(module)
         },

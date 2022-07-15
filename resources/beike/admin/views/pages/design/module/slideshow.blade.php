@@ -21,7 +21,7 @@
                 <i class="el-icon-rank"></i>
               </el-tooltip>
 
-              {{-- <img :src="thumbnail(item.image[{{ helper.current_language_id() }}], 40, 40)" class="img-responsive"> --}}
+              <img :src="thumbnail(item.image[{{ current_language_id() }}], 40, 40)" class="img-responsive">
             </div>
 
             <div class="right">
@@ -68,10 +68,11 @@ Vue.component('module-editor-slideshow', {
   watch: {
     module: {
       handler: function (val) {
-        console.log(222)
-        this.$emit('on-changed', val);
+        console.log(previewWindow)
+        // $(previewWindow.document).find('.product-description h1').css('font-size', newValue);
+        // this.$emit('on-changed', val);
       },
-      deep: true
+      deep: true,
     }
   },
 

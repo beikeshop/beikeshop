@@ -7,10 +7,7 @@ $primary: #fd560f;
 
 @import './header';
 @import './footer';
-@import './module-image-plus';
 @import './product-style';
-@import './module-brand';
-@import './module-tab-product';
 @import './login';
 @import './account/account';
 @import './product';
@@ -21,3 +18,7 @@ $primary: #fd560f;
 @import './page-account-order';
 @import './page-account-address';
 @import './home';
+@import './module/module-image-plus';
+@import './module/module-brand';
+@import './module/module-tab-product';
+@import './module/slideshow';
