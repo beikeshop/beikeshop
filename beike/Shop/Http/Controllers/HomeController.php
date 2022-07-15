@@ -2,16 +2,10 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\ProductRepo;
-
 class HomeController extends Controller
 {
     public function index()
     {
-        $data = [
-            'category_products' => [],
-        ];
-
         $html = '';
         $designSettings = system_setting('base.design_setting');
         $modules = $designSettings['modules'] ?? [];
