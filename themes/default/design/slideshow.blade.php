@@ -17,12 +17,11 @@
   <div class="module-info">
     <div class="swiper module-swiper-{{ $module_id }} module-slideshow">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <a href=""><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></a>
-        </div>
-        <div class="swiper-slide">
-          <a href=""><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></a>
-        </div>
+        @foreach($content['images'] as $image)
+          <div class="swiper-slide">
+            <a href="{{ $image['link']['link'] }}"><img src="{{ $image['image'] }}" class="img-fluid"></a>
+          </div>
+        @endforeach
       </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>

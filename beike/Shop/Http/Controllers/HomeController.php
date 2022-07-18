@@ -11,6 +11,7 @@ class HomeController extends Controller
      * 通过page builder 显示首页
      *
      * @return View
+     * @throws \Exception
      */
     public function index(): View
     {

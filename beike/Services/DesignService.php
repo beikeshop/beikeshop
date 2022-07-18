@@ -35,6 +35,9 @@ class DesignService
     }
 
 
+    /**
+     * @throws \Exception
+     */
     public static function handleModuleContent($moduleCode, $content)
     {
         if ($moduleCode == 'slideshow') {
@@ -54,7 +57,8 @@ class DesignService
     private static function handleSlideShow($content): array
     {
         foreach ($content['images'] as $index => $image) {
-            $content['images'][$index]['image'] = image_resize($image[current_language_code()] ?? '');
+            $imagePath = 'catalog' . ($image['image'][current_language_code()] ?? '');
+            $content['images'][$index]['image'] = image_origin($imagePath);
 
             $link = $image['link'];
             if (empty($link)) {

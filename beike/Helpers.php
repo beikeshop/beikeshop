@@ -225,7 +225,7 @@ function current_language_id(): int
 /**
  * 当前语言code
  *
- * @return int
+ * @return string
  */
 function current_language_code(): string
 {
