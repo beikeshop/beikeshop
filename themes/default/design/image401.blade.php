@@ -1,4 +1,4 @@
-<section class="module-item" id="module-{{ $module_id }}">
+<section class="module-item module-item-design" id="module-{{ $module_id }}">
   @if ($design)
   <div class="module-edit">
     <div class="edit-wrap">

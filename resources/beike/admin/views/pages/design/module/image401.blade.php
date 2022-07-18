@@ -1,13 +1,13 @@
-<template id="module-editor-image-401-template">
+<template id="module-editor-image401-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-title">内容</div>
+    <div class="module-editor-row">内容</div>
     <div class="module-edit-group">
       <div class="module-edit-title">选择图片</div>
       <div class="pb-images-selector" v-for="(item, index) in module.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image[{{ current_language_code() }}], 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image['{{ current_language_code() }}'], 40, 40)" class="img-responsive">
           </div>
 
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
@@ -25,8 +25,8 @@
 </template>
 
 <script type="text/javascript">
-Vue.component('module-editor-image-401', {
-  template: '#module-editor-image-401-template',
+Vue.component('module-editor-image401', {
+  template: '#module-editor-image401-template',
 
   props: ['module'],
 
