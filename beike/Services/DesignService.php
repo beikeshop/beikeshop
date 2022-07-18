@@ -11,8 +11,6 @@
 
 namespace Beike\Services;
 
-use Beike\Models\Product;
-use Beike\Repositories\ProductRepo;
 use Illuminate\Support\Str;
 
 class DesignService
