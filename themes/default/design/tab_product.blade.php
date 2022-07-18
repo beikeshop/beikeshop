@@ -44,7 +44,7 @@
           <div class="row">
             @for ($s = 0; $s < 8; $s++)
             <div class="col-6 col-md-4 col-lg-3">
-              @include('shared.product')
+              {{-- @include('shared.product') --}}
               商品
             </div>
             @endfor
