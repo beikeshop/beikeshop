@@ -28,9 +28,7 @@
       <div class="swiper-button-next"></div>
     </div>
   </div>
-</section>
 
-@push('add-scripts')
   <script>
     new Swiper ('.module-swiper-{{ $module_id }}', {
       loop: true, // 循环模式选项
@@ -50,6 +48,7 @@
       },
     })
   </script>
-@endpush
+</section>
+
 
 

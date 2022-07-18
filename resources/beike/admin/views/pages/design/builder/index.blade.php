@@ -25,8 +25,13 @@
   <div class="design-box">
     <div class="sidebar-edit-wrap" id="app" v-cloak>
       <div class="design-head">
-        <div @click="saveButtonClicked">保存</div>
-        <div @click="exitDesign">退出</div>
+        <template v-if="design.editType == 'add'">
+          <div @click="saveButtonClicked" class="save-btn"><i class="el-icon-check"></i>保存</div>
+          <div @click="exitDesign"><i class="el-icon-switch-button"></i>退出</div>
+        </template>
+        <template v-else>
+          <div @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>返回</div>
+        </template>
       </div>
       <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
         <component
@@ -62,6 +67,15 @@
     var $languages = @json($languages);
     var $language_id = '{{ current_language_code() }}';
 
+    function languagesFill(text) {
+      var obj = {};
+      $languages.map(e => {
+        obj[e.code] = text
+      })
+
+      return obj;
+    }
+
     Vue.prototype.thumbnail = function thumbnail(image, width, height) {
       return '{{ asset('catalog') }}' + image;
     };
@@ -78,9 +92,13 @@
       previewWindow = document.getElementById("preview-iframe").contentWindow;
       app.design.ready = true;
       app.design.sidebar = true;
-      $(previewWindow.document).find('.module-edit .edit').on('click', function(event) {
-        // console.log($(this).parents('.module-item').prop('id'))
-        window.parent.postMessage({index: 0}, '*')
+
+      $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
+        // module-b0448efb0989 删除 module-
+        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+        const modules = app.form.modules;
+        const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
+        app.editModuleButtonClicked(editingModuleIndex);
       });
     });
   </script>
@@ -135,17 +153,24 @@
         moduleUpdated(module) {
           const data = this.form.modules[this.design.editingModuleIndex]
 
-          $http.post('design/builder/preview', data, {hload: true}).then((res) => {
-            // layer.msg(res.message)
-            console.log(res)
-            // $(previewWindow.document).find('.module-edit .edit').on('click', function(event) {
-            // });
+          $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
+            $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
           })
-          // console.log(module)
         },
 
         addModuleButtonClicked(code) {
-          console.log(code)
+          const sourceModule = this.source.modules.find(e => e.code == code)
+          const _data = {
+            code: code,
+            content: sourceModule.make,
+            module_id: '',
+            name: sourceModule.name,
+          }
+
+          $http.post('design/builder', _data).then((res) => {
+            // layer.msg(res.message)
+            // $(previewWindow.document).find('#module-' + data.module_id + ' .module-info').replaceWith(res);
+          })
         },
 
         // 编辑模块
@@ -162,6 +187,11 @@
 
         exitDesign() {
           location = '/';
+        },
+
+        showAllModuleButtonClicked() {
+          this.design.editType = 'add';
+          this.design.editingModuleIndex = 0;
         }
       },
       created () {
@@ -171,12 +201,12 @@
       },
     })
 
-    window.addEventListener('message', (event) => {
-      event.stopPropagation()
-      if (typeof(event.data.index) !== 'undefined') {
-        app.editModuleButtonClicked(event.data.index)
-      }
-    }, false)
+    // window.addEventListener('message', (event) => {
+    //   event.stopPropagation()
+    //   if (typeof(event.data.index) !== 'undefined') {
+    //     app.editModuleButtonClicked(event.data.index)
+    //   }
+    // }, false)
   </script>
 </body>
 </html>

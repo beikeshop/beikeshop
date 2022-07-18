@@ -21,6 +21,9 @@ body.page-design {
   height: 100vh;
   overflow: hidden;
 }
+body.page-design [class*=" el-icon-"], body.page-design [class^=el-icon-] {
+  font-weight: 600;
+}
 body.page-design .tag {
   margin: 8px 0;
   color: #777;
@@ -50,6 +53,12 @@ body.page-design .design-box .design-head > div {
   text-align: center;
   font-size: 0.8rem;
   transition: all 0.2s ease-in-out;
+}
+body.page-design .design-box .design-head > div.save-btn {
+  border-right: 1px solid #5692ff;
+}
+body.page-design .design-box .design-head > div i {
+  margin-right: 7px;
 }
 body.page-design .design-box .design-head > div:hover {
   background-color: #005bcc;

@@ -50,10 +50,6 @@
 
 <script type="text/javascript">
 
-setTimeout(() => {
-  app.source.modules.push(@json($register))
-}, 100)
-
 Vue.component('module-editor-slideshow', {
   template: '#module-editor-slideshow-template',
 
@@ -96,4 +92,37 @@ Vue.component('module-editor-slideshow', {
     }
   }
 });
+
+setTimeout(() => {
+  const make = {
+    style: {
+      background_color: ''
+    },
+    full: true,
+    floor: languagesFill(''),
+    images: [
+      {
+        image: languagesFill('/demo/banner.png'),
+        show: true,
+        link: {
+          type: 'product',
+          value:''
+        }
+      },
+      {
+        image: languagesFill('/demo/banner.png'),
+        show: false,
+        link: {
+          type: 'product',
+          value:''
+        }
+      }
+    ]
+  }
+
+  let register = @json($register);
+
+  register.make = make;
+  app.source.modules.push(register)
+}, 100)
 </script>

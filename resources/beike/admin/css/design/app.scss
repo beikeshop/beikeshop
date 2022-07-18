@@ -10,6 +10,10 @@ body.page-design {
   height: 100vh;
   overflow: hidden;
 
+  [class*=" el-icon-"], [class^=el-icon-] {
+    font-weight: 600;
+  }
+
   .tag {
     margin: 8px 0;
     color: #777;
@@ -41,6 +45,14 @@ body.page-design {
         text-align: center;
         font-size: .8rem;
         transition: all .2s ease-in-out;
+
+        &.save-btn {
+          border-right: 1px solid #5692ff;
+        }
+
+        i {
+          margin-right: 7px;
+        }
 
         &:hover {
           background-color: darken($main_color, 10%);

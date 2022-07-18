@@ -25,9 +25,6 @@
 </template>
 
 <script type="text/javascript">
-setTimeout(() => {
-  app.source.modules.push(@json($register))
-}, 100)
 Vue.component('module-editor-image-401', {
   template: '#module-editor-image-401-template',
 
@@ -59,4 +56,52 @@ Vue.component('module-editor-image-401', {
     },
   }
 });
+
+setTimeout(() => {
+  const make = {
+    style: {
+      background_color: ''
+    },
+    floor: languagesFill(''),
+    images: [
+      {
+        image: languagesFill('image/default/image_plus_1.png'),
+        show: true,
+        link: {
+          type: 'product',
+          value:''
+        }
+      },
+      {
+        image: languagesFill('image/default/image_plus_2.png'),
+        show: false,
+        link: {
+          type: 'product',
+          value:''
+        }
+      },
+      {
+        image: languagesFill('image/default/image_plus_3.png'),
+        show: false,
+        link: {
+          type: 'product',
+          value:''
+        }
+      },
+      {
+        image: languagesFill('image/default/image_plus_4.png'),
+        show: false,
+        link: {
+          type: 'product',
+          value:''
+        }
+      }
+    ]
+  }
+
+  let register = @json($register);
+
+  register.make = make;
+  app.source.modules.push(register)
+}, 100)
 </script>
