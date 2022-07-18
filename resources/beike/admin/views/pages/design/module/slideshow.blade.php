@@ -77,7 +77,7 @@ Vue.component('module-editor-slideshow', {
   },
 
   created: function () {
-    console.log(this.module)
+    // console.log(this.module)
   },
 
   methods: {

@@ -137,6 +137,9 @@
 
           $http.post('design/builder/preview', data, {hload: true}).then((res) => {
             // layer.msg(res.message)
+            console.log(res)
+            // $(previewWindow.document).find('.module-edit .edit').on('click', function(event) {
+            // });
           })
           // console.log(module)
         },

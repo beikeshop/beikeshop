@@ -312,7 +312,7 @@
             url = `products/${this.link.value}/name`;
             break;
           case 'category':
-            url = `categories/${this.link.value}/autocomplete`;
+            url = `categories/${this.link.value}/name`;
             break;
           case 'manufacturer':
             url = '';
