@@ -170,7 +170,7 @@
     }
 
     .pb-image-selector .i18n-inner {
-      /*margin-top: 5px;*/
+      margin-top: 5px;
       display: flex;
       align-items: center;
       background: whitesmoke;

@@ -109,24 +109,10 @@ Vue.component('module-editor-tab-product', {
       if (!this.module.tabs[0].products.length) return;
       this.loading = true;
 
-      http://beike.test/panel/products/names?product_ids=1,2,3
-
-      $http.get('panel/products/names', {product_ids: this.module.tabs[this.editableTabsValue].products}, {hload: true}).then((res) => {
-        console.log(res)
+      $http.get('products/names?product_ids='+this.module.tabs[this.editableTabsValue].products.join(','), {hload: true}).then((res) => {
+        this.loading = false;
+        that.productData = res.data;
       })
-
-      // $.ajax({
-      //   url: 'index.php?route=extension/theme/default/page/module/product/productsByIds',
-      //   data: {product_ids: this.module.tabs[this.editableTabsValue].products},
-      //   type: 'post',
-      //   dataType: 'json',
-      //   success: function (json) {
-      //     if (json) {
-      //       that.loading = false;
-      //       that.productData = json;
-      //     }
-      //   }
-      // });
     },
 
     querySearch(keyword, cb) {

@@ -14,6 +14,10 @@ body.page-design {
     font-weight: 600;
   }
 
+  .el-tabs__header {
+    margin-bottom: 0;
+  }
+
   .tag {
     margin: 8px 0;
     color: #777;
@@ -68,6 +72,8 @@ body.page-design {
 
       .module-edit {
         padding: 0 10px 14px;
+        overflow-y: auto;
+        height: 100%;
 
         .module-editor-row {
           height: 47px;
@@ -274,6 +280,127 @@ body.page-design {
       }
       .el-input-group__prepend {
         padding: 0 10px;
+      }
+    }
+  }
+
+  .module-editor-tab-product-template {
+    .tab-info {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f2f2f2;
+      border-radius: 6px;
+    }
+
+    .manufacturer-list {
+      > div {
+        margin-bottom: 10px;
+        border: 1px solid #f4f4f4;
+        padding: 5px;
+        border-radius: 6px;
+        background: #f4f4f4;
+        padding-bottom: 8px;
+        position: relative;
+        &:hover {
+          .remove-btn {
+            display: block;
+          }
+        }
+
+        .remove-btn {
+          position: absolute;
+          display: none;
+          top: 0;
+          right: 0;
+          background: red;
+          color: #fff;
+          z-index: 9;
+          padding: 0 2px;
+          cursor: pointer;
+          border-radius: 0 0 0 4px;
+          &:hover {
+            background: #c70000;
+          }
+        }
+      }
+    }
+
+    .add-category {
+      // margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .manufacturers {
+      .module-edit-group {
+        margin-top: 5px;
+      }
+    }
+
+    .tab-edit-category > .el-tabs__header > .el-tabs__nav-wrap {
+      .el-tabs__item {
+        padding: 0 10px !important;
+      }
+    }
+
+    .autocomplete-group-wrapper {
+      .item-group-wrapper {
+        background: #fff;
+      }
+    }
+  }
+
+  .autocomplete-group-wrapper {
+    .inline-input {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .item-group-wrapper {
+      padding: 10px;
+      min-height: 230px;
+      overflow: auto;
+      background-color: #f5f5f5;
+      // border: 1px solid #e3e3e3;
+      border-radius: 6px;
+
+      .item {
+        overflow: hidden;
+        position: relative;
+        padding: 5px 19px 5px 26px;
+        margin-bottom: 1px;
+        background: #fff;
+        border: 1px solid #eee;
+        cursor: move;
+        &:before {
+          content: "\f0c9";
+          font-family: "fontawesome";
+          position: absolute;
+          left: 6px;
+          top: 50%;
+          margin-top: -10px;
+          color: #999;
+        }
+
+        span {
+          height: 19px;
+          overflow: hidden;
+          display: block;
+          font-size: 12px;
+          display: -webkit-box;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          word-break: break-all;
+        }
+
+        i {
+          position: absolute;
+          right: 6px;
+          top: 50%;
+          margin-top: -8px;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -599,71 +726,5 @@ body.page-design {
 
   .link-dialog-footer {
 
-  }
-
-  .module-editor-tab-product-template {
-    .tab-info {
-      margin-top: 10px;
-      padding: 10px;
-      background: #f2f2f2;
-      border-radius: 6px;
-    }
-
-    .manufacturer-list {
-      > div {
-        margin-bottom: 10px;
-        border: 1px solid #f4f4f4;
-        padding: 5px;
-        border-radius: 6px;
-        background: #f4f4f4;
-        padding-bottom: 8px;
-        position: relative;
-        &:hover {
-          .remove-btn {
-            display: block;
-          }
-        }
-
-        .remove-btn {
-          position: absolute;
-          display: none;
-          top: 0;
-          right: 0;
-          background: red;
-          color: #fff;
-          z-index: 9;
-          padding: 0 2px;
-          cursor: pointer;
-          border-radius: 0 0 0 4px;
-          &:hover {
-            background: #c70000;
-          }
-        }
-      }
-    }
-
-    .add-category {
-      // margin-top: 10px;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .manufacturers {
-      .module-edit-group {
-        margin-top: 5px;
-      }
-    }
-
-    .tab-edit-category > .el-tabs__header > .el-tabs__nav-wrap {
-      .el-tabs__item {
-        padding: 0 10px !important;
-      }
-    }
-
-    .autocomplete-group-wrapper {
-      .item-group-wrapper {
-        background: #fff;
-      }
-    }
   }
 }
