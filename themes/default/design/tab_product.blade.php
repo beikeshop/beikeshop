@@ -13,14 +13,14 @@
   <div class="module-info">
     <div class="module-title">推荐商品模块</div>
     <div class="container">
-      @if ($tabs)
+      @if (isset($content['tabs']))
         <div class="nav justify-content-center mb-3">
-          @foreach ($tabs as $key => $category)
+          @foreach ($content['tabs'] as $key => $category)
           <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $key }}</a>
           @endforeach
         </div>
         <div class="tab-content">
-          @foreach ($tabs as $products)
+          @foreach ($content['tabs'] as $products)
           <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-product-{{ $loop->index }}">
             <div class="row">
               @foreach ($products as $product)
