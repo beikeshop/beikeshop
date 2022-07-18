@@ -46,7 +46,7 @@ class ProductRepo
     }
 
 
-    public static function getBuilder($data = []) :Builder
+    public static function getBuilder($data = []): Builder
     {
         $builder = Product::query()->with('description', 'skus', 'master_sku');
 
@@ -123,5 +123,30 @@ class ProductRepo
             return $product->description->name;
         }
         return '';
+    }
+
+
+    /**
+     * @param $productIds
+     * @return array
+     */
+    public static function getNames($productIds): array
+    {
+        if (empty($productIds)) {
+            return [];
+        }
+        $products = Product::query()
+            ->with(['description'])
+            ->whereIn('id', $productIds)
+            ->get();
+
+        $items = [];
+        foreach ($products as $product) {
+            $items[] = [
+                'id' => $product->id,
+                'name' => $product->description->name ?? ''
+            ];
+        }
+        return $items;
     }
 }

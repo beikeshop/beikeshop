@@ -41,6 +41,7 @@ Route::prefix($adminName)
                 Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
                 Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
                 Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
+                Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
                 Route::resource('products', Controllers\ProductController::class);
                 Route::resource('currencies', Controllers\CurrencyController::class);
 

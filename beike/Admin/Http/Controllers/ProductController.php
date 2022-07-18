@@ -99,4 +99,19 @@ class ProductController extends Controller
 
         return json_success('获取成功', $name);
     }
+
+
+    /**
+     * 根据产品ID批量获取产品名称
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function getNames(Request $request): array
+    {
+        $productIds = explode(',',$request->get('product_ids'));
+        $name = ProductRepo::getNames($productIds);
+
+        return json_success('获取成功', $name);
+    }
 }
