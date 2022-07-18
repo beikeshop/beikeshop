@@ -95,11 +95,11 @@ class AdminServiceProvider extends ServiceProvider
         $viewPath = base_path() . '/beike/Admin/View';
         $builderPath = $viewPath . '/DesignBuilders/';
 
-        $builderFolders = glob($builderPath . '*');
-        foreach ($builderFolders as $builderFolder) {
-            $folderName = basename($builderFolder, '.php');
-            $aliasName = Str::snake($folderName);
-            $componentName = Str::studly($folderName);
+        $builders = glob($builderPath . '*');
+        foreach ($builders as $builder) {
+            $builderName = basename($builder, '.php');
+            $aliasName = Str::snake($builderName);
+            $componentName = Str::studly($builderName);
             $classBaseName = "\\Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
 
             if (!class_exists($classBaseName)) {
