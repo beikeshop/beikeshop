@@ -168,8 +168,7 @@
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
-            console.log(res)
-            // $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+            $(previewWindow.document).find('.modules-box').append(res);
           })
         },
 

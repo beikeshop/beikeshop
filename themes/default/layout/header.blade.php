@@ -87,38 +87,38 @@
       </div>
     </div>
   </div>
-</header>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel" class="mx-auto mb-0">您的购物车</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="offcanvas-right-products">
-{{--       @for ($i = 0; $i < 20; $i++)
-        <div class="product-list d-flex align-items-center">
-          <div class="left"><img src="https://via.placeholder.com/140x140.png/eeeeee" calss="img-fluid"></div>
-          <div class="right flex-grow-1">
-            <div class="name fs-sm fw-bold mb-2">测试商品名称事实上</div>
-            <div class="price mb-2">22.22</div>
-            <div class="product-bottom d-flex justify-content-between align-items-center">
-              @include('shared.quantity', ['quantity' => '1'])
-              <span>删除</span>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel" class="mx-auto mb-0">您的购物车</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="offcanvas-right-products">
+  {{--       @for ($i = 0; $i < 20; $i++)
+          <div class="product-list d-flex align-items-center">
+            <div class="left"><img src="https://via.placeholder.com/140x140.png/eeeeee" calss="img-fluid"></div>
+            <div class="right flex-grow-1">
+              <div class="name fs-sm fw-bold mb-2">测试商品名称事实上</div>
+              <div class="price mb-2">22.22</div>
+              <div class="product-bottom d-flex justify-content-between align-items-center">
+                @include('shared.quantity', ['quantity' => '1'])
+                <span>删除</span>
+              </div>
             </div>
           </div>
-        </div>
-      @endfor --}}
+        @endfor --}}
+      </div>
+    </div>
+    <div class="offcanvas-footer">
+      <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
+        <strong>小计（<span class="offcanvas-right-cart-count"></span>）</strong>
+        <strong class="ms-auto offcanvas-right-cart-amount"></strong>
+      </div>
+      <div class="p-4">
+        <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">去结账</a>
+        <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">查看购物车</a>
+      </div>
     </div>
   </div>
-  <div class="offcanvas-footer">
-    <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
-      <strong>小计（<span class="offcanvas-right-cart-count"></span>）</strong>
-      <strong class="ms-auto offcanvas-right-cart-amount"></strong>
-    </div>
-    <div class="p-4">
-      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">去结账</a>
-      <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">查看购物车</a>
-    </div>
-  </div>
-</div>
+</header>
+
