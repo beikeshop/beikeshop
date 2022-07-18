@@ -133,10 +133,7 @@
       // 组件方法
       methods: {
         moduleUpdated(module) {
-          const data = {
-            module: this.editingModuleCode,
-            content: this.form.modules[this.design.editingModuleIndex].content
-          };
+          const data = this.form.modules[this.design.editingModuleIndex]
 
           $http.post('design/builder/preview', data, {hload: true}).then((res) => {
             // layer.msg(res.message)

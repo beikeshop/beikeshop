@@ -33,7 +33,7 @@
 
 @push('add-scripts')
   <script>
-    new Swiper ('.module-swiper-dasuybkdas', {
+    new Swiper ('.module-swiper-{{ $module_id }}', {
       loop: true, // 循环模式选项
       autoplay: true,
       pauseOnMouseEnter: true,
