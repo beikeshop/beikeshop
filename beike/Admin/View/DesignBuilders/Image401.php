@@ -33,12 +33,12 @@ class Image401 extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'image_401',
+            'code' => 'image401',
             'sort' => 0,
             'name' => '一行四图-pro',
             'icon' => '&#xe634;',
         ];
 
-        return view('admin::pages.design.module.image_401', $data);
+        return view('admin::pages.design.module.image401', $data);
     }
 }

@@ -1,8 +1,8 @@
 <template id="module-editor-image-401-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-title">{{ modules_content }}</div>
+    <div class="module-editor-title">内容</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">{{ modules_select_image }}</div>
+      <div class="module-edit-title">选择图片</div>
       <div class="pb-images-selector" v-for="(item, index) in module.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
@@ -15,7 +15,7 @@
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
             <pb-image-selector v-model="item.image"></pb-image-selector>
-            <div class="tag">{{ text_suggested_size }} 1060 x 380</div>
+            <div class="tag">建议尺寸: 1060 x 380</div>
           </div>
           <link-selector v-model="item.link"></link-selector>
         </div>
@@ -29,8 +29,6 @@ setTimeout(() => {
   app.source.modules.push(@json($register))
 }, 100)
 Vue.component('module-editor-image-401', {
-  delimiters: ['${', '}'],
-
   template: '#module-editor-image-401-template',
 
   props: ['module'],

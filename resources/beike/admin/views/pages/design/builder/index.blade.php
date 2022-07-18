@@ -53,6 +53,7 @@
     </div>
   </div>
 
+
   @foreach($editors as $editor)
     <x-dynamic-component :component="$editor" />
   @endforeach

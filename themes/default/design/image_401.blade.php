@@ -1,4 +1,4 @@
-<div class="column-item" id="{{ $module_id }}">
+<div class="column-item" id="">
   <div  class="container">
     <div class="module-transverse-2">
       <div class="row">

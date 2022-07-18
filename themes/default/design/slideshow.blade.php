@@ -1,3 +1,8 @@
+@push('header')
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+@endpush
+
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-dasuybkdas">
   @if ($design)
   <div class="module-edit">
@@ -24,10 +29,9 @@
       <div class="swiper-button-next"></div>
     </div>
   </div>
+</section>
 
-  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-
+@push('add-scripts')
   <script>
     new Swiper ('.module-swiper-dasuybkdas', {
       loop: true, // 循环模式选项
@@ -47,6 +51,6 @@
       },
     })
     </script>
-</section>
+  @endpush
 
 
