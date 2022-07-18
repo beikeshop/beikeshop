@@ -40,7 +40,7 @@ class DesignService
     {
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif ($moduleCode == 'image_401') {
+        } elseif ($moduleCode == 'image401') {
             return self::handleImage401($content);
         }
         return $content;
@@ -56,20 +56,12 @@ class DesignService
      */
     private static function handleSlideShow($content): array
     {
-        foreach ($content['images'] as $index => $image) {
-            $imagePath = 'catalog' . ($image['image'][current_language_code()] ?? '');
-            $content['images'][$index]['image'] = image_origin($imagePath);
-
-            $link = $image['link'];
-            if (empty($link)) {
-                continue;
-            }
-            $type = $link['type'] ?? '';
-            $value = (int)$link['value'] ?? 0;
-            if ($type && $value) {
-                $content['images'][$index]['link']['link'] = self::handleLink($type, $value);
-            }
+        $images = $content['images'];
+        if (empty($images)) {
+            return $content;
         }
+
+        $content['images'] = self::handleImages($images);
         return $content;
     }
 
@@ -83,7 +75,42 @@ class DesignService
      */
     private static function handleImage401($content): array
     {
+        $images = $content['images'];
+        if (empty($images)) {
+            return $content;
+        }
+
+        $content['images'] = self::handleImages($images);
         return $content;
+    }
+
+
+    /**
+     * 处理图片以及链接
+     * @throws \Exception
+     */
+    private static function handleImages($images): array
+    {
+        if (empty($images)) {
+            return [];
+        }
+
+        foreach ($images as $index => $image) {
+            $imagePath = 'catalog/' . ($image['image'][current_language_code()] ?? '');
+            $images[$index]['image'] = image_origin($imagePath);
+
+            $link = $image['link'];
+            if (empty($link)) {
+                continue;
+            }
+
+            $type = $link['type'] ?? '';
+            $value = (int)$link['value'] ?? 0;
+            if ($type && $value) {
+                $images[$index]['link']['link'] = self::handleLink($type, $value);
+            }
+        }
+        return $images;
     }
 
 

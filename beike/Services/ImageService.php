@@ -29,9 +29,6 @@ class ImageService
     {
         $this->image = $image ?: self::PLACEHOLDER_IMAGE;
         $imagePath = public_path($this->image);
-        if (!file_exists($imagePath)) {
-            throw new \Exception("图片不存在");
-        }
         $this->imagePath = $imagePath;
     }
 
