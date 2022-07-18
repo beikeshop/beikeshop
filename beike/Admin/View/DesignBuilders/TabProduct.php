@@ -14,7 +14,7 @@ namespace Beike\Admin\View\DesignBuilders;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class Product extends Component
+class TabProduct extends Component
 {
     /**
      * Create a new component instance.
@@ -35,10 +35,10 @@ class Product extends Component
         $data['register'] = [
             'code' => 'product',
             'sort' => 0,
-            'name' => '推荐商品',
+            'name' => '选项卡商品',
             'icon' => '&#xe634;',
         ];
 
-        return view('admin::pages.design.module.product', $data);
+        return view('admin::pages.design.module.tab_product', $data);
     }
 }

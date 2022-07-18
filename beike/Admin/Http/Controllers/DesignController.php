@@ -19,7 +19,7 @@ class DesignController extends Controller
     public function index(Request $request): View
     {
         $data = [
-            'editors' => ['editor-slide_show', 'editor-image401', 'editor-product'],
+            'editors' => ['editor-slide_show', 'editor-image401', 'editor-tab_product'],
             'languages' => LanguageRepo::all(),
             'design_settings' => system_setting('base.design_setting'),
         ];
