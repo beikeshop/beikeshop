@@ -33,7 +33,7 @@ class TabProduct extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'product',
+            'code' => 'tab_product',
             'sort' => 0,
             'name' => '选项卡商品',
             'icon' => '&#xe634;',

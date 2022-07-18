@@ -132,33 +132,34 @@ Vue.component('module-editor-product-tab', {
       if (!this.module.tabs[0].products.length) return;
       this.loading = true;
 
-      $.ajax({
-        url: 'index.php?route=extension/theme/default/page/module/product/productsByIds',
-        data: {product_ids: this.module.tabs[this.editableTabsValue].products},
-        type: 'post',
-        dataType: 'json',
-        success: function (json) {
-          if (json) {
-            that.loading = false;
-            that.productData = json;
-          }
-        }
-      });
+      http://beike.test/panel/products/names?product_ids=1,2,3
+
+      $http.get('panel/products/names', {product_ids: this.module.tabs[this.editableTabsValue].products}, {hload: true}).then((res) => {
+        console.log(res)
+      })
+
+      // $.ajax({
+      //   url: 'index.php?route=extension/theme/default/page/module/product/productsByIds',
+      //   data: {product_ids: this.module.tabs[this.editableTabsValue].products},
+      //   type: 'post',
+      //   dataType: 'json',
+      //   success: function (json) {
+      //     if (json) {
+      //       that.loading = false;
+      //       that.productData = json;
+      //     }
+      //   }
+      // });
     },
 
     querySearch(keyword, cb) {
       if (!keyword) {
         return;
       }
-      $.ajax({
-        url: 'index.php?route=extension/theme/default/page/module/product/autocomplete&filter_name=' + encodeURIComponent(keyword),
-        dataType: 'json',
-        success: function (json) {
-          if (json) {
-            cb(json);
-          }
-        }
-      });
+
+      $http.get('products/autocomplete', {name: keyword}, null).then((res) => {
+        cb(res);
+      })
     },
 
     handleSelect(item) {
@@ -195,4 +196,20 @@ Vue.component('module-editor-product-tab', {
     }
   }
 });
+
+setTimeout(() => {
+  const make = {
+    style: {
+      background_color: ''
+    },
+    floor: languagesFill(''),
+    tabs: [{title: languagesFill('标题'), products: []}],
+    title: languagesFill('模块标题'),
+  }
+
+  let register = @json($register);
+
+  register.make = make;
+  app.source.modules.push(register)
+}, 100)
 </script>
