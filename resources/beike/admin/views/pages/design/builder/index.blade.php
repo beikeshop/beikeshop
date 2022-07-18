@@ -105,6 +105,7 @@
 
   @include('admin::pages.design.builder.component.image_selector')
   @include('admin::pages.design.builder.component.link_selector')
+  @include('admin::pages.design.builder.component.text_i18n')
 
   <script>
     let app = new Vue({
@@ -160,16 +161,26 @@
 
         addModuleButtonClicked(code) {
           const sourceModule = this.source.modules.find(e => e.code == code)
+          const module_id = randomString(16)
           const _data = {
             code: code,
             content: sourceModule.make,
-            module_id: randomString(16),
+            module_id: module_id,
             name: sourceModule.name,
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
             $(previewWindow.document).find('.modules-box').append(res);
             this.form.modules.push(_data);
+            this.design.editingModuleIndex = this.form.modules.length - 1;
+            this.design.editType = 'module';
+
+
+            setTimeout(() => {
+              $(previewWindow.document).find("html, body").animate({
+                scrollTop: $(previewWindow.document).find('#module-' + module_id).offset().top - 30
+              }, 50);
+            }, 200)
           })
         },
 

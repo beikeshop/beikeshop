@@ -14,8 +14,8 @@
     <div class="container">
       @if ($content['tabs'])
         <div class="nav justify-content-center mb-3">
-          @foreach ($content['tabs'] as $key => $title)
-          <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $key }}</a>
+          @foreach ($content['tabs'] as $key => $tabs)
+          <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
           @endforeach
         </div>
         <div class="tab-content">

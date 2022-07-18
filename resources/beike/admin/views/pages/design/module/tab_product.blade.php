@@ -1,35 +1,12 @@
-<template id="module-editor-product-tab-template">
-  <div class="module-editor-product-tab-template">
-    <div class="module-editor-title">设置</div>
+<template id="module-editor-tab-product-template">
+  <div class="module-editor-tab-product-template">
+    <div class="module-editor-row">设置</div>
     <div class="module-edit-group">
       <div class="module-edit-title">模块标题</div>
       <text-i18n v-model="module.title"></text-i18n>
     </div>
 
-    <div class="module-editor-title">内容</div>
-    <div class="module-edit-group">
-      <div class="module-edit-title">选择图片</div>
-      <div class="pb-images-selector">
-        <div class="selector-head">
-          <div class="left">
-            <img :src="thumbnail(module.image.image[{{ current_language_code() }}], 40, 40)" class="img-responsive">
-          </div>
-
-          <div class="right"><i :class="'fa fa-angle-'+(module.image.show ? 'up' : 'down')"></i></div>
-        </div>
-        <div :class="'pb-images-list ' + (module.image.show ? 'active' : '')">
-          <div class="pb-images-top">
-            <div class="pb-image-selector-wrapper">
-              <pb-image-selector v-model="module.image.image"></pb-image-selector>
-              <div class="tag">建议尺寸: 440 x 1022</div>
-            </div>
-          </div>
-
-          <link-selector v-model="module.image.link"></link-selector>
-        </div>
-      </div>
-    </div>
-
+    <div class="module-editor-row">内容</div>
     <div class="module-edit-group">
       <div class="module-edit-title">配置商品</div>
       <el-tabs v-model="editableTabsValue" class="tab-edit-category" type="card" editable @edit="handleTabsEdit">
@@ -88,9 +65,9 @@
 </template>
 
 <script type="text/javascript">
-Vue.component('module-editor-product-tab', {
+Vue.component('module-editor-tab-product', {
   delimiters: ['${', '}'],
-  template: '#module-editor-product-tab-template',
+  template: '#module-editor-tab-product-template',
   props: ['module'],
   data: function () {
     return {
@@ -123,7 +100,7 @@ Vue.component('module-editor-product-tab', {
 
   methods: {
     tabTitleLanguage(titles) {
-      return titles[{{ current_language_code() }}];
+      return titles['{{ current_language_code() }}'];
     },
 
     tabsValueProductData() {

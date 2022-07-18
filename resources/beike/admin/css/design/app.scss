@@ -600,4 +600,70 @@ body.page-design {
   .link-dialog-footer {
 
   }
+
+  .module-editor-tab-product-template {
+    .tab-info {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f2f2f2;
+      border-radius: 6px;
+    }
+
+    .manufacturer-list {
+      > div {
+        margin-bottom: 10px;
+        border: 1px solid #f4f4f4;
+        padding: 5px;
+        border-radius: 6px;
+        background: #f4f4f4;
+        padding-bottom: 8px;
+        position: relative;
+        &:hover {
+          .remove-btn {
+            display: block;
+          }
+        }
+
+        .remove-btn {
+          position: absolute;
+          display: none;
+          top: 0;
+          right: 0;
+          background: red;
+          color: #fff;
+          z-index: 9;
+          padding: 0 2px;
+          cursor: pointer;
+          border-radius: 0 0 0 4px;
+          &:hover {
+            background: #c70000;
+          }
+        }
+      }
+    }
+
+    .add-category {
+      // margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .manufacturers {
+      .module-edit-group {
+        margin-top: 5px;
+      }
+    }
+
+    .tab-edit-category > .el-tabs__header > .el-tabs__nav-wrap {
+      .el-tabs__item {
+        padding: 0 10px !important;
+      }
+    }
+
+    .autocomplete-group-wrapper {
+      .item-group-wrapper {
+        background: #fff;
+      }
+    }
+  }
 }

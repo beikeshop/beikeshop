@@ -499,3 +499,49 @@ body.page-design .pb-images-selector .pb-images-list .el-input-group__prepend {
   background-color: #f6f6f6;
   padding: 10px 20px;
 }
+.link-dialog-box .module-editor-tab-product-template .tab-info {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f2f2f2;
+  border-radius: 6px;
+}
+.link-dialog-box .module-editor-tab-product-template .manufacturer-list > div {
+  margin-bottom: 10px;
+  border: 1px solid #f4f4f4;
+  padding: 5px;
+  border-radius: 6px;
+  background: #f4f4f4;
+  padding-bottom: 8px;
+  position: relative;
+}
+.link-dialog-box .module-editor-tab-product-template .manufacturer-list > div:hover .remove-btn {
+  display: block;
+}
+.link-dialog-box .module-editor-tab-product-template .manufacturer-list > div .remove-btn {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: 0;
+  background: red;
+  color: #fff;
+  z-index: 9;
+  padding: 0 2px;
+  cursor: pointer;
+  border-radius: 0 0 0 4px;
+}
+.link-dialog-box .module-editor-tab-product-template .manufacturer-list > div .remove-btn:hover {
+  background: #c70000;
+}
+.link-dialog-box .module-editor-tab-product-template .add-category {
+  display: flex;
+  justify-content: flex-end;
+}
+.link-dialog-box .module-editor-tab-product-template .manufacturers .module-edit-group {
+  margin-top: 5px;
+}
+.link-dialog-box .module-editor-tab-product-template .tab-edit-category > .el-tabs__header > .el-tabs__nav-wrap .el-tabs__item {
+  padding: 0 10px !important;
+}
+.link-dialog-box .module-editor-tab-product-template .autocomplete-group-wrapper .item-group-wrapper {
+  background: #fff;
+}
