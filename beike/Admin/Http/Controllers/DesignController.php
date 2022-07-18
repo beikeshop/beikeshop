@@ -35,10 +35,20 @@ class DesignController extends Controller
      */
     public function preview(Request $request): View
     {
-        $moduleName = $request->get('module');
-        $content = $request->get('content');
-        $viewPath = "design.{$moduleName}";
-        return view($viewPath, $content);
+        $module = json_decode($request->getContent(), true);
+        $moduleId = $module['module_id'] ?? '';
+        $moduleCode = $module['code'] ?? '';
+        $content = $module['content'] ?? '';
+        $viewPath = "design.{$moduleCode}";
+
+        $viewData = [
+            'code' => $moduleCode,
+            'module_id' => $moduleId,
+            'view_path' => $viewPath,
+            'content' => DesignService::handleModuleContent($moduleCode, $content)
+        ];
+
+        return view($viewPath, $viewData);
     }
 
 
