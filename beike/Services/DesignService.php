@@ -11,6 +11,7 @@
 
 namespace Beike\Services;
 
+use Beike\Repositories\ProductRepo;
 use Illuminate\Support\Str;
 
 class DesignService
@@ -42,6 +43,8 @@ class DesignService
             return self::handleSlideShow($content);
         } elseif ($moduleCode == 'image401') {
             return self::handleImage401($content);
+        } elseif ($moduleCode == 'tab_product') {
+            return self::handleTabProducts($content);
         }
         return $content;
     }
@@ -81,6 +84,31 @@ class DesignService
         }
 
         $content['images'] = self::handleImages($images);
+        return $content;
+    }
+
+
+    /**
+     * 处理选项卡商品列表模块
+     *
+     * @param $content
+     * @return array
+     */
+    private static function handleTabProducts($content): array
+    {
+        $tabs = $content['tabs'] ?? [];
+        if (empty($tabs)) {
+            return [];
+        }
+
+        foreach ($tabs as $index => $tab) {
+            $tabs[$index]['title'] = $tab['title'][current_language_code()];
+            $productsIds = $tab['products'];
+            if ($productsIds) {
+                $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds);
+            }
+        }
+        $content['tabs'] = $tabs;
         return $content;
     }
 

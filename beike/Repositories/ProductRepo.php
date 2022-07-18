@@ -12,8 +12,10 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Product;
-use Beike\Shop\Http\Resources\ProductList;
 use Illuminate\Database\Eloquent\Builder;
+use Beike\Shop\Http\Resources\ProductList;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductRepo
@@ -46,7 +48,27 @@ class ProductRepo
     }
 
 
-    public static function getBuilder($data = []): Builder
+    /**
+     * 通过产品ID获取产品列表
+     * @param $productIds
+     * @return AnonymousResourceCollection
+     */
+    public static function getProductsByIds($productIds): AnonymousResourceCollection
+    {
+        $builder = self::getBuilder(['product_ids' => $productIds]);
+        $products = $builder->get();
+        $items = ProductList::collection($products);
+        return $items;
+    }
+
+
+    /**
+     * 获取产品筛选对象
+     *
+     * @param array $data
+     * @return Builder
+     */
+    public static function getBuilder(array $data = []): Builder
     {
         $builder = Product::query()->with('description', 'skus', 'master_sku');
 
@@ -59,6 +81,11 @@ class ProductRepo
                 }
             });
         }
+
+        if (isset($data['product_ids'])) {
+            $builder->whereIn('id', $data['product_ids']);
+        }
+
         if (isset($data['sku']) || isset($data['model'])) {
             $builder->whereHas('skus', function ($query) use ($data) {
                 if (isset($data['sku'])) {
@@ -70,16 +97,19 @@ class ProductRepo
 
             });
         }
+
         if (isset($data['model'])) {
             $builder->whereHas('skus', function ($query) use ($data) {
                 $query->where('sku', 'like', "%{$data['sku']}%");
             });
         }
+
         if (isset($data['name'])) {
             $builder->whereHas('description', function ($query) use ($data) {
                 $query->where('name', 'like', "%{$data['name']}%");
             });
         }
+
         if (isset($data['active'])) {
             $builder->where('active', (int)$data['active']);
         }
@@ -113,7 +143,7 @@ class ProductRepo
     /**
      * 获取商品名称
      * @param $id
-     * @return \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed|string
+     * @return HigherOrderBuilderProxy|mixed|string
      */
     public static function getName($id)
     {
@@ -132,6 +162,22 @@ class ProductRepo
      */
     public static function getNames($productIds): array
     {
+        $products = self::getListByProductIds($productIds);
+        return $products->map(function ($product) {
+            return [
+                'id' => $product->id,
+                'name' => $product->description->name ?? ''
+            ];
+        })->toArray();
+    }
+
+
+    /**
+     * 通过产品ID获取产品列表
+     * @return array|Builder[]|Collection
+     */
+    public static function getListByProductIds($productIds)
+    {
         if (empty($productIds)) {
             return [];
         }
@@ -139,12 +185,6 @@ class ProductRepo
             ->with(['description'])
             ->whereIn('id', $productIds)
             ->get();
-
-        return $products->map(function ($product) {
-            return [
-                'id' => $product->id,
-                'name' => $product->description->name ?? ''
-            ];
-        })->toArray();
+        return $products;
     }
 }
