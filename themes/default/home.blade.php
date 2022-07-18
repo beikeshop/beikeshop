@@ -4,7 +4,7 @@
 
 
 @foreach($modules as $module)
-  @include($module['view_path'], $module['content'])
+  @include($module['view_path'], $module)
 @endforeach
 
 {{-- <script>

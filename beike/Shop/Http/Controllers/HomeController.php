@@ -2,6 +2,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
+use Beike\Services\DesignService;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -27,7 +28,7 @@ class HomeController extends Controller
                     'code' => $code,
                     'module_id' => $moduleId,
                     'view_path' => $viewPath,
-                    'content' => $content
+                    'content' => DesignService::handleModuleContent($code, $content)
                 ];
             }
         }

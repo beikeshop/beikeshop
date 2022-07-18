@@ -4,9 +4,9 @@ namespace Beike\Admin\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Beike\Services\DesignService;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\LanguageRepo;
-use Beike\Admin\Services\DesignService;
 
 class DesignController extends Controller
 {
@@ -52,7 +52,7 @@ class DesignController extends Controller
     public function update(Request $request): array
     {
         $content = json_decode($request->getContent(), true);
-        $moduleData = DesignService::handleModules($content);
+        $moduleData = DesignService::handleRequestModules($content);
         $data = [
             'type' => 'system',
             'space' => 'base',

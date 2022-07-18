@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
 @endpush
 
-<section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-dasuybkdas">
+<section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @if ($design)
   <div class="module-edit">
     <div class="edit-wrap">
@@ -15,7 +15,7 @@
   </div>
   @endif
   <div class="module-info">
-    <div class="swiper module-swiper-dasuybkdas module-slideshow">
+    <div class="swiper module-swiper-{{ $module_id }} module-slideshow">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <a href=""><img src="{{ asset('image/default/banner.png') }}" class="img-fluid"></a>
@@ -50,7 +50,7 @@
         prevEl: '.swiper-button-prev',
       },
     })
-    </script>
-  @endpush
+  </script>
+@endpush
 
 

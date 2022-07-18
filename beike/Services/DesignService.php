@@ -9,13 +9,13 @@
  * @modified   2022-07-14 20:57:37
  */
 
-namespace Beike\Admin\Services;
+namespace Beike\Services;
 
 use Illuminate\Support\Str;
 
 class DesignService
 {
-    public static function handleModules($modulesData): array
+    public static function handleRequestModules($modulesData): array
     {
         $modulesData = $modulesData['modules'];
         if (empty($modulesData)) {
@@ -30,5 +30,20 @@ class DesignService
             $modulesData[$index] = $moduleData;
         }
         return ['modules' => $modulesData];
+    }
+
+
+    public static function handleModuleContent($moduleCode, $content)
+    {
+        if ($moduleCode == 'slideshow') {
+            return self::handleSlideShow($content);
+        }
+        return $content;
+    }
+
+
+    private static function handleSlideShow($content)
+    {
+        return $content;
     }
 }
