@@ -3,11 +3,9 @@
 @section('content')
 
 
-{{--@foreach($renders as $render)--}}
-{{--  <x-dynamic-component :component="$render"/>--}}
-{{--@endforeach--}}
-
-{!! $html !!}
+@foreach($modules as $module)
+  @include($module['view_path'], $module['content'])
+@endforeach
 
 {{-- <script>
   $(function() {
