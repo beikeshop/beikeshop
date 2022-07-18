@@ -163,12 +163,13 @@
           const _data = {
             code: code,
             content: sourceModule.make,
-            module_id: '',
+            module_id: randomString(16),
             name: sourceModule.name,
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
             $(previewWindow.document).find('.modules-box').append(res);
+            this.form.modules.push(_data);
           })
         },
 
