@@ -42,6 +42,8 @@ class DesignService
     {
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
+        } elseif ($moduleCode == 'image_401') {
+            return self::handleImage401($content);
         }
         return $content;
     }
@@ -70,6 +72,19 @@ class DesignService
                 $content['images'][$index]['link']['link'] = self::handleLink($type, $value);
             }
         }
+        return $content;
+    }
+
+
+    /**
+     * 处理 SlideShow 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleImage401($content): array
+    {
         return $content;
     }
 
