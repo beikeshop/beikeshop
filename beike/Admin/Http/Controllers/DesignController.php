@@ -32,6 +32,7 @@ class DesignController extends Controller
      *
      * @param Request $request
      * @return View
+     * @throws \Exception
      */
     public function preview(Request $request): View
     {
@@ -45,7 +46,8 @@ class DesignController extends Controller
             'code' => $moduleCode,
             'module_id' => $moduleId,
             'view_path' => $viewPath,
-            'content' => DesignService::handleModuleContent($moduleCode, $content)
+            'content' => DesignService::handleModuleContent($moduleCode, $content),
+            'design' => (bool)$request->get('design')
         ];
 
         return view($viewPath, $viewData);
