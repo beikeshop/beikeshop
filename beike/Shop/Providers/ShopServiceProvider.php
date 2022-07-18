@@ -32,8 +32,10 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->app->bind('view.finder', function ($app) {
             $paths = $app['config']['view.paths'];
-            $customTheme[] = base_path('themes/black');
-            $paths = array_merge($customTheme, $paths);
+            if ($theme = setting('base.theme')) {
+                $customTheme[] = base_path("themes/{$theme}");
+                $paths = array_merge($customTheme, $paths);
+            }
             return new FileViewFinder($app['files'], $paths);
         });
 
