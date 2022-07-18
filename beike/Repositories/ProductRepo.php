@@ -140,13 +140,11 @@ class ProductRepo
             ->whereIn('id', $productIds)
             ->get();
 
-        $items = [];
-        foreach ($products as $product) {
-            $items[] = [
+        return $products->map(function ($product) {
+            return [
                 'id' => $product->id,
                 'name' => $product->description->name ?? ''
             ];
-        }
-        return $items;
+        })->toArray();
     }
 }
