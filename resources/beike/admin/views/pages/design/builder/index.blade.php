@@ -167,9 +167,9 @@
             name: sourceModule.name,
           }
 
-          $http.post('design/builder', _data).then((res) => {
-            // layer.msg(res.message)
-            // $(previewWindow.document).find('#module-' + data.module_id + ' .module-info').replaceWith(res);
+          $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
+            console.log(res)
+            // $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
           })
         },
 
