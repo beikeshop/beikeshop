@@ -11,6 +11,8 @@
 
 namespace Beike\Services;
 
+use Beike\Models\Product;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Support\Str;
 
 class DesignService
@@ -42,8 +44,47 @@ class DesignService
     }
 
 
-    private static function handleSlideShow($content)
+    /**
+     * 处理 SlideShow 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleSlideShow($content): array
     {
+        foreach ($content['images'] as $index => $image) {
+            $content['images'][$index]['image'] = image_resize($image[current_language_code()] ?? '');
+
+            $link = $image['link'];
+            if (empty($link)) {
+                continue;
+            }
+            $type = $link['type'] ?? '';
+            $value = (int)$link['value'] ?? 0;
+            if ($type && $value) {
+                $content['images'][$index]['link']['link'] = self::handleLink($type, $value);
+            }
+        }
         return $content;
+    }
+
+
+    /**
+     * 处理链接
+     *
+     * @param $type
+     * @param $value
+     * @return string
+     */
+    private static function handleLink($type, $value): string
+    {
+        if ($type == 'product') {
+            return shop_route('products.show', ['product' => $value]);
+        }
+        if ($type == 'category') {
+            return shop_route('categories.show', ['category' => $value]);
+        }
+        return '';
     }
 }

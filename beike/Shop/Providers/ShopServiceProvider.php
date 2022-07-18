@@ -18,6 +18,8 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
+
         $uri = request()->getRequestUri();
         load_settings();
 
@@ -25,7 +27,6 @@ class ShopServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->registerGuard();
 
