@@ -1,3 +1,4 @@
+@charset "UTF-8";
 [v-cloak] {
   display: none;
 }
@@ -6,6 +7,14 @@ body.page-filemanager {
   height: 100vh;
   overflow: hidden;
   font-size: 12px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  /* CSS3属性 */
+}
+body.page-filemanager [class*=" el-icon-"], body.page-filemanager [class^=el-icon-] {
+  font-weight: 600;
 }
 body.page-filemanager .filemanager-wrap {
   display: flex;
@@ -16,6 +25,15 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar {
   width: 20%;
   background-color: #293042;
   overflow-y: auto;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar::-webkit-scrollbar {
+  width: 2px;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar::-webkit-scrollbar-thumb {
+  background: #409EFF;
+}
+body.page-filemanager .filemanager-wrap .filemanager-navbar::-webkit-scrollbar-track {
+  background: transparent;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree {
   background-color: transparent;
@@ -139,7 +157,6 @@ body.page-filemanager .filemanager-wrap .filemanager-content .content-center .im
 body.page-filemanager .filemanager-wrap .filemanager-content .content-center .image-list .text .el-icon-check {
   color: #409EFF;
   font-size: 18px;
-  font-weight: 600;
 }
 body.page-filemanager .filemanager-wrap .filemanager-content .content-footer {
   height: 56px;

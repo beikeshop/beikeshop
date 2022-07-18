@@ -115,9 +115,9 @@
                 that.loading = false;
 
                 if (that.isLanguage) {
-                  that.src[that.tabActiveId] = images.path;
+                  that.src[that.tabActiveId] = images[0].path;
                 } else {
-                  that.src = images.path;
+                  that.src = images[0].path;
                 }
                 // console.log(that.src);
               }

@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <base href="{{ $admin_base_url }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <script src="{{ asset('vendor/vue/2.6.12/vue.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
+  <script src="{{ asset('vendor/vue/batch_select.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.9/index.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>beike filemanager</title>
 </head>
 <body class="page-filemanager">
@@ -54,15 +56,16 @@
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
         <div class="left">
-          <el-link :underline="false" :disabled="editingImageIndex === null" icon="el-icon-download">下载</el-link>
-          <el-link :underline="false" :disabled="editingImageIndex === null" @click="deleteFile" icon="el-icon-delete">删除</el-link>
-          <el-link :underline="false" :disabled="editingImageIndex === null" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
+          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download" @click="downloadImages">下载</el-link>
+          <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile" icon="el-icon-delete">删除</el-link>
+          <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true" @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
+          <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()" icon="el-icon-finished">全选</el-link>
         </div>
         <div class="right">
           <el-button size="small" type="primary" @click="openUploadFile" icon="el-icon-upload2">上传文件</el-button>
         </div>
       </div>
-      <div class="content-center">
+      <div class="content-center" v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
         <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index" @click="checkedImage(index)">
           <div class="img"><img :src="file.url"></div>
           <div class="text">
@@ -81,7 +84,7 @@
             :total="image_total">
           </el-pagination>
         </div>
-        <div class="right"><el-button size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="editingImageIndex === null">选择</el-button></div>
+        <div class="right"><el-button size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">选择</el-button></div>
       </div>
     </div>
 
@@ -133,10 +136,13 @@
       max: 40,
       paneLengthPercent: 26,
       triggerLength: 10,
+      isShift: false,
 
+      ssss:[],
       loading: false,
+      isBatchSelect: false,
 
-      editingImageIndex: null,
+      selectImageIndex: [],
 
       treeData: [{name: '图片空间', path: '/', children: @json($folders)}],
 
@@ -145,6 +151,7 @@
         label: 'name',
         isLeaf: 'leaf'
       },
+      selectIdxs: [],
 
       uploadFileDialog: {
         show: false,
@@ -168,7 +175,20 @@
     },
     // 侦听器
     watch: {
+      images: {
+        handler(val) {
+          if (this.isBatchSelect) return;
+          // 将选中的图片索引放入 selectImageIndex，未选中则清空
+          this.selectImageIndex = val.filter(item => item.selected).map(e => this.images.indexOf(e));
+        },
+        deep: true
+      },
 
+      selectImageIndex(indexs) {
+        this.images.forEach((item, index) => {
+          item.selected = indexs.includes(index);
+        });
+      },
     },
     // 组件方法
     methods: {
@@ -179,6 +199,10 @@
         this.folderCurrent = e.path
         this.image_page = 1;
         this.loadData(e, node)
+      },
+
+      updateSelectStatus(status) {
+        this.isBatchSelect = status
       },
 
       pageCurrentChange(e) {
@@ -298,13 +322,32 @@
       },
 
       checkedImage(index) {
-        this.editingImageIndex = index;
-        this.images.map(e => !e.index ? e.selected = false : '')
+        // 获取当前选中的 index
+        const selectedIndex = this.images.findIndex(e => e.selected);
+
+        if (this.isShift) {
+          // 获取 selectedIndex 与 index 之间的所有图片
+          let selectedImages = this.images.slice(Math.min(selectedIndex, index), Math.max(selectedIndex, index) + 1);
+          selectedImages.map(e => e.selected = true)
+          return;
+        }
+
+        if (this.isCtrl) {
+          this.images[index].selected = !this.images[index].selected;
+          return;
+        }
+
+        if (this.selectImageIndex.length > 1) {
+          this.images.map((e,i) => i != index ? e.selected = false : e.selected = true)
+          return;
+        }
+
+        this.images.map((e,i) => i != index ? e.selected = false : '')
         this.images[index].selected = !this.images[index].selected
       },
 
       fileChecked() {
-        let typedFiles = this.images[this.editingImageIndex];
+        let typedFiles = this.images.filter(e => e.selected)
 
         if (callback !== null) {
           callback(typedFiles);
@@ -319,7 +362,10 @@
         this.$confirm('是否要删除选中文件', '提示', {
           type: 'warning'
         }).then(() => {
-          this.images.splice(this.editingImageIndex, 1);
+          // 删除选中的文件
+          console.log(this.selectImageIndex);
+
+          // this.images.splice(this.selectImageIndex, 1);
           this.$message({type: 'success',message: '删除成功!'});
         }).catch(_=>{});
       },
@@ -340,13 +386,34 @@
         }
       },
 
+      selectAll() {
+        // 获取 this.images 中的 selected 是否全部为 true
+        const isAllSelected = this.images.every(e => e.selected);
+        this.images.map(e => e.selected = !isAllSelected)
+      },
+
+      downloadImages() {
+        // 获取选中的图片
+        const selectedImages = this.images.filter(e => e.selected);
+        // 创建 a 标签
+        selectedImages.forEach(e => {
+          const a = document.createElement('a');
+          // 设置 a 标签的 href 属性
+          a.href = e.origin_url;
+          // 设置 a 标签的 download 属性
+          a.download = e.name;
+          // 触发 a 标签的 click 事件
+          a.click();
+        });
+      },
+
       openInputBox(type, node, data) {
         this.$prompt('', type == 'addFolder' ? '新建文件夹' : '重命名', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^.+$/,
           closeOnClickModal: false,
-          inputValue: type == 'image' ? this.images[this.editingImageIndex].name : (type == 'renameFolder' ? data.name : '新建文件夹'),
+          inputValue: type == 'image' ? this.images[this.selectImageIndex].name : (type == 'renameFolder' ? data.name : '新建文件夹'),
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
 
@@ -396,10 +463,7 @@
         }
       }
     },
-    // 在实例初始化之后，组件属性计算之前，如data属性等
-    beforeCreate () {
-    },
-    // 在实例创建完成后被立即同步调用
+
     created () {
       const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
 
@@ -407,22 +471,31 @@
         // this.defaultkeyarr = defaultkeyarr.split(',');
       }
     },
-    // 在挂载开始之前被调用:相关的 render 函数首次被调用
-    beforeMount () {
-    },
     // 实例被挂载后调用
     mounted () {
+      // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
+      document.addEventListener('keydown', (e) => {
+        this.isShift = e.shiftKey;
+        this.isCtrl = e.ctrlKey || e.metaKey;
+      })
+
+      // 获取键盘事件 是否松开 shift/ctrl 键
+      document.addEventListener('keyup', (e) => {
+        this.isShift = e.shiftKey;
+        this.isCtrl = e.ctrlKey || e.metaKey;
+      })
+
+      // 判断鼠标是否点击 .image-list 元素
+      document.addEventListener('click', (e) => {
+        if (this.isBatchSelect) return;
+        const targets = ['filemanager-navbar', 'content-center']
+        if (targets.indexOf(e.target.className) > -1) {
+          this.selectImageIndex = [];
+          this.images.map(e => e.selected = false)
+        }
+      })
     },
   })
-
-  $(document).ready(function() {
-    $(document).on('click', function (e) {
-      if ($(e.target).closest('.content-center .image-list, .content-head, .content-footer, .el-message-box').length === 0) {
-        app.editingImageIndex = null;
-        app.images.map(e => e.selected = false)
-      }
-    })
-  });
   </script>
 </body>
 </html>

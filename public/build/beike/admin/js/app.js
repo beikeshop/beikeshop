@@ -2102,17 +2102,18 @@ __webpack_require__.r(__webpack_exports__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+var token = document.querySelector('meta[name="csrf-token"]').content;
+var base = document.querySelector('base').href;
 var instance = axios.create({
   headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    'X-CSRF-TOKEN': token
   }
 });
 axios.defaults.timeout = 5000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
 // console.log(process.env.VUE_APP_BASE_URL)
 
-console.log($('base').attr('href'));
-axios.defaults.baseURL = $('base').attr('href');
+axios.defaults.baseURL = base;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /**
    * get 请求

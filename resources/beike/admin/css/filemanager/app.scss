@@ -11,6 +11,11 @@ body.page-filemanager {
   height: 100vh;
   overflow: hidden;
   font-size: 12px;
+  user-select:none; /* CSS3属性 */
+
+  [class*=" el-icon-"], [class^=el-icon-] {
+    font-weight: 600;
+  }
 
   .filemanager-wrap {
     display: flex;
@@ -21,6 +26,18 @@ body.page-filemanager {
       width: 20%;
       background-color: #293042;
       overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $primary;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
 
       .el-tree {
         background-color: transparent;
@@ -206,7 +223,6 @@ body.page-filemanager {
             .el-icon-check {
               color: $primary;
               font-size: 18px;
-              font-weight: 600;
             }
           }
         }

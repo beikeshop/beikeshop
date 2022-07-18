@@ -1,14 +1,16 @@
 window.axios = require('axios');
 
+const token = document.querySelector('meta[name="csrf-token"]').content;
+const base = document.querySelector('base').href;
+
 const instance = axios.create({
-  headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+  headers: {'X-CSRF-TOKEN': token},
 });
 
 axios.defaults.timeout = 5000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
 // console.log(process.env.VUE_APP_BASE_URL)
-console.log($('base').attr('href'))
-axios.defaults.baseURL = $('base').attr('href');
+axios.defaults.baseURL = base;
 export default {
   /**
    * get 请求
