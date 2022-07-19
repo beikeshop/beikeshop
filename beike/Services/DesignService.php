@@ -43,6 +43,8 @@ class DesignService
             return self::handleSlideShow($content);
         } elseif ($moduleCode == 'image401') {
             return self::handleImage401($content);
+        } elseif ($moduleCode == 'image100') {
+            return self::handleImage401($content);
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
         }
@@ -84,6 +86,7 @@ class DesignService
         }
 
         $content['images'] = self::handleImages($images);
+        $content['full'] = $content['full'] ?? false;
         return $content;
     }
 
@@ -109,6 +112,7 @@ class DesignService
             }
         }
         $content['tabs'] = $tabs;
+        $content['title'] = $content['title'][current_language_code()];
         return $content;
     }
 
@@ -138,6 +142,7 @@ class DesignService
                 $images[$index]['link']['link'] = self::handleLink($type, $value);
             }
         }
+
         return $images;
     }
 

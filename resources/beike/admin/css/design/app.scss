@@ -49,9 +49,10 @@ body.page-design {
         text-align: center;
         font-size: .8rem;
         transition: all .2s ease-in-out;
+        border-right: 1px solid #5692ff;
 
-        &.save-btn {
-          border-left: 1px solid #5692ff;
+        &:last-of-type {
+          border-right: none;
         }
 
         i {

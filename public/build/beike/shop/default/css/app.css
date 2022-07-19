@@ -852,6 +852,10 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
   background-color: #eb4802;
 }
 
+.module-image-plus .container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
 .module-image-plus .module-image-plus-top {
   display: flex;
 }

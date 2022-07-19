@@ -56,9 +56,10 @@ body.page-design .design-box .design-head > div {
   text-align: center;
   font-size: 0.8rem;
   transition: all 0.2s ease-in-out;
+  border-right: 1px solid #5692ff;
 }
-body.page-design .design-box .design-head > div.save-btn {
-  border-left: 1px solid #5692ff;
+body.page-design .design-box .design-head > div:last-of-type {
+  border-right: none;
 }
 body.page-design .design-box .design-head > div i {
   margin-right: 7px;

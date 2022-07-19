@@ -21,6 +21,7 @@ class Header extends Component
         $this->addLink('会员管理', admin_route('customers.index'), equal_route('admin.customers.index'));
         // $this->addLink('营销管理', admin_route('home.index'), equal_route('admin.promotions.index'));
         $this->addLink('插件管理', admin_route('plugins.index'), equal_route('admin.plugins.index'));
+        $this->addLink('首页装修', admin_route('design.index'), equal_route('admin.design.index'));
         $this->addLink('系统设置', admin_route('home.index'), equal_route('admin.settings.index'));
     }
 

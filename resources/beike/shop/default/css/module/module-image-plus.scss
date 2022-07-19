@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
 .module-image-plus {
+  .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   .module-image-plus-top {
     display: flex;
 

@@ -10,7 +10,7 @@
   </div>
   @endif
   <div class="module-info module-tab-product">
-    <div class="module-title">推荐商品模块</div>
+    <div class="module-title">{{ $content['title'] }}</div>
     <div class="container">
       @if ($content['tabs'])
         <div class="nav justify-content-center mb-3">
