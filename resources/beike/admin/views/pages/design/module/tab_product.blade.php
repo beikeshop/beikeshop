@@ -48,8 +48,11 @@
                     :options="{animation: 330}"
                   >
                     <div v-for="(item, index) in productData" :key="index" class="item">
-                      <span>${item.name}</span>
-                      <i class="fa fa-minus-circle" @click="removeProduct(index)"></i>
+                      <div>
+                        <i class="el-icon-s-unfold"></i>
+                        <span>${item.name}</span>
+                      </div>
+                      <i class="el-icon-delete right" @click="removeProduct(index)"></i>
                     </div>
                   </draggable>
                 </template>
@@ -120,7 +123,7 @@ Vue.component('module-editor-tab-product', {
         return;
       }
 
-      $http.get('products/autocomplete', {name: keyword}, null).then((res) => {
+      $http.get('products/autocomplete?name=' + encodeURIComponent(keyword)).then((res) => {
         cb(res);
       })
     },
@@ -144,7 +147,7 @@ Vue.component('module-editor-tab-product', {
 
     handleTabsEdit(targetName, action) {
       if (action === 'add') {
-        this.module.tabs.push({title: languagesFill('标题'), products: []});
+        this.module.tabs.push({title: languagesFill('Tab ' + (this.module.tabs.length + 1)), products: []});
         this.editableTabsValue = this.module.tabs.length - 1 + '';
       }
 
@@ -166,7 +169,7 @@ setTimeout(() => {
       background_color: ''
     },
     floor: languagesFill(''),
-    tabs: [{title: languagesFill('标题'), products: []}],
+    tabs: [{title: languagesFill('Tab 1'), products: []}],
     title: languagesFill('模块标题'),
   }
 

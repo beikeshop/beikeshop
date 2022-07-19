@@ -31,11 +31,9 @@ Route::prefix('/')
         Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
         Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
 
-        Route::get('categories/autocomplete', [CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-        Route::get('products/autocomplete', [ProductController::class, 'autocomplete'])->name('products.autocomplete');
         Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 

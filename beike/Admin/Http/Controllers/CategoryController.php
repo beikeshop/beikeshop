@@ -4,7 +4,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
-use Beike\Admin\Repositories\CategoryRepo;
+use Beike\Repositories\CategoryRepo;
 use Beike\Models\Category;
 use Beike\Admin\Services\CategoryService;
 use Beike\Repositories\ProductRepo;
@@ -63,7 +63,7 @@ class CategoryController extends Controller
         $data = [
             'category' => $category ?? new Category(),
             'descriptions' => $descriptions ?? null,
-            'categories' => CategoryRepo::flatten(locale()),
+            'categories' => \Beike\Admin\Repositories\CategoryRepo\CategoryRepo::flatten(locale()),
             '_redirect' => $this->getRedirect(),
         ];
 
@@ -75,5 +75,12 @@ class CategoryController extends Controller
     {
         (new CategoryService())->createOrUpdate($request->all(), $category);
         return redirect($this->getRedirect())->with('success', 'Category created successfully');
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $categories = CategoryRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success('获取成功！', $categories);
     }
 }

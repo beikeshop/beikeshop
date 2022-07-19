@@ -16,6 +16,9 @@ Route::prefix($adminName)
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
 
+        Route::get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
+        Route::get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
+
         Route::middleware('admin_auth:' . \Beike\Models\AdminUser::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');

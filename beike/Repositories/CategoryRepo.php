@@ -91,5 +91,15 @@ class CategoryRepo
         return $results;
     }
 
+
+    public static function getName($id)
+    {
+        $category = Category::query()->find($id);
+
+        if ($category) {
+            return $category->description->name;
+        }
+        return '';
+    }
 }
 

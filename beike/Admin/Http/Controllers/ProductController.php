@@ -114,4 +114,12 @@ class ProductController extends Controller
 
         return json_success('获取成功', $name);
     }
+
+
+    public function autocomplete(Request $request)
+    {
+        $products = ProductRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success('获取成功！', $products);
+    }
 }

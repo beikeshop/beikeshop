@@ -301,38 +301,42 @@ body.page-design .autocomplete-group-wrapper .item-group-wrapper {
 body.page-design .autocomplete-group-wrapper .item-group-wrapper .item {
   overflow: hidden;
   position: relative;
-  padding: 5px 19px 5px 26px;
-  margin-bottom: 1px;
+  padding: 5px 8px;
+  margin-bottom: 4px;
   background: #fff;
   border: 1px solid #eee;
   cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-body.page-design .autocomplete-group-wrapper .item-group-wrapper .item:before {
-  content: "\f0c9";
-  font-family: "fontawesome";
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  margin-top: -10px;
-  color: #999;
+body.page-design .autocomplete-group-wrapper .item-group-wrapper .item:hover {
+  border-color: #aaa;
+}
+body.page-design .autocomplete-group-wrapper .item-group-wrapper .item div {
+  display: flex;
+  line-height: 1;
+  width: calc(100% - 16px);
+  align-items: center;
+}
+body.page-design .autocomplete-group-wrapper .item-group-wrapper .item div i {
+  margin-right: 4px;
 }
 body.page-design .autocomplete-group-wrapper .item-group-wrapper .item span {
-  height: 19px;
-  overflow: hidden;
-  display: block;
   font-size: 12px;
-  display: -webkit-box;
+  overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  word-break: break-all;
+  white-space: nowrap;
 }
 body.page-design .autocomplete-group-wrapper .item-group-wrapper .item i {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  margin-top: -8px;
+  color: #999;
+  font-weight: 400;
+}
+body.page-design .autocomplete-group-wrapper .item-group-wrapper .item i.right {
   cursor: pointer;
+}
+body.page-design .autocomplete-group-wrapper .item-group-wrapper .item i.right:hover {
+  color: #222;
 }
 
 .file-manager-box .layui-layer-title {

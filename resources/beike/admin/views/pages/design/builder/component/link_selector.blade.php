@@ -14,6 +14,7 @@
       :visible.sync="linkDialog.show"
       class="link-dialog-box"
       :append-to-body="true"
+      :close-on-click-modal="false"
       @open="linkDialogOpen"
       @closed="linkDialogClose"
       width="460px">
@@ -211,7 +212,7 @@
         const self = this;
         this.link.value = '';
         this.querySearch(this.keyword, null, function (data) {
-          self.linkDialog.data = data;
+          self.linkDialog.data = data.data;
         })
       },
 
@@ -273,13 +274,12 @@
             null;
         }
 
-        $.ajax({
-          url: url + encodeURIComponent(keyword) + (all ? '&all=all' : ''),
-          dataType: 'json',
-          beforeSend: function() { self.loading = true;; },
-          complete: function() { self.loading = false; },
-          success: function (json) {if (json) {cb(json)}}
-        });
+        this.loading = true;
+
+        $http.get(url + encodeURIComponent(keyword), null, {hload: true}).then((res) => {
+          if (res) {cb(res)};
+          this.loading = false;
+        }).finally(() => {this.loading = false});
       },
 
       linksNewBack() {
@@ -321,10 +321,6 @@
             null;
         }
 
-        // beforeSend: function() { self.loading = true;; },
-
-        // complete: function() { self.loading = false; },
-        // this.loading = true;
         $http.get(url, null, {hload: true}).then((res) => {
           if (res.data) {
             self.name = res.data;

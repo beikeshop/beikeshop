@@ -18,11 +18,4 @@ class ProductController extends Controller
 
         return view('product', $data);
     }
-
-    public function autocomplete(Request $request)
-    {
-        $products = ProductRepo::autocomplete($request->get('name') ?? '');
-
-        return json_success('获取成功！', $products);
-    }
 }

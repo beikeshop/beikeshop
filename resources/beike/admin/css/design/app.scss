@@ -367,39 +367,47 @@ body.page-design {
       .item {
         overflow: hidden;
         position: relative;
-        padding: 5px 19px 5px 26px;
-        margin-bottom: 1px;
+        padding: 5px 8px;
+        margin-bottom: 4px;
         background: #fff;
         border: 1px solid #eee;
         cursor: move;
-        &:before {
-          content: "\f0c9";
-          font-family: "fontawesome";
-          position: absolute;
-          left: 6px;
-          top: 50%;
-          margin-top: -10px;
-          color: #999;
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: space-between; // flex-end | center | space-between
+        &:hover {
+          border-color: #aaa;
+        }
+
+        div {
+          display: flex;
+          line-height: 1;
+          width: calc(100% - 16px);
+          align-items: center; // flex-start | center
+
+          i {
+            margin-right: 4px;
+          }
         }
 
         span {
-          height: 19px;
-          overflow: hidden;
-          display: block;
           font-size: 12px;
-          display: -webkit-box;
-          text-overflow: ellipsis;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-          word-break: break-all;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
         }
 
         i {
-          position: absolute;
-          right: 6px;
-          top: 50%;
-          margin-top: -8px;
-          cursor: pointer;
+          // position: absolute;
+          color: #999;
+          font-weight: 400;
+          &.right {
+            cursor: pointer;
+
+            &:hover {
+              color: #222;
+            }
+          }
         }
       }
     }
