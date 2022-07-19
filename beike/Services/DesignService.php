@@ -41,10 +41,10 @@ class DesignService
     {
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif ($moduleCode == 'image401') {
+        } elseif (in_array($moduleCode, ['image401', 'image100'])) {
             return self::handleImage401($content);
-        } elseif ($moduleCode == 'image100') {
-            return self::handleImage401($content);
+        } elseif ($moduleCode == 'brand') {
+            return self::handleBrand($content);
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
         }
@@ -67,6 +67,23 @@ class DesignService
         }
 
         $content['images'] = self::handleImages($images);
+        return $content;
+    }
+
+    /**
+     * 处理 brand 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleBrand($content): array
+    {
+        $brands = $content['brands'];
+
+
+        $content['brands'] = [];
+        $content['title'] = $content['title'][current_language_code()];
         return $content;
     }
 
