@@ -123,21 +123,21 @@ Vue.component('module-editor-tab-product', {
         return;
       }
 
-      $http.get('products/autocomplete?name=' + encodeURIComponent(keyword)).then((res) => {
-        cb(res);
+      $http.get('products/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+        cb(res.data);
       })
     },
 
     handleSelect(item) {
-      if (!this.module.tabs[this.editableTabsValue].products.find(v => v == item.product_id)) {
-        this.module.tabs[this.editableTabsValue].products.push(item.product_id * 1);
+      if (!this.module.tabs[this.editableTabsValue].products.find(v => v == item.id)) {
+        this.module.tabs[this.editableTabsValue].products.push(item.id * 1);
         this.productData.push(item);
       }
       this.keyword = ""
     },
 
     itemChange(evt) {
-      this.module.tabs[this.editableTabsValue].products = this.productData.map(e => e.product_id * 1);
+      this.module.tabs[this.editableTabsValue].products = this.productData.map(e => e.id * 1);
     },
 
     removeProduct(index) {

@@ -58,7 +58,7 @@ body.page-design .design-box .design-head > div {
   transition: all 0.2s ease-in-out;
 }
 body.page-design .design-box .design-head > div.save-btn {
-  border-right: 1px solid #5692ff;
+  border-left: 1px solid #5692ff;
 }
 body.page-design .design-box .design-head > div i {
   margin-right: 7px;

@@ -73,7 +73,7 @@
                 <li v-for="(product, index) in linkDialog.data" @click="product.status ? link.value = product.id : false" :class="!product.status ? 'no-status' : ''">
                   <div class="left">
                     <span :class="'checkbox-plus ' + (link.value == product.id ? 'active':'') + (!product.status ? 'no-status':'')"></span>
-                    <img :src="product.image" class="img-responsive">
+                    <img :src="product.image" v-if="product.image" class="img-responsive">
                     <div>@{{ product.name }}</div>
                   </div>
                   <div :class="'right ' + (product.status ? 'ok' : 'no')">@{{ product.status ? '启用' : '禁用' }}</div>

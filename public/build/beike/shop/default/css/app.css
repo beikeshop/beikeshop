@@ -873,6 +873,7 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
 
 .module-tab-product .nav .nav-link {
   color: #6c757d;
+  font-size: 0.9rem;
 }
 .module-tab-product .nav .nav-link.active {
   color: #111;
