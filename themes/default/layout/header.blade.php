@@ -42,8 +42,8 @@
         <ul class="navbar-nav mx-auto">
           @foreach ($categories as $category)
           <li class="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ $category['name'] }}</a>
-            @if ($category['children'])
+            <a class="nav-link {{ (isset($category['children']) and $category['children']) ? 'dropdown-toggle' : '' }}" href="{{ $category['url'] }}" data-bs-toggle="dropdown">{{ $category['name'] }}</a>
+            @if (isset($category['children']) and $category['children'])
             <ul class="dropdown-menu">
               @forelse ($category['children'] as $child)
                 <li><a href="{{ $child['url'] }}" class="dropdown-item">{{ $child['name'] }}</a></li>
