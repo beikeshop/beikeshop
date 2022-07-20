@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Customer;
+use Beike\Models\CustomerWishlist;
 use Illuminate\Support\Facades\Hash;
 
 class CustomerRepo
@@ -96,6 +97,45 @@ class CustomerRepo
     public static function restore($id)
     {
         Customer::withTrashed()->find($id)->restore();
+    }
+
+    /**
+     * @param $customer,  Customer对象或id
+     * @param $productId
+     * @return Customer|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed|null
+     */
+    public static function addToWishlist($customer, $productId)
+    {
+        if (!$customer instanceof Customer) {
+            $customer = Customer::query()->findOrFail($customer);
+        }
+        $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
+
+        return $customer;
+    }
+
+    /**
+     * @param $customer, Customer对象或id
+     * @param $productId
+     * @return void
+     */
+    public static function removeFromWishlist($customer, $productId)
+    {
+        if (!$customer instanceof Customer) {
+            $customer = Customer::query()->findOrFail($customer);
+        }
+        $customer->wishlists()->where('product_id', $productId)->delete();
+
+        return $customer;
+    }
+
+    public static function wishlists($customer)
+    {
+        if (!$customer instanceof Customer) {
+            $customer = Customer::query()->findOrFail($customer);
+        }
+
+        return $customer->wishlists()->with('product.description')->paginate(20);
     }
 }
 

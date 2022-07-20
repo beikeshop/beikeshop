@@ -4,6 +4,7 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Product;
 use Beike\Repositories\ProductRepo;
+use Beike\Shop\Http\Resources\ProductDetail;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,7 @@ class ProductController extends Controller
         $product = ProductRepo::getProductDetail($product);
 
         $data = [
-            'product' => $product,
+            'product' => (new ProductDetail($product)),
         ];
 
         return view('product', $data);

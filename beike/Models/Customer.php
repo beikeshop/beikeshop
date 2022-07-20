@@ -27,4 +27,9 @@ class Customer extends Authenticatable
     {
         return $this->belongsTo(CustomerGroup::class);
     }
+
+    public function wishlists() : HasMany
+    {
+        return $this->hasMany(CustomerWishlist::class);
+    }
 }
