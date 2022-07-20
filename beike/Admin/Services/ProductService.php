@@ -26,6 +26,7 @@ class ProductService
         try {
             DB::beginTransaction();
 
+            $data['variables'] = json_decode($data['variables']);
             $product->fill($data);
             $product->save();
 
