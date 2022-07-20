@@ -19,7 +19,7 @@ class SkuDetail extends JsonResource
     {
         return [
             'id' => $this->id,
-            'variants' => json_decode($this->varians),
+            'variants' => $this->variants,
             'position' => $this->position,
             'image' => image_resize($this->image),
             'model' => $this->model,

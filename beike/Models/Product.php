@@ -17,6 +17,7 @@ class Product extends Model
     ];
     protected $casts = [
         'active' => 'boolean',
+        'variables' => 'array',
     ];
 
     public function categories()
