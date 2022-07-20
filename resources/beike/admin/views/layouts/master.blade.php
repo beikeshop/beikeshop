@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <base href="{{ $admin_base_url }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('vendor/vue/2.6.12/vue.js') }}"></script>
     <script src="{{ asset('vendor/element-ui/2.6.2/js.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
@@ -17,7 +18,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.6.2/css.css') }}">
     <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>beike admin</title>
     @stack('header')
     {{-- <x-analytics /> --}}

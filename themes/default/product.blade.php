@@ -120,9 +120,22 @@
 
       data: {
         selectedVariantsIndex: [], // 选中的变量索引
+        product: {
+          id: 0,
+          image: "",
+          model: "",
+          origin_price: 0,
+          origin_price_format: "",
+          position: 0,
+          price: 0,
+          price_format: "",
+          quantity: 0,
+          sku: "",
+        },
         source: {
           skus: @json($product['skus']),
-          variables: @json($product['variables']),
+          // variables: @json($product['variables']),
+          variables: JSON.parse(@json($product['variables'] ?? [])),
         }
       },
 
@@ -142,22 +155,46 @@
 
         // console.log(this.selectedVariantsIndex)
         this.checkedVariants()
+        this.getSku();
       },
 
       methods: {
-        checkedVariableValue(variable_idnex, value_index,value) {
-          this.source.variables[variable_idnex].values[value_index].selected = !value.selected
+        checkedVariableValue(variable_idnex, value_index, value) {
+          this.source.variables[variable_idnex].values.forEach((v, i) => {
+            v.selected = false
+            if (i == value_index) {
+              v.selected = true
+            }
+          })
+
+          // 获取选中的 variables 内 value的 下标 index 填充到 selectedVariantsIndex 中
+          this.source.variables.forEach((variable, index) => {
+            variable.values.forEach((value, value_index) => {
+              if (value.selected) {
+                this.selectedVariantsIndex[index] = value_index
+              }
+            })
+          })
+
+          this.getSku();
         },
 
         // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
         checkedVariants() {
           this.source.variables.forEach((variable, index) => {
-            variable.values.forEach(value => {
-              value.selected = false
-            })
+            // variable.values.forEach(value => {
+            //   value.selected = false
+            // })
             variable.values[this.selectedVariantsIndex[index]].selected = true
           })
         },
+
+        // 根据 selectedVariantsIndex 下标获取对应的 sku
+        getSku() {
+          const sku = this.source.skus.find(sku => sku.variants.toString() === this.selectedVariantsIndex.toString())
+          console.log(sku);
+          this.product = sku
+        }
       }
     })
   </script>
