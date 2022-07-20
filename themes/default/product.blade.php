@@ -134,8 +134,8 @@
         },
         source: {
           skus: @json($product['skus']),
-          // variables: @json($product['variables']),
-          variables: JSON.parse(@json($product['variables'] ?? [])),
+          variables: @json($product['variables']),
+          // variables: JSON.parse(@json($product['variables'] ?? [])),
         }
       },
 

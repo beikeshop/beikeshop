@@ -140,14 +140,11 @@
       el: '#app',
       data: {
         form: {
-          // 字符串转json
-          variables: JSON.parse(@json($product->variables ?? [])),
-          {{-- variables: @json($product->variables ?? []), --}}
+          variables: @json($product->variables ?? []),
           skus: @json($product->skus ?? []),
         },
         source: {
-          {{-- variables: @json($product->variables ?? []), --}}
-          variables: JSON.parse(@json($product->variables ?? [])),
+          variables: @json($product->variables ?? []),
         },
         editing: {
           isVariable: @json(($product->variables ?? null) != null),
