@@ -76,7 +76,7 @@ class Manager
     {
         $allPlugins = $this->getPlugins();
         return $allPlugins->filter(function (Plugin $plugin) {
-            return $plugin->getEnabled();
+            return $plugin->getInstalled() && $plugin->getEnabled();
         });
     }
 
