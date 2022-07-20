@@ -86,7 +86,7 @@
               return;
             }
 
-            $http.put(`/admin/plugins/{{ $plugin->code }}`, this.form).then((res) => {
+            $http.put(`plugins/{{ $plugin->code }}`, this.form).then((res) => {
               this.$message.success(res.message);
             })
           });
