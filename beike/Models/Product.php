@@ -50,11 +50,6 @@ class Product extends Model
         return '$' . $this->price;
     }
 
-    public function getVariablesDecodedAttribute()
-    {
-        return json_decode($this->variables, true);
-    }
-
     public function getUrlAttribute()
     {
         return shop_route('products.show', ['product' => $this]);

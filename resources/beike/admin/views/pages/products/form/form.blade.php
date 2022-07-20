@@ -140,11 +140,11 @@
       el: '#app',
       data: {
         form: {
-          variables: @json($product->variables_decoded ?? []),
+          variables: @json($product->variables ?? []),
           skus: @json($product->skus ?? []),
         },
         source: {
-          variables: @json($product->variables_decoded ?? []),
+          variables: @json($product->variables ?? []),
         },
         editing: {
           isVariable: @json(($product->variables ?? null) != null),

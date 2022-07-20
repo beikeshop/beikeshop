@@ -381,6 +381,23 @@ body.page-product .product-image .left {
 body.page-product .product-image .left > div {
   margin-bottom: 1rem;
 }
+body.page-product .variables-wrap .variable-info > div {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ddd;
+  margin-left: 0;
+  min-width: 3rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s ease-in-out;
+}
+body.page-product .variables-wrap .variable-info > div:hover, body.page-product .variables-wrap .variable-info > div.active {
+  border-color: #222;
+}
 body.page-product .peoduct-info .rating-wrap {
   margin-bottom: 2rem;
 }
