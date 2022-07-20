@@ -17,9 +17,9 @@ class Bootstrap
 {
     public function boot()
     {
-        dump(__CLASS__, __METHOD__, __FUNCTION__);
+        // dump(__CLASS__, __METHOD__, __FUNCTION__);
         Eventy::addFilter('header.categories', function($data) {
-            dump($data);
+            // dump($data);
             return $data;
         }, 20, 1);
     }
