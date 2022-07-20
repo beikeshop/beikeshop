@@ -3,9 +3,9 @@
 use Beike\Models\Customer;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
+use TorMorten\Eventy\Facades\Eventy;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Auth\Authenticatable;
-use TorMorten\Eventy\Facades\Eventy;
 
 /**
  * 获取后台设置到 settings 表的值
