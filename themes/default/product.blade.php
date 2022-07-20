@@ -26,7 +26,7 @@
               <div class=""><img src="http://fpoimg.com/100x100?bg_color=f3f3f3" class="img-fluid"></div>
             @endfor
           </div>
-          <div class="right"><img src="{{ $product['image'] }}" class="img-fluid"></div>
+          <div class="right"><img :src="product.image" class="img-fluid"></div>
         </div>
       </div>
 
@@ -42,18 +42,18 @@
             <span class="text-muted">132 reviews</span>
           </div>
           <div class="price-wrap d-flex align-items-end">
-            <div class="new-price"></div>
-            <div class="old-price text-muted text-decoration-line-through"></div>
+            <div class="new-price">@{{ product.price_format }}</div>
+            <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
           </div>
 
           <div class="variables-wrap">
-            <div class="variable-group mb-3" v-for="variable, index in source.variables" :key="index">
+            <div class="variable-group mb-3" v-for="variable, variable_index in source.variables" :key="variable_index">
               <p class=""><strong>@{{ variable.name }}</strong></p>
               <div class="variable-info">
                 <div
-                  v-for="value, v in variable.values"
-                  @click="checkedVariableValue(index, v, value)"
-                  :key="v"
+                  v-for="value, value_index in variable.values"
+                  @click="checkedVariableValue(variable_index, value_index, value)"
+                  :key="value_index"
                   :class="value.selected ? 'active' : ''">
                   @{{ value.name }}
                 </div>
@@ -66,20 +66,31 @@
               <tbody>
                 <tr>
                   <td>型号</td>
-                  <td></td>
+                  <td>@{{ product.model }}</td>
                 </tr>
                 <tr>
                   <td>Sku</td>
-                  <td></td>
+                  <td>@{{ product.sku }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div class="quantity-btns d-flex">
-            @include('shared.quantity', ['quantity' => '1'])
-            <button class="btn btn-outline-secondary ms-3 add-cart"><i class="bi bi-cart-fill me-1"></i>加入购物车</button>
-            <button class="btn btn-dark ms-3"><i class="bi bi-bag-fill me-1"></i>立即购买</button>
+            <div class="quantity-wrap">
+              <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
+              <div class="right">
+                <i class="bi bi-chevron-up"></i>
+                <i class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+            <button
+              class="btn btn-outline-secondary ms-3 add-cart"
+              :disabled="!product.quantity"
+              @click="addCart"
+              ><i class="bi bi-cart-fill me-1"></i>加入购物车
+            </button>
+            <button class="btn btn-dark ms-3" :disabled="!product.quantity"><i class="bi bi-bag-fill me-1" @click="addCart(true)"></i>立即购买</button>
           </div>
           <div class="add-wishlist">
             <button class="btn btn-link ps-0"><i class="bi bi-suit-heart-fill me-1"></i>加入收藏夹</button>
@@ -132,10 +143,10 @@
           quantity: 0,
           sku: "",
         },
+        quantity: 1,
         source: {
           skus: @json($product['skus']),
-          variables: @json($product['variables']),
-          // variables: JSON.parse(@json($product['variables'] ?? [])),
+          variables: @json($product['variables'] ?? []),
         }
       },
 
@@ -143,30 +154,64 @@
       },
 
       beforeMount () {
-        const skuDefault = this.source.skus.find(e => e.is_default)
+        const skus = JSON.parse(JSON.stringify(this.source.skus));
+        const skuDefault = skus.find(e => e.is_default)
         this.selectedVariantsIndex = skuDefault.variants
+        // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
+        if (skuDefault.variants == null) {
+          this.product = skus[0]
+        }
 
         // 为 variables 里面每一个 values 的值添加一个 selected 字段
-        this.source.variables.forEach(variable => {
-          variable.values.forEach(value => {
-            this.$set(value, 'selected', false)
+        if (this.source.variables.length) {
+          this.source.variables.forEach(variable => {
+            variable.values.forEach(value => {
+              this.$set(value, 'selected', false)
+            })
           })
-        })
 
-        // console.log(this.selectedVariantsIndex)
-        this.checkedVariants()
-        this.getSku();
+          this.checkedVariants()
+          this.getSelectedSku();
+        }
       },
 
       methods: {
         checkedVariableValue(variable_idnex, value_index, value) {
           this.source.variables[variable_idnex].values.forEach((v, i) => {
-            v.selected = false
-            if (i == value_index) {
-              v.selected = true
-            }
+            v.selected = i == value_index
           })
 
+          this.updateSelectedVariantsIndex();
+          this.getSelectedSku();
+        },
+
+        // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
+        checkedVariants() {
+          this.source.variables.forEach((variable, index) => {
+            variable.values[this.selectedVariantsIndex[index]].selected = true
+          })
+        },
+
+        getSelectedSku() {
+          // 通过 selectedVariantsIndex 的值比对 skus 的 variables
+          const sku = this.source.skus.find(sku => sku.variants.toString() == this.selectedVariantsIndex.toString())
+          this.product = sku;
+        },
+
+        addCart(isBuyNow) {
+          const data = {
+            sku_id: this.product.id,
+            quantity: this.quantity
+          };
+          console.log(data);
+          return;
+
+          $http.post('/carts', data).then((res) => {
+            layer.msg(res.message)
+          })
+        },
+
+        updateSelectedVariantsIndex() {
           // 获取选中的 variables 内 value的 下标 index 填充到 selectedVariantsIndex 中
           this.source.variables.forEach((variable, index) => {
             variable.values.forEach((value, value_index) => {
@@ -175,26 +220,7 @@
               }
             })
           })
-
-          this.getSku();
         },
-
-        // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
-        checkedVariants() {
-          this.source.variables.forEach((variable, index) => {
-            // variable.values.forEach(value => {
-            //   value.selected = false
-            // })
-            variable.values[this.selectedVariantsIndex[index]].selected = true
-          })
-        },
-
-        // 根据 selectedVariantsIndex 下标获取对应的 sku
-        getSku() {
-          const sku = this.source.skus.find(sku => sku.variants.toString() === this.selectedVariantsIndex.toString())
-          console.log(sku);
-          this.product = sku
-        }
       }
     })
   </script>
