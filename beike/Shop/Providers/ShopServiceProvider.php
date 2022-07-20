@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Beike\Shop\View\Components\AccountSidebar;
 use Illuminate\View\FileViewFinder;
+use TorMorten\Eventy\Facades\Eventy;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -69,7 +70,7 @@ class ShopServiceProvider extends ServiceProvider
         View::share('languages', languages());
 
         $menuCategories = CategoryRepo::getTwoLevelCategories();
-        View::share('categories', $menuCategories);
+        View::share('categories', Eventy::filter('header.categories', $menuCategories));
 
         View::share('shop_base_url', shop_route('home.index'));
     }

@@ -177,6 +177,7 @@ return [
 
         Beike\Admin\Providers\AdminServiceProvider::class,
         Beike\Shop\Providers\ShopServiceProvider::class,
+        Beike\Shop\Providers\PluginServiceProvider::class,
 
     ],
 

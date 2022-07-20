@@ -92,6 +92,11 @@ class Plugin implements Arrayable, \ArrayAccess
     }
 
 
+    public function getDirname(): string
+    {
+        return $this->dirName;
+    }
+
     public function getPath(): string
     {
         return $this->path;

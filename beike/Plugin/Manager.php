@@ -65,6 +65,43 @@ class Manager
         return $this->plugins;
     }
 
+
+    /**
+     * 获取已开启的插件
+     *
+     * @return Collection
+     * @throws \Exception
+     */
+    public function getEnabledPlugins(): Collection
+    {
+        $allPlugins = $this->getPlugins();
+        return $allPlugins->filter(function (Plugin $plugin) {
+            return $plugin->getEnabled();
+        });
+    }
+
+    /**
+     * 获取已开启插件对应根目录下的启动文件 bootstrap.php
+     *
+     * @return Collection
+     * @throws \Exception
+     */
+    public function getEnabledBootstraps(): Collection
+    {
+        $bootstraps = new Collection;
+
+        foreach ($this->getEnabledPlugins() as $plugin) {
+            if ($this->filesystem->exists($file = $plugin->getPath() . '/bootstrap.php')) {
+                $bootstraps->push([
+                    'code' => $plugin->getDirName(),
+                    'file' => $file
+                ]);
+            }
+        }
+
+        return $bootstraps;
+    }
+
     /**
      * 获取单个插件
      *
