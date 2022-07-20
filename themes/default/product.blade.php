@@ -46,7 +46,7 @@
             <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
           </div>
 
-          <div class="variables-wrap">
+          <div class="variables-wrap" v-if="source.variables.length">
             <div class="variable-group mb-3" v-for="variable, variable_index in source.variables" :key="variable_index">
               <p class=""><strong>@{{ variable.name }}</strong></p>
               <div class="variable-info">
@@ -87,10 +87,15 @@
             <button
               class="btn btn-outline-secondary ms-3 add-cart"
               :disabled="!product.quantity"
-              @click="addCart"
+              @click="addCart(false)"
               ><i class="bi bi-cart-fill me-1"></i>加入购物车
             </button>
-            <button class="btn btn-dark ms-3" :disabled="!product.quantity"><i class="bi bi-bag-fill me-1" @click="addCart(true)"></i>立即购买</button>
+            <button
+              class="btn btn-dark ms-3"
+              :disabled="!product.quantity"
+              @click="addCart(true)"
+              ><i class="bi bi-bag-fill me-1"></i>立即购买
+            </button>
           </div>
           <div class="add-wishlist">
             <button class="btn btn-link ps-0"><i class="bi bi-suit-heart-fill me-1"></i>加入收藏夹</button>
@@ -198,16 +203,12 @@
           this.product = sku;
         },
 
-        addCart(isBuyNow) {
-          const data = {
-            sku_id: this.product.id,
-            quantity: this.quantity
-          };
-          console.log(data);
-          return;
-
-          $http.post('/carts', data).then((res) => {
+        addCart(isBuyNow = false) {
+          $http.post('/carts', {sku_id: this.product.id, quantity: this.quantity}).then((res) => {
             layer.msg(res.message)
+            if (isBuyNow) {
+              location.href = '{{ shop_route("checkout.index") }}'
+            }
           })
         },
 
