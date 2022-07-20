@@ -1,0 +1,12 @@
+{
+    "code": "header_menu",
+    "name": "首页菜单Demo",
+    "description": "修改首页菜单插件",
+    "type": "view",
+    "version": "v1.0.0",
+    "icon": "https://via.placeholder.com/100x100.png/aabbcc?text=MENU",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "yangjin@opencart.cn"
+    }
+}

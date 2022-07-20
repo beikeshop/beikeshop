@@ -5,6 +5,7 @@ use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Contracts\Auth\Authenticatable;
+use TorMorten\Eventy\Facades\Eventy;
 
 /**
  * 获取后台设置到 settings 表的值
@@ -298,4 +299,32 @@ function create_directories($directoryPath)
             @mkdir(public_path($path), 0755);
         }
     }
+}
+
+
+/**
+ * 添加 Filter
+ *
+ * @param $hook
+ * @param $callback
+ * @param int $priority
+ * @param int $arguments
+ * @return mixed
+ */
+function add_filter($hook, $callback, int $priority = 20, int $arguments = 1)
+{
+    return Eventy::addFilter($hook, $callback, $priority, $arguments);
+}
+
+/**
+ * 添加 Action
+ *
+ * @param $hook
+ * @param $callback
+ * @param int $priority
+ * @param int $arguments
+ */
+function add_action($hook, $callback, int $priority = 20, int $arguments = 1)
+{
+    Eventy::addAction($hook, $callback, $priority, $arguments);
 }
