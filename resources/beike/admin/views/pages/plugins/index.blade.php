@@ -68,26 +68,17 @@
         pluginStatusChange(e, code) {
           const self = this;
 
-          $.ajax({
-            url: `/admin/plugins/${code}/status`,
-            type: 'PUT',
-            data: {status: e * 1},
-            success: function(res) {
-              layer.msg(res.message)
-            },
+          $http.put(`plugins/${code}/status`, {status: e * 1}).then((res) => {
+            layer.msg(res.message)
           })
         },
 
         installedPlugin(code, type, index) {
           const self = this;
 
-          $.ajax({
-            url: `/admin/plugins/${code}/${type}`,
-            type: 'post',
-            success: function(res) {
-              layer.msg(res.message)
-              self.plugins[index].installed = type == 'install' ? true : false;
-            },
+          $http.post(`plugins/${code}/${type}`).then((res) => {
+            layer.msg(res.message)
+            self.plugins[index].installed = type == 'install' ? true : false;
           })
         }
       }

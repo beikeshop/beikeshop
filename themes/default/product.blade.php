@@ -167,11 +167,12 @@
           this.product = skus[0]
         }
 
-        // 为 variables 里面每一个 values 的值添加一个 selected 字段
+        // 为 variables 里面每一个 values 的值添加 selected、disabled 字段
         if (this.source.variables.length) {
           this.source.variables.forEach(variable => {
             variable.values.forEach(value => {
               this.$set(value, 'selected', false)
+              this.$set(value, 'disabled', false)
             })
           })
 
@@ -222,6 +223,8 @@
             })
           })
         },
+
+        // 根据 skus 中 quantity 字段，对应到 variants 的 每种组合 variables 的 selected 字段
       }
     })
   </script>
