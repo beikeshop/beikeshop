@@ -24,7 +24,7 @@ class ProductDetail extends JsonResource
             'image' => image_resize($this->image),
             'category_id' => $this->category_id ?? null,
             'variables' => json_decode($this->variables),
-            'skus' => SkuDetail::collection($this->skus),
+            'skus' => SkuDetail::collection($this->skus)->jsonSerialize(),
         ];
     }
 }
