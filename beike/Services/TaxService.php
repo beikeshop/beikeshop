@@ -13,6 +13,7 @@ namespace Beike\Services;
 
 use Beike\Models\Address;
 use Beike\Models\TaxRate;
+use Beike\Models\TaxRule;
 
 class TaxService
 {
@@ -68,7 +69,7 @@ class TaxService
         }
 
         $customerGroupId = (int)system_setting('base.config_customer_group_id');
-        $sqlBuilder = \DB::table('tax_rule')
+        $sqlBuilder = TaxRule::query()
             ->leftJoin('tax_rate', 'tax_rule.tax_rate_id', '=', 'tax_rate.tax_rate_id')
             ->join('tax_rate_to_customer_group', 'tax_rate.tax_rate_id', '=', 'tax_rate_to_customer_group.tax_rate_id')
             ->leftJoin('zone_to_geo_zone', 'tax_rate.geo_zone_id', '=', 'zone_to_geo_zone.geo_zone_id')
@@ -81,7 +82,7 @@ class TaxService
                 $query->where('zone_to_geo_zone.zone_id', '=', 0)
                     ->orWhere('zone_to_geo_zone.zone_id', '=', (int)$zoneId);
             })
-            ->orderBy('tax_rule.priority', 'asc');
+            ->orderBy('tax_rule.priority');
         $data = $sqlBuilder->get();
         self::$taxRules["$type-$countryId-$zoneId"] = $data;
         return $data;
@@ -136,7 +137,7 @@ class TaxService
      * @param bool|true $calculate
      * @return mixed
      */
-    public function calculate($value, $taxClassId, $calculate = true)
+    public function calculate($value, $taxClassId, bool $calculate = true)
     {
         if ($taxClassId && $calculate) {
             $amount = 0;
