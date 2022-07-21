@@ -91,6 +91,18 @@ function shop_route($route, $params = []): string
 }
 
 /**
+ * 获取插件链接
+ *
+ * @param $route
+ * @param mixed $params
+ * @return string
+ */
+function plugin_route($route, $params = []): string
+{
+    return route('plugin.' . $route, $params);
+}
+
+/**
  * 是否为当前访问路由
  *
  * @param $routeName

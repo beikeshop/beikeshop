@@ -12,6 +12,7 @@
 namespace Beike\Shop\Providers;
 
 use Beike\Plugin\Manager;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
@@ -39,6 +40,8 @@ class PluginServiceProvider extends ServiceProvider
     {
         $plugins = $manager->getPlugins();
         $bootstraps = $manager->getEnabledBootstraps();
+        $pluginBasePath = base_path('plugins');
+
         foreach ($bootstraps as $bootstrap) {
             $filePath = $bootstrap['file'];
             $pluginCode = $bootstrap['code'];
@@ -47,6 +50,14 @@ class PluginServiceProvider extends ServiceProvider
                 $className = "Plugin\\{$pluginCode}\\Bootstrap";
                 (new $className)->boot();
             }
+
+            $this->loadViewsFrom("{$pluginBasePath}/{$pluginCode}/Views", $pluginCode);
+
+            Route::prefix('plugin')
+                ->middleware('web')
+                ->group(function () use ($pluginBasePath, $pluginCode) {
+                    $this->loadRoutesFrom("{$pluginBasePath}/{$pluginCode}/routes.php");
+                });
         }
     }
 }

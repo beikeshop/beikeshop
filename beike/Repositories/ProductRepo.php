@@ -117,7 +117,8 @@ class ProductRepo
         return $builder;
     }
 
-    public static function list($data)
+
+    public static function list($data=[])
     {
         return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }

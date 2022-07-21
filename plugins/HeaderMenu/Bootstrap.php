@@ -18,11 +18,11 @@ class Bootstrap
         add_filter('header.categories', function ($data) {
             $data[] = [
                 'name' => '插件链接',
-                'url' => 'https://www.google.com',
+                'url' => shop_route('home.index'),
                 'children' => [
                     [
-                        "name" => "Google",
-                        "url" => "https://www.google.com",
+                        "name" => "最新商品",
+                        "url" => plugin_route('latest_products'),
                     ], [
                         "name" => "百度",
                         "url" => "https://www.baidu.com",

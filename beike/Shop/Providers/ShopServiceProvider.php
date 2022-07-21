@@ -31,23 +31,15 @@ class ShopServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->registerGuard();
 
-        $this->app->bind('view.finder', function ($app) {
-            $paths = $app['config']['view.paths'];
-            if ($theme = setting('base.theme')) {
-                $customTheme[] = base_path("themes/{$theme}");
-                $paths = array_merge($customTheme, $paths);
-            }
-            return new FileViewFinder($app['files'], $paths);
-        });
+        $this->loadThemeViewPath();
+
+        $this->loadComponents();
 
         $this->app->booted(function () {
             $this->loadShareViewData();
         });
-
-        $this->loadViewComponentsAs('shop', [
-            'sidebar' => AccountSidebar::class,
-        ]);
     }
+
 
     protected function registerGuard()
     {
@@ -62,16 +54,32 @@ class ShopServiceProvider extends ServiceProvider
         ]);
     }
 
+    protected function loadThemeViewPath()
+    {
+        $this->app->singleton('view.finder', function ($app) {
+            $paths = $app['config']['view.paths'];
+            if ($theme = setting('base.theme')) {
+                $customTheme[] = base_path("themes/{$theme}");
+                $paths = array_merge($customTheme, $paths);
+            }
+            return new FileViewFinder($app['files'], $paths);
+        });
+    }
+
+    protected function loadComponents()
+    {
+        $this->loadViewComponentsAs('shop', [
+            'sidebar' => AccountSidebar::class,
+        ]);
+    }
+
     protected function loadShareViewData()
     {
-
         View::share('design', request('design') == 1);
-
         View::share('languages', languages());
+        View::share('shop_base_url', shop_route('home.index'));
 
         $menuCategories = CategoryRepo::getTwoLevelCategories();
         View::share('categories', Eventy::filter('header.categories', $menuCategories));
-
-        View::share('shop_base_url', shop_route('home.index'));
     }
 }
