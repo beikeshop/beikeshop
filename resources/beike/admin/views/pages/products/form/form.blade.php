@@ -52,11 +52,13 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
+
+          <div class="form-group" v-if="editing.isVariable">
             <div class="row align-items-center">
               <label for="" class="col-sm-2 col-form-label"></label>
               <div class="col-sm-10">
-                <div v-if="editing.isVariable" class="selectable-variants">
+                <div class="selectable-variants">
                   <div>
                     <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
                       <div class="title">
@@ -108,7 +110,6 @@
                   </div>
 
                   <div v-if="form.skus.length" class="mt-3">
-                    <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
                     <table class="table table-bordered table-hover">
                       <thead>
                         <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
@@ -161,34 +162,96 @@
                     </table>
                   </div>
                 </div>
-
-                <div v-if="!editing.isVariable">
-                  <div>
-                    <input type="text" name="skus[0][image]" placeholder="image"
-                      value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}">
-                    <input type="text" name="skus[0][model]" placeholder="model"
-                      value="{{ old('skus.0.model', $product->skus[0]->model ?? '') }}">
-                    <input type="text" name="skus[0][sku]" placeholder="sku"
-                      value="{{ old('skus.0.sku', $product->skus[0]->sku ?? '') }}">
-                    <input type="text" name="skus[0][price]" placeholder="price"
-                      value="{{ old('skus.0.price', $product->skus[0]->price ?? '') }}">
-                    <input type="text" name="skus[0][origin_price]" placeholder="origin_price"
-                      value="{{ old('skus.0.origin_price', $product->skus[0]->origin_price ?? '') }}">
-                    <input type="text" name="skus[0][cost_price]" placeholder="cost_price"
-                      value="{{ old('skus.0.cost_price', $product->skus[0]->cost_price ?? '') }}">
-                    <input type="text" name="skus[0][quantity]" placeholder="quantity"
-                      value="{{ old('skus.0.quantity', $product->skus[0]->quantity ?? '') }}">
-                    <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
-                    <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
-                    <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
-                  </div>
-                </div>
               </div>
             </div>
           </div>
+
+          <template v-if="!editing.isVariable">
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">图片</label>
+                <div class="col-sm-10">
+
+                  <div class="open-file-manager set-product-img">
+                    <div>
+                      <img :src="thumbnail(form.skus[0].image)" class="img-fluid">
+                    </div>
+                  </div>
+                  <input type="hidden" v-model="form.skus[0].image" name="skus[0][image]">
+{{--                   <input type="text" class="form-control form-control-sm short" name="skus[0][image]" placeholder="image"
+                    value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}"> --}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">model</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm short" name="skus[0][model]" placeholder="model"
+                    value="{{ old('skus.0.model', $product->skus[0]->model ?? '') }}">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">sku</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm short" name="skus[0][sku]" placeholder="sku"
+                    value="{{ old('skus.0.sku', $product->skus[0]->sku ?? '') }}">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">price</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm short" name="skus[0][price]" placeholder="price"
+                    value="{{ old('skus.0.price', $product->skus[0]->price ?? '') }}">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">origin_price</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control form-control-sm short" name="skus[0][origin_price]" placeholder="origin_price"
+                      value="{{ old('skus.0.origin_price', $product->skus[0]->origin_price ?? '') }}">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">cost_price</label>
+                <div class="col-sm-10">
+                  <input type="text" name="skus[0][cost_price]" class="form-control form-control-sm short" placeholder="cost_price"
+                    value="{{ old('skus.0.cost_price', $product->skus[0]->cost_price ?? '') }}">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row align-items-center">
+                <label for="" class="col-sm-2 col-form-label">quantity</label>
+                <div class="col-sm-10">
+                   <input type="text" class="form-control form-control-sm short" name="skus[0][quantity]" placeholder="quantity"
+                      value="{{ old('skus.0.quantity', $product->skus[0]->quantity ?? '') }}">
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
+            <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
+            <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
+          </template>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10"><button type="submit" class="btn btn-primary">Save</button></div>
+          </div>
+        </div>
+
 
         <el-dialog
           title="编辑"
@@ -223,6 +286,11 @@
 @push('footer')
   <script>
     Vue.prototype.thumbnail = function thumbnail(image, width, height) {
+      // 判断 image 是否以 http 开头
+      if (image.indexOf('http') === 0) {
+        return image;
+      }
+
       return '{{ asset('catalog') }}' + image;
     };
 
@@ -231,6 +299,11 @@
       data: {
         current_language_code: '{{ current_language_code() }}',
         form: {
+          model: @json($product->skus[0]['model'] ?? ''),
+          price: @json($product->skus[0]['price'] ?? ''),
+          quantity: @json($product->skus[0]['quantity'] ?? ''),
+          sku: @json($product->skus[0]['sku'] ?? ''),
+          status: @json($product->skus[0]['status'] ?? false),
           variables: @json($product->variables ?? []),
           skus: @json($product->skus ?? []),
         },
@@ -324,12 +397,23 @@
           });
         },
 
+        swapSourceVariantValue(e, variantIndex) {
+          console.log(e, variantIndex)
+        },
+
         closedialogVariablesFormDialog(form) {
           this.dialogVariables.show = false;
           this.dialogVariables.variantIndex = null;
           this.dialogVariables.variantValueIndex = null;
           this.dialogVariables.form.name = {};
           this.$refs[form].clearValidate();
+        },
+
+        removeSourceVariantValue(variantIndex, variantValueIndex) {
+          this.source.variables[variantIndex].values.splice(variantValueIndex, 1);
+          // this.form.variants = this.validSourceVariants;
+
+
         },
 
         modalVariantOpenButtonClicked(variantIndex, variantValueIndex) {
@@ -349,7 +433,6 @@
             }
           }
 
-          console.log(name)
           this.dialogVariables.form.name = JSON.parse(JSON.stringify(name));
           this.dialogVariables.show = true;
         },

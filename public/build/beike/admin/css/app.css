@@ -34,6 +34,10 @@ body {
   font-size: 12px;
 }
 
+.open-file-manager {
+  cursor: pointer;
+}
+
 .file-manager-box .layui-layer-title {
   background-color: #293042;
   color: #fff;
@@ -43,6 +47,16 @@ body {
   background: url("/image/close.png") no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.set-product-img {
+  width: 80px;
+  height: 80px;
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-content {
@@ -560,8 +574,8 @@ body.page-product-form .variants-producr-img {
   justify-content: center;
 }
 body.page-product-form .variant-value-img {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   border-radius: 2px;
   cursor: pointer;
   display: flex;
