@@ -13,7 +13,7 @@
       <script src="{{ asset('vendor/axios/0.21.1/axios.min.js') }}"></script>
       <script src="{{ mix('build/js/app.js') }}"></script> --}}
     {{-- <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.8/index.min.js"></script> --}}
-
+    <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.bundle.min.js') }}"></script>
     <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.6.2/css.css') }}">
     <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">

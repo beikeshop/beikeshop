@@ -1,13 +1,17 @@
 @extends('admin::layouts.master')
 
+@section('body-class', 'page-product-form')
+
 @push('header')
-  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
+  <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
 @endpush
 
 @section('content')
   <div class="card">
+    {{-- <div class="card-header"><h6 class="card-title">基础信息</h6></div> --}}
     <div class="card-body">
-      <h2>product</h2>
+      <h5 class="border-bottom pb-3 mb-4">基础信息</h5>
       <form action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
         method="POST" id="app">
         @csrf
@@ -37,118 +41,218 @@
         </x-admin::form.row>
 
         <div>
-          <h2>skus</h2>
-          <input type="radio" v-model="editing.isVariable" :value="false"> 单规格
-          <input type="radio" v-model="editing.isVariable" :value="true"> 多规格
-          <div v-if="editing.isVariable">
-            <div>
-              <div v-for="(variant, variantIndex) in source.variables">
-                <div>
-                  <input type="text" v-model="variant.name" placeholder="variant name">
+          <h5 class="border-bottom pb-3 mb-4">商品库存</h5>
 
-                  <div v-for="(value, valueIndex) in variant.values">
-                    <input v-model="variant.values[valueIndex].name" type="text" placeholder="variant value name">
-                  </div>
-                  <button type="button" @click="addVariantValue(variantIndex)">Add value</button>
-                </div>
+          <div class="form-group">
+            <div class="row align-items-center">
+              <label for="" class="col-sm-2 col-form-label">启用多规格</label>
+              <div class="col-sm-10">
+                <el-switch v-model="editing.isVariable"></el-switch>
               </div>
-
-              <button type="button" @click="addVariant">Add variant</button>
-            </div>
-
-            <div v-if="form.skus.length">
-              <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
-              <table>
-                <thead>
-                  <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
-                    @{{ variant.name || 'No name' }}
-                  </th>
-                  <th>image</th>
-                  <th>model</th>
-                  <th>sku</th>
-                  <th>price</th>
-                  <th>orgin price</th>
-                  <th>cost price</th>
-                  <th>quantity</th>
-                </thead>
-                <tbody>
-                  <tr v-for="(sku, skuIndex) in form.skus">
-                    <template v-for="(variantValueIndex, j) in sku.variants">
-                      <td v-if="skuIndex % variantValueRepetitions[j] == 0" :key="'pvv' + skuIndex + '-' + j"
-                        :rowspan="variantValueRepetitions[j]">
-                        <span>@{{ form.variables[j].values[variantValueIndex].name || 'No name' }}</span>
-                      </td>
-                    </template>
-                    <td>
-                      <input type="text" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'"
-                        placeholder="image">
-                      <input type="hidden" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
-                      <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
-                        :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
-                    </td>
-                    <td><input type="text" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
-                        placeholder="model"></td>
-                    <td><input type="text" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
-                    </td>
-                    <td><input type="text" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
-                        placeholder="price"></td>
-                    <td><input type="text" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
-                        placeholder="origin_price"></td>
-                    <td><input type="text" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
-                        placeholder="cost_price">
-                    </td>
-                    <td><input type="text" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
-                        placeholder="quantity"></td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
 
-          <div v-if="!editing.isVariable">
-            <div>
-              <input type="text" name="skus[0][image]" placeholder="image"
-                value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}">
-              <input type="text" name="skus[0][model]" placeholder="model"
-                value="{{ old('skus.0.model', $product->skus[0]->model ?? '') }}">
-              <input type="text" name="skus[0][sku]" placeholder="sku"
-                value="{{ old('skus.0.sku', $product->skus[0]->sku ?? '') }}">
-              <input type="text" name="skus[0][price]" placeholder="price"
-                value="{{ old('skus.0.price', $product->skus[0]->price ?? '') }}">
-              <input type="text" name="skus[0][origin_price]" placeholder="origin_price"
-                value="{{ old('skus.0.origin_price', $product->skus[0]->origin_price ?? '') }}">
-              <input type="text" name="skus[0][cost_price]" placeholder="cost_price"
-                value="{{ old('skus.0.cost_price', $product->skus[0]->cost_price ?? '') }}">
-              <input type="text" name="skus[0][quantity]" placeholder="quantity"
-                value="{{ old('skus.0.quantity', $product->skus[0]->quantity ?? '') }}">
-              <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
-              <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
-              <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
+          <div class="form-group">
+            <div class="row align-items-center">
+              <label for="" class="col-sm-2 col-form-label"></label>
+              <div class="col-sm-10">
+                <div v-if="editing.isVariable" class="selectable-variants">
+                  <div>
+                    <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
+                      <div class="title">
+                        <div>
+                          <b>@{{ variant.name[current_language_code] }}</b>
+                          <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
+                          <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
+                        </div>
+                        <div>
+                          <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
+                          <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
+                        </div>
+                      </div>
+                       <draggable
+                         element="div"
+                         v-if="variant.values.length"
+                         class="variants-wrap"
+                         @end="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                         ghost-class="dragabble-ghost"
+                         :list="variant.values"
+                         :options="{animation: 100}"
+                         >
+                         <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
+                           {{-- <div class="value-img" v-if="variant.isImage"> --}}
+                             {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
+                               {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
+                             {{-- </a> --}}
+                           {{-- </div> --}}
+
+                           <div class="open-file-manager variant-value-img" v-if="variant.isImage">
+                             <div>
+                               <img :src="thumbnail(value.image)" class="img-fluid">
+                             </div>
+                           </div>
+                           <input type="hidden" v-model="value.image">
+
+                           <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
+                           <div class="name">
+                             @{{ value.name[current_language_code] }}
+                           </div>
+                         </div>
+                      </draggable>
+                      <div v-else>
+                        <div class="p-2" @click="addVariantValue(variantIndex)">请添加 Value</div>
+                      </div>
+                    </div>
+
+                    <el-button type="primary" size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">Add variant</el-button>
+                  </div>
+
+                  <div v-if="form.skus.length" class="mt-3">
+                    <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
+                          @{{ variant.name[current_language_code] || 'No name' }}
+                        </th>
+                        <th>image</th>
+                        <th>model</th>
+                        <th>sku</th>
+                        <th>price</th>
+                        <th>orgin price</th>
+                        <th>cost price</th>
+                        <th>quantity</th>
+                      </thead>
+                      <tbody>
+                        <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
+                          <template v-for="(variantValueIndex, j) in sku.variants">
+                            <td v-if="skuIndex % variantValueRepetitions[j] == 0" :key="'pvv' + skuIndex + '-' + j"
+                              :rowspan="variantValueRepetitions[j]">
+                              <span>@{{ form.variables[j].values[variantValueIndex].name[current_language_code] || 'No name' }}</span>
+                            </td>
+                          </template>
+                          <td>
+                            <div class="open-file-manager variants-producr-img">
+                              <div>
+                                <img :src="thumbnail(sku.image)" class="img-fluid">
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'"
+                              placeholder="image">
+
+                            <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
+                            <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
+                              :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
+                          </td>
+                          <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
+                              placeholder="model"></td>
+                          <td><input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
+                          </td>
+                          <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
+                              placeholder="price"></td>
+                          <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
+                              placeholder="origin_price"></td>
+                          <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
+                              placeholder="cost_price">
+                          </td>
+                          <td><input type="text" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
+                              placeholder="quantity"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div v-if="!editing.isVariable">
+                  <div>
+                    <input type="text" name="skus[0][image]" placeholder="image"
+                      value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}">
+                    <input type="text" name="skus[0][model]" placeholder="model"
+                      value="{{ old('skus.0.model', $product->skus[0]->model ?? '') }}">
+                    <input type="text" name="skus[0][sku]" placeholder="sku"
+                      value="{{ old('skus.0.sku', $product->skus[0]->sku ?? '') }}">
+                    <input type="text" name="skus[0][price]" placeholder="price"
+                      value="{{ old('skus.0.price', $product->skus[0]->price ?? '') }}">
+                    <input type="text" name="skus[0][origin_price]" placeholder="origin_price"
+                      value="{{ old('skus.0.origin_price', $product->skus[0]->origin_price ?? '') }}">
+                    <input type="text" name="skus[0][cost_price]" placeholder="cost_price"
+                      value="{{ old('skus.0.cost_price', $product->skus[0]->cost_price ?? '') }}">
+                    <input type="text" name="skus[0][quantity]" placeholder="quantity"
+                      value="{{ old('skus.0.quantity', $product->skus[0]->quantity ?? '') }}">
+                    <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
+                    <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
+                    <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
+
+        <el-dialog
+          title="编辑"
+          :visible.sync="dialogVariables.show"
+          width="400"
+          @close="closedialogVariablesFormDialog('form')"
+          :close-on-click-modal="false"
+          >
+          <el-form ref="form" :rules="rules" :model="dialogVariables.form" label-width="100px">
+            <el-form-item label="名称" required class="language-inputs">
+              <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
+                :rules="[
+                  { required: true, message: '输入框不能为空', trigger: 'blur' },
+                ]"
+              >
+                <el-input size="mini" v-model="dialogVariables.form.name[lang.code]" placeholder="请填写名称"><template slot="prepend">@{{lang.name}}</template></el-input>
+              </el-form-item>
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="dialogVariablesFormSubmit('form')">保存</el-button>
+              <el-button @click="closedialogVariablesFormDialog('form')">取消</el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
       </form>
     </div>
   </div>
 @endsection
 
+
 @push('footer')
   <script>
+    Vue.prototype.thumbnail = function thumbnail(image, width, height) {
+      return '{{ asset('catalog') }}' + image;
+    };
+
     var app = new Vue({
       el: '#app',
       data: {
+        current_language_code: '{{ current_language_code() }}',
         form: {
           variables: @json($product->variables ?? []),
           skus: @json($product->skus ?? []),
         },
         source: {
           variables: @json($product->variables ?? []),
+          languages: @json($languages ?? []),
         },
+
         editing: {
           isVariable: @json(($product->variables ?? null) != null),
-        }
+        },
+
+        dialogVariables: {
+          show: false,
+          variantIndex: null,
+          variantValueIndex: null,
+          form: {
+            name: {}
+          },
+        },
+
+        rules: {}
       },
       computed: {
         // variant value 重复次数
@@ -184,18 +288,80 @@
         }
       },
       methods: {
-        addVariant() {
-          this.source.variables.push({
-            name: '',
-            values: []
+        // addVariant() {
+        //   this.source.variables.push({
+        //     name: '',
+        //     values: []
+        //   });
+        // },
+
+        dialogVariablesFormSubmit(form) {
+          const name = JSON.parse(JSON.stringify(this.dialogVariables.form.name));
+          const variantIndex = this.dialogVariables.variantIndex;
+          const variantValueIndex = this.dialogVariables.variantValueIndex;
+
+          this.$refs[form].validate((valid) => {
+            if (!valid) {
+              this.$message.error('请检查表单是否填写正确');
+              return;
+            }
+
+            if (variantValueIndex !== null) {
+              if (variantValueIndex == -1) { // 创建
+                this.source.variables[variantIndex].values.push({name, image: ''});
+              } else {
+                this.source.variables[variantIndex].values[variantValueIndex].name = name;
+              }
+            } else {
+              if (variantIndex == -1) { // 创建
+                this.source.variables.push({name, values: [], isImage: false});
+              } else {
+                this.source.variables[variantIndex].name = name;
+              }
+            }
+
+            this.dialogVariables.show = false;
           });
         },
 
+        closedialogVariablesFormDialog(form) {
+          this.dialogVariables.show = false;
+          this.dialogVariables.variantIndex = null;
+          this.dialogVariables.variantValueIndex = null;
+          this.dialogVariables.form.name = {};
+          this.$refs[form].clearValidate();
+        },
+
+        modalVariantOpenButtonClicked(variantIndex, variantValueIndex) {
+          this.dialogVariables.variantIndex = variantIndex;
+          this.dialogVariables.variantValueIndex = variantValueIndex;
+
+          let name = null;
+          if (variantIndex === -1 || variantValueIndex === -1) {
+            name = {};
+          } else {
+            if (variantValueIndex !== null) {
+              // 编辑 variant value
+              name = this.source.variables[variantIndex].values[variantValueIndex].name;
+            } else {
+              // 编辑 variant
+              name = this.source.variables[variantIndex].name;
+            }
+          }
+
+          console.log(name)
+          this.dialogVariables.form.name = JSON.parse(JSON.stringify(name));
+          this.dialogVariables.show = true;
+        },
+
+        removeSourceVariant() {
+
+        },
+
         addVariantValue(variantIndex) {
-          this.source.variables[variantIndex].values.push({
-            name: '',
-            image: ''
-          });
+          this.dialogVariables.show = true;
+          this.dialogVariables.type = 'variant-value';
+          this.dialogVariables.variantIndex = variantIndex;
         },
 
         remakeSkus() {

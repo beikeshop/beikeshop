@@ -6,6 +6,7 @@ use Beike\Admin\Http\Resources\ProductResource;
 use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Product;
 use Beike\Admin\Services\ProductService;
+use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 
@@ -73,6 +74,7 @@ class ProductController extends Controller
             'product' => $product,
             'descriptions' => $descriptions ?? [],
             'category_ids' => $categoryIds ?? [],
+            'languages' => LanguageRepo::all(),
             'source' => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],

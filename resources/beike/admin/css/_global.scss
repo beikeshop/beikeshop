@@ -27,6 +27,20 @@ body {
   font-size: 12px;
 }
 
+.file-manager-box {
+  .layui-layer-title {
+    background-color: #293042;
+    color: #fff;
+    border-color: #404e72;
+  }
+
+  .layui-layer-ico {
+    background: url('/image/close.png') no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 .main-content {
   display: flex;
   // flex-direction: column;

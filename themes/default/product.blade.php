@@ -232,6 +232,7 @@
           this.source.variables.forEach((variable, index) => {
             variable.values.forEach((value, value_index) => {
               const selectedVariantsIndex = this.selectedVariantsIndex.slice(0);
+
               selectedVariantsIndex[index] = value_index;
               const selectedSku = skus.find(sku => sku.toString() == selectedVariantsIndex.toString());
               if (selectedSku) {

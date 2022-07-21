@@ -3,7 +3,6 @@
 @section('title', '商品管理')
 
 @push('header')
-  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/underscore.js/1.13.3/underscore.min.js"></script>
 @endpush
 
@@ -11,8 +10,6 @@
   <div id="product-app">
     <div class="card">
       <div class="card-body">
-
-
         <div class="bg-light p-4">
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">

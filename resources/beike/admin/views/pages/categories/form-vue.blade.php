@@ -2,10 +2,6 @@
 
 @section('title', '分类管理')
 
-@push('header')
-  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
-@endpush
-
 @section('content')
   <div id="app">
     <el-card class="box-card">

@@ -2065,6 +2065,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/http */ "./resources/js/http.js");
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+var base = document.querySelector('base').href;
+$(document).on('click', '.open-file-manager', function (event) {
+  var $this = $(this);
+  layer.open({
+    type: 2,
+    title: '图片管理器',
+    shadeClose: false,
+    skin: 'file-manager-box',
+    scrollbar: false,
+    shade: 0.4,
+    area: ['1060px', '680px'],
+    content: "".concat(base, "/file_manager"),
+    success: function success(layerInstance, index) {
+      var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
+
+      iframeWindow.callback = function (images) {
+        $this.find('img').prop('src', images[0].url);
+        $this.next('input').val(images[0].path);
+        $this.next('input')[0].dispatchEvent(new Event('input'));
+      };
+    }
+  });
+});
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {
