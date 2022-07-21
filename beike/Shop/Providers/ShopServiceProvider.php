@@ -58,7 +58,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $this->app->singleton('view.finder', function ($app) {
             $paths = $app['config']['view.paths'];
-            if ($theme = setting('base.theme')) {
+            if ($theme = system_setting('base.theme')) {
                 $customTheme[] = base_path("themes/{$theme}");
                 $paths = array_merge($customTheme, $paths);
             }
