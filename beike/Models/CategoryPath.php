@@ -3,10 +3,9 @@
 namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class CategoryPath extends Model
+class CategoryPath extends Base
 {
     use HasFactory;
 

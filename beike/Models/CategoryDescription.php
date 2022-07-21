@@ -3,9 +3,8 @@
 namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class CategoryDescription extends Model
+class CategoryDescription extends Base
 {
     use HasFactory;
 

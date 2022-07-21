@@ -11,9 +11,7 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class OrderProduct extends Model
+class OrderProduct extends Base
 {
     protected $fillable = [
         'product_id', 'order_number', 'product_sku', 'name', 'image', 'quantity', 'price',

@@ -11,10 +11,9 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Order extends Model
+class Order extends Base
 {
     protected $fillable = [
         'number', 'customer_id', 'customer_group_id', 'shipping_address_id', 'payment_address_id', 'customer_name',
