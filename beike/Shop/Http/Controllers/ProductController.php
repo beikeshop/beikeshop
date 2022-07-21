@@ -16,7 +16,7 @@ class ProductController extends Controller
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),
         ];
-
+dd($data);
         return view('product', $data);
     }
 }
