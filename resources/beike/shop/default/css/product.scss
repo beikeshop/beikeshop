@@ -25,9 +25,19 @@ body.page-product {
         padding: 0.5rem;
         cursor: pointer;
         text-align: center;
+        font-weight: bold;
+        // border-radius: 2rem;
         transition: all .1s ease-in-out;
-        &:hover, &.active {
+        &:hover, &.selected {
           border-color: #222;
+        }
+
+        &:not(.selected) {
+          &.disabled {
+            border: 1px dashed #bfbfbf;
+            color: #999;
+            font-weight: initial;
+          }
         }
       }
     }

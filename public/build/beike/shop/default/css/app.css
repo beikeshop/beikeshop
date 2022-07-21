@@ -393,10 +393,16 @@ body.page-product .variables-wrap .variable-info > div {
   padding: 0.5rem;
   cursor: pointer;
   text-align: center;
+  font-weight: bold;
   transition: all 0.1s ease-in-out;
 }
-body.page-product .variables-wrap .variable-info > div:hover, body.page-product .variables-wrap .variable-info > div.active {
+body.page-product .variables-wrap .variable-info > div:hover, body.page-product .variables-wrap .variable-info > div.selected {
   border-color: #222;
+}
+body.page-product .variables-wrap .variable-info > div:not(.selected).disabled {
+  border: 1px dashed #bfbfbf;
+  color: #999;
+  font-weight: initial;
 }
 body.page-product .peoduct-info .rating-wrap {
   margin-bottom: 2rem;

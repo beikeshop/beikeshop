@@ -47,14 +47,14 @@
           </div>
 
           <div class="variables-wrap" v-if="source.variables.length">
-            <div class="variable-group mb-3" v-for="variable, variable_index in source.variables" :key="variable_index">
-              <p class=""><strong>@{{ variable.name }}</strong></p>
+            <div class="variable-group mb-2" v-for="variable, variable_index in source.variables" :key="variable_index">
+              <p class="mb-2"><strong>@{{ variable.name }}</strong></p>
               <div class="variable-info">
                 <div
                   v-for="value, value_index in variable.values"
                   @click="checkedVariableValue(variable_index, value_index, value)"
                   :key="value_index"
-                  :class="value.selected ? 'active' : ''">
+                  :class="[value.selected ? 'selected' : '', value.disabled ? 'disabled' : '']">
                   @{{ value.name }}
                 </div>
               </div>
@@ -178,6 +178,7 @@
 
           this.checkedVariants()
           this.getSelectedSku();
+          this.updateSelectedVariantsStatus()
         }
       },
 
@@ -189,6 +190,7 @@
 
           this.updateSelectedVariantsIndex();
           this.getSelectedSku();
+          this.updateSelectedVariantsStatus()
         },
 
         // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
@@ -224,7 +226,22 @@
           })
         },
 
-        // 根据 skus 中 quantity 字段，对应到 variants 的 每种组合 variables 的 selected 字段
+        updateSelectedVariantsStatus() {
+          // skus 里面 quantity 不为 0 的 sku.variants
+          const skus = this.source.skus.filter(sku => sku.quantity > 0).map(sku => sku.variants);
+          this.source.variables.forEach((variable, index) => {
+            variable.values.forEach((value, value_index) => {
+              const selectedVariantsIndex = this.selectedVariantsIndex.slice(0);
+              selectedVariantsIndex[index] = value_index;
+              const selectedSku = skus.find(sku => sku.toString() == selectedVariantsIndex.toString());
+              if (selectedSku) {
+                value.disabled = false;
+              } else {
+                value.disabled = true;
+              }
+            })
+          });
+        },
       }
     })
   </script>
