@@ -23,12 +23,21 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
-                Route::Resource('categories', Controllers\CategoryController::class);
+                Route::resource('categories', Controllers\CategoryController::class);
+                Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+
+                Route::resource('customers', Controllers\CustomerController::class);
+                Route::resource('customers.addresses', Controllers\AddressController::class);
+                Route::resource('countries.zones', Controllers\ZoneController::class);
+                Route::resource('customer_groups', Controllers\CustomerGroupController::class);
+
+                Route::resource('currencies', Controllers\CurrencyController::class);
+
                 Route::get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
                 Route::put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
                 Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
-                Route::Resource('files', Controllers\FileController::class);
+                Route::resource('files', Controllers\FileController::class);
 
                 Route::get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
                 Route::post('file_manager/directory', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
@@ -36,22 +45,10 @@ Route::prefix($adminName)
                 Route::post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
                 Route::delete('file_manager/delete_files', [Controllers\FileManagerController::class, 'destroyFiles'])->name('file_manager.delete_files');
 
-                Route::Resource('customers', Controllers\CustomerController::class);
-                Route::resource('customers.addresses', Controllers\AddressController::class);
-                Route::resource('countries.zones', Controllers\ZoneController::class);
-                Route::Resource('customer_groups', Controllers\CustomerGroupController::class);
-
-                Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
-                Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
-                Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
-                Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
-                Route::resource('products', Controllers\ProductController::class);
-                Route::resource('currencies', Controllers\CurrencyController::class);
+                Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
                 Route::get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
                 Route::get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
-
-                Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
 
                 Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
@@ -61,7 +58,11 @@ Route::prefix($adminName)
                 Route::post('plugins/{code}/install', [Controllers\PluginController::class, 'install'])->name('plugins.install');
                 Route::post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
-                Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
+                Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
+                Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
+                Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
+                Route::resource('products', Controllers\ProductController::class);
 
+                Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
             });
     });
