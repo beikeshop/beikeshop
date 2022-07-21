@@ -31,6 +31,16 @@ class PluginController extends Controller
         return view('admin::pages.plugins.index', $data);
     }
 
+
+    /**
+     * 上传插件
+     */
+    public function import(Request $request): array
+    {
+        return json_success("导入成功");
+    }
+
+
     /**
      * @param Request $request
      * @param $code

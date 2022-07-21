@@ -54,6 +54,7 @@ Route::prefix($adminName)
                 Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
 
                 Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
+                Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
                 Route::get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
                 Route::put('plugins/{code}', [Controllers\PluginController::class, 'update'])->name('plugins.update');
                 Route::put('plugins/{code}/status', [Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
