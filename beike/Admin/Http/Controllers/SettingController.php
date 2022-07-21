@@ -11,7 +11,39 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Repositories\SettingRepo;
+use Illuminate\Http\Request;
+
 class SettingController extends Controller
 {
+    /**
+     * 显示系统设置页面
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        return setting("system");
+    }
 
+
+    /**
+     * 更新系统设置
+     *
+     * @throws \Throwable
+     */
+    public function store(Request $request)
+    {
+        $settings = json_decode($request->getContent(), true);
+        foreach ($settings as $key => $value) {
+            $data = [
+                'type' => 'system',
+                'space' => 'base',
+                'name' => $key,
+                'value' => $value,
+                'json' => is_array($value)
+            ];
+            SettingRepo::createOrUpdate($data);
+        }
+    }
 }
