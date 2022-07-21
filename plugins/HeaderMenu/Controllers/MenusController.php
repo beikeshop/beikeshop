@@ -18,7 +18,7 @@ class MenusController extends Controller
 {
     public function latestProducts()
     {
-        $products = ProductRepo::getBuilder()->orderByDesc('created_at')->paginate(40);
+        $products = ProductRepo::getBuilder()->orderByDesc('updated_at')->paginate(40);
         return view("HeaderMenu::latest_products", ['products' => $products]);
     }
 }
