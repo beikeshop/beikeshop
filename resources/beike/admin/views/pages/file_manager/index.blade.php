@@ -373,11 +373,16 @@
         this.$confirm('是否要删除选中文件', '提示', {
           type: 'warning'
         }).then(() => {
-          // 删除选中的文件
-          console.log(this.selectImageIndex);
+          const selectImageIndex = this.selectImageIndex;
+            // 获取images中下标与selectImageIndex相同的图片
+          const images = this.images.filter(e => selectImageIndex.includes(this.images.indexOf(e)));
+          // images 取 path 组成数组 然后用 | 分割成字符串
+          const files = images.map(e => e.name);
 
-          // this.images.splice(this.selectImageIndex, 1);
-          this.$message({type: 'success',message: '删除成功!'});
+          $http.delete('file_manager/delete',  {path: this.folderCurrent, files: files}).then((res) => {
+            layer.msg(res.message)
+            this.loadData()
+          })
         }).catch(_=>{});
       },
 
