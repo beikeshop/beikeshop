@@ -379,7 +379,7 @@
           // images 取 path 组成数组 然后用 | 分割成字符串
           const files = images.map(e => e.name);
 
-          $http.delete('file_manager/delete',  {path: this.folderCurrent, files: files}).then((res) => {
+          $http.delete('file_manager/files',  {path: this.folderCurrent, files: files}).then((res) => {
             layer.msg(res.message)
             this.loadData()
           })
@@ -391,7 +391,7 @@
           this.$confirm('正在进行删除文件夹操作，文件夹内所有文件都将被删除，是否确认？', '提示', {
             type: 'warning'
           }).then(() => {
-            $http.delete(`file_manager/delete_files`, {name: this.folderCurrent}).then((res) => {
+            $http.delete(`file_manager/directories`, {name: this.folderCurrent}).then((res) => {
               layer.msg(res.message)
               this.$refs.tree.setCurrentKey(node.parent.data.path)
               this.folderCurrent = node.parent.data.path;
