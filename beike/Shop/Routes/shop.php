@@ -66,6 +66,7 @@ Route::prefix('/')
                 Route::resource('addresses', AddressController::class);
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
+                Route::post('update', [AccountController::class, 'update'])->name('account.update');
                 Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
             });
     });

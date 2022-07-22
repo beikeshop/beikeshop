@@ -14,6 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Requests\EditRequest;
 use Beike\Shop\Http\Requests\ForgottenRequest;
 use http\Env\Request;
 use Illuminate\Support\Facades\Hash;
@@ -47,5 +48,17 @@ class AccountController extends Controller
         CustomerRepo::update(current_customer(), ['password' => $request->get('password')]);
 
         return json_success('密码修改成功');
+    }
+
+    /**
+     * 顾客修改个人信息
+     * @param EditRequest $request
+     * @return array
+     */
+    public function update(EditRequest $request)
+    {
+        CustomerRepo::update($request->only('name'));
+
+        return json_success('修改成功');
     }
 }
