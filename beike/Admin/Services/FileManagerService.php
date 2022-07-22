@@ -35,14 +35,10 @@ class FileManagerService
         $result = [];
         foreach ($directories as $directory) {
             $baseName = basename($directory);
-            if ($baseName == 'index.html') {
-                continue;
-            }
-
-            $fileName = str_replace($this->fileBasePath, '', $directory);
+            $dirName = str_replace($this->fileBasePath, '', $directory);
             if (is_dir($directory)) {
-                $item = $this->handleFolder($fileName, $baseName);
-                $subDirectories = self::getDirectories($fileName);
+                $item = $this->handleFolder($dirName, $baseName);
+                $subDirectories = $this->getDirectories($dirName);
                 if ($subDirectories) {
                     $item['children'] = $subDirectories;
                 }
@@ -66,27 +62,22 @@ class FileManagerService
         $currentBasePath = $this->fileBasePath . $baseFolder;
         $files = glob($currentBasePath . '/*');
 
-        $folders = $images = [];
+        $images = [];
         foreach ($files as $file) {
             $baseName = basename($file);
             if ($baseName == 'index.html') {
                 continue;
             }
-
             $fileName = str_replace($this->fileBasePath, '', $file);
-            if (is_dir($file)) {
-                $folders[] = $this->handleFolder($fileName, $baseName);
-            } elseif (is_file($file)) {
+            if (is_file($file)) {
                 $images[] = $this->handleImage($fileName, $baseName);
             }
         }
 
         $page = $page > 0 ? $page : 1;
         $perPage = 20;
-
         $imageCollection = collect($images);
         $data = [
-            'folders' => $folders,
             'images' => $imageCollection->forPage($page, $perPage)->values()->toArray(),
             'image_total' => $imageCollection->count(),
             'image_page' => $page,
@@ -142,7 +133,7 @@ class FileManagerService
     public function updateName($originPath, $newPath)
     {
         $originPath = public_path("catalog/{$originPath}");
-        if (!is_dir($originPath) || !file_exists($originPath)) {
+        if (!is_dir($originPath) && !file_exists($originPath)) {
             throw new \Exception('原始文件或者文件夹无效');
         }
         $originBase = dirname($originPath);
