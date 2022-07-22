@@ -74,9 +74,11 @@
                       </div>
                        <draggable
                          element="div"
+                         @start="isMove = true"
                          v-if="variant.values.length"
                          class="variants-wrap"
-                         @end="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                         @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                         @end="isMove = false"
                          ghost-class="dragabble-ghost"
                          :list="variant.values"
                          :options="{animation: 100}"
@@ -178,8 +180,6 @@
                     </div>
                   </div>
                   <input type="hidden" v-model="form.skus[0].image" name="skus[0][image]">
-{{--                   <input type="text" class="form-control form-control-sm short" name="skus[0][image]" placeholder="image"
-                    value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}"> --}}
                 </div>
               </div>
             </div>
@@ -252,7 +252,6 @@
           </div>
         </div>
 
-
         <el-dialog
           title="编辑"
           :visible.sync="dialogVariables.show"
@@ -298,6 +297,7 @@
       el: '#app',
       data: {
         current_language_code: '{{ current_language_code() }}',
+        isMove: false,
         form: {
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
@@ -344,7 +344,9 @@
       watch: {
         'source.variables': {
           deep: true,
-          handler: function() {
+          handler: function(val) {
+            if (this.isMove) return;
+
             // 原始规格数据变动，过滤有效规格并同步至 form.variables
             let variants = [];
             const sourceVariants = JSON.parse(JSON.stringify(this.source.variables));
@@ -355,6 +357,7 @@
                 variants.push(sourceVariant);
               }
             }
+
             this.form.variables = variants;
             this.remakeSkus();
           }
@@ -366,6 +369,10 @@
         //     name: '',
         //     values: []
         //   });
+        // },
+
+        // datadragEnd(e) {
+        //   console.log(e);
         // },
 
         dialogVariablesFormSubmit(form) {
@@ -398,7 +405,19 @@
         },
 
         swapSourceVariantValue(e, variantIndex) {
-          console.log(e, variantIndex)
+          // console.log(e, variantIndex);
+          // console.log(e.oldIndex, e.newIndex, variantIndex)
+          // 将 sku.variants[variantIndex] == e.oldIndex 的 sku[0] 与 sku.variants[variantIndex] == e.newIndex 的 sku[1] 交换顺序
+          // this.form.skus 数组顺序调换
+
+
+
+          this.form.skus.forEach(function(sku) {
+            const oldIndex = sku.variants[variantIndex];
+            const newIndex = sku.variants[variantIndex] == e.oldIndex ? e.newIndex.toString() : e.oldIndex.toString()
+            sku.variants[variantIndex] = newIndex;
+          });
+          this.remakeSkus()
         },
 
         closedialogVariablesFormDialog(form) {
@@ -477,12 +496,15 @@
               });
             }
           }
+
           // 第一个子商品用主商品的值
-          skus[0].model = this.form.model;
-          skus[0].sku = this.form.sku;
-          skus[0].price = this.form.price;
-          skus[0].quantity = this.form.quantity;
-          skus[0].status = this.form.status;
+          if (!this.isMove) {
+            skus[0].model = this.form.model;
+            skus[0].sku = this.form.sku;
+            skus[0].price = this.form.price;
+            skus[0].quantity = this.form.quantity;
+            skus[0].status = this.form.status;
+          }
 
           this.form.skus = skus;
         },
