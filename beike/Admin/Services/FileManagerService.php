@@ -59,7 +59,7 @@ class FileManagerService
      */
     public function getFiles($baseFolder, int $page = 1): array
     {
-        $currentBasePath = $this->fileBasePath . $baseFolder;
+        $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $files = glob($currentBasePath . '/*');
 
         $images = [];
