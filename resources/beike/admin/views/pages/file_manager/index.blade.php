@@ -346,6 +346,7 @@
         this.images[index].selected = !this.images[index].selected
       },
 
+      // 选取
       fileChecked() {
         let typedFiles = this.images.filter(e => e.selected)
 
@@ -416,10 +417,8 @@
           inputValue: type == 'image' ? this.images[this.selectImageIndex].name : (type == 'renameFolder' ? data.name : '新建文件夹'),
           inputErrorMessage: '不能为空'
         }).then(({ value }) => {
-
-          let fileAllPathName = this.folderCurrent + '/' + value;
-
           if (type == 'addFolder') {
+            let fileAllPathName = this.folderCurrent + '/' + value;
             $http.post(`file_manager/directory`, {name: fileAllPathName}).then((res) => {
               layer.msg(res.message)
               this.$refs.tree.append({name: value, path: fileAllPathName, leaf: true}, node);
@@ -438,7 +437,10 @@
           }
 
           if (type == 'image') {
-            $http.post(`file_manager/rename`, {origin_name: fileAllPathNamet, new_name: value}).then((res) => {
+            const name = this.images[this.selectImageIndex].name;
+            const origin_name = this.folderCurrent == '/' ? '/' + name : this.folderCurrent + '/' + name;
+
+            $http.post(`file_manager/rename`, {origin_name: origin_name, new_name: value}).then((res) => {
               layer.msg(res.message)
             })
           }
