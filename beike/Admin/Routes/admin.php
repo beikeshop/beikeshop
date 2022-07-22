@@ -40,7 +40,8 @@ Route::prefix($adminName)
                 Route::resource('files', Controllers\FileController::class);
 
                 Route::get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
-                Route::post('file_manager/directory', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
+                Route::get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
+                Route::post('file_manager/directories', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
                 Route::post('file_manager/upload', [Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
                 Route::post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
                 Route::delete('file_manager/delete_files', [Controllers\FileManagerController::class, 'destroyFiles'])->name('file_manager.delete_files');

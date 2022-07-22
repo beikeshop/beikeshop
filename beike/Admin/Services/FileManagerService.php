@@ -25,6 +25,35 @@ class FileManagerService
 
 
     /**
+     * 获取某个目录下所有文件夹
+     */
+    public function getDirectories($baseFolder = '/'): array
+    {
+        $currentBasePath = $this->fileBasePath . $baseFolder;
+        $directories = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
+
+        $result = [];
+        foreach ($directories as $directory) {
+            $baseName = basename($directory);
+            if ($baseName == 'index.html') {
+                continue;
+            }
+
+            $fileName = str_replace($this->fileBasePath, '', $directory);
+            if (is_dir($directory)) {
+                $item = $this->handleFolder($fileName, $baseName);
+                $subDirectories = self::getDirectories($fileName);
+                if ($subDirectories) {
+                    $item['children'] = $subDirectories;
+                }
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
+
+
+    /**
      * 获取某个目录下的文件和文件夹
      *
      * @param $baseFolder
@@ -34,12 +63,7 @@ class FileManagerService
      */
     public function getFiles($baseFolder, int $page = 1): array
     {
-        $fileBasePath = $this->fileBasePath;
-        if ($baseFolder) {
-            $currentBasePath = $fileBasePath . $baseFolder;
-        } else {
-            $currentBasePath = $fileBasePath;
-        }
+        $currentBasePath = $this->fileBasePath . $baseFolder;
         $files = glob($currentBasePath . '/*');
 
         $folders = $images = [];
@@ -49,7 +73,7 @@ class FileManagerService
                 continue;
             }
 
-            $fileName = str_replace($fileBasePath, '', $file);
+            $fileName = str_replace($this->fileBasePath, '', $file);
             if (is_dir($file)) {
                 $folders[] = $this->handleFolder($fileName, $baseName);
             } elseif (is_file($file)) {
@@ -141,8 +165,7 @@ class FileManagerService
     {
         return [
             'path' => $folderPath,
-            'name' => $baseName,
-            'leaf' => !$this->hasSubFolders($folderPath),
+            'name' => $baseName
         ];
     }
 

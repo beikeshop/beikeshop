@@ -26,6 +26,18 @@ class FileManagerController extends Controller
         return view('admin::pages.file_manager.index', $data);
     }
 
+    /**
+     * 获取文件夹和文件列表
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getDirectories(Request $request)
+    {
+        $baseFolder = $request->get('base_folder');
+        return (new FileManagerService)->getDirectories($baseFolder);
+    }
+
 
     /**
      * 创建文件夹
