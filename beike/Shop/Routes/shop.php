@@ -34,7 +34,7 @@ Route::prefix('/')
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
-        Route::get('countries.zones', [ZoneController::class, 'index'])->name('countries.zones.index');
+        Route::get('countries/{id}/zones', [ZoneController::class, 'index'])->name('countries.zones.index');
 
         Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
