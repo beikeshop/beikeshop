@@ -106,7 +106,7 @@
           drag
           action=""
           :show-file-list="false"
-          accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG"
+          accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4"
           :before-upload="beforePhotoUpload"
           :on-success="handlePhotoSuccess"
           :on-change="handleUploadChange"
@@ -157,6 +157,7 @@
 
       uploadFileDialog: {
         show: false,
+        total: 0,
         images: []
       },
 
@@ -215,8 +216,11 @@
       },
 
       uploadFileDialogClose() {
+        if (this.uploadFileDialog.images.length) {
+          this.loadData()
+        }
+
         this.uploadFileDialog.images = [];
-        $('.content-center').animate({ scrollTop: 1000} , 'fast');
       },
 
       openUploadFile() {
@@ -230,9 +234,9 @@
       handlePhotoSuccess(data) {
         // this.editing.photoLoading = false;
 
-        if (data.images) {
-          this.images.push(data.images);
-        }
+        // if (data.images) {
+        //   this.images.push(data.images);
+        // }
       },
 
       // 文件上传
@@ -261,11 +265,11 @@
         $http.post('file_manager/upload', formData).then((res) => {
           this.uploadFileDialog.images[index].status = 'complete';
           this.uploadFileDialog.images[index].progre = 100;
-          index += 1;
-        })
+        }).finally(() => {index += 1})
       },
 
-      handleUploadChange() {
+      handleUploadChange(e) {
+        console.log(e);
         // console.log('handleUploadChange');
       },
 
