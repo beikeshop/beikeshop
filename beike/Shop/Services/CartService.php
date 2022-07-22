@@ -150,7 +150,8 @@ class CartService
             'carts' => $carts,
             'quantity' => $quantity,
             'amount' => $amount,
-            'amount_format' => currency_format($amount)
+            'amount_format' => currency_format($amount),
+            'totals' => TotalService::getTotals(),
         ];
         return $data;
     }
