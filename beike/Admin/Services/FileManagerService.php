@@ -103,7 +103,7 @@ class FileManagerService
 
 
     /**
-     * 批量删除文件或文件夹
+     * 删除文件或文件夹
      *
      * @param $filePath
      * @throws \Exception
@@ -119,6 +119,26 @@ class FileManagerService
             @rmdir($filePath);
         } elseif (file_exists($filePath)) {
             @unlink($filePath);
+        }
+    }
+
+
+    /**
+     * 批量删除文件
+     *
+     * @param $basePath
+     * @param $files
+     */
+    public function deleteFiles($basePath, $files)
+    {
+        if (empty($basePath) && empty($files)) {
+            return;
+        }
+        foreach ($files as $file) {
+            $filePath = $basePath . '/' . $file;
+            if (file_exists($filePath)) {
+                @unlink($filePath);
+            }
         }
     }
 

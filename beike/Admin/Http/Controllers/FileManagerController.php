@@ -77,14 +77,31 @@ class FileManagerController extends Controller
 
     /**
      * 删除文件或文件夹
-     * DELETE    /admin/file_manager/delete
+     * DELETE    /admin/file_manager/files  {"path":"/xx/yy", "files":["1.jpg", "2.png"]}
      * @throws \Exception
      */
     public function destroyFiles(Request $request): array
     {
+        $requestData = json_decode($request->getContent(), true);
+        $basePath = $requestData['path'] ?? '';
+        $files = $requestData['files'] ?? [];
+        (new FileManagerService)->deleteFiles($basePath, $files);
+        return json_success('删除成功');
+    }
+
+
+    /**
+     * 删除文件夹
+     *
+     * @param Request $request
+     * @return array
+     * @throws \Exception
+     */
+    public function destroyDirectories(Request $request): array
+    {
         $folderName = $request->get('name');
         (new FileManagerService)->deleteDirectoryOrFile($folderName);
-        return json_success('删除成功');
+        return json_success('文件夹删除成功');
     }
 
 
