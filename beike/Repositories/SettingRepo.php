@@ -109,7 +109,7 @@ class SettingRepo
         $space = $data['space'] ?? '';
         $name = $data['name'] ?? '';
         $value = (string)$data['value'] ?? '';
-        $json = (bool)$data['json'] ?? '';
+        $json = (bool)$data['json'] ?? is_array($value);
 
         $setting = Setting::query()
             ->where('type', $type)
