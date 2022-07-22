@@ -135,7 +135,7 @@ class FileManagerService
             return;
         }
         foreach ($files as $file) {
-            $filePath = $basePath . '/' . $file;
+            $filePath = public_path("catalog/{$basePath}/$file");
             if (file_exists($filePath)) {
                 @unlink($filePath);
             }
