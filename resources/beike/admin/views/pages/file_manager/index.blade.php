@@ -144,7 +144,7 @@
 
       selectImageIndex: [],
 
-      treeData: [{name: '图片空间', path: '/', children: @json($folders)}],
+      treeData: [{name: '图片空间', path: '/', children: @json($directories)}],
 
       defaultProps: {
         children: 'children',
@@ -163,7 +163,7 @@
 
       triggerLeftOffset: 0,
 
-      images: @json($images),
+      images: [],
       image_total: 0,
       image_page: 1,
     },
@@ -277,14 +277,7 @@
       },
 
       loadData(e, node) {
-        $http.get(`file_manager?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
-          if (node) {
-            if (!e.children) {
-              node.expanded = !node.expanded;
-              this.$refs["tree"].updateKeyChildren(this.folderCurrent, res.folders);
-            }
-          }
-
+        $http.get(`file_manager/files?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
@@ -475,6 +468,7 @@
     },
     // 实例被挂载后调用
     mounted () {
+      this.loadData()
       // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
       document.addEventListener('keydown', (e) => {
         this.isShift = e.shiftKey;
