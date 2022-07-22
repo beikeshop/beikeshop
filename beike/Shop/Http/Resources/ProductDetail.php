@@ -31,13 +31,16 @@ class ProductDetail extends JsonResource
     private function decodeVariables($variables)
     {
         $lang = current_language_code();
-        return array_map(function ($item) use ($lang){
+        if (empty($variables)) {
+            return [];
+        }
+        return array_map(function ($item) use ($lang) {
             return [
                 'name' => $item['name'][$lang],
-                'values' => array_map(function ($item) use ($lang){
+                'values' => array_map(function ($item) use ($lang) {
                     return [
                         'name' => $item['name'][$lang],
-                        'image' => image_resize($item['image'], 100, 100),
+                        'image' => image_resize('catalog/'.$item['image'], 100, 100),
                     ];
                 }, $item['values']),
             ];
