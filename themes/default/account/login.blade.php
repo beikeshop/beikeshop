@@ -36,11 +36,11 @@
                 <el-input v-model="loginForm.email" placeholder="邮箱地址"></el-input>
               </el-form-item>
 
-              <el-form-item label="密码" prop="password" class="mb-1">
+              <el-form-item label="密码" prop="password" class="mb-2">
                 <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
               </el-form-item>
 
-              <a class="text-muted" href="{{ shop_route('forgotten.index') }}">Forgot Your Password?</a>
+              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> 忘记密码</a>
 
               <div class="mt-4 mb-3">
                 <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> 登录</button>
