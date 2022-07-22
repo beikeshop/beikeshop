@@ -379,7 +379,9 @@
           // images 取 path 组成数组 然后用 | 分割成字符串
           const files = images.map(e => e.name);
 
-          $http.delete('file_manager/files',  {path: this.folderCurrent, files: files}).then((res) => {
+          this.loading = true;
+
+          $http.delete('file_manager/files',  {path: this.folderCurrent, files: files}, {hload: true}).then((res) => {
             layer.msg(res.message)
             this.loadData()
           })
@@ -396,8 +398,7 @@
               this.$refs.tree.setCurrentKey(node.parent.data.path)
               this.folderCurrent = node.parent.data.path;
               this.$refs.tree.remove(data.path)
-              this.loadData()
-            })
+            }).finally(() => this.loadData())
           }).catch(_=>{});
         }
       },
