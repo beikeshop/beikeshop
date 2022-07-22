@@ -29,7 +29,7 @@ class FileManagerService
      */
     public function getDirectories($baseFolder = '/'): array
     {
-        $currentBasePath = $this->fileBasePath . $baseFolder;
+        $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $directories = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
 
         $result = [];
