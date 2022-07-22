@@ -176,10 +176,11 @@
 
                   <div class="open-file-manager set-product-img">
                     <div>
-                      <img :src="thumbnail(form.skus[0].image)" class="img-fluid">
+                      {{-- <img :src="thumbnail(form.skus[0].image)" class="img-fluid"> --}}
+                      <img src="{{ old('skus.0.image', 'catalog/' . $product->skus[0]->image ?? '') }}" class="img-fluid">
                     </div>
                   </div>
-                  <input type="hidden" v-model="form.skus[0].image" name="skus[0][image]">
+                  <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 </div>
               </div>
             </div>
@@ -451,8 +452,14 @@
           this.dialogVariables.show = true;
         },
 
-        removeSourceVariant() {
-
+        removeSourceVariant(variantIndex) {
+          this.source.variables.splice(variantIndex, 1);
+          if (!this.source.variables.length) {
+            setTimeout(() => { // 等 remakeSkus 完成 this.form.skus = [];
+              this.form.skus = [{product_sku_id: 0,position: 1,variants: [],image: '',model: '',sku: '',price: null,quantity: null,is_default: 1}];
+              this.editing.isVariable = false;
+            }, 0);
+          }
         },
 
         addVariantValue(variantIndex) {
