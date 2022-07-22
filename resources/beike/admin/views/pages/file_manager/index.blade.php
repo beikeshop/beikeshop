@@ -244,6 +244,7 @@
 
         var formData = new FormData();
         formData.append("file", file.file, file.file.name);
+        formData.append("path", this.folderCurrent);
 
         newFile = {
           // index: this.images.length,
