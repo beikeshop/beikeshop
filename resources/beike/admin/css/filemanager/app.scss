@@ -57,13 +57,22 @@ body.page-filemanager {
       }
 
       .tree-wrap {
-        .is-current {
-
+        .el-tree-node {
+          &.is-current > .el-tree-node__content {
+            .right {
+              display: block;
+            }
+          }
         }
 
         .el-tree-node__content {
           height: 32px;
           background-color: transparent;
+          &:hover {
+            .right {
+              display: block;
+            }
+          }
         }
 
         .custom-tree-node {
@@ -73,6 +82,8 @@ body.page-filemanager {
           justify-content: space-between; // flex-end | center | space-between
 
           .right {
+            display: none;
+
             span {
               margin-right: 6px;
 

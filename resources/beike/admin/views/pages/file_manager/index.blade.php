@@ -35,7 +35,8 @@
         class="tree-wrap">
         <div class="custom-tree-node" slot-scope="{ node, data }">
           <div>@{{ node.label }}</div>
-          <div class="right" v-if="node.isCurrent">
+          {{-- v-if="node.isCurrent" --}}
+          <div class="right" >
             <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
               <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i class="el-icon-circle-plus-outline"></i></span>
             </el-tooltip>
@@ -193,7 +194,7 @@
     },
     // 组件方法
     methods: {
-      handleNodeClick(e, node, data) {
+      handleNodeClick(e, node) {
         if (e.path == this.folderCurrent) {
           return;
         }
@@ -295,6 +296,7 @@
 
           if (node) {
             node.expanded = true
+            this.updateDefaultExpandedKeys(node.data, 'expand')
           }
         }).finally(() => this.loading = false);
       },
@@ -427,9 +429,13 @@
         }).then(({ value }) => {
           if (type == 'addFolder') {
             let fileAllPathName = this.folderCurrent + '/' + value;
-            $http.post(`file_manager/directores`, {name: fileAllPathName}).then((res) => {
+            $http.post(`file_manager/directories`, {name: fileAllPathName}).then((res) => {
               layer.msg(res.message)
+              node.expanded = true
               this.$refs.tree.append({name: value, path: fileAllPathName, leaf: true}, node);
+              this.$refs.tree.setCurrentKey(fileAllPathName)
+              this.folderCurrent = fileAllPathName;
+              this.updateDefaultExpandedKeys(node.data, 'expand')
             })
           }
 
