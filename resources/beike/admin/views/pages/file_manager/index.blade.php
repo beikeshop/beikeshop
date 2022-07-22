@@ -65,7 +65,7 @@
           <el-button size="small" type="primary" @click="openUploadFile" icon="el-icon-upload2">上传文件</el-button>
         </div>
       </div>
-      <div class="content-center" v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
+      <div v-if="images.length" class="content-center" v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
         <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index" @click="checkedImage(index)">
           <div class="img"><img :src="file.url"></div>
           <div class="text">
@@ -74,6 +74,7 @@
           </div>
         </div>
       </div>
+      <el-empty v-else description="没有文件"></el-empty>
       <div class="content-footer">
         <div class="right"></div>
         <div class="pagination-wrap">
@@ -196,8 +197,10 @@
         if (e.path == this.folderCurrent) {
           return;
         }
+
         this.folderCurrent = e.path
         this.image_page = 1;
+        sessionStorage.setItem('folderCurrent', this.folderCurrent);
         this.loadData(e, node)
       },
 
@@ -266,22 +269,33 @@
 
       updateDefaultExpandedKeys(node, type) {
         const isExist = this.defaultkeyarr.some(item => item === node.path)
-        if (!isExist) {
-          if (type == 'expand') return this.defaultkeyarr.push(node.path)
+
+        if (type == 'expand') {
+          if (!isExist) {
+            this.defaultkeyarr.push(node.path)
+          }
         } else {
           const index = this.defaultkeyarr.findIndex(e => e == node.path);
-          if (type == 'collapse') return this.defaultkeyarr.splice(index, 1);
+          if (index > -1) {
+            this.defaultkeyarr.splice(index, 1);
+          }
         }
 
         sessionStorage.setItem('defaultkeyarr', this.defaultkeyarr);
       },
 
       loadData(e, node) {
-        $http.get(`file_manager/files?base_folder=${this.folderCurrent}`, {page: this.image_page}).then((res) => {
+        this.loading = true;
+
+        $http.get(`file_manager/files?base_folder=${this.folderCurrent}`, {page: this.image_page}, {hload: true}).then((res) => {
           this.images = res.images
           this.image_page = res.image_page
           this.image_total = res.image_total
-        })
+
+          if (node) {
+            node.expanded = true
+          }
+        }).finally(() => this.loading = false);
       },
 
       // 按下滑动器
@@ -412,7 +426,7 @@
         }).then(({ value }) => {
           if (type == 'addFolder') {
             let fileAllPathName = this.folderCurrent + '/' + value;
-            $http.post(`file_manager/directory`, {name: fileAllPathName}).then((res) => {
+            $http.post(`file_manager/directores`, {name: fileAllPathName}).then((res) => {
               layer.msg(res.message)
               this.$refs.tree.append({name: value, path: fileAllPathName, leaf: true}, node);
             })
@@ -461,9 +475,14 @@
 
     created () {
       const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
+      const folderCurrent = sessionStorage.getItem('folderCurrent');
 
       if (defaultkeyarr) {
-        // this.defaultkeyarr = defaultkeyarr.split(',');
+        this.defaultkeyarr = defaultkeyarr.split(',');
+      }
+
+      if (folderCurrent) {
+        this.folderCurrent = folderCurrent;
       }
     },
     // 实例被挂载后调用

@@ -51,6 +51,7 @@ body.page-filemanager .filemanager-wrap .filemanager-navbar .el-tree--highlight-
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .el-tree-node__content {
   height: 32px;
+  background-color: transparent;
 }
 body.page-filemanager .filemanager-wrap .filemanager-navbar .tree-wrap .custom-tree-node {
   width: 100%;
