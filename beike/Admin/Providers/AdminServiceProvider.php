@@ -57,9 +57,9 @@ class AdminServiceProvider extends ServiceProvider
             $this->publishResources();
         }
 
-        Config::set('filesystems.disks.upload', [
+        Config::set('filesystems.disks.catalog', [
             'driver' => 'local',
-            'root' => public_path('upload'),
+            'root' => public_path('catalog'),
         ]);
 
         $this->loadDesignComponents();

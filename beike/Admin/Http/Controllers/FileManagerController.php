@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\UploadRequest;
 use Beike\Admin\Services\FileManagerService;
 use Illuminate\Http\Request;
 
@@ -91,17 +92,20 @@ class FileManagerController extends Controller
      * 上传文件
      * POST      /admin/file_manager/upload
      *
-     * @param Request $request
+     * @param UploadRequest $request
      * @return array
      */
-    public function uploadFiles(Request $request): array
+    public function uploadFiles(UploadRequest $request): array
     {
         $file = $request->file('file');
-        $path = $file->store('xxx', 'upload');
+        $savePath = $request->get('path');
+
+        $originName = $file->getClientOriginalName();
+        $filePath = $file->storeAs($savePath, $originName, 'catalog');
 
         return [
-            'name' => $file->getClientOriginalName(),
-            'url' => asset('upload/' . $path),
+            'name' => $originName,
+            'url' => asset('catalog/' . $filePath),
         ];
     }
 }
