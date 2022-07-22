@@ -113,10 +113,10 @@
 
       methods: {
         submitForm(form) {
-          let _data = this.form, url = '/forgotten/password'
+          let _data = this.form, url = 'forgotten/password'
 
           if (!this.isCode) {
-            url = '/forgotten/send_code'
+            url = 'forgotten/send_code'
           }
 
           this.$refs[form].validate((valid) => {

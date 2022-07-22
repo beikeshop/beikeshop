@@ -45,6 +45,7 @@
               @endif
 
               <div class="d-grid mb-4"><button type="submit" class="btn btn-lg btn-primary">登录</button></div>
+              <a href="{{ admin_route('forgotten.index') }}">忘记密码</a>
             </form>
           </div>
         </div>
