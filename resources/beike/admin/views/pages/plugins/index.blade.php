@@ -6,7 +6,17 @@
 
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body">
-      <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建插件</a>
+      {{-- <button type="button" @click="upload" class="btn btn-primary">上传插件</button> --}}
+      <el-upload
+        class="upload-demo"
+        action="{{ admin_route('plugins.import') }}"
+        :limit="1"
+        :on-change="handleFileChange"
+        :before-upload="beforeFileUpload"
+        accept=".zip"
+        >
+        <el-button size="small" type="primary">上传插件 (仅支持 zip 文件)</el-button>
+      </el-upload>
       <div class="mt-4" style="">
         <table class="table">
           <thead>
@@ -71,6 +81,18 @@
           $http.put(`plugins/${code}/status`, {status: e * 1}).then((res) => {
             layer.msg(res.message)
           })
+        },
+
+        handleFileChange(e) {
+          console.log(e);
+        },
+
+        beforeFileUpload(e) {
+          console.log(e);
+        },
+
+        upload() {
+
         },
 
         installedPlugin(code, type, index) {

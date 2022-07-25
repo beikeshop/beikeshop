@@ -30,6 +30,86 @@ body {
   min-height: 600px;
 }
 
+.wp-100 {
+  width: 100px;
+}
+
+.wp-200 {
+  width: 200px;
+}
+
+.wp-300 {
+  width: 300px;
+}
+
+.wp-400 {
+  width: 400px;
+}
+
+.wp-500 {
+  width: 500px;
+}
+
+.wp-600 {
+  width: 600px;
+}
+
+.wp-700 {
+  width: 700px;
+}
+
+.wp-800 {
+  width: 800px;
+}
+
+.wp-900 {
+  width: 900px;
+}
+
+.wp-1000 {
+  width: 1000px;
+}
+
+.wp-100- {
+  width: calc(100% - 100px);
+}
+
+.wp-200- {
+  width: calc(100% - 200px);
+}
+
+.wp-300- {
+  width: calc(100% - 300px);
+}
+
+.wp-400- {
+  width: calc(100% - 400px);
+}
+
+.wp-500- {
+  width: calc(100% - 500px);
+}
+
+.wp-600- {
+  width: calc(100% - 600px);
+}
+
+.wp-700- {
+  width: calc(100% - 700px);
+}
+
+.wp-800- {
+  width: calc(100% - 800px);
+}
+
+.wp-900- {
+  width: calc(100% - 900px);
+}
+
+.wp-1000- {
+  width: calc(100% - 1000px);
+}
+
 .font-size-12 {
   font-size: 12px;
 }
@@ -442,10 +522,6 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
   }
 }
 
-.form-control {
-  border-radius: 2px;
-  font-size: 0.7rem;
-}
 .form-control:focus {
   box-shadow: none;
 }

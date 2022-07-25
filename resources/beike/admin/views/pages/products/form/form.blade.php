@@ -43,215 +43,149 @@
         <div>
           <h5 class="border-bottom pb-3 mb-4">商品库存</h5>
 
-          <div class="form-group">
-            <div class="row align-items-center">
-              <label for="" class="col-sm-2 col-form-label">启用多规格</label>
-              <div class="col-sm-10">
-                <el-switch v-model="editing.isVariable"></el-switch>
-              </div>
-            </div>
-          </div>
+          <x-admin::form.row title="启用多规格">
+            <el-switch v-model="editing.isVariable"></el-switch>
+          </x-admin::form.row>
 
           <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
-          <div class="form-group" v-if="editing.isVariable">
-            <div class="row align-items-center">
-              <label for="" class="col-sm-2 col-form-label"></label>
-              <div class="col-sm-10">
-                <div class="selectable-variants">
-                  <div>
-                    <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
-                      <div class="title">
-                        <div>
-                          <b>@{{ variant.name[current_language_code] }}</b>
-                          <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
-                          <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
-                        </div>
-                        <div>
-                          <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
-                          <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
-                        </div>
+          <div class="row g-3 mb-3" v-if="editing.isVariable">
+            <label for="" class="wp-200 col-form-label text-end"></label>
+            <div class="col-auto wp-200-">
+              <div class="selectable-variants">
+                <div>
+                  <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
+                    <div class="title">
+                      <div>
+                        <b>@{{ variant.name[current_language_code] }}</b>
+                        <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
+                        <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
                       </div>
-                       <draggable
-                         element="div"
-                         @start="isMove = true"
-                         v-if="variant.values.length"
-                         class="variants-wrap"
-                         @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
-                         @end="isMove = false"
-                         ghost-class="dragabble-ghost"
-                         :list="variant.values"
-                         :options="{animation: 100}"
-                         >
-                         <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
-                           {{-- <div class="value-img" v-if="variant.isImage"> --}}
-                             {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
-                               {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
-                             {{-- </a> --}}
-                           {{-- </div> --}}
-
-                           <div class="open-file-manager variant-value-img" v-if="variant.isImage">
-                             <div>
-                               <img :src="thumbnail(value.image)" class="img-fluid">
-                             </div>
-                           </div>
-                           <input type="hidden" v-model="value.image">
-
-                           <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
-                           <div class="name">
-                             @{{ value.name[current_language_code] }}
-                           </div>
-                         </div>
-                      </draggable>
-                      <div v-else>
-                        <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加 Value</div>
+                      <div>
+                        <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
+                        <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
                       </div>
                     </div>
+                     <draggable
+                       element="div"
+                       @start="isMove = true"
+                       v-if="variant.values.length"
+                       class="variants-wrap"
+                       @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                       @end="isMove = false"
+                       ghost-class="dragabble-ghost"
+                       :list="variant.values"
+                       :options="{animation: 100}"
+                       >
+                       <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
+                         {{-- <div class="value-img" v-if="variant.isImage"> --}}
+                           {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
+                             {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
+                           {{-- </a> --}}
+                         {{-- </div> --}}
 
-                    <el-button type="primary" size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">Add variant</el-button>
+                         <div class="open-file-manager variant-value-img" v-if="variant.isImage">
+                           <div>
+                             <img :src="thumbnail(value.image)" class="img-fluid">
+                           </div>
+                         </div>
+                         <input type="hidden" v-model="value.image">
+
+                         <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
+                         <div class="name">
+                           @{{ value.name[current_language_code] }}
+                         </div>
+                       </div>
+                    </draggable>
+                    <div v-else>
+                      <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加 Value</div>
+                    </div>
                   </div>
 
-                  <div v-if="form.skus.length" class="mt-3">
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
-                          @{{ variant.name[current_language_code] || 'No name' }}
-                        </th>
-                        <th>image</th>
-                        <th>model</th>
-                        <th>sku</th>
-                        <th>price</th>
-                        <th>orgin price</th>
-                        <th>cost price</th>
-                        <th>quantity</th>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
-                          <template v-for="(variantValueIndex, j) in sku.variants">
-                            <td v-if="skuIndex % variantValueRepetitions[j] == 0" :key="'pvv' + skuIndex + '-' + j"
-                              :rowspan="variantValueRepetitions[j]">
-                              <span>@{{ form.variables[j].values[variantValueIndex].name[current_language_code] || 'No name' }}</span>
-                            </td>
-                          </template>
-                          <td>
-                            <div class="open-file-manager variants-producr-img">
-                              <div>
-                                <img :src="thumbnail(sku.image)" class="img-fluid">
-                              </div>
+                  <el-button type="primary" size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">Add variant</el-button>
+                </div>
+
+                <div v-if="form.skus.length && form.variables.length" class="mt-3">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
+                        @{{ variant.name[current_language_code] || 'No name' }}
+                      </th>
+                      <th>image</th>
+                      <th>model</th>
+                      <th>sku</th>
+                      <th>price</th>
+                      <th>orgin price</th>
+                      <th>cost price</th>
+                      <th>quantity</th>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
+                        <template v-for="(variantValueIndex, j) in sku.variants">
+                          <td v-if="skuIndex % variantValueRepetitions[j] == 0" :key="'pvv' + skuIndex + '-' + j"
+                            :rowspan="variantValueRepetitions[j]">
+                            <span>@{{ form.variables[j].values[variantValueIndex].name[current_language_code] || 'No name' }}</span>
+                          </td>
+                        </template>
+                        <td>
+                          <div class="open-file-manager variants-producr-img">
+                            <div>
+                              <img :src="thumbnail(sku.image)" class="img-fluid">
                             </div>
-                            <input type="hidden" class="form-control" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'"
-                              placeholder="image">
+                          </div>
+                          <input type="hidden" class="form-control" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'"
+                            placeholder="image">
 
-                            <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
-                            <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
-                              :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
-                          </td>
-                          <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
-                              placeholder="model"></td>
-                          <td><input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
-                          </td>
-                          <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
-                              placeholder="price"></td>
-                          <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
-                              placeholder="origin_price"></td>
-                          <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
-                              placeholder="cost_price">
-                          </td>
-                          <td><input type="text" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
-                              placeholder="quantity"></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                          <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
+                          <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
+                            :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
+                        </td>
+                        <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
+                            placeholder="model"></td>
+                        <td><input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
+                        </td>
+                        <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
+                            placeholder="price"></td>
+                        <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
+                            placeholder="origin_price"></td>
+                        <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
+                            placeholder="cost_price">
+                        </td>
+                        <td><input type="text" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
+                            placeholder="quantity"></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
 
           <template v-if="!editing.isVariable">
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">图片</label>
-                <div class="col-sm-10">
-
-                  <div class="open-file-manager set-product-img">
-                    <div>
-                      {{-- <img :src="thumbnail(form.skus[0].image)" class="img-fluid"> --}}
-                      <img src="{{ old('skus.0.image', 'catalog/' . $product->skus[0]->image ?? '') }}" class="img-fluid">
-                    </div>
-                  </div>
-                  <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
+            <x-admin::form.row title="图片">
+              <div class="open-file-manager set-product-img">
+                <div>
+                  {{-- <img :src="thumbnail(form.skus[0].image)" class="img-fluid"> --}}
+                  <img src="{{ old('skus.0.image', 'catalog/' . $product->skus[0]->image ?? '') }}" class="img-fluid">
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">model</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control form-control-sm short" name="skus[0][model]" placeholder="model"
-                    value="{{ old('skus.0.model', $product->skus[0]->model ?? '') }}">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">sku</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control form-control-sm short" name="skus[0][sku]" placeholder="sku"
-                    value="{{ old('skus.0.sku', $product->skus[0]->sku ?? '') }}">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">price</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control form-control-sm short" name="skus[0][price]" placeholder="price"
-                    value="{{ old('skus.0.price', $product->skus[0]->price ?? '') }}">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">origin_price</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control form-control-sm short" name="skus[0][origin_price]" placeholder="origin_price"
-                      value="{{ old('skus.0.origin_price', $product->skus[0]->origin_price ?? '') }}">
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">cost_price</label>
-                <div class="col-sm-10">
-                  <input type="text" name="skus[0][cost_price]" class="form-control form-control-sm short" placeholder="cost_price"
-                    value="{{ old('skus.0.cost_price', $product->skus[0]->cost_price ?? '') }}">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row align-items-center">
-                <label for="" class="col-sm-2 col-form-label">quantity</label>
-                <div class="col-sm-10">
-                   <input type="text" class="form-control form-control-sm short" name="skus[0][quantity]" placeholder="quantity"
-                      value="{{ old('skus.0.quantity', $product->skus[0]->quantity ?? '') }}">
-                </div>
-              </div>
-            </div>
+              <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
+            </x-admin::form.row>
+            <x-admin-form-input name="skus[0][model]" title="model" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
+            <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" />
+            <x-admin-form-input name="skus[0][price]" title="price" :value="old('skus.0.price', $product->skus[0]->price ?? '')" />
+            <x-admin-form-input name="skus[0][origin_price]" title="origin_price" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
+            <x-admin-form-input name="skus[0][cost_price]" title="cost_price" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
+            <x-admin-form-input name="skus[0][quantity]" title="quantity" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
             <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
             <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
             <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
           </template>
         </div>
 
-        <div class="form-group">
-          <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-10"><button type="submit" class="btn btn-primary">Save</button></div>
-          </div>
-        </div>
+        <x-admin::form.row title="">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </x-admin::form.row>
 
         <el-dialog
           title="编辑"

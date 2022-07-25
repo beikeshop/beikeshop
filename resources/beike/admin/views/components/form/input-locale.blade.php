@@ -1,8 +1,8 @@
 <x-admin::form.row :title="$title">
   @foreach (locales() as $index => $locale)
-    <div class="d-flex align-items-center mb-1">
+    <div class="d-flex wp-400">
+      <span class="input-group-text wp-100 px-1" id="basic-addon1">{{ $locale['name'] }}</span>
       <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}" class="form-control short" placeholder="{{ $locale['name'] }}">
-      <span class="ml-1 text-muted">{{ $locale['name'] }}</span>
     </div>
     @if ($attributes->has('required'))
       @error($errorKey($locale['code']))

@@ -1,9 +1,7 @@
-<div class="form-group">
-  <div class="row">
-    <label for="" class="col-sm-2 col-form-label">{{ $title ?? '' }}</label>
-    <div class="col-sm-10">
-      {{ $slot }}
-    </div>
+<div class="row g-3 mb-3">
+  <label for="" class="wp-200 col-form-label text-end">{{ $title ?? '' }}</label>
+  <div class="col-auto">
+    {{ $slot }}
   </div>
 </div>
 

@@ -23,6 +23,19 @@ body {
   }
 }
 
+// 生成 100 200 300 ... 1000 的宽度
+@for $i from 1 through 10 {
+  .wp-#{$i}00 {
+    width: #{$i}00px;
+  }
+}
+// clac(100% - #{$i}00px)
+@for $i from 1 through 10 {
+  .wp-#{$i}00- {
+    width: calc(100% - #{$i}00px);
+  }
+}
+
 .font-size-12 {
   font-size: 12px;
 }
