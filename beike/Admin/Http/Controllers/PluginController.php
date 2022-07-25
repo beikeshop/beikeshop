@@ -26,7 +26,7 @@ class PluginController extends Controller
      */
     public function index()
     {
-        $plugins = (new Manager)->getPlugins();
+        $plugins = app('plugin')->getPlugins();
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         return view('admin::pages.plugins.index', $data);
     }
@@ -49,7 +49,7 @@ class PluginController extends Controller
      */
     public function install(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPluginOrFail($code);
+        $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::installPlugin($plugin);
         return json_success("安装成功");
     }
@@ -63,7 +63,7 @@ class PluginController extends Controller
      */
     public function uninstall(Request $request, $code): array
     {
-        $plugin = (new Manager)->getPluginOrFail($code);
+        $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::uninstallPlugin($plugin);
         return json_success("卸载成功");
     }
@@ -77,7 +77,7 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code): View
     {
-        $data['plugin'] = (new Manager)->getPluginOrFail($code);
+        $data['plugin'] = app('plugin')->getPluginOrFail($code);
         return view('admin::pages.plugins.form', $data);
     }
 
@@ -90,7 +90,7 @@ class PluginController extends Controller
      */
     public function update(Request $request, $code): array
     {
-        (new Manager)->getPluginOrFail($code);
+        app('plugin')->getPluginOrFail($code);
         $fields = $request->all();
         SettingRepo::update('plugin', $code, $fields);
         return json_success("编辑成功");
@@ -105,7 +105,7 @@ class PluginController extends Controller
      */
     public function updateStatus(Request $request, $code): array
     {
-        (new Manager)->getPluginOrFail($code);
+        app('plugin')->getPluginOrFail($code);
         $status = $request->get('status');
         SettingRepo::update('plugin', $code, ['status' => $status]);
         return json_success("编辑成功");

@@ -32,12 +32,10 @@ class PluginServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap Plugin Service Provider
-     *
-     * @param Manager $manager
-     * @throws \Exception
      */
-    public function boot(Manager $manager)
+    public function boot()
     {
+        $manager = app('plugin');
         $plugins = $manager->getPlugins();
         $bootstraps = $manager->getEnabledBootstraps();
         $pluginBasePath = base_path('plugins');

@@ -134,7 +134,7 @@ class PluginRepo
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'shipping')->filter(function ($item) {
-            $plugin = (new Manager)->getPlugin($item->code);
+            $plugin = app('plugin')->getPlugin($item->code);
             if ($plugin) {
                 $item->plugin = $plugin;
             }
@@ -150,7 +150,7 @@ class PluginRepo
     {
         $allPlugins = self::allPlugins();
         return $allPlugins->where('type', 'payment')->filter(function ($item) {
-            $plugin = (new Manager)->getPlugin($item->code);
+            $plugin = app('plugin')->getPlugin($item->code);
             if ($plugin) {
                 $item->plugin = $plugin;
             }
