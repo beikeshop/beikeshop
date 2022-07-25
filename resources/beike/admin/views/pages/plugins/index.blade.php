@@ -84,7 +84,10 @@
         },
 
         uploadFile(file) {
-          $http.post('plugins/import', file).then((res) => {
+          let formData = new FormData();
+          formData.append("file", file.file, file.file.name);
+
+          $http.post('plugins/import', formData).then((res) => {
             layer.msg(res.message)
             location.reload();
           })
