@@ -12,6 +12,33 @@ body[class^="page-account-"] {
   min-height: 500px;
 }
 
+// 生成 100 200 300 ... 1000 的宽度
+@for $i from 1 through 10 {
+  .wp-#{$i}00 {
+    width: #{$i}00px;
+  }
+}
+// clac(100% - #{$i}00px)
+@for $i from 1 through 10 {
+  .wp-#{$i}00- {
+    width: calc(100% - #{$i}00px);
+  }
+}
+
+// 生成 100 200 300 ... 1000 的最小高度
+@for $i from 1 through 10 {
+  .h-min-#{$i}00 {
+    min-height: #{$i}00px;
+  }
+}
+
+// 生成 100 200 300 ... 1000 的高度
+@for $i from 1 through 10 {
+  .hp-#{$i}00 {
+    height: #{$i}00px;
+  }
+}
+
 .module-title {
   font-size: 1.5rem;
   text-align: center;

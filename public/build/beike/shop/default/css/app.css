@@ -25,6 +25,166 @@ body[class^=page-account-] {
   min-height: 500px;
 }
 
+.wp-100 {
+  width: 100px;
+}
+
+.wp-200 {
+  width: 200px;
+}
+
+.wp-300 {
+  width: 300px;
+}
+
+.wp-400 {
+  width: 400px;
+}
+
+.wp-500 {
+  width: 500px;
+}
+
+.wp-600 {
+  width: 600px;
+}
+
+.wp-700 {
+  width: 700px;
+}
+
+.wp-800 {
+  width: 800px;
+}
+
+.wp-900 {
+  width: 900px;
+}
+
+.wp-1000 {
+  width: 1000px;
+}
+
+.wp-100- {
+  width: calc(100% - 100px);
+}
+
+.wp-200- {
+  width: calc(100% - 200px);
+}
+
+.wp-300- {
+  width: calc(100% - 300px);
+}
+
+.wp-400- {
+  width: calc(100% - 400px);
+}
+
+.wp-500- {
+  width: calc(100% - 500px);
+}
+
+.wp-600- {
+  width: calc(100% - 600px);
+}
+
+.wp-700- {
+  width: calc(100% - 700px);
+}
+
+.wp-800- {
+  width: calc(100% - 800px);
+}
+
+.wp-900- {
+  width: calc(100% - 900px);
+}
+
+.wp-1000- {
+  width: calc(100% - 1000px);
+}
+
+.h-min-100 {
+  min-height: 100px;
+}
+
+.h-min-200 {
+  min-height: 200px;
+}
+
+.h-min-300 {
+  min-height: 300px;
+}
+
+.h-min-400 {
+  min-height: 400px;
+}
+
+.h-min-500 {
+  min-height: 500px;
+}
+
+.h-min-600 {
+  min-height: 600px;
+}
+
+.h-min-700 {
+  min-height: 700px;
+}
+
+.h-min-800 {
+  min-height: 800px;
+}
+
+.h-min-900 {
+  min-height: 900px;
+}
+
+.h-min-1000 {
+  min-height: 1000px;
+}
+
+.hp-100 {
+  height: 100px;
+}
+
+.hp-200 {
+  height: 200px;
+}
+
+.hp-300 {
+  height: 300px;
+}
+
+.hp-400 {
+  height: 400px;
+}
+
+.hp-500 {
+  height: 500px;
+}
+
+.hp-600 {
+  height: 600px;
+}
+
+.hp-700 {
+  height: 700px;
+}
+
+.hp-800 {
+  height: 800px;
+}
+
+.hp-900 {
+  height: 900px;
+}
+
+.hp-1000 {
+  height: 1000px;
+}
+
 .module-title {
   font-size: 1.5rem;
   text-align: center;

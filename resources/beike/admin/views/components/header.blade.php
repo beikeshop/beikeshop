@@ -1,7 +1,7 @@
 <div class="header-wrap">
   <div class="header-left">
     <div class="logo">
-      <img src="{{ asset('image/logo.png') }}" class="img-fluid">
+      <a href=""><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a>
       {{-- <div class="text-center"><h5 class="mb-0">beike admin</h5></div> --}}
     </div>
   </div>

@@ -43,6 +43,13 @@ body {
   }
 }
 
+// 生成 100 200 300 ... 1000 的高度
+@for $i from 1 through 10 {
+  .hp-#{$i}00 {
+    height: #{$i}00px;
+  }
+}
+
 .font-size-12 {
   font-size: 12px;
 }

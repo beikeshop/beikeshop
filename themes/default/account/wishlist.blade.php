@@ -15,25 +15,38 @@
       <x-shop-sidebar/>
 
       <div class="col-12 col-md-9">
-        <div class="card mb-4 account-card order-wrap">
+        <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">我的订单</h5>
+            <h5 class="card-title">我的收藏</h5>
           </div>
           <div class="card-body">
             <table class="table ">
               <thead>
                 <tr>
-                  <th>订单详情</th>
-                  <th>金额</th>
-                  <th>状态</th>
-                  <th class="text-end">操作</th>
+                  <th width="120px"></th>
+                  <th>产品</th>
+                  <th>价格</th>
+                  <th class="text-end"></th>
                 </tr>
               </thead>
               <tbody>
-
+                @foreach ($wishlist as $item)
+                <tr>
+                  <td><div class="wp-100 hp-100"><img src="{{ $item['image'] }}" class="img-fluid"></div></td>
+                  <td>{{ $item['product_name'] }}</td>
+                  <td>{{ $item['price'] }}</td>
+                  <td class="text-end">
+                    <div class="">
+                      <button class="btn btn-outline-danger btn-sm">删除</button>
+                      <button class="btn btn-outline-dark btn-sm">加购物车</button>
+                    </div>
+                  </td>
+                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
+        </div>
         </div>
       </div>
     </div>
