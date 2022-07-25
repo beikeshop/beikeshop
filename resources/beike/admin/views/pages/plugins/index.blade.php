@@ -9,10 +9,10 @@
       {{-- <button type="button" @click="upload" class="btn btn-primary">上传插件</button> --}}
       <el-upload
         class="upload-demo"
-        action="{{ admin_route('plugins.import') }}"
+        action=""
         :limit="1"
-        :on-change="handleFileChange"
-        :before-upload="beforeFileUpload"
+        :show-file-list="false"
+        :http-request="uploadFile"
         accept=".zip"
         >
         <el-button size="small" type="primary">上传插件 (仅支持 zip 文件)</el-button>
@@ -83,16 +83,11 @@
           })
         },
 
-        handleFileChange(e) {
-          console.log(e);
-        },
-
-        beforeFileUpload(e) {
-          console.log(e);
-        },
-
-        upload() {
-
+        uploadFile(file) {
+          $http.post('plugins/import', file).then((res) => {
+            layer.msg(res.message)
+            location.reload();
+          })
         },
 
         installedPlugin(code, type, index) {
