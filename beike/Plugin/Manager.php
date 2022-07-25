@@ -177,7 +177,6 @@ class Manager
         $newFilePath = $destPath . '/' . $originalName;
         $file->move($destPath, $originalName);
 
-        Zip::check($newFilePath);
         $zipFile = Zip::open($newFilePath);
         $zipFile->extract(base_path('plugins'));
     }
