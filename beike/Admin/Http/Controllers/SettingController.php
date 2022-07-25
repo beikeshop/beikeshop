@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Repositories\SettingRepo;
+use Beike\Repositories\SystemSettingRepo;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -23,7 +24,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return setting("system");
+        $settings = SystemSettingRepo::getList();
+        dd($settings);
     }
 
 
