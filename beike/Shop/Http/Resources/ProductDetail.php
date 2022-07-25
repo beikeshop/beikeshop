@@ -15,6 +15,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductDetail extends JsonResource
 {
+    /**
+     * @throws \Exception
+     */
     public function toArray($request): array
     {
         return [
@@ -28,7 +31,15 @@ class ProductDetail extends JsonResource
         ];
     }
 
-    private function decodeVariables($variables)
+
+    /**
+     * 处理多规格商品数据
+     *
+     * @param $variables
+     * @return array|array[]
+     * @throws \Exception
+     */
+    private function decodeVariables($variables): array
     {
         $lang = current_language_code();
         if (empty($variables)) {
@@ -36,11 +47,11 @@ class ProductDetail extends JsonResource
         }
         return array_map(function ($item) use ($lang) {
             return [
-                'name' => $item['name'][$lang],
+                'name' => $item['name'][$lang] ?? '',
                 'values' => array_map(function ($item) use ($lang) {
                     return [
-                        'name' => $item['name'][$lang],
-                        'image' => image_resize('catalog/'.$item['image'], 100, 100),
+                        'name' => $item['name'][$lang] ?? '',
+                        'image' => image_resize('catalog/' . $item['image']),
                     ];
                 }, $item['values']),
             ];
