@@ -1,6 +1,7 @@
 <?php
 
 use Beike\Models\Customer;
+use Beike\Shop\Http\Controllers\Account\WishlistController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
@@ -68,6 +69,9 @@ Route::prefix('/')
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
                 Route::post('update', [AccountController::class, 'update'])->name('account.update');
                 Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
+                Route::get('wishlist', [WishlistController::class, 'wishlist'])->name('account.wishlist.index');
+                Route::post('wishlist', [WishlistController::class, 'wishlist'])->name('account.wishlist.add');
+                Route::delete('wishlist/{id}', [WishlistController::class, 'wishlist'])->name('account.wishlist.remove');
             });
     });
 
