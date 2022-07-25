@@ -13,6 +13,10 @@ namespace Beike\Repositories;
 
 use Beike\Models\Customer;
 use Beike\Models\CustomerWishlist;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 class CustomerRepo
@@ -20,7 +24,7 @@ class CustomerRepo
     /**
      * 创建一个customer记录
      * @param $customerData
-     * @return int
+     * @return Builder|Model
      */
     public static function create($customerData)
     {
@@ -51,7 +55,7 @@ class CustomerRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return Builder|Builder[]|Collection|Model|null
      */
     public static function find($id)
     {
@@ -69,9 +73,9 @@ class CustomerRepo
 
     /**
      * @param $data
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public static function list($data)
+    public static function list($data): LengthAwarePaginator
     {
         $builder = Customer::query()->with("customerGroup.description");
 
@@ -102,7 +106,7 @@ class CustomerRepo
     /**
      * @param $customer,  Customer对象或id
      * @param $productId
-     * @return Customer|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed|null
+     * @return Customer|Builder|Builder[]|Collection|Model|mixed|null
      */
     public static function addToWishlist($customer, $productId)
     {
@@ -129,7 +133,7 @@ class CustomerRepo
         return $customer;
     }
 
-    public static function wishlists($customer)
+    public static function wishlists($customer): LengthAwarePaginator
     {
         if (!$customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);

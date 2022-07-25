@@ -13,6 +13,6 @@ class CustomerWishlist extends Base
 
     public function product(): HasOne
     {
-        return $this->hasOne(Product::class);
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
 }

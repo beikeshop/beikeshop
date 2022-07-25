@@ -13,39 +13,37 @@ namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
-use Beike\Shop\Http\Requests\AddressRequest;
-use Beike\Shop\Http\Resources\Account\AddressResource;
-use Beike\Repositories\AddressRepo;
-use Beike\Shop\Services\AddressService;
+use Beike\Shop\Http\Resources\Account\WishlistDetail;
 use Illuminate\Http\Request;
-use Beike\Repositories\CountryRepo;
 
 class WishlistController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer());
         $data = [
-            'wishlist' => $wishlists,
+            'wishlist' => WishlistDetail::collection($wishlists)->jsonSerialize(),
         ];
 
         return view('account/wishlist', $data);
     }
 
-    public function add(Request $request, $productId)
+    public function add(Request $request): array
     {
+        $productId = $request->get('product_id');
         CustomerRepo::addToWishlist(current_customer(), $productId);
 
-        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer());
 
         return json_success('加入收藏成功', $wishlists);
     }
 
-    public function remove(Request $request, $productId)
+    public function remove(Request $request): array
     {
+        $productId = $request->get('product_id');
         CustomerRepo::removeFromWishlist(current_customer(), $productId);
 
-        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer());
 
         return json_success('移除收藏成功', $wishlists);
     }
