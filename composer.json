@@ -7,13 +7,15 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
+        "ext-zip": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "laravel/framework": "^8.65",
         "laravel/tinker": "^2.5",
         "stripe/stripe-php": "^8.8",
-        "tormjens/eventy": "^0.8.0"
+        "tormjens/eventy": "^0.8.0",
+        "zanysoft/laravel-zip": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

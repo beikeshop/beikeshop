@@ -11,10 +11,12 @@
 
 namespace Beike\Plugin;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use ZanySoft\Zip\Zip;
 use Illuminate\Support\Arr;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class Manager
 {
@@ -161,5 +163,22 @@ class Manager
     protected function getPluginsDir(): string
     {
         return config('plugins.directory') ?: base_path('plugins');
+    }
+
+
+    /**
+     * 上传插件并解压
+     * @throws \Exception
+     */
+    public function import(UploadedFile $file)
+    {
+        $originalName = $file->getClientOriginalName();
+        $destPath = storage_path('upload');
+        $newFilePath = $destPath . '/' . $originalName;
+        $file->move($destPath, $originalName);
+
+        Zip::check($newFilePath);
+        $zipFile = Zip::open($newFilePath);
+        $zipFile->extract(base_path('plugins'));
     }
 }

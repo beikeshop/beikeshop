@@ -37,6 +37,8 @@ class PluginController extends Controller
      */
     public function import(Request $request): array
     {
+        $zipFile = $request->file('file');
+        app('plugin')->import($zipFile);
         return json_success("导入成功");
     }
 
