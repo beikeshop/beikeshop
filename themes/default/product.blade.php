@@ -241,7 +241,7 @@
         },
 
         addWishlist() {
-          $http.post('wishlist', {product_id: this.product.id}).then((res) => {
+          $http.post('account/wishlist', {product_id: this.product.id}).then((res) => {
             layer.msg(res.message)
           })
         },
