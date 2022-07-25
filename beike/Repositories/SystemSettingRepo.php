@@ -29,7 +29,7 @@ class SystemSettingRepo
                     ['value' => '2', 'label' => '美国']
                 ],
                 'value' => old('country_id', system_setting('base.country_id', '1')),
-                'description' => '默认国家选择',
+                'description' => '默认语言设置',
             ],
             [
                 'name' => 'locale',
@@ -41,7 +41,7 @@ class SystemSettingRepo
                     ['value' => 'en', 'label' => '英文']
                 ],
                 'value' => old('locale', system_setting('base.locale', 'zh_cn')),
-                'description' => '密钥(Secret key)',
+                'description' => '默认语言设置',
             ],
             [
                 'name' => 'admin_name',
