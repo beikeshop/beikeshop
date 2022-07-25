@@ -36,6 +36,13 @@ body {
   }
 }
 
+// 生成 100 200 300 ... 1000 的最小高度
+@for $i from 1 through 10 {
+  .h-min-#{$i}00 {
+    min-height: #{$i}00px;
+  }
+}
+
 .font-size-12 {
   font-size: 12px;
 }

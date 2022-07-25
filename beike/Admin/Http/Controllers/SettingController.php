@@ -25,7 +25,8 @@ class SettingController extends Controller
     public function index()
     {
         $settings = SystemSettingRepo::getList();
-        dd($settings);
+
+        return view('admin::pages.setting', ['settings' => $settings]);
     }
 
 
@@ -47,5 +48,7 @@ class SettingController extends Controller
             ];
             SettingRepo::createOrUpdate($data);
         }
+
+        return json_success("修改成功");
     }
 }

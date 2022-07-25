@@ -110,6 +110,46 @@ body {
   width: calc(100% - 1000px);
 }
 
+.h-min-100 {
+  min-height: 100px;
+}
+
+.h-min-200 {
+  min-height: 200px;
+}
+
+.h-min-300 {
+  min-height: 300px;
+}
+
+.h-min-400 {
+  min-height: 400px;
+}
+
+.h-min-500 {
+  min-height: 500px;
+}
+
+.h-min-600 {
+  min-height: 600px;
+}
+
+.h-min-700 {
+  min-height: 700px;
+}
+
+.h-min-800 {
+  min-height: 800px;
+}
+
+.h-min-900 {
+  min-height: 900px;
+}
+
+.h-min-1000 {
+  min-height: 1000px;
+}
+
 .font-size-12 {
   font-size: 12px;
 }
