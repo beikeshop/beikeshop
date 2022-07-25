@@ -12,17 +12,17 @@
     <div class="card-body pt-5">
       <el-form :model="form" :rules="rules" ref="form" label-width="110px">
         <div v-for="column, index in source.columns">
-          <el-form-item :label="column.label" v-if="column.type == 'string'" class="form-max-w" :prop="column.required ? column.name : ''">
+          <el-form-item :label="column.label" v-if="column.type == 'string'" class="form-max-w" :prop="column.required ? column.name : ''" :required="column.required">
             <el-input v-model="form[column.name]" :placeholder="column.label"></el-input>
             <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
 
-          <el-form-item :label="column.label" v-if="column.type == 'text'" style="max-width: 900px;" :prop="column.required ? column.name : ''">
+          <el-form-item :label="column.label" v-if="column.type == 'text'" style="max-width: 900px;" :prop="column.required ? column.name : ''" :required="column.required">
             <textarea v-model="form[column.name]" :data-key="column.name" id="input-tinymce"></textarea>
             <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
 
-          <el-form-item :label="column.label" v-if="column.type == 'select'" class="form-max-w">
+          <el-form-item :label="column.label" v-if="column.type == 'select'" class="form-max-w" :required="column.required">
             <el-select v-model="form[column.name]" placeholder="请选择" >
               <el-option v-for="option, o_i in column.options" :key="o_i" :label="option.label"
                 :value="option.value">
@@ -30,7 +30,7 @@
             </el-select>
             <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
-          <el-form-item :label="column.label" v-if="column.type == 'bool'">
+          <el-form-item :label="column.label" v-if="column.type == 'bool'" :required="column.required">
             <el-switch v-model="form[column.name]" :active-value="1" :inactive-value="0"></el-switch>
             <div class="text-muted font-size-12 lh-base" v-if="column.description">@{{ column.description }}</div>
           </el-form-item>
