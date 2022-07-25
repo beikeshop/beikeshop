@@ -22,9 +22,9 @@ use Beike\Repositories\CountryRepo;
 
 class WishlistController extends Controller
 {
-    public function index(Request $request, int $customerId)
+    public function index(Request $request)
     {
-        $wishlists = CustomerRepo::wishlists($customerId, $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
         $data = [
             'wishlist' => $wishlists,
         ];
@@ -32,20 +32,20 @@ class WishlistController extends Controller
         return view('account/wishlist', $data);
     }
 
-    public function add(Request $request, $customerId, $productId)
+    public function add(Request $request, $productId)
     {
-        CustomerRepo::addToWishlist($customerId, $productId);
+        CustomerRepo::addToWishlist(current_customer(), $productId);
 
-        $wishlists = CustomerRepo::wishlists($customerId, $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
 
         return json_success('加入收藏成功', $wishlists);
     }
 
-    public function remove(Request $request, $customerId, $productId)
+    public function remove(Request $request, $productId)
     {
-        CustomerRepo::removeFromWishlist($customerId, $productId);
+        CustomerRepo::removeFromWishlist(current_customer(), $productId);
 
-        $wishlists = CustomerRepo::wishlists($customerId, $request->get('product_id'));
+        $wishlists = CustomerRepo::wishlists(current_customer(), $request->get('product_id'));
 
         return json_success('移除收藏成功', $wishlists);
     }
