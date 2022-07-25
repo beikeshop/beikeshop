@@ -98,7 +98,7 @@
             </button>
           </div>
           <div class="add-wishlist">
-            <button class="btn btn-link ps-0"><i class="bi bi-suit-heart-fill me-1"></i>加入收藏夹</button>
+            <button class="btn btn-link ps-0 text-dark" @click="addWishlist"><i class="bi bi-suit-heart-fill me-1"></i>加入收藏夹</button>
           </div>
         </div>
       </div>
@@ -123,10 +123,6 @@
       </div>
     </div>
   </div>
-
-  <script>
-
-  </script>
 @endsection
 
 @push('add-scripts')
@@ -242,6 +238,12 @@
               }
             })
           });
+        },
+
+        addWishlist() {
+          $http.post('wishlist', {product_id: this.product.id}).then((res) => {
+            layer.msg(res.message)
+          })
         },
       }
     })
