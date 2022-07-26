@@ -24,7 +24,12 @@ class TaxClassController extends Controller
                 'taxRates.region',
                 'taxRules'
             ])->get(),
-            'all_tax_rates' => TaxRate::all()
+            'all_tax_rates' => TaxRate::all(),
+            'bases' => [
+                'store',
+                'payment',
+                'shipping'
+            ]
         ];
 
         dd($data);
