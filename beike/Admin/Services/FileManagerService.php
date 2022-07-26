@@ -211,7 +211,7 @@ class FileManagerService
     private function handleImage($filePath, $baseName): array
     {
         return [
-            'path' => '/catalog' . $filePath,
+            'path' => 'catalog' . $filePath,
             'name' => $baseName,
             'url' => image_resize("catalog{$filePath}"),
             'origin_url' => image_origin("catalog{$filePath}"),
