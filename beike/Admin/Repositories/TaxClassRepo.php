@@ -29,7 +29,7 @@ class TaxClassRepo
         ]);
         $taxClass->saveOrFail();
 
-        $taxClass->taxRates()->delete();
-        $taxClass->taxRates()->createMany($data['rates']);
+        $taxClass->taxRules()->delete();
+        $taxClass->taxRules()->createMany($data['rules']);
     }
 }
