@@ -25,6 +25,30 @@ body[class^=page-account-] {
   min-height: 500px;
 }
 
+.min-h1 {
+  min-height: 100px;
+}
+
+.min-h2 {
+  min-height: 200px;
+}
+
+.min-h3 {
+  min-height: 300px;
+}
+
+.min-h4 {
+  min-height: 400px;
+}
+
+.min-h5 {
+  min-height: 500px;
+}
+
+.min-h6 {
+  min-height: 600px;
+}
+
 .wp-100 {
   width: 100px;
 }
@@ -183,6 +207,56 @@ body[class^=page-account-] {
 
 .hp-1000 {
   height: 1000px;
+}
+
+.wh-10 {
+  height: 10px;
+  width: 10px;
+}
+
+.wh-20 {
+  height: 20px;
+  width: 20px;
+}
+
+.wh-30 {
+  height: 30px;
+  width: 30px;
+}
+
+.wh-40 {
+  height: 40px;
+  width: 40px;
+}
+
+.wh-50 {
+  height: 50px;
+  width: 50px;
+}
+
+.wh-60 {
+  height: 60px;
+  width: 60px;
+}
+
+.wh-70 {
+  height: 70px;
+  width: 70px;
+}
+
+.wh-80 {
+  height: 80px;
+  width: 80px;
+}
+
+.wh-90 {
+  height: 90px;
+  width: 90px;
+}
+
+.wh-100 {
+  height: 100px;
+  width: 100px;
 }
 
 .module-title {

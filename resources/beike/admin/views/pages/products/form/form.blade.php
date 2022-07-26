@@ -23,7 +23,7 @@
         @endforeach
 
         <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
-        <x-admin-form-input name="image" title="主图" :value="old('image', $product->image ?? '')" />
+        {{-- <x-admin-form-input name="image" title="主图" :value="old('image', $product->image ?? '')" /> --}}
         <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" />
         <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
         <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
@@ -47,7 +47,7 @@
             <el-switch v-model="editing.isVariable"></el-switch>
           </x-admin::form.row>
 
-          <input v-if="form.skus.length" type="hidden" name="variables" :value="JSON.stringify(form.variables)">
+          <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
           <div class="row g-3 mb-3" v-if="editing.isVariable">
             <label for="" class="wp-200 col-form-label text-end"></label>
@@ -162,15 +162,28 @@
           </div>
 
           <template v-if="!editing.isVariable">
-            <x-admin::form.row title="图片">
+{{--             <x-admin::form.row title="图片">
               <div class="open-file-manager set-product-img">
                 <div>
-                  {{-- <img :src="thumbnail(form.skus[0].image)" class="img-fluid"> --}}
-                  {{-- <img src="{{ 'catalog/' . old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid"> --}}
+                  <img src="{{ 'catalog/' . old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid">
                   <img src="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid">
                 </div>
               </div>
               <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
+            </x-admin::form.row> --}}
+
+            <x-admin::form.row title="图片">
+              <div class="open-file-manager set-product-img">
+                @if ($product->image)
+                <div>
+                  <img src="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid">
+                </div>
+                @else
+                <i class="bi bi-plus fs-1 text-muted"></i>
+                @endif
+              </div>
+              <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
+              {{-- <span class="help-text">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</span> --}}
             </x-admin::form.row>
             <x-admin-form-input name="skus[0][model]" title="model" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
             <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" />
