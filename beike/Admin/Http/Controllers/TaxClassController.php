@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Repositories\TaxClassRepo;
 use Beike\Models\TaxClass;
 use Beike\Models\TaxRate;
 use Illuminate\Http\Request;
@@ -39,6 +40,9 @@ class TaxClassController extends Controller
 
     public function store(Request $request)
     {
+        $requestData = json_decode($request->getContent());
+        TaxClassRepo::createOrUpdate($requestData);
+        return json_success('保存成功');
     }
 
     public function update(Request $request)
