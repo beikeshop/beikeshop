@@ -22,7 +22,10 @@ class SkuDetail extends JsonResource
             'variants' => $this->variants,
             'position' => $this->position,
             'images' => array_map(function ($image) {
-                return image_resize($image, 600, 600);
+                return [
+                    'image' => image_resize($image, 600, 600),
+                    'thumb' => image_resize($image, 150, 150)
+                ];
             }, $this->images ?? []),
             'model' => $this->model,
             'sku' => $this->sku,
