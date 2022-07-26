@@ -9,6 +9,7 @@ class Sidebar extends Component
 {
     public array $links = [];
     private string $adminName;
+    private string $routeNameWithPrefix;
 
     /**
      * Create a new component instance.
@@ -18,6 +19,7 @@ class Sidebar extends Component
     public function __construct()
     {
         $this->adminName = admin_name();
+        $this->routeNameWithPrefix = request()->route()->getName();
     }
 
     /**
@@ -46,9 +48,11 @@ class Sidebar extends Component
             $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
         }
 
-        if (Str::startsWith($routeName, ['settings.', 'plugins.'])) {
+        if (Str::startsWith($routeName, ['settings.', 'plugins.', 'tax_classes', 'tax_rates', 'regions'])) {
             $this->addLink('系统设置', admin_route('settings.index'), 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
             $this->addLink('插件列表', admin_route('plugins.index'), 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
+            $this->addLink('税费设置', admin_route('tax_classes.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
+            $this->addLink('区域分组', admin_route('regions.index'), 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
             $this->addLink('首页装修', admin_route('design.index'), 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
         }
 
@@ -85,10 +89,7 @@ class Sidebar extends Component
      */
     private function equalRoute($routeName): bool
     {
-        $adminName = $this->adminName;
-        $routeNameWithPrefix = request()->route()->getName();
-        $currentRouteName = str_replace($adminName . '.', '', $routeNameWithPrefix);
-
+        $currentRouteName = str_replace($this->adminName . '.', '', $this->routeNameWithPrefix);
         return $routeName == $currentRouteName;
     }
 }

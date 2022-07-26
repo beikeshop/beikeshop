@@ -66,7 +66,12 @@ Route::prefix($adminName)
                 Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
                 Route::resource('products', Controllers\ProductController::class);
 
+                Route::resource('regions', Controllers\RegionController::class);
+
                 Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
+
+                Route::resource('tax_classes', Controllers\TaxClassController::class);
+                Route::resource('tax_rates', Controllers\TaxRateController::class);
             });
     });
