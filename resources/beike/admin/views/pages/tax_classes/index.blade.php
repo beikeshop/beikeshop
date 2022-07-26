@@ -54,18 +54,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="rates, index in dialog.form.rates" :key="index">
+                <tr v-for="rule, index in dialog.form.rules" :key="index">
                   <td>
-                    <el-select v-model="rates.tax_rate_id" size="mini" placeholder="请选择">
+                    <el-select v-model="rule.tax_rate_id" size="mini" placeholder="请选择">
                       <el-option v-for="tax in source.all_tax_rates" :key="tax.id" :label="tax.name" :value="tax.id"></el-option>
                     </el-select>
                   </td>
                   <td>
-                    <el-select v-model="rates.based" size="mini" placeholder="请选择">
+                    <el-select v-model="rule.based" size="mini" placeholder="请选择">
                       <el-option v-for="base in source.bases" :key="base" :label="base" :value="base"></el-option>
                     </el-select>
                   </td>
-                  <td width="80px"><el-input v-model="rates.priority" size="mini" placeholder="优先级"></el-input></td>
+                  <td width="80px"><el-input v-model="rule.priority" size="mini" placeholder="优先级"></el-input></td>
                   <td>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteRates(index)">删除</button>
                   </td>
@@ -104,7 +104,7 @@
             id: null,
             title: '',
             description: '',
-            rates: [],
+            rules: [],
           },
         },
 
@@ -133,7 +133,7 @@
               id: tax.id,
               title: tax.title,
               description: tax.description,
-              rates: tax.rates,
+              rules: tax.rules,
             }
           }
         },
@@ -142,11 +142,11 @@
           const tax_rate_id = this.source.all_tax_rates[0]?.id || 0;
           const based = this.source.bases[0] || '';
 
-          this.dialog.form.rates.push({tax_rate_id, based, priority: ''})
+          this.dialog.form.rules.push({tax_rate_id, based, priority: ''})
         },
 
         deleteRates(index) {
-          this.dialog.form.rates.splice(index, 1)
+          this.dialog.form.rules.splice(index, 1)
         },
 
         addFormSubmit(form) {
@@ -161,9 +161,9 @@
             }
 
             $http[type](url, this.dialog.form).then((res) => {
-              // this.$message.success(res.message);
-              // this.tax_classes.push(res.data)
-              // this.dialog.show = false
+              this.$message.success(res.message);
+              this.tax_classes.push(res.data)
+              this.dialog.show = false
             })
           });
         },

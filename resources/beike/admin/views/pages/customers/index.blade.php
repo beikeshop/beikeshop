@@ -95,7 +95,7 @@
             name: '',
             email: '',
             password: '',
-            customer_group_id: 1,
+            customer_group_id: @json($customer_groups[0]['id'] ?? ''),
             status: 1,
           },
         },
@@ -128,15 +128,10 @@
               return;
             }
 
-            $.ajax({
-              url: `/admin/customers`,
-              type: 'post',
-              data: self.dialogCustomers.form,
-              success: function(res) {
-                self.$message.success(res.message);
-                self.customers.push(res.data);
-                self.dialogCustomers.show = false
-              }
+            $http.post('customers', this.dialogCustomers.form).then((res) => {
+              this.$message.success(res.message);
+              this.customers.push(res.data);
+              this.dialogCustomers.show = false
             })
           });
         },
@@ -148,13 +143,9 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            $.ajax({
-              url: url,
-              type: 'delete',
-              success: function(res) {
-                self.$message.success(res.message);
-                self.customers.splice(index, 1)
-              }
+            $http.delete(url).then((res) => {
+              self.$message.success(res.message);
+              self.customers.splice(index, 1)
             })
           }).catch(()=>{})
         },
