@@ -16,6 +16,7 @@ class Product extends Base
     ];
     protected $casts = [
         'active' => 'boolean',
+        'images' => 'array',
         'variables' => 'array',
     ];
 
