@@ -17,10 +17,12 @@
     <div class="row mb-5" id="product-top">
       <div class="col-12 col-md-6">
         <div class="product-image d-flex align-items-start">
-          <div class="left">
+          <div class="left" v-if="images.length">
             <div :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
           </div>
-          <div class="right"><img :src="images[0].image" class="img-fluid"></div>
+          <div class="right">
+            <img :src="images[0]?.image || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+          </div>
         </div>
       </div>
 
@@ -129,7 +131,7 @@
         images: [],
         product: {
           id: 0,
-          image: "",
+          images: "",
           model: "",
           origin_price: 0,
           origin_price_format: "",
