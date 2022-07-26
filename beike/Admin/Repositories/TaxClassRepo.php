@@ -31,5 +31,6 @@ class TaxClassRepo
 
         $taxClass->taxRules()->delete();
         $taxClass->taxRules()->createMany($data['rules']);
+        return $taxClass;
     }
 }

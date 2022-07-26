@@ -39,8 +39,8 @@ class TaxClassController extends Controller
     public function store(Request $request)
     {
         $requestData = json_decode($request->getContent(), true);
-        TaxClassRepo::createOrUpdate($requestData);
-        return json_success('保存成功');
+        $taxClass = TaxClassRepo::createOrUpdate($requestData);
+        return json_success('保存成功', $taxClass);
     }
 
     public function update(Request $request)
