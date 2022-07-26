@@ -22,10 +22,10 @@ class ImageService
     const PLACEHOLDER_IMAGE = 'catalog/placeholder.png';
 
     /**
-     * @param string $image
+     * @param $image
      * @throws \Exception
      */
-    public function __construct(string $image)
+    public function __construct($image)
     {
         $this->image = $image ?: self::PLACEHOLDER_IMAGE;
         $imagePath = public_path($this->image);
