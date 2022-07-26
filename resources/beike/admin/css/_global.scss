@@ -85,9 +85,11 @@ body {
   }
 }
 
+.border-dashed {
+  border-style: dashed !important;
+}
+
 .set-product-img {
-  width: 80px;
-  height: 80px;
   background-color: #f8f8f8;
   border: 1px dashed #e2e2e2;
   display: flex;

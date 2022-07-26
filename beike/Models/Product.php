@@ -11,9 +11,6 @@ class Product extends Base
     use SoftDeletes;
 
     protected $fillable = ['images', 'video', 'position', 'active', 'variables'];
-    protected $attributes = [
-        'image' => ''
-    ];
     protected $casts = [
         'active' => 'boolean',
         'variables' => 'array',

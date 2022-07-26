@@ -24,6 +24,29 @@
 
         <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
         {{-- <x-admin-form-input name="image" title="主图" :value="old('image', $product->image ?? '')" /> --}}
+        <x-admin::form.row title="图片">
+          <div class="product-images d-flex flex-wrap">
+            <div v-for="image, index in form.images" :key="index" class="wh-80 border d-flex justify-content-center align-items-center me-2">
+              <img :src="thumbnail(image)" class="img-fluid">
+              <input type="hidden" name="images[]" :value="image">
+            </div>
+            <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
+          </div>
+          <div class="help-text mb-1 mt-2">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</div>
+          <div class="help-text">开启多规格并且多规格配置了图片时，这里的图片将作为多规格的公用图片，展示在其后面</div>
+        </x-admin::form.row>
+
+        {{-- <div class="set-product-img">
+          @if ($product->image)
+          <div>
+            <img src="{{ old('images', $product->images ?? '') }}" class="img-fluid">
+          </div>
+          @else
+          <i class="bi bi-plus fs-1 text-muted"></i>
+          @endif
+        </div>
+        <input type="hidden" value="{{ old('images', $product->images ?? '') }}" name="skus[0][image]">
+        --}}
         <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" />
         <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
         <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
@@ -54,53 +77,55 @@
             <div class="col-auto wp-200-">
               <div class="selectable-variants">
                 <div>
-                  <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
-                    <div class="title">
-                      <div>
-                        <b>@{{ variant.name[current_language_code] }}</b>
-                        <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
-                        <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
+                  <draggable :list="source.variables" :options="{animation: 100}">
+                    <div v-for="(variant, variantIndex) in source.variables" :id="'selectable-variant-' + variantIndex">
+                      <div class="title">
+                        <div>
+                          <b>@{{ variant.name[current_language_code] }}</b>
+                          <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
+                          <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
+                        </div>
+                        <div>
+                          <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
+                          <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
+                        </div>
                       </div>
-                      <div>
-                        <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
-                        <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
-                      </div>
-                    </div>
-                     <draggable
-                       element="div"
-                       @start="isMove = true"
-                       v-if="variant.values.length"
-                       class="variants-wrap"
-                       @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
-                       @end="isMove = false"
-                       ghost-class="dragabble-ghost"
-                       :list="variant.values"
-                       :options="{animation: 100}"
-                       >
-                       <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
-                         {{-- <div class="value-img" v-if="variant.isImage"> --}}
-                           {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
-                             {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
-                           {{-- </a> --}}
-                         {{-- </div> --}}
+                       <draggable
+                         element="div"
+                         @start="isMove = true"
+                         v-if="variant.values.length"
+                         class="variants-wrap"
+                         @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                         @end="isMove = false"
+                         ghost-class="dragabble-ghost"
+                         :list="variant.values"
+                         :options="{animation: 100}"
+                         >
+                         <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
+                           {{-- <div class="value-img" v-if="variant.isImage"> --}}
+                             {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
+                               {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
+                             {{-- </a> --}}
+                           {{-- </div> --}}
 
-                         <div class="open-file-manager variant-value-img" v-if="variant.isImage">
-                           <div>
-                             <img :src="thumbnail(value.image)" class="img-fluid">
+                           <div class="open-file-manager variant-value-img" v-if="variant.isImage">
+                             <div>
+                               <img :src="thumbnail(value.image)" class="img-fluid">
+                             </div>
+                           </div>
+                           <input type="hidden" v-model="value.image">
+
+                           <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
+                           <div class="name">
+                             @{{ value.name[current_language_code] }}
                            </div>
                          </div>
-                         <input type="hidden" v-model="value.image">
-
-                         <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
-                         <div class="name">
-                           @{{ value.name[current_language_code] }}
-                         </div>
-                       </div>
-                    </draggable>
-                    <div v-else>
-                      <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加 Value</div>
+                      </draggable>
+                      <div v-else>
+                        <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加 Value</div>
+                      </div>
                     </div>
-                  </div>
+                  </draggable>
 
                   <el-button type="primary" size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">Add variant</el-button>
                 </div>
@@ -111,7 +136,7 @@
                       <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                         @{{ variant.name[current_language_code] || 'No name' }}
                       </th>
-                      <th>image</th>
+                      <th width="106px">image</th>
                       <th>model</th>
                       <th>sku</th>
                       <th>price</th>
@@ -128,13 +153,22 @@
                           </td>
                         </template>
                         <td>
-                          <div class="open-file-manager variants-producr-img">
+                          <div class="product-images d-flex flex-wrap" style="margin-right: -8px">
+                            <div v-for="image, index in sku.images" :key="index" class="wh-40 border d-flex justify-content-center align-items-center me-2 mb-2">
+                              <img :src="thumbnail(image)" class="img-fluid">
+                              <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'"
+                            placeholder="image">
+                            </div>
+                            <div class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40" @click="addProductImages(skuIndex)"><i class="bi bi-plus fs-3 text-muted"></i></div>
+                          </div>
+
+                          {{-- <div class="open-file-manager variants-producr-img">
                             <div>
                               <img :src="thumbnail(sku.image)" class="img-fluid">
                             </div>
                           </div>
                           <input type="hidden" class="form-control" v-model="sku.image" :name="'skus[' + skuIndex + '][image]'"
-                            placeholder="image">
+                            placeholder="image"> --}}
 
                           <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
                           <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
@@ -172,19 +206,7 @@
               <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
             </x-admin::form.row> --}}
 
-            <x-admin::form.row title="图片">
-              <div class="open-file-manager set-product-img">
-                @if ($product->image)
-                <div>
-                  <img src="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid">
-                </div>
-                @else
-                <i class="bi bi-plus fs-1 text-muted"></i>
-                @endif
-              </div>
-              <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
-              {{-- <span class="help-text">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</span> --}}
-            </x-admin::form.row>
+            <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
             <x-admin-form-input name="skus[0][model]" title="model" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
             <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" />
             <x-admin-form-input name="skus[0][price]" title="price" :value="old('skus.0.price', $product->skus[0]->price ?? '')" />
@@ -239,7 +261,7 @@
         return image;
       }
 
-      return '{{ asset('catalog') }}' + image;
+      return '{{ asset('/') }}' + image;
     };
 
     var app = new Vue({
@@ -248,6 +270,7 @@
         current_language_code: '{{ current_language_code() }}',
         isMove: false,
         form: {
+          images: @json($product->images ?? []),
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
           quantity: @json($product->skus[0]['quantity'] ?? ''),
@@ -313,16 +336,33 @@
         }
       },
       methods: {
-        // addVariant() {
-        //   this.source.variables.push({
-        //     name: '',
-        //     values: []
-        //   });
-        // },
-
-        // datadragEnd(e) {
-        //   console.log(e);
-        // },
+        addProductImages(skuIndex) {
+          const self = this;
+          layer.open({
+            type: 2,
+            title: '图片管理器',
+            shadeClose: false,
+            skin: 'file-manager-box',
+            scrollbar: false,
+            shade: 0.4,
+            area: ['1060px', '680px'],
+            content: `${document.querySelector('base').href}/file_manager`,
+            success: function(layerInstance, index) {
+              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
+              iframeWindow.callback = (images) => {
+                if (!isNaN(skuIndex)) {
+                  if (self.form.skus[skuIndex].images === null) {
+                    self.form.skus[skuIndex].images = images.map(e => e.path)
+                  } else {
+                    self.form.skus[skuIndex].images.push(...images.map(e => e.path))
+                  }
+                  return;
+                }
+                self.form.images.push(...images.map(e => e.path))
+              }
+            }
+          });
+        },
 
         dialogVariablesFormSubmit(form) {
           const name = JSON.parse(JSON.stringify(this.dialogVariables.form.name));
@@ -437,7 +477,7 @@
                 product_sku_id: 0,
                 position: i,
                 variants: combo,
-                image: '',
+                images: [],
                 model: '',
                 sku: '',
                 price: null,
