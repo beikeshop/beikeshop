@@ -12,14 +12,24 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\TaxClass;
+use Beike\Models\TaxRate;
 use Illuminate\Http\Request;
 
 class TaxClassController extends Controller
 {
     public function index()
     {
-        $taxClasses = TaxClass::query()->get();
-        return view('admin::pages.tax_classes.index', ['tax_classes' => $taxClasses]);
+        $data = [
+            'tax_classes' => TaxClass::query()->with([
+                'taxRates.region',
+                'taxRules'
+            ])->get(),
+            'all_tax_rates' => TaxRate::all()
+        ];
+
+        dd($data);
+
+        return view('admin::pages.tax_classes.index', $data);
     }
 
     public function store(Request $request)

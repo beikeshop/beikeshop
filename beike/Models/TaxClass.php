@@ -13,5 +13,13 @@ namespace Beike\Models;
 
 class TaxClass extends Base
 {
+    public function taxRates()
+    {
+        return $this->belongsToMany(TaxRate::class, 'tax_rules');
+    }
 
+    public function taxRules()
+    {
+        return $this->hasMany(TaxRule::class);
+    }
 }
