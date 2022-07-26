@@ -20,13 +20,11 @@
 
     <div class="row mb-5" id="product-top">
       <div class="col-12 col-md-6">
-        <div class="product-image d-flex">
+        <div class="product-image d-flex align-items-start">
           <div class="left">
-            @for ($i = 0; $i < 5; $i++)
-              <div class=""><img src="http://fpoimg.com/100x100?bg_color=f3f3f3" class="img-fluid"></div>
-            @endfor
+            <div :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
           </div>
-          <div class="right"><img :src="product.image" class="img-fluid"></div>
+          <div class="right"><img :src="images[0].image" class="img-fluid"></div>
         </div>
       </div>
 
@@ -127,11 +125,12 @@
 
 @push('add-scripts')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#product-app',
 
       data: {
         selectedVariantsIndex: [], // 选中的变量索引
+        images: [],
         product: {
           id: 0,
           image: "",
@@ -160,7 +159,8 @@
         this.selectedVariantsIndex = skuDefault.variants
         // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
         if (skuDefault.variants == null) {
-          this.product = skus[0]
+          this.product = skus[0];
+          this.images = @json($product['images'] ?? []);
         }
 
         // 为 variables 里面每一个 values 的值添加 selected、disabled 字段
@@ -199,6 +199,8 @@
         getSelectedSku() {
           // 通过 selectedVariantsIndex 的值比对 skus 的 variables
           const sku = this.source.skus.find(sku => sku.variants.toString() == this.selectedVariantsIndex.toString())
+          const spuImages = @json($product['images'] ?? []);
+          this.images = [...sku.images, ...spuImages]
           this.product = sku;
         },
 
@@ -246,6 +248,12 @@
           })
         },
       }
-    })
+    });
+
+    $("body").on("mouseover", ".product-image .left > div", function() {
+      const image = $(this).data('image')
+      $('.product-image .right').find('img').attr('src', image);
+      $(this).addClass('active').siblings().removeClass('active');
+    });
   </script>
 @endpush

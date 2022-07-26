@@ -6,8 +6,22 @@ body.page-product {
       margin-right: 1rem;
 
       > div {
-        margin-bottom: 1rem;
+        border: 1px solid #eee;
+        margin-bottom: 10px;
+        width: 80px;
+        height: 80px;
+        padding: 2px;
+        background-color: #fff;
+        cursor: pointer;
+
+        &.active, &:hover {
+          border: 1px solid #3a3a3a;
+        }
       }
+    }
+
+    .right {
+      border: 1px solid #eee;
     }
   }
 

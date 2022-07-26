@@ -613,7 +613,19 @@ body.page-product .product-image .left {
   margin-right: 1rem;
 }
 body.page-product .product-image .left > div {
-  margin-bottom: 1rem;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+  width: 80px;
+  height: 80px;
+  padding: 2px;
+  background-color: #fff;
+  cursor: pointer;
+}
+body.page-product .product-image .left > div.active, body.page-product .product-image .left > div:hover {
+  border: 1px solid #3a3a3a;
+}
+body.page-product .product-image .right {
+  border: 1px solid #eee;
 }
 body.page-product .variables-wrap .variable-info > div {
   display: inline-flex;
