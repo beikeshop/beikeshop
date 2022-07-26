@@ -29,6 +29,8 @@ Breadcrumbs::for('product', function (BreadcrumbTrail $trail, $product) {
     $category = $productModel->categories->first();
     if ($category) {
         $trail->parent('category', $category);
+    } else {
+        $trail->parent('home');
     }
     $trail->push($product['name'], shop_route('products.show', $productModel));
 });
