@@ -184,6 +184,7 @@
 
         closeCustomersDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
+          this.dialog.form.rules = []
           this.dialog.show = false
         }
       }
