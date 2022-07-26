@@ -13,6 +13,7 @@ namespace Beike\Repositories;
 
 use Beike\Models\Customer;
 use Beike\Models\CustomerWishlist;
+use Beike\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -142,9 +143,20 @@ class CustomerRepo
         return $customer->wishlists()->with('product.description')->paginate(20);
     }
 
+    /**
+     * @param $product, 商品id或对象
+     * @param $customer, 顾客id或对象
+     * @return int
+     */
     public static function inWishlist($product, $customer)
     {
-
+        if ($product instanceof Product) {
+            $product = $product->id;
+        }
+        if (!$customer instanceof Customer) {
+            $customer = Customer::query()->findOrFail($customer);
+        }
+        return $customer->wishlists()->where('product_id', $product)->count();
     }
 }
 
