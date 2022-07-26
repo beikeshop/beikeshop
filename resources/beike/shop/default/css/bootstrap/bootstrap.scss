@@ -31,11 +31,12 @@ $breadcrumb-bg:                     transparent;
 
 $border-radius:               0;
 $input-btn-padding-y:         .46rem;
-$input-btn-font-size:         0.9rem;
+$input-btn-font-size:         0.85rem;
 $input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
 // $input-btn-padding-x:         .75rem !default;
 $btn-focus-width: 0;
+$btn-border-radius: 0;
 // $btn-padding-y:               $input-btn-padding-y !default;
 // $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
@@ -78,6 +79,10 @@ $card-border-width: 0;
 
 .table > :not(:first-child) {
   border-top: none;
+}
+
+.btn {
+  border-radius: 0;
 }
 
 .card {

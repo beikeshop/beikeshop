@@ -37,8 +37,8 @@
                   <td>{{ $item['price'] }}</td>
                   <td class="text-end">
                     <div class="">
-                      <button class="btn btn-outline-danger btn-sm">删除</button>
-                      <button class="btn btn-outline-dark btn-sm">加购物车</button>
+                      <button class="btn btn-dark btn-sm">加购物车</button>
+                      <button class="btn btn-danger btn-sm"><i class="bi bi-x-lg"></i></button>
                     </div>
                   </td>
                 </tr>
