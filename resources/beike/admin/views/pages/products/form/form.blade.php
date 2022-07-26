@@ -166,7 +166,8 @@
               <div class="open-file-manager set-product-img">
                 <div>
                   {{-- <img :src="thumbnail(form.skus[0].image)" class="img-fluid"> --}}
-                  <img src="{{ old('skus.0.image', 'catalog/' . $product->skus[0]->image ?? '') }}" class="img-fluid">
+                  {{-- <img src="{{ 'catalog/' . old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid"> --}}
+                  <img src="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" class="img-fluid">
                 </div>
               </div>
               <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
