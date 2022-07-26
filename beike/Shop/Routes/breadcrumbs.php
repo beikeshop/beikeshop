@@ -27,7 +27,9 @@ Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
 Breadcrumbs::for('product', function (BreadcrumbTrail $trail, $product) {
     $productModel = \Beike\Models\Product::query()->find($product['id']);
     $category = $productModel->categories->first();
-    $trail->parent('category', $category);
+    if ($category) {
+        $trail->parent('category', $category);
+    }
     $trail->push($product['name'], shop_route('products.show', $productModel));
 });
 
