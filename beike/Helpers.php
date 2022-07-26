@@ -103,6 +103,20 @@ function plugin_route($route, $params = []): string
 }
 
 /**
+ * 是否访问的后端
+ * @return bool
+ */
+function is_admin(): bool
+{
+    $adminName = admin_name();
+    $uri = request()->getRequestUri();
+    if (Str::startsWith($uri, "/{$adminName}")) {
+        return true;
+    }
+    return false;
+}
+
+/**
  * 是否为当前访问路由
  *
  * @param $routeName

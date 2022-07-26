@@ -11,12 +11,8 @@
 @section('content')
 
   <div class="container" id="product-app" v-cloak>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav>
+
+    {{ Diglactic\Breadcrumbs\Breadcrumbs::render('product', $product) }}
 
     <div class="row mb-5" id="product-top">
       <div class="col-12 col-md-6">
