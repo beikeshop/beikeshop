@@ -33,8 +33,6 @@ class TaxClassController extends Controller
             ]
         ];
 
-        dd($data);
-
         return view('admin::pages.tax_classes.index', $data);
     }
 
