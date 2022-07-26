@@ -31,7 +31,7 @@ class ProductList extends JsonResource
             'url' => shop_route('products.show', ['product' => $this]),
             'price' => $this->price,
             'origin_price' => $this->origin_price,
-            'image' => image_resize($this->image),
+            'images' => image_resize($this->images[0] ?? ''),
             'price_format' => currency_format($this->price),
             'category_id' => $this->category_id ?? null,
         ];

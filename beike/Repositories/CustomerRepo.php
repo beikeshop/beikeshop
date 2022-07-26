@@ -141,5 +141,10 @@ class CustomerRepo
 
         return $customer->wishlists()->with('product.description')->paginate(20);
     }
+
+    public static function inWishlist($product, $customer)
+    {
+
+    }
 }
 

@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Http\Resources;
 
+use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductDetail extends JsonResource
@@ -24,10 +25,13 @@ class ProductDetail extends JsonResource
             'id' => $this->id,
             'name' => $this->description->name ?? '',
             'description' => $this->description->description ?? '',
-            'image' => image_resize($this->image),
+            'images' => array_map(function ($image) {
+                return image_resize($image);
+            }, $this->images ?? []),
             'category_id' => $this->category_id ?? null,
             'variables' => $this->decodeVariables($this->variables),
             'skus' => SkuDetail::collection($this->skus)->jsonSerialize(),
+            'in_wishlist' => CustomerRepo::inWishlist($this, current_customer()),
         ];
     }
 
