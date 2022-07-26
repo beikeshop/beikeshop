@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'files' => is_admin() ? base_path('beike/Admin/routes/breadcrumbs.php') : base_path('beike/Shop/routes/breadcrumbs.php'),
+    'files' => base_path('beike/Shop/routes/breadcrumbs.php'),
 
     /*
     |--------------------------------------------------------------------------
