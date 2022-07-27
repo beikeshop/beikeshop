@@ -13,7 +13,7 @@
   </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
-    <div class="card-body">
+    <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button>
       </div>
@@ -69,8 +69,8 @@
         </el-form-item>
 
         <el-form-item label="区域">
-          <el-select v-model="dialog.form.type" size="small" placeholder="请选择">
-            <el-option v-for="type in source.types" :key="type.value" :label="type.name" :value="type.value"></el-option>
+          <el-select v-model="dialog.form.geo_zone_id" size="small" placeholder="请选择">
+            <el-option v-for="region in source.regions" :key="region.value" :label="region.name" :value="region.id"></el-option>
           </el-select>
         </el-form-item>
 
@@ -93,8 +93,8 @@
 
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
-          bases: @json($bases ?? []),
-          types: [{value:'P', name: '百分比'}, {value:'F', name: '固定税率'}]
+          regions: @json($regions ?? []),
+          types: [{value:'percent', name: '百分比'}, {value:'flat', name: '固定税率'}]
         },
 
         dialog: {
@@ -105,7 +105,7 @@
             id: null,
             name: '',
             rate: '',
-            type: 'P',
+            type: 'percent',
             geo_zone_id: '',
           },
         },
@@ -116,18 +116,12 @@
         }
       },
 
-      beforeMount() {
-        // this.source.languages.forEach(e => {
-        //   this.$set(this.dialog.form.name, e.code, '')
-        //   this.$set(this.dialog.form.description, e.code, '')
-        // })
-      },
-
       methods: {
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
           this.dialog.index = index
+          this.dialog.form.geo_zone_id = this.source.regions[0].id
 
           if (type == 'edit') {
             let tax = this.tax_rates[index];
@@ -140,13 +134,6 @@
               geo_zone_id: tax.geo_zone_id,
             }
           }
-        },
-
-        addRates() {
-          const tax_rate_id = this.source.all_tax_rates[0]?.id || 0;
-          const based = this.source.bases[0] || '';
-
-          this.dialog.form.tax_rules.push({tax_rate_id, based, priority: ''})
         },
 
         deleteRates(index) {
@@ -193,7 +180,7 @@
 
         closeCustomersDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
-          this.dialog.form.type = 'P';
+          this.dialog.form.type = 'percent';
           this.dialog.show = false
         }
       }

@@ -5,7 +5,7 @@
 @section('content')
 
   <div id="plugins-app" class="card" v-cloak>
-    <div class="card-body">
+    <div class="card-body h-min-600">
       {{-- <button type="button" @click="upload" class="btn btn-primary">上传插件</button> --}}
       <el-upload
         class="upload-demo"

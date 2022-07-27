@@ -13,7 +13,7 @@
   </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
-    <div class="card-body">
+    <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button>
       </div>
