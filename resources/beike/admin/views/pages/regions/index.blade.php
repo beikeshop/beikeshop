@@ -188,6 +188,7 @@
         countryChange(e, index) {
           $http.get(`countries/${e}/zones`).then((res) => {
             this.dialog.form.region_zones[index].zones = res.data.zones
+            this.dialog.form.region_zones[index].zone_id = ''
           })
         },
 
