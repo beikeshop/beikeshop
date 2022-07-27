@@ -11,6 +11,9 @@ class LoginController extends Controller
 {
     public function show()
     {
+        if (auth(AdminUser::AUTH_GUARD)->check()) {
+            return redirect()->back();
+        }
         return view('admin::pages.login.login');
     }
 
