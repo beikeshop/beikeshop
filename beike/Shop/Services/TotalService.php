@@ -11,7 +11,6 @@
 
 namespace Beike\Shop\Services;
 
-use \Beike\Shop\Services\TotalServices;
 use Illuminate\Support\Str;
 
 class TotalService
@@ -23,16 +22,27 @@ class TotalService
         'total'
     ];
 
+    public array $carts;
+    public array $totals;
+
+    public function __construct($carts)
+    {
+        $this->carts = $carts;
+    }
+
     /**
      * @return array
      */
-    public static function getTotals(): array
+    public function getTotals(): array
     {
         $totals = [];
         foreach (self::TOTAL_CODES as $code) {
-            $serviceName = Str::studly($code);
-            $service = "TotalServices\{$serviceName}";
-            $totals[] = $service::getTotal();
+            $serviceName = Str::studly($code) . 'Service';
+            $service = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+            if (!class_exists($service) || !method_exists($service, 'getTotal')) {
+                continue;
+            }
+            $this->totals[] = $service::getTotal($this);
         }
 
         return $totals;
