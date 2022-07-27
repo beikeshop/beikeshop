@@ -37,8 +37,8 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="120px">
-        <el-form-item label="区域群组名称" prop="title">
-          <el-input v-model="dialog.form.title" placeholder="区域群组名称"></el-input>
+        <el-form-item label="区域群组名称" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="区域群组名称"></el-input>
         </el-form-item>
 
         <el-form-item label="描述" prop="description">
@@ -109,14 +109,14 @@
           zones: [],
           form: {
             id: null,
-            title: '',
+            name: '',
             description: '',
             region_zones: [],
           },
         },
 
         rules: {
-          title: [{required: true,message: '请输入区域群组名称',trigger: 'blur'}, ],
+          name: [{required: true,message: '请输入区域群组名称',trigger: 'blur'}, ],
           description: [{required: true,message: '请输入描述',trigger: 'blur'}, ],
         }
       },
@@ -138,7 +138,7 @@
 
             this.dialog.form = {
               id: tax.id,
-              title: tax.title,
+              name: tax.name,
               description: tax.description,
               region_zones: tax.region_zones,
             }
