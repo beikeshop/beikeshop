@@ -13,6 +13,7 @@
           <tr>
             <th>#</th>
             <th>名称</th>
+            <th>描述</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
           <tr v-for="tax, index in tax_classes" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.title }}</td>
+            <td>@{{ tax.description }}</td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
@@ -125,6 +127,7 @@
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
+          this.dialog.index = index
 
           if (type == 'edit') {
             let tax = this.tax_classes[index];
@@ -162,7 +165,12 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              this.tax_classes.push(res.data)
+              if (type == 'add') {
+                this.tax_classes.push(res.data)
+              } else {
+                this.tax_classes[this.dialog.index] = res.data
+              }
+
               this.dialog.show = false
             })
           });

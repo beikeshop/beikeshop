@@ -13,6 +13,7 @@
           <tr>
             <th>#</th>
             <th>名称</th>
+            <th>描述</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
           <tr v-for="tax, index in regions" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
+            <td>@{{ tax.description }}</td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
