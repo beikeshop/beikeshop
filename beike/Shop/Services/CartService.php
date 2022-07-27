@@ -145,14 +145,12 @@ class CartService
         $selected = collect($carts)->where('selected', 1);
         $quantity = $selected->sum('quantity');
         $amount = $selected->sum('subtotal');
-        $totalService = new TotalService($carts);
 
         $data = [
             'carts' => $carts,
             'quantity' => $quantity,
             'amount' => $amount,
             'amount_format' => currency_format($amount),
-            'totals' => $totalService->getTotals(),
         ];
         return $data;
     }

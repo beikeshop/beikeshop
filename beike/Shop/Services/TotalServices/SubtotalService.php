@@ -12,14 +12,19 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
+use Beike\Shop\Services\TotalService;
+
 class SubtotalService
 {
-    public static function getTotal($totalService)
+    public static function getTotal(TotalService $totalService)
     {
         $carts = $totalService->carts;
+        $amount = collect($carts)->sum('subtotal');
         return [
             'code' => 'sub_total',
-            'value' => collect($carts)->sum('total')
+            'title' => '商品总额',
+            'amount' => $amount,
+            'amount_format' => currency_format($amount)
         ];
     }
 }

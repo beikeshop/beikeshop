@@ -19,32 +19,48 @@ class TotalService
         'subtotal',
         'tax',
         'shipping',
-        'total'
+        'order_total'
     ];
 
     public array $carts;
     public array $totals;
+    public float $amount = 0;
+    public string $shippingMethod = '';
 
     public function __construct($carts)
     {
         $this->carts = $carts;
     }
 
+
+    /**
+     * 设置配送方式
+     */
+    public function setShippingMethod($methodCode): TotalService
+    {
+        $this->shippingMethod = $methodCode;
+        return $this;
+    }
+
+
     /**
      * @return array
      */
     public function getTotals(): array
     {
-        $totals = [];
         foreach (self::TOTAL_CODES as $code) {
             $serviceName = Str::studly($code) . 'Service';
             $service = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
             if (!class_exists($service) || !method_exists($service, 'getTotal')) {
                 continue;
             }
-            $this->totals[] = $service::getTotal($this);
+            $totalData = $service::getTotal($this);
+            if ($totalData) {
+                $this->amount += $totalData['amount'];
+                $this->totals[] = $totalData;
+            }
         }
 
-        return $totals;
+        return $this->totals;
     }
 }

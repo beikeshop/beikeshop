@@ -122,6 +122,7 @@ class CheckoutService
 
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
+        $totalService = (new TotalService($cartList))->setShippingMethod($this->cart->shipping_method_code);
 
         $data = [
             'current' => [
@@ -136,8 +137,10 @@ class CheckoutService
             'addresses' => AddressResource::collection($addresses),
             'shipping_methods' => $shipments,
             'payment_methods' => $payments,
-            'carts' => $carts
+            'carts' => $carts,
+            'totals' => $totalService->getTotals(),
         ];
+
         return $data;
     }
 }

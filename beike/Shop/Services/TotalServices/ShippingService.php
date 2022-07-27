@@ -12,10 +12,22 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
+use Beike\Shop\Services\TotalService;
+
 class ShippingService
 {
-    public static function getTotal()
+    public static function getTotal(TotalService $totalService)
     {
-
+        $shippingMethod = $totalService->shippingMethod;
+        if (empty($shippingMethod)) {
+            return null;
+        }
+        $amount = 5;
+        return [
+            'code' => 'shipping',
+            'title' => '运费',
+            'amount' => $amount,
+            'amount_format' => currency_format($amount)
+        ];
     }
 }
