@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Models\Region;
 use Illuminate\Http\Request;
 use Beike\Admin\Repositories\TaxRateRepo;
 
@@ -19,7 +20,8 @@ class TaxRateController
     public function index()
     {
         $data = [
-            'tax_rates' => TaxRateRepo::getList()
+            'tax_rates' => TaxRateRepo::getList(),
+            'regions' => Region::all()
         ];
 
         return view('admin::pages.tax_rates.index', $data);
