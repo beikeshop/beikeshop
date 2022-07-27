@@ -155,11 +155,6 @@
         const skus = JSON.parse(JSON.stringify(this.source.skus));
         const skuDefault = skus.find(e => e.is_default)
         this.selectedVariantsIndex = skuDefault.variants
-        // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
-        if (skuDefault.variants == null) {
-          this.product = skus[0];
-          this.images = @json($product['images'] ?? []);
-        }
 
         // 为 variables 里面每一个 values 的值添加 selected、disabled 字段
         if (this.source.variables.length) {
@@ -173,6 +168,10 @@
           this.checkedVariants()
           this.getSelectedSku();
           this.updateSelectedVariantsStatus()
+        } else {
+          // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
+          this.product = skus[0];
+          this.images = @json($product['images'] ?? []);
         }
       },
 
