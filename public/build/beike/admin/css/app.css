@@ -553,6 +553,23 @@ hr.horizontal.dark {
   background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent);
 }
 
+.nav-tabs.nav-bordered {
+  border-width: 2px;
+}
+.nav-tabs.nav-bordered .nav-item {
+  margin-bottom: -1px;
+}
+.nav-tabs.nav-bordered .nav-item a {
+  color: #6c757d;
+  border: none;
+}
+.nav-tabs.nav-bordered .nav-item a.active {
+  color: #fd560f;
+  font-weight: bold;
+  background-color: transparent;
+  border-bottom: 2px solid #fd560f;
+}
+
 .card {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
   border: none;

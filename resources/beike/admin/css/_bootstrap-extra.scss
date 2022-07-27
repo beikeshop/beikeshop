@@ -21,6 +21,25 @@ hr.horizontal.dark {
   background-image: linear-gradient(90deg,transparent,rgba(0,0,0,.4),transparent);
 }
 
+.nav-tabs.nav-bordered {
+  border-width: 2px;
+
+  .nav-item {
+    margin-bottom: -1px;
+    a {
+      color: #6c757d;
+      border: none;
+    }
+
+    a.active {
+      color: $primary;
+      font-weight: bold;
+      background-color: transparent;
+      border-bottom: 2px solid $primary;
+    }
+  }
+}
+
 .card {
   box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
   border: none;

@@ -14,6 +14,8 @@
             <th>#</th>
             <th>名称</th>
             <th>描述</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
@@ -22,6 +24,8 @@
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
             <td>@{{ tax.description }}</td>
+            <td>@{{ tax.created_at }}</td>
+            <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>

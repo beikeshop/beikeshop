@@ -3,6 +3,15 @@
 @section('title', '税类设置')
 
 @section('content')
+  <ul class="nav-bordered nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{{ admin_route('tax_classes.index') }}">税类设置</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ admin_route('tax_rates.index') }}">税率设置</a>
+    </li>
+  </ul>
+
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
@@ -14,6 +23,8 @@
             <th>#</th>
             <th>名称</th>
             <th>描述</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
@@ -22,6 +33,8 @@
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.title }}</td>
             <td>@{{ tax.description }}</td>
+            <td>@{{ tax.created_at }}</td>
+            <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
