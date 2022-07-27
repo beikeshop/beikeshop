@@ -136,6 +136,12 @@
           if (type == 'edit') {
             let tax = this.regions[index];
 
+            tax.region_zones.forEach(e => {
+              $http.get(`countries/${e.country_id}/zones`).then((res) => {
+                this.$set(e, 'zones', res.data.zones)
+              })
+            })
+
             this.dialog.form = {
               id: tax.id,
               name: tax.name,
