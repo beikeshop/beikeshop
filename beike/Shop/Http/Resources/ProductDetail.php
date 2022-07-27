@@ -34,7 +34,7 @@ class ProductDetail extends JsonResource
             'category_id' => $this->category_id ?? null,
             'variables' => $this->decodeVariables($this->variables),
             'skus' => SkuDetail::collection($this->skus)->jsonSerialize(),
-            'in_wishlist' => CustomerRepo::inWishlist($this, current_customer()),
+            'in_wishlist' => CustomerRepo::inWishlist($this->resource, current_customer()),
         ];
     }
 
