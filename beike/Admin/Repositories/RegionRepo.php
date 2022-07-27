@@ -24,7 +24,7 @@ class RegionRepo
             $region = new Region();
         }
         $region->fill([
-            'name' => $data['title'],
+            'name' => $data['name'],
             'description' => $data['description'],
         ]);
         $region->saveOrFail();
