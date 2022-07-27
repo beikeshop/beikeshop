@@ -131,7 +131,7 @@
               name: tax.name,
               rate: tax.rate,
               type: tax.type,
-              geo_zone_id: tax.geo_zone_id,
+              geo_zone_id: tax.region.id,
             }
           }
         },
