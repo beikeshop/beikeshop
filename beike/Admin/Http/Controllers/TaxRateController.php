@@ -24,15 +24,16 @@ class TaxRateController
 
     public function store(Request $request)
     {
+        return json_success('添加成功');
     }
 
     public function update(Request $request)
     {
-
+        return json_success('更新成功');
     }
 
     public function destroy(Request $request)
     {
-
+        return json_success('删除成功');
     }
 }
