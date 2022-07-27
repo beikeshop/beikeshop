@@ -127,7 +127,7 @@
             let tax = this.tax_rates[index];
 
             this.dialog.form = {
-              id: null,
+              id: tax.id,
               name: tax.name,
               rate: tax.rate,
               type: tax.type,
