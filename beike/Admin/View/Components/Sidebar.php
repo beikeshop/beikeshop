@@ -51,8 +51,9 @@ class Sidebar extends Component
         if (Str::startsWith($routeName, ['settings.', 'plugins.', 'tax_classes', 'tax_rates', 'regions'])) {
             $this->addLink('系统设置', admin_route('settings.index'), 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
             $this->addLink('插件列表', admin_route('plugins.index'), 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
-            $this->addLink('税费设置', admin_route('tax_classes.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
             $this->addLink('区域分组', admin_route('regions.index'), 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
+            $this->addLink('税率设置', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('税费类别', admin_route('tax_classes.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
             $this->addLink('首页装修', admin_route('design.index'), 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
         }
 

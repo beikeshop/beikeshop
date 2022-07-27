@@ -11,10 +11,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Repositories\TaxClassRepo;
-use Beike\Models\TaxClass;
 use Beike\Models\TaxRate;
 use Illuminate\Http\Request;
+use Beike\Admin\Repositories\TaxClassRepo;
 
 class TaxClassController extends Controller
 {

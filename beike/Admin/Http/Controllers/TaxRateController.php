@@ -11,29 +11,38 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Models\TaxRate;
 use Illuminate\Http\Request;
+use Beike\Admin\Repositories\TaxRateRepo;
 
 class TaxRateController
 {
     public function index()
     {
-        $taxRates = TaxRate::all();
-        return view('admin::pages.tax_rates.index', ['tax_rates' => $taxRates]);
+        $data = [
+            'tax_rates' => TaxRateRepo::getList()
+        ];
+
+        return view('admin::pages.tax_rates.index', $data);
     }
 
     public function store(Request $request)
     {
-        return json_success('添加成功');
+        $requestData = json_decode($request->getContent(), true);
+        $taxRate = TaxRateRepo::createOrUpdate($requestData);
+        return json_success('保存成功', $taxRate);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, int $taxRateId)
     {
-        return json_success('更新成功');
+        $requestData = json_decode($request->getContent(), true);
+        $requestData['id'] = $taxRateId;
+        $taxRate = TaxRateRepo::createOrUpdate($requestData);
+        return json_success('更新成功', $taxRate);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, int $taxRateId)
     {
+        TaxRateRepo::deleteById($taxRateId);
         return json_success('删除成功');
     }
 }
