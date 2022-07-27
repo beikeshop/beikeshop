@@ -132,6 +132,7 @@
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
+          this.dialog.index = index
 
           if (type == 'edit') {
             let tax = this.regions[index];
@@ -179,7 +180,11 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              this.regions.push(res.data)
+              if (type == 'add') {
+                this.regions.push(res.data)
+              } else {
+                this.regions[this.dialog.index] = res.data
+              }
               this.dialog.show = false
             })
           });
