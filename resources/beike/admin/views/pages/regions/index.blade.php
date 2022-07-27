@@ -56,7 +56,7 @@
                 <tr v-for="rule, index in dialog.form.region_zones" :key="index">
                   <td>
                     <el-select v-model="rule.country_id" size="mini" filterable placeholder="选择国家" @change="(e) => {countryChange(e, index)}">
-                      <el-option v-for="item in rule.countries" :key="item.id" :label="item.name"
+                      <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
                         :value="item.id">
                       </el-option>
                     </el-select>
@@ -151,7 +151,6 @@
             country_id: this.source.country_id,
             zone_id: '',
             zones: this.dialog.zones,
-            countries: this.source.countries,
           })
         },
 
