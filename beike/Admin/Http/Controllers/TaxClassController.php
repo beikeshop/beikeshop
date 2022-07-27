@@ -43,13 +43,17 @@ class TaxClassController extends Controller
         return json_success('保存成功', $taxClass);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, int $taxClassId)
     {
-        return json_success('更新成功');
+        $requestData = json_decode($request->getContent(), true);
+        $requestData['id'] = $taxClassId;
+        $taxClass = TaxClassRepo::createOrUpdate($requestData);
+        return json_success('更新成功', $taxClass);
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, int $taxClassId)
     {
+        TaxClassRepo::deleteById($taxClassId);
         return json_success('删除成功');
     }
 }

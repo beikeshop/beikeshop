@@ -30,7 +30,14 @@ class TaxClassRepo
         $taxClass->saveOrFail();
 
         $taxClass->taxRules()->delete();
-        $taxClass->taxRules()->createMany($data['rules']);
+        $taxClass->taxRules()->createMany($data['tax_rules']);
         return $taxClass;
+    }
+
+    public static function deleteById($id)
+    {
+        $taxClass = TaxClass::query()->findOrFail($id);
+        $taxClass->taxRules()->delete();
+        $taxClass->delete();
     }
 }
