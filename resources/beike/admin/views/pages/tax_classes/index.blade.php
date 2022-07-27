@@ -22,7 +22,7 @@
             <td>@{{ tax.title }}</td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)">删除</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
             </td>
           </tr>
         </tbody>
@@ -54,7 +54,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="rule, index in dialog.form.rules" :key="index">
+                <tr v-for="rule, index in dialog.form.tax_rules" :key="index">
                   <td>
                     <el-select v-model="rule.tax_rate_id" size="mini" placeholder="请选择">
                       <el-option v-for="tax in source.all_tax_rates" :key="tax.id" :label="tax.name" :value="tax.id"></el-option>
@@ -104,7 +104,7 @@
             id: null,
             title: '',
             description: '',
-            rules: [],
+            tax_rules: [],
           },
         },
 
@@ -133,7 +133,7 @@
               id: tax.id,
               title: tax.title,
               description: tax.description,
-              rules: tax.rules,
+              tax_rules: tax.tax_rules,
             }
           }
         },
@@ -142,11 +142,11 @@
           const tax_rate_id = this.source.all_tax_rates[0]?.id || 0;
           const based = this.source.bases[0] || '';
 
-          this.dialog.form.rules.push({tax_rate_id, based, priority: ''})
+          this.dialog.form.tax_rules.push({tax_rate_id, based, priority: ''})
         },
 
         deleteRates(index) {
-          this.dialog.form.rules.splice(index, 1)
+          this.dialog.form.tax_rules.splice(index, 1)
         },
 
         addFormSubmit(form) {
@@ -175,7 +175,7 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            $http.delete('/admin/tax_classes/' + id).then((res) => {
+            $http.delete('tax_classes/' + id).then((res) => {
               this.$message.success(res.message);
               self.tax_classes.splice(index, 1)
             })
@@ -184,7 +184,7 @@
 
         closeCustomersDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
-          this.dialog.form.rules = []
+          this.dialog.form.tax_rules = []
           this.dialog.show = false
         }
       }
