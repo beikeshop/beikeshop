@@ -45,7 +45,7 @@
           <el-input v-model="dialog.form.description" placeholder="描述"></el-input>
         </el-form-item>
 
-        <el-form-item label="税率">
+        <el-form-item label="规则">
             <table class="table table-bordered" style="line-height: 1.6;">
               <thead>
                 <tr>
@@ -74,7 +74,7 @@
                 </tr>
               </tbody>
             </table>
-            <el-button type="primary" icon="el-icon-plus" size="small" plain @click="addRates">添加税率</el-button>
+            <el-button type="primary" icon="el-icon-plus" size="small" plain @click="addRates">添加规则</el-button>
         </el-form-item>
         <el-form-item class="mt-5">
           <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
