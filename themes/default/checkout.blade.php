@@ -109,10 +109,9 @@
               </div>
             </div>
             <ul class="totals">
-              {{-- <li><span>总数</span><span v-text="source.carts.quantity"></span></li> --}}
-              <li><span>商品总额</span><span>2341.00</span></li>
-              <li><span>运费</span><span>15</span></li>
-              <li><span>应付总金额</span><span v-text="source.carts.amount_format"></span></li>
+              @foreach ($totals as $total)
+              <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
+              @endforeach
             </ul>
             <div class="d-grid gap-2 mt-3">
               <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">提交订单</button>
