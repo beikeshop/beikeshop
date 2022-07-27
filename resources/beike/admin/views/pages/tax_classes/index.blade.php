@@ -13,7 +13,7 @@
           <tr>
             <th>#</th>
             <th>名称</th>
-            <th >操作</th>
+            <th class="text-end">操作</th>
           </tr>
         </thead>
         <tbody>

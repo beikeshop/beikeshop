@@ -13,13 +13,18 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Region;
 use Illuminate\Http\Request;
+use Beike\Repositories\CountryRepo;
 
 class RegionController
 {
     public function index()
     {
-        $regions = Region::query()->with('zones')->get();
-        return view('admin::pages.regions.index', ['regions' => $regions]);
+        $data = [
+            'regions' => Region::query()->with('zones')->get(),
+            'countries' => CountryRepo::all()
+        ];
+
+        return view('admin::pages.regions.index', $data);
     }
 
     public function store(Request $request)

@@ -288,14 +288,8 @@
         },
 
         countryChange(e) {
-          const self = this;
-
-          $.ajax({
-            url: `/admin/countries/${e}/zones`,
-            type: 'get',
-            success: function(res) {
-              self.source.zones = res.data.zones;
-            }
+          $http.get(`countries/${e}/zones`).then((res) => {
+            this.source.zones = res.data.zones;
           })
         }
       }
