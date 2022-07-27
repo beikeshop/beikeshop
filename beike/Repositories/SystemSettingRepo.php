@@ -62,6 +62,30 @@ class SystemSettingRepo
                 'value' => old('theme', system_setting('base.theme', 'default')),
                 'required' => true,
                 'description' => '主题模板选择',
+            ],
+            [
+                'name' => 'tax',
+                'label' => '启用税费',
+                'type' => 'select',
+                'options' => [
+                    ['value' => '1', 'label' => '开启'],
+                    ['value' => '0', 'label' => '关闭']
+                ],
+                'value' => old('tax', system_setting('base.tax', '0')),
+                'required' => true,
+                'description' => '是否启用税费计算',
+            ],
+            [
+                'name' => 'tax_address',
+                'label' => '税费地址',
+                'type' => 'select',
+                'options' => [
+                    ['value' => 'shipping', 'label' => '配送地址'],
+                    ['value' => 'payment', 'label' => '账单地址']
+                ],
+                'value' => old('tax_address', system_setting('base.tax_address', 'shipping')),
+                'required' => true,
+                'description' => '按什么地址计算税费',
             ]
         ];
     }
