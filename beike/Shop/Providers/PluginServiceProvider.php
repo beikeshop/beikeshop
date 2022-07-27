@@ -44,18 +44,22 @@ class PluginServiceProvider extends ServiceProvider
             $filePath = $bootstrap['file'];
             $pluginCode = $bootstrap['code'];
             if (file_exists($filePath)) {
-                require_once $filePath;
                 $className = "Plugin\\{$pluginCode}\\Bootstrap";
-                (new $className)->boot();
+                if (method_exists($className, 'boot')) {
+                    (new $className)->boot();
+                }
+            }
+
+            $routePath = "{$pluginBasePath}/{$pluginCode}/routes.php";
+            if (file_exists($routePath)) {
+                Route::prefix('plugin')
+                    ->middleware('web')
+                    ->group(function () use ($routePath) {
+                        $this->loadRoutesFrom($routePath);
+                    });
             }
 
             $this->loadViewsFrom("{$pluginBasePath}/{$pluginCode}/Views", $pluginCode);
-
-            Route::prefix('plugin')
-                ->middleware('web')
-                ->group(function () use ($pluginBasePath, $pluginCode) {
-                    $this->loadRoutesFrom("{$pluginBasePath}/{$pluginCode}/routes.php");
-                });
         }
     }
 }

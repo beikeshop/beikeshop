@@ -13,6 +13,7 @@
 namespace Beike\Shop\Services\TotalServices;
 
 use Beike\Shop\Services\TotalService;
+use Illuminate\Support\Str;
 
 class ShippingService
 {
@@ -22,7 +23,14 @@ class ShippingService
         if (empty($shippingMethod)) {
             return null;
         }
-        $amount = 5;
+
+        $pluginCode = Str::studly($shippingMethod);
+        $className = "Plugin\\{$pluginCode}\\Bootstrap";
+
+        if (!method_exists($className, 'getShippingFee')) {
+            throw new \Exception("请在插件 {$className} 实现方法 getShippingFee");
+        }
+        $amount = (float)(new $className)->getShippingFee($totalService);
         return [
             'code' => 'shipping',
             'title' => '运费',

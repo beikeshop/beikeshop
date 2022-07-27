@@ -20,8 +20,8 @@ class TaxService
     {
         $amount = $totalService->amount * 0.02;
         return [
-            'code' => 'shipping',
-            'title' => '运费',
+            'code' => 'tax',
+            'title' => '税费',
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
