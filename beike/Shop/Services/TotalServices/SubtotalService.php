@@ -9,7 +9,13 @@
  * @created    2022-07-22 17:58:25
  * @modified   2022-07-22 17:58:25
  */
+
+namespace Beike\Shop\Services\TotalServices;
+
 class SubtotalService
 {
+    public static function getTotal()
+    {
 
+    }
 }

@@ -11,10 +11,14 @@
 
 namespace Beike\Shop\Services;
 
+use \Beike\Shop\Services\TotalServices;
+use Illuminate\Support\Str;
+
 class TotalService
 {
     const TOTAL_CODES = [
         'subtotal',
+        'tax',
         'shipping',
         'total'
     ];
@@ -26,11 +30,11 @@ class TotalService
     {
         $totals = [];
         foreach (self::TOTAL_CODES as $code) {
-            $totals[] = 11;
+            $serviceName = Str::studly($code);
+            $service = "TotalServices\{$serviceName}";
+            $totals[] = $service::getTotal();
         }
 
-        // hook= [subtotal, shipping]
-
-        return [];
+        return $totals;
     }
 }
