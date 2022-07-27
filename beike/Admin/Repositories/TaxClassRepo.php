@@ -15,6 +15,16 @@ use Beike\Models\TaxClass;
 
 class TaxClassRepo
 {
+    const BASE_TYPES = ['store', 'payment', 'shipping'];
+
+    public static function getList()
+    {
+        return TaxClass::query()->with([
+            'taxRates.region',
+            'taxRules'
+        ])->get();
+    }
+
     public static function createOrUpdate($data)
     {
         $id = $data['id'] ?? 0;

@@ -21,16 +21,9 @@ class TaxClassController extends Controller
     public function index()
     {
         $data = [
-            'tax_classes' => TaxClass::query()->with([
-                'taxRates.region',
-                'taxRules'
-            ])->get(),
+            'tax_classes' => TaxClassRepo::getList(),
             'all_tax_rates' => TaxRate::all(),
-            'bases' => [
-                'store',
-                'payment',
-                'shipping'
-            ]
+            'bases' => TaxClassRepo::BASE_TYPES,
         ];
 
         return view('admin::pages.tax_classes.index', $data);
