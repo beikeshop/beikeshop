@@ -3,6 +3,8 @@
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\WishlistController;
 use Beike\Shop\Http\Controllers\BrandController;
+use Beike\Shop\Http\Controllers\CurrencyController;
+use Beike\Shop\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
@@ -41,9 +43,13 @@ Route::prefix('/')
 
         Route::get('countries/{id}/zones', [ZoneController::class, 'index'])->name('countries.zones.index');
 
+        Route::get('currency/{currency}', [CurrencyController::class, 'index'])->name('currency.switch');
+
         Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
+
+        Route::get('lang/{lang}', [LanguageController::class, 'index'])->name('lang.switch');
 
         Route::get('login', [LoginController::class, 'index'])->name('login.index');
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
