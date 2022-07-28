@@ -2,12 +2,8 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Models\Product;
 use Beike\Repositories\BrandRepo;
-use Beike\Repositories\ProductRepo;
-use Beike\Shop\Http\Resources\ProductDetail;
 use Beike\Shop\Http\Resources\ProductList;
-use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
