@@ -2,6 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Models\AdminUser;
+use Beike\Repositories\LanguageRepo;
 use Illuminate\Support\Str;
 use TorMorten\Eventy\Facades\Eventy;
 use Illuminate\Support\Facades\Route;
@@ -231,12 +232,11 @@ function image_origin($image)
 /**
  * 获取当前所有语言列表
  *
- * @return array|false
+ * @return \Illuminate\Support\Collection
  */
 function languages()
 {
-    $languageDir = resource_path('lang');
-    return array_diff(scandir($languageDir), array('..', '.'));
+    return LanguageRepo::enabled()->pluck('code');
 }
 
 /**

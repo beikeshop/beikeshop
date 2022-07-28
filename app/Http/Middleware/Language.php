@@ -18,7 +18,7 @@ class Language
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session()->has('locale') AND array_key_exists(Session()->get('locale'), LanguageRepo::all()->where('status', true)->pluck('code'))) {
+        if (Session()->has('locale') AND array_key_exists(Session()->get('locale'), languages())) {
             App::setLocale(Session()->get('locale'));
         }
         else { // This is optional as Laravel will automatically set the fallback language if there is none specified

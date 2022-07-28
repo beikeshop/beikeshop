@@ -74,4 +74,13 @@ class LanguageRepo
     {
         return Language::query()->get();
     }
+
+    /**
+     * 获取所有启用的语言
+     * @return Builder[]|Collection
+     */
+    public static function enabled()
+    {
+        return Language::query()->where('status', true)->get();
+    }
 }

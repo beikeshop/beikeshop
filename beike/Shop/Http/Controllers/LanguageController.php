@@ -17,7 +17,7 @@ class LanguageController extends Controller
 {
     public function index($lang)
     {
-        if (array_key_exists($lang, LanguageRepo::all()->where('status', true)->pluck('code'))) {
+        if (array_key_exists($lang, languages())) {
             Session::put('locale', $lang);
         }
         return Redirect::back();
