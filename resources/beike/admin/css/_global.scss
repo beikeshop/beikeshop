@@ -93,6 +93,7 @@ body {
   background-color: #f8f8f8;
   border: 1px dashed #e2e2e2;
   display: flex;
+  cursor: pointer;
   align-items: center; // flex-start | center
   justify-content: center; // flex-end | center | space-between
   transition: all .2s ease;

@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\Sidebar;
+use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Admin\View\Components\Form\InputLocale;
@@ -45,6 +46,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-input-locale' => InputLocale::class,
             'form-switch' => SwitchRadio::class,
             'form-input' => Input::class,
+            'form-image' => Image::class,
         ]);
 
         $this->registerGuard();

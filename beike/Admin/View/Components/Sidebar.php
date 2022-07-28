@@ -33,9 +33,10 @@ class Sidebar extends Component
         $routeNameWithPrefix = request()->route()->getName();
         $routeName = str_replace($adminName . '.', '', $routeNameWithPrefix);
 
-        if (Str::startsWith($routeName, ['products.', 'categories.'])) {
+        if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
             $this->addLink('商品分类', admin_route('categories.index'), 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
             $this->addLink('商品列表', admin_route('products.index'), 'fa fa-tachometer-alt', $this->equalRoute('products.index'));
+            $this->addLink('品牌管理', admin_route('brands.index'), 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
             $this->addLink('回收站', admin_route('products.index', ['trashed' => 1]), 'fa fa-tachometer-alt', false);
         }
 

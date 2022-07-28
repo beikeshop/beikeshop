@@ -136,6 +136,7 @@
         checkedCustomersCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
+          this.dialog.index = index
 
           if (type == 'edit') {
             let group = this.customer_groups[index];
@@ -174,7 +175,11 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              this.customer_groups.push(res.data)
+              if (type == 'add') {
+                this.customer_groups.push(res.data)
+              } else {
+                this.customer_groups[this.dialog.index] = res.data
+              }
               this.dialog.show = false
             })
           });
