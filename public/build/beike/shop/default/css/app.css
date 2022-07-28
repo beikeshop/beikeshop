@@ -1,8 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "iconfont";
-  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype");
-  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype"); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
 .iconfont {
   font-family: "iconfont";
@@ -1154,12 +1153,9 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
 }
 
 .swiper.module-slideshow {
-  --swiper-theme-color: #ff6600;
-  /* 设置Swiper风格 */
-  --swiper-navigation-color: #ff6600;
-  /* 单独设置按钮颜色 */
-  --swiper-navigation-size: 30px;
-  /* 设置按钮大小 */
+  --swiper-theme-color: #ff6600; /* 设置Swiper风格 */
+  --swiper-navigation-color: #ff6600; /* 单独设置按钮颜色 */
+  --swiper-navigation-size: 30px; /* 设置按钮大小 */
 }
 .swiper.module-slideshow .swiper-button-prev, .swiper.module-slideshow .swiper-button-next {
   display: none;

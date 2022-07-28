@@ -691,8 +691,7 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 
 @font-face {
   font-family: "iconfont";
-  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype");
-  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype"); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
 .iconfont {
   font-family: "iconfont" !important;
