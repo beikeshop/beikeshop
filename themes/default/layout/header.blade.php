@@ -43,6 +43,7 @@
           @foreach ($categories as $category)
           <li class="dropdown">
             <a
+              target="{{ (isset($category['new_window']) and $category['new_window']) ? '_blank' : '_self' }}"
               class="nav-link {{ (isset($category['children']) and $category['children']) ? 'dropdown-toggle' : '' }}"
               href="{{ $category['url'] }}">
               {{ $category['name'] }}
@@ -50,7 +51,7 @@
             @if (isset($category['children']) and $category['children'])
             <ul class="dropdown-menu">
               @forelse ($category['children'] as $child)
-                <li><a href="{{ $child['url'] }}" class="dropdown-item">{{ $child['name'] }}</a></li>
+                <li><a target="{{ (isset($child['new_window']) and $child['new_window']) ? '_blank' : '_self' }}" href="{{ $child['url'] }}" class="dropdown-item">{{ $child['name'] }}</a></li>
               @endforeach
             </ul>
             @endif

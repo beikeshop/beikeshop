@@ -32,9 +32,11 @@ class Bootstrap
                     [
                         "name" => trans('HeaderMenu::header.latest_products'),
                         "url" => plugin_route('latest_products'),
+                        "new_window" => false,
                     ], [
                         "name" => trans('HeaderMenu::header.baidu'),
                         "url" => "https://www.baidu.com",
+                        "new_window" => true,
                     ]
                 ],
             ];

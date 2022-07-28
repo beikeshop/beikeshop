@@ -13,6 +13,7 @@
     </ul>
     <ul class="navbar">
       <li class="nav-item"><a href="{{ admin_route('logout.index') }}" class="nav-link">退出登录</a></li>
+      <li class="nav-item"><a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link">访问前台</a></li>
       <li class="nav-item">
 
         <a href="" class="nav-link">
