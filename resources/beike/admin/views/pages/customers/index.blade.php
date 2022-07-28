@@ -130,11 +130,7 @@
 
             $http.post('customers', this.dialogCustomers.form).then((res) => {
               this.$message.success(res.message);
-              if (this.dialog.type == 'add') {
-                this.customers.push(res.data)
-              } else {
-                this.customers[this.dialog.index] = res.data
-              }
+              this.customers.push(res.data);
               this.dialogCustomers.show = false
             })
           });

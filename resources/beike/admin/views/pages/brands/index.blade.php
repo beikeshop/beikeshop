@@ -24,7 +24,7 @@
           <tr v-for="brand, index in brands.data" :key="index">
             <td>@{{ brand.id }}</td>
             <td>@{{ brand.name }}</td>
-            <td><div class="wh-70"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
+            <td><div class="wh-50"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
             <td>@{{ brand.sort_order }}</td>
             <td>@{{ brand.first }}</td>
             <td>@{{ brand.status }}</td>
@@ -48,11 +48,11 @@
           <el-input class="mb-0" v-model="dialog.form.name" placeholder="名称"></el-input>
         </el-form-item>
 
-        <el-form-item label="图标">
+        <el-form-item label="图标" prop="logo" required>
           <vue-image v-model="dialog.form.logo"></vue-image>
         </el-form-item>
 
-        <el-form-item label="首字母">
+        <el-form-item label="首字母" prop="first">
           <el-input class="mb-0" v-model="dialog.form.first" placeholder="首字母"></el-input>
         </el-form-item>
 
@@ -99,22 +99,30 @@
             logo: '',
             first: '',
             sort_order: '',
-            status: '',
+            status: 1,
           },
         },
 
         rules: {
-          // password: [{required: true,message: '请输入密码',trigger: 'blur'}, ],
+          name: [{required: true,message: '请输入名称',trigger: 'blur'}, ],
+          first: [{required: true,message: '请输入首字母',trigger: 'blur'}, ],
+          logo: [{required: true,message: '请上传图标',trigger: 'change'}, ],
         }
       },
 
-      mounted() {
-        // $http.get('brands?page=1').then((res) => {
-        //   console.log(res)
-        // })
+      watch: {
+        page: function() {
+          this.loadData();
+        },
       },
 
       methods: {
+        loadData() {
+          $http.get(`brands?page=${this.page}`).then((res) => {
+            this.brands = res.data.brands;
+          })
+        },
+
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
@@ -174,6 +182,7 @@
 
         closeDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
+          this.dialog.form.status = 1
           this.dialog.show = false
         }
       }

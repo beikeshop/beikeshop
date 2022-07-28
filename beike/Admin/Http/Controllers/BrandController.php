@@ -36,7 +36,7 @@ class BrandController extends Controller
         return json_success("创建成功", $brand);
     }
 
-    public function update(Request $request, int $customerId, int $id)
+    public function update(Request $request, int $id)
     {
         $brand = BrandRepo::update($id, $request->all());
 

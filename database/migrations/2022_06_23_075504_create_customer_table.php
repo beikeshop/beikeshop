@@ -20,7 +20,7 @@ class CreateCustomerTable extends Migration
             $table->string('name');
             $table->string('avatar')->default('');
             $table->unsignedInteger('customer_group_id');
-            $table->unsignedInteger('address_id');
+            $table->unsignedInteger('address_id')->default(0);
             $table->string('locale', 10);
             $table->tinyInteger('status')->default(0);
             $table->string('code', 40)->default('');

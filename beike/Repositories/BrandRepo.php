@@ -84,7 +84,7 @@ class BrandRepo
             $builder->where('status', $data['status']);
         }
 
-        return $builder->paginate(20)->withQueryString();
+        return $builder->paginate(10)->withQueryString();
     }
 
     public static function listGroupByFirst()
