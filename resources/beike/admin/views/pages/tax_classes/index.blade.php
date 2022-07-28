@@ -178,7 +178,7 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (type == 'add') {
+              if (this.dialog.type == 'add') {
                 this.tax_classes.push(res.data)
               } else {
                 this.tax_classes[this.dialog.index] = res.data

@@ -153,7 +153,7 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (type == 'add') {
+              if (this.dialog.type == 'add') {
                 this.tax_rates.push(res.data)
               } else {
                 this.tax_rates[this.dialog.index] = res.data

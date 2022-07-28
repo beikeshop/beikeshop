@@ -175,7 +175,7 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (type == 'add') {
+              if (this.dialog.type == 'add') {
                 this.customer_groups.push(res.data)
               } else {
                 this.customer_groups[this.dialog.index] = res.data

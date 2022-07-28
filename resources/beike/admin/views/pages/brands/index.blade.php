@@ -36,7 +36,8 @@
         </tbody>
       </table>
 
-      {{-- {{ $brands->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      <el-pagination layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
+        :total="brands.total"></el-pagination>
     </div>
 
     <el-dialog title="品牌" :visible.sync="dialog.show" width="600px"
@@ -82,7 +83,7 @@
 
       data: {
         brands: @json($brands ?? []),
-
+        page: 1,
         source: {
           // languages: ['zh-ck','en-gb']
           languages: @json($languages ?? []),
@@ -146,10 +147,11 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (type == 'add') {
-                this.brands.push(res.data)
+
+              if (this.dialog.type == 'add') {
+                this.brands.data.push(res.data)
               } else {
-                this.brands[this.dialog.index] = res.data
+                this.brands.data[this.dialog.index] = res.data
               }
               this.dialog.show = false
             })

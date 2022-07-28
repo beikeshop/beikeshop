@@ -5,6 +5,7 @@
   <base href="{{ $admin_base_url }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="asset" content="{{ asset('/') }}">
   <script src="{{ asset('vendor/vue/2.6.12/vue.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
