@@ -2,12 +2,12 @@
 
 use Beike\Models\Customer;
 use Beike\Models\AdminUser;
-use Beike\Repositories\LanguageRepo;
-use Beike\Services\CurrencyService;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Beike\Services\CurrencyService;
+use Beike\Repositories\LanguageRepo;
 use TorMorten\Eventy\Facades\Eventy;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
