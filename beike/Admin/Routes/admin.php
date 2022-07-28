@@ -38,6 +38,7 @@ Route::prefix($adminName)
                 Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
                 Route::resource('files', Controllers\FileController::class);
+                Route::resource('manufacturers', Controllers\ManufacturerController::class);
 
                 Route::get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
                 Route::get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
