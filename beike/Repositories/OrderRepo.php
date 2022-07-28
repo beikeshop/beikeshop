@@ -106,6 +106,7 @@ class OrderRepo
         $current = $data['current'] ?? [];
         $carts = $data['carts'] ?? [];
         $totals = $data['totals'] ?? [];
+        $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
         $shippingAddressId = $current['shipping_address_id'] ?? 0;
         $paymentAddressId = $current['payment_address_id'] ?? 0;
@@ -126,7 +127,7 @@ class OrderRepo
             'email' => $customer->email,
             'calling_code' => $customer->calling_code ?? 0,
             'telephone' => $customer->telephone ?? '',
-            'total' => $carts['amount'],
+            'total' => $orderTotal['amount'],
             'locale' => locale(),
             'currency_code' => current_currency_code(),
             'currency_value' => 1,
