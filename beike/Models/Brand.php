@@ -1,6 +1,6 @@
 <?php
 /**
- * Manufacturer.php
+ * Brand.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -14,7 +14,7 @@ namespace Beike\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Manufacturer extends Base
+class Brand extends Base
 {
     use HasFactory;
 
@@ -23,6 +23,11 @@ class Manufacturer extends Base
     public function zones(): HasMany
     {
         return $this->hasMany(Zone::class);
+    }
+
+    public function products() :HasMany
+    {
+        return $this->hasMany(Product::Class);
     }
 }
 

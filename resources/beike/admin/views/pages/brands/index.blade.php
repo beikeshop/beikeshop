@@ -3,7 +3,7 @@
 @section('title', '品牌管理')
 
 @section('content')
-  <div id="manufacturer-app" class="card">
+  <div id="brand-app" class="card">
     <div class="card-body">
       <div class="d-flex justify-content-between my-4">
         <a href="{{ admin_route('currencies.create') }}" class="btn btn-primary">创建</a>
@@ -20,16 +20,16 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($manufacturers as $manufacturer)
+          @foreach ($brands as $brand)
             <tr>
-              <td>{{ $manufacturer['id'] }}</td>
-              <td>{{ $manufacturer['name'] }}</td>
-              <td>{{ $manufacturer['logo'] }}</td>
-              <td>{{ $manufacturer['sort_order'] }}</td>
-              <td>{{ $manufacturer['status'] }}</td>
+              <td>{{ $brand['id'] }}</td>
+              <td>{{ $brand['name'] }}</td>
+              <td>{{ $brand['logo'] }}</td>
+              <td>{{ $brand['sort_order'] }}</td>
+              <td>{{ $brand['status'] }}</td>
               <td>
                 <a class="btn btn-outline-secondary btn-sm"
-                  href="{{ admin_route('manufacturers.edit', [$manufacturer['id']]) }}">编辑</a>
+                  href="{{ admin_route('brands.edit', [$brand['id']]) }}">编辑</a>
               </td>
             </tr>
           @endforeach

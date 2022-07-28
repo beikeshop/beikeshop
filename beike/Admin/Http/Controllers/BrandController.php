@@ -1,6 +1,6 @@
 <?php
 /**
- * ManufacturerController.php
+ * BrandController.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -11,32 +11,32 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\ManufacturerRepo;
+use Beike\Repositories\BrandRepo;
 use Illuminate\Http\Request;
 
-class ManufacturerController extends Controller
+class BrandController extends Controller
 {
     public function index(Request $request)
     {
-        $manufacturers = ManufacturerRepo::list($request->only('name', 'first', 'status'));
+        $brands = BrandRepo::list($request->only('name', 'first', 'status'));
         $data = [
-            'manufacturers' => $manufacturers,
+            'brands' => $brands,
         ];
 
-        return view('admin::pages.manufacturers.index', $data);
+        return view('admin::pages.brands.index', $data);
     }
 
     public function store(Request $request)
     {
-        $manufacturer = ManufacturerRepo::create($request->all());
-        return json_success("创建成功", $manufacturer);
+        $brand = BrandRepo::create($request->all());
+        return json_success("创建成功", $brand);
     }
 
     public function update(Request $request, int $customerId, int $id)
     {
-        $manufacturer = ManufacturerRepo::update($id, $request->all());
+        $brand = BrandRepo::update($id, $request->all());
 
-        return json_success("成功修改", $manufacturer);
+        return json_success("成功修改", $brand);
     }
 
     public function destroy(Request $request, int $customerId, int $addressId)

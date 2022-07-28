@@ -1,6 +1,6 @@
 <?php
 /**
- * ManufacturerRepo.php
+ * BrandRepo.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -11,9 +11,9 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Manufacturer;
+use Beike\Models\Brand;
 
-class ManufacturerRepo
+class BrandRepo
 {
     /**
      * 创建一个记录
@@ -22,26 +22,26 @@ class ManufacturerRepo
      */
     public static function create($data)
     {
-        $manufacturer = Manufacturer::query()->create($data);
-        return $manufacturer;
+        $brand = Brand::query()->create($data);
+        return $brand;
     }
 
     /**
-     * @param $manufacturer
+     * @param $brand
      * @param $data
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
      * @throws \Exception
      */
-    public static function update($manufacturer, $data)
+    public static function update($brand, $data)
     {
-        if (!$manufacturer instanceof Manufacturer) {
-            $manufacturer = Manufacturer::query()->find($manufacturer);
+        if (!$brand instanceof Brand) {
+            $brand = Brand::query()->find($brand);
         }
-        if (!$manufacturer) {
-            throw new \Exception("品牌id {$manufacturer} 不存在");
+        if (!$brand) {
+            throw new \Exception("品牌id {$brand} 不存在");
         }
-        $manufacturer->update($data);
-        return $manufacturer;
+        $brand->update($data);
+        return $brand;
     }
 
     /**
@@ -50,7 +50,7 @@ class ManufacturerRepo
      */
     public static function find($id)
     {
-        return Manufacturer::query()->find($id);
+        return Brand::query()->find($id);
     }
 
     /**
@@ -59,9 +59,9 @@ class ManufacturerRepo
      */
     public static function delete($id)
     {
-        $manufacturer = Manufacturer::query()->find($id);
-        if ($manufacturer) {
-            $manufacturer->delete();
+        $brand = Brand::query()->find($id);
+        if ($brand) {
+            $brand->delete();
         }
     }
 
@@ -71,7 +71,7 @@ class ManufacturerRepo
      */
     public static function list($data)
     {
-        $builder = Manufacturer::query();
+        $builder = Brand::query();
 
         if (isset($data['name'])) {
             $builder->where('name', 'like', "%{$data['name']}%");
@@ -88,11 +88,11 @@ class ManufacturerRepo
 
     public static function listGroupByFirst()
     {
-        $manufacturers = Manufacturer::query()->where('status', true)->get();
+        $brands = Brand::query()->where('status', true)->get();
 
         $results = [];
-        foreach ($manufacturers as $manufacturer) {
-            $results[$manufacturer->first][] = $manufacturer;
+        foreach ($brands as $brand) {
+            $results[$brand->first][] = $brand;
         }
 
         return $results;

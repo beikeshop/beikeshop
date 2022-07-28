@@ -42,6 +42,11 @@ class Product extends Base
         return $this->hasOne(ProductSku::Class)->where('is_default', 1);
     }
 
+    public function manufacturer()
+    {
+        return $this->hasOne(Brand::Class, 'id', 'manufacturer_id');
+    }
+
     public function getPriceFormattedAttribute(): string
     {
         return '$' . $this->price;
