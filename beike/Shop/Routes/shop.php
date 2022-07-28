@@ -2,6 +2,7 @@
 
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\WishlistController;
+use Beike\Shop\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
@@ -24,6 +25,9 @@ Route::prefix('/')
     ->middleware(['web'])
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+        Route::get('brands', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('brands/{id}', [BrandController::class, 'show'])->name('brands.show');
 
         Route::get('carts', [CartController::class, 'index'])->name('carts.index');
         Route::post('carts', [CartController::class, 'store'])->name('carts.store');

@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Brand;
+use Beike\Shop\Http\Resources\BrandDetail;
 
 class BrandRepo
 {
@@ -92,7 +93,7 @@ class BrandRepo
 
         $results = [];
         foreach ($brands as $brand) {
-            $results[$brand->first][] = $brand;
+            $results[$brand->first][] = (new BrandDetail($brand))->jsonSerialize();
         }
 
         return $results;

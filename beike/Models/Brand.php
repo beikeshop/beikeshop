@@ -20,11 +20,6 @@ class Brand extends Base
 
     protected $fillable = ['name', 'country_id', 'code', 'sort_order', 'status'];
 
-    public function zones(): HasMany
-    {
-        return $this->hasMany(Zone::class);
-    }
-
     public function products() :HasMany
     {
         return $this->hasMany(Product::Class);
