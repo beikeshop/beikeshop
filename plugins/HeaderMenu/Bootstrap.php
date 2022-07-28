@@ -15,6 +15,15 @@ class Bootstrap
 {
     public function boot()
     {
+        $this->addHeaderMenu();
+    }
+
+
+    /**
+     * 在网页头部添加二级菜单链接
+     */
+    private function addHeaderMenu()
+    {
         add_filter('header.categories', function ($data) {
             $data[] = [
                 'name' => trans('HeaderMenu::header.plugin_link'),

@@ -12,4 +12,3 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/latest_products', '\Plugin\HeaderMenu\Controllers\MenusController@latestProducts')->name('plugin.latest_products');
-
