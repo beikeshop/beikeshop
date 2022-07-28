@@ -17,7 +17,7 @@
       </li>
       <li class="nav-item">
         <div class="dropdown">
-          <a href="#" class="nav-link" data-bs-toggle="dropdown">
+          <a href="#" class="nav-link dropdown-toggle px-2" data-bs-toggle="dropdown">
             <img src="http://dummyimage.com/100x100" class="avatar img-fluid rounded-circle me-1">
             <span class="text-dark ml-2">{{ auth()->user()->name }}</span>
           </a>
