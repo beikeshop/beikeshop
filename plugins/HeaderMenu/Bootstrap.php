@@ -17,14 +17,14 @@ class Bootstrap
     {
         add_filter('header.categories', function ($data) {
             $data[] = [
-                'name' => '插件链接',
+                'name' => trans('HeaderMenu::header.plugin_link'),
                 'url' => shop_route('home.index'),
                 'children' => [
                     [
-                        "name" => "最新商品",
+                        "name" => trans('HeaderMenu::header.latest_products'),
                         "url" => plugin_route('latest_products'),
                     ], [
-                        "name" => "百度",
+                        "name" => trans('HeaderMenu::header.baidu'),
                         "url" => "https://www.baidu.com",
                     ]
                 ],
