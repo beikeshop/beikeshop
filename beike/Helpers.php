@@ -3,6 +3,8 @@
 use Beike\Models\Customer;
 use Beike\Models\AdminUser;
 use Beike\Repositories\LanguageRepo;
+use Beike\Services\CurrencyService;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use TorMorten\Eventy\Facades\Eventy;
 use Illuminate\Support\Facades\Route;
@@ -195,9 +197,12 @@ function locale(): string
  * @param $price
  * @return string
  */
-function currency_format($price): string
+function currency_format($price, $currency = '', $value = '', $format = true): string
 {
-    return '$' . number_format($price, 2);
+    if (!$currency) {
+        $currency = Session::get('currency') ?? system_setting('base.currency');
+    }
+    return CurrencyService::getInstance()->format($price, $currency, $value, $format);
 }
 
 /**

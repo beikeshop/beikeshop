@@ -44,6 +44,18 @@ class SystemSettingRepo
                 'description' => '默认语言设置',
             ],
             [
+                'name' => 'currency',
+                'label' => '默认货币',
+                'type' => 'select',
+                'required' => true,
+                'options' => [
+                    ['value' => 'CNY', 'label' => '人民币'],
+                    ['value' => 'USD', 'label' => '美元']
+                ],
+                'value' => old('currency', system_setting('base.currency', 'USD')),
+                'description' => '默认货币设置',
+            ],
+            [
                 'name' => 'admin_name',
                 'label' => '后台目录',
                 'type' => 'string',

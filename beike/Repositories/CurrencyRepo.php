@@ -66,4 +66,10 @@ class CurrencyRepo
     {
         return Currency::query()->get();
     }
+
+    public static function enabled()
+    {
+        return Currency::query()->where('status', true)->get();
+    }
+
 }

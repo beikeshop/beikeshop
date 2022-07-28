@@ -11,7 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\LanguageRepo;
+use Illuminate\Support\Facades\Session;
 
 class LanguageController extends Controller
 {
