@@ -18,7 +18,7 @@ class Brand extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'country_id', 'code', 'sort_order', 'status'];
+    protected $fillable = ['name', 'country_id', 'first', 'logo', 'code', 'sort_order', 'status'];
 
     public function products() :HasMany
     {

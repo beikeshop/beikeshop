@@ -1,6 +1,7 @@
 import http from "../../../js/http";
 window.$http = http;
 const base = document.querySelector('base').href;
+const asset = document.querySelector('meta[name="asset"]').content;
 
 $(document).on('click', '.open-file-manager', function(event) {
   const $this = $(this);
@@ -25,6 +26,16 @@ $(document).on('click', '.open-file-manager', function(event) {
   });
 });
 
+if (typeof Vue != 'undefined') {
+  Vue.prototype.thumbnail = function thumbnail(image, width, height) {
+    // 判断 image 是否以 http 开头
+    if (image.indexOf('http') === 0) {
+      return image;
+    }
+
+    return asset + image;
+  };
+}
 
 $(document).ready(function ($) {
   $.ajaxSetup({

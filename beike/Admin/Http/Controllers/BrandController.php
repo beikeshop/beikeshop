@@ -23,6 +23,10 @@ class BrandController extends Controller
             'brands' => $brands,
         ];
 
+        if ($request->expectsJson()) {
+            return json_success('成功', $data);
+        }
+
         return view('admin::pages.brands.index', $data);
     }
 

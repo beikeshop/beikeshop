@@ -3,7 +3,7 @@
 @section('title', '品牌管理')
 
 @section('content')
-  <div id="customer-app" class="card" v-cloak>
+  <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">创建品牌</button>
@@ -15,16 +15,18 @@
             <th>名称</th>
             <th>图标</th>
             <th>排序</th>
+            <th>首字母</th>
             <th>状态</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="brand, index in brands" :key="index">
+          <tr v-for="brand, index in brands.data" :key="index">
             <td>@{{ brand.id }}</td>
             <td>@{{ brand.name }}</td>
-            <td>@{{ brand.logo }}</td>
+            <td><div class="wh-70"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
             <td>@{{ brand.sort_order }}</td>
+            <td>@{{ brand.first }}</td>
             <td>@{{ brand.status }}</td>
             <td>
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
@@ -37,7 +39,7 @@
       {{-- {{ $brands->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="创建用户组" :visible.sync="dialog.show" width="600px"
+    <el-dialog title="品牌" :visible.sync="dialog.show" width="600px"
       @close="closeDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
@@ -47,6 +49,10 @@
 
         <el-form-item label="图标">
           <vue-image v-model="dialog.form.logo"></vue-image>
+        </el-form-item>
+
+        <el-form-item label="首字母">
+          <el-input class="mb-0" v-model="dialog.form.first" placeholder="首字母"></el-input>
         </el-form-item>
 
         <el-form-item label="排序">
@@ -67,6 +73,7 @@
 @endsection
 
 
+
 @push('footer')
   @include('admin::shared.vue-image')
   <script>
@@ -74,7 +81,7 @@
       el: '#customer-app',
 
       data: {
-        brands: @json($brands->data ?? []),
+        brands: @json($brands ?? []),
 
         source: {
           // languages: ['zh-ck','en-gb']
@@ -89,6 +96,7 @@
             id: null,
             name: '',
             logo: '',
+            first: '',
             sort_order: '',
             status: '',
           },
@@ -99,6 +107,12 @@
         }
       },
 
+      mounted() {
+        // $http.get('brands?page=1').then((res) => {
+        //   console.log(res)
+        // })
+      },
+
       methods: {
         checkedCreate(type, index) {
           this.dialog.show = true
@@ -106,13 +120,14 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let brand = this.brands[index];
+            let brand = this.brands.data[index];
 
             this.dialog.form = {
               id: brand.id,
               name: brand.name,
               logo: brand.logo,
-              sort_order: brand.sort_order,
+              logo: brand.logo,
+              first: brand.first,
               status: brand.status,
             }
           }
