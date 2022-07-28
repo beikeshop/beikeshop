@@ -12,14 +12,20 @@
       @endforeach
     </ul>
     <ul class="navbar">
-      <li class="nav-item"><a href="{{ admin_route('logout.index') }}" class="nav-link">退出登录</a></li>
-      <li class="nav-item"><a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link">访问前台</a></li>
       <li class="nav-item">
+        <a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link"><i class="bi bi-send"></i> 访问前台</a>
+      </li>
+      <li class="nav-item">
+        <div class="dropdown">
+          <a href="#" class="nav-link" data-bs-toggle="dropdown">
+            <img src="http://dummyimage.com/100x100" class="avatar img-fluid rounded-circle me-1">
+            <span class="text-dark ml-2">{{ auth()->user()->name }}</span>
+          </a>
 
-        <a href="" class="nav-link">
-          <img src="http://dummyimage.com/100x100" class="avatar img-fluid rounded-circle me-1">
-          <span class="text-dark ml-2">{{ auth()->user()->name }}</span>
-        </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+            <li><a href="{{ admin_route('logout.index') }}" class="dropdown-item"><i class="bi bi-box-arrow-left"></i> 退出登录</a></li>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>

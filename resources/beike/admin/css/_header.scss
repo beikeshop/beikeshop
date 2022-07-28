@@ -33,26 +33,29 @@
     justify-content: space-between;
     flex: 1;
 
-    .navbar {
+    > .navbar {
       margin-bottom: 0;
       list-style: none;
-      li {
-        padding: 0.5rem 1.3rem;
+      > li {
+        padding: 0.5rem 1rem;
 
         @media (max-width: 1200px) and (min-width: 992px) {
           padding: 0.5rem 1rem;
         }
 
-        a {
+        a.nav-link {
           color: #333;
           padding: 0.5rem 0;
+          &.show {
+            background-color: #eee;
+          }
         }
       }
     }
 
     .navbar.navbar-right {
       li {
-        a {
+        a.nav-link {
           position: relative;
 
           &:after {

@@ -10,7 +10,8 @@ body.page-filemanager {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none; /* CSS3属性 */
+          user-select: none;
+  /* CSS3属性 */
 }
 body.page-filemanager [class*=" el-icon-"], body.page-filemanager [class^=el-icon-] {
   font-weight: 600;

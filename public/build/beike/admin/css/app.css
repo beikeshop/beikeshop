@@ -502,26 +502,29 @@ body.page-seller-product .share-link-pop .share-links-code img {
   justify-content: space-between;
   flex: 1;
 }
-.header-wrap .header-right .navbar {
+.header-wrap .header-right > .navbar {
   margin-bottom: 0;
   list-style: none;
 }
-.header-wrap .header-right .navbar li {
-  padding: 0.5rem 1.3rem;
+.header-wrap .header-right > .navbar > li {
+  padding: 0.5rem 1rem;
 }
 @media (max-width: 1200px) and (min-width: 992px) {
-  .header-wrap .header-right .navbar li {
+  .header-wrap .header-right > .navbar > li {
     padding: 0.5rem 1rem;
   }
 }
-.header-wrap .header-right .navbar li a {
+.header-wrap .header-right > .navbar > li a.nav-link {
   color: #333;
   padding: 0.5rem 0;
 }
-.header-wrap .header-right .navbar.navbar-right li a {
+.header-wrap .header-right > .navbar > li a.nav-link.show {
+  background-color: #eee;
+}
+.header-wrap .header-right .navbar.navbar-right li a.nav-link {
   position: relative;
 }
-.header-wrap .header-right .navbar.navbar-right li a:after {
+.header-wrap .header-right .navbar.navbar-right li a.nav-link:after {
   content: "";
   position: absolute;
   left: 0;
@@ -691,7 +694,8 @@ table.table.table-striped > tbody > tr:nth-of-type(2n) {
 
 @font-face {
   font-family: "iconfont";
-  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype"); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype");
+  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
 .iconfont {
   font-family: "iconfont" !important;
