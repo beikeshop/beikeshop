@@ -21,7 +21,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>#</th>
+              <th>插件代码</th>
               <th>插件类型</th>
               <th width="50%">插件描述</th>
               <th>状态</th>
