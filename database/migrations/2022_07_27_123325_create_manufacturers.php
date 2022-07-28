@@ -22,6 +22,9 @@ class CreateManufacturers extends Migration
             $table->integer('status');
             $table->timestamps();
         });
+        Schema::table('products', function (Blueprint $table) {
+            $table->unsignedInteger('manufacturer_id')->after('id')->index();
+        });
     }
 
     /**
@@ -32,5 +35,8 @@ class CreateManufacturers extends Migration
     public function down()
     {
         Schema::dropIfExists('manufacturers');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('manufacturer_id');
+        });
     }
 }
