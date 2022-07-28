@@ -29,4 +29,9 @@ class Order extends Base
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function orderTotals(): HasMany
+    {
+        return $this->hasMany(OrderTotal::class);
+    }
 }

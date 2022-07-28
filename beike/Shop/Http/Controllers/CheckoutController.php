@@ -40,13 +40,11 @@ class CheckoutController extends Controller
     /**
      * 确认提交订单
      *
-     * @param Request $request
      * @return Order
      * @throws \Throwable
      */
-    public function confirm(Request $request): Order
+    public function confirm(): Order
     {
-        $data = $request->all();
-        return (new CheckoutService)->confirm($data);
+        return (new CheckoutService)->confirm();
     }
 }

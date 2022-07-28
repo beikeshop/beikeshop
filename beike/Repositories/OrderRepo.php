@@ -103,16 +103,18 @@ class OrderRepo
     public static function create(array $data): Order
     {
         $customer = $data['customer'] ?? null;
-        $current = $data['checkout']['current'] ?? [];
-        $carts = $data['checkout']['carts'] ?? [];
+        $current = $data['current'] ?? [];
+        $carts = $data['carts'] ?? [];
+        $totals = $data['totals'] ?? [];
+
         $shippingAddressId = $current['shipping_address_id'] ?? 0;
         $paymentAddressId = $current['payment_address_id'] ?? 0;
 
         $shippingAddress = AddressRepo::find($shippingAddressId);
         $paymentAddress = AddressRepo::find($paymentAddressId);
 
-        $shippingMethodCode = $data['shipping_method_code'] ?? '';
-        $paymentMethodCode = $data['payment_method_code'] ?? '';
+        $shippingMethodCode = $current['shipping_method_code'] ?? '';
+        $paymentMethodCode = $current['payment_method_code'] ?? '';
 
         $order = new Order([
             'number' => self::generateOrderNumber(),
@@ -155,6 +157,7 @@ class OrderRepo
         $order->saveOrFail();
 
         OrderProductRepo::create($order, $carts['carts']);
+        OrderTotalRepo::createTotals($order, $totals);
         // OrderHistoryRepo::create($order);
 
         return $order;

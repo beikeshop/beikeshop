@@ -75,13 +75,16 @@ class CheckoutService
      * 确认提交订单
      * @throws \Throwable
      */
-    public function confirm($data): \Beike\Models\Order
+    public function confirm(): \Beike\Models\Order
     {
         $customer = current_customer();
-        $data['customer'] = $customer;
-        $data['checkout'] = self::checkoutData();
-        $order = OrderRepo::create($data);
+        $checkoutData = self::checkoutData();
+        $checkoutData['customer'] = $customer;
+
+        $order = OrderRepo::create($checkoutData);
+
         CartRepo::clearSelectedCartProducts($customer);
+
         // Notification::endmail();
         // Notification::sendsms();
         return $order;
