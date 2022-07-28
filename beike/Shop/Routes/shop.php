@@ -29,6 +29,7 @@ Route::prefix('/')
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
         Route::get('brands', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('brands/autocomplete', [BrandController::class, 'autocomplete'])->name('brands.autocomplete');
         Route::get('brands/{id}', [BrandController::class, 'show'])->name('brands.show');
 
         Route::get('carts', [CartController::class, 'index'])->name('carts.index');

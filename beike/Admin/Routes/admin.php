@@ -9,6 +9,7 @@ Route::prefix($adminName)
     ->middleware(['web'])
     ->name("{$adminName}.")
     ->group(function () {
+        Route::get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
         Route::get('login', [Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [Controllers\LoginController::class, 'store'])->name('login.store');
 

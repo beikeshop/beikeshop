@@ -4,6 +4,7 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Repositories\BrandRepo;
 use Beike\Shop\Http\Resources\ProductList;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -26,5 +27,12 @@ class BrandController extends Controller
         ];
 
         return view('brand/info', $data);
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $brands = BrandRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success('获取成功！', $brands);
     }
 }

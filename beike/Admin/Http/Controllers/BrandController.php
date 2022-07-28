@@ -49,4 +49,11 @@ class BrandController extends Controller
 
         return json_success("已成功删除");
     }
+
+    public function autocomplete(Request $request)
+    {
+        $brands = BrandRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success('获取成功！', $brands);
+    }
 }
