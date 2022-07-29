@@ -2545,17 +2545,21 @@ $(document).ready(function ($) {
       } else {
         $('.total-old').remove();
         $('.fixed-top-line').removeAttr('style');
-      } // if ($(this).scrollTop() > totalWrapTop) {
-      //   $('.fixed-top-line').addClass('fixed-top-line-fixed').css({'left': totalWrapLeft, 'width': totalWrapWidth})
-      //   if ($('.total-old').length > 0) return;
-      //   $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
-      // } else {
-      //   $('.total-old').remove();
-      //   $('.fixed-top-line').removeClass('fixed-top-line-fixed').css({'left': 0, 'width': 'auto'})
-      // }
-
+      }
     });
-  })(window.jQuery);
+  })(window.jQuery); // offcanvas-search-top
+
+
+  var myOffcanvas = document.getElementById('offcanvas-search-top');
+  myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
+    $('#offcanvas-search-top input').focus();
+    $('#offcanvas-search-top input').keydown(function (e) {
+      if (e.keyCode == 13) {
+        console.log('enter');
+        $('#offcanvas-search-top .btn-search').click();
+      }
+    });
+  });
 });
 
 bk.getCarts = function () {
