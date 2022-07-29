@@ -18,11 +18,16 @@ class OrderTotalService
     public static function getTotal(TotalService $totalService)
     {
         $amount = $totalService->amount;
-        return [
+        $totalData = [
             'code' => 'order_total',
             'title' => '应付总金额',
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
+
+        $totalService->amount += $totalData['amount'];
+        $totalService->totals[] = $totalData;
+
+        return $totalData;
     }
 }

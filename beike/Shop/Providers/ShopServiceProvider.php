@@ -2,18 +2,32 @@
 
 namespace Beike\Shop\Providers;
 
+use Beike\Libraries\Tax;
 use Beike\Models\Customer;
 use Illuminate\Support\Str;
+use Illuminate\View\FileViewFinder;
+use TorMorten\Eventy\Facades\Eventy;
 use Beike\Repositories\CategoryRepo;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Beike\Shop\View\Components\AccountSidebar;
-use Illuminate\View\FileViewFinder;
-use TorMorten\Eventy\Facades\Eventy;
 
 class ShopServiceProvider extends ServiceProvider
 {
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('tax', function () {
+            return new Tax();
+        });
+    }
+
+
     /**
      * @throws \Exception
      */

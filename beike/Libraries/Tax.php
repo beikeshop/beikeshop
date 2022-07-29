@@ -9,23 +9,23 @@
  * @modified   2022-07-21 16:29:54
  */
 
-namespace Beike\Services;
+namespace Beike\Libraries;
 
 use Beike\Models\Address;
 use Beike\Models\TaxRate;
 use Beike\Models\TaxRule;
 
-class TaxService
+class Tax
 {
-    private $taxRates = array();
-    private static $taxRules;
+    private array $taxRates = [];
+    private static array $taxRules = [];
 
     const AVAILABLE_TYPES = ['shipping', 'payment', 'store'];
 
     public function __construct($data = array())
     {
-        $countryId = system_setting('base.config_country_id');
-        $zoneId = system_setting('base.config_zone_id');
+        $countryId = (int)system_setting('base.country_id');
+        $zoneId = (int)system_setting('base.zone_id');
 
         $shippingAddress = $data['shipping_address'] ?? null;
         $paymentAddress = $data['payment_address'] ?? null;
@@ -68,21 +68,19 @@ class TaxService
             return self::$taxRules["$type-$countryId-$zoneId"];
         }
 
-        $customerGroupId = (int)system_setting('base.config_customer_group_id');
         $sqlBuilder = TaxRule::query()
-            ->leftJoin('tax_rate', 'tax_rule.tax_rate_id', '=', 'tax_rate.tax_rate_id')
-            ->join('tax_rate_to_customer_group', 'tax_rate.tax_rate_id', '=', 'tax_rate_to_customer_group.tax_rate_id')
-            ->leftJoin('zone_to_geo_zone', 'tax_rate.geo_zone_id', '=', 'zone_to_geo_zone.geo_zone_id')
-            ->leftJoin('geo_zone', 'tax_rate.geo_zone_id', '=', 'geo_zone.geo_zone_id')
-            ->select('tax_rule.*', 'tax_rate.*')
-            ->where('tax_rule.based', $type)
-            ->where('tax_rate_to_customer_group.customer_group_id', $customerGroupId)
-            ->where('zone_to_geo_zone.country_id', $countryId)
+            ->from('tax_rules as rule')
+            ->select('rule.*', 'rate.*')
+            ->leftJoin('tax_rates as rate', 'rule.tax_rate_id', '=', 'rate.id')
+            ->leftJoin('region_zones as rz', 'rate.region_id', '=', 'rz.region_id')
+            ->leftJoin('regions as region', 'rate.region_id', '=', 'region.id')
+            ->where('rule.based', $type)
+            ->where('rz.country_id', $countryId)
             ->where(function ($query) use ($zoneId) {
-                $query->where('zone_to_geo_zone.zone_id', '=', 0)
-                    ->orWhere('zone_to_geo_zone.zone_id', '=', (int)$zoneId);
+                $query->where('rz.zone_id', '=', 0)
+                    ->orWhere('rz.zone_id', '=', (int)$zoneId);
             })
-            ->orderBy('tax_rule.priority');
+            ->orderBy('rule.priority');
         $data = $sqlBuilder->get();
         self::$taxRules["$type-$countryId-$zoneId"] = $data;
         return $data;
@@ -187,9 +185,9 @@ class TaxService
                     $amount = 0;
                 }
 
-                if ($taxRate['type'] == 'F') {
+                if ($taxRate['type'] == 'flat') {
                     $amount += $taxRate['rate'];
-                } elseif ($taxRate['type'] == 'P') {
+                } elseif ($taxRate['type'] == 'percent') {
                     $amount += ($value / 100 * $taxRate['rate']);
                 }
 

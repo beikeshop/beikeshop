@@ -52,6 +52,7 @@ class CreateTax extends Migration
             $table->integer('tax_class_id');
             $table->integer('tax_rate_id');
             $table->enum('based', ['store', 'payment', 'shipping']);
+            $table->integer('priority');
             $table->timestamps();
         });
     }

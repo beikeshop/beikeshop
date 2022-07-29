@@ -12,18 +12,30 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
+use Beike\Admin\Repositories\TaxRateRepo;
 use Beike\Shop\Services\TotalService;
 
 class TaxService
 {
     public static function getTotal(TotalService $totalService)
     {
-        $amount = $totalService->amount * 0.02;
-        return [
-            'code' => 'tax',
-            'title' => '税费',
-            'amount' => $amount,
-            'amount_format' => currency_format($amount)
-        ];
+        $taxes = $totalService->taxes;
+
+        $totalItems = [];
+        foreach ($taxes as $taxRateId => $value) {
+            if ($value <= 0) {
+                continue;
+            }
+            $totalItems[] = array(
+                'code' => 'tax',
+                'title' => TaxRateRepo::getNameByRateId($taxRateId),
+                'amount' => $value,
+                'amount_format' => currency_format($value)
+            );
+            $totalService->amount += $value;
+        }
+
+        $totalService->totals = array_merge($totalService->totals, $totalItems);
+        return $totalItems;
     }
 }

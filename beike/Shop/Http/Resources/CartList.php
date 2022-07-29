@@ -13,12 +13,14 @@ class CartList extends JsonResource
      *
      * @param Request $request
      * @return array|Arrayable|\JsonSerializable
+     * @throws \Exception
      */
     public function toArray($request)
     {
         $sku = $this->sku;
+        $product = $sku->product;
         $price = $sku->price;
-        $description = $sku->product->description;
+        $description = $product->description;
         $subTotal = $price * $this->quantity;
         return [
             'cart_id' => $this->id,
@@ -30,6 +32,7 @@ class CartList extends JsonResource
             'selected' => $this->selected,
             'price' => $price,
             'price_format' => currency_format($price),
+            'tax_class_id' => $product->tax_class_id,
             'subtotal' => $subTotal,
             'subtotal_format' => currency_format($subTotal),
         ];

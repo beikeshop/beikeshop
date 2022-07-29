@@ -31,11 +31,16 @@ class ShippingService
             throw new \Exception("请在插件 {$className} 实现方法 getShippingFee");
         }
         $amount = (float)(new $className)->getShippingFee($totalService);
-        return [
+        $totalData = [
             'code' => 'shipping',
             'title' => '运费',
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
+
+        $totalService->amount += $totalData['amount'];
+        $totalService->totals[] = $totalData;
+
+        return $totalData;
     }
 }

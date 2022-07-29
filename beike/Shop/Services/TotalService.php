@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Libraries\Tax;
 use Illuminate\Support\Str;
 
 class TotalService
@@ -23,6 +24,7 @@ class TotalService
     ];
 
     public array $carts;
+    public array $taxes = [];
     public array $totals;
     public float $amount = 0;
     public string $shippingMethod = '';
@@ -30,6 +32,7 @@ class TotalService
     public function __construct($carts)
     {
         $this->carts = $carts;
+        $this->getTaxes();
     }
 
 
@@ -44,6 +47,33 @@ class TotalService
 
 
     /**
+     * 获取税费数据
+     *
+     * @return array
+     */
+    public function getTaxes(): array
+    {
+        $taxLib = Tax::getInstance();
+        foreach ($this->carts as $product) {
+            if (empty($product['tax_class_id'])) {
+                continue;
+            }
+
+            $taxRates = $taxLib->getRates($product['price'], $product['tax_class_id']);
+            foreach ($taxRates as $taxRate) {
+                if (!isset($this->taxes[$taxRate['tax_rate_id']])) {
+                    $this->taxes[$taxRate['tax_rate_id']] = ($taxRate['amount'] * $product['quantity']);
+                } else {
+                    $this->taxes[$taxRate['tax_rate_id']] += ($taxRate['amount'] * $product['quantity']);
+                }
+            }
+        }
+
+        return $this->taxes;
+    }
+
+
+    /**
      * @return array
      */
     public function getTotals(): array
@@ -54,11 +84,7 @@ class TotalService
             if (!class_exists($service) || !method_exists($service, 'getTotal')) {
                 continue;
             }
-            $totalData = $service::getTotal($this);
-            if ($totalData) {
-                $this->amount += $totalData['amount'];
-                $this->totals[] = $totalData;
-            }
+            $service::getTotal($this);
         }
 
         return $this->totals;

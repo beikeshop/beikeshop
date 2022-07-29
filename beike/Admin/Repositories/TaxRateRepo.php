@@ -45,4 +45,10 @@ class TaxRateRepo
         $taxRate = TaxRate::query()->findOrFail($id);
         $taxRate->delete();
     }
+
+    public static function getNameByRateId($taxRateId)
+    {
+        $taxRate = TaxRate::query()->findOrFail($taxRateId);
+        return $taxRate->name;
+    }
 }

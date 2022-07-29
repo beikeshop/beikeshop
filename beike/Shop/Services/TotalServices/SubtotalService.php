@@ -20,11 +20,16 @@ class SubtotalService
     {
         $carts = $totalService->carts;
         $amount = collect($carts)->sum('subtotal');
-        return [
+        $totalData = [
             'code' => 'sub_total',
             'title' => '商品总额',
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
+
+        $totalService->amount += $totalData['amount'];
+        $totalService->totals[] = $totalData;
+
+        return $totalData;
     }
 }

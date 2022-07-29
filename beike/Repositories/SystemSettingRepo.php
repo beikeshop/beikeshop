@@ -29,7 +29,16 @@ class SystemSettingRepo
                     ['value' => '2', 'label' => '美国']
                 ],
                 'value' => old('country_id', system_setting('base.country_id', '1')),
-                'description' => '默认语言设置',
+                'description' => '默认国家设置',
+            ],
+            [
+                'name' => 'zone_id',
+                'label' => '默认省份',
+                'type' => 'select',
+                'required' => true,
+                'options' => ZoneRepo::getZoneOptions(1),
+                'value' => old('zone_id', system_setting('base.zone_id', '1')),
+                'description' => '默认省份设置',
             ],
             [
                 'name' => 'locale',

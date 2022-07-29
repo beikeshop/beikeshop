@@ -18,7 +18,7 @@ class ZoneRepo
     /**
      * 创建一个zone记录
      * @param $data
-     * @return int
+     * @return mixed
      */
     public static function create($data)
     {
@@ -29,7 +29,8 @@ class ZoneRepo
     /**
      * @param $id
      * @param $data
-     * @return bool|int
+     * @return mixed
+     * @throws \Exception
      */
     public static function update($id, $data)
     {
@@ -43,7 +44,7 @@ class ZoneRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return mixed
      */
     public static function find($id)
     {
@@ -96,5 +97,25 @@ class ZoneRepo
         if ($country) {
             return $country->zones;
         }
+    }
+
+
+    /**
+     * 通过国家ID获取省份拉下选项
+     *
+     * @param $countryId
+     * @return array
+     */
+    public static function getZoneOptions($countryId): array
+    {
+        $zones = self::listByCountry($countryId);
+        $items = [];
+        foreach ($zones as $zone) {
+            $items[] = [
+                'value' => $zone->id,
+                'label' => $zone->name
+            ];
+        }
+        return $items;
     }
 }
