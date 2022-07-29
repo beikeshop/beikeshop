@@ -3,7 +3,6 @@
 @section('title', '订单详情')
 
 @section('content')
-{{-- {{ dd($order) }} --}}
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">订单详情</h6></div>
     <div class="card-body">
@@ -76,6 +75,14 @@
           </tr>
           @endforeach
         </tbody>
+        <tfoot>
+          @foreach ($order->orderTotals as $order)
+            <tr>
+              <td colspan="5" class="text-end">{{ $order->title }}： <span class="fw-bold">{{ $order->value }}</span></td>
+              {{-- <td>{{ $order->title }}: {{ $order->value }}</td> --}}
+            </tr>
+          @endforeach
+        </tfoot>
       </table>
     </div>
   </div>

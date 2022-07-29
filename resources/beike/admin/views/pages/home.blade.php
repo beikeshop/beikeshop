@@ -135,7 +135,10 @@
     options: {
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+        },
+        x: {
+          // display: false,
         }
       }
     }
