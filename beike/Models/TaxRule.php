@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TaxRule extends Base
 {
-    protected $fillable = ['tax_class_id', 'tax_rate_id', 'based'];
+    protected $fillable = ['tax_class_id', 'tax_rate_id', 'based', 'priority'];
 
     public function taxClass(): BelongsTo
     {

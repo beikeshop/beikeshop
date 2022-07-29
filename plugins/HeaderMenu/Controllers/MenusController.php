@@ -13,12 +13,17 @@ namespace Plugin\HeaderMenu\Controllers;
 
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Resources\ProductList;
 
 class MenusController extends Controller
 {
     public function latestProducts()
     {
         $products = ProductRepo::getBuilder()->orderByDesc('updated_at')->paginate(40);
-        return view("HeaderMenu::latest_products", ['products' => $products]);
+        $data = [
+            'products' => $products,
+            'items' => ProductList::collection($products)->jsonSerialize(),
+        ];
+        return view("HeaderMenu::latest_products", $data);
     }
 }

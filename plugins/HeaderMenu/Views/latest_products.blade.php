@@ -10,7 +10,7 @@
         </nav>
 
         <div class="row">
-            @foreach ($products as $product)
+            @foreach ($items as $product)
                 <div class="col-6 col-md-3">@include('shared.product')</div>
             @endforeach
         </div>
