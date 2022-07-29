@@ -48,7 +48,7 @@
         <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
           <div @click="addModuleButtonClicked(item.code)" class="module-list">
             <div class="module-info">
-              <div class="icon"><i class="iconfont" v-html="item.icon"></i></div>
+              <div class="icon"><i :style="item.style" class="iconfont" v-html="item.icon"></i></div>
               <div class="name">@{{ item.name }}</div>
             </div>
           </div>

@@ -36,7 +36,7 @@ class Image401 extends Component
             'code' => 'image401',
             'sort' => 0,
             'name' => '一行四图-pro',
-            'icon' => '&#xe634;',
+            'icon' => '&#xe663;',
         ];
 
         return view('admin::pages.design.module.image401', $data);

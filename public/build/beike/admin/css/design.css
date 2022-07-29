@@ -1,18 +1,9 @@
 @charset "UTF-8";
 @font-face {
   font-family: "iconfont";
-  src: url("/vendor/iconfont/iconfont.woff") format("woff"), url("/vendor/iconfont/iconfont.ttf") format("truetype");
+  src: url("/fonts/design/iconfont.woff") format("woff"), url("/fonts/design/iconfont.ttf") format("truetype");
   /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 body.page-design {
   background-color: #fff;
   padding: 0;
@@ -20,6 +11,14 @@ body.page-design {
   font-size: 14px;
   height: 100vh;
   overflow: hidden;
+}
+body.page-design .iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0;
+  -moz-osx-font-smoothing: grayscale;
 }
 body.page-design [class*=" el-icon-"], body.page-design [class^=el-icon-] {
   font-weight: 600;
@@ -130,9 +129,10 @@ body.page-design .design-box .sidebar-edit-wrap .module-list .module-info:hover 
 }
 body.page-design .design-box .sidebar-edit-wrap .module-list .icon {
   padding: 12px 0 7px;
-  width: 36px;
   height: 36px;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 body.page-design .design-box .sidebar-edit-wrap .module-list .icon img {
   max-width: 100%;

@@ -36,7 +36,7 @@ class Image100 extends Component
             'code' => 'image100',
             'sort' => 0,
             'name' => '单图模块',
-            'icon' => '&#xe634;',
+            'icon' => '&#xe663;',
         ];
 
         return view('admin::pages.design.module.image100', $data);

@@ -36,7 +36,7 @@ class TabProduct extends Component
             'code' => 'tab_product',
             'sort' => 0,
             'name' => '选项卡商品',
-            'icon' => '&#xe634;',
+            'icon' => '&#xe688;',
         ];
 
         return view('admin::pages.design.module.tab_product', $data);

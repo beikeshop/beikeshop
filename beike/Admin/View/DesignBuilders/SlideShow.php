@@ -36,7 +36,8 @@ class SlideShow extends Component
             'code' => 'slideshow',
             'sort' => 0,
             'name' => '幻灯片模块',
-            'icon' => '&#xe634;',
+            'icon' => '&#xe61b;',
+            'style' => 'font-size: 40px;',
         ];
 
         return view('admin::pages.design.module.slideshow', $data);

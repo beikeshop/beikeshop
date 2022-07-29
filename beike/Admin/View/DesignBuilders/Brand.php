@@ -36,7 +36,7 @@ class Brand extends Component
             'code' => 'brand',
             'sort' => 0,
             'name' => '品牌模块',
-            'icon' => '&#xe634;',
+            'icon' => '&#xe602;',
         ];
 
         return view('admin::pages.design.module.brand', $data);
