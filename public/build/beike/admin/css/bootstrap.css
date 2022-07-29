@@ -6803,7 +6803,7 @@
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 0.92rem;
+  --bs-body-font-size: 0.82rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
@@ -6855,47 +6855,42 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 }
 
 h1, .h1 {
-  font-size: calc(1.355rem + 1.26vw);
+  font-size: calc(1.33rem + 0.96vw);
 }
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.3rem;
+    font-size: 2.05rem;
   }
 }
 
 h2, .h2 {
-  font-size: calc(1.309rem + 0.708vw);
+  font-size: calc(1.289rem + 0.468vw);
 }
 @media (min-width: 1200px) {
   h2, .h2 {
-    font-size: 1.84rem;
+    font-size: 1.64rem;
   }
 }
 
 h3, .h3 {
-  font-size: calc(1.286rem + 0.432vw);
+  font-size: calc(1.2685rem + 0.222vw);
 }
 @media (min-width: 1200px) {
   h3, .h3 {
-    font-size: 1.61rem;
+    font-size: 1.435rem;
   }
 }
 
 h4, .h4 {
-  font-size: calc(1.263rem + 0.156vw);
-}
-@media (min-width: 1200px) {
-  h4, .h4 {
-    font-size: 1.38rem;
-  }
+  font-size: 1.23rem;
 }
 
 h5, .h5 {
-  font-size: 1.15rem;
+  font-size: 1.025rem;
 }
 
 h6, .h6 {
-  font-size: 0.92rem;
+  font-size: 0.82rem;
 }
 
 p {
@@ -7055,7 +7050,7 @@ table {
 caption {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  color: #6c757d;
+  color: #95aac9;
   text-align: left;
 }
 
@@ -7234,7 +7229,7 @@ progress {
 }
 
 .lead {
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   font-weight: 300;
 }
 
@@ -7328,7 +7323,7 @@ progress {
 
 .blockquote {
   margin-bottom: 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
 }
 .blockquote > :last-child {
   margin-bottom: 0;
@@ -8916,26 +8911,26 @@ progress {
 .col-form-label-lg {
   padding-top: calc(0.5rem + 1px);
   padding-bottom: calc(0.5rem + 1px);
-  font-size: 1.15rem;
+  font-size: 1.025rem;
 }
 
 .col-form-label-sm {
   padding-top: calc(0.25rem + 1px);
   padding-bottom: calc(0.25rem + 1px);
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
 }
 
 .form-text {
   margin-top: 0.25rem;
   font-size: 0.875em;
-  color: #6c757d;
+  color: #95aac9;
 }
 
 .form-control {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -9076,7 +9071,7 @@ progress {
 .form-control-sm {
   min-height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   border-radius: 0.2rem;
 }
 .form-control-sm::-webkit-file-upload-button {
@@ -9101,7 +9096,7 @@ progress {
 .form-control-lg {
   min-height: calc(1.5em + 1rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   border-radius: 0.3rem;
 }
 .form-control-lg::-webkit-file-upload-button {
@@ -9155,7 +9150,7 @@ textarea.form-control-lg {
   width: 100%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
   -moz-padding-start: calc(0.75rem - 3px);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -9197,7 +9192,7 @@ textarea.form-control-lg {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   border-radius: 0.2rem;
 }
 
@@ -9205,13 +9200,13 @@ textarea.form-control-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   border-radius: 0.3rem;
 }
 
 .form-check {
   display: block;
-  min-height: 1.38rem;
+  min-height: 1.23rem;
   padding-left: 1.7em;
   margin-bottom: 0.125rem;
 }
@@ -9509,7 +9504,7 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   padding: 0.375rem 0.75rem;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -9525,7 +9520,7 @@ textarea.form-control-lg {
 .input-group-lg > .input-group-text,
 .input-group-lg > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   border-radius: 0.3rem;
 }
 
@@ -9534,7 +9529,7 @@ textarea.form-control-lg {
 .input-group-sm > .input-group-text,
 .input-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   border-radius: 0.2rem;
 }
 
@@ -9575,7 +9570,7 @@ textarea.form-control-lg {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   color: #fff;
   background-color: rgba(25, 135, 84, 0.9);
   border-radius: 0;
@@ -9664,7 +9659,7 @@ textarea.form-control-lg {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   color: #fff;
   background-color: rgba(220, 53, 69, 0.9);
   border-radius: 0;
@@ -9752,7 +9747,7 @@ textarea.form-control-lg {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   border-radius: 0;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -10227,13 +10222,13 @@ textarea.form-control-lg {
 
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   border-radius: 0.3rem;
 }
 
 .btn-sm, .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   border-radius: 0.2rem;
 }
 
@@ -10305,7 +10300,7 @@ textarea.form-control-lg {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: #212529;
   text-align: left;
   list-style: none;
@@ -10539,7 +10534,7 @@ textarea.form-control-lg {
   display: block;
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   color: #6c757d;
   white-space: nowrap;
 }
@@ -10792,10 +10787,10 @@ textarea.form-control-lg {
   justify-content: space-between;
 }
 .navbar-brand {
-  padding-top: 0.3275rem;
-  padding-bottom: 0.3275rem;
+  padding-top: 0.34625rem;
+  padding-bottom: 0.34625rem;
   margin-right: 1rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   white-space: nowrap;
 }
 .navbar-nav {
@@ -10826,7 +10821,7 @@ textarea.form-control-lg {
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
@@ -11412,7 +11407,7 @@ textarea.form-control-lg {
   align-items: center;
   width: 100%;
   padding: 1rem 1.25rem;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: #212529;
   text-align: left;
   background-color: #fff;
@@ -11600,7 +11595,7 @@ textarea.form-control-lg {
 
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
-  font-size: 1.15rem;
+  font-size: 1.025rem;
 }
 .pagination-lg .page-item:first-child .page-link {
   border-top-left-radius: 0.3rem;
@@ -11613,7 +11608,7 @@ textarea.form-control-lg {
 
 .pagination-sm .page-link {
   padding: 0.25rem 0.5rem;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
 }
 .pagination-sm .page-item:first-child .page-link {
   border-top-left-radius: 0.2rem;
@@ -11634,7 +11629,7 @@ textarea.form-control-lg {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0;
+  border-radius: 2px;
 }
 .badge:empty {
   display: none;
@@ -11759,7 +11754,7 @@ textarea.form-control-lg {
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: 0.69rem;
+  font-size: 0.615rem;
   background-color: #e9ecef;
   border-radius: 0;
 }
@@ -12515,7 +12510,7 @@ textarea.form-control-lg {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   word-wrap: break-word;
   opacity: 0;
 }
@@ -12617,7 +12612,7 @@ textarea.form-control-lg {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.805rem;
+  font-size: 0.7175rem;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: padding-box;
@@ -12711,7 +12706,7 @@ textarea.form-control-lg {
 .popover-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   background-color: #f0f0f0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   border-top-left-radius: calc(0.3rem - 1px);
@@ -14336,27 +14331,27 @@ textarea.form-control-lg {
 }
 
 .fs-1 {
-  font-size: calc(1.355rem + 1.26vw) !important;
+  font-size: calc(1.33rem + 0.96vw) !important;
 }
 
 .fs-2 {
-  font-size: calc(1.309rem + 0.708vw) !important;
+  font-size: calc(1.289rem + 0.468vw) !important;
 }
 
 .fs-3 {
-  font-size: calc(1.286rem + 0.432vw) !important;
+  font-size: calc(1.2685rem + 0.222vw) !important;
 }
 
 .fs-4 {
-  font-size: calc(1.263rem + 0.156vw) !important;
+  font-size: 1.23rem !important;
 }
 
 .fs-5 {
-  font-size: 1.15rem !important;
+  font-size: 1.025rem !important;
 }
 
 .fs-6 {
-  font-size: 0.92rem !important;
+  font-size: 0.82rem !important;
 }
 
 .fst-italic {
@@ -14511,7 +14506,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important;
+  color: #95aac9 !important;
 }
 
 .text-black-50 {
@@ -17970,19 +17965,15 @@ textarea.form-control-lg {
 }
 @media (min-width: 1200px) {
   .fs-1 {
-    font-size: 2.3rem !important;
+    font-size: 2.05rem !important;
   }
 
   .fs-2 {
-    font-size: 1.84rem !important;
+    font-size: 1.64rem !important;
   }
 
   .fs-3 {
-    font-size: 1.61rem !important;
-  }
-
-  .fs-4 {
-    font-size: 1.38rem !important;
+    font-size: 1.435rem !important;
   }
 }
 @media print {
@@ -18040,4 +18031,9 @@ textarea.form-control-lg {
 .form-switch .form-check-input {
   width: 3em;
   height: 1.6em;
+}
+
+.badge.bg-success-soft {
+  color: #00d97e;
+  background-color: #ccf7e5;
 }

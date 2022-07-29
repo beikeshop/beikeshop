@@ -10,7 +10,7 @@
 
 $primary: #fd560f;
 $border-radius:  0;
-$font-size-base: 0.92rem;
+$font-size-base: 0.82rem;
 $form-check-input-width: 1.2em;
 $form-switch-width: 2.6em;
 $link-decoration: none;
@@ -23,6 +23,8 @@ $btn-focus-width: 0;
 $table-border-color: #e9ecef;
 $border-color: #e2e2e2;
 $input-border-color: #e2e2e2;
+$badge-border-radius: 2px;
+$text-muted: #95aac9;
 
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
@@ -43,4 +45,9 @@ $input-border-color: #e2e2e2;
     width: 3em;
     height: 1.6em;
   }
+}
+
+.badge.bg-success-soft {
+  color: #00d97e;
+  background-color: #ccf7e5;
 }
