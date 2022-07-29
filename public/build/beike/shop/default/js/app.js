@@ -2492,6 +2492,8 @@ $(document).ready(function ($) {
     var cartId = $(this).data('id');
     $http["delete"]("/carts/".concat(cartId)).then(function (res) {
       $this.parents('.product-list').remove();
+      $('.offcanvas-right-cart-count').html(res.data.quantity);
+      $('.offcanvas-right-cart-amount').html(res.data.amount_format);
     });
   });
   $(document).on('click', '.quantity-wrap .right i', function (event) {
@@ -2570,7 +2572,7 @@ bk.getCarts = function () {
 
     if (res.data.carts.length) {
       $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-      $('.offcanvas-right-cart-count').html(res.data.carts.length);
+      $('.offcanvas-right-cart-count').html(res.data.quantity);
       var html = '';
       res.data.carts.forEach(function (e) {
         html += '<div class="product-list d-flex align-items-center">';
@@ -2578,7 +2580,7 @@ bk.getCarts = function () {
         html += '<div class="right flex-grow-1">';
         html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
         html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-        html += "<div class=\"price\">".concat(e.price_format, "</div>");
+        html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
         html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
         html += '</div>';
         html += '</div>';
