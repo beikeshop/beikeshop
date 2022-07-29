@@ -1,6 +1,9 @@
 import http from "../../../../js/http";
 window.$http = http;
 
+// 基于 window 顶层 创建 bk 对象，先判断是否存在，如果存在，就不创建
+window.bk = window.bk || {};
+
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -8,30 +11,7 @@ $(document).ready(function ($) {
     complete: function() { layer.closeAll('loading'); },
   });
 
-  $http.get('carts/mini', null, {hload: true}).then((res) => {
-    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-    if (res.data.carts.length) {
-      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-      $('.offcanvas-right-cart-count').html(res.data.carts.length);
-
-      let html = '';
-      res.data.carts.forEach(e => {
-        html += '<div class="product-list d-flex align-items-center">';
-          html += `<div class="left"><img src="${e.image}" calss="img-fluid"></div>`;
-          html += '<div class="right flex-grow-1">';
-            html += `<div class="name fs-sm fw-bold mb-2">${e.name}</div>`;
-            html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-              html += `<div class="price">${e.price_format}</div>`;
-              html += `<span class="offcanvas-products-delete" data-id="${e.cart_id}"><i class="bi bi-x-lg"></i> 删除</span>`;
-            html += '</div>';
-          html += '</div>';
-        html += '</div>';
-      })
-
-      $('.offcanvas-right-products').html(html)
-    }
-  })
+  bk.getCarts();
 
   $(document).on('click', '.offcanvas-products-delete', function(event) {
     const $this = $(this)
@@ -98,3 +78,32 @@ $(document).ready(function ($) {
     })
   })(window.jQuery);
 });
+
+// 封装一个方法, 把上面这个 http.get('carts/mini', null, {hload: true}).then((res) => { 放里面
+// 把封装的方法放在 bk 对象里面
+bk.getCarts = function () {
+  $http.get('carts/mini', null, {hload: true}).then((res) => {
+    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
+
+    if (res.data.carts.length) {
+      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
+      $('.offcanvas-right-cart-count').html(res.data.carts.length);
+
+      let html = '';
+      res.data.carts.forEach(e => {
+        html += '<div class="product-list d-flex align-items-center">';
+          html += `<div class="left"><img src="${e.image}" calss="img-fluid"></div>`;
+          html += '<div class="right flex-grow-1">';
+            html += `<div class="name fs-sm fw-bold mb-2">${e.name}</div>`;
+            html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+              html += `<div class="price">${e.price_format}</div>`;
+              html += `<span class="offcanvas-products-delete" data-id="${e.cart_id}"><i class="bi bi-x-lg"></i> 删除</span>`;
+            html += '</div>';
+          html += '</div>';
+        html += '</div>';
+      })
+
+      $('.offcanvas-right-products').html(html)
+    }
+  })
+}

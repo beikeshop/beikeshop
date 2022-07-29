@@ -2469,7 +2469,9 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../js/http */ "./resources/js/http.js");
 
-window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"]; // 基于 window 顶层 创建 bk 对象，先判断是否存在，如果存在，就不创建
+
+window.bk = window.bk || {};
 $(document).ready(function ($) {
   $.ajaxSetup({
     headers: {
@@ -2484,30 +2486,7 @@ $(document).ready(function ($) {
       layer.closeAll('loading');
     }
   });
-  $http.get('carts/mini', null, {
-    hload: true
-  }).then(function (res) {
-    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-    if (res.data.carts.length) {
-      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-      $('.offcanvas-right-cart-count').html(res.data.carts.length);
-      var html = '';
-      res.data.carts.forEach(function (e) {
-        html += '<div class="product-list d-flex align-items-center">';
-        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
-        html += '<div class="right flex-grow-1">';
-        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
-        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-        html += "<div class=\"price\">".concat(e.price_format, "</div>");
-        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-      });
-      $('.offcanvas-right-products').html(html);
-    }
-  });
+  bk.getCarts();
   $(document).on('click', '.offcanvas-products-delete', function (event) {
     var $this = $(this);
     var cartId = $(this).data('id');
@@ -2577,7 +2556,35 @@ $(document).ready(function ($) {
 
     });
   })(window.jQuery);
-});
+}); // 封装一个方法, 把上面这个 http.get('carts/mini', null, {hload: true}).then((res) => { 放里面
+// 把封装的方法放在 bk 对象里面
+
+bk.getCarts = function () {
+  $http.get('carts/mini', null, {
+    hload: true
+  }).then(function (res) {
+    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
+
+    if (res.data.carts.length) {
+      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
+      $('.offcanvas-right-cart-count').html(res.data.carts.length);
+      var html = '';
+      res.data.carts.forEach(function (e) {
+        html += '<div class="product-list d-flex align-items-center">';
+        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
+        html += '<div class="right flex-grow-1">';
+        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
+        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+        html += "<div class=\"price\">".concat(e.price_format, "</div>");
+        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      $('.offcanvas-right-products').html(html);
+    }
+  });
+};
 })();
 
 /******/ })()
