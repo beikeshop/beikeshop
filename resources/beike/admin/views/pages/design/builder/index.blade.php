@@ -7,6 +7,7 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="asset" content="{{ asset('/') }}">
   <base href="{{$admin_base_url}}">
   <title>首页编辑器</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
