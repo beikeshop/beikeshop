@@ -21,10 +21,6 @@ body[class^=page-account-] {
   background-color: #F7F8FA;
 }
 
-.h-600 {
-  min-height: 500px;
-}
-
 .min-h1 {
   min-height: 100px;
 }
@@ -273,7 +269,7 @@ body[class^=page-account-] {
   transform: translateX(-50%);
   left: 50%;
   content: "";
-  width: 100px;
+  width: 60px;
   height: 1px;
   background: #FD560F;
 }
@@ -1162,6 +1158,9 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
   height: 90px;
 }
 
+.module-tab-product .module-title {
+  margin-bottom: 1rem;
+}
 .module-tab-product .nav .nav-link {
   color: #6c757d;
   font-size: 0.9rem;

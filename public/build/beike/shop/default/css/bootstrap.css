@@ -6976,11 +6976,12 @@ sup {
 }
 
 a {
-  color: #3480e7;
+  color: #fd560f;
   text-decoration: none;
 }
 a:hover {
   color: #fd560f;
+  text-decoration: underline;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -9758,6 +9759,7 @@ textarea.form-control-lg {
 }
 .btn:hover {
   color: #212529;
+  text-decoration: none;
 }
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
@@ -10210,11 +10212,15 @@ textarea.form-control-lg {
 
 .btn-link {
   font-weight: 400;
-  color: #3480e7;
+  color: #fd560f;
   text-decoration: none;
 }
 .btn-link:hover {
   color: #fd560f;
+  text-decoration: underline;
+}
+.btn-link:focus {
+  text-decoration: underline;
 }
 .btn-link:disabled, .btn-link.disabled {
   color: #6c757d;
@@ -10513,6 +10519,7 @@ textarea.form-control-lg {
 }
 .dropdown-item:hover, .dropdown-item:focus {
   color: #1e2125;
+  text-decoration: none;
   background-color: #e9ecef;
 }
 .dropdown-item.active, .dropdown-item:active {
@@ -10681,7 +10688,7 @@ textarea.form-control-lg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #3480e7;
+  color: #fd560f;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -10691,6 +10698,7 @@ textarea.form-control-lg {
 }
 .nav-link:hover, .nav-link:focus {
   color: #fd560f;
+  text-decoration: none;
 }
 .nav-link.disabled {
   color: #6c757d;
@@ -10793,6 +10801,10 @@ textarea.form-control-lg {
   font-size: 1rem;
   white-space: nowrap;
 }
+.navbar-brand:hover, .navbar-brand:focus {
+  text-decoration: none;
+}
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -11296,6 +11308,9 @@ textarea.form-control-lg {
   margin-bottom: 0;
 }
 
+.card-link:hover {
+  text-decoration: none;
+}
 .card-link + .card-link {
   margin-left: 1rem;
 }
@@ -11541,7 +11556,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #3480e7;
+  color: #fd560f;
   background-color: #fff;
   border: 1px solid #dee2e6;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -11554,6 +11569,7 @@ textarea.form-control-lg {
 .page-link:hover {
   z-index: 2;
   color: #fd560f;
+  text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
@@ -18054,4 +18070,8 @@ textarea.form-control-lg {
   padding-left: 10px;
   border-left: 3px solid #fd560f;
   line-height: 1;
+}
+
+.breadcrumb a {
+  color: #212529;
 }

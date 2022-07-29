@@ -37,25 +37,29 @@
         }
       }
 
-      &.active, &:hover {
-        a {
-          color: $primary;
-          background-color: #f4f4f4;
-        }
+      &:hover {
+        background-color: #f4f4f4;
       }
 
       &.active {
-        &:before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 2px;
-          height: 100%;
-          z-index: 1;
-          background: $primary;
+        a {
+          // color: $primary;
+          background-color: #eee;
         }
       }
+
+      // &.active {
+      //   &:before {
+      //     content: '';
+      //     position: absolute;
+      //     left: 0;
+      //     top: 0;
+      //     width: 2px;
+      //     height: 100%;
+      //     z-index: 1;
+      //     background: $primary;
+      //   }
+      // }
     }
   }
 }

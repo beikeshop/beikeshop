@@ -29,15 +29,15 @@
 <x-admin-header/>
 
 <div class="main-content">
-    <aside class="sidebar navbar-expand-xs border-radius-xl">
-        <x-admin-sidebar/>
-    </aside>
+  <aside class="sidebar navbar-expand-xs border-radius-xl">
+    <x-admin-sidebar/>
+  </aside>
+  <div id="content">
     <div class="page-title-box"><h4 class="page-title">@yield('title')</h4></div>
-    <div id="content">
-        <div class="container-fluid p-0">
-            @yield('content')
-        </div>
+    <div class="container-fluid p-0 mt-4">
+        @yield('content')
     </div>
+  </div>
 </div>
 @stack('footer')
 </body>

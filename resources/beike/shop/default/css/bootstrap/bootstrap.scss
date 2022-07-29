@@ -41,7 +41,8 @@ $btn-border-radius: 0;
 // $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
 $link-decoration: none;
-$link-color: #3480e7;
+$link-hover-decoration: underline;
+// $link-color: #3480e7;
 $link-hover-color: $primary;
 $form-select-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
@@ -107,5 +108,11 @@ $card-border-width: 0;
       line-height: 1;
       // font-size: 14px;
     }
+  }
+}
+
+.breadcrumb {
+  a {
+    color: #212529;
   }
 }

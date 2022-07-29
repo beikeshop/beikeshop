@@ -10,10 +10,13 @@
 
 .header-wrap {
   background-color: #fff;
-  height: 60px;
-  border-bottom: 1px solid #f1f1f1;
+  height: 54px;
+  // border-bottom: 1px solid #f1f1f1;
+  position: relative;
   display: flex;
   align-items: center;
+  z-index: 9;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
 
   .header-left {
     width: 190px;
@@ -35,17 +38,18 @@
 
     > .navbar {
       margin-bottom: 0;
+      padding: 0 0 0 .6rem;
       list-style: none;
       > li {
-        padding: 0.5rem 1rem;
-
-        @media (max-width: 1200px) and (min-width: 992px) {
-          padding: 0.5rem 1rem;
-        }
+        padding: 0 1rem;
 
         a.nav-link {
           color: #333;
-          padding: 0.5rem 0;
+          padding: 0;
+          height: 54px;
+          display: flex;
+          align-items: center;
+
           &.show {
             background-color: #eee;
           }

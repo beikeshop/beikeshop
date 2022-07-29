@@ -121,8 +121,8 @@ body {
 
   > #content {
     flex: 1;
-    padding: 1rem 1rem 4rem;
-    margin-top: 44px;
+    padding: 0 1.5rem 4rem;
+    // margin-top: 44px;
     overflow-y: auto;
 
     @media screen and (max-width: 991px) {
@@ -132,22 +132,23 @@ body {
 }
 
 .page-title-box {
-  position: fixed;
-  top: 60px;
-  left: 190px;
+  // position: fixed;
+  // top: 60px;
+  // left: 190px;
   z-index: 9;
   right: 0;
-  height: 44px;
-  padding: 0 28px;
-  background-color: #fff;
-  border-bottom: 1px solid #f1f1f1;
+  // height: 58px;
+  padding: 1.5rem 0 0;
+  // background-color: #fff;
+  // border-bottom: 1px solid #f1f1f1;
   display: flex;
   align-items: center;
 
   .page-title {
-    font-size: 15px;
+    font-size: 1.2rem;
     margin: 0;
     // line-height: 35px;
+    // color: #12263f;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

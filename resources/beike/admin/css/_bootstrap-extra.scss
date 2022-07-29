@@ -22,18 +22,31 @@ hr.horizontal.dark {
 }
 
 .nav-tabs.nav-bordered {
-  border-width: 2px;
+  // border-width: 2px;
 
   .nav-item {
-    margin-bottom: -1px;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
     a {
       color: #6c757d;
       border: none;
+      padding: 0.7rem 0;
     }
 
     a.active {
-      color: $primary;
-      font-weight: bold;
+      // color: $primary;
+      // color: #12263f;
+      color: #1a1a1a;
+      // font-weight: bold;
       background-color: transparent;
       border-bottom: 2px solid $primary;
     }
