@@ -1,7 +1,7 @@
 import http from "../../../../js/http";
 window.$http = http;
 
-// 基于 window 顶层 创建 bk 对象，先判断是否存在，如果存在，就不创建
+// 创建 bk 对象
 window.bk = window.bk || {};
 
 $(document).ready(function ($) {
@@ -79,8 +79,6 @@ $(document).ready(function ($) {
   })(window.jQuery);
 });
 
-// 封装一个方法, 把上面这个 http.get('carts/mini', null, {hload: true}).then((res) => { 放里面
-// 把封装的方法放在 bk 对象里面
 bk.getCarts = function () {
   $http.get('carts/mini', null, {hload: true}).then((res) => {
     $('.offcanvas-right-cart-amount').html(res.data.amount_format);
