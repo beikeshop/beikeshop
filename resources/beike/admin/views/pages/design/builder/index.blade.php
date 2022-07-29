@@ -95,12 +95,50 @@
       app.design.ready = true;
       app.design.sidebar = true;
 
+      // 编辑模块
       $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
-        // module-b0448efb0989 删除 module-
         const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
         const modules = app.form.modules;
         const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
         app.editModuleButtonClicked(editingModuleIndex);
+      });
+
+      // 删除模块
+      $(previewWindow.document).on('click', '.module-edit .delete', function(event) {
+        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+        const editingModuleIndex = app.form.modules.findIndex(e => e.module_id == module_id);
+        app.design.editType = 'add';
+        app.design.editingModuleIndex = 0;
+        $(this).parents('.module-item').remove();
+        app.form.modules.splice(editingModuleIndex, 1);
+      });
+
+      // 模块位置改变，点击.module-edit .up或者.down
+      $(previewWindow.document).on('click', '.module-edit .up, .module-edit .down', function(event) {
+        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+        const modules = app.form.modules;
+        const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
+        const up = $(this).hasClass('up');
+        app.design.editType = 'add';
+        app.design.editingModuleIndex = 0;
+        if (up) {
+          if (editingModuleIndex > 0) {
+            const module = modules[editingModuleIndex];
+            modules.splice(editingModuleIndex, 1);
+            modules.splice(editingModuleIndex - 1, 0, module);
+            // dom操作
+            $(this).parents('.module-item').insertBefore($(this).parents('.module-item').prev());
+          }
+        } else {
+          if (editingModuleIndex < modules.length - 1) {
+            const module = modules[editingModuleIndex];
+            modules.splice(editingModuleIndex, 1);
+            modules.splice(editingModuleIndex + 1, 0, module);
+            // dom操作
+            $(this).parents('.module-item').insertAfter($(this).parents('.module-item').next());
+          }
+        }
+        app.form.modules = modules;
       });
     });
   </script>

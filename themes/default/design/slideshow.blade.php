@@ -7,8 +7,8 @@
   @if ($design)
   <div class="module-edit">
     <div class="edit-wrap">
-      <div class=""><i class="bi bi-chevron-down"></i></div>
-      <div class=""><i class="bi bi-chevron-up"></i></div>
+      <div class="down"><i class="bi bi-chevron-down"></i></div>
+      <div class="up"><i class="bi bi-chevron-up"></i></div>
       <div class="delete"><i class="bi bi-x-lg"></i></div>
       <div class="edit"><i class="bi bi-pencil-square"></i></div>
     </div>
