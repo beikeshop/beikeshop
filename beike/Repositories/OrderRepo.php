@@ -50,7 +50,7 @@ class OrderRepo
      */
     private static function getListBuilder($customer = null): Builder
     {
-        $builder = Order::query();
+        $builder = Order::query()->orderByDesc('created_at');
         if ($customer) {
             $builder->where('customer_id', $customer->id);
         }
