@@ -30,9 +30,9 @@ class CartRepo
             $defaultAddress = AddressRepo::listByCustomer($customer)->first();
             $cart = Cart::query()->create([
                 'customer_id' => $customerId,
-                'shipping_address_id' => $defaultAddress->id,
+                'shipping_address_id' => $defaultAddress->id ?? 0,
                 'shipping_method_code' => $shippingMethod->code,
-                'payment_address_id' => $defaultAddress->id,
+                'payment_address_id' => $defaultAddress->id ?? 0,
                 'payment_method_code' => $paymentMethod->code
             ]);
         }
