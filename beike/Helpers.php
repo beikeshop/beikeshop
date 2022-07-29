@@ -195,9 +195,12 @@ function locale(): string
  * 货币格式化
  *
  * @param $price
+ * @param string $currency
+ * @param string $value
+ * @param bool $format
  * @return string
  */
-function currency_format($price, $currency = '', $value = '', $format = true): string
+function currency_format($price, string $currency = '', string $value = '', bool $format = true): string
 {
     if (!$currency) {
         $currency = Session::get('currency') ?? system_setting('base.currency');
