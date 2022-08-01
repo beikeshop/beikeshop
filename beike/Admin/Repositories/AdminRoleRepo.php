@@ -16,6 +16,13 @@ use Spatie\Permission\Models\Role;
 
 class AdminRoleRepo
 {
+    /**
+     * 创建新角色
+     *
+     * @param $data
+     * @return Role
+     * @throws \Exception
+     */
     public static function createAdminRole($data): Role
     {
         $adminRole = new Role([
@@ -23,12 +30,21 @@ class AdminRoleRepo
             'guard_name' => 'web_admin',
         ]);
         $adminRole->save();
-        $adminRole->givePermissionTo($data['permissions']);
+
+        $permissions = $data['permissions'];
+        self::syncPermissions($adminRole, $permissions);
         return $adminRole;
     }
 
 
-    public static function updateAdminRole($data)
+    /**
+     * 编辑新角色
+     *
+     * @param $data
+     * @return Role
+     * @throws \Exception
+     */
+    public static function updateAdminRole($data): Role
     {
         $adminRole = Role::findById($data['id']);
         $adminRole->update([
@@ -37,6 +53,20 @@ class AdminRoleRepo
         ]);
 
         $permissions = $data['permissions'];
+        self::syncPermissions($adminRole, $permissions);
+        return $adminRole;
+    }
+
+
+    /**
+     * 同步所有权限
+     *
+     * @param $adminRole
+     * @param $permissions
+     * @throws \Exception
+     */
+    private static function syncPermissions($adminRole, $permissions)
+    {
         $items = [];
         foreach ($permissions as $groupedPermissions) {
             foreach ($groupedPermissions['permissions'] as $groupedPermission) {
@@ -50,11 +80,15 @@ class AdminRoleRepo
         if (empty($items)) {
             throw new \Exception('无效的权限');
         }
-        $adminRole->givePermissionTo($items);
-        return $adminRole;
+        $adminRole->syncPermissions($items);
     }
 
 
+    /**
+     * 删除角色
+     *
+     * @param $adminRoleId
+     */
     public static function deleteAdminRole($adminRoleId)
     {
         $adminRole = Role::query()->find($adminRoleId);
