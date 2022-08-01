@@ -13,14 +13,16 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
     public function index()
     {
         $data = [
-            'admin_users' => AdminUser::query()->get(),
-            'admin_user_groups' => [],
+            'admin_users' => AdminUser::query()->with(['roles'])->get(),
+            'admin_roles' => Role::query()->get()
         ];
 
         return view('admin::pages.admin_users.index', $data);
