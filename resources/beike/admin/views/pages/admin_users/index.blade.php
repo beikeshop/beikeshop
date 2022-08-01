@@ -23,6 +23,7 @@
             <th>#</th>
             <th>账号名称</th>
             <th>邮箱</th>
+            <th>角色</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th class="text-end">操作</th>
@@ -33,6 +34,11 @@
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
             <td>@{{ tax.email }}</td>
+            <td>
+              <span v-for="role, role_index in tax.roles" :key="role_index">
+                @{{ role.name }} @{{ (tax.roles.length - 1 != role_index) ? '、' : '' }}
+              </span>
+            </td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
