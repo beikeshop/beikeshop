@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body.page-list {
+  li {
+    list-style: none;
+  }
+
+  .curser {
+    cursor: pointer;
+
+    >li>a {
+      display: block;
+      color: #242424;
+      transition: all .5s;
+      &:hover {
+        text-decoration: none;
+        background-color: #eee;
+      }
+    }
+  }
+}
