@@ -15,6 +15,7 @@ use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Beike\Admin\Repositories\AdminRoleRepo;
 use Beike\Admin\Repositories\PermissionRepo;
 
 class AdminRoleController extends Controller
@@ -48,16 +49,19 @@ class AdminRoleController extends Controller
 
     public function store(Request $request)
     {
-        return json_success('保存成功');
+        $adminUser = AdminRoleRepo::createAdminRole($request->toArray());
+        return json_success('保存成功', $adminUser);
     }
 
-    public function update(Request $request, int $adminRoleId)
+    public function update(Request $request, int $adminUserId)
     {
-        return json_success('更新成功');
+        $adminUser = AdminRoleRepo::updateAdminRole($request->toArray());
+        return json_success('更新成功', $adminUser);
     }
 
-    public function destroy(Request $request, int $adminRoleId)
+    public function destroy(Request $request, int $adminUserId)
     {
+        AdminRoleRepo::deleteAdminRole($adminUserId);
         return json_success('删除成功');
     }
 }
