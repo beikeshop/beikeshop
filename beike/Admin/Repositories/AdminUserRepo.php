@@ -20,11 +20,38 @@ class AdminUserRepo
         $adminUser = new AdminUser([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => bcrypt($data['password']),
+            'active' => true,
         ]);
         $adminUser->save();
 
         $adminUser->assignRole($data['roles']);
         return $adminUser;
+    }
+
+
+    public static function updateAdminUser($data): AdminUser
+    {
+        $id = $data['id'] ?? 0;
+        $password = $data['password'] ?? '';
+        $adminUser = AdminUser::query()->find($id);
+        $userData = [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'active' => true,
+        ];
+        if ($password) {
+            $userData['password'] = bcrypt($password);
+        }
+        $adminUser->update($userData);
+        $adminUser->syncRoles($data['roles']);
+        return $adminUser;
+    }
+
+
+    public static function deleteAdminUser($adminUserId)
+    {
+        $adminUser = AdminUser::query()->find($adminUserId);
+        $adminUser->delete();
     }
 }

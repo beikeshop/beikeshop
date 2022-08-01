@@ -36,11 +36,13 @@ class AdminUserController extends Controller
 
     public function update(Request $request, int $adminUserId)
     {
-        return json_success('更新成功');
+        $adminUser = AdminUserRepo::updateAdminUser($request->toArray());
+        return json_success('更新成功', $adminUser);
     }
 
     public function destroy(Request $request, int $adminUserId)
     {
+        AdminUserRepo::deleteAdminUser($adminUserId);
         return json_success('删除成功');
     }
 }
