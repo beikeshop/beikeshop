@@ -24,7 +24,6 @@ class AdminRoleController extends Controller
         $data = [
             'roles' => Role::query()->get()
         ];
-
         return view('admin::pages.admin_roles.index', $data);
     }
 
