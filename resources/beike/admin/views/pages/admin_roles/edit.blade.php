@@ -51,28 +51,6 @@
           id: @json($role->id ?? null),
           name: @json($role->name ?? ''),
           permissions: @json($permissions ?? []),
-          // roles: [
-          //   {
-          //     title: '商品权限',
-          //     methods: [
-          //       {name:'列表', code: 'list', selected: false},
-          //       {name:'创建', code: 'create', selected: false},
-          //       {name:'查看', code: 'show', selected: false},
-          //       {name:'编辑', code: 'update', selected: false},
-          //       {name:'删除', code: 'destroy', selected: false},
-          //     ]
-          //   },
-          //   {
-          //     title: '订单权限',
-          //     methods: [
-          //       {name:'列表', code: 'list', selected: false},
-          //       {name:'创建', code: 'create', selected: false},
-          //       {name:'查看', code: 'show', selected: false},
-          //       {name:'编辑', code: 'update', selected: false},
-          //       {name:'删除', code: 'destroy', selected: false},
-          //     ]
-          //   },
-          // ]
         },
 
         source: {
@@ -111,6 +89,10 @@
           const url = this.form.id == null ? 'admin_roles' : 'admin_roles/' + this.form.id;
 
           this.$refs[form].validate((valid) => {
+            // this.form.permissions.forEach(e => {
+            //   e.permissions = e.permissions.filter(x => x.selected).map(j => j.code)
+            // });
+
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
               return;
