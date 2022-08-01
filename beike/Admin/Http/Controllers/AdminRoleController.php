@@ -11,15 +11,20 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Beike\Admin\Repositories\PermissionRepo;
 
 class AdminRoleController extends Controller
 {
     public function index()
     {
+        $adminUser = Auth::guard(AdminUser::AUTH_GUARD)->user();
         $data = [
             'roles' => Role::query()->get(),
+            'permissions' => (new PermissionRepo($adminUser))->getAllPermissions(),
         ];
 
         return view('admin::pages.admin_roles.index', $data);
@@ -28,7 +33,6 @@ class AdminRoleController extends Controller
     public function edit(Request $request)
     {
         $data = [];
-
         return view('admin::pages.admin_roles.edit', $data);
     }
 
