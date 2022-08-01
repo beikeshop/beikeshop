@@ -23,7 +23,7 @@
             <div v-for="role, index in form.roles" :key="index">
               <div class="bg-light px-2 d-flex">
                 @{{ role.title }}
-                <div class="row-update ms-2">[<span @click="updateState(true, index)" class="link-secondary">全选</span>/<span @click="updateState(false, index)" class="link-secondary">取消</span>]</div>
+                <div class="row-update ms-2 link-secondary">[<span @click="updateState(true, index)">全选</span> / <span @click="updateState(false, index)">取消</span>]</div>
               </div>
               <div class="role.methods">
                 <div class="d-flex px-3">
@@ -142,6 +142,7 @@
 
     .row-update {
       cursor: pointer;
+      font-size: 12px;
     }
   </style>
 @endpush

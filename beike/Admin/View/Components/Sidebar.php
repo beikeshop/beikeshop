@@ -40,7 +40,7 @@ class Sidebar extends Component
             $this->addLink('品牌管理', admin_route('brands.index'), 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
             $this->addLink('税率设置', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
             $this->addLink('语言管理', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('货币管理', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('货币管理', admin_route('currencies.index'), 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
         }
 
         if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
@@ -59,13 +59,14 @@ class Sidebar extends Component
             $this->addLink('订单列表', admin_route('orders.index'), 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
         }
 
-        if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions'])) {
+        if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies'])) {
             $this->addLink('系统设置', admin_route('settings.index'), 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
             $this->addLink('后台用户', admin_route('admin_users.index'), 'fa fa-tachometer-alt', $this->equalRoute('admin_users.index'));
             $this->addLink('插件列表', admin_route('plugins.index'), 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
             $this->addLink('区域分组', admin_route('regions.index'), 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
             $this->addLink('税率设置', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
             $this->addLink('税费类别', admin_route('tax_classes.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
+            $this->addLink('货币管理', admin_route('currencies.index'), 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
             $this->addLink('首页装修', admin_route('design.index'), 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
         }
 
