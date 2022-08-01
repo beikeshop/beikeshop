@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\AdminUser;
+use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
@@ -23,5 +24,20 @@ class AdminUserController extends Controller
         ];
 
         return view('admin::pages.admin_users.index', $data);
+    }
+
+    public function store(Request $request)
+    {
+        return json_success('保存成功');
+    }
+
+    public function update(Request $request, int $adminUserId)
+    {
+        return json_success('更新成功');
+    }
+
+    public function destroy(Request $request, int $adminUserId)
+    {
+        return json_success('删除成功');
     }
 }
