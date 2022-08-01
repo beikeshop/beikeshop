@@ -36,9 +36,13 @@ class AdminRoleController extends Controller
         return view('admin::pages.admin_roles.edit', $data);
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, int $id)
     {
-        $data = [];
+        $adminUser = Auth::guard(AdminUser::AUTH_GUARD)->user();
+        $data = [
+            'permissions' => (new PermissionRepo($adminUser))->getAllPermissions(),
+            'role' => Role::query()->findOrFail($id)
+        ];
         return view('admin::pages.admin_roles.edit', $data);
     }
 
