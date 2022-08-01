@@ -2,7 +2,7 @@ import http from "../../../js/http";
 window.$http = http;
 const base = document.querySelector('base').href;
 const asset = document.querySelector('meta[name="asset"]').content;
-const editor_language = document.querySelector('meta[name="editor_language"]').content;
+const editor_language = document.querySelector('meta[name="editor_language"]')?.content || 'zh_cn';
 
 $(document).on('click', '.open-file-manager', function(event) {
   const $this = $(this);

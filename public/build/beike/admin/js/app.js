@@ -2063,11 +2063,13 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/http */ "./resources/js/http.js");
+var _document$querySelect;
+
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 var base = document.querySelector('base').href;
 var asset = document.querySelector('meta[name="asset"]').content;
-var editor_language = document.querySelector('meta[name="editor_language"]').content;
+var editor_language = ((_document$querySelect = document.querySelector('meta[name="editor_language"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.content) || 'zh_cn';
 $(document).on('click', '.open-file-manager', function (event) {
   var $this = $(this);
   layer.open({
