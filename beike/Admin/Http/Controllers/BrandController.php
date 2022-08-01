@@ -43,9 +43,9 @@ class BrandController extends Controller
         return json_success("成功修改", $brand);
     }
 
-    public function destroy(Request $request, int $customerId, int $addressId)
+    public function destroy(int $addressId)
     {
-        AddressRepo::delete($addressId);
+        BrandRepo::delete($addressId);
 
         return json_success("已成功删除");
     }
