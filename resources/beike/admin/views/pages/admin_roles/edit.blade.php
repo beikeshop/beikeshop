@@ -6,8 +6,8 @@
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <el-form ref="form" :rules="rules" :model="form" label-width="100px" class="w-max-700">
-        <el-form-item label="角色名称" prop="title">
-          <el-input v-model="form.title" placeholder="角色名称"></el-input>
+        <el-form-item label="角色名称" prop="name">
+          <el-input v-model="form.name" placeholder="角色名称"></el-input>
         </el-form-item>
 
         <el-form-item label="权限" prop="roles">
@@ -48,8 +48,8 @@
 
       data: {
         form: {
-          id: null,
-          name: '',
+          id: @json($role->id ?? null),
+          name: @json($role->name ?? ''),
           permissions: @json($permissions ?? []),
           // roles: [
           //   {
@@ -80,7 +80,7 @@
         },
 
         rules: {
-          title: [{required: true,message: '请输入角色名称',trigger: 'blur'}, ],
+          name: [{required: true,message: '请输入角色名称',trigger: 'blur'}, ],
           description: [{required: true,message: '请输入描述',trigger: 'blur'}, ],
         }
       },
