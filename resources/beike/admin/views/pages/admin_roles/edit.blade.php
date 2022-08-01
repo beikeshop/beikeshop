@@ -10,10 +10,6 @@
           <el-input v-model="form.title" placeholder="角色名称"></el-input>
         </el-form-item>
 
-        <el-form-item label="描述" prop="description">
-          <el-input v-model="form.description" placeholder="描述"></el-input>
-        </el-form-item>
-
         <el-form-item label="权限" prop="roles">
           <div class="roles-wrap border">
             <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
