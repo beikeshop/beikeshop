@@ -75,5 +75,8 @@ Route::prefix($adminName)
 
                 Route::resource('tax_classes', Controllers\TaxClassController::class);
                 Route::resource('tax_rates', Controllers\TaxRateController::class);
+
+                Route::resource('admin_users', Controllers\AdminUserController::class);
+                Route::resource('admin_user_groups', Controllers\AdminUserGroupController::class);
             });
     });

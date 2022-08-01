@@ -2,12 +2,13 @@
 
 namespace Beike\Models;
 
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminUser extends Authenticatable
+class AdminUser extends AuthUser
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     const AUTH_GUARD = 'web_admin';
 
