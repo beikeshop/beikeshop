@@ -15,7 +15,7 @@
   <div id="tax-classes-app" class="card">
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <a href="{{ admin_route('admin_roles.edit', [0]) }}" class="btn btn-primary">创建角色</a>
+        <a href="{{ admin_route('admin_roles.create') }}" class="btn btn-primary">创建角色</a>
       </div>
       <table class="table">
         <thead>

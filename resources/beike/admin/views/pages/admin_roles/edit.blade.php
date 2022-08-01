@@ -16,14 +16,14 @@
               <el-button size="small" @click="updateAllState(true)">选中所有</el-button>
               <el-button size="small" @click="updateAllState(false)">取消选中</el-button>
             </div>
-            <div v-for="role, index in form.roles" :key="index">
+            <div v-for="role, index in form.permissions" :key="index">
               <div class="bg-light px-2 d-flex">
                 @{{ role.title }}
                 <div class="row-update ms-2 link-secondary">[<span @click="updateState(true, index)">全选</span> / <span @click="updateState(false, index)">取消</span>]</div>
               </div>
               <div class="role.methods">
                 <div class="d-flex px-3">
-                  <div v-for="method,index in role.methods" class="me-3">
+                  <div v-for="method,index in role.permissions" class="me-3">
                     <el-checkbox class="text-dark" v-model="method.selected">@{{ method.name }}</el-checkbox>
                   </div>
                 </div>
@@ -48,29 +48,31 @@
 
       data: {
         form: {
+          id: null,
           name: '',
-          roles: [
-            {
-              title: '商品权限',
-              methods: [
-                {name:'列表', code: 'list', selected: false},
-                {name:'创建', code: 'create', selected: false},
-                {name:'查看', code: 'show', selected: false},
-                {name:'编辑', code: 'update', selected: false},
-                {name:'删除', code: 'destroy', selected: false},
-              ]
-            },
-            {
-              title: '订单权限',
-              methods: [
-                {name:'列表', code: 'list', selected: false},
-                {name:'创建', code: 'create', selected: false},
-                {name:'查看', code: 'show', selected: false},
-                {name:'编辑', code: 'update', selected: false},
-                {name:'删除', code: 'destroy', selected: false},
-              ]
-            },
-          ]
+          permissions: @json($permissions ?? []),
+          // roles: [
+          //   {
+          //     title: '商品权限',
+          //     methods: [
+          //       {name:'列表', code: 'list', selected: false},
+          //       {name:'创建', code: 'create', selected: false},
+          //       {name:'查看', code: 'show', selected: false},
+          //       {name:'编辑', code: 'update', selected: false},
+          //       {name:'删除', code: 'destroy', selected: false},
+          //     ]
+          //   },
+          //   {
+          //     title: '订单权限',
+          //     methods: [
+          //       {name:'列表', code: 'list', selected: false},
+          //       {name:'创建', code: 'create', selected: false},
+          //       {name:'查看', code: 'show', selected: false},
+          //       {name:'编辑', code: 'update', selected: false},
+          //       {name:'删除', code: 'destroy', selected: false},
+          //     ]
+          //   },
+          // ]
         },
 
         source: {
@@ -92,12 +94,12 @@
 
       methods: {
         updateState(type, index) {
-          this.form.roles[index].methods.map(e => e.selected = !!type)
+          this.form.permissions[index].permissions.map(e => e.selected = !!type)
         },
 
         updateAllState(type) {
-          this.form.roles.forEach(e => {
-            e.methods.forEach(method => {
+          this.form.permissions.forEach(e => {
+            e.permissions.forEach(method => {
               method.selected = !!type
             });
           });
@@ -105,8 +107,8 @@
 
         addFormSubmit(form) {
           const self = this;
-          const type = this.type == 'add' ? 'post' : 'put';
-          const url = this.type == 'add' ? 'roles' : 'roles/' + this.form.id;
+          const type = this.form.id == null ? 'post' : 'put';
+          const url = this.form.id == null ? 'admin_roles' : 'admin_roles/' + this.form.id;
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
@@ -114,16 +116,9 @@
               return;
             }
 
-            // $http[type](url, this.form).then((res) => {
-            //   this.$message.success(res.message);
-            //   if (this.type == 'add') {
-            //     this.roles.push(res.data)
-            //   } else {
-            //     this.roles[this.index] = res.data
-            //   }
-
-            //   this.show = false
-            // })
+            $http[type](url, this.form).then((res) => {
+              this.$message.success(res.message);
+            })
           });
         },
       }
