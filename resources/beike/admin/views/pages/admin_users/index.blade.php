@@ -64,6 +64,10 @@
           <el-input v-model="dialog.form.email" placeholder="邮箱"></el-input>
         </el-form-item>
 
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="dialog.form.password" placeholder="密码"></el-input>
+        </el-form-item>
+
         <el-form-item label="角色" prop="roles">
           <el-checkbox-group v-model="dialog.form.roles">
             <el-checkbox v-for="roles, index in source.roles" :label="roles.id">@{{roles.name}}</el-checkbox>
@@ -100,6 +104,7 @@
             id: null,
             name: '',
             email: '',
+            password: '',
             roles: [],
           },
         },
@@ -107,6 +112,7 @@
         rules: {
           name: [{required: true,message: '请输入账号名称', trigger: 'blur'}, ],
           email: [{required: true,message: '请输入邮箱', trigger: 'blur'}, ],
+          password: [{required: true,message: '请输入密码', trigger: 'blur'}, ],
           roles: [{type: 'array', required: true, message: '请至少选择一个角色', trigger: 'blur'}],
         }
       },
