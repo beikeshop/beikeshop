@@ -30,8 +30,14 @@ class PermissionRepo
     public function getAllPermissions(): array
     {
         $permissions = [
-            'product' => self::getProductPermissions(),
-            'order' => self::getOrderPermissions(),
+            [
+                'title' => '产品权限',
+                'permissions' => self::getProductPermissions(),
+            ],
+            [
+                'title' => '订单权限',
+                'permissions' => self::getOrderPermissions(),
+            ]
         ];
 
         return $permissions;
