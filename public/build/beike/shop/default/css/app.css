@@ -1063,6 +1063,22 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
   color: #2d68a8;
 }
 
+body.page-list li {
+  list-style: none;
+}
+body.page-list .curser {
+  cursor: pointer;
+}
+body.page-list .curser > li > a {
+  display: block;
+  color: #242424;
+  transition: all 0.5s;
+}
+body.page-list .curser > li > a:hover {
+  text-decoration: none;
+  background-color: #eee;
+}
+
 .module-item {
   position: relative;
 }
