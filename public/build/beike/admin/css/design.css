@@ -1,8 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: "iconfont";
-  src: url("/fonts/design/iconfont.woff") format("woff"), url("/fonts/design/iconfont.ttf") format("truetype");
-  /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  src: url("/fonts/design/iconfont.woff") format("woff"), url("/fonts/design/iconfont.ttf") format("truetype"); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
 }
 body.page-design {
   background-color: #fff;

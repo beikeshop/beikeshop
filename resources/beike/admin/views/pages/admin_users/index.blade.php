@@ -105,9 +105,9 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入账号名称',trigger: 'blur'}, ],
-          email: [{required: true,message: '请输入邮箱',trigger: 'blur'}, ],
-          roles: [{type: 'array', required: true, message: '请至少选择一个角色', trigger: 'change'}],
+          name: [{required: true,message: '请输入账号名称', trigger: 'blur'}, ],
+          email: [{required: true,message: '请输入邮箱', trigger: 'blur'}, ],
+          roles: [{type: 'array', required: true, message: '请至少选择一个角色', trigger: 'blur'}],
         }
       },
 
@@ -122,8 +122,9 @@
 
             this.dialog.form = {
               id: tax.id,
-              title: tax.title,
+              name: tax.name,
               email: tax.email,
+              roles: tax.roles.map(e => e.id),
             }
           }
         },
