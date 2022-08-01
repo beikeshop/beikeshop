@@ -25,6 +25,13 @@ class AdminRoleController extends Controller
         return view('admin::pages.admin_roles.index', $data);
     }
 
+    public function edit(Request $request)
+    {
+        $data = [];
+
+        return view('admin::pages.admin_roles.edit', $data);
+    }
+
     public function store(Request $request)
     {
         return json_success('保存成功');

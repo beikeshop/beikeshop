@@ -22,28 +22,26 @@
           <tr>
             <th>#</th>
             <th>名称</th>
-            <th>描述</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tax, index in admin_users" :key="index">
+          <tr v-for="tax, index in roles" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
-            <td>@{{ tax.email }}</td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
+              <a href="{{ admin_route('admin_roles.edit', [0]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
             </td>
           </tr>
         </tbody>
       </table>
 
-      {{-- {{ $admin_users->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      {{-- {{ $roles->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="创建税费" :visible.sync="dialog.show" width="700px"
@@ -104,7 +102,7 @@
       el: '#tax-classes-app',
 
       data: {
-        admin_users: @json($admin_users ?? []),
+        roles: @json($roles ?? []),
 
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
@@ -143,7 +141,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let tax = this.admin_users[index];
+            let tax = this.roles[index];
 
             this.dialog.form = {
               id: tax.id,
@@ -168,7 +166,7 @@
         addFormSubmit(form) {
           const self = this;
           const type = this.dialog.type == 'add' ? 'post' : 'put';
-          const url = this.dialog.type == 'add' ? 'admin_users' : 'admin_users/' + this.dialog.form.id;
+          const url = this.dialog.type == 'add' ? 'roles' : 'roles/' + this.dialog.form.id;
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
@@ -179,9 +177,9 @@
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
               if (this.dialog.type == 'add') {
-                this.admin_users.push(res.data)
+                this.roles.push(res.data)
               } else {
-                this.admin_users[this.dialog.index] = res.data
+                this.roles[this.dialog.index] = res.data
               }
 
               this.dialog.show = false
@@ -196,9 +194,9 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            $http.delete('admin_users/' + id).then((res) => {
+            $http.delete('roles/' + id).then((res) => {
               this.$message.success(res.message);
-              self.admin_users.splice(index, 1)
+              self.roles.splice(index, 1)
             })
           }).catch(()=>{})
         },
