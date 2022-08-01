@@ -11,9 +11,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Repositories\AdminUserRepo;
 use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
@@ -30,7 +30,8 @@ class AdminUserController extends Controller
 
     public function store(Request $request)
     {
-        return json_success('保存成功');
+        $adminUser = AdminUserRepo::createAdminUser($request->toArray());
+        return json_success('保存成功', $adminUser);
     }
 
     public function update(Request $request, int $adminUserId)
