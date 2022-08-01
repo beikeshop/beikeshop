@@ -21,13 +21,20 @@ class AdminRoleController extends Controller
 {
     public function index()
     {
-        $adminUser = Auth::guard(AdminUser::AUTH_GUARD)->user();
         $data = [
-            'roles' => Role::query()->get(),
-            'permissions' => (new PermissionRepo($adminUser))->getAllPermissions(),
+            'roles' => Role::query()->get()
         ];
 
         return view('admin::pages.admin_roles.index', $data);
+    }
+
+    public function create(Request $request)
+    {
+        $adminUser = Auth::guard(AdminUser::AUTH_GUARD)->user();
+        $data = [
+            'permissions' => (new PermissionRepo($adminUser))->getAllPermissions(),
+        ];
+        return view('admin::pages.admin_roles.edit', $data);
     }
 
     public function edit(Request $request)
