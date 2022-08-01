@@ -418,7 +418,7 @@ header .dropdown:hover .dropdown-menu.dropdown-menu-end {
   right: 0;
 }
 header .top-wrap {
-  height: 44px;
+  height: 40px;
   background: #F7F8FA;
   display: flex;
 }

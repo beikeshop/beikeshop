@@ -15,10 +15,12 @@
           <h6 class="text-uppercase text-black-50 mb-3">产品总数</h6>
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">90</div><span class="mt-n1 ms-2 badge bg-success-soft">+3.5%</span>
+              <div class="fs-2 lh-1 fw-bold">90</div>
+              {{-- <span class="mt-n1 ms-2 badge bg-success-soft">+3.5%</span> --}}
             </div>
             <div><i class="fs-4 bi bi-cart"></i></div>
           </div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-24</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
         </div>
       </div>
     </div>
@@ -33,6 +35,7 @@
             </div>
             <div><i class="fs-4 bi bi-journal-text"></i></div>
           </div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-21%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
         </div>
       </div>
     </div>
@@ -47,6 +50,7 @@
             </div>
             <div><i class="fs-4 bi bi-person"></i></div>
           </div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+30%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
         </div>
       </div>
     </div>
@@ -54,13 +58,14 @@
       <div class="card mb-4">
         {{-- <div class="card-header">会员总数</div> --}}
         <div class="card-body">
-          <h6 class="text-uppercase text-black-50 mb-3">XXXXX</h6>
+          <h6 class="text-uppercase text-black-50 mb-3">销售金额</h6>
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">190</div>
+              <div class="fs-2 lh-1 fw-bold">6666666</div>
             </div>
             <div><i class="fs-4 bi bi-person"></i></div>
           </div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+140%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
         </div>
       </div>
     </div>
@@ -111,6 +116,11 @@
       labels: ['新注册', '最近访问', '活跃用户', '近期下单'],
       datasets: [{
         label: '# of Votes',
+        // backgroundColor: '#ffadb9',
+        // borderColor: '#f7072b',
+        // barThickness: 30,
+        // borderRadius: 20, // This will round the corners
+        // borderSkipped: false, // To make all side rounded
         data: [12, 19, 3, 5],
         // borderRadius: 5,
         backgroundColor: [
@@ -136,8 +146,22 @@
       scales: {
         y: {
           beginAtZero: true,
+          drawBorder: false,
+          // ticks: {
+          //   display: false,
+          // }
+          grid: {
+            // borderDash: [4],
+            drawBorder: false,
+          },
         },
         x: {
+          beginAtZero: true,
+          drawBorder: false,
+          grid: {
+            drawBorder: false,
+            display: false
+          },
           // display: false,
         }
       }

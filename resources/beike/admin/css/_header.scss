@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   z-index: 9;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .05);
 
   .header-left {
     width: 190px;
@@ -27,6 +27,7 @@
 
     .logo {
       max-width: 76%;
+      max-height: 30px;
     }
   }
 
@@ -38,14 +39,30 @@
 
     > .navbar {
       margin-bottom: 0;
-      padding: 0 0 0 .6rem;
+      padding: 0;
       list-style: none;
       > li {
         padding: 0 1rem;
 
+        .dropdown {
+          &:hover {
+            .nav-link {
+              background-color: #eee;
+            }
+
+            .dropdown-menu {
+              display: block;
+              &.dropdown-menu-end {
+                right: 0;
+                left: auto;
+              }
+            }
+          }
+        }
+
         a.nav-link {
           color: #333;
-          padding: 0;
+          padding: 0 6px;
           height: 54px;
           display: flex;
           align-items: center;
@@ -75,6 +92,8 @@
         }
 
         &.active, &:hover {
+          font-weight: bold;
+
           a {
             &:after {
               display: block;

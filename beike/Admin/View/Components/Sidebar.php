@@ -36,6 +36,11 @@ class Sidebar extends Component
         if (Str::startsWith($routeName, ['home.'])) {
             $this->addLink('首页装修', admin_route('design.index'), 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
             $this->addLink('插件列表', admin_route('plugins.index'), 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
+            $this->addLink('商品分类', admin_route('categories.index'), 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
+            $this->addLink('品牌管理', admin_route('brands.index'), 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
+            $this->addLink('税率设置', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('多语言', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('多货币', admin_route('tax_rates.index'), 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
         }
 
         if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
