@@ -204,6 +204,7 @@
           this.dialog.form.name = {};
           this.dialog.form.description = {};
           this.dialog.show = false
+          this.$refs[form].resetFields();
         }
       }
     })

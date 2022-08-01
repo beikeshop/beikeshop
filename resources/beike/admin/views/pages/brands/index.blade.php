@@ -184,6 +184,7 @@
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.status = 1
           this.dialog.show = false
+          this.$refs[form].resetFields();
         }
       }
     })
