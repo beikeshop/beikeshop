@@ -64,7 +64,7 @@
           <el-input v-model="dialog.form.email" placeholder="邮箱"></el-input>
         </el-form-item>
 
-        <el-form-item label="密码" prop="password">
+        <el-form-item label="密码" :prop="dialog.form.id === null || dialog.form.id == '' ? 'password' : ''">
           <el-input v-model="dialog.form.password" placeholder="密码"></el-input>
         </el-form-item>
 

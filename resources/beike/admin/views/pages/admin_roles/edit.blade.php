@@ -16,9 +16,9 @@
 
         <el-form-item label="权限" prop="roles">
           <div class="roles-wrap border">
-            <div class="header-wrap px-2">
-              <button class="btn btn-outline-dark btn-sm me-3" type="button">选中所有</button>
-              <button class="btn btn-outline-dark btn-sm" type="button">取消选中</button>
+            <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
+              <el-button size="small" @click="updateAllState(true)">选中所有</el-button>
+              <el-button size="small" @click="updateAllState(false)">取消选中</el-button>
             </div>
             <div v-for="role, index in form.roles" :key="index">
               <div class="bg-light px-2 d-flex">
@@ -97,6 +97,14 @@
       methods: {
         updateState(type, index) {
           this.form.roles[index].methods.map(e => e.selected = !!type)
+        },
+
+        updateAllState(type) {
+          this.form.roles.forEach(e => {
+            e.methods.forEach(method => {
+              method.selected = !!type
+            });
+          });
         },
 
         addFormSubmit(form) {
