@@ -2,6 +2,7 @@ import http from "../../../js/http";
 window.$http = http;
 const base = document.querySelector('base').href;
 const asset = document.querySelector('meta[name="asset"]').content;
+const editor_language = document.querySelector('meta[name="editor_language"]').content;
 
 $(document).on('click', '.open-file-manager', function(event) {
   const $this = $(this);
@@ -48,4 +49,38 @@ $(document).ready(function ($) {
       }
     },
   });
+
+  tinymceInit()
 });
+
+function tinymceInit() {
+  if (typeof tinymce == 'undefined') {
+    return;
+  }
+
+  tinymce.init({
+    selector: '.tinymce',
+    language: editor_language,
+    branding: false,
+    height: 400,
+    plugins: "link lists fullscreen table hr wordcount image imagetools code",
+    menubar: "",
+    toolbar: "undo redo | toolbarImageButton | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
+    // contextmenu: "link image imagetools table",
+    toolbar_items_size: 'small',
+    image_caption: true,
+    // imagetools_toolbar: 'imageoptions',
+    toolbar_mode: 'wrap',
+    font_formats:
+      "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
+    fontsize_formats: "10px 12px 14px 18px 24px 36px",
+    relative_urls : true,
+    setup:function(ed) {
+      // ed.on('change', function(e) {
+      //   if (e.target.targetElm.dataset.key) {
+      //     app.form[e.target.targetElm.dataset.key] = ed.getContent()
+      //   }
+      // });
+    }
+  });
+}

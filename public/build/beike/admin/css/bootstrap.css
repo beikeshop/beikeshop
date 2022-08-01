@@ -12296,7 +12296,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid #f4f4f4;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
 }
@@ -12323,7 +12323,7 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: flex-end;
   padding: 0.75rem;
-  border-top: 1px solid #e2e2e2;
+  border-top: 1px solid #f4f4f4;
   border-bottom-right-radius: calc(0.3rem - 1px);
   border-bottom-left-radius: calc(0.3rem - 1px);
 }
@@ -13581,7 +13581,7 @@ textarea.form-control-lg {
 }
 
 .border {
-  border: 1px solid #e2e2e2 !important;
+  border: 1px solid #f4f4f4 !important;
 }
 
 .border-0 {
@@ -13589,7 +13589,7 @@ textarea.form-control-lg {
 }
 
 .border-top {
-  border-top: 1px solid #e2e2e2 !important;
+  border-top: 1px solid #f4f4f4 !important;
 }
 
 .border-top-0 {
@@ -13597,7 +13597,7 @@ textarea.form-control-lg {
 }
 
 .border-end {
-  border-right: 1px solid #e2e2e2 !important;
+  border-right: 1px solid #f4f4f4 !important;
 }
 
 .border-end-0 {
@@ -13605,7 +13605,7 @@ textarea.form-control-lg {
 }
 
 .border-bottom {
-  border-bottom: 1px solid #e2e2e2 !important;
+  border-bottom: 1px solid #f4f4f4 !important;
 }
 
 .border-bottom-0 {
@@ -13613,7 +13613,7 @@ textarea.form-control-lg {
 }
 
 .border-start {
-  border-left: 1px solid #e2e2e2 !important;
+  border-left: 1px solid #f4f4f4 !important;
 }
 
 .border-start-0 {

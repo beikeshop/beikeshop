@@ -100,7 +100,7 @@
                 <input type="checkbox" :value="item.id" v-model="selected" />
               </td>
               <td>@{{ item.id }}</td>
-              <td><div class="wh-70"><img :src="item.image" class="img-fluid"></div></td>
+              <td><div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div></td>
               <td>@{{ item.name || '无名称' }}</td>
               <td>@{{ item.price_formatted }}</td>
               <td>@{{ item.created_at }}</td>

@@ -43,6 +43,20 @@ body {
   }
 }
 
+// 生成 100 200 300 ... 1000 的最小宽度
+@for $i from 1 through 10 {
+  .h-min-#{$i}00 {
+    min-width: #{$i}00px;
+  }
+}
+
+// 生成 100 200 300 ... 1000 的最大宽度
+@for $i from 1 through 10 {
+  .w-max-#{$i}00 {
+    max-width: #{$i}00px;
+  }
+}
+
 // 生成 100 200 300 ... 1000 的高度
 @for $i from 1 through 10 {
   .hp-#{$i}00 {

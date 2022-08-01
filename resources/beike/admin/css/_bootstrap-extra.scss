@@ -36,19 +36,19 @@ hr.horizontal.dark {
       margin-right: 0;
     }
 
-    a {
+    .nav-link {
       color: #6c757d;
       border: none;
-      padding: 0.7rem 0;
-    }
+      padding: 0 .2rem 0.7rem;
 
-    a.active {
-      // color: $primary;
-      // color: #12263f;
-      color: #1a1a1a;
-      // font-weight: bold;
-      background-color: transparent;
-      border-bottom: 2px solid $primary;
+      &.active {
+        // color: $primary;
+        // color: #12263f;
+        color: #1a1a1a;
+        font-weight: bold;
+        background-color: transparent;
+        border-bottom: 2px solid $primary;
+      }
     }
   }
 }

@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="tax, index in tax_classes" :key="index">
+          <tr v-for="tax, index in admin_users" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
             <td>@{{ tax.email }}</td>
@@ -43,7 +43,7 @@
         </tbody>
       </table>
 
-      {{-- {{ $tax_classes->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      {{-- {{ $admin_users->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="创建税费" :visible.sync="dialog.show" width="700px"
@@ -104,7 +104,7 @@
       el: '#tax-classes-app',
 
       data: {
-        tax_classes: @json($admin_users ?? []),
+        admin_users: @json($admin_users ?? []),
 
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
@@ -143,7 +143,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let tax = this.tax_classes[index];
+            let tax = this.admin_users[index];
 
             this.dialog.form = {
               id: tax.id,
@@ -168,7 +168,7 @@
         addFormSubmit(form) {
           const self = this;
           const type = this.dialog.type == 'add' ? 'post' : 'put';
-          const url = this.dialog.type == 'add' ? 'tax_classes' : 'tax_classes/' + this.dialog.form.id;
+          const url = this.dialog.type == 'add' ? 'admin_users' : 'admin_users/' + this.dialog.form.id;
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
@@ -179,9 +179,9 @@
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
               if (this.dialog.type == 'add') {
-                this.tax_classes.push(res.data)
+                this.admin_users.push(res.data)
               } else {
-                this.tax_classes[this.dialog.index] = res.data
+                this.admin_users[this.dialog.index] = res.data
               }
 
               this.dialog.show = false
@@ -196,9 +196,9 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            $http.delete('tax_classes/' + id).then((res) => {
+            $http.delete('admin_users/' + id).then((res) => {
               this.$message.success(res.message);
-              self.tax_classes.splice(index, 1)
+              self.admin_users.splice(index, 1)
             })
           }).catch(()=>{})
         },
