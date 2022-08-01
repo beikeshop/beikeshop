@@ -44,6 +44,7 @@ class AdminRoleController extends Controller
             'permissions' => (new PermissionRepo($adminUser))->getAllPermissions(),
             'role' => Role::query()->findOrFail($id)
         ];
+        app()['cache']->forget('spatie.permission.cache');
         return view('admin::pages.admin_roles.edit', $data);
     }
 
