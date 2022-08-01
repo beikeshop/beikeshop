@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Repositories;
 
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class AdminRoleRepo
@@ -29,7 +30,28 @@ class AdminRoleRepo
 
     public static function updateAdminRole($data)
     {
+        $adminRole = Role::findById($data['id']);
+        $adminRole->update([
+            'name' => $data['name'],
+            'guard_name' => 'web_admin',
+        ]);
 
+        $permissions = $data['permissions'];
+        $items = [];
+        foreach ($permissions as $groupedPermissions) {
+            foreach ($groupedPermissions['permissions'] as $groupedPermission) {
+                if ($groupedPermission['selected']) {
+                    $code = $groupedPermission['code'];
+                    Permission::findOrCreate($code);
+                    $items[] = $code;
+                }
+            }
+        }
+        if (empty($items)) {
+            throw new \Exception('无效的权限');
+        }
+        $adminRole->givePermissionTo($items);
+        return $adminRole;
     }
 
 
