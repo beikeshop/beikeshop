@@ -61,11 +61,11 @@ class AdminRoleRepo
     /**
      * 同步所有权限
      *
-     * @param $adminRole
+     * @param Role $adminRole
      * @param $permissions
      * @throws \Exception
      */
-    private static function syncPermissions($adminRole, $permissions)
+    private static function syncPermissions(Role $adminRole, $permissions)
     {
         $items = [];
         foreach ($permissions as $groupedPermissions) {

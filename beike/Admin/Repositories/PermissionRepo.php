@@ -40,22 +40,15 @@ class PermissionRepo
     public function getAllPermissions(): array
     {
         $permissions = [
-            [
-                'title' => '订单管理',
-                'permissions' => $this->getOrderPermissions(),
-            ],
-            [
-                'title' => '商品管理',
-                'permissions' => $this->getProductPermissions(),
-            ],
-            [
-                'title' => '客户管理',
-                'permissions' => $this->getCustomerPermissions(),
-            ],
-            [
-                'title' => '系统设置',
-                'permissions' => $this->getSettingPermissions(),
-            ],
+            ['title' => '订单管理', 'permissions' => $this->getOrderPermissions()],
+            ['title' => '商品管理', 'permissions' => $this->getProductPermissions()],
+            ['title' => '客户管理', 'permissions' => $this->getCustomerPermissions()],
+            ['title' => '系统设置', 'permissions' => $this->getSettingPermissions()],
+            ['title' => '插件管理', 'permissions' => $this->getPluginPermissions()],
+            ['title' => '区域分组', 'permissions' => $this->getRegionPermissions()],
+            ['title' => '税率设置', 'permissions' => $this->getTaxRatePermissions()],
+            ['title' => '税费类别', 'permissions' => $this->getTaxClassPermissions()],
+            ['title' => '货币管理', 'permissions' => $this->getCurrencyPermissions()],
         ];
 
         return $permissions;
@@ -114,7 +107,7 @@ class PermissionRepo
 
 
     /**
-     * 会员权限列表
+     * 设置权限列表
      *
      * @return \string[][]
      */
@@ -122,13 +115,96 @@ class PermissionRepo
     {
         return [
             ['code' => 'settings_index', 'name' => '系统设置', 'selected' => $this->hasPermission('settings_index')],
-            ['code' => 'admin_users_index', 'name' => '后台用户', 'selected' => $this->hasPermission('admin_users_index')],
-            ['code' => 'plugins_index', 'name' => '插件列表', 'selected' => $this->hasPermission('plugins_index')],
-            ['code' => 'regions_index', 'name' => '区域分组', 'selected' => $this->hasPermission('regions_index')],
-            ['code' => 'tax_rates_index', 'name' => '税费设置', 'selected' => $this->hasPermission('tax_rates_index')],
-            ['code' => 'tax_classes_index', 'name' => '税费类别', 'selected' => $this->hasPermission('tax_classes_index')],
-            ['code' => 'currencies_index', 'name' => '货币管理', 'selected' => $this->hasPermission('currencies_index')],
             ['code' => 'design_index', 'name' => '首页装修', 'selected' => $this->hasPermission('design_index')],
+        ];
+    }
+
+
+    /**
+     * 插件权限列表
+     *
+     * @return array[]
+     */
+    private function getPluginPermissions(): array
+    {
+        return [
+            ['code' => 'plugins_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
+            ['code' => 'plugins_import', 'name' => '上传', 'selected' => $this->hasPermission('customers_create')],
+            ['code' => 'plugins_update', 'name' => '保存更新', 'selected' => $this->hasPermission('customers_show')],
+            ['code' => 'plugins_edit', 'name' => '编辑', 'selected' => $this->hasPermission('customers_update')],
+            ['code' => 'plugins_install', 'name' => '安装', 'selected' => $this->hasPermission('customers_delete')],
+            ['code' => 'plugins_update_status', 'name' => '更改状态', 'selected' => $this->hasPermission('customers_delete')],
+            ['code' => 'plugins_uninstall', 'name' => '卸载', 'selected' => $this->hasPermission('customers_delete')],
+        ];
+    }
+
+
+    /**
+     * 区域分组权限列表
+     *
+     * @return array[]
+     */
+    private function getRegionPermissions(): array
+    {
+        return [
+            ['code' => 'regions_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
+            ['code' => 'regions_store', 'name' => '保存', 'selected' => $this->hasPermission('customers_create')],
+            ['code' => 'regions_create', 'name' => '创建', 'selected' => $this->hasPermission('customers_show')],
+            ['code' => 'regions_show', 'name' => '详情', 'selected' => $this->hasPermission('customers_update')],
+            ['code' => 'regions_update', 'name' => '安装', 'selected' => $this->hasPermission('customers_delete')],
+            ['code' => 'regions_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('customers_delete')],
+            ['code' => 'regions_edit', 'name' => '卸载', 'selected' => $this->hasPermission('customers_delete')],
+        ];
+    }
+
+
+    /**
+     * 获取税率权限列表
+     *
+     * @return array[]
+     */
+    private function getTaxRatePermissions(): array
+    {
+        return [
+            ['code' => 'tax_rates_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
+            ['code' => 'tax_rates_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
+            ['code' => 'tax_rates_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
+            ['code' => 'tax_rates_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
+            ['code' => 'tax_rates_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'tax_rates_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'tax_rates_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
+        ];
+    }
+
+
+    /**
+     * 获取税类权限列表
+     *
+     * @return array[]
+     */
+    private function getTaxClassPermissions(): array
+    {
+        return [
+            ['code' => 'tax_classes_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
+            ['code' => 'tax_classes_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
+            ['code' => 'tax_classes_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
+            ['code' => 'tax_classes_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
+            ['code' => 'tax_classes_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'tax_classes_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'tax_classes_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
+        ];
+    }
+
+    private function getCurrencyPermissions()
+    {
+        return [
+            ['code' => 'currencies_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
+            ['code' => 'currencies_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
+            ['code' => 'currencies_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
+            ['code' => 'currencies_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
+            ['code' => 'currencies_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'currencies_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
+            ['code' => 'currencies_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
         ];
     }
 
