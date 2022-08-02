@@ -28,13 +28,27 @@ class Header extends Component
      */
     public function render()
     {
-        $this->addLink('管理首页', 'home.index', equal_route('admin.home.index'));
-        $this->addLink('订单管理', 'orders.index', equal_route('admin.orders.index'));
-        $this->addLink('商品管理', 'products.index', equal_route('admin.products.index'));
-        $this->addLink('会员管理', 'customers.index', equal_route('admin.customers.index'));
-        $this->addLink('系统设置', 'settings.index', equal_route('admin.settings.index'));
-
+        $preparedMenus = $this->prepareMenus();
+        foreach ($preparedMenus as $menu) {
+            $this->addLink($menu['name'], $menu['route'], equal_route("admin.{$menu['name']}"));
+        }
         return view('admin::components.header');
+    }
+
+
+    /**
+     * 默认菜单
+     */
+    private function prepareMenus()
+    {
+        $menus = [
+            ['name' => trans('admin/header.home'), 'route' => 'home.index'],
+            ['name' => trans('admin/header.order'), 'route' => 'orders.index'],
+            ['name' => trans('admin/header.product'), 'route' => 'products.index'],
+            ['name' => trans('admin/header.customer'), 'route' => 'customers.index'],
+            ['name' => trans('admin/header.setting'), 'route' => 'settings.index'],
+        ];
+        return hook_filter('admin.header_menus', $menus);
     }
 
 
