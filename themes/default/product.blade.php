@@ -5,6 +5,7 @@
 @push('header')
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/elevatezoom/jquery.elevateZoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   {{-- <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}"> --}}
@@ -21,9 +22,13 @@
         <div class="product-image d-flex align-items-start">
 
           <div class="left" v-if="images.length">
-            <div class="swiper mySwiper">
+            <div class="swiper" id="product-thumbnail-gallery">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
+                <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
+                  <a href="javascript:;" :data-image="image.popup">
+                    <img :src="image.thumb" class="img-fluid" :data-zoom-image="image.popup">
+                  </a>
+                </div>
               </div>
               <div class="swiper-pager">
                   <div class="swiper-button-next new-feature-slideshow-next"></div>
@@ -33,8 +38,9 @@
           </div>
 
           <div class="right">
-            <img :src="images[0]?.image || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+            <img :src="images[0]?.preview || '{{ asset('image/placeholder.png') }}'" :data-zoom-image="images[0]?.popup || '{{ asset('image/placeholder.png') }}'" id="elevate-zoom" class="img-fluid">
           </div>
+
         </div>
       </div>
 
@@ -135,6 +141,8 @@
 
 @push('add-scripts')
   <script>
+    let initZoom = null;
+
     let app = new Vue({
       el: '#product-app',
 
@@ -189,6 +197,7 @@
 
       methods: {
         checkedVariableValue(variable_idnex, value_index, value) {
+          $('.product-image .swiper .swiper-slide').eq(0).addClass('active').siblings().removeClass('active');
           this.source.variables[variable_idnex].values.forEach((v, i) => {
             v.selected = i == value_index
           })
@@ -211,6 +220,12 @@
           const spuImages = @json($product['images'] ?? []);
           this.images = [...sku.images, ...spuImages]
           this.product = sku;
+          if (initZoom) {
+            this.$nextTick(() => {
+              initZoom()
+
+            })
+          }
         },
 
         addCart(isBuyNow = false) {
@@ -260,13 +275,12 @@
       }
     });
 
-    $("body").on("mouseover", ".product-image .left > .swiper > div > div", function() {
-      const image = $(this).data('image')
-      $('.product-image .right').find('img').attr('src', image);
+    $(document).on("mouseover", ".product-image .swiper .swiper-slide", function() {
       $(this).addClass('active').siblings().removeClass('active');
+      $(this).find('a').trigger('click');
     });
 
-    var swiper = new Swiper(".mySwiper", {
+    var swiper = new Swiper("#product-thumbnail-gallery", {
       direction: "vertical",
       slidesPerView: 6,
       spaceBetween:10,
@@ -279,6 +293,23 @@
         prevEl: '.swiper-button-prev',
       },
       observer: true,
+      observeParents: true
+    });
+
+    $(document).ready(function () {
+      initZoom = function(params) {
+        $('#elevate-zoom').elevateZoom({
+          showLens: true,
+          zoomType: 'inner',
+          zoomLens: false,
+          borderColour: '#eaeaea',
+          gallery: 'product-thumbnail-gallery',
+          galleryActiveClass: 'active',
+          cursor:'pointer',
+        });
+      }
+
+      initZoom()
     });
 
   </script>
