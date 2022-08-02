@@ -23,8 +23,10 @@
       <div class="flex-wrap d-flex justity-content-between align-items-center">
         @foreach ($brand as $item)
           <div class="text-center">
-            <img src="{{ $item['logo'] }}" class="img-responsive mx-5" alt="{{ $item['name'] }}">
-            <p class="mb-0 mt-1">{{ $item['name'] }}</p>
+            <a href="{{ shop_route('brands.show', [$item['id']]) }}">
+              <img src="{{ $item['logo'] }}" class="img-fluid mx-5" alt="{{ $item['name'] }}">
+              <p class="mb-0 mt-1">{{ $item['name'] }}</p>
+            </a>
           </div>
         @endforeach
       </div>

@@ -1066,6 +1066,10 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
 body.page-list li {
   list-style: none;
 }
+body.page-list li a {
+  color: #242424;
+  text-decoration: none;
+}
 body.page-list .curser {
   cursor: pointer;
 }

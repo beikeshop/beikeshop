@@ -3,6 +3,10 @@
 body.page-list {
   li {
     list-style: none;
+    a{
+      color: #242424;
+      text-decoration: none;
+    }
   }
 
   .curser {

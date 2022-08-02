@@ -4,6 +4,8 @@
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   {{-- <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}"> --}}
 @endpush
@@ -17,9 +19,13 @@
     <div class="row mb-5" id="product-top">
       <div class="col-12 col-md-6">
         <div class="product-image d-flex align-items-start">
-          <div class="left" v-if="images.length">
-            <div :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
+
+          <div class="left swiper mySwiper" v-if="images.length">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
+            </div>
           </div>
+
           <div class="right">
             <img :src="images[0]?.image || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
           </div>
