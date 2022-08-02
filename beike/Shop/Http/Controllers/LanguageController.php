@@ -18,7 +18,7 @@ class LanguageController extends Controller
 {
     public function index($lang)
     {
-        if (array_key_exists($lang, languages())) {
+        if (in_array($lang, languages()->toArray())) {
             Session::put('locale', $lang);
         }
         return Redirect::back();
