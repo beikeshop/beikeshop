@@ -2,26 +2,30 @@
 
 namespace App\Http\Middleware;
 
-use Beike\Repositories\LanguageRepo;
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class Language
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return Response|RedirectResponse
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session()->has('locale') AND array_key_exists(Session()->get('locale'), languages())) {
-            App::setLocale(Session()->get('locale'));
-        }
-        else { // This is optional as Laravel will automatically set the fallback language if there is none specified
+        if (session()->has('locale') AND in_array(session()->get('locale'), languages()->toArray())) {
+            App::setLocale(session()->get('locale'));
+        } else { // This is optional as Laravel will automatically set the fallback language if there is none specified
             App::setLocale(system_setting('base.locale'));
         }
         return $next($request);
