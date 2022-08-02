@@ -12,8 +12,8 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\AdminUser;
-use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 
 class PermissionRepo
 {
@@ -62,13 +62,9 @@ class PermissionRepo
      */
     private function getOrderPermissions(): array
     {
-        return [
-            ['code' => 'orders_index', 'name' => '列表', 'selected' => $this->hasPermission('orders_index')],
-            ['code' => 'orders_create', 'name' => '创建', 'selected' => $this->hasPermission('orders_create')],
-            ['code' => 'orders_show', 'name' => '详情', 'selected' => $this->hasPermission('orders_show')],
-            ['code' => 'orders_update', 'name' => '编辑', 'selected' => $this->hasPermission('orders_update')],
-            ['code' => 'orders_delete', 'name' => '删除', 'selected' => $this->hasPermission('orders_delete')],
-        ];
+        $routes = ['orders_index', 'orders_create', 'orders_edit', 'orders_update', 'orders_delete'];
+        $items = $this->getPermissionList('order', $routes);
+        return $items;
     }
 
 
@@ -79,13 +75,9 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        return [
-            ['code' => 'products_index', 'name' => '列表', 'selected' => $this->hasPermission('products_index')],
-            ['code' => 'products_create', 'name' => '创建', 'selected' => $this->hasPermission('products_create')],
-            ['code' => 'products_show', 'name' => '详情', 'selected' => $this->hasPermission('products_show')],
-            ['code' => 'products_update', 'name' => '编辑', 'selected' => $this->hasPermission('products_update')],
-            ['code' => 'products_delete', 'name' => '删除', 'selected' => $this->hasPermission('products_delete')],
-        ];
+        $routes = ['products_index', 'products_create', 'products_edit', 'products_update', 'products_delete'];
+        $items = $this->getPermissionList('product', $routes);
+        return $items;
     }
 
 
@@ -96,13 +88,9 @@ class PermissionRepo
      */
     private function getCustomerPermissions(): array
     {
-        return [
-            ['code' => 'customers_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
-            ['code' => 'customers_create', 'name' => '创建', 'selected' => $this->hasPermission('customers_create')],
-            ['code' => 'customers_show', 'name' => '详情', 'selected' => $this->hasPermission('customers_show')],
-            ['code' => 'customers_update', 'name' => '编辑', 'selected' => $this->hasPermission('customers_update')],
-            ['code' => 'customers_delete', 'name' => '删除', 'selected' => $this->hasPermission('customers_delete')],
-        ];
+        $routes = ['customers_index', 'customers_create', 'customers_edit', 'customers_update', 'customers_delete'];
+        $items = $this->getPermissionList('customer', $routes);
+        return $items;
     }
 
 
@@ -114,8 +102,8 @@ class PermissionRepo
     private function getSettingPermissions(): array
     {
         return [
-            ['code' => 'settings_index', 'name' => '系统设置', 'selected' => $this->hasPermission('settings_index')],
-            ['code' => 'design_index', 'name' => '首页装修', 'selected' => $this->hasPermission('design_index')],
+            ['code' => 'settings_index', 'name' => trans('setting.settings_index'), 'selected' => $this->hasPermission('settings_index')],
+            ['code' => 'design_index', 'name' => trans('setting.design_index'), 'selected' => $this->hasPermission('design_index')],
         ];
     }
 
@@ -127,15 +115,9 @@ class PermissionRepo
      */
     private function getPluginPermissions(): array
     {
-        return [
-            ['code' => 'plugins_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
-            ['code' => 'plugins_import', 'name' => '上传', 'selected' => $this->hasPermission('customers_create')],
-            ['code' => 'plugins_update', 'name' => '保存更新', 'selected' => $this->hasPermission('customers_show')],
-            ['code' => 'plugins_edit', 'name' => '编辑', 'selected' => $this->hasPermission('customers_update')],
-            ['code' => 'plugins_install', 'name' => '安装', 'selected' => $this->hasPermission('customers_delete')],
-            ['code' => 'plugins_update_status', 'name' => '更改状态', 'selected' => $this->hasPermission('customers_delete')],
-            ['code' => 'plugins_uninstall', 'name' => '卸载', 'selected' => $this->hasPermission('customers_delete')],
-        ];
+        $routes = ['plugins_index', 'plugins_import', 'plugins_update', 'plugins_edit', 'plugins_install', 'plugins_update_status', 'plugins_uninstall'];
+        $items = $this->getPermissionList('plugin', $routes);
+        return $items;
     }
 
 
@@ -146,15 +128,9 @@ class PermissionRepo
      */
     private function getRegionPermissions(): array
     {
-        return [
-            ['code' => 'regions_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
-            ['code' => 'regions_store', 'name' => '保存', 'selected' => $this->hasPermission('customers_create')],
-            ['code' => 'regions_create', 'name' => '创建', 'selected' => $this->hasPermission('customers_show')],
-            ['code' => 'regions_show', 'name' => '详情', 'selected' => $this->hasPermission('customers_update')],
-            ['code' => 'regions_update', 'name' => '安装', 'selected' => $this->hasPermission('customers_delete')],
-            ['code' => 'regions_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('customers_delete')],
-            ['code' => 'regions_edit', 'name' => '卸载', 'selected' => $this->hasPermission('customers_delete')],
-        ];
+        $routes = ['regions_index', 'regions_create', 'regions_edit', 'regions_update', 'regions_delete'];
+        $items = $this->getPermissionList('region', $routes);
+        return $items;
     }
 
 
@@ -165,15 +141,9 @@ class PermissionRepo
      */
     private function getTaxRatePermissions(): array
     {
-        return [
-            ['code' => 'tax_rates_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
-            ['code' => 'tax_rates_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
-            ['code' => 'tax_rates_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
-            ['code' => 'tax_rates_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
-            ['code' => 'tax_rates_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'tax_rates_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'tax_rates_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
-        ];
+        $routes = ['tax_rates_index', 'tax_rates_create', 'tax_rates_edit', 'tax_rates_update', 'tax_rates_delete'];
+        $items = $this->getPermissionList('tax_rate', $routes);
+        return $items;
     }
 
 
@@ -184,30 +154,40 @@ class PermissionRepo
      */
     private function getTaxClassPermissions(): array
     {
-        return [
-            ['code' => 'tax_classes_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
-            ['code' => 'tax_classes_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
-            ['code' => 'tax_classes_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
-            ['code' => 'tax_classes_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
-            ['code' => 'tax_classes_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'tax_classes_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'tax_classes_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
-        ];
+        $routes = ['tax_classes_index', 'tax_classes_create', 'tax_classes_edit', 'tax_classes_update', 'tax_classes_delete'];
+        $items = $this->getPermissionList('tax_class', $routes);
+        return $items;
     }
 
-    private function getCurrencyPermissions()
+
+    /**
+     * 获取汇率权限列表
+     *
+     * @return array[]
+     */
+    private function getCurrencyPermissions(): array
     {
-        return [
-            ['code' => 'currencies_index', 'name' => '列表', 'selected' => $this->hasPermission('tax_rates_index')],
-            ['code' => 'currencies_store', 'name' => '保存', 'selected' => $this->hasPermission('tax_rates_create')],
-            ['code' => 'currencies_create', 'name' => '创建', 'selected' => $this->hasPermission('tax_rates_show')],
-            ['code' => 'currencies_show', 'name' => '详情', 'selected' => $this->hasPermission('tax_rates_update')],
-            ['code' => 'currencies_update', 'name' => '安装', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'currencies_destroy', 'name' => '更改状态', 'selected' => $this->hasPermission('tax_rates_delete')],
-            ['code' => 'currencies_edit', 'name' => '卸载', 'selected' => $this->hasPermission('tax_rates_delete')],
-        ];
+        $routes = ['currencies_index', 'currencies_create', 'currencies_edit', 'currencies_update', 'currencies_delete'];
+        $items = $this->getPermissionList('currency', $routes);
+        return $items;
     }
 
+
+    /**
+     * 根据模块和路由返回权限列表
+     *
+     * @param $module
+     * @param $routes
+     * @return array
+     */
+    private function getPermissionList($module, $routes): array
+    {
+        $items = [];
+        foreach ($routes as $route) {
+            $items[] = ['code' => $route, 'name' => trans("{$module}.{$route}"), 'selected' => $this->hasPermission($route)];
+        }
+        return $items;
+    }
 
     /**
      * 判断当前用户或者角色是否有权限

@@ -11,10 +11,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Beike\Admin\Repositories\AdminRoleRepo;
 use Beike\Admin\Repositories\PermissionRepo;
 
@@ -39,7 +38,7 @@ class AdminRoleController extends Controller
 
     public function edit(Request $request, int $id)
     {
-        app()['cache']->forget('spatie.permission.cache');
+        Cache::forget('spatie.permission.cache');
         $role = Role::query()->findOrFail($id);
         $permissionRepo = (new PermissionRepo())->setRole($role);
         $data = [
