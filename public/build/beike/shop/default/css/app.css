@@ -622,20 +622,64 @@ body.page-account .account-card .order-wrap .text {
   font-size: 1rem;
 }
 
+body.page-product .product-image .swiper {
+  height: 538px;
+}
+body.page-product .product-image .swiper:hover .swiper-pager > div {
+  background-color: rgba(255, 255, 255, 0.548);
+  opacity: 1;
+}
+body.page-product .product-image .swiper:hover .swiper-pager > div:hover {
+  background-color: rgb(255, 255, 255);
+}
 body.page-product .product-image .left {
   margin-right: 1rem;
 }
-body.page-product .product-image .left > div {
+body.page-product .product-image .left > .swiper > div > div {
   border: 1px solid #eee;
   margin-bottom: 10px;
   width: 80px;
   height: 80px;
   padding: 2px;
-  background-color: #fff;
   cursor: pointer;
 }
-body.page-product .product-image .left > div.active, body.page-product .product-image .left > div:hover {
+body.page-product .product-image .left > .swiper > div > div.active, body.page-product .product-image .left > .swiper > div > div:hover {
   border: 1px solid #3a3a3a;
+}
+body.page-product .product-image .left .swiper-pager > div {
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0);
+  transition: all 0.5s;
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-next {
+  border: 0;
+  top: 518px;
+  left: 50%;
+  height: 55px;
+  width: 30px;
+  transform-origin: center;
+  transform: rotate(90deg) translate(0, 25%);
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-next:hover, body.page-product .product-image .left .swiper-pager .swiper-button-next.active {
+  border: 0 !important;
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-next::after {
+  font-size: 18px;
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-prev {
+  border: 0;
+  top: 8px;
+  left: 50%;
+  height: 55px;
+  width: 30px;
+  transform-origin: center;
+  transform: rotate(90deg) translate(0, 25%);
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-prev:hover, body.page-product .product-image .left .swiper-pager .swiper-button-prev.active {
+  border: 0 !important;
+}
+body.page-product .product-image .left .swiper-pager .swiper-button-prev::after {
+  font-size: 18px;
 }
 body.page-product .product-image .right {
   border: 1px solid #eee;

@@ -2,20 +2,75 @@
 
 body.page-product {
   .product-image {
+    .swiper {
+      height: 538px;
+      &:hover {
+        .swiper-pager > div {
+          background-color: rgba(255, 255, 255, 0.548);
+          opacity: 1;
+          &:hover {
+            background-color: rgba(255, 255, 255);
+          }
+        }
+      }
+    }
     .left {
       margin-right: 1rem;
 
-      > div {
+      > .swiper > div > div{
         border: 1px solid #eee;
         margin-bottom: 10px;
         width: 80px;
         height: 80px;
         padding: 2px;
-        background-color: #fff;
         cursor: pointer;
 
         &.active, &:hover {
           border: 1px solid #3a3a3a;
+        }
+      }
+
+      .swiper-pager {
+        > div {
+          opacity: 0;
+          background-color: rgba(255, 255, 255, 0);
+          transition: all .5s;
+        }
+        .swiper-button-next {
+          border: 0;
+          top: 518px;
+          left: 50%;
+
+          height: 55px;
+          width: 30px;
+          transform-origin: center;
+          transform: rotate(90deg) translate(0,25%);
+
+          &:hover,&.active {
+            border: 0 !important;
+          }
+
+          &::after {
+            font-size: 18px;
+          }
+        }
+
+        .swiper-button-prev{
+          border: 0;
+          top: 8px;
+          left: 50%;
+          height: 55px;
+          width: 30px;
+          transform-origin: center;
+          transform: rotate(90deg) translate(0,25%);
+
+          &:hover,&.active {
+            border: 0 !important;
+          }
+
+          &::after {
+            font-size: 18px;
+          }
         }
       }
     }

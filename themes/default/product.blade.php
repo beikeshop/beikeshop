@@ -20,9 +20,15 @@
       <div class="col-12 col-md-6">
         <div class="product-image d-flex align-items-start">
 
-          <div class="left swiper mySwiper" v-if="images.length">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide" :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
+          <div class="left" v-if="images.length">
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" :class="!index ? 'active' : ''" :data-image="image.image" v-for="image, index in images"><img :src="image.thumb" class="img-fluid"></div>
+              </div>
+              <div class="swiper-pager">
+                  <div class="swiper-button-next new-feature-slideshow-next"></div>
+                  <div class="swiper-button-prev new-feature-slideshow-prev"></div>
+              </div>
             </div>
           </div>
 
@@ -254,10 +260,26 @@
       }
     });
 
-    $("body").on("mouseover", ".product-image .left > div", function() {
+    $("body").on("mouseover", ".product-image .left > .swiper > div > div", function() {
       const image = $(this).data('image')
       $('.product-image .right').find('img').attr('src', image);
       $(this).addClass('active').siblings().removeClass('active');
     });
+
+    var swiper = new Swiper(".mySwiper", {
+      direction: "vertical",
+      slidesPerView: 6,
+      spaceBetween:10,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      observer: true,
+    });
+
   </script>
 @endpush
