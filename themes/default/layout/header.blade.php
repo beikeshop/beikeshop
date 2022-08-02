@@ -17,13 +17,13 @@
         <div class="dropdown">
           <a class="btn dropdown-toggle" href="#" role="button" id="language-dropdown" data-toggle="dropdown"
             aria-expanded="false">
-            Language
+            {{ current_language() }}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="language-dropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            @foreach ($languages as $language)
+            <a class="dropdown-item" href="{{ shop_route('lang.switch', [$language->code]) }}">{{ $language->name }}</a>
+            @endforeach
           </div>
         </div>
       </div>

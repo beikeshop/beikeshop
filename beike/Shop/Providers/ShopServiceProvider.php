@@ -90,7 +90,7 @@ class ShopServiceProvider extends ServiceProvider
     protected function loadShareViewData()
     {
         View::share('design', request('design') == 1);
-        View::share('languages', languages());
+        View::share('languages', \Beike\Repositories\LanguageRepo::enabled());
         View::share('shop_base_url', shop_route('home.index'));
 
         $menuCategories = CategoryRepo::getTwoLevelCategories();

@@ -1,6 +1,7 @@
 <?php
 
 use Beike\Models\Customer;
+use Beike\Models\Language;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
 use Beike\Services\CurrencyService;
@@ -264,7 +265,18 @@ function current_language_id(): int
  */
 function current_language_code(): string
 {
-    return 'zh_cn';
+    return Session::get('locale') ?? system_setting('base.locale');
+}
+
+/**
+ * 当前语言
+ *
+ * @return string
+ */
+function current_language(): string
+{
+    $code = current_language_code();
+    return Language::query()->where('code', $code)->first()->name;
 }
 
 /**
