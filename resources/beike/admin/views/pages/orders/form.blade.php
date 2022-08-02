@@ -50,36 +50,40 @@
       </div>
     </div>
   </div>
-
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">商品信息</h6></div>
     <div class="card-body">
-      <table class="table table-bordered">
-        <thead class="table-light">
+      <table class="table ">
+        <thead class="">
           <tr>
-            <td>ID</td>
-            <td>商品</td>
-            <td>价格</td>
-            <td>数量</td>
-            <td>sku</td>
+            <th>ID</th>
+            <th>商品</th>
+            <th>价格</th>
+            <th class="text-end">数量</th>
+            <th class="text-end">sku</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($order->orderProducts as $product)
           <tr>
             <td>{{ $product->id }}</td>
-            <td>{{ $product->name }}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
+              </div>
+            </td>
             <td>{{ $product->price }}</td>
-            <td>{{ $product->quantity }}</td>
-            <td>{{ $product->product_sku }}</td>
+            <td class="text-end">{{ $product->quantity }}</td>
+            <td class="text-end">{{ $product->product_sku }}</td>
           </tr>
           @endforeach
         </tbody>
         <tfoot>
           @foreach ($order->orderTotals as $order)
             <tr>
-              <td colspan="5" class="text-end">{{ $order->title }}： <span class="fw-bold">{{ $order->value }}</span></td>
-              {{-- <td>{{ $order->title }}: {{ $order->value }}</td> --}}
+              {{-- <td colspan="4" class="text-end">{{ $order->title }}： <span class="fw-bold">{{ $order->value }}</span></td> --}}
+              <td colspan="4" class="text-end">{{ $order->title }}</td>
+              <td class="text-end"><span class="fw-bold">{{ $order->value }}</span></td>
             </tr>
           @endforeach
         </tfoot>

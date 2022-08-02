@@ -5,13 +5,13 @@
 @section('content')
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      <el-form ref="form" :rules="rules" :model="form" label-width="100px" class="w-max-700">
+      <el-form ref="form" :rules="rules" :model="form" label-width="100px">
         <el-form-item label="角色名称" prop="name">
-          <el-input v-model="form.name" placeholder="角色名称"></el-input>
+          <el-input v-model="form.name" placeholder="角色名称" class="w-auto"></el-input>
         </el-form-item>
 
         <el-form-item label="权限" prop="roles">
-          <div class="roles-wrap border">
+          <div class="roles-wrap border w-max-900">
             <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
               <el-button size="small" @click="updateAllState(true)">选中所有</el-button>
               <el-button size="small" @click="updateAllState(false)">取消选中</el-button>
@@ -21,8 +21,8 @@
                 @{{ role.title }}
                 <div class="row-update ms-2 link-secondary">[<span @click="updateState(true, index)">全选</span> / <span @click="updateState(false, index)">取消</span>]</div>
               </div>
-              <div class="role.methods">
-                <div class="d-flex px-3">
+              <div class="role-methods">
+                <div class="d-flex flex-wrap px-3">
                   <div v-for="method,index in role.permissions" class="me-3">
                     <el-checkbox class="text-dark" v-model="method.selected">@{{ method.name }}</el-checkbox>
                   </div>
@@ -99,7 +99,8 @@
             }
 
             $http[type](url, this.form).then((res) => {
-              this.$message.success(res.message);
+              layer.msg(res.message);
+              window.history.back();
             })
           });
         },

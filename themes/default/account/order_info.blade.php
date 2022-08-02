@@ -58,6 +58,20 @@
         </div>
 
         <div class="card mb-4">
+          <div class="card-header"><h5 class="card-title">Order Total</h5></div>
+          <div class="card-body">
+            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+              @foreach ($order->orderTotals as $order)
+              <li class="list-group-item d-flex">
+                <span>{{ $order->title }}</span>
+                <span class="ms-auto">{{ $order->value }}</span>
+              </li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+
+        <div class="card mb-4">
           <div class="card-header"><h5 class="card-title">物流状态</h5></div>
           <div class="card-body">
 
