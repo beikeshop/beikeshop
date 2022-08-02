@@ -68,22 +68,12 @@ Vue.component('module-editor-brand', {
   },
 
   created: function () {
-    // var that = this;
-    // if (!this.module.brands.length) return;
-    // this.loading = true;
-
-    // $.ajax({
-    //   url: 'index.php?route=extension/theme/default/page/module/product/getbrands',
-    //   data: {ids: this.module.brands},
-    //   type: 'post',
-    //   dataType: 'json',
-    //   success: function (json) {
-    //     if (json) {
-    //       that.loading = false;
-    //       that.brands = json;
-    //     }
-    //   }
-    // });
+    if (!this.module.brands.length) return;
+    const ids = this.module.brands.join(',');
+    this.loading = true;
+    $http.get(`brands/names?ids=${ids}`, null, {hload:true}).then((res) => {
+      console.log(res)
+    }).finally(e => this.loading = false)
   },
 
   methods: {
