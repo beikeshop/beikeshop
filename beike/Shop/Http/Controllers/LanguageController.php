@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class LanguageController extends Controller
