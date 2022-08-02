@@ -41,33 +41,24 @@ class PermissionRepo
     {
         $permissions = [
             [
-                'title' => '产品权限',
-                'permissions' => self::getProductPermissions(),
+                'title' => '订单管理',
+                'permissions' => $this->getOrderPermissions(),
             ],
             [
-                'title' => '订单权限',
-                'permissions' => self::getOrderPermissions(),
-            ]
+                'title' => '商品管理',
+                'permissions' => $this->getProductPermissions(),
+            ],
+            [
+                'title' => '客户管理',
+                'permissions' => $this->getCustomerPermissions(),
+            ],
+            [
+                'title' => '系统设置',
+                'permissions' => $this->getSettingPermissions(),
+            ],
         ];
 
         return $permissions;
-    }
-
-
-    /**
-     * 商品权限列表
-     *
-     * @return \string[][]
-     */
-    private function getProductPermissions(): array
-    {
-        return [
-            ['code' => 'products_index', 'name' => '商品列表', 'selected' => $this->hasPermission('products_index')],
-            ['code' => 'products_create', 'name' => '商品创建', 'selected' => $this->hasPermission('products_create')],
-            ['code' => 'products_show', 'name' => '商品详情', 'selected' => $this->hasPermission('products_show')],
-            ['code' => 'products_update', 'name' => '商品编辑', 'selected' => $this->hasPermission('products_update')],
-            ['code' => 'products_delete', 'name' => '商品删除', 'selected' => $this->hasPermission('products_delete')],
-        ];
     }
 
 
@@ -79,11 +70,65 @@ class PermissionRepo
     private function getOrderPermissions(): array
     {
         return [
-            ['code' => 'orders_index', 'name' => '订单列表', 'selected' => $this->hasPermission('orders_index')],
-            ['code' => 'orders_create', 'name' => '订单创建', 'selected' => $this->hasPermission('orders_create')],
-            ['code' => 'orders_show', 'name' => '订单详情', 'selected' => $this->hasPermission('orders_show')],
-            ['code' => 'orders_update', 'name' => '订单编辑', 'selected' => $this->hasPermission('orders_update')],
-            ['code' => 'orders_delete', 'name' => '订单删除', 'selected' => $this->hasPermission('orders_delete')],
+            ['code' => 'orders_index', 'name' => '列表', 'selected' => $this->hasPermission('orders_index')],
+            ['code' => 'orders_create', 'name' => '创建', 'selected' => $this->hasPermission('orders_create')],
+            ['code' => 'orders_show', 'name' => '详情', 'selected' => $this->hasPermission('orders_show')],
+            ['code' => 'orders_update', 'name' => '编辑', 'selected' => $this->hasPermission('orders_update')],
+            ['code' => 'orders_delete', 'name' => '删除', 'selected' => $this->hasPermission('orders_delete')],
+        ];
+    }
+
+
+    /**
+     * 商品权限列表
+     *
+     * @return \string[][]
+     */
+    private function getProductPermissions(): array
+    {
+        return [
+            ['code' => 'products_index', 'name' => '列表', 'selected' => $this->hasPermission('products_index')],
+            ['code' => 'products_create', 'name' => '创建', 'selected' => $this->hasPermission('products_create')],
+            ['code' => 'products_show', 'name' => '详情', 'selected' => $this->hasPermission('products_show')],
+            ['code' => 'products_update', 'name' => '编辑', 'selected' => $this->hasPermission('products_update')],
+            ['code' => 'products_delete', 'name' => '删除', 'selected' => $this->hasPermission('products_delete')],
+        ];
+    }
+
+
+    /**
+     * 客户权限列表
+     *
+     * @return \string[][]
+     */
+    private function getCustomerPermissions(): array
+    {
+        return [
+            ['code' => 'customers_index', 'name' => '列表', 'selected' => $this->hasPermission('customers_index')],
+            ['code' => 'customers_create', 'name' => '创建', 'selected' => $this->hasPermission('customers_create')],
+            ['code' => 'customers_show', 'name' => '详情', 'selected' => $this->hasPermission('customers_show')],
+            ['code' => 'customers_update', 'name' => '编辑', 'selected' => $this->hasPermission('customers_update')],
+            ['code' => 'customers_delete', 'name' => '删除', 'selected' => $this->hasPermission('customers_delete')],
+        ];
+    }
+
+
+    /**
+     * 会员权限列表
+     *
+     * @return \string[][]
+     */
+    private function getSettingPermissions(): array
+    {
+        return [
+            ['code' => 'settings_index', 'name' => '系统设置', 'selected' => $this->hasPermission('settings_index')],
+            ['code' => 'admin_users_index', 'name' => '后台用户', 'selected' => $this->hasPermission('admin_users_index')],
+            ['code' => 'plugins_index', 'name' => '插件列表', 'selected' => $this->hasPermission('plugins_index')],
+            ['code' => 'regions_index', 'name' => '区域分组', 'selected' => $this->hasPermission('regions_index')],
+            ['code' => 'tax_rates_index', 'name' => '税费设置', 'selected' => $this->hasPermission('tax_rates_index')],
+            ['code' => 'tax_classes_index', 'name' => '税费类别', 'selected' => $this->hasPermission('tax_classes_index')],
+            ['code' => 'currencies_index', 'name' => '货币管理', 'selected' => $this->hasPermission('currencies_index')],
+            ['code' => 'design_index', 'name' => '首页装修', 'selected' => $this->hasPermission('design_index')],
         ];
     }
 
