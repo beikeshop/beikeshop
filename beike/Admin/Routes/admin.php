@@ -52,8 +52,8 @@ Route::prefix($adminName)
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
-                Route::get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
-                Route::get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
+                Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
+                Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
 
                 Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
