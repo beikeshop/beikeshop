@@ -50,8 +50,7 @@ class PermissionRepo
             ['title' => '税费类别', 'permissions' => $this->getTaxClassPermissions()],
             ['title' => '货币管理', 'permissions' => $this->getCurrencyPermissions()],
         ];
-
-        return $permissions;
+        return hook_filter('role.all_permissions', $permissions);
     }
 
 
@@ -64,7 +63,7 @@ class PermissionRepo
     {
         $routes = ['orders_index', 'orders_create', 'orders_edit', 'orders_update', 'orders_delete'];
         $items = $this->getPermissionList('order', $routes);
-        return $items;
+        return hook_filter('role.order_permissions', $items);
     }
 
 
@@ -77,7 +76,7 @@ class PermissionRepo
     {
         $routes = ['products_index', 'products_create', 'products_edit', 'products_update', 'products_delete'];
         $items = $this->getPermissionList('product', $routes);
-        return $items;
+        return hook_filter('role.product_permissions', $items);
     }
 
 
@@ -90,7 +89,7 @@ class PermissionRepo
     {
         $routes = ['customers_index', 'customers_create', 'customers_edit', 'customers_update', 'customers_delete'];
         $items = $this->getPermissionList('customer', $routes);
-        return $items;
+        return hook_filter('role.customer_permissions', $items);
     }
 
 
@@ -101,10 +100,11 @@ class PermissionRepo
      */
     private function getSettingPermissions(): array
     {
-        return [
+        $items = [
             ['code' => 'settings_index', 'name' => trans('setting.settings_index'), 'selected' => $this->hasPermission('settings_index')],
             ['code' => 'design_index', 'name' => trans('setting.design_index'), 'selected' => $this->hasPermission('design_index')],
         ];
+        return hook_filter('role.setting_permissions', $items);
     }
 
 
@@ -117,7 +117,7 @@ class PermissionRepo
     {
         $routes = ['plugins_index', 'plugins_import', 'plugins_update', 'plugins_edit', 'plugins_install', 'plugins_update_status', 'plugins_uninstall'];
         $items = $this->getPermissionList('plugin', $routes);
-        return $items;
+        return hook_filter('role.plugin_permissions', $items);
     }
 
 
@@ -130,7 +130,7 @@ class PermissionRepo
     {
         $routes = ['regions_index', 'regions_create', 'regions_edit', 'regions_update', 'regions_delete'];
         $items = $this->getPermissionList('region', $routes);
-        return $items;
+        return hook_filter('role.region_permissions', $items);
     }
 
 
@@ -143,7 +143,7 @@ class PermissionRepo
     {
         $routes = ['tax_rates_index', 'tax_rates_create', 'tax_rates_edit', 'tax_rates_update', 'tax_rates_delete'];
         $items = $this->getPermissionList('tax_rate', $routes);
-        return $items;
+        return hook_filter('role.tax_rate_permissions', $items);
     }
 
 
@@ -156,7 +156,7 @@ class PermissionRepo
     {
         $routes = ['tax_classes_index', 'tax_classes_create', 'tax_classes_edit', 'tax_classes_update', 'tax_classes_delete'];
         $items = $this->getPermissionList('tax_class', $routes);
-        return $items;
+        return hook_filter('role.tax_class_permissions', $items);
     }
 
 
@@ -169,7 +169,7 @@ class PermissionRepo
     {
         $routes = ['currencies_index', 'currencies_create', 'currencies_edit', 'currencies_update', 'currencies_delete'];
         $items = $this->getPermissionList('currency', $routes);
-        return $items;
+        return hook_filter('role.currency_permissions', $items);
     }
 
 

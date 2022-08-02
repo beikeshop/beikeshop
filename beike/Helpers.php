@@ -349,6 +349,32 @@ function create_directories($directoryPath)
 
 
 /**
+ * hook filter 埋点
+ *
+ * @param $hookKey
+ * @param $hookValue
+ * @return mixed
+ */
+function hook_filter($hookKey, $hookValue)
+{
+    return Eventy::filter($hookKey, $hookValue);
+}
+
+
+/**
+ * hook action 埋点
+ *
+ * @param $hookKey
+ * @param $hookValue
+ * @return mixed
+ */
+function hook_action($hookKey, $hookValue)
+{
+    Eventy::action($hookKey, $hookValue);
+}
+
+
+/**
  * 添加 Filter
  *
  * @param $hook
