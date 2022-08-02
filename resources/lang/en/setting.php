@@ -10,9 +10,6 @@
  */
 
 return [
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_edit' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
+    'settings_index' => 'Setting',
+    'design_index' => 'Design Builder',
 ];

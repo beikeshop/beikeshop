@@ -10,9 +10,11 @@
  */
 
 return [
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_edit' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
+    'plugins_index' => 'Index',
+    'plugins_import' => 'Import',
+    'plugins_edit' => 'Detail',
+    'plugins_update' => 'Update',
+    'plugins_update_status' => 'Delete',
+    'plugins_install' => 'Install',
+    'plugins_uninstall' => 'Uninstall',
 ];

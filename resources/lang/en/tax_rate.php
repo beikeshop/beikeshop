@@ -10,9 +10,9 @@
  */
 
 return [
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_edit' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
+    'tax_rates_index' => 'Index',
+    'tax_rates_create' => 'Create',
+    'tax_rates_edit' => 'Detail',
+    'tax_rates_update' => 'Edit',
+    'tax_rates_delete' => 'Delete'
 ];

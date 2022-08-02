@@ -10,9 +10,9 @@
  */
 
 return [
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_edit' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
+    'customers_index' => 'Index',
+    'customers_create' => 'Create',
+    'customers_edit' => 'Detail',
+    'customers_update' => 'Edit',
+    'customers_delete' => 'Delete'
 ];
