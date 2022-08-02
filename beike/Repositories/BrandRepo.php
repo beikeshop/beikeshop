@@ -13,25 +13,30 @@ namespace Beike\Repositories;
 
 use Beike\Models\Brand;
 use Beike\Shop\Http\Resources\BrandDetail;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
+use Illuminate\Database\Eloquent\Model;
 
 class BrandRepo
 {
     /**
      * 创建一个记录
      * @param $data
-     * @return int
+     * @return Builder|Model
      */
     public static function create($data)
     {
-        $brand = Brand::query()->create($data);
-        return $brand;
+        return Brand::query()->create($data);
     }
 
     /**
      * @param $brand
      * @param $data
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
-     * @throws \Exception
+     * @return Builder|Builder[]|Collection|Model|mixed
+     * @throws Exception
      */
     public static function update($brand, $data)
     {
@@ -39,7 +44,7 @@ class BrandRepo
             $brand = Brand::query()->find($brand);
         }
         if (!$brand) {
-            throw new \Exception("品牌id {$brand} 不存在");
+            throw new Exception("品牌id $brand 不存在");
         }
         $brand->update($data);
         return $brand;
@@ -47,7 +52,7 @@ class BrandRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return Builder|Builder[]|Collection|Model|null
      */
     public static function find($id)
     {
@@ -68,9 +73,9 @@ class BrandRepo
 
     /**
      * @param $data
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public static function list($data)
+    public static function list($data): LengthAwarePaginator
     {
         $builder = Brand::query();
 
@@ -87,7 +92,7 @@ class BrandRepo
         return $builder->paginate(10)->withQueryString();
     }
 
-    public static function listGroupByFirst()
+    public static function listGroupByFirst(): array
     {
         $brands = Brand::query()->where('status', true)->get();
 
@@ -102,10 +107,56 @@ class BrandRepo
     public static function autocomplete($name)
     {
         $brands = Brand::query()
-            ->where('name', 'like', "{$name}%")
+            ->where('name', 'like', "$name%")
             ->where('status', 1)
             ->select('id', 'name')
             ->limit(10)->get();
+        return $brands;
+    }
+
+    /**
+     * 获取商品名称
+     * @param $id
+     * @return HigherOrderBuilderProxy|mixed|string
+     */
+    public static function getName($id)
+    {
+        $brand = Brand::query()->find($id);
+
+        if ($brand) {
+            return $brand->name;
+        }
+        return '';
+    }
+
+
+    /**
+     * @param $ids
+     * @return array
+     */
+    public static function getNames($ids): array
+    {
+        $brands = self::getListByIds($ids);
+        return $brands->map(function ($brand) {
+            return [
+                'id' => $brand->id,
+                'name' => $brand->name ?? ''
+            ];
+        })->toArray();
+    }
+
+    /**
+     * 通过产品ID获取产品列表
+     * @return array|Builder[]|Collection
+     */
+    public static function getListByIds($ids)
+    {
+        if (empty($ids)) {
+            return [];
+        }
+        $brands = Brand::query()
+            ->whereIn('id', $ids)
+            ->get();
         return $brands;
     }
 }

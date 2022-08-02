@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Repositories\BrandRepo;
+use Exception;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -30,30 +31,56 @@ class BrandController extends Controller
         return view('admin::pages.brands.index', $data);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): array
     {
         $brand = BrandRepo::create($request->all());
         return json_success("创建成功", $brand);
     }
 
-    public function update(Request $request, int $id)
+    /**
+     * @throws Exception
+     */
+    public function update(Request $request, int $id): array
     {
         $brand = BrandRepo::update($id, $request->all());
 
         return json_success("成功修改", $brand);
     }
 
-    public function destroy(int $addressId)
+    public function destroy(int $addressId): array
     {
         BrandRepo::delete($addressId);
 
         return json_success("已成功删除");
     }
 
-    public function autocomplete(Request $request)
+    public function autocomplete(Request $request): array
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '');
 
         return json_success('获取成功！', $brands);
+    }
+
+
+    public function name(int $id): array
+    {
+        $name = BrandRepo::getName($id);
+
+        return json_success('获取成功', $name);
+    }
+
+
+    /**
+     * 根据产品ID批量获取产品名称
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function getNames(Request $request): array
+    {
+        $ids = explode(',',$request->get('ids'));
+        $name = BrandRepo::getNames($ids);
+
+        return json_success('获取成功', $name);
     }
 }

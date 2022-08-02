@@ -32,4 +32,9 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(CustomerWishlist::class);
     }
+
+    public function rmas() : HasMany
+    {
+        return $this->hasMany(Rma::class);
+    }
 }

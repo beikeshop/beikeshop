@@ -24,6 +24,10 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
+                Route::resource('brands', Controllers\BrandController::class);
+                Route::get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
+                Route::get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
+
                 Route::resource('categories', Controllers\CategoryController::class);
                 Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
 
@@ -39,7 +43,6 @@ Route::prefix($adminName)
                 Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
                 Route::resource('files', Controllers\FileController::class);
-                Route::resource('brands', Controllers\BrandController::class);
 
                 Route::get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
                 Route::get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
