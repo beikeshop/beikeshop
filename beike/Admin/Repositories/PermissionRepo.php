@@ -12,12 +12,13 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\AdminUser;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 use Spatie\Permission\Models\Role;
 
 class PermissionRepo
 {
-    private $adminUser;
-    private $adminRole;
+    private AdminUser $adminUser;
+    private Role $adminRole;
 
     public function setUser(AdminUser $user): PermissionRepo
     {
@@ -61,11 +62,11 @@ class PermissionRepo
     private function getProductPermissions(): array
     {
         return [
-            ['code' => 'product_list', 'name' => '商品列表', 'selected' => $this->hasPermission('product_list')],
-            ['code' => 'product_create', 'name' => '商品创建', 'selected' => $this->hasPermission('product_create')],
-            ['code' => 'product_show', 'name' => '商品详情', 'selected' => $this->hasPermission('product_show')],
-            ['code' => 'product_update', 'name' => '商品编辑', 'selected' => $this->hasPermission('product_update')],
-            ['code' => 'product_delete', 'name' => '商品删除', 'selected' => $this->hasPermission('product_delete')],
+            ['code' => 'products_index', 'name' => '商品列表', 'selected' => $this->hasPermission('products_index')],
+            ['code' => 'products_create', 'name' => '商品创建', 'selected' => $this->hasPermission('products_create')],
+            ['code' => 'products_show', 'name' => '商品详情', 'selected' => $this->hasPermission('products_show')],
+            ['code' => 'products_update', 'name' => '商品编辑', 'selected' => $this->hasPermission('products_update')],
+            ['code' => 'products_delete', 'name' => '商品删除', 'selected' => $this->hasPermission('products_delete')],
         ];
     }
 
@@ -78,11 +79,11 @@ class PermissionRepo
     private function getOrderPermissions(): array
     {
         return [
-            ['code' => 'order_list', 'name' => '订单列表', 'selected' => $this->hasPermission('order_list')],
-            ['code' => 'order_create', 'name' => '订单创建', 'selected' => $this->hasPermission('order_create')],
-            ['code' => 'order_show', 'name' => '订单详情', 'selected' => $this->hasPermission('order_show')],
-            ['code' => 'order_update', 'name' => '订单编辑', 'selected' => $this->hasPermission('order_update')],
-            ['code' => 'order_delete', 'name' => '订单删除', 'selected' => $this->hasPermission('order_delete')],
+            ['code' => 'orders_index', 'name' => '订单列表', 'selected' => $this->hasPermission('orders_index')],
+            ['code' => 'orders_create', 'name' => '订单创建', 'selected' => $this->hasPermission('orders_create')],
+            ['code' => 'orders_show', 'name' => '订单详情', 'selected' => $this->hasPermission('orders_show')],
+            ['code' => 'orders_update', 'name' => '订单编辑', 'selected' => $this->hasPermission('orders_update')],
+            ['code' => 'orders_delete', 'name' => '订单删除', 'selected' => $this->hasPermission('orders_delete')],
         ];
     }
 
@@ -95,10 +96,14 @@ class PermissionRepo
      */
     private function hasPermission($permission): bool
     {
-        if ($this->adminRole) {
-            return $this->adminRole->hasPermissionTo($permission);
-        } elseif ($this->adminUser) {
-            return $this->adminUser->hasPermissionTo($permission);
+        try {
+            if ($this->adminRole) {
+                return $this->adminRole->hasPermissionTo($permission);
+            } elseif ($this->adminUser) {
+                return $this->adminUser->can($permission);
+            }
+        } catch (PermissionDoesNotExist $exception) {
+            return false;
         }
         return false;
     }
