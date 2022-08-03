@@ -72,6 +72,7 @@ Route::prefix($adminName)
                 Route::resource('products', Controllers\ProductController::class);
 
                 Route::resource('regions', Controllers\RegionController::class);
+                Route::post('rmas/history',  [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
                 Route::resource('rmas', Controllers\RmaController::class);
                 Route::resource('rma_reasons', Controllers\RmaReasonController::class);
 
