@@ -13,8 +13,8 @@
         <el-form-item label="权限" prop="roles">
           <div class="roles-wrap border w-max-900">
             <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
-              <el-button size="small" @click="updateAllState(true)">选中所有</el-button>
-              <el-button size="small" @click="updateAllState(false)">取消选中</el-button>
+              <el-button size="small" @click="updateAllState(true)">@lang('admin/admin_roles.select_all')</el-button>
+              <el-button size="small" @click="updateAllState(false)">@lang('admin/admin_roles.unselect_all')</el-button>
             </div>
             <div v-for="role, index in form.permissions" :key="index">
               <div class="bg-light px-2 d-flex">
