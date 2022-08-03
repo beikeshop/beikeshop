@@ -21,7 +21,8 @@
       <div class="col-12 col-md-6">
         <div class="product-image d-flex align-items-start">
 
-          <div class="left swiper" id="swiper" v-if="images.length">
+          <div class="left"  v-if="images.length">
+            <div class="swiper" id="swiper">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
                   <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
@@ -33,6 +34,7 @@
                   <div class="swiper-button-next new-feature-slideshow-next"></div>
                   <div class="swiper-button-prev new-feature-slideshow-prev"></div>
               </div>
+            </div>
           </div>
 
           <div class="right" id="zoom">
