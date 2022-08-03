@@ -5,7 +5,7 @@
 @push('header')
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
-  <script src="{{ asset('vendor/elevatezoom/jquery.elevateZoom.min.js') }}"></script>
+  <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   {{-- <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}"> --}}
@@ -21,12 +21,11 @@
       <div class="col-12 col-md-6">
         <div class="product-image d-flex align-items-start">
 
-          <div class="left" v-if="images.length">
-            <div class="swiper" id="product-thumbnail-gallery">
+          <div class="left swiper" id="swiper" v-if="images.length">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
-                  <a href="javascript:;" :data-image="image.popup">
-                    <img :src="image.thumb" class="img-fluid" :data-zoom-image="image.popup">
+                  <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
+                    <img :src="image.thumb" class="img-fluid">
                   </a>
                 </div>
               </div>
@@ -34,11 +33,10 @@
                   <div class="swiper-button-next new-feature-slideshow-next"></div>
                   <div class="swiper-button-prev new-feature-slideshow-prev"></div>
               </div>
-            </div>
           </div>
 
-          <div class="right">
-            <img :src="images[0]?.preview || '{{ asset('image/placeholder.png') }}'" :data-zoom-image="images[0]?.popup || '{{ asset('image/placeholder.png') }}'" id="elevate-zoom" class="img-fluid">
+          <div class="right" id="zoom">
+            <img :src="images[0]?.preview || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
           </div>
 
         </div>
@@ -141,8 +139,6 @@
 
 @push('add-scripts')
   <script>
-    let initZoom = null;
-
     let app = new Vue({
       el: '#product-app',
 
@@ -220,12 +216,11 @@
           const spuImages = @json($product['images'] ?? []);
           this.images = [...sku.images, ...spuImages]
           this.product = sku;
-          if (initZoom) {
-            this.$nextTick(() => {
-              initZoom()
-
-            })
-          }
+          this.$nextTick(() => {
+            $('#zoom img').attr('src', $('#swiper a').attr('data-image'));
+            $('#zoom').trigger('zoom.destroy');
+            $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
+          })
         },
 
         addCart(isBuyNow = false) {
@@ -275,12 +270,14 @@
       }
     });
 
-    $(document).on("mouseover", ".product-image .swiper .swiper-slide", function() {
-      $(this).addClass('active').siblings().removeClass('active');
-      $(this).find('a').trigger('click');
+    $(document).on("mouseover", ".product-image .swiper .swiper-slide a", function() {
+      $(this).parent().addClass('active').siblings().removeClass('active');
+      $('#zoom').trigger('zoom.destroy');
+      $('#zoom img').attr('src', $(this).attr('data-image'));
+      $('#zoom').zoom({url: $(this).attr('data-zoom-image')});
     });
 
-    var swiper = new Swiper("#product-thumbnail-gallery", {
+    var swiper = new Swiper("#swiper", {
       direction: "vertical",
       slidesPerView: 6,
       spaceBetween:10,
@@ -297,19 +294,8 @@
     });
 
     $(document).ready(function () {
-      initZoom = function(params) {
-        $('#elevate-zoom').elevateZoom({
-          showLens: true,
-          zoomType: 'inner',
-          zoomLens: false,
-          borderColour: '#eaeaea',
-          gallery: 'product-thumbnail-gallery',
-          galleryActiveClass: 'active',
-          cursor:'pointer',
-        });
-      }
-
-      initZoom()
+        $('#zoom').trigger('zoom.destroy');
+        $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
     });
 
   </script>
