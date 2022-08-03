@@ -24,9 +24,9 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
+                Route::get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
                 Route::resource('brands', Controllers\BrandController::class);
                 Route::get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
-                Route::get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
 
                 Route::resource('categories', Controllers\CategoryController::class);
                 Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');

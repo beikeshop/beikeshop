@@ -72,7 +72,7 @@ Vue.component('module-editor-brand', {
     const ids = this.module.brands.join(',');
     this.loading = true;
     $http.get(`brands/names?ids=${ids}`, null, {hload:true}).then((res) => {
-      console.log(res)
+      this.brands = res.data
     }).finally(e => this.loading = false)
   },
 
