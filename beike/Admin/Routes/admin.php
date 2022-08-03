@@ -72,6 +72,8 @@ Route::prefix($adminName)
                 Route::resource('products', Controllers\ProductController::class);
 
                 Route::resource('regions', Controllers\RegionController::class);
+                Route::resource('rmas', Controllers\RmaController::class);
+                Route::resource('rma_reasons', Controllers\RmaReasonController::class);
 
                 Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
