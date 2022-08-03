@@ -21,7 +21,7 @@
       <x-shop-sidebar/>
 
       <div class="col-12 col-md-9">
-        <div class="card account-card">
+        <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">我的地址</h5>
           </div>
@@ -30,7 +30,7 @@
             <div class="addresses-wrap" v-cloak>
               <div class="row">
                 <div class="col-6" v-for="address, index in addresses" :key="index" v-if="addresses.length">
-                  <div :class="['item', address.default ? 'active' : '']" >
+                  <div class="item">
                     <div class="name-wrap">
                       <span class="name">@{{ address.name }}</span>
                       <span class="phone">@{{ address.phone }}</span>
