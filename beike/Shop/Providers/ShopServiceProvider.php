@@ -44,14 +44,8 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->registerGuard();
-
         $this->loadThemeViewPath();
-
         $this->loadComponents();
-
-        $this->app->booted(function () {
-            $this->loadShareViewData();
-        });
     }
 
 
@@ -85,15 +79,5 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
         ]);
-    }
-
-    protected function loadShareViewData()
-    {
-        View::share('design', request('design') == 1);
-        View::share('languages', \Beike\Repositories\LanguageRepo::enabled());
-        View::share('shop_base_url', shop_route('home.index'));
-
-        $menuCategories = CategoryRepo::getTwoLevelCategories();
-        View::share('categories', Eventy::filter('header.categories', $menuCategories));
     }
 }
