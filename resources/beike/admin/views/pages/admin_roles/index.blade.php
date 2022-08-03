@@ -36,7 +36,7 @@
             <td>{{ $role->updated_at }}</td>
             <td class="text-end">
               <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button">删除</button>
+              <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}" type="button">删除</button>
             </td>
           </tr>
           @endforeach
@@ -45,3 +45,16 @@
     </div>
   </div>
 @endsection
+
+@push('footer')
+  <script>
+    $('.delete-role').click(function(event) {
+      const id = $(this).data('id');
+
+      $http.delete(`admin_roles/${id}`).then((res) => {
+        layer.msg(res.message);
+        $(this).parents('tr').remove()
+      })
+    });
+  </script>
+@endpush

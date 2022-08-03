@@ -46,6 +46,12 @@ class RmaController extends Controller
     public function addHistory(Request $request, int $id)
     {
         RmaRepo::addHistory($id, $request->only('status', 'notify', 'comment'));
+
+         $data = [
+            'rma' => RmaRepo::find($id),
+            'statuses' => RmaRepo::getStatuses(),
+        ];
+       return json_success('更新成功', $data);
     }
 
     public function destroy(int $id): array

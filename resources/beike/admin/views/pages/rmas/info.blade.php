@@ -52,11 +52,91 @@
   </div>
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">操作日志</h6></div>
-    <div class="card-body">
+    <div class="card-header"><h6 class="card-title">状态</h6></div>
+    <div class="card-body" id="app">
+      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+        <el-form-item label="当前状态">
+          待支付
+        </el-form-item>
+        <el-form-item label="修改状态" prop="status">
+          <el-select size="small" v-model="form.status" placeholder="请选择">
+            <el-option
+              v-for="item in statuses"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="通知客户">
+          {{-- <el-checkbox v-model="form.notify"></el-checkbox> --}}
+          <el-switch v-model="form.notify">
+          </el-switch>
+        </el-form-item>
+        <el-form-item label="备注信息">
+          <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('form')">更新状态</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
 
+  <div class="card mb-4">
+    <div class="card-header"><h6 class="card-title">操作历史</h6></div>
+    <div class="card-body">
+      @foreach ($rma->histories as $history)
+      @endforeach
     </div>
   </div>
 @endsection
 
+@push('footer')
+  <script>
+    new Vue({
+      el: '#app',
+
+      data: {
+        statuses: [],
+        rma: @json($rma ?? []),
+        form: {
+          status: "",
+          notify: false,
+          comment: '',
+        },
+
+        rules: {
+          status: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+        }
+      },
+
+      beforeMount() {
+        let statuses = @json($statuses ?? []);
+        this.statuses = Object.keys(statuses).map(key => {
+          return {
+            value: key,
+            label: statuses[key]
+          }
+        });
+      },
+
+      methods: {
+        submitForm(form) {
+          this.$refs[form].validate((valid) => {
+            if (!valid) {
+              layer.msg('请检查表单是否填写正确',()=>{});
+              return;
+            }
+
+            $http.post(`rmas/history/${this.rma.id}`,this.form).then((res) => {
+              console.log(res)
+              layer.msg(res.message);
+            })
+          });
+        }
+      }
+    })
+  </script>
+@endpush
 

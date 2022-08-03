@@ -58,8 +58,9 @@ class Sidebar extends Component
             $this->addLink('用户组', 'customer_groups.index', 'fa fa-tachometer-alt', $this->equalRoute('customer_groups.index'));
         }
 
-        if (Str::startsWith($routeName, ['orders.'])) {
+        if (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
             $this->addLink('订单列表', 'orders.index', 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
+            $this->addLink('售后列表', 'rmas.index', 'fa fa-tachometer-alt', $this->equalRoute('rmas.index'));
         }
 
         if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies'])) {
