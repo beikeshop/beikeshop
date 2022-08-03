@@ -19,6 +19,7 @@ class WishlistDetail extends JsonResource
     {
         $data = [
             'id' => $this->id,
+            'product_id' => $this->priduct_id,
             'image' => image_resize($this->product->image, 100, 100),
             'product_name' => $this->product->description->name,
             'price' => currency_format($this->product->price)

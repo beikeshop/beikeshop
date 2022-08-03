@@ -40,8 +40,8 @@ class WishlistController extends Controller
 
     public function remove(Request $request): array
     {
-        $productId = $request->product_id;
-        CustomerRepo::removeFromWishlist(current_customer(), $productId);
+        $id = $request->id;
+        CustomerRepo::removeFromWishlist(current_customer(), $id);
 
         $wishlists = CustomerRepo::wishlists(current_customer());
 

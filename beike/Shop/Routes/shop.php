@@ -84,7 +84,7 @@ Route::prefix('/')
                 Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
                 Route::get('wishlist', [WishlistController::class, 'index'])->name('account.wishlist.index');
                 Route::post('wishlist', [WishlistController::class, 'add'])->name('account.wishlist.add');
-                Route::delete('wishlist/{product_id}', [WishlistController::class, 'remove'])->name('account.wishlist.remove');
+                Route::delete('wishlist/{id}', [WishlistController::class, 'remove'])->name('account.wishlist.remove');
             });
     });
 

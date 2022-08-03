@@ -121,15 +121,15 @@ class CustomerRepo
 
     /**
      * @param $customer , Customer对象或id
-     * @param $productId
+     * @param $id
      * @return void
      */
-    public static function removeFromWishlist($customer, $productId)
+    public static function removeFromWishlist($customer, $id)
     {
         if (!$customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
-        $customer->wishlists()->where('product_id', $productId)->delete();
+        $customer->wishlists()->where('id', $id)->delete();
 
         return $customer;
     }
