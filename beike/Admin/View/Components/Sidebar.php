@@ -10,8 +10,8 @@ class Sidebar extends Component
 {
     public array $links = [];
     private string $adminName;
-    private string $routeNameWithPrefix;
-    private AdminUser $adminUser;
+    private ?string $routeNameWithPrefix;
+    private ?AdminUser $adminUser;
 
     /**
      * Create a new component instance.

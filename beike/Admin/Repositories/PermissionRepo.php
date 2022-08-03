@@ -17,8 +17,8 @@ use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 
 class PermissionRepo
 {
-    private AdminUser $adminUser;
-    private Role $adminRole;
+    private ?AdminUser $adminUser = null;
+    private ?Role $adminRole = null;
 
     public function setUser(AdminUser $user): PermissionRepo
     {
@@ -44,7 +44,9 @@ class PermissionRepo
             ['title' => '商品管理', 'permissions' => $this->getProductPermissions()],
             ['title' => '客户管理', 'permissions' => $this->getCustomerPermissions()],
             ['title' => '系统设置', 'permissions' => $this->getSettingPermissions()],
+
             ['title' => '插件管理', 'permissions' => $this->getPluginPermissions()],
+            ['title' => '后台用户', 'permissions' => $this->getAdminUserPermissions()],
             ['title' => '区域分组', 'permissions' => $this->getRegionPermissions()],
             ['title' => '税率设置', 'permissions' => $this->getTaxRatePermissions()],
             ['title' => '税费类别', 'permissions' => $this->getTaxClassPermissions()],
@@ -118,6 +120,19 @@ class PermissionRepo
         $routes = ['plugins_index', 'plugins_import', 'plugins_update', 'plugins_edit', 'plugins_install', 'plugins_update_status', 'plugins_uninstall'];
         $items = $this->getPermissionList('plugin', $routes);
         return hook_filter('role.plugin_permissions', $items);
+    }
+
+
+    /**
+     * 后台管理员权限列表
+     *
+     * @return mixed
+     */
+    private function getAdminUserPermissions()
+    {
+        $routes = ['admin_users_index', 'admin_users_create', 'admin_users_edit', 'admin_users_update', 'admin_users_delete'];
+        $items = $this->getPermissionList('user', $routes);
+        return hook_filter('role.user_permissions', $items);
     }
 
 
