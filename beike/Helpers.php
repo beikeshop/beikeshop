@@ -4,6 +4,7 @@ use Beike\Models\Customer;
 use Beike\Models\Language;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 use Beike\Services\CurrencyService;
 use Beike\Repositories\LanguageRepo;
 use TorMorten\Eventy\Facades\Eventy;
@@ -189,7 +190,7 @@ function locales(): array
  */
 function locale(): string
 {
-    return 'zh_cn';
+    return Session::get('locale') ?? system_setting('base.locale');
 }
 
 /**
@@ -241,9 +242,9 @@ function image_origin($image)
 /**
  * 获取当前所有语言列表
  *
- * @return \Illuminate\Support\Collection
+ * @return Collection
  */
-function languages()
+function languages(): Collection
 {
     return LanguageRepo::enabled()->pluck('code');
 }
@@ -259,23 +260,13 @@ function current_language_id(): int
 }
 
 /**
- * 当前语言code
- *
- * @return string
- */
-function current_language_code(): string
-{
-    return Session::get('locale') ?? system_setting('base.locale');
-}
-
-/**
  * 当前语言
  *
  * @return string
  */
 function current_language(): string
 {
-    $code = current_language_code();
+    $code = locale();
     return Language::query()->where('code', $code)->first()->name;
 }
 

@@ -67,7 +67,7 @@
 
   <script>
     var $languages = @json($languages);
-    var $language_id = '{{ current_language_code() }}';
+    var $language_id = '{{ locale() }}';
 
     function languagesFill(text) {
       var obj = {};

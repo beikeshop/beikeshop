@@ -49,7 +49,7 @@ class ProductDetail extends JsonResource
      */
     private function decodeVariables($variables): array
     {
-        $lang = current_language_code();
+        $lang = locale();
         if (empty($variables)) {
             return [];
         }

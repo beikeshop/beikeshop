@@ -103,7 +103,7 @@ Vue.component('module-editor-tab-product', {
 
   methods: {
     tabTitleLanguage(titles) {
-      return titles['{{ current_language_code() }}'];
+      return titles['{{ locale() }}'];
     },
 
     tabsValueProductData() {

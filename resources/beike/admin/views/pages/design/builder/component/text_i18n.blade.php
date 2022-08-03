@@ -1,6 +1,6 @@
 <template id="text-i18n-template">
   <div class="text-i18n-template">
-    <el-tabs v-if="languages.length > 1" value="language-{{ current_language_code() }}" :stretch="languages.length > 5 ? true : false" type="card">
+    <el-tabs v-if="languages.length > 1" value="language-{{ locale() }}" :stretch="languages.length > 5 ? true : false" type="card">
       <el-tab-pane v-for="(item, index) in languages" :key="index" :label="item.name" :name="'language-' + item.code">
         <span slot="label" style="padding: 0 8px; font-size: 12px">@{{ item.name }}</span>
 

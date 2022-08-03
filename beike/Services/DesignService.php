@@ -83,7 +83,7 @@ class DesignService
 
 
         $content['brands'] = [];
-        $content['title'] = $content['title'][current_language_code()];
+        $content['title'] = $content['title'][locale()];
         return $content;
     }
 
@@ -122,14 +122,14 @@ class DesignService
         }
 
         foreach ($tabs as $index => $tab) {
-            $tabs[$index]['title'] = $tab['title'][current_language_code()];
+            $tabs[$index]['title'] = $tab['title'][locale()];
             $productsIds = $tab['products'];
             if ($productsIds) {
                 $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds);
             }
         }
         $content['tabs'] = $tabs;
-        $content['title'] = $content['title'][current_language_code()];
+        $content['title'] = $content['title'][locale()];
         return $content;
     }
 
@@ -145,7 +145,7 @@ class DesignService
         }
 
         foreach ($images as $index => $image) {
-            $imagePath = 'catalog/' . ($image['image'][current_language_code()] ?? '');
+            $imagePath = 'catalog/' . ($image['image'][locale()] ?? '');
             $images[$index]['image'] = image_origin($imagePath);
 
             $link = $image['link'];

@@ -1,6 +1,6 @@
   <template id="pb-image-selector">
     <div class="pb-image-selector">
-      <el-tabs v-if="isLanguage" @tab-click="tabClick" value="language-{{ current_language_code() }}" :stretch="languages.length > 5 ? true : false" type="card" :class="languages.length <= 1 ? 'languages-a' : ''">
+      <el-tabs v-if="isLanguage" @tab-click="tabClick" value="language-{{ locale() }}" :stretch="languages.length > 5 ? true : false" type="card" :class="languages.length <= 1 ? 'languages-a' : ''">
         <el-tab-pane v-for="(item, index) in languages" :key="index" :label="item.name" :name="'language-' + item.code">
           <span slot="label" style="padding: 0 4px; font-size: 12px">@{{ item.name }}</span>
 

@@ -271,7 +271,7 @@
     var app = new Vue({
       el: '#app',
       data: {
-        current_language_code: '{{ current_language_code() }}',
+        current_language_code: '{{ locale() }}',
         isMove: false,
         form: {
           images: @json($product->images ?? []),

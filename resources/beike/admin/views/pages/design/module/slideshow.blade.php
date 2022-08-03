@@ -21,7 +21,7 @@
                 <i class="el-icon-rank"></i>
               </el-tooltip>
 
-              <img :src="thumbnail(item.image['{{ current_language_code() }}'], 40, 40)" class="img-responsive">
+              <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
             </div>
 
             <div class="right">

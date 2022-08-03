@@ -7,7 +7,7 @@
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image['{{ current_language_code() }}'], 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
           </div>
 
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
