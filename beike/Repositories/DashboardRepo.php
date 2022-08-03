@@ -11,9 +11,8 @@
 
 namespace Beike\Repositories;
 
-
-use Beike\Models\Customer;
 use Beike\Models\Product;
+use Beike\Models\Customer;
 
 class DashboardRepo
 {
@@ -76,8 +75,26 @@ class DashboardRepo
         ];
     }
 
-    public static function getTotalData()
-    {
 
+    /**
+     * 获取订单总额基础统计, 总数和今日昨日比较
+     *
+     * @return array
+     */
+    public static function getTotalData(): array
+    {
+        $today = OrderRepo::getListBuilder(['start' => today(), 'end' => today()->addDay()])->sum('total');
+        $yesterday = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->sum('total');
+        $difference = $today - $yesterday;
+        if ($difference && $yesterday) {
+            $percentage = round(($difference / $yesterday) * 100);
+        } else {
+            $percentage = 0;
+        }
+
+        return [
+            'total' => quantity_format(Customer::query()->count()),
+            'percentage' => $percentage,
+        ];
     }
 }
