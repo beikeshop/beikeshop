@@ -280,6 +280,28 @@ function current_currency_code(): string
     return 'CNY';
 }
 
+
+/**
+ * 数量格式化, 用于商品、订单统计
+ *
+ * @param $quantity
+ * @return mixed|string
+ */
+function quantity_format($quantity)
+{
+    if ($quantity > 1000000000000) {
+        return round($quantity / 1000000000000, 1) . 'T';
+    } elseif ($quantity > 1000000000) {
+        return round($quantity / 1000000000, 1) . 'B';
+    } elseif ($quantity > 1000000) {
+        return round($quantity / 1000000, 1) . 'M';
+    } elseif ($quantity > 1000) {
+        return round($quantity / 1000, 1) . 'K';
+    } else {
+        return $quantity;
+    }
+}
+
 /**
  * 返回json序列化结果
  */

@@ -78,25 +78,48 @@ class CustomerRepo
      */
     public static function list($data): LengthAwarePaginator
     {
+        $builder = self::getListBuilder($data);
+        return $builder->paginate(20)->withQueryString();
+    }
+
+
+    /**
+     * 获取筛选对象
+     *
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getListBuilder(array $filters = []): Builder
+    {
         $builder = Customer::query()->with("customerGroup.description");
 
-        if (isset($data['name'])) {
-            $builder->where('customers.name', 'like', "%{$data['name']}%");
+        if (isset($filters['name'])) {
+            $builder->where('customers.name', 'like', "%{$filters['name']}%");
         }
-        if (isset($data['email'])) {
-            $builder->where('customers.email', 'like', "%{$data['email']}%");
+        if (isset($filters['email'])) {
+            $builder->where('customers.email', 'like', "%{$filters['email']}%");
         }
-        if (isset($data['status'])) {
-            $builder->where('customers.status', $data['status']);
+        if (isset($filters['status'])) {
+            $builder->where('customers.status', (int)$filters['status']);
         }
-        if (isset($data['from'])) {
-            $builder->where('customers.from', $data['from']);
+        if (isset($filters['from'])) {
+            $builder->where('customers.from', $filters['from']);
         }
-        if (isset($data['customer_group_id'])) {
-            $builder->where('customers.customer_group_id', $data['customer_group_id']);
+        if (isset($filters['customer_group_id'])) {
+            $builder->where('customers.customer_group_id', $filters['customer_group_id']);
         }
 
-        return $builder->paginate(20)->withQueryString();
+        $start = $filters['start'] ?? null;
+        if ($start) {
+            $builder->where('customers.created_at', '>', $start);
+        }
+
+        $end = $filters['end'] ?? null;
+        if ($end) {
+            $builder->where('customers.created_at', '<', $end);
+        }
+
+        return $builder;
     }
 
     public static function restore($id)

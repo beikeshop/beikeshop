@@ -39,24 +39,47 @@ class OrderRepo
      */
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
-        $builder = self::getListBuilder($customer);
+        $builder = self::getListBuilder(['customer' => $customer]);
         return $builder->paginate();
     }
 
 
     /**
-     * @param null $customer
+     * @param array $filters
+     * @return LengthAwarePaginator
+     */
+    public static function filterOrders(array $filters = []): LengthAwarePaginator
+    {
+        $builder = self::getListBuilder($filters);
+        return $builder->paginate();
+    }
+
+
+    /**
+     * @param array $filters
      * @return Builder
      */
-    private static function getListBuilder($customer = null): Builder
+    public static function getListBuilder(array $filters = []): Builder
     {
         $builder = Order::query()->orderByDesc('created_at');
+
+        $customer = $filters['customer'] ?? null;
         if ($customer) {
             $builder->where('customer_id', $customer->id);
         }
+
+        $start = $filters['start'] ?? null;
+        if ($start) {
+            $builder->where('created_at', '>', $start);
+        }
+
+        $end = $filters['end'] ?? null;
+        if ($end) {
+            $builder->where('created_at', '<', $end);
+        }
+
         return $builder;
     }
-
 
     /**
      * 通过订单号获取订单
