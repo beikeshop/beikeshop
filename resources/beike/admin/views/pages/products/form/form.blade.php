@@ -47,6 +47,8 @@
             </x-admin::form.row>
             <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" />
             <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
+            <x-admin-form-input name="brand_id" title="品牌" value="0" />
+            <x-admin-form-input name="tax_class_id" title="税类" value="0" />
             <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
             <x-admin::form.row title="分类">
@@ -209,11 +211,12 @@
                   </li>
                 @endforeach
               </ul>
+
               <div class="tab-content">
                 @foreach ($languages as $language)
                   <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-descriptions-{{ $language->code }}">
-                    <textarea name="descriptions[{{ $language->code }}]" class="form-control tinymce">
-                      {{ old('descriptions', $product->descriptions[$language->code] ?? '') }}
+                    <textarea name="descriptions[{{ $language->code }}][content]" class="form-control tinymce">
+                      {{ old('content', $product->descriptions->keyBy('locale')[$language->code]->content ?? '') }}
                     </textarea>
                   </div>
                 @endforeach

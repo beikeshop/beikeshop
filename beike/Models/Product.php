@@ -10,7 +10,7 @@ class Product extends Base
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['images', 'video', 'position', 'active', 'variables'];
+    protected $fillable = ['images', 'video', 'position', 'brand_id', 'tax_class_id', 'active', 'variables'];
     protected $casts = [
         'active' => 'boolean',
         'variables' => 'array',
