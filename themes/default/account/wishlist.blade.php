@@ -31,7 +31,7 @@
               </thead>
               <tbody>
                 @foreach ($wishlist as $item)
-                <tr data-id="{{ $item['id'] }}">
+                <tr data-id="{{ $item['product_id'] }}">
                   <td><div class="wh-70"><img src="{{ $item['image'] }}" class="img-fluid"></div></td>
                   <td>{{ $item['product_name'] }}</td>
                   <td>{{ $item['price'] }}</td>
