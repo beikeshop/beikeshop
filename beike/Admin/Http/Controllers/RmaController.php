@@ -43,6 +43,11 @@ class RmaController extends Controller
         return view('admin::pages.rmas.info', $data);
     }
 
+    public function addHistory(Request $request, int $id)
+    {
+        RmaRepo::addHistory($id, $request->only('status', 'notify', 'comment'));
+    }
+
     public function destroy(int $id): array
     {
         RmaRepo::delete($id);

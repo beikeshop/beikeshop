@@ -13,6 +13,7 @@ namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Rma extends Base
 {
@@ -38,5 +39,10 @@ class Rma extends Base
     public function reason() :BelongsTo
     {
         return $this->belongsTo(RmaReason::class);
+    }
+
+    public function histories() :HasMany
+    {
+        return $this->hasMany(RmaHistory::class);
     }
 }

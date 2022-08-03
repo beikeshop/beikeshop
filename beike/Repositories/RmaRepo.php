@@ -61,6 +61,20 @@ class RmaRepo
     }
 
     /**
+     * @param $rma
+     * @param array $data
+     * @return Rma
+     */
+    public static function addHistory($rma, Array $data)
+    {
+        if (!$rma instanceof Rma) {
+            $rma = self::find($rma);
+        }
+        $rma->histories()->create($data);
+        return $rma;
+    }
+
+    /**
      * @param $id
      * @return void
      */
