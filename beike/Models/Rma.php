@@ -19,7 +19,7 @@ class Rma extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['order_id','order_product_id','customer_id','name','email','telephone','product_name','model','quantity','opened','rma_reason_id','type','status','comment'];
+    protected $fillable = ['order_id','order_product_id','customer_id','name','email','telephone','product_name','sku','quantity','opened','rma_reason_id','type','status','comment'];
 
     public function order() :BelongsTo
     {

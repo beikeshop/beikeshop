@@ -106,8 +106,8 @@ class RmaRepo
         if (isset($data['product_name'])) {
             $builder->where('product_name', 'like', "%{$data['product_name']}%");
         }
-        if (isset($data['model'])) {
-            $builder->where('model', 'like', "%{$data['model']}%");
+        if (isset($data['sku'])) {
+            $builder->where('sku', 'like', "%{$data['sku']}%");
         }
         if (isset($data['type'])) {
             $builder->where('type', $data['type']);

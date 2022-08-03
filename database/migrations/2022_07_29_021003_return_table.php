@@ -22,7 +22,7 @@ class ReturnTable extends Migration
             $table->string('email');
             $table->string('telephone');
             $table->string('product_name');
-            $table->string('model');
+            $table->string('sku');
             $table->integer('quantity');
             $table->tinyInteger('opened');
             $table->unsignedInteger('rma_reason_id');

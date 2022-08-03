@@ -11,9 +11,17 @@
 
 namespace Beike\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class OrderProduct extends Base
 {
     protected $fillable = [
         'product_id', 'order_number', 'product_sku', 'name', 'image', 'quantity', 'price',
     ];
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
 }

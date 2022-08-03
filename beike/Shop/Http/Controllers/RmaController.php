@@ -9,24 +9,23 @@
  * @modified   2022-08-03 21:17:04
  */
 
-namespace Beike\Admin\Http\Controllers;
+namespace Beike\Shop\Http\Controllers;
 
-use Beike\Models\Rma;
-use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
-use Exception;
+use Beike\Shop\Http\Requests\RmaRequest;
+use Beike\Shop\Services\RmaService;
 use Illuminate\Http\Request;
 
 class RmaController extends Controller
 {
     public function index(Request $request)
     {
-        $rmas = RmaRepo::list($request->only('name', 'email', 'telephone', 'product_name', 'sku', 'type', 'status'));
+        $rmas = RmaRepo::listByCustomer(current_customer());
         $data = [
             'rmas' => $rmas,
         ];
 
-        return view('admin::pages.rmas.index', $data);
+        return view('rmas.index', $data);
     }
 
     /**
@@ -40,24 +39,23 @@ class RmaController extends Controller
             'statuses' => RmaRepo::getStatuses(),
             'types' => RmaRepo::getTypes(),
         ];
-        return view('admin::pages.rmas.info', $data);
+        return view('rms/info', $data);
     }
 
-    public function addHistory(Request $request, int $id)
+    public function create(int $orderProductId)
     {
-        RmaRepo::addHistory($id, $request->only('status', 'notify', 'comment'));
-
-         $data = [
-            'rma' => RmaRepo::find($id),
+        $data = [
+            'orderProductId' => $orderProductId,
             'statuses' => RmaRepo::getStatuses(),
+            'types' => RmaRepo::getTypes(),
         ];
-       return json_success('更新成功', $data);
+        return view('rms/form', $data);
     }
 
-    public function destroy(int $id): array
+    public function store(RmaRequest $request)
     {
-        RmaRepo::delete($id);
+        $rma = RmaService::createFromShop($request->only('order_product_id', 'quantity', 'opened', 'rma_reason_id', 'type', 'comment'));
 
-        return json_success("已成功删除");
+        return json_success('售后服务申请提交成功', $rma);
     }
 }

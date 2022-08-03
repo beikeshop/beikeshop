@@ -12,6 +12,11 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Order;
+use Beike\Models\OrderProduct;
+use Beike\Models\Rma;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderProductRepo
 {
@@ -30,5 +35,14 @@ class OrderProductRepo
             ];
         }
         $order->orderProducts()->createMany($orderProducts);
+    }
+
+    /**
+     * @param $id
+     * @return Builder|Builder[]|Collection|Model|null
+     */
+    public static function find($id)
+    {
+        return OrderProduct::query()->findOrFail($id);
     }
 }
