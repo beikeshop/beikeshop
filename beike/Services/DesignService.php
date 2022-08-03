@@ -125,7 +125,7 @@ class DesignService
             $tabs[$index]['title'] = $tab['title'][locale()];
             $productsIds = $tab['products'];
             if ($productsIds) {
-                $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds);
+                $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds)->jsonSerialize();
             }
         }
         $content['tabs'] = $tabs;
