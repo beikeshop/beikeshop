@@ -15,6 +15,7 @@ class HomeController extends Controller
             'customer' => DashboardRepo::getCustomerData(),
             'total' => DashboardRepo::getTotalData(),
         ];
+
         return view('admin::pages.home', $data);
     }
 }

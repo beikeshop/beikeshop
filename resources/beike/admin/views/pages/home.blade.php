@@ -10,62 +10,73 @@
   <div class="row">
     <div class="col-lg-3 col-6">
       <div class="card mb-4">
-        {{-- <div class="card-header">产品总数</div> --}}
+        <div class="card-header d-flex justify-content-between">
+          <span>{{ __('admin/dashboard.customer_view') }}</span>
+          <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
+        </div>
         <div class="card-body">
-          <h6 class="text-uppercase text-black-50 mb-3">产品总数</h6>
+          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.customer_view') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">90</div>
-              {{-- <span class="mt-n1 ms-2 badge bg-success-soft">+3.5%</span> --}}
+              <div class="fs-2 lh-1 fw-bold">{{ $product['total'] }}</div>
             </div>
-            <div><i class="fs-4 bi bi-cart"></i></div>
+            {{-- <div><i class="fs-4 bi bi-cart"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-24</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-24</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboar.day_befored') }}</span></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-6">
       <div class="card mb-4">
-        {{-- <div class="card-header">订单总数</div> --}}
+        <div class="card-header d-flex justify-content-between">
+          <span>{{ __('admin/dashboard.order_total') }}</span>
+          <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
+        </div>
         <div class="card-body">
-          <h6 class="text-uppercase text-black-50 mb-3">订单总数</h6>
+          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.order_total') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">190</div>
+              <div class="fs-2 lh-1 fw-bold">{{ $order['total'] }}</div>
             </div>
-            <div><i class="fs-4 bi bi-journal-text"></i></div>
+            {{-- <div><i class="fs-4 bi bi-journal-text"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-21%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-21%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-6">
       <div class="card mb-4">
-        {{-- <div class="card-header">会员总数</div> --}}
+        <div class="card-header d-flex justify-content-between">
+          <span>{{ __('admin/dashboard.customer_new') }}</span>
+          <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
+        </div>
         <div class="card-body">
-          <h6 class="text-uppercase text-black-50 mb-3">会员总数</h6>
+          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.customer_new') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">190</div>
+              <div class="fs-2 lh-1 fw-bold">{{ $customer['total'] }}</div>
             </div>
-            <div><i class="fs-4 bi bi-person"></i></div>
+            {{-- <div><i class="fs-4 bi bi-person"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+30%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+30%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-6">
       <div class="card mb-4">
-        {{-- <div class="card-header">会员总数</div> --}}
+        <div class="card-header d-flex justify-content-between">
+          <span>{{ __('admin/dashboard.order_amount') }}</span>
+          <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
+        </div>
         <div class="card-body">
-          <h6 class="text-uppercase text-black-50 mb-3">销售金额</h6>
+          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.order_amount') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">6666666</div>
+              <div class="fs-2 lh-1 fw-bold">{{ $total['total'] }}</div>
             </div>
-            <div><i class="fs-4 bi bi-person"></i></div>
+            {{-- <div><i class="fs-4 bi bi-person"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+140%</span> <span class="vr mx-2"></span> <span class="text-muted">较以往新增</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">+140%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
