@@ -71,12 +71,19 @@
     </div>
   </div>
 
+  <div class="card mb-4">
+    <div class="card-header">订单统计</div>
+    <div class="card-body">
+      <canvas id="orders-chart" style="max-height: 420px"></canvas>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-lg-8 col-12">
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart"></canvas>
+          <canvas id="customer-chart" style="max-height: 420px"></canvas>
         </div>
       </div>
     </div>
@@ -84,25 +91,12 @@
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart-1"></canvas>
+          <canvas id="customer-chart-1" style="max-height: 420px"></canvas>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card mb-3">
-    <div class="card-header">订单统计</div>
-    <div class="card-body">
-      <div>
-        <ul>
-          <li>新订单</li>
-          <li>已付款</li>
-          <li>已发货</li>
-          <li>已完成</li>
-        </ul>
-      </div>
-    </div>
-  </div>
 
 @endsection
 
@@ -110,6 +104,7 @@
   <script>
   const ctx = document.getElementById('customer-chart').getContext('2d');
   const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
+  const orders = document.getElementById('orders-chart').getContext('2d');
   const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -189,6 +184,53 @@
         ],
         borderWidth: 0
       }]
+    }
+  });
+
+
+  const gradient = ctx.createLinearGradient(0, 0, 0, 420);
+        gradient.addColorStop(0, 'rgba(180,223,253,1)');
+        gradient.addColorStop(1, 'rgba(180,223,253,0)');
+
+  const ordersChart = new Chart(orders, {
+    type: 'line',
+    data: {
+      labels: Array.from({length: 30}, (v, k) => k + 1),
+      datasets: [{
+        label: ["订单数"],
+        backgroundColor : gradient, // Put the gradient here as a fill color
+        borderColor : "#4da4f9",
+        borderWidth: 2,
+        pointColor : "#fff",
+        pointStrokeColor : "#ff6c23",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "#ff6c23",
+        data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
+        fill: true,
+        // borderDash: [],
+        responsive: true,
+        lineTension: 0.3,
+        datasetStrokeWidth : 3,
+        pointDotStrokeWidth : 4,
+        // pointRadius: 3,
+      }],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            drawBorder: false,
+          },
+        },
+        x: {
+          beginAtZero: true,
+          grid: {
+            drawBorder: false,
+            display: false
+          },
+        }
+      },
     }
   });
   </script>

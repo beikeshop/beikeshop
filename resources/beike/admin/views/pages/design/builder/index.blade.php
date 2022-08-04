@@ -79,7 +79,7 @@
     }
 
     Vue.prototype.thumbnail = function thumbnail(image, width, height) {
-      return '{{ asset('catalog') }}' + image;
+      return '{{ asset('') }}' + image;
     };
 
     function randomString(length) {
