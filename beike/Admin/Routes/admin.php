@@ -42,7 +42,7 @@ Route::prefix($adminName)
                 Route::put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
                 Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
-                Route::get('edit', [Controllers\EditController::class, 'update'])->name('edit');
+                Route::put('edit', [Controllers\EditController::class, 'update'])->name('edit');
                 Route::put('edit/locale', [Controllers\EditController::class, 'local'])->name('edit.locale');
 
                 Route::resource('files', Controllers\FileController::class);
