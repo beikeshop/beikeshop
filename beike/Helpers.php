@@ -240,7 +240,7 @@ function image_origin($image)
 }
 
 /**
- * 获取当前所有语言列表
+ * 获取后天开启所有语言列表
  *
  * @return Collection
  */
@@ -259,6 +259,33 @@ function current_language(): string
     $code = locale();
     return Language::query()->where('code', $code)->first()->name;
 }
+
+
+/**
+ * 获取后台所有语言包列表
+ *
+ * @return array
+ */
+function admin_languages(): array
+{
+    $packages = language_packages();
+    $adminLanguages = collect($packages)->filter(function ($package) {
+        return file_exists(resource_path("lang/{$package}/admin"));
+    })->toArray();
+    return array_values($adminLanguages);
+}
+
+
+/**
+ * 获取语言包列表
+ * @return array
+ */
+function language_packages(): array
+{
+    $languageDir = resource_path('lang');
+    return array_values(array_diff(scandir($languageDir), array('..', '.')));
+}
+
 
 /**
  * 获取当前货币
