@@ -12,6 +12,7 @@
 return [
     'edit' => '编辑',
 
+    // header
     'home' => 'Home',
     'order' => 'Orders',
     'product' => 'Products',
@@ -22,5 +23,15 @@ return [
     'region' => 'Region',
     'tax_rate' => 'Tax Rate',
     'tax_class' => 'Tax Class',
-    'currency' => 'Currency'
+    'currency' => 'Currency',
+
+    // sidebar
+    'settings_index' => 'Setting',
+    'admin_users_index' => 'Admin Users',
+    'plugins_index' => 'Plugins',
+    'regions_index' => 'Regions',
+    'tax_rates_index' => 'Tax Rates',
+    'tax_classes_index' => 'Tax Classes',
+    'currencies_index' => 'Currencies',
+    'design_index' => 'Page Builder',
 ];

@@ -37,41 +37,41 @@ class Sidebar extends Component
         $routeName = str_replace($adminName . '.', '', $routeNameWithPrefix);
 
         if (Str::startsWith($routeName, ['home.'])) {
-            $this->addLink('首页装修', 'design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
-            $this->addLink('插件列表', 'plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
-            $this->addLink('商品分类', 'categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
-            $this->addLink('品牌管理', 'brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
-            $this->addLink('税率设置', 'tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('语言管理', 'tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('货币管理', 'currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
+            $this->addLink('design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
+            $this->addLink('plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
+            $this->addLink('categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
+            $this->addLink('brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
+            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
         }
 
         if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
-            $this->addLink('商品分类', 'categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
-            $this->addLink('商品列表', 'products.index', 'fa fa-tachometer-alt', $this->equalRoute('products.index'));
-            $this->addLink('品牌管理', 'brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
-            $this->addLink('回收站', 'products.trashed', 'fa fa-tachometer-alt', $this->equalRoute('products.trashed'));
+            $this->addLink('categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
+            $this->addLink('products.index', 'fa fa-tachometer-alt', $this->equalRoute('products.index'));
+            $this->addLink('brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
+            $this->addLink('products.trashed', 'fa fa-tachometer-alt', $this->equalRoute('products.trashed'));
         }
 
         if (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
-            $this->addLink('会员管理', 'customers.index', 'fa fa-tachometer-alt', $this->equalRoute('customers.index'));
-            $this->addLink('用户组', 'customer_groups.index', 'fa fa-tachometer-alt', $this->equalRoute('customer_groups.index'));
+            $this->addLink('customers.index', 'fa fa-tachometer-alt', $this->equalRoute('customers.index'));
+            $this->addLink('customer_groups.index', 'fa fa-tachometer-alt', $this->equalRoute('customer_groups.index'));
         }
 
         if (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
-            $this->addLink('订单列表', 'orders.index', 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
-            $this->addLink('售后列表', 'rmas.index', 'fa fa-tachometer-alt', $this->equalRoute('rmas.index'));
+            $this->addLink('orders.index', 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
+            $this->addLink('rmas.index', 'fa fa-tachometer-alt', $this->equalRoute('rmas.index'));
         }
 
         if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies'])) {
-            $this->addLink('系统设置', 'settings.index', 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
-            $this->addLink('后台用户', 'admin_users.index', 'fa fa-tachometer-alt', $this->equalRoute('admin_users.index'));
-            $this->addLink('插件列表', 'plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
-            $this->addLink('区域分组', 'regions.index', 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
-            $this->addLink('税率设置', 'tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('税费类别', 'tax_classes.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
-            $this->addLink('货币管理', 'currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
-            $this->addLink('首页装修', 'design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
+            $this->addLink('settings.index', 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
+            $this->addLink('admin_users.index', 'fa fa-tachometer-alt', $this->equalRoute('admin_users.index'));
+            $this->addLink('plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
+            $this->addLink('regions.index', 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
+            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
+            $this->addLink('tax_classes.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
+            $this->addLink('currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
+            $this->addLink('design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
         }
 
         return view('admin::components.sidebar');
@@ -81,19 +81,19 @@ class Sidebar extends Component
     /**
      * 添加左侧菜单链接
      *
-     * @param $title
      * @param $route
      * @param $icon
      * @param $active
      * @param false $newWindow
      */
-    public function addLink($title, $route, $icon, $active, bool $newWindow = false)
+    public function addLink($route, $icon, $active, bool $newWindow = false)
     {
         $permissionRoute = str_replace('.', '_', $route);
         if ($this->adminUser->cannot($permissionRoute)) {
             return;
         }
 
+        $title = trans("admin/common.{$permissionRoute}");
         $url = admin_route($route);
         $this->links[] = [
             'title' => $title,
