@@ -114,6 +114,12 @@ class ProductRepo
             $builder->where('active', (int)$data['active']);
         }
 
+        // 回收站
+        if (isset($data['trashed']) && $data['trashed']) {
+            $builder->onlyTrashed();
+        }
+
+
         return $builder;
     }
 

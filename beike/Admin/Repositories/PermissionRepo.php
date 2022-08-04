@@ -42,7 +42,10 @@ class PermissionRepo
         $permissions = [
             ['title' => trans('admin/common.order'), 'permissions' => $this->getOrderPermissions()],
             ['title' => trans('admin/common.product'), 'permissions' => $this->getProductPermissions()],
+            ['title' => trans('admin/common.category'), 'permissions' => $this->getCategoryPermissions()],
+            ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
             ['title' => trans('admin/common.customer'), 'permissions' => $this->getCustomerPermissions()],
+            ['title' => trans('admin/common.customer_group'), 'permissions' => $this->getCustomerGroupPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
@@ -76,9 +79,35 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        $routes = ['products_index', 'products_create', 'products_edit', 'products_update', 'products_delete'];
+        $routes = ['products_index', 'products_create', 'products_edit', 'products_update', 'products_delete', 'products_trashed'];
         $items = $this->getPermissionList('product', $routes);
         return hook_filter('role.product_permissions', $items);
+    }
+
+
+    /**
+     * 分类权限列表
+     *
+     * @return \string[][]
+     */
+    private function getCategoryPermissions(): array
+    {
+        $routes = ['categories_index', 'categories_create', 'categories_edit', 'categories_update', 'categories_delete'];
+        $items = $this->getPermissionList('category', $routes);
+        return hook_filter('role.category_permissions', $items);
+    }
+
+
+    /**
+     * 品牌权限列表
+     *
+     * @return \string[][]
+     */
+    private function getBrandPermissions(): array
+    {
+        $routes = ['brands_index', 'brands_create', 'brands_edit', 'brands_update', 'brands_delete'];
+        $items = $this->getPermissionList('brand', $routes);
+        return hook_filter('role.brand_permissions', $items);
     }
 
 
@@ -92,6 +121,19 @@ class PermissionRepo
         $routes = ['customers_index', 'customers_create', 'customers_edit', 'customers_update', 'customers_delete'];
         $items = $this->getPermissionList('customer', $routes);
         return hook_filter('role.customer_permissions', $items);
+    }
+
+
+    /**
+     * 客户组权限列表
+     *
+     * @return \string[][]
+     */
+    private function getCustomerGroupPermissions(): array
+    {
+        $routes = ['customer_groups_index', 'customer_groups_create', 'customer_groups_edit', 'customer_groups_update', 'customer_groups_delete'];
+        $items = $this->getPermissionList('customer_group', $routes);
+        return hook_filter('role.customer_group_permissions', $items);
     }
 
 

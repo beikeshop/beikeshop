@@ -28,6 +28,10 @@ class ProductController extends Controller
         return view('admin::pages.products.index', $data);
     }
 
+    public function trashed(Request $request)
+    {
+    }
+
     public function create(Request $request)
     {
         return $this->form($request, new Product());

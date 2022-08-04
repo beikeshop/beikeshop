@@ -68,6 +68,7 @@ Route::prefix($adminName)
                 Route::post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
                 Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
+                Route::get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
                 Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
                 Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
                 Route::resource('products', Controllers\ProductController::class);
