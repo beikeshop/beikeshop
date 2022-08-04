@@ -12,11 +12,17 @@
 namespace Plugin\HeaderMenu\Controllers;
 
 use Beike\Repositories\ProductRepo;
-use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\ProductList;
+use Beike\Shop\Http\Controllers\Controller;
 
 class MenusController extends Controller
 {
+    public function getRoutes(): string
+    {
+        return __METHOD__;
+    }
+
+
     public function latestProducts()
     {
         $products = ProductRepo::getBuilder()->orderByDesc('updated_at')->paginate(40);

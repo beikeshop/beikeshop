@@ -34,9 +34,12 @@ class ShareViewData
 
         if (is_admin()) {
             $adminLanguages = $this->handleAdminLanguages();
-            $currentLanguage = current_user()->locale ?: 'en';
-            View::share('admin_languages', $adminLanguages);
-            View::share('admin_language', collect($adminLanguages)->where('code', $currentLanguage)->first());
+            $loggedAdminUser = current_user();
+            if ($loggedAdminUser) {
+                $currentLanguage = $loggedAdminUser->locale ?: 'en';
+                View::share('admin_languages', $adminLanguages);
+                View::share('admin_language', collect($adminLanguages)->where('code', $currentLanguage)->first());
+            }
         }
     }
 

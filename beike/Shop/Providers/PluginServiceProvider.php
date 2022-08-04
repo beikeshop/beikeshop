@@ -12,6 +12,7 @@
 namespace Beike\Shop\Providers;
 
 use Beike\Plugin\Manager;
+use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -77,12 +78,23 @@ class PluginServiceProvider extends ServiceProvider
     private function loadRoutes($pluginCode)
     {
         $pluginBasePath = $this->pluginBasePath;
-        $routePath = "{$pluginBasePath}/{$pluginCode}/routes.php";
-        if (file_exists($routePath)) {
+        $shopRoutePath = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
+        if (file_exists($shopRoutePath)) {
             Route::prefix('plugin')
-                ->middleware('web')
-                ->group(function () use ($routePath) {
-                    $this->loadRoutesFrom($routePath);
+                ->middleware('shop')
+                ->group(function () use ($shopRoutePath) {
+                    $this->loadRoutesFrom($shopRoutePath);
+                });
+        }
+
+        $adminRoutePath = "{$pluginBasePath}/{$pluginCode}/Routes/admin.php";
+        if (file_exists($adminRoutePath)) {
+            $adminName = admin_name();
+            Route::prefix($adminName)
+                ->name('admin.')
+                ->middleware(['admin', 'admin_auth:' . AdminUser::AUTH_GUARD])
+                ->group(function () use ($adminRoutePath) {
+                    $this->loadRoutesFrom($adminRoutePath);
                 });
         }
     }
