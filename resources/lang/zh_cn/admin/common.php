@@ -38,6 +38,8 @@ return [
     'currencies_index' => '货币管理',
     'design_index' => '首页装修',
     'categories_index' => '产品分类',
+    'products_index' => '商品管理',
+    'products_trashed' => '回收站',
     'brands_index' => '产品品牌',
     'orders_index' => '订单列表',
     'customers_index' => '客户列表',

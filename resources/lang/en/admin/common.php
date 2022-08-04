@@ -39,6 +39,8 @@ return [
     'currencies_index' => 'Currencies',
     'design_index' => 'Page Builder',
     'categories_index' => 'Categories',
+    'products_index' => 'Products',
+    'products_trashed' => 'Trashed',
     'brands_index' => 'Brands',
     'orders_index' => 'Orders',
     'customers_index' => 'Customers',
