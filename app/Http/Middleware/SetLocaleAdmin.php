@@ -17,8 +17,8 @@ class SetLocaleAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $currentLocale = current_user()->locale;
-        if (in_array($currentLocale, languages()->toArray())) {
+        $currentLocale = current_user()->locale ?? 'en';
+        if (in_array($currentLocale, admin_languages())) {
             App::setLocale($currentLocale);
         } else {
             App::setLocale('en');

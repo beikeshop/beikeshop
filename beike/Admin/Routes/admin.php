@@ -54,6 +54,7 @@ Route::prefix($adminName)
                 Route::delete('file_manager/directories', [Controllers\FileManagerController::class, 'destroyDirectories'])->name('file_manager.delete_directories');
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
+                Route::resource('languages', Controllers\LanguageController::class);
 
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
