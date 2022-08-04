@@ -21,6 +21,7 @@ class AdminUserRepo
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'locale' => $data['locale'],
             'active' => true,
         ]);
         $adminUser->save();
@@ -38,6 +39,7 @@ class AdminUserRepo
         $userData = [
             'name' => $data['name'],
             'email' => $data['email'],
+            'locale' => $data['locale'],
             'active' => true,
         ];
         if ($password) {
