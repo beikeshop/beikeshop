@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     public array $links = [];
-    private AdminUser $adminUser;
+    private ?AdminUser $adminUser;
 
     /**
      * Create a new component instance.
@@ -17,7 +17,7 @@ class Header extends Component
      */
     public function __construct()
     {
-        $this->adminUser = auth()->user();
+        $this->adminUser = current_user();
     }
 
 

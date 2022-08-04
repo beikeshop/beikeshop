@@ -22,7 +22,7 @@ class Sidebar extends Component
     {
         $this->adminName = admin_name();
         $this->routeNameWithPrefix = request()->route()->getName();
-        $this->adminUser = auth(AdminUser::AUTH_GUARD)->user();
+        $this->adminUser = current_user();
     }
 
     /**

@@ -17,7 +17,7 @@ class AccountSidebar extends Component
      */
     public function __construct()
     {
-        $this->customer = auth(Customer::AUTH_GUARD)->user();
+        $this->customer = current_customer();
     }
 
     /**

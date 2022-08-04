@@ -135,9 +135,9 @@ function equal_route($routeName): bool
 /**
  * 获取后台当前登录用户
  *
- * @return Authenticatable|null
+ * @return mixed
  */
-function current_user(): ?Authenticatable
+function current_user(): ?AdminUser
 {
     return auth()->guard(AdminUser::AUTH_GUARD)->user();
 }
@@ -145,9 +145,9 @@ function current_user(): ?Authenticatable
 /**
  * 获取前台当前登录客户
  *
- * @return Authenticatable|null
+ * @return mixed
  */
-function current_customer(): ?Authenticatable
+function current_customer(): ?Customer
 {
     return auth()->guard(Customer::AUTH_GUARD)->user();
 }

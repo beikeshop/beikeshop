@@ -19,7 +19,7 @@ class EditController extends Controller
 {
     public function index()
     {
-        $customer = auth(Customer::AUTH_GUARD)->user();
+        $customer = current_customer();
         $data['customer'] = $customer;
         return view('account/edit', $data);
     }

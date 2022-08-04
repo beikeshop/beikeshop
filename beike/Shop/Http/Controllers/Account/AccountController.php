@@ -13,23 +13,21 @@ namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
-use Beike\Shop\Http\Controllers\Controller;
-use Beike\Shop\Http\Requests\EditRequest;
-use Beike\Shop\Http\Requests\ForgottenRequest;
-use http\Env\Request;
 use Illuminate\Support\Facades\Hash;
-use function auth;
-use function view;
+use Beike\Shop\Http\Requests\EditRequest;
+use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Requests\ForgottenRequest;
 
 class AccountController extends Controller
 {
     /**
      * 个人中心首页
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Exception
      */
     public function index()
     {
-        $data = auth(Customer::AUTH_GUARD)->user()->toArray();
+        $data = current_customer()->toArray();
         $data['avatar'] = image_resize($data['avatar']);
         return view('account/account', $data);
     }
