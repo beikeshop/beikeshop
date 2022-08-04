@@ -21,7 +21,7 @@
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             @foreach ($admin_languages as $language)
-            <li><a href="" class="dropdown-item">{{ $language['name'] }}</a></li>
+            <li><a href="{{ admin_route('edit.locale', ['locale' => $language['code']]) }}" class="dropdown-item">{{ $language['name'] }}</a></li>
             @endforeach
           </ul>
         </div>

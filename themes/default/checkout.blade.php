@@ -46,7 +46,7 @@
               </div>
               <div class="col-6" v-if="!isAllAddress">
                 <div class="item address-right">
-                  <button class="btn btn-outline-dark w-100 mb-3" @click="isAllAddress = true">选择其他地址</button>
+                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddress = true">选择其他地址</button>
                   <button class="btn btn-outline-dark w-100" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</button>
                 </div>
               </div>
