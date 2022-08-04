@@ -23,6 +23,7 @@ return [
     'tax_rate' => '税率管理',
     'tax_class' => '税类管理',
     'currency' => '货币管理',
+    'access_frontend' => '访问前台',
 
     // sidebar
     'settings_index' => '系统设置',

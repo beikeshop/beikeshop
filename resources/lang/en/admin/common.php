@@ -24,6 +24,7 @@ return [
     'tax_rate' => 'Tax Rate',
     'tax_class' => 'Tax Class',
     'currency' => 'Currency',
+    'access_frontend' => 'Frontend',
 
     // sidebar
     'settings_index' => 'Setting',

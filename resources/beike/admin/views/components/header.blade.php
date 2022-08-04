@@ -13,7 +13,7 @@
     </ul>
     <ul class="navbar">
       <li class="nav-item">
-        <a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link"><i class="bi bi-send me-1"></i> 访问前台</a>
+        <a target="_blank" href="{{ shop_route('home.index') }}" class="nav-link"><i class="bi bi-send me-1"></i> @lang('admin/common.access_frontend')</a>
       </li>
       <li class="nav-item">
         <div class="dropdown">
