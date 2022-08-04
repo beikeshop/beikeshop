@@ -17,9 +17,13 @@ use Beike\Shop\Http\Controllers\Controller;
 
 class MenusController extends Controller
 {
-    public function getRoutes(): string
+    public function getRoutes()
     {
-        return __METHOD__;
+        $data = [
+            'method' => __METHOD__,
+            'route_list' => []
+        ];
+        return view("HeaderMenu::route_list", $data);
     }
 
 
