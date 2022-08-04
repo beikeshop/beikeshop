@@ -74,30 +74,42 @@
       }
     }
 
-    .navbar.navbar-right {
-      li {
-        a.nav-link {
-          position: relative;
+    .navbar {
+      &.navbar-left {
+        li {
+          a.nav-link {
+            position: relative;
 
-          &:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            display: none;
-            bottom: 0;
-            width: 100%;
-            height: 3px;
-            background-color: $primary;
+            &:after {
+              content: '';
+              position: absolute;
+              left: 0;
+              display: none;
+              bottom: 0;
+              width: 100%;
+              height: 3px;
+              background-color: $primary;
+            }
+          }
+
+          &.active, &:hover {
+            font-weight: bold;
+
+            a {
+              &:after {
+                display: block;
+              }
+            }
           }
         }
+      }
 
-        &.active, &:hover {
-          font-weight: bold;
+      &.navbar-right {
+        > li {
+          padding: 0 .5rem;
 
-          a {
-            &:after {
-              display: block;
-            }
+          a.nav-link {
+            padding: 0 10px;
           }
         }
       }

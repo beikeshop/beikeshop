@@ -117,7 +117,7 @@
             id: null,
             name: '',
             email: '',
-            locale: @json($admin_language ?? 'en'),
+            locale: @json($admin_language['code'] ?? 'en'),
             password: '',
             roles: [],
           },
@@ -144,6 +144,7 @@
               id: tax.id,
               name: tax.name,
               email: tax.email,
+              locale: tax.locale,
               roles: tax.roles.map(e => e.id),
             }
           }
@@ -190,7 +191,7 @@
         closeCustomersDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.roles = [];
-          this.dialog.form.locale =  @json($admin_language ?? 'en');
+          this.dialog.form.locale =  @json($admin_language['code'] ?? 'en');
           this.dialog.show = false
           this.$refs[form].resetFields();
         }
