@@ -25,7 +25,7 @@ use Beike\Shop\Http\Controllers\Account\ForgottenController;
 
 Route::prefix('/')
     ->name('shop.')
-    ->middleware(['web'])
+    ->middleware(['shop'])
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
 

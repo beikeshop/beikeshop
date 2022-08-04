@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 $adminName = admin_name();
 Route::prefix($adminName)
-    ->middleware(['web'])
+    ->middleware(['admin'])
     ->name("{$adminName}.")
     ->group(function () {
         Route::get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');

@@ -250,16 +250,6 @@ function languages(): Collection
 }
 
 /**
- * 当前语言ID
- *
- * @return int
- */
-function current_language_id(): int
-{
-    return 1;
-}
-
-/**
  * 当前语言
  *
  * @return string
