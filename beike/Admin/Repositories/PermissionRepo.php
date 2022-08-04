@@ -40,17 +40,17 @@ class PermissionRepo
     public function getAllPermissions(): array
     {
         $permissions = [
-            ['title' => '订单管理', 'permissions' => $this->getOrderPermissions()],
-            ['title' => '商品管理', 'permissions' => $this->getProductPermissions()],
-            ['title' => '客户管理', 'permissions' => $this->getCustomerPermissions()],
-            ['title' => '系统设置', 'permissions' => $this->getSettingPermissions()],
+            ['title' => trans('admin/common.order'), 'permissions' => $this->getOrderPermissions()],
+            ['title' => trans('admin/common.product'), 'permissions' => $this->getProductPermissions()],
+            ['title' => trans('admin/common.customer'), 'permissions' => $this->getCustomerPermissions()],
+            ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
 
-            ['title' => '插件管理', 'permissions' => $this->getPluginPermissions()],
-            ['title' => '后台用户', 'permissions' => $this->getAdminUserPermissions()],
-            ['title' => '区域分组', 'permissions' => $this->getRegionPermissions()],
-            ['title' => '税率设置', 'permissions' => $this->getTaxRatePermissions()],
-            ['title' => '税费类别', 'permissions' => $this->getTaxClassPermissions()],
-            ['title' => '货币管理', 'permissions' => $this->getCurrencyPermissions()],
+            ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
+            ['title' => trans('admin/common.admin_user'), 'permissions' => $this->getAdminUserPermissions()],
+            ['title' => trans('admin/common.region'), 'permissions' => $this->getRegionPermissions()],
+            ['title' => trans('admin/common.tax_rate'), 'permissions' => $this->getTaxRatePermissions()],
+            ['title' => trans('admin/common.tax_class'), 'permissions' => $this->getTaxClassPermissions()],
+            ['title' => trans('admin/common.currency'), 'permissions' => $this->getCurrencyPermissions()],
         ];
         return hook_filter('role.all_permissions', $permissions);
     }
