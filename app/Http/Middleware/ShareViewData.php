@@ -31,5 +31,33 @@ class ShareViewData
         View::share('languages', LanguageRepo::enabled());
         View::share('shop_base_url', shop_route('home.index'));
         View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
+
+        if (is_admin()) {
+            View::share('admin_languages', $this->handleAdminLanguages());
+        }
+    }
+
+
+    /**
+     * 处理后台语言包列表
+     *
+     * @return array
+     */
+    private function handleAdminLanguages(): array
+    {
+        $items = [];
+        $languages = admin_languages();
+        foreach ($languages as $language) {
+            $path = lang_path("{$language}/admin/base.php");
+            if (file_exists($path)) {
+                $baseData = require_once($path);
+            }
+            $name = $baseData['name'] ?? '';
+            $items[] = [
+                'code' => $language,
+                'name' => $name,
+            ];
+        }
+        return $items;
     }
 }
