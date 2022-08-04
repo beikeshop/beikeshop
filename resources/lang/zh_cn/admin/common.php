@@ -33,4 +33,9 @@ return [
     'tax_classes_index' => '税费类别',
     'currencies_index' => '货币管理',
     'design_index' => '首页装修',
+    'categories_index' => '产品分类',
+    'brands_index' => '产品品牌',
+    'orders_index' => '订单列表',
+    'customers_index' => '客户列表',
+    'customer_groups_index' => '客户组',
 ];

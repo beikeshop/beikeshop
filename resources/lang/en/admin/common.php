@@ -34,4 +34,9 @@ return [
     'tax_classes_index' => 'Tax Classes',
     'currencies_index' => 'Currencies',
     'design_index' => 'Page Builder',
+    'categories_index' => 'Categories',
+    'brands_index' => 'Brands',
+    'orders_index' => 'Orders',
+    'customers_index' => 'Customers',
+    'customer_groups_index' => 'Customer Groups',
 ];
