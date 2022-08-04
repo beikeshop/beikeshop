@@ -33,8 +33,10 @@ class ShareViewData
         View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
 
         if (is_admin()) {
-            View::share('admin_languages', $this->handleAdminLanguages());
-            View::share('admin_language', current_user()->locale ?? 'en');
+            $adminLanguages = $this->handleAdminLanguages();
+            $currentLanguage = current_user()->locale ?? 'en';
+            View::share('admin_languages', $adminLanguages);
+            View::share('admin_language', collect($adminLanguages)->where('code', $currentLanguage)->first());
         }
     }
 
