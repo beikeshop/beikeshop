@@ -15,10 +15,10 @@ class EditController extends Controller
         return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
     }
 
-    public function local(Request $request)
+    public function locale(Request $request)
     {
         $user = current_user();
-        $user->update($request->only('local'));
+        $user->update($request->only('locale'));
 
         return redirect()->back();
     }
