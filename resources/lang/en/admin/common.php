@@ -17,4 +17,10 @@ return [
     'product' => 'Products',
     'customer' => 'Customers',
     'setting' => 'Settings',
+    'plugin' => 'Plugin',
+    'admin_user' => 'Admin User',
+    'region' => 'Region',
+    'tax_rate' => 'Tax Rate',
+    'tax_class' => 'Tax Class',
+    'currency' => 'Currency'
 ];
