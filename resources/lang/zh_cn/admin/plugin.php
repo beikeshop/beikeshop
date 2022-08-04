@@ -10,11 +10,11 @@
  */
 
 return [
-    'plugins_index' => 'Index',
-    'plugins_import' => 'Import',
-    'plugins_edit' => 'Detail',
-    'plugins_update' => 'Update',
-    'plugins_update_status' => 'Delete',
-    'plugins_install' => 'Install',
-    'plugins_uninstall' => 'Uninstall',
+    'plugins_index' => '插件列表',
+    'plugins_import' => '上传插件',
+    'plugins_edit' => '插件详情',
+    'plugins_update' => '插件更新',
+    'plugins_update_status' => '删除插件',
+    'plugins_install' => '安装',
+    'plugins_uninstall' => '卸载',
 ];

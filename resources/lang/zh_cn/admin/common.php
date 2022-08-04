@@ -10,5 +10,5 @@
  */
 
 return [
-    'edit' => 'Edit',
+    'edit' => '编辑',
 ];

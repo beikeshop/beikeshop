@@ -10,6 +10,6 @@
  */
 
 return [
-    'settings_index' => 'Setting',
-    'design_index' => 'Design Builder',
+    'settings_index' => '系统设置',
+    'design_index' => '首页编辑器',
 ];

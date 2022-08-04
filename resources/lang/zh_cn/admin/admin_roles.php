@@ -10,6 +10,6 @@
  */
 
 return [
-    'select_all' => 'Select All',
-    'unselect_all' => 'Unselect All',
+    'select_all' => '选中所有',
+    'unselect_all' => '取消选中',
 ];

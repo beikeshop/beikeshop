@@ -10,9 +10,9 @@
  */
 
 return [
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_edit' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
+    'orders_index' => '订单列表',
+    'orders_create' => '创建订单',
+    'orders_edit' => '订单详情',
+    'orders_update' => '更新订单',
+    'orders_delete' => '删除订单',
 ];

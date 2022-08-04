@@ -10,9 +10,9 @@
  */
 
 return [
-    'home' => 'Home',
-    'order' => 'Orders',
-    'product' => 'Products',
-    'customer' => 'Customers',
-    'setting' => 'Settings',
+    'home' => '管理首页',
+    'order' => '订单管理',
+    'product' => '商品管理',
+    'customer' => '会员管理',
+    'setting' => '系统设置',
 ];

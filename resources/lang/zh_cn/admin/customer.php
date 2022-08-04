@@ -10,9 +10,9 @@
  */
 
 return [
-    'customers_index' => 'Index',
-    'customers_create' => 'Create',
-    'customers_edit' => 'Detail',
-    'customers_update' => 'Edit',
-    'customers_delete' => 'Delete'
+    'customers_index' => '客户列表',
+    'customers_create' => '创建客户',
+    'customers_edit' => '客户详情',
+    'customers_update' => '更新客户',
+    'customers_delete' => '删除客户',
 ];

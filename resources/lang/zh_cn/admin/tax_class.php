@@ -10,9 +10,9 @@
  */
 
 return [
-    'tax_classes_index' => 'Index',
-    'tax_classes_create' => 'Create',
-    'tax_classes_edit' => 'Detail',
-    'tax_classes_update' => 'Edit',
-    'tax_classes_delete' => 'Delete'
+    'tax_classes_index' => '税类列表',
+    'tax_classes_create' => '创建税类',
+    'tax_classes_edit' => '税类详情',
+    'tax_classes_update' => '更新税类',
+    'tax_classes_delete' => '删除税类',
 ];

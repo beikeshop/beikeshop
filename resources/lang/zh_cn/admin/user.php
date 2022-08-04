@@ -10,9 +10,9 @@
  */
 
 return [
-    'admin_users_index' => 'Index',
-    'admin_users_create' => 'Create',
-    'admin_users_edit' => 'Detail',
-    'admin_users_update' => 'Edit',
-    'admin_users_delete' => 'Delete'
+    'admin_users_index' => '用户列表',
+    'admin_users_create' => '创建用户',
+    'admin_users_edit' => '用户详情',
+    'admin_users_update' => '更新用户',
+    'admin_users_delete' => '删除用户',
 ];
