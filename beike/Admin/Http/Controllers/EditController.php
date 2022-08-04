@@ -20,6 +20,6 @@ class EditController extends Controller
         $user = current_user();
         $user->update($request->only('local'));
 
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        return redirect()->back();
     }
 }
