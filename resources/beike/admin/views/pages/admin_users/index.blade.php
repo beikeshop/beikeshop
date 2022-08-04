@@ -68,6 +68,17 @@
           <el-input v-model="dialog.form.password" placeholder="密码"></el-input>
         </el-form-item>
 
+        <el-form-item label="语言">
+          <el-select v-model="dialog.form.locale" placeholder="请选择">
+            <el-option
+              v-for="language in source.languages"
+              :key="language.code"
+              :label="language.name"
+              :value="language.code">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="角色" prop="roles">
           <el-checkbox-group v-model="dialog.form.roles">
             <el-checkbox v-for="roles, index in source.roles" :label="roles.id">@{{roles.name}}</el-checkbox>
@@ -93,7 +104,9 @@
 
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
-          roles: @json($admin_roles ?? [])
+          roles: @json($admin_roles ?? []),
+          languages: @json($admin_languages ?? []),
+          {{-- language: @json($admin_language ?? 'en'), --}}
         },
 
         dialog: {
@@ -104,6 +117,7 @@
             id: null,
             name: '',
             email: '',
+            locale: @json($admin_language ?? 'en'),
             password: '',
             roles: [],
           },
@@ -176,6 +190,7 @@
         closeCustomersDialog(form) {
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.roles = [];
+          this.dialog.form.locale =  @json($admin_language ?? 'en');
           this.dialog.show = false
           this.$refs[form].resetFields();
         }
