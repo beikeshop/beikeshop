@@ -37,41 +37,38 @@ class Sidebar extends Component
         $routeName = str_replace($adminName . '.', '', $routeNameWithPrefix);
 
         if (Str::startsWith($routeName, ['home.'])) {
-            $this->addLink('design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
-            $this->addLink('plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
-            $this->addLink('categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
-            $this->addLink('brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
-            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
+            $routes = $this->getHomeSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         }
 
         if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
-            $this->addLink('categories.index', 'fa fa-tachometer-alt', $this->equalRoute('categories.index'));
-            $this->addLink('products.index', 'fa fa-tachometer-alt', $this->equalRoute('products.index'));
-            $this->addLink('brands.index', 'fa fa-tachometer-alt', $this->equalRoute('brands.index'));
-            $this->addLink('products.trashed', 'fa fa-tachometer-alt', $this->equalRoute('products.trashed'));
+            $routes = $this->getProductSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         }
 
         if (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
-            $this->addLink('customers.index', 'fa fa-tachometer-alt', $this->equalRoute('customers.index'));
-            $this->addLink('customer_groups.index', 'fa fa-tachometer-alt', $this->equalRoute('customer_groups.index'));
+            $routes = $this->getCustomerSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         }
 
         if (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
-            $this->addLink('orders.index', 'fa fa-tachometer-alt', $this->equalRoute('orders.index'));
-            $this->addLink('rmas.index', 'fa fa-tachometer-alt', $this->equalRoute('rmas.index'));
+            $routes = $this->getOrderSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         }
 
         if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies'])) {
-            $this->addLink('settings.index', 'fa fa-tachometer-alt', $this->equalRoute('settings.index'));
-            $this->addLink('admin_users.index', 'fa fa-tachometer-alt', $this->equalRoute('admin_users.index'));
-            $this->addLink('plugins.index', 'fa fa-tachometer-alt', $this->equalRoute('plugins.index'));
-            $this->addLink('regions.index', 'fa fa-tachometer-alt', $this->equalRoute('regions.index'));
-            $this->addLink('tax_rates.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_rates.index'));
-            $this->addLink('tax_classes.index', 'fa fa-tachometer-alt', $this->equalRoute('tax_classes.index'));
-            $this->addLink('currencies.index', 'fa fa-tachometer-alt', $this->equalRoute('currencies.index'));
-            $this->addLink('design.index', 'fa fa-tachometer-alt', $this->equalRoute('design.index'), true);
+            $routes = $this->getSettingSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         }
 
         return view('admin::components.sidebar');
@@ -102,6 +99,85 @@ class Sidebar extends Component
             'active' => $active,
             'new_window' => $newWindow
         ];
+    }
+
+
+    /**
+     * 获取首页子页面路由
+     */
+    private function getHomeSubRoutes()
+    {
+        $routes = [
+            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
+        ];
+        return hook_filter('sidebar.home_routes', $routes);
+    }
+
+
+    /**
+     * 获取产品子页面路由
+     */
+    private function getProductSubRoutes()
+    {
+        $routes = [
+            ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'products.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'products.trashed', 'icon' => 'fa fa-tachometer-alt'],
+        ];
+        return hook_filter('sidebar.product_routes', $routes);
+    }
+
+
+    /**
+     * 获取产品子页面路由
+     */
+    private function getCustomerSubRoutes()
+    {
+        $routes = [
+            ['route' => 'customers.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'customer_groups.index', 'icon' => 'fa fa-tachometer-alt'],
+        ];
+        return hook_filter('sidebar.customer_routes', $routes);
+    }
+
+
+    /**
+     * 获取订单子页面路由
+     */
+    private function getOrderSubRoutes()
+    {
+        $routes = [
+            ['route' => 'orders.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'rmas.index', 'icon' => 'fa fa-tachometer-alt'],
+        ];
+        return hook_filter('sidebar.order_routes', $routes);
+    }
+
+
+    /**
+     * 获取系统设置子页面路由
+     * @return mixed
+     */
+    private function getSettingSubRoutes()
+    {
+        $routes = [
+            ['route' => 'settings.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'admin_users.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'regions.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
+        ];
+        return hook_filter('sidebar.setting_routes', $routes);
     }
 
 

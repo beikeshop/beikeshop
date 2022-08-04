@@ -15,12 +15,28 @@ class Bootstrap
 {
     public function boot()
     {
+        $this->addAdminSideBarMenu();
         $this->addHeaderMenu();
     }
 
 
     /**
-     * 在网页头部添加二级菜单链接
+     * 在网站管理后台添加菜单链接
+     */
+    private function addAdminSideBarMenu()
+    {
+        add_filter('sidebar.order_routes', function ($data) {
+            $data[] = [
+                "route" => "currencies.index",
+                "icon" => "fa fa-tachometer-alt"
+            ];
+            return $data;
+        });
+    }
+
+
+    /**
+     * 在前台网页头部添加二级菜单链接
      */
     private function addHeaderMenu()
     {
