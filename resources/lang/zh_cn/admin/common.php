@@ -1,6 +1,6 @@
 <?php
 /**
- * header.php
+ * common.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -11,4 +11,10 @@
 
 return [
     'edit' => '编辑',
+
+    'home' => '管理首页',
+    'order' => '订单管理',
+    'product' => '商品管理',
+    'customer' => '会员管理',
+    'setting' => '系统设置',
 ];

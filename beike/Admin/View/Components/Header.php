@@ -42,11 +42,11 @@ class Header extends Component
     private function prepareMenus()
     {
         $menus = [
-            ['name' => trans('admin/header.home'), 'route' => 'home.index'],
-            ['name' => trans('admin/header.order'), 'route' => 'orders.index'],
-            ['name' => trans('admin/header.product'), 'route' => 'products.index'],
-            ['name' => trans('admin/header.customer'), 'route' => 'customers.index'],
-            ['name' => trans('admin/header.setting'), 'route' => 'settings.index'],
+            ['name' => trans('admin/common.home'), 'route' => 'home.index'],
+            ['name' => trans('admin/common.order'), 'route' => 'orders.index'],
+            ['name' => trans('admin/common.product'), 'route' => 'products.index'],
+            ['name' => trans('admin/common.customer'), 'route' => 'customers.index'],
+            ['name' => trans('admin/common.setting'), 'route' => 'settings.index'],
         ];
         return hook_filter('admin.header_menus', $menus);
     }
