@@ -17,10 +17,12 @@
       <div class="row">
         @foreach ($content['brands'] as $brand)
         <div class="col-6 col-md-4 col-lg-3">
-          <div class="brand-item">
-            <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" class="img-fluid">
-          </div>
-          <p class="text-center">{{ $brand['name'] }}</p>
+          <a href="{{ $brand['url'] }}" class="text-decoration-none">
+            <div class="brand-item">
+              <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" class="img-fluid">
+            </div>
+            <p class="text-center text-dark">{{ $brand['name'] }}</p>
+          </a>
         </div>
         @endforeach
       </div>

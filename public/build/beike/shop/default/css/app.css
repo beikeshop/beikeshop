@@ -589,16 +589,6 @@ footer .footer-bottom {
   justify-content: center;
 }
 .product-wrap .image .button-wrap button {
-  color: white;
-  display: block;
-  margin: 4px;
-  background-color: #252323;
-  width: 36px;
-  height: 38px;
-  text-align: center;
-  line-height: 35px;
-  border-radius: 4px;
-  text-decoration: none;
   position: relative;
 }
 .product-wrap .image .button-wrap button > span {
@@ -624,6 +614,9 @@ footer .footer-bottom {
   bottom: -9px;
   left: 50%;
   margin-left: -5px;
+}
+.product-wrap .image .button-wrap button:hover {
+  background-color: rgba(0, 0, 0, 0.726);
 }
 .product-wrap .image .button-wrap button:hover span {
   opacity: 1;

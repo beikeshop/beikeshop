@@ -9,11 +9,11 @@
       </div>
     </a>
     <div class="button-wrap">
-      <button class="add-wishlist">
+      <button class="btn btn-dark text-light mx-1 rounded-3">
         <i class="iconfont">&#xe77f;</i>
         <span>加入收藏</span>
       </button>
-      <button class="add-cart" onclick="bk.addCart({{ $product['id'] }})">
+      <button class="btn btn-dark text-light mx-1 rounded-3" onclick="bk.addCart({{ $product['id'] }})">
         <i class="iconfont">&#xf13a;</i>
         <span>加入购物车</span>
       </button>
