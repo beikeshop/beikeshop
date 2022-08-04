@@ -10,9 +10,11 @@
  */
 
 return [
-    'orders_index' => '订单列表',
-    'orders_create' => '创建订单',
-    'orders_edit' => '订单详情',
-    'orders_update' => '更新订单',
-    'orders_delete' => '删除订单',
+    'plugins_index' => 'Index',
+    'plugins_import' => 'Import',
+    'plugins_edit' => 'Detail',
+    'plugins_update' => 'Update',
+    'plugins_update_status' => 'Delete',
+    'plugins_install' => 'Install',
+    'plugins_uninstall' => 'Uninstall',
 ];

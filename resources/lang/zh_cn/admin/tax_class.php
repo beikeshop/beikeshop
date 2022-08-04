@@ -10,9 +10,9 @@
  */
 
 return [
-    'products_index' => '产品列表',
-    'products_create' => '创建产品',
-    'products_edit' => '产品详情',
-    'products_update' => '更新产品',
-    'products_delete' => '删除产品',
+    'tax_classes_index' => 'Index',
+    'tax_classes_create' => 'Create',
+    'tax_classes_edit' => 'Detail',
+    'tax_classes_update' => 'Edit',
+    'tax_classes_delete' => 'Delete'
 ];

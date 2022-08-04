@@ -1,14 +1,15 @@
 <?php
 /**
- * header.php
+ * order.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
  * @author     Edward Yang <yangjin@opencart.cn>
- * @created    2022-08-02 19:03:19
- * @modified   2022-08-02 19:03:19
+ * @created    2022-08-02 14:22:41
+ * @modified   2022-08-02 14:22:41
  */
 
 return [
-    'edit' => 'Edit',
+    'settings_index' => 'Setting',
+    'design_index' => 'Design Builder',
 ];

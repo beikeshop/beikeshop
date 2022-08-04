@@ -102,10 +102,8 @@ class PermissionRepo
      */
     private function getSettingPermissions(): array
     {
-        $items = [
-            ['code' => 'settings_index', 'name' => trans('setting.settings_index'), 'selected' => $this->hasPermission('settings_index')],
-            ['code' => 'design_index', 'name' => trans('setting.design_index'), 'selected' => $this->hasPermission('design_index')],
-        ];
+        $routes = ['settings_index', 'design_index'];
+        $items = $this->getPermissionList('setting', $routes);
         return hook_filter('role.setting_permissions', $items);
     }
 
@@ -199,7 +197,7 @@ class PermissionRepo
     {
         $items = [];
         foreach ($routes as $route) {
-            $items[] = ['code' => $route, 'name' => trans("{$module}.{$route}"), 'selected' => $this->hasPermission($route)];
+            $items[] = ['code' => $route, 'name' => trans("admin/{$module}.{$route}"), 'selected' => $this->hasPermission($route)];
         }
         return $items;
     }
