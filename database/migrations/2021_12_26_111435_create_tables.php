@@ -19,6 +19,7 @@ class CreateTables extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('active');
+            $table->string('locale')->default('');
             $table->timestamps();
         });
 

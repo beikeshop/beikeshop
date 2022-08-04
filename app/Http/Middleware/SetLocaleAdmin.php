@@ -17,13 +17,11 @@ class SetLocaleAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $sessionLocale = session('locale');
-        if ($sessionLocale && in_array($sessionLocale, languages()->toArray())) {
-            App::setLocale($sessionLocale);
+        $currentLocale = current_user()->locale;
+        if (in_array($currentLocale, languages()->toArray())) {
+            App::setLocale($currentLocale);
         } else {
-            $configLocale = system_setting('base.locale');
-            App::setLocale($configLocale);
-            session(['locale' => $configLocale]);
+            App::setLocale('en');
         }
         return $next($request);
     }

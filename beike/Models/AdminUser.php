@@ -12,5 +12,5 @@ class AdminUser extends AuthUser
 
     const AUTH_GUARD = 'web_admin';
 
-    protected $fillable = ['name', 'email', 'password', 'active'];
+    protected $fillable = ['name', 'email', 'locale', 'password', 'active'];
 }
