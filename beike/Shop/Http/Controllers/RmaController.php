@@ -14,11 +14,13 @@ namespace Beike\Shop\Http\Controllers;
 use Beike\Repositories\RmaRepo;
 use Beike\Shop\Http\Requests\RmaRequest;
 use Beike\Shop\Services\RmaService;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class RmaController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $rmas = RmaRepo::listByCustomer(current_customer());
         $data = [
@@ -30,7 +32,7 @@ class RmaController extends Controller
 
     /**
      * @param int $id
-     * @return mixed
+     * @return Application|Factory|View
      */
     public function show(int $id)
     {
@@ -52,7 +54,7 @@ class RmaController extends Controller
         return view('rms/form', $data);
     }
 
-    public function store(RmaRequest $request)
+    public function store(RmaRequest $request): array
     {
         $rma = RmaService::createFromShop($request->only('order_product_id', 'quantity', 'opened', 'rma_reason_id', 'type', 'comment'));
 
