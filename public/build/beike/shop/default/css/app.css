@@ -566,6 +566,79 @@ footer .footer-bottom {
 }
 .product-wrap .image {
   margin-bottom: 10px;
+  position: relative;
+}
+.product-wrap .image .image-old {
+  opacity: 1;
+  transition: all ease-out 0.4s;
+}
+.product-wrap .image .image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.product-wrap .image .button-wrap {
+  width: 100%;
+  position: absolute;
+  z-index: 40;
+  bottom: -30px;
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+}
+.product-wrap .image .button-wrap a {
+  color: white;
+  display: block;
+  margin: 4px;
+  background-color: #252323;
+  width: 36px;
+  height: 38px;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 4px;
+  text-decoration: none;
+  position: relative;
+}
+.product-wrap .image .button-wrap a > span {
+  font-size: 11px;
+  text-transform: none;
+  line-height: 18px;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  background-color: #000;
+  padding: 0 5px;
+  white-space: nowrap;
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translate(-50%);
+}
+.product-wrap .image .button-wrap a > span::before {
+  content: "";
+  border: 5px solid transparent;
+  border-top-color: #000;
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  margin-left: -5px;
+}
+.product-wrap .image .button-wrap a:hover span {
+  opacity: 1;
+  bottom: calc(100% + 7px);
+  z-index: 2;
+}
+.product-wrap .image:hover .image-hover {
+  opacity: 1;
+  transition: all ease-out 0.4s;
+}
+.product-wrap .image:hover .image-old {
+  opacity: 0;
+}
+.product-wrap:hover .button-wrap {
+  bottom: 10px;
+  opacity: 1;
 }
 .product-wrap .product-name {
   margin-bottom: 6px;
