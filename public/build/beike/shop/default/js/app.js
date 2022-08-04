@@ -2054,6 +2054,127 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/beike/shop/default/js/global.js":
+/*!***************************************************!*\
+  !*** ./resources/beike/shop/default/js/global.js ***!
+  \***************************************************/
+/***/ (() => {
+
+// 创建 bk 对象
+window.bk = window.bk || {}; // 获取购物车数据
+
+bk.getCarts = function () {
+  $http.get('carts/mini', null, {
+    hload: true
+  }).then(function (res) {
+    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
+
+    if (res.data.carts.length) {
+      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
+      $('.offcanvas-right-cart-count').html(res.data.quantity);
+      var html = '';
+      res.data.carts.forEach(function (e) {
+        html += '<div class="product-list d-flex align-items-center">';
+        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
+        html += '<div class="right flex-grow-1">';
+        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
+        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+        html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
+        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      });
+      $('.offcanvas-right-products').html(html);
+    }
+  });
+}; // 加入购物车
+
+
+bk.addCart = function (sku_id) {
+  var quantity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var isBuyNow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  $http.post('/carts', {
+    sku_id: sku_id,
+    quantity: quantity
+  }).then(function (res) {
+    bk.getCarts();
+    layer.msg(res.message);
+
+    if (isBuyNow) {
+      location.href = 'checkout';
+    }
+  });
+}; // 滑动固定顶部
+
+
+bk.slidingFixed = function () {
+  $(document).ready(function () {
+    if (!$('.fixed-top-line').length) return;
+    if ($(window).width() < 768) return;
+    var totalWrapTop = $('.fixed-top-line').offset().top;
+    var totalWrapWidth = $('.fixed-top-line').outerWidth();
+    var totalWrapHeight = $('.fixed-top-line').outerHeight();
+    var totalWrapLeft = $('.fixed-top-line').offset().left;
+    var footerTop = $('footer').offset().top;
+    var footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > totalWrapTop) {
+        $('.fixed-top-line').css({
+          position: 'fixed',
+          top: 0,
+          bottom: 'auto',
+          'width': totalWrapWidth
+        });
+
+        if (!$('.total-old').length) {
+          $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
+        }
+
+        if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
+          $('.fixed-top-line').css({
+            position: 'absolute',
+            top: 'auto',
+            bottom: '0',
+            'width': totalWrapWidth
+          });
+        }
+      } else {
+        $('.total-old').remove();
+        $('.fixed-top-line').removeAttr('style');
+      }
+    });
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/beike/shop/default/js/product.js":
+/*!****************************************************!*\
+  !*** ./resources/beike/shop/default/js/product.js ***!
+  \****************************************************/
+/***/ (() => {
+
+$(document).on('click', '.quantity-wrap .right i', function (event) {
+  event.stopPropagation();
+  var input = $(this).parent().siblings('input');
+
+  if ($(this).hasClass('bi-chevron-up')) {
+    input.val(input.val() * 1 + 1);
+    input.get(0).dispatchEvent(new Event('input'));
+    return;
+  }
+
+  if (input.val() * 1 <= input.attr('minimum') * 1) {
+    return;
+  }
+
+  input.val(input.val() * 1 - 1);
+  input.get(0).dispatchEvent(new Event('input'));
+});
+
+/***/ }),
+
 /***/ "./resources/js/http.js":
 /*!******************************!*\
   !*** ./resources/js/http.js ***!
@@ -2430,6 +2551,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -2468,128 +2601,17 @@ var __webpack_exports__ = {};
   \************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../js/http */ "./resources/js/http.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./resources/beike/shop/default/js/global.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_global__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product */ "./resources/beike/shop/default/js/product.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_product__WEBPACK_IMPORTED_MODULE_2__);
 
-window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"]; // 创建 bk 对象
-
-window.bk = window.bk || {};
-$(document).ready(function ($) {
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    beforeSend: function beforeSend() {
-      layer.load(2, {
-        shade: [0.3, '#fff']
-      });
-    },
-    complete: function complete() {
-      layer.closeAll('loading');
-    }
-  });
-  bk.getCarts();
-  $(document).on('click', '.offcanvas-products-delete', function (event) {
-    var $this = $(this);
-    var cartId = $(this).data('id');
-    $http["delete"]("/carts/".concat(cartId)).then(function (res) {
-      $this.parents('.product-list').remove();
-      $('.offcanvas-right-cart-count').html(res.data.quantity);
-      $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-    });
-  });
-  $(document).on('click', '.quantity-wrap .right i', function (event) {
-    event.stopPropagation();
-    var input = $(this).parent().siblings('input');
-
-    if ($(this).hasClass('bi-chevron-up')) {
-      input.val(input.val() * 1 + 1);
-      input.get(0).dispatchEvent(new Event('input'));
-      return;
-    }
-
-    if (input.val() * 1 <= input.attr('minimum') * 1) {
-      return;
-    }
-
-    input.val(input.val() * 1 - 1);
-    input.get(0).dispatchEvent(new Event('input'));
-  }); // 滑动固定顶部
-
-  (function ($) {
-    if (!$('.fixed-top-line').length) return;
-    if ($(window).width() < 768) return;
-    var totalWrapTop = $('.fixed-top-line').offset().top;
-    var totalWrapWidth = $('.fixed-top-line').outerWidth();
-    var totalWrapHeight = $('.fixed-top-line').outerHeight();
-    var totalWrapLeft = $('.fixed-top-line').offset().left;
-    var footerTop = $('footer').offset().top;
-    var footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > totalWrapTop) {
-        $('.fixed-top-line').css({
-          position: 'fixed',
-          top: 0,
-          bottom: 'auto',
-          'width': totalWrapWidth
-        });
-
-        if (!$('.total-old').length) {
-          $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
-        }
-
-        if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
-          $('.fixed-top-line').css({
-            position: 'absolute',
-            top: 'auto',
-            bottom: '0',
-            'width': totalWrapWidth
-          });
-        }
-      } else {
-        $('.total-old').remove();
-        $('.fixed-top-line').removeAttr('style');
-      }
-    });
-  })(window.jQuery); // offcanvas-search-top
+window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 
-  var myOffcanvas = document.getElementById('offcanvas-search-top');
-  myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
-    $('#offcanvas-search-top input').focus();
-    $('#offcanvas-search-top input').keydown(function (e) {
-      if (e.keyCode == 13) {
-        console.log('enter');
-        $('#offcanvas-search-top .btn-search').click();
-      }
-    });
-  });
-});
+bk.getCarts(); // 页面初始加载购物车数据
 
-bk.getCarts = function () {
-  $http.get('carts/mini', null, {
-    hload: true
-  }).then(function (res) {
-    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-    if (res.data.carts.length) {
-      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-      $('.offcanvas-right-cart-count').html(res.data.quantity);
-      var html = '';
-      res.data.carts.forEach(function (e) {
-        html += '<div class="product-list d-flex align-items-center">';
-        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
-        html += '<div class="right flex-grow-1">';
-        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
-        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-        html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
-        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-      });
-      $('.offcanvas-right-products').html(html);
-    }
-  });
-};
+bk.slidingFixed();
 })();
 
 /******/ })()

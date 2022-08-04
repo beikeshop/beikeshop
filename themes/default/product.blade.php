@@ -226,13 +226,7 @@
         },
 
         addCart(isBuyNow = false) {
-          $http.post('/carts', {sku_id: this.product.id, quantity: this.quantity}).then((res) => {
-            bk.getCarts();
-            layer.msg(res.message)
-            if (isBuyNow) {
-              location.href = '{{ shop_route("checkout.index") }}'
-            }
-          })
+          bk.addCart(this.product.id, this.quantity, isBuyNow);
         },
 
         updateSelectedVariantsIndex() {
