@@ -13,7 +13,7 @@
         <i class="iconfont">&#xe77f;</i>
         <span>加入收藏</span>
       </button>
-      <button class="add-cart">
+      <button class="add-cart" onclick="bk.addCart({{ $product['id'] }})">
         <i class="iconfont">&#xf13a;</i>
         <span>加入购物车</span>
       </button>
