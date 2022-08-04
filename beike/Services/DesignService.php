@@ -11,7 +11,9 @@
 
 namespace Beike\Services;
 
+use Beike\Repositories\BrandRepo;
 use Beike\Repositories\ProductRepo;
+use Beike\Shop\Http\Resources\BrandDetail;
 use Illuminate\Support\Str;
 
 class DesignService
@@ -79,10 +81,10 @@ class DesignService
      */
     private static function handleBrand($content): array
     {
-        $brands = $content['brands'];
+        $brandIds = $content['brands'] ?? [];
+        $brands = BrandDetail::collection(BrandRepo::getListByIds($brandIds))->jsonSerialize();
 
-
-        $content['brands'] = [];
+        $content['brands'] = $brands;
         $content['title'] = $content['title'][locale()];
         return $content;
     }

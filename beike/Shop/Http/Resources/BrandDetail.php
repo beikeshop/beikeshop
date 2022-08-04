@@ -15,6 +15,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class BrandDetail extends JsonResource
 {
+    /**
+     * @throws \Exception
+     */
     public function toArray($request): array
     {
         return [
@@ -22,6 +25,7 @@ class BrandDetail extends JsonResource
             'name' => $this->name,
             'logo' => image_resize($this->logo),
             'sort_order' => $this->sort_order,
+            'url'=> shop_route('brands.show', $this->id),
             'first' => $this->first,
         ];
     }
