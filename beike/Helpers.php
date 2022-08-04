@@ -240,7 +240,7 @@ function image_origin($image)
 }
 
 /**
- * 获取后天开启所有语言列表
+ * 获取后台开启的所有语言
  *
  * @return Collection
  */
@@ -250,7 +250,7 @@ function languages(): Collection
 }
 
 /**
- * 当前语言
+ * 当前语言名称
  *
  * @return string
  */
