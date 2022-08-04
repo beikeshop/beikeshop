@@ -614,6 +614,7 @@ footer .footer-bottom {
   bottom: calc(100% + 20px);
   left: 50%;
   transform: translate(-50%);
+  visibility: hidden;
 }
 .product-wrap .image .button-wrap button > span::before {
   content: "";
@@ -628,6 +629,7 @@ footer .footer-bottom {
   opacity: 1;
   bottom: calc(100% + 7px);
   z-index: 2;
+  visibility: visible;
 }
 .product-wrap .image:hover .image-hover {
   opacity: 1;
