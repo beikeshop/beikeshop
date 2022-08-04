@@ -34,6 +34,7 @@ class ShareViewData
 
         if (is_admin()) {
             View::share('admin_languages', $this->handleAdminLanguages());
+            View::share('admin_language', current_user()->locale ?? 'en');
         }
     }
 
