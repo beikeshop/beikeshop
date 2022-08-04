@@ -9,14 +9,14 @@
       </div>
     </a>
     <div class="button-wrap">
-      <a href="" class="btn-left">
+      <button class="add-wishlist">
         <i class="iconfont">&#xe77f;</i>
         <span>加入收藏</span>
-      </a>
-      <a href="" class="btn-right">
+      </button>
+      <button class="add-cart">
         <i class="iconfont">&#xf13a;</i>
         <span>加入购物车</span>
-      </a>
+      </button>
     </div>
   </div>
   <div class="product-name">{{ $product['name'] }}</div>

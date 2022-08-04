@@ -11,14 +11,18 @@
   @endif
 
   <div class="module-info module-brand mb-5">
+    {{-- {{ dd($content) }} --}}
     <div class="module-title">{{ $content['title'] }}</div>
     <div class="container">
       <div class="row">
-        @for ($i = 0; $i < 8; $i++)
+        @foreach ($content['brands'] as $brand)
         <div class="col-6 col-md-4 col-lg-3">
-          <div class="brand-item"><img src="{{ asset('image/default/banner-1.png') }}" class="img-fluid"></div>
+          <div class="brand-item">
+            <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" class="img-fluid">
+          </div>
+          <p class="text-center">{{ $brand['name'] }}</p>
         </div>
-        @endfor
+        @endforeach
       </div>
     </div>
   </div>

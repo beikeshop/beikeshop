@@ -588,7 +588,7 @@ footer .footer-bottom {
   display: flex;
   justify-content: center;
 }
-.product-wrap .image .button-wrap a {
+.product-wrap .image .button-wrap button {
   color: white;
   display: block;
   margin: 4px;
@@ -596,12 +596,12 @@ footer .footer-bottom {
   width: 36px;
   height: 38px;
   text-align: center;
-  line-height: 38px;
+  line-height: 35px;
   border-radius: 4px;
   text-decoration: none;
   position: relative;
 }
-.product-wrap .image .button-wrap a > span {
+.product-wrap .image .button-wrap button > span {
   font-size: 11px;
   text-transform: none;
   line-height: 18px;
@@ -615,7 +615,7 @@ footer .footer-bottom {
   left: 50%;
   transform: translate(-50%);
 }
-.product-wrap .image .button-wrap a > span::before {
+.product-wrap .image .button-wrap button > span::before {
   content: "";
   border: 5px solid transparent;
   border-top-color: #000;
@@ -624,7 +624,7 @@ footer .footer-bottom {
   left: 50%;
   margin-left: -5px;
 }
-.product-wrap .image .button-wrap a:hover span {
+.product-wrap .image .button-wrap button:hover span {
   opacity: 1;
   bottom: calc(100% + 7px);
   z-index: 2;
@@ -712,7 +712,7 @@ body.page-product .product-image .left .swiper > div > div {
   border: 1px solid #eee;
   margin-bottom: 10px;
   width: 80px;
-  height: 80px;
+  height: 80px !important;
   padding: 2px;
   cursor: pointer;
 }
@@ -1290,8 +1290,11 @@ body.page-list .curser > li > a:hover {
   align-items: center;
   justify-content: center;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   height: 90px;
+}
+.module-brand .brand-item > img {
+  max-height: 100%;
 }
 
 .module-tab-product .module-title {
