@@ -22,7 +22,7 @@
             </div>
             {{-- <div><i class="fs-4 bi bi-cart"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-24</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboar.day_befored') }}</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">-24</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
@@ -134,16 +134,12 @@
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
-            // 'rgba(153, 102, 255, 0.2)',
-            // 'rgba(255, 159, 64, 0.2)'
         ],
         borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
-            // 'rgba(153, 102, 255, 1)',
-            // 'rgba(255, 159, 64, 1)'
         ],
         borderWidth: 1
       }]
@@ -152,23 +148,16 @@
       scales: {
         y: {
           beginAtZero: true,
-          drawBorder: false,
-          // ticks: {
-          //   display: false,
-          // }
           grid: {
-            // borderDash: [4],
             drawBorder: false,
           },
         },
         x: {
           beginAtZero: true,
-          drawBorder: false,
           grid: {
             drawBorder: false,
             display: false
           },
-          // display: false,
         }
       }
     }
@@ -185,14 +174,7 @@
         radius: '80%',
         spacing: 6,
         hoverOffset: 4,
-        // weight: 1,
-        // hoverBorderWidth: 5,
-        // borderRadius: 5,
-        backgroundColor: [
-          '#2c7be4',
-          '#a5c5f7',
-          '#d2ddec',
-        ],
+        backgroundColor: ['#2c7be4','#a5c5f7','#d2ddec',],
         borderWidth: 0
       }]
     }
@@ -208,7 +190,8 @@
     data: {
       labels: Array.from({length: 30}, (v, k) => k + 1),
       datasets: [{
-        label: ["订单数"],
+        // label: ["订单数"],
+        fill: true,
         backgroundColor : gradient, // Put the gradient here as a fill color
         borderColor : "#4da4f9",
         borderWidth: 2,
@@ -217,27 +200,41 @@
         pointHighlightFill: "#fff",
         pointHighlightStroke: "#ff6c23",
         data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
-        fill: true,
         // borderDash: [],
         responsive: true,
-        lineTension: 0.3,
+        lineTension: 0.4,
         datasetStrokeWidth : 3,
         pointDotStrokeWidth : 4,
+        pointHoverBorderWidth: 8,
         // pointRadius: 3,
       }],
     },
     options: {
+      responsive: true,
+      plugins: {
+          legend: false // Hide legend
+      },
+      interaction: {
+        mode: 'index',
+        // axis: 'x',
+        intersect: false,
+        // includeInvisible: true,
+      },
       scales: {
         y: {
           beginAtZero: true,
           grid: {
             drawBorder: false,
+            borderDash: [3],
+            // tickMarkLength:1,
+            // drawOnChartArea: false,
           },
         },
         x: {
           beginAtZero: true,
           grid: {
             drawBorder: false,
+            // drawOnChartArea: false,
             display: false
           },
         }
