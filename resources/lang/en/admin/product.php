@@ -14,5 +14,6 @@ return [
     'products_create' => 'Create',
     'products_edit' => 'Detail',
     'products_update' => 'Edit',
-    'products_delete' => 'Delete'
+    'products_delete' => 'Delete',
+    'products_trashed' => 'Trashed',
 ];

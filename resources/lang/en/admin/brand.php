@@ -10,10 +10,9 @@
  */
 
 return [
-    'products_index' => '产品列表',
-    'products_create' => '创建产品',
-    'products_edit' => '产品详情',
-    'products_update' => '更新产品',
-    'products_delete' => '删除产品',
-    'products_trashed' => '回收站',
+    'brands_index' => 'Index',
+    'brands_create' => 'Create',
+    'brands_edit' => 'Detail',
+    'brands_update' => 'Edit',
+    'brands_delete' => 'Delete'
 ];

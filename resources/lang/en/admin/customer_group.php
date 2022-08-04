@@ -10,10 +10,9 @@
  */
 
 return [
-    'products_index' => '产品列表',
-    'products_create' => '创建产品',
-    'products_edit' => '产品详情',
-    'products_update' => '更新产品',
-    'products_delete' => '删除产品',
-    'products_trashed' => '回收站',
+    'customer_groups_index' => 'Index',
+    'customer_groups_create' => 'Create',
+    'customer_groups_edit' => 'Detail',
+    'customer_groups_update' => 'Edit',
+    'customer_groups_delete' => 'Delete'
 ];
