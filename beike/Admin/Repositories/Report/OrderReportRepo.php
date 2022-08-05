@@ -27,13 +27,13 @@ class OrderReportRepo
     public static function getLatestMonth()
     {
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()->subDay()])
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
         $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()->subDay()])
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('sum(total) as amount'))
+            ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
@@ -47,7 +47,7 @@ class OrderReportRepo
 
             $dates[] = $dateFormat;
             $totals[] = $orderTotal ? $orderTotal->total : 0;
-            $amounts[] = currency_format($orderAmount ? $orderAmount->amount : 0);
+            $amounts[] = $orderAmount ? $orderAmount->amount : 0;
         }
 
         $data = [
@@ -65,13 +65,13 @@ class OrderReportRepo
     public static function getLatestWeek()
     {
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()->subDay()])
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as total'))
+            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
         $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()->subDay()])
-            ->select(DB::raw('DATE(created_at) as date'), DB::raw('sum(total) as amount'))
+            ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
@@ -85,7 +85,7 @@ class OrderReportRepo
 
             $dates[] = $dateFormat;
             $totals[] = $orderTotal ? $orderTotal->total : 0;
-            $amounts[] = currency_format($orderAmount ? $orderAmount->amount : 0);
+            $amounts[] = $orderAmount ? $orderAmount->amount : 0;
         }
 
         $data = [
@@ -131,7 +131,7 @@ class OrderReportRepo
 
             $dates[] = $dateFormat;
             $totals[] = $orderTotal ?: 0;
-            $amounts[] = currency_format($orderAmount ?: 0);
+            $amounts[] = $orderAmount ?: 0;
         }
 
         $data = [
