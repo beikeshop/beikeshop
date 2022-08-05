@@ -9,9 +9,9 @@
           </a>
 
           <div class="dropdown-menu" aria-labelledby="currency-dropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            @foreach (currencies() as $currency)
+            <a class="dropdown-item" href="{{ shop_route('currency.switch', [$currency->code]) }}">{{ $currency->name }}</a>
+            @endforeach
           </div>
         </div>
         <div class="dropdown">
