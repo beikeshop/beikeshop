@@ -5,7 +5,7 @@
         <div class="dropdown">
           <a class="btn dropdown-toggle ps-0" href="#" role="button" id="currency-dropdown" data-toggle="dropdown"
             aria-expanded="false">
-            $ USD
+            {{ current_currency_code() }}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="currency-dropdown">
