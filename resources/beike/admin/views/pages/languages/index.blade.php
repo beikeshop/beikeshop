@@ -39,7 +39,7 @@
       {{-- {{ $languages->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="税率" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="语言" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
