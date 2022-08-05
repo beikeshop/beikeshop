@@ -5,7 +5,11 @@
         <div class="dropdown">
           <a class="btn dropdown-toggle ps-0" href="#" role="button" id="currency-dropdown" data-toggle="dropdown"
             aria-expanded="false">
-            {{ current_currency_code() }}
+            @foreach (currencies() as $currency)
+              @if ($currency->code == current_currency_code())
+                {{ $currency->name }}
+              @endif
+            @endforeach
           </a>
 
           <div class="dropdown-menu" aria-labelledby="currency-dropdown">
