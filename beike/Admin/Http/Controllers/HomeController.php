@@ -17,8 +17,8 @@ class HomeController extends Controller
             'order_totals' => DashboardRepo::getTotalData(),
             'order_trends' => [
                 'latest_month' => OrderReportRepo::getLatestMonth(),
-                'latest_week' => '',
-                'latest_year' => '',
+                'latest_week' => OrderReportRepo::getLatestWeek(),
+                'latest_year' => OrderReportRepo::getLatestYear(),
             ]
         ];
 
