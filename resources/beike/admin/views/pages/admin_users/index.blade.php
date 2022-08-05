@@ -168,7 +168,7 @@
               } else {
                 this.admin_users[this.dialog.index] = res.data
               }
-
+              window.location.reload();
               this.dialog.show = false
             })
           });

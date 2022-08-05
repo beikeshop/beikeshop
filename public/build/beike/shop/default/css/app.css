@@ -21,8 +21,8 @@ body[class^=page-account-] {
 }
 
 @font-face {
-  font-family: "Jost";
-  src: url("/fonts/Jost/Jost400Book.otf");
+  font-family: "poppins";
+  src: url("/fonts/poppins/Poppins-Regular.ttf");
 }
 .min-h1 {
   min-height: 100px;

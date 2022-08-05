@@ -6798,16 +6798,16 @@
   --bs-white-rgb: 255, 255, 255;
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
-  --bs-body-bg-rgb: 255, 255, 255;
+  --bs-body-bg-rgb: 249, 251, 253;
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: poppins, sans-serif;
   --bs-body-font-size: 0.82rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+  --bs-body-bg: #f9fbfd;
 }
 
 *,
@@ -7346,7 +7346,7 @@ progress {
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #fff;
+  background-color: #f9fbfd;
   border: 1px solid #dee2e6;
   border-radius: 0;
   max-width: 100%;
@@ -8714,7 +8714,7 @@ progress {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: #f9fbfd;
   background-clip: padding-box;
   border: 1px solid #e2e2e2;
   -webkit-appearance: none;
@@ -8736,7 +8736,7 @@ progress {
 }
 .form-control:focus {
   color: #212529;
-  background-color: #fff;
+  background-color: #f9fbfd;
   border-color: #feab87;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
@@ -8930,7 +8930,7 @@ textarea.form-control-lg {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: #f9fbfd;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
@@ -8996,7 +8996,7 @@ textarea.form-control-lg {
   height: 1.2em;
   margin-top: 0.15em;
   vertical-align: top;
-  background-color: #fff;
+  background-color: #f9fbfd;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -9098,10 +9098,10 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
+  box-shadow: 0 0 0 1px #f9fbfd, 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
 }
 .form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
+  box-shadow: 0 0 0 1px #f9fbfd, 0 0 0 0.25rem rgba(253, 86, 15, 0.25);
 }
 .form-range::-moz-focus-outer {
   border: 0;
@@ -10479,8 +10479,8 @@ textarea.form-control-lg {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
+  background-color: #f9fbfd;
+  border-color: #dee2e6 #dee2e6 #f9fbfd;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
@@ -11084,6 +11084,10 @@ textarea.form-control-lg {
   margin-left: -0.5rem;
   border-bottom: 0;
 }
+.card-header-tabs .nav-link.active {
+  background-color: #fff;
+  border-bottom-color: #fff;
+}
 
 .card-header-pills {
   margin-right: -0.5rem;
@@ -11169,7 +11173,7 @@ textarea.form-control-lg {
   font-size: 0.82rem;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #f9fbfd;
   border: 0;
   border-radius: 0;
   overflow-anchor: none;
@@ -11220,7 +11224,7 @@ textarea.form-control-lg {
 }
 
 .accordion-item {
-  background-color: #fff;
+  background-color: #f9fbfd;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .accordion-item:first-of-type {
@@ -12251,7 +12255,7 @@ textarea.form-control-lg {
   z-index: 1080;
   display: block;
   margin: 0;
-  font-family: var(--bs-font-sans-serif);
+  font-family: "poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -12353,7 +12357,7 @@ textarea.form-control-lg {
   z-index: 1070;
   display: block;
   max-width: 276px;
-  font-family: var(--bs-font-sans-serif);
+  font-family: "poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;

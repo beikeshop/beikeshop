@@ -8,13 +8,8 @@
 // @modified         2021-08-24 15:07:05
 //
 
-body {
-  // min-height: 100vh;
-  // background-color: #f9f9f9;
-  font-weight: 400;
-  line-height: 1.6;
-  font-size: 0.875rem;
-  background-color: #f9fbfd;
+@font-face {font-family: 'poppins';
+  src: url('/fonts/poppins/Poppins-Regular.ttf');
 }
 
 @for $i from 1 through 6 {
