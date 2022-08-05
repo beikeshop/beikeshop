@@ -98,6 +98,7 @@
     </div>
   </div>
 
+  @if (0)
   <div class="row">
     <div class="col-xl-8 col-12">
       <div class="card mb-4">
@@ -116,16 +117,18 @@
       </div>
     </div>
   </div>
+  @endif
 
 
 @endsection
 
 @push('footer')
   <script>
-    const ctx = document.getElementById('customer-chart').getContext('2d');
-    const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
     const orders = document.getElementById('orders-chart').getContext('2d');
 
+    @if (0)
+    const ctx = document.getElementById('customer-chart').getContext('2d');
+    const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -195,13 +198,14 @@
         maintainAspectRatio: false
       }
     });
+    @endif
 
 
-    const orderGradient = ctx.createLinearGradient(0, 0, 0, 380);
+    const orderGradient = orders.createLinearGradient(0, 0, 0, 380);
           orderGradient.addColorStop(0, 'rgba(180,223,253,1)');
           orderGradient.addColorStop(1, 'rgba(180,223,253,0)');
 
-    const amountGradient = ctx.createLinearGradient(0, 0, 0, 380);
+    const amountGradient = orders.createLinearGradient(0, 0, 0, 380);
           amountGradient.addColorStop(0, 'rgba(32,201,151,0.3)');
           amountGradient.addColorStop(1, 'rgba(32,201,151,0)');
 
