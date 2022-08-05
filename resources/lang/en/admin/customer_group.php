@@ -12,7 +12,7 @@
 return [
     'customer_groups_index' => 'Index',
     'customer_groups_create' => 'Create',
-    'customer_groups_edit' => 'Detail',
+    'customer_groups_show' => 'Detail',
     'customer_groups_update' => 'Edit',
     'customer_groups_delete' => 'Delete'
 ];

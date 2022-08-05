@@ -62,7 +62,7 @@ Route::prefix($adminName)
 
                 // 订单
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
-                Route::middleware('can:orders_show')->get('orders/{order}/edit', [Controllers\OrderController::class, 'edit'])->name('orders.show');
+                Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
 
                 Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');

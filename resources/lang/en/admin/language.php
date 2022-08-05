@@ -10,9 +10,9 @@
  */
 
 return [
-    'tax_classes_index' => 'Index',
-    'tax_classes_create' => 'Create',
-    'tax_classes_show' => 'Detail',
-    'tax_classes_update' => 'Edit',
-    'tax_classes_delete' => 'Delete'
+    'languages_index' => 'Index',
+    'languages_create' => 'Create',
+    'languages_show' => 'Detail',
+    'languages_update' => 'Update',
+    'languages_delete' => 'Delete'
 ];

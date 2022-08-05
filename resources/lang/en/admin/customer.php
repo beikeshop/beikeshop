@@ -12,7 +12,7 @@
 return [
     'customers_index' => 'Index',
     'customers_create' => 'Create',
-    'customers_edit' => 'Detail',
+    'customers_show' => 'Detail',
     'customers_update' => 'Edit',
     'customers_delete' => 'Delete'
 ];

@@ -13,7 +13,7 @@ return [
     'thousand_point' => ',',
     'currencies_index' => '货币列表',
     'currencies_create' => '创建货币',
-    'currencies_edit' => '货币详情',
+    'currencies_show' => '货币详情',
     'currencies_update' => '更新货币',
     'currencies_delete' => '删除货币',
 ];

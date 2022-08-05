@@ -12,7 +12,7 @@
 return [
     'brands_index' => 'Index',
     'brands_create' => 'Create',
-    'brands_edit' => 'Detail',
+    'brands_show' => 'Detail',
     'brands_update' => 'Edit',
     'brands_delete' => 'Delete'
 ];

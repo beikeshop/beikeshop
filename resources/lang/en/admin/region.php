@@ -12,7 +12,7 @@
 return [
     'regions_index' => 'Index',
     'regions_create' => 'Create',
-    'regions_edit' => 'Detail',
+    'regions_show' => 'Detail',
     'regions_update' => 'Edit',
     'regions_delete' => 'Delete'
 ];

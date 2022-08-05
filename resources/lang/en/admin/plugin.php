@@ -12,7 +12,7 @@
 return [
     'plugins_index' => 'Index',
     'plugins_import' => 'Import',
-    'plugins_edit' => 'Detail',
+    'plugins_show' => 'Detail',
     'plugins_update' => 'Update',
     'plugins_update_status' => 'Delete',
     'plugins_install' => 'Install',

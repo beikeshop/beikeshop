@@ -12,7 +12,7 @@
 return [
     'tax_rates_index' => 'Index',
     'tax_rates_create' => 'Create',
-    'tax_rates_edit' => 'Detail',
+    'tax_rates_show' => 'Detail',
     'tax_rates_update' => 'Edit',
     'tax_rates_delete' => 'Delete'
 ];

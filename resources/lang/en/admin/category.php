@@ -12,7 +12,7 @@
 return [
     'categories_index' => 'Index',
     'categories_create' => 'Create',
-    'categories_edit' => 'Detail',
+    'categories_show' => 'Detail',
     'categories_update' => 'Edit',
     'categories_delete' => 'Delete'
 ];

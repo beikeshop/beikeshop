@@ -12,7 +12,7 @@
 return [
     'customers_index' => '客户列表',
     'customers_create' => '创建客户',
-    'customers_edit' => '客户详情',
+    'customers_show' => '客户详情',
     'customers_update' => '更新客户',
     'customers_delete' => '删除客户',
 ];

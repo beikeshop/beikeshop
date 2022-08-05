@@ -67,7 +67,7 @@ class PermissionRepo
      */
     private function getOrderPermissions(): array
     {
-        $routes = ['orders_index', 'orders_create', 'orders_edit', 'orders_update', 'orders_delete'];
+        $routes = ['orders_index', 'orders_create', 'orders_show', 'orders_update', 'orders_delete'];
         $items = $this->getPermissionList('order', $routes);
         return hook_filter('role.order_permissions', $items);
     }
@@ -80,7 +80,7 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        $routes = ['products_index', 'products_create', 'products_edit', 'products_update', 'products_delete', 'products_trashed'];
+        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed'];
         $items = $this->getPermissionList('product', $routes);
         return hook_filter('role.product_permissions', $items);
     }
@@ -93,7 +93,7 @@ class PermissionRepo
      */
     private function getCategoryPermissions(): array
     {
-        $routes = ['categories_index', 'categories_create', 'categories_edit', 'categories_update', 'categories_delete'];
+        $routes = ['categories_index', 'categories_create', 'categories_show', 'categories_update', 'categories_delete'];
         $items = $this->getPermissionList('category', $routes);
         return hook_filter('role.category_permissions', $items);
     }
@@ -106,7 +106,7 @@ class PermissionRepo
      */
     private function getBrandPermissions(): array
     {
-        $routes = ['brands_index', 'brands_create', 'brands_edit', 'brands_update', 'brands_delete'];
+        $routes = ['brands_index', 'brands_create', 'brands_show', 'brands_update', 'brands_delete'];
         $items = $this->getPermissionList('brand', $routes);
         return hook_filter('role.brand_permissions', $items);
     }
@@ -119,7 +119,7 @@ class PermissionRepo
      */
     private function getCustomerPermissions(): array
     {
-        $routes = ['customers_index', 'customers_create', 'customers_edit', 'customers_update', 'customers_delete'];
+        $routes = ['customers_index', 'customers_create', 'customers_show', 'customers_update', 'customers_delete'];
         $items = $this->getPermissionList('customer', $routes);
         return hook_filter('role.customer_permissions', $items);
     }
@@ -132,7 +132,7 @@ class PermissionRepo
      */
     private function getCustomerGroupPermissions(): array
     {
-        $routes = ['customer_groups_index', 'customer_groups_create', 'customer_groups_edit', 'customer_groups_update', 'customer_groups_delete'];
+        $routes = ['customer_groups_index', 'customer_groups_create', 'customer_groups_show', 'customer_groups_update', 'customer_groups_delete'];
         $items = $this->getPermissionList('customer_group', $routes);
         return hook_filter('role.customer_group_permissions', $items);
     }
@@ -158,7 +158,7 @@ class PermissionRepo
      */
     private function getPluginPermissions(): array
     {
-        $routes = ['plugins_index', 'plugins_import', 'plugins_update', 'plugins_edit', 'plugins_install', 'plugins_update_status', 'plugins_uninstall'];
+        $routes = ['plugins_index', 'plugins_import', 'plugins_update', 'plugins_show', 'plugins_install', 'plugins_update_status', 'plugins_uninstall'];
         $items = $this->getPermissionList('plugin', $routes);
         return hook_filter('role.plugin_permissions', $items);
     }
@@ -171,7 +171,7 @@ class PermissionRepo
      */
     private function getAdminUserPermissions()
     {
-        $routes = ['admin_users_index', 'admin_users_create', 'admin_users_edit', 'admin_users_update', 'admin_users_delete'];
+        $routes = ['admin_users_index', 'admin_users_create', 'admin_users_show', 'admin_users_update', 'admin_users_delete'];
         $items = $this->getPermissionList('user', $routes);
         return hook_filter('role.user_permissions', $items);
     }
@@ -184,7 +184,7 @@ class PermissionRepo
      */
     private function getRegionPermissions(): array
     {
-        $routes = ['regions_index', 'regions_create', 'regions_edit', 'regions_update', 'regions_delete'];
+        $routes = ['regions_index', 'regions_create', 'regions_show', 'regions_update', 'regions_delete'];
         $items = $this->getPermissionList('region', $routes);
         return hook_filter('role.region_permissions', $items);
     }
@@ -197,7 +197,7 @@ class PermissionRepo
      */
     private function getTaxRatePermissions(): array
     {
-        $routes = ['tax_rates_index', 'tax_rates_create', 'tax_rates_edit', 'tax_rates_update', 'tax_rates_delete'];
+        $routes = ['tax_rates_index', 'tax_rates_create', 'tax_rates_show', 'tax_rates_update', 'tax_rates_delete'];
         $items = $this->getPermissionList('tax_rate', $routes);
         return hook_filter('role.tax_rate_permissions', $items);
     }
@@ -210,7 +210,7 @@ class PermissionRepo
      */
     private function getTaxClassPermissions(): array
     {
-        $routes = ['tax_classes_index', 'tax_classes_create', 'tax_classes_edit', 'tax_classes_update', 'tax_classes_delete'];
+        $routes = ['tax_classes_index', 'tax_classes_create', 'tax_classes_show', 'tax_classes_update', 'tax_classes_delete'];
         $items = $this->getPermissionList('tax_class', $routes);
         return hook_filter('role.tax_class_permissions', $items);
     }
@@ -223,7 +223,7 @@ class PermissionRepo
      */
     private function getCurrencyPermissions(): array
     {
-        $routes = ['currencies_index', 'currencies_create', 'currencies_edit', 'currencies_update', 'currencies_delete'];
+        $routes = ['currencies_index', 'currencies_create', 'currencies_show', 'currencies_update', 'currencies_delete'];
         $items = $this->getPermissionList('currency', $routes);
         return hook_filter('role.currency_permissions', $items);
     }
@@ -236,7 +236,7 @@ class PermissionRepo
      */
     private function getLanguagePermissions(): array
     {
-        $routes = ['languages_index', 'languages_create', 'languages_edit', 'languages_update', 'languages_delete'];
+        $routes = ['languages_index', 'languages_create', 'languages_show', 'languages_update', 'languages_delete'];
         $items = $this->getPermissionList('language', $routes);
         return hook_filter('role.language_permissions', $items);
     }

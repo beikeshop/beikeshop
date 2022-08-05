@@ -13,7 +13,7 @@ return [
     'thousand_point' => ',',
     'currencies_index' => 'Index',
     'currencies_create' => 'Create',
-    'currencies_edit' => 'Detail',
+    'currencies_show' => 'Detail',
     'currencies_update' => 'Edit',
     'currencies_delete' => 'Delete'
 ];

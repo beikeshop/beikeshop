@@ -13,7 +13,7 @@ return [
     'customer_view' => 'Customer View',
     'order_total' => 'Order Total',
     'customer_new' => 'Customer New',
-    'order_amount' => 'Order Smount',
+    'order_amount' => 'Order Amount',
     'yesterday' => 'Yesterday',
     'day_before' => 'A day earlier',
 ];

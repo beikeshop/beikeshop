@@ -12,7 +12,7 @@
 return [
     'plugins_index' => '插件列表',
     'plugins_import' => '上传插件',
-    'plugins_edit' => '插件详情',
+    'plugins_show' => '插件详情',
     'plugins_update' => '插件更新',
     'plugins_update_status' => '删除插件',
     'plugins_install' => '安装',

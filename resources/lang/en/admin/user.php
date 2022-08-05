@@ -12,7 +12,7 @@
 return [
     'admin_users_index' => 'Index',
     'admin_users_create' => 'Create',
-    'admin_users_edit' => 'Detail',
+    'admin_users_show' => 'Detail',
     'admin_users_update' => 'Edit',
     'admin_users_delete' => 'Delete'
 ];
