@@ -4,6 +4,7 @@ use Beike\Models\Customer;
 use Beike\Models\Language;
 use Beike\Models\AdminUser;
 use Beike\Repositories\CurrencyRepo;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Beike\Services\CurrencyService;
@@ -286,10 +287,12 @@ function language_packages(): array
     return array_values(array_diff(scandir($languageDir), array('..', '.')));
 }
 
-
-function currencies(): array
+/**
+ * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+ */
+function currencies()
 {
-    return CurrencyRepo::all()->where('status', true)->get();
+    return CurrencyRepo::all()->where('status', true);
 }
 
 /**

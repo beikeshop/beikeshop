@@ -11,13 +11,14 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\CurrencyRepo;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class CurrencyController extends Controller
 {
     public function index($lang)
     {
-        if (in_array($lang, CurrencyRepo::all()->where('status', true)->pluck('code'))) {
+        if (in_array($lang, currencies()->where('status', true)->pluck('code')->toArray())) {
             Session::put('currency', $lang);
         }
         return Redirect::back();
