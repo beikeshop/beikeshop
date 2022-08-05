@@ -55,7 +55,7 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        $settings = json_decode($request->getContent(), true);
+        $settings = $request->all();
         foreach ($settings as $key => $value) {
             $data = [
                 'type' => 'system',
@@ -67,6 +67,6 @@ class SettingController extends Controller
             SettingRepo::createOrUpdate($data);
         }
 
-        return json_success("修改成功");
+        return redirect($this->getRedirect())->with('success', '修改成功');
     }
 }

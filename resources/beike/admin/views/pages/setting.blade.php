@@ -2,12 +2,11 @@
 
 @section('title', '系统设置')
 
-
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
       <h6 class="border-bottom pb-3 mb-4">基础设置</h6>
-      <form action="" method="POST" id="app">
+      <form action="{{ admin_route('settings.store') }}" method="POST" id="app">
         @csrf
         <x-admin::form.row title="默认地址">
           <div class="d-flex">
@@ -65,6 +64,7 @@
 @push('footer')
   <script>
     const country_id = {{ system_setting('base.country_id', '1') }};
+    const zone_id = {{ system_setting('base.zone_id', '1') }};
 
     // 获取身份
     const getZones = (country_id) => {
@@ -73,7 +73,7 @@
           $('select[name="zone_id"]').html('');
           res.data.zones.forEach((zone) => {
             $('select[name="zone_id"]').append(`
-              <option value="${zone.id}">${zone.name}</option>
+              <option ${zone_id == zone.id ? 'selected' : ''} value="${zone.id}">${zone.name}</option>
             `);
           });
         } else {
