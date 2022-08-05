@@ -1,4 +1,4 @@
-@extends('errors::minimal')
+@extends('layout.master')
 
 @section('title', __('Not Found'))
 @section('code', '404')

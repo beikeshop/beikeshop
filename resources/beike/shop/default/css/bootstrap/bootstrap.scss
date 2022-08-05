@@ -10,10 +10,12 @@
 
 $primary: #fd560f;
 $font-size-base: 0.8rem;
-
+$font-family-base: 'Jost', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $border-radius: 0;
 $form-check-input-width: 1.2em;
 $form-check-input-border-radius: 0;
+
+$nav-link-color: #1f1f1f;
 
 // Breadcrumbs
 // scss-docs-start breadcrumb-variables

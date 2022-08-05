@@ -34,8 +34,8 @@
     <x-admin-sidebar/>
   </aside>
   <div id="content">
-    <div class="page-title-box"><h4 class="page-title">@yield('title')</h4></div>
-    <div class="container-fluid p-0 mt-4">
+    <div class="page-title-box"><h5 class="page-title">@yield('title')</h5></div>
+    <div class="container-fluid p-0 mt-3">
         @yield('content')
     </div>
   </div>

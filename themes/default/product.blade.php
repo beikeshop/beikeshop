@@ -120,13 +120,13 @@
 
     <div class="product-description">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
-        <a class="nav-link active" data-bs-toggle="tab" href="#product-description">
+        <a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
           Description
         </a>
-        <a class="nav-link" data-bs-toggle="tab" href="#description-1">
+        <a class="nav-link fw-bold" data-bs-toggle="tab" href="#description-1">
           Size &amp; Fit
         </a>
-        <a class="nav-link" data-bs-toggle="tab" href="#description-2">
+        <a class="nav-link fw-bold" data-bs-toggle="tab" href="#description-2">
           Shipping &amp; Return
         </a>
       </div>

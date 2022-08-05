@@ -87,5 +87,3 @@ Route::prefix('/')
                 Route::delete('wishlist/{id}', [WishlistController::class, 'remove'])->name('account.wishlist.remove');
             });
     });
-
-Route::get('/{url_key}', [PagesController::class, 'show'])->name('pages.show');

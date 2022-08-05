@@ -8,7 +8,7 @@
 
 @section('content')
   <div class="row">
-    <div class="col-lg-3 col-6">
+    <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
           <span>{{ __('admin/dashboard.customer_view') }}</span>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-6">
+    <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
           <span>{{ __('admin/dashboard.order_total') }}</span>
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-6">
+    <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
           <span>{{ __('admin/dashboard.customer_new') }}</span>
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-6">
+    <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
           <span>{{ __('admin/dashboard.order_amount') }}</span>
@@ -94,24 +94,24 @@
       </div>
     </div>
     <div class="card-body">
-      <canvas id="orders-chart" style="max-height: 380px"></canvas>
+      <canvas id="orders-chart" height="380"></canvas>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-8 col-12">
+    <div class="col-xl-8 col-12">
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart" style="max-height: 380px"></canvas>
+          <canvas id="customer-chart" height="380"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-12">
+    <div class="col-xl-4 col-12">
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart-1" style="max-height: 380px"></canvas>
+          <canvas id="customer-chart-1" height="380"></canvas>
         </div>
       </div>
     </div>
@@ -155,6 +155,8 @@
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
@@ -187,6 +189,10 @@
           backgroundColor: ['#2c7be4','#a5c5f7','#d2ddec',],
           borderWidth: 0
         }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
       }
     });
 
@@ -205,22 +211,26 @@
           backgroundColor : gradient, // Put the gradient here as a fill color
           borderColor : "#4da4f9",
           borderWidth: 2,
-          pointColor : "#fff",
-          pointStrokeColor : "#ff6c23",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "#ff6c23",
           data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
           // borderDash: [],
           responsive: true,
           lineTension: 0.4,
-          datasetStrokeWidth : 3,
-          pointDotStrokeWidth : 4,
+          datasetStrokeWidth: 3,
+          pointDotStrokeWidth: 4,
+          // pointStyle: 'rect',
           pointHoverBorderWidth: 8,
+          // pointBorderColor: [],
+          pointBackgroundColor: '#4da4f9',
+          // pointColor : "#fff",
+          // pointStrokeColor : "#ff6c23",
+          // pointHighlightFill: "#fff",
+          // pointHighlightStroke: "#ff6c23",
           // pointRadius: 3,
         }],
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: false // Hide legend
         },
@@ -236,8 +246,6 @@
             grid: {
               drawBorder: false,
               borderDash: [3],
-              // tickMarkLength:1,
-              // drawOnChartArea: false,
             },
           },
           x: {

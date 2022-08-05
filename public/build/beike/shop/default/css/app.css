@@ -20,6 +20,10 @@ body[class^=page-account-] {
   background-color: #F7F8FA;
 }
 
+@font-face {
+  font-family: "Jost";
+  src: url("/fonts/Jost/Jost400Book.otf");
+}
 .min-h1 {
   min-height: 100px;
 }
