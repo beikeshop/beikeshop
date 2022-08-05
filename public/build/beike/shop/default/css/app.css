@@ -620,7 +620,7 @@ footer .footer-bottom {
   margin-left: -5px;
 }
 .product-wrap .image .button-wrap button:hover {
-  background-color: rgba(0, 0, 0, 0.726);
+  background-color: rgb(70, 70, 70);
 }
 .product-wrap .image .button-wrap button:hover span {
   opacity: 1;

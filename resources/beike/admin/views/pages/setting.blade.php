@@ -21,82 +21,38 @@
                   </option>
                 @endforeach
               </select>
-              <div class="text-muted font-size-12 lh-base">默认国家设置</div>
+              <div class="help-text font-size-12 lh-base">默认国家设置</div>
             </div>
             <div>
               <select class="form-select wp-200 zones-select" name="zone_id" aria-label="Default select example"></select>
-              <div class="text-muted font-size-12 lh-base">默认省份设置</div>
+              <div class="help-text font-size-12 lh-base">默认省份设置</div>
             </div>
           </div>
         </x-admin::form.row>
 
-        <x-admin::form.row title="默认语言">
-          <select class="form-select wp-200 me-3" name="locale" aria-label="Default select example">
-            @foreach ($languages as $language)
-              <option
-                value="{{ $language->code }}"
-                {{ $language->code == system_setting('base.locale', 'zh_cn') ? 'selected': '' }}>
-                {{ $language->name }}
-              </option>
-            @endforeach
-          </select>
-          <div class="text-muted font-size-12 lh-base">默认语言设置</div>
-        </x-admin::form.row>
+        <x-admin-form-select title="默认语言" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$languages->toArray()" key="code" label="name">
+          <div class="help-text font-size-12 lh-base">默认语言设置</div>
+        </x-admin-form-select>
 
-        <x-admin::form.row title="默认货币">
-          <select class="form-select wp-200 me-3" name="currency" aria-label="Default select example">
-            @foreach ($currencies as $currency)
-              <option
-                value="{{ $currency->code }}"
-                {{ $currency->code == system_setting('base.currency', 'USD') ? 'selected': '' }}>
-                {{ $currency->name }}
-              </option>
-            @endforeach
-          </select>
-          <div class="text-muted font-size-12 lh-base">默认货币设置</div>
-        </x-admin::form.row>
+        <x-admin-form-select title="默认货币" name="currency" :value="old('currency', system_setting('base.currency', 'USD'))" :options="$currencies->toArray()" key="code" label="name">
+          <div class="help-text font-size-12 lh-base">默认货币设置</div>
+        </x-admin-form-select>
 
         <x-admin-form-input name="admin_name" title="后台目录" value="{{ old('admin_name', system_setting('base.admin_name', 'admin')) }}">
-          <div class="text-muted font-size-12 lh-base">管理后台目录,默认为admin</div>
+          <div class="help-text font-size-12 lh-base">管理后台目录,默认为admin</div>
         </x-admin-form-input>
 
-{{--         <x-admin::form.row title="模版主题">
-          <select class="form-select wp-200 me-3" name="theme" aria-label="Default select example">
-            @foreach ($themes as $theme)
-              <option
-                value="{{ $theme['value'] }}"
-                {{ $theme['value'] == system_setting('base.theme', 'default') ? 'selected': '' }}>
-                {{ $theme['label'] }}
-              </option>
-            @endforeach
-          </select>
-          <div class="text-muted font-size-12 lh-base">主题模板选择</div>
-        </x-admin::form.row> --}}
-
         <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
-          <div class="text-muted font-size-12 lh-base">主题模板选择</div>
+          <div class="help-text font-size-12 lh-base">主题模板选择</div>
         </x-admin-form-select>
 
         <x-admin-form-switch name="tax" title="启用税费" value="{{ old('tax', system_setting('base.tax', '0')) }}">
-          <div class="text-muted font-size-12 lh-base">是否启用税费计算</div>
+          <div class="help-text font-size-12 lh-base">是否启用税费计算</div>
         </x-admin-form-switch>
 
         <x-admin-form-select title="税费地址" name="tax_address" :value="old('tax_address', system_setting('base.address', 'shipping'))" :options="$tax_address">
-          <div class="text-muted font-size-12 lh-base">按什么地址计算税费</div>
+          <div class="help-text font-size-12 lh-base">按什么地址计算税费</div>
         </x-admin-form-select>
-
-{{--         <x-admin::form.row title="税费地址">
-          <select class="form-select wp-200 me-3" name="tax_address" aria-label="Default select example">
-            @foreach ($tax_address as $address)
-              <option
-                value="{{ $address['value'] }}"
-                {{ $address['value'] == system_setting('base.address', 'shipping') ? 'selected': '' }}>
-                {{ $address['label'] }}
-              </option>
-            @endforeach
-          </select>
-          <div class="text-muted font-size-12 lh-base">按什么地址计算税费</div>
-        </x-admin::form.row> --}}
 
         <x-admin::form.row title="">
           <button type="submit" class="btn btn-primary mt-4">提交</button>
@@ -113,7 +69,6 @@
     // 获取身份
     const getZones = (country_id) => {
       $http.get(`countries/${country_id}/zones`).then((res) => {
-        console.log(res);
         if (res.data.zones.length > 0) {
           $('select[name="zone_id"]').html('');
           res.data.zones.forEach((zone) => {
