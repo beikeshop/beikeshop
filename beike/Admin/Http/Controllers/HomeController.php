@@ -22,6 +22,7 @@ class HomeController extends Controller
             ]
         ];
 
+        // dd($data);
         return view('admin::pages.home', $data);
     }
 }

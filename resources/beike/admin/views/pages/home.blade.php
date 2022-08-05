@@ -87,9 +87,9 @@
       <div>订单统计</div>
       <div class="orders-right">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-          <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="30">一个月</button>
-          <button type="button" class="btn btn-sm btn-outline-info" data-type="7">一周</button>
-          <button type="button" class="btn btn-sm btn-outline-info" data-type="12">一年</button>
+          <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">一个月</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_week">一周</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_year">一年</button>
         </div>
       </div>
     </div>
@@ -205,11 +205,15 @@
           amountGradient.addColorStop(0, 'rgba(32,201,151,0.3)');
           amountGradient.addColorStop(1, 'rgba(32,201,151,0)');
 
+    const latest_month = @json($order_trends['latest_month']);
+    const latest_week = @json($order_trends['latest_week']);
+    const latest_year = @json($order_trends['latest_year']);
+
     const ordersChart = new Chart(orders, {
       type: 'line',
       data: {
         // labels: Array.from({length: 30}, (v, k) => k + 1),
-        labels: @json($order_trends['latest_month']['period']),
+        labels: latest_month.period,
         datasets: [
           {
             label: ["订单数量"],
@@ -218,7 +222,7 @@
             borderColor : "#4da4f9",
             borderWidth: 2,
             // data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
-            data: @json($order_trends['latest_month']['totals']),
+            data: latest_month.totals,
             // borderDash: [],
             responsive: true,
             lineTension: 0.4,
@@ -240,7 +244,7 @@
             backgroundColor : amountGradient,
             borderColor : "#20c997",
             borderWidth: 2,
-            data: @json($order_trends['latest_month']['amounts']),
+            data: latest_month.amounts,
             responsive: true,
             lineTension: 0.4,
             datasetStrokeWidth: 3,
@@ -285,15 +289,18 @@
 
     function upDate(chart, label, data) {
       chart.data.labels = label;
-      chart.data.datasets[0].data = data;
-      chart.data.datasets[1].data = data;
+      data.forEach((e, i) => {
+        chart.data.datasets[i].data = e;
+      });
       chart.update();
     }
 
     $('.orders-right .btn-group > .btn').on('click', function() {
       const day = $(this).data('type'); // 天数
-      const labels = Array.from({length: day}, (v, k) => k + 1);
-      const data = Array.from({length: day}, () => Math.floor(Math.random() * 123.7));
+      const labels = eval(day).period;
+      const data = [eval(day).totals, eval(day).amounts];
+      // const labels = Array.from({length: day}, (v, k) => k + 1);
+      // const data = Array.from({length: day}, () => Math.floor(Math.random() * 123.7));
       $(this).addClass('btn-info text-white').siblings().removeClass('btn-info text-white');
 
       upDate(ordersChart, labels, data);
