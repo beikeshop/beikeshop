@@ -63,10 +63,14 @@
 
 @push('footer')
   <script>
+    @if (session('success'))
+      layer.msg('{{ session('success') }}')
+    @endif
+
     const country_id = {{ system_setting('base.country_id', '1') }};
     const zone_id = {{ system_setting('base.zone_id', '1') }};
 
-    // 获取身份
+    // 获取省份
     const getZones = (country_id) => {
       $http.get(`countries/${country_id}/zones`).then((res) => {
         if (res.data.zones.length > 0) {
