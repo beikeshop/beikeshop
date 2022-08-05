@@ -137,7 +137,10 @@ class CustomerRepo
         if (!$customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
-        $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
+
+        if (!CustomerWishlist::query()->where('customer_id', $customer->id)->where('product_id', $productId)->first()) {
+            $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
+        }
 
         return $customer;
     }
@@ -162,8 +165,10 @@ class CustomerRepo
         if (!$customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
+        $builder = $customer->wishlists()
+            ->whereHas('product');
 
-        return $customer->wishlists()->with('product.description')->paginate(20);
+        return $builder->with('product.description')->paginate(20);
     }
 
     /**
