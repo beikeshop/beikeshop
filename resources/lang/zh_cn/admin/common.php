@@ -26,6 +26,7 @@ return [
     'tax_rate' => '税率管理',
     'tax_class' => '税类管理',
     'currency' => '货币管理',
+    'language' => '语言管理',
     'access_frontend' => '访问前台',
 
     // sidebar
@@ -36,6 +37,7 @@ return [
     'tax_rates_index' => '税率设置',
     'tax_classes_index' => '税费类别',
     'currencies_index' => '货币管理',
+    'languages_index' => '语言管理',
     'design_index' => '首页装修',
     'categories_index' => '产品分类',
     'products_index' => '商品管理',

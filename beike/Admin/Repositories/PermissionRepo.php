@@ -54,6 +54,7 @@ class PermissionRepo
             ['title' => trans('admin/common.tax_rate'), 'permissions' => $this->getTaxRatePermissions()],
             ['title' => trans('admin/common.tax_class'), 'permissions' => $this->getTaxClassPermissions()],
             ['title' => trans('admin/common.currency'), 'permissions' => $this->getCurrencyPermissions()],
+            ['title' => trans('admin/common.language'), 'permissions' => $this->getLanguagePermissions()],
         ];
         return hook_filter('role.all_permissions', $permissions);
     }
@@ -225,6 +226,19 @@ class PermissionRepo
         $routes = ['currencies_index', 'currencies_create', 'currencies_edit', 'currencies_update', 'currencies_delete'];
         $items = $this->getPermissionList('currency', $routes);
         return hook_filter('role.currency_permissions', $items);
+    }
+
+
+    /**
+     * 获取语言权限列表
+     *
+     * @return array[]
+     */
+    private function getLanguagePermissions(): array
+    {
+        $routes = ['languages_index', 'languages_create', 'languages_edit', 'languages_update', 'languages_delete'];
+        $items = $this->getPermissionList('language', $routes);
+        return hook_filter('role.language_permissions', $items);
     }
 
 

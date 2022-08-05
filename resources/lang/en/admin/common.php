@@ -27,6 +27,7 @@ return [
     'tax_rate' => 'Tax Rate',
     'tax_class' => 'Tax Class',
     'currency' => 'Currency',
+    'language' => 'Language',
     'access_frontend' => 'Frontend',
 
     // sidebar
@@ -37,6 +38,7 @@ return [
     'tax_rates_index' => 'Tax Rates',
     'tax_classes_index' => 'Tax Classes',
     'currencies_index' => 'Currencies',
+    'languages_index' => 'Languages',
     'design_index' => 'Page Builder',
     'categories_index' => 'Categories',
     'products_index' => 'Products',

@@ -176,6 +176,7 @@ class Sidebar extends Component
             ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
+            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
         ];
         return hook_filter('sidebar.setting_routes', $routes);
     }
