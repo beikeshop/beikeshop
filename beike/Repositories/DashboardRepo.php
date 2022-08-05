@@ -31,14 +31,15 @@ class DashboardRepo
 
 
     /**
-     * 获取订单基础统计, 总数和今日昨日比较
-     *
+     * 获取客户访问统计今日昨日比较
      * @return array
+     * @todo
+     *
      */
-    public static function getOrderData(): array
+    public static function getCustomerViewData(): array
     {
-        $today = OrderRepo::getListBuilder(['start' => today(), 'end' => today()->addDay()])->count();
-        $yesterday = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
+        $today = 10;
+        $yesterday = 8;
         $difference = $today - $yesterday;
         if ($difference && $yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
@@ -47,21 +48,21 @@ class DashboardRepo
         }
 
         return [
-            'total' => quantity_format(Product::query()->count()),
+            'total' => $today,
             'percentage' => $percentage,
         ];
     }
 
 
     /**
-     * 获取客户基础统计, 总数和今日昨日比较
+     * 获取订单基础统计, 总数和今日昨日比较
      *
      * @return array
      */
-    public static function getCustomerData(): array
+    public static function getOrderData(): array
     {
-        $today = CustomerRepo::getListBuilder(['start' => today(), 'end' => today()->addDay()])->count();
-        $yesterday = CustomerRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
+        $today = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
+        $yesterday = OrderRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->count();
         $difference = $today - $yesterday;
         if ($difference && $yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
@@ -70,7 +71,35 @@ class DashboardRepo
         }
 
         return [
-            'total' => quantity_format(Customer::query()->count()),
+            'total' => $today,
+            'percentage' => $percentage,
+            'reports' => [
+                'latest_month' => '',
+                'latest_week' => '',
+                'latest_year' => '',
+            ]
+        ];
+    }
+
+
+    /**
+     * 获取客户注册今日昨日比较
+     *
+     * @return array
+     */
+    public static function getCustomerData(): array
+    {
+        $today = CustomerRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
+        $yesterday = CustomerRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->count();
+        $difference = $today - $yesterday;
+        if ($difference && $yesterday) {
+            $percentage = round(($difference / $yesterday) * 100);
+        } else {
+            $percentage = 0;
+        }
+
+        return [
+            'total' => $today,
             'percentage' => $percentage,
         ];
     }
@@ -83,8 +112,8 @@ class DashboardRepo
      */
     public static function getTotalData(): array
     {
-        $today = OrderRepo::getListBuilder(['start' => today(), 'end' => today()->addDay()])->sum('total');
-        $yesterday = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->sum('total');
+        $today = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->sum('total');
+        $yesterday = OrderRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->sum('total');
         $difference = $today - $yesterday;
         if ($difference && $yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
@@ -93,7 +122,7 @@ class DashboardRepo
         }
 
         return [
-            'total' => quantity_format(Customer::query()->count()),
+            'total' => currency_format($today),
             'percentage' => $percentage,
         ];
     }

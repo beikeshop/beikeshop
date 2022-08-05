@@ -10,10 +10,10 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'product' => DashboardRepo::getProductData(),
-            'order' => DashboardRepo::getOrderData(),
-            'customer' => DashboardRepo::getCustomerData(),
-            'total' => DashboardRepo::getTotalData(),
+            'views' => DashboardRepo::getCustomerViewData(),
+            'orders' => DashboardRepo::getOrderData(),
+            'customers' => DashboardRepo::getCustomerData(),
+            'order_totals' => DashboardRepo::getTotalData(),
         ];
 
         return view('admin::pages.home', $data);
