@@ -9,10 +9,11 @@
  * @modified   2022-08-03 18:16:53
  */
 
-namespace Beike\Repositories;
+namespace Beike\Admin\Repositories;
 
 use Beike\Models\Product;
-use Beike\Models\Customer;
+use Beike\Repositories\OrderRepo;
+use Beike\Repositories\CustomerRepo;
 
 class DashboardRepo
 {
@@ -73,11 +74,6 @@ class DashboardRepo
         return [
             'total' => $today,
             'percentage' => $percentage,
-            'reports' => [
-                'latest_month' => '',
-                'latest_week' => '',
-                'latest_year' => '',
-            ]
         ];
     }
 

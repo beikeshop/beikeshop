@@ -3,7 +3,8 @@
 namespace Beike\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Beike\Repositories\DashboardRepo;
+use Beike\Admin\Repositories\DashboardRepo;
+use Beike\Admin\Repositories\Report\OrderReportRepo;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,11 @@ class HomeController extends Controller
             'orders' => DashboardRepo::getOrderData(),
             'customers' => DashboardRepo::getCustomerData(),
             'order_totals' => DashboardRepo::getTotalData(),
+            'order_trends' => [
+                'latest_month' => OrderReportRepo::getLatestMonth(),
+                'latest_week' => '',
+                'latest_year' => '',
+            ]
         ];
 
         return view('admin::pages.home', $data);

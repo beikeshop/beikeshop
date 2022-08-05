@@ -26,7 +26,7 @@ class OrderRepo
      */
     public static function getListAll(): LengthAwarePaginator
     {
-        $builder = self::getListBuilder();
+        $builder = self::getListBuilder()->orderByDesc('created_at');
         return $builder->paginate();
     }
 
@@ -39,7 +39,7 @@ class OrderRepo
      */
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
-        $builder = self::getListBuilder(['customer' => $customer]);
+        $builder = self::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
         return $builder->paginate();
     }
 
@@ -50,7 +50,7 @@ class OrderRepo
      */
     public static function filterOrders(array $filters = []): LengthAwarePaginator
     {
-        $builder = self::getListBuilder($filters);
+        $builder = self::getListBuilder($filters)->orderByDesc('created_at');
         return $builder->paginate();
     }
 
@@ -61,7 +61,7 @@ class OrderRepo
      */
     public static function getListBuilder(array $filters = []): Builder
     {
-        $builder = Order::query()->orderByDesc('created_at');
+        $builder = Order::query();
 
         $customer = $filters['customer'] ?? null;
         if ($customer) {
