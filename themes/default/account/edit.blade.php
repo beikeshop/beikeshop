@@ -26,19 +26,20 @@
             <h5 class="card-title">修改个人信息</h5>
           </div>
           <div class="card-body h-600">
-            <form>
-              <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
-                <div class="d-flex align-items-center">
-                  <img class="rounded-3" id="avatar" src="{{ image_resize($customer->avatar, 200, 200) }}" width="90">
-                  <div class="ps-3">
-                    <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
-                      <i class="bi bi-arrow-repeat"></i> 修改头像
-                      <input type="file" class="d-none" id="update-btn" name="avatar" accept="image/*">
-                    </label>
-                    <div class="p mb-0 fs-ms text-muted">上传JPG、GIF或PNG图片。需要300 x 300。</div>
-                  </div>
+            <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
+              <div class="d-flex align-items-center">
+                <img class="rounded-3" id="avatar" src="{{ image_resize($customer->avatar, 200, 200) }}" width="90">
+                <div class="ps-3">
+                  <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
+                    <i class="bi bi-arrow-repeat"></i> 修改头像
+                    <input type="file" class="d-none" id="update-btn" name="avatar" accept="image/*">
+                  </label>
+                  <div class="p mb-0 fs-ms text-muted">上传JPG、GIF或PNG图片。需要300 x 300。</div>
                 </div>
               </div>
+            </div>
+            <form action="{{ shop_route('account.edit.index') }}" method="POST">
+              @csrf
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label">名称</label>
@@ -53,7 +54,7 @@
                   <input class="form-control" type="password" placeholder="留空则保持原密码不变" name="password" value="">
                 </div>
                 <div class="col-12 mt-4">
-                  <button class="btn btn-primary mt-sm-0" type="button">提交</button>
+                  <button class="btn btn-primary mt-sm-0" type="submit">提交</button>
                 </div>
               </div>
             </form>

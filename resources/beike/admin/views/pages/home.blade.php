@@ -83,9 +83,18 @@
   </div>
 
   <div class="card mb-4">
-    <div class="card-header">订单统计</div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>订单统计</div>
+      <div class="orders-right">
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+          <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="30">一个月</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="7">一周</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="12">一年</button>
+        </div>
+      </div>
+    </div>
     <div class="card-body">
-      <canvas id="orders-chart" style="max-height: 420px"></canvas>
+      <canvas id="orders-chart" style="max-height: 380px"></canvas>
     </div>
   </div>
 
@@ -94,7 +103,7 @@
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart" style="max-height: 420px"></canvas>
+          <canvas id="customer-chart" style="max-height: 380px"></canvas>
         </div>
       </div>
     </div>
@@ -102,7 +111,7 @@
       <div class="card mb-4">
         <div class="card-header">客户统计</div>
         <div class="card-body">
-          <canvas id="customer-chart-1" style="max-height: 420px"></canvas>
+          <canvas id="customer-chart-1" style="max-height: 380px"></canvas>
         </div>
       </div>
     </div>
@@ -113,133 +122,150 @@
 
 @push('footer')
   <script>
-  const ctx = document.getElementById('customer-chart').getContext('2d');
-  const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
-  const orders = document.getElementById('orders-chart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['新注册', '最近访问', '活跃用户', '近期下单'],
-      datasets: [{
-        label: '# of Votes',
-        // backgroundColor: '#ffadb9',
-        // borderColor: '#f7072b',
-        // barThickness: 30,
-        // borderRadius: 20, // This will round the corners
-        // borderSkipped: false, // To make all side rounded
-        data: [12, 19, 3, 5],
-        // borderRadius: 5,
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-        ],
-        borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            drawBorder: false,
+    const ctx = document.getElementById('customer-chart').getContext('2d');
+    const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
+    const orders = document.getElementById('orders-chart').getContext('2d');
+
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['新注册', '最近访问', '活跃用户', '近期下单'],
+        datasets: [{
+          label: '# of Votes',
+          // backgroundColor: '#ffadb9',
+          // borderColor: '#f7072b',
+          // barThickness: 30,
+          // borderRadius: 20, // This will round the corners
+          // borderSkipped: false, // To make all side rounded
+          data: [12, 19, 3, 5],
+          // borderRadius: 5,
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              drawBorder: false,
+            },
           },
-        },
-        x: {
-          beginAtZero: true,
-          grid: {
-            drawBorder: false,
-            display: false
-          },
+          x: {
+            beginAtZero: true,
+            grid: {
+              drawBorder: false,
+              display: false
+            },
+          }
         }
       }
-    }
-  });
+    });
 
-  const myChart1 = new Chart(ctx1, {
-    type: 'doughnut',
-    data: {
-      labels: ['Red', 'Orange', 'Yellow'],
-      datasets: [{
-        label: '# of Votes',
-        data: [112, 19, 3],
-        cutout: '80%',
-        radius: '80%',
-        spacing: 6,
-        hoverOffset: 4,
-        backgroundColor: ['#2c7be4','#a5c5f7','#d2ddec',],
-        borderWidth: 0
-      }]
-    }
-  });
+    const myChart1 = new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['Red', 'Orange', 'Yellow'],
+        datasets: [{
+          label: '# of Votes',
+          data: [112, 19, 3],
+          cutout: '80%',
+          radius: '80%',
+          spacing: 6,
+          hoverOffset: 4,
+          backgroundColor: ['#2c7be4','#a5c5f7','#d2ddec',],
+          borderWidth: 0
+        }]
+      }
+    });
 
 
-  const gradient = ctx.createLinearGradient(0, 0, 0, 420);
-        gradient.addColorStop(0, 'rgba(180,223,253,1)');
-        gradient.addColorStop(1, 'rgba(180,223,253,0)');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 380);
+          gradient.addColorStop(0, 'rgba(180,223,253,1)');
+          gradient.addColorStop(1, 'rgba(180,223,253,0)');
 
-  const ordersChart = new Chart(orders, {
-    type: 'line',
-    data: {
-      labels: Array.from({length: 30}, (v, k) => k + 1),
-      datasets: [{
-        // label: ["订单数"],
-        fill: true,
-        backgroundColor : gradient, // Put the gradient here as a fill color
-        borderColor : "#4da4f9",
-        borderWidth: 2,
-        pointColor : "#fff",
-        pointStrokeColor : "#ff6c23",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "#ff6c23",
-        data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
-        // borderDash: [],
+    const ordersChart = new Chart(orders, {
+      type: 'line',
+      data: {
+        labels: Array.from({length: 30}, (v, k) => k + 1),
+        datasets: [{
+          // label: ["订单数"],
+          fill: true,
+          backgroundColor : gradient, // Put the gradient here as a fill color
+          borderColor : "#4da4f9",
+          borderWidth: 2,
+          pointColor : "#fff",
+          pointStrokeColor : "#ff6c23",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "#ff6c23",
+          data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
+          // borderDash: [],
+          responsive: true,
+          lineTension: 0.4,
+          datasetStrokeWidth : 3,
+          pointDotStrokeWidth : 4,
+          pointHoverBorderWidth: 8,
+          // pointRadius: 3,
+        }],
+      },
+      options: {
         responsive: true,
-        lineTension: 0.4,
-        datasetStrokeWidth : 3,
-        pointDotStrokeWidth : 4,
-        pointHoverBorderWidth: 8,
-        // pointRadius: 3,
-      }],
-    },
-    options: {
-      responsive: true,
-      plugins: {
-          legend: false // Hide legend
-      },
-      interaction: {
-        mode: 'index',
-        // axis: 'x',
-        intersect: false,
-        // includeInvisible: true,
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: {
-            drawBorder: false,
-            borderDash: [3],
-            // tickMarkLength:1,
-            // drawOnChartArea: false,
-          },
+        plugins: {
+            legend: false // Hide legend
         },
-        x: {
-          beginAtZero: true,
-          grid: {
-            drawBorder: false,
-            // drawOnChartArea: false,
-            display: false
+        interaction: {
+          mode: 'index',
+          // axis: 'x',
+          intersect: false,
+          // includeInvisible: true,
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              drawBorder: false,
+              borderDash: [3],
+              // tickMarkLength:1,
+              // drawOnChartArea: false,
+            },
           },
-        }
-      },
+          x: {
+            beginAtZero: true,
+            grid: {
+              drawBorder: false,
+              // drawOnChartArea: false,
+              display: false
+            },
+          }
+        },
+      }
+    });
+    // console.log(ordersChart)
+
+    function upDate(chart, label, data) {
+      chart.data.labels = label;
+      chart.data.datasets[0].data = data;
+      chart.update();
     }
-  });
+
+    $('.orders-right .btn-group > .btn').on('click', function() {
+      const day = $(this).data('type'); // 天数
+      const labels = Array.from({length: day}, (v, k) => k + 1);
+      const data = Array.from({length: day}, () => Math.floor(Math.random() * 123.7));
+      $(this).addClass('btn-info text-white').siblings().removeClass('btn-info text-white');
+
+      upDate(ordersChart, labels, data);
+    });
   </script>
 @endpush
