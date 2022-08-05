@@ -1,10 +1,8 @@
 <x-admin::form.row :title="$title">
-  {{-- <input type="text" name="{{ $name }}" class="form-control wp-400" value="{{ $value }}" placeholder="{{ $title }}"> --}}
-  <select class="form-select" aria-label="Default select example">
-    <option selected>Open this select menu</option>
-    <option value="1">One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
+  <select class="form-select wp-200 me-3" name="{{ $name }}">
+    @foreach ($options as $option)
+      <option value="{{ $option['value'] }}" {{ $option['value'] == $value ? 'selected': '' }}>{{ $option['label'] }}</option>
+    @endforeach
   </select>
   {{ $slot }}
 </x-admin::form.row>

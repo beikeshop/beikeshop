@@ -1,5 +1,5 @@
 <div class="row g-3 mb-3">
-  <label for="" class="wp-200 col-form-label text-end">{{ $title ?? '' }}</label>
+  <label for="" class="wp-200 col-form-label text-end opacity-75">{{ $title ?? '' }}</label>
   <div class="col-auto wp-200-">
     {{ $slot }}
   </div>

@@ -60,7 +60,7 @@
           <div class="text-muted font-size-12 lh-base">管理后台目录,默认为admin</div>
         </x-admin-form-input>
 
-        <x-admin::form.row title="模版主题">
+{{--         <x-admin::form.row title="模版主题">
           <select class="form-select wp-200 me-3" name="theme" aria-label="Default select example">
             @foreach ($themes as $theme)
               <option
@@ -71,13 +71,21 @@
             @endforeach
           </select>
           <div class="text-muted font-size-12 lh-base">主题模板选择</div>
-        </x-admin::form.row>
+        </x-admin::form.row> --}}
+
+        <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
+          <div class="text-muted font-size-12 lh-base">主题模板选择</div>
+        </x-admin-form-select>
 
         <x-admin-form-switch name="tax" title="启用税费" value="{{ old('tax', system_setting('base.tax', '0')) }}">
           <div class="text-muted font-size-12 lh-base">是否启用税费计算</div>
         </x-admin-form-switch>
 
-        <x-admin::form.row title="税费地址">
+        <x-admin-form-select title="税费地址" name="tax_address" :value="old('tax_address', system_setting('base.address', 'shipping'))" :options="$tax_address">
+          <div class="text-muted font-size-12 lh-base">按什么地址计算税费</div>
+        </x-admin-form-select>
+
+{{--         <x-admin::form.row title="税费地址">
           <select class="form-select wp-200 me-3" name="tax_address" aria-label="Default select example">
             @foreach ($tax_address as $address)
               <option
@@ -88,7 +96,7 @@
             @endforeach
           </select>
           <div class="text-muted font-size-12 lh-base">按什么地址计算税费</div>
-        </x-admin::form.row>
+        </x-admin::form.row> --}}
 
         <x-admin::form.row title="">
           <button type="submit" class="btn btn-primary mt-4">提交</button>

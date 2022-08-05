@@ -204,14 +204,14 @@
     const ordersChart = new Chart(orders, {
       type: 'line',
       data: {
-        labels: Array.from({length: 30}, (v, k) => k + 1),
+        labels: {!! $order_trends['latest_month']->pluck('date') !!},
         datasets: [{
           // label: ["订单数"],
           fill: true,
           backgroundColor : gradient, // Put the gradient here as a fill color
           borderColor : "#4da4f9",
           borderWidth: 2,
-          data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
+          data: {!! $order_trends['latest_month']->pluck('total') !!},
           // borderDash: [],
           responsive: true,
           lineTension: 0.4,

@@ -12,6 +12,7 @@ use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
+use Beike\Admin\View\Components\Form\Select;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
@@ -46,6 +47,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-input-locale' => InputLocale::class,
             'form-switch' => SwitchRadio::class,
             'form-input' => Input::class,
+            'form-select' => Select::class,
             'form-image' => Image::class,
         ]);
 
