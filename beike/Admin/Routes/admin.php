@@ -59,8 +59,10 @@ Route::prefix($adminName)
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
                 Route::resource('languages', Controllers\LanguageController::class);
 
+
+                // 订单
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
-                Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
+                Route::middleware('can:orders_show')->get('orders/{order}/edit', [Controllers\OrderController::class, 'edit'])->name('orders.show');
 
                 Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
@@ -77,15 +79,24 @@ Route::prefix($adminName)
                 Route::resource('products', Controllers\ProductController::class);
 
                 Route::resource('regions', Controllers\RegionController::class);
-                Route::post('rmas/history/{id}',  [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
+                Route::post('rmas/history/{id}', [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
                 Route::resource('rmas', Controllers\RmaController::class);
                 Route::resource('rma_reasons', Controllers\RmaReasonController::class);
 
                 Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
 
-                Route::resource('tax_classes', Controllers\TaxClassController::class);
-                Route::resource('tax_rates', Controllers\TaxRateController::class);
+                // 税类
+                Route::middleware('can:tax_classes_index')->get('tax_classes', [Controllers\TaxClassController::class, 'index'])->name('tax_classes.index');
+                Route::middleware('can:tax_classes_create')->post('tax_classes', [Controllers\TaxClassController::class, 'store'])->name('tax_classes.store');
+                Route::middleware('can:tax_classes_update')->put('tax_classes/{tax_class}', [Controllers\TaxClassController::class, 'update'])->name('tax_classes.update');
+                Route::middleware('can:tax_classes_delete')->delete('tax_classes/{tax_class}', [Controllers\TaxClassController::class, 'destroy'])->name('tax_classes.destroy');
+
+                // 税费
+                Route::middleware('can:tax_rates_index')->get('tax_rates', [Controllers\TaxRateController::class, 'index'])->name('tax_rates.index');
+                Route::middleware('can:tax_rates_create')->post('tax_rates', [Controllers\TaxRateController::class, 'store'])->name('tax_rates.store');
+                Route::middleware('can:tax_rates_update')->put('tax_rates/{tax_rate}', [Controllers\TaxRateController::class, 'update'])->name('tax_rates.update');
+                Route::middleware('can:tax_rates_delete')->delete('tax_rates/{tax_rate}', [Controllers\TaxRateController::class, 'destroy'])->name('tax_rates.destroy');
 
                 Route::resource('admin_users', Controllers\AdminUserController::class);
                 Route::resource('admin_roles', Controllers\AdminRoleController::class);
