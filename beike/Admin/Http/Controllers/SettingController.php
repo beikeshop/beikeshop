@@ -12,6 +12,8 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Repositories\SettingRepo;
+use Beike\Repositories\CountryRepo;
+use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\SystemSettingRepo;
 use Illuminate\Http\Request;
 
@@ -24,9 +26,25 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = SystemSettingRepo::getList();
+        $themes =  [
+            ['value' => 'default', 'label' => '默认主题'],
+            ['value' => 'black', 'label' => '黑色主题']
+        ];
 
-        return view('admin::pages.setting', ['settings' => $settings]);
+        $tax_address = [
+            ['value' => 'shipping', 'label' => '配送地址'],
+            ['value' => 'payment', 'label' => '账单地址']
+        ];
+
+        $data = [
+            'settings' => SystemSettingRepo::getList(),
+            'countries' => CountryRepo::all(),
+            'currencies' => CurrencyRepo::all(),
+            'tax_address' => $tax_address,
+            'themes' => $themes
+        ];
+
+        return view('admin::pages.setting', $data);
     }
 
 
