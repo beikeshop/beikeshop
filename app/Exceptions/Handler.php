@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -37,5 +38,18 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+
+    /**
+     * 自定义错误信息页面, 前台与后台不同 需要分开定义
+     */
+    protected function registerErrorViewPaths()
+    {
+        if (is_admin()) {
+            (new RegisterAdminErrorViewPaths())();
+        } else {
+            (new RegisterErrorViewPaths())();
+        }
     }
 }
