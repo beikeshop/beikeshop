@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
 
 
     /**
-     * 自定义错误信息页面, 前台与后台不同 需要分开定义
+     * 自定义错误信息页面, 前台与后台不同, 需要分开定义
      */
     protected function registerErrorViewPaths()
     {
