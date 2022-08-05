@@ -109,7 +109,7 @@
     </div>
     <div class="col-xl-4 col-12">
       <div class="card mb-4">
-        <div class="card-header">客户统计</div>
+        <div class="card-header">注册来源</div>
         <div class="card-body">
           <canvas id="customer-chart-1" height="380"></canvas>
         </div>
@@ -197,38 +197,58 @@
     });
 
 
-    const gradient = ctx.createLinearGradient(0, 0, 0, 380);
-          gradient.addColorStop(0, 'rgba(180,223,253,1)');
-          gradient.addColorStop(1, 'rgba(180,223,253,0)');
+    const orderGradient = ctx.createLinearGradient(0, 0, 0, 380);
+          orderGradient.addColorStop(0, 'rgba(180,223,253,1)');
+          orderGradient.addColorStop(1, 'rgba(180,223,253,0)');
+
+    const amountGradient = ctx.createLinearGradient(0, 0, 0, 380);
+          amountGradient.addColorStop(0, 'rgba(32,201,151,0.3)');
+          amountGradient.addColorStop(1, 'rgba(32,201,151,0)');
 
     const ordersChart = new Chart(orders, {
       type: 'line',
       data: {
         // labels: Array.from({length: 30}, (v, k) => k + 1),
-        labels: {!! $order_trends['latest_month']->pluck('date') !!},
-        datasets: [{
-          // label: ["订单数"],
-          fill: true,
-          backgroundColor : gradient, // Put the gradient here as a fill color
-          borderColor : "#4da4f9",
-          borderWidth: 2,
-          // data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
-          data: {!! $order_trends['latest_month']->pluck('total') !!},
-          // borderDash: [],
-          responsive: true,
-          lineTension: 0.4,
-          datasetStrokeWidth: 3,
-          pointDotStrokeWidth: 4,
-          // pointStyle: 'rect',
-          pointHoverBorderWidth: 8,
-          // pointBorderColor: [],
-          pointBackgroundColor: '#4da4f9',
-          // pointColor : "#fff",
-          // pointStrokeColor : "#ff6c23",
-          // pointHighlightFill: "#fff",
-          // pointHighlightStroke: "#ff6c23",
-          // pointRadius: 3,
-        }],
+        labels: @json($order_trends['latest_month']['period']),
+        datasets: [
+          {
+            label: ["订单数量"],
+            fill: true,
+            backgroundColor : orderGradient, // Put the gradient here as a fill color
+            borderColor : "#4da4f9",
+            borderWidth: 2,
+            // data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
+            data: @json($order_trends['latest_month']['totals']),
+            // borderDash: [],
+            responsive: true,
+            lineTension: 0.4,
+            datasetStrokeWidth: 3,
+            pointDotStrokeWidth: 4,
+            // pointStyle: 'rect',
+            pointHoverBorderWidth: 8,
+            // pointBorderColor: [],
+            pointBackgroundColor: '#4da4f9',
+            // pointColor : "#fff",
+            // pointStrokeColor : "#ff6c23",
+            // pointHighlightFill: "#fff",
+            // pointHighlightStroke: "#ff6c23",
+            // pointRadius: 3,
+          },
+          {
+            label: ["订单金额"],
+            fill: true,
+            backgroundColor : amountGradient,
+            borderColor : "#20c997",
+            borderWidth: 2,
+            data: @json($order_trends['latest_month']['amounts']),
+            responsive: true,
+            lineTension: 0.4,
+            datasetStrokeWidth: 3,
+            pointDotStrokeWidth: 4,
+            pointHoverBorderWidth: 8,
+            pointBackgroundColor: '#20c997',
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -266,6 +286,7 @@
     function upDate(chart, label, data) {
       chart.data.labels = label;
       chart.data.datasets[0].data = data;
+      chart.data.datasets[1].data = data;
       chart.update();
     }
 
