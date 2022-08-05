@@ -204,7 +204,7 @@ function locale(): string
 function currency_format($price, string $currency = '', string $value = '', bool $format = true): string
 {
     if (!$currency) {
-        $currency = Session::get('currency') ?? system_setting('base.currency');
+        $currency = current_currency_code();
     }
     return CurrencyService::getInstance()->format($price, $currency, $value, $format);
 }
@@ -293,7 +293,7 @@ function language_packages(): array
  */
 function current_currency_code(): string
 {
-    return 'CNY';
+    return Session::get('currency') ?? system_setting('base.currency');
 }
 
 

@@ -17,7 +17,7 @@ class CurrencyController extends Controller
 {
     public function index($lang)
     {
-        if (array_key_exists($lang, CurrencyRepo::all()->where('status', true)->pluck('code'))) {
+        if (in_array($lang, CurrencyRepo::all()->where('status', true)->pluck('code'))) {
             Session::put('currency', $lang);
         }
         return Redirect::back();
