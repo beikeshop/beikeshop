@@ -128,7 +128,13 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">订单操作日志</h6></div>
     <div class="card-body">
-
+        @foreach ($order->orderHistories as $orderHistory)
+            <tr>
+                <td colspan="4" class="text-end">{{ $orderHistory->status }}</td>
+                <td class="text-end"><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
+                <td class="text-end"><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
+            </tr>
+        @endforeach
     </div>
   </div>
 @endsection
