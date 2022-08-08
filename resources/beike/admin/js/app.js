@@ -76,6 +76,32 @@ function tinymceInit() {
     fontsize_formats: "10px 12px 14px 18px 24px 36px",
     relative_urls : true,
     setup:function(ed) {
+      ed.ui.registry.addButton('toolbarImageButton',{
+        // text: '',
+        icon: 'image',
+        onAction:function() {
+          layer.open({
+            type: 2,
+            title: '图片管理器',
+            shadeClose: false,
+            skin: 'file-manager-box',
+            scrollbar: false,
+            shade: 0.4,
+            area: ['1060px', '680px'],
+            content: `${base}/file_manager`,
+            success: function(layerInstance, index) {
+              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
+              iframeWindow.callback = function(images) {
+                if (images.length) {
+                  images.forEach(e => {
+                    ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                  });
+                }
+              }
+            }
+          });
+        }
+      });
       // ed.on('change', function(e) {
       //   if (e.target.targetElm.dataset.key) {
       //     app.form[e.target.targetElm.dataset.key] = ed.getContent()

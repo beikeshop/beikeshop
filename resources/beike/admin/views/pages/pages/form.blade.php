@@ -2,15 +2,46 @@
 
 @section('title', '信息页面')
 
+@push('header')
+  <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
+@endpush
+
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
-      <h6 class="border-bottom pb-3 mb-4">编辑信息页面</h6>
-      <form action="" method="POST" id="app">
+      {{-- <h6 class="border-bottom pb-3 mb-4">编辑信息页面</h6> --}}
+      <form action="{{ admin_route('pages.store') }}" method="POST">
         @csrf
-{{--         <x-admin-form-input name="admin_name" title="后台目录" value="{{ old('admin_name', system_setting('base.admin_name', 'admin')) }}">
-          <div class="help-text font-size-12 lh-base">管理后台目录,默认为admin</div>
-        </x-admin-form-input> --}}
+
+        <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+          @foreach ($admin_languages as $language)
+            <li class="nav-item" role="presentation">
+              <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-{{ $language['code'] }}" type="button" >{{ $language['name'] }}</button>
+            </li>
+          @endforeach
+        </ul>
+        <div class="tab-content">
+
+          @foreach ($admin_languages as $language)
+            <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
+              <x-admin-form-input name="title[{{ $language['code'] }}]" title="信息标题" value="{{ old('title', '') }}" />
+              <x-admin::form.row title="内容">
+                <div class="w-max-1000">
+                  <textarea name="content[{{ $language['code'] }}]" class="form-control tinymce">
+                    {{ old('content', '') }}
+                  </textarea>
+                </div>
+              </x-admin::form.row>
+              <x-admin-form-input name="meta_title[{{ $language['code'] }}]" title="Meta Tag 标题" value="{{ old('meta_title', '') }}" />
+              <x-admin-form-input name="meta_description[{{ $language['code'] }}]" title="Meta Tag 描述" value="{{ old('meta_description', '') }}" />
+              <x-admin-form-input name="meta_keyword[{{ $language['code'] }}]" title="Meta Tag 关键字" value="{{ old('meta_keyword', '') }}" />
+              <x-admin::form.row title="">
+                <button type="submit" class="mt-3 btn btn-primary">提交</button>
+              </x-admin::form.row>
+            </div>
+          @endforeach
+        </div>
+
       </form>
     </div>
   </div>

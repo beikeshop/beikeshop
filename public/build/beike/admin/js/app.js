@@ -2147,7 +2147,34 @@ function tinymceInit() {
     font_formats: "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
     fontsize_formats: "10px 12px 14px 18px 24px 36px",
     relative_urls: true,
-    setup: function setup(ed) {// ed.on('change', function(e) {
+    setup: function setup(ed) {
+      ed.ui.registry.addButton('toolbarImageButton', {
+        // text: '',
+        icon: 'image',
+        onAction: function onAction() {
+          layer.open({
+            type: 2,
+            title: '图片管理器',
+            shadeClose: false,
+            skin: 'file-manager-box',
+            scrollbar: false,
+            shade: 0.4,
+            area: ['1060px', '680px'],
+            content: "".concat(base, "/file_manager"),
+            success: function success(layerInstance, index) {
+              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
+
+              iframeWindow.callback = function (images) {
+                if (images.length) {
+                  images.forEach(function (e) {
+                    ed.insertContent("<img src='/".concat(e.path, "' class=\"img-fluid\" />"));
+                  });
+                }
+              };
+            }
+          });
+        }
+      }); // ed.on('change', function(e) {
       //   if (e.target.targetElm.dataset.key) {
       //     app.form[e.target.targetElm.dataset.key] = ed.getContent()
       //   }
