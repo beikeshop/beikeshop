@@ -34,4 +34,9 @@ class Order extends Base
     {
         return $this->hasMany(OrderTotal::class);
     }
+
+    public function orderHistories(): HasMany
+    {
+        return $this->hasMany(OrderHistory::class);
+    }
 }

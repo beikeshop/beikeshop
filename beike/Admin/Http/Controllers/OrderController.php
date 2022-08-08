@@ -44,7 +44,7 @@ class OrderController extends Controller
      */
     public function show(Request $request, Order $order)
     {
-        $order->load(['orderTotals']);
+        $order->load(['orderTotals', 'orderHistories']);
         $data = [
             'order' => $order,
         ];
