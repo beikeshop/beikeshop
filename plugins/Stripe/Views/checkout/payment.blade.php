@@ -50,6 +50,7 @@
 
     data: {
       form: {
+        order_number: @json($order->number ?? null),
         cardnum: '',
         year: '',
         month: '',
@@ -99,7 +100,7 @@
 
           console.log(this.form);
 
-          $http.post(`/orders/${this.source.order.number}/pay`, this.form).then((res) => {
+          $http.post(`/plugin/stripe/capture`, this.form).then((res) => {
             console.log(res)
           })
         });
