@@ -9,6 +9,7 @@
         "ext-json": "*",
         "ext-zip": "*",
         "diglactic/laravel-breadcrumbs": "^7.2",
+        "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",

@@ -45,6 +45,10 @@ class CurrencyService
 
     public function format($amount, $currency, $value = '', $format = true)
     {
+        if (empty($this->currencies)) {
+            return $amount;
+        }
+
         $symbol_left = $this->currencies[$currency]->symbol_left;
         $symbol_right = $this->currencies[$currency]->symbol_right;
         $decimal_place = $this->currencies[$currency]->decimal_place;
