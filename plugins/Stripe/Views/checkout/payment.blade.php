@@ -4,46 +4,42 @@
 
 <script src="{{ asset('plugin/stripe/js/demo.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('plugin/stripe/css/demo.css') }}">
-
 <div class="mt-5" id="bk-stripe-app" v-cloak>
-  <div class="card">
-    <div class="card-body">
-      <div class="checkout-black">
-        <h5 class="checkout-title">卡信息</h5>
-        <div class="">
-          <div class="pay-iamges">
-              <img src="{{ asset("plugin/stripe/image/pay-image.png") }}" class="img-fluid">
-          </div>
-          <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
-            <el-form-item label="卡号" prop="cardnum">
-              <el-input v-model="form.cardnum"></el-input>
-            </el-form-item>
-            <el-form-item label="截止日期" required>
-              <div class="d-flex align-items-center">
-                <el-form-item prop="year">
-                  <el-date-picker class="w-auto me-2" v-model="form.year" format="yyyy" value-format="yyyy"
-                    type="year" placeholder="选择年">
-                  </el-date-picker>
-                </el-form-item>
-                <el-form-item prop="month">
-                  <el-date-picker v-model="form.month" class="w-auto" format="MM" value-format="MM" type="month"
-                    placeholder="选择月">
-                  </el-date-picker>
-                </el-form-item>
-              </div>
-            </el-form-item>
-            <el-form-item label="安全码" prop="cvv">
-              <el-input v-model="form.cvv"></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-checkbox v-model="form.remenber">記住這張卡以備將來使用</el-checkbox>
-            </el-form-item>
-            <el-form-item>
-              <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm('form')">支付</button>
-            </el-form-item>
-          </el-form>
-        </div>
+  <hr class="mb-4">
+  <div class="checkout-black">
+    <h5 class="checkout-title">卡信息</h5>
+    <div class="">
+      <div class="pay-iamges mb-2">
+        <img src="{{ asset("plugin/stripe/image/pay-image.png") }}" class="img-fluid">
       </div>
+      <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
+        <el-form-item label="卡号" prop="cardnum">
+          <el-input v-model="form.cardnum"></el-input>
+        </el-form-item>
+        <el-form-item label="截止日期" required>
+          <div class="d-flex align-items-center">
+            <el-form-item prop="year">
+              <el-date-picker class="w-auto me-2" v-model="form.year" format="yyyy" value-format="yyyy"
+                type="year" placeholder="选择年">
+              </el-date-picker>
+            </el-form-item>
+            <el-form-item prop="month">
+              <el-date-picker v-model="form.month" class="w-auto" format="MM" value-format="MM" type="month"
+                placeholder="选择月">
+              </el-date-picker>
+            </el-form-item>
+          </div>
+        </el-form-item>
+        <el-form-item label="安全码" prop="cvv">
+          <el-input v-model="form.cvv"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="form.remenber">記住這張卡以備將來使用</el-checkbox>
+        </el-form-item>
+        <el-form-item>
+          <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm('form')">支付</button>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </div>

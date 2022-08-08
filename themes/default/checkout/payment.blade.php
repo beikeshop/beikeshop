@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('body-class', 'page-bk-stripe')
+@section('body-class', 'page-payment')
 
 @section('content')
   <div class="container">
@@ -8,17 +8,32 @@
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 4])</div>
     </div>
 
-
     <div class="col-12">
-      <div class="card order-wrap border total-wrap">
-        <h5 class="checkout-title">订单结账</h5>
-        <div class="card-body">
-          <ul class="totals">
-            <li><span>订单号</span><span>{{ $order->number }}</span></li>
-            <li><span>应付总金额</span><span v-text="source.order.total">{{ $order->total }}</span></li>
-          </ul>
+      <div class="card order-wrap border">
+        <div class="card-body main-body">
+          <div class="order-top">
+            <div class="left">
+              <i class="bi bi-credit-card-2-back"></i>
+            </div>
+            <div class="right">
+              <h3 class="order-title">订单提交成功，请付款</h3>
+              <div class="order-info">
+                <table class="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td>订单编号：<span class="fw-bold">{{ $order['number'] }}</span></td>
+                      <td>应付金额：<span class="fw-bold">{{ $order['total'] }}</span></td>
+                    </tr>
+                    <tr>
+                      <td>支付方式：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-          {!! $payment !!}
+              {!! $payment !!}
+            </div>
+          </div>
         </div>
       </div>
     </div>

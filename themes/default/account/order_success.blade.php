@@ -9,8 +9,8 @@
     </div>
 
     <div class="card order-wrap border">
-      <div class="card-body">
-        <div class="order-top">
+      <div class="card-body main-body">
+        <div class="order-top border-bottom">
           <div class="left">
             <i class="bi bi-check2-circle"></i>
           </div>

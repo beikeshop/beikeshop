@@ -1,13 +1,14 @@
 @charset "UTF-8";
 
-body.page-order-success {
+body.page-order-success, body.page-payment {
   .order-wrap {
     .card-body {
-      padding: 3rem;
-      padding-left: 7rem;
+      &.main-body {
+        padding: 3rem;
+        padding-left: 7rem;
+      }
 
       .order-top {
-        border-bottom: 1px solid #eee;
         padding-bottom: 2.7rem;
         margin-bottom: 2.7rem;
         display: flex;
