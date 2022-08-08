@@ -159,8 +159,8 @@ class PermissionRepo
     private function getContentPermissions()
     {
         $routes = ['pages_index', 'pages_create', 'pages_show', 'pages_update', 'pages_delete'];
-        $items = $this->getPermissionList('setting', $routes);
-        return hook_filter('role.setting_permissions', $items);
+        $items = $this->getPermissionList('page', $routes);
+        return hook_filter('role.page_permissions', $items);
     }
 
 

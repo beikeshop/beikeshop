@@ -1,6 +1,6 @@
 <?php
 /**
- * order.php
+ * page.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -10,7 +10,9 @@
  */
 
 return [
-    'settings_index' => 'Setting',
-    'design_index' => 'Design Builder',
-    'design_footer_index' => 'Design Footer',
+    'pages_index' => 'Index',
+    'pages_create' => 'Create',
+    'pages_show' => 'Detail',
+    'pages_update' => 'Edit',
+    'pages_delete' => 'Delete'
 ];
