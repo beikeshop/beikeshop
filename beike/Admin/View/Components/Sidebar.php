@@ -56,6 +56,11 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
+        } elseif (Str::startsWith($routeName, ['pages.'])) {
+            $routes = $this->getPagesSubRoutes();
+            foreach ($routes as $route) {
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+            }
         } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
@@ -152,6 +157,16 @@ class Sidebar extends Component
         return hook_filter('sidebar.order_routes', $routes);
     }
 
+    /**
+     * 获取内容管理子页面路由
+     * @return mixed
+     */
+    private function getPagesSubRoutes() {
+        $routes = [
+            ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
+        ];
+        return hook_filter('sidebar.pages_routes', $routes);
+    }
 
     /**
      * 获取系统设置子页面路由

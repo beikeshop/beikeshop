@@ -38,6 +38,7 @@ return [
     'plugins_index' => 'Plugins',
     'regions_index' => 'Regions',
     'tax_rates_index' => 'Tax Rates',
+    'pages_index' => 'Information',
     'tax_classes_index' => 'Tax Classes',
     'currencies_index' => 'Currencies',
     'languages_index' => 'Languages',

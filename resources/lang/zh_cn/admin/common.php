@@ -42,6 +42,7 @@ return [
     'currencies_index' => '货币管理',
     'languages_index' => '语言管理',
     'design_index' => '首页装修',
+    'pages_index' => '信息页面',
     'design_footer_index' => '页尾装修',
     'categories_index' => '产品分类',
     'products_index' => '商品管理',
