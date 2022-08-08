@@ -79,7 +79,7 @@ Route::prefix($adminName)
 
                 // 单页
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
-                Route::middleware('can:pages_create')->get('pages', [Controllers\PagesController::class, 'create'])->name('pages.create');
+                Route::middleware('can:pages_create')->get('pages/create', [Controllers\PagesController::class, 'create'])->name('pages.create');
                 Route::middleware('can:pages_create')->post('pages', [Controllers\PagesController::class, 'store'])->name('pages.store');
                 Route::middleware('can:pages_update')->put('pages/{page}', [Controllers\PagesController::class, 'update'])->name('pages.update');
                 Route::middleware('can:pages_delete')->delete('pages/{page}', [Controllers\PagesController::class, 'destroy'])->name('pages.destroy');
