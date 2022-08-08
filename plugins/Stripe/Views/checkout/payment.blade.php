@@ -7,37 +7,37 @@
 <div class="mt-5" id="bk-stripe-app" v-cloak>
   <hr class="mb-4">
   <div class="checkout-black">
-    <h5 class="checkout-title">卡信息</h5>
+    <h5 class="checkout-title">{{ __('Stripe::common.title_info') }}</h5>
     <div class="">
       <div class="mb-2">
         <img src="{{ asset("plugin/stripe/image/pay-image.png") }}" class="img-fluid">
       </div>
       <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
-        <el-form-item label="卡号" prop="cardnum">
+        <el-form-item label="{{ __('Stripe::common.cardnum') }}" prop="cardnum">
           <el-input v-model="form.cardnum"></el-input>
         </el-form-item>
-        <el-form-item label="截止日期" required>
+        <el-form-item label="{{ __('Stripe::common.expiration_date') }}" required>
           <div class="d-flex align-items-center">
             <el-form-item prop="year">
               <el-date-picker class="w-auto me-2" v-model="form.year" format="yyyy" value-format="yyyy"
-                type="year" placeholder="选择年">
+                type="year" placeholder="{{ __('Stripe::common.year') }}">
               </el-date-picker>
             </el-form-item>
             <el-form-item prop="month">
               <el-date-picker v-model="form.month" class="w-auto" format="MM" value-format="MM" type="month"
-                placeholder="选择月">
+                placeholder="{{ __('Stripe::common.month') }}">
               </el-date-picker>
             </el-form-item>
           </div>
         </el-form-item>
-        <el-form-item label="安全码" prop="cvv">
+        <el-form-item label="{{ __('Stripe::common.cvv') }}" prop="cvv">
           <el-input v-model="form.cvv"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-checkbox v-model="form.remenber">記住這張卡以備將來使用</el-checkbox>
+          <el-checkbox v-model="form.remenber">{{ __('Stripe::common.remenber') }}</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm('form')">支付</button>
+          <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm('form')">{{ __('Stripe::common.btn_submit') }}</button>
         </el-form-item>
       </el-form>
     </div>
