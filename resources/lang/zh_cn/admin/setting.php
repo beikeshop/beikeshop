@@ -12,4 +12,5 @@
 return [
     'settings_index' => '系统设置',
     'design_index' => '首页编辑器',
+    'design_footer_index' => '页尾编辑器',
 ];

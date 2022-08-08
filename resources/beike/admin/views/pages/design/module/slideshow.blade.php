@@ -12,7 +12,7 @@
       <draggable
         ghost-class="dragabble-ghost"
         :list="module.images"
-        :options="{animation: 330}"
+        :options="{animation: 330, handle: '.icon-rank'}"
       >
         <div class="pb-images-selector" v-for="(item, index) in module.images" :key="index">
           <div class="selector-head" @click="itemShow(index)">

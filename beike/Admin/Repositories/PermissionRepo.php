@@ -145,7 +145,7 @@ class PermissionRepo
      */
     private function getSettingPermissions(): array
     {
-        $routes = ['settings_index', 'design_index'];
+        $routes = ['settings_index', 'design_index', 'design_footer_index'];
         $items = $this->getPermissionList('setting', $routes);
         return hook_filter('role.setting_permissions', $items);
     }

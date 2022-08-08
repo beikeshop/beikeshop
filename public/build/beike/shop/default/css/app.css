@@ -168,6 +168,86 @@ body[class^=page-account-] {
   min-height: 1000px;
 }
 
+.h-min-100 {
+  min-width: 100px;
+}
+
+.h-min-200 {
+  min-width: 200px;
+}
+
+.h-min-300 {
+  min-width: 300px;
+}
+
+.h-min-400 {
+  min-width: 400px;
+}
+
+.h-min-500 {
+  min-width: 500px;
+}
+
+.h-min-600 {
+  min-width: 600px;
+}
+
+.h-min-700 {
+  min-width: 700px;
+}
+
+.h-min-800 {
+  min-width: 800px;
+}
+
+.h-min-900 {
+  min-width: 900px;
+}
+
+.h-min-1000 {
+  min-width: 1000px;
+}
+
+.w-max-100 {
+  max-width: 100px;
+}
+
+.w-max-200 {
+  max-width: 200px;
+}
+
+.w-max-300 {
+  max-width: 300px;
+}
+
+.w-max-400 {
+  max-width: 400px;
+}
+
+.w-max-500 {
+  max-width: 500px;
+}
+
+.w-max-600 {
+  max-width: 600px;
+}
+
+.w-max-700 {
+  max-width: 700px;
+}
+
+.w-max-800 {
+  max-width: 800px;
+}
+
+.w-max-900 {
+  max-width: 900px;
+}
+
+.w-max-1000 {
+  max-width: 1000px;
+}
+
 .hp-100 {
   height: 100px;
 }
