@@ -64,14 +64,18 @@ Route::prefix($adminName)
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
 
-                Route::get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
-                Route::post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
-                Route::get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
-                Route::put('plugins/{code}', [Controllers\PluginController::class, 'update'])->name('plugins.update');
-                Route::put('plugins/{code}/status', [Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
-                Route::post('plugins/{code}/install', [Controllers\PluginController::class, 'install'])->name('plugins.install');
-                Route::post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
+                // 插件
+                Route::middleware('can:plugins_index')->get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
+                Route::middleware('can:plugins_import')->post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
+                Route::middleware('can:plugins_edit')->get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
+                Route::middleware('can:plugins_update')->put('plugins/{code}', [Controllers\PluginController::class, 'update'])->name('plugins.update');
+                Route::middleware('can:plugins_update_status')->put('plugins/{code}/status', [Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
+                Route::middleware('can:plugins_install')->post('plugins/{code}/install', [Controllers\PluginController::class, 'install'])->name('plugins.install');
+                Route::middleware('can:plugins_uninstall')->post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
+
+
+                // 产品
                 Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
                 Route::get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
                 Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
