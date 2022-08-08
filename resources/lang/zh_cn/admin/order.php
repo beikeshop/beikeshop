@@ -10,6 +10,7 @@
  */
 
 return [
+    'list' => '订单列表',
     'orders_index' => '订单列表',
     'orders_create' => '创建订单',
     'orders_show' => '订单详情',

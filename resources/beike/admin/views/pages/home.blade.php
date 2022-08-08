@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '后台管理')
+@section('title', __('admin/common.admin_panel'))
 
 @push('header')
   <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>

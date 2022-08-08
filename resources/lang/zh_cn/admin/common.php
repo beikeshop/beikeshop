@@ -11,6 +11,7 @@
 
 return [
     'edit' => '编辑',
+    'admin_panel' => '后台管理',
 
     // header
     'home' => '管理首页',

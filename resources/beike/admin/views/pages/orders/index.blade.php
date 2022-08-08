@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '订单列表')
+@section('title', __('admin/order.list'))
 
 @section('content')
   <div id="customer-app" class="card">

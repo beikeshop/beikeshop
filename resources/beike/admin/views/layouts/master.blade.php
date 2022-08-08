@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.6.2/css.css') }}">
     <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-    <title>beike admin</title>
+    <title>BeikeShop - @yield('title')</title>
     @stack('header')
     {{-- <x-analytics /> --}}
 </head>

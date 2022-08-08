@@ -10,7 +10,8 @@
  */
 
 return [
-    'edit' => '编辑',
+    'edit' => 'Edit',
+    'admin_panel' => 'Admin Panel',
 
     // header
     'home' => 'Home',

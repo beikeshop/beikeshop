@@ -10,6 +10,7 @@
  */
 
 return [
+    'list' => 'Order List',
     'orders_index' => 'Index',
     'orders_create' => 'Create',
     'orders_show' => 'Detail',
