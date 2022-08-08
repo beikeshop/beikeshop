@@ -9,7 +9,7 @@
   <div class="checkout-black">
     <h5 class="checkout-title">卡信息</h5>
     <div class="">
-      <div class="pay-iamges mb-2">
+      <div class="mb-2">
         <img src="{{ asset("plugin/stripe/image/pay-image.png") }}" class="img-fluid">
       </div>
       <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
