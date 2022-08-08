@@ -51,6 +51,7 @@
     </div>
   </div>
 
+  @can('orders_update_status')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">状态</h6></div>
     <div class="card-body" id="app">
@@ -82,6 +83,7 @@
       </el-form>
     </div>
   </div>
+  @endcan
 
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">商品信息</h6></div>
@@ -112,11 +114,10 @@
           @endforeach
         </tbody>
         <tfoot>
-          @foreach ($order->orderTotals as $order)
+          @foreach ($order->orderTotals as $orderTotal)
             <tr>
-              {{-- <td colspan="4" class="text-end">{{ $order->title }}： <span class="fw-bold">{{ $order->value }}</span></td> --}}
-              <td colspan="4" class="text-end">{{ $order->title }}</td>
-              <td class="text-end"><span class="fw-bold">{{ $order->value }}</span></td>
+              <td colspan="4" class="text-end">{{ $orderTotal->title }}</td>
+              <td class="text-end"><span class="fw-bold">{{ $orderTotal->value }}</span></td>
             </tr>
           @endforeach
         </tfoot>
@@ -133,7 +134,8 @@
 @endsection
 
 @push('footer')
-  <script>
+  @can('orders_update_status')
+    <script>
     new Vue({
       el: '#app',
 
@@ -177,5 +179,6 @@
       }
     })
   </script>
+  @endcan
 @endpush
 
