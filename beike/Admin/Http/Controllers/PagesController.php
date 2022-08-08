@@ -25,6 +25,20 @@ class PagesController
         return view('admin::pages.pages.index', $data);
     }
 
+    public function create(Request $request)
+    {
+        return view('admin::pages.pages.form');
+    }
+
+    public function edit()
+    {
+        $data = [
+            'pages' => PageRepo::getList()
+        ];
+
+        return view('admin::pages.pages.form', $data);
+    }
+
     public function store(Request $request)
     {
         $requestData = json_decode($request->getContent(), true);

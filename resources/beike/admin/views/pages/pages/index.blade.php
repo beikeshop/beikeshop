@@ -6,7 +6,7 @@
   <div class="card">
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary">添加</button>
+        <a href="{{ admin_route('pages.create.index') }}" class="btn btn-primary">添加</a>
       </div>
       <table class="table">
         <thead>
