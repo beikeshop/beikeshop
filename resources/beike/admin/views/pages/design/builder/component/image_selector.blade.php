@@ -23,12 +23,12 @@
       </el-tabs>
 
       <div class="i18n-inner" v-else>
-        <img :src="type == 'image' ? thumbnail(value) : 'image/video.png'" :id="'thumb-' + code" @click="selectButtonClicked" style="max-width: 60px; cursor: pointer;border: 1px solid #eee;">
+        <img :src="type == 'image' ? thumbnail(value) : 'image/video.png'" @click="selectButtonClicked" style="max-width: 60px; cursor: pointer;border: 1px solid #eee;">
         <div class="btns">
           <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
           <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">删除</el-button>
         </div>
-        <input type="hidden" value="" v-model="src" :id="'input-' + code">
+        <input type="hidden" value="" v-model="src">
       </div>
     </div>
   </template>
