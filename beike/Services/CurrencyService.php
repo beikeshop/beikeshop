@@ -1,4 +1,12 @@
 <?php
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        Pu Shuo <pushuo@opencart.cn>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-08-06 12:52:21
+ */
+
 /**
  * CurrencyService.php
  *

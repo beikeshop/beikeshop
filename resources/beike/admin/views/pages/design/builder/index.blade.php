@@ -26,14 +26,9 @@
   <div class="design-box">
     <div class="sidebar-edit-wrap" id="app" v-cloak>
       <div class="design-head">
-        <template v-if="design.editType == 'add'">
-          <div @click="exitDesign"><i class="el-icon-switch-button"></i>返回</div>
-          <div @click="viewHome"><i class="el-icon-view"></i>查看页面</div>
-          <div @click="saveButtonClicked"><i class="el-icon-check"></i>保存</div>
-        </template>
-        <template v-else>
-          <div @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>返回</div>
-        </template>
+        <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>返回</div>
+        <div @click="viewHome"><i class="el-icon-view"></i>查看页面</div>
+        <div @click="saveButtonClicked"><i class="el-icon-check"></i>保存</div>
       </div>
       <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
         <component

@@ -2054,98 +2054,118 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/beike/shop/default/js/global.js":
+/***/ "./resources/beike/shop/default/js/common.js":
 /*!***************************************************!*\
-  !*** ./resources/beike/shop/default/js/global.js ***!
+  !*** ./resources/beike/shop/default/js/common.js ***!
   \***************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-// 创建 bk 对象
-window.bk = window.bk || {}; // 获取购物车数据
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  /**
+   * @description: 获取购物车数据
+   * @return {*}
+   */
+  getCarts: function getCarts() {
+    $http.get('carts/mini', null, {
+      hload: true
+    }).then(function (res) {
+      $('.offcanvas-right-cart-amount').html(res.data.amount_format);
 
-bk.getCarts = function () {
-  $http.get('carts/mini', null, {
-    hload: true
-  }).then(function (res) {
-    $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-    if (res.data.carts.length) {
-      $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-      $('.offcanvas-right-cart-count').html(res.data.quantity);
-      var html = '';
-      res.data.carts.forEach(function (e) {
-        html += '<div class="product-list d-flex align-items-center">';
-        html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
-        html += '<div class="right flex-grow-1">';
-        html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
-        html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-        html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
-        html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-      });
-      $('.offcanvas-right-products').html(html);
-    }
-  });
-}; // 加入购物车
-
-
-bk.addCart = function (sku_id) {
-  var quantity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var isBuyNow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  $http.post('/carts', {
-    sku_id: sku_id,
-    quantity: quantity
-  }).then(function (res) {
-    bk.getCarts();
-    layer.msg(res.message);
-
-    if (isBuyNow) {
-      location.href = 'checkout';
-    }
-  });
-}; // 滑动固定顶部
-
-
-bk.slidingFixed = function () {
-  $(document).ready(function () {
-    if (!$('.fixed-top-line').length) return;
-    if ($(window).width() < 768) return;
-    var totalWrapTop = $('.fixed-top-line').offset().top;
-    var totalWrapWidth = $('.fixed-top-line').outerWidth();
-    var totalWrapHeight = $('.fixed-top-line').outerHeight();
-    var totalWrapLeft = $('.fixed-top-line').offset().left;
-    var footerTop = $('footer').offset().top;
-    var footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
-    $(window).scroll(function () {
-      if ($(this).scrollTop() > totalWrapTop) {
-        $('.fixed-top-line').css({
-          position: 'fixed',
-          top: 0,
-          bottom: 'auto',
-          'width': totalWrapWidth
+      if (res.data.carts.length) {
+        $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
+        $('.offcanvas-right-cart-count').html(res.data.quantity);
+        var html = '';
+        res.data.carts.forEach(function (e) {
+          html += '<div class="product-list d-flex align-items-center">';
+          html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
+          html += '<div class="right flex-grow-1">';
+          html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
+          html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
+          html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
+          html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
+          html += '</div>';
+          html += '</div>';
+          html += '</div>';
         });
-
-        if (!$('.total-old').length) {
-          $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
-        }
-
-        if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
-          $('.fixed-top-line').css({
-            position: 'absolute',
-            top: 'auto',
-            bottom: '0',
-            'width': totalWrapWidth
-          });
-        }
-      } else {
-        $('.total-old').remove();
-        $('.fixed-top-line').removeAttr('style');
+        $('.offcanvas-right-products').html(html);
       }
     });
-  });
-};
+  },
+
+  /**
+   * @description: 加入购物车
+   * @param {*} sku_id  商品id
+   * @param {*} quantity  商品数量
+   * @param {*} isBuyNow  是否立即购买
+   * @return {*}  返回Promise
+   */
+  addCart: function addCart(sku_id) {
+    var _this = this;
+
+    var quantity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+    var isBuyNow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    $http.post('/carts', {
+      sku_id: sku_id,
+      quantity: quantity
+    }).then(function (res) {
+      _this.getCarts();
+
+      layer.msg(res.message);
+
+      if (isBuyNow) {
+        location.href = 'checkout';
+      }
+    });
+  },
+
+  /**
+   * @description: 滑动固定顶部
+   * @return {*}
+   */
+  slidingFixed: function slidingFixed() {
+    $(document).ready(function () {
+      if (!$('.fixed-top-line').length) return;
+      if ($(window).width() < 768) return;
+      var totalWrapTop = $('.fixed-top-line').offset().top;
+      var totalWrapWidth = $('.fixed-top-line').outerWidth();
+      var totalWrapHeight = $('.fixed-top-line').outerHeight();
+      var totalWrapLeft = $('.fixed-top-line').offset().left;
+      var footerTop = $('footer').offset().top;
+      var footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > totalWrapTop) {
+          $('.fixed-top-line').css({
+            position: 'fixed',
+            top: 0,
+            bottom: 'auto',
+            'width': totalWrapWidth
+          });
+
+          if (!$('.total-old').length) {
+            $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
+          }
+
+          if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
+            $('.fixed-top-line').css({
+              position: 'absolute',
+              top: 'auto',
+              bottom: '0',
+              'width': totalWrapWidth
+            });
+          }
+        } else {
+          $('.total-old').remove();
+          $('.fixed-top-line').removeAttr('style');
+        }
+      });
+    });
+  }
+});
 
 /***/ }),
 
@@ -2601,13 +2621,13 @@ var __webpack_exports__ = {};
   \************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../js/http */ "./resources/js/http.js");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./resources/beike/shop/default/js/global.js");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_global__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/beike/shop/default/js/common.js");
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product */ "./resources/beike/shop/default/js/product.js");
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_product__WEBPACK_IMPORTED_MODULE_2__);
 
-window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 
+window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
+window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 bk.getCarts(); // 页面初始加载购物车数据
 
