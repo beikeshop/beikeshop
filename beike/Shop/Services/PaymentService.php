@@ -13,6 +13,7 @@ namespace Beike\Shop\Services;
 
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Stripe\Customer;
 use Stripe\Exception\ApiErrorException;
@@ -52,9 +53,10 @@ class PaymentService
     public function pay()
     {
         $orderPaymentCode = $this->paymentMethodCode;
-        $viewPath = "checkout.payment.{$this->paymentMethodCode}";
+        $paymentCode = Str::studly($orderPaymentCode);
+        $viewPath = "$paymentCode::checkout.payment";
         if (!view()->exists($viewPath)) {
-            throw new \Exception("找不到Payment{$orderPaymentCode}view{$viewPath}");
+            throw new \Exception("找不到支付方式 {$orderPaymentCode} 模板 {$viewPath}");
         }
         $paymentView = view($viewPath, ['order' => $this->order])->render();
         return view('checkout.payment', ['order' => $this->order, 'payment' => $paymentView]);
@@ -66,7 +68,7 @@ class PaymentService
      */
     public function capture($creditCardData): bool
     {
-        $apiKey = plugin_setting('bk_stripe.secret_key');
+        $apiKey = plugin_setting('stripe.secret_key');
         Stripe::setApiKey($apiKey);
         $token = Token::create([
             'card' => [

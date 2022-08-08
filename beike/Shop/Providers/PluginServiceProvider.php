@@ -39,12 +39,12 @@ class PluginServiceProvider extends ServiceProvider
     public function boot()
     {
         $manager = app('plugin');
-        $bootstraps = $manager->getEnabledBootstraps();
+        $plugins = $manager->getEnabledPlugins();
         $this->pluginBasePath = base_path('plugins');
 
-        foreach ($bootstraps as $bootstrap) {
-            $pluginCode = $bootstrap['code'];
-            $this->bootPlugin($bootstrap);
+        foreach ($plugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
+            $this->bootPlugin($plugin);
             $this->loadRoutes($pluginCode);
             $this->loadTranslations($pluginCode);
             $this->loadViews($pluginCode);
@@ -55,12 +55,12 @@ class PluginServiceProvider extends ServiceProvider
     /**
      * 调用插件 Bootstrap::boot()
      *
-     * @param $bootstrap
+     * @param $plugin
      */
-    private function bootPlugin($bootstrap)
+    private function bootPlugin($plugin)
     {
-        $filePath = $bootstrap['file'];
-        $pluginCode = $bootstrap['code'];
+        $filePath = $plugin->getBootFile();
+        $pluginCode = $plugin->getDirname();
         if (file_exists($filePath)) {
             $className = "Plugin\\{$pluginCode}\\Bootstrap";
             if (method_exists($className, 'boot')) {

@@ -51,7 +51,7 @@ class PluginRepo
     {
         $code = $bPlugin->code;
         $path = $bPlugin->getPath();
-        $staticPath = $path . '/static';
+        $staticPath = $path . '/Static';
         if (is_dir($staticPath)) {
             File::copyDirectory($staticPath, public_path('plugin/' . $code));
         }

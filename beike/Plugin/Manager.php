@@ -93,7 +93,7 @@ class Manager
         $bootstraps = new Collection;
 
         foreach ($this->getEnabledPlugins() as $plugin) {
-            if ($this->filesystem->exists($file = $plugin->getPath() . '/bootstrap.php')) {
+            if ($this->filesystem->exists($file = $plugin->getBootFile())) {
                 $bootstraps->push([
                     'code' => $plugin->getDirName(),
                     'file' => $file

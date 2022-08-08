@@ -148,6 +148,16 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this->columns;
     }
 
+    /**
+     * 获取插件启动文件路径
+     *
+     * @return string
+     */
+    public function getBootFile(): string
+    {
+        return $this->getPath() . '/Bootstrap.php';
+    }
+
 
     public function toArray(): array
     {

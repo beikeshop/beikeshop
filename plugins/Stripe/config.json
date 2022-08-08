@@ -1,5 +1,5 @@
 {
-    "code": "bk_stripe",
+    "code": "stripe",
     "name": "Stripe 支付",
     "description": "Stripe 支付 <a href='https://stripe.com/' target='_blank'>Stripe</a>",
     "type": "payment",
