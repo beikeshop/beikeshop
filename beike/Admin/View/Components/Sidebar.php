@@ -41,30 +41,22 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        }
-
-        if (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
+        } elseif (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
             $routes = $this->getProductSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        }
-
-        if (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
+        } elseif (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
             $routes = $this->getCustomerSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        }
-
-        if (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
+        } elseif (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
             $routes = $this->getOrderSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        }
-
-        if (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages'])) {
+        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));

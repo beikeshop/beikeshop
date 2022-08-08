@@ -77,6 +77,13 @@ Route::prefix($adminName)
                 Route::middleware('can:plugins_uninstall')->post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
 
 
+                // 单页
+                Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
+                Route::middleware('can:pages_create')->post('pages', [Controllers\PagesController::class, 'store'])->name('pages.store');
+                Route::middleware('can:pages_update')->put('pages/{page}', [Controllers\PagesController::class, 'update'])->name('pages.update');
+                Route::middleware('can:pages_delete')->delete('pages/{page}', [Controllers\PagesController::class, 'destroy'])->name('pages.destroy');
+
+
                 // 产品
                 Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
                 Route::get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
@@ -92,11 +99,13 @@ Route::prefix($adminName)
                 Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
 
+
                 // 税类
                 Route::middleware('can:tax_classes_index')->get('tax_classes', [Controllers\TaxClassController::class, 'index'])->name('tax_classes.index');
                 Route::middleware('can:tax_classes_create')->post('tax_classes', [Controllers\TaxClassController::class, 'store'])->name('tax_classes.store');
                 Route::middleware('can:tax_classes_update')->put('tax_classes/{tax_class}', [Controllers\TaxClassController::class, 'update'])->name('tax_classes.update');
                 Route::middleware('can:tax_classes_delete')->delete('tax_classes/{tax_class}', [Controllers\TaxClassController::class, 'destroy'])->name('tax_classes.destroy');
+
 
                 // 税费
                 Route::middleware('can:tax_rates_index')->get('tax_rates', [Controllers\TaxRateController::class, 'index'])->name('tax_rates.index');

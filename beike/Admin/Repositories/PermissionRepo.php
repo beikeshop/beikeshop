@@ -46,6 +46,7 @@ class PermissionRepo
             ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
             ['title' => trans('admin/common.customer'), 'permissions' => $this->getCustomerPermissions()],
             ['title' => trans('admin/common.customer_group'), 'permissions' => $this->getCustomerGroupPermissions()],
+            ['title' => trans('admin/common.content'), 'permissions' => $this->getContentPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
@@ -146,6 +147,18 @@ class PermissionRepo
     private function getSettingPermissions(): array
     {
         $routes = ['settings_index', 'design_index', 'design_footer_index'];
+        $items = $this->getPermissionList('setting', $routes);
+        return hook_filter('role.setting_permissions', $items);
+    }
+
+
+    /**
+     * 内容管理列表
+     * @return mixed
+     */
+    private function getContentPermissions()
+    {
+        $routes = ['pages_index', 'pages_create', 'pages_show', 'pages_update', 'pages_delete'];
         $items = $this->getPermissionList('setting', $routes);
         return hook_filter('role.setting_permissions', $items);
     }

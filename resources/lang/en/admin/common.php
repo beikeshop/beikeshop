@@ -20,6 +20,7 @@ return [
     'category' => 'Categories',
     'customer_group' => 'Customer Groups',
     'customer' => 'Customers',
+    'content' => 'Contents',
     'setting' => 'Settings',
     'plugin' => 'Plugin',
     'admin_user' => 'Admin User',

@@ -12,6 +12,7 @@
 return [
     'edit' => '编辑',
 
+    // header
     'home' => '管理首页',
     'order' => '订单管理',
     'product' => '商品管理',
@@ -19,6 +20,7 @@ return [
     'category' => '分类管理',
     'customer_group' => '客户组管理',
     'customer' => '客户管理',
+    'content' => '内容管理',
     'setting' => '系统设置',
     'plugin' => '插件管理',
     'admin_user' => '后台用户',
