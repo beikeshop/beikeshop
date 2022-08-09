@@ -126,7 +126,7 @@ class StateMachineService
         $nextStatusCodes = array_keys($nextStatus);
         $result = [];
         foreach ($nextStatusCodes as $status) {
-            $result[$status] = [
+            $result[] = [
                 'status' => $status,
                 'name' => trans($status)
             ];
