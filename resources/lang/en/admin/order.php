@@ -12,6 +12,7 @@
 return [
     'list' => 'Order List',
     'orders_index' => 'Index',
+    'unpaid' => 'Unpaid',
     'orders_create' => 'Create',
     'orders_show' => 'Detail',
     'orders_update' => 'Update',
