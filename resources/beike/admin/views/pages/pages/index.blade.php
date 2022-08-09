@@ -23,7 +23,7 @@
           @foreach ($pages as $page)
           <tr>
             <td>{{ $page->id }}</td>
-            <td>{{ $page->description->title }}</td>
+            <td>{{ $page->description->title ?? '' }}</td>
             <td>{{ $page->active }}</td>
             <td>{{ $page->created_at }}</td>
             <td>{{ $page->updated_at }}</td>
