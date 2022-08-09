@@ -13,5 +13,7 @@ namespace Beike\Models;
 
 class PageDescription extends Base
 {
-
+    protected $fillable = [
+        'page_id', 'locale', 'title', 'content', 'meta_title', 'meta_description', 'meta_keyword'
+    ];
 }

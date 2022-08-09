@@ -21,34 +21,32 @@ class PagesController
         $data = [
             'pages' => PageRepo::getList()
         ];
-
         return view('admin::pages.pages.index', $data);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('admin::pages.pages.form');
     }
 
-    public function edit()
+    public function edit(Request $request, int $pageId)
     {
         $data = [
-            'pages' => PageRepo::getList()
+            'page' => PageRepo::findByPageId($pageId),
         ];
-
         return view('admin::pages.pages.form', $data);
     }
 
     public function store(Request $request)
     {
-        $requestData = json_decode($request->getContent(), true);
-        $page = PageRepo::createOrUpdate($requestData);
-        return json_success('保存成功', $page);
+        $requestData = $request->all();
+        PageRepo::createOrUpdate($requestData);
+        return redirect()->to(admin_route('pages.index'));
     }
 
     public function update(Request $request, int $pageId)
     {
-        $requestData = json_decode($request->getContent(), true);
+        $requestData = $request->all();
         $requestData['id'] = $pageId;
         $page = PageRepo::createOrUpdate($requestData);
         return json_success('更新成功', $page);

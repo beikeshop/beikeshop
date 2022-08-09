@@ -17,13 +17,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Page extends Base
 {
+    protected $fillable = [
+        'position', 'active'
+    ];
+
     public function description(): HasOne
     {
-        return $this->hasOne(ProductDescription::class)->where('locale', locale());
+        return $this->hasOne(PageDescription::class)->where('locale', locale());
     }
 
     public function descriptions(): HasMany
     {
-        return $this->hasMany(ProductDescription::class);
+        return $this->hasMany(PageDescription::class);
     }
 }

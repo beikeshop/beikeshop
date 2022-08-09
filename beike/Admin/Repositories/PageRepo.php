@@ -12,15 +12,29 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PageRepo
 {
-    public static function getList()
+    /**
+     * 获取列表页数据
+     * @return LengthAwarePaginator
+     */
+    public static function getList(): LengthAwarePaginator
     {
         return Page::query()->with([
-            'descriptions'
-        ])->get();
+            'description'
+        ])->paginate();
     }
+
+
+    public static function findByPageId($pageId)
+    {
+        $page = Page::query()->findOrFail($pageId);
+        $page->load(['descriptions']);
+        return $page;
+    }
+
 
     public static function createOrUpdate($data)
     {
@@ -31,8 +45,8 @@ class PageRepo
             $page = new Page();
         }
         $page->fill([
-            'position' => $data['position'],
-            'active' => $data['active'],
+            'position' => $data['position'] ?? 0,
+            'active' => $data['active'] ?? true,
         ]);
         $page->saveOrFail();
 

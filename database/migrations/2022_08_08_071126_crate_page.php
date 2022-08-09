@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('page_description', function (Blueprint $table) {
+        Schema::create('page_descriptions', function (Blueprint $table) {
             $table->id();
             $table->integer('page_id');
             $table->string('locale');
