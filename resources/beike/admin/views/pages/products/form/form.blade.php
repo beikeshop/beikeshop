@@ -36,7 +36,10 @@
             <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
             <x-admin::form.row title="图片">
               <div class="product-images d-flex flex-wrap">
-                <div v-for="image, index in form.images" :key="index" class="wh-80 border d-flex justify-content-center align-items-center me-2">
+                <div v-for="image, index in form.images" :key="index" class="wh-80 position-relative border d-flex justify-content-center align-items-center me-2">
+                  <div class="position-absolute top-0 end-0">
+                    <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
+                  </div>
                   <img :src="thumbnail(image)" class="img-fluid">
                   <input type="hidden" name="images[]" :value="image">
                 </div>
@@ -355,6 +358,10 @@
             }
             this.form.images.push(...images.map(e => e.path))
           })
+        },
+
+        removeImages(index) {
+          this.form.images.splice(index, 1)
         },
 
         dialogVariablesFormSubmit(form) {
