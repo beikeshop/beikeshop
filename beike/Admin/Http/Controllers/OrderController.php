@@ -41,14 +41,16 @@ class OrderController extends Controller
      * @param Request $request
      * @param Order $order
      * @return mixed
+     * @throws \Exception
      */
     public function show(Request $request, Order $order)
     {
         $order->load(['orderTotals', 'orderHistories']);
         $data = [
             'order' => $order,
+            'statuses' => StateMachineService::getInstance($order)->nextBackendStatuses()
         ];
-
+dd($data);
         return view('admin::pages.orders.form', $data);
     }
 
