@@ -49,6 +49,7 @@ return [
     'products_trashed' => '回收站',
     'brands_index' => '产品品牌',
     'orders_index' => '订单列表',
+    'rmas_index' => '售后管理',
     'customers_index' => '客户列表',
     'customer_groups_index' => '客户组',
 ];

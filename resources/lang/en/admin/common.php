@@ -49,6 +49,7 @@ return [
     'products_trashed' => 'Trashed',
     'brands_index' => 'Brands',
     'orders_index' => 'Orders',
+    'rmas_index' => 'RMA',
     'customers_index' => 'Customers',
     'customer_groups_index' => 'Customer Groups',
 ];
