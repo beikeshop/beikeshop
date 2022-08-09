@@ -142,7 +142,6 @@ class StateMachineService
      */
     public function changeStatus($status, string $comment = '', bool $notify = false)
     {
-        $orderId = $this->orderId;
         $order = $this->order;
         $oldStatusCode = $order->status;
         $newStatusCode = $status;
@@ -179,7 +178,7 @@ class StateMachineService
         $orderNumber = $this->order->number;
         $currentStatusCode = $this->order->status;
 
-        $nextStatusCodes = array_keys($this->nextBackendStatuses());
+        $nextStatusCodes = collect($this->nextBackendStatuses())->pluck('status')->toArray();
         if (!in_array($statusCode, $nextStatusCodes)) {
             throw new \Exception("Order {$orderId}({$orderNumber}) is {$currentStatusCode}, cannot be changed to $statusCode");
         }
@@ -194,7 +193,7 @@ class StateMachineService
      */
     private function getFunctions($oldStatus, $newStatus): array
     {
-        return self::MACHINES["{$oldStatus}.{$newStatus}"] ?? [];
+        return self::MACHINES[$oldStatus][$newStatus] ?? [];
     }
 
 
@@ -227,5 +226,17 @@ class StateMachineService
             'comment' => (string)$this->comment,
         ]);
         $history->saveOrFail();
+    }
+
+
+    /**
+     * 减扣库存
+     *
+     * @param $oldCode
+     * @param $newCode
+     */
+    private function subStock($oldCode, $newCode)
+    {
+
     }
 }
