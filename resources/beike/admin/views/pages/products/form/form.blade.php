@@ -344,31 +344,17 @@
       },
       methods: {
         addProductImages(skuIndex) {
-          const self = this;
-          layer.open({
-            type: 2,
-            title: '图片管理器',
-            shadeClose: false,
-            skin: 'file-manager-box',
-            scrollbar: false,
-            shade: 0.4,
-            area: ['1060px', '680px'],
-            content: `${document.querySelector('base').href}/file_manager`,
-            success: function(layerInstance, index) {
-              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-              iframeWindow.callback = (images) => {
-                if (!isNaN(skuIndex)) {
-                  if (self.form.skus[skuIndex].images === null) {
-                    self.form.skus[skuIndex].images = images.map(e => e.path)
-                  } else {
-                    self.form.skus[skuIndex].images.push(...images.map(e => e.path))
-                  }
-                  return;
-                }
-                self.form.images.push(...images.map(e => e.path))
+          bk.fileManagerIframe(images => {
+            if (!isNaN(skuIndex)) {
+              if (this.form.skus[skuIndex].images === null) {
+                this.form.skus[skuIndex].images = images.map(e => e.path)
+              } else {
+                this.form.skus[skuIndex].images.push(...images.map(e => e.path))
               }
+              return;
             }
-          });
+            this.form.images.push(...images.map(e => e.path))
+          })
         },
 
         dialogVariablesFormSubmit(form) {

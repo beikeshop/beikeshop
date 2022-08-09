@@ -258,9 +258,9 @@
         },
 
         saveButtonClicked() {
-          $http.put('design/builder', this.form).then((res) => {
-            layer.msg(res.message)
-          })
+          // $http.put('design/builder', this.form).then((res) => {
+          //   layer.msg(res.message)
+          // })
         },
 
         selectorShow(index) {

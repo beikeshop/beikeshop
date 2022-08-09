@@ -2176,6 +2176,28 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/beike/shop/default/js/header.js":
+/*!***************************************************!*\
+  !*** ./resources/beike/shop/default/js/header.js ***!
+  \***************************************************/
+/***/ (() => {
+
+// offcanvas-search-top
+$(function () {
+  var myOffcanvas = document.getElementById('offcanvas-search-top');
+  myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
+    $('#offcanvas-search-top input').focus();
+    $('#offcanvas-search-top input').keydown(function (e) {
+      if (e.keyCode == 13) {
+        console.log('enter');
+        $('#offcanvas-search-top .btn-search').click();
+      }
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/beike/shop/default/js/product.js":
 /*!****************************************************!*\
   !*** ./resources/beike/shop/default/js/product.js ***!
@@ -2631,10 +2653,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/beike/shop/default/js/common.js");
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./product */ "./resources/beike/shop/default/js/product.js");
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_product__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./header */ "./resources/beike/shop/default/js/header.js");
+/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_header__WEBPACK_IMPORTED_MODULE_3__);
 
 
 window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+
 
 bk.getCarts(); // 页面初始加载购物车数据
 

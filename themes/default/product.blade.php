@@ -18,7 +18,7 @@
     {{ Diglactic\Breadcrumbs\Breadcrumbs::render('product', $product) }}
 
     <div class="row mb-5" id="product-top">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-lg-6">
         <div class="product-image d-flex align-items-start">
 
           <div class="left"  v-if="images.length">
@@ -44,9 +44,15 @@
         </div>
       </div>
 
-      <div class="ps-lg-5 col-xl-5 col-lg-6 order-lg-2">
+      <div class="col-12 col-lg-6">
         <div class="peoduct-info">
-          <h1>{{ $product['name'] }}</h1>
+          <h1 class="mb-4">{{ $product['name'] }}</h1>
+          <div class="stock-and-sku mb-4">
+            <span :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">@{{ product.quantity > 0 ? 'In Stock' : 'Out Stock' }}</span>
+            <span class="ms-3 text-muted">SKU: @{{ product.sku }}</span>
+            <span class="ms-3 text-muted">MODEL: @{{ product.model }}</span>
+          </div>
+          @if (0)
           <div class="rating-wrap d-flex">
             <div class="rating">
               @for ($i = 0; $i < 5; $i++)
@@ -55,14 +61,15 @@
             </div>
             <span class="text-muted">132 reviews</span>
           </div>
+          @endif
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
           </div>
 
-          <div class="variables-wrap" v-if="source.variables.length">
+          <div class="variables-wrap mb-4" v-if="source.variables.length">
             <div class="variable-group mb-2" v-for="variable, variable_index in source.variables" :key="variable_index">
-              <p class="mb-2"><strong>@{{ variable.name }}</strong></p>
+              <p class="mb-2">@{{ variable.name }}</p>
               <div class="variable-info">
                 <div
                   v-for="value, value_index in variable.values"
@@ -73,21 +80,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="attribute-wrap">
-            <table class="table table-striped table-borderless">
-              <tbody>
-                <tr>
-                  <td>型号</td>
-                  <td>@{{ product.model }}</td>
-                </tr>
-                <tr>
-                  <td>Sku</td>
-                  <td>@{{ product.sku }}</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
 
           <div class="quantity-btns d-flex">
@@ -290,9 +282,8 @@
     });
 
     $(document).ready(function () {
-        $('#zoom').trigger('zoom.destroy');
-        $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
+      $('#zoom').trigger('zoom.destroy');
+      $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
     });
-
   </script>
 @endpush

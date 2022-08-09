@@ -40,7 +40,7 @@
 
 // 生成 100 200 300 ... 1000 的最小宽度
 @for $i from 1 through 10 {
-  .h-min-#{$i}00 {
+  .s-min-#{$i}00 {
     min-width: #{$i}00px;
   }
 }

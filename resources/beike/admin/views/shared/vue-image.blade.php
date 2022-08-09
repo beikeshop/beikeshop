@@ -21,26 +21,12 @@ Vue.component('vue-image', {
   methods: {
     updateImages() {
       const self = this;
-      layer.open({
-        type: 2,
-        title: '图片管理器',
-        shadeClose: false,
-        skin: 'file-manager-box',
-        scrollbar: false,
-        shade: 0.4,
-        area: ['1060px', '680px'],
-        content: `${document.querySelector('base').href}/file_manager`,
-        success: function(layerInstance, index) {
-          var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-          iframeWindow.callback = (images) => {
-            if (images) {
-              self.$emit('input', images[0].path);
-            }
-          }
+      bk.fileManagerIframe(images => {
+        if (images) {
+          self.$emit('input', images[0].path);
         }
-      });
+      })
     },
-
   }
 });
 </script>

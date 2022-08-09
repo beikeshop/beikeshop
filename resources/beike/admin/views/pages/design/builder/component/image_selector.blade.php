@@ -101,35 +101,17 @@
         },
 
         selectButtonClicked() {
-          let that = this;
           this.loading = true;
 
-          layer.open({
-            type: 2,
-            title: '图片管理器',
-            shadeClose: false,
-            skin: 'file-manager-box',
-            scrollbar: false,
-            shade: 0.4,
-            area: ['1060px', '680px'],
-            content: '/{{ admin_name() }}/file_manager',
-            success: function(layerInstance, index) {
-              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-              iframeWindow.callback = function(images) {
-                // if (images.length < 1) {
-                //   return;
-                // }
-                that.loading = false;
+          bk.fileManagerIframe(images => {
+            this.loading = false;
 
-                if (that.isLanguage) {
-                  that.src[that.tabActiveId] = images[0].path;
-                } else {
-                  that.src = images[0].path;
-                }
-                // console.log(that.src);
-              }
+            if (this.isLanguage) {
+              this.src[this.tabActiveId] = images[0].path;
+            } else {
+              this.src = images[0].path;
             }
-          });
+          })
         }
       }
     });
