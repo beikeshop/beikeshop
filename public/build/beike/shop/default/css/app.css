@@ -582,27 +582,27 @@ footer {
   background: #fafafa;
   margin-top: 5rem;
 }
-footer .footer-top {
+footer .services-wrap {
   padding: 2.2rem 0;
   border-bottom: 1px solid #e4e4e4;
 }
-footer .footer-top .service-item {
+footer .services-wrap .service-item {
   display: flex;
   align-items: center;
 }
-footer .footer-top .service-item .icon {
+footer .services-wrap .service-item .icon {
   width: 34px;
   margin-right: 14px;
 }
-footer .footer-top .service-item p {
+footer .services-wrap .service-item p {
   margin-bottom: 0;
 }
-footer .footer-top .service-item .title {
+footer .services-wrap .service-item .title {
   margin-bottom: 2px;
   font-weight: bold;
   color: #333;
 }
-footer .footer-top .service-item .sub-title {
+footer .services-wrap .service-item .sub-title {
   font-size: 0.6rem;
   color: #8D94A0;
 }

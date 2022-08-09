@@ -288,8 +288,8 @@
       },
 
       updateData() {
-        this.value.type = this.value.type || 'category';
-        this.value.link = this.value.link || '';
+        this.value.type = this.value?.type || 'category';
+        this.value.link = this.value?.link || '';
         this.link = JSON.parse(JSON.stringify(this.value));
         if (this.type) {
           this.types = this.types.filter(e => e.type == this.type);

@@ -2063,34 +2063,18 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/http */ "./resources/js/http.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/beike/admin/js/common.js");
 var _document$querySelect;
 
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+
+window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
 var base = document.querySelector('base').href;
 var asset = document.querySelector('meta[name="asset"]').content;
 var editor_language = ((_document$querySelect = document.querySelector('meta[name="editor_language"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.content) || 'zh_cn';
 $(document).on('click', '.open-file-manager', function (event) {
-  var $this = $(this);
-  layer.open({
-    type: 2,
-    title: '图片管理器',
-    shadeClose: false,
-    skin: 'file-manager-box',
-    scrollbar: false,
-    shade: 0.4,
-    area: ['1060px', '680px'],
-    content: "".concat(base, "/file_manager"),
-    success: function success(layerInstance, index) {
-      var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-
-      iframeWindow.callback = function (images) {
-        $this.find('img').prop('src', images[0].url);
-        $this.next('input').val(images[0].path);
-        $this.next('input')[0].dispatchEvent(new Event('input'));
-      };
-    }
-  });
+  bk.fileManagerIframe();
 });
 
 if (typeof Vue != 'undefined') {
@@ -2126,7 +2110,7 @@ $(document).ready(function ($) {
   tinymceInit();
 });
 
-function tinymceInit() {
+var tinymceInit = function tinymceInit() {
   if (typeof tinymce == 'undefined') {
     return;
   }
@@ -2148,40 +2132,75 @@ function tinymceInit() {
     fontsize_formats: "10px 12px 14px 18px 24px 36px",
     relative_urls: true,
     setup: function setup(ed) {
+      var height = ed.getElement().dataset.tinymceHeight; // console.log(ed);
+      // 修改 tinymce 的高度
+      // if (height) {
+      // ed.theme.resizeTo(null, height);
+      // }
+
       ed.ui.registry.addButton('toolbarImageButton', {
         // text: '',
         icon: 'image',
         onAction: function onAction() {
-          layer.open({
-            type: 2,
-            title: '图片管理器',
-            shadeClose: false,
-            skin: 'file-manager-box',
-            scrollbar: false,
-            shade: 0.4,
-            area: ['1060px', '680px'],
-            content: "".concat(base, "/file_manager"),
-            success: function success(layerInstance, index) {
-              var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-
-              iframeWindow.callback = function (images) {
-                if (images.length) {
-                  images.forEach(function (e) {
-                    ed.insertContent("<img src='/".concat(e.path, "' class=\"img-fluid\" />"));
-                  });
-                }
-              };
+          bk.fileManagerIframe(function (images) {
+            if (images.length) {
+              images.forEach(function (e) {
+                ed.insertContent("<img src='/".concat(e.path, "' class=\"img-fluid\" />"));
+              });
             }
           });
         }
-      }); // ed.on('change', function(e) {
-      //   if (e.target.targetElm.dataset.key) {
-      //     app.form[e.target.targetElm.dataset.key] = ed.getContent()
-      //   }
-      // });
+      });
     }
   });
-}
+};
+
+/***/ }),
+
+/***/ "./resources/beike/admin/js/common.js":
+/*!********************************************!*\
+  !*** ./resources/beike/admin/js/common.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-09 09:39:34
+ * @LastEditTime  2022-08-09 09:43:18
+ */
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  fileManagerIframe: function fileManagerIframe(callback) {
+    var base = document.querySelector('base').href;
+    var $this = $(this);
+    layer.open({
+      type: 2,
+      title: '图片管理器',
+      shadeClose: false,
+      skin: 'file-manager-box',
+      scrollbar: false,
+      shade: 0.4,
+      area: ['1060px', '680px'],
+      content: "".concat(base, "/file_manager"),
+      success: function success(layerInstance, index) {
+        var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
+
+        iframeWindow.callback = function (images) {
+          if (callback && typeof callback === "function") return callback(images);
+          $this.find('img').prop('src', images[0].url);
+          $this.next('input').val(images[0].path);
+          $this.next('input')[0].dispatchEvent(new Event('input'));
+        };
+      }
+    });
+  }
+});
 
 /***/ }),
 

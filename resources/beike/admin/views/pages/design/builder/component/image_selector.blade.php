@@ -23,7 +23,14 @@
       </el-tabs>
 
       <div class="i18n-inner" v-else>
-        <img :src="type == 'image' ? thumbnail(value) : 'image/video.png'" @click="selectButtonClicked" style="max-width: 60px; cursor: pointer;border: 1px solid #eee;">
+        <div class="img">
+          <el-image :src="type == 'image' ? thumbnail(value) : 'image/video.png'" :id="'thumb-' + id" @click="selectButtonClicked">
+            <div slot="error" class="image-slot">
+              <i class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+        </div>
+
         <div class="btns">
           <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
           <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">删除</el-button>
@@ -51,7 +58,7 @@
 
       data: function () {
         return {
-          tabActiveId: $language_id,
+          tabActiveId: $locale,
           languages: $languages,
           internalValues: {},
           id: 'image-selector-'+ randomString(4),

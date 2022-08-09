@@ -19,7 +19,7 @@ class DesignFooterController extends Controller
     public function index(Request $request): View
     {
         $data = [
-            'languages' => LanguageRepo::all(),
+            // 'languages' => LanguageRepo::all(),
             'design_settings' => system_setting('base.footer_setting'),
         ];
         return view('admin::pages.design.builder.footer', $data);

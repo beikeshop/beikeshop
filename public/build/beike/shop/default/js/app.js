@@ -2065,6 +2065,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-04 17:22:54
+ * @LastEditTime  2022-08-09 09:40:08
+ */
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   /**
    * @description: 获取购物车数据

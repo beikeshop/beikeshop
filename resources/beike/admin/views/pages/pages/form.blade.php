@@ -27,7 +27,7 @@
               <x-admin-form-input name="title[{{ $language['code'] }}]" title="信息标题" value="{{ old('title', '') }}" />
               <x-admin::form.row title="内容">
                 <div class="w-max-1000">
-                  <textarea name="content[{{ $language['code'] }}]" class="form-control tinymce">
+                  <textarea name="content[{{ $language['code'] }}]" data-tinymce-height="600" class="form-control tinymce">
                     {{ old('content', '') }}
                   </textarea>
                 </div>

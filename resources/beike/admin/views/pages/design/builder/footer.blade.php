@@ -16,6 +16,7 @@
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
+  <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
@@ -31,7 +32,7 @@
       </div>
       <div class="module-edit">
         <el-collapse value="intro" @change="footerItemChange" accordion>
-          <el-collapse-item title="服务图标" name="service_icon">
+          <el-collapse-item title="服务图标" name="services-wrap">
             <div class="module-edit-group">
               <div class="module-edit-group">
                 <div class="module-edit-title">启用</div>
@@ -69,27 +70,102 @@
               </draggable>
             </div>
           </el-collapse-item>
+          <el-collapse-item title="Logo/介绍" name="footer-content-left">
+            <div class="module-edit-group">
+              <div class="module-edit-title">logo</div>
+              <pb-image-selector v-model="form.content.intro.logo" :is-language="false"></pb-image-selector>
+            </div>
+            <div class="module-edit-group">
+              <div class="module-edit-title">简介</div>
+              <rich-text-i18n v-model="form.content.intro.text"></rich-text-i18n>
+            </div>
+          </el-collapse-item>
+          @for ($i = 1; $i <= 3; $i++)
+          <el-collapse-item title="链接栏{{ $i }}" name="top_link{{ $i }}">
+            <div class="module-edit-group">
+              <div class="module-edit-title">配置标题</div>
+              <text-i18n v-model="form.content.link{{ $i }}.title"></text-i18n>
+            </div>
+            <div class="module-edit-group">
+              <div class="module-edit-title">链接</div>
+
+              <draggable
+                ghost-class="dragabble-ghost"
+                :list="form.content.link{{ $i }}.links"
+                :options="{animation: 330, handle: '.icon-rank'}">
+                <div v-for="(item, index) in form.content.link{{ $i }}.links" :key="index" class="footer-link-item">
+                  <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
+                    <i class="el-icon-rank"></i>
+                  </el-tooltip>
+                  <link-selector :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
+                  <div class="remove-item" @click="removeLink('link{{ $i }}', index)"><i class="iconfont">&#xe63a;</i></div>
+                </div>
+              </draggable>
+            </div>
+            <el-button class="add-item" size="mini" type="primary" plain @click="topLinkAddLinkButtonClicked({{ $i }})">添加链接</el-button>
+          </el-collapse-item>
+          @endfor
+
+          <el-collapse-item title="联系我们" name="top_contact">
+            <div class="module-edit-group">
+              <div class="module-edit-title">联系电话</div>
+              <el-input placeholder="联系电话" size="small" v-model="form.content.contact.telephone"></el-input>
+            </div>
+            <div class="module-edit-group">
+              <div class="module-edit-title">地址</div>
+              <el-input placeholder="地址" size="small" v-model="form.content.contact.address"></el-input>
+            </div>
+            <div class="module-edit-group">
+              <div class="module-edit-title">邮箱</div>
+              <el-input placeholder="邮箱" size="small" v-model="form.content.contact.email"></el-input>
+            </div>
+          </el-collapse-item>
+
+          <el-collapse-item title="版权设置" name="bottom_copyright">
+            <rich-text-i18n v-model="form.bottom.copyright"></rich-text-i18n>
+          </el-collapse-item>
+
+          <el-collapse-item title="更多链接" name="bottom_link">
+            <draggable
+              v-if="form.bottom.links.length"
+              ghost-class="dragabble-ghost"
+              :list="form.bottom.links"
+              :options="{animation: 330, handle: '.icon-rank'}"
+            >
+              <div v-for="(item, index) in form.bottom.links" :key="index" class="footer-link-item">
+                <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
+                  <i class="el-icon-rank"></i>
+                </el-tooltip>
+                <link-selector :show-text="true" v-model="item.link"></link-selector>
+                <div class="remove-item" @click="removeBottomLink(index)"><i class="iconfont">&#xe63a;</i>
+                </div>
+              </div>
+            </draggable>
+            <div class="add-item">
+              <el-button type="primary" size="small" @click="addBottomLink" icon="el-icon-circle-plus-outline">添加链接</el-button>
+            </div>
+          </el-collapse-item>
         </el-collapse>
       </div>
     </div>
     <div class="preview-iframe">
-      <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
+      <iframe src="{{ url('/') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
 
 
   <script>
     var $languages = @json($languages);
-    var $language_id = '{{ locale() }}';
+    var $locale = '{{ locale() }}';
 
-    // function languagesFill(text) {
-    //   var obj = {};
-    //   $languages.map(e => {
-    //     obj[e.code] = text
-    //   })
+    function languagesFill(text) {
+      var obj = {};
+      $languages.map(e => {
+        obj[e.code] = text
+      })
 
-    //   return obj;
-    // }
+      return obj;
+    }
 
     Vue.prototype.thumbnail = function thumbnail(image, width, height) {
       if (!image) {
@@ -112,13 +188,17 @@
       app.design.ready = true;
       app.design.sidebar = true;
 
-
+      // 页面滚动到最底部
+      $(previewWindow.document).ready(function() {
+        previewWindow.scrollTo(0, $(previewWindow.document).height());
+      });
     });
   </script>
 
   @include('admin::pages.design.builder.component.image_selector')
   @include('admin::pages.design.builder.component.link_selector')
   @include('admin::pages.design.builder.component.text_i18n')
+  @include('admin::pages.design.builder.component.rich_text_i18n')
 
   <script>
     let app = new Vue({
@@ -152,41 +232,29 @@
         },
 
         footerItemChange(val) {
+          console.log(val)
           // $footer = $("#preview-iframe").contents().find('footer');
           // $footer.find("div").removeClass('footer-active');
           // if (!val) return;
           // $footer.find(`.${val}`).addClass('footer-active');
         },
 
-        // addModuleButtonClicked(code) {
-        //   const sourceModule = this.source.modules.find(e => e.code == code)
-        //   const module_id = randomString(16)
-        //   const _data = {
-        //     code: code,
-        //     content: sourceModule.make,
-        //     module_id: module_id,
-        //     name: sourceModule.name,
-        //   }
-
-        //   $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
-        //     $(previewWindow.document).find('.modules-box').append(res);
-        //     this.form.modules.push(_data);
-        //     this.design.editingModuleIndex = this.form.modules.length - 1;
-        //     this.design.editType = 'module';
-
-
-        //     setTimeout(() => {
-        //       $(previewWindow.document).find("html, body").animate({
-        //         scrollTop: $(previewWindow.document).find('#module-' + module_id).offset().top - 30
-        //       }, 50);
-        //     }, 200)
-        //   })
-        // },
-
         // 编辑模块
         editModuleButtonClicked(index) {
           this.design.editingModuleIndex = index;
           this.design.editType = 'module';
+        },
+
+        topLinkAddLinkButtonClicked(index) {
+          this.form.content['link' + index].links.push({type: '', value: '', text: {}});
+        },
+
+        removeLink(item, index) {
+          this.form.content[item].links.splice(index, 1);
+        },
+
+        addBottomLink: function () {
+          this.form.bottom.links.push({link: {type: '', value: '', text: {}}})
         },
 
         saveButtonClicked() {

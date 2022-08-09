@@ -1,6 +1,6 @@
 <footer>
-  <div class="container">
-    <div class="footer-top">
+  <div class="services-wrap">
+    <div class="container">
       <div class="row">
         @for ($i = 0; $i < 4; $i++)
         <div class="col-lg-3">
@@ -15,6 +15,8 @@
         @endfor
       </div>
     </div>
+  </div>
+  <div class="container">
     <div class="footer-content">
       <div class="row">
         <div class="col-12 col-md-4">

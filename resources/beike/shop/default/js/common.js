@@ -1,3 +1,10 @@
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-04 17:22:54
+ * @LastEditTime  2022-08-09 09:40:08
+ */
 export default {
   /**
    * @description: 获取购物车数据
