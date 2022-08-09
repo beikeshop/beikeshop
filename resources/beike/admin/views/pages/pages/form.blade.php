@@ -21,7 +21,6 @@
           @endforeach
         </ul>
         <div class="tab-content">
-
           @foreach ($admin_languages as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][title]" title="信息标题" value="{{ old('title', '') }}" />
@@ -36,14 +35,14 @@
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="Meta Tag 标题" value="{{ old('meta_title', '') }}" />
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="Meta Tag 描述" value="{{ old('meta_description', '') }}" />
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="Meta Tag 关键字" value="{{ old('meta_keyword', '') }}" />
-              <x-admin-form-switch name="active" title="状态" value="{{ old('active', 1) }}" />
-              <x-admin::form.row title="">
-                <button type="submit" class="mt-3 btn btn-primary">提交</button>
-              </x-admin::form.row>
             </div>
           @endforeach
-        </div>
 
+          <x-admin-form-switch name="active" title="状态" value="{{ old('active', 1) }}" />
+          <x-admin::form.row title="">
+            <button type="submit" class="mt-3 btn btn-primary">提交</button>
+          </x-admin::form.row>
+        </div>
       </form>
     </div>
   </div>
