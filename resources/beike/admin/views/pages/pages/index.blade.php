@@ -12,26 +12,27 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>税种</th>
-            <th>税率</th>
-            <th>类型</th>
-            <th>区域</th>
+            <th>标题</th>
+            <th>状态</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th class="text-end">操作</th>
           </tr>
         </thead>
         <tbody>
+          @foreach ($pages as $page)
           <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td class="text-end">1</td>
+            <td>{{ $page->id }}</td>
+            <td>{{ $page->description->title }}</td>
+            <td>{{ $page->active }}</td>
+            <td>{{ $page->created_at }}</td>
+            <td>{{ $page->updated_at }}</td>
+            <td class="text-end">
+              <a href="{{ admin_route('pages.edit', [$page->id]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
+              <a href="{{ admin_route('pages.destroy', [$page->id]) }}" class="btn btn-outline-danger btn-sm">删除</a>
+            </td>
           </tr>
+          @endforeach
         </tbody>
       </table>
 
