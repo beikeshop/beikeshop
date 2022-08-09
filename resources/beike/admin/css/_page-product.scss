@@ -1,15 +1,16 @@
 @charset "UTF-8";
 
 body.page-product-form {
-  .variants-producr-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 2px;
-    border: 1px solid #eee;
-    cursor: pointer;
-    display: flex;
-    align-items: center; // flex-start | center
-    justify-content: center; // flex-end | center | space-between
+  .product-item {
+    .position-absolute {
+      display: none;
+    }
+
+    &:hover {
+      .position-absolute {
+        display: block;
+      }
+    }
   }
 
   .variant-value-img {

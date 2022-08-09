@@ -1,4 +1,5 @@
-<div class="open-file-manager variants-producr-img">
+@if (0)
+<div class="open-file-manager">
   <div>
     @if ($image)
     <img src="{{ image_resize($image) }}" class="img-fluid">
@@ -8,3 +9,4 @@
   </div>
 </div>
 <input type="hidden" value="{{ $value }}" name="{{ $name }}">
+@endif

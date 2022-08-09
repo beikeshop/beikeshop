@@ -36,7 +36,7 @@
             <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
             <x-admin::form.row title="图片">
               <div class="product-images d-flex flex-wrap">
-                <div v-for="image, index in form.images" :key="index" class="wh-80 position-relative border d-flex justify-content-center align-items-center me-2">
+                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative border d-flex justify-content-center align-items-center me-2">
                   <div class="position-absolute top-0 end-0">
                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                   </div>
@@ -48,7 +48,8 @@
               <div class="help-text mb-1 mt-2">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</div>
               <div class="help-text">开启多规格并且多规格配置了图片时，这里的图片将作为多规格的公用图片，展示在其后面</div>
             </x-admin::form.row>
-            <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" />
+            {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
+            <input type="hidden" name="name" value="">
             <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
             <x-admin-form-input name="brand_id" title="品牌" value="0" />
             <x-admin-form-input name="tax_class_id" title="税类" value="0" />
@@ -157,7 +158,10 @@
                             </template>
                             <td>
                               <div class="product-images d-flex flex-wrap" style="margin-right: -8px">
-                                <div v-for="image, index in sku.images" :key="index" class="wh-40 border d-flex justify-content-center align-items-center me-2 mb-2">
+                                <div v-for="image, index in sku.images" :key="index" class="product-item wh-40 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative">
+                                  <div class="position-absolute top-0 end-0">
+                                    <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeSkuImages(skuIndex, index)" type="button"><i class="bi bi-trash"></i></button>
+                                  </div>
                                   <img :src="thumbnail(image)" class="img-fluid">
                                   <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'"
                                 placeholder="image">
@@ -362,6 +366,10 @@
 
         removeImages(index) {
           this.form.images.splice(index, 1)
+        },
+
+        removeSkuImages(variantIndex, index) {
+          this.form.skus[variantIndex].images.splice(index, 1)
         },
 
         dialogVariablesFormSubmit(form) {
