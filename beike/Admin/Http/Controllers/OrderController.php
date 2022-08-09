@@ -50,7 +50,6 @@ class OrderController extends Controller
             'order' => $order,
             'statuses' => StateMachineService::getInstance($order)->nextBackendStatuses()
         ];
-dd($data);
         return view('admin::pages.orders.form', $data);
     }
 

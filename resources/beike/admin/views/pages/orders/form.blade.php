@@ -22,10 +22,6 @@
                 <td>总计：</td>
                 <td>{{ $order->total }}</td>
               </tr>
-              <tr>
-                <td>状态：</td>
-                <td>{{ $order->status }}</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -57,15 +53,15 @@
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="当前状态">
-          待支付
+          {{ __('admin/order.' . $order->status) }}
         </el-form-item>
         <el-form-item label="修改状态" prop="status">
           <el-select size="small" v-model="form.status" placeholder="请选择">
             <el-option
               v-for="item in statuses"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
+              :key="item.status"
+              :label="item.name"
+              :value="item.status">
             </el-option>
           </el-select>
         </el-form-item>
@@ -157,7 +153,8 @@
       el: '#app',
 
       data: {
-        statuses: [{"value":"pending","label":"待处理"},{"value":"rejected","label":"已拒绝"},{"value":"approved","label":"已批准（待顾客寄回商品）"},{"value":"shipped","label":"已发货（寄回商品）"},{"value":"completed","label":"已完成"}],
+        // statuses: [{"value":"pending","label":"待处理"},{"value":"rejected","label":"已拒绝"},{"value":"approved","label":"已批准（待顾客寄回商品）"},{"value":"shipped","label":"已发货（寄回商品）"},{"value":"completed","label":"已完成"}],
+        statuses: @json($statuses ?? []),
         form: {
           status: "",
           notify: false,
@@ -169,15 +166,15 @@
         }
       },
 
-      beforeMount() {
-        // let statuses = @json($statuses ?? []);
-        // this.statuses = Object.keys(statuses).map(key => {
-        //   return {
-        //     value: key,
-        //     label: statuses[key]
-        //   }
-        // });
-      },
+      // beforeMount() {
+      //   let statuses = @json($statuses ?? []);
+      //   this.statuses = Object.keys(statuses).map(key => {
+      //     return {
+      //       value: key,
+      //       label: statuses[name]
+      //     }
+      //   });
+      // },
 
       methods: {
         submitForm(form) {
@@ -188,8 +185,8 @@
             }
 
             $http.put(`/orders/{{ $order->id }}/status`,this.form).then((res) => {
-              console.log(res)
               layer.msg(res.message);
+              window.location.reload();
             })
           });
         }
