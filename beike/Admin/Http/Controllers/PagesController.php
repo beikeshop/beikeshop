@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Models\Page;
 use Illuminate\Http\Request;
 use Beike\Admin\Repositories\PageRepo;
 
@@ -33,6 +34,7 @@ class PagesController
     {
         $data = [
             'page' => PageRepo::findByPageId($pageId),
+            'descriptions' => PageRepo::getDescriptionsByLocale($pageId),
         ];
         return view('admin::pages.pages.form', $data);
     }

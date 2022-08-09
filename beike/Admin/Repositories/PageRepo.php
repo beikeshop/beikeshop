@@ -36,6 +36,13 @@ class PageRepo
     }
 
 
+    public static function getDescriptionsByLocale($pageId)
+    {
+        $page = self::findByPageId($pageId);
+        return $page->descriptions->keyBy('locale');
+    }
+
+
     public static function createOrUpdate($data)
     {
         $id = $data['id'] ?? 0;
