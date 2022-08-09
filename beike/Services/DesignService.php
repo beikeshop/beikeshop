@@ -157,9 +157,7 @@ class DesignService
 
             $type = $link['type'] ?? '';
             $value = (int)$link['value'] ?? 0;
-            if ($type && $value) {
-                $images[$index]['link']['link'] = self::handleLink($type, $value);
-            }
+            $images[$index]['link']['link'] = self::handleLink($type, $value);
         }
 
         return $images;
@@ -175,12 +173,14 @@ class DesignService
      */
     private static function handleLink($type, $value): string
     {
-        if ($type == 'product') {
+        if ($type == 'product' && $value) {
             return shop_route('products.show', ['product' => $value]);
         }
-        if ($type == 'category') {
+
+        if ($type == 'category' && $value) {
             return shop_route('categories.show', ['category' => $value]);
         }
+
         return '';
     }
 }

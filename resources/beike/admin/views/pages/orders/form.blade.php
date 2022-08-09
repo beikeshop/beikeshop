@@ -49,7 +49,7 @@
 
   @can('orders_update_status')
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">状态</h6></div>
+    <div class="card-header"><h6 class="card-title">订单状态</h6></div>
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="当前状态">

@@ -5,6 +5,10 @@ footer {
   background: #fafafa;
   margin-top: 5rem;
 
+  .footer-active {
+    outline: 2px dashed #4bb1f0 !important;
+  }
+
   .services-wrap {
     padding: 2.2rem 0;
     border-bottom: 1px solid #e4e4e4;

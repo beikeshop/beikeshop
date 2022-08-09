@@ -102,7 +102,7 @@ setTimeout(() => {
     floor: languagesFill(''),
     images: [
       {
-        image: languagesFill('/demo/banner.png'),
+        image: languagesFill('catalog/demo/banner.png'),
         show: true,
         link: {
           type: 'product',
@@ -110,7 +110,7 @@ setTimeout(() => {
         }
       },
       {
-        image: languagesFill('/demo/banner.png'),
+        image: languagesFill('catalog/demo/banner.png'),
         show: false,
         link: {
           type: 'product',

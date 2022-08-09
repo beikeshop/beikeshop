@@ -57,7 +57,7 @@
               </ul>
             </div>
             <div class="col-6 col-sm">
-              <h6 class="text-uppercase text-dark mb-3">Hot links</h6>
+              <h6 class="text-uppercase text-dark mb-3">联系我们</h6>
               <ul class="list-unstyled">
                 <li><a href="">dsddslkdjccxz</a></li>
                 <li><a href="">dsddslkdjccxz</a></li>

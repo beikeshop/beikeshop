@@ -23,7 +23,7 @@
         <div class="tab-content">
           @foreach ($admin_languages as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][title]" title="信息标题" value="{{ old('title', '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][title]" title="信息标题" value="{{ old('title', $page->descriptions[$language['code']]->name ?? '') }}" />
               <x-admin::form.row title="内容">
                 <div class="w-max-1000">
                   <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">

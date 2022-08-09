@@ -232,11 +232,11 @@
         },
 
         footerItemChange(val) {
-          console.log(val)
-          // $footer = $("#preview-iframe").contents().find('footer');
-          // $footer.find("div").removeClass('footer-active');
-          // if (!val) return;
-          // $footer.find(`.${val}`).addClass('footer-active');
+          // console.log(val)
+          $footer = $("#preview-iframe").contents().find('footer');
+          $footer.find("div").removeClass('footer-active');
+          if (!val) return;
+          $footer.find(`.${val}`).addClass('footer-active');
         },
 
         // 编辑模块
