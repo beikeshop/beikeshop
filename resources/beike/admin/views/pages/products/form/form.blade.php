@@ -50,7 +50,7 @@
             </x-admin::form.row>
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
             <input type="hidden" name="name" value="">
-            <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '')" />
+            <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '0')" />
             <x-admin-form-input name="brand_id" title="品牌" value="0" />
             <x-admin-form-input name="tax_class_id" title="税类" value="0" />
             <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />

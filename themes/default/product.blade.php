@@ -91,7 +91,7 @@
               </div>
             </div>
             <button
-              class="btn btn-outline-secondary ms-3 add-cart"
+              class="btn btn-outline-dark ms-3 add-cart"
               :disabled="!product.quantity"
               @click="addCart(false)"
               ><i class="bi bi-cart-fill me-1"></i>加入购物车
@@ -113,19 +113,11 @@
     <div class="product-description">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
         <a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
-          Description
-        </a>
-        <a class="nav-link fw-bold" data-bs-toggle="tab" href="#description-1">
-          Size &amp; Fit
-        </a>
-        <a class="nav-link fw-bold" data-bs-toggle="tab" href="#description-2">
-          Shipping &amp; Return
+          商品详情
         </a>
       </div>
       <div class="tab-content">
         <div class="tab-pane fade show active" id="product-description" role="tabpanel" aria-labelledby="pills-home-tab">111</div>
-        <div class="tab-pane fade" id="description-1" role="tabpanel" aria-labelledby="pills-profile-tab">222</div>
-        <div class="tab-pane fade" id="description-2" role="tabpanel" aria-labelledby="pills-contact-tab">333</div>
       </div>
     </div>
   </div>
