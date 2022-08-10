@@ -26,27 +26,26 @@
             <h5 class="card-title">修改个人信息</h5>
           </div>
           <div class="card-body h-600">
-            <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
-              <div class="d-flex align-items-center">
-                <img class="rounded-3" id="avatar" src="{{ image_resize($customer->avatar, 200, 200) }}" width="90">
-                <div class="ps-3">
-                  <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
-                    <i class="bi bi-arrow-repeat"></i> 修改头像
-                    <input type="file" class="d-none" id="update-btn" name="avatar" accept="image/*">
-                  </label>
-                  <div class="p mb-0 fs-ms text-muted">上传JPG、GIF或PNG图片。需要300 x 300。</div>
-                </div>
-              </div>
-            </div>
             <form action="{{ shop_route('account.edit.update') }}" method="POST">
               @csrf
               {{ method_field('put') }}
 
               @if (session('success'))
-                <div class="alert alert-success">
-                  {{ session('success') }}
-                </div>
+                @include('shared.form-msg', ['msg' => session('success')])
               @endif
+
+              <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
+                <div class="d-flex align-items-center">
+                  <img class="rounded-3" id="avatar" src="{{ image_resize($customer->avatar, 200, 200) }}" width="90">
+                  <div class="ps-3">
+                    <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
+                      <i class="bi bi-arrow-repeat"></i> 修改头像
+                      <input type="file" class="d-none" id="update-btn" name="avatar" accept="image/*">
+                    </label>
+                    <div class="p mb-0 fs-ms text-muted">上传JPG或PNG图片。建议300 x 300。</div>
+                  </div>
+                </div>
+              </div>
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label">名称</label>
@@ -104,7 +103,6 @@
       var files = e.target.files;
       var done = function (url) {
         $(this).val('');
-        // $('#c-image').prop('src', url);
         image.src = url;
         $('#modal').modal('show');
       };
@@ -154,8 +152,11 @@
         canvas.toBlob(function (blob) {
           var formData = new FormData();
 
-          formData.append('avatar', blob, 'avatar.png');
-          console.log(formData)
+          formData.append('file', blob, 'avatar.png');
+          formData.append('type', 'avatar');
+          $http.put('{{ shop_route('file.store') }}', formData).then(res => {
+            console.log(res);
+          })
         });
       }
     });

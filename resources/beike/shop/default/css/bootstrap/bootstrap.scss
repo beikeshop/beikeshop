@@ -9,6 +9,8 @@
 //
 
 $primary: #fd560f;
+$success: #71c20b;
+
 $font-size-base: 0.8rem;
 $font-family-base: 'poppins', sans-serif;
 $border-radius: 0;
@@ -59,6 +61,8 @@ $dropdown-item-padding-y: .4rem;
 
 
 $card-border-width: 0;
+
+$alert-padding-y: 0.5rem;
 
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
