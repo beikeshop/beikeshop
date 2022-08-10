@@ -39,8 +39,16 @@ class TaxClassRepo
         ]);
         $taxClass->saveOrFail();
 
+        $rules = [];
+        foreach ($data['tax_rules'] as $rule) {
+            $rules[] = [
+                'tax_rate_id' => $rule['tax_rate_id'],
+                'based' => $rule['based'],
+                'priority' => (int)$rule['priority'],
+            ];
+        }
         $taxClass->taxRules()->delete();
-        $taxClass->taxRules()->createMany($data['tax_rules']);
+        $taxClass->taxRules()->createMany($rules);
         $taxClass->load(['taxRules']);
         return $taxClass;
     }
