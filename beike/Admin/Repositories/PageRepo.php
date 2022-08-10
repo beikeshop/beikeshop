@@ -39,7 +39,7 @@ class PageRepo
     public static function getDescriptionsByLocale($pageId)
     {
         $page = self::findByPageId($pageId);
-        return $page->descriptions->keyBy('locale');
+        return $page->descriptions->keyBy('locale')->toArray();
     }
 
 
