@@ -2,12 +2,13 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Beike\Shop\Http\Requests\UploadRequest;
 
 class FileController extends Controller
 {
-    public function store(Request $request)
+    public function store(UploadRequest $request)
     {
+        dump($request->all);
         $file = $request->file('file');
         $type = $request->get('type');
 
