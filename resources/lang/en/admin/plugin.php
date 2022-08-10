@@ -24,8 +24,8 @@ return [
     'plugin_description' => 'Description',
     'plugin_upload' => 'Upload(Only for zip file)',
 
-    'shipping' => 'Payment',
-    'payment' => 'Shipping',
+    'shipping' => 'Shipping',
+    'payment' => 'Payment',
     'total' => 'Total',
     'view' => 'View',
 ];

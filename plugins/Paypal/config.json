@@ -1,0 +1,12 @@
+{
+    "code": "paypal",
+    "name": "PayPal",
+    "description": "PayPal 支付 <a href='https://developer.paypal.com/' target='_blank'>PayPal Developer</a>",
+    "type": "payment",
+    "version": "v1.0.0",
+    "icon": "https://via.placeholder.com/100x100.png/99ee66?text=STRIPE",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "yangjin@opencart.cn"
+    }
+}
