@@ -37,7 +37,7 @@ return [
     |
     */
 
-    'files' => base_path('beike/Shop/routes/breadcrumbs.php'),
+    'files' => base_path('beike/Shop/Routes/breadcrumbs.php'),
 
     /*
     |--------------------------------------------------------------------------
