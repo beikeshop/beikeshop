@@ -33,13 +33,15 @@ class DesignFooterController extends Controller
     public function preview(Request $request): View
     {
         $module = json_decode($request->getContent(), true);
+        $content = $module['content'] ?? '';
+        $viewPath = "design.footer";
 
-        // $viewData = [
-        //     'content' => DesignService::handleModuleContent($moduleCode, $content),
-        //     'design' => (bool)$request->get('design')
-        // ];
+        $viewData = [
+            'content' => DesignService::handleModuleContent('footer', $content),
+            'design' => (bool)$request->get('design')
+        ];
 
-        // return view($viewPath, $viewData);
+        return view($viewPath, $viewData);
     }
 
 

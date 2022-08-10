@@ -49,6 +49,8 @@ class DesignService
             return self::handleBrand($content);
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
+        } elseif ($moduleCode == 'footer') {
+            return self::handleFooter($content);
         }
         return $content;
     }
@@ -133,6 +135,17 @@ class DesignService
         $content['tabs'] = $tabs;
         $content['title'] = $content['title'][locale()];
         return $content;
+    }
+
+
+    /**
+     * 处理页尾数据
+     *
+     * @param $content
+     */
+    private static function handleFooter($content)
+    {
+        dd($content);
     }
 
 
