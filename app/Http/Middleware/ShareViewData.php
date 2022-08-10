@@ -1,4 +1,11 @@
 <?php
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-10 16:45:58
+ * @LastEditTime  2022-08-10 17:03:40
+ */
 /**
  * ShareViewData.php
  *

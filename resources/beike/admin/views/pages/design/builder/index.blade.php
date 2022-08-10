@@ -61,7 +61,7 @@
   @endforeach
 
   <script>
-    var $languages = @json($languages);
+    var $languages = @json($admin_languages);
     var $locale = '{{ locale() }}';
 
     function languagesFill(text) {

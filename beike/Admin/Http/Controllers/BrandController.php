@@ -1,4 +1,11 @@
 <?php
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-08-10 19:07:07
+ */
 /**
  * BrandController.php
  *
@@ -56,7 +63,7 @@ class BrandController extends Controller
 
     public function autocomplete(Request $request): array
     {
-        $brands = BrandRepo::autocomplete($request->get('name') ?? '');
+        $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
 
         return json_success('获取成功！', $brands);
     }

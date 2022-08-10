@@ -2168,13 +2168,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/*
- * @copyright     2022 opencart.cn - All Rights Reserved.
- * @link          https://www.guangdawangluo.com
- * @Author        PS <pushuo@opencart.cn>
- * @Date          2022-08-09 09:39:34
- * @LastEditTime  2022-08-09 09:43:18
- */
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   fileManagerIframe: function fileManagerIframe(callback) {
     var base = document.querySelector('base').href;
@@ -2199,6 +2192,21 @@ __webpack_require__.r(__webpack_exports__);
         };
       }
     });
+  },
+  debounce: function debounce(fn, delay) {
+    var timeout = null; // 创建一个标记用来存放定时器的返回值
+
+    return function (e) {
+      var _arguments = arguments,
+          _this = this;
+
+      // 每当用户输入的时候把前一个 setTimeout clear 掉
+      clearTimeout(timeout); // 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数
+
+      timeout = setTimeout(function () {
+        fn.apply(_this, _arguments);
+      }, delay);
+    };
   }
 });
 

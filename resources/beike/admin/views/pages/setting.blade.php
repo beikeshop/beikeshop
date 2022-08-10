@@ -29,7 +29,7 @@
           </div>
         </x-admin::form.row>
 
-        <x-admin-form-select title="默认语言" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$languages->toArray()" key="code" label="name">
+        <x-admin-form-select title="默认语言" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$admin_languages" key="code" label="name">
           <div class="help-text font-size-12 lh-base">默认语言设置</div>
         </x-admin-form-select>
 

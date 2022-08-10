@@ -97,7 +97,7 @@
                   <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
-                  <link-selector :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
+                  <link-selector :hide-types="['product', 'category']" :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
                   <div class="remove-item" @click="removeLink('link{{ $i }}', index)"><i class="iconfont">&#xe63a;</i></div>
                 </div>
               </draggable>
@@ -141,7 +141,7 @@
 
 
   <script>
-    var $languages = @json($languages);
+    var $languages = @json($admin_languages);
     var $locale = '{{ locale() }}';
 
     function languagesFill(text) {
@@ -210,11 +210,13 @@
       },
       // 组件方法
       methods: {
-        footerUpdate() {
+        footerUpdate: bk.debounce(function() {
           $http.post('design_footer/builder/preview', this.form, {hload: true}).then((res) => {
-            // $(previewWindow.document).find('footer').replaceWith(res);
+            if (previewWindow) {
+              $(previewWindow.document).find('footer').replaceWith(res);
+            }
           })
-        },
+        }, 300),
 
         footerItemChange(val) {
           // console.log(val)

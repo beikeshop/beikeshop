@@ -111,6 +111,13 @@
         default: false
       },
 
+      hideTypes: {
+        type: Array,
+        default: function () {
+          return [];
+        }
+      },
+
       type: {
         default: null
       },
@@ -125,8 +132,8 @@
         types: [
           {type: 'product',label: '商品'},
           {type: 'category',label: '分类'},
-          // {type: 'information',label: ''},
-          // {type: 'manufacturer',label: '品牌'},
+          {type: 'page',label: '信息页面'},
+          {type: 'brand', label: '品牌'},
           {type: 'static',label: '固定连接'},
           // {type: 'blog',label: '博客'},
           {type: 'custom',label: '自定义'}
@@ -150,6 +157,11 @@
 
     beforeMount() {
       this.updateData();
+      if (this.hideTypes.length) {
+        this.types = this.types.filter((item) => {
+          return this.hideTypes.indexOf(item.type) == -1;
+        });
+      }
     },
 
     watch: {
@@ -179,8 +191,8 @@
           case 'category':
             url = '{{ admin_route('categories.index') }}';
             break;
-          case 'manufacturer':
-            url = '/';
+          case 'brand':
+            url = '';
             break;
           default:
             null;
@@ -267,8 +279,8 @@
           case 'category':
             url = 'categories/autocomplete?name=';
             break;
-          case 'manufacturer':
-            url = '';
+          case 'brand':
+            url = 'brands/autocomplete?name=';
             break;
           default:
             null;
@@ -296,11 +308,13 @@
         }
 
         if (!this.link.value) return;
-        if (this.link.type == 'customer') return this.name = this.link.value;
+        if (this.link.type == 'custom') return this.name = this.link.value;
         if (this.link.type == 'static') {
           if (this.static.find(e => e.value == this.link.value)) {
             this.name = this.static.find(e => e.value == this.link.value).name;
           }
+
+          return;
         }
 
         this.nameLoading = true;
@@ -314,8 +328,8 @@
           case 'category':
             url = `categories/${this.link.value}/name`;
             break;
-          case 'manufacturer':
-            url = '';
+          case 'brand':
+            url = `brands/${this.link.value}/name`;
             break;
           default:
             null;

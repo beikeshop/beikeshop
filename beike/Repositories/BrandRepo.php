@@ -104,14 +104,16 @@ class BrandRepo
         return $results;
     }
 
-    public static function autocomplete($name)
+    public static function autocomplete($name, $onlyActive = 1)
     {
-        $brands = Brand::query()
+        $builder = Brand::query()
             ->where('name', 'like', "$name%")
-            ->where('status', 1)
-            ->select('id', 'name')
-            ->limit(10)->get();
-        return $brands;
+            ->select('id', 'name', 'status');
+            if ($onlyActive) {
+                $builder->where('status', 1);
+            }
+
+        return $builder->limit(10)->get();
     }
 
     /**
