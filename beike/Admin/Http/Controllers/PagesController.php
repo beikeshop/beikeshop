@@ -27,7 +27,7 @@ class PagesController
 
     public function create()
     {
-        return view('admin::pages.pages.form');
+        return view('admin::pages.pages.form', ['page' => new Page()]);
     }
 
     public function edit(Request $request, int $pageId)
@@ -51,12 +51,12 @@ class PagesController
         $requestData = $request->all();
         $requestData['id'] = $pageId;
         $page = PageRepo::createOrUpdate($requestData);
-        return json_success('更新成功', $page);
+        return redirect()->to(admin_route('pages.index'));
     }
 
     public function destroy(Request $request, int $pageId)
     {
         PageRepo::deleteById($pageId);
-        return json_success('删除成功');
+        return redirect()->to(admin_route('pages.index'));
     }
 }

@@ -9,9 +9,9 @@
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
-      {{-- <h6 class="border-bottom pb-3 mb-4">编辑信息页面</h6> --}}
-      <form action="{{ admin_route('pages.store') }}" method="POST">
+      <form action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
         @csrf
+        @method($page->id ? 'PUT' : 'POST')
 
         <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
           @foreach ($admin_languages as $language)
@@ -23,18 +23,18 @@
         <div class="tab-content">
           @foreach ($admin_languages as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][title]" title="信息标题" value="{{ old('title', $page->descriptions[$language['code']]->name ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][title]" title="信息标题" value="{{ old('title', $descriptions[$language['code']]['title'] ?? '') }}" />
               <x-admin::form.row title="内容">
                 <div class="w-max-1000">
                   <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
-                    {{ old('content', '') }}
+                    {{ old('content', $descriptions[$language['code']]['content'] ?? '') }}
                   </textarea>
                 </div>
               </x-admin::form.row>
               <input type="hidden" name="descriptions[{{ $language['code'] }}][locale]" value="{{ $language['code'] }}">
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="Meta Tag 标题" value="{{ old('meta_title', '') }}" />
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="Meta Tag 描述" value="{{ old('meta_description', '') }}" />
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="Meta Tag 关键字" value="{{ old('meta_keyword', '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="Meta Tag 标题" value="{{ old('meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="Meta Tag 描述" value="{{ old('meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="Meta Tag 关键字" value="{{ old('meta_keyword', $descriptions[$language['code']]['meta_keyword'] ?? '') }}" />
             </div>
           @endforeach
 
