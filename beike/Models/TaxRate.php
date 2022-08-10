@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TaxRate extends Base
 {
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['region_id', 'name', 'rate', 'type'];
 
     public function region(): BelongsTo
     {
