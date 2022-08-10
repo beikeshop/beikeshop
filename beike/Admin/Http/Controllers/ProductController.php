@@ -2,13 +2,13 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Resources\ProductResource;
-use Beike\Admin\Repositories\CategoryRepo;
 use Beike\Models\Product;
-use Beike\Admin\Services\ProductService;
-use Beike\Repositories\LanguageRepo;
-use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
+use Beike\Repositories\ProductRepo;
+use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\LanguageRepo;
+use Beike\Admin\Services\ProductService;
+use Beike\Admin\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {

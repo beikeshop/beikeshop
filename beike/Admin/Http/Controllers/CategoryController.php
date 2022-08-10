@@ -2,13 +2,14 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+
+use Beike\Models\Category;
+use Illuminate\Http\Request;
+use Beike\Repositories\CategoryRepo;
+use Beike\Admin\Services\CategoryService;
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
-use Beike\Repositories\CategoryRepo;
-use Beike\Models\Category;
-use Beike\Admin\Services\CategoryService;
-use Beike\Repositories\ProductRepo;
-use Illuminate\Http\Request;
+
 
 class CategoryController extends Controller
 {
@@ -63,12 +64,11 @@ class CategoryController extends Controller
         $data = [
             'category' => $category ?? new Category(),
             'descriptions' => $descriptions ?? null,
-            'categories' => \Beike\Admin\Repositories\CategoryRepo\CategoryRepo::flatten(locale()),
+            'categories' => CategoryRepo::flatten(locale()),
             '_redirect' => $this->getRedirect(),
         ];
 
         return view('admin::pages.categories.form', $data);
-        return view('admin::pages.categories.form-vue', $data);
     }
 
     protected function save(Request $request, ?Category $category = null)
