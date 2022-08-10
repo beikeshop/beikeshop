@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Beike\Shop\View\Components\AccountSidebar;
+use Beike\Shop\View\Components\Alert;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -83,6 +84,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
+            'alert' => Alert::class,
         ]);
     }
 }

@@ -31,7 +31,7 @@
               {{ method_field('put') }}
 
               @if (session('success'))
-                @include('shared.form-msg', ['msg' => session('success')])
+                <x-shop-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
               @endif
 
               <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
@@ -40,7 +40,8 @@
                   <div class="ps-3">
                     <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
                       <i class="bi bi-arrow-repeat"></i> 修改头像
-                      <input type="file" class="d-none" id="update-btn" name="avatar" accept="image/*">
+                      <input type="file" class="d-none" id="update-btn" name="" accept="image/*">
+                      <input type="hidden" id="avatar-input" name="avatar" value="{{ $customer->avatar }}">
                     </label>
                     <div class="p mb-0 fs-ms text-muted">上传JPG或PNG图片。建议300 x 300。</div>
                   </div>
@@ -49,16 +50,18 @@
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label">名称</label>
-                  <input class="form-control" type="text" name="name" value="{{ $customer->name }}">
+                  <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" value="{{ old('name', $customer->name ?? '') }}">
+                  @if ($errors->has('name'))
+                    <span class="invalid-feedback" role="alert">{{ $errors->first('name') }}</span>
+                  @endif
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label">邮箱</label>
-                  <input class="form-control" type="email" name="email" value="{{ $customer->email }}">
+                  <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" value="{{ old('name', $customer->email ?? '') }}">
+                  @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">{{ $errors->first('email') }}</span>
+                  @endif
                 </div>
-                {{-- <div class="col-sm-6">
-                  <label class="form-label">密码</label>
-                  <input class="form-control" type="password" placeholder="留空则保持原密码不变" name="password" value="">
-                </div> --}}
                 <div class="col-12 mt-4">
                   <button class="btn btn-primary mt-sm-0" type="submit">提交</button>
                 </div>
@@ -148,14 +151,15 @@
           height: 200,
         });
         initialAvatarURL = avatar.src;
-        avatar.src = canvas.toDataURL();
+        // avatar.src = canvas.toDataURL();
         canvas.toBlob(function (blob) {
           var formData = new FormData();
 
           formData.append('file', blob, 'avatar.png');
           formData.append('type', 'avatar');
           $http.post('{{ shop_route('file.store') }}', formData).then(res => {
-            console.log(res);
+            $('#avatar').attr('src', res.data.url);
+            $('#avatar-input').val(res.data.value)
           })
         });
       }

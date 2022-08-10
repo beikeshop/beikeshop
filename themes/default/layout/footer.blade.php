@@ -22,44 +22,41 @@
   <div class="container">
     <div class="footer-content">
       <div class="row">
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-3">
           <div class="footer-content-left">
             <div class="logo"><a href="http://"><img
                   src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
             <div class="text">{!! $footer_content['content']['intro']['text'][$locale] ?? '' !!}</div>
           </div>
         </div>
-        <div class="col-lg-8">
-          <div class="row">
-            @for ($i = 1; $i <= 3; $i++)
-              @php
-                $link = $footer_content['content']['link' . $i];
-              @endphp
-              <div class="col-6 col-sm">
-                <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] }}</h6>
-                <ul class="list-unstyled">
-                  @foreach ($link['links'] as $item)
-                    <li><a href="{{ type_route($item['type'], $item['value']) }}"
-                        @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>{{ $item['text'][$locale] }}</a></li>
-                  @endforeach
-                </ul>
-              </div>
-            @endfor
-            <div class="col-6 col-sm">
-              <h6 class="text-uppercase text-dark mb-3">联系我们</h6>
-              <ul class="list-unstyled">
-                @if ($footer_content['content']['contact']['email'])
-                  <li>{{ $footer_content['content']['contact']['email'] }}</li>
-                @endif
-                @if ($footer_content['content']['contact']['telephone'])
-                  <li>{{ $footer_content['content']['contact']['telephone'] }}</li>
-                @endif
-                @if ($footer_content['content']['contact']['address'])
-                  <li>{{ $footer_content['content']['contact']['address'] }}</li>
-                @endif
-              </ul>
-            </div>
+
+        @for ($i = 1; $i <= 3; $i++)
+          @php
+            $link = $footer_content['content']['link' . $i];
+          @endphp
+          <div class="col-6 col-sm footer-content-link{{ $i }}">
+            <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] }}</h6>
+            <ul class="list-unstyled">
+              @foreach ($link['links'] as $item)
+                <li><a href="{{ type_route($item['type'], $item['value']) }}"
+                    @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>{{ $item['text'][$locale] }}</a></li>
+              @endforeach
+            </ul>
           </div>
+        @endfor
+        <div class="col-12 col-md-3 footer-content-contact">
+          <h6 class="text-uppercase text-dark mb-3">联系我们</h6>
+          <ul class="list-unstyled">
+            @if ($footer_content['content']['contact']['email'])
+              <li><i class="bi bi-envelope-fill"></i> {{ $footer_content['content']['contact']['email'] }}</li>
+            @endif
+            @if ($footer_content['content']['contact']['telephone'])
+              <li><i class="bi bi-telephone-fill"></i> {{ $footer_content['content']['contact']['telephone'] }}</li>
+            @endif
+            @if ($footer_content['content']['contact']['address'])
+              <li><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'] }}</li>
+            @endif
+          </ul>
         </div>
       </div>
     </div>

@@ -618,11 +618,6 @@ footer .footer-content a {
 footer .footer-content a:hover {
   color: #fd560f;
 }
-@media (min-width: 768px) {
-  footer .footer-content .footer-content-left {
-    width: 76%;
-  }
-}
 footer .footer-content .logo {
   max-width: 150px;
   margin-bottom: 20px;

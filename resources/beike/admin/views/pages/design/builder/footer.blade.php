@@ -81,7 +81,7 @@
             </div>
           </el-collapse-item>
           @for ($i = 1; $i <= 3; $i++)
-          <el-collapse-item title="链接栏{{ $i }}" name="top_link{{ $i }}">
+          <el-collapse-item title="链接栏{{ $i }}" name="footer-content-link{{ $i }}">
             <div class="module-edit-group">
               <div class="module-edit-title">配置标题</div>
               <text-i18n v-model="form.content.link{{ $i }}.title"></text-i18n>
@@ -97,7 +97,7 @@
                   <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
-                  <link-selector :hide-types="['product', 'category']" :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
+                  <link-selector :hide-types="['product', 'category', 'brand']" :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
                   <div class="remove-item" @click="removeLink('link{{ $i }}', index)"><i class="iconfont">&#xe63a;</i></div>
                 </div>
               </draggable>
@@ -106,7 +106,7 @@
           </el-collapse-item>
           @endfor
 
-          <el-collapse-item title="联系我们" name="top_contact">
+          <el-collapse-item title="联系我们" name="footer-content-contact">
             <div class="module-edit-group">
               <div class="module-edit-title">联系电话</div>
               <el-input placeholder="联系电话" size="small" v-model="form.content.contact.telephone"></el-input>
@@ -121,7 +121,7 @@
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="版权/图片" name="bottom_copyright">
+          <el-collapse-item title="版权/图片" name="footer-bottom">
             <div class="module-edit-group">
               <div class="module-edit-title">版权设置</div>
               <rich-text-i18n v-model="form.bottom.copyright"></rich-text-i18n>
