@@ -109,6 +109,31 @@ function plugin_route($route, $params = []): string
 }
 
 /**
+ * 获取 product, category, brand, page 路由链接
+ *
+ * @param $type
+ * @param $value
+ * @return string
+ */
+function type_route($type, $value): string
+{
+    if (empty($type) || empty($value)) {
+        return '';
+    }
+    if ($type == 'product') {
+        return shop_route('products.show', ['product' => $value]);
+    } elseif ($type == 'category') {
+        return shop_route('categories.show', ['category' => $value]);
+    } elseif ($type == 'brand') {
+        return shop_route('brands.show', ['brand' => $value]);
+    } elseif ($type == 'page') {
+        return shop_route('pages.show', ['page' => $value]);
+    }
+
+    return '';
+}
+
+/**
  * 是否访问的后端
  * @return bool
  */

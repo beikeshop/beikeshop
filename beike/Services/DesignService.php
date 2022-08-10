@@ -142,10 +142,11 @@ class DesignService
      * 处理页尾数据
      *
      * @param $content
+     * @return mixed
      */
     private static function handleFooter($content)
     {
-        dd($content);
+        return $content;
     }
 
 
@@ -186,14 +187,6 @@ class DesignService
      */
     private static function handleLink($type, $value): string
     {
-        if ($type == 'product' && $value) {
-            return shop_route('products.show', ['product' => $value]);
-        }
-
-        if ($type == 'category' && $value) {
-            return shop_route('categories.show', ['category' => $value]);
-        }
-
-        return '';
+        return type_route($type, $value);
     }
 }
