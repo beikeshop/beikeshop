@@ -36,7 +36,7 @@ class DesignFooterController extends Controller
         $viewPath = "layout.footer";
 
         $viewData = [
-            'content' => DesignService::handleModuleContent('footer', $content),
+            'footer_content' => DesignService::handleModuleContent('footer', $content),
             'design' => (bool)$request->get('design')
         ];
 

@@ -27,11 +27,6 @@ class ShareViewData
 
     protected function loadShopShareViewData()
     {
-        View::share('design', request('design') == 1);
-        View::share('languages', LanguageRepo::enabled());
-        View::share('shop_base_url', shop_route('home.index'));
-        View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
-
         if (is_admin()) {
             $adminLanguages = $this->handleAdminLanguages();
             $loggedAdminUser = current_user();
@@ -40,6 +35,12 @@ class ShareViewData
                 View::share('admin_languages', $adminLanguages);
                 View::share('admin_language', collect($adminLanguages)->where('code', $currentLanguage)->first());
             }
+        } else {
+            View::share('design', request('design') == 1);
+            View::share('languages', LanguageRepo::enabled());
+            View::share('shop_base_url', shop_route('home.index'));
+            View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
+            View::share('footer_content', hook_filter('footer.content', system_setting('base.footer_setting')));
         }
     }
 

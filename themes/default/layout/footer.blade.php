@@ -19,6 +19,7 @@
   <div class="container">
     <div class="footer-content">
       <div class="row">
+          @dump($footer_content)
         <div class="col-12 col-md-4">
           <div class="footer-content-left">
             <div class="logo"><a href="http://"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
