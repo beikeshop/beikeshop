@@ -31,6 +31,7 @@ class TaxRateController
     {
         $requestData = json_decode($request->getContent(), true);
         $taxRate = TaxRateRepo::createOrUpdate($requestData);
+        $taxRate->load('region');
         return json_success('保存成功', $taxRate);
     }
 
@@ -39,6 +40,7 @@ class TaxRateController
         $requestData = json_decode($request->getContent(), true);
         $requestData['id'] = $taxRateId;
         $taxRate = TaxRateRepo::createOrUpdate($requestData);
+        $taxRate->load('region');
         return json_success('更新成功', $taxRate);
     }
 
