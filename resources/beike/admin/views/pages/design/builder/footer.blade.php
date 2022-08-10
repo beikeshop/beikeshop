@@ -190,9 +190,7 @@
     let app = new Vue({
       el: '#app',
       data: {
-        form: {
-
-        },
+        form: @json($design_settings),
 
         design: {
           type: 'pc',
@@ -271,7 +269,6 @@
         }
       },
       created () {
-        this.form = @json($design_settings)
       },
       mounted () {
       },

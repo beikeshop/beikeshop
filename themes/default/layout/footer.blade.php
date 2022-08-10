@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         @for ($i = 0; $i < 4; $i++)
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-12">
           <div class="service-item">
             <div class="icon"><img src="{{ asset('image/default/footer-icon-1.png') }}" class="img-fluid"></div>
             <div class="text">
