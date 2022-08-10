@@ -142,7 +142,7 @@
               </div>
             </draggable>
             <div class="add-item">
-              <el-button type="primary" size="small" @click="addBottomLink" icon="el-icon-circle-plus-outline">添加链接</el-button>
+              <el-button type="primary" plain size="mini" @click="addBottomLink" icon="el-icon-circle-plus-outline">添加链接</el-button>
             </div>
           </el-collapse-item>
         </el-collapse>
@@ -258,9 +258,9 @@
         },
 
         saveButtonClicked() {
-          // $http.put('design/builder', this.form).then((res) => {
-          //   layer.msg(res.message)
-          // })
+          $http.put('design_footer/builder', this.form).then((res) => {
+            layer.msg(res.message)
+          })
         },
 
         selectorShow(index) {

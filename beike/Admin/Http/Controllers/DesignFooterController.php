@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Beike\Services\DesignService;
 use Beike\Repositories\SettingRepo;
-use Beike\Repositories\LanguageRepo;
 
 class DesignFooterController extends Controller
 {
@@ -19,12 +18,10 @@ class DesignFooterController extends Controller
     public function index(Request $request): View
     {
         $data = [
-            // 'languages' => LanguageRepo::all(),
             'design_settings' => system_setting('base.footer_setting'),
         ];
         return view('admin::pages.design.builder.footer', $data);
     }
-
 
     /**
      * 预览模块显示结果
@@ -36,20 +33,13 @@ class DesignFooterController extends Controller
     public function preview(Request $request): View
     {
         $module = json_decode($request->getContent(), true);
-        $moduleId = $module['module_id'] ?? '';
-        $moduleCode = $module['code'] ?? '';
-        $content = $module['content'] ?? '';
-        $viewPath = "design.{$moduleCode}";
 
-        $viewData = [
-            'code' => $moduleCode,
-            'module_id' => $moduleId,
-            'view_path' => $viewPath,
-            'content' => DesignService::handleModuleContent($moduleCode, $content),
-            'design' => (bool)$request->get('design')
-        ];
+        // $viewData = [
+        //     'content' => DesignService::handleModuleContent($moduleCode, $content),
+        //     'design' => (bool)$request->get('design')
+        // ];
 
-        return view($viewPath, $viewData);
+        // return view($viewPath, $viewData);
     }
 
 
@@ -63,12 +53,12 @@ class DesignFooterController extends Controller
     public function update(Request $request): array
     {
         $content = json_decode($request->getContent(), true);
-        $moduleData = DesignService::handleRequestModules($content);
+
         $data = [
             'type' => 'system',
             'space' => 'base',
-            'name' => 'design_setting',
-            'value' => json_encode($moduleData),
+            'name' => 'footer_setting',
+            'value' => json_encode($content),
             'json' => 1
         ];
         SettingRepo::createOrUpdate($data);

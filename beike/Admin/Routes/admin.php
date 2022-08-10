@@ -43,6 +43,7 @@ Route::prefix($adminName)
                 Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
                 Route::get('design_footer/builder', [Controllers\DesignFooterController::class, 'index'])->name('design_footer.index');
+                Route::put('design_footer/builder', [Controllers\designFooterController::class, 'update'])->name('design_footer.update');
 
                 Route::put('edit', [Controllers\EditController::class, 'update'])->name('edit');
                 Route::get('edit/locale', [Controllers\EditController::class, 'locale'])->name('edit.locale');
