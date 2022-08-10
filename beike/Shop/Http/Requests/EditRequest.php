@@ -25,6 +25,7 @@ class EditRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'email' => 'required|email:rfc,dns|unique:customers,email',
         ];
     }
 
@@ -32,6 +33,7 @@ class EditRequest extends FormRequest
     {
         return [
             'name' => '姓名',
+            'email' => '邮箱',
         ];
     }
 }
