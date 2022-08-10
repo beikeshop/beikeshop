@@ -4,6 +4,7 @@ use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Account\WishlistController;
 use Beike\Shop\Http\Controllers\BrandController;
 use Beike\Shop\Http\Controllers\CurrencyController;
+use Beike\Shop\Http\Controllers\FileController;
 use Beike\Shop\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\ZoneController;
@@ -47,6 +48,7 @@ Route::prefix('/')
 
         Route::get('currency/{currency}', [CurrencyController::class, 'index'])->name('currency.switch');
 
+        Route::put('files', [FileController::class, 'store'])->name('file.store');
         Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
