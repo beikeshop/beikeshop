@@ -154,7 +154,7 @@
 
           formData.append('file', blob, 'avatar.png');
           formData.append('type', 'avatar');
-          $http.put('{{ shop_route('file.store') }}', formData).then(res => {
+          $http.post('{{ shop_route('file.store') }}', formData).then(res => {
             console.log(res);
           })
         });
