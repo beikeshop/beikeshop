@@ -11,11 +11,10 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
-use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
-use Beike\Shop\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Beike\Shop\Http\Requests\EditRequest;
-use http\Env\Request;
+use Beike\Shop\Http\Controllers\Controller;
 
 class EditController extends Controller
 {
@@ -30,12 +29,11 @@ class EditController extends Controller
     /**
      * 顾客修改个人信息
      * @param EditRequest $request
-     * @return array
+     * @return RedirectResponse
      */
-    public function update(EditRequest $request)
+    public function update(EditRequest $request): RedirectResponse
     {
         CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
-
         return redirect()->to(shop_route('account.edit.index'))->with('success', '修改成功');
     }
 }
