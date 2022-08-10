@@ -171,8 +171,6 @@
     var previewWindow = null;
     $('#preview-iframe').on('load', function(event) {
       previewWindow = document.getElementById("preview-iframe").contentWindow;
-      app.design.ready = true;
-      app.design.sidebar = true;
 
       // 页面滚动到最底部
       $(previewWindow.document).ready(function() {
@@ -193,8 +191,6 @@
         form: @json($design_settings),
 
         design: {
-          type: 'pc',
-          ready: false,
         },
 
         source: {
@@ -273,13 +269,6 @@
       mounted () {
       },
     })
-
-    // window.addEventListener('message', (event) => {
-    //   event.stopPropagation()
-    //   if (typeof(event.data.index) !== 'undefined') {
-    //     app.editModuleButtonClicked(event.data.index)
-    //   }
-    // }, false)
   </script>
 </body>
 </html>

@@ -69,7 +69,7 @@
         </el-form-item>
 
         <el-form-item label="区域">
-          <el-select v-model="dialog.form.geo_zone_id" size="small" placeholder="请选择">
+          <el-select v-model="dialog.form.region_id" size="small" placeholder="请选择">
             <el-option v-for="region in source.regions" :key="region.value" :label="region.name" :value="region.id"></el-option>
           </el-select>
         </el-form-item>
@@ -106,7 +106,7 @@
             name: '',
             rate: '',
             type: 'percent',
-            geo_zone_id: '',
+            region_id: '',
           },
         },
 
@@ -121,7 +121,7 @@
           this.dialog.show = true
           this.dialog.type = type
           this.dialog.index = index
-          this.dialog.form.geo_zone_id = this.source.regions[0].id
+          this.dialog.form.region_id = this.source.regions[0].id
 
           if (type == 'edit') {
             let tax = this.tax_rates[index];
@@ -131,7 +131,7 @@
               name: tax.name,
               rate: tax.rate,
               type: tax.type,
-              geo_zone_id: tax.region.id,
+              region_id: tax.region.id,
             }
           }
         },
