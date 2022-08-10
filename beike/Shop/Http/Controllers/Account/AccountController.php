@@ -47,16 +47,4 @@ class AccountController extends Controller
 
         return json_success('密码修改成功');
     }
-
-    /**
-     * 顾客修改个人信息
-     * @param EditRequest $request
-     * @return array
-     */
-    public function update(EditRequest $request)
-    {
-        CustomerRepo::update($request->only('name'));
-
-        return json_success('修改成功');
-    }
 }

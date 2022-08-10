@@ -12,7 +12,9 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
+use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Requests\EditRequest;
 use http\Env\Request;
 
 class EditController extends Controller
@@ -22,5 +24,18 @@ class EditController extends Controller
         $customer = current_customer();
         $data['customer'] = $customer;
         return view('account/edit', $data);
+    }
+
+
+    /**
+     * 顾客修改个人信息
+     * @param EditRequest $request
+     * @return array
+     */
+    public function update(EditRequest $request)
+    {
+        CustomerRepo::update($request->only('name', 'email'));
+
+        return json_success('修改成功');
     }
 }

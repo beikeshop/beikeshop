@@ -77,9 +77,9 @@ Route::prefix('/')
                 Route::get('/', [AccountController::class, 'index'])->name('account.index');
                 Route::resource('addresses', AddressController::class);
                 Route::get('edit', [EditController::class, 'index'])->name('account.edit.index');
+                Route::put('edit', [EditController::class, 'update'])->name('account.edit.update');
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
-                Route::post('update', [AccountController::class, 'update'])->name('account.update');
                 Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
                 Route::get('wishlist', [WishlistController::class, 'index'])->name('account.wishlist.index');
                 Route::post('wishlist', [WishlistController::class, 'add'])->name('account.wishlist.add');
