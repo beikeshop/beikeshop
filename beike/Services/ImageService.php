@@ -28,6 +28,9 @@ class ImageService
     public function __construct($image)
     {
         $this->image = $image ?: self::PLACEHOLDER_IMAGE;
+        if (!is_file($image)) {
+            $this->image = self::PLACEHOLDER_IMAGE;
+        }
         $imagePath = public_path($this->image);
         $this->imagePath = $imagePath;
     }
