@@ -9,7 +9,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="asset" content="{{ asset('/') }}">
   <base href="{{$admin_base_url}}">
-  <title>首页编辑器</title>
+  <title>页尾编辑器</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
@@ -121,28 +121,14 @@
             </div>
           </el-collapse-item>
 
-          <el-collapse-item title="版权设置" name="bottom_copyright">
-            <rich-text-i18n v-model="form.bottom.copyright"></rich-text-i18n>
-          </el-collapse-item>
-
-          <el-collapse-item title="更多链接" name="bottom_link">
-            <draggable
-              v-if="form.bottom.links.length"
-              ghost-class="dragabble-ghost"
-              :list="form.bottom.links"
-              :options="{animation: 330, handle: '.icon-rank'}"
-            >
-              <div v-for="(item, index) in form.bottom.links" :key="index" class="footer-link-item">
-                <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
-                  <i class="el-icon-rank"></i>
-                </el-tooltip>
-                <link-selector :show-text="true" v-model="item.link"></link-selector>
-                <div class="remove-item" @click="removeBottomLink(index)"><i class="iconfont">&#xe63a;</i>
-                </div>
-              </div>
-            </draggable>
-            <div class="add-item">
-              <el-button type="primary" plain size="mini" @click="addBottomLink" icon="el-icon-circle-plus-outline">添加链接</el-button>
+          <el-collapse-item title="版权/图片" name="bottom_copyright">
+            <div class="module-edit-group">
+              <div class="module-edit-title">版权设置</div>
+              <rich-text-i18n v-model="form.bottom.copyright"></rich-text-i18n>
+            </div>
+            <div class="module-edit-group">
+              <div class="module-edit-title">图片</div>
+              <pb-image-selector v-model="form.bottom.image" :is-language="false"></pb-image-selector>
             </div>
           </el-collapse-item>
         </el-collapse>
@@ -220,14 +206,20 @@
       computed: {
       },
       // 侦听器
-      watch: {},
+      watch: {
+        form: {
+          handler: function(val, oldVal) {
+            this.footerUpdate();
+          },
+          deep: true,
+        }
+      },
       // 组件方法
       methods: {
-        moduleUpdated(module) {
-          const data = this.form.modules[this.design.editingModuleIndex]
-
-          $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
-            $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+        footerUpdate() {
+          $http.post('design_footer/builder/preview', this.form, {hload: true}).then((res) => {
+            console.log(res);
+            // $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
           })
         },
 
@@ -251,10 +243,6 @@
 
         removeLink(item, index) {
           this.form.content[item].links.splice(index, 1);
-        },
-
-        addBottomLink: function () {
-          this.form.bottom.links.push({link: {type: '', value: '', text: {}}})
         },
 
         saveButtonClicked() {
