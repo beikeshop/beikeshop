@@ -13,9 +13,9 @@ class FileController extends Controller
 
         $path = $file->store($type . '/', 'upload');
 
-        return [
+        return json_success('上传成功', [
             'url' => asset('upload/' . $path),
             'value' => 'upload/' . $path,
-        ];
+        ]);
     }
 }
