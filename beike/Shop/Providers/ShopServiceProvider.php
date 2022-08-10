@@ -42,6 +42,11 @@ class ShopServiceProvider extends ServiceProvider
             return;
         }
 
+        Config::set('filesystems.disks.upload', [
+            'driver' => 'local',
+            'root' => public_path('upload'),
+        ]);
+
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->registerGuard();
         $this->loadThemeViewPath();

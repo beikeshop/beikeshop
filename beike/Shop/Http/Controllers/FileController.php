@@ -8,7 +8,6 @@ class FileController extends Controller
 {
     public function store(UploadRequest $request)
     {
-        dump($request->all);
         $file = $request->file('file');
         $type = $request->get('type');
 
