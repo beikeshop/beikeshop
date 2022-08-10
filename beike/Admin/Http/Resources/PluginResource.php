@@ -22,6 +22,7 @@ class PluginResource extends JsonResource
             'code' => $this->code,
             'description' => $this->description,
             'type' => $this->type,
+            'type_format' => trans('admin/plugin.' . $this->type),
             'icon' => $this->icon,
             'author' => $this->author,
             'status' => $this->getStatus(),

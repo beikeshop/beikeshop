@@ -10,8 +10,12 @@
  */
 
 return [
-    'edit' => 'Edit',
     'admin_panel' => 'Admin Panel',
+    'edit' => 'Edit',
+    'status' => 'Status',
+    'action' => 'Action',
+    'install' => 'Install',
+    'uninstall' => 'Uninstall',
 
     // header
     'home' => 'Home',

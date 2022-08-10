@@ -17,4 +17,15 @@ return [
     'plugins_update_status' => 'Delete',
     'plugins_install' => 'Install',
     'plugins_uninstall' => 'Uninstall',
+
+    'plugin_list' => 'Plugin List',
+    'plugin_code' => 'Code',
+    'plugin_type' => 'Type',
+    'plugin_description' => 'Description',
+    'plugin_upload' => 'Upload(Only for zip file)',
+
+    'shipping' => 'Payment',
+    'payment' => 'Shipping',
+    'total' => 'Total',
+    'view' => 'View',
 ];

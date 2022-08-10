@@ -17,4 +17,15 @@ return [
     'plugins_update_status' => '删除插件',
     'plugins_install' => '安装',
     'plugins_uninstall' => '卸载',
+
+    'plugin_list' => '插件列表',
+    'plugin_code' => '插件代码',
+    'plugin_type' => '插件类型',
+    'plugin_description' => '插件描述',
+    'plugin_upload' => '上传插件(仅支持 zip 文件)',
+
+    'shipping' => '配送方式',
+    'payment' => '支付方式',
+    'total' => '订单计算',
+    'view' => '页面修改',
 ];
