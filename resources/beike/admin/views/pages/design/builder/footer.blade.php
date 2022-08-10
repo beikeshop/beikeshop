@@ -212,8 +212,7 @@
       methods: {
         footerUpdate() {
           $http.post('design_footer/builder/preview', this.form, {hload: true}).then((res) => {
-            console.log(res);
-            // $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+            // $(previewWindow.document).find('footer').replaceWith(res);
           })
         },
 

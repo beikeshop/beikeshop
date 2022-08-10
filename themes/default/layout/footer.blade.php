@@ -2,24 +2,23 @@
   <div class="services-wrap">
     <div class="container">
       <div class="row">
-        @for ($i = 0; $i < 4; $i++)
+        @foreach ($footer_content['services']['items'] as $item)
         <div class="col-lg-3 col-md-6 col-12">
           <div class="service-item">
             <div class="icon"><img src="{{ asset('image/default/footer-icon-1.png') }}" class="img-fluid"></div>
             <div class="text">
-              <p class="title">FREE SHIPPING & RETURN</p>
-              <p class="sub-title">Free Shipping over $300</p>
+              <p class="title">{{ $item['title'][locale()] }}</p>
+              <p class="sub-title">{{ $item['sub_title'][locale()] }}</p>
             </div>
           </div>
         </div>
-        @endfor
+        @endforeach
       </div>
     </div>
   </div>
   <div class="container">
     <div class="footer-content">
       <div class="row">
-          @dump($footer_content)
         <div class="col-12 col-md-4">
           <div class="footer-content-left">
             <div class="logo"><a href="http://"><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a></div>
