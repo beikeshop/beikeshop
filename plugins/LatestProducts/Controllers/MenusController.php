@@ -9,7 +9,7 @@
  * @modified   2022-07-21 10:00:25
  */
 
-namespace Plugin\HeaderMenu\Controllers;
+namespace Plugin\LatestProducts\Controllers;
 
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\ProductList;
@@ -23,7 +23,7 @@ class MenusController extends Controller
             'method' => __METHOD__,
             'route_list' => []
         ];
-        return view("HeaderMenu::route_list", $data);
+        return view("LatestProducts::route_list", $data);
     }
 
 
@@ -34,6 +34,6 @@ class MenusController extends Controller
             'products' => $products,
             'items' => ProductList::collection($products)->jsonSerialize(),
         ];
-        return view("HeaderMenu::latest_products", $data);
+        return view("LatestProducts::latest_products", $data);
     }
 }

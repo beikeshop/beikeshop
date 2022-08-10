@@ -10,6 +10,6 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use Plugin\HeaderMenu\Controllers\MenusController;
+use Plugin\LatestProducts\Controllers\MenusController;
 
 Route::get('/routes', [MenusController::class, 'getRoutes'])->name('routes');

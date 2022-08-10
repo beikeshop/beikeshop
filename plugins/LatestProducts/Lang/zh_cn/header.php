@@ -10,7 +10,5 @@
  */
 
 return [
-    'plugin_link' => 'Plugin Link',
-    'latest_products' => 'Latest Products',
-    'baidu' => 'Baidu',
+    'latest_products' => '最新商品',
 ];

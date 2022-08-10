@@ -10,6 +10,6 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use Plugin\HeaderMenu\Controllers\MenusController;
+use Plugin\LatestProducts\Controllers\MenusController;
 
 Route::get('/latest_products', [MenusController::class, 'latestProducts'])->name('plugin.latest_products');

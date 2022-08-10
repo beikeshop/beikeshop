@@ -1,7 +1,7 @@
 {
-    "code": "header_menu",
-    "name": "首页菜单Demo",
-    "description": "修改首页菜单插件",
+    "code": "latest_products",
+    "name": "最新商品列表",
+    "description": "首页菜单添加最新商品列表功能",
     "type": "view",
     "version": "v1.0.0",
     "icon": "https://via.placeholder.com/100x100.png/aabbcc?text=MENU",
