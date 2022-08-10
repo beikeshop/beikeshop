@@ -38,8 +38,15 @@
                 </div>
               </div>
             </div>
-            <form action="{{ shop_route('account.edit.index') }}" method="POST">
+            <form action="{{ shop_route('account.edit.update') }}" method="POST">
               @csrf
+              {{ method_field('put') }}
+
+              @if (session('success'))
+                <div class="alert alert-success">
+                  {{ session('success') }}
+                </div>
+              @endif
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
                   <label class="form-label">名称</label>
@@ -49,10 +56,10 @@
                   <label class="form-label">邮箱</label>
                   <input class="form-control" type="email" name="email" value="{{ $customer->email }}">
                 </div>
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                   <label class="form-label">密码</label>
                   <input class="form-control" type="password" placeholder="留空则保持原密码不变" name="password" value="">
-                </div>
+                </div> --}}
                 <div class="col-12 mt-4">
                   <button class="btn btn-primary mt-sm-0" type="submit">提交</button>
                 </div>

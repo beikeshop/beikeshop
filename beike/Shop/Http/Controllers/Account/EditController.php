@@ -1,4 +1,11 @@
 <?php
+/*
+ * @copyright     2022 opencart.cn - All Rights Reserved.
+ * @link          https://www.guangdawangluo.com
+ * @Author        PS <pushuo@opencart.cn>
+ * @Date          2022-08-10 15:05:22
+ * @LastEditTime  2022-08-10 15:17:43
+ */
 /**
  * AccountController.php
  *
@@ -34,8 +41,8 @@ class EditController extends Controller
      */
     public function update(EditRequest $request)
     {
-        CustomerRepo::update($request->only('name', 'email'));
+        CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
 
-        return json_success('修改成功');
+        return redirect()->to(shop_route('account.edit.index'))->with('success', '修改成功');
     }
 }
