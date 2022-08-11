@@ -11,10 +11,9 @@
 
 namespace Beike\Shop\Services;
 
-use Beike\Models\CartProduct;
 use Exception;
-use Beike\Models\Cart;
-use Beike\Shop\Http\Resources\CartList;
+use Beike\Models\CartProduct;
+use Beike\Shop\Http\Resources\CartDetail;
 
 class CartService
 {
@@ -48,7 +47,7 @@ class CartService
             return $description && $product;
         });
 
-        $cartList = CartList::collection($cartItems)->jsonSerialize();
+        $cartList = CartDetail::collection($cartItems)->jsonSerialize();
         return $cartList;
     }
 

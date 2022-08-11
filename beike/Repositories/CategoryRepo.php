@@ -14,7 +14,7 @@ namespace Beike\Repositories;
 use Beike\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
-use Beike\Shop\Http\Resources\CategoryList;
+use Beike\Shop\Http\Resources\CategoryDetail;
 use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepo
@@ -44,7 +44,7 @@ class CategoryRepo
             ->orderBy('position')
             ->get();
 
-        $categoryList = CategoryList::collection($topCategories);
+        $categoryList = CategoryDetail::collection($topCategories);
         return json_decode($categoryList->toJson(), true);
     }
 
@@ -57,26 +57,18 @@ class CategoryRepo
      */
     public static function list(array $filter = [])
     {
-        $keyword = $filter['keyword'] ?? '';
         $builder = Category::query()->with(['description']);
-        if ($keyword) {
-            // $builder->whereExists('name')
-        }
         return $builder->get();
     }
 
-    public static function updateViewNumber()
-    {
 
-    }
-
-    public static function multipleUpdate()
-    {
-
-    }
-
-
-    public static function autocomplete($name)
+    /**
+     * 自动完成
+     *
+     * @param $name
+     * @return array
+     */
+    public static function autocomplete($name): array
     {
         $categories = Category::query()->with('paths.pathCategory.description')
             ->whereHas('paths', function ($query) use ($name) {

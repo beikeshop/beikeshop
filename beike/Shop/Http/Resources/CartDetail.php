@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CartList extends JsonResource
+class CartDetail extends JsonResource
 {
     /**
      * Transform the resource into an array.
