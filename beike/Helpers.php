@@ -237,6 +237,23 @@ function currency_format($price, string $currency = '', string $value = '', bool
 }
 
 /**
+ * 时间格式化
+ *
+ * @param null $datetime
+ * @return false|string
+ */
+function time_format($datetime = null)
+{
+    $format = 'Y-m-d H:i:s';
+    if ($datetime instanceof Illuminate\Support\Carbon) {
+        return $datetime->format($format);
+    } elseif (is_int($datetime)) {
+        return date($format, $datetime);
+    }
+    return date($format);
+}
+
+/**
  * 图片缩放
  *
  * @param $image
