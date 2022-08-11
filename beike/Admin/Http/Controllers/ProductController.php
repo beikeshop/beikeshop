@@ -8,6 +8,7 @@ use Beike\Repositories\ProductRepo;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Admin\Services\ProductService;
+use Beike\Admin\Repositories\TaxClassRepo;
 use Beike\Admin\Http\Resources\ProductResource;
 
 class ProductController extends Controller
@@ -72,6 +73,7 @@ class ProductController extends Controller
         if ($product->id) {
             $descriptions = $product->descriptions->keyBy('locale');
             $categoryIds = $product->categories->pluck('id')->toArray();
+            $product->load('brand');
         }
 
         $data = [
@@ -79,6 +81,7 @@ class ProductController extends Controller
             'descriptions' => $descriptions ?? [],
             'category_ids' => $categoryIds ?? [],
             'languages' => LanguageRepo::all(),
+            'tax_classes' => TaxClassRepo::getList(),
             'source' => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],

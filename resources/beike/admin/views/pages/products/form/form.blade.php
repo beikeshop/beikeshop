@@ -55,22 +55,28 @@
               <div class="help-text">开启多规格并且多规格配置了图片时，这里的图片将作为多规格的公用图片，展示在其后面</div>
             </x-admin::form.row>
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
-            <input type="hidden" name="name" value="">
             <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '0')" />
-            <x-admin-form-input name="brand_id" title="品牌" value="0" />
-            <x-admin-form-input name="tax_class_id" title="税类" value="0" />
+
+            <x-admin::form.row title="品牌">
+              <input type="text" value="{{ $product->brand->name }}" id="brand-autocomplete" class="form-control wp-400 " />
+              <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
+            </x-admin::form.row>
+
+            <x-admin-form-select title="税类" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes->toArray()" key="id" label="title" />
             <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
             <x-admin::form.row title="分类">
-              @foreach ($source['categories'] as $_category)
+              <div class="wp-400 form-control" style="max-height: 300px;overflow-y: auto">
+                @foreach ($source['categories'] as $_category)
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}"
-                    id="category-{{ $_category->id }}" {{ in_array($_category->id, $category_ids) ? 'checked' : '' }}>
+                  id="category-{{ $_category->id }}" {{ in_array($_category->id, $category_ids) ? 'checked' : '' }}>
                   <label class="form-check-label" for="category-{{ $_category->id }}">
                     {{ $_category->name }}
                   </label>
                 </div>
-              @endforeach
+                @endforeach
+              </div>
             </x-admin::form.row>
 
             <div>
@@ -240,7 +246,7 @@
 
 
         <x-admin::form.row title="">
-          <button type="submit" class="btn btn-primary">保存</button>
+          <button type="submit" class="btn btn-primary mt-3 btn-lg">保存</button>
         </x-admin::form.row>
 
         <el-dialog
@@ -272,18 +278,8 @@
   </div>
 @endsection
 
-
 @push('footer')
   <script>
-    Vue.prototype.thumbnail = function thumbnail(image, width, height) {
-      // 判断 image 是否以 http 开头
-      if (image.indexOf('http') === 0) {
-        return image;
-      }
-
-      return '{{ asset('/') }}' + image;
-    };
-
     var app = new Vue({
       el: '#app',
       data: {
@@ -544,5 +540,21 @@
       }
       return results;
     }
+
+    $(document).ready(function ($) {
+      $('#brand-autocomplete').autocomplete({
+        'source': function(request, response) {
+          $http.get(`brands/autocomplete?name=${encodeURIComponent(request)}`, null, {hload: true}).then((res) => {
+            response($.map(res.data, function(item) {
+              return {label: item['name'], value: item['id']}
+            }));
+          })
+        },
+        'select': function(item) {
+          $(this).val(item['label']);
+          $('input[name="brand_id"]').val(item['value']);
+        }
+      });
+    });
   </script>
 @endpush

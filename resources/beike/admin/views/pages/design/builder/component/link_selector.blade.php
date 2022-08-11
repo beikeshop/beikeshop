@@ -138,7 +138,7 @@
           {type: 'custom',label: '自定义'}
         ],
         static: [
-          {name: '个人中心', value: '{{ shop_route('account.index') }}', route: 'account.index'},
+          {name: '个人中心', value: 'account.index'},
         ],
         link: null,
         keyword: '',
