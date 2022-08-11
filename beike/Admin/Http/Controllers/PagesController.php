@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Page;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 use Beike\Admin\Repositories\PageRepo;
 
@@ -58,5 +59,28 @@ class PagesController
     {
         PageRepo::deleteById($pageId);
         return redirect()->to(admin_route('pages.index'));
+    }
+
+    /**
+     * 搜索页面标题自动完成
+     * @param Request $request
+     * @return array
+     */
+    public function autocomplete(Request $request): array
+    {
+        $products = PageRepo::autocomplete($request->get('name') ?? '');
+        return json_success('获取成功！', $products);
+    }
+
+
+    /**
+     * 获取单页名称
+     * @param Page $page
+     * @return array
+     */
+    public function name(Page $page): array
+    {
+        $name = $page->description->title ?? '';
+        return json_success('获取成功', $name);
     }
 }

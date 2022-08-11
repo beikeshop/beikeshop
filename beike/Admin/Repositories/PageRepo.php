@@ -12,6 +12,7 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
+use Beike\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PageRepo
@@ -68,5 +69,29 @@ class PageRepo
         $page = Page::query()->findOrFail($id);
         $page->descriptions()->delete();
         $page->delete();
+    }
+
+
+    /**
+     * 页面内容自动完成
+     *
+     * @param $name
+     * @return array
+     */
+    public static function autocomplete($name): array
+    {
+        $pages = Page::query()->with('description')
+            ->whereHas('description', function ($query) use ($name) {
+                $query->where('title', 'like', "{$name}%");
+            })->limit(10)->get();
+        $results = [];
+        foreach ($pages as $page) {
+            $results[] = [
+                'id' => $page->id,
+                'title' => $page->description->title,
+                'status' => $page->active
+            ];
+        }
+        return $results;
     }
 }

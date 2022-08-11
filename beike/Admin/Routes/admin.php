@@ -9,7 +9,6 @@ Route::prefix($adminName)
     ->middleware(['admin'])
     ->name("{$adminName}.")
     ->group(function () {
-        Route::get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
         Route::get('login', [Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [Controllers\LoginController::class, 'store'])->name('login.store');
 
@@ -17,18 +16,17 @@ Route::prefix($adminName)
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
 
-        Route::get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
-        Route::get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
-
         Route::middleware('admin_auth:' . \Beike\Models\AdminUser::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
                 Route::get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
+                Route::get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
                 Route::resource('brands', Controllers\BrandController::class);
                 Route::get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
 
                 Route::resource('categories', Controllers\CategoryController::class);
+                Route::get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
                 Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
 
                 Route::resource('customers', Controllers\CustomerController::class);
@@ -80,8 +78,10 @@ Route::prefix($adminName)
 
                 // 单页
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
+                Route::middleware('can:pages_index')->get('pages/autocomplete', [Controllers\PagesController::class, 'autocomplete'])->name('pages.autocomplete');
                 Route::middleware('can:pages_create')->get('pages/create', [Controllers\PagesController::class, 'create'])->name('pages.create');
                 Route::middleware('can:pages_show')->get('pages/{code}/edit', [Controllers\PagesController::class, 'edit'])->name('pages.edit');
+                Route::middleware('can:pages_show')->get('pages/{page}/name', [Controllers\PagesController::class, 'name'])->name('pages.name');
                 Route::middleware('can:pages_create')->post('pages', [Controllers\PagesController::class, 'store'])->name('pages.store');
                 Route::middleware('can:pages_update')->put('pages/{page}', [Controllers\PagesController::class, 'update'])->name('pages.update');
                 Route::middleware('can:pages_delete')->delete('pages/{page}', [Controllers\PagesController::class, 'destroy'])->name('pages.destroy');
@@ -92,6 +92,7 @@ Route::prefix($adminName)
                 Route::get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
                 Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
                 Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
+                Route::get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
                 Route::resource('products', Controllers\ProductController::class);
 
                 Route::resource('regions', Controllers\RegionController::class);
