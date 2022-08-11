@@ -35,8 +35,14 @@
             <h6 class="border-bottom pb-3 mb-4">数据</h6>
             <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
             <x-admin::form.row title="图片">
-              <div class="product-images d-flex flex-wrap">
-                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative border d-flex justify-content-center align-items-center me-2">
+              <draggable
+                element="div"
+                ghost-class="dragabble-ghost"
+                class="product-images d-flex flex-wrap"
+                :list="form.images"
+                :options="{animation: 200, filter: '.set-product-img'}"
+                >
+                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2">
                   <div class="position-absolute top-0 end-0">
                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                   </div>
@@ -44,7 +50,7 @@
                   <input type="hidden" name="images[]" :value="image">
                 </div>
                 <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
-              </div>
+              </draggable>
               <div class="help-text mb-1 mt-2">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</div>
               <div class="help-text">开启多规格并且多规格配置了图片时，这里的图片将作为多规格的公用图片，展示在其后面</div>
             </x-admin::form.row>
