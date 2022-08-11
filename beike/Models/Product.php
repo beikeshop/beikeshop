@@ -22,6 +22,11 @@ class Product extends Base
         return $this->belongsToMany(Category::class, ProductCategory::class)->withTimestamps();
     }
 
+    public function productCategories()
+    {
+        return $this->hasMany(ProductCategory::class);
+    }
+
     public function description()
     {
         return $this->hasOne(ProductDescription::class)->where('locale', locale());
@@ -42,9 +47,9 @@ class Product extends Base
         return $this->hasOne(ProductSku::Class)->where('is_default', 1);
     }
 
-    public function manufacturer()
+    public function brand()
     {
-        return $this->hasOne(Brand::Class, 'id', 'manufacturer_id');
+        return $this->belongsTo(Brand::Class, 'brand_id', 'id');
     }
 
     public function getPriceFormattedAttribute(): string
