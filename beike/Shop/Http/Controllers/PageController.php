@@ -23,6 +23,7 @@ class PageController extends Controller
         $data = [
             'page' => (new PageDetail($page))->jsonSerialize()
         ];
-        dd($data);
+
+        return view('pages/detail', $data);
     }
 }
