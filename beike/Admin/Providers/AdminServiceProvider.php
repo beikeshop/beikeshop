@@ -16,6 +16,7 @@ use Beike\Admin\View\Components\Form\Select;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
+use Beike\Admin\View\Components\Form\Textarea;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -49,6 +50,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-input' => Input::class,
             'form-select' => Select::class,
             'form-image' => Image::class,
+            'form-textarea' => Textarea::class,
         ]);
 
         $this->registerGuard();

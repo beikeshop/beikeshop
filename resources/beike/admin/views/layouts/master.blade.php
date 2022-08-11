@@ -35,7 +35,7 @@
   </aside>
   <div id="content">
     <div class="page-title-box"><h5 class="page-title">@yield('title')</h5></div>
-    <div class="container-fluid p-0 mt-3">
+    <div class="container-fluid p-0 mt-4">
         @yield('content')
     </div>
   </div>

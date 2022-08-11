@@ -25,5 +25,5 @@ return [
         'label' => '运费值',
         'type' => 'string',
         'required' => true,
-    ],
+    ]
 ];
