@@ -30,7 +30,8 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_id']));
 
         $data = [
-            'customers' => CustomerResource::collection($customers)->jsonSerialize(),
+            'customers' => $customers,
+            'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
         ];
 
