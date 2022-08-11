@@ -44,10 +44,10 @@ return [
     ],
     [
         'name' => 'sandbox_mode',
-        'label' => '沙盒模式',
+        'label_key' => 'setting.sandbox_mode',
         'type' => 'select',
         'options' => [
-            ['value' => '1', 'label' => '开启'],
+            ['value' => '1', 'label_key' => 'setting.enabled'],
             ['value' => '0', 'label' => '关闭']
         ],
         'required' => true,

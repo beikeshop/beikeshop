@@ -100,14 +100,30 @@ class Plugin implements Arrayable, \ArrayAccess
     public function handleLabel()
     {
         $this->columns = collect($this->columns)->map(function ($item) {
-            $labelKey = $item['label_key'] ?? '';
-            $label = $item['label'] ?? '';
-            if (empty($label) && $labelKey) {
-                $languageKey = "{$this->dirName}::{$labelKey}";
-                $item['label'] = trans($languageKey);
+            $item = $this->transLabel($item);
+            if (isset($item['options'])) {
+                $item['options'] = collect($item['options'])->map(function ($option) {
+                    return $this->transLabel($option);
+                })->toArray();
             }
             return $item;
         })->toArray();
+    }
+
+    /**
+     * 翻译 label
+     * @param $item
+     * @return mixed
+     */
+    private function transLabel($item)
+    {
+        $labelKey = $item['label_key'] ?? '';
+        $label = $item['label'] ?? '';
+        if (empty($label) && $labelKey) {
+            $languageKey = "{$this->dirName}::{$labelKey}";
+            $item['label'] = trans($languageKey);
+        }
+        return $item;
     }
 
 
