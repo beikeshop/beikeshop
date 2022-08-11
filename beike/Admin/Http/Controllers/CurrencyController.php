@@ -30,11 +30,6 @@ class CurrencyController extends Controller
         return view('admin::pages.currencies.index', $data);
     }
 
-    public function create()
-    {
-        return view('admin::pages.currencies.form');
-    }
-
     public function store(CurrencyRequest $request)
     {
         $data = [
@@ -46,22 +41,12 @@ class CurrencyController extends Controller
             'value' => (float)$request->get('value', 1),
             'status' => (int)$request->get('status', 0),
         ];
-        CurrencyRepo::create($data);
+        $currency = CurrencyRepo::create($data);
 
-        return redirect($this->getRedirect())->with('success', '货币创建成功！');
+        return json_success('货币创建成功！', $currency);
     }
 
-    public function edit(Request $request, int $id)
-    {
-        $data = [
-            'currency' => CurrencyRepo::find($id),
-            '_redirect' => $this->getRedirect(),
-        ];
-
-        return view('admin::pages.currencies.form', $data);
-    }
-
-    public function update(CurrencyRequest $request, int $currencyId)
+    public function update(CurrencyRequest $request, int $id)
     {
         $data = [
             'name' => $request->get('name', ''),
@@ -72,9 +57,9 @@ class CurrencyController extends Controller
             'value' => (float)$request->get('value', 1),
             'status' => (int)$request->get('status', 0),
         ];
-        CurrencyRepo::update($currencyId, $data);
+        $currency = CurrencyRepo::update($id, $data);
 
-        return redirect($this->getRedirect())->with('success', '货币更新成功！');
+        return json_success('货币更新成功！', $currency);
     }
 
     public function destroy(Request $request, int $currencyId)

@@ -29,6 +29,7 @@ class CurrencyRequest extends FormRequest
             'symbol_left' => 'max:16',
             'symbol_right' => 'max:16',
             'value' => 'required',
+            'decimal_place' => 'max:9',
         ];
     }
 
@@ -40,6 +41,7 @@ class CurrencyRequest extends FormRequest
             'symbol_left' => '左符号',
             'symbol_right' => '右符号',
             'value' => '汇率值',
+            'decimal_place' => '小数位数',
         ];
     }
 }
