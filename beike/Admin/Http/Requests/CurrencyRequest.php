@@ -24,12 +24,12 @@ class CurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:64',
+            'name' => 'required',
             'code' => 'required|max:16',
             'symbol_left' => 'max:16',
             'symbol_right' => 'max:16',
             'value' => 'required',
-            'decimal_place' => 'max:9',
+            'decimal_place' => 'required|max:1',
         ];
     }
 
