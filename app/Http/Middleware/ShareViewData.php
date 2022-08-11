@@ -6,6 +6,7 @@
  * @Date          2022-08-10 16:45:58
  * @LastEditTime  2022-08-10 17:03:40
  */
+
 /**
  * ShareViewData.php
  *
@@ -20,6 +21,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Beike\Repositories\FooterRepo;
 use Illuminate\Support\Facades\View;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
@@ -47,7 +49,7 @@ class ShareViewData
             View::share('languages', LanguageRepo::enabled());
             View::share('shop_base_url', shop_route('home.index'));
             View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
-            View::share('footer_content', hook_filter('footer.content', system_setting('base.footer_setting')));
+            View::share('footer_content', hook_filter('footer.content', FooterRepo::handleFooterData()));
         }
     }
 

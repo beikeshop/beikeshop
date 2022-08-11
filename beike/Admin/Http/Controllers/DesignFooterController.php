@@ -4,7 +4,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Beike\Services\DesignService;
+use Beike\Repositories\FooterRepo;
 use Beike\Repositories\SettingRepo;
 
 class DesignFooterController extends Controller
@@ -36,7 +36,7 @@ class DesignFooterController extends Controller
         $viewPath = "layout.footer";
 
         $viewData = [
-            'footer_content' => DesignService::handleModuleContent('footer', $content),
+            'footer_content' => FooterRepo::handleFooterData($content),
             'design' => (bool)$request->get('design')
         ];
 

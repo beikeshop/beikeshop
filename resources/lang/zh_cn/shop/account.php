@@ -12,4 +12,5 @@
 return [
     'login' => 'Login',
     'new_account' => 'New Account',
+    'index' => '个人中心',
 ];

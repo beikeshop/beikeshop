@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
-use Beike\Shop\Http\Controllers\PagesController;
+use Beike\Shop\Http\Controllers\PageController;
 use Beike\Shop\Http\Controllers\ProductController;
 use Beike\Shop\Http\Controllers\CategoryController;
 use Beike\Shop\Http\Controllers\CheckoutController;
@@ -58,6 +58,8 @@ Route::prefix('/')
         Route::get('login', [LoginController::class, 'index'])->name('login.index');
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
+
+        Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
         Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
