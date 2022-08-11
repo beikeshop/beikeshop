@@ -90,12 +90,13 @@ class PluginController extends Controller
      * @return array
      * @throws Exception
      */
-    public function update(Request $request, $code): array
+    public function update(Request $request, $code)
     {
         app('plugin')->getPluginOrFail($code);
         $fields = $request->all();
         SettingRepo::update('plugin', $code, $fields);
-        return json_success("编辑成功");
+        return redirect($this->getRedirect())->with('success', '修改成功');
+        // return json_success("编辑成功");
     }
 
 

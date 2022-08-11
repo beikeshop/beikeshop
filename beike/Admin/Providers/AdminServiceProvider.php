@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\Sidebar;
+use Beike\Admin\View\Components\Alert;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\Select;
@@ -45,6 +46,7 @@ class AdminServiceProvider extends ServiceProvider
             'header' => Header::class,
             'sidebar' => Sidebar::class,
             'filter' => Filter::class,
+            'alert' => Alert::class,
             'form-input-locale' => InputLocale::class,
             'form-switch' => SwitchRadio::class,
             'form-input' => Input::class,
