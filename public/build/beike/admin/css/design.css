@@ -506,6 +506,7 @@ body.page-design .autocomplete-group-wrapper .item-group-wrapper .item i.right:h
   height: 26px;
   line-height: 26px;
   color: #333;
+  text-decoration: none;
 }
 .link-dialog-box .link-dialog-content .product-search .el-input-group__append {
   background-color: #0072ff;

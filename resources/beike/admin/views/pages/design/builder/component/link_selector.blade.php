@@ -191,7 +191,10 @@
             url = '{{ admin_route('categories.index') }}';
             break;
           case 'brand':
-            url = '';
+            url = '{{ admin_route('brands.index') }}';
+            break;
+          case 'page':
+            url = '{{ admin_route('pages.index') }}';
             break;
           default:
             null;

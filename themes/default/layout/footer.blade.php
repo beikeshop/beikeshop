@@ -38,8 +38,9 @@
             <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] }}</h6>
             <ul class="list-unstyled">
               @foreach ($link['links'] as $item)
-                <li><a href="{{ type_route($item['type'], $item['value']) }}"
-                    @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>{{ $item['text'][$locale] }}</a></li>
+                <li>
+                  <a href="{{ $item['value'] }}" @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>{{ $item['text'][$locale] ?? '' }}</a>
+                </li>
               @endforeach
             </ul>
           </div>
