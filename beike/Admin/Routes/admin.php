@@ -71,7 +71,7 @@ Route::prefix($adminName)
                 // 插件
                 Route::middleware('can:plugins_index')->get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
                 Route::middleware('can:plugins_import')->post('plugins/import', [Controllers\PluginController::class, 'import'])->name('plugins.import');
-                Route::middleware('can:plugins_edit')->get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
+                Route::middleware('can:plugins_show')->get('plugins/{code}/edit', [Controllers\PluginController::class, 'edit'])->name('plugins.edit');
                 Route::middleware('can:plugins_update')->put('plugins/{code}', [Controllers\PluginController::class, 'update'])->name('plugins.update');
                 Route::middleware('can:plugins_update_status')->put('plugins/{code}/status', [Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
                 Route::middleware('can:plugins_install')->post('plugins/{code}/install', [Controllers\PluginController::class, 'install'])->name('plugins.install');
