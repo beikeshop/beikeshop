@@ -79,8 +79,10 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code): View
     {
-        $data['plugin'] = app('plugin')->getPluginOrFail($code);
-        return view('admin::pages.plugins.form', $data);
+        $plugin = app('plugin')->getPluginOrFail($code);
+        $columnView = $plugin->getColumnView();
+        $view = $columnView ?: 'admin::pages.plugins.form';
+        return view($view, ['plugin' => $plugin]);
     }
 
 

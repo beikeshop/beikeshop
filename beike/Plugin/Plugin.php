@@ -157,8 +157,21 @@ class Plugin implements Arrayable, \ArrayAccess
      */
     public function validate($requestData): \Illuminate\Contracts\Validation\Validator
     {
-        $rules = array_column($this->columns,'rules', 'name');
+        $rules = array_column($this->columns, 'rules', 'name');
         return Validator::make($requestData, $rules);
+    }
+
+    /**
+     * 获取插件自定义编辑模板
+     * @return string
+     */
+    public function getColumnView(): string
+    {
+        $viewFile = $this->getPath() . '/Views/columns.blade.php';
+        if (file_exists($viewFile)) {
+            return "{$this->dirName}::columns";
+        }
+        return '';
     }
 
     /**
