@@ -123,6 +123,7 @@ class Manager
     public function getPluginOrFail($code): ?Plugin
     {
         $plugin = $this->getPlugin($code);
+        $plugin->handleLabel();
         if (empty($plugin)) {
             throw new \Exception('无效的插件');
         }

@@ -10,6 +10,8 @@
  */
 
 return [
+    'publishable_key' => 'Publishable Key',
+
     'title_info' => 'Card information',
     'cardnum' => 'Cardnum',
     'expiration_date' => 'Expiration Date',

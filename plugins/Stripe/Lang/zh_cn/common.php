@@ -10,6 +10,8 @@
  */
 
 return [
+    'publishable_key' => '公钥',
+
     'title_info' => '卡信息',
     'cardnum' => '卡号',
     'expiration_date' => '截止日期',

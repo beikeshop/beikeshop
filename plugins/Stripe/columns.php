@@ -12,7 +12,7 @@
 return [
     [
         'name' => 'publishable_key',
-        'label' => '公钥',
+        'label_key' => 'common.publishable_key',
         'type' => 'string',
         'required' => true,
         'rules' => 'required|size:32',

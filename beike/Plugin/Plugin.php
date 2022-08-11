@@ -93,6 +93,24 @@ class Plugin implements Arrayable, \ArrayAccess
     }
 
 
+    /**
+     * 处理插件后台设置字段多语言 优先级: label > label_key
+     * 有label字段则直接返回, label_key 则翻译
+     */
+    public function handleLabel()
+    {
+        $this->columns = collect($this->columns)->map(function ($item) {
+            $labelKey = $item['label_key'] ?? '';
+            $label = $item['label'] ?? '';
+            if (empty($label) && $labelKey) {
+                $languageKey = "{$this->dirName}::{$labelKey}";
+                $item['label'] = trans($languageKey);
+            }
+            return $item;
+        })->toArray();
+    }
+
+
     public function getDirname(): string
     {
         return $this->dirName;
