@@ -23,6 +23,7 @@ class CustomerGroupDetail extends JsonResource
             'discount_factor' => $this->discount_factor,
             'level' => $this->level,
             'name' => $this->description->name ?? '',
+            'description' => $this->description->description ?? '',
         ];
 
         return $data;

@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="customer, index in customers" :key="index">
+          <tr v-for="customer, index in customers.data" :key="index">
             <td>@{{ customer.id }}</td>
             <td>@{{ customer.email }}</td>
             <td>
@@ -42,7 +42,7 @@
         </tbody>
       </table>
 
-      {{ $customers->links('admin::vendor/pagination/bootstrap-4') }}
+      {{-- {{ $customers->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="创建顾客" :visible.sync="dialogCustomers.show" width="600px"
@@ -59,7 +59,7 @@
         </el-form-item>
         <el-form-item label="用户组">
           <el-select v-model="dialogCustomers.form.customer_group_id" placeholder="请选择">
-            <el-option v-for="item in source.customer_group" :key="item.id" :label="item.description.name"
+            <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
               :value="item.id">
             </el-option>
           </el-select>

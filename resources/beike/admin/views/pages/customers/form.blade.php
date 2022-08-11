@@ -20,7 +20,7 @@
               </el-form-item>
               <el-form-item label="用户组">
                 <el-select v-model="form.customer_group_id" placeholder="请选择">
-                  <el-option v-for="item in source.customer_group" :key="item.id" :label="item.description.name"
+                  <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
                     :value="item.id">
                   </el-option>
                 </el-select>

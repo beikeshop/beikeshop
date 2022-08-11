@@ -25,8 +25,8 @@
         <tbody>
           <tr v-for="group, index in customer_groups" :key="index">
             <td>@{{ group.id }}</td>
-            <td>@{{ group.description.name }}</td>
-            <td>@{{ group.description.description }}</td>
+            <td>@{{ group.description?.name || '' }}</td>
+            <td>@{{ group.description?.description || '' }}</td>
             <td>@{{ group.level }}</td>
             <td>@{{ group.total }}</td>
             <td>@{{ group.discount_factor }}</td>

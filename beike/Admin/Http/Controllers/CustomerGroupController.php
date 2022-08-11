@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CustomerGroupRequest;
+use Beike\Admin\Http\Resources\CustomerGroupDetail;
 use Beike\Admin\Services\CustomerGroupService;
 use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\LanguageRepo;
