@@ -13,6 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CustomerRequest;
 use Beike\Admin\Http\Resources\AddressResource;
+use Beike\Admin\Http\Resources\CustomerGroupDetail;
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerService;
 use Beike\Models\Customer;
@@ -29,8 +30,8 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_id']));
 
         $data = [
-            'customers' => CustomerResource::collection($customers),
-            'customer_groups' => CustomerGroupRepo::list(),
+            'customers' => CustomerResource::collection($customers)->jsonSerialize(),
+            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
         ];
 
         return view('admin::pages.customers.index', $data);
@@ -49,8 +50,8 @@ class CustomerController extends Controller
         $addresses = AddressRepo::listByCustomer($customer->id);
         $data = [
             'customer' => $customer,
-            'customer_groups' => CustomerGroupRepo::list(),
-            'addresses' => AddressResource::collection($addresses),
+            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'addresses' => AddressResource::collection($addresses)->jsonSerialize(),
             'countries' => CountryRepo::all(),
             'country_id' => system_setting('base.country_id'),
             '_redirect' => $this->getRedirect(),
