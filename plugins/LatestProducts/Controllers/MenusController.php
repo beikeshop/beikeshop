@@ -17,19 +17,18 @@ use Beike\Shop\Http\Controllers\Controller;
 
 class MenusController extends Controller
 {
-    public function getRoutes()
+    public function getRoutes(): array
     {
-        $data = [
+        return [
             'method' => __METHOD__,
             'route_list' => []
         ];
-        return view("LatestProducts::route_list", $data);
     }
 
 
     public function latestProducts()
     {
-        $products = ProductRepo::getBuilder()->orderByDesc('updated_at')->paginate(40);
+        $products = ProductRepo::getBuilder()->whereHas('master_sku')->orderByDesc('updated_at')->paginate(40);
         $data = [
             'products' => $products,
             'items' => ProductList::collection($products)->jsonSerialize(),
