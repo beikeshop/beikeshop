@@ -21,7 +21,7 @@
               :title="$column['label']"
               :class="$errors->has($column['name']) ? 'is-invalid' : ''"
               :required="$column['required'] ? true : false"
-              :value="old($column['value'], $column['value'] ?? '')">
+              :value="old($column['name'], $column['value'] ?? '')">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
               @endif
@@ -35,7 +35,7 @@
             <x-admin-form-select
               :name="$column['name']"
               :title="$column['label']"
-              :value="old($column['value'], $column['value'] ?? '')"
+              :value="old($column['name'], $column['value'] ?? '')"
               :options="$column['options']">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
@@ -47,7 +47,7 @@
             <x-admin-form-switch
               :name="$column['name']"
               :title="$column['label']"
-              :value="old($column['value'], $column['value'] ?? '')">
+              :value="old($column['name'], $column['value'] ?? '')">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
               @endif
@@ -60,7 +60,7 @@
               :title="$column['label']"
               :required="$column['required'] ? true : false"
               :html="isset($column['html']) ? true : false"
-              :value="old($column['value'], $column['value'] ?? '')">
+              :value="old($column['name'], $column['value'] ?? '')">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
               @endif
