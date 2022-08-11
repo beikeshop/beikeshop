@@ -31,7 +31,9 @@ class FooterRepo
         foreach ($contentLinkKeys as $contentLinkKey) {
             $links = $content[$contentLinkKey]['links'];
             $links = collect($links)->map(function ($link) {
-                if ($link['type'] == 'static') {
+                if ($link['type'] == 'custom') {
+                    $link['link'] = $link['value'];
+                } elseif ($link['type'] == 'static') {
                     $link['link'] = shop_route($link['value']);
                     $link['text'] = trans('shop/' . $link['value']);
                 } elseif ($link['type'] == 'page') {
