@@ -35,14 +35,13 @@
           <a :href="linkTypeAdmin" target="_blank" v-if="link.type != 'custom' && link.type != 'static'">管理@{{ dialogTitle }}</a>
         </div>
 
-        <div class="link-text" v-if="showText">
-          <div class="module-edit-group" style="margin-bottom: 10px;">
-            <div class="module-edit-title">标题（覆盖下方选择的链接名称）</div>
-            <text-i18n v-model="link.text"></text-i18n>
-          </div>
-        </div>
-
         <template v-if="link.type == 'custom'">
+          <div class="link-text">
+            <div class="module-edit-group" style="margin-bottom: 10px;">
+              <div class="module-edit-title">标题</div>
+              <text-i18n v-model="link.text"></text-i18n>
+            </div>
+          </div>
           <div class="linkDialog-custom">
             <el-input v-model="link.value" placeholder="请输入链接地址"></el-input>
           </div>
@@ -130,9 +129,9 @@
     data: function () {
       return {
         types: [
-          {type: 'product',label: '商品'},
-          {type: 'category',label: '分类'},
-          {type: 'page',label: '信息页面'},
+          {type: 'product', label: '商品'},
+          {type: 'category', label: '分类'},
+          {type: 'page', label: '信息页面'},
           {type: 'brand', label: '品牌'},
           {type: 'static',label: '固定连接'},
           // {type: 'blog',label: '博客'},
@@ -282,6 +281,9 @@
           case 'brand':
             url = 'brands/autocomplete?name=';
             break;
+            case 'page':
+            url = 'pages/autocomplete?name=';
+            break;
           default:
             null;
         }
@@ -330,6 +332,9 @@
             break;
           case 'brand':
             url = `brands/${this.link.value}/name`;
+            break;
+            case 'page':
+            url = `pages/${this.link.value}/name`;
             break;
           default:
             null;

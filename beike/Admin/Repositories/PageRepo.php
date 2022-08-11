@@ -88,7 +88,7 @@ class PageRepo
         foreach ($pages as $page) {
             $results[] = [
                 'id' => $page->id,
-                'title' => $page->description->title,
+                'name' => $page->description->title,
                 'status' => $page->active
             ];
         }

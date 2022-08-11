@@ -233,7 +233,7 @@
         },
 
         topLinkAddLinkButtonClicked(index) {
-          this.form.content['link' + index].links.push({type: '', value: '', text: {}});
+          this.form.content['link' + index].links.push({type: 'page', value: '', text: {}});
         },
 
         removeLink(item, index) {
