@@ -40,14 +40,13 @@
         </tbody>
       </table>
 
-      {{-- {{ $currencies->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="货币" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="code" prop="name">
+        <el-form-item label="名称" prop="name">
           <el-input v-model="dialog.form.name" placeholder="code"></el-input>
         </el-form-item>
 
@@ -63,11 +62,11 @@
           <el-input v-model="dialog.form.symbol_right" placeholder="左符号"></el-input>
         </el-form-item>
 
-        <el-form-item label="小数位数">
+        <el-form-item label="小数位数" prop="decimal_place">
           <el-input v-model="dialog.form.decimal_place" placeholder="左符号"></el-input>
         </el-form-item>
 
-        <el-form-item label="汇率值">
+        <el-form-item label="汇率值" prop="value">
           <el-input v-model="dialog.form.value" placeholder="左符号"></el-input>
         </el-form-item>
 
@@ -113,6 +112,8 @@
         rules: {
           name: [{required: true,message: '请输入名称',trigger: 'blur'}, ],
           code: [{required: true,message: '请输入编码',trigger: 'blur'}, ],
+          value: [{required: true,message: '请输入汇率值',trigger: 'blur'}, ],
+          decimal_place: [{required: true,message: '请输入小数位数',trigger: 'blur'}, ],
         }
       },
 
@@ -153,7 +154,7 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除语言码？', '提示', {
+          this.$confirm('确定要删除货币吗？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
