@@ -51,10 +51,10 @@ class CurrencyController extends Controller
         return redirect($this->getRedirect())->with('success', '货币创建成功！');
     }
 
-    public function edit(Request $request, int $currency)
+    public function edit(Request $request, int $id)
     {
         $data = [
-            'currency' => $currency,
+            'currency' => CurrencyRepo::find($id),
             '_redirect' => $this->getRedirect(),
         ];
 
