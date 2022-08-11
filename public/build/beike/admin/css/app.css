@@ -317,6 +317,14 @@
   width: 100px;
 }
 
+.col-form-label.required::before {
+  content: "*";
+  color: #f56c6c;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
 .help-text {
   color: #B2B2B2;
   margin-top: 4px;

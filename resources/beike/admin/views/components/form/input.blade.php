@@ -1,4 +1,4 @@
-<x-admin::form.row :title="$title">
+<x-admin::form.row :title="$title" :required="$required">
   <input type="text" name="{{ $name }}" class="form-control wp-400" value="{{ $value }}" placeholder="{{ $title }}">
   {{ $slot }}
 </x-admin::form.row>
