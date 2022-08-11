@@ -15,6 +15,7 @@ return [
         'label' => 'Sandbox Client ID',
         'type' => 'string',
         'required' => true,
+        'rules' => 'required|min:3|max:5',
         'description' => '沙盒模式 Client ID',
     ],
     [

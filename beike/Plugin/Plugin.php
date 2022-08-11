@@ -12,6 +12,7 @@
 namespace Beike\Plugin;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
@@ -146,6 +147,18 @@ class Plugin implements Arrayable, \ArrayAccess
             $this->columns[$index]['value'] = $value;
         }
         return $this->columns;
+    }
+
+
+    /**
+     * 字段验证
+     * @param $requestData
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function validate($requestData): \Illuminate\Contracts\Validation\Validator
+    {
+        $rules = array_column($this->columns,'rules', 'name');
+        return Validator::make($requestData, $rules);
     }
 
     /**

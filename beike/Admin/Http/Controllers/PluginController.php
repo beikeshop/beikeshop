@@ -87,16 +87,21 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @return array
-     * @throws Exception
+     * @return mixed
      */
     public function update(Request $request, $code)
     {
-        app('plugin')->getPluginOrFail($code);
         $fields = $request->all();
+        $plugin = app('plugin')->getPluginOrFail($code);
+        if (method_exists($plugin, 'validate')) {
+            $validator = $plugin->validate($fields);
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+        }
+
         SettingRepo::update('plugin', $code, $fields);
         return redirect($this->getRedirect())->with('success', '修改成功');
-        // return json_success("编辑成功");
     }
 
 
