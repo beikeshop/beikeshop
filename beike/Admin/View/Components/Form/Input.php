@@ -9,14 +9,16 @@ class Input extends Component
     public string $name;
     public string $title;
     public string $value;
+    public string $class;
     public bool $required;
 
-    public function __construct(string $name, string $title, ?string $value, bool $required = false)
+    public function __construct(string $name, string $title, ?string $value, bool $required = false, ?string $class = '')
     {
         $this->name = $name;
         $this->title = $title;
-        $this->value = $value ?? '';
-        $this->required = $required ?? false;
+        $this->value = $value;
+        $this->class = $class;
+        $this->required = $required;
     }
 
     public function render()
