@@ -90,11 +90,11 @@ class OrderRepo
      */
     public static function getOrderByNumber($number, $customer)
     {
-        $order = Order::query()
+        return Order::query()
+            ->with(['orderProducts', 'orderTotals', 'orderHistories'])
             ->where('number', $number)
             ->where('customer_id', $customer->id)
             ->first();
-        return $order;
     }
 
 
