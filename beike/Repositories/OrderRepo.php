@@ -45,6 +45,20 @@ class OrderRepo
 
 
     /**
+     * @param $customer
+     * @param $limit
+     * @return mixed
+     */
+    public static function getLatestOrders($customer, $limit)
+    {
+        return self::getListBuilder(['customer' => $customer])
+            ->orderByDesc('created_at')
+            ->take($limit)
+            ->get();
+    }
+
+
+    /**
      * @param array $filters
      * @return LengthAwarePaginator
      */

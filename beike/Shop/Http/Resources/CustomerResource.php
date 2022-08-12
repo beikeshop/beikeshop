@@ -2,6 +2,7 @@
 
 namespace Beike\Shop\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerResource extends JsonResource
@@ -9,12 +10,13 @@ class CustomerResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
+     * @throws \Exception
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
-        $data = [
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
@@ -23,7 +25,5 @@ class CustomerResource extends JsonResource
             'from' => $this->from,
             'customer_group_name' => $this->customer_group_name,
         ];
-
-        return $data;
     }
 }

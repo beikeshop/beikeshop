@@ -11,34 +11,38 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
-use Beike\Models\Customer;
-use Beike\Repositories\CustomerRepo;
+use Beike\Repositories\OrderRepo;
 use Illuminate\Support\Facades\Hash;
-use Beike\Shop\Http\Requests\EditRequest;
+use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\ForgottenRequest;
+use Beike\Shop\Http\Resources\CustomerResource;
+use Beike\Shop\Http\Resources\Account\OrderList;
 
 class AccountController extends Controller
 {
     /**
      * 个人中心首页
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return mixed
      * @throws \Exception
      */
     public function index()
     {
-        $data = current_customer()->toArray();
-        $data['avatar'] = image_resize($data['avatar']);
+        $customer = current_customer();
+        $data = [
+            'customer' => new CustomerResource($customer),
+            'latest_orders' => OrderList::collection(OrderRepo::getLatestOrders($customer, 10)),
+        ];
         return view('account/account', $data);
     }
 
     /**
-     * 修改密码，提交"origin_password"、"password", "password_confirmation", 验证新密码和确认密码相等，且原密码正确则修改密码
+     * 修改密码，提交 "origin_password"、"password", "password_confirmation", 验证新密码和确认密码相等，且原密码正确则修改密码
      * @param ForgottenRequest $request
      * @return array
      * @throws \Exception
      */
-    public function updatePassword(ForgottenRequest $request)
+    public function updatePassword(ForgottenRequest $request): array
     {
         if (Hash::make($request->get('origin_password')) != current_customer()->getAuthPassword()) {
             throw new \Exception("原密码错误");

@@ -59,6 +59,39 @@
                 <div class="text mb-3 text-muted">您还没有订单！<a href="">去下单</a></div>
               </div>
             </div>
+
+              @foreach ($latest_orders as $order)
+                  <tbody>
+                  <tr class="sep-row"><td colspan="4"></td></tr>
+                  <tr class="head-tr">
+                      <td colspan="4">
+                          <span class="order-created me-4">{{ $order->created_at }}</span>
+                          <span class="order-number">订单号：{{ $order->number }}</span>
+                      </td>
+                  </tr>
+                  @foreach ($order->orderProducts as $product)
+                      <tr class="{{ $loop->first ? 'first-tr' : '' }}">
+                          <td>
+                              <div class="product-info">
+                                  <div class="img"><img src="{{ $product->image }}" class="img-fluid"></div>
+                                  <div class="name">
+                                      <span>{{ $product->name }}</span>
+                                  </div>
+                                  <div class="quantity">{{ $product->quantity }}</div>
+                              </div>
+                          </td>
+                          @if ($loop->first)
+                              <td rowspan="{{ $loop->count }}">{{ $order->total }}</td>
+                              <td rowspan="{{ $loop->count }}">{{ $order->status }}</td>
+                              <td rowspan="{{ $loop->count }}" class="text-end">
+                                  <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">查看</a>
+                              </td>
+                          @endif
+                      </tr>
+                  @endforeach
+                  </tbody>
+              @endforeach
+
           </div>
         </div>
       </div>
