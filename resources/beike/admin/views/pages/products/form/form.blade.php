@@ -58,7 +58,7 @@
             <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '0')" />
 
             <x-admin::form.row title="品牌">
-              <input type="text" value="{{ $product->brand->name }}" id="brand-autocomplete" class="form-control wp-400 " />
+              <input type="text" value="{{ $product->brand->name ?? '' }}" id="brand-autocomplete" class="form-control wp-400 " />
               <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
             </x-admin::form.row>
 
