@@ -33,7 +33,7 @@
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">数据</h6>
-            <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
+            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="名称" :value="$descriptions" required />
             <x-admin::form.row title="图片">
               <draggable
                 element="div"
@@ -66,7 +66,7 @@
             <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
             <x-admin::form.row title="分类">
-              <div class="wp-400 form-control" style="max-height: 300px;overflow-y: auto">
+              <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
                 @foreach ($source['categories'] as $_category)
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}"
