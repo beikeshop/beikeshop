@@ -10,7 +10,14 @@
  */
 
 return [
-    'login' => 'Login',
-    'new_account' => 'New Account',
     'index' => '个人中心',
+    'login' => '登录',
+
+    'wishlist' => [
+        'index' => '收藏列表',
+    ],
+
+    'order' => [
+        'index' => '订单列表',
+    ]
 ];

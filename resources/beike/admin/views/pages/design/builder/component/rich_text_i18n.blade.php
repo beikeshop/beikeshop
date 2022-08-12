@@ -97,7 +97,7 @@ Vue.component('rich-text-i18n', {
         height: 300,
         plugins: "link lists fullscreen table hr wordcount image imagetools code",
         menubar: "",
-        toolbar: "undo redo | toolbarImageButton | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor | code",
+        toolbar: "undo redo | toolbarImageButton | lineheight | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor | code",
         toolbar_items_size: 'small',
         image_caption: true,
         toolbar_mode: 'wrap',

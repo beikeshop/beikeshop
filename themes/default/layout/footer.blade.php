@@ -26,7 +26,7 @@
           <div class="footer-content-left">
             <div class="logo"><a href="http://"><img
                   src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
-            <div class="text">{!! $footer_content['content']['intro']['text'][$locale] ?? '' !!}</div>
+            <div class="text tinymce-format-p">{!! $footer_content['content']['intro']['text'][$locale] ?? '' !!}</div>
           </div>
         </div>
 
@@ -38,11 +38,13 @@
             <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] }}</h6>
             <ul class="list-unstyled">
               @foreach ($link['links'] as $item)
-                <li>
+                @if ($item['link'])
+                <li class="lh-lg mb-2">
                   <a href="{{ $item['link'] }}" @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>
                     {{ $item['type'] == 'custom' ? $item['text'][$locale] ?? '' : $item['text'] }}
                   </a>
                 </li>
+              @endif
               @endforeach
             </ul>
           </div>
@@ -51,13 +53,13 @@
           <h6 class="text-uppercase text-dark mb-3">联系我们</h6>
           <ul class="list-unstyled">
             @if ($footer_content['content']['contact']['email'])
-              <li><i class="bi bi-envelope-fill"></i> {{ $footer_content['content']['contact']['email'] }}</li>
+              <li class="lh-lg mb-2"><i class="bi bi-envelope-fill"></i> {{ $footer_content['content']['contact']['email'] }}</li>
             @endif
             @if ($footer_content['content']['contact']['telephone'])
-              <li><i class="bi bi-telephone-fill"></i> {{ $footer_content['content']['contact']['telephone'] }}</li>
+              <li class="lh-lg mb-2"><i class="bi bi-telephone-fill"></i> {{ $footer_content['content']['contact']['telephone'] }}</li>
             @endif
             @if ($footer_content['content']['contact']['address'])
-              <li><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'] }}</li>
+              <li class="lh-lg mb-2"><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'] }}</li>
             @endif
           </ul>
         </div>

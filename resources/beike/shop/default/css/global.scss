@@ -97,6 +97,12 @@ body[class^="page-account-"] {
   }
 }
 
+.tinymce-format-p {
+  p {
+    margin-bottom: 0.5rem;
+  }
+}
+
 .steps-wrap {
   display: flex;
   justify-content: space-around;

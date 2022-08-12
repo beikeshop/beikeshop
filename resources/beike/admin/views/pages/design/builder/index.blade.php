@@ -186,13 +186,13 @@
       watch: {},
       // 组件方法
       methods: {
-        moduleUpdated(module) {
+        moduleUpdated: bk.debounce(function() {
           const data = this.form.modules[this.design.editingModuleIndex]
 
           $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
             $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
           })
-        },
+        }, 300),
 
         addModuleButtonClicked(code) {
           const sourceModule = this.source.modules.find(e => e.code == code)

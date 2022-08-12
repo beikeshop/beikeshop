@@ -35,6 +35,10 @@ class CustomerController extends Controller
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
         ];
 
+        if ($request->expectsJson()) {
+            return json_success('成功', $data);
+        }
+
         return view('admin::pages.customers.index', $data);
     }
 

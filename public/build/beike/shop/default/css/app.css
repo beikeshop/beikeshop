@@ -365,6 +365,10 @@ body[class^=page-account-] {
   background: #FD560F;
 }
 
+.tinymce-format-p p {
+  margin-bottom: 0.5rem;
+}
+
 .steps-wrap {
   display: flex;
   justify-content: space-around;
@@ -525,8 +529,8 @@ header .header-content .menu-wrap .nav-link {
   padding-right: 1rem;
 }
 header .header-content .logo img {
-  max-width: 140px;
-  max-height: 30px;
+  max-width: 180px;
+  max-height: 50px;
 }
 header .header-content .right-btn .nav-link {
   color: #333;
@@ -634,13 +638,7 @@ footer .footer-content .text {
   color: #666666;
 }
 footer .footer-content h6 {
-  font-weight: bold;
-}
-footer .footer-content .list-unstyled {
-  margin-bottom: 0;
-}
-footer .footer-content .list-unstyled li {
-  line-height: 26px;
+  font-size: 14px;
 }
 footer .footer-bottom {
   height: 60px;

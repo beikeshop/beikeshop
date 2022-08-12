@@ -1,12 +1,11 @@
-@if (0)
-<div class="open-file-manager">
-  <div>
-    @if ($image)
-    <img src="{{ image_resize($image) }}" class="img-fluid">
+<x-admin::form.row :title="$title">
+  <div class="open-file-manager bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative">
+    @if ($value)
+      <img src="{{ image_resize($value) }}" class="img-fluid">
     @else
-    <i class="bi bi-plus fs-1 text-muted"></i>
+      <i class="bi bi-plus fs-1 text-muted"></i>
     @endif
   </div>
-</div>
-<input type="hidden" value="{{ $value }}" name="{{ $name }}">
-@endif
+  <input type="hidden" value="{{ $value }}" name="{{ $name }}">
+  {{ $slot }}
+</x-admin::form.row>

@@ -139,6 +139,10 @@
         ],
         static: [
           {name: '个人中心', value: 'account.index'},
+          {name: '收藏列表', value: 'account.wishlist.index'},
+          {name: '历史订单', value: 'account.order.index'},
+          // {name: '最新商品', value: 'account.index'},
+          {name: '品牌列表', value: 'brands.index'},
         ],
         link: null,
         keyword: '',

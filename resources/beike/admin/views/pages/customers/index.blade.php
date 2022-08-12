@@ -1,12 +1,12 @@
 @extends('admin::layouts.master')
 
-@section('title', '顾客管理')
+@section('title', '客户管理')
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">创建顾客</button>
+        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">创建客户</button>
       </div>
       <table class="table">
         <thead>
@@ -42,10 +42,11 @@
         </tbody>
       </table>
 
-      {{-- {{ $customers->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      <el-pagination layout="prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
+        :total="customers.total"></el-pagination>
     </div>
 
-    <el-dialog title="创建顾客" :visible.sync="dialogCustomers.show" width="600px"
+    <el-dialog title="创建客户" :visible.sync="dialogCustomers.show" width="600px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
       <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="100px">
         <el-form-item label="用户名" prop="name">
@@ -82,6 +83,7 @@
       el: '#customer-app',
 
       data: {
+        page: 1,
         customers: @json($customers ?? []),
 
         source: {
@@ -110,11 +112,22 @@
         }
       },
 
-      beforeMount() {
-
+      watch: {
+        page: function() {
+          this.loadData();
+        },
       },
 
+      // mounted: function() {
+      // },
+
       methods: {
+        loadData() {
+          $http.get(`customers?page=${this.page}`).then((res) => {
+            this.customers = res.data.customers;
+          })
+        },
+
         checkedCustomersCreate() {
           this.dialogCustomers.show = true
         },

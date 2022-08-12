@@ -9,7 +9,16 @@ const asset = document.querySelector('meta[name="asset"]').content;
 const editor_language = document.querySelector('meta[name="editor_language"]')?.content || 'zh_cn';
 
 $(document).on('click', '.open-file-manager', function(event) {
-  bk.fileManagerIframe();
+  bk.fileManagerIframe(images => {
+    if (!$(this).find('img').length) {
+      $(this).append('<img src="' + images[0].url + '" class="img-fluid">');
+      $(this).find('i').remove()
+    } else {
+      $(this).find('img').prop('src', images[0].url);
+    }
+    $(this).next('input').val(images[0].path)
+    $(this).next('input')[0].dispatchEvent(new Event('input'));
+  });
 });
 
 if (typeof Vue != 'undefined') {
@@ -50,7 +59,7 @@ const tinymceInit = () => {
     height: 400,
     plugins: "link lists fullscreen table hr wordcount image imagetools code",
     menubar: "",
-    toolbar: "undo redo | toolbarImageButton | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
+    toolbar: "undo redo | toolbarImageButton | lineheight | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
     // contextmenu: "link image imagetools table",
     toolbar_items_size: 'small',
     image_caption: true,

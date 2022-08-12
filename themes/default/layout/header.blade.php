@@ -44,8 +44,9 @@
 
   <div class="header-content py-3">
     <div class="container navbar-expand-lg">
-      <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ asset('image/logo.png') }}"
-            class="img-fluid"></a></div>
+      <div class="logo"><a href="{{ shop_route('home.index') }}">
+        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+      </div>
       <div class="menu-wrap">
         <ul class="navbar-nav mx-auto">
           @foreach ($categories as $category)

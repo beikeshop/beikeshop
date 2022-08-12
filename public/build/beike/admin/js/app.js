@@ -2075,7 +2075,19 @@ var base = document.querySelector('base').href;
 var asset = document.querySelector('meta[name="asset"]').content;
 var editor_language = ((_document$querySelect = document.querySelector('meta[name="editor_language"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.content) || 'zh_cn';
 $(document).on('click', '.open-file-manager', function (event) {
-  bk.fileManagerIframe();
+  var _this = this;
+
+  bk.fileManagerIframe(function (images) {
+    if (!$(_this).find('img').length) {
+      $(_this).append('<img src="' + images[0].url + '" class="img-fluid">');
+      $(_this).find('i').remove();
+    } else {
+      $(_this).find('img').prop('src', images[0].url);
+    }
+
+    $(_this).next('input').val(images[0].path);
+    $(_this).next('input')[0].dispatchEvent(new Event('input'));
+  });
 });
 
 if (typeof Vue != 'undefined') {
@@ -2117,7 +2129,7 @@ var tinymceInit = function tinymceInit() {
     height: 400,
     plugins: "link lists fullscreen table hr wordcount image imagetools code",
     menubar: "",
-    toolbar: "undo redo | toolbarImageButton | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
+    toolbar: "undo redo | toolbarImageButton | lineheight | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
     // contextmenu: "link image imagetools table",
     toolbar_items_size: 'small',
     image_caption: true,
@@ -2166,7 +2178,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   fileManagerIframe: function fileManagerIframe(callback) {
     var base = document.querySelector('base').href;
-    var $this = $(this);
     layer.open({
       type: 2,
       title: '图片管理器',
@@ -2180,10 +2191,7 @@ __webpack_require__.r(__webpack_exports__);
         var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
 
         iframeWindow.callback = function (images) {
-          if (callback && typeof callback === "function") return callback(images);
-          $this.find('img').prop('src', images[0].url);
-          $this.next('input').val(images[0].path);
-          $this.next('input')[0].dispatchEvent(new Event('input'));
+          callback(images);
         };
       }
     });
