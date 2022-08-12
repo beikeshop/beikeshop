@@ -3,13 +3,10 @@
 
 <!-- Include the PayPal JavaScript SDK -->
 @if($payment_setting['sandbox_mode'])
-    <script
-        src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency=USD"></script>
 @else
-    <script
-        src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency=USD"></script>
 @endif
-
 
 <script>
     // Render the PayPal button into #paypal-button-container
