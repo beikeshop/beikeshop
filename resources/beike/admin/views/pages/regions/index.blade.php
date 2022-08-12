@@ -175,7 +175,6 @@
           const self = this;
           const type = this.dialog.type == 'add' ? 'post' : 'put';
           const url = this.dialog.type == 'add' ? 'regions' : 'regions/' + this.dialog.form.id;
-
           this.$refs[form].validate((valid) => {
             if (!valid) {
               this.$message.error('请检查表单是否填写正确');
@@ -184,7 +183,7 @@
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (type == 'add') {
+              if (this.dialog.type == 'add') {
                 this.regions.push(res.data)
               } else {
                 this.regions[this.dialog.index] = res.data
@@ -203,7 +202,7 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除税类码？', '提示', {
+          this.$confirm('确定要删除区域组吗？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
