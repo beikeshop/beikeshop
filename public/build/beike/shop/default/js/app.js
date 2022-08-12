@@ -2129,6 +2129,14 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
   },
+  addWishlist: function addWishlist(id) {
+    var isWishlist = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    $http.post('account/wishlist', {
+      product_id: id
+    }).then(function (res) {
+      layer.msg(res.message);
+    });
+  },
 
   /**
    * @description: 滑动固定顶部

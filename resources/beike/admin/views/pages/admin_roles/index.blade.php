@@ -50,10 +50,17 @@
   <script>
     $('.delete-role').click(function(event) {
       const id = $(this).data('id');
+      const self = $(this);
 
-      $http.delete(`admin_roles/${id}`).then((res) => {
-        layer.msg(res.message);
-        $(this).parents('tr').remove()
+      layer.confirm('确定要删除角色吗？', {
+        title: "提示",
+        btn: ['取消', '确定'],
+        btn2: () => {
+        $http.delete(`admin_roles/${id}`).then((res) => {
+            layer.msg(res.message);
+            self.parents('tr').remove()
+          })
+        }
       })
     });
   </script>

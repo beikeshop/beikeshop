@@ -300,3 +300,17 @@ body.page-seller-product {
     }
   }
 }
+
+.layui-layer-btn {
+  .layui-layer-btn0 {
+    border: 1px solid #dedede;
+    color: #333;
+    background-color: #fff;
+  }
+
+  .layui-layer-btn1 {
+    background-color: $primary;
+    border-color: $primary;
+    color: #fff;
+  }
+}
