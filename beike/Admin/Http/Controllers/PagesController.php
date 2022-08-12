@@ -13,6 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Page;
 use Beike\Repositories\ProductRepo;
+use Beike\Shop\Http\Resources\PageDetail;
 use Illuminate\Http\Request;
 use Beike\Admin\Repositories\PageRepo;
 
@@ -20,8 +21,10 @@ class PagesController
 {
     public function index()
     {
+        $pageList = PageRepo::getList();
         $data = [
-            'pages' => PageRepo::getList()
+            'pages' => $pageList,
+            'pages_format' => PageDetail::collection($pageList)->jsonSerialize()
         ];
         return view('admin::pages.pages.index', $data);
     }

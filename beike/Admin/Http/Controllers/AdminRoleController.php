@@ -51,7 +51,7 @@ class AdminRoleController extends Controller
 
 
     /**
-     * 保存
+     * 保存后台用户角色
      *
      * @param AdminRoleRequest $request
      * @return array

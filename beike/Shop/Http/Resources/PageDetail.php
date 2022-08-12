@@ -26,7 +26,9 @@ class PageDetail extends JsonResource
         $description = $this->description;
         return [
             'id' => $this->id,
+            'active' => $this->active,
             'title' => $description->title,
+            'title_format' => sub_string($description->title),
             'content' => $description->content,
             'meta_title' => $description->meta_title,
             'meta_description' => $description->meta_description,

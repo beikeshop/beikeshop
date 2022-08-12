@@ -13,19 +13,23 @@ namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
 use Beike\Models\Product;
+use Beike\Shop\Http\Resources\PageDetail;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PageRepo
 {
     /**
      * 获取列表页数据
+     *
      * @return LengthAwarePaginator
      */
     public static function getList(): LengthAwarePaginator
     {
-        return Page::query()->with([
+        $builder = Page::query()->with([
             'description'
-        ])->paginate();
+        ])->orderByDesc('created_at');
+
+        return $builder->paginate();
     }
 
 

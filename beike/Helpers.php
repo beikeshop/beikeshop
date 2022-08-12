@@ -374,12 +374,11 @@ function quantity_format($quantity)
  */
 function json_success($message, $data = []): array
 {
-    $result = [
+    return [
         'status' => 'success',
         'message' => $message,
         'data' => $data,
     ];
-    return $result;
 }
 
 /**
@@ -387,12 +386,30 @@ function json_success($message, $data = []): array
  */
 function json_fail($message, $data = []): array
 {
-    $result = [
+    return [
         'status' => 'fail',
         'message' => $message,
         'data' => $data,
     ];
-    return $result;
+}
+
+if (!function_exists('sub_string')) {
+    /**
+     * @param $string
+     * @param int $length
+     * @param string $dot
+     * @return string
+     */
+    function sub_string($string, int $length = 16, string $dot = '...'): string
+    {
+        $strLength = strlen($string);
+        if ($length <= 0) {
+            return $string;
+        } elseif ($strLength <= $length) {
+            return $string;
+        }
+        return mb_substr($string, 0, $length) . $dot;
+    }
 }
 
 /**
