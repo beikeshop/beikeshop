@@ -9,14 +9,22 @@
       </div>
     </a>
     <div class="button-wrap">
-      <button class="btn btn-dark text-light mx-1 rounded-3" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
-        {{-- <i class="iconfont">&#xe77f;</i> --}}
+      <button
+        class="btn btn-dark text-light mx-1 rounded-3"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="加入收藏"
+        data-in-wishlist="{{ $product['in_wishlist'] }}"
+        onclick="bk.addWishlist('{{ $product['id'] }}', this)">
         <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }}"></i>
-        <span>加入收藏</span>
       </button>
-      <button class="btn btn-dark text-light mx-1 rounded-3" onclick="bk.addCart({{ $product['sku_id'] }})">
-        <i class="iconfont">&#xf13a;</i>
-        <span>加入购物车</span>
+      <button
+        class="btn btn-dark text-light mx-1 rounded-3"
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="加入购物车"
+        onclick="bk.addCart({sku_id: '{{ $product['sku_id'] }}'}, this)">
+        <i class="bi bi-cart"></i>
       </button>
     </div>
   </div>

@@ -676,41 +676,8 @@ footer .footer-bottom {
   display: flex;
   justify-content: center;
 }
-.product-wrap .image .button-wrap button {
-  position: relative;
-}
-.product-wrap .image .button-wrap button > span {
-  font-size: 11px;
-  text-transform: none;
-  line-height: 18px;
-  transition: all 0.2s ease-in-out;
-  opacity: 0;
-  background-color: #000;
-  padding: 0 5px;
-  white-space: nowrap;
-  position: absolute;
-  bottom: calc(100% + 20px);
-  left: 50%;
-  transform: translate(-50%);
-  visibility: hidden;
-}
-.product-wrap .image .button-wrap button > span::before {
-  content: "";
-  border: 5px solid transparent;
-  border-top-color: #000;
-  position: absolute;
-  bottom: -9px;
-  left: 50%;
-  margin-left: -5px;
-}
 .product-wrap .image .button-wrap button:hover {
   background-color: rgb(70, 70, 70);
-}
-.product-wrap .image .button-wrap button:hover span {
-  opacity: 1;
-  bottom: calc(100% + 7px);
-  z-index: 2;
-  visibility: visible;
 }
 .product-wrap .image:hover .image-hover {
   opacity: 1;

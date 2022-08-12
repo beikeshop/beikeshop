@@ -44,36 +44,43 @@ export default {
    * @param {*} isBuyNow  是否立即购买
    * @return {*}  返回Promise
    */
-  addCart(sku_id, quantity = 1, isBuyNow = false) {
-    $http.post('/carts', {sku_id, quantity}).then((res) => {
+  addCart({sku_id, quantity = 1, isBuyNow = false}, event) {
+    const $btn = $(event);
+    const btnHtml = $btn.html();
+    const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
+    $btn.html(loadHtml).prop('disabled', true);
+
+    $http.post('/carts', {sku_id, quantity}, {hload: !!event}).then((res) => {
       this.getCarts();
       layer.msg(res.message)
       if (isBuyNow) {
         location.href = 'checkout'
       }
-    })
+    }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
   },
 
-  addWishlist(id, e) {
-    const $btn = $(e);
-    let isWishlist = $btn.attr('data-in-wishlist') * 1;
+  addWishlist(id, event) {
+    const $btn = $(event);
     const btnHtml = $btn.html();
-    const loadHtml = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+    const isWishlist = $btn.attr('data-in-wishlist') * 1;
+    const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
 
     if (isWishlist) {
       $btn.html(loadHtml).prop('disabled', true);
       $http.delete(`account/wishlist/${isWishlist}`, null, {hload: true}).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', '0');
-        $btn.find('i.bi').prop('class', 'bi bi-heart me-1')
-      }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
+      }).finally(() => {
+        $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart')
+      })
     } else {
       $btn.html(loadHtml).prop('disabled', true);
       $http.post('account/wishlist', {product_id: id}, {hload: true}).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', res.data.id);
-        $btn.find('i.bi').prop('class', 'bi bi-heart-fill me-1')
-      }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
+      }).finally(() => {
+        $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill')
+      })
     }
   },
 

@@ -2111,14 +2111,23 @@ __webpack_require__.r(__webpack_exports__);
    * @param {*} isBuyNow  是否立即购买
    * @return {*}  返回Promise
    */
-  addCart: function addCart(sku_id) {
+  addCart: function addCart(_ref, event) {
     var _this = this;
 
-    var quantity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-    var isBuyNow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var sku_id = _ref.sku_id,
+        _ref$quantity = _ref.quantity,
+        quantity = _ref$quantity === void 0 ? 1 : _ref$quantity,
+        _ref$isBuyNow = _ref.isBuyNow,
+        isBuyNow = _ref$isBuyNow === void 0 ? false : _ref$isBuyNow;
+    var $btn = $(event);
+    var btnHtml = $btn.html();
+    var loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
+    $btn.html(loadHtml).prop('disabled', true);
     $http.post('/carts', {
       sku_id: sku_id,
       quantity: quantity
+    }, {
+      hload: !!event
     }).then(function (res) {
       _this.getCarts();
 
@@ -2127,13 +2136,15 @@ __webpack_require__.r(__webpack_exports__);
       if (isBuyNow) {
         location.href = 'checkout';
       }
+    })["finally"](function () {
+      $btn.html(btnHtml).prop('disabled', false);
     });
   },
-  addWishlist: function addWishlist(id, e) {
-    var $btn = $(e);
-    var isWishlist = $btn.attr('data-in-wishlist') * 1;
+  addWishlist: function addWishlist(id, event) {
+    var $btn = $(event);
     var btnHtml = $btn.html();
-    var loadHtml = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+    var isWishlist = $btn.attr('data-in-wishlist') * 1;
+    var loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
 
     if (isWishlist) {
       $btn.html(loadHtml).prop('disabled', true);
@@ -2142,9 +2153,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         layer.msg(res.message);
         $btn.attr('data-in-wishlist', '0');
-        $btn.find('i.bi').prop('class', 'bi bi-heart me-1');
       })["finally"](function () {
-        $btn.html(btnHtml).prop('disabled', false);
+        $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart');
       });
     } else {
       $btn.html(loadHtml).prop('disabled', true);
@@ -2155,9 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         layer.msg(res.message);
         $btn.attr('data-in-wishlist', res.data.id);
-        $btn.find('i.bi').prop('class', 'bi bi-heart-fill me-1');
       })["finally"](function () {
-        $btn.html(btnHtml).prop('disabled', false);
+        $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill');
       });
     }
   },

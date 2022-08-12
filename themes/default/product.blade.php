@@ -96,13 +96,13 @@
             <button
               class="btn btn-outline-dark ms-3 add-cart"
               :disabled="!product.quantity"
-              @click="addCart(false)"
+              @click="addCart(false, this)"
               ><i class="bi bi-cart-fill me-1"></i>加入购物车
             </button>
             <button
               class="btn btn-dark ms-3"
               :disabled="!product.quantity"
-              @click="addCart(true)"
+              @click="addCart(true, this)"
               ><i class="bi bi-bag-fill me-1"></i>立即购买
             </button>
           </div>
@@ -215,7 +215,7 @@
         },
 
         addCart(isBuyNow = false) {
-          bk.addCart(this.product.id, this.quantity, isBuyNow);
+          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow});
         },
 
         updateSelectedVariantsIndex() {
