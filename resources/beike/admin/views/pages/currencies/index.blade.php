@@ -76,7 +76,7 @@
 
         <el-form-item class="mt-5">
           <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button @click="dialog.show = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -124,7 +124,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            this.dialog.form = this.currencies[index]
+            this.dialog.form = JSON.parse(JSON.stringify(this.currencies[index]))
           }
         },
 
@@ -169,7 +169,7 @@
         closeCustomersDialog(form) {
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
-          this.dialog.show = false
+          // this.dialog.show = false
         }
       }
     })
