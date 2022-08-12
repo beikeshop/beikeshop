@@ -20,7 +20,7 @@ class BrandController extends Controller
 
     public function show(int $id)
     {
-        $products = BrandRepo::find($id)->products()->paginate(20);
+        $products = BrandRepo::find($id)->products()->with('inCurrentWishlist')->paginate(20);
 
         $data = [
             'products' => ProductList::collection($products)->jsonSerialize(),

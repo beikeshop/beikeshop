@@ -42,7 +42,7 @@ class ProductRepo
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
         $builder = self::getBuilder(['category_id' => $categoryId]);
-        $products = $builder->get();
+        $products = $builder->with('inCurrentWishlist')->get();
         $items = ProductList::collection($products);
         return $items;
     }
@@ -56,7 +56,7 @@ class ProductRepo
     public static function getProductsByIds($productIds): AnonymousResourceCollection
     {
         $builder = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
-        $products = $builder->get();
+        $products = $builder->with('inCurrentWishlist')->get();
         return ProductList::collection($products);
     }
 
