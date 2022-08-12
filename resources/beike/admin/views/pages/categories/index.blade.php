@@ -40,10 +40,16 @@
 
       methods: {
         removeCategory(node, data) {
-          $http.delete(`/categories/${data.id}`).then((res) => {
-            layer.msg(res.message);
-            this.$refs.tree.remove(data.id)
-          })
+          this.$confirm('确定要删除分类吗？', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            $http.delete(`/categories/${data.id}`).then((res) => {
+              layer.msg(res.message);
+              this.$refs.tree.remove(data.id)
+            })
+          }).catch(()=>{})
         },
       }
     });
