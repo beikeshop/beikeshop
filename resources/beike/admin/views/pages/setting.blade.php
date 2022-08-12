@@ -109,7 +109,7 @@
     @endif
 
     const country_id = {{ system_setting('base.country_id', '1') }};
-    const zone_id = {{ system_setting('base.zone_id', '1') }};
+    const zone_id = {{ system_setting('base.zone_id', '1') ?: 1 }};
 
     // 获取省份
     const getZones = (country_id) => {
