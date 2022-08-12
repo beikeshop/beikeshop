@@ -167,9 +167,9 @@
         },
 
         closeCustomersDialog(form) {
+          this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.show = false
-          this.$refs[form].resetFields();
         }
       }
     })

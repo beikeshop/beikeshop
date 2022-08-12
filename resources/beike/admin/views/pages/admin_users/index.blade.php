@@ -189,11 +189,11 @@
         },
 
         closeCustomersDialog(form) {
+          this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.roles = [];
           this.dialog.form.locale =  @json($admin_language['code'] ?? 'en');
           this.dialog.show = false
-          this.$refs[form].resetFields();
         }
       }
     })

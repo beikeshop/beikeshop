@@ -66,7 +66,7 @@
 
         <el-form-item>
           <el-button type="primary" @click="submit('form')">保存</el-button>
-          <el-button @click="closeDialog('form')">取消</el-button>
+          <el-button @click="dialog.show = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -129,16 +129,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let brand = this.brands.data[index];
-
-            this.dialog.form = {
-              id: brand.id,
-              name: brand.name,
-              logo: brand.logo,
-              logo: brand.logo,
-              first: brand.first,
-              status: brand.status,
-            }
+            this.dialog.form = this.brands.data[index]
           }
         },
 
@@ -181,10 +172,9 @@
         },
 
         closeDialog(form) {
+          this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.status = 1
-          this.dialog.show = false
-          this.$refs[form].resetFields();
         }
       }
     })
