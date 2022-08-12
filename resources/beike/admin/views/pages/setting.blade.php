@@ -15,12 +15,23 @@
             <a class="nav-link active" data-bs-toggle="tab" href="#tab-general">基础设置</a>
           </li>
           <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-store">商店设置</a>
+          </li>
+          <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-image">图片设置</a>
           </li>
         </ul>
 
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-general">
+            <x-admin-form-input name="meta_title" title="Meta 标题" value="{{ old('meta_title', system_setting('base.meta_title', '')) }}" />
+            <x-admin-form-textarea name="meta_description" title="Meta 描述" value="{{ old('meta_description', system_setting('base.meta_description', '')) }}" />
+            <x-admin-form-textarea name="meta_keyword" title="Meta 关键词" value="{{ old('meta_keyword', system_setting('base.meta_keyword', '')) }}" />
+            <x-admin-form-input name="telephone" title="联系电话" value="{{ old('telephone', system_setting('base.telephone', '')) }}" />
+            <x-admin-form-input name="email" title="E-Mail" value="{{ old('email', system_setting('base.email', '')) }}" />
+          </div>
+
+          <div class="tab-pane fade" id="tab-store">
             <x-admin::form.row title="默认地址">
               <div class="d-flex">
                 <div>
@@ -66,11 +77,11 @@
               <div class="help-text font-size-12 lh-base">按什么地址计算税费</div>
             </x-admin-form-select>
           </div>
+
           <div class="tab-pane fade" id="tab-image">
             <x-admin-form-image name="logo" title="网站 Logo" :value="old('logo', system_setting('base.logo', ''))">
               <div class="help-text font-size-12 lh-base">网站前台显示 380*100</div>
             </x-admin-form-image>
-
 
             <x-admin-form-image name="favicon" title="favicon" :value="old('web_icon', system_setting('base.web_icon', ''))">
               <div class="help-text font-size-12 lh-base">显示在浏览器选项卡上的小图标，必须为PNG格式大小为：32*32</div>
