@@ -18,17 +18,21 @@
 
   <ul>
     @foreach ($brands as $brand)
-    <li class="d-flex justity-content-between align-items-center border-top py-1">
-      <p class="ps-2 fs-5 mt-4 fw-bold py-5" id="{{ $brand['0']['first'] }}">{{ $brand['0']['first'] }}</p>
-      <div class="flex-wrap d-flex justity-content-between align-items-center">
-        @foreach ($brand as $item)
-          <div class="text-center">
-            <a href="{{ shop_route('brands.show', [$item['id']]) }}">
-              <img src="{{ $item['logo'] }}" class="img-fluid mx-5" alt="{{ $item['name'] }}">
-              <p class="mb-0 mt-1">{{ $item['name'] }}</p>
-            </a>
-          </div>
-        @endforeach
+    <li class="d-flex border-top py-2">
+      <p class="px-2 fs-5 mt-4 fw-bold py-5" id="{{ $brand['0']['first'] }}">{{ $brand['0']['first'] }}</p>
+      <div class="container">
+        <div class="row">
+          @foreach ($brand as $item)
+            <div class="text-center col-6 col-md-4 col-lg-2 mt-2">
+              <a href="{{ shop_route('brands.show', [$item['id']]) }}">
+                <div class="brand-item">
+                  <img src="{{ $item['logo'] }}" class="img-fluid" alt="{{ $item['name'] }}">
+                </div>
+                <p class="mb-0 mt-1 ">{{ $item['name'] }}</p>
+              </a>
+            </div>
+          @endforeach
+        </div>
       </div>
     </li>
     @endforeach

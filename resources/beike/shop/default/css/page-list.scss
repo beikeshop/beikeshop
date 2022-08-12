@@ -1,6 +1,20 @@
 @charset "UTF-8";
 
 body.page-list {
+  .brand-item {
+    display: flex;
+    align-items: center; // flex-start | center
+    justify-content: center; // flex-end | center | space-between
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .07);
+    margin-bottom: 10px;
+    height: 133px;
+    width: 100%;
+
+    >img {
+      max-height: 100%;
+    }
+  }
+
   li {
     list-style: none;
     a{

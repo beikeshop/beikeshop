@@ -1259,6 +1259,18 @@ body.page-account-address .addresses-wrap .item .address-bottom a, body.page-che
   color: #2d68a8;
 }
 
+body.page-list .brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  margin-bottom: 10px;
+  height: 133px;
+  width: 100%;
+}
+body.page-list .brand-item > img {
+  max-height: 100%;
+}
 body.page-list li {
   list-style: none;
 }
