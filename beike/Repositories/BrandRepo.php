@@ -88,6 +88,7 @@ class BrandRepo
         if (isset($data['status'])) {
             $builder->where('status', $data['status']);
         }
+        $builder->orderByDesc('created_at');
 
         return $builder->paginate(10)->withQueryString();
     }
@@ -109,9 +110,9 @@ class BrandRepo
         $builder = Brand::query()
             ->where('name', 'like', "$name%")
             ->select('id', 'name', 'status');
-            if ($onlyActive) {
-                $builder->where('status', 1);
-            }
+        if ($onlyActive) {
+            $builder->where('status', 1);
+        }
 
         return $builder->limit(10)->get();
     }

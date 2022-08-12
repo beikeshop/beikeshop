@@ -6,6 +6,7 @@
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-08-10 19:07:07
  */
+
 /**
  * BrandController.php
  *
@@ -24,6 +25,11 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    /**
+     * 显示品牌列表
+     * @param Request $request
+     * @return mixed
+     */
     public function index(Request $request)
     {
         $brands = BrandRepo::list($request->only('name', 'first', 'status'));
@@ -38,6 +44,13 @@ class BrandController extends Controller
         return view('admin::pages.brands.index', $data);
     }
 
+
+    /**
+     * 创建品牌
+     *
+     * @param Request $request
+     * @return array
+     */
     public function store(Request $request): array
     {
         $brand = BrandRepo::create($request->all());
@@ -85,7 +98,7 @@ class BrandController extends Controller
      */
     public function getNames(Request $request): array
     {
-        $ids = explode(',',$request->get('ids'));
+        $ids = explode(',', $request->get('ids'));
         $name = BrandRepo::getNames($ids);
 
         return json_success('获取成功', $name);
