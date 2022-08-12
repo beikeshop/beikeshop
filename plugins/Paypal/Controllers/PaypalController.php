@@ -16,50 +16,115 @@
 
 namespace Plugin\Paypal\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Srmklive\PayPal\Services\PayPal;
 
 class PaypalController
 {
-    public function handlePayment()
+    private PayPal $paypalClient;
+
+    /**
+     * PaypalController constructor.
+     * @throws \Throwable
+     */
+    public function __construct()
     {
-        $product = [];
-        $product['items'] = [
-            [
-                'name' => 'Nike Joyride 2',
-                'price' => 112,
-                'desc'  => 'Running shoes for Men',
-                'qty' => 2
-            ]
+        $paypalSetting = plugin_setting('paypal');
+        $config = [
+            'mode' => $paypalSetting['sandbox_mode'] ? 'sandbox' : 'live',
+            'sandbox' => [
+                'client_id' => $paypalSetting['sandbox_client_id'],
+                'client_secret' => $paypalSetting['sandbox_secret'],
+            ],
+            'live' => [
+                'client_id' => $paypalSetting['live_client_id'],
+                'client_secret' => $paypalSetting['live_secret'],
+            ],
+            'payment_action' => 'Sale', // Can only be 'Sale', 'Authorization' or 'Order'
+            'currency' => 'USD',
+            'notify_url' => '', // Change this accordingly for your application.
+            'locale' => 'en_US', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
+            'validate_ssl' => true, // Validate SSL when creating api client.
         ];
-
-        $product['invoice_id'] = 1;
-        $product['invoice_description'] = "Order #{$product['invoice_id']} Bill";
-        $product['return_url'] = route('success.payment');
-        $product['cancel_url'] = route('cancel.payment');
-        $product['total'] = 224;
-
-        $paypalModule = new PayPal();
-
-        $res = $paypalModule->setExpressCheckout($product);
-        $res = $paypalModule->setExpressCheckout($product, true);
-
-        return redirect($res['paypal_link']);
+        config(['paypal' => null]);
+        $this->paypalClient = new PayPal($config);
+        $token = $this->paypalClient->getAccessToken();
+        $this->paypalClient->setAccessToken($token);
     }
 
-    public function paymentCancel()
+    public function test()
     {
-        dd('Your payment has been declend. The payment cancelation page goes here!');
+
     }
 
-    public function paymentSuccess(Request $request)
-    {
-        $paypalModule = new ExpressCheckout;
-        $response = $paypalModule->getExpressCheckoutDetails($request->token);
 
-        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
-            dd('Payment was successfull. The payment success page goes here!');
+    /**
+     * 创建 paypal 订单
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Throwable
+     */
+    public function create(Request $request): JsonResponse
+    {
+        $orderId = $request->get('order_number');
+        dd($orderId);
+        $data = json_decode($request->getContent(), true);
+
+
+        $order = $this->paypalClient->createOrder([
+            "intent" => "CAPTURE",
+            "purchase_units" => [
+                [
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => $data['amount']
+                    ],
+                    'description' => 'test'
+                ]
+            ],
+        ]);
+
+        $mergeData = array_merge($data, ['status' => TransactionStatus::PENDING, 'vendor_order_id' => $order['id']]);
+        DB::beginTransaction();
+        Order::create($mergeData);
+        DB::commit();
+        return response()->json($order);
+
+
+        //return redirect($order['links'][1]['href'])->send();
+        // echo('Create working');
+    }
+
+    public function capture(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+        $orderId = $data['orderId'];
+        $this->paypalClient->setApiCredentials(config('paypal'));
+        $token = $this->paypalClient->getAccessToken();
+        $this->paypalClient->setAccessToken($token);
+        $result = $this->paypalClient->capturePaymentOrder($orderId);
+
+//            $result = $result->purchase_units[0]->payments->captures[0];
+        try {
+            DB::beginTransaction();
+            if ($result['status'] === "COMPLETED") {
+                $transaction = new Transaction;
+                $transaction->vendor_payment_id = $orderId;
+                $transaction->payment_gateway_id = $data['payment_gateway_id'];
+                $transaction->user_id = $data['user_id'];
+                $transaction->status = TransactionStatus::COMPLETED;
+                $transaction->save();
+                $order = Order::where('vendor_order_id', $orderId)->first();
+                $order->transaction_id = $transaction->id;
+                $order->status = TransactionStatus::COMPLETED;
+                $order->save();
+                DB::commit();
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
+            dd($e);
         }
-
-        dd('Error occured!');
+        return response()->json($result);
     }
 }

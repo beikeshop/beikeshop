@@ -56,7 +56,11 @@ class PaymentService
         if (!view()->exists($viewPath)) {
             throw new \Exception("找不到支付方式 {$orderPaymentCode} 模板 {$viewPath}");
         }
-        $paymentView = view($viewPath, ['order' => $this->order])->render();
+        $paymentData = [
+            'order' => $this->order,
+            'payment_setting' => plugin_setting($orderPaymentCode),
+        ];
+        $paymentView = view($viewPath, $paymentData)->render();
         return view('checkout.payment', ['order' => $this->order, 'payment' => $paymentView]);
     }
 }

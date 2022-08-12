@@ -20,6 +20,7 @@
           <div class="card-header"><h5 class="card-title">订单详情</h5></div>
           <div class="card-body">
             <div class="bg-light p-2">
+                <a href="{{ shop_route('orders.pay', $order->number) }}">去支付</a>
               <table class="table table-borderless mb-0">
                 <thead>
                   <tr>
