@@ -37,7 +37,7 @@
       {{-- {{ $regions->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="创建税费" :visible.sync="dialog.show" width="700px"
+    <el-dialog title="创建区域组" :visible.sync="dialog.show" width="700px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="120px">
