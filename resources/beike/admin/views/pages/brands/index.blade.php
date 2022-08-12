@@ -129,7 +129,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            this.dialog.form = this.brands.data[index]
+            this.dialog.form = JSON.parse(JSON.stringify(this.brands.data[index]))
           }
         },
 
