@@ -29,8 +29,19 @@ class RegionRepo
         ]);
         $region->saveOrFail();
 
-        $region->regionZones()->delete();
-        $region->regionZones()->createMany($data['region_zones']);
+        $newRegionZones = [];
+        foreach ($data['region_zones'] as $regionZone) {
+            if ($regionZone['country_id'] && $regionZone['zone_id']) {
+                $newRegionZones[] = [
+                    'country_id' => $regionZone['country_id'],
+                    'zone_id' => $regionZone['zone_id'],
+                ];
+            }
+        }
+        if ($newRegionZones) {
+            $region->regionZones()->delete();
+            $region->regionZones()->createMany($newRegionZones);
+        }
         $region->load(['regionZones']);
         return $region;
     }
