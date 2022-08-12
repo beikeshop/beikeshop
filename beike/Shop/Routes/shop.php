@@ -61,6 +61,7 @@ Route::prefix('/')
 
         Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
+        Route::get('products/search', [ProductController::class, 'search'])->name('products.search');
         Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
         Route::get('register', [RegisterController::class, 'index'])->name('register.index');

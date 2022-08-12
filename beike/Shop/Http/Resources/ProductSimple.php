@@ -1,6 +1,6 @@
 <?php
 /**
- * ProductList.php
+ * ProductSimple.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -14,7 +14,7 @@ namespace Beike\Shop\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductList extends JsonResource
+class ProductSimple extends JsonResource
 {
     /**
      * 图片列表页Item

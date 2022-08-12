@@ -13,7 +13,7 @@ namespace Beike\Repositories;
 
 use Beike\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
-use Beike\Shop\Http\Resources\ProductList;
+use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -43,8 +43,7 @@ class ProductRepo
     {
         $builder = self::getBuilder(['category_id' => $categoryId]);
         $products = $builder->with('inCurrentWishlist')->get();
-        $items = ProductList::collection($products);
-        return $items;
+        return ProductSimple::collection($products);
     }
 
 
@@ -57,7 +56,7 @@ class ProductRepo
     {
         $builder = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
         $products = $builder->with('inCurrentWishlist')->get();
-        return ProductList::collection($products);
+        return ProductSimple::collection($products);
     }
 
 

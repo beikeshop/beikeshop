@@ -12,8 +12,8 @@
 namespace Plugin\LatestProducts\Controllers;
 
 use Beike\Repositories\ProductRepo;
-use Beike\Shop\Http\Resources\ProductList;
 use Beike\Shop\Http\Controllers\Controller;
+use Beike\Shop\Http\Resources\ProductSimple;
 
 class MenusController extends Controller
 {
@@ -31,7 +31,7 @@ class MenusController extends Controller
         $products = ProductRepo::getBuilder()->whereHas('master_sku')->with('inCurrentWishlist')->orderByDesc('updated_at')->paginate(40);
         $data = [
             'products' => $products,
-            'items' => ProductList::collection($products)->jsonSerialize(),
+            'items' => ProductSimple::collection($products)->jsonSerialize(),
         ];
         return view("LatestProducts::latest_products", $data);
     }

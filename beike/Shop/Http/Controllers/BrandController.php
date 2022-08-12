@@ -2,9 +2,9 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\BrandRepo;
-use Beike\Shop\Http\Resources\ProductList;
 use Illuminate\Http\Request;
+use Beike\Repositories\BrandRepo;
+use Beike\Shop\Http\Resources\ProductSimple;
 
 class BrandController extends Controller
 {
@@ -23,7 +23,7 @@ class BrandController extends Controller
         $products = BrandRepo::find($id)->products()->with('inCurrentWishlist')->paginate(20);
 
         $data = [
-            'products' => ProductList::collection($products)->jsonSerialize(),
+            'products' => ProductSimple::collection($products)->jsonSerialize(),
         ];
 
         return view('brand/info', $data);
