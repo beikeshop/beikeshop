@@ -2218,6 +2218,10 @@ $(document).on('click', '.quantity-wrap .right i', function (event) {
     return;
   }
 
+  if (input.val() * 1 <= 1) {
+    return;
+  }
+
   input.val(input.val() * 1 - 1);
   input.get(0).dispatchEvent(new Event('input'));
 });
@@ -2659,8 +2663,24 @@ __webpack_require__.r(__webpack_exports__);
 
 window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
+var token = document.querySelector('meta[name="csrf-token"]').content;
+var base = document.querySelector('base').href;
 
 
+$(document).ready(function ($) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': token
+    },
+    // beforeSend: function() { layer.load(2, {shade: [0.3,'#fff'] }); },
+    // complete: function() { layer.closeAll('loading'); },
+    error: function error(xhr, ajaxOptions, thrownError) {
+      if (xhr.responseJSON.message) {
+        layer.msg(xhr.responseJSON.message, function () {});
+      }
+    }
+  });
+});
 bk.getCarts(); // 页面初始加载购物车数据
 
 bk.slidingFixed();

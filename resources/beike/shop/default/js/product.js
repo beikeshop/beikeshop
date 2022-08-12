@@ -12,6 +12,10 @@ $(document).on('click', '.quantity-wrap .right i', function(event) {
     return;
   }
 
+  if (input.val () * 1 <= 1) {
+    return;
+  }
+
   input.val(input.val() * 1 - 1)
   input.get(0).dispatchEvent(new Event('input'));
 });
