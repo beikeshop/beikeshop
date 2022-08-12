@@ -175,7 +175,7 @@
           }).then(() => {
             $http.delete('brands/' + id).then((res) => {
               this.$message.success(res.message);
-              self.brands.splice(index, 1)
+              self.brands.data.splice(index, 1)
             })
           }).catch(()=>{})
         },
