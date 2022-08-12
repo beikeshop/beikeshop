@@ -19,7 +19,7 @@
       <div class="swiper-wrapper">
         @foreach($content['images'] as $image)
           <div class="swiper-slide">
-            <a href="{{ $image['link']['link'] }}"><img src="{{ $image['image'] }}" class="img-fluid"></a>
+            <a href="{{ $image['link']['link'] }}" class="d-flex justify-content-center"><img src="{{ $image['image'] }}" class="img-fluid"></a>
           </div>
         @endforeach
       </div>
