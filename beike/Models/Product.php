@@ -52,6 +52,11 @@ class Product extends Base
         return $this->belongsTo(Brand::Class, 'brand_id', 'id');
     }
 
+    public function inCurrentWishlist()
+    {
+        return $this->hasOne(CustomerWishlist::class)->where('customer_id', current_customer() ? current_customer()->id : 0);
+    }
+
     public function getPriceFormattedAttribute(): string
     {
         return '$' . $this->price;
