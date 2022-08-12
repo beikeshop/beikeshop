@@ -1047,3 +1047,8 @@ body.page-product-form .selectable-variants .variants-wrap > div .name + .btn-li
   display: block;
   border-bottom: 1px solid #000;
 }
+
+body.page-categories .el-tree-node__content {
+  height: 42px;
+  border-bottom: 1px solid #f5f5f5;
+}

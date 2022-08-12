@@ -2,28 +2,22 @@
 
 @section('title', '分类管理')
 
-@push('header')
-  <style>
-    .el-tree-node__content {
-      height: 32px;
-      border-bottom: 1px solid #f9f9f9;
-    }
-  </style>
-@endpush
+@section('body-class', 'page-categories')
 
 @section('content')
   <div id="category-app" class="card">
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建分类</a>
       <div class="mt-4" style="">
-        <el-tree :data="categories" default-expand-all :expand-on-click-node="false">
-          <div class="custom-tree-node" slot-scope="{ node, data }" style="flex:1;display:flex">
-            <span>@{{ data.name }}</span>
-            <div style="flex:1"></div>
-            <span class="me-4">@{{ data.active ? '启用' : '禁用' }}</span>
-            <div>
-              <a :href="data.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
-              <a class="btn btn-outline-danger btn-sm">删除</a>
+        <el-tree :data="categories" node-key="id" ref="tree">
+          <div class="custom-tree-node d-flex align-items-center justify-content-between w-100" slot-scope="{ node, data }">
+            <div><span>@{{ data.name }}</span></div>
+            <div class="d-flex align-items-center">
+              <span :class="['me-4', 'badge', 'bg-' + (data.active ? 'success' : 'secondary')]">@{{ data.active ? '启用' : '禁用' }}</span>
+              <div>
+                <a :href="data.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
+                <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">删除</a>
+              </div>
             </div>
           </div>
         </el-tree>
@@ -45,9 +39,12 @@
       },
 
       methods: {
-        handleNodeClick(data) {
-          console.log(data);
-        }
+        removeCategory(node, data) {
+          $http.delete(`/categories/${data.id}`).then((res) => {
+            layer.msg(res.message);
+            this.$refs.tree.remove(data.id)
+          })
+        },
       }
     });
   </script>
