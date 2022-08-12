@@ -16,6 +16,7 @@
 
 namespace Plugin\Paypal\Controllers;
 
+use Beike\Repositories\OrderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Srmklive\PayPal\Services\PayPal;
@@ -67,35 +68,36 @@ class PaypalController
      */
     public function create(Request $request): JsonResponse
     {
-        $orderId = $request->get('order_number');
-        dd($orderId);
-        $data = json_decode($request->getContent(), true);
+        $data = \json_decode($request->getContent(), true);
+        $orderNumber = $data['order_number'];
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $orderTotalUsd = currency_format($order->total, 'USD', '', false);
 
-
-        $order = $this->paypalClient->createOrder([
+        $paypalOrder = $this->paypalClient->createOrder([
             "intent" => "CAPTURE",
             "purchase_units" => [
                 [
                     "amount" => [
-                        "currency_code" => "USD",
-                        "value" => $data['amount']
+                        "currency_code" => 'USD',
+                        "value" => round($orderTotalUsd, 2),
                     ],
                     'description' => 'test'
                 ]
             ],
         ]);
 
-        $mergeData = array_merge($data, ['status' => TransactionStatus::PENDING, 'vendor_order_id' => $order['id']]);
-        DB::beginTransaction();
-        Order::create($mergeData);
-        DB::commit();
-        return response()->json($order);
-
-
-        //return redirect($order['links'][1]['href'])->send();
-        // echo('Create working');
+        return response()->json($paypalOrder);
+        //return redirect($paypalOrder['links'][1]['href'])->send();
     }
 
+
+    /**
+     * 客户同意后扣款回调
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Throwable
+     */
     public function capture(Request $request)
     {
         $data = json_decode($request->getContent(), true);

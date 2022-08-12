@@ -14,8 +14,12 @@
     paypal.Buttons({
         // Call your server to set up the transaction
         createOrder: function (data, actions) {
+            const token = $('meta[name="csrf-token"]').attr('content')
             return fetch('/plugin/paypal/create', {
                 method: 'POST',
+                headers: {
+                    'X-CSRF-Token':token
+                },
                 body: JSON.stringify({
                     'order_number': "{{$order->number}}",
                 })
@@ -30,8 +34,12 @@
 
         // Call your server to finalize the transaction
         onApprove: function (data, actions) {
+            const token = $('meta[name="csrf-token"]').attr('content')
             return fetch('/plugin/paypal/capture', {
                 method: 'POST',
+                headers: {
+                    'X-CSRF-Token':token
+                },
                 body: JSON.stringify({
                     orderId: data.orderID,
                     payment_gateway_id: $("#payapalId").val(),
