@@ -64,7 +64,7 @@
         </div>
 
         <template v-if="items.length">
-          <table class="table" v-loading="loading">
+          <table class="table table-hover" v-loading="loading">
             <thead>
               <tr>
                 <th></th>
@@ -107,9 +107,9 @@
               <td>@{{ item.position }}</td>
               <td>@{{ item.active ? '上架' : '下架' }}</td>
               <td>
-                <a :href="item.url_edit">编辑</a>
+                <a :href="item.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
                 <template>
-                  <a v-if="item.deleted_at == ''" href="javascript:void(0)" @click.prevent="deleteProduct(index)">删除</a>
+                  <a v-if="item.deleted_at == ''" href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct(index)">删除</a>
                   <a v-else href="javascript:void(0)" @click.prevent="restoreProduct(index)">恢复</a>
                 </template>
               </td>

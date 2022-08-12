@@ -20,10 +20,10 @@
           <div class="custom-tree-node" slot-scope="{ node, data }" style="flex:1;display:flex">
             <span>@{{ data.name }}</span>
             <div style="flex:1"></div>
-            <span class="mr-4">@{{ data.active ? '启用' : '禁用' }}</span>
+            <span class="me-4">@{{ data.active ? '启用' : '禁用' }}</span>
             <div>
-              <a :href="data.url_edit">编辑</a>
-              <a>删除</a>
+              <a :href="data.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
+              <a class="btn btn-outline-danger btn-sm">删除</a>
             </div>
           </div>
         </el-tree>
