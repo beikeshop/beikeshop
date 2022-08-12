@@ -40,6 +40,7 @@ class ProductList extends JsonResource
             'price_format' => currency_format($masterSku->price),
             'origin_price_format' => currency_format($masterSku->origin_price),
             'category_id' => $this->category_id ?? null,
+            'in_wishlist' => $this->inCurrentWishlist->id ?? 0,
 
             'images' => array_map(function ($item) {
                 return image_resize($item, 400, 400);
