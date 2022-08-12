@@ -50,7 +50,7 @@
         <el-form-item label="名称" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
-              { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+              { required: true, message: '请输入名称', trigger: 'blur' },
             ]"
           >
             <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="用户名"><template slot="prepend">@{{lang.name}}</template></el-input>
