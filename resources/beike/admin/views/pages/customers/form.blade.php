@@ -239,16 +239,16 @@
         },
 
         deleteAddress(id, index) {
-          const self = this;
-
-          $.ajax({
-            url: `/admin/customers/{{ $customer['id'] }}/addresses/${id}`,
-            type: 'delete',
-            success: function(res) {
-              self.$message.success(res.message);
-              self.addresses.splice(index, 1)
-            }
-          })
+          this.$confirm('确定要删除地址吗？', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            $http.delete(`customers/{{ $customer['id'] }}/addresses/${id}`).then((res) => {
+              this.$message.success(res.message);
+              this.addresses.splice(index, 1)
+            })
+          }).catch(()=>{})
         },
 
         addressFormSubmit(form) {

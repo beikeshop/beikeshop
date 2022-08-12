@@ -166,7 +166,7 @@
           this.editIndex = null;
 
           Object.keys(this.form).forEach(key => this.form[key] = '')
-          this.form.country_id =  @json((int)setting('base.country_id'))
+          this.form.country_id =  @json((int)system_setting('base.country_id'))
         },
 
         countryChange(e) {
