@@ -19,6 +19,7 @@ namespace Plugin\Paypal\Controllers;
 use Beike\Repositories\OrderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal;
 
 class PaypalController
@@ -42,11 +43,11 @@ class PaypalController
                 'client_id' => $paypalSetting['live_client_id'],
                 'client_secret' => $paypalSetting['live_secret'],
             ],
-            'payment_action' => 'Sale', // Can only be 'Sale', 'Authorization' or 'Order'
+            'payment_action' => 'Sale',
             'currency' => 'USD',
-            'notify_url' => '', // Change this accordingly for your application.
-            'locale' => 'en_US', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
-            'validate_ssl' => true, // Validate SSL when creating api client.
+            'notify_url' => '',
+            'locale' => 'en_US',
+            'validate_ssl' => true,
         ];
         config(['paypal' => null]);
         $this->paypalClient = new PayPal($config);
@@ -69,7 +70,7 @@ class PaypalController
     public function create(Request $request): JsonResponse
     {
         $data = \json_decode($request->getContent(), true);
-        $orderNumber = $data['order_number'];
+        $orderNumber = $data['orderNumber'];
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
         $orderTotalUsd = currency_format($order->total, 'USD', '', false);
@@ -100,30 +101,22 @@ class PaypalController
      */
     public function capture(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        $orderId = $data['orderId'];
-        $this->paypalClient->setApiCredentials(config('paypal'));
-        $token = $this->paypalClient->getAccessToken();
-        $this->paypalClient->setAccessToken($token);
-        $result = $this->paypalClient->capturePaymentOrder($orderId);
+        $data = \json_decode($request->getContent(), true);
+        $orderNumber = $data['orderNumber'];
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
 
-//            $result = $result->purchase_units[0]->payments->captures[0];
+        $paypalOrderId = $data['paypalOrderId'];
+        $result = $this->paypalClient->capturePaymentOrder($paypalOrderId);
+
         try {
             DB::beginTransaction();
             if ($result['status'] === "COMPLETED") {
-                $transaction = new Transaction;
-                $transaction->vendor_payment_id = $orderId;
-                $transaction->payment_gateway_id = $data['payment_gateway_id'];
-                $transaction->user_id = $data['user_id'];
-                $transaction->status = TransactionStatus::COMPLETED;
-                $transaction->save();
-                $order = Order::where('vendor_order_id', $orderId)->first();
-                $order->transaction_id = $transaction->id;
-                $order->status = TransactionStatus::COMPLETED;
+                $order->status = 'paid';
                 $order->save();
                 DB::commit();
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             dd($e);
         }

@@ -3,9 +3,11 @@
 
 <!-- Include the PayPal JavaScript SDK -->
 @if($payment_setting['sandbox_mode'])
-    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency=USD"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency=USD"></script>
 @else
-    <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency=USD"></script>
+    <script
+        src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.live_client_id') }}&currency=USD"></script>
 @endif
 
 
@@ -18,10 +20,10 @@
             return fetch('/plugin/paypal/create', {
                 method: 'POST',
                 headers: {
-                    'X-CSRF-Token':token
+                    'X-CSRF-Token': token
                 },
                 body: JSON.stringify({
-                    'order_number': "{{$order->number}}",
+                    orderNumber: "{{$order->number}}",
                 })
             }).then(function (res) {
                 //res.json();
@@ -38,28 +40,24 @@
             return fetch('/plugin/paypal/capture', {
                 method: 'POST',
                 headers: {
-                    'X-CSRF-Token':token
+                    'X-CSRF-Token': token
                 },
                 body: JSON.stringify({
-                    orderId: data.orderID,
+                    orderNumber: "{{$order->number}}",
+                    paypalOrderId: data.orderID,
                     payment_gateway_id: $("#payapalId").val(),
-                    user_id: "{{ auth()->user()->id }}",
                 })
             }).then(function (res) {
                 // console.log(res.json());
                 return res.json();
             }).then(function (orderData) {
-
                 // Successful capture! For demo purposes:
-                //  console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                var transaction = orderData.purchase_units[0].payments.captures[0];
-                iziToast.success({
-                    title: 'Success',
-                    message: 'Payment completed',
-                    position: 'topRight'
-                });
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                let captureStatus = orderData.status
+                if (captureStatus === 'COMPLETED') {
+                    window.location.href = "{{ shop_route('account.order.show', $order->number) }}"
+                }
             });
         }
-
     }).render('#paypal-button-container');
 </script>
