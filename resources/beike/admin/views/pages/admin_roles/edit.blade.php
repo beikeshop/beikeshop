@@ -100,7 +100,7 @@
 
             $http[type](url, this.form).then((res) => {
               layer.msg(res.message);
-              window.history.back();
+              location = '{{ admin_route('admin_roles.index') }}'
             })
           });
         },
