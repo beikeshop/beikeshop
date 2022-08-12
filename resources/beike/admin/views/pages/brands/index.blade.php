@@ -168,7 +168,7 @@
 
         deleteItem(id, index) {
           const self = this;
-          this.$confirm('确定要删除用户码？', '提示', {
+          this.$confirm('确定要删除品牌码？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
