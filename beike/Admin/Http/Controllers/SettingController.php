@@ -26,7 +26,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $themes =  [
+        $themes = [
             ['value' => 'default', 'label' => '默认主题'],
             ['value' => 'black', 'label' => '黑色主题']
         ];
@@ -67,6 +67,10 @@ class SettingController extends Controller
             SettingRepo::createOrUpdate($data);
         }
 
-        return redirect($this->getRedirect())->with('success', '修改成功');
+        $oldAdminName = admin_name();
+        $newAdminName = $settings['admin_name'] ?: 'admin';
+        $settingUrl = admin_route('settings.index');
+        $settingUrl = str_replace($oldAdminName, $newAdminName, $settingUrl);
+        return redirect($settingUrl)->with('success', '修改成功');
     }
 }
