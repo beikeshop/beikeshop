@@ -17,6 +17,7 @@
 namespace Plugin\Paypal\Controllers;
 
 use Beike\Repositories\OrderRepo;
+use Beike\Services\StateMachineService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -99,7 +100,7 @@ class PaypalController
      * @return JsonResponse
      * @throws \Throwable
      */
-    public function capture(Request $request)
+    public function capture(Request $request): JsonResponse
     {
         $data = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
@@ -112,8 +113,7 @@ class PaypalController
         try {
             DB::beginTransaction();
             if ($result['status'] === "COMPLETED") {
-                $order->status = 'paid';
-                $order->save();
+                StateMachineService::getInstance($order)->changeStatus('paid');
                 DB::commit();
             }
         } catch (\Exception $e) {
