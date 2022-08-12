@@ -11,10 +11,28 @@
 
 namespace Beike\Admin\Repositories;
 
+use Beike\Admin\Http\Resources\AdminUserDetail;
 use Beike\Models\AdminUser;
 
 class AdminUserRepo
 {
+    /**
+     * 获取后台用户管理员列表
+     */
+    public static function getAdminUsers(): array
+    {
+        $builder = AdminUser::query()->with(['roles']);
+        $adminUsers = $builder->get();
+        return AdminUserDetail::collection($adminUsers)->jsonSerialize();
+    }
+
+
+    /**
+     * 创建后台管理员用户
+     *
+     * @param $data
+     * @return AdminUser
+     */
     public static function createAdminUser($data): AdminUser
     {
         $adminUser = new AdminUser([
@@ -31,7 +49,13 @@ class AdminUserRepo
     }
 
 
-    public static function updateAdminUser($data): AdminUser
+    /**
+     * 更新后台管理员用户
+     *
+     * @param $data
+     * @return mixed
+     */
+    public static function updateAdminUser($data)
     {
         $id = $data['id'] ?? 0;
         $password = $data['password'] ?? '';
@@ -51,6 +75,11 @@ class AdminUserRepo
     }
 
 
+    /**
+     * 删除后台用户
+     *
+     * @param $adminUserId
+     */
     public static function deleteAdminUser($adminUserId)
     {
         $adminUser = AdminUser::query()->find($adminUserId);

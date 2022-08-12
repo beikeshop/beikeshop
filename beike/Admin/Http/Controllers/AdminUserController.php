@@ -11,22 +11,26 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Repositories\AdminUserRepo;
-use Beike\Models\AdminUser;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Beike\Admin\Repositories\AdminUserRepo;
 
 class AdminUserController extends Controller
 {
+    /**
+     * 获取后台用户列表
+     *
+     * @return mixed
+     */
     public function index()
     {
         $data = [
-            'admin_users' => AdminUser::query()->with(['roles'])->get(),
+            'admin_users' => AdminUserRepo::getAdminUsers(),
             'admin_roles' => Role::query()->get()
         ];
-
         return view('admin::pages.admin_users.index', $data);
     }
+
 
     public function store(Request $request)
     {
