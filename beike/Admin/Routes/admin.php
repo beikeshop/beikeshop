@@ -25,8 +25,8 @@ Route::prefix($adminName)
                 Route::resource('brands', Controllers\BrandController::class);
                 Route::get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
 
-                Route::resource('categories', Controllers\CategoryController::class);
                 Route::get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
+                Route::resource('categories', Controllers\CategoryController::class);
                 Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
 
                 Route::resource('customers', Controllers\CustomerController::class);
