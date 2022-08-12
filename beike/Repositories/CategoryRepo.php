@@ -98,6 +98,24 @@ class CategoryRepo
     }
 
 
+    /**
+     * 删除产品分类
+     * @throws \Exception
+     */
+    public static function delete($category)
+    {
+        if (is_int($category)) {
+            $category = Category::query()->findOrFail($category);
+        } elseif (!($category instanceof Category)) {
+            throw new \Exception('invalid category');
+        }
+        $category->descriptions()->delete();
+        $category->paths()->delete();
+        $category->productCategories()->delete();
+        $category->delete();
+    }
+
+
     public static function getName($id)
     {
         $category = Category::query()->find($id);

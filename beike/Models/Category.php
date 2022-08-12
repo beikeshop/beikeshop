@@ -39,4 +39,9 @@ class Category extends Base
     {
         return $this->hasMany(CategoryPath::class);
     }
+
+    public function productCategories(): HasMany
+    {
+        return $this->hasMany(ProductCategory::class);
+    }
 }

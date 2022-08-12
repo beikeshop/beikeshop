@@ -2,14 +2,12 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-
 use Beike\Models\Category;
 use Illuminate\Http\Request;
 use Beike\Repositories\CategoryRepo;
 use Beike\Admin\Services\CategoryService;
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
-
 
 class CategoryController extends Controller
 {
@@ -47,6 +45,21 @@ class CategoryController extends Controller
     {
         return $this->save($request, $category);
     }
+
+
+    /**
+     * 删除分类
+     * @param Request $request
+     * @param Category $category
+     * @return array
+     * @throws \Exception
+     */
+    public function destroy(Request $request, Category $category): array
+    {
+        CategoryRepo::delete($category);
+        return json_success('删除成功');
+    }
+
 
     public function name(int $id)
     {
