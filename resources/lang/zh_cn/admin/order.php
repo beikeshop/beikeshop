@@ -17,4 +17,5 @@ return [
     'orders_show' => '订单详情',
     'orders_update' => '更新订单',
     'orders_delete' => '删除订单',
+    'orders_update_status' => '更新状态',
 ];

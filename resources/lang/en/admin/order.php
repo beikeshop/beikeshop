@@ -17,4 +17,5 @@ return [
     'orders_show' => 'Detail',
     'orders_update' => 'Update',
     'orders_delete' => 'Delete',
+    'orders_update_status' => 'Update Status',
 ];

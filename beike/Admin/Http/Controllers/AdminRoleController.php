@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\AdminRoleRequest;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Cache;
@@ -48,7 +49,15 @@ class AdminRoleController extends Controller
         return view('admin::pages.admin_roles.edit', $data);
     }
 
-    public function store(Request $request)
+
+    /**
+     * 保存
+     *
+     * @param AdminRoleRequest $request
+     * @return array
+     * @throws \Exception
+     */
+    public function store(AdminRoleRequest $request): array
     {
         $adminUser = AdminRoleRepo::createAdminRole($request->toArray());
         return json_success('保存成功', $adminUser);

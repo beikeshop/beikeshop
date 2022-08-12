@@ -25,12 +25,7 @@ class AdminRoleRepo
      */
     public static function createAdminRole($data): Role
     {
-        $adminRole = new Role([
-            'name' => $data['name'],
-            'guard_name' => 'web_admin',
-        ]);
-        $adminRole->save();
-
+        $adminRole = Role::findOrCreate($data['name'], 'web_admin');
         $permissions = $data['permissions'];
         self::syncPermissions($adminRole, $permissions);
         return $adminRole;
@@ -78,7 +73,7 @@ class AdminRoleRepo
             }
         }
         if (empty($items)) {
-            throw new \Exception('无效的权限');
+            throw new \Exception('权限不能为空,请选择至少一项');
         }
         $adminRole->syncPermissions($items);
     }
