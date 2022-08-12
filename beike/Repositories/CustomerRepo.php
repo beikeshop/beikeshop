@@ -139,10 +139,10 @@ class CustomerRepo
         }
 
         if (!$customer->wishlists()->where('product_id', $productId)->first()) {
-            $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
+            $wishlist = $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
         }
 
-        return $customer;
+        return $wishlist;
     }
 
     /**

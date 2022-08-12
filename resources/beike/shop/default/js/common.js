@@ -54,6 +54,29 @@ export default {
     })
   },
 
+  addWishlist(id, e) {
+    const $btn = $(e);
+    let isWishlist = $btn.attr('data-in-wishlist') * 1;
+    const btnHtml = $btn.html();
+    const loadHtml = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+    if (isWishlist) {
+      $btn.html(loadHtml).prop('disabled', true);
+      $http.delete(`account/wishlist/${isWishlist}`, null, {hload: true}).then((res) => {
+        layer.msg(res.message)
+        $btn.attr('data-in-wishlist', '0');
+        $btn.find('i.bi').prop('class', 'bi bi-heart me-1')
+      }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
+    } else {
+      $btn.html(loadHtml).prop('disabled', true);
+      $http.post('account/wishlist', {product_id: id}, {hload: true}).then((res) => {
+        layer.msg(res.message)
+        $btn.attr('data-in-wishlist', res.data.id);
+        $btn.find('i.bi').prop('class', 'bi bi-heart-fill me-1')
+      }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
+    }
+  },
+
   /**
    * @description: 滑动固定顶部
    * @return {*}

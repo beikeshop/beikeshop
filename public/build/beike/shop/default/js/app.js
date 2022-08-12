@@ -2129,13 +2129,37 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
   },
-  addWishlist: function addWishlist(id) {
-    var isWishlist = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    $http.post('account/wishlist', {
-      product_id: id
-    }).then(function (res) {
-      layer.msg(res.message);
-    });
+  addWishlist: function addWishlist(id, e) {
+    var $btn = $(e);
+    var isWishlist = $btn.attr('data-in-wishlist') * 1;
+    var btnHtml = $btn.html();
+    var loadHtml = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+    if (isWishlist) {
+      $btn.html(loadHtml).prop('disabled', true);
+      $http["delete"]("account/wishlist/".concat(isWishlist), null, {
+        hload: true
+      }).then(function (res) {
+        layer.msg(res.message);
+        $btn.attr('data-in-wishlist', '0');
+        $btn.find('i.bi').prop('class', 'bi bi-heart me-1');
+      })["finally"](function () {
+        $btn.html(btnHtml).prop('disabled', false);
+      });
+    } else {
+      $btn.html(loadHtml).prop('disabled', true);
+      $http.post('account/wishlist', {
+        product_id: id
+      }, {
+        hload: true
+      }).then(function (res) {
+        layer.msg(res.message);
+        $btn.attr('data-in-wishlist', res.data.id);
+        $btn.find('i.bi').prop('class', 'bi bi-heart-fill me-1');
+      })["finally"](function () {
+        $btn.html(btnHtml).prop('disabled', false);
+      });
+    }
   },
 
   /**

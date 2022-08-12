@@ -2064,13 +2064,15 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/http */ "./resources/js/http.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/beike/admin/js/common.js");
+/* harmony import */ var _autocomplete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./autocomplete */ "./resources/beike/admin/js/autocomplete.js");
+/* harmony import */ var _autocomplete__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_autocomplete__WEBPACK_IMPORTED_MODULE_2__);
 var _document$querySelect;
 
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
-_common__WEBPACK_IMPORTED_MODULE_1__["default"].autocomplete();
+
 var base = document.querySelector('base').href;
 var asset = document.querySelector('meta[name="asset"]').content;
 var editor_language = ((_document$querySelect = document.querySelector('meta[name="editor_language"]')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.content) || 'zh_cn';
@@ -2164,6 +2166,133 @@ var tinymceInit = function tinymceInit() {
 
 /***/ }),
 
+/***/ "./resources/beike/admin/js/autocomplete.js":
+/*!**************************************************!*\
+  !*** ./resources/beike/admin/js/autocomplete.js ***!
+  \**************************************************/
+/***/ (() => {
+
+$(function () {
+  $.fn.autocomplete = function (option) {
+    return this.each(function () {
+      this.timer = null;
+      this.items = new Array();
+      $.extend(this, option);
+      $(this).attr('autocomplete', 'off'); // Focus
+
+      $(this).on('focus', function () {
+        this.request();
+      }); // Blur
+
+      $(this).on('blur', function () {
+        setTimeout(function (object) {
+          object.hide();
+        }, 200, this);
+      }); // Keydown
+
+      $(this).on('keydown', function (event) {
+        switch (event.keyCode) {
+          case 27:
+            // escape
+            this.hide();
+            break;
+
+          default:
+            this.request();
+            break;
+        }
+      }); // Click
+
+      this.click = function (event) {
+        event.preventDefault();
+        var value = $(event.target).parent().attr('data-value');
+
+        if (value && this.items[value]) {
+          this.select(this.items[value]);
+        }
+      }; // Show
+
+
+      this.show = function () {
+        var pos = $(this).position();
+        $(this).siblings('ul.dropdown-menu').css({
+          top: pos.top + $(this).outerHeight(),
+          left: pos.left
+        });
+        $(this).siblings('ul.dropdown-menu').show();
+      }; // Hide
+
+
+      this.hide = function () {
+        $(this).siblings('ul.dropdown-menu').hide();
+      }; // Request
+
+
+      this.request = function () {
+        clearTimeout(this.timer);
+        this.timer = setTimeout(function (object) {
+          object.source($(object).val(), $.proxy(object.response, object));
+        }, 200, this);
+      }; // Response
+
+
+      this.response = function (json) {
+        var hasFocus = $(this).is(':focus');
+        if (!hasFocus) return;
+        var html = '';
+
+        if (json.length) {
+          for (var i = 0; i < json.length; i++) {
+            this.items[json[i]['value']] = json[i];
+          }
+
+          for (var i = 0; i < json.length; i++) {
+            if (!json[i]['category']) {
+              html += '<li data-value="' + json[i]['value'] + '"><a href="#" class="dropdown-item">' + json[i]['label'] + '</a></li>';
+            }
+          } // Get all the ones with a categories
+
+
+          var category = new Array();
+
+          for (var i = 0; i < json.length; i++) {
+            if (json[i]['category']) {
+              if (!category[json[i]['category']]) {
+                category[json[i]['category']] = new Array();
+                category[json[i]['category']]['name'] = json[i]['category'];
+                category[json[i]['category']]['item'] = new Array();
+              }
+
+              category[json[i]['category']]['item'].push(json[i]);
+            }
+          }
+
+          for (var i in category) {
+            html += '<li class="dropdown-header">' + category[i]['name'] + '</li>';
+
+            for (j = 0; j < category[i]['item'].length; j++) {
+              html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
+            }
+          }
+        }
+
+        if (html) {
+          this.show();
+        } else {
+          this.hide();
+        }
+
+        $(this).siblings('ul.dropdown-menu').html(html);
+      };
+
+      $(this).after('<ul class="dropdown-menu"></ul>');
+      $(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));
+    });
+  };
+});
+
+/***/ }),
+
 /***/ "./resources/beike/admin/js/common.js":
 /*!********************************************!*\
   !*** ./resources/beike/admin/js/common.js ***!
@@ -2211,124 +2340,7 @@ __webpack_require__.r(__webpack_exports__);
       }, delay);
     };
   },
-  autocomplete: function autocomplete() {
-    $.fn.autocomplete = function (option) {
-      return this.each(function () {
-        this.timer = null;
-        this.items = new Array();
-        $.extend(this, option);
-        $(this).attr('autocomplete', 'off'); // Focus
-
-        $(this).on('focus', function () {
-          this.request();
-        }); // Blur
-
-        $(this).on('blur', function () {
-          setTimeout(function (object) {
-            object.hide();
-          }, 200, this);
-        }); // Keydown
-
-        $(this).on('keydown', function (event) {
-          switch (event.keyCode) {
-            case 27:
-              // escape
-              this.hide();
-              break;
-
-            default:
-              this.request();
-              break;
-          }
-        }); // Click
-
-        this.click = function (event) {
-          event.preventDefault();
-          var value = $(event.target).parent().attr('data-value');
-
-          if (value && this.items[value]) {
-            this.select(this.items[value]);
-          }
-        }; // Show
-
-
-        this.show = function () {
-          var pos = $(this).position();
-          $(this).siblings('ul.dropdown-menu').css({
-            top: pos.top + $(this).outerHeight(),
-            left: pos.left
-          });
-          $(this).siblings('ul.dropdown-menu').show();
-        }; // Hide
-
-
-        this.hide = function () {
-          $(this).siblings('ul.dropdown-menu').hide();
-        }; // Request
-
-
-        this.request = function () {
-          clearTimeout(this.timer);
-          this.timer = setTimeout(function (object) {
-            object.source($(object).val(), $.proxy(object.response, object));
-          }, 200, this);
-        }; // Response
-
-
-        this.response = function (json) {
-          var hasFocus = $(this).is(':focus');
-          if (!hasFocus) return;
-          var html = '';
-
-          if (json.length) {
-            for (var i = 0; i < json.length; i++) {
-              this.items[json[i]['value']] = json[i];
-            }
-
-            for (var i = 0; i < json.length; i++) {
-              if (!json[i]['category']) {
-                html += '<li data-value="' + json[i]['value'] + '"><a href="#" class="dropdown-item">' + json[i]['label'] + '</a></li>';
-              }
-            } // Get all the ones with a categories
-
-
-            var category = new Array();
-
-            for (var i = 0; i < json.length; i++) {
-              if (json[i]['category']) {
-                if (!category[json[i]['category']]) {
-                  category[json[i]['category']] = new Array();
-                  category[json[i]['category']]['name'] = json[i]['category'];
-                  category[json[i]['category']]['item'] = new Array();
-                }
-
-                category[json[i]['category']]['item'].push(json[i]);
-              }
-            }
-
-            for (var i in category) {
-              html += '<li class="dropdown-header">' + category[i]['name'] + '</li>';
-
-              for (j = 0; j < category[i]['item'].length; j++) {
-                html += '<li data-value="' + category[i]['item'][j]['value'] + '"><a href="#">&nbsp;&nbsp;&nbsp;' + category[i]['item'][j]['label'] + '</a></li>';
-              }
-            }
-          }
-
-          if (html) {
-            this.show();
-          } else {
-            this.hide();
-          }
-
-          $(this).siblings('ul.dropdown-menu').html(html);
-        };
-
-        $(this).after('<ul class="dropdown-menu"></ul>');
-        $(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));
-      });
-    };
-  }
+  listDelete: function listDelete() {}
 });
 
 /***/ }),
@@ -2819,6 +2831,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

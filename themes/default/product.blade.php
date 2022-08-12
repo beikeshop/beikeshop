@@ -12,7 +12,6 @@
 @endpush
 
 @section('content')
-
   <div class="container" id="product-app" v-cloak>
 
     {{ Diglactic\Breadcrumbs\Breadcrumbs::render('product', $product) }}
@@ -40,7 +39,6 @@
           <div class="right" id="zoom">
             <img :src="images[0]?.preview || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
           </div>
-
         </div>
       </div>
 
@@ -104,7 +102,9 @@
             </button>
           </div>
           <div class="add-wishlist">
-            <button class="btn btn-link ps-0 text-dark" @click="addWishlist"><i class="bi bi-suit-heart-fill me-1"></i>加入收藏夹</button>
+            <button class="btn btn-link ps-0 text-dark" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+              <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> 加入收藏夹
+            </button>
           </div>
         </div>
       </div>
@@ -240,12 +240,6 @@
               }
             })
           });
-        },
-
-        addWishlist() {
-          $http.post('account/wishlist', {product_id: '{{ $product['id'] }}'}).then((res) => {
-            layer.msg(res.message)
-          })
         },
       }
     });

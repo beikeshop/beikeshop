@@ -2,7 +2,7 @@ import http from "../../../js/http";
 window.$http = http;
 import common from "./common";
 window.bk = common;
-common.autocomplete();
+import "./autocomplete";
 
 const base = document.querySelector('base').href;
 const asset = document.querySelector('meta[name="asset"]').content;
