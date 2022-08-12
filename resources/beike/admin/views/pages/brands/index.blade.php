@@ -157,7 +157,7 @@
               this.$message.success(res.message);
 
               if (this.dialog.type == 'add') {
-                this.brands.data.push(res.data)
+                this.brands.data.unshift(res.data)
               } else {
                 this.brands.data[this.dialog.index] = res.data
               }
