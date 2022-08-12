@@ -57,8 +57,7 @@ class ProductRepo
     {
         $builder = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
         $products = $builder->get();
-        $items = ProductList::collection($products);
-        return $items;
+        return ProductList::collection($products);
     }
 
 

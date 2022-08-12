@@ -25,18 +25,25 @@ class ProductList extends JsonResource
      */
     public function toArray($request): array
     {
+        $masterSku = $this->master_sku;
+        if (empty($masterSku)) {
+            throw new \Exception("invalid master sku for product {$this->id}");
+        }
+
         return [
             'id' => $this->id,
+            'sku_id' => $masterSku->id,
             'name' => $this->description->name ?? '',
             'url' => shop_route('products.show', ['product' => $this]),
-            'price' => $this->master_sku->price,
-            'origin_price' => $this->master_sku->origin_price,
-            'images' => array_map(function ($item){
-                return image_resize($item, 400, 400);
-            }, array_merge($this->images ?? [], $this->master_sku->images ?? [])),
-            'price_format' => currency_format($this->master_sku->price),
-            'origin_price_format' => currency_format($this->master_sku->origin_price),
+            'price' => $masterSku->price,
+            'origin_price' => $masterSku->origin_price,
+            'price_format' => currency_format($masterSku->price),
+            'origin_price_format' => currency_format($masterSku->origin_price),
             'category_id' => $this->category_id ?? null,
+
+            'images' => array_map(function ($item) {
+                return image_resize($item, 400, 400);
+            }, array_merge($this->images ?? [], $masterSku->images ?? [])),
         ];
     }
 }
