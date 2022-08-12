@@ -3,9 +3,19 @@
 body.page-product {
   .product-image {
     .swiper {
-      height: 500px;
+      height: 250px;
+      @media (min-width: 480px) {
+        height: 400px;
+      }
+      @media (min-width: 768px) {
+        height: 500px;
+      }
+
       &:hover {
         .swiper-pager > div {
+          @media (max-width: 768px) {
+            display: none;
+          }
           background-color: rgba(255, 255, 255, 0.548);
           opacity: 1;
           &:hover {
@@ -21,7 +31,7 @@ body.page-product {
         border: 1px solid #eee;
         margin-bottom: 10px;
         width: 80px;
-        height: 80px !important;
+        // height: 80px !important;
         padding: 2px;
         cursor: pointer;
 
@@ -38,7 +48,7 @@ body.page-product {
         }
         .swiper-button-next {
           border: 0;
-          top: 518px;
+          top: 485px;
           left: 50%;
 
           height: 55px;

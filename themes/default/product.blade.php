@@ -17,12 +17,17 @@
     {{ Diglactic\Breadcrumbs\Breadcrumbs::render('product', $product) }}
 
     <div class="row mb-5" id="product-top">
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-6 mb-3">
         <div class="product-image d-flex align-items-start">
 
           <div class="left"  v-if="images.length">
             <div class="swiper" id="swiper">
               <div class="swiper-wrapper">
+                <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
+                  <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
+                    <img :src="image.thumb" class="img-fluid">
+                  </a>
+                </div>
                 <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
                   <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
                     <img :src="image.thumb" class="img-fluid">
@@ -253,8 +258,23 @@
 
     var swiper = new Swiper("#swiper", {
       direction: "vertical",
-      slidesPerView: 6,
-      spaceBetween:10,
+      slidesPerView: 1,
+      spaceBetween:3,
+      breakpoints:{
+        375:{
+          slidesPerView: 3,
+          spaceBetween:3,
+        },
+        480:{
+          slidesPerView: 4,
+          spaceBetween:27,
+        },
+        768:{
+          slidesPerView: 6,
+          spaceBetween:3,
+        },
+
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
