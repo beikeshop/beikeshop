@@ -11,12 +11,10 @@
 
 namespace Beike\Shop\Services;
 
-use Beike\Models\Cart;
-use Beike\Models\CartProduct;
 use Beike\Models\Customer;
-use Beike\Models\Order;
 use Beike\Repositories\CartRepo;
 use Beike\Repositories\OrderRepo;
+use Illuminate\Support\Facades\DB;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
@@ -81,9 +79,15 @@ class CheckoutService
         $checkoutData = self::checkoutData();
         $checkoutData['customer'] = $customer;
 
-        $order = OrderRepo::create($checkoutData);
-
-        CartRepo::clearSelectedCartProducts($customer);
+        try {
+            DB::beginTransaction();
+            $order = OrderRepo::create($checkoutData);
+            CartRepo::clearSelectedCartProducts($customer);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e);
+        }
 
         // Notification::endmail();
         // Notification::sendsms();

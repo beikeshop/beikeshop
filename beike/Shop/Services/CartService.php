@@ -47,8 +47,7 @@ class CartService
             return $description && $product;
         });
 
-        $cartList = CartDetail::collection($cartItems)->jsonSerialize();
-        return $cartList;
+        return CartDetail::collection($cartItems)->jsonSerialize();
     }
 
 

@@ -15,8 +15,16 @@ class ProductSku extends Base
         'images' => 'array',
     ];
 
+    protected $appends = ['image'];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function getImageAttribute()
+    {
+        $images = $this->images ?? [];
+        return $images[0] ?? '';
     }
 }
