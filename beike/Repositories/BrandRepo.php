@@ -184,7 +184,7 @@ class BrandRepo
         }
 
         $items = [];
-        $brands = self::getBuilder()->select('id')->get();
+        $brands = self::getBuilder()->select(['id', 'name'])->get();
         foreach ($brands as $brand) {
             $items[$brand->id] = [
                 'id' => $brand->id,
