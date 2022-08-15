@@ -6,6 +6,10 @@ body.page-order-success, body.page-payment {
       &.main-body {
         padding: 3rem;
         padding-left: 7rem;
+
+        @media (max-width:768px) {
+          padding: 3rem;
+        }
       }
 
       .order-top {
@@ -16,6 +20,10 @@ body.page-order-success, body.page-payment {
 
         .left {
           margin-top: -6px;
+
+          @media (max-width:768px) {
+            display: none;
+          }
 
           i {
             color: #4caf50;
@@ -28,6 +36,9 @@ body.page-order-success, body.page-payment {
           flex: 1;
           margin-left: 2rem;
 
+          @media (max-width:768px) {
+            margin: 0;
+          }
           .table {
             margin-bottom: 0;
           }
@@ -48,6 +59,10 @@ body.page-order-success, body.page-payment {
       .order-bottom {
         margin-left: calc(2rem + 80px);
         line-height: 2;
+
+        @media (max-width:768px) {
+          margin: 0;
+        }
       }
     }
   }

@@ -1148,6 +1148,11 @@ body.page-order-success .order-wrap .card-body.main-body, body.page-payment .ord
   padding: 3rem;
   padding-left: 7rem;
 }
+@media (max-width: 768px) {
+  body.page-order-success .order-wrap .card-body.main-body, body.page-payment .order-wrap .card-body.main-body {
+    padding: 3rem;
+  }
+}
 body.page-order-success .order-wrap .card-body .order-top, body.page-payment .order-wrap .card-body .order-top {
   padding-bottom: 2.7rem;
   margin-bottom: 2.7rem;
@@ -1157,6 +1162,11 @@ body.page-order-success .order-wrap .card-body .order-top, body.page-payment .or
 body.page-order-success .order-wrap .card-body .order-top .left, body.page-payment .order-wrap .card-body .order-top .left {
   margin-top: -6px;
 }
+@media (max-width: 768px) {
+  body.page-order-success .order-wrap .card-body .order-top .left, body.page-payment .order-wrap .card-body .order-top .left {
+    display: none;
+  }
+}
 body.page-order-success .order-wrap .card-body .order-top .left i, body.page-payment .order-wrap .card-body .order-top .left i {
   color: #4caf50;
   font-size: 80px;
@@ -1165,6 +1175,11 @@ body.page-order-success .order-wrap .card-body .order-top .left i, body.page-pay
 body.page-order-success .order-wrap .card-body .order-top .right, body.page-payment .order-wrap .card-body .order-top .right {
   flex: 1;
   margin-left: 2rem;
+}
+@media (max-width: 768px) {
+  body.page-order-success .order-wrap .card-body .order-top .right, body.page-payment .order-wrap .card-body .order-top .right {
+    margin: 0;
+  }
 }
 body.page-order-success .order-wrap .card-body .order-top .right .table, body.page-payment .order-wrap .card-body .order-top .right .table {
   margin-bottom: 0;
@@ -1181,6 +1196,11 @@ body.page-order-success .order-wrap .card-body .order-top .right .order-info, bo
 body.page-order-success .order-wrap .card-body .order-bottom, body.page-payment .order-wrap .card-body .order-bottom {
   margin-left: calc(2rem + 80px);
   line-height: 2;
+}
+@media (max-width: 768px) {
+  body.page-order-success .order-wrap .card-body .order-bottom, body.page-payment .order-wrap .card-body .order-bottom {
+    margin: 0;
+  }
 }
 
 body.page-account-order-list {
