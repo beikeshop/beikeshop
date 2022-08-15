@@ -19,15 +19,15 @@
             <x-admin-form-input
               :name="$column['name']"
               :title="$column['label']"
-              :class="$errors->has($column['name']) ? 'is-invalid' : ''"
+              {{-- :class="$errors->has($column['name']) ? 'is-invalid' : ''" --}}
               :required="$column['required'] ? true : false"
               :value="old($column['name'], $column['value'] ?? '')">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
               @endif
-              @if ($errors->has($column['name']))
+{{--               @if ($errors->has($column['name']))
                 <span class="invalid-feedback" role="alert">{{ $errors->first($column['name']) }}</span>
-              @endif
+              @endif --}}
             </x-admin-form-input>
           @endif
 
