@@ -12,13 +12,6 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Page;
-use Beike\Models\Category;
-use Beike\Repositories\CategoryRepo;
-use Beike\Repositories\ProductRepo;
-use Beike\Repositories\BrandRepo;
-
-
 class MenuRepo
 {
     /**
@@ -37,7 +30,7 @@ class MenuRepo
         $menus = $menuSetting['menus'];
 
         foreach ($menus as $index => $menu) {
-            $menu['link'] = handle_link($menu['link']);
+            $menu['link'] = handle_link($menu['link'])['link'] ?? '';
             $menu['name'] = $menu['name'][$locale] ?? '';
             $menu['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
 
