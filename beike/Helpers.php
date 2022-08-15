@@ -564,3 +564,8 @@ function add_action($hook, $callback, int $priority = 20, int $arguments = 1)
 {
     Eventy::addAction($hook, $callback, $priority, $arguments);
 }
+
+function installed()
+{
+    return file_exists(storage_path('installed'));
+}

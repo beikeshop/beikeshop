@@ -39,8 +39,7 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $uri = request()->getRequestUri();
-        if (Str::startsWith($uri, "/installer")) {
+        if(!installed()) {
             return;
         }
         $manager = app('plugin');
