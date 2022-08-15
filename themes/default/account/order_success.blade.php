@@ -25,7 +25,7 @@
                   </tr>
                   <tr>
                     <td>支付方式：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
-                    <td><a href="/">查看订单详情</a></td>
+                    <td><a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}">查看订单详情</a></td>
                   </tr>
                   <tr>
                     <td><a href="{{ shop_route('orders.pay', [$order['number']]) }}" class="btn btn-primary btn-sm">立即支付</a></td>
