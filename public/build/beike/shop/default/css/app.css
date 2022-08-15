@@ -1285,6 +1285,19 @@ body.page-account-address .addresses-wrap .item .address-bottom, body.page-check
 body.page-account-address .addresses-wrap .item .address-bottom a, body.page-checkout .addresses-wrap .item .address-bottom a {
   color: #2d68a8;
 }
+@media (max-width: 768px) {
+  body.page-account-address .dialog-margin, body.page-checkout .dialog-margin {
+    margin-top: 10px;
+  }
+}
+body.page-account-address .dialog-address, body.page-checkout .dialog-address {
+  display: block;
+}
+@media (min-width: 768px) {
+  body.page-account-address .dialog-address, body.page-checkout .dialog-address {
+    display: flex;
+  }
+}
 
 body.page-list .brand-item {
   display: flex;
@@ -1312,6 +1325,7 @@ body.page-list .curser > li > a {
   display: block;
   color: #242424;
   transition: all 0.5s;
+  margin: 0 auto;
 }
 body.page-list .curser > li > a:hover {
   text-decoration: none;

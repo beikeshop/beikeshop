@@ -8,10 +8,10 @@
     <p class="fw-bold fs-3 d-flex justify-content-center mt-5 mb-4">品牌列表</p>
   </div>
 
-  <ul class="d-flex justify-content-between mt-3 align-items-baseline mb-3 curser">
+  <ul class="d-flex justify-content-start mt-3 align-items-baseline mb-3 curser flex-wrap">
     @foreach ($brands as $brand)
-      <li class="fs-6 border flex-fill align-content-center text-center">
-        <a href="brands#{{ $brand['0']['first'] }}" class="py-2">{{ $brand['0']['first'] }}</a>
+      <li class="fs-6 border align-content-center text-center">
+        <a href="brands#{{ $brand['0']['first'] }}" class="py-2 px-3">{{ $brand['0']['first'] }}</a>
       </li>
     @endforeach
   </ul>

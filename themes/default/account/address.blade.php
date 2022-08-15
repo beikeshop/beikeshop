@@ -83,6 +83,9 @@
           default: false,
         },
 
+        dialogWidth:'600px',
+        dialogcol:'col-4',
+
         addresses: @json($addresses ?? []),
 
         source: {
@@ -101,6 +104,12 @@
 
       // 实例被挂载后调用
       mounted () {
+        this.setDialogWidth();
+        window.onresize = () => {
+          return (() => {
+            this.setDialogWidth()
+          })()
+        }
       },
 
       beforeMount () {
@@ -108,6 +117,17 @@
       },
 
       methods: {
+        setDialogWidth() {
+          var val = document.body.clientWidth
+          if (val < 768) {
+            this.dialogWidth = '360px'
+            this.dialogcol = 'col-12'
+          } else {
+            this.dialogWidth = '600px'
+            this.dialogcol = 'col-4'
+          }
+        },
+
         editAddress(index) {
           if (typeof index == 'number') {
             this.editIndex = index;

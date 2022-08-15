@@ -17,6 +17,7 @@ body.page-list {
 
   li {
     list-style: none;
+
     a{
       color: #242424;
       text-decoration: none;
@@ -30,6 +31,8 @@ body.page-list {
       display: block;
       color: #242424;
       transition: all .5s;
+      margin: 0 auto;
+
       &:hover {
         text-decoration: none;
         background-color: #eee;

@@ -7,7 +7,7 @@
       <div class="row">
         @foreach ($footer_content['services']['items'] as $item)
           <div class="col-lg-3 col-md-6 col-12">
-            <div class="service-item">
+            <div class="service-item my-1">
               <div class="icon"><img src="{{ image_resize($item['image'], 80, 80) }}" class="img-fluid"></div>
               <div class="text">
                 <p class="title">{{ $item['title'][locale()] ?? '' }}</p>

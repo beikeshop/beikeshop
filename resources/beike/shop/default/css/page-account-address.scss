@@ -70,4 +70,23 @@ body.page-account-address, body.page-checkout {
     }
   }
 
+  // .dialog-width {
+  //   margin: 0 auto;
+  //   width: 90%;
+  // }
+
+  .dialog-margin {
+    @media (max-width:768px) {
+      margin-top: 10px;
+    }
+
+  }
+  .dialog-address {
+    display: block;
+
+    @media (min-width:768px) {
+      display: flex;
+    }
+  }
+
 }
