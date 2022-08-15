@@ -113,7 +113,7 @@ class CreateTables extends Migration
             $table->string('type')->comment('类型,包括 system、plugin');
             $table->string('space')->comment('配置组, 比如 stripe, paypal, flat_shipping');
             $table->string('name')->comment('配置名称, 类似字段名');
-            $table->string('value')->comment('配置值');
+            $table->text('value')->comment('配置值');
             $table->boolean('json')->default(false);
             $table->timestamps();
         });

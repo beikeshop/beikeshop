@@ -17,6 +17,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
+        if (installed()) {
+            exit('Already installed');
+        }
         return view('installer::welcome');
     }
 }
