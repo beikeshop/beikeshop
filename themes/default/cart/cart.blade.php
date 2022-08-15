@@ -16,7 +16,7 @@
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9">
-        <div class="cart-products-wrap">
+        <div class="cart-products-wrap table-responsive">
           <table class="table">
             <thead>
               <tr>
@@ -38,7 +38,7 @@
                 <td>
                   <div class="d-flex align-items-center p-image">
                     <input class="form-check-input" type="checkbox" v-model="product.selected">
-                    {{-- <img :src="product.image" class="img-fluid"> --}}
+                    <img :src="product.image" class="img-fluid">
                   </div>
                 </td>
                 <td>

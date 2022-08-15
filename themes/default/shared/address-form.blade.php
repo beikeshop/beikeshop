@@ -4,7 +4,7 @@
   $address_form_rules = $address_form_rules ?? 'addressRules';
 @endphp
 
-<el-dialog title="编辑地址" :visible.sync="{{ $address_form_show }}" width="600px" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
+<el-dialog custom-class="mobileWidth" title="编辑地址" :visible.sync="{{ $address_form_show }}" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
   <el-form ref="addressForm" :rules="{{ $address_form_rules }}" :model="{{ $address_form_key }}" label-width="100px">
     <el-form-item label="姓名" prop="name">
       <el-input v-model="{{ $address_form_key }}.name"></el-input>
@@ -23,7 +23,7 @@
             </el-select>
           </el-form-item>
         </div>
-        <div class="col-4">
+        <div class="col-4 mt-2 mt-sm-0">
           <el-form-item prop="zone_id">
             <el-select v-model="{{ $address_form_key }}.zone_id" filterable placeholder="选择省份">
               <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
@@ -32,7 +32,7 @@
             </el-select>
           </el-form-item>
         </div>
-        <div class="col-4">
+        <div class="col-4 mt-2 mt-sm-0">
           <el-form-item prop="city">
             <el-input v-model="{{ $address_form_key }}.city" placeholder="输入 city"></el-input>
           </el-form-item>

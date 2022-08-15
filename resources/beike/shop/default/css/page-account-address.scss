@@ -70,23 +70,30 @@ body.page-account-address, body.page-checkout {
     }
   }
 
-  // .dialog-width {
-  //   margin: 0 auto;
-  //   width: 90%;
-  // }
-
-  .dialog-margin {
-    @media (max-width:768px) {
-      margin-top: 10px;
+  .mobileWidth {
+    width: 600px;
+    @media (max-width: 768px) {
+      width: 95%;
+      }
     }
 
-  }
   .dialog-address {
     display: block;
+
+    >div {
+    @media (max-width:768px) {
+      width: 100%;
+      // margin-bottom: 10px;
+      // &:nth-last-child(){
+      //   margin-bottom: 0;
+      // }
+    }
+    }
 
     @media (min-width:768px) {
       display: flex;
     }
   }
+
 
 }
