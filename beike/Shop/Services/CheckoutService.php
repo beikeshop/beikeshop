@@ -86,11 +86,8 @@ class CheckoutService
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
+            throw $e;
         }
-
-        // Notification::endmail();
-        // Notification::sendsms();
         return $order;
     }
 

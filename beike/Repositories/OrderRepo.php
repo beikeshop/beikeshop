@@ -11,6 +11,7 @@
 
 namespace Beike\Repositories;
 
+use Beike\Models\Address;
 use Carbon\Carbon;
 use Beike\Models\Order;
 use Illuminate\Database\Eloquent\Model;
@@ -148,8 +149,8 @@ class OrderRepo
         $shippingAddressId = $current['shipping_address_id'] ?? 0;
         $paymentAddressId = $current['payment_address_id'] ?? 0;
 
-        $shippingAddress = AddressRepo::find($shippingAddressId);
-        $paymentAddress = AddressRepo::find($paymentAddressId);
+        $shippingAddress = Address::query()->findOrFail($shippingAddressId);
+        $paymentAddress = Address::query()->findOrFail($paymentAddressId);
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $paymentMethodCode = $current['payment_method_code'] ?? '';

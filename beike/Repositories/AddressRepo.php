@@ -18,18 +18,17 @@ class AddressRepo
     /**
      * 创建一个address记录
      * @param $data
-     * @return int
+     * @return mixed
      */
     public static function create($data)
     {
-        $address = Address::query()->create($data);
-        return $address;
+        return Address::query()->create($data);
     }
 
     /**
      * @param $address
      * @param $data
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
+     * @return mixed
      * @throws \Exception
      */
     public static function update($address, $data)
@@ -46,7 +45,7 @@ class AddressRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return mixed
      */
     public static function find($id)
     {
@@ -65,6 +64,13 @@ class AddressRepo
         }
     }
 
+
+    /**
+     * 获取某个客户地址列表
+     *
+     * @param $customer
+     * @return mixed
+     */
     public static function listByCustomer($customer)
     {
         if (gettype($customer) != 'object') {
