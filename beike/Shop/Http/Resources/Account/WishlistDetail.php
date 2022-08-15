@@ -29,8 +29,9 @@ class WishlistDetail extends JsonResource
             'product_id' => $this->product_id,
             'image' => image_resize($image),
             'product_name' => $product->description->name,
-            'price' => currency_format($product->price)
+            'price' => currency_format($masterSku->price)
         ];
+
         return $data;
     }
 }
