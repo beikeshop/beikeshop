@@ -15,5 +15,5 @@ return [
     'customer_new' => 'Customer New',
     'order_amount' => 'Order Amount',
     'yesterday' => 'Yesterday',
-    'day_before' => 'A day earlier',
+    'day_before' => 'Last day',
 ];
