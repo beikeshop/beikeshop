@@ -120,6 +120,9 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
+        $sort = $data['sort'] ?? 'updated_at';
+        $order = $data['order'] ?? 'desc';
+        $builder->orderBy($sort, $order);
 
         return $builder;
     }

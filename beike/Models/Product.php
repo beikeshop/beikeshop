@@ -59,11 +59,6 @@ class Product extends Base
         return $this->hasOne(CustomerWishlist::class)->where('customer_id', current_customer() ? current_customer()->id : 0);
     }
 
-    public function getPriceFormattedAttribute(): string
-    {
-        return '$' . $this->price;
-    }
-
     public function getUrlAttribute()
     {
         return shop_route('products.show', ['product' => $this]);
