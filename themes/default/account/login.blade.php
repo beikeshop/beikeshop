@@ -36,7 +36,7 @@
                 <el-input v-model="loginForm.email" placeholder="邮箱地址"></el-input>
               </el-form-item>
 
-              <el-form-item label="密码" prop="password" class="mb-2">
+              <el-form-item label="密码" prop="password" class="mb-4">
                 <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
               </el-form-item>
 
