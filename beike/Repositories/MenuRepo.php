@@ -27,45 +27,52 @@ class MenuRepo
      * @return array|mixed
      * @throws \Exception
      */
-    public static function handleMenuData($MenuSetting = [])
+    public static function handleMenuData($menuSetting = [])
     {
-        if (empty($MenuSetting)) {
-            $MenuSetting = system_setting('base.menu_setting');
+        if (empty($menuSetting)) {
+            $menuSetting = system_setting('base.menu_setting');
         }
 
         $locale = locale();
-
-        $menus = $MenuSetting['menus'];
+        $menus = $menuSetting['menus'];
 
         foreach ($menus as $index => $menu) {
-            $menus[$index]['link'] = handle_link($menu['link']);
-            $menus[$index]['name'] = $menu['name'][$locale] ?? '';
-            $menus[$index]['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
+            $menu['link'] = handle_link($menu['link']);
+            $menu['name'] = $menu['name'][$locale] ?? '';
+            $menu['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
 
             if ($menu['childrenGroup']) {
-                foreach ($menu['childrenGroup'] as $group_index => $childrenGroup) {
-                    $menus[$index]['childrenGroup'][$group_index]['name'] = $childrenGroup['name'][$locale];
+                $menu['childrenGroup'] = self::handleChildrenGroup($menu['childrenGroup']);
+            }
+            $menus[$index] = $menu;
+        }
+        return $menus;
+    }
 
-                    if ($childrenGroup['type'] == 'image') {
-                        $menus[$index]['childrenGroup'][$group_index]['image']['image'] = image_origin($childrenGroup['image']['image'][$locale]);
-                        $menus[$index]['childrenGroup'][$group_index]['image']['link'] = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
-                        continue;
-                    }
 
-                    // 判断 $childrenGroup['children'] 是否为空，如果为空，则删除该分组
-                    if (empty($childrenGroup['children'])) {
-                        unset($menus[$index]['childrenGroup'][$group_index]);
-                    } else {
-                        if ($childrenGroup['children']) {
-                            foreach ($childrenGroup['children'] as $children_index => $children) {
-                                $menus[$index]['childrenGroup'][$group_index]['children'][$children_index]['link'] = handle_link($children['link']);
-                            }
-                        }
-                    }
+    /**
+     * 处理头部 menu 子菜单数据
+     *
+     * @param $childrenGroups
+     * @return mixed
+     * @throws \Exception
+     */
+    private static function handleChildrenGroup($childrenGroups)
+    {
+        $locale = locale();
+        foreach ($childrenGroups as $groupIndex => $childrenGroup) {
+            $childrenGroup['name'] = $childrenGroup['name'][$locale];
+            if ($childrenGroup['type'] == 'image') {
+                $childrenGroup['image']['image'] = image_origin($childrenGroup['image']['image'][$locale]);
+                $childrenGroup['image']['link'] = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
+            } elseif ($childrenGroup['children']) {
+                foreach ($childrenGroup['children'] as $childrenIndex => $children) {
+                    $children['link'] = handle_link($children['link']);
+                    $childrenGroup['children'][$childrenIndex] = $children;
                 }
             }
+            $childrenGroups[$groupIndex] = $childrenGroup;
         }
-
-        return $menus;
+        return $childrenGroups;
     }
 }
