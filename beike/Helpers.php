@@ -3,19 +3,19 @@
 use Beike\Models\Customer;
 use Beike\Models\Language;
 use Beike\Models\AdminUser;
+use Illuminate\Support\Str;
+use Beike\Repositories\PageRepo;
 use Beike\Repositories\BrandRepo;
+use Illuminate\Support\Collection;
+use Beike\Repositories\ProductRepo;
+use Beike\Services\CurrencyService;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
-use Beike\Repositories\PageRepo;
-use Beike\Repositories\ProductRepo;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
-use Beike\Services\CurrencyService;
 use Beike\Repositories\LanguageRepo;
 use TorMorten\Eventy\Facades\Eventy;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * 获取后台设置到 settings 表的值
