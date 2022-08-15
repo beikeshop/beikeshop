@@ -21,8 +21,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Beike\Repositories\FooterRepo;
 use Beike\Repositories\MenuRepo;
+use Beike\Repositories\FooterRepo;
 use Illuminate\Support\Facades\View;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
@@ -35,6 +35,9 @@ class ShareViewData
         return $next($request);
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function loadShopShareViewData()
     {
         if (is_admin()) {

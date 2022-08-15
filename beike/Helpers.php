@@ -182,6 +182,25 @@ function type_label($type, $value, array $texts = []): string
 
 
 /**
+ * 处理配置链接
+ *
+ * @param $link
+ * @return array
+ */
+function handle_link($link): array
+{
+    $type = $link['type'] ?? '';
+    $value = $link['value'] ?? '';
+    $texts = $link['text'] ?? [];
+
+    $link['link'] = type_route($type, $value);
+    $link['text'] = type_label($type, $value, $texts);
+
+    return $link;
+}
+
+
+/**
  * 是否访问的后端
  * @return bool
  */

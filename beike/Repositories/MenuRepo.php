@@ -38,7 +38,7 @@ class MenuRepo
         $menus = $MenuSetting['menus'];
 
         foreach ($menus as $index => $menu) {
-            $menus[$index]['link'] = self::handleLink($menu['link']);
+            $menus[$index]['link'] = handle_link($menu['link']);
             $menus[$index]['name'] = $menu['name'][$locale] ?? '';
             $menus[$index]['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
 
@@ -58,7 +58,7 @@ class MenuRepo
                     } else {
                         if ($childrenGroup['children']) {
                             foreach ($childrenGroup['children'] as $children_index => $children) {
-                                $menus[$index]['childrenGroup'][$group_index]['children'][$children_index]['link'] = self::handleLink($children['link']);
+                                $menus[$index]['childrenGroup'][$group_index]['children'][$children_index]['link'] = handle_link($children['link']);
                             }
                         }
                     }
@@ -67,23 +67,5 @@ class MenuRepo
         }
 
         return $menus;
-    }
-
-    /**
-     * 处理链接
-     *
-     * @param $link
-     * @return array
-     */
-    private static function handleLink($link): array
-    {
-        $type = $link['type'] ?? '';
-        $value = $link['value'] ?? '';
-        $texts = $link['text'] ?? [];
-
-        $link['link'] = type_route($type, $value);
-        $link['text'] = type_label($type, $value, $texts);
-
-        return $link;
     }
 }
