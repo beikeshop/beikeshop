@@ -28,7 +28,12 @@ class MenusController extends Controller
 
     public function latestProducts()
     {
-        $products = ProductRepo::getBuilder()->whereHas('master_sku')->with('inCurrentWishlist')->orderByDesc('updated_at')->paginate(40);
+        $products = ProductRepo::getBuilder(['active' => 1])
+            ->whereHas('master_sku')
+            ->with('inCurrentWishlist')
+            ->orderByDesc('updated_at')
+            ->paginate(40);
+
         $data = [
             'products' => $products,
             'items' => ProductSimple::collection($products)->jsonSerialize(),
