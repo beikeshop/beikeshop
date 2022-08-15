@@ -948,6 +948,7 @@ body.page-cart .cart-products-wrap .table thead th {
   border-bottom: none;
   padding: 0.7rem 0.5rem;
   box-shadow: none;
+  white-space: nowrap;
 }
 body.page-cart .cart-products-wrap .table .p-image input {
   flex: 0 0 1;

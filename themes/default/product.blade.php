@@ -26,11 +26,6 @@
                     <img :src="image.thumb" class="img-fluid">
                   </a>
                 </div>
-                <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
-                  <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
-                    <img :src="image.thumb" class="img-fluid">
-                  </a>
-                </div>
               </div>
               <div class="swiper-pager">
                   <div class="swiper-button-next new-feature-slideshow-next"></div>

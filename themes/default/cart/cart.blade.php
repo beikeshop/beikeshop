@@ -38,7 +38,7 @@
                 <td>
                   <div class="d-flex align-items-center p-image">
                     <input class="form-check-input" type="checkbox" v-model="product.selected">
-                    <img :src="product.image" class="img-fluid">
+                    {{-- <img :src="product.image" class="img-fluid"> --}}
                   </div>
                 </td>
                 <td>
