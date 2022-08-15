@@ -15,16 +15,22 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class WishlistDetail extends JsonResource
 {
+    /**
+     * @throws \Exception
+     */
     public function toArray($request): array
     {
+        $product = $this->product;
+        $masterSku = $product->master_sku;
+        $image = $this->product->image ?: $masterSku->image;
+
         $data = [
             'id' => $this->id,
-            'product_id' => $this->priduct_id,
-            'image' => image_resize($this->product->image, 100, 100),
-            'product_name' => $this->product->description->name,
-            'price' => currency_format($this->product->price)
+            'product_id' => $this->product_id,
+            'image' => image_resize($image),
+            'product_name' => $product->description->name,
+            'price' => currency_format($product->price)
         ];
-
         return $data;
     }
 }

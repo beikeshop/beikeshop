@@ -37,7 +37,7 @@
                   <td>{{ $item['price'] }}</td>
                   <td class="text-end">
                     <div class="">
-                      <button class="btn btn-dark btn-sm add-cart">查看详情</button>
+                      <a class="btn btn-dark btn-sm add-cart" href="{{ shop_route('products.show', $item['product_id']) }}">查看详情</a>
                       <button class="btn btn-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
                     </div>
                   </td>

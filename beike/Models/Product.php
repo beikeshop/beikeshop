@@ -17,6 +17,8 @@ class Product extends Base
         'images' => 'array',
     ];
 
+    protected $appends = ['image'];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, ProductCategory::class)->withTimestamps();
@@ -65,5 +67,11 @@ class Product extends Base
     public function getUrlAttribute()
     {
         return shop_route('products.show', ['product' => $this]);
+    }
+
+    public function getImageAttribute()
+    {
+        $images = $this->images ?? [];
+        return $images[0] ?? '';
     }
 }
