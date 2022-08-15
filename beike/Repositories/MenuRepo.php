@@ -43,6 +43,8 @@ class MenuRepo
 
             if ($menu['childrenGroup']) {
                 foreach ($menu['childrenGroup'] as $group_index => $childrenGroup) {
+                    $menus[$index]['childrenGroup'][$group_index]['name'] = $childrenGroup['name'][$locale];
+
                     if ($childrenGroup['type'] == 'image') {
                         $menus[$index]['childrenGroup'][$group_index]['image']['image'] = image_origin($childrenGroup['image']['image'][$locale]);
                         $menus[$index]['childrenGroup'][$group_index]['image']['link'] = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
@@ -53,7 +55,6 @@ class MenuRepo
                     if (empty($childrenGroup['children'])) {
                         unset($menus[$index]['childrenGroup'][$group_index]);
                     } else {
-                        $menus[$index]['childrenGroup'][$group_index]['name'] = $childrenGroup['name'][$locale];
                         if ($childrenGroup['children']) {
                             foreach ($childrenGroup['children'] as $children_index => $children) {
                                 $menus[$index]['childrenGroup'][$group_index]['children'][$children_index]['link'] = self::handleLink($children['link']);

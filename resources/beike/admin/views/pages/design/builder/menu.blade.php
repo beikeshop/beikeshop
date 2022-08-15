@@ -99,7 +99,7 @@
                   <text-i18n v-model="group.name" class="mb-3"></text-i18n>
                   <div class="group-children">
                     <div v-if="group.type == 'image'">
-                      <pb-image-selector v-model="group.image.image"></pb-image-selector>
+                      <pb-image-selector v-model="group.image.image" class="mb-2"></pb-image-selector>
                       <link-selector v-model="group.image.link"></link-selector>
                     </div>
                     <template v-else>

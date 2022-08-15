@@ -70,12 +70,12 @@
                         <div class="row">
                           @forelse ($menu['childrenGroup'] as $group)
                             <div class="col-6 col-md">
+                              @if ($group['name'])
+                                <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
+                              @endif
                               @if ($group['type'] == 'image')
                                 <a href="$group['image']['link']"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
                               @else
-                                @if ($group['name'])
-                                  <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
-                                @endif
                                 <ul class="nav flex-column ul-children">
                                   @foreach ($group['children'] as $children)
                                     @if (!is_array($children['link']['text']))
