@@ -52,14 +52,14 @@ class AdminUserRepo
     /**
      * 更新后台管理员用户
      *
+     * @param $adminUserId
      * @param $data
      * @return mixed
      */
-    public static function updateAdminUser($data)
+    public static function updateAdminUser($adminUserId, $data)
     {
-        $id = $data['id'] ?? 0;
         $password = $data['password'] ?? '';
-        $adminUser = AdminUser::query()->find($id);
+        $adminUser = AdminUser::query()->findOrFail($adminUserId);
         $userData = [
             'name' => $data['name'],
             'email' => $data['email'],

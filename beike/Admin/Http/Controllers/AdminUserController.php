@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Beike\Admin\Repositories\AdminUserRepo;
+use Beike\Admin\Http\Requests\AdminUserRequest;
 
 class AdminUserController extends Controller
 {
@@ -32,17 +33,32 @@ class AdminUserController extends Controller
     }
 
 
-    public function store(Request $request)
+    /**
+     * 创建后台管理员
+     *
+     * @param AdminUserRequest $request
+     * @return array
+     */
+    public function store(AdminUserRequest $request)
     {
         $adminUser = AdminUserRepo::createAdminUser($request->toArray());
         return json_success('保存成功', $adminUser);
     }
 
-    public function update(Request $request, int $adminUserId)
+
+    /**
+     * 更新后台管理员
+     *
+     * @param AdminUserRequest $request
+     * @param int $adminUserId
+     * @return array
+     */
+    public function update(AdminUserRequest $request, int $adminUserId)
     {
-        $adminUser = AdminUserRepo::updateAdminUser($request->toArray());
+        $adminUser = AdminUserRepo::updateAdminUser($adminUserId, $request->toArray());
         return json_success('更新成功', $adminUser);
     }
+
 
     public function destroy(Request $request, int $adminUserId)
     {

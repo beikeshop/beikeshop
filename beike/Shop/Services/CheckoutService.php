@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Models\Order;
 use Beike\Models\Customer;
 use Beike\Repositories\CartRepo;
 use Beike\Repositories\OrderRepo;
@@ -73,7 +74,7 @@ class CheckoutService
      * 确认提交订单
      * @throws \Throwable
      */
-    public function confirm(): \Beike\Models\Order
+    public function confirm(): Order
     {
         $customer = current_customer();
         $checkoutData = self::checkoutData();
