@@ -41,8 +41,8 @@ class MenuRepo
             $menu['name'] = $menu['name'][$locale] ?? '';
             $menu['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
 
-            if ($menu['childrenGroup']) {
-                $menu['childrenGroup'] = self::handleChildrenGroup($menu['childrenGroup']);
+            if ($menu['children_group']) {
+                $menu['children_group'] = self::handleChildrenGroup($menu['children_group']);
             }
             $menus[$index] = $menu;
         }

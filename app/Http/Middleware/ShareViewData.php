@@ -52,7 +52,6 @@ class ShareViewData
             View::share('design', request('design') == 1);
             View::share('languages', LanguageRepo::enabled());
             View::share('shop_base_url', shop_route('home.index'));
-            View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
             View::share('footer_content', hook_filter('footer.content', FooterRepo::handleFooterData()));
             View::share('menu_content', hook_filter('menu.content', MenuRepo::handleMenuData()));
         }
