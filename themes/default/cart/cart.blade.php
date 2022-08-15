@@ -14,7 +14,7 @@
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9">
         <div class="cart-products-wrap">
           <table class="table">
@@ -26,9 +26,9 @@
                     全选
                   </label>
                 </th>
-                <th width="230">商品</th>
-                <th>数量</th>
-                <th>小计</th>
+                <th>商品</th>
+                <th width="170">数量</th>
+                <th width="170">小计</th>
                 <th class="text-end">操作</th>
               </tr>
             </thead>
@@ -58,8 +58,7 @@
                 <td class="text-end">
                   <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
                     <i class="bi bi-x-lg"></i> 删除
-                  </button><br>
-                  <button type="button" class="btn text-secondary btn-link btn-sm px-0">加入收藏</button>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -80,6 +79,20 @@
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="d-flex justify-content-center align-items-center flex-column">
+      <div class="empty-cart-wrap text-center mt-5">
+        <div class="empty-cart-icon mb-3">
+          <i class="bi bi-cart fs-1"></i>
+        </div>
+        <div class="empty-cart-text mb-3">
+          <h5>您的购物车是空的</h5>
+          <p class="text-muted">您可以去看看有哪些想买的</p>
+        </div>
+        <div class="empty-cart-action">
+          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">去逛逛</a>
         </div>
       </div>
     </div>
