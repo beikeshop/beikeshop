@@ -26,10 +26,13 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $uri = request()->getRequestUri();
+        if (Str::startsWith($uri, "/installer")) {
+            return;
+        }
         load_settings();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
 
-        $uri = request()->getRequestUri();
         $adminName = admin_name();
         if (!Str::startsWith($uri, "/{$adminName}")) {
             return;

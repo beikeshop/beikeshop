@@ -15,6 +15,7 @@ use Beike\Plugin\Manager;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,10 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $uri = request()->getRequestUri();
+        if (Str::startsWith($uri, "/installer")) {
+            return;
+        }
         $manager = app('plugin');
         $plugins = $manager->getEnabledPlugins();
         $this->pluginBasePath = base_path('plugins');

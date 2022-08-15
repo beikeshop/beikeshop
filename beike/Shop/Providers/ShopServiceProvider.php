@@ -34,9 +34,12 @@ class ShopServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $uri = request()->getRequestUri();
+        if (Str::startsWith($uri, "/installer")) {
+            return;
+        }
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
 
-        $uri = request()->getRequestUri();
         load_settings();
 
         if (Str::startsWith($uri, '/admin')) {
