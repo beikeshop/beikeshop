@@ -22,6 +22,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Beike\Repositories\FooterRepo;
+use Beike\Repositories\MenuRepo;
 use Illuminate\Support\Facades\View;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
@@ -50,6 +51,7 @@ class ShareViewData
             View::share('shop_base_url', shop_route('home.index'));
             View::share('categories', hook_filter('header.categories', CategoryRepo::getTwoLevelCategories()));
             View::share('footer_content', hook_filter('footer.content', FooterRepo::handleFooterData()));
+            View::share('menu_content', hook_filter('menu.content', MenuRepo::handleMenuData()));
         }
     }
 

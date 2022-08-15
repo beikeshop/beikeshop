@@ -18,6 +18,8 @@ $border-radius:  0;
 $btn-border-radius: 0;
 $btn-border-radius-sm: 0;
 $btn-border-radius-lg: 0;
+$input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
+
 // $btn-border-width: 0;
 $font-size-base: 0.82rem;
 $form-check-input-width: 1.2em;
@@ -30,7 +32,7 @@ $form-floating-padding-y:         .9rem;
 $form-floating-height:        50px;
 $btn-focus-width: 0;
 $table-border-color: #e9ecef;
-$border-color: #f1f1f1;
+$border-color: #e8e8e8;
 $input-border-color: #e2e2e2;
 $badge-border-radius: 2px;
 $text-muted: #95aac9;
@@ -61,4 +63,10 @@ $alert-padding-y: 0.5rem;
 .badge.bg-success-soft {
   color: #00d97e;
   background-color: #ccf7e5;
+}
+
+.btn-link {
+  &:focus {
+    box-shadow: none;
+  }
 }

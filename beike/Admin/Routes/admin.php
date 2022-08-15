@@ -44,6 +44,9 @@ Route::prefix($adminName)
                 Route::put('design_footer/builder', [Controllers\DesignFooterController::class, 'update'])->name('design_footer.update');
                 Route::post('design_footer/builder/preview', [Controllers\DesignFooterController::class, 'preview'])->name('design_footer.module.preview');
 
+                Route::get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
+                Route::put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
+
                 Route::put('edit', [Controllers\EditController::class, 'update'])->name('edit');
                 Route::get('edit/locale', [Controllers\EditController::class, 'locale'])->name('edit.locale');
 

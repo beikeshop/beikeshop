@@ -7,8 +7,6 @@
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-  {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
-  {{-- <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}"> --}}
 @endpush
 
 @section('content')
@@ -66,7 +64,7 @@
           </div>
           @endif
           <div class="price-wrap d-flex align-items-end">
-            <div class="new-price">@{{ product.price_format }}</div>
+            <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
           </div>
 

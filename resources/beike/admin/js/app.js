@@ -22,7 +22,11 @@ $(document).on('click', '.open-file-manager', function(event) {
 });
 
 if (typeof Vue != 'undefined') {
-  Vue.prototype.thumbnail = function thumbnail(image, width, height) {
+  Vue.prototype.thumbnail = function thumbnail(image) {
+    if (!image) {
+      return 'image/placeholder.png';
+    }
+
     // 判断 image 是否以 http 开头
     if (image.indexOf('http') === 0) {
       return image;

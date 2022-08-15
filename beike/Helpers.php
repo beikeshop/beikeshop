@@ -125,7 +125,7 @@ function type_route($type, $value): string
     } elseif ($type == 'category') {
         return shop_route('categories.show', ['category' => $value]);
     } elseif ($type == 'brand') {
-        return shop_route('brands.show', ['brand' => $value]);
+        return shop_route('brands.show', [$value]);
     } elseif ($type == 'page') {
         return shop_route('pages.show', ['page' => $value]);
     }

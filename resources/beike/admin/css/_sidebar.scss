@@ -16,11 +16,11 @@
   background: #fff;
   border-right: 1px solid #f1f1f1;
 
-  @media screen and (max-width: 991px) {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-  }
+  // @media screen and (max-width: 991px) {
+  //   position: fixed;
+  //   top: 0;
+  //   bottom: 0;
+  // }
 
   .navbar-nav {
     > li.nav-item {

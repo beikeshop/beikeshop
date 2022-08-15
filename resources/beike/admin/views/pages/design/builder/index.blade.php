@@ -12,8 +12,8 @@
   <title>首页编辑器</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
@@ -71,16 +71,6 @@
       })
 
       return obj;
-    }
-
-    Vue.prototype.thumbnail = function thumbnail(image, width, height) {
-      return '{{ asset('') }}' + image;
-    };
-
-    function randomString(length) {
-      let str = '';
-      for (; str.length < length; str += Math.random().toString(36).substr(2));
-      return str.substr(0, length);
     }
 
     // iframe 操作
@@ -196,7 +186,7 @@
 
         addModuleButtonClicked(code) {
           const sourceModule = this.source.modules.find(e => e.code == code)
-          const module_id = randomString(16)
+          const module_id = bk.randomString(16)
           const _data = {
             code: code,
             content: sourceModule.make,

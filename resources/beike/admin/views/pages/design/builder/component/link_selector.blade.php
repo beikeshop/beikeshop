@@ -2,7 +2,7 @@
   <div class="link-selector-wrap">
     <div class="title" v-if="isTitle"><i class="el-icon-link"></i>选择链接</div>
     <div class="selector-type" @blur="selectorContentShow = false" tabindex="1">
-      <div class="title" v-if="value.value == ''" @click="selectorContentShow = !selectorContentShow">请选择跳转到的链接页面</div>
+      <div class="title" v-if="link.type != 'custom' ? value.value == '' : ''" @click="selectorContentShow = !selectorContentShow">请选择链接</div>
       <div class="title" @click="selectorContentShow = !selectorContentShow" v-else :title="name" v-loading="nameLoading">@{{ selectorTitle }}: @{{ name }}</div>
       <div :class="'selector-content ' + (selectorContentShow ? 'active' : '')">
         <div @click="selectorType()">无</div>
@@ -35,13 +35,13 @@
           <a :href="linkTypeAdmin" target="_blank" v-if="link.type != 'custom' && link.type != 'static'">管理@{{ dialogTitle }}</a>
         </div>
 
-        <template v-if="link.type == 'custom'">
-          <div class="link-text">
-            <div class="module-edit-group" style="margin-bottom: 10px;">
-              <div class="module-edit-title">标题</div>
-              <text-i18n v-model="link.text"></text-i18n>
-            </div>
+        <div class="link-text" v-if="isCustomName">
+          <div class="module-edit-group" style="margin-bottom: 10px;">
+            <div class="module-edit-title">自定义名称</div>
+            <text-i18n v-model="link.text"></text-i18n>
           </div>
+        </div>
+        <template v-if="link.type == 'custom'">
           <div class="linkDialog-custom">
             <el-input v-model="link.value" placeholder="请输入链接地址"></el-input>
           </div>
@@ -87,7 +87,7 @@
         </template>
       </div>
       <div slot="footer" class="link-dialog-footer">
-        <el-button type="primary" @click="linkDialogConfirm" :disabled="link.value == ''">确 定</el-button>
+        <el-button type="primary" @click="linkDialogConfirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -103,6 +103,11 @@
 
       isTitle: {
         default: true,
+        type: Boolean
+      },
+
+      isCustomName: {
+        default: false,
         type: Boolean
       },
 
@@ -147,6 +152,7 @@
         link: null,
         keyword: '',
         name: '',
+        locale: '{{ locale() }}',
         loading: null,
         nameLoading: null,
         selectorContentShow: false,
@@ -316,8 +322,9 @@
           this.types = this.types.filter(e => e.type == this.type);
         }
 
+        if (this.link.type == 'custom') return this.name = this.link.value || this.link.text[this.locale] || '';
+
         if (!this.link.value) return;
-        if (this.link.type == 'custom') return this.name = this.link.value;
         if (this.link.type == 'static') {
           if (this.static.find(e => e.value == this.link.value)) {
             this.name = this.static.find(e => e.value == this.link.value).name;

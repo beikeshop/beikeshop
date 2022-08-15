@@ -61,7 +61,7 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages'])) {
+        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
@@ -185,6 +185,7 @@ class Sidebar extends Component
             ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
             ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
+            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.setting_routes', $routes);
     }

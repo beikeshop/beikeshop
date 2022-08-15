@@ -45,10 +45,60 @@
   <div class="header-content py-3">
     <div class="container navbar-expand-lg">
       <div class="logo"><a href="{{ shop_route('home.index') }}">
-        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="menu-wrap">
         <ul class="navbar-nav mx-auto">
+          @foreach ($menu_content as $menu)
+            <li
+              class="nav-item {{ $menu['childrenGroup'] ? 'dropdown' : '' }} {{ $menu['isFull'] ? 'position-static' : '' }}">
+              <a class="nav-link fw-bold {{ $menu['childrenGroup'] ? 'dropdown-toggle' : '' }}" href="{{ $menu['link']['link'] }}">
+                {{-- {{ $menu['link']['text'] }} --}}
+                {{ $menu['name'] }}
+                @if ($menu['badge']['name'])
+                  <span class="badge"
+                    style="background-color: {{ $menu['badge']['bg_color'] }}; color: {{ $menu['badge']['text_color'] }}; border-color: {{ $menu['badge']['bg_color'] }}">
+                    {{ $menu['badge']['name'] }}
+                  </span>
+                @endif
+              </a>
+              @if ($menu['childrenGroup'])
+                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}" style="min-width: {{ count($menu['childrenGroup']) * 200 }}px">
+                  <div class="card card-lg">
+                    <div class="card-body">
+                      <div class="container">
+                        <div class="row">
+                          @forelse ($menu['childrenGroup'] as $group)
+                            <div class="col-6 col-md">
+                              @if ($group['type'] == 'image')
+                                <a href="$group['image']['link']"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
+                              @else
+                                @if ($group['name'])
+                                  <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
+                                @endif
+                                <ul class="nav flex-column ul-children">
+                                  @foreach ($group['children'] as $children)
+                                    @if (!is_array($children['link']['text']))
+                                    <li class="nav-item">
+                                      <a class="nav-link px-0"
+                                      href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
+                                    </li>
+                                    @endif
+                                  @endforeach
+                                </ul>
+                              @endif
+                            </div>
+                          @endforeach
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endif
+            </li>
+          @endforeach
+        </ul>
+        {{-- <ul class="navbar-nav mx-auto">
           @foreach ($categories as $category)
             <li class="dropdown">
               <a target="{{ (isset($category['new_window']) and $category['new_window']) ? '_blank' : '_self' }}"
@@ -66,7 +116,7 @@
               @endif
             </li>
           @endforeach
-        </ul>
+        </ul> --}}
 
         {{-- <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a> --}}
       </div>
@@ -114,7 +164,8 @@
       </div>
     </div>
   </div>
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
+    aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasRightLabel" class="mx-auto mb-0">您的购物车</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

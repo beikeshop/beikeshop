@@ -5,8 +5,10 @@ $(function() {
     $('#offcanvas-search-top input').focus();
     $('#offcanvas-search-top input').keydown(function (e) {
       if (e.keyCode == 13) {
-        console.log('enter');
-        $('#offcanvas-search-top .btn-search').click();
+        if ($(this).val() != '') {
+          location.href = 'products/search?keyword=' + $(this).val();
+        }
+        // $('#offcanvas-search-top .btn-search').click();
       }
     })
   })

@@ -70,7 +70,7 @@ export default {
       $http.delete(`account/wishlist/${isWishlist}`, null, {hload: true}).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', '0');
-      }).finally(() => {
+      }).finally((e) => {
         $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart')
       })
     } else {
@@ -78,7 +78,7 @@ export default {
       $http.post('account/wishlist', {product_id: id}, {hload: true}).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', res.data.id);
-      }).finally(() => {
+      }).finally((e) => {
         $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill')
       })
     }

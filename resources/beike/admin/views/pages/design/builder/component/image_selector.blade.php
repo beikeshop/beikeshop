@@ -58,10 +58,10 @@
 
       data: function () {
         return {
-          tabActiveId: $locale,
+          tabActiveId: '{{ locale() }}',
           languages: $languages,
           internalValues: {},
-          id: 'image-selector-'+ randomString(4),
+          id: 'image-selector-'+ bk.randomString(4),
           loading: null
         }
       },
@@ -187,5 +187,9 @@
     .pb-image-selector .i18n-inner .img img {
       max-width: 100%;
       height: auto;
+    }
+
+    .pb-image-selector .el-tabs__header {
+      margin-bottom: 0;
     }
   </style>

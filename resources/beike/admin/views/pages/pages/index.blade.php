@@ -23,7 +23,7 @@
           @foreach ($pages_format as $page)
           <tr>
             <td>{{ $page['id'] }}</td>
-            <td>{{ $page['title_format'] ?? '' }}</td>
+            <td><div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div></td>
             <td>{{ $page['active'] }}</td>
             <td>{{ $page['created_at'] }}</td>
             <td>{{ $page['updated_at'] }}</td>

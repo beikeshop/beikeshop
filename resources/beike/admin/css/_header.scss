@@ -43,6 +43,9 @@
       list-style: none;
       > li {
         padding: 0 1rem;
+        @media screen and (max-width: 991px) {
+          padding: 0 .3rem;
+        }
 
         .dropdown {
           &:hover {

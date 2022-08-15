@@ -48,6 +48,7 @@ return [
     'design_index' => '首页装修',
     'pages_index' => '信息页面',
     'design_footer_index' => '页尾装修',
+    'design_menu_index' => '导航配置',
     'categories_index' => '产品分类',
     'products_index' => '商品管理',
     'products_trashed' => '回收站',

@@ -12,8 +12,8 @@
   <title>页尾编辑器</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
@@ -97,7 +97,7 @@
                   <el-tooltip class="icon-rank" effect="dark" content="拖动排序" placement="left">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
-                  <link-selector :hide-types="['product', 'category', 'brand']" :show-text="true" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
+                  <link-selector :is-custom-name="true" :hide-types="['product', 'category', 'brand']" v-model="form.content.link{{ $i }}.links[index]"></link-selector>
                   <div class="remove-item" @click="removeLink('link{{ $i }}', index)"><i class="iconfont">&#xe63a;</i></div>
                 </div>
               </draggable>
@@ -151,20 +151,6 @@
       })
 
       return obj;
-    }
-
-    Vue.prototype.thumbnail = function thumbnail(image, width, height) {
-      if (!image) {
-        return 'image/placeholder.png';
-      }
-
-      return '{{ asset('') }}' + image;
-    };
-
-    function randomString(length) {
-      let str = '';
-      for (; str.length < length; str += Math.random().toString(36).substr(2));
-      return str.substr(0, length);
     }
 
     // iframe 操作

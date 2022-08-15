@@ -48,6 +48,7 @@ return [
     'languages_index' => 'Languages',
     'design_index' => 'Page Builder',
     'design_footer_index' => 'Footer Builder',
+    'design_menu_index' => 'Menu Builder',
     'categories_index' => 'Categories',
     'products_index' => 'Products',
     'products_trashed' => 'Trashed',

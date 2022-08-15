@@ -55,6 +55,7 @@
       layer.confirm('确定要删除角色吗？', {
         title: "提示",
         btn: ['取消', '确定'],
+        area: ['400px'],
         btn2: () => {
         $http.delete(`admin_roles/${id}`).then((res) => {
             layer.msg(res.message);

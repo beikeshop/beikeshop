@@ -83,7 +83,7 @@ export default {
         if (!hmsg) {
           layer.msg(res.response.data.message || res.message, ()=>{});
         }
-      }).finally(function(){
+      }).finally(() => {
         layer.closeAll('loading')
       });
     });
