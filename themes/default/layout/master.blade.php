@@ -25,6 +25,10 @@
 
   @include('layout.footer')
 
+  <script>
+    const isLogin = @json(current_customer());
+  </script>
+
   @stack('add-scripts')
 </body>
 </html>

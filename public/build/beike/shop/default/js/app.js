@@ -2165,8 +2165,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         layer.msg(res.message);
         $btn.attr('data-in-wishlist', res.data.id);
-      })["finally"](function (e) {
         $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill');
+      })["catch"](function (e) {
+        $btn.html(btnHtml).prop('disabled', false);
       });
     }
   },

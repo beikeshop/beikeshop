@@ -78,8 +78,9 @@ export default {
       $http.post('account/wishlist', {product_id: id}, {hload: true}).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', res.data.id);
-      }).finally((e) => {
         $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill')
+      }).catch((e) => {
+        $btn.html(btnHtml).prop('disabled', false)
       })
     }
   },

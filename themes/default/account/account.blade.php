@@ -13,12 +13,14 @@
 
     <div class="row">
 
-      <x-shop-sidebar/>
+      <x-shop-sidebar />
 
       <div class="col-12 col-md-9">
         @if (\Session::has('success'))
           <div class="alert alert-success">
-            <ul><li>{!! \Session::get('success') !!}</li></ul>
+            <ul>
+              <li>{!! \Session::get('success') !!}</li>
+            </ul>
           </div>
         @endif
         <div class="card mb-4 account-card">
@@ -54,44 +56,69 @@
                   class="text-muted">售后</span></a>
             </div>
             <div class="order-wrap">
-              <div class="no-order d-flex flex-column align-items-center">
-                <div class="icon mb-2"><i class="iconfont">&#xe60b;</i></div>
-                <div class="text mb-3 text-muted">您还没有订单！<a href="">去下单</a></div>
-              </div>
-            </div>
+              @if (!$latest_orders)
+                <div class="no-order d-flex flex-column align-items-center">
+                  <div class="icon mb-2"><i class="iconfont">&#xe60b;</i></div>
+                  <div class="text mb-3 text-muted">您还没有订单！<a href="">去下单</a></div>
+                </div>
+              @else
+                {{-- <p class="text-muted">近期订单</p> --}}
+                <ul class="list-unstyled orders-list">
+                  <table class="table table-hover">
+                    <tbody>
+                      @foreach ($latest_orders as $order)
+                      <tr class="align-middle">
+                        <td>
+                          <div class="img me-3 border wh-60">
+                            @foreach ($order->orderProducts as $product)
+                            <img src="{{ $product->image }}" class="img-fluid">
+                            @endforeach
+                          </div>
+                        </td>
+                        <td>
+                          <div class="mb-2">订单号：{{ $order->number }} <span class="vr lh-1 mx-2 bg-secondary"></span> 共 {{ count($order->orderProducts) }} 件商品</div>
+                          <div class="text-muted">下单时间：{{ $order->created_at }}</div>
+                        </td>
+                        <td>
+                          <span class="ms-4 d-inline-block">状态：{{ $order->status }}</span>
+                        </td>
+                        <td>
+                          <span class="ms-3 d-inline-block">金额：{{ $order->total }}</span>
+                        </td>
 
-              @foreach ($latest_orders as $order)
-                  <tbody>
-                  <tr class="sep-row"><td colspan="4"></td></tr>
-                  <tr class="head-tr">
-                      <td colspan="4">
-                          <span class="order-created me-4">{{ $order->created_at }}</span>
-                          <span class="order-number">订单号：{{ $order->number }}</span>
-                      </td>
-                  </tr>
-                  @foreach ($order->orderProducts as $product)
-                      <tr class="{{ $loop->first ? 'first-tr' : '' }}">
-                          <td>
-                              <div class="product-info">
-                                  <div class="img"><img src="{{ $product->image }}" class="img-fluid"></div>
-                                  <div class="name">
-                                      <span>{{ $product->name }}</span>
-                                  </div>
-                                  <div class="quantity">{{ $product->quantity }}</div>
-                              </div>
-                          </td>
-                          @if ($loop->first)
-                              <td rowspan="{{ $loop->count }}">{{ $order->total }}</td>
-                              <td rowspan="{{ $loop->count }}">{{ $order->status }}</td>
-                              <td rowspan="{{ $loop->count }}" class="text-end">
-                                  <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">查看</a>
-                              </td>
-                          @endif
+                        <td>
+                          <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}"
+                            class="btn btn-outline-secondary btn-sm">查看详情</a>
+                        </td>
                       </tr>
-                  @endforeach
-                  </tbody>
-              @endforeach
+                      @endforeach
+                    </tbody>
+                  </table>
+                  {{-- @foreach ($latest_orders as $order)
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <div class="d-flex align-items-center">
+                        <div class="img me-3 border wh-70">
+                          @foreach ($order->orderProducts as $product)
+                          <img src="{{ $product->image }}" class="img-fluid">
+                          @endforeach
+                        </div>
+                        <div>
+                          <div class="order-number mb-2">
+                            <span class="wp-200 d-inline-block">订单号：{{ $order->number }}</span>
+                            <span class="wp-200 ms-4 d-inline-block">状态：{{ $order->status }}</span>
+                            <span class=" ms-3 d-inline-block">金额：{{ $order->total }}</span>
+                          </div>
+                          <div class="order-created text-muted">下单时间：{{ $order->created_at }}</div>
+                        </div>
+                      </div>
 
+                      <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}"
+                        class="btn btn-outline-secondary btn-sm">查看详情</a>
+                    </div>
+                  @endforeach --}}
+                </ul>
+              @endif
+            </div>
           </div>
         </div>
       </div>
