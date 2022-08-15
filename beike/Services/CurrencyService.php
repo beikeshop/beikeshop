@@ -1,12 +1,4 @@
 <?php
-/*
- * @copyright     2022 opencart.cn - All Rights Reserved.
- * @link          https://www.guangdawangluo.com
- * @Author        Pu Shuo <pushuo@opencart.cn>
- * @Date          2022-08-02 19:19:52
- * @LastEditTime  2022-08-06 12:52:21
- */
-
 /**
  * CurrencyService.php
  *
@@ -19,9 +11,6 @@
 
 namespace Beike\Services;
 
-use Beike\Models\Address;
-use Beike\Models\TaxRate;
-use Beike\Models\TaxRule;
 use Beike\Repositories\CurrencyRepo;
 
 class CurrencyService
@@ -30,7 +19,7 @@ class CurrencyService
     private $currencies = array();
 
     public function __construct() {
-        foreach (CurrencyRepo::enabled() as $result) {
+        foreach (CurrencyRepo::listEnabled() as $result) {
             $this->currencies[$result->code] = $result;
         }
     }

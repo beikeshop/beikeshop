@@ -11,15 +11,16 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Country;
 use Beike\Models\Currency;
 
 class CurrencyRepo
 {
+    private static $enabledCurrencies;
+
     /**
      * 创建一个currency记录
      * @param $data
-     * @return int
+     * @return mixed
      */
     public static function create($data)
     {
@@ -29,7 +30,8 @@ class CurrencyRepo
     /**
      * @param $id
      * @param $data
-     * @return bool|int
+     * @return mixed
+     * @throws \Exception
      */
     public static function update($id, $data)
     {
@@ -43,7 +45,7 @@ class CurrencyRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return mixed
      */
     public static function find($id)
     {
@@ -67,9 +69,11 @@ class CurrencyRepo
         return Currency::query()->get();
     }
 
-    public static function enabled()
+    public static function listEnabled()
     {
-        return Currency::query()->where('status', true)->get();
+        if (self::$enabledCurrencies !== null) {
+            return self::$enabledCurrencies;
+        }
+        return self::$enabledCurrencies = Currency::query()->where('status', true)->get();
     }
-
 }

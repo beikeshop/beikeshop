@@ -401,7 +401,7 @@ function language_packages(): array
  */
 function currencies()
 {
-    return CurrencyRepo::all()->where('status', true);
+    return CurrencyRepo::listEnabled();
 }
 
 /**
