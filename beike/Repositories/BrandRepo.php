@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BrandRepo
 {
+    private static $allBrandsWithName;
+
     /**
      * 创建一个记录
      * @param $data
@@ -72,26 +74,37 @@ class BrandRepo
     }
 
     /**
-     * @param $data
+     * @param $filters
      * @return LengthAwarePaginator
      */
-    public static function list($data): LengthAwarePaginator
+    public static function list($filters): LengthAwarePaginator
     {
-        $builder = Brand::query();
-
-        if (isset($data['name'])) {
-            $builder->where('name', 'like', "%{$data['name']}%");
-        }
-        if (isset($data['first'])) {
-            $builder->where('first', $data['email']);
-        }
-        if (isset($data['status'])) {
-            $builder->where('status', $data['status']);
-        }
-        $builder->orderByDesc('created_at');
-
+        $builder = self::getBuilder($filters);
         return $builder->paginate(10)->withQueryString();
     }
+
+
+    /**
+     * 获取产品品牌筛选builder
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getBuilder(array $filters = []): Builder
+    {
+        $builder = Brand::query();
+        if (isset($filters['name'])) {
+            $builder->where('name', 'like', "%{$filters['name']}%");
+        }
+        if (isset($filters['first'])) {
+            $builder->where('first', $filters['email']);
+        }
+        if (isset($filters['status'])) {
+            $builder->where('status', $filters['status']);
+        }
+        $builder->orderByDesc('created_at');
+        return $builder;
+    }
+
 
     public static function listGroupByFirst(): array
     {
@@ -115,21 +128,6 @@ class BrandRepo
         }
 
         return $builder->limit(10)->get();
-    }
-
-    /**
-     * 获取商品名称
-     * @param $id
-     * @return HigherOrderBuilderProxy|mixed|string
-     */
-    public static function getName($id)
-    {
-        $brand = Brand::query()->find($id);
-
-        if ($brand) {
-            return $brand->name;
-        }
-        return '';
     }
 
 
@@ -157,9 +155,42 @@ class BrandRepo
         if (empty($ids)) {
             return [];
         }
-        $brands = Brand::query()
+        return Brand::query()
             ->whereIn('id', $ids)
             ->get();
-        return $brands;
+    }
+
+
+    /**
+     * 通过品牌ID获取品牌名称
+     * @param $id
+     * @return mixed|string
+     */
+    public static function getName($id)
+    {
+        $categories = self::getAllBrandsWithName();
+        return $categories[$id]['name'] ?? '';
+    }
+
+
+    /**
+     * 获取所有商品分类ID和名称列表
+     * @return array|null
+     */
+    public static function getAllBrandsWithName(): ?array
+    {
+        if (self::$allBrandsWithName !== null) {
+            return self::$allBrandsWithName;
+        }
+
+        $items = [];
+        $brands = self::getBuilder()->select('id')->get();
+        foreach ($brands as $brand) {
+            $items[$brand->id] = [
+                'id' => $brand->id,
+                'name' => $brand->name ?? '',
+            ];
+        }
+        return self::$allBrandsWithName = $items;
     }
 }

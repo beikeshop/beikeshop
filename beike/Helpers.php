@@ -3,7 +3,11 @@
 use Beike\Models\Customer;
 use Beike\Models\Language;
 use Beike\Models\AdminUser;
+use Beike\Repositories\BrandRepo;
+use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
+use Beike\Repositories\PageRepo;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -109,7 +113,7 @@ function plugin_route($route, $params = []): string
 }
 
 /**
- * 获取 product, category, brand, page 路由链接
+ * 获取 category, product, brand, page, static, custom 路由链接
  *
  * @param $type
  * @param $value
@@ -117,21 +121,65 @@ function plugin_route($route, $params = []): string
  */
 function type_route($type, $value): string
 {
-    if (empty($type) || empty($value)) {
+    $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
+    if (empty($type) || empty($value) || !in_array($type, $types)) {
         return '';
     }
-    if ($type == 'product') {
-        return shop_route('products.show', ['product' => $value]);
-    } elseif ($type == 'category') {
+
+    if ($type == 'category') {
         return shop_route('categories.show', ['category' => $value]);
+    } elseif ($type == 'product') {
+        return shop_route('products.show', ['product' => $value]);
     } elseif ($type == 'brand') {
         return shop_route('brands.show', [$value]);
     } elseif ($type == 'page') {
         return shop_route('pages.show', ['page' => $value]);
+    } elseif ($type == 'static') {
+        return shop_route($value);
+    } elseif ($type == 'custom') {
+        return $value;
     }
-
     return '';
 }
+
+
+/**
+ * 获取 category, product, brand, page, static, custom 链接名称
+ *
+ * @param $type
+ * @param $value
+ * @param array $texts
+ * @return string
+ */
+function type_label($type, $value, array $texts = []): string
+{
+    $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
+    if (empty($type) || empty($value) || !in_array($type, $types)) {
+        return '';
+    }
+
+    $locale = locale();
+    $text = $texts[$locale] ?? '';
+    if ($text) {
+        return $text;
+    }
+
+    if ($type == 'category') {
+        return CategoryRepo::getName($value);
+    } elseif ($type == 'product') {
+        return ProductRepo::getName($value);
+    } elseif ($type == 'brand') {
+        return BrandRepo::getName($value);
+    } elseif ($type == 'page') {
+        return PageRepo::getName($value);
+    } elseif ($type == 'static') {
+        return trans('shop/' . $value);
+    } elseif ($type == 'custom') {
+        return $text;
+    }
+    return '';
+}
+
 
 /**
  * 是否访问的后端

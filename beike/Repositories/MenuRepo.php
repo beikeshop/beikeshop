@@ -22,9 +22,10 @@ use Beike\Repositories\BrandRepo;
 class MenuRepo
 {
     /**
-     * 处理页尾编辑器数据
+     * 处理页头编辑器数据
      *
      * @return array|mixed
+     * @throws \Exception
      */
     public static function handleMenuData($MenuSetting = [])
     {
@@ -71,43 +72,17 @@ class MenuRepo
     /**
      * 处理链接
      *
-     * @param $type
-     * @param $value
-     * @return string
+     * @param $link
+     * @return array
      */
     private static function handleLink($link): array
     {
-        $locale = locale();
+        $type = $link['type'] ?? '';
+        $value = $link['value'] ?? '';
+        $texts = $link['text'] ?? [];
 
-        if ($link['type'] == 'custom') {
-            $link['link'] = $link['value'];
-            $link['text'] = $link['text'][$locale];
-        } elseif ($link['type'] == 'static') {
-            $link['link'] = shop_route($link['value']);
-            $link['text'] = $link['text'][$locale] ?: trans('shop/' . $link['value']);
-        } elseif ($link['type'] == 'page') {
-            $pageId = $link['value'];
-            $page = Page::query()->find($pageId);
-            if ($page) {
-                $link['link'] = type_route('page', $link['value']);
-                $link['text'] = $link['text'][$locale] ?: $page->description->title;
-            }
-        } elseif ($link['type'] == 'category') {
-            $categoryName = CategoryRepo::getName($link['value']);
-            if ($categoryName) {
-                $link['link'] = type_route('category', $link['value']);
-                $link['text'] = $categoryName;
-            }
-        } elseif ($link['type'] == 'product') {
-            $link['link'] = type_route('product', $link['value']);
-            $link['text'] = $link['text'][$locale] ?: ProductRepo::getName($link['value']);
-        } elseif ($link['type'] == 'brand') {
-            $link['link'] = type_route('brand', $link['value']);
-            $link['text'] = $link['text'][$locale] ?: BrandRepo::getName($link['value']);
-        } else {
-            $link['link'] = '';
-            $link['text'] = $link['text'][$locale];
-        }
+        $link['link'] = type_route($type, $value);
+        $link['text'] = type_label($type, $value, $texts);
 
         return $link;
     }

@@ -145,7 +145,7 @@ class CategoryRepo
      */
     public static function getName($id)
     {
-        $categories = self::getAllCategoryWithName();
+        $categories = self::getAllCategoriesWithName();
         return $categories[$id]['name'] ?? '';
     }
 
@@ -154,7 +154,7 @@ class CategoryRepo
      * 获取所有商品分类ID和名称列表
      * @return array|null
      */
-    public static function getAllCategoryWithName(): ?array
+    public static function getAllCategoriesWithName(): ?array
     {
         if (self::$allCategoryWithName !== null) {
             return self::$allCategoryWithName;
