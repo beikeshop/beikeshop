@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use RachidLaasri\LaravelInstaller\Events\EnvironmentSaved;
-use RachidLaasri\LaravelInstaller\Helpers\EnvironmentManager;
+use Beike\Installer\Helpers\EnvironmentManager;
 use Validator;
 
 class EnvironmentController extends Controller
@@ -63,8 +62,6 @@ class EnvironmentController extends Controller
         }
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
-
-        event(new EnvironmentSaved($request));
 
         return $redirect->route('installer.database')
                         ->with(['results' => $results]);

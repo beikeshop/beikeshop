@@ -3,7 +3,7 @@
 namespace Beike\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use RachidLaasri\LaravelInstaller\Helpers\PermissionsChecker;
+use Beike\Installer\Helpers\PermissionsChecker;
 
 class PermissionsController extends Controller
 {

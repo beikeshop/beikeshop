@@ -3,7 +3,7 @@
 namespace Beike\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use RachidLaasri\LaravelInstaller\Helpers\DatabaseManager;
+use Beike\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {
