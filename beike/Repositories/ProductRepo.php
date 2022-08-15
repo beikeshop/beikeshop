@@ -20,6 +20,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductRepo
 {
+    private static $allProductsWithName;
+
+
     /**
      * 获取产品详情
      */
@@ -122,7 +125,7 @@ class ProductRepo
     }
 
 
-    public static function list($data=[])
+    public static function list($data = [])
     {
         return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
@@ -146,18 +149,53 @@ class ProductRepo
     }
 
     /**
-     * 获取商品名称
+     * 获取商品ID获取单个商品名称
+     *
      * @param $id
      * @return HigherOrderBuilderProxy|mixed|string
      */
-    public static function getName($id)
+    public static function getNameById($id)
     {
         $product = Product::query()->find($id);
-
         if ($product) {
             return $product->description->name;
         }
         return '';
+    }
+
+
+    /**
+     * 通过产品ID获取商品名称
+     * @param $id
+     * @return mixed|string
+     */
+    public static function getName($id)
+    {
+        $categories = self::getAllProductsWithName();
+        return $categories[$id]['name'] ?? '';
+    }
+
+
+    /**
+     * 获取所有商品ID和名称列表
+     *
+     * @return array|null
+     */
+    public static function getAllProductsWithName(): ?array
+    {
+        if (self::$allProductsWithName !== null) {
+            return self::$allProductsWithName;
+        }
+
+        $items = [];
+        $products = self::getBuilder()->select('id')->get();
+        foreach ($products as $product) {
+            $items[$product->id] = [
+                'id' => $product->id,
+                'name' => $product->description->name ?? '',
+            ];
+        }
+        return self::$allProductsWithName = $items;
     }
 
 
