@@ -24,7 +24,7 @@ class ProductDetail extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->description->name ?? '',
-            'description' => $this->description->description ?? '',
+            'description' => $this->description->content ?? '',
             'images' => array_map(function ($image) {
                 return [
                     'preview' => image_resize($image, 500, 500),

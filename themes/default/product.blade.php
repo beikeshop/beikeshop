@@ -115,7 +115,9 @@
         </a>
       </div>
       <div class="tab-content">
-        <div class="tab-pane fade show active" id="product-description" role="tabpanel" aria-labelledby="pills-home-tab">111</div>
+        <div class="tab-pane fade show active" id="product-description" role="tabpanel" aria-labelledby="pills-home-tab">
+          {!! $product['description'] !!}
+        </div>
       </div>
     </div>
   </div>
