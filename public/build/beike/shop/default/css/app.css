@@ -505,16 +505,16 @@ header .top-wrap {
   background: #F7F8FA;
   display: flex;
 }
-header .top-wrap .dropdown:hover {
+header .top-wrap .dropdown:hover, header .header-content .dropdown:hover {
   background-color: #fff;
 }
-header .top-wrap .dropdown:hover .dropdown-menu {
+header .top-wrap .dropdown:hover .dropdown-menu, header .header-content .dropdown:hover .dropdown-menu {
   margin: 0;
   display: block;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border: none;
 }
-header .top-wrap .dropdown:hover .dropdown-menu.dropdown-menu-end {
+header .top-wrap .dropdown:hover .dropdown-menu.dropdown-menu-end, header .header-content .dropdown:hover .dropdown-menu.dropdown-menu-end {
   right: 0;
 }
 header .header-content {

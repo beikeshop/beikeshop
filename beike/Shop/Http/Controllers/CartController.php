@@ -17,7 +17,7 @@ class CartController extends Controller
         $data = [
             'data' => CartService::reloadData()
         ];
-        return view("cart", $data);
+        return view("cart/cart", $data);
     }
 
     /**
@@ -74,10 +74,11 @@ class CartController extends Controller
      * 右上角购物车
      * @return array
      */
-    public function miniCart(): array
+    public function miniCart()
     {
         $data = CartService::reloadData();
-        return json_success('获取成功', $data);
+        // return json_success('获取成功', $data);
+        return view('cart/mini', $data);
     }
 
 

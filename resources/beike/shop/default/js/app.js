@@ -10,16 +10,15 @@ import './product';
 import './header'
 
 $(document).ready(function ($) {
-  $.ajaxSetup({
-    headers: {'X-CSRF-TOKEN': token},
-    // beforeSend: function() { layer.load(2, {shade: [0.3,'#fff'] }); },
-    // complete: function() { layer.closeAll('loading'); },
-    error: function(xhr, ajaxOptions, thrownError) {
-      if (xhr.responseJSON.message) {
-        layer.msg(xhr.responseJSON.message,() => {})
-      }
-    },
-  });
+  $(document).on('click', '.offcanvas-products-delete', function () {
+    const id = $(this).data('id');
+
+    $http.delete(`carts/${id}`).then((res) => {
+      $(this).parents('.product-list').remove();
+      $('.offcanvas-right-cart-count').text(res.data.quantity);
+      $('.offcanvas-right-cart-amount').text(res.data.amount_format);
+    })
+  })
 });
 
 bk.getCarts(); // 页面初始加载购物车数据

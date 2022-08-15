@@ -51,24 +51,23 @@
         <ul class="navbar-nav mx-auto">
           @foreach ($menu_content as $menu)
             <li
-              class="nav-item {{ $menu['childrenGroup'] ? 'dropdown' : '' }} {{ $menu['isFull'] ? 'position-static' : '' }}">
-              <a class="nav-link fw-bold {{ $menu['childrenGroup'] ? 'dropdown-toggle' : '' }}" href="{{ $menu['link']['link'] }}">
-                {{-- {{ $menu['link']['text'] }} --}}
+              class="nav-item {{ isset($menu['children_group']) ? 'dropdown' : '' }} {{ isset($menu['isFull']) && $menu['isFull'] ? 'position-static' : '' }}">
+              <a class="nav-link fw-bold {{ isset($menu['children_group']) ? 'dropdown-toggle' : '' }}" href="{{ $menu['link'] ?? '' }}">
                 {{ $menu['name'] }}
-                @if ($menu['badge']['name'])
+                @if (isset($menu['badge']) && $menu['badge']['name'])
                   <span class="badge"
                     style="background-color: {{ $menu['badge']['bg_color'] }}; color: {{ $menu['badge']['text_color'] }}; border-color: {{ $menu['badge']['bg_color'] }}">
                     {{ $menu['badge']['name'] }}
                   </span>
                 @endif
               </a>
-              @if ($menu['childrenGroup'])
-                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}" style="min-width: {{ count($menu['childrenGroup']) * 200 }}px">
+              @if (isset($menu['children_group']) && $menu['children_group'])
+                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}" style="min-width: {{ count($menu['children_group']) * 200 }}px">
                   <div class="card card-lg">
                     <div class="card-body">
                       <div class="container">
                         <div class="row">
-                          @forelse ($menu['childrenGroup'] as $group)
+                          @forelse ($menu['children_group'] as $group)
                             <div class="col-6 col-md">
                               @if ($group['name'])
                                 <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
@@ -165,26 +164,7 @@
     </div>
   </div>
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
-    aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-      <h5 id="offcanvasRightLabel" class="mx-auto mb-0">您的购物车</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="offcanvas-right-products">
-      </div>
-    </div>
-    <div class="offcanvas-footer">
-      <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
-        <strong>小计（<span class="offcanvas-right-cart-count"></span>）</strong>
-        <strong class="ms-auto offcanvas-right-cart-amount"></strong>
-      </div>
-      <div class="p-4">
-        <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">去结账</a>
-        <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">查看购物车</a>
-      </div>
-    </div>
-  </div>
+    aria-labelledby="offcanvasRightLabel"></div>
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">

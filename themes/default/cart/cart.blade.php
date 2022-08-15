@@ -56,8 +56,10 @@
                 </td>
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
-                  <button type="button" class="btn btn-link btn-sm" @click.stop="checkedBtnDelete(product.cart_id)">删除</button><br>
-                  <button type="button" class="btn btn-link btn-sm">加入收藏</button>
+                  <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
+                    <i class="bi bi-x-lg"></i> 删除
+                  </button><br>
+                  <button type="button" class="btn text-secondary btn-link btn-sm px-0">加入收藏</button>
                 </td>
               </tr>
             </tbody>

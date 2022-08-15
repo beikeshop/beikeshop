@@ -2081,26 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
     $http.get('carts/mini', null, {
       hload: true
     }).then(function (res) {
-      $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-      if (res.data.carts.length) {
-        $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-        $('.offcanvas-right-cart-count').html(res.data.quantity);
-        var html = '';
-        res.data.carts.forEach(function (e) {
-          html += '<div class="product-list d-flex align-items-center">';
-          html += "<div class=\"left\"><img src=\"".concat(e.image, "\" calss=\"img-fluid\"></div>");
-          html += '<div class="right flex-grow-1">';
-          html += "<div class=\"name fs-sm fw-bold mb-2\">".concat(e.name, "</div>");
-          html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-          html += "<div class=\"price\">".concat(e.price_format, " <span class=\"text-muted\">x ").concat(e.quantity, "<span></div>");
-          html += "<span class=\"offcanvas-products-delete\" data-id=\"".concat(e.cart_id, "\"><i class=\"bi bi-x-lg\"></i> \u5220\u9664</span>");
-          html += '</div>';
-          html += '</div>';
-          html += '</div>';
-        });
-        $('.offcanvas-right-products').html(html);
-      }
+      $('#offcanvas-right-cart').html(res);
     });
   },
 
@@ -2712,17 +2693,15 @@ var base = document.querySelector('base').href;
 
 
 $(document).ready(function ($) {
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': token
-    },
-    // beforeSend: function() { layer.load(2, {shade: [0.3,'#fff'] }); },
-    // complete: function() { layer.closeAll('loading'); },
-    error: function error(xhr, ajaxOptions, thrownError) {
-      if (xhr.responseJSON.message) {
-        layer.msg(xhr.responseJSON.message, function () {});
-      }
-    }
+  $(document).on('click', '.offcanvas-products-delete', function () {
+    var _this = this;
+
+    var id = $(this).data('id');
+    $http["delete"]("carts/".concat(id)).then(function (res) {
+      $(_this).parents('.product-list').remove();
+      $('.offcanvas-right-cart-count').text(res.data.quantity);
+      $('.offcanvas-right-cart-amount').text(res.data.amount_format);
+    });
   });
 });
 bk.getCarts(); // 页面初始加载购物车数据

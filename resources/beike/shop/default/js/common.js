@@ -12,28 +12,7 @@ export default {
    */
   getCarts() {
     $http.get('carts/mini', null, {hload: true}).then((res) => {
-      $('.offcanvas-right-cart-amount').html(res.data.amount_format);
-
-      if (res.data.carts.length) {
-        $('.navbar-icon-link-badge').html(res.data.carts.length > 99 ? '99+' : res.data.carts.length).show();
-        $('.offcanvas-right-cart-count').html(res.data.quantity);
-
-        let html = '';
-        res.data.carts.forEach(e => {
-          html += '<div class="product-list d-flex align-items-center">';
-            html += `<div class="left"><img src="${e.image}" calss="img-fluid"></div>`;
-            html += '<div class="right flex-grow-1">';
-              html += `<div class="name fs-sm fw-bold mb-2">${e.name}</div>`;
-              html += '<div class="product-bottom d-flex justify-content-between align-items-center">';
-                html += `<div class="price">${e.price_format} <span class="text-muted">x ${e.quantity}<span></div>`;
-                html += `<span class="offcanvas-products-delete" data-id="${e.cart_id}"><i class="bi bi-x-lg"></i> 删除</span>`;
-              html += '</div>';
-            html += '</div>';
-          html += '</div>';
-        })
-
-        $('.offcanvas-right-products').html(html)
-      }
+      $('#offcanvas-right-cart').html(res);
     })
   },
 

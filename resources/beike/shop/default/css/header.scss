@@ -15,7 +15,9 @@ header {
     // max-height: 50px;
     background: #F7F8FA;
     display: flex;
+  }
 
+  .top-wrap, .header-content {
     .dropdown {
       &:hover {
         background-color: #fff;
@@ -23,7 +25,6 @@ header {
         .dropdown-menu {
           margin: 0;
           display: block;
-          // box-shadow: 0 6px 6px 0 rgb(0, 0, 0, .08);
           box-shadow: 0 0 15px rgb(0, 0, 0, .1);
           border: none;
 
