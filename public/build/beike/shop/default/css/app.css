@@ -592,19 +592,28 @@ header .header-content .right-btn .nav-link {
 header .header-content .right-btn .nav-link i {
   font-size: 1.1rem;
 }
-header .navbar-icon-link-badge {
-  position: absolute;
-  display: none;
-  top: 0;
-  right: 0;
-  width: 19px;
-  height: 19px;
-  text-align: center;
-  color: #fff;
-  border-radius: 50%;
-  background: #fd560f;
-  font-size: 0.6rem;
-  line-height: 19px;
+header .header-mobile .mobile-content {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header .header-mobile .mobile-content > div {
+  width: 33.33%;
+}
+header .header-mobile .mobile-content .left > i {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+header .header-mobile .mobile-content .right {
+  display: flex;
+  justify-content: flex-end;
+}
+header .header-mobile .mobile-content .right .nav-link {
+  padding: 0;
+}
+header .header-mobile .mobile-content .right .nav-link i {
+  font-size: 1.2rem;
 }
 
 #offcanvas-search-top {

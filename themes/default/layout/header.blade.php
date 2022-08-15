@@ -35,14 +35,14 @@
         </div>
       </div>
       <div class="right nav">
-        <a href="" class="px-2">Delivery</a>
-        <a href="" class="px-2">Help</a>
+        {{-- <a href="" class="px-2">Delivery</a> --}}
+        {{-- <a href="" class="px-2">Help</a> --}}
         <span class="px-2">028-0000000</span>
       </div>
     </div>
   </div>
 
-  <div class="header-content py-3">
+  <div class="header-content d-none d-lg-block py-3">
     <div class="container navbar-expand-lg">
       <div class="logo"><a href="{{ shop_route('home.index') }}">
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
@@ -97,27 +97,6 @@
             </li>
           @endforeach
         </ul>
-        {{-- <ul class="navbar-nav mx-auto">
-          @foreach ($categories as $category)
-            <li class="dropdown">
-              <a target="{{ (isset($category['new_window']) and $category['new_window']) ? '_blank' : '_self' }}"
-                class="nav-link {{ (isset($category['children']) and $category['children']) ? 'dropdown-toggle' : '' }}"
-                href="{{ $category['url'] }}">
-                {{ $category['name'] }}
-              </a>
-              @if (isset($category['children']) and $category['children'])
-                <ul class="dropdown-menu">
-                  @forelse ($category['children'] as $child)
-                    <li><a target="{{ (isset($child['new_window']) and $child['new_window']) ? '_blank' : '_self' }}"
-                        href="{{ $child['url'] }}" class="dropdown-item">{{ $child['name'] }}</a></li>
-                  @endforeach
-                </ul>
-              @endif
-            </li>
-          @endforeach
-        </ul> --}}
-
-        {{-- <a href="{{ shop_route('categories.show', $category) }}">{{ $category->description->name }}</a> --}}
       </div>
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
@@ -160,6 +139,19 @@
             </a>
           </li>
         </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-mobile d-lg-none">
+    <div class="mobile-content">
+      <div class="left"><i class="bi bi-list"></i></div>
+      <div class="center"><a href="{{ shop_route('home.index') }}">
+        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+      </div>
+      <div class="right">
+        <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3"><i class="iconfont">&#xe634;</i></a>
       </div>
     </div>
   </div>

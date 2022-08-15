@@ -36,7 +36,7 @@
             <td>@{{ tax.email }}</td>
             <td>
               <span v-for="role, role_index in tax.roles" :key="role_index">
-                @{{ role.name }} @{{ (tax.roles.length - 1 != role_index) ? '、' : '' }}
+                @{{ role }}
               </span>
             </td>
             <td>@{{ tax.created_at }}</td>

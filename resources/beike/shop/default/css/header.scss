@@ -155,19 +155,37 @@ header {
     }
   }
 
-  .navbar-icon-link-badge {
-    position: absolute;
-    display: none;
-    top: 0;
-    right: 0;
-    width: 19px;
-    height: 19px;
-    text-align: center;
-    color: #fff;
-    border-radius: 50%;
-    background: $primary;
-    font-size: .6rem;
-    line-height: 19px;
+  .header-mobile {
+    .mobile-content {
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > div {
+        width: 33.33%;
+      }
+
+      .left {
+        > i {
+          font-size: 1.6rem;
+          line-height: 1;
+        }
+      }
+
+      .right {
+        display: flex;
+        justify-content: flex-end;
+
+        .nav-link {
+          padding: 0;
+          i {
+            font-size: 1.2rem;
+          }
+
+          // margin-left: 14px;
+        }
+      }
+    }
   }
 }
 
