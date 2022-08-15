@@ -19,6 +19,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepo
 {
+    private static $allCategoryWithName = null;
+
+
     public static function flatten(string $locale, $separator = ' > '): array
     {
         $sql = "SELECT cp.category_id AS id, TRIM(LOWER(GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '{$separator}'))) AS name, c1.parent_id, c1.position";
@@ -27,9 +30,7 @@ class CategoryRepo
         $sql .= " LEFT JOIN categories c2 ON (cp.path_id = c2.id)";
         $sql .= " LEFT JOIN category_descriptions cd1 ON (cp.path_id = cd1.category_id)";
         $sql .= " WHERE cd1.locale = '" . $locale . "' GROUP BY cp.category_id ORDER BY name ASC";
-        $results = DB::select($sql);
-
-        return $results;
+        return DB::select($sql);
     }
 
     /**
@@ -54,13 +55,32 @@ class CategoryRepo
     /**
      * 获取产品分类列表
      *
-     * @param array $filter , keyword, a_name, b_name, category_page, per_page
+     * @param array $filters
      * @return Builder[]|Collection
      */
-    public static function list(array $filter = [])
+    public static function list(array $filters = [])
+    {
+        $builder = self::getBuilder($filters);
+        return $builder->get();
+    }
+
+
+    /**
+     * 获取筛选builder
+     *
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getBuilder(array $filters = []): Builder
     {
         $builder = Category::query()->with(['description']);
-        return $builder->get();
+        $keyword = $filters['keyword'] ?? '';
+        if ($keyword) {
+            $builder->whereHas('description', function ($query) use ($keyword) {
+                return $query->where('name', 'like', "%$keyword%");
+            });
+        }
+        return $builder;
     }
 
 
@@ -118,14 +138,37 @@ class CategoryRepo
     }
 
 
+    /**
+     * 通过分类ID获取产品名称
+     * @param $id
+     * @return mixed|string
+     */
     public static function getName($id)
     {
-        $category = Category::query()->find($id);
+        $categories = self::getAllCategoryWithName();
+        return $categories[$id]['name'] ?? '';
+    }
 
-        if ($category) {
-            return $category->description->name;
+
+    /**
+     * 获取所有商品分类ID和名称列表
+     * @return array|null
+     */
+    public static function getAllCategoryWithName(): ?array
+    {
+        if (self::$allCategoryWithName !== null) {
+            return self::$allCategoryWithName;
         }
-        return '';
+
+        $items = [];
+        $categories = self::getBuilder()->select('id')->get();
+        foreach ($categories as $category) {
+            $items[$category->id] = [
+                'id' => $category->id,
+                'name' => $category->description->name ?? '',
+            ];
+        }
+        return self::$allCategoryWithName = $items;
     }
 }
 

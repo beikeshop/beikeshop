@@ -93,10 +93,10 @@ class MenuRepo
                 $link['text'] = $link['text'][$locale] ?: $page->description->title;
             }
         } elseif ($link['type'] == 'category') {
-            $category = Category::query()->find($link['value']);
-            if ($category) {
+            $categoryName = CategoryRepo::getName($link['value']);
+            if ($categoryName) {
                 $link['link'] = type_route('category', $link['value']);
-                $link['text'] = $link['text'][$locale] ?: CategoryRepo::getName($link['value']);
+                $link['text'] = $categoryName;
             }
         } elseif ($link['type'] == 'product') {
             $link['link'] = type_route('product', $link['value']);
