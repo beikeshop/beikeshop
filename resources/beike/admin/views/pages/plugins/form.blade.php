@@ -19,16 +19,9 @@
             <x-admin-form-input
               :name="$column['name']"
               :title="$column['label']"
-              {{-- :class="$errors->has($column['name']) ? 'is-invalid' : ''" --}}
+              :error="$errors->first($column['name'])"
               :required="$column['required'] ? true : false"
-              :value="old($column['name'], $column['value'] ?? '')">
-              @if (isset($column['description']))
-                <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
-              @endif
-{{--               @if ($errors->has($column['name']))
-                <span class="invalid-feedback" role="alert">{{ $errors->first($column['name']) }}</span>
-              @endif --}}
-            </x-admin-form-input>
+              :value="old($column['name'], $column['value'] ?? '')" />
           @endif
 
           @if ($column['type'] == 'select')

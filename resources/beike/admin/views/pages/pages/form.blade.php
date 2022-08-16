@@ -7,7 +7,6 @@
 @endpush
 
 @section('content')
-    @dump($errors)
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
       <form action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
@@ -24,11 +23,11 @@
         <div class="tab-content">
           @foreach ($admin_languages as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
-                @php
-                $message = $errors->first("descriptions.{$language['code']}.title");
-                @endphp
+              @php
+                $error_title = $errors->first("descriptions.{$language['code']}.title");
+              @endphp
               <x-admin-form-input
-                error="{{ $message }}"
+                error="{{ $error_title }}"
                 name="descriptions[{{ $language['code'] }}][title]"
                 title="信息标题"
                 value="{{ old('title', $descriptions[$language['code']]['title'] ?? '') }}"
@@ -40,6 +39,9 @@
                     {{ old('content', $descriptions[$language['code']]['content'] ?? '') }}
                   </textarea>
                 </div>
+                @if ($errors->has("descriptions.{$language['code']}.content"))
+                  <span class="invalid-feedback d-block" role="alert">{{ $errors->first("descriptions.{$language['code']}.content") }}</span>
+                @endif
               </x-admin::form.row>
               <input type="hidden" name="descriptions[{{ $language['code'] }}][locale]" value="{{ $language['code'] }}">
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="Meta Tag 标题" value="{{ old('meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
