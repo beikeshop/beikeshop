@@ -17,7 +17,8 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $productList = ProductRepo::list($request->all());
+        $requestData = $request->all();
+        $productList = ProductRepo::list($requestData);
         $products = ProductResource::collection($productList)->resource;
 
         $data = [
@@ -36,14 +37,18 @@ class ProductController extends Controller
     {
         $requestData = $request->all();
         $requestData['trashed'] = true;
+        $productList = ProductRepo::list($requestData);
+        $products = ProductResource::collection($productList)->resource;
 
-        if ($request->expectsJson()) {
-            $products = ProductRepo::list($requestData);
-            return ProductResource::collection($products);
-        }
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
+            'products' => $products,
         ];
+
+        if ($request->expectsJson()) {
+            return $products;
+        }
+
         return view('admin::pages.products.index', $data);
     }
 
