@@ -16,4 +16,5 @@ return [
     'products_update' => '更新产品',
     'products_delete' => '删除产品',
     'products_trashed' => '回收站',
+    'products_restore' => '恢复回收站',
 ];

@@ -16,4 +16,5 @@ return [
     'products_update' => 'Edit',
     'products_delete' => 'Delete',
     'products_trashed' => 'Trashed',
+    'products_restore' => 'restore',
 ];

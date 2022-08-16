@@ -10,7 +10,8 @@
  */
 
 return [
-    'settings_index' => 'Setting',
+    'settings_index' => 'View Setting',
+    'settings_update' => 'Update Setting',
     'design_index' => 'Design Builder',
     'design_footer_index' => 'Design Footer',
     'design_menu_index' => 'Design Menu',

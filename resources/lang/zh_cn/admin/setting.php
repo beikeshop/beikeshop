@@ -10,7 +10,8 @@
  */
 
 return [
-    'settings_index' => '系统设置',
+    'settings_index' => '查看系统设置',
+    'settings_update' => '修改系统设置',
     'design_index' => '首页编辑器',
     'design_footer_index' => '页尾编辑器',
     'design_menu_index' => '导航编辑器',

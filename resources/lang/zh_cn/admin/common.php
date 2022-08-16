@@ -20,6 +20,8 @@ return [
     // header
     'home' => '管理首页',
     'order' => '订单管理',
+    'rma' => '售后服务管理',
+    'rma_reason' => '退换货原因管理',
     'product' => '商品管理',
     'brand' => '品牌管理',
     'category' => '分类管理',
@@ -34,6 +36,7 @@ return [
     'tax_class' => '税类管理',
     'currency' => '货币管理',
     'language' => '语言管理',
+    'file_manager' => '文件管理器',
     'access_frontend' => '访问前台',
 
     // sidebar

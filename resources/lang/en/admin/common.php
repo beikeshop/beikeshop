@@ -20,6 +20,8 @@ return [
     // header
     'home' => 'Home',
     'order' => 'Orders',
+    'rma' => 'RMA',
+    'rma_reason' => 'RMA Reason',
     'product' => 'Products',
     'brand' => 'Brands',
     'category' => 'Categories',
@@ -34,6 +36,7 @@ return [
     'tax_class' => 'Tax Class',
     'currency' => 'Currency',
     'language' => 'Language',
+    'file_manager' => 'File Manager',
     'access_frontend' => 'Frontend',
 
     // sidebar
