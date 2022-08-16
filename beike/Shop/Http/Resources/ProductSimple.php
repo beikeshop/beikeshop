@@ -30,10 +30,13 @@ class ProductSimple extends JsonResource
             throw new \Exception("invalid master sku for product {$this->id}");
         }
 
+        $name = $this->description->name ?? '';
+
         return [
             'id' => $this->id,
             'sku_id' => $masterSku->id,
-            'name' => $this->description->name ?? '',
+            'name' => $name,
+            'name_format' => sub_string($name, 50),
             'url' => shop_route('products.show', ['product' => $this]),
             'price' => $masterSku->price,
             'origin_price' => $masterSku->origin_price,

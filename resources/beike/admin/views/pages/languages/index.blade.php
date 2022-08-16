@@ -43,8 +43,8 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="code" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="code"></el-input>
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
         </el-form-item>
 
         <el-form-item label="编码" prop="code">

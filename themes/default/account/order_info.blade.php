@@ -12,12 +12,23 @@
     </nav>
 
     <div class="row">
+      <x-shop-sidebar />
 
-      <x-shop-sidebar/>
       <div class="col-12 col-md-9">
         <div class="card mb-4 order-head">
-          <div class="card-header"><h5 class="card-title">订单详情</h5></div>
+          <div class="card-header d-flex align-items-center justify-content-between">
+            <h6 class="card-title">订单详情</h6>
+            <div>
+              @if ($order->status == 'unpaid')
+                <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">去支付</a>
+              @endif
+              @if ($order->status == 'shipped')
+                <button class="btn btn-primary btn-sm shipped-ed" type="button">确认收货</button>
+              @endif
+            </div>
+          </div>
           <div class="card-body">
+
             <div class="bg-light p-2 table-responsive">
               <table class="table table-borderless mb-0">
                 <thead>
@@ -34,9 +45,6 @@
                     <td>{{ $order->created_at }}</td>
                     <td>
                       {{ $order->status }}
-                      @if ($order->status == 'unpaid')
-                        <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">去支付</a>
-                      @endif
                     </td>
                     <td>{{ $order->total }}</td>
                   </tr>
@@ -47,37 +55,42 @@
         </div>
 
         <div class="card mb-4">
-          <div class="card-header"><h5 class="card-title">订购商品</h5></div>
+          <div class="card-header">
+            <h6 class="card-title">订购商品</h6>
+          </div>
           <div class="card-body">
             @foreach ($order->orderProducts as $product)
-            <div class="product-list">
-              <div class="d-flex">
-                <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
-                <div class="right">
-                  <div class="name">{{ $product->name }}  x {{ $product->quantity }}</div>
-                  <div class="price">{{ $product->price }}</div>
+              <div class="product-list">
+                <div class="d-flex">
+                  <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
+                  <div class="right">
+                    <div class="name">{{ $product->name }} x {{ $product->quantity }}</div>
+                    <div class="price">{{ $product->price }}</div>
+                  </div>
                 </div>
+                @if ($order->status == 'completed')
+                  <a href="{{ shop_route('account.rma.create', [$product->id]) }}"
+                    class="btn btn-outline-primary btn-sm">申请售后</a>
+                @endif
               </div>
-              @if ($order->status == 'completed')
-                <a href="{{ shop_route('account.rma.create', [$product->id]) }}" class="btn btn-outline-primary btn-sm">申请售后</a>
-              @endif
-            </div>
             @endforeach
           </div>
         </div>
 
         <div class="card mb-4">
-          <div class="card-header"><h5 class="card-title">Order Total</h5></div>
+          <div class="card-header">
+            <h6 class="card-title">Order Total</h6>
+          </div>
           <div class="card-body">
             <table class="table table-bordered border">
               <tbody>
                 @foreach (array_chunk($order->orderTotals->all(), 2) as $totals)
-                <tr>
-                  @foreach ($totals as $total)
-                  <td class="bg-light wp-200">{{ $total->title }}</td>
-                  <td><strong>{{ $total->value }}</strong></td>
-                  @endforeach
-                </tr>
+                  <tr>
+                    @foreach ($totals as $total)
+                      <td class="bg-light wp-200">{{ $total->title }}</td>
+                      <td><strong>{{ $total->value }}</strong></td>
+                    @endforeach
+                  </tr>
                 @endforeach
               </tbody>
             </table>
@@ -85,17 +98,21 @@
         </div>
 
         @if (0)
-        <div class="card mb-4">
-          <div class="card-header"><h5 class="card-title">物流状态</h5></div>
-          <div class="card-body">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h6 class="card-title">物流状态</h6>
+            </div>
+            <div class="card-body">
 
+            </div>
           </div>
-        </div>
         @endif
 
         @if ($order->orderHistories->count())
           <div class="card mb-4">
-            <div class="card-header"><h5 class="card-title">订单状态</h5></div>
+            <div class="card-header">
+              <h6 class="card-title">订单状态</h6>
+            </div>
             <div class="card-body">
               <table class="table ">
                 <thead class="">
@@ -122,3 +139,15 @@
     </div>
   </div>
 @endsection
+
+
+@push('add-scripts')
+<script>
+  $('.shipped-ed').click(function(event) {
+    $http.post('orders/{{ $order->id }}/complete').then((res) => {
+      layer.msg(res.message)
+      window.location.reload()
+    })
+  });
+</script>
+@endpush

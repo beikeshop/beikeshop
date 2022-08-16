@@ -140,6 +140,7 @@ class CartService
         if (empty($carts)) {
             $carts = CartService::list(current_customer());
         }
+
         $selected = collect($carts)->where('selected', 1);
         $quantity = $selected->sum('quantity');
         $amount = $selected->sum('subtotal');

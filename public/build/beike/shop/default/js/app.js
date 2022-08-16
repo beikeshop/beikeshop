@@ -2213,9 +2213,8 @@ $(function () {
     $('#offcanvas-search-top input').keydown(function (e) {
       if (e.keyCode == 13) {
         if ($(this).val() != '') {
-          location.href = 'products/keyword?name=' + $(this).val();
-        } // $('#offcanvas-search-top .btn-search').click();
-
+          location.href = 'products/search?keyword=' + $(this).val();
+        }
       }
     });
   });

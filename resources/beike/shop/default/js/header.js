@@ -8,7 +8,6 @@ $(function() {
         if ($(this).val() != '') {
           location.href = 'products/search?keyword=' + $(this).val();
         }
-        // $('#offcanvas-search-top .btn-search').click();
       }
     })
   })

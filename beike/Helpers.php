@@ -469,12 +469,13 @@ if (!function_exists('sub_string')) {
      */
     function sub_string($string, int $length = 16, string $dot = '...'): string
     {
-        $strLength = strlen($string);
+        $strLength = mb_strlen($string);
         if ($length <= 0) {
             return $string;
         } elseif ($strLength <= $length) {
             return $string;
         }
+
         return mb_substr($string, 0, $length) . $dot;
     }
 }

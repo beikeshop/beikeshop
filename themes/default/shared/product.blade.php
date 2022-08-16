@@ -28,7 +28,7 @@
       </button>
     </div>
   </div>
-  <div class="product-name">{{ $product['name'] }}</div>
+  <div class="product-name">{{ $product['name_format'] }}</div>
   <div class="product-price">
     <span class="price-new">{{ $product['price_format'] }}</span>
     <span class="price-lod">{{ $product['origin_price_format'] }}</span>
