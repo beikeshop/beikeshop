@@ -20,6 +20,7 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
+                // 商品品牌
                 Route::middleware('can:brands_index')->get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
                 Route::middleware('can:brands_index')->get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
                 Route::middleware('can:brands_show')->get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
@@ -28,6 +29,8 @@ Route::prefix($adminName)
                 Route::middleware('can:brands_update')->put('brands/{id}', [Controllers\BrandController::class, 'update'])->name('brands.update');
                 Route::middleware('can:brands_delete')->delete('brands/{id}', [Controllers\BrandController::class, 'destroy'])->name('brands.destroy');
 
+
+                // 商品分类
                 Route::middleware('can:categories_index')->get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
                 Route::middleware('can:categories_show')->get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
                 Route::middleware('can:categories_index')->get('categories', [Controllers\CategoryController::class, 'index'])->name('categories.index');
@@ -37,12 +40,16 @@ Route::prefix($adminName)
                 Route::middleware('can:categories_update')->put('categories/{id}', [Controllers\CategoryController::class, 'update'])->name('categories.update');
                 Route::middleware('can:categories_delete')->delete('categories/{id}', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
 
+
+                // 客户
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
                 Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
                 Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
                 Route::middleware('can:customers_delete')->delete('customers/{id}', [Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
 
+
+                // 客户地址
                 Route::middleware('can:customers_show')->get('customers/{customer_id}/addresses', [Controllers\AddressController::class, 'index'])->name('customers.addresses.index');
                 Route::middleware('can:customers_update')->post('customers/{customer_id}/addresses', [Controllers\AddressController::class, 'store'])->name('customers.addresses.store');
                 Route::middleware('can:customers_update')->put('customers/{customer_id}/addresses/{id}', [Controllers\AddressController::class, 'update'])->name('customers.addresses.update');
@@ -50,16 +57,22 @@ Route::prefix($adminName)
 
                 Route::get('countries/{country_id}/zones', [Controllers\ZoneController::class, 'index'])->name('countries.zones.index');
 
+
+                // 客户组
                 Route::middleware('can:customer_groups_index')->get('customer_groups', [Controllers\CustomerGroupController::class, 'index'])->name('customer_groups.index');
                 Route::middleware('can:customer_groups_create')->post('customer_groups', [Controllers\CustomerGroupController::class, 'store'])->name('customer_groups.store');
                 Route::middleware('can:customer_groups_update')->put('customer_groups/{id}', [Controllers\CustomerGroupController::class, 'update'])->name('customer_groups.update');
                 Route::middleware('can:customer_groups_delete')->delete('customer_groups/{id}', [Controllers\CustomerGroupController::class, 'destroy'])->name('customer_groups.destroy');
 
+
+                // 货币
                 Route::middleware('can:currencies_index')->get('currencies', [Controllers\CurrencyController::class, 'index'])->name('currencies.index');
                 Route::middleware('can:currencies_create')->post('currencies', [Controllers\CurrencyController::class, 'store'])->name('currencies.store');
                 Route::middleware('can:currencies_update')->put('currencies/{id}', [Controllers\CurrencyController::class, 'update'])->name('currencies.update');
                 Route::middleware('can:currencies_delete')->delete('currencies/{id}', [Controllers\CurrencyController::class, 'destroy'])->name('currencies.destroy');
 
+
+                // 页面装修
                 Route::middleware('can:design_index')->get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
                 Route::middleware('can:design_index')->put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
                 Route::middleware('can:design_index')->post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
@@ -71,9 +84,12 @@ Route::prefix($adminName)
                 Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
                 Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
 
+
                 Route::put('edit', [Controllers\EditController::class, 'update'])->name('edit');
                 Route::get('edit/locale', [Controllers\EditController::class, 'locale'])->name('edit.locale');
 
+
+                // 图片库
                 Route::middleware('can:file_manager_show')->get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
                 Route::middleware('can:file_manager_show')->get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
                 Route::middleware('can:file_manager_show')->get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
@@ -85,6 +101,8 @@ Route::prefix($adminName)
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
+
+                // 语言管理
                 Route::middleware('can:languages_index')->get('languages', [Controllers\LanguageController::class, 'index'])->name('languages.index');
                 Route::middleware('can:languages_create')->post('languages', [Controllers\LanguageController::class, 'store'])->name('languages.store');
                 Route::middleware('can:languages_update')->put('languages/{id}', [Controllers\LanguageController::class, 'update'])->name('languages.update');
@@ -132,11 +150,15 @@ Route::prefix($adminName)
                 Route::middleware('can:products_update')->put('products/{product}', [Controllers\ProductController::class, 'update'])->name('products.update');
                 Route::middleware('can:products_delete')->delete('products/{product}', [Controllers\ProductController::class, 'destroy'])->name('products.destroy');
 
+
+                // 区域组
                 Route::middleware('can:regions_index')->get('regions', [Controllers\RegionController::class, 'index'])->name('regions.index');
                 Route::middleware('can:regions_create')->post('regions', [Controllers\RegionController::class, 'store'])->name('regions.store');
                 Route::middleware('can:regions_update')->put('regions/{id}', [Controllers\RegionController::class, 'update'])->name('regions.update');
                 Route::middleware('can:regions_delete')->delete('regions/{id}', [Controllers\RegionController::class, 'destroy'])->name('regions.destroy');
 
+
+                // RMA
                 Route::middleware('can:rmas_update')->post('rmas/history/{id}', [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
                 Route::middleware('can:rmas_index')->get('rmas', [Controllers\RmaController::class, 'index'])->name('rmas.index');
                 Route::middleware('can:rmas_show')->get('rmas/{id}', [Controllers\RmaController::class, 'show'])->name('rmas.show');
@@ -147,7 +169,7 @@ Route::prefix($adminName)
                 Route::middleware('can:rma_reasons_update')->put('rma_reasons/{id}', [Controllers\RmaReasonController::class, 'update'])->name('rma_reasons.update');
                 Route::middleware('can:rma_reasons_delete')->delete('rma_reasons/{id}', [Controllers\RmaReasonController::class, 'destroy'])->name('rma_reasons.destroy');
 
-                Route::middleware('can:tax_classes_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
+                Route::middleware('can:settings_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
 
 
@@ -164,7 +186,18 @@ Route::prefix($adminName)
                 Route::middleware('can:tax_rates_update')->put('tax_rates/{tax_rate}', [Controllers\TaxRateController::class, 'update'])->name('tax_rates.update');
                 Route::middleware('can:tax_rates_delete')->delete('tax_rates/{tax_rate}', [Controllers\TaxRateController::class, 'destroy'])->name('tax_rates.destroy');
 
-                Route::resource('admin_users', Controllers\AdminUserController::class);
-                Route::resource('admin_roles', Controllers\AdminRoleController::class);
+
+                // 后台用户
+                Route::middleware('can:admin_users_index')->get('admin_users', [Controllers\AdminUserController::class, 'index'])->name('admin_users.index');
+                Route::middleware('can:admin_users_create')->post('admin_users', [Controllers\AdminUserController::class, 'store'])->name('admin_users.store');
+                Route::middleware('can:admin_users_update')->put('admin_users/{user_id}', [Controllers\AdminUserController::class, 'update'])->name('admin_users.update');
+                Route::middleware('can:admin_users_delete')->delete('admin_users/{user_id}', [Controllers\AdminUserController::class, 'destroy'])->name('admin_users.destroy');
+
+
+                // 后台用户组
+                Route::middleware('can:admin_roles_index')->get('admin_roles', [Controllers\AdminRoleController::class, 'index'])->name('admin_roles.index');
+                Route::middleware('can:admin_roles_create')->post('admin_roles', [Controllers\AdminRoleController::class, 'store'])->name('admin_roles.store');
+                Route::middleware('can:admin_roles_update')->put('admin_roles/{role_id}', [Controllers\AdminRoleController::class, 'update'])->name('admin_roles.update');
+                Route::middleware('can:admin_roles_delete')->delete('admin_roles/{role_id}', [Controllers\AdminRoleController::class, 'destroy'])->name('admin_roles.destroy');
             });
     });
