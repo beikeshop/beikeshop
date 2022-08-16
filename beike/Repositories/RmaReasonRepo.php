@@ -78,7 +78,7 @@ class RmaReasonRepo
      */
     public static function list(array $data = [])
     {
-        $builder = RmaReason::query()->where('locale', current_language());
+        $builder = RmaReason::query()->where('locale', locale());
 
         if (isset($data['name'])) {
             $builder->where('name', 'like', "%{$data['name']}%");
