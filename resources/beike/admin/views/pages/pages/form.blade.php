@@ -24,11 +24,11 @@
         <div class="tab-content">
           @foreach ($admin_languages as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
-              {{ $errors->first("descriptions.{$language['code']}.title") }}
+                @php
+                $message = $errors->first("descriptions.{$language['code']}.title");
+                @endphp
               <x-admin-form-input
-                {{-- :error="$errors->has("descriptions.{$language['code']}.title") ? $errors->first("descriptions.{$language['code']}.title") : ''" --}}
-                error="bbhjhhjg"
-                {{-- error="{{ $errors->first("descriptions.{$language['code']}.title") }}" --}}
+                error="{{ $message }}"
                 name="descriptions[{{ $language['code'] }}][title]"
                 title="信息标题"
                 value="{{ old('title', $descriptions[$language['code']]['title'] ?? '') }}"
