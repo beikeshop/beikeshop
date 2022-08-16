@@ -32,7 +32,7 @@ class TaxClassController extends Controller
     {
         $requestData = json_decode($request->getContent(), true);
         $taxClass = TaxClassRepo::createOrUpdate($requestData);
-        return json_success('保存成功', $taxClass);
+        return json_success(trans('common.created_success'), $taxClass);
     }
 
     public function update(Request $request, int $taxClassId)
@@ -40,12 +40,12 @@ class TaxClassController extends Controller
         $requestData = json_decode($request->getContent(), true);
         $requestData['id'] = $taxClassId;
         $taxClass = TaxClassRepo::createOrUpdate($requestData);
-        return json_success('更新成功', $taxClass);
+        return json_success(trans('common.updated_success'), $taxClass);
     }
 
     public function destroy(Request $request, int $taxClassId)
     {
         TaxClassRepo::deleteById($taxClassId);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

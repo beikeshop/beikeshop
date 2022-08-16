@@ -42,7 +42,7 @@ class AdminUserController extends Controller
     public function store(AdminUserRequest $request)
     {
         $adminUser = AdminUserRepo::createAdminUser($request->toArray());
-        return json_success('保存成功', $adminUser);
+        return json_success(trans('common.created_success'), $adminUser);
     }
 
 
@@ -56,13 +56,13 @@ class AdminUserController extends Controller
     public function update(AdminUserRequest $request, int $adminUserId)
     {
         $adminUser = AdminUserRepo::updateAdminUser($adminUserId, $request->toArray());
-        return json_success('更新成功', $adminUser);
+        return json_success(trans('common.updated_success'), $adminUser);
     }
 
 
     public function destroy(Request $request, int $adminUserId)
     {
         AdminUserRepo::deleteAdminUser($adminUserId);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

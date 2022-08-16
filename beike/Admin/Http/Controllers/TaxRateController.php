@@ -32,7 +32,7 @@ class TaxRateController
         $requestData = json_decode($request->getContent(), true);
         $taxRate = TaxRateRepo::createOrUpdate($requestData);
         $taxRate->load('region');
-        return json_success('保存成功', $taxRate);
+        return json_success(trans('common.created_success'), $taxRate);
     }
 
     public function update(Request $request, int $taxRateId)
@@ -41,12 +41,12 @@ class TaxRateController
         $requestData['id'] = $taxRateId;
         $taxRate = TaxRateRepo::createOrUpdate($requestData);
         $taxRate->load('region');
-        return json_success('更新成功', $taxRate);
+        return json_success(trans('common.updated_success'), $taxRate);
     }
 
     public function destroy(Request $request, int $taxRateId)
     {
         TaxRateRepo::deleteById($taxRateId);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

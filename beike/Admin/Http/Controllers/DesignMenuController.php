@@ -42,6 +42,6 @@ class DesignMenuController extends Controller
             'json' => 1
         ];
         SettingRepo::createOrUpdate($data);
-        return json_success("保存成功");
+        return json_success(trans('common.updated_success'));
     }
 }

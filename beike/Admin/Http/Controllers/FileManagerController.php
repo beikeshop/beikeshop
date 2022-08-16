@@ -57,7 +57,7 @@ class FileManagerController extends Controller
     {
         $folderName = $request->get('name');
         (new FileManagerService)->createDirectory($folderName);
-        return json_success('创建成功');
+        return json_success(trans('common.created_success'));
     }
 
 
@@ -71,7 +71,7 @@ class FileManagerController extends Controller
         $originPath = $request->get('origin_name');
         $newPath = $request->get('new_name');
         (new FileManagerService)->updateName($originPath, $newPath);
-        return json_success('修改成功');
+        return json_success(trans('common.updated_success'));
     }
 
 
@@ -86,7 +86,7 @@ class FileManagerController extends Controller
         $basePath = $requestData['path'] ?? '';
         $files = $requestData['files'] ?? [];
         (new FileManagerService)->deleteFiles($basePath, $files);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 
 
@@ -101,7 +101,7 @@ class FileManagerController extends Controller
     {
         $folderName = $request->get('name');
         (new FileManagerService)->deleteDirectoryOrFile($folderName);
-        return json_success('文件夹删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 
 

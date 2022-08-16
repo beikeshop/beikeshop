@@ -51,13 +51,13 @@ class RmaController extends Controller
             'rma' => RmaRepo::find($id),
             'statuses' => RmaRepo::getStatuses(),
         ];
-       return json_success('更新成功', $data);
+       return json_success(trans('common.updated_success'), $data);
     }
 
     public function destroy(int $id): array
     {
         RmaRepo::delete($id);
 
-        return json_success("已成功删除");
+        return json_success(trans('common.deleted_success'));
     }
 }

@@ -69,6 +69,6 @@ class SettingController extends Controller
         $oldAdminName = admin_name();
         $newAdminName = $settings['admin_name'] ?: 'admin';
         $settingUrl = str_replace($oldAdminName, $newAdminName, admin_route('settings.index'));
-        return redirect($settingUrl)->with('success', '修改成功');
+        return redirect($settingUrl)->with('success', trans('common.updated_success'));
     }
 }

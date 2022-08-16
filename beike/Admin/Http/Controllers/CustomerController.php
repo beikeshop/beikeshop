@@ -36,7 +36,7 @@ class CustomerController extends Controller
         ];
 
         if ($request->expectsJson()) {
-            return json_success('成功', $data);
+            return json_success(trans('success'), $data);
         }
 
         return view('admin::pages.customers.index', $data);
@@ -47,7 +47,7 @@ class CustomerController extends Controller
         $data = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
         $customer = CustomerService::create($data);
 
-        return json_success('创建成功！', new CustomerResource($customer));
+        return json_success(trans('common.success'), new CustomerResource($customer));
     }
 
     public function edit(Request $request, int $customerId)
@@ -74,20 +74,20 @@ class CustomerController extends Controller
         }
         $customer = CustomerRepo::update($customerId, $data);
 
-        return json_success('创建成功！', $customer);
+        return json_success(trans('common.updated_success'), $customer);
     }
 
     public function destroy(Request $request, int $customerId)
     {
         CustomerRepo::delete($customerId);
 
-        return json_success('删除成功！');
+        return json_success(trans('common.deleted_success'));
     }
 
     public function restore(Request $request, int $customerId)
     {
         CustomerRepo::restore($customerId);
 
-        return json_success('恢复成功！');
+        return json_success(trans('common.restored_success'));
     }
 }

@@ -31,20 +31,20 @@ class AddressController extends Controller
     public function store(Request $request, int $customerId)
     {
         $address = AddressService::addForCustomer($customerId, $request->all());
-        return json_success("地址创建成功", $address);
+        return json_success(trans('common.created_success'), $address);
     }
 
     public function update(Request $request, int $customerId, int $addressId)
     {
         $address = AddressService::update($addressId, $request->all());
 
-        return json_success("地址成功修改", $address);
+        return json_success(trans('common.updated_success'), $address);
     }
 
     public function destroy(Request $request, int $customerId, int $addressId)
     {
         AddressRepo::delete($addressId);
 
-        return json_success("已成功删除");
+        return json_success(trans('common.deleted_success'));
     }
 }

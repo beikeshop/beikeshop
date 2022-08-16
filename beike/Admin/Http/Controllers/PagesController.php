@@ -114,7 +114,7 @@ class PagesController
     public function autocomplete(Request $request): array
     {
         $products = PageRepo::autocomplete($request->get('name') ?? '');
-        return json_success('获取成功！', $products);
+        return json_success(trans('common.get_success'), $products);
     }
 
 
@@ -126,6 +126,6 @@ class PagesController
     public function name(Page $page): array
     {
         $name = $page->description->title ?? '';
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 }

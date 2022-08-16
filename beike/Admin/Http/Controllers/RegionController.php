@@ -32,7 +32,7 @@ class RegionController
     {
         $requestData = json_decode($request->getContent(), true);
         $region = RegionRepo::createOrUpdate($requestData);
-        return json_success('保存成功', $region);
+        return json_success(trans('common.created_success'), $region);
     }
 
     public function update(Request $request, int $regionId)
@@ -40,12 +40,12 @@ class RegionController
         $requestData = json_decode($request->getContent(), true);
         $requestData['id'] = $regionId;
         $region = RegionRepo::createOrUpdate($requestData);
-        return json_success('更新成功', $region);
+        return json_success(trans('common.updated_success'), $region);
     }
 
     public function destroy(Request $request, int $regionId)
     {
         RegionRepo::deleteById($regionId);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

@@ -46,6 +46,6 @@ class ForgottenController
     {
         UserService::verifyAndChangePassword($request->get('code'), $request->get('email'), $request->get('password'));
 
-        return json_success('密码已修改');
+        return json_success(trans('common.updated_success'));
     }
 }

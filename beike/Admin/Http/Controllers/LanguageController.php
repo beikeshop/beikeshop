@@ -35,7 +35,7 @@ class LanguageController extends Controller
     {
         $language = LanguageRepo::create($request->only('name', 'code', 'locale', 'image', 'sort_order', 'status'));
 
-        return json_success('创建成功', $language);
+        return json_success(trans('common.created_success'), $language);
     }
 
     /**
@@ -48,13 +48,13 @@ class LanguageController extends Controller
     {
         $language = LanguageRepo::update($id, $request->only('name', 'code', 'locale', 'image', 'sort_order', 'status'));
 
-        return json_success('更新成功！', $language);
+        return json_success(trans('common.updated_success'), $language);
     }
 
     public function destroy(int $currencyId): array
     {
         LanguageRepo::delete($currencyId);
 
-        return json_success('删除成功！');
+        return json_success(trans('common.deleted_success'));
     }
 }

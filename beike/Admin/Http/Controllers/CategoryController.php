@@ -57,7 +57,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, Category $category): array
     {
         CategoryRepo::delete($category);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 
 
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         $name = CategoryRepo::getName($id);
 
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 
     protected function form(Request $request, Category $category = null)
@@ -94,6 +94,6 @@ class CategoryController extends Controller
     {
         $categories = CategoryRepo::autocomplete($request->get('name') ?? '');
 
-        return json_success('获取成功！', $categories);
+        return json_success(trans('common.get_success'), $categories);
     }
 }

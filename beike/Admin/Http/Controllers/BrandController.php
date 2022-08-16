@@ -38,7 +38,7 @@ class BrandController extends Controller
         ];
 
         if ($request->expectsJson()) {
-            return json_success('成功', $data);
+            return json_success(trans('common.success'), $data);
         }
 
         return view('admin::pages.brands.index', $data);
@@ -54,7 +54,7 @@ class BrandController extends Controller
     public function store(Request $request): array
     {
         $brand = BrandRepo::create($request->all());
-        return json_success("创建成功", $brand);
+        return json_success(trans('common.created_success'), $brand);
     }
 
     /**
@@ -64,21 +64,21 @@ class BrandController extends Controller
     {
         $brand = BrandRepo::update($id, $request->all());
 
-        return json_success("成功修改", $brand);
+        return json_success(trans('common.updated_success'), $brand);
     }
 
     public function destroy(int $addressId): array
     {
         BrandRepo::delete($addressId);
 
-        return json_success("已成功删除");
+        return json_success(trans('common.deleted_success'));
     }
 
     public function autocomplete(Request $request): array
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
 
-        return json_success('获取成功！', $brands);
+        return json_success(trans('common.get_success'), $brands);
     }
 
 
@@ -86,7 +86,7 @@ class BrandController extends Controller
     {
         $name = BrandRepo::getName($id);
 
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 
 
@@ -101,6 +101,6 @@ class BrandController extends Controller
         $ids = explode(',', $request->get('ids'));
         $name = BrandRepo::getNames($ids);
 
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 }

@@ -30,7 +30,7 @@ class RmaReasonController extends Controller
     public function store(Request $request): array
     {
         $rmaReason = RmaReasonRepo::create($request->only('name'));
-        return json_success("创建成功", $rmaReason);
+        return json_success(trans('common.created_success'), $rmaReason);
     }
 
     /**
@@ -40,13 +40,13 @@ class RmaReasonController extends Controller
     {
         $rmaReason = RmaReasonRepo::update($id, $request->only('name'));
 
-        return json_success("成功修改", $rmaReason);
+        return json_success(trans('common.updated_success'), $rmaReason);
     }
 
     public function destroy(int $id): array
     {
         RmaReasonRepo::delete($id);
 
-        return json_success("已成功删除");
+        return json_success(trans('common.deleted_success'));
     }
 }

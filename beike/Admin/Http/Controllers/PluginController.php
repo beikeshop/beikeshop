@@ -39,7 +39,7 @@ class PluginController extends Controller
     {
         $zipFile = $request->file('file');
         app('plugin')->import($zipFile);
-        return json_success("导入成功");
+        return json_success(trans('common.success'));
     }
 
 
@@ -53,7 +53,7 @@ class PluginController extends Controller
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::installPlugin($plugin);
-        return json_success("安装成功");
+        return json_success(trans('common.success'));
     }
 
 
@@ -67,7 +67,7 @@ class PluginController extends Controller
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::uninstallPlugin($plugin);
-        return json_success("卸载成功");
+        return json_success(trans('common.success'));
     }
 
 
@@ -103,7 +103,7 @@ class PluginController extends Controller
         }
 
         SettingRepo::update('plugin', $code, $fields);
-        return redirect($this->getRedirect())->with('success', '修改成功');
+        return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
     }
 
 
@@ -118,6 +118,6 @@ class PluginController extends Controller
         app('plugin')->getPluginOrFail($code);
         $status = $request->get('status');
         SettingRepo::update('plugin', $code, ['status' => $status]);
-        return json_success("编辑成功");
+        return json_success(trans('common.updated_success'));
     }
 }

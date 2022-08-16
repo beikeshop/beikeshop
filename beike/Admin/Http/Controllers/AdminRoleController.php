@@ -60,18 +60,18 @@ class AdminRoleController extends Controller
     public function store(AdminRoleRequest $request): array
     {
         $adminUser = AdminRoleRepo::createAdminRole($request->toArray());
-        return json_success('保存成功', $adminUser);
+        return json_success(trans('common.created_success'), $adminUser);
     }
 
     public function update(Request $request, int $adminUserId)
     {
         $adminUser = AdminRoleRepo::updateAdminRole($request->toArray());
-        return json_success('更新成功', $adminUser);
+        return json_success(trans('common.updated_success'), $adminUser);
     }
 
     public function destroy(Request $request, int $adminUserId)
     {
         AdminRoleRepo::deleteAdminRole($adminUserId);
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

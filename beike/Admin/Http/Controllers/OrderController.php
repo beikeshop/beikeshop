@@ -69,6 +69,6 @@ class OrderController extends Controller
         $notify = $request->get('notify');
         $stateMachine = new StateMachineService($order);
         $stateMachine->changeStatus($status, $comment, $notify);
-        return json_success('更新成功');
+        return json_success(trans('common.updated_success'));
     }
 }

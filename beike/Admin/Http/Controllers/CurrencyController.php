@@ -43,7 +43,7 @@ class CurrencyController extends Controller
         ];
         $currency = CurrencyRepo::create($data);
 
-        return json_success('货币创建成功！', $currency);
+        return json_success(trans('common.created_success'), $currency);
     }
 
     public function update(CurrencyRequest $request, int $id)
@@ -59,13 +59,13 @@ class CurrencyController extends Controller
         ];
         $currency = CurrencyRepo::update($id, $data);
 
-        return json_success('货币更新成功！', $currency);
+        return json_success(trans('common.updated_success'), $currency);
     }
 
     public function destroy(Request $request, int $currencyId)
     {
         CurrencyRepo::delete($currencyId);
 
-        return json_success('删除成功！');
+        return json_success(trans('common.deleted_success'));
     }
 }

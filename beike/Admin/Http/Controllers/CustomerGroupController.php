@@ -38,7 +38,7 @@ class CustomerGroupController extends Controller
         $customerGroup = CustomerGroupService::create($request->all());
         $customerGroup->load('descriptions', 'description');
 
-        return json_success('创建成功！', $customerGroup);
+        return json_success(trans('common.created_success'), $customerGroup);
     }
 
     public function update(CustomerGroupRequest $request, int $id)
@@ -46,13 +46,13 @@ class CustomerGroupController extends Controller
         $customerGroup = CustomerGroupService::update($id, $request->all());
         $customerGroup->load('descriptions', 'description');
 
-        return json_success('更新成功！', $customerGroup);
+        return json_success(trans('common.updated_success'), $customerGroup);
     }
 
     public function destroy(Request $request, int $id)
     {
         CustomerGroupRepo::delete($id);
 
-        return json_success('删除成功');
+        return json_success(trans('common.deleted_success'));
     }
 }

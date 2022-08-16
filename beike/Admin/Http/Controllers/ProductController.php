@@ -125,7 +125,7 @@ class ProductController extends Controller
     {
         $name = ProductRepo::getName($id);
 
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 
 
@@ -140,7 +140,7 @@ class ProductController extends Controller
         $productIds = explode(',', $request->get('product_ids'));
         $name = ProductRepo::getNames($productIds);
 
-        return json_success('获取成功', $name);
+        return json_success(trans('common.get_success'), $name);
     }
 
 
@@ -148,6 +148,6 @@ class ProductController extends Controller
     {
         $products = ProductRepo::autocomplete($request->get('name') ?? '');
 
-        return json_success('获取成功！', $products);
+        return json_success(trans('common.get_success'), $products);
     }
 }
