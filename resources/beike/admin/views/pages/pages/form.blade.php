@@ -7,6 +7,7 @@
 @endpush
 
 @section('content')
+    @dump($errors)
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
       <form action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">

@@ -11,14 +11,20 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\PageRequest;
 use Beike\Models\Page;
-use Beike\Repositories\ProductRepo;
-use Beike\Shop\Http\Resources\PageDetail;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Beike\Admin\Repositories\PageRepo;
+use Beike\Shop\Http\Resources\PageDetail;
 
 class PagesController
 {
+    /**
+     * 显示单页列表
+     *
+     * @return mixed
+     */
     public function index()
     {
         $pageList = PageRepo::getList();
@@ -29,11 +35,37 @@ class PagesController
         return view('admin::pages.pages.index', $data);
     }
 
+
+    /**
+     * 创建页面
+     *
+     * @return mixed
+     */
     public function create()
     {
         return view('admin::pages.pages.form', ['page' => new Page()]);
     }
 
+
+    /**
+     * 保存新建
+     *
+     * @param PageRequest $request
+     * @return RedirectResponse
+     */
+    public function store(PageRequest $request)
+    {
+        $requestData = $request->all();
+        PageRepo::createOrUpdate($requestData);
+        return redirect()->to(admin_route('pages.index'));
+    }
+
+
+    /**
+     * @param Request $request
+     * @param int $pageId
+     * @return mixed
+     */
     public function edit(Request $request, int $pageId)
     {
         $data = [
@@ -43,14 +75,15 @@ class PagesController
         return view('admin::pages.pages.form', $data);
     }
 
-    public function store(Request $request)
-    {
-        $requestData = $request->all();
-        PageRepo::createOrUpdate($requestData);
-        return redirect()->to(admin_route('pages.index'));
-    }
 
-    public function update(Request $request, int $pageId)
+    /**
+     * 保存更新
+     *
+     * @param PageRequest $request
+     * @param int $pageId
+     * @return RedirectResponse
+     */
+    public function update(PageRequest $request, int $pageId)
     {
         $requestData = $request->all();
         $requestData['id'] = $pageId;
@@ -58,11 +91,20 @@ class PagesController
         return redirect()->to(admin_route('pages.index'));
     }
 
+
+    /**
+     * 删除单页
+     *
+     * @param Request $request
+     * @param int $pageId
+     * @return RedirectResponse
+     */
     public function destroy(Request $request, int $pageId)
     {
         PageRepo::deleteById($pageId);
         return redirect()->to(admin_route('pages.index'));
     }
+
 
     /**
      * 搜索页面标题自动完成
