@@ -20,47 +20,75 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
-                Route::get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
-                Route::get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
-                Route::resource('brands', Controllers\BrandController::class);
-                Route::get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
+                Route::middleware('can:brands_index')->get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
+                Route::middleware('can:brands_index')->get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');
+                Route::middleware('can:brands_show')->get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
+                Route::middleware('can:brands_index')->get('brands', [Controllers\BrandController::class, 'index'])->name('brands.index');
+                Route::middleware('can:brands_create')->post('brands', [Controllers\BrandController::class, 'store'])->name('brands.store');
+                Route::middleware('can:brands_update')->put('brands/{id}', [Controllers\BrandController::class, 'update'])->name('brands.update');
+                Route::middleware('can:brands_delete')->delete('brands/{id}', [Controllers\BrandController::class, 'destroy'])->name('brands.destroy');
 
-                Route::get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
-                Route::resource('categories', Controllers\CategoryController::class);
-                Route::get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+                Route::middleware('can:categories_index')->get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
+                Route::middleware('can:categories_show')->get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+                Route::middleware('can:categories_index')->get('categories', [Controllers\CategoryController::class, 'index'])->name('categories.index');
+                Route::middleware('can:categories_create')->get('categories/create', [Controllers\CategoryController::class, 'create'])->name('categories.create');
+                Route::middleware('can:categories_create')->post('categories', [Controllers\CategoryController::class, 'store'])->name('categories.store');
+                Route::middleware('can:categories_update')->get('categories/{id}/edit', [Controllers\CategoryController::class, 'edit'])->name('categories.edit');
+                Route::middleware('can:categories_update')->put('categories/{id}', [Controllers\CategoryController::class, 'update'])->name('categories.update');
+                Route::middleware('can:categories_delete')->delete('categories/{id}', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
 
-                Route::resource('customers', Controllers\CustomerController::class);
-                Route::resource('customers.addresses', Controllers\AddressController::class);
-                Route::resource('countries.zones', Controllers\ZoneController::class);
-                Route::resource('customer_groups', Controllers\CustomerGroupController::class);
+                Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
+                Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
+                Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+                Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
+                Route::middleware('can:customers_delete')->delete('customers/{id}', [Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
 
-                Route::resource('currencies', Controllers\CurrencyController::class);
+                Route::middleware('can:customers_show')->get('customers/{customer_id}/addresses', [Controllers\AddressController::class, 'index'])->name('customers.addresses.index');
+                Route::middleware('can:customers_update')->post('customers/{customer_id}/addresses', [Controllers\AddressController::class, 'store'])->name('customers.addresses.store');
+                Route::middleware('can:customers_update')->put('customers/{customer_id}/addresses/{id}', [Controllers\AddressController::class, 'update'])->name('customers.addresses.update');
+                Route::middleware('can:customers_update')->delete('customers/{customer_id}/addresses/{id}', [Controllers\AddressController::class, 'destroy'])->name('customers.addresses.destroy');
 
-                Route::get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
-                Route::put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
-                Route::post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
+                Route::get('countries/{country_id}/zones', [Controllers\ZoneController::class, 'index'])->name('countries.zones.index');
 
-                Route::get('design_footer/builder', [Controllers\DesignFooterController::class, 'index'])->name('design_footer.index');
-                Route::put('design_footer/builder', [Controllers\DesignFooterController::class, 'update'])->name('design_footer.update');
-                Route::post('design_footer/builder/preview', [Controllers\DesignFooterController::class, 'preview'])->name('design_footer.module.preview');
+                Route::middleware('can:customer_groups_index')->get('customer_groups', [Controllers\CustomerGroupController::class, 'index'])->name('customer_groups.index');
+                Route::middleware('can:customer_groups_create')->post('customer_groups', [Controllers\CustomerGroupController::class, 'store'])->name('customer_groups.store');
+                Route::middleware('can:customer_groups_update')->put('customer_groups/{id}', [Controllers\CustomerGroupController::class, 'update'])->name('customer_groups.update');
+                Route::middleware('can:customer_groups_delete')->delete('customer_groups/{id}', [Controllers\CustomerGroupController::class, 'destroy'])->name('customer_groups.destroy');
 
-                Route::get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
-                Route::put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
+                Route::middleware('can:currencies_index')->get('currencies', [Controllers\CurrencyController::class, 'index'])->name('currencies.index');
+                Route::middleware('can:currencies_create')->post('currencies', [Controllers\CurrencyController::class, 'store'])->name('currencies.store');
+                Route::middleware('can:currencies_update')->put('currencies/{id}', [Controllers\CurrencyController::class, 'update'])->name('currencies.update');
+                Route::middleware('can:currencies_delete')->delete('currencies/{id}', [Controllers\CurrencyController::class, 'destroy'])->name('currencies.destroy');
+
+                Route::middleware('can:design_index')->get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
+                Route::middleware('can:design_index')->put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
+                Route::middleware('can:design_index')->post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
+
+                Route::middleware('can:design_footer_index')->get('design_footer/builder', [Controllers\DesignFooterController::class, 'index'])->name('design_footer.index');
+                Route::middleware('can:design_footer_index')->put('design_footer/builder', [Controllers\DesignFooterController::class, 'update'])->name('design_footer.update');
+                Route::middleware('can:design_footer_index')->post('design_footer/builder/preview', [Controllers\DesignFooterController::class, 'preview'])->name('design_footer.module.preview');
+
+                Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
+                Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
 
                 Route::put('edit', [Controllers\EditController::class, 'update'])->name('edit');
                 Route::get('edit/locale', [Controllers\EditController::class, 'locale'])->name('edit.locale');
 
-                Route::get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
-                Route::get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
-                Route::get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
-                Route::post('file_manager/directories', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
-                Route::post('file_manager/upload', [Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
-                Route::post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
-                Route::delete('file_manager/files', [Controllers\FileManagerController::class, 'destroyFiles'])->name('file_manager.delete_files');
-                Route::delete('file_manager/directories', [Controllers\FileManagerController::class, 'destroyDirectories'])->name('file_manager.delete_directories');
+                Route::middleware('can:file_manager_show')->get('file_manager', [Controllers\FileManagerController::class, 'index'])->name('file_manager.index');
+                Route::middleware('can:file_manager_show')->get('file_manager/files', [Controllers\FileManagerController::class, 'getFiles'])->name('file_manager.get_files');
+                Route::middleware('can:file_manager_show')->get('file_manager/directories', [Controllers\FileManagerController::class, 'getDirectories'])->name('file_manager.get_directories');
+                Route::middleware('can:file_manager_create')->post('file_manager/directories', [Controllers\FileManagerController::class, 'createDirectory'])->name('file_manager.create_directory');
+                Route::middleware('can:file_manager_create')->post('file_manager/upload', [Controllers\FileManagerController::class, 'uploadFiles'])->name('file_manager.upload');
+                Route::middleware('can:file_manager_update')->post('file_manager/rename', [Controllers\FileManagerController::class, 'rename'])->name('file_manager.rename');
+                Route::middleware('can:file_manager_delete')->delete('file_manager/files', [Controllers\FileManagerController::class, 'destroyFiles'])->name('file_manager.delete_files');
+                Route::middleware('can:file_manager_delete')->delete('file_manager/directories', [Controllers\FileManagerController::class, 'destroyDirectories'])->name('file_manager.delete_directories');
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
-                Route::resource('languages', Controllers\LanguageController::class);
+
+                Route::middleware('can:languages_index')->get('languages', [Controllers\LanguageController::class, 'index'])->name('languages.index');
+                Route::middleware('can:languages_create')->post('languages', [Controllers\LanguageController::class, 'store'])->name('languages.store');
+                Route::middleware('can:languages_update')->put('languages/{id}', [Controllers\LanguageController::class, 'update'])->name('languages.update');
+                Route::middleware('can:languages_delete')->delete('languages/{id}', [Controllers\LanguageController::class, 'destroy'])->name('languages.destroy');
 
 
                 // 订单
@@ -91,20 +119,36 @@ Route::prefix($adminName)
 
 
                 // 产品
-                Route::put('products/restore', [Controllers\ProductController::class, 'restore']);
-                Route::get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
-                Route::get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
-                Route::get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
-                Route::get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
-                Route::resource('products', Controllers\ProductController::class);
+                Route::middleware('can:products_restore')->put('products/restore', [Controllers\ProductController::class, 'restore']);
+                Route::middleware('can:products_trashed')->get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
+                Route::middleware('can:products_show')->get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
+                Route::middleware('can:products_index')->get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
+                Route::middleware('can:products_index')->get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
 
-                Route::resource('regions', Controllers\RegionController::class);
-                Route::post('rmas/history/{id}', [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
-                Route::resource('rmas', Controllers\RmaController::class);
-                Route::resource('rma_reasons', Controllers\RmaReasonController::class);
+                Route::middleware('can:products_index')->get('products', [Controllers\ProductController::class, 'index'])->name('products.index');
+                Route::middleware('can:products_create')->get('products/create', [Controllers\ProductController::class, 'create'])->name('products.create');
+                Route::middleware('can:products_create')->post('products', [Controllers\ProductController::class, 'store'])->name('products.store');
+                Route::middleware('can:products_update')->get('products/{id}/edit', [Controllers\ProductController::class, 'edit'])->name('products.edit');
+                Route::middleware('can:products_update')->put('products/{id}', [Controllers\ProductController::class, 'update'])->name('products.update');
+                Route::middleware('can:products_delete')->delete('products/{id}', [Controllers\ProductController::class, 'destroy'])->name('products.destroy');
 
-                Route::get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
-                Route::post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
+                Route::middleware('can:regions_index')->get('regions', [Controllers\RegionController::class, 'index'])->name('regions.index');
+                Route::middleware('can:regions_create')->post('regions', [Controllers\RegionController::class, 'store'])->name('regions.store');
+                Route::middleware('can:regions_update')->put('regions/{id}', [Controllers\RegionController::class, 'update'])->name('regions.update');
+                Route::middleware('can:regions_delete')->delete('regions/{id}', [Controllers\RegionController::class, 'destroy'])->name('regions.destroy');
+
+                Route::middleware('can:rmas_update')->post('rmas/history/{id}', [Controllers\RmaController::class, 'addHistory'])->name('rmas.add_history');
+                Route::middleware('can:rmas_index')->get('rmas', [Controllers\RmaController::class, 'index'])->name('rmas.index');
+                Route::middleware('can:rmas_show')->get('rmas/{id}', [Controllers\RmaController::class, 'show'])->name('rmas.show');
+                Route::middleware('can:rmas_delete')->delete('rmas/{id}', [Controllers\RmaController::class, 'destroy'])->name('rmas.destroy');
+
+                Route::middleware('can:rma_reasons_index')->get('rma_reasons', [Controllers\RmaReasonController::class, 'index'])->name('rma_reasons.index');
+                Route::middleware('can:rma_reasons_create')->post('rma_reasons', [Controllers\RmaReasonController::class, 'store'])->name('rma_reasons.store');
+                Route::middleware('can:rma_reasons_update')->put('rma_reasons/{id}', [Controllers\RmaReasonController::class, 'update'])->name('rma_reasons.update');
+                Route::middleware('can:rma_reasons_delete')->delete('rma_reasons/{id}', [Controllers\RmaReasonController::class, 'destroy'])->name('rma_reasons.destroy');
+
+                Route::middleware('can:tax_classes_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
+                Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
 
 
                 // 税类

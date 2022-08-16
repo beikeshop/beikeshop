@@ -84,7 +84,7 @@ class PermissionRepo
      */
     private function getRmaPermissions(): array
     {
-        $routes = ['rmas_index', 'rmas_create', 'rmas_show', 'rmas_update', 'rmas_delete', 'rmas_update_status'];
+        $routes = ['rmas_index', 'rmas_show', 'rmas_update', 'rmas_delete'];
         $items = $this->getPermissionList('rma', $routes);
         return hook_filter('role.rma_permissions', $items);
     }
@@ -97,7 +97,7 @@ class PermissionRepo
      */
     private function getRmaReasonPermissions(): array
     {
-        $routes = ['rma_reasons_index', 'rma_reasons_create', 'rma_reasons_show', 'rma_reasons_update', 'rma_reasons_delete', 'rma_reasons_update_status'];
+        $routes = ['rma_reasons_index', 'rma_reasons_create', 'rma_reasons_update', 'rma_reasons_delete'];
         $items = $this->getPermissionList('rma_reason', $routes);
         return hook_filter('role.rma_reason_permissions', $items);
     }
@@ -110,7 +110,7 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed'];
+        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed', 'products_restore'];
         $items = $this->getPermissionList('product', $routes);
         return hook_filter('role.product_permissions', $items);
     }
@@ -175,7 +175,7 @@ class PermissionRepo
      */
     private function getSettingPermissions(): array
     {
-        $routes = ['settings_index', 'design_index', 'design_footer_index', 'design_menu_index'];
+        $routes = ['settings_index', 'settings_update', 'design_index', 'design_footer_index', 'design_menu_index'];
         $items = $this->getPermissionList('setting', $routes);
         return hook_filter('role.setting_permissions', $items);
     }
@@ -278,7 +278,7 @@ class PermissionRepo
      */
     private function getLanguagePermissions(): array
     {
-        $routes = ['languages_index', 'languages_create', 'languages_show', 'languages_update', 'languages_delete'];
+        $routes = ['languages_index', 'languages_create', 'languages_update', 'languages_delete'];
         $items = $this->getPermissionList('language', $routes);
         return hook_filter('role.language_permissions', $items);
     }
