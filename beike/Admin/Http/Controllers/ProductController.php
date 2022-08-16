@@ -19,10 +19,8 @@ class ProductController extends Controller
     {
         if ($request->expectsJson()) {
             $products = ProductRepo::list($request->all());
-
             return ProductResource::collection($products);
         }
-
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
         ];
@@ -31,6 +29,16 @@ class ProductController extends Controller
 
     public function trashed(Request $request)
     {
+        $requestData = $request->all();
+        $requestData['trashed'] = true;
+        if ($request->expectsJson()) {
+            $products = ProductRepo::list($requestData);
+            return ProductResource::collection($products);
+        }
+        $data = [
+            'categories' => CategoryRepo::flatten(locale()),
+        ];
+        return view('admin::pages.products.index', $data);
     }
 
     public function create(Request $request)
@@ -118,7 +126,7 @@ class ProductController extends Controller
      */
     public function getNames(Request $request): array
     {
-        $productIds = explode(',',$request->get('product_ids'));
+        $productIds = explode(',', $request->get('product_ids'));
         $name = ProductRepo::getNames($productIds);
 
         return json_success('获取成功', $name);
