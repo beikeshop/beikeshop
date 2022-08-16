@@ -109,11 +109,13 @@
               <td>@{{ item.position }}</td>
               <td>@{{ item.active ? '上架' : '下架' }}</td>
               <td width="140" class="text-end">
-                <a :href="item.url_edit" class="btn btn-outline-dark btn-sm">编辑</a>
-                <template>
-                  <a v-if="item.deleted_at == ''" href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
+                <template v-if="item.deleted_at == ''">
+                  <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
+                  <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
                     @click.prevent="deleteProduct(index)">删除</a>
-                  <a v-else href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                </template>
+                <template v-else>
+                  <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
                     @click.prevent="restoreProduct(index)">恢复</a>
                 </template>
               </td>

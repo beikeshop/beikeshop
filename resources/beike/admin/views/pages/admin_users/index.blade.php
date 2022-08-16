@@ -35,7 +35,7 @@
             <td>@{{ tax.name }}</td>
             <td>@{{ tax.email }}</td>
             <td>
-              <span v-for="role, role_index in tax.roles" :key="role_index">
+              <span v-for="role, role_index in tax.roles_name" :key="role_index">
                 @{{ role }}
               </span>
             </td>
