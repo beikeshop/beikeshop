@@ -34,7 +34,7 @@ class ForgottenController
     public function sendVerifyCode(Request $request)
     {
         UserService::sendVerifyCodeForForgotten($request->get('email'));
-        return json_success('验证码已发送，请查看并输入验证码');
+        return json_success(trans('admin/forgotten.verify_code_sent'));
     }
 
     /**

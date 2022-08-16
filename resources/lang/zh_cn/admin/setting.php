@@ -15,4 +15,9 @@ return [
     'design_index' => '首页编辑器',
     'design_footer_index' => '页尾编辑器',
     'design_menu_index' => '导航编辑器',
+
+    'theme_default' => '默认主题',
+    'theme_black' => '黑色主题',
+    'shipping_address' => '发货地址',
+    'payment_address' => '账单地址',
 ];

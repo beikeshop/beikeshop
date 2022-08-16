@@ -27,13 +27,13 @@ class SettingController extends Controller
     public function index()
     {
         $themes = [
-            ['value' => 'default', 'label' => '默认主题'],
-            ['value' => 'black', 'label' => '黑色主题']
+            ['value' => 'default', 'label' => trans('admin/setting.theme_default')],
+            ['value' => 'black', 'label' => trans('admin/setting.theme_black')]
         ];
 
         $tax_address = [
-            ['value' => 'shipping', 'label' => '配送地址'],
-            ['value' => 'payment', 'label' => '账单地址']
+            ['value' => 'shipping', 'label' => trans('admin/setting.shipping_address')],
+            ['value' => 'payment', 'label' => trans('admin/setting.payment_address')]
         ];
 
         $data = [

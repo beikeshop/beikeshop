@@ -15,4 +15,9 @@ return [
     'design_index' => 'Design Builder',
     'design_footer_index' => 'Design Footer',
     'design_menu_index' => 'Design Menu',
+
+    'theme_default' => 'Default Theme',
+    'theme_black' => 'Black Theme',
+    'shipping_address' => 'Shipping Address',
+    'payment_address' => 'Billing Address',
 ];
