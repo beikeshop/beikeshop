@@ -50,9 +50,10 @@ class CustomerController extends Controller
         return json_success('创建成功！', new CustomerResource($customer));
     }
 
-    public function edit(Request $request, Customer $customer)
+    public function edit(Request $request, int $customerId)
     {
-        $addresses = AddressRepo::listByCustomer($customer->id);
+        $addresses = AddressRepo::listByCustomer($customerId);
+        $customer = CustomerRepo::find($customerId);
         $data = [
             'customer' => $customer,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
