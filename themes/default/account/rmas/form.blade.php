@@ -49,6 +49,14 @@
 
               <div class="row">
                 <div class="col-sm-6 mb-4">
+                  <label class="form-label">服务类型</label>
+                  <select class="form-select" name="type">
+                    @foreach ($types as $key => $item)
+                      <option value="{{ $key }}" {{ $key == old('type', '') ? 'selected': '' }}>{{ $item }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="col-sm-6 mb-4">
                   <label class="form-label">退换数量</label>
                   <input class="form-control" type="text" value="{{ old('quantity', $orderProduct->quantity ?? '1') }}">
                   @if ($errors->has('quantity'))
@@ -67,14 +75,6 @@
                   <select class="form-select" name="opened">
                     <option selected value="0">否</option>
                     <option value="1">是</option>
-                  </select>
-                </div>
-                <div class="col-sm-6 mb-4">
-                  <label class="form-label">服务类型</label>
-                  <select class="form-select" name="type">
-                    @foreach ($statuses as $key => $item)
-                      <option value="{{ $key }}" {{ $key == old('type', '') ? 'selected': '' }}>{{ $item }}</option>
-                    @endforeach
                   </select>
                 </div>
 

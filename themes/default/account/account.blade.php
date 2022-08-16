@@ -72,10 +72,7 @@
                       <tr class="align-middle">
                         <td>
                           <div class="img me-3 border wh-60">
-                            {{-- @foreach ($order->orderProducts as $product)
-                            <img src="{{ $product->image }}" class="img-fluid">
-                            @endforeach --}}
-                            <img src="{{ $order->orderProducts[0]->image }}" class="img-fluid">
+                            <img src="{{ $order->orderProducts[0]->image ?? '' }}" class="img-fluid">
                           </div>
                         </td>
                         <td>
