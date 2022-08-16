@@ -9,14 +9,16 @@
  * @modified   2022-08-03 21:17:04
  */
 
-namespace Beike\Shop\Http\Controllers;
+namespace Beike\Shop\Http\Controllers\Account;
 
+use App\Http\Controllers\Controller;
 use Beike\Repositories\RmaRepo;
 use Beike\Shop\Http\Requests\RmaRequest;
 use Beike\Shop\Services\RmaService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Beike\Repositories\OrderProductRepo;
 
 class RmaController extends Controller
 {
@@ -47,11 +49,12 @@ class RmaController extends Controller
     public function create(int $orderProductId)
     {
         $data = [
-            'orderProductId' => $orderProductId,
+            'orderProduct' => OrderProductRepo::find($orderProductId),
             'statuses' => RmaRepo::getStatuses(),
             'types' => RmaRepo::getTypes(),
         ];
-        return view('rms/form', $data);
+
+        return view('account/rmas/form', $data);
     }
 
     public function store(RmaRequest $request): array

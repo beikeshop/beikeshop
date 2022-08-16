@@ -83,7 +83,12 @@ Route::prefix('/')
                 Route::get('/', [AccountController::class, 'index'])->name('account.index');
                 Route::resource('addresses', AddressController::class);
                 Route::get('edit', [EditController::class, 'index'])->name('account.edit.index');
+
                 Route::get('rmas', [RmaController::class, 'index'])->name('account.rma.index');
+                Route::get('rmas/{id}', [RmaController::class, 'show'])->name('account.rma.show');
+                Route::get('rmas/create/{order_product_id}', [RmaController::class, 'create'])->name('account.rma.create');
+                Route::post('rmas/store', [RmaController::class, 'store'])->name('account.rma.store');
+
                 Route::put('edit', [EditController::class, 'update'])->name('account.edit.update');
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');

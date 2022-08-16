@@ -59,7 +59,7 @@
                 </div>
               </div>
               @if ($order->status == 'completed')
-                <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-outline-primary btn-sm">申请售后</a>
+                <a href="{{ shop_route('account.rma.create', [$product->id]) }}" class="btn btn-outline-primary btn-sm">申请售后</a>
               @endif
             </div>
             @endforeach
