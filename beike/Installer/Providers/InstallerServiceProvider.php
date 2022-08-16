@@ -21,7 +21,7 @@ class InstallerServiceProvider extends ServiceProvider
         }
 
         $this->mergeConfigFrom(__DIR__ . '/../config.php', 'installer');
-        $this->loadViewsFrom(__DIR__ . '/../views', 'installer');
+        $this->loadViewsFrom(__DIR__ . '/../Views', 'installer');
 
         $pathInstaller = base_path('beike/installer');
         $this->loadTranslationsFrom("{$pathInstaller}/Lang", 'installer');
