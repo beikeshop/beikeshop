@@ -25,7 +25,6 @@
           </div>
           <div class="card-body h-600">
             <div class="bg-light rounded-3 p-3 mb-4" style="background: #f6f9fc;">
-              {{-- <h6 class="mb-2">商品信息</h6> --}}
               <div class="d-flex align-items-center">
                 <div class="left wh-70">
                   <img src="{{ $orderProduct->image }}" class="img-fluid">
@@ -36,7 +35,7 @@
                 </div>
               </div>
             </div>
-            {{-- <h6 class="border-bottom pb-3 mb-4">商品信息 & 退换原因</h6> --}}
+
             <form action="{{ shop_route('account.rma.store') }}" method="POST">
               @csrf
               {{-- {{ method_field('put') }} --}}
@@ -56,13 +55,15 @@
                     @endforeach
                   </select>
                 </div>
+
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">退换数量</label>
-                  <input class="form-control" type="text" value="{{ old('quantity', $orderProduct->quantity ?? '1') }}">
+                  <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text" name="quantity" value="{{ old('quantity', $orderProduct->quantity ?? '1') }}">
                   @if ($errors->has('quantity'))
                     <span class="invalid-feedback" role="alert">{{ $errors->first('quantity') }}</span>
                   @endif
                 </div>
+
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">已打开包装</label>
                   <select class="form-select" name="opened">
@@ -73,7 +74,7 @@
 
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">退换原因</label>
-                  <select class="form-select" name="opened">
+                  <select class="form-select" name="rma_reason_id">
                     @foreach ($reasons as $item)
                       <option value="{{ $item['id'] }}" {{ $item['id'] == old('opened', '') ? 'selected': '' }}>{{ $item['name'] }}</option>
                     @endforeach

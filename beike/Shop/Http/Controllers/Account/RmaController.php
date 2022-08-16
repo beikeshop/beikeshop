@@ -59,10 +59,10 @@ class RmaController extends Controller
         return view('account/rmas/form', $data);
     }
 
-    public function store(RmaRequest $request): array
+    public function store(RmaRequest $request)
     {
         $rma = RmaService::createFromShop($request->only('order_product_id', 'quantity', 'opened', 'rma_reason_id', 'type', 'comment'));
 
-        return json_success('售后服务申请提交成功', $rma);
+        return redirect()->to(shop_route('account.rmas.index'))->with('success', '售后服务申请提交成功');
     }
 }

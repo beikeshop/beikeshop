@@ -33,9 +33,7 @@ class RmaRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'order_id' => 'required|exists:orders,id',
             'order_product_id' => 'required|exists:order_products,id',
-            'customer_id' => 'required|exists:customers,id',
             'quantity' => 'required',
             'opened' => 'required',
             'rma_reason_id' => 'required|exists:rma_reasons,id',
@@ -47,9 +45,7 @@ class RmaRequest extends FormRequest
     public function attributes()
     {
         return [
-            'order_id' => '订单',
             'order_product_id' => '订单商品',
-            'customer_id' => '顾客',
             'quantity' => '数量',
             'opened' => '已拆包装',
             'rma_reason_id' => '退换货原因',
