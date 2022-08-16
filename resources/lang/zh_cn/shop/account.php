@@ -19,5 +19,6 @@ return [
 
     'order' => [
         'index' => '订单列表',
+        'order_completed' => '已确认收货',
     ]
 ];

@@ -20,5 +20,6 @@ return [
 
     'order' => [
         'index' => 'Order List',
+        'order_completed' => 'Completed Order',
     ]
 ];
