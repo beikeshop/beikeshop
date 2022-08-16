@@ -22,13 +22,15 @@ class CartDetail extends JsonResource
         $price = $sku->price;
         $description = $product->description;
         $subTotal = $price * $this->quantity;
+        $image = $sku->image ?: $product->image;
+
         return [
             'cart_id' => $this->id,
             'product_id' => $this->product_id,
             'sku_id' => $this->product_sku_id,
             'name' => $description->name,
-            'image' => $sku->image,
-            'image_url' => image_resize($sku->image),
+            'image' => $image,
+            'image_url' => image_resize($image),
             'quantity' => $this->quantity,
             'selected' => $this->selected,
             'price' => $price,
