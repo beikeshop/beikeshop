@@ -31,7 +31,7 @@
           </div>
           <div class="card-body">
             <div class="d-flex flex-nowrap card-items py-2">
-              <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xe77f;</i><span
+              <a href="{{ shop_route('account.wishlist.index') }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xe77f;</i><span
                   class="text-muted">收藏</span></a>
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xe6a3;</i><span
                   class="text-muted">优惠券</span></a>
