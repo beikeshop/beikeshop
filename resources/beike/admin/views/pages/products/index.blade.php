@@ -63,8 +63,8 @@
           </div>
         </div>
 
-        <template v-if="items.length">
-          <table class="table table-hover" v-loading="loading">
+        <template v-if="product.data.length">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th></th>
@@ -92,32 +92,36 @@
                   </div>
                 </th>
                 <th>上架</th>
-                <th>操作</th>
+                <th class="text-end">操作</th>
               </tr>
             </thead>
-            <tr v-for="(item, index) in items" :key="item.id">
+            <tr v-for="(item, index) in product.data" :key="item.id">
               <td>
                 <input type="checkbox" :value="item.id" v-model="selected" />
               </td>
               <td>@{{ item.id }}</td>
-              <td><div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div></td>
+              <td>
+                <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
+              </td>
               <td>@{{ item.name || '无名称' }}</td>
               <td>@{{ item.price_formatted }}</td>
               <td>@{{ item.created_at }}</td>
               <td>@{{ item.position }}</td>
               <td>@{{ item.active ? '上架' : '下架' }}</td>
-              <td>
-                <a :href="item.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
+              <td width="140" class="text-end">
+                <a :href="item.url_edit" class="btn btn-outline-dark btn-sm">编辑</a>
                 <template>
-                  <a v-if="item.deleted_at == ''" href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct(index)">删除</a>
-                  <a v-else href="javascript:void(0)" @click.prevent="restoreProduct(index)">恢复</a>
+                  <a v-if="item.deleted_at == ''" href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
+                    @click.prevent="deleteProduct(index)">删除</a>
+                  <a v-else href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                    @click.prevent="restoreProduct(index)">恢复</a>
                 </template>
               </td>
             </tr>
           </table>
 
-          <el-pagination layout="prev, pager, next" background :page-size="perPage" :current-page.sync="page"
-            :total="totals"></el-pagination>
+          <el-pagination layout="prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
+          :total="product.total"></el-pagination>
         </template>
 
         <p v-else>无商品</p>
@@ -131,23 +135,19 @@
     new Vue({
       el: '#product-app',
       data: {
+        product: @json($product),
         filter: {
-          keyword: @json(request('keyword') ?? ''),
-          category_id: @json(request('category_id') ?? ''),
-          sku: @json(request('sku') ?? ''),
-          active: @json(request('active') ?? ''),
+          keyword: bk.getQueryString('keyword'),
+          category_id: bk.getQueryString('category_id'),
+          sku: bk.getQueryString('sku'),
+          active: bk.getQueryString('active'),
         },
-        items: [],
         selected: [],
-        page: @json((int) request('page') ?? 1),
-        totals: 0,
-        perPage: @json((int) (request('per_page') ?? 20)),
-        loading: false,
-        orderBy: @json(request('order_by', 'products.id:desc')),
+        page: bk.getQueryString('page', 1),
+        perPage: bk.getQueryString('per_page', 20),
+        orderBy: bk.getQueryString('order_by', 'products.id:desc'),
       },
-      mounted: function() {
-        this.load();
-      },
+
       computed: {
         url: function() {
           let filter = {};
@@ -174,60 +174,48 @@
       },
       watch: {
         page: function() {
-          this.load();
+          this.loadData();
         },
+
         orderBy: function() {
-          this.load();
+          this.loadData();
         }
       },
       methods: {
-        load: function() {
+        loadData: function() {
           const url = this.url;
-          window.history.pushState('', '', url);
-          this.loading = true;
-          axios.get(url).then(response => {
-            this.loading = false;
-            this.items = response.data.data;
-            this.totals = response.data.meta.total;
-          }).catch(error => {
-            // this.$message.error(error.response.data.message);
-          });
+          // window.history.pushState('', '', url);
+          $http.get(url).then((res) => {
+            this.product = res.data;
+          })
         },
 
         search: function() {
           this.page = 1;
-          this.load();
+          this.loadData();
         },
 
         deleteProduct: function(index) {
-          const product = this.items[index];
+          const product = this.product.data[index];
 
           this.$confirm('确认要删除选中的商品吗？', '删除商品', {
-            // confirmButtonText: '确定',
-            // cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            axios.delete('products/' + product.id).then(response => {
+            $http.delete('products/' + product.id).then((res) => {
               location.reload();
-            }).catch(error => {
-              // this.$message.error(error.response.data.message);
-            });
+            })
           });
         },
 
         restoreProduct: function(index) {
-          const product = this.items[index];
+          const product = this.product.data[index];
 
           this.$confirm('确认要恢复选中的商品吗？', '恢复商品', {
             type: 'warning'
           }).then(() => {
-            axios.put('products/restore', {
-              id: product.id
-            }).then(response => {
+            $http.put('products/restore', {id: product.id}).then((res) => {
               location.reload();
-            }).catch(error => {
-              // this.$message.error(error.response.data.message);
-            });
+            })
           });
         }
       }

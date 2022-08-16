@@ -1,5 +1,5 @@
 export default {
-   fileManagerIframe(callback) {
+  fileManagerIframe(callback) {
     const base = document.querySelector('base').href;
 
     layer.open({
@@ -38,4 +38,13 @@ export default {
     for (; str.length < length; str += Math.random().toString(36).substr(2));
     return str.substr(0, length);
   },
+
+  getQueryString(name, defaultValue) {
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+    const r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return decodeURIComponent(r[2]);
+    }
+    return defaultValue || '';
+  }
 }
