@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">商品名称</label>
-              <input type="text" v-model="filter.keyword" class="form-control" placeholder="keyword">
+              <input type="text" v-model="filter.name" class="form-control" placeholder="name">
             </div>
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">sku</label>
@@ -45,7 +45,7 @@
             <label class="filter-title"></label>
             <div class="col-auto">
               <button type="button" @click="search" class="btn btn-primary">筛选</button>
-              <button type="button" @click="search" class="btn btn-outline-primary">重置</button>
+              <button type="button" @click="resetSearch" class="btn btn-outline-primary">重置</button>
             </div>
           </div>
         </div>
@@ -135,37 +135,39 @@
     new Vue({
       el: '#product-app',
       data: {
-        product: @json($product),
+        product: @json($products),
         filter: {
-          keyword: bk.getQueryString('keyword'),
+          name: bk.getQueryString('name'),
           category_id: bk.getQueryString('category_id'),
           sku: bk.getQueryString('sku'),
           active: bk.getQueryString('active'),
         },
         selected: [],
-        page: bk.getQueryString('page', 1),
-        perPage: bk.getQueryString('per_page', 20),
+        page: bk.getQueryString('page', 1) * 1,
         orderBy: bk.getQueryString('order_by', 'products.id:desc'),
       },
 
       computed: {
         url: function() {
           let filter = {};
-          filter.per_page = this.perPage;
           if (this.orderBy != 'products.id:desc') {
             filter.order_by = this.orderBy;
           }
+
           if (this.page > 1) {
             filter.page = this.page;
           }
+
           for (key in this.filter) {
             const value = this.filter[key];
             if (value !== '' && value !== null) {
               filter[key] = value;
             }
           }
+
           const query = Object.keys(filter).map(key => key + '=' + filter[key]).join('&');
           const url = @json(admin_route('products.index'));
+
           if (query) {
             return url + '?' + query;
           }
@@ -186,12 +188,17 @@
         loadData: function() {
           window.history.pushState('', '', this.url);
           $http.get(this.url).then((res) => {
-            this.product = res.data;
+            this.product = res;
           })
         },
 
         search: function() {
           this.page = 1;
+          this.loadData();
+        },
+
+        resetSearch() {
+          Object.keys(this.filter).forEach(key => this.filter[key] = '')
           this.loadData();
         },
 
