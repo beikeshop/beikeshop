@@ -27,7 +27,7 @@ class RmaController extends Controller
             'rmas' => $rmas,
         ];
 
-        return view('rmas.index', $data);
+        return view('account/rmas/index', $data);
     }
 
     /**

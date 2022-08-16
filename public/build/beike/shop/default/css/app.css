@@ -1243,12 +1243,13 @@ body.page-account-order-info {
 body.page-account-order-info .product-list {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #eee;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 }
 body.page-account-order-info .product-list .left {
-  width: 90px;
+  width: 80px;
   margin-right: 10px;
 }
 body.page-account-order-info .product-list .right {

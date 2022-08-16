@@ -23,6 +23,7 @@
             </ul>
           </div>
         @endif
+        @if (0)
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">个人中心</h5>
@@ -39,18 +40,19 @@
             </div>
           </div>
         </div>
+        @endif
         <div class="card account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">我的订单</h5>
-            <a href="http://" class="text-muted">全部订单</a>
+            <a href="{{ shop_route('account.order.index') }}" class="text-muted">全部订单</a>
           </div>
           <div class="card-body">
-            <div class="d-flex flex-nowrap card-items mb-4 py-2">
-              <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf12f;</i><span
+            <div class="d-flex flex-nowrap card-items mb-4 py-3">
+              <a href="{{ shop_route('account.order.index', ['status' => 'unpaid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf12f;</i><span
                   class="text-muted">待付款</span></a>
-              <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf130;</i><span
+              <a href="{{ shop_route('account.order.index', ['status' => 'paid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf130;</i><span
                   class="text-muted">待发货</span></a>
-              <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf131;</i><span
+              <a href="{{ shop_route('account.order.index', ['status' => 'shipped']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf131;</i><span
                   class="text-muted">待收货</span></a>
               <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf132;</i><span
                   class="text-muted">售后</span></a>

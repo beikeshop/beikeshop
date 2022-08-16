@@ -15,7 +15,7 @@
             <div class="d-flex align-items-center">
               <span :class="['me-4', 'badge', 'bg-' + (data.active ? 'success' : 'secondary')]">@{{ data.active ? '启用' : '禁用' }}</span>
               <div>
-                <a :href="data.url_edit" class="btn btn-outline-info btn-sm">编辑</a>
+                <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
                 <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">删除</a>
               </div>
             </div>

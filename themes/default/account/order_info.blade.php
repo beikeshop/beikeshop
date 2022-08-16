@@ -51,11 +51,16 @@
           <div class="card-body">
             @foreach ($order->orderProducts as $product)
             <div class="product-list">
-              <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
-              <div class="right">
-                <div class="name">{{ $product->name }}  x {{ $product->quantity }}</div>
-                <div class="price">{{ $product->price }}</div>
+              <div class="d-flex">
+                <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
+                <div class="right">
+                  <div class="name">{{ $product->name }}  x {{ $product->quantity }}</div>
+                  <div class="price">{{ $product->price }}</div>
+                </div>
               </div>
+              @if ($order->status == 'completed')
+                <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-outline-primary btn-sm">申请售后</a>
+              @endif
             </div>
             @endforeach
           </div>

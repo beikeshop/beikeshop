@@ -20,6 +20,7 @@ use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\AddressController;
 use Beike\Shop\Http\Controllers\Account\EditController;
 use Beike\Shop\Http\Controllers\Account\AccountController;
+use Beike\Shop\Http\Controllers\Account\RmaController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 use Beike\Shop\Http\Controllers\Account\ForgottenController;
 
@@ -82,6 +83,7 @@ Route::prefix('/')
                 Route::get('/', [AccountController::class, 'index'])->name('account.index');
                 Route::resource('addresses', AddressController::class);
                 Route::get('edit', [EditController::class, 'index'])->name('account.edit.index');
+                Route::get('rmas', [RmaController::class, 'index'])->name('account.rma.index');
                 Route::put('edit', [EditController::class, 'update'])->name('account.edit.update');
                 Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
                 Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
