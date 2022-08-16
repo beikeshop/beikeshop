@@ -172,6 +172,7 @@
           return url;
         }
       },
+
       watch: {
         page: function() {
           this.loadData();
@@ -183,9 +184,8 @@
       },
       methods: {
         loadData: function() {
-          const url = this.url;
-          // window.history.pushState('', '', url);
-          $http.get(url).then((res) => {
+          window.history.pushState('', '', this.url);
+          $http.get(this.url).then((res) => {
             this.product = res.data;
           })
         },

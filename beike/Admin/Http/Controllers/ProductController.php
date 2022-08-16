@@ -17,21 +17,21 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        // $product = ProductRepo::list($request->all());
         $product = ProductRepo::list($request->all());
-        // if ($request->expectsJson()) {
-            // return ProductResource::collection($products);
-        // }
+
         // dd($product->getItems());
         // dd(ProductResource::collection($productitem));
+        // dd(ProductResource::collection($product)->jsonSerialize());
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
-            'product' => $product,
+            'product' => ProductResource::collection($product),
         ];
 
         if ($request->expectsJson()) {
             return ProductResource::collection($product);
-            return json_success('成功', ProductResource::collection($product));
-            return json_success('成功', $product);
+            // return json_success('成功', ProductResource::collection($product));
+            // return json_success('成功', $product);
         }
 
         return view('admin::pages.products.index', $data);
