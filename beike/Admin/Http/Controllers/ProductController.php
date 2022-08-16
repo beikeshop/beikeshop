@@ -29,6 +29,8 @@ class ProductController extends Controller
         ];
 
         if ($request->expectsJson()) {
+            return ProductResource::collection($product);
+            return json_success('成功', ProductResource::collection($product));
             return json_success('成功', $product);
         }
 
