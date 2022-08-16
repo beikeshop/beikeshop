@@ -1263,6 +1263,9 @@ body.page-account-order-info .product-list .right .name {
 body.page-account-order-info .product-list .right .price {
   font-weight: bold;
 }
+body.page-account-order-info .nowrap {
+  white-space: nowrap;
+}
 
 body.page-account-address .addresses-wrap .item, body.page-checkout .addresses-wrap .item {
   position: relative;

@@ -63,7 +63,7 @@
                 </div>
               @else
                 {{-- <p class="text-muted">近期订单</p> --}}
-                <ul class="list-unstyled orders-list">
+                <ul class="list-unstyled orders-list table-responsive">
                   <table class="table table-hover">
                     <tbody>
                       @foreach ($latest_orders as $order)

@@ -18,12 +18,12 @@
         <div class="card mb-4 order-head">
           <div class="card-header"><h5 class="card-title">订单详情</h5></div>
           <div class="card-body">
-            <div class="bg-light p-2">
+            <div class="bg-light p-2 table-responsive">
               <table class="table table-borderless mb-0">
                 <thead>
                   <tr>
                     <th>订单号</th>
-                    <th>下单日期</th>
+                    <th class="nowrap">下单日期</th>
                     <th>状态</th>
                     <th>订单金额</th>
                   </tr>
@@ -35,7 +35,7 @@
                     <td>
                       {{ $order->status }}
                       @if ($order->status == 'unpaid')
-                        <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm">去支付</a>
+                        <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">去支付</a>
                       @endif
                     </td>
                     <td>{{ $order->total }}</td>
