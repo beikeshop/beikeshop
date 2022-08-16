@@ -78,7 +78,7 @@ class RmaReasonRepo
      */
     public static function list(array $data = [])
     {
-        $builder = Rma::query();
+        $builder = RmaReason::query();
 
         if (isset($data['name'])) {
             $builder->where('name', 'like', "%{$data['name']}%");
