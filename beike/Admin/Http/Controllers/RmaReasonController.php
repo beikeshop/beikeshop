@@ -24,7 +24,7 @@ class RmaReasonController extends Controller
             'rmaReasons' => $rmaReasons,
         ];
 
-        return view('admin::pages.rma_reasons.index1', $data);
+        return view('admin::pages.rma_reasons.index', $data);
     }
 
     public function store(Request $request): array
