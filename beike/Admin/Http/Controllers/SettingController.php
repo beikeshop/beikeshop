@@ -37,9 +37,8 @@ class SettingController extends Controller
         ];
 
         $data = [
-            'settings' => SystemSettingRepo::getList(),
             'countries' => CountryRepo::all(),
-            'currencies' => CurrencyRepo::all(),
+            'currencies' => CurrencyRepo::listEnabled(),
             'tax_address' => $tax_address,
             'themes' => $themes
         ];
