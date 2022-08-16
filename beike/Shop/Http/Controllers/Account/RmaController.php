@@ -52,7 +52,7 @@ class RmaController extends Controller
         $data = [
             'orderProduct' => OrderProductRepo::find($orderProductId),
             'statuses' => RmaRepo::getStatuses(),
-            'reasons' => RmaReasonRepo::list(),
+            'reasons' => RmaReasonRepo::list()->toArray(),
             'types' => RmaRepo::getTypes(),
         ];
 

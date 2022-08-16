@@ -70,11 +70,13 @@
                     <option value="1">是</option>
                   </select>
                 </div>
+
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">退换原因</label>
                   <select class="form-select" name="opened">
-                    <option selected value="0">否</option>
-                    <option value="1">是</option>
+                    @foreach ($reasons as $item)
+                      <option value="{{ $item['id'] }}" {{ $item['id'] == old('opened', '') ? 'selected': '' }}>{{ $item['name'] }}</option>
+                    @endforeach
                   </select>
                 </div>
 
