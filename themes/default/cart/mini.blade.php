@@ -6,7 +6,7 @@
   <div class="offcanvas-right-products">
     @foreach ($carts as $cart)
     <div class="product-list d-flex align-items-center">
-      <div class="left"><img src="{{ $cart['image_url'] }}" calss="img-fluid"></div>
+      <div class="left"><img src="{{ $cart['image'] }}" calss="img-fluid"></div>
       <div class="right flex-grow-1">
         <div class="name fs-sm fw-bold mb-2">{{ $cart['name'] }}</div>
         <div class="product-bottom d-flex justify-content-between align-items-center">
