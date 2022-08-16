@@ -31,6 +31,7 @@ return [
     'setting' => 'Settings',
     'plugin' => 'Plugin',
     'admin_user' => 'Admin User',
+    'admin_role' => 'Admin Role',
     'region' => 'Region',
     'tax_rate' => 'Tax Rate',
     'tax_class' => 'Tax Class',

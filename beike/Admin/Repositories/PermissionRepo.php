@@ -53,6 +53,7 @@ class PermissionRepo
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.admin_user'), 'permissions' => $this->getAdminUserPermissions()],
+            ['title' => trans('admin/common.admin_role'), 'permissions' => $this->getAdminRolePermissions()],
             ['title' => trans('admin/common.region'), 'permissions' => $this->getRegionPermissions()],
             ['title' => trans('admin/common.tax_rate'), 'permissions' => $this->getTaxRatePermissions()],
             ['title' => trans('admin/common.tax_class'), 'permissions' => $this->getTaxClassPermissions()],
@@ -216,6 +217,19 @@ class PermissionRepo
         $routes = ['admin_users_index', 'admin_users_create', 'admin_users_show', 'admin_users_update', 'admin_users_delete'];
         $items = $this->getPermissionList('user', $routes);
         return hook_filter('role.user_permissions', $items);
+    }
+
+
+    /**
+     * 后台管理员权限列表
+     *
+     * @return mixed
+     */
+    private function getAdminRolePermissions()
+    {
+        $routes = ['admin_roles_index', 'admin_roles_create', 'admin_roles_show', 'admin_roles_update', 'admin_roles_delete'];
+        $items = $this->getPermissionList('role', $routes);
+        return hook_filter('role.role_permissions', $items);
     }
 
 

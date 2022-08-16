@@ -196,7 +196,9 @@ Route::prefix($adminName)
 
                 // 后台用户组
                 Route::middleware('can:admin_roles_index')->get('admin_roles', [Controllers\AdminRoleController::class, 'index'])->name('admin_roles.index');
+                Route::middleware('can:admin_roles_create')->get('admin_roles/create', [Controllers\AdminRoleController::class, 'create'])->name('admin_roles.create');
                 Route::middleware('can:admin_roles_create')->post('admin_roles', [Controllers\AdminRoleController::class, 'store'])->name('admin_roles.store');
+                Route::middleware('can:admin_roles_show')->get('admin_roles/{role_id}/edit', [Controllers\AdminRoleController::class, 'edit'])->name('admin_roles.edit');
                 Route::middleware('can:admin_roles_update')->put('admin_roles/{role_id}', [Controllers\AdminRoleController::class, 'update'])->name('admin_roles.update');
                 Route::middleware('can:admin_roles_delete')->delete('admin_roles/{role_id}', [Controllers\AdminRoleController::class, 'destroy'])->name('admin_roles.destroy');
             });

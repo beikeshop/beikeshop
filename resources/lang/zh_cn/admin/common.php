@@ -31,6 +31,7 @@ return [
     'setting' => '系统设置',
     'plugin' => '插件管理',
     'admin_user' => '后台用户',
+    'admin_role' => '用户角色',
     'region' => '区域分组',
     'tax_rate' => '税率管理',
     'tax_class' => '税类管理',
