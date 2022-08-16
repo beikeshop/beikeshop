@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 
 class RmaReasonRepo
@@ -72,10 +73,10 @@ class RmaReasonRepo
     }
 
     /**
-     * @param $data
-     * @return LengthAwarePaginator
+     * @param array $data
+     * @return Builder[]|Collection
      */
-    public static function list($data = []): LengthAwarePaginator
+    public static function list(array $data = [])
     {
         $builder = Rma::query();
 
@@ -83,6 +84,6 @@ class RmaReasonRepo
             $builder->where('name', 'like', "%{$data['name']}%");
         }
 
-        return $builder->paginate(10);
+        return $builder->get();
     }
 }
