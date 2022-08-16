@@ -41,6 +41,8 @@ class PermissionRepo
     {
         $permissions = [
             ['title' => trans('admin/common.order'), 'permissions' => $this->getOrderPermissions()],
+            ['title' => trans('admin/common.rma'), 'permissions' => $this->getRmaPermissions()],
+            ['title' => trans('admin/common.rma_reason'), 'permissions' => $this->getRmaReasonPermissions()],
             ['title' => trans('admin/common.product'), 'permissions' => $this->getProductPermissions()],
             ['title' => trans('admin/common.category'), 'permissions' => $this->getCategoryPermissions()],
             ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
@@ -56,6 +58,7 @@ class PermissionRepo
             ['title' => trans('admin/common.tax_class'), 'permissions' => $this->getTaxClassPermissions()],
             ['title' => trans('admin/common.currency'), 'permissions' => $this->getCurrencyPermissions()],
             ['title' => trans('admin/common.language'), 'permissions' => $this->getLanguagePermissions()],
+            ['title' => trans('admin/common.file_manager'), 'permissions' => $this->getFileManagerPermissions()],
         ];
         return hook_filter('role.all_permissions', $permissions);
     }
@@ -71,6 +74,32 @@ class PermissionRepo
         $routes = ['orders_index', 'orders_create', 'orders_show', 'orders_update', 'orders_delete', 'orders_update_status'];
         $items = $this->getPermissionList('order', $routes);
         return hook_filter('role.order_permissions', $items);
+    }
+
+
+    /**
+     * 售后（退换货）权限列表
+     *
+     * @return \string[][]
+     */
+    private function getRmaPermissions(): array
+    {
+        $routes = ['rmas_index', 'rmas_create', 'rmas_show', 'rmas_update', 'rmas_delete', 'rmas_update_status'];
+        $items = $this->getPermissionList('rma', $routes);
+        return hook_filter('role.rma_permissions', $items);
+    }
+
+
+    /**
+     * 售后（退换货）原因权限列表
+     *
+     * @return \string[][]
+     */
+    private function getRmaReasonPermissions(): array
+    {
+        $routes = ['rma_reasons_index', 'rma_reasons_create', 'rma_reasons_show', 'rma_reasons_update', 'rma_reasons_delete', 'rma_reasons_update_status'];
+        $items = $this->getPermissionList('rma_reason', $routes);
+        return hook_filter('role.rma_reason_permissions', $items);
     }
 
 
@@ -252,6 +281,19 @@ class PermissionRepo
         $routes = ['languages_index', 'languages_create', 'languages_show', 'languages_update', 'languages_delete'];
         $items = $this->getPermissionList('language', $routes);
         return hook_filter('role.language_permissions', $items);
+    }
+
+
+    /**
+     * 获取文件管理器权限列表
+     *
+     * @return array[]
+     */
+    private function getFileManagerPermissions(): array
+    {
+        $routes = ['file_manager_create', 'file_manager_show', 'file_manager_update', 'file_manager_delete'];
+        $items = $this->getPermissionList('file_manager', $routes);
+        return hook_filter('role.file_manager_permissions', $items);
     }
 
 
