@@ -17,7 +17,7 @@
         <li class="breadcrumb-item active" aria-current="page">Library</li>
       </ol>
     </nav>
-    <div class="hero-content pb-5 text-center"><h1 class="hero-heading">用户登录与注册</h1></div>
+    <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/account.login.index') }}</h1></div>
     <div class="justify-content-center row mb-5">
       <div class="col-lg-5">
         <div class="card">

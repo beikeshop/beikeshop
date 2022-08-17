@@ -11,7 +11,9 @@
 
 return [
     'index' => '个人中心',
-    'login' => '登录',
+    'login' => [
+        'index' => '用户登录与注册',
+    ],
 
     'wishlist' => [
         'index' => '收藏列表',
