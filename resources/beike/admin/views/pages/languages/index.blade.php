@@ -28,8 +28,8 @@
             <td>@{{ language.image }}</td>
             <td>@{{ language.sort_order }}</td>
             <td>
-              <el-switch v-model="language.status" @change="(e) => {statusChange(e, index)}" :active-value="1" :inactive-value="0"></el-switch>
-                {{-- @{{ language.status }} --}}
+              {{-- <el-switch v-model="language.status" @change="(e) => {statusChange(e, index)}" :active-value="1" :inactive-value="0"></el-switch> --}}
+                @{{ language.status }}
             </td>
             {{-- <td>@{{ language.status }}</td> --}}
             <td class="text-end">
