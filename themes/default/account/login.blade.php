@@ -91,7 +91,7 @@
   <script>
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('{{ __('shop/account.login.enter_password') }}'));
       } else {
         if (value !== '') {
           app.$refs.registerForm.validateField('password_confirmation');
@@ -102,9 +102,9 @@
 
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入确认密码'));
+        callback(new Error('{{ __('shop/account.login.please_confirm') }}'));
       } else if (value !== app.registerForm.password) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error('{{ __('shop/account.login.password_err') }}'));
       } else {
         callback();
       }
@@ -127,18 +127,18 @@
 
         loginRules: {
           email: [
-            {required: true, message: '请输入邮箱', trigger: 'blur'},
-            {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/account.login.enter_email') }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('shop/account.login.email_err') }}', trigger: 'blur'},
           ],
           password: [
-            {required: true, message: '请输入密码', trigger: 'blur'}
+            {required: true, message: '{{ __('shop/account.login.enter_password')}}', trigger: 'blur'}
           ]
         },
 
         registeRules: {
           email: [
-            {required: true, message: '请输入邮箱', trigger: 'blur'},
-            {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/account.login.enter_email') }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('shop/account.login.email_err') }}', trigger: 'blur'},
           ],
           password: [
             {required: true, validator: validatePass, trigger: 'blur'}
@@ -162,7 +162,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              layer.msg('请检查表单是否填写正确', () => {})
+              layer.msg('{{ __('shop/account.login.check_form') }}', () => {})
               return;
             }
 

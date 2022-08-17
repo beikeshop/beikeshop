@@ -27,6 +27,12 @@ return [
         'not_Already' => '还不是我们的注册客户？',
         'confirm_password' => '确认密码',
         'register' => '注册',
+        'enter_password' => '请输入密码',
+        'enter_email' => '请输入邮箱',
+        'please_confirm' => '请确认密码',
+        'password_err' => '两次输入密码不一致!',
+        'email_err' => '请输入正确邮箱地址!',
+        'check_form' => '请检查表单是否填写正确',
     ],
 
     'wishlist' => [
