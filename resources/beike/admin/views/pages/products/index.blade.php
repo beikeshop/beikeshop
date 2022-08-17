@@ -44,8 +44,8 @@
           <div class="row">
             <label class="filter-title"></label>
             <div class="col-auto">
-              <button type="button" @click="search" class="btn btn-primary">筛选</button>
-              <button type="button" @click="resetSearch" class="btn btn-outline-primary">重置</button>
+              <button type="button" @click="search" class="btn btn-outline-primary btn-sm">筛选</button>
+              <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">重置</button>
             </div>
           </div>
         </div>

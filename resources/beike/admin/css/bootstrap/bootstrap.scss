@@ -13,12 +13,13 @@ $success: #71c20b;
 $info: #1a8eff;
 $body-bg: #f9fbfd;
 
-$font-family-base: 'poppins', sans-serif;
-$border-radius:  0;
+$font-family-base: 'poppins',
+sans-serif;
+$border-radius: 0;
 $btn-border-radius: 0;
 $btn-border-radius-sm: 0;
 $btn-border-radius-lg: 0;
-$input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
+$input-btn-focus-box-shadow: 0 0 11px 0 rgba($color: $primary, $alpha: .1);
 
 // $btn-border-width: 0;
 $font-size-base: 0.82rem;
@@ -26,10 +27,10 @@ $form-check-input-width: 1.2em;
 $form-switch-width: 2.6em;
 $link-decoration: none;
 $link-color: #1890ff;
-$form-floating-input-padding-t:   1.325rem;
-$form-floating-input-padding-b:   .625rem;
-$form-floating-padding-y:         .9rem;
-$form-floating-height:        50px;
+$form-floating-input-padding-t: 1.325rem;
+$form-floating-input-padding-b: .625rem;
+$form-floating-padding-y: .9rem;
+$form-floating-height: 50px;
 $btn-focus-width: 0;
 $table-border-color: #e9ecef;
 $border-color: #e8e8e8;
@@ -37,13 +38,16 @@ $input-border-color: #e2e2e2;
 $badge-border-radius: 2px;
 $text-muted: #95aac9;
 
+$form-feedback-icon-valid: none;
+$form-feedback-icon-valid-color: inherit;
+
 $alert-padding-y: 0.5rem;
 
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
 // @import 'node_modules/bootstrap/scss/bootstrap';
 
-.table > :not(:first-child) {
+.table> :not(:first-child) {
   border-top: none;
 }
 
@@ -71,7 +75,26 @@ $alert-padding-y: 0.5rem;
   }
 }
 
-.was-validated .form-control:valid, .form-control.is-valid {
-  border-color: $input-border-color;
-  background-image: none;
+.was-validated {
+  .form-control,
+  .form-select {
+    &:valid {
+      border-color: $input-border-color;
+    }
+  }
+
+  .form-check-input {
+    &:valid {
+      border-color: rgba(#000, .25);
+
+      &:checked {
+        background-color: $primary;
+        border-color: $primary;
+      }
+
+      &~.form-check-label {
+        color: inherit;
+      }
+    }
+  }
 }
