@@ -13,6 +13,20 @@ return [
     'index' => '个人中心',
     'login' => [
         'index' => '用户登录与注册',
+        'Home' => '首页',
+        'Library' => '登录与注册',
+        'Login' => '登录',
+        'Already' => '已经是我们的客户了？',
+        'description' => '已经是我们的客户了？',
+        'email' => '邮件',
+        'email_address' => '邮件地址',
+        'password' => '密码',
+        'forget_password' => '忘记密码',
+        'login' => '登录',
+        'new' => '新账号',
+        'not_Already' => '还不是我们的注册客户？',
+        'confirm_password' => '确认密码',
+        'register' => '注册',
     ],
 
     'wishlist' => [

@@ -13,8 +13,8 @@
   <div class="container" id="page-login" v-cloak>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb justify-content-center">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item"><a href="#">{{ __('shop/account.login.Home') }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ __('shop/account.login.Library') }}</li>
       </ol>
     </nav>
     <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/account.login.index') }}</h1></div>
@@ -23,27 +23,27 @@
         <div class="card">
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
             <div class="login-item-header card-header">
-              <h6 class="text-uppercase mb-0">Login</h6>
+              <h6 class="text-uppercase mb-0">{{ __('shop/account.login.Login') }}</h6>
             </div>
             <div class="card-body">
-              <p class="lead">Already our customer?</p>
+              <p class="lead">{{ __('shop/account.login.Already') }}</p>
               <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                 egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
                 amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
               <hr>
 
-              <el-form-item label="邮箱" prop="email">
-                <el-input v-model="loginForm.email" placeholder="邮箱地址"></el-input>
+              <el-form-item label="{{ __('shop/account.login.email') }}" prop="email">
+                <el-input v-model="loginForm.email" placeholder="{{ __('shop/account.login.email_address') }}"></el-input>
               </el-form-item>
 
-              <el-form-item label="密码" prop="password" class="mb-4">
-                <el-input type="password" v-model="loginForm.password" placeholder="密码"></el-input>
+              <el-form-item label="{{ __('shop/account.login.password') }}" prop="password" class="mb-4">
+                <el-input type="password" v-model="loginForm.password" placeholder="{{ __('shop/account.login.password') }}"></el-input>
               </el-form-item>
 
-              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> 忘记密码</a>
+              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/account.login.forget_password') }}</a>
 
               <div class="mt-4 mb-3">
-                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> 登录</button>
+                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/account.login.login') }}</button>
               </div>
             </div>
           </el-form>
@@ -52,10 +52,10 @@
       <div class="col-lg-5">
         <div class="card">
           <div class="login-item-header card-header">
-            <h6 class="text-uppercase mb-0">New account</h6>
+            <h6 class="text-uppercase mb-0">{{ __('shop/account.login.new') }}</h6>
           </div>
           <div class="card-body">
-            <p class="lead">Not our registered customer yet?</p>
+            <p class="lead">{{ __('shop/account.login.not_Already') }}</p>
             <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
               you! The whole process will not take you more than a minute!</p>
             <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, our
@@ -63,21 +63,21 @@
               <hr>
 
               <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
-                <el-form-item label="邮箱" prop="email">
-                  <el-input v-model="registerForm.email" placeholder="邮箱地址"></el-input>
+                <el-form-item label="{{ __('shop/account.login.email') }}" prop="email">
+                  <el-input v-model="registerForm.email" placeholder="{{ __('shop/account.login.email_address') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="密码" prop="password">
-                  <el-input type="password" v-model="registerForm.password" placeholder="密码"></el-input>
+                <el-form-item label="{{ __('shop/account.login.password') }}" prop="password">
+                  <el-input type="password" v-model="registerForm.password" placeholder="{{ __('shop/account.login.password') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="确认密码" prop="password_confirmation">
-                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="确认密码"></el-input>
+                <el-form-item label="{{ __('shop/account.login.confirm_password') }}" prop="password_confirmation">
+                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/account.login.confirm_password') }}"></el-input>
                 </el-form-item>
 
 
                 <div class="mt-5 mb-3">
-                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> 注册</button>
+                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> {{ __('shop/account.login.register') }}</button>
                 </div>
               </el-form>
           </div>
