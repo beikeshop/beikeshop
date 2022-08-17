@@ -18,7 +18,7 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">我的售后</h5>
+            <h5 class="card-title">我的售后</h5>
           </div>
           <div class="card-body">
             <table class="table ">
@@ -45,6 +45,8 @@
                 @endforeach
               </tbody>
             </table>
+
+            {{-- {{ $rmas->links('shared/pagination/bootstrap-4') }} --}}
           </div>
         </div>
       </div>
