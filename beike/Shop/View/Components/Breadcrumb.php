@@ -14,6 +14,7 @@ namespace Beike\Shop\View\Components;
 use Beike\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Breadcrumb extends Component
@@ -36,6 +37,8 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleCategoryLinks($value));
         } elseif ($type == 'product') {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleProductLinks($value));
+        } elseif (Str::startsWith($value, 'account')) {
+            $breadcrumbs = array_merge($breadcrumbs, $this->handleAccountLinks($value));
         } else {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleLinks($type, $value, $text));
         }
@@ -95,6 +98,35 @@ class Breadcrumb extends Component
 
         $productLink = handle_link(['type' => 'product', 'value' => $value]);
         $links[] = ['title' => $productLink['text'], 'url' => $productLink['link']];
+
+        return $links;
+    }
+
+
+    /**
+     * 处理个人中心面包屑
+     *
+     * @param $value
+     * @return array[]
+     */
+    private function handleAccountLinks($value): array
+    {
+        $links = [];
+        $values = explode('.', $value);
+
+        if (count($values) == 3) {
+            $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+            $links[] = [
+                'title' => $link['text'],
+                'url' => $link['link'],
+            ];
+        }
+
+        $link = handle_link(['type' => 'static', 'value' => $value]);
+        $links[] = [
+            'title' => $link['text'],
+            'url' => $link['link'],
+        ];
 
         return $links;
     }
