@@ -28,7 +28,7 @@ class CartDetail extends JsonResource
             'cart_id' => $this->id,
             'product_id' => $this->product_id,
             'sku_id' => $this->product_sku_id,
-            'name' => $description->name,
+            'name' => sub_string($description->name),
             'image' => $image,
             'image_url' => image_resize($image),
             'quantity' => $this->quantity,

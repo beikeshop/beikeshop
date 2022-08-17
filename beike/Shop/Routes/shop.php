@@ -35,12 +35,7 @@ Route::prefix('/')
         Route::get('brands/autocomplete', [BrandController::class, 'autocomplete'])->name('brands.autocomplete');
         Route::get('brands/{id}', [BrandController::class, 'show'])->name('brands.show');
 
-        Route::get('carts', [CartController::class, 'index'])->name('carts.index');
-        Route::post('carts', [CartController::class, 'store'])->name('carts.store');
         Route::get('carts/mini', [CartController::class, 'miniCart'])->name('carts.mini');
-        Route::put('carts/{cart}', [CartController::class, 'update'])->name('carts.update');
-        Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
-        Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
 
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
@@ -70,6 +65,12 @@ Route::prefix('/')
 
         Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
+                Route::get('carts', [CartController::class, 'index'])->name('carts.index');
+                Route::post('carts', [CartController::class, 'store'])->name('carts.store');
+                Route::put('carts/{cart}', [CartController::class, 'update'])->name('carts.update');
+                Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
+                Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
+
                 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
                 Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
                 Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');

@@ -72,12 +72,11 @@ class CartController extends Controller
 
     /**
      * 右上角购物车
-     * @return array
+     * @return mixed
      */
     public function miniCart()
     {
         $data = CartService::reloadData();
-        // return json_success('获取成功', $data);
         return view('cart/mini', $data);
     }
 
