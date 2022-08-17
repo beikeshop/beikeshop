@@ -28,7 +28,7 @@ class RmaService
             'customer_id' => $customer->id,
             'name' => $customer->name,
             'email' => $customer->email,
-            'telephone' => $customer->telephone,
+            'telephone' => $customer->telephone ?? '',
             'product_name' => $orderProduct->name,
             'sku' => $orderProduct->product_sku,
             'product_name' => $orderProduct->name,
@@ -37,6 +37,7 @@ class RmaService
             'rma_reason_id' => $data['rma_reason_id'],
             'type' => $data['type'],
             'comment' => $data['comment'],
+            'status' => true,
         ];
 
         $rma = RmaRepo::create($params);

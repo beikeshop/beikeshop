@@ -26,6 +26,7 @@ class RmaController extends Controller
     public function index()
     {
         $rmas = RmaRepo::listByCustomer(current_customer());
+
         $data = [
             'rmas' => $rmas,
         ];
@@ -63,6 +64,6 @@ class RmaController extends Controller
     {
         $rma = RmaService::createFromShop($request->only('order_product_id', 'quantity', 'opened', 'rma_reason_id', 'type', 'comment'));
 
-        return redirect()->to(shop_route('account.rmas.index'))->with('success', '售后服务申请提交成功');
+        return redirect()->to(shop_route('account.rma.index'))->with('success', '售后服务申请提交成功');
     }
 }

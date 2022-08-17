@@ -130,8 +130,9 @@ class RmaRepo
         }
 
         $results = [];
-        foreach ($customer->rmas as $rma) {
-            $results[$rma->first][] = (new RmaDetail($rma))->jsonSerialize();
+
+        foreach ($customer->rmas()->with('reason')->get() as $rma) {
+            $results[] = (new RmaDetail($rma))->jsonSerialize();
         }
 
         return $results;
