@@ -26,10 +26,10 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item me-3">
         <div class="dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <img src="http://dummyimage.com/100x100" class="avatar img-fluid rounded-circle me-1">
+            {{-- <img src="http://dummyimage.com/100x100" class="avatar img-fluid rounded-circle me-1"> --}}
             <span class="text-dark ml-2">{{ current_user()->name }}</span>
           </a>
 

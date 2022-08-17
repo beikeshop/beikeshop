@@ -67,6 +67,9 @@ $card-border-width: 0;
 
 $alert-padding-y: 0.5rem;
 
+$form-feedback-icon-valid: none;
+$form-feedback-icon-valid-color: inherit;
+
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
@@ -134,7 +137,26 @@ $alert-padding-y: 0.5rem;
   }
 }
 
-.was-validated .form-control:valid, .form-control.is-valid {
-  border-color: $input-border-color;
-  background-image: none;
+.was-validated {
+  .form-control,
+  .form-select {
+    &:valid {
+      border-color: $input-border-color;
+    }
+  }
+
+  .form-check-input {
+    &:valid {
+      border-color: rgba(#000, .25);
+
+      &:checked {
+        background-color: $primary;
+        border-color: $primary;
+      }
+
+      &~.form-check-label {
+        color: inherit;
+      }
+    }
+  }
 }

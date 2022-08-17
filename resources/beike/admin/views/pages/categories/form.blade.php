@@ -6,7 +6,7 @@
   <div id="category-app" class="card">
     <div class="card-header">编辑分类</div>
     <div class="card-body">
-      <form action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}"
+      <form class="needs-validation" novalidate action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}"
         method="POST">
         @csrf
         @method($category->id ? 'PUT' : 'POST')
@@ -16,7 +16,7 @@
           <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
         @endif
 
-        <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" required />
+        <x-admin-form-input-locale name="descriptions.*.name" title="名称" :value="$descriptions" :required="true" />
         <x-admin-form-input-locale name="descriptions.*.content" title="内容" :value="$descriptions" />
 
         {{-- <x-admin-form-select title="上级分类" name="parent_id" :value="old('parent_id', $category->parent_id ?? 0)" :options="$categories->toArray()" key="id" label="name" /> --}}

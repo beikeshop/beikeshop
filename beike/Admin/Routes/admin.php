@@ -32,13 +32,13 @@ Route::prefix($adminName)
 
                 // 商品分类
                 Route::middleware('can:categories_index')->get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
-                Route::middleware('can:categories_show')->get('categories/{id}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+                Route::middleware('can:categories_show')->get('categories/{category}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
                 Route::middleware('can:categories_index')->get('categories', [Controllers\CategoryController::class, 'index'])->name('categories.index');
                 Route::middleware('can:categories_create')->get('categories/create', [Controllers\CategoryController::class, 'create'])->name('categories.create');
                 Route::middleware('can:categories_create')->post('categories', [Controllers\CategoryController::class, 'store'])->name('categories.store');
-                Route::middleware('can:categories_update')->get('categories/{id}/edit', [Controllers\CategoryController::class, 'edit'])->name('categories.edit');
-                Route::middleware('can:categories_update')->put('categories/{id}', [Controllers\CategoryController::class, 'update'])->name('categories.update');
-                Route::middleware('can:categories_delete')->delete('categories/{id}', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
+                Route::middleware('can:categories_update')->get('categories/{category}/edit', [Controllers\CategoryController::class, 'edit'])->name('categories.edit');
+                Route::middleware('can:categories_update')->put('categories/{category}', [Controllers\CategoryController::class, 'update'])->name('categories.update');
+                Route::middleware('can:categories_delete')->delete('categories/{category}', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
                 // 客户

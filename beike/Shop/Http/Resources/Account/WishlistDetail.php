@@ -23,12 +23,13 @@ class WishlistDetail extends JsonResource
         $product = $this->product;
         $masterSku = $product->master_sku;
         $image = $this->product->image ?: $masterSku->image;
+        $productName = $product->description->name ?? '';
 
         $data = [
             'id' => $this->id,
             'product_id' => $this->product_id,
             'image' => image_resize($image),
-            'product_name' => $product->description->name,
+            'product_name' => sub_string($productName,24),
             'price' => currency_format($masterSku->price)
         ];
 
