@@ -3,6 +3,7 @@ window.$http = http;
 import common from "./common";
 window.bk = common;
 import "./autocomplete";
+import "./bootstrap-validation";
 
 const base = document.querySelector('base').href;
 const asset = document.querySelector('meta[name="asset"]').content;

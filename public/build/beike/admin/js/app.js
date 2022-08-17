@@ -2066,12 +2066,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./resources/beike/admin/js/common.js");
 /* harmony import */ var _autocomplete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./autocomplete */ "./resources/beike/admin/js/autocomplete.js");
 /* harmony import */ var _autocomplete__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_autocomplete__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _bootstrap_validation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bootstrap-validation */ "./resources/beike/admin/js/bootstrap-validation.js");
+/* harmony import */ var _bootstrap_validation__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_bootstrap_validation__WEBPACK_IMPORTED_MODULE_3__);
 var _document$querySelect;
 
 
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 
 window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
+
 
 var base = document.querySelector('base').href;
 var asset = document.querySelector('meta[name="asset"]').content;
@@ -2293,6 +2296,30 @@ $(function () {
       $(this).siblings('ul.dropdown-menu').delegate('a', 'click', $.proxy(this.click, this));
     });
   };
+});
+
+/***/ }),
+
+/***/ "./resources/beike/admin/js/bootstrap-validation.js":
+/*!**********************************************************!*\
+  !*** ./resources/beike/admin/js/bootstrap-validation.js ***!
+  \**********************************************************/
+/***/ (() => {
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+$(function () {
+  var forms = document.querySelectorAll(".needs-validation"); // Loop over them and prevent submission
+
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add("was-validated");
+    }, false);
+  });
 });
 
 /***/ }),

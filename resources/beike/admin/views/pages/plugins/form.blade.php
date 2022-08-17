@@ -10,7 +10,7 @@
       @if (session('success'))
         <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
       @endif
-      <form action="{{ admin_route('plugins.update', [$plugin->code]) }}" method="POST">
+      <form class="needs-validation" novalidate action="{{ admin_route('plugins.update', [$plugin->code]) }}" method="POST">
         @csrf
         {{ method_field('put') }}
 

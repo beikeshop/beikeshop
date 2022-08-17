@@ -8,6 +8,7 @@ const base = document.querySelector('base').href;
 
 import './product';
 import './header'
+import './bootstrap-validation'
 
 $(document).ready(function ($) {
   $(document).on('click', '.offcanvas-products-delete', function () {

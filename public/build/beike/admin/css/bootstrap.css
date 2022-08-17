@@ -17012,3 +17012,8 @@ textarea.form-control-lg {
 .btn-link:focus {
   box-shadow: none;
 }
+
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: #e2e2e2;
+  background-image: none;
+}

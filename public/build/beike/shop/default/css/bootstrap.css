@@ -17042,3 +17042,8 @@ textarea.form-control-lg {
 .breadcrumb a {
   color: #212529;
 }
+
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: #ced4da;
+  background-image: none;
+}

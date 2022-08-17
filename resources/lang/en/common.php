@@ -18,5 +18,5 @@ return [
     'updated_success' => 'Updated Successfully!',
     'created_success' => 'Created Successfully!',
     'get_success' => 'Get Successfully!',
-
+    'error_required' => 'Please fill out the :name',
 ];

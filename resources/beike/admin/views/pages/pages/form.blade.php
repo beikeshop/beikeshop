@@ -9,7 +9,7 @@
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
-      <form action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
+      <form novalidate class="needs-validation" action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
         @csrf
         @method($page->id ? 'PUT' : 'POST')
 
@@ -30,12 +30,13 @@
                 error="{{ $error_title }}"
                 name="descriptions[{{ $language['code'] }}][title]"
                 title="信息标题"
+                :required="true"
                 value="{{ old('title', $descriptions[$language['code']]['title'] ?? '') }}"
               />
 
               <x-admin::form.row title="内容">
                 <div class="w-max-1000">
-                  <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
+                  <textarea required name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
                     {{ old('content', $descriptions[$language['code']]['content'] ?? '') }}
                   </textarea>
                 </div>

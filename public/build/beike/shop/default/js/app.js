@@ -2054,6 +2054,30 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/beike/shop/default/js/bootstrap-validation.js":
+/*!*****************************************************************!*\
+  !*** ./resources/beike/shop/default/js/bootstrap-validation.js ***!
+  \*****************************************************************/
+/***/ (() => {
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+$(function () {
+  var forms = document.querySelectorAll(".needs-validation"); // Loop over them and prevent submission
+
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add("was-validated");
+    }, false);
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/beike/shop/default/js/common.js":
 /*!***************************************************!*\
   !*** ./resources/beike/shop/default/js/common.js ***!
@@ -2683,12 +2707,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_product__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./header */ "./resources/beike/shop/default/js/header.js");
 /* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_header__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _bootstrap_validation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bootstrap-validation */ "./resources/beike/shop/default/js/bootstrap-validation.js");
+/* harmony import */ var _bootstrap_validation__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_bootstrap_validation__WEBPACK_IMPORTED_MODULE_4__);
 
 
 window.bk = _common__WEBPACK_IMPORTED_MODULE_1__["default"];
 window.$http = _js_http__WEBPACK_IMPORTED_MODULE_0__["default"];
 var token = document.querySelector('meta[name="csrf-token"]').content;
 var base = document.querySelector('base').href;
+
 
 
 $(document).ready(function ($) {

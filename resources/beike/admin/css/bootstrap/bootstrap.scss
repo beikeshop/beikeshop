@@ -70,3 +70,8 @@ $alert-padding-y: 0.5rem;
     box-shadow: none;
   }
 }
+
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: $input-border-color;
+  background-image: none;
+}

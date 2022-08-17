@@ -24,7 +24,7 @@
   <div class="card">
     {{-- <div class="card-header"><h6 class="card-title">基础信息</h6></div> --}}
     <div class="card-body">
-      <form action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
+      <form novalidate class="needs-validation" action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
         method="POST" id="app">
         @csrf
         @method($product->id ? 'PUT' : 'POST')
@@ -33,7 +33,7 @@
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">数据</h6>
-            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="名称" :value="$descriptions" required />
+            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="名称" :value="$descriptions" :required="true" />
             <x-admin::form.row title="图片">
               <draggable
                 element="div"
