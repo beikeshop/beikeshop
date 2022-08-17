@@ -118,12 +118,16 @@ function plugin_route($route, $params = []): string
  * @param $type
  * @param $value
  * @return string
+ * @throws Exception
  */
 function type_route($type, $value): string
 {
     $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
     if (empty($type) || empty($value) || !in_array($type, $types)) {
         return '';
+    }
+    if (is_array($value)) {
+        throw new \Exception('Value must be integer, string or object');
     }
 
     if ($type == 'category') {

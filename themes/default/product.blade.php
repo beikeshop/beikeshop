@@ -12,7 +12,7 @@
 @section('content')
   <div class="container" id="product-app" v-cloak>
 
-    {{ Diglactic\Breadcrumbs\Breadcrumbs::render('product', $product) }}
+    <x-shop-breadcrumb type="product" :value="$product['id']" />
 
     <div class="row mb-5" id="product-top">
       <div class="col-12 col-lg-6 mb-3">

@@ -6,13 +6,11 @@ use Beike\Libraries\Tax;
 use Beike\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
-use TorMorten\Eventy\Facades\Eventy;
-use Beike\Repositories\CategoryRepo;
-use Illuminate\Support\Facades\View;
+use Beike\Shop\View\Components\Alert;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Beike\Shop\View\Components\Breadcrumb;
 use Beike\Shop\View\Components\AccountSidebar;
-use Beike\Shop\View\Components\Alert;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -88,6 +86,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
             'alert' => Alert::class,
+            'breadcrumb' => Breadcrumb::class
         ]);
     }
 }

@@ -20,8 +20,8 @@ class BrandController extends Controller
 
     public function show(int $id)
     {
-        $products = BrandRepo::find($id)
-            ->products()
+        $brand = BrandRepo::find($id);
+        $products = $brand->products()
             ->with([
                 'master_sku',
                 'description',
@@ -30,6 +30,7 @@ class BrandController extends Controller
             ->paginate(20);
 
         $data = [
+            'brand' => $brand,
             'products' => ProductSimple::collection($products)->jsonSerialize(),
         ];
 

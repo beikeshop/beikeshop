@@ -140,11 +140,12 @@ class CategoryRepo
 
     /**
      * 通过分类ID获取产品名称
-     * @param $id
+     * @param $category
      * @return mixed|string
      */
-    public static function getName($id)
+    public static function getName($category)
     {
+        $id = is_int($category) ? $category : $category->id;
         $categories = self::getAllCategoriesWithName();
         return $categories[$id]['name'] ?? '';
     }
