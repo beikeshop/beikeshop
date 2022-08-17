@@ -1,26 +1,26 @@
 <?php
 
 use Beike\Models\Customer;
-use Beike\Shop\Http\Controllers\Account\WishlistController;
-use Beike\Shop\Http\Controllers\BrandController;
-use Beike\Shop\Http\Controllers\CurrencyController;
-use Beike\Shop\Http\Controllers\FileController;
-use Beike\Shop\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+use Beike\Shop\Http\Controllers\FileController;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\PageController;
+use Beike\Shop\Http\Controllers\BrandController;
 use Beike\Shop\Http\Controllers\ProductController;
+use Beike\Shop\Http\Controllers\CurrencyController;
+use Beike\Shop\Http\Controllers\LanguageController;
 use Beike\Shop\Http\Controllers\CategoryController;
 use Beike\Shop\Http\Controllers\CheckoutController;
+use Beike\Shop\Http\Controllers\Account\RmaController;
+use Beike\Shop\Http\Controllers\Account\EditController;
 use Beike\Shop\Http\Controllers\Account\LoginController;
 use Beike\Shop\Http\Controllers\Account\OrderController;
 use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\AddressController;
-use Beike\Shop\Http\Controllers\Account\EditController;
 use Beike\Shop\Http\Controllers\Account\AccountController;
-use Beike\Shop\Http\Controllers\Account\RmaController;
+use Beike\Shop\Http\Controllers\Account\WishlistController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 use Beike\Shop\Http\Controllers\Account\ForgottenController;
 
