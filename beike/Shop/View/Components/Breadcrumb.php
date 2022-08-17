@@ -12,10 +12,10 @@
 namespace Beike\Shop\View\Components;
 
 use Beike\Models\Product;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\View\View;
 
 class Breadcrumb extends Component
 {

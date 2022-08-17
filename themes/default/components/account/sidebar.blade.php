@@ -12,7 +12,7 @@
         <span>修改个人信息</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('account.order.index') }}">
         <span>我的订单</span></a>
-      <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('addresses.index') }}">
+      <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('account.addresses.index') }}">
         <span>我的地址</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('account.wishlist.index') }}">
         <span>我的收藏</span></a>
