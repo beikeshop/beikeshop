@@ -24,7 +24,7 @@
             <h5 class="card-title">售后详情</h5>
           </div>
           <div class="card-body h-600">
-
+            {{-- {{ dd($rma) }} --}}
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@
                   class="text-muted">待发货</span></a>
               <a href="{{ shop_route('account.order.index', ['status' => 'shipped']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf131;</i><span
                   class="text-muted">待收货</span></a>
-              <a href="http://" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf132;</i><span
+              <a href="{{ shop_route('account.rma.index') }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf132;</i><span
                   class="text-muted">售后</span></a>
             </div>
             <div class="order-wrap">

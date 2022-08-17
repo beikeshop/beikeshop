@@ -11,18 +11,21 @@
 
 namespace Beike\Shop\Http\Resources;
 
+use Beike\Repositories\RmaRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RmaDetail extends JsonResource
 {
     public function toArray($request): array
     {
+        $types = RmaRepo::getTypes();
+
         return [
             'id' => $this->id,
             'order_product_id' => $this->order_product_id,
             'quantity' => $this->quantity,
             'opened' => $this->opened,
-            'type' => $this->type,
+            'type' => $types[$this->type],
             'comment' => $this->comment,
             'status' => $this->status,
             'created_at' => time_format($this->created_at),
