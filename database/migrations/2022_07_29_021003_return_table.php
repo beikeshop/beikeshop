@@ -40,7 +40,7 @@ class ReturnTable extends Migration
             $table->timestamps();
         });
         Schema::create('rma_reasons', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id');
             $table->string('locale');
             $table->string('name');
         });
