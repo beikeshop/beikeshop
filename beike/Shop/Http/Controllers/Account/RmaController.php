@@ -26,7 +26,7 @@ class RmaController extends Controller
     public function index()
     {
         $rmas = RmaRepo::listByCustomer(current_customer());
-
+        dd($rmas);
         $data = [
             'rmas' => $rmas,
         ];
@@ -45,7 +45,8 @@ class RmaController extends Controller
             'statuses' => RmaRepo::getStatuses(),
             'types' => RmaRepo::getTypes(),
         ];
-        return view('rms/info', $data);
+
+        return view('account/rmas/info', $data);
     }
 
     public function create(int $orderProductId)

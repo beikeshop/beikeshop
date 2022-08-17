@@ -23,7 +23,7 @@
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">提交售后信息</h5>
           </div>
-          <div class="card-body h-600">
+          <div class="card-body h-min-600">
             <div class="bg-light rounded-3 p-3 mb-4" style="background: #f6f9fc;">
               <div class="d-flex align-items-center">
                 <div class="left wh-70">
