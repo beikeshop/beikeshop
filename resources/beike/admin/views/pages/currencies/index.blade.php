@@ -59,15 +59,15 @@
         </el-form-item>
 
         <el-form-item label="右符号">
-          <el-input v-model="dialog.form.symbol_right" placeholder="左符号"></el-input>
+          <el-input v-model="dialog.form.symbol_right" placeholder="右符号"></el-input>
         </el-form-item>
 
         <el-form-item label="小数位数" prop="decimal_place">
-          <el-input v-model="dialog.form.decimal_place" placeholder="左符号"></el-input>
+          <el-input v-model="dialog.form.decimal_place" placeholder="小数位数"></el-input>
         </el-form-item>
 
         <el-form-item label="汇率值" prop="value">
-          <el-input v-model="dialog.form.value" placeholder="左符号"></el-input>
+          <el-input v-model="dialog.form.value" placeholder="汇率值"></el-input>
         </el-form-item>
 
         <el-form-item label=" 状态">
