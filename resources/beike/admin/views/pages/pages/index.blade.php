@@ -29,11 +29,11 @@
             <td>{{ $page['updated_at'] }}</td>
             <td class="text-end">
               <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
-              <form action="{{ admin_route('pages.destroy', [$page['id']]) }}" method="post" class="d-inline-block">
+              {{-- <form action="{{ admin_route('pages.destroy', [$page['id']]) }}" method="post" class="d-inline-block">
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
-                <button class="btn btn-outline-danger btn-sm">删除</button>
-              </form>
+              </form> --}}
+              <button class="btn btn-outline-danger btn-sm delete-btn" data-id="{{ $page['id'] }}">删除</button>
             </td>
           </tr>
           @endforeach
@@ -45,3 +45,24 @@
     </div>
   </div>
 @endsection
+
+@push('footer')
+  <script>
+    $('.delete-btn').click(function(event) {
+      const id = $(this).data('id');
+      const self = $(this);
+
+      layer.confirm('确定要删除角色吗？', {
+        title: "提示",
+        btn: ['取消', '确定'],
+        area: ['400px'],
+        btn2: () => {
+        $http.delete(`pages/${id}`).then((res) => {
+            layer.msg(res.message);
+            window.location.reload();
+          })
+        }
+      })
+    });
+  </script>
+@endpush
