@@ -33,7 +33,7 @@ class CustomerGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'descriptions.*.name' => 'required|max:64',
+            'name.*' => 'required|max:64',
             'level' => 'required|max:16',
         ];
     }

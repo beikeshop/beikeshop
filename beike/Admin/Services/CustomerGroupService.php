@@ -60,10 +60,10 @@ class CustomerGroupService
     {
         $descriptions = [];
         foreach ($data['name'] as $locale => $value) {
-            $descriptions[$locale]['name'] = $value;
-        }
-        foreach ($data['description'] as $locale => $value) {
-            $descriptions[$locale]['description'] = $value;
+            $descriptions[$locale] = [
+                'name' => $value,
+                'description' => $data['description'][$locale] ?? ''
+            ];
         }
 
         $params = [
