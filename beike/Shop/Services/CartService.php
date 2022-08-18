@@ -11,9 +11,9 @@
 
 namespace Beike\Shop\Services;
 
-use Beike\Repositories\CartRepo;
 use Exception;
 use Beike\Models\CartProduct;
+use Beike\Repositories\CartRepo;
 use Beike\Shop\Http\Resources\CartDetail;
 
 class CartService
@@ -116,6 +116,12 @@ class CartService
     }
 
 
+    /**
+     * 删除购物车商品
+     *
+     * @param $customer
+     * @param $cartId
+     */
     public static function delete($customer, $cartId)
     {
         if (empty($cartId)) {
@@ -149,6 +155,6 @@ class CartService
             'amount' => $amount,
             'amount_format' => currency_format($amount),
         ];
-        return $data;
+        return hook_filter('cart.data', $data);
     }
 }

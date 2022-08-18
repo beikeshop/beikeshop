@@ -157,4 +157,30 @@ class PluginRepo
             return $plugin && $plugin->getEnabled();
         });
     }
+
+
+    /**
+     * 检测对应配送方式是否可用
+     *
+     * @param $code
+     * @return bool
+     */
+    public static function shippingEnabled($code): bool
+    {
+        $shippingMethods = self::getShippingMethods();
+        return $shippingMethods->where('code', $code)->count() > 0;
+    }
+
+
+    /**
+     * 检测对应支付方式是否可用
+     *
+     * @param $code
+     * @return bool
+     */
+    public static function paymentEnabled($code): bool
+    {
+        $paymentMethods = self::getPaymentMethods();
+        return $paymentMethods->where('code', $code)->count() > 0;
+    }
 }

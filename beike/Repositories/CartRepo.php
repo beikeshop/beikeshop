@@ -42,15 +42,15 @@ class CartRepo
             $cart = Cart::query()->create([
                 'customer_id' => $customerId,
                 'shipping_address_id' => $defaultAddressId,
-                'shipping_method_code' => $shippingMethod->code,
+                'shipping_method_code' => $shippingMethod->code ?? '',
                 'payment_address_id' => $defaultAddressId,
-                'payment_method_code' => $paymentMethod->code
+                'payment_method_code' => $paymentMethod->code ?? ''
             ]);
         } else {
-            if ($cart->shipping_address_id == 0) {
+            if ($cart->shipping_address_id == 0 || empty(AddressRepo::find($cart->shipping_address_id))) {
                 $cart->shipping_address_id = $defaultAddressId;
             }
-            if ($cart->payment_address_id == 0) {
+            if ($cart->payment_address_id == 0 || empty(AddressRepo::find($cart->payment_address_id))) {
                 $cart->payment_address_id = $defaultAddressId;
             }
             $cart->save();
