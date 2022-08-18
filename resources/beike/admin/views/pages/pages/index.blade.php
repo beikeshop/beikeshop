@@ -33,7 +33,7 @@
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
               </form> --}}
-              <button class="btn btn-outline-danger btn-sm delete-btn" data-id="{{ $page['id'] }}">删除</button>
+              <button class="btn btn-outline-danger btn-sm delete-btn" type='button' data-id="{{ $page['id'] }}">删除</button>
             </td>
           </tr>
           @endforeach
