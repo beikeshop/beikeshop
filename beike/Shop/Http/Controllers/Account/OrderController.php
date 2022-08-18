@@ -96,6 +96,9 @@ class OrderController extends Controller
     {
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($number, $customer);
+        if (empty($order)) {
+            throw new \Exception('无效的订单');
+        }
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED);
         return json_success(trans('shop/account.order_completed'));
     }
