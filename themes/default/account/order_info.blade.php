@@ -4,12 +4,15 @@
 
 @section('content')
   <div class="container">
-    <nav aria-label="breadcrumb">
+
+    <x-shop-breadcrumb type="static" value="account.order.index" />
+
+    {{-- <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Library</li>
       </ol>
-    </nav>
+    </nav> --}}
 
     <div class="row">
       <x-shop-sidebar />
@@ -17,13 +20,13 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 order-head">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h6 class="card-title">订单详情</h6>
+            <h6 class="card-title">{{ __('shop/account.order.order_info.order_details') }}</h6>
             <div>
               @if ($order->status == 'unpaid')
-                <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">去支付</a>
+                <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account.order.order_info.to_pay') }}</a>
               @endif
               @if ($order->status == 'shipped')
-                <button class="btn btn-primary btn-sm shipped-ed" type="button">确认收货</button>
+                <button class="btn btn-primary btn-sm shipped-ed" type="button">{{ __('shop/account.order.order_info.confirm_receipt') }}</button>
               @endif
             </div>
           </div>
@@ -33,10 +36,10 @@
               <table class="table table-borderless mb-0">
                 <thead>
                   <tr>
-                    <th>订单号</th>
-                    <th class="nowrap">下单日期</th>
-                    <th>状态</th>
-                    <th>订单金额</th>
+                    <th>{{ __('shop/account.order.order_info.order_number') }}</th>
+                    <th class="nowrap">{{ __('shop/account.order.order_info.order_date') }}</th>
+                    <th>{{ __('shop/account.order.order_info.state') }}</th>
+                    <th>{{ __('shop/account.order.order_info.order_amount') }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -56,7 +59,7 @@
 
         <div class="card mb-4">
           <div class="card-header">
-            <h6 class="card-title">订购商品</h6>
+            <h6 class="card-title">{{ __('shop/account.order.order_info.order_items') }}</h6>
           </div>
           <div class="card-body">
             @foreach ($order->orderProducts as $product)
@@ -70,7 +73,7 @@
                 </div>
                 @if ($order->status == 'completed')
                   <a href="{{ shop_route('account.rma.create', [$product->id]) }}"
-                    class="btn btn-outline-primary btn-sm">申请售后</a>
+                    class="btn btn-outline-primary btn-sm">{{ __('shop/account.order.order_info.apply_after_sales') }}</a>
                 @endif
               </div>
             @endforeach
@@ -79,7 +82,7 @@
 
         <div class="card mb-4">
           <div class="card-header">
-            <h6 class="card-title">Order Total</h6>
+            <h6 class="card-title">{{ __('shop/account.order.order_info.order_total') }}</h6>
           </div>
           <div class="card-body">
             <table class="table table-bordered border">
@@ -100,7 +103,7 @@
         @if (0)
           <div class="card mb-4">
             <div class="card-header">
-              <h6 class="card-title">物流状态</h6>
+              <h6 class="card-title">{{ __('shop/account.order.order_info.logistics_status') }}</h6>
             </div>
             <div class="card-body">
 
@@ -111,15 +114,15 @@
         @if ($order->orderHistories->count())
           <div class="card mb-4">
             <div class="card-header">
-              <h6 class="card-title">订单状态</h6>
+              <h6 class="card-title">{{ __('shop/account.order.order_info.order_status') }}</h6>
             </div>
             <div class="card-body">
               <table class="table ">
                 <thead class="">
                   <tr>
-                    <th>状态</th>
-                    <th>备注</th>
-                    <th>更新时间</th>
+                    <th>{{ __('shop/account.order.order_info.state') }}</th>
+                    <th>{{ __('shop/account.order.order_info.remark') }}</th>
+                    <th>{{ __('shop/account.order.order_info.update_time') }}</th>
                   </tr>
                 </thead>
                 <tbody>
