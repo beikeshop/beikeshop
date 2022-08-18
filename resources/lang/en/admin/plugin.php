@@ -14,7 +14,7 @@ return [
     'plugins_import' => 'Import',
     'plugins_show' => 'Detail',
     'plugins_update' => 'Update',
-    'plugins_update_status' => 'Delete',
+    'plugins_update_status' => 'Update Status',
     'plugins_install' => 'Install',
     'plugins_uninstall' => 'Uninstall',
 
