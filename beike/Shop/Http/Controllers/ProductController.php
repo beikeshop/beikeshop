@@ -20,6 +20,9 @@ class ProductController extends Controller
     public function show(Request $request, Product $product)
     {
         $product = ProductRepo::getProductDetail($product);
+        if ($product->active == 0) {
+            return redirect(shop_route('home.index'));
+        }
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),
         ];
@@ -31,7 +34,7 @@ class ProductController extends Controller
      * 通过关键字搜索产品
      *
      * @param Request $request
-     * @return AnonymousResourceCollection
+     * @return mixed
      */
     public function search(Request $request)
     {
