@@ -144,7 +144,7 @@
 @push('add-scripts')
 <script>
   $('.shipped-ed').click(function(event) {
-    $http.post('orders/{{ $order->id }}/complete').then((res) => {
+    $http.post('orders/{{ $order->number }}/complete').then((res) => {
       layer.msg(res.message)
       window.location.reload()
     })
