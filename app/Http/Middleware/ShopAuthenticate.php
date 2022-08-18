@@ -2,12 +2,38 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class ShopAuthenticate extends Middleware
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param Request $request
+     * @param \Closure $next
+     * @param string[] ...$guards
+     * @return mixed
+     *
+     * @throws AuthenticationException
+     */
+    public function handle($request, \Closure $next, ...$guards)
+    {
+        $this->authenticate($request, $guards);
+
+        $customer = current_customer();
+        if ($customer->status != 1) {
+            Auth::guard(Customer::AUTH_GUARD)->logout();
+            return redirect(shop_route('account.login'));
+        }
+
+        return $next($request);
+    }
+
+
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *

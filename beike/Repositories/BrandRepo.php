@@ -31,7 +31,14 @@ class BrandRepo
      */
     public static function create($data)
     {
-        return Brand::query()->create($data);
+        $brandData = [
+            'name' => $data['name'] ?? '',
+            'first' => $data['first'] ?? '',
+            'logo' => $data['logo'] ?? '',
+            'sort_order' => (int)($data['sort_order'] ?? 0),
+            'status' => (bool)($data['status'] ?? 1),
+        ];
+        return Brand::query()->create($brandData);
     }
 
     /**
@@ -48,7 +55,15 @@ class BrandRepo
         if (!$brand) {
             throw new Exception("品牌id $brand 不存在");
         }
-        $brand->update($data);
+
+        $brandData = [
+            'name' => $data['name'] ?? '',
+            'first' => $data['first'] ?? '',
+            'logo' => $data['logo'] ?? '',
+            'sort_order' => (int)($data['sort_order'] ?? 0),
+            'status' => (bool)($data['status'] ?? 1),
+        ];
+        $brand->update($brandData);
         return $brand;
     }
 

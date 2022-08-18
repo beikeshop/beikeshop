@@ -14,11 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\LoginRequest;
-use Illuminate\Http\Request;
-use function auth;
-use function back;
-use function redirect;
-use function view;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,6 +32,11 @@ class LoginController extends Controller
             throw new \Exception("账号密码错误！");
         }
 
+        $customer = current_customer();
+        if ($customer && $customer->status != 1) {
+            Auth::guard(Customer::AUTH_GUARD)->logout();
+            throw new \Exception("用户已被禁用！");
+        }
         return json_success("登录成功!");
     }
 }

@@ -46,8 +46,6 @@ return [
 
     'order' => [
         'index' => '订单列表',
-        'show' => '订单详情',
-        'order_completed' => '已确认收货',
         'order_details' => '订单详情',
         'amount' => '金额',
         'state' => '状态',

@@ -27,7 +27,9 @@
             <td><div class="wh-50"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
             <td>@{{ brand.sort_order }}</td>
             <td>@{{ brand.first }}</td>
-            <td>@{{ brand.status }}</td>
+            <td>
+              <span :class="brand.status ? 'text-success' : 'text-secondary'">@{{ brand.status ? '启用' : '禁用' }}</span>
+            </td>
             <td>
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">删除</button>

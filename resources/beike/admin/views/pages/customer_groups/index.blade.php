@@ -15,10 +15,11 @@
             <th>名称</th>
             <th>描述</th>
             <th>等级</th>
-            <th>消费额度</th>
+            <th>创建时间</th>
+            {{-- <th>消费额度</th>
             <th>折扣率</th>
             <th>奖励积分系数</th>
-            <th>使用积分系数</th>
+            <th>使用积分系数</th> --}}
             <th>操作</th>
           </tr>
         </thead>
@@ -28,10 +29,11 @@
             <td>@{{ group.description?.name || '' }}</td>
             <td>@{{ group.description?.description || '' }}</td>
             <td>@{{ group.level }}</td>
-            <td>@{{ group.total }}</td>
+            <td>@{{ group.created_at }}</td>
+            {{-- <td>@{{ group.total }}</td>
             <td>@{{ group.discount_factor }}</td>
             <td>@{{ group.reward_point_factor }}</td>
-            <td>@{{ group.use_point_factor }}</td>
+            <td>@{{ group.use_point_factor }}</td> --}}
             <td>
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)">删除</button>
