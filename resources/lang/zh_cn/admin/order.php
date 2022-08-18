@@ -14,6 +14,7 @@ return [
     'orders_index' => '订单列表',
 
     'unpaid' => '待支付',
+    'paid' => '已支付',
     'shipped' => '已发货',
     'completed' => '已完成',
 

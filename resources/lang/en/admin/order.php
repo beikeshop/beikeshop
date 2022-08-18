@@ -14,6 +14,7 @@ return [
     'orders_index' => 'Index',
 
     'unpaid' => 'Unpaid',
+    'paid' => 'Paid',
     'shipped' => 'Shipped',
     'completed' => 'Completed',
 
