@@ -82,7 +82,7 @@ function load_settings()
  * @param mixed $params
  * @return string
  */
-function admin_route($route, $params = []): string
+function admin_route($route, array $params = []): string
 {
     $adminName = admin_name();
     return route("{$adminName}.{$route}", $params);
@@ -95,7 +95,7 @@ function admin_route($route, $params = []): string
  * @param mixed $params
  * @return string
  */
-function shop_route($route, $params = []): string
+function shop_route($route, array $params = []): string
 {
     return route('shop.' . $route, $params);
 }
@@ -107,7 +107,7 @@ function shop_route($route, $params = []): string
  * @param mixed $params
  * @return string
  */
-function plugin_route($route, $params = []): string
+function plugin_route($route, array $params = []): string
 {
     return route('plugin.' . $route, $params);
 }
@@ -122,7 +122,7 @@ function plugin_route($route, $params = []): string
  */
 function type_route($type, $value): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
+    $types = ['category', 'product', 'brand', 'page', 'order', 'static', 'custom'];
     if (empty($type) || empty($value) || !in_array($type, $types)) {
         return '';
     }
@@ -138,6 +138,8 @@ function type_route($type, $value): string
         return shop_route('brands.show', [$value]);
     } elseif ($type == 'page') {
         return shop_route('pages.show', ['page' => $value]);
+    } elseif ($type == 'order') {
+        return shop_route('account.order.show', ['number' => $value]);
     } elseif ($type == 'static') {
         return shop_route($value);
     } elseif ($type == 'custom') {
@@ -190,6 +192,7 @@ function type_label($type, $value, array $texts = []): string
  *
  * @param $link
  * @return array
+ * @throws Exception
  */
 function handle_link($link): array
 {

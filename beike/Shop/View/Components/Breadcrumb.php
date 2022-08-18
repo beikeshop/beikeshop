@@ -25,6 +25,7 @@ class Breadcrumb extends Component
      * Create a new component instance.
      *
      * @return void
+     * @throws \Exception
      */
     public function __construct($type, $value, array $text = [])
     {
@@ -37,6 +38,8 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleCategoryLinks($value));
         } elseif ($type == 'product') {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleProductLinks($value));
+        } elseif ($type == 'order') {
+            $breadcrumbs = array_merge($breadcrumbs, $this->handleOrderLinks($value));
         } elseif (Str::startsWith($value, 'account')) {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleAccountLinks($value));
         } else {
@@ -62,6 +65,7 @@ class Breadcrumb extends Component
      *
      * @param $value
      * @return array
+     * @throws \Exception
      */
     private function handleCategoryLinks($value): array
     {
@@ -79,6 +83,7 @@ class Breadcrumb extends Component
      *
      * @param $value
      * @return array
+     * @throws \Exception
      */
     private function handleProductLinks($value): array
     {
@@ -104,10 +109,44 @@ class Breadcrumb extends Component
 
 
     /**
+     * 获取订单详情页面包屑
+     *
+     * @param $value
+     * @return array
+     * @throws \Exception
+     */
+    private function handleOrderLinks($value): array
+    {
+        $links = [];
+
+        $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+        $links[] = [
+            'title' => $link['text'],
+            'url' => $link['link'],
+        ];
+
+        $link = handle_link(['type' => 'static', 'value' => 'account.order.index']);
+        $links[] = [
+            'title' => $link['text'],
+            'url' => $link['link'],
+        ];
+
+        $link = handle_link(['type' => 'order', 'value' => $value]);
+        $links[] = [
+            'title' => $value,
+            'url' => $link['link'],
+        ];
+
+        return $links;
+    }
+
+
+    /**
      * 处理个人中心面包屑
      *
      * @param $value
      * @return array[]
+     * @throws \Exception
      */
     private function handleAccountLinks($value): array
     {
@@ -138,6 +177,7 @@ class Breadcrumb extends Component
      * @param $value
      * @param array $text
      * @return array
+     * @throws \Exception
      */
     private function handleLinks($type, $value, array $text = []): array
     {
