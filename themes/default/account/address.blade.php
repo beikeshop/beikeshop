@@ -11,7 +11,7 @@
 @section('content')
   <div class="container" id="address-app">
 
-    <x-shop-breadcrumb type="static" value="account.addresses.index" />
+    <x-shop-breadcrumb type="static" value="account.addresses.index" /> 
 
     <div class="row">
       <x-shop-sidebar/>
@@ -19,10 +19,10 @@
       <div class="col-12 col-md-9">
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">我的地址</h5>
+            <h5 class="card-title">{{ __('shop/account.addresses.index') }}</h5>
           </div>
           <div class="card-body h-600">
-            <button class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i> 添加新地址</button>
+            <button class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i> {{ __('shop/account.addresses.add_address') }}</button>
             <div class="addresses-wrap" v-cloak>
               <div class="row">
                 <div class="col-6" v-for="address, index in addresses" :key="index" v-if="addresses.length">
@@ -34,10 +34,10 @@
                     <div class="zipcode">@{{ address.zipcode }}</div>
                     <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
                     <div class="address-bottom">
-                      <div><span class="badge bg-success" v-if="address.default">默认地址</span></div>
+                      <div><span class="badge bg-success" v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span></div>
                       <div>
-                        <a class="me-2" @click.stop="deleteAddress(index)">删除</a>
-                        <a @click.stop="editAddress(index)">编辑</a>
+                        <a class="me-2" @click.stop="deleteAddress(index)">{{ __('shop/account.addresses.delete') }}</a>
+                        <a @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</a>
                       </div>
                     </div>
                   </div>
@@ -87,11 +87,11 @@
         },
 
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
-          phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
-          address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
-          zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
-          city: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
+          name: [{required: true, message: '{{ __('shop/account.addresses.enter_name') }}', trigger: 'blur'}, ],
+          phone: [{required: true, message: '{{ __('shop/account.addresses.enter_phone') }}', trigger: 'blur'}, ],
+          address_1: [{required: true, message: ' 1{{ __('shop/account.addresses.enter_address') }}', trigger: 'blur'}, ],
+          zone_id: [{required: true, message: '{{ __('shop/account.addresses.select_province') }}', trigger: 'blur'}, ],
+          city: [{required: true, message: '{{ __('shop/account.addresses.enter_city') }}', trigger: 'blur'}, ],
         }
       },
 
@@ -114,9 +114,9 @@
         },
 
         deleteAddress(index) {
-          this.$confirm('确定要删除地址吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('shop/account.addresses.confirm_delete') }}', '{{ __('shop/account.addresses.hint') }}', {
+            confirmButtonText: '{{ __('shop/common.confirm') }}',
+            cancelButtonText: '{{ __('shop/common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('/account/addresses/' + this.addresses[index].id).then((res) => {

@@ -87,6 +87,17 @@ return [
     ],
 
     'addresses' => [
-        'index' => '我的地址'
+        'index' => '我的地址',
+        'add_address' => '添加新地址',
+        'default_address' => '默认地址',
+        'delete' => '删除',
+        'edit' => '编辑',
+        'enter_name' => '请输入姓名',
+        'enter_phone' => '请输入联系电话',
+        'enter_address' => '请输入详细地址 1',
+        'select_province' => '请选择省份',
+        'enter_city' => '请填写城市',
+        'confirm_delete' => '确定要删除地址吗？',
+        'hint' => '提示',
     ],
 ];

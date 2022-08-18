@@ -34,7 +34,7 @@
         </div>
         <div class="col-4 mt-2 mt-sm-0">
           <el-form-item prop="city">
-            <el-input v-model="{{ $address_form_key }}.city" placeholder="输入 city"></el-input>
+            <el-input v-model="{{ $address_form_key }}.city" placeholder="输入城市"></el-input>
           </el-form-item>
         </div>
       </div>
