@@ -76,7 +76,7 @@ class OrderRepo
      */
     public static function getListBuilder(array $filters = []): Builder
     {
-        $builder = Order::query();
+        $builder = Order::query()->with(['orderProducts']);
 
         $customer = $filters['customer'] ?? null;
         if ($customer) {
