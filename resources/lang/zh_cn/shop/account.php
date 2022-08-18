@@ -39,6 +39,9 @@ return [
 
     'wishlist' => [
         'index' => '收藏列表',
+        'product' => '产品',
+        'price' => '价格',
+        'check_details' => '查看详情',
     ],
 
     'order' => [

@@ -20,15 +20,15 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">我的收藏</h5>
+            <h5 class="card-title">{{ __('shop/account.wishlist.index') }}</h5>
           </div>
           <div class="card-body">
             <table class="table align-middle">
               <thead>
                 <tr>
                   <th width="90px"></th>
-                  <th>产品</th>
-                  <th>价格</th>
+                  <th>{{ __('shop/account.wishlist.product') }}</th>
+                  <th>{{ __('shop/account.wishlist.price') }}</th>
                   <th class="text-end"></th>
                 </tr>
               </thead>
@@ -40,7 +40,7 @@
                   <td>{{ $item['price'] }}</td>
                   <td class="text-end">
                     <div class="">
-                      <a class="btn btn-dark btn-sm add-cart" href="{{ shop_route('products.show', $item['product_id']) }}">查看详情</a>
+                      <a class="btn btn-dark btn-sm add-cart" href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
                       <button class="btn btn-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
                     </div>
                   </td>
