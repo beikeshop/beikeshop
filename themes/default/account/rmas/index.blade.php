@@ -3,13 +3,16 @@
 @section('body-class', 'page-account-rmas')
 
 @section('content')
-  <div class="container">
-    <nav aria-label="breadcrumb">
+  <div class="container"> 
+
+    <x-shop-breadcrumb type="static" value="account.rma.index" /> 
+
+    {{-- <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Library</li>
       </ol>
-    </nav>
+    </nav> --}}
 
 
     <div class="row">
@@ -17,19 +20,19 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">我的售后</h5>
+            <h5 class="card-title">{{ __('shop/account.rma.index') }}</h5>
           </div>
           <div class="card-body">
             <table class="table ">
               <thead>
                 <tr>
-                  <th>商品</th>
-                  <th>数量</th>
-                  <th>服务类型</th>
-                  <th>退换原因</th>
-                  <th>创建时间</th>
+                  <th>{{ __('shop/account.rma.commodity') }}</th>
+                  <th>{{ __('shop/account.rma.quantity') }}</th>
+                  <th>{{ __('shop/account.rma.service_type') }}</th>
+                  <th>{{ __('shop/account.rma.return_reason') }}</th>
+                  <th>{{ __('shop/account.rma.creation_time') }}</th>
                   {{-- <th>状态</th> --}}
-                  <th class="text-end">操作</th>
+                  <th class="text-end">{{ __('shop/account.rma.operate') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,7 +44,7 @@
                     <td>{{ $rma['reason'] }}</td>
                     <td>{{ $rma['created_at'] }}</td>
                     {{-- <td>{{ $rma['status'] }}</td> --}}
-                    <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm">查看</a> </td>
+                    <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
                   </tr>
                 @endforeach
               </tbody>

@@ -8,6 +8,8 @@
 
 @section('content')
   <div class="container" id="address-app">
+
+    
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -21,7 +23,7 @@
       <div class="col-12 col-md-9">
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">售后详情</h5>
+            <h5 class="card-title">{{ __('shop/account.rma.rma_info.index') }}</h5>
           </div>
           <div class="card-body h-600">
             {{-- {{ dd($rma) }} --}}

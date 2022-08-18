@@ -46,6 +46,7 @@ return [
 
     'order' => [
         'index' => '订单列表',
+        'show' => '订单详情',
         'order_completed' => '已确认收货',
         'order_details' => '订单详情',
         'amount' => '金额',
@@ -103,4 +104,28 @@ return [
         'confirm_delete' => '确定要删除地址吗？',
         'hint' => '提示',
     ],
+
+    'rma' => [
+        'index' => '我的售后',
+        'commodity' => '商品',
+        'quantity' => '数量',
+        'service_type' => '服务类型',
+        'return_reason' => '退换原因',
+        'creation_time' => '创建时间',
+        'operate' => '操作',
+        'check' => '查看',
+
+        'rma_info' => [
+            'index' => '售后详情', 
+        ],
+
+        'rma_form' => [
+            'index' => '提交售后信息', 
+            'service_type' => '服务类型', 
+            'return_quantity' => '退换数量', 
+            'unpacked' => '已打开包装', 
+            'return_reason' => '退换原因', 
+            'remark' => '备注', 
+        ]
+    ]
 ];

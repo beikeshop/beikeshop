@@ -14,4 +14,6 @@ return [
     'submit' => '提交',
     'cancel' => '取消',
     'confirm' => '确定',
+    'no' => '否',
+    'yes' => '是',
 ];
