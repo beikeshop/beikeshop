@@ -163,11 +163,12 @@ class BrandRepo
 
     /**
      * 通过品牌ID获取品牌名称
-     * @param $id
+     * @param $brand
      * @return mixed|string
      */
-    public static function getName($id)
+    public static function getName($brand)
     {
+        $id = is_int($brand) ? $brand : $brand->id;
         $categories = self::getAllBrandsWithName();
         return $categories[$id]['name'] ?? '';
     }

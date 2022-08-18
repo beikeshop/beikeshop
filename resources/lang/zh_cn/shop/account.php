@@ -42,5 +42,9 @@ return [
     'order' => [
         'index' => '订单列表',
         'order_completed' => '已确认收货',
-    ]
+    ],
+
+    'addresses' => [
+        'index' => '我的地址'
+    ],
 ];

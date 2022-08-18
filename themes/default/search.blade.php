@@ -4,7 +4,7 @@
 @section('content')
   <div class="container">
 
-    {{-- {{ Diglactic\Breadcrumbs\Breadcrumbs::render('category', $category) }} --}}
+    <x-shop-breadcrumb type="static" value="products.search" />
 
     <div class="row">
       @foreach ($items as $product)

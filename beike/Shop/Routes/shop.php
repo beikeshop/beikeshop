@@ -1,26 +1,26 @@
 <?php
 
 use Beike\Models\Customer;
-use Beike\Shop\Http\Controllers\Account\WishlistController;
-use Beike\Shop\Http\Controllers\BrandController;
-use Beike\Shop\Http\Controllers\CurrencyController;
-use Beike\Shop\Http\Controllers\FileController;
-use Beike\Shop\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
+use Beike\Shop\Http\Controllers\FileController;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Beike\Shop\Http\Controllers\CartController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\PageController;
+use Beike\Shop\Http\Controllers\BrandController;
 use Beike\Shop\Http\Controllers\ProductController;
+use Beike\Shop\Http\Controllers\CurrencyController;
+use Beike\Shop\Http\Controllers\LanguageController;
 use Beike\Shop\Http\Controllers\CategoryController;
 use Beike\Shop\Http\Controllers\CheckoutController;
+use Beike\Shop\Http\Controllers\Account\RmaController;
+use Beike\Shop\Http\Controllers\Account\EditController;
 use Beike\Shop\Http\Controllers\Account\LoginController;
 use Beike\Shop\Http\Controllers\Account\OrderController;
 use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\AddressController;
-use Beike\Shop\Http\Controllers\Account\EditController;
 use Beike\Shop\Http\Controllers\Account\AccountController;
-use Beike\Shop\Http\Controllers\Account\RmaController;
+use Beike\Shop\Http\Controllers\Account\WishlistController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 use Beike\Shop\Http\Controllers\Account\ForgottenController;
 
@@ -80,23 +80,24 @@ Route::prefix('/')
             });
 
         Route::prefix('account')
+            ->name('account.')
             ->middleware('shop_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
-                Route::get('/', [AccountController::class, 'index'])->name('account.index');
+                Route::get('/', [AccountController::class, 'index'])->name('index');
                 Route::resource('addresses', AddressController::class);
-                Route::get('edit', [EditController::class, 'index'])->name('account.edit.index');
+                Route::get('edit', [EditController::class, 'index'])->name('edit.index');
 
-                Route::get('rmas', [RmaController::class, 'index'])->name('account.rma.index');
-                Route::get('rmas/{id}', [RmaController::class, 'show'])->name('account.rma.show');
-                Route::get('rmas/create/{order_product_id}', [RmaController::class, 'create'])->name('account.rma.create');
-                Route::post('rmas/store', [RmaController::class, 'store'])->name('account.rma.store');
+                Route::get('rmas', [RmaController::class, 'index'])->name('rma.index');
+                Route::get('rmas/{id}', [RmaController::class, 'show'])->name('rma.show');
+                Route::get('rmas/create/{order_product_id}', [RmaController::class, 'create'])->name('rma.create');
+                Route::post('rmas/store', [RmaController::class, 'store'])->name('rma.store');
 
-                Route::put('edit', [EditController::class, 'update'])->name('account.edit.update');
-                Route::get('orders', [OrderController::class, 'index'])->name('account.order.index');
-                Route::get('orders/{number}', [OrderController::class, 'show'])->name('account.order.show');
-                Route::get('update_password', [AccountController::class, 'updatePassword'])->name('account.update_password');
-                Route::get('wishlist', [WishlistController::class, 'index'])->name('account.wishlist.index');
-                Route::post('wishlist', [WishlistController::class, 'add'])->name('account.wishlist.add');
-                Route::delete('wishlist/{id}', [WishlistController::class, 'remove'])->name('account.wishlist.remove');
+                Route::put('edit', [EditController::class, 'update'])->name('edit.update');
+                Route::get('orders', [OrderController::class, 'index'])->name('order.index');
+                Route::get('orders/{number}', [OrderController::class, 'show'])->name('order.show');
+                Route::get('update_password', [AccountController::class, 'updatePassword'])->name('update_password');
+                Route::get('wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+                Route::post('wishlist', [WishlistController::class, 'add'])->name('wishlist.add');
+                Route::delete('wishlist/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
             });
     });
