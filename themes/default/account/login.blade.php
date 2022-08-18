@@ -11,12 +11,9 @@
 
 @section('content')
   <div class="container" id="page-login" v-cloak>
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb justify-content-center">
-        <li class="breadcrumb-item"><a href="#">{{ __('shop/account.login.Home') }}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">{{ __('shop/account.login.Library') }}</li>
-      </ol>
-    </nav>
+
+    <x-shop-breadcrumb type="static" value="login.index" />
+
     <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/account.login.index') }}</h1></div>
     <div class="justify-content-center row mb-5">
       <div class="col-lg-5">
