@@ -11,6 +11,8 @@
 
 return [
     'index' => '个人中心',
+    'revise_info' => '修改信息',
+
     'login' => [
         'index' => '用户登录与注册',
         'Home' => '首页',

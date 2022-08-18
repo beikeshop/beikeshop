@@ -19,11 +19,11 @@
             </ul>
           </div>
         @endif
-        @if (0)
+        @if (1)
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account.index') }}</h5>
-            <a href="{{ shop_route('account.edit.index') }}" class="text-muted">修改信息</a>
+            <a href="{{ shop_route('account.edit.index') }}" class="text-muted">{{ __('shop/account.revise_info') }}</a>
           </div>
           <div class="card-body">
             <div class="d-flex flex-nowrap card-items py-2">
