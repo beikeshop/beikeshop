@@ -159,6 +159,7 @@
             zipcode: '',
             zone_id: '',
             city: '',
+            city_id: '',
             address_1: '',
             address_2: '',
           }
