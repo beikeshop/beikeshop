@@ -18,7 +18,7 @@ class CustomerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'status' => $this->status ? '启用' : '禁用',
+            'status' => $this->status,
             'avatar' => image_resize($this->avatar),
             'from' => $this->from,
             'customer_group_name' => $this->customerGroup->description->name ?? '',
