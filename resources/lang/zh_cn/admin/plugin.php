@@ -14,7 +14,7 @@ return [
     'plugins_import' => '上传插件',
     'plugins_show' => '插件详情',
     'plugins_update' => '插件更新',
-    'plugins_update_status' => '删除插件',
+    'plugins_update_status' => '更新状态',
     'plugins_install' => '安装',
     'plugins_uninstall' => '卸载',
 

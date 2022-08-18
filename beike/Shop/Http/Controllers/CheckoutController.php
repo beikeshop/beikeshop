@@ -53,10 +53,6 @@ class CheckoutController extends Controller
      */
     public function confirm()
     {
-        try {
-            return (new CheckoutService)->confirm();
-        } catch (\Exception $e) {
-            return json_fail($e->getMessage());
-        }
+        return (new CheckoutService)->confirm();
     }
 }

@@ -41,18 +41,16 @@
                   <th>#</th>
                   <th>名称</th>
                   <th>电话</th>
-                  <th>注册来源</th>
-                  <th>状态</th>
+                  <th>创建时间</th>
                   <th>操作</th>
                 </tr>
               </thead>
               <tbody v-if="addresses.length">
                 <tr v-for="address, index in addresses" :key="index">
-                  <td>@{{ index }}</td>
+                  <td>@{{ index + 1}}</td>
                   <td>@{{ address.name }}</td>
                   <td>@{{ address.phone }}</td>
-                  <td>222</td>
-                  <td>222</td>
+                  <td>@{{ address.created_at }}</td>
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button"
                       @click="editAddress(index)">编辑</button>
@@ -283,6 +281,8 @@
 
         closeAddressDialog(form) {
           this.$refs[form].resetFields();
+          Object.keys(this.dialogAddress.form).forEach(key => this.dialogAddress.form[key] = '')
+          this.dialogAddress.form.country_id = @json((int)system_setting('base.country_id'));
           this.dialogAddress.show = false
           this.dialogAddress.index = null;
         },

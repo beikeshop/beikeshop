@@ -143,7 +143,7 @@
 
             $http.post('customers', this.dialogCustomers.form).then((res) => {
               this.$message.success(res.message);
-              this.customers.push(res.data);
+              this.loadData();// this.customers.data.push(res.data);
               this.dialogCustomers.show = false
             })
           });

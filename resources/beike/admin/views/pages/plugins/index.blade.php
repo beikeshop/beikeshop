@@ -41,7 +41,7 @@
                 </div>
               </td>
               <td>
-                <el-switch :disabled="!plugin.installed" v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code)}"></el-switch>
+                <el-switch :disabled="!plugin.installed" v-model="plugin.status" @change="(e) => {pluginStatusChange(e, plugin.code, index)}"></el-switch>
               </td>
               <td>
                 <div v-if="plugin.installed">
@@ -74,12 +74,14 @@
       },
 
       methods: {
-        pluginStatusChange(e, code) {
+        pluginStatusChange(e, code, index) {
           const self = this;
 
           $http.put(`plugins/${code}/status`, {status: e * 1}).then((res) => {
             layer.msg(res.message)
-          })
+          }).catch((res) => {
+            this.plugins[index].status = !this.plugins[index].status;
+          });
         },
 
         uploadFile(file) {

@@ -83,7 +83,7 @@
               <div class="help-text font-size-12 lh-base">网站前台显示 380*100</div>
             </x-admin-form-image>
 
-            <x-admin-form-image name="favicon" title="favicon" :value="old('web_icon', system_setting('base.web_icon', ''))">
+            <x-admin-form-image name="favicon" title="favicon" :value="old('favicon', system_setting('base.favicon', ''))">
               <div class="help-text font-size-12 lh-base">显示在浏览器选项卡上的小图标，必须为PNG格式大小为：32*32</div>
             </x-admin-form-image>
 

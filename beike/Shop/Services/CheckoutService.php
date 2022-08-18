@@ -12,6 +12,7 @@
 namespace Beike\Shop\Services;
 
 use Beike\Models\Order;
+use Beike\Models\Address;
 use Beike\Models\Customer;
 use Beike\Repositories\CartRepo;
 use Beike\Repositories\OrderRepo;
@@ -88,6 +89,7 @@ class CheckoutService
         $customer = current_customer();
         $checkoutData = self::checkoutData();
         $checkoutData['customer'] = $customer;
+        $this->validateConfirm($checkoutData);
 
         try {
             DB::beginTransaction();
@@ -99,6 +101,35 @@ class CheckoutService
             throw $e;
         }
         return $order;
+    }
+
+
+    /**
+     * @throws \Exception
+     */
+    private function validateConfirm($checkoutData)
+    {
+        $current = $checkoutData['current'];
+
+        $shippingAddressId = $current['shipping_address_id'];
+        if (empty(Address::query()->find($shippingAddressId))) {
+            throw new \Exception('配送地址无效');
+        }
+
+        $paymentAddressId = $current['payment_address_id'];
+        if (empty(Address::query()->find($paymentAddressId))) {
+            throw new \Exception('账单地址无效');
+        }
+
+        $shippingMethodCode = $current['shipping_method_code'];
+        if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
+            throw new \Exception('配送方式不可用');
+        }
+
+        $paymentMethodCode = $current['payment_method_code'];
+        if (!PluginRepo::paymentEnabled($paymentMethodCode)) {
+            throw new \Exception('支付方式不可用');
+        }
     }
 
 
