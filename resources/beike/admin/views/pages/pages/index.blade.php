@@ -52,7 +52,7 @@
       const id = $(this).data('id');
       const self = $(this);
 
-      layer.confirm('确定要删除角色吗？', {
+      layer.confirm('确定要删除页面吗？', {
         title: "提示",
         btn: ['取消', '确定'],
         area: ['400px'],
