@@ -122,7 +122,7 @@ function plugin_route($route, $params = []): string
  */
 function type_route($type, $value): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'order', 'static', 'custom'];
+    $types = ['category', 'product', 'brand', 'page', 'order', 'rma', 'static', 'custom'];
     if (empty($type) || empty($value) || !in_array($type, $types)) {
         return '';
     }
@@ -140,6 +140,8 @@ function type_route($type, $value): string
         return shop_route('pages.show', ['page' => $value]);
     } elseif ($type == 'order') {
         return shop_route('account.order.show', ['number' => $value]);
+    } elseif ($type == 'rma') {
+        return shop_route('account.rma.show', ['id' => $value]);
     } elseif ($type == 'static') {
         return shop_route($value);
     } elseif ($type == 'custom') {

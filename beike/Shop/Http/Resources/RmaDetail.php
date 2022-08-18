@@ -34,7 +34,7 @@ class RmaDetail extends JsonResource
             'product_name' => $this->product_name,
             'name' => $this->name,
             'sku' => $this->sku,
-            'reason' => $this->reason->name,
+            'reason' => $this->reason->name ?? '',
             'type_text' => $this->type_text,
         ];
     }

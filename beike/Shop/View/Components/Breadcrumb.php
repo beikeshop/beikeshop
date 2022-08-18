@@ -40,6 +40,8 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleProductLinks($value));
         } elseif ($type == 'order') {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleOrderLinks($value));
+        } elseif ($type == 'rma') {
+            $breadcrumbs = array_merge($breadcrumbs, $this->handleRmaLinks($value));
         } elseif (Str::startsWith($value, 'account')) {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleAccountLinks($value));
         } else {
@@ -132,6 +134,39 @@ class Breadcrumb extends Component
         ];
 
         $link = handle_link(['type' => 'order', 'value' => $value]);
+        $links[] = [
+            'title' => $value,
+            'url' => $link['link'],
+        ];
+
+        return $links;
+    }
+
+
+    /**
+     * 获取订单详情页面包屑
+     *
+     * @param $value
+     * @return array
+     * @throws \Exception
+     */
+    private function handleRmaLinks($value): array
+    {
+        $links = [];
+
+        $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+        $links[] = [
+            'title' => $link['text'],
+            'url' => $link['link'],
+        ];
+
+        $link = handle_link(['type' => 'static', 'value' => 'account.rma.index']);
+        $links[] = [
+            'title' => $link['text'],
+            'url' => $link['link'],
+        ];
+
+        $link = handle_link(['type' => 'rma', 'value' => $value]);
         $links[] = [
             'title' => $value,
             'url' => $link['link'],

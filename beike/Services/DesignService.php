@@ -170,6 +170,7 @@ class DesignService
      * @param $type
      * @param $value
      * @return string
+     * @throws \Exception
      */
     private static function handleLink($type, $value): string
     {
