@@ -6,6 +6,9 @@
 
 @section('content')
   <div class="container">
-    {!! $page['content'] !!}
+    <x-shop-breadcrumb type="page" :value="$page['id']" />
+    <div class="row">
+      {!! $page['content'] !!}
+    </div>
   </div>
 @endsection
