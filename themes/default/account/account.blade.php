@@ -26,7 +26,7 @@
         @if (0)
         <div class="card mb-4 account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">个人中心</h5>
+            <h5 class="card-title">{{ __('shop/account.index') }}</h5>
             <a href="{{ shop_route('account.edit.index') }}" class="text-muted">修改信息</a>
           </div>
           <div class="card-body">

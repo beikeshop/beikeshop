@@ -14,7 +14,7 @@ return [
     'login' => [
         'index' => '用户登录与注册',
         'Home' => '首页',
-        'Library' => '登录与注册',
+        'Library' => '个人中心',
         'Login' => '登录',
         'Already' => '已经是我们的客户了？',
         'description' => '已经是我们的客户了？',
