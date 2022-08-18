@@ -4,8 +4,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ trans('LatestProducts::header.latest_products') }}</li>
+                <li class="breadcrumb-item"><a href="/">@lang('shop/common.home')</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ __('LatestProducts::header.latest_products') }}</li>
             </ol>
         </nav>
 
