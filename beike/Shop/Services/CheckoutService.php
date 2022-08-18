@@ -27,7 +27,12 @@ class CheckoutService
 {
     private $customer;
     private $cart;
+    private $selectedProducts;
 
+
+    /**
+     * @throws \Exception
+     */
     public function __construct($customer = null)
     {
         if (is_int($customer) || empty($customer)) {
@@ -37,6 +42,10 @@ class CheckoutService
             throw new \Exception("购物车客户无效");
         }
         $this->cart = CartRepo::createCart($this->customer);
+        $this->selectedProducts = CartRepo::selectedCartProducts($this->customer->id);
+        if ($this->selectedProducts->count() == 0) {
+            throw new \Exception("购物车商品为空");
+        }
     }
 
     /**
@@ -146,6 +155,6 @@ class CheckoutService
             'totals' => $totalService->getTotals(),
         ];
 
-        return $data;
+        return hook_filter('checkout.data', $data);
     }
 }

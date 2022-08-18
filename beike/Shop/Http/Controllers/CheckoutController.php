@@ -19,8 +19,12 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $data = (new CheckoutService)->checkoutData();
-        return view('checkout', $data);
+        try {
+            $data = (new CheckoutService)->checkoutData();
+            return view('checkout', $data);
+        } catch (\Exception $e) {
+            return redirect(shop_route('carts.index'));
+        }
     }
 
 
@@ -32,19 +36,27 @@ class CheckoutController extends Controller
      */
     public function update(Request $request): array
     {
-        $requestData = $request->all();
-        return (new CheckoutService)->update($requestData);
+        try {
+            $requestData = $request->all();
+            return (new CheckoutService)->update($requestData);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
 
     /**
      * 确认提交订单
      *
-     * @return Order
+     * @return mixed
      * @throws \Throwable
      */
-    public function confirm(): Order
+    public function confirm()
     {
-        return (new CheckoutService)->confirm();
+        try {
+            return (new CheckoutService)->confirm();
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 }
