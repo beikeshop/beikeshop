@@ -44,6 +44,12 @@ return [
     'order' => [
         'index' => '订单列表',
         'order_completed' => '已确认收货',
+        'order_details' => '订单详情',
+        'amount' => '金额',
+        'state' => '状态',
+        'operate' => '操作',
+        'order_number' => '订单号',
+        'check' => '查看',
     ],
 
     'addresses' => [

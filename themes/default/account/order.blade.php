@@ -16,16 +16,16 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">我的订单</h5>
+            <h5 class="card-title">{{ __('shop/account.order.index') }}</h5>
           </div>
           <div class="card-body">
             <table class="table ">
               <thead>
                 <tr>
-                  <th>订单详情</th>
-                  <th>金额</th>
-                  <th>状态</th>
-                  <th class="text-end">操作</th>
+                  <th>{{ __('shop/account.order.order_details') }}</th>
+                  <th>{{ __('shop/account.order.amount') }}</th>
+                  <th>{{ __('shop/account.order.state') }}</th>
+                  <th class="text-end">{{ __('shop/account.order.operate') }}</th>
                 </tr>
               </thead>
               @foreach ($orders as $order)
@@ -34,7 +34,7 @@
                   <tr class="head-tr">
                     <td colspan="4">
                       <span class="order-created me-4">{{ $order->created_at }}</span>
-                      <span class="order-number">订单号：{{ $order->number }}</span>
+                      <span class="order-number">{{ __('shop/account.order.order_number') }}：{{ $order->number }}</span>
                     </td>
                   </tr>
                   @foreach ($order->orderProducts as $product)
@@ -52,7 +52,7 @@
                       <td rowspan="{{ $loop->count }}">{{ $order->total }}</td>
                       <td rowspan="{{ $loop->count }}">{{ $order->status }}</td>
                       <td rowspan="{{ $loop->count }}" class="text-end">
-                        <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">查看</a>
+                        <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">{{ __('shop/account.order.check') }}</a>
                       </td>
                     @endif
                   </tr>

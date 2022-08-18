@@ -20,10 +20,10 @@
         <div class="card">
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
             <div class="login-item-header card-header">
-              <h6 class="text-uppercase mb-0">{{ __('shop/login.Login') }}</h6>
+              <h6 class="text-uppercase mb-0">{{ __('shop/login.login') }}</h6>
             </div>
             <div class="card-body">
-              <p class="lead">{{ __('shop/login.Already') }}</p>
+              <p class="lead">{{ __('shop/login.already') }}</p>
               <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                 egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
                 amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
@@ -52,7 +52,7 @@
             <h6 class="text-uppercase mb-0">{{ __('shop/login.new') }}</h6>
           </div>
           <div class="card-body">
-            <p class="lead">{{ __('shop/login.not_Already') }}</p>
+            <p class="lead">{{ __('shop/login.not_already') }}</p>
             <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
               you! The whole process will not take you more than a minute!</p>
             <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, our
