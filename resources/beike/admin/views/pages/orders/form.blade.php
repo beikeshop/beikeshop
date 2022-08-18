@@ -162,7 +162,7 @@
         },
 
         rules: {
-          status: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+          status: [{required: true, message: '请选择状态', trigger: 'blur'}, ],
         }
       },
 
