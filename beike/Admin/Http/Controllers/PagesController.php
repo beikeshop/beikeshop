@@ -97,12 +97,12 @@ class PagesController
      *
      * @param Request $request
      * @param int $pageId
-     * @return RedirectResponse
+     * @return array
      */
-    public function destroy(Request $request, int $pageId)
+    public function destroy(Request $request, int $pageId): array
     {
         PageRepo::deleteById($pageId);
-        return redirect()->to(admin_route('pages.index'));
+        return json_success(trans('common.deleted_success'));
     }
 
 
