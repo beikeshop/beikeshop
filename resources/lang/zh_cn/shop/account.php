@@ -28,6 +28,15 @@ return [
     'amount' => '金额',
     'check_details' => '查看详情',
 
+    'edit' => [
+        'index' => '修改个人信息',
+        'modify_avatar' => '修改头像',
+        'suggest' => '上传JPG或PNG图片。建议300 x 300。',
+        'name' => '名称',
+        'email' => '邮箱',
+        'crop' => '裁剪',
+    ],
+
     'wishlist' => [
         'index' => '收藏列表',
     ],

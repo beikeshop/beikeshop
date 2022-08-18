@@ -10,5 +10,8 @@
  */
 
 return [
-    'home' => '首页'
+    'home' => '首页',
+    'submit' => '提交',
+    'cancel' => '取消',
+    'confirm' => '确定',
 ];
