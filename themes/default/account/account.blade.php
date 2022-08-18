@@ -54,7 +54,7 @@
                   class="text-muted">{{ __('shop/account.after_sales') }}</span></a>
             </div>
             <div class="order-wrap">
-              @if (!$latest_orders)
+              @if (!count($latest_orders))
                 <div class="no-order d-flex flex-column align-items-center">
                   <div class="icon mb-2"><i class="iconfont">&#xe60b;</i></div>
                   <div class="text mb-3 text-muted">{{ __('shop/account.no_order') }}<a href="">{{ __('shop/account.to_buy') }}</a></div>

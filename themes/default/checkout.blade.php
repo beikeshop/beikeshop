@@ -107,7 +107,7 @@
               @endforeach
             </ul>
             <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">提交订单</button>
+              <button class="btn btn-primary" type="button" :disabled="!isSubmit" @click="checkedBtnCheckoutConfirm">提交订单</button>
             </div>
           </div>
         </div>
@@ -168,6 +168,10 @@
 
       // 计算属性
       computed: {
+        isSubmit() {
+          // source.addresses.length > 0 && source.payment_methods.length > 0 && source.shipping_methods.length > 0
+          return this.source.addresses.length > 0 && this.source.payment_methods.length > 0 && this.source.shipping_methods.length > 0;
+        },
         // isAddress: {
         //   this.form.shipping_address_id ==
         // }
