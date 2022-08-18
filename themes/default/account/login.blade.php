@@ -24,9 +24,9 @@
             </div>
             <div class="card-body">
               <p class="lead">{{ __('shop/login.already') }}</p>
-              <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
+              {{-- <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                 egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
-                amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p> --}}
               <hr>
 
               <el-form-item label="{{ __('shop/login.email') }}" prop="email">
@@ -53,10 +53,10 @@
           </div>
           <div class="card-body">
             <p class="lead">{{ __('shop/login.not_already') }}</p>
-            <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
+            {{-- <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
               you! The whole process will not take you more than a minute!</p>
             <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, our
-              customer service center is working for you 24/7.</p>
+              customer service center is working for you 24/7.</p> --}}
               <hr>
 
               <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
