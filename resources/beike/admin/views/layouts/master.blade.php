@@ -30,9 +30,12 @@
     <x-admin-sidebar/>
   </aside>
   <div id="content">
-    <div class="page-title-box"><h5 class="page-title">@yield('title')</h5></div>
-    <div class="container-fluid p-0 mt-4">
-        @yield('content')
+    <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
+      <h5 class="page-title">@yield('title')</h5>
+      @yield('page-title-right')
+    </div>
+    <div class="container-fluid p-0">
+      @yield('content')
     </div>
   </div>
 </div>

@@ -8,6 +8,10 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
 @endpush
 
+@section('page-title-right')
+  <button type="button" class="btn btn-primary save-btn">保存</button>
+@endsection
+
 @section('content')
   <div class="card" id="app" v-cloak>
     <div class="card-body h-min-600 position-relative">
@@ -125,12 +129,9 @@
           </div>
         </div>
       </div>
-      <div class="mt-5">
-        <button @click="saveButtonClicked" class="btn btn-primary">保存</button>
-      </div>
     </div>
 
-    <el-dialog title="设置" :visible.sync="childrenGroupPop.show" width="500px" v-if="currentMenu.childrenGroup.length">
+    <el-dialog title="设置" :visible.sync="childrenGroupPop.show" width="500px" v-if="currentMenu && currentMenu.childrenGroup.length">
       <p class="fw-bold mb-2">类型</p>
       <el-select v-model="currentMenu.childrenGroup[childrenGroupPop.groupIndex].type" placeholder="请选择">
         <el-option
@@ -281,6 +282,11 @@
       },
       created() {},
       mounted() {},
+    })
+
+    let saveBtn = document.querySelector('.save-btn')
+    saveBtn.addEventListener('click', () => {
+      app.saveButtonClicked()
     })
   </script>
 @endpush

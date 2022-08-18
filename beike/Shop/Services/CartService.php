@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Repositories\CartRepo;
 use Exception;
 use Beike\Models\CartProduct;
 use Beike\Shop\Http\Resources\CartDetail;
@@ -29,10 +30,7 @@ class CartService
         if (empty($customer)) {
             return [];
         }
-        $cartBuilder = CartProduct::query()
-            ->with(['product', 'sku.product.description'])
-            ->where('customer_id', $customer->id)
-            ->orderByDesc('id');
+        $cartBuilder = CartRepo::allCartProductsBuilder($customer->id);
         if ($selected) {
             $cartBuilder->where('selected', true);
         }

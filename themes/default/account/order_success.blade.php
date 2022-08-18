@@ -34,14 +34,14 @@
               </table>
             </div>
 
-            <div class="text-muted mt-4">温馨提示：温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示温馨提示</div>
+            <div class="text-muted mt-4">温馨提示：您的订单已生成成功，请尽快完成支付哦～</div>
             <div class="mt-3">您还可以：<a href="/">继续采购</a></div>
           </div>
         </div>
         <div class="order-bottom">
           <div class="text-muted">如果您在订单过程中有任何问题，可以随时联系我们客服人员：</div>
-          <div>Emaill: ceshi@opencart.cn</div>
-          <div>服务热线: +86 1878017xxxx</div>
+          <div>Emaill: {{ system_setting('base.email', '') }}</div>
+          <div>服务热线: {{ system_setting('base.telephone', '') }}</div>
         </div>
       </div>
     </div>

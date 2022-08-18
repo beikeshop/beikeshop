@@ -15,6 +15,11 @@ use Beike\Models\Region;
 
 class RegionRepo
 {
+    public static function getList()
+    {
+        return Region::query()->with('regionZones.zone')->get();
+    }
+
     public static function createOrUpdate($data)
     {
         $id = $data['id'] ?? 0;

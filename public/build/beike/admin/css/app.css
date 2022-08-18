@@ -406,11 +406,7 @@
 }
 
 .page-title-box {
-  z-index: 9;
-  right: 0;
-  padding: 1.4rem 0 0;
-  display: flex;
-  align-items: center;
+  height: 64px;
 }
 .page-title-box .page-title {
   font-size: 1rem;

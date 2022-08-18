@@ -10,6 +10,13 @@
  */
 return [
     'error_required' => '请填写 :name',
+    'unauthenticated' => '请先登录',
+    'success' => '成功',
+    'created_success' => '创建成功!',
+    'deleted_success' => '删除成功!',
+    'restored_success' => '恢复成功!',
+    'updated_success' => '更新成功!',
+    'get_success' => '获取成功!',
 ];
 
 

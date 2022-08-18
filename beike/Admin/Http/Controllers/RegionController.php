@@ -21,7 +21,7 @@ class RegionController
     public function index()
     {
         $data = [
-            'regions' => Region::query()->with('regionZones.zone')->get(),
+            'regions' => RegionRepo::getList(),
             'countries' => CountryRepo::all()
         ];
 

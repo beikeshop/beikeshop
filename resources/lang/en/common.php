@@ -10,13 +10,12 @@
  */
 
 return [
-    // action
+    'error_required' => 'Please fill out the :name',
+    'unauthenticated' => 'Please login first',
     'success' => 'Success',
     'created_success' => 'Created Successfully!',
     'deleted_success' => 'Deleted Successfully!',
     'restored_success' => 'Restore Successfully!',
     'updated_success' => 'Updated Successfully!',
-    'created_success' => 'Created Successfully!',
     'get_success' => 'Get Successfully!',
-    'error_required' => 'Please fill out the :name',
 ];
