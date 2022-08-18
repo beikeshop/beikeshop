@@ -281,6 +281,8 @@
 
         closeAddressDialog(form) {
           this.$refs[form].resetFields();
+          Object.keys(this.dialogAddress.form).forEach(key => this.dialogAddress.form[key] = '')
+          this.dialogAddress.form.country_id = @json((int)system_setting('base.country_id'));
           this.dialogAddress.show = false
           this.dialogAddress.index = null;
         },
