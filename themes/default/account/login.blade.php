@@ -14,33 +14,33 @@
 
     <x-shop-breadcrumb type="static" value="login.index" />
 
-    <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/account.login.index') }}</h1></div>
+    <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
     <div class="justify-content-center row mb-5">
       <div class="col-lg-5">
         <div class="card">
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
             <div class="login-item-header card-header">
-              <h6 class="text-uppercase mb-0">{{ __('shop/account.login.Login') }}</h6>
+              <h6 class="text-uppercase mb-0">{{ __('shop/login.Login') }}</h6>
             </div>
             <div class="card-body">
-              <p class="lead">{{ __('shop/account.login.Already') }}</p>
+              <p class="lead">{{ __('shop/login.Already') }}</p>
               <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                 egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
                 amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
               <hr>
 
-              <el-form-item label="{{ __('shop/account.login.email') }}" prop="email">
-                <el-input v-model="loginForm.email" placeholder="{{ __('shop/account.login.email_address') }}"></el-input>
+              <el-form-item label="{{ __('shop/login.email') }}" prop="email">
+                <el-input v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
               </el-form-item>
 
-              <el-form-item label="{{ __('shop/account.login.password') }}" prop="password" class="mb-4">
-                <el-input type="password" v-model="loginForm.password" placeholder="{{ __('shop/account.login.password') }}"></el-input>
+              <el-form-item label="{{ __('shop/login.password') }}" prop="password" class="mb-4">
+                <el-input type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
               </el-form-item>
 
-              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/account.login.forget_password') }}</a>
+              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
 
               <div class="mt-4 mb-3">
-                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/account.login.login') }}</button>
+                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/login.login') }}</button>
               </div>
             </div>
           </el-form>
@@ -49,10 +49,10 @@
       <div class="col-lg-5">
         <div class="card">
           <div class="login-item-header card-header">
-            <h6 class="text-uppercase mb-0">{{ __('shop/account.login.new') }}</h6>
+            <h6 class="text-uppercase mb-0">{{ __('shop/login.new') }}</h6>
           </div>
           <div class="card-body">
-            <p class="lead">{{ __('shop/account.login.not_Already') }}</p>
+            <p class="lead">{{ __('shop/login.not_Already') }}</p>
             <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
               you! The whole process will not take you more than a minute!</p>
             <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, our
@@ -60,21 +60,21 @@
               <hr>
 
               <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
-                <el-form-item label="{{ __('shop/account.login.email') }}" prop="email">
-                  <el-input v-model="registerForm.email" placeholder="{{ __('shop/account.login.email_address') }}"></el-input>
+                <el-form-item label="{{ __('shop/login.email') }}" prop="email">
+                  <el-input v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="{{ __('shop/account.login.password') }}" prop="password">
-                  <el-input type="password" v-model="registerForm.password" placeholder="{{ __('shop/account.login.password') }}"></el-input>
+                <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+                  <el-input type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="{{ __('shop/account.login.confirm_password') }}" prop="password_confirmation">
-                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/account.login.confirm_password') }}"></el-input>
+                <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
+                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
                 </el-form-item>
 
 
                 <div class="mt-5 mb-3">
-                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> {{ __('shop/account.login.register') }}</button>
+                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
                 </div>
               </el-form>
           </div>
@@ -88,7 +88,7 @@
   <script>
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('{{ __('shop/account.login.enter_password') }}'));
+        callback(new Error('{{ __('shop/login.enter_password') }}'));
       } else {
         if (value !== '') {
           app.$refs.registerForm.validateField('password_confirmation');
@@ -99,9 +99,9 @@
 
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('{{ __('shop/account.login.please_confirm') }}'));
+        callback(new Error('{{ __('shop/login.please_confirm') }}'));
       } else if (value !== app.registerForm.password) {
-        callback(new Error('{{ __('shop/account.login.password_err') }}'));
+        callback(new Error('{{ __('shop/login.password_err') }}'));
       } else {
         callback();
       }
@@ -124,18 +124,18 @@
 
         loginRules: {
           email: [
-            {required: true, message: '{{ __('shop/account.login.enter_email') }}', trigger: 'blur'},
-            {type: 'email', message: '{{ __('shop/account.login.email_err') }}', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'blur'},
           ],
           password: [
-            {required: true, message: '{{ __('shop/account.login.enter_password')}}', trigger: 'blur'}
+            {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'blur'}
           ]
         },
 
         registeRules: {
           email: [
-            {required: true, message: '{{ __('shop/account.login.enter_email') }}', trigger: 'blur'},
-            {type: 'email', message: '{{ __('shop/account.login.email_err') }}', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'blur'},
           ],
           password: [
             {required: true, validator: validatePass, trigger: 'blur'}
@@ -159,7 +159,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              layer.msg('{{ __('shop/account.login.check_form') }}', () => {})
+              layer.msg('{{ __('shop/login.check_form') }}', () => {})
               return;
             }
 
