@@ -74,11 +74,15 @@
 
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">退换原因</label>
-                  <select class="form-select" name="rma_reason_id">
+                  <select class="form-select {{ $errors->has('rma_reason_id') ? 'is-invalid' : '' }}" name="rma_reason_id">
                     @foreach ($reasons as $item)
                       <option value="{{ $item['id'] }}" {{ $item['id'] == old('opened', '') ? 'selected': '' }}>{{ $item['name'] }}</option>
                     @endforeach
                   </select>
+
+                  @if ($errors->has('rma_reason_id'))
+                    <span class="invalid-feedback" role="alert">{{ $errors->first('rma_reason_id') }}</span>
+                  @endif
                 </div>
 
                 <div class="col-12 "></div>

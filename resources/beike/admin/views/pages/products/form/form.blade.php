@@ -152,13 +152,13 @@
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}
                           </th>
-                          <th width="106px">image</th>
-                          <th>model</th>
+                          <th width="106px">图片</th>
+                          <th>型号</th>
                           <th>sku</th>
-                          <th>price</th>
-                          <th>orgin price</th>
-                          <th>cost price</th>
-                          <th>quantity</th>
+                          <th>价格</th>
+                          <th>原价</th>
+                          <th>成本价</th>
+                          <th>数量</th>
                         </thead>
                         <tbody>
                           <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
@@ -207,12 +207,12 @@
 
               <template v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
-                <x-admin-form-input name="skus[0][model]" title="model" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
+                <x-admin-form-input name="skus[0][model]" title="型号" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
                 <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" />
-                <x-admin-form-input name="skus[0][price]" title="price" :value="old('skus.0.price', $product->skus[0]->price ?? '')" />
-                <x-admin-form-input name="skus[0][origin_price]" title="origin_price" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
-                <x-admin-form-input name="skus[0][cost_price]" title="cost_price" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
-                <x-admin-form-input name="skus[0][quantity]" title="quantity" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
+                <x-admin-form-input name="skus[0][price]" title="价格" :value="old('skus.0.price', $product->skus[0]->price ?? '')" />
+                <x-admin-form-input name="skus[0][origin_price]" title="原价" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
+                <x-admin-form-input name="skus[0][cost_price]" title="成本价" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
+                <x-admin-form-input name="skus[0][quantity]" title="数量" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
                 <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
                 <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">

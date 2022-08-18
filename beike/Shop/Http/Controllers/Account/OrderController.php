@@ -30,7 +30,11 @@ class OrderController extends Controller
      */
     public function index(Request $request): View
     {
-        $orders = OrderRepo::getListByCustomer(current_customer());
+        $filters = [
+            'customer' => current_customer(),
+            'status' => $request->get('status')
+        ];
+        $orders = OrderRepo::filterOrders($filters);
         $data = [
             'orders' => OrderList::collection($orders),
         ];

@@ -93,6 +93,12 @@ class OrderRepo
             $builder->where('created_at', '<', $end);
         }
 
+        $status = $filters['status'] ?? '';
+        if ($status) {
+            $builder->where('status', $status);
+        }
+
+
         return $builder;
     }
 
