@@ -26,7 +26,7 @@ class PageRepo
     {
         $builder = Page::query()->with([
             'description'
-        ])->orderByDesc('created_at');
+        ])->orderByDesc('updated_at');
 
         return $builder->paginate();
     }
