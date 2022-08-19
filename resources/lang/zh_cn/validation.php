@@ -26,9 +26,9 @@ return [
     'before_or_equal' => ':attribute 必须是 :date 之前或相同的一个日期。',
     'between' => [
         'numeric' => ':attribute 必须在 :min 到 :max 之间。',
-        'file'    => ':attribute 必须在 :min 到 :max KB 之间。',
-        'string'  => ':attribute 必须在 :min 到 :max 个字符之间。',
-        'array'   => ':attribute 必须在 :min 到 :max 项之间。',
+        'file' => ':attribute 必须在 :min 到 :max KB 之间。',
+        'string' => ':attribute 必须在 :min 到 :max 个字符之间。',
+        'array' => ':attribute 必须在 :min 到 :max 项之间。',
     ],
     'boolean' => ':attribute 字符必须是 true 或 false。',
     'confirmed' => ':attribute 二次确认不匹配。',
@@ -82,17 +82,17 @@ return [
     ],
     'max' => [
         'numeric' => ':attribute 的最大长度为 :max 位数。',
-        'file'    => ':attribute 的大小最多为 :max KB。',
-        'string'  => ':attribute 的最大长度为 :max 字符。',
-        'array'   => ':attribute 最多为 :max 项。',
+        'file' => ':attribute 的大小最多为 :max KB。',
+        'string' => ':attribute 的最大长度为 :max 字符。',
+        'array' => ':attribute 最多为 :max 项。',
     ],
     'mimes' => ':attribute 的文件类型必须是 :values。',
     'mimetypes' => ':attribute 的文件类型必须是 :values。',
     'min' => [
         'numeric' => ':attribute 的最小长度为 :min 位数。',
-        'file'    => ':attribute 的大小至少为 :min KB。',
-        'string'  => ':attribute 的最小长度为 :min 字符。',
-        'array'   => ':attribute 至少有 :min 项。',
+        'file' => ':attribute 的大小至少为 :min KB。',
+        'string' => ':attribute 的最小长度为 :min 字符。',
+        'array' => ':attribute 至少有 :min 项。',
     ],
     'multiple_of' => ':attribute 必须是 :value 的倍数。',
     'not_in' => '选定的 :attribute 是无效的。',
@@ -115,9 +115,9 @@ return [
     'same' => ':attribute和:other必须匹配。',
     'size' => [
         'numeric' => ':attribute 必须是 :size 位数。',
-        'file'    => ':attribute 必须是 :size KB。',
-        'string'  => ':attribute 必须是 :size 个字符。',
-        'array'   => ':attribute 必须包括 :size 项。',
+        'file' => ':attribute 必须是 :size KB。',
+        'string' => ':attribute 必须是 :size 个字符。',
+        'array' => ':attribute 必须包括 :size 项。',
     ],
     'starts_with' => ':attribute 必须以 :values 开始。',
     'string' => ':attribute 必须是一个字符串。',
@@ -158,6 +158,12 @@ return [
     'attributes' => [
         'descriptions.en.title' => '英文标题',
         'descriptions.zh_cn.title' => '中文标题',
+
+        'tax_rate' => [
+            'name' => '税种名称',
+            'type' => '类型',
+            'rate' => '税率',
+        ]
     ],
 
 ];

@@ -35,7 +35,17 @@ class TaxRateRequest extends FormRequest
         return [
             'name' => 'required|string|max:10',
             'rate' => 'required|numeric',
-            'type' => 'required|'
+            'type' => 'required|in:percent,flat',
+            'region_id' => 'required|int',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => trans('validation.attributes.tax_rate.name'),
+            'rate' => trans('validation.attributes.tax_rate.rate'),
+            'type' => trans('validation.attributes.tax_rate.type'),
         ];
     }
 }

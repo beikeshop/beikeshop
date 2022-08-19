@@ -158,6 +158,12 @@ return [
     'attributes' => [
         'descriptions.en.title' => 'Title',
         'descriptions.zh_cn.title' => 'Title',
+
+        'tax_rate' => [
+            'name' => 'Tax Rate Name',
+            'type' => 'Tax Type',
+            'rate' => 'Tax Rate',
+        ]
     ],
 
 ];
