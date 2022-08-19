@@ -10,6 +10,9 @@
 
 @section('content')
   <div class="container" id="checkout-app" v-cloak>
+
+    <x-shop-breadcrumb type="static" value="checkout.index" />
+
     <div class="row mt-5 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 2])</div>
     </div>
@@ -18,7 +21,7 @@
       <div class="col-12 col-md-8">
         <div class="checkout-black">
           <div class="checkout-title">
-            <h5 class="mb-0">地址</h5>
+            <h5 class="mb-0">{{ __('shop/checkout.address') }}</h5>
             <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
           </div>
           <div class="addresses-wrap">
@@ -32,15 +35,15 @@
                   <div class="zipcode">@{{ address.zipcode }}</div>
                   <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
                   <div class="address-bottom">
-                    <span class="badge bg-success" v-if="form.shipping_address_id == address.id">已选择</span>
-                    <a class="" @click.stop="editAddress(index)">编辑</a>
+                    <span class="badge bg-success" v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                    <a class="" @click.stop="editAddress(index)">{{ __('shop/checkout.edit') }}</a>
                   </div>
                 </div>
               </div>
               <div class="col-6" v-if="!isAllAddress">
                 <div class="item address-right">
-                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddress = true">选择其他地址</button>
-                  <button class="btn btn-outline-dark w-100" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> 添加新地址</button>
+                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                 </div>
               </div>
             </div>
@@ -48,7 +51,7 @@
         </div>
 
         <div class="checkout-black">
-          <h5 class="checkout-title">支付方式</h5>
+          <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>
           <div class="radio-line-wrap">
             <div :class="['radio-line-item', payment.code == form.payment_method_code ? 'active' : '']" v-for="payment, index in source.payment_methods" :key="index" @click="updateCheckout(payment.code, 'payment_method_code')">
               <div class="left">
@@ -64,7 +67,7 @@
         </div>
 
         <div class="checkout-black">
-          <h5 class="checkout-title">配送方式</h5>
+          <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
           <div class="radio-line-wrap">
             <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']" v-for="shipping, index in source.shipping_methods" :key="index" @click="updateCheckout(shipping.code, 'shipping_method_code')">
               <div class="left">
@@ -83,7 +86,7 @@
       <div class="col-12 col-md-4 right-column">
         <div class="card total-wrap fixed-top-line">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">CART TOTALS</h5>
+            <h5 class="mb-0">{{ __('shop/checkout.cart_totals') }}</h5>
             <span class="rounded-circle bg-primary">@{{ source.carts.quantity }}</span>
           </div>
           <div class="card-body">
@@ -107,7 +110,7 @@
               @endforeach
             </ul>
             <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary" type="button" :disabled="!isSubmit" @click="checkedBtnCheckoutConfirm">提交订单</button>
+              <button class="btn btn-primary" type="button" :disabled="!isSubmit" @click="checkedBtnCheckoutConfirm">{{ __('shop/checkout.submit_order') }}</button>
             </div>
           </div>
         </div>
@@ -158,11 +161,11 @@
         },
 
         addressRules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}, ],
-          phone: [{required: true, message: '请输入联系电话', trigger: 'blur'}, ],
-          address_1: [{required: true, message: '请输入详细地址 1', trigger: 'blur'}, ],
-          zone_id: [{required: true, message: '请选择省份', trigger: 'blur'}, ],
-          city: [{required: true, message: '请填写 city', trigger: 'blur'}, ],
+          name: [{required: true, message: '{{ __('shop/checkout.enter_name') }}', trigger: 'blur'}, ],
+          phone: [{required: true, message: '{{ __('shop/checkout.enter_phone') }}', trigger: 'blur'}, ],
+          address_1: [{required: true, message: '{{ __('shop/checkout.enter_address') }}', trigger: 'blur'}, ],
+          zone_id: [{required: true, message: '{{ __('shop/checkout.select_province') }}', trigger: 'blur'}, ],
+          city: [{required: true, message: '{{ __('shop/checkout.enter_city') }}', trigger: 'blur'}, ],
         }
       },
 
@@ -199,7 +202,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('shop/checkout.check_form') }}');
               return;
             }
 

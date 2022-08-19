@@ -10,6 +10,9 @@
 
 @section('content')
   <div class="container" id="app-cart" v-cloak>
+
+    <x-shop-breadcrumb type="static" value="carts.index" />
+
     <div class="row mt-5 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
@@ -23,13 +26,13 @@
                 <th width="130">
                   <input class="form-check-input" type="checkbox" value="" id="check-all" v-model="allSelected">
                   <label class="form-check-label ms-1" for="check-all">
-                    {{ __('shop/cart.select_all') }}
+                    {{ __('shop/carts.select_all') }}
                   </label>
                 </th>
-                <th>{{ __('shop/cart.index') }}</th>
-                <th width="170">{{ __('shop/cart.commodity') }}</th>
-                <th width="170">{{ __('shop/cart.subtotal') }}</th>
-                <th class="text-end">{{ __('shop/cart.operate') }}</th>
+                <th>{{ __('shop/carts.index') }}</th>
+                <th width="170">{{ __('shop/carts.commodity') }}</th>
+                <th width="170">{{ __('shop/carts.subtotal') }}</th>
+                <th class="text-end">{{ __('shop/carts.operate') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -67,15 +70,15 @@
       </div>
       <div class="col-12 col-md-3">
         <div class="card total-wrap fixed-top-line">
-          <div class="card-header"><h5 class="mb-0">{{ __('shop/cart.product_total') }}</h5></div>
+          <div class="card-header"><h5 class="mb-0">{{ __('shop/carts.product_total') }}</h5></div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><span>{{ __('shop/cart.all') }}</span><span>@{{ products.length }}</span></li>
-              <li class="list-group-item"><span>{{ __('shop/cart.selected') }}</span><span>@{{ total_quantity }}</span></li>
-              <li class="list-group-item border-bottom-0"><span>{{ __('shop/cart.total_price') }}</span><span class="total-price">@{{ amount_format }}</span></li>
+              <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ products.length }}</span></li>
+              <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
+              <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.total_price') }}</span><span class="total-price">@{{ amount_format }}</span></li>
               <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
                 {{-- <a href="{{ shop_route('checkout.index', 'checkout') }}" class="btn btn-primary">去结账</a> --}}
-                <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">{{ __('shop/cart.to_checkout') }}</button>
+                <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
               </li>
             </ul>
           </div>
@@ -88,11 +91,11 @@
           <i class="bi bi-cart fs-1"></i>
         </div>
         <div class="empty-cart-text mb-3">
-          <h5>{{ __('shop/cart.cart_empty') }}</h5>
-          <p class="text-muted">{{ __('shop/cart.go_buy') }}</p>
+          <h5>{{ __('shop/carts.cart_empty') }}</h5>
+          <p class="text-muted">{{ __('shop/carts.go_buy') }}</p>
         </div>
         <div class="empty-cart-action">
-          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/cart.go_shopping') }}</a>
+          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/carts.go_shopping') }}</a>
         </div>
       </div>
     </div>
@@ -130,7 +133,7 @@
       methods: {
         checkedBtnToCheckout() {
           if (!this.products.some(e => e.selected)) {
-            layer.msg('{{ __('shop/cart.nust_select') }}', ()=>{})
+            layer.msg('{{ __('shop/carts.nust_select') }}', ()=>{})
             return
           }
 
