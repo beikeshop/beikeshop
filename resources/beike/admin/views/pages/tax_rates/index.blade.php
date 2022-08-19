@@ -59,7 +59,9 @@
         </el-form-item>
 
         <el-form-item label="税率" prop="rate">
-          <el-input v-model="dialog.form.rate" placeholder="税率"></el-input>
+          <el-input v-model="dialog.form.rate" placeholder="税率">
+            <template slot="append" v-if="dialog.form.type == 'percent'">%</template>
+          </el-input>
         </el-form-item>
 
         <el-form-item label="类型">
