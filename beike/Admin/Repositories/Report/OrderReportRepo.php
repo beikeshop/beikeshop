@@ -26,13 +26,13 @@ class OrderReportRepo
      */
     public static function getLatestMonth()
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()->subDay()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()->subDay()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()])
             ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
@@ -64,13 +64,13 @@ class OrderReportRepo
      */
     public static function getLatestWeek()
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()->subDay()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()->subDay()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()])
             ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
@@ -102,7 +102,7 @@ class OrderReportRepo
      */
     public static function getLatestYear()
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()->subDay()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()])
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
             ->groupBy(['year', 'month'])
             ->get();
@@ -112,7 +112,7 @@ class OrderReportRepo
             $orderMonthTotals[$key] = $orderTotal['total'];
         }
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()->subDay()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()])
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, sum(total) as amount'))
             ->groupBy(['year', 'month'])
             ->get();
