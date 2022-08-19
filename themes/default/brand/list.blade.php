@@ -3,9 +3,11 @@
 
 @section('content')
 <div class="container">
-  {{-- {{ dd($brands) }} --}}
+
+  <x-shop-breadcrumb type="static" value="brands.index" /> 
+
   <div>
-    <p class="fw-bold fs-3 d-flex justify-content-center mt-5 mb-4">品牌列表</p>
+    <p class="fw-bold fs-3 d-flex justify-content-center mt-5 mb-4">{{ __('shop/brands.index') }}</p>
   </div>
 
   <ul class="d-flex justify-content-start mt-3 align-items-baseline mb-3 curser flex-wrap">

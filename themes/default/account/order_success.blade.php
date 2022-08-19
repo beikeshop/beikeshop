@@ -5,7 +5,7 @@
 @section('content')
   <div class="container">
 
-    <x-shop-breadcrumb type="static" value="account.order.index" />
+    {{-- <x-shop-breadcrumb type="static" value="account.order.index" /> --}}
     
     <div class="row mt-5 justify-content-center mb-5">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 3])</div>
