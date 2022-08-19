@@ -65,9 +65,9 @@
               <div class="help-text font-size-12 lh-base">管理后台目录,默认为admin</div>
             </x-admin-form-input>
 
-            <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
+            {{-- <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
               <div class="help-text font-size-12 lh-base">主题模板选择</div>
-            </x-admin-form-select>
+            </x-admin-form-select> --}}
 
             <x-admin-form-switch name="tax" title="启用税费" value="{{ old('tax', system_setting('base.tax', '0')) }}">
               <div class="help-text font-size-12 lh-base">是否启用税费计算</div>
