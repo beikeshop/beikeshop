@@ -55,9 +55,13 @@ class PagesController
      */
     public function store(PageRequest $request)
     {
-        $requestData = $request->all();
-        PageRepo::createOrUpdate($requestData);
-        return redirect()->to(admin_route('pages.index'));
+        try {
+            $requestData = $request->all();
+            PageRepo::createOrUpdate($requestData);
+            return redirect(admin_route('pages.index'));
+        } catch (\Exception $e) {
+            return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 
@@ -85,10 +89,14 @@ class PagesController
      */
     public function update(PageRequest $request, int $pageId)
     {
-        $requestData = $request->all();
-        $requestData['id'] = $pageId;
-        $page = PageRepo::createOrUpdate($requestData);
-        return redirect()->to(admin_route('pages.index'));
+        try {
+            $requestData = $request->all();
+            $requestData['id'] = $pageId;
+            PageRepo::createOrUpdate($requestData);
+            return redirect()->to(admin_route('pages.index'));
+        } catch (\Exception $e) {
+            return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 

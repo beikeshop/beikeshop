@@ -12,8 +12,7 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
-use Beike\Models\Product;
-use Beike\Shop\Http\Resources\PageDetail;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PageRepo
@@ -49,6 +48,19 @@ class PageRepo
 
 
     public static function createOrUpdate($data)
+    {
+        try {
+            DB::beginTransaction();
+            $region = self::pushPage($data);
+            DB::commit();
+            return $region;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public static function pushPage($data)
     {
         $id = $data['id'] ?? 0;
         if ($id) {

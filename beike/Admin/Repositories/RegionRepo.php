@@ -12,6 +12,7 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Region;
+use Illuminate\Support\Facades\DB;
 
 class RegionRepo
 {
@@ -21,6 +22,19 @@ class RegionRepo
     }
 
     public static function createOrUpdate($data)
+    {
+        try {
+            DB::beginTransaction();
+            $region = self::pushRegion($data);
+            DB::commit();
+            return $region;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public static function pushRegion($data)
     {
         $id = $data['id'] ?? 0;
         if ($id) {

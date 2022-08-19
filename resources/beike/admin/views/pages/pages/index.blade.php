@@ -3,6 +3,9 @@
 @section('title', '信息页面')
 
 @section('content')
+
+    @dump($errors)
+
   <div class="card">
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
