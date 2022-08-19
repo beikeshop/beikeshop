@@ -38,14 +38,14 @@ return [
     ],
 
     'wishlist' => [
-        'index' => '收藏列表',
+        'index' => '我的收藏',
         'product' => '产品',
         'price' => '价格',
         'check_details' => '查看详情',
     ],
 
     'order' => [
-        'index' => '订单列表',
+        'index' => '我的订单',
         'completed' => '已确认收货',
         'order_details' => '订单详情',
         'amount' => '金额',

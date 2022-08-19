@@ -44,9 +44,13 @@
         <div class="peoduct-info">
           <h1 class="mb-4">{{ $product['name'] }}</h1>
           <div class="stock-and-sku mb-4">
-            <span :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">@{{ product.quantity > 0 ? 'In Stock' : 'Out Stock' }}</span>
+            <span :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
+              {{-- @{{ product.quantity > 0 ? 'In Stock' : 'Out Stock' }} --}}
+              <template v-if="product.quantity > 0">{{ __('shop/products.in_stock') }}</template>
+              <template v-else>{{ __('shop/products.out_stock') }}</template>
+            </span>
             <span class="ms-3 text-muted">SKU: @{{ product.sku }}</span>
-            <span class="ms-3 text-muted">MODEL: @{{ product.model }}</span>
+            <span class="ms-3 text-muted">{{ __('shop/products.model') }}: @{{ product.model }}</span>
           </div>
           @if (0)
           <div class="rating-wrap d-flex">
@@ -90,18 +94,18 @@
               class="btn btn-outline-dark ms-3 add-cart"
               :disabled="!product.quantity"
               @click="addCart(false, this)"
-              ><i class="bi bi-cart-fill me-1"></i>加入购物车
+              ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
             </button>
             <button
               class="btn btn-dark ms-3"
               :disabled="!product.quantity"
               @click="addCart(true, this)"
-              ><i class="bi bi-bag-fill me-1"></i>立即购买
+              ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
             </button>
           </div>
           <div class="add-wishlist">
             <button class="btn btn-link ps-0 text-dark" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
-              <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> 加入收藏夹
+              <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
             </button>
           </div>
         </div>
@@ -111,7 +115,7 @@
     <div class="product-description">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
         <a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
-          商品详情
+          {{ __('shop/products.product_details') }}
         </a>
       </div>
       <div class="tab-content">

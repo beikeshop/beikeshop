@@ -14,7 +14,7 @@
               <div class="price">{{ $cart['price_format'] }} <span class="text-muted">x {{ $cart['quantity'] }}<span>
               </div>
               <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
-                {{ __('shop/carts.delete') }}</span>
+                {{ __('common.delete') }}</span>
             </div>
           </div>
         </div>

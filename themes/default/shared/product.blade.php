@@ -13,7 +13,7 @@
         class="btn btn-dark text-light mx-1 rounded-3"
         data-bs-toggle="tooltip"
         data-bs-placement="top"
-        title="加入收藏"
+        title="{{ __('shop/products.add_to_favorites') }}"
         data-in-wishlist="{{ $product['in_wishlist'] }}"
         onclick="bk.addWishlist('{{ $product['id'] }}', this)">
         <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }}"></i>
@@ -22,7 +22,7 @@
         class="btn btn-dark text-light mx-1 rounded-3"
         data-bs-toggle="tooltip"
         data-bs-placement="top"
-        title="加入购物车"
+        title="{{ __('shop/products.add_to_cart') }}"
         onclick="bk.addCart({sku_id: '{{ $product['sku_id'] }}'}, this)">
         <i class="bi bi-cart"></i>
       </button>

@@ -12,21 +12,21 @@
         <span>{{ __('shop/account.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.edit.index') ? 'active' : '' }}"
         href="{{ shop_route('account.edit.index') }}">
-        <span>修改个人信息</span></a>
+        <span>{{ __('shop/account.edit.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.order.index') || equal_route('shop.account.order.show') ? 'active' : '' }}"
         href="{{ shop_route('account.order.index') }}">
-        <span>我的订单</span></a>
+        <span>{{ __('shop/account.order.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.addresses.index') ? 'active' : '' }}"
         href="{{ shop_route('account.addresses.index') }}">
-        <span>我的地址</span></a>
+        <span>{{ __('shop/account.addresses.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.wishlist.index') ? 'active' : '' }}"
         href="{{ shop_route('account.wishlist.index') }}">
-        <span>我的收藏</span></a>
+        <span>{{ __('shop/account.wishlist.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.rma.index') || equal_route('shop.account.rma.show') ? 'active' : '' }}"
         href="{{ shop_route('account.rma.index') }}">
-        <span>我的售后</span></a>
+        <span>{{ __('shop/account.rma.index') }}</span></a>
       <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
-        <span>退出登录</span></a>
+        <span>{{ __('common.sign_out') }}</span></a>
     </nav>
   </div>
 </div>

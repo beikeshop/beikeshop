@@ -11,4 +11,11 @@
 
 return [
     'search' => '搜索',
+    'add_to_favorites' => '加入收藏夹',
+    'add_to_cart' => '加入购物车',
+    'buy_now' => '立即购买',
+    'product_details' => '商品详情',
+    'in_stock' => '有货',
+    'out_stock' => '缺货',
+    'model' => '型号',
 ];
