@@ -33,7 +33,8 @@
             <td>@{{ customer.from }}</td>
             <td>@{{ customer.customer_group_name }}</td>
             <td>
-              <el-tag :type="customer.status ? 'success' : 'info'" size="small">@{{ customer.status ? '启用' : '禁用' }}</el-tag>
+              <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
+              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             <td>
               <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">编辑</a>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">删除</button>

@@ -17,6 +17,8 @@ return [
     'restored_success' => '恢复成功!',
     'updated_success' => '更新成功!',
     'get_success' => '获取成功!',
+    'enable' => '启用',
+    'disable' => '禁用',
 ];
 
 

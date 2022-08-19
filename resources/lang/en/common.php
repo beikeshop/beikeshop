@@ -18,4 +18,6 @@ return [
     'restored_success' => 'Restore Successfully!',
     'updated_success' => 'Updated Successfully!',
     'get_success' => 'Get Successfully!',
+    'enable' => 'Enable',
+    'disable' => 'Disable',
 ];
