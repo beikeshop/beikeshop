@@ -18,6 +18,9 @@
     </div>
 
       {{-- @dump($errors) --}}
+    @if ($errors->has('error'))
+      <x-admin-alert type="Danger" msg="{{ $errors->has('error') }}" class="mt-4" />
+    @endif
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9">

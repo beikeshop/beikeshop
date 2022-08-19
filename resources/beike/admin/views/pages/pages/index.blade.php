@@ -4,11 +4,9 @@
 
 @section('content')
 
-  {{-- @dump($errors) --}}
-
-  {{-- @if (session('success'))
-    <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
-  @endif --}}
+  @if ($errors->has('error'))
+    <x-admin-alert type="Danger" msg="{{ $errors->has('error') }}" class="mt-4" />
+  @endif
 
   <div class="card">
     <div class="card-body h-min-600">
