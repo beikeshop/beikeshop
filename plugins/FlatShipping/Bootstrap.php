@@ -23,7 +23,7 @@ class Bootstrap
         $shippingValue = plugin_setting('flat_shipping.value', 0);
         if ($shippingType == 'fixed') {
             return $shippingValue;
-        } elseif ($shippingType == 'rate') {
+        } elseif ($shippingType == 'percent') {
             return $amount * $shippingValue / 100;
         } else {
             return 0;
