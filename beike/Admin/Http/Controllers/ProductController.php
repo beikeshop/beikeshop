@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Models\Product;
 use Illuminate\Http\Request;
 use Beike\Repositories\ProductRepo;
@@ -57,9 +58,14 @@ class ProductController extends Controller
         return $this->form($request, new Product());
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        return $this->save($request, new Product());
+        try {
+            (new ProductService)->create($request->all());
+            return redirect()->to($this->getRedirect())->with('success', trans('common.created_success'));
+        } catch (\Exception $e) {
+            return redirect(admin_route('product.create'))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function edit(Request $request, Product $product)
@@ -67,16 +73,20 @@ class ProductController extends Controller
         return $this->form($request, $product);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        return $this->save($request, $product);
+        try {
+            (new ProductService)->update($product, $request->all());
+            return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
+        } catch (\Exception $e) {
+            return redirect(admin_route('product.edit', $product))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy(Request $request, Product $product)
     {
         $product->delete();
-
-        return ['success' => true];
+        return json_success(trans('common.deleted_success'));
     }
 
     public function restore(Request $request)
@@ -108,17 +118,6 @@ class ProductController extends Controller
         ];
 
         return view('admin::pages.products.form.form', $data);
-    }
-
-    protected function save(Request $request, Product $product)
-    {
-        if ($product->id) {
-            $product = (new ProductService)->update($product, $request->all());
-        } else {
-            $product = (new ProductService)->create($request->all());
-        }
-
-        return redirect($this->getRedirect())->with('success', 'product created');
     }
 
     public function name(int $id)

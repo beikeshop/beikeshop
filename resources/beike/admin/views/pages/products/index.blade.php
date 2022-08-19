@@ -7,6 +7,11 @@
 @endpush
 
 @section('content')
+
+    @if ($errors->has('error'))
+        <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+    @endif
+
   <div id="product-app">
     <div class="card">
       <div class="card-body">
