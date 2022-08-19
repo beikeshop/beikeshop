@@ -23,7 +23,7 @@ class CheckoutController extends Controller
             $data = (new CheckoutService)->checkoutData();
             return view('checkout', $data);
         } catch (\Exception $e) {
-            return redirect(shop_route('carts.index'));
+            return redirect(shop_route('carts.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
 

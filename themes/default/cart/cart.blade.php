@@ -17,6 +17,8 @@
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
 
+      @dump($errors)
+
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9">
         <div class="cart-products-wrap table-responsive">
