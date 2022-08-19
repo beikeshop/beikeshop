@@ -26,4 +26,7 @@ return [
     'go_buy' => '您可以去看看有哪些想买的',
     'go_shopping' => '去逛逛',
     'must_select' => '请选择至少一个商品',
+    'mini' => '您的购物车',
+    'delete' => '删除',
+    'check_cart' => '查看购物车',
 ];

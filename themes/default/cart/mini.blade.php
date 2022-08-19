@@ -1,5 +1,5 @@
 <div class="offcanvas-header">
-  <h5 id="offcanvasRightLabel" class="mx-auto mb-0">您的购物车</h5>
+  <h5 id="offcanvasRightLabel" class="mx-auto mb-0">{{ __('shop/cart.mini') }}</h5>
   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">
@@ -14,7 +14,7 @@
               <div class="price">{{ $cart['price_format'] }} <span class="text-muted">x {{ $cart['quantity'] }}<span>
               </div>
               <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
-                删除</span>
+                {{ __('shop/cart.delete') }}</span>
             </div>
           </div>
         </div>
@@ -27,11 +27,11 @@
           <i class="bi bi-cart fs-1"></i>
         </div>
         <div class="empty-cart-text mb-3">
-          <h5>您的购物车是空的</h5>
-          <p class="text-muted">您可以去看看有哪些想买的</p>
+          <h5>{{ __('shop/cart.cart_empty') }}</h5>
+          <p class="text-muted">{{ __('shop/cart.go_buy') }}</p>
         </div>
         <div class="empty-cart-action">
-          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">去逛逛</a>
+          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/cart.go_shopping') }}</a>
         </div>
       </div>
     </div>
@@ -45,8 +45,8 @@
       <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
     </div>
     <div class="p-4">
-      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">去结账</a>
-      <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">查看购物车</a>
+      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">{{ __('shop/cart.to_checkout') }}</a>
+      <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">{{ __('shop/cart.check_cart') }}</a>
     </div>
   </div>
 @endif
