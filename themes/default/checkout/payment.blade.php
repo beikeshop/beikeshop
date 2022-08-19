@@ -16,16 +16,16 @@
               <i class="bi bi-credit-card-2-back"></i>
             </div>
             <div class="right">
-              <h3 class="order-title">订单提交成功，请付款</h3>
+              <h3 class="order-title">{{ __('shop/checkout.payment.please_pay') }}</h3>
               <div class="order-info">
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
-                      <td>订单编号：<span class="fw-bold">{{ $order['number'] }}</span></td>
-                      <td>应付金额：<span class="fw-bold">{{ $order['total'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment.order_number') }}：<span class="fw-bold">{{ $order['number'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment.amounts_payable') }}：<span class="fw-bold">{{ $order['total'] }}</span></td>
                     </tr>
                     <tr>
-                      <td>支付方式：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment.payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
                     </tr>
                   </tbody>
                 </table>
