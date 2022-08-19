@@ -261,7 +261,7 @@
           this.currentMenu.childrenGroup.splice(index, 1)
         },
 
-        removeLink(item, index) {
+        removeLink(index) {
           this.form.menus.splice(index, 1);
         },
 
