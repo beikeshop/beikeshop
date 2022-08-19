@@ -38,7 +38,7 @@ class Tax
             } else {
                 $this->setShippingAddress($shippingAddress['country_id'], $shippingAddress['zone_id']);
             }
-        } elseif (system_setting('base.config_tax_default') == 'shipping') {
+        } elseif (system_setting('base.tax_address') == 'shipping') {
             $this->setShippingAddress($countryId, $zoneId);
         }
 
@@ -50,7 +50,7 @@ class Tax
             } else {
                 $this->setPaymentAddress($paymentAddress['country_id'], $paymentAddress['zone_id']);
             }
-        } elseif (system_setting('base.config_tax_default') == 'payment') {
+        } elseif (system_setting('base.tax_address') == 'payment') {
             $this->setPaymentAddress($countryId, $zoneId);
         }
 

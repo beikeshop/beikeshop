@@ -36,10 +36,10 @@ class RegionRepo
 
         $newRegionZones = [];
         foreach ($data['region_zones'] as $regionZone) {
-            if ($regionZone['country_id'] && $regionZone['zone_id']) {
+            if ($regionZone['country_id']) {
                 $newRegionZones[] = [
-                    'country_id' => $regionZone['country_id'],
-                    'zone_id' => $regionZone['zone_id'],
+                    'country_id' => (int)$regionZone['country_id'],
+                    'zone_id' => (int)$regionZone['zone_id'],
                 ];
             }
         }
