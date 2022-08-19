@@ -115,8 +115,8 @@
 
         deleteAddress(index) {
           this.$confirm('{{ __('shop/account.addresses.confirm_delete') }}', '{{ __('shop/account.addresses.hint') }}', {
-            confirmButtonText: '{{ __('shop/common.confirm') }}',
-            cancelButtonText: '{{ __('shop/common.cancel') }}',
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('/account/addresses/' + this.addresses[index].id).then((res) => {

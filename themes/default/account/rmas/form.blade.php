@@ -71,8 +71,8 @@
                 <div class="col-sm-6 mb-4">
                   <label class="form-label">{{ __('shop/account.rma.rma_form.unpacked') }}</label>
                   <select class="form-select" name="opened">
-                    <option selected value="0">{{ __('shop/common.no') }}</option>
-                    <option value="1">{{ __('shop/common.yes') }}</option>
+                    <option selected value="0">{{ __('common.no') }}</option>
+                    <option value="1">{{ __('common.yes') }}</option>
                   </select>
                 </div>
 
