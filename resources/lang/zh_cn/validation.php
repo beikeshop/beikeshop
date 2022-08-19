@@ -156,7 +156,8 @@ return [
     */
 
     'attributes' => [
-        'descriptions.en.title' => '信息标题'
+        'descriptions.en.title' => '英文标题',
+        'descriptions.zh_cn.title' => '中文标题',
     ],
 
 ];

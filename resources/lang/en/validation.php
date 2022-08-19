@@ -155,6 +155,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'descriptions.en.title' => 'Title',
+        'descriptions.zh_cn.title' => 'Title',
+    ],
 
 ];
