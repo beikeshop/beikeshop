@@ -10,5 +10,10 @@
  */
 
 return [
-    'home' => 'Home'
+    'home' => 'Home',
+    'submit' => 'submit',
+    'cancel' => 'cancel',
+    'confirm' => 'confirm',
+    'no' => 'no',
+    'yes' => 'yes',
 ];

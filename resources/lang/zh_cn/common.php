@@ -19,6 +19,12 @@ return [
     'get_success' => '获取成功!',
     'enable' => '启用',
     'disable' => '禁用',
+    'home' => '首页',
+    'submit' => '提交',
+    'cancel' => '取消',
+    'confirm' => '确定',
+    'no' => '否',
+    'yes' => '是',
 ];
 
 

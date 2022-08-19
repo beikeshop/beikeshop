@@ -69,7 +69,7 @@
                   {{-- @if ($errors->has('email'))@endif --}}
                 </div>
                 <div class="col-12 mt-4">
-                  <button class="btn btn-primary mt-sm-0" type="submit">{{ __('shop/common.submit') }}</button>
+                  <button class="btn btn-primary mt-sm-0" type="submit">{{ __('common.submit') }}</button>
                 </div>
               </div>
             </form>
