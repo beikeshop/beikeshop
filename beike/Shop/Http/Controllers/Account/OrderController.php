@@ -103,7 +103,8 @@ class OrderController extends Controller
         if (empty($order)) {
             throw new \Exception('无效的订单');
         }
-        StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED);
+        $comment = '用户确认收货';
+        StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED, $comment);
         return json_success(trans('shop/account.order.completed'));
     }
 }
