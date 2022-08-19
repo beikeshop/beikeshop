@@ -56,7 +56,7 @@ class MenuRepo
         foreach ($childrenGroups as $groupIndex => $childrenGroup) {
             $childrenGroup['name'] = $childrenGroup['name'][$locale];
             if ($childrenGroup['type'] == 'image') {
-                $childrenGroup['image']['image'] = image_origin($childrenGroup['image']['image'][$locale]);
+                $childrenGroup['image']['image'] = image_origin($childrenGroup['image']['image'][$locale] ?? '');
                 $childrenGroup['image']['link'] = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
             } elseif ($childrenGroup['children']) {
                 foreach ($childrenGroup['children'] as $childrenIndex => $children) {
