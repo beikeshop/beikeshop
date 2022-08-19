@@ -25,6 +25,7 @@ return [
     'confirm' => '确定',
     'no' => '否',
     'yes' => '是',
+    'delete' => '删除',
 ];
 
 

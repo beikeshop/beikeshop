@@ -23,13 +23,13 @@
                 <th width="130">
                   <input class="form-check-input" type="checkbox" value="" id="check-all" v-model="allSelected">
                   <label class="form-check-label ms-1" for="check-all">
-                    全选
+                    {{ __('shop/cart.select_all') }}
                   </label>
                 </th>
-                <th>商品</th>
-                <th width="170">数量</th>
-                <th width="170">小计</th>
-                <th class="text-end">操作</th>
+                <th>{{ __('shop/cart.index') }}</th>
+                <th width="170">{{ __('shop/cart.commodity') }}</th>
+                <th width="170">{{ __('shop/cart.subtotal') }}</th>
+                <th class="text-end">{{ __('shop/cart.operate') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -57,7 +57,7 @@
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
                   <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
-                    <i class="bi bi-x-lg"></i> 删除
+                    <i class="bi bi-x-lg"></i> {{ __('shop/common.delete') }}
                   </button>
                 </td>
               </tr>
@@ -67,15 +67,15 @@
       </div>
       <div class="col-12 col-md-3">
         <div class="card total-wrap fixed-top-line">
-          <div class="card-header"><h5 class="mb-0">商品总计</h5></div>
+          <div class="card-header"><h5 class="mb-0">{{ __('shop/cart.product_total') }}</h5></div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><span>全部</span><span>@{{ products.length }}</span></li>
-              <li class="list-group-item"><span>已选</span><span>@{{ total_quantity }}</span></li>
-              <li class="list-group-item border-bottom-0"><span>总价</span><span class="total-price">@{{ amount_format }}</span></li>
+              <li class="list-group-item"><span>{{ __('shop/cart.all') }}</span><span>@{{ products.length }}</span></li>
+              <li class="list-group-item"><span>{{ __('shop/cart.selected') }}</span><span>@{{ total_quantity }}</span></li>
+              <li class="list-group-item border-bottom-0"><span>{{ __('shop/cart.total_price') }}</span><span class="total-price">@{{ amount_format }}</span></li>
               <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
                 {{-- <a href="{{ shop_route('checkout.index', 'checkout') }}" class="btn btn-primary">去结账</a> --}}
-                <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">去结账</button>
+                <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">{{ __('shop/cart.to_checkout') }}</button>
               </li>
             </ul>
           </div>
@@ -88,11 +88,11 @@
           <i class="bi bi-cart fs-1"></i>
         </div>
         <div class="empty-cart-text mb-3">
-          <h5>您的购物车是空的</h5>
-          <p class="text-muted">您可以去看看有哪些想买的</p>
+          <h5>{{ __('shop/cart.cart_empty') }}</h5>
+          <p class="text-muted">{{ __('shop/cart.go_buy') }}</p>
         </div>
         <div class="empty-cart-action">
-          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">去逛逛</a>
+          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/cart.go_shopping') }}</a>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@
       methods: {
         checkedBtnToCheckout() {
           if (!this.products.some(e => e.selected)) {
-            layer.msg('请选择至少一个商品', ()=>{})
+            layer.msg('{{ __('shop/cart.nust_select') }}', ()=>{})
             return
           }
 
