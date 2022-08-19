@@ -354,13 +354,17 @@
             null;
         }
 
-        $http.get(url, null, {hload: true}).then((res) => {
+        $http.get(url, null, {hload: true, hmsg: true}).then((res) => {
           if (res.data) {
             self.name = res.data;
           } else {
             self.name = '数据不存在或已被删除';
           }
-        }).finally(() => {this.nameLoading = false});
+        }).catch(() => {
+          self.name = '数据不存在或已被删除';
+        }).finally(() => {
+          self.nameLoading = false;
+        });
       },
     }
   });
