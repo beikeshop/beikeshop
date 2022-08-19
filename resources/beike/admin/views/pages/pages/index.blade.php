@@ -5,7 +5,7 @@
 @section('content')
 
   @if ($errors->has('error'))
-    <x-admin-alert type="Danger" msg="{{ $errors->has('error') }}" class="mt-4" />
+    <x-admin-alert type="danger" msg="{{ $errors->has('error') }}" class="mt-4" />
   @endif
 
   <div class="card">
