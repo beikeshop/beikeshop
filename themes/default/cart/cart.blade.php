@@ -63,7 +63,7 @@
                 <td>@{{ product.subtotal_format }}</td>
                 <td class="text-end">
                   <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
-                    <i class="bi bi-x-lg"></i> {{ __('shop/common.delete') }}
+                    <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
                   </button>
                 </td>
               </tr>
