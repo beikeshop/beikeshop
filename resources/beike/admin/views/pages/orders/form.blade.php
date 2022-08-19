@@ -65,11 +65,10 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="通知客户">
-          {{-- <el-checkbox v-model="form.notify"></el-checkbox> --}}
+        {{-- <el-form-item label="通知客户">
           <el-switch v-model="form.notify">
           </el-switch>
-        </el-form-item>
+        </el-form-item> --}}
         <el-form-item label="备注信息">
           <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
         </el-form-item>
