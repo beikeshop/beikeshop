@@ -2254,6 +2254,7 @@ $(function () {
 
 $(document).on('click', '.quantity-wrap .right i', function (event) {
   event.stopPropagation();
+  event.preventDefault();
   var input = $(this).parent().siblings('input');
 
   if ($(this).hasClass('bi-chevron-up')) {

@@ -17,7 +17,7 @@
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
 
-      @dump($errors)
+      {{-- @dump($errors) --}}
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9">
@@ -38,11 +38,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="product, index in products" :key="index" @click="checkedCartTr(index)"
-                :class="product.selected ? 'active' : ''">
+              <tr v-for="product, index in products" :key="index" :class="product.selected ? 'active' : ''">
                 <td>
                   <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" type="checkbox" v-model="product.selected">
+                    <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
                     <img :src="product.image" class="img-fluid">
                   </div>
                 </td>
@@ -144,7 +143,7 @@
 
         quantityChange(quantity, cart_id) {
           const self = this;
-          $http.put(`/carts/${cart_id}`, {quantity: quantity}).then((res) => {
+          $http.put(`/carts/${cart_id}`, {quantity: quantity}, {hload: true}).then((res) => {
             this.setUpdateData(res);
           })
         },
@@ -158,7 +157,7 @@
         },
 
         checkedCartTr(index) {
-          this.products[index].selected = !this.products[index].selected;
+          // this.products[index].selected = !this.products[index].selected;
           this.selectedBtnSelected();
         },
 
@@ -166,7 +165,7 @@
           const self = this;
           const cart_ids = this.products.filter(e => e.selected).map(x => x.cart_id)
 
-          $http.post(`/carts/select`, {cart_ids: cart_ids}).then((res) => {
+          $http.post(`/carts/select`, {cart_ids: cart_ids}, {hload: true}).then((res) => {
             this.setUpdateData(res);
           })
         },

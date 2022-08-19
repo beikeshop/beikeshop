@@ -4,7 +4,11 @@
 
 @section('content')
 
-    @dump($errors)
+  {{-- @dump($errors) --}}
+
+  {{-- @if (session('success'))
+    <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
+  @endif --}}
 
   <div class="card">
     <div class="card-body h-min-600">
@@ -24,21 +28,24 @@
         </thead>
         <tbody>
           @foreach ($pages_format as $page)
-          <tr>
-            <td>{{ $page['id'] }}</td>
-            <td><div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div></td>
-            <td>{{ $page['active'] }}</td>
-            <td>{{ $page['created_at'] }}</td>
-            <td>{{ $page['updated_at'] }}</td>
-            <td class="text-end">
-              <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
-              {{-- <form action="{{ admin_route('pages.destroy', [$page['id']]) }}" method="post" class="d-inline-block">
+            <tr>
+              <td>{{ $page['id'] }}</td>
+              <td>
+                <div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div>
+              </td>
+              <td>{{ $page['active'] }}</td>
+              <td>{{ $page['created_at'] }}</td>
+              <td>{{ $page['updated_at'] }}</td>
+              <td class="text-end">
+                <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">编辑</a>
+                {{-- <form action="{{ admin_route('pages.destroy', [$page['id']]) }}" method="post" class="d-inline-block">
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
               </form> --}}
-              <button class="btn btn-outline-danger btn-sm delete-btn" type='button' data-id="{{ $page['id'] }}">删除</button>
-            </td>
-          </tr>
+                <button class="btn btn-outline-danger btn-sm delete-btn" type='button'
+                  data-id="{{ $page['id'] }}">删除</button>
+              </td>
+            </tr>
           @endforeach
         </tbody>
       </table>
@@ -60,7 +67,7 @@
         btn: ['取消', '确定'],
         area: ['400px'],
         btn2: () => {
-        $http.delete(`pages/${id}`).then((res) => {
+          $http.delete(`pages/${id}`).then((res) => {
             layer.msg(res.message);
             window.location.reload();
           })

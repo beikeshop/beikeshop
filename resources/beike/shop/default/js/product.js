@@ -1,5 +1,7 @@
 $(document).on('click', '.quantity-wrap .right i', function(event) {
   event.stopPropagation();
+  event.preventDefault();
+
   let input = $(this).parent().siblings('input')
 
   if ($(this).hasClass('bi-chevron-up')) {
