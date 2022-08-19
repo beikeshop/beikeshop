@@ -34,7 +34,7 @@ class CartController extends Controller
         CartService::select($customer, $cartIds);
 
         $data = CartService::reloadData();
-        return json_success('获取成功', $data);
+        return json_success(trans('common.updated_success'), $data);
     }
 
     /**
@@ -50,7 +50,7 @@ class CartController extends Controller
         CartService::updateQuantity($customer, $cartId, $quantity);
 
         $data = CartService::reloadData();
-        return json_success('获取成功', $data);
+        return json_success(trans('common.updated_success'), $data);
     }
 
 
@@ -66,7 +66,7 @@ class CartController extends Controller
         CartService::delete($customer, $cartId);
 
         $data = CartService::reloadData();
-        return json_success('获取成功', $data);
+        return json_success(trans('common.deleted_success'), $data);
     }
 
 
@@ -99,6 +99,6 @@ class CartController extends Controller
             ->findOrFail($skuId);
 
         $cart = CartService::add($sku, $quantity, $customer);
-        return json_success('获取成功', $cart);
+        return json_success(trans('shop/cart.added_to_cart'), $cart);
     }
 }
