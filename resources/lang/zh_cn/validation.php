@@ -81,9 +81,9 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute must not be greater than :max.',
+        'numeric' => ':attribute不能大于 :max',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => ':attribute长度不能超过 :max 个字符',
         'array' => 'The :attribute must not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -155,6 +155,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'descriptions.en.title' => '信息标题'
+    ],
 
 ];
