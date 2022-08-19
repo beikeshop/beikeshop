@@ -11,15 +11,16 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\LanguageRepo;
 use Exception;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Beike\Repositories\LanguageRepo;
 
 class LanguageController extends Controller
 {
-
+    /**
+     * 语言列表
+     * @return mixed
+     */
     public function index()
     {
         $languages = LanguageRepo::all();
@@ -31,12 +32,18 @@ class LanguageController extends Controller
         return view('admin::pages.languages.index', $data);
     }
 
+    /**
+     * 新建语言
+     * @param Request $request
+     * @return array
+     */
     public function store(Request $request): array
     {
-        $language = LanguageRepo::create($request->only('name', 'code', 'locale', 'image', 'sort_order', 'status'));
+        $language = LanguageRepo::create($request->all());
 
         return json_success(trans('common.created_success'), $language);
     }
+
 
     /**
      * @param Request $request
@@ -46,11 +53,18 @@ class LanguageController extends Controller
      */
     public function update(Request $request, int $id): array
     {
-        $language = LanguageRepo::update($id, $request->only('name', 'code', 'locale', 'image', 'sort_order', 'status'));
+        $language = LanguageRepo::update($id, $request->all());
 
         return json_success(trans('common.updated_success'), $language);
     }
 
+
+    /**
+     * 删除语言
+     *
+     * @param int $currencyId
+     * @return array
+     */
     public function destroy(int $currencyId): array
     {
         LanguageRepo::delete($currencyId);

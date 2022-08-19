@@ -11,7 +11,6 @@
 
 namespace Beike\Repositories;
 
-
 use Beike\Models\Language;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,7 +25,15 @@ class LanguageRepo
      */
     public static function create($data)
     {
-        return Language::query()->create($data);
+        $languageData = [
+            'name' => $data['name'] ?? '',
+            'code' => $data['code'] ?? '',
+            'locale' => $data['locale'] ?? '',
+            'image' => $data['image'] ?? '',
+            'sort_order' => (int)($data['sort_order'] ?? 0),
+            'status' => (bool)($data['status'] ?? ''),
+        ];
+        return Language::query()->create($languageData);
     }
 
     /**
@@ -41,7 +48,15 @@ class LanguageRepo
         if (!$item) {
             throw new \Exception("语言id {$id} 不存在");
         }
-        $item->update($data);
+        $languageData = [
+            'name' => $data['name'] ?? '',
+            'code' => $data['code'] ?? '',
+            'locale' => $data['locale'] ?? '',
+            'image' => $data['image'] ?? '',
+            'sort_order' => (int)($data['sort_order'] ?? 0),
+            'status' => (bool)($data['status'] ?? ''),
+        ];
+        $item->update($languageData);
         return $item;
     }
 

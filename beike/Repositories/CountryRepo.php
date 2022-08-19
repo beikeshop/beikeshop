@@ -12,13 +12,14 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Country;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CountryRepo
 {
     /**
      * 创建一个country记录
      * @param $data
-     * @return int
+     * @return mixed
      */
     public static function create($data)
     {
@@ -29,7 +30,8 @@ class CountryRepo
     /**
      * @param $id
      * @param $data
-     * @return bool|int
+     * @return mixed
+     * @throws \Exception
      */
     public static function update($id, $data)
     {
@@ -43,7 +45,7 @@ class CountryRepo
 
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return mixed
      */
     public static function find($id)
     {
@@ -64,9 +66,9 @@ class CountryRepo
 
     /**
      * @param $data
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
-    public static function list($data)
+    public static function list($data): LengthAwarePaginator
     {
         $builder = Country::query();
 
