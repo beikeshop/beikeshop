@@ -20,4 +20,12 @@ return [
     'get_success' => 'Get Successfully!',
     'enable' => 'Enable',
     'disable' => 'Disable',
+    'home' => 'home',
+    'submit' => 'submit',
+    'cancel' => 'cancel',
+    'confirm' => 'confirm',
+    'no' => 'no',
+    'yes' => 'yes',
+    'delete' => 'delete',
+    'sign_out' => 'sign out',
 ];

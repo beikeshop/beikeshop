@@ -10,5 +10,12 @@
  */
 
 return [
-    'search' => 'Search',
+    'search' => 'search',
+    'add_to_favorites' => 'add to favorites',
+    'add_to_cart' => 'add to Shopping Cart',
+    'buy_now' => 'buy now',
+    'product_details' => 'product details',
+    'in_stock' => 'In stock',
+    'out_stock' => 'Out stock',
+    'model' => 'model',
 ];
