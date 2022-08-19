@@ -31,6 +31,10 @@ mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/bu
 mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
+// 安装引导
+mix.sass('beike/installer/assets/scss/app.scss', 'public/build/beike/installer/app.css');
+
+
 // design
 mix.sass('resources/beike/admin/css/design/app.scss', 'public/build/beike/admin/css/design.css');
 

@@ -9,7 +9,7 @@
     {{ trans('installer::installer_messages.permissions.title') }}
 @endsection
 
-@section('container')
+@section('content')
 
     <ul class="list">
         @foreach($permissions['permissions'] as $permission)

@@ -1,0 +1,70 @@
+body {
+  background-color: #f6f7f8;
+  display: flex;
+  height: 100vh;
+}
+body > .aside-wrap {
+  width: 30%;
+  background-color: #fff;
+  padding: 40px 20px 40px 40px;
+}
+body > .content {
+  width: 70%;
+  padding: 40px;
+}
+
+.aside-wrap .logo img {
+  max-width: 180px;
+}
+.aside-wrap .steps-wrap ul {
+  padding-left: 0;
+  list-style: none;
+}
+.aside-wrap .steps-wrap ul li {
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aside-wrap .steps-wrap ul li .left {
+  display: flex;
+  align-items: center;
+}
+.aside-wrap .steps-wrap ul li .right i {
+  font-size: 24px;
+  line-height: 1;
+}
+.aside-wrap .steps-wrap ul li span.index {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+  color: #666;
+}
+.aside-wrap .steps-wrap ul li.success {
+  color: #999;
+}
+.aside-wrap .steps-wrap ul li.success span.index {
+  background-color: #5dca86;
+  border-color: #5dca86;
+  color: #fff;
+}
+.aside-wrap .steps-wrap ul li.success span.index i {
+  font-size: 24px;
+}
+.aside-wrap .steps-wrap ul li.ing {
+  color: #fd560f;
+}
+.aside-wrap .steps-wrap ul li.ing span.index {
+  border-color: #fd560f;
+  color: #fd560f;
+}
+.aside-wrap .steps-wrap ul li.ing span.index i {
+  font-size: 24px;
+}

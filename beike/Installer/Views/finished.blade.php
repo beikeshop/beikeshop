@@ -9,7 +9,7 @@
     {{ trans('installer::installer_messages.final.title') }}
 @endsection
 
-@section('container')
+@section('content')
 
 	@if(session('message')['dbOutputLog'])
 		<p><strong><small>{{ trans('installer::installer_messages.final.migration') }}</small></strong></p>

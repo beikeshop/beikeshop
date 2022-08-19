@@ -8,7 +8,7 @@
     {{ trans('installer::installer_messages.welcome.title') }}
 @endsection
 
-@section('container')
+@section('content')
     <p class="text-center">
       {{ trans('installer::installer_messages.welcome.message') }}
     </p>
