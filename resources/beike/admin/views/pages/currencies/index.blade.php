@@ -31,7 +31,10 @@
             <td>@{{ language.symbol_right }}</td>
             <td>@{{ language.decimal_place }}</td>
             <td>@{{ language.value }}</td>
-            <td>@{{ language.status }}</td>
+            <td>
+              <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
+              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+            </td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">删除</button>
