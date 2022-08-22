@@ -24,8 +24,8 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'phone' => 'required',
+            'name' => 'required|min:2|max:16',
+            'phone' => 'required|min:6|max:16',
             'country_id' => 'required|exists:countries,id',
             'zone_id' => 'required|exists:zones,id',
             'address_1' => 'required',
@@ -35,11 +35,11 @@ class AddressRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '姓名',
-            'phone' => '电话号码',
-            'country_id' => '国家ID',
-            'zone_id' => '省份ID',
-            'address_1' => '地址1',
+            'name' => trans('address.name'),
+            'phone' => trans('address.phone'),
+            'country_id' => trans('address.country_id'),
+            'zone_id' => trans('address.zone_id'),
+            'address_1' => trans('address.address_1'),
         ];
     }
 }
