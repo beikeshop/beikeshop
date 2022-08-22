@@ -44,8 +44,8 @@
                         <div class="img"><img src="{{ $product->image }}" class="img-fluid"></div>
                         <div class="name">
                           <span>{{ $product->name }}</span>
+                          <div class="quantity mt-1 text-secondary">x {{ $product->quantity }}</div>
                         </div>
-                        <div class="quantity">{{ $product->quantity }}</div>
                       </div>
                     </td>
                     @if ($loop->first)
