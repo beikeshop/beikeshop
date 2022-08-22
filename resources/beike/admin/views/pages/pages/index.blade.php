@@ -31,7 +31,9 @@
               <td>
                 <div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div>
               </td>
-              <td>{{ $page['active'] }}</td>
+              <td class="{{ $page['active'] ? 'text-success' : 'text-secondary'}}">
+                {{ $page['active'] ? __('common.enable') : __('common.disable') }}
+              </td>
               <td>{{ $page['created_at'] }}</td>
               <td>{{ $page['updated_at'] }}</td>
               <td class="text-end">
