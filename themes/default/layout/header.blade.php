@@ -127,7 +127,7 @@
                     退出登录</a></li>
               @else
                 <li><a href="{{ shop_route('login.index') }}" class="dropdown-item"><i
-                      class="bi bi-box-arrow-right me-1"></i> 登录/注册</a></li>
+                      class="bi bi-box-arrow-right me-1"></i>{{ __('shop/login.login_and_sign') }}</a></li>
               @endauth
             </ul>
           </li>

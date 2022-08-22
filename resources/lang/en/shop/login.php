@@ -12,6 +12,7 @@
 
 return [
     'index' => 'User login and registration',
+    'login_and_sign' => 'Login/Sign In',
     'home' => 'home',
     'library' => 'library',
     'login' => 'login',
@@ -21,7 +22,6 @@ return [
     'email_address' => 'email address',
     'password' => 'password',
     'forget_password' => 'forget password',
-    'login' => 'login',
     'new' => 'new account',
     'not_already' => 'Not yet our registered customer?',
     'confirm_password' => 'confirm password',
@@ -32,4 +32,7 @@ return [
     'password_err' => 'The passwords entered twice do not match!',
     'email_err' => 'Please enter a valid email address!',
     'check_form' => 'Please check that the form is filled out correctly',
+    'email_or_password_error' => 'Email or Password is incorrect!',
+    'customer_inactive' => 'The customer is inactive!',
+    'login_successfully' => 'Login successfully!',
 ];

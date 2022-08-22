@@ -29,14 +29,14 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         if (!auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
-            throw new \Exception("账号密码错误！");
+            throw new \Exception(trans('shop/login.email_or_password_error'));
         }
 
         $customer = current_customer();
         if ($customer && $customer->status != 1) {
             Auth::guard(Customer::AUTH_GUARD)->logout();
-            throw new \Exception("用户已被禁用！");
+            throw new \Exception(trans('shop/login.customer_inactive'));
         }
-        return json_success("登录成功!");
+        return json_success(trans('shop/login.login_successfully'));
     }
 }
