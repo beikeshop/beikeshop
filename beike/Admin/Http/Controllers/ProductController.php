@@ -25,6 +25,7 @@ class ProductController extends Controller
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
             'products' => $products,
+            'type' => 'products',
         ];
 
         if ($request->expectsJson()) {
@@ -44,6 +45,7 @@ class ProductController extends Controller
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
             'products' => $products,
+            'type' => 'trashed',
         ];
 
         if ($request->expectsJson()) {

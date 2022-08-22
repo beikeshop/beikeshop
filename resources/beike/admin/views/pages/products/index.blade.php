@@ -173,11 +173,18 @@
           }
 
           const query = Object.keys(filter).map(key => key + '=' + filter[key]).join('&');
-          const url = @json(admin_route('products.index'));
+          // const url = @json(admin_route('products.index'));
+
+          @if ($type == 'products')
+            const url = @json(admin_route('products.index'));
+          @else
+            const url = @json(admin_route('products.trashed'));
+          @endif
 
           if (query) {
             return url + '?' + query;
           }
+
           return url;
         }
       },
