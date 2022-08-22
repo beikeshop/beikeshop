@@ -20,5 +20,5 @@ return [
     'address' => 'Address',
     'enter_city' => 'Enter city',
     'post_code' => 'Post Code',
-    'default' => 'Default Address',
+    'default' => 'Default',
 ];

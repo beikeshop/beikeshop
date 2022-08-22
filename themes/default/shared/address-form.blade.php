@@ -57,8 +57,8 @@
       </el-switch>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="addressFormSubmit('addressForm')">{{ __('common.save') }}"</el-button>
-      <el-button @click="closeAddressDialog('addressForm')">{{ __('common.cancel') }}"</el-button>
+      <el-button type="primary" @click="addressFormSubmit('addressForm')">{{ __('common.save') }}</el-button>
+      <el-button @click="closeAddressDialog('addressForm')">{{ __('common.cancel') }}</el-button>
     </el-form-item>
   </el-form>
 </el-dialog>
