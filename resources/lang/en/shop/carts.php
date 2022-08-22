@@ -29,4 +29,5 @@ return [
     'mini' => 'Your cart',
     'delete' => 'Delete',
     'check_cart' => 'Check the shopping cart',
+    'subtotal' => 'Subtotal',
 ];

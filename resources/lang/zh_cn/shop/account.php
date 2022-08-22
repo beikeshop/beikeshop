@@ -27,6 +27,8 @@ return [
     'state' => '状态',
     'amount' => '金额',
     'check_details' => '查看详情',
+    'all' => '共',
+    'items' => '件商品',
 
     'edit' => [
         'index' => '修改个人信息',
@@ -104,6 +106,7 @@ return [
         'enter_city' => '请填写城市',
         'confirm_delete' => '确定要删除地址吗？',
         'hint' => '提示',
+        'check_form' => '请检查表单是否填写正确',
     ],
 
     'rma' => [

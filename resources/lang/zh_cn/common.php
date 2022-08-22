@@ -10,7 +10,8 @@
  */
 return [
     'index' => '123123',
-    'error_required' => '请填写 :name',
+    'error_required_name' => '请填写姓名',
+    'error_required_email' => '请填写邮箱',
     'unauthenticated' => '请先登录',
     'success' => '成功',
     'created_success' => '创建成功!',

@@ -27,6 +27,8 @@ return [
     'state' => 'State',
     'amount' => 'Amount',
     'check_details' => 'Check Details',
+    'all' => 'All',
+    'items' => 'Items',
 
     'edit' => [
         'index' => 'Edit',
@@ -104,6 +106,7 @@ return [
         'enter_city' => 'Please fill in the city',
         'confirm_delete' => 'Are you sure you want to delete the address?',
         'hint' => 'Hint',
+        'check_form' => 'Please check that the form is filled out correctly',
     ],
 
     'rma' => [

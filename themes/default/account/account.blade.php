@@ -72,7 +72,7 @@
                           </div>
                         </td>
                         <td>
-                          <div class="mb-2">{{ __('shop/account.order_number') }}：{{ $order->number }} <span class="vr lh-1 mx-2 bg-secondary"></span> 共 {{ count($order->orderProducts) }} 件商品</div>
+                          <div class="mb-2">{{ __('shop/account.order_number') }}：{{ $order->number }} <span class="vr lh-1 mx-2 bg-secondary"></span> {{ __('shop/account.all') }} {{ count($order->orderProducts) }} {{ __('shop/account.items') }}</div>
                           <div class="text-muted">{{ __('shop/account.order_time') }}：{{ $order->created_at }}</div>
                         </td>
                         <td>

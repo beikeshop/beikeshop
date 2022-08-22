@@ -10,7 +10,8 @@
  */
 
 return [
-    'error_required' => 'Please fill out the :name',
+    'error_required_name' => 'Please fill in your name',
+    'error_required_email' => 'Please enter your email',
     'unauthenticated' => 'Please login first',
     'success' => 'Success',
     'created_success' => 'Created Successfully!',

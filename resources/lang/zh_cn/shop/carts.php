@@ -29,4 +29,5 @@ return [
     'mini' => '您的购物车',
     'delete' => '删除',
     'check_cart' => '查看购物车',
+    'subtotal' => '小计',
 ];

@@ -41,7 +41,7 @@
 @if ($carts)
   <div class="offcanvas-footer">
     <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
-      <strong>小计（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
+      <strong>{{ __('shop/carts.subtotal') }}（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
       <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
     </div>
     <div class="p-4">
