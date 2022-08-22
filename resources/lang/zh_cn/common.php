@@ -27,6 +27,13 @@ return [
     'yes' => '是',
     'delete' => '删除',
     'sign_out' => '退出登录',
+
+    'order' => [
+        'unpaid' => '待支付',
+        'paid' => '已支付',
+        'shipped' => '已发货',
+        'completed' => '已完成',
+    ]
 ];
 
 

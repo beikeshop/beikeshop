@@ -40,9 +40,9 @@
                     <td>{{ $order->number }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>
-                      {{ $order->status }}
+                      {{ __("common.order.{$order->status}") }}
                     </td>
-                    <td>{{ $order->total }}</td>
+                    <td>{{ currency_format($order->total) }}</td>
                   </tr>
                 </tbody>
               </table>

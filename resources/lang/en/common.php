@@ -28,4 +28,11 @@ return [
     'yes' => 'yes',
     'delete' => 'delete',
     'sign_out' => 'Sign Out',
+
+    'order' => [
+        'unpaid' => 'Unpaid',
+        'paid' => 'Paid',
+        'shipped' => 'Shipped',
+        'completed' => 'Completed',
+    ]
 ];
