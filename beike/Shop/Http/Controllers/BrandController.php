@@ -41,6 +41,6 @@ class BrandController extends Controller
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '');
 
-        return json_success('获取成功！', $brands);
+        return json_success(trans('common.get_success'), $brands);
     }
 }
