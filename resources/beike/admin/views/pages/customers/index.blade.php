@@ -35,6 +35,7 @@
             <td>
               <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+            </td>
             <td>
               <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">编辑</a>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">删除</button>

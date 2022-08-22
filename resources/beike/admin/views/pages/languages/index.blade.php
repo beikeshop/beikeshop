@@ -28,10 +28,9 @@
             <td>@{{ language.image }}</td>
             <td>@{{ language.sort_order }}</td>
             <td>
-              {{-- <el-switch v-model="language.status" @change="(e) => {statusChange(e, index)}" :active-value="1" :inactive-value="0"></el-switch> --}}
-                @{{ language.status }}
+              <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
+              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
-            {{-- <td>@{{ language.status }}</td> --}}
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">删除</button>
