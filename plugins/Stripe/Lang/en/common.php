@@ -20,4 +20,9 @@ return [
     'cvv' => 'Cvv',
     'remenber' => 'Keep this card in mind for future use',
     'btn_submit' => 'Submit',
+
+    'error_cardnum' => 'Please enter the card number',
+    'error_cvv' => 'Please enter the security code',
+    'error_year' => 'Please select the year',
+    'error_month' => 'Please select a month',
 ];

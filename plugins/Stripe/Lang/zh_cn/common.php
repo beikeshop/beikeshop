@@ -20,4 +20,9 @@ return [
     'cvv' => '安全码',
     'remenber' => '记住这张卡以便将来使用',
     'btn_submit' => '提交支付',
+
+    'error_cardnum' => '请输入卡号',
+    'error_cvv' => '请输入安全码',
+    'error_year' => '请选择年',
+    'error_month' => '请选择月',
 ];

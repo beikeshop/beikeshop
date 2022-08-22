@@ -65,22 +65,22 @@
       rules: {
         cardnum: [{
           required: true,
-          message: '请输入卡号',
+          message: "{{ __('Stripe::common.error_cardnum') }}",
           trigger: 'blur'
         }, ],
         cvv: [{
           required: true,
-          message: '请输入安全码',
+          message: "{{ __('Stripe::common.error_cvv') }}",
           trigger: 'blur'
         }, ],
         year: [{
           required: true,
-          message: '请选择年',
+          message: "{{ __('Stripe::common.error_year') }}",
           trigger: 'blur'
         }, ],
         month: [{
           required: true,
-          message: '请选择月',
+          message: "{{ __('Stripe::common.error_month') }}",
           trigger: 'blur'
         }, ],
       }
@@ -94,7 +94,7 @@
       checkedBtnCheckoutConfirm(form) {
         this.$refs[form].validate((valid) => {
           if (!valid) {
-            this.$message.error('请检查表单是否填写正确');
+            // this.$message.error('请检查表单是否填写正确');
             return;
           }
 
