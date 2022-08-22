@@ -99,6 +99,6 @@ class CartController extends Controller
             ->findOrFail($skuId);
 
         $cart = CartService::add($sku, $quantity, $customer);
-        return json_success(trans('shop/cart.added_to_cart'), $cart);
+        return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
 }
