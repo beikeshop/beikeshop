@@ -12,7 +12,6 @@
       <form novalidate class="needs-validation" action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
         @csrf
         @method($page->id ? 'PUT' : 'POST')
-
         <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
           @foreach ($admin_languages as $language)
             <li class="nav-item" role="presentation">
@@ -51,7 +50,7 @@
             </div>
           @endforeach
 
-          <x-admin-form-switch name="active" title="状态" value="{{ old('active', 1) }}" />
+          <x-admin-form-switch name="active" title="状态" value="{{ old('active', $page->active) }}" />
           <x-admin::form.row title="">
             <button type="submit" class="mt-3 btn btn-primary">提交</button>
           </x-admin::form.row>
