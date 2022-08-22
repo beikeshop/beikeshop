@@ -35,4 +35,5 @@ return [
     'email_or_password_error' => '邮件或密码错误!',
     'customer_inactive' => '用户已被禁用',
     'login_successfully' => '登录成功',
+    'register_success' => '注册成功',
 ];

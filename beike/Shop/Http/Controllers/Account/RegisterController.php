@@ -33,6 +33,6 @@ class RegisterController extends Controller
         AccountService::register($credentials);
         auth(Customer::AUTH_GUARD)->attempt($credentials);
 
-        return json_success("注册成功，您现在可以使用您的账号登录网站!");
+        return json_success(trans('shop/login.register_success'));
     }
 }

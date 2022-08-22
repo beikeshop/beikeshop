@@ -35,4 +35,5 @@ return [
     'email_or_password_error' => 'Email or Password is incorrect!',
     'customer_inactive' => 'The customer is inactive!',
     'login_successfully' => 'Login successfully!',
+    'register_success' => 'Registered successfully',
 ];
