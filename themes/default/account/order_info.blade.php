@@ -61,7 +61,7 @@
                   <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
                   <div class="right">
                     <div class="name">{{ $product->name }} x {{ $product->quantity }}</div>
-                    <div class="price">{{ $product->price }}</div>
+                    <div class="price">{{ currency_format($product->price) }}</div>
                   </div>
                 </div>
                 @if ($order->status == 'completed')

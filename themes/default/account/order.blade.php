@@ -50,7 +50,7 @@
                     </td>
                     @if ($loop->first)
                       <td rowspan="{{ $loop->count }}">{{ currency_format($order->total) }}</td>
-                      <td rowspan="{{ $loop->count }}">{{ $order->status }}</td>
+                      <td rowspan="{{ $loop->count }}">{{ __("common.order.{$order->status}") }}</td>
                       <td rowspan="{{ $loop->count }}" class="text-end">
                         <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}" class="btn btn-outline-secondary btn-sm">{{ __('shop/account.order.check') }}</a>
                       </td>
