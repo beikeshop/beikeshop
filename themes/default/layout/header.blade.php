@@ -136,16 +136,16 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-person me-1"></i>
-                    个人中心</a></li>
+                  {{ __('shop/account.index') }}</a></li>
                 <li><a href="{{ shop_route('account.order.index') }}" class="dropdown-item"><i
-                      class="bi bi-clipboard-check me-1"></i> 我的订单</a></li>
+                      class="bi bi-clipboard-check me-1"></i> {{ __('shop/account.order.index') }}</a></li>
                 <li><a href="{{ shop_route('account.wishlist.index') }}" class="dropdown-item"><i
-                      class="bi bi-heart me-1"></i> 我的收藏</a></li>
+                      class="bi bi-heart me-1"></i> {{ __('shop/account.wishlist.index') }}</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
                 <li><a href="{{ shop_route('logout') }}" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i>
-                    退出登录</a></li>
+                    {{ __('common.sign_out') }}</a></li>
               @else
                 <li><a href="{{ shop_route('login.index') }}" class="dropdown-item"><i
                       class="bi bi-box-arrow-right me-1"></i>{{ __('shop/login.login_and_sign') }}</a></li>

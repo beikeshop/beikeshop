@@ -28,6 +28,7 @@ return [
     'yes' => 'yes',
     'delete' => 'delete',
     'sign_out' => 'Sign Out',
+    'contact_us' => 'contact us',
 
     'order' => [
         'unpaid' => 'Unpaid',

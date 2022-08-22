@@ -50,7 +50,7 @@
           </div>
         @endfor
         <div class="col-12 col-md-3 footer-content-contact">
-          <h6 class="text-uppercase text-dark mb-3">联系我们</h6>
+          <h6 class="text-uppercase text-dark mb-3">{{ __('common.contact_us') }}</h6>
           <ul class="list-unstyled">
             @if ($footer_content['content']['contact']['email'])
               <li class="lh-lg mb-2"><i class="bi bi-envelope-fill"></i> {{ $footer_content['content']['contact']['email'] }}</li>

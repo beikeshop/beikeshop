@@ -27,6 +27,7 @@ return [
     'yes' => '是',
     'delete' => '删除',
     'sign_out' => '退出登录',
+    'contact_us' => '联系我们',
 
     'order' => [
         'unpaid' => '待支付',
