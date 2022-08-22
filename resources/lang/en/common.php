@@ -17,6 +17,7 @@ return [
     'deleted_success' => 'Deleted Successfully!',
     'restored_success' => 'Restore Successfully!',
     'updated_success' => 'Updated Successfully!',
+    'edit_success' => 'Modify Success!',
     'get_success' => 'Get Successfully!',
     'enable' => 'Enable',
     'disable' => 'Disable',

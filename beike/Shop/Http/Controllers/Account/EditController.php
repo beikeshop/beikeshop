@@ -34,6 +34,6 @@ class EditController extends Controller
     public function update(EditRequest $request): RedirectResponse
     {
         CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
-        return redirect()->to(shop_route('account.edit.index'))->with('success', '修改成功');
+        return redirect()->to(shop_route('account.edit.index'))->with('success', trans('common.edit_success'));
     }
 }
