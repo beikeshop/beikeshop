@@ -18,7 +18,7 @@
     </div>
 
     @if ($errors->has('error'))
-      <x-shop-alert type="danger" msg="{{ $errors->has('error') }}" class="mt-4" />
+      <x-shop-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
     @endif
 
     <div class="row mt-5" v-if="products.length">
@@ -136,7 +136,7 @@
       methods: {
         checkedBtnToCheckout() {
           if (!this.products.some(e => e.selected)) {
-            layer.msg('{{ __('shop/carts.nust_select') }}', ()=>{})
+            layer.msg('{{ __('shop/carts.empty_selected_products') }}', ()=>{})
             return
           }
 

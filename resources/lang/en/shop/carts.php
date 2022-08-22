@@ -29,5 +29,11 @@ return [
     'mini' => 'Your cart',
     'delete' => 'Delete',
     'check_cart' => 'Check the shopping cart',
-    'subtotal' => 'Subtotal',
+
+    'invalid_customer' => 'Invalid customer.',
+    'empty_selected_products' => 'Empty selected products.',
+    'invalid_shipping_address' => 'Invalid shipping address',
+    'invalid_payment_address' => 'Invalid payment address.',
+    'invalid_shipping_method' => 'Invalid shipping method.',
+    'invalid_payment_method' => 'Invalid payment method.',
 ];

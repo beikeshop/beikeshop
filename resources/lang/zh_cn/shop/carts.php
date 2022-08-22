@@ -29,5 +29,11 @@ return [
     'mini' => '您的购物车',
     'delete' => '删除',
     'check_cart' => '查看购物车',
-    'subtotal' => '小计',
+
+    'invalid_customer' => '购物车客户无效',
+    'empty_selected_products' => '购物车选中商品为空',
+    'invalid_shipping_address' => '配送地址无效',
+    'invalid_payment_address' => '账单地址无效',
+    'invalid_shipping_method' => '配送方式不可用',
+    'invalid_payment_method' => '支付方式不可用',
 ];

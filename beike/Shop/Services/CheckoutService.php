@@ -40,12 +40,12 @@ class CheckoutService
             $this->customer = current_customer();
         }
         if (empty($this->customer) || !($this->customer instanceof Customer)) {
-            throw new \Exception("购物车客户无效");
+            throw new \Exception(trans('shop/carts.invalid_customer'));
         }
         $this->cart = CartRepo::createCart($this->customer);
         $this->selectedProducts = CartRepo::selectedCartProducts($this->customer->id);
         if ($this->selectedProducts->count() == 0) {
-            throw new \Exception("购物车商品为空");
+            throw new \Exception(trans('shop/carts.empty_selected_products'));
         }
     }
 
@@ -113,22 +113,22 @@ class CheckoutService
 
         $shippingAddressId = $current['shipping_address_id'];
         if (empty(Address::query()->find($shippingAddressId))) {
-            throw new \Exception('配送地址无效');
+            throw new \Exception(trans('shop/carts.invalid_shipping_address'));
         }
 
         $paymentAddressId = $current['payment_address_id'];
         if (empty(Address::query()->find($paymentAddressId))) {
-            throw new \Exception('账单地址无效');
+            throw new \Exception(trans('shop/carts.invalid_payment_address'));
         }
 
         $shippingMethodCode = $current['shipping_method_code'];
         if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
-            throw new \Exception('配送方式不可用');
+            throw new \Exception(trans('shop/carts.invalid_shipping_method'));
         }
 
         $paymentMethodCode = $current['payment_method_code'];
         if (!PluginRepo::paymentEnabled($paymentMethodCode)) {
-            throw new \Exception('支付方式不可用');
+            throw new \Exception(trans('shop/carts.invalid_payment_method'));
         }
     }
 
