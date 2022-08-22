@@ -11,9 +11,9 @@
 
 return [
     'home' => 'Home',
-    'submit' => 'submit',
-    'cancel' => 'cancel',
-    'confirm' => 'confirm',
-    'no' => 'no',
-    'yes' => 'yes',
+    'submit' => 'Submit',
+    'cancel' => 'Cancel',
+    'confirm' => 'Confirm',
+    'no' => 'No',
+    'yes' => 'Yes',
 ];

@@ -10,7 +10,7 @@
  */
 
 return [
-    'index' => 'steps',
+    'index' => 'Steps',
     'cart' => 'Cart',
     'checkout' => 'Checkouts',
     'submitted_successfully' => 'Submitted Successfully',

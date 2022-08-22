@@ -14,7 +14,7 @@ return [
     'index' => 'User login and registration',
     'login_and_sign' => 'Login/Sign In',
     'home' => 'Home',
-    'library' => 'library',
+    'library' => 'Library',
     'login' => 'Login',
     'already' => 'Already our customer?',
     'description' => 'Already our customer?',

@@ -12,10 +12,10 @@
 return [
     'index' => 'Checkouts',
     'address' => 'Address',
-    'chosen' => 'chosen',
-    'edit' => 'edit',
-    'choose_another_address' => 'choose another address',
-    'add_new_address' => 'add new address',
+    'chosen' => 'Chosen',
+    'edit' => 'Edit',
+    'choose_another_address' => 'Choose Another Address',
+    'add_new_address' => 'Add New Address',
     'payment_method' => 'Payment Method',
     'delivery_method' => 'Delivery Method',
     'cart_totals' => 'Cart Totals',
@@ -28,10 +28,10 @@ return [
     'check_form' => 'Please check that the form is filled out correctly',
 
     'payment' => [
-        'index' => 'please pay',
+        'index' => 'Please Pay',
         'please_pay' => 'Order submitted successfully, please pay',
-        'order_number' => 'order number',
-        'amounts_payable' => 'amounts payable',
-        'payment_method' => 'payment method',
+        'order_number' => 'Order Number',
+        'amounts_payable' => 'Amounts Payable',
+        'payment_method' => 'Payment Method',
     ]
 ];

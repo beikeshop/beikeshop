@@ -11,16 +11,16 @@
  */
 
 return [
-    'index' => 'forgot password',
+    'index' => 'Forgot Password',
     'follow_prompt' => 'Please follow the prompts to retrieve your password',
     'email_forCode' => 'Please enter your email address to get the verification code',
     'enter_password' => 'Please enter a new password',
-    'email' => 'email',
-    'email_address' => 'email address',
-    'verification_code' => 'verification code',
-    'password' => 'password',
-    'confirm_password' => 'confirm password',
-    'send_code' => 'send code',
+    'email' => 'Email',
+    'email_address' => 'Email Address',
+    'verification_code' => 'Verification Code',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'send_code' => 'Send Code',
     'to_back' => 'Back to previous step',
     'enter_password' => 'Please enter password',
     'enter_email' => 'please input your email',
