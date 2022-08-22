@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'account',
+    'index' => 'Account',
     'revise_info' => 'modify information',
     'collect' => 'collect',
     'coupon' => 'coupon',
-    'my_order' => 'my order',
+    'my_order' => 'My Order',
     'orders' => 'all orders',
     'pending_payment' => 'pending payment',
     'pending_send' => 'to be delivered',
@@ -29,7 +29,7 @@ return [
     'check_details' => 'check details',
 
     'edit' => [
-        'index' => 'edit',
+        'index' => 'Edit',
         'modify_avatar' => 'modify avatar',
         'suggest' => 'Upload a JPG or PNG image. 300 x 300 is recommended.',
         'name' => 'name',
@@ -38,16 +38,16 @@ return [
     ],
 
     'wishlist' => [
-        'index' => 'wishlist',
+        'index' => 'Wishlist',
         'product' => 'product',
         'price' => 'price',
         'check_details' => 'check details',
     ],
 
     'order' => [
-        'index' => 'order',
+        'index' => 'Order',
         'completed' => 'completed',
-        'order_details' => 'order details',
+        'order_details' => 'Order Details',
         'amount' => 'amount',
         'state' => 'state',
         'operate' => 'operate',
@@ -55,7 +55,7 @@ return [
         'check' => 'check',
 
         'order_info' => [
-            'index' => 'order info',
+            'index' => 'Order Info',
             'order_details' => 'order details',
             'to_pay' => 'to pay',
             'confirm_receipt' => 'confirm the receipt of goods',
@@ -90,7 +90,7 @@ return [
     ],
 
     'addresses' => [
-        'index' => 'addresses',
+        'index' => 'Addresses',
         'add_address' => 'add new address',
         'default_address' => 'default address',
         'delete' => 'delete',
@@ -105,7 +105,7 @@ return [
     ],
 
     'rma' => [
-        'index' => 'rma',
+        'index' => 'Rma',
         'commodity' => 'commodity',
         'quantity' => 'quantity',
         'service_type' => 'service type',

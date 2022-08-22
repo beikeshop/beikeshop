@@ -11,8 +11,8 @@
 
 return [
     'index' => 'steps',
-    'cart' => 'cart',
-    'checkout' => 'checkouts',
-    'submitted_successfully' => 'submitted successfully',
-    'payment' => 'payment',
+    'cart' => 'Cart',
+    'checkout' => 'Checkouts',
+    'submitted_successfully' => 'Submitted Successfully',
+    'payment' => 'Payment',
 ];

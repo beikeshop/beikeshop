@@ -27,5 +27,5 @@ return [
     'no' => 'no',
     'yes' => 'yes',
     'delete' => 'delete',
-    'sign_out' => 'sign out',
+    'sign_out' => 'Sign Out',
 ];

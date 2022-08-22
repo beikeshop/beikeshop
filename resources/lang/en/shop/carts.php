@@ -26,7 +26,7 @@ return [
     'go_buy' => 'You can go and see what you want to buy',
     'go_shopping' => 'go shopping',
     'must_select' => 'Please select at least one product',
-    'mini' => 'your cart',
+    'mini' => 'Your cart',
     'delete' => 'delete',
     'check_cart' => 'check the shopping cart',
 ];

@@ -10,15 +10,15 @@
  */
 
 return [
-    'index' => 'checkouts',
-    'address' => 'address',
+    'index' => 'Checkouts',
+    'address' => 'Address',
     'chosen' => 'chosen',
     'edit' => 'edit',
-    'choose_another_address' => 'Choose another address',
+    'choose_another_address' => 'choose another address',
     'add_new_address' => 'add new address',
-    'payment_method' => 'payment method',
+    'payment_method' => 'Payment Method',
     'delivery_method' => 'Delivery Method',
-    'cart_totals' => 'cart totals',
+    'cart_totals' => 'Cart Totals',
     'submit_order' => 'Submit Order',
     'enter_name' => 'Please type in your name',
     'enter_phone' => 'Please type your phone number',
