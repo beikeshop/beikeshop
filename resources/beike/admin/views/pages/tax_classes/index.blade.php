@@ -32,7 +32,7 @@
           <tr v-for="tax, index in tax_classes" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.title }}</td>
-            <td>@{{ descriptionFormat(tax.description) }}</td>
+            <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">

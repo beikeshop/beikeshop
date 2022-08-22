@@ -23,7 +23,7 @@
           <tr v-for="tax, index in regions" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
-            <td>@{{ tax.description }}</td>
+            <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">

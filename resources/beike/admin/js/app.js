@@ -35,6 +35,10 @@ if (typeof Vue != 'undefined') {
 
     return asset + image;
   };
+
+  Vue.prototype.stringLengthInte = function stringLengthInte(text, length) {
+    return bk.stringLengthInte(text, length)
+  };
 }
 
 $(document).ready(function ($) {
