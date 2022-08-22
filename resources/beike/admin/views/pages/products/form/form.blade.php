@@ -112,7 +112,7 @@
                             </div>
                             <div>
                               <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
-                              <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">Add value</el-button>
+                              <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">添加规格值</el-button>
                             </div>
                           </div>
                            <draggable
@@ -147,12 +147,12 @@
                              </div>
                           </draggable>
                           <div v-else>
-                            <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加 Value</div>
+                            <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加规格值</div>
                           </div>
                         </div>
                       </draggable>
 
-                      <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">Add variant</el-button>
+                      <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">添加规格</el-button>
                     </div>
 
                     <div v-if="form.skus.length && form.variables.length" class="mt-3">
@@ -194,18 +194,18 @@
                                 :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
-                                placeholder="model"></td>
+                                placeholder="型号"></td>
                             <td><input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
-                                placeholder="price"></td>
+                                placeholder="价格"></td>
                             <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
-                                placeholder="origin_price"></td>
+                                placeholder="原价"></td>
                             <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
-                                placeholder="cost_price">
+                                placeholder="成本价">
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
-                                placeholder="quantity"></td>
+                                placeholder="数量"></td>
                           </tr>
                         </tbody>
                       </table>
