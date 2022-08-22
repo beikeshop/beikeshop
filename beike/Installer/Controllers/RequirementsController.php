@@ -34,6 +34,8 @@ class RequirementsController extends Controller
             config('installer.requirements')
         );
 
-        return view('installer::requirements', compact('requirements', 'phpSupportInfo'));
+        $steps = 2;
+
+        return view('installer::requirements', compact('requirements', 'phpSupportInfo', 'steps'));
     }
 }

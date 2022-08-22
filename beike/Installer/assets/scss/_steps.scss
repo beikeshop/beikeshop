@@ -26,10 +26,7 @@
         }
 
         .right {
-          i {
-            font-size: 24px;
-            line-height: 1;
-          }
+          display: none;
         }
 
         span.index {
@@ -65,6 +62,14 @@
             color: $primary;
             i {
               font-size: 24px;
+            }
+          }
+
+          .right {
+            display: block;
+            i {
+              font-size: 24px;
+              line-height: 1;
             }
           }
         }

@@ -20,6 +20,9 @@ class WelcomeController extends Controller
         if (installed()) {
             exit('Already installed');
         }
-        return view('installer::welcome');
+
+        $steps = 1;
+
+        return view('installer::welcome', compact('steps'));
     }
 }

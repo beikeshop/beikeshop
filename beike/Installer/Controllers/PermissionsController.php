@@ -31,6 +31,8 @@ class PermissionsController extends Controller
             config('installer.permissions')
         );
 
-        return view('installer::permissions', compact('permissions'));
+        $steps = 3;
+
+        return view('installer::permissions', compact('permissions', 'steps'));
     }
 }

@@ -3,23 +3,23 @@
 $primary: #fd560f;
 
 body {
-  background-color: #f6f7f8;
+  // background-color: #f6f7f8;
+  background-color: #f3f6f8;
   display: flex;
   height: 100vh;
-  // flex-direction: column;
 
   > .aside-wrap {
     width: 30%;
     background-color: #fff;
     padding: 40px 20px 40px 40px;
-    // flex: 1;
   }
 
   > .content {
     width: 70%;
-    padding: 40px;
-    // flex: 1;
+    padding: 40px 60px;
   }
 }
 
 @import "steps";
+@import "install-1";
+

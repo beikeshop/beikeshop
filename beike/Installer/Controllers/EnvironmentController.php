@@ -32,7 +32,9 @@ class EnvironmentController extends Controller
      */
     public function index()
     {
-        return view('installer::environment-wizard');
+        $steps = 4;
+
+        return view('installer::environment-wizard', compact('steps'));
     }
 
     /**
