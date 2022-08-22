@@ -7,7 +7,13 @@
             aria-expanded="false">
             @foreach (currencies() as $currency)
               @if ($currency->code == current_currency_code())
-                {{ $currency->symbol_left }} {{ $currency->name }}
+                @if ($currency->symbol_left)
+                {{ $currency->symbol_left }}
+                @endif
+                {{ $currency->name }}
+                @if ($currency->symbol_right)
+                {{ $currency->symbol_right }}
+                @endif
               @endif
             @endforeach
           </a>
@@ -15,8 +21,15 @@
           <div class="dropdown-menu" aria-labelledby="currency-dropdown">
             @foreach (currencies() as $currency)
               <a class="dropdown-item"
-                href="{{ shop_route('currency.switch', [$currency->code]) }}">{{ $currency->symbol_left }}
-                {{ $currency->name }}</a>
+                href="{{ shop_route('currency.switch', [$currency->code]) }}">
+                @if ($currency->symbol_left)
+                {{ $currency->symbol_left }}
+                @endif
+                {{ $currency->name }}
+                @if ($currency->symbol_right)
+                {{ $currency->symbol_right }}
+                @endif
+                </a>
             @endforeach
           </div>
         </div>
