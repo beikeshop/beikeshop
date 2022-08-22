@@ -131,7 +131,9 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            this.dialog.form = JSON.parse(JSON.stringify(this.brands.data[index]))
+            let item = JSON.parse(JSON.stringify(this.brands.data[index]));
+            item.status = Number(item.status)
+            this.dialog.form = item
           }
         },
 
