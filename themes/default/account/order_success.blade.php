@@ -6,7 +6,7 @@
   <div class="container">
 
     {{-- <x-shop-breadcrumb type="static" value="account.order.index" /> --}}
-    
+
     <div class="row mt-5 justify-content-center mb-5">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 3])</div>
     </div>
@@ -24,7 +24,7 @@
                 <tbody>
                   <tr>
                     <td>{{ __('shop/account.order.order_success.order_number') }}：<span class="fw-bold">{{ $order['number'] }}</span></td>
-                    <td>{{ __('shop/account.order.order_success.amounts_payable') }}：<span class="fw-bold">{{ $order['total'] }}</span></td>
+                    <td>{{ __('shop/account.order.order_success.amounts_payable') }}：<span class="fw-bold">{{ currency_format($order['total']) }}</span></td>
                   </tr>
                   <tr>
                     <td>{{ __('shop/account.order.order_success.payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
