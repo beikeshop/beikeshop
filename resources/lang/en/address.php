@@ -10,9 +10,15 @@
  */
 
 return [
+    'index' => 'Edit Address',
     'name' => 'Name',
     'phone' => 'Phone',
     'country_id' => 'Country ID',
     'zone_id' => 'Zone ID',
     'address_1' => 'Address 1',
+    'address_2' => 'Address 2',
+    'address' => 'Address',
+    'enter_city' => 'Enter city',
+    'post_code' => 'Post Code',
+    'default' => 'Default Address',
 ];
