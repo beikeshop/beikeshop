@@ -46,5 +46,13 @@ export default {
       return decodeURIComponent(r[2]);
     }
     return defaultValue || '';
+  },
+
+  stringLengthInte(text, length = 50) {
+    if (text.length) {
+      return text.slice(0, length) + (text.length > length ? '...' : '');
+    }
+
+    return '';
   }
 }

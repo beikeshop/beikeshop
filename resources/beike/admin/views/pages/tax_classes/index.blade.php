@@ -32,7 +32,7 @@
           <tr v-for="tax, index in tax_classes" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.title }}</td>
-            <td>@{{ tax.description }}</td>
+            <td>@{{ descriptionFormat(tax.description) }}</td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
@@ -137,6 +137,10 @@
       },
 
       methods: {
+        descriptionFormat(text) {
+          return bk.stringLengthInte(text)
+        },
+
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type

@@ -2389,6 +2389,15 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     return defaultValue || '';
+  },
+  stringLengthInte: function stringLengthInte(text) {
+    var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 50;
+
+    if (text.length) {
+      return text.slice(0, length) + (text.length > length ? '...' : '');
+    }
+
+    return '';
   }
 });
 
