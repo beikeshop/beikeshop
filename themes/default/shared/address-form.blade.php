@@ -10,7 +10,7 @@
       <el-input v-model="{{ $address_form_key }}.name"></el-input>
     </el-form-item>
     <el-form-item label="联系电话" prop="phone">
-      <el-input maxlength="11" v-model="{{ $address_form_key }}.phone"></el-input>
+      <el-input maxlength="11" v-model="{{ $address_form_key }}.phone" type="number"></el-input>
     </el-form-item>
     <el-form-item label="地址" required>
       <div class="row dialog-address">
