@@ -33,7 +33,7 @@ class WishlistController extends Controller
         $productId = $request->get('product_id');
         $wishlist = CustomerRepo::addToWishlist(current_customer(), $productId);
 
-        return json_success('加入收藏成功', $wishlist);
+        return json_success(trans('shop/wishlist.add_wishlist_success'), $wishlist);
     }
 
     public function remove(Request $request): array
@@ -41,7 +41,7 @@ class WishlistController extends Controller
         $id = $request->id;
         CustomerRepo::removeFromWishlist(current_customer(), $id);
 
-        return json_success('移除收藏成功');
+        return json_success(trans('shop/wishlist.remove_wishlist_success'));
     }
 
 }
