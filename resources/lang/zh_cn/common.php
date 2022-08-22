@@ -9,7 +9,7 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-    'index' => '123123',
+    'error_required' => '请填写 :name', // 这个有用别删了，:name 是一个变量
     'error_required_name' => '请填写姓名',
     'error_required_email' => '请填写邮箱',
     'unauthenticated' => '请先登录',

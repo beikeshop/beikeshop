@@ -10,6 +10,7 @@
  */
 
 return [
+    'error_required' => 'Please fill out the :name', // 这个有用别删了，:name 是一个变量
     'error_required_name' => 'Please fill in your name',
     'error_required_email' => 'Please enter your email',
     'unauthenticated' => 'Please login first',
