@@ -35,6 +35,8 @@ return [
         'name' => '名称',
         'email' => '邮箱',
         'crop' => '裁剪',
+        'password_edit_success' => '密码修改成功',
+        'origin_password_fail' => '原密码错误',
     ],
 
     'wishlist' => [
@@ -115,16 +117,16 @@ return [
         'check' => '查看',
 
         'rma_info' => [
-            'index' => '售后详情', 
+            'index' => '售后详情',
         ],
 
         'rma_form' => [
-            'index' => '提交售后信息', 
-            'service_type' => '服务类型', 
-            'return_quantity' => '退换数量', 
-            'unpacked' => '已打开包装', 
-            'return_reason' => '退换原因', 
-            'remark' => '备注', 
+            'index' => '提交售后信息',
+            'service_type' => '服务类型',
+            'return_quantity' => '退换数量',
+            'unpacked' => '已打开包装',
+            'return_reason' => '退换原因',
+            'remark' => '备注',
         ]
     ]
 ];

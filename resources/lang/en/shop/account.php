@@ -30,11 +30,13 @@ return [
 
     'edit' => [
         'index' => 'Edit',
-        'modify_avatar' => 'modify avatar',
+        'modify_avatar' => 'Modify Avatar',
         'suggest' => 'Upload a JPG or PNG image. 300 x 300 is recommended.',
-        'name' => 'name',
-        'email' => 'email',
+        'name' => 'Name',
+        'email' => 'Email',
         'crop' => 'crop',
+        'password_edit_success' => 'Change password successfully!',
+        'origin_password_fail' => 'Origin password incorrect!',
     ],
 
     'wishlist' => [
@@ -115,16 +117,16 @@ return [
         'check' => 'check',
 
         'rma_info' => [
-            'index' => 'after-sales details', 
+            'index' => 'after-sales details',
         ],
 
         'rma_form' => [
-            'index' => 'Submit after-sales information', 
-            'service_type' => 'service type', 
-            'return_quantity' => 'return quantity', 
-            'unpacked' => 'unpacked', 
+            'index' => 'Submit after-sales information',
+            'service_type' => 'service type',
+            'return_quantity' => 'return quantity',
+            'unpacked' => 'unpacked',
             'return_reason' => 'reason for return',
-            'remark' => 'remark', 
+            'remark' => 'remark',
         ]
     ]
 ];

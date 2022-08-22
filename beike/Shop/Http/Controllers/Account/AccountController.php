@@ -45,10 +45,10 @@ class AccountController extends Controller
     public function updatePassword(ForgottenRequest $request): array
     {
         if (Hash::make($request->get('origin_password')) != current_customer()->getAuthPassword()) {
-            throw new \Exception("原密码错误");
+            throw new \Exception(trans('shop/account.edit.origin_password_fail'));
         }
         CustomerRepo::update(current_customer(), ['password' => $request->get('password')]);
 
-        return json_success('密码修改成功');
+        return json_success(trans('shop/account.edit.password_edit_success'));
     }
 }
