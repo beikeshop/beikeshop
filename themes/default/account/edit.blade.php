@@ -57,7 +57,7 @@
                   <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"
                     value="{{ old('name', $customer->name ?? '') }}" required>
                   <span class="invalid-feedback"
-                    role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required_name', ['name' => '名称']) }}</span>
+                    role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account.edit.name')]) }}</span>
                   {{-- @if ($errors->has('name'))@endif --}}
                 </div>
                 <div class="col-sm-6">
@@ -65,7 +65,7 @@
                   <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
                     name="email" value="{{ old('name', $customer->email ?? '') }}" required>
                   <span class="invalid-feedback"
-                    role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required_email', ['name' => '邮箱']) }}</span>
+                    role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account.edit.email')]) }}</span>
                   {{-- @if ($errors->has('email'))@endif --}}
                 </div>
                 <div class="col-12 mt-4">
