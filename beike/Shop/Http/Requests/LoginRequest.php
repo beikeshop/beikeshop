@@ -32,8 +32,8 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => '邮箱地址',
-            'password' => '密码'
+            'email' => trans('shop/login.email_address'),
+            'password' => trans('shop/login.password'),
         ];
     }
 }
