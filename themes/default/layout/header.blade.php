@@ -52,7 +52,9 @@
           @foreach ($menu_content as $menu)
             <li
               class="nav-item {{ isset($menu['children_group']) ? 'dropdown' : '' }} {{ isset($menu['isFull']) && $menu['isFull'] ? 'position-static' : '' }}">
-              <a class="nav-link fw-bold {{ isset($menu['children_group']) ? 'dropdown-toggle' : '' }}" href="{{ $menu['link'] ?? '' }}">
+              <a class="nav-link fw-bold {{ isset($menu['children_group']) ? 'dropdown-toggle' : '' }}"
+                target="{{ isset($menu['new_window']) && $menu['new_window'] ? '_blank' : '_self' }}"
+                href="{{ $menu['link'] ?? '' }}">
                 {{ $menu['name'] }}
                 @if (isset($menu['badge']) && $menu['badge']['name'])
                   <span class="badge"
@@ -62,7 +64,8 @@
                 @endif
               </a>
               @if (isset($menu['children_group']) && $menu['children_group'])
-                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}" style="min-width: {{ count($menu['children_group']) * 200 }}px">
+                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}"
+                  style="min-width: {{ count($menu['children_group']) * 200 }}px">
                   <div class="card card-lg">
                     <div class="card-body">
                       <div class="container">
@@ -73,15 +76,20 @@
                                 <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
                               @endif
                               @if ($group['type'] == 'image')
-                                <a href="$group['image']['link']"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
+                                <a
+                                target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}"
+                                href="$group['image']['link']"><img src="{{ $group['image']['image'] }}"
+                                    class="img-fluid"></a>
                               @else
                                 <ul class="nav flex-column ul-children">
                                   @foreach ($group['children'] as $children)
                                     @if (!is_array($children['link']['text']))
-                                    <li class="nav-item">
-                                      <a class="nav-link px-0"
-                                      href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
-                                    </li>
+                                      <li class="nav-item">
+                                        <a
+                                        target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}"
+                                        class="nav-link px-0"
+                                          href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
+                                      </li>
                                     @endif
                                   @endforeach
                                 </ul>
@@ -147,7 +155,7 @@
     <div class="mobile-content">
       <div class="left"><i class="bi bi-list"></i></div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
-        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>

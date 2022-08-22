@@ -33,6 +33,7 @@ class MenuRepo
             $menu['link'] = handle_link($menu['link'])['link'] ?? '';
             $menu['name'] = $menu['name'][$locale] ?? '';
             $menu['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
+            $menu['new_window'] = $menu['link']['new_window'] ?? false;
 
             if ($menu['childrenGroup']) {
                 $menu['children_group'] = self::handleChildrenGroup($menu['childrenGroup']);
