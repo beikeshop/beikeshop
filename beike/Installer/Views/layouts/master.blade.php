@@ -49,14 +49,14 @@
         <li class="{{ $steps == 4 ? 'ing' : '' }} {{ $steps > 4 ? 'success' : '' }}">
           <div class="left">
             <span class="index">@if ($steps > 4 && $steps != 4) <i class="bi bi-check-lg"></i> @else 4 @endif</span>
-            配置参数
+            系统参数配置
           </div>
           <span class="right"><i class="bi bi-arrow-right-short"></i></span>
         </li>
         <li class="{{ $steps == 5 ? 'ing' : '' }} {{ $steps > 5 ? 'success' : '' }}">
           <div class="left">
             <span class="index">@if ($steps > 5 && $steps != 5) <i class="bi bi-check-lg"></i> @else 5 @endif</span>
-            安装结果
+            获取安装结果
           </div>
           <span class="right"><i class="bi bi-arrow-right-short"></i></span>
         </li>
