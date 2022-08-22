@@ -89,7 +89,7 @@
         rules: {
           name: [{required: true, message: '{{ __('shop/account.addresses.enter_name') }}', trigger: 'blur'}, ],
           phone: [{required: true, message: '{{ __('shop/account.addresses.enter_phone') }}', trigger: 'blur'}, ],
-          address_1: [{required: true, message: ' 1{{ __('shop/account.addresses.enter_address') }}', trigger: 'blur'}, ],
+          address_1: [{required: true, message: ' {{ __('shop/account.addresses.enter_address') }}', trigger: 'blur'}, ],
           zone_id: [{required: true, message: '{{ __('shop/account.addresses.select_province') }}', trigger: 'blur'}, ],
           city: [{required: true, message: '{{ __('shop/account.addresses.enter_city') }}', trigger: 'blur'}, ],
         }

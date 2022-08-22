@@ -23,6 +23,7 @@ return [
     'disable' => 'Disable',
     'home' => 'home',
     'submit' => 'submit',
+    'save' => 'save',
     'cancel' => 'cancel',
     'confirm' => 'confirm',
     'no' => 'no',
@@ -36,5 +37,5 @@ return [
         'paid' => 'Paid',
         'shipped' => 'Shipped',
         'completed' => 'Completed',
-    ]
+    ],
 ];

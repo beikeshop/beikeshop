@@ -9,6 +9,7 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
+    'index' => '123123',
     'error_required' => '请填写 :name',
     'unauthenticated' => '请先登录',
     'success' => '成功',
@@ -22,6 +23,7 @@ return [
     'disable' => '禁用',
     'home' => '首页',
     'submit' => '提交',
+    'save' => '保存',
     'cancel' => '取消',
     'confirm' => '确定',
     'no' => '否',
