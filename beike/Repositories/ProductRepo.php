@@ -246,6 +246,6 @@ class ProductRepo
 
     public static function updateStatusByIds($ids, $status)
     {
-        Product::query()->whereIn('id', $ids)->update('status', $status);
+        Product::query()->whereIn('id', $ids)->update(['status' => $status]);
     }
 }
