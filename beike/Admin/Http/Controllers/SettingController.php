@@ -11,6 +11,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Resources\CustomerGroupDetail;
+use Beike\Models\CustomerGroup;
+use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
@@ -40,6 +43,7 @@ class SettingController extends Controller
             'countries' => CountryRepo::all(),
             'currencies' => CurrencyRepo::listEnabled(),
             'tax_address' => $tax_address,
+            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes' => $themes
         ];
 

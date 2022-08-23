@@ -61,6 +61,10 @@
               <div class="help-text font-size-12 lh-base">默认货币设置</div>
             </x-admin-form-select>
 
+              <x-admin-form-select title="默认客户组" name="default_customer_group_id" :value="old('locale', system_setting('base.default_customer_group_id', ''))" :options="$customer_groups" key="id" label="name">
+                  <div class="help-text font-size-12 lh-base">默认客户组</div>
+              </x-admin-form-select>
+
             <x-admin-form-input name="admin_name" title="后台目录" required value="{{ old('admin_name', system_setting('base.admin_name', 'admin')) }}">
               <div class="help-text font-size-12 lh-base">管理后台目录,默认为admin</div>
             </x-admin-form-input>
