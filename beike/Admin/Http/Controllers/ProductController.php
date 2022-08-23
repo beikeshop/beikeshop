@@ -154,7 +154,7 @@ class ProductController extends Controller
 
     public function updateStatus(Request $request)
     {
-        ProductRepo::updateStatusByIds($request->get('ids'));
+        ProductRepo::updateStatusByIds($request->get('ids'), $request->get('status'));
 
         return json_success(trans('common.updated_success'), []);
     }

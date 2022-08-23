@@ -236,7 +236,7 @@ class ProductRepo
             ->get();
         return $products;
     }
-    public static function DeleteByIds($ids, $price)
+    public static function DeleteByIds($ids)
     {
         Product::query()->whereIn('id', $ids)->delete();
         ProductSku::query()->whereIn('product_id', $ids)->delete();
