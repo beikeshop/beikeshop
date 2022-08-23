@@ -91,7 +91,7 @@ class BrandController extends Controller
 
 
     /**
-     * 根据产品ID批量获取产品名称
+     * 根据商品ID批量获取商品名称
      *
      * @param Request $request
      * @return array

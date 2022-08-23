@@ -18,7 +18,7 @@ use Beike\Repositories\CustomerRepo;
 class DashboardRepo
 {
     /**
-     * 获取产品总数
+     * 获取商品总数
      *
      * @return array
      */

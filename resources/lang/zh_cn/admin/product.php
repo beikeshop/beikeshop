@@ -10,11 +10,11 @@
  */
 
 return [
-    'products_index' => '产品列表',
-    'products_create' => '创建产品',
-    'products_show' => '产品详情',
-    'products_update' => '更新产品',
-    'products_delete' => '删除产品',
+    'products_index' => '商品列表',
+    'products_create' => '创建商品',
+    'products_show' => '商品详情',
+    'products_update' => '更新商品',
+    'products_delete' => '删除商品',
     'products_trashed' => '回收站',
     'products_restore' => '恢复回收站',
 

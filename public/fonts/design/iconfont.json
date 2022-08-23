@@ -42,14 +42,14 @@
     },
     {
       "icon_id": "15954666",
-      "name": "产品",
+      "name": "商品",
       "font_class": "chanpin",
       "unicode": "e606",
       "unicode_decimal": 58886
     },
     {
       "icon_id": "17907876",
-      "name": "产品 (1)",
+      "name": "商品 (1)",
       "font_class": "chanpin1",
       "unicode": "e607",
       "unicode_decimal": 58887
@@ -350,7 +350,7 @@
     },
     {
       "icon_id": "680974",
-      "name": "产品2",
+      "name": "商品2",
       "font_class": "chanpin2",
       "unicode": "e71a",
       "unicode_decimal": 59162

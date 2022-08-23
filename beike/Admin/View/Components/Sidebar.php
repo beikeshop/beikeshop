@@ -118,7 +118,7 @@ class Sidebar extends Component
 
 
     /**
-     * 获取产品子页面路由
+     * 获取商品子页面路由
      */
     private function getProductSubRoutes()
     {
@@ -133,7 +133,7 @@ class Sidebar extends Component
 
 
     /**
-     * 获取产品子页面路由
+     * 获取商品子页面路由
      */
     private function getCustomerSubRoutes()
     {

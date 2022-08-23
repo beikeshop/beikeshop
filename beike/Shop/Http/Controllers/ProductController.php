@@ -12,7 +12,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class ProductController extends Controller
 {
     /**
-     * 产品详情页
+     * 商品详情页
      * @param Request $request
      * @param Product $product
      * @return mixed
@@ -31,7 +31,7 @@ class ProductController extends Controller
 
 
     /**
-     * 通过关键字搜索产品
+     * 通过关键字搜索商品
      *
      * @param Request $request
      * @return mixed

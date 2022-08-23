@@ -81,7 +81,7 @@ class Breadcrumb extends Component
     }
 
     /**
-     * 获取产品以及分类路径
+     * 获取商品以及分类路径
      *
      * @param $value
      * @return array

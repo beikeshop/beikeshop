@@ -136,7 +136,7 @@ Route::prefix($adminName)
                 Route::middleware('can:pages_delete')->delete('pages/{page}', [Controllers\PagesController::class, 'destroy'])->name('pages.destroy');
 
 
-                // 产品
+                // 商品
                 Route::middleware('can:products_restore')->put('products/restore', [Controllers\ProductController::class, 'restore']);
                 Route::middleware('can:products_trashed')->get('products/trashed', [Controllers\ProductController::class, 'trashed'])->name('products.trashed');
                 Route::middleware('can:products_show')->get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');

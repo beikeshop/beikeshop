@@ -53,7 +53,7 @@ class CategoryRepo
 
 
     /**
-     * 获取产品分类列表
+     * 获取商品分类列表
      *
      * @param array $filters
      * @return Builder[]|Collection
@@ -121,7 +121,7 @@ class CategoryRepo
 
 
     /**
-     * 删除产品分类
+     * 删除商品分类
      * @throws \Exception
      */
     public static function delete($category)
@@ -139,7 +139,7 @@ class CategoryRepo
 
 
     /**
-     * 通过分类ID获取产品名称
+     * 通过分类ID获取商品名称
      * @param $category
      * @return mixed|string
      */

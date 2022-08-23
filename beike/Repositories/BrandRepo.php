@@ -100,7 +100,7 @@ class BrandRepo
 
 
     /**
-     * 获取产品品牌筛选builder
+     * 获取商品品牌筛选builder
      * @param array $filters
      * @return Builder
      */
@@ -162,7 +162,7 @@ class BrandRepo
     }
 
     /**
-     * 通过产品ID获取产品列表
+     * 通过商品ID获取商品列表
      * @return array|Builder[]|Collection
      */
     public static function getListByIds($ids)

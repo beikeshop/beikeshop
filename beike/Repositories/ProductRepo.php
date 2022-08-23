@@ -27,7 +27,7 @@ class ProductRepo
 
 
     /**
-     * 获取产品详情
+     * 获取商品详情
      */
     public static function getProductDetail($product)
     {
@@ -40,7 +40,7 @@ class ProductRepo
 
 
     /**
-     * 通过单个或多个产品分类获取产品列表
+     * 通过单个或多个商品分类获取商品列表
      *
      * @param $categoryId
      * @return AnonymousResourceCollection
@@ -54,7 +54,7 @@ class ProductRepo
 
 
     /**
-     * 通过产品ID获取产品列表
+     * 通过商品ID获取商品列表
      * @param $productIds
      * @return AnonymousResourceCollection
      */
@@ -67,7 +67,7 @@ class ProductRepo
 
 
     /**
-     * 获取产品筛选对象
+     * 获取商品筛选对象
      *
      * @param array $data
      * @return Builder
@@ -171,7 +171,7 @@ class ProductRepo
 
 
     /**
-     * 通过产品ID获取商品名称
+     * 通过商品ID获取商品名称
      * @param $id
      * @return mixed|string
      */
@@ -222,7 +222,7 @@ class ProductRepo
 
 
     /**
-     * 通过产品ID获取产品列表
+     * 通过商品ID获取商品列表
      * @return array|Builder[]|Collection
      */
     public static function getListByProductIds($productIds)
