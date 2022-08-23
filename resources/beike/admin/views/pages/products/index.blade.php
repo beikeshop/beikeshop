@@ -18,16 +18,16 @@
         <div class="bg-light p-4">
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-              <label class="filter-title">商品名称</label>
+              <label class="filter-title">{{ __('product.name') }}</label>
               <input type="text" v-model="filter.name" class="form-control" placeholder="name">
             </div>
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-              <label class="filter-title">sku</label>
+              <label class="filter-title">{{ __('product.sku') }}</label>
               <input type="text" v-model="filter.sku" class="form-control" placeholder="sku">
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-              <label class="filter-title">分类</label>
+              <label class="filter-title">{{ __('product.category') }}</label>
               <select v-model="filter.category_id" class="form-control">
                 <option value="0">全部</option>
                 @foreach ($categories as $_category)
