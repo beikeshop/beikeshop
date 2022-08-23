@@ -195,7 +195,9 @@
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
                                 placeholder="型号"></td>
-                            <td><input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku">
+                            <td>
+                              <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''">
+                              <span v-if="sku.is_default" class="text-success">默认主商品</span>
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
                                 placeholder="价格"></td>

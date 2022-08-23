@@ -211,6 +211,7 @@
             type: 'warning'
           }).then(() => {
             $http.delete('products/delete', {ids: this.selected}).then((res) => {
+              layer.msg(res.message)
               location.reload();
             })
           });
@@ -221,6 +222,7 @@
             type: 'warning'
           }).then(() => {
             $http.post('products/status', {ids: this.selected, status: type}).then((res) => {
+              layer.msg(res.message)
               location.reload();
             })
           });
