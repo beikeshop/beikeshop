@@ -17,9 +17,4 @@ return [
     'products_delete' => '删除商品',
     'products_trashed' => '回收站',
     'products_restore' => '恢复回收站',
-
-    'name' => '商品名称',
-    'sku' => 'SKU',
-    'price' => '价格',
-    'Brand' => '品牌',
 ];
