@@ -239,13 +239,10 @@ class ProductRepo
     public static function DeleteByIds($ids)
     {
         Product::query()->whereIn('id', $ids)->delete();
-        ProductSku::query()->whereIn('product_id', $ids)->delete();
-        ProductDescription::query()->whereIn('product_id', $ids)->delete();
-        ProductCategory::query()->whereIn('product_id', $ids)->delete();
     }
 
     public static function updateStatusByIds($ids, $status)
     {
-        Product::query()->whereIn('id', $ids)->update(['status' => $status]);
+        Product::query()->whereIn('id', $ids)->update(['active' => $status]);
     }
 }
