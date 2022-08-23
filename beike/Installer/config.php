@@ -13,7 +13,7 @@ return [
     |
     */
     'core' => [
-        'minPhpVersion' => '7.0.0',
+        'minPhpVersion' => '8.0.2',
     ],
     'final' => [
         'key' => true,
