@@ -23,9 +23,9 @@ return [
     'send_code' => 'Send Code',
     'to_back' => 'Back to previous step',
     'enter_password' => 'Please enter password',
-    'enter_email' => 'please input your email',
+    'enter_email' => 'Please input your email',
     'please_confirm' => 'Please confirm your password',
     'password_err' => 'The passwords entered twice do not match!',
     'email_err' => 'Please enter a valid email address!',
-    'enter_code' => 'please enter verification code',
+    'enter_code' => 'Please enter verification code',
 ];

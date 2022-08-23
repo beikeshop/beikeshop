@@ -27,7 +27,7 @@ return [
     'confirm_password' => 'Confirm Password',
     'register' => 'Register',
     'enter_password' => 'Please enter password',
-    'enter_email' => 'please input your email',
+    'enter_email' => 'Please input your email',
     'please_confirm' => 'Please confirm your password',
     'password_err' => 'The passwords entered twice do not match!',
     'email_err' => 'Please enter a valid email address!',
