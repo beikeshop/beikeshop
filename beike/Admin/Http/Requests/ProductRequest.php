@@ -36,8 +36,8 @@ class ProductRequest extends FormRequest
             'descriptions.*.name' => 'required|string|min:3|max:32',
             // 'descriptions.*.description' => 'required|string',
             'brand_id' => 'int',
-            'sku' => 'required|string',
-            'price' => 'required|float',
+            'skus.*.sku' => 'required|string',
+            'skus.*.price' => 'required|numeric',
         ];
     }
 }
