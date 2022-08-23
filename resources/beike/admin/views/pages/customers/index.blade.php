@@ -160,7 +160,8 @@
           }).then(() => {
             $http.delete(url).then((res) => {
               self.$message.success(res.message);
-              self.customers.splice(index, 1)
+              window.location.reload();
+              // self.customers.splice(index, 1)
             })
           }).catch(()=>{})
         },
