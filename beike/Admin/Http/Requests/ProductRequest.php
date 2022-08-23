@@ -40,4 +40,14 @@ class ProductRequest extends FormRequest
             'skus.*.price' => 'required|numeric',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'descriptions.*.name' => trans('admin::product.name'),
+            'brand_id' => trans('admin::product.brand'),
+            'skus.*.sku' => trans('admin::product.sku'),
+            'skus.*.price' => trans('admin::product.price')
+        ];
+    }
 }

@@ -17,4 +17,9 @@ return [
     'products_delete' => 'Delete',
     'products_trashed' => 'Trashed',
     'products_restore' => 'restore',
+
+    'name' => 'Product Name',
+    'sku' => 'SKU',
+    'price' => 'Price',
+    'Brand' => 'Brand',
 ];
