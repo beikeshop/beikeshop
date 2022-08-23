@@ -102,12 +102,6 @@ class ProductRepo
             });
         }
 
-        if (isset($data['model'])) {
-            $builder->whereHas('skus', function ($query) use ($data) {
-                $query->where('sku', 'like', "%{$data['sku']}%");
-            });
-        }
-
         if (isset($data['name'])) {
             $builder->whereHas('description', function ($query) use ($data) {
                 $query->where('name', 'like', "%{$data['name']}%");

@@ -27,6 +27,11 @@
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+              <label class="filter-title">{{ __('product.model') }}</label>
+              <input type="text" v-model="filter.model" class="form-control" placeholder="model">
+            </div>
+
+            <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.category') }}</label>
               <select v-model="filter.category_id" class="form-control">
                 <option value="0">全部</option>
@@ -147,6 +152,7 @@
           name: bk.getQueryString('name'),
           category_id: bk.getQueryString('category_id'),
           sku: bk.getQueryString('sku'),
+          model: bk.getQueryString('model'),
           active: bk.getQueryString('active'),
         },
         selected: [],

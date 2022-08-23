@@ -15,4 +15,5 @@ return [
     'price' => 'Price',
     'brand' => 'Brand',
     'category' => 'Category',
+    'model' => 'Model',
 ];
