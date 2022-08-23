@@ -61,10 +61,10 @@
           </a>
 
           <div class="right">
-            <button class="btn btn-outline-secondary">批量删除</button>
-            <button class="btn btn-outline-secondary">批量上架</button>
-            <button class="btn btn-outline-secondary">批量下架</button>
-            <button class="btn btn-outline-secondary">批量改价</button>
+            <button class="btn btn-outline-secondary" @click="batchDelete">批量删除</button>
+            <button class="btn btn-outline-secondary" @click="batchActive(true)">批量上架</button>
+            <button class="btn btn-outline-secondary" @click="batchActive(false)">批量下架</button>
+            {{-- <button class="btn btn-outline-secondary">批量改价</button> --}}
           </div>
         </div>
 
@@ -206,6 +206,26 @@
           })
         },
 
+        batchDelete() {
+          this.$confirm('确认要批量删除选中的商品吗？', '删除商品', {
+            type: 'warning'
+          }).then(() => {
+            $http.delete('products/delete', {ids: this.selected}).then((res) => {
+              location.reload();
+            })
+          });
+        },
+
+        batchActive (type) {
+          this.$confirm('确认要批量修改选中的商品的状态吗？', '修改状态', {
+            type: 'warning'
+          }).then(() => {
+            $http.post('products/status', {ids: this.selected, status: type}).then((res) => {
+              location.reload();
+            })
+          });
+        },
+
         search: function() {
           this.page = 1;
           this.loadData();
@@ -219,7 +239,7 @@
         deleteProduct: function(index) {
           const product = this.product.data[index];
 
-          this.$confirm('确认要删除选中的商品吗？', '删除商品', {
+          this.$confirm('确认要删除商品吗？', '删除商品', {
             type: 'warning'
           }).then(() => {
             $http.delete('products/' + product.id).then((res) => {
