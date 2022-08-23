@@ -14,5 +14,6 @@ return [
     'customer_groups_create' => 'Create',
     'customer_groups_show' => 'Detail',
     'customer_groups_update' => 'Edit',
-    'customer_groups_delete' => 'Delete'
+    'customer_groups_delete' => 'Delete',
+    'default_cannot_delete' => 'Default customer group cannot be deleted',
 ];

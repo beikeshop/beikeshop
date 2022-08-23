@@ -15,4 +15,5 @@ return [
     'customer_groups_show' => '客户组详情',
     'customer_groups_update' => '更新客户组',
     'customer_groups_delete' => '删除客户组',
+    'default_cannot_delete' => '默认客户组不能删除',
 ];
