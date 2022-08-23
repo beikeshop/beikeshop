@@ -33,6 +33,7 @@ return [
     'delete' => 'Delete',
     'sign_out' => 'Sign Out',
     'contact_us' => 'Contact us',
+    'input' => 'Type your search here',
 
     'order' => [
         'unpaid' => 'Unpaid',

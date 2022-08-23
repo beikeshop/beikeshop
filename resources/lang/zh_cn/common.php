@@ -32,6 +32,7 @@ return [
     'delete' => '删除',
     'sign_out' => '退出登录',
     'contact_us' => '联系我们',
+    'input' => '在此处输入您的搜索',
 
     'order' => [
         'unpaid' => '待支付',
