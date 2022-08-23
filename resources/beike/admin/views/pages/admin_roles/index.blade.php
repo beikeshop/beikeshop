@@ -20,7 +20,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>名称</th>
             <th>创建时间</th>
             <th>修改时间</th>

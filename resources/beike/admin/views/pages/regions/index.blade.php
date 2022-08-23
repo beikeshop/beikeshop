@@ -11,7 +11,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>名称</th>
             <th>描述</th>
             <th>创建时间</th>

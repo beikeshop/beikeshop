@@ -11,7 +11,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>名称</th>
             <th>编码</th>
             <th>左符号</th>

@@ -20,7 +20,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>税种</th>
             <th>税率</th>
             <th>类型</th>

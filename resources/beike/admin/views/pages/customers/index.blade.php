@@ -11,7 +11,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>邮箱</th>
             <th>名称</th>
             <th>注册来源</th>

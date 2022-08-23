@@ -20,7 +20,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>#</th>
+            <th>ID</th>
             <th>账号名称</th>
             <th>邮箱</th>
             <th>角色</th>
