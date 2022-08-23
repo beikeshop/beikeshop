@@ -151,4 +151,19 @@ class ProductController extends Controller
 
         return json_success(trans('common.get_success'), $products);
     }
+
+    public function updateStatus(Request $request)
+    {
+        ProductRepo::updateStatusByIds($request->get('ids'));
+
+        return json_success(trans('common.updated_success'), []);
+    }
+
+
+    public function destroyByIds(Request $request)
+    {
+        ProductRepo::DeleteByIds($request->get('ids'));
+
+        return json_success(trans('common.deleted_success'), []);
+    }
 }

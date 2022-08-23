@@ -12,6 +12,9 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Product;
+use Beike\Models\ProductCategory;
+use Beike\Models\ProductDescription;
+use Beike\Models\ProductSku;
 use Illuminate\Database\Eloquent\Builder;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Database\Eloquent\Collection;
@@ -232,5 +235,17 @@ class ProductRepo
             ->whereIn('id', $productIds)
             ->get();
         return $products;
+    }
+    public static function DeleteByIds($ids, $price)
+    {
+        Product::query()->whereIn('id', $ids)->delete();
+        ProductSku::query()->whereIn('product_id', $ids)->delete();
+        ProductDescription::query()->whereIn('product_id', $ids)->delete();
+        ProductCategory::query()->whereIn('product_id', $ids)->delete();
+    }
+
+    public static function updateStatusByIds($ids, $status)
+    {
+        Product::query()->whereIn('id', $ids)->update('status', $status);
     }
 }
