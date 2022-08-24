@@ -75,7 +75,7 @@
         </tbody>
       </table>
 
-      {{ $orders->links('admin::vendor/pagination/bootstrap-4') }}
+      {{ $orders->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
     </div>
   </div>
 @endsection
