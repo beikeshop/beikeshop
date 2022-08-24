@@ -287,7 +287,7 @@
         </div>
 
 
-        <div class="col-sm-6">
+        {{-- <div class="col-sm-6">
           <label class="form-label">
             {{ trans($entry_key . 'app_tabs.mail_driver_label') }}
           </label>
@@ -346,7 +346,7 @@
             value="{{ old('mail_encryption', '') }}" type="password" placeholder="{{ trans($entry_key . 'app_tabs.mail_encryption_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_encryption') ? $errors->first('mail_encryption') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_encryption_label')]) }}</span>
-        </div>
+        </div> --}}
 
 
         <div class="col-sm-12 my-5">
