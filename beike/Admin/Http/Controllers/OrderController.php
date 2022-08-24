@@ -11,12 +11,12 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Resources\OrderSimple;
 use Beike\Models\Order;
+use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
+use Beike\Admin\Http\Resources\OrderSimple;
 use Beike\Shop\Http\Resources\Account\OrderList;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
