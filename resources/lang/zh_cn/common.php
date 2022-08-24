@@ -39,6 +39,7 @@ return [
     'operate' => '操作',
     'add' => '添加',
     'please_choose' => '请选择',
+    'recommend_size' => '建议尺寸',
 
     'order' => [
         'unpaid' => '待支付',

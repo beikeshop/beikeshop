@@ -40,6 +40,7 @@ return [
     'operate' => 'Operate',
     'add' => 'Add',
     'please_choose' => 'Please Choose',
+    'recommend_size' => 'Recommend Size',
 
     'order' => [
         'unpaid' => 'Unpaid',
