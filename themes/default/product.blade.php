@@ -44,13 +44,15 @@
         <div class="peoduct-info">
           <h1 class="mb-4">{{ $product['name'] }}</h1>
           <div class="stock-and-sku mb-4">
-            <span :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
-              {{-- @{{ product.quantity > 0 ? 'In Stock' : 'Out Stock' }} --}}
-              <template v-if="product.quantity > 0">{{ __('shop/products.in_stock') }}</template>
-              <template v-else>{{ __('shop/products.out_stock') }}</template>
-            </span>
-            <span class="ms-3 text-muted">SKU: @{{ product.sku }}</span>
-            <span class="ms-3 text-muted">{{ __('shop/products.model') }}: @{{ product.model }}</span>
+            <div class="d-flex">
+              <span class="title text-muted">{{ __('product.quantity') }}:</span>
+              <div :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
+                <template v-if="product.quantity > 0">{{ __('shop/products.in_stock') }}</template>
+                <template v-else>{{ __('shop/products.out_stock') }}</template>
+              </div>
+            </div>
+            <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
+            <div class="d-flex"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
           </div>
           @if (0)
           <div class="rating-wrap d-flex">

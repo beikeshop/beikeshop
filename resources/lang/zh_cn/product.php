@@ -15,5 +15,6 @@ return [
     'price' => '价格',
     'brand' => '品牌',
     'category' => '分类',
-    'model' => '型号'
+    'model' => '型号',
+    'quantity' => '库存'
 ];

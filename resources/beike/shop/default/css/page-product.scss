@@ -91,6 +91,17 @@ body.page-product {
     }
   }
 
+  .stock-and-sku {
+    > div {
+      margin-bottom: 10px;
+      font-size: 14px;
+
+      .title {
+        width: 80px;
+      }
+    }
+  }
+
   .variables-wrap {
     .variable-info {
       > div {

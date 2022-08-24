@@ -3,6 +3,10 @@
   font-family: "poppins";
   src: url("/fonts/poppins/Poppins-Regular.ttf");
 }
+@font-face {
+  font-family: "poppins-bold";
+  src: url("/fonts/poppins/Poppins-Bold.ttf");
+}
 .min-h1 {
   min-height: 100px;
 }
@@ -531,6 +535,10 @@ body.page-seller-product .share-link-pop .share-links-code img {
   background-color: #fd560f;
   border-color: #fd560f;
   color: #fff;
+}
+
+table.table thead th, .fw-bold, h1, h2, h3, h4, h5, h6, b, strong, .card .card-header {
+  font-family: "poppins-bold", sans-serif;
 }
 
 [v-cloak] {

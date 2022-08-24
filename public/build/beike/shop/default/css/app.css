@@ -24,6 +24,10 @@ body[class^=page-account-] {
   font-family: "poppins";
   src: url("/fonts/poppins/Poppins-Regular.ttf");
 }
+@font-face {
+  font-family: "poppins-bold";
+  src: url("/fonts/poppins/Poppins-Bold.ttf");
+}
 .min-h1 {
   min-height: 100px;
 }
@@ -494,6 +498,10 @@ body[class^=page-account-] {
   color: #fff;
 }
 
+table.table thead th, .fw-bold, h1, h2, h3, h4, h5, h6, b, strong, .card .card-header {
+  font-family: "poppins-bold", sans-serif;
+}
+
 header {
   background: #fff;
 }
@@ -880,6 +888,13 @@ body.page-product .product-image .left .swiper-pager .swiper-button-prev::after 
 }
 body.page-product .product-image .right {
   border: 1px solid #eee;
+}
+body.page-product .stock-and-sku > div {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+body.page-product .stock-and-sku > div .title {
+  width: 80px;
 }
 body.page-product .variables-wrap .variable-info > div {
   display: inline-flex;
