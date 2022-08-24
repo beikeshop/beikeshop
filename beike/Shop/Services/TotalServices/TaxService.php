@@ -17,8 +17,13 @@ use Beike\Shop\Services\TotalService;
 
 class TaxService
 {
-    public static function getTotal(TotalService $totalService)
+    public static function getTotal(TotalService $totalService): ?array
     {
+        $taxEnabled = system_setting('base.tax', false);
+        if (!$taxEnabled) {
+            return null;
+        }
+
         $taxes = $totalService->taxes;
 
         $totalItems = [];
