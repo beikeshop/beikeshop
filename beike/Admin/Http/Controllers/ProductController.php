@@ -64,9 +64,12 @@ class ProductController extends Controller
     {
         try {
             (new ProductService)->create($request->all());
-            return redirect()->to($this->getRedirect())->with('success', trans('common.created_success'));
+            return redirect()->to(admin_route('products.index'))
+                ->with('success', trans('common.created_success'));
         } catch (\Exception $e) {
-            return redirect(admin_route('product.create'))->withErrors(['error' => $e->getMessage()]);
+            return redirect(admin_route('products.create'))
+                ->withInput()
+                ->withErrors(['error' => $e->getMessage()]);
         }
     }
 

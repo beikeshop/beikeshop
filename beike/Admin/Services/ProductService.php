@@ -26,6 +26,7 @@ class ProductService
         try {
             DB::beginTransaction();
 
+            $data['brand_id'] = (int)$data['brand_id'];
             $data['variables'] = json_decode($data['variables']);
             $product->fill($data);
             $product->save();
@@ -47,6 +48,9 @@ class ProductService
             $skus = [];
             foreach ($data['skus'] as $index => $sku) {
                 $sku['position'] = $index;
+                $sku['origin_price'] = (float)$sku['origin_price'];
+                $sku['cost_price'] = (float)$sku['cost_price'];
+                $sku['quantity'] = (int)$sku['quantity'];
                 $skus[] = $sku;
             }
             $product->skus()->createMany($skus);
