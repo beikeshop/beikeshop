@@ -36,7 +36,7 @@ return [
     'created_at' => '创建时间',
     'updated_at' => '修改时间',
     'edit' => '编辑',
-    'operate' => '操作',
+    'action' => '操作',
     'add' => '添加',
     'please_choose' => '请选择',
     'recommend_size' => '建议尺寸',

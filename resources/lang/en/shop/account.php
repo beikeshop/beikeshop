@@ -54,7 +54,6 @@ return [
         'order_details' => 'Order Details',
         'amount' => 'Amount',
         'state' => 'State',
-        'operate' => 'Operate',
         'order_number' => 'Order Number',
         'check' => 'Check',
 
@@ -116,7 +115,6 @@ return [
         'service_type' => 'Service Type',
         'return_reason' => 'Reason For Return',
         'creation_time' => 'Creation Time',
-        'operate' => 'Operate',
         'check' => 'Check',
 
         'rma_info' => [

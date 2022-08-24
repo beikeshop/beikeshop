@@ -16,7 +16,7 @@
             <th>{{ __('admin/region.describe') }}</th>
             <th>{{ __('common.created_at') }}</th>
             <th>{{ __('common.updated_at') }}</th>
-            <th class="text-end">{{ __('common.operate') }}</th>
+            <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>

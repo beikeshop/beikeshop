@@ -16,7 +16,6 @@ return [
     'commodity' => '商品',
     'quantity' => '数量',
     'subtotal' => '小计',
-    'operate' => '操作',
     'product_total' => '商品总计',
     'all' => '全部',
     'selected' => '已选',

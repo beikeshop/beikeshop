@@ -54,7 +54,6 @@ return [
         'order_details' => '订单详情',
         'amount' => '金额',
         'state' => '状态',
-        'operate' => '操作',
         'order_number' => '订单号',
         'check' => '查看',
 
@@ -116,7 +115,6 @@ return [
         'service_type' => '服务类型',
         'return_reason' => '退换原因',
         'creation_time' => '创建时间',
-        'operate' => '操作',
         'check' => '查看',
 
         'rma_info' => [

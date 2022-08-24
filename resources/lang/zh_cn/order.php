@@ -13,9 +13,11 @@ return [
     'id' => 'ID',
     'number' => '订单号',
     'customer_name' => '客户姓名',
+    'payment_method' => '支付方式',
     'email' => 'Email',
     'telephone' => '联系电话',
     'created_at' => '创建时间',
     'updated_at' => '更新时间',
     'status' => '状态',
+    'total' => '订单总额',
 ];

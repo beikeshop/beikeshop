@@ -46,15 +46,15 @@
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>订单号</th>
-            <th>客户姓名</th>
-            <th>支付方式</th>
-            <th>状态</th>
-            <th>总计</th>
-            <th>生成日期</th>
-            <th>修改日期</th>
-            <th>操作</th>
+            <th>{{ __('order.id') }}</th>
+            <th>{{ __('order.number') }}</th>
+            <th>{{ __('order.customer_name') }}</th>
+            <th>{{ __('order.payment_method') }}</th>
+            <th>{{ __('order.status') }}</th>
+            <th>{{ __('order.total') }}</th>
+            <th>{{ __('order.created_at') }}</th>
+            <th>{{ __('order.updated_at') }}</th>
+            <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>

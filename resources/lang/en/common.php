@@ -37,7 +37,7 @@ return [
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
     'edit' => 'Edit',
-    'operate' => 'Operate',
+    'action' => 'Action',
     'add' => 'Add',
     'please_choose' => 'Please Choose',
     'recommend_size' => 'Recommend Size',

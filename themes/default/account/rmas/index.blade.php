@@ -3,9 +3,9 @@
 @section('body-class', 'page-account-rmas')
 
 @section('content')
-  <div class="container"> 
+  <div class="container">
 
-    <x-shop-breadcrumb type="static" value="account.rma.index" /> 
+    <x-shop-breadcrumb type="static" value="account.rma.index" />
 
     {{-- <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -32,7 +32,7 @@
                   <th>{{ __('shop/account.rma.return_reason') }}</th>
                   <th>{{ __('shop/account.rma.creation_time') }}</th>
                   {{-- <th>状态</th> --}}
-                  <th class="text-end">{{ __('shop/account.rma.operate') }}</th>
+                  <th class="text-end">{{ __('common.action') }}</th>
                 </tr>
               </thead>
               <tbody>

@@ -36,7 +36,7 @@
                 <th>{{ __('shop/carts.index') }}</th>
                 <th width="170">{{ __('shop/carts.commodity') }}</th>
                 <th width="170">{{ __('shop/carts.subtotal') }}</th>
-                <th class="text-end">{{ __('shop/carts.operate') }}</th>
+                <th class="text-end">{{ __('common.action') }}</th>
               </tr>
             </thead>
             <tbody>

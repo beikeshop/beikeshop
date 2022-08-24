@@ -16,7 +16,6 @@ return [
     'commodity' => 'Commodity',
     'quantity' => 'Quantity',
     'subtotal' => 'Subtotal',
-    'operate' => 'Operate',
     'product_total' => 'Product Totals',
     'all' => 'All',
     'selected' => 'Selected',

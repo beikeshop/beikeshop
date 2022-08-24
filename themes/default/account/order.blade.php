@@ -25,7 +25,7 @@
                   <th>{{ __('shop/account.order.order_details') }}</th>
                   <th>{{ __('shop/account.order.amount') }}</th>
                   <th>{{ __('shop/account.order.state') }}</th>
-                  <th class="text-end">{{ __('shop/account.order.operate') }}</th>
+                  <th class="text-end">{{ __('common.action') }}</th>
                 </tr>
               </thead>
               @foreach ($orders as $order)
