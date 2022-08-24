@@ -17,9 +17,6 @@
             <el-form-item label="邮箱">
               <el-input v-model="filter.email" size="small" placeholder="邮箱"></el-input>
             </el-form-item>
-            <el-form-item label="电话">
-              <el-input v-model="filter.telephone" size="small" placeholder="电话"></el-input>
-            </el-form-item>
           </div>
           <el-form-item label="订单日期">
             <el-form-item>
@@ -91,7 +88,6 @@
           number: bk.getQueryString('number'),
           customer_name: bk.getQueryString('customer_name'),
           email: bk.getQueryString('email'),
-          telephone: bk.getQueryString('telephone'),
           start: bk.getQueryString('start'),
           end: bk.getQueryString('end'),
         },
