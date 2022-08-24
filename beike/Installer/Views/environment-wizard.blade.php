@@ -280,8 +280,10 @@
           <label class="form-label">
             {{ trans($entry_key . 'db_password_label') }}
           </label>
-          <input class="form-control" name="database_password"
+          <input class="form-control {{ $errors->has('database_password') ? 'is-invalid' : '' }}" name="database_password"
             value="{{ old('database_password', '') }}" placeholder="{{ trans($entry_key . 'db_password_placeholder') }}">
+          <span class="invalid-feedback"
+            role="alert">{{ $errors->has('database_password') ? $errors->first('database_password') : __('common.error_required', ['name' => trans($entry_key . 'db_password_label')]) }}</span>
         </div>
 
 
@@ -301,7 +303,7 @@
             {{ trans($entry_key . 'app_tabs.mail_host_label') }}
           </label>
           <input class="form-control {{ $errors->has('mail_host') ? 'is-invalid' : '' }}" name="mail_host"
-            value="{{ old('mail_host', '') }}" required placeholder="{{ trans($entry_key . 'app_tabs.mail_host_placeholder') }}">
+            value="{{ old('mail_host', '') }}" placeholder="{{ trans($entry_key . 'app_tabs.mail_host_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_host') ? $errors->first('mail_host') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_host_label')]) }}</span>
         </div>
@@ -311,7 +313,7 @@
             {{ trans($entry_key . 'app_tabs.mail_port_label') }}
           </label>
           <input class="form-control {{ $errors->has('mail_port') ? 'is-invalid' : '' }}" name="mail_port"
-            value="{{ old('mail_port', '') }}" required placeholder="{{ trans($entry_key . 'app_tabs.mail_port_placeholder') }}">
+            value="{{ old('mail_port', '') }}" placeholder="{{ trans($entry_key . 'app_tabs.mail_port_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_port') ? $errors->first('mail_port') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_port_label')]) }}</span>
         </div>
@@ -321,7 +323,7 @@
             {{ trans($entry_key . 'app_tabs.mail_username_label') }}
           </label>
           <input class="form-control {{ $errors->has('mail_username') ? 'is-invalid' : '' }}" name="mail_username"
-            value="{{ old('mail_username', '') }}" required placeholder="{{ trans($entry_key . 'app_tabs.mail_username_placeholder') }}">
+            value="{{ old('mail_username', '') }}" placeholder="{{ trans($entry_key . 'app_tabs.mail_username_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_username') ? $errors->first('mail_username') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_username_label')]) }}</span>
         </div>
@@ -331,7 +333,7 @@
             {{ trans($entry_key . 'app_tabs.mail_password_label') }}
           </label>
           <input class="form-control {{ $errors->has('mail_password') ? 'is-invalid' : '' }}" name="mail_password"
-            value="{{ old('mail_password', '') }}" type="password" required placeholder="{{ trans($entry_key . 'app_tabs.mail_password_placeholder') }}">
+            value="{{ old('mail_password', '') }}" type="password" placeholder="{{ trans($entry_key . 'app_tabs.mail_password_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_password') ? $errors->first('mail_password') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_password_label')]) }}</span>
         </div>
@@ -341,7 +343,7 @@
             {{ trans($entry_key . 'app_tabs.mail_encryption_label') }}
           </label>
           <input class="form-control {{ $errors->has('mail_encryption') ? 'is-invalid' : '' }}" name="mail_encryption"
-            value="{{ old('mail_encryption', '') }}" type="password" required placeholder="{{ trans($entry_key . 'app_tabs.mail_encryption_placeholder') }}">
+            value="{{ old('mail_encryption', '') }}" type="password" placeholder="{{ trans($entry_key . 'app_tabs.mail_encryption_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('mail_encryption') ? $errors->first('mail_encryption') : __('common.error_required', ['name' => trans($entry_key . 'app_tabs.mail_encryption_label')]) }}</span>
         </div>
