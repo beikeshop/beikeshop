@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Resources\OrderSimple;
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
@@ -40,14 +41,13 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @return mixed
+     * @throws \Exception
      */
     public function export(Request $request)
     {
         $orders = OrderRepo::filterOrders($request->all());
-        $data = [
-            'orders' => OrderList::collection($orders),
-        ];
-        return view('admin::pages.orders.index', $data);
+        $items = OrderSimple::collection($orders)->jsonSerialize();
+        return $this->downloadCsv('orders', $items, 'order');
     }
 
 

@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "ext-json": "*",
         "ext-zip": "*",
+        "ext-iconv": "*",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
