@@ -43,6 +43,10 @@
       <div class="col-12 col-lg-6">
         <div class="peoduct-info">
           <h1 class="mb-4">{{ $product['name'] }}</h1>
+          <div class="price-wrap d-flex align-items-end">
+            <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
+            <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
+          </div>
           <div class="stock-and-sku mb-4">
             <div class="d-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
@@ -64,10 +68,7 @@
             <span class="text-muted">132 reviews</span>
           </div>
           @endif
-          <div class="price-wrap d-flex align-items-end">
-            <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
-            <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
-          </div>
+
 
           <div class="variables-wrap mb-4" v-if="source.variables.length">
             <div class="variable-group mb-2" v-for="variable, variable_index in source.variables" :key="variable_index">
