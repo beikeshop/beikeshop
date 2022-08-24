@@ -27,7 +27,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $orders = OrderRepo::getListAll();
+        $orders = OrderRepo::filterOrders($request->all());
         $data = [
             'orders' => OrderList::collection($orders),
         ];

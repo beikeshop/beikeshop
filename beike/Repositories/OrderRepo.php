@@ -78,6 +78,26 @@ class OrderRepo
     {
         $builder = Order::query()->with(['orderProducts']);
 
+        $number = $filters['number'] ?? 0;
+        if ($number) {
+            $builder->where('number', 'like', "%{$number}%");
+        }
+
+        $customerName = $filters['customer_name'] ?? '';
+        if ($customerName) {
+            $builder->where('customer_name', 'like', "%{$customerName}%");
+        }
+
+        $email = $filters['email'] ?? '';
+        if ($email) {
+            $builder->where('email', 'like', "%{$email}%");
+        }
+
+        $phone = $filters['phone'] ?? '';
+        if ($phone) {
+            $builder->where('phone', 'like', "%{$phone}%");
+        }
+
         $customer = $filters['customer'] ?? null;
         if ($customer) {
             $builder->where('customer_id', $customer->id);
@@ -182,7 +202,7 @@ class OrderRepo
             'shipping_method_name' => trans($shippingMethodCode),
             'shipping_customer_name' => $shippingAddress->name,
             'shipping_calling_code' => $shippingAddress->calling_code ?? 0,
-            'shipping_telephone' => $shippingAddress->telephone ?? '',
+            'shipping_telephone' => $shippingAddress->phone ?? '',
             'shipping_country' => $shippingAddress->country->name ?? '',
             'shipping_zone' => $shippingAddress->zone,
             'shipping_city' => $shippingAddress->city,
@@ -192,7 +212,7 @@ class OrderRepo
             'payment_method_name' => trans($paymentMethodCode),
             'payment_customer_name' => $paymentAddress->name,
             'payment_calling_code' => $paymentAddress->calling_code ?? 0,
-            'payment_telephone' => $paymentAddress->telephone ?? '',
+            'payment_telephone' => $paymentAddress->phone ?? '',
             'payment_country' => $paymentAddress->country->name ?? '',
             'payment_zone' => $paymentAddress->zone,
             'payment_city' => $paymentAddress->city,
