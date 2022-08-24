@@ -349,7 +349,7 @@
         </div>
 
 
-        <div class="col-sm-12 mt-5">
+        <div class="col-sm-12 my-5">
           <div class="d-flex justify-content-end">
             <button class="btn btn-primary d-flex align-items-center" type="submit">
               {{ trans('installer::installer_messages.environment.wizard.form.buttons.install') }}
