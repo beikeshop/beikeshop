@@ -3,7 +3,6 @@
 namespace Beike\Installer\Controllers;
 
 use Illuminate\Routing\Controller;
-use RachidLaasri\LaravelInstaller\Events\LaravelInstallerFinished;
 use Beike\Installer\Helpers\EnvironmentManager;
 use Beike\Installer\Helpers\FinalInstallManager;
 use Beike\Installer\Helpers\InstalledFileManager;
@@ -23,8 +22,6 @@ class FinalController extends Controller
         $finalMessages = $finalInstall->runFinal();
         $finalStatusMessage = $fileManager->update();
         $finalEnvFile = $environment->getEnvContent();
-
-        event(new LaravelInstallerFinished);
 
         $steps = 5;
 

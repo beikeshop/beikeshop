@@ -2,6 +2,7 @@
 
 namespace Beike\Installer\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,8 @@ class InstallerServiceProvider extends ServiceProvider
         if (!Str::startsWith($uri, "/installer")) {
             return;
         }
+
+        Schema::defaultStringLength(191);
 
         $this->mergeConfigFrom(__DIR__ . '/../config.php', 'installer');
         $this->loadViewsFrom(__DIR__ . '/../Views', 'installer');
