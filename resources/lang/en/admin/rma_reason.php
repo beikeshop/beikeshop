@@ -10,6 +10,9 @@
  */
 
 return [
+    'rule' => 'Rule',
+    'based_on' => 'Based On',
+    'priority' => 'Priority',
     'rma_reasons_index' => 'Index',
     'rma_reasons_create' => 'Create',
     'rma_reasons_update' => 'Update',

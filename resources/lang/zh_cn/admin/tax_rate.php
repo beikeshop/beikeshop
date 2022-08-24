@@ -10,6 +10,12 @@
  */
 
 return [
+    'index' => '税率设置',
+    'tax_classes_index' => '税类设置',
+    'tax' => '税种',
+    'tax_rate' => '税率',
+    'type' => '类型',
+    'area' => '区域',
     'tax_rates_index' => '税率列表',
     'tax_rates_create' => '创建税率',
     'tax_rates_show' => '税率详情',

@@ -1,22 +1,22 @@
 @extends('admin::layouts.master')
 
-@section('title', '区域组')
+@section('title', __('admin/region.index'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button>
+        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>描述</th>
-            <th>创建时间</th>
-            <th>修改时间</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('admin/region.name') }}</th>
+            <th>{{ __('admin/region.describe') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th>{{ __('common.updated_at') }}</th>
+            <th class="text-end">{{ __('common.operate') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -27,8 +27,8 @@
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>

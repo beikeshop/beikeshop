@@ -10,6 +10,9 @@
  */
 
 return [
+    'rule' => 'Rule',
+    'based_on' => 'Based',
+    'priority' => 'Priority',
     'tax_classes_index' => 'Index',
     'tax_classes_create' => 'Create',
     'tax_classes_show' => 'Detail',

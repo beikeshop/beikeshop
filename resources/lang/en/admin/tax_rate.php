@@ -10,6 +10,12 @@
  */
 
 return [
+    'index' => 'Tax Rate',
+    'tax_classes_index' => 'Tax Classes',
+    'tax' => 'Tax',
+    'tax_rate' => 'Tax Rate',
+    'type' => 'Type',
+    'area' => 'Area',
     'tax_rates_index' => 'Index',
     'tax_rates_create' => 'Create',
     'tax_rates_show' => 'Detail',

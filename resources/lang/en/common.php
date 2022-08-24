@@ -34,6 +34,12 @@ return [
     'sign_out' => 'Sign Out',
     'contact_us' => 'Contact us',
     'input' => 'Type your search here',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
+    'edit' => 'Edit',
+    'operate' => 'Operate',
+    'add' => 'Add',
+    'please_choose' => 'Please Choose',
 
     'order' => [
         'unpaid' => 'Unpaid',

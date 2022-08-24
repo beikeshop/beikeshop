@@ -33,6 +33,12 @@ return [
     'sign_out' => '退出登录',
     'contact_us' => '联系我们',
     'input' => '在此处输入您的搜索',
+    'created_at' => '创建时间',
+    'updated_at' => '修改时间',
+    'edit' => '编辑',
+    'operate' => '操作',
+    'add' => '添加',
+    'please_choose' => '请选择',
 
     'order' => [
         'unpaid' => '待支付',

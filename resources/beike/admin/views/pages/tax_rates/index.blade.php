@@ -1,33 +1,33 @@
 @extends('admin::layouts.master')
 
-@section('title', '税率设置')
+@section('title', __('admin/tax_rate.index'))
 
 @section('content')
   <ul class="nav-bordered nav nav-tabs mb-3">
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="{{ admin_route('tax_classes.index') }}">税类设置</a>
+      <a class="nav-link" aria-current="page" href="{{ admin_route('tax_classes.index') }}">{{ __('admin/tax_rate.tax_classes_index') }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="{{ admin_route('tax_rates.index') }}">税率设置</a>
+      <a class="nav-link active" href="{{ admin_route('tax_rates.index') }}">{{ __('admin/tax_rate.index') }}</a>
     </li>
   </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button>
+        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>税种</th>
-            <th>税率</th>
-            <th>类型</th>
-            <th>区域</th>
-            <th>创建时间</th>
-            <th>修改时间</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('admin/tax_rate.tax') }}</th>
+            <th>{{ __('admin/tax_rate.tax_rate') }}</th>
+            <th>{{ __('admin/tax_rate.type') }}</th>
+            <th>{{ __('admin/tax_rate.area') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th>{{ __('common.updated_at') }}</th>
+            <th class="text-end">{{ __('common.operate') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -40,8 +40,8 @@
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -50,35 +50,35 @@
       {{-- {{ $tax_rates->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="税率" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/tax_rate.tax_rate') }}" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="税种" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="税种"></el-input>
+        <el-form-item label="{{ __('admin/tax_rate.tax') }}" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="{{ __('admin/tax_rate.tax') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="税率" prop="rate">
-          <el-input v-model="dialog.form.rate" placeholder="税率">
+        <el-form-item label="{{ __('admin/tax_rate.tax_rate') }}" prop="rate">
+          <el-input v-model="dialog.form.rate" placeholder="{{ __('admin/tax_rate.tax_rate') }}">
             <template slot="append" v-if="dialog.form.type == 'percent'">%</template>
           </el-input>
         </el-form-item>
 
-        <el-form-item label="类型">
-          <el-select v-model="dialog.form.type" size="small" placeholder="请选择">
+        <el-form-item label="{{ __('admin/tax_rate.type') }}">
+          <el-select v-model="dialog.form.type" size="small" placeholder="{{ __('common.please_choose') }}">
             <el-option v-for="type in source.types" :key="type.value" :label="type.name" :value="type.value"></el-option>
           </el-select>
         </el-form-item>
 
-        <el-form-item label="区域">
-          <el-select v-model="dialog.form.region_id" size="small" placeholder="请选择">
+        <el-form-item label="{{ __('admin/tax_rate.area') }}">
+          <el-select v-model="dialog.form.region_id" size="small" placeholder="{{ __('common.please_choose') }}">
             <el-option v-for="region in source.regions" :key="region.value" :label="region.name" :value="region.id"></el-option>
           </el-select>
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
