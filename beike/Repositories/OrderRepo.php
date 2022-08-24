@@ -11,11 +11,12 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Address;
 use Carbon\Carbon;
 use Beike\Models\Order;
+use Beike\Models\Address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class OrderRepo
@@ -23,12 +24,13 @@ class OrderRepo
     /**
      * 获取所有客户订单列表
      *
-     * @return LengthAwarePaginator
+     * @param array $filters
+     * @return Builder[]|Collection
      */
-    public static function getListAll(): LengthAwarePaginator
+    public static function filterAll(array $filters = [])
     {
-        $builder = self::getListBuilder()->orderByDesc('created_at');
-        return $builder->paginate();
+        $builder = self::getListBuilder($filters)->orderByDesc('created_at');
+        return $builder->get();
     }
 
 
