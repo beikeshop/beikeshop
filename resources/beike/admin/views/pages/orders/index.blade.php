@@ -105,14 +105,8 @@
             .map(key => key + '=' + this.filter[key])
             .join('&');
 
-          const page = bk.getQueryString('page');
-
-          if (page) {
-            query += '?page=' + page;
-          }
-
           if (filter) {
-            query += (page ? '&' : '?') + filter;
+            query += '?' + filter;
           }
 
           return query;

@@ -47,6 +47,38 @@
     </div>
   </div>
 
+  <div class="card mb-4">
+    <div class="card-header"><h6 class="card-title">地址信息</h6></div>
+    <div class="card-body">
+      <table class="table ">
+        <thead class="">
+          <tr>
+            <th>订单地址</th>
+            <th>账单地址</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div>{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
+              {{ $order->shipping_country }}
+              {{ $order->shipping_zone }}
+              {{ $order->shipping_city }}
+              {{ $order->shipping_address_1 }}
+            </td>
+            <td>
+              <div>{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
+              {{ $order->payment_country }}
+              {{ $order->payment_zone }}
+              {{ $order->payment_city }}
+              {{ $order->payment_address_1 }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   @can('orders_update_status')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">订单状态</h6></div>
