@@ -2,7 +2,6 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Models\Product;
 use Illuminate\Http\Request;
 use Beike\Repositories\ProductRepo;
@@ -10,6 +9,7 @@ use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Admin\Services\ProductService;
 use Beike\Admin\Repositories\TaxClassRepo;
+use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Admin\Http\Resources\ProductResource;
 
 class ProductController extends Controller
