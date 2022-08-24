@@ -280,10 +280,8 @@
           <label class="form-label">
             {{ trans($entry_key . 'db_password_label') }}
           </label>
-          <input class="form-control {{ $errors->has('database_password') ? 'is-invalid' : '' }}" name="database_password"
-            value="{{ old('database_password', '') }}" required placeholder="{{ trans($entry_key . 'db_password_placeholder') }}">
-          <span class="invalid-feedback"
-            role="alert">{{ $errors->has('database_password') ? $errors->first('database_password') : __('common.error_required', ['name' => trans($entry_key . 'db_password_label')]) }}</span>
+          <input class="form-control" name="database_password"
+            value="{{ old('database_password', '') }}" placeholder="{{ trans($entry_key . 'db_password_placeholder') }}">
         </div>
 
 
