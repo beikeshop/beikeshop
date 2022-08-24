@@ -62,7 +62,7 @@
               <td>{{ $order->customer_name }}</td>
               <td>{{ $order->payment_method_name }}</td>
               <td>{{ $order->status }}</td>
-              <td>{{ $order->total }}</td>
+              <td>{{ $order->total_format }}</td>
               <td>{{ $order->created_at }}</td>
               <td>{{ $order->updated_at }}</td>
               <td><a href="{{ admin_route('orders.show', [$order->id]) }}" class="btn btn-outline-secondary btn-sm">查看</a>

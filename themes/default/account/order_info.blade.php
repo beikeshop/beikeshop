@@ -42,7 +42,7 @@
                     <td>
                       {{ __("common.order.{$order->status}") }}
                     </td>
-                    <td>{{ currency_format($order->total) }}</td>
+                    <td>{{ $order->total_format }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -61,7 +61,7 @@
                   <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
                   <div class="right">
                     <div class="name">{{ $product->name }} x {{ $product->quantity }}</div>
-                    <div class="price">{{ currency_format($product->price) }}</div>
+                    <div class="price">{{ $product->price_format }}</div>
                   </div>
                 </div>
                 @if ($order->status == 'completed')
@@ -84,7 +84,7 @@
                   <tr>
                     @foreach ($totals as $total)
                       <td class="bg-light wp-200">{{ $total->title }}</td>
-                      <td><strong>{{ $total->value }}</strong></td>
+                      <td><strong>{{ $total->value_format }}</strong></td>
                     @endforeach
                   </tr>
                 @endforeach

@@ -20,7 +20,7 @@
               </tr>
               <tr>
                 <td>总计：</td>
-                <td>{{ $order->total }}</td>
+                <td>{{ $order->total_format }}</td>
               </tr>
             </tbody>
           </table>
@@ -134,7 +134,7 @@
                 <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
               </div>
             </td>
-            <td>{{ $product->price }}</td>
+            <td>{{ $product->price_format }}</td>
             <td class="text-end">{{ $product->quantity }}</td>
             <td class="text-end">{{ $product->product_sku }}</td>
           </tr>
@@ -144,7 +144,7 @@
           @foreach ($order->orderTotals as $orderTotal)
             <tr>
               <td colspan="4" class="text-end">{{ $orderTotal->title }}</td>
-              <td class="text-end"><span class="fw-bold">{{ $orderTotal->value }}</span></td>
+              <td class="text-end"><span class="fw-bold">{{ $orderTotal->value_format }}</span></td>
             </tr>
           @endforeach
         </tfoot>

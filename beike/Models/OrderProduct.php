@@ -24,4 +24,11 @@ class OrderProduct extends Base
         return $this->belongsTo(Order::class);
     }
 
+    protected $appends = ['price_format'];
+
+    public function getPriceFormatAttribute()
+    {
+        return currency_format($this->price);
+    }
+
 }
