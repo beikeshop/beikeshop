@@ -72,7 +72,7 @@ class PermissionRepo
      */
     private function getOrderPermissions(): array
     {
-        $routes = ['orders_index', 'orders_create', 'orders_show', 'orders_update', 'orders_delete', 'orders_update_status'];
+        $routes = ['orders_index', 'orders_export', 'orders_show', 'orders_update_status'];
         $items = $this->getPermissionList('order', $routes);
         return hook_filter('role.order_permissions', $items);
     }

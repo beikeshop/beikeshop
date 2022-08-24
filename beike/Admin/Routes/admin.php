@@ -111,6 +111,7 @@ Route::prefix($adminName)
 
                 // 订单
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
+                Route::middleware('can:orders_export')->get('orders/export', [Controllers\OrderController::class, 'export'])->name('orders.export');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/status', [Controllers\OrderController::class, 'updateStatus'])->name('orders.update_status');
 

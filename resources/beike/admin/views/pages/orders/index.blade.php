@@ -86,7 +86,7 @@
       el: '#app',
       data: {
         url: @json(admin_route('orders.index')),
-        exportUrl: @json(admin_route('orders.index')),
+        exportUrl: @json(admin_route('orders.export')),
         filter: {
           number: bk.getQueryString('number'),
           customer_name: bk.getQueryString('customer_name'),

@@ -36,6 +36,22 @@ class OrderController extends Controller
 
 
     /**
+     * 导出订单列表
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function export(Request $request)
+    {
+        $orders = OrderRepo::filterOrders($request->all());
+        $data = [
+            'orders' => OrderList::collection($orders),
+        ];
+        return view('admin::pages.orders.index', $data);
+    }
+
+
+    /**
      * 查看单个订单
      *
      * @param Request $request

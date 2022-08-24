@@ -11,16 +11,17 @@
 
 return [
     'list' => 'Order List',
+
     'orders_index' => 'Index',
+    'orders_create' => 'Create',
+    'orders_show' => 'Detail',
+    'orders_export' => 'Export',
+    'orders_update' => 'Update',
+    'orders_delete' => 'Delete',
+    'orders_update_status' => 'Update Status',
 
     'unpaid' => 'Unpaid',
     'paid' => 'Paid',
     'shipped' => 'Shipped',
     'completed' => 'Completed',
-
-    'orders_create' => 'Create',
-    'orders_show' => 'Detail',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
-    'orders_update_status' => 'Update Status',
 ];

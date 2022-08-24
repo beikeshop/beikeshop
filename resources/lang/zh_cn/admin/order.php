@@ -11,16 +11,17 @@
 
 return [
     'list' => '订单列表',
+
     'orders_index' => '订单列表',
+    'orders_create' => '创建订单',
+    'orders_show' => '订单详情',
+    'orders_export' => '导出订单',
+    'orders_update' => '更新订单',
+    'orders_delete' => '删除订单',
+    'orders_update_status' => '更新状态',
 
     'unpaid' => '待支付',
     'paid' => '已支付',
     'shipped' => '已发货',
     'completed' => '已完成',
-
-    'orders_create' => '创建订单',
-    'orders_show' => '订单详情',
-    'orders_update' => '更新订单',
-    'orders_delete' => '删除订单',
-    'orders_update_status' => '更新状态',
 ];
