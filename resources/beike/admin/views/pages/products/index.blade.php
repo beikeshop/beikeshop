@@ -8,9 +8,9 @@
 
 @section('content')
 
-    @if ($errors->has('error'))
-        <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
-    @endif
+  @if ($errors->has('error'))
+    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+  @endif
 
   <div id="product-app">
     <div class="card">
@@ -66,9 +66,11 @@
           </a>
 
           <div class="right">
-            <button class="btn btn-outline-secondary" @click="batchDelete">批量删除</button>
-            <button class="btn btn-outline-secondary" @click="batchActive(true)">批量上架</button>
-            <button class="btn btn-outline-secondary" @click="batchActive(false)">批量下架</button>
+            <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">批量删除</button>
+            <button class="btn btn-outline-secondary" :disabled="!selected.length"
+              @click="batchActive(true)">批量上架</button>
+            <button class="btn btn-outline-secondary" :disabled="!selected.length"
+              @click="batchActive(false)">批量下架</button>
             {{-- <button class="btn btn-outline-secondary">批量改价</button> --}}
           </div>
         </div>
@@ -77,7 +79,7 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th></th>
+                <th><input type="checkbox" v-model="allSelected" /></th>
                 <th>ID</th>
                 <th>图片</th>
                 <th>商品名称</th>
@@ -107,37 +109,37 @@
                 <th class="text-end">操作</th>
               </tr>
             </thead>
-            <tr v-for="(item, index) in product.data" :key="item.id">
-              <td>
-                <input type="checkbox" :value="item.id" v-model="selected" />
-              </td>
-              <td>@{{ item.id }}</td>
-              <td>
-                <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
-              </td>
-              <td>@{{ item.name || '无名称' }}</td>
-              <td>@{{ item.price_formatted }}</td>
-              <td>@{{ item.created_at }}</td>
-              <td>@{{ item.position }}</td>
-              @if ($type != 'trashed')
-                <td>@{{ item.active ? '上架' : '下架' }}</td>
-              @endif
-              <td width="140" class="text-end">
-                <template v-if="item.deleted_at == ''">
-                  <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
-                  <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
-                    @click.prevent="deleteProduct(index)">删除</a>
-                </template>
-                <template v-else>
-                  <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                    @click.prevent="restoreProduct(index)">恢复</a>
-                </template>
-              </td>
-            </tr>
+            <tbody>
+              <tr v-for="(item, index) in product.data" :key="item.id">
+                <td><input type="checkbox" :value="item.id" v-model="selected" /></td>
+                <td>@{{ item.id }}</td>
+                <td>
+                  <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
+                </td>
+                <td>@{{ item.name || '无名称' }}</td>
+                <td>@{{ item.price_formatted }}</td>
+                <td>@{{ item.created_at }}</td>
+                <td>@{{ item.position }}</td>
+                @if ($type != 'trashed')
+                  <td>@{{ item.active ? '上架' : '下架' }}</td>
+                @endif
+                <td width="140" class="text-end">
+                  <template v-if="item.deleted_at == ''">
+                    <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
+                    <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
+                      @click.prevent="deleteProduct(index)">删除</a>
+                  </template>
+                  <template v-else>
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                      @click.prevent="restoreProduct(index)">恢复</a>
+                  </template>
+                </td>
+              </tr>
+            </tbody>
           </table>
 
           <el-pagination layout="prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
-          :total="product.total"></el-pagination>
+            :total="product.total"></el-pagination>
         </template>
 
         <p v-else>无商品</p>
@@ -196,6 +198,15 @@
           }
 
           return url;
+        },
+
+        allSelected: {
+          get() {
+            return this.selected.length == this.product.data.length;
+          },
+          set(val) {
+            return this.selected = val ? this.product.data.map(e => e.id) : [];
+          }
         }
       },
 
@@ -220,18 +231,23 @@
           this.$confirm('确认要批量删除选中的商品吗？', '删除商品', {
             type: 'warning'
           }).then(() => {
-            $http.delete('products/delete', {ids: this.selected}).then((res) => {
+            $http.delete('products/delete', {
+              ids: this.selected
+            }).then((res) => {
               layer.msg(res.message)
               location.reload();
             })
           });
         },
 
-        batchActive (type) {
+        batchActive(type) {
           this.$confirm('确认要批量修改选中的商品的状态吗？', '修改状态', {
             type: 'warning'
           }).then(() => {
-            $http.post('products/status', {ids: this.selected, status: type}).then((res) => {
+            $http.post('products/status', {
+              ids: this.selected,
+              status: type
+            }).then((res) => {
               layer.msg(res.message)
               location.reload();
             })
@@ -266,7 +282,9 @@
           this.$confirm('确认要恢复选中的商品吗？', '恢复商品', {
             type: 'warning'
           }).then(() => {
-            $http.put('products/restore', {id: product.id}).then((res) => {
+            $http.put('products/restore', {
+              id: product.id
+            }).then((res) => {
               location.reload();
             })
           });
