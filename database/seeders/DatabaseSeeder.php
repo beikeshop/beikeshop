@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Beike\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        // $this->duplicate();
+       // Eloquent::unguard();
+
+        $installerPath = base_path('beike/Installer');
+        $path = $installerPath . '/database.sql';
+        DB::unprepared(file_get_contents($path));
+        $this->command->info('Database seeded!');
     }
 
     /**
