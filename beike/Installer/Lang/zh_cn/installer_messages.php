@@ -45,10 +45,32 @@ return [
      *
      */
     'environment' => [
-        'title' => '环境设置',
-        'save' => '保存 .env',
-        'success' => '.env 文件保存成功.',
-        'errors' => '无法保存 .env 文件, 请手动创建它.',
+        'wizard' => [
+            'form' => [
+                'app_url_label' => '您的应用URL',
+                'app_url_placeholder' => '输入您的应用URL',
+                'db_connection_failed' => '无法连接到数据库！',
+                'db_connection_label' => '数据库连接',
+                'db_connection_label_mysql' => 'mysql',
+                'db_connection_label_sqlite' => 'sqlite',
+                'db_connection_label_pgsql' => 'pgsql',
+                'db_connection_label_sqlsrv' => 'sqlsrv',
+                'db_host_label' => '数据库主机',
+                'db_host_placeholder' => '输入数据库主机ip或url',
+                'db_port_label' => '数据库端口',
+                'db_port_placeholder' => '输入数据库端口',
+                'db_name_label' => '数据库名',
+                'db_name_placeholder' => '输入数据库名',
+                'db_username_label' => '数据库账号',
+                'db_username_placeholder' => '输入数据库账号',
+                'db_password_label' => '数据库账号密码',
+                'db_password_placeholder' => '输入数据库账号密码',
+
+                'buttons' => [
+                    'install' => '安装',
+                ],
+            ],
+        ],
     ],
 
     /*
