@@ -51,6 +51,7 @@ return [
     'order' => [
         'index' => '我的订单',
         'completed' => '已确认收货',
+        'cancelled' => '订单已取消',
         'order_details' => '订单详情',
         'amount' => '金额',
         'state' => '状态',
@@ -61,6 +62,7 @@ return [
             'index' => '订单详情',
             'order_details' => '订单详情',
             'to_pay' => '去支付',
+            'cancel' => '取消订单',
             'confirm_receipt' => '确认收货',
             'order_number' => '订单号',
             'order_date' => '下单日期',

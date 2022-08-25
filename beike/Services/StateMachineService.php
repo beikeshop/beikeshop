@@ -35,6 +35,7 @@ class StateMachineService
         self::PAID,
         self::SHIPPED,
         self::COMPLETED,
+        self::CANCELLED,
     ];
 
     const MACHINES = [

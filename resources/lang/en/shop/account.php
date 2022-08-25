@@ -51,6 +51,7 @@ return [
     'order' => [
         'index' => 'Order',
         'completed' => 'Completed',
+        'cancelled' => 'Cancelled',
         'order_details' => 'Order Details',
         'amount' => 'Amount',
         'state' => 'State',
@@ -61,6 +62,7 @@ return [
             'index' => 'Order Info',
             'order_details' => 'Order Details',
             'to_pay' => 'To Pay',
+            'cancel' => 'Cancel',
             'confirm_receipt' => 'Confirm the receipt of goods',
             'order_number' => 'Order Number',
             'order_date' => 'Order Date',
