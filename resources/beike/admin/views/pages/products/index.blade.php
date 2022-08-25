@@ -101,7 +101,9 @@
                     </div>
                   </div>
                 </th>
-                <th>上架</th>
+                @if ($type != 'trashed')
+                  <th>状态</th>
+                @endif
                 <th class="text-end">操作</th>
               </tr>
             </thead>
@@ -117,7 +119,9 @@
               <td>@{{ item.price_formatted }}</td>
               <td>@{{ item.created_at }}</td>
               <td>@{{ item.position }}</td>
-              <td>@{{ item.active ? '上架' : '下架' }}</td>
+              @if ($type != 'trashed')
+                <td>@{{ item.active ? '上架' : '下架' }}</td>
+              @endif
               <td width="140" class="text-end">
                 <template v-if="item.deleted_at == ''">
                   <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
