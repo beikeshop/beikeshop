@@ -31,7 +31,8 @@ class FileManagerController extends Controller
     {
         $baseFolder = $request->get('base_folder');
         $page = (int)$request->get('page');
-        return (new FileManagerService)->getFiles($baseFolder, $page);
+        $perPage = (int)$request->get('per_page');
+        return (new FileManagerService)->getFiles($baseFolder, $page, $perPage);
     }
 
 

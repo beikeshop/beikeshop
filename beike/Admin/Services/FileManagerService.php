@@ -57,7 +57,7 @@ class FileManagerService
      * @return array
      * @throws \Exception
      */
-    public function getFiles($baseFolder, int $page = 1): array
+    public function getFiles($baseFolder, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $files = glob($currentBasePath . '/*');
@@ -75,7 +75,7 @@ class FileManagerService
         }
 
         $page = $page > 0 ? $page : 1;
-        $perPage = 20;
+        // $perPage = $perPage;
         $imageCollection = collect($images);
         $data = [
             'images' => $imageCollection->forPage($page, $perPage)->values()->toArray(),
