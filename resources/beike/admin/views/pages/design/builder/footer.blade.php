@@ -113,7 +113,8 @@
             </div>
             <div class="module-edit-group">
               <div class="module-edit-title">地址</div>
-              <el-input placeholder="地址" size="small" v-model="form.content.contact.address"></el-input>
+              {{-- <el-input placeholder="地址" size="small" v-model="form.content.contact.address"></el-input> --}}
+              <text-i18n type="textarea" v-model="form.content.contact.address"></text-i18n>
             </div>
             <div class="module-edit-group">
               <div class="module-edit-title">邮箱</div>

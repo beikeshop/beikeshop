@@ -58,8 +58,8 @@
             @if ($footer_content['content']['contact']['telephone'])
               <li class="lh-lg mb-2"><i class="bi bi-telephone-fill"></i> {{ $footer_content['content']['contact']['telephone'] }}</li>
             @endif
-            @if ($footer_content['content']['contact']['address'])
-              <li class="lh-lg mb-2"><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'] }}</li>
+            @if ($footer_content['content']['contact']['address'][$locale])
+              <li class="lh-lg mb-2"><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'][$locale] ?? '' }}</li>
             @endif
           </ul>
         </div>

@@ -1,4 +1,4 @@
-<x-admin::form.row :title="$title">
+<x-admin::form.row :title="$title" :required="$required">
   @foreach (locales() as $index => $locale)
     <div class="d-flex wp-{{ $width }}">
       <span class="input-group-text wp-100 px-1" id="basic-addon1">{{ $locale['name'] }}</span>

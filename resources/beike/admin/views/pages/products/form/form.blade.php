@@ -196,11 +196,15 @@
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
                                 placeholder="型号"></td>
                             <td>
-                              <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''">
+                              <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
+                              <span role="alert" class="invalid-feedback">请填写sku</span>
                               <span v-if="sku.is_default" class="text-success">默认主商品</span>
                             </td>
-                            <td><input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
-                                placeholder="价格"></td>
+                            <td>
+                              <input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
+                                placeholder="价格" required>
+                              <span role="alert" class="invalid-feedback">请填写价格</span>
+                            </td>
                             <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
                                 placeholder="原价"></td>
                             <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
@@ -219,8 +223,8 @@
               <template v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" title="型号" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
-                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" />
-                <x-admin-form-input name="skus[0][price]" title="价格" :value="old('skus.0.price', $product->skus[0]->price ?? '')" />
+                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
+                <x-admin-form-input name="skus[0][price]" title="价格" :value="old('skus.0.price', $product->skus[0]->price ?? '')" required />
                 <x-admin-form-input name="skus[0][origin_price]" title="原价" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
                 <x-admin-form-input name="skus[0][cost_price]" title="成本价" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
                 <x-admin-form-input name="skus[0][quantity]" title="数量" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
@@ -237,7 +241,7 @@
               <ul class="nav nav-tabs mb-3" role="tablist">
                 @foreach ($languages as $language)
                   <li class="nav-item" role="presentation">
-                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-descriptions-{{ $language->code }}" type="button" >{{ $language->code }}</button>
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-descriptions-{{ $language->code }}" type="button" >{{ $language->name }}</button>
                   </li>
                 @endforeach
               </ul>
