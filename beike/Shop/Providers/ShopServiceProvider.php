@@ -39,6 +39,7 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
 
         load_settings();
+        $this->registerGuard();
 
         if (Str::startsWith($uri, '/admin')) {
             return;
@@ -50,7 +51,6 @@ class ShopServiceProvider extends ServiceProvider
         ]);
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-        $this->registerGuard();
         $this->loadThemeViewPath();
         $this->loadComponents();
     }

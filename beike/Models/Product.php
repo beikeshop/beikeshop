@@ -56,7 +56,9 @@ class Product extends Base
 
     public function inCurrentWishlist()
     {
-        return $this->hasOne(CustomerWishlist::class)->where('customer_id', current_customer() ? current_customer()->id : 0);
+        $customer = current_customer();
+        $customerId = $customer ? $customer->id : 0;
+        return $this->hasOne(CustomerWishlist::class)->where('customer_id', $customerId);
     }
 
     public function getUrlAttribute()
