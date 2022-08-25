@@ -17,7 +17,7 @@
             <div>
               @if ($order->status == 'unpaid')
                 <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account.order.order_info.to_pay') }}</a>
-                <a href="{{ shop_route('orders.cancel', $order->number) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account.order.order_info.cancel') }}</a>
+                <button class="btn btn-primary btn-sm cancel-order" type="button">{{ __('shop/account.order.order_info.cancel') }}</button>
               @endif
               @if ($order->status == 'shipped')
                 <button class="btn btn-primary btn-sm shipped-ed" type="button">{{ __('shop/account.order.order_info.confirm_receipt') }}</button>
@@ -142,6 +142,13 @@
 <script>
   $('.shipped-ed').click(function(event) {
     $http.post('orders/{{ $order->number }}/complete').then((res) => {
+      layer.msg(res.message)
+      window.location.reload()
+    })
+  });
+
+  $('.cancel-order').click(function(event) {
+    $http.post('orders/{{ $order->number }}/cancel').then((res) => {
       layer.msg(res.message)
       window.location.reload()
     })
