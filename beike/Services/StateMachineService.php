@@ -27,6 +27,7 @@ class StateMachineService
     const PAID = 'paid';                        // 已支付
     const SHIPPED = 'shipped';                  // 已发货
     const COMPLETED = 'completed';              // 已完成
+    const CANCELLED = 'cancelled';              // 已取消
 
     const ORDER_STATUS = [
         self::CREATED,
@@ -39,12 +40,13 @@ class StateMachineService
     const MACHINES = [
         self::CREATED => [
             self::UNPAID => ['updateStatus', 'addHistory'],
-            self::PAID => ['updateStatus', 'addHistory', 'subStock'],
         ],
         self::UNPAID => [
             self::PAID => ['updateStatus', 'addHistory', 'subStock'],
+            self::CANCELLED => ['updateStatus', 'addHistory'],
         ],
         self::PAID => [
+            self::CANCELLED => ['updateStatus', 'addHistory', 'revertStock'],
             self::SHIPPED => ['updateStatus', 'addHistory'],
             self::COMPLETED => ['updateStatus', 'addHistory']
         ],
@@ -236,6 +238,15 @@ class StateMachineService
      * @param $newCode
      */
     private function subStock($oldCode, $newCode)
+    {
+
+    }
+
+
+    /**
+     * 恢复库存
+     */
+    private function revertStock($oldCode, $newCode)
     {
 
     }

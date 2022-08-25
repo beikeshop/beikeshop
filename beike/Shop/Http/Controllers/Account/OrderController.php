@@ -89,7 +89,7 @@ class OrderController extends Controller
 
 
     /**
-     * 订单完成
+     * 完成订单
      *
      * @param Request $request
      * @param $number
@@ -106,5 +106,26 @@ class OrderController extends Controller
         $comment = '用户确认收货';
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED, $comment);
         return json_success(trans('shop/account.order.completed'));
+    }
+
+
+    /**
+     * 取消订单
+     *
+     * @param Request $request
+     * @param $number
+     * @return array
+     * @throws \Exception
+     */
+    public function cancel(Request $request, $number)
+    {
+        $customer = current_customer();
+        $order = OrderRepo::getOrderByNumber($number, $customer);
+        if (empty($order)) {
+            throw new \Exception('无效的订单');
+        }
+        $comment = '用户取消订单';
+        StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
+        return json_success(trans('shop/account.order.cancelled'));
     }
 }
