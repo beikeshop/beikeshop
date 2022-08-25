@@ -35,7 +35,10 @@
                   <div class="zipcode">@{{ address.zipcode }}</div>
                   <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
                   <div class="address-bottom">
-                    <span class="badge bg-success" v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                    <div>
+                      <span class="badge bg-success" v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                      {{-- <span class="badge bg-info" v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span> --}}
+                    </div>
                     <a class="" @click.stop="editAddress(index)">{{ __('shop/checkout.edit') }}</a>
                   </div>
                 </div>

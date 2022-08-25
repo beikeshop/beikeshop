@@ -12,8 +12,8 @@
   src: url('/fonts/poppins/Poppins-Regular.ttf');
 }
 
-@font-face {font-family: 'poppins-bold';
-  src: url('/fonts/poppins/Poppins-Bold.ttf');
+@font-face {font-family: 'Poppins-Medium';
+  src: url('/fonts/poppins/Poppins-Medium.ttf');
 }
 
 @for $i from 1 through 6 {
@@ -322,5 +322,5 @@ body.page-seller-product {
 }
 
 table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-header {
-  font-family: 'poppins-bold', sans-serif;
+  font-family: 'Poppins-Medium', sans-serif;
 }
