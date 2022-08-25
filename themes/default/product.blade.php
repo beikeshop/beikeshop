@@ -116,10 +116,10 @@
     </div>
 
     <div class="product-description">
-      <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
-        <a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
+      <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
+        <h5 class="mb-0"><a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
-        </a>
+        </a></h5>
       </div>
       <div class="tab-content">
         <div class="tab-pane fade show active" id="product-description" role="tabpanel" aria-labelledby="pills-home-tab">

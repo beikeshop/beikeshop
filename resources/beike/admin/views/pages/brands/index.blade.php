@@ -55,7 +55,7 @@
         </el-form-item>
 
         <el-form-item label="首字母" prop="first">
-          <el-input class="mb-0" v-model="dialog.form.first" placeholder="首字母"></el-input>
+          <el-input class="mb-0" :maxlength="1" v-model="dialog.form.first" placeholder="首字母"></el-input>
         </el-form-item>
 
         <el-form-item label="排序">
