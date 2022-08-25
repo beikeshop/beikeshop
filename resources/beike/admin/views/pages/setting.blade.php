@@ -77,7 +77,7 @@
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div>
             </x-admin-form-switch>
 
-            <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.address', 'shipping'))" :options="$tax_address">
+            <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.tax_address_info') }}</div>
             </x-admin-form-select>
           </div>
