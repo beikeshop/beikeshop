@@ -48,7 +48,7 @@ class EnvironmentController extends Controller
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
-            'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
+            'environment_custom.required_if' => trans('installer::installer_messages.environment.wizard.form.name_required'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -59,7 +59,7 @@ class EnvironmentController extends Controller
 
         if (! $this->checkDatabaseConnection($request)) {
             return $redirect->route('installer.environment')->withInput()->withErrors([
-                'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
+                'database_connection' => trans('installer::installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
