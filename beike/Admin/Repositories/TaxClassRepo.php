@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Repositories;
 
+use Beike\Admin\Http\Resources\TaxClassDetail;
 use Beike\Models\TaxClass;
 
 class TaxClassRepo
@@ -19,10 +20,12 @@ class TaxClassRepo
 
     public static function getList()
     {
-        return TaxClass::query()->with([
+        $taxClass = TaxClass::query()->with([
             'taxRates.region',
             'taxRules'
         ])->get();
+
+        return TaxClassDetail::collection($taxClass)->jsonSerialize();
     }
 
     public static function createOrUpdate($data)
