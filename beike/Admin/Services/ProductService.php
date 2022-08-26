@@ -33,7 +33,7 @@ class ProductService
 
             if ($isUpdating) {
                 $product->skus()->delete();
-                $product->description()->delete();
+                $product->descriptions()->delete();
             }
 
             $descriptions = [];
