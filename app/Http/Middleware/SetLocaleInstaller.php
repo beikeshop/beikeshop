@@ -24,7 +24,7 @@ class SetLocaleInstaller
         if ($sessionLocale && in_array($sessionLocale, $languages)) {
             App::setLocale($sessionLocale);
         } else {
-            session(['locale' => 'en']);
+            App::setLocale('en');
         }
         return $next($request);
     }
