@@ -3,7 +3,7 @@
     <div class="container d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
         <div class="dropdown">
-          <a class="btn dropdown-toggle ps-0" href="#" role="button" id="currency-dropdown" data-toggle="dropdown"
+          <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
             aria-expanded="false">
             @foreach (currencies() as $currency)
               @if ($currency->code == current_currency_code())
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="dropdown">
-          <a class="btn dropdown-toggle" href="#" role="button" id="language-dropdown" data-toggle="dropdown"
+          <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
             aria-expanded="false">
             {{ current_language() }}
           </a>
