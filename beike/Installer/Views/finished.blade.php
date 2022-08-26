@@ -20,8 +20,8 @@
 			<h5 class="text-center mb-5">{{ __('installer::installer_messages.final.finished') }}</h5>
 
 			<div class="d-flex justify-content-center">
-				<a href="{{ url('/') }}" class="btn btn-primary">{{ trans('installer::installer_messages.final.to_front') }}</a>
-				<a href="{{ url('/admin') }}" class="btn btn-primary ms-3">{{ trans('installer::installer_messages.final.to_admin') }}</a>
+				<a href="{{ url('/') }}" class="btn btn-primary"><i class="bi bi-window-dock me-2"></i> {{ trans('installer::installer_messages.final.to_front') }}</a>
+				<a href="{{ url('/admin') }}" class="btn btn-outline-primary ms-3"><i class="bi bi-window-sidebar me-2"></i> {{ trans('installer::installer_messages.final.to_admin') }}</a>
 			</div>
     </div>
   </div>
