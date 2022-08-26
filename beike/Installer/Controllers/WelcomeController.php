@@ -12,6 +12,9 @@
 namespace Beike\Installer\Controllers;
 
 use App\Http\Controllers\Controller;
+use Beike\Repositories\LanguageRepo;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller
 {
@@ -21,8 +24,16 @@ class WelcomeController extends Controller
             exit('Already installed');
         }
 
-        $steps = 1;
+        $data['languages'] = LanguageRepo::enabled();
 
-        return view('installer::welcome', compact('steps'));
+        return view('installer::welcome', $data);
+    }
+
+    public function locale($lang)
+    {
+        if (in_array($lang, languages()->toArray())) {
+            Session::put('locale', $lang);
+        }
+        return Redirect::back();
     }
 }

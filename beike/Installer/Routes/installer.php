@@ -12,6 +12,7 @@ Route::prefix('installer')
     ->middleware(['installer'])
     ->group(function () {
         Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+        Route::get('lang/{lang}', [WelcomeController::class, 'index'])->name('lang.switch');
         Route::get('requirements', [RequirementsController::class, 'index'])->name('requirements');
         Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
         Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
