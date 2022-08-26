@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Beike\Installer\Helpers\EnvironmentManager;
+use Illuminate\Support\Facades\Session;
 use Validator;
 
 class EnvironmentController extends Controller
@@ -65,8 +66,12 @@ class EnvironmentController extends Controller
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
-        return $redirect->route('installer.database')->withInput()
-                        ->with(['results' => $results]);
+        $params = [
+            'admin_email' => $request->get('admin_email'),
+            'admin_password' => $request->get('admin_password'),
+        ];
+
+        return redirect(route('installer.database', $params));
     }
 
     /**

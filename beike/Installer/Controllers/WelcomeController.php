@@ -41,6 +41,8 @@ class WelcomeController extends Controller
     {
         if (in_array($lang, languages()->toArray())) {
             Session::put('locale', $lang);
+            Session::put('admin_email', 'aaa');
+            Session::put('admin_password', 'ppp');
         }
         return Redirect::back();
     }

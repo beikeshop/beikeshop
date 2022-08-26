@@ -44,7 +44,9 @@ class AdminUserRepo
         ]);
         $adminUser->save();
 
-        $adminUser->assignRole($data['roles']);
+        if (isset($data['roles'])) {
+            $adminUser->assignRole($data['roles']);
+        }
         return $adminUser;
     }
 
