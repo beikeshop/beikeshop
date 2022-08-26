@@ -239,4 +239,9 @@ class ProductRepo
     {
         Product::query()->whereIn('id', $ids)->update(['active' => $status]);
     }
+
+    public static function forceDeleteTrashed()
+    {
+        Product::onlyTrashed()->forceDelete();
+    }
 }

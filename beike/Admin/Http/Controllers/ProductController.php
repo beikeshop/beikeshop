@@ -169,4 +169,9 @@ class ProductController extends Controller
 
         return json_success(trans('common.deleted_success'), []);
     }
+
+    public function trashedClear()
+    {
+        ProductRepo::forceDeleteTrashed();
+    }
 }
