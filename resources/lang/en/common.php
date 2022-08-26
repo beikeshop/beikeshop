@@ -36,6 +36,8 @@ return [
     'sign_out' => 'Sign Out',
     'contact_us' => 'Contact us',
     'input' => 'Type your search here',
+    'filter' => 'Filter',
+    'reset' => 'Reset',
     'edit' => 'Edit',
     'action' => 'Action',
     'add' => 'Add',

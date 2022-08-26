@@ -35,6 +35,8 @@ return [
     'sign_out' => '退出登录',
     'contact_us' => '联系我们',
     'input' => '在此处输入您的搜索',
+    'filter' => '筛选',
+    'reset' => '重置',
     'edit' => '编辑',
     'action' => '操作',
     'add' => '添加',

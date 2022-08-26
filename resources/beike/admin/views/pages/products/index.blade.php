@@ -54,8 +54,8 @@
           <div class="row">
             <label class="filter-title"></label>
             <div class="col-auto">
-              <button type="button" @click="search" class="btn btn-outline-primary btn-sm">筛选</button>
-              <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">重置</button>
+              <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+              <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
             </div>
           </div>
         </div>
@@ -126,13 +126,13 @@
                 @endif
                 <td width="140" class="text-end">
                   <template v-if="item.deleted_at == ''">
-                    <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
+                    <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                     <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
-                      @click.prevent="deleteProduct(index)">删除</a>
+                      @click.prevent="deleteProduct(index)">{{ __('common.delete') }}</a>
                   </template>
                   <template v-else>
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                      @click.prevent="restoreProduct(index)">恢复</a>
+                      @click.prevent="restoreProduct(index)">{{ __('common.restore') }}</a>
                   </template>
                 </td>
               </tr>
