@@ -16,4 +16,9 @@ return [
     'order_amount' => 'Order Amount',
     'yesterday' => 'Yesterday',
     'day_before' => 'Last day',
+
+    'order_report' => 'Order Report',
+    'latest_month' => 'Latest Month',
+    'latest_week' => 'Latest Week',
+    'latest_year' => 'Latest Year',
 ];

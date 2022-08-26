@@ -84,12 +84,12 @@
 
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div>订单统计</div>
+      <div>{{ __('admin/dashboard.order_report') }}</div>
       <div class="orders-right">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-          <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">一个月</button>
-          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_week">一周</button>
-          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_year">一年</button>
+          <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">{{ __('admin/dashboard.latest_month') }}</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_week">{{ __('admin/dashboard.latest_week') }}</button>
+          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_year">{{ __('admin/dashboard.latest_year') }}</button>
         </div>
       </div>
     </div>

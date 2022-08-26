@@ -16,4 +16,9 @@ return [
     'order_amount' => '销售额',
     'yesterday' => '昨日',
     'day_before' => '较前一日',
+
+    'order_report' => '订单统计',
+    'latest_month' => '一个月',
+    'latest_week' => '一周',
+    'latest_year' => '一年',
 ];
