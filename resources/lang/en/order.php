@@ -20,4 +20,9 @@ return [
     'updated_at' => 'Updated',
     'status' => 'Status',
     'total' => 'Total',
+
+    'unpaid' => 'Unpaid',
+    'paid' => 'Paid',
+    'shipped' => 'Shipped',
+    'completed' => 'Completed',
 ];

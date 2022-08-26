@@ -61,7 +61,7 @@
               <td>{{ $order->number }}</td>
               <td>{{ $order->customer_name }}</td>
               <td>{{ $order->payment_method_name }}</td>
-              <td>{{ $order->status }}</td>
+              <td>{{ $order->status_format }}</td>
               <td>{{ $order->total_format }}</td>
               <td>{{ $order->created_at }}</td>
               <td>{{ $order->updated_at }}</td>

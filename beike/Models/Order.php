@@ -25,7 +25,7 @@ class Order extends Base
         'payment_address_1', 'payment_address_2',
     ];
 
-    protected $appends = ['total_format'];
+    protected $appends = ['status_format', 'total_format'];
 
     public function orderProducts(): HasMany
     {
@@ -40,6 +40,11 @@ class Order extends Base
     public function orderHistories(): HasMany
     {
         return $this->hasMany(OrderHistory::class);
+    }
+
+    public function getStatusFormatAttribute()
+    {
+        return trans('order.' . $this->status);
     }
 
     public function getTotalFormatAttribute()

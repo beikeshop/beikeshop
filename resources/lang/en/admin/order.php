@@ -19,9 +19,4 @@ return [
     'orders_update' => 'Update',
     'orders_delete' => 'Delete',
     'orders_update_status' => 'Update Status',
-
-    'unpaid' => 'Unpaid',
-    'paid' => 'Paid',
-    'shipped' => 'Shipped',
-    'completed' => 'Completed',
 ];

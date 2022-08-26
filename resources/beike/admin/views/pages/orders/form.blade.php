@@ -85,7 +85,7 @@
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="当前状态">
-          {{ __('admin/order.' . $order->status) }}
+          {{ $order->status_format }}
         </el-form-item>
         <el-form-item label="修改状态" prop="status">
           <el-select size="small" v-model="form.status" placeholder="请选择">

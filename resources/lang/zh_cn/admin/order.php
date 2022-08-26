@@ -19,9 +19,4 @@ return [
     'orders_update' => '更新订单',
     'orders_delete' => '删除订单',
     'orders_update_status' => '更新状态',
-
-    'unpaid' => '待支付',
-    'paid' => '已支付',
-    'shipped' => '已发货',
-    'completed' => '已完成',
 ];

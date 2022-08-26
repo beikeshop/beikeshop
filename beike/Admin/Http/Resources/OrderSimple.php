@@ -25,7 +25,8 @@ class OrderSimple extends JsonResource
             'telephone' => $this->telephone,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'status' => trans("admin/order.{$this->status}"),
+            'status' => $this->status,
+            'status_format' => $this->status_format,
         ];
 
         return $data;

@@ -76,7 +76,7 @@
                           <div class="text-muted">{{ __('shop/account.order_time') }}：{{ $order->created_at }}</div>
                         </td>
                         <td>
-                          <span class="ms-4 d-inline-block">{{ __('shop/account.state') }}：{{ $order->status }}</span>
+                          <span class="ms-4 d-inline-block">{{ __('shop/account.state') }}：{{ $order->status_format }}</span>
                         </td>
                         <td>
                           <span class="ms-3 d-inline-block">{{ __('shop/account.amount') }}：{{ $order->total_format }}</span>
@@ -90,28 +90,6 @@
                       @endforeach
                     </tbody>
                   </table>
-                  {{-- @foreach ($latest_orders as $order)
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                      <div class="d-flex align-items-center">
-                        <div class="img me-3 border wh-70">
-                          @foreach ($order->orderProducts as $product)
-                          <img src="{{ $product->image }}" class="img-fluid">
-                          @endforeach
-                        </div>
-                        <div>
-                          <div class="order-number mb-2">
-                            <span class="wp-200 d-inline-block">订单号：{{ $order->number }}</span>
-                            <span class="wp-200 ms-4 d-inline-block">状态：{{ $order->status }}</span>
-                            <span class=" ms-3 d-inline-block">金额：{{ $order->total }}</span>
-                          </div>
-                          <div class="order-created text-muted">下单时间：{{ $order->created_at }}</div>
-                        </div>
-                      </div>
-
-                      <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}"
-                        class="btn btn-outline-secondary btn-sm">查看详情</a>
-                    </div>
-                  @endforeach --}}
                 </ul>
               @endif
             </div>
