@@ -21,7 +21,7 @@
             <div class="brand-item">
               <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" class="img-fluid">
             </div>
-            <p class="text-center text-dark">{{ $brand['name'] }}</p>
+            <p class="text-center text-dark mb-4">{{ $brand['name'] }}</p>
           </a>
         </div>
         @endforeach
