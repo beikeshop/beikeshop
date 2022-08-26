@@ -23,9 +23,9 @@
               <thead>
                 <tr>
                   <th>{{ __('shop/account.order.order_details') }}</th>
-                  <th>{{ __('shop/account.order.amount') }}</th>
-                  <th>{{ __('shop/account.order.state') }}</th>
-                  <th class="text-end">{{ __('common.action') }}</th>
+                  <th width="160px">{{ __('shop/account.order.amount') }}</th>
+                  <th width="100px">{{ __('shop/account.order.state') }}</th>
+                  <th width="100px" class="text-end">{{ __('common.action') }}</th>
                 </tr>
               </thead>
               @foreach ($orders as $order)

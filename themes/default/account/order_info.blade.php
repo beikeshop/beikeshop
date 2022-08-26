@@ -17,7 +17,7 @@
             <div>
               @if ($order->status == 'unpaid')
                 <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account.order.order_info.to_pay') }}</a>
-                <button class="btn btn-primary btn-sm cancel-order" type="button">{{ __('shop/account.order.order_info.cancel') }}</button>
+                <button class="btn btn-outline-secondary btn-sm cancel-order" type="button">{{ __('shop/account.order.order_info.cancel') }}</button>
               @endif
               @if ($order->status == 'shipped')
                 <button class="btn btn-primary btn-sm shipped-ed" type="button">{{ __('shop/account.order.order_info.confirm_receipt') }}</button>
