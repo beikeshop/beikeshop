@@ -50,7 +50,7 @@
             {{ trans($entry_key . 'db_host_label') }}
           </label>
           <input class="form-control {{ $errors->has('database_hostname') ? 'is-invalid' : '' }}" name="database_hostname"
-            value="{{ old('database_hostname', 'localhost') }}" required placeholder="{{ trans($entry_key . 'db_host_placeholder') }}">
+            value="{{ old('database_hostname', '127.0.0.1') }}" required placeholder="{{ trans($entry_key . 'db_host_placeholder') }}">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('database_hostname') ? $errors->first('database_hostname') : __('common.error_required', ['name' => trans($entry_key . 'db_host_label')]) }}</span>
         </div>

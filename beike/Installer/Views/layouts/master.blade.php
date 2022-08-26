@@ -71,17 +71,6 @@
     </aside>
 
     <div class="content">
-      @if (session('message'))
-        <p class="alert text-center">
-          <strong>
-            @if (is_array(session('message')))
-              {{ session('message')['message'] }}
-            @else
-              {{ session('message') }}
-            @endif
-          </strong>
-        </p>
-      @endif
       @if (session()->has('errors'))
         <div class="alert alert-danger" id="error_alert">
           @foreach ($errors->all() as $error)
