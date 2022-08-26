@@ -17,7 +17,7 @@
             <el-form-item label="客户组">
               <el-select size="small" v-model="filter.customer_group" placeholder="请选择">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
-                  :value="item.id">
+                  :value="item.id + ''">
                 </el-option>
               </el-select>
             </el-form-item>
