@@ -98,10 +98,10 @@
             return;
           }
 
-          console.log(this.form);
-
           $http.post(`/plugin/stripe/capture`, this.form).then((res) => {
+            layer.msg(res.message)
             console.log(res)
+            location = "{{ shop_route('account.order.show', ['number' => $order->number]) }}"
           })
         });
       }

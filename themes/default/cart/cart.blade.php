@@ -13,7 +13,7 @@
 
     <x-shop-breadcrumb type="static" value="carts.index" />
 
-    <div class="row mt-5 justify-content-center">
+    <div class="row mt-1 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>
 
