@@ -2140,6 +2140,10 @@ var tinymceInit = function tinymceInit() {
     language: editor_language,
     branding: false,
     height: 400,
+    convert_urls: false,
+    // document_base_url: 'ssssss',
+    inline: false,
+    relative_urls: false,
     plugins: "link lists fullscreen table hr wordcount image imagetools code",
     menubar: "",
     toolbar: "undo redo | toolbarImageButton | lineheight | bold italic underline strikethrough | forecolor backcolor | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | formatpainter removeformat | charmap emoticons | preview | template link anchor table toolbarImageUrlButton | fullscreen code",
@@ -2150,7 +2154,6 @@ var tinymceInit = function tinymceInit() {
     toolbar_mode: 'wrap',
     font_formats: "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
     fontsize_formats: "10px 12px 14px 18px 24px 36px",
-    relative_urls: true,
     setup: function setup(ed) {
       var height = ed.getElement().dataset.tinymceHeight; // console.log(ed);
       // 修改 tinymce 的高度
