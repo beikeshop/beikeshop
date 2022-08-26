@@ -92,7 +92,10 @@
               <div class="w-25 card border mx-2 mb-3" v-for="group, group_index in currentMenu.childrenGroup"
                 :key="group_index">
                 <div class="card-header d-flex align-items-center justify-content-between mb-2">
-                  <div class=""><i class="el-icon-rank cursor-scroll"></i> 菜单 - @{{ group_index + 1 }}</div>
+                  <div class="">
+                    <i class="el-icon-rank cursor-scroll"></i> 菜单 - @{{ group_index + 1 }}
+                    (@{{ groupTypeName(group.type) }})
+                  </div>
                   <div class="d-flex">
                     <div class="cursor-pointer me-2" @click="settingChildrenGroup(group_index)"><i class="bi bi-gear"></i></div>
                     <div class="remove-item cursor-pointer" @click="removeChildrenGroup(group_index)"><i
@@ -120,7 +123,7 @@
                           </div>
                         </div>
                       </draggable>
-                      <button @click="addChildrenLink(group_index)" class="btn btn-link btn-sm mt-2">添加链接</button>
+                      <button @click="addChildrenLink(group_index)" class="btn btn-link btn-sm mt-2">添加子菜单链接</button>
                     </template>
                   </div>
                 </div>
@@ -228,6 +231,10 @@
           })
 
           this.currentMenuIndex = this.form.menus.length - 1;
+        },
+
+        groupTypeName(value) {
+          return this.source.types.find(e => e.value == (value || 'link')).name
         },
 
         addChildrenGroup() {
