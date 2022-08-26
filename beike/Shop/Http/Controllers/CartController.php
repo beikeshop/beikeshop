@@ -92,6 +92,7 @@ class CartController extends Controller
     {
         $skuId = $request->sku_id;
         $quantity = $request->quantity ?? 1;
+        $buyNow = (bool)$request->buy_now ?? false;
         $customer = current_customer();
 
         $sku = ProductSku::query()
@@ -99,6 +100,9 @@ class CartController extends Controller
             ->findOrFail($skuId);
 
         $cart = CartService::add($sku, $quantity, $customer);
+        if ($buyNow) {
+            CartService::select($customer, [$cart->id]);
+        }
         return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
 }
