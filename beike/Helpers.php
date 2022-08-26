@@ -310,7 +310,7 @@ function locale(): string
 function currency_format($price, string $currency = '', string $value = '', bool $format = true): string
 {
     if (!$currency) {
-        $currency = current_currency_code();
+        $currency = is_admin() ? system_setting('base.currency') : current_currency_code();
     }
     return CurrencyService::getInstance()->format($price, $currency, $value, $format);
 }
