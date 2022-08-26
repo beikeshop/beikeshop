@@ -38,13 +38,41 @@ class CartController extends Controller
         return json_success(trans('common.updated_success'), $data);
     }
 
+
     /**
-     * PUT /carts/{cart_id} {quantity: 123}
-     * @param Request $request
+     * POST /carts {sku_id:1, quantity: 2}
+     * 创建购物车
+     *
+     * @param CartRequest $request
+     * @return mixed
+     * @throws \Exception
+     */
+    public function store(CartRequest $request)
+    {
+        $skuId = $request->sku_id;
+        $quantity = $request->quantity ?? 1;
+        $buyNow = (bool)$request->buy_now ?? false;
+        $customer = current_customer();
+
+        $sku = ProductSku::query()
+            ->whereRelation('product', 'active', '=', true)
+            ->findOrFail($skuId);
+
+        $cart = CartService::add($sku, $quantity, $customer);
+        if ($buyNow) {
+            CartService::select($customer, [$cart->id]);
+        }
+        return json_success(trans('shop/carts.added_to_cart'), $cart);
+    }
+
+
+    /**
+     * PUT /carts/{cart_id} {sku_id:1, quantity: 2}
+     * @param CartRequest $request
      * @param $cartId
      * @return array
      */
-    public function update(Request $request, $cartId): array
+    public function update(CartRequest $request, $cartId): array
     {
         $customer = current_customer();
         $quantity = (int)$request->get('quantity');
@@ -79,31 +107,5 @@ class CartController extends Controller
     {
         $data = CartService::reloadData();
         return view('cart/mini', $data);
-    }
-
-
-    /**
-     * 创建购物车
-     *
-     * @param CartRequest $request
-     * @return mixed
-     * @throws \Exception
-     */
-    public function store(CartRequest $request)
-    {
-        $skuId = $request->sku_id;
-        $quantity = $request->quantity ?? 1;
-        $buyNow = (bool)$request->buy_now ?? false;
-        $customer = current_customer();
-
-        $sku = ProductSku::query()
-            ->whereRelation('product', 'active', '=', true)
-            ->findOrFail($skuId);
-
-        $cart = CartService::add($sku, $quantity, $customer);
-        if ($buyNow) {
-            CartService::select($customer, [$cart->id]);
-        }
-        return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
 }

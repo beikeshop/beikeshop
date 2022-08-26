@@ -13,7 +13,6 @@ namespace Beike\Shop\Http\Requests;
 
 use Beike\Models\ProductSku;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CartRequest extends FormRequest
 {

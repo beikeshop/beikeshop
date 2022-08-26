@@ -10,5 +10,7 @@
  */
 
 return [
+    'sku_id' => 'SKU ID',
+    'quantity' => '购买数量',
     'stock_out' => '库存不足',
 ];
