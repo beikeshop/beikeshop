@@ -31,6 +31,7 @@ class WelcomeController extends Controller
         }
 
         $data['languages'] = $this->languages;
+        $data['locale'] = session('locale');
 
         return view('installer::welcome', $data);
     }
