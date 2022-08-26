@@ -36,13 +36,16 @@ return [
     'sign_out' => 'Sign Out',
     'contact_us' => 'Contact us',
     'input' => 'Type your search here',
-    'created_at' => 'Created At',
-    'updated_at' => 'Updated At',
     'edit' => 'Edit',
     'action' => 'Action',
     'add' => 'Add',
     'please_choose' => 'Please Choose',
     'recommend_size' => 'Recommend Size',
+
+    'id' => 'ID',
+    'created_at' => 'Created At',
+    'updated_at' => 'Updated At',
+    'sort_order' => 'Sort By',
 
     'order' => [
         'unpaid' => 'Unpaid',

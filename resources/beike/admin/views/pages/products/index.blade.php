@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '商品管理')
+@section('title', __('admin/common.product'))
 
 @push('header')
   <script src="https://cdn.bootcdn.net/ajax/libs/underscore.js/1.13.3/underscore.min.js"></script>
@@ -34,7 +34,7 @@
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.category') }}</label>
               <select v-model="filter.category_id" class="form-control">
-                <option value="0">全部</option>
+                <option value="0">{{ __('common.all') }}</option>
                 @foreach ($categories as $_category)
                   <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
                 @endforeach
@@ -62,16 +62,15 @@
 
         <div class="d-flex justify-content-between my-4">
           <a href="{{ admin_route('products.create') }}">
-            <button class="btn btn-primary">创建商品</button>
+            <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
           </a>
 
           <div class="right">
-            <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">批量删除</button>
+            <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
-              @click="batchActive(true)">批量上架</button>
+              @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
-              @click="batchActive(false)">批量下架</button>
-            {{-- <button class="btn btn-outline-secondary">批量改价</button> --}}
+              @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
           </div>
         </div>
 
@@ -80,13 +79,13 @@
             <thead>
               <tr>
                 <th><input type="checkbox" v-model="allSelected" /></th>
-                <th>ID</th>
-                <th>图片</th>
-                <th>商品名称</th>
-                <th>价格</th>
+                <th>{{ __('common.id') }}</th>
+                <th>{{ __('product.image') }}</th>
+                <th>{{ __('product.name') }}</th>
+                <th>{{ __('product.price') }}</th>
                 <th>
                   <div class="d-flex align-items-center">
-                    创建时间
+                      {{ __('common.created_at') }}
                     <div class="d-flex flex-column ml-1 order-by-wrap">
                       <i class="el-icon-caret-top" @click="orderBy = 'created_at:asc'"></i>
                       <i class="el-icon-caret-bottom" @click="orderBy = 'created_at:desc'"></i>
@@ -96,7 +95,7 @@
 
                 <th class="d-flex align-items-center">
                   <div class="d-flex align-items-center">
-                    排序
+                      {{ __('common.sort_order') }}
                     <div class="d-flex flex-column ml-1 order-by-wrap">
                       <i class="el-icon-caret-top" @click="orderBy = 'position:asc'"></i>
                       <i class="el-icon-caret-bottom" @click="orderBy = 'position:desc'"></i>
@@ -104,9 +103,9 @@
                   </div>
                 </th>
                 @if ($type != 'trashed')
-                  <th>状态</th>
+                  <th>{{ __('common.status') }}</th>
                 @endif
-                <th class="text-end">操作</th>
+                <th class="text-end">{{ __('common.action') }}</th>
               </tr>
             </thead>
             <tbody>

@@ -17,6 +17,7 @@ return [
     'category' => '分类',
     'model' => '型号',
     'quantity' => '库存',
+    'image' => '图片',
 
     'active' => '上架',
     'inactive' => '下架',

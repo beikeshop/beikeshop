@@ -17,6 +17,7 @@ return [
     'category' => 'Category',
     'model' => 'Model',
     'quantity' => 'Quantity',
+    'image' => 'Image',
 
     'active' => 'Active',
     'inactive' => 'Inactive',

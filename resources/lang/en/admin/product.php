@@ -17,4 +17,8 @@ return [
     'products_delete' => 'Delete',
     'products_trashed' => 'Trashed',
     'products_restore' => 'restore',
+
+    'batch_delete' => 'Batch Delete',
+    'batch_active' => 'Batch Active',
+    'batch_inactive' => 'Batch Inactive',
 ];
