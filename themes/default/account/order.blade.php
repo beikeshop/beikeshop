@@ -43,7 +43,7 @@
                       <div class="product-info">
                         <div class="img"><img src="{{ $product->image }}" class="img-fluid"></div>
                         <div class="name">
-                          <span>{{ $product->name }}</span>
+                          <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
                           <div class="quantity mt-1 text-secondary">x {{ $product->quantity }}</div>
                         </div>
                       </div>

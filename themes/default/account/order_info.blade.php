@@ -61,7 +61,9 @@
                 <div class="d-flex">
                   <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
                   <div class="right">
-                    <div class="name">{{ $product->name }} x {{ $product->quantity }}</div>
+                    <div class="name">
+                    <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a><br>   x {{ $product->quantity }}
+                    </div>
                     <div class="price">{{ $product->price_format }}</div>
                   </div>
                 </div>

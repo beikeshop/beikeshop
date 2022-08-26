@@ -1248,7 +1248,7 @@ body.page-account-order-list .order-wrap .table .product-info {
   align-items: center;
 }
 body.page-account-order-list .order-wrap .table .product-info .img {
-  width: 60px;
+  flex: 0 0 60px;
   margin-right: 10px;
 }
 
@@ -1264,7 +1264,7 @@ body.page-account-order-info .product-list {
   margin-bottom: 1rem;
 }
 body.page-account-order-info .product-list .left {
-  width: 80px;
+  flex: 0 0 80px;
   margin-right: 10px;
 }
 body.page-account-order-info .product-list .right {

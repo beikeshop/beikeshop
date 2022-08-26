@@ -39,7 +39,7 @@ body.page-account-order-list {
         align-items: center;
 
         .img {
-          width: 60px;
+          flex: 0 0 60px;
           margin-right: 10px;
         }
       }
@@ -64,7 +64,7 @@ body.page-account-order-info {
     // justify-content: space-between; // flex-end | center | space-between
 
     .left {
-      width: 80px;
+      flex: 0 0 80px;
       margin-right: 10px;
     }
 
