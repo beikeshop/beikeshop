@@ -21,6 +21,8 @@ return [
     'updated_success' => 'Updated Successfully!',
     'edit_success' => 'Modify Success!',
     'get_success' => 'Get Successfully!',
+    'all' => 'All',
+    'status' => 'Status',
     'enable' => 'Enable',
     'disable' => 'Disable',
     'home' => 'Home',

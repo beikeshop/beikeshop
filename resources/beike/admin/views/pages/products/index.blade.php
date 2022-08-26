@@ -42,11 +42,11 @@
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-              <label class="filter-title">排序</label>
+              <label class="filter-title">{{ __('common.status') }}</label>
               <select v-model="filter.active" class="form-control">
-                <option value="">全部</option>
-                <option value="1">上架</option>
-                <option value="0">下架</option>
+                <option value="">{{ __('common.all') }}</option>
+                <option value="1">{{ __('product.active') }}</option>
+                <option value="0">{{ __('product.inactive') }}</option>
               </select>
             </div>
           </div>

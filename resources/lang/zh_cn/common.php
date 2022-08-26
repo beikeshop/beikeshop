@@ -20,6 +20,8 @@ return [
     'updated_success' => '更新成功!',
     'edit_success' => '修改成功!',
     'get_success' => '获取成功!',
+    'all' => '全部',
+    'status' => '状态',
     'enable' => '启用',
     'disable' => '禁用',
     'home' => '首页',

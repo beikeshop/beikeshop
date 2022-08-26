@@ -16,5 +16,8 @@ return [
     'brand' => 'Brand',
     'category' => 'Category',
     'model' => 'Model',
-    'quantity' => 'Quantity'
+    'quantity' => 'Quantity',
+
+    'active' => 'Active',
+    'inactive' => 'Inactive',
 ];

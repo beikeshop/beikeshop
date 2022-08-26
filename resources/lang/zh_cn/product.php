@@ -16,5 +16,8 @@ return [
     'brand' => '品牌',
     'category' => '分类',
     'model' => '型号',
-    'quantity' => '库存'
+    'quantity' => '库存',
+
+    'active' => '上架',
+    'inactive' => '下架',
 ];
