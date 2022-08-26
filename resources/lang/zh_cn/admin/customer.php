@@ -15,4 +15,6 @@ return [
     'customers_show' => '客户详情',
     'customers_update' => '更新客户',
     'customers_delete' => '删除客户',
+
+    'cannot_delete_root' => '不能删除Root账户',
 ];

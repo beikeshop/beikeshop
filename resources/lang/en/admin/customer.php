@@ -14,5 +14,7 @@ return [
     'customers_create' => 'Create',
     'customers_show' => 'Detail',
     'customers_update' => 'Edit',
-    'customers_delete' => 'Delete'
+    'customers_delete' => 'Delete',
+
+    'cannot_delete_root' => 'Cannot delete root admin user',
 ];
