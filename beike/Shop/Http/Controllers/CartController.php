@@ -3,6 +3,7 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\ProductSku;
+use Beike\Shop\Http\Requests\CartRequest;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Beike\Shop\Services\CartService;
@@ -84,11 +85,11 @@ class CartController extends Controller
     /**
      * 创建购物车
      *
-     * @param Request $request
+     * @param CartRequest $request
      * @return mixed
      * @throws \Exception
      */
-    public function store(Request $request)
+    public function store(CartRequest $request)
     {
         $skuId = $request->sku_id;
         $quantity = $request->quantity ?? 1;
