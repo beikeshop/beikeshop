@@ -6,6 +6,7 @@ use Beike\Admin\Repositories\AdminUserRepo;
 use Illuminate\Routing\Controller;
 use Beike\Installer\Helpers\DatabaseManager;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseController extends Controller
 {
@@ -44,7 +45,7 @@ class DatabaseController extends Controller
             'name' => substr($email, 0, strpos($email, '@')),
             'email' => $email,
             'password' => request('admin_password'),
-            'locale' => 'en',
+            'locale' => session('locale'),
             'active' => true,
         ];
         AdminUserRepo::createAdminUser($data);
