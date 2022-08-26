@@ -5,6 +5,40 @@
 @section('content')
   <div id="customer-app" class="card" v-cloak>
     <div class="card-body">
+      <div class="bg-light p-4 mb-3">
+        <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
+          <div>
+            <el-form-item label="客户姓名">
+              <el-input v-model="filter.name" size="small" placeholder="客户姓名"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱">
+              <el-input v-model="filter.email" size="small" placeholder="邮箱"></el-input>
+            </el-form-item>
+            <el-form-item label="客户组">
+              <el-select v-model="filter.customer_group" placeholder="请选择">
+                <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="状态">
+              <el-select v-model="filter.status" placeholder="请选择">
+                <el-option label="启用" value="1"></el-option>
+                <el-option label="禁用" value="0"></el-option>
+              </el-select>
+            </el-form-item>
+          </div>
+        </el-form>
+
+        <div class="row">
+          <label class="wp-100"></label>
+          <div class="col-auto">
+            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">筛选</button>
+            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm ms-1">重置</button>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">创建客户</button>
       </div>
@@ -111,7 +145,16 @@
             {type: 'email', message: '请输入正确邮箱格式' ,trigger: 'blur'},
           ],
           password: [{required: true,message: '请输入密码',trigger: 'blur'}, ],
-        }
+        },
+
+        url: @json(admin_route('customers.index')),
+
+        filter: {
+          email: bk.getQueryString('email'),
+          name: bk.getQueryString('name'),
+          customer_group: bk.getQueryString('customer_group'),
+          status: bk.getQueryString('status'),
+        },
       },
 
       watch: {
@@ -120,8 +163,21 @@
         },
       },
 
-      // mounted: function() {
-      // },
+      computed: {
+        query() {
+          let query = '';
+          const filter = Object.keys(this.filter)
+            .filter(key => this.filter[key])
+            .map(key => key + '=' + this.filter[key])
+            .join('&');
+
+          if (filter) {
+            query += '?' + filter;
+          }
+
+          return query;
+        }
+      },
 
       methods: {
         loadData() {
@@ -169,7 +225,16 @@
         closeCustomersDialog(form) {
           this.$refs[form].resetFields();
           this.dialogCustomers.show = false
-        }
+        },
+
+        search() {
+          location = this.url + this.query
+        },
+
+        resetSearch() {
+          Object.keys(this.filter).forEach(key => this.filter[key] = '')
+          location = this.url + this.query
+        },
       }
     })
   </script>
