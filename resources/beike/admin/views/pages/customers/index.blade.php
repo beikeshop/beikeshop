@@ -15,14 +15,14 @@
               <el-input v-model="filter.email" size="small" placeholder="邮箱"></el-input>
             </el-form-item>
             <el-form-item label="客户组">
-              <el-select v-model="filter.customer_group" placeholder="请选择">
+              <el-select size="small" v-model="filter.customer_group" placeholder="请选择">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
                   :value="item.id">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="状态">
-              <el-select v-model="filter.status" placeholder="请选择">
+              <el-select size="small" v-model="filter.status" placeholder="请选择">
                 <el-option label="启用" value="1"></el-option>
                 <el-option label="禁用" value="0"></el-option>
               </el-select>
