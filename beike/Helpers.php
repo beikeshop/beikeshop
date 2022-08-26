@@ -292,6 +292,9 @@ function locales(): array
  */
 function locale(): string
 {
+    if (is_admin()) {
+        return current_user()->locale ?? 'en';
+    }
     return Session::get('locale') ?? system_setting('base.locale');
 }
 
