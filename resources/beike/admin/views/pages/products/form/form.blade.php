@@ -71,7 +71,7 @@
               <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
             </x-admin::form.row>
 
-            <x-admin-form-select title="税类" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes->toArray()" key="id" label="title" />
+            <x-admin-form-select title="税类" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
             <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
 
             <x-admin::form.row title="分类">
