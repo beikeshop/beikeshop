@@ -1,13 +1,13 @@
 @extends('admin::layouts.master')
 
-@section('title', '分类管理')
+@section('title', __('admin/common.category'))
 
 @section('body-class', 'page-categories')
 
 @section('content')
   <div id="category-app" class="card">
     <div class="card-body">
-      <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">创建分类</a>
+      <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">{{ __('admin/category.categories_create') }}</a>
       <div class="mt-4" style="">
         <el-tree :data="categories" node-key="id" ref="tree">
           <div class="custom-tree-node d-flex align-items-center justify-content-between w-100" slot-scope="{ node, data }">
@@ -15,8 +15,8 @@
             <div class="d-flex align-items-center">
               <span :class="['me-4', 'badge', 'bg-' + (data.active ? 'success' : 'secondary')]">@{{ data.active ? '启用' : '禁用' }}</span>
               <div>
-                <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">编辑</a>
-                <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">删除</a>
+                <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">{{ __('common.delete') }}</a>
               </div>
             </div>
           </div>

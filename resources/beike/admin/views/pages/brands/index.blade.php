@@ -1,23 +1,23 @@
 @extends('admin::layouts.master')
 
-@section('title', '品牌管理')
+@section('title', __('admin/common.brand'))
 
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">创建品牌</button>
+        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('admin/brand.brands_create') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>名称</th>
-            <th>图标</th>
-            <th>排序</th>
-            <th>首字母</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th>{{ __('common.id') }}</th>
+            <th>{{ __('brand.name') }}</th>
+            <th>{{ __('brand.icon') }}</th>
+            <th>{{ __('common.sort_order') }}</th>
+            <th>{{ __('brand.first_letter') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -31,8 +31,8 @@
               <span :class="brand.status ? 'text-success' : 'text-secondary'">@{{ brand.status ? '启用' : '禁用' }}</span>
             </td>
             <td>
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
