@@ -24,14 +24,22 @@ class WelcomeController extends Controller
             exit('Already installed');
         }
 
-        $data['languages'] = LanguageRepo::enabled();
+        $languageDir = base_path('beike/Installer/Lang');
+        $packages = array_values(array_diff(scandir($languageDir), array('..', '.')));
+        $Languages = collect($packages)->filter(function ($package) {
+            return file_exists(base_path("beike/Installer/Lang/{$package}"));
+        })->toArray();
+        $data['languages'] = array_values($Languages);
+        $data['steps'] = 1;
 
         return view('installer::welcome', $data);
     }
 
     public function locale($lang)
     {
-        if (in_array($lang, languages()->toArray())) {
+        $languageDir = base_path('beike/Installer/Lang');
+        $packages = array_values(array_diff(scandir($languageDir), array('..', '.')));
+        if (in_array($lang, $packages)) {
             Session::put('locale', $lang);
         }
         return Redirect::back();
