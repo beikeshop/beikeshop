@@ -116,7 +116,9 @@
                 <td>
                   <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
                 </td>
-                <td>@{{ item.name || '无名称' }}</td>
+                <td>
+                  <a :href="item.url" target="_blank" class="text-dark">@{{ item.name || '无名称' }}</a>
+                </td>
                 <td>@{{ item.price_formatted }}</td>
                 <td>@{{ item.created_at }}</td>
                 <td>@{{ item.position }}</td>

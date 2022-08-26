@@ -2130,7 +2130,8 @@ __webpack_require__.r(__webpack_exports__);
     $btn.html(loadHtml).prop('disabled', true);
     $http.post('/carts', {
       sku_id: sku_id,
-      quantity: quantity
+      quantity: quantity,
+      buy_now: isBuyNow
     }, {
       hload: !!event
     }).then(function (res) {

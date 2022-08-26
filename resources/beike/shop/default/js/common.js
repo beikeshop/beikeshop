@@ -29,7 +29,7 @@ export default {
     const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
     $btn.html(loadHtml).prop('disabled', true);
 
-    $http.post('/carts', {sku_id, quantity}, {hload: !!event}).then((res) => {
+    $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
       this.getCarts();
       layer.msg(res.message)
       if (isBuyNow) {
