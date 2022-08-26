@@ -47,11 +47,12 @@
           </div>
         </div>
       </div>
+
+      @if (system_setting('base.telephone', ''))
       <div class="right nav">
-        {{-- <a href="" class="px-2">Delivery</a> --}}
-        {{-- <a href="" class="px-2">Help</a> --}}
-        <span class="px-2">028-0000000</span>
+        <span class="px-2"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</span>
       </div>
+      @endif
     </div>
   </div>
 
