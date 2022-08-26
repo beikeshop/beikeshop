@@ -37,11 +37,13 @@ return [
     'input' => '在此处输入您的搜索',
     'filter' => '筛选',
     'reset' => '重置',
+    'export' => '导出',
     'edit' => '编辑',
     'action' => '操作',
     'add' => '添加',
     'please_choose' => '请选择',
     'recommend_size' => '建议尺寸',
+    'pick_datetime' => '选择时间',
 
     'id' => 'ID',
     'created_at' => '创建时间',

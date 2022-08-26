@@ -12,7 +12,7 @@
 return [
     'id' => 'ID',
     'number' => 'Number',
-    'customer_name' => 'Customer Name',
+    'customer_name' => 'Customer',
     'payment_method' => 'Payment Method',
     'email' => 'Email',
     'telephone' => 'Telephone',

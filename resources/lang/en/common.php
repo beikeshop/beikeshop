@@ -38,11 +38,13 @@ return [
     'input' => 'Type your search here',
     'filter' => 'Filter',
     'reset' => 'Reset',
+    'export' => 'Export',
     'edit' => 'Edit',
     'action' => 'Action',
     'add' => 'Add',
     'please_choose' => 'Please Choose',
     'recommend_size' => 'Recommend Size',
+    'pick_datetime' => 'Pick Datetime',
 
     'id' => 'ID',
     'created_at' => 'Created At',
