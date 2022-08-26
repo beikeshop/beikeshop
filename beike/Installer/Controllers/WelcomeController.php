@@ -18,28 +18,26 @@ use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller
 {
+    private $languages = [
+        'zh_cn' => '简体中文',
+        'en' => 'English',
+    ];
+
+
     public function index()
     {
         if (installed()) {
             exit('Already installed');
         }
 
-        $languageDir = base_path('beike/Installer/Lang');
-        $packages = array_values(array_diff(scandir($languageDir), array('..', '.')));
-        $Languages = collect($packages)->filter(function ($package) {
-            return file_exists(base_path("beike/Installer/Lang/{$package}"));
-        })->toArray();
-        $data['languages'] = array_values($Languages);
-        $data['steps'] = 1;
+        $data['languages'] = $this->languages;
 
         return view('installer::welcome', $data);
     }
 
     public function locale($lang)
     {
-        $languageDir = base_path('beike/Installer/Lang');
-        $packages = array_values(array_diff(scandir($languageDir), array('..', '.')));
-        if (in_array($lang, $packages)) {
+        if (in_array($lang, languages()->toArray())) {
             Session::put('locale', $lang);
         }
         return Redirect::back();
