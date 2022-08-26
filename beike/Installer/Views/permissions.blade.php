@@ -11,30 +11,20 @@
 
 @section('content')
   <div class="install-2">
-    <h3 class="mb-5">文件夹权限检测</h3>
-    {{-- <ul class="list">
-      @foreach ($permissions['permissions'] as $permission)
-        <li class="list__item list__item--permissions {{ $permission['isSet'] ? 'success' : 'error' }}">
-          {{ $permission['folder'] }}
-          <span>
-            <i class="fa fa-fw fa-{{ $permission['isSet'] ? 'check-circle-o' : 'exclamation-circle' }}"></i>
-            {{ $permission['permission'] }}
-          </span>
-        </li>
-      @endforeach
-    </ul> --}}
-
+    <h3 class="mb-5">{{ __('installer::installer_messages.permissions.title') }}</h3>
     <table class="table table-hover text-black text-opacity-75 fs-5 mb-5">
       <thead>
         <tr>
-          <th width="70%">文件夹</th>
-          <th width="30%">状态</th>
+          <th width="40%">{{ __('installer::installer_messages.permissions.table') }}</th>
+          <th width="30%">{{ __('installer::installer_messages.permissions.next') }}</th>
+          <th width="30%">{{ __('installer::installer_messages.status') }}</th>
         </tr>
       </thead>
       <tbody>
         @foreach ($permissions['permissions'] as $permission)
           <tr class="{{ $permission['isSet'] ? '' : 'table-danger' }}">
-            <td>{{ $permission['folder'] }} {{ $permission['permission'] }}</td>
+            <td>{{ $permission['folder'] }}</td>
+            <td>{{ $permission['permission'] }}</td>
             <td>
               <i class="bi bi-{{ $permission['isSet'] ? 'check-circle-fill' : 'exclamation-circle-fill' }} {{ $permission['isSet'] ? 'text-success' : 'text-danger' }} row-icon"
                 aria-hidden="true"></i>

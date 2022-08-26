@@ -11,11 +11,11 @@
 
 @section('content')
   <div class="install-2">
-    <h3 class="mb-5">系统环境检测</h3>
+    <h3 class="mb-5">{{ trans('installer::installer_messages.requirements.title') }}</h3>
     <table class="table table-hover text-black text-opacity-75 fs-5 mb-5">
       <thead>
-        <th width="70%">环境</th>
-        <th width="30%">状态</th>
+        <th width="70%">{{ trans('installer::installer_messages.requirements.environment') }}</th>
+        <th width="30%">{{ trans('installer::installer_messages.status') }}</th>
       </thead>
       <tbody>
         @foreach ($requirements['requirements'] as $type => $requirement)
@@ -39,27 +39,6 @@
                 aria-hidden="true"></i></td>
             </tr>
           @endforeach
-
-          {{-- <ul class="list-group">
-            <li class="list__item list__title {{ $phpSupportInfo['supported'] ? 'success' : 'error' }}">
-              <strong>{{ ucfirst($type) }}</strong>
-              @if ($type == 'php')
-                <small>(version {{ $phpSupportInfo['minimum'] }} required)</small>
-                <span class="float-right">
-                  <strong>{{ $phpSupportInfo['current'] }}</strong>
-                  <i class="bi bi-{{ $phpSupportInfo['supported'] ? 'check-circle-fill' : 'exclamation-circle-fill' }} row-icon"
-                    aria-hidden="true"></i>
-                </span>
-              @endif
-            </li>
-            @foreach ($requirements['requirements'][$type] as $extention => $enabled)
-              <li class="list__item {{ $enabled ? 'success' : 'error' }}">
-                {{ $extention }}
-                <i class="fa fa-fw fa-{{ $enabled ? 'check-circle-o' : 'exclamation-circle' }} row-icon"
-                  aria-hidden="true"></i>
-              </li>
-            @endforeach
-          </ul> --}}
         @endforeach
       </tbody>
     </table>

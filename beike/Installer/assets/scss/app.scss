@@ -3,20 +3,35 @@
 $primary: #fd560f;
 
 body {
-  // background-color: #f6f7f8;
-  background-color: #f3f6f8;
-  display: flex;
-  height: 100vh;
+  .install-box {
+    background-color: #f3f6f8;
+    display: flex;
+    height: 100vh;
+    margin: auto;
 
-  > .aside-wrap {
-    width: 30%;
-    background-color: #fff;
-    padding: 40px 20px 40px 40px;
-  }
+    > .aside-wrap {
+      width: 30%;
+      background-color: #fff;
+      padding: 40px 20px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-  > .content {
-    width: 70%;
-    padding: 40px 60px;
+    > .content {
+      width: 70%;
+      padding: 40px 60px;
+
+      @media (min-width: 1441px) {
+        width: 60%;
+      }
+    }
+
+    .language-switch {
+      .form-select {
+        width: auto
+      }
+    }
   }
 }
 

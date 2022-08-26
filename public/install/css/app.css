@@ -1,16 +1,28 @@
-body {
+body .install-box {
   background-color: #f3f6f8;
   display: flex;
   height: 100vh;
+  margin: auto;
 }
-body > .aside-wrap {
+body .install-box > .aside-wrap {
   width: 30%;
   background-color: #fff;
   padding: 40px 20px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-body > .content {
+body .install-box > .content {
   width: 70%;
   padding: 40px 60px;
+}
+@media (min-width: 1441px) {
+  body .install-box > .content {
+    width: 60%;
+  }
+}
+body .install-box .language-switch .form-select {
+  width: auto;
 }
 
 .aside-wrap .logo img {
