@@ -25,6 +25,8 @@ return [
     'status' => 'Status',
     'enable' => 'Enable',
     'disable' => 'Disable',
+    'enabled' => 'Enabled',
+    'disabled' => 'Disabled',
     'home' => 'Home',
     'submit' => 'Submit',
     'save' => 'Save',

@@ -11,10 +11,10 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
+use Illuminate\Http\Request;
 use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\WishlistDetail;
-use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {

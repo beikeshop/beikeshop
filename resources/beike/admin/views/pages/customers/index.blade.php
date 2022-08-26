@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '客户管理')
+@section('title', __('admin/common.customer'))
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>
@@ -8,23 +8,23 @@
       <div class="bg-light p-4 mb-3">
         <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
           <div>
-            <el-form-item label="客户姓名">
-              <el-input v-model="filter.name" size="small" placeholder="客户姓名"></el-input>
+            <el-form-item label="{{ __('customer.name') }}">
+              <el-input v-model="filter.name" size="small" placeholder="{{ __('customer.name') }}"></el-input>
             </el-form-item>
-            <el-form-item label="邮箱">
-              <el-input v-model="filter.email" size="small" placeholder="邮箱"></el-input>
+            <el-form-item label="{{ __('customer.email') }}">
+              <el-input v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
             </el-form-item>
-            <el-form-item label="客户组">
-              <el-select size="small" v-model="filter.customer_group" placeholder="请选择">
+            <el-form-item label="{{ __('customer.customer_group') }}">
+              <el-select size="small" v-model="filter.customer_group" placeholder="{{ __('common.please_choose') }}">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
                   :value="item.id + ''">
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="状态">
-              <el-select size="small" v-model="filter.status" placeholder="请选择">
-                <el-option label="启用" value="1"></el-option>
-                <el-option label="禁用" value="0"></el-option>
+            <el-form-item label="{{ __('common.status') }}">
+              <el-select size="small" v-model="filter.status" placeholder="{{ __('common.please_choose') }}">
+                <el-option label="{{ __('common.enabled') }}" value="1"></el-option>
+                <el-option label="{{ __('common.disabled') }}" value="0"></el-option>
               </el-select>
             </el-form-item>
           </div>
@@ -33,25 +33,25 @@
         <div class="row">
           <label class="wp-100"></label>
           <div class="col-auto">
-            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">筛选</button>
-            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm ms-1">重置</button>
+            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">创建客户</button>
+        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>邮箱</th>
-            <th>名称</th>
-            <th>注册来源</th>
-            <th>客户组</th>
-            <th>状态</th>
-            <th>操作</th>
+            <th>{{ __('common.id') }}</th>
+            <th>{{ __('customer.email') }}</th>
+            <th>{{ __('customer.name') }}</th>
+            <th>{{ __('customer.from') }}</th>
+            <th>{{ __('customer.customer_group') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -71,8 +71,8 @@
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td>
-              <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">编辑</a>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">删除</button>
+              <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>

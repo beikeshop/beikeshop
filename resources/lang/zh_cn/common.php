@@ -24,6 +24,8 @@ return [
     'status' => '状态',
     'enable' => '启用',
     'disable' => '禁用',
+    'enabled' => '启用',
+    'disabled' => '禁用',
     'home' => '首页',
     'submit' => '提交',
     'save' => '保存',
