@@ -13,13 +13,13 @@ namespace Beike\Repositories;
 
 use Beike\Models\Order;
 use Beike\Models\OrderProduct;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class OrderProductRepo
 {
-    public static function create(Order $order, $cartProducts)
+    public static function createOrderProducts(Order $order, $cartProducts)
     {
         $orderProducts = [];
         foreach ($cartProducts as $cartProduct) {

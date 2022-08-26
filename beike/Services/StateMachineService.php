@@ -47,7 +47,7 @@ class StateMachineService
             self::CANCELLED => ['updateStatus', 'addHistory'],
         ],
         self::PAID => [
-            self::CANCELLED => ['updateStatus', 'addHistory', 'revertStock'],
+            self::CANCELLED => ['updateStatus', 'addHistory'],
             self::SHIPPED => ['updateStatus', 'addHistory'],
             self::COMPLETED => ['updateStatus', 'addHistory']
         ],
@@ -240,7 +240,17 @@ class StateMachineService
      */
     private function subStock($oldCode, $newCode)
     {
-
+        $this->order->loadMissing([
+            'orderProducts.productSku'
+        ]);
+        $orderProducts = $this->order->orderProducts;
+        foreach ($orderProducts as $orderProduct) {
+            $productSku = $orderProduct->productSku;
+            if (empty($productSku)) {
+                continue;
+            }
+            $productSku->decrement('quantity', $orderProduct->quantity);
+        }
     }
 
 

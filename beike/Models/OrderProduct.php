@@ -19,12 +19,17 @@ class OrderProduct extends Base
         'product_id', 'order_number', 'product_sku', 'name', 'image', 'quantity', 'price',
     ];
 
+    protected $appends = ['price_format'];
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
     }
 
-    protected $appends = ['price_format'];
+    public function productSku(): BelongsTo
+    {
+        return $this->belongsTo(ProductSku::class, 'product_sku', 'id');
+    }
 
     public function getPriceFormatAttribute()
     {

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
+use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
 use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
@@ -94,6 +95,7 @@ class CheckoutService
         try {
             DB::beginTransaction();
             $order = OrderRepo::create($checkoutData);
+            StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID);
             CartRepo::clearSelectedCartProducts($customer);
             DB::commit();
         } catch (\Exception $e) {

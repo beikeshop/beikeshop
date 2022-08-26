@@ -14,6 +14,7 @@ namespace Beike\Repositories;
 use Carbon\Carbon;
 use Beike\Models\Order;
 use Beike\Models\Address;
+use Beike\Services\StateMachineService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -199,7 +200,7 @@ class OrderRepo
             'currency_value' => 1,
             'ip' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
-            'status' => 'unpaid',
+            'status' => StateMachineService::CREATED,
             'shipping_method_code' => $shippingMethodCode,
             'shipping_method_name' => trans($shippingMethodCode),
             'shipping_customer_name' => $shippingAddress->name,
@@ -223,9 +224,8 @@ class OrderRepo
         ]);
         $order->saveOrFail();
 
-        OrderProductRepo::create($order, $carts['carts']);
+        OrderProductRepo::createOrderProducts($order, $carts['carts']);
         OrderTotalRepo::createTotals($order, $totals);
-        // OrderHistoryRepo::create($order);
 
         return $order;
     }
