@@ -12,7 +12,7 @@
 
   <div class="module-image-plus module-info mb-5 d-flex justify-content-center">
     <div class="container{{ $content['full'] ? '-fluid' : '' }}">
-      <a class="col-12"><img src="{{ $content['images'][0]['image'] }}" class="img-fluid"></a>
+      <a class="col-12" href="{{ $content['images'][0]['link']['link'] ?? '' }}"><img src="{{ $content['images'][0]['image'] }}" class="img-fluid"></a>
     </div>
   </div>
 </section>
