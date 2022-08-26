@@ -59,7 +59,7 @@
             <tr>
               <td>{{ $order->id }}</td>
               <td>{{ $order->number }}</td>
-              <td>{{ $order->customer_name }}</td>
+              <td>{{ sub_string($order->customer_name, 14) }}</td>
               <td>{{ $order->payment_method_name }}</td>
               <td>{{ $order->status_format }}</td>
               <td>{{ $order->total_format }}</td>
