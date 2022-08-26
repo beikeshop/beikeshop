@@ -47,7 +47,7 @@ return [
     'id' => 'ID',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
-    'sort_order' => 'Sort By',
+    'sort_order' => 'Sort Order',
 
     'order' => [
         'unpaid' => 'Unpaid',

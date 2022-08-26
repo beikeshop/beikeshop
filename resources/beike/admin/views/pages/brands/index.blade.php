@@ -42,33 +42,33 @@
         :total="brands.total"></el-pagination>
     </div>
 
-    <el-dialog title="品牌" :visible.sync="dialog.show" width="600px"
+    <el-dialog title="{{ __('admin/common.brand') }}" :visible.sync="dialog.show" width="600px"
       @close="closeDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="名称" prop="name">
-          <el-input class="mb-0" v-model="dialog.form.name" placeholder="名称"></el-input>
+        <el-form-item label="{{ __('brand.name') }}" prop="name">
+          <el-input class="mb-0" v-model="dialog.form.name" placeholder="{{ __('brand.name') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="图标" prop="logo" required>
+        <el-form-item label="{{ __('brand.icon') }}" prop="logo" required>
           <vue-image v-model="dialog.form.logo"></vue-image>
         </el-form-item>
 
-        <el-form-item label="首字母" prop="first">
-          <el-input class="mb-0" :maxlength="1" v-model="dialog.form.first" placeholder="首字母"></el-input>
+        <el-form-item label="{{ __('brand.first_letter') }}" prop="first">
+          <el-input class="mb-0" :maxlength="1" v-model="dialog.form.first" placeholder="{{ __('brand.first_letter') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="排序">
-          <el-input class="mb-0" type="number" v-model="dialog.form.sort_order" placeholder="排序"></el-input>
+        <el-form-item label="{{ __('common.sort_order') }}">
+          <el-input class="mb-0" type="number" v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="状态">
+        <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="submit('form')">保存</el-button>
-          <el-button @click="dialog.show = false">取消</el-button>
+          <el-button type="primary" @click="submit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="dialog.show = false">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
