@@ -53,7 +53,7 @@
                 </td>
                 <td>
                   <div class="quantity-wrap">
-                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
+                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
                     <div class="right">
                       <i class="bi bi-chevron-up"></i>
                       <i class="bi bi-chevron-down"></i>
@@ -143,9 +143,9 @@
           location = '{{ shop_route("checkout.index") }}'
         },
 
-        quantityChange(quantity, cart_id) {
+        quantityChange(quantity, cart_id, sku_id) {
           const self = this;
-          $http.put(`/carts/${cart_id}`, {quantity: quantity}, {hload: true}).then((res) => {
+          $http.put(`/carts/${cart_id}`, {quantity: quantity, sku_id}, {hload: true}).then((res) => {
             this.setUpdateData(res);
           })
         },
