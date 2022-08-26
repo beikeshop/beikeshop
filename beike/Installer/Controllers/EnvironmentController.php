@@ -65,7 +65,7 @@ class EnvironmentController extends Controller
 
         $results = $this->EnvironmentManager->saveFileWizard($request);
 
-        return $redirect->route('installer.database')
+        return $redirect->route('installer.database')->withInput($request->only('admin_email', 'admin_password'))
                         ->with(['results' => $results]);
     }
 

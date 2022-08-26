@@ -67,6 +67,8 @@ return [
                 'database_name'         => 'required|string|max:50',
                 'database_username'     => 'required|string|max:50',
                 'database_password'     => 'nullable|string|max:50',
+                'admin_email'           => 'required|email:rfc,dns',
+                'admin_password'        => 'required|string|max:50',
             ],
         ],
     ],
