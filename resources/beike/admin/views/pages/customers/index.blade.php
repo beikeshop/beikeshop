@@ -23,6 +23,7 @@
             </el-form-item>
             <el-form-item label="{{ __('common.status') }}">
               <el-select size="small" v-model="filter.status" placeholder="{{ __('common.please_choose') }}">
+                <el-option label="{{ __('common.all') }}" value=""></el-option>
                 <el-option label="{{ __('common.enabled') }}" value="1"></el-option>
                 <el-option label="{{ __('common.disabled') }}" value="0"></el-option>
               </el-select>
@@ -155,6 +156,11 @@
           customer_group: bk.getQueryString('customer_group'),
           status: bk.getQueryString('status'),
         },
+      },
+
+      mounted () {
+        const customerGroupAll = {id:'', name: '{{ __('common.all') }}'}
+        this.source.customer_group.unshift(customerGroupAll);
       },
 
       watch: {
