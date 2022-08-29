@@ -10,6 +10,7 @@
  */
 
 return [
+    'index' => '税类',
     'rule' => '规则',
     'based_on' => '基于',
     'priority' => '优先级',

@@ -10,6 +10,7 @@
  */
 
 return [
+    'index' => 'Tax',
     'rule' => 'Rule',
     'based_on' => 'Based',
     'priority' => 'Priority',

@@ -10,6 +10,8 @@
  */
 
 return [
+    'index' => '品牌',
+
     'brands_index' => '品牌列表',
     'brands_create' => '创建品牌',
     'brands_show' => '品牌详情',

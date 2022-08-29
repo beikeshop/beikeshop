@@ -122,13 +122,16 @@
                   <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
                 </td>
                 <td>
-                  <a :href="item.url" target="_blank" class="text-dark">@{{ item.name || '无名称' }}</a>
+                  <a :href="item.url" target="_blank" :title="item.name" class="text-dark">@{{ stringLengthInte(item.name, 90) }}</a>
                 </td>
                 <td>@{{ item.price_formatted }}</td>
                 <td>@{{ item.created_at }}</td>
                 <td>@{{ item.position }}</td>
                 @if ($type != 'trashed')
-                  <td>@{{ item.active ? '上架' : '下架' }}</td>
+                  <td>
+                    <span v-if="item.active" class="text-success">{{ __('common.enable') }}</span>
+                    <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+                  </td>
                 @endif
                 <td width="140" class="text-end">
                   <template v-if="item.deleted_at == ''">

@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '商品详情')
+@section('title', __('admin/product.products_show'))
 
 @section('body-class', 'page-product-form')
 
@@ -23,10 +23,10 @@
 
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-basic" type="button" >基础信息</button>
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-basic" type="button" >{{ __('admin/product.basic_information') }}</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-descriptions" type="button">商品详情</button>
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-descriptions" type="button">{{ __('admin/product.product_details') }}</button>
     </li>
   </ul>
 
@@ -41,9 +41,9 @@
 
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
-            <h6 class="border-bottom pb-3 mb-4">数据</h6>
-            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="名称" :value="$descriptions" :required="true" />
-            <x-admin::form.row title="图片">
+            <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
+            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
+            <x-admin::form.row title="{{ __('common.image') }}">
               <draggable
                 element="div"
                 ghost-class="dragabble-ghost"
@@ -60,21 +60,20 @@
                 </div>
                 <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
               </draggable>
-              <div class="help-text mb-1 mt-2">第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置；</div>
-              <div class="help-text">开启多规格并且多规格配置了图片时，这里的图片将作为多规格的公用图片，展示在其后面</div>
+              <div class="help-text mb-1 mt-2">{{ __('admin/product.image_help') }}</div>
             </x-admin::form.row>
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
-            <x-admin-form-input name="position" title="排序" :value="old('position', $product->position ?? '0')" />
+            <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
 
-            <x-admin::form.row title="品牌">
+            <x-admin::form.row :title="__('admin/brand.index')">
               <input type="text" value="{{ $product->brand->name ?? '' }}" id="brand-autocomplete" class="form-control wp-400 " />
               <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
             </x-admin::form.row>
 
-            <x-admin-form-select title="税类" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
-            <x-admin-form-switch name="active" title="状态" :value="old('active', $product->active ?? 1)" />
+            <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
+            <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 
-            <x-admin::form.row title="分类">
+            <x-admin::form.row :title="__('admin/category.index')">
               <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
                 @foreach ($source['categories'] as $_category)
                 <div class="form-check">
@@ -89,9 +88,9 @@
             </x-admin::form.row>
 
             <div>
-              <h5 class="border-bottom pb-3 mb-4">商品库存</h5>
+              <h5 class="border-bottom pb-3 mb-4">{{ __('admin/product.stocks') }}</h5>
 
-              <x-admin::form.row title="启用多规格">
+              <x-admin::form.row :title="__('admin/product.enable_multi_spec')">
                 <el-switch v-model="editing.isVariable" class="mt-2"></el-switch>
               </x-admin::form.row>
 
@@ -107,12 +106,12 @@
                           <div class="title">
                             <div>
                               <b>@{{ variant.name[current_language_code] }}</b>
-                              <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">编辑</el-link>
-                              <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">移除</el-link>
+                              <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">{{ __('admin/product.edit') }}</el-link>
+                              <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">{{ __('admin/product.delete') }}</el-link>
                             </div>
                             <div>
-                              <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">添加规格图片</el-checkbox>
-                              <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">添加规格值</el-button>
+                              <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>
+                              <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</el-button>
                             </div>
                           </div>
                            <draggable
@@ -147,12 +146,12 @@
                              </div>
                           </draggable>
                           <div v-else>
-                            <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">请添加规格值</div>
+                            <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</div>
                           </div>
                         </div>
                       </draggable>
 
-                      <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">添加规格</el-button>
+                      <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
                     </div>
 
                     <div v-if="form.skus.length && form.variables.length" class="mt-3">
@@ -161,13 +160,13 @@
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}
                           </th>
-                          <th width="106px">图片</th>
-                          <th>型号</th>
+                          <th width="106px">{{ __('common.image') }}</th>
+                          <th>{{ __('admin/product.model') }}</th>
                           <th>sku</th>
-                          <th>价格</th>
-                          <th>原价</th>
-                          <th>成本价</th>
-                          <th>数量</th>
+                          <th>{{ __('admin/product.price') }}</th>
+                          <th>{{ __('admin/product.origin_price') }}</th>
+                          <th>{{ __('admin/product.cost_price') }}</th>
+                          <th>{{ __('admin/product.quantity') }}</th>
                         </thead>
                         <tbody>
                           <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
@@ -194,42 +193,42 @@
                                 :name="'skus[' + skuIndex + '][variants][' + j + ']'" :value="variantValueIndex">
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
-                                placeholder="型号"></td>
+                                placeholder="{{ __('admin/product.model') }}"></td>
                             <td>
                               <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
-                              <span role="alert" class="invalid-feedback">请填写sku</span>
-                              <span v-if="sku.is_default" class="text-success">默认主商品</span>
+                              <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => 'sku']) }}</span>
+                              <span v-if="sku.is_default" class="text-success">{{ __('admin/product.default_main_product') }}</span>
                             </td>
                             <td>
                               <input type="text" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'"
-                                placeholder="价格" required>
-                              <span role="alert" class="invalid-feedback">请填写价格</span>
+                                placeholder="{{ __('admin/product.price') }}" required>
+                              <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/product.price')]) }}</span>
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'"
-                                placeholder="原价"></td>
+                                placeholder="{{ __('admin/product.origin_price') }}"></td>
                             <td><input type="text" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'"
-                                placeholder="成本价">
+                                placeholder="{{ __('admin/product.cost_price') }}">
                             </td>
                             <td><input type="text" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
-                                placeholder="数量"></td>
+                                placeholder="{{ __('admin/product.quantity') }}"></td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
                   <input class="form-control d-none" :value="form.skus[0]?.variants?.length || ''" required>
-                  <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> 请添加规格</div>
+                  <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
                 </div>
               </div>
 
               <template v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
-                <x-admin-form-input name="skus[0][model]" title="型号" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
+                <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
                 <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
-                <x-admin-form-input name="skus[0][price]" title="价格" :value="old('skus.0.price', $product->skus[0]->price ?? '')" required />
-                <x-admin-form-input name="skus[0][origin_price]" title="原价" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
-                <x-admin-form-input name="skus[0][cost_price]" title="成本价" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
-                <x-admin-form-input name="skus[0][quantity]" title="数量" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
+                <x-admin-form-input name="skus[0][price]" :title="__('admin/product.price')" :value="old('skus.0.price', $product->skus[0]->price ?? '')" required />
+                <x-admin-form-input name="skus[0][origin_price]" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" />
+                <x-admin-form-input name="skus[0][cost_price]" :title="__('admin/product.cost_price')" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" />
+                <x-admin-form-input name="skus[0][quantity]" :title="__('admin/product.quantity')" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
                 <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
                 <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
@@ -237,8 +236,8 @@
             </div>
           </div>
           <div class="tab-pane fade" id="tab-descriptions">
-            <h6 class="border-bottom pb-3 mb-4">商品详情</h6>
-            <x-admin::form.row title="商品详情">
+            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/product.product_details') }}</h6>
+            <x-admin::form.row :title="__('admin/product.product_details')">
 
               <ul class="nav nav-tabs mb-3" role="tablist">
                 @foreach ($languages as $language)
@@ -263,21 +262,21 @@
 
 
         <x-admin::form.row title="">
-          <button type="submit" class="btn btn-primary mt-3 btn-lg">保存</button>
+          <button type="submit" class="btn btn-primary mt-3 btn-lg">{{ __('common.save') }}</button>
         </x-admin::form.row>
 
         <el-dialog
-          title="编辑"
+          title="{{ __('common.edit') }}"
           :visible.sync="dialogVariables.show"
           width="400"
           @close="closedialogVariablesFormDialog('form')"
           :close-on-click-modal="false"
           >
           <el-form ref="form" :rules="rules" :model="dialogVariables.form" label-width="100px">
-            <el-form-item label="名称" required class="language-inputs">
+            <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
               <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
                 :rules="[
-                  { required: true, message: '输入框不能为空', trigger: 'blur' },
+                  { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
                 ]"
               >
                 <el-input size="mini" v-model="dialogVariables.form.name[lang.code]" placeholder="请填写名称"><template slot="prepend">@{{lang.name}}</template></el-input>
@@ -285,8 +284,8 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="dialogVariablesFormSubmit('form')">保存</el-button>
-              <el-button @click="closedialogVariablesFormDialog('form')">取消</el-button>
+              <el-button type="primary" @click="dialogVariablesFormSubmit('form')">{{ __('common.save') }}</el-button>
+              <el-button @click="closedialogVariablesFormDialog('form')">{{ __('common.cancel') }}</el-button>
             </el-form-item>
           </el-form>
         </el-dialog>

@@ -10,6 +10,8 @@
  */
 
 return [
+    'index' => 'Category',
+
     'categories_index' => 'Index',
     'categories_create' => 'Create',
     'categories_show' => 'Detail',

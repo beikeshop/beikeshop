@@ -10,6 +10,8 @@
  */
 
 return [
+    'index' => 'Brand',
+
     'brands_index' => 'Index',
     'brands_create' => 'Create',
     'brands_show' => 'Detail',

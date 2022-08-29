@@ -10,6 +10,8 @@
  */
 
 return [
+    'index' => '分类',
+
     'categories_index' => '分类列表',
     'categories_create' => '创建分类',
     'categories_show' => '分类详情',

@@ -13,6 +13,7 @@ return [
     'error_required' => 'Please fill out the :name', // 这个有用别删了，:name 是一个变量
     'error_required_name' => 'Please fill in your name',
     'error_required_email' => 'Please enter your email',
+    'error_input_required' => 'Input box cannot be empty',
     'unauthenticated' => 'Please login first',
     'success' => 'Success',
     'no_data' => 'No data～',
@@ -53,6 +54,9 @@ return [
     'confirm_delete' => 'You sure you want to delete it?',
     'text_hint' => 'Hint',
     'restore' => 'Restore',
+    'name' => 'Name',
+    'image' => 'Image',
+    'data' => 'Data',
 
     'id' => 'ID',
     'created_at' => 'Created At',
