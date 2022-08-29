@@ -149,9 +149,7 @@
             :total="product.total"></el-pagination>
         </template>
 
-        <p v-else>
-          <x-admin-no-data/>
-        </p>
+        <div v-else><x-admin-no-data /></div>
       </div>
     </div>
   </div>
