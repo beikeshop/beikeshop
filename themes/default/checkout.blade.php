@@ -366,6 +366,7 @@
           $http.put('/checkout', this.form).then((res) => {
             this.form = res.current
             this.isAllAddress = false
+            this.isAllAddressPayment = false
           })
         },
 
