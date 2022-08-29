@@ -17,6 +17,7 @@ return [
     'products_delete' => '删除商品',
     'products_trashed' => '回收站',
     'products_restore' => '恢复回收站',
+    'clear_restore' => '清空回收站',
 
 
     'batch_delete' => '批量删除',

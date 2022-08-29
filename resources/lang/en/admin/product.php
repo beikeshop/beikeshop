@@ -17,6 +17,7 @@ return [
     'products_delete' => 'Delete',
     'products_trashed' => 'Trashed',
     'products_restore' => 'restore',
+    'clear_restore' => 'Empty Recycle Bin',
 
     'batch_delete' => 'Batch Delete',
     'batch_active' => 'Batch Active',

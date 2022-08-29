@@ -61,17 +61,23 @@
         </div>
 
         <div class="d-flex justify-content-between my-4">
-          <a href="{{ admin_route('products.create') }}">
-            <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
-          </a>
+          @if ($type != 'trashed')
+            <a href="{{ admin_route('products.create') }}">
+              <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
+            </a>
+          @else
+            <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
+          @endif
 
+          @if ($type != 'trashed')
           <div class="right">
             <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
-              @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
+            @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
-              @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+            @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
           </div>
+          @endif
         </div>
 
         <template v-if="product.data.length">
@@ -143,7 +149,9 @@
             :total="product.total"></el-pagination>
         </template>
 
-        <p v-else>无商品</p>
+        <p v-else>
+          <x-admin-no-data/>
+        </p>
       </div>
     </div>
   </div>
@@ -286,6 +294,16 @@
             $http.put('products/restore', {
               id: product.id
             }).then((res) => {
+              location.reload();
+            })
+          });
+        },
+
+        clearRestore() {
+          this.$confirm('确认要清空回收站吗？', '提示', {
+            type: 'warning'
+          }).then(() => {
+            $http.post('products/trashed/clear').then((res) => {
               location.reload();
             })
           });
