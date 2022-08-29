@@ -24,6 +24,10 @@ class CountryController extends Controller
             'country' => $countries,
         ];
 
+        if ($request->expectsJson()) {
+            return json_success(trans('common.success'), $data);
+        }
+
         return view('admin::pages.country.index', $data);
     }
 

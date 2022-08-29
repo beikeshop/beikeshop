@@ -26,6 +26,10 @@ class ZoneController extends Controller
             'countries' => CountryRepo::all()
         ];
 
+        if ($request->expectsJson()) {
+            return json_success(trans('common.success'), $data);
+        }
+
         return view('admin::pages.zones.index', $data);
     }
 

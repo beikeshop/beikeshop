@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '国家管理')
+@section('title', '省份管理')
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
@@ -22,44 +22,56 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="country, index in country.data" :key="index">
-            <td>@{{ country.id }}</td>
-            <td>@{{ country.name }}</td>
-            <td>@{{ country.code }}</td>
-            <td>@{{ country.created_at }}</td>
-            <td>@{{ country.updated_at }}</td>
-            <td>@{{ country.sort_order }}</td>
+          <tr v-for="zone, index in zones.data" :key="index">
+            <td>@{{ zone.id }}</td>
+            <td>@{{ zone.name }}</td>
+            <td>@{{ zone.code }}</td>
+            <td>@{{ zone.created_at }}</td>
+            <td>@{{ zone.updated_at }}</td>
+            <td>@{{ zone.sort_order }}</td>
             <td>
-              <span v-if="country.status" class="text-success">{{ __('common.enable') }}</span>
+              <span v-if="zone.status" class="text-success">{{ __('common.enable') }}</span>
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">删除</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">删除</button>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <el-pagination layout="prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
-        :total="country.total"></el-pagination>
+      <el-pagination layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
+        :total="zones.total"></el-pagination>
     </div>
 
-    <el-dialog title="国家管理" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="省份管理" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="国家名称" prop="name">
+        <el-form-item label="省份名称" prop="name">
           <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
+        </el-form-item>
+
+        <el-form-item label="编码">
+          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
+        </el-form-item>
+
+        <el-form-item label="所属国家">
+          <el-select v-model="dialog.form.country_id" placeholder="请选择">
+            <el-option
+              v-for="item in countries"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
 
         <el-form-item label="排序">
           <el-input v-model="dialog.form.sort_order" placeholder="排序"></el-input>
         </el-form-item>
 
-        <el-form-item label="编码">
-          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
-        </el-form-item>
 
         <el-form-item label=" 状态">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
@@ -82,7 +94,9 @@
       el: '#tax-classes-app',
 
       data: {
-        country: @json($country ?? []),
+        countries: @json($countries ?? []),
+        zones: @json($zones ?? []),
+
         page: 1,
 
         dialog: {
@@ -93,6 +107,7 @@
             id: null,
             name: '',
             code: '',
+            country_id: '',
             sort_order: '',
             status: 1,
           },
@@ -111,8 +126,8 @@
 
       methods: {
         loadData() {
-          $http.get(`countries?page=${this.page}`).then((res) => {
-            this.country = res.data.country;
+          $http.get(`zones?page=${this.page}`).then((res) => {
+            this.zones = res.data.zones;
           })
         },
 
@@ -122,12 +137,12 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            this.dialog.form = JSON.parse(JSON.stringify(this.country.data[index]));
+            this.dialog.form = JSON.parse(JSON.stringify(this.zones.data[index]));
           }
         },
 
         statusChange(e, index) {
-          const id = this.country.data[index].id;
+          const id = this.zones.data[index].id;
 
           // $http.put(`languages/${id}`).then((res) => {
           //   layer.msg(res.message);
@@ -137,7 +152,7 @@
         addFormSubmit(form) {
           const self = this;
           const type = this.dialog.type == 'add' ? 'post' : 'put';
-          const url = this.dialog.type == 'add' ? 'countries' : 'countries/' + this.dialog.form.id;
+          const url = this.dialog.type == 'add' ? 'zones' : 'zones/' + this.dialog.form.id;
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
@@ -148,10 +163,10 @@
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
               if (this.dialog.type == 'add') {
-                // this.country.data.push(res.data)
+                // this.zones.data.push(res.data)
                 this.loadData();
               } else {
-                this.country.data[this.dialog.index] = res.data
+                this.zones.data[this.dialog.index] = res.data
               }
 
               this.dialog.show = false
@@ -166,7 +181,7 @@
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.delete('countries/' + id).then((res) => {
+            $http.delete('zones/' + id).then((res) => {
               this.$message.success(res.message);
               this.loadData();
               // self.country.data.splice(index, 1)
