@@ -12,6 +12,8 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Currency;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class CurrencyRepo
 {
@@ -64,16 +66,38 @@ class CurrencyRepo
         }
     }
 
+
+    /**
+     * 获取所有货币列表
+     *
+     * @return Builder[]|Collection
+     */
     public static function all()
     {
         return Currency::query()->get();
     }
 
+
+    /**
+     * 查找所有已开启货币
+     *
+     * @return Builder[]|Collection
+     */
     public static function listEnabled()
     {
         if (self::$enabledCurrencies !== null) {
             return self::$enabledCurrencies;
         }
         return self::$enabledCurrencies = Currency::query()->where('status', true)->get();
+    }
+
+
+    /**
+     * 根据code查找货币
+     * @return Builder[]|Collection
+     */
+    public static function findByCode($code)
+    {
+        return self::listEnabled()->where('code', $code)->firstOrFail();
     }
 }

@@ -184,6 +184,10 @@ class OrderRepo
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $paymentMethodCode = $current['payment_method_code'] ?? '';
 
+        $currencyCode = current_currency_code();
+        $currency = CurrencyRepo::findByCode($currencyCode);
+        $currencyValue = $currency->value ?? 1;
+
         $order = new Order([
             'number' => self::generateOrderNumber(),
             'customer_id' => $customer->id,
@@ -196,8 +200,8 @@ class OrderRepo
             'telephone' => $customer->telephone ?? '',
             'total' => $orderTotal['amount'],
             'locale' => locale(),
-            'currency_code' => current_currency_code(),
-            'currency_value' => 1,
+            'currency_code' => $currencyCode,
+            'currency_value' => $currencyValue,
             'ip' => request()->getClientIp(),
             'user_agent' => request()->userAgent(),
             'status' => StateMachineService::CREATED,
