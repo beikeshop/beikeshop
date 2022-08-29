@@ -12,6 +12,7 @@
 namespace Beike\Shop\Services;
 
 use Beike\Libraries\Tax;
+use Beike\Models\Cart;
 use Illuminate\Support\Str;
 
 class TotalService
@@ -23,15 +24,17 @@ class TotalService
         'order_total'
     ];
 
-    public array $carts;
+    public Cart $currentCart;
+    public array $cartProducts;
     public array $taxes = [];
     public array $totals;
     public float $amount = 0;
     public string $shippingMethod = '';
 
-    public function __construct($carts)
+    public function __construct($currentCart, $cartProducts)
     {
-        $this->carts = $carts;
+        $this->currentCart = $currentCart;
+        $this->cartProducts = $cartProducts;
         $this->getTaxes();
     }
 
@@ -53,8 +56,13 @@ class TotalService
      */
     public function getTaxes(): array
     {
-        $taxLib = Tax::getInstance();
-        foreach ($this->carts as $product) {
+        $addressInfo = [
+            'shipping_address' => $this->currentCart->shippingAddress,
+            'payment_address' => $this->currentCart->paymentAddress,
+        ];
+        $taxLib = Tax::getInstance($addressInfo);
+
+        foreach ($this->cartProducts as $product) {
             if (empty($product['tax_class_id'])) {
                 continue;
             }

@@ -18,7 +18,7 @@ class SubtotalService
 {
     public static function getTotal(TotalService $totalService)
     {
-        $carts = $totalService->carts;
+        $carts = $totalService->cartProducts;
         $amount = collect($carts)->sum('subtotal');
         $totalData = [
             'code' => 'sub_total',

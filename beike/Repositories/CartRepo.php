@@ -55,6 +55,7 @@ class CartRepo
             }
             $cart->save();
         }
+        $cart->loadMissing(['shippingAddress', 'paymentAddress']);
         return $cart;
     }
 

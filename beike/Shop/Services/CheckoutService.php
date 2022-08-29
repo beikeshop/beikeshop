@@ -163,20 +163,23 @@ class CheckoutService
     public function checkoutData(): array
     {
         $customer = $this->customer;
+        $currentCart = $this->cart;
+
         $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodItem::collection(PluginRepo::getShippingMethods())->jsonSerialize();
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
-        $totalService = (new TotalService($cartList))->setShippingMethod($this->cart->shipping_method_code);
+
+        $totalService = (new TotalService($currentCart, $cartList));
 
         $data = [
             'current' => [
-                'shipping_address_id' => $this->cart->shipping_address_id,
-                'shipping_method_code' => $this->cart->shipping_method_code,
-                'payment_address_id' => $this->cart->payment_address_id,
-                'payment_method_code' => $this->cart->payment_method_code,
+                'shipping_address_id' => $currentCart->shipping_address_id,
+                'shipping_method_code' => $currentCart->shipping_method_code,
+                'payment_address_id' => $currentCart->payment_address_id,
+                'payment_method_code' => $currentCart->payment_method_code,
             ],
             'country_id' => (int)system_setting('base.country_id'),
             'customer_id' => $customer->id ?? null,
