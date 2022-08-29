@@ -61,7 +61,7 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu'])) {
+        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));

@@ -13,6 +13,7 @@
           <tr>
             <th>ID</th>
             <th>名称</th>
+            <th>编码</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th>排序</th>
@@ -24,6 +25,7 @@
           <tr v-for="country, index in country.data" :key="index">
             <td>@{{ country.id }}</td>
             <td>@{{ country.name }}</td>
+            <td>@{{ country.code }}</td>
             <td>@{{ country.created_at }}</td>
             <td>@{{ country.updated_at }}</td>
             <td>@{{ country.sort_order }}</td>
@@ -53,6 +55,10 @@
 
         <el-form-item label="排序">
           <el-input v-model="dialog.form.sort_order" placeholder="排序"></el-input>
+        </el-form-item>
+
+        <el-form-item label="编码">
+          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
         </el-form-item>
 
         <el-form-item label=" 状态">
@@ -86,6 +92,7 @@
           form: {
             id: null,
             name: '',
+            code: '',
             sort_order: '',
             status: 1,
           },
@@ -141,9 +148,9 @@
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
               if (this.dialog.type == 'add') {
-                this.languages.push(res.data)
+                this.country.data.push(res.data)
               } else {
-                this.languages[this.dialog.index] = res.data
+                this.country.data[this.dialog.index] = res.data
               }
 
               this.dialog.show = false
@@ -158,9 +165,9 @@
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.delete('languages/' + id).then((res) => {
+            $http.delete('countries/' + id).then((res) => {
               this.$message.success(res.message);
-              self.languages.splice(index, 1)
+              self.country.data.splice(index, 1)
             })
           }).catch(()=>{})
         },
