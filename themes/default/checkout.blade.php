@@ -23,7 +23,7 @@
           <div class="checkout-title">
             <div class="d-flex">
               <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
-              <el-checkbox v-model="form.same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
+              <el-checkbox v-model="form.same_as_shipping_address" @change="(e) => {updateCheckout(e, 'same_as_shipping_address')}">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
             </div>
             <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
           </div>
@@ -288,7 +288,7 @@
         },
 
         updateCheckout(id, key) {
-          if (this.form[key] === id) {
+          if (this.form[key] === id && key != 'same_as_shipping_address') {
             return
           }
 
