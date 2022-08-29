@@ -30,6 +30,7 @@ return [
     'disabled' => '禁用',
     'home' => '首页',
     'submit' => '提交',
+    'title' => '标题',
     'save' => '保存',
     'cancel' => '取消',
     'confirm' => '确定',

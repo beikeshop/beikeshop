@@ -10,6 +10,10 @@
  */
 
 return [
+    'index' => '信息页面',
+    'info_title' => '信息标题',
+    'info_content' => '内容',
+
     'pages_index' => '单页列表',
     'pages_create' => '创建单页',
     'pages_show' => '单页详情',

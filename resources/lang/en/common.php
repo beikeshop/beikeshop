@@ -31,6 +31,7 @@ return [
     'disabled' => 'Disabled',
     'home' => 'Home',
     'submit' => 'Submit',
+    'title' => 'Title',
     'save' => 'Save',
     'cancel' => 'Cancel',
     'confirm' => 'Confirm',

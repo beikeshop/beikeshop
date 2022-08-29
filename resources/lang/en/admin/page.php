@@ -10,6 +10,10 @@
  */
 
 return [
+    'index' => 'Information',
+    'info_title' => 'Information Title',
+    'info_content' => 'Content',
+
     'pages_index' => 'Index',
     'pages_create' => 'Create',
     'pages_show' => 'Detail',
