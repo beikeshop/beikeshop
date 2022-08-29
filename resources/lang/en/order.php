@@ -26,4 +26,5 @@ return [
     'paid' => 'Paid',
     'shipped' => 'Shipped',
     'completed' => 'Completed',
+    'cancelled' => 'Cancelled',
 ];
