@@ -50,6 +50,8 @@ return [
     'please_choose' => 'Please Choose',
     'recommend_size' => 'Recommend Size',
     'pick_datetime' => 'Pick Datetime',
+    'confirm_delete' => 'You sure you want to delete it?',
+    'text_hint' => 'Hint',
 
     'id' => 'ID',
     'created_at' => 'Created At',

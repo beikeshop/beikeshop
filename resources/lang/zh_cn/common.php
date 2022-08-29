@@ -49,6 +49,8 @@ return [
     'please_choose' => '请选择',
     'recommend_size' => '建议尺寸',
     'pick_datetime' => '选择时间',
+    'confirm_delete' => '确定要删除吗?',
+    'text_hint' => '提示',
 
     'id' => 'ID',
     'created_at' => '创建时间',

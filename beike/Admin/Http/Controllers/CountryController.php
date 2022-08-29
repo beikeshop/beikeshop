@@ -21,10 +21,10 @@ class CountryController extends Controller
         $countries = CountryRepo::list($request->only('name', 'code', 'status'));
 
         $data = [
-            'zones' => $countries,
+            'country' => $countries,
         ];
 
-        return view('admin::pages.zones.index', $data);
+        return view('admin::pages.country.index', $data);
     }
 
     public function store(Request $request)
