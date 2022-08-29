@@ -36,6 +36,7 @@ class ProductDetail extends JsonResource
             'variables' => $this->decodeVariables($this->variables),
             'skus' => SkuDetail::collection($this->skus)->jsonSerialize(),
             'in_wishlist' => $this->inCurrentWishlist->id ?? 0,
+            'active' => (bool)$this->active,
         ];
     }
 

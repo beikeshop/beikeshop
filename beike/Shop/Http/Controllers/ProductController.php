@@ -19,13 +19,6 @@ class ProductController extends Controller
     public function show(Request $request, Product $product)
     {
         $product = ProductRepo::getProductDetail($product);
-        if ($product->active == 0) {
-            $data = [
-                'product' => (new ProductDetail($product))->jsonSerialize(),
-                'error' => trans('product.has_been_inactive')
-            ];
-            return view('product', $data);
-        }
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),
         ];
