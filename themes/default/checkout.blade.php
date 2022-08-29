@@ -23,32 +23,41 @@
           <div class="checkout-title">
             <div class="d-flex">
               <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
-              <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
+              <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
+              </el-checkbox>
             </div>
-            <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
+            <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i
+                class="bi bi-x-lg"></i></button>
           </div>
           <div class="addresses-wrap">
             <div class="row">
-              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
-                <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'shipping_address_id')">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index"
+                v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
+                <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
+                  @click="updateCheckout(address.id, 'shipping_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
                     <span class="phone">@{{ address.phone }}</span>
                   </div>
                   <div class="zipcode">@{{ address.zipcode }}</div>
-                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
+                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
+                    @{{ address.address_1 }}</div>
                   <div class="address-bottom">
                     <div>
-                      <span class="badge bg-success" v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                      <span class="badge bg-success"
+                        v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
                     </div>
-                    <a class="" @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
+                    <a class=""
+                      @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
                   </div>
                 </div>
               </div>
               <div class="col-6" v-if="!isAllAddress">
                 <div class="item address-right">
-                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
-                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+                    @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i
+                      class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                 </div>
               </div>
             </div>
@@ -60,30 +69,38 @@
             <div class="d-flex">
               <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
             </div>
-            <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i class="bi bi-x-lg"></i></button>
+            <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i
+                class="bi bi-x-lg"></i></button>
           </div>
           <div class="addresses-wrap">
             <div class="row">
-              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
-                <div :class="['item', address.id == form.payment_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'payment_address_id')">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index"
+                v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
+                <div :class="['item', address.id == form.payment_address_id ? 'active' : '']"
+                  @click="updateCheckout(address.id, 'payment_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
                     <span class="phone">@{{ address.phone }}</span>
                   </div>
                   <div class="zipcode">@{{ address.zipcode }}</div>
-                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
+                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
+                    @{{ address.address_1 }}</div>
                   <div class="address-bottom">
                     <div>
-                      <span class="badge bg-success" v-if="form.payment_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                      <span class="badge bg-success"
+                        v-if="form.payment_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
                     </div>
-                    <a class="" @click.stop="editAddress(index, 'payment_address_id')">{{ __('shop/checkout.edit') }}</a>
+                    <a class=""
+                      @click.stop="editAddress(index, 'payment_address_id')">{{ __('shop/checkout.edit') }}</a>
                   </div>
                 </div>
               </div>
               <div class="col-6" v-if="!isAllAddressPayment">
                 <div class="item address-right">
-                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
-                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+                    @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i
+                      class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                 </div>
               </div>
             </div>
@@ -93,9 +110,12 @@
         <div class="checkout-black">
           <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>
           <div class="radio-line-wrap">
-            <div :class="['radio-line-item', payment.code == form.payment_method_code ? 'active' : '']" v-for="payment, index in source.payment_methods" :key="index" @click="updateCheckout(payment.code, 'payment_method_code')">
+            <div :class="['radio-line-item', payment.code == form.payment_method_code ? 'active' : '']"
+              v-for="payment, index in source.payment_methods" :key="index"
+              @click="updateCheckout(payment.code, 'payment_method_code')">
               <div class="left">
-                <input name="payment" type="radio" v-model="form.payment_method_code" :value="payment.code" :id="'payment-method-' + index" class="form-check-input">
+                <input name="payment" type="radio" v-model="form.payment_method_code" :value="payment.code"
+                  :id="'payment-method-' + index" class="form-check-input">
                 <img :src="payment.icon" class="img-fluid">
               </div>
               <div class="right">
@@ -109,9 +129,12 @@
         <div class="checkout-black">
           <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
           <div class="radio-line-wrap">
-            <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']" v-for="shipping, index in source.shipping_methods" :key="index" @click="updateCheckout(shipping.code, 'shipping_method_code')">
+            <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']"
+              v-for="shipping, index in source.shipping_methods" :key="index"
+              @click="updateCheckout(shipping.code, 'shipping_method_code')">
               <div class="left">
-                <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code" :id="'shipping-method-' + index" class="form-check-input">
+                <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code"
+                  :id="'shipping-method-' + index" class="form-check-input">
                 <img :src="shipping.icon" class="img-fluid">
               </div>
               <div class="right">
@@ -146,11 +169,12 @@
             </div>
             <ul class="totals">
               @foreach ($totals as $total)
-              <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
+                <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
               @endforeach
             </ul>
             <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary" type="button" :disabled="!isSubmit" @click="checkedBtnCheckoutConfirm">{{ __('shop/checkout.submit_order') }}</button>
+              <button class="btn btn-primary" type="button" :disabled="!isSubmit"
+                @click="checkedBtnCheckoutConfirm">{{ __('shop/checkout.submit_order') }}</button>
             </div>
           </div>
         </div>
@@ -205,11 +229,31 @@
         },
 
         addressRules: {
-          name: [{required: true, message: '{{ __('shop/checkout.enter_name') }}', trigger: 'blur'}, ],
-          phone: [{required: true, message: '{{ __('shop/checkout.enter_phone') }}', trigger: 'blur'}, ],
-          address_1: [{required: true, message: '{{ __('shop/checkout.enter_address') }}', trigger: 'blur'}, ],
-          zone_id: [{required: true, message: '{{ __('shop/checkout.select_province') }}', trigger: 'blur'}, ],
-          city: [{required: true, message: '{{ __('shop/checkout.enter_city') }}', trigger: 'blur'}, ],
+          name: [{
+            required: true,
+            message: '{{ __('shop/checkout.enter_name') }}',
+            trigger: 'blur'
+          }, ],
+          phone: [{
+            required: true,
+            message: '{{ __('shop/checkout.enter_phone') }}',
+            trigger: 'blur'
+          }, ],
+          address_1: [{
+            required: true,
+            message: '{{ __('shop/checkout.enter_address') }}',
+            trigger: 'blur'
+          }, ],
+          zone_id: [{
+            required: true,
+            message: '{{ __('shop/checkout.select_province') }}',
+            trigger: 'blur'
+          }, ],
+          city: [{
+            required: true,
+            message: '{{ __('shop/checkout.enter_city') }}',
+            trigger: 'blur'
+          }, ],
         }
       },
 
@@ -223,6 +267,7 @@
           set(e) {
             if (e) {
               this.form.payment_address_id = this.form.shipping_address_id
+              this.updateCheckout(this.form.payment_address_id, 'same_as_shipping_address')
             } else {
               this.form.payment_address_id = '';
             }
@@ -231,14 +276,15 @@
 
         isSubmit() {
           // source.addresses.length > 0 && source.payment_methods.length > 0 && source.shipping_methods.length > 0
-          return this.source.addresses.length > 0 && this.source.payment_methods.length > 0 && this.source.shipping_methods.length > 0;
+          return this.source.addresses.length > 0 && this.source.payment_methods.length > 0 && this.source
+            .shipping_methods.length > 0;
         },
         // isAddress: {
         //   this.form.shipping_address_id ==
         // }
       },
 
-      beforeMount () {
+      beforeMount() {
         this.countryChange(this.dialogAddress.form.country_id);
       },
 
@@ -295,7 +341,7 @@
           this.dialogAddress.index = null;
 
           Object.keys(this.dialogAddress.form).forEach(key => this.dialogAddress.form[key] = '')
-          this.dialogAddress.form.country_id =  @json($country_id)
+          this.dialogAddress.form.country_id = @json($country_id)
         },
 
         countryChange(e) {
