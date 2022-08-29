@@ -36,12 +36,12 @@ class CurrencyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '名称',
-            'code' => '编码',
-            'symbol_left' => '左符号',
-            'symbol_right' => '右符号',
-            'value' => '汇率值',
-            'decimal_place' => '小数位数',
+            'name' => trans('currency.name'),
+            'code' => trans('currency.code'),
+            'symbol_left' => trans('currency.symbol_left'),
+            'symbol_right' => trans('currency.symbol_right'),
+            'value' => trans('currency.value'),
+            'decimal_place' => trans('currency.decimal_place'),
         ];
     }
 }

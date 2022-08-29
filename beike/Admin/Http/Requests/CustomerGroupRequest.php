@@ -41,8 +41,8 @@ class CustomerGroupRequest extends FormRequest
     public function attributes()
     {
         return [
-            'descriptions.*.name' => '名称',
-            'level' => '等级',
+            'descriptions.*.name' => trans('customer_group.name'),
+            'level' => trans('customer_group.level'),
         ];
     }
 }

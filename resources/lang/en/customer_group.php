@@ -1,6 +1,6 @@
 <?php
 /**
- * customer.php
+ * customer_group.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -10,10 +10,6 @@
  */
 
 return [
-    'name' => 'Name',
-    'email' => 'Email',
-    'from' => 'From',
-    'customer_group' => 'Group',
-    'password' => 'Password',
-    'customer_group_id' => 'Customer Group',
+    'level' => 'Level',
+    'name' => 'Customer Group Name',
 ];

@@ -31,7 +31,7 @@ class CategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'descriptions.*.name' => '名称',
+            'descriptions.*.name' => trans('category.name'),
         ];
     }
 }

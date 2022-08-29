@@ -11,4 +11,10 @@
 return [
     'decimal_point' => '.',
     'thousand_point' => ',',
+    'name' => 'Name',
+    'code' => 'Code',
+    'symbol_left' => 'Symbol Left',
+    'symbol_right' => 'Symbol Right',
+    'value' => 'Value',
+    'decimal_place' => 'Decimal Place',
 ];

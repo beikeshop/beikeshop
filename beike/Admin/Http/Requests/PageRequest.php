@@ -40,4 +40,12 @@ class PageRequest extends FormRequest
 
         return $rules;
     }
+
+    public function attributes()
+    {
+        return [
+            'title' => trans('page.title'),
+            'content' => trans('page.content'),
+        ];
+    }
 }

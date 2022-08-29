@@ -36,4 +36,11 @@ class AdminRoleRequest extends FormRequest
             'name' => 'required|string|max:10',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => trans('role.name'),
+        ];
+    }
 }

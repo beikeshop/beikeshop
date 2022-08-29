@@ -10,7 +10,9 @@
  */
 
 return [
-    'order_product_id' => 'Order Product ID',
+    'order_id' => 'Order',
+    'order_product_id' => 'Order Product',
+    'customer_id' => 'Customer',
     'quantity' => 'Quantity',
     'opened' => 'Opened',
     'rma_reason_id' => 'Reason ID',

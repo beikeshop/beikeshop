@@ -48,10 +48,10 @@ class CustomerRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '姓名',
-            'email' => 'Email',
-            'password' => '密码',
-            'customer_group_id' => '会员组',
+            'name' => trans('customer.name'),
+            'email' => trans('customer.email'),
+            'password' => trans('customer.password'),
+            'customer_group_id' => trans('customer.customer_group_id'),
         ];
     }
 }

@@ -47,13 +47,13 @@ class RmaRequest extends FormRequest
     public function attributes()
     {
         return [
-            'order_id' => '订单',
-            'order_product_id' => '订单商品',
-            'customer_id' => '顾客',
-            'quantity' => '数量',
-            'opened' => '已拆包装',
-            'rma_reason_id' => '退换货原因',
-            'type' => '售后服务类型',
+            'order_id' => trans('rma.order_id'),
+            'order_product_id' => trans('rma.order_product_id'),
+            'customer_id' => trans('rma.customer_id'),
+            'quantity' => trans('rma.quantity'),
+            'opened' => trans('rma.opened'),
+            'rma_reason_id' => trans('rma.rma_reason_id'),
+            'type' => trans('rma.type'),
         ];
     }
 }

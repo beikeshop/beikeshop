@@ -10,7 +10,9 @@
  */
 
 return [
+    'order_id' => '订单',
     'order_product_id' => '订单商品',
+    'customer_id' => '顾客',
     'quantity' => '数量',
     'opened' => '已拆包装',
     'rma_reason_id' => '退换货原因',
