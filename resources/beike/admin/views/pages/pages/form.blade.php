@@ -35,7 +35,7 @@
 
               <x-admin::form.row title="内容">
                 <div class="w-max-1000">
-                  <textarea required name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
+                  <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
                     {{ old('content', $descriptions[$language['code']]['content'] ?? '') }}
                   </textarea>
                 </div>
@@ -61,11 +61,11 @@
 @endsection
 
 @push('footer')
-  <script>
+  {{-- <script>
     $(function() {
 
     });
-  </script>
+  </script> --}}
 @endpush
 
 
