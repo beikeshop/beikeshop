@@ -49,6 +49,6 @@ class Order extends Base
 
     public function getTotalFormatAttribute()
     {
-        return currency_format($this->total);
+        return currency_format($this->total, $this->currency_code, $this->currency_value);
     }
 }
