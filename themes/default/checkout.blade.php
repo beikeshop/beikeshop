@@ -23,7 +23,7 @@
           <div class="checkout-title">
             <div class="d-flex">
               <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
-              <el-checkbox v-model="form.same_as_shipping_address" @change="(e) => {updateCheckout(e, 'same_as_shipping_address')}">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
+              <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
             </div>
             <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
           </div>
@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <div class="checkout-black" v-if='!form.same_as_shipping_address'>
+        <div class="checkout-black" v-if='!same_as_shipping_address'>
           <div class="checkout-title">
             <div class="d-flex">
               <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
@@ -64,7 +64,7 @@
           </div>
           <div class="addresses-wrap">
             <div class="row">
-              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length &&( address.id == form.payment_address_id || isAllAddressPayment)">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
                 <div :class="['item', address.id == form.payment_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'payment_address_id')">
                   <div class="name-wrap">
                     <span class="name">@{{ address.name }}</span>
@@ -171,8 +171,9 @@
           payment_address_id: @json($current['payment_address_id']),
           payment_method_code: @json($current['payment_method_code']),
           shipping_method_code: @json($current['shipping_method_code']),
-          same_as_shipping_address: @json($current['same_as_shipping_address'] ?? true) ,
         },
+
+        // same_as_shipping_address: @json($current['same_as_shipping_address'] ?? true),
 
         isAllAddress: false,
         isAllAddressPayment: false,
@@ -214,6 +215,20 @@
 
       // 计算属性
       computed: {
+        same_as_shipping_address: {
+          get() {
+            return this.form.shipping_address_id == this.form.payment_address_id
+          },
+
+          set(e) {
+            if (e) {
+              this.form.payment_address_id = this.form.shipping_address_id
+            } else {
+              this.form.payment_address_id = '';
+            }
+          }
+        },
+
         isSubmit() {
           // source.addresses.length > 0 && source.payment_methods.length > 0 && source.shipping_methods.length > 0
           return this.source.addresses.length > 0 && this.source.payment_methods.length > 0 && this.source.shipping_methods.length > 0;
@@ -240,6 +255,10 @@
           this.dialogAddress.type = type
           this.dialogAddress.show = true
         },
+
+        // shippingPaymentAddressChange() {
+
+        // },
 
         addressFormSubmit(form) {
           const self = this;
