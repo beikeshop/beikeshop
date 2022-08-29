@@ -183,6 +183,8 @@ class Sidebar extends Component
             ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'countries.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'zones.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
             ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
             ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],

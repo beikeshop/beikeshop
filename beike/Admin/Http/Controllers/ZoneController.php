@@ -11,17 +11,46 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Resources\CustomerResource;
-use Beike\Models\Customer;
 use Beike\Repositories\CountryRepo;
-use Beike\Repositories\CustomerGroupRepo;
-use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\ZoneRepo;
 use Illuminate\Http\Request;
 
 class ZoneController extends Controller
 {
-    public function index(Request $request, int $countryId)
+    public function index(Request $request)
+    {
+        $zones = ZoneRepo::list($request->only('name', 'code', 'status'));
+
+        $data = [
+            'zones' => $zones,
+            'countries' => CountryRepo::all()
+        ];
+
+        return view('admin::pages.zones.index', $data);
+    }
+
+    public function store(Request $request)
+    {
+        $zone = ZoneRepo::create($request->only('country_id', 'name', 'code', 'sort_order', 'status'));
+
+        return json_success(trans('common.created_success'), $zone);
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $zone = ZoneRepo::update($id, $request->only('country_id', 'name', 'code', 'sort_order', 'status'));
+
+        return json_success(trans('common.updated_success'), $zone);
+    }
+
+    public function destroy(int $id)
+    {
+        ZoneRepo::delete($id);
+
+        return json_success(trans('common.deleted_success'));
+    }
+
+    public function listByCountry(Request $request, int $countryId)
     {
         ZoneRepo::listByCountry($countryId);
 

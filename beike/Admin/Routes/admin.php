@@ -41,6 +41,20 @@ Route::prefix($adminName)
                 Route::middleware('can:categories_delete')->delete('categories/{category}', [Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
+                // 国家
+                Route::middleware('can:countries_index')->get('countries', [Controllers\CountryController::class, 'index'])->name('countries.index');
+                Route::middleware('can:countries_create')->post('countries', [Controllers\CountryController::class, 'store'])->name('countries.store');
+                Route::middleware('can:countries_update')->put('countries/{id}', [Controllers\CountryController::class, 'update'])->name('countries.update');
+                Route::middleware('can:countries_delete')->delete('countries/{id}', [Controllers\CountryController::class, 'destroy'])->name('countries.destroy');
+
+
+                // 省份
+                Route::middleware('can:zones_index')->get('zones', [Controllers\ZoneController::class, 'index'])->name('zones.index');
+                Route::middleware('can:zones_create')->post('zones', [Controllers\ZoneController::class, 'store'])->name('zones.store');
+                Route::middleware('can:zones_update')->put('zones/{id}', [Controllers\ZoneController::class, 'update'])->name('zones.update');
+                Route::middleware('can:zones_delete')->delete('zones/{id}', [Controllers\ZoneController::class, 'destroy'])->name('zones.destroy');
+
+
                 // 客户
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
@@ -55,7 +69,7 @@ Route::prefix($adminName)
                 Route::middleware('can:customers_update')->put('customers/{customer_id}/addresses/{id}', [Controllers\AddressController::class, 'update'])->name('customers.addresses.update');
                 Route::middleware('can:customers_update')->delete('customers/{customer_id}/addresses/{id}', [Controllers\AddressController::class, 'destroy'])->name('customers.addresses.destroy');
 
-                Route::get('countries/{country_id}/zones', [Controllers\ZoneController::class, 'index'])->name('countries.zones.index');
+                Route::get('countries/{country_id}/zones', [Controllers\ZoneController::class, 'listByCountry'])->name('countries.zones.index');
 
 
                 // 客户组

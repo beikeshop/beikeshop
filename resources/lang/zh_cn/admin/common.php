@@ -37,6 +37,8 @@ return [
     'tax_class' => '税类管理',
     'currency' => '货币管理',
     'language' => '语言管理',
+    'zone' => '省份管理',
+    'country' => '国家管理',
     'file_manager' => '文件管理器',
     'access_frontend' => '访问前台',
 
@@ -61,4 +63,6 @@ return [
     'rmas_index' => '售后管理',
     'customers_index' => '客户列表',
     'customer_groups_index' => '客户组',
+    'countries_index' => '国家',
+    'zones_index' => '省份',
 ];

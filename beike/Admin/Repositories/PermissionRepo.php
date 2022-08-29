@@ -60,6 +60,8 @@ class PermissionRepo
             ['title' => trans('admin/common.currency'), 'permissions' => $this->getCurrencyPermissions()],
             ['title' => trans('admin/common.language'), 'permissions' => $this->getLanguagePermissions()],
             ['title' => trans('admin/common.file_manager'), 'permissions' => $this->getFileManagerPermissions()],
+            ['title' => trans('admin/common.zone'), 'permissions' => $this->getZonePermissions()],
+            ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
         ];
         return hook_filter('role.all_permissions', $permissions);
     }
@@ -308,6 +310,32 @@ class PermissionRepo
         $routes = ['file_manager_create', 'file_manager_show', 'file_manager_update', 'file_manager_delete'];
         $items = $this->getPermissionList('file_manager', $routes);
         return hook_filter('role.file_manager_permissions', $items);
+    }
+
+
+    /**
+     * 获取省份权限列表
+     *
+     * @return array[]
+     */
+    private function getZonePermissions(): array
+    {
+        $routes = ['zones_create', 'zones_index', 'zones_update', 'zones_delete'];
+        $items = $this->getPermissionList('zone', $routes);
+        return hook_filter('role.zone_permissions', $items);
+    }
+
+
+    /**
+     * 获取国家权限列表
+     *
+     * @return array[]
+     */
+    private function getCountryPermissions(): array
+    {
+        $routes = ['countries_create', 'countries_index', 'countries_update', 'countries_delete'];
+        $items = $this->getPermissionList('country', $routes);
+        return hook_filter('role.country_permissions', $items);
     }
 
 
