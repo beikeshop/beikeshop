@@ -217,6 +217,8 @@
                       </table>
                     </div>
                   </div>
+                  <input class="form-control d-none" :value="form.skus[0]?.variants?.length || ''" required>
+                  <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> 请添加规格</div>
                 </div>
               </div>
 
