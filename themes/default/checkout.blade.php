@@ -357,6 +357,10 @@
             return
           }
 
+          if (key == 'shipping_address_id' && this.same_as_shipping_address) {
+            this.form.payment_address_id = id
+          }
+
           this.form[key] = id
 
           $http.put('/checkout', this.form).then((res) => {
