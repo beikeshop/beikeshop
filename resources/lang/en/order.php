@@ -26,6 +26,7 @@ return [
     'shipping_address' => 'Shipping Address',
     'payment_address' => 'Payment Address',
     'order_status' => 'Order Status',
+    'product_sub_price' => 'Subtotal',
     'current_status' => 'Current',
     'change_to_status' => 'Change To',
     'comment' => 'Comment',

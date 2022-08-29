@@ -73,7 +73,7 @@
                 <td>{{ sub_string($order->customer_name, 14) }}</td>
                 <td>{{ $order->payment_method_name }}</td>
                 <td>{{ $order->status_format }}</td>
-                <td>{{ $order->total_format }}</td>
+                <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
                 <td>{{ $order->created_at }}</td>
                 <td>{{ $order->updated_at }}</td>
                 <td><a href="{{ admin_route('orders.show', [$order->id]) }}"

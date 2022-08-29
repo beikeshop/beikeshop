@@ -20,7 +20,7 @@
               </tr>
               <tr>
                 <td>{{ __('order.total') }}：</td>
-                <td>{{ $order->total_format }}</td>
+                <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
               </tr>
             </tbody>
           </table>
@@ -120,9 +120,10 @@
           <tr>
             <th>ID</th>
             <th>{{ __('order.product_name') }}</th>
+            <th class="">{{ __('order.product_sku') }}</th>
             <th>{{ __('order.product_price') }}</th>
-            <th class="text-end">{{ __('order.product_quantity') }}</th>
-            <th class="text-end">{{ __('order.product_sku') }}</th>
+            <th class="">{{ __('order.product_quantity') }}</th>
+            <th class="text-end">{{ __('order.product_sub_price') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -134,17 +135,18 @@
                 <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
               </div>
             </td>
-            <td>{{ $product->price_format }}</td>
-            <td class="text-end">{{ $product->quantity }}</td>
-            <td class="text-end">{{ $product->product_sku }}</td>
+            <td class="">{{ $product->product_sku }}</td>
+            <td>{{ currency_format($product->price, $order->currency_code, $order->currency_value) }}</td>
+            <td class="">{{ $product->quantity }}</td>
+            <td class="text-end">{{ currency_format($product->price * $product->quantity, $order->currency_code, $order->currency_value) }}</td>
           </tr>
           @endforeach
         </tbody>
         <tfoot>
           @foreach ($order->orderTotals as $orderTotal)
             <tr>
-              <td colspan="4" class="text-end">{{ $orderTotal->title }}</td>
-              <td class="text-end"><span class="fw-bold">{{ $orderTotal->value_format }}</span></td>
+              <td colspan="5" class="text-end">{{ $orderTotal->title }}</td>
+              <td class="text-end"><span class="fw-bold">{{ currency_format($orderTotal->value, $order->currency_code, $order->currency_value) }}</span></td>
             </tr>
           @endforeach
         </tfoot>

@@ -43,7 +43,7 @@
                     <td>
                       {{ __("common.order.{$order->status}") }}
                     </td>
-                    <td>{{ $order->total_format }}</td>
+                    <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -62,9 +62,13 @@
                   <div class="left"><img src="{{ $product->image }}" class="img-fluid"></div>
                   <div class="right">
                     <div class="name">
-                    <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a><br>   x {{ $product->quantity }}
+                    <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
                     </div>
-                    <div class="price">{{ $product->price_format }}</div>
+                    <div class="price">
+                      {{ currency_format($product->price, $order->currency_code, $order->currency_value) }}
+                      x {{ $product->quantity }}
+                      = {{ currency_format($product->price * $product->quantity, $order->currency_code, $order->currency_value) }}
+                    </div>
                   </div>
                 </div>
                 @if ($order->status == 'completed')
@@ -87,7 +91,7 @@
                   <tr>
                     @foreach ($totals as $total)
                       <td class="bg-light wp-200">{{ $total->title }}</td>
-                      <td><strong>{{ $total->value_format }}</strong></td>
+                      <td><strong>{{ currency_format($total->value, $order->currency_code, $order->currency_value) }}</strong></td>
                     @endforeach
                   </tr>
                 @endforeach

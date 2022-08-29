@@ -34,6 +34,7 @@ return [
     'product_info' => '商品信息',
     'product_name' => '名称',
     'product_price' => '价格',
+    'product_sub_price' => '小计',
     'product_quantity' => '数量',
     'product_sku' => 'SKU',
 

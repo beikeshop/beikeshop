@@ -79,7 +79,7 @@
                           <span class="ms-4 d-inline-block">{{ __('shop/account.state') }}：{{ $order->status_format }}</span>
                         </td>
                         <td>
-                          <span class="ms-3 d-inline-block">{{ __('shop/account.amount') }}：{{ $order->total_format }}</span>
+                          <span class="ms-3 d-inline-block">{{ __('shop/account.amount') }}：{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</span>
                         </td>
 
                         <td>
