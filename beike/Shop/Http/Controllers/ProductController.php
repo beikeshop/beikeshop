@@ -3,11 +3,10 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Product;
-use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\Request;
 use Beike\Repositories\ProductRepo;
+use Beike\Shop\Http\Resources\ProductSimple;
 use Beike\Shop\Http\Resources\ProductDetail;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
@@ -21,7 +20,11 @@ class ProductController extends Controller
     {
         $product = ProductRepo::getProductDetail($product);
         if ($product->active == 0) {
-            return redirect(shop_route('home.index'));
+            $data = [
+                'product' => (new ProductDetail($product))->jsonSerialize(),
+                'error' => trans('product.has_been_inactive')
+            ];
+            return view('product', $data);
         }
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),

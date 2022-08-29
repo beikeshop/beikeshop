@@ -21,4 +21,5 @@ return [
 
     'active' => 'Active',
     'inactive' => 'Inactive',
+    'has_been_inactive' => 'The product has been inactive',
 ];

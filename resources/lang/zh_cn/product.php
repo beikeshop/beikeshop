@@ -21,4 +21,5 @@ return [
 
     'active' => '上架',
     'inactive' => '下架',
+    'has_been_inactive' => '该商品已下架',
 ];
