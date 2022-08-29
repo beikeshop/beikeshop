@@ -1062,19 +1062,9 @@ body.page-checkout .checkout-title, body.page-bk-stripe .checkout-title {
   padding-bottom: 16px;
   margin-bottom: 16px;
   position: relative;
-  padding-left: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-body.page-checkout .checkout-title:before, body.page-bk-stripe .checkout-title:before {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 0;
-  background-color: #fd560f;
-  width: 3px;
-  height: 16px;
 }
 body.page-checkout .checkout-title .btn, body.page-bk-stripe .checkout-title .btn {
   margin-bottom: -10px;

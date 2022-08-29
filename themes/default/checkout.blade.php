@@ -18,10 +18,13 @@
     </div>
 
     <div class="row mt-5">
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-8 left-column">
         <div class="checkout-black">
           <div class="checkout-title">
-            <h5 class="mb-0">{{ __('shop/checkout.address') }}</h5>
+            <div class="d-flex">
+              <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
+              <el-checkbox v-model="form.same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}</el-checkbox>
+            </div>
             <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i class="bi bi-x-lg"></i></button>
           </div>
           <div class="addresses-wrap">
@@ -37,16 +40,50 @@
                   <div class="address-bottom">
                     <div>
                       <span class="badge bg-success" v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
-                      {{-- <span class="badge bg-info" v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span> --}}
                     </div>
-                    <a class="" @click.stop="editAddress(index)">{{ __('shop/checkout.edit') }}</a>
+                    <a class="" @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
                   </div>
                 </div>
               </div>
               <div class="col-6" v-if="!isAllAddress">
                 <div class="item address-right">
                   <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
-                  <button class="btn btn-outline-dark w-100" @click="editAddress"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-black" v-if='!form.same_as_shipping_address'>
+          <div class="checkout-title">
+            <div class="d-flex">
+              <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
+            </div>
+            <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i class="bi bi-x-lg"></i></button>
+          </div>
+          <div class="addresses-wrap">
+            <div class="row">
+              <div class="col-6" v-for="address, index in source.addresses" :key="index" v-if="source.addresses.length &&( address.id == form.payment_address_id || isAllAddressPayment)">
+                <div :class="['item', address.id == form.payment_address_id ? 'active' : '']" @click="updateCheckout(address.id, 'payment_address_id')">
+                  <div class="name-wrap">
+                    <span class="name">@{{ address.name }}</span>
+                    <span class="phone">@{{ address.phone }}</span>
+                  </div>
+                  <div class="zipcode">@{{ address.zipcode }}</div>
+                  <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
+                  <div class="address-bottom">
+                    <div>
+                      <span class="badge bg-success" v-if="form.payment_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                    </div>
+                    <a class="" @click.stop="editAddress(index, 'payment_address_id')">{{ __('shop/checkout.edit') }}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6" v-if="!isAllAddressPayment">
+                <div class="item address-right">
+                  <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1" @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                  <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                 </div>
               </div>
             </div>
@@ -134,9 +171,11 @@
           payment_address_id: @json($current['payment_address_id']),
           payment_method_code: @json($current['payment_method_code']),
           shipping_method_code: @json($current['shipping_method_code']),
+          same_as_shipping_address: @json($current['same_as_shipping_address'] ?? true) ,
         },
 
         isAllAddress: false,
+        isAllAddressPayment: false,
 
         source: {
           addresses: @json($addresses ?? []),
@@ -150,6 +189,7 @@
         dialogAddress: {
           show: false,
           index: null,
+          type: 'shipping_address_id',
           form: {
             name: '',
             phone: '',
@@ -188,7 +228,7 @@
       },
 
       methods: {
-        editAddress(index) {
+        editAddress(index, type) {
           if (typeof index == 'number') {
             this.dialogAddress.index = index;
 
@@ -197,6 +237,7 @@
             })
           }
 
+          this.dialogAddress.type = type
           this.dialogAddress.show = true
         },
 
@@ -215,8 +256,8 @@
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
                 this.source.addresses.push(res.data)
-                this.updateCheckout(res.data.id, 'shipping_address_id')
-                this.form.shipping_address_id = res.data.id
+                this.updateCheckout(res.data.id, this.dialogAddress.form.type)
+                this.form[this.dialogAddress.form.type] = res.data.id
 
               } else {
                 this.source.addresses[this.dialogAddress.index] = res.data

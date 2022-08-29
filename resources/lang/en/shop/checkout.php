@@ -12,6 +12,8 @@
 return [
     'index' => 'Checkouts',
     'address' => 'Address',
+    'payment_address' => 'Payment Address',
+    'same_as_shipping_address' => 'Same As Shipping Address',
     'chosen' => 'Chosen',
     'edit' => 'Edit',
     'choose_another_address' => 'Choose Another Address',

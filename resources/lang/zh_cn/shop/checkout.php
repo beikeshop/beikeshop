@@ -11,7 +11,9 @@
 
 return [
     'index' => '结账',
-    'address' => '地址',
+    'address' => '配送地址',
+    'payment_address' => '账单地址',
+    'same_as_shipping_address' => '账单地址同收货地址',
     'chosen' => '已选择',
     'edit' => '编辑',
     'choose_another_address' => '选择其他地址',

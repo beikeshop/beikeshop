@@ -84,20 +84,20 @@ body.page-checkout, body.page-bk-stripe {
     padding-bottom: 16px;
     margin-bottom: 16px;
     position: relative;
-    padding-left: 10px;
+    // padding-left: 10px;
     display: flex;
     align-items: center; // flex-start | center
     justify-content: space-between; // flex-end | center | space-between
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 0;
-      background-color: $primary;
-      width: 3px;
-      height: 16px;
-    }
+    // &:before {
+    //   content: '';
+    //   position: absolute;
+    //   top: 2px;
+    //   left: 0;
+    //   background-color: $primary;
+    //   width: 3px;
+    //   height: 16px;
+    // }
 
     .btn {
       margin-bottom: -10px;
