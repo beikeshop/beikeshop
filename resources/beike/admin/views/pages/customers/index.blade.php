@@ -15,7 +15,7 @@
               <el-input v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('customer.customer_group') }}">
-              <el-select size="small" v-model="filter.customer_group" placeholder="{{ __('common.please_choose') }}">
+              <el-select size="small" v-model="filter.customer_group_id" placeholder="{{ __('common.please_choose') }}">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
                   :value="item.id + ''">
                 </el-option>
@@ -153,7 +153,7 @@
         filter: {
           email: bk.getQueryString('email'),
           name: bk.getQueryString('name'),
-          customer_group: bk.getQueryString('customer_group'),
+          customer_group_id: bk.getQueryString('customer_group_id'),
           status: bk.getQueryString('status'),
         },
       },
