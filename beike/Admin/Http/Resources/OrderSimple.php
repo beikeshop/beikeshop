@@ -25,7 +25,6 @@ class OrderSimple extends JsonResource
             'telephone' => $this->telephone,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'status' => $this->status,
             'status_format' => $this->status_format,
         ];
 

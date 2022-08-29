@@ -19,6 +19,7 @@ return [
     'created_at' => 'Created',
     'updated_at' => 'Updated',
     'status' => 'Status',
+    'status_format' => 'Status',
     'total' => 'Total',
 
     'unpaid' => 'Unpaid',
