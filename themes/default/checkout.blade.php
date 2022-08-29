@@ -321,8 +321,8 @@
             $http[type](url, this.dialogAddress.form).then((res) => {
               if (type == 'post') {
                 this.source.addresses.push(res.data)
-                this.updateCheckout(res.data.id, this.dialogAddress.form.type)
-                this.form[this.dialogAddress.form.type] = res.data.id
+                this.updateCheckout(res.data.id, this.dialogAddress.type)
+                this.form[this.dialogAddress.type] = res.data.id
 
               } else {
                 this.source.addresses[this.dialogAddress.index] = res.data
