@@ -2124,6 +2124,20 @@ __webpack_require__.r(__webpack_exports__);
         quantity = _ref$quantity === void 0 ? 1 : _ref$quantity,
         _ref$isBuyNow = _ref.isBuyNow,
         isBuyNow = _ref$isBuyNow === void 0 ? false : _ref$isBuyNow;
+
+    if (!isLogin) {
+      layer.open({
+        type: 2,
+        title: '',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['900px', '600px'],
+        content: 'login?iframe=true' //iframe的url
+
+      });
+      return;
+    }
+
     var $btn = $(event);
     var btnHtml = $btn.html();
     var loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
@@ -2233,6 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
 // offcanvas-search-top
 $(function () {
   var myOffcanvas = document.getElementById('offcanvas-search-top');
+  if (!myOffcanvas) return;
   myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
     $('#offcanvas-search-top input').focus();
     $('#offcanvas-search-top input').keydown(function (e) {

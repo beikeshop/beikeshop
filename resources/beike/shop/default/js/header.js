@@ -1,6 +1,8 @@
 // offcanvas-search-top
 $(function() {
   var myOffcanvas = document.getElementById('offcanvas-search-top')
+  if (!myOffcanvas) return;
+
   myOffcanvas.addEventListener('shown.bs.offcanvas', function () {
     $('#offcanvas-search-top input').focus();
     $('#offcanvas-search-top input').keydown(function (e) {

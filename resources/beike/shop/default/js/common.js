@@ -24,6 +24,19 @@ export default {
    * @return {*}  返回Promise
    */
   addCart({sku_id, quantity = 1, isBuyNow = false}, event) {
+    if (!isLogin) {
+      layer.open({
+        type: 2,
+        title: '',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['900px', '600px'],
+        content: 'login?iframe=true' //iframe的url
+      });
+
+      return;
+    }
+
     const $btn = $(event);
     const btnHtml = $btn.html();
     const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';

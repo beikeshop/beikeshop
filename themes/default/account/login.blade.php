@@ -10,13 +10,14 @@
 
 
 @section('content')
-  <div class="container" id="page-login" v-cloak>
+  <div class="{{ request('iframe') ? 'container-fluid mt-5' : 'container' }}" id="page-login" v-cloak>
+    @if (!request('iframe'))
+      <x-shop-breadcrumb type="static" value="login.index" />
+      <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
+    @endif
 
-    <x-shop-breadcrumb type="static" value="login.index" />
-
-    <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
-    <div class="justify-content-center row mb-5">
-      <div class="col-lg-5">
+    <div class="justify-content-center row {{ !request('iframe') ? 'mb-5' : '' }}">
+      <div class="col-lg-{{ request('iframe') ? '6' : '5' }} col-md-6 col-sm-12">
         <div class="card">
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
             <div class="login-item-header card-header">
@@ -46,7 +47,7 @@
           </el-form>
         </div>
       </div>
-      <div class="col-lg-5">
+      <div class="col-lg-{{ request('iframe') ? '6' : '5' }} col-md-6 col-sm-12">
         <div class="card">
           <div class="login-item-header card-header">
             <h6 class="text-uppercase mb-0">{{ __('shop/login.new') }}</h6>
@@ -164,8 +165,16 @@
             }
 
             $http.post(url, _data).then((res) => {
-              this.$message.success(res.message);
-              location = "{{ shop_route('account.index') }}"
+              layer.msg(res.message)
+              @if (!request('iframe'))
+                location = "{{ shop_route('account.index') }}"
+              @else
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                setTimeout(() => {
+                  parent.layer.close(index); //再执行关闭
+                  parent.window.location.reload()
+                }, 400);
+              @endif
             })
           });
         }

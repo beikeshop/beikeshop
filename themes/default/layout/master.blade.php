@@ -19,11 +19,15 @@
   @stack('header')
 </head>
 <body class="@yield('body-class')">
-  @include('layout.header')
+  @if (!request('iframe'))
+    @include('layout.header')
+  @endif
 
   @yield('content')
 
-  @include('layout.footer')
+  @if (!request('iframe'))
+    @include('layout.footer')
+  @endif
 
   <script>
     const isLogin = @json(current_customer());
