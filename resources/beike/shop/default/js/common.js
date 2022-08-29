@@ -12,7 +12,12 @@ export default {
    */
   getCarts() {
     $http.get('carts/mini', null, {hload: true}).then((res) => {
-      $('#offcanvas-right-cart').html(res);
+      $('#offcanvas-right-cart').html(res.data.html);
+      if (!res.data.quantity) {
+        $('.cart-badge-quantity').hide();
+      } else {
+        $('.cart-badge-quantity').show().html(res.data.quantity > 99 ? '99+' : res.data.quantity);
+      }
     })
   },
 

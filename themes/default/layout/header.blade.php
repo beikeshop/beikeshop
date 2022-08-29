@@ -154,10 +154,11 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvas-right-cart" role="button"
+            <a class="nav-link position-relative" data-bs-toggle="offcanvas" href="#offcanvas-right-cart" role="button"
               aria-controls="offcanvasExample">
               <i class="iconfont">&#xe634;</i>
-              <div class="navbar-icon-link-badge"></div>
+              {{-- <div class="navbar-icon-link-badge"></div> --}}
+              <span class="cart-badge-quantity"></span>
             </a>
           </li>
         </ul>

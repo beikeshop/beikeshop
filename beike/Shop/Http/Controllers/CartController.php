@@ -105,7 +105,11 @@ class CartController extends Controller
      */
     public function miniCart()
     {
-        $data = CartService::reloadData();
-        return view('cart/mini', $data);
+        $reloadData = CartService::reloadData();
+
+        $data['html'] = view('cart/mini', $reloadData)->render();
+        $data['quantity'] = $reloadData['quantity'];
+
+        return json_success(trans('common.success'), $data);
     }
 }
