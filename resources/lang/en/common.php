@@ -52,6 +52,7 @@ return [
     'pick_datetime' => 'Pick Datetime',
     'confirm_delete' => 'You sure you want to delete it?',
     'text_hint' => 'Hint',
+    'restore' => 'Restore',
 
     'id' => 'ID',
     'created_at' => 'Created At',

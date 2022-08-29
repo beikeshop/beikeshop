@@ -51,6 +51,7 @@ return [
     'pick_datetime' => '选择时间',
     'confirm_delete' => '确定要删除吗?',
     'text_hint' => '提示',
+    'restore' => '恢复',
 
     'id' => 'ID',
     'created_at' => '创建时间',
