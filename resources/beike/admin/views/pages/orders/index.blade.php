@@ -9,48 +9,48 @@
 
   <div id="customer-app" class="card h-min-600">
     <div class="card-body">
-      @if (count($orders))
-        <div class="bg-light p-4 mb-3" id="app">
-          <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
-            <div>
-              <el-form-item label="{{ __('order.number') }}">
-                <el-input v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
-              </el-form-item>
-              <el-form-item label="{{ __('order.customer_name') }}">
-                <el-input v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
-                </el-input>
-              </el-form-item>
-              <el-form-item label="{{ __('order.email') }}">
-                <el-input v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
-              </el-form-item>
-            </div>
-            <el-form-item label="{{ __('order.created_at') }}">
-              <el-form-item>
-                <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                  placeholder="{{ __('common.pick_datetime') }}" v-model="filter.start" style="width: 100%;">
-                </el-date-picker>
-              </el-form-item>
-              <span>-</span>
-              <el-form-item>
-                <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                  placeholder="{{ __('common.pick_datetime') }}" v-model="filter.end" style="width: 100%;">
-                </el-date-picker>
-              </el-form-item>
+      <div class="bg-light p-4 mb-3" id="app">
+        <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
+          <div>
+            <el-form-item label="{{ __('order.number') }}">
+              <el-input v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
             </el-form-item>
-          </el-form>
+            <el-form-item label="{{ __('order.customer_name') }}">
+              <el-input v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
+              </el-input>
+            </el-form-item>
+            <el-form-item label="{{ __('order.email') }}">
+              <el-input v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
+            </el-form-item>
+          </div>
+          <el-form-item label="{{ __('order.created_at') }}">
+            <el-form-item>
+              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
+                placeholder="{{ __('common.pick_datetime') }}" v-model="filter.start" style="width: 100%;">
+              </el-date-picker>
+            </el-form-item>
+            <span>-</span>
+            <el-form-item>
+              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
+                placeholder="{{ __('common.pick_datetime') }}" v-model="filter.end" style="width: 100%;">
+              </el-date-picker>
+            </el-form-item>
+          </el-form-item>
+        </el-form>
 
-          <div class="row">
-            <label class="wp-100"></label>
-            <div class="col-auto">
-              <button type="button" @click="search"
-                class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
-              <button type="button" @click="exportOrder"
-                class="btn btn-outline-primary btn-sm ms-1">{{ __('common.export') }}</button>
-              <button type="button" @click="resetSearch"
-                class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
-            </div>
+        <div class="row">
+          <label class="wp-100"></label>
+          <div class="col-auto">
+            <button type="button" @click="search"
+              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="exportOrder"
+              class="btn btn-outline-primary btn-sm ms-1">{{ __('common.export') }}</button>
+            <button type="button" @click="resetSearch"
+              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
           </div>
         </div>
+      </div>
+      @if (count($orders))
         <table class="table">
           <thead>
             <tr>
