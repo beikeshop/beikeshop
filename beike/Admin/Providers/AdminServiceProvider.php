@@ -11,6 +11,7 @@ use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Admin\View\Components\Alert;
+use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\Select;
@@ -57,6 +58,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-select' => Select::class,
             'form-image' => Image::class,
             'form-textarea' => Textarea::class,
+            'no-data' => NoData::class,
         ]);
 
         $this->registerGuard();

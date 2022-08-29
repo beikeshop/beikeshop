@@ -15,6 +15,7 @@ return [
     'error_required_email' => 'Please enter your email',
     'unauthenticated' => 'Please login first',
     'success' => 'Success',
+    'no_data' => 'No data～',
     'created_success' => 'Created Successfully!',
     'deleted_success' => 'Deleted Successfully!',
     'restored_success' => 'Restore Successfully!',
