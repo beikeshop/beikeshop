@@ -105,7 +105,8 @@ class CartController extends Controller
      */
     public function miniCart()
     {
-        $reloadData = CartService::reloadData();
+        $carts = CartService::list(current_customer());
+        $reloadData = CartService::reloadData($carts, true);
 
         $data['html'] = view('cart/mini', $reloadData)->render();
         $data['quantity'] = $reloadData['quantity'];
