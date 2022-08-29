@@ -51,7 +51,7 @@ abstract class Controller extends BaseController
         $charset = app()->getLocale() == 'zh-hk' ? 'BIG5' : 'GBK';
 
         if (empty($items)) {
-            throw new \Exception(trans('empty_items'));
+            throw new \Exception(trans('common.empty_items'));
         }
         if (!str_contains($fileName, '.csv')) {
             $fileName = $fileName . '-' . date('YmdHis') . '.csv';

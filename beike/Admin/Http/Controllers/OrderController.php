@@ -45,9 +45,13 @@ class OrderController extends Controller
      */
     public function export(Request $request)
     {
-        $orders = OrderRepo::filterAll($request->all());
-        $items = OrderSimple::collection($orders)->jsonSerialize();
-        return $this->downloadCsv('orders', $items, 'order');
+        try {
+            $orders = OrderRepo::filterAll($request->all());
+            $items = OrderSimple::collection($orders)->jsonSerialize();
+            return $this->downloadCsv('orders', $items, 'order');
+        } catch (\Exception $e) {
+            return redirect(admin_route('orders.index'))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 

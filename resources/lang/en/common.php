@@ -16,6 +16,7 @@ return [
     'unauthenticated' => 'Please login first',
     'success' => 'Success',
     'no_data' => 'No data～',
+    'empty_items' => 'Empty Items',
     'created_success' => 'Created Successfully!',
     'deleted_success' => 'Deleted Successfully!',
     'restored_success' => 'Restore Successfully!',

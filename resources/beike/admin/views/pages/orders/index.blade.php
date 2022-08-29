@@ -3,6 +3,10 @@
 @section('title', __('admin/order.list'))
 
 @section('content')
+  @if ($errors->has('error'))
+    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+  @endif
+
   <div id="customer-app" class="card h-min-600">
     <div class="card-body">
       @if (count($orders))
