@@ -217,13 +217,9 @@
               return;
             }
 
-            $.ajax({
-              url: `/admin/customers/{{ $customer['id'] }}`,
-              type: 'put',
-              data: self.form,
-              success: function(res) {
-                self.$message.success(res.message);
-              }
+            $http.put(`customers/{{ $customer['id'] }}`, self.form).then((res) => {
+              layer.msg(res.message);
+                location = '{{ admin_route("customers.index") }}'
             })
           });
         },
