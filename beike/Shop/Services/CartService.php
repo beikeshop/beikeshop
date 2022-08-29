@@ -145,7 +145,7 @@ class CartService
             $carts = CartService::list(current_customer());
         }
 
-        $selected = collect($carts)->where('selected', 1);
+        $selected = collect($carts);
         $quantity = $selected->sum('quantity');
         $amount = $selected->sum('subtotal');
 
