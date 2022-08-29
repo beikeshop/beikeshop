@@ -16,4 +16,11 @@ class OrderHistory extends Base
     protected $fillable = [
         'order_id', 'status', 'notify', 'comment'
     ];
+
+    protected $appends = ['status_format'];
+
+    public function getStatusFormatAttribute()
+    {
+        return trans("order.{$this->status}");
+    }
 }

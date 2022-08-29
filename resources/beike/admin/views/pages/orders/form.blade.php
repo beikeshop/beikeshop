@@ -1,25 +1,25 @@
 @extends('admin::layouts.master')
 
-@section('title', '订单详情')
+@section('title', __('admin/common.order'))
 
 @section('content')
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">订单详情</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
     <div class="card-body">
       <div class="row">
         <div class="col-4">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>订单编号：</td>
+                <td>{{ __('order.number') }}：</td>
                 <td>{{ $order->number }}</td>
               </tr>
               <tr>
-                <td>付款方式：</td>
+                <td>{{ __('order.payment_method') }}：</td>
                 <td>{{ $order->payment_method_name }}</td>
               </tr>
               <tr>
-                <td>总计：</td>
+                <td>{{ __('order.total') }}：</td>
                 <td>{{ $order->total_format }}</td>
               </tr>
             </tbody>
@@ -29,15 +29,15 @@
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>客户姓名：</td>
+                <td>{{ __('order.customer_name') }}：</td>
                 <td>{{ $order->customer_name }}</td>
               </tr>
               <tr>
-                <td>生成日期：</td>
+                <td>{{ __('order.created_at') }}：</td>
                 <td>{{ $order->created_at }}</td>
               </tr>
               <tr>
-                <td>修改日期：</td>
+                <td>{{ __('order.updated_at') }}：</td>
                 <td>{{ $order->updated_at }}</td>
               </tr>
             </tbody>
@@ -48,13 +48,13 @@
   </div>
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">地址信息</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
     <div class="card-body">
       <table class="table ">
         <thead class="">
           <tr>
-            <th>订单地址</th>
-            <th>账单地址</th>
+            <th>{{ __('order.shipping_address') }}</th>
+            <th>{{ __('order.payment_address') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -81,14 +81,14 @@
 
   @can('orders_update_status')
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">订单状态</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('order.order_status') }}</h6></div>
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-        <el-form-item label="当前状态">
+        <el-form-item label="{{ __('order.current_status') }}">
           {{ $order->status_format }}
         </el-form-item>
-        <el-form-item label="修改状态" prop="status">
-          <el-select size="small" v-model="form.status" placeholder="请选择">
+        <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
+          <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
             <el-option
               v-for="item in statuses"
               :key="item.status"
@@ -101,11 +101,11 @@
           <el-switch v-model="form.notify">
           </el-switch>
         </el-form-item> --}}
-        <el-form-item label="备注信息">
+        <el-form-item label="{{ __('order.comment') }}">
           <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('form')">更新状态</el-button>
+          <el-button type="primary" @click="submitForm('form')">{{ __('order.submit_status') }}</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -113,16 +113,16 @@
   @endcan
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">商品信息</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('order.product_info') }}</h6></div>
     <div class="card-body">
       <table class="table ">
         <thead class="">
           <tr>
             <th>ID</th>
-            <th>商品</th>
-            <th>价格</th>
-            <th class="text-end">数量</th>
-            <th class="text-end">sku</th>
+            <th>{{ __('order.product_name') }}</th>
+            <th>{{ __('order.product_price') }}</th>
+            <th class="text-end">{{ __('order.product_quantity') }}</th>
+            <th class="text-end">{{ __('order.product_sku') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -153,20 +153,20 @@
   </div>
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">订单操作日志</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('order.action_history') }}</h6></div>
     <div class="card-body">
       <table class="table ">
         <thead class="">
           <tr>
-            <th>状态</th>
-            <th>备注</th>
-            <th>更新时间</th>
+            <th>{{ __('order.history_status') }}</th>
+            <th>{{ __('order.history_comment') }}</th>
+            <th>{{ __('order.history_created_at') }}</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($order->orderHistories as $orderHistory)
             <tr>
-              <td>{{ $orderHistory->status }}</td>
+              <td>{{ $orderHistory->status_format }}</td>
               <td><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
               <td><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
             </tr>

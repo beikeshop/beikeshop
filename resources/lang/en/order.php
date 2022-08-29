@@ -22,6 +22,26 @@ return [
     'status_format' => 'Status',
     'total' => 'Total',
 
+    'address_info' => 'Address Information',
+    'shipping_address' => 'Shipping Address',
+    'payment_address' => 'Payment Address',
+    'order_status' => 'Order Status',
+    'current_status' => 'Current',
+    'change_to_status' => 'Change To',
+    'comment' => 'Comment',
+    'submit_status' => 'Submit',
+
+    'product_info' => 'Product Information',
+    'product_name' => 'Product Name',
+    'product_price' => 'Unit Price',
+    'product_quantity' => 'Quantity',
+    'product_sku' => 'SKU',
+
+    'action_history' => 'Action History',
+    'history_status' => 'Status',
+    'history_comment' => 'Comment',
+    'history_created_at' => 'Created At',
+
     'unpaid' => 'Unpaid',
     'paid' => 'Paid',
     'shipped' => 'Shipped',

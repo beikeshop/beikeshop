@@ -22,6 +22,26 @@ return [
     'status_format' => '状态',
     'total' => '订单总额',
 
+    'address_info' => '地址信息',
+    'shipping_address' => '配送地址',
+    'payment_address' => '账单地址',
+    'order_status' => '订单状态',
+    'current_status' => '当前状态',
+    'change_to_status' => '修改状态',
+    'comment' => '备注信息',
+    'submit_status' => '更新状态',
+
+    'product_info' => '商品信息',
+    'product_name' => '名称',
+    'product_price' => '价格',
+    'product_quantity' => '数量',
+    'product_sku' => 'SKU',
+
+    'action_history' => '操作日志',
+    'history_status' => '状态',
+    'history_comment' => '备注',
+    'history_created_at' => '更新日期',
+
     'unpaid' => '待支付',
     'paid' => '已支付',
     'shipped' => '已发货',

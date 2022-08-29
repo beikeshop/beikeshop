@@ -131,7 +131,7 @@ class StateMachineService
         foreach ($nextStatusCodes as $status) {
             $result[] = [
                 'status' => $status,
-                'name' => trans($status)
+                'name' => trans("order.{$status}")
             ];
         }
         return $result;
