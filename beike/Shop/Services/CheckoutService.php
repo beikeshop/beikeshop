@@ -177,6 +177,7 @@ class CheckoutService
                 'shipping_method_code' => $this->cart->shipping_method_code,
                 'payment_address_id' => $this->cart->payment_address_id,
                 'payment_method_code' => $this->cart->payment_method_code,
+                'same_as_shipping_address' => $this->cart->shipping_address_id == $this->cart->payment_address_id,
             ],
             'country_id' => (int)system_setting('base.country_id'),
             'customer_id' => $customer->id ?? null,
