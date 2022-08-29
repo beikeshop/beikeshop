@@ -72,7 +72,7 @@ class CheckoutService
         }
 
         if ($paymentAddressId) {
-            $this->updatePaymentAddressId($shippingAddressId);
+            $this->updatePaymentAddressId($paymentAddressId);
         }
         if ($paymentMethodCode) {
             $this->updatePaymentMethod($paymentMethodCode);
