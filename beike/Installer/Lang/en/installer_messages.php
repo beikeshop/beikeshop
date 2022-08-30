@@ -23,8 +23,8 @@ return [
      *
      */
     'welcome' => [
-        'templateTitle' => 'Welcome',
-        'title'   => 'Laravel Installer',
+        'title' => 'Welcome',
+        'describe'   => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
         'message' => 'Easy Installation and Setup Wizard.',
         'next'    => 'Check Requirements',
     ],

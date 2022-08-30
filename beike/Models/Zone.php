@@ -17,6 +17,6 @@ class Zone extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'code', 'sort_order', 'status'];
+    protected $fillable = ['country_id', 'name', 'code', 'sort_order', 'status'];
 }
 

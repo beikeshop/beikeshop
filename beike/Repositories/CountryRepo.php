@@ -17,12 +17,27 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class CountryRepo
 {
     /**
+     * @param $data
+     * @return array
+     */
+    private static function handleParams($data)
+    {
+        return [
+            'name' => $data['name'] ?? '',
+            'code' => $data['code'] ?? '',
+            'sort_order' => (int)$data['sort_order'] ?? 0,
+            'status' => (bool)$data['status'] ?? 0,
+        ];
+    }
+
+    /**
      * 创建一个country记录
      * @param $data
      * @return mixed
      */
     public static function create($data)
     {
+        $data = self::handleParams($data);
         return Country::query()->create($data);
     }
 
@@ -34,6 +49,7 @@ class CountryRepo
      */
     public static function update($id, $data)
     {
+        $data = self::handleParams($data);
         $country = Country::query()->find($id);
         if (!$country) {
             throw new \Exception("国家id {$id} 不存在");

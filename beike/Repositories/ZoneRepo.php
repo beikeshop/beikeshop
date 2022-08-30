@@ -16,14 +16,29 @@ use Beike\Models\Zone;
 class ZoneRepo
 {
     /**
+     * @param $data
+     * @return array
+     */
+    private static function handleParams($data)
+    {
+        return [
+            'country_id' => $data['country_id'] ?? 0,
+            'name' => $data['name'] ?? '',
+            'code' => $data['code'] ?? '',
+            'sort_order' => (int)$data['sort_order'] ?? 0,
+            'status' => (bool)$data['status'] ?? 0,
+        ];
+    }
+
+    /**
      * 创建一个zone记录
      * @param $data
      * @return mixed
      */
     public static function create($data)
     {
-        $id = Zone::query()->insertGetId($data);
-        return self::find($id);
+        $data = self::handleParams($data);
+        return Zone::query()->create($data);
     }
 
     /**
@@ -38,6 +53,7 @@ class ZoneRepo
         if (!$zone) {
             throw new \Exception("省份/地区id {$id} 不存在");
         }
+        $data = self::handleParams($data);
         $zone->update($data);
         return $zone;
     }
