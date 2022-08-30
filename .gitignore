@@ -5,6 +5,7 @@
 /storage/*.key
 /storage/installed
 /vendor
+Envoy.blade.php
 .env
 .env.backup
 .phpunit.result.cache
