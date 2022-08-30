@@ -106,8 +106,8 @@
                           <div class="title">
                             <div>
                               <b>@{{ variant.name[current_language_code] }}</b>
-                              <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">{{ __('admin/product.edit') }}</el-link>
-                              <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">{{ __('admin/product.delete') }}</el-link>
+                              <el-link type="primary" @click="modalVariantOpenButtonClicked(variantIndex, null)">{{ __('common.edit') }}</el-link>
+                              <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">{{ __('common.delete') }}</el-link>
                             </div>
                             <div>
                               <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>

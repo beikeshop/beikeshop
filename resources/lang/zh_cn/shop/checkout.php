@@ -28,6 +28,7 @@ return [
     'select_province' => '请选择省份',
     'enter_city' => '请填写城市',
     'check_form' => '请检查表单是否填写正确',
+    'error_payment_address' => '请选择账单地址',
 
     'payment' => [
         'index' => '请付款',

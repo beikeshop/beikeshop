@@ -371,6 +371,11 @@
         },
 
         checkedBtnCheckoutConfirm() {
+          if (!this.form.payment_address_id) {
+            layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
+            return;
+          }
+
           $http.post('/checkout/confirm', this.form).then((res) => {
             location = 'orders/' + res.number + '/success?type=create'
           })

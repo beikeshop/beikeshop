@@ -28,6 +28,7 @@ return [
     'select_province' => 'Please select province',
     'enter_city' => 'Please fill in the city    ',
     'check_form' => 'Please check that the form is filled out correctly',
+    'error_payment_address' => 'Please select a billing address',
 
     'payment' => [
         'index' => 'Please Pay',
