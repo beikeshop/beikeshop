@@ -2,6 +2,7 @@
 
 namespace Beike\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,6 +18,11 @@ class Customer extends Authenticatable
     const AUTH_GUARD = 'web_shop';
 
     protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'status', 'from'];
+
+    protected function serializeDate(\DateTimeInterface $date): string
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d H:i:s');
+    }
 
     public function addresses(): HasMany
     {

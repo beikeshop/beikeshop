@@ -33,11 +33,6 @@ return [
     'address_1' => '详细地址 1',
     'address_2' => '详细地址 2',
 
-    // 'customers_delete' => '邮箱',
-    // 'customers_delete' => '密码',
-    // 'customers_delete' => '用户组',
-    // 'customers_delete' => '添加地址',
-
     'cannot_delete_root' => '不能删除Root账户',
     'error_email' => '请输入正确邮箱格式',
     'confirm_delete_address' => '确定要删除地址吗？',

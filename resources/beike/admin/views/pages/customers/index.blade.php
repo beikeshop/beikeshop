@@ -85,31 +85,31 @@
         :total="customers.total"></el-pagination>
     </div>
 
-    <el-dialog title="创建客户" :visible.sync="dialogCustomers.show" width="600px"
+    <el-dialog title="{{ __('admin/customer.customers_create') }}" :visible.sync="dialogCustomers.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
-      <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="100px">
-        <el-form-item label="用户名" prop="name">
-          <el-input v-model="dialogCustomers.form.name" placeholder="用户名"></el-input>
+      <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="120px">
+        <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
+          <el-input v-model="dialogCustomers.form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="dialogCustomers.form.email" placeholder="邮箱"></el-input>
+        <el-form-item label="{{ __('common.edit') }}" prop="email">
+          <el-input v-model="dialogCustomers.form.email" placeholder="{{ __('common.edit') }}"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="dialogCustomers.form.password" placeholder="密码"></el-input>
+        <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+          <el-input v-model="dialogCustomers.form.password" placeholder="{{ __('shop/login.password') }}"></el-input>
         </el-form-item>
-        <el-form-item label="用户组">
-          <el-select v-model="dialogCustomers.form.customer_group_id" placeholder="请选择">
+        <el-form-item label="{{ __('customer.customer_group') }}">
+          <el-select v-model="dialogCustomers.form.customer_group_id" placeholder="">
             <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
               :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="状态" prop="status">
+        <el-form-item label="{{ __('common.status') }}" prop="status">
           <el-switch v-model="dialogCustomers.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="addCustomersFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -142,12 +142,12 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入用户名',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}', trigger: 'blur'}, ],
           email: [
-            {required: true, message: '请输入邮箱', trigger: 'blur'},
-            {type: 'email', message: '请输入正确邮箱格式' ,trigger: 'blur'},
+            {required: true, message: '{{ __('common.error_required', ['name' => __('common.email')] ) }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('admin/customer.error_email') }}' ,trigger: 'blur'},
           ],
-          password: [{required: true,message: '请输入密码',trigger: 'blur'}, ],
+          password: [{required: true,message: '{{ __('common.error_required', ['name' => __('shop/login.password')] ) }}',trigger: 'blur'}, ],
         },
 
         url: @json(admin_route('customers.index')),
@@ -203,7 +203,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -217,9 +217,9 @@
 
         deleteCustomer(url, index) {
           const self = this;
-          this.$confirm('确定要删除用户吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete(url).then((res) => {

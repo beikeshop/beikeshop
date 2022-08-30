@@ -12,6 +12,10 @@
     <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
   @endif
 
+  @if (session()->has('message'))
+    <x-admin-alert type="success" msg="{{ session('message') }}" class="mt-4" />
+  @endif
+
   <div id="product-app">
     <div class="card">
       <div class="card-body">
