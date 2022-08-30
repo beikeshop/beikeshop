@@ -23,8 +23,7 @@ class CountryRepo
      */
     public static function create($data)
     {
-        $id = Country::query()->insertGetId($data);
-        return self::find($id);
+        return Country::query()->create($data);
     }
 
     /**

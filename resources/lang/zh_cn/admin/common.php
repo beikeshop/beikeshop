@@ -63,6 +63,6 @@ return [
     'rmas_index' => '售后管理',
     'customers_index' => '客户列表',
     'customer_groups_index' => '客户组',
-    'countries_index' => '国家',
-    'zones_index' => '省份',
+    'countries_index' => '国家管理',
+    'zones_index' => '省份管理',
 ];
