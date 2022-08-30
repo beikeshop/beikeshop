@@ -46,7 +46,7 @@ class CustomerGroupRepo
      */
     public static function find($id)
     {
-        return CustomerGroup::query()->find($id);
+        return CustomerGroup::query()->findOrFail($id);
     }
 
     /**

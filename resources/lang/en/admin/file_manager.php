@@ -13,5 +13,8 @@ return [
     'file_manager_create' => 'Create',
     'file_manager_show' => 'View',
     'file_manager_update' => 'Rename',
-    'file_manager_delete' => 'Delete'
+    'file_manager_delete' => 'Delete',
+    'directory_already_exist' => 'The directory not exist!',
+    'directory_not_empty' => 'The directory not empty!',
+    'target_not_exist' => 'The target file/directory not exist!',
 ];

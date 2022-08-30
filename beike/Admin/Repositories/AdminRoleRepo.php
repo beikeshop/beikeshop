@@ -73,7 +73,7 @@ class AdminRoleRepo
             }
         }
         if (empty($items)) {
-            throw new \Exception('权限不能为空,请选择至少一项');
+            throw new \Exception(trans('admin/role.select_one_at_least'));
         }
         $adminRole->syncPermissions($items);
     }

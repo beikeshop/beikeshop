@@ -39,9 +39,6 @@ class CustomerGroupService
     {
         $data = self::getParams($data);
         $customerGroup = CustomerGroupRepo::find($id);
-        if (!$customerGroup) {
-            throw New \Exception("您更新的ID不存在");
-        }
 
         $customerGroup->update($data);
 

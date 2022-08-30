@@ -35,7 +35,7 @@ class Image401 extends Component
         $data['register'] = [
             'code' => 'image401',
             'sort' => 0,
-            'name' => '一行四图-pro',
+            'name' => trans('admin/design_builder.module_four_image_pro'),
             'icon' => '&#xe663;',
         ];
 

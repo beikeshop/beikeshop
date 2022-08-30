@@ -35,7 +35,7 @@ class TabProduct extends Component
         $data['register'] = [
             'code' => 'tab_product',
             'sort' => 0,
-            'name' => '选项卡商品',
+            'name' => trans('admin/design_builder.module_tab_products'),
             'icon' => '&#xe688;',
         ];
 

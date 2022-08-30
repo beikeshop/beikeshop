@@ -96,7 +96,7 @@ class FileManagerService
         $catalogFolderPath = "catalog/{$folderName}";
         $folderPath = public_path($catalogFolderPath);
         if (is_dir($folderPath)) {
-            throw new \Exception("目录已存在");
+            throw new \Exception(trans('admin/file_manager.directory_already_exist'));
         }
         create_directories($catalogFolderPath);
     }
@@ -114,7 +114,7 @@ class FileManagerService
         if (is_dir($filePath)) {
             $files = glob($filePath . '/*');
             if ($files) {
-                throw new \Exception("该目录不为空");
+                throw new \Exception(trans('admin/file_manager.directory_not_empty'));
             }
             @rmdir($filePath);
         } elseif (file_exists($filePath)) {
@@ -154,7 +154,7 @@ class FileManagerService
     {
         $originPath = public_path("catalog/{$originPath}");
         if (!is_dir($originPath) && !file_exists($originPath)) {
-            throw new \Exception('原始文件或者文件夹无效');
+            throw new \Exception(trans('admin/file_manager.target_not_exist'));
         }
         $originBase = dirname($originPath);
         $newPath = $originBase . '/' . $newPath;

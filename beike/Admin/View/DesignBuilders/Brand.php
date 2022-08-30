@@ -35,7 +35,7 @@ class Brand extends Component
         $data['register'] = [
             'code' => 'brand',
             'sort' => 0,
-            'name' => '品牌模块',
+            'name' => trans('admin/design_builder.module_brand'),
             'icon' => '&#xe602;',
         ];
 

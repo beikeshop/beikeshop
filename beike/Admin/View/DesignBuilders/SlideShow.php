@@ -35,7 +35,7 @@ class SlideShow extends Component
         $data['register'] = [
             'code' => 'slideshow',
             'sort' => 0,
-            'name' => '幻灯片模块',
+            'name' => trans('admin/design_builder.module_slideshow'),
             'icon' => '&#xe61b;',
             'style' => 'font-size: 40px;',
         ];

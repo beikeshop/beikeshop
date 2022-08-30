@@ -35,7 +35,7 @@ class Image100 extends Component
         $data['register'] = [
             'code' => 'image100',
             'sort' => 0,
-            'name' => '单图模块',
+            'name' => trans('admin/design_builder.module_banner'),
             'icon' => '&#xe663;',
         ];
 

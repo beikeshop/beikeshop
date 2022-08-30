@@ -13,5 +13,8 @@ return [
     'file_manager_create' => '创建目录/文件',
     'file_manager_show' => '查看目录/文件',
     'file_manager_update' => '重命名',
-    'file_manager_delete' => '删除目录/文件'
+    'file_manager_delete' => '删除目录/文件',
+    'directory_already_exist' => '目录已存在',
+    'directory_not_empty' => '该目录不为空',
+    'target_not_exist' => '原始文件或者文件夹不存在',
 ];
