@@ -30,15 +30,7 @@ export default {
    */
   addCart({sku_id, quantity = 1, isBuyNow = false}, event) {
     if (!isLogin) {
-      layer.open({
-        type: 2,
-        title: '',
-        shadeClose: true,
-        shade: 0.8,
-        area: ['900px', '600px'],
-        content: 'login?iframe=true' //iframe的url
-      });
-
+      this.openLogin()
       return;
     }
 
@@ -57,6 +49,11 @@ export default {
   },
 
   addWishlist(id, event) {
+    if (!isLogin) {
+      this.openLogin()
+      return;
+    }
+
     const $btn = $(event);
     const btnHtml = $btn.html();
     const isWishlist = $btn.attr('data-in-wishlist') * 1;
@@ -113,5 +110,15 @@ export default {
         }
       })
     })
+  },
+
+  openLogin() {
+    layer.open({
+      type: 2,
+      title: '',
+      shadeClose: true,
+      area: ['900px', '600px'],
+      content: 'login?iframe=true' //iframe的url
+    });
   }
 }

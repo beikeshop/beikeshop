@@ -2132,15 +2132,7 @@ __webpack_require__.r(__webpack_exports__);
         isBuyNow = _ref$isBuyNow === void 0 ? false : _ref$isBuyNow;
 
     if (!isLogin) {
-      layer.open({
-        type: 2,
-        title: '',
-        shadeClose: true,
-        shade: 0.8,
-        area: ['900px', '600px'],
-        content: 'login?iframe=true' //iframe的url
-
-      });
+      this.openLogin();
       return;
     }
 
@@ -2167,6 +2159,11 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   addWishlist: function addWishlist(id, event) {
+    if (!isLogin) {
+      this.openLogin();
+      return;
+    }
+
     var $btn = $(event);
     var btnHtml = $btn.html();
     var isWishlist = $btn.attr('data-in-wishlist') * 1;
@@ -2238,6 +2235,16 @@ __webpack_require__.r(__webpack_exports__);
           $('.fixed-top-line').removeAttr('style');
         }
       });
+    });
+  },
+  openLogin: function openLogin() {
+    layer.open({
+      type: 2,
+      title: '',
+      shadeClose: true,
+      area: ['900px', '600px'],
+      content: 'login?iframe=true' //iframe的url
+
     });
   }
 });
