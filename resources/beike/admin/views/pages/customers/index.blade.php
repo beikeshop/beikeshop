@@ -52,7 +52,8 @@
             <th>{{ __('customer.from') }}</th>
             <th>{{ __('customer.customer_group') }}</th>
             <th>{{ __('common.status') }}</th>
-            <th>{{ __('common.action') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -71,6 +72,7 @@
               <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
+            <td>@{{ customer.created_at }}</td>
             <td>
               <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
