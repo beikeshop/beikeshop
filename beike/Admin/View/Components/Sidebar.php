@@ -105,13 +105,12 @@ class Sidebar extends Component
     private function getHomeSubRoutes()
     {
         $routes = [
-            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
-            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
+            ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
+            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.home_routes', $routes);
     }
@@ -161,7 +160,8 @@ class Sidebar extends Component
      * 获取内容管理子页面路由
      * @return mixed
      */
-    private function getPagesSubRoutes() {
+    private function getPagesSubRoutes()
+    {
         $routes = [
             ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
