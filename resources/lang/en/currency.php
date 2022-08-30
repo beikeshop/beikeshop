@@ -13,6 +13,7 @@ return [
     'thousand_point' => ',',
     'name' => 'Name',
     'code' => 'Code',
+    'icon' => 'Icon',
     'symbol_left' => 'Symbol Left',
     'symbol_right' => 'Symbol Right',
     'value' => 'Value',

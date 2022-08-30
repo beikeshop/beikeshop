@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '语言管理')
+@section('title', __('admin/common.language'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
@@ -12,12 +12,12 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>编码</th>
-            <th>图标</th>
-            <th>排序</th>
-            <th>状态</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('common.name') }}</th>
+            <th>{{ __('currency.code') }}</th>
+            <th>{{ __('currency.icon') }}</th>
+            <th>{{ __('common.sort_order') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -42,33 +42,33 @@
       {{-- {{ $languages->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="语言" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/common.language') }}" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
+        <el-form-item label="{{ __('common.name') }}" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="编码" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
+        <el-form-item label="{{ __('currency.code') }}" prop="code">
+          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="图标" prop="image">
+        <el-form-item label="{{ __('currency.icon') }}" prop="image">
           <vue-image v-model="dialog.form.image"></vue-image>
         </el-form-item>
 
-        <el-form-item label="排序">
-          <el-input v-model="dialog.form.sort_order" placeholder="排序"></el-input>
+        <el-form-item label="{{ __('common.sort_order') }}">
+          <el-input v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label=" 状态">
+        <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -100,9 +100,9 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入名称',trigger: 'blur'}, ],
-          code: [{required: true,message: '请输入编码',trigger: 'blur'}, ],
-          image: [{required: true,message: '请选择图标',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
+          code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}',trigger: 'blur'}, ],
+          image: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.icon')]) }}',trigger: 'blur'}, ],
         }
       },
 

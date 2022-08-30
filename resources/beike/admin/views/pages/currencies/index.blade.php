@@ -1,25 +1,25 @@
 @extends('admin::layouts.master')
 
-@section('title', '货币管理')
+@section('title', __('admin/common.currency'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button>
+        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>编码</th>
-            <th>左符号</th>
-            <th>右符号</th>
-            <th>小数位数</th>
-            <th>汇率值</th>
-            <th>状态</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('common.name') }}</th>
+            <th>{{ __('currency.code') }}</th>
+            <th>{{ __('currency.symbol_left') }}</th>
+            <th>{{ __('currency.symbol_right') }}</th>
+            <th>{{ __('currency.decimal_place') }}</th>
+            <th>{{ __('currency.value') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -36,8 +36,8 @@
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -45,41 +45,41 @@
 
     </div>
 
-    <el-dialog title="货币" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/common.currency') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
-      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="名称" prop="name">
+      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
+        <el-form-item label="{{ __('common.name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="code"></el-input>
         </el-form-item>
 
-        <el-form-item label="编码" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
+        <el-form-item label="{{ __('currency.code') }}" prop="code">
+          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="左符号">
-          <el-input v-model="dialog.form.symbol_left" placeholder="左符号"></el-input>
+        <el-form-item label="{{ __('currency.symbol_left') }}">
+          <el-input v-model="dialog.form.symbol_left" placeholder="{{ __('currency.symbol_left') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="右符号">
-          <el-input v-model="dialog.form.symbol_right" placeholder="右符号"></el-input>
+        <el-form-item label="{{ __('currency.symbol_right') }}">
+          <el-input v-model="dialog.form.symbol_right" placeholder="{{ __('currency.symbol_right') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="小数位数" prop="decimal_place">
-          <el-input v-model="dialog.form.decimal_place" placeholder="小数位数"></el-input>
+        <el-form-item label="{{ __('currency.decimal_place') }}" prop="decimal_place">
+          <el-input v-model="dialog.form.decimal_place" placeholder="{{ __('currency.decimal_place') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="汇率值" prop="value">
-          <el-input v-model="dialog.form.value" placeholder="汇率值"></el-input>
+        <el-form-item label="{{ __('currency.value') }}" prop="value">
+          <el-input v-model="dialog.form.value" placeholder="{{ __('currency.value') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label=" 状态">
+        <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="dialog.show = false">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="dialog.show = false">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -113,10 +113,10 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入名称',trigger: 'blur'}, ],
-          code: [{required: true,message: '请输入编码',trigger: 'blur'}, ],
-          value: [{required: true,message: '请输入汇率值',trigger: 'blur'}, ],
-          decimal_place: [{required: true,message: '请输入小数位数',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur'}, ],
+          code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}', trigger: 'blur'}, ],
+          value: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.value')]) }}',trigger: 'blur'}, ],
+          decimal_place: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.decimal_place')]) }}',trigger: 'blur'}, ],
         }
       },
 
