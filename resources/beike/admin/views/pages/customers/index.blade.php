@@ -91,8 +91,8 @@
         <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
           <el-input v-model="dialogCustomers.form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
         </el-form-item>
-        <el-form-item label="{{ __('common.edit') }}" prop="email">
-          <el-input v-model="dialogCustomers.form.email" placeholder="{{ __('common.edit') }}"></el-input>
+        <el-form-item label="{{ __('customer.email') }}" prop="email">
+          <el-input v-model="dialogCustomers.form.email" placeholder="{{ __('customer.email') }}"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('shop/login.password') }}" prop="password">
           <el-input v-model="dialogCustomers.form.password" placeholder="{{ __('shop/login.password') }}"></el-input>
