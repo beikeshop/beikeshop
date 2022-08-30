@@ -1087,8 +1087,38 @@ body.page-categories .el-tree-node__content {
 .design-wrap .menus-wrap > div:not(.list-group-item-primary):hover {
   background-color: #f5f5f5;
 }
-.design-wrap .left .menus-wrap .link-selector-wrap {
-  width: calc(100% - 20px);
+.design-wrap .left {
+  display: flex;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.design-wrap .left .menus-wrap {
+  display: flex;
+}
+.design-wrap .left .menus-wrap > div {
+  position: relative;
+  border: 1px solid transparent;
+  background-color: #f3f3f3;
+}
+.design-wrap .left .menus-wrap > div.active {
+  border-bottom: none;
+  background-color: #fff;
+  border-color: #fd560f;
+}
+.design-wrap .left .menus-wrap > div.active:before {
+  display: block;
+}
+.design-wrap .left .menus-wrap > div:before {
+  content: "";
+  display: none;
+  width: calc(100% + 2px);
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  height: 11px;
+  background-color: #fff;
+  border-left: 1px solid #fd560f;
+  border-right: 1px solid #fd560f;
 }
 .design-wrap .left .menus-wrap .link-selector-wrap .selector-type .title {
   border: none;
@@ -1096,15 +1126,21 @@ body.page-categories .el-tree-node__content {
   background-color: transparent;
 }
 .design-wrap .right {
-  width: calc(100% - 220px);
+  border: 1px solid #fd560f;
+  padding: 14px;
 }
-.design-wrap .right .menu-children-group .group-children .children-item {
+.design-wrap .right .children-group-wrap .group-item {
+  flex: 0 0 calc(20% - 20px);
+  box-shadow: none;
+  border-color: #f2f2f2 !important;
+}
+.design-wrap .right .children-group-wrap .group-item .group-children-info .children-item {
   background-color: #f5f5f5;
 }
-.design-wrap .right .menu-children-group .group-children .children-item .link-selector-wrap {
+.design-wrap .right .children-group-wrap .group-item .group-children-info .children-item .link-selector-wrap {
   width: calc(100% - 34px);
 }
-.design-wrap .right .menu-children-group .group-children .children-item .link-selector-wrap .selector-type .title {
+.design-wrap .right .children-group-wrap .group-item .group-children-info .children-item .link-selector-wrap .selector-type .title {
   border: none;
   background-color: transparent;
 }

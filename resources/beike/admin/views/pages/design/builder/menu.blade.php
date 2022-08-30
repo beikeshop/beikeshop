@@ -15,23 +15,21 @@
 @section('content')
   <div class="card" id="app" v-cloak>
     <div class="card-body h-min-600 position-relative">
-      <div class="design-wrap d-flex">
-        <div class="left" style="width: 220px">
-          <p class="fw-bold mb-2">主菜单</p>
+      <div class="design-wrap">
+        <p class="fw-bold mb-2">主菜单</p>
+        <div class="left">
           {{-- <div class="menus-wrap" v-if="form.menus.length"> --}}
           <draggable class="menus-wrap" v-if="form.menus.length" :list="form.menus"
             :options="{ animation: 330, handle: '.el-icon-rank' }">
             <div
-              :class="['border px-2 py-3 mb-2 ', currentMenuIndex == index ?
-                  'bg-primary bg-opacity-10' : ''
-              ]"
+              :class="['p-2 me-2', currentMenuIndex == index ? 'active' : '']"
               @click="currentMenuIndex = index" v-for="menu, index in form.menus" :key="index">
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center flex-grow-1">
                   <el-tooltip class="icon-rank cursor-scroll" effect="dark" content="拖动排序" placement="left">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
-                  <div class="name ms-2">@{{ menu.name[source.locale] || '请添加数据' }}</div>
+                  <div class="name mx-2">@{{ menu.name[source.locale] || '请添加数据' }}</div>
                   {{-- <link-selector :is-custom-name="true" :is-title="false" v-model="menu.link"></link-selector> --}}
                 </div>
                 <div>
@@ -41,41 +39,38 @@
             </div>
           </draggable>
           {{-- </div> --}}
-          <button @click="addLinkClicked" class="btn btn-outline-primary mt-3">添加主菜单</button>
+          <button @click="addLinkClicked" class="btn btn-outline-primary ms-3">添加主菜单</button>
         </div>
-        <div class="vr position-absolute bg-secondary" style="height: 90%; left: 260px"></div>
-        <div class="flex-1 right ps-5" v-if="currentMenu" :key="currentMenuIndex">
+        <div class="flex-1 right" v-if="currentMenu" :key="currentMenuIndex">
           <div class="d-flex">
-            <div class="wp-200 mb-3">
-              <div class="mb-2 fw-bold">主菜单名称/链接</div>
+            <div class="wp-200 ">
+              <div class="mb-2">主菜单名称/链接</div>
               <text-i18n v-model="currentMenu.name" class="mb-2"></text-i18n>
               {{-- <input type="text" v-model="currentMenu.name['zh_cn']"> --}}
               <link-selector :is-title="false" style="border-color: #c0c4cc" v-model="currentMenu.link">
               </link-selector>
             </div>
-            {{-- <div>
-              <div class="mb-2 fw-bold">子菜单是否为</div>
-              <el-switch v-model="currentMenu.isChildren" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
-            </div> --}}
+
             <div class="wp-200 ms-5">
-              <div class="mb-2 fw-bold">主菜单标签</div>
-              <text-i18n v-model="currentMenu.badge.name" class="mb-3"></text-i18n>
+              <div class="mb-2">主菜单标签</div>
+              <text-i18n v-model="currentMenu.badge.name" class=""></text-i18n>
             </div>
 
             <div class="wp-100 ms-5">
-              <div class="mb-2 fw-bold">标签背景色</div>
-              <el-color-picker v-model="currentMenu.badge.bg_color"></el-color-picker>
+              <div class="mb-2">标签背景色</div>
+              <el-color-picker v-model="currentMenu.badge.bg_color" size="small"></el-color-picker>
             </div>
 
             <div class="wp-100">
-              <div class="mb-2 fw-bold">标签文字色</div>
-              <el-color-picker v-model="currentMenu.badge.text_color"></el-color-picker>
+              <div class="mb-2">标签文字色</div>
+              <el-color-picker v-model="currentMenu.badge.text_color" size="small"></el-color-picker>
             </div>
           </div>
 
-          {{-- <hr class="bg-secondary"> --}}
-          <div class="menu-children-group">
-            <div class="d-flex align-items-center border p-2 bg-light mb-3">
+          <hr class="bg-secondary bg-opacity-50">
+
+          <div class="children-group-wrap">
+            <div class="d-flex align-items-center mb-3">
               <span class="fw-bold">子菜单 (组)</span>
               <div class="vr lh-1 mx-3 bg-secondary " style="height: 18px;"></div>
               <button class="btn btn-sm btn-link p-0" @click="addChildrenGroup"
@@ -87,12 +82,12 @@
                 <el-switch v-model="currentMenu.isFull"></el-switch>
               </div>
             </div>
-            <draggable class="children-item d-flex" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
+            <draggable class="children-group d-flex" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
               :options="{ animation: 330, handle: '.el-icon-rank' }">
-              <div class="w-25 card border mx-2 mb-3" v-for="group, group_index in currentMenu.childrenGroup"
+              <div class="card border mx-2 mb-3 group-item" v-for="group, group_index in currentMenu.childrenGroup"
                 :key="group_index">
                 <div class="card-header d-flex align-items-center justify-content-between mb-2">
-                  <div class="">
+                  <div class="" style="font-weight: 400">
                     <i class="el-icon-rank cursor-scroll"></i> 菜单 - @{{ group_index + 1 }}
                     (@{{ groupTypeName(group.type) }})
                   </div>
@@ -104,7 +99,7 @@
                 </div>
                 <div class="card-body p-2">
                   <text-i18n v-model="group.name" class="mb-3"></text-i18n>
-                  <div class="group-children">
+                  <div class="group-children-info">
                     <div v-if="group.type == 'image'">
                       <pb-image-selector v-model="group.image.image" class="mb-2"></pb-image-selector>
                       <link-selector v-model="group.image.link"></link-selector>
