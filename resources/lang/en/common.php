@@ -61,6 +61,7 @@ return [
     'phone' => 'Phone',
     'exit' => 'Exit',
     'return' => 'Return',
+    'language' => 'Language',
 
     'id' => 'ID',
     'created_at' => 'Created At',

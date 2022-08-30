@@ -60,6 +60,7 @@ return [
     'phone' => '电话',
     'exit' => '退出',
     'return' => '返回',
+    'language' => '语言',
 
     'id' => 'ID',
     'created_at' => '创建时间',
