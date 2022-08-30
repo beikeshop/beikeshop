@@ -1,6 +1,6 @@
 <template id="rich-text-i18n-template">
   <div class="rich-text-i18n-template">
-    <el-button style="width: 100%;" icon="el-icon-edit-outline" plain @click="richTextDialogChecked('open')">{{ __('common.modules_edit_content') }}</el-button>
+    <el-button style="width: 100%;" icon="el-icon-edit-outline" plain @click="richTextDialogChecked('open')">{{ __('admin/builder.modules_edit_content') }}</el-button>
     <el-dialog
       custom-class="rich-text-dialog"
       :modal-append-to-body="false"

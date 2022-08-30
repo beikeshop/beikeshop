@@ -111,7 +111,7 @@ return [
     'text_phone' => '电话',
     'text_address' => '地址',
     'text_email' => '邮箱',
-    'text_copyright' => '版权文字',
+    'text_copyright' => '版权/图片',
     'text_yq_link' => '友情链接',
     'text_link_bar' => '链接栏',
     'text_introduce' => '介绍',
@@ -244,4 +244,10 @@ return [
     'menu'  => '菜单',
     'add_submenu_link'  => '添加子菜单链接',
     'type'  => '类型',
+
+    // footer
+    'footer_edit'  => '页尾编辑器',
+    'sub_title'  => '副标题',
+    'introduction'  => '简介',
+    'copyright_settings'  => '版权设置',
 ];

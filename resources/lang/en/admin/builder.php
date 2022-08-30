@@ -111,7 +111,7 @@ return [
     'text_phone' => 'Phone',
     'text_address' => 'Address',
     'text_email' => 'Mailbox',
-    'text_copyright' => 'Copyright text',
+    'text_copyright' => 'Copyright / Image',
     'text_yq_link' => 'Friendly Link',
     'text_link_bar'  => 'Link bar',
     'text_introduce'  => 'Introduce',
@@ -228,18 +228,23 @@ return [
     'mobile_search_fixed' => 'Fixed at the top of the screen (default)',
 
     // Menu
-// Menu
-     'main_menu' => 'main menu',
-     'please_add_data' => 'please add data',
+     'main_menu' => 'Main Menu',
+     'please_add_data' => 'Please add data',
      'add_main_menu' => 'Add main menu',
-     'main_menu_name_link' => 'main menu name/link',
+     'main_menu_name_link' => 'Main menu name/link',
      'main_menu_label' => 'Main menu label',
-     'label_background_color' => 'label background color',
-     'label_text_color' => 'label text color',
+     'label_background_color' => 'Label background color',
+     'label_text_color' => 'Label text color',
      'submenu_group' => 'Submenu (group)',
      'add_menu_group' => 'Add menu group',
      'full_screen' => 'Whether full screen',
-     'menu' => 'menu',
+     'menu' => 'Menu',
      'add_submenu_link' => 'Add submenu link',
-     'type' => 'type',
+     'type' => 'Type',
+
+     // footer
+     'footer_edit'  => 'Footer editor',
+     'sub_title'  => 'Sub Title',
+     'introduction'  => 'Introduction',
+     'copyright_settings'  => 'Copyright settings',
 ];
