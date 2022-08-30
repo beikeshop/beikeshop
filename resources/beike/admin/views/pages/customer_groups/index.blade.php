@@ -1,34 +1,37 @@
 @extends('admin::layouts.master')
 
-@section('title', '用户组')
+@section('title', __('customer.customer_group'))
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">创建用户组</button>
+        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/customer_group.customer_groups_create') }}</button>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>描述</th>
-            <th>等级</th>
-            <th>创建时间</th>
-            <th>操作</th>
+            <th>{{ __('common.name') }}</th>
+            <th>{{ __('admin/region.describe') }}</th>
+            <th>{{ __('customer_group.level') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th width="130px">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="group, index in customer_groups" :key="index">
             <td>@{{ group.id }}</td>
             <td>@{{ group.description?.name || '' }}</td>
-            <td>@{{ group.description?.description || '' }}</td>
+            <td>
+              <div :title="group.description?.description || ''" class="w-max-500">
+                @{{ stringLengthInte(group.description?.description || '') }}</div>
+            </td>
             <td>@{{ group.level }}</td>
             <td>@{{ group.created_at }}</td>
             <td>
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -37,49 +40,49 @@
       {{-- {{ $customer_groups->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="创建用户组" :visible.sync="dialog.show" width="600px"
+    <el-dialog title="{{ __('customer.customer_group') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
-      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="名称" required class="language-inputs">
+      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">
+        <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
-              { required: true, message: '请输入名称', trigger: 'blur' },
+              { required: true, message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur' },
             ]"
           >
-            <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="用户名"><template slot="prepend">@{{lang.name}}</template></el-input>
+            <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
         </el-form-item>
 
-        <el-form-item label="描述" class="language-inputs">
+        <el-form-item label="{{ __('admin/region.describe') }}" class="language-inputs">
           <el-form-item v-for="lang, lang_i in source.languages" :key="lang_i">
-            <el-input size="mini" v-model="dialog.form.description[lang.code]" placeholder="描述"><template slot="prepend">@{{lang.name}}</template></el-input>
+            <el-input size="mini" v-model="dialog.form.description[lang.code]" placeholder="{{ __('admin/region.describe') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
         </el-form-item>
 
-        <el-form-item label="等级">
-          <el-input class="mb-0" v-model="dialog.form.level" placeholder="等级"></el-input>
+        <el-form-item label="{{ __('customer_group.level') }}">
+          <el-input class="mb-0" v-model="dialog.form.level" placeholder="{{ __('customer_group.level') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="消费额度">
-          <el-input class="mb-0" type="number" v-model="dialog.form.total" placeholder="消费额度"></el-input>
+        <el-form-item label="{{ __('admin/customer_group.consumption_limit') }}">
+          <el-input class="mb-0" type="number" v-model="dialog.form.total" placeholder="{{ __('admin/customer_group.consumption_limit') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="折扣率">
-          <el-input class="mb-0" type="number" v-model="dialog.form.discount_factor" placeholder="折扣率"></el-input>
+        <el-form-item label="{{ __('admin/customer_group.discount_rate') }}">
+          <el-input class="mb-0" type="number" v-model="dialog.form.discount_factor" placeholder="{{ __('admin/customer_group.discount_rate') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="奖励积分系数">
-          <el-input class="mb-0" type="number" v-model="dialog.form.reward_point_factor" placeholder="奖励积分系数"></el-input>
+        <el-form-item label="{{ __('admin/customer_group.reward_points_factor') }}">
+          <el-input class="mb-0" type="number" v-model="dialog.form.reward_point_factor" placeholder="{{ __('admin/customer_group.reward_points_factor') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="使用积分系数">
-          <el-input class="mb-0" type="number" v-model="dialog.form.use_point_factor" placeholder="使用积分系数"></el-input>
+        <el-form-item label="{{ __('admin/customer_group.integral_factor') }}">
+          <el-input class="mb-0" type="number" v-model="dialog.form.use_point_factor" placeholder="{{ __('admin/customer_group.integral_factor') }}"></el-input>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="addCustomersFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -163,7 +166,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -181,9 +184,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除用户组吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('customer_groups/' + id).then((res) => {

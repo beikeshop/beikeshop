@@ -11,6 +11,10 @@
 
 return [
     'index' => 'Customer Groups',
+    'consumption_limit' => 'consumption limit',
+    'discount_rate' => 'discount rate',
+    'reward_points_factor' => 'reward points',
+    'integral_factor' => 'integral coefficient',
 
     'customer_groups_index' => 'Index',
     'customer_groups_create' => 'Create',
