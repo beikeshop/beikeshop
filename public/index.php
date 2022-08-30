@@ -3,6 +3,10 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+if (version_compare(PHP_VERSION, '8.0.2', '<') == true) {
+    exit('PHP8.0.2+ Required');
+}
+
 define('LARAVEL_START', microtime(true));
 
 /*

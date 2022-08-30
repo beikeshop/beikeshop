@@ -40,7 +40,7 @@ class WelcomeController extends Controller
     public function locale($lang)
     {
         if (in_array($lang, languages()->toArray())) {
-            Session::put('locale', $lang);
+            setcookie('locale', $lang, 0, '/');
         }
         return Redirect::back();
     }

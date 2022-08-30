@@ -36,12 +36,12 @@
           <select name="database_connection" class="form-select" aria-label="Default select example">
             <option value="mysql" selected>
               {{ trans($entry_key . 'db_connection_label_mysql') }}</option>
-            <option value="sqlite">
-              {{ trans($entry_key . 'db_connection_label_sqlite') }}</option>
-            <option value="pgsql">
-              {{ trans($entry_key . 'db_connection_label_pgsql') }}</option>
-            <option value="sqlsrv">
-              {{ trans($entry_key . 'db_connection_label_sqlsrv') }}</option>
+{{--            <option value="sqlite">--}}
+{{--              {{ trans($entry_key . 'db_connection_label_sqlite') }}</option>--}}
+{{--            <option value="pgsql">--}}
+{{--              {{ trans($entry_key . 'db_connection_label_pgsql') }}</option>--}}
+{{--            <option value="sqlsrv">--}}
+{{--              {{ trans($entry_key . 'db_connection_label_sqlsrv') }}</option>--}}
           </select>
         </div>
 

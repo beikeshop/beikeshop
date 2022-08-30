@@ -17,12 +17,12 @@ class SetLocaleInstaller
      */
     public function handle(Request $request, Closure $next)
     {
-        $sessionLocale = session('locale');
+        $locale = $_COOKIE['locale'] ?? 'en';
         $languageDir = base_path('beike/Installer/Lang');
         $languages = array_values(array_diff(scandir($languageDir), array('..', '.')));
 
-        if ($sessionLocale && in_array($sessionLocale, $languages)) {
-            App::setLocale($sessionLocale);
+        if ($locale && in_array($locale, $languages)) {
+            App::setLocale($locale);
         } else {
             App::setLocale('en');
         }
