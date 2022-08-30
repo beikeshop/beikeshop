@@ -118,7 +118,7 @@
                   :id="'payment-method-' + index" class="form-check-input">
                 <img :src="payment.icon" class="img-fluid">
               </div>
-              <div class="right">
+              <div class="right ms-3">
                 <div class="title">@{{ payment.name }}</div>
                 <div class="sub-title" v-html="payment.description"></div>
               </div>
@@ -135,9 +135,9 @@
               <div class="left">
                 <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code"
                   :id="'shipping-method-' + index" class="form-check-input">
-                <img :src="shipping.icon" class="img-fluid">
+                <img :src="shipping.icon" class="img-fluid" v-if="shipping.icon">
               </div>
-              <div class="right">
+              <div class="right ms-3">
                 <div class="title">@{{ shipping.name }}</div>
                 <div class="sub-title" v-html="shipping.description"></div>
               </div>
