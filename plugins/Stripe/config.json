@@ -4,7 +4,7 @@
     "description": "Stripe 支付 <a href='https://stripe.com/' target='_blank'>Stripe</a>",
     "type": "payment",
     "version": "v1.0.0",
-    "icon": "https://via.placeholder.com/100x100.png/00ee99?text=STRIPE",
+    "icon": "plugin/stripe/image/logo.png",
     "author": {
         "name": "成都光大网络科技有限公司",
         "email": "yangjin@opencart.cn"
