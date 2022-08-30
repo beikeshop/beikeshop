@@ -1,14 +1,14 @@
 <template id="module-editor-brand-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">设置</div>
+    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">模块标题</div>
+      <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="module.title"></text-i18n>
     </div>
 
-    <div class="module-editor-row">内容</div>
+    <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">选择品牌</div>
+      <div class="module-edit-title">{{ __('admin/builder.modules_choose_brand') }}</div>
 
       <div class="autocomplete-group-wrapper">
         <el-autocomplete
@@ -17,7 +17,7 @@
           value-key="name"
           size="small"
           :fetch-suggestions="querySearch"
-          placeholder="请输入关键字搜索"
+          placeholder="{{ __('admin/builder.modules_keywords_search') }}"
           :trigger-on-focus="false"
           :highlight-first-item="true"
           @select="handleSelect"
@@ -113,7 +113,7 @@ setTimeout(() => {
     },
     floor: languagesFill(''),
     full: true,
-    title: languagesFill('推荐品牌模块'),
+    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
     brands: []
   }
 

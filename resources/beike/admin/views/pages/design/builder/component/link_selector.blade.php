@@ -1,11 +1,11 @@
 <template id="link-selector">
   <div class="link-selector-wrap">
-    <div class="title" v-if="isTitle"><i class="el-icon-link"></i>选择链接</div>
+    <div class="title" v-if="isTitle"><i class="el-icon-link"></i>{{ __('admin/builder.modules_choose_link') }}</div>
     <div class="selector-type" @blur="selectorContentShow = false" tabindex="1">
-      <div class="title" v-if="link.type != 'custom' ? value.value == '' : ''" @click="selectorContentShow = !selectorContentShow">请选择链接</div>
+      <div class="title" v-if="link.type != 'custom' ? value.value == '' : ''" @click="selectorContentShow = !selectorContentShow">{{ __('admin/builder.modules_choose_link') }}</div>
       <div class="title" @click="selectorContentShow = !selectorContentShow" v-else :title="name" v-loading="nameLoading">@{{ selectorTitle }}: @{{ name }}</div>
       <div :class="'selector-content ' + (selectorContentShow ? 'active' : '')">
-        <div @click="selectorType()">无</div>
+        <div @click="selectorType()">{{ __('admin/builder.text_no') }}</div>
         <div v-for="(type, index) in types" :key="index" @click="selectorType(type.type)">@{{ type.label }}</div>
       </div>
     </div>
@@ -19,31 +19,31 @@
       @closed="linkDialogClose"
       width="460px">
       <div slot="title" class="link-dialog-header">
-        <div class="title">选择@{{ dialogTitle }}</div>
+        <div class="title">{{ __('admin/builder.modules_choose') }}@{{ dialogTitle }}</div>
         <div class="input-with-select" v-if="link.type != 'custom'">
-          <input type="text" placeholder="请输入关键字搜索" v-model="keyword" @keyup.enter="searchProduct" class="form-control">
-          <el-button  @click="searchProduct"><i class="el-icon-search"></i> 搜索</el-button>
+          <input type="text" placeholder="{{ __('admin/builder.modules_keywords_search') }}" v-model="keyword" @keyup.enter="searchProduct" class="form-control">
+          <el-button  @click="searchProduct"><i class="el-icon-search"></i> {{ __('admin/builder.text_search') }}</el-button>
         </div>
       </div>
       <div class="link-dialog-content">
         <div class="product-search">
           <div class="link-top-new">
-            <span>是否新窗口打开</span>
+            <span>{{ __('admin/builder.text_is_newpage') }}</span>
             <el-switch :width="36" @change="linksNewBack" v-model="link.new_window"></el-switch>
           </div>
 
-          <a :href="linkTypeAdmin" target="_blank" v-if="link.type != 'custom' && link.type != 'static'">管理@{{ dialogTitle }}</a>
+          <a :href="linkTypeAdmin" target="_blank" v-if="link.type != 'custom' && link.type != 'static'">{{ __('admin/builder.text_manage') }}@{{ dialogTitle }}</a>
         </div>
 
         <div class="link-text" v-if="isCustomName">
           <div class="module-edit-group" style="margin-bottom: 10px;">
-            <div class="module-edit-title">自定义名称</div>
+            <div class="module-edit-title">{{ __('admin/builder.custom_name') }}</div>
             <text-i18n v-model="link.text"></text-i18n>
           </div>
         </div>
         <template v-if="link.type == 'custom'">
           <div class="linkDialog-custom">
-            <el-input v-model="link.value" placeholder="请输入链接地址"></el-input>
+            <el-input v-model="link.value" placeholder="{{ __('admin/builder.text_enter_link') }}"></el-input>
           </div>
         </template>
         <template v-else-if="link.type == 'static'">
@@ -64,8 +64,8 @@
           <div class="product-info" v-loading="loading">
             <template v-if="linkDialog.data.length">
               <div class="product-info-title">
-                <span>内容</span>
-                <span>状态</span>
+                <span>{{ __('admin/builder.modules_content') }}</span>
+                <span>{{ __('admin/builder.text_states') }}</span>
               </div>
 
               <ul class="product-list">
@@ -75,19 +75,22 @@
                     <img :src="product.image" v-if="product.image" class="img-responsive">
                     <div>@{{ product.name }}</div>
                   </div>
-                  <div :class="'right ' + (product.status ? 'ok' : 'no')">@{{ product.status ? '启用' : '禁用' }}</div>
+                  <div :class="'right ' + (product.status ? 'ok' : 'no')">
+                    <template v-if="product.status">{{ __('admin/builder.text_enable') }}</template>
+                    <template v-else>{{ __('admin/builder.text_disable') }}</template>
+                  </div>
                 </li>
               </ul>
             </template>
             <div class="product-info-no" v-if="!linkDialog.data.length && loading === false">
               <div class="icon"><i class="iconfont">&#xe60c;</i></div>
-              <div class="no-text">数据不存在或已被删除，<a :href="linkTypeAdmin" target="_blank">去添加@{{ dialogTitle }}</a></div>
+              <div class="no-text">{{ __('admin/builder.text_no_data') }}, <a :href="linkTypeAdmin" target="_blank">{{ __('admin/builder.text_to_add') }}@{{ dialogTitle }}</a></div>
             </div>
           </div>
         </template>
       </div>
       <div slot="footer" class="link-dialog-footer">
-        <el-button type="primary" @click="linkDialogConfirm">确 定</el-button>
+        <el-button type="primary" @click="linkDialogConfirm">{{ __('admin/builder.text_sure') }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -134,20 +137,20 @@
     data: function () {
       return {
         types: [
-          {type: 'product', label: '商品'},
-          {type: 'category', label: '分类'},
-          {type: 'page', label: '信息页面'},
-          {type: 'brand', label: '品牌'},
-          {type: 'static',label: '固定连接'},
+          {type: 'product', label: '{{ __('admin/builder.modules_product') }}'},
+          {type: 'category', label: '{{ __('admin/builder.text_category') }}'},
+          {type: 'page', label: '{{ __('admin/builder.text_information') }}'},
+          {type: 'brand', label: '{{ __('admin/builder.text_manufacturer') }}'},
+          {type: 'static',label: '{{ __('admin/builder.text_static') }}'},
           // {type: 'blog',label: '博客'},
-          {type: 'custom',label: '自定义'}
+          {type: 'custom',label: '{{ __('admin/builder.text_custom') }}'}
         ],
         static: [
-          {name: '个人中心', value: 'account.index'},
-          {name: '收藏列表', value: 'account.wishlist.index'},
-          {name: '历史订单', value: 'account.order.index'},
+          {name: '{{ __('shop/account.index') }}', value: 'account.index'},
+          {name: '{{ __('shop/account.wishlist.index') }}', value: 'account.wishlist.index'},
+          {name: '{{ __('shop/account.order.index') }}', value: 'account.order.index'},
           // {name: '最新商品', value: 'account.index'},
-          {name: '品牌列表', value: 'brands.index'},
+          {name: '{{ __('shop/brands.index') }}', value: 'brands.index'},
         ],
         link: null,
         keyword: '',
@@ -358,10 +361,10 @@
           if (res.data) {
             self.name = res.data;
           } else {
-            self.name = '数据不存在或已被删除';
+            self.name = '{{ __('admin/builder.text_no_data') }}';
           }
         }).catch(() => {
-          self.name = '数据不存在或已被删除';
+          self.name = '{{ __('admin/builder.text_no_data') }}';
         }).finally(() => {
           self.nameLoading = false;
         });

@@ -61,4 +61,6 @@ return [
     'rmas_index' => 'RMA',
     'customers_index' => 'Customers',
     'customer_groups_index' => 'Customer Groups',
+    'countries_index' => 'Countries',
+    'zones_index' => 'Zones',
 ];

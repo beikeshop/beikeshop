@@ -59,6 +59,8 @@ return [
     'data' => 'Data',
     'view' => 'View',
     'phone' => 'Phone',
+    'exit' => 'Exit',
+    'return' => 'Return',
 
     'id' => 'ID',
     'created_at' => 'Created At',

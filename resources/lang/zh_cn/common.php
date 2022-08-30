@@ -58,6 +58,8 @@ return [
     'data' => '数据',
     'view' => '查看',
     'phone' => '电话',
+    'exit' => '退出',
+    'return' => '返回',
 
     'id' => 'ID',
     'created_at' => '创建时间',

@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '编辑导航菜单')
+@section('title', __('admin/builder.text_to_menu'))
 
 @push('header')
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
@@ -9,7 +9,7 @@
 @endpush
 
 @section('page-title-right')
-  <button type="button" class="btn btn-primary save-btn">保存</button>
+  <button type="button" class="btn btn-primary save-btn">{{ __('common.save') }}</button>
 @endsection
 
 @section('content')

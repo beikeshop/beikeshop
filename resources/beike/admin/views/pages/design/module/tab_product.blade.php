@@ -1,14 +1,14 @@
 <template id="module-editor-tab-product-template">
   <div class="module-editor-tab-product-template">
-    <div class="module-editor-row">设置</div>
+    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">模块标题</div>
+      <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="module.title"></text-i18n>
     </div>
 
-    <div class="module-editor-row">内容</div>
+    <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">配置商品</div>
+      <div class="module-edit-title">{{ __('admin/builder.modules_set_product') }}</div>
       <el-tabs v-model="editableTabsValue" class="tab-edit-category" type="card" editable @edit="handleTabsEdit">
         <el-tab-pane
           v-for="(item, index) in module.tabs"
@@ -19,12 +19,12 @@
 
         <div class="tab-info">
           <div class="module-edit-group">
-            <div class="module-edit-title">配置标题</div>
+            <div class="module-edit-title">{{ __('admin/builder.text_set_title') }}</div>
             <text-i18n v-model="item.title"></text-i18n>
           </div>
 
           <div class="module-edit-group">
-            <div class="module-edit-title">商品</div>
+            <div class="module-edit-title">{{ __('admin/builder.modules_product') }}</div>
 
             <div class="autocomplete-group-wrapper">
               <el-autocomplete
@@ -33,7 +33,7 @@
                 value-key="name"
                 size="small"
                 :fetch-suggestions="querySearch"
-                placeholder="请输入关键字搜索"
+                placeholder="{{ __('admin/builder.modules_keywords_search') }}"
                 :trigger-on-focus="false"
                 :highlight-first-item="true"
                 @select="handleSelect"
@@ -56,7 +56,7 @@
                     </div>
                   </draggable>
                 </template>
-                <template v-else>请添加商品</template>
+                <template v-else>{{ __('admin/builder.modules_please_products') }}</template>
               </div>
             </div>
           </div>
@@ -170,7 +170,7 @@ setTimeout(() => {
     },
     floor: languagesFill(''),
     tabs: [{title: languagesFill('Tab 1'), products: []}],
-    title: languagesFill('模块标题'),
+    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
   }
 
   let register = @json($register);

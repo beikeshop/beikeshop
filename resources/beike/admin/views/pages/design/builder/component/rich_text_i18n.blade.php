@@ -1,10 +1,10 @@
 <template id="rich-text-i18n-template">
   <div class="rich-text-i18n-template">
-    <el-button style="width: 100%;" icon="el-icon-edit-outline" plain @click="richTextDialogChecked('open')">编辑内容</el-button>
+    <el-button style="width: 100%;" icon="el-icon-edit-outline" plain @click="richTextDialogChecked('open')">{{ __('common.modules_edit_content') }}</el-button>
     <el-dialog
       custom-class="rich-text-dialog"
       :modal-append-to-body="false"
-      title="编辑"
+      title="{{ __('common.edit') }}"
       :visible.sync="richTextDialog.show"
       width="800px">
       <el-tabs v-if="languages.length > 1" value="language-{{ locale() }}" :stretch="languages.length > 5 ? true : false" type="card">
@@ -21,8 +21,8 @@
         <textarea class="tinymce">@{{ value[languages[0].code] }}</textarea>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="richTextDialog.show = false">取 消</el-button>
-        <el-button type="primary" @click="richTextDialogSave">确 定</el-button>
+        <el-button @click="richTextDialog.show = false">{{ __('common.cancel') }}</el-button>
+        <el-button type="primary" @click="richTextDialogSave">{{ __('common.confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>

@@ -9,7 +9,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="asset" content="{{ asset('/') }}">
   <base href="{{$admin_base_url}}">
-  <title>首页编辑器</title>
+  <title>{{ __('admin/builder.text_edit_home') }}</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
@@ -26,10 +26,9 @@
   <div class="design-box">
     <div class="sidebar-edit-wrap" id="app" v-cloak>
       <div class="design-head">
-        <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>返回</div>
-        {{-- <div @click="viewHome"><i class="el-icon-view"></i>查看页面</div> --}}
-        <div @click="viewHome"><i class="el-icon-switch-button"></i>退出</div>
-        <div @click="saveButtonClicked"><i class="el-icon-check"></i>保存</div>
+        <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>{{ __('common.return') }}</div>
+        <div @click="viewHome"><i class="el-icon-switch-button"></i>{{ __('common.exit') }}</div>
+        <div @click="saveButtonClicked"><i class="el-icon-check"></i>{{ __('common.save') }}</div>
       </div>
       <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
         <component
@@ -40,16 +39,20 @@
         ></component>
       </div>
 
-      <el-row v-if="design.editType == 'add'" class="modules-list">
-        <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
-          <div @click="addModuleButtonClicked(item.code)" class="module-list">
-            <div class="module-info">
-              <div class="icon"><i :style="item.style" class="iconfont" v-html="item.icon"></i></div>
-              <div class="name">@{{ item.name }}</div>
+      <div class="modules-list">
+        <div style="padding: 5px; color: #666;"><i class="el-icon-microphone"></i> {{ __('admin/builder.modules_instructions') }}</div>
+
+        <el-row v-if="design.editType == 'add'">
+          <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
+            <div @click="addModuleButtonClicked(item.code)" class="module-list">
+              <div class="module-info">
+                <div class="icon"><i :style="item.style" class="iconfont" v-html="item.icon"></i></div>
+                <div class="name">@{{ item.name }}</div>
+              </div>
             </div>
-          </div>
-        </el-col>
-      </el-row>
+          </el-col>
+        </el-row>
+      </div>
     </div>
     <div class="preview-iframe">
       <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>

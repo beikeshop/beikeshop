@@ -14,8 +14,8 @@
               </el-image>
             </div>
             <div class="btns">
-              <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
-              <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">删除</el-button>
+              <el-button type="primary" size="mini" plain @click="selectButtonClicked">{{ __('admin/builder.modules_choose') }}</el-button>
+              <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">{{ __('admin/builder.text_delete') }}</el-button>
             </div>
             <input type="hidden" value="" v-model="src" :id="'input-' + id">
           </div>
@@ -32,8 +32,8 @@
         </div>
 
         <div class="btns">
-          <el-button type="primary" size="mini" plain @click="selectButtonClicked">选择</el-button>
-          <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">删除</el-button>
+          <el-button type="primary" size="mini" plain @click="selectButtonClicked">{{ __('admin/builder.modules_choose') }}</el-button>
+          <el-button size="mini" plain style="margin-left: 4px;" @click="removeImage">{{ __('admin/builder.text_delete') }}</el-button>
         </div>
         <input type="hidden" value="" v-model="src">
       </div>
