@@ -57,7 +57,7 @@
           <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
         </el-form-item>
 
-        <el-form-item label="所属国家">
+        <el-form-item label="所属国家" prop="country_id">
           <el-select v-model="dialog.form.country_id" placeholder="请选择">
             <el-option
               v-for="item in countries"
@@ -114,7 +114,8 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入国家名称',trigger: 'blur'}, ],
+          name: [{required: true, message: '请输入省份名称', trigger: 'blur'}, ],
+          country_id: [{required: true, message: '请选择国家', trigger: 'blur'}, ],
         }
       },
 
