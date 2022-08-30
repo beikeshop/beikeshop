@@ -1,5 +1,5 @@
 <x-admin::form.row :title="$title" :required="$required">
-  <input type="text" name="{{ $name }}"
+  <input type="{{ $type }}" name="{{ $name }}"
     class="form-control wp-{{ $width }} {{ $error ? 'is-invalid' : '' }}" value="{{ $value }}"
     placeholder="{{ $title }}" @if ($required) required @endif>
   <span class="invalid-feedback" role="alert">
