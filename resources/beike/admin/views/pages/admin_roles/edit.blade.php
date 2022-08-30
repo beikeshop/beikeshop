@@ -1,16 +1,16 @@
 @extends('admin::layouts.master')
 
-@section('title', '角色管理')
+@section('title', __('admin/admin_roles.role_management'))
 
 @section('content')
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <el-form ref="form" :rules="rules" :model="form" label-width="100px">
-        <el-form-item label="角色名称" prop="name">
-          <el-input v-model="form.name" placeholder="角色名称" class="w-auto"></el-input>
+        <el-form-item label="{{ __('admin/admin_roles.role_name') }}" prop="name">
+          <el-input v-model="form.name" placeholder="{{ __('admin/admin_roles.role_name') }}" class="w-auto"></el-input>
         </el-form-item>
 
-        <el-form-item label="权限" prop="roles">
+        <el-form-item label="{{ __('admin/admin_roles.permission') }}" prop="roles">
           <div class="roles-wrap border w-max-900">
             <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
               <el-button size="small" @click="updateAllState(true)">@lang('admin/admin_roles.select_all')</el-button>
@@ -19,7 +19,7 @@
             <div v-for="role, index in form.permissions" :key="index">
               <div class="bg-light px-2 d-flex">
                 @{{ role.title }}
-                <div class="row-update ms-2 link-secondary">[<span @click="updateState(true, index)">全选</span> / <span @click="updateState(false, index)">取消</span>]</div>
+                <div class="row-update ms-2 link-secondary">[<span @click="updateState(true, index)">{{ __('common.select_all') }}</span> / <span @click="updateState(false, index)">{{ __('common.cancel') }}</span>]</div>
               </div>
               <div class="role-methods">
                 <div class="d-flex flex-wrap px-3">
@@ -33,8 +33,8 @@
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </div>

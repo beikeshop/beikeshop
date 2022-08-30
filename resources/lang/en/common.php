@@ -62,6 +62,7 @@ return [
     'exit' => 'Exit',
     'return' => 'Return',
     'language' => 'Language',
+    'select_all' => 'Select All',
 
     'id' => 'ID',
     'created_at' => 'Created At',
