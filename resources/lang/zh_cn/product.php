@@ -13,6 +13,8 @@ return [
     'name' => '名称',
     'sku' => 'SKU',
     'price' => '价格',
+    'origin_price' => '原价',
+    'cost_price' => '成本价',
     'brand' => '品牌',
     'category' => '分类',
     'model' => '型号',

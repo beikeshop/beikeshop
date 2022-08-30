@@ -34,10 +34,11 @@ class ProductRequest extends FormRequest
     {
         return [
             'descriptions.*.name' => 'required|string|min:3|max:128',
-            // 'descriptions.*.description' => 'required|string',
             'brand_id' => 'int',
             'skus.*.sku' => 'required|string',
             'skus.*.price' => 'required|numeric',
+            'skus.*.origin_price' => 'required|numeric',
+            'skus.*.cost_price' => 'required|numeric',
         ];
     }
 
@@ -47,7 +48,9 @@ class ProductRequest extends FormRequest
             'descriptions.*.name' => trans('product.name'),
             'brand_id' => trans('product.brand'),
             'skus.*.sku' => trans('product.sku'),
-            'skus.*.price' => trans('product.price')
+            'skus.*.price' => trans('product.price'),
+            'skus.*.origin_price' => trans('product.origin_price'),
+            'skus.*.cost_price' => trans('product.cost_price'),
         ];
     }
 }
