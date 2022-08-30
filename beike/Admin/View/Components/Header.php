@@ -30,7 +30,7 @@ class Header extends Component
     {
         $preparedMenus = $this->prepareMenus();
         foreach ($preparedMenus as $menu) {
-            $this->addLink($menu['name'], $menu['route'], equal_route("admin.{$menu['name']}"));
+            $this->addLink($menu['name'], $menu['route'], equal_route("admin.{$menu['route']}"));
         }
         return view('admin::components.header');
     }
