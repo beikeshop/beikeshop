@@ -25,7 +25,7 @@
         </div>
         <div class="col-4 mt-2 mt-sm-0">
           <el-form-item prop="zone_id">
-            <el-select v-model="{{ $address_form_key }}.zone_id" filterable placeholder="{{ __('address.zone_id') }}">
+            <el-select v-model="{{ $address_form_key }}.zone_id" filterable placeholder="{{ __('address.zone') }}">
               <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
                 :value="item.id">
               </el-option>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-4 mt-2 mt-sm-0">
           <el-form-item prop="city">
-            <el-input v-model="{{ $address_form_key }}.city" placeholder="{{ __('address.enter_city') }}"></el-input>
+            <el-input v-model="{{ $address_form_key }}.city" placeholder="{{ __('shop/account.addresses.enter_city') }}"></el-input>
           </el-form-item>
         </div>
       </div>

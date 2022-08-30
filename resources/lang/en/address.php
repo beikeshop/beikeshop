@@ -14,6 +14,7 @@ return [
     'name' => 'Name',
     'phone' => 'Phone',
     'country_id' => 'Country ID',
+    'zone' => 'Zone',
     'zone_id' => 'Zone ID',
     'address_1' => 'Address 1',
     'address_2' => 'Address 2',
