@@ -77,7 +77,7 @@
                 <td>{{ $order->created_at }}</td>
                 <td>{{ $order->updated_at }}</td>
                 <td><a href="{{ admin_route('orders.show', [$order->id]) }}"
-                    class="btn btn-outline-secondary btn-sm">查看</a>
+                    class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
                 </td>
               </tr>
             @endforeach

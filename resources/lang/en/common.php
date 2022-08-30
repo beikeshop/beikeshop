@@ -11,9 +11,9 @@
 
 return [
     'error_required' => 'Please fill out the :name', // 这个有用别删了，:name 是一个变量
-    'error_required_name' => 'Please fill in your name',
-    'error_required_email' => 'Please enter your email',
     'error_input_required' => 'Input box cannot be empty',
+    'error_form' => 'Please check the form for errors',
+    'email' => 'Email',
     'unauthenticated' => 'Please login first',
     'success' => 'Success',
     'no_data' => 'No data～',
@@ -57,6 +57,8 @@ return [
     'name' => 'Name',
     'image' => 'Image',
     'data' => 'Data',
+    'view' => 'View',
+    'phone' => 'Phone',
 
     'id' => 'ID',
     'created_at' => 'Created At',

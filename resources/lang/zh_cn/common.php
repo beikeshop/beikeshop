@@ -10,9 +10,9 @@
  */
 return [
     'error_required' => '请填写 :name', // 这个有用别删了，:name 是一个变量
-    'error_required_name' => '请填写姓名',
-    'error_required_email' => '请填写邮箱',
     'error_input_required' => '输入框不能为空',
+    'error_form' => '请检查表单是否填写正确',
+    'email' => '邮箱',
     'unauthenticated' => '请先登录',
     'success' => '成功',
     'no_data' => '暂无数据～',
@@ -56,6 +56,8 @@ return [
     'name' => '名称',
     'image' => '图片',
     'data' => '数据',
+    'view' => '查看',
+    'phone' => '电话',
 
     'id' => 'ID',
     'created_at' => '创建时间',

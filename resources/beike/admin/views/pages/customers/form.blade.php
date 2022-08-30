@@ -1,48 +1,48 @@
 @extends('admin::layouts.master')
 
-@section('title', '顾客管理')
+@section('title', __('admin/common.customer'))
 
 @section('content')
   <div id="customer-app-form" class="card" v-cloak>
     <div class="card-body">
-      <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+      <el-form :model="form" :rules="rules" ref="form" label-width="140px">
         <el-tabs v-model="customerTab">
-          <el-tab-pane label="用户信息" name="customer">
+          <el-tab-pane label="{{ __('admin/customer.user_info') }}" name="customer">
             <div class="form-max-w">
-              <el-form-item label="用户名" prop="name">
-                <el-input v-model="form.name" placeholder="用户名"></el-input>
+              <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
+                <el-input v-model="form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
               </el-form-item>
-              <el-form-item label="邮箱" prop="email">
-                <el-input v-model="form.email" placeholder="邮箱"></el-input>
+              <el-form-item label="{{ __('common.email') }}" prop="email">
+                <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
               </el-form-item>
-              <el-form-item label="密码" prop="password">
-                <el-input v-model="form.password" placeholder="留空则保持原密码不变"></el-input>
+              <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+                <el-input v-model="form.password" placeholder="{{ __('admin/customer.password_info') }}"></el-input>
               </el-form-item>
-              <el-form-item label="用户组">
+              <el-form-item label="{{ __('admin/customer_group.index') }}">
                 <el-select v-model="form.customer_group_id" placeholder="请选择">
                   <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
                     :value="item.id">
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="状态" prop="status">
+              <el-form-item label="{{ __('common.status') }}" prop="status">
                 <el-switch v-model="form.status" :active-value="1" :inactive-value="0"></el-switch>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm('form')">提交</el-button>
+                <el-button type="primary" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
               </el-form-item>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="地址管理" name="address" v-if="form.id">
-            <button class="btn btn-primary mb-3" type="button" @click="editAddress">添加地址</button>
+          <el-tab-pane label="{{ __('admin/customer.address_management') }}" name="address" v-if="form.id">
+            <button class="btn btn-primary mb-3" type="button" @click="editAddress">{{ __('common.add') }}</button>
             <table class="table">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>名称</th>
-                  <th>电话</th>
-                  <th>创建时间</th>
-                  <th>操作</th>
+                  <th>{{ __('common.name') }}</th>
+                  <th>{{ __('common.phone') }}</th>
+                  <th>{{ __('common.created_at') }}</th>
+                  <th>{{ __('common.action') }}</th>
                 </tr>
               </thead>
               <tbody v-if="addresses.length">
@@ -53,16 +53,16 @@
                   <td>@{{ address.created_at }}</td>
                   <td>
                     <button class="btn btn-outline-secondary btn-sm" type="button"
-                      @click="editAddress(index)">编辑</button>
+                      @click="editAddress(index)">{{ __('common.edit') }}</button>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button"
-                      @click="deleteAddress(address.id, index)">删除</button>
+                      @click="deleteAddress(address.id, index)">{{ __('common.delete') }}</button>
                   </td>
               </tbody>
               <tbody v-else>
                 <tr>
                   <td colspan="6" class="text-center">
-                    <span class="me-2">当前账号无地址</span>
-                    <el-link type="primary" @click="editAddress">新增地址</el-link>
+                    <span class="me-2">{{ __('admin/customer.no_address') }}</span>
+                    <el-link type="primary" @click="editAddress">{{ __('admin/customer.add_address') }}</el-link>
                   </td>
               </tbody>
             </table>
@@ -71,20 +71,20 @@
       </el-form>
     </div>
 
-    <el-dialog title="编辑地址" :visible.sync="dialogAddress.show" width="600px"
+    <el-dialog title="{{ __('admin/customer.edit_address') }}" :visible.sync="dialogAddress.show" width="650px"
       @close="closeAddressDialog('addressForm')">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
-        <el-form-item label="姓名" prop="name">
+        <el-form-item label="{{ __('common.name') }}" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
         </el-form-item>
-        <el-form-item label="联系电话" prop="phone">
+        <el-form-item label="{{ __('common.phone') }}" prop="phone">
           <el-input maxlength="11" v-model="dialogAddress.form.phone"></el-input>
         </el-form-item>
-        <el-form-item label="地址" required>
+        <el-form-item label="{{ __('admin/customer.address') }}" required>
           <div class="row">
             <div class="col-4">
               <el-form-item>
-                <el-select v-model="dialogAddress.form.country_id" filterable placeholder="选择国家" @change="countryChange">
+                <el-select v-model="dialogAddress.form.country_id" filterable placeholder="{{ __('admin/customer.choose_country') }}" @change="countryChange">
                   <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
                     :value="item.id">
                   </el-option>
@@ -93,7 +93,7 @@
             </div>
             <div class="col-4">
               <el-form-item prop="zone_id">
-                <el-select v-model="dialogAddress.form.zone_id" filterable placeholder="选择省份">
+                <el-select v-model="dialogAddress.form.zone_id" filterable placeholder="{{ __('admin/customer.choose_zones') }}">
                   <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
                     :value="item.id">
                   </el-option>
@@ -102,23 +102,23 @@
             </div>
             <div class="col-4">
               <el-form-item prop="city">
-                <el-input v-model="dialogAddress.form.city" placeholder="输入城市"></el-input>
+                <el-input v-model="dialogAddress.form.city" placeholder="{{ __('admin/customer.enter_city') }}"></el-input>
               </el-form-item>
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="邮编" prop="zipcode">
+        <el-form-item label="{{ __('admin/customer.zipcode') }}" prop="zipcode">
           <el-input v-model="dialogAddress.form.zipcode"></el-input>
         </el-form-item>
-        <el-form-item label="详细地址 1" prop="address_1">
+        <el-form-item label="{{ __('admin/customer.address_1') }}" prop="address_1">
           <el-input v-model="dialogAddress.form.address_1"></el-input>
         </el-form-item>
-        <el-form-item label="详细地址 2">
+        <el-form-item label="{{ __('admin/customer.address_2') }}">
           <el-input v-model="dialogAddress.form.address_2"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="addressFormSubmit('addressForm')">保存</el-button>
-          <el-button @click="closeAddressDialog('addressForm')">取消</el-button>
+          <el-button type="primary" @click="addressFormSubmit('addressForm')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeAddressDialog('addressForm')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -166,37 +166,37 @@
         },
 
         rules: {
-          name: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+          name: [{required: true, message: "{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}", trigger: 'blur'}, ],
           email: [
-            {required: true, message: '请输入邮箱', trigger: 'blur'},
-            {type: 'email', message: '请输入正确邮箱格式' ,trigger: 'blur'},
+            {required: true, message: '{{ __('common.error_required', ['name' => __('common.email')] ) }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('common.error_required', ['name' => __('admin/customer.error_email')] ) }}' ,trigger: 'blur'},
           ],
         },
 
         addressRules: {
           name: [{
             required: true,
-            message: '请输入姓名',
+            message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}',
             trigger: 'blur'
           }, ],
           phone: [{
             required: true,
-            message: '请输入联系电话',
+            message: '{{ __('common.error_required', ['name' => __('common.phone')] ) }}',
             trigger: 'blur'
           }, ],
           address_1: [{
             required: true,
-            message: '请输入详细地址 1',
+            message: '{{ __('common.error_required', ['name' => __('admin/customer.address_1')] ) }}',
             trigger: 'blur'
           }, ],
           zone_id: [{
             required: true,
-            message: '请选择省份',
+            message: '{{ __('common.error_required', ['name' => __('admin/customer.zones')] ) }}',
             trigger: 'blur'
           }, ],
           city: [{
             required: true,
-            message: '请填写城市',
+            message: '{{ __('common.error_required', ['name' => __('admin/customer.city')] ) }}',
             trigger: 'blur'
           }, ],
         }
@@ -213,7 +213,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{__('common.error_form')}}');
               return;
             }
 
@@ -234,9 +234,9 @@
         },
 
         deleteAddress(id, index) {
-          this.$confirm('确定要删除地址吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('admin/customer.confirm_delete_address') }}', '{{__('common.text_hint')}}', {
+            confirmButtonText: '{{__('common.confirm')}}',
+            cancelButtonText: '{{__('common.cancel')}}',
             type: 'warning'
           }).then(() => {
             $http.delete(`customers/{{ $customer['id'] }}/addresses/${id}`).then((res) => {
@@ -251,7 +251,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{__('common.error_form')}}');
               return;
             }
 

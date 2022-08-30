@@ -10,6 +10,8 @@
  */
 
 return [
+    'index' => 'Customer Groups',
+
     'customer_groups_index' => 'Index',
     'customer_groups_create' => 'Create',
     'customer_groups_show' => 'Detail',
