@@ -22,7 +22,7 @@ class SubtotalService
         $amount = collect($carts)->sum('subtotal');
         $totalData = [
             'code' => 'sub_total',
-            'title' => '商品总额',
+            'title' => trans('shop/carts.product_total'),
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];

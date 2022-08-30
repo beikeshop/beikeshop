@@ -35,10 +35,10 @@ class PaymentService
             $this->order = $order;
         }
         if (empty($this->order)) {
-            throw new \Exception("无效订单");
+            throw new \Exception(trans('shop/order.invalid_order'));
         }
         if ($this->order->status != 'unpaid') {
-            throw new \Exception('订单已支付');
+            throw new \Exception(trans('shop/order.order_already_paid'));
         }
         $this->orderId = (int)$this->order->id;
         $this->paymentMethodCode = $this->order->payment_method_code;

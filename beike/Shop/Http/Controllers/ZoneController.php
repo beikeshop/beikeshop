@@ -24,6 +24,6 @@ class ZoneController extends Controller
             'zones' => ZoneRepo::listByCountry($countryId),
         ];
 
-        return json_success('成功!', $data);
+        return json_success(trans('common.success'), $data);
     }
 }

@@ -34,7 +34,7 @@ class ForgottenController
     public function sendVerifyCode(Request $request)
     {
         AccountService::sendVerifyCodeForForgotten($request->get('email'), 'email');
-        return json_success('验证码已发送，请查看并输入验证码');
+        return json_success(trans('shop/forgotten.verification_code_sent'));
     }
 
     /**
@@ -46,6 +46,6 @@ class ForgottenController
     {
         AccountService::verifyAndChangePassword($request->get('code'), $request->get('email'), $request->get('password'));
 
-        return json_success('密码已修改');
+        return json_success(trans('shop/forgotten.password_updated'));
     }
 }

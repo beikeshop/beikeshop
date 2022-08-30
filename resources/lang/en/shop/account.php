@@ -29,6 +29,9 @@ return [
     'check_details' => 'Check Details',
     'all' => 'All',
     'items' => 'Items',
+    'verify_code_expired' => 'The verify code expired (10 minute), please retry.',
+    'verify_code_error' => 'Verify code error!',
+    'account_not_exist' => 'Account not exist!',
 
     'edit' => [
         'index' => 'Edit',

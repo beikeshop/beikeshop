@@ -76,17 +76,17 @@ class AccountService
         $verifyCode = VerifyCodeRepo::findByAccount($account);
         if ($verifyCode->created_at->addMinutes(10) < Carbon::now()) {
             $verifyCode->delete();
-            throw new \Exception("您的验证码已过期（10分钟），请重新获取");
+            throw new \Exception(trans('shop/account.verify_code_expired'));
         }
 
         if ($verifyCode->code != $code) {
-            throw new \Exception("您的验证码错误");
+            throw new \Exception(trans('shop/account.verify_code_error'));
         }
 
         if ($type == 'email') {
             $customer = CustomerRepo::findByEmail($account);
             if (!$customer) {
-                throw new \Exception("账号不存在");
+                throw new \Exception(trans('shop/account.account_not_exist'));
             }
         } elseif ($type == 'telephone') {
             throw new \Exception("暂不支持手机号码找回密码");

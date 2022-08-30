@@ -29,6 +29,9 @@ return [
     'check_details' => '查看详情',
     'all' => '共',
     'items' => '件商品',
+    'verify_code_expired' => '您的验证码已过期（10分钟），请重新获取',
+    'verify_code_error' => '您的验证码错误',
+    'account_not_exist' => '账号不存在',
 
     'edit' => [
         'index' => '修改个人信息',

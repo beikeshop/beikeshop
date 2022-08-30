@@ -101,9 +101,9 @@ class OrderController extends Controller
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($number, $customer);
         if (empty($order)) {
-            throw new \Exception('无效的订单');
+            throw new \Exception(trans('shop/order.invalid_order'));
         }
-        $comment = '用户确认收货';
+        $comment = trans('shop/order.confirm_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED, $comment);
         return json_success(trans('shop/account.order.completed'));
     }
@@ -122,9 +122,9 @@ class OrderController extends Controller
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($number, $customer);
         if (empty($order)) {
-            throw new \Exception('无效的订单');
+            throw new \Exception(trans('shop/order.invalid_order'));
         }
-        $comment = '用户取消订单';
+        $comment = trans('shop/order.cancel_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
         return json_success(trans('shop/account.order.cancelled'));
     }

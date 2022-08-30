@@ -1,7 +1,7 @@
 <?php
 
 /**
- * currency.php
+ * forgotten.php
  *
  * @copyright  2022 opencart.cn - All Rights Reserved
  * @link       http://www.guangdawangluo.com
@@ -28,4 +28,6 @@ return [
     'password_err' => '两次输入密码不一致!',
     'email_err' => '请输入正确邮箱地址!',
     'enter_code' => '请输入验证码',
+    'verification_code_sent' => '验证码已发送，请查看并输入验证码',
+    'password_updated' => '密码已修改',
 ];

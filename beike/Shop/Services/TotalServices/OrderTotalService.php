@@ -20,7 +20,7 @@ class OrderTotalService
         $amount = $totalService->amount;
         $totalData = [
             'code' => 'order_total',
-            'title' => '应付总金额',
+            'title' => trans('shop/carts.order_total'),
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];

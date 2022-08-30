@@ -78,7 +78,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ products.length }}</span></li>
               <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
-              <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.total_price') }}</span><span class="total-price">@{{ amount_format }}</span></li>
+              <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
               <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
                 {{-- <a href="{{ shop_route('checkout.index', 'checkout') }}" class="btn btn-primary">去结账</a> --}}
                 <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>

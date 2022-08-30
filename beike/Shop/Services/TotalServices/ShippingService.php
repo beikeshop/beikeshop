@@ -33,7 +33,7 @@ class ShippingService
         $amount = (float)(new $className)->getShippingFee($totalService);
         $totalData = [
             'code' => 'shipping',
-            'title' => '运费',
+            'title' => trans('shop/carts.shipping_fee'),
             'amount' => $amount,
             'amount_format' => currency_format($amount)
         ];
