@@ -226,4 +226,20 @@ return [
     'mobile_search_normal' => 'Not fixed at the top of the screen',
     'mobile_search_hide' => 'Do not display the top search bar',
     'mobile_search_fixed' => 'Fixed at the top of the screen (default)',
+
+    // Menu
+// Menu
+     'main_menu' => 'main menu',
+     'please_add_data' => 'please add data',
+     'add_main_menu' => 'Add main menu',
+     'main_menu_name_link' => 'main menu name/link',
+     'main_menu_label' => 'Main menu label',
+     'label_background_color' => 'label background color',
+     'label_text_color' => 'label text color',
+     'submenu_group' => 'Submenu (group)',
+     'add_menu_group' => 'Add menu group',
+     'full_screen' => 'Whether full screen',
+     'menu' => 'menu',
+     'add_submenu_link' => 'Add submenu link',
+     'type' => 'type',
 ];

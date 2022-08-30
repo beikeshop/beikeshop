@@ -16,7 +16,7 @@
   <div class="card" id="app" v-cloak>
     <div class="card-body h-min-600 position-relative">
       <div class="design-wrap">
-        <p class="fw-bold mb-2">主菜单</p>
+        <p class="fw-bold mb-2">{{ __('admin/builder.main_menu') }}</p>
         <div class="left">
           {{-- <div class="menus-wrap" v-if="form.menus.length"> --}}
           <draggable class="menus-wrap" v-if="form.menus.length" :list="form.menus"
@@ -26,10 +26,13 @@
               @click="currentMenuIndex = index" v-for="menu, index in form.menus" :key="index">
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center flex-grow-1">
-                  <el-tooltip class="icon-rank cursor-scroll" effect="dark" content="拖动排序" placement="left">
+                  <el-tooltip class="icon-rank cursor-scroll" effect="dark" content="{{ __('admin/builder.text_drag_sort') }}" placement="left">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
-                  <div class="name mx-2">@{{ menu.name[source.locale] || '请添加数据' }}</div>
+                  <div class="name mx-2">
+                    <template v-if="menu.name[source.locale]">@{{ menu.name[source.locale] }}</template>
+                    <template v-else>{{ __('admin/builder.please_add_data') }}</template>
+                  </div>
                   {{-- <link-selector :is-custom-name="true" :is-title="false" v-model="menu.link"></link-selector> --}}
                 </div>
                 <div>
@@ -39,12 +42,12 @@
             </div>
           </draggable>
           {{-- </div> --}}
-          <button @click="addLinkClicked" class="btn btn-outline-primary ms-3">添加主菜单</button>
+          <button @click="addLinkClicked" class="btn btn-outline-primary ms-3">{{ __('admin/builder.add_main_menu') }}</button>
         </div>
         <div class="flex-1 right" v-if="currentMenu" :key="currentMenuIndex">
           <div class="d-flex">
             <div class="wp-200 ">
-              <div class="mb-2">主菜单名称/链接</div>
+              <div class="mb-2">{{ __('admin/builder.main_menu_name_link') }}</div>
               <text-i18n v-model="currentMenu.name" class="mb-2"></text-i18n>
               {{-- <input type="text" v-model="currentMenu.name['zh_cn']"> --}}
               <link-selector :is-title="false" style="border-color: #c0c4cc" v-model="currentMenu.link">
@@ -52,17 +55,17 @@
             </div>
 
             <div class="wp-200 ms-5">
-              <div class="mb-2">主菜单标签</div>
+              <div class="mb-2">{{ __('admin/builder.main_menu_label') }}</div>
               <text-i18n v-model="currentMenu.badge.name" class=""></text-i18n>
             </div>
 
-            <div class="wp-100 ms-5">
-              <div class="mb-2">标签背景色</div>
+            <div class="wp-200 ms-5">
+              <div class="mb-2">{{ __('admin/builder.label_background_color') }}</div>
               <el-color-picker v-model="currentMenu.badge.bg_color" size="small"></el-color-picker>
             </div>
 
-            <div class="wp-100">
-              <div class="mb-2">标签文字色</div>
+            <div class="wp-200">
+              <div class="mb-2">{{ __('admin/builder.label_text_color') }}</div>
               <el-color-picker v-model="currentMenu.badge.text_color" size="small"></el-color-picker>
             </div>
           </div>
@@ -71,14 +74,13 @@
 
           <div class="children-group-wrap">
             <div class="d-flex align-items-center mb-3">
-              <span class="fw-bold">子菜单 (组)</span>
+              <span class="fw-bold">{{ __('admin/builder.submenu_group') }}</span>
               <div class="vr lh-1 mx-3 bg-secondary " style="height: 18px;"></div>
               <button class="btn btn-sm btn-link p-0" @click="addChildrenGroup"
-                :disabled="currentMenu.childrenGroup.length >= 5">添加菜单组</button>
+                :disabled="currentMenu.childrenGroup.length >= 5">{{ __('admin/builder.add_menu_group') }}</button>
               <div class="vr mx-3 lh-1 bg-secondary " style="height: 18px;"></div>
               <div>
-                {{-- <div class="mb-2 fw-bold">是否全屏</div> --}}
-                <span class="me-2">是否全屏</span>
+                <span class="me-2">{{ __('admin/builder.full_screen') }}</span>
                 <el-switch v-model="currentMenu.isFull"></el-switch>
               </div>
             </div>
@@ -88,7 +90,7 @@
                 :key="group_index">
                 <div class="card-header d-flex align-items-center justify-content-between mb-2">
                   <div class="" style="font-weight: 400">
-                    <i class="el-icon-rank cursor-scroll"></i> 菜单 - @{{ group_index + 1 }}
+                    <i class="el-icon-rank cursor-scroll"></i> {{ __('admin/builder.menu') }} - @{{ group_index + 1 }}
                     (@{{ groupTypeName(group.type) }})
                   </div>
                   <div class="d-flex">
@@ -118,7 +120,7 @@
                           </div>
                         </div>
                       </draggable>
-                      <button @click="addChildrenLink(group_index)" class="btn btn-link btn-sm mt-2">添加子菜单链接</button>
+                      <button @click="addChildrenLink(group_index)" class="btn btn-link btn-sm mt-2">{{ __('admin/builder.add_submenu_link') }}</button>
                     </template>
                   </div>
                 </div>
@@ -129,9 +131,9 @@
       </div>
     </div>
 
-    <el-dialog title="设置" :visible.sync="childrenGroupPop.show" width="500px" v-if="currentMenu && currentMenu.childrenGroup.length">
-      <p class="fw-bold mb-2">类型</p>
-      <el-select v-model="currentMenu.childrenGroup[childrenGroupPop.groupIndex].type" placeholder="请选择">
+    <el-dialog title="{{ __('admin/builder.text_set_up') }}" :visible.sync="childrenGroupPop.show" width="500px" v-if="currentMenu && currentMenu.childrenGroup.length">
+      <p class="fw-bold mb-2">{{ __('admin/builder.type') }}</p>
+      <el-select v-model="currentMenu.childrenGroup[childrenGroupPop.groupIndex].type" placeholder="">
         <el-option
           v-for="type in source.types"
           :key="type.value"
@@ -140,8 +142,8 @@
         </el-option>
       </el-select>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="childrenGroupPop.show = false">取 消</el-button>
-        <el-button type="primary" @click="childrenGroupPop.show = false">确 定</el-button>
+        <el-button @click="childrenGroupPop.show = false">{{ __('common.cancel') }}</el-button>
+        <el-button type="primary" @click="childrenGroupPop.show = false">{{ __('common.confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -170,10 +172,10 @@
         source: {
           locale: '{{ locale() }}',
           types: [{
-            name: '链接',
+            name: '{{ __('admin/builder.modules_link') }}',
             value: 'link'
           },{
-            name: '图片',
+            name: '{{ __('admin/builder.text_image') }}',
             value: 'image'
           }],
         },

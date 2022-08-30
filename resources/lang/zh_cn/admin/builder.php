@@ -229,4 +229,19 @@ return [
     'mobile_search_normal'           => '不固定在屏幕顶部',
     'mobile_search_hide'             => '不显示顶部搜索条',
     'mobile_search_fixed'            => '固定在屏幕顶部 (默认)',
+
+    // Menu
+    'main_menu'  => '主菜单',
+    'please_add_data'  => '请添加数据',
+    'add_main_menu'  => '添加主菜单',
+    'main_menu_name_link'  => '主菜单名称/链接',
+    'main_menu_label'  => '主菜单标签',
+    'label_background_color'  => '标签背景色',
+    'label_text_color'  => '标签文字色',
+    'submenu_group'  => '子菜单(组)',
+    'add_menu_group'  => '添加菜单组',
+    'full_screen'  => '是否全屏',
+    'menu'  => '菜单',
+    'add_submenu_link'  => '添加子菜单链接',
+    'type'  => '类型',
 ];
