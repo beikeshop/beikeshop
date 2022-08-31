@@ -37,10 +37,10 @@
               <td>{{ $page['created_at'] }}</td>
               <td>{{ $page['updated_at'] }}</td>
               <td class="text-end">
-                <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.delete') }}</a>
+                <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
 
                 <button class="btn btn-outline-danger btn-sm delete-btn" type='button'
-                  data-id="{{ $page['id'] }}">{{ __('common.edit') }}</button>
+                  data-id="{{ $page['id'] }}">{{ __('common.delete') }}</button>
               </td>
             </tr>
           @endforeach
