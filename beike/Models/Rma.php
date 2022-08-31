@@ -38,7 +38,7 @@ class Rma extends Base
 
     public function reason() :BelongsTo
     {
-        return $this->belongsTo(RmaReason::class, 'rma_reason_id', 'id')->where('locale', locale());
+        return $this->belongsTo(RmaReason::class, 'rma_reason_id', 'id');
     }
 
     public function histories() :HasMany

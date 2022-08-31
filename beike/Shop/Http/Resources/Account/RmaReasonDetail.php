@@ -9,7 +9,7 @@
  * @modified   2022-08-31 11:56:28
  */
 
-namespace Beike\Shop\Http\Resources;
+namespace Beike\Shop\Http\Resources\Account;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
