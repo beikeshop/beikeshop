@@ -12,15 +12,15 @@
             <tbody>
               <tr>
                 <td>ID：</td>
-                <td>{{ $rma->id }}</td>
+                <td>{{ $rma['id'] }}</td>
               </tr>
               <tr>
                   <td>{{ __('admin/rma.customers_name') }}：</td>
-                  <td>{{ $rma->name }}</td>
+                  <td>{{ $rma['name'] }}</td>
               </tr>
               <tr>
                   <td>{{ __('common.phone') }}：</td>
-                  <td>{{ $rma->telephone }}</td>
+                  <td>{{ $rma['telephone'] }}</td>
               </tr>
             </tbody>
           </table>
@@ -30,19 +30,19 @@
             <tbody>
               <tr>
                 <td>{{ __('admin/builder.modules_product') }}：</td>
-                <td>{{ $rma->product_name }}</td>
+                <td>{{ $rma['product_name'] }}</td>
               </tr>
               <tr>
                 <td>{{ __('product.model') }}：</td>
-                <td>{{ $rma->model }}</td>
+                <td>{{ $rma['model'] }}</td>
               </tr>
               <tr>
                 <td>{{ __('admin/rma.quantity') }}：</td>
-                <td>{{ $rma->quantity }}</td>
+                <td>{{ $rma['quantity'] }}</td>
               </tr>
               <tr>
                 <td>{{ __('admin/rma.reasons_return') }}：</td>
-                <td>{{ $rma->quantity }}</td>
+                <td>{{ $rma['quantity'] }}</td>
               </tr>
             </tbody>
           </table>
@@ -56,7 +56,7 @@
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-form-item label="{{ __('admin/rma.current_state') }}">
-          {{ $rma->status }}
+          {{ $rma['status'] }}
         </el-form-item>
         <el-form-item label="{{ __('admin/rma.modify_status') }}" prop="status">
           <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
@@ -85,7 +85,7 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.operation_history') }}</h6></div>
     <div class="card-body">
-      @foreach ($rma->histories as $history)
+      @foreach ($histories as $history)
       @endforeach
     </div>
   </div>

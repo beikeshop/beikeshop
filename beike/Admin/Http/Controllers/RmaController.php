@@ -37,8 +37,10 @@ class RmaController extends Controller
      */
     public function show(int $id)
     {
+        $rma = RmaRepo::find($id);
         $data = [
-            'rma' => RmaRepo::find($id),
+            'rma' => (new RmaDetail($rma))->jsonSerialize(),
+            'histories' => $rma->histories,
             'statuses' => RmaRepo::getStatuses(),
             'types' => RmaRepo::getTypes(),
         ];
