@@ -37,7 +37,7 @@ class RmaService
             'rma_reason_id' => $data['rma_reason_id'],
             'type' => $data['type'],
             'comment' => $data['comment'],
-            'status' => true,
+            'status' => 'pending',
         ];
 
         $rma = RmaRepo::create($params);
