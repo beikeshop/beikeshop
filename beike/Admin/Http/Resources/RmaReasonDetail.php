@@ -21,6 +21,7 @@ class RmaReasonDetail extends JsonResource
         return [
             'id' => $this->id,
             'name' => json_decode($this->name, true)[locale()] ?? '',
+            'names' => json_decode($this->name, true)
         ];
     }
 }

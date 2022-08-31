@@ -12,7 +12,7 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use Beike\Admin\Http\Resources\RmaReasonDetail;
+use Beike\Shop\Http\Resources\RmaReasonDetail;
 use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
 use Beike\Shop\Http\Requests\RmaRequest;

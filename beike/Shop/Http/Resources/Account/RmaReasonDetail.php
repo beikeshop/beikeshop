@@ -9,9 +9,8 @@
  * @modified   2022-08-31 11:56:28
  */
 
-namespace Beike\Admin\Http\Resources;
+namespace Beike\Shop\Http\Resources;
 
-use Beike\Repositories\RmaRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RmaReasonDetail extends JsonResource
