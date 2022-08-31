@@ -38,4 +38,9 @@ return [
     'add_variable_value' => '添加规格值',
     'add_variable_image' => '添加规格图片',
     'default_main_product' => '默认主商品',
+
+    'confirm_batch_product' => '确认要批量删除选中的商品吗？',
+    'confirm_batch_status' => '确认要批量修改选中的商品的状态吗？',
+    'confirm_batch_restore' => '确认要恢复选中的商品吗？',
+    'confirm_delete_restore' => '确认要清空回收站吗？',
 ];

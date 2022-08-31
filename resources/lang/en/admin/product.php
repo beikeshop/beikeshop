@@ -37,4 +37,9 @@ return [
      'add_variable_value' => 'Add Specification Value',
      'add_variable_image' => 'Add Spec Image',
      'default_main_product' => 'Default main product',
+
+    'confirm_batch_product' => 'Are you sure you want to delete the selected products in batches? ',
+    'confirm_batch_status' => 'Confirm to modify the status of the selected products in batches? ',
+    'confirm_batch_restore' => 'Confirm to restore the selected product? ',
+    'confirm_delete_restore' => 'Are you sure you want to empty the recycle bin? ',
 ];

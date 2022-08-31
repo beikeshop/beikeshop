@@ -242,7 +242,7 @@
         },
 
         batchDelete() {
-          this.$confirm('确认要批量删除选中的商品吗？', '删除商品', {
+          this.$confirm('{{ __('admin/product.confirm_batch_product') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             $http.delete('products/delete', {
@@ -255,7 +255,7 @@
         },
 
         batchActive(type) {
-          this.$confirm('确认要批量修改选中的商品的状态吗？', '修改状态', {
+          this.$confirm('{{ __('admin/product.confirm_batch_status') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             $http.post('products/status', {
@@ -281,7 +281,7 @@
         deleteProduct: function(index) {
           const product = this.product.data[index];
 
-          this.$confirm('确认要删除商品吗？', '删除商品', {
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             $http.delete('products/' + product.id).then((res) => {
@@ -293,7 +293,7 @@
         restoreProduct: function(index) {
           const product = this.product.data[index];
 
-          this.$confirm('确认要恢复选中的商品吗？', '恢复商品', {
+          this.$confirm('{{ __('admin/product.confirm_batch_restore') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             $http.put('products/restore', {
@@ -305,7 +305,7 @@
         },
 
         clearRestore() {
-          this.$confirm('确认要清空回收站吗？', '提示', {
+          this.$confirm('{{ __('admin/product.confirm_delete_restore') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             $http.post('products/trashed/clear').then((res) => {

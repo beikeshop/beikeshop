@@ -11,6 +11,8 @@
 
 return [
     'index' => '分类',
+    'edit_category' => '编辑分类',
+    'upper_category' => '上级分类',
 
     'categories_index' => '分类列表',
     'categories_create' => '创建分类',

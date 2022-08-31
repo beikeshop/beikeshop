@@ -11,6 +11,8 @@
 
 return [
     'index' => 'Category',
+    'edit_category' => 'Edit Category',
+    'upper_category' => 'Upper Category',
 
     'categories_index' => 'Index',
     'categories_create' => 'Create',
