@@ -59,7 +59,10 @@ if [[ -a ./storage/installed ]];then
 fi;
 rm -rf ./storage/app/*
 rm -rf ./storage/debugbar/*
-rm -rf ./storage/framework/*
+rm -rf ./storage/framework/cache/*
+rm -rf ./storage/framework/sessions/*
+rm -rf ./storage/framework/testing/*
+rm -rf ./storage/framework/views/*
 rm -rf ./storage/logs/*
 rm -rf ./storage/upload/*
 rm -rf ./.idea
