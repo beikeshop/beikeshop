@@ -21,16 +21,16 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($rmas as $rma)
+            @foreach ($rmas_format as $rma)
               <tr>
-                <td>{{ $rma->name }}</td>
-                <td>{{ $rma->email }}</td>
-                <td>{{ $rma->telephone }}</td>
-                <td>{{ $rma->product_name }}</td>
-                <td>{{ $rma->model }}</td>
-                <td>{{ $rma->quantity }}</td>
-                <td>{{ $rma->type }}</td>
-                <td>{{ $rma->status }}</td>
+                <td>{{ $rma['name'] }}</td>
+                <td>{{ $rma['email'] }}</td>
+                <td>{{ $rma['telephone'] }}</td>
+                <td>{{ $rma['product_name'] }}</td>
+                <td>{{ $rma['model'] }}</td>
+                <td>{{ $rma['quantity'] }}</td>
+                <td>{{ $rma['type'] }}</td>
+                <td>{{ $rma['status'] }}</td>
                 <td><a href="{{ admin_route('rmas.show', [$rma->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
                 </td>
               </tr>
