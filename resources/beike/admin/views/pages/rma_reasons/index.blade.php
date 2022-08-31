@@ -58,10 +58,6 @@
           <tr v-for="language, index in rmaReasons" :key="index">
             <td>@{{ language.id }}</td>
             <td>@{{ language.name }}</td>
-            <td>
-              <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-            </td>
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
@@ -69,8 +65,6 @@
           </tr>
         </tbody>
       </table>
-
-      {{-- {{ $languages->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="{{ __('admin/common.rma_reasons_index') }}" :visible.sync="dialog.show" width="500px"
@@ -140,9 +134,15 @@
 
             this.dialog.form = {
               id: tax.id,
-              name: tax.name,
+              name: tax.names,
             }
           }
+        },
+
+        loadData() {
+          $http.get(`rma_reasons?page=${this.page}`).then((res) => {
+            this.rmaReasons = res.data.rmaReasons;
+          })
         },
 
         statusChange(e, index) {
@@ -160,17 +160,13 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
-              if (this.dialog.type == 'add') {
-                this.rmaReasons.push(res.data)
-              } else {
-                this.rmaReasons[this.dialog.index] = res.data
-              }
+              this.loadData();
 
               this.dialog.show = false
             })
@@ -179,9 +175,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除语言吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('rmaReasons/' + id).then((res) => {
@@ -194,6 +190,7 @@
         closeCustomersDialog(form) {
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
+          this.dialog.form.name = {};
           this.dialog.show = false
         }
       }
