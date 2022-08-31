@@ -17,4 +17,12 @@ return [
     'directory_already_exist' => '目录已存在',
     'directory_not_empty' => '该目录不为空',
     'target_not_exist' => '原始文件或者文件夹不存在',
+    'create_folder' => '创建文件夹',
+    'rename' => '重命名',
+    'download' => '下载',
+    'upload_files' => '上传文件',
+    'click_upload' => '点击上传，或将图片拖到此处',
+    'image_uploading' => '图片上传中',
+    'no_file' => '没有文件',
+    'picture_space' => '图片空间',
 ];
