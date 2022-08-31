@@ -13,7 +13,8 @@
           <div class="custom-tree-node d-flex align-items-center justify-content-between w-100" slot-scope="{ node, data }">
             <div><span>@{{ data.name }}</span></div>
             <div class="d-flex align-items-center">
-              <span :class="['me-4', 'badge', 'bg-' + (data.active ? 'success' : 'secondary')]">@{{ data.active ? '启用' : '禁用' }}</span>
+              <span class="me-4 badge bg-success" v-if="data.active">{{ __('common.enabled') }}</span>
+              <span class="me-4 badge bg-secondary" v-else>{{ __('common.disabled') }}</span>
               <div>
                 <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                 <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">{{ __('common.delete') }}</a>
@@ -40,9 +41,9 @@
 
       methods: {
         removeCategory(node, data) {
-          this.$confirm('确定要删除分类吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete(`/categories/${data.id}`).then((res) => {

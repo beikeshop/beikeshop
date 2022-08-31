@@ -16,5 +16,6 @@ return [
     'brands_create' => 'Create',
     'brands_show' => 'Detail',
     'brands_update' => 'Edit',
-    'brands_delete' => 'Delete'
+    'brands_delete' => 'Delete',
+    'error_upload' => 'Please upload icon'
 ];

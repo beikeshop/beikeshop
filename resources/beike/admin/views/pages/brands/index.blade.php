@@ -28,7 +28,8 @@
             <td>@{{ brand.sort_order }}</td>
             <td>@{{ brand.first }}</td>
             <td>
-              <span :class="brand.status ? 'text-success' : 'text-secondary'">@{{ brand.status ? '启用' : '禁用' }}</span>
+              <span class="text-success" v-if="brand.status">{{ __('common.enabled') }}</span>
+              <span class="text-secondary" v-else>{{ __('common.disabled') }}</span>
             </td>
             <td>
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
@@ -106,9 +107,9 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入名称',trigger: 'blur'}, ],
-          first: [{required: true,message: '请输入首字母',trigger: 'blur'}, ],
-          logo: [{required: true,message: '请上传图标',trigger: 'change'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')])}}',trigger: 'blur'}, ],
+          first: [{required: true,message: '{{ __('common.error_required', ['name' => __('brand.first_letter')])}}',trigger: 'blur'}, ],
+          logo: [{required: true,message: '{{ __('admin/brand.error_upload') }}',trigger: 'change'}, ],
         }
       },
 

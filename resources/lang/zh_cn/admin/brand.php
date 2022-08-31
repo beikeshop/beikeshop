@@ -16,5 +16,6 @@ return [
     'brands_create' => '创建品牌',
     'brands_show' => '品牌详情',
     'brands_update' => '更新品牌',
-    'brands_delete' => '删除品牌'
+    'brands_delete' => '删除品牌',
+    'error_upload' => '请上传图标'
 ];
