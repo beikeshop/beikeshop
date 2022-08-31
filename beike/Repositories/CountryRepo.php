@@ -13,6 +13,8 @@ namespace Beike\Repositories;
 
 use Beike\Models\Country;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class CountryRepo
 {
@@ -100,6 +102,21 @@ class CountryRepo
         return $builder->paginate(20)->withQueryString();
     }
 
+
+    /**
+     * 获取已启用国家列表
+     * @return Builder[]|Collection
+     */
+    public static function listEnabled(): Collection|array
+    {
+        return Country::query()->where('status', true)->select('id', 'name')->get();
+    }
+
+
+    /**
+     * 获取所有国家列表
+     * @return Builder[]|Collection
+     */
     public static function all()
     {
         return Country::query()->select('id', 'name')->get();

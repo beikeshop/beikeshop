@@ -40,7 +40,7 @@ class SettingController extends Controller
         ];
 
         $data = [
-            'countries' => CountryRepo::all(),
+            'countries' => CountryRepo::listEnabled(),
             'currencies' => CurrencyRepo::listEnabled(),
             'tax_address' => $tax_address,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
