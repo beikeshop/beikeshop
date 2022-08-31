@@ -37,6 +37,8 @@ return [
     'tax_class' => 'Tax Class',
     'currency' => 'Currency',
     'language' => 'Language',
+    'zone' => 'Zone',
+    'country' => 'Country',
     'file_manager' => 'File Manager',
     'access_frontend' => 'Frontend',
 

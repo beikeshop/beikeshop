@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '国家管理')
+@section('title', __('admin/common.country'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
@@ -12,13 +12,13 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>编码</th>
-            <th>创建时间</th>
-            <th>修改时间</th>
-            <th>排序</th>
-            <th>状态</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('common.name') }}</th>
+            <th>{{ __('currency.code') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th>{{ __('common.updated_at') }}</th>
+            <th>{{ __('common.sort_order') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -34,8 +34,8 @@
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -45,29 +45,29 @@
         :total="country.total"></el-pagination>
     </div>
 
-    <el-dialog title="国家管理" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/common.country') }}" :visible.sync="dialog.show" width="600px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
-      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="国家名称" prop="name">
+      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
+        <el-form-item label="{{ __('admin/country.country_name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
         </el-form-item>
 
-        <el-form-item label="排序">
-          <el-input v-model="dialog.form.sort_order" placeholder="排序"></el-input>
+        <el-form-item label="{{ __('common.sort_order') }}">
+          <el-input v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="编码">
-          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
+        <el-form-item label="{{ __('currency.code') }}">
+          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label=" 状态">
+        <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -99,7 +99,7 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入国家名称',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/country.country_name')]) }}',trigger: 'blur'}, ],
         }
       },
 
@@ -141,7 +141,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 

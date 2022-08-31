@@ -9,9 +9,10 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'country_name' => '国家名称',
+    'country_name' => 'Country Name',
 
-    'countries_index' => '国家列表',
-    'countries_create' => '创建国家',
-    'countries_update' => '更新国家',
+    'countries_index' => 'Country List',
+    'countries_create' => 'Create Country',
+    'countries_update' => 'Update Country',
+    'countries_delete' => 'Delete Country',
 ];

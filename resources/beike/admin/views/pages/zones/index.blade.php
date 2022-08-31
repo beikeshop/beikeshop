@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '省份管理')
+@section('title', __('admin/common.zone'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
@@ -12,13 +12,13 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>名称</th>
-            <th>编码</th>
-            <th>创建时间</th>
-            <th>修改时间</th>
-            <th>排序</th>
-            <th>状态</th>
-            <th class="text-end">操作</th>
+            <th>{{ __('common.name') }}</th>
+            <th>{{ __('currency.code') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th>{{ __('common.updated_at') }}</th>
+            <th>{{ __('common.sort_order') }}</th>
+            <th>{{ __('common.status') }}</th>
+            <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -34,8 +34,8 @@
               <span v-else class="text-secondary">{{ __('common.disable') }}</span>
             </td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">编辑</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">删除</button>
+              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>
         </tbody>
@@ -45,20 +45,20 @@
         :total="zones.total"></el-pagination>
     </div>
 
-    <el-dialog title="省份管理" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/common.zone') }}" :visible.sync="dialog.show" width="620px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
-      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="省份名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
+      <el-form ref="form" :rules="rules" :model="dialog.form" label-width="148px">
+        <el-form-item label="{{ __('admin/zone.zone_name') }}" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="{{ __('admin/zone.zone_name') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="编码">
-          <el-input v-model="dialog.form.code" placeholder="编码"></el-input>
+        <el-form-item label="{{ __('currency.code') }}">
+          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="所属国家" prop="country_id">
-          <el-select v-model="dialog.form.country_id" placeholder="请选择">
+        <el-form-item label="{{ __('admin/zone.country_of_origin') }}" prop="country_id">
+          <el-select v-model="dialog.form.country_id" placeholder="{{ __('admin/zone.country_of_origin') }}">
             <el-option
               v-for="item in countries"
               :key="item.id"
@@ -68,18 +68,18 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="排序">
-          <el-input v-model="dialog.form.sort_order" placeholder="排序"></el-input>
+        <el-form-item label="{{ __('common.sort_order') }}">
+          <el-input v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
 
-        <el-form-item label=" 状态">
+        <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -114,8 +114,8 @@
         },
 
         rules: {
-          name: [{required: true, message: '请输入省份名称', trigger: 'blur'}, ],
-          country_id: [{required: true, message: '请选择国家', trigger: 'blur'}, ],
+          name: [{required: true, message: '{{ __('common.error_required', ['name' => __('admin/zone.zone_name')]) }}', trigger: 'blur'}, ],
+          country_id: [{required: true, message: '{{ __('admin/zone.error_country') }}', trigger: 'blur'}, ],
         }
       },
 
@@ -157,7 +157,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
