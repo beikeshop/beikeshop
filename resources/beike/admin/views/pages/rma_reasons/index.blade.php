@@ -180,7 +180,7 @@
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.delete('rmaReasons/' + id).then((res) => {
+            $http.delete('rma_reasons/' + id).then((res) => {
               this.$message.success(res.message);
               self.rmaReasons.splice(index, 1)
             })
