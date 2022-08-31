@@ -72,7 +72,7 @@
                   </div>
                 </div>
                 @if ($order->status == 'completed')
-                  <a href="{{ shop_route('account.rma.create', [$product->id]) }}"
+                  <a href="{{ shop_route('account.rma.create', [$product->id]) }}" style="white-space: nowrap;"
                     class="btn btn-outline-primary btn-sm">{{ __('shop/account.order.order_info.apply_after_sales') }}</a>
                 @endif
               </div>

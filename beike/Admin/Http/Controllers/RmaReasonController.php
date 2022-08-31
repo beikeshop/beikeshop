@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Repositories\RmaReasonRepo;
+use Beike\Repositories\LanguageRepo;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,7 @@ class RmaReasonController extends Controller
     {
         $rmaReasons = RmaReasonRepo::list($request->only('name'));
         $data = [
+            'languages' => LanguageRepo::all(),
             'rmaReasons' => $rmaReasons,
         ];
 
