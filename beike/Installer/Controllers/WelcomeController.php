@@ -12,9 +12,7 @@
 namespace Beike\Installer\Controllers;
 
 use App\Http\Controllers\Controller;
-use Beike\Repositories\LanguageRepo;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 
 class WelcomeController extends Controller
 {
@@ -31,7 +29,7 @@ class WelcomeController extends Controller
         }
 
         $data['languages'] = $this->languages;
-        $data['locale'] = session('locale');
+        $data['locale'] = $_COOKIE['locale'] ?? 'en';
         $data['steps'] = 1;
 
         return view('installer::welcome', $data);
