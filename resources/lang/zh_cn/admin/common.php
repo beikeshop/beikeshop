@@ -61,6 +61,7 @@ return [
     'brands_index' => '商品品牌',
     'orders_index' => '订单列表',
     'rmas_index' => '售后管理',
+    'rma_reasons_index' => '售后原因',
     'customers_index' => '客户列表',
     'customer_groups_index' => '客户组',
     'countries_index' => '国家管理',

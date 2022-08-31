@@ -38,7 +38,7 @@
 
 @extends('admin::layouts.master')
 
-@section('title', '退换货原因')
+@section('title', __('admin/common.rma_reasons_index'))
 
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
@@ -73,7 +73,7 @@
       {{-- {{ $languages->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="退换货原因" :visible.sync="dialog.show" width="500px"
+    <el-dialog title="{{ __('admin/common.rma_reasons_index') }}" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">

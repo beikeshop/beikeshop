@@ -51,7 +51,7 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        } elseif (Str::startsWith($routeName, ['orders.', 'rmas.'])) {
+        } elseif (Str::startsWith($routeName, ['orders.', 'rmas.', 'rma_reasons.'])) {
             $routes = $this->getOrderSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
@@ -152,6 +152,7 @@ class Sidebar extends Component
         $routes = [
             ['route' => 'orders.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'rmas.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'rma_reasons.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.order_routes', $routes);
     }

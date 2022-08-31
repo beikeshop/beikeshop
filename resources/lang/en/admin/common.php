@@ -61,6 +61,7 @@ return [
     'brands_index' => 'Brands',
     'orders_index' => 'Orders',
     'rmas_index' => 'RMA',
+    'rma_reasons_index' => 'Rma Reasons',
     'customers_index' => 'Customers',
     'customer_groups_index' => 'Customer Groups',
     'countries_index' => 'Countries',
