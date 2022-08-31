@@ -124,8 +124,8 @@
         },
 
         rules: {
-          title: [{required: true,message: '请输入税类名称',trigger: 'blur'}, ],
-          description: [{required: true,message: '请输入描述',trigger: 'blur'}, ],
+          title: [{required: true,message: "{{ __('common.error_required', ['name' => __('admin/region.name')])}}",trigger: 'blur'}, ],
+          description: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/region.describe')])}}',trigger: 'blur'}, ],
         }
       },
 

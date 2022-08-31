@@ -29,6 +29,7 @@ class RmaReasonRepo
      */
     public static function create($data)
     {
+        $data['name'] = json_encode($data['name']);
         $item = RmaReason::query()->create($data);
         return $item;
     }
@@ -47,6 +48,7 @@ class RmaReasonRepo
         if (!$reason) {
             throw new Exception("退换货原因id $reason 不存在");
         }
+        $data['name'] = json_encode($data['name']);
         $reason->update($data);
         return $reason;
     }
@@ -78,10 +80,11 @@ class RmaReasonRepo
      */
     public static function list(array $data = [])
     {
-        $builder = RmaReason::query()->where('locale', locale());
+        $builder = RmaReason::query();
 
         if (isset($data['name'])) {
-            $builder->where('name', 'like', "%{$data['name']}%");
+            $locale = locale();
+            $builder->whereJsonContains("name->$locale", 'like', "%{$data['name']}%");
         }
 
         return $builder->get();

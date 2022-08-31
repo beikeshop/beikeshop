@@ -96,7 +96,7 @@
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
           regions: @json($regions ?? []),
-          types: [{value:'percent', name: '百分比'}, {value:'flat', name: '固定税率'}]
+          types: [{value:'percent', name: '{{ __('admin/tax_rate.percentage') }}'}, {value:'flat', name: '{{ __('admin/tax_rate.fixed_tax_rate') }}'}]
         },
 
         dialog: {
@@ -113,8 +113,8 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入税种',trigger: 'blur'}, ],
-          rate: [{required: true,message: '请输入税率',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax_rate.tax')])}}',trigger: 'blur'}, ],
+          rate: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax_rate')])}}',trigger: 'blur'}, ],
         }
       },
 
@@ -149,7 +149,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -168,9 +168,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除税类吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('tax_rates/' + id).then((res) => {

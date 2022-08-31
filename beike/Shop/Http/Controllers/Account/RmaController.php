@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
 use Beike\Shop\Http\Requests\RmaRequest;
+use Beike\Shop\Http\Resources\Account\RmaReasonDetail;
 use Beike\Shop\Services\RmaService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -40,9 +41,12 @@ class RmaController extends Controller
      */
     public function show(int $id)
     {
+        $rma = RmaRepo::find($id);
         $data = [
-            'rma' => RmaRepo::find($id),
+            'rma' => $rma,
+            'orderProduct' => OrderProductRepo::find($rma->order_product_id),
             'statuses' => RmaRepo::getStatuses(),
+            'reasons' => RmaReasonDetail::collection(RmaReasonRepo::list())->jsonSerialize(),
             'types' => RmaRepo::getTypes(),
         ];
 
@@ -54,7 +58,7 @@ class RmaController extends Controller
         $data = [
             'orderProduct' => OrderProductRepo::find($orderProductId),
             'statuses' => RmaRepo::getStatuses(),
-            'reasons' => RmaReasonRepo::list()->toArray(),
+            'reasons' => RmaReasonDetail::collection(RmaReasonRepo::list())->jsonSerialize(),
             'types' => RmaRepo::getTypes(),
         ];
 

@@ -17,6 +17,9 @@
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.9/index.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
+  @if (locale() != 'zh_cn')
+    <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
+  @endif
   <title>beike filemanager</title>
 </head>
 
@@ -31,17 +34,17 @@
           <div>@{{ node.label }}</div>
           {{-- v-if="node.isCurrent" --}}
           <div class="right">
-            <el-tooltip class="item" effect="dark" content="创建文件夹" placement="top">
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}" placement="top">
               <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
                   class="el-icon-circle-plus-outline"></i></span>
             </el-tooltip>
 
-            <el-tooltip class="item" effect="dark" content="重命名" placement="top">
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
               <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
                   class="el-icon-edit"></i></span>
             </el-tooltip>
 
-            <el-tooltip class="item" effect="dark" content="删除" placement="top">
+            <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
               <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
                   class="el-icon-delete"></i></span>
             </el-tooltip>
@@ -54,18 +57,18 @@
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
         <div class="left d-flex">
-          <el-button class="me-5" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">选择</el-button>
+          <el-button class="me-5" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
           <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download"
-            @click="downloadImages">下载</el-link>
+            @click="downloadImages">{{ __('admin/file_manager.download') }}</el-link>
           <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
-            icon="el-icon-delete">删除</el-link>
+            icon="el-icon-delete">{{ __('common.delete') }}</el-link>
           <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
-            @click="openInputBox('image')" icon="el-icon-edit">重命名</el-link>
+            @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
           <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length"
-            @click="selectAll()" icon="el-icon-finished">全选</el-link>
+            @click="selectAll()" icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
         </div>
         <div class="right">
-          <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">上传文件</el-button>
+          <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
         </div>
       </div>
       <div v-if="images.length" class="content-center"
@@ -79,7 +82,7 @@
           </div>
         </div>
       </div>
-      <el-empty v-else description="没有文件"></el-empty>
+      <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
       <div class="content-footer">
         <div class="right"></div>
         <div class="pagination-wrap">
@@ -104,15 +107,15 @@
       </div>
     </div>
 
-    <el-dialog title="上传文件" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
+    <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
       @close="uploadFileDialogClose" custom-class="upload-wrap">
-      <el-upload class="photos-upload" target="photos-upload" id="photos-upload" element-loading-text="图片上传中..."
+      <el-upload class="photos-upload" target="photos-upload" id="photos-upload" element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
         element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
         accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4" :before-upload="beforePhotoUpload"
         :on-success="handlePhotoSuccess" :on-change="handleUploadChange" :http-request="uploadFile"
         :multiple="true">
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">点击上传，或将图片拖到此处</div>
+        <div class="el-upload__text">{{ __('admin/file_manager.click_upload') }}</div>
       </el-upload>
       <div class="upload-image">
         <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
@@ -127,6 +130,9 @@
   </div>
 
   <script>
+    @if (locale() != 'zh_cn')
+      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
+    @endif
     var callback = null;
 
     var app = new Vue({
@@ -146,7 +152,7 @@
         selectImageIndex: [],
 
         treeData: [{
-          name: '图片空间',
+          name: '{{ __('admin/file_manager.picture_space') }}',
           path: '/',
           children: @json($directories)
         }],
