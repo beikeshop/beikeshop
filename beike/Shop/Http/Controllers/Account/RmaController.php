@@ -12,6 +12,7 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use Beike\Admin\Http\Resources\RmaReasonDetail;
 use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
 use Beike\Shop\Http\Requests\RmaRequest;
@@ -54,7 +55,7 @@ class RmaController extends Controller
         $data = [
             'orderProduct' => OrderProductRepo::find($orderProductId),
             'statuses' => RmaRepo::getStatuses(),
-            'reasons' => RmaReasonRepo::list()->toArray(),
+            'reasons' => RmaReasonDetail::collection(RmaReasonRepo::list())->jsonSerialize(),
             'types' => RmaRepo::getTypes(),
         ];
 

@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Resources\RmaReasonDetail;
 use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\LanguageRepo;
 use Exception;
@@ -21,9 +22,10 @@ class RmaReasonController extends Controller
     public function index(Request $request)
     {
         $rmaReasons = RmaReasonRepo::list($request->only('name'));
+
         $data = [
             'languages' => LanguageRepo::all(),
-            'rmaReasons' => $rmaReasons,
+            'rmaReasons' => RmaReasonDetail::collection($rmaReasons)->jsonSerialize(),
         ];
 
         return view('admin::pages.rma_reasons.index', $data);

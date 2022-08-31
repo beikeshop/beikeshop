@@ -40,9 +40,9 @@ class ReturnTable extends Migration
             $table->timestamps();
         });
         Schema::create('rma_reasons', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->string('locale');
-            $table->string('name');
+            $table->id();
+            $table->json('name'); // 值示例: {"en":"cannot to use","zh_cn":"无法使用"}
+            $table->timestamps();
         });
     }
 
