@@ -31,7 +31,7 @@
                 <td>{{ $rma['quantity'] }}</td>
                 <td>{{ $rma['type'] }}</td>
                 <td>{{ $rma['status'] }}</td>
-                <td><a href="{{ admin_route('rmas.show', [$rma->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
                 </td>
               </tr>
             @endforeach
