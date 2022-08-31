@@ -64,7 +64,7 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-between my-4">
+        <div class="d-flex justify-content-between my-4" v-if="product.data.length">
           @if ($type != 'trashed')
             <a href="{{ admin_route('products.create') }}">
               <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
