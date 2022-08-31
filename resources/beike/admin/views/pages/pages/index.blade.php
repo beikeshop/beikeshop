@@ -19,8 +19,8 @@
             <th>ID</th>
             <th>{{ __('common.title') }}</th>
             <th>{{ __('common.status') }}</th>
-            <th>{{ __('common.created_success') }}</th>
-            <th>{{ __('common.edit_success') }}</th>
+            <th>{{ __('common.created_at') }}</th>
+            <th>{{ __('common.updated_at') }}</th>
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
