@@ -34,7 +34,7 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-            <li><a href="{{ admin_route('logout.index') }}" class="dropdown-item"><i class="bi bi-box-arrow-left"></i> 退出登录</a></li>
+            <li><a href="{{ admin_route('logout.index') }}" class="dropdown-item"><i class="bi bi-box-arrow-left"></i> {{ __('common.sign_out') }}</a></li>
           </ul>
         </div>
       </li>

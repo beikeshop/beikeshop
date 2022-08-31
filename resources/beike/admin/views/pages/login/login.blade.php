@@ -14,8 +14,8 @@
       <div class="card">
         <div class="w-480">
           <div class="card-header mt-3 mb-4">
-            <h4 class="fw-bold">登录到 beikeshop 后台</h4>
-            <div class="text-muted fw-normal">登录到 beikeshop 后台</div>
+            <h4 class="fw-bold">{{ __('admin/login.plugins_index') }}</h4>
+            <div class="text-muted fw-normal">{{ __('admin/login.plugins_index') }}</div>
           </div>
 
           <div class="card-body">
@@ -24,15 +24,15 @@
 
               <div class="form-floating mb-4">
                 <input type="text" name="email" class="form-control" id="email-input" value="{{ old('email') }}" placeholder="邮箱地址">
-                <label for="email-input">邮箱地址</label>
+                <label for="email-input">{{ __('common.email') }}</label>
                 @error('email')
                   <x-admin::form.error :message="$message" />
                 @enderror
               </div>
 
               <div class="form-floating mb-5">
-                <input type="password" name="password" class="form-control" id="password-input" placeholder="密码">
-                <label for="password-input">密码</label>
+                <input type="password" name="password" class="form-control" id="password-input" placeholder="{{ __('shop/login.password') }}">
+                <label for="password-input">{{ __('shop/login.password') }}</label>
                 @error('password')
                   <x-admin::form.error :message="$message" />
                 @enderror
@@ -44,7 +44,7 @@
                 </div>
               @endif
 
-              <div class="d-grid mb-4"><button type="submit" class="btn btn-lg btn-primary">登录</button></div>
+              <div class="d-grid mb-4"><button type="submit" class="btn btn-lg btn-primary">{{ __('admin/login.log_in') }}</button></div>
               {{-- <a href="{{ admin_route('forgotten.index') }}" class="text-muted"><i class="bi bi-question-circle"></i> 忘记密码</a> --}}
             </form>
           </div>

@@ -62,6 +62,7 @@ return [
     'return' => '返回',
     'language' => '语言',
     'select_all' => '全选',
+    'sign_out' => '退出登录',
 
     'id' => 'ID',
     'created_at' => '创建时间',

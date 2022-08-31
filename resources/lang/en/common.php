@@ -63,6 +63,7 @@ return [
     'return' => 'Return',
     'language' => 'Language',
     'select_all' => 'Select All',
+    'sign_out' => 'Sign Out',
 
     'id' => 'ID',
     'created_at' => 'Created At',

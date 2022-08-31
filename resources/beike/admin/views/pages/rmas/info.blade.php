@@ -56,7 +56,7 @@
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
         <el-form-item label="{{ __('admin/rma.current_state') }}">
-          待支付
+          {{ $rma->status }}
         </el-form-item>
         <el-form-item label="{{ __('admin/rma.modify_status') }}" prop="status">
           <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
