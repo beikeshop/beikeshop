@@ -27,7 +27,6 @@
                 </tbody>
             </table>
 
-            {{ $rmaReasons->links('admin::vendor/pagination/bootstrap-4') }}
         </div>
     </div>
 @endsection
