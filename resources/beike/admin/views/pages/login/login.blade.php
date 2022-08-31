@@ -15,7 +15,7 @@
         <div class="w-480">
           <div class="card-header mt-3 mb-4">
             <h4 class="fw-bold">{{ __('admin/login.plugins_index') }}</h4>
-            <div class="text-muted fw-normal">{{ __('admin/login.plugins_index') }}</div>
+            {{-- <div class="text-muted fw-normal">{{ __('admin/login.plugins_index') }}</div> --}}
           </div>
 
           <div class="card-body">
