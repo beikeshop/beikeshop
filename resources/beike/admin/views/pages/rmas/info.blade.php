@@ -1,10 +1,10 @@
 @extends('admin::layouts.master')
 
-@section('title', '售后申请')
+@section('title', __('admin/rma.index'))
 
 @section('content')
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">售后申请详情</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('admin/rma.rma_details') }}</h6></div>
     <div class="card-body">
       <div class="row">
         <div class="col-4">
@@ -15,11 +15,11 @@
                 <td>{{ $rma->id }}</td>
               </tr>
               <tr>
-                  <td>客户姓名：</td>
+                  <td>{{ __('admin/rma.customers_name') }}：</td>
                   <td>{{ $rma->name }}</td>
               </tr>
               <tr>
-                  <td>联系电话：</td>
+                  <td>{{ __('common.phone') }}：</td>
                   <td>{{ $rma->telephone }}</td>
               </tr>
             </tbody>
@@ -29,19 +29,19 @@
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>商品：</td>
+                <td>{{ __('admin/builder.modules_product') }}：</td>
                 <td>{{ $rma->product_name }}</td>
               </tr>
               <tr>
-                <td>型号：</td>
+                <td>{{ __('product.model') }}：</td>
                 <td>{{ $rma->model }}</td>
               </tr>
               <tr>
-                <td>数量：</td>
+                <td>{{ __('admin/rma.quantity') }}：</td>
                 <td>{{ $rma->quantity }}</td>
               </tr>
               <tr>
-                <td>退货原因：</td>
+                <td>{{ __('admin/rma.reasons_return') }}：</td>
                 <td>{{ $rma->quantity }}</td>
               </tr>
             </tbody>
@@ -52,14 +52,14 @@
   </div>
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">状态</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('common.status') }}</h6></div>
     <div class="card-body" id="app">
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
-        <el-form-item label="当前状态">
+      <el-form ref="form" :model="form" :rules="rules" label-width="140px">
+        <el-form-item label="{{ __('admin/rma.current_state') }}">
           待支付
         </el-form-item>
-        <el-form-item label="修改状态" prop="status">
-          <el-select size="small" v-model="form.status" placeholder="请选择">
+        <el-form-item label="{{ __('admin/rma.modify_status') }}" prop="status">
+          <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
             <el-option
               v-for="item in statuses"
               :key="item.value"
@@ -72,18 +72,18 @@
           <el-switch v-model="form.notify">
           </el-switch>
         </el-form-item> --}}
-        <el-form-item label="备注信息">
+        <el-form-item label="{{ __('admin/rma.remarks') }}">
           <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('form')">更新状态</el-button>
+          <el-button type="primary" @click="submitForm('form')">{{ __('admin/rma.update_status') }}</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 
   <div class="card mb-4">
-    <div class="card-header"><h6 class="card-title">操作历史</h6></div>
+    <div class="card-header"><h6 class="card-title">{{ __('admin/rma.operation_history') }}</h6></div>
     <div class="card-body">
       @foreach ($rma->histories as $history)
       @endforeach
@@ -124,7 +124,7 @@
         submitForm(form) {
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              layer.msg('请检查表单是否填写正确',()=>{});
+              layer.msg('{{ __('common.error_form') }}',()=>{});
               return;
             }
 

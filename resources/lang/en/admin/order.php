@@ -12,6 +12,8 @@
 return [
     'list' => 'Order List',
 
+    'order_quantity' => 'Order Quantity',
+    'order_amount' => 'Order Amount',
     'orders_index' => 'Index',
     'orders_create' => 'Create',
     'orders_show' => 'Detail',

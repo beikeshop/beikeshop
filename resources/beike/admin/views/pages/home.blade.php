@@ -221,7 +221,7 @@
         labels: latest_month.period,
         datasets: [
           {
-            label: ["订单数量"],
+            label: ["{{ __('admin/order.order_quantity') }}"],
             fill: true,
             backgroundColor : orderGradient, // Put the gradient here as a fill color
             borderColor : "#4da4f9",
@@ -244,7 +244,7 @@
             // pointRadius: 3,
           },
           {
-            label: ["订单金额"],
+            label: ["{{ __('admin/order.order_amount') }}"],
             fill: true,
             backgroundColor : amountGradient,
             borderColor : "#20c997",

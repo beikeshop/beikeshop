@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', '售后申请列表')
+@section('title', __('admin/rma.index'))
 
 @section('content')
   <div id="customer-app" class="card h-min-600">
@@ -9,15 +9,15 @@
         <table class="table">
           <thead>
             <tr>
-              <th>客户姓名</th>
-              <th>邮箱</th>
-              <th>电话号码</th>
-              <th>商品</th>
-              <th>商品型号</th>
-              <th>数量</th>
-              <th>服务类型</th>
-              <th>状态</th>
-              <th>操作</th>
+              <th>{{ __('admin/rma.customers_name') }}</th>
+              <th>{{ __('common.email') }}</th>
+              <th>{{ __('common.phone') }}</th>
+              <th>{{ __('admin/builder.modules_product') }}</th>
+              <th>{{ __('product.model') }}</th>
+              <th>{{ __('admin/rma.quantity') }}</th>
+              <th>{{ __('admin/rma.service_type') }}</th>
+              <th>{{ __('common.status') }}</th>
+              <th>{{ __('common.action') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -31,7 +31,7 @@
                 <td>{{ $rma->quantity }}</td>
                 <td>{{ $rma->type }}</td>
                 <td>{{ $rma->status }}</td>
-                <td><a href="{{ admin_route('rmas.show', [$rma->id]) }}" class="btn btn-outline-secondary btn-sm">查看</a>
+                <td><a href="{{ admin_route('rmas.show', [$rma->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
                 </td>
               </tr>
             @endforeach
