@@ -16,6 +16,8 @@ return [
     'tax_rate' => 'Tax Rate',
     'type' => 'Type',
     'area' => 'Area',
+    'percentage' => 'Percentage',
+    'fixed_tax_rate' => 'Fixed Tax Rate',
     'tax_rates_index' => 'Index',
     'tax_rates_create' => 'Create',
     'tax_rates_show' => 'Detail',

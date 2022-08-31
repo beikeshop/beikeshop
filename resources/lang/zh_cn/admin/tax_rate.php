@@ -16,6 +16,8 @@ return [
     'tax_rate' => '税率',
     'type' => '类型',
     'area' => '区域',
+    'percentage' => '百分比',
+    'fixed_tax_rate' => '固定税率',
     'tax_rates_index' => '税率列表',
     'tax_rates_create' => '创建税率',
     'tax_rates_show' => '税率详情',
