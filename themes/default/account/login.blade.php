@@ -125,24 +125,24 @@
 
         loginRules: {
           email: [
-            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'blur'},
-            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'change'},
+            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
           ],
           password: [
-            {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'blur'}
+            {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'change'}
           ]
         },
 
         registeRules: {
           email: [
-            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'blur'},
-            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'change'},
+            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
           ],
           password: [
-            {required: true, validator: validatePass, trigger: 'blur'}
+            {required: true, validator: validatePass, trigger: 'change'}
           ],
           password_confirmation: [
-            {required: true, validator: validatePass2, trigger: 'blur'}
+            {required: true, validator: validatePass2, trigger: 'change'}
           ]
         }
       },
