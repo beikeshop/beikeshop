@@ -12,9 +12,13 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
-use Beike\Shop\Http\Controllers\Controller;
-use Beike\Shop\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
+use Beike\Shop\Http\Requests\LoginRequest;
+use Beike\Shop\Http\Controllers\Controller;
+use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class LoginController extends Controller
 {
@@ -29,13 +33,13 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         if (!auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
-            throw new \Exception(trans('shop/login.email_or_password_error'));
+            throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
         }
 
         $customer = current_customer();
         if ($customer && $customer->status != 1) {
             Auth::guard(Customer::AUTH_GUARD)->logout();
-            throw new \Exception(trans('shop/login.customer_inactive'));
+            throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
         }
         return json_success(trans('shop/login.login_successfully'));
     }
