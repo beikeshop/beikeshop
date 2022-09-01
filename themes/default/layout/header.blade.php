@@ -62,7 +62,7 @@
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="menu-wrap">
-        @if (!isMobile())
+        @if (!is_mobile())
           @include('shared.menu-pc')
         @endif
       </div>
@@ -130,7 +130,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mobile-menu-wrap">
-      @if (isMobile())
+      @if (is_mobile())
         @include('shared.menu-mobile')
       @endif
     </div>
