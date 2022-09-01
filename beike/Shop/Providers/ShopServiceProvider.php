@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use Beike\Shop\View\Components\Breadcrumb;
 use Beike\Shop\View\Components\AccountSidebar;
+use Beike\Shop\View\Components\NoData;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -85,6 +86,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $this->loadViewComponentsAs('shop', [
             'sidebar' => AccountSidebar::class,
+            'no-data' => NoData::class,
             'alert' => Alert::class,
             'breadcrumb' => Breadcrumb::class
         ]);
