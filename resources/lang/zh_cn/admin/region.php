@@ -18,4 +18,6 @@ return [
     'regions_delete' => '删除区域组',
     'name' => '名称',
     'describe' => '描述',
+    'country' => '国家',
+    'zone' => '省份',
 ];

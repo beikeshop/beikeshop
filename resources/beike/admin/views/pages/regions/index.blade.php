@@ -37,54 +37,54 @@
       {{-- {{ $regions->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="创建区域组" :visible.sync="dialog.show" width="700px"
+    <el-dialog title="{{ __('admin/region.regions_create') }}" :visible.sync="dialog.show" width="700px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="120px">
-        <el-form-item label="区域群组名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="区域群组名称"></el-input>
+        <el-form-item label="{{ __('common.name') }}" prop="name">
+          <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="描述" prop="description">
-          <el-input v-model="dialog.form.description" placeholder="描述"></el-input>
+        <el-form-item label="{{ __('admin/region.describe') }}" prop="description">
+          <el-input v-model="dialog.form.description" placeholder="{{ __('admin/region.describe') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="区域群组">
+        <el-form-item label="{{ __('admin/region.index') }}">
             <table class="table table-bordered" style="line-height: 1.6;">
               <thead>
                 <tr>
-                  <th>国家</th>
-                  <th>省份</th>
+                  <th>{{ __('admin/region.country') }}</th>
+                  <th>{{ __('admin/region.zone') }}</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="rule, index in dialog.form.region_zones" :key="index">
                   <td>
-                    <el-select v-model="rule.country_id" size="mini" filterable placeholder="选择国家" @change="(e) => {countryChange(e, index)}">
+                    <el-select v-model="rule.country_id" size="mini" filterable placeholder="{{ __('admin/customer.choose_country') }}" @change="(e) => {countryChange(e, index)}">
                       <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
                         :value="item.id">
                       </el-option>
                     </el-select>
                   </td>
                   <td>
-                    <el-select v-model="rule.zone_id" size="mini" filterable placeholder="选择省份">
+                    <el-select v-model="rule.zone_id" size="mini" filterable placeholder="{{ __('admin/customer.choose_zones') }}">
                       <el-option v-for="item in rule.zones" :key="item.id" :label="item.name"
                         :value="item.id">
                       </el-option>
                     </el-select>
                   </td>
                   <td>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteRates(index)">删除</button>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteRates(index)">{{ __('common.delete') }}</button>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <el-button type="primary" icon="el-icon-plus" size="small" plain @click="addRates">添加区域</el-button>
+            <el-button type="primary" icon="el-icon-plus" size="small" plain @click="addRates">{{ __('common.add') }}</el-button>
         </el-form-item>
         <el-form-item class="mt-5">
-          <el-button type="primary" @click="addFormSubmit('form')">保存</el-button>
-          <el-button @click="closeCustomersDialog('form')">取消</el-button>
+          <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
+          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -120,8 +120,8 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入区域群组名称',trigger: 'blur'}, ],
-          description: [{required: true,message: '请输入描述',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
+          description: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/region.describe')]) }}',trigger: 'blur'}, ],
         }
       },
 
@@ -177,7 +177,7 @@
           const url = this.dialog.type == 'add' ? 'regions' : 'regions/' + this.dialog.form.id;
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -202,9 +202,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除区域组吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('regions/' + id).then((res) => {
