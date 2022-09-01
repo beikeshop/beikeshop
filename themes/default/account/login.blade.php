@@ -139,7 +139,7 @@
             {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
           ],
           password: [
-            {required: true, validator: validatePass, trigger: 'change'}
+            {required: true, trigger: 'change'}
           ],
           password_confirmation: [
             {required: true, validator: validatePass2, trigger: 'change'}
@@ -158,8 +158,8 @@
             _data = this.registerForm, url = '/register'
           }
 
-          this.$refs['loginForm'].resetFields();
-          this.$refs['registerForm'].resetFields();
+          this.$refs['loginForm'].clearValidate();
+          this.$refs['registerForm'].clearValidate();
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
