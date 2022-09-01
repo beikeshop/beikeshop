@@ -43,7 +43,14 @@ body.page-checkout {
   .addresses-wrap {
     .item {
       &.address-right {
-        padding: 0 2.6rem;
+        @media (min-width: 768px) {
+          padding: 0 2.6rem;
+        }
+
+        @media (max-width: 768px) {
+          padding: 0;
+        }
+
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -26,7 +26,7 @@
               @click="currentMenuIndex = index" v-for="menu, index in form.menus" :key="index">
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center flex-grow-1">
-                  <el-tooltip class="icon-rank cursor-scroll" effect="dark" content="{{ __('admin/builder.text_drag_sort') }}" placement="left">
+                  <el-tooltip class="icon-rank cursor-scroll" effect="dark" content="{{ __('admin/builder.text_drag_sort') }}" placement="top">
                     <i class="el-icon-rank"></i>
                   </el-tooltip>
                   <div class="name mx-2">

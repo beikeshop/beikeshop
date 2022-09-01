@@ -41,6 +41,10 @@ body.page-account-order-list {
         .img {
           flex: 0 0 60px;
           margin-right: 10px;
+
+          @media (max-width:768px) {
+            display: none;
+          }
         }
       }
     }

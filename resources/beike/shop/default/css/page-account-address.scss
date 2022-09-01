@@ -14,6 +14,10 @@ body.page-account-address, body.page-checkout {
       height: 130px;
       cursor: pointer;
 
+      @media (max-width: 768px) {
+        padding: 10px 10px 10px 14px;
+      }
+
       &:hover {
         border-color: #222;
       }
