@@ -11,9 +11,8 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Models\Order;
-use Beike\Shop\Services\CheckoutService;
 use Illuminate\Http\Request;
+use Beike\Shop\Services\CheckoutService;
 
 class CheckoutController extends Controller
 {

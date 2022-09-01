@@ -35,6 +35,7 @@ class TotalService
     {
         $this->currentCart = $currentCart;
         $this->cartProducts = $cartProducts;
+        $this->setShippingMethod($currentCart->shipping_method_code);
         $this->getTaxes();
     }
 
