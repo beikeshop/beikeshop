@@ -164,7 +164,7 @@
 
         deleteItem(id, index) {
           const self = this;
-          this.$confirm('{{ __('common.error_form') }}', '{{ __('common.text_hint') }}', {
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
