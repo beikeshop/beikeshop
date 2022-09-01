@@ -2,11 +2,12 @@
 
 namespace Beike\Installer\Controllers;
 
-use Beike\Admin\Repositories\AdminUserRepo;
 use Illuminate\Routing\Controller;
-use Beike\Installer\Helpers\DatabaseManager;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Schema;
+use Beike\Admin\Repositories\AdminUserRepo;
+use Beike\Installer\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {
@@ -26,13 +27,13 @@ class DatabaseController extends Controller
     /**
      * Migrate and seed the database.
      *
-     * @return \Illuminate\View\View
+     * @return RedirectResponse
      */
     public function index()
     {
         DB::statement("SET FOREIGN_KEY_CHECKS = 0");
         $rows = DB::select('SHOW TABLES');
-        $tables = array_column($rows, 'Tables_in_'.env('DB_DATABASE'));
+        $tables = array_column($rows, 'Tables_in_' . env('DB_DATABASE'));
         foreach ($tables as $table) {
             Schema::drop($table);
         }
@@ -50,7 +51,6 @@ class DatabaseController extends Controller
         ];
         AdminUserRepo::createAdminUser($data);
 
-        return redirect()->route('installer.final')
-                         ->with(['message' => $response]);
+        return redirect()->route('installer.final')->with(['message' => $response]);
     }
 }
