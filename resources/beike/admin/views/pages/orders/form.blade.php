@@ -195,7 +195,7 @@
         },
 
         rules: {
-          status: [{required: true, message: '请选择状态', trigger: 'blur'}, ],
+          status: [{required: true, message: '{{ __('admin/order.error_status') }}', trigger: 'blur'}, ],
         }
       },
 
@@ -213,7 +213,7 @@
         submitForm(form) {
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              layer.msg('请检查表单是否填写正确',()=>{});
+              layer.msg('{{ __('common.error_form') }}',()=>{});
               return;
             }
 

@@ -21,4 +21,5 @@ return [
     'orders_update' => 'Update',
     'orders_delete' => 'Delete',
     'orders_update_status' => 'Update Status',
+    'error_status' => 'Please select a status',
 ];
