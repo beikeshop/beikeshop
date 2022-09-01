@@ -65,6 +65,7 @@ return [
     'select_all' => 'Select All',
     'sign_out' => 'Sign Out',
     'menu' => 'Menu',
+    'whether_open' => 'Whether to open',
 
     'id' => 'ID',
     'created_at' => 'Created At',

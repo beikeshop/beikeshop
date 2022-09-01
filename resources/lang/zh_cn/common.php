@@ -64,6 +64,7 @@ return [
     'select_all' => '全选',
     'sign_out' => '退出登录',
     'menu' => '菜单',
+    'whether_open' => '是否开启',
 
     'id' => 'ID',
     'created_at' => '创建时间',

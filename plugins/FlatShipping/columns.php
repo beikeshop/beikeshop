@@ -12,17 +12,17 @@
 return [
     [
         'name' => 'type',
-        'label' => trans('FlatShipping::common.flat_shipping'),
+        'label_key' => 'common.flat_shipping',
         'type' => 'select',
         'options' => [
-            ['value' => 'fixed', 'label' => '固定运费'],
-            ['value' => 'percent', 'label' => '百分比']
+            ['value' => 'fixed', 'label_key' => 'common.flat_shipping'],
+            ['value' => 'percent', 'label_key' => 'common.percentage']
         ],
         'required' => true,
     ],
     [
         'name' => 'value',
-        'label' => '运费值',
+        'label_key' => 'common.shipping_value',
         'type' => 'string',
         'required' => true,
     ]

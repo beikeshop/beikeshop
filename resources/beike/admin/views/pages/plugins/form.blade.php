@@ -62,7 +62,7 @@
         @endforeach
 
         <x-admin::form.row title="">
-          <button type="submit" class="btn btn-primary btn-lg mt-4">提交</button>
+          <button type="submit" class="btn btn-primary btn-lg mt-4">{{ __('common.submit') }}</button>
         </x-admin::form.row>
       </form>
     </div>

@@ -52,7 +52,7 @@ class SettingRepo
     {
         return [
             'name' => 'status',
-            'label' => '是否开启',
+            'label' => trans('common.whether_open'),
             'type' => 'bool',
             'required' => true,
         ];
