@@ -150,7 +150,6 @@ function type_route($type, $value): string
     return '';
 }
 
-
 /**
  * 获取 category, product, brand, page, static, custom 链接名称
  *
@@ -188,7 +187,6 @@ function type_label($type, $value, array $texts = []): string
     return '';
 }
 
-
 /**
  * 处理配置链接
  *
@@ -207,7 +205,6 @@ function handle_link($link): array
 
     return $link;
 }
-
 
 /**
  * 是否访问的后端
@@ -382,7 +379,6 @@ function current_language(): string
     return Language::query()->where('code', $code)->first()->name;
 }
 
-
 /**
  * 获取后台所有语言包列表
  *
@@ -396,7 +392,6 @@ function admin_languages(): array
     })->toArray();
     return array_values($adminLanguages);
 }
-
 
 /**
  * 获取语言包列表
@@ -425,7 +420,6 @@ function current_currency_code(): string
 {
     return Session::get('currency') ?? system_setting('base.currency');
 }
-
 
 /**
  * 数量格式化, 用于商品、订单统计
@@ -507,7 +501,6 @@ function to_sql($builder)
     return $sql;
 }
 
-
 /**
  * 递归创建文件夹
  * @param $directoryPath
@@ -524,7 +517,6 @@ function create_directories($directoryPath)
     }
 }
 
-
 /**
  * hook filter 埋点
  *
@@ -537,7 +529,6 @@ function hook_filter($hookKey, $hookValue)
     return Eventy::filter($hookKey, $hookValue);
 }
 
-
 /**
  * hook action 埋点
  *
@@ -549,7 +540,6 @@ function hook_action($hookKey, $hookValue)
 {
     Eventy::action($hookKey, $hookValue);
 }
-
 
 /**
  * 添加 Filter
@@ -578,13 +568,22 @@ function add_action($hook, $callback, int $priority = 20, int $arguments = 1)
     Eventy::addAction($hook, $callback, $priority, $arguments);
 }
 
+/**
+ * 检测系统是否已安装
+ *
+ * @return bool
+ */
 function installed()
 {
     return file_exists(storage_path('installed'));
 }
 
-
-function isMobile()
+/**
+ * 是否为移动端访问
+ *
+ * @return bool
+ */
+function is_mobile()
 {
     return (new \Jenssegers\Agent\Agent())->isMobile();
 }
