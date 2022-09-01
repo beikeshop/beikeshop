@@ -81,7 +81,7 @@
               { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
             ]"
           >
-            <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="请填写名称"><template slot="prepend">@{{lang.name}}</template></el-input>
+            <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
         </el-form-item>
 
