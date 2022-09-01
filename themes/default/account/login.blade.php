@@ -158,6 +158,9 @@
             _data = this.registerForm, url = '/register'
           }
 
+          this.$refs['loginForm'].resetFields();
+          this.$refs['registerForm'].resetFields();
+
           this.$refs[form].validate((valid) => {
             if (!valid) {
               layer.msg('{{ __('shop/login.check_form') }}', () => {})
