@@ -138,7 +138,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('{{ __('common.error_form')) }}');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
