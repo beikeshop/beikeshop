@@ -63,9 +63,8 @@ return [
     'return' => 'Return',
     'language' => 'Language',
     'select_all' => 'Select All',
-    'sign_out' => 'Sign Out',
     'menu' => 'Menu',
-    'whether_open' => 'Whether to open',
+    'whether_open' => 'Status',
 
     'id' => 'ID',
     'created_at' => 'Created At',
