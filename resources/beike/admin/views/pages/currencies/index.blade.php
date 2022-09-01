@@ -138,7 +138,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form')) }}');
               return;
             }
 
@@ -157,9 +157,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除货币吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('currencies/' + id).then((res) => {
