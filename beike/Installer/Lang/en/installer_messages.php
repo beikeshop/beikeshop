@@ -88,8 +88,8 @@ return [
         'db_username_placeholder' => 'Database User Name',
         'db_password_label' => 'Database Password',
         'db_password_placeholder' => 'Database Password',
-        'admin_email' => '后台账号',
-        'admin_password' => '后台密码',
+        'admin_email' => 'Admin User Account',
+        'admin_password' => 'Admin Password',
         'install' => 'Install',
     ],
 
