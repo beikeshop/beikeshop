@@ -19,3 +19,5 @@ yarn-error.log
 mix-manifest.json
 package-lock.json
 beike/node_modules
+/public/build/beike/admin/js/app.js
+/public/build/beike/shop/default/js/app.js
