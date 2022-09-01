@@ -62,63 +62,9 @@
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="menu-wrap">
-        <ul class="navbar-nav mx-auto">
-          @foreach ($menu_content as $menu)
-            <li
-              class="nav-item {{ isset($menu['children_group']) ? 'dropdown' : '' }} {{ isset($menu['isFull']) && $menu['isFull'] ? 'position-static' : '' }}">
-              <a class="nav-link fw-bold {{ isset($menu['children_group']) ? 'dropdown-toggle' : '' }}"
-                target="{{ isset($menu['new_window']) && $menu['new_window'] ? '_blank' : '_self' }}"
-                href="{{ $menu['link'] ?? '' }}">
-                {{ $menu['name'] }}
-                @if (isset($menu['badge']) && $menu['badge']['name'])
-                  <span class="badge"
-                    style="background-color: {{ $menu['badge']['bg_color'] }}; color: {{ $menu['badge']['text_color'] }}; border-color: {{ $menu['badge']['bg_color'] }}">
-                    {{ $menu['badge']['name'] }}
-                  </span>
-                @endif
-              </a>
-              @if (isset($menu['children_group']) && $menu['children_group'])
-                <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}"
-                  style="min-width: {{ count($menu['children_group']) * 200 }}px">
-                  <div class="card card-lg">
-                    <div class="card-body">
-                      <div class="container">
-                        <div class="row">
-                          @forelse ($menu['children_group'] as $group)
-                            <div class="col-6 col-md">
-                              @if ($group['name'])
-                                <div class="mb-3 fw-bold group-name">{{ $group['name'] }}</div>
-                              @endif
-                              @if ($group['type'] == 'image')
-                                <a
-                                target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}"
-                                href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}"
-                                    class="img-fluid"></a>
-                              @else
-                                <ul class="nav flex-column ul-children">
-                                  @foreach ($group['children'] as $children)
-                                    @if (!is_array($children['link']['text']))
-                                      <li class="nav-item">
-                                        <a
-                                        target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}"
-                                        class="nav-link px-0"
-                                          href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
-                                      </li>
-                                    @endif
-                                  @endforeach
-                                </ul>
-                              @endif
-                            </div>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              @endif
-            </li>
-          @endforeach
-        </ul>
+        @if (!isMobile())
+          @include('shared.menu-pc')
+        @endif
       </div>
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
@@ -168,7 +114,7 @@
 
   <div class="header-mobile d-lg-none">
     <div class="mobile-content">
-      <div class="left"><i class="bi bi-list"></i></div>
+      <div class="left mobile-open-menu"><i class="bi bi-list"></i></div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
@@ -178,6 +124,19 @@
       </div>
     </div>
   </div>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-mobile-menu">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">{{ __('common.menu') }}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mobile-menu-wrap">
+      @if (isMobile())
+        @include('shared.menu-mobile')
+      @endif
+    </div>
+  </div>
+
+
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
     aria-labelledby="offcanvasRightLabel"></div>
 

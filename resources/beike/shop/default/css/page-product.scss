@@ -135,6 +135,11 @@ body.page-product {
   }
 
   .peoduct-info {
+    h1 {
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
     .rating-wrap {
       margin-bottom: 2rem;
 
@@ -151,6 +156,10 @@ body.page-product {
     }
 
     .quantity-btns {
+      @media (min-width: 768px) {
+        display: flex;
+      }
+
       .quantity-input {
         max-width: 5rem;
         text-align: center;
@@ -158,6 +167,9 @@ body.page-product {
 
       .quantity-wrap {
         height: 43px;
+        @media (max-width: 768px) {
+          margin-bottom: 10px;
+        }
       }
     }
   }

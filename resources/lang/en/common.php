@@ -64,6 +64,7 @@ return [
     'language' => 'Language',
     'select_all' => 'Select All',
     'sign_out' => 'Sign Out',
+    'menu' => 'Menu',
 
     'id' => 'ID',
     'created_at' => 'Created At',

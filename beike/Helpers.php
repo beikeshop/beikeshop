@@ -582,3 +582,9 @@ function installed()
 {
     return file_exists(storage_path('installed'));
 }
+
+
+function isMobile()
+{
+    return (new \Jenssegers\Agent\Agent())->isMobile();
+}

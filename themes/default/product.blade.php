@@ -86,7 +86,7 @@
           </div>
 
           @if ($product['active'])
-            <div class="quantity-btns d-flex">
+            <div class="quantity-btns">
               <div class="quantity-wrap">
                 <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
                 <div class="right">
@@ -95,7 +95,7 @@
                 </div>
               </div>
               <button
-                class="btn btn-outline-dark ms-3 add-cart"
+                class="btn btn-outline-dark ms-md-3 add-cart"
                 :disabled="!product.quantity"
                 @click="addCart(false, this)"
                 ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
