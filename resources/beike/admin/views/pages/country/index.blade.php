@@ -50,7 +50,7 @@
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
         <el-form-item label="{{ __('admin/country.country_name') }}" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="名称"></el-input>
+          <el-input v-model="dialog.form.name" placeholder="{{ __('admin/country.country_name') }}"></el-input>
         </el-form-item>
 
         <el-form-item label="{{ __('common.sort_order') }}">
