@@ -58,8 +58,7 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入角色名称',trigger: 'blur'}, ],
-          description: [{required: true,message: '请输入描述',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/admin_roles.role_name')]) }}',trigger: 'blur'}, ],
         }
       },
 
@@ -94,7 +93,7 @@
             // });
 
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 

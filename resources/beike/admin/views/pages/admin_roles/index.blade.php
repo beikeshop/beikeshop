@@ -52,9 +52,9 @@
       const id = $(this).data('id');
       const self = $(this);
 
-      layer.confirm('确定要删除角色吗？', {
-        title: "提示",
-        btn: ['取消', '确定'],
+      layer.confirm('{{ __('common.confirm_delete') }}', {
+        title: "{{ __('common.text_hint') }}",
+        btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
         area: ['400px'],
         btn2: () => {
         $http.delete(`admin_roles/${id}`).then((res) => {

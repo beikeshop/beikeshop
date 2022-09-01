@@ -15,4 +15,5 @@ return [
     'role_name' => '角色名称',
     'role_management' => '角色管理',
     'permission' => '权限',
+    'error_roles' => '请至少选择一个角色',
 ];

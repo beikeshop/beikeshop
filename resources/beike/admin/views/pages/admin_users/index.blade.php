@@ -124,10 +124,10 @@
         },
 
         rules: {
-          name: [{required: true,message: '请输入账号名称', trigger: 'blur'}, ],
-          email: [{required: true,message: '请输入邮箱', trigger: 'blur'}, ],
-          password: [{required: true,message: '请输入密码', trigger: 'blur'}, ],
-          roles: [{type: 'array', required: true, message: '请至少选择一个角色', trigger: 'blur'}],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur'}, ],
+          email: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.email')]) }}', trigger: 'blur'}, ],
+          password: [{required: true,message: '{{ __('common.error_required', ['name' => __('shop/login.password')]) }}', trigger: 'blur'}, ],
+          roles: [{type: 'array', required: true, message: '{{ __('admin/admin_roles.error_roles') }}', trigger: 'blur'}],
         }
       },
 
@@ -157,7 +157,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -176,9 +176,9 @@
 
         deleteCustomer(id, index) {
           const self = this;
-          this.$confirm('确定要删除用户吗？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('admin_users/' + id).then((res) => {
