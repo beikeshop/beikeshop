@@ -32,7 +32,7 @@ mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/d
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
 // 安装引导
-mix.sass('beike/installer/assets/scss/app.scss', 'public/install/css/app.css');
+mix.sass('beike/Installer/assets/scss/app.scss', 'public/install/css/app.css');
 
 
 // design
