@@ -1,11 +1,11 @@
 @extends('admin::layouts.master')
 
-@section('title', '插件编辑')
+@section('title', __('admin/plugin.plugins_show'))
 
 @section('content')
   <div class="card">
     <div class="card-body">
-      <h6 class="border-bottom pb-3 mb-4">{{ $plugin->name }} - 配置</h6>
+      <h6 class="border-bottom pb-3 mb-4">{{ $plugin->name }}</h6>
 
       @if (session('success'))
         <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>

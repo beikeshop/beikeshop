@@ -12,7 +12,7 @@
 return [
     [
         'name' => 'type',
-        'label' => '方式',
+        'label' => trans('FlatShipping::common.flat_shipping'),
         'type' => 'select',
         'options' => [
             ['value' => 'fixed', 'label' => '固定运费'],
