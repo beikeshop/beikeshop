@@ -72,7 +72,7 @@
           {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.order_amount') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <img src="https://beikeshop.com/install/install-enter.jpg?version=1.0&build_date={{ config('beike.version') }}" class="d-none">
+              <img src="https://beikeshop.com/install/install-enter.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="d-none">
               <div class="fs-2 lh-1 fw-bold">{{ $order_totals['total'] }}</div>
             </div>
             {{-- <div><i class="fs-4 bi bi-person"></i></div> --}}
