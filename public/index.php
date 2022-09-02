@@ -3,6 +3,10 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+if (!file_exists( __DIR__.'/../storage/installed') && (!isset($_SERVER['REDIRECT_URL']) || substr($_SERVER['REDIRECT_URL'], 0, 10) != '/installer')) {
+    header("Location: /installer");
+}
+
 if (version_compare(PHP_VERSION, '8.0.2', '<') == true) {
     exit('PHP8.0.2+ Required');
 }
