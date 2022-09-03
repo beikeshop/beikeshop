@@ -10,7 +10,7 @@
   </div>
   @endif
 
-  <div class="module-info module-brand mb-5">
+  <div class="module-info module-brand mb-3 mb-md-5">
     {{-- {{ dd($content) }} --}}
     <div class="module-title">{{ $content['title'] }}</div>
     <div class="container">

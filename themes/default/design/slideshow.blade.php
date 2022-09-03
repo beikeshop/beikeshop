@@ -14,7 +14,7 @@
     </div>
   </div>
   @endif
-  <div class="module-info mb-5">
+  <div class="module-info mb-3 mb-md-5">
     <div class="swiper module-swiper-{{ $module_id }} module-slideshow">
       <div class="swiper-wrapper">
         @foreach($content['images'] as $image)

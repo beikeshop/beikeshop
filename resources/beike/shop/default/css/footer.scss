@@ -5,6 +5,10 @@ footer {
   background: #fafafa;
   margin-top: 5rem;
 
+  @media (max-width:768px) {
+    margin-top: 2rem;
+  }
+
   .footer-active {
     outline: 2px dashed #4bb1f0 !important;
   }

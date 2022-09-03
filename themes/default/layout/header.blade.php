@@ -114,7 +114,12 @@
 
   <div class="header-mobile d-lg-none">
     <div class="mobile-content">
-      <div class="left mobile-open-menu"><i class="bi bi-list"></i></div>
+      <div class="left">
+        <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
+        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample">
+          <i class="iconfont">&#xe8d6;</i>
+        </div>
+      </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>

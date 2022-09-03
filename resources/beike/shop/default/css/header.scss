@@ -173,23 +173,33 @@ header {
 
   .header-mobile {
     .mobile-content {
-      padding: 10px 15px;
+      padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      .mobile-open-menu {
-        cursor: pointer;
-      }
 
       > div {
         width: 33.33%;
       }
 
       .left {
-        > i {
-          font-size: 1.6rem;
-          line-height: 1;
+        display: flex;
+        align-items: center;
+
+        > div {
+          cursor: pointer;
+          > i {
+            font-size: 1.5rem;
+            line-height: 1;
+          }
+        }
+
+        .mobile-open-search {
+          margin-left: 10px;
+
+          > i {
+            font-size: 1.1rem;
+          }
         }
       }
 
