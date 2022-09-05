@@ -37,9 +37,8 @@ class WelcomeController extends Controller
 
     public function locale($lang)
     {
-        if (in_array($lang, languages()->toArray())) {
-            setcookie('locale', $lang, 0, '/');
-        }
+        setcookie('locale', $lang, 0, '/');
+        
         return Redirect::back();
     }
 }
