@@ -21,6 +21,11 @@ class RmaDetail extends JsonResource
         $types = RmaRepo::getTypes();
         $statuses = RmaRepo::getStatuses();
 
+        if ($this->reason) {
+            $reason = json_decode($this->reason->name, true)[locale()] ?? '';
+        } else {
+            $reason = '';
+        }
         return [
             'id' => $this->id,
             'order_product_id' => $this->order_product_id,
@@ -35,7 +40,7 @@ class RmaDetail extends JsonResource
             'product_name' => $this->product_name,
             'name' => $this->name,
             'sku' => $this->sku,
-            'reason' => json_decode($this->reason->name, true)[locale()] ?? '',
+            'reason' => $reason,
             'type_text' => $this->type_text,
         ];
     }
