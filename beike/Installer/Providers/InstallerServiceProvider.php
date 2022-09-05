@@ -23,6 +23,7 @@ class InstallerServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
 
+        $this->mergeConfigFrom(__DIR__ . '/../config.php', 'installer');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->loadViewsFrom(__DIR__ . '/../Views', 'installer');
 

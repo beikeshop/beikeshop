@@ -22,15 +22,6 @@
       <div class="row gx-4 gy-3">
         <div class="col-sm-6">
           <label class="form-label">
-            {{ trans($entry_key . 'app_url_label') }}
-          </label>
-          <input class="form-control {{ $errors->has('app_url') ? 'is-invalid' : '' }}" name="app_url"
-            value="{{ old('app_url', '') }}" required placeholder="{{ trans($entry_key . 'app_url_placeholder') }}">
-          <span class="invalid-feedback"
-            role="alert">{{ $errors->has('app_url') ? $errors->first('app_url') : __('common.error_required', ['name' => trans($entry_key . 'app_url_label')]) }}</span>
-        </div>
-        <div class="col-sm-6">
-          <label class="form-label">
             {{ trans($entry_key . 'db_connection_label') }}
           </label>
           <select name="database_connection" class="form-select" aria-label="Default select example">
