@@ -23,7 +23,7 @@ return [
      *
      */
     'welcome' => [
-        'templateTitle' => 'Welcome',
+        'template_title' => 'Welcome',
         'title' => 'Welcome',
         'describe'   => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
         'message' => 'Easy Installation and Setup Wizard.',
@@ -36,7 +36,7 @@ return [
      *
      */
     'requirements' => [
-        'templateTitle' => 'Step 1 | Server Requirements',
+        'template_title' => 'Step 1 | Server Requirements',
         'environment' => 'Environmen',
         'title' => 'Server Requirements',
         'next'    => 'Check Permissions',
@@ -48,7 +48,7 @@ return [
      *
      */
     'permissions' => [
-        'templateTitle' => 'Step 2 | Directory Permission',
+        'template_title' => 'Step 2 | Directory Permission',
         'title' => 'Directory permission detection',
         'next' => 'Configure Environment',
         'table' => 'Table of contents',
@@ -61,7 +61,7 @@ return [
      *
      */
     'environment' => [
-        'templateTitle' => 'Step 3 | System Parameters',
+        'template_title' => 'Step 3 | System Parameters',
         'title' => 'System parameter configuration',
         'name_required' => 'An environment name is required.',
         'database_link' => 'Database link',
@@ -115,7 +115,7 @@ return [
      */
     'final' => [
         'title' => 'Installation Finished',
-        'templateTitle' => 'Installation Finished',
+        'template_title' => 'Installation Finished',
         'migration' => 'Migration &amp; Seed Console Output:',
         'console' => 'Application Console Output:',
         'log' => 'Installation Log Entry:',

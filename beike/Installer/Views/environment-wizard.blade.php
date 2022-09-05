@@ -1,12 +1,12 @@
 @extends('installer::layouts.master')
 
 @section('template_title')
-  {{ trans('installer::installer_messages.environment.wizard.templateTitle') }}
+  {{ trans('installer::installer_messages.environment.template_title') }}
 @endsection
 
 @section('title')
   <i class="fa fa-magic fa-fw" aria-hidden="true"></i>
-  {!! trans('installer::installer_messages.environment.wizard.title') !!}
+  {!! trans('installer::installer_messages.environment.title') !!}
 @endsection
 
 @section('content')

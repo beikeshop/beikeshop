@@ -1,7 +1,7 @@
 @extends('installer::layouts.master')
 
 @section('template_title')
-  {{ trans('installer::installer_messages.permissions.templateTitle') }}
+  {{ trans('installer::installer_messages.permissions.template_title') }}
 @endsection
 
 @section('title')

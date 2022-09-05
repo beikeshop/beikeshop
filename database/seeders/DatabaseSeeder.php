@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Beike\Models\CustomerGroup;
 use Beike\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,12 +17,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       // Eloquent::unguard();
-
-        $installerPath = base_path('beike/Installer');
-        $path = $installerPath . '/database.sql';
-        DB::unprepared(file_get_contents($path));
-        $this->command->info('Database seeded!');
+        $this->call([
+            BrandsSeeder::class,
+            CategoriesSeeder::class,
+            CountriesSeeder::class,
+            CurrenciesSeeder::class,
+            CustomerGroupsSeeder::class,
+            LanguagesSeeder::class,
+            PagesSeeder::class,
+            PluginsSeeder::class,
+            ZonesSeeder::class,
+            ProductsSeeder::class,
+            SettingsSeeder::class,
+        ]);
     }
 
     /**
