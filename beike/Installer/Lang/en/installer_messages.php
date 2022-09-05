@@ -61,6 +61,8 @@ return [
     'environment' => [
         'title' => 'System parameter configuration',
         'name_required' => 'An environment name is required.',
+        'database_link' => 'Database link',
+        'admin_info' => 'Set admin account password',
         'app_name_label' => 'App Name',
         'app_name_placeholder' => 'App Name',
         'app_environment_label' => 'App Environment',

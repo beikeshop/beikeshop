@@ -55,6 +55,8 @@ return [
     'environment' => [
         'title' => '系统参数配置',
         'app_url_label' => '您的应用URL',
+        'database_link' => '数据库链接',
+        'admin_info' => '设置后台账号密码',
         'app_url_placeholder' => '输入您的应用URL',
         'db_connection_failed' => '无法连接到数据库！',
         'db_connection_label' => '数据库连接',

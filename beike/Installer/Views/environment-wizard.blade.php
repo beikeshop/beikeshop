@@ -20,6 +20,10 @@
       <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
       <div class="row gx-4 gy-3">
+        <div class="col-12">
+          <h5>{{ __('installer::installer_messages.environment.database_link') }}</h5>
+          <hr class="mb-0">
+        </div>
         <div class="col-sm-6">
           <label class="form-label">
             {{ trans($entry_key . 'db_connection_label') }}
@@ -27,12 +31,6 @@
           <select name="database_connection" class="form-select" aria-label="Default select example">
             <option value="mysql" selected>
               {{ trans($entry_key . 'db_connection_label_mysql') }}</option>
-{{--            <option value="sqlite">--}}
-{{--              {{ trans($entry_key . 'db_connection_label_sqlite') }}</option>--}}
-{{--            <option value="pgsql">--}}
-{{--              {{ trans($entry_key . 'db_connection_label_pgsql') }}</option>--}}
-{{--            <option value="sqlsrv">--}}
-{{--              {{ trans($entry_key . 'db_connection_label_sqlsrv') }}</option>--}}
           </select>
         </div>
 
@@ -87,6 +85,10 @@
             role="alert">{{ $errors->has('database_password') ? $errors->first('database_password') : __('common.error_required', ['name' => trans($entry_key . 'db_password_label')]) }}</span>
         </div>
 
+        <div class="col-12 mt-5">
+          <h5>{{ __('installer::installer_messages.environment.admin_info') }}</h5>
+          <hr class="mb-0">
+        </div>
 
         <div class="col-sm-6">
           <label class="form-label">
@@ -97,6 +99,7 @@
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('admin_email') ? $errors->first('admin_email') : __('common.error_required', ['name' => trans($entry_key . 'admin_email')]) }}</span>
         </div>
+
 
         <div class="col-sm-6">
           <label class="form-label">
