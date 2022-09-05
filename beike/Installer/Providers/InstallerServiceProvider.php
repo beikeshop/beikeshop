@@ -16,8 +16,7 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../Routes/installer.php');
 
-        $uri = request()->getRequestUri();
-        if (!Str::startsWith($uri, "/installer")) {
+        if (!is_installer()) {
             return;
         }
 

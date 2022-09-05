@@ -28,7 +28,7 @@ class AdminServiceProvider extends ServiceProvider
     public function boot()
     {
         $uri = request()->getRequestUri();
-        if (Str::startsWith($uri, "/installer")) {
+        if (is_installer()) {
             return;
         }
 

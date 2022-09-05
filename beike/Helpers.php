@@ -71,6 +71,9 @@ function admin_name(): string
  */
 function load_settings()
 {
+    if (is_installer() || !file_exists(__DIR__ . '/../storage/installed')) {
+        return;
+    }
     $result = \Beike\Repositories\SettingRepo::getGroupedSettings();
     config(['bk' => $result]);
 }
@@ -219,6 +222,18 @@ function is_admin(): bool
     }
     return false;
 }
+
+
+/**
+ * 是否访问安装页面
+ * @return bool
+ */
+function is_installer(): bool
+{
+    $uri = request()->getRequestUri();
+    return Str::startsWith($uri, "/installer");
+}
+
 
 /**
  * 是否为当前访问路由
