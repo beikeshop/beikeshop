@@ -19,6 +19,7 @@ return [
      *
      */
     'welcome' => [
+        'templateTitle' => '欢迎',
         'title'   => '欢迎来到安装引导程序',
         'describe'   => '欢迎使用安装引导，在后面的步骤中我们将检测您的系统环境和安装条件是否达标，请根据每一步中的提示信息操作，谢谢。',
         'message' => '欢迎来到安装向导.',
@@ -31,6 +32,7 @@ return [
      *
      */
     'requirements' => [
+        'templateTitle' => '第一步 | 服务器环境',
         'title' => '系统环境要求检测',
         'environment' => '环境',
     ],
@@ -41,6 +43,7 @@ return [
      *
      */
     'permissions' => [
+        'templateTitle' => '第二步 | 目录权限',
         'title' => '目录权限检测',
         'table' => '目录',
         'next' => '配置环境参数',
@@ -53,6 +56,7 @@ return [
     *
     */
     'environment' => [
+        'templateTitle' => '第三步 | 系统参数',
         'title' => '系统参数配置',
         'app_url_label' => '您的应用URL',
         'database_link' => '数据库链接',
@@ -85,6 +89,7 @@ return [
      *
      */
     'final' => [
+        'templateTitle' => '安装完成',
         'title' => '获取安装结果',
         'finished' => '恭喜您，系统安装成功，赶快体验吧',
         'to_front' => '访问前台',

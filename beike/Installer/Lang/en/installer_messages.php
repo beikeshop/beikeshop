@@ -23,6 +23,7 @@ return [
      *
      */
     'welcome' => [
+        'templateTitle' => 'Welcome',
         'title' => 'Welcome',
         'describe'   => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
         'message' => 'Easy Installation and Setup Wizard.',
@@ -47,6 +48,7 @@ return [
      *
      */
     'permissions' => [
+        'templateTitle' => 'Step 2 | Directory Permission',
         'title' => 'Directory permission detection',
         'next' => 'Configure Environment',
         'table' => 'Table of contents',
@@ -59,6 +61,7 @@ return [
      *
      */
     'environment' => [
+        'templateTitle' => 'Step 3 | System Parameters',
         'title' => 'System parameter configuration',
         'name_required' => 'An environment name is required.',
         'database_link' => 'Database link',
