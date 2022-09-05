@@ -28,7 +28,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="tax_classes.length">
           <tr v-for="tax, index in tax_classes" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.title }}</td>
@@ -41,9 +41,8 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="5" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
-
-      {{-- {{ $tax_classes->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="{{ __('admin/tax_class.tax_classes_create') }}" :visible.sync="dialog.show" width="700px"

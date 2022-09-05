@@ -4,18 +4,10 @@
 
 @section('content')
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="account.wishlist.index" /> 
-
-    {{-- <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav> --}}
+    <x-shop-breadcrumb type="static" value="account.wishlist.index" />
 
     <div class="row">
-      <x-shop-sidebar/>
+      <x-shop-sidebar />
 
       <div class="col-12 col-md-9">
         <div class="card mb-4 h-min-600">
@@ -33,46 +25,56 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($wishlist as $item)
-                <tr data-id="{{ $item['id'] }}">
-                  <td><div class="wh-70"><img src="{{ $item['image'] }}" class="img-fluid"></div></td>
-                  <td>{{ $item['product_name'] }}</td>
-                  <td>{{ $item['price'] }}</td>
-                  <td class="text-end">
-                    <div class="">
-                      <a class="btn btn-dark btn-sm add-cart" href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
-                      <button class="btn btn-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                @endforeach
+                @if (count($wishlist))
+                  @foreach ($wishlist as $item)
+                    <tr data-id="{{ $item['id'] }}">
+                      <td>
+                        <div class="wh-70"><img src="{{ $item['image'] }}" class="img-fluid"></div>
+                      </td>
+                      <td>{{ $item['product_name'] }}</td>
+                      <td>{{ $item['price'] }}</td>
+                      <td class="text-end">
+                        <div class="">
+                          <a class="btn btn-dark btn-sm add-cart"
+                            href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
+                          <button class="btn btn-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  @endforeach
+                @else
+                  <tr>
+                    <td colspan="4" class="border-0">
+                      <x-shop-no-data />
+                    </td>
+                  </tr>
+                @endif
               </tbody>
             </table>
           </div>
         </div>
-        {{-- {{ $wishlist->links('shared/pagination/bootstrap-4') }} --}}
       </div>
     </div>
   </div>
 @endsection
 
 @push('add-scripts')
-<script>
-  $(document).ready(function() {
-    $('.remove-wishlist').click(function() {
-      const product_id = $(this).closest('tr').data('id');
+  <script>
+    $(document).ready(function() {
+      $('.remove-wishlist').click(function() {
+        const product_id = $(this).closest('tr').data('id');
 
-      $http.delete('account/wishlist/' + product_id).then((res) => {
-        if (res.status == 'success') {
-          $(this).closest('tr').fadeOut(function() {
-            $(this).remove();
-            if ($('.remove-wishlist').length == 0) {
-              location.reload();
-            }
-          });
-        }
-      })
+        $http.delete('account/wishlist/' + product_id).then((res) => {
+          if (res.status == 'success') {
+            $(this).closest('tr').fadeOut(function() {
+              $(this).remove();
+              if ($('.remove-wishlist').length == 0) {
+                location.reload();
+              }
+            });
+          }
+        })
+      });
     });
-  });
-</script>
+  </script>
 @endpush

@@ -56,7 +56,7 @@
               <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="customers.data.length">
           <tr v-for="customer, index in customers.data" :key="index">
             <td>@{{ customer.id }}</td>
             <td>@{{ customer.email }}</td>
@@ -79,9 +79,10 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
-      <el-pagination layout="prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
+      <el-pagination v-if="customers.data.length" layout="prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
         :total="customers.total"></el-pagination>
     </div>
 

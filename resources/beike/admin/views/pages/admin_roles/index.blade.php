@@ -15,7 +15,8 @@
   <div id="tax-classes-app" class="card">
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
-        <a href="{{ admin_route('admin_roles.create') }}" class="btn btn-primary">{{ __('admin/role.admin_roles_create') }}</a>
+        <a href="{{ admin_route('admin_roles.create') }}"
+          class="btn btn-primary">{{ __('admin/role.admin_roles_create') }}</a>
       </div>
       <table class="table">
         <thead>
@@ -28,18 +29,26 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($roles as $role)
-          <tr>
-            <td>{{ $role->id }}</td>
-            <td>{{ $role->name }}</td>
-            <td>{{ $role->created_at }}</td>
-            <td>{{ $role->updated_at }}</td>
-            <td class="text-end">
-              <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-              <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}" type="button">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-          @endforeach
+          @if (count($roles))
+            @foreach ($roles as $role)
+              <tr>
+                <td>{{ $role->id }}</td>
+                <td>{{ $role->name }}</td>
+                <td>{{ $role->created_at }}</td>
+                <td>{{ $role->updated_at }}</td>
+                <td class="text-end">
+                  <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}"
+                    class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                  <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}"
+                    type="button">{{ __('common.delete') }}</button>
+                </td>
+              </tr>
+            @endforeach
+          @else
+            <tr>
+              <td colspan="5" class="border-0"><x-admin-no-data /></td>
+            </tr>
+          @endif
         </tbody>
       </table>
     </div>
@@ -57,7 +66,7 @@
         btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
         area: ['400px'],
         btn2: () => {
-        $http.delete(`admin_roles/${id}`).then((res) => {
+          $http.delete(`admin_roles/${id}`).then((res) => {
             layer.msg(res.message);
             self.parents('tr').remove()
           })

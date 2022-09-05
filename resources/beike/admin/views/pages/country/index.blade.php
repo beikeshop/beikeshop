@@ -21,7 +21,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="country.data.length">
           <tr v-for="country, index in country.data" :key="index">
             <td>@{{ country.id }}</td>
             <td>@{{ country.name }}</td>
@@ -39,9 +39,10 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="8" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
-      <el-pagination layout="prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
+      <el-pagination v-if="country.data.length" layout="prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
         :total="country.total"></el-pagination>
     </div>
 

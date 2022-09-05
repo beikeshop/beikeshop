@@ -2,12 +2,7 @@
 
 @section('title', __('admin/common.product'))
 
-@push('header')
-  <script src="https://cdn.bootcdn.net/ajax/libs/underscore.js/1.13.3/underscore.min.js"></script>
-@endpush
-
 @section('content')
-
   @if ($errors->has('error'))
     <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
   @endif

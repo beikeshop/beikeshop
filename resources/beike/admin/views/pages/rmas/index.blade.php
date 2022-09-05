@@ -21,30 +21,35 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($rmas_format as $rma)
+            @if (count($rmas_format))
+              @foreach ($rmas_format as $rma)
+                <tr>
+                  <td>{{ $rma['name'] }}</td>
+                  <td>{{ $rma['email'] }}</td>
+                  <td>{{ $rma['telephone'] }}</td>
+                  <td>{{ $rma['product_name'] }}</td>
+                  <td>{{ $rma['model'] }}</td>
+                  <td>{{ $rma['quantity'] }}</td>
+                  <td>{{ $rma['type'] }}</td>
+                  <td>{{ $rma['status'] }}</td>
+                  <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}"
+                      class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                  </td>
+                </tr>
+              @endforeach
+            @else
               <tr>
-                <td>{{ $rma['name'] }}</td>
-                <td>{{ $rma['email'] }}</td>
-                <td>{{ $rma['telephone'] }}</td>
-                <td>{{ $rma['product_name'] }}</td>
-                <td>{{ $rma['model'] }}</td>
-                <td>{{ $rma['quantity'] }}</td>
-                <td>{{ $rma['type'] }}</td>
-                <td>{{ $rma['status'] }}</td>
-                <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                <td colspan="9" class="border-0">
+                  <x-admin-no-data />
                 </td>
               </tr>
-            @endforeach
+            @endif
           </tbody>
         </table>
         {{ $rmas->links('admin::vendor/pagination/bootstrap-4') }}
       @else
-      <x-admin-no-data/>
+        <x-admin-no-data />
       @endif
     </div>
   </div>
 @endsection
-
-@push('footer')
-  <script></script>
-@endpush

@@ -11,10 +11,10 @@
 @section('content')
   <div class="container" id="address-app">
 
-    <x-shop-breadcrumb type="static" value="account.addresses.index" /> 
+    <x-shop-breadcrumb type="static" value="account.addresses.index" />
 
     <div class="row">
-      <x-shop-sidebar/>
+      <x-shop-sidebar />
 
       <div class="col-12 col-md-9">
         <div class="card h-min-600">
@@ -22,19 +22,22 @@
             <h5 class="card-title">{{ __('shop/account.addresses.index') }}</h5>
           </div>
           <div class="card-body h-600">
-            <button class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i> {{ __('shop/account.addresses.add_address') }}</button>
+            <button v-if="addresses.length" class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
+              {{ __('shop/account.addresses.add_address') }}</button>
             <div class="addresses-wrap" v-cloak>
-              <div class="row">
-                <div class="col-6" v-for="address, index in addresses" :key="index" v-if="addresses.length">
+              <div class="row" v-if="addresses.length">
+                <div class="col-6" v-for="address, index in addresses" :key="index">
                   <div class="item">
                     <div class="name-wrap">
                       <span class="name">@{{ address.name }}</span>
                       <span class="phone">@{{ address.phone }}</span>
                     </div>
                     <div class="zipcode">@{{ address.zipcode }}</div>
-                    <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }} @{{ address.address_1 }}</div>
+                    <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
+                      @{{ address.address_1 }}</div>
                     <div class="address-bottom">
-                      <div><span class="badge bg-success" v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span></div>
+                      <div><span class="badge bg-success"
+                          v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span></div>
                       <div>
                         <a class="me-2" @click.stop="deleteAddress(index)">{{ __('shop/account.addresses.delete') }}</a>
                         <a @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</a>
@@ -43,6 +46,11 @@
                   </div>
                 </div>
               </div>
+              <div v-else class="text-center">
+                <x-shop-no-data />
+                <button class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
+                  {{ __('shop/account.addresses.add_address') }}</button>
+              </div>
             </div>
           </div>
         </div>
@@ -50,10 +58,10 @@
     </div>
 
     @include('shared.address-form', [
-      'address_form_key' => 'form',
-      'address_form_show' => 'editShow',
-      'address_form_rules' => 'rules'
-      ])
+        'address_form_key' => 'form',
+        'address_form_show' => 'editShow',
+        'address_form_rules' => 'rules',
+    ])
   </div>
 @endsection
 
@@ -70,7 +78,7 @@
         form: {
           name: '',
           phone: '',
-          country_id: @json((int)system_setting('base.country_id')),
+          country_id: @json((int) system_setting('base.country_id')),
           zipcode: '',
           zone_id: '',
           city: '',
@@ -87,19 +95,38 @@
         },
 
         rules: {
-          name: [{required: true, message: '{{ __('shop/account.addresses.enter_name') }}', trigger: 'blur'}, ],
-          phone: [{required: true, message: '{{ __('shop/account.addresses.enter_phone') }}', trigger: 'blur'}, ],
-          address_1: [{required: true, message: ' {{ __('shop/account.addresses.enter_address') }}', trigger: 'blur'}, ],
-          zone_id: [{required: true, message: '{{ __('shop/account.addresses.select_province') }}', trigger: 'blur'}, ],
-          city: [{required: true, message: '{{ __('shop/account.addresses.enter_city') }}', trigger: 'blur'}, ],
+          name: [{
+            required: true,
+            message: '{{ __('shop/account.addresses.enter_name') }}',
+            trigger: 'blur'
+          }, ],
+          phone: [{
+            required: true,
+            message: '{{ __('shop/account.addresses.enter_phone') }}',
+            trigger: 'blur'
+          }, ],
+          address_1: [{
+            required: true,
+            message: ' {{ __('shop/account.addresses.enter_address') }}',
+            trigger: 'blur'
+          }, ],
+          zone_id: [{
+            required: true,
+            message: '{{ __('shop/account.addresses.select_province') }}',
+            trigger: 'blur'
+          }, ],
+          city: [{
+            required: true,
+            message: '{{ __('shop/account.addresses.enter_city') }}',
+            trigger: 'blur'
+          }, ],
         }
       },
 
       // 实例被挂载后调用
-      mounted () {
-      },
+      mounted() {},
 
-      beforeMount () {
+      beforeMount() {
         this.countryChange(this.form.country_id);
       },
 
@@ -114,16 +141,17 @@
         },
 
         deleteAddress(index) {
-          this.$confirm('{{ __('shop/account.addresses.confirm_delete') }}', '{{ __('shop/account.addresses.hint') }}', {
-            confirmButtonText: '{{ __('common.confirm') }}',
-            cancelButtonText: '{{ __('common.cancel') }}',
-            type: 'warning'
-          }).then(() => {
+          this.$confirm('{{ __('shop/account.addresses.confirm_delete') }}',
+            '{{ __('shop/account.addresses.hint') }}', {
+              confirmButtonText: '{{ __('common.confirm') }}',
+              cancelButtonText: '{{ __('common.cancel') }}',
+              type: 'warning'
+            }).then(() => {
             $http.delete('/account/addresses/' + this.addresses[index].id).then((res) => {
               this.$message.success(res.message);
               this.addresses.splice(index, 1)
             })
-          }).catch(()=>{})
+          }).catch(() => {})
         },
 
         addressFormSubmit(form) {
@@ -162,13 +190,15 @@
           this.editIndex = null;
 
           Object.keys(this.form).forEach(key => this.form[key] = '')
-          this.form.country_id =  @json((int)system_setting('base.country_id'))
+          this.form.country_id = @json((int) system_setting('base.country_id'))
         },
 
         countryChange(e) {
           const self = this;
 
-          $http.get(`/countries/${e}/zones`, null, {hload:true}).then((res) => {
+          $http.get(`/countries/${e}/zones`, null, {
+            hload: true
+          }).then((res) => {
             this.source.zones = res.data.zones;
           })
         },

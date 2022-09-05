@@ -21,3 +21,4 @@ package-lock.json
 beike/node_modules
 /public/build/beike/*
 /public/install/css/*
+dist

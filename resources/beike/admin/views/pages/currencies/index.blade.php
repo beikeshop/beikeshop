@@ -22,7 +22,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="currencies.length">
           <tr v-for="language, index in currencies" :key="index">
             <td>@{{ language.id }}</td>
             <td>@{{ language.name }}</td>
@@ -41,6 +41,7 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
     </div>

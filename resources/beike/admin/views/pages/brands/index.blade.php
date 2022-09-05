@@ -20,7 +20,7 @@
             <th>{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="brands.data.length">
           <tr v-for="brand, index in brands.data" :key="index">
             <td>@{{ brand.id }}</td>
             <td>@{{ brand.name }}</td>
@@ -37,9 +37,10 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
-      <el-pagination layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
+      <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
         :total="brands.total"></el-pagination>
     </div>
 

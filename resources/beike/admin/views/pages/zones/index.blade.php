@@ -21,7 +21,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="zones.data.length">
           <tr v-for="zone, index in zones.data" :key="index">
             <td>@{{ zone.id }}</td>
             <td>@{{ zone.name }}</td>
@@ -39,9 +39,10 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
-      <el-pagination layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
+      <el-pagination v-if="zones.data.length" layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
         :total="zones.total"></el-pagination>
     </div>
 

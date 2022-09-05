@@ -19,7 +19,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="regions.length">
           <tr v-for="tax, index in regions" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
@@ -32,9 +32,8 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="6" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
-
-      {{-- {{ $regions->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="{{ __('admin/region.regions_create') }}" :visible.sync="dialog.show" width="700px"

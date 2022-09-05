@@ -45,7 +45,8 @@ export default {
     if (r != null) {
       return decodeURIComponent(r[2]);
     }
-    return defaultValue || '';
+
+    return typeof(defaultValue) != 'undefined' ? defaultValue : '';
   },
 
   stringLengthInte(text, length = 50) {

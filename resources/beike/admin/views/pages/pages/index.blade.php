@@ -25,25 +25,30 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($pages_format as $page)
-            <tr>
-              <td>{{ $page['id'] }}</td>
-              <td>
-                <div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div>
-              </td>
-              <td class="{{ $page['active'] ? 'text-success' : 'text-secondary'}}">
-                {{ $page['active'] ? __('common.enable') : __('common.disable') }}
-              </td>
-              <td>{{ $page['created_at'] }}</td>
-              <td>{{ $page['updated_at'] }}</td>
-              <td class="text-end">
-                <a href="{{ admin_route('pages.edit', [$page['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+          @if (count($pages_format))
+            @foreach ($pages_format as $page)
+              <tr>
+                <td>{{ $page['id'] }}</td>
+                <td>
+                  <div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div>
+                </td>
+                <td class="{{ $page['active'] ? 'text-success' : 'text-secondary' }}">
+                  {{ $page['active'] ? __('common.enable') : __('common.disable') }}
+                </td>
+                <td>{{ $page['created_at'] }}</td>
+                <td>{{ $page['updated_at'] }}</td>
+                <td class="text-end">
+                  <a href="{{ admin_route('pages.edit', [$page['id']]) }}"
+                    class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
 
-                <button class="btn btn-outline-danger btn-sm delete-btn" type='button'
-                  data-id="{{ $page['id'] }}">{{ __('common.delete') }}</button>
-              </td>
-            </tr>
-          @endforeach
+                  <button class="btn btn-outline-danger btn-sm delete-btn" type='button'
+                    data-id="{{ $page['id'] }}">{{ __('common.delete') }}</button>
+                </td>
+              </tr>
+            @endforeach
+          @else
+          <tr><td colspan="5" class="border-0"><x-admin-no-data /></td></tr>
+          @endif
         </tbody>
       </table>
 

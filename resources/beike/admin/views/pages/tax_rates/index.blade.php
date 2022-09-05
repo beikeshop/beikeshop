@@ -30,7 +30,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="tax_rates.length">
           <tr v-for="tax, index in tax_rates" :key="index">
             <td>@{{ tax.id }}</td>
             <td>@{{ tax.name }}</td>
@@ -45,6 +45,7 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
 
       {{-- {{ $tax_rates->links('admin::vendor/pagination/bootstrap-4') }} --}}

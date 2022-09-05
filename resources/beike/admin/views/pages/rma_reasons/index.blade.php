@@ -1,41 +1,3 @@
-{{-- @extends('admin::layouts.master')
-
-@section('title', '退换货原因')
-
-@section('content')
-  <div id="customer-app" class="card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">创建</button>
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>名称</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($rmaReasons as $rmaReason)
-            <tr>
-              <td>{{ $rmaReason->id }}</td>
-              <td>{{ $rmaReason->name }}</td>
-              <td><a href="{{ admin_route('rma_reasons.show', [$rmaReason->id]) }}"
-                  class="btn btn-outline-secondary btn-sm">查看</a></td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-  </div>
-@endsection
-
-@push('footer')
-  <script></script>
-@endpush --}}
-
-
 @extends('admin::layouts.master')
 
 @section('title', __('admin/common.rma_reasons_index'))
@@ -54,7 +16,7 @@
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-if="rmaReasons.length">
           <tr v-for="language, index in rmaReasons" :key="index">
             <td>@{{ language.id }}</td>
             <td>@{{ language.name }}</td>
@@ -64,6 +26,7 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-else><tr><td colspan="3" class="border-0"><x-admin-no-data /></td></tr></tbody>
       </table>
     </div>
 
@@ -71,10 +34,6 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        {{-- <el-form-item label="{{ __('common.name') }}" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
-        </el-form-item> --}}
-
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[

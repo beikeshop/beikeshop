@@ -7,16 +7,8 @@
 
     <x-shop-breadcrumb type="static" value="account.rma.index" />
 
-    {{-- <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav> --}}
-
-
     <div class="row">
-      <x-shop-sidebar/>
+      <x-shop-sidebar />
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
@@ -36,17 +28,25 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($rmas as $rma)
+                @if (count($rmas))
+                  @foreach ($rmas as $rma)
+                    <tr>
+                      <td>{{ sub_string($rma['product_name'], 80) }}</td>
+                      <td>{{ $rma['quantity'] }}</td>
+                      <td>{{ $rma['type'] }}</td>
+                      <td>{{ $rma['reason'] }}</td>
+                      <td>{{ $rma['created_at'] }}</td>
+                      <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
+                          class="btn btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
+                    </tr>
+                  @endforeach
+                @else
                   <tr>
-                    <td>{{ sub_string($rma['product_name'], 80) }}</td>
-                    <td>{{ $rma['quantity'] }}</td>
-                    <td>{{ $rma['type'] }}</td>
-                    <td>{{ $rma['reason'] }}</td>
-                    <td>{{ $rma['created_at'] }}</td>
-                    {{-- <td>{{ $rma['status'] }}</td> --}}
-                    <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
+                    <td colspan="6" class="border-0">
+                      <x-shop-no-data />
+                    </td>
                   </tr>
-                @endforeach
+                @endif
               </tbody>
             </table>
 
