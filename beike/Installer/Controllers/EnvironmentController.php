@@ -103,7 +103,7 @@ class EnvironmentController extends Controller
      * Validate database connection with user credentials (Form Wizard).
      *
      * @param Request $request
-     * @return bool
+     * @return array|bool
      */
     private function checkDatabaseConnection(Request $request)
     {
@@ -132,12 +132,16 @@ class EnvironmentController extends Controller
 
         DB::purge();
 
+        $result = [];
         try {
-            DB::connection()->getPdo();
-
+            $pdo = DB::connection()->getPdo();
+            $serverVersion = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            if (version_compare($serverVersion, '5.7', '>=')) {
+                $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
+                return $result;
+            }
             return true;
-        } catch (Exception $e) {
-            $result = [];
+        } catch (\PDOException $e) {
             switch ($e->getCode()) {
                 case 2002:
                     $result['database_hostname'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
@@ -151,9 +155,8 @@ class EnvironmentController extends Controller
                     $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
                     break;
                 default:
-
             }
-            return $result;
         }
+        return $result;
     }
 }

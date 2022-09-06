@@ -72,6 +72,7 @@ return [
         'db_connection_failed_host_port' => 'Database host or port error!',
         'db_connection_failed_user_password' => 'Database username or password error!',
         'db_connection_failed_database_name' => 'Database name not exist!',
+        'db_connection_failed_invalid_version' => 'MySQL version must grater than 5.7!',
         'app_environment_label_local' => 'Local',
         'app_environment_label_developement' => 'Development',
         'app_environment_label_qa' => 'Qa',

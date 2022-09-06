@@ -68,6 +68,7 @@ return [
         'db_connection_failed_host_port' => '数据库主机或端口错误！',
         'db_connection_failed_user_password' => '数据库账号或密码错误！',
         'db_connection_failed_database_name' => '数据库名不存在！',
+        'db_connection_failed_invalid_version' => '数据库版本必须大于5.7！',
         'db_connection_label_mysql' => 'MySQL',
         'db_connection_label_sqlite' => 'SQLite',
         'db_connection_label_pgsql' => 'PostgreSQL',
