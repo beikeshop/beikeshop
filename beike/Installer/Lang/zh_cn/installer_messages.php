@@ -35,6 +35,7 @@ return [
         'template_title' => '第一步 | 服务器环境',
         'title' => '系统环境要求检测',
         'environment' => '环境',
+        'next'    => '检测权限',
     ],
 
     /*
