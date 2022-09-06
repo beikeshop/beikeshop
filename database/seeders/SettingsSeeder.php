@@ -1562,7 +1562,7 @@ class SettingsSeeder extends Seeder
                     "social_network" => [
 
                     ],
-                    "logo" => "catalog\/logo.png",
+                    "logo" => "catalog/logo.png",
                     "text" => [
                         "zh_cn" => "<p style=\"line-height: 1.4;\"><strong>成都光大网络科技有限公司</strong></p>\n<p style=\"line-height: 1.4;\">是一家主要从事互联网开发的高科技企业,<\/p>\n<p style=\"line-height: 1.4;\">公司成立于2014年8月，公司以为客户创造</p>\n<p style=\"line-height: 1.4;\">价值为核心价值观，帮助中小企业利用互联</p>\n<p style=\"line-height: 1.4;\">网工具提升产品销售为目标。</p>",
                         "en" => "<p>Chengdu Guangda Network Technology Co., Ltd. is a high-tech enterprise mainly engaged in Internet development. The company was established in August 2014.</p>"
@@ -1623,7 +1623,7 @@ class SettingsSeeder extends Seeder
                     "zh_cn" => "<div>技术支持 <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - 成都光大网络科技 &copy; 2022</div>",
                     "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu Everbright Network Technology &copy; 2022</div>"
                 ],
-                "image" => "catalog\/demo\/banner\/pay_icons.png"
+                "image" => "catalog/demo/banner/pay_icons.png"
             ],
             "services" => [
                 "enable" => true,
@@ -1634,7 +1634,7 @@ class SettingsSeeder extends Seeder
                             "en" => "Material world"
                         ],
                         "show" => false,
-                        "image" => "catalog\/demo\/services-icon\/4.png",
+                        "image" => "catalog/demo/services-icon/4.png",
                         "sub_title" => [
                             "zh_cn" => "多仓直发 极速配送多仓直发 极速配送",
                             "en" => "Multi - warehouse fast delivery"
@@ -1646,7 +1646,7 @@ class SettingsSeeder extends Seeder
                             "en" => "Return all"
                         ],
                         "show" => false,
-                        "image" => "catalog\/demo\/services-icon\/3.png",
+                        "image" => "catalog/demo/services-icon/3.png",
                         "sub_title" => [
                             "zh_cn" => "放心购物 退还无忧放心购物 退还无忧",
                             "en" => "Rest assured shopping return worry"
@@ -1658,7 +1658,7 @@ class SettingsSeeder extends Seeder
                             "en" => "Delicate service"
                         ],
                         "show" => false,
-                        "image" => "catalog\/demo\/services-icon\/1.png",
+                        "image" => "catalog/demo/services-icon/1.png",
                         "sub_title" => [
                             "zh_cn" => "精致服务 售后保障精致服务 售后保障",
                             "en" => "Exquisite service and after-sales guarantee"
@@ -1670,7 +1670,7 @@ class SettingsSeeder extends Seeder
                             "en" => "With reduced activity"
                         ],
                         "show" => true,
-                        "image" => "catalog\/demo\/services-icon\/2.png",
+                        "image" => "catalog/demo/services-icon/2.png",
                         "sub_title" => [
                             "zh_cn" => "满500元立减90，新用户立减200",
                             "en" => "If 500 yuan is exceeded, a reduction of 90 yuan will be given"
