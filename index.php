@@ -10,4 +10,4 @@
  */
 
 $currentDir = getcwd();
-die("请将网站根目录设置为: {$currentDir}/public/");
+die("请修改 Apache 或 Nginx 配置, 将网站根目录设置为: {$currentDir}/public/");
