@@ -206,7 +206,10 @@
         url: 'environment/validate_db',
         type: 'POST',
         data: $('form :input[name!="admin_email"][name!="admin_password"]').serialize(),
-        beforeSend: function () {$('.database-loading').removeClass('d-none')},
+        beforeSend: function () {
+          $('.database-loading').removeClass('d-none')
+          $('.text-success').addClass('d-none')
+        },
         complete: function() {
           $('.database-loading').addClass('d-none');
         },
