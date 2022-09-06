@@ -94,17 +94,12 @@ class EnvironmentManager
     {
         $results = trans('installer::installer_messages.environment.success');
 
-        $app_url = 'http';
-        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
-        {
-            $app_url .= "s";
-        }
-        $app_url .= "://";
+        $appUrl = $_SERVER['REQUEST_SCHEME'] . "://";
         if ($_SERVER["SERVER_PORT"] != "80")
         {
-            $app_url .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] ;
+            $appUrl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] ;
         } else {
-            $app_url .= $_SERVER["SERVER_NAME"];
+            $appUrl .= $_SERVER["SERVER_NAME"];
         }
 
         $envFileData =
@@ -113,7 +108,7 @@ class EnvironmentManager
         'APP_KEY='.'base64:'.base64_encode(Str::random(32))."\n".
         'APP_DEBUG=true'."\n".
         'APP_LOG_LEVEL='.$request->app_log_level."\n".
-        'APP_URL='.$app_url."\n\n".
+        'APP_URL='.$appUrl."\n\n".
         'DB_CONNECTION='.$request->database_connection."\n".
         'DB_HOST='.$request->database_hostname."\n".
         'DB_PORT='.$request->database_port."\n".
