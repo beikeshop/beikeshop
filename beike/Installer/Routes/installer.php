@@ -21,6 +21,7 @@ Route::prefix('installer')
                 Route::get('lang/{lang}', [WelcomeController::class, 'locale'])->name('lang.switch');
                 Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
                 Route::post('environment/save', [EnvironmentController::class, 'saveWizard'])->name('environment.save');
+                Route::post('environment/validate_db', [EnvironmentController::class, 'validateDatabase'])->name('environment.validate_db');
                 Route::get('database', [DatabaseController::class, 'index'])->name('database');
                 Route::get('final', [FinalController::class, 'index'])->name('final');
             });

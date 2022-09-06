@@ -58,7 +58,7 @@ class EnvironmentController extends Controller
             return $redirect->route('installer.environment')->withInput()->withErrors($validator->errors());
         }
 
-        if (! $this->checkDatabaseConnection($request)) {
+        if ($this->checkDatabaseConnection($request) !== true) {
             return $redirect->route('installer.environment')->withInput()->withErrors([
                 'database_connection' => trans('installer::installer_messages.environment.db_connection_failed'),
             ]);
@@ -73,6 +73,28 @@ class EnvironmentController extends Controller
 
         return redirect(route('installer.database', $params));
     }
+
+    public function validateDatabase(Request $request)
+    {
+        $rules = config('installer.environment.form.rules');
+        $messages = [
+            'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return json_fail('', $validator->errors());
+        }
+
+        $dbValidateResult = $this->checkDatabaseConnection($request);
+        if ($dbValidateResult !== true) {
+            return json_fail('', $dbValidateResult);
+        }
+
+        return json_success('');
+    }
+
 
     /**
      * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
@@ -110,9 +132,26 @@ class EnvironmentController extends Controller
 
         try {
             DB::connection()->getPdo();
+
+            return true;
         } catch (Exception $e) {
-            dd($e);
-            return false;
+            $result = [];
+            switch ($e->getCode()) {
+                case 2002:
+                    $result['database_hostname'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
+                    $result['database_port'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
+                    break;
+                case 1045:
+                    $result['database_username'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
+                    $result['database_password'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
+                    break;
+                case 1049:
+                    $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
+                    break;
+                default:
+
+            }
+            return $result;
         }
     }
 }
