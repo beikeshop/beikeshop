@@ -101,6 +101,7 @@ return [
         'install' => 'Install',
         'ajax_database_parameters' => 'Check database parameters...',
         'ajax_database_success' => 'Database connection succeeded',
+        'error_email' => 'Please fill in the correct email address',
     ],
 
 

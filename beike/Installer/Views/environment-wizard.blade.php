@@ -110,9 +110,9 @@
             {{ trans($entry_key . 'admin_email') }}
           </label>
           <input class="form-control {{ $errors->has('admin_email') ? 'is-invalid' : '' }}" name="admin_email"
-            value="{{ old('admin_email', 'admin') }}" required placeholder="{{ trans($entry_key . 'admin_email') }}">
+            value="{{ old('admin_email', 'root@example.com') }}" type="email" required placeholder="{{ trans($entry_key . 'admin_email') }}">
           <span class="invalid-feedback"
-            role="alert">{{ $errors->has('admin_email') ? $errors->first('admin_email') : __('common.error_required', ['name' => trans($entry_key . 'admin_email')]) }}</span>
+            role="alert">{{ $errors->has('admin_email') ? $errors->first('admin_email') : __('installer::installer_messages.environment.error_email') }}</span>
         </div>
 
         <div class="col-sm-6">

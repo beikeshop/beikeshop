@@ -87,6 +87,7 @@ return [
         'install' => '安装',
         'ajax_database_parameters' => '检测数据库参数...',
         'ajax_database_success' => '数据库连接成功',
+        'error_email' => '请填写正确的邮箱地址',
     ],
 
     /*
