@@ -85,6 +85,8 @@ return [
         'admin_email' => '后台账号',
         'admin_password' => '后台密码',
         'install' => '安装',
+        'ajax_database_parameters' => '检测数据库参数...',
+        'ajax_database_success' => '数据库连接成功',
     ],
 
     /*

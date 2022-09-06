@@ -99,6 +99,8 @@ return [
         'admin_email' => 'Admin User Account',
         'admin_password' => 'Admin Password',
         'install' => 'Install',
+        'ajax_database_parameters' => 'Check database parameters...',
+        'ajax_database_success' => 'Database connection succeeded',
     ],
 
 

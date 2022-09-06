@@ -25,10 +25,10 @@
             <h5 class="mb-0">{{ __('installer::installer_messages.environment.database_link') }}</h5>
             <div class="d-none ms-3 database-loading">
               <div class="spinner-border spinner-border-sm text-muted"></div>
-              <span class="text-muted">检测数据库参数...</span>
+              <span class="text-muted">{{ __('installer::installer_messages.environment.ajax_database_parameters') }}</span>
             </div>
             <div class="text-success d-flex align-items-center ms-3 d-none"><i
-                class="bi bi-check-lg me-2 fs-4 lh-1"></i>数据库连接成功</div>
+                class="bi bi-check-lg me-2 fs-4 lh-1"></i>{{ __('installer::installer_messages.environment.ajax_database_success') }}</div>
           </div>
           <hr class="mb-0">
         </div>
@@ -181,7 +181,7 @@
     function isDatabaseInputVal() {
       let isDate = true;
       $('.database-link-wrap input').each((index, el) => {
-        if ($(el).val() == '') {
+        if ($(el).val() == '' && $(el).prop('name') != 'database_password') {
           isDate = false;
         }
       })
