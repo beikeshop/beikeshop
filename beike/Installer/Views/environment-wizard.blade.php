@@ -28,10 +28,10 @@
               <span class="text-muted">{{ __('installer::installer_messages.environment.ajax_database_parameters') }}</span>
             </div>
             <div class="text-danger d-flex align-items-center ms-3 d-none">
-              <i class="bi bi-x-lg fs-5 lh-1 me-1"></i><span></span>
+              <i class="bi bi-x-circle-fill fs-5 lh-1 me-1"></i><span></span>
             </div>
             <div class="text-success d-flex align-items-center ms-3 d-none"><i
-                class="bi bi-check-lg me-1 fs-4 lh-1"></i>{{ __('installer::installer_messages.environment.ajax_database_success') }}</div>
+                class="bi bi-check-circle-fill me-1 fs-4 lh-1"></i>{{ __('installer::installer_messages.environment.ajax_database_success') }}</div>
           </div>
           <hr class="mb-0">
         </div>
@@ -156,6 +156,10 @@
 
       if ($('input[name="admin_email"]').hasClass('is-invalid')) {
         $('.admin-data-wrap').removeClass('d-none')
+      }
+
+      if ($('.content > .alert-danger').length) {
+        getDatabaseStatus()
       }
 
       $('#submit-button').click(function() {
