@@ -81,6 +81,8 @@ class EnvironmentController extends Controller
             'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
         ];
 
+        unset($rules['admin_email']);
+        unset($rules['admin_password']);
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
