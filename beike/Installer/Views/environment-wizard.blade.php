@@ -27,8 +27,11 @@
               <div class="spinner-border spinner-border-sm text-muted"></div>
               <span class="text-muted">{{ __('installer::installer_messages.environment.ajax_database_parameters') }}</span>
             </div>
+            <div class="text-danger d-flex align-items-center ms-3 d-none">
+              <i class="bi bi-x-lg fs-5 lh-1 me-1"></i><span></span>
+            </div>
             <div class="text-success d-flex align-items-center ms-3 d-none"><i
-                class="bi bi-check-lg me-2 fs-4 lh-1"></i>{{ __('installer::installer_messages.environment.ajax_database_success') }}</div>
+                class="bi bi-check-lg me-1 fs-4 lh-1"></i>{{ __('installer::installer_messages.environment.ajax_database_success') }}</div>
           </div>
           <hr class="mb-0">
         </div>
@@ -218,7 +221,7 @@
         data: $('form :input[name!="admin_email"][name!="admin_password"]').serialize(),
         beforeSend: function () {
           $('.database-loading').removeClass('d-none')
-          $('.text-success').addClass('d-none')
+          $('.title-status .text-success, .title-status .text-danger').addClass('d-none')
         },
         complete: function() {
           $('.database-loading').addClass('d-none');
@@ -230,6 +233,10 @@
             data.forEach((e)=> {
               $('.database-link-wrap input[name="' + e + '"]').addClass('is-invalid').next('.invalid-feedback').text(json.data[e])
             })
+
+            if (json.data.database_version) {
+              $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_version);
+            }
 
             $('.admin-data-wrap').addClass('d-none')
           }
