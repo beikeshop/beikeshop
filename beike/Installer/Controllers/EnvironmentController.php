@@ -64,12 +64,9 @@ class EnvironmentController extends Controller
             ]);
         }
 
-        $results = $this->EnvironmentManager->saveFileWizard($request);
+        $this->EnvironmentManager->saveFileWizard($request);
 
-        $params = [
-            'admin_email' => $request->get('admin_email'),
-            'admin_password' => $request->get('admin_password'),
-        ];
+        $params = $request->all();
 
         return redirect(route('installer.database', $params));
     }
@@ -122,7 +119,7 @@ class EnvironmentController extends Controller
                         'database' => $request->input('database_name'),
                         'username' => $request->input('database_username'),
                         'password' => $request->input('database_password'),
-                        'options'   => [
+                        'options' => [
                             \PDO::ATTR_TIMEOUT => 1,
                         ],
                     ]),
