@@ -98,6 +98,9 @@ class EnvironmentController extends Controller
                         'database' => $request->input('database_name'),
                         'username' => $request->input('database_username'),
                         'password' => $request->input('database_password'),
+                        'options'   => [
+                            \PDO::ATTR_TIMEOUT => 1,
+                        ],
                     ]),
                 ],
             ],
@@ -107,9 +110,8 @@ class EnvironmentController extends Controller
 
         try {
             DB::connection()->getPdo();
-
-            return true;
         } catch (Exception $e) {
+            dd($e);
             return false;
         }
     }
