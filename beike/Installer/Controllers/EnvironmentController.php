@@ -136,7 +136,7 @@ class EnvironmentController extends Controller
         try {
             $pdo = DB::connection()->getPdo();
             $serverVersion = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
-            if (version_compare($serverVersion, '5.7', '>=')) {
+            if (version_compare($serverVersion, '5.7', '<')) {
                 $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
                 return $result;
             }
