@@ -59,7 +59,7 @@
             <li class="{{ $steps == 5 ? 'ing' : '' }} {{ $steps > 5 ? 'success' : '' }}">
               <div class="left">
                 <span class="index">@if ($steps > 5 && $steps != 5) <i class="bi bi-check-lg"></i> @else 5 @endif</span>
-                {{ __('installer::installer_messages.final.title') }}
+                {{ __('installer::installer_messages.final.template_title') }}
               </div>
               <span class="right"><i class="bi bi-arrow-right-short"></i></span>
             </li>
