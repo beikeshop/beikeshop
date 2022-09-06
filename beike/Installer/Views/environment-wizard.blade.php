@@ -149,6 +149,10 @@
           debounce(getDatabaseStatus, 500)
         }
       })
+
+      if ($('input[name="admin_email"]').hasClass('is-invalid')) {
+        $('.admin-data-wrap').removeClass('d-none')
+      }
     })
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
