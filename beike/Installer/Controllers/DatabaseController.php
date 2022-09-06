@@ -39,10 +39,15 @@ class DatabaseController extends Controller
         }
         DB::statement("SET FOREIGN_KEY_CHECKS = 1");
 
+        $params = request()->all();
         try {
             $response = $this->databaseManager->migrateAndSeed();
+            $status = $response['status'] ?? '';
+            $message = $response['message'] ?? '';
+            if ($status == 'error' && $message) {
+                return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' => $message]);
+            }
         } catch (\Exception $e) {
-            $params = request()->all();
             return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' => $e->getMessage()]);
         }
 
