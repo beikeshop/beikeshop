@@ -94,7 +94,18 @@ class EnvironmentManager
     {
         $results = trans('installer::installer_messages.environment.success');
 
-        $app_url = $_SERVER['APP_URL'];
+        $app_url = 'http';
+        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+        {
+            $app_url .= "s";
+        }
+        $app_url .= "://";
+        if ($_SERVER["SERVER_PORT"] != "80")
+        {
+            $app_url .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] ;
+        } else {
+            $app_url .= $_SERVER["SERVER_NAME"];
+        }
 
         $envFileData =
         'APP_NAME=\''.$request->app_name."'\n".
