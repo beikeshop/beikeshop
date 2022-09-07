@@ -162,9 +162,11 @@
         getDatabaseStatus()
       }
 
-      $('#submit-button').click(function() {
-        $(this).prop('disabled', true).addClass('text-white').find('span').removeClass('d-none')
-      })
+      // $('#submit-button').click(function() {
+      //   setTimeout(() => {
+      //     $(this).prop('disabled', true).addClass('text-white').find('span').removeClass('d-none')
+      //   }, 0);
+      // })
     })
 
     // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -173,18 +175,16 @@
 
       // Loop over them and prevent submission
       Array.prototype.slice.call(forms).forEach(function(form) {
-        form.addEventListener(
-          "submit",
-          function(event) {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
+        form.addEventListener("submit", function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          } else {
+            $("#submit-button").prop('disabled', true).addClass('text-white').find('span').removeClass('d-none')
+          }
 
-            form.classList.add("was-validated");
-          },
-          false
-        );
+          form.classList.add("was-validated");
+        }, false);
       });
     });
 
