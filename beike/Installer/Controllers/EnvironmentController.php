@@ -140,6 +140,9 @@ class EnvironmentController extends Controller
             return true;
         } catch (\PDOException $e) {
             switch ($e->getCode()) {
+                case 1115:
+                    $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
+                    break;
                 case 2002:
                     $result['database_hostname'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
                     $result['database_port'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
