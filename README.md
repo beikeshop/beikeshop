@@ -38,10 +38,11 @@ PHP语言开发，基于 Laravel 框架，前端采用Vue
 
 ## 安装教程(面向开发者)
 1. git clone https://gitee.com/beikeshop/beikeshop.git
-1. 命令行进入beikeshop目录, 执行 `composer install`
+1. 命令行进入beikeshop目录, 执行 `composer install` 安装第三方包
+1. 接着执行 `cp .env.example .env` 创建配置文件
+1. 接着执行 `npm install` 以及 `npm run dev` 编译前端 js 和 css 文件
 1. 将项目文件夹下的 public 设置为网站根目录
-1. 命令行进入beikeshop目录, 执行 `npm install` 以及 `npm run dev`
-1. 通过浏览器访问网站根据提示完成安装
+1. 通过浏览器访问网站, 根据提示完成安装
 
 ## 参与贡献
 1. Fork 本仓库
