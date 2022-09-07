@@ -152,6 +152,7 @@ class EnvironmentController extends Controller
                     $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
                     break;
                 default:
+                    $result['database_other'] = $e->getMessage();
             }
         }
         return $result;
