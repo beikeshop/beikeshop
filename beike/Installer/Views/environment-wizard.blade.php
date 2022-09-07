@@ -131,7 +131,7 @@
 
         <div class="col-sm-12 my-5">
           <div class="d-flex justify-content-end">
-            <button class="btn btn-primary d-flex align-items-center" id="submit-button" type="button">
+            <button class="btn btn-primary d-flex align-items-center" id="submit-button" type="submit">
               <span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
               {{ trans('installer::installer_messages.environment.install') }}
               <i class="bi bi-arrow-right-short fs-2 lh-1 ms-2"></i>
@@ -164,7 +164,6 @@
 
       $('#submit-button').click(function() {
         $(this).prop('disabled', true).addClass('text-white').find('span').removeClass('d-none')
-        $('#environment-form').submit();
       })
     })
 
