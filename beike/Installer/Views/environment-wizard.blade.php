@@ -242,6 +242,10 @@
               $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_version);
             }
 
+            if (json.data.database_other) {
+              $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_other);
+            }
+
             $('.admin-data-wrap').addClass('d-none')
           }
 
