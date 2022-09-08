@@ -105,12 +105,12 @@ class Sidebar extends Component
     private function getHomeSubRoutes()
     {
         $routes = [
-            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
             ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
             ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.home_routes', $routes);
     }
