@@ -121,7 +121,10 @@
         <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
           <div class="info">
             <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
-            <div class="status">@{{ image.status == 'complete' ? '完成' : '上传中' }}</div>
+            <div class="status">
+              <span v-if="image.status == 'complete'">{{ __('admin/file_manager.finish') }}</span>
+              <span v-else>{{ __('admin/file_manager.uploading') }}</span>
+            </div>
           </div>
           <el-progress :percentage="image.progre" :show-text="false" :stroke-width="4"></el-progress>
         </div>
@@ -397,7 +400,7 @@
         },
 
         deleteFile() {
-          this.$confirm('是否要删除选中文件', '提示', {
+          this.$confirm('{{ __('common.confirm_delete_file') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             const selectImageIndex = this.selectImageIndex;
@@ -422,7 +425,7 @@
 
         deleteFolder(node, data) {
           if (data.path) {
-            this.$confirm('正在进行删除文件夹操作，文件夹内所有文件都将被删除，是否确认？', '提示', {
+            this.$confirm('{{ __('admin/file_manager.confirm_delete_folder') }}', '{{ __('common.text_hint') }}', {
               type: 'warning'
             }).then(() => {
               $http.delete(`file_manager/directories`, {
@@ -459,14 +462,14 @@
         },
 
         openInputBox(type, node, data) {
-          this.$prompt('', type == 'addFolder' ? '新建文件夹' : '重命名', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$prompt('', type == 'addFolder' ? '{{ __('admin/file_manager.new_folder') }}' : '{{ __('admin/file_manager.rename') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             inputPattern: /^.+$/,
             closeOnClickModal: false,
             inputValue: type == 'image' ? this.images[this.selectImageIndex].name : (type == 'renameFolder' ? data
-              .name : '新建文件夹'),
-            inputErrorMessage: '不能为空'
+              .name : '{{ __('admin/file_manager.new_folder') }}'),
+            inputErrorMessage: '{{ __('admin/file_manager.can_empty') }}'
           }).then(({
             value
           }) => {

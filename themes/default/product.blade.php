@@ -79,6 +79,7 @@
                   @click="checkedVariableValue(variable_index, value_index, value)"
                   :key="value_index"
                   :class="[value.selected ? 'selected' : '', value.disabled ? 'disabled' : '']">
+                  <span class="image" v-if="value.image"><img :src="value.image" class="img-fluid"></span>
                   @{{ value.name }}
                 </div>
               </div>

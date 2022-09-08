@@ -25,4 +25,11 @@ return [
     'image_uploading' => '图片上传中',
     'no_file' => '没有文件',
     'picture_space' => '图片空间',
+
+    'confirm_delete_file' => '是否要删除选中文件',
+    'confirm_delete_folder' => '正在进行删除文件夹操作，文件夹内所有文件都将被删除，是否确认？',
+    'new_folder' => '新建文件夹',
+    'can_empty' => '不能为空',
+    'finish' => '完成',
+    'uploading' => '上传中',
 ];

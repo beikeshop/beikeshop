@@ -60,7 +60,7 @@ class ProductDetail extends JsonResource
                 'values' => array_map(function ($item) use ($lang) {
                     return [
                         'name' => $item['name'][$lang] ?? '',
-                        'image' => image_resize('catalog/' . $item['image']),
+                        'image' => $item['image'] ? image_resize($item['image']) : '',
                     ];
                 }, $item['values']),
             ];

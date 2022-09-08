@@ -117,10 +117,19 @@ body.page-product {
         cursor: pointer;
         text-align: center;
         font-weight: bold;
+        flex-direction: column;
         // border-radius: 2rem;
         transition: all .1s ease-in-out;
         &:hover, &.selected {
           border-color: #222;
+        }
+
+        > span.image {
+          width: 50px;
+          margin-top: -0.5rem;
+          margin-left: -0.5rem;
+          margin-right: -0.5rem;
+          margin-bottom: 6px;
         }
 
         &:not(.selected) {
