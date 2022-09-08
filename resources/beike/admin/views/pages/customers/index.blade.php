@@ -162,8 +162,6 @@
       },
 
       mounted () {
-        const customerGroupAll = {id:'', name: '{{ __('common.all') }}'}
-        this.source.customer_group.unshift(customerGroupAll);
       },
 
       watch: {
