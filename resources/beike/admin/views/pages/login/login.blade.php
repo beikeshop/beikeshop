@@ -23,7 +23,7 @@
               @csrf
 
               <div class="form-floating mb-4">
-                <input type="text" name="email" class="form-control" id="email-input" value="{{ old('email') }}" placeholder="邮箱地址">
+                <input type="text" name="email" class="form-control" id="email-input" value="{{ old('email', $admin_email) }}" placeholder="{{ __('common.email') }}">
                 <label for="email-input">{{ __('common.email') }}</label>
                 @error('email')
                   <x-admin::form.error :message="$message" />
@@ -31,7 +31,7 @@
               </div>
 
               <div class="form-floating mb-5">
-                <input type="password" name="password" class="form-control" id="password-input" placeholder="{{ __('shop/login.password') }}">
+                <input type="password" name="password" class="form-control" id="password-input" value="{{ old('password', $admin_password) }}" placeholder="{{ __('shop/login.password') }}">
                 <label for="password-input">{{ __('shop/login.password') }}</label>
                 @error('password')
                   <x-admin::form.error :message="$message" />
