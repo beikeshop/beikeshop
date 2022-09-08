@@ -27,9 +27,11 @@ class CountriesSeeder extends Seeder
 
         if ($items) {
             Country::query()->truncate();
-            foreach ($items as $item) {
-                Country::query()->create($item);
-            }
+            Country::query()->insert(collect($items)->map(function ($item) {
+                $item['created_at'] = now();
+                $item['updated_at'] = now();
+                return $item;
+            })->toArray());
         }
     }
 
