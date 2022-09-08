@@ -12,9 +12,10 @@ class Input extends Component
     public string $error;
     public string $width;
     public string $type;
+    public string $step;
     public bool $required;
 
-    public function __construct(string $name, string $title, ?string $value, bool $required = false, ?string $error = '', ?string $width = '400', ?string $type = 'text')
+    public function __construct(string $name, string $title, ?string $value, bool $required = false, ?string $error = '', ?string $width = '400', ?string $type = 'text', ?string $step = '')
     {
         $this->name = $name;
         $this->title = $title;
@@ -22,6 +23,7 @@ class Input extends Component
         $this->error = $error;
         $this->width = $width;
         $this->type = $type;
+        $this->step = $step;
         $this->required = $required;
     }
 

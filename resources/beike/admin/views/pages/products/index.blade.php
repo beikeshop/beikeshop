@@ -33,7 +33,7 @@
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.category') }}</label>
               <select v-model="filter.category_id" class="form-control">
-                <option value="0">{{ __('common.all') }}</option>
+                <option value="">{{ __('common.all') }}</option>
                 @foreach ($categories as $_category)
                   <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
                 @endforeach
