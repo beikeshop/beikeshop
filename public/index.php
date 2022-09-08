@@ -3,6 +3,17 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
+$basePath = getcwd() . '/';
+$htaPath = $basePath . '.htaccess';
+$htaExamplePath = $basePath . 'htaccess.txt';
+if (!file_exists($htaPath)) {
+    if (file_exists($htaExamplePath)) {
+        copy($htaExamplePath, $htaPath);
+    } else {
+        touch($htaPath);
+    }
+}
+
 if (!file_exists(__DIR__ . '/../storage/installed')
     && (!isset($_SERVER['REDIRECT_URL']) || substr($_SERVER['REDIRECT_URL'], 0, 10) != '/installer')
     && (stripos($_SERVER['REQUEST_URI'], '_debugbar') !== 1)) {
@@ -11,7 +22,9 @@ if (!file_exists(__DIR__ . '/../storage/installed')
 }
 
 if (version_compare(PHP_VERSION, '8.0.2', '<') == true) {
-    exit('PHP8.0.2+ Required');
+    echo 'Your current version of PHP does not meet the requirements. Upgrade to at least version 8.0.2 <br/>';
+    echo '您当前PHP版本不满足要求，至少升级至8.0.2版本';
+    exit;
 }
 
 define('LARAVEL_START', microtime(true));
