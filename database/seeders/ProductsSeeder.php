@@ -30,8 +30,8 @@ class ProductsSeeder extends Seeder
         if ($products) {
             Product::query()->truncate();
             foreach ($products as $item) {
-                $item['images'] = json_decode($item['images']);
-                $item['variables'] = json_decode($item['variables']);
+                $item['images'] = json_decode($item['images'] ?? '');
+                $item['variables'] = json_decode($item['variables'] ?? '');
                 Product::query()->create($item);
             }
         }
@@ -57,6 +57,7 @@ class ProductsSeeder extends Seeder
             ProductSku::query()->truncate();
             foreach ($skus as $item) {
                 $item['images'] = json_decode($item['images']);
+                $item['variants'] = json_decode($item['variants']);
                 ProductSku::query()->create($item);
             }
         }
@@ -73,7 +74,7 @@ class ProductsSeeder extends Seeder
                 "images" => "[\"catalog/demo/product/1.jpg\", \"catalog/demo/product/2.jpg\", \"catalog/demo/product/4.jpg\"]",
                 "position" => 0,
                 "active" => 1,
-                "variables" => "[{\"name\"=>{\"en\"=>\"chima\", \"zh_cn\"=>\"尺码\"], \"values\"=>[{\"name\"=>{\"en\"=>\"L\", \"zh_cn\"=>\"L\"], \"image\"=>\"\"], {\"name\"=>{\"en\"=>\"M\", \"zh_cn\"=>\"M\"], \"image\"=>\"\"}], \"isImage\"=>false], {\"name\"=>{\"en\"=>\"yanse\", \"zh_cn\"=>\"颜色\"], \"values\"=>[{\"name\"=>{\"en\"=>\"黄色\", \"zh_cn\"=>\"黄色\"], \"image\"=>\"catalog/app/icon/3.png\"], {\"name\"=>{\"en\"=>\"绿色\", \"zh_cn\"=>\"绿色\"], \"image\"=>\"catalog/app/icon/8.png\"}], \"isImage\"=>false}]",
+                "variables" => "[{\"name\": {\"en\": \"chima\", \"zh_cn\": \"尺码\"}, \"values\": [{\"name\": {\"en\": \"L\", \"zh_cn\": \"L\"}, \"image\": \"\"}, {\"name\": {\"en\": \"M\", \"zh_cn\": \"M\"}, \"image\": \"\"}], \"isImage\": false}, {\"name\": {\"en\": \"yanse\", \"zh_cn\": \"颜色\"}, \"values\": [{\"name\": {\"en\": \"黄色\", \"zh_cn\": \"黄色\"}, \"image\": \"catalog/app/icon/3.png\"}, {\"name\": {\"en\": \"绿色\", \"zh_cn\": \"绿色\"}, \"image\": \"catalog/app/icon/8.png\"}], \"isImage\": false}]",
                 "tax_class_id" => 1,
             ],
             [
@@ -233,7 +234,7 @@ class ProductsSeeder extends Seeder
                 "images" => "[\"catalog/demo/product/11.jpg\", \"catalog/demo/product/12.jpg\", \"catalog/demo/product/13.jpg\", \"catalog/demo/product/14.jpg\", \"catalog/demo/product/15.jpg\", \"catalog/demo/product/16.jpg\", \"catalog/demo/product/17.jpg\", \"catalog/demo/product/18.jpg\", \"catalog/demo/product/2.jpg\"]",
                 "position" => 1,
                 "active" => 1,
-                "variables" => "[{\"name\"=>{\"en\"=>\"color\", \"zh_cn\"=>\"颜色\"], \"values\"=>[{\"name\"=>{\"en\"=>\"yellow\", \"zh_cn\"=>\"黄色\"], \"image\"=>\"\"], {\"name\"=>{\"en\"=>\"green\", \"zh_cn\"=>\"绿色\"], \"image\"=>\"\"}], \"isImage\"=>true], {\"name\"=>{\"en\"=>\"规格\", \"zh_cn\"=>\"规格\"], \"values\"=>[{\"name\"=>{\"en\"=>\"450ML\", \"zh_cn\"=>\"450ML\"], \"image\"=>\"\"], {\"name\"=>{\"en\"=>\"500ml\", \"zh_cn\"=>\"500ml\"], \"image\"=>\"\"}], \"isImage\"=>false}]",
+                "variables" => "[{\"name\": {\"en\": \"color\", \"zh_cn\": \"颜色\"}, \"values\": [{\"name\": {\"en\": \"yellow\", \"zh_cn\": \"黄色\"}, \"image\": \"\"}, {\"name\": {\"en\": \"green\", \"zh_cn\": \"绿色\"}, \"image\": \"\"}], \"isImage\": true}, {\"name\": {\"en\": \"规格\", \"zh_cn\": \"规格\"}, \"values\": [{\"name\": {\"en\": \"450ML\", \"zh_cn\": \"450ML\"}, \"image\": \"\"}, {\"name\": {\"en\": \"500ml\", \"zh_cn\": \"500ml\"}, \"image\": \"\"}], \"isImage\": false}]",
                 "tax_class_id" => 1,
             ]
         ];
@@ -246,92 +247,66 @@ class ProductsSeeder extends Seeder
                 "id" => 1,
                 "product_id" => 2,
                 "category_id" => 100000,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 3,
                 "product_id" => 2,
                 "category_id" => 100002,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 4,
                 "product_id" => 2,
                 "category_id" => 100003,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 5,
                 "product_id" => 2,
                 "category_id" => 100004,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 6,
                 "product_id" => 2,
                 "category_id" => 100005,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 7,
                 "product_id" => 2,
                 "category_id" => 100008,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 8,
                 "product_id" => 2,
                 "category_id" => 100007,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 9,
                 "product_id" => 2,
                 "category_id" => 100009,
-                "created_at" => "2022-08-11 08:57:19",
-                "updated_at" => "2022-08-11 08:57:19"
             ],
             [
                 "id" => 10,
                 "product_id" => 14,
                 "category_id" => 100000,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
             ],
             [
                 "id" => 12,
                 "product_id" => 14,
                 "category_id" => 100002,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
             ],
             [
                 "id" => 13,
                 "product_id" => 14,
                 "category_id" => 100003,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
             ],
             [
                 "id" => 14,
                 "product_id" => 14,
                 "category_id" => 100004,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
             ],
             [
                 "id" => 15,
                 "product_id" => 14,
                 "category_id" => 100005,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
             ],
             [
                 "id" => 16,
