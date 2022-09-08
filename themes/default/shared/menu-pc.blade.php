@@ -33,7 +33,7 @@
                       @else
                         <ul class="nav flex-column ul-children">
                           @foreach ($group['children'] as $children)
-                            @if (!is_array($children['link']['text']))
+                            @if (!is_array($children['link']['text']) && $children['link']['text'])
                               <li class="nav-item">
                                 <a
                                 target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}"
