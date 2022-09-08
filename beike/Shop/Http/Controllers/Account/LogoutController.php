@@ -24,9 +24,7 @@ class LogoutController extends Controller
 {
     public function index(Request $request)
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
+        Auth::guard(Customer::AUTH_GUARD)->logout();
 
         $request->session()->regenerateToken();
 
