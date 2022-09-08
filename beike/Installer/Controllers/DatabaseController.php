@@ -61,6 +61,6 @@ class DatabaseController extends Controller
         ];
         AdminUserRepo::createAdminUser($data);
 
-        return redirect()->route('installer.final')->with(['message' => $response]);
+        return redirect()->route('installer.final', request()->only('admin_email', 'admin_password'))->with(['message' => $response]);
     }
 }

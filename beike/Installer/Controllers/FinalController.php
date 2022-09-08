@@ -25,6 +25,10 @@ class FinalController extends Controller
 
         $steps = 5;
 
-        return view('installer::finished', compact('finalMessages', 'finalStatusMessage', 'finalEnvFile', 'steps'));
+        $data = compact('finalMessages', 'finalStatusMessage', 'finalEnvFile', 'steps');
+        $data['admin_email'] = request()->get('admin_email');
+        $data['admin_password'] = request()->get('admin_password');
+
+        return view('installer::finished', $data);
     }
 }
