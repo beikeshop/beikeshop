@@ -1621,7 +1621,7 @@ class SettingsSeeder extends Seeder
             "bottom" => [
                 "copyright" => [
                     "zh_cn" => "<div>技术支持 <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - 成都光大网络科技 &copy; 2022</div>",
-                    "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu GangdaNetwork Technology &copy; 2022</div>"
+                    "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu Guangda Network Technology &copy; 2022</div>"
                 ],
                 "image" => "catalog/demo/banner/pay_icons.png"
             ],
