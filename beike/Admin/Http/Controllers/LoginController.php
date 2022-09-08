@@ -14,7 +14,7 @@ class LoginController extends Controller
         if (auth(AdminUser::AUTH_GUARD)->check()) {
             return redirect()->back();
         }
-        return view('admin::pages.login.login');
+        return view('admin::pages.login.login', \request()->only('admin_email', 'admin_password'));
     }
 
     public function store(Request $request)
