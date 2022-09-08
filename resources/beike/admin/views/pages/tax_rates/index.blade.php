@@ -114,7 +114,7 @@
         },
 
         rules: {
-          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax_rate.tax')])}}',trigger: 'blur'}, ],
+          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax')])}}',trigger: 'blur'}, ],
           rate: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax_rate')])}}',trigger: 'blur'}, ],
         }
       },
