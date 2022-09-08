@@ -23,7 +23,7 @@
           </div>
         </el-tree>
       </div>
-      <div><x-admin-no-data /></div>
+      <div v-else><x-admin-no-data /></div>
     </div>
   </div>
 @endsection
