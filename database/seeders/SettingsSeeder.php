@@ -501,7 +501,13 @@ class SettingsSeeder extends Seeder
     }
 
 
-    private function getMenuSetting()
+    /**
+     * 设置菜单数据
+     *
+     * @return false|string
+     * @throws \Exception
+     */
+    private function getMenuSetting(): bool|string
     {
         $json = '{"menus":[{"isFull":false,"badge":{"isShow":false,"name":{"en":"","zh_cn":""},"bg_color":"#fd560f","text_color":"#ffffff"},"link":{"type":"page","value":"","text":[],"link":""},"name":{"en":"Sports","zh_cn":"\u8fd0\u52a8\u6f6e\u5427"},"isChildren":false,"childrenGroup":[{"name":{"en":"leading the fashion","zh_cn":"\u5f15\u9886\u65f6\u5c1a"},"type":"","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"brand","value":3,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"category","value":100008,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":5,"text":{"en":"","zh_cn":""},"link":""}}]},{"name":{"en":"Special offer","zh_cn":"\u7279\u4ef7\u4f18\u60e0"},"type":"link","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"category","value":100008,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":6,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"category","value":100003,"text":{"en":"","zh_cn":""},"link":""}}]},{"name":{"en":"Popular products","zh_cn":"\u7206\u6b3e\u5546\u54c1"},"type":"image","image":{"image":{"en":"catalog\/demo\/banner\/2_en.jpg","zh_cn":"catalog\/demo\/banner\/2.jpg"},"link":{"type":"product","value":1,"text":[],"link":""}},"children":[]}]},{"isFull":false,"badge":{"isShow":false,"name":{"en":"NEW","zh_cn":"\u65b0\u54c1"},"bg_color":"#7628A2","text_color":"#ffffff"},"link":{"type":"category","value":100003,"text":[],"link":""},"name":{"en":"Fashion","zh_cn":"\u65f6\u5c1a\u6f6e\u6d41"},"isChildren":false,"childrenGroup":[{"name":{"en":"global purchase","zh_cn":"\u5168\u7403\u8d2d"},"type":"link","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"brand","value":2,"text":{"en":"","zh_cn":""},"link":"","new_window":true}},{"name":[],"link":{"type":"product","value":1,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"category","value":100001,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"page","value":21,"text":{"en":"","zh_cn":""},"link":""}}]},{"name":{"en":"Fashion","zh_cn":"\u65f6\u5c1a"},"type":"image","image":{"image":{"en":"catalog\/demo\/product\/16.jpg","zh_cn":"catalog\/demo\/product\/16.jpg"},"link":{"type":"category","value":100001,"text":[],"link":""}},"children":[{"name":[],"link":{"type":"custom","value":"https:\/\/www.baidu.com","text":{"en":"","zh_cn":"baidu "},"link":"","new_window":true}}]},{"name":{"en":"recommended","zh_cn":"\u5e97\u957f\u63a8\u8350"},"type":"image","image":{"image":{"en":"catalog\/demo\/product\/13.jpg","zh_cn":"catalog\/demo\/product\/13.jpg"},"link":{"type":"product","value":"","text":[],"link":""}},"children":[]}]},{"isFull":false,"badge":{"isShow":false,"name":{"en":"","zh_cn":""},"bg_color":"#fd560f","text_color":"#ffffff"},"link":{"type":"category","value":100007,"text":[],"link":""},"name":{"en":"Digital","zh_cn":"\u6570\u7801\u4ea7\u54c1"},"isChildren":false,"childrenGroup":[{"name":{"en":"\u5927\u724c\u4fc3\u9500","zh_cn":"\u5927\u724c\u4fc3\u9500"},"type":"","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"brand","value":2,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":8,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":9,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":1,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":6,"text":{"en":"","zh_cn":""},"link":""}}]},{"name":{"en":"","zh_cn":"\u6d3b\u52a8\u793c\u54c1"},"type":"","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"category","value":100002,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"category","value":100007,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"static","value":"account.order.index","text":{"en":"","zh_cn":""},"link":""}}]},{"name":{"en":"","zh_cn":"\u5168\u573a\u4e09\u6298"},"type":"","image":{"image":[],"link":{"type":"product","value":"","text":[]}},"children":[{"name":[],"link":{"type":"brand","value":2,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":6,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":10,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":3,"text":{"en":"","zh_cn":""},"link":""}},{"name":[],"link":{"type":"brand","value":1,"text":{"en":"","zh_cn":""},"link":""}}]}]},{"isFull":false,"badge":{"isShow":false,"name":{"en":"Hot","zh_cn":"\u70ed\u5356"},"bg_color":"#FF4D00","text_color":"#ffffff"},"link":{"type":"page","value":"","text":[],"link":""},"name":{"en":"Hot","zh_cn":"\u70ed\u5356\u7279\u60e0"},"isChildren":false,"childrenGroup":[]},{"isFull":false,"badge":{"isShow":false,"name":{"en":"Sales","zh_cn":"\u5927\u724c\u76f4\u9500"},"bg_color":"#00C5C5","text_color":"#ffffff"},"link":{"type":"page","value":"","text":[],"link":""},"name":{"en":"Brand","zh_cn":"\u56fd\u9645\u6f6e\u724c"},"isChildren":false,"childrenGroup":[]}]}';
         $setting = json_decode($json, true);
@@ -511,446 +517,37 @@ class SettingsSeeder extends Seeder
         return json_encode($setting);
     }
 
-    private function getHomeSetting()
+
+    /**
+     * 设置首页装修数据
+     *
+     * @return false|string
+     * @throws \Exception
+     */
+    private function getHomeSetting(): bool|string
     {
-        $data = [
-            "modules" => [
-                [
-                    "content" => [
-                        "style" => [
-                            "background_color" => ""
-                        ],
-                        "full" => true,
-                        "floor" => [
-                            "2" => "",
-                            "3" => ""
-                        ],
-                        "images" => [
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/banner/banner-4-en.jpg",
-                                    "zh_cn" => "catalog/demo/banner/banner-4.jpg"
-                                ],
-                                "show" => true,
-                                "link" => [
-                                    "type" => "category",
-                                    "value" => 100012,
-                                    "link" => ""
-                                ]
-                            ],
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/banner/banner-3-en.jpg",
-                                    "zh_cn" => "catalog/demo/banner/banner-3.jpg"
-                                ],
-                                "show" => false,
-                                "link" => [
-                                    "type" => "category",
-                                    "value" => 100008,
-                                    "link" => ""
-                                ]
-                            ]
-                        ]
-                    ],
-                    "code" => "slideshow",
-                    "name" => "幻灯片",
-                    "module_id" => "b0448efb0989"
-                ],
-                [
-                    "code" => "image401",
-                    "content" => [
-                        "style" => [
-                            "background_color" => ""
-                        ],
-                        "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
-                        ],
-                        "images" => [
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_1-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_1.png"
-                                ],
-                                "show" => false,
-                                "link" => [
-                                    "type" => "category",
-                                    "value" => 100000,
-                                    "link" => ""
-                                ]
-                            ],
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_2-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_2.png"
-                                ],
-                                "show" => false,
-                                "link" => [
-                                    "type" => "category",
-                                    "value" => 100007,
-                                    "link" => ""
-                                ]
-                            ],
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_3-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_3.png"
-                                ],
-                                "show" => false,
-                                "link" => [
-                                    "type" => "product",
-                                    "value" => "",
-                                    "link" => ""
-                                ]
-                            ],
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_4-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_4.png"
-                                ],
-                                "show" => true,
-                                "link" => [
-                                    "type" => "product",
-                                    "value" => 2,
-                                    "link" => ""
-                                ]
-                            ]
-                        ]
-                    ],
-                    "module_id" => "g1vrlixfzfjk9a3k",
-                    "name" => "一行四图-pro"
-                ],
-                [
-                    "code" => "tab_product",
-                    "content" => [
-                        "style" => [
-                            "background_color" => ""
-                        ],
-                        "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
-                        ],
-                        "tabs" => [
-                            [
-                                "title" => [
-                                    "en" => "latest promotions",
-                                    "zh_cn" => "最新促销"
-                                ],
-                                "products" => [
-                                    1,
-                                    2,
-                                    3,
-                                    4,
-                                    5,
-                                    7,
-                                    8,
-                                    11
-                                ]
-                            ],
-                            [
-                                "title" => [
-                                    "en" => "Fashion sheet",
-                                    "zh_cn" => "时尚单品"
-                                ],
-                                "products" => [
-                                    6,
-                                    49,
-                                    328,
-                                    9,
-                                    10,
-                                    11,
-                                    12,
-                                    13,
-                                    14,
-                                    15
-                                ]
-                            ]
-                        ],
-                        "title" => [
-                            "en" => "Recommended products",
-                            "zh_cn" => "推荐商品"
-                        ]
-                    ],
-                    "module_id" => "s6e7e3vucriazzbi",
-                    "name" => "选项卡商品"
-                ],
-                [
-                    "code" => "image100",
-                    "content" => [
-                        "style" => [
-                            "background_color" => ""
-                        ],
-                        "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
-                        ],
-                        "full" => true,
-                        "images" => [
-                            [
-                                "image" => [
-                                    "en" => "catalog/demo/banner/banner-2-en.png",
-                                    "zh_cn" => "catalog/demo/banner/banner-2.png"
-                                ],
-                                "show" => true,
-                                "link" => [
-                                    "type" => "category",
-                                    "value" => 100003,
-                                    "link" => ""
-                                ]
-                            ]
-                        ]
-                    ],
-                    "module_id" => "0htwy33z3xcituyx",
-                    "name" => "单图模块"
-                ],
-                [
-                    "code" => "brand",
-                    "content" => [
-                        "style" => [
-                            "background_color" => ""
-                        ],
-                        "floor" => [
-                            "en" => "",
-                            "zh_cn" => ""
-                        ],
-                        "full" => true,
-                        "title" => [
-                            "en" => "Recommended Brand",
-                            "zh_cn" => "推荐品牌"
-                        ],
-                        "brands" => [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9,
-                            10,
-                            11,
-                            12
-                        ]
-                    ],
-                    "module_id" => "yln7isoqlxovqz3k",
-                    "name" => "品牌模块"
-                ]
-            ]
-        ];
-        return json_encode($data);
+        $json = '{"modules":[{"content":{"style":{"background_color":""},"full":true,"floor":{"2":"","3":""},"images":[{"image":{"en":"catalog\/demo\/banner\/banner-4-en.jpg","zh_cn":"catalog\/demo\/banner\/banner-4.jpg"},"show":true,"link":{"type":"category","value":100012,"link":""}},{"image":{"en":"catalog\/demo\/banner\/banner-3-en.jpg","zh_cn":"catalog\/demo\/banner\/banner-3.jpg"},"show":false,"link":{"type":"category","value":100008,"link":""}}]},"code":"slideshow","name":"\u5e7b\u706f\u7247","module_id":"b0448efb0989"},{"code":"image401","content":{"style":{"background_color":""},"floor":{"zh_cn":"","en":""},"images":[{"image":{"en":"catalog\/demo\/image_plus_1-en.png","zh_cn":"catalog\/demo\/image_plus_1.png"},"show":false,"link":{"type":"category","value":100000,"link":""}},{"image":{"en":"catalog\/demo\/image_plus_2-en.png","zh_cn":"catalog\/demo\/image_plus_2.png"},"show":false,"link":{"type":"category","value":100007,"link":""}},{"image":{"en":"catalog\/demo\/image_plus_3-en.png","zh_cn":"catalog\/demo\/image_plus_3.png"},"show":false,"link":{"type":"product","value":"","link":""}},{"image":{"en":"catalog\/demo\/image_plus_4-en.png","zh_cn":"catalog\/demo\/image_plus_4.png"},"show":true,"link":{"type":"product","value":2,"link":""}}]},"module_id":"g1vrlixfzfjk9a3k","name":"\u4e00\u884c\u56db\u56fe-pro"},{"code":"tab_product","content":{"style":{"background_color":""},"floor":{"zh_cn":"","en":""},"tabs":[{"title":{"en":"latest promotions","zh_cn":"\u6700\u65b0\u4fc3\u9500"},"products":[1,2,3,4,5,7,8,11]},{"title":{"en":"Fashion sheet","zh_cn":"\u65f6\u5c1a\u5355\u54c1"},"products":[6,49,328,9,10,11,12,13,14,15]}],"title":{"en":"Recommended products","zh_cn":"\u63a8\u8350\u5546\u54c1"}},"module_id":"s6e7e3vucriazzbi","name":"\u9009\u9879\u5361\u5546\u54c1"},{"code":"image100","content":{"style":{"background_color":""},"floor":{"zh_cn":"","en":""},"full":true,"images":[{"image":{"en":"catalog\/demo\/banner\/banner-2-en.png","zh_cn":"catalog\/demo\/banner\/banner-2.png"},"show":true,"link":{"type":"category","value":100003,"link":""}}]},"module_id":"0htwy33z3xcituyx","name":"\u5355\u56fe\u6a21\u5757"},{"code":"brand","content":{"style":{"background_color":""},"floor":{"en":"","zh_cn":""},"full":true,"title":{"en":"Recommended Brand","zh_cn":"\u63a8\u8350\u54c1\u724c"},"brands":[1,2,3,4,5,6,7,8,9,10,11,12]},"module_id":"yln7isoqlxovqz3k","name":"\u54c1\u724c\u6a21\u5757"}]}';
+        $setting = json_decode($json, true);
+        if (empty($setting)) {
+            throw new \Exception("无效的首页装修设置");
+        }
+        return json_encode($setting);
     }
 
-    private function getFooterSetting()
+
+    /**
+     * 设置页尾数据
+     *
+     * @return false|string
+     * @throws \Exception
+     */
+    private function getFooterSetting(): bool|string
     {
-        $data = [
-            "content" => [
-                "link1" => [
-                    "title" => [
-                        "zh_cn" => "关于我们",
-                        "en" => "About us"
-                    ],
-                    "links" => [
-                        [
-                            "text" => [
-                                "zh_cn" => "关于我们",
-                                "en" => "about us"
-                            ],
-                            "value" => 21,
-                            "type" => "page",
-                            "link" => ""
-                        ],
-                        [
-                            "link" => "",
-                            "value" => 18,
-                            "type" => "page",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => 12,
-                            "type" => "page",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => "account.order.index",
-                            "type" => "static",
-                            "text" => [
-                                "zh_cn" => "",
-                                "en" => ""
-                            ]
-                        ]
-                    ]
-                ],
-                "link3" => [
-                    "title" => [
-                        "zh_cn" => "其他",
-                        "en" => "Other"
-                    ],
-                    "links" => [
-                        [
-                            "link" => "",
-                            "value" => "brands.index",
-                            "type" => "static",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => "account.index",
-                            "type" => "static",
-                            "text" => [
-                                "zh_cn" => "",
-                                "en" => ""
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => 20,
-                            "type" => "page",
-                            "text" => [
-                                "zh_cn" => "",
-                                "en" => ""
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => 21,
-                            "type" => "page",
-                            "text" => [
-                                "zh_cn" => "",
-                                "en" => ""
-                            ]
-                        ]
-                    ]
-                ],
-                "intro" => [
-                    "social_network" => [
-
-                    ],
-                    "logo" => "catalog/logo.png",
-                    "text" => [
-                        "zh_cn" => "<p style=\"line-height: 1.4;\"><strong>成都光大网络科技有限公司</strong></p>\n<p style=\"line-height: 1.4;\">是一家主要从事互联网开发的高科技企业,<\/p>\n<p style=\"line-height: 1.4;\">公司成立于2014年8月，公司以为客户创造</p>\n<p style=\"line-height: 1.4;\">价值为核心价值观，帮助中小企业利用互联</p>\n<p style=\"line-height: 1.4;\">网工具提升产品销售为目标。</p>",
-                        "en" => "<p>Chengdu Guangda Network Technology Co., Ltd. is a high-tech enterprise mainly engaged in Internet development. The company was established in August 2014.</p>"
-                    ]
-                ],
-                "link2" => [
-                    "title" => [
-                        "zh_cn" => "会员中心",
-                        "en" => "Account"
-                    ],
-                    "links" => [
-                        [
-                            "link" => "",
-                            "value" => "account.index",
-                            "type" => "static",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => "account.order.index",
-                            "type" => "static",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => "account.wishlist.index",
-                            "type" => "static",
-                            "text" => [
-
-                            ]
-                        ],
-                        [
-                            "link" => "",
-                            "value" => "brands.index",
-                            "type" => "static",
-                            "text" => [
-                                "zh_cn" => "",
-                                "en" => ""
-                            ]
-                        ]
-                    ]
-                ],
-                "contact" => [
-                    "address" => [
-                        "zh_cn" => "成都市高新区益州大道中段1858号天府软件园G8 成都光大网络科技有限公司",
-                        "en" => "G8 Tianfu Software Park Chengdu China, Guangda Network Technology Co., Ltd."
-                    ],
-                    "email" => "Marketing@guangda.work",
-                    "telephone" => "028-87966209"
-                ]
-            ],
-            "bottom" => [
-                "copyright" => [
-                    "zh_cn" => "<div>技术支持 <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - 成都光大网络科技 &copy; 2022</div>",
-                    "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu Guangda Network Technology &copy; 2022</div>"
-                ],
-                "image" => "catalog/demo/banner/pay_icons.png"
-            ],
-            "services" => [
-                "enable" => true,
-                "items" => [
-                    [
-                        "title" => [
-                            "zh_cn" => "物行天下",
-                            "en" => "Material world"
-                        ],
-                        "show" => false,
-                        "image" => "catalog/demo/services-icon/4.png",
-                        "sub_title" => [
-                            "zh_cn" => "多仓直发 极速配送多仓直发 极速配送",
-                            "en" => "Multi - warehouse fast delivery"
-                        ]
-                    ],
-                    [
-                        "title" => [
-                            "zh_cn" => "退换无忧",
-                            "en" => "Return all"
-                        ],
-                        "show" => false,
-                        "image" => "catalog/demo/services-icon/3.png",
-                        "sub_title" => [
-                            "zh_cn" => "放心购物 退还无忧放心购物 退还无忧",
-                            "en" => "Rest assured shopping return worry"
-                        ]
-                    ],
-                    [
-                        "title" => [
-                            "zh_cn" => "精致服务",
-                            "en" => "Delicate service"
-                        ],
-                        "show" => false,
-                        "image" => "catalog/demo/services-icon/1.png",
-                        "sub_title" => [
-                            "zh_cn" => "精致服务 售后保障精致服务 售后保障",
-                            "en" => "Exquisite service and after-sales guarantee"
-                        ]
-                    ],
-                    [
-                        "title" => [
-                            "zh_cn" => "满减活动",
-                            "en" => "With reduced activity"
-                        ],
-                        "show" => true,
-                        "image" => "catalog/demo/services-icon/2.png",
-                        "sub_title" => [
-                            "zh_cn" => "满500元立减90，新用户立减200",
-                            "en" => "If 500 yuan is exceeded, a reduction of 90 yuan will be given"
-                        ]
-                    ]
-                ]
-            ]
-        ];
-        return json_encode($data);
+        $json = '{"services":{"enable":true,"items":[{"image":"catalog\/demo\/services-icon\/4.png","title":{"en":"Material world","zh_cn":"\u7269\u884c\u5929\u4e0b"},"sub_title":{"en":"Multi - warehouse fast delivery","zh_cn":"\u591a\u4ed3\u76f4\u53d1 \u6781\u901f\u914d\u9001\u591a\u4ed3\u76f4\u53d1 \u6781\u901f\u914d\u9001"},"show":false},{"image":"catalog\/demo\/services-icon\/3.png","title":{"en":"Return all","zh_cn":"\u9000\u6362\u65e0\u5fe7"},"sub_title":{"en":"Rest assured shopping return worry","zh_cn":"\u653e\u5fc3\u8d2d\u7269 \u9000\u8fd8\u65e0\u5fe7\u653e\u5fc3\u8d2d\u7269 \u9000\u8fd8\u65e0\u5fe7"},"show":false},{"image":"catalog\/demo\/services-icon\/1.png","title":{"en":"Delicate service","zh_cn":"\u7cbe\u81f4\u670d\u52a1"},"sub_title":{"en":"Exquisite service and after-sales guarantee","zh_cn":"\u7cbe\u81f4\u670d\u52a1 \u552e\u540e\u4fdd\u969c\u7cbe\u81f4\u670d\u52a1 \u552e\u540e\u4fdd\u969c"},"show":false},{"image":"catalog\/demo\/services-icon\/2.png","title":{"en":"With reduced activity","zh_cn":"\u6ee1\u51cf\u6d3b\u52a8"},"sub_title":{"en":"If 500 yuan is exceeded, a reduction of 90 yuan will be given","zh_cn":"\u6ee1500\u5143\u7acb\u51cf90\uff0c\u65b0\u7528\u6237\u7acb\u51cf200"},"show":true}]},"content":{"intro":{"logo":"catalog\/logo.png","text":{"en":"<p>Chengdu Guangda Network Technology Co., Ltd. is a high-tech enterprise mainly engaged in Internet development. The company was established in August 2014.<\/p>","zh_cn":"<p style=\"line-height: 1.4;\"><strong>\u6210\u90fd\u5149\u5927\u7f51\u7edc\u79d1\u6280\u6709\u9650\u516c\u53f8<\/strong><\/p>\n<p style=\"line-height: 1.4;\">\u662f\u4e00\u5bb6\u4e13\u4e1a\u4e92\u8054\u7f51\u5f00\u53d1\u7684\u9ad8\u79d1\u6280\u4f01\u4e1a\uff0c\u516c\u53f8\u6210\u7acb\u4e8e2014\u5e748\u6708\u3002<\/p>\n<p style=\"line-height: 1.4;\">\u516c\u53f8\u4ee5\u4e3a\u5ba2\u6237\u521b\u9020\u4ef7\u503c\u4e3a\u6838\u5fc3\u4ef7\u503c\u89c2\uff0c\u5e2e\u52a9\u4e2d\u5c0f\u4f01\u4e1a\u5229\u7528\u4e92\u8054\u7f51\u5de5\u5177\u63d0\u5347\u4ea7\u54c1\u9500\u552e\u3002<\/p>"},"social_network":[]},"link1":{"title":{"en":"About us","zh_cn":"\u5173\u4e8e\u6211\u4eec"},"links":[{"link":"","type":"page","value":21,"text":{"en":"about us","zh_cn":"\u5173\u4e8e\u6211\u4eec"}},{"type":"page","value":18,"text":[],"link":""},{"type":"page","value":12,"text":[],"link":""},{"type":"static","value":"account.order.index","text":{"en":"","zh_cn":""},"link":""}]},"link2":{"title":{"en":"Account","zh_cn":"\u4f1a\u5458\u4e2d\u5fc3"},"links":[{"type":"static","value":"account.index","text":[],"link":""},{"type":"static","value":"account.order.index","text":[],"link":""},{"type":"static","value":"account.wishlist.index","text":[],"link":""},{"type":"static","value":"brands.index","text":{"en":"","zh_cn":""},"link":""}]},"link3":{"title":{"en":"Other","zh_cn":"\u5176\u4ed6"},"links":[{"type":"static","value":"brands.index","text":[],"link":""},{"type":"static","value":"account.index","text":{"en":"","zh_cn":""},"link":""},{"type":"page","value":20,"text":{"en":"","zh_cn":""},"link":""},{"type":"page","value":21,"text":{"en":"","zh_cn":""},"link":""}]},"contact":{"telephone":"028-87966209","address":{"en":"G8 Tianfu Software Park Chengdu China, Guangda Network Technology Co., Ltd.","zh_cn":"\u6210\u90fd\u5e02\u9ad8\u65b0\u533a\u76ca\u5dde\u5927\u9053\u4e2d\u6bb51858\u53f7\u5929\u5e9c\u8f6f\u4ef6\u56edG8 \u6210\u90fd\u5149\u5927\u7f51\u7edc\u79d1\u6280\u6709\u9650\u516c\u53f8"},"email":"Marketing@guangda.work"}},"bottom":{"copyright":{"en":"<div>Technical Support <a href=\"https:\/\/beikeshop.com\/\" target=\"_blank\" rel=\"noopener\">beikeshop.com<\/a>&nbsp; - Chengdu Guangda Network Technology &copy; 2022<\/div>","zh_cn":"<div class=\"\">\u6280\u672f\u652f\u6301 <a href=\"https:\/\/beikeshop.com\/\" target=\"_blank\" rel=\"noopener\">beikeshop.com<\/a>&nbsp; - \u6210\u90fd\u5149\u5927\u7f51\u7edc\u79d1\u6280 &copy; 2022<\/div>"},"image":"catalog\/demo\/banner\/pay_icons.png"}}';
+        $setting = json_decode($json, true);
+        if (empty($setting)) {
+            throw new \Exception("无效的底部配置数据");
+        }
+        return json_encode($setting);
     }
 }
