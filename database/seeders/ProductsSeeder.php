@@ -243,645 +243,101 @@ class ProductsSeeder extends Seeder
     public function getProductCategories()
     {
         return [
-            [
-                "id" => 1,
-                "product_id" => 2,
-                "category_id" => 100000,
-            ],
-            [
-                "id" => 3,
-                "product_id" => 2,
-                "category_id" => 100002,
-            ],
-            [
-                "id" => 4,
-                "product_id" => 2,
-                "category_id" => 100003,
-            ],
-            [
-                "id" => 5,
-                "product_id" => 2,
-                "category_id" => 100004,
-            ],
-            [
-                "id" => 6,
-                "product_id" => 2,
-                "category_id" => 100005,
-            ],
-            [
-                "id" => 7,
-                "product_id" => 2,
-                "category_id" => 100008,
-            ],
-            [
-                "id" => 8,
-                "product_id" => 2,
-                "category_id" => 100007,
-            ],
-            [
-                "id" => 9,
-                "product_id" => 2,
-                "category_id" => 100009,
-            ],
-            [
-                "id" => 10,
-                "product_id" => 14,
-                "category_id" => 100000,
-            ],
-            [
-                "id" => 12,
-                "product_id" => 14,
-                "category_id" => 100002,
-            ],
-            [
-                "id" => 13,
-                "product_id" => 14,
-                "category_id" => 100003,
-            ],
-            [
-                "id" => 14,
-                "product_id" => 14,
-                "category_id" => 100004,
-            ],
-            [
-                "id" => 15,
-                "product_id" => 14,
-                "category_id" => 100005,
-            ],
-            [
-                "id" => 16,
-                "product_id" => 14,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
-            ],
-            [
-                "id" => 17,
-                "product_id" => 14,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
-            ],
-            [
-                "id" => 18,
-                "product_id" => 14,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:09:47",
-                "updated_at" => "2022-08-11 09:09:47"
-            ],
-            [
-                "id" => 19,
-                "product_id" => 15,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 21,
-                "product_id" => 15,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 22,
-                "product_id" => 15,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 23,
-                "product_id" => 15,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 24,
-                "product_id" => 15,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 25,
-                "product_id" => 15,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 26,
-                "product_id" => 15,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 27,
-                "product_id" => 15,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:29",
-                "updated_at" => "2022-08-11 09:10:29"
-            ],
-            [
-                "id" => 28,
-                "product_id" => 16,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 30,
-                "product_id" => 16,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 31,
-                "product_id" => 16,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 32,
-                "product_id" => 16,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 33,
-                "product_id" => 16,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 34,
-                "product_id" => 16,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 35,
-                "product_id" => 16,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 36,
-                "product_id" => 16,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30"
-            ],
-            [
-                "id" => 37,
-                "product_id" => 17,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 39,
-                "product_id" => 17,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 40,
-                "product_id" => 17,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 41,
-                "product_id" => 17,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 42,
-                "product_id" => 17,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 43,
-                "product_id" => 17,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 44,
-                "product_id" => 17,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 45,
-                "product_id" => 17,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31"
-            ],
-            [
-                "id" => 46,
-                "product_id" => 18,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 48,
-                "product_id" => 18,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 49,
-                "product_id" => 18,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 50,
-                "product_id" => 18,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 51,
-                "product_id" => 18,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 52,
-                "product_id" => 18,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 53,
-                "product_id" => 18,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 54,
-                "product_id" => 18,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32"
-            ],
-            [
-                "id" => 55,
-                "product_id" => 19,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 57,
-                "product_id" => 19,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 58,
-                "product_id" => 19,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 59,
-                "product_id" => 19,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 60,
-                "product_id" => 19,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 61,
-                "product_id" => 19,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 62,
-                "product_id" => 19,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 63,
-                "product_id" => 19,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33"
-            ],
-            [
-                "id" => 64,
-                "product_id" => 20,
-                "category_id" => 100000,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 66,
-                "product_id" => 20,
-                "category_id" => 100002,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 67,
-                "product_id" => 20,
-                "category_id" => 100003,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 68,
-                "product_id" => 20,
-                "category_id" => 100004,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 69,
-                "product_id" => 20,
-                "category_id" => 100005,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 70,
-                "product_id" => 20,
-                "category_id" => 100008,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 71,
-                "product_id" => 20,
-                "category_id" => 100007,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 72,
-                "product_id" => 20,
-                "category_id" => 100009,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37"
-            ],
-            [
-                "id" => 76,
-                "product_id" => 1,
-                "category_id" => 100015,
-                "created_at" => "2022-08-12 03:36:51",
-                "updated_at" => "2022-08-12 03:36:51"
-            ],
-            [
-                "id" => 79,
-                "product_id" => 2,
-                "category_id" => 100013,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 81,
-                "product_id" => 2,
-                "category_id" => 100010,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 82,
-                "product_id" => 2,
-                "category_id" => 100011,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 85,
-                "product_id" => 2,
-                "category_id" => 100012,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 86,
-                "product_id" => 2,
-                "category_id" => 100014,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 87,
-                "product_id" => 2,
-                "category_id" => 100015,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 88,
-                "product_id" => 2,
-                "category_id" => 100019,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 89,
-                "product_id" => 2,
-                "category_id" => 100018,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 90,
-                "product_id" => 2,
-                "category_id" => 100020,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45"
-            ],
-            [
-                "id" => 104,
-                "product_id" => 31,
-                "category_id" => 100011,
-                "created_at" => "2022-08-12 08:29:52",
-                "updated_at" => "2022-08-12 08:29:52"
-            ],
-            [
-                "id" => 105,
-                "product_id" => 32,
-                "category_id" => 100008,
-                "created_at" => "2022-08-12 08:36:17",
-                "updated_at" => "2022-08-12 08:36:17"
-            ],
-            [
-                "id" => 106,
-                "product_id" => 32,
-                "category_id" => 100011,
-                "created_at" => "2022-08-12 08:36:17",
-                "updated_at" => "2022-08-12 08:36:17"
-            ],
-            [
-                "id" => 107,
-                "product_id" => 32,
-                "category_id" => 100012,
-                "created_at" => "2022-08-12 08:36:17",
-                "updated_at" => "2022-08-12 08:36:17"
-            ],
-            [
-                "id" => 108,
-                "product_id" => 32,
-                "category_id" => 100014,
-                "created_at" => "2022-08-12 08:36:17",
-                "updated_at" => "2022-08-12 08:36:17"
-            ],
-            [
-                "id" => 109,
-                "product_id" => 34,
-                "category_id" => 100013,
-                "created_at" => "2022-08-15 01:19:51",
-                "updated_at" => "2022-08-15 01:19:51"
-            ],
-            [
-                "id" => 110,
-                "product_id" => 35,
-                "category_id" => 100011,
-                "created_at" => "2022-08-15 01:30:23",
-                "updated_at" => "2022-08-15 01:30:23"
-            ],
-            [
-                "id" => 111,
-                "product_id" => 35,
-                "category_id" => 100012,
-                "created_at" => "2022-08-15 01:30:23",
-                "updated_at" => "2022-08-15 01:30:23"
-            ],
-            [
-                "id" => 112,
-                "product_id" => 39,
-                "category_id" => 100013,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 113,
-                "product_id" => 39,
-                "category_id" => 100000,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 116,
-                "product_id" => 39,
-                "category_id" => 100002,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 117,
-                "product_id" => 39,
-                "category_id" => 100010,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 118,
-                "product_id" => 39,
-                "category_id" => 100003,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 119,
-                "product_id" => 39,
-                "category_id" => 100004,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 120,
-                "product_id" => 39,
-                "category_id" => 100005,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 121,
-                "product_id" => 39,
-                "category_id" => 100008,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 122,
-                "product_id" => 39,
-                "category_id" => 100011,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 123,
-                "product_id" => 39,
-                "category_id" => 100012,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 124,
-                "product_id" => 39,
-                "category_id" => 100014,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 125,
-                "product_id" => 39,
-                "category_id" => 100015,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
-            [
-                "id" => 126,
-                "product_id" => 39,
-                "category_id" => 100019,
-                "created_at" => "2022-08-16 07:15:45",
-                "updated_at" => "2022-08-16 07:15:45"
-            ],
+            ["id" => 1, "product_id" => 2, "category_id" => 100000],
+            ["id" => 3, "product_id" => 2, "category_id" => 100002],
+            ["id" => 4, "product_id" => 2, "category_id" => 100003],
+            ["id" => 5, "product_id" => 2, "category_id" => 100004],
+            ["id" => 6, "product_id" => 2, "category_id" => 100005],
+            ["id" => 7, "product_id" => 2, "category_id" => 100008],
+            ["id" => 8, "product_id" => 2, "category_id" => 100007],
+            ["id" => 9, "product_id" => 2, "category_id" => 100009],
+            ["id" => 10, "product_id" => 14, "category_id" => 100000],
+            ["id" => 12, "product_id" => 14, "category_id" => 100002],
+            ["id" => 13, "product_id" => 14, "category_id" => 100003],
+            ["id" => 14, "product_id" => 14, "category_id" => 100004],
+            ["id" => 15, "product_id" => 14, "category_id" => 100005],
+            ["id" => 16, "product_id" => 14, "category_id" => 100008],
+            ["id" => 17, "product_id" => 14, "category_id" => 100007],
+            ["id" => 18, "product_id" => 14, "category_id" => 100009],
+            ["id" => 19, "product_id" => 15, "category_id" => 100000],
+            ["id" => 21, "product_id" => 15, "category_id" => 100002],
+            ["id" => 22, "product_id" => 15, "category_id" => 100003],
+            ["id" => 23, "product_id" => 15, "category_id" => 100004],
+            ["id" => 24, "product_id" => 15, "category_id" => 100005],
+            ["id" => 25, "product_id" => 15, "category_id" => 100008],
+            ["id" => 26, "product_id" => 15, "category_id" => 100007],
+            ["id" => 27, "product_id" => 15, "category_id" => 100009],
+            ["id" => 28, "product_id" => 16, "category_id" => 100000],
+            ["id" => 30, "product_id" => 16, "category_id" => 100002],
+            ["id" => 31, "product_id" => 16, "category_id" => 100003],
+            ["id" => 32, "product_id" => 16, "category_id" => 100004],
+            ["id" => 33, "product_id" => 16, "category_id" => 100005],
+            ["id" => 34, "product_id" => 16, "category_id" => 100008],
+            ["id" => 35, "product_id" => 16, "category_id" => 100007],
+            ["id" => 36, "product_id" => 16, "category_id" => 100009],
+            ["id" => 37, "product_id" => 17, "category_id" => 100000],
+            ["id" => 39, "product_id" => 17, "category_id" => 100002],
+            ["id" => 40, "product_id" => 17, "category_id" => 100003],
+            ["id" => 41, "product_id" => 17, "category_id" => 100004],
+            ["id" => 42, "product_id" => 17, "category_id" => 100005],
+            ["id" => 43, "product_id" => 17, "category_id" => 100008],
+            ["id" => 44, "product_id" => 17, "category_id" => 100007],
+            ["id" => 45, "product_id" => 17, "category_id" => 100009],
+            ["id" => 46, "product_id" => 18, "category_id" => 100000],
+            ["id" => 48, "product_id" => 18, "category_id" => 100002],
+            ["id" => 49, "product_id" => 18, "category_id" => 100003],
+            ["id" => 50, "product_id" => 18, "category_id" => 100004],
+            ["id" => 51, "product_id" => 18, "category_id" => 100005],
+            ["id" => 52, "product_id" => 18, "category_id" => 100008],
+            ["id" => 53, "product_id" => 18, "category_id" => 100007],
+            ["id" => 54, "product_id" => 18, "category_id" => 100009],
+            ["id" => 55, "product_id" => 19, "category_id" => 100000],
+            ["id" => 57, "product_id" => 19, "category_id" => 100002],
+            ["id" => 58, "product_id" => 19, "category_id" => 100003],
+            ["id" => 59, "product_id" => 19, "category_id" => 100004],
+            ["id" => 60, "product_id" => 19, "category_id" => 100005],
+            ["id" => 61, "product_id" => 19, "category_id" => 100008],
+            ["id" => 62, "product_id" => 19, "category_id" => 100007],
+            ["id" => 63, "product_id" => 19, "category_id" => 100009],
+            ["id" => 64, "product_id" => 20, "category_id" => 100000],
+            ["id" => 66, "product_id" => 20, "category_id" => 100002],
+            ["id" => 67, "product_id" => 20, "category_id" => 100003],
+            ["id" => 68, "product_id" => 20, "category_id" => 100004],
+            ["id" => 69, "product_id" => 20, "category_id" => 100005],
+            ["id" => 70, "product_id" => 20, "category_id" => 100008],
+            ["id" => 71, "product_id" => 20, "category_id" => 100007],
+            ["id" => 72, "product_id" => 20, "category_id" => 100009],
+            ["id" => 76, "product_id" => 1, "category_id" => 100015],
+            ["id" => 79, "product_id" => 2, "category_id" => 100013],
+            ["id" => 81, "product_id" => 2, "category_id" => 100010],
+            ["id" => 82, "product_id" => 2, "category_id" => 100011],
+            ["id" => 85, "product_id" => 2, "category_id" => 100012],
+            ["id" => 86, "product_id" => 2, "category_id" => 100014],
+            ["id" => 87, "product_id" => 2, "category_id" => 100015],
+            ["id" => 88, "product_id" => 2, "category_id" => 100019],
+            ["id" => 89, "product_id" => 2, "category_id" => 100018],
+            ["id" => 90, "product_id" => 2, "category_id" => 100020],
+            ["id" => 104, "product_id" => 31, "category_id" => 100011],
+            ["id" => 105, "product_id" => 32, "category_id" => 100008],
+            ["id" => 106, "product_id" => 32, "category_id" => 100011],
+            ["id" => 107, "product_id" => 32, "category_id" => 100012],
+            ["id" => 108, "product_id" => 32, "category_id" => 100014],
+            ["id" => 109, "product_id" => 34, "category_id" => 100013],
+            ["id" => 110, "product_id" => 35, "category_id" => 100011],
+            ["id" => 111, "product_id" => 35, "category_id" => 100012],
+            ["id" => 112, "product_id" => 39, "category_id" => 100013],
+            ["id" => 113, "product_id" => 39, "category_id" => 100000],
+            ["id" => 116, "product_id" => 39, "category_id" => 100002],
+            ["id" => 117, "product_id" => 39, "category_id" => 100010],
+            ["id" => 118, "product_id" => 39, "category_id" => 100003],
+            ["id" => 119, "product_id" => 39, "category_id" => 100004],
+            ["id" => 120, "product_id" => 39, "category_id" => 100005],
+            ["id" => 121, "product_id" => 39, "category_id" => 100008],
+            ["id" => 122, "product_id" => 39, "category_id" => 100011],
+            ["id" => 123, "product_id" => 39, "category_id" => 100012],
+            ["id" => 124, "product_id" => 39, "category_id" => 100014],
+            ["id" => 125, "product_id" => 39, "category_id" => 100015],
+            ["id" => 126, "product_id" => 39, "category_id" => 100019],
         ];
     }
 
@@ -1462,8 +918,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-11 09:10:30",
-                "updated_at" => "2022-08-11 09:10:30",
                 "images" => null
             ],
             [
@@ -1478,8 +932,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-11 09:10:31",
-                "updated_at" => "2022-08-11 09:10:31",
                 "images" => null
             ],
             [
@@ -1494,8 +946,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-11 09:10:32",
-                "updated_at" => "2022-08-11 09:10:32",
                 "images" => null
             ],
             [
@@ -1510,8 +960,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-11 09:10:33",
-                "updated_at" => "2022-08-11 09:10:33",
                 "images" => null
             ],
             [
@@ -1526,8 +974,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-11 09:10:37",
-                "updated_at" => "2022-08-11 09:10:37",
                 "images" => null
             ],
             [
@@ -1542,8 +988,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:34:45",
-                "updated_at" => "2022-08-12 05:34:45",
                 "images" => null
             ],
             [
@@ -1558,8 +1002,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 1992,
                 "quantity" => 444,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:35:50",
-                "updated_at" => "2022-08-12 05:35:50",
                 "images" => null
             ],
             [
@@ -1574,8 +1016,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 299,
                 "quantity" => 3333,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:42:51",
-                "updated_at" => "2022-08-12 05:42:51",
                 "images" => null
             ],
             [
@@ -1590,8 +1030,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 99,
                 "quantity" => 99,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:47:43",
-                "updated_at" => "2022-08-12 05:47:43",
                 "images" => null
             ],
             [
@@ -1606,8 +1044,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 223,
                 "quantity" => 2223,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:49:19",
-                "updated_at" => "2022-08-12 05:49:19",
                 "images" => null
             ],
             [
@@ -1622,8 +1058,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 333,
                 "quantity" => 2222,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:51:05",
-                "updated_at" => "2022-08-12 05:51:05",
                 "images" => null
             ],
             [
@@ -1638,8 +1072,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 333,
                 "quantity" => 3445,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:52:38",
-                "updated_at" => "2022-08-12 05:52:38",
                 "images" => null
             ],
             [
@@ -1654,8 +1086,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 234,
                 "quantity" => 423,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 05:53:44",
-                "updated_at" => "2022-08-12 05:53:44",
                 "images" => null
             ],
             [
@@ -1670,8 +1100,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 213,
                 "quantity" => 213,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 07:48:13",
-                "updated_at" => "2022-08-12 07:48:13",
                 "images" => null
             ],
             [
@@ -1686,8 +1114,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 10,
                 "quantity" => 10,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 08:24:17",
-                "updated_at" => "2022-08-12 08:24:17",
                 "images" => null
             ],
             [
@@ -1702,8 +1128,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 20.99,
                 "quantity" => 999,
                 "is_default" => 1,
-                "created_at" => "2022-08-12 08:34:06",
-                "updated_at" => "2022-08-12 08:34:06",
                 "images" => null
             ],
             [
@@ -1718,8 +1142,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 10,
                 "quantity" => 999,
                 "is_default" => 1,
-                "created_at" => "2022-08-15 01:23:41",
-                "updated_at" => "2022-08-15 01:23:41",
                 "images" => null
             ],
             [
@@ -1734,8 +1156,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 100,
                 "quantity" => 999,
                 "is_default" => 1,
-                "created_at" => "2022-08-15 02:05:45",
-                "updated_at" => "2022-08-15 02:05:45",
                 "images" => null
             ],
             [
@@ -1750,8 +1170,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 3,
                 "quantity" => 123123,
                 "is_default" => 1,
-                "created_at" => "2022-08-18 18:17:42",
-                "updated_at" => "2022-08-18 18:17:42",
                 "images" => null
             ],
             [
@@ -1766,8 +1184,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 3453,
                 "quantity" => 999,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:20:14",
-                "updated_at" => "2022-08-26 09:20:14",
                 "images" => "[\"catalog/demo/product/12.jpg\"]"
             ],
             [
@@ -1782,8 +1198,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 454,
                 "quantity" => 454,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:20:14",
-                "updated_at" => "2022-08-26 09:20:14",
                 "images" => "[\"catalog/demo/product/15.jpg\"]"
             ],
             [
@@ -1798,8 +1212,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 345,
                 "quantity" => 45,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:20:14",
-                "updated_at" => "2022-08-26 09:20:14",
                 "images" => "[\"catalog/demo/product/18.jpg\"]"
             ],
             [
@@ -1814,8 +1226,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 4545,
                 "quantity" => 45,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:20:14",
-                "updated_at" => "2022-08-26 09:20:14",
                 "images" => "[\"catalog/demo/product/4.jpg\"]"
             ],
             [
@@ -1830,8 +1240,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 30.99,
                 "quantity" => 999,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:22:05",
-                "updated_at" => "2022-08-26 09:22:05",
                 "images" => null
             ],
             [
@@ -1846,8 +1254,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 333,
                 "quantity" => 333,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:22:33",
-                "updated_at" => "2022-08-26 09:22:33",
                 "images" => null
             ],
             [
@@ -1862,8 +1268,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 222,
                 "quantity" => 2222,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:22:44",
-                "updated_at" => "2022-08-26 09:22:44",
                 "images" => null
             ],
             [
@@ -1878,8 +1282,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 222,
                 "quantity" => 42131,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:22:53",
-                "updated_at" => "2022-08-26 09:22:53",
                 "images" => null
             ],
             [
@@ -1894,8 +1296,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 55,
                 "quantity" => 33,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:23:04",
-                "updated_at" => "2022-08-26 09:23:04",
                 "images" => null
             ],
             [
@@ -1910,8 +1310,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 2312,
                 "quantity" => 2222,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:23:24",
-                "updated_at" => "2022-08-26 09:23:24",
                 "images" => "[\"catalog/demo/product/17.jpg\"]"
             ],
             [
@@ -1926,8 +1324,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 2312,
                 "quantity" => 0,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:23:24",
-                "updated_at" => "2022-08-26 09:23:24",
                 "images" => "[\"catalog/demo/product/10.jpg\"]"
             ],
             [
@@ -1942,8 +1338,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 2312,
                 "quantity" => 22,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:23:24",
-                "updated_at" => "2022-08-26 09:23:24",
                 "images" => "[\"catalog/demo/product/17.jpg\"]"
             ],
             [
@@ -1958,8 +1352,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 2312,
                 "quantity" => 3333,
                 "is_default" => 0,
-                "created_at" => "2022-08-26 09:23:24",
-                "updated_at" => "2022-08-26 09:23:24",
                 "images" => "[\"catalog/demo/product/10.jpg\"]"
             ],
             [
@@ -1974,8 +1366,6 @@ class ProductsSeeder extends Seeder
                 "cost_price" => 43,
                 "quantity" => 546,
                 "is_default" => 1,
-                "created_at" => "2022-08-26 09:23:36",
-                "updated_at" => "2022-08-26 09:23:36",
                 "images" => null
             ],
         ];
