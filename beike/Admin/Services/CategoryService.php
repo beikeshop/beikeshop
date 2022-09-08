@@ -130,6 +130,53 @@ class CategoryService
             ->whereIn('category_id', $categoryPaths->pluck('category_id'))
             ->delete();
         CategoryPath::insert($paths);
+
+        // $this->repairCategories(0);
     }
 
+
+    /**
+     * 重建category path
+     *
+     * @param int $parentId
+     */
+    public function repairCategories(int $parentId = 0)
+    {
+        $categories = Category::query()->where('parent_id', $parentId)->get();
+
+        foreach ($categories as $category) {
+            // Delete the path below the current one
+            CategoryPath::query()->where('category_id', $category->id)->delete();
+
+            // Fix for records with no paths
+            $level = 0;
+            $subCategoryPaths = CategoryPath::query()->where('category_id', $parentId)->orderBy('level')->get();
+            foreach ($subCategoryPaths as $path) {
+                CategoryPath::query()->create([
+                    'category_id' => $category->id,
+                    'path_id' => $path->path_id,
+                    'level' => $level,
+                ]);
+                $level++;
+            }
+
+            $path = CategoryPath::query()
+                ->where('category_id', $category->id)
+                ->where('path_id', $category->id)
+                ->where('level', $level)
+                ->first();
+            $pathData = [
+                'category_id' => $category->id,
+                'path_id' => $category->id,
+                'level' => $level
+            ];
+            if ($path) {
+                $path->update($pathData);
+            } else {
+                CategoryPath::query()->create($pathData);
+            }
+
+            $this->repairCategories($category->id);
+        }
+    }
 }
