@@ -1612,7 +1612,7 @@ class SettingsSeeder extends Seeder
                 "contact" => [
                     "address" => [
                         "zh_cn" => "成都市高新区益州大道中段1858号天府软件园G8 成都光大网络科技有限公司",
-                        "en" => "G8 Tianfu Software Park Chengdu China\nChengdu Guangda Network Technology Co., Ltd."
+                        "en" => "G8 Tianfu Software Park Chengdu China, Guangda Network Technology Co., Ltd."
                     ],
                     "email" => "Marketing@guangda.work",
                     "telephone" => "028-87966209"
@@ -1621,7 +1621,7 @@ class SettingsSeeder extends Seeder
             "bottom" => [
                 "copyright" => [
                     "zh_cn" => "<div>技术支持 <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - 成都光大网络科技 &copy; 2022</div>",
-                    "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu Everbright Network Technology &copy; 2022</div>"
+                    "en" => "<div>Technical Support <a href=\"https://beikeshop.com/\" target=\"_blank\" rel=\"noopener\">beikeshop.com</a>&nbsp; - Chengdu GangdaNetwork Technology &copy; 2022</div>"
                 ],
                 "image" => "catalog/demo/banner/pay_icons.png"
             ],
