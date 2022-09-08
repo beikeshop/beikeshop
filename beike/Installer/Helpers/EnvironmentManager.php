@@ -34,7 +34,7 @@ class EnvironmentManager
      */
     public function getEnvContent()
     {
-        if (! file_exists($this->envPath)) {
+        if (!file_exists($this->envPath)) {
             if (file_exists($this->envExamplePath)) {
                 copy($this->envExamplePath, $this->envPath);
             } else {
@@ -95,36 +95,35 @@ class EnvironmentManager
         $results = trans('installer::installer_messages.environment.success');
 
         $appUrl = $_SERVER['REQUEST_SCHEME'] . "://";
-        if ($_SERVER["SERVER_PORT"] != "80")
-        {
-            $appUrl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] ;
+        if ($_SERVER["SERVER_PORT"] != "80") {
+            $appUrl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"];
         } else {
             $appUrl .= $_SERVER["SERVER_NAME"];
         }
 
         $envFileData =
-        'APP_NAME=\''.$request->app_name."'\n".
-        'APP_ENV='.$request->environment."\n".
-        'APP_KEY='.'base64:'.base64_encode(Str::random(32))."\n".
-        'APP_DEBUG=false'."\n".
-        'APP_LOG_LEVEL='.$request->app_log_level."\n".
-        'APP_URL='.$appUrl."\n\n".
-        'DB_CONNECTION='.$request->database_connection."\n".
-        'DB_HOST='.$request->database_hostname."\n".
-        'DB_PORT='.$request->database_port."\n".
-        'DB_DATABASE='.$request->database_name."\n".
-        'DB_USERNAME='.$request->database_username."\n".
-        'DB_PASSWORD='.$request->database_password."\n\n".
-        'BROADCAST_DRIVER=log'."\n".
-        'CACHE_DRIVER=file'."\n".
-        'SESSION_DRIVER=file'."\n".
-        'QUEUE_DRIVER=sync'."\n\n".
-        'MAIL_DRIVER='.$request->mail_driver."\n".
-        'MAIL_HOST='.$request->mail_host."\n".
-        'MAIL_PORT='.$request->mail_port."\n".
-        'MAIL_USERNAME='.$request->mail_username."\n".
-        'MAIL_PASSWORD='.$request->mail_password."\n".
-        'MAIL_ENCRYPTION='.$request->mail_encryption."\n\n";
+            'APP_NAME=\'' . ($request->app_name ?: 'BeikeShop') . "'\n" .
+            'APP_ENV=' . $request->environment . "\n" .
+            'APP_KEY=' . 'base64:' . base64_encode(Str::random(32)) . "\n" .
+            'APP_DEBUG=false' . "\n" .
+            'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
+            'APP_URL=' . $appUrl . "\n\n" .
+            'DB_CONNECTION=' . $request->database_connection . "\n" .
+            'DB_HOST=' . $request->database_hostname . "\n" .
+            'DB_PORT=' . $request->database_port . "\n" .
+            'DB_DATABASE=' . $request->database_name . "\n" .
+            'DB_USERNAME=' . $request->database_username . "\n" .
+            'DB_PASSWORD=' . $request->database_password . "\n\n" .
+            'BROADCAST_DRIVER=log' . "\n" .
+            'CACHE_DRIVER=file' . "\n" .
+            'SESSION_DRIVER=file' . "\n" .
+            'QUEUE_DRIVER=sync' . "\n\n" .
+            'MAIL_DRIVER=' . $request->mail_driver . "\n" .
+            'MAIL_HOST=' . $request->mail_host . "\n" .
+            'MAIL_PORT=' . $request->mail_port . "\n" .
+            'MAIL_USERNAME=' . $request->mail_username . "\n" .
+            'MAIL_PASSWORD=' . $request->mail_password . "\n" .
+            'MAIL_ENCRYPTION=' . $request->mail_encryption . "\n\n";
 
         try {
             file_put_contents($this->envPath, $envFileData);

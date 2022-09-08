@@ -2,14 +2,13 @@
 
 namespace Beike\Installer\Controllers;
 
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 use Beike\Installer\Helpers\EnvironmentManager;
-use Illuminate\Support\Facades\Session;
-use Validator;
 
 class EnvironmentController extends Controller
 {
@@ -43,9 +42,9 @@ class EnvironmentController extends Controller
      *
      * @param Request $request
      * @param Redirector $redirect
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function saveWizard(Request $request, Redirector $redirect)
+    public function saveWizard(Request $request, Redirector $redirect): RedirectResponse
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
@@ -71,7 +70,14 @@ class EnvironmentController extends Controller
         return redirect(route('installer.database', $params));
     }
 
-    public function validateDatabase(Request $request)
+
+    /**
+     * 数据库信息检测
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function validateDatabase(Request $request): array
     {
         $rules = config('installer.environment.form.rules');
         $messages = [
@@ -102,7 +108,7 @@ class EnvironmentController extends Controller
      * @param Request $request
      * @return array|bool
      */
-    private function checkDatabaseConnection(Request $request)
+    private function checkDatabaseConnection(Request $request): bool|array
     {
         $connection = $request->input('database_connection');
 
