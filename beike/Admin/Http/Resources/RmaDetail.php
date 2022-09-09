@@ -35,7 +35,7 @@ class RmaDetail extends JsonResource
             'product_name' => $this->product_name,
             'name' => $this->name,
             'sku' => $this->sku,
-            'reason' => $this->reason->name ? (json_decode($this->reason->name, true)[locale()] ?? '') : '',
+            'reason' => $this->reason ? (json_decode($this->reason->name, true)[locale()] ?? '') : '',
             'type_text' => $this->type_text,
         ];
     }
