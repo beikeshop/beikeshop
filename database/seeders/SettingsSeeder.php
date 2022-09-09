@@ -37,377 +37,46 @@ class SettingsSeeder extends Seeder
 
     public function getItems()
     {
-        return
-            [
-                [
-                    "id" => 94,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "country_id",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-06-30 10:54:48",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 142,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "locale",
-                    "value" => "en",
-                    "json" => 0,
-                    "created_at" => "2022-07-01 10:53:32",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 222,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "design_setting",
-                    "value" => $this->getHomeSetting(),
-                    "json" => 1,
-                    "created_at" => "2022-07-14 06:19:44",
-                    "updated_at" => "2022-08-26 09:01:54"
-                ],
-                [
-                    "id" => 236,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "theme",
-                    "value" => "default",
-                    "json" => 0,
-                    "created_at" => "2022-07-20 08:41:23",
-                    "updated_at" => "2022-08-19 16:23:06"
-                ],
-                [
-                    "id" => 242,
-                    "type" => "plugin",
-                    "space" => "service_charge",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-07-25 06:54:25",
-                    "updated_at" => "2022-07-25 06:54:25"
-                ],
-                [
-                    "id" => 244,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "status",
-                    "value" => "",
-                    "json" => 0,
-                    "created_at" => "2022-07-25 12:35:25",
-                    "updated_at" => "2022-07-29 06:49:54"
-                ],
-                [
-                    "id" => 246,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "admin_name",
-                    "value" => "admin",
-                    "json" => 0,
-                    "created_at" => "2022-07-25 13:25:12",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 247,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "tax",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-07-27 06:11:16",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 248,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "tax_address",
-                    "value" => "payment",
-                    "json" => 0,
-                    "created_at" => "2022-07-27 06:22:01",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 249,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "currency",
-                    "value" => "USD",
-                    "json" => 0,
-                    "created_at" => "2022-07-28 09:33:58",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 257,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "zone_id",
-                    "value" => "3",
-                    "json" => 0,
-                    "created_at" => "2022-07-29 06:48:36",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 260,
-                    "type" => "plugin",
-                    "space" => "header_menu",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-05 11:18:04",
-                    "updated_at" => "2022-08-05 11:18:04"
-                ],
-                [
-                    "id" => 266,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "footer_setting",
-                    "value" => $this->getFooterSetting(),
-                    "json" => 1,
-                ],
-                [
-                    "id" => 437,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "publishable_key",
-                    "value" => "pk_test_Flhi0NU77hK1IBFNpl02o5hN",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 06:39:08",
-                    "updated_at" => "2022-08-11 06:39:08"
-                ],
-                [
-                    "id" => 438,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "secret_key",
-                    "value" => "sk_test_FlsXnYjhoqLb6d5JzvpgKdMM",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 06:39:08",
-                    "updated_at" => "2022-08-11 06:39:08"
-                ],
-                [
-                    "id" => 439,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "test_mode",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 06:39:08",
-                    "updated_at" => "2022-08-11 06:39:08"
-                ],
-                [
-                    "id" => 443,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "sandbox_client_id",
-                    "value" => "AUd6ePa2vrHkWWbbl82VS9mhQ1cLlPO868bulTOgVuejU4Lt4aFHRX1rasJ8-jZmPln48iLfni8nvbn7",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 444,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "sandbox_secret",
-                    "value" => "EDRgLo5BWC_SBREGRY0X1-58h4j_4lntiavsFEiAXqnorulFXYzUAFHSNNIzaE1SZomBR3ObX-26E58i",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 445,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "live_client_id",
-                    "value" => "AUd6ePa2vrHkWWbbl82VS9mhQ1cLlPO868bulTOgVuejU4Lt4aFHRX1rasJ8-jZmPln48iLfni8nvbn7",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 446,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "live_secret",
-                    "value" => "EDRgLo5BWC_SBREGRY0X1-58h4j_4lntiavsFEiAXqnorulFXYzUAFHSNNIzaE1SZomBR3ObX-26E58i",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 447,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "sandbox_mode",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 449,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "logo",
-                    "value" => "catalog/logo.png",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:23:33",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 450,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "placeholder",
-                    "value" => "catalog/placeholder.png",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:27:34",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 451,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "favicon",
-                    "value" => "catalog/favicon.png",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:32:54",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 452,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "meta_title",
-                    "value" => "BeikeShop开源好用的跨境电商系统 - BeikeShop官网",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:48:25",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 453,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "meta_description",
-                    "value" => "BeikeShop 是一款开源好用的跨境电商建站系统，基于 Laravel 开发。主要面向外贸，和跨境行业。系统提供商品管理、订单管理、会员管理、支付、物流、系统管理等丰富功能",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:48:25",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 454,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "meta_keyword",
-                    "value" => "开源电商,开源代码,开源电商项目,b2b独立站,dtc独立站,跨境电商网",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:48:25",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 455,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "telephone",
-                    "value" => "028-87966209",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:48:25",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 456,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "email",
-                    "value" => "marketing@guangda.work",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 03:48:25",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 462,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "menu_setting",
-                    "value" => $this->getMenuSetting(),
-                    "json" => 1,
-                    "created_at" => "2022-07-14 06:19:44",
-                    "updated_at" => "2022-08-29 15:13:22"
-                ],
-                [
-                    "id" => 506,
-                    "type" => "plugin",
-                    "space" => "flat_shipping",
-                    "name" => "type",
-                    "value" => "percent",
-                    "json" => 0,
-                    "created_at" => "2022-08-22 14:41:00",
-                    "updated_at" => "2022-08-22 14:41:00"
-                ],
-                [
-                    "id" => 507,
-                    "type" => "plugin",
-                    "space" => "flat_shipping",
-                    "name" => "value",
-                    "value" => "10",
-                    "json" => 0,
-                    "created_at" => "2022-08-22 14:41:00",
-                    "updated_at" => "2022-08-22 14:41:00"
-                ],
-                [
-                    "id" => 509,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "default_customer_group_id",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-23 10:10:46",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
-                    "id" => 516,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-25 16:12:28",
-                    "updated_at" => "2022-08-25 16:12:28"
-                ],
-                [
-                    "id" => 517,
-                    "type" => "plugin",
-                    "space" => "latest_products",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-25 16:12:32",
-                    "updated_at" => "2022-08-25 16:12:32"
-                ],
-                [
-                    "id" => 518,
-                    "type" => "plugin",
-                    "space" => "flat_shipping",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-25 16:12:34",
-                    "updated_at" => "2022-08-25 16:12:34"
-                ],
-                [
-                    "id" => 519,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "status",
-                    "value" => "1",
-                    "json" => 0,
-                    "created_at" => "2022-08-25 16:12:55",
-                    "updated_at" => "2022-08-25 16:12:55"
-                ]
-            ];
+        return [
+            ["type" => "system", "space" => "base", "name" => "country_id", "value" => "44", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "locale", "value" => "en", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "design_setting", "value" => $this->getHomeSetting(), "json" => 1],
+            ["type" => "system", "space" => "base", "name" => "theme", "value" => "default", "json" => 0],
+            ["type" => "plugin", "space" => "service_charge", "name" => "status", "value" => "1", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "status", "value" => "", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "admin_name", "value" => "admin", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "tax", "value" => "1", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "tax_address", "value" => "payment", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "currency", "value" => "USD", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "zone_id", "value" => "710", "json" => 0],
+            ["type" => "plugin", "space" => "header_menu", "name" => "status", "value" => "1", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "footer_setting", "value" => $this->getFooterSetting(),
+                "json" => 1],
+            ["type" => "plugin", "space" => "stripe", "name" => "publishable_key", "value" => "pk_test_Flhi0NU77hK1IBFNpl02o5hN", "json" => 0],
+            ["type" => "plugin", "space" => "stripe", "name" => "secret_key", "value" => "sk_test_FlsXnYjhoqLb6d5JzvpgKdMM", "json" => 0],
+            ["type" => "plugin", "space" => "stripe", "name" => "test_mode", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "sandbox_client_id", "value" => "AUd6ePa2vrHkWWbbl82VS9mhQ1cLlPO868bulTOgVuejU4Lt4aFHRX1rasJ8-jZmPln48iLfni8nvbn7", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "sandbox_secret", "value" => "EDRgLo5BWC_SBREGRY0X1-58h4j_4lntiavsFEiAXqnorulFXYzUAFHSNNIzaE1SZomBR3ObX-26E58i", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "live_client_id", "value" => "AUd6ePa2vrHkWWbbl82VS9mhQ1cLlPO868bulTOgVuejU4Lt4aFHRX1rasJ8-jZmPln48iLfni8nvbn7", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "live_secret", "value" => "EDRgLo5BWC_SBREGRY0X1-58h4j_4lntiavsFEiAXqnorulFXYzUAFHSNNIzaE1SZomBR3ObX-26E58i", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "sandbox_mode", "value" => "1", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "logo", "value" => "catalog/logo.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "placeholder", "value" => "catalog/placeholder.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "favicon", "value" => "catalog/favicon.png", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "meta_title", "value" => "BeikeShop开源好用的跨境电商系统 - BeikeShop官网", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "meta_description", "value" => "BeikeShop 是一款开源好用的跨境电商建站系统，基于 Laravel 开发。主要面向外贸，和跨境行业。系统提供商品管理、订单管理、会员管理、支付、物流、系统管理等丰富功能", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "meta_keyword", "value" => "开源电商,开源代码,开源电商项目,b2b独立站,dtc独立站,跨境电商网", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "telephone", "value" => "028-87966209", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "email", "value" => "marketing@guangda.work", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "menu_setting", "value" => $this->getMenuSetting(), "json" => 1],
+            ["type" => "plugin", "space" => "flat_shipping", "name" => "type", "value" => "percent", "json" => 0],
+            ["type" => "plugin", "space" => "flat_shipping", "name" => "value", "value" => "10", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "default_customer_group_id", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "stripe", "name" => "status", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "latest_products", "name" => "status", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "flat_shipping", "name" => "status", "value" => "1", "json" => 0],
+            ["type" => "plugin", "space" => "paypal", "name" => "status", "value" => "1", "json" => 0]
+        ];
     }
 
 
