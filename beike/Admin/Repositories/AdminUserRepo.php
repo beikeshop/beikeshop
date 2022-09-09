@@ -11,8 +11,9 @@
 
 namespace Beike\Admin\Repositories;
 
-use Beike\Admin\Http\Resources\AdminUserDetail;
 use Beike\Models\AdminUser;
+use Beike\Admin\Http\Resources\AdminUserDetail;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class AdminUserRepo
 {
@@ -81,9 +82,13 @@ class AdminUserRepo
      * 删除后台用户
      *
      * @param $adminUserId
+     * @throws \Exception
      */
     public static function deleteAdminUser($adminUserId)
     {
+        if ($adminUserId == 1) {
+            throw new NotAcceptableHttpException(trans('admin/customer.cannot_delete_root'));
+        }
         $adminUser = AdminUser::query()->find($adminUserId);
         $adminUser->delete();
     }

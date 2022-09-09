@@ -70,9 +70,6 @@ class CustomerRepo
      */
     public static function delete($id)
     {
-        if ($id == 1) {
-            throw new \Exception(trans('admin/customer.cannot_delete_root'));
-        }
         Customer::query()->find($id)->delete();
     }
 
