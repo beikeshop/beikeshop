@@ -11,14 +11,20 @@
 
 namespace Beike\Shop\Services;
 
-
-
-use Beike\Repositories\OrderProductRepo;
 use Beike\Repositories\RmaRepo;
+use Illuminate\Database\Eloquent\Model;
+use Beike\Repositories\OrderProductRepo;
+use Illuminate\Database\Eloquent\Builder;
 
 class RmaService
 {
-    public static function createFromShop($data)
+    /**
+     * 创建RMA
+     *
+     * @param $data
+     * @return Model|Builder
+     */
+    public static function createFromShop($data): Model|Builder
     {
         $orderProduct = OrderProductRepo::find($data['order_product_id']);
         $customer = current_customer();
@@ -31,7 +37,6 @@ class RmaService
             'telephone' => $customer->telephone ?? '',
             'product_name' => $orderProduct->name,
             'sku' => $orderProduct->product_sku,
-            'product_name' => $orderProduct->name,
             'quantity' => $data['quantity'],
             'opened' => $data['opened'],
             'rma_reason_id' => $data['rma_reason_id'],
@@ -40,8 +45,6 @@ class RmaService
             'status' => 'pending',
         ];
 
-        $rma = RmaRepo::create($params);
-
-        return $rma;
+        return RmaRepo::create($params);
     }
 }
