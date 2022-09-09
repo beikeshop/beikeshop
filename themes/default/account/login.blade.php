@@ -31,11 +31,11 @@
               <hr>
 
               <el-form-item label="{{ __('shop/login.email') }}" prop="email">
-                <el-input v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
+                <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
               </el-form-item>
 
               <el-form-item label="{{ __('shop/login.password') }}" prop="password" class="mb-4">
-                <el-input type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
+                <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
               </el-form-item>
 
               <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
@@ -62,15 +62,15 @@
 
               <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
                 <el-form-item label="{{ __('shop/login.email') }}" prop="email">
-                  <el-input v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
+                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
                 </el-form-item>
 
                 <el-form-item label="{{ __('shop/login.password') }}" prop="password">
-                  <el-input type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
+                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
                 </el-form-item>
 
                 <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
-                  <el-input type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
+                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
                 </el-form-item>
 
 

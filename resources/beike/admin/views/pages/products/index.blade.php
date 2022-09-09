@@ -18,16 +18,16 @@
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.name') }}</label>
-              <input type="text" v-model="filter.name" class="form-control" placeholder="name">
+              <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control" placeholder="name">
             </div>
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.sku') }}</label>
-              <input type="text" v-model="filter.sku" class="form-control" placeholder="sku">
+              <input @keyup.enter="search" type="text" v-model="filter.sku" class="form-control" placeholder="sku">
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.model') }}</label>
-              <input type="text" v-model="filter.model" class="form-control" placeholder="model">
+              <input @keyup.enter="search" type="text" v-model="filter.model" class="form-control" placeholder="model">
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">

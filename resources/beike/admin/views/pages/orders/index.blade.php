@@ -13,14 +13,14 @@
         <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
           <div>
             <el-form-item label="{{ __('order.number') }}">
-              <el-input v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('order.customer_name') }}">
-              <el-input v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
+              <el-input @keyup.enter.native="search" v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
               </el-input>
             </el-form-item>
             <el-form-item label="{{ __('order.email') }}">
-              <el-input v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
             </el-form-item>
           </div>
           <el-form-item label="{{ __('order.created_at') }}">
