@@ -17,6 +17,10 @@ return [
     'install' => 'Install',
     'uninstall' => 'Uninstall',
 
+    // errors
+    'forbidden' => 'Forbidden',
+    'has_no_permission' => 'You have no permission, please contact with administrator.',
+
     // header
     'home' => 'Home',
     'order' => 'Orders',

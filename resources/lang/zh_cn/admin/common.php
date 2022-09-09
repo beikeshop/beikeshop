@@ -17,6 +17,10 @@ return [
     'install' => '安装',
     'uninstall' => '卸载',
 
+    // errors
+    'forbidden' => '禁止访问',
+    'has_no_permission' => '您没有权限访问该页面, 请联系系统管理员。',
+
     // header
     'home' => '管理首页',
     'order' => '订单管理',
