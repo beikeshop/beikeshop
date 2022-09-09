@@ -113,7 +113,7 @@
                               <el-link type="danger" class="ms-2" @click="removeSourceVariant(variantIndex)">{{ __('common.delete') }}</el-link>
                             </div>
                             <div>
-                              <el-checkbox v-model="variant.isImage" border size="mini" class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>
+                              <el-checkbox v-model="variant.isImage" @change="(e) => {variantIsImage(e, variantIndex)}" border size="mini" class="me-2 bg-white">{{ __('admin/product.add_variable_image') }}</el-checkbox>
                               <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</el-button>
                             </div>
                           </div>
@@ -371,6 +371,14 @@
         }
       },
       methods: {
+        variantIsImage(e, index) {
+          if (!e) {
+            this.source.variables[index].values.forEach(v => {
+              v.image = '';
+            })
+          }
+        },
+
         addProductImages(skuIndex) {
           bk.fileManagerIframe(images => {
             if (!isNaN(skuIndex)) {
