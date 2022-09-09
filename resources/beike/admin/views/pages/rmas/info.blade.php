@@ -42,7 +42,7 @@
               </tr>
               <tr>
                 <td>{{ __('admin/rma.reasons_return') }}：</td>
-                <td>{{ $rma['quantity'] }}</td>
+                <td>{{ $rma['reason'] }}</td>
               </tr>
             </tbody>
           </table>
