@@ -7,7 +7,7 @@ const instance = axios.create({
   headers: {'X-CSRF-TOKEN': token},
 });
 
-axios.defaults.timeout = 5000; // 请求超时
+axios.defaults.timeout = 10000; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
 // console.log(process.env.VUE_APP_BASE_URL)
 axios.defaults.baseURL = base;
