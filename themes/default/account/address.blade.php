@@ -80,7 +80,7 @@
           phone: '',
           country_id: @json((int) system_setting('base.country_id')),
           zipcode: '',
-          zone_id: '',
+          zone_id: @json((int) system_setting('base.zone_id')),
           city: '',
           address_1: '',
           address_2: '',
