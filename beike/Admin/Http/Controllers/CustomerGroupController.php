@@ -51,6 +51,9 @@ class CustomerGroupController extends Controller
 
     public function destroy(Request $request, int $id)
     {
+        if ($id == setting('base.default_customer_group_id')) {
+            return json_fail(trans('customer_group.default_cannot_delete'));
+        }
         CustomerGroupRepo::delete($id);
 
         return json_success(trans('common.deleted_success'));
