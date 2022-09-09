@@ -452,7 +452,7 @@ class SettingsSeeder extends Seeder
                     "type" => "system",
                     "space" => "base",
                     "name" => "default_customer_group_id",
-                    "value" => "36",
+                    "value" => "1",
                     "json" => 0,
                     "created_at" => "2022-08-23 10:10:46",
                     "updated_at" => "2022-08-31 18:14:36"
