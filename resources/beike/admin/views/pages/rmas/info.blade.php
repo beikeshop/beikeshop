@@ -33,8 +33,8 @@
                 <td>{{ $rma['product_name'] }}</td>
               </tr>
               <tr>
-                <td>{{ __('product.model') }}：</td>
-                <td>{{ $rma['model'] }}</td>
+                <td>{{ __('product.sku') }}：</td>
+                <td>{{ $rma['sku'] }}</td>
               </tr>
               <tr>
                 <td>{{ __('admin/rma.quantity') }}：</td>
