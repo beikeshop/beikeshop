@@ -141,22 +141,22 @@ class RmaRepo
     public static function getStatuses(): array
     {
         return [
-            'pending' => '待处理',
-            'rejected' => '已拒绝',
-            'approved' => '已批准（待顾客寄回商品）',
-            'shipped' => '已发货（寄回商品）',
-            'completed' => '已完成'
+            'pending' => trans('rma.status_pending'),
+            'rejected' => trans('rma.status_rejected'),
+            'approved' => trans('rma.status_approved'),
+            'shipped' => trans('rma.status_shipped'),
+            'completed' => trans('rma.status_completed')
         ];
     }
 
     public static function getTypes(): array
     {
         return [
-            'return' => '退货',
-            'exchange' => '换货',
-            'repair' => '维修',
-            'reissue' => '补发商品',
-            'refund' => '仅退款'
+            'return' => trans('rma.type_return'),
+            'exchange' => trans('rma.type_exchange'),
+            'repair' => trans('rma.type_repair'),
+            'reissue' => trans('rma.type_reissue'),
+            'refund' => trans('rma.type_refund')
         ];
     }
 }

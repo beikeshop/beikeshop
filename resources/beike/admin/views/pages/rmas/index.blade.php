@@ -13,7 +13,7 @@
               <th>{{ __('common.email') }}</th>
               <th>{{ __('common.phone') }}</th>
               <th>{{ __('admin/builder.modules_product') }}</th>
-              <th>{{ __('product.model') }}</th>
+              <th>{{ __('product.sku') }}</th>
               <th>{{ __('admin/rma.quantity') }}</th>
               <th>{{ __('admin/rma.service_type') }}</th>
               <th>{{ __('common.status') }}</th>
@@ -28,7 +28,7 @@
                   <td>{{ $rma['email'] }}</td>
                   <td>{{ $rma['telephone'] }}</td>
                   <td>{{ $rma['product_name'] }}</td>
-                  <td>{{ $rma['model'] }}</td>
+                  <td>{{ $rma['sku'] }}</td>
                   <td>{{ $rma['quantity'] }}</td>
                   <td>{{ $rma['type'] }}</td>
                   <td>{{ $rma['status'] }}</td>
