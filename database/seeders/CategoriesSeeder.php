@@ -15,6 +15,7 @@ use Beike\Models\Category;
 use Beike\Models\CategoryPath;
 use Illuminate\Database\Seeder;
 use Beike\Models\CategoryDescription;
+use Beike\Admin\Services\CategoryService;
 
 class CategoriesSeeder extends Seeder
 {
@@ -44,9 +45,11 @@ class CategoriesSeeder extends Seeder
         $paths = $this->getCategoryPaths();
         if ($paths) {
             CategoryPath::query()->truncate();
-            foreach ($paths as $item) {
-                CategoryPath::query()->create($item);
-            }
+            CategoryPath::query()->insert(collect($paths)->map(function ($item) {
+                $item['created_at'] = now();
+                $item['updated_at'] = now();
+                return $item;
+            })->toArray());
         }
         // (new CategoryService())->repairCategories(0);
     }
@@ -55,15 +58,13 @@ class CategoriesSeeder extends Seeder
     public function getCategories()
     {
         return [
-            ["id" => 100001, "parent_id" => 0, "position" => 2, "active" => 1],
-            ["id" => 100002, "parent_id" => 100001, "position" => 0, "active" => 1],
+            ["id" => 100002, "parent_id" => 100007, "position" => 0, "active" => 1],
             ["id" => 100003, "parent_id" => 0, "position" => 1, "active" => 1],
             ["id" => 100004, "parent_id" => 100007, "position" => 0, "active" => 1],
             ["id" => 100005, "parent_id" => 0, "position" => 0, "active" => 1],
             ["id" => 100006, "parent_id" => 0, "position" => 0, "active" => 1],
             ["id" => 100007, "parent_id" => 0, "position" => 9, "active" => 1],
             ["id" => 100008, "parent_id" => 100006, "position" => 0, "active" => 1],
-            ["id" => 100009, "parent_id" => 0, "position" => 0, "active" => 0],
             ["id" => 100010, "parent_id" => 0, "position" => 0, "active" => 1],
             ["id" => 100011, "parent_id" => 100010, "position" => 0, "active" => 1],
             ["id" => 100012, "parent_id" => 0, "position" => 0, "active" => 1],
@@ -406,33 +407,33 @@ class CategoriesSeeder extends Seeder
     public function getCategoryPaths()
     {
         return [
-            ["id" => 183, "category_id" => 100003, "path_id" => 100003, "level" => 0],
-            ["id" => 184, "category_id" => 100013, "path_id" => 100003, "level" => 0],
-            ["id" => 185, "category_id" => 100013, "path_id" => 100013, "level" => 1],
-            ["id" => 186, "category_id" => 100015, "path_id" => 100003, "level" => 0],
-            ["id" => 187, "category_id" => 100015, "path_id" => 100013, "level" => 1],
-            ["id" => 188, "category_id" => 100015, "path_id" => 100015, "level" => 2],
-            ["id" => 189, "category_id" => 100014, "path_id" => 100003, "level" => 0],
-            ["id" => 190, "category_id" => 100014, "path_id" => 100014, "level" => 1],
-            ["id" => 191, "category_id" => 100016, "path_id" => 100003, "level" => 0],
-            ["id" => 192, "category_id" => 100016, "path_id" => 100014, "level" => 1],
-            ["id" => 193, "category_id" => 100016, "path_id" => 100016, "level" => 2],
-            ["id" => 194, "category_id" => 100005, "path_id" => 100005, "level" => 0],
-            ["id" => 195, "category_id" => 100006, "path_id" => 100006, "level" => 0],
-            ["id" => 196, "category_id" => 100008, "path_id" => 100006, "level" => 0],
-            ["id" => 197, "category_id" => 100008, "path_id" => 100008, "level" => 1],
-            ["id" => 198, "category_id" => 100007, "path_id" => 100007, "level" => 0],
-            ["id" => 199, "category_id" => 100002, "path_id" => 100007, "level" => 0],
-            ["id" => 200, "category_id" => 100002, "path_id" => 100002, "level" => 1],
-            ["id" => 201, "category_id" => 100004, "path_id" => 100007, "level" => 0],
-            ["id" => 202, "category_id" => 100004, "path_id" => 100004, "level" => 1],
-            ["id" => 204, "category_id" => 100010, "path_id" => 100010, "level" => 0],
-            ["id" => 205, "category_id" => 100011, "path_id" => 100010, "level" => 0],
-            ["id" => 206, "category_id" => 100011, "path_id" => 100011, "level" => 1],
-            ["id" => 207, "category_id" => 100012, "path_id" => 100012, "level" => 0],
-            ["id" => 208, "category_id" => 100018, "path_id" => 100018, "level" => 0],
-            ["id" => 209, "category_id" => 100017, "path_id" => 100018, "level" => 0],
-            ["id" => 210, "category_id" => 100017, "path_id" => 100017, "level" => 1]
+            ["id" => 1, "category_id" => 100003, "path_id" => 100003, "level" => 0],
+            ["id" => 2, "category_id" => 100005, "path_id" => 100005, "level" => 0],
+            ["id" => 3, "category_id" => 100006, "path_id" => 100006, "level" => 0],
+            ["id" => 4, "category_id" => 100008, "path_id" => 100006, "level" => 0],
+            ["id" => 5, "category_id" => 100008, "path_id" => 100008, "level" => 1],
+            ["id" => 6, "category_id" => 100007, "path_id" => 100007, "level" => 0],
+            ["id" => 7, "category_id" => 100002, "path_id" => 100007, "level" => 0],
+            ["id" => 8, "category_id" => 100002, "path_id" => 100002, "level" => 1],
+            ["id" => 9, "category_id" => 100004, "path_id" => 100007, "level" => 0],
+            ["id" => 10, "category_id" => 100004, "path_id" => 100004, "level" => 1],
+            ["id" => 11, "category_id" => 100010, "path_id" => 100010, "level" => 0],
+            ["id" => 12, "category_id" => 100011, "path_id" => 100010, "level" => 0],
+            ["id" => 13, "category_id" => 100011, "path_id" => 100011, "level" => 1],
+            ["id" => 14, "category_id" => 100013, "path_id" => 100010, "level" => 0],
+            ["id" => 15, "category_id" => 100013, "path_id" => 100013, "level" => 1],
+            ["id" => 16, "category_id" => 100015, "path_id" => 100010, "level" => 0],
+            ["id" => 17, "category_id" => 100015, "path_id" => 100013, "level" => 1],
+            ["id" => 18, "category_id" => 100015, "path_id" => 100015, "level" => 2],
+            ["id" => 19, "category_id" => 100014, "path_id" => 100010, "level" => 0],
+            ["id" => 20, "category_id" => 100014, "path_id" => 100014, "level" => 1],
+            ["id" => 21, "category_id" => 100016, "path_id" => 100010, "level" => 0],
+            ["id" => 22, "category_id" => 100016, "path_id" => 100014, "level" => 1],
+            ["id" => 23, "category_id" => 100016, "path_id" => 100016, "level" => 2],
+            ["id" => 24, "category_id" => 100012, "path_id" => 100012, "level" => 0],
+            ["id" => 25, "category_id" => 100018, "path_id" => 100018, "level" => 0],
+            ["id" => 26, "category_id" => 100017, "path_id" => 100018, "level" => 0],
+            ["id" => 27, "category_id" => 100017, "path_id" => 100017, "level" => 1]
         ];
     }
 }
