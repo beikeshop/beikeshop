@@ -32,4 +32,5 @@ return [
     'can_empty' => 'Can not be empty',
     'finish' => 'Finish',
     'uploading' => 'loading...',
+    'file_manager' => 'File Manager',
 ];

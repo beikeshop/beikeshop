@@ -49,6 +49,9 @@
     @if (locale() != 'zh_cn')
       ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
     @endif
+    const lang = {
+      file_manager: '{{ __('admin/file_manager.file_manager') }}',
+    }
   </script>
   @stack('footer')
 </body>

@@ -4,7 +4,7 @@ export default {
 
     layer.open({
       type: 2,
-      title: '图片管理器',
+      title: lang.file_manager,
       shadeClose: false,
       skin: 'file-manager-box',
       scrollbar: false,

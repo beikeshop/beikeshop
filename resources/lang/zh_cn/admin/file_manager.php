@@ -32,4 +32,5 @@ return [
     'can_empty' => '不能为空',
     'finish' => '完成',
     'uploading' => '上传中',
+    'file_manager' => '图片管理器',
 ];
