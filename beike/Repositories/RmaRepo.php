@@ -71,6 +71,8 @@ class RmaRepo
             $rma = self::find($rma);
         }
         $rma->histories()->create($data);
+        $rma->status = $data['status'];
+        $rma->saveOrFail();
         return $rma;
     }
 
