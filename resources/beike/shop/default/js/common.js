@@ -118,6 +118,7 @@ export default {
       title: '',
       shadeClose: true,
       area: ['900px', '600px'],
+      skin: 'login-pop-box',
       content: 'login?iframe=true' //iframe的url
     });
   }

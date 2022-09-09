@@ -81,6 +81,15 @@ body[class^="page-account-"] {
   }
 }
 
+.login-pop-box {
+  overflow: inherit;
+
+  @media (max-width: 768px) {
+    width: 90% !important;
+    height: 80% !important;
+  }
+}
+
 .module-title {
   font-size: 1.5rem;
   text-align: center;
