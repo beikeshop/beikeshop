@@ -357,28 +357,17 @@
             null;
         }
 
-        $.ajax({
-          url: 'admin/'+url,
-          // dataType: 'json',
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-          // beforeSend: function() { self.loading = true;; },
-          complete: function() { self.nameLoading = false; },
-          success: function (json) {
-            console.log(json);
+        $http.get(url, null, {hload: true, hmsg: true}).then((res) => {
+          if (res.data) {
+            self.name = res.data;
+          } else {
+            self.name = '{{ __('admin/builder.text_no_data') }}';
           }
+        }).catch(() => {
+          self.name = '{{ __('admin/builder.text_no_data') }}';
+        }).finally(() => {
+          self.nameLoading = false;
         });
-
-        // $http.get(url, null, {hload: true, hmsg: true}).then((res) => {
-        //   if (res.data) {
-        //     self.name = res.data;
-        //   } else {
-        //     self.name = '{{ __('admin/builder.text_no_data') }}';
-        //   }
-        // }).catch(() => {
-        //   self.name = '{{ __('admin/builder.text_no_data') }}';
-        // }).finally(() => {
-        //   self.nameLoading = false;
-        // });
       },
     }
   });
