@@ -20,6 +20,7 @@ class CartDetail extends JsonResource
         $sku = $this->sku;
         $product = $sku->product;
         $price = $sku->price;
+        $skuCode = $sku->sku;
         $description = $product->description;
         $productName = $description->name;
         $subTotal = $price * $this->quantity;
@@ -29,6 +30,7 @@ class CartDetail extends JsonResource
             'cart_id' => $this->id,
             'product_id' => $this->product_id,
             'sku_id' => $this->product_sku_id,
+            'product_sku' => $skuCode,
             'name' => $productName,
             'name_format' => sub_string($productName),
             'image' => $image,

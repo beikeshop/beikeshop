@@ -19,6 +19,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class OrderProductRepo
 {
+    /**
+     * 创建商品明细
+     *
+     * @param Order $order
+     * @param $cartProducts
+     */
     public static function createOrderProducts(Order $order, $cartProducts)
     {
         $orderProducts = [];
@@ -26,7 +32,7 @@ class OrderProductRepo
             $orderProducts[] = [
                 'product_id' => $cartProduct['product_id'],
                 'order_number' => $order->number,
-                'product_sku' => $cartProduct['sku_id'],
+                'product_sku' => $cartProduct['product_sku'],
                 'name' => $cartProduct['name'],
                 'image' => $cartProduct['image'],
                 'quantity' => $cartProduct['quantity'],
@@ -36,11 +42,14 @@ class OrderProductRepo
         $order->orderProducts()->createMany($orderProducts);
     }
 
+
     /**
+     * 查找单条商品明细数据
+     *
      * @param $id
      * @return Builder|Builder[]|Collection|Model|null
      */
-    public static function find($id)
+    public static function find($id): Model|Collection|Builder|array|null
     {
         return OrderProduct::query()->findOrFail($id);
     }
