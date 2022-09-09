@@ -11,16 +11,16 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Requests\CustomerGroupRequest;
-use Beike\Admin\Http\Resources\CustomerGroupDetail;
-use Beike\Admin\Services\CustomerGroupService;
-use Beike\Repositories\CustomerGroupRepo;
-use Beike\Repositories\LanguageRepo;
 use Illuminate\Http\Request;
+use Beike\Repositories\LanguageRepo;
+use Beike\Repositories\CustomerGroupRepo;
+use Beike\Admin\Services\CustomerGroupService;
+use Beike\Admin\Http\Requests\CustomerGroupRequest;
 
 class CustomerGroupController extends Controller
 {
     protected string $defaultRoute = 'customer_groups.index';
+
     public function index(Request $request)
     {
         $customers = CustomerGroupRepo::list();
@@ -51,11 +51,7 @@ class CustomerGroupController extends Controller
 
     public function destroy(Request $request, int $id)
     {
-        if ($id == setting('base.default_customer_group_id')) {
-            return json_fail(trans('customer_group.default_cannot_delete'));
-        }
         CustomerGroupRepo::delete($id);
-
         return json_success(trans('common.deleted_success'));
     }
 }

@@ -15,6 +15,7 @@ use Beike\Models\CustomerGroup;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class CustomerGroupRepo
 {
@@ -58,13 +59,13 @@ class CustomerGroupRepo
 
     /**
      * @param $id
-     * @return array
+     * @return mixed
      */
-    public static function delete($id): array
+    public static function delete($id)
     {
         $defaultCustomerGroupId = system_setting('base.default_customer_group_id');
         if ($id == $defaultCustomerGroupId) {
-            return json_fail(trans('customer_group.default_cannot_delete'));
+            throw new NotAcceptableHttpException(trans('admin/customer_group.default_cannot_delete'));
         }
         $group = CustomerGroup::query()->find($id);
         if ($group) {
