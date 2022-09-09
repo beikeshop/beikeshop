@@ -11,14 +11,12 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Admin\Http\Resources\CustomerGroupDetail;
-use Beike\Models\CustomerGroup;
-use Beike\Repositories\CustomerGroupRepo;
+use Illuminate\Http\Request;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
-use Beike\Repositories\SystemSettingRepo;
-use Illuminate\Http\Request;
+use Beike\Repositories\CustomerGroupRepo;
+use Beike\Admin\Http\Resources\CustomerGroupDetail;
 
 class SettingController extends Controller
 {

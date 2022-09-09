@@ -12,25 +12,30 @@
 namespace Beike\Repositories;
 
 use Beike\Models\CustomerGroup;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomerGroupRepo
 {
     /**
      * 创建一个CustomerGroup记录
      * @param $data
-     * @return int
+     * @return Builder|Model
      */
-    public static function create($data)
+    public static function create($data): Model|Builder
     {
         return CustomerGroup::query()->create($data);
     }
 
+
     /**
      * @param $id
      * @param $data
-     * @return bool|int
+     * @return Builder|Builder[]|Collection|Model
+     * @throws \Exception
      */
-    public static function update($id, $data)
+    public static function update($id, $data): Model|Collection|Builder|array
     {
         $group = CustomerGroup::query()->find($id);
         if (!$group) {
@@ -40,32 +45,42 @@ class CustomerGroupRepo
         return $group;
     }
 
+
     /**
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return Builder|Builder[]|Collection|Model|null
      */
-    public static function find($id)
+    public static function find($id): Model|Collection|Builder|array|null
     {
         return CustomerGroup::query()->findOrFail($id);
     }
 
+
     /**
      * @param $id
-     * @return void
+     * @return array
      */
-    public static function delete($id)
+    public static function delete($id): array
     {
+        $defaultCustomerGroupId = system_setting('base.default_customer_group_id');
+        if ($id == $defaultCustomerGroupId) {
+            return json_fail(trans('customer_group.default_cannot_delete'));
+        }
         $group = CustomerGroup::query()->find($id);
         if ($group) {
             $group->delete();
         }
     }
 
-    public static function list()
+
+    /**
+     * 获取用户组列表
+     *
+     * @return Builder[]|Collection
+     */
+    public static function list(): Collection|array
     {
         $builder = CustomerGroup::query()->with('description', 'descriptions');
-        $groups = $builder->get();
-
-        return $groups;
+        return $builder->get();
     }
 }
