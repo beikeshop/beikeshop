@@ -105,6 +105,9 @@ class SettingRepo
 
         $rows = [];
         foreach ($fields as $name => $value) {
+            if (in_array($name, ['_method', '_token'])) {
+                continue;
+            }
             $rows[] = [
                 'type' => $type,
                 'space' => $code,
@@ -127,9 +130,13 @@ class SettingRepo
      */
     public static function createOrUpdate($data)
     {
+        $name = $data['name'] ?? '';
+        if (in_array($name, ['_method', '_token'])) {
+            return;
+        }
+
         $type = $data['type'] ?? '';
         $space = $data['space'] ?? '';
-        $name = $data['name'] ?? '';
         $value = (string)$data['value'] ?? '';
         $json = (bool)$data['json'] ?? is_array($value);
 

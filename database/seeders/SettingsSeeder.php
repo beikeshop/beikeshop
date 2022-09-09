@@ -150,16 +150,6 @@ class SettingsSeeder extends Seeder
                     "updated_at" => "2022-08-31 18:14:36"
                 ],
                 [
-                    "id" => 258,
-                    "type" => "system",
-                    "space" => "base",
-                    "name" => "_token",
-                    "value" => "ZVu8AAf63UmINL4jELMwsK2hW9MA2a11mrlPTb8f",
-                    "json" => 0,
-                    "created_at" => "2022-08-05 11:01:09",
-                    "updated_at" => "2022-08-31 18:14:36"
-                ],
-                [
                     "id" => 260,
                     "type" => "plugin",
                     "space" => "header_menu",
@@ -176,46 +166,6 @@ class SettingsSeeder extends Seeder
                     "name" => "footer_setting",
                     "value" => $this->getFooterSetting(),
                     "json" => 1,
-                ],
-                [
-                    "id" => 306,
-                    "type" => "plugin",
-                    "space" => "latest_products",
-                    "name" => "_token",
-                    "value" => "a5tv1jermA4okE4DjmwQAH1WuEj7aed6ez25dDmV",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 03:09:51",
-                    "updated_at" => "2022-08-11 03:09:51"
-                ],
-                [
-                    "id" => 307,
-                    "type" => "plugin",
-                    "space" => "latest_products",
-                    "name" => "_method",
-                    "value" => "put",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 03:09:51",
-                    "updated_at" => "2022-08-11 03:09:51"
-                ],
-                [
-                    "id" => 435,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "_token",
-                    "value" => "T0LajKAiOtNNb1eXK4H9lvxJupHjAqyAkzdMYS9b",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 06:39:08",
-                    "updated_at" => "2022-08-11 06:39:08"
-                ],
-                [
-                    "id" => 436,
-                    "type" => "plugin",
-                    "space" => "stripe",
-                    "name" => "_method",
-                    "value" => "put",
-                    "json" => 0,
-                    "created_at" => "2022-08-11 06:39:08",
-                    "updated_at" => "2022-08-11 06:39:08"
                 ],
                 [
                     "id" => 437,
@@ -246,26 +196,6 @@ class SettingsSeeder extends Seeder
                     "json" => 0,
                     "created_at" => "2022-08-11 06:39:08",
                     "updated_at" => "2022-08-11 06:39:08"
-                ],
-                [
-                    "id" => 441,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "_token",
-                    "value" => "x7wQxPIUmuVIYEMQ7UujlczIQvuRW0uoKfmElCt7",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
-                ],
-                [
-                    "id" => 442,
-                    "type" => "plugin",
-                    "space" => "paypal",
-                    "name" => "_method",
-                    "value" => "put",
-                    "json" => 0,
-                    "created_at" => "2022-08-12 01:20:15",
-                    "updated_at" => "2022-08-12 01:20:15"
                 ],
                 [
                     "id" => 443,
@@ -406,26 +336,6 @@ class SettingsSeeder extends Seeder
                     "json" => 1,
                     "created_at" => "2022-07-14 06:19:44",
                     "updated_at" => "2022-08-29 15:13:22"
-                ],
-                [
-                    "id" => 504,
-                    "type" => "plugin",
-                    "space" => "flat_shipping",
-                    "name" => "_token",
-                    "value" => "NfoFyPbATfYS57KmHyHZgJJLubz78Ngv8uDTKYjL",
-                    "json" => 0,
-                    "created_at" => "2022-08-22 14:41:00",
-                    "updated_at" => "2022-08-22 14:41:00"
-                ],
-                [
-                    "id" => 505,
-                    "type" => "plugin",
-                    "space" => "flat_shipping",
-                    "name" => "_method",
-                    "value" => "put",
-                    "json" => 0,
-                    "created_at" => "2022-08-22 14:41:00",
-                    "updated_at" => "2022-08-22 14:41:00"
                 ],
                 [
                     "id" => 506,
