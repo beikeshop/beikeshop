@@ -129,8 +129,9 @@
             }
 
             $http.post(`rmas/history/${this.rma.id}`,this.form).then((res) => {
-              console.log(res)
-              layer.msg(res.message);
+              layer.msg(res.message, {time: 1000}, ()=> {
+                window.location.reload();
+              });
             })
           });
         }
