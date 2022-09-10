@@ -3,7 +3,6 @@
 @section('body-class', 'page-account-edit')
 
 @push('header')
-  {{-- <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script> --}}
   <script src="{{ asset('vendor/cropper/cropper.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/cropper/cropper.min.css') }}">
 @endpush
@@ -12,13 +11,6 @@
   <div class="container" id="address-app">
 
     <x-shop-breadcrumb type="static" value="account.edit.index" />
-
-    {{-- <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav> --}}
 
     <div class="row">
       <x-shop-sidebar />
@@ -58,15 +50,13 @@
                     value="{{ old('name', $customer->name ?? '') }}" required>
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account.edit.name')]) }}</span>
-                  {{-- @if ($errors->has('name'))@endif --}}
                 </div>
                 <div class="col-sm-6">
                   <label class="form-label">{{ __('shop/account.edit.email') }}</label>
                   <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
-                    name="email" value="{{ old('name', $customer->email ?? '') }}" required>
+                    name="email" value="{{ old('email', $customer->email ?? '') }}" required>
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account.edit.email')]) }}</span>
-                  {{-- @if ($errors->has('email'))@endif --}}
                 </div>
                 <div class="col-12 mt-4">
                   <button class="btn btn-primary mt-sm-0" type="submit">{{ __('common.submit') }}</button>
