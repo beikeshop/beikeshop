@@ -20,6 +20,11 @@
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
   @stack('header')
+  <script>
+    const lang = {
+      file_manager: '{{ __('admin/file_manager.file_manager') }}',
+    }
+  </script>
 </head>
 
 <body class="page-design">
