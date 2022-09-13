@@ -46,6 +46,7 @@ return [
         'storage/framework/'     => '755',
         'storage/logs/'          => '755',
         'bootstrap/cache/'       => '755',
+        '.env'                   => '755',
     ],
 
     /*
