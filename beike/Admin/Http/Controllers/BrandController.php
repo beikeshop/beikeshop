@@ -1,18 +1,10 @@
 <?php
-/*
- * @copyright     2022 opencart.cn - All Rights Reserved.
- * @link          https://www.guangdawangluo.com
- * @Author        PS <pushuo@opencart.cn>
- * @Date          2022-08-02 19:19:52
- * @LastEditTime  2022-08-10 19:07:07
- */
-
 /**
  * BrandController.php
  *
- * @copyright  2022 opencart.cn - All Rights Reserved
- * @link       http://www.guangdawangluo.com
- * @author     TL <mengwb@opencart.cn>
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     TL <mengwb@guangda.work>
  * @created    2022-07-27 21:17:04
  * @modified   2022-07-27 21:17:04
  */

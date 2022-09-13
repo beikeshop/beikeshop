@@ -2,9 +2,9 @@
 /**
  * UserRepo.php
  *
- * @copyright  2022 opencart.cn - All Rights Reserved
- * @link       http://www.guangdawangluo.com
- * @author     TL <mengwb@opencart.cn>
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     TL <mengwb@guangda.work>
  * @created    2022-07-14 11:45:41
  * @modified   2022-07-14 11:45:41
  */

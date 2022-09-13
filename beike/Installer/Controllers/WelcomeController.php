@@ -2,9 +2,9 @@
 /**
  * WelcomeController.php
  *
- * @copyright  2022 opencart.cn - All Rights Reserved
- * @link       http://www.guangdawangluo.com
- * @author     TL <mengwb@opencart.cn>
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     TL <mengwb@guangda.work>
  * @created    2022-08-12 20:17:04
  * @modified   2022-08-12 20:17:04
  */
@@ -38,7 +38,7 @@ class WelcomeController extends Controller
     public function locale($lang)
     {
         setcookie('locale', $lang, 0, '/');
-        
+
         return Redirect::back();
     }
 }

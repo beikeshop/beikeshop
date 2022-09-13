@@ -3,9 +3,9 @@
 /**
  * ShippingService.php
  *
- * @copyright  2022 opencart.cn - All Rights Reserved
- * @link       http://www.guangdawangluo.com
- * @author     Edward Yang <yangjin@opencart.cn>
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
  * @created    2022-07-22 17:58:14
  * @modified   2022-07-22 17:58:14
  */
