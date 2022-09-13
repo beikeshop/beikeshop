@@ -66,13 +66,13 @@
                     <tbody>
                       @foreach ($latest_orders as $order)
                       <tr class="align-middle">
-                        <td>
-                          <div class="img me-3 border wh-60">
+                        <td style="width: 62px">
+                          <div class="img border wh-60">
                             <img src="{{ $order->orderProducts[0]->image ?? '' }}" class="img-fluid">
                           </div>
                         </td>
                         <td>
-                          <div class="mb-2">{{ __('shop/account.order_number') }}：{{ $order->number }} <span class="vr lh-1 mx-2 bg-secondary"></span> {{ __('shop/account.all') }} {{ count($order->orderProducts) }} {{ __('shop/account.items') }}</div>
+                          <div class="mb-2">{{ __('shop/account.order_number') }}：<span style="width: 110px;display: inline-block;">{{ $order->number }}</span> <span class="vr lh-1 me-2 bg-secondary"></span> {{ __('shop/account.all') }} {{ count($order->orderProducts) }} {{ __('shop/account.items') }}</div>
                           <div class="text-muted">{{ __('shop/account.order_time') }}：{{ $order->created_at }}</div>
                         </td>
                         <td>
