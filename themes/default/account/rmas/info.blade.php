@@ -47,6 +47,11 @@
               </div>
 
               <div class="col-sm-6 mb-4">
+                <label class="form-label">{{ __('common.status') }}</label>
+                <div>{{ $rma->status }}</div>
+              </div>
+
+              <div class="col-sm-6 mb-4">
                 <label class="form-label">{{ __('shop/account.rma.rma_form.unpacked') }}</label>
                 <div>
                   @if ($rma->opened)
