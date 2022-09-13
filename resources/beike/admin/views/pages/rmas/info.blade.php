@@ -85,8 +85,24 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.operation_history') }}</h6></div>
     <div class="card-body">
-      @foreach ($histories as $history)
-      @endforeach
+      <table class="table ">
+        <thead class="">
+          <tr>
+            <th>{{ __('order.history_status') }}</th>
+            <th width="60%">{{ __('order.history_comment') }}</th>
+            <th>{{ __('order.history_created_at') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($histories as $history)
+            <tr>
+              <td>{{ $history->status }}</td>
+              <td>{{ $history->comment }}</td>
+              <td>{{ $history->created_at }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 @endsection
