@@ -15,7 +15,7 @@ if (!file_exists($htaPath)) {
 }
 
 if (!file_exists(__DIR__ . '/../storage/installed')
-    && !(isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] == '/installer')
+    && !(isset($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 10) == '/installer')
     && (stripos($_SERVER['REQUEST_URI'], '_debugbar') !== 1)) {
     header("Location: /installer");
     exit;
