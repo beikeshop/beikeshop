@@ -30,6 +30,8 @@ class RmaRepo
     public static function create($data)
     {
         $item = Rma::query()->create($data);
+        $data['notify'] = 0;
+        self::addHistory($item, $data);
         return $item;
     }
 
@@ -117,6 +119,7 @@ class RmaRepo
         if (isset($data['status'])) {
             $builder->where('status', $data['status']);
         }
+        $builder->orderBy('id', 'DESC');
 
         return $builder->paginate(10)->withQueryString();
     }
