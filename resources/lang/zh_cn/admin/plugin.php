@@ -26,6 +26,7 @@ return [
 
     'shipping' => '配送方式',
     'payment' => '支付方式',
+    'social' => '社交网络',
     'total' => '订单计算',
     'view' => '页面修改',
     'social' => '第三方登录',

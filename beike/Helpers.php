@@ -342,6 +342,39 @@ function time_format($datetime = null)
     return date($format);
 }
 
+
+/**
+ * 获取插件根目录
+ *
+ * @param string $path
+ * @return string
+ */
+function plugin_path(string $path = ''): string
+{
+    return base_path('plugins') . ($path ? DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR) : $path);
+}
+
+
+/**
+ * 插件图片缩放
+ *
+ * @param $pluginCode
+ * @param $image
+ * @param int $width
+ * @param int $height
+ * @return mixed|void
+ * @throws Exception
+ */
+function plugin_resize($pluginCode, $image, int $width = 100, int $height = 100)
+{
+    $plugin = app('plugin')->getPlugin($pluginCode);
+    if (Str::startsWith($image, 'http')) {
+        return $image;
+    }
+    $pluginDirName = $plugin->getDirname();
+    return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->resize($width, $height);
+}
+
 /**
  * 图片缩放
  *

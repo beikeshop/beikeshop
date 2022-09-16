@@ -26,6 +26,7 @@ return [
 
     'shipping' => 'Shipping',
     'payment' => 'Payment',
+    'social' => 'Social',
     'total' => 'Total',
     'view' => 'View',
     'social' => 'Social',

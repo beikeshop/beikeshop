@@ -4,7 +4,7 @@
     "description": "首页菜单添加最新商品列表功能",
     "type": "view",
     "version": "v1.0.0",
-    "icon": "https://via.placeholder.com/100x100.png/aabbcc?text=MENU",
+    "icon": "",
     "author": {
         "name": "成都光大网络科技有限公司",
         "email": "yangjin@beikeshop.com"

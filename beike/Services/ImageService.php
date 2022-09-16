@@ -28,13 +28,32 @@ class ImageService
     public function __construct($image)
     {
         $this->image = $image ?: self::PLACEHOLDER_IMAGE;
-        if (!is_file($image)) {
-            $this->image = self::PLACEHOLDER_IMAGE;
-        }
-        $imagePath = public_path($this->image);
-        $this->imagePath = $imagePath;
+        $this->imagePath = public_path($this->image);
     }
 
+
+    /**
+     * 设置插件目录名称
+     * @param $dirName
+     * @return $this
+     */
+    public function setPluginDirName($dirName): static
+    {
+        $originImage = $this->image;
+        if ($this->image == self::PLACEHOLDER_IMAGE) {
+            return $this;
+        }
+
+        $this->imagePath = plugin_path("{$dirName}/Static") . $originImage;
+        if (file_exists($this->imagePath)) {
+            $this->image = strtolower('plugin/' . $dirName . $originImage);
+        } else {
+            $this->image = self::PLACEHOLDER_IMAGE;
+            $this->imagePath = public_path($this->image);
+        }
+
+        return $this;
+    }
 
     /**
      * 生成并获取缩略图

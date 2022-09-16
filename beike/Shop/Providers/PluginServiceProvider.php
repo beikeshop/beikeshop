@@ -15,7 +15,6 @@ use Beike\Plugin\Manager;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -51,6 +50,11 @@ class PluginServiceProvider extends ServiceProvider
             $this->bootPlugin($plugin);
             $this->loadRoutes($pluginCode);
             $this->loadTranslations($pluginCode);
+        }
+
+        $allPlugins = $manager->getPlugins();
+        foreach ($allPlugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
             $this->loadViews($pluginCode);
         }
     }

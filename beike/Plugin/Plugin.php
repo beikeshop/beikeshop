@@ -201,9 +201,9 @@ class Plugin implements Arrayable, \ArrayAccess
      */
     public function getColumnView(): string
     {
-        $viewFile = $this->getPath() . '/Views/columns.blade.php';
+        $viewFile = $this->getPath() . '/Views/admin/config.blade.php';
         if (file_exists($viewFile)) {
-            return "{$this->dirName}::columns";
+            return "{$this->dirName}::admin.config";
         }
         return '';
     }

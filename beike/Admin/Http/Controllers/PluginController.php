@@ -90,6 +90,7 @@ class PluginController extends Controller
      * @param Request $request
      * @param $code
      * @return mixed
+     * @throws Exception
      */
     public function update(Request $request, $code)
     {

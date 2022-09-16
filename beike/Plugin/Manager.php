@@ -54,7 +54,7 @@ class Manager
             $plugin->setColumns();
 
             if ($plugins->has($plugin->code)) {
-                throw new \Exception("有重名插件：" . $plugin->code);
+                continue;
             }
 
             $plugins->put($plugin->code, $plugin);
@@ -123,10 +123,10 @@ class Manager
     public function getPluginOrFail($code): ?Plugin
     {
         $plugin = $this->getPlugin($code);
-        $plugin->handleLabel();
         if (empty($plugin)) {
             throw new \Exception('无效的插件');
         }
+        $plugin->handleLabel();
         return $plugin;
     }
 

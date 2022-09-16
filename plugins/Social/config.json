@@ -1,8 +1,8 @@
 {
-    "code": "stripe",
-    "name": "Stripe 支付",
-    "description": "Stripe 支付 <a href='https://stripe.com/' target='_blank'>Stripe</a>",
-    "type": "payment",
+    "code": "social",
+    "name": "Social",
+    "description": "第三方登录(包括微信、QQ、微博、Google、Facebook)",
+    "type": "social",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
     "author": {

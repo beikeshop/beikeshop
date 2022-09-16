@@ -4,7 +4,7 @@
     "description": "PayPal 支付 <a href='https://developer.paypal.com/' target='_blank'>PayPal Developer</a>",
     "type": "payment",
     "version": "v1.0.0",
-    "icon": "plugin/paypal/image/logo.png",
+    "icon": "/image/logo.png",
     "author": {
         "name": "成都光大网络科技有限公司",
         "email": "yangjin@beikeshop.com"
