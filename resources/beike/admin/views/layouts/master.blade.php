@@ -42,7 +42,7 @@
       <div class="container-fluid p-0">
         @yield('content')
 
-        <p class="text-center text-secondary mt-5">Chengdu Guangda Network Technology &copy; {{ date('Y') }} All Rights Reserved v{{ config('beike.version') }}({{ config('beike.build') }})</p>
+        <p class="text-center text-secondary mt-5">Chengdu <a href="https://beikeshop.com/" class="ms-2" target="_blank">Guangda Network</a> Technology &copy; {{ date('Y') }} All Rights Reserved v{{ config('beike.version') }}({{ config('beike.build') }})</p>
       </div>
     </div>
   </div>
