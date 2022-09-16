@@ -1,3 +1,11 @@
+/*
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-26 18:18:22
+ * @LastEditTime  2022-09-16 20:58:01
+ */
+
 import http from "../../../js/http";
 window.$http = http;
 import common from "./common";

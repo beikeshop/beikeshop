@@ -1,10 +1,11 @@
 /*
- * @copyright     2022 opencart.cn - All Rights Reserved.
- * @link          https://www.guangdawangluo.com
- * @Author        PS <pushuo@opencart.cn>
- * @Date          2022-08-04 17:22:54
- * @LastEditTime  2022-08-09 09:40:08
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-09-09 19:16:39
+ * @LastEditTime  2022-09-16 20:56:53
  */
+
 export default {
   /**
    * @description: 获取购物车数据

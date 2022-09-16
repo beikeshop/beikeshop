@@ -1,3 +1,11 @@
+/*
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-09-16 20:58:16
+ */
+
 window.axios = require('axios');
 
 const token = document.querySelector('meta[name="csrf-token"]').content;
