@@ -41,6 +41,8 @@
       </div>
       <div class="container-fluid p-0">
         @yield('content')
+
+        <p class="text-center text-secondary mt-5">Chengdu Guangda Network Technology &copy; {{ date('Y') }} All Rights Reserved v{{ config('beike.version') }}({{ config('beike.build') }})</p>
       </div>
     </div>
   </div>
