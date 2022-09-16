@@ -16,6 +16,10 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      @media (max-width: 768px) {
+        padding: 20px;
+      }
     }
 
     > .content {
