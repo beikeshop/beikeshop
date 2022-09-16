@@ -122,7 +122,7 @@
         },
 
         rules: {
-          status: [{required: true, message: '请输入用户名', trigger: 'blur'}, ],
+          status: [{required: true, message: '{{ __('common.error_required', ['name' => __('common.status')] ) }}', trigger: 'blur'}, ],
         }
       },
 
