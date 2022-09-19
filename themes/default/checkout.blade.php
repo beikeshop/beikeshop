@@ -295,6 +295,7 @@
 
             this.$nextTick(() => {
               this.dialogAddress.form = JSON.parse(JSON.stringify(this.source.addresses[index]))
+              this.countryChange(this.dialogAddress.form.country_id);
             })
           }
 

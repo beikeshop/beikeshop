@@ -135,6 +135,7 @@
           if (typeof index == 'number') {
             this.editIndex = index;
             this.form = JSON.parse(JSON.stringify(this.addresses[index]))
+            this.countryChange(this.form.country_id);
           }
 
           this.editShow = true
