@@ -49,3 +49,6 @@ PHP语言开发，基于 Laravel 框架，前端采用Vue
 1. 新建 feature-xxx 分支
 1. 提交代码
 1. 新建 Merge Request
+
+## QQ交流群
+1. 639108380
