@@ -31,7 +31,7 @@ class LanguageRepo
             'locale' => $data['locale'] ?? '',
             'image' => $data['image'] ?? '',
             'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? ''),
+            'status' => (bool)($data['status'] ?? 1),
         ];
         return Language::query()->create($languageData);
     }
@@ -54,7 +54,7 @@ class LanguageRepo
             'locale' => $data['locale'] ?? '',
             'image' => $data['image'] ?? '',
             'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? ''),
+            'status' => (bool)($data['status'] ?? 1),
         ];
         $item->update($languageData);
         return $item;

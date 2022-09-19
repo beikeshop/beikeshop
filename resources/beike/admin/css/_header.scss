@@ -42,7 +42,10 @@
       padding: 0;
       list-style: none;
       > li {
-        padding: 0 1rem;
+        html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+          padding: 0 1rem;
+        }
+
         @media screen and (max-width: 991px) {
           padding: 0 .3rem;
         }
@@ -109,7 +112,9 @@
 
       &.navbar-right {
         > li {
-          padding: 0 .5rem;
+          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+            padding: 0 .5rem;
+          }
 
           a.nav-link {
             padding: 0 10px;

@@ -284,15 +284,13 @@ function thumbnail($path): string
  */
 function locales(): array
 {
-    $locales = [];
-    $locales[] = [
-        'name' => '中文简体',
-        'code' => 'zh_cn',
-    ];
-    $locales[] = [
-        'name' => 'English',
-        'code' => 'en',
-    ];
+    $locales = LanguageRepo::enabled()->toArray();
+    $locales = array_map(function ($item) {
+        return [
+            'name' => $item['name'],
+            'code' => $item['code']
+        ];
+    }, $locales);
 
     return $locales;
 }
@@ -388,10 +386,10 @@ function languages(): Collection
  *
  * @return string
  */
-function current_language(): string
+function current_language()
 {
     $code = locale();
-    return Language::query()->where('code', $code)->first()->name;
+    return Language::query()->where('code', $code)->first();
 }
 
 /**

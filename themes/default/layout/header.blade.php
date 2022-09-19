@@ -36,13 +36,20 @@
         <div class="dropdown">
           <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
             aria-expanded="false">
-            {{ current_language() }}
+            {{-- @if (current_language()->image)
+              <img src="{{ image_resize(current_language()->image, 16, 16) }}" class="img-fluid me-1">
+            @endif --}}
+            {{ current_language()->name }}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="language-dropdown">
             @foreach ($languages as $language)
-              <a class="dropdown-item"
-                href="{{ shop_route('lang.switch', [$language->code]) }}">{{ $language->name }}</a>
+              <a class="dropdown-item" href="{{ shop_route('lang.switch', [$language->code]) }}">
+                {{-- @if ($language->image)
+                <img src="{{ image_resize($language->image, 16, 16) }}" class="img-fluid me-1">
+                @endif --}}
+                {{ $language->name }}
+              </a>
             @endforeach
           </div>
         </div>

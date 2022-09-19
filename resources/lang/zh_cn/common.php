@@ -65,6 +65,7 @@ return [
     'sign_out' => '退出登录',
     'menu' => '菜单',
     'whether_open' => '是否开启',
+    'default' => '默认',
 
     'id' => 'ID',
     'created_at' => '创建时间',

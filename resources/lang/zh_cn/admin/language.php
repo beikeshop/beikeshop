@@ -14,5 +14,7 @@ return [
     'languages_create' => '创建语言',
     'languages_show' => '语言详情',
     'languages_update' => '更新语言',
-    'languages_delete' => '删除语言'
+    'languages_delete' => '删除语言',
+    'error_default_language_cannot_delete' => '默认语言不能删除！',
+    'help_install' => '注意：安装新语言需要配置对应语言的商品、分类、导航、首页模块、页尾等内容，否则会出现页面显示异常',
 ];

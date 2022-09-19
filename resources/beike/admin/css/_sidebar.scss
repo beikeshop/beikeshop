@@ -11,10 +11,13 @@
 .sidebar {
   background: #293042;
   direction: ltr;
-  width: 190px;
+  width: 220px;
   transition: all .2s ease-in-out;
   background: #fff;
   border-right: 1px solid #f1f1f1;
+  html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+    width: 190px;
+  }
 
   // @media screen and (max-width: 991px) {
   //   position: fixed;
@@ -27,7 +30,7 @@
       position: relative;
 
       a {
-        padding: .6rem 1rem .6rem;
+        padding: .7rem 1rem .7rem 1.5rem;
         // color: rgba(58,65,111, .9);
         color: #333;
         transition: all .1s ease-in-out;

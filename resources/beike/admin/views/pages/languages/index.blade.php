@@ -5,65 +5,61 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      <div class="d-flex justify-content-between mb-4">
+      {{-- <div class="d-flex justify-content-between mb-4"> --}}
         {{-- <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button> --}}
-      </div>
+      {{-- </div> --}}
+      <div class="mb-3 alert alert-info">{{ __('admin/language.help_install') }}</div>
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>{{ __('common.name') }}</th>
             <th>{{ __('currency.code') }}</th>
-            <th>{{ __('currency.icon') }}</th>
+            {{-- <th>{{ __('currency.icon') }}</th> --}}
             <th>{{ __('common.sort_order') }}</th>
-            <th>{{ __('common.status') }}</th>
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="language, index in languages" :key="index">
-            <td>@{{ language.id }}</td>
-            <td>@{{ language.name }}</td>
-            <td>@{{ language.code }}</td>
-            <td>@{{ language.image }}</td>
-            <td>@{{ language.sort_order }}</td>
             <td>
-              <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+              @{{ language.name }}
+              <span class="badge bg-success" v-if="settingLocale == language.code">{{ __('common.default') }}</span>
             </td>
+            <td>@{{ language.code }}</td>
+            {{-- <td><div v-if="language.image" class="wh-30 align-items-center justify-content-center d-flex"><img :src="thumbnail(language.image)" class="img-fluid"></div></td> --}}
+            <td>@{{ language.sort_order }}</td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
+              <div v-if="language.id">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button :disabled="settingLocale == language.code" class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(language.id, index)">{{ __('admin/common.uninstall') }}</button>
+              </div>
+              <div v-else>
+                <button class="btn btn-outline-success btn-sm" @click="install(language.code, language.name, index)">{{ __('admin/common.install') }}</button>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
-
-      {{-- {{ $languages->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="{{ __('admin/common.language') }}" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
-        <el-form-item label="{{ __('common.name') }}" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
+        <el-form-item label="{{ __('common.name') }}">
+          <el-input v-model="dialog.form.name" :disabled="true" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="{{ __('currency.code') }}" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
+        <el-form-item label="{{ __('currency.code') }}">
+          <el-input v-model="dialog.form.code" :disabled="true" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        <el-form-item label="{{ __('currency.icon') }}" prop="image">
+        {{-- <el-form-item label="{{ __('currency.icon') }}">
           <vue-image v-model="dialog.form.image"></vue-image>
-        </el-form-item>
+        </el-form-item> --}}
 
         <el-form-item label="{{ __('common.sort_order') }}">
           <el-input v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
-        </el-form-item>
-
-        <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
@@ -84,25 +80,24 @@
 
       data: {
         languages: @json($languages ?? []),
+        settingLocale: @json(system_setting('base.locale') ?? 'zh_cn'),
 
         dialog: {
           show: false,
           index: null,
           type: 'add',
           form: {
-            id: null,
             name: '',
             code: '',
-            image: '',
+            // image: '',
             sort_order: '',
-            status: 1,
           },
         },
 
         rules: {
-          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
-          code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}',trigger: 'blur'}, ],
-          image: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.icon')]) }}',trigger: 'blur'}, ],
+          // name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
+          // code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}',trigger: 'blur'}, ],
+          // image: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.icon')]) }}',trigger: 'blur'}, ],
         }
       },
 
@@ -113,25 +108,8 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let tax = this.languages[index];
-
-            this.dialog.form = {
-              id: tax.id,
-              name: tax.name,
-              code: tax.code,
-              image: tax.image,
-              sort_order: tax.sort_order,
-              status: tax.status,
-            }
+            this.dialog.form = JSON.parse(JSON.stringify(this.languages[index]));
           }
-        },
-
-        statusChange(e, index) {
-          const id = this.languages[index].id;
-
-          // $http.put(`languages/${id}`).then((res) => {
-          //   layer.msg(res.message);
-          // })
         },
 
         addFormSubmit(form) {
@@ -158,18 +136,20 @@
           });
         },
 
-        deleteCustomer(id, index) {
-          const self = this;
-          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
-            confirmButtonText: '{{ __('common.confirm') }}',
-            cancelButtonText: '{{ __('common.cancel') }}',
-            type: 'warning'
-          }).then(() => {
-            $http.delete('languages/' + id).then((res) => {
-              this.$message.success(res.message);
-              self.languages.splice(index, 1)
-            })
-          }).catch(()=>{})
+        install(code, name, index) {
+          $http.post('languages', {name, code}).then((res) => {
+            this.languages[index] = res.data;
+            this.$message.success(res.message);
+            this.$forceUpdate();
+          })
+        },
+
+        deleteItem(id, index) {
+          $http.delete('languages/' + id).then((res) => {
+            this.$message.success(res.message);
+            this.languages[index].id = 0;
+            this.$forceUpdate();
+          })
         },
 
         closeCustomersDialog(form) {

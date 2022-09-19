@@ -85,7 +85,7 @@ class DesignService
         $brands = BrandDetail::collection(BrandRepo::getListByIds($brandIds))->jsonSerialize();
 
         $content['brands'] = $brands;
-        $content['title'] = $content['title'][locale()];
+        $content['title'] = $content['title'][locale()] ?? '';
         return $content;
     }
 
@@ -124,14 +124,14 @@ class DesignService
         }
 
         foreach ($tabs as $index => $tab) {
-            $tabs[$index]['title'] = $tab['title'][locale()];
+            $tabs[$index]['title'] = $tab['title'][locale()] ?? '';
             $productsIds = $tab['products'];
             if ($productsIds) {
                 $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds)->jsonSerialize();
             }
         }
         $content['tabs'] = $tabs;
-        $content['title'] = $content['title'][locale()];
+        $content['title'] = $content['title'][locale()] ?? '';
         return $content;
     }
 

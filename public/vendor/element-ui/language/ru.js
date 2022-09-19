@@ -1,6 +1,6 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define('element/locale/ru-RU', ['module', 'exports'], factory);
+    define('element/locale/ru', ['module', 'exports'], factory);
   } else if (typeof exports !== "undefined") {
     factory(module, exports);
   } else {
@@ -8,8 +8,8 @@
       exports: {}
     };
     factory(mod, mod.exports);
-    global.ELEMENT.lang = global.ELEMENT.lang || {}; 
-    global.ELEMENT.lang.ruRU = mod.exports;
+    global.ELEMENT.lang = global.ELEMENT.lang || {};
+    global.ELEMENT.lang.ru = mod.exports;
   }
 })(this, function (module, exports) {
   'use strict';

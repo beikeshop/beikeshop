@@ -65,6 +65,7 @@ return [
     'select_all' => 'Select All',
     'menu' => 'Menu',
     'whether_open' => 'Status',
+    'default' => 'Default',
 
     'id' => 'ID',
     'created_at' => 'Created At',

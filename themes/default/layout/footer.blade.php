@@ -35,7 +35,7 @@
             $link = $footer_content['content']['link' . $i];
           @endphp
           <div class="col-6 col-sm footer-content-link{{ $i }}">
-            <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] }}</h6>
+            <h6 class="text-uppercase text-dark mb-3">{{ $link['title'][$locale] ?? '' }}</h6>
             <ul class="list-unstyled">
               @foreach ($link['links'] as $item)
                 @if ($item['link'])
@@ -58,7 +58,7 @@
             @if ($footer_content['content']['contact']['telephone'])
               <li class="lh-lg mb-2"><i class="bi bi-telephone-fill"></i> {{ $footer_content['content']['contact']['telephone'] }}</li>
             @endif
-            @if ($footer_content['content']['contact']['address'][$locale])
+            @if ($footer_content['content']['contact']['address'][$locale] ?? '')
               <li class="lh-lg mb-2"><i class="bi bi-geo-alt-fill"></i> {{ $footer_content['content']['contact']['address'][$locale] ?? '' }}</li>
             @endif
           </ul>

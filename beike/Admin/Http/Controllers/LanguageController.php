@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Services\LanguageService;
 use Exception;
 use Illuminate\Http\Request;
 use Beike\Repositories\LanguageRepo;
@@ -23,7 +24,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = LanguageRepo::all();
+        $languages = LanguageService::all();
 
         $data = [
             'languages' => $languages,
@@ -39,7 +40,7 @@ class LanguageController extends Controller
      */
     public function store(Request $request): array
     {
-        $language = LanguageRepo::create($request->all());
+        $language = LanguageService::create($request->only('name', 'code'));
 
         return json_success(trans('common.created_success'), $language);
     }
@@ -53,7 +54,7 @@ class LanguageController extends Controller
      */
     public function update(Request $request, int $id): array
     {
-        $language = LanguageRepo::update($id, $request->all());
+        $language = LanguageRepo::update($id, $request->except('status'));
 
         return json_success(trans('common.updated_success'), $language);
     }
@@ -65,9 +66,9 @@ class LanguageController extends Controller
      * @param int $currencyId
      * @return array
      */
-    public function destroy(int $currencyId): array
+    public function destroy(int $id): array
     {
-        LanguageRepo::delete($currencyId);
+        LanguageService::delete($id);
 
         return json_success(trans('common.deleted_success'));
     }

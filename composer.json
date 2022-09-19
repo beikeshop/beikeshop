@@ -17,7 +17,6 @@
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^9.0",
         "laravel/tinker": "^2.7",
-        "overtrue/laravel-lang": "^6.0",
         "spatie/laravel-permission": "^5.5",
         "srmklive/paypal": "^3.0",
         "stripe/stripe-php": "^8.8",
@@ -28,6 +27,9 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/attributes": "^1.0",
+        "laravel-lang/lang": "^10.9",
+        "laravel-lang/publisher": "^13.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
