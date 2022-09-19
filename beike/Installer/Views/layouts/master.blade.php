@@ -83,6 +83,11 @@
     </div>
   </div>
   @yield('scripts')
-</body>
 
+  <script>
+    $(document).ready(function() {
+      $('html, body').css('height', $(window).height());
+    });
+  </script>
+</body>
 </html>
