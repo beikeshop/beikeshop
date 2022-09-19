@@ -25,7 +25,7 @@ class EditRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:16',
-            'email' => 'required|email:rfc,dns|unique:customers,email,' . current_customer()->id,
+            'email' => 'required|email:rfc|unique:customers,email,' . current_customer()->id,
         ];
     }
 

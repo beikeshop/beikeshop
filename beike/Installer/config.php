@@ -21,12 +21,19 @@ return [
     ],
     'requirements' => [
         'php' => [
-            'openssl',
-            'pdo',
-            'mbstring',
-            'tokenizer',
-            'JSON',
+            'BCMath',
+            'Ctype',
             'cURL',
+            'DOM',
+            'Intl',
+            'Fileinfo',
+            'JSON',
+            'Mbstring',
+            'OpenSSL',
+            'PCRE',
+            'PDO',
+            'Tokenizer',
+            'XML',
         ],
         'apache' => [
             'mod_rewrite',
@@ -43,10 +50,10 @@ return [
     |
     */
     'permissions' => [
-        'storage/framework/'     => '755',
-        'storage/logs/'          => '755',
-        'bootstrap/cache/'       => '755',
-        '.env'                   => '755',
+        'storage/framework/' => '755',
+        'storage/logs/' => '755',
+        'bootstrap/cache/' => '755',
+        '.env' => '755',
     ],
 
     /*
@@ -61,14 +68,14 @@ return [
     'environment' => [
         'form' => [
             'rules' => [
-                'database_connection'   => 'required|string|max:50',
-                'database_hostname'     => 'required|string|max:50',
-                'database_port'         => 'required|numeric',
-                'database_name'         => 'required|string|max:50',
-                'database_username'     => 'required|string|max:50',
-                'database_password'     => 'nullable|string|max:50',
-                'admin_email'           => 'required|email:rfc,dns',
-                'admin_password'        => 'required|string|max:50',
+                'database_connection' => 'required|string|max:50',
+                'database_hostname' => 'required|string|max:50',
+                'database_port' => 'required|numeric',
+                'database_name' => 'required|string|max:50',
+                'database_username' => 'required|string|max:50',
+                'database_password' => 'nullable|string|max:50',
+                'admin_email' => 'required|email:rfc',
+                'admin_password' => 'required|string|max:50',
             ],
         ],
     ],

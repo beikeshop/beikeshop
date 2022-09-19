@@ -34,13 +34,13 @@ class CustomerRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|max:64',
-            'email' => 'required|email:rfc,dns|unique:customers',
+            'email' => 'required|email:rfc|unique:customers',
             'customer_group_id' => 'required|exists:customer_groups,id',
         ];
         if (!$this->id) {
             $rules['password'] = 'required|max:64';
         } else {
-            $rules['email'] = 'required|email:rfc,dns|unique:customers,email,' . $this->id;
+            $rules['email'] = 'required|email:rfc|unique:customers,email,' . $this->id;
         }
         return $rules;
     }

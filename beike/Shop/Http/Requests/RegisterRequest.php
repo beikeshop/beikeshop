@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc,dns|unique:customers,email',
+            'email' => 'required|email:rfc|unique:customers,email',
             'password' => 'required|confirmed',
         ];
     }
