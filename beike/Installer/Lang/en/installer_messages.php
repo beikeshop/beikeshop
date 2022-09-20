@@ -11,7 +11,6 @@ return [
     'next' => 'Next Step',
     'back' => 'Previous',
     'finish' => 'Install',
-    'environment' => 'Environmen',
     'status' => 'Status',
     'forms' => [
         'errorTitle' => 'The Following errors occurred:',
@@ -25,9 +24,9 @@ return [
     'welcome' => [
         'template_title' => 'Welcome',
         'title' => 'Welcome',
-        'describe'   => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
+        'describe' => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
         'message' => 'Easy Installation and Setup Wizard.',
-        'next'    => 'Check Requirements',
+        'next' => 'Check Requirements',
     ],
 
     /*
@@ -39,7 +38,7 @@ return [
         'template_title' => 'Step 1 | Server Requirements',
         'environment' => 'Environmen',
         'title' => 'Server Requirements',
-        'next'    => 'Check Permissions',
+        'next' => 'Check Permissions',
     ],
 
     /*
@@ -52,7 +51,6 @@ return [
         'title' => 'Directory permission detection',
         'next' => 'Configure Environment',
         'table' => 'Table of contents',
-        'ask_permission' => '要求权限',
     ],
 
     /*
@@ -152,7 +150,7 @@ return [
          *
          */
         'welcome' => [
-            'title'   => 'Welcome To The Updater',
+            'title' => 'Welcome To The Updater',
             'message' => 'Welcome to the update wizard.',
         ],
 
@@ -162,7 +160,7 @@ return [
          *
          */
         'overview' => [
-            'title'   => 'Overview',
+            'title' => 'Overview',
             'message' => 'There is 1 update.|There are :number updates.',
             'install_updates' => 'Install Updates',
         ],
