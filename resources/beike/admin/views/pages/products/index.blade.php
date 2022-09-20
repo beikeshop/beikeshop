@@ -238,6 +238,8 @@
 
         batchDelete() {
           this.$confirm('{{ __('admin/product.confirm_batch_product') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.delete('products/delete', {
@@ -246,11 +248,13 @@
               layer.msg(res.message)
               location.reload();
             })
-          });
+          }).catch(()=>{});
         },
 
         batchActive(type) {
           this.$confirm('{{ __('admin/product.confirm_batch_status') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
             $http.post('products/status', {
@@ -260,7 +264,7 @@
               layer.msg(res.message)
               location.reload();
             })
-          });
+          }).catch(()=>{});
         },
 
         search: function() {
