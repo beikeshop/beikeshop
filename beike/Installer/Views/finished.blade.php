@@ -25,8 +25,8 @@
 			</div>
 
 			<div class="d-flex justify-content-center">
-				<a href="{{ url('/') }}" class="btn btn-lg btn-primary"><i class="bi bi-window-dock me-2"></i> {{ trans('installer::installer_messages.final.to_front') }}</a>
-				<a href="{{ url('/admin/login') }}?admin_email={{ $admin_email }}&admin_password={{ $admin_password }}" class="btn btn-lg btn-outline-primary ms-4"><i class="bi bi-window-sidebar me-2"></i> {{ trans('installer::installer_messages.final.to_admin') }}</a>
+				<a href="{{ url('/') }}" class="btn btn-lg btn-outline-primary"><i class="bi bi-window-dock me-2"></i> {{ trans('installer::installer_messages.final.to_front') }}</a>
+				<a href="{{ url('/admin/login') }}?admin_email={{ $admin_email }}&admin_password={{ $admin_password }}" class="btn btn-lg btn-primary ms-4"><i class="bi bi-window-sidebar me-2"></i> {{ trans('installer::installer_messages.final.to_admin') }}</a>
 			</div>
     </div>
   </div>

@@ -15,7 +15,7 @@
       </a>
       @if (isset($menu['children_group']) && $menu['children_group'])
         <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}"
-          style="min-width: {{ count($menu['children_group']) * 200 }}px">
+          style="min-width: {{ count($menu['children_group']) * 240 }}px">
           <div class="card card-lg">
             <div class="card-body">
               <div class="container">
