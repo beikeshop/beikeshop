@@ -94,7 +94,8 @@ class EnvironmentManager
     {
         $results = trans('installer::installer_messages.environment.success');
 
-        $appUrl = $_SERVER['REQUEST_SCHEME'] . "://";
+        $scheme = is_secure() ? 'https' : 'http';
+        $appUrl = $scheme . "://";
         if ($_SERVER["SERVER_PORT"] != "80") {
             $appUrl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"];
         } else {
