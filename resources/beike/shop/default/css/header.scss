@@ -261,7 +261,10 @@ header {
       border-top: 1px solid #eee;
 
       .left {
-        width: 90px;
+        width: 80px;
+        flex: 0 0 80px;
+        height: 80px;
+        border: 1px solid #eee;
         margin-right: 10px;
 
         img {
@@ -270,6 +273,14 @@ header {
       }
 
       .right {
+        .name {
+          overflow: hidden;
+          text-overflow:ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
         .offcanvas-products-delete {
           cursor: pointer;
           color: #999;

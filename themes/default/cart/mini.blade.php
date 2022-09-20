@@ -7,9 +7,9 @@
     <div class="offcanvas-right-products">
       @foreach ($carts as $cart)
         <div class="product-list d-flex align-items-center">
-          <div class="left"><img src="{{ $cart['image'] }}" calss="img-fluid"></div>
+          <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] }}" class="img-fluid"></a></div>
           <div class="right flex-grow-1">
-            <div class="name fs-sm fw-bold mb-2">{{ $cart['name'] }}</div>
+            <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-3 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
             <div class="product-bottom d-flex justify-content-between align-items-center">
               <div class="price">{{ $cart['price_format'] }} <span class="text-muted">x {{ $cart['quantity'] }}<span>
               </div>

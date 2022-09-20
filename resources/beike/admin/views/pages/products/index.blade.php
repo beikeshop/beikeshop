@@ -118,7 +118,7 @@
                 <td><input type="checkbox" :value="item.id" v-model="selected" /></td>
                 <td>@{{ item.id }}</td>
                 <td>
-                  <div class="wh-60"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
+                  <div class="wh-60 border d-flex justify-content-between align-items-center"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
                 </td>
                 <td>
                   <a :href="item.url" target="_blank" :title="item.name" class="text-dark">@{{ stringLengthInte(item.name, 90) }}</a>

@@ -36,7 +36,7 @@
                 <th>{{ __('shop/carts.index') }}</th>
                 <th width="170">{{ __('shop/carts.commodity') }}</th>
                 <th width="170">{{ __('shop/carts.subtotal') }}</th>
-                <th class="text-end">{{ __('common.action') }}</th>
+                <th width="100" class="text-end">{{ __('common.action') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +44,7 @@
                 <td>
                   <div class="d-flex align-items-center p-image">
                     <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-                    <img :src="product.image" class="img-fluid">
+                    <div class="border d-flex align-items-center justify-content-between wh-80 ms-3"><img :src="product.image" class="img-fluid"></div>
                   </div>
                 </td>
                 <td>
