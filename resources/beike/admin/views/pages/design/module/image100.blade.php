@@ -58,7 +58,7 @@ setTimeout(() => {
     full: true,
     images: [
       {
-        image: languagesFill('catalog/demo/banner-2.png'),
+        image: languagesFill('catalog/demo/banner/banner-2-en.png'),
         show: true,
         link: {
           type: 'product',

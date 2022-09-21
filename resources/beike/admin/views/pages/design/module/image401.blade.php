@@ -65,7 +65,7 @@ setTimeout(() => {
     floor: languagesFill(''),
     images: [
       {
-        image: languagesFill('catalog/demo/image_plus_1.png'),
+        image: languagesFill('catalog/demo/image_plus_1-en.png'),
         show: true,
         link: {
           type: 'product',
@@ -73,7 +73,7 @@ setTimeout(() => {
         }
       },
       {
-        image: languagesFill('catalog/demo/image_plus_2.png'),
+        image: languagesFill('catalog/demo/image_plus_2-en.png'),
         show: false,
         link: {
           type: 'product',
@@ -81,7 +81,7 @@ setTimeout(() => {
         }
       },
       {
-        image: languagesFill('catalog/demo/image_plus_3.png'),
+        image: languagesFill('catalog/demo/image_plus_3-en.png'),
         show: false,
         link: {
           type: 'product',
@@ -89,7 +89,7 @@ setTimeout(() => {
         }
       },
       {
-        image: languagesFill('catalog/demo/image_plus_4.png'),
+        image: languagesFill('catalog/demo/image_plus_4-en.png'),
         show: false,
         link: {
           type: 'product',
