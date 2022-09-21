@@ -79,7 +79,7 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="角色" prop="roles">
+        <el-form-item label="{{ __('admin/admin_roles.role') }}" prop="roles">
           <el-checkbox-group v-model="dialog.form.roles">
             <el-checkbox v-for="roles, index in source.roles" :label="roles.id">@{{roles.name}}</el-checkbox>
           </el-checkbox-group>
