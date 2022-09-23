@@ -201,6 +201,10 @@
             hload: true
           }).then((res) => {
             this.source.zones = res.data.zones;
+
+            if (!res.data.zones.some(e => e.id == this.form.zone_id)) {
+              this.form.zone_id = '';
+            }
           })
         },
       }

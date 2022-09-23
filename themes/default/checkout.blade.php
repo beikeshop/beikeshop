@@ -350,6 +350,10 @@
 
           $http.get(`/countries/${e}/zones`).then((res) => {
             this.source.zones = res.data.zones;
+
+            if (!res.data.zones.some(e => e.id == this.dialogAddress.form.zone_id)) {
+              this.dialogAddress.form.zone_id = '';
+            }
           })
         },
 
