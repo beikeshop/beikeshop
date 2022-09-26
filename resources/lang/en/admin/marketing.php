@@ -10,5 +10,5 @@
  */
 
 return [
-    'marketing_list' => '可用插件'
+    'marketing_list' => 'Plugin Marketing List'
 ];

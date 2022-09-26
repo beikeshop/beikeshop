@@ -61,7 +61,7 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
             }
-        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'])) {
+        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
@@ -179,6 +179,7 @@ class Sidebar extends Component
             ['route' => 'settings.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'admin_users.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'marketing.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'regions.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],

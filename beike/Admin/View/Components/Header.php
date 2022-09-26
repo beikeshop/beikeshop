@@ -48,6 +48,7 @@ class Header extends Component
             ['name' => trans('admin/common.customer'), 'route' => 'customers.index'],
             ['name' => trans('admin/common.content'), 'route' => 'pages.index'],
             ['name' => trans('admin/common.setting'), 'route' => 'settings.index'],
+            ['name' => trans('admin/common.marketing'), 'route' => 'marketing.index'],
         ];
         return hook_filter('admin.header_menus', $menus);
     }
