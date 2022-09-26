@@ -38,6 +38,20 @@ class MarketingController
 
 
     /**
+     * 获取单个插件详情
+     */
+    public function show(Request $request)
+    {
+        $code = $request->code;
+        $plugin = MarketingService::getPlugin($code);
+        $data = [
+            'plugin' => $plugin,
+        ];
+        return view('admin::pages.marketing.show', $data);
+    }
+
+
+    /**
      * 下载插件安装包到本地
      */
     public function download(Request $request)

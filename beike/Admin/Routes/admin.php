@@ -142,6 +142,7 @@ Route::prefix($adminName)
 
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
+                Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');
                 Route::middleware('can:marketing_download')->get('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
 
 

@@ -20,4 +20,10 @@ class MarketingService
         $url = config('beike.api_url') . '/api/plugins';
         return Http::get($url)->json();
     }
+
+    public static function getPlugin($code)
+    {
+        $url = config('beike.api_url') . '/api/plugins/' . $code;
+        return Http::get($url)->json();
+    }
 }
