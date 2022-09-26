@@ -10,6 +10,7 @@
  */
 
 return [
+    'api_url' => env('BEIKE_API_URL', 'https://beikeshop.com'),
     'version' => '1.0.3',
     'build' => '20220920',
 ];

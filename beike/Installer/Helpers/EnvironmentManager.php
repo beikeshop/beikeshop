@@ -109,6 +109,7 @@ class EnvironmentManager
             'APP_DEBUG=false' . "\n" .
             'APP_LOG_LEVEL=' . $request->app_log_level . "\n" .
             'APP_URL=' . $appUrl . "\n\n" .
+            'BEIKE_API_URL=https://beikeshop.com' . "\n\n" .
             'DB_CONNECTION=' . $request->database_connection . "\n" .
             'DB_HOST=' . $request->database_hostname . "\n" .
             'DB_PORT=' . $request->database_port . "\n" .
