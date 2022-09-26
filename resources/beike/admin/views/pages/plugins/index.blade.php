@@ -6,16 +6,19 @@
 
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      <el-upload
-        class="upload-demo"
-        action=""
-        :limit="1"
-        :show-file-list="false"
-        :http-request="uploadFile"
-        accept=".zip"
-        >
-        <el-button size="small" type="primary">{{ __('admin/plugin.plugin_upload') }}</el-button>
-      </el-upload>
+      <div class="d-flex align-items-center justify-content-between">
+        <el-upload
+          class="upload-demo"
+          action=""
+          :limit="1"
+          :show-file-list="false"
+          :http-request="uploadFile"
+          accept=".zip"
+          >
+          <el-button size="small" type="primary">{{ __('admin/plugin.plugin_upload') }}</el-button>
+        </el-upload>
+        <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">插件中心</a>
+      </div>
       <div class="mt-4" style="">
         <table class="table">
           <thead>

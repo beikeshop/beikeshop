@@ -28,6 +28,11 @@ class MarketingController
         $data = [
             'plugins' => $plugins,
         ];
+
+        if ($request->expectsJson()) {
+            return json_success(trans('common.success'), $data);
+        }
+
         return view('admin::pages.marketing.index', $data);
     }
 

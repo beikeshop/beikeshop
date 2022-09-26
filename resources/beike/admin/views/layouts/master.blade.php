@@ -26,8 +26,6 @@
 </head>
 
 <body class="@yield('body-class')">
-  <!-- <div style="height: 80px; background: white;"></div> -->
-
   <x-admin-header />
 
   <div class="main-content">
