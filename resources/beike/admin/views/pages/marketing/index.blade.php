@@ -57,7 +57,7 @@
           <div class="col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
-                <div class="plugin-img mb-3"><a href=""><img :src="plugin.icon_big" class="img-fluid"></a></div>
+                <div class="plugin-img mb-3"><a :href="'admin/marketing/' + plugin.code"><img :src="plugin.icon_big" class="img-fluid"></a></div>
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
                   <span class="text-success">免费</span>
@@ -93,6 +93,36 @@
       },
     },
 
+    computed: {
+        url: function() {
+          let filter = {};
+          // if (this.orderBy != 'products.id:desc') {
+          //   filter.order_by = this.orderBy;
+          // }
+
+          if (this.page > 1) {
+            filter.page = this.page;
+          }
+
+          for (key in this.filter) {
+            const value = this.filter[key];
+            if (value !== '' && value !== null) {
+              filter[key] = value;
+            }
+          }
+
+          const query = Object.keys(filter).map(key => key + '=' + filter[key]).join('&');
+
+          const url = @json(admin_route('marketing.index'));
+
+          if (query) {
+            return url + '?' + query;
+          }
+
+          return url;
+        },
+      },
+
     watch: {
       page: function() {
         this.loadData();
@@ -101,6 +131,7 @@
 
     methods: {
       loadData() {
+        window.history.pushState('', '', this.url);
         $http.get(`marketing?page=${this.page}`).then((res) => {
           this.marketing = res.data.marketing;
         })

@@ -47,6 +47,7 @@ class MarketingController
         $data = [
             'plugin' => $plugin,
         ];
+
         return view('admin::pages.marketing.show', $data);
     }
 
