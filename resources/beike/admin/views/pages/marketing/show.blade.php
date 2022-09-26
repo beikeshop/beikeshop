@@ -37,7 +37,7 @@
 
           <div>
             <button class="btn btn-primary btn-lg download-plugin"><i class="bi bi-cloud-arrow-down-fill"></i> 下载插件</button>
-
+            <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i class="bi bi-cursor-fill"></i> <span></span></a></div>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
   <script>
     $('.download-plugin').click(function(e) {
       $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}').then((res) => {
-        console.log(res);
+        $('.download-help').removeClass('d-none').find('span').text(res.message);
       })
     })
     // {{ admin_route('marketing.download', ['code' => $data['code']]) }}
