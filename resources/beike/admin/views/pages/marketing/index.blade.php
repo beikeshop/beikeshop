@@ -110,8 +110,8 @@
     methods: {
       loadData() {
         window.history.pushState('', '', this.url);
-        $http.get(`marketing?page=${this.page}`).then((res) => {
-          this.marketing = res.data.marketing;
+        $http.get(this.url).then((res) => {
+          this.plugins = res.data.plugins;
         })
       },
 
