@@ -12,14 +12,27 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Plugin;
-use Beike\Plugin\Manager;
 use Beike\Plugin\Plugin as BPlugin;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Collection;
 
 class PluginRepo
 {
     public static $installedPlugins;
+
+
+    public static function getTypes(): array
+    {
+        $types = [];
+        foreach (Plugin::TYPES as $item) {
+            $types[] = [
+                'value' => $item,
+                'label' => trans("admin/plugin.{$item}")
+            ];
+        }
+        return $types;
+    }
+
 
     /**
      * 安装插件到系统: 插入数据

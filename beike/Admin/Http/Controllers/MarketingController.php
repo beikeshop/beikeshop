@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Repositories\PluginRepo;
 use ZanySoft\Zip\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,9 +25,14 @@ class MarketingController
      */
     public function index(Request $request)
     {
-        $plugins = MarketingService::getList();
+        $filters = [
+            'type' => $request->get('type'),
+            'keyword' => $request->get('keyword'),
+        ];
+        $plugins = MarketingService::getList($filters);
         $data = [
             'plugins' => $plugins,
+            'types' => PluginRepo::getTypes(),
         ];
 
         if ($request->expectsJson()) {
