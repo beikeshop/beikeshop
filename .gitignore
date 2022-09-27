@@ -3,6 +3,8 @@
 /public/hot
 /public/storage
 /public/upload/avatar
+/public/build/beike/*
+/public/install/css/*
 /storage/*.key
 /storage/installed
 /vendor
@@ -19,7 +21,4 @@ yarn-error.log
 /.vscode
 mix-manifest.json
 package-lock.json
-beike/node_modules
-/public/build/beike/*
-/public/install/css/*
 dist
