@@ -15,7 +15,7 @@
         <div class="ms-5 mt-2">
           <h3 class="card-title mb-4">{{ $data['name'] }}</h3>
           <div class="plugin-item d-flex align-items-center mb-4 lh-1 text-secondary">
-            <div class="mx-3 ms-0">下载次数：{{ $data['number'] }}</div><span class="vr lh-1 bg-secondary"></span>
+            <div class="mx-3 ms-0">下载次数：{{ $data['downloaded'] }}</div><span class="vr lh-1 bg-secondary"></span>
             <div class="mx-3">最后更新：{{ $data['updated_at'] }}</div><span class="vr lh-1 bg-secondary"></span>
             <div class="mx-3">版本：{{ $data['version'] }}</div>
           </div>
