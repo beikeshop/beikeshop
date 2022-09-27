@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="marketing-wrap">
+      <div class="marketing-wrap" v-if="plugins.data.length">
         <div class="row">
           <div class="col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
@@ -49,6 +49,8 @@
           </div>
         </div>
       </div>
+
+      <div v-else><x-admin-no-data /></div>
 
       <el-pagination v-if="plugins.data.length" layout="prev, pager, next" background :page-size="plugins.meta.per_page" :current-page.sync="page"
         :total="plugins.meta.total"></el-pagination>
