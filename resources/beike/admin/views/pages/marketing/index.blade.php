@@ -42,7 +42,7 @@
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
                   <span class="text-success">免费</span>
-                  <span class="text-secondary">下载数：999</span>
+                  <span class="text-secondary">下载数：@{{ plugin.downloaded }}</span>
                 </div>
               </div>
             </div>
