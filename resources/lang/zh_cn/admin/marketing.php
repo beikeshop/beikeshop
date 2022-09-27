@@ -10,6 +10,6 @@
  */
 
 return [
-    'marketing_list' => '插件中心',
+    'marketing_list' => '插件市场',
     'marketing_show' => '插件详情',
 ];

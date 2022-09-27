@@ -10,5 +10,6 @@
  */
 
 return [
-    'marketing_list' => 'Plugin Marketing List'
+    'marketing_list' => 'Plugin Marketing',
+    'marketing_show' => 'Plugin Detail',
 ];

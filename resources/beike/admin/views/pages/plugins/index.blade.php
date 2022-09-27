@@ -17,7 +17,7 @@
           >
           <el-button size="small" type="primary">{{ __('admin/plugin.plugin_upload') }}</el-button>
         </el-upload>
-        <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">插件中心</a>
+        <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
       </div>
       <div class="mt-4" style="">
         <table class="table">
