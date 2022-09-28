@@ -48,7 +48,7 @@
 
       <div class="marketing-wrap" v-if="plugins.data.length">
         <div class="row">
-          <div class="col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
+          <div class="col-xxl-2 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
                 <div class="plugin-img mb-3"><a :href="'admin/marketing/' + plugin.code"><img :src="plugin.icon_big"

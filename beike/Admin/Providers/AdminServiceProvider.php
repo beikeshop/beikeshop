@@ -133,5 +133,6 @@ class AdminServiceProvider extends ServiceProvider
     {
         View::share('languages', languages());
         View::share('admin_base_url', admin_route('home.index'));
+        View::share('shop_base_url', shop_route('home.index'));
     }
 }

@@ -26,9 +26,9 @@ class AccountService
      * 注册用户
      *
      * @param array $data // ['email', 'password']
-     * @return Customer
+     * @return mixed
      */
-    public static function register(array $data): Customer
+    public static function register(array $data)
     {
         $data['customer_group_id'] = system_setting('base.default_customer_group_id', 0); // default_customer_group_id为默认客户组名称
         $data['status'] = !system_setting('base.approve_customer'); // approve_customer为是否需要审核客户
@@ -38,7 +38,7 @@ class AccountService
         if ($data['email'] ?? 0) {
             $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));;
         }
-        $data['avatar'] = '';
+        $data['avatar'] = $data['avatar'] ?? '';
 
         return CustomerRepo::create($data);
     }
@@ -49,7 +49,8 @@ class AccountService
      * @param $type
      * @return void
      */
-    public static function sendVerifyCodeForForgotten($email, $type) {
+    public static function sendVerifyCodeForForgotten($email, $type)
+    {
         $code = str_pad(mt_rand(10, 999999), 6, '0', STR_PAD_LEFT);
 
         VerifyCodeRepo::deleteByAccount($email);
@@ -68,7 +69,7 @@ class AccountService
      * @param $code
      * @param $account
      * @param $password
-     * @param $type  $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
+     * @param $type $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
      * @return void
      */
     public static function verifyAndChangePassword($code, $account, $password, $type = 'email')

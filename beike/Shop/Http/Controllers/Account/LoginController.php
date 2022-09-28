@@ -27,7 +27,10 @@ class LoginController extends Controller
         if (current_customer()) {
             return redirect(shop_route('account.index'));
         }
-        return view('account/login');
+        $loginData = [
+            'social_buttons' => hook_filter('login.social.buttons', []),
+        ];
+        return view('account/login', $loginData);
     }
 
     public function store(LoginRequest $request)

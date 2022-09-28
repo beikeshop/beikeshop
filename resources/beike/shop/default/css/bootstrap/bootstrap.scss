@@ -72,10 +72,10 @@ $form-feedback-icon-valid-color: inherit;
 
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
-@import 'node_modules/bootstrap-5.1.3/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
 
 .btn-primary {
-  color: #fff;
+  color: #fff !important;
 }
 
 .container-fluid {

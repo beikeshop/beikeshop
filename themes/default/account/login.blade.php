@@ -16,69 +16,65 @@
       <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
     @endif
 
-    <div class="justify-content-center row {{ !request('iframe') ? 'mb-5' : '' }}">
-      <div class="col-lg-{{ request('iframe') ? '6' : '5' }} col-md-6 col-sm-12">
-        <div class="card">
-          <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
-            <div class="login-item-header card-header">
-              <h6 class="text-uppercase mb-0">{{ __('shop/login.login') }}</h6>
-            </div>
-            <div class="card-body">
-              <p class="lead">{{ __('shop/login.already') }}</p>
-              {{-- <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
-                amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p> --}}
-              <hr>
-
-              <el-form-item label="{{ __('shop/login.email') }}" prop="email">
-                <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
-              </el-form-item>
-
-              <el-form-item label="{{ __('shop/login.password') }}" prop="password" class="mb-4">
-                <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
-              </el-form-item>
-
-              <a class="text-muted" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
-
-              <div class="mt-4 mb-3">
-                <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-outline-dark"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/login.login') }}</button>
-              </div>
-            </div>
-          </el-form>
-        </div>
-      </div>
-      <div class="col-lg-{{ request('iframe') ? '6' : '5' }} col-md-6 col-sm-12">
-        <div class="card">
+    <div class="login-wrap">
+      <div class="card">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" :inline-message="true">
           <div class="login-item-header card-header">
-            <h6 class="text-uppercase mb-0">{{ __('shop/login.new') }}</h6>
+            <h6 class="text-uppercase mb-0">{{ __('shop/login.login') }}</h6>
           </div>
-          <div class="card-body">
-            <p class="lead">{{ __('shop/login.not_already') }}</p>
-            {{-- <p class="text-muted">With registration with us new world of fashion, fantastic discounts and much more opens to
-              you! The whole process will not take you more than a minute!</p>
-            <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, our
-              customer service center is working for you 24/7.</p> --}}
-              <hr>
+          <div class="card-body px-md-2">
+            <el-form-item label="{{ __('shop/login.email') }}" prop="email">
+              <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
+            </el-form-item>
 
-              <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
-                <el-form-item label="{{ __('shop/login.email') }}" prop="email">
-                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
-                </el-form-item>
+            <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+              <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
+            </el-form-item>
 
-                <el-form-item label="{{ __('shop/login.password') }}" prop="password">
-                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
-                </el-form-item>
+            <a class="text-muted forgotten-link" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
 
-                <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
-                  <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
-                </el-form-item>
-
-
-                <div class="mt-5 mb-3">
-                  <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-outline-dark"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
-                </div>
-              </el-form>
+            <div class="mt-4 mb-3">
+              <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/login.login') }}</button>
+            </div>
           </div>
+        </el-form>
+
+        @if($social_buttons)
+          <div class="social-wrap px-2">
+            <div class="title mb-4"><span>第三方登录</span></div>
+            @foreach($social_buttons as $button)
+              {!! $button !!}
+            @endforeach
+          </div>
+        @endif
+      </div>
+
+      <div class="d-flex">
+        <div class="vr bg-secondary"></div>
+      </div>
+      <div class="card">
+        <div class="login-item-header card-header">
+          <h6 class="text-uppercase mb-0">{{ __('shop/login.new') }}</h6>
+        </div>
+        <div class="card-body px-md-2">
+            <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
+              <el-form-item label="{{ __('shop/login.email') }}" prop="email">
+                <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
+              </el-form-item>
+
+              <el-form-item label="{{ __('shop/login.password') }}" prop="password">
+                <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
+              </el-form-item>
+
+              <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
+                <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
+              </el-form-item>
+
+
+              <div class="mt-5 mb-3">
+                <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
+              </div>
+            </el-form>
         </div>
       </div>
     </div>

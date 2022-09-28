@@ -1,0 +1,8 @@
+/**
+这里是插件css, 请在blade里面使用以下代码引入
+<link rel="stylesheet" href="{{ asset('plugin/stripe/css/demo.css') }}">
+ */
+
+#bk-stripe-app .form-wrap {
+  max-width: 400px;
+}

@@ -13,6 +13,23 @@ body.page-login, body.page-forgotten {
     overflow-x: hidden;
   }
 
+  .el-form-item__error--inline {
+    margin-left: 0;
+  }
+
+  .forgotten-link {
+    display: block;
+    margin-top: -14px;
+  }
+
+  .el-form-item {
+    margin-bottom: 18px;
+
+    .el-form-item__content {
+      line-height: 1;
+    }
+  }
+
   .login-item-header {
     background: #f8f9fa;
     border-bottom: none;
@@ -23,14 +40,66 @@ body.page-login, body.page-forgotten {
     }
   }
 
-  .card {
-    border: none;
+  .login-wrap {
+    @media (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .card {
+      border: none;
+      @media (min-width: 768px) {
+        width: 340px;
+        margin: 0 60px;
+      }
+    }
   }
 
   .form-iframe {
+    margin-bottom: 30px;
+
     @media (max-width: 768px) {
       padding: 0;
       margin-top: 0 !important;
+    }
+
+    .card {
+      border: none;
+      @media (min-width: 768px) {
+        margin: 0 30px;
+      }
+    }
+  }
+
+  .social-wrap {
+    .title {
+      position: relative;
+      text-align: center;
+      color: #999;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 0;
+        height: 1px;
+        top: 47%;
+        background: #e5e5e5;
+      }
+
+      span {
+        background-color: #fff;
+        position: relative;
+        padding: 0 5px;
+        z-index: 1;
+      }
+    }
+
+    .btn {
+      border-color: #ccc !important;
+      &:hover {
+        background-color: #eee;
+      }
     }
   }
 }

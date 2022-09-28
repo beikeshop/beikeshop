@@ -4,7 +4,7 @@
     "description": "按订单总额收取固定运费",
     "type": "shipping",
     "version": "v1.0.0",
-    "icon": "",
+    "icon": "/image/logo.png",
     "author": {
         "name": "成都光大网络科技有限公司",
         "email": "yangjin@beikeshop.com"

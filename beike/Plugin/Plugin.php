@@ -162,6 +162,14 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this->enabled;
     }
 
+    public function getSetting($name = '')
+    {
+        if ($name) {
+            return plugin_setting("{$this->code}.{$name}");
+        }
+        return plugin_setting($this->code);
+    }
+
 
     /**
      * 获取插件对应的设置字段, 并获取已存储在DB的字段值

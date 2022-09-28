@@ -9,12 +9,6 @@
  */
 
 body.page-marketing {
-  .col-xl-3 {
-    @media (min-width: 1200px) {
-      width: 20%;
-    }
-  }
-
   .marketing-item {
     box-shadow: none;
     border: 1px solid #eee;

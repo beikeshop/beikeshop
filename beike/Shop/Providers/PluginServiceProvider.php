@@ -38,7 +38,7 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(!installed()) {
+        if (!installed()) {
             return;
         }
         $manager = app('plugin');
@@ -48,6 +48,7 @@ class PluginServiceProvider extends ServiceProvider
         foreach ($plugins as $plugin) {
             $pluginCode = $plugin->getDirname();
             $this->bootPlugin($plugin);
+            $this->loadMigrations($pluginCode);
             $this->loadRoutes($pluginCode);
             $this->loadTranslations($pluginCode);
         }
@@ -74,6 +75,20 @@ class PluginServiceProvider extends ServiceProvider
             if (method_exists($className, 'boot')) {
                 (new $className)->boot();
             }
+        }
+    }
+
+
+    /**
+     * 加载插件数据库迁移脚本
+     *
+     * @param $pluginCode
+     */
+    private function loadMigrations($pluginCode)
+    {
+        $migrationPath = "{$this->pluginBasePath}/{$pluginCode}/Migrations";
+        if (is_dir($migrationPath)) {
+            $this->loadMigrationsFrom("{$migrationPath}");
         }
     }
 
