@@ -5,6 +5,7 @@
 @section('body-class', 'page-marketing')
 
 @section('content')
+    @dump($errors)
   <div id="app" class="card h-min-600" v-cloak>
     <div class="card-body">
       <div class="bg-light p-4 mb-4">

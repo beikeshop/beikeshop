@@ -48,13 +48,16 @@ class MarketingController
      */
     public function show(Request $request)
     {
-        $code = $request->code;
-        $plugin = MarketingService::getPlugin($code);
-        $data = [
-            'plugin' => $plugin,
-        ];
-
-        return view('admin::pages.marketing.show', $data);
+        try {
+            $code = $request->code;
+            $plugin = MarketingService::getPlugin($code);
+            $data = [
+                'plugin' => $plugin,
+            ];
+            return view('admin::pages.marketing.show', $data);
+        } catch (\Exception $e) {
+            return redirect(admin_route('marketing.index'))->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 

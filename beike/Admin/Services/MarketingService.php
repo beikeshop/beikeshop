@@ -12,6 +12,7 @@
 namespace Beike\Admin\Services;
 
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MarketingService
 {
@@ -27,6 +28,10 @@ class MarketingService
     public static function getPlugin($code)
     {
         $url = config('beike.api_url') . '/api/plugins/' . $code;
-        return Http::get($url)->json();
+        $plugin = Http::get($url)->json();
+        if (empty($plugin)) {
+            throw new NotFoundHttpException('该插件不存在或已下架');
+        }
+        return $plugin;
     }
 }
