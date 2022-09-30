@@ -96,9 +96,9 @@
         <tbody>
           @foreach ($histories as $history)
             <tr>
-              <td>{{ $history->status }}</td>
-              <td>{{ $history->comment }}</td>
-              <td>{{ $history->created_at }}</td>
+              <td>{{ $history['status'] }}</td>
+              <td>{{ $history['comment'] }}</td>
+              <td>{{ $history['created_at'] }}</td>
             </tr>
           @endforeach
         </tbody>

@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\RmaDetail;
+use Beike\Admin\Http\Resources\RmaHistoryDetail;
 use Beike\Models\Rma;
 use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
@@ -40,7 +41,7 @@ class RmaController extends Controller
         $rma = RmaRepo::find($id);
         $data = [
             'rma' => (new RmaDetail($rma))->jsonSerialize(),
-            'histories' => $rma->histories,
+            'histories' => RmaHistoryDetail::collection($rma->histories)->jsonSerialize(),
             'statuses' => RmaRepo::getStatuses(),
             'types' => RmaRepo::getTypes(),
         ];
