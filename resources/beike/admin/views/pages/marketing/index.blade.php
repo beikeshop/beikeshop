@@ -5,9 +5,19 @@
 @section('body-class', 'page-marketing')
 
 @section('content')
-    @dump($errors)
   <div id="app" class="card h-min-600" v-cloak>
     <div class="card-body">
+      @if (session()->has('errors'))
+        <div class="alert alert-danger alert-dismissible d-flex align-items-center" id="error_alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <div class="ms-2">
+            @foreach ($errors->all() as $error)
+            <div>{{ $error }}</div>
+            @endforeach
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
       <div class="bg-light p-4 mb-4">
         <div class="row">
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
@@ -28,8 +38,10 @@
         <div class="row">
           <label class="filter-title"></label>
           <div class="col-auto">
-            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
-            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+            <button type="button" @click="search"
+              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="resetSearch"
+              class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
           </div>
         </div>
       </div>
@@ -39,7 +51,8 @@
           <div class="col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
-                <div class="plugin-img mb-3"><a :href="'admin/marketing/' + plugin.code"><img :src="plugin.icon_big" class="img-fluid"></a></div>
+                <div class="plugin-img mb-3"><a :href="'admin/marketing/' + plugin.code"><img :src="plugin.icon_big"
+                      class="img-fluid"></a></div>
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
                   <span class="text-success">免费</span>
@@ -51,30 +64,32 @@
         </div>
       </div>
 
-      <div v-else><x-admin-no-data /></div>
+      <div v-else>
+        <x-admin-no-data />
+      </div>
 
-      <el-pagination v-if="plugins.data.length" layout="prev, pager, next" background :page-size="plugins.meta.per_page" :current-page.sync="page"
-        :total="plugins.meta.total"></el-pagination>
+      <el-pagination v-if="plugins.data.length" layout="prev, pager, next" background :page-size="plugins.meta.per_page"
+        :current-page.sync="page" :total="plugins.meta.total"></el-pagination>
     </div>
   </div>
 @endsection
 
 @push('footer')
-<script>
-  new Vue({
-    el: '#app',
+  <script>
+    new Vue({
+      el: '#app',
 
-    data: {
-      plugins: @json($plugins ?? []),
-      page: 1,
+      data: {
+        plugins: @json($plugins ?? []),
+        page: 1,
 
-      filter: {
-        keyword: bk.getQueryString('keyword'),
-        type: bk.getQueryString('type'),
+        filter: {
+          keyword: bk.getQueryString('keyword'),
+          type: bk.getQueryString('type'),
+        },
       },
-    },
 
-    computed: {
+      computed: {
         url: function() {
           let filter = {};
           // if (this.orderBy != 'products.id:desc') {
@@ -104,30 +119,30 @@
         },
       },
 
-    watch: {
-      page: function() {
-        this.loadData();
-      },
-    },
-
-    methods: {
-      loadData() {
-        window.history.pushState('', '', this.url);
-        $http.get(this.url).then((res) => {
-          this.plugins = res.data.plugins;
-        })
+      watch: {
+        page: function() {
+          this.loadData();
+        },
       },
 
-      search: function() {
-        this.page = 1;
-        this.loadData();
-      },
+      methods: {
+        loadData() {
+          window.history.pushState('', '', this.url);
+          $http.get(this.url).then((res) => {
+            this.plugins = res.data.plugins;
+          })
+        },
 
-      resetSearch() {
-        Object.keys(this.filter).forEach(key => this.filter[key] = '')
-        this.loadData();
-      },
-    }
-  })
-</script>
+        search: function() {
+          this.page = 1;
+          this.loadData();
+        },
+
+        resetSearch() {
+          Object.keys(this.filter).forEach(key => this.filter[key] = '')
+          this.loadData();
+        },
+      }
+    })
+  </script>
 @endpush
