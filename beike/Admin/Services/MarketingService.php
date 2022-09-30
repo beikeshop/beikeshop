@@ -22,13 +22,13 @@ class MarketingService
         if (!empty($filters)) {
             $url .= '?' . http_build_query($filters);
         }
-        return Http::get($url)->json();
+        return Http::withOptions(['verify' => false])->get($url)->json();
     }
 
     public static function getPlugin($code)
     {
         $url = config('beike.api_url') . '/api/plugins/' . $code;
-        $plugin = Http::get($url)->json();
+        $plugin = Http::withOptions(['verify' => false])->get($url)->json();
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件不存在或已下架');
         }
