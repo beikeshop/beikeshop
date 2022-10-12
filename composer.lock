@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6c6b01c79d7432cd602e320cafb6110",
+    "content-hash": "5e07b1ed3b9aa782c38fb64150da497e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6519,6 +6519,84 @@
                 "source": "https://github.com/tormjens/eventy/tree/0.8"
             },
             "time": "2021-10-22T08:33:10+00:00"
+        },
+        {
+            "name": "ultrono/laravel-sitemap",
+            "version": "9.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ultrono/laravel-sitemap.git",
+                "reference": "27489bd4d0bfa6e017dad143bc1c3d120d1cd8de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ultrono/laravel-sitemap/zipball/27489bd4d0bfa6e017dad143bc1c3d120d1cd8de",
+                "reference": "27489bd4d0bfa6e017dad143bc1c3d120d1cd8de",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/filesystem": "^8.0 || ^9.0",
+                "illuminate/support": "^8.0 || ^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^8.0 || ^9.0",
+                "orchestra/testbench-core": "^6.0 || ^7.0",
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ultrono\\Sitemap\\SitemapServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Ultrono\\Sitemap": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rumen Damyanov",
+                    "email": "r@alfamatter.com",
+                    "homepage": "https://darumen.com",
+                    "role": "Original Developer"
+                },
+                {
+                    "name": "Rob Allport",
+                    "email": "rob@f9web.co.uk",
+                    "homepage": "https://f9web.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP 8 sitemap generator for Laravel 8 and 9",
+            "keywords": [
+                "Sitemap",
+                "generator",
+                "google-news",
+                "html",
+                "laravel",
+                "php",
+                "xml"
+            ],
+            "support": {
+                "issues": "https://github.com/ultrono/laravel-sitemap/issues",
+                "source": "https://github.com/ultrono/laravel-sitemap"
+            },
+            "time": "2022-03-11T10:11:30+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
