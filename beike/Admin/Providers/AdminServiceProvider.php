@@ -4,6 +4,7 @@ namespace Beike\Admin\Providers;
 
 use Beike\Models\AdminUser;
 use Illuminate\Support\Str;
+use Beike\Console\Commands\Sitemap;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
@@ -16,9 +17,9 @@ use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\Select;
 use Beike\Console\Commands\MakeRootAdminUser;
+use Beike\Admin\View\Components\Form\Textarea;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
-use Beike\Admin\View\Components\Form\Textarea;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,9 @@ class AdminServiceProvider extends ServiceProvider
         if (is_installer()) {
             return;
         }
+
+        $this->loadCommands();
+        $this->publishResources();
 
         load_settings();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
@@ -63,20 +67,25 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->registerGuard();
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                MakeRootAdminUser::class,
-            ]);
-
-            $this->publishResources();
-        }
-
         Config::set('filesystems.disks.catalog', [
             'driver' => 'local',
             'root' => public_path('catalog'),
         ]);
 
         $this->loadDesignComponents();
+    }
+
+    /**
+     * 加载后台命令行脚本
+     */
+    protected function loadCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeRootAdminUser::class,
+                Sitemap::class,
+            ]);
+        }
     }
 
     protected function registerGuard()

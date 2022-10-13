@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Beike\Console\Commands;
 
 use Beike\Services\SitemapService;
 use Illuminate\Console\Command;

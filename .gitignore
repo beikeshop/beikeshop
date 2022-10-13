@@ -5,6 +5,7 @@
 /public/upload/avatar
 /public/build/beike/*
 /public/install/css/*
+/public/sitemap.xml
 /storage/*.key
 /storage/installed
 /vendor
