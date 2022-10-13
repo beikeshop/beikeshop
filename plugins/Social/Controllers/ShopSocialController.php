@@ -62,7 +62,7 @@ class ShopSocialController extends Controller
 
         // For google, facebook, twitter in China.
         $driver->setGuzzleOptions([
-            'proxy' => '127.0.0.1:7890'
+            // 'proxy' => '127.0.0.1:7890'
         ]);
 
         $userData = $driver->userFromCode($code);
