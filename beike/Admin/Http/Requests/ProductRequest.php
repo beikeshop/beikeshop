@@ -38,7 +38,7 @@ class ProductRequest extends FormRequest
             'skus.*.sku' => 'required|string',
             'skus.*.price' => 'required|numeric',
             'skus.*.origin_price' => 'required|numeric',
-            'skus.*.cost_price' => 'required|numeric',
+            'skus.*.cost_price' => 'numeric',
         ];
     }
 
