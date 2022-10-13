@@ -46,17 +46,16 @@ class PluginServiceProvider extends ServiceProvider
         $this->pluginBasePath = base_path('plugins');
 
         foreach ($plugins as $plugin) {
-            $pluginCode = $plugin->getDirname();
             $this->bootPlugin($plugin);
-            $this->loadMigrations($pluginCode);
-            $this->loadRoutes($pluginCode);
-            $this->loadTranslations($pluginCode);
         }
 
         $allPlugins = $manager->getPlugins();
         foreach ($allPlugins as $plugin) {
             $pluginCode = $plugin->getDirname();
+            $this->loadMigrations($pluginCode);
+            $this->loadRoutes($pluginCode);
             $this->loadViews($pluginCode);
+            $this->loadTranslations($pluginCode);
         }
     }
 
