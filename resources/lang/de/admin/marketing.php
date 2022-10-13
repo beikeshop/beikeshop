@@ -10,7 +10,7 @@
  */
 
 return [
-    'marketing_list' => '插件市场',
-    'marketing_show' => '插件详情',
-    'set_token' => '设置 Token',
+    'marketing_list' => 'Plug-in-Markt',
+    'marketing_show' => 'Plug-in-Details',
+    'set_token' => 'Token setzen',
 ];

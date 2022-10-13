@@ -5,6 +5,11 @@
 @section('body-class', 'page-marketing')
 
 @section('content')
+
+@section('page-title-right')
+  <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
+@endsection
+
   <div id="app" class="card h-min-600" v-cloak>
     <div class="card-body">
       @if (session()->has('errors'))
@@ -71,12 +76,32 @@
       <el-pagination v-if="plugins.data.length" layout="prev, pager, next" background :page-size="plugins.meta.per_page"
         :current-page.sync="page" :total="plugins.meta.total"></el-pagination>
     </div>
+
+    <el-dialog
+      title="{{ __('admin/marketing.set_token') }}"
+      :visible.sync="setTokenDialog.show"
+      width="500px">
+      <el-input
+        type="textarea"
+        :rows="4"
+        placeholder="{{ __('admin/marketing.set_token') }}"
+        v-model="setTokenDialog.token">
+      </el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>
+        <el-button type="primary" @click="submitToken">{{ __('common.confirm') }}</el-button>
+      </span>
+    </el-dialog>
   </div>
 @endsection
 
 @push('footer')
   <script>
-    new Vue({
+    $('.update-token').click(function(event) {
+      console.log(1)
+    });
+
+    let app = new Vue({
       el: '#app',
 
       data: {
@@ -87,6 +112,11 @@
           keyword: bk.getQueryString('keyword'),
           type: bk.getQueryString('type'),
         },
+
+        setTokenDialog: {
+          show: false,
+          token: '',
+        }
       },
 
       computed: {
@@ -142,6 +172,14 @@
           Object.keys(this.filter).forEach(key => this.filter[key] = '')
           this.loadData();
         },
+
+        setToken() {
+          this.setTokenDialog.show = true;
+        },
+
+        submitToken() {
+          console.log(this.setTokenDialog.token)
+        }
       }
     })
   </script>

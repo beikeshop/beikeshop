@@ -12,4 +12,5 @@
 return [
     'marketing_list' => 'Plugin Marketing',
     'marketing_show' => 'Plugin Detail',
+    'set_token' => 'Set Token',
 ];
