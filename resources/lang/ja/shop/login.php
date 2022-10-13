@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'ユーザーは無効です',
     'login_successfully' => 'ログイン成功',
     'register_success' => '登録完了',
+    'third_party_logins' => '言及する価値がある',
 ];

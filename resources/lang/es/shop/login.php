@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'El usuario está deshabilitado',
     'login_successfully' => 'Inicio de sesión correcto',
     'register_success' => 'registración exitosa',
+    'third_party_logins' => 'vale la pena mencionar',
 ];

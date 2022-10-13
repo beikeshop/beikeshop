@@ -40,6 +40,10 @@ body.page-login, body.page-forgotten {
     }
   }
 
+  .vr-wrap {
+    margin: 0 80px;
+  }
+
   .login-wrap {
     @media (min-width: 768px) {
       display: flex;
@@ -50,7 +54,6 @@ body.page-login, body.page-forgotten {
       border: none;
       @media (min-width: 768px) {
         width: 340px;
-        margin: 0 60px;
       }
     }
   }
@@ -63,11 +66,12 @@ body.page-login, body.page-forgotten {
       margin-top: 0 !important;
     }
 
+    .vr-wrap {
+      margin: 0 60px;
+    }
+
     .card {
       border: none;
-      @media (min-width: 768px) {
-        margin: 0 30px;
-      }
     }
   }
 
@@ -96,7 +100,15 @@ body.page-login, body.page-forgotten {
     }
 
     .btn {
-      border-color: #ccc !important;
+      // border-color: #ccc !important;
+      color: #666;
+
+      img {
+        // transform: translateY(-50%);
+        position: absolute;
+        left: 40px;
+      }
+
       &:hover {
         background-color: #eee;
       }

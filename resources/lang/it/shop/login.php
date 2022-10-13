@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'l\'utente è stato disabilitato',
     'login_successfully' => 'login con successo',
     'register_success' => 'registrato con successo',
+    'third_party_logins' => 'Vale la pena citare',
 ];

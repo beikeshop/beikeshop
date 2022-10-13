@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'L\'utilisateur est désactivé',
     'login_successfully' => 'connexion réussie',
     'register_success' => 'succès de l\'inscription',
+    'third_party_logins' => 'à noter',
 ];

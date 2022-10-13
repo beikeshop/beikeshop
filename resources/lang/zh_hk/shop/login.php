@@ -36,4 +36,5 @@ return [
     'customer_inactive' => '用戶已被禁用',
     'login_successfully' => '登錄成功',
     'register_success' => '註冊成功',
+    'third_party_logins' => '第三方登錄',
 ];

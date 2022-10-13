@@ -36,4 +36,5 @@ return [
      'customer_inactive' => 'Benutzer wurde deaktiviert',
      'login_successfully' => 'erfolgreich angemeldet',
      'register_success' => 'erfolgreich registriert',
+     'third_party_logins' => 'erwähnenswert',
 ];

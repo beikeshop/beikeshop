@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'Пользователь отключен',
     'login_successfully' => 'Успешный вход в систему',
     'register_success' => 'Вы успешно зарегистрировались',
+    'third_party_logins' => 'Стоит отметить',
 ];

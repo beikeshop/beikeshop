@@ -41,7 +41,7 @@
 
         @if($social_buttons)
           <div class="social-wrap px-2">
-            <div class="title mb-4"><span>第三方登录</span></div>
+            <div class="title mb-4"><span>{{ __('shop/login.third_party_logins') }}</span></div>
             @foreach($social_buttons as $button)
               {!! $button !!}
             @endforeach
@@ -49,7 +49,7 @@
         @endif
       </div>
 
-      <div class="d-flex">
+      <div class="d-flex vr-wrap">
         <div class="vr bg-secondary"></div>
       </div>
       <div class="card">

@@ -37,9 +37,10 @@
                 <el-form-item prop="provider" class="mb-0">
                   <el-select size="small" v-model="item.provider" @change="(e) => {providerChange(e, index)}" placeholder="{{ __('Social::setting.provider') }}">
                     <el-option
-                      v-for="item in source.providers"
+                      v-for="item in providers"
                       :key="item.code"
                       :label="item.label"
+                      :disabled="item.disabled"
                       :value="item.code">
                     </el-option>
                   </el-select>
@@ -151,6 +152,21 @@
       }
     },
 
+    computed: {
+      providers() {
+        let providers = @json(Plugin\Social\Repositories\CustomerRepo::allProviders());
+
+        providers.forEach(e => {
+          if (this.form.social.some(s => s.provider == e.code)) {
+            e.disabled = true;
+          }
+        })
+
+
+        return providers;
+      }
+    },
+
     methods: {
       submit(form) {
         this.$refs[form].validate((valid) => {
@@ -174,7 +190,10 @@
       },
 
       addRow() {
-        this.form.social.push({provider: this.source.providers[1].code, status: 1, key: '', secret: '', callback: `plugin/social/callbacks/${this.source.providers[1].code}`, sort_order: this.form.social.length})
+        let providers = this.source.providers.filter(e => !this.form.social.some(s => s.provider == e.code))
+        if (providers.length) {
+          this.form.social.push({provider: providers[0].code, status: 1, key: '', secret: '', callback: `plugin/social/callbacks/${this.source.providers[1].code}`, sort_order: this.form.social.length})
+        }
       }
     }
   })

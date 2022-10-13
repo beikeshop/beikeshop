@@ -36,4 +36,5 @@ return [
     'customer_inactive' => 'The customer is inactive!',
     'login_successfully' => 'Login successfully!',
     'register_success' => 'Registered successfully',
+    'third_party_logins' => 'Third-party Login',
 ];
