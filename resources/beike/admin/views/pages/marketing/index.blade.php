@@ -115,7 +115,7 @@
 
         setTokenDialog: {
           show: false,
-          token: '',
+          token: @json(system_setting('base.developer_token') ?? ''),
         }
       },
 
