@@ -195,6 +195,7 @@ Route::prefix($adminName)
 
                 Route::middleware('can:settings_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
+                Route::middleware('can:settings_update')->post('settings/store_token', [Controllers\SettingController::class, 'store_token'])->name('settings.store_token');
 
 
                 // 税类
