@@ -29,6 +29,7 @@ class CustomerRepo
      */
     public static function create($customerData)
     {
+        $customerData['email'] = $customerData['email'] ?? '';
         $customerData['password'] = Hash::make($customerData['password'] ?? '');
         return Customer::query()->create($customerData);
     }

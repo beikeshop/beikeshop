@@ -35,7 +35,7 @@ class AccountService
         $data['from'] = $data['from'] ?? 'pc';
         $data['locale'] = locale();
 
-        if ($data['email'] ?? 0) {
+        if ($data['email'] ?? '') {
             $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));;
         }
         $data['avatar'] = $data['avatar'] ?? '';
