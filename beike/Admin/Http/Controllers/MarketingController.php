@@ -29,7 +29,7 @@ class MarketingController
             'type' => $request->get('type'),
             'keyword' => $request->get('keyword'),
         ];
-        $plugins = MarketingService::getList($filters);
+        $plugins = MarketingService::getInstance()->getList($filters);
         $data = [
             'plugins' => $plugins,
             'types' => PluginRepo::getTypes(),
@@ -49,8 +49,8 @@ class MarketingController
     public function show(Request $request)
     {
         try {
-            $code = $request->code;
-            $plugin = MarketingService::getPlugin($code);
+            $pluginCode = $request->code;
+            $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
             $data = [
                 'plugin' => $plugin,
             ];
@@ -68,16 +68,7 @@ class MarketingController
     {
         try {
             $pluginCode = $request->code;
-            $datetime = date('Y-m-d');
-            $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/download";
-            $content = file_get_contents($url);
-
-            $pluginPath = "plugins/{$pluginCode}-{$datetime}.zip";
-            Storage::disk('local')->put($pluginPath, $content);
-
-            $pluginZip = storage_path('app/' . $pluginPath);
-            $zipFile = Zip::open($pluginZip);
-            $zipFile->extract(base_path('plugins'));
+            MarketingService::getInstance()->download($pluginCode);
             return json_success('下载解压成功, 请去插件列表安装');
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
