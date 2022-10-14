@@ -61,7 +61,7 @@
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
                   <span class="text-success">{{ __('admin/marketing.text_free') }}</span>
-                  <span class="text-secondary">：@{{ plugin.downloaded }}</span>
+                  <span class="text-secondary">{{ __('admin/marketing.download_count') }}：@{{ plugin.downloaded }}</span>
                 </div>
               </div>
             </div>
