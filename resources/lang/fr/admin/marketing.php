@@ -13,4 +13,12 @@ return [
     'marketing_list' => 'marché des plug-ins',
     'marketing_show' => 'détails du plug-in',
     'set_token' => 'Définir le jeton',
+    'download_count' => 'nombre de téléchargements',
+     'last_update' => 'dernière mise à jour',
+     'text_version' => 'version',
+     'text_compatibility' => 'compatibilité',
+     'text_author' => 'auteur du plug-in',
+     'download_plugin' => 'télécharger le plugin',
+     'download_description' => 'Description de l\'extension',
+     'text_free' => 'gratuit',
 ];

@@ -60,8 +60,8 @@
                       class="img-fluid"></a></div>
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
-                  <span class="text-success">免费</span>
-                  <span class="text-secondary">下载数：@{{ plugin.downloaded }}</span>
+                  <span class="text-success">{{ __('admin/marketing.text_free') }}</span>
+                  <span class="text-secondary">：@{{ plugin.downloaded }}</span>
                 </div>
               </div>
             </div>
@@ -79,6 +79,7 @@
 
     <el-dialog
       title="{{ __('admin/marketing.set_token') }}"
+      :close-on-click-modal="false"
       :visible.sync="setTokenDialog.show"
       width="500px">
       <el-input
@@ -174,7 +175,6 @@
         },
 
         submitToken() {
-          console.log(this.setTokenDialog.token)
           if (!this.setTokenDialog.token) {
             return;
           }
