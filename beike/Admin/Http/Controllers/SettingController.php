@@ -73,4 +73,10 @@ class SettingController extends Controller
         $settingUrl = str_replace($oldAdminName, $newAdminName, admin_route('settings.index'));
         return redirect($settingUrl)->with('success', trans('common.updated_success'));
     }
+
+    public function storeDeveloperToken(Request $request)
+    {
+        SettingRepo::storeValue('developer_token', $request->get('developer_token'));
+        return json_success(trans('common.updated_success'));
+    }
 }

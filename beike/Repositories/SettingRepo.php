@@ -161,4 +161,28 @@ class SettingRepo
             $setting->update($settingData);
         }
     }
+
+    public static function storeValue($name, $value, $space = 'base', $type = 'system')
+    {
+        $setting = Setting::query()
+            ->where('type', $type)
+            ->where('space', $space)
+            ->where('name', $name)
+            ->first();
+
+        $settingData = [
+            'type' => $type,
+            'space' => $space,
+            'name' => $name,
+            'value' => $value,
+            'json' => is_array($value),
+        ];
+
+        if (empty($setting)) {
+            $setting = new Setting($settingData);
+            $setting->saveOrFail();
+        } else {
+            $setting->update($settingData);
+        }
+    }
 }
