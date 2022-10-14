@@ -46,6 +46,12 @@ class ShopSocialController extends Controller
      */
     public function redirect($provider)
     {
+        if (!defined(\Overtrue\Socialite\Contracts\ABNF_OPEN_ID)) {
+            require_once app_path() . '/../vendor/overtrue/socialite/src/Contracts/FactoryInterface.php';
+            require_once app_path() . '/../vendor/overtrue/socialite/src/Contracts/ProviderInterFace.php';
+            require_once app_path() . '/../vendor/overtrue/socialite/src/Contracts/UserInterFace.php';
+        }
+
         $url = $this->socialite->create($provider)->redirect();
         return redirect($url);
     }
