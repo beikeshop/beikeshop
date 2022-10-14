@@ -97,10 +97,6 @@
 
 @push('footer')
   <script>
-    $('.update-token').click(function(event) {
-      console.log(1)
-    });
-
     let app = new Vue({
       el: '#app',
 
