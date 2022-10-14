@@ -128,18 +128,12 @@ class SettingRepo
      * @param $data
      * @throws \Throwable
      */
-    public static function createOrUpdate($data)
+    public static function storeValue($name, $value, $space = 'base', $type = 'system')
     {
-        $name = $data['name'] ?? '';
         if (in_array($name, ['_method', '_token'])) {
             return;
         }
 
-        $type = $data['type'] ?? '';
-        $space = $data['space'] ?? '';
-        $value = (string)$data['value'] ?? '';
-        $json = (bool)$data['json'] ?? is_array($value);
-
         $setting = Setting::query()
             ->where('type', $type)
             ->where('space', $space)
@@ -150,31 +144,7 @@ class SettingRepo
             'type' => $type,
             'space' => $space,
             'name' => $name,
-            'value' => $value,
-            'json' => $json,
-        ];
-
-        if (empty($setting)) {
-            $setting = new Setting($settingData);
-            $setting->saveOrFail();
-        } else {
-            $setting->update($settingData);
-        }
-    }
-
-    public static function storeValue($name, $value, $space = 'base', $type = 'system')
-    {
-        $setting = Setting::query()
-            ->where('type', $type)
-            ->where('space', $space)
-            ->where('name', $name)
-            ->first();
-
-        $settingData = [
-            'type' => $type,
-            'space' => $space,
-            'name' => $name,
-            'value' => $value,
+            'value' => is_array($value) ? json_encode($value) : $value,
             'json' => is_array($value),
         ];
 

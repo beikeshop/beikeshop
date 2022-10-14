@@ -63,14 +63,7 @@ class DesignController extends Controller
     {
         $content = json_decode($request->getContent(), true);
         $moduleData = DesignService::handleRequestModules($content);
-        $data = [
-            'type' => 'system',
-            'space' => 'base',
-            'name' => 'design_setting',
-            'value' => json_encode($moduleData),
-            'json' => 1
-        ];
-        SettingRepo::createOrUpdate($data);
+        SettingRepo::storeValue('design_setting', $moduleData);
         return json_success(trans('common.updated_success'));
     }
 }

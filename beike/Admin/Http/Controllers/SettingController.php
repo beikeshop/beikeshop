@@ -58,14 +58,7 @@ class SettingController extends Controller
     {
         $settings = $request->all();
         foreach ($settings as $key => $value) {
-            $data = [
-                'type' => 'system',
-                'space' => 'base',
-                'name' => $key,
-                'value' => $value,
-                'json' => is_array($value)
-            ];
-            SettingRepo::createOrUpdate($data);
+            SettingRepo::storeValue($key, $value);
         }
 
         $oldAdminName = admin_name();

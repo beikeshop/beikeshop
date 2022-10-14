@@ -55,14 +55,7 @@ class DesignFooterController extends Controller
     {
         $content = json_decode($request->getContent(), true);
 
-        $data = [
-            'type' => 'system',
-            'space' => 'base',
-            'name' => 'footer_setting',
-            'value' => json_encode($content),
-            'json' => 1
-        ];
-        SettingRepo::createOrUpdate($data);
+        SettingRepo::storeValue("footer_setting", $content);
         return json_success(trans('common.updated_success'));
     }
 }

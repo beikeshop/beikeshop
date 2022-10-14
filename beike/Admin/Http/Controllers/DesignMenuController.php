@@ -34,14 +34,7 @@ class DesignMenuController extends Controller
     {
         $content = json_decode($request->getContent(), true);
 
-        $data = [
-            'type' => 'system',
-            'space' => 'base',
-            'name' => 'menu_setting',
-            'value' => json_encode($content),
-            'json' => 1
-        ];
-        SettingRepo::createOrUpdate($data);
+        SettingRepo::storeValue("menu_setting", $content);
         return json_success(trans('common.updated_success'));
     }
 }

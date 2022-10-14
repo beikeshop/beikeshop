@@ -22,14 +22,7 @@ class AdminSocialController extends Controller
      */
     public function saveSetting(Request $request): array
     {
-        $socialData = [
-            'type' => 'plugin',
-            'space' => 'social',
-            'name' => 'setting',
-            'value' => json_encode($request->all()),
-            'json' => 1,
-        ];
-        SettingRepo::createOrUpdate($socialData);
+        SettingRepo::storeValue('setting', $request->all(), 'social', 'plugin');
         return json_success('保存成功');
     }
 }
