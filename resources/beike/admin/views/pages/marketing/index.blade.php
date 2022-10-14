@@ -179,6 +179,14 @@
 
         submitToken() {
           console.log(this.setTokenDialog.token)
+          if (!this.setTokenDialog.token) {
+            return;
+          }
+
+          $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
+            this.setTokenDialog.show = false;
+            layer.msg(res.message);
+          })
         }
       }
     })
