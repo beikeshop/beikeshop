@@ -29,6 +29,10 @@ class ImageService
     {
         $this->image = $image ?: self::PLACEHOLDER_IMAGE;
         $this->imagePath = public_path($this->image);
+        if (!file_exists($this->imagePath)) {
+            $this->image = self::PLACEHOLDER_IMAGE;
+            $this->imagePath = public_path($this->image);
+        }
     }
 
 

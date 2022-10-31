@@ -12,6 +12,7 @@ class ProductResource extends JsonResource
      *
      * @param Request $request
      * @return array
+     * @throws \Exception
      */
     public function toArray($request): array
     {
@@ -20,7 +21,7 @@ class ProductResource extends JsonResource
         $data = [
             'id' => $this->id,
             'images' => array_map(function ($image) {
-                return thumbnail($image);
+                return image_resize($image);
             }, $this->images ?? []),
             'name' => $this->description->name ?? '',
             'price_formatted' => currency_format($masterSku->price),

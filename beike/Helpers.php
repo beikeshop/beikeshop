@@ -267,17 +267,6 @@ function current_customer(): ?Customer
 }
 
 /**
- * 获取缩略图
- *
- * @param $path
- * @return string
- */
-function thumbnail($path): string
-{
-    return $path;
-}
-
-/**
  * 获取语言列表
  *
  * @return array
