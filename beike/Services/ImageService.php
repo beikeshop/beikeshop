@@ -68,6 +68,10 @@ class ImageService
     public function resize(int $width = 100, int $height = 100): string
     {
         try {
+            if (!file_exists($this->imagePath)) {
+                return '';
+            }
+
             $extension = pathinfo($this->imagePath, PATHINFO_EXTENSION);
             $newImage = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
 
