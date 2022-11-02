@@ -25,12 +25,14 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @return mixed
+     * @throws \Exception
      */
     public function index(Request $request)
     {
         $orders = OrderRepo::filterOrders($request->all());
         $data = [
             'orders' => OrderList::collection($orders),
+            'statuses' => StateMachineService::getAllStatuses(),
         ];
         return view('admin::pages.orders.index', $data);
     }
