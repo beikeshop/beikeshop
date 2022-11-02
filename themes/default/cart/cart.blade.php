@@ -76,7 +76,7 @@
           <div class="card-header"><h5 class="mb-0">{{ __('shop/carts.product_total') }}</h5></div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ products.length }}</span></li>
+              <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ allProduct }}</span></li>
               <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
               <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
               <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
@@ -128,6 +128,10 @@
             this.products.map(e => e.selected = val)
             this.selectedBtnSelected()
           }
+        },
+
+        allProduct() {
+          return this.products.map(e => e.quantity).reduce((n,m) => n + m);
         },
       },
       // 侦听器

@@ -22,6 +22,14 @@
             <el-form-item label="{{ __('order.email') }}">
               <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
             </el-form-item>
+            <el-form-item label="{{ __('common.status') }}">
+              {{-- <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input> --}}
+              <select v-model="filter.status" class="form-control wp-100">
+                <option value="">{{ __('common.all') }}</option>
+                <option value="1">{{ __('product.active') }}</option>
+                <option value="0">{{ __('product.inactive') }}</option>
+              </select>
+            </el-form-item>
           </div>
           <el-form-item label="{{ __('order.created_at') }}">
             <el-form-item>
@@ -108,6 +116,7 @@
         exportUrl: @json(admin_route('orders.export')),
         filter: {
           number: bk.getQueryString('number'),
+          status: bk.getQueryString('status'),
           customer_name: bk.getQueryString('customer_name'),
           email: bk.getQueryString('email'),
           start: bk.getQueryString('start'),
