@@ -33,7 +33,7 @@
                     {{ __('shop/carts.select_all') }}
                   </label>
                 </th>
-                <th>{{ __('shop/carts.index') }}</th>
+                <th width="40%">{{ __('shop/carts.index') }}</th>
                 <th width="170">{{ __('shop/carts.commodity') }}</th>
                 <th width="170">{{ __('shop/carts.subtotal') }}</th>
                 <th width="100" class="text-end">{{ __('common.action') }}</th>

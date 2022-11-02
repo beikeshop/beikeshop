@@ -26,6 +26,12 @@ class CartDetail extends JsonResource
         $subTotal = $price * $this->quantity;
         $image = $sku->image ?: $product->image;
 
+
+        $variantLabel = $sku->getVariantLabel();
+        if ($variantLabel) {
+            $productName .= ' - ' . trim($variantLabel);
+        }
+
         return [
             'cart_id' => $this->id,
             'product_id' => $this->product_id,

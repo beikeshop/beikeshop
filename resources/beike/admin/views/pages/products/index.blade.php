@@ -32,7 +32,7 @@
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.category') }}</label>
-              <select v-model="filter.category_id" class="form-control">
+              <select v-model="filter.category_id" class="form-select">
                 <option value="">{{ __('common.all') }}</option>
                 @foreach ($categories as $_category)
                   <option :value="{{ $_category->id }}">{{ $_category->name }}</option>
@@ -42,7 +42,7 @@
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('common.status') }}</label>
-              <select v-model="filter.active" class="form-control">
+              <select v-model="filter.active" class="form-select">
                 <option value="">{{ __('common.all') }}</option>
                 <option value="1">{{ __('product.active') }}</option>
                 <option value="0">{{ __('product.inactive') }}</option>

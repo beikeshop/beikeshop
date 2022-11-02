@@ -27,4 +27,20 @@ class ProductSku extends Base
         $images = $this->images ?? [];
         return $images[0] ?? '';
     }
+
+    public function getVariantLabel(): string
+    {
+        $product = $this->product;
+        $localeCode = locale();
+        $variantLabel = '';
+        foreach ($product->variables as $index => $variable) {
+            $valueIndex = $this->variants[$index];
+            $variantName = $variable['name'][$localeCode] ?? '';
+            $variantValue = $variable['values'][$valueIndex]['name'][$localeCode] ?? '';
+            if ($variantName && $variantValue) {
+                $variantLabel .= $variantName . ': ' . $variantValue . '; ';
+            }
+        }
+        return $variantLabel;
+    }
 }

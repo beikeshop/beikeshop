@@ -14,6 +14,7 @@
           <div>
             <el-form-item label="{{ __('order.number') }}">
               <el-input @keyup.enter.native="search" v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
+              {{-- <input @keyup.enter="search" type="text" v-model="filter.number" class="form-control" placeholder="{{ __('order.number') }}"> --}}
             </el-form-item>
             <el-form-item label="{{ __('order.customer_name') }}">
               <el-input @keyup.enter.native="search" v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
@@ -22,12 +23,12 @@
             <el-form-item label="{{ __('order.email') }}">
               <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
             </el-form-item>
-            <el-form-item label="{{ __('common.status') }}">
-              {{-- <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input> --}}
-              <select v-model="filter.status" class="form-control wp-100">
+            <el-form-item label="{{ __('common.status') }}" class="el-input--small">
+              <select v-model="filter.status" class="form-select wp-100 bg-white bs-el-input-inner-sm">
                 <option value="">{{ __('common.all') }}</option>
-                <option value="1">{{ __('product.active') }}</option>
-                <option value="0">{{ __('product.inactive') }}</option>
+                @foreach ($statuses as $item)
+                  <option value="{{ $item['status'] }}">{{ $item['name'] }}</option>
+                @endforeach
               </select>
             </el-form-item>
           </div>
