@@ -176,6 +176,7 @@
           this.products = res.data.carts
           this.amount_format = res.data.amount_format
           this.total_quantity = res.data.quantity
+          bk.getCarts()
         }
       },
       // 实例被挂载后调用
