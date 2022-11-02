@@ -74,7 +74,7 @@ class ProductsSeeder extends Seeder
                 "images" => "[\"catalog/demo/product/1.jpg\", \"catalog/demo/product/2.jpg\", \"catalog/demo/product/4.jpg\"]",
                 "position" => 0,
                 "active" => 1,
-                "variables" => "[{\"name\": {\"en\": \"chima\", \"zh_cn\": \"尺码\"}, \"values\": [{\"name\": {\"en\": \"L\", \"zh_cn\": \"L\"}, \"image\": \"\"}, {\"name\": {\"en\": \"M\", \"zh_cn\": \"M\"}, \"image\": \"\"}], \"isImage\": false}, {\"name\": {\"en\": \"yanse\", \"zh_cn\": \"颜色\"}, \"values\": [{\"name\": {\"en\": \"黄色\", \"zh_cn\": \"黄色\"}, \"image\": \"catalog/app/icon/3.png\"}, {\"name\": {\"en\": \"绿色\", \"zh_cn\": \"绿色\"}, \"image\": \"catalog/app/icon/8.png\"}], \"isImage\": false}]",
+                "variables" => "[{\"name\": {\"en\": \"chima\", \"zh_cn\": \"尺码\"}, \"values\": [{\"name\": {\"en\": \"L\", \"zh_cn\": \"L\"}, \"image\": \"\"}, {\"name\": {\"en\": \"M\", \"zh_cn\": \"M\"}, \"image\": \"\"}], \"isImage\": false}, {\"name\": {\"en\": \"yanse\", \"zh_cn\": \"颜色\"}, \"values\": [{\"name\": {\"en\": \"黄色\", \"zh_cn\": \"黄色\"}, \"image\": \"\"}, {\"name\": {\"en\": \"绿色\", \"zh_cn\": \"绿色\"}, \"image\": \"\"}], \"isImage\": false}]",
                 "tax_class_id" => 1,
             ],
             [
