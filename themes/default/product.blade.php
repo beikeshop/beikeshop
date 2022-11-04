@@ -3,7 +3,7 @@
 @section('body-class', 'page-product')
 
 @push('header')
-  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">

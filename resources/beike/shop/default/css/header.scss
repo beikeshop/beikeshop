@@ -255,10 +255,25 @@ header {
 }
 
 #offcanvas-right-cart {
+  .select-wrap {
+    flex: 1;
+    margin-right: 10px;
+    cursor: pointer;
+
+    i {
+      font-size: 20px;
+      color: #aaa;
+      &.bi-check-circle-fill {
+        color: $primary;
+      }
+    }
+  }
+
   .offcanvas-right-products {
     .product-list {
       padding: 1rem 0;
       border-top: 1px solid #eee;
+
 
       .left {
         width: 80px;
@@ -281,12 +296,24 @@ header {
           -webkit-line-clamp: 2;
         }
 
+        .price {
+          input {
+            margin-left: 10px;
+            width: 50px;
+            height: 24px;
+          }
+        }
+
         .offcanvas-products-delete {
           cursor: pointer;
           color: #999;
         }
       }
     }
+  }
+
+  .offcanvas-footer {
+
   }
 }
 

@@ -36,18 +36,12 @@
         <div class="dropdown">
           <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
             aria-expanded="false">
-            {{-- @if (current_language()->image)
-              <img src="{{ image_resize(current_language()->image, 16, 16) }}" class="img-fluid me-1">
-            @endif --}}
             {{ current_language()->name }}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="language-dropdown">
             @foreach ($languages as $language)
               <a class="dropdown-item" href="{{ shop_route('lang.switch', [$language->code]) }}">
-                {{-- @if ($language->image)
-                <img src="{{ image_resize($language->image, 16, 16) }}" class="img-fluid me-1">
-                @endif --}}
                 {{ $language->name }}
               </a>
             @endforeach
@@ -107,10 +101,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link position-relative" data-bs-toggle="offcanvas" href="#offcanvas-right-cart" role="button"
+            <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
+              href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"
               aria-controls="offcanvasExample">
               <i class="iconfont">&#xe634;</i>
-              {{-- <div class="navbar-icon-link-badge"></div> --}}
               <span class="cart-badge-quantity"></span>
             </a>
           </li>
@@ -148,9 +142,9 @@
     </div>
   </div>
 
-
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
-    aria-labelledby="offcanvasRightLabel"></div>
+  @if (!equal_route('shop.carts.index'))
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
+  @endif
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">

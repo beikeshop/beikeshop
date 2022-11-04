@@ -3,18 +3,29 @@
   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
 <div class="offcanvas-body">
+  @php $check = 0 @endphp
+
   @if ($carts)
     <div class="offcanvas-right-products">
       @foreach ($carts as $cart)
+        @if ($cart['selected']) @php $check = $check + 1 @endphp @endif
         <div class="product-list d-flex align-items-center">
-          <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] }}" class="img-fluid"></a></div>
-          <div class="right flex-grow-1">
-            <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-3 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
-            <div class="product-bottom d-flex justify-content-between align-items-center">
-              <div class="price">{{ $cart['price_format'] }} <span class="text-muted">x {{ $cart['quantity'] }}<span>
+          <div class="select-wrap">
+            <i class="bi {{ $cart['selected'] ? 'bi-check-circle-fill' : 'bi-circle' }}" data-id="{{ $cart['cart_id'] }}"></i>
+          </div>
+          <div class="product-info d-flex align-items-center">
+            <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] }}" class="img-fluid"></a></div>
+            <div class="right flex-grow-1">
+              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-3 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
+              <div class="product-bottom d-flex justify-content-between align-items-center">
+                <div class="price d-flex align-items-center">
+                  {{ $cart['price_format'] }} x
+                  <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                   data-id="{{ $cart['cart_id'] }}" data-sku="{{ $cart['sku_id'] }}" class="form-control p-1" value="{{ $cart['quantity'] }}">
+                </div>
+                <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
+                  {{ __('common.delete') }}</span>
               </div>
-              <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
-                {{ __('common.delete') }}</span>
             </div>
           </div>
         </div>
@@ -40,9 +51,15 @@
 
 @if ($carts)
   <div class="offcanvas-footer">
-    <div class="d-flex justify-content-between align-items-center mb-2 p-4 bg-light">
-      <strong>{{ __('shop/carts.subtotal') }}（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
-      <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
+    <div class="d-flex justify-content-between align-items-center mb-2 p-3 bg-light top-footer">
+      <div class="select-wrap all-select d-flex align-items-center">
+        <i class="bi {{ $check == count($carts) ? 'bi-check-circle-fill' : 'bi-circle' }}"></i>
+        <span class="ms-1 text-secondary">{{ __('common.select_all') }}</span>
+      </div>
+      <div>
+        <span class="text-secondary">{{ __('shop/carts.product_total') }}</span><strong>（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
+        <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
+      </div>
     </div>
     <div class="p-4">
       <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">{{ __('shop/carts.to_checkout') }}</a>

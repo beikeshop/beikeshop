@@ -3,7 +3,7 @@
 @section('body-class', 'page-login')
 
 @push('header')
-  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 @endpush
