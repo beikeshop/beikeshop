@@ -95,12 +95,7 @@ class EnvironmentManager
         $results = trans('installer::installer_messages.environment.success');
 
         $scheme = is_secure() ? 'https' : 'http';
-        $appUrl = $scheme . "://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $appUrl .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"];
-        } else {
-            $appUrl .= $_SERVER["SERVER_NAME"];
-        }
+        $appUrl = $scheme . "://" . $_SERVER["HTTP_HOST"];
 
         $envFileData =
             'APP_NAME=\'' . ($request->app_name ?: 'BeikeShop') . "'\n" .

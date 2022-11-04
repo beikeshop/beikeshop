@@ -49,6 +49,7 @@
                 </td>
                 <td>
                   <div class="name mb-1 fw-bold" v-text="product.name"></div>
+                  <div class="attr text-muted">@{{ product.variant_labels }}</div>
                   <div class="price text-muted">@{{ product.price_format }}</div>
                 </td>
                 <td>

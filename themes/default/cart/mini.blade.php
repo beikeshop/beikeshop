@@ -16,7 +16,8 @@
           <div class="product-info d-flex align-items-center">
             <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] }}" class="img-fluid"></a></div>
             <div class="right flex-grow-1">
-              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-3 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
+              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
+              <div class="attr text-muted">{{ $cart['variant_labels'] }}</div>
               <div class="product-bottom d-flex justify-content-between align-items-center">
                 <div class="price d-flex align-items-center">
                   {{ $cart['price_format'] }} x

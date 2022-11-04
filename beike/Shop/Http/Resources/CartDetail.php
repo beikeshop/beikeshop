@@ -26,12 +26,6 @@ class CartDetail extends JsonResource
         $subTotal = $price * $this->quantity;
         $image = $sku->image ?: $product->image;
 
-
-        $variantLabel = $sku->getVariantLabel();
-        if ($variantLabel) {
-            $productName .= ' - ' . trim($variantLabel);
-        }
-
         return [
             'cart_id' => $this->id,
             'product_id' => $this->product_id,
@@ -48,6 +42,7 @@ class CartDetail extends JsonResource
             'tax_class_id' => $product->tax_class_id,
             'subtotal' => $subTotal,
             'subtotal_format' => currency_format($subTotal),
+            'variant_labels' => trim($sku->getVariantLabel()),
         ];
     }
 }
