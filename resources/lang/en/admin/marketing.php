@@ -13,6 +13,7 @@ return [
     'marketing_list' => 'Plugin Marketing',
     'marketing_show' => 'Plugin Detail',
     'set_token' => 'Set Token',
+    'get_token' => 'Get Token',
     'download_count' => 'download count',
     'last_update' => 'last update',
     'text_version' => 'version',

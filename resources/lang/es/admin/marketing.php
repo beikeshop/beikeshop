@@ -13,6 +13,7 @@ return [
     'marketing_list' => 'mercado complementario',
     'marketing_show' => 'detalles del complemento',
     'set_token' => 'Establecer ficha',
+    'get_token' => 'Obtener token',
     'download_count' => 'recuento de descargas',
      'last_update' => 'última actualización',
      'text_version' => 'versión',

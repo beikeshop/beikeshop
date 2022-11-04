@@ -59,10 +59,13 @@
         placeholder="{{ __('admin/marketing.set_token') }}"
         v-model="setTokenDialog.token">
       </el-input>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>
-        <el-button type="primary" @click="submitToken">{{ __('common.confirm') }}</el-button>
-      </span>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <a href="https://beikeshop.com/account/websites" class="link-primary" target="_blank">{{ __('admin/marketing.get_token') }}</a>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>
+          <el-button type="primary" @click="submitToken">{{ __('common.confirm') }}</el-button>
+        </span>
+      </div>
     </el-dialog>
   </div>
 @endsection

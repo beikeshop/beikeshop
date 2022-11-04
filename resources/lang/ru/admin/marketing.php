@@ -13,6 +13,7 @@ return [
     'marketing_list' => 'рынок плагинов',
     'marketing_show' => 'детали плагина',
     'set_token' => 'Установить токен',
+    'get_token' => 'Получить токен',
     'download_count' => 'количество загрузок',
     'last_update' => 'последнее обновление',
     'text_version' => 'версия',

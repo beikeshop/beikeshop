@@ -13,6 +13,7 @@ return [
     'marketing_list' => '插件市场',
     'marketing_show' => '插件详情',
     'set_token' => '设置 Token',
+    'get_token' => '获取 Token',
     'download_count' => '下载次数',
     'last_update' => '最后更新',
     'text_version' => '版本',

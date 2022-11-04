@@ -13,6 +13,7 @@ return [
     'marketing_list' => 'Plug-in-Markt',
     'marketing_show' => 'Plug-in-Details',
     'set_token' => 'Token setzen',
+    'get_token' => 'Token abrufen',
     'download_count' => 'Download-Zähler',
     'last_update' => 'letzte Aktualisierung',
     'text_version' => 'Version',

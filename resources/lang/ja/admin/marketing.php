@@ -13,6 +13,7 @@ return [
     'marketing_list' => 'プラグイン市場',
     'marketing_show' => 'プラグインの詳細',
     'set_token' => 'セットトークン',
+    'get_token' => '获取 Token',
     'download_count' => 'ダウンロード数',
     'last_update' => '最終更新',
     'text_version' => 'バージョン',
