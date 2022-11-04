@@ -98,13 +98,24 @@ class ProductRepo
                 if (isset($data['model'])) {
                     $query->where('model', 'like', "%{$data['model']}%");
                 }
-
             });
         }
 
         if (isset($data['name'])) {
             $builder->whereHas('description', function ($query) use ($data) {
                 $query->where('name', 'like', "%{$data['name']}%");
+            });
+        }
+
+        $keyword = $data['keyword'] ?? '';
+        if ($keyword) {
+            $builder->where(function (Builder $query) use ($keyword) {
+                $query->whereHas('skus', function (Builder $query) use ($keyword) {
+                    $query->where('sku', 'like', "%{$keyword}%")
+                        ->orWhere('model', 'like', "%{$keyword}%");
+                })->orWhereHas('description', function ($query) use ($keyword) {
+                    $query->where('name', 'like', "%{$keyword}%");
+                });
             });
         }
 
