@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('product.name') }}</label>
-            <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="name">
+            <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('product.name') }}">
           </div>
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('admin/tax_rate.type') }}</label>
