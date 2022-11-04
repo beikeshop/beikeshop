@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2022-11-04 14:18:43
+ * @LastEditTime  2022-11-04 16:00:27
  */
 
 $(function () {
@@ -48,6 +48,12 @@ $(function () {
     const checkedIds = $('#offcanvas-right-cart .product-list').map(function() {
       return $(this).find('i.bi-check-circle-fill').data('id');
     }).get();
+
+    if (!checkedIds.length) {
+      $('#offcanvas-right-cart .to-checkout').addClass('disabled')
+    } else {
+      $('#offcanvas-right-cart .to-checkout').removeClass('disabled')
+    }
 
     $http.post(`/carts/select`, {cart_ids: checkedIds}, {hload: true}).then((res) => {
       updateMiniCartData(res);

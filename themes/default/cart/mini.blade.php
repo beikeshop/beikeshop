@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="p-4">
-      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark">{{ __('shop/carts.to_checkout') }}</a>
+      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 btn-dark to-checkout {{ !$check ? 'disabled' : '' }}">{{ __('shop/carts.to_checkout') }}</a>
       <a href="{{ shop_route('carts.index') }}" class="btn w-100 btn-outline-dark mt-2">{{ __('shop/carts.check_cart') }}</a>
     </div>
   </div>
