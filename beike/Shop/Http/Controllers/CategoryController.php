@@ -20,7 +20,8 @@ class CategoryController extends Controller
 
         $data = [
             'category' => $category,
-            'products' => $products->jsonSerialize(),
+            'products_format' => $products->jsonSerialize(),
+            'products' => $products,
         ];
 
         return view('category', $data);

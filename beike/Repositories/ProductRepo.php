@@ -48,7 +48,7 @@ class ProductRepo
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
         $builder = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
-        $products = $builder->with('inCurrentWishlist')->get();
+        $products = $builder->with('inCurrentWishlist')->paginate();
         return ProductSimple::collection($products);
     }
 
@@ -230,6 +230,7 @@ class ProductRepo
             ->get();
         return $products;
     }
+
     public static function DeleteByIds($ids)
     {
         Product::query()->whereIn('id', $ids)->delete();
