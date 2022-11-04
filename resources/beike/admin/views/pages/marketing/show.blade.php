@@ -59,7 +59,7 @@
         placeholder="{{ __('admin/marketing.set_token') }}"
         v-model="setTokenDialog.token">
       </el-input>
-      <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="d-flex justify-content-between align-items-center mt-5">
         <a href="https://beikeshop.com/account/websites" class="link-primary" target="_blank">{{ __('admin/marketing.get_token') }}</a>
         <span slot="footer" class="dialog-footer">
           <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>
