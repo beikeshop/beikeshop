@@ -48,7 +48,7 @@ class ProductRepo
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
         $builder = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
-        $products = $builder->with('inCurrentWishlist')->paginate();
+        $products = $builder->with('inCurrentWishlist')->paginate(20);
         return ProductSimple::collection($products);
     }
 

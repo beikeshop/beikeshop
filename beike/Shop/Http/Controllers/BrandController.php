@@ -31,7 +31,8 @@ class BrandController extends Controller
 
         $data = [
             'brand' => $brand,
-            'products' => ProductSimple::collection($products)->jsonSerialize(),
+            'products' => $products,
+            'products_format' => ProductSimple::collection($products)->jsonSerialize(),
         ];
 
         return view('brand/info', $data);
