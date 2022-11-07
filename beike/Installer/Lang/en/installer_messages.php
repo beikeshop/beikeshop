@@ -27,6 +27,11 @@ return [
         'describe' => 'Welcome to install BeikeShop. Easy Installation and Setup Wizard.',
         'message' => 'Easy Installation and Setup Wizard.',
         'next' => 'Check Requirements',
+        'copyright_btn' => 'I have read the agreement and agree',
+        'copyright_title' => 'Copyright Description',
+        'copyright_list_1' => '1. The copyright of this system belongs to Chengdu GuangDa Network Technology Co., Ltd. ',
+        'copyright_list_2' => '2. Except for the written permission of the company, no individual, unit or organization may profit from the sale of this system and its derivatives as commodities. ',
+        'copyright_list_3' => '3. This system can be downloaded, forwarded, installed, modified and used freely without authorization from our company. ',
     ],
 
     /*
