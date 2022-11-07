@@ -106,6 +106,10 @@ body[class^="page-account-"] {
   padding-bottom: 10px;
   margin-bottom: 2rem;
 
+  @media (max-width: 992px) {
+    font-size: 1rem;
+  }
+
   &:after {
     position: absolute;
     bottom: 0;
@@ -275,4 +279,16 @@ body[class^="page-account-"] {
 
 table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-header {
   font-family: 'Poppins-Medium', sans-serif;
+}
+
+.text-size-min {
+  font-size: 12px;
+}
+
+.text-truncate-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }

@@ -2,7 +2,7 @@
   <h5 id="offcanvasRightLabel" class="mx-auto mb-0">{{ __('shop/carts.mini') }}</h5>
   <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>
-<div class="offcanvas-body">
+<div class="offcanvas-body pt-0">
   @php $check = 0 @endphp
 
   @if ($carts)
@@ -16,8 +16,8 @@
           <div class="product-info d-flex align-items-center">
             <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] }}" class="img-fluid"></a></div>
             <div class="right flex-grow-1">
-              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
-              <div class="attr text-muted">{{ $cart['variant_labels'] }}</div>
+              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark text-truncate-2" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
+              <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>
               <div class="product-bottom d-flex justify-content-between align-items-center">
                 <div class="price d-flex align-items-center">
                   {{ $cart['price_format'] }} x

@@ -12,7 +12,7 @@
 return [
     'index' => 'Steps',
     'cart' => 'Cart',
-    'checkout' => 'Checkouts',
-    'submitted_successfully' => 'Submitted Successfully',
+    'checkout' => 'Checkout',
+    'submitted_successfully' => 'Placed Order',
     'payment' => 'Payment',
 ];

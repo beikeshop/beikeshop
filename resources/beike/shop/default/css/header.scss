@@ -274,7 +274,6 @@ header {
       padding: 1rem 0;
       border-top: 1px solid #eee;
 
-
       .left {
         width: 80px;
         flex: 0 0 80px;
@@ -288,14 +287,6 @@ header {
       }
 
       .right {
-        .name {
-          overflow: hidden;
-          text-overflow:ellipsis;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-        }
-
         .price {
           input {
             margin-left: 10px;

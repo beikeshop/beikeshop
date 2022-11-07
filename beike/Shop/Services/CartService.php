@@ -137,25 +137,24 @@ class CartService
      * 获取购物车相关数据
      *
      * @param array $carts
-     * @param bool $showAll
      * @return array
      */
-    public static function reloadData(array $carts = [], bool $showAll = false): array
+    public static function reloadData(array $carts = []): array
     {
         if (empty($carts)) {
             $carts = CartService::list(current_customer());
         }
 
-        $cartList = collect($carts);
-        if (!$showAll) {
-            $cartList = collect($carts)->where('selected', 1);
-        }
+        $cartList = collect($carts)->where('selected', 1);
+
         $quantity = $cartList->sum('quantity');
+        $quantityAll = collect($carts)->sum('quantity');
         $amount = $cartList->sum('subtotal');
 
         $data = [
             'carts' => $carts,
             'quantity' => $quantity,
+            'quantity_all' => $quantityAll,
             'amount' => $amount,
             'amount_format' => currency_format($amount),
         ];

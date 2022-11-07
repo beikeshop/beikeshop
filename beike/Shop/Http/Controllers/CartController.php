@@ -110,6 +110,7 @@ class CartController extends Controller
 
         $data['html'] = view('cart/mini', $reloadData)->render();
         $data['quantity'] = $reloadData['quantity'];
+        $data['quantity_all'] = $reloadData['quantity_all'];
 
         return json_success(trans('common.success'), $data);
     }

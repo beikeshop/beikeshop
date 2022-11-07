@@ -77,10 +77,21 @@ footer {
   }
 
   .footer-bottom {
-    height: 60px;
     display: flex;
     align-items: center;
     background: #EFEFF4;
     color: #666;
+
+    @media (min-width:768px) {
+      height: 60px;
+    }
+
+    @media (max-width:768px) {
+      padding: 10px 0;
+    }
+
+    .right-img {
+      max-height: 42px;
+    }
   }
 }

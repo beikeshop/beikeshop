@@ -73,7 +73,7 @@
           {!! $footer_content['bottom']['copyright'][$locale] ?? '' !!}
         </div>
         @if (isset($footer_content['bottom']['image']))
-          <div class="col-auto">
+          <div class="col-auto right-img">
             <img src="{{ image_origin($footer_content['bottom']['image']) }}" class="img-fluid">
           </div>
         @endif
