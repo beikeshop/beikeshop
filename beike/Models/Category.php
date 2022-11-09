@@ -2,6 +2,7 @@
 
 namespace Beike\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +20,11 @@ class Category extends Base
     protected $casts = [
         'active' => 'boolean',
     ];
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
 
     public function children(): HasMany
     {

@@ -22,6 +22,41 @@ class CategoryRepo
     private static $allCategoryWithName = null;
 
 
+    /**
+     * 后台获取分类列表
+     * @return Builder[]|Collection
+     */
+    public static function getAdminList()
+    {
+        self::cleanCategories();
+        return Category::with(['description', 'children.description', 'children.children.description'])
+            ->where('parent_id', 0)
+            ->get();
+    }
+
+
+    /**
+     * 清理分类数据
+     */
+    public static function cleanCategories()
+    {
+        $categories = Category::with([
+            'parent',
+            'description',
+        ])->get();
+
+        foreach ($categories as $category) {
+            if ($category->parent_id && empty($category->parent)) {
+                $category->parent_id = 0;
+                $category->save();
+            }
+            if (empty($category->description)) {
+                $category->delete();
+            }
+        }
+    }
+
+
     public static function flatten(string $locale, $separator = ' > '): array
     {
         $sql = "SELECT cp.category_id AS id, TRIM(LOWER(GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '{$separator}'))) AS name, c1.parent_id, c1.position";
@@ -107,6 +142,10 @@ class CategoryRepo
             foreach ($category->paths->sortBy('level') as $path) {
                 if ($pathName) {
                     $pathName .= ' > ';
+                }
+                if (empty($path->pathCategory)) {
+                    $path->delete();
+                    continue;
                 }
                 $pathName .= $path->pathCategory->description->name;
             }

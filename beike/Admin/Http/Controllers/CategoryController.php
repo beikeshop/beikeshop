@@ -15,10 +15,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::with('description', 'children.description', 'children.children.description')
-            ->where('parent_id', 0)
-            ->get();
-
+        $categories = CategoryRepo::getAdminList();
         $data = [
             'categories' => CategoryResource::collection($categories),
         ];
