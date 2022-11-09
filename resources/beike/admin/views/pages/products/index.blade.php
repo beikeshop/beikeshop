@@ -59,7 +59,7 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-between my-4" v-if="product.data.length">
+        <div class="d-flex justify-content-between my-4">
           @if ($type != 'trashed')
             <a href="{{ admin_route('products.create') }}">
               <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
@@ -69,7 +69,7 @@
           @endif
 
           @if ($type != 'trashed')
-          <div class="right">
+          <div class="right" v-if="product.data.length">
             <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
             @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
