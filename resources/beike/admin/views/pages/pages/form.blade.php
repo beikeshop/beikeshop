@@ -13,14 +13,14 @@
         @csrf
         @method($page->id ? 'PUT' : 'POST')
         <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
-          @foreach ($admin_languages as $language)
+          @foreach (locales() as $language)
             <li class="nav-item" role="presentation">
               <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-{{ $language['code'] }}" type="button" >{{ $language['name'] }}</button>
             </li>
           @endforeach
         </ul>
         <div class="tab-content">
-          @foreach ($admin_languages as $language)
+          @foreach (locales() as $language)
             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
               @php
                 $error_title = $errors->first("descriptions.{$language['code']}.title");

@@ -105,7 +105,7 @@
         source: {
           all_tax_rates: @json($all_tax_rates ?? []),
           roles: @json($admin_roles ?? []),
-          languages: @json($admin_languages ?? []),
+          languages: @json(locales() ?? []),
           {{-- language: @json($admin_language ?? 'en'), --}}
         },
 

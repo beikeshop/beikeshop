@@ -147,7 +147,7 @@
 
 
   <script>
-    var $languages = @json($admin_languages);
+    var $languages = @json(locales());
     var $locale = '{{ locale() }}';
 
     function languagesFill(text) {
