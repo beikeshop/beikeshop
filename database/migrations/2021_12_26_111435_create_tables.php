@@ -259,7 +259,7 @@ class CreateTables extends Migration
             $table->id()->comment('ID');
             $table->integer('order_id')->comment('订单 ID');
             $table->string('code')->comment('类型编码');
-            $table->string('value')->comment('金额');
+            $table->decimal('value')->comment('金额');
             $table->string('title')->comment('名称');
             $table->json('reference')->comment('附加信息');
             $table->timestamps();
