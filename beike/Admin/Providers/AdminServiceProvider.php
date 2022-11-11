@@ -18,6 +18,7 @@ use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\Select;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Admin\View\Components\Form\Textarea;
+use Beike\Console\Commands\GenerateDatabaseDict;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
 
@@ -84,6 +85,7 @@ class AdminServiceProvider extends ServiceProvider
             $this->commands([
                 MakeRootAdminUser::class,
                 Sitemap::class,
+                GenerateDatabaseDict::class,
             ]);
         }
     }
