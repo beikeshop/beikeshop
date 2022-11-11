@@ -258,7 +258,7 @@
         var scrollHeight = div.scrollHeight;
         var scrollTop    = div.scrollTop;
         var height       = div.offsetHeight;
-        if ((scrollTop + height) == scrollHeight) {
+        if ((scrollTop + height + 1) >= scrollHeight) {
           $('.modal-footer .btn').removeAttr('disabled')
         }
       });
