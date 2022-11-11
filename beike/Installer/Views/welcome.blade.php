@@ -47,7 +47,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">{{ trans('installer::installer_messages.welcome.copyright_title') }}</h5>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="copyright-info">
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_1') }}</p>
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_2') }}</p>
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_3') }}</p>
@@ -239,15 +239,29 @@
     $(function() {
       $('#modal-copyright').modal('show');
 
-      $('#modal-copyright .modal-body').scroll(function() {
-        var bodyHeight = $(this).outerHeight();
-        var nScrollHeight = $(this)[0].scrollHeight;
-        var nScrollTop = $(this)[0].scrollTop;
+      var addEvent = (function() {
+        if (window.addEventListener) {
+          return function(elm, type, handle) {
+            elm.addEventListener(type, handle, false);
+          }
+        }
 
-        if (Math.round(nScrollTop + bodyHeight) >= nScrollHeight) {
+       if (window.attachEvent) {
+          return function(elm, type, handle) {
+            elm.attachEvent('on' + type, handle);
+          }
+        }
+      })();
+
+      var div = document.getElementById('copyright-info');
+      addEvent(div, 'scroll', function() {
+        var scrollHeight = div.scrollHeight;
+        var scrollTop    = div.scrollTop;
+        var height       = div.offsetHeight;
+        if ((scrollTop + height) == scrollHeight) {
           $('.modal-footer .btn').removeAttr('disabled')
         }
-      })
+      });
     })
   </script>
 @endsection
