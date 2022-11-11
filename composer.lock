@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d41aaf4336e9383247e1340f2fe6ffe5",
+    "content-hash": "793040fbe53dc3a99b2c8ea50fcc03cb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6941,6 +6941,66 @@
                 "source": "https://github.com/ultrono/laravel-sitemap"
             },
             "time": "2022-03-11T10:11:30+00:00"
+        },
+        {
+            "name": "unisharp/doc-us",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UniSharp/doc-us.git",
+                "reference": "8175acac629a92ff7245a3f8a4f53ee4b9a4a752"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UniSharp/doc-us/zipball/8175acac629a92ff7245a3f8a4f53ee4b9a4a752",
+                "reference": "8175acac629a92ff7245a3f8a4f53ee4b9a4a752",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/database": ">5.3",
+                "illuminate/support": ">5.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.6",
+                "phpunit/phpunit": "^5.6",
+                "vlucas/phpdotenv": "^2.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "UniSharp\\DocUs\\DocUsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "UniSharp\\DocUs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "UniSharp Ltd.",
+                    "email": "unisharp-service@unisharp.com",
+                    "homepage": "http://unisharp.com"
+                }
+            ],
+            "description": "A MySQL Schema Documantation Generator for Laravel",
+            "support": {
+                "issues": "https://github.com/UniSharp/doc-us/issues",
+                "source": "https://github.com/UniSharp/doc-us/tree/v1.3.0"
+            },
+            "time": "2018-02-22T10:01:27+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
