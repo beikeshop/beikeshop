@@ -14,6 +14,8 @@ class CreateFailedJobsTable extends Migration
     public function up()
     {
         Schema::create('failed_jobs', function (Blueprint $table) {
+            $table->comment('队列失败任务');
+
             $table->id()->comment('主键ID');
             $table->string('uuid')->unique()->comment('唯一ID');
             $table->text('connection')->comment('链接');
