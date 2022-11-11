@@ -228,9 +228,25 @@
           if (typeof index == 'number') {
             this.dialogAddress.index = index;
             this.dialogAddress.form = JSON.parse(JSON.stringify(this.addresses[index]))
+            this.countryChange(this.dialogAddress.form.country_id);
           }
 
+          this.countryChange(this.dialogAddress.form.country_id);
           this.dialogAddress.show = true
+        },
+
+        countryChange(e) {
+          const self = this;
+
+          $http.get(`countries/${e}/zones`, null, {
+            hload: true
+          }).then((res) => {
+            this.source.zones = res.data.zones;
+
+            if (!res.data.zones.some(e => e.id == this.form.zone_id)) {
+              this.form.zone_id = '';
+            }
+          })
         },
 
         deleteAddress(id, index) {
