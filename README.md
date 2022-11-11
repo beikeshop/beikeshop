@@ -35,7 +35,7 @@ PHP语言开发，基于 Laravel 框架，前端采用Vue
 1. 上传到你的服务器并解压
 1. 将解压文件夹下的 public 设置为网站根目录
 1. 通过浏览器访问网站根据提示完成安装
-1. <a href="https://docs.beikeshop.com/install/" target="_blank">BeikeShop详细安装指引</a>
+1. <a href="https://docs.beikeshop.com/install/bt.html" target="_blank">BeikeShop详细安装指引</a>
 
 ## 安装教程(面向开发者)
 1. git clone https://gitee.com/beikeshop/beikeshop.git
