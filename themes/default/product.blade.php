@@ -14,7 +14,7 @@
 
     <x-shop-breadcrumb type="product" :value="$product['id']" />
 
-    <div class="row mb-5" id="product-top">
+    <div class="row mb-5 mt-3 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-3">
         <div class="product-image d-flex align-items-start">
 
