@@ -30,13 +30,13 @@
                 name="descriptions[{{ $language['code'] }}][title]"
                 title="{{ __('admin/page.info_title') }}"
                 :required="true"
-                value="{{ old('title', $descriptions[$language['code']]['title'] ?? '') }}"
+                value="{{ old('descriptions.' . $language['code'] . '.title', $descriptions[$language['code']]['title'] ?? '') }}"
               />
 
               <x-admin::form.row title="{{ __('admin/page.info_content') }}">
                 <div class="w-max-1000">
                   <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
-                    {{ old('content', $descriptions[$language['code']]['content'] ?? '') }}
+                    {{ old('descriptions.' . $language['code'] . '.content', $descriptions[$language['code']]['content'] ?? '') }}
                   </textarea>
                 </div>
                 @if ($errors->has("descriptions.{$language['code']}.content"))
@@ -45,9 +45,9 @@
               </x-admin::form.row>
 
               <input type="hidden" name="descriptions[{{ $language['code'] }}][locale]" value="{{ $language['code'] }}">
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_tiele') }}" value="{{ old('meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="{{ __('admin/setting.meta_description') }}" value="{{ old('meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="{{ __('admin/setting.meta_keyword') }}" value="{{ old('meta_keyword', $descriptions[$language['code']]['meta_keyword'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_tiele') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="{{ __('admin/setting.meta_description') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="{{ __('admin/setting.meta_keyword') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_keyword', $descriptions[$language['code']]['meta_keyword'] ?? '') }}" />
             </div>
           @endforeach
 
