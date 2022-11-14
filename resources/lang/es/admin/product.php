@@ -38,6 +38,7 @@ return [
     'add_variable_value' => 'Agregar valor de especificación',
     'add_variable_image' => 'Agregar imagen de especificaciones',
     'default_main_product' => 'Producto principal predeterminado',
+    'modify_order' => 'Haz doble clic para modificar, arrastra para ajustar el orden',
 
     'confirm_batch_product' => '¿Está seguro de que desea eliminar los elementos seleccionados de forma masiva?',
     'confirm_batch_status' => '¿Está seguro de que desea editar en masa el estado de los elementos seleccionados?',

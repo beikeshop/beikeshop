@@ -38,6 +38,7 @@ return [
     'add_variable_value' => '添加規格值',
     'add_variable_image' => '添加規格圖片',
     'default_main_product' => '默認主商品',
+    'modify_order' => '雙擊修改、拖動調整順序',
 
     'confirm_batch_product' => '確認要批量刪除選中的商品嗎？ ',
     'confirm_batch_status' => '確認要批量修改選中的商品的狀態嗎？ ',

@@ -38,6 +38,7 @@ return [
     'add_variable_value' => 'Aggiungi valore di specifica',
     'add_variable_image' => 'Aggiungi immagine specifica',
     'default_main_product' => 'prodotto principale predefinito',
+    'modify_order' => 'Fai doppio clic per modificare, trascina per regolare l\'ordine',
 
     'confirm_batch_product' => 'Sei sicuro di voler eliminare i prodotti selezionati in batch?',
     'confirm_batch_status' => 'Conferma per modificare lo stato dei prodotti selezionati in batch?',

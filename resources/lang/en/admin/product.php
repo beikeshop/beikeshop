@@ -37,6 +37,7 @@ return [
      'add_variable_value' => 'Add Specification Value',
      'add_variable_image' => 'Add Spec Image',
      'default_main_product' => 'Default main product',
+     'modify_order' => 'Double-click to modify, drag to adjust the order',
 
     'confirm_batch_product' => 'Are you sure you want to delete the selected products in batches? ',
     'confirm_batch_status' => 'Confirm to modify the status of the selected products in batches? ',

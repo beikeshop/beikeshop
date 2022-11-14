@@ -38,6 +38,7 @@ return [
     'add_variable_value' => '指定値を追加',
     'add_variable_image' => '仕様画像追加',
     'default_main_product' => 'デフォルトのメイン製品',
+    'modify_order' => 'ダブルクリックして変更、ドラッグして順序を調整',
 
     'confirm_batch_product' => '選択した製品をまとめて削除しますか? ',
     'confirm_batch_status' => 'バッチで選択した製品のステータスを変更することを確認しますか? ',

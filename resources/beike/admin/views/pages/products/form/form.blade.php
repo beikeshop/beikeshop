@@ -117,40 +117,43 @@
                               <el-button type="primary" plain size="mini" @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</el-button>
                             </div>
                           </div>
-                           <draggable
-                             element="div"
-                             @start="isMove = true"
-                             v-if="variant.values.length"
-                             class="variants-wrap"
-                             @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
-                             @end="isMove = false"
-                             ghost-class="dragabble-ghost"
-                             :list="variant.values"
-                             :options="{animation: 100}"
-                             >
-                             <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
-                               {{-- <div class="value-img" v-if="variant.isImage"> --}}
-                                 {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
-                                   {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
-                                 {{-- </a> --}}
-                               {{-- </div> --}}
+                          <template v-if="variant.values.length">
+                             <draggable
+                               element="div"
+                               @start="isMove = true"
+                               class="variants-wrap"
+                               @update="(e) => {swapSourceVariantValue(e, variantIndex)}"
+                               @end="isMove = false"
+                               ghost-class="dragabble-ghost"
+                               :list="variant.values"
+                               :options="{animation: 100}"
+                               >
+                               <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
+                                 {{-- <div class="value-img" v-if="variant.isImage"> --}}
+                                   {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
+                                     {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
+                                   {{-- </a> --}}
+                                 {{-- </div> --}}
 
-                               <div class="open-file-manager variant-value-img" v-if="variant.isImage">
-                                 <div>
-                                   <img :src="thumbnail(value.image)" class="img-fluid">
+                                 <div class="open-file-manager variant-value-img" v-if="variant.isImage">
+                                   <div>
+                                     <img :src="thumbnail(value.image)" class="img-fluid">
+                                   </div>
+                                 </div>
+                                 <input type="hidden" v-model="value.image">
+
+                                 <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
+                                 <div class="name">
+                                   @{{ value.name[current_language_code] }}
                                  </div>
                                </div>
-                               <input type="hidden" v-model="value.image">
-
-                               <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
-                               <div class="name">
-                                 @{{ value.name[current_language_code] }}
-                               </div>
-                             </div>
-                          </draggable>
-                          <div v-else>
-                            <div class="p-2" @click="modalVariantOpenButtonClicked(variantIndex, -1)">{{ __('admin/product.add_variable_value') }}</div>
+                            </draggable>
+                            <div class="ps-2 mt-2 mb-3 opacity-50"><i class="bi bi-exclamation-circle"></i> {{ __('admin/product.modify_order') }}</div>
+                          </template>
+                          <div v-else class="d-flex justify-content-center align-items-center">
+                            <div class="p-4 fs-5 btn" @click="modalVariantOpenButtonClicked(variantIndex, -1)"><i class="bi bi-plus-square-dotted"></i> {{ __('admin/product.add_variable_value') }}</div>
                           </div>
+
                         </div>
                       </draggable>
 
