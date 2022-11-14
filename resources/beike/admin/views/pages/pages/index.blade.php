@@ -13,6 +13,7 @@
       <div class="d-flex justify-content-between mb-4">
         <a href="{{ admin_route('pages.create') }}" class="btn btn-primary">{{ __('common.add') }}</a>
       </div>
+
       <table class="table">
         <thead>
           <tr>
@@ -30,7 +31,7 @@
               <tr>
                 <td>{{ $page['id'] }}</td>
                 <td>
-                  <div title="{{ $page['title'] ?? '' }}">{{ $page['title_format'] ?? '' }}</div>
+                  <div title="{{ $page['title'] ?? '' }}"><a class="text-dark" href="{{ shop_route('pages.show', $page['id']) }}" target="_blank">{{ $page['title_format'] ?? '' }}</a></div>
                 </td>
                 <td class="{{ $page['active'] ? 'text-success' : 'text-secondary' }}">
                   {{ $page['active'] ? __('common.enable') : __('common.disable') }}
