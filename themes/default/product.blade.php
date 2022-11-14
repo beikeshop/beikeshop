@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
-            <div class="d-flex"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
+            <div class="d-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
           </div>
           @if (0)
           <div class="rating-wrap d-flex">
