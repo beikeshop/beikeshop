@@ -49,6 +49,16 @@ class ShopServiceProvider extends ServiceProvider
         Config::set('filesystems.disks.upload', [
             'driver' => 'local',
             'root' => public_path('upload'),
+            'permissions' => [
+                'file' => [
+                    'public' => 0755,
+                    'private' => 0755,
+                ],
+                'dir' => [
+                    'public' => 0755,
+                    'private' => 0755,
+                ],
+            ],
         ]);
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
