@@ -29,9 +29,19 @@ body.page-account {
       }
     }
 
+    .card-body {
+      @media (min-width: 992px) {
+        min-height: 509px;
+      }
+    }
+
     .order-wrap {
       background-color: #f6f8f9;
-      padding: 2rem 1rem;
+
+      @media (min-width:768px) {
+        padding: 2rem 1rem;
+      }
+
       .icon {
         i {
           font-size: 4.5rem;

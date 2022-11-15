@@ -45,13 +45,13 @@
           <div class="card-body">
             <div class="d-flex flex-nowrap card-items mb-4 py-3">
               <a href="{{ shop_route('account.order.index', ['status' => 'unpaid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf12f;</i><span
-                  class="text-muted">{{ __('shop/account.pending_payment') }}</span></a>
+                  class="text-muted text-center">{{ __('shop/account.pending_payment') }}</span></a>
               <a href="{{ shop_route('account.order.index', ['status' => 'paid']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf130;</i><span
-                  class="text-muted">{{ __('shop/account.pending_send') }}</span></a>
+                  class="text-muted text-center">{{ __('shop/account.pending_send') }}</span></a>
               <a href="{{ shop_route('account.order.index', ['status' => 'shipped']) }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf131;</i><span
-                  class="text-muted">{{ __('shop/account.pending_receipt') }}</span></a>
+                  class="text-muted text-center">{{ __('shop/account.pending_receipt') }}</span></a>
               <a href="{{ shop_route('account.rma.index') }}" class="d-flex flex-column align-items-center"><i class="iconfont">&#xf132;</i><span
-                  class="text-muted">{{ __('shop/account.after_sales') }}</span></a>
+                  class="text-muted text-center">{{ __('shop/account.after_sales') }}</span></a>
             </div>
             <div class="order-wrap">
               @if (!count($latest_orders))

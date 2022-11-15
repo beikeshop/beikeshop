@@ -9,6 +9,12 @@
  */
 
 body.page-product {
+  @media (max-width: 768px) {
+    .breadcrumb {
+      display: none
+    }
+  }
+
   .product-image {
     .swiper {
       height: 250px;

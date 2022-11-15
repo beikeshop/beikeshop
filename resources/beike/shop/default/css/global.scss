@@ -260,6 +260,10 @@ body[class^="page-account-"] {
       transition: all .2s ease-in-out;
       text-decoration: none !important;
 
+      &:last-of-type {
+        border-bottom: none;
+      }
+
       &:hover {
         background-color: #E9ECEF;
       }
@@ -291,4 +295,11 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.breadcrumb {
+  @media (max-width: 768px) {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+  }
 }

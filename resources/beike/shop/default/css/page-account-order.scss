@@ -51,7 +51,22 @@ body.page-account-order-list {
           margin-right: 10px;
 
           @media (max-width:768px) {
-            display: none;
+            // display: none;
+            flex: 0 0 50px;
+            width: 50px
+          }
+        }
+
+        .name {
+          @media (max-width:768px) {
+            a {
+              overflow: hidden;
+              text-overflow:ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              font-size: 12px;
+            }
           }
         }
       }
