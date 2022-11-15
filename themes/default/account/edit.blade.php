@@ -99,20 +99,22 @@
     var cropper;
     var $modal = $('#modal');
 
-    $('#update-btn').change(function(e) {
+    $(document).on('change', '#update-btn', function(e) {
       var files = e.target.files;
       var done = function(url) {
         $(this).val('');
         image.src = url;
         $('#modal').modal('show');
       };
-
       var reader;
       var file;
       var url;
 
       if (files && files.length > 0) {
         file = files[0];
+
+        $('#update-btn').remove()
+        $('#avatar-input').before('<input type="file" class="d-none" id="update-btn" name="" accept="image/*">');
 
         if (URL) {
           done(URL.createObjectURL(file));
