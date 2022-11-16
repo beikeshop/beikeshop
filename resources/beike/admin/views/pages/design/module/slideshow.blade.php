@@ -88,7 +88,7 @@ Vue.component('module-editor-slideshow', {
 
     addImage() {
       this.module.images.find(e => e.show = false);
-      this.module.images.push({image: languagesFill('/demo/banner.png'), show: true, link: {type: 'product', value:''}});
+      this.module.images.push({image: languagesFill('catalog/demo/banner/banner-4-en.jpg'), show: true, link: {type: 'product', value:''}});
     }
   }
 });

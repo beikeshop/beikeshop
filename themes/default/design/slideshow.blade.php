@@ -19,7 +19,7 @@
       <div class="swiper-wrapper">
         @foreach($content['images'] as $image)
           <div class="swiper-slide">
-            <a href="{{ $image['link']['link'] }}" class="d-flex justify-content-center"><img src="{{ $image['image'] }}" class="img-fluid"></a>
+            <a href="{{ $image['link']['link'] ?: 'javascript:void(0)' }}" class="d-flex justify-content-center"><img src="{{ $image['image'] }}" class="img-fluid"></a>
           </div>
         @endforeach
       </div>
@@ -31,7 +31,7 @@
 
   <script>
     new Swiper ('.module-swiper-{{ $module_id }}', {
-      loop: true, // 循环模式选项
+      loop: '{{ count($content['images']) > 1 ? true : false }}', // 循环模式选项
       autoplay: true,
       pauseOnMouseEnter: true,
       clickable :true,
