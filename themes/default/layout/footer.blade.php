@@ -29,7 +29,6 @@
             <div class="text tinymce-format-p">{!! $footer_content['content']['intro']['text'][$locale] ?? '' !!}</div>
           </div>
         </div>
-
         @for ($i = 1; $i <= 3; $i++)
           @php
             $link = $footer_content['content']['link' . $i];
@@ -41,7 +40,7 @@
                 @if ($item['link'])
                 <li class="lh-lg mb-2">
                   <a href="{{ $item['link'] }}" @if (isset($item['new_window']) && $item['new_window']) target="_blank" @endif>
-                    {{ $item['type'] == 'custom' ? $item['text'][$locale] ?? '' : $item['text'] }}
+                    {{ $item['text'] }}
                   </a>
                 </li>
               @endif
