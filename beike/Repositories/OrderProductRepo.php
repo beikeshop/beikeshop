@@ -29,11 +29,16 @@ class OrderProductRepo
     {
         $orderProducts = [];
         foreach ($cartProducts as $cartProduct) {
+            $productName = $cartProduct['name'];
+            $variantLabels = $cartProduct['variant_labels'] ?? '';
+            if ($variantLabels) {
+                $productName .= " - {$variantLabels}";
+            }
             $orderProducts[] = [
                 'product_id' => $cartProduct['product_id'],
                 'order_number' => $order->number,
                 'product_sku' => $cartProduct['product_sku'],
-                'name' => $cartProduct['name'],
+                'name' => $productName,
                 'image' => $cartProduct['image'],
                 'quantity' => $cartProduct['quantity'],
                 'price' => $cartProduct['price'],
