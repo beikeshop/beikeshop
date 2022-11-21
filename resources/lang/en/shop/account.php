@@ -22,7 +22,7 @@ return [
     'after_sales' => 'After Sales',
     'no_order' => "You don't have an order yet!",
     'to_buy' => 'To place an order',
-    'order_number' => 'Arder Number',
+    'order_number' => 'Order Number',
     'order_time' => 'Order Time',
     'state' => 'State',
     'amount' => 'Amount',
