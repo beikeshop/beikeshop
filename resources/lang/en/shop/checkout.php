@@ -10,7 +10,7 @@
  */
 
 return [
-    'index' => 'Checkouts',
+    'index' => 'Checkout',
     'address' => 'Address',
     'payment_address' => 'Payment Address',
     'same_as_shipping_address' => 'Same As Shipping Address',
