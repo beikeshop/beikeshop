@@ -157,7 +157,10 @@
               <div class="item" v-for="cart, index in source.carts.carts" :key="index">
                 <div class="image">
                   <img :src="cart.image" class="img-fluid">
-                  <div class="name text-truncate-2" :title="cart.name" v-text="cart.name"></div>
+                  <div class="name">
+                    <div :title="cart.name" v-text="cart.name" class="text-truncate-2"></div>
+                    <div v-if="cart.variant_labels" v-text="cart.variant_labels" class="text-muted mt-1"></div>
+                  </div>
                 </div>
                 <div class="price text-end">
                   <div>@{{ cart.price_format }}</div>
