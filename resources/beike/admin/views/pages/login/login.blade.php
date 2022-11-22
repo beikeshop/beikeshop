@@ -6,7 +6,7 @@
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
   {{-- <link href="{{ mix('build/css/admin/login.css') }}" rel="stylesheet"> --}}
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
-  <title>admin login</title>
+  <title>{{ __('admin/login.plugins_index') }}</title>
 </head>
 <body class="page-login">
   <div class="d-flex align-items-center vh-100 pt-2 pt-sm-5 pb-4 pb-sm-5">
