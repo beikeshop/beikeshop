@@ -64,7 +64,7 @@ return [
         'order_info' => [
             'index' => 'Order Info',
             'order_details' => 'Order Details',
-            'to_pay' => 'To Pay',
+            'to_pay' => 'Pay',
             'cancel' => 'Cancel',
             'confirm_receipt' => 'Confirm the receipt of goods',
             'order_number' => 'Order Number',
@@ -83,7 +83,7 @@ return [
         'order_success' => [
             'order_success' => 'Congratulations, the order was successfully generated!',
             'order_number' => 'Order Number',
-            'amounts_payable' => 'Amounts Payable ',
+            'amounts_payable' => 'Amount ',
             'payment_method' => 'Payment Method ',
             'view_order' => 'View Order ',
             'pay_now' => 'Pay Now ',

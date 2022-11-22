@@ -22,7 +22,7 @@
                   <tbody>
                     <tr>
                       <td>{{ __('shop/checkout.payment.order_number') }}：<span class="fw-bold">{{ $order['number'] }}</span></td>
-                      <td>{{ __('shop/checkout.payment.amounts_payable') }}：<span class="fw-bold">{{ $order['total'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment.amounts_payable') }}：<span class="fw-bold">{{ $order['total_format'] }}</span></td>
                     </tr>
                     <tr>
                       <td>{{ __('shop/checkout.payment.payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>

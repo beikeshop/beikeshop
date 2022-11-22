@@ -32,9 +32,9 @@ return [
 
     'payment' => [
         'index' => 'Please Pay',
-        'please_pay' => 'Order submitted successfully, please pay',
+        'please_pay' => 'Order placed successfully, please pay',
         'order_number' => 'Order Number',
-        'amounts_payable' => 'Amounts Payable',
+        'amounts_payable' => 'Amount',
         'payment_method' => 'Payment Method',
     ]
 ];

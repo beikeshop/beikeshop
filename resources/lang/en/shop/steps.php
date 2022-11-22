@@ -13,6 +13,6 @@ return [
     'index' => 'Steps',
     'cart' => 'Cart',
     'checkout' => 'Checkout',
-    'submitted_successfully' => 'Placed Order',
+    'submitted_successfully' => 'Place Order',
     'payment' => 'Payment',
 ];
