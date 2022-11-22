@@ -1,5 +1,5 @@
 <!-- Set up a container element for the button -->
-<div id="paypal-button-container"></div>
+<div id="paypal-button-container" class="mt-4"></div>
 
 <!-- Include the PayPal JavaScript SDK -->
 @if($payment_setting['sandbox_mode'])
