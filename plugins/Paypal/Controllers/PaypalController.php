@@ -69,6 +69,7 @@ class PaypalController
         $orderNumber = $data['orderNumber'];
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $total = round($order->total, 2);
 
         $paypalOrder = $this->paypalClient->createOrder([
             "intent" => "CAPTURE",
@@ -76,7 +77,7 @@ class PaypalController
                 [
                     "amount" => [
                         "currency_code" => $order->currency_code,
-                        "value" => $order->total,
+                        "value" => $total,
                     ],
                     'description' => 'test'
                 ]

@@ -23,10 +23,13 @@
                     orderNumber: "{{$order->number}}",
                 })
             }).then(function (res) {
-                //res.json();
                 return res.json();
             }).then(function (orderData) {
-                //console.log(orderData);
+                if (orderData.error) {
+                    layer.alert(orderData.error.details[0].description, function(index){
+                        window.location.reload();
+                    });
+                }
                 return orderData.id;
             });
         },
