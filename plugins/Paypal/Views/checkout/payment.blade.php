@@ -29,7 +29,7 @@
                     layer.alert(orderData.error.details[0].description, {
                         title: '{{ __('common.text_hint') }}',
                         closeBtn: 0,
-                        area: ['400px', '240px'],
+                        area: ['400px', 'auto'],
                         btn: ['{{ __('common.confirm') }}']
                     }, function(index) {
                       window.location.reload();
