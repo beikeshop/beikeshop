@@ -12,6 +12,7 @@ class PluginResource extends JsonResource
      *
      * @param Request $request
      * @return array
+     * @throws \Exception
      */
     public function toArray($request): array
     {

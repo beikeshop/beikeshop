@@ -12,6 +12,7 @@ class PaymentMethodItem extends JsonResource
      *
      * @param Request $request
      * @return array
+     * @throws \Exception
      */
     public function toArray($request): array
     {
@@ -21,7 +22,7 @@ class PaymentMethodItem extends JsonResource
             'code' => $this->code,
             'name' => $pluginSetting->name,
             'description' => $pluginSetting->description,
-            'icon' => $pluginSetting->icon,
+            'icon' => plugin_resize($this->code, $pluginSetting->icon),
         ];
     }
 }
