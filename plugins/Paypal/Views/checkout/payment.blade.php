@@ -26,8 +26,14 @@
                 return res.json();
             }).then(function (orderData) {
                 if (orderData.error) {
-                    layer.alert(orderData.error.details[0].description, function(index){
-                        window.location.reload();
+                    layer.alert(orderData.error.details[0].description, {
+                        title: '{{ __('common.text_hint') }}',
+                        closeBtn: 0,
+                        area: ['400px', '240px'],
+                        btn: ['{{ __('common.confirm') }}']
+                    }, function(index) {
+                      window.location.reload();
+                      layer.close(index);
                     });
                 }
                 return orderData.id;
