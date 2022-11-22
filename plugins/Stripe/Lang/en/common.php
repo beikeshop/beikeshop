@@ -25,4 +25,7 @@ return [
     'error_cvv' => 'Please enter the security code',
     'error_year' => 'Please select the year',
     'error_month' => 'Please select a month',
+
+    'capture_success' => 'Capture Successfully',
+    'capture_fail' => 'Capture Failed',
 ];

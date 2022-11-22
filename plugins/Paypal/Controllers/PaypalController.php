@@ -16,12 +16,12 @@
 
 namespace Plugin\Paypal\Controllers;
 
-use Beike\Repositories\OrderRepo;
-use Beike\Services\StateMachineService;
 use Illuminate\Http\Request;
+use Beike\Repositories\OrderRepo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal;
+use Beike\Services\StateMachineService;
 
 class PaypalController
 {
@@ -56,11 +56,6 @@ class PaypalController
         $this->paypalClient->setAccessToken($token);
     }
 
-    public function test()
-    {
-
-    }
-
 
     /**
      * 创建 paypal 订单
@@ -74,15 +69,14 @@ class PaypalController
         $orderNumber = $data['orderNumber'];
         $customer = current_customer();
         $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
-        $orderTotalUsd = currency_format($order->total, 'USD', '', false);
 
         $paypalOrder = $this->paypalClient->createOrder([
             "intent" => "CAPTURE",
             "purchase_units" => [
                 [
                     "amount" => [
-                        "currency_code" => 'USD',
-                        "value" => round($orderTotalUsd, 2),
+                        "currency_code" => $order->currency_code,
+                        "value" => $order->total,
                     ],
                     'description' => 'test'
                 ]
@@ -90,7 +84,6 @@ class PaypalController
         ]);
 
         return response()->json($paypalOrder);
-        //return redirect($paypalOrder['links'][1]['href'])->send();
     }
 
 
@@ -113,7 +106,7 @@ class PaypalController
         try {
             DB::beginTransaction();
             if ($result['status'] === "COMPLETED") {
-                StateMachineService::getInstance($order)->changeStatus('paid');
+                StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID);
                 DB::commit();
             }
         } catch (\Exception $e) {

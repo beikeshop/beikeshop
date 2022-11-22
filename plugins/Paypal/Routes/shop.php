@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 use Plugin\Paypal\Controllers\PaypalController;
 
 Route::group(['prefix' => 'paypal'], function () {
-    Route::get('/test', [PaypalController::class, 'test']);
     Route::post('/create', [PaypalController::class, 'create']);
     Route::post('/capture', [PaypalController::class, 'capture']);
 });

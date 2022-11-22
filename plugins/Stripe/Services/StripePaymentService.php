@@ -18,6 +18,12 @@ use Stripe\Exception\ApiErrorException;
 
 class StripePaymentService extends PaymentService
 {
+    // 零位十进制货币 https://stripe.com/docs/currencies#special-cases
+    const ZERO_DECIMAL = [
+        'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA',
+        'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF',
+    ];
+
     /**
      * @throws ApiErrorException
      */
@@ -34,24 +40,40 @@ class StripePaymentService extends PaymentService
             ],
         ]);
 
-        // $customer = Customer::create([
-        //     'email' => $this->order->email,
-        // ]);
-        // $customerId = $customer['id'];
-
         $tokenId = $token['id'];
-        $total = round($this->order->total, 2) * 100;
+        $currency = $this->order->currency_code;
+
+        if (!in_array($currency, self::ZERO_DECIMAL)) {
+            $total = round($this->order->total, 2) * 100;
+        } else {
+            $total = floor($this->order->total);
+        }
+
         $stripeChargeParameters = array(
             'amount' => $total,
-            'currency' => $this->order->currency_code,
+            'currency' => $currency,
             'metadata' => array(
                 'orderId' => $this->order->id,
             ),
             'source' => $tokenId,
-            // 'customer' => $customerId,
+            // 'customer' => $this->createCustomer(),
         );
 
         $charge = \Stripe\Charge::create($stripeChargeParameters);
         return $charge['paid'] && $charge['captured'];
+    }
+
+
+    /**
+     * 创建 stripe customer
+     * @return mixed
+     * @throws ApiErrorException
+     */
+    private function createCustomer(): mixed
+    {
+        $customer = \Stripe\Customer::create([
+            'email' => $this->order->email,
+        ]);
+        return $customer['id'];
     }
 }

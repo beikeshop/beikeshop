@@ -25,4 +25,7 @@ return [
     'error_cvv' => '请输入安全码',
     'error_year' => '请选择年',
     'error_month' => '请选择月',
+
+    'capture_success' => '支付成功',
+    'capture_fail' => '支付失败',
 ];
