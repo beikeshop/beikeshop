@@ -8,34 +8,36 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/customer_group.customer_groups_create') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('common.name') }}</th>
-            <th>{{ __('admin/region.describe') }}</th>
-            <th>{{ __('customer_group.level') }}</th>
-            <th>{{ __('common.created_at') }}</th>
-            <th width="130px">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="group, index in customer_groups" :key="index">
-            <td>@{{ group.id }}</td>
-            <td>@{{ group.description?.name || '' }}</td>
-            <td>
-              <div :title="group.description?.description || ''" class="w-max-500">
-                @{{ stringLengthInte(group.description?.description || '') }}</div>
-            </td>
-            <td>@{{ group.level }}</td>
-            <td>@{{ group.created_at }}</td>
-            <td>
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('common.name') }}</th>
+              <th>{{ __('admin/region.describe') }}</th>
+              <th>{{ __('customer_group.level') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th width="130px">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="group, index in customer_groups" :key="index">
+              <td>@{{ group.id }}</td>
+              <td>@{{ group.description?.name || '' }}</td>
+              <td>
+                <div :title="group.description?.description || ''" class="w-max-500">
+                  @{{ stringLengthInte(group.description?.description || '') }}</div>
+              </td>
+              <td>@{{ group.level }}</td>
+              <td>@{{ group.created_at }}</td>
+              <td>
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       {{-- {{ $customer_groups->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
@@ -81,8 +83,10 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
-          <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          <div class="d-flex d-lg-block">
+            <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
+            <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          </div>
         </el-form-item>
       </el-form>
     </el-dialog>

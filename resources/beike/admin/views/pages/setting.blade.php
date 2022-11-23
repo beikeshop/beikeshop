@@ -33,7 +33,7 @@
 
           <div class="tab-pane fade" id="tab-store">
             <x-admin::form.row title="{{ __('admin/setting.default_address') }}">
-              <div class="d-flex">
+              <div class="d-lg-flex">
                 <div>
                   <select class="form-select wp-200 me-3" name="country_id" aria-label="Default select example">
                     @foreach ($countries as $country)

@@ -43,44 +43,46 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{ __('common.id') }}</th>
-            <th>{{ __('customer.email') }}</th>
-            <th>{{ __('customer.name') }}</th>
-            <th>{{ __('customer.from') }}</th>
-            <th>{{ __('customer.customer_group') }}</th>
-            <th>{{ __('common.status') }}</th>
-              <th>{{ __('common.created_at') }}</th>
-              <th>{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="customers.data.length">
-          <tr v-for="customer, index in customers.data" :key="index">
-            <td>@{{ customer.id }}</td>
-            <td>@{{ customer.email }}</td>
-            <td>
-              <div class="d-flex align-items-center">
-                {{-- <img src="@{{ customer.avatar }}" class="img-fluid rounded-circle me-2" style="width: 40px;"> --}}
-                <div>@{{ customer.name }}</div>
-              </div>
-            </td>
-            <td>@{{ customer.from }}</td>
-            <td>@{{ customer.customer_group_name }}</td>
-            <td>
-              <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-            </td>
-            <td>@{{ customer.created_at }}</td>
-            <td>
-              <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ __('common.id') }}</th>
+              <th>{{ __('customer.email') }}</th>
+              <th>{{ __('customer.name') }}</th>
+              <th>{{ __('customer.from') }}</th>
+              <th>{{ __('customer.customer_group') }}</th>
+              <th>{{ __('common.status') }}</th>
+                <th>{{ __('common.created_at') }}</th>
+                <th>{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="customers.data.length">
+            <tr v-for="customer, index in customers.data" :key="index">
+              <td>@{{ customer.id }}</td>
+              <td>@{{ customer.email }}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  {{-- <img src="@{{ customer.avatar }}" class="img-fluid rounded-circle me-2" style="width: 40px;"> --}}
+                  <div>@{{ customer.name }}</div>
+                </div>
+              </td>
+              <td>@{{ customer.from }}</td>
+              <td>@{{ customer.customer_group_name }}</td>
+              <td>
+                <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+              </td>
+              <td>@{{ customer.created_at }}</td>
+              <td>
+                <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
       <el-pagination v-if="customers.data.length" layout="prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
         :total="customers.total"></el-pagination>

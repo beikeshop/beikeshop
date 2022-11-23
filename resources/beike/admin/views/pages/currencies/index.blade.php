@@ -8,41 +8,43 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('common.name') }}</th>
-            <th>{{ __('currency.code') }}</th>
-            <th>{{ __('currency.symbol_left') }}</th>
-            <th>{{ __('currency.symbol_right') }}</th>
-            <th>{{ __('currency.decimal_place') }}</th>
-            <th>{{ __('currency.value') }}</th>
-            <th>{{ __('common.status') }}</th>
-            <th class="text-end">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="currencies.length">
-          <tr v-for="language, index in currencies" :key="index">
-            <td>@{{ language.id }}</td>
-            <td>@{{ language.name }}</td>
-            <td>@{{ language.code }}</td>
-            <td>@{{ language.symbol_left }}</td>
-            <td>@{{ language.symbol_right }}</td>
-            <td>@{{ language.decimal_place }}</td>
-            <td>@{{ language.value }}</td>
-            <td>
-              <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-            </td>
-            <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('common.name') }}</th>
+              <th>{{ __('currency.code') }}</th>
+              <th>{{ __('currency.symbol_left') }}</th>
+              <th>{{ __('currency.symbol_right') }}</th>
+              <th>{{ __('currency.decimal_place') }}</th>
+              <th>{{ __('currency.value') }}</th>
+              <th>{{ __('common.status') }}</th>
+              <th class="text-end">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="currencies.length">
+            <tr v-for="language, index in currencies" :key="index">
+              <td>@{{ language.id }}</td>
+              <td>@{{ language.name }}</td>
+              <td>@{{ language.code }}</td>
+              <td>@{{ language.symbol_left }}</td>
+              <td>@{{ language.symbol_right }}</td>
+              <td>@{{ language.decimal_place }}</td>
+              <td>@{{ language.value }}</td>
+              <td>
+                <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+              </td>
+              <td class="text-end">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
     </div>
 

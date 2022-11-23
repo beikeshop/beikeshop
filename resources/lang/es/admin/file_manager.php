@@ -25,6 +25,7 @@ return [
     'image_uploading' => 'carga de imagen',
     'no_file' => 'ningún archivo',
     'picture_space' => 'espacio de imagen',
+    'show_pc' => 'Por favor, vaya al lado de la PC para operar',
 
     'confirm_delete_file' => '¿Quieres eliminar el archivo seleccionado?',
     'confirm_delete_folder' => 'La operación de eliminación de carpetas está en curso, se eliminarán todos los archivos de la carpeta, ¿quiere confirmar?',

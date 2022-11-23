@@ -30,7 +30,7 @@
   <x-admin-header />
 
   <div class="main-content">
-    <aside class="sidebar navbar-expand-xs border-radius-xl">
+    <aside class="sidebar navbar-expand-xs border-radius-xl d-none d-lg-block">
       <x-admin-sidebar />
     </aside>
     <div id="content">

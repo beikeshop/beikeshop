@@ -154,6 +154,19 @@ body.page-filemanager {
 
           }
         }
+
+        @media (max-width: 768px) {
+          height: 140px;
+          display: block;
+
+          .left {
+            margin-bottom: 5px;
+
+            a {
+              margin-right: 25px;
+            }
+          }
+        }
       }
 
       .content-center {
@@ -256,6 +269,22 @@ body.page-filemanager {
         box-shadow: 0 -2px 4px rgba(0, 0, 0, .04);
         align-items: center; // flex-start | center
         justify-content: space-between;
+
+        @media (max-width: 768px) {
+          height: 120px;
+          padding: 0;
+
+          .el-pagination {
+            white-space: inherit;
+            padding: 0;
+            text-align: center;
+          }
+
+          .el-pagination__jump {
+            margin: 0;
+            margin-top: 10px;
+          }
+        }
       }
     }
   }

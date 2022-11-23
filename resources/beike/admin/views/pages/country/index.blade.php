@@ -8,39 +8,41 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('common.name') }}</th>
-            <th>{{ __('currency.code') }}</th>
-            <th>{{ __('common.created_at') }}</th>
-            <th>{{ __('common.updated_at') }}</th>
-            <th>{{ __('common.sort_order') }}</th>
-            <th>{{ __('common.status') }}</th>
-            <th class="text-end">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="country.data.length">
-          <tr v-for="country, index in country.data" :key="index">
-            <td>@{{ country.id }}</td>
-            <td>@{{ country.name }}</td>
-            <td>@{{ country.code }}</td>
-            <td>@{{ country.created_at }}</td>
-            <td>@{{ country.updated_at }}</td>
-            <td>@{{ country.sort_order }}</td>
-            <td>
-              <span v-if="country.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-            </td>
-            <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="8" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('common.name') }}</th>
+              <th>{{ __('currency.code') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th>{{ __('common.updated_at') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
+              <th>{{ __('common.status') }}</th>
+              <th class="text-end">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="country.data.length">
+            <tr v-for="country, index in country.data" :key="index">
+              <td>@{{ country.id }}</td>
+              <td>@{{ country.name }}</td>
+              <td>@{{ country.code }}</td>
+              <td>@{{ country.created_at }}</td>
+              <td>@{{ country.updated_at }}</td>
+              <td>@{{ country.sort_order }}</td>
+              <td>
+                <span v-if="country.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+              </td>
+              <td class="text-end">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="8" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
       <el-pagination v-if="country.data.length" layout="prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
         :total="country.total"></el-pagination>

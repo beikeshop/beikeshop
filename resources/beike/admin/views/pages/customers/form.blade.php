@@ -35,37 +35,39 @@
           </el-tab-pane>
           <el-tab-pane label="{{ __('admin/customer.address_management') }}" name="address" v-if="form.id">
             <button class="btn btn-primary mb-3" type="button" @click="editAddress">{{ __('common.add') }}</button>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>{{ __('common.name') }}</th>
-                  <th>{{ __('common.phone') }}</th>
-                  <th>{{ __('common.created_at') }}</th>
-                  <th>{{ __('common.action') }}</th>
-                </tr>
-              </thead>
-              <tbody v-if="addresses.length">
-                <tr v-for="address, index in addresses" :key="index">
-                  <td>@{{ index + 1}}</td>
-                  <td>@{{ address.name }}</td>
-                  <td>@{{ address.phone }}</td>
-                  <td>@{{ address.created_at }}</td>
-                  <td>
-                    <button class="btn btn-outline-secondary btn-sm" type="button"
-                      @click="editAddress(index)">{{ __('common.edit') }}</button>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button"
-                      @click="deleteAddress(address.id, index)">{{ __('common.delete') }}</button>
-                  </td>
-              </tbody>
-              <tbody v-else>
-                <tr>
-                  <td colspan="6" class="text-center">
-                    <span class="me-2">{{ __('admin/customer.no_address') }}</span>
-                    <el-link type="primary" @click="editAddress">{{ __('admin/customer.add_address') }}</el-link>
-                  </td>
-              </tbody>
-            </table>
+            <div class="table-push">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>{{ __('common.name') }}</th>
+                    <th>{{ __('common.phone') }}</th>
+                    <th>{{ __('common.created_at') }}</th>
+                    <th>{{ __('common.action') }}</th>
+                  </tr>
+                </thead>
+                <tbody v-if="addresses.length">
+                  <tr v-for="address, index in addresses" :key="index">
+                    <td>@{{ index + 1}}</td>
+                    <td>@{{ address.name }}</td>
+                    <td>@{{ address.phone }}</td>
+                    <td>@{{ address.created_at }}</td>
+                    <td>
+                      <button class="btn btn-outline-secondary btn-sm" type="button"
+                        @click="editAddress(index)">{{ __('common.edit') }}</button>
+                      <button class="btn btn-outline-danger btn-sm ml-1" type="button"
+                        @click="deleteAddress(address.id, index)">{{ __('common.delete') }}</button>
+                    </td>
+                </tbody>
+                <tbody v-else>
+                  <tr>
+                    <td colspan="6" class="text-center">
+                      <span class="me-2">{{ __('admin/customer.no_address') }}</span>
+                      <el-link type="primary" @click="editAddress">{{ __('admin/customer.add_address') }}</el-link>
+                    </td>
+                </tbody>
+              </table>
+            </div>
           </el-tab-pane>
         </el-tabs>
       </el-form>

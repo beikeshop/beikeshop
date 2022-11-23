@@ -8,32 +8,34 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('admin/region.name') }}</th>
-            <th>{{ __('admin/region.describe') }}</th>
-            <th>{{ __('common.created_at') }}</th>
-            <th>{{ __('common.updated_at') }}</th>
-            <th class="text-end">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="regions.length">
-          <tr v-for="tax, index in regions" :key="index">
-            <td>@{{ tax.id }}</td>
-            <td>@{{ tax.name }}</td>
-            <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
-            <td>@{{ tax.created_at }}</td>
-            <td>@{{ tax.updated_at }}</td>
-            <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="6" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('admin/region.name') }}</th>
+              <th>{{ __('admin/region.describe') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th>{{ __('common.updated_at') }}</th>
+              <th class="text-end">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="regions.length">
+            <tr v-for="tax, index in regions" :key="index">
+              <td>@{{ tax.id }}</td>
+              <td>@{{ tax.name }}</td>
+              <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
+              <td>@{{ tax.created_at }}</td>
+              <td>@{{ tax.updated_at }}</td>
+              <td class="text-end">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="6" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
     </div>
 
     <el-dialog title="{{ __('admin/region.regions_create') }}" :visible.sync="dialog.show" width="700px"

@@ -25,6 +25,7 @@ return [
      'image_uploading' => 'Bild hochladen',
      'no_file' => 'keine Datei',
      'picture_space' => 'Bildraum',
+     'show_pc' => 'Bitte gehen Sie zur Bedienung auf die PC-Seite',
 
      'confirm_delete_file' => 'Möchten Sie die ausgewählte Datei löschen',
      'confirm_delete_folder' => 'Der Vorgang zum Löschen des Ordners läuft, alle Dateien im Ordner werden gelöscht, möchten Sie dies bestätigen? ',

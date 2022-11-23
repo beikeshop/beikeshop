@@ -46,8 +46,10 @@
           padding: 0 1rem;
         }
 
-        @media screen and (max-width: 991px) {
-          padding: 0 .3rem;
+        @media screen and (max-width: 1200px) {
+          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+            padding: 0 .2rem;
+          }
         }
 
         .dropdown {
@@ -129,5 +131,148 @@
     margin-bottom: -15px;
     margin-top: -15px;
     width: 36px;
+  }
+}
+
+.header-mobile-wrap {
+  background-color: #fff;
+  padding: 10px;
+  height: 54px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9;
+  box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .05);
+
+  > .logo {
+    max-width: 150px;
+    max-height: 30px;
+
+    img {
+      max-height: 100%;
+    }
+  }
+
+  .header-mobile-left {
+    display: flex;
+    align-items: center;
+
+    .mobile-open-menu i {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+
+
+  }
+
+  .header-mobile-right {
+    display: flex;
+    justify-content: right;
+
+    .lang, .user {
+      .dropdown a {
+        padding: 0;
+      }
+    }
+
+    .mobile-to-front {
+      margin-left: 10px;
+      a {
+        color:var(--bs-body-color);
+
+        i {
+          font-size: 1.2rem;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
+
+#offcanvas-mobile-menu {
+  width: 80%;
+
+  .offcanvas-header {
+    padding: 10px 20px 10px 10px;
+    border-bottom: 1px solid #e5e5e5;
+
+  }
+
+  .mobile-menu-wrap {
+    padding: 0;
+
+    ul.mobile-navbar {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 0;
+
+      > .nav-item {
+        &.active {
+          background-color: #f9f9f9;
+
+           & > a {
+            background-color: #e2e2e2;
+          }
+        }
+      }
+
+      .nav-link:active {
+        background-color: #eee;
+      }
+
+      .navbar-nav {
+        a {
+          padding-left: 36px;
+        }
+
+        >.nav-item {
+          &:last-of-type {
+            border: none;
+          }
+
+          &.active {
+             & > a {
+              background-color: #eee;
+            }
+          }
+        }
+      }
+    }
+
+    .navbar-nav,.mobile-navbar {
+      .nav-item {
+        border-bottom: 1px solid #e5e5e5;
+
+        a {
+          color: var(--bs-body-color);
+          flex: 1;
+          height: 44px;
+          padding-left: 20px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .offcanvas-footer {
+    .offcanvas-btns {
+      display: flex;
+      justify-content: space-between;
+
+      .nav-link{
+        padding: 10px;
+      }
+
+      .dropdown-toggle::after {
+        color: var(--bs-body-color);
+      }
+
+      .dropdown-menu {
+        border-color: rgba(0, 0, 0, .2);;
+      }
+    }
   }
 }

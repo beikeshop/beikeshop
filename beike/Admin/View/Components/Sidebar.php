@@ -39,32 +39,32 @@ class Sidebar extends Component
         if (Str::startsWith($routeName, ['home.'])) {
             $routes = $this->getHomeSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         } elseif (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
             $routes = $this->getProductSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         } elseif (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
             $routes = $this->getCustomerSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         } elseif (Str::startsWith($routeName, ['orders.', 'rmas.', 'rma_reasons.'])) {
             $routes = $this->getOrderSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         } elseif (Str::startsWith($routeName, ['pages.'])) {
             $routes = $this->getPagesSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'])) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false));
+                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         }
 
@@ -80,7 +80,7 @@ class Sidebar extends Component
      * @param $active
      * @param false $newWindow
      */
-    public function addLink($route, $icon, $active, bool $newWindow = false)
+    public function addLink($route, $icon, $active, bool $newWindow = false, $hide_mobile = 0)
     {
         $permissionRoute = str_replace('.', '_', $route);
         if ($this->adminUser->cannot($permissionRoute)) {
@@ -94,6 +94,7 @@ class Sidebar extends Component
             'url' => $url,
             'icon' => $icon,
             'active' => $active,
+            'hide_mobile' => $hide_mobile,
             'new_window' => $newWindow
         ];
     }
@@ -102,15 +103,15 @@ class Sidebar extends Component
     /**
      * 获取首页子页面路由
      */
-    private function getHomeSubRoutes()
+    public function getHomeSubRoutes()
     {
         $routes = [
-            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
-            ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1],
-            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1, 'hide_mobile' => 1],
+            ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => 1, 'hide_mobile' => 1],
+            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
+            ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
+            ['route' => 'currencies.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt' ,'hide_mobile' => 1],
         ];
         return hook_filter('sidebar.home_routes', $routes);
     }
@@ -119,12 +120,12 @@ class Sidebar extends Component
     /**
      * 获取商品子页面路由
      */
-    private function getProductSubRoutes()
+    public function getProductSubRoutes()
     {
         $routes = [
             ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'products.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt','hide_mobile' => 1],
             ['route' => 'products.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.product_routes', $routes);
@@ -134,7 +135,7 @@ class Sidebar extends Component
     /**
      * 获取商品子页面路由
      */
-    private function getCustomerSubRoutes()
+    public function getCustomerSubRoutes()
     {
         $routes = [
             ['route' => 'customers.index', 'icon' => 'fa fa-tachometer-alt'],
@@ -147,7 +148,7 @@ class Sidebar extends Component
     /**
      * 获取订单子页面路由
      */
-    private function getOrderSubRoutes()
+    public function getOrderSubRoutes()
     {
         $routes = [
             ['route' => 'orders.index', 'icon' => 'fa fa-tachometer-alt'],
@@ -161,7 +162,7 @@ class Sidebar extends Component
      * 获取内容管理子页面路由
      * @return mixed
      */
-    private function getPagesSubRoutes()
+    public function getPagesSubRoutes()
     {
         $routes = [
             ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
@@ -173,13 +174,13 @@ class Sidebar extends Component
      * 获取系统设置子页面路由
      * @return mixed
      */
-    private function getSettingSubRoutes()
+    public function getSettingSubRoutes()
     {
         $routes = [
             ['route' => 'settings.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'admin_users.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'marketing.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt','hide_mobile' => 1],
+            ['route' => 'marketing.index', 'icon' => 'fa fa-tachometer-alt','hide_mobile' => 1],
             ['route' => 'regions.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'tax_classes.index', 'icon' => 'fa fa-tachometer-alt'],
@@ -187,9 +188,9 @@ class Sidebar extends Component
             ['route' => 'languages.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'countries.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'zones.index', 'icon' => 'fa fa-tachometer-alt'],
-            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
-            ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true],
-            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'design.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true ,'hide_mobile' => 1],
+            ['route' => 'design_footer.index', 'icon' => 'fa fa-tachometer-alt', 'blank' => true ,'hide_mobile' => 1],
+            ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt' ,'hide_mobile' => 1],
         ];
         return hook_filter('sidebar.setting_routes', $routes);
     }

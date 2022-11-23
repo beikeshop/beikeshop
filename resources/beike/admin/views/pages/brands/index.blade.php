@@ -8,37 +8,39 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('admin/brand.brands_create') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>{{ __('common.id') }}</th>
-            <th>{{ __('brand.name') }}</th>
-            <th>{{ __('brand.icon') }}</th>
-            <th>{{ __('common.sort_order') }}</th>
-            <th>{{ __('brand.first_letter') }}</th>
-            <th>{{ __('common.status') }}</th>
-            <th>{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="brands.data.length">
-          <tr v-for="brand, index in brands.data" :key="index">
-            <td>@{{ brand.id }}</td>
-            <td>@{{ brand.name }}</td>
-            <td><div class="wh-50"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
-            <td>@{{ brand.sort_order }}</td>
-            <td>@{{ brand.first }}</td>
-            <td>
-              <span class="text-success" v-if="brand.status">{{ __('common.enabled') }}</span>
-              <span class="text-secondary" v-else>{{ __('common.disabled') }}</span>
-            </td>
-            <td>
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>{{ __('common.id') }}</th>
+              <th>{{ __('brand.name') }}</th>
+              <th>{{ __('brand.icon') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
+              <th>{{ __('brand.first_letter') }}</th>
+              <th>{{ __('common.status') }}</th>
+              <th>{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="brands.data.length">
+            <tr v-for="brand, index in brands.data" :key="index">
+              <td>@{{ brand.id }}</td>
+              <td>@{{ brand.name }}</td>
+              <td><div class="wh-50"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
+              <td>@{{ brand.sort_order }}</td>
+              <td>@{{ brand.first }}</td>
+              <td>
+                <span class="text-success" v-if="brand.status">{{ __('common.enabled') }}</span>
+                <span class="text-secondary" v-else>{{ __('common.disabled') }}</span>
+              </td>
+              <td>
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
       <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
         :total="brands.total"></el-pagination>

@@ -25,87 +25,92 @@
 
 <body class="page-filemanager">
   <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak ref="splitPane">
-    <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
-      <el-tree :props="defaultProps" node-key="path" :data="treeData" :current-node-key="folderCurrent"
-        :default-expanded-keys="defaultkeyarr" :expand-on-click-node="false" highlight-current ref="tree"
-        @node-click="handleNodeClick" @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
-        @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
-        <div class="custom-tree-node" slot-scope="{ node, data }">
-          <div>@{{ node.label }}</div>
-          {{-- v-if="node.isCurrent" --}}
+    @if (!is_mobile())
+      <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
+        <el-tree :props="defaultProps" node-key="path" :data="treeData" :current-node-key="folderCurrent"
+          :default-expanded-keys="defaultkeyarr" :expand-on-click-node="false" highlight-current ref="tree"
+          @node-click="handleNodeClick" @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
+          @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
+          <div class="custom-tree-node" slot-scope="{ node, data }">
+            <div>@{{ node.label }}</div>
+            {{-- v-if="node.isCurrent" --}}
+            <div class="right">
+              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}" placement="top">
+                <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
+                    class="el-icon-circle-plus-outline"></i></span>
+              </el-tooltip>
+
+              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
+                <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
+                    class="el-icon-edit"></i></span>
+              </el-tooltip>
+
+              <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
+                <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
+                    class="el-icon-delete"></i></span>
+              </el-tooltip>
+
+            </div>
+          </div>
+        </el-tree>
+      </div>
+      <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
+      <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
+        <div class="content-head">
+          <div class="left d-lg-flex">
+            <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download"
+              @click="downloadImages">{{ __('admin/file_manager.download') }}</el-link>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
+              icon="el-icon-delete">{{ __('common.delete') }}</el-link>
+            <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
+              @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
+            <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length"
+              @click="selectAll()" icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
+          </div>
           <div class="right">
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}" placement="top">
-              <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
-                  class="el-icon-circle-plus-outline"></i></span>
-            </el-tooltip>
+            <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
+          </div>
+        </div>
+        <div v-if="images.length" class="content-center"
+          v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
+          <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images"
+            :key="index" @click="checkedImage(index)">
+            <div class="img"><img :src="file.url"></div>
+            <div class="text">
+              <span :title="file.name">@{{ file.name }}</span>
+              <i v-if="file.selected" class="el-icon-check"></i>
+            </div>
+          </div>
+        </div>
+        <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
+        <div class="content-footer">
+          <div class="right"></div>
+          <div class="pagination-wrap">
+            {{-- <el-pagination @current-change="pageCurrentChange" :page-size="20" layout="prev, pager, next"
+              :total="image_total">
+            </el-pagination> --}}
 
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
-                  class="el-icon-edit"></i></span>
-            </el-tooltip>
+            <el-pagination
+              @size-change="pageSizeChange"
+              @current-change="pageCurrentChange"
+              :current-page="image_page"
+              :page-sizes="[20, 40, 60, 80, 100]"
+              :page-size="20"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="image_total">
+            </el-pagination>
 
-            <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
-                  class="el-icon-delete"></i></span>
-            </el-tooltip>
+          </div>
+          <div class="right">
 
           </div>
         </div>
-      </el-tree>
-    </div>
-    <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
-    <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
-      <div class="content-head">
-        <div class="left d-flex">
-          <el-button class="me-5" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
-          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download"
-            @click="downloadImages">{{ __('admin/file_manager.download') }}</el-link>
-          <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
-            icon="el-icon-delete">{{ __('common.delete') }}</el-link>
-          <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
-            @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
-          <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length"
-            @click="selectAll()" icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
-        </div>
-        <div class="right">
-          <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
-        </div>
       </div>
-      <div v-if="images.length" class="content-center"
-        v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
-        <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images"
-          :key="index" @click="checkedImage(index)">
-          <div class="img"><img :src="file.url"></div>
-          <div class="text">
-            <span :title="file.name">@{{ file.name }}</span>
-            <i v-if="file.selected" class="el-icon-check"></i>
-          </div>
-        </div>
-      </div>
-      <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
-      <div class="content-footer">
-        <div class="right"></div>
-        <div class="pagination-wrap">
-          {{-- <el-pagination @current-change="pageCurrentChange" :page-size="20" layout="prev, pager, next"
-            :total="image_total">
-          </el-pagination> --}}
+    @else
+    <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
 
-          <el-pagination
-            @size-change="pageSizeChange"
-            @current-change="pageCurrentChange"
-            :current-page="image_page"
-            :page-sizes="[20, 40, 60, 80, 100]"
-            :page-size="20"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="image_total">
-          </el-pagination>
-
-        </div>
-        <div class="right">
-
-        </div>
-      </div>
-    </div>
+    @endif
 
     <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
       @close="uploadFileDialogClose" custom-class="upload-wrap">
@@ -400,7 +405,7 @@
         },
 
         deleteFile() {
-          this.$confirm('{{ __('common.confirm_delete_file') }}', '{{ __('common.text_hint') }}', {
+          this.$confirm('{{ __('admin/file_manager.confirm_delete_file') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
             const selectImageIndex = this.selectImageIndex;

@@ -28,9 +28,27 @@ class Header extends Component
      */
     public function render()
     {
+        $sidebar = new Sidebar();
         $preparedMenus = $this->prepareMenus();
+
         foreach ($preparedMenus as $menu) {
-            $this->addLink($menu['name'], $menu['route'], equal_route("admin.{$menu['route']}"));
+            if ($menu['code']) {
+                $routes = [];
+                $sideMenuRoutes = $sidebar->{"get{$menu['code']}SubRoutes"}();
+
+                foreach ($sideMenuRoutes as $route) {
+                    $route_first = explode('.', $route['route'])[0] ?? '';
+                    $routes[] = "admin." . $route['route'];
+                    $routes[] = 'admin.' . $route_first .  '.edit';
+                    $routes[] = 'admin.' . $route_first .  '.show';
+                }
+
+                $is_route = equal_route($routes);
+            } else {
+                $is_route = equal_route("admin." . $menu['route']);
+            }
+
+            $this->addLink($menu['name'], $menu['route'], $is_route);
         }
         return view('admin::components.header');
     }
@@ -42,13 +60,13 @@ class Header extends Component
     private function prepareMenus()
     {
         $menus = [
-            ['name' => trans('admin/common.home'), 'route' => 'home.index'],
-            ['name' => trans('admin/common.order'), 'route' => 'orders.index'],
-            ['name' => trans('admin/common.product'), 'route' => 'products.index'],
-            ['name' => trans('admin/common.customer'), 'route' => 'customers.index'],
-            ['name' => trans('admin/common.content'), 'route' => 'pages.index'],
-            ['name' => trans('admin/common.setting'), 'route' => 'settings.index'],
-            ['name' => trans('admin/common.marketing'), 'route' => 'marketing.index'],
+            ['name' => trans('admin/common.home'), 'route' => 'home.index', 'code' => ''],
+            ['name' => trans('admin/common.order'), 'route' => 'orders.index', 'code' => 'Order'],
+            ['name' => trans('admin/common.product'), 'route' => 'products.index', 'code' => 'Product'],
+            ['name' => trans('admin/common.customer'), 'route' => 'customers.index', 'code' => 'Customer'],
+            ['name' => trans('admin/common.content'), 'route' => 'pages.index', 'code' => 'Pages'],
+            ['name' => trans('admin/common.setting'), 'route' => 'settings.index', 'code' => 'Setting'],
+            // ['name' => trans('admin/common.marketing'), 'route' => 'marketing.index', 'code' => ''],
         ];
         return hook_filter('admin.header_menus', $menus);
     }

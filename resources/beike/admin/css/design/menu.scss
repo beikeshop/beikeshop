@@ -33,13 +33,17 @@
         background-color: #f3f3f3;
 
         &.active {
-          border-bottom: none;
           background-color: #fff;
           border-color: #fd560f;
 
-          &:before {
-            display: block;
+          @media (min-width: 768px) {
+            border-bottom: none;
+
+            &:before {
+              display: block;
+            }
           }
+
         }
 
         &:before {

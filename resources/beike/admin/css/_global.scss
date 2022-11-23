@@ -23,16 +23,24 @@
   }
 }
 
-// 生成 100 200 300 ... 1000 的宽度
-@for $i from 1 through 10 {
-  .wp-#{$i}00 {
-    width: #{$i}00px;
+@media (min-width: 768px) {
+  // 生成 100 200 300 ... 1000 的宽度
+  @for $i from 1 through 10 {
+    .wp-#{$i}00 {
+      width: #{$i}00px;
+    }
   }
-}
-// clac(100% - #{$i}00px)
-@for $i from 1 through 10 {
-  .wp-#{$i}00- {
-    width: calc(100% - #{$i}00px);
+  // clac(100% - #{$i}00px)
+  @for $i from 1 through 10 {
+    .wp-#{$i}00- {
+      width: calc(100% - #{$i}00px);
+    }
+  }
+  // 生成 100 200 300 ... 1000 的高度
+  @for $i from 1 through 10 {
+    .hp-#{$i}00 {
+      height: #{$i}00px;
+    }
   }
 }
 
@@ -45,7 +53,7 @@
 
 // 生成 100 200 300 ... 1000 的最小宽度
 @for $i from 1 through 10 {
-  .s-min-#{$i}00 {
+  .w-min-#{$i}00 {
     min-width: #{$i}00px;
   }
 }
@@ -57,12 +65,7 @@
   }
 }
 
-// 生成 100 200 300 ... 1000 的高度
-@for $i from 1 through 10 {
-  .hp-#{$i}00 {
-    height: #{$i}00px;
-  }
-}
+
 
 // 生成 10 20 30 ... 90 的高宽
 @for $i from 1 through 10 {
@@ -81,6 +84,8 @@
     margin-right: 5px;
   }
 }
+
+
 
 .cursor-pointer {
   cursor: pointer;
@@ -324,6 +329,91 @@ body.page-seller-product {
 
 table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-header {
   font-family: 'Poppins-Medium', sans-serif;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+  .wp-200.text-end {
+    text-align: left !important;
+  }
+
+  .col-auto {
+    flex: 1 0 auto !important;
+  }
+
+  .table-push {
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: auto;
+    -webkit-backface-visibility: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    & + .el-pagination {
+      margin-top: 20px;
+    }
+  }
+
+  .el-form--inline .el-form-item__label {
+    text-align: left;
+  }
+
+  .el-form--inline .el-form-item__content {
+    width: 100%;
+  }
+
+  .el-form-item__label {
+    text-align: left;
+    width: 100% !important;
+  }
+
+  .el-form-item__content {
+    margin-left: 0 !important;
+  }
+
+  .table {
+    margin-bottom: 0;
+  }
+
+  .el-dialog {
+    width: 95% !important;
+  }
+
+  .text-hidden {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+  }
+
+  .input-group-text {
+    width: 100px;
+  }
+
+  .row > * {
+    margin-top: 0.2rem
+  }
+
+  .el-message-box {
+    width: 90%;
+  }
+
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+
+  .layui-layer-iframe {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  .tox .tox-toolbar--scrolling {
+    flex-wrap: wrap !important;
+  }
 }
 
 .swal2-confirm:focus {

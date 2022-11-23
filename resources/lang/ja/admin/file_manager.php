@@ -25,6 +25,7 @@ return [
     'image_uploading' => '画像のアップロード',
     'no_file' => 'ファイルなし',
     'picture_space' => 'ピクチャースペース',
+    'show_pc' => ' PCで操作してください',
 
     'confirm_delete_file' => '選択したファイルを削除しますか',
     'confirm_delete_folder' => 'フォルダの削除操作が進行中です。フォルダ内のすべてのファイルが削除されます。確認しますか? ',

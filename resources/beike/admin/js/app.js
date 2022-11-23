@@ -11,6 +11,7 @@ window.$http = http;
 import common from "./common";
 window.bk = common;
 import "./autocomplete";
+import "./header";
 import "./bootstrap-validation";
 
 const base = document.querySelector('base').href;

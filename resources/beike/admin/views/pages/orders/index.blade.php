@@ -60,46 +60,48 @@
         </div>
       </div>
       @if (count($orders))
-        <table class="table">
-          <thead>
-            <tr>
-              <th>{{ __('order.id') }}</th>
-              <th>{{ __('order.number') }}</th>
-              <th>{{ __('order.customer_name') }}</th>
-              <th>{{ __('order.payment_method') }}</th>
-              <th>{{ __('order.status') }}</th>
-              <th>{{ __('order.total') }}</th>
-              <th>{{ __('order.created_at') }}</th>
-              <th>{{ __('order.updated_at') }}</th>
-              <th>{{ __('common.action') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            @if (count($orders))
-              @foreach ($orders as $order)
+        <div class="table-push">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ __('order.id') }}</th>
+                <th>{{ __('order.number') }}</th>
+                <th>{{ __('order.customer_name') }}</th>
+                <th>{{ __('order.payment_method') }}</th>
+                <th>{{ __('order.status') }}</th>
+                <th>{{ __('order.total') }}</th>
+                <th>{{ __('order.created_at') }}</th>
+                <th>{{ __('order.updated_at') }}</th>
+                <th>{{ __('common.action') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (count($orders))
+                @foreach ($orders as $order)
+                  <tr>
+                    <td>{{ $order->id }}</td>
+                    <td>{{ $order->number }}</td>
+                    <td>{{ sub_string($order->customer_name, 14) }}</td>
+                    <td>{{ $order->payment_method_name }}</td>
+                    <td>{{ $order->status_format }}</td>
+                    <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+                    <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->updated_at }}</td>
+                    <td><a href="{{ admin_route('orders.show', [$order->id]) }}"
+                        class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                    </td>
+                  </tr>
+                @endforeach
+              @else
                 <tr>
-                  <td>{{ $order->id }}</td>
-                  <td>{{ $order->number }}</td>
-                  <td>{{ sub_string($order->customer_name, 14) }}</td>
-                  <td>{{ $order->payment_method_name }}</td>
-                  <td>{{ $order->status_format }}</td>
-                  <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-                  <td>{{ $order->created_at }}</td>
-                  <td>{{ $order->updated_at }}</td>
-                  <td><a href="{{ admin_route('orders.show', [$order->id]) }}"
-                      class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                  <td colspan="9" class="border-0">
+                    <x-admin-no-data />
                   </td>
                 </tr>
-              @endforeach
-            @else
-              <tr>
-                <td colspan="9" class="border-0">
-                  <x-admin-no-data />
-                </td>
-              </tr>
-            @endif
-          </tbody>
-        </table>
+              @endif
+            </tbody>
+          </table>
+        </div>
         {{ $orders->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
       @else
         <x-admin-no-data />

@@ -17,9 +17,9 @@
     <div class="card-body h-min-600 position-relative">
       <div class="design-wrap">
         <p class="fw-bold mb-2">{{ __('admin/builder.main_menu') }}</p>
-        <div class="left">
+        <div class="left d-block d-lg-flex">
           {{-- <div class="menus-wrap" v-if="form.menus.length"> --}}
-          <draggable class="menus-wrap" v-if="form.menus.length" :list="form.menus"
+          <draggable class="menus-wrap d-block d-lg-flex mb-2 mb-lg-0" v-if="form.menus.length" :list="form.menus"
             :options="{ animation: 330, handle: '.el-icon-rank' }">
             <div
               :class="['p-2 me-2', currentMenuIndex == index ? 'active' : '']"
@@ -42,10 +42,10 @@
             </div>
           </draggable>
           {{-- </div> --}}
-          <button @click="addLinkClicked" class="btn btn-outline-primary ms-3">{{ __('admin/builder.add_main_menu') }}</button>
+          <button @click="addLinkClicked" class="btn btn-outline-primary ms-lg-3">{{ __('admin/builder.add_main_menu') }}</button>
         </div>
         <div class="flex-1 right" v-if="currentMenu" :key="currentMenuIndex">
-          <div class="d-flex">
+          <div class="d-lg-flex">
             <div class="wp-200 ">
               <div class="mb-2">{{ __('admin/builder.main_menu_name_link') }}</div>
               <text-i18n v-model="currentMenu.name" class="mb-2"></text-i18n>
@@ -54,18 +54,18 @@
               </link-selector>
             </div>
 
-            <div class="wp-200 ms-5">
-              <div class="mb-2">{{ __('admin/builder.main_menu_label') }}</div>
+            <div class="wp-200 ms-lg-5">
+              <div class="mb-2 mt-3 mt-lg-0">{{ __('admin/builder.main_menu_label') }}</div>
               <text-i18n v-model="currentMenu.badge.name" class=""></text-i18n>
             </div>
 
-            <div class="wp-200 ms-5">
-              <div class="mb-2">{{ __('admin/builder.label_background_color') }}</div>
+            <div class="wp-200 ms-lg-5">
+              <div class="mb-2 mt-3 mt-lg-0">{{ __('admin/builder.label_background_color') }}</div>
               <el-color-picker v-model="currentMenu.badge.bg_color" size="small"></el-color-picker>
             </div>
 
             <div class="wp-200">
-              <div class="mb-2">{{ __('admin/builder.label_text_color') }}</div>
+              <div class="mb-2 mt-3 mt-lg-0">{{ __('admin/builder.label_text_color') }}</div>
               <el-color-picker v-model="currentMenu.badge.text_color" size="small"></el-color-picker>
             </div>
           </div>
@@ -84,7 +84,7 @@
                 <el-switch v-model="currentMenu.isFull"></el-switch>
               </div>
             </div>
-            <draggable class="children-group d-flex" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
+            <draggable class="children-group d-lg-flex" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
               :options="{ animation: 330, handle: '.el-icon-rank' }">
               <div class="card border mx-2 mb-3 group-item" v-for="group, group_index in currentMenu.childrenGroup"
                 :key="group_index">

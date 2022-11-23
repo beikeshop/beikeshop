@@ -19,7 +19,7 @@
         </el-upload>
         <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
       </div>
-      <div class="mt-4" style="">
+      <div class="mt-4 table-push" style="">
         <table class="table">
           <thead>
             <tr>

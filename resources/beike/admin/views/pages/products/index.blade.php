@@ -44,7 +44,7 @@
               <label class="filter-title">{{ __('common.status') }}</label>
               <select v-model="filter.active" class="form-select">
                 <option value="">{{ __('common.all') }}</option>
-                <option value="1">{{ __('product.active') }}</option>
+              variant-value-img  <option value="1">{{ __('product.active') }}</option>
                 <option value="0">{{ __('product.inactive') }}</option>
               </select>
             </div>
@@ -61,7 +61,7 @@
 
         <div class="d-flex justify-content-between my-4">
           @if ($type != 'trashed')
-            <a href="{{ admin_route('products.create') }}">
+            <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
               <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
             </a>
           @else
@@ -69,7 +69,7 @@
           @endif
 
           @if ($type != 'trashed')
-          <div class="right" v-if="product.data.length">
+          <div class="right nowrap" v-if="product.data.length">
             <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
             <button class="btn btn-outline-secondary" :disabled="!selected.length"
             @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
@@ -80,72 +80,74 @@
         </div>
 
         <template v-if="product.data.length">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th><input type="checkbox" v-model="allSelected" /></th>
-                <th>{{ __('common.id') }}</th>
-                <th>{{ __('product.image') }}</th>
-                <th>{{ __('product.name') }}</th>
-                <th>{{ __('product.price') }}</th>
-                <th>
-                  <div class="d-flex align-items-center">
-                      {{ __('common.created_at') }}
-                    <div class="d-flex flex-column ml-1 order-by-wrap">
-                      <i class="el-icon-caret-top" @click="orderBy = 'created_at:asc'"></i>
-                      <i class="el-icon-caret-bottom" @click="orderBy = 'created_at:desc'"></i>
+          <div class="table-push">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" v-model="allSelected" /></th>
+                  <th>{{ __('common.id') }}</th>
+                  <th>{{ __('product.image') }}</th>
+                  <th>{{ __('product.name') }}</th>
+                  <th>{{ __('product.price') }}</th>
+                  <th>
+                    <div class="d-flex align-items-center">
+                        {{ __('common.created_at') }}
+                      <div class="d-flex flex-column ml-1 order-by-wrap">
+                        <i class="el-icon-caret-top" @click="orderBy = 'created_at:asc'"></i>
+                        <i class="el-icon-caret-bottom" @click="orderBy = 'created_at:desc'"></i>
+                      </div>
                     </div>
-                  </div>
-                </th>
+                  </th>
 
-                <th class="d-flex align-items-center">
-                  <div class="d-flex align-items-center">
-                      {{ __('common.sort_order') }}
-                    <div class="d-flex flex-column ml-1 order-by-wrap">
-                      <i class="el-icon-caret-top" @click="orderBy = 'position:asc'"></i>
-                      <i class="el-icon-caret-bottom" @click="orderBy = 'position:desc'"></i>
+                  <th class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        {{ __('common.sort_order') }}
+                      <div class="d-flex flex-column ml-1 order-by-wrap">
+                        <i class="el-icon-caret-top" @click="orderBy = 'position:asc'"></i>
+                        <i class="el-icon-caret-bottom" @click="orderBy = 'position:desc'"></i>
+                      </div>
                     </div>
-                  </div>
-                </th>
-                @if ($type != 'trashed')
-                  <th>{{ __('common.status') }}</th>
-                @endif
-                <th class="text-end">{{ __('common.action') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in product.data" :key="item.id">
-                <td><input type="checkbox" :value="item.id" v-model="selected" /></td>
-                <td>@{{ item.id }}</td>
-                <td>
-                  <div class="wh-60 border d-flex justify-content-between align-items-center"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
-                </td>
-                <td>
-                  <a :href="item.url" target="_blank" :title="item.name" class="text-dark">@{{ stringLengthInte(item.name, 90) }}</a>
-                </td>
-                <td>@{{ item.price_formatted }}</td>
-                <td>@{{ item.created_at }}</td>
-                <td>@{{ item.position }}</td>
-                @if ($type != 'trashed')
+                  </th>
+                  @if ($type != 'trashed')
+                    <th>{{ __('common.status') }}</th>
+                  @endif
+                  <th class="text-end">{{ __('common.action') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in product.data" :key="item.id">
+                  <td><input type="checkbox" :value="item.id" v-model="selected" /></td>
+                  <td>@{{ item.id }}</td>
                   <td>
-                    <span v-if="item.active" class="text-success">{{ __('common.enable') }}</span>
-                    <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+                    <div class="wh-60 border d-flex justify-content-between align-items-center"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
                   </td>
-                @endif
-                <td width="140" class="text-end">
-                  <template v-if="item.deleted_at == ''">
-                    <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-                    <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
-                      @click.prevent="deleteProduct(index)">{{ __('common.delete') }}</a>
-                  </template>
-                  <template v-else>
-                    <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                      @click.prevent="restoreProduct(index)">{{ __('common.restore') }}</a>
-                  </template>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td>
+                    <a :href="item.url" target="_blank" :title="item.name" class="text-dark">@{{ stringLengthInte(item.name, 90) }}</a>
+                  </td>
+                  <td>@{{ item.price_formatted }}</td>
+                  <td>@{{ item.created_at }}</td>
+                  <td>@{{ item.position }}</td>
+                  @if ($type != 'trashed')
+                    <td>
+                      <span v-if="item.active" class="text-success">{{ __('common.enable') }}</span>
+                      <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+                    </td>
+                  @endif
+                  <td width="140" class="text-end">
+                    <template v-if="item.deleted_at == ''">
+                      <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
+                        @click.prevent="deleteProduct(index)">{{ __('common.delete') }}</a>
+                    </template>
+                    <template v-else>
+                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                        @click.prevent="restoreProduct(index)">{{ __('common.restore') }}</a>
+                    </template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <el-pagination layout="prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
             :total="product.total"></el-pagination>

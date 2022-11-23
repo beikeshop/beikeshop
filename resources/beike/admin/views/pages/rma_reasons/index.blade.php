@@ -19,9 +19,9 @@
         <tbody v-if="rmaReasons.length">
           <tr v-for="language, index in rmaReasons" :key="index">
             <td>@{{ language.id }}</td>
-            <td>@{{ language.name }}</td>
+            <td><span class="text-hidden">@{{ language.name }}</span></td>
             <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+              <button class="btn btn-outline-secondary btn-sm mb-1 mb-sm-0" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
             </td>
           </tr>

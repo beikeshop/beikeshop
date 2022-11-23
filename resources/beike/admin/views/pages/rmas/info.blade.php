@@ -7,11 +7,11 @@
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.rma_details') }}</h6></div>
     <div class="card-body">
       <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>ID：</td>
+                <td style="width:40%">ID：</td>
                 <td>{{ $rma['id'] }}</td>
               </tr>
               <tr>
@@ -25,11 +25,11 @@
             </tbody>
           </table>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>{{ __('admin/builder.modules_product') }}：</td>
+                <td style="width:40%">{{ __('admin/builder.modules_product') }}：</td>
                 <td>{{ $rma['product_name'] }}</td>
               </tr>
               <tr>
@@ -85,24 +85,26 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.operation_history') }}</h6></div>
     <div class="card-body">
-      <table class="table ">
-        <thead class="">
-          <tr>
-            <th>{{ __('order.history_status') }}</th>
-            <th width="60%">{{ __('order.history_comment') }}</th>
-            <th>{{ __('order.history_created_at') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($histories as $history)
+      <div class="table-push">
+        <table class="table ">
+          <thead class="">
             <tr>
-              <td>{{ $history['status'] }}</td>
-              <td>{{ $history['comment'] }}</td>
-              <td>{{ $history['created_at'] }}</td>
+              <th>{{ __('order.history_status') }}</th>
+              <th width="60%">{{ __('order.history_comment') }}</th>
+              <th>{{ __('order.history_created_at') }}</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @foreach ($histories as $history)
+              <tr>
+                <td>{{ $history['status'] }}</td>
+                <td>{{ $history['comment'] }}</td>
+                <td>{{ $history['created_at'] }}</td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 @endsection

@@ -243,6 +243,10 @@ function is_installer(): bool
  */
 function equal_route($routeName): bool
 {
+    if (is_array($routeName)) {
+        return in_array(Route::getCurrentRoute()->getName(), $routeName);
+    }
+
     return $routeName == Route::getCurrentRoute()->getName();
 }
 

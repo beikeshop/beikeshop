@@ -8,41 +8,43 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('common.name') }}</th>
-            <th>{{ __('currency.code') }}</th>
-            <th>{{ __('common.created_at') }}</th>
-            <th>{{ __('common.updated_at') }}</th>
-            <th>{{ __('common.sort_order') }}</th>
-            <th>{{ __('common.status') }}</th>
-            <th class="text-end">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="zones.data.length">
-          <tr v-for="zone, index in zones.data" :key="index">
-            <td>@{{ zone.id }}</td>
-            <td>@{{ zone.name }}</td>
-            <td>@{{ zone.code }}</td>
-            <td>@{{ zone.created_at }}</td>
-            <td>@{{ zone.updated_at }}</td>
-            <td>@{{ zone.sort_order }}</td>
-            <td>
-              <span v-if="zone.status" class="text-success">{{ __('common.enable') }}</span>
-              <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-            </td>
-            <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('common.name') }}</th>
+              <th>{{ __('currency.code') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th>{{ __('common.updated_at') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
+              <th>{{ __('common.status') }}</th>
+              <th class="text-end">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="zones.data.length">
+            <tr v-for="zone, index in zones.data" :key="index">
+              <td>@{{ zone.id }}</td>
+              <td>@{{ zone.name }}</td>
+              <td>@{{ zone.code }}</td>
+              <td>@{{ zone.created_at }}</td>
+              <td>@{{ zone.updated_at }}</td>
+              <td>@{{ zone.sort_order }}</td>
+              <td>
+                <span v-if="zone.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+              </td>
+              <td class="text-end">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
-      <el-pagination v-if="zones.data.length" layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
+      <el-pagination v-if="zones.data.length" :pager-count="5" layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
         :total="zones.total"></el-pagination>
     </div>
 

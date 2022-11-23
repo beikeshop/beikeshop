@@ -25,6 +25,7 @@ return [
     'image_uploading' => 'téléchargement d\'images',
     'no_file' => 'pas de fichier',
     'picture_space' => 'espace image',
+    'show_pc' => 'Veuillez passer du côté PC pour opérer',
 
     'confirm_delete_file' => 'Voulez-vous supprimer le fichier sélectionné',
     'confirm_delete_folder' => 'L\'opération de suppression du dossier est en cours, tous les fichiers du dossier seront supprimés, voulez-vous confirmer ? ',

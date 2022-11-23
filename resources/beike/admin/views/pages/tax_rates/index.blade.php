@@ -17,36 +17,38 @@
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>{{ __('admin/tax_rate.tax') }}</th>
-            <th>{{ __('admin/tax_rate.tax_rate') }}</th>
-            <th>{{ __('admin/tax_rate.type') }}</th>
-            <th>{{ __('admin/tax_rate.area') }}</th>
-            <th>{{ __('common.created_at') }}</th>
-            <th>{{ __('common.updated_at') }}</th>
-            <th class="text-end">{{ __('common.action') }}</th>
-          </tr>
-        </thead>
-        <tbody v-if="tax_rates.length">
-          <tr v-for="tax, index in tax_rates" :key="index">
-            <td>@{{ tax.id }}</td>
-            <td>@{{ tax.name }}</td>
-            <td>@{{ tax.rate }}</td>
-            <td>@{{ tax.type }}</td>
-            <td>@{{ tax.region.name }}</td>
-            <td>@{{ tax.created_at }}</td>
-            <td>@{{ tax.updated_at }}</td>
-            <td class="text-end">
-              <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-              <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
-            </td>
-          </tr>
-        </tbody>
-        <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
-      </table>
+      <div class="table-push">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{ __('admin/tax_rate.tax') }}</th>
+              <th>{{ __('admin/tax_rate.tax_rate') }}</th>
+              <th>{{ __('admin/tax_rate.type') }}</th>
+              <th>{{ __('admin/tax_rate.area') }}</th>
+              <th>{{ __('common.created_at') }}</th>
+              <th>{{ __('common.updated_at') }}</th>
+              <th class="text-end">{{ __('common.action') }}</th>
+            </tr>
+          </thead>
+          <tbody v-if="tax_rates.length">
+            <tr v-for="tax, index in tax_rates" :key="index">
+              <td>@{{ tax.id }}</td>
+              <td>@{{ tax.name }}</td>
+              <td>@{{ tax.rate }}</td>
+              <td>@{{ tax.type }}</td>
+              <td>@{{ tax.region.name }}</td>
+              <td>@{{ tax.created_at }}</td>
+              <td>@{{ tax.updated_at }}</td>
+              <td class="text-end">
+                <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody v-else><tr><td colspan="7" class="border-0"><x-admin-no-data /></td></tr></tbody>
+        </table>
+      </div>
 
       {{-- {{ $tax_rates->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>

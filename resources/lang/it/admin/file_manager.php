@@ -25,6 +25,7 @@ return [
     'image_uploading' => 'caricamento delle immagini',
     'no_file' => 'nessun file',
     'picture_space' => 'spazio dell\'immagine',
+    'show_pc' => 'Si prega di andare sul lato PC per operare',
 
     'confirm_delete_file' => 'Vuoi eliminare il file selezionato',
     'confirm_delete_folder' => 'L\'operazione di cancellazione della cartella è in corso, tutti i file nella cartella verranno eliminati, vuoi confermare?',

@@ -52,9 +52,9 @@
                 ghost-class="dragabble-ghost"
                 class="product-images d-flex flex-wrap"
                 :list="form.images"
-                :options="{animation: 200, filter: '.set-product-img'}"
+                :options="{animation: 200, handle: '.product-item'}"
                 >
-                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2">
+                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2 mb-2">
                   <div class="position-absolute top-0 end-0">
                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                   </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
               </draggable>
-              <div class="help-text mb-1 mt-2">{{ __('admin/product.image_help') }}</div>
+              <div class="help-text mb-1 mt-1">{{ __('admin/product.image_help') }}</div>
             </x-admin::form.row>
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
             <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
@@ -160,19 +160,19 @@
                       <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
                     </div>
 
-                    <div v-if="form.skus.length && form.variables.length" class="mt-3">
+                    <div v-if="form.skus.length && form.variables.length" class="mt-3 table-push">
                       <table class="table table-bordered table-hover">
                         <thead>
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}
                           </th>
                           <th width="106px">{{ __('common.image') }}</th>
-                          <th>{{ __('admin/product.model') }}</th>
-                          <th>sku</th>
-                          <th>{{ __('admin/product.price') }}</th>
-                          <th>{{ __('admin/product.origin_price') }}</th>
-                          <th>{{ __('admin/product.cost_price') }}</th>
-                          <th>{{ __('admin/product.quantity') }}</th>
+                          <th class="w-min-100">{{ __('admin/product.model') }}</th>
+                          <th class="w-min-100">sku</th>
+                          <th class="w-min-100">{{ __('admin/product.price') }}</th>
+                          <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
+                          <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
+                          <th class="w-min-100">{{ __('admin/product.quantity') }}</th>
                         </thead>
                         <tbody>
                           <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">

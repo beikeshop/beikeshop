@@ -7,11 +7,11 @@
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
     <div class="card-body">
       <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>{{ __('order.number') }}：</td>
+                <td style="width: 40%">{{ __('order.number') }}：</td>
                 <td>{{ $order->number }}</td>
               </tr>
               <tr>
@@ -25,11 +25,11 @@
             </tbody>
           </table>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td>{{ __('order.customer_name') }}：</td>
+                <td style="width: 40%">{{ __('order.customer_name') }}：</td>
                 <td>{{ $order->customer_name }}</td>
               </tr>
               <tr>
@@ -117,66 +117,70 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.product_info') }}</h6></div>
     <div class="card-body">
-      <table class="table ">
-        <thead class="">
-          <tr>
-            <th>ID</th>
-            <th>{{ __('order.product_name') }}</th>
-            <th class="">{{ __('order.product_sku') }}</th>
-            <th>{{ __('order.product_price') }}</th>
-            <th class="">{{ __('order.product_quantity') }}</th>
-            <th class="text-end">{{ __('order.product_sub_price') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($order->orderProducts as $product)
-          <tr>
-            <td>{{ $product->id }}</td>
-            <td>
-              <div class="d-flex align-items-center">
-                <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
-              </div>
-            </td>
-            <td class="">{{ $product->product_sku }}</td>
-            <td>{{ currency_format($product->price, $order->currency_code, $order->currency_value) }}</td>
-            <td class="">{{ $product->quantity }}</td>
-            <td class="text-end">{{ currency_format($product->price * $product->quantity, $order->currency_code, $order->currency_value) }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-        <tfoot>
-          @foreach ($order->orderTotals as $orderTotal)
+      <div class="table-push">
+        <table class="table ">
+          <thead class="">
             <tr>
-              <td colspan="5" class="text-end">{{ $orderTotal->title }}</td>
-              <td class="text-end"><span class="fw-bold">{{ currency_format($orderTotal->value, $order->currency_code, $order->currency_value) }}</span></td>
+              <th>ID</th>
+              <th>{{ __('order.product_name') }}</th>
+              <th class="">{{ __('order.product_sku') }}</th>
+              <th>{{ __('order.product_price') }}</th>
+              <th class="">{{ __('order.product_quantity') }}</th>
+              <th class="text-end">{{ __('order.product_sub_price') }}</th>
             </tr>
-          @endforeach
-        </tfoot>
-      </table>
+          </thead>
+          <tbody>
+            @foreach ($order->orderProducts as $product)
+            <tr>
+              <td>{{ $product->id }}</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
+                </div>
+              </td>
+              <td class="">{{ $product->product_sku }}</td>
+              <td>{{ currency_format($product->price, $order->currency_code, $order->currency_value) }}</td>
+              <td class="">{{ $product->quantity }}</td>
+              <td class="text-end">{{ currency_format($product->price * $product->quantity, $order->currency_code, $order->currency_value) }}</td>
+            </tr>
+            @endforeach
+          </tbody>
+          <tfoot>
+            @foreach ($order->orderTotals as $orderTotal)
+              <tr>
+                <td colspan="5" class="text-end">{{ $orderTotal->title }}</td>
+                <td class="text-end"><span class="fw-bold">{{ currency_format($orderTotal->value, $order->currency_code, $order->currency_value) }}</span></td>
+              </tr>
+            @endforeach
+          </tfoot>
+        </table>
+      </div>
     </div>
   </div>
 
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.action_history') }}</h6></div>
     <div class="card-body">
-      <table class="table ">
-        <thead class="">
-          <tr>
-            <th>{{ __('order.history_status') }}</th>
-            <th>{{ __('order.history_comment') }}</th>
-            <th>{{ __('order.history_created_at') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($order->orderHistories as $orderHistory)
+      <div class="table-push">
+        <table class="table ">
+          <thead class="">
             <tr>
-              <td>{{ $orderHistory->status_format }}</td>
-              <td><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
-              <td><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
+              <th>{{ __('order.history_status') }}</th>
+              <th>{{ __('order.history_comment') }}</th>
+              <th>{{ __('order.history_created_at') }}</th>
             </tr>
-          @endforeach
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @foreach ($order->orderHistories as $orderHistory)
+              <tr>
+                <td>{{ $orderHistory->status_format }}</td>
+                <td><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
+                <td><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 @endsection

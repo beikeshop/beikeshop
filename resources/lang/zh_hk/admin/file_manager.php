@@ -25,6 +25,7 @@ return [
     'image_uploading' => '圖片上傳中',
     'no_file' => '沒有文件',
     'picture_space' => '圖片空間',
+    'show_pc' => '請到PC端操作',
 
     'confirm_delete_file' => '是否要刪除選中文件',
     'confirm_delete_folder' => '正在進行刪除文件夾操作，文件夾內所有文件都將被刪除，是否確認？ ',
