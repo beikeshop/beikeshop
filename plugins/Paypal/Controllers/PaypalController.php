@@ -48,7 +48,7 @@ class PaypalController
             'currency' => 'USD',
             'notify_url' => '',
             'locale' => 'en_US',
-            'validate_ssl' => true,
+            'validate_ssl' => false,
         ];
         config(['paypal' => null]);
         $this->paypalClient = new PayPal($config);
