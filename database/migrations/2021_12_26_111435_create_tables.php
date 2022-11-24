@@ -206,7 +206,7 @@ class CreateTables extends Migration
             $table->string('currency_code')->comment('当前货币');
             $table->string('currency_value')->comment('当前汇率');
             $table->string('ip')->comment('下单时 IP');
-            $table->string('user_agent')->comment('下单时浏览器信息');
+            $table->text('user_agent')->comment('下单时浏览器信息');
             $table->string('status')->comment('订单状态');
             $table->string('shipping_method_code')->comment('配送方式编码');
             $table->string('shipping_method_name')->comment('配送方式名称');
