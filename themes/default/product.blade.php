@@ -35,7 +35,7 @@
           </div>
 
           <div class="right" id="zoom">
-            <img :src="images[0]?.preview || '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+            <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
           </div>
         </div>
       </div>
