@@ -80,10 +80,10 @@ class ZoneRepo
     }
 
     /**
-     * @param $data
+     * @param array $data
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function list($data)
+    public static function list(array $data = [])
     {
         $builder = Zone::query();
 
