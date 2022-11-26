@@ -34,7 +34,6 @@
                 size="small"
                 :fetch-suggestions="querySearch"
                 placeholder="{{ __('admin/builder.modules_keywords_search') }}"
-                :trigger-on-focus="false"
                 :highlight-first-item="true"
                 @select="handleSelect"
               ></el-autocomplete>
@@ -119,10 +118,6 @@ Vue.component('module-editor-tab-product', {
     },
 
     querySearch(keyword, cb) {
-      if (!keyword) {
-        return;
-      }
-
       $http.get('products/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
         cb(res.data);
       })
