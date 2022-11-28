@@ -4,7 +4,7 @@
       class="nav-item {{ isset($menu['children_group']) ? 'dropdown' : '' }} {{ isset($menu['isFull']) && $menu['isFull'] ? 'position-static' : '' }}">
       <a class="nav-link fw-bold {{ isset($menu['children_group']) ? 'dropdown-toggle' : '' }}"
         target="{{ isset($menu['new_window']) && $menu['new_window'] ? '_blank' : '_self' }}"
-        href="{{ $menu['link'] ?? '' }}">
+        href="{{ $menu['link'] ?: 'javascript:void(0)' }}">
         {{ $menu['name'] }}
         @if (isset($menu['badge']) && $menu['badge']['name'])
           <span class="badge"
@@ -28,7 +28,7 @@
                       @if ($group['type'] == 'image')
                         <a
                         target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}"
-                        href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}"
+                        href="{{ $group['image']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $group['image']['image'] }}"
                             class="img-fluid"></a>
                       @else
                         <ul class="nav flex-column ul-children">
@@ -38,7 +38,7 @@
                                 <a
                                 target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}"
                                 class="nav-link px-0"
-                                  href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
+                                  href="{{ $children['link']['link'] ?: 'javascript:void(0)' }}">{{ $children['link']['text'] }}</a>
                               </li>
                             @endif
                           @endforeach
