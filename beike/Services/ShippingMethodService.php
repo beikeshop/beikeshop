@@ -13,17 +13,18 @@ namespace Beike\Services;
 
 use Illuminate\Support\Str;
 use Beike\Repositories\PluginRepo;
+use Beike\Shop\Services\CheckoutService;
 
 class ShippingMethodService
 {
     /**
      * 获取配送方式, 二维数组, 一个配送插件对应多个配送方式
      *
-     * @param $currentCart
+     * @param CheckoutService $checkout
      * @return array
      * @throws \Exception
      */
-    public static function getShippingMethods($currentCart): array
+    public static function getShippingMethods(CheckoutService $checkout): array
     {
         $shippingPlugins = PluginRepo::getShippingMethods();
 
@@ -37,7 +38,7 @@ class ShippingMethodService
             if (!method_exists($className, 'getQuotes')) {
                 throw new \Exception("请在插件 {$className} 实现方法: public function getQuotes(\$currentCart)");
             }
-            $quotes = (new $className)->getQuotes($currentCart, $shippingPlugin);
+            $quotes = (new $className)->getQuotes($checkout, $plugin);
             if ($quotes) {
                 $shippingMethods[] = [
                     'code' => $pluginCode,

@@ -48,6 +48,7 @@ class Manager
             $status = $plugin->getStatus();
             $plugin->setDirname($dirname);
             $plugin->setName(Arr::get($package, 'name'));
+            $plugin->setDescription(Arr::get($package, 'description'));
             $plugin->setInstalled(true);
             $plugin->setEnabled($status);
             $plugin->setVersion(Arr::get($package, 'version'));

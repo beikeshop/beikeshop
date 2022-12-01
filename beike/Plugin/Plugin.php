@@ -22,6 +22,7 @@ class Plugin implements Arrayable, \ArrayAccess
 {
     protected $path;
     protected $name;
+    protected $description;
     protected $packageInfo;
     protected $dirName;
     protected $installed;
@@ -63,6 +64,13 @@ class Plugin implements Arrayable, \ArrayAccess
         $this->name = $name;
         return $this;
     }
+
+    public function setDescription(string $description): Plugin
+    {
+        $this->description = $description;
+        return $this;
+    }
+
 
     public function setInstalled(bool $installed): Plugin
     {
@@ -126,6 +134,16 @@ class Plugin implements Arrayable, \ArrayAccess
         return $item;
     }
 
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
 
     public function getDirname(): string
     {

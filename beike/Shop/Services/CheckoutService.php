@@ -27,9 +27,9 @@ use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
 
 class CheckoutService
 {
-    private $customer;
-    private $cart;
-    private $selectedProducts;
+    public $customer;
+    public $cart;
+    public $selectedProducts;
 
 
     /**
@@ -167,12 +167,12 @@ class CheckoutService
         $customer = $this->customer;
         $currentCart = $this->cart;
 
-        $addresses = AddressRepo::listByCustomer($customer);
-        $shipments = ShippingMethodService::getShippingMethods($currentCart);
-        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
-
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
+
+        $addresses = AddressRepo::listByCustomer($customer);
+        $shipments = ShippingMethodService::getShippingMethods($this);
+        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
         $totalService = (new TotalService($currentCart, $cartList));
 

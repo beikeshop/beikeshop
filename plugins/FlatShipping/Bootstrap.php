@@ -11,26 +11,28 @@
 
 namespace Plugin\FlatShipping;
 
+use Beike\Plugin\Plugin;
+use Beike\Shop\Services\CheckoutService;
+
 class Bootstrap
 {
     /**
      * 获取固定运费方式
      *
-     * @param $currentCart
-     * @param $shippingPlugin
+     * @param CheckoutService $checkout
+     * @param Plugin $plugin
      * @return array
      * @throws \Exception
      */
-    public function getQuotes($currentCart, $shippingPlugin): array
+    public function getQuotes(CheckoutService $checkout, Plugin $plugin): array
     {
-        $code = 'flat_shipping';
-        $pluginSetting = $shippingPlugin->plugin;
+        $code = $plugin->code;
         $quotes[] = [
             'type' => 'shipping',
             'code' => "{$code}.0",
-            'name' => $pluginSetting->name,
-            'description' => $pluginSetting->description,
-            'icon' => plugin_resize($code, $pluginSetting->icon),
+            'name' => $plugin->getName(),
+            'description' => $plugin->getDescription(),
+            'icon' => plugin_resize($code, $plugin->icon),
         ];
         return $quotes;
     }
