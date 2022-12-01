@@ -21,9 +21,9 @@ use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Services\StateMachineService;
+use Beike\Services\ShippingMethodService;
 use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
-use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
 
 class CheckoutService
 {
@@ -159,6 +159,7 @@ class CheckoutService
      * 获取结账页数据
      *
      * @return array
+     * @throws \Exception
      */
     public function checkoutData(): array
     {
@@ -166,7 +167,7 @@ class CheckoutService
         $currentCart = $this->cart;
 
         $addresses = AddressRepo::listByCustomer($customer);
-        $shipments = ShippingMethodItem::collection(PluginRepo::getShippingMethods())->jsonSerialize();
+        $shipments = ShippingMethodService::getShippingMethods($currentCart);
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
         $cartList = CartService::list($customer, true);

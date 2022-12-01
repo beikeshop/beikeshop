@@ -11,12 +11,31 @@
 
 namespace Plugin\FlatShipping;
 
+use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
+
 class Bootstrap
 {
     /**
-     * @return float
+     * 获取固定运费方式
+     *
+     * @param $currentCart
+     * @param $shippingPlugin
+     * @return array
      */
-    public function getShippingFee($totalService)
+    public function getQuotes($currentCart, $shippingPlugin): array
+    {
+        $quotes['flat_shipping.0'] = (new ShippingMethodItem($shippingPlugin))->jsonSerialize();
+        return $quotes;
+    }
+
+
+    /**
+     * 计算固定运费
+     *
+     * @param $totalService
+     * @return float|int
+     */
+    public function getShippingFee($totalService): float|int
     {
         $amount = $totalService->amount;
         $shippingType = plugin_setting('flat_shipping.type', 'fixed');
