@@ -30,6 +30,7 @@ class CheckoutService
     public $customer;
     public $cart;
     public $selectedProducts;
+    public $totalService;
 
 
     /**
@@ -169,12 +170,12 @@ class CheckoutService
 
         $cartList = CartService::list($customer, true);
         $carts = CartService::reloadData($cartList);
+        $totalService = (new TotalService($currentCart, $cartList));
+        $this->totalService = $totalService;
 
         $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodService::getShippingMethods($this);
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
-
-        $totalService = (new TotalService($currentCart, $cartList));
 
         $data = [
             'current' => [
