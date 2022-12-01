@@ -17,7 +17,12 @@ use Illuminate\Support\Str;
 
 class ShippingService
 {
-    public static function getTotal(TotalService $totalService)
+    /**
+     * @param TotalService $totalService
+     * @return array|null
+     * @throws \Exception
+     */
+    public static function getTotal(TotalService $totalService): ?array
     {
         $shippingMethod = $totalService->shippingMethod;
         if (empty($shippingMethod)) {
