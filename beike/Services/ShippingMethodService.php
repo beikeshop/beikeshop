@@ -29,6 +29,7 @@ class ShippingMethodService
 
         $shippingMethods = [];
         foreach ($shippingPlugins as $shippingPlugin) {
+            $plugin = $shippingPlugin->plugin;
             $pluginCode = $shippingPlugin->code;
             $pluginName = Str::studly($pluginCode);
             $className = "Plugin\\{$pluginName}\\Bootstrap";
@@ -38,7 +39,11 @@ class ShippingMethodService
             }
             $quotes = (new $className)->getQuotes($currentCart, $shippingPlugin);
             if ($quotes) {
-                $shippingMethods[$pluginCode] = $quotes;
+                $shippingMethods[] = [
+                    'code' => $pluginCode,
+                    'name' => $plugin->name,
+                    'quotes' => $quotes
+                ];
             }
         }
         return $shippingMethods;

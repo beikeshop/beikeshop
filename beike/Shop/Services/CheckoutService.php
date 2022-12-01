@@ -55,6 +55,7 @@ class CheckoutService
      *
      * @param $requestData ['shipping_address_id'=>1, 'payment_address_id'=>2, 'shipping_method'=>'code', 'payment_method'=>'code']
      * @return array
+     * @throws \Exception
      */
     public function update($requestData): array
     {

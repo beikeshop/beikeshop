@@ -128,18 +128,20 @@
 
         <div class="checkout-black">
           <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
-          <div class="radio-line-wrap">
-            <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']"
-              v-for="shipping, index in source.shipping_methods" :key="index"
-              @click="updateCheckout(shipping.code, 'shipping_method_code')">
-              <div class="left">
-                <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code"
-                  :id="'shipping-method-' + index" class="form-check-input">
-                <img :src="shipping.icon" class="img-fluid" v-if="shipping.icon">
-              </div>
-              <div class="right ms-3">
-                <div class="title">@{{ shipping.name }}</div>
-                <div class="sub-title" v-html="shipping.description"></div>
+          <div class="radio-line-wrap" v-if="source.shipping_methods.length">
+            <div v-for="methods, index in source.shipping_methods" :key="index">
+              <div :class="['radio-line-item', shipping.code == form.shipping_method_code ? 'active' : '']"
+                v-for="shipping, s_index in methods.quotes" :key="index + '-' + s_index"
+                @click="updateCheckout(shipping.code, 'shipping_method_code')">
+                <div class="left">
+                  <input name="shipping" type="radio" v-model="form.shipping_method_code" :value="shipping.code"
+                    :id="'shipping-method-' + index" class="form-check-input">
+                  <img :src="shipping.icon" class="img-fluid" v-if="shipping.icon">
+                </div>
+                <div class="right ms-3">
+                  <div class="title">@{{ shipping.name }}</div>
+                  <div class="sub-title" v-html="shipping.description"></div>
+                </div>
               </div>
             </div>
           </div>

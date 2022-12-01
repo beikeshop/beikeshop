@@ -24,11 +24,12 @@ class ShippingService
             return null;
         }
 
-        $pluginCode = Str::studly($shippingMethod);
+        $methodArray = explode('.', $shippingMethod);
+        $pluginCode = Str::studly($methodArray[0]);
         $className = "Plugin\\{$pluginCode}\\Bootstrap";
 
         if (!method_exists($className, 'getShippingFee')) {
-            throw new \Exception("请在插件 {$className} 实现方法 getShippingFee");
+            throw new \Exception("请在插件 {$className} 实现方法: public function getShippingFee(\$totalService)");
         }
         $amount = (float)(new $className)->getShippingFee($totalService);
         $totalData = [

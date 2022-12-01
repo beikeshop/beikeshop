@@ -11,8 +11,6 @@
 
 namespace Plugin\FlatShipping;
 
-use Beike\Shop\Http\Resources\Checkout\ShippingMethodItem;
-
 class Bootstrap
 {
     /**
@@ -21,10 +19,19 @@ class Bootstrap
      * @param $currentCart
      * @param $shippingPlugin
      * @return array
+     * @throws \Exception
      */
     public function getQuotes($currentCart, $shippingPlugin): array
     {
-        $quotes['flat_shipping.0'] = (new ShippingMethodItem($shippingPlugin))->jsonSerialize();
+        $code = 'flat_shipping';
+        $pluginSetting = $shippingPlugin->plugin;
+        $quotes[] = [
+            'type' => 'shipping',
+            'code' => "{$code}.0",
+            'name' => $pluginSetting->name,
+            'description' => $pluginSetting->description,
+            'icon' => plugin_resize($code, $pluginSetting->icon),
+        ];
         return $quotes;
     }
 
