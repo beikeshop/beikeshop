@@ -171,9 +171,7 @@
               </div>
             </div>
             <ul class="totals">
-              @foreach ($totals as $total)
-                <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
-              @endforeach
+              <li v-for="total, index in source.totals" :key="index"><span>@{{ total.title }}</span><span>@{{ total.amount_format }}</span></li>
             </ul>
             <div class="d-grid gap-2 mt-3">
               <button class="btn btn-primary" type="button" :disabled="!isSubmit"
@@ -211,6 +209,7 @@
           shipping_methods: @json($shipping_methods ?? []),
           payment_methods: @json($payment_methods ?? []),
           carts: @json($carts ?? null),
+          totals: @json($totals ?? []),
           zones: []
         },
 
@@ -373,6 +372,8 @@
 
           $http.put('/checkout', this.form).then((res) => {
             this.form = res.current
+            this.source.totals = res.totals
+
             this.isAllAddress = false
             this.isAllAddressPayment = false
           })
