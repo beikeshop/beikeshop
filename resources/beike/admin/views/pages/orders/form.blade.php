@@ -87,26 +87,28 @@
         <el-form-item label="{{ __('order.current_status') }}">
           {{ $order->status_format }}
         </el-form-item>
-        <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
-          <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
-            <el-option
-              v-for="item in statuses"
-              :key="item.status"
-              :label="item.name"
-              :value="item.status">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        {{-- <el-form-item label="通知客户">
-          <el-switch v-model="form.notify">
-          </el-switch>
-        </el-form-item> --}}
-        <el-form-item label="{{ __('order.comment') }}">
-          <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('form')">{{ __('order.submit_status') }}</el-button>
-        </el-form-item>
+        @if ($order->status != 'completed')
+          <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
+            <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
+              <el-option
+                v-for="item in statuses"
+                :key="item.status"
+                :label="item.name"
+                :value="item.status">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          {{-- <el-form-item label="通知客户">
+            <el-switch v-model="form.notify">
+            </el-switch>
+          </el-form-item> --}}
+          <el-form-item label="{{ __('order.comment') }}">
+            <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('form')">{{ __('order.submit_status') }}</el-button>
+          </el-form-item>
+        @endif
       </el-form>
     </div>
   </div>
