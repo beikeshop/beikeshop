@@ -18,6 +18,7 @@
   @if (locale() != 'zh_cn')
     <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif
+  <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <title>BeikeShop - @yield('title')</title>
