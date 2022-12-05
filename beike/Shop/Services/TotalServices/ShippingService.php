@@ -35,9 +35,9 @@ class ShippingService
         $className = "Plugin\\{$pluginCode}\\Bootstrap";
 
         if (!method_exists($className, 'getShippingFee')) {
-            throw new \Exception("请在插件 {$className} 实现方法: public function getShippingFee(\$totalService)");
+            throw new \Exception("请在插件 {$className} 实现方法: public function getShippingFee(CheckoutService \$checkout)");
         }
-        $amount = (float)(new $className)->getShippingFee($totalService);
+        $amount = (float)(new $className)->getShippingFee($checkout);
         $totalData = [
             'code' => 'shipping',
             'title' => trans('shop/carts.shipping_fee'),

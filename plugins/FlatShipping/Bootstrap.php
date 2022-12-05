@@ -41,11 +41,12 @@ class Bootstrap
     /**
      * 计算固定运费
      *
-     * @param $totalService
+     * @param CheckoutService $checkout
      * @return float|int
      */
-    public function getShippingFee($totalService): float|int
+    public function getShippingFee(CheckoutService $checkout): float|int
     {
+        $totalService = $checkout->totalService;
         $amount = $totalService->amount;
         $shippingType = plugin_setting('flat_shipping.type', 'fixed');
         $shippingValue = plugin_setting('flat_shipping.value', 0);
