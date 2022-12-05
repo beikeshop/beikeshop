@@ -109,6 +109,22 @@ class CheckoutService
 
 
     /**
+     * 计算当前选中商品总重量
+     * @todo
+     * @return int
+     */
+    public function getCartWeight(): int
+    {
+        $weight = 0;
+        $selectedProducts = $this->selectedProducts;
+        foreach ($selectedProducts as $product) {
+            $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
+        }
+        return $weight;
+    }
+
+
+    /**
      * @throws \Exception
      */
     private function validateConfirm($checkoutData)

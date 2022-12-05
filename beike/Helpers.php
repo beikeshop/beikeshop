@@ -457,6 +457,18 @@ function current_currency_code(): string
 }
 
 /**
+ * 获取当前货币
+ *
+ * @return string
+ */
+function current_currency_id(): string
+{
+    $currencyCode = current_currency_code();
+    $currency = \Beike\Models\Currency::query()->where('code', $currencyCode)->first();
+    return $currency->id ?? 0;
+}
+
+/**
  * 数量格式化, 用于商品、订单统计
  *
  * @param $quantity
