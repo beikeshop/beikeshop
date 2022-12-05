@@ -31,6 +31,11 @@ class ProductSimple extends JsonResource
         }
 
         $name = $this->description->name ?? '';
+        if ($masterSku && $masterSku->images) {
+            $images = $masterSku->images;
+        } else {
+            $images = $this->images ?? [];
+        }
 
         return [
             'id' => $this->id,
@@ -47,7 +52,7 @@ class ProductSimple extends JsonResource
 
             'images' => array_map(function ($item) {
                 return image_resize($item, 400, 400);
-            }, array_merge($this->images ?? [], $masterSku->images ?? [])),
+            }, $images),
         ];
     }
 }
