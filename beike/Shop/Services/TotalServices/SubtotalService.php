@@ -18,8 +18,7 @@ class SubtotalService
 {
     public static function getTotal(TotalService $totalService)
     {
-        $carts = $totalService->cartProducts;
-        $amount = collect($carts)->sum('subtotal');
+        $amount = self::getAmount($totalService);
         $totalData = [
             'code' => 'sub_total',
             'title' => trans('shop/carts.product_total'),
@@ -31,5 +30,11 @@ class SubtotalService
         $totalService->totals[] = $totalData;
 
         return $totalData;
+    }
+
+    public static function getAmount(TotalService $totalService)
+    {
+        $carts = $totalService->cartProducts;
+        return collect($carts)->sum('subtotal');
     }
 }
