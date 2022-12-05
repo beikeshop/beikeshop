@@ -191,7 +191,7 @@ class CheckoutService
             'shipping_methods' => $shipments,
             'payment_methods' => $payments,
             'carts' => $carts,
-            'totals' => $totalService->getTotals(),
+            'totals' => $totalService->getTotals($this),
         ];
 
         return hook_filter('checkout.data', $data);

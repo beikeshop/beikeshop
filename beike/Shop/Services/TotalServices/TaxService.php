@@ -12,13 +12,18 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
+use Beike\Shop\Services\CheckoutService;
 use Beike\Admin\Repositories\TaxRateRepo;
-use Beike\Shop\Services\TotalService;
 
 class TaxService
 {
-    public static function getTotal(TotalService $totalService): ?array
+    /**
+     * @param CheckoutService $checkout
+     * @return array|null
+     */
+    public static function getTotal(CheckoutService $checkout): ?array
     {
+        $totalService = $checkout->totalService;
         $taxEnabled = system_setting('base.tax', false);
         if (!$taxEnabled) {
             return null;

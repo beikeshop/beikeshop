@@ -83,9 +83,10 @@ class TotalService
 
 
     /**
+     * @param CheckoutService $checkout
      * @return array
      */
-    public function getTotals(): array
+    public function getTotals(CheckoutService $checkout): array
     {
         foreach (self::TOTAL_CODES as $code) {
             $serviceName = Str::studly($code) . 'Service';
@@ -93,7 +94,7 @@ class TotalService
             if (!class_exists($service) || !method_exists($service, 'getTotal')) {
                 continue;
             }
-            $service::getTotal($this);
+            $service::getTotal($checkout);
         }
 
         return $this->totals;

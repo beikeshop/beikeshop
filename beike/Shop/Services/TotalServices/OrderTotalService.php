@@ -11,12 +11,17 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
-use Beike\Shop\Services\TotalService;
+use Beike\Shop\Services\CheckoutService;
 
 class OrderTotalService
 {
-    public static function getTotal(TotalService $totalService)
+    /**
+     * @param CheckoutService $checkout
+     * @return array
+     */
+    public static function getTotal(CheckoutService $checkout)
     {
+        $totalService = $checkout->totalService;
         $amount = $totalService->amount;
         $totalData = [
             'code' => 'order_total',

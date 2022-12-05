@@ -12,18 +12,19 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
-use Beike\Shop\Services\TotalService;
 use Illuminate\Support\Str;
+use Beike\Shop\Services\CheckoutService;
 
 class ShippingService
 {
     /**
-     * @param TotalService $totalService
+     * @param CheckoutService $checkout
      * @return array|null
      * @throws \Exception
      */
-    public static function getTotal(TotalService $totalService): ?array
+    public static function getTotal(CheckoutService $checkout): ?array
     {
+        $totalService = $checkout->totalService;
         $shippingMethod = $totalService->shippingMethod;
         if (empty($shippingMethod)) {
             return null;
