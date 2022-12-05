@@ -33,6 +33,7 @@ class Bootstrap
             'name' => $plugin->getName(),
             'description' => $plugin->getDescription(),
             'icon' => plugin_resize($code, $plugin->icon),
+            'cost' => $this->getShippingFee($checkout),
         ];
         return $quotes;
     }
