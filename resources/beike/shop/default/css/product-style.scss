@@ -9,10 +9,10 @@
  */
 
 .product-wrap {
-  margin-bottom: 26px;
+  margin-bottom: 20px;
   text-align: center;
-
-
+  padding-bottom: .7rem;
+  transition: all 0.3s ease-in-out;
 
   .image {
     margin-bottom: 10px;
@@ -21,13 +21,6 @@
     .image-old {
       opacity: 1;
       transition: all ease-out .4s;
-    }
-
-    .image-hover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
     }
 
     .button-wrap {
@@ -46,20 +39,11 @@
         }
       }
     }
-
-    &:hover {
-      .image-hover {
-        opacity: 1;
-        transition: all ease-out .4s;
-      }
-
-      .image-old {
-        opacity: 0;
-      }
-    }
   }
 
   &:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
     .button-wrap {
       bottom: 10px;
       opacity: 1;

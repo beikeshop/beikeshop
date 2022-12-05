@@ -4,9 +4,6 @@
       <div class="image-old">
         <img src="{{ $product['images'][0] ?? image_resize('', 400, 400) }}" class="img-fluid">
       </div>
-      <div class="image-hover">
-        <img src="{{ $product['images'][1] ?? image_resize('', 400, 400) }}" class="img-fluid">
-      </div>
     </a>
     <div class="button-wrap">
       <button
