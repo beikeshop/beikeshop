@@ -35,7 +35,14 @@ class MarketingService
         return new self;
     }
 
-    public function getList($filters = [])
+
+    /**
+     * 获取可插件市场插件列表
+     *
+     * @param array $filters
+     * @return mixed
+     */
+    public function getList(array $filters = []): mixed
     {
         $url = config('beike.api_url') . '/api/plugins';
         if (!empty($filters)) {
@@ -44,9 +51,16 @@ class MarketingService
         return $this->httpClient->get($url)->json();
     }
 
-    public function getPlugin($pluginCode)
+
+    /**
+     * 获取插件市场单个插件信息
+     *
+     * @param $pluginCode
+     * @return mixed
+     */
+    public function getPlugin($pluginCode): mixed
     {
-        $url = config('beike.api_url') . '/api/plugins/' . $pluginCode;
+        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}";
         $plugin = $this->httpClient->get($url)->json();
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件不存在或已下架');
@@ -54,6 +68,35 @@ class MarketingService
         return $plugin;
     }
 
+
+    /**
+     * 购买插件市场单个插件
+     *
+     * @throws \Exception
+     */
+    public function buy($pluginCode, $postData)
+    {
+        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/buy";
+
+        $content = $this->httpClient->withBody($postData, 'application/json')
+            ->post($url)
+            ->json();
+
+        $status = $content['status'] ?? '';
+        if ($status == 'success') {
+            return $content['data'];
+        } else {
+            throw new \Exception($content['message'] ?? '');
+        }
+    }
+
+
+    /**
+     * 下载插件到网站
+     *
+     * @param $pluginCode
+     * @throws \Exception
+     */
     public function download($pluginCode)
     {
         $datetime = date('Y-m-d');
@@ -68,5 +111,4 @@ class MarketingService
         $zipFile = Zip::open($pluginZip);
         $zipFile->extract(base_path('plugins'));
     }
-
 }

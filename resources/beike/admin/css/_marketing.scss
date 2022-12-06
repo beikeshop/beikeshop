@@ -30,4 +30,17 @@ body.page-marketing {
 }
 
 body.page-marketing-info {
+  .radio-group {
+    > .el-radio {
+      height: auto;
+      padding: 8px 15px 8px 10px;
+
+      .el-radio__label {
+        overflow: hidden;
+        > img {
+          max-height: 26px;
+        }
+      }
+    }
+  }
 }

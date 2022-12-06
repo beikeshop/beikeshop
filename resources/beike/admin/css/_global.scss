@@ -325,3 +325,7 @@ body.page-seller-product {
 table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-header {
   font-family: 'Poppins-Medium', sans-serif;
 }
+
+.swal2-confirm:focus {
+  box-shadow: none !important;
+}
