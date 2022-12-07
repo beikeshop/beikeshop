@@ -16,7 +16,7 @@ body.page-product {
   }
 
   .product-image {
-    .swiper {
+    #swiper {
       height: 250px;
       @media (min-width: 480px) {
         height: 400px;
@@ -36,6 +36,14 @@ body.page-product {
             background-color: rgba(255, 255, 255);
           }
         }
+      }
+    }
+
+    #swiper-2 {
+      .swiper-pagination {
+        --swiper-theme-color: #ff6600;/* 设置Swiper风格 */
+        --swiper-navigation-color: #ff6600;/* 单独设置按钮颜色 */
+        --swiper-navigation-size: 30px;/* 设置按钮大小 */
       }
     }
 

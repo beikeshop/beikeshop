@@ -17,26 +17,35 @@
     <div class="row mb-5 mt-3 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-3">
         <div class="product-image d-flex align-items-start">
-
-          <div class="left"  v-if="images.length">
-            <div class="swiper" id="swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
-                  <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
-                    <img :src="image.thumb" class="img-fluid">
-                  </a>
+          @if(!is_mobile())
+            <div class="left"  v-if="images.length">
+              <div class="swiper" id="swiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
+                    <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
+                      <img :src="image.thumb" class="img-fluid">
+                    </a>
+                  </div>
+                </div>
+                <div class="swiper-pager">
+                    <div class="swiper-button-next new-feature-slideshow-next"></div>
+                    <div class="swiper-button-prev new-feature-slideshow-prev"></div>
                 </div>
               </div>
-              <div class="swiper-pager">
-                  <div class="swiper-button-next new-feature-slideshow-next"></div>
-                  <div class="swiper-button-prev new-feature-slideshow-prev"></div>
-              </div>
             </div>
-          </div>
-
-          <div class="right" id="zoom">
-            <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
-          </div>
+            <div class="right" id="zoom">
+              <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+            </div>
+          @else
+            <div class="swiper" id="swiper-2">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="image, index in images">
+                  <img :src="image.preview" class="img-fluid">
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          @endif
         </div>
       </div>
 
@@ -256,13 +265,12 @@
       }
     });
 
-    $(document).on("mouseover", ".product-image .swiper .swiper-slide a", function() {
+    $(document).on("mouseover", ".product-image #swiper .swiper-slide a", function() {
       $(this).parent().addClass('active').siblings().removeClass('active');
       $('#zoom').trigger('zoom.destroy');
       $('#zoom img').attr('src', $(this).attr('data-image'));
       $('#zoom').zoom({url: $(this).attr('data-zoom-image')});
     });
-
     var swiper = new Swiper("#swiper", {
       direction: "vertical",
       slidesPerView: 1,
@@ -289,6 +297,16 @@
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
+      },
+      observer: true,
+      observeParents: true
+    });
+
+    var swiper2 = new Swiper("#swiper-2", {
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
       },
       observer: true,
       observeParents: true
