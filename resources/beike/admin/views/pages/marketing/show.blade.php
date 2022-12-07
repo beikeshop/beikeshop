@@ -17,11 +17,11 @@
   <div class="card mb-4" id="app">
     <div class="card-header"><h6 class="card-title">{{ __('admin/marketing.marketing_show') }}</h6></div>
     <div class="card-body">
-      <div class="d-flex">
+      <div class="d-lg-flex">
         <div class="border wp-400 hp-400 d-flex justify-content-between align-items-center"><img src="{{ $data['icon_big'] }}" class="img-fluid"></div>
-        <div class="ms-5 mt-2">
+        <div class="ms-lg-5 mt-2">
           <h3 class="card-title mb-4">{{ $data['name'] }}</h3>
-          <div class="plugin-item d-flex align-items-center mb-4 lh-1 text-secondary">
+          <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
             <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span class="vr lh-1 bg-secondary"></span>
             <div class="mx-3">{{ __('admin/marketing.last_update') }}：{{ $data['updated_at'] }}</div><span class="vr lh-1 bg-secondary"></span>
             <div class="mx-3">{{ __('admin/marketing.text_version') }}：{{ $data['version'] }}</div>
