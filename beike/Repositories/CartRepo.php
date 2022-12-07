@@ -24,7 +24,7 @@ class CartRepo
      * 创建购物车
      *
      * @param $customer
-     * @return Builder|Model|object|null
+     * @return Cart
      */
     public static function createCart($customer)
     {

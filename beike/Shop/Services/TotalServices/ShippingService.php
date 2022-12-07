@@ -20,7 +20,7 @@ class ShippingService
     /**
      * @param CheckoutService $checkout
      * @return array|null
-     * @throws \Exception
+     * @throws \Exception|\Throwable
      */
     public static function getTotal(CheckoutService $checkout): ?array
     {
@@ -31,9 +31,18 @@ class ShippingService
         }
 
         $methodArray = explode('.', $shippingMethod);
-        $pluginCode = Str::studly($methodArray[0]);
-        $className = "Plugin\\{$pluginCode}\\Bootstrap";
+        $shippingPluginCode = $methodArray[0];
+        $pluginCode = Str::studly($shippingPluginCode);
 
+        $plugin = app('plugin')->getPlugin($shippingPluginCode);
+        if (empty($plugin) || !$plugin->getInstalled() || !$plugin->getEnabled()) {
+            $cart = $checkout->cart;
+            $cart->shipping_method_code = '';
+            $cart->saveOrFail();
+            return [];
+        }
+
+        $className = "Plugin\\{$pluginCode}\\Bootstrap";
         if (!method_exists($className, 'getShippingFee')) {
             throw new \Exception("请在插件 {$className} 实现方法: public function getShippingFee(CheckoutService \$checkout)");
         }
