@@ -2,23 +2,14 @@
 
 @section('title', __('admin/plugin.plugin_list'))
 
+@section('page-title-right')
+  <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
+@endsection
+
 @section('content')
 
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      <div class="d-flex align-items-center justify-content-between">
-        <el-upload
-          class="upload-demo"
-          action=""
-          :limit="1"
-          :show-file-list="false"
-          :http-request="uploadFile"
-          accept=".zip"
-          >
-          <el-button size="small" type="primary">{{ __('admin/plugin.plugin_upload') }}</el-button>
-        </el-upload>
-        <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
-      </div>
       <div class="mt-4 table-push" style="">
         <table class="table">
           <thead>
@@ -85,16 +76,6 @@
           }).catch((res) => {
             this.plugins[index].status = !this.plugins[index].status;
           });
-        },
-
-        uploadFile(file) {
-          let formData = new FormData();
-          formData.append("file", file.file, file.file.name);
-
-          $http.post('plugins/import', formData).then((res) => {
-            layer.msg(res.message)
-            location.reload();
-          })
         },
 
         installedPlugin(code, type, index) {
