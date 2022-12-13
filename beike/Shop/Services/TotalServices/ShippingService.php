@@ -30,8 +30,7 @@ class ShippingService
             return null;
         }
 
-        $methodArray = explode('.', $shippingMethod);
-        $shippingPluginCode = $methodArray[0];
+        $shippingPluginCode = self::parseShippingPluginCode($shippingMethod);
         $pluginCode = Str::studly($shippingPluginCode);
 
         $plugin = app('plugin')->getPlugin($shippingPluginCode);
@@ -58,5 +57,18 @@ class ShippingService
         $totalService->totals[] = $totalData;
 
         return $totalData;
+    }
+
+
+    /**
+     * 通过配送方式获取插件编码
+     *
+     * @param $shippingMethod
+     * @return string
+     */
+    public static function parseShippingPluginCode($shippingMethod): string
+    {
+        $methodArray = explode('.', $shippingMethod);
+        return $methodArray[0];
     }
 }

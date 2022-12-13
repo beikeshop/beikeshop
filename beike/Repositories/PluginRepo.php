@@ -15,6 +15,7 @@ use Beike\Models\Plugin;
 use Beike\Plugin\Plugin as BPlugin;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Collection;
+use Beike\Shop\Services\TotalServices\ShippingService;
 
 class PluginRepo
 {
@@ -180,6 +181,7 @@ class PluginRepo
      */
     public static function shippingEnabled($code): bool
     {
+        $code = ShippingService::parseShippingPluginCode($code);
         $shippingMethods = self::getShippingMethods();
         return $shippingMethods->where('code', $code)->count() > 0;
     }
