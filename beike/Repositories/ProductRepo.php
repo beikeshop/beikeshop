@@ -182,8 +182,7 @@ class ProductRepo
      */
     public static function getName($id)
     {
-        $categories = self::getAllProductsWithName();
-        return $categories[$id]['name'] ?? '';
+        return self::getNameById($id);
     }
 
 
