@@ -100,7 +100,7 @@ class CreateTables extends Migration
         Schema::create('category_paths', function (Blueprint $table) {
             $table->comment('产品分类上下级关系');
             $table->id()->comment('ID');
-            $table->unsignedBigInteger('category_id')->comment('分类 ID')->index('customer_id');
+            $table->unsignedBigInteger('category_id')->comment('分类 ID')->index('category_id');
             $table->unsignedBigInteger('path_id')->comment('分类路径 ID')->index('path_id');
             $table->integer('level')->comment('层级');
             $table->timestamps();
