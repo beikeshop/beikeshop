@@ -128,7 +128,7 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
-        $sort = $data['sort'] ?? 'updated_at';
+        $sort = $data['sort'] ?? 'products.updated_at';
         $order = $data['order'] ?? 'desc';
         $builder->orderBy($sort, $order);
 
