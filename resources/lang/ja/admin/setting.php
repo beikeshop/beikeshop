@@ -16,6 +16,7 @@ return [
     'design_index' => 'ホーム エディター',
     'design_footer_index' => 'フッター エディター',
     'design_menu_index' => 'ナビゲーション エディター',
+    'product_perpage' => '各ページに表示される商品の数',
 
     'basic_settings' => '基本設定',
     'store_settings' => 'ストア設定',

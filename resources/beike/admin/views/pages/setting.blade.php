@@ -69,6 +69,9 @@
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.admin_name_info') }}</div>
             </x-admin-form-input>
 
+            <x-admin-form-input name="product_perpage" title="{{ __('admin/setting.product_perpage') }}" required value="{{ old('product_perpage', system_setting('base.product_perpage', 20)) }}">
+            </x-admin-form-input>
+
             {{-- <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
               <div class="help-text font-size-12 lh-base">主题模板选择</div>
             </x-admin-form-select> --}}
