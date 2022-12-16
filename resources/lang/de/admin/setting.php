@@ -16,7 +16,7 @@ return [
     'design_index' => 'Home-Editor',
     'design_footer_index' => 'Fußzeilen-Editor',
     'design_menu_index' => 'Navigationseditor',
-    'product_perpage' => 'Die Anzahl der auf jeder Seite angezeigten Produkte',
+    'product_per_page' => 'Die Anzahl der auf jeder Seite angezeigten Produkte',
 
     'basic_settings' => 'Grundeinstellungen',
     'store_settings' => 'Store-Einstellungen',

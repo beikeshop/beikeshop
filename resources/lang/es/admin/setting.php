@@ -16,7 +16,7 @@ return [
     'design_index' => 'Editor de inicio',
     'design_footer_index' => 'editor de pie de página',
     'design_menu_index' => 'Editor de navegación',
-    'product_perpage' => 'El número de productos mostrados en cada página',
+    'product_per_page' => 'El número de productos mostrados en cada página',
 
     'basic_settings' => 'configuraciones básicas',
     'store_settings' => 'configuración de la tienda',

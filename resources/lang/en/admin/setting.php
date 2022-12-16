@@ -16,7 +16,7 @@ return [
     'design_index' => 'Design Builder',
     'design_footer_index' => 'Design Footer',
     'design_menu_index' => 'Design Menu',
-    'product_perpage' => 'The number of products displayed on each page',
+    'product_per_page' => 'The Number of Per Page',
 
     'basic_settings' => 'Basic Settings',
     'store_settings' => 'Store Settings',

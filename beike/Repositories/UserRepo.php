@@ -84,7 +84,7 @@ class UserRepo
             $builder->where('admin_users.active', $data['active']);
         }
 
-        return $builder->paginate(20)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 }
 

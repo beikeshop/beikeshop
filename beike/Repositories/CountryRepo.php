@@ -99,7 +99,7 @@ class CountryRepo
             $builder->where('countries.status', $data['status']);
         }
 
-        return $builder->paginate(20)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 
 

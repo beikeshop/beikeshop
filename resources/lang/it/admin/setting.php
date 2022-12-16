@@ -16,7 +16,7 @@ return [
     'design_index' => 'Casa Editore',
     'design_footer_index' => 'editor footer',
     'design_menu_index' => 'Editor di navigazione',
-    'product_perpage' => 'Il numero di prodotti visualizzati su ogni pagina',
+    'product_per_page' => 'Il numero di prodotti visualizzati su ogni pagina',
 
     'basic_settings' => 'impostazioni di base',
     'store_settings' => 'impostazioni negozio',

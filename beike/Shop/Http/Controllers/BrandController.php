@@ -27,7 +27,7 @@ class BrandController extends Controller
                 'description',
                 'inCurrentWishlist'
             ])
-            ->paginate(20);
+            ->paginate(perPage());
 
         $data = [
             'brand' => $brand,

@@ -95,7 +95,7 @@ class BrandRepo
     public static function list($filters): LengthAwarePaginator
     {
         $builder = self::getBuilder($filters);
-        return $builder->paginate(10)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 
 

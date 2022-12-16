@@ -121,7 +121,7 @@ class RmaRepo
         }
         $builder->orderBy('id', 'DESC');
 
-        return $builder->paginate(10)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 
     /**

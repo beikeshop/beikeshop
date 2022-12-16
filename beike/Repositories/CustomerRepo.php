@@ -81,7 +81,7 @@ class CustomerRepo
     public static function list($data): LengthAwarePaginator
     {
         $builder = self::getListBuilder($data);
-        return $builder->paginate(20)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 
 
@@ -170,7 +170,7 @@ class CustomerRepo
         $builder = $customer->wishlists()
             ->whereHas('product');
 
-        return $builder->with('product.description')->paginate(20);
+        return $builder->with('product.description')->paginate(perPage());
     }
 
     /**

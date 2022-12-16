@@ -16,7 +16,7 @@ return [
     'design_index' => '首页编辑器',
     'design_footer_index' => '页尾编辑器',
     'design_menu_index' => '导航编辑器',
-    'product_perpage' => '每页显示商品个数',
+    'product_per_page' => '每页显示数量',
 
     'basic_settings' => '基础设置',
     'store_settings' => '商店设置',

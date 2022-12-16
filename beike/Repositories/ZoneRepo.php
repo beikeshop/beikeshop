@@ -97,7 +97,7 @@ class ZoneRepo
             $builder->where('zones.status', $data['status']);
         }
 
-        return $builder->paginate(20)->withQueryString();
+        return $builder->paginate(perPage())->withQueryString();
     }
 
     /**
