@@ -26,7 +26,7 @@ return [
     'theme_black' => '黑色主題',
     'shipping_address' => '發貨地址',
     'payment_address' => '賬單地址',
-    'meta_tiele' => 'Meta 標題',
+    'meta_title' => 'Meta 標題',
     'meta_description' => 'Meta 描述',
     'meta_keyword' => 'Meta 關鍵詞',
     'telephone' => '聯繫電話',

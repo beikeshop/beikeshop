@@ -45,7 +45,7 @@
               </x-admin::form.row>
 
               <input type="hidden" name="descriptions[{{ $language['code'] }}][locale]" value="{{ $language['code'] }}">
-              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_tiele') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
+              <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_title') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="{{ __('admin/setting.meta_description') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
               <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keyword]" title="{{ __('admin/setting.meta_keyword') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_keyword', $descriptions[$language['code']]['meta_keyword'] ?? '') }}" />
             </div>

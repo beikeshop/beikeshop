@@ -27,7 +27,7 @@ return [
     'shipping_address' => 'Shipping Address',
     'payment_address' => 'Billing Address',
 
-    'meta_tiele' => 'Meta Title',
+    'meta_title' => 'Meta Title',
     'meta_description' => 'Meta Description',
     'meta_keyword' => 'Meta Keyword',
     'telephone' => 'Contact Phone',

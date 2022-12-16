@@ -26,7 +26,7 @@ return [
     'theme_black' => 'tema nero',
     'shipping_address' => 'indirizzo di spedizione',
     'payment_address' => 'indirizzo di fatturazione',
-    'meta_tiele' => 'Meta titolo',
+    'meta_title' => 'Meta titolo',
     'meta_description' => 'Meta descrizione',
     'meta_keyword' => 'Meta parola chiave',
     'telephone' => 'Contatta telefono',
