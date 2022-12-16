@@ -16,6 +16,7 @@ return [
     'design_index' => 'Домашний редактор',
     'design_footer_index' => 'Редактор нижнего колонтитула',
     'design_menu_index' => 'Редактор навигации',
+    'product_perpage' => 'Количество товаров, отображаемых на каждой странице',
 
     'basic_settings' => 'Базовые настройки',
     'store_settings' => 'Настройки магазина',
