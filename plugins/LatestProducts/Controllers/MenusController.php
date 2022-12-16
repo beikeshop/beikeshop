@@ -31,7 +31,7 @@ class MenusController extends Controller
         $products = ProductRepo::getBuilder(['active' => 1])
             ->whereHas('master_sku')
             ->with('inCurrentWishlist')
-            ->paginate(40);
+            ->paginate(perPage());
 
         $data = [
             'products' => $products,

@@ -48,7 +48,7 @@ class ProductRepo
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
         $builder = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
-        $products = $builder->with('inCurrentWishlist')->paginate(20);
+        $products = $builder->with('inCurrentWishlist')->paginate(perPage());
         return ProductSimple::collection($products);
     }
 
@@ -138,7 +138,7 @@ class ProductRepo
 
     public static function list($data = [])
     {
-        return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
+        return self::getBuilder($data)->paginate($data['per_page'] ?? perPage());
     }
 
     public static function autocomplete($name)

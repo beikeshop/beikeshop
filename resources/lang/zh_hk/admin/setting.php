@@ -16,7 +16,7 @@ return [
     'design_index' => '首頁編輯器',
     'design_footer_index' => '頁尾編輯器',
     'design_menu_index' => '導航編輯器',
-    'product_perpage' => '每頁顯示商品個數',
+    'product_per_page' => '每頁顯示商品個數',
 
     'basic_settings' => '基礎設置',
     'store_settings' => '商店設置',

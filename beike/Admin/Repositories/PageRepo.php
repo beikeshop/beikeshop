@@ -28,7 +28,7 @@ class PageRepo
             'description'
         ])->orderByDesc('updated_at');
 
-        return $builder->paginate();
+        return $builder->paginate(perPage());
     }
 
 

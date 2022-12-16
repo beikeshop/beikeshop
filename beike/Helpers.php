@@ -542,7 +542,7 @@ if (!function_exists('sub_string')) {
  * @param mixed $builder
  * @return string|string[]|null
  */
-function to_sql($builder)
+function to_sql($builder): array|string|null
 {
     $sql = $builder->toSql();
     foreach ($builder->getBindings() as $binding) {
@@ -575,7 +575,7 @@ function create_directories($directoryPath)
  * @param $hookValue
  * @return mixed
  */
-function hook_filter($hookKey, $hookValue)
+function hook_filter($hookKey, $hookValue): mixed
 {
     return Eventy::filter($hookKey, $hookValue);
 }
@@ -587,7 +587,7 @@ function hook_filter($hookKey, $hookValue)
  * @param $hookValue
  * @return mixed
  */
-function hook_action($hookKey, $hookValue)
+function hook_action($hookKey, $hookValue): mixed
 {
     Eventy::action($hookKey, $hookValue);
 }
@@ -624,7 +624,7 @@ function add_action($hook, $callback, int $priority = 20, int $arguments = 1)
  *
  * @return bool
  */
-function installed()
+function installed(): bool
 {
     return file_exists(storage_path('installed'));
 }
@@ -634,7 +634,7 @@ function installed()
  *
  * @return bool
  */
-function is_mobile()
+function is_mobile(): bool
 {
     return (new \Jenssegers\Agent\Agent())->isMobile();
 }
@@ -645,7 +645,7 @@ function is_mobile()
  *
  * @return bool
  */
-function is_secure()
+function is_secure(): bool
 {
     if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
         return true;
@@ -659,4 +659,15 @@ function is_secure()
         return true;
     }
     return false;
+}
+
+
+/**
+ * 每页商品显示数量
+ *
+ * @return int
+ */
+function perPage(): int
+{
+    return (int)system_setting('base.product_per_page', 20);
 }
