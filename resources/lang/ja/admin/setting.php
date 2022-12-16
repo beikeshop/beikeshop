@@ -26,7 +26,7 @@ return [
     'theme_black' => '黒のテーマ',
     'shipping_address' => '配送先住所',
     'payment_address' => '請求先住所',
-    'meta_tiele' => 'メタタイトル',
+    'meta_title' => 'メタタイトル',
     'meta_description' => 'メタディスクリプション',
     'meta_keyword' => 'メタキーワード',
     'telephone' => '連絡先電話',

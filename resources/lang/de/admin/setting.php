@@ -26,7 +26,7 @@ return [
     'theme_black' => 'schwarzes Thema',
     'shipping_address' => 'Lieferadresse',
     'payment_address' => 'Rechnungsadresse',
-    'meta_tiele' => 'Metatitel',
+    'meta_title' => 'Metatitel',
     'meta_description' => 'Meta-Beschreibung',
     'meta_keyword' => 'Meta-Schlüsselwort',
     'telephone' => 'Telefon kontaktieren',

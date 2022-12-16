@@ -26,7 +26,7 @@ return [
     'theme_black' => 'черная тема',
     'shipping_address' => 'адресс доставки',
     'payment_address' => 'Адрес для выставления счета',
-    'meta_tiele' => 'Мета-заголовок',
+    'meta_title' => 'Мета-заголовок',
     'meta_description' => 'Мета-описание',
     'meta_keyword' => 'Мета-ключевые слова',
     'telephone' => 'Контактный номер',
