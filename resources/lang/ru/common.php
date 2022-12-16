@@ -65,6 +65,7 @@ return [
     'sign_out' => 'Выйти',
     'menu' => 'меню',
     'whether_open' => 'открывать ли',
+    'to_setting' => 'настроить',
 
     'id' => 'ID',
     'created_at' => 'время создания',

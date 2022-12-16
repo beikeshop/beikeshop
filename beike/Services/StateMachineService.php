@@ -14,6 +14,7 @@ namespace Beike\Services;
 use Throwable;
 use Beike\Models\Order;
 use Beike\Models\OrderHistory;
+use Beike\Models\OrderShipment;
 
 class StateMachineService
 {
@@ -21,6 +22,7 @@ class StateMachineService
     private int $orderId;
     private string $comment;
     private bool $notify;
+    private array $shipment;
 
     const CREATED = 'created';                  // 已创建
     const UNPAID = 'unpaid';                    // 待支付
@@ -48,7 +50,7 @@ class StateMachineService
         ],
         self::PAID => [
             self::CANCELLED => ['updateStatus', 'addHistory'],
-            self::SHIPPED => ['updateStatus', 'addHistory'],
+            self::SHIPPED => ['updateStatus', 'addHistory', 'addShipment'],
             self::COMPLETED => ['updateStatus', 'addHistory']
         ],
         self::SHIPPED => [
@@ -86,6 +88,18 @@ class StateMachineService
     public function setNotify($flag): self
     {
         $this->notify = (bool)$flag;
+        return $this;
+    }
+
+    /**
+     * 设置发货信息
+     *
+     * @param array $shipment
+     * @return $this
+     */
+    public function setShipment(array $shipment = []): self
+    {
+        $this->shipment = $shipment;
         return $this;
     }
 
@@ -250,6 +264,27 @@ class StateMachineService
                 continue;
             }
             $productSku->decrement('quantity', $orderProduct->quantity);
+        }
+    }
+
+
+    /**
+     * 添加发货单号
+     */
+    private function addShipment($oldCode, $newCode)
+    {
+        $shipment = $this->shipment;
+        $expressCode = $shipment['express_code'] ?? '';
+        $expressCompany = $shipment['express_company'] ?? '';
+        $expressNumber = $shipment['express_number'] ?? '';
+        if ($expressCode && $expressCompany && $expressNumber) {
+            $orderShipment = new OrderShipment([
+                'order_id' => $this->orderId,
+                'express_code' => $expressCode,
+                'express_company' => $expressCompany,
+                'express_number' => $expressNumber,
+            ]);
+            $orderShipment->saveOrFail();
         }
     }
 

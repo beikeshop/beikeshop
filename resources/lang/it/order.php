@@ -21,6 +21,9 @@ return [
     'status' => 'stato',
     'status_format' => 'stato',
     'total' => 'ordine totale',
+    'express_number' => 'numero ordine espresso',
+    'express_company' => 'azienda espressa',
+    'order_shipments' => 'informazioni sulla spedizione',
 
     'address_info' => 'Informazioni sull\'indirizzo',
     'shipping_address' => 'indirizzo di consegna',

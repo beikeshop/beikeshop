@@ -25,7 +25,6 @@
             </div>
           </div>
           <div class="card-body">
-
             <div class="bg-light p-2 table-responsive">
               <table class="table table-borderless mb-0">
                 <thead>
@@ -50,7 +49,47 @@
             </div>
           </div>
         </div>
-
+        <div class="card mb-4">
+          <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
+          <div class="card-body">
+            <table class="table ">
+              <thead class="">
+                <tr>
+                  <th>{{ __('order.shipping_address') }}</th>
+                  <th>{{ __('order.payment_address') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div>{{ __('address.name') }}：{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
+                    <div>
+                      {{ __('address.address') }}：
+                      {{ $order->shipping_address_1 }}
+                      {{ $order->shipping_address_2 }}
+                      {{ $order->shipping_city }}
+                      {{ $order->shipping_zone }}
+                      {{ $order->shipping_country }}
+                    </div>
+                    <div>{{ __('address.post_code') }}：{{ $order->shipping_zipcode }}</div>
+                  </td>
+                  <td>
+                    <div>{{ __('address.name') }}：{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
+                    <div>
+                      {{ __('address.address') }}：
+                      {{ $order->payment_address_1 }}
+                      {{ $order->payment_address_2 }}
+                      {{ $order->payment_city }}
+                      {{ $order->payment_zone }}
+                      {{ $order->payment_country }}
+                    </div>
+                    <div>{{ __('address.post_code') }}：{{ $order->payment_zipcode }}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="card mb-4">
           <div class="card-header">
             <h6 class="card-title">{{ __('shop/account.order.order_info.order_items') }}</h6>
@@ -107,6 +146,34 @@
             </div>
             <div class="card-body">
 
+            </div>
+          </div>
+        @endif
+
+        @if ($order->orderShipments)
+          <div class="card mb-4">
+            <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
+            <div class="card-body">
+              <div class="table-push">
+                <table class="table ">
+                  <thead class="">
+                    <tr>
+                      <th>{{ __('order.express_company') }}</th>
+                      <th>{{ __('order.express_number') }}</th>
+                      <th>{{ __('order.history_created_at') }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($order->orderShipments as $ship)
+                    <tr>
+                      <td>{{ $ship->express_company }}</td>
+                      <td>{{ $ship->express_number }}</td>
+                      <td>{{ $ship->created_at }}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         @endif

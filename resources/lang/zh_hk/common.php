@@ -65,6 +65,7 @@ return [
     'sign_out' => '退出登錄',
     'menu' => '菜單',
     'whether_open' => '是否開啟',
+    'to_setting' => '去配置',
 
     'id' => 'ID',
     'created_at' => '創建時間',

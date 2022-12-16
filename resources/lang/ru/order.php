@@ -21,6 +21,9 @@ return [
     'status' => 'государство',
     'status_format' => 'государство',
     'total' => 'общий заказ',
+    'express_number' => 'номер экспресс-заказа',
+    'express_company' => 'экспресс-компания',
+    'order_shipments' => 'информация об отправке',
 
     'address_info' => 'информация об адресе',
     'shipping_address' => 'адрес доставки',

@@ -215,6 +215,7 @@ class OrderRepo
             'shipping_city' => $shippingAddress->city,
             'shipping_address_1' => $shippingAddress->address_1,
             'shipping_address_2' => $shippingAddress->address_2,
+            'shipping_zipcode' => $shippingAddress->zipcode,
             'payment_method_code' => $paymentMethodCode,
             'payment_method_name' => trans($paymentMethodCode),
             'payment_customer_name' => $paymentAddress->name,
@@ -225,6 +226,7 @@ class OrderRepo
             'payment_city' => $paymentAddress->city,
             'payment_address_1' => $paymentAddress->address_1,
             'payment_address_2' => $paymentAddress->address_2,
+            'payment_zipcode' => $paymentAddress->zipcode,
         ]);
         $order->saveOrFail();
 

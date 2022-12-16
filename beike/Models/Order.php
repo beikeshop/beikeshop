@@ -20,9 +20,9 @@ class Order extends Base
         'email', 'calling_code', 'telephone', 'total', 'locale', 'currency_code', 'currency_value', 'ip', 'user_agent',
         'status', 'shipping_method_code', 'shipping_method_name', 'shipping_customer_name', 'shipping_calling_code',
         'shipping_telephone', 'shipping_country', 'shipping_zone', 'shipping_city', 'shipping_address_1',
-        'shipping_address_2', 'payment_method_code', 'payment_method_name', 'payment_customer_name',
+        'shipping_zipcode', 'shipping_address_2', 'payment_method_code', 'payment_method_name', 'payment_customer_name',
         'payment_calling_code', 'payment_telephone', 'payment_country', 'payment_zone', 'payment_city',
-        'payment_address_1', 'payment_address_2',
+        'payment_address_1', 'payment_address_2', 'payment_zipcode',
     ];
 
     protected $appends = ['status_format', 'total_format'];
@@ -40,6 +40,11 @@ class Order extends Base
     public function orderHistories(): HasMany
     {
         return $this->hasMany(OrderHistory::class);
+    }
+
+    public function orderShipments(): HasMany
+    {
+        return $this->hasMany(OrderShipment::class);
     }
 
     public function getStatusFormatAttribute()

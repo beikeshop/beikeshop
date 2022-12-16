@@ -21,6 +21,9 @@ return [
     'status' => '州',
     'status_format' => '州',
     'total' => '合計注文',
+    'express_number' => 'エクスプレス注文番号',
+    'express_company' => '運送会社',
+    'order_shipments' => '出荷情報',
 
     'address_info' => '住所情報',
     'shipping_address' => '配送先住所',

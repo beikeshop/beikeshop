@@ -60,18 +60,28 @@
         <tbody>
           <tr>
             <td>
-              <div>{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
-              {{ $order->shipping_country }}
-              {{ $order->shipping_zone }}
-              {{ $order->shipping_city }}
-              {{ $order->shipping_address_1 }}
+              <div>{{ __('address.name') }}：{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
+              <div>
+                {{ __('address.address') }}：
+                {{ $order->shipping_address_1 }}
+                {{ $order->shipping_address_2 }}
+                {{ $order->shipping_city }}
+                {{ $order->shipping_zone }}
+                {{ $order->shipping_country }}
+              </div>
+              <div>{{ __('address.post_code') }}：{{ $order->shipping_zipcode }}</div>
             </td>
             <td>
-              <div>{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
-              {{ $order->payment_country }}
-              {{ $order->payment_zone }}
-              {{ $order->payment_city }}
-              {{ $order->payment_address_1 }}
+              <div>{{ __('address.name') }}：{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
+              <div>
+                {{ __('address.address') }}：
+                {{ $order->payment_address_1 }}
+                {{ $order->payment_address_2 }}
+                {{ $order->payment_city }}
+                {{ $order->payment_zone }}
+                {{ $order->payment_country }}
+              </div>
+              <div>{{ __('address.post_code') }}：{{ $order->payment_zipcode }}</div>
             </td>
           </tr>
         </tbody>
@@ -89,7 +99,7 @@
         </el-form-item>
         @if ($order->status != 'completed')
           <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
-            <el-select size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
+            <el-select class="wp-200" size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
               <el-option
                 v-for="item in statuses"
                 :key="item.status"
@@ -98,10 +108,20 @@
               </el-option>
             </el-select>
           </el-form-item>
-          {{-- <el-form-item label="通知客户">
-            <el-switch v-model="form.notify">
-            </el-switch>
-          </el-form-item> --}}
+          <el-form-item label="{{ __('order.express_company') }}" v-if="form.status == 'shipped'" prop="express_company">
+            <el-select class="wp-200" size="small" v-model="form.express_code" placeholder="{{ __('common.please_choose') }}">
+              <el-option
+                v-for="item in source.express_company"
+                :key="item.code"
+                :label="item.name"
+                :value="item.code">
+              </el-option>
+            </el-select>
+            <a href="{{ admin_route('settings.index') }}?tab=tab-express-company" target="_blank" class="ms-2">{{ __('common.to_setting') }}</a>
+          </el-form-item>
+          <el-form-item label="{{ __('order.express_number') }}" v-if="form.status == 'shipped'" prop="express_number">
+            <el-input class="w-max-500" v-model="form.express_number" size="small" v-if="form.status == 'shipped'" placeholder="{{ __('order.express_number') }}"></el-input>
+          </el-form-item>
           <el-form-item label="{{ __('order.comment') }}">
             <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
           </el-form-item>
@@ -158,6 +178,34 @@
     </div>
   </div>
 
+  @if ($order->orderShipments)
+    <div class="card mb-4">
+      <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
+      <div class="card-body">
+        <div class="table-push">
+          <table class="table ">
+            <thead class="">
+              <tr>
+                <th>{{ __('order.express_company') }}</th>
+                <th>{{ __('order.express_number') }}</th>
+                <th>{{ __('order.history_created_at') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($order->orderShipments as $ship)
+              <tr>
+                <td>{{ $ship->express_company }}</td>
+                <td>{{ $ship->express_number }}</td>
+                <td>{{ $ship->created_at }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  @endif
+
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.action_history') }}</h6></div>
     <div class="card-body">
@@ -174,8 +222,8 @@
             @foreach ($order->orderHistories as $orderHistory)
               <tr>
                 <td>{{ $orderHistory->status_format }}</td>
-                <td><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
-                <td><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
+                <td>{{ $orderHistory->comment }}</td>
+                <td>{{ $orderHistory->created_at }}</td>
               </tr>
             @endforeach
           </tbody>
@@ -196,12 +244,20 @@
         statuses: @json($statuses ?? []),
         form: {
           status: "",
+          express_number: '',
+          express_code: '',
           notify: false,
           comment: '',
         },
 
+        source: {
+          express_company: @json(system_setting('base.express_company', [])),
+        },
+
         rules: {
           status: [{required: true, message: '{{ __('admin/order.error_status') }}', trigger: 'blur'}, ],
+          express_code: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_company')]) }}',trigger: 'blur'}, ],
+          express_number: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_number')]) }}',trigger: 'blur'}, ],
         }
       },
 

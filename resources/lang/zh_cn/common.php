@@ -66,6 +66,7 @@ return [
     'menu' => '菜单',
     'whether_open' => '是否开启',
     'default' => '默认',
+    'to_setting' => '去配置',
 
     'id' => 'ID',
     'created_at' => '创建时间',

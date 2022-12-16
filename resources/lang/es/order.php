@@ -21,6 +21,9 @@ return [
     'status' => 'estado',
     'status_format' => 'estado',
     'total' => 'orden total',
+    'express_number' => 'número de pedido urgente',
+    'express_company' => 'compañía exprés',
+    'order_shipments' => 'información del envío',
 
     'address_info' => 'Datos del Domicilio',
     'shipping_address' => 'dirección de entrega',

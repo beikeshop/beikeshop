@@ -21,6 +21,9 @@ return [
     'status' => 'Etat',
     'status_format' => 'Etat',
     'total' => 'commande totale',
+    'express_number' => 'numéro de commande express',
+    'express_company' => 'entreprise de messagerie',
+    'order_shipments' => 'informations sur l\'expédition',
 
     'address_info' => 'Informations d\'adresse',
     'shipping_address' => 'adresse de livraison',

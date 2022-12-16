@@ -21,6 +21,9 @@ return [
     'status' => '狀態',
     'status_format' => '狀態',
     'total' => '訂單總額',
+    'express_number' => '快遞單號',
+    'express_company' => '快遞公司',
+    'order_shipments' => '發貨信息',
 
     'address_info' => '地址信息',
     'shipping_address' => '配送地址',

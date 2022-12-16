@@ -26,7 +26,7 @@
   {{-- <x-analytics /> --}}
 </head>
 
-<body class="@yield('body-class')">
+<body class="@yield('body-class') {{ locale() }}">
   <x-admin-header />
 
   <div class="main-content">

@@ -21,6 +21,10 @@ return [
     'status' => '状态',
     'status_format' => '状态',
     'total' => '订单总额',
+    'express_number' => '快递单号',
+    'express_company' => '快递公司',
+
+    'order_shipments' => '发货信息',
 
     'address_info' => '地址信息',
     'shipping_address' => '配送地址',

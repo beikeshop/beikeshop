@@ -65,6 +65,7 @@ return [
     'sign_out' => 'desconectar',
     'menu' => 'menú',
     'whether_open' => 'Ya sea para abrir',
+    'to_setting' => 'para configurar',
 
     'id' => 'ID',
     'created_at' => 'tiempo de creación',

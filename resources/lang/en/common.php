@@ -66,6 +66,7 @@ return [
     'menu' => 'Menu',
     'whether_open' => 'Status',
     'default' => 'Default',
+    'to_setting' => 'to configure',
 
     'id' => 'ID',
     'created_at' => 'Created At',

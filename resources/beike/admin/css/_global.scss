@@ -336,6 +336,28 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
 }
 
 
+// 处理 el-form 表单在非中文情况下的 显示问题
+@media (min-width: 768px) {
+  body:not(.zh_cn) {
+    .el-form-item {
+      display: flex;
+      align-items: center;
+
+      .el-form-item__label {
+        line-height: 1.3;
+        font-size: 13px;
+        & + .el-form-item__content {
+          margin-left: 0 !important;
+        }
+      }
+
+      .el-form-item__content {
+        flex: 1;
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .wp-200.text-end {
     text-align: left !important;

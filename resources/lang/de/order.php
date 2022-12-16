@@ -21,6 +21,9 @@ return [
     'status' => 'Status',
     'status_format' => 'status',
     'total' => 'Bestellsumme',
+    'express_number' => 'Express-Bestellnummer',
+    'express_company' => 'express company',
+    'order_shipments' => 'Sendungsinformationen',
 
     'address_info' => 'Adressinformationen',
     'shipping_address' => 'Lieferadresse',

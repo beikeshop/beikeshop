@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Order;
+use Beike\Services\ShipmentService;
 use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
@@ -67,7 +68,7 @@ class OrderController extends Controller
      */
     public function show(Request $request, Order $order)
     {
-        $order->load(['orderTotals', 'orderHistories']);
+        $order->load(['orderTotals', 'orderHistories', 'orderShipments']);
         $data = [
             'order' => $order,
             'statuses' => StateMachineService::getInstance($order)->nextBackendStatuses()
@@ -89,8 +90,11 @@ class OrderController extends Controller
         $status = $request->get('status');
         $comment = $request->get('comment');
         $notify = $request->get('notify');
+
+        $shipment = ShipmentService::handleShipment(\request('express_code'), \request('express_number'));
+
         $stateMachine = new StateMachineService($order);
-        $stateMachine->changeStatus($status, $comment, $notify);
+        $stateMachine->setShipment($shipment)->changeStatus($status, $comment, $notify);
         return json_success(trans('common.updated_success'));
     }
 }

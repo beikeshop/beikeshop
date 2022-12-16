@@ -20,6 +20,6 @@ return [
     'address_2' => 'Address 2',
     'address' => 'Address',
     'enter_city' => 'Enter city',
-    'post_code' => 'Post Code',
+    'post_code' => 'Zip Code',
     'default' => 'Default',
 ];

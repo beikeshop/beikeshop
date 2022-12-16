@@ -65,6 +65,7 @@ return [
     'sign_out' => 'Abmelden',
     'menu' => 'Menü',
     'whether_open' => 'ob öffnen',
+    'to_setting' => 'zu konfigurieren',
 
     'id' => 'ID',
     'created_at' => 'Erstellungszeit',

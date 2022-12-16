@@ -21,6 +21,9 @@ return [
     'status' => 'Status',
     'status_format' => 'Status',
     'total' => 'Total',
+    'express_number' => 'Express Number',
+    'express_company' => 'Express Company',
+    'order_shipments' => 'shipment information',
 
     'address_info' => 'Address Information',
     'shipping_address' => 'Shipping Address',

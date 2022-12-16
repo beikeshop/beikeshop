@@ -65,6 +65,7 @@ return [
     'sign_out' => 'サインアウト',
     'menu' => 'メニュー',
     'whether_open' => '開くかどうか',
+    'to_setting' => '設定する',
 
     'id' => 'ID',
     'created_at' => '作成時間',
