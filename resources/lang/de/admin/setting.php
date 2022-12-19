@@ -48,4 +48,6 @@ return [
     'favicon_info' => 'Das kleine Symbol, das auf dem Browser-Tab angezeigt wird, muss im PNG-Format vorliegen und die Größe beträgt: 32*32',
     'placeholder_image' => 'Platzhalterbild',
     'placeholder_image_info' => 'Das Platzhalterbild wird angezeigt, wenn kein Bild vorhanden ist oder das Bild nicht gefunden wird, empfohlene Größe: 500*500',
+    'head_code' => 'Code einfügen',
+    'head_code_info' => 'Der Code im Eingabefeld wird in den Kopf der Frontend-Seite eingefügt, die zum Zählen des Codes oder zum Hinzufügen spezieller Plug-Ins usw. verwendet werden kann',
 ];

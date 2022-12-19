@@ -20,6 +20,9 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-image">{{ __('admin/setting.picture_settings') }}</a>
           </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-code">{{ __('admin/setting.head_code') }}</a>
+          </li>
         </ul>
 
         <div class="tab-content">
@@ -98,8 +101,13 @@
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.placeholder_image_info') }}</div>
             </x-admin-form-image>
           </div>
-        </div>
 
+          <div class="tab-pane fade" id="tab-code">
+            <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
+            </x-admin-form-textarea>
+          </div>
+        </div>
 
         <x-admin::form.row title="">
           <button type="submit" class="btn btn-primary mt-4">{{ __('common.submit') }}</button>

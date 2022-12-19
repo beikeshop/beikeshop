@@ -48,4 +48,6 @@ return [
     'favicon_info' => 'La petite icône affichée sur l\'onglet du navigateur doit être au format PNG et la taille est : 32*32',
     'placeholder_image' => 'image d\'espace réservé',
     'placeholder_image_info' => 'L\'image d\'espace réservé s\'affiche lorsqu\'il n\'y a pas d\'image ou si l\'image n\'est pas trouvée, taille recommandée: 500*500',
+    'head_code' => 'insérer le code',
+    'head_code_info' => 'Le code dans la zone de saisie sera inséré dans l\'en-tête de la page frontale, qui peut être utilisé pour compter le code ou ajouter des plug-ins spéciaux, etc',
 ];

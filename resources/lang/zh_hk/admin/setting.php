@@ -48,4 +48,6 @@ return [
     'favicon_info' => '顯示在瀏覽器選項卡上的小圖標，必須為PNG格式大小為：32*32',
     'placeholder_image' => '佔位圖',
     'placeholder_image_info' => '無圖片或圖片未找到時顯示的佔位圖，建議尺寸：500*500',
+    'head_code' => '插入代碼',
+    'head_code_info' => '會將輸入框中的代碼插入到前端頁面 head 中，可用於統計代碼或者添加特殊插件等',
 ];

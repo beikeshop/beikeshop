@@ -48,4 +48,6 @@ return [
     'favicon_info' => 'La piccola icona visualizzata sulle schede del browser, deve essere in formato PNG dimensione: 32*32',
     'placeholder_image' => 'mappa segnaposto',
     'placeholder_image_info' => 'Immagine segnaposto visualizzata quando non viene trovata alcuna immagine o immagine, dimensione consigliata: 500*500',
+    'head_code' => 'inserisci codice',
+    'head_code_info' => 'Il codice nella casella di input verrà inserito nell\'intestazione della pagina front-end, che può essere utilizzata per contare il codice o aggiungere plug-in speciali, ecc.',
 ];
