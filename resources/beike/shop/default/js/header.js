@@ -74,4 +74,19 @@ $(function () {
     $('.offcanvas-right-cart-count').text(res.data.quantity);
     $('.offcanvas-right-cart-amount').text(res.data.amount_format);
   }
+
+  // 导航菜单防止小屏幕下(非手机端)，配置列数过多 显示错误
+  $('.menu-wrap > ul > li').each(function(index, el) {
+    if ($(el).children('.dropdown-menu').length) {
+      const offsetLeft = $(el).children('.dropdown-menu').offset().left;
+      const width = $(el).children('.dropdown-menu').width();
+      const windowWidth = $(window).width();
+
+      if (offsetLeft < 0) {
+        $(el).addClass('position-static')
+        .children('.dropdown-menu')
+        .css({'left': (windowWidth - width) / 2, 'transform': 'translate(0, 0.5rem)'});
+      }
+    }
+  });
 });
