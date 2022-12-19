@@ -20,9 +20,6 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-image">{{ __('admin/setting.picture_settings') }}</a>
           </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" href="#tab-code">{{ __('admin/setting.head_code') }}</a>
-          </li>
         </ul>
 
         <div class="tab-content">
@@ -86,6 +83,10 @@
             <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.tax_address_info') }}</div>
             </x-admin-form-select>
+
+            <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
+            </x-admin-form-textarea>
           </div>
 
           <div class="tab-pane fade" id="tab-image">
@@ -100,12 +101,6 @@
             <x-admin-form-image name="placeholder" title="{{ __('admin/setting.placeholder_image') }}" :value="old('placeholder', system_setting('base.placeholder', ''))">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.placeholder_image_info') }}</div>
             </x-admin-form-image>
-          </div>
-
-          <div class="tab-pane fade" id="tab-code">
-            <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
-            </x-admin-form-textarea>
           </div>
         </div>
 
