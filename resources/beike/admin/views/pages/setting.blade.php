@@ -83,6 +83,10 @@
             <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.tax_address_info') }}</div>
             </x-admin-form-select>
+
+            <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
+            </x-admin-form-textarea>
           </div>
 
           <div class="tab-pane fade" id="tab-image">
@@ -99,7 +103,6 @@
             </x-admin-form-image>
           </div>
         </div>
-
 
         <x-admin::form.row title="">
           <button type="submit" class="btn btn-primary mt-4">{{ __('common.submit') }}</button>

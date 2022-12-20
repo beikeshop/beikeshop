@@ -16,6 +16,9 @@
   <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/build/beike/shop/default/js/app.js') }}"></script>
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/app.css') }}">
+  @if (system_setting('base.head_code'))
+    {!! system_setting('base.head_code') !!}
+  @endif
   @stack('header')
 </head>
 <body class="@yield('body-class')">
