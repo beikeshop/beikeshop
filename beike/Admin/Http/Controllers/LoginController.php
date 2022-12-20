@@ -19,17 +19,14 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator =Validator::make($request->all(),[
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
-        $credentials = $request->only('email', 'password');
-
-        if (auth(AdminUser::AUTH_GUARD)->attempt($credentials)) {
+        if (auth(AdminUser::AUTH_GUARD)->attempt($validator->validated())) {
             return redirect(admin_route('home.index'));
         }
 
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        return redirect()->back()->with(['error' => 'Invalid credentials'])->withInput();
     }
 }
