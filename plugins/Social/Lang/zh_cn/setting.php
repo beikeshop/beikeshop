@@ -14,7 +14,7 @@ return [
     'text_module'         => '模块',
     'text_success'        => '成功: 您成功修改第三方登录配置!',
     'text_copyright'      => 'OpenCart.cn <a href="http://www.opencart.cn" target="_blank">获取帮助</a> &copy; %s',
-    'text_omni_explain'      => '本模块支持微信扫码, 微信公众号, QQ, 微博，Facebook，Google，Twitter等第三方登录',
+    'text_omni_explain'      => '本模块支持微Facebook, Twitter, Google等第三方登录',
     'text_omni_explain_2'      => '要使用第三方登录, 需要到对应平台申请开通, 并把获取到的 ID 和密钥填写到上面对应的输入框',
     'text_wechat_title'      => '微信扫码登录申请地址',
     'text_wechat_info'      => '微信开放平台',
@@ -24,7 +24,7 @@ return [
     'text_weibo_info'      => '微博开放平台',
     'text_facebook_title'      => 'Facebook登录申请地址',
     'text_google_title'      => 'Google登录申请地址',
-    'text_Twitter_title'      => 'Twitter登录申请地址',
+    'text_twitter_title'      => 'Twitter登录申请地址',
     'text_help_msg'            => '帮助信息',
 
 // Entry

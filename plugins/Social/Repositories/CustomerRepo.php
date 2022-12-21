@@ -12,13 +12,11 @@
 namespace Plugin\Social\Repositories;
 
 use Beike\Models\Customer;
-use Overtrue\Socialite\User;
-use Overtrue\Socialite\Providers;
+use Laravel\Socialite\Two\User;
 use Beike\Shop\Services\AccountService;
 use Illuminate\Database\Eloquent\Model;
 use Plugin\Social\Models\CustomerSocial;
 use Illuminate\Database\Eloquent\Builder;
-use Overtrue\Socialite\Exceptions\Exception;
 
 class CustomerRepo
 {
@@ -26,28 +24,9 @@ class CustomerRepo
      * 允许的第三方服务
      */
     private const PROVIDERS = [
-        Providers\Alipay::NAME,
-        Providers\Azure::NAME,
-        Providers\DingTalk::NAME,
-        Providers\DouYin::NAME,
-        Providers\Douban::NAME,
-        Providers\Facebook::NAME,
-        Providers\FeiShu::NAME,
-        // Providers\Figma::NAME,
-        // Providers\GitHub::NAME,
-        // Providers\Gitee::NAME,
-        Providers\Google::NAME,
-        Providers\Line::NAME,
-        Providers\Linkedin::NAME,
-        // Providers\OpenWeWork::NAME,
-        Providers\Outlook::NAME,
-        // Providers\QCloud::NAME,
-        Providers\QQ::NAME,
-        // Providers\Taobao::NAME,
-        // Providers\Tapd::NAME,
-        Providers\WeChat::NAME,
-        // Providers\WeWork::NAME,
-        Providers\Weibo::NAME,
+        'facebook',
+        'twitter',
+        'google',
     ];
 
     public static function allProviders(): array
@@ -68,7 +47,6 @@ class CustomerRepo
      * @param $provider
      * @param User $userData
      * @return Customer
-     * @throws Exception
      */
     public static function createCustomer($provider, User $userData): Customer
     {
@@ -84,7 +62,7 @@ class CustomerRepo
             $customerData = [
                 'from' => $provider,
                 'email' => $userData->getEmail(),
-                'name' => $userData->getNickname(),
+                'name' => $userData->getName(),
                 'avatar' => $userData->getAvatar(),
             ];
             $customer = AccountService::register($customerData);
@@ -100,7 +78,6 @@ class CustomerRepo
      * @param $provider
      * @param User $userData
      * @return Model|Builder
-     * @throws Exception
      */
     public static function createSocial($customer, $provider, User $userData): Model|Builder
     {
@@ -114,8 +91,8 @@ class CustomerRepo
             'provider' => $provider,
             'user_id' => $userData->getId(),
             'union_id' => '',
-            'access_token' => $userData->getAccessToken(),
-            'extra' => $userData->toJSON()
+            'access_token' => $userData->token,
+            'extra' => json_encode($userData->getRaw())
         ];
         return CustomerSocial::query()->create($socialData);
     }

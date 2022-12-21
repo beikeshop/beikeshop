@@ -72,8 +72,8 @@
               <td>
                 <el-form-item label="" class="mb-0">
                   <div class="input-group">
-                    <input size="small" class="form-control" :value="callbackUrl(item.callback)" disabled placeholder="{{ __('Social::setting.entry_callback') }}"></input>
-                    <a href="javascript:void(0)" class="btn btn-outline-secondary opacity-75 copy-code" :data-clipboard-text="item.callback"><i class="bi bi-front"></i></a>
+                    <input size="small" class="form-control" :value="item.callback" disabled placeholder="{{ __('Social::setting.entry_callback') }}"></input>
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary opacity-75 copy-code" :data-clipboard-text="item.callback" @click="copyCode"><i class="bi bi-front"></i></a>
                   </div>
                 </el-form-item>
               </td>
@@ -99,23 +99,14 @@
       <ol class="list-group list-group-numbered lh-lg text-secondary">
         <li>{{ __('Social::setting.text_omni_explain') }}</li>
         <li>{{ __('Social::setting.text_omni_explain_2') }}</li>
-        <li>{{ __('Social::setting.text_wechat_title') }}
-            <a target="_blank" href="https://open.weixin.qq.com/">{{ __('Social::setting.text_wechat_info') }}</a>
-        </li>
-        <li>{{ __('Social::setting.text_qq_title') }}
-            <a target="_blank" href="https://connect.qq.com/">{{ __('Social::setting.text_qq_info') }}</a>
-        </li>
-        <li>{{ __('Social::setting.text_weibo_title') }}
-            <a target="_blank" href="http://open.weibo.com/">{{ __('Social::setting.text_weibo_info') }}</a>
-        </li>
         <li>{{ __('Social::setting.text_facebook_title') }}
           <a target="_blank" href="https://developers.facebook.com/">Facebook</a>
         </li>
-        <li>{{ __('Social::setting.text_google_title') }}
-          <a target="_blank" href="https://console.developers.google.com/projectcreate/">Google</a>
+        <li>{{ __('Social::setting.text_twitter_title') }}
+          <a target="_blank" href="https://developer.twitter.com/">Twitter</a>
         </li>
-        <li>{{ __('Social::setting.text_Twitter_title') }}
-          <a target="_blank" href="https://apps.twitter.com/">Twitter</a>
+        <li>{{ __('Social::setting.text_google_title') }}
+          <a target="_blank" href="https://console.developers.google.com/">Google</a>
         </li>
         .......
       </ol>
@@ -181,19 +172,19 @@
         });
       },
 
-      callbackUrl(code) {
-        return `{{ shop_route('home.index') }}/${code}`;
-      },
-
       providerChange(e, index) {
-        this.form.social[index].callback = 'plugin/social/callbacks/' + e
+        this.form.social[index].callback = `{{ shop_route('home.index') }}/plugin/social/callbacks/${e}`
       },
 
       addRow() {
         let providers = this.source.providers.filter(e => !this.form.social.some(s => s.provider == e.code))
         if (providers.length) {
-          this.form.social.push({provider: providers[0].code, status: 1, key: '', secret: '', callback: `plugin/social/callbacks/${this.source.providers[1].code}`, sort_order: this.form.social.length})
+          this.form.social.push({provider: providers[0].code, status: 1, key: '', secret: '', callback: `{{ shop_route('home.index') }}/plugin/social/callbacks/${this.source.providers[0].code}`, sort_order: this.form.social.length})
         }
+      },
+
+      copyCode() {
+        layer.msg('Ok');
       }
     }
   })

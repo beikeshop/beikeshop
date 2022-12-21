@@ -1,7 +1,7 @@
 {
     "code": "social",
     "name": "Social",
-    "description": "第三方登录(包括微信、QQ、微博、Google、Facebook)",
+    "description": "第三方登录(包括Facebook、Twitter、Google)",
     "type": "social",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
