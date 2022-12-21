@@ -108,7 +108,7 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="{{ __('order.express_company') }}" v-if="form.status == 'shipped'" prop="express_company">
+          <el-form-item label="{{ __('order.express_company') }}" v-if="form.status == 'shipped'" prop="express_code">
             <el-select class="wp-200" size="small" v-model="form.express_code" placeholder="{{ __('common.please_choose') }}">
               <el-option
                 v-for="item in source.express_company"
