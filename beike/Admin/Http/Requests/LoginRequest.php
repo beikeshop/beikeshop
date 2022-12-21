@@ -11,7 +11,7 @@ class LoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,11 +21,11 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'email'=>['required','email'],
-            'password'=>'required',
+            'email' => ['required', 'email'],
+            'password' => 'required',
         ];
     }
 
