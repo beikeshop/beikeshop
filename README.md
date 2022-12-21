@@ -36,7 +36,7 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 1. 将解压文件夹下的 public 设置为网站根目录
 1. 通过浏览器访问网站根据提示完成安装
 1. <a href="https://docs.beikeshop.com/install/bt.html" target="_blank">BeikeShop详细安装指引</a>
-1. 如需升级请,下载最新版覆盖到服务器后网站根目录运行`composer install && php artisan migrate`
+1. 如需升级请下载最新版覆盖到服务器后网站根目录运行`composer install && php artisan migrate`
 
 ## 安装教程(面向开发者)
 1. 打开命令行克隆代码 `git clone https://gitee.com/beikeshop/beikeshop.git`
