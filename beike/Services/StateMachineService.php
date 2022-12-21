@@ -42,19 +42,19 @@ class StateMachineService
 
     const MACHINES = [
         self::CREATED => [
-            self::UNPAID => ['updateStatus', 'addHistory'],
+            self::UNPAID => ['updateStatus', 'addHistory', 'notifyNewOrder'],
         ],
         self::UNPAID => [
-            self::PAID => ['updateStatus', 'addHistory', 'subStock'],
-            self::CANCELLED => ['updateStatus', 'addHistory'],
+            self::PAID => ['updateStatus', 'addHistory', 'subStock', 'notifyUpdateOrder'],
+            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::PAID => [
-            self::CANCELLED => ['updateStatus', 'addHistory'],
-            self::SHIPPED => ['updateStatus', 'addHistory', 'addShipment'],
-            self::COMPLETED => ['updateStatus', 'addHistory']
+            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
+            self::SHIPPED => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder'],
+            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder']
         ],
         self::SHIPPED => [
-            self::COMPLETED => ['updateStatus', 'addHistory',]
+            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder']
         ]
     ];
 
@@ -286,6 +286,30 @@ class StateMachineService
             ]);
             $orderShipment->saveOrFail();
         }
+    }
+
+
+    /**
+     * 发送新订单通知
+     */
+    private function notifyNewOrder($oldCode, $newCode)
+    {
+        if (!$this->notify) {
+            return;
+        }
+        $this->order->notifyNewOrder();
+    }
+
+
+    /**
+     * 发送订单状态更新通知
+     */
+    private function notifyUpdateOrder($oldCode, $newCode)
+    {
+        if (!$this->notify) {
+            return;
+        }
+        $this->order->notifyUpdateOrder($oldCode);
     }
 
 

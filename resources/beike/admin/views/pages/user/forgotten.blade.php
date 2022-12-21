@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <base href="{{ $admin_base_url }}">
+  <meta name="asset" content="{{ asset('/') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
@@ -21,35 +22,43 @@
     <div class="container">
       <div class="card">
         <div class="w-480">
-          <div class="card-header mt-3 mb-4">
-            <h4 class="fw-bold">请根据提示找回您的密码</h4>
-            <div class="text-muted fw-normal" v-if="!isCode">请输入邮箱地址获取验证码</div>
-            <div class="text-muted fw-normal" v-else>请输入新密码</div>
+          <div class="card-header mt-3 mb-3">
+            <h4 class="fw-bold">{{ __('shop/forgotten.follow_prompt') }}</h4>
+            <div class="text-muted fw-normal" v-if="!isCode">{{ __('shop/forgotten.email_forCode') }}</div>
+            <div class="text-muted fw-normal" v-else>{{ __('shop/forgotten.enter_password') }}</div>
           </div>
 
           <div class="card-body">
-            <el-form ref="form" :model="form" :rules="rules">
+            <el-form ref="form" :model="form" :rules="rules" label-position="top">
               <div class="card-body p-0">
-                <el-form-item label="邮箱" prop="email" v-if="!isCode">
-                  <el-input v-model="form.email" placeholder="邮箱地址"></el-input>
+{{--                 <h4 class="fw-bold">{{ __('shop/forgotten.follow_prompt') }}</h4>
+                <p class="text-muted" v-if="!isCode">{{ __('shop/forgotten.email_forCode') }}</p>
+                <p class="text-muted" v-else>{{ __('shop/forgotten.enter_password') }}</p> --}}
+
+                <el-form-item label="{{ __('shop/forgotten.email') }}" prop="email" v-if="!isCode">
+                  <el-input v-model="form.email" placeholder="{{ __('shop/forgotten.email_address') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="验证码" prop="code" class="mb-3" v-if="isCode">
-                  <el-input  v-model="form.code" placeholder="密码"></el-input>
+                <el-form-item label="{{ __('shop/forgotten.verification_code') }}" prop="code" class="mb-3" v-if="isCode">
+                  <el-input  v-model="form.code" placeholder="{{ __('shop/forgotten.verification_code') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="密码" prop="password" class="mb-3" v-if="isCode">
-                  <el-input type="password" v-model="form.password" placeholder="密码"></el-input>
+                <el-form-item label="{{ __('shop/forgotten.password') }}" prop="password" class="mb-3" v-if="isCode">
+                  <el-input type="password" v-model="form.password" placeholder="{{ __('shop/forgotten.password') }}"></el-input>
                 </el-form-item>
 
-                <el-form-item label="确认密码" prop="password_confirmation" v-if="isCode">
-                  <el-input type="password" v-model="form.password_confirmation" placeholder="确认密码"></el-input>
+                <el-form-item label="{{ __('shop/forgotten.confirm_password') }}" prop="password_confirmation" v-if="isCode">
+                  <el-input type="password" v-model="form.password_confirmation" placeholder="{{ __('shop/forgotten.confirm_password') }}"></el-input>
                 </el-form-item>
 
                 <div class="mt-5 mb-3 d-flex justify-content-between">
-                  <button type="button" @click="submitForm('form')" class="btn w-50 btn-dark">@{{ !isCode ? '发送验证码' : '提交' }}</button>
+                  <button type="button" @click="submitForm('form')" class="btn w-50 btn-dark">
+                    {{-- @{{ !isCode ? '发送验证码'  :  '提交'  }} --}}
+                    <template v-if="!isCode">{{ __('shop/forgotten.send_code') }}</template>
+                    <template v-else>{{ __('common.submit') }}</template>
+                  </button>
                 </div>
-                <a href="javascript:void(0)" v-if="isCode" @click="isCode = false" class="text-muted">返回上一步</a>
+                <a href="javascript:void(0)" v-if="isCode" @click="isCode = false" class="text-muted">{{ __('shop/forgotten.to_back') }}</a>
               </div>
             </el-form>
           </div>
@@ -60,7 +69,7 @@
   <script>
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('{{ __('shop/forgotten.enter_password') }}'));
       } else {
         if (value !== '') {
           app.$refs.form.validateField('password_confirmation');
@@ -71,9 +80,9 @@
 
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入确认密码'));
+        callback(new Error('{{ __('shop/forgotten.please_confirm') }}'));
       } else if (value !== app.form.password) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error('{{ __('shop/forgotten.password_err') }}'));
       } else {
         callback();
       }
@@ -84,21 +93,21 @@
 
       data: {
         form: {
-          email: '',
-          code: '',
+          email: bk.getQueryString('email', ''),
+          code: bk.getQueryString('code', ''),
           password: '',
           password_confirmation: '',
         },
 
-        isCode: false,
+        isCode: !!bk.getQueryString('code'),
 
         rules: {
           email: [
-            {required: true, message: '请输入邮箱', trigger: 'blur'},
-            {type: 'email', message: '请输入正确邮箱地址', trigger: 'blur'},
+            {required: true, message: '{{ __('shop/forgotten.enter_email') }}', trigger: 'blur'},
+            {type: 'email', message: '{{ __('shop/forgotten.email_err') }}', trigger: 'blur'},
           ],
           code: [
-            {required: true, message: '请输入验证码', trigger: 'blur'}
+            {required: true, message: '{{ __('shop/forgotten.enter_code') }}', trigger: 'blur'}
           ],
           password: [
             {required: true, validator: validatePass, trigger: 'blur'}
@@ -109,7 +118,7 @@
         },
       },
 
-      beforeMount () {
+      mounted () {
       },
 
       methods: {
@@ -122,12 +131,16 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              // layer.msg('请检查表单是否填写正确', () => {})
               return;
             }
 
             $http.post(url, this.form).then((res) => {
-              this.$message.success(res.message);
+              if (this.isCode) {
+                layer.msg(res.message)
+              } else {
+                this.$alert(res.message, '{{ __('common.text_hint') }}');
+              }
+
               this.$refs[form].clearValidate();
 
               if (this.isCode) {

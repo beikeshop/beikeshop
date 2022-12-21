@@ -20,6 +20,7 @@ return [
     'orders_export' => 'orden de exportación',
     'orders_update' => 'Orden de actualización',
     'orders_delete' => 'borrar pedido',
+    'notificar' => 'Ya sea para recordar',
     'orders_update_status' => 'estado de actualización',
     'error_status' => 'Seleccione un estado',
 ];

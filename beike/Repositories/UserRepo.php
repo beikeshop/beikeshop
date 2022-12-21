@@ -43,6 +43,10 @@ class UserRepo
         return $user->update($data);
     }
 
+    /**
+     * @param $email
+     * @return AdminUser
+     */
     public static function findByEmail($email)
     {
         return AdminUser::query()->where('email', $email)->first();

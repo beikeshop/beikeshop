@@ -19,6 +19,7 @@ return [
      'orders_show' => '注文の詳細',
      'orders_export' => '輸出注文',
      'orders_update' => '注文を更新',
+     'notify' => '通知するかどうか',
      'orders_delete' => '注文を削除',
      'orders_update_status' => '更新ステータス',
      'error_status' => 'ステータスを選択してください',

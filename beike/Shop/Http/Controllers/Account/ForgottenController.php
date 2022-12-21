@@ -12,6 +12,7 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Shop\Http\Requests\ForgottenRequest;
+use Beike\Shop\Http\Requests\VerifyCodeRequest;
 use Beike\Shop\Services\AccountService;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ForgottenController
      * @param Request $request
      * @return array
      */
-    public function sendVerifyCode(Request $request)
+    public function sendVerifyCode(VerifyCodeRequest $request)
     {
         AccountService::sendVerifyCodeForForgotten($request->get('email'), 'email');
         return json_success(trans('shop/forgotten.verification_code_sent'));

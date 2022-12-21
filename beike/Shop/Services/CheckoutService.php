@@ -97,7 +97,7 @@ class CheckoutService
         try {
             DB::beginTransaction();
             $order = OrderRepo::create($checkoutData);
-            StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID);
+            StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
             DB::commit();
         } catch (\Exception $e) {

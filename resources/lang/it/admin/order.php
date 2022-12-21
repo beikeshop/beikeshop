@@ -20,6 +20,7 @@ return [
     'orders_export' => 'esporta ordini',
     'orders_update' => 'aggiorna ordine',
     'orders_delete' => 'cancella ordine',
+    'notify' => 'Se ricordare',
     'orders_update_status' => 'stato di aggiornamento',
     'error_status' => 'Seleziona lo stato',
 ];

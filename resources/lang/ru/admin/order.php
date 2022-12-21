@@ -18,6 +18,7 @@ return [
     'orders_create' => 'создать заказ',
     'orders_show' => 'детали заказа',
     'orders_export' => 'экспорт заказов',
+    'notify' => 'Напомнить ли',
     'orders_update' => 'обновить заказ',
     'orders_delete' => 'удалить заказ',
     'orders_update_status' => 'обновить статус',

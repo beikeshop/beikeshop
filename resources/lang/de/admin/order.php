@@ -17,6 +17,7 @@ return [
      'orders_index' => 'Bestellliste',
      'orders_create' => 'Bestellung erstellen',
      'orders_show' => 'Bestelldetails',
+     'notify' => 'Ob zu erinnern',
      'orders_export' => 'Bestellungen exportieren',
      'orders_update' => 'Bestellung aktualisieren',
      'orders_delete' => 'Bestellung löschen',

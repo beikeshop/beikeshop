@@ -20,6 +20,7 @@ return [
     'orders_export' => '導出訂單',
     'orders_update' => '更新訂單',
     'orders_delete' => '刪除訂單',
+    'notify' => '是否提醒',
     'orders_update_status' => '更新狀態',
     'error_status' => '請選擇狀態',
 ];

@@ -14,13 +14,6 @@
 
     <x-shop-breadcrumb type="static" value="forgotten.index" />
 
-    {{-- <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav> --}}
-    {{-- <div class="hero-content pb-5 text-center"><h1 class="hero-heading">找回密码</h1></div> --}}
     <div class="row my-5 justify-content-md-center">
       <div class="col-lg-5 col-xxl-4">
         <div class="card">
@@ -90,13 +83,13 @@
 
       data: {
         form: {
-          email: '',
-          code: '',
+          email: bk.getQueryString('email', ''),
+          code: bk.getQueryString('code', ''),
           password: '',
           password_confirmation: '',
         },
 
-        isCode: false,
+        isCode: !!bk.getQueryString('code'),
 
         rules: {
           email: [
@@ -115,7 +108,7 @@
         },
       },
 
-      beforeMount () {
+      mounted () {
       },
 
       methods: {
@@ -128,12 +121,16 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              // layer.msg('请检查表单是否填写正确', () => {})
               return;
             }
 
             $http.post(url, this.form).then((res) => {
-              this.$message.success(res.message);
+              if (this.isCode) {
+                layer.msg(res.message)
+              } else {
+                this.$alert(res.message, '{{ __('common.text_hint') }}');
+              }
+
               this.$refs[form].clearValidate();
 
               if (this.isCode) {

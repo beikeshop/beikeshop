@@ -114,7 +114,7 @@ class EnvironmentManager
             'BROADCAST_DRIVER=log' . "\n" .
             'CACHE_DRIVER=file' . "\n" .
             'SESSION_DRIVER=file' . "\n" .
-            'QUEUE_DRIVER=sync' . "\n\n" .
+            'QUEUE_CONNECTION=sync' . "\n\n" .
             'MAIL_DRIVER=' . $request->mail_driver . "\n" .
             'MAIL_HOST=' . $request->mail_host . "\n" .
             'MAIL_PORT=' . $request->mail_port . "\n" .

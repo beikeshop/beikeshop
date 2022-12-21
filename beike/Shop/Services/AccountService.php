@@ -40,7 +40,12 @@ class AccountService
         }
         $data['avatar'] = $data['avatar'] ?? '';
 
-        return CustomerRepo::create($data);
+        $customer = CustomerRepo::create($data);
+        if ($customer) {
+            $customer->notifyRegistration();
+            hook_action('after_register', $customer);
+        }
+        return $customer;
     }
 
     /**
@@ -61,7 +66,7 @@ class AccountService
 
         Log::info("找回密码验证码：{$code}");
 
-        Notification::verifyCode($code, "您的验证码是%s,该验证码仅用于找回密码。", $type);
+        Customer::query()->where('email', $email)->firstOrFail()->notifyVerifyCodeForForgotten($code);
     }
 
     /**

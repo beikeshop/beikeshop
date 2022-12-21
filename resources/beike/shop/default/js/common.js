@@ -133,5 +133,15 @@ export default {
     window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight
 　　　　+ ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft
 　　　　+ ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
-  }
+  },
+
+  getQueryString(name, defaultValue) {
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+    const r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return decodeURIComponent(r[2]);
+    }
+
+    return typeof(defaultValue) != 'undefined' ? defaultValue : '';
+  },
 }

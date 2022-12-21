@@ -36,7 +36,7 @@ class UserService
 
         Log::info("找回密码验证码：{$code}");
 
-        Notification::verifyCode($code, "您的验证码是%s,该验证码仅用于找回密码。", 'email');
+        UserRepo::findByEmail($email)->notifyVerifyCodeForForgotten($code);
     }
 
     /**

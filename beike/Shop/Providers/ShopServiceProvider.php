@@ -40,12 +40,43 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
 
         load_settings();
+
         $this->registerGuard();
+        $this->loadMailConfig();
 
         if (Str::startsWith($uri, '/admin')) {
             return;
         }
 
+        $this->registerFileSystem();
+        $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
+        $this->loadThemeViewPath();
+        $this->loadComponents();
+    }
+
+
+    /**
+     * 注册前端客户
+     */
+    protected function registerGuard()
+    {
+        Config::set('auth.guards.' . Customer::AUTH_GUARD, [
+            'driver' => 'session',
+            'provider' => 'shop_customer',
+        ]);
+
+        Config::set('auth.providers.shop_customer', [
+            'driver' => 'eloquent',
+            'model' => Customer::class,
+        ]);
+    }
+
+
+    /**
+     * 注册上传文件系统
+     */
+    protected function registerFileSystem()
+    {
         Config::set('filesystems.disks.upload', [
             'driver' => 'local',
             'root' => public_path('upload'),
@@ -60,26 +91,32 @@ class ShopServiceProvider extends ServiceProvider
                 ],
             ],
         ]);
-
-        $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-        $this->loadThemeViewPath();
-        $this->loadComponents();
     }
 
 
-    protected function registerGuard()
+    /**
+     * 加载邮件配置, 从后台 mail 取值, 并覆盖到  config/mail 和 config/services
+     */
+    protected function loadMailConfig()
     {
-        Config::set('auth.guards.' . Customer::AUTH_GUARD, [
-            'driver' => 'session',
-            'provider' => 'shop_customer',
-        ]);
+        $mailEngine = system_setting('base.mail_engine', 'smtp');
+        $storeMail = system_setting('base.email', '');
 
-        Config::set('auth.providers.shop_customer', [
-            'driver' => 'eloquent',
-            'model' => Customer::class,
-        ]);
+        Config::set('mail.default', $mailEngine);
+        Config::set('mail.from.address', $storeMail);
+        Config::set('mail.from.name', \config('app.name'));
+
+        $smtpSetting = system_setting('base.smtp');
+        if ($smtpSetting) {
+            $smtpSetting['transport'] = 'smtp';
+            Config::set('mail.mailers.smtp', $smtpSetting);
+        }
     }
 
+
+    /**
+     * 加载主体模板路径
+     */
     protected function loadThemeViewPath()
     {
         $this->app->singleton('view.finder', function ($app) {
@@ -92,6 +129,10 @@ class ShopServiceProvider extends ServiceProvider
         });
     }
 
+
+    /**
+     * 加载视图组件
+     */
     protected function loadComponents()
     {
         $this->loadViewComponentsAs('shop', [

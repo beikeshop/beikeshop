@@ -11,10 +11,16 @@
 
 namespace Beike\Models;
 
+use Illuminate\Notifications\Notifiable;
+use Beike\Notifications\NewOrderNotification;
+use Beike\Notifications\UpdateOrderNotification;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Base
 {
+    use Notifiable;
+
     protected $fillable = [
         'number', 'customer_id', 'customer_group_id', 'shipping_address_id', 'payment_address_id', 'customer_name',
         'email', 'calling_code', 'telephone', 'total', 'locale', 'currency_code', 'currency_value', 'ip', 'user_agent',
@@ -26,6 +32,11 @@ class Order extends Base
     ];
 
     protected $appends = ['status_format', 'total_format'];
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
     public function orderProducts(): HasMany
     {
@@ -55,5 +66,33 @@ class Order extends Base
     public function getTotalFormatAttribute()
     {
         return currency_format($this->total, $this->currency_code, $this->currency_value);
+    }
+
+
+    /**
+     * 新订单通知
+     */
+    public function notifyNewOrder()
+    {
+        $useQueue = system_setting('base.use_queue', true);
+        if ($useQueue) {
+            $this->notify(new NewOrderNotification($this));
+        } else {
+            $this->notifyNow(new NewOrderNotification($this));
+        }
+    }
+
+
+    /**
+     * 订单状态更新通知
+     */
+    public function notifyUpdateOrder($fromCode)
+    {
+        $useQueue = system_setting('base.use_queue', true);
+        if ($useQueue) {
+            $this->notify(new UpdateOrderNotification($this, $fromCode));
+        } else {
+            $this->notifyNow(new UpdateOrderNotification($this, $fromCode));
+        }
     }
 }

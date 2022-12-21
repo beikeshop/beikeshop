@@ -19,6 +19,7 @@ return [
     'orders_show' => 'détails de la commande',
     'orders_export' => 'commande d\'exportation',
     'orders_update' => 'Mise à jour de la commande',
+    'notify' => 'S\'il faut rappeler',
     'orders_delete' => 'supprimer la commande',
     'orders_update_status' => 'état de mise à jour',
     'error_status' => 'Veuillez sélectionner un statut',

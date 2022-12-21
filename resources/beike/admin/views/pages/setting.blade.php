@@ -5,7 +5,7 @@
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
-      <form action="{{ admin_route('settings.store') }}" method="POST" id="app">
+      <form action="{{ admin_route('settings.store') }}" class="needs-validation" novalidate method="POST" id="app" v-cloak>
         @csrf
         @if (session('success'))
           <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
@@ -22,6 +22,9 @@
           </li>
           <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-express-company">{{ __('order.express_company') }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-mail">{{ __('admin/setting.mail_settings') }}</a>
           </li>
         </ul>
 
@@ -124,6 +127,49 @@
               </table>
             </x-admin::form.row>
           </div>
+
+          <div class="tab-pane fade" id="tab-mail">
+            <x-admin-form-switch name="use_queue" title="{{ __('admin/setting.use_queue') }}" value="{{ old('use_queue', system_setting('base.use_queue', '0')) }}">
+              {{-- <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div> --}}
+            </x-admin-form-switch>
+            <x-admin::form.row title="{{ __('admin/setting.mail_engine') }}">
+              <select name="mail_engine" v-model="mail_engine" class="form-select wp-200 me-3">
+                <option :value="item.code" v-for="item, index in source.mailEngines" :key="index">@{{ item.name }}</option>
+              </select>
+              <div v-if="mail_engine == 'log'" class="help-text font-size-12 lh-base">{{ __('admin/setting.mail_log') }}</div>
+            </x-admin::form.row>
+
+            <div v-if="mail_engine == 'smtp'">
+              <x-admin-form-input name="smtp[host]" required title="{{ __('admin/setting.smtp_host') }}" value="{{ old('host', system_setting('base.smtp.host', '')) }}">
+              </x-admin-form-input>
+              <x-admin-form-input name="smtp[username]" required title="{{ __('admin/setting.smtp_username') }}" value="{{ old('username', system_setting('base.smtp.username', '')) }}">
+              </x-admin-form-input>
+              <x-admin-form-input name="smtp[password]" required title="{{ __('admin/setting.smtp_password') }}" value="{{ old('password', system_setting('base.smtp.password', '')) }}">
+                <div class="help-text font-size-12 lh-base">{{ __('admin/setting.smtp_password_info') }}</div>
+              </x-admin-form-input>
+              <x-admin-form-input name="smtp[encryption]" required title="{{ __('admin/setting.smtp_encryption') }}" value="{{ old('encryption', system_setting('base.smtp.encryption', 'TLS')) }}">
+                <div class="help-text font-size-12 lh-base">{{ __('admin/setting.smtp_encryption_info') }}</div>
+              </x-admin-form-input>
+              <x-admin-form-input name="smtp[port]" required title="{{ __('admin/setting.smtp_port') }}" value="{{ old('port', system_setting('base.smtp.port', '465')) }}">
+              </x-admin-form-input>
+              <x-admin-form-input name="smtp[timeout]" required title="{{ __('admin/setting.smtp_timeout') }}" value="{{ old('timeout', system_setting('base.smtp.timeout', '5')) }}">
+              </x-admin-form-input>
+            </div>
+
+            <div v-if="mail_engine == 'sendmail'">
+              <x-admin-form-input name="sendmail[path]" required title="{{ __('admin/setting.sendmail_path') }}" value="{{ old('path', system_setting('base.sendmail.path', '')) }}">
+              </x-admin-form-input>
+            </div>
+
+            <div v-if="mail_engine == 'mailgun'">
+              <x-admin-form-input name="mailgun[domain]" required title="{{ __('admin/setting.mailgun_domain') }}" value="{{ old('domain', system_setting('base.mailgun.domain', '')) }}">
+              </x-admin-form-input>
+              <x-admin-form-input name="mailgun[secret]" required title="{{ __('admin/setting.mailgun_secret') }}" value="{{ old('secret', system_setting('base.mailgun.secret', '')) }}">
+              </x-admin-form-input>
+              <x-admin-form-input name="mailgun[endpoint]" required title="{{ __('admin/setting.mailgun_endpoint') }}" value="{{ old('endpoint', system_setting('base.mailgun.endpoint', '')) }}">
+              </x-admin-form-input>
+            </div>
+          </div>
         </div>
 
         <x-admin::form.row title="">
@@ -172,9 +218,20 @@
 
   <script>
     new Vue({
-      el: '#tab-express-company',
+      el: '#app',
       data: {
+        mail_engine: @json(old('mail_engine', system_setting('base.mail_engine', ''))),
         express_company: @json(old('express_company', system_setting('base.express_company', []))),
+
+        source: {
+          mailEngines: [
+            {name: '{{ __('common.cancel') }}', code: ''},
+            {name: 'SMTP', code: 'smtp'},
+            {name: 'Sendmail', code: 'sendmail'},
+            {name: 'Mailgun', code: 'mailgun'},
+            {name: 'Log', code: 'log'},
+          ]
+        },
       },
       methods: {
         addCompany() {

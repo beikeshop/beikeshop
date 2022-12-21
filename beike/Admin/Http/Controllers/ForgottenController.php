@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\ForgottenRequest;
+use Beike\Admin\Http\Requests\VerifyCodeRequest;
 use Beike\Admin\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ForgottenController
      * @param Request $request
      * @return array
      */
-    public function sendVerifyCode(Request $request)
+    public function sendVerifyCode(VerifyCodeRequest $request)
     {
         UserService::sendVerifyCodeForForgotten($request->get('email'));
         return json_success(trans('admin/forgotten.verify_code_sent'));

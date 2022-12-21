@@ -25,9 +25,9 @@ class CustomerRepo
     /**
      * 创建一个customer记录
      * @param $customerData
-     * @return Builder|Model
+     * @return Model
      */
-    public static function create($customerData)
+    public static function create($customerData): Customer
     {
         $customerData['email'] = $customerData['email'] ?? '';
         $customerData['password'] = Hash::make($customerData['password'] ?? '');

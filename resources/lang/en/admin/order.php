@@ -20,6 +20,7 @@ return [
     'orders_export' => 'Export',
     'orders_update' => 'Update',
     'orders_delete' => 'Delete',
+    'notify' => 'Whether to remind',
     'orders_update_status' => 'Update Status',
     'error_status' => 'Please select a status',
 ];

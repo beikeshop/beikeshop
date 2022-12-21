@@ -16,6 +16,7 @@
         "intervention/image": "^2.7",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^9.0",
+        "laravel/horizon": "^5.10",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "spatie/laravel-permission": "^5.5",
