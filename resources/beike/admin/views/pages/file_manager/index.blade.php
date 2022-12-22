@@ -492,6 +492,9 @@
                 }, node);
                 this.$refs.tree.setCurrentKey(fileAllPathName)
                 this.folderCurrent = fileAllPathName;
+                this.images = [];
+                this.image_page = 1
+                this.image_total = 0
                 this.updateDefaultExpandedKeys(node.data, 'expand')
               })
             }
