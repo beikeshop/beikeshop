@@ -86,8 +86,11 @@ class ProductRepo
             });
         }
 
-        if (isset($data['product_ids'])) {
-            $builder->whereIn('id', $data['product_ids']);
+        $productIds = $data['product_ids'] ?? [];
+        if ($productIds) {
+            $builder->whereIn('id', $productIds);
+            $productIds = implode(',', $productIds);
+            $builder->orderByRaw("FIELD(products.id, {$productIds})");
         }
 
         if (isset($data['sku']) || isset($data['model'])) {
