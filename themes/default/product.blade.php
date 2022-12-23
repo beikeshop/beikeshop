@@ -37,7 +37,7 @@
               <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
             </div>
           @else
-            <div class="swiper" id="swiper-2">
+            <div class="swiper" id="swiper-mobile">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="image, index in images">
                   <img :src="image.preview" class="img-fluid">
@@ -146,6 +146,8 @@
 
 @push('add-scripts')
   <script>
+    let swiperMobile = null;
+
     let app = new Vue({
       el: '#product-app',
 
@@ -223,6 +225,10 @@
           const spuImages = @json($product['images'] ?? []);
           this.images = [...sku.images, ...spuImages]
           this.product = sku;
+          if (swiperMobile) {
+            swiperMobile.slideTo(0, 0, false)
+          }
+
           this.$nextTick(() => {
             $('#zoom img').attr('src', $('#swiper a').attr('data-image'));
             $('#zoom').trigger('zoom.destroy');
@@ -271,6 +277,7 @@
       $('#zoom img').attr('src', $(this).attr('data-image'));
       $('#zoom').zoom({url: $(this).attr('data-zoom-image')});
     });
+
     var swiper = new Swiper("#swiper", {
       direction: "vertical",
       slidesPerView: 1,
@@ -302,15 +309,17 @@
       observeParents: true
     });
 
-    var swiper2 = new Swiper("#swiper-2", {
-      slidesPerView: 1,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      observer: true,
-      observeParents: true
-    });
+    @if (is_mobile())
+      swiperMobile = new Swiper("#swiper-mobile", {
+        slidesPerView: 1,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        observer: true,
+        observeParents: true
+      });
+    @endif
 
     $(document).ready(function () {
       $('#zoom').trigger('zoom.destroy');
