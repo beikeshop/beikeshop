@@ -54,6 +54,7 @@ class FileManagerService
      *
      * @param $baseFolder
      * @param int $page
+     * @param int $perPage
      * @return array
      * @throws \Exception
      */
@@ -61,6 +62,9 @@ class FileManagerService
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $files = glob($currentBasePath . '/*');
+        usort($files, function ($a, $b) {
+            return filemtime($a) - filemtime($b) <0;
+        });
 
         $images = [];
         foreach ($files as $file) {
@@ -75,14 +79,13 @@ class FileManagerService
         }
 
         $page = $page > 0 ? $page : 1;
-        // $perPage = $perPage;
         $imageCollection = collect($images);
-        $data = [
+
+        return [
             'images' => $imageCollection->forPage($page, $perPage)->values()->toArray(),
             'image_total' => $imageCollection->count(),
             'image_page' => $page,
         ];
-        return $data;
     }
 
 
