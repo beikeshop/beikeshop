@@ -129,16 +129,16 @@ class CustomerRepo
 
     public static function restore($id)
     {
-        Customer::withTrashed()->find($id)->restore();
+        Customer::onlyTrashed()->find($id)->restore();
     }
 
     public static function forceDelete($id)
     {
-        Customer::withTrashed()->find($id)->forceDelete();
+        Customer::onlyTrashed()->find($id)->forceDelete();
     }
 
     public static function forceDeleteAll() {
-        Customer::withTrashed()->forceDelete();
+        Customer::onlyTrashed()->forceDelete();
     }
 
     /**
