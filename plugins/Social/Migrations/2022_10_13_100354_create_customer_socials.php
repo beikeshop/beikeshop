@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('provider');
             $table->string('user_id');
             $table->string('union_id');
-            $table->string('access_token');
+            $table->text('access_token');
             $table->text('extra');
             $table->timestamps();
         });
