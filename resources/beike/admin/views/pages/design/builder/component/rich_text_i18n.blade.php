@@ -18,7 +18,7 @@
       </el-tabs>
 
       <div class="i18n-inner" v-else>
-        <textarea class="tinymce">@{{ value[languages[0].code] }}</textarea>
+        <textarea class="tinymce" :id="randomNumber + '-' + locale" :data-code="locale">@{{ value[languages[0].code] }}</textarea>
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="richTextDialog.show = false">{{ __('common.cancel') }}</el-button>
@@ -43,6 +43,7 @@ Vue.component('rich-text-i18n', {
         content: {}
       },
       languages: $languages,
+      locale: '{{ locale() }}',
     }
   },
 
