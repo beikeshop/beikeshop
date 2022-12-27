@@ -9,7 +9,7 @@
           {{ __('mail.welcome_register') }} {{ config('app.name') }}
         </h1>
         <p style="font-size:14px;color:#333; line-height:24px; margin:0;">
-          {{ __('mail.customer_name', ['name' => $order->customer_name]) }}
+          {{ __('mail.customer_name', ['name' => $customer->name]) }}
         </p>
         <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
           <span style="color: rgb(51, 51, 51); font-size: 14px;">{{ __('mail.register_end') }}
