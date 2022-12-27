@@ -16,7 +16,6 @@ use Beike\Admin\Http\Resources\AddressResource;
 use Beike\Admin\Http\Resources\CustomerGroupDetail;
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerService;
-use Beike\Models\Customer;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CustomerGroupRepo;
@@ -40,6 +39,23 @@ class CustomerController extends Controller
         }
 
         return view('admin::pages.customers.index', $data);
+    }
+
+    public function trashed(Request $request)
+    {
+        $customers = CustomerRepo::list(array_merge($request->only(['name', 'email', 'status', 'from', 'customer_group_id']), ['only_trashed' => true]));
+
+        $data = [
+            'customers' => $customers,
+            'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
+            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+        ];
+
+        if ($request->expectsJson()) {
+            return json_success(trans('success'), $data);
+        }
+
+        return view('admin::pages.customers.trashed', $data);
     }
 
     public function store(CustomerRequest $request)
@@ -89,5 +105,19 @@ class CustomerController extends Controller
         CustomerRepo::restore($customerId);
 
         return json_success(trans('common.restored_success'));
+    }
+
+    public function forceDelete(Request $request, int $customerId)
+    {
+        $customer = CustomerRepo::forceDelete($customerId);
+
+        return json_success(trans('common.success'));
+    }
+
+    public function forceDeleteAll(Request $request)
+    {
+        $customer = CustomerRepo::forceDeleteAll();
+
+        return json_success(trans('common.success'));
     }
 }

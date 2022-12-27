@@ -56,11 +56,15 @@ Route::prefix($adminName)
 
 
                 // 客户
+                Route::middleware('can:customers_index')->get('customers/trashed', [Controllers\CustomerController::class, 'trashed'])->name('customers.trashed');
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
                 Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
                 Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
+                Route::middleware('can:customers_create')->delete('customers/{id}/restore', [Controllers\CustomerController::class, 'restore'])->name('customers.restore');
                 Route::middleware('can:customers_delete')->delete('customers/{id}', [Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
+                Route::middleware('can:customers_delete')->delete('customers/{id}/force', [Controllers\CustomerController::class, 'forceDelete'])->name('customers.force_delete');
+                Route::middleware('can:customers_delete')->post('customers/force_delete_all', [Controllers\CustomerController::class, 'forceDeleteAll'])->name('customers.force_delete_all');
 
 
                 // 客户地址

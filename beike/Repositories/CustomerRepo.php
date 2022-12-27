@@ -110,6 +110,9 @@ class CustomerRepo
         if (isset($filters['customer_group_id'])) {
             $builder->where('customers.customer_group_id', $filters['customer_group_id']);
         }
+        if (isset($filters['only_trashed']) && $filters['only_trashed']) {
+            $builder->onlyTrashed();
+        }
 
         $start = $filters['start'] ?? null;
         if ($start) {
@@ -127,6 +130,15 @@ class CustomerRepo
     public static function restore($id)
     {
         Customer::withTrashed()->find($id)->restore();
+    }
+
+    public static function forceDelete($id)
+    {
+        Customer::withTrashed()->find($id)->forceDelete();
+    }
+
+    public static function forceDeleteAll() {
+        Customer::withTrashed()->forceDelete();
     }
 
     /**
