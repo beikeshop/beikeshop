@@ -1,4 +1,13 @@
 <?php
+/**
+ * AdminUserRepo.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2022-08-08 08:08:08
+ * @modified   2022-08-08 08:08:08
+ */
 
 namespace Beike\Admin\Providers;
 
@@ -21,6 +30,7 @@ use Beike\Admin\View\Components\Form\Textarea;
 use Beike\Console\Commands\GenerateDatabaseDict;
 use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\SwitchRadio;
+use Illuminate\View\FileViewFinder;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -47,24 +57,13 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
         $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
+        $this->loadThemeViewPath();
 
         $this->app->booted(function () {
             $this->loadShareViewData();
         });
 
-        $this->loadViewComponentsAs('admin', [
-            'header' => Header::class,
-            'sidebar' => Sidebar::class,
-            'filter' => Filter::class,
-            'alert' => Alert::class,
-            'form-input-locale' => InputLocale::class,
-            'form-switch' => SwitchRadio::class,
-            'form-input' => Input::class,
-            'form-select' => Select::class,
-            'form-image' => Image::class,
-            'form-textarea' => Textarea::class,
-            'no-data' => NoData::class,
-        ]);
+        $this->loadAdminViewComponents();
 
         $this->registerGuard();
 
@@ -75,6 +74,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->loadDesignComponents();
     }
+
 
     /**
      * 加载后台命令行脚本
@@ -90,6 +90,10 @@ class AdminServiceProvider extends ServiceProvider
         }
     }
 
+
+    /**
+     * 注册后台用户 guard
+     */
     protected function registerGuard()
     {
         Config::set('auth.guards.' . AdminUser::AUTH_GUARD, [
@@ -103,12 +107,54 @@ class AdminServiceProvider extends ServiceProvider
         ]);
     }
 
+
+    /**
+     * 加载主题模板, 用于装修预览
+     */
+    protected function loadThemeViewPath()
+    {
+        $this->app->singleton('view.finder', function ($app) {
+            $paths = $app['config']['view.paths'];
+            if ($theme = system_setting('base.theme')) {
+                $customTheme[] = base_path("themes/{$theme}");
+                $paths = array_merge($customTheme, $paths);
+            }
+            return new FileViewFinder($app['files'], $paths);
+        });
+    }
+
+
+    /**
+     * 后台UI组件
+     */
+    protected function loadAdminViewComponents()
+    {
+        $this->loadViewComponentsAs('admin', [
+            'header' => Header::class,
+            'sidebar' => Sidebar::class,
+            'filter' => Filter::class,
+            'alert' => Alert::class,
+            'form-input-locale' => InputLocale::class,
+            'form-switch' => SwitchRadio::class,
+            'form-input' => Input::class,
+            'form-select' => Select::class,
+            'form-image' => Image::class,
+            'form-textarea' => Textarea::class,
+            'no-data' => NoData::class,
+        ]);
+    }
+
+
+    /**
+     * seeder 数据
+     */
     protected function publishResources()
     {
         $this->publishes([
             __DIR__ . '/../Database/Seeders/ProductSeeder.php' => database_path('seeders/ProductSeeder.php'),
         ], 'beike-seeders');
     }
+
 
     /**
      * 加载首页 page builder 相关组件
