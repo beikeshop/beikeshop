@@ -585,9 +585,8 @@ function hook_filter($hookKey, $hookValue): mixed
  *
  * @param $hookKey
  * @param $hookValue
- * @return mixed
  */
-function hook_action($hookKey, $hookValue): mixed
+function hook_action($hookKey, $hookValue)
 {
     Eventy::action($hookKey, $hookValue);
 }
