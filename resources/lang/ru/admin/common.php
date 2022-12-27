@@ -62,6 +62,7 @@ return [
     'categories_index' => 'категория товара',
     'products_index' => 'товарный менеджмент',
     'products_trashed' => 'корзина',
+    'customers_trashed' => 'корзина',
     'brands_index' => 'бренд продукта',
     'orders_index' => 'Список заказа',
     'rmas_index' => 'Послепродажное управление',

@@ -140,6 +140,7 @@ class Sidebar extends Component
         $routes = [
             ['route' => 'customers.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'customer_groups.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'customers.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.customer_routes', $routes);
     }

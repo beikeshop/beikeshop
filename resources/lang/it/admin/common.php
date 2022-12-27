@@ -62,6 +62,7 @@ return [
     'categories_index' => 'Categorie',
     'products_index' => 'gestione delle merci',
     'products_trashed' => 'cestino',
+    'customers_trashed' => 'cestino',
     'brands_index' => 'marchio del prodotto',
     'orders_index' => 'Lista degli ordini',
     'rmas_index' => 'Gestione post vendita',

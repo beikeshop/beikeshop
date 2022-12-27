@@ -62,6 +62,7 @@ return [
     'categories_index' => 'Categorías',
     'products_index' => 'gestión de mercancías',
     'products_trashed' => 'papelera de reciclaje',
+    'customers_trashed' => 'papelera de reciclaje',
     'brands_index' => 'producto de marca',
     'orders_index' => 'Lista de orden',
     'rmas_index' => 'Gestión postventa',

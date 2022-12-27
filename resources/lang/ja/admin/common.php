@@ -62,6 +62,7 @@ return [
     'categories_index' => '製品カテゴリ',
     'products_index' => '製品管理',
     'products_trashed' => 'ごみ箱',
+    'customers_trashed' => 'ごみ箱',
     'brands_index' => '製品ブランド',
     'orders_index' => '注文リスト',
     'rmas_index' => 'アフター管理',

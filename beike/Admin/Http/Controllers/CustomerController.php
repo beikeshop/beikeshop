@@ -32,6 +32,7 @@ class CustomerController extends Controller
             'customers' => $customers,
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type' => 'customer',
         ];
 
         if ($request->expectsJson()) {
@@ -49,13 +50,14 @@ class CustomerController extends Controller
             'customers' => $customers,
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type' => 'trashed',
         ];
 
         if ($request->expectsJson()) {
             return json_success(trans('success'), $data);
         }
 
-        return view('admin::pages.customers.trashed', $data);
+        return view('admin::pages.customers.index', $data);
     }
 
     public function store(CustomerRequest $request)

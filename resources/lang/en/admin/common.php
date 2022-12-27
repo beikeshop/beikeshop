@@ -64,6 +64,7 @@ return [
     'categories_index' => 'Categories',
     'products_index' => 'Products',
     'products_trashed' => 'Trashed',
+    'customers_trashed' => 'Trashed',
     'brands_index' => 'Brands',
     'orders_index' => 'Orders',
     'rmas_index' => 'RMA',

@@ -62,6 +62,7 @@ return [
      'categories_index' => 'Produktkategorie',
      'products_index' => 'Produktverwaltung',
      'products_trashed' => 'Papierkorb',
+     'customers_trashed' => 'Papierkorb',
      'brands_index' => 'Produktmarke',
      'orders_index' => 'Bestellliste',
      'rmas_index' => 'Kundendienstverwaltung',

@@ -64,6 +64,7 @@ return [
     'categories_index' => '商品分类',
     'products_index' => '商品管理',
     'products_trashed' => '回收站',
+    'customers_trashed' => '回收站',
     'brands_index' => '商品品牌',
     'orders_index' => '订单列表',
     'rmas_index' => '售后管理',

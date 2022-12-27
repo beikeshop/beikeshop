@@ -62,6 +62,7 @@ return [
      'categories_index' => 'catégorie de produit',
      'products_index' => 'gestion des produits',
      'products_trashed' => 'corbeille',
+     'customers_trashed' => 'corbeille',
      'brands_index' => 'marque du produit',
      'orders_index' => 'liste de commandes',
      'rmas_index' => 'gestion après-vente',

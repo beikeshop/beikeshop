@@ -41,7 +41,11 @@
       </div>
 
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
+        @if ($type != 'trashed')
+          <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
+        @else
+          <button type="button" class="btn btn-primary" @click="checkedCustomerSclearRestore">{{ __('admin/product.clear_restore') }}</button>
+        @endif
       </div>
       <div class="table-push">
         <table class="table">
@@ -75,8 +79,14 @@
               </td>
               <td>@{{ customer.created_at }}</td>
               <td>
-                <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
+                @if ($type != 'trashed')
+                  <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
+                  <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
+                @else
+                  <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                    @click.prevent="restore(customer.id, index)">{{ __('common.restore') }}</a>
+                  <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteTrashedCustomer(customer.id, index)">{{ __('common.delete') }}</button>
+                @endif
               </td>
             </tr>
           </tbody>
@@ -197,6 +207,40 @@
 
         checkedCustomersCreate() {
           this.dialogCustomers.show = true
+        },
+
+        deleteTrashedCustomer(id) {
+          this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
+            type: 'warning'
+          }).then(() => {
+            $http.delete('customers/' + id + '/force').then((res) => {
+              this.$message.success(res.message);
+              window.location.reload();
+            })
+          }).catch(()=>{})
+        },
+
+        // 清空回收站
+        checkedCustomerSclearRestore() {
+          this.$confirm('{{ __('admin/product.confirm_delete_restore') }}', '{{ __('common.text_hint') }}', {
+            confirmButtonText: '{{ __('common.confirm') }}',
+            cancelButtonText: '{{ __('common.cancel') }}',
+            type: 'warning'
+          }).then(() => {
+            $http.post('{{ admin_route('customers.force_delete_all') }}').then((res) => {
+              this.$message.success(res.message);
+              window.location.reload();
+            })
+          }).catch(()=>{})
+        },
+
+        restore(id, index) {
+          $http.delete('customers/' + id + '/restore').then((res) => {
+            this.$message.success(res.message);
+            window.location.reload();
+          })
         },
 
         addCustomersFormSubmit(form) {
