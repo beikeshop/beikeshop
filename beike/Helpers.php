@@ -278,14 +278,12 @@ function current_customer(): ?Customer
 function locales(): array
 {
     $locales = LanguageRepo::enabled()->toArray();
-    $locales = array_map(function ($item) {
+    return array_map(function ($item) {
         return [
             'name' => $item['name'],
             'code' => $item['code']
         ];
     }, $locales);
-
-    return $locales;
 }
 
 /**
@@ -296,7 +294,9 @@ function locales(): array
 function locale(): string
 {
     if (is_admin()) {
-        return current_user()->locale ?? 'en';
+        $locales = collect(locales())->pluck('code');
+        $userLocale = current_user()->locale;
+        return ($locales->contains($userLocale)) ? $userLocale : 'en';
     }
     return Session::get('locale') ?? system_setting('base.locale');
 }
