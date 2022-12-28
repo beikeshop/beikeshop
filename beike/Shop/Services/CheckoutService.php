@@ -99,6 +99,7 @@ class CheckoutService
             $order = OrderRepo::create($checkoutData);
             StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
+            hook_action('checkout_confirm', $order);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -109,9 +110,9 @@ class CheckoutService
 
 
     /**
-     * 计算当前选中商品总重量
-     * @todo
+     * 计算当前选中商品总重量, 当前产品无重量, 待处理
      * @return int
+     * @todo
      */
     public function getCartWeight(): int
     {
