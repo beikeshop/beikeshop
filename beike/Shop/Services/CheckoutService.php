@@ -79,6 +79,9 @@ class CheckoutService
         if ($paymentMethodCode) {
             $this->updatePaymentMethod($paymentMethodCode);
         }
+
+        hook_action('after_checkout_update', $requestData);
+
         return $this->checkoutData();
     }
 
@@ -99,7 +102,9 @@ class CheckoutService
             $order = OrderRepo::create($checkoutData);
             StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
-            hook_action('checkout_confirm', $order);
+
+            hook_action('after_checkout_confirm', $order);
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -151,6 +156,8 @@ class CheckoutService
         if (!PluginRepo::paymentEnabled($paymentMethodCode)) {
             throw new \Exception(trans('shop/carts.invalid_payment_method'));
         }
+
+        hook_action('after_checkout_validate', $checkoutData);
     }
 
 
