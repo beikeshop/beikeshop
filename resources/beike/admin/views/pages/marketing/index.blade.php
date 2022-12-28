@@ -56,7 +56,7 @@
           <div class="col-xxl-2 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
-                <div class="plugin-img mb-3"><a :href="'admin/marketing/' + plugin.code"><img :src="plugin.icon_big"
+                <div class="plugin-img mb-3"><a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
                       class="img-fluid"></a></div>
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
                 <div class="d-flex align-items-center justify-content-between">
