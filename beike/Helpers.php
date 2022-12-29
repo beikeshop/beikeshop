@@ -302,6 +302,19 @@ function locale(): string
 }
 
 /**
+ * 获取后台当前语言
+ *
+ * @return string
+ */
+function admin_locale(): string
+{
+    if (is_admin()) {
+        return current_user()->locale;
+    }
+    return locale();
+}
+
+/**
  * 货币格式化
  *
  * @param $price

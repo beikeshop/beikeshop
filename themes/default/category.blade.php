@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('body-class', 'page-categories')
+@section('title', system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统 - BeikeShop官网') .' - '. $category->description->name)
 
 @section('content')
   <div class="container">

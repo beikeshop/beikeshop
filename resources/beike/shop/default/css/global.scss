@@ -20,6 +20,11 @@ body[class^="page-account-"] {
   src: url('/fonts/poppins/Poppins-Regular.ttf');
 }
 
+@font-face {font-family: 'poppins';
+  src: url('/fonts/poppins/Poppins-Bold.ttf');
+  font-weight: bold;
+}
+
 @font-face {font-family: 'Poppins-Medium';
   src: url('/fonts/poppins/Poppins-Medium.ttf');
 }

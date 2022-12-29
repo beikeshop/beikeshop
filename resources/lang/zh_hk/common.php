@@ -71,6 +71,8 @@ return [
     'created_at' => '創建時間',
     'updated_at' => '修改時間',
     'sort_order' => '排序',
+    'error_page' => '您訪問的數據不存在或已被刪除~',
+    'error_page_btn' => '返回上一頁',
 
     'order' => [
         'unpaid' => '待支付',

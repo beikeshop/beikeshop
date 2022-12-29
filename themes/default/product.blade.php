@@ -1,6 +1,6 @@
 @extends('layout.master')
-
 @section('body-class', 'page-product')
+@section('title', $product['name'])
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
@@ -51,7 +51,7 @@
 
       <div class="col-12 col-lg-6">
         <div class="peoduct-info">
-          <h1 class="mb-4">{{ $product['name'] }}</h1>
+          <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>

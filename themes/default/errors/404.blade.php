@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends('errors.layout')
+@section('title', __('common.error_page'))
 
-@section('title', __('Not Found'))
-@section('code', '404')
-@section('message', __('Not Found'))
+@section('content')
+  <x-shop-no-data text="{{ __('common.error_page') }}" link="javascript:history.go(-1)" btn="{{ __('common.error_page_btn') }}" />
+@endsection

@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('body-class', 'page-categories')
+@section('title', $brand->name)
 
 @section('content')
 <div class="container">

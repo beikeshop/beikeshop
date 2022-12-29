@@ -71,6 +71,8 @@ return [
     'created_at' => '作成時間',
     'updated_at' => '時間を変更する',
     'sort_order' => '選別',
+    'error_page' => 'アクセスしたデータは存在しないか削除されています~',
+    'error_page_btn' => '前のページに戻る',
 
     'order' => [
         'unpaid' => '支払われる',

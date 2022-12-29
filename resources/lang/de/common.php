@@ -71,6 +71,8 @@ return [
     'created_at' => 'Erstellungszeit',
     'updated_at' => 'geänderte Zeit',
     'sort_order' => 'sortieren',
+    'error_page' => 'Die Daten, auf die Sie zugegriffen haben, existieren nicht oder wurden gelöscht~',
+    'error_page_btn' => 'Zurück zur vorherigen Seite',
 
     'order' => [
         'unpaid' => 'zu bezahlen',

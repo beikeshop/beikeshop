@@ -71,6 +71,8 @@ return [
     'created_at' => 'tempo di creazione',
     'updated_at' => 'Cambia l\'ora',
     'sort_order' => 'ordinare',
+    'error_page' => 'I dati a cui hai effettuato l\'accesso non esistono o sono stati eliminati~',
+    'error_page_btn' => 'Torna alla pagina precedente',
 
     'order' => [
         'unpaid' => 'Essere pagato',

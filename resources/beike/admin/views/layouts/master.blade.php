@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ locale() }}">
+<html lang="{{ admin_locale() }}">
 
 <head>
   <meta charset="UTF-8">
@@ -26,7 +26,7 @@
   {{-- <x-analytics /> --}}
 </head>
 
-<body class="@yield('body-class') {{ locale() }}">
+<body class="@yield('body-class') {{ admin_locale() }}">
   <x-admin-header />
 
   <div class="main-content">

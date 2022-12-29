@@ -18,6 +18,8 @@ class CategoryController extends Controller
     {
         $products = ProductRepo::getProductsByCategory($category->id);
 
+        $category->load('description');
+
         $data = [
             'category' => $category,
             'products_format' => $products->jsonSerialize(),

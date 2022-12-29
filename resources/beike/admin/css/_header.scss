@@ -42,12 +42,12 @@
       padding: 0;
       list-style: none;
       > li {
-        html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+        html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
           padding: 0 1rem;
         }
 
         @media screen and (max-width: 1200px) {
-          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
+          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
             padding: 0 .2rem;
           }
         }
