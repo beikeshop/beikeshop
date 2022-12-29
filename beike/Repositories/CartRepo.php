@@ -39,10 +39,11 @@ class CartRepo
         if (empty($cart)) {
             $shippingMethod = PluginRepo::getShippingMethods()->first();
             $paymentMethod = PluginRepo::getPaymentMethods()->first();
+            $shippingMethodCode = $shippingMethod->code ?? '';
             $cart = Cart::query()->create([
                 'customer_id' => $customerId,
                 'shipping_address_id' => $defaultAddressId,
-                'shipping_method_code' => $shippingMethod->code ?? '',
+                'shipping_method_code' => $shippingMethodCode ? $shippingMethodCode . '.0' : '',
                 'payment_address_id' => $defaultAddressId,
                 'payment_method_code' => $paymentMethod->code ?? ''
             ]);
