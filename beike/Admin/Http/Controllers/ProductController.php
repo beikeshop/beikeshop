@@ -84,7 +84,7 @@ class ProductController extends Controller
             (new ProductService)->update($product, $request->all());
             return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
-            return redirect(admin_route('product.edit', $product))->withErrors(['error' => $e->getMessage()]);
+            return redirect(admin_route('products.edit', $product))->withErrors(['error' => $e->getMessage()]);
         }
     }
 
