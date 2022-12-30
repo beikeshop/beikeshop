@@ -41,7 +41,7 @@ class ProductSimple extends JsonResource
             'id' => $this->id,
             'sku_id' => $masterSku->id,
             'name' => $name,
-            'name_format' => sub_string($name, 36),
+            'name_format' => $name,
             'url' => shop_route('products.show', ['product' => $this]),
             'price' => $masterSku->price,
             'origin_price' => $masterSku->origin_price,

@@ -81,7 +81,7 @@
                   <h6 class="mb-0">{{ current_customer()->name }}</h6>
                 </li>
                 <li>
-                  <hr class="dropdown-divider">
+                  <hr class="dropdown-divider opacity-100">
                 </li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-person me-1"></i>
                   {{ __('shop/account.index') }}</a></li>
@@ -90,7 +90,7 @@
                 <li><a href="{{ shop_route('account.wishlist.index') }}" class="dropdown-item"><i
                       class="bi bi-heart me-1"></i> {{ __('shop/account.wishlist.index') }}</a></li>
                 <li>
-                  <hr class="dropdown-divider">
+                  <hr class="dropdown-divider opacity-100">
                 </li>
                 <li><a href="{{ shop_route('logout') }}" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i>
                     {{ __('common.sign_out') }}</a></li>

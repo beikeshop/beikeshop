@@ -139,6 +139,10 @@
           </div>
         </div>
 
+        @foreach ($html_items as $item)
+          {!! $item !!}
+        @endforeach
+
         @if (0)
           <div class="card mb-4">
             <div class="card-header">
@@ -150,7 +154,7 @@
           </div>
         @endif
 
-        @if ($order->orderShipments)
+        @if ($order->orderShipments->count())
           <div class="card mb-4">
             <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
             <div class="card-body">

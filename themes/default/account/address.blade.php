@@ -40,7 +40,7 @@
                           v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span></div>
                       <div>
                         <a class="me-2" @click.stop="deleteAddress(index)">{{ __('shop/account.addresses.delete') }}</a>
-                        <a @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</a>
+                        <a href="javascript:void(0)" @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</a>
                       </div>
                     </div>
                   </div>
@@ -57,88 +57,35 @@
       </div>
     </div>
 
-    @include('shared.address-form', [
-        'address_form_key' => 'form',
-        'address_form_show' => 'editShow',
-        'address_form_rules' => 'rules',
-    ])
+    <address-dialog ref="address-dialog" @change="onAddressDialogChange"></address-dialog>
   </div>
 @endsection
 
 @push('add-scripts')
+  @include('shared.address-form')
   <script>
     new Vue({
       el: '#address-app',
 
       data: {
         editIndex: null,
-
-        editShow: false,
-
-        form: {
-          name: '',
-          phone: '',
-          country_id: @json((int) system_setting('base.country_id')),
-          zipcode: '',
-          zone_id: @json((int) system_setting('base.zone_id')),
-          city: '',
-          address_1: '',
-          address_2: '',
-          default: false,
-        },
-
         addresses: @json($addresses ?? []),
-
-        source: {
-          countries: @json($countries ?? []),
-          zones: []
-        },
-
-        rules: {
-          name: [{
-            required: true,
-            message: '{{ __('shop/account.addresses.enter_name') }}',
-            trigger: 'blur'
-          }, ],
-          phone: [{
-            required: true,
-            message: '{{ __('shop/account.addresses.enter_phone') }}',
-            trigger: 'blur'
-          }, ],
-          address_1: [{
-            required: true,
-            message: ' {{ __('shop/account.addresses.enter_address') }}',
-            trigger: 'blur'
-          }, ],
-          zone_id: [{
-            required: true,
-            message: '{{ __('shop/account.addresses.select_province') }}',
-            trigger: 'blur'
-          }, ],
-          city: [{
-            required: true,
-            message: '{{ __('shop/account.addresses.enter_city') }}',
-            trigger: 'blur'
-          }, ],
-        }
       },
 
       // 实例被挂载后调用
       mounted() {},
 
-      beforeMount() {
-        this.countryChange(this.form.country_id);
-      },
-
       methods: {
         editAddress(index) {
+          let addresses = null
+
           if (typeof index == 'number') {
             this.editIndex = index;
-            this.form = JSON.parse(JSON.stringify(this.addresses[index]))
+
+            addresses = JSON.parse(JSON.stringify(this.addresses[index]))
           }
 
-          this.countryChange(this.form.country_id);
-          this.editShow = true
+          this.$refs['address-dialog'].editAddress(addresses)
         },
 
         deleteAddress(index) {
@@ -155,57 +102,18 @@
           }).catch(() => {})
         },
 
-        addressFormSubmit(form) {
-          const self = this;
+        onAddressDialogChange(form) {
+          if (form.default) {
+            this.addresses.map(e => e.default = false)
+          }
 
-          this.$refs[form].validate((valid) => {
-            if (!valid) {
-              this.$message.error('{{ __('shop/account.addresses.check_form') }}');
-              return;
-            }
-
-            const type = this.form.id ? 'put' : 'post';
-            const url = `/account/addresses${type == 'put' ? '/' + this.form.id : ''}`;
-
-            $http[type](url, this.form).then((res) => {
-              if (res.data.default) {
-                this.addresses.map(e => e.default = false)
-              }
-
-              if (type == 'post') {
-                this.addresses.push(res.data)
-              } else {
-                this.addresses[this.editIndex] = res.data
-              }
-              this.$message.success(res.message);
-              this.$refs[form].resetFields();
-              this.editShow = false
-              this.editIndex = null;
-            })
-          });
-        },
-
-        closeAddressDialog(form) {
-          this.$refs[form].resetFields();
-          this.editShow = false
+          if (this.addresses.find(e => e.id == form.id)) {
+            this.addresses[this.editIndex] = form
+          } else {
+            this.addresses.push(form)
+          }
           this.editIndex = null;
-
-          Object.keys(this.form).forEach(key => this.form[key] = '')
-          this.form.country_id = @json((int) system_setting('base.country_id'))
-        },
-
-        countryChange(e) {
-          const self = this;
-
-          $http.get(`/countries/${e}/zones`, null, {
-            hload: true
-          }).then((res) => {
-            this.source.zones = res.data.zones;
-
-            if (!res.data.zones.some(e => e.id == this.form.zone_id)) {
-              this.form.zone_id = '';
-            }
-          })
+          this.$forceUpdate()
         },
       }
     })

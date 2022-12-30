@@ -89,6 +89,10 @@
     </div>
   </div>
 
+  @foreach ($html_items as $item)
+    {!! $item !!}
+  @endforeach
+
   @can('orders_update_status')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.order_status') }}</h6></div>

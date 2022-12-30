@@ -15,17 +15,45 @@ body.page-checkout {
       align-items: center;
       cursor: pointer;
       padding: 20px;
+      border: 1px solid transparent;
 
       &:not(:last-of-type) {
         margin-bottom: 1rem;
       }
 
       &:hover {
+        border-color: #e5e5e5;
+      }
 
+      &:active {
+        background-color: #f7f7f7;
       }
 
       &.active {
-        border: 1px solid #e5e5e5;
+        border-color: #e5e5e5;
+
+        .radio {
+          border-color: $primary;
+
+          &:before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: $primary;
+            left: 2px;
+            top: 2px;
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .radio {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #d4d4d4;
+        border-radius: 50%;
       }
 
       .left {
