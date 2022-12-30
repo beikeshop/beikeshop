@@ -80,7 +80,7 @@ class CheckoutService
             $this->updatePaymentMethod($paymentMethodCode);
         }
 
-        hook_action('after_checkout_update', $requestData);
+        hook_action('after_checkout_update', ['request_data' => $requestData, 'cart' => $this->cart]);
 
         return $this->checkoutData();
     }
@@ -103,7 +103,7 @@ class CheckoutService
             StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
 
-            hook_action('after_checkout_confirm', $order);
+            hook_action('after_checkout_confirm', ['order' => $order, 'cart' => $this->cart]);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -207,6 +207,7 @@ class CheckoutService
                 'shipping_method_code' => $currentCart->shipping_method_code,
                 'payment_address_id' => $currentCart->payment_address_id,
                 'payment_method_code' => $currentCart->payment_method_code,
+                'extra' => $currentCart->extra,
             ],
             'country_id' => (int)system_setting('base.country_id'),
             'customer_id' => $customer->id ?? null,

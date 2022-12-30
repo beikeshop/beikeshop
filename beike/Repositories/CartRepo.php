@@ -57,6 +57,7 @@ class CartRepo
             $cart->save();
         }
         $cart->loadMissing(['shippingAddress', 'paymentAddress']);
+        $cart->extra = json_decode($cart->extra, true);
         return $cart;
     }
 

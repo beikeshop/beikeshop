@@ -12,7 +12,6 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Order;
-use Beike\Services\ShipmentService;
 use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
@@ -69,10 +68,8 @@ class OrderController extends Controller
     public function show(Request $request, Order $order)
     {
         $order->load(['orderTotals', 'orderHistories', 'orderShipments']);
-        $data = [
-            'order' => $order,
-            'statuses' => StateMachineService::getInstance($order)->nextBackendStatuses()
-        ];
+        $data = hook_filter('account_order_detail', ['order' => $order, 'html_items' => []]);
+        $data['statuses'] = StateMachineService::getInstance($order)->nextBackendStatuses();
         return view('admin::pages.orders.form', $data);
     }
 
