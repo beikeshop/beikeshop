@@ -13,6 +13,7 @@ namespace Beike\Repositories;
 
 use Beike\Models\Plugin;
 use Beike\Plugin\Plugin as BPlugin;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Collection;
 use Beike\Shop\Services\TotalServices\ShippingService;
@@ -42,6 +43,7 @@ class PluginRepo
     public static function installPlugin(BPlugin $bPlugin)
     {
         self::publishStaticFiles($bPlugin);
+        self::migrateDatabase($bPlugin);
         $type = $bPlugin->type;
         $code = $bPlugin->code;
         $plugin = Plugin::query()
@@ -68,6 +70,20 @@ class PluginRepo
         $staticPath = $path . '/Static';
         if (is_dir($staticPath)) {
             File::copyDirectory($staticPath, public_path('plugin/' . $code));
+        }
+    }
+
+
+    /**
+     * 数据库迁移
+     */
+    public static function migrateDatabase(BPlugin $bPlugin)
+    {
+        $migrationPath = "{$bPlugin->getPath()}/Migrations";
+        if (is_dir($migrationPath)) {
+            Artisan::call('migrate', [
+                '--force' => true
+            ]);
         }
     }
 
