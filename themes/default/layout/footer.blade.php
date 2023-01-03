@@ -2,23 +2,26 @@
   @php
     $locale = locale();
   @endphp
-  <div class="services-wrap">
-    <div class="container">
-      <div class="row">
-        @foreach ($footer_content['services']['items'] as $item)
-          <div class="col-lg-3 col-md-6 col-12">
-            <div class="service-item my-1">
-              <div class="icon"><img src="{{ image_resize($item['image'], 80, 80) }}" class="img-fluid"></div>
-              <div class="text">
-                <p class="title">{{ $item['title'][locale()] ?? '' }}</p>
-                <p class="sub-title">{{ $item['sub_title'][locale()] ?? '' }}</p>
+
+  @if ($footer_content['services']['enable'])
+    <div class="services-wrap">
+      <div class="container">
+        <div class="row">
+          @foreach ($footer_content['services']['items'] as $item)
+            <div class="col-lg-3 col-md-6 col-12">
+              <div class="service-item my-1">
+                <div class="icon"><img src="{{ image_resize($item['image'], 80, 80) }}" class="img-fluid"></div>
+                <div class="text">
+                  <p class="title">{{ $item['title'][locale()] ?? '' }}</p>
+                  <p class="sub-title">{{ $item['sub_title'][locale()] ?? '' }}</p>
+                </div>
               </div>
             </div>
-          </div>
-        @endforeach
+          @endforeach
+        </div>
       </div>
     </div>
-  </div>
+  @endif
   <div class="container">
     <div class="footer-content">
       <div class="row">
