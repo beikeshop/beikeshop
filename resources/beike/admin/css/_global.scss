@@ -454,3 +454,17 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
 .swal2-confirm:focus {
   box-shadow: none !important;
 }
+
+.order-top-info {
+  table {
+    tr {
+      td:first-of-type {
+        width: 40%;
+
+        html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
+          width: 90px;
+        }
+      }
+    }
+  }
+}

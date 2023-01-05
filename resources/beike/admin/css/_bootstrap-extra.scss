@@ -40,6 +40,20 @@ hr.horizontal.dark {
       color: #6c757d;
       border: none;
       padding: 0 .2rem 0.7rem;
+      &.error-invalid {
+        color: #dc3545 !important;
+        font-weight: bold;
+        position: relative;
+        padding-left: 17px;
+
+        &:before {
+          content: '\F333';
+          left: 0;
+          top: 1px;
+          font-family: 'bootstrap-icons';
+          position: absolute;
+        }
+      }
 
       &.active {
         // color: $primary;

@@ -21,6 +21,15 @@ $(function () {
         }
 
         form.classList.add("was-validated");
+
+        // 如果错误输入框在 tab 页面，则高亮显示对应的选项卡
+        $('.invalid-feedback').each(function(index, el) {
+          if ($(el).css('display') == 'block' && $(el).parents('.tab-pane')) {
+            const id = $(el).parents('.tab-pane').prop('id');
+
+            $(`a[href="#${id}"], button[data-bs-target="#${id}"]`).addClass('error-invalid');
+          }
+        });
       },
       false
     );

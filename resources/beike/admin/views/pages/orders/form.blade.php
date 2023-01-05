@@ -5,13 +5,13 @@
 @section('content')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
-    <div class="card-body">
+    <div class="card-body order-top-info">
       <div class="row">
         <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td style="width: 40%">{{ __('order.number') }}：</td>
+                <td>{{ __('order.number') }}：</td>
                 <td>{{ $order->number }}</td>
               </tr>
               <tr>
@@ -29,16 +29,16 @@
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td style="width: 40%">{{ __('order.customer_name') }}：</td>
+                <td>{{ __('order.customer_name') }}：</td>
                 <td>{{ $order->customer_name }}</td>
+              </tr>
+              <tr>
+                <td>{{ __('common.email') }}：</td>
+                <td>{{ $order->email }}</td>
               </tr>
               <tr>
                 <td>{{ __('order.created_at') }}：</td>
                 <td>{{ $order->created_at }}</td>
-              </tr>
-              <tr>
-                <td>{{ __('order.updated_at') }}：</td>
-                <td>{{ $order->updated_at }}</td>
               </tr>
             </tbody>
           </table>
@@ -47,8 +47,8 @@
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td style="width: 20%">{{ __('common.email') }}：</td>
-                <td>{{ $order->email }}</td>
+                <td>{{ __('order.updated_at') }}：</td>
+                <td>{{ $order->updated_at }}</td>
               </tr>
             </tbody>
           </table>
