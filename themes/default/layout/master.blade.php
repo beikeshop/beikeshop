@@ -9,13 +9,13 @@
   <meta name="keywords" content="@yield('keywords', system_setting('base.meta_keyword'))">
   <meta name="description" content="@yield('description', system_setting('base.meta_description'))">
   <base href="{{ $shop_base_url }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/default/css/bootstrap.css') }}">
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
   <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('/build/beike/shop/default/js/app.js') }}"></script>
-  <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/shop/default/css/app.css') }}">
+  <script src="{{ mix('/build/beike/shop/default/js/app.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/default/css/app.css') }}">
   @if (system_setting('base.head_code'))
     {!! system_setting('base.head_code') !!}
   @endif
@@ -33,7 +33,10 @@
   @endif
 
   <script>
-    const isLogin = @json(current_customer());
+    const config = {
+      isLogin: !!{{ current_customer()->id ?? 'null' }},
+      guestCheckout: !!{{ system_setting('base.guest_checkout', '1') }}
+    }
   </script>
 
   @stack('add-scripts')

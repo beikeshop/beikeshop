@@ -287,7 +287,7 @@
         addresses: @json($addresses ?? []),
         guest_shipping_address: @json($current['guest_shipping_address'] ?? null),
         guest_payment_address: @json($current['guest_payment_address'] ?? null),
-        isLogin: @json(current_customer(), null),
+        isLogin: config.isLogin,
       },
 
       dialogAddress: {
@@ -346,7 +346,7 @@
         const type = form.id ? 'put' : 'post';
         const url = `/account/addresses${type == 'put' ? '/' + form.id : ''}`;
 
-        if (!isLogin) {
+        if (!this.source.isLogin) {
           let data = {[this.dialogAddress.type]: form}
 
           if (this.source.guest_payment_address === null && this.source.guest_shipping_address === null) {

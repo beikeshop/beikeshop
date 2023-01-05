@@ -32,7 +32,7 @@ export default {
    * @return {*}  返回Promise
    */
   addCart({sku_id, quantity = 1, isBuyNow = false}, event) {
-    if (!isLogin) {
+    if (!config.isLogin && !config.guestCheckout) {
       this.openLogin()
       return;
     }
@@ -52,7 +52,7 @@ export default {
   },
 
   addWishlist(id, event) {
-    if (!isLogin) {
+    if (!config.isLogin && !config.guestCheckout) {
       this.openLogin()
       return;
     }

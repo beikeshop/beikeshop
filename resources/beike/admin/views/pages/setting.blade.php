@@ -38,6 +38,9 @@
           </div>
 
           <div class="tab-pane fade" id="tab-store">
+            <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
+            </x-admin-form-switch>
+
             <x-admin::form.row title="{{ __('admin/setting.default_address') }}">
               <div class="d-lg-flex">
                 <div>
@@ -87,7 +90,6 @@
             </x-admin-form-switch>
 
             <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.tax_address_info') }}</div>
             </x-admin-form-select>
 
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
