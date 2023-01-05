@@ -77,6 +77,7 @@ class ImageService
 
             $newImagePath = public_path($newImage);
             if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
+                ini_set("memory_limit", "-1");
                 create_directories(dirname($newImage));
                 $img = Image::make($this->imagePath);
 
