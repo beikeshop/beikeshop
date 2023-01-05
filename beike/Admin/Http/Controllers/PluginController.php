@@ -11,9 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\MenuRepo;
 use Exception;
-use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
