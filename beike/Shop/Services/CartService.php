@@ -93,12 +93,16 @@ class CartService
      */
     public static function select($customer, $cartIds)
     {
-        CartProduct::query()->where('customer_id', $customer->id)->update(['selected' => 0]);
+        if ($customer) {
+            $builder = CartProduct::query()->where('customer_id', $customer->id);
+        } else {
+            $builder = CartProduct::query()->where('session_id', session()->getId());
+        }
+        $builder->update(['selected' => 0]);
         if (empty($cartIds)) {
             return;
         }
-        CartProduct::query()->where('customer_id', $customer->id)
-            ->whereIn('id', $cartIds)
+        $builder->whereIn('id', $cartIds)
             ->update(['selected' => 1]);
     }
 
@@ -111,8 +115,12 @@ class CartService
         if (empty($cartId) || $quantity == 0) {
             return;
         }
-        CartProduct::query()->where('customer_id', $customer->id)
-            ->where('id', $cartId)
+        if ($customer) {
+            $builder = CartProduct::query()->where('customer_id', $customer->id);
+        } else {
+            $builder = CartProduct::query()->where('session_id', session()->getId());
+        }
+        $builder->where('id', $cartId)
             ->update(['quantity' => $quantity, 'selected' => 1]);
     }
 
