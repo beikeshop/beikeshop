@@ -129,7 +129,7 @@ class BrandRepo
         foreach ($brands as $brand) {
             $results[$brand->first][] = (new BrandDetail($brand))->jsonSerialize();
         }
-
+        ksort($results);
         return $results;
     }
 
