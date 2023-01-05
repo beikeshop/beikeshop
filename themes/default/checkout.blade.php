@@ -26,7 +26,7 @@
                 <div class="checkout-title">
                   <div class="d-flex">
                     <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
-                    <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
+                    <el-checkbox v-model="same_as_shipping_address" v-if="source.addresses.length || source.guest_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
                     </el-checkbox>
                   </div>
                   <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i
@@ -215,49 +215,51 @@
       </div>
 
       <div class="col-12 col-md-4 right-column">
-        @if (!current_customer())
-          <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
-            <div class="card-header">
-              <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
+        <div class="fixed-top-line">
+          @if (!current_customer())
+            <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
+              <div class="card-header">
+                <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
+              </div>
+              <div class="card-body">
+                <button class="btn btn-outline-dark guest-checkout-login"><i class="bi bi-box-arrow-in-right me-2"></i>{{ __('shop/login.login_and_sign') }}</button>
+              </div>
+            </div>
+          @endif
+
+          <div class="card total-wrap p-lg-4 shadow-sm">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <h5 class="mb-0">{{ __('shop/checkout.cart_totals') }}</h5>
+              <span class="rounded-circle bg-primary">{{ $carts['quantity'] }}</span>
             </div>
             <div class="card-body">
-              <button class="btn btn-outline-dark guest-checkout-login"><i class="bi bi-box-arrow-in-right me-2"></i>{{ __('shop/login.login_and_sign') }}</button>
-            </div>
-          </div>
-        @endif
-
-        <div class="card total-wrap fixed-top-line p-lg-4 shadow-sm">
-          <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">{{ __('shop/checkout.cart_totals') }}</h5>
-            <span class="rounded-circle bg-primary">{{ $carts['quantity'] }}</span>
-          </div>
-          <div class="card-body">
-            <div class="products-wrap">
-              @foreach ($carts['carts'] as $cart)
-                <div class="item">
-                  <div class="image">
-                    <img src="{{ $cart['image'] }}" class="img-fluid">
-                    <div class="name">
-                      <div title="{{ $cart['name'] }}" class="text-truncate-2">{{ $cart['name'] }}</div>
-                      @if ($cart['variant_labels'])
-                        <div class="text-muted mt-1">{{ $cart['variant_labels'] }}</div>
-                      @endif
+              <div class="products-wrap">
+                @foreach ($carts['carts'] as $cart)
+                  <div class="item">
+                    <div class="image">
+                      <img src="{{ $cart['image'] }}" class="img-fluid">
+                      <div class="name">
+                        <div title="{{ $cart['name'] }}" class="text-truncate-2">{{ $cart['name'] }}</div>
+                        @if ($cart['variant_labels'])
+                          <div class="text-muted mt-1">{{ $cart['variant_labels'] }}</div>
+                        @endif
+                      </div>
+                    </div>
+                    <div class="price text-end">
+                      <div>{{ $cart['price_format'] }}</div>
+                      <div class="quantity">x {{ $cart['quantity'] }}</div>
                     </div>
                   </div>
-                  <div class="price text-end">
-                    <div>{{ $cart['price_format'] }}</div>
-                    <div class="quantity">x {{ $cart['quantity'] }}</div>
-                  </div>
-                </div>
-              @endforeach
-            </div>
-            <ul class="totals">
-              @foreach ($totals as $total)
-                <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
-              @endforeach
-            </ul>
-            <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary fw-bold" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
+                @endforeach
+              </div>
+              <ul class="totals">
+                @foreach ($totals as $total)
+                  <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
+                @endforeach
+              </ul>
+              <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-primary fw-bold" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
+              </div>
             </div>
           </div>
         </div>
