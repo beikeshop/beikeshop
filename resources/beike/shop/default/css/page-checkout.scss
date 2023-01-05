@@ -9,6 +9,8 @@
  */
 
 body.page-checkout {
+  background-color: #f6f8fa;
+
   .radio-line-wrap {
     .radio-line-item {
       display: flex;
@@ -95,18 +97,6 @@ body.page-checkout {
         border: none;
       }
     }
-    // .add-addres {
-    //   display: flex;
-    //   align-items: center; // flex-start | center
-    //   justify-content: center; // flex-end | center | space-between
-    //   flex-direction: column;
-    //   font-size: 1rem;
-    //   color: #666;
-
-    //   i {
-    //     font-size: 2rem;
-    //   }
-    // }
   }
 }
 
@@ -115,32 +105,14 @@ body.page-checkout, body.page-bk-stripe {
     margin-bottom: 2.6rem;
   }
 
-  .right-column {
-    position: relative;
-    @media (min-width: 992px) {
-      padding-left: 2rem;
-    }
-  }
-
   .checkout-title {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #f1f1f1;
     padding-bottom: 16px;
     margin-bottom: 16px;
     position: relative;
-    // padding-left: 10px;
     display: flex;
     align-items: center; // flex-start | center
     justify-content: space-between; // flex-end | center | space-between
-
-    // &:before {
-    //   content: '';
-    //   position: absolute;
-    //   top: 2px;
-    //   left: 0;
-    //   background-color: $primary;
-    //   width: 3px;
-    //   height: 16px;
-    // }
 
     .btn {
       margin-bottom: -10px;
@@ -151,18 +123,21 @@ body.page-checkout, body.page-bk-stripe {
   }
 
   .total-wrap {
-    padding: 1.4rem;
-    border: 3px solid #efefef;
-
     .card-body {
-      padding: 0;
+      @media (min-width: 768px) {
+        padding: 0;
+      }
     }
 
     .card-header {
       background-color: #fff;
-      padding: 0 0 .8rem;
       margin-bottom: 1rem;
       border-bottom: 1px solid #E6E6E6;
+
+      @media (min-width: 768px) {
+        padding: 0 0 .8rem;
+      }
+
       h5 {
         font-weight: bold;
       }
@@ -222,7 +197,6 @@ body.page-checkout, body.page-bk-stripe {
         align-items: center; // flex-start | center
         justify-content: space-between; // flex-end | center | space-between
         margin-bottom: 14px;
-        // flex-wrap: wrap;
         &:last-of-type {
           font-weight: bold;
 
@@ -232,16 +206,10 @@ body.page-checkout, body.page-bk-stripe {
             }
           }
         }
-        > span {
-          // font-weight: bold;
 
+        > span {
           &:first-of-type {
             font-size: .8rem;
-            // color: #3f3f3f;
-          }
-
-          &:last-of-type {
-            // color: #dc3545;
           }
         }
       }

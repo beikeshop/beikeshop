@@ -19,199 +19,214 @@
 
     <div class="row mt-5">
       <div class="col-12 col-md-8 left-column">
-        <div id="checkout-app" v-cloak>
-          <div class="checkout-black">
-            <div class="checkout-title">
-              <div class="d-flex">
-                <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
-                <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
-                </el-checkbox>
-              </div>
-              <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i
-                  class="bi bi-x-lg"></i></button>
-            </div>
-            <div class="addresses-wrap">
-              <div class="row">
-                <template v-if="source.isLogin">
-                  <div class="col-6" v-for="address, index in source.addresses" :key="index"
-                    v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
-                    <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
-                      @click="updateCheckout(address.id, 'shipping_address_id')">
-                      <div class="name-wrap">
-                        <span class="name">@{{ address.name }}</span>
-                        <span class="phone">@{{ address.phone }}</span>
-                      </div>
-                      <div class="zipcode">@{{ address.zipcode }}</div>
-                      <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
-                        @{{ address.address_1 }}</div>
-                      <div class="address-bottom">
-                        <div>
-                          <span class="badge bg-success"
-                            v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+        <div class="card shadow-sm">
+          <div class="card-body p-lg-4">
+            <div id="checkout-app" v-cloak>
+              <div class="checkout-black">
+                <div class="checkout-title">
+                  <div class="d-flex">
+                    <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
+                    <el-checkbox v-model="same_as_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
+                    </el-checkbox>
+                  </div>
+                  <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i
+                      class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="addresses-wrap">
+                  <div class="row">
+                    <template v-if="source.isLogin">
+                      <div class="col-6" v-for="address, index in source.addresses" :key="index"
+                        v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
+                        <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
+                          @click="updateCheckout(address.id, 'shipping_address_id')">
+                          <div class="name-wrap">
+                            <span class="name">@{{ address.name }}</span>
+                            <span class="phone">@{{ address.phone }}</span>
+                          </div>
+                          <div class="zipcode">@{{ address.zipcode }}</div>
+                          <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
+                            @{{ address.address_1 }}</div>
+                          <div class="address-bottom">
+                            <div>
+                              <span class="badge bg-success"
+                                v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                            </div>
+                            <a href="javascript:void(0)" class=""
+                              @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
+                          </div>
                         </div>
-                        <a href="javascript:void(0)" class=""
-                          @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-6" v-if="!isAllAddress">
-                    <div class="item address-right">
-                      <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
-                        @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
-                      <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i
-                          class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
-                    </div>
-                  </div>
-                </template>
-                <template v-else>
-                  <div class="col-6" v-if="source.guest_shipping_address">
-                    <div class="item active">
-                      <div class="name-wrap">
-                        <span class="name">@{{ source.guest_shipping_address.name }}</span>
-                        <span class="phone">@{{ source.guest_shipping_address.phone }}</span>
-                      </div>
-                      <div class="zipcode">
-                        <span>@{{ source.guest_shipping_address.zipcode }}</span>
-                        <span class="ms-1">@{{ source.guest_shipping_address.email }}</span>
-                      </div>
-                      <div class="address-info">@{{ source.guest_shipping_address.country }} @{{ source.guest_shipping_address.zone }} @{{ source.guest_shipping_address.city }}
-                        @{{ source.guest_shipping_address.address_1 }}</div>
-                      <div class="address-bottom">
-                        <div>
-                          <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
+                      <div class="col-6" v-if="!isAllAddress">
+                        <div class="item address-right">
+                          <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+                            @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                          <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i
+                              class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                         </div>
-                        <a class="javascript:void(0)"
-                          @click.stop="editAddress(null, 'guest_shipping_address')">{{ __('shop/checkout.edit') }}</a>
                       </div>
-                    </div>
+                    </template>
+                    <template v-else>
+                      <div class="col-6" v-if="source.guest_shipping_address">
+                        <div class="item active">
+                          <div class="name-wrap">
+                            <span class="name">@{{ source.guest_shipping_address.name }}</span>
+                            <span class="phone">@{{ source.guest_shipping_address.phone }}</span>
+                          </div>
+                          <div class="zipcode">
+                            <span>@{{ source.guest_shipping_address.zipcode }}</span>
+                            <span class="ms-1">@{{ source.guest_shipping_address.email }}</span>
+                          </div>
+                          <div class="address-info">@{{ source.guest_shipping_address.country }} @{{ source.guest_shipping_address.zone }} @{{ source.guest_shipping_address.city }}
+                            @{{ source.guest_shipping_address.address_1 }}</div>
+                          <div class="address-bottom">
+                            <div>
+                              <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
+                            </div>
+                            <a class="javascript:void(0)"
+                              @click.stop="editAddress(null, 'guest_shipping_address')">{{ __('shop/checkout.edit') }}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6" v-if="!source.guest_shipping_address">
+                        <div class="item address-right">
+                          <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_shipping_address')"><i
+                              class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                        </div>
+                      </div>
+                    </template>
                   </div>
-                  <div class="col-6" v-if="!source.guest_shipping_address">
-                    <div class="item address-right">
-                      <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_shipping_address')"><i
-                          class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
-                    </div>
-                  </div>
-                </template>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class="checkout-black" v-if='!same_as_shipping_address'>
-            <div class="checkout-title">
-              <div class="d-flex">
-                <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
-              </div>
-              <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i
-                  class="bi bi-x-lg"></i></button>
-            </div>
-            <div class="addresses-wrap">
-              <div class="row">
-                <template v-if="source.isLogin">
-                  <div class="col-6" v-for="address, index in source.addresses" :key="index"
-                    v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
-                    <div :class="['item', address.id == form.payment_address_id ? 'active' : '']"
-                      @click="updateCheckout(address.id, 'payment_address_id')">
-                      <div class="name-wrap">
-                        <span class="name">@{{ address.name }}</span>
-                        <span class="phone">@{{ address.phone }}</span>
-                      </div>
-                      <div class="zipcode">@{{ address.zipcode }}</div>
-                      <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
-                        @{{ address.address_1 }}</div>
-                      <div class="address-bottom">
-                        <div>
-                          <span class="badge bg-success"
-                            v-if="form.payment_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+              <div class="checkout-black" v-if='!same_as_shipping_address'>
+                <div class="checkout-title">
+                  <div class="d-flex">
+                    <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
+                  </div>
+                  <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i
+                      class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="addresses-wrap">
+                  <div class="row">
+                    <template v-if="source.isLogin">
+                      <div class="col-6" v-for="address, index in source.addresses" :key="index"
+                        v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
+                        <div :class="['item', address.id == form.payment_address_id ? 'active' : '']"
+                          @click="updateCheckout(address.id, 'payment_address_id')">
+                          <div class="name-wrap">
+                            <span class="name">@{{ address.name }}</span>
+                            <span class="phone">@{{ address.phone }}</span>
+                          </div>
+                          <div class="zipcode">@{{ address.zipcode }}</div>
+                          <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
+                            @{{ address.address_1 }}</div>
+                          <div class="address-bottom">
+                            <div>
+                              <span class="badge bg-success"
+                                v-if="form.payment_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
+                            </div>
+                            <a class="javascript:void(0)"
+                              @click.stop="editAddress(index, 'payment_address_id')">{{ __('shop/checkout.edit') }}</a>
+                          </div>
                         </div>
-                        <a class="javascript:void(0)"
-                          @click.stop="editAddress(index, 'payment_address_id')">{{ __('shop/checkout.edit') }}</a>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-6" v-if="!isAllAddressPayment">
-                    <div class="item address-right">
-                      <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
-                        @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
-                      <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i
-                          class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
-                    </div>
-                  </div>
-                </template>
-                <template v-else>
-                  <div class="col-6" v-if="source.guest_payment_address">
-                    <div class="item active">
-                      <div class="name-wrap">
-                        <span class="name">@{{ source.guest_payment_address.name }}</span>
-                        <span class="phone">@{{ source.guest_payment_address.phone }}</span>
-                      </div>
-                      <div class="zipcode">@{{ source.guest_payment_address.zipcode }}</div>
-                      <div class="address-info">@{{ source.guest_payment_address.country }} @{{ source.guest_payment_address.zone }} @{{ source.guest_payment_address.city }}
-                        @{{ source.guest_payment_address.address_1 }}</div>
-                      <div class="address-bottom">
-                        <div>
-                          <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
+                      <div class="col-6" v-if="!isAllAddressPayment">
+                        <div class="item address-right">
+                          <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+                            @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
+                          <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i
+                              class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
                         </div>
-                        <a class="javascript:void(0)"
-                          @click.stop="editAddress(null, 'guest_payment_address')">{{ __('shop/checkout.edit') }}</a>
                       </div>
-                    </div>
+                    </template>
+                    <template v-else>
+                      <div class="col-6" v-if="source.guest_payment_address">
+                        <div class="item active">
+                          <div class="name-wrap">
+                            <span class="name">@{{ source.guest_payment_address.name }}</span>
+                            <span class="phone">@{{ source.guest_payment_address.phone }}</span>
+                          </div>
+                          <div class="zipcode">@{{ source.guest_payment_address.zipcode }}</div>
+                          <div class="address-info">@{{ source.guest_payment_address.country }} @{{ source.guest_payment_address.zone }} @{{ source.guest_payment_address.city }}
+                            @{{ source.guest_payment_address.address_1 }}</div>
+                          <div class="address-bottom">
+                            <div>
+                              <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
+                            </div>
+                            <a class="javascript:void(0)"
+                              @click.stop="editAddress(null, 'guest_payment_address')">{{ __('shop/checkout.edit') }}</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6" v-if="!source.guest_payment_address">
+                        <div class="item address-right">
+                          <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_payment_address')"><i
+                              class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
+                        </div>
+                      </div>
+                    </template>
                   </div>
-                  <div class="col-6" v-if="!source.guest_payment_address">
-                    <div class="item address-right">
-                      <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_payment_address')"><i
-                          class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
-                    </div>
-                  </div>
-                </template>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="checkout-black">
-          <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>
-          <div class="radio-line-wrap">
-            @foreach ($payment_methods as $payment)
-              <div class="radio-line-item {{ $payment['code'] == $current['payment_method_code'] ? 'active' : '' }}" data-key="payment_method_code" data-value="{{ $payment['code'] }}">
-                <div class="left">
-                  <span class="radio"></span>
-                  {{-- <input name="payment" type="radio" {{ $payment['code'] == $current['payment_method_code'] ? 'checked' : ''  }} value="{{ $payment['code'] }}" class="form-check-input"> --}}
-                  <img src="{{ $payment['icon'] }}" class="img-fluid">
-                </div>
-                <div class="right ms-3">
-                  <div class="title">{{ $payment['name'] }}</div>
-                  <div class="sub-title">{!! $payment['description'] !!}</div>
-                </div>
+            <div class="checkout-black">
+              <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>
+              <div class="radio-line-wrap">
+                @foreach ($payment_methods as $payment)
+                  <div class="radio-line-item {{ $payment['code'] == $current['payment_method_code'] ? 'active' : '' }}" data-key="payment_method_code" data-value="{{ $payment['code'] }}">
+                    <div class="left">
+                      <span class="radio"></span>
+                      {{-- <input name="payment" type="radio" {{ $payment['code'] == $current['payment_method_code'] ? 'checked' : ''  }} value="{{ $payment['code'] }}" class="form-check-input"> --}}
+                      <img src="{{ $payment['icon'] }}" class="img-fluid">
+                    </div>
+                    <div class="right ms-3">
+                      <div class="title">{{ $payment['name'] }}</div>
+                      <div class="sub-title">{!! $payment['description'] !!}</div>
+                    </div>
+                  </div>
+                @endforeach
               </div>
-            @endforeach
-          </div>
-        </div>
+            </div>
 
-        <div class="checkout-black">
-          <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
-          <div class="radio-line-wrap">
-            @foreach ($shipping_methods as $methods)
-              @foreach ($methods['quotes'] as $shipping)
-              <div class="radio-line-item {{ $shipping['code'] == $current['shipping_method_code'] ? 'active':'' }}" data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
-                <div class="left">
-                  {{-- <input name="shipping" {{ $shipping['code'] == $current['shipping_method_code'] ? 'checked' : ''  }} type="radio" value="{{ $shipping['code'] }}" class="form-check-input"> --}}
-                  <span class="radio"></span>
-                  <img src="{{ $shipping['icon'] }}" class="img-fluid">
-                </div>
-                <div class="right ms-3">
-                  <div class="title">{{ $shipping['name'] }}</div>
-                  <div class="sub-title">{!! $shipping['description'] !!}</div>
-                  <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>
-                </div>
+            <div class="checkout-black">
+              <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
+              <div class="radio-line-wrap">
+                @foreach ($shipping_methods as $methods)
+                  @foreach ($methods['quotes'] as $shipping)
+                  <div class="radio-line-item {{ $shipping['code'] == $current['shipping_method_code'] ? 'active':'' }}" data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
+                    <div class="left">
+                      {{-- <input name="shipping" {{ $shipping['code'] == $current['shipping_method_code'] ? 'checked' : ''  }} type="radio" value="{{ $shipping['code'] }}" class="form-check-input"> --}}
+                      <span class="radio"></span>
+                      <img src="{{ $shipping['icon'] }}" class="img-fluid">
+                    </div>
+                    <div class="right ms-3">
+                      <div class="title">{{ $shipping['name'] }}</div>
+                      <div class="sub-title">{!! $shipping['description'] !!}</div>
+                      <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>
+                    </div>
+                  </div>
+                  @endforeach
+                @endforeach
               </div>
-              @endforeach
-            @endforeach
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-12 col-md-4 right-column">
-        <div class="card total-wrap fixed-top-line">
+        @if (!current_customer())
+          <div class="card total-wrap mb-4 fixed-top-line p-lg-4 shadow-sm">
+            <div class="card-header">
+              <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
+            </div>
+            <div class="card-body">
+              <button class="btn btn-outline-dark guest-checkout-login"><i class="bi bi-box-arrow-in-right me-2"></i>{{ __('shop/login.login_and_sign') }}</button>
+            </div>
+          </div>
+        @endif
+
+        <div class="card total-wrap fixed-top-line p-lg-4 shadow-sm">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h5 class="mb-0">{{ __('shop/checkout.cart_totals') }}</h5>
             <span class="rounded-circle bg-primary">{{ $carts['quantity'] }}</span>
@@ -242,7 +257,7 @@
               @endforeach
             </ul>
             <div class="d-grid gap-2 mt-3">
-              <button class="btn btn-primary" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
+              <button class="btn btn-primary fw-bold" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
             </div>
           </div>
         </div>
@@ -268,6 +283,10 @@
 
     $('#submit-checkout').click(function(event) {
       app.checkedBtnCheckoutConfirm();
+    });
+
+    $('.guest-checkout-login').click(function(event) {
+      bk.openLogin();
     });
   });
 

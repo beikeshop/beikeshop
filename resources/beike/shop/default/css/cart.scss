@@ -8,6 +8,26 @@
  * @LastEditTime  2022-09-16 20:47:16
  */
 
+body.page-checkout, body.page-cart {
+  background-color: #f6f8fa;
+
+  .left-column {
+    @media (min-width: 992px) {
+      width: 70%;
+    }
+  }
+
+  .right-column {
+    @media (min-width: 992px) {
+      width: 30%;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 1.4rem;
+    }
+  }
+}
+
 body.page-cart {
   .cart-products-wrap {
     .table {
@@ -18,11 +38,11 @@ body.page-cart {
           border-color: #f0f2f4;
         }
 
-        tr {
-          &.active {
-            background-color: #fff6f1;
-          }
-        }
+        // tr {
+        //   &.active {
+        //     background-color: #fff6f1;
+        //   }
+        // }
       }
 
       thead {
@@ -45,9 +65,6 @@ body.page-cart {
   }
 
   .total-wrap {
-    border: none;
-    background-color: #F8F9FA;
-
     &.total-wrap-fixed {
       position: fixed;
       top: 0;

@@ -22,69 +22,77 @@
     @endif
 
     <div class="row mt-5" v-if="products.length">
-      <div class="col-12 col-md-9">
-        <div class="cart-products-wrap table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th width="130">
-                  <input class="form-check-input" type="checkbox" value="" id="check-all" v-model="allSelected">
-                  <label class="form-check-label ms-1" for="check-all">
-                    {{ __('shop/carts.select_all') }}
-                  </label>
-                </th>
-                <th width="40%">{{ __('shop/carts.index') }}</th>
-                <th width="170">{{ __('shop/carts.commodity') }}</th>
-                <th width="170">{{ __('shop/carts.subtotal') }}</th>
-                <th width="100" class="text-end">{{ __('common.action') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="product, index in products" :key="index" :class="product.selected ? 'active' : ''">
-                <td>
-                  <div class="d-flex align-items-center p-image">
-                    <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-                    <div class="border d-flex align-items-center justify-content-between wh-80 ms-3"><img :src="product.image" class="img-fluid"></div>
-                  </div>
-                </td>
-                <td>
-                  <div class="name text-truncate-2 mb-1 fw-bold" v-text="product.name"></div>
-                  <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
-                  <div class="price text-muted">@{{ product.price_format }}</div>
-                </td>
-                <td>
-                  <div class="quantity-wrap">
-                    <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
-                    <div class="right">
-                      <i class="bi bi-chevron-up"></i>
-                      <i class="bi bi-chevron-down"></i>
-                    </div>
-                  </div>
-                </td>
-                <td>@{{ product.subtotal_format }}</td>
-                <td class="text-end">
-                  <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
-                    <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="col-12 col-md-9 left-column">
+        <div class="card shadow-sm">
+          <div class="card-body p-lg-4">
+            <div class="p-lg-0"><h5 class="mb-3">{{ __('shop/carts.commodity') }}</h5></div>
+            <div class="cart-products-wrap table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="130">
+                      <input class="form-check-input" type="checkbox" value="" id="check-all" v-model="allSelected">
+                      <label class="form-check-label ms-1" for="check-all">
+                        {{ __('shop/carts.select_all') }}
+                      </label>
+                    </th>
+                    <th width="40%">{{ __('shop/carts.index') }}</th>
+                    <th width="170">{{ __('shop/carts.commodity') }}</th>
+                    <th width="170">{{ __('shop/carts.subtotal') }}</th>
+                    <th width="100" class="text-end">{{ __('common.action') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="product, index in products" :key="index" :class="product.selected ? 'active' : ''">
+                    <td>
+                      <div class="d-flex align-items-center p-image">
+                        <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
+                        <div class="border d-flex align-items-center justify-content-between wh-80 ms-3"><img :src="product.image" class="img-fluid"></div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="name text-truncate-2 mb-1 fw-bold" v-text="product.name"></div>
+                      <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
+                      <div class="price text-muted">@{{ product.price_format }}</div>
+                    </td>
+                    <td>
+                      <div class="quantity-wrap">
+                        <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
+                        <div class="right">
+                          <i class="bi bi-chevron-up"></i>
+                          <i class="bi bi-chevron-down"></i>
+                        </div>
+                      </div>
+                    </td>
+                    <td>@{{ product.subtotal_format }}</td>
+                    <td class="text-end">
+                      <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
+                        <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-12 col-md-3">
-        <div class="card total-wrap fixed-top-line">
-          <div class="card-header"><h5 class="mb-0">{{ __('shop/carts.product_total') }}</h5></div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ allProduct }}</span></li>
-              <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
-              <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
-              <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
-                {{-- <a href="{{ shop_route('checkout.index', 'checkout') }}" class="btn btn-primary">去结账</a> --}}
-                <button type="button" class="btn btn-primary" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
-              </li>
-            </ul>
+      <div class="col-12 col-md-3 right-column">
+        <div class="card shadow-sm">
+          <div class="card-body p-lg-4">
+            <div class="card total-wrap fixed-top-line">
+              <div class="p-lg-0"><h5 class="mb-3">{{ __('shop/carts.product_total') }}</h5></div>
+              <div class="card-body p-lg-0">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ allProduct }}</span></li>
+                  <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
+                  <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
+                  <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
+                    <button type="button" class="btn btn-primary fw-bold" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
