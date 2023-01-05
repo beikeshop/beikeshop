@@ -63,7 +63,7 @@ Route::prefix('/')
         Route::get('register', [RegisterController::class, 'index'])->name('register.index');
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
-        Route::middleware('shop_auth:' . Customer::AUTH_GUARD)
+        Route::middleware('checkout_auth:' . Customer::AUTH_GUARD)
             ->group(function () {
                 Route::get('carts', [CartController::class, 'index'])->name('carts.index');
                 Route::post('carts', [CartController::class, 'store'])->name('carts.store');

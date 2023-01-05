@@ -26,6 +26,7 @@ class LogoutController extends Controller
     {
         Auth::guard(Customer::AUTH_GUARD)->logout();
 
+        $request->session()->regenerate();
         $request->session()->regenerateToken();
 
         return redirect(shop_route('login.index'));

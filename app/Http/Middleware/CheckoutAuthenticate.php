@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class ShopAuthenticate extends Middleware
+class CheckoutAuthenticate extends Middleware
 {
     /**
      * Handle an incoming request.
@@ -22,6 +22,10 @@ class ShopAuthenticate extends Middleware
      */
     public function handle($request, \Closure $next, ...$guards)
     {
+        if (system_setting('base.guest_checkout', 1)) {
+            return $next($request);
+        }
+
         $this->authenticate($request, $guards);
 
         $customer = current_customer();
@@ -58,6 +62,9 @@ class ShopAuthenticate extends Middleware
      */
     protected function unauthenticated($request, array $guards)
     {
+        if (system_setting('base.guest_checkout', 1)) {
+            return;
+        }
         throw new AuthenticationException(
             trans('common.unauthenticated'), $guards, $this->redirectTo($request)
         );

@@ -12,6 +12,7 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
+use Beike\Repositories\CartRepo;
 use Illuminate\Support\Facades\Auth;
 use Beike\Shop\Http\Requests\LoginRequest;
 use Beike\Shop\Http\Controllers\Controller;
@@ -35,6 +36,7 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
+        $guestCartProduct = CartRepo::allCartProducts(0);
         if (!auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
             throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
         }
@@ -44,6 +46,9 @@ class LoginController extends Controller
             Auth::guard(Customer::AUTH_GUARD)->logout();
             throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
         }
+
+        CartRepo::mergeGuestCart($customer, $guestCartProduct);
+
         return json_success(trans('shop/login.login_successfully'));
     }
 }

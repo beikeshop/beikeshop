@@ -115,6 +115,18 @@ class CartRepo
 
 
     /**
+     * 获取所有购物车商品列表
+     *
+     * @param $customerId
+     * @return Builder[]|Collection
+     */
+    public static function allCartProducts($customerId)
+    {
+        return self::allCartProductsBuilder($customerId)->get();
+    }
+
+
+    /**
      * 当前购物车所有商品 builder
      *
      * @param $customerId
@@ -132,5 +144,17 @@ class CartRepo
         $builder->orderByDesc('id');
 
         return $builder;
+    }
+
+    public static function mergeGuestCart($customer, $guestCartProducts)
+    {
+        $guestCartProductSkuIds = $guestCartProducts->pluck('product_sku_id');
+        self::allCartProductsBuilder($customer->id)->whereIn('product_sku_id', $guestCartProductSkuIds)->delete();
+
+        foreach ($guestCartProducts as $cartProduct) {
+            $cartProduct->customer_id = $customer->id;
+            $cartProduct->save();
+        }
+
     }
 }
