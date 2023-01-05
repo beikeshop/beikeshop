@@ -216,7 +216,7 @@
 
       <div class="col-12 col-md-4 right-column">
         @if (!current_customer())
-          <div class="card total-wrap mb-4 fixed-top-line p-lg-4 shadow-sm">
+          <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
             <div class="card-header">
               <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
             </div>
