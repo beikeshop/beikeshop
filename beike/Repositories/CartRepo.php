@@ -31,8 +31,13 @@ class CartRepo
         if (is_numeric($customer)) {
             $customer = Customer::query()->find($customer);
         }
-        $customerId = $customer->id;
-        $cart = Cart::query()->where('customer_id', $customerId)->first();
+        $customerId = $customer->id ?? 0;
+        $sessionId = session()->getId();
+        if ($customerId) {
+            $cart = Cart::query()->where('customer_id', $customerId)->first();
+        } else {
+            $cart = Cart::query()->where('session_id', $sessionId)->first();
+        }
         $defaultAddress = AddressRepo::listByCustomer($customer)->first();
         $defaultAddressId = $defaultAddress->id ?? 0;
 
@@ -42,6 +47,7 @@ class CartRepo
             $shippingMethodCode = $shippingMethod->code ?? '';
             $cart = Cart::query()->create([
                 'customer_id' => $customerId,
+                'session_id' => $sessionId,
                 'shipping_address_id' => $defaultAddressId,
                 'shipping_method_code' => $shippingMethodCode ? $shippingMethodCode . '.0' : '',
                 'payment_address_id' => $defaultAddressId,
@@ -58,6 +64,8 @@ class CartRepo
         }
         $cart->loadMissing(['shippingAddress', 'paymentAddress']);
         $cart->extra = json_decode($cart->extra, true);
+        $cart->guest_shipping_address = json_decode($cart->guest_shipping_address, true);
+        $cart->guest_payment_address = json_decode($cart->guest_payment_address, true);
         return $cart;
     }
 
@@ -72,8 +80,12 @@ class CartRepo
         if (is_numeric($customer)) {
             $customer = Customer::query()->find($customer);
         }
-        $customerId = $customer->id;
-        Cart::query()->where('customer_id', $customerId)->delete();
+        $customerId = $customer->id ?? 0;
+        if ($customer) {
+            Cart::query()->where('customer_id', $customerId)->delete();
+        } else {
+            Cart::query()->where('session_id', session()->getId())->delete();
+        }
         self::selectedCartProductsBuilder($customerId)->delete();
     }
 
@@ -110,9 +122,15 @@ class CartRepo
      */
     public static function allCartProductsBuilder($customerId): Builder
     {
-        return CartProduct::query()
-            ->with(['product.description', 'sku.product.description'])
-            ->where('customer_id', $customerId)
-            ->orderByDesc('id');
+        $builder =  CartProduct::query()
+            ->with(['product.description', 'sku.product.description']);
+        if ($customerId) {
+            $builder->where('customer_id', $customerId);
+        } else {
+            $builder->where('session_id', session()->getId());
+        }
+        $builder->orderByDesc('id');
+
+        return $builder;
     }
 }

@@ -27,10 +27,7 @@ class CartService
      */
     public static function list($customer, bool $selected = false): array
     {
-        if (empty($customer)) {
-            return [];
-        }
-        $cartBuilder = CartRepo::allCartProductsBuilder($customer->id);
+        $cartBuilder = CartRepo::allCartProductsBuilder($customer->id ?? 0);
         if ($selected) {
             $cartBuilder->where('selected', true);
         }
@@ -62,9 +59,12 @@ class CartService
         if (empty($sku) || $quantity == 0) {
             return null;
         }
-        $cart = CartProduct::query()
-            ->where('customer_id', $customerId)
-            ->where('product_id', $productId)
+        if ($customerId) {
+            $builder = CartProduct::query()->where('customer_id', $customerId);
+        } else {
+            $builder = CartProduct::query()->where('session_id', session()->getId());
+        }
+        $cart = $builder->where('product_id', $productId)
             ->where('product_sku_id', $skuId)
             ->first();
 
@@ -74,6 +74,7 @@ class CartService
         } else {
             $cart = CartProduct::query()->create([
                 'customer_id' => $customerId,
+                'session_id' => session()->getId(),
                 'product_id' => $productId,
                 'product_sku_id' => $skuId,
                 'quantity' => $quantity,
@@ -127,8 +128,13 @@ class CartService
         if (empty($cartId)) {
             return;
         }
-        CartProduct::query()->where('customer_id', $customer->id)
-            ->where('id', $cartId)
+        $customerId = $customer->id ?? 0;
+        if ($customerId) {
+            $builder = CartProduct::query()->where('customer_id', $customerId);
+        } else {
+            $builder = CartProduct::query()->orWhere('session_id', session()->getId());
+        }
+        $builder->where('id', $cartId)
             ->delete();
     }
 

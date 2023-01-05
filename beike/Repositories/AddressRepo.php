@@ -78,6 +78,8 @@ class AddressRepo
         }
         if ($customer) {
             return $customer->addresses()->with('country')->get();
+        } else {
+            return collect();
         }
     }
 }

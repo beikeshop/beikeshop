@@ -25,7 +25,7 @@ class ShopAuthenticate extends Middleware
         $this->authenticate($request, $guards);
 
         $customer = current_customer();
-        if ($customer->status != 1) {
+        if ($customer && $customer->status != 1) {
             Auth::guard(Customer::AUTH_GUARD)->logout();
             return redirect(shop_route('login.index'));
         }
@@ -58,6 +58,9 @@ class ShopAuthenticate extends Middleware
      */
     protected function unauthenticated($request, array $guards)
     {
+        if (system_setting('base.guest_checkout', 1)) {
+            return;
+        }
         throw new AuthenticationException(
             trans('common.unauthenticated'), $guards, $this->redirectTo($request)
         );

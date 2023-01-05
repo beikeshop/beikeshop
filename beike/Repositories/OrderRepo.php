@@ -44,7 +44,7 @@ class OrderRepo
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
         $builder = self::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
-        return $builder->paginate(perPage());
+        return $builder->paginate();
     }
 
 
@@ -69,7 +69,7 @@ class OrderRepo
     public static function filterOrders(array $filters = []): LengthAwarePaginator
     {
         $builder = self::getListBuilder($filters)->orderByDesc('created_at');
-        return $builder->paginate(perPage());
+        return $builder->paginate();
     }
 
 
@@ -134,11 +134,14 @@ class OrderRepo
      */
     public static function getOrderByNumber($number, $customer)
     {
-        return Order::query()
+        $builder = Order::query()
             ->with(['orderProducts', 'orderTotals', 'orderHistories'])
-            ->where('number', $number)
-            ->where('customer_id', $customer->id)
-            ->first();
+            ->where('number', $number);
+        if ($customer) {
+            $builder->where('customer_id', $customer->id);
+        }
+            ;
+        return $builder->first();
     }
 
 
@@ -175,11 +178,16 @@ class OrderRepo
         $totals = $data['totals'] ?? [];
         $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
-        $shippingAddressId = $current['shipping_address_id'] ?? 0;
-        $paymentAddressId = $current['payment_address_id'] ?? 0;
+        if (current_customer()) {
+            $shippingAddressId = $current['shipping_address_id'] ?? 0;
+            $paymentAddressId = $current['payment_address_id'] ?? 0;
 
-        $shippingAddress = Address::query()->findOrFail($shippingAddressId);
-        $paymentAddress = Address::query()->findOrFail($paymentAddressId);
+            $shippingAddress = Address::query()->findOrFail($shippingAddressId);
+            $paymentAddress = Address::query()->findOrFail($paymentAddressId);
+        } else {
+            $shippingAddress = (Object)($current['guest_shipping_address'] ?? []);
+            $paymentAddress = (Object)($current['guest_payment_address'] ?? []);
+        }
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $paymentMethodCode = $current['payment_method_code'] ?? '';
@@ -190,12 +198,12 @@ class OrderRepo
 
         $order = new Order([
             'number' => self::generateOrderNumber(),
-            'customer_id' => $customer->id,
-            'customer_group_id' => $customer->customer_group_id,
-            'shipping_address_id' => $shippingAddress->id,
-            'payment_address_id' => $paymentAddress->id,
-            'customer_name' => $customer->name,
-            'email' => $customer->email,
+            'customer_id' => $customer->id ?? 0,
+            'customer_group_id' => $customer->customer_group_id ?? 0,
+            'shipping_address_id' => $shippingAddress->id ?? 0,
+            'payment_address_id' => $paymentAddress->id ?? 0,
+            'customer_name' => $customer->name ?? '',
+            'email' => $customer ? $customer->email : $shippingAddress->email,
             'calling_code' => $customer->calling_code ?? 0,
             'telephone' => $customer->telephone ?? '',
             'total' => $orderTotal['amount'],
@@ -211,26 +219,20 @@ class OrderRepo
             'shipping_calling_code' => $shippingAddress->calling_code ?? 0,
             'shipping_telephone' => $shippingAddress->phone ?? '',
             'shipping_country' => $shippingAddress->country->name ?? '',
-            'shipping_country_id' => $shippingAddress->country->id ?? 0,
             'shipping_zone' => $shippingAddress->zone,
-            'shipping_zone_id' => $shippingAddress->zone_id ?? 0,
             'shipping_city' => $shippingAddress->city,
             'shipping_address_1' => $shippingAddress->address_1,
             'shipping_address_2' => $shippingAddress->address_2,
-            'shipping_zipcode' => $shippingAddress->zipcode,
             'payment_method_code' => $paymentMethodCode,
             'payment_method_name' => trans($paymentMethodCode),
             'payment_customer_name' => $paymentAddress->name,
             'payment_calling_code' => $paymentAddress->calling_code ?? 0,
             'payment_telephone' => $paymentAddress->phone ?? '',
             'payment_country' => $paymentAddress->country->name ?? '',
-            'payment_country_id' => $paymentAddress->country->id ?? 0,
             'payment_zone' => $paymentAddress->zone,
-            'payment_zone_id' => $paymentAddress->zone_id ?? 0,
             'payment_city' => $paymentAddress->city,
             'payment_address_1' => $paymentAddress->address_1,
             'payment_address_2' => $paymentAddress->address_2,
-            'payment_zipcode' => $paymentAddress->zipcode,
         ]);
         $order->saveOrFail();
 
