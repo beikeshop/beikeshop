@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Order;
+use Beike\Services\ShipmentService;
 use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
