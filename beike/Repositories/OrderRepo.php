@@ -44,7 +44,7 @@ class OrderRepo
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
         $builder = self::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
-        return $builder->paginate();
+        return $builder->paginate(perPage());
     }
 
 
@@ -69,7 +69,7 @@ class OrderRepo
     public static function filterOrders(array $filters = []): LengthAwarePaginator
     {
         $builder = self::getListBuilder($filters)->orderByDesc('created_at');
-        return $builder->paginate();
+        return $builder->paginate(perPage());
     }
 
 
@@ -219,20 +219,26 @@ class OrderRepo
             'shipping_calling_code' => $shippingAddress->calling_code ?? 0,
             'shipping_telephone' => $shippingAddress->phone ?? '',
             'shipping_country' => $shippingAddress->country->name ?? '',
+            'shipping_country_id' => $shippingAddress->country->id ?? 0,
             'shipping_zone' => $shippingAddress->zone,
+            'shipping_zone_id' => $shippingAddress->zone_id ?? 0,
             'shipping_city' => $shippingAddress->city,
             'shipping_address_1' => $shippingAddress->address_1,
             'shipping_address_2' => $shippingAddress->address_2,
+            'shipping_zipcode' => $shippingAddress->zipcode,
             'payment_method_code' => $paymentMethodCode,
             'payment_method_name' => trans($paymentMethodCode),
             'payment_customer_name' => $paymentAddress->name,
             'payment_calling_code' => $paymentAddress->calling_code ?? 0,
             'payment_telephone' => $paymentAddress->phone ?? '',
             'payment_country' => $paymentAddress->country->name ?? '',
+            'payment_country_id' => $paymentAddress->country->id ?? 0,
             'payment_zone' => $paymentAddress->zone,
+            'payment_zone_id' => $paymentAddress->zone_id ?? 0,
             'payment_city' => $paymentAddress->city,
             'payment_address_1' => $paymentAddress->address_1,
             'payment_address_2' => $paymentAddress->address_2,
+            'payment_zipcode' => $paymentAddress->zipcode,
         ]);
         $order->saveOrFail();
 
