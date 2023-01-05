@@ -103,17 +103,23 @@
         },
 
         onAddressDialogChange(form) {
-          if (form.default) {
-            this.addresses.map(e => e.default = false)
-          }
+          const type = form.id ? 'put' : 'post';
+          const url = `/account/addresses${type == 'put' ? '/' + form.id : ''}`;
 
-          if (this.addresses.find(e => e.id == form.id)) {
-            this.addresses[this.editIndex] = form
-          } else {
-            this.addresses.push(form)
-          }
-          this.editIndex = null;
-          this.$forceUpdate()
+          $http[type](url, form).then((res) => {
+            if (res.data.default) {
+              this.addresses.map(e => e.default = false)
+            }
+
+            if (this.addresses.find(e => e.id == res.data.id)) {
+              this.addresses[this.editIndex] = res.data
+            } else {
+              this.addresses.push(res.data)
+            }
+            this.editIndex = null;
+            this.$forceUpdate()
+            this.$refs['address-dialog'].closeAddressDialog()
+          })
         },
       }
     })

@@ -5,6 +5,11 @@
         <el-form-item label="{{ __('address.name') }}" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
+        @if (!current_customer())
+          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'">
+            <el-input v-model="form.email"></el-input>
+          </el-form-item>
+        @endif
         <el-form-item label="{{ __('address.phone') }}" prop="phone">
           <el-input maxlength="11" v-model="form.phone" type="number"></el-input>
         </el-form-item>
@@ -91,6 +96,12 @@
           message: '{{ __('shop/account.addresses.enter_name') }}',
           trigger: 'blur'
         }, ],
+        email: [{
+          required: true,
+          type: 'email',
+          message: '{{ __('shop/login.enter_email') }}',
+          trigger: 'blur'
+        }, ],
         phone: [{
           required: true,
           message: '{{ __('shop/account.addresses.enter_phone') }}',
@@ -128,7 +139,8 @@
   },
 
   methods: {
-    editAddress(addresses) {
+    editAddress(addresses, type) {
+      this.type = type
       if (addresses) {
         this.form = addresses
       }
@@ -144,20 +156,21 @@
           return;
         }
 
-        const type = this.form.id ? 'put' : 'post';
+        this.$emit('change', this.form)
+        // const type = this.form.id ? 'put' : 'post';
 
-        const url = `/account/addresses${type == 'put' ? '/' + this.form.id : ''}`;
+        // const url = `/account/addresses${type == 'put' ? '/' + this.form.id : ''}`;
 
-        $http[type](url, this.form).then((res) => {
-          this.$message.success(res.message);
-          this.$emit('change', res.data)
-          this.editShow = false
-        })
+        // $http[type](url, this.form).then((res) => {
+        //   this.$message.success(res.message);
+        //   this.$emit('change', res.data)
+        //   this.editShow = false
+        // })
       });
     },
 
-    closeAddressDialog(form) {
-      this.$refs[form].resetFields();
+    closeAddressDialog() {
+      this.$refs['addressForm'].resetFields();
       this.editShow = false
 
       Object.keys(this.form).forEach(key => this.form[key] = '')
