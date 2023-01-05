@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Repositories\MenuRepo;
 use Exception;
 use Beike\Plugin\Manager;
 use Illuminate\Http\Request;
@@ -104,6 +105,7 @@ class PluginController extends Controller
         }
 
         SettingRepo::update('plugin', $code, $fields);
+        hook_action('after_edit_plugin', ['plugin_code' => $code, 'fields' => $fields]);
         return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
     }
 
