@@ -49,7 +49,7 @@
         <el-form-item label="{{ __('address.address_2') }}">
           <el-input v-model="form.address_2"></el-input>
         </el-form-item>
-        <el-form-item label="{{ __('address.default') }}" v-if="isLogin">
+        <el-form-item label="{{ __('address.default') }}" v-if="source.isLogin">
           <el-switch
             v-model="form.default"
             >
