@@ -78,9 +78,9 @@
         </div>
       </div>
       <div class="col-12 col-md-3 right-column">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm fixed-top-line">
           <div class="card-body p-lg-4">
-            <div class="card total-wrap fixed-top-line">
+            <div class="card total-wrap">
               <div class="p-lg-0"><h5 class="mb-3">{{ __('shop/carts.product_total') }}</h5></div>
               <div class="card-body p-lg-0">
                 <ul class="list-group list-group-flush">

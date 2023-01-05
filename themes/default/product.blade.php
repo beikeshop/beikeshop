@@ -11,7 +11,6 @@
 
 @section('content')
   <div class="container" id="product-app" v-cloak>
-
     <x-shop-breadcrumb type="product" :value="$product['id']" />
 
     <div class="row mb-5 mt-3 mt-md-0" id="product-top">
@@ -64,6 +63,12 @@
                 <template v-else>{{ __('shop/products.out_stock') }}</template>
               </div>
             </div>
+            @if ($product['brand_id'])
+            <div class="d-flex">
+              <span class="title text-muted">{{ __('product.brand') }}:</span>
+              <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
+            </div>
+            @endif
             <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
             <div class="d-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
           </div>
