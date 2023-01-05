@@ -28,7 +28,9 @@
                   </tr>
                   <tr>
                     <td>{{ __('shop/account.order.order_success.payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
+                    @if (current_customer())
                     <td><a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}">{{ __('shop/account.order.order_success.view_order') }}</a></td>
+                    @endif
                   </tr>
                   <tr>
                     <td><a href="{{ shop_route('orders.pay', [$order['number']]) }}" class="btn btn-primary btn-sm">{{ __('shop/account.order.order_success.pay_now') }}</a></td>

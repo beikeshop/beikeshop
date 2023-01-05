@@ -43,6 +43,16 @@
             </tbody>
           </table>
         </div>
+        <div class="col-lg-4 col-12">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td style="width: 20%">{{ __('common.email') }}：</td>
+                <td>{{ $order->email }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
