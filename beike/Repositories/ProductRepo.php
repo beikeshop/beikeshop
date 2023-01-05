@@ -34,7 +34,7 @@ class ProductRepo
         if (is_int($product)) {
             $product = Product::query()->findOrFail($product);
         }
-        $product->load('description', 'skus', 'master_sku');
+        $product->load('description', 'skus', 'master_sku', 'brand');
         return $product;
     }
 

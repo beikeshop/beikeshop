@@ -22,6 +22,7 @@ class ProductController extends Controller
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),
         ];
+        $data = hook_filter('product.show', $data);
         return view('product', $data);
     }
 
