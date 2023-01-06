@@ -34,6 +34,12 @@ class ProductDetail extends JsonResource
                     'thumb' => image_resize($image, 150, 150)
                 ];
             }, $this->images ?? []),
+            'attributes' => $this->attributes->map(function ($attribute) {
+                return [
+                    'attribute' => $attribute->attribute->description->name,
+                    'attribute_value' => $attribute->attributeValue->description->name,
+                ];
+            })->toArray(),
             'category_id' => $this->category_id ?? null,
             'variables' => $this->decodeVariables($this->variables),
             'skus' => SkuDetail::collection($this->skus)->jsonSerialize(),

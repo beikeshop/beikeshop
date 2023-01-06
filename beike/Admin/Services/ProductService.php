@@ -34,6 +34,7 @@ class ProductService
             if ($isUpdating) {
                 $product->skus()->delete();
                 $product->descriptions()->delete();
+                $product->attributes()->delete();
             }
 
             $descriptions = [];
@@ -44,6 +45,8 @@ class ProductService
                 $descriptions[] = $description;
             }
             $product->descriptions()->createMany($descriptions);
+
+            $product->attributes()->createMany($data['attributes'] ?? []);
 
             $skus = [];
             foreach ($data['skus'] as $index => $sku) {

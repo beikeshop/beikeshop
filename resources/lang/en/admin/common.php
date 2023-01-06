@@ -48,6 +48,8 @@ return [
     'access_frontend' => 'Frontend',
 
     // sidebar
+    'attribute_groups_index' => 'Attribute Group',
+    'attributes_index' => 'Attributes',
     'settings_index' => 'Setting',
     'admin_users_index' => 'Admin Users',
     'plugins_index' => 'Plugins',

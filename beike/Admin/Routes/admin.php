@@ -20,6 +20,24 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
+                // 属性
+                Route::middleware('can:attributes_update')->post('attributes/{id}/values', [Controllers\AttributeController::class, 'storeValue'])->name('attributes.values.store');
+                Route::middleware('can:attributes_show')->get('attributes/{id}/values/autocomplete', [Controllers\AttributeController::class, 'autocompleteValue'])->name('attributes.values.autocomplete');
+                Route::middleware('can:attributes_update')->put('attributes/{id}/values/{value_id}', [Controllers\AttributeController::class, 'updateValue'])->name('attributes.values.update');
+                Route::middleware('can:attributes_update')->delete('attributes/{id}/values/{value_id}', [Controllers\AttributeController::class, 'destroyValue'])->name('attributes.values.destroy');
+                Route::middleware('can:attributes_index')->get('attributes', [Controllers\AttributeController::class, 'index'])->name('attributes.index');
+                Route::middleware('can:attributes_show')->get('attributes/autocomplete', [Controllers\AttributeController::class, 'autocomplete'])->name('attributes.autocomplete');
+                Route::middleware('can:attributes_show')->get('attributes/{id}', [Controllers\AttributeController::class, 'show'])->name('attributes.show');
+                Route::middleware('can:attributes_create')->post('attributes', [Controllers\AttributeController::class, 'store'])->name('attributes.store');
+                Route::middleware('can:attributes_update')->put('attributes/{id}', [Controllers\AttributeController::class, 'update'])->name('attributes.update');
+                Route::middleware('can:attributes_delete')->delete('attributes/{id}', [Controllers\AttributeController::class, 'destroy'])->name('attributes.destroy');
+
+                // 属性组
+                Route::middleware('can:attribute_groups_index')->get('attribute_groups', [Controllers\AttributeGroupController::class, 'index'])->name('attribute_groups.index');
+                Route::middleware('can:attribute_groups_create')->post('attribute_groups', [Controllers\AttributeGroupController::class, 'store'])->name('attribute_groups.store');
+                Route::middleware('can:attribute_groups_update')->put('attribute_groups/{id}', [Controllers\AttributeGroupController::class, 'update'])->name('attribute_groups.update');
+                Route::middleware('can:attribute_groups_delete')->delete('attribute_groups/{id}', [Controllers\AttributeGroupController::class, 'destroy'])->name('attribute_groups.destroy');
+
                 // 商品品牌
                 Route::middleware('can:brands_index')->get('brands/names', [Controllers\BrandController::class, 'getNames'])->name('brands.names');
                 Route::middleware('can:brands_index')->get('brands/autocomplete', [Controllers\BrandController::class, 'autocomplete'])->name('brands.autocomplete');

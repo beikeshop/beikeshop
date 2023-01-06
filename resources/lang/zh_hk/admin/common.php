@@ -47,6 +47,8 @@ return [
     'access_frontend' => '訪問前台',
 
     // sidebar
+    'attribute_groups_index' => '屬性組',
+    'attributes_index' => '屬性',
     'settings_index' => '系統設置',
     'admin_users_index' => '後台用戶',
     'plugins_index' => '插件列表',

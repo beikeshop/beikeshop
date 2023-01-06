@@ -41,7 +41,7 @@ class Sidebar extends Component
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['products.', 'categories.', 'brands.'])) {
+        } elseif (Str::startsWith($routeName, ['products.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'])) {
             $routes = $this->getProductSubRoutes();
             foreach ($routes as $route) {
                 $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool)($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
@@ -126,6 +126,8 @@ class Sidebar extends Component
             ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'products.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt','hide_mobile' => 1],
+            ['route' => 'attribute_groups.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'attributes.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'products.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
         return hook_filter('sidebar.product_routes', $routes);

@@ -2,7 +2,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Resources\ProductAttributeResource;
 use Beike\Models\Product;
+use Beike\Models\ProductAttribute;
 use Illuminate\Http\Request;
 use Beike\Repositories\ProductRepo;
 use Beike\Repositories\CategoryRepo;
@@ -107,13 +109,14 @@ class ProductController extends Controller
         if ($product->id) {
             $descriptions = $product->descriptions->keyBy('locale');
             $categoryIds = $product->categories->pluck('id')->toArray();
-            $product->load('brand');
+            $product->load('brand', 'attributes');
         }
 
         $data = [
             'product' => $product,
             'descriptions' => $descriptions ?? [],
             'category_ids' => $categoryIds ?? [],
+            'product_attributes' => ProductAttributeResource::collection($product->attributes),
             'languages' => LanguageRepo::all(),
             'tax_classes' => TaxClassRepo::getList(),
             'source' => [

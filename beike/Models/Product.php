@@ -2,6 +2,7 @@
 
 namespace Beike\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -42,6 +43,11 @@ class Product extends Base
     public function skus()
     {
         return $this->hasMany(ProductSku::class);
+    }
+
+    public function attributes() : HasMany
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 
     public function master_sku()

@@ -48,6 +48,8 @@ return [
     'access_frontend' => '访问前台',
 
     // sidebar
+    'attribute_groups_index' => '属性组',
+    'attributes_index' => '属性',
     'settings_index' => '系统设置',
     'admin_users_index' => '后台用户',
     'plugins_index' => '插件列表',
