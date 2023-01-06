@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                     'content' => $faker->paragraphs(6, true),
                     'meta_title' => $faker->words(10, true),
                     'meta_description' => $faker->sentence(10),
-                    'meta_keyword' => $faker->words(10, true),
+                    'meta_keywords' => $faker->words(10, true),
                     'created_at' => $time,
                     'updated_at' => $time,
                 ];

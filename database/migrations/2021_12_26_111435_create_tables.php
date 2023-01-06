@@ -94,7 +94,7 @@ class CreateTables extends Migration
             $table->text('content')->comment('描述');
             $table->string('meta_title')->default('')->comment('meta 标题');
             $table->string('meta_description')->default('')->comment('meta 描述');
-            $table->string('meta_keyword')->default('')->comment('meta 关键词');
+            $table->string('meta_keywords')->default('')->comment('meta 关键词');
             $table->timestamps();
         });
         Schema::create('category_paths', function (Blueprint $table) {
@@ -282,7 +282,7 @@ class CreateTables extends Migration
             $table->text('content')->comment('内容');
             $table->string('meta_title')->comment('meta 标题');
             $table->string('meta_description')->comment('meta 描述');
-            $table->string('meta_keyword')->comment('meta 关键字');
+            $table->string('meta_keywords')->comment('meta 关键字');
             $table->timestamps();
         });
 
@@ -326,7 +326,7 @@ class CreateTables extends Migration
             $table->text('content')->comment('产品描述');
             $table->string('meta_title')->default('')->comment('meta 标题');
             $table->string('meta_description')->default('')->comment('meta 描述');
-            $table->string('meta_keyword')->default('')->comment('meta 关键字');
+            $table->string('meta_keywords')->default('')->comment('meta 关键字');
             $table->timestamps();
         });
         Schema::create('product_skus', function (Blueprint $table) {

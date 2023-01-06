@@ -352,7 +352,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 20,
@@ -362,7 +362,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 23,
@@ -372,7 +372,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 24,
@@ -382,7 +382,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 27,
@@ -392,7 +392,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 28,
@@ -402,7 +402,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 31,
@@ -412,7 +412,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 32,
@@ -422,7 +422,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 35,
@@ -432,7 +432,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 36,
@@ -442,7 +442,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 65,
@@ -452,7 +452,7 @@ class ProductsSeeder extends Seeder
                 "content" => "fdsfsd",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 66,
@@ -462,7 +462,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 67,
@@ -472,7 +472,7 @@ class ProductsSeeder extends Seeder
                 "content" => "测试下商品详情",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 68,
@@ -482,7 +482,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 75,
@@ -492,7 +492,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 76,
@@ -502,7 +502,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 79,
@@ -512,7 +512,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 80,
@@ -522,7 +522,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 83,
@@ -532,7 +532,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 84,
@@ -542,7 +542,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 85,
@@ -552,7 +552,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 86,
@@ -562,7 +562,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 87,
@@ -572,7 +572,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 88,
@@ -582,7 +582,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 89,
@@ -592,7 +592,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 90,
@@ -602,7 +602,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 101,
@@ -612,7 +612,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 102,
@@ -622,7 +622,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 105,
@@ -632,7 +632,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 106,
@@ -642,7 +642,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 115,
@@ -652,7 +652,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 116,
@@ -662,7 +662,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 125,
@@ -672,7 +672,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 126,
@@ -682,7 +682,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 149,
@@ -692,7 +692,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 150,
@@ -702,7 +702,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 203,
@@ -712,7 +712,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 204,
@@ -722,7 +722,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 291,
@@ -732,7 +732,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 292,
@@ -742,7 +742,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
                 "created_at" => "2022-08-26 09:20:14",
                 "updated_at" => "2022-08-26 09:20:14"
             ],
@@ -754,7 +754,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 294,
@@ -764,7 +764,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 295,
@@ -774,7 +774,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 296,
@@ -784,7 +784,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 297,
@@ -794,7 +794,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 298,
@@ -804,7 +804,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 299,
@@ -814,7 +814,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 300,
@@ -824,7 +824,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 301,
@@ -834,7 +834,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 302,
@@ -844,7 +844,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 303,
@@ -854,7 +854,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 304,
@@ -864,7 +864,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 305,
@@ -874,7 +874,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
             [
                 "id" => 306,
@@ -884,7 +884,7 @@ class ProductsSeeder extends Seeder
                 "content" => "<p><img class=\"img-fluid\" src=\"/catalog/demo/product/xq_01.jpg\" /></p>",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => "",
+                "meta_keywords" => "",
             ],
         ];
     }

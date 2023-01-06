@@ -45,7 +45,7 @@ return [
     'payment_address' => '賬單地址',
     'meta_title' => 'Meta 標題',
     'meta_description' => 'Meta 描述',
-    'meta_keyword' => 'Meta 關鍵詞',
+    'meta_keywords' => 'Meta 關鍵詞',
     'telephone' => '聯繫電話',
     'email' => '郵箱',
     'default_address' => '默認地址',

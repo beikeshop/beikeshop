@@ -334,7 +334,7 @@
               @foreach ($languages as $language)
               <div class="input-group w-max-600">
                 <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keyword]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_keyword', $product->descriptions->keyBy('locale')[$language->code]->meta_keyword ?? '') }}</textarea>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_keywords', $product->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
               </div>
               @endforeach
             </x-admin::form.row>

@@ -88,7 +88,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 2,
@@ -98,7 +98,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Pad",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 3,
@@ -108,7 +108,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "时尚潮流",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 4,
@@ -118,7 +118,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Fashion",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 5,
@@ -128,7 +128,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "相机",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 6,
@@ -138,7 +138,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Camera",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 7,
@@ -148,7 +148,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 8,
@@ -158,7 +158,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 9,
@@ -168,7 +168,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "运动户外",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 10,
@@ -178,7 +178,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Sports",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 11,
@@ -188,7 +188,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "电子数码",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 12,
@@ -198,7 +198,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Electron",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 13,
@@ -208,7 +208,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "帐篷",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 14,
@@ -218,7 +218,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Tent",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 15,
@@ -228,7 +228,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "男装女装",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 16,
@@ -238,7 +238,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Fashion",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 17,
@@ -248,7 +248,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "男装",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 18,
@@ -258,7 +258,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Men",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 19,
@@ -268,7 +268,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "夏季促销",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 20,
@@ -278,7 +278,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "Summer promotion",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 21,
@@ -288,7 +288,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 22,
@@ -298,7 +298,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 23,
@@ -308,7 +308,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 24,
@@ -318,7 +318,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 25,
@@ -328,7 +328,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 26,
@@ -338,7 +338,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 27,
@@ -348,7 +348,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 28,
@@ -358,7 +358,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 29,
@@ -368,7 +368,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "智能冰箱",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 30,
@@ -378,7 +378,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 31,
@@ -388,7 +388,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ],
             [
                 "id" => 32,
@@ -398,7 +398,7 @@ class CategoriesSeeder extends Seeder
                 "content" => "",
                 "meta_title" => "",
                 "meta_description" => "",
-                "meta_keyword" => ""
+                "meta_keywords" => ""
             ]
         ];
     }

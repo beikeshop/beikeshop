@@ -45,7 +45,7 @@ return [
     'payment_address' => 'Адрес для выставления счета',
     'meta_title' => 'Мета-заголовок',
     'meta_description' => 'Мета-описание',
-    'meta_keyword' => 'Мета-ключевые слова',
+    'meta_keywords' => 'Мета-ключевые слова',
     'telephone' => 'Контактный номер',
     'email' => 'Почта',
     'default_address' => 'адрес по умолчанию',

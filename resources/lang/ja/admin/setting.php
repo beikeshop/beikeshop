@@ -45,7 +45,7 @@ return [
     'payment_address' => '請求先住所',
     'meta_title' => 'メタタイトル',
     'meta_description' => 'メタディスクリプション',
-    'meta_keyword' => 'メタキーワード',
+    'meta_keywords' => 'メタキーワード',
     'telephone' => '連絡先電話',
     'email' => 'メールボックス',
     'default_address' => 'デフォルトアドレス',

@@ -46,7 +46,7 @@ return [
 
     'meta_title' => 'Meta Title',
     'meta_description' => 'Meta Description',
-    'meta_keyword' => 'Meta Keyword',
+    'meta_keywords' => 'Meta Keyword',
     'telephone' => 'Contact Phone',
     'email' => 'Mailbox',
     'default_address' => 'Default Address',

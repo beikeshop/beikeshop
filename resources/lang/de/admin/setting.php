@@ -45,7 +45,7 @@ return [
     'payment_address' => 'Rechnungsadresse',
     'meta_title' => 'Metatitel',
     'meta_description' => 'Meta-Beschreibung',
-    'meta_keyword' => 'Meta-Schlüsselwort',
+    'meta_keywords' => 'Meta-Schlüsselwort',
     'telephone' => 'Telefon kontaktieren',
     'email' => 'Postfach',
     'default_address' => 'Standardadresse',

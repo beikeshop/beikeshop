@@ -46,7 +46,7 @@ return [
     'payment_address' => 'Dirección de Envio',
     'meta_title' => 'Meta título',
     'meta_description' => 'Meta descripción',
-    'meta_keyword' => 'Metapalabra clave',
+    'meta_keywords' => 'Metapalabra clave',
     'telephone' => 'Teléfono de contacto',
     'email' => 'Correo',
     'default_address' => 'dirección predeterminada',

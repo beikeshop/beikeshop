@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title', system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统 - BeikeShop官网'))</title>
-  <meta name="keywords" content="@yield('keywords', system_setting('base.meta_keyword'))">
+  <meta name="keywords" content="@yield('keywords', system_setting('base.meta_keywords'))">
   <meta name="description" content="@yield('description', system_setting('base.meta_description'))">
   <base href="{{ $shop_base_url }}">
   <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/default/css/bootstrap.css') }}">

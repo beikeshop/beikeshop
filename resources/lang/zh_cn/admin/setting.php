@@ -45,7 +45,7 @@ return [
     'payment_address' => '账单地址',
     'meta_title' => 'Meta 标题',
     'meta_description' => 'Meta 描述',
-    'meta_keyword' => 'Meta 关键词',
+    'meta_keywords' => 'Meta 关键词',
     'telephone' => '联系电话',
     'email' => '邮箱',
     'default_address' => '默认地址',

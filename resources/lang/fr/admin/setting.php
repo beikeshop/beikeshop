@@ -45,7 +45,7 @@ return [
     'payment_address' => 'Adresse de facturation',
     'meta_title' => 'Méta titre',
     'meta_description' => 'Méta description',
-    'meta_keyword' => 'Méta-mot clé',
+    'meta_keywords' => 'Méta-mot clé',
     'telephone' => 'numéro de contact',
     'email' => 'Courrier',
     'default_address' => 'Adresse par défaut',

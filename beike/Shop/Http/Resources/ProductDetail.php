@@ -26,7 +26,7 @@ class ProductDetail extends JsonResource
             'name' => $this->description->name ?? '',
             'description' => $this->description->content ?? '',
             'meta_title' => $this->description->meta_title ?? '',
-            'meta_keyword' => $this->description->meta_keyword ?? '',
+            'meta_keywords' => $this->description->meta_keywords ?? '',
             'meta_description' => $this->description->meta_description ?? '',
             'brand_id' => $this->brand->id ?? 0,
             'brand_name' => $this->brand->name ?? '',

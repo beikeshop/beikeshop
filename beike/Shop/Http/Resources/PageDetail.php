@@ -32,7 +32,7 @@ class PageDetail extends JsonResource
             'content' => $description->content,
             'meta_title' => $description->meta_title,
             'meta_description' => $description->meta_description,
-            'meta_keyword' => $description->meta_keyword,
+            'meta_keywords' => $description->meta_keywords,
             'created_at' => time_format($this->created_at),
             'updated_at' => time_format($this->updated_at),
         ];
