@@ -24,27 +24,23 @@ body[class^="page-account-"] {
   font-display: swap;
 }
 
+// @font-face {font-family: 'Poppins';
+//   src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
+//   font-style: normal;
+//   font-display: swap;
+//   font-weight: 700;
+// }
 
 @font-face {font-family: 'Poppins';
-  src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
+  src: url('/fonts/poppins/Poppins-SemiBold.ttf') format("truetype");
   font-style: normal;
   font-display: swap;
   font-weight: 700;
 }
 
-@font-face {font-family: 'Poppins';
-  src: url('/fonts/poppins/Poppins-Bold.ttf') format("truetype");
-  font-style: normal;
-  font-display: swap;
-  font-weight: 800;
-}
-
-.fw-800 {
-  font-weight: 800 !important;
-}
-
 h1,h2,h3, h4, h5, h6, b, strong {
-  font-weight: 800 !important;
+  font-weight: 700;
+  color: #282828;
 }
 
 @for $i from 1 through 6 {
@@ -127,6 +123,7 @@ h1,h2,h3, h4, h5, h6, b, strong {
   font-weight: bold;
   position: relative;
   padding-bottom: 10px;
+  color: #333;
   margin-bottom: 2rem;
 
   @media (max-width: 992px) {

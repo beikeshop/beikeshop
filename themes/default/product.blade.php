@@ -1,6 +1,8 @@
 @extends('layout.master')
 @section('body-class', 'page-product')
-@section('title', $product['name'])
+@section('title', $product['meta_title'] ?: $product['name'])
+@section('keywords', $product['meta_keywords'] ?: system_setting('base.meta_keyword'))
+@section('description', $product['meta_description'] ?: system_setting('base.meta_description'))
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>

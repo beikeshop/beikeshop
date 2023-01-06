@@ -109,7 +109,7 @@
                 @endforeach
               </ul>
               <div class="d-grid gap-2 mt-3">
-                <button class="btn btn-primary fw-bold" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
+                <button class="btn btn-primary fw-bold fs-5" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
               </div>
             </div>
           </div>

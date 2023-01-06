@@ -167,13 +167,14 @@ body.page-product {
 
   .peoduct-info {
     .product-name {
-      font-size: 1.5rem;
-      line-height: 1.4;
+      font-size: 1.7rem;
+      line-height: 1.3;
 
       @media (max-width: 768px) {
         font-size: 1.2rem;
       }
     }
+
     .rating-wrap {
       margin-bottom: 2rem;
 

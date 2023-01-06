@@ -25,7 +25,7 @@
       <div class="col-12 col-md-9 left-column">
         <div class="card shadow-sm">
           <div class="card-body p-lg-4">
-            <div class="p-lg-0"><h5 class="mb-3">{{ __('shop/carts.commodity') }}</h5></div>
+            <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.commodity') }}</h4></div>
             <div class="cart-products-wrap table-responsive">
               <table class="table">
                 <thead>
@@ -81,14 +81,14 @@
         <div class="card shadow-sm fixed-top-line">
           <div class="card-body p-lg-4">
             <div class="card total-wrap">
-              <div class="p-lg-0"><h5 class="mb-3">{{ __('shop/carts.product_total') }}</h5></div>
+              <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.product_total') }}</h4></div>
               <div class="card-body p-lg-0">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ allProduct }}</span></li>
                   <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
                   <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
                   <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
-                    <button type="button" class="btn btn-primary fw-bold" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
+                    <button type="button" class="btn btn-primary fs-5 fw-bold" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
                   </li>
                 </ul>
               </div>

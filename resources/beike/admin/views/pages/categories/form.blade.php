@@ -35,6 +35,31 @@
           </select>
         </x-admin::form.row>
 
+        <x-admin::form.row title="Meta title">
+          @foreach ($languages as $language)
+          <div class="input-group w-max-600">
+            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+          </div>
+          @endforeach
+        </x-admin::form.row>
+        <x-admin::form.row title="Meta keywords">
+          @foreach ($languages as $language)
+          <div class="input-group w-max-600">
+            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+          </div>
+          @endforeach
+        </x-admin::form.row>
+        <x-admin::form.row title="Meta description">
+          @foreach ($languages as $language)
+          <div class="input-group w-max-600">
+            <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control wp-400" placeholder="Meta description">{{ old('meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+          </div>
+          @endforeach
+        </x-admin::form.row>
+
         <x-admin-form-switch title="{{ __('common.status') }}" name="active" :value="old('active', $category->active ?? 1)" />
 
         <x-admin::form.row>

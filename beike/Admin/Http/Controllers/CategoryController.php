@@ -4,6 +4,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Models\Category;
 use Illuminate\Http\Request;
+use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\CategoryRepo;
 use Beike\Admin\Services\CategoryService;
 use Beike\Admin\Http\Requests\CategoryRequest;
@@ -73,6 +74,7 @@ class CategoryController extends Controller
 
         $data = [
             'category' => $category ?? new Category(),
+            'languages' => LanguageRepo::all(),
             'descriptions' => $descriptions ?? null,
             'categories' => CategoryRepo::flatten(locale()),
             '_redirect' => $this->getRedirect(),
