@@ -34,6 +34,9 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-attribute" type="button">{{ __('admin/attribute.index') }}</button>
     </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seo" type="button" >SEO</button>
+    </li>
   </ul>
 
   <div class="card">
@@ -312,6 +315,33 @@
                   </tbody>
                 </table>
               </div>
+            </x-admin::form.row>
+          </div>
+          <div class="tab-pane fade" id="tab-seo">
+            <h6 class="border-bottom pb-3 mb-4">SEO</h6>
+            <x-admin::form.row title="Meta title">
+              @foreach ($languages as $language)
+              <div class="input-group w-max-600">
+                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_title', $product->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+              </div>
+              @endforeach
+            </x-admin::form.row>
+            <x-admin::form.row title="Meta keyword">
+              @foreach ($languages as $language)
+              <div class="input-group w-max-600">
+                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keyword]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_keyword', $product->descriptions->keyBy('locale')[$language->code]->meta_keyword ?? '') }}</textarea>
+              </div>
+              @endforeach
+            </x-admin::form.row>
+            <x-admin::form.row title="Meta description">
+              @foreach ($languages as $language)
+              <div class="input-group w-max-600">
+                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_description', $product->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+              </div>
+              @endforeach
             </x-admin::form.row>
           </div>
         </div>
