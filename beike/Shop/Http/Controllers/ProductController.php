@@ -18,9 +18,11 @@ class ProductController extends Controller
      */
     public function show(Request $request, Product $product)
     {
+        $relationIds = $product->relations->pluck('id')->toArray();
         $product = ProductRepo::getProductDetail($product);
         $data = [
             'product' => (new ProductDetail($product))->jsonSerialize(),
+            'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
         ];
         $data = hook_filter('product.show', $data);
         return view('product', $data);

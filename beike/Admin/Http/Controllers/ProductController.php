@@ -117,6 +117,7 @@ class ProductController extends Controller
             'descriptions' => $descriptions ?? [],
             'category_ids' => $categoryIds ?? [],
             'product_attributes' => ProductAttributeResource::collection($product->attributes),
+            'relations' => ProductResource::collection($product->relations)->resource,
             'languages' => LanguageRepo::all(),
             'tax_classes' => TaxClassRepo::getList(),
             'source' => [

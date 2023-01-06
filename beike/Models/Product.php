@@ -60,6 +60,11 @@ class Product extends Base
         return $this->belongsTo(Brand::Class, 'brand_id', 'id');
     }
 
+    public function relations()
+    {
+        return $this->belongsToMany(Product::class, ProductRelation::class, 'product_id', 'relation_id')->withTimestamps();
+    }
+
     public function inCurrentWishlist()
     {
         $customer = current_customer();

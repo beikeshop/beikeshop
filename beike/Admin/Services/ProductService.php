@@ -59,6 +59,7 @@ class ProductService
             $product->skus()->createMany($skus);
 
             $product->categories()->sync($data['categories'] ?? []);
+            $product->relations()->sync($data['relations'] ?? []);
 
             DB::commit();
 
