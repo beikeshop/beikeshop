@@ -52,7 +52,7 @@ export default {
   },
 
   addWishlist(id, event) {
-    if (!config.isLogin && !config.guestCheckout) {
+    if (!config.isLogin) {
       this.openLogin()
       return;
     }

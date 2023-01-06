@@ -16,17 +16,35 @@ body[class^="page-account-"] {
   background-color: #F7F8FA;
 }
 
-@font-face {font-family: 'poppins';
-  src: url('/fonts/poppins/Poppins-Regular.ttf');
+@font-face {font-family: 'Poppins';
+  src: url('/fonts/poppins/Poppins-Regular.ttf') format("truetype");
+  font-style: normal;
+  font-weight: 500;
+  font-weight: normal;
+  font-display: swap;
 }
 
-@font-face {font-family: 'poppins';
-  src: url('/fonts/poppins/Poppins-Bold.ttf');
-  font-weight: bold;
+
+@font-face {font-family: 'Poppins';
+  src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
 }
 
-@font-face {font-family: 'Poppins-Medium';
-  src: url('/fonts/poppins/Poppins-Medium.ttf');
+@font-face {font-family: 'Poppins';
+  src: url('/fonts/poppins/Poppins-Bold.ttf') format("truetype");
+  font-style: normal;
+  font-display: swap;
+  font-weight: 800;
+}
+
+.fw-800 {
+  font-weight: 800 !important;
+}
+
+h1,h2,h3, h4, h5, h6, b, strong {
+  font-weight: 800 !important;
 }
 
 @for $i from 1 through 6 {
@@ -282,11 +300,6 @@ body[class^="page-account-"] {
       }
     }
   }
-}
-
-
-table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-header {
-  font-family: 'Poppins-Medium', sans-serif;
 }
 
 .text-size-min {

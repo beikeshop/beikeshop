@@ -35,7 +35,7 @@
   <script>
     const config = {
       isLogin: !!{{ current_customer()->id ?? 'null' }},
-      guestCheckout: !!{{ system_setting('base.guest_checkout', '1') }}
+      guestCheckout: !!{{ system_setting('base.guest_checkout', 1) }}
     }
   </script>
 
