@@ -56,6 +56,8 @@ class AttributeGroupRepo
         $attributeGroup->descriptions()->delete();
         $attributeGroup->descriptions()->createMany($descriptions);
 
+        $attributeGroup->load('description', 'descriptions');
+
         return $attributeGroup;
     }
 
