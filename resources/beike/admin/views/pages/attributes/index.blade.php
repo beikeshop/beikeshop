@@ -145,9 +145,15 @@
             }
 
             $http.post('attributes', this.dialog.form).then((res) => {
-              this.$message.success(res.message);
-              this.loadData();// this.customers.data.push(res.data);
-              this.dialog.show = false
+              this.loadData();
+              setTimeout(() => this.dialog.show = false, 100)
+              this.$confirm('{{ __('admin/attribute.to_info_values') }}', '{{ __('common.created_success') }}', {
+                distinguishCancelAndClose: true,
+                confirmButtonText: '{{ __('admin/attribute.btn_at') }}',
+                cancelButtonText: '{{ __('admin/attribute.btn_later') }}',
+              }).then(() => {
+                location = this.linkEdit(res.data.id);
+              }).catch(()=>{})
             })
           });
         },

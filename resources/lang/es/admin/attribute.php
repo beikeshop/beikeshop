@@ -17,4 +17,7 @@ return [
     'set_attribute' => 'atributo de configuración',
     'add_attribute' => 'agregar valor de atributo',
     'before_attribute' => 'Seleccione primero el atributo de la izquierda',
+    'btn_at' => 'Ir ahora',
+    'btn_later' => 'más tarde',
+    'to_info_values' => 'Por favor, vaya a la página de detalles para editar los valores de los atributos',
 ];
