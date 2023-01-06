@@ -13,7 +13,7 @@ return [
     'index' => 'checkout',
     'address' => 'indirizzo di consegna',
     'payment_address' => 'indirizzo di fatturazione',
-    'same_as_shipping_address' => 'L'indirizzo di fatturazione è lo stesso dell'indirizzo di spedizione',
+    'same_as_shipping_address' => 'L\'indirizzo di fatturazione è lo stesso dell\'indirizzo di spedizione',
     'chosen' => 'selezionato',
     'edit' => 'modifica',
     'choose_another_address' => 'Scegli un altro indirizzo',

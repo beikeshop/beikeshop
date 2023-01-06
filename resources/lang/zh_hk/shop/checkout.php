@@ -31,9 +31,10 @@ return [
     'error_payment_address' => '請選擇賬單地址',
 
     'payment' => [
-       'index' => '請付款',
+        'index' => '請付款',
         'please_pay' => '訂單提交成功，請付款',
         'order_number' => '訂單編號',
         'amounts_payable' => '應付金額',
         'payment_method' => '支付方式',
+    ],
 ];

@@ -29,7 +29,7 @@ return [
     'smtp_encryption' => '暗号化方式',
     'smtp_encryption_info' => 'SSL または TLS',
     'smtp_password' => 'パスワード',
-    'smtp_password_info' => 'SMTP パスワードを設定します。 Gmail については、https://security.google.com/settings/security/apppasswords を参照してください'。
+    'smtp_password_info' => 'SMTP パスワードを設定します。 Gmail については、https://security.google.com/settings/security/apppasswords を参照してください',
     'smtp_port' => 'ポート',
     'smtp_timeout' => 'タイムアウト',
     'sendmail_path' => '実行パス',

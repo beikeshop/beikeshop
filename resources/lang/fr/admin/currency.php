@@ -16,4 +16,4 @@ return [
      'currencies_show' => 'détails de la devise',
      'currencies_update' => 'mettre à jour la devise',
      'currencies_delete' => 'Supprimer la devise',
-] ;
+];
