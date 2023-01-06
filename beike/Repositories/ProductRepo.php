@@ -60,6 +60,9 @@ class ProductRepo
      */
     public static function getProductsByIds($productIds): AnonymousResourceCollection
     {
+        if (!$productIds) {
+            return ProductSimple::collection(new Collection());
+        }
         $builder = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
         $products = $builder->with('inCurrentWishlist')->get();
         return ProductSimple::collection($products);
