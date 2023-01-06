@@ -37,11 +37,13 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-seo" type="button" >SEO</button>
     </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relations" type="button">{{ __('admin/product.product_relations') }}</button>
+    </li>
   </ul>
 
   <div class="card">
-    {{-- <div class="card-header"><h6 class="card-title">基础信息</h6></div> --}}
-    <div class="card-body">
+    <div class="card-body h-min-600">
       <form novalidate class="needs-validation" action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
         method="POST" id="app">
         @csrf
@@ -317,6 +319,7 @@
               </div>
             </x-admin::form.row>
           </div>
+
           <div class="tab-pane fade" id="tab-seo">
             <h6 class="border-bottom pb-3 mb-4">SEO</h6>
             <x-admin::form.row title="Meta title">
@@ -344,8 +347,45 @@
               @endforeach
             </x-admin::form.row>
           </div>
-        </div>
 
+          <div class="tab-pane fade" id="tab-relations">
+            <x-admin::form.row title="{{ __('admin/product.product_relations') }}">
+              <div class="module-edit-group wp-600">
+                <div class="autocomplete-group-wrapper">
+                  <el-autocomplete
+                    class="inline-input"
+                    v-model="relations.keyword"
+                    value-key="name"
+                    size="small"
+                    :fetch-suggestions="relationsQuerySearch"
+                    placeholder="{{ __('admin/builder.modules_keywords_search') }}"
+                    @select="relationsHandleSelect"
+                  ></el-autocomplete>
+
+                  <div class="item-group-wrapper" v-loading="relations.loading">
+                    <template v-if="relations.products.length">
+                      <draggable
+                        ghost-class="dragabble-ghost"
+                        :list="relations.products"
+                        :options="{animation: 330}"
+                      >
+                        <div v-for="(item, index) in relations.products" :key="index" class="item">
+                          <div>
+                            <i class="el-icon-s-unfold"></i>
+                            <span>@{{ item.name }}</span>
+                          </div>
+                          <i class="el-icon-delete right" @click="relationsRemoveProduct(index)"></i>
+                          <input type="text" :name="'relations['+ index +']'" v-model="item.id" class="form-control d-none">
+                        </div>
+                      </draggable>
+                    </template>
+                    <template v-else>{{ __('admin/builder.modules_please_products') }}</template>
+                  </div>
+                </div>
+              </div>
+            </x-admin::form.row>
+          </div>
+        </div>
 
         <x-admin::form.row title="">
           <button type="submit" class="btn btn-primary mt-3 btn-lg">{{ __('common.save') }}</button>
@@ -422,6 +462,12 @@
           skus: @json($product->skus ?? []),
         },
 
+        relations: {
+          keyword: '',
+          products: @json($relations ?? []),
+          loading: null,
+        },
+
         source: {
           variables: @json($product->variables ?? []),
           languages: @json($languages ?? []),
@@ -491,6 +537,23 @@
         }
       },
       methods: {
+        relationsQuerySearch(keyword, cb) {
+          $http.get('products/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+            cb(res.data);
+          })
+        },
+
+        relationsHandleSelect(item) {
+          if (!this.relations.products.find(v => v == item.id)) {
+            this.relations.products.push(item);
+          }
+          this.relations.keyword = ""
+        },
+
+        relationsRemoveProduct(index) {
+          this.relations.products.splice(index, 1);
+        },
+
         variantIsImage(e, index) {
           if (!e) {
             this.source.variables[index].values.forEach(v => {

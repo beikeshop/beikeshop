@@ -26,6 +26,7 @@ return [
 
     'basic_information' => '基礎信息',
     'product_details' => '商品詳情',
+    'product_relations' => '相關商品',
     'stocks' => '商品庫存',
     'model' => '型號',
     'price' => '價格',

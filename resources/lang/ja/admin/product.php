@@ -26,6 +26,7 @@ return [
 
     'basic_information' => '基本情報',
     'product_details' => '商品の詳細',
+    'product_relations' => '関連商品',
     'stocks' => '商品在庫',
     'model' => 'モデル',
     'price' => '価格',

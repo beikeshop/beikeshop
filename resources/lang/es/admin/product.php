@@ -26,6 +26,7 @@ return [
 
     'basic_information' => 'información básica',
     'product_details' => 'Detalles de producto',
+    'product_relations' => 'bienes relacionados',
     'stocks' => 'Existencias de materias primas',
     'model' => 'modelo',
     'price' => 'precio',

@@ -26,6 +26,7 @@ return [
 
     'basic_information' => 'основная информация',
     'product_details' => 'Подробнее о продукте',
+    'product_relations' => 'сопутствующие товары',
     'stocks' => 'инвентаризация товаров',
     'model' => 'модель',
     'price' => 'цена',

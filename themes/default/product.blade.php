@@ -164,6 +164,27 @@
       </div>
     </div>
   </div>
+
+  @if ($relations)
+    <div class="relations-wrap mt-5">
+      <div class="container position-relative">
+        <div class="title text-center fs-1 mb-4">{{ __('admin/product.product_relations') }}</div>
+        <div class="product swiper-style-plus">
+          <div class="swiper relations-swiper">
+            <div class="swiper-wrapper">
+              @foreach ($relations as $item)
+              <div class="swiper-slide">
+                @include('shared.product', ['product' => $item])
+              </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="swiper-button-prev relations-swiper-prev"></div>
+          <div class="swiper-button-next relations-swiper-next"></div>
+        </div>
+      </div>
+    </div>
+  @endif
 @endsection
 
 @push('add-scripts')
@@ -317,19 +338,33 @@
           slidesPerView: 6,
           spaceBetween:3,
         },
-
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.new-feature-slideshow-next',
+        prevEl: '.new-feature-slideshow-prev',
       },
       observer: true,
       observeParents: true
     });
+
+    var relationsSwiper = new Swiper ('.relations-swiper', {
+      breakpoints:{
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 10,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 30,
+        },
+      },
+      spaceBetween: 30,
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.relations-swiper-next',
+        prevEl: '.relations-swiper-prev',
+      },
+    })
 
     @if (is_mobile())
       swiperMobile = new Swiper("#swiper-mobile", {

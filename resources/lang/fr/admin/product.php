@@ -26,6 +26,7 @@ return [
 
      'basic_information' => 'informations de base',
      'product_details' => 'détails du produit',
+     'product_relations' => 'biens liés',
      'stocks' => 'inventaire des marchandises',
      'model' => 'maquette',
      'price' => 'le prix',

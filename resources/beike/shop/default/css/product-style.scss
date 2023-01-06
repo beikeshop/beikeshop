@@ -13,6 +13,7 @@
   text-align: center;
   padding-bottom: .7rem;
   transition: all 0.3s ease-in-out;
+  background-color: #fff;
 
   .image {
     margin-bottom: 10px;
@@ -41,12 +42,14 @@
     }
   }
 
-  &:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  @media (min-width: 768px) {
+    &:hover {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
-    .button-wrap {
-      bottom: 10px;
-      opacity: 1;
+      .button-wrap {
+        bottom: 10px;
+        opacity: 1;
+      }
     }
   }
 

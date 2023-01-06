@@ -23,3 +23,35 @@
     }
   }
 }
+
+
+.swiper-style-plus {
+  position: relative;
+
+  .swiper-button-prev,.swiper-button-next {
+    width: 34px;
+    height: 37px;
+    color: #333;
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    &:after {
+      font-size: 22px;
+    }
+  }
+
+  .swiper-button-prev {
+    left: -50px;
+  }
+
+  .swiper-button-next {
+    right: -50px;
+  }
+
+  .swiper-pagination {
+    .swiper-pagination-bullet-active {
+      background: $primary;
+    }
+  }
+}

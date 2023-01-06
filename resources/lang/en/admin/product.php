@@ -25,6 +25,7 @@ return [
 
     'basic_information' => 'basic information',
      'product_details' => 'Product details',
+     'product_relations' => 'Related goods',
      'stocks' => 'goods inventory',
      'model' => 'model',
      'price' => 'price',

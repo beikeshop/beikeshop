@@ -26,6 +26,7 @@ return [
 
      'basic_information' => 'grundlegende Informationen',
      'product_details' => 'Produktdetails',
+     'product_relations' => 'bezogene Waren',
      'stocks' => 'Warenbestand',
      'model' => 'Modell',
      'price' => 'Preis',
