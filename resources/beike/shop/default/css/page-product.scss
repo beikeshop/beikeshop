@@ -230,4 +230,24 @@ body.page-product {
       }
     }
   }
+
+  .attribute-table {
+    tr {
+      td:first-of-type {
+        @media (min-width: 768px) {
+          width: 20%;
+        }
+
+        @media (max-width: 768px) {
+          width: 40%;
+        }
+      }
+
+      &:nth-child(2n+1) {
+        td {
+          background-color: rgba(249, 172, 17, .05);
+        }
+      }
+    }
+  }
 }

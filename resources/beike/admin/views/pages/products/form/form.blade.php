@@ -31,6 +31,9 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-descriptions" type="button">{{ __('admin/product.product_details') }}</button>
     </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-attribute" type="button">{{ __('admin/attribute.index') }}</button>
+    </li>
   </ul>
 
   <div class="card">
@@ -266,6 +269,51 @@
               </div>
             </x-admin::form.row>
           </div>
+          <div class="tab-pane fade" id="tab-attribute">
+            <x-admin::form.row title="{{ __('admin/attribute.set_attribute') }}">
+              <div class="pdf-table">
+                <table class="table table-bordered w-max-600">
+                  <thead><th>{{ __('admin/attribute.index') }}</th><th>{{ __('admin/attribute.attribute_value') }}</th><th width="50px"></th></thead>
+                  <tbody>
+                    <tr v-for="item, index in form.attributes" :key="index">
+                      <td>
+                        <el-autocomplete
+                          v-model="item.attribute.name"
+                          :fetch-suggestions="attributeQuerySearch"
+                          placeholder="{{ __('admin/builder.modules_keywords_search') }}"
+                          value-key="name"
+                          class="w-100"
+                          size="small"
+                          @select="(e) => {attributeHandleSelect(e, index, 'attribute')}"
+                        ></el-autocomplete>
+                        <input type="text" :name="'attributes['+ index +'][attribute_id]'" v-model="item.attribute.id" class="form-control d-none">
+                      </td>
+                      <td>
+                        <el-autocomplete
+                          v-model="item.attribute_value.name"
+                          :fetch-suggestions="((query, cb) => {attributeValueQuerySearch(query, cb, index)})"
+                          size="small"
+                          :disabled="item.attribute.id == ''"
+                          value-key="name"
+                          class="w-100"
+                          :placeholder="item.attribute.id == '' ? '{{ __('admin/attribute.before_attribute') }}' : '{{ __('admin/builder.modules_keywords_search') }}'"
+                          @select="(e) => {attributeHandleSelect(e, index, 'attribute_value')}"
+                        ></el-autocomplete>
+                        <input type="text" :name="'attributes['+ index +'][attribute_value_id]'" v-model="item.attribute_value.id" class="form-control d-none">
+                      </td>
+                      <td class="text-end">
+                        <i @click="form.attributes.splice(index, 1)" class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"></td>
+                      <td class="text-end"><i class="bi bi-plus-circle cursor-pointer fs-4" @click="addAttribute"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </x-admin::form.row>
+          </div>
         </div>
 
 
@@ -287,13 +335,36 @@
                   { required: true, message: '{{ __('common.error_input_required') }}', trigger: 'blur' },
                 ]"
               >
-                <el-input size="mini" v-model="dialogVariables.form.name[lang.code]" placeholder="请填写名称"><template slot="prepend">@{{lang.name}}</template></el-input>
+                <el-input size="mini" v-model="dialogVariables.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
               </el-form-item>
             </el-form-item>
 
             <el-form-item>
               <el-button type="primary" @click="dialogVariablesFormSubmit('form')">{{ __('common.save') }}</el-button>
               <el-button @click="closedialogVariablesFormDialog('form')">{{ __('common.cancel') }}</el-button>
+            </el-form-item>
+          </el-form>
+        </el-dialog>
+
+        <el-dialog title="{{ __('admin/attribute.attribute_value') }}" :visible.sync="attributeDialog.show" width="670px"
+          @close="attributeCloseDialog('attribute_form')" :close-on-click-modal="false">
+
+          <el-form ref="attribute_form" :model="attributeDialog.form" label-width="155px">
+            <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
+              <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
+                :rules="[
+                  { required: true, message: '{{ __('common.error_required', ['name' => __('common.name')]) }}', trigger: 'blur' },
+                ]"
+              >
+                <el-input size="mini" v-model="attributeDialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
+              </el-form-item>
+            </el-form-item>
+
+            <el-form-item>
+              <div class="d-flex d-lg-block mt-4">
+                <el-button type="primary" @click="attributeSubmit('attribute_form')">{{ __('common.save') }}</el-button>
+                <el-button @click="attributeCloseDialog('attribute_form')">{{ __('common.cancel') }}</el-button>
+              </div>
             </el-form-item>
           </el-form>
         </el-dialog>
@@ -310,6 +381,7 @@
         current_language_code: '{{ locale() }}',
         isMove: false,
         form: {
+          attributes: @json(old('pickups', $product_attributes) ?? []),
           images: @json($product->images ?? []),
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
@@ -319,6 +391,7 @@
           variables: @json($product->variables ?? []),
           skus: @json($product->skus ?? []),
         },
+
         source: {
           variables: @json($product->variables ?? []),
           languages: @json($languages ?? []),
@@ -335,6 +408,14 @@
           form: {
             name: {}
           },
+        },
+
+        attributeDialog: {
+          show: false,
+          index: null,
+          form: {
+            name: {},
+          }
         },
 
         rules: {}
@@ -417,7 +498,7 @@
 
           this.$refs[form].validate((valid) => {
             if (!valid) {
-              this.$message.error('请检查表单是否填写正确');
+              this.$message.error('{{ __('common.error_form') }}');
               return;
             }
 
@@ -500,6 +581,65 @@
           this.dialogVariables.show = true;
           this.dialogVariables.type = 'variant-value';
           this.dialogVariables.variantIndex = variantIndex;
+        },
+
+        addAttribute() {
+          this.form.attributes.push({attribute:{id:'',name:''}, attribute_value: {id:'',name:''}})
+        },
+
+        attributeQuerySearch(keyword, cb) {
+          $http.get('attributes/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+            cb(res.data);
+          })
+        },
+
+        attributeValueQuerySearch(keyword, cb, index) {
+          $http.get(`attributes/${this.form.attributes[index].attribute.id}/values/autocomplete?name=${encodeURIComponent(keyword)}`, null, {hload:true}).then((res) => {
+            res.data.push({id: 'add', name: '{{ __('admin/attribute.add_attribute') }}'})
+            cb(res.data);
+          })
+        },
+
+        attributeHandleSelect(item, index, type) {
+          if (type == 'attribute' && item.id != this.form.attributes[index].attribute.id) {
+            this.form.attributes[index].attribute_value.name = ''
+            this.form.attributes[index].attribute_value.id = ''
+          }
+
+          if (item.id == 'add') {
+            this.attributeDialog.show = true;
+            this.attributeDialog.index = index;
+            this.form.attributes[index].attribute_value.name = ''
+            return;
+          }
+
+          this.form.attributes[index][type].name = item.name
+          this.form.attributes[index][type].id = item.id
+        },
+
+        attributeSubmit(form) {
+          const self = this;
+
+          this.$refs[form].validate((valid) => {
+            if (!valid) {
+              this.$message.error('{{ __('common.error_form') }}');
+              return;
+            }
+
+            const id = this.form.attributes[this.attributeDialog.index].attribute.id;
+
+            $http.post(`attributes/${id}/values`, this.attributeDialog.form).then((res) => {
+              this.form.attributes[this.attributeDialog.index].attribute_value.id = res.data.id
+              this.form.attributes[this.attributeDialog.index].attribute_value.name = res.data.description.name
+              this.attributeDialog.show = false
+            })
+          });
+        },
+
+        attributeCloseDialog(form) {
+          this.$refs[form].resetFields();
+          this.attributeDialog.form.name = {}
+          this.attributeDialog.show = false
         },
 
         remakeSkus() {

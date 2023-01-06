@@ -136,13 +136,30 @@
 
     <div class="product-description">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
-        <h5 class="mb-0"><a class="nav-link fw-bold active" data-bs-toggle="tab" href="#product-description">
+        <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
-        </a></h5>
+        </a>
+        @if ($product['attributes'])
+        <a class="nav-link fw-bold fs-5" data-bs-toggle="tab" href="#product-attributes">
+          {{ __('admin/attribute.index') }}
+        </a>
+        @endif
       </div>
       <div class="tab-content">
-        <div class="tab-pane fade show active" id="product-description" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="tab-pane fade show active" id="product-description" role="tabpanel">
           {!! $product['description'] !!}
+        </div>
+        <div class="tab-pane fade" id="product-attributes" role="tabpanel">
+          <table class="table table-bordered attribute-table">
+            <tbody>
+              @foreach ($product['attributes'] as $item)
+              <tr>
+                <td>{{ $item['attribute'] }}</td>
+                <td>{{ $item['attribute_value'] }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
