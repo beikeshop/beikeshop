@@ -12,6 +12,7 @@
 namespace Plugin\Social\Repositories;
 
 use Beike\Models\Customer;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Two\User;
 use Beike\Shop\Services\AccountService;
 use Illuminate\Database\Eloquent\Model;
@@ -57,11 +58,14 @@ class CustomerRepo
         }
 
         $email = $userData->getEmail();
+        if (empty($email)) {
+            $email = strtolower(Str::random(8)) . "@{$provider}.com";
+        }
         $customer = Customer::query()->where('email', $email)->first();
         if (empty($customer)) {
             $customerData = [
                 'from' => $provider,
-                'email' => $userData->getEmail(),
+                'email' => $email,
                 'name' => $userData->getName(),
                 'avatar' => $userData->getAvatar(),
             ];
