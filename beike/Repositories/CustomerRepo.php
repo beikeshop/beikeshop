@@ -124,6 +124,8 @@ class CustomerRepo
             $builder->where('customers.created_at', '<', $end);
         }
 
+        $builder->orderByDesc('customers.created_at');
+
         return $builder;
     }
 
@@ -137,7 +139,8 @@ class CustomerRepo
         Customer::onlyTrashed()->find($id)->forceDelete();
     }
 
-    public static function forceDeleteAll() {
+    public static function forceDeleteAll()
+    {
         Customer::onlyTrashed()->forceDelete();
     }
 
