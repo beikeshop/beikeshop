@@ -1,7 +1,50 @@
 {
     "preset": "laravel",
     "rules": {
-        "braces": false
+        "braces": false,
+        "array_syntax": {
+            "syntax": "short"
+        },
+        "ordered_imports": true,
+        "no_useless_else": true,
+        "no_useless_return": true,
+        "self_accessor": true,
+        "php_unit_construct": true,
+        "single_quote": true,
+        "no_unused_imports": true,
+        "no_singleline_whitespace_before_semicolons": true,
+        "no_empty_statement": true,
+        "no_whitespace_in_blank_line": true,
+        "combine_consecutive_unsets": true,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "array_indentation": true,
+        "no_superfluous_phpdoc_tags": false,
+        "blank_line_before_statement": {
+            "statements": ["break", "continue", "declare", "return", "throw", "try"]
+        },
+        "binary_operator_spaces": {
+            "default": "align_single_space"
+        },
+        "lowercase_cast": false,
+        "constant_case": {
+            "case": "lower"
+        },
+        "lowercase_static_reference": true,
+        "no_blank_lines_after_class_opening": true,
+        "phpdoc_separation": false,
+        "phpdoc_single_line_var_spacing": true,
+        "phpdoc_indent": true,
+        "phpdoc_align": {
+            "align": "vertical",
+            "tags": ["param", "throws", "type", "var", "property"]
+        },
+        "visibility_required": {
+            "elements": ["const", "method", "property"]
+        },
+        "single_line_after_imports": true,
+        "whitespace_after_comma_in_array": true
     },
     "exclude": [
         "database",
