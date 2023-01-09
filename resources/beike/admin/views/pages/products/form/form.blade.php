@@ -102,7 +102,7 @@
               <h5 class="border-bottom pb-3 mb-4">{{ __('admin/product.stocks') }}</h5>
 
               <x-admin::form.row :title="__('admin/product.enable_multi_spec')">
-                <el-switch v-model="editing.isVariable" class="mt-2"></el-switch>
+                <el-switch v-model="editing.isVariable" @change="isVariableChange" class="mt-2"></el-switch>
               </x-admin::form.row>
 
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
@@ -291,7 +291,8 @@
                           size="small"
                           @select="(e) => {attributeHandleSelect(e, index, 'attribute')}"
                         ></el-autocomplete>
-                        <input type="text" :name="'attributes['+ index +'][attribute_id]'" v-model="item.attribute.id" class="form-control d-none">
+                        <input type="text" required :name="'attributes['+ index +'][attribute_id]'" v-model="item.attribute.id" class="form-control d-none">
+                        <div class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.index')]) }}</div>
                       </td>
                       <td>
                         <el-autocomplete
@@ -304,7 +305,8 @@
                           :placeholder="item.attribute.id == '' ? '{{ __('admin/attribute.before_attribute') }}' : '{{ __('admin/builder.modules_keywords_search') }}'"
                           @select="(e) => {attributeHandleSelect(e, index, 'attribute_value')}"
                         ></el-autocomplete>
-                        <input type="text" :name="'attributes['+ index +'][attribute_value_id]'" v-model="item.attribute_value.id" class="form-control d-none">
+                        <input type="text" required :name="'attributes['+ index +'][attribute_value_id]'" v-model="item.attribute_value.id" class="form-control d-none">
+                        <div class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/attribute.attribute_value')]) }}</div>
                       </td>
                       <td class="text-end">
                         <i @click="form.attributes.splice(index, 1)" class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i>
@@ -552,6 +554,12 @@
 
         relationsRemoveProduct(index) {
           this.relations.products.splice(index, 1);
+        },
+
+        isVariableChange(e) {
+          if (!e) {
+            this.source.variables = [];
+          }
         },
 
         variantIsImage(e, index) {
