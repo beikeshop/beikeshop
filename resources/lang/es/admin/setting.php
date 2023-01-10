@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => 'Clave',
     'mailgun_endpoint'       => 'puerto',
     'mail_log'               => 'Descripción: ¡El motor de registro generalmente se usa con fines de prueba! El correo electrónico no se enviará realmente a la dirección del destinatario, y el contenido del correo electrónico se guardará en `/storage/logs/laravel.log`\' en forma de registro',
+    'express_code_help'      => 'números, letras, guión bajo',
 
     'guest_checkout'         => 'pago de visitante',
 

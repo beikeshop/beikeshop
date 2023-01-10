@@ -3,7 +3,7 @@
 @section('body-class', 'page-account-rmas')
 
 @push('header')
-  {{-- <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script> --}}
+  {{-- <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script> --}}
 @endpush
 
 @section('content')

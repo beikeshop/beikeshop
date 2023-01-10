@@ -78,6 +78,8 @@ return [
     'text_edit_page_name'              => 'Edit page name',
     'text_page_name_no'                => 'Name cannot be empty',
     'custom_name'                      => 'Custom Name',
+    'move_down'                        => 'Move down',
+    'move_up'                          => 'Move up',
 
     // 固定连接
     'text_static_product_latest'       => 'Latest products',

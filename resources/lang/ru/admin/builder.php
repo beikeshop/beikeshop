@@ -78,6 +78,8 @@ return [
     'text_edit_page_name'              => 'Изменить название страницы',
     'text_page_name_no'                => 'Укажите имя',
     'custom_name'                      => 'пользовательское имя',
+    'move_down'                        => 'переместиться вниз',
+    'move_up'                          => 'движение вверх',
 
     // 固定连接
     'text_static_product_latest'       => 'Последний продукт',

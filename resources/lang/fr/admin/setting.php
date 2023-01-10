@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => 'Clé',
     'mailgun_endpoint'       => 'port',
     'mail_log'               => 'Description: Le moteur de journalisation est généralement utilisé à des fins de test! L\'e-mail ne sera pas réellement envoyé à l\'adresse du destinataire, et le contenu de l\'e-mail sera enregistré dans `/storage/logs/laravel.log`\' sous la forme d\'un journal',
+    'express_code_help'      => 'chiffres, lettres, trait de soulignement',
 
     'guest_checkout'         => 'paiement des visiteurs',
     'theme_default'          => 'thème par défaut',

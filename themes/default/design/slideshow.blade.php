@@ -4,16 +4,8 @@
 @endpush
 
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
-  @if ($design)
-  <div class="module-edit">
-    <div class="edit-wrap">
-      <div class="down"><i class="bi bi-chevron-down"></i></div>
-      <div class="up"><i class="bi bi-chevron-up"></i></div>
-      <div class="delete"><i class="bi bi-x-lg"></i></div>
-      <div class="edit"><i class="bi bi-pencil-square"></i></div>
-    </div>
-  </div>
-  @endif
+  @include('design._partial._module_tool')
+
   <div class="module-info mb-3 mb-md-5 {{ !$content['full'] ? 'container' : '' }}">
     <div class="swiper module-swiper-{{ $module_id }} module-slideshow">
       <div class="swiper-wrapper">

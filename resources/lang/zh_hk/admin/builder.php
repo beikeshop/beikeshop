@@ -79,6 +79,8 @@ return [
     'text_edit_page_name'              => '修改頁面名稱',
     'text_page_name_no'                => '名稱不能為空',
     'custom_name'                      => '自定義名稱',
+    'move_down'                        => '下移',
+    'move_up'                          => '上移',
 
     // 固定连接
     'text_static_product_latest'       => '最新商品',

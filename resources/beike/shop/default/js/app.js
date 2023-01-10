@@ -24,7 +24,6 @@ $(document).ready(function ($) {
 
     $http.delete(`carts/${id}`).then((res) => {
       $(this).parents('.product-list').remove();
-      console.log(res.data.quantity);
       if (!res.data.quantity) {
         $('.cart-badge-quantity').hide();
       } else {
@@ -35,6 +34,9 @@ $(document).ready(function ($) {
       $('.offcanvas-right-cart-amount').text(res.data.amount_format);
     })
   })
+
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 });
 
 bk.getCarts(); // 页面初始加载购物车数据

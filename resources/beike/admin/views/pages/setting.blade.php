@@ -113,8 +113,12 @@
 
           <div class="tab-pane fade" id="tab-express-company">
             <x-admin::form.row title="{{ __('order.express_company') }}">
-              <table class="table table-bordered w-max-500">
-                <thead><th>{{ __('order.express_company') }}</th><th>Code</th><th></th></thead>
+              <table class="table table-bordered w-max-600">
+                <thead>
+                  <th>{{ __('order.express_company') }}</th>
+                  <th>Code</th>
+                  <th></th>
+                </thead>
                 <tbody>
                   <tr v-for="item, index in express_company" :key="index">
                     <td>
@@ -122,7 +126,7 @@
                       <div class="invalid-feedback">{{ __('common.error_required', ['name' => __('order.express_company')]) }}</div>
                     </td>
                     <td>
-                      <input required placeholder="Code" type="text" :name="'express_company['+ index +'][code]'" v-model="item.code" class="form-control">
+                      <input required placeholder="{{ __('admin/setting.express_code_help') }}" type="text" :name="'express_company['+ index +'][code]'" v-model="item.code" class="form-control">
                       <div class="invalid-feedback">{{ __('common.error_required', ['name' => 'Code']) }}</div>
                     </td>
                     <td><i @click="express_company.splice(index, 1)" class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i></td>

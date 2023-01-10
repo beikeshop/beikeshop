@@ -133,8 +133,16 @@ $form-feedback-icon-valid-color: inherit;
 }
 
 .breadcrumb {
+  .breadcrumb-item {
+    &:last-of-type {
+      a {
+        color: #666;
+        font-weight: 600;
+      }
+    }
+  }
   a {
-    color: #212529;
+    color: #888;
   }
 }
 

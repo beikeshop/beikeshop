@@ -12,7 +12,7 @@
   <title>{{ __('admin/builder.text_edit_home') }}</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <script src="{{ asset('vendor/vue/2.6.14/vue.js') }}"></script>
+  <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
@@ -103,6 +103,7 @@
         const editingModuleIndex = app.form.modules.findIndex(e => e.module_id == module_id);
         app.design.editType = 'add';
         app.design.editingModuleIndex = 0;
+        $(previewWindow.document).find('.tooltip').remove();
         $(this).parents('.module-item').remove();
         app.form.modules.splice(editingModuleIndex, 1);
       });
@@ -146,9 +147,7 @@
       el: '#app',
       data: {
         form: {
-          modules: [
-            // {"content":{"style":{"background_color":""},"full":true,"floor":{"2":"","3":""},"images":[{"image":{"2":"catalog/demo/slideshow/2.jpg","3":"catalog/demo/slideshow/2.jpg"},"show":true,"link":{"type":"product","value":"","link":""}},{"image":{"2":"catalog/demo/slideshow/1.jpg","3":"catalog/demo/slideshow/1.jpg"},"show":false,"link":{"type":"product","value":"","link":""}}]},"code":"slideshow","name":"幻灯片","module_id":"b0448efb0989"}
-          ]
+          modules: []
         },
 
         design: {
@@ -176,10 +175,6 @@
         editingModuleCode() {
           return this.form.modules[this.design.editingModuleIndex].code;
         },
-
-        // editingConfigCodeFormat() {
-        //   return 'config-' + this.config.editingConfigCode;
-        // },
       },
       // 侦听器
       watch: {},
@@ -190,6 +185,8 @@
 
           $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
             $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+            const tooltipTriggerList = previewWindow.document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new previewWindow.bootstrap.Tooltip(tooltipTriggerEl))
           })
         }, 300),
 
@@ -208,7 +205,6 @@
             this.form.modules.push(_data);
             this.design.editingModuleIndex = this.form.modules.length - 1;
             this.design.editType = 'module';
-
 
             setTimeout(() => {
               $(previewWindow.document).find("html, body").animate({
@@ -250,13 +246,6 @@
       mounted () {
       },
     })
-
-    // window.addEventListener('message', (event) => {
-    //   event.stopPropagation()
-    //   if (typeof(event.data.index) !== 'undefined') {
-    //     app.editModuleButtonClicked(event.data.index)
-    //   }
-    // }, false)
   </script>
 </body>
 </html>

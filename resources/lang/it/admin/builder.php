@@ -78,6 +78,8 @@ return [
     'text_edit_page_name'              => 'Modifica il nome della pagina',
     'text_page_name_no'                => 'Il nome è obbligatorio',
     'custom_name'                      => 'nome personalizzato',
+    'move_down'                        => 'sposta giù',
+    'move_up'                          => 'sposta su',
 
     // 固定连接
     'text_static_product_latest'       => 'Nuovi Prodotti',

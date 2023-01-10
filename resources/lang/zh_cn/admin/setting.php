@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => '密钥',
     'mailgun_endpoint'       => '端口',
     'mail_log'               => '说明：日志引擎一般用于测试目的！邮件将不会被真实发送至收件地址，邮件内容会以日志形式保存在 `/storage/logs/laravel.log`',
+    'express_code_help'      => '数字、字母、下划线',
 
     'guest_checkout'         => '游客结账',
     'theme_default'          => '默认主题',

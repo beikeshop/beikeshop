@@ -33,7 +33,7 @@
                     @endif
                   </tr>
                   <tr>
-                    <td><a href="{{ shop_route('orders.pay', [$order['number']]) }}" class="btn btn-primary btn-sm">{{ __('shop/account.order.order_success.pay_now') }}</a></td>
+                    <td><a href="{{ shop_route('orders.pay', [$order['number']]) }}" class="btn btn-primary">{{ __('shop/account.order.order_success.pay_now') }}</a></td>
                   </tr>
                 </tbody>
               </table>

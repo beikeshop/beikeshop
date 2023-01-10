@@ -24,12 +24,12 @@ body[class^="page-account-"] {
   font-display: swap;
 }
 
-// @font-face {font-family: 'Poppins';
-//   src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
-//   font-style: normal;
-//   font-display: swap;
-//   font-weight: 700;
-// }
+@font-face {font-family: 'Poppins';
+  src: url('/fonts/poppins/Poppins-Medium.ttf') format("truetype");
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+}
 
 @font-face {font-family: 'Poppins';
   src: url('/fonts/poppins/Poppins-SemiBold.ttf') format("truetype");

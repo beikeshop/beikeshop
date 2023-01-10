@@ -38,7 +38,7 @@
   .module-edit {
     // position: relative;
     position: absolute;
-    top: -22px;
+    top: -28px;
     left: 0;
     width: 100%;
     z-index: 9;
@@ -54,9 +54,10 @@
       align-items: center;
 
       > div {
-        height: 24px;
-        line-height: 24px;
+        height: 28px;
+        line-height: 30px;
         padding: 0 10px;
+        font-size: 16px;
         cursor: pointer;
         position: relative;
 
@@ -67,7 +68,7 @@
             top: 0;
             border: solid #0000;
             border-right: solid $primary;
-            border-width: 24px 10px 0 0;
+            border-width: 28px 10px 0 0;
             right: 100%;
           }
           &:hover {
@@ -84,7 +85,7 @@
             top: 0;
             border: solid #0000;
             border-left: solid $primary;
-            border-width: 24px 0 0 10px;
+            border-width: 28px 0 0 10px;
             left: 100%;
           }
           &:hover {

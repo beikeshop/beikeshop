@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => 'Key',
     'mailgun_endpoint'       => 'port',
     'mail_log'               => 'Description: The log engine is generally used for testing purposes! The email will not be actually sent to the recipient address, and the email content will be saved in `/storage/logs/laravel.log` in the form of a log',
+    'express_code_help'      => 'numbers, letters, underscore',
 
     'guest_checkout'         => 'visitor checkout',
     'theme_default'          => 'Default Theme',

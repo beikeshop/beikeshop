@@ -5,7 +5,7 @@
 @section('description', $product['meta_description'] ?: system_setting('base.meta_description'))
 
 @push('header')
-  <script src="{{ asset('vendor/vue/2.6.14/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
+  <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
@@ -112,20 +112,20 @@
                 </div>
               </div>
               <button
-                class="btn btn-outline-dark ms-md-3 add-cart"
+                class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
                 :disabled="!product.quantity"
                 @click="addCart(false, this)"
                 ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
               </button>
               <button
-                class="btn btn-dark ms-3"
+                class="btn btn-dark ms-3 fw-bold"
                 :disabled="!product.quantity"
                 @click="addCart(true, this)"
                 ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
               </button>
             </div>
             <div class="add-wishlist">
-              <button class="btn btn-link ps-0 text-dark" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+              <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
                 <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
               </button>
             </div>

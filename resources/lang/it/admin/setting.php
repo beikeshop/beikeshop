@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => 'Chiave',
     'mailgun_endpoint'       => 'porta',
     'mail_log'               => 'Descrizione: Il motore di log è generalmente utilizzato a scopo di test! L\'e-mail non verrà effettivamente inviata all\'indirizzo del destinatario e il contenuto dell\'e-mail verrà salvato in `/storage/logs/laravel.log`\' sotto forma di registro',
+    'express_code_help'      => 'numeri, lettere, underscore',
 
     'guest_checkout'         => 'checkout visitatore',
     'theme_default'          => 'tema predefinito',

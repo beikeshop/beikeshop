@@ -78,6 +78,8 @@ return [
     'text_edit_page_name'              => 'modifier le nom de la page',
     'text_page_name_no'                => 'Le nom ne peut pas être vide',
     'custom_name'                      => 'nom personnalisé',
+    'move_down'                        => 'descendre',
+    'move_up'                          => 'monter',
 
     // Connexion fixe
     'text_static_product_latest'       => 'Dernier produit',

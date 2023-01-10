@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => 'Schlüssel',
     'mailgun_endpoint'       => 'port',
     'mail_log'               => 'Beschreibung: Die Log-Engine wird generell zu Testzwecken verwendet! Die E-Mail wird nicht tatsächlich an die Empfängeradresse gesendet, und der E-Mail-Inhalt wird in „/storage/logs/laravel.log“ in Form eines Protokolls gespeichert.',
+    'express_code_help'      => 'Zahlen, Buchstaben, Unterstrich',
 
     'guest_checkout'         => 'Besucherkasse',
     'theme_default'          => 'Standardthema',

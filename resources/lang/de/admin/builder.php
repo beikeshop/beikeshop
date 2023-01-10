@@ -78,6 +78,8 @@ return [
     'text_edit_page_name'              => 'Seitenname ändern',
     'text_page_name_no'                => 'Der Name darf nicht leer sein',
     'custom_name'                      => 'benutzerdefinierter Name',
+    'move_down'                        => 'nach unten bewegen',
+    'move_up'                          => 'nach oben verschieben',
 
     // Feste Verbindung
     'text_static_product_latest'       => 'Neuestes Produkt',

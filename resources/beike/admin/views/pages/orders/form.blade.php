@@ -169,7 +169,7 @@
           <tbody>
             @foreach ($order->orderProducts as $product)
             <tr>
-              <td>{{ $product->id }}</td>
+              <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
                   <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}

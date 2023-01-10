@@ -37,6 +37,7 @@ return [
     'mailgun_secret'         => '鍵',
     'mailgun_endpoint'       => 'ポート',
     'mail_log'               => '説明: ログ エンジンは通常、テスト目的で使用されます! メールは実際に受信者アドレスに送信されるわけではなく、メールの内容は「/storage/logs/laravel.log」にログとして保存されますが、',
+    'express_code_help'      => '数字、文字、アンダースコア',
 
     'guest_checkout'         => '訪問者チェックアウト',
     'theme_default'          => 'デフォルトのテーマ',
