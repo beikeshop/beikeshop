@@ -24,6 +24,7 @@ use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Console\Commands\GenerateDatabaseDict;
 use Beike\Console\Commands\MakeRootAdminUser;
+use Beike\Console\Commands\MigrateFromOpenCart;
 use Beike\Console\Commands\Sitemap;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Config;
@@ -83,8 +84,9 @@ class AdminServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 MakeRootAdminUser::class,
-                Sitemap::class,
+                MigrateFromOpenCart::class,
                 GenerateDatabaseDict::class,
+                Sitemap::class,
             ]);
         }
     }
