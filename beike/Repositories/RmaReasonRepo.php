@@ -11,13 +11,10 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Rma;
 use Beike\Models\RmaReason;
 use Exception;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 
 class RmaReasonRepo
@@ -30,7 +27,8 @@ class RmaReasonRepo
     public static function create($data)
     {
         $data['name'] = json_encode($data['name']);
-        $item = RmaReason::query()->create($data);
+        $item         = RmaReason::query()->create($data);
+
         return $item;
     }
 
@@ -42,14 +40,15 @@ class RmaReasonRepo
      */
     public static function update($reason, $data)
     {
-        if (!$reason instanceof RmaReason) {
+        if (! $reason instanceof RmaReason) {
             $reason = RmaReason::query()->find($reason);
         }
-        if (!$reason) {
+        if (! $reason) {
             throw new Exception("退换货原因id $reason 不存在");
         }
         $data['name'] = json_encode($data['name']);
         $reason->update($data);
+
         return $reason;
     }
 

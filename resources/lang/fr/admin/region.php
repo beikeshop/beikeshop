@@ -10,14 +10,14 @@
  */
 
 return [
-     'index' => 'groupe de régions',
-     'regions_index' => 'liste des groupes de régions',
-     'regions_create' => 'Créer un groupe de régions',
-     'regions_show' => 'détails du groupe de régions',
-     'regions_update' => 'mettre à jour le groupe de régions',
-     'regions_delete' => 'Supprimer le groupe de régions',
-     'name' => 'nom',
-     'describe' => 'describe',
-     'country' => 'pays',
-     'zone' => 'Province',
+    'index'          => 'groupe de régions',
+    'regions_index'  => 'liste des groupes de régions',
+    'regions_create' => 'Créer un groupe de régions',
+    'regions_show'   => 'détails du groupe de régions',
+    'regions_update' => 'mettre à jour le groupe de régions',
+    'regions_delete' => 'Supprimer le groupe de régions',
+    'name'           => 'nom',
+    'describe'       => 'describe',
+    'country'        => 'pays',
+    'zone'           => 'Province',
 ];

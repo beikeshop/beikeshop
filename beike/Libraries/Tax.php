@@ -18,17 +18,18 @@ use Beike\Models\TaxRule;
 class Tax
 {
     private array $taxRates = [];
+
     private static array $taxRules = [];
 
-    const AVAILABLE_TYPES = ['shipping', 'payment', 'store'];
+    public const AVAILABLE_TYPES = ['shipping', 'payment', 'store'];
 
-    public function __construct($data = array())
+    public function __construct($data = [])
     {
-        $countryId = (int)system_setting('base.country_id');
-        $zoneId = (int)system_setting('base.zone_id');
+        $countryId = (int) system_setting('base.country_id');
+        $zoneId    = (int) system_setting('base.zone_id');
 
         $shippingAddress = $data['shipping_address'] ?? null;
-        $paymentAddress = $data['payment_address'] ?? null;
+        $paymentAddress  = $data['payment_address']  ?? null;
 
         if ($shippingAddress) {
             if ($shippingAddress instanceof Address) {
@@ -57,7 +58,7 @@ class Tax
         $this->setStoreAddress($countryId, $zoneId);
     }
 
-    public static function getInstance($data = array())
+    public static function getInstance($data = [])
     {
         return new self($data);
     }
@@ -78,36 +79,37 @@ class Tax
             ->where('rz.country_id', $countryId)
             ->where(function ($query) use ($zoneId) {
                 $query->where('rz.zone_id', '=', 0)
-                    ->orWhere('rz.zone_id', '=', (int)$zoneId);
+                    ->orWhere('rz.zone_id', '=', (int) $zoneId);
             })
             ->orderBy('rule.priority');
-        $data = $sqlBuilder->get();
+        $data                                       = $sqlBuilder->get();
         self::$taxRules["$type-$countryId-$zoneId"] = $data;
+
         return $data;
     }
 
     private function setAddress($type, $countryId, $zoneId)
     {
-        if (!in_array($type, self::AVAILABLE_TYPES)) {
+        if (! in_array($type, self::AVAILABLE_TYPES)) {
             throw new \Exception('invalid tax types');
         }
 
         $data = $this->getTaxRules($type, $countryId, $zoneId);
 
         foreach ($data as $result) {
-            $this->taxRates[$result->tax_class_id][$result->tax_rate_id] = array(
+            $this->taxRates[$result->tax_class_id][$result->tax_rate_id] = [
                 'tax_rate_id' => $result->tax_rate_id,
-                'name' => $result->name,
-                'rate' => $result->rate,
-                'type' => $result->type,
-                'priority' => $result->priority
-            );
+                'name'        => $result->name,
+                'rate'        => $result->rate,
+                'type'        => $result->type,
+                'priority'    => $result->priority,
+            ];
         }
     }
 
     public function unsetRates()
     {
-        $this->taxRates = array();
+        $this->taxRates = [];
     }
 
     public function setShippingAddress($countryId, $zoneId)
@@ -138,7 +140,7 @@ class Tax
     public function calculate($value, $taxClassId, bool $calculate = true)
     {
         if ($taxClassId && $calculate) {
-            $amount = 0;
+            $amount   = 0;
             $taxRates = $this->getRates($value, $taxClassId);
             foreach ($taxRates as $taxRate) {
                 if ($calculate != 'P' && $calculate != 'F') {
@@ -147,19 +149,22 @@ class Tax
                     $amount += $taxRate['amount'];
                 }
             }
+
             return $value + $amount;
-        } else {
-            return $value;
         }
+
+            return $value;
+
     }
 
     public function getTax($value, $taxClassId)
     {
-        $amount = 0;
+        $amount   = 0;
         $taxRates = $this->getRates($value, $taxClassId);
         foreach ($taxRates as $taxRate) {
             $amount += $taxRate['amount'];
         }
+
         return $amount;
     }
 
@@ -168,14 +173,15 @@ class Tax
         $taxRate = TaxRate::query()->find($taxRateId);
         if ($taxRate) {
             return $taxRate->name;
-        } else {
-            return false;
         }
+
+            return false;
+
     }
 
     public function getRates($value, $taxClassId)
     {
-        $taxRateData = array();
+        $taxRateData = [];
 
         if (isset($this->taxRates[$taxClassId])) {
             foreach ($this->taxRates[$taxClassId] as $taxRate) {
@@ -191,13 +197,13 @@ class Tax
                     $amount += ($value / 100 * $taxRate['rate']);
                 }
 
-                $taxRateData[$taxRate['tax_rate_id']] = array(
+                $taxRateData[$taxRate['tax_rate_id']] = [
                     'tax_rate_id' => $taxRate['tax_rate_id'],
-                    'name' => $taxRate['name'],
-                    'rate' => $taxRate['rate'],
-                    'type' => $taxRate['type'],
-                    'amount' => $amount
-                );
+                    'name'        => $taxRate['name'],
+                    'rate'        => $taxRate['rate'],
+                    'type'        => $taxRate['type'],
+                    'amount'      => $amount,
+                ];
             }
         }
 

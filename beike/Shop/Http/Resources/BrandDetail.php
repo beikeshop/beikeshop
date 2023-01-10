@@ -21,12 +21,12 @@ class BrandDetail extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'logo' => image_origin($this->logo),
+            'id'         => $this->id,
+            'name'       => $this->name,
+            'logo'       => image_origin($this->logo),
             'sort_order' => $this->sort_order,
-            'url'=> shop_route('brands.show', $this->id),
-            'first' => $this->first,
+            'url'        => shop_route('brands.show', $this->id),
+            'first'      => $this->first,
         ];
     }
 }

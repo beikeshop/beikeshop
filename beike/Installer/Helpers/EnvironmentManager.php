@@ -23,7 +23,7 @@ class EnvironmentManager
      */
     public function __construct()
     {
-        $this->envPath = base_path('.env');
+        $this->envPath        = base_path('.env');
         $this->envExamplePath = base_path('.env.example');
     }
 
@@ -34,7 +34,7 @@ class EnvironmentManager
      */
     public function getEnvContent()
     {
-        if (!file_exists($this->envPath)) {
+        if (! file_exists($this->envPath)) {
             if (file_exists($this->envExamplePath)) {
                 copy($this->envExamplePath, $this->envPath);
             } else {
@@ -95,7 +95,7 @@ class EnvironmentManager
         $results = trans('installer::installer_messages.environment.success');
 
         $scheme = is_secure() ? 'https' : 'http';
-        $appUrl = $scheme . "://" . $_SERVER["HTTP_HOST"];
+        $appUrl = $scheme . '://' . $_SERVER['HTTP_HOST'];
 
         $envFileData =
             'APP_NAME=\'' . ($request->app_name ?: 'BeikeShop') . "'\n" .

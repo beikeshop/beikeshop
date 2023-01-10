@@ -11,8 +11,8 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Rma;
 use Beike\Models\Customer;
+use Beike\Models\Rma;
 use Beike\Shop\Http\Resources\RmaDetail;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -29,9 +29,10 @@ class RmaRepo
      */
     public static function create($data)
     {
-        $item = Rma::query()->create($data);
+        $item           = Rma::query()->create($data);
         $data['notify'] = 0;
         self::addHistory($item, $data);
+
         return $item;
     }
 
@@ -43,13 +44,14 @@ class RmaRepo
      */
     public static function update($rma, $data)
     {
-        if (!$rma instanceof Rma) {
+        if (! $rma instanceof Rma) {
             $rma = Rma::query()->find($rma);
         }
-        if (!$rma) {
+        if (! $rma) {
             throw new Exception("退还/售后id $rma 不存在");
         }
         $rma->update($data);
+
         return $rma;
     }
 
@@ -67,14 +69,15 @@ class RmaRepo
      * @param array $data
      * @return Rma
      */
-    public static function addHistory($rma, Array $data)
+    public static function addHistory($rma, array $data)
     {
-        if (!$rma instanceof Rma) {
+        if (! $rma instanceof Rma) {
             $rma = self::find($rma);
         }
         $rma->histories()->create($data);
         $rma->status = $data['status'];
         $rma->saveOrFail();
+
         return $rma;
     }
 
@@ -130,7 +133,7 @@ class RmaRepo
      */
     public static function listByCustomer($customer): array
     {
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = CustomerRepo::find($customer->id);
         }
 
@@ -146,22 +149,22 @@ class RmaRepo
     public static function getStatuses(): array
     {
         return [
-            'pending' => trans('rma.status_pending'),
-            'rejected' => trans('rma.status_rejected'),
-            'approved' => trans('rma.status_approved'),
-            'shipped' => trans('rma.status_shipped'),
-            'completed' => trans('rma.status_completed')
+            'pending'   => trans('rma.status_pending'),
+            'rejected'  => trans('rma.status_rejected'),
+            'approved'  => trans('rma.status_approved'),
+            'shipped'   => trans('rma.status_shipped'),
+            'completed' => trans('rma.status_completed'),
         ];
     }
 
     public static function getTypes(): array
     {
         return [
-            'return' => trans('rma.type_return'),
+            'return'   => trans('rma.type_return'),
             'exchange' => trans('rma.type_exchange'),
-            'repair' => trans('rma.type_repair'),
-            'reissue' => trans('rma.type_reissue'),
-            'refund' => trans('rma.type_refund')
+            'repair'   => trans('rma.type_repair'),
+            'reissue'  => trans('rma.type_reissue'),
+            'refund'   => trans('rma.type_refund'),
         ];
     }
 }

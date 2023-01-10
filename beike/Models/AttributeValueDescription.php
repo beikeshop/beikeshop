@@ -12,14 +12,10 @@
 namespace Beike\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AttributeValueDescription extends Base
 {
     use HasFactory;
 
     protected $fillable = ['attribute_value_id', 'locale', 'name'];
-
-
 }
-

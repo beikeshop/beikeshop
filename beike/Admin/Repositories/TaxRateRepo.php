@@ -18,7 +18,7 @@ class TaxRateRepo
     public static function getList()
     {
         return TaxRate::query()->with([
-            'region'
+            'region',
         ])->get();
     }
 
@@ -32,11 +32,12 @@ class TaxRateRepo
         }
         $taxRate->fill([
             'region_id' => $data['region_id'],
-            'name' => $data['name'],
-            'rate' => $data['rate'],
-            'type' => $data['type'],
+            'name'      => $data['name'],
+            'rate'      => $data['rate'],
+            'type'      => $data['type'],
         ]);
         $taxRate->saveOrFail();
+
         return $taxRate;
     }
 
@@ -49,6 +50,7 @@ class TaxRateRepo
     public static function getNameByRateId($taxRateId)
     {
         $taxRate = TaxRate::query()->findOrFail($taxRateId);
+
         return $taxRate->name;
     }
 }

@@ -11,19 +11,19 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Repositories\FooterRepo;
+use Beike\Repositories\LanguageRepo;
+use Beike\Repositories\MenuRepo;
 use Closure;
 use Illuminate\Http\Request;
-use Beike\Repositories\MenuRepo;
-use Beike\Repositories\FooterRepo;
 use Illuminate\Support\Facades\View;
-use Beike\Repositories\CategoryRepo;
-use Beike\Repositories\LanguageRepo;
 
 class ShareViewData
 {
     public function handle(Request $request, Closure $next)
     {
         $this->loadShopShareViewData();
+
         return $next($request);
     }
 
@@ -33,7 +33,7 @@ class ShareViewData
     protected function loadShopShareViewData()
     {
         if (is_admin()) {
-            $adminLanguages = $this->handleAdminLanguages();
+            $adminLanguages  = $this->handleAdminLanguages();
             $loggedAdminUser = current_user();
             if ($loggedAdminUser) {
                 $currentLanguage = $loggedAdminUser->locale ?: 'en';
@@ -49,7 +49,6 @@ class ShareViewData
         }
     }
 
-
     /**
      * 处理后台语言包列表
      *
@@ -57,19 +56,20 @@ class ShareViewData
      */
     private function handleAdminLanguages(): array
     {
-        $items = [];
+        $items     = [];
         $languages = admin_languages();
         foreach ($languages as $language) {
             $path = lang_path("{$language}/admin/base.php");
             if (file_exists($path)) {
-                $baseData = require_once($path);
+                $baseData = require_once $path;
             }
-            $name = $baseData['name'] ?? '';
+            $name    = $baseData['name'] ?? '';
             $items[] = [
                 'code' => $language,
                 'name' => $name,
             ];
         }
+
         return $items;
     }
 }

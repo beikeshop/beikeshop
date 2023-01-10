@@ -4,9 +4,9 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\ProductSku;
 use Beike\Shop\Http\Requests\CartRequest;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\View\View;
 use Beike\Shop\Services\CartService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -16,9 +16,10 @@ class CartController extends Controller
     public function index(): View
     {
         $data = [
-            'data' => CartService::reloadData()
+            'data' => CartService::reloadData(),
         ];
-        return view("cart/cart", $data);
+
+        return view('cart/cart', $data);
     }
 
     /**
@@ -30,14 +31,14 @@ class CartController extends Controller
      */
     public function select(Request $request): array
     {
-        $cartIds = $request->get('cart_ids');
+        $cartIds  = $request->get('cart_ids');
         $customer = current_customer();
         CartService::select($customer, $cartIds);
 
         $data = CartService::reloadData();
+
         return json_success(trans('common.updated_success'), $data);
     }
-
 
     /**
      * POST /carts {sku_id:1, quantity: 2}
@@ -49,9 +50,9 @@ class CartController extends Controller
      */
     public function store(CartRequest $request)
     {
-        $skuId = $request->sku_id;
-        $quantity = $request->quantity ?? 1;
-        $buyNow = (bool)$request->buy_now ?? false;
+        $skuId    = $request->sku_id;
+        $quantity = $request->quantity       ?? 1;
+        $buyNow   = (bool) $request->buy_now ?? false;
         $customer = current_customer();
 
         $sku = ProductSku::query()
@@ -62,9 +63,9 @@ class CartController extends Controller
         if ($buyNow) {
             CartService::select($customer, [$cart->id]);
         }
+
         return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
-
 
     /**
      * PUT /carts/{cart_id} {sku_id:1, quantity: 2}
@@ -75,13 +76,13 @@ class CartController extends Controller
     public function update(CartRequest $request, $cartId): array
     {
         $customer = current_customer();
-        $quantity = (int)$request->get('quantity');
+        $quantity = (int) $request->get('quantity');
         CartService::updateQuantity($customer, $cartId, $quantity);
 
         $data = CartService::reloadData();
+
         return json_success(trans('common.updated_success'), $data);
     }
-
 
     /**
      * DELETE /carts/{cart_id}
@@ -95,9 +96,9 @@ class CartController extends Controller
         CartService::delete($customer, $cartId);
 
         $data = CartService::reloadData();
+
         return json_success(trans('common.deleted_success'), $data);
     }
-
 
     /**
      * 右上角购物车
@@ -105,11 +106,11 @@ class CartController extends Controller
      */
     public function miniCart()
     {
-        $carts = CartService::list(current_customer());
+        $carts      = CartService::list(current_customer());
         $reloadData = CartService::reloadData($carts);
 
-        $data['html'] = view('cart/mini', $reloadData)->render();
-        $data['quantity'] = $reloadData['quantity'];
+        $data['html']         = view('cart/mini', $reloadData)->render();
+        $data['quantity']     = $reloadData['quantity'];
         $data['quantity_all'] = $reloadData['quantity_all'];
 
         return json_success(trans('common.success'), $data);

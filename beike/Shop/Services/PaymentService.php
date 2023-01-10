@@ -14,16 +14,13 @@ namespace Beike\Shop\Services;
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
-use Stripe\Customer;
-use Stripe\Exception\ApiErrorException;
-use Stripe\Stripe;
-use Stripe\Token;
 
 class PaymentService
 {
     protected $order;
+
     protected $orderId;
+
     protected $paymentMethodCode;
 
     public function __construct($order)
@@ -40,10 +37,9 @@ class PaymentService
         if ($this->order->status != 'unpaid') {
             throw new \Exception(trans('shop/order.order_already_paid'));
         }
-        $this->orderId = (int)$this->order->id;
+        $this->orderId           = (int) $this->order->id;
         $this->paymentMethodCode = $this->order->payment_method_code;
     }
-
 
     /**
      * @throws \Exception
@@ -51,16 +47,17 @@ class PaymentService
     public function pay()
     {
         $orderPaymentCode = $this->paymentMethodCode;
-        $paymentCode = Str::studly($orderPaymentCode);
-        $viewPath = "$paymentCode::checkout.payment";
-        if (!view()->exists($viewPath)) {
+        $paymentCode      = Str::studly($orderPaymentCode);
+        $viewPath         = "$paymentCode::checkout.payment";
+        if (! view()->exists($viewPath)) {
             throw new \Exception("找不到支付方式 {$orderPaymentCode} 模板 {$viewPath}");
         }
         $paymentData = [
-            'order' => $this->order,
+            'order'           => $this->order,
             'payment_setting' => plugin_setting($orderPaymentCode),
         ];
         $paymentView = view($viewPath, $paymentData)->render();
+
         return view('checkout.payment', ['order' => $this->order, 'payment' => $paymentView]);
     }
 }

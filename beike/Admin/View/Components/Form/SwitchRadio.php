@@ -7,12 +7,14 @@ use Illuminate\View\Component;
 class SwitchRadio extends Component
 {
     public string $name;
+
     public string $value;
+
     public string $title;
 
     public function __construct(string $name, string $value, string $title)
     {
-        $this->name = $name;
+        $this->name  = $name;
         $this->title = $title;
         $this->value = $value;
     }

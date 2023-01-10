@@ -11,14 +11,13 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Page extends Base
 {
     protected $fillable = [
-        'position', 'active'
+        'position', 'active',
     ];
 
     public function description(): HasOne

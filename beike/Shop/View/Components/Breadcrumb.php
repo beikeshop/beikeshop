@@ -12,10 +12,10 @@
 namespace Beike\Shop\View\Components;
 
 use Beike\Models\Product;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\View\View;
 
 class Breadcrumb extends Component
 {
@@ -31,7 +31,7 @@ class Breadcrumb extends Component
     {
         $breadcrumbs[] = [
             'title' => trans('shop/common.home'),
-            'url' => shop_route('home.index')
+            'url'   => shop_route('home.index'),
         ];
 
         if ($type == 'category') {
@@ -61,7 +61,6 @@ class Breadcrumb extends Component
         return view('components.breadcrumbs');
     }
 
-
     /**
      * 获取分类以及路径
      *
@@ -72,11 +71,12 @@ class Breadcrumb extends Component
     private function handleCategoryLinks($value): array
     {
         $link = handle_link(['type' => 'category', 'value' => $value]);
+
         return [
             [
                 'title' => $link['text'],
-                'url' => $link['link'],
-            ]
+                'url'   => $link['link'],
+            ],
         ];
     }
 
@@ -89,26 +89,25 @@ class Breadcrumb extends Component
      */
     private function handleProductLinks($value): array
     {
-        $links = [];
+        $links     = [];
         $productId = 0;
         if (is_array($value)) {
             $productId = $value['id'] ?? 0;
         } elseif (is_int($value)) {
             $productId = $value;
         }
-        $product = Product::query()->find($productId);
+        $product  = Product::query()->find($productId);
         $category = $product->categories()->first();
         if ($category) {
             $categoryLink = handle_link(['type' => 'category', 'value' => $category]);
-            $links[] = ['title' => $categoryLink['text'], 'url' => $categoryLink['link']];
+            $links[]      = ['title' => $categoryLink['text'], 'url' => $categoryLink['link']];
         }
 
         $productLink = handle_link(['type' => 'product', 'value' => $value]);
-        $links[] = ['title' => $productLink['text'], 'url' => $productLink['link']];
+        $links[]     = ['title' => $productLink['text'], 'url' => $productLink['link']];
 
         return $links;
     }
-
 
     /**
      * 获取订单详情页面包屑
@@ -121,27 +120,26 @@ class Breadcrumb extends Component
     {
         $links = [];
 
-        $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+        $link    = handle_link(['type' => 'static', 'value' => 'account.index']);
         $links[] = [
             'title' => $link['text'],
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
-        $link = handle_link(['type' => 'static', 'value' => 'account.order.index']);
+        $link    = handle_link(['type' => 'static', 'value' => 'account.order.index']);
         $links[] = [
             'title' => $link['text'],
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
-        $link = handle_link(['type' => 'order', 'value' => $value]);
+        $link    = handle_link(['type' => 'order', 'value' => $value]);
         $links[] = [
             'title' => $value,
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
         return $links;
     }
-
 
     /**
      * 获取订单详情页面包屑
@@ -154,27 +152,26 @@ class Breadcrumb extends Component
     {
         $links = [];
 
-        $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+        $link    = handle_link(['type' => 'static', 'value' => 'account.index']);
         $links[] = [
             'title' => $link['text'],
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
-        $link = handle_link(['type' => 'static', 'value' => 'account.rma.index']);
+        $link    = handle_link(['type' => 'static', 'value' => 'account.rma.index']);
         $links[] = [
             'title' => $link['text'],
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
-        $link = handle_link(['type' => 'rma', 'value' => $value]);
+        $link    = handle_link(['type' => 'rma', 'value' => $value]);
         $links[] = [
             'title' => $value,
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
         return $links;
     }
-
 
     /**
      * 处理个人中心面包屑
@@ -185,21 +182,21 @@ class Breadcrumb extends Component
      */
     private function handleAccountLinks($value): array
     {
-        $links = [];
+        $links  = [];
         $values = explode('.', $value);
 
         if (count($values) == 3) {
-            $link = handle_link(['type' => 'static', 'value' => 'account.index']);
+            $link    = handle_link(['type' => 'static', 'value' => 'account.index']);
             $links[] = [
                 'title' => $link['text'],
-                'url' => $link['link'],
+                'url'   => $link['link'],
             ];
         }
 
-        $link = handle_link(['type' => 'static', 'value' => $value]);
+        $link    = handle_link(['type' => 'static', 'value' => $value]);
         $links[] = [
             'title' => $link['text'],
-            'url' => $link['link'],
+            'url'   => $link['link'],
         ];
 
         return $links;
@@ -217,16 +214,17 @@ class Breadcrumb extends Component
     private function handleLinks($type, $value, array $text = []): array
     {
         $data = [
-            'type' => $type,
+            'type'  => $type,
             'value' => $value,
-            'text' => $text,
+            'text'  => $text,
         ];
         $link = handle_link($data);
+
         return [
             [
                 'title' => $link['text'],
-                'url' => $link['link'],
-            ]
+                'url'   => $link['link'],
+            ],
         ];
     }
 }

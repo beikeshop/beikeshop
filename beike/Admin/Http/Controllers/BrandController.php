@@ -25,7 +25,7 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         $brands = BrandRepo::list($request->only('name', 'first', 'status'));
-        $data = [
+        $data   = [
             'brands' => $brands,
         ];
 
@@ -36,7 +36,6 @@ class BrandController extends Controller
         return view('admin::pages.brands.index', $data);
     }
 
-
     /**
      * 创建品牌
      *
@@ -46,6 +45,7 @@ class BrandController extends Controller
     public function store(Request $request): array
     {
         $brand = BrandRepo::create($request->all());
+
         return json_success(trans('common.created_success'), $brand);
     }
 
@@ -73,14 +73,12 @@ class BrandController extends Controller
         return json_success(trans('common.get_success'), $brands);
     }
 
-
     public function name(int $id): array
     {
         $name = BrandRepo::getName($id);
 
         return json_success(trans('common.get_success'), $name);
     }
-
 
     /**
      * 根据商品ID批量获取商品名称
@@ -90,7 +88,7 @@ class BrandController extends Controller
      */
     public function getNames(Request $request): array
     {
-        $ids = explode(',', $request->get('ids'));
+        $ids  = explode(',', $request->get('ids'));
         $name = BrandRepo::getNames($ids);
 
         return json_success(trans('common.get_success'), $name);

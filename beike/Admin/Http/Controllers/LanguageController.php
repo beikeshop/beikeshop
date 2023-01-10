@@ -12,9 +12,9 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Services\LanguageService;
+use Beike\Repositories\LanguageRepo;
 use Exception;
 use Illuminate\Http\Request;
-use Beike\Repositories\LanguageRepo;
 
 class LanguageController extends Controller
 {
@@ -45,10 +45,9 @@ class LanguageController extends Controller
         return json_success(trans('common.created_success'), $language);
     }
 
-
     /**
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      * @return array
      * @throws Exception
      */
@@ -58,7 +57,6 @@ class LanguageController extends Controller
 
         return json_success(trans('common.updated_success'), $language);
     }
-
 
     /**
      * 删除语言

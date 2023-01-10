@@ -10,7 +10,7 @@
  */
 
 return [
-    'sku_id' => 'SKU ID',
-    'quantity' => 'Quantity',
+    'sku_id'    => 'SKU ID',
+    'quantity'  => 'Quantity',
     'stock_out' => 'Stock Out',
 ];

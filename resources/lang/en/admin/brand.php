@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => 'Brand',
+    'index'         => 'Brand',
 
-    'brands_index' => 'Index',
+    'brands_index'  => 'Index',
     'brands_create' => 'Create',
-    'brands_show' => 'Detail',
+    'brands_show'   => 'Detail',
     'brands_update' => 'Edit',
     'brands_delete' => 'Delete',
-    'error_upload' => 'Please upload icon'
+    'error_upload'  => 'Please upload icon',
 ];

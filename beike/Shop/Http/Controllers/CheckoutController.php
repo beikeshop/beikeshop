@@ -11,8 +11,8 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Beike\Shop\Services\CheckoutService;
+use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
@@ -20,12 +20,12 @@ class CheckoutController extends Controller
     {
         try {
             $data = (new CheckoutService)->checkoutData();
+
             return view('checkout', $data);
         } catch (\Exception $e) {
             return redirect(shop_route('carts.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
-
 
     /**
      * 更改结算信息
@@ -37,12 +37,12 @@ class CheckoutController extends Controller
     {
         try {
             $requestData = $request->all();
+
             return (new CheckoutService)->update($requestData);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
     }
-
 
     /**
      * 确认提交订单

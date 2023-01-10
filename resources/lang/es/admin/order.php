@@ -10,17 +10,17 @@
  */
 
 return [
-    'list' => 'Lista de orden',
+    'list'                 => 'Lista de orden',
 
-    'order_quantity' => 'cantidad de pedido',
-    'order_amount' => 'Total de la orden',
-    'orders_index' => 'Lista de orden',
-    'orders_create' => 'Crear orden',
-    'orders_show' => 'detalles del pedido',
-    'orders_export' => 'orden de exportación',
-    'orders_update' => 'Orden de actualización',
-    'orders_delete' => 'borrar pedido',
-    'notificar' => 'Ya sea para recordar',
+    'order_quantity'       => 'cantidad de pedido',
+    'order_amount'         => 'Total de la orden',
+    'orders_index'         => 'Lista de orden',
+    'orders_create'        => 'Crear orden',
+    'orders_show'          => 'detalles del pedido',
+    'orders_export'        => 'orden de exportación',
+    'orders_update'        => 'Orden de actualización',
+    'orders_delete'        => 'borrar pedido',
+    'notificar'            => 'Ya sea para recordar',
     'orders_update_status' => 'estado de actualización',
-    'error_status' => 'Seleccione un estado',
+    'error_status'         => 'Seleccione un estado',
 ];

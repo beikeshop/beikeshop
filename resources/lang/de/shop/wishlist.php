@@ -10,6 +10,6 @@
  */
 
 return [
-     'add_wishlist_success' => 'Der Sammlung erfolgreich hinzugefügt',
-     'remove_wishlist_success' => 'Sammlung erfolgreich entfernt',
+    'add_wishlist_success'    => 'Der Sammlung erfolgreich hinzugefügt',
+    'remove_wishlist_success' => 'Sammlung erfolgreich entfernt',
 ];

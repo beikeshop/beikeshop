@@ -2,13 +2,13 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Models\Category;
-use Illuminate\Http\Request;
-use Beike\Repositories\LanguageRepo;
-use Beike\Repositories\CategoryRepo;
-use Beike\Admin\Services\CategoryService;
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
+use Beike\Admin\Services\CategoryService;
+use Beike\Models\Category;
+use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\LanguageRepo;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = CategoryRepo::getAdminList();
-        $data = [
+        $data       = [
             'categories' => CategoryResource::collection($categories),
         ];
 
@@ -44,10 +44,9 @@ class CategoryController extends Controller
         return $this->save($request, $category);
     }
 
-
     /**
      * 删除分类
-     * @param Request $request
+     * @param Request  $request
      * @param Category $category
      * @return array
      * @throws \Exception
@@ -55,9 +54,9 @@ class CategoryController extends Controller
     public function destroy(Request $request, Category $category): array
     {
         CategoryRepo::delete($category);
+
         return json_success(trans('common.deleted_success'));
     }
-
 
     public function name(int $id)
     {
@@ -73,11 +72,11 @@ class CategoryController extends Controller
         }
 
         $data = [
-            'category' => $category ?? new Category(),
-            'languages' => LanguageRepo::all(),
+            'category'     => $category ?? new Category(),
+            'languages'    => LanguageRepo::all(),
             'descriptions' => $descriptions ?? null,
-            'categories' => CategoryRepo::flatten(locale()),
-            '_redirect' => $this->getRedirect(),
+            'categories'   => CategoryRepo::flatten(locale()),
+            '_redirect'    => $this->getRedirect(),
         ];
 
         return view('admin::pages.categories.form', $data);
@@ -86,6 +85,7 @@ class CategoryController extends Controller
     protected function save(Request $request, ?Category $category = null)
     {
         (new CategoryService())->createOrUpdate($request->all(), $category);
+
         return redirect($this->getRedirect())->with('success', 'Category created successfully');
     }
 

@@ -3,14 +3,14 @@
 namespace Beike\Models;
 
 use Beike\Notifications\ForgottenNotification;
-use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Beike\Notifications\RegistrationNotification;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Customer extends Authenticatable
 {
@@ -18,7 +18,7 @@ class Customer extends Authenticatable
     use SoftDeletes;
     use Notifiable;
 
-    const AUTH_GUARD = 'web_shop';
+    public const AUTH_GUARD = 'web_shop';
 
     protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'status', 'from'];
 

@@ -10,16 +10,16 @@
  */
 
 return [
-    'index' => 'Customer Groups',
-    'consumption_limit' => 'consumption limit',
-    'discount_rate' => 'discount rate',
-    'reward_points_factor' => 'reward points',
-    'integral_factor' => 'integral coefficient',
+    'index'                  => 'Customer Groups',
+    'consumption_limit'      => 'consumption limit',
+    'discount_rate'          => 'discount rate',
+    'reward_points_factor'   => 'reward points',
+    'integral_factor'        => 'integral coefficient',
 
-    'customer_groups_index' => 'Index',
+    'customer_groups_index'  => 'Index',
     'customer_groups_create' => 'Create',
-    'customer_groups_show' => 'Detail',
+    'customer_groups_show'   => 'Detail',
     'customer_groups_update' => 'Edit',
     'customer_groups_delete' => 'Delete',
-    'default_cannot_delete' => 'Default customer group cannot be deleted',
+    'default_cannot_delete'  => 'Default customer group cannot be deleted',
 ];

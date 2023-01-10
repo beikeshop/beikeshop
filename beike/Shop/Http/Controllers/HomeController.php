@@ -16,20 +16,20 @@ class HomeController extends Controller
     public function index(): View
     {
         $designSettings = system_setting('base.design_setting');
-        $modules = $designSettings['modules'] ?? [];
+        $modules        = $designSettings['modules'] ?? [];
 
         $moduleItems = [];
         foreach ($modules as $module) {
-            $code = $module['code'];
+            $code     = $module['code'];
             $moduleId = $module['module_id'] ?? '';
-            $content = $module['content'];
+            $content  = $module['content'];
             $viewPath = "design.{$code}";
             if (view()->exists($viewPath) && $moduleId) {
                 $moduleItems[] = [
-                    'code' => $code,
+                    'code'      => $code,
                     'module_id' => $moduleId,
                     'view_path' => $viewPath,
-                    'content' => DesignService::handleModuleContent($code, $content)
+                    'content'   => DesignService::handleModuleContent($code, $content),
                 ];
             }
         }

@@ -9,5 +9,4 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 class Controller extends \App\Http\Controllers\Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
 }

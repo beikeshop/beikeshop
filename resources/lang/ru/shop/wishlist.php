@@ -10,6 +10,6 @@
  */
 
 return [
-    'add_wishlist_success' => 'Добавить в избранное успешно',
+    'add_wishlist_success'    => 'Добавить в избранное успешно',
     'remove_wishlist_success' => 'Удалить избранное успешно',
 ];

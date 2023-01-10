@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => 'Login to Admin Panel',
-    'log_in' => 'Log In',
+    'log_in'        => 'Log In',
 ];

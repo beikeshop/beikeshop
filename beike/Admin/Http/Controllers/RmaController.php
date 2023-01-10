@@ -13,10 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\RmaDetail;
 use Beike\Admin\Http\Resources\RmaHistoryDetail;
-use Beike\Models\Rma;
-use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\RmaRepo;
-use Exception;
 use Illuminate\Http\Request;
 
 class RmaController extends Controller
@@ -25,7 +22,7 @@ class RmaController extends Controller
     {
         $rmas = RmaRepo::list($request->only('name', 'email', 'telephone', 'product_name', 'sku', 'type', 'status'));
         $data = [
-            'rmas' => $rmas,
+            'rmas'        => $rmas,
             'rmas_format' => RmaDetail::collection($rmas)->jsonSerialize(),
         ];
 
@@ -38,13 +35,14 @@ class RmaController extends Controller
      */
     public function show(int $id)
     {
-        $rma = RmaRepo::find($id);
+        $rma  = RmaRepo::find($id);
         $data = [
-            'rma' => (new RmaDetail($rma))->jsonSerialize(),
+            'rma'       => (new RmaDetail($rma))->jsonSerialize(),
             'histories' => RmaHistoryDetail::collection($rma->histories)->jsonSerialize(),
-            'statuses' => RmaRepo::getStatuses(),
-            'types' => RmaRepo::getTypes(),
+            'statuses'  => RmaRepo::getStatuses(),
+            'types'     => RmaRepo::getTypes(),
         ];
+
         return view('admin::pages.rmas.info', $data);
     }
 
@@ -53,9 +51,10 @@ class RmaController extends Controller
         RmaRepo::addHistory($id, $request->only('status', 'notify', 'comment'));
 
          $data = [
-            'rma' => (new RmaDetail(RmaRepo::find($id)))->jsonSerialize(),
-            'statuses' => RmaRepo::getStatuses(),
-        ];
+             'rma'      => (new RmaDetail(RmaRepo::find($id)))->jsonSerialize(),
+             'statuses' => RmaRepo::getStatuses(),
+         ];
+
        return json_success(trans('common.updated_success'), $data);
     }
 

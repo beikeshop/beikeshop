@@ -25,12 +25,12 @@ class AdminRoleRepo
      */
     public static function createAdminRole($data): Role
     {
-        $adminRole = Role::findOrCreate($data['name'], 'web_admin');
+        $adminRole   = Role::findOrCreate($data['name'], 'web_admin');
         $permissions = $data['permissions'];
         self::syncPermissions($adminRole, $permissions);
+
         return $adminRole;
     }
-
 
     /**
      * 编辑新角色
@@ -43,15 +43,15 @@ class AdminRoleRepo
     {
         $adminRole = Role::findById($data['id']);
         $adminRole->update([
-            'name' => $data['name'],
+            'name'       => $data['name'],
             'guard_name' => 'web_admin',
         ]);
 
         $permissions = $data['permissions'];
         self::syncPermissions($adminRole, $permissions);
+
         return $adminRole;
     }
-
 
     /**
      * 同步所有权限
@@ -77,7 +77,6 @@ class AdminRoleRepo
         }
         $adminRole->syncPermissions($items);
     }
-
 
     /**
      * 删除角色

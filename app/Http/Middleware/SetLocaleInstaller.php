@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Installer\Helpers\EnvironmentManager;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Beike\Installer\Helpers\EnvironmentManager;
 
 class SetLocaleInstaller
 {
@@ -18,9 +18,9 @@ class SetLocaleInstaller
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale = $_COOKIE['locale'] ?? 'en';
+        $locale      = $_COOKIE['locale'] ?? 'en';
         $languageDir = base_path('beike/Installer/Lang');
-        $languages = array_values(array_diff(scandir($languageDir), array('..', '.')));
+        $languages   = array_values(array_diff(scandir($languageDir), ['..', '.']));
 
         (new EnvironmentManager)->getEnvContent();
 
@@ -29,6 +29,7 @@ class SetLocaleInstaller
         } else {
             App::setLocale('en');
         }
+
         return $next($request);
     }
 }

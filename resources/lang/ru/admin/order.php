@@ -10,17 +10,17 @@
  */
 
 return [
-    'list' => 'список заказов',
+    'list'                 => 'список заказов',
 
-    'order_quantity' => 'количество заказа',
-    'order_amount' => 'сумма заказа',
-    'orders_index' => 'список заказов',
-    'orders_create' => 'создать заказ',
-    'orders_show' => 'детали заказа',
-    'orders_export' => 'экспорт заказов',
-    'notify' => 'Напомнить ли',
-    'orders_update' => 'обновить заказ',
-    'orders_delete' => 'удалить заказ',
+    'order_quantity'       => 'количество заказа',
+    'order_amount'         => 'сумма заказа',
+    'orders_index'         => 'список заказов',
+    'orders_create'        => 'создать заказ',
+    'orders_show'          => 'детали заказа',
+    'orders_export'        => 'экспорт заказов',
+    'notify'               => 'Напомнить ли',
+    'orders_update'        => 'обновить заказ',
+    'orders_delete'        => 'удалить заказ',
     'orders_update_status' => 'обновить статус',
-    'error_status' => 'Выберите статус',
+    'error_status'         => 'Выберите статус',
 ];

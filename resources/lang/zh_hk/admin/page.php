@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => '信息頁面',
-    'info_title' => '信息標題',
+    'index'        => '信息頁面',
+    'info_title'   => '信息標題',
     'info_content' => '內容',
 
-    'pages_index' => '單頁列表',
+    'pages_index'  => '單頁列表',
     'pages_create' => '創建單頁',
-    'pages_show' => '單頁詳情',
+    'pages_show'   => '單頁詳情',
     'pages_update' => '單頁編輯',
-    'pages_delete' => '刪除單頁'
+    'pages_delete' => '刪除單頁',
 ];

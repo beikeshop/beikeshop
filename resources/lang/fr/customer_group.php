@@ -11,5 +11,5 @@
 
 return [
     'level' => 'noter',
-    'name' => 'nom du groupe de clients',
+    'name'  => 'nom du groupe de clients',
 ];

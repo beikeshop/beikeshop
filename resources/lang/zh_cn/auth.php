@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => '账号密码不匹配',
+    'failed'   => '账号密码不匹配',
     'password' => '密码不正确',
     'throttle' => '失败次数太多. 请 :seconds 分钟后重试.',
 

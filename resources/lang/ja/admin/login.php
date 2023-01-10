@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => 'BeikeShop バックエンドへのログイン',
-    'log_in' => 'ログイン',
+    'log_in'        => 'ログイン',
 ];

@@ -10,22 +10,22 @@
  */
 
 return [
-    'order_id' => 'Order',
+    'order_id'         => 'Order',
     'order_product_id' => 'Order Product',
-    'customer_id' => 'Customer',
-    'quantity' => 'Quantity',
-    'opened' => 'Opened',
-    'rma_reason_id' => 'Reason ID',
-    'type' => 'Type',
+    'customer_id'      => 'Customer',
+    'quantity'         => 'Quantity',
+    'opened'           => 'Opened',
+    'rma_reason_id'    => 'Reason ID',
+    'type'             => 'Type',
 
-    'status_pending' => 'Pending',
-    'status_rejected' => 'Rejected',
-    'status_approved' => 'Approved',
-    'status_shipped' => 'Shipped',
+    'status_pending'   => 'Pending',
+    'status_rejected'  => 'Rejected',
+    'status_approved'  => 'Approved',
+    'status_shipped'   => 'Shipped',
     'status_completed' => 'Completed',
-    'type_return' => 'Return',
-    'type_exchange' => 'Exchange',
-    'type_repair' => 'Repair',
-    'type_reissue' => 'Reissue',
-    'type_refund' => 'Refund'
+    'type_return'      => 'Return',
+    'type_exchange'    => 'Exchange',
+    'type_repair'      => 'Repair',
+    'type_reissue'     => 'Reissue',
+    'type_refund'      => 'Refund',
 ];

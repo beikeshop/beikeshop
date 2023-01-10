@@ -9,11 +9,11 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-    'decimal_point' => '.',
-    'thousand_point' => ',',
-    'currencies_index' => 'Lista de monedas',
+    'decimal_point'     => '.',
+    'thousand_point'    => ',',
+    'currencies_index'  => 'Lista de monedas',
     'currencies_create' => 'Crear moneda',
-    'currencies_show' => 'Detalles de moneda',
+    'currencies_show'   => 'Detalles de moneda',
     'currencies_update' => 'actualizar moneda',
     'currencies_delete' => 'borrar moneda',
 ];

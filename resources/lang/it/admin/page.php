@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'pagina informativa',
-    'info_title' => 'titolo delle informazioni',
+    'index'        => 'pagina informativa',
+    'info_title'   => 'titolo delle informazioni',
     'info_content' => 'contenuto',
 
-    'pages_index' => 'Elenco di pagine singole',
+    'pages_index'  => 'Elenco di pagine singole',
     'pages_create' => 'Crea una singola pagina',
-    'pages_show' => 'Dettagli pagina singola',
+    'pages_show'   => 'Dettagli pagina singola',
     'pages_update' => 'Modifica pagina singola',
-    'pages_delete' => 'Elimina una singola pagina'
+    'pages_delete' => 'Elimina una singola pagina',
 ];

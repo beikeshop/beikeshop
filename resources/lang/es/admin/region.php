@@ -10,14 +10,14 @@
  */
 
 return [
-    'index' => 'grupo de área',
-    'regions_index' => 'Lista de grupos de zonas',
+    'index'          => 'grupo de área',
+    'regions_index'  => 'Lista de grupos de zonas',
     'regions_create' => 'Crear un grupo de zona',
-    'regions_show' => 'Detalles del grupo de áreas',
+    'regions_show'   => 'Detalles del grupo de áreas',
     'regions_update' => 'Actualizar grupo de zona',
     'regions_delete' => 'eliminar grupo de campos',
-    'name' => 'nombre',
-    'describe' => 'describir',
-    'country' => 'nación',
-    'zone' => 'provincia',
+    'name'           => 'nombre',
+    'describe'       => 'describir',
+    'country'        => 'nación',
+    'zone'           => 'provincia',
 ];

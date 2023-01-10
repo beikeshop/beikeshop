@@ -19,4 +19,3 @@ class RmaHistory extends Base
 
     protected $fillable = ['rma_id', 'status', 'notify', 'comment'];
 }
-

@@ -18,9 +18,8 @@ class WelcomeController extends Controller
 {
     private $languages = [
         'zh_cn' => '简体中文',
-        'en' => 'English',
+        'en'    => 'English',
     ];
-
 
     public function index()
     {
@@ -29,8 +28,8 @@ class WelcomeController extends Controller
         }
 
         $data['languages'] = $this->languages;
-        $data['locale'] = $_COOKIE['locale'] ?? 'en';
-        $data['steps'] = 1;
+        $data['locale']    = $_COOKIE['locale'] ?? 'en';
+        $data['steps']     = 1;
 
         return view('installer::welcome', $data);
     }

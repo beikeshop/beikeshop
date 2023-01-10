@@ -9,9 +9,9 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'country_name' => '国名',
+    'country_name'     => '国名',
 
-    'countries_index' => '国リスト',
+    'countries_index'  => '国リスト',
     'countries_create' => '国を作成',
     'countries_update' => '国を更新',
 ];

@@ -19,29 +19,29 @@ class Rma extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['order_id','order_product_id','customer_id','name','email','telephone','product_name','sku','quantity','opened','rma_reason_id','type','status','comment'];
+    protected $fillable = ['order_id', 'order_product_id', 'customer_id', 'name', 'email', 'telephone', 'product_name', 'sku', 'quantity', 'opened', 'rma_reason_id', 'type', 'status', 'comment'];
 
-    public function order() :BelongsTo
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(Order::Class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function orderProduct() :BelongsTo
+    public function orderProduct(): BelongsTo
     {
         return $this->belongsTo(OrderProduct::class);
     }
 
-    public function customer() :BelongsTo
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function reason() :BelongsTo
+    public function reason(): BelongsTo
     {
         return $this->belongsTo(RmaReason::class, 'rma_reason_id', 'id');
     }
 
-    public function histories() :HasMany
+    public function histories(): HasMany
     {
         return $this->hasMany(RmaHistory::class);
     }

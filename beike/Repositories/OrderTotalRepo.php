@@ -20,9 +20,9 @@ class OrderTotalRepo
         $items = [];
         foreach ($totals as $total) {
             $items[] = [
-                'code' => $total['code'],
-                'value' => $total['amount'],
-                'title' => $total['title'],
+                'code'      => $total['code'],
+                'value'     => $total['amount'],
+                'title'     => $total['title'],
                 'reference' => json_encode($total['reference'] ?? ''),
             ];
         }

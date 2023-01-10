@@ -11,14 +11,14 @@
 
 return [
     'customer_view' => 'ユーザーの訪問',
-    'order_total' => '注文金額',
-    'customer_new' => 'ユーザーを追加',
-    'order_amount' => '売上',
-    'yesterday' => '昨日',
-    'day_before' => '前日',
+    'order_total'   => '注文金額',
+    'customer_new'  => 'ユーザーを追加',
+    'order_amount'  => '売上',
+    'yesterday'     => '昨日',
+    'day_before'    => '前日',
 
-    'order_report' => '注文統計',
-    'latest_month' => '月',
-    'latest_week' => '週',
-    'latest_year' => '1 年',
+    'order_report'  => '注文統計',
+    'latest_month'  => '月',
+    'latest_week'   => '週',
+    'latest_year'   => '1 年',
 ];

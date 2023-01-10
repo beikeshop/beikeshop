@@ -11,29 +11,31 @@
 
 namespace Beike\Shop\Services;
 
-use Beike\Models\Country;
-use Beike\Models\Order;
 use Beike\Models\Address;
+use Beike\Models\Country;
 use Beike\Models\Customer;
+use Beike\Models\Order;
 use Beike\Models\Zone;
-use Beike\Repositories\CartRepo;
-use Beike\Repositories\OrderRepo;
-use Illuminate\Support\Facades\DB;
-use Beike\Repositories\PluginRepo;
 use Beike\Repositories\AddressRepo;
+use Beike\Repositories\CartRepo;
 use Beike\Repositories\CountryRepo;
-use Beike\Services\StateMachineService;
+use Beike\Repositories\OrderRepo;
+use Beike\Repositories\PluginRepo;
 use Beike\Services\ShippingMethodService;
+use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\AddressResource;
 use Beike\Shop\Http\Resources\Checkout\PaymentMethodItem;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutService
 {
     public $customer;
-    public $cart;
-    public $selectedProducts;
-    public $totalService;
 
+    public $cart;
+
+    public $selectedProducts;
+
+    public $totalService;
 
     /**
      * @throws \Exception
@@ -46,7 +48,7 @@ class CheckoutService
         // if (empty($this->customer) || !($this->customer instanceof Customer)) {
         //     // throw new \Exception(trans('shop/carts.invalid_customer'));
         // }
-        $this->cart = CartRepo::createCart($this->customer);
+        $this->cart             = CartRepo::createCart($this->customer);
         $this->selectedProducts = CartRepo::selectedCartProducts($this->customer->id ?? 0);
         if ($this->selectedProducts->count() == 0) {
             throw new \Exception(trans('shop/carts.empty_selected_products'));
@@ -62,14 +64,14 @@ class CheckoutService
      */
     public function update($requestData): array
     {
-        $shippingAddressId = $requestData['shipping_address_id'] ?? 0;
+        $shippingAddressId  = $requestData['shipping_address_id']  ?? 0;
         $shippingMethodCode = $requestData['shipping_method_code'] ?? '';
 
-        $paymentAddressId = $requestData['payment_address_id'] ?? 0;
+        $paymentAddressId  = $requestData['payment_address_id']  ?? 0;
         $paymentMethodCode = $requestData['payment_method_code'] ?? '';
 
         $guestShippingAddress = $requestData['guest_shipping_address'] ?? [];
-        $guestPaymentAddress = $requestData['guest_payment_address'] ?? [];
+        $guestPaymentAddress  = $requestData['guest_payment_address']  ?? [];
 
         if ($shippingAddressId) {
             $this->updateShippingAddressId($shippingAddressId);
@@ -96,15 +98,14 @@ class CheckoutService
         return $this->checkoutData();
     }
 
-
     /**
      * 确认提交订单
      * @throws \Throwable
      */
     public function confirm(): Order
     {
-        $customer = current_customer();
-        $checkoutData = self::checkoutData();
+        $customer                 = current_customer();
+        $checkoutData             = self::checkoutData();
         $checkoutData['customer'] = $customer;
         $this->validateConfirm($checkoutData);
 
@@ -119,11 +120,12 @@ class CheckoutService
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
+
         return $order;
     }
-
 
     /**
      * 计算当前选中商品总重量, 当前产品无重量, 待处理
@@ -132,14 +134,14 @@ class CheckoutService
      */
     public function getCartWeight(): int
     {
-        $weight = 0;
+        $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
             $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
         }
+
         return $weight;
     }
-
 
     /**
      * @throws \Exception
@@ -159,28 +161,27 @@ class CheckoutService
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }
         } else {
-            if (!$current['guest_shipping_address']) {
+            if (! $current['guest_shipping_address']) {
                 throw new \Exception(trans('shop/carts.invalid_shipping_address'));
             }
 
-            if (!$current['guest_payment_address']) {
+            if (! $current['guest_payment_address']) {
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }
         }
 
         $shippingMethodCode = $current['shipping_method_code'];
-        if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
+        if (! PluginRepo::shippingEnabled($shippingMethodCode)) {
             throw new \Exception(trans('shop/carts.invalid_shipping_method'));
         }
 
         $paymentMethodCode = $current['payment_method_code'];
-        if (!PluginRepo::paymentEnabled($paymentMethodCode)) {
+        if (! PluginRepo::paymentEnabled($paymentMethodCode)) {
             throw new \Exception(trans('shop/carts.invalid_payment_method'));
         }
 
         hook_action('after_checkout_validate', $checkoutData);
     }
-
 
     private function updateShippingAddressId($shippingAddressId)
     {
@@ -220,48 +221,49 @@ class CheckoutService
      */
     public function checkoutData(): array
     {
-        $customer = $this->customer;
+        $customer    = $this->customer;
         $currentCart = $this->cart;
 
-        $cartList = CartService::list($customer, true);
-        $carts = CartService::reloadData($cartList);
-        $totalService = (new TotalService($currentCart, $cartList));
+        $cartList           = CartService::list($customer, true);
+        $carts              = CartService::reloadData($cartList);
+        $totalService       = (new TotalService($currentCart, $cartList));
         $this->totalService = $totalService;
 
         $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodService::getShippingMethods($this);
-        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+        $payments  = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
 
         $data = [
-            'current' => [
-                'shipping_address_id' => $currentCart->shipping_address_id,
+            'current'          => [
+                'shipping_address_id'    => $currentCart->shipping_address_id,
                 'guest_shipping_address' => $currentCart->guest_shipping_address,
-                'shipping_method_code' => $currentCart->shipping_method_code,
-                'payment_address_id' => $currentCart->payment_address_id,
-                'guest_payment_address' => $currentCart->guest_payment_address,
-                'payment_method_code' => $currentCart->payment_method_code,
-                'extra' => $currentCart->extra,
+                'shipping_method_code'   => $currentCart->shipping_method_code,
+                'payment_address_id'     => $currentCart->payment_address_id,
+                'guest_payment_address'  => $currentCart->guest_payment_address,
+                'payment_method_code'    => $currentCart->payment_method_code,
+                'extra'                  => $currentCart->extra,
             ],
-            'country_id' => (int)system_setting('base.country_id'),
-            'customer_id' => $customer->id ?? null,
-            'countries' => CountryRepo::all(),
-            'addresses' => AddressResource::collection($addresses),
+            'country_id'       => (int) system_setting('base.country_id'),
+            'customer_id'      => $customer->id ?? null,
+            'countries'        => CountryRepo::all(),
+            'addresses'        => AddressResource::collection($addresses),
             'shipping_methods' => $shipments,
-            'payment_methods' => $payments,
-            'carts' => $carts,
-            'totals' => $totalService->getTotals($this),
+            'payment_methods'  => $payments,
+            'carts'            => $carts,
+            'totals'           => $totalService->getTotals($this),
         ];
 
         return hook_filter('checkout.data', $data);
     }
 
-    static public function formatAddress($address)
+    public static function formatAddress($address)
     {
-        if (!$address) {
+        if (! $address) {
             return [];
         }
         $address['country'] = Country::find($address['country_id'])->name;
-        $address['zone'] = Zone::find($address['zone_id'])->name;
+        $address['zone']    = Zone::find($address['zone_id'])->name;
+
         return $address;
     }
 }

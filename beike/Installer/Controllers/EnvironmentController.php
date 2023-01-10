@@ -2,13 +2,13 @@
 
 namespace Beike\Installer\Controllers;
 
+use Beike\Installer\Helpers\EnvironmentManager;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
-use Beike\Installer\Helpers\EnvironmentManager;
 
 class EnvironmentController extends Controller
 {
@@ -40,13 +40,13 @@ class EnvironmentController extends Controller
     /**
      * Processes the newly saved environment configuration (Form Wizard).
      *
-     * @param Request $request
+     * @param Request    $request
      * @param Redirector $redirect
      * @return RedirectResponse
      */
     public function saveWizard(Request $request, Redirector $redirect): RedirectResponse
     {
-        $rules = config('installer.environment.form.rules');
+        $rules    = config('installer.environment.form.rules');
         $messages = [
             'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
         ];
@@ -70,7 +70,6 @@ class EnvironmentController extends Controller
         return redirect(route('installer.database', $params));
     }
 
-
     /**
      * 数据库信息检测
      *
@@ -79,13 +78,13 @@ class EnvironmentController extends Controller
      */
     public function validateDatabase(Request $request): array
     {
-        $rules = config('installer.environment.form.rules');
+        $rules    = config('installer.environment.form.rules');
         $messages = [
             'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
         ];
 
-        unset($rules['admin_email']);
-        unset($rules['admin_password']);
+        unset($rules['admin_email'], $rules['admin_password']);
+
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
@@ -99,7 +98,6 @@ class EnvironmentController extends Controller
 
         return json_success('');
     }
-
 
     /**
      * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
@@ -116,16 +114,16 @@ class EnvironmentController extends Controller
 
         config([
             'database' => [
-                'default' => $connection,
+                'default'     => $connection,
                 'connections' => [
                     $connection => array_merge($settings, [
-                        'driver' => $connection,
-                        'host' => $request->input('database_hostname'),
-                        'port' => $request->input('database_port'),
+                        'driver'   => $connection,
+                        'host'     => $request->input('database_hostname'),
+                        'port'     => $request->input('database_port'),
                         'database' => $request->input('database_name'),
                         'username' => $request->input('database_username'),
                         'password' => $request->input('database_password'),
-                        'options' => [
+                        'options'  => [
                             \PDO::ATTR_TIMEOUT => 1,
                         ],
                     ]),
@@ -136,34 +134,42 @@ class EnvironmentController extends Controller
         DB::purge();
 
         $result = [];
+
         try {
-            $pdo = DB::connection()->getPdo();
+            $pdo           = DB::connection()->getPdo();
             $serverVersion = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
             if (version_compare($serverVersion, '5.7', '<')) {
                 $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
+
                 return $result;
             }
+
             return true;
         } catch (\PDOException $e) {
             switch ($e->getCode()) {
                 case 1115:
                     $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
+
                     break;
                 case 2002:
                     $result['database_hostname'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
-                    $result['database_port'] = trans('installer::installer_messages.environment.db_connection_failed_host_port');
+                    $result['database_port']     = trans('installer::installer_messages.environment.db_connection_failed_host_port');
+
                     break;
                 case 1045:
                     $result['database_username'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
                     $result['database_password'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
+
                     break;
                 case 1049:
                     $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
+
                     break;
                 default:
                     $result['database_other'] = $e->getMessage();
             }
         }
+
         return $result;
     }
 }

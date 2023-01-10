@@ -10,21 +10,21 @@
  */
 
 return [
-     'index' => 'After-Sales-Anwendung',
-     
-     'rmas_index' => 'Kundendienstliste',
-     'rmas_show' => 'Kundendienstdetails',
-     'rmas_update' => 'Kundendienst aktualisieren',
-     'rmas_delete' => 'Kundendienst löschen',
+    'index'             => 'After-Sales-Anwendung',
 
-     'customers_name' => 'Kundenname',
-     'quantity' => 'Menge',
-     'service_type' => 'Diensttyp',
-     'rma_details' => 'Kundenanwendungsdetails',
-     'reasons_return' => 'Rücksendegrund',
-     'current_state' => 'aktueller Zustand',
-     'modify_status' => 'Status ändern',
-     'remarks' => 'Bemerkungen',
-     'update_status' => 'Aktualisierungsstatus',
-     'operation_history' => 'Vorgangsverlauf',
+    'rmas_index'        => 'Kundendienstliste',
+    'rmas_show'         => 'Kundendienstdetails',
+    'rmas_update'       => 'Kundendienst aktualisieren',
+    'rmas_delete'       => 'Kundendienst löschen',
+
+    'customers_name'    => 'Kundenname',
+    'quantity'          => 'Menge',
+    'service_type'      => 'Diensttyp',
+    'rma_details'       => 'Kundenanwendungsdetails',
+    'reasons_return'    => 'Rücksendegrund',
+    'current_state'     => 'aktueller Zustand',
+    'modify_status'     => 'Status ändern',
+    'remarks'           => 'Bemerkungen',
+    'update_status'     => 'Aktualisierungsstatus',
+    'operation_history' => 'Vorgangsverlauf',
 ];

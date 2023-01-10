@@ -11,7 +11,6 @@
 
 namespace Beike\Admin\Http\Resources;
 
-use Beike\Repositories\RmaRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RmaReasonDetail extends JsonResource
@@ -19,9 +18,9 @@ class RmaReasonDetail extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'name' => json_decode($this->name, true)[locale()] ?? '',
-            'names' => json_decode($this->name, true)
+            'id'    => $this->id,
+            'name'  => json_decode($this->name, true)[locale()] ?? '',
+            'names' => json_decode($this->name, true),
         ];
     }
 }

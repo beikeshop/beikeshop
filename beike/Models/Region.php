@@ -11,8 +11,8 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Region extends Base
 {
@@ -22,7 +22,6 @@ class Region extends Base
     {
         return $this->belongsToMany(Zone::class, 'region_zones');
     }
-
 
     public function regionZones(): HasMany
     {

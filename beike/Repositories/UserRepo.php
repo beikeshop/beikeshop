@@ -24,6 +24,7 @@ class UserRepo
     public static function create($data)
     {
         $data['password'] = Hash::make($data['password']);
+
         return AdminUser::query()->create($data);
     }
 
@@ -34,12 +35,13 @@ class UserRepo
      */
     public static function update($user, $data)
     {
-        if (!$user instanceof AdminUser) {
+        if (! $user instanceof AdminUser) {
             $user = AdminUser::query()->findOrFail($user);
         }
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
+
         return $user->update($data);
     }
 
@@ -91,4 +93,3 @@ class UserRepo
         return $builder->paginate(perPage())->withQueryString();
     }
 }
-

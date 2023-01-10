@@ -10,22 +10,22 @@
  */
 
 return [
-    'plugins_index' => 'список плагинов',
-    'plugins_import' => 'Загрузить плагин',
-    'plugins_show' => 'детали плагинов',
-    'plugins_update' => 'обновление плагинов',
+    'plugins_index'         => 'список плагинов',
+    'plugins_import'        => 'Загрузить плагин',
+    'plugins_show'          => 'детали плагинов',
+    'plugins_update'        => 'обновление плагинов',
     'plugins_update_status' => 'статус обновления',
-    'plugins_install' => 'Установить',
-    'plugins_uninstall' => 'удалить',
+    'plugins_install'       => 'Установить',
+    'plugins_uninstall'     => 'удалить',
 
-    'plugin_list' => 'Список плагинов',
-    'plugin_code' => 'код плагина',
-    'plugin_type' => 'Тип плагина',
-    'plugin_description' => 'Описание плагина',
-    'plugin_upload' => 'Загрузить плагин (поддерживаются только zip-файлы)',
+    'plugin_list'           => 'Список плагинов',
+    'plugin_code'           => 'код плагина',
+    'plugin_type'           => 'Тип плагина',
+    'plugin_description'    => 'Описание плагина',
+    'plugin_upload'         => 'Загрузить плагин (поддерживаются только zip-файлы)',
 
-    'shipping' => 'способ доставки',
-    'payment' => 'метод оплаты',
-    'total' => 'Расчет заказа',
-    'view' => 'модификация страницы',
+    'shipping'              => 'способ доставки',
+    'payment'               => 'метод оплаты',
+    'total'                 => 'Расчет заказа',
+    'view'                  => 'модификация страницы',
 ];

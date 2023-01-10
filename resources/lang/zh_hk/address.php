@@ -10,16 +10,16 @@
  */
 
 return [
-    'index' => '編輯地址',
-    'name' => '姓名',
-    'phone' => '電話號碼',
+    'index'      => '編輯地址',
+    'name'       => '姓名',
+    'phone'      => '電話號碼',
     'country_id' => '國家ID',
-    'zone' => '省份',
-    'zone_id' => '省份ID',
-    'address_1' => '地址1',
-    'address_2' => '地址2',
-    'address' => '地址',
+    'zone'       => '省份',
+    'zone_id'    => '省份ID',
+    'address_1'  => '地址1',
+    'address_2'  => '地址2',
+    'address'    => '地址',
     'enter_city' => '輸入地址',
-    'post_code' => '郵編',
-    'default' => '默認地址',
+    'post_code'  => '郵編',
+    'default'    => '默認地址',
 ];

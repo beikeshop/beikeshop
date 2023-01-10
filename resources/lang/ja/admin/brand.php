@@ -9,14 +9,13 @@
  * @modified   2022-08-02 14:22:41
  */
 
-
 return [
-    'index' => 'ブランド',
+    'index'         => 'ブランド',
 
-    'brands_index' => 'ブランド一覧',
+    'brands_index'  => 'ブランド一覧',
     'brands_create' => 'ブランドを作成',
-    'brands_show' => 'ブランドの詳細',
+    'brands_show'   => 'ブランドの詳細',
     'brands_update' => 'ブランドの更新',
     'brands_delete' => 'ブランドを削除',
-    'error_upload' => 'アイコンをアップロードしてください',
+    'error_upload'  => 'アイコンをアップロードしてください',
 ];

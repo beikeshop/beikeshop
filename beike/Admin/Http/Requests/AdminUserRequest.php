@@ -32,7 +32,7 @@ class AdminUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        if (!$this->id) {
+        if (! $this->id) {
             $rules['email'] = 'required|email:rfc|unique:admin_users,email';
         } else {
             $rules['email'] = 'required|email:rfc|unique:admin_users,email,' . $this->id;

@@ -10,17 +10,17 @@
  */
 
 return [
-    'list' => '訂單列表',
+    'list'                 => '訂單列表',
 
-    'order_quantity' => '訂單數量',
-    'order_amount' => '訂單金額',
-    'orders_index' => '訂單列表',
-    'orders_create' => '創建訂單',
-    'orders_show' => '訂單詳情',
-    'orders_export' => '導出訂單',
-    'orders_update' => '更新訂單',
-    'orders_delete' => '刪除訂單',
-    'notify' => '是否提醒',
+    'order_quantity'       => '訂單數量',
+    'order_amount'         => '訂單金額',
+    'orders_index'         => '訂單列表',
+    'orders_create'        => '創建訂單',
+    'orders_show'          => '訂單詳情',
+    'orders_export'        => '導出訂單',
+    'orders_update'        => '更新訂單',
+    'orders_delete'        => '刪除訂單',
+    'notify'               => '是否提醒',
     'orders_update_status' => '更新狀態',
-    'error_status' => '請選擇狀態',
+    'error_status'         => '請選擇狀態',
 ];

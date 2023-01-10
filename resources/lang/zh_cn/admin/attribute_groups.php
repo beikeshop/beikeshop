@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => '属性组',
+    'index'            => '属性组',
     'create_at_groups' => '创建属性组',
 ];

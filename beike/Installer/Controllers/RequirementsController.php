@@ -2,8 +2,8 @@
 
 namespace Beike\Installer\Controllers;
 
-use Illuminate\Routing\Controller;
 use Beike\Installer\Helpers\RequirementsChecker;
+use Illuminate\Routing\Controller;
 
 class RequirementsController extends Controller
 {

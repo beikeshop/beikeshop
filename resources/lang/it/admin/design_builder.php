@@ -10,9 +10,9 @@
  */
 
 return [
-    'module_brand' => 'modulo brand',
-    'module_banner' => 'modulo banner',
+    'module_brand'          => 'modulo brand',
+    'module_banner'         => 'modulo banner',
     'module_four_image_pro' => 'una riga quattro immagini PRO',
-    'module_slideshow' => 'modulo diapositiva',
-    'module_tab_products' => 'scheda prodotti',
+    'module_slideshow'      => 'modulo diapositiva',
+    'module_tab_products'   => 'scheda prodotti',
 ];

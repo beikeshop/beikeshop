@@ -35,6 +35,7 @@ class ForgottenController
     public function sendVerifyCode(VerifyCodeRequest $request)
     {
         AccountService::sendVerifyCodeForForgotten($request->get('email'), 'email');
+
         return json_success(trans('shop/forgotten.verification_code_sent'));
     }
 

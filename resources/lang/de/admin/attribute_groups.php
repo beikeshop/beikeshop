@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => 'Attributgruppe',
+    'index'            => 'Attributgruppe',
     'create_at_groups' => 'Attributgruppe erstellen',
 ];

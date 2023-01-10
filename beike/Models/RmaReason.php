@@ -17,6 +17,5 @@ class RmaReason extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['locale','name'];
+    protected $fillable = ['locale', 'name'];
 }
-

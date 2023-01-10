@@ -11,10 +11,10 @@
 
 namespace Beike\Shop\Services;
 
-use Exception;
 use Beike\Models\CartProduct;
 use Beike\Repositories\CartRepo;
 use Beike\Shop\Http\Resources\CartDetail;
+use Exception;
 
 class CartService
 {
@@ -35,16 +35,16 @@ class CartService
 
         $cartItems = $cartItems->filter(function ($item) {
             $description = $item->sku->product->description ?? '';
-            $product = $item->product ?? null;
+            $product     = $item->product                   ?? null;
             if (empty($description) || empty($product)) {
                 $item->delete();
             }
+
             return $description && $product;
         });
 
         return CartDetail::collection($cartItems)->jsonSerialize();
     }
-
 
     /**
      * 创建购物车或者更新购物车数量
@@ -53,8 +53,8 @@ class CartService
     public static function add($sku, int $quantity, $customer = null)
     {
         $customerId = $customer->id ?? 0;
-        $productId = $sku->product_id;
-        $skuId = $sku->id;
+        $productId  = $sku->product_id;
+        $skuId      = $sku->id;
 
         if (empty($sku) || $quantity == 0) {
             return null;
@@ -73,17 +73,17 @@ class CartService
             $cart->increment('quantity', $quantity);
         } else {
             $cart = CartProduct::query()->create([
-                'customer_id' => $customerId,
-                'session_id' => session()->getId(),
-                'product_id' => $productId,
+                'customer_id'    => $customerId,
+                'session_id'     => session()->getId(),
+                'product_id'     => $productId,
                 'product_sku_id' => $skuId,
-                'quantity' => $quantity,
-                'selected' => true,
+                'quantity'       => $quantity,
+                'selected'       => true,
             ]);
         }
+
         return $cart;
     }
-
 
     /**
      * 选择购物车商品
@@ -106,7 +106,6 @@ class CartService
             ->update(['selected' => 1]);
     }
 
-
     /**
      * 更新购物车数量
      */
@@ -123,7 +122,6 @@ class CartService
         $builder->where('id', $cartId)
             ->update(['quantity' => $quantity, 'selected' => 1]);
     }
-
 
     /**
      * 删除购物车商品
@@ -146,7 +144,6 @@ class CartService
             ->delete();
     }
 
-
     /**
      * 获取购物车相关数据
      *
@@ -156,22 +153,23 @@ class CartService
     public static function reloadData(array $carts = []): array
     {
         if (empty($carts)) {
-            $carts = CartService::list(current_customer());
+            $carts = self::list(current_customer());
         }
 
         $cartList = collect($carts)->where('selected', 1);
 
-        $quantity = $cartList->sum('quantity');
+        $quantity    = $cartList->sum('quantity');
         $quantityAll = collect($carts)->sum('quantity');
-        $amount = $cartList->sum('subtotal');
+        $amount      = $cartList->sum('subtotal');
 
         $data = [
-            'carts' => $carts,
-            'quantity' => $quantity,
-            'quantity_all' => $quantityAll,
-            'amount' => $amount,
+            'carts'         => $carts,
+            'quantity'      => $quantity,
+            'quantity_all'  => $quantityAll,
+            'amount'        => $amount,
             'amount_format' => currency_format($amount),
         ];
+
         return hook_filter('cart.data', $data);
     }
 }

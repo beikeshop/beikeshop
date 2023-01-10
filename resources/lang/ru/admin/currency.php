@@ -9,11 +9,11 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-    'decimal_point' => '.',
-    'thousand_point' => ',',
-    'currencies_index' => 'Список валют',
+    'decimal_point'     => '.',
+    'thousand_point'    => ',',
+    'currencies_index'  => 'Список валют',
     'currencies_create' => 'Создать валюту',
-    'currencies_show' => 'Детали валюты',
+    'currencies_show'   => 'Детали валюты',
     'currencies_update' => 'обновить валюту',
     'currencies_delete' => 'удалить валюту',
 ];

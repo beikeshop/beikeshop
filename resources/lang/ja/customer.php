@@ -10,8 +10,8 @@
  */
 
 return [
-    'name' => '名前',
-    'email' => 'Email',
-    'from' => '登録ソース',
+    'name'           => '名前',
+    'email'          => 'Email',
+    'from'           => '登録ソース',
     'customer_group' => 'ユーザー・グループ',
 ];

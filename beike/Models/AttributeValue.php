@@ -26,14 +26,13 @@ class AttributeValue extends Base
         return $this->hasOne(AttributeValueDescription::class)->where('locale', locale());
     }
 
-    public function descriptions() :HasMany
+    public function descriptions(): HasMany
     {
-        return $this->hasMany(AttributeValueDescription::Class);
+        return $this->hasMany(AttributeValueDescription::class);
     }
 
-    public function attribute() :BelongsTo
+    public function attribute(): BelongsTo
     {
-        return $this->belongsTo(Attribute::Class);
+        return $this->belongsTo(Attribute::class);
     }
 }
-

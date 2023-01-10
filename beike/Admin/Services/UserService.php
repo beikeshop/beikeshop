@@ -11,8 +11,6 @@
 
 namespace Beike\Admin\Services;
 
-
-use Beike\Libraries\Notification;
 use Beike\Repositories\UserRepo;
 use Beike\Repositories\VerifyCodeRepo;
 use Illuminate\Support\Carbon;
@@ -25,13 +23,14 @@ class UserService
      * @param $email
      * @return void
      */
-    public static function sendVerifyCodeForForgotten($email) {
+    public static function sendVerifyCodeForForgotten($email)
+    {
         $code = str_pad(mt_rand(10, 999999), 6, '0', STR_PAD_LEFT);
 
         VerifyCodeRepo::deleteByAccount($email);
         VerifyCodeRepo::create([
             'account' => $email,
-            'code' => $code,
+            'code'    => $code,
         ]);
 
         Log::info("找回密码验证码：{$code}");
@@ -51,6 +50,7 @@ class UserService
         $verifyCode = VerifyCodeRepo::findByAccount($account);
         if ($verifyCode->created_at->addMinutes(10) < Carbon::now()) {
             $verifyCode->delete();
+
             throw new \Exception(trans('admin/user.verify_code_expired'));
         }
 
@@ -59,7 +59,7 @@ class UserService
         }
 
         $user = UserRepo::findByEmail($account);
-        if (!$user) {
+        if (! $user) {
             throw new \Exception(trans('admin/user.account_not_exist'));
         }
 

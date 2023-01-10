@@ -11,8 +11,8 @@
 
 namespace Beike\Admin\Repositories;
 
-use Beike\Models\AdminUser;
 use Beike\Admin\Http\Resources\AdminUserDetail;
+use Beike\Models\AdminUser;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class AdminUserRepo
@@ -22,11 +22,11 @@ class AdminUserRepo
      */
     public static function getAdminUsers(): array
     {
-        $builder = AdminUser::query()->with(['roles']);
+        $builder    = AdminUser::query()->with(['roles']);
         $adminUsers = $builder->get();
+
         return AdminUserDetail::collection($adminUsers)->jsonSerialize();
     }
-
 
     /**
      * 创建后台管理员用户
@@ -37,20 +37,20 @@ class AdminUserRepo
     public static function createAdminUser($data): AdminUser
     {
         $adminUser = new AdminUser([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
-            'locale' => $data['locale'],
-            'active' => true,
+            'locale'   => $data['locale'],
+            'active'   => true,
         ]);
         $adminUser->save();
 
         if (isset($data['roles'])) {
             $adminUser->assignRole($data['roles']);
         }
+
         return $adminUser;
     }
-
 
     /**
      * 更新后台管理员用户
@@ -61,11 +61,11 @@ class AdminUserRepo
      */
     public static function updateAdminUser($adminUserId, $data)
     {
-        $password = $data['password'] ?? '';
+        $password  = $data['password'] ?? '';
         $adminUser = AdminUser::query()->findOrFail($adminUserId);
-        $userData = [
-            'name' => $data['name'],
-            'email' => $data['email'],
+        $userData  = [
+            'name'   => $data['name'],
+            'email'  => $data['email'],
             'locale' => $data['locale'],
             'active' => true,
         ];
@@ -74,9 +74,9 @@ class AdminUserRepo
         }
         $adminUser->update($userData);
         $adminUser->syncRoles($data['roles']);
+
         return $adminUser;
     }
-
 
     /**
      * 删除后台用户

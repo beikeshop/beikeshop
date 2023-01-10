@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => 'Name',
-    'sku' => 'SKU',
-    'price' => 'Preis',
-    'origin_price' => 'ursprünglicher Preis',
-    'cost_price' => 'Kostenpreis',
-    'brand' => 'Marke',
-    'category' => 'Kategorie',
-    'model' => 'Modell',
-    'quantity' => 'Lager',
-    'image' => 'Bild',
+    'name'              => 'Name',
+    'sku'               => 'SKU',
+    'price'             => 'Preis',
+    'origin_price'      => 'ursprünglicher Preis',
+    'cost_price'        => 'Kostenpreis',
+    'brand'             => 'Marke',
+    'category'          => 'Kategorie',
+    'model'             => 'Modell',
+    'quantity'          => 'Lager',
+    'image'             => 'Bild',
 
-    'active' => 'im Regal',
-    'inactive' => 'von der Stange',
+    'active'            => 'im Regal',
+    'inactive'          => 'von der Stange',
     'has_been_inactive' => 'Das Produkt wurde entfernt',
 ];

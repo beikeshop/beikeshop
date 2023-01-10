@@ -11,11 +11,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Repositories\PluginRepo;
-use ZanySoft\Zip\Zip;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Beike\Admin\Services\MarketingService;
+use Beike\Repositories\PluginRepo;
+use Illuminate\Http\Request;
 
 class MarketingController
 {
@@ -26,14 +24,14 @@ class MarketingController
     public function index(Request $request)
     {
         $filters = [
-            'type' => $request->get('type'),
+            'type'    => $request->get('type'),
             'keyword' => $request->get('keyword'),
         ];
         $plugins = MarketingService::getInstance()->getList($filters);
-        $data = [
+        $data    = [
             'plugins' => $plugins,
-            'domain' => str_replace(['http://', 'https://'], '', config('app.url')),
-            'types' => PluginRepo::getTypes(),
+            'domain'  => str_replace(['http://', 'https://'], '', config('app.url')),
+            'types'   => PluginRepo::getTypes(),
         ];
 
         if ($request->expectsJson()) {
@@ -43,7 +41,6 @@ class MarketingController
         return view('admin::pages.marketing.index', $data);
     }
 
-
     /**
      * 获取单个插件详情
      */
@@ -51,20 +48,20 @@ class MarketingController
     {
         try {
             $pluginCode = $request->code;
-            $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
-            $data = [
+            $plugin     = MarketingService::getInstance()->getPlugin($pluginCode);
+            $data       = [
                 'domain' => str_replace(['http://', 'https://'], '', config('app.url')),
                 'plugin' => $plugin,
             ];
             if ($request->expectsJson()) {
                 return $data;
             }
+
             return view('admin::pages.marketing.show', $data);
         } catch (\Exception $e) {
             return redirect(admin_route('marketing.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
-
 
     /**
      * 下单购买插件
@@ -72,15 +69,15 @@ class MarketingController
     public function buy(Request $request)
     {
         try {
-            $postData = $request->getContent();
+            $postData   = $request->getContent();
             $pluginCode = $request->code;
-            $result = MarketingService::getInstance()->buy($pluginCode, $postData);
+            $result     = MarketingService::getInstance()->buy($pluginCode, $postData);
+
             return json_success('获取成功', $result);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
     }
-
 
     /**
      * 下载插件安装包到本地
@@ -90,6 +87,7 @@ class MarketingController
         try {
             $pluginCode = $request->code;
             MarketingService::getInstance()->download($pluginCode);
+
             return json_success('下载解压成功, 请去插件列表安装');
         } catch (\Exception $e) {
             return json_fail($e->getMessage());

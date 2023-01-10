@@ -21,4 +21,3 @@ class VerifyCode extends Base
 
     protected $fillable = ['account', 'code'];
 }
-

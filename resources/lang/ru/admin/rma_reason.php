@@ -10,8 +10,8 @@
  */
 
 return [
-    'rma_reasons_index' => 'список причин',
+    'rma_reasons_index'  => 'список причин',
     'rma_reasons_create' => 'причина создания',
     'rma_reasons_update' => 'причина обновления',
-    'rma_reasons_delete' => 'удалить причину'
+    'rma_reasons_delete' => 'удалить причину',
 ];

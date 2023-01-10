@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => '分类',
-    'edit_category' => '编辑分类',
-    'upper_category' => '上级分类',
+    'index'             => '分类',
+    'edit_category'     => '编辑分类',
+    'upper_category'    => '上级分类',
 
-    'categories_index' => '分类列表',
+    'categories_index'  => '分类列表',
     'categories_create' => '创建分类',
-    'categories_show' => '分类详情',
+    'categories_show'   => '分类详情',
     'categories_update' => '更新分类',
     'categories_delete' => '删除分类',
 ];

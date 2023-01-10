@@ -10,13 +10,13 @@
  */
 
 return [
-    'decimal_point' => '.',
+    'decimal_point'  => '.',
     'thousand_point' => ',',
-    'name' => 'имя',
-    'code' => 'код',
-    'icon' => 'значок',
-    'symbol_left' => 'левый символ',
-    'symbol_right' => 'правильный символ',
-    'value' => 'Стоимость обменного курса',
-    'decimal_place' => 'Десятичные разряды',
+    'name'           => 'имя',
+    'code'           => 'код',
+    'icon'           => 'значок',
+    'symbol_left'    => 'левый символ',
+    'symbol_right'   => 'правильный символ',
+    'value'          => 'Стоимость обменного курса',
+    'decimal_place'  => 'Десятичные разряды',
 ];

@@ -13,5 +13,4 @@ namespace Beike\Repositories;
 
 class SystemSettingRepo
 {
-
 }

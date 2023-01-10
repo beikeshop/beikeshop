@@ -11,5 +11,5 @@
 
 return [
     'level' => 'calificación',
-    'name' => 'nombre del grupo de clientes',
+    'name'  => 'nombre del grupo de clientes',
 ];

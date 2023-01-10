@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => 'nome',
-    'sku' => 'SKU',
-    'price' => 'prezzo',
-    'origin_price' => 'prezzo originale',
-    'cost_price' => 'prezzo di costo',
-    'brand' => 'marca',
-    'category' => 'Classificazione',
-    'model' => 'modello',
-    'quantity' => 'disponibile',
-    'image' => 'immagine',
+    'name'              => 'nome',
+    'sku'               => 'SKU',
+    'price'             => 'prezzo',
+    'origin_price'      => 'prezzo originale',
+    'cost_price'        => 'prezzo di costo',
+    'brand'             => 'marca',
+    'category'          => 'Classificazione',
+    'model'             => 'modello',
+    'quantity'          => 'disponibile',
+    'image'             => 'immagine',
 
-    'active' => 'sul ripiano',
-    'inactive' => 'prendere nota',
+    'active'            => 'sul ripiano',
+    'inactive'          => 'prendere nota',
     'has_been_inactive' => 'Questo articolo è stato interrotto',
 ];

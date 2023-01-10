@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => 'marca',
+    'index'         => 'marca',
 
-    'brands_index' => 'lista de marcas',
+    'brands_index'  => 'lista de marcas',
     'brands_create' => 'crear una marca',
-    'brands_show' => 'Detalles de la marca',
+    'brands_show'   => 'Detalles de la marca',
     'brands_update' => 'Actualizar la marca',
     'brands_delete' => 'quitar marca',
-    'error_upload' => 'por favor cargue el icono'
+    'error_upload'  => 'por favor cargue el icono',
 ];

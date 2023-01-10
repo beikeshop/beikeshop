@@ -11,8 +11,8 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class CurrencyController extends Controller
 {
@@ -21,6 +21,7 @@ class CurrencyController extends Controller
         if (in_array($lang, currencies()->where('status', true)->pluck('code')->toArray())) {
             Session::put('currency', $lang);
         }
+
         return Redirect::back();
     }
 }

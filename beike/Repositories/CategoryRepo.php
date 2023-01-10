@@ -12,15 +12,14 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Category;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Builder;
 use Beike\Shop\Http\Resources\CategoryDetail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepo
 {
     private static $allCategoryWithName = null;
-
 
     /**
      * 后台获取分类列表
@@ -29,11 +28,11 @@ class CategoryRepo
     public static function getAdminList()
     {
         self::cleanCategories();
+
         return Category::with(['description', 'children.description', 'children.children.description'])
             ->where('parent_id', 0)
             ->get();
     }
-
 
     /**
      * 清理分类数据
@@ -56,15 +55,15 @@ class CategoryRepo
         }
     }
 
-
     public static function flatten(string $locale, $separator = ' > '): array
     {
         $sql = "SELECT cp.category_id AS id, TRIM(LOWER(GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '{$separator}'))) AS name, c1.parent_id, c1.position";
-        $sql .= " FROM category_paths cp";
-        $sql .= " LEFT JOIN categories c1 ON (cp.category_id = c1.id)";
-        $sql .= " LEFT JOIN categories c2 ON (cp.path_id = c2.id)";
-        $sql .= " LEFT JOIN category_descriptions cd1 ON (cp.path_id = cd1.category_id)";
+        $sql .= ' FROM category_paths cp';
+        $sql .= ' LEFT JOIN categories c1 ON (cp.category_id = c1.id)';
+        $sql .= ' LEFT JOIN categories c2 ON (cp.path_id = c2.id)';
+        $sql .= ' LEFT JOIN category_descriptions cd1 ON (cp.path_id = cd1.category_id)';
         $sql .= " WHERE cd1.locale = '" . $locale . "' GROUP BY cp.category_id ORDER BY name ASC";
+
         return DB::select($sql);
     }
 
@@ -83,9 +82,9 @@ class CategoryRepo
             ->get();
 
         $categoryList = CategoryDetail::collection($topCategories);
+
         return json_decode($categoryList->toJson(), true);
     }
-
 
     /**
      * 获取商品分类列表
@@ -96,9 +95,9 @@ class CategoryRepo
     public static function list(array $filters = [])
     {
         $builder = self::getBuilder($filters);
+
         return $builder->get();
     }
-
 
     /**
      * 获取筛选builder
@@ -115,9 +114,9 @@ class CategoryRepo
                 return $query->where('name', 'like', "%$keyword%");
             });
         }
+
         return $builder;
     }
-
 
     /**
      * 自动完成
@@ -145,19 +144,20 @@ class CategoryRepo
                 }
                 if (empty($path->pathCategory)) {
                     $path->delete();
+
                     continue;
                 }
                 $pathName .= $path->pathCategory->description->name;
             }
             $results[] = [
-                'id' => $category->id,
+                'id'     => $category->id,
                 'status' => $category->active,
-                'name' => $pathName,
+                'name'   => $pathName,
             ];
         }
+
         return $results;
     }
-
 
     /**
      * 删除商品分类
@@ -167,7 +167,7 @@ class CategoryRepo
     {
         if (is_int($category)) {
             $category = Category::query()->findOrFail($category);
-        } elseif (!($category instanceof Category)) {
+        } elseif (! ($category instanceof Category)) {
             throw new \Exception('invalid category');
         }
         $category->descriptions()->delete();
@@ -176,7 +176,6 @@ class CategoryRepo
         $category->delete();
     }
 
-
     /**
      * 通过分类ID获取商品名称
      * @param $category
@@ -184,11 +183,11 @@ class CategoryRepo
      */
     public static function getName($category)
     {
-        $id = is_int($category) ? $category : $category->id;
+        $id         = is_int($category) ? $category : $category->id;
         $categories = self::getAllCategoriesWithName();
+
         return $categories[$id]['name'] ?? '';
     }
-
 
     /**
      * 获取所有商品分类ID和名称列表
@@ -200,15 +199,15 @@ class CategoryRepo
             return self::$allCategoryWithName;
         }
 
-        $items = [];
+        $items      = [];
         $categories = self::getBuilder()->select('id')->get();
         foreach ($categories as $category) {
             $items[$category->id] = [
-                'id' => $category->id,
+                'id'   => $category->id,
                 'name' => $category->description->name ?? '',
             ];
         }
+
         return self::$allCategoryWithName = $items;
     }
 }
-

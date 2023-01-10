@@ -10,14 +10,14 @@
  */
 
 return [
-    'index' => 'Attribute',
-    'attribute_info' => 'Attribute information',
-    'create_at' => 'Create attribute',
-    'attribute_value' => 'Cttribute value',
-    'set_attribute' => 'Configuration attribute',
-    'add_attribute' => 'Add attribute value',
+    'index'            => 'Attribute',
+    'attribute_info'   => 'Attribute information',
+    'create_at'        => 'Create attribute',
+    'attribute_value'  => 'Cttribute value',
+    'set_attribute'    => 'Configuration attribute',
+    'add_attribute'    => 'Add attribute value',
     'before_attribute' => 'Please select the left attribute first',
-    'btn_at' => 'Go now',
-    'btn_later' => 'Later',
-    'to_info_values' => 'Please go to the details page to edit attribute values',
+    'btn_at'           => 'Go now',
+    'btn_later'        => 'Later',
+    'to_info_values'   => 'Please go to the details page to edit attribute values',
 ];

@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => 'カテゴリ',
-     'edit_category' => 'カテゴリを編集',
-     'upper_category' => '上位カテゴリ',
+    'index'             => 'カテゴリ',
+    'edit_category'     => 'カテゴリを編集',
+    'upper_category'    => '上位カテゴリ',
 
-     'categories_index' => 'カテゴリーリスト',
-     'categories_create' => 'カテゴリを作成',
-     'categories_show' => 'カテゴリーの詳細',
-     'categories_update' => 'カテゴリを更新',
-     'categories_delete' => 'カテゴリを削除',
+    'categories_index'  => 'カテゴリーリスト',
+    'categories_create' => 'カテゴリを作成',
+    'categories_show'   => 'カテゴリーの詳細',
+    'categories_update' => 'カテゴリを更新',
+    'categories_delete' => 'カテゴリを削除',
 ];

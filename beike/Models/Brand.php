@@ -20,9 +20,8 @@ class Brand extends Base
 
     protected $fillable = ['name', 'first', 'logo', 'sort_order', 'status'];
 
-    public function products() :HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(Product::Class);
+        return $this->hasMany(Product::class);
     }
 }
-

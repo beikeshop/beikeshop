@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => 'Connectez-vous au backend de BeikeShop',
-    'log_in' => 'Connexion',
+    'log_in'        => 'Connexion',
 ];

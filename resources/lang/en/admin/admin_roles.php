@@ -10,11 +10,11 @@
  */
 
 return [
-    'select_all' => 'Select All',
-    'unselect_all' => 'Unselect All',
-    'role' => 'Role',
-    'role_name' => 'Role Name',
+    'select_all'      => 'Select All',
+    'unselect_all'    => 'Unselect All',
+    'role'            => 'Role',
+    'role_name'       => 'Role Name',
     'role_management' => 'Role Management',
-    'permission' => 'Permission',
-    'error_roles' => 'Please select at least one role',
+    'permission'      => 'Permission',
+    'error_roles'     => 'Please select at least one role',
 ];

@@ -12,15 +12,15 @@ return [
     | by looping through the array and run "extension_loaded" on it.
     |
     */
-    'core' => [
+    'core'                   => [
         'minPhpVersion' => '8.0.2',
     ],
-    'final' => [
-        'key' => true,
+    'final'                  => [
+        'key'     => true,
         'publish' => false,
     ],
-    'requirements' => [
-        'php' => [
+    'requirements'           => [
+        'php'    => [
             'BCMath',
             'Ctype',
             'cURL',
@@ -49,11 +49,11 @@ return [
     | requires more permissions just add them to the array list bellow.
     |
     */
-    'permissions' => [
+    'permissions'            => [
         'storage/framework/' => '755',
-        'storage/logs/' => '755',
-        'bootstrap/cache/' => '755',
-        '.env' => '755',
+        'storage/logs/'      => '755',
+        'bootstrap/cache/'   => '755',
+        '.env'               => '755',
     ],
 
     /*
@@ -65,17 +65,17 @@ return [
     | https://laravel.com/docs/5.4/validation#available-validation-rules
     |
     */
-    'environment' => [
+    'environment'            => [
         'form' => [
             'rules' => [
                 'database_connection' => 'required|string|max:50',
-                'database_hostname' => 'required|string|max:50',
-                'database_port' => 'required|numeric',
-                'database_name' => 'required|string|max:50',
-                'database_username' => 'required|string|max:50',
-                'database_password' => 'nullable|string|max:50',
-                'admin_email' => 'required|email:rfc',
-                'admin_password' => 'required|string|max:50',
+                'database_hostname'   => 'required|string|max:50',
+                'database_port'       => 'required|numeric',
+                'database_name'       => 'required|string|max:50',
+                'database_username'   => 'required|string|max:50',
+                'database_password'   => 'nullable|string|max:50',
+                'admin_email'         => 'required|email:rfc',
+                'admin_password'      => 'required|string|max:50',
             ],
         ],
     ],
@@ -88,7 +88,7 @@ return [
     | canInstall middleware located in `canInstall.php`.
     |
     */
-    'installed' => [
+    'installed'              => [
         'redirectOptions' => [
             'route' => [
                 'name' => 'welcome',
@@ -97,7 +97,7 @@ return [
             'abort' => [
                 'type' => '404',
             ],
-            'dump' => [
+            'dump'  => [
                 'data' => 'Dumping a not found message.',
             ],
         ],
@@ -124,6 +124,6 @@ return [
     | Boolean value
     |
     */
-    'updaterEnabled' => 'true',
+    'updaterEnabled'         => 'true',
 
 ];

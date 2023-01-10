@@ -10,14 +10,14 @@
  */
 
 return [
-    'index' => 'attributo',
-    'attribute_info' => 'informazioni sugli attributi',
-    'create_at' => 'crea attributo',
-    'attribute_value' => 'valore attributo',
-    'set_attribute' => 'attributo di configurazione',
-    'add_attribute' => 'aggiungi valore attributo',
+    'index'            => 'attributo',
+    'attribute_info'   => 'informazioni sugli attributi',
+    'create_at'        => 'crea attributo',
+    'attribute_value'  => 'valore attributo',
+    'set_attribute'    => 'attributo di configurazione',
+    'add_attribute'    => 'aggiungi valore attributo',
     'before_attribute' => 'Si prega di selezionare prima l\'attributo di sinistra',
-    'btn_at' => 'Vai ora',
-    'btn_later' => 'più tardi',
-    'to_info_values' => 'Vai alla pagina dei dettagli per modificare i valori degli attributi',
+    'btn_at'           => 'Vai ora',
+    'btn_later'        => 'più tardi',
+    'to_info_values'   => 'Vai alla pagina dei dettagli per modificare i valori degli attributi',
 ];

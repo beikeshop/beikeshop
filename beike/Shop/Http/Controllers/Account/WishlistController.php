@@ -11,17 +11,17 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
-use Illuminate\Http\Request;
 use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\WishlistDetail;
+use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
     public function index()
     {
         $wishlists = CustomerRepo::wishlists(current_customer());
-        $data = [
+        $data      = [
             'wishlist' => WishlistDetail::collection($wishlists)->jsonSerialize(),
         ];
 
@@ -31,7 +31,7 @@ class WishlistController extends Controller
     public function add(Request $request): array
     {
         $productId = $request->get('product_id');
-        $wishlist = CustomerRepo::addToWishlist(current_customer(), $productId);
+        $wishlist  = CustomerRepo::addToWishlist(current_customer(), $productId);
 
         return json_success(trans('shop/wishlist.add_wishlist_success'), $wishlist);
     }
@@ -43,5 +43,4 @@ class WishlistController extends Controller
 
         return json_success(trans('shop/wishlist.remove_wishlist_success'));
     }
-
 }

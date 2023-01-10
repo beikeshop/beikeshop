@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => 'бренд',
+    'index'         => 'бренд',
 
-    'brands_index' => 'список брендов',
+    'brands_index'  => 'список брендов',
     'brands_create' => 'Создать бренд',
-    'brands_show' => 'детали бренда',
+    'brands_show'   => 'детали бренда',
     'brands_update' => 'обновить бренд',
     'brands_delete' => 'удалить бренд',
-    'error_upload' => 'Пожалуйста, загрузите иконку'
+    'error_upload'  => 'Пожалуйста, загрузите иконку',
 ];

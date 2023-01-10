@@ -10,10 +10,10 @@
  */
 
 return [
-    'admin_roles_index' => 'lista ruoli',
-    'admin_roles_create' => 'Crea ruoli',
-    'admin_roles_show' => 'dettagli ruoli',
-    'admin_roles_update' => 'aggiorna ruoli',
-    'admin_roles_delete' => 'cancella ruolo',
-    'select_one_at_least' => 'Le autorizzazioni non possono essere vuote, selezionane almeno una'
+    'admin_roles_index'   => 'lista ruoli',
+    'admin_roles_create'  => 'Crea ruoli',
+    'admin_roles_show'    => 'dettagli ruoli',
+    'admin_roles_update'  => 'aggiorna ruoli',
+    'admin_roles_delete'  => 'cancella ruolo',
+    'select_one_at_least' => 'Le autorizzazioni non possono essere vuote, selezionane almeno una',
 ];

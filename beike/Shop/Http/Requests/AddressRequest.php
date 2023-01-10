@@ -24,22 +24,22 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2|max:16',
-            'phone' => 'required|min:6|max:16',
+            'name'       => 'required|min:2|max:16',
+            'phone'      => 'required|min:6|max:16',
             'country_id' => 'required|exists:countries,id',
-            'zone_id' => 'required|exists:zones,id',
-            'address_1' => 'required',
+            'zone_id'    => 'required|exists:zones,id',
+            'address_1'  => 'required',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => trans('address.name'),
-            'phone' => trans('address.phone'),
+            'name'       => trans('address.name'),
+            'phone'      => trans('address.phone'),
             'country_id' => trans('address.country_id'),
-            'zone_id' => trans('address.zone_id'),
-            'address_1' => trans('address.address_1'),
+            'zone_id'    => trans('address.zone_id'),
+            'address_1'  => trans('address.address_1'),
         ];
     }
 }

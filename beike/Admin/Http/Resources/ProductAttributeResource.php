@@ -18,15 +18,15 @@ class ProductAttributeResource extends JsonResource
     {
         $this->load('attribute', 'attributeValue');
         $data = [
-            'attribute' => [
-                'id' => $this->attribute_id,
+            'attribute'       => [
+                'id'   => $this->attribute_id,
                 'name' => $this->attribute->description->name,
             ],
             'attribute_value' => [
-                'id' => $this->attribute_value_id,
+                'id'   => $this->attribute_value_id,
                 'name' => $this->attributeValue->description->name,
             ],
-         ];
+        ];
 
         return $data;
     }

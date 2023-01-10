@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => 'Name',
-    'sku' => 'SKU',
-    'price' => 'Price',
-    'origin_price' => 'Origin Price',
-    'cost_price' => 'Cost Price',
-    'brand' => 'Brand',
-    'category' => 'Category',
-    'model' => 'Model',
-    'quantity' => 'Quantity',
-    'image' => 'Image',
+    'name'              => 'Name',
+    'sku'               => 'SKU',
+    'price'             => 'Price',
+    'origin_price'      => 'Origin Price',
+    'cost_price'        => 'Cost Price',
+    'brand'             => 'Brand',
+    'category'          => 'Category',
+    'model'             => 'Model',
+    'quantity'          => 'Quantity',
+    'image'             => 'Image',
 
-    'active' => 'Active',
-    'inactive' => 'Inactive',
+    'active'            => 'Active',
+    'inactive'          => 'Inactive',
     'has_been_inactive' => 'The product has been inactive',
 ];

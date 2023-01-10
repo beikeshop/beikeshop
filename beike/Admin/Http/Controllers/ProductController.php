@@ -2,17 +2,16 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Admin\Http\Resources\ProductAttributeResource;
+use Beike\Admin\Http\Resources\ProductResource;
+use Beike\Admin\Repositories\TaxClassRepo;
+use Beike\Admin\Services\ProductService;
 use Beike\Models\Product;
-use Beike\Models\ProductAttribute;
-use Illuminate\Http\Request;
-use Beike\Repositories\ProductRepo;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
-use Beike\Admin\Services\ProductService;
-use Beike\Admin\Repositories\TaxClassRepo;
-use Beike\Admin\Http\Requests\ProductRequest;
-use Beike\Admin\Http\Resources\ProductResource;
+use Beike\Repositories\ProductRepo;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -22,12 +21,12 @@ class ProductController extends Controller
     {
         $requestData = $request->all();
         $productList = ProductRepo::list($requestData);
-        $products = ProductResource::collection($productList)->resource;
+        $products    = ProductResource::collection($productList)->resource;
 
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
-            'products' => $products,
-            'type' => 'products',
+            'products'   => $products,
+            'type'       => 'products',
         ];
 
         if ($request->expectsJson()) {
@@ -39,15 +38,15 @@ class ProductController extends Controller
 
     public function trashed(Request $request)
     {
-        $requestData = $request->all();
+        $requestData            = $request->all();
         $requestData['trashed'] = true;
-        $productList = ProductRepo::list($requestData);
-        $products = ProductResource::collection($productList)->resource;
+        $productList            = ProductRepo::list($requestData);
+        $products               = ProductResource::collection($productList)->resource;
 
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
-            'products' => $products,
-            'type' => 'trashed',
+            'products'   => $products,
+            'type'       => 'trashed',
         ];
 
         if ($request->expectsJson()) {
@@ -66,6 +65,7 @@ class ProductController extends Controller
     {
         try {
             (new ProductService)->create($request->all());
+
             return redirect()->to(admin_route('products.index'))
                 ->with('success', trans('common.created_success'));
         } catch (\Exception $e) {
@@ -84,6 +84,7 @@ class ProductController extends Controller
     {
         try {
             (new ProductService)->update($product, $request->all());
+
             return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
             return redirect(admin_route('products.edit', $product))->withErrors(['error' => $e->getMessage()]);
@@ -93,6 +94,7 @@ class ProductController extends Controller
     public function destroy(Request $request, Product $product)
     {
         $product->delete();
+
         return json_success(trans('common.deleted_success'));
     }
 
@@ -108,22 +110,22 @@ class ProductController extends Controller
     {
         if ($product->id) {
             $descriptions = $product->descriptions->keyBy('locale');
-            $categoryIds = $product->categories->pluck('id')->toArray();
+            $categoryIds  = $product->categories->pluck('id')->toArray();
             $product->load('brand', 'attributes');
         }
 
         $data = [
-            'product' => $product,
-            'descriptions' => $descriptions ?? [],
-            'category_ids' => $categoryIds ?? [],
+            'product'            => $product,
+            'descriptions'       => $descriptions ?? [],
+            'category_ids'       => $categoryIds  ?? [],
             'product_attributes' => ProductAttributeResource::collection($product->attributes),
-            'relations' => ProductResource::collection($product->relations)->resource,
-            'languages' => LanguageRepo::all(),
-            'tax_classes' => TaxClassRepo::getList(),
-            'source' => [
+            'relations'          => ProductResource::collection($product->relations)->resource,
+            'languages'          => LanguageRepo::all(),
+            'tax_classes'        => TaxClassRepo::getList(),
+            'source'             => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],
-            '_redirect' => $this->getRedirect(),
+            '_redirect'          => $this->getRedirect(),
         ];
 
         return view('admin::pages.products.form.form', $data);
@@ -136,7 +138,6 @@ class ProductController extends Controller
         return json_success(trans('common.get_success'), $name);
     }
 
-
     /**
      * 根据商品ID批量获取商品名称
      *
@@ -146,11 +147,10 @@ class ProductController extends Controller
     public function getNames(Request $request): array
     {
         $productIds = explode(',', $request->get('product_ids'));
-        $name = ProductRepo::getNames($productIds);
+        $name       = ProductRepo::getNames($productIds);
 
         return json_success(trans('common.get_success'), $name);
     }
-
 
     public function autocomplete(Request $request)
     {
@@ -165,7 +165,6 @@ class ProductController extends Controller
 
         return json_success(trans('common.updated_success'), []);
     }
-
 
     public function destroyByIds(Request $request)
     {

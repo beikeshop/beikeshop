@@ -19,18 +19,18 @@ class ProductResource extends JsonResource
         $masterSku = $this->master_sku;
 
         $data = [
-            'id' => $this->id,
-            'images' => array_map(function ($image) {
+            'id'              => $this->id,
+            'images'          => array_map(function ($image) {
                 return image_resize($image);
             }, $this->images ?? []),
-            'name' => $this->description->name ?? '',
+            'name'            => $this->description->name ?? '',
             'price_formatted' => currency_format($masterSku->price),
-            'active' => $this->active,
-            'position' => $this->position,
-            'url' => shop_route('products.show', $this->id),
-            'created_at' => time_format($this->created_at),
-            'deleted_at' => $this->deleted_at ? time_format($this->deleted_at) : '',
-            'url_edit' => admin_route('products.edit', $this->id),
+            'active'          => $this->active,
+            'position'        => $this->position,
+            'url'             => shop_route('products.show', $this->id),
+            'created_at'      => time_format($this->created_at),
+            'deleted_at'      => $this->deleted_at ? time_format($this->deleted_at) : '',
+            'url_edit'        => admin_route('products.edit', $this->id),
         ];
 
         return $data;

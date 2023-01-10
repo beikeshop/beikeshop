@@ -9,13 +9,13 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'zone_name' => 'nome provincia',
+    'zone_name'         => 'nome provincia',
     'country_of_origin' => 'paese di origine',
 
-    'zones_index' => 'lista provincia',
-    'zones_create' => 'crea provincia',
-    'zones_update' => 'aggiorna provincia',
-    'zones_delete' => 'Elimina provincia',
+    'zones_index'       => 'lista provincia',
+    'zones_create'      => 'crea provincia',
+    'zones_update'      => 'aggiorna provincia',
+    'zones_delete'      => 'Elimina provincia',
 
-    'error_country' => 'Seleziona un paese',
+    'error_country'     => 'Seleziona un paese',
 ];

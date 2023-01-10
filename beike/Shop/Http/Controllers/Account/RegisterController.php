@@ -12,11 +12,9 @@
 namespace Beike\Shop\Http\Controllers\Account;
 
 use Beike\Models\Customer;
-use Beike\Shop\Services\AccountService;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\RegisterRequest;
-use Illuminate\Support\Facades\Hash;
-use function redirect;
+use Beike\Shop\Services\AccountService;
 use function view;
 
 class RegisterController extends Controller

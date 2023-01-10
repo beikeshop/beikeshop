@@ -9,11 +9,11 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-    'decimal_point' => '.',
-    'thousand_point' => ',',
-    'currencies_index' => '貨幣列表',
+    'decimal_point'     => '.',
+    'thousand_point'    => ',',
+    'currencies_index'  => '貨幣列表',
     'currencies_create' => '創建貨幣',
-    'currencies_show' => '貨幣詳情',
+    'currencies_show'   => '貨幣詳情',
     'currencies_update' => '更新貨幣',
     'currencies_delete' => '刪除貨幣',
 ];

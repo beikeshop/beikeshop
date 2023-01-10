@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => 'grupo de atributos',
+    'index'            => 'grupo de atributos',
     'create_at_groups' => 'crear grupo de atributos',
 ];

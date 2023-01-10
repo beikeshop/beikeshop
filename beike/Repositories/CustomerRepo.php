@@ -29,8 +29,9 @@ class CustomerRepo
      */
     public static function create($customerData): Customer
     {
-        $customerData['email'] = $customerData['email'] ?? '';
+        $customerData['email']    = $customerData['email'] ?? '';
         $customerData['password'] = Hash::make($customerData['password'] ?? '');
+
         return Customer::query()->create($customerData);
     }
 
@@ -41,12 +42,13 @@ class CustomerRepo
      */
     public static function update($customer, $data)
     {
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
+
         return $customer->update($data);
     }
 
@@ -81,9 +83,9 @@ class CustomerRepo
     public static function list($data): LengthAwarePaginator
     {
         $builder = self::getListBuilder($data);
+
         return $builder->paginate(perPage())->withQueryString();
     }
-
 
     /**
      * 获取筛选对象
@@ -93,7 +95,7 @@ class CustomerRepo
      */
     public static function getListBuilder(array $filters = []): Builder
     {
-        $builder = Customer::query()->with("customerGroup.description");
+        $builder = Customer::query()->with('customerGroup.description');
 
         if (isset($filters['name'])) {
             $builder->where('customers.name', 'like', "%{$filters['name']}%");
@@ -102,7 +104,7 @@ class CustomerRepo
             $builder->where('customers.email', 'like', "%{$filters['email']}%");
         }
         if (isset($filters['status'])) {
-            $builder->where('customers.status', (int)$filters['status']);
+            $builder->where('customers.status', (int) $filters['status']);
         }
         if (isset($filters['from'])) {
             $builder->where('customers.from', $filters['from']);
@@ -151,11 +153,11 @@ class CustomerRepo
      */
     public static function addToWishlist($customer, $productId)
     {
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
 
-        if (!$customer->wishlists()->where('product_id', $productId)->first()) {
+        if (! $customer->wishlists()->where('product_id', $productId)->first()) {
             $wishlist = $customer->wishlists()->save(new CustomerWishlist(['product_id' => $productId]));
         }
 
@@ -169,7 +171,7 @@ class CustomerRepo
      */
     public static function removeFromWishlist($customer, $id)
     {
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
         $customer->wishlists()->where('id', $id)->delete();
@@ -179,7 +181,7 @@ class CustomerRepo
 
     public static function wishlists($customer): LengthAwarePaginator
     {
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
         $builder = $customer->wishlists()
@@ -195,16 +197,16 @@ class CustomerRepo
      */
     public static function inWishlist($product, $customer)
     {
-        if (!$customer) {
+        if (! $customer) {
             return false;
         }
         if ($product instanceof Product) {
             $product = $product->id;
         }
-        if (!$customer instanceof Customer) {
+        if (! $customer instanceof Customer) {
             $customer = Customer::query()->findOrFail($customer);
         }
+
         return $customer->wishlists()->where('product_id', $product)->count();
     }
 }
-

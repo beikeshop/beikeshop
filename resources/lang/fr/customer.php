@@ -10,8 +10,8 @@
  */
 
 return [
-    'name' => 'Nom',
-    'email' => 'Email',
-    'from' => 'source enregistrée',
+    'name'           => 'Nom',
+    'email'          => 'Email',
+    'from'           => 'source enregistrée',
     'customer_group' => 'groupe d\'utilisateurs',
 ];

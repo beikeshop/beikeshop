@@ -8,17 +8,21 @@ use Illuminate\View\Component;
 class InputLocale extends Component
 {
     public string $name;
+
     public string $title;
+
     public string $width;
+
     public $value;
+
     public bool $required;
 
     public function __construct(string $name, string $title, $value, ?string $width = '400', ?bool $required = false)
     {
-        $this->name = $name;
-        $this->title = $title;
-        $this->width = $width;
-        $this->value = $value;
+        $this->name     = $name;
+        $this->title    = $title;
+        $this->width    = $width;
+        $this->value    = $value;
         $this->required = $required;
     }
 
@@ -32,7 +36,7 @@ class InputLocale extends Component
         // descriptions.*.name => descriptions[zh_cn][name]
 
         $segments = explode('.', $this->name);
-        $key = $segments[0];
+        $key      = $segments[0];
         for ($i = 1; $i < count($segments); $i++) {
             $segment = $segments[$i];
             if ($segment == '*') {
@@ -41,6 +45,7 @@ class InputLocale extends Component
                 $key .= '[' . $segment . ']';
             }
         }
+
         return $key;
     }
 
@@ -54,7 +59,7 @@ class InputLocale extends Component
         $valueKey = implode('.', $segments);
         $valueKey = str_replace('*', $code, $valueKey);
 
-        return old($oldKey,  Arr::get($this->value, $valueKey, ''));
+        return old($oldKey, Arr::get($this->value, $valueKey, ''));
     }
 
     public function errorKey($code)

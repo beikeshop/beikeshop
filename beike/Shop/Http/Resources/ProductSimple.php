@@ -38,19 +38,19 @@ class ProductSimple extends JsonResource
         }
 
         return [
-            'id' => $this->id,
-            'sku_id' => $masterSku->id,
-            'name' => $name,
-            'name_format' => $name,
-            'url' => shop_route('products.show', ['product' => $this]),
-            'price' => $masterSku->price,
-            'origin_price' => $masterSku->origin_price,
-            'price_format' => currency_format($masterSku->price),
+            'id'                  => $this->id,
+            'sku_id'              => $masterSku->id,
+            'name'                => $name,
+            'name_format'         => $name,
+            'url'                 => shop_route('products.show', ['product' => $this]),
+            'price'               => $masterSku->price,
+            'origin_price'        => $masterSku->origin_price,
+            'price_format'        => currency_format($masterSku->price),
             'origin_price_format' => currency_format($masterSku->origin_price),
-            'category_id' => $this->category_id ?? null,
-            'in_wishlist' => $this->inCurrentWishlist->id ?? 0,
+            'category_id'         => $this->category_id           ?? null,
+            'in_wishlist'         => $this->inCurrentWishlist->id ?? 0,
 
-            'images' => array_map(function ($item) {
+            'images'              => array_map(function ($item) {
                 return image_resize($item, 400, 400);
             }, $images),
         ];

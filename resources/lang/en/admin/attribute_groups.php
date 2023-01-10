@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => 'Attribute group',
+    'index'            => 'Attribute group',
     'create_at_groups' => 'Create attribute group',
 ];

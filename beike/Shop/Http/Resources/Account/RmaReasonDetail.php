@@ -18,7 +18,7 @@ class RmaReasonDetail extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
+            'id'   => $this->id,
             'name' => json_decode($this->name, true)[locale()] ?? '',
         ];
     }

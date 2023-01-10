@@ -11,11 +11,11 @@
 
 namespace Beike\Notifications;
 
+use Beike\Mail\CustomerRegistration;
 use Beike\Models\Customer;
 use Illuminate\Bus\Queueable;
-use Beike\Mail\CustomerRegistration;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
 class RegistrationNotification extends Notification implements ShouldQueue
 {
@@ -76,7 +76,7 @@ class RegistrationNotification extends Notification implements ShouldQueue
     public function toDatabase()
     {
         return [
-            'customer' => $this->customer
+            'customer' => $this->customer,
         ];
     }
 }

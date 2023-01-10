@@ -11,8 +11,6 @@
 
 namespace Beike\Admin\Repositories\Report;
 
-
-use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -38,26 +36,26 @@ class OrderReportRepo
             ->get()
             ->keyBy('date');
 
-        $dates = $totals = $amounts = [];
+        $dates  = $totals = $amounts = [];
         $period = CarbonPeriod::create(today()->subMonth(), today()->subDay())->toArray();
         foreach ($period as $date) {
-            $dateFormat = $date->format('Y-m-d');
-            $orderTotal = $orderTotals[$dateFormat] ?? null;
+            $dateFormat  = $date->format('Y-m-d');
+            $orderTotal  = $orderTotals[$dateFormat]  ?? null;
             $orderAmount = $orderAmounts[$dateFormat] ?? null;
 
-            $dates[] = $dateFormat;
-            $totals[] = $orderTotal ? $orderTotal->total : 0;
+            $dates[]   = $dateFormat;
+            $totals[]  = $orderTotal ? $orderTotal->total : 0;
             $amounts[] = $orderAmount ? $orderAmount->amount : 0;
         }
 
         $data = [
-            'period' => $dates,
-            'totals' => $totals,
+            'period'  => $dates,
+            'totals'  => $totals,
             'amounts' => $amounts,
         ];
+
         return hook_filter('dashboard.order_report_month', $data);
     }
-
 
     /**
      * 获取最近一周每日销售订单数
@@ -76,26 +74,26 @@ class OrderReportRepo
             ->get()
             ->keyBy('date');
 
-        $dates = $totals = $amounts = [];
+        $dates  = $totals = $amounts = [];
         $period = CarbonPeriod::create(today()->subWeek(), today()->subDay())->toArray();
         foreach ($period as $date) {
-            $dateFormat = $date->format('Y-m-d');
-            $orderTotal = $orderTotals[$dateFormat] ?? null;
+            $dateFormat  = $date->format('Y-m-d');
+            $orderTotal  = $orderTotals[$dateFormat]  ?? null;
             $orderAmount = $orderAmounts[$dateFormat] ?? null;
 
-            $dates[] = $dateFormat;
-            $totals[] = $orderTotal ? $orderTotal->total : 0;
+            $dates[]   = $dateFormat;
+            $totals[]  = $orderTotal ? $orderTotal->total : 0;
             $amounts[] = $orderAmount ? $orderAmount->amount : 0;
         }
 
         $data = [
-            'period' => $dates,
-            'totals' => $totals,
+            'period'  => $dates,
+            'totals'  => $totals,
             'amounts' => $amounts,
         ];
+
         return hook_filter('dashboard.order_report_week', $data);
     }
-
 
     /**
      * 获取最近一年每月销售订单数
@@ -108,7 +106,7 @@ class OrderReportRepo
             ->get();
         $orderMonthTotals = [];
         foreach ($orderTotals as $orderTotal) {
-            $key = Carbon::create($orderTotal->year, $orderTotal->month)->format('Y-m');
+            $key                    = Carbon::create($orderTotal->year, $orderTotal->month)->format('Y-m');
             $orderMonthTotals[$key] = $orderTotal['total'];
         }
 
@@ -118,27 +116,28 @@ class OrderReportRepo
             ->get();
         $orderMonthAmounts = [];
         foreach ($orderAmounts as $orderAmount) {
-            $key = Carbon::create($orderAmount->year, $orderAmount->month)->format('Y-m');
+            $key                     = Carbon::create($orderAmount->year, $orderAmount->month)->format('Y-m');
             $orderMonthAmounts[$key] = $orderAmount['amount'];
         }
 
-        $dates = $totals = $amounts = [];
+        $dates  = $totals = $amounts = [];
         $period = CarbonPeriod::create(today()->subYear()->endOfMonth(), '1 month', today()->endOfMonth())->toArray();
         foreach ($period as $date) {
-            $dateFormat = $date->format('Y-m');
-            $orderTotal = $orderMonthTotals[$dateFormat] ?? null;
+            $dateFormat  = $date->format('Y-m');
+            $orderTotal  = $orderMonthTotals[$dateFormat]  ?? null;
             $orderAmount = $orderMonthAmounts[$dateFormat] ?? null;
 
-            $dates[] = $dateFormat;
-            $totals[] = $orderTotal ?: 0;
+            $dates[]   = $dateFormat;
+            $totals[]  = $orderTotal ?: 0;
             $amounts[] = $orderAmount ?: 0;
         }
 
         $data = [
-            'period' => $dates,
-            'totals' => $totals,
+            'period'  => $dates,
+            'totals'  => $totals,
             'amounts' => $amounts,
         ];
+
         return hook_filter('dashboard.order_report_year', $data);
     }
 }

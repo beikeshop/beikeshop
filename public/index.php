@@ -3,10 +3,10 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-$basePath = getcwd() . '/';
-$htaPath = $basePath . '.htaccess';
+$basePath       = getcwd() . '/';
+$htaPath        = $basePath . '.htaccess';
 $htaExamplePath = $basePath . 'htaccess.txt';
-if (!file_exists($htaPath)) {
+if (! file_exists($htaPath)) {
     if (file_exists($htaExamplePath)) {
         copy($htaExamplePath, $htaPath);
     } else {
@@ -14,10 +14,10 @@ if (!file_exists($htaPath)) {
     }
 }
 
-if (!file_exists(__DIR__ . '/../storage/installed')
-    && !(isset($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 10) == '/installer')
+if (! file_exists(__DIR__ . '/../storage/installed')
+    && ! (isset($_SERVER['REQUEST_URI']) && substr($_SERVER['REQUEST_URI'], 0, 10) == '/installer')
     && (stripos($_SERVER['REQUEST_URI'], '_debugbar') !== 1)) {
-    header("Location: /installer");
+    header('Location: /installer');
     exit;
 }
 

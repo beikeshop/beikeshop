@@ -10,22 +10,22 @@
  */
 
 return [
-    'plugins_index' => 'Lista de complementos',
-    'plugins_import' => 'Subir complemento',
-    'plugins_show' => 'Detalles del complemento',
-    'plugins_update' => 'Actualización del complemento',
+    'plugins_index'         => 'Lista de complementos',
+    'plugins_import'        => 'Subir complemento',
+    'plugins_show'          => 'Detalles del complemento',
+    'plugins_update'        => 'Actualización del complemento',
     'plugins_update_status' => 'estado de actualización',
-    'plugins_install' => 'Instalar',
-    'plugins_uninstall' => 'desinstalar',
+    'plugins_install'       => 'Instalar',
+    'plugins_uninstall'     => 'desinstalar',
 
-    'plugin_list' => 'Lista de complementos',
-    'plugin_code' => 'código de complemento',
-    'plugin_type' => 'Tipo de complemento',
-    'plugin_description' => 'Descripción del complemento',
-    'plugin_upload' => 'Complemento de carga (solo se admiten archivos zip)',
+    'plugin_list'           => 'Lista de complementos',
+    'plugin_code'           => 'código de complemento',
+    'plugin_type'           => 'Tipo de complemento',
+    'plugin_description'    => 'Descripción del complemento',
+    'plugin_upload'         => 'Complemento de carga (solo se admiten archivos zip)',
 
-    'shipping' => 'Método de entrega',
-    'payment' => 'método de pago',
-    'total' => 'Cálculo de pedidos',
-    'view' => 'modificación de página',
+    'shipping'              => 'Método de entrega',
+    'payment'               => 'método de pago',
+    'total'                 => 'Cálculo de pedidos',
+    'view'                  => 'modificación de página',
 ];

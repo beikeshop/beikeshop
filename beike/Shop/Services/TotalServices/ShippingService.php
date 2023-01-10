@@ -12,8 +12,8 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
-use Illuminate\Support\Str;
 use Beike\Shop\Services\CheckoutService;
+use Illuminate\Support\Str;
 
 class ShippingService
 {
@@ -24,33 +24,34 @@ class ShippingService
      */
     public static function getTotal(CheckoutService $checkout): ?array
     {
-        $totalService = $checkout->totalService;
+        $totalService   = $checkout->totalService;
         $shippingMethod = $totalService->shippingMethod;
         if (empty($shippingMethod)) {
             return null;
         }
 
         $shippingPluginCode = self::parseShippingPluginCode($shippingMethod);
-        $pluginCode = Str::studly($shippingPluginCode);
+        $pluginCode         = Str::studly($shippingPluginCode);
 
         $plugin = app('plugin')->getPlugin($shippingPluginCode);
-        if (empty($plugin) || !$plugin->getInstalled() || !$plugin->getEnabled()) {
-            $cart = $checkout->cart;
+        if (empty($plugin) || ! $plugin->getInstalled() || ! $plugin->getEnabled()) {
+            $cart                       = $checkout->cart;
             $cart->shipping_method_code = '';
             $cart->saveOrFail();
+
             return [];
         }
 
         $className = "Plugin\\{$pluginCode}\\Bootstrap";
-        if (!method_exists($className, 'getShippingFee')) {
+        if (! method_exists($className, 'getShippingFee')) {
             throw new \Exception("请在插件 {$className} 实现方法: public function getShippingFee(CheckoutService \$checkout)");
         }
-        $amount = (float)(new $className)->getShippingFee($checkout);
+        $amount    = (float) (new $className)->getShippingFee($checkout);
         $totalData = [
-            'code' => 'shipping',
-            'title' => trans('shop/carts.shipping_fee'),
-            'amount' => $amount,
-            'amount_format' => currency_format($amount)
+            'code'          => 'shipping',
+            'title'         => trans('shop/carts.shipping_fee'),
+            'amount'        => $amount,
+            'amount_format' => currency_format($amount),
         ];
 
         $totalService->amount += $totalData['amount'];
@@ -58,7 +59,6 @@ class ShippingService
 
         return $totalData;
     }
-
 
     /**
      * 通过配送方式获取插件编码
@@ -69,6 +69,7 @@ class ShippingService
     public static function parseShippingPluginCode($shippingMethod): string
     {
         $methodArray = explode('.', $shippingMethod);
+
         return $methodArray[0];
     }
 }

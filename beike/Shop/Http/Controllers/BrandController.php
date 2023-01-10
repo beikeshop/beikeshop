@@ -2,16 +2,16 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Beike\Repositories\BrandRepo;
 use Beike\Shop\Http\Resources\ProductSimple;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
     public function index()
     {
         $brands = BrandRepo::listGroupByFirst();
-        $data = [
+        $data   = [
             'brands' => $brands,
         ];
 
@@ -20,18 +20,18 @@ class BrandController extends Controller
 
     public function show(int $id)
     {
-        $brand = BrandRepo::find($id);
+        $brand    = BrandRepo::find($id);
         $products = $brand->products()
             ->with([
                 'master_sku',
                 'description',
-                'inCurrentWishlist'
+                'inCurrentWishlist',
             ])
             ->paginate(perPage());
 
         $data = [
-            'brand' => $brand,
-            'products' => $products,
+            'brand'           => $brand,
+            'products'        => $products,
             'products_format' => ProductSimple::collection($products)->jsonSerialize(),
         ];
 

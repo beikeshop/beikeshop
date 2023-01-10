@@ -33,27 +33,28 @@ class RmaRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'order_id' => 'required|exists:orders,id',
+            'order_id'         => 'required|exists:orders,id',
             'order_product_id' => 'required|exists:order_products,id',
-            'customer_id' => 'required|exists:customers,id',
-            'quantity' => 'required',
-            'opened' => 'required',
-            'rma_reason_id' => 'required|exists:rma_reasons,id',
-            'type' => 'required',
+            'customer_id'      => 'required|exists:customers,id',
+            'quantity'         => 'required',
+            'opened'           => 'required',
+            'rma_reason_id'    => 'required|exists:rma_reasons,id',
+            'type'             => 'required',
         ];
+
         return $rules;
     }
 
     public function attributes()
     {
         return [
-            'order_id' => trans('rma.order_id'),
+            'order_id'         => trans('rma.order_id'),
             'order_product_id' => trans('rma.order_product_id'),
-            'customer_id' => trans('rma.customer_id'),
-            'quantity' => trans('rma.quantity'),
-            'opened' => trans('rma.opened'),
-            'rma_reason_id' => trans('rma.rma_reason_id'),
-            'type' => trans('rma.type'),
+            'customer_id'      => trans('rma.customer_id'),
+            'quantity'         => trans('rma.quantity'),
+            'opened'           => trans('rma.opened'),
+            'rma_reason_id'    => trans('rma.rma_reason_id'),
+            'type'             => trans('rma.type'),
         ];
     }
 }

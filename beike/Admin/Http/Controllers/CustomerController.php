@@ -29,10 +29,10 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_id']));
 
         $data = [
-            'customers' => $customers,
+            'customers'        => $customers,
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
-            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'type' => 'customer',
+            'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type'             => 'customer',
         ];
 
         if ($request->expectsJson()) {
@@ -47,10 +47,10 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list(array_merge($request->only(['name', 'email', 'status', 'from', 'customer_group_id']), ['only_trashed' => true]));
 
         $data = [
-            'customers' => $customers,
+            'customers'        => $customers,
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
-            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'type' => 'trashed',
+            'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type'             => 'trashed',
         ];
 
         if ($request->expectsJson()) {
@@ -62,7 +62,7 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        $data = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
+        $data     = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
         $customer = CustomerService::create($data);
 
         return json_success(trans('common.success'), new CustomerResource($customer));
@@ -71,14 +71,14 @@ class CustomerController extends Controller
     public function edit(Request $request, int $customerId)
     {
         $addresses = AddressRepo::listByCustomer($customerId);
-        $customer = CustomerRepo::find($customerId);
-        $data = [
-            'customer' => $customer,
+        $customer  = CustomerRepo::find($customerId);
+        $data      = [
+            'customer'        => $customer,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'addresses' => AddressResource::collection($addresses)->jsonSerialize(),
-            'countries' => CountryRepo::all(),
-            'country_id' => system_setting('base.country_id'),
-            '_redirect' => $this->getRedirect(),
+            'addresses'       => AddressResource::collection($addresses)->jsonSerialize(),
+            'countries'       => CountryRepo::all(),
+            'country_id'      => system_setting('base.country_id'),
+            '_redirect'       => $this->getRedirect(),
         ];
 
         return view('admin::pages.customers.form', $data);

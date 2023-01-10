@@ -2,10 +2,10 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Beike\Repositories\FooterRepo;
 use Beike\Repositories\SettingRepo;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DesignFooterController extends Controller
 {
@@ -20,6 +20,7 @@ class DesignFooterController extends Controller
         $data = [
             'design_settings' => system_setting('base.footer_setting'),
         ];
+
         return view('admin::pages.design.builder.footer', $data);
     }
 
@@ -32,17 +33,16 @@ class DesignFooterController extends Controller
      */
     public function preview(Request $request): View
     {
-        $content = json_decode($request->getContent(), true);
-        $viewPath = "layout.footer";
+        $content  = json_decode($request->getContent(), true);
+        $viewPath = 'layout.footer';
 
         $viewData = [
             'footer_content' => FooterRepo::handleFooterData($content),
-            'design' => (bool)$request->get('design')
+            'design'         => (bool) $request->get('design'),
         ];
 
         return view($viewPath, $viewData);
     }
-
 
     /**
      * 更新所有数据
@@ -55,7 +55,8 @@ class DesignFooterController extends Controller
     {
         $content = json_decode($request->getContent(), true);
 
-        SettingRepo::storeValue("footer_setting", $content);
+        SettingRepo::storeValue('footer_setting', $content);
+
         return json_success(trans('common.updated_success'));
     }
 }

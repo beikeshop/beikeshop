@@ -10,16 +10,16 @@
  */
 
 return [
-    'index' => 'Edit Address',
-    'name' => 'Name',
-    'phone' => 'Phone',
+    'index'      => 'Edit Address',
+    'name'       => 'Name',
+    'phone'      => 'Phone',
     'country_id' => 'Country ID',
-    'zone' => 'Zone',
-    'zone_id' => 'Zone ID',
-    'address_1' => 'Address 1',
-    'address_2' => 'Address 2',
-    'address' => 'Address',
+    'zone'       => 'Zone',
+    'zone_id'    => 'Zone ID',
+    'address_1'  => 'Address 1',
+    'address_2'  => 'Address 2',
+    'address'    => 'Address',
     'enter_city' => 'Enter city',
-    'post_code' => 'Zip Code',
-    'default' => 'Default',
+    'post_code'  => 'Zip Code',
+    'default'    => 'Default',
 ];

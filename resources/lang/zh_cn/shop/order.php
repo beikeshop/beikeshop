@@ -11,8 +11,8 @@
  */
 
 return [
-    'invalid_order' => '无效的订单',
-    'confirm_order' => '用户确认收货',
-    'cancel_order' => '用户取消订单',
+    'invalid_order'      => '无效的订单',
+    'confirm_order'      => '用户确认收货',
+    'cancel_order'       => '用户取消订单',
     'order_already_paid' => '订单已支付',
 ];

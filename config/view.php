@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'paths' => [
+    'paths'    => [
         base_path('themes/default'),
         resource_path('views'),
     ],

@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => '品牌',
+    'index'         => '品牌',
 
-    'brands_index' => '品牌列表',
+    'brands_index'  => '品牌列表',
     'brands_create' => '創建品牌',
-    'brands_show' => '品牌詳情',
+    'brands_show'   => '品牌詳情',
     'brands_update' => '更新品牌',
     'brands_delete' => '刪除品牌',
-    'error_upload' => '請上傳圖標'
+    'error_upload'  => '請上傳圖標',
 ];

@@ -10,12 +10,12 @@
  */
 
 return [
-     'index' => 'marque',
+    'index'         => 'marque',
 
-     'brands_index' => 'liste de marques',
-     'brands_create' => 'Créer une marque',
-     'brands_show' => 'détails de la marque',
-     'brands_update' => 'mettre à jour la marque',
-     'brands_delete' => 'supprimer la marque',
-     'error_upload' => 'Veuillez télécharger l\'icône'
+    'brands_index'  => 'liste de marques',
+    'brands_create' => 'Créer une marque',
+    'brands_show'   => 'détails de la marque',
+    'brands_update' => 'mettre à jour la marque',
+    'brands_delete' => 'supprimer la marque',
+    'error_upload'  => 'Veuillez télécharger l\'icône',
 ];

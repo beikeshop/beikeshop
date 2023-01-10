@@ -10,8 +10,8 @@
  */
 
 return [
-    'rma_reasons_index' => 'lista dei motivi',
+    'rma_reasons_index'  => 'lista dei motivi',
     'rma_reasons_create' => 'motivo della creazione',
     'rma_reasons_update' => 'motivo dell\'aggiornamento',
-    'rma_reasons_delete' => 'elimina motivo'
+    'rma_reasons_delete' => 'elimina motivo',
 ];

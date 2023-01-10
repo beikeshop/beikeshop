@@ -17,12 +17,12 @@ class CustomerResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'status' => $this->status ? trans('common.enable') : trans('common.disable'),
-            'avatar' => image_resize($this->avatar),
-            'from' => $this->from,
+            'id'                  => $this->id,
+            'name'                => $this->name,
+            'email'               => $this->email,
+            'status'              => $this->status ? trans('common.enable') : trans('common.disable'),
+            'avatar'              => image_resize($this->avatar),
+            'from'                => $this->from,
             'customer_group_name' => $this->customer_group_name,
         ];
     }

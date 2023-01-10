@@ -10,14 +10,14 @@
  */
 
 return [
-    'index' => '属性',
-    'attribute_info' => '属性情報',
-    'create_at' => '属性を作成',
-    'attribute_value' => '属性値',
-    'set_attribute' => '構成属性',
-    'add_attribute' => '属性値を追加',
+    'index'            => '属性',
+    'attribute_info'   => '属性情報',
+    'create_at'        => '属性を作成',
+    'attribute_value'  => '属性値',
+    'set_attribute'    => '構成属性',
+    'add_attribute'    => '属性値を追加',
     'before_attribute' => '最初に左の属性を選択してください',
-    'btn_at' => '今すぐ行く',
-    'btn_later' => '後で',
-    'to_info_values' => '詳細ページに移動して属性値を編集してください',
+    'btn_at'           => '今すぐ行く',
+    'btn_later'        => '後で',
+    'to_info_values'   => '詳細ページに移動して属性値を編集してください',
 ];

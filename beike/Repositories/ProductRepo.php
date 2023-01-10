@@ -12,11 +12,8 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Product;
-use Beike\Models\ProductCategory;
-use Beike\Models\ProductDescription;
-use Beike\Models\ProductSku;
-use Illuminate\Database\Eloquent\Builder;
 use Beike\Shop\Http\Resources\ProductSimple;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -24,7 +21,6 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class ProductRepo
 {
     private static $allProductsWithName;
-
 
     /**
      * 获取商品详情
@@ -35,9 +31,9 @@ class ProductRepo
             $product = Product::query()->findOrFail($product);
         }
         $product->load('description', 'skus', 'master_sku', 'brand', 'relations');
+
         return $product;
     }
-
 
     /**
      * 通过单个或多个商品分类获取商品列表
@@ -47,11 +43,11 @@ class ProductRepo
      */
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
-        $builder = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
+        $builder  = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
         $products = $builder->with('inCurrentWishlist')->paginate(perPage());
+
         return ProductSimple::collection($products);
     }
-
 
     /**
      * 通过商品ID获取商品列表
@@ -60,14 +56,14 @@ class ProductRepo
      */
     public static function getProductsByIds($productIds): AnonymousResourceCollection
     {
-        if (!$productIds) {
+        if (! $productIds) {
             return ProductSimple::collection(new Collection());
         }
-        $builder = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
+        $builder  = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
         $products = $builder->with('inCurrentWishlist')->get();
+
         return ProductSimple::collection($products);
     }
-
 
     /**
      * 获取商品筛选对象
@@ -126,7 +122,7 @@ class ProductRepo
         }
 
         if (isset($data['active'])) {
-            $builder->where('active', (int)$data['active']);
+            $builder->where('active', (int) $data['active']);
         }
 
         // 回收站
@@ -134,13 +130,12 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
-        $sort = $data['sort'] ?? 'products.updated_at';
+        $sort  = $data['sort']  ?? 'products.updated_at';
         $order = $data['order'] ?? 'desc';
         $builder->orderBy($sort, $order);
 
         return $builder;
     }
-
 
     public static function list($data = [])
     {
@@ -156,12 +151,13 @@ class ProductRepo
         $results = [];
         foreach ($products as $product) {
             $results[] = [
-                'id' => $product->id,
-                'name' => $product->description->name,
+                'id'     => $product->id,
+                'name'   => $product->description->name,
                 'status' => $product->active,
-                'image' => $product->image,
+                'image'  => $product->image,
             ];
         }
+
         return $results;
     }
 
@@ -177,9 +173,9 @@ class ProductRepo
         if ($product) {
             return $product->description->name;
         }
+
         return '';
     }
-
 
     /**
      * 通过商品ID获取商品名称
@@ -190,7 +186,6 @@ class ProductRepo
     {
         return self::getNameById($id);
     }
-
 
     /**
      * 获取所有商品ID和名称列表
@@ -203,17 +198,17 @@ class ProductRepo
             return self::$allProductsWithName;
         }
 
-        $items = [];
+        $items    = [];
         $products = self::getBuilder()->select('id')->get();
         foreach ($products as $product) {
             $items[$product->id] = [
-                'id' => $product->id,
+                'id'   => $product->id,
                 'name' => $product->description->name ?? '',
             ];
         }
+
         return self::$allProductsWithName = $items;
     }
-
 
     /**
      * @param $productIds
@@ -222,14 +217,14 @@ class ProductRepo
     public static function getNames($productIds): array
     {
         $products = self::getListByProductIds($productIds);
+
         return $products->map(function ($product) {
             return [
-                'id' => $product->id,
-                'name' => $product->description->name ?? ''
+                'id'   => $product->id,
+                'name' => $product->description->name ?? '',
             ];
         })->toArray();
     }
-
 
     /**
      * 通过商品ID获取商品列表
@@ -244,6 +239,7 @@ class ProductRepo
             ->with(['description'])
             ->whereIn('id', $productIds)
             ->get();
+
         return $products;
     }
 

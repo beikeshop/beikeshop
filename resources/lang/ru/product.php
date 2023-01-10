@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => 'имя',
-    'sku' => 'SKU',
-    'price' => 'цена',
-    'origin_price' => 'первоначальная цена',
-    'cost_price' => 'стоимость',
-    'brand' => 'марка',
-    'category' => 'Классификация',
-    'model' => 'модель',
-    'quantity' => 'в наличии',
-    'image' => 'картина',
+    'name'              => 'имя',
+    'sku'               => 'SKU',
+    'price'             => 'цена',
+    'origin_price'      => 'первоначальная цена',
+    'cost_price'        => 'стоимость',
+    'brand'             => 'марка',
+    'category'          => 'Классификация',
+    'model'             => 'модель',
+    'quantity'          => 'в наличии',
+    'image'             => 'картина',
 
-    'active' => 'на полке',
-    'inactive' => 'снять',
+    'active'            => 'на полке',
+    'inactive'          => 'снять',
     'has_been_inactive' => 'Этот пункт был прекращен',
 ];

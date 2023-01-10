@@ -10,10 +10,10 @@
  */
 
 return [
-    'select_all' => 'すべて選択',
-    'unselect_all' => 'unselect',
-    'role_name' => '役割名',
+    'select_all'      => 'すべて選択',
+    'unselect_all'    => 'unselect',
+    'role_name'       => '役割名',
     'role_management' => '役割管理',
-    'permission' => '許可',
-    'error_roles' => '少なくとも 1 つのロールを選択してください',
+    'permission'      => '許可',
+    'error_roles'     => '少なくとも 1 つのロールを選択してください',
 ];

@@ -11,8 +11,8 @@
  */
 
 return [
-    'invalid_order' => 'pedido inválido',
-    'confirm_order' => 'El usuario confirma la recepción',
-    'cancel_order' => 'El usuario cancela el pedido',
+    'invalid_order'      => 'pedido inválido',
+    'confirm_order'      => 'El usuario confirma la recepción',
+    'cancel_order'       => 'El usuario cancela el pedido',
     'order_already_paid' => 'orden pagada',
 ];

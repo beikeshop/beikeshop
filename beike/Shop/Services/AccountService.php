@@ -11,13 +11,10 @@
 
 namespace Beike\Shop\Services;
 
-
-use Beike\Libraries\Notification;
 use Beike\Models\Customer;
 use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\VerifyCodeRepo;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class AccountService
@@ -36,7 +33,7 @@ class AccountService
         $data['locale'] = locale();
 
         if ($data['email'] ?? '') {
-            $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));;
+            $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));
         }
         $data['avatar'] = $data['avatar'] ?? '';
 
@@ -45,6 +42,7 @@ class AccountService
             $customer->notifyRegistration();
             hook_action('after_register', $customer);
         }
+
         return $customer;
     }
 
@@ -74,14 +72,16 @@ class AccountService
      * @param $code
      * @param $account
      * @param $password
-     * @param $type $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
+     * @param string $type $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
      * @return void
+     * @throws \Exception
      */
-    public static function verifyAndChangePassword($code, $account, $password, $type = 'email')
+    public static function verifyAndChangePassword($code, $account, $password, string $type = 'email')
     {
         $verifyCode = VerifyCodeRepo::findByAccount($account);
         if ($verifyCode->created_at->addMinutes(10) < Carbon::now()) {
             $verifyCode->delete();
+
             throw new \Exception(trans('shop/account.verify_code_expired'));
         }
 
@@ -95,9 +95,9 @@ class AccountService
                 throw new \Exception(trans('shop/account.account_not_exist'));
             }
         } elseif ($type == 'telephone') {
-            throw new \Exception("暂不支持手机号码找回密码");
+            throw new \Exception('暂不支持手机号码找回密码');
         } else {
-            throw new \Exception("找回密码类型错误");
+            throw new \Exception('找回密码类型错误');
         }
         CustomerRepo::update($customer, ['password' => $password]);
         $verifyCode->delete();

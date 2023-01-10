@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'categoria fiscale',
-    'rule' => 'regola',
-    'based_on' => 'basato su',
-    'priority' => 'priorita',
-    'tax_classes_index' => 'lista delle classi fiscali',
+    'index'              => 'categoria fiscale',
+    'rule'               => 'regola',
+    'based_on'           => 'basato su',
+    'priority'           => 'priorita',
+    'tax_classes_index'  => 'lista delle classi fiscali',
     'tax_classes_create' => 'Crea classi fiscali',
-    'tax_classes_show' => 'dettagli classe fiscale',
+    'tax_classes_show'   => 'dettagli classe fiscale',
     'tax_classes_update' => 'Aggiorna classi fiscali',
     'tax_classes_delete' => 'elimina classe fiscale',
 ];

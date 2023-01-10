@@ -10,6 +10,6 @@
  */
 
 return [
-    'add_wishlist_success' => 'お気に入りに追加',
+    'add_wishlist_success'    => 'お気に入りに追加',
     'remove_wishlist_success' => 'お気に入りを削除しました',
 ];

@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'Clasificación',
-    'edit_category' => 'Editar categoria',
-    'upper_category' => 'subtítulos',
+    'index'             => 'Clasificación',
+    'edit_category'     => 'Editar categoria',
+    'upper_category'    => 'subtítulos',
 
-    'categories_index' => 'Lista de categoría',
+    'categories_index'  => 'Lista de categoría',
     'categories_create' => 'Crear una taxonomía',
-    'categories_show' => 'Detalles de la categoría',
+    'categories_show'   => 'Detalles de la categoría',
     'categories_update' => 'Actualizar clasificación',
     'categories_delete' => 'eliminar categoría',
 ];

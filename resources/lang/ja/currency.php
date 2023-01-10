@@ -10,13 +10,13 @@
  */
 
 return [
-    'decimal_point' => '.',
+    'decimal_point'  => '.',
     'thousand_point' => ',',
-    'name' => '名前',
-    'code' => 'コーディング',
-    'icon' => 'アイコン',
-    'symbol_left' => '左サイン',
-    'symbol_right' => '右記号',
-    'value' => '為替レート値',
-    'decimal_place' => '小数位',
+    'name'           => '名前',
+    'code'           => 'コーディング',
+    'icon'           => 'アイコン',
+    'symbol_left'    => '左サイン',
+    'symbol_right'   => '右記号',
+    'value'          => '為替レート値',
+    'decimal_place'  => '小数位',
 ];

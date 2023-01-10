@@ -10,10 +10,10 @@
  */
 
 return [
-    'name' => 'Name',
-    'email' => 'Email',
-    'from' => 'From',
-    'customer_group' => 'Group',
-    'password' => 'Password',
+    'name'              => 'Name',
+    'email'             => 'Email',
+    'from'              => 'From',
+    'customer_group'    => 'Group',
+    'password'          => 'Password',
     'customer_group_id' => 'Customer Group',
 ];

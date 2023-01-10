@@ -18,24 +18,24 @@ class SkuDetail extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->id,
-            'variants' => $this->variants ?: [],
-            'position' => $this->position,
-            'images' => array_map(function ($image) {
+            'id'                  => $this->id,
+            'variants'            => $this->variants ?: [],
+            'position'            => $this->position,
+            'images'              => array_map(function ($image) {
                 return [
                     'preview' => image_resize($image, 500, 500),
-                    'popup' => image_resize($image, 800, 800),
-                    'thumb' => image_resize($image, 150, 150)
+                    'popup'   => image_resize($image, 800, 800),
+                    'thumb'   => image_resize($image, 150, 150),
                 ];
             }, $this->images ?? []),
-            'model' => $this->model,
-            'sku' => $this->sku,
-            'price' => $this->price,
-            'price_format' => currency_format($this->price),
-            'origin_price' => $this->origin_price,
+            'model'               => $this->model,
+            'sku'                 => $this->sku,
+            'price'               => $this->price,
+            'price_format'        => currency_format($this->price),
+            'origin_price'        => $this->origin_price,
             'origin_price_format' => currency_format($this->origin_price),
-            'quantity' => $this->quantity,
-            'is_default' => $this->is_default,
+            'quantity'            => $this->quantity,
+            'is_default'          => $this->is_default,
         ];
     }
 }

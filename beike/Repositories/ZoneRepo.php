@@ -22,11 +22,11 @@ class ZoneRepo
     private static function handleParams($data)
     {
         return [
-            'country_id' => $data['country_id'] ?? 0,
-            'name' => $data['name'] ?? '',
-            'code' => $data['code'] ?? '',
-            'sort_order' => (int)$data['sort_order'] ?? 0,
-            'status' => (bool)$data['status'] ?? 0,
+            'country_id' => $data['country_id']       ?? 0,
+            'name'       => $data['name']             ?? '',
+            'code'       => $data['code']             ?? '',
+            'sort_order' => (int) $data['sort_order'] ?? 0,
+            'status'     => (bool) $data['status']    ?? 0,
         ];
     }
 
@@ -38,6 +38,7 @@ class ZoneRepo
     public static function create($data)
     {
         $data = self::handleParams($data);
+
         return Zone::query()->create($data);
     }
 
@@ -50,11 +51,12 @@ class ZoneRepo
     public static function update($id, $data)
     {
         $zone = Zone::query()->find($id);
-        if (!$zone) {
+        if (! $zone) {
             throw new \Exception("省份/地区id {$id} 不存在");
         }
         $data = self::handleParams($data);
         $zone->update($data);
+
         return $zone;
     }
 
@@ -115,7 +117,6 @@ class ZoneRepo
         }
     }
 
-
     /**
      * 通过国家ID获取省份拉下选项
      *
@@ -129,9 +130,10 @@ class ZoneRepo
         foreach ($zones as $zone) {
             $items[] = [
                 'value' => $zone->id,
-                'label' => $zone->name
+                'label' => $zone->name,
             ];
         }
+
         return $items;
     }
 }

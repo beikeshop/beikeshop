@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => 'nombre',
-    'sku' => 'SKU',
-    'price' => 'precio',
-    'origin_price' => 'precio original',
-    'cost_price' => 'precio de coste',
-    'brand' => 'marca',
-    'category' => 'Clasificación',
-    'model' => 'modelo',
-    'quantity' => 'en stock',
-    'image' => 'imagen',
+    'name'              => 'nombre',
+    'sku'               => 'SKU',
+    'price'             => 'precio',
+    'origin_price'      => 'precio original',
+    'cost_price'        => 'precio de coste',
+    'brand'             => 'marca',
+    'category'          => 'Clasificación',
+    'model'             => 'modelo',
+    'quantity'          => 'en stock',
+    'image'             => 'imagen',
 
-    'active' => 'en la repisa',
-    'inactive' => 'Derribar',
+    'active'            => 'en la repisa',
+    'inactive'          => 'Derribar',
     'has_been_inactive' => 'Este artículo ha sido descontinuado',
 ];

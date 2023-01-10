@@ -10,7 +10,7 @@
  */
 
 return [
-    'sku_id' => 'SKU ID',
-    'quantity' => '購買數量',
+    'sku_id'    => 'SKU ID',
+    'quantity'  => '購買數量',
     'stock_out' => '庫存不足',
 ];

@@ -10,15 +10,15 @@
  */
 
 return [
-     'customer_view' => 'visites des utilisateurs',
-     'order_total' => 'montant de la commande',
-     'customer_new' => 'Ajouter un utilisateur',
-     'order_amount' => 'Ventes',
-     'yesterday' => 'hier',
-     'day_before' => 'un jour avant',
+    'customer_view' => 'visites des utilisateurs',
+    'order_total'   => 'montant de la commande',
+    'customer_new'  => 'Ajouter un utilisateur',
+    'order_amount'  => 'Ventes',
+    'yesterday'     => 'hier',
+    'day_before'    => 'un jour avant',
 
-     'order_report' => 'statistiques de commande',
-     'latest_month' => 'mois',
-     'latest_week' => 'semaine',
-     'latest_year' => 'un an',
+    'order_report'  => 'statistiques de commande',
+    'latest_month'  => 'mois',
+    'latest_week'   => 'semaine',
+    'latest_year'   => 'un an',
 ];

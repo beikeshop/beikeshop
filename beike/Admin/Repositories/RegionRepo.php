@@ -27,9 +27,11 @@ class RegionRepo
             DB::beginTransaction();
             $region = self::pushRegion($data);
             DB::commit();
+
             return $region;
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
     }
@@ -43,7 +45,7 @@ class RegionRepo
             $region = new Region();
         }
         $region->fill([
-            'name' => $data['name'],
+            'name'        => $data['name'],
             'description' => $data['description'],
         ]);
         $region->saveOrFail();
@@ -52,8 +54,8 @@ class RegionRepo
         foreach ($data['region_zones'] as $regionZone) {
             if ($regionZone['country_id']) {
                 $newRegionZones[] = [
-                    'country_id' => (int)$regionZone['country_id'],
-                    'zone_id' => (int)$regionZone['zone_id'],
+                    'country_id' => (int) $regionZone['country_id'],
+                    'zone_id'    => (int) $regionZone['zone_id'],
                 ];
             }
         }
@@ -62,6 +64,7 @@ class RegionRepo
             $region->regionZones()->createMany($newRegionZones);
         }
         $region->load(['regionZones']);
+
         return $region;
     }
 

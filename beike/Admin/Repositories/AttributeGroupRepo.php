@@ -30,7 +30,7 @@ class AttributeGroupRepo
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attributeGroup->descriptions()->createMany($descriptions);
@@ -50,7 +50,7 @@ class AttributeGroupRepo
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attributeGroup->descriptions()->delete();

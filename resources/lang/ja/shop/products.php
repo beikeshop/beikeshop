@@ -10,12 +10,12 @@
  */
 
 return [
-    'search' => '探す',
+    'search'           => '探す',
     'add_to_favorites' => 'お気に入りに追加',
-    'add_to_cart' => 'ショッピングカートに入れる',
-    'buy_now' => '今買う',
-    'product_details' => '製品詳細',
-    'in_stock' => '在庫あり',
-    'out_stock' => '在庫切れ',
-    'model' => 'モデル',
+    'add_to_cart'      => 'ショッピングカートに入れる',
+    'buy_now'          => '今買う',
+    'product_details'  => '製品詳細',
+    'in_stock'         => '在庫あり',
+    'out_stock'        => '在庫切れ',
+    'model'            => 'モデル',
 ];

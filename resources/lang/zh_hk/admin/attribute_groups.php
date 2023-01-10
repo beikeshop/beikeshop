@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => '屬性組',
+    'index'            => '屬性組',
     'create_at_groups' => '創建屬性組',
 ];

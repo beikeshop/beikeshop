@@ -9,13 +9,13 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-     'zone_name' => 'Provinzname',
-     'country_of_origin' => 'Herkunftsland',
+    'zone_name'         => 'Provinzname',
+    'country_of_origin' => 'Herkunftsland',
 
-     'zones_index' => 'Provinzliste',
-     'zones_create' => 'Provinz erstellen',
-     'zones_update' => 'Provinz aktualisieren',
-     'zones_delete' => 'Provinz löschen',
+    'zones_index'       => 'Provinzliste',
+    'zones_create'      => 'Provinz erstellen',
+    'zones_update'      => 'Provinz aktualisieren',
+    'zones_delete'      => 'Provinz löschen',
 
-     'error_country' => 'Bitte wählen Sie ein Land aus',
+    'error_country'     => 'Bitte wählen Sie ein Land aus',
 ];

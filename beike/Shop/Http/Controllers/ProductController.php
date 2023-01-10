@@ -3,10 +3,10 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Product;
-use Illuminate\Http\Request;
 use Beike\Repositories\ProductRepo;
-use Beike\Shop\Http\Resources\ProductSimple;
 use Beike\Shop\Http\Resources\ProductDetail;
+use Beike\Shop\Http\Resources\ProductSimple;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -19,15 +19,15 @@ class ProductController extends Controller
     public function show(Request $request, Product $product)
     {
         $relationIds = $product->relations->pluck('id')->toArray();
-        $product = ProductRepo::getProductDetail($product);
-        $data = [
-            'product' => (new ProductDetail($product))->jsonSerialize(),
+        $product     = ProductRepo::getProductDetail($product);
+        $data        = [
+            'product'   => (new ProductDetail($product))->jsonSerialize(),
             'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
         ];
         $data = hook_filter('product.show', $data);
+
         return view('product', $data);
     }
-
 
     /**
      * 通过关键字搜索商品
@@ -37,7 +37,7 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
-        $keyword = $request->get('keyword');
+        $keyword  = $request->get('keyword');
         $products = ProductRepo::getBuilder(['keyword' => $keyword])
             ->where('active', true)
             ->paginate(perPage())
@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         $data = [
             'products' => $products,
-            'items' => ProductSimple::collection($products)->jsonSerialize(),
+            'items'    => ProductSimple::collection($products)->jsonSerialize(),
         ];
 
         return view('search', $data);

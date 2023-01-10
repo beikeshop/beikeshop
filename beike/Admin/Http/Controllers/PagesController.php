@@ -12,11 +12,11 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\PageRequest;
-use Beike\Models\Page;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Beike\Admin\Repositories\PageRepo;
+use Beike\Models\Page;
 use Beike\Shop\Http\Resources\PageDetail;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class PagesController
 {
@@ -28,13 +28,13 @@ class PagesController
     public function index()
     {
         $pageList = PageRepo::getList();
-        $data = [
-            'pages' => $pageList,
-            'pages_format' => PageDetail::collection($pageList)->jsonSerialize()
+        $data     = [
+            'pages'        => $pageList,
+            'pages_format' => PageDetail::collection($pageList)->jsonSerialize(),
         ];
+
         return view('admin::pages.pages.index', $data);
     }
-
 
     /**
      * 创建页面
@@ -45,7 +45,6 @@ class PagesController
     {
         return view('admin::pages.pages.form', ['page' => new Page()]);
     }
-
 
     /**
      * 保存新建
@@ -58,61 +57,61 @@ class PagesController
         try {
             $requestData = $request->all();
             PageRepo::createOrUpdate($requestData);
+
             return redirect(admin_route('pages.index'));
         } catch (\Exception $e) {
             return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-
     /**
      * @param Request $request
-     * @param int $pageId
+     * @param int     $pageId
      * @return mixed
      */
     public function edit(Request $request, int $pageId)
     {
         $data = [
-            'page' => PageRepo::findByPageId($pageId),
+            'page'         => PageRepo::findByPageId($pageId),
             'descriptions' => PageRepo::getDescriptionsByLocale($pageId),
         ];
+
         return view('admin::pages.pages.form', $data);
     }
-
 
     /**
      * 保存更新
      *
      * @param PageRequest $request
-     * @param int $pageId
+     * @param int         $pageId
      * @return RedirectResponse
      */
     public function update(PageRequest $request, int $pageId)
     {
         try {
-            $requestData = $request->all();
+            $requestData       = $request->all();
             $requestData['id'] = $pageId;
             PageRepo::createOrUpdate($requestData);
+
             return redirect()->to(admin_route('pages.index'));
         } catch (\Exception $e) {
             return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-
     /**
      * 删除单页
      *
      * @param Request $request
-     * @param int $pageId
+     * @param int     $pageId
      * @return array
      */
     public function destroy(Request $request, int $pageId): array
     {
         PageRepo::deleteById($pageId);
+
         return json_success(trans('common.deleted_success'));
     }
-
 
     /**
      * 搜索页面标题自动完成
@@ -122,9 +121,9 @@ class PagesController
     public function autocomplete(Request $request): array
     {
         $products = PageRepo::autocomplete($request->get('name') ?? '');
+
         return json_success(trans('common.get_success'), $products);
     }
-
 
     /**
      * 获取单页名称
@@ -134,6 +133,7 @@ class PagesController
     public function name(Page $page): array
     {
         $name = $page->description->title ?? '';
+
         return json_success(trans('common.get_success'), $name);
     }
 }

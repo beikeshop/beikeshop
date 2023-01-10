@@ -11,14 +11,14 @@
 
 return [
     'customer_view' => 'Customer View',
-    'order_total' => 'Order Total',
-    'customer_new' => 'Customer New',
-    'order_amount' => 'Order Amount',
-    'yesterday' => 'Yesterday',
-    'day_before' => 'Last day',
+    'order_total'   => 'Order Total',
+    'customer_new'  => 'Customer New',
+    'order_amount'  => 'Order Amount',
+    'yesterday'     => 'Yesterday',
+    'day_before'    => 'Last day',
 
-    'order_report' => 'Order Report',
-    'latest_month' => 'Latest Month',
-    'latest_week' => 'Latest Week',
-    'latest_year' => 'Latest Year',
+    'order_report'  => 'Order Report',
+    'latest_month'  => 'Latest Month',
+    'latest_week'   => 'Latest Week',
+    'latest_year'   => 'Latest Year',
 ];

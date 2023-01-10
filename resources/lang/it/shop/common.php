@@ -10,10 +10,10 @@
  */
 
 return [
-    'home' => 'casa',
-    'submit' => 'Invia',
-    'cancel' => 'Annulla',
+    'home'    => 'casa',
+    'submit'  => 'Invia',
+    'cancel'  => 'Annulla',
     'confirm' => 'conferma',
-    'no' => 'No',
-    'yes' => 'Yes',
+    'no'      => 'No',
+    'yes'     => 'Yes',
 ];

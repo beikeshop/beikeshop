@@ -11,11 +11,11 @@
 
 namespace Beike\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Beike\Notifications\NewOrderNotification;
 use Beike\Notifications\UpdateOrderNotification;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class Order extends Base
 {
@@ -68,7 +68,6 @@ class Order extends Base
         return currency_format($this->total, $this->currency_code, $this->currency_value);
     }
 
-
     /**
      * 新订单通知
      */
@@ -81,7 +80,6 @@ class Order extends Base
             $this->notifyNow(new NewOrderNotification($this));
         }
     }
-
 
     /**
      * 订单状态更新通知

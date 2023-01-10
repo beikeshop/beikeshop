@@ -11,7 +11,6 @@
 
 namespace Beike\Admin\Services;
 
-
 use Beike\Repositories\CustomerGroupRepo;
 
 class CustomerGroupService
@@ -22,13 +21,13 @@ class CustomerGroupService
      */
     public static function create($data)
     {
-        $data = self::getParams($data);
+        $data          = self::getParams($data);
         $customerGroup = CustomerGroupRepo::create($data);
 
         $descriptions = [];
         foreach ($data['descriptions'] as $locale => $description) {
             $description['locale'] = $locale;
-            $descriptions[] = $description;
+            $descriptions[]        = $description;
         }
         $customerGroup->descriptions()->createMany($descriptions);
 
@@ -37,7 +36,7 @@ class CustomerGroupService
 
     public static function update($id, $data)
     {
-        $data = self::getParams($data);
+        $data          = self::getParams($data);
         $customerGroup = CustomerGroupRepo::find($id);
 
         $customerGroup->update($data);
@@ -46,7 +45,7 @@ class CustomerGroupService
         $descriptions = [];
         foreach ($data['descriptions'] as $locale => $description) {
             $description['locale'] = $locale;
-            $descriptions[] = $description;
+            $descriptions[]        = $description;
         }
         $customerGroup->descriptions()->createMany($descriptions);
 
@@ -58,18 +57,18 @@ class CustomerGroupService
         $descriptions = [];
         foreach ($data['name'] as $locale => $value) {
             $descriptions[$locale] = [
-                'name' => $value,
-                'description' => $data['description'][$locale] ?? ''
+                'name'        => $value,
+                'description' => $data['description'][$locale] ?? '',
             ];
         }
 
         $params = [
-            'total' => (int)$data['total'] ?? 0,
-            'reward_point_factor' => (float)$data['reward_point_factor'] ?? 0,
-            'use_point_factor' => (float)$data['use_point_factor'] ?? 0,
-            'discount_factor' => (float)$data['discount_factor'] ?? 0,
-            'level' => (int)$data['level'] ?? 0,
-            'descriptions' => $descriptions,
+            'total'               => (int) $data['total']                 ?? 0,
+            'reward_point_factor' => (float) $data['reward_point_factor'] ?? 0,
+            'use_point_factor'    => (float) $data['use_point_factor']    ?? 0,
+            'discount_factor'     => (float) $data['discount_factor']     ?? 0,
+            'level'               => (int) $data['level']                 ?? 0,
+            'descriptions'        => $descriptions,
         ];
 
         return $params;

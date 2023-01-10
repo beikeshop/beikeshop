@@ -11,17 +11,18 @@
 
 namespace Beike\Notifications;
 
+use Beike\Mail\CustomerForgotten;
 use Beike\Models\Customer;
 use Illuminate\Bus\Queueable;
-use Beike\Mail\CustomerForgotten;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
 class ForgottenNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private Customer $customer;
+
     private string $code;
 
     /**
@@ -32,7 +33,7 @@ class ForgottenNotification extends Notification implements ShouldQueue
     public function __construct(Customer $customer, string $code)
     {
         $this->customer = $customer;
-        $this->code = $code;
+        $this->code     = $code;
     }
 
     /**
@@ -78,7 +79,7 @@ class ForgottenNotification extends Notification implements ShouldQueue
     public function toDatabase()
     {
         return [
-            'customer' => $this->customer
+            'customer' => $this->customer,
         ];
     }
 }

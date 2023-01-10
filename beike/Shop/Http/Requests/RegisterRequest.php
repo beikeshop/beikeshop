@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc|unique:customers,email',
+            'email'    => 'required|email:rfc|unique:customers,email',
             'password' => 'required|confirmed',
         ];
     }
@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => trans('shop/login.email_address'),
+            'email'    => trans('shop/login.email_address'),
             'password' => trans('shop/login.password'),
         ];
     }

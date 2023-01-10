@@ -28,20 +28,23 @@ class AttributeGroupController extends Controller
     public function store(Request $request)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeGroupRepo::create($requestData);
+        $item        = AttributeGroupRepo::create($requestData);
+
         return json_success(trans('common.created_success'), $item);
     }
 
     public function update(Request $request, int $id)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeGroupRepo::update($id, $requestData);
+        $item        = AttributeGroupRepo::update($id, $requestData);
+
         return json_success(trans('common.updated_success'), $item);
     }
 
     public function destroy(Request $request, int $id)
     {
         AttributeGroupRepo::delete($id);
+
         return json_success(trans('common.deleted_success'));
     }
 }

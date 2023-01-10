@@ -12,9 +12,9 @@
 namespace Beike\Repositories;
 
 use Beike\Models\CustomerGroup;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class CustomerGroupRepo
@@ -29,7 +29,6 @@ class CustomerGroupRepo
         return CustomerGroup::query()->create($data);
     }
 
-
     /**
      * @param $id
      * @param $data
@@ -39,13 +38,13 @@ class CustomerGroupRepo
     public static function update($id, $data): Model|Collection|Builder|array
     {
         $group = CustomerGroup::query()->find($id);
-        if (!$group) {
+        if (! $group) {
             throw new \Exception("Customer Group id {$id} 不存在");
         }
         $group->update($data);
+
         return $group;
     }
-
 
     /**
      * @param $id
@@ -55,7 +54,6 @@ class CustomerGroupRepo
     {
         return CustomerGroup::query()->findOrFail($id);
     }
-
 
     /**
      * @param $id
@@ -73,7 +71,6 @@ class CustomerGroupRepo
         }
     }
 
-
     /**
      * 获取用户组列表
      *
@@ -82,6 +79,7 @@ class CustomerGroupRepo
     public static function list(): Collection|array
     {
         $builder = CustomerGroup::query()->with('description', 'descriptions');
+
         return $builder->get();
     }
 }

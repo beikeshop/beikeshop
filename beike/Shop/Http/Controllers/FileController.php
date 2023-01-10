@@ -14,7 +14,7 @@ class FileController extends Controller
         $path = $file->store($type . '/', 'upload');
 
         return json_success(trans('shop/file.uploaded_success'), [
-            'url' => asset('upload/' . $path),
+            'url'   => asset('upload/' . $path),
             'value' => 'upload/' . $path,
         ]);
     }

@@ -11,14 +11,14 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
-use Beike\Services\StateMachineService;
-use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Beike\Shop\Services\PaymentService;
+use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\OrderList;
+use Beike\Shop\Services\PaymentService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -32,10 +32,10 @@ class OrderController extends Controller
     {
         $filters = [
             'customer' => current_customer(),
-            'status' => $request->get('status')
+            'status'   => $request->get('status'),
         ];
         $orders = OrderRepo::filterOrders($filters);
-        $data = [
+        $data   = [
             'orders' => OrderList::collection($orders),
         ];
 
@@ -52,11 +52,11 @@ class OrderController extends Controller
     public function show(Request $request, $number): View
     {
         $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($number, $customer);
-        $html = hook_filter('account_order_detail', ['order' => $order, 'html_items' => []]);
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
+        $html     = hook_filter('account_order_detail', ['order' => $order, 'html_items' => []]);
+
         return view('account/order_info', $html);
     }
-
 
     /**
      * 订单提交成功页
@@ -68,10 +68,10 @@ class OrderController extends Controller
     public function success(Request $request, $number): View
     {
         $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($number, $customer);
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
+
         return view('account/order_success', ['order' => $order]);
     }
-
 
     /**
      * 订单支付页面
@@ -84,10 +84,10 @@ class OrderController extends Controller
     public function pay(Request $request, $number)
     {
         $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($number, $customer);
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
+
         return (new PaymentService($order))->pay();
     }
-
 
     /**
      * 完成订单
@@ -100,15 +100,15 @@ class OrderController extends Controller
     public function complete(Request $request, $number)
     {
         $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($number, $customer);
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
         if (empty($order)) {
             throw new \Exception(trans('shop/order.invalid_order'));
         }
         $comment = trans('shop/order.confirm_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED, $comment);
+
         return json_success(trans('shop/account.order.completed'));
     }
-
 
     /**
      * 取消订单
@@ -121,12 +121,13 @@ class OrderController extends Controller
     public function cancel(Request $request, $number)
     {
         $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($number, $customer);
+        $order    = OrderRepo::getOrderByNumber($number, $customer);
         if (empty($order)) {
             throw new \Exception(trans('shop/order.invalid_order'));
         }
         $comment = trans('shop/order.cancel_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
+
         return json_success(trans('shop/account.order.cancelled'));
     }
 }

@@ -11,5 +11,5 @@
 
 return [
     'level' => 'Level',
-    'name' => 'Customer Group Name',
+    'name'  => 'Customer Group Name',
 ];

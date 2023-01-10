@@ -4,14 +4,14 @@ namespace Beike\Shop\Providers;
 
 use Beike\Libraries\Tax;
 use Beike\Models\Customer;
-use Illuminate\Support\Str;
-use Illuminate\View\FileViewFinder;
+use Beike\Shop\View\Components\AccountSidebar;
 use Beike\Shop\View\Components\Alert;
+use Beike\Shop\View\Components\Breadcrumb;
+use Beike\Shop\View\Components\NoData;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
-use Beike\Shop\View\Components\Breadcrumb;
-use Beike\Shop\View\Components\AccountSidebar;
-use Beike\Shop\View\Components\NoData;
+use Illuminate\Support\Str;
+use Illuminate\View\FileViewFinder;
 
 class ShopServiceProvider extends ServiceProvider
 {
@@ -26,7 +26,6 @@ class ShopServiceProvider extends ServiceProvider
             return new Tax();
         });
     }
-
 
     /**
      * @throws \Exception
@@ -54,23 +53,21 @@ class ShopServiceProvider extends ServiceProvider
         $this->loadComponents();
     }
 
-
     /**
      * 注册前端客户
      */
     protected function registerGuard()
     {
         Config::set('auth.guards.' . Customer::AUTH_GUARD, [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'shop_customer',
         ]);
 
         Config::set('auth.providers.shop_customer', [
             'driver' => 'eloquent',
-            'model' => Customer::class,
+            'model'  => Customer::class,
         ]);
     }
-
 
     /**
      * 注册上传文件系统
@@ -78,21 +75,20 @@ class ShopServiceProvider extends ServiceProvider
     protected function registerFileSystem()
     {
         Config::set('filesystems.disks.upload', [
-            'driver' => 'local',
-            'root' => public_path('upload'),
+            'driver'      => 'local',
+            'root'        => public_path('upload'),
             'permissions' => [
                 'file' => [
-                    'public' => 0755,
+                    'public'  => 0755,
                     'private' => 0755,
                 ],
-                'dir' => [
-                    'public' => 0755,
+                'dir'  => [
+                    'public'  => 0755,
                     'private' => 0755,
                 ],
             ],
         ]);
     }
-
 
     /**
      * 加载邮件配置, 从后台 mail 取值, 并覆盖到  config/mail 和 config/services
@@ -100,7 +96,7 @@ class ShopServiceProvider extends ServiceProvider
     protected function loadMailConfig()
     {
         $mailEngine = system_setting('base.mail_engine', 'smtp');
-        $storeMail = system_setting('base.email', '');
+        $storeMail  = system_setting('base.email', '');
 
         Config::set('mail.default', $mailEngine);
         Config::set('mail.from.address', $storeMail);
@@ -113,7 +109,6 @@ class ShopServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 加载主体模板路径
      */
@@ -123,12 +118,12 @@ class ShopServiceProvider extends ServiceProvider
             $paths = $app['config']['view.paths'];
             if ($theme = system_setting('base.theme')) {
                 $customTheme[] = base_path("themes/{$theme}");
-                $paths = array_merge($customTheme, $paths);
+                $paths         = array_merge($customTheme, $paths);
             }
+
             return new FileViewFinder($app['files'], $paths);
         });
     }
-
 
     /**
      * 加载视图组件
@@ -136,10 +131,10 @@ class ShopServiceProvider extends ServiceProvider
     protected function loadComponents()
     {
         $this->loadViewComponentsAs('shop', [
-            'sidebar' => AccountSidebar::class,
-            'no-data' => NoData::class,
-            'alert' => Alert::class,
-            'breadcrumb' => Breadcrumb::class
+            'sidebar'    => AccountSidebar::class,
+            'no-data'    => NoData::class,
+            'alert'      => Alert::class,
+            'breadcrumb' => Breadcrumb::class,
         ]);
     }
 }

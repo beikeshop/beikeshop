@@ -2,12 +2,12 @@
 
 namespace Beike\Installer\Controllers;
 
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Schema;
 use Beike\Admin\Repositories\AdminUserRepo;
 use Beike\Installer\Helpers\DatabaseManager;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseController extends Controller
 {
@@ -31,19 +31,20 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        DB::statement("SET FOREIGN_KEY_CHECKS = 0");
-        $rows = DB::select('SHOW TABLES');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        $rows   = DB::select('SHOW TABLES');
         $tables = array_column($rows, 'Tables_in_' . env('DB_DATABASE'));
         foreach ($tables as $table) {
             Schema::drop($table);
         }
-        DB::statement("SET FOREIGN_KEY_CHECKS = 1");
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 
         $params = request()->all();
+
         try {
             $response = $this->databaseManager->migrateAndSeed();
-            $status = $response['status'] ?? '';
-            $message = $response['message'] ?? '';
+            $status   = $response['status']  ?? '';
+            $message  = $response['message'] ?? '';
             if ($status == 'error' && $message) {
                 return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' => $message]);
             }
@@ -52,12 +53,12 @@ class DatabaseController extends Controller
         }
 
         $email = request('admin_email');
-        $data = [
-            'name' => substr($email, 0, strpos($email, '@')),
-            'email' => $email,
+        $data  = [
+            'name'     => substr($email, 0, strpos($email, '@')),
+            'email'    => $email,
             'password' => request('admin_password'),
-            'locale' => session('locale') ?? 'en',
-            'active' => true,
+            'locale'   => session('locale') ?? 'en',
+            'active'   => true,
         ];
         AdminUserRepo::createAdminUser($data);
 

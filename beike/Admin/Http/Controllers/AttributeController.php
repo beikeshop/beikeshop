@@ -24,10 +24,10 @@ class AttributeController extends Controller
     public function index(Request $request)
     {
         $attributes = AttributeRepo::getList();
-        $data = [
-            'attribute_list' => $attributes,
+        $data       = [
+            'attribute_list'        => $attributes,
             'attribute_list_format' => AttributeResource::collection($attributes),
-            'attribute_group' => AttributeGroupRepo::getList(),
+            'attribute_group'       => AttributeGroupRepo::getList(),
         ];
 
         if ($request->expectsJson()) {
@@ -40,7 +40,7 @@ class AttributeController extends Controller
     public function show(Request $request, int $id)
     {
         $data = [
-            'attribute' => (new AttributeDetailResource(AttributeRepo::find($id)))->jsonSerialize(),
+            'attribute'       => (new AttributeDetailResource(AttributeRepo::find($id)))->jsonSerialize(),
             'attribute_group' => AttributeGroupRepo::getList(),
         ];
 
@@ -50,41 +50,46 @@ class AttributeController extends Controller
     public function store(Request $request)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeRepo::create($requestData);
+        $item        = AttributeRepo::create($requestData);
+
         return json_success(trans('common.created_success'), $item);
     }
 
     public function update(Request $request, int $id)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeRepo::update($id, $requestData);
+        $item        = AttributeRepo::update($id, $requestData);
+
         return json_success(trans('common.updated_success'), $item);
     }
-
 
     public function storeValue(Request $request, int $id)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeRepo::createValue(array_merge($requestData, ['attribute_id' => $id]));
+        $item        = AttributeRepo::createValue(array_merge($requestData, ['attribute_id' => $id]));
+
         return json_success(trans('common.created_success'), new AttributeValueResource($item));
     }
 
     public function updateValue(Request $request, int $id, int $value_id)
     {
         $requestData = json_decode($request->getContent(), true);
-        $item = AttributeRepo::updateValue($value_id, $requestData);
+        $item        = AttributeRepo::updateValue($value_id, $requestData);
+
         return json_success(trans('common.updated_success'), new AttributeValueResource($item));
     }
 
     public function destroyValue(Request $request, int $id, int $value_id)
     {
         AttributeRepo::deleteValue($value_id);
+
         return json_success(trans('common.deleted_success'));
     }
 
     public function destroy(Request $request, int $id)
     {
         AttributeRepo::delete($id);
+
         return json_success(trans('common.deleted_success'));
     }
 

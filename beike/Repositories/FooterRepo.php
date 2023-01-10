@@ -11,8 +11,6 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Page;
-
 class FooterRepo
 {
     /**
@@ -26,7 +24,7 @@ class FooterRepo
             $footerSetting = system_setting('base.footer_setting');
         }
 
-        $content = $footerSetting['content'];
+        $content         = $footerSetting['content'];
         $contentLinkKeys = ['link1', 'link2', 'link3'];
         foreach ($contentLinkKeys as $contentLinkKey) {
             $links = $content[$contentLinkKey]['links'];
@@ -35,6 +33,7 @@ class FooterRepo
             })->toArray();
             $footerSetting['content'][$contentLinkKey]['links'] = $links;
         }
+
         return $footerSetting;
     }
 }

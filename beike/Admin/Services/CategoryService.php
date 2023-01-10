@@ -33,12 +33,12 @@ class CategoryService
             $descriptions = [];
             foreach ($data['descriptions'] as $locale => $description) {
                 $descriptions[] = [
-                    'locale' => $locale,
-                    'name' => $description['name'],
-                    'content' => $description['content'] ?? '',
-                    'meta_title' => $description['meta_title'] ?? '',
+                    'locale'           => $locale,
+                    'name'             => $description['name'],
+                    'content'          => $description['content']          ?? '',
+                    'meta_title'       => $description['meta_title']       ?? '',
                     'meta_description' => $description['meta_description'] ?? '',
-                    'meta_keywords' => $description['meta_keywords'] ?? '',
+                    'meta_keywords'    => $description['meta_keywords']    ?? '',
                 ];
             }
             if ($isUpdating) {
@@ -55,6 +55,7 @@ class CategoryService
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
 
@@ -66,19 +67,19 @@ class CategoryService
         // Paths
         $paths = [];
         // 复制上级分类的 paths
-        $level = 0;
+        $level       = 0;
         $parentPaths = CategoryPath::query()->where('category_id', $category->parent_id)->orderBy('level')->get();
         foreach ($parentPaths as $path) {
             $paths[] = [
                 'path_id' => $path->path_id,
-                'level' => $level,
+                'level'   => $level,
             ];
             $level++;
         }
         // 自身
         $paths[] = [
             'path_id' => $category->id,
-            'level' => $level,
+            'level'   => $level,
         ];
         $category->paths()->createMany($paths);
     }
@@ -103,7 +104,7 @@ class CategoryService
                 $newPathIds = $newParentPathIds;
 
                 $results = CategoryPath::query()
-                    ->where('category_id', (int)$category_path->category_id)
+                    ->where('category_id', (int) $category_path->category_id)
                     ->where('level', '>=', $category_path->level)
                     ->orderBy('level')
                     ->get();
@@ -116,10 +117,10 @@ class CategoryService
                 foreach ($newPathIds as $path_id) {
                     $paths[] = [
                         'category_id' => $category_path->category_id,
-                        'path_id' => $path_id,
-                        'level' => $level,
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'path_id'     => $path_id,
+                        'level'       => $level,
+                        'created_at'  => now(),
+                        'updated_at'  => now(),
                     ];
                     $level++;
                 }
@@ -133,7 +134,6 @@ class CategoryService
 
         // $this->repairCategories(0);
     }
-
 
     /**
      * 重建category path
@@ -149,13 +149,13 @@ class CategoryService
             CategoryPath::query()->where('category_id', $category->id)->delete();
 
             // Fix for records with no paths
-            $level = 0;
+            $level            = 0;
             $subCategoryPaths = CategoryPath::query()->where('category_id', $parentId)->orderBy('level')->get();
             foreach ($subCategoryPaths as $path) {
                 CategoryPath::query()->create([
                     'category_id' => $category->id,
-                    'path_id' => $path->path_id,
-                    'level' => $level,
+                    'path_id'     => $path->path_id,
+                    'level'       => $level,
                 ]);
                 $level++;
             }
@@ -167,8 +167,8 @@ class CategoryService
                 ->first();
             $pathData = [
                 'category_id' => $category->id,
-                'path_id' => $category->id,
-                'level' => $level
+                'path_id'     => $category->id,
+                'level'       => $level,
             ];
             if ($path) {
                 $path->update($pathData);

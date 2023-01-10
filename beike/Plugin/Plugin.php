@@ -11,29 +11,36 @@
 
 namespace Beike\Plugin;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class Plugin implements Arrayable, \ArrayAccess
 {
     protected $path;
-    protected $name;
-    protected $description;
-    protected $packageInfo;
-    protected $dirName;
-    protected $installed;
-    protected $enabled;
-    protected $version;
-    protected $columns;
 
+    protected $name;
+
+    protected $description;
+
+    protected $packageInfo;
+
+    protected $dirName;
+
+    protected $installed;
+
+    protected $enabled;
+
+    protected $version;
+
+    protected $columns;
 
     public function __construct(string $path, array $packageInfo)
     {
-        $this->path = $path;
+        $this->path        = $path;
         $this->packageInfo = $packageInfo;
     }
 
@@ -52,54 +59,58 @@ class Plugin implements Arrayable, \ArrayAccess
         return Arr::get($this->packageInfo, $name);
     }
 
-
-    public function setDirname(string $dirName): Plugin
+    public function setDirname(string $dirName): self
     {
         $this->dirName = $dirName;
+
         return $this;
     }
 
-    public function setName(string $name): Plugin
+    public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
-    public function setDescription(string $description): Plugin
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
-
-    public function setInstalled(bool $installed): Plugin
+    public function setInstalled(bool $installed): self
     {
         $this->installed = $installed;
+
         return $this;
     }
 
-    public function setEnabled(bool $enabled): Plugin
+    public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
+
         return $this;
     }
 
-    public function setVersion(string $version): Plugin
+    public function setVersion(string $version): self
     {
         $this->version = $version;
+
         return $this;
     }
 
-    public function setColumns(): Plugin
+    public function setColumns(): self
     {
         $columnsPath = $this->path . DIRECTORY_SEPARATOR . 'columns.php';
-        if (!file_exists($columnsPath)) {
+        if (! file_exists($columnsPath)) {
             return $this;
         }
         $this->columns = require_once $columnsPath;
+
         return $this;
     }
-
 
     /**
      * 处理插件后台设置字段多语言 优先级: label > label_key
@@ -114,6 +125,7 @@ class Plugin implements Arrayable, \ArrayAccess
                     return $this->transLabel($option);
                 })->toArray();
             }
+
             return $item;
         })->toArray();
     }
@@ -126,14 +138,14 @@ class Plugin implements Arrayable, \ArrayAccess
     private function transLabel($item)
     {
         $labelKey = $item['label_key'] ?? '';
-        $label = $item['label'] ?? '';
+        $label    = $item['label']     ?? '';
         if (empty($label) && $labelKey) {
-            $languageKey = "{$this->dirName}::{$labelKey}";
+            $languageKey   = "{$this->dirName}::{$labelKey}";
             $item['label'] = trans($languageKey);
         }
+
         return $item;
     }
-
 
     public function getName(): string
     {
@@ -185,9 +197,9 @@ class Plugin implements Arrayable, \ArrayAccess
         if ($name) {
             return plugin_setting("{$this->code}.{$name}");
         }
+
         return plugin_setting($this->code);
     }
-
 
     /**
      * 获取插件对应的设置字段, 并获取已存储在DB的字段值
@@ -197,18 +209,18 @@ class Plugin implements Arrayable, \ArrayAccess
     public function getColumns(): array
     {
         $this->columns[] = SettingRepo::getPluginStatusColumn();
-        $existValues = SettingRepo::getPluginColumns($this->code);
+        $existValues     = SettingRepo::getPluginColumns($this->code);
         foreach ($this->columns as $index => $column) {
             $dbColumn = $existValues[$column['name']] ?? null;
-            $value = $dbColumn ? $dbColumn->value : null;
+            $value    = $dbColumn ? $dbColumn->value : null;
             if ($column['name'] == 'status') {
-                $value = (int)$value;
+                $value = (int) $value;
             }
             $this->columns[$index]['value'] = $value;
         }
+
         return $this->columns;
     }
-
 
     /**
      * 字段验证
@@ -218,6 +230,7 @@ class Plugin implements Arrayable, \ArrayAccess
     public function validate($requestData): \Illuminate\Contracts\Validation\Validator
     {
         $rules = array_column($this->columns, 'rules', 'name');
+
         return Validator::make($requestData, $rules);
     }
 
@@ -231,6 +244,7 @@ class Plugin implements Arrayable, \ArrayAccess
         if (file_exists($viewFile)) {
             return "{$this->dirName}::admin.config";
         }
+
         return '';
     }
 
@@ -244,13 +258,12 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this->getPath() . '/Bootstrap.php';
     }
 
-
     public function toArray(): array
     {
-        return (array)array_merge([
-            'name' => $this->name,
+        return (array) array_merge([
+            'name'    => $this->name,
             'version' => $this->getVersion(),
-            'path' => $this->path
+            'path'    => $this->path,
         ], $this->packageInfo);
     }
 

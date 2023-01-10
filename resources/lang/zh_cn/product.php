@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => '名称',
-    'sku' => 'SKU',
-    'price' => '价格',
-    'origin_price' => '原价',
-    'cost_price' => '成本价',
-    'brand' => '品牌',
-    'category' => '分类',
-    'model' => '型号',
-    'quantity' => '库存',
-    'image' => '图片',
+    'name'              => '名称',
+    'sku'               => 'SKU',
+    'price'             => '价格',
+    'origin_price'      => '原价',
+    'cost_price'        => '成本价',
+    'brand'             => '品牌',
+    'category'          => '分类',
+    'model'             => '型号',
+    'quantity'          => '库存',
+    'image'             => '图片',
 
-    'active' => '上架',
-    'inactive' => '下架',
+    'active'            => '上架',
+    'inactive'          => '下架',
     'has_been_inactive' => '该商品已下架',
 ];

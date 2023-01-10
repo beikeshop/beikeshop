@@ -10,7 +10,7 @@
  */
 
 return [
-     'name' => 'Markenname',
-     'icon' => 'Symbol',
-     'first_letter' => 'Anfangsbuchstabe',
+    'name'         => 'Markenname',
+    'icon'         => 'Symbol',
+    'first_letter' => 'Anfangsbuchstabe',
 ];

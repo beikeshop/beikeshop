@@ -11,7 +11,6 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-
 use Beike\Models\Page;
 use Beike\Shop\Http\Resources\PageDetail;
 
@@ -21,7 +20,7 @@ class PageController extends Controller
     {
         $page->load('description');
         $data = [
-            'page' => (new PageDetail($page))->jsonSerialize()
+            'page' => (new PageDetail($page))->jsonSerialize(),
         ];
 
         return view('pages/detail', $data);

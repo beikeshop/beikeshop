@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'категория',
-    'edit_category' => 'Изменить категорию',
-    'upper_category' => 'категория',
+    'index'             => 'категория',
+    'edit_category'     => 'Изменить категорию',
+    'upper_category'    => 'категория',
 
-    'categories_index' => 'список категорий',
+    'categories_index'  => 'список категорий',
     'categories_create' => 'Создать категории',
-    'categories_show' => 'детали категории',
+    'categories_show'   => 'детали категории',
     'categories_update' => 'Обновить категории',
     'categories_delete' => 'Удалить категорию',
 ];

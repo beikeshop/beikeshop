@@ -10,22 +10,22 @@
  */
 
 return [
-    'plugins_index' => 'elenco dei plugin',
-    'plugins_import' => 'Carica plugin',
-    'plugins_show' => 'dettagli plugin',
-    'plugins_update' => 'aggiornamento plugin',
+    'plugins_index'         => 'elenco dei plugin',
+    'plugins_import'        => 'Carica plugin',
+    'plugins_show'          => 'dettagli plugin',
+    'plugins_update'        => 'aggiornamento plugin',
     'plugins_update_status' => 'stato di aggiornamento',
-    'plugins_install' => 'installa',
-    'plugins_uninstall' => 'disinstalla',
+    'plugins_install'       => 'installa',
+    'plugins_uninstall'     => 'disinstalla',
 
-    'plugin_list' => 'elenco dei plugin',
-    'plugin_code' => 'codice plugin',
-    'plugin_type' => 'tipo di plugin',
-    'plugin_description' => 'descrizione plugin',
-    'plugin_upload' => 'Carica plugin (supporta solo file zip)',
+    'plugin_list'           => 'elenco dei plugin',
+    'plugin_code'           => 'codice plugin',
+    'plugin_type'           => 'tipo di plugin',
+    'plugin_description'    => 'descrizione plugin',
+    'plugin_upload'         => 'Carica plugin (supporta solo file zip)',
 
-    'shipping' => 'metodo di spedizione',
-    'payment' => 'metodo di pagamento',
-    'total' => 'Calcolo dell\'ordine',
-    'view' => 'modifica pagina',
+    'shipping'              => 'metodo di spedizione',
+    'payment'               => 'metodo di pagamento',
+    'total'                 => 'Calcolo dell\'ordine',
+    'view'                  => 'modifica pagina',
 ];

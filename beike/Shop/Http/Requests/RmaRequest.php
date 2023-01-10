@@ -34,11 +34,12 @@ class RmaRequest extends FormRequest
     {
         $rules = [
             'order_product_id' => 'required|exists:order_products,id',
-            'quantity' => 'required',
-            'opened' => 'required',
-            'rma_reason_id' => 'required|exists:rma_reasons,id',
-            'type' => 'required',
+            'quantity'         => 'required',
+            'opened'           => 'required',
+            'rma_reason_id'    => 'required|exists:rma_reasons,id',
+            'type'             => 'required',
         ];
+
         return $rules;
     }
 
@@ -46,10 +47,10 @@ class RmaRequest extends FormRequest
     {
         return [
             'order_product_id' => trans('rma.order_product_id'),
-            'quantity' => trans('rma.quantity'),
-            'opened' => trans('rma.opened'),
-            'rma_reason_id' => trans('rma.rma_reason_id'),
-            'type' => trans('rma.type'),
+            'quantity'         => trans('rma.quantity'),
+            'opened'           => trans('rma.opened'),
+            'rma_reason_id'    => trans('rma.rma_reason_id'),
+            'type'             => trans('rma.type'),
         ];
     }
 }

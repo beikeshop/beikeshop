@@ -11,19 +11,16 @@
 
 namespace Beike\Admin\Services;
 
-use Beike\Models\Category;
-use Beike\Models\CategoryPath;
 use Beike\Repositories\CustomerRepo;
-use Illuminate\Support\Facades\DB;
 
 class CustomerService
 {
     public static function create($data)
     {
         $data['locale'] = system_setting('base.locale');
-        $data['from'] = 'admin';
-        $customer = CustomerRepo::create($data);
+        $data['from']   = 'admin';
+        $customer       = CustomerRepo::create($data);
+
         return $customer;
     }
-
 }

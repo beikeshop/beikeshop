@@ -11,8 +11,8 @@
 
 namespace Beike\Admin\View\DesignBuilders;
 
-use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
 
 class TabProduct extends Component
 {

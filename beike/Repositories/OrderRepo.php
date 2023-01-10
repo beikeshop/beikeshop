@@ -11,14 +11,14 @@
 
 namespace Beike\Repositories;
 
-use Carbon\Carbon;
-use Beike\Models\Order;
 use Beike\Models\Address;
+use Beike\Models\Order;
 use Beike\Services\StateMachineService;
-use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderRepo
 {
@@ -31,9 +31,9 @@ class OrderRepo
     public static function filterAll(array $filters = [])
     {
         $builder = self::getListBuilder($filters)->orderByDesc('created_at');
+
         return $builder->get();
     }
-
 
     /**
      * 获取特定客户订单列表
@@ -44,9 +44,9 @@ class OrderRepo
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
         $builder = self::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
+
         return $builder->paginate(perPage());
     }
-
 
     /**
      * @param $customer
@@ -61,7 +61,6 @@ class OrderRepo
             ->get();
     }
 
-
     /**
      * @param array $filters
      * @return LengthAwarePaginator
@@ -69,9 +68,9 @@ class OrderRepo
     public static function filterOrders(array $filters = []): LengthAwarePaginator
     {
         $builder = self::getListBuilder($filters)->orderByDesc('created_at');
+
         return $builder->paginate(perPage());
     }
-
 
     /**
      * @param array $filters
@@ -121,7 +120,6 @@ class OrderRepo
             $builder->where('status', $status);
         }
 
-
         return $builder;
     }
 
@@ -140,10 +138,9 @@ class OrderRepo
         if ($customer) {
             $builder->where('customer_id', $customer->id);
         }
-            ;
+
         return $builder->first();
     }
-
 
     /**
      * 通过订单ID或者订单号获取订单
@@ -161,9 +158,9 @@ class OrderRepo
             })
             ->where('customer_id', $customer->id)
             ->first();
+
         return $order;
     }
-
 
     /**
      * @param array $data
@@ -172,73 +169,73 @@ class OrderRepo
      */
     public static function create(array $data): Order
     {
-        $customer = $data['customer'] ?? null;
-        $current = $data['current'] ?? [];
-        $carts = $data['carts'] ?? [];
-        $totals = $data['totals'] ?? [];
+        $customer   = $data['customer'] ?? null;
+        $current    = $data['current']  ?? [];
+        $carts      = $data['carts']    ?? [];
+        $totals     = $data['totals']   ?? [];
         $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
         if (current_customer()) {
             $shippingAddressId = $current['shipping_address_id'] ?? 0;
-            $paymentAddressId = $current['payment_address_id'] ?? 0;
+            $paymentAddressId  = $current['payment_address_id']  ?? 0;
 
             $shippingAddress = Address::query()->findOrFail($shippingAddressId);
-            $paymentAddress = Address::query()->findOrFail($paymentAddressId);
+            $paymentAddress  = Address::query()->findOrFail($paymentAddressId);
         } else {
-            $shippingAddress = (Object)($current['guest_shipping_address'] ?? []);
-            $paymentAddress = (Object)($current['guest_payment_address'] ?? []);
+            $shippingAddress = (Object) ($current['guest_shipping_address'] ?? []);
+            $paymentAddress  = (Object) ($current['guest_payment_address'] ?? []);
         }
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
-        $paymentMethodCode = $current['payment_method_code'] ?? '';
+        $paymentMethodCode  = $current['payment_method_code']  ?? '';
 
-        $currencyCode = current_currency_code();
-        $currency = CurrencyRepo::findByCode($currencyCode);
+        $currencyCode  = current_currency_code();
+        $currency      = CurrencyRepo::findByCode($currencyCode);
         $currencyValue = $currency->value ?? 1;
 
         $order = new Order([
-            'number' => self::generateOrderNumber(),
-            'customer_id' => $customer->id ?? 0,
-            'customer_group_id' => $customer->customer_group_id ?? 0,
-            'shipping_address_id' => $shippingAddress->id ?? 0,
-            'payment_address_id' => $paymentAddress->id ?? 0,
-            'customer_name' => $customer->name ?? '',
-            'email' => $customer ? $customer->email : $shippingAddress->email,
-            'calling_code' => $customer->calling_code ?? 0,
-            'telephone' => $customer->telephone ?? '',
-            'total' => $orderTotal['amount'],
-            'locale' => locale(),
-            'currency_code' => $currencyCode,
-            'currency_value' => $currencyValue,
-            'ip' => request()->getClientIp(),
-            'user_agent' => request()->userAgent(),
-            'status' => StateMachineService::CREATED,
-            'shipping_method_code' => $shippingMethodCode,
-            'shipping_method_name' => trans($shippingMethodCode),
+            'number'                 => self::generateOrderNumber(),
+            'customer_id'            => $customer->id                ?? 0,
+            'customer_group_id'      => $customer->customer_group_id ?? 0,
+            'shipping_address_id'    => $shippingAddress->id         ?? 0,
+            'payment_address_id'     => $paymentAddress->id          ?? 0,
+            'customer_name'          => $customer->name              ?? '',
+            'email'                  => $customer ? $customer->email : $shippingAddress->email,
+            'calling_code'           => $customer->calling_code ?? 0,
+            'telephone'              => $customer->telephone    ?? '',
+            'total'                  => $orderTotal['amount'],
+            'locale'                 => locale(),
+            'currency_code'          => $currencyCode,
+            'currency_value'         => $currencyValue,
+            'ip'                     => request()->getClientIp(),
+            'user_agent'             => request()->userAgent(),
+            'status'                 => StateMachineService::CREATED,
+            'shipping_method_code'   => $shippingMethodCode,
+            'shipping_method_name'   => trans($shippingMethodCode),
             'shipping_customer_name' => $shippingAddress->name,
-            'shipping_calling_code' => $shippingAddress->calling_code ?? 0,
-            'shipping_telephone' => $shippingAddress->phone ?? '',
-            'shipping_country' => $shippingAddress->country->name ?? '',
-            'shipping_country_id' => $shippingAddress->country->id ?? 0,
-            'shipping_zone' => $shippingAddress->zone,
-            'shipping_zone_id' => $shippingAddress->zone_id ?? 0,
-            'shipping_city' => $shippingAddress->city,
-            'shipping_address_1' => $shippingAddress->address_1,
-            'shipping_address_2' => $shippingAddress->address_2,
-            'shipping_zipcode' => $shippingAddress->zipcode,
-            'payment_method_code' => $paymentMethodCode,
-            'payment_method_name' => trans($paymentMethodCode),
-            'payment_customer_name' => $paymentAddress->name,
-            'payment_calling_code' => $paymentAddress->calling_code ?? 0,
-            'payment_telephone' => $paymentAddress->phone ?? '',
-            'payment_country' => $paymentAddress->country->name ?? '',
-            'payment_country_id' => $paymentAddress->country->id ?? 0,
-            'payment_zone' => $paymentAddress->zone,
-            'payment_zone_id' => $paymentAddress->zone_id ?? 0,
-            'payment_city' => $paymentAddress->city,
-            'payment_address_1' => $paymentAddress->address_1,
-            'payment_address_2' => $paymentAddress->address_2,
-            'payment_zipcode' => $paymentAddress->zipcode,
+            'shipping_calling_code'  => $shippingAddress->calling_code  ?? 0,
+            'shipping_telephone'     => $shippingAddress->phone         ?? '',
+            'shipping_country'       => $shippingAddress->country->name ?? '',
+            'shipping_country_id'    => $shippingAddress->country->id   ?? 0,
+            'shipping_zone'          => $shippingAddress->zone,
+            'shipping_zone_id'       => $shippingAddress->zone_id ?? 0,
+            'shipping_city'          => $shippingAddress->city,
+            'shipping_address_1'     => $shippingAddress->address_1,
+            'shipping_address_2'     => $shippingAddress->address_2,
+            'shipping_zipcode'       => $shippingAddress->zipcode,
+            'payment_method_code'    => $paymentMethodCode,
+            'payment_method_name'    => trans($paymentMethodCode),
+            'payment_customer_name'  => $paymentAddress->name,
+            'payment_calling_code'   => $paymentAddress->calling_code  ?? 0,
+            'payment_telephone'      => $paymentAddress->phone         ?? '',
+            'payment_country'        => $paymentAddress->country->name ?? '',
+            'payment_country_id'     => $paymentAddress->country->id   ?? 0,
+            'payment_zone'           => $paymentAddress->zone,
+            'payment_zone_id'        => $paymentAddress->zone_id ?? 0,
+            'payment_city'           => $paymentAddress->city,
+            'payment_address_1'      => $paymentAddress->address_1,
+            'payment_address_2'      => $paymentAddress->address_2,
+            'payment_zipcode'        => $paymentAddress->zipcode,
         ]);
         $order->saveOrFail();
 
@@ -248,7 +245,6 @@ class OrderRepo
         return $order;
     }
 
-
     /**
      * 生成订单号
      *
@@ -257,10 +253,11 @@ class OrderRepo
     public static function generateOrderNumber(): string
     {
         $orderNumber = Carbon::now()->format('Ymd') . rand(10000, 99999);
-        $exist = Order::query()->where('number', $orderNumber)->exists();
+        $exist       = Order::query()->where('number', $orderNumber)->exists();
         if ($exist) {
             return self::generateOrderNumber();
         }
+
         return $orderNumber;
     }
 }

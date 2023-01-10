@@ -12,8 +12,8 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class PageRepo
 {
@@ -25,27 +25,26 @@ class PageRepo
     public static function getList(): LengthAwarePaginator
     {
         $builder = Page::query()->with([
-            'description'
+            'description',
         ])->orderByDesc('updated_at');
 
         return $builder->paginate(perPage());
     }
 
-
     public static function findByPageId($pageId)
     {
         $page = Page::query()->findOrFail($pageId);
         $page->load(['descriptions']);
+
         return $page;
     }
-
 
     public static function getDescriptionsByLocale($pageId)
     {
         $page = self::findByPageId($pageId);
+
         return $page->descriptions->keyBy('locale')->toArray();
     }
-
 
     public static function createOrUpdate($data)
     {
@@ -53,9 +52,11 @@ class PageRepo
             DB::beginTransaction();
             $region = self::pushPage($data);
             DB::commit();
+
             return $region;
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
     }
@@ -70,13 +71,14 @@ class PageRepo
         }
         $page->fill([
             'position' => $data['position'] ?? 0,
-            'active' => $data['active'] ?? true,
+            'active'   => $data['active']   ?? true,
         ]);
         $page->saveOrFail();
 
         $page->descriptions()->delete();
         $page->descriptions()->createMany($data['descriptions']);
         $page->load(['descriptions']);
+
         return $page;
     }
 
@@ -86,7 +88,6 @@ class PageRepo
         $page->descriptions()->delete();
         $page->delete();
     }
-
 
     /**
      * 页面内容自动完成
@@ -103,11 +104,12 @@ class PageRepo
         $results = [];
         foreach ($pages as $page) {
             $results[] = [
-                'id' => $page->id,
-                'name' => $page->description->title,
-                'status' => $page->active
+                'id'     => $page->id,
+                'name'   => $page->description->title,
+                'status' => $page->active,
             ];
         }
+
         return $results;
     }
 }

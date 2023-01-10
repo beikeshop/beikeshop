@@ -11,25 +11,25 @@
 
 namespace Beike\Admin\Providers;
 
-use Beike\Models\AdminUser;
-use Illuminate\Support\Str;
-use Beike\Console\Commands\Sitemap;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
-use Beike\Admin\View\Components\Filter;
-use Beike\Admin\View\Components\Header;
-use Beike\Admin\View\Components\Sidebar;
 use Beike\Admin\View\Components\Alert;
-use Beike\Admin\View\Components\NoData;
+use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
-use Beike\Admin\View\Components\Form\Select;
-use Beike\Console\Commands\MakeRootAdminUser;
-use Beike\Admin\View\Components\Form\Textarea;
-use Beike\Console\Commands\GenerateDatabaseDict;
 use Beike\Admin\View\Components\Form\InputLocale;
+use Beike\Admin\View\Components\Form\Select;
 use Beike\Admin\View\Components\Form\SwitchRadio;
+use Beike\Admin\View\Components\Form\Textarea;
+use Beike\Admin\View\Components\Header;
+use Beike\Admin\View\Components\NoData;
+use Beike\Admin\View\Components\Sidebar;
+use Beike\Console\Commands\GenerateDatabaseDict;
+use Beike\Console\Commands\MakeRootAdminUser;
+use Beike\Console\Commands\Sitemap;
+use Beike\Models\AdminUser;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
 
 class AdminServiceProvider extends ServiceProvider
@@ -51,7 +51,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
 
         $adminName = admin_name();
-        if (!Str::startsWith($uri, "/{$adminName}")) {
+        if (! Str::startsWith($uri, "/{$adminName}")) {
             return;
         }
 
@@ -69,12 +69,11 @@ class AdminServiceProvider extends ServiceProvider
 
         Config::set('filesystems.disks.catalog', [
             'driver' => 'local',
-            'root' => public_path('catalog'),
+            'root'   => public_path('catalog'),
         ]);
 
         $this->loadDesignComponents();
     }
-
 
     /**
      * 加载后台命令行脚本
@@ -90,23 +89,21 @@ class AdminServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 注册后台用户 guard
      */
     protected function registerGuard()
     {
         Config::set('auth.guards.' . AdminUser::AUTH_GUARD, [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'admin_users',
         ]);
 
         Config::set('auth.providers.admin_users', [
             'driver' => 'eloquent',
-            'model' => AdminUser::class,
+            'model'  => AdminUser::class,
         ]);
     }
-
 
     /**
      * 加载主题模板, 用于装修预览
@@ -117,12 +114,12 @@ class AdminServiceProvider extends ServiceProvider
             $paths = $app['config']['view.paths'];
             if ($theme = system_setting('base.theme')) {
                 $customTheme[] = base_path("themes/{$theme}");
-                $paths = array_merge($customTheme, $paths);
+                $paths         = array_merge($customTheme, $paths);
             }
+
             return new FileViewFinder($app['files'], $paths);
         });
     }
-
 
     /**
      * 后台UI组件
@@ -130,20 +127,19 @@ class AdminServiceProvider extends ServiceProvider
     protected function loadAdminViewComponents()
     {
         $this->loadViewComponentsAs('admin', [
-            'header' => Header::class,
-            'sidebar' => Sidebar::class,
-            'filter' => Filter::class,
-            'alert' => Alert::class,
+            'header'            => Header::class,
+            'sidebar'           => Sidebar::class,
+            'filter'            => Filter::class,
+            'alert'             => Alert::class,
             'form-input-locale' => InputLocale::class,
-            'form-switch' => SwitchRadio::class,
-            'form-input' => Input::class,
-            'form-select' => Select::class,
-            'form-image' => Image::class,
-            'form-textarea' => Textarea::class,
-            'no-data' => NoData::class,
+            'form-switch'       => SwitchRadio::class,
+            'form-input'        => Input::class,
+            'form-select'       => Select::class,
+            'form-image'        => Image::class,
+            'form-textarea'     => Textarea::class,
+            'no-data'           => NoData::class,
         ]);
     }
-
 
     /**
      * seeder 数据
@@ -155,7 +151,6 @@ class AdminServiceProvider extends ServiceProvider
         ], 'beike-seeders');
     }
 
-
     /**
      * 加载首页 page builder 相关组件
      *
@@ -163,25 +158,24 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected function loadDesignComponents()
     {
-        $viewPath = base_path() . '/beike/Admin/View';
+        $viewPath    = base_path() . '/beike/Admin/View';
         $builderPath = $viewPath . '/DesignBuilders/';
 
         $builders = glob($builderPath . '*');
         foreach ($builders as $builder) {
-            $builderName = basename($builder, '.php');
-            $aliasName = Str::snake($builderName);
+            $builderName   = basename($builder, '.php');
+            $aliasName     = Str::snake($builderName);
             $componentName = Str::studly($builderName);
             $classBaseName = "\\Beike\\Admin\\View\\DesignBuilders\\{$componentName}";
 
-            if (!class_exists($classBaseName)) {
+            if (! class_exists($classBaseName)) {
                 throw new \Exception("请先定义自定义模板类 {$classBaseName}");
             }
             $this->loadViewComponentsAs('editor', [
-                $aliasName => $classBaseName
+                $aliasName => $classBaseName,
             ]);
         }
     }
-
 
     /**
      * 后台公共数据

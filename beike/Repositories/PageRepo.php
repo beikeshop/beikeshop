@@ -31,9 +31,9 @@ class PageRepo
     public static function getName($id)
     {
         $categories = self::getAllPagesWithName();
+
         return $categories[$id]['name'] ?? '';
     }
-
 
     /**
      * 获取所有单页ID和名称列表
@@ -49,10 +49,11 @@ class PageRepo
         $pages = self::getBuilder()->select('id')->get();
         foreach ($pages as $brand) {
             $items[$brand->id] = [
-                'id' => $brand->id,
+                'id'   => $brand->id,
                 'name' => $brand->description->title ?? '',
             ];
         }
+
         return self::$allPagesWithName = $items;
     }
 }

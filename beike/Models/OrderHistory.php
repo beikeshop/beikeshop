@@ -14,7 +14,7 @@ namespace Beike\Models;
 class OrderHistory extends Base
 {
     protected $fillable = [
-        'order_id', 'status', 'notify', 'comment'
+        'order_id', 'status', 'notify', 'comment',
     ];
 
     protected $appends = ['status_format'];

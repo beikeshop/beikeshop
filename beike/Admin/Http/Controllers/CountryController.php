@@ -51,5 +51,4 @@ class CountryController extends Controller
 
         return json_success(trans('common.deleted_success'));
     }
-
 }

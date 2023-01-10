@@ -10,17 +10,17 @@
  */
 
 return [
-    'list' => '订单列表',
+    'list'                 => '订单列表',
 
-    'order_quantity' => '订单数量',
-    'order_amount' => '订单金额',
-    'orders_index' => '订单列表',
-    'orders_create' => '创建订单',
-    'orders_show' => '订单详情',
-    'orders_export' => '导出订单',
-    'orders_update' => '更新订单',
-    'orders_delete' => '删除订单',
-    'notify' => '是否提醒',
+    'order_quantity'       => '订单数量',
+    'order_amount'         => '订单金额',
+    'orders_index'         => '订单列表',
+    'orders_create'        => '创建订单',
+    'orders_show'          => '订单详情',
+    'orders_export'        => '导出订单',
+    'orders_update'        => '更新订单',
+    'orders_delete'        => '删除订单',
+    'notify'               => '是否提醒',
     'orders_update_status' => '更新状态',
-    'error_status' => '请选择状态',
+    'error_status'         => '请选择状态',
 ];

@@ -13,9 +13,9 @@ namespace Beike\Mail;
 
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\App;
 
 class CustomerNewOrder extends Mailable implements ShouldQueue
@@ -43,6 +43,7 @@ class CustomerNewOrder extends Mailable implements ShouldQueue
     {
         $orderLocale = $this->order->locale;
         App::setLocale($orderLocale);
+
         return $this->view('mails.order_new', ['order' => $this->order]);
     }
 }

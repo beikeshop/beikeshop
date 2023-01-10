@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'Category',
-    'edit_category' => 'Edit Category',
-    'upper_category' => 'Upper Category',
+    'index'             => 'Category',
+    'edit_category'     => 'Edit Category',
+    'upper_category'    => 'Upper Category',
 
-    'categories_index' => 'Index',
+    'categories_index'  => 'Index',
     'categories_create' => 'Create',
-    'categories_show' => 'Detail',
+    'categories_show'   => 'Detail',
     'categories_update' => 'Edit',
-    'categories_delete' => 'Delete'
+    'categories_delete' => 'Delete',
 ];

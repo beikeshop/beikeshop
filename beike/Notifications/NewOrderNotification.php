@@ -11,11 +11,11 @@
 
 namespace Beike\Notifications;
 
+use Beike\Mail\CustomerNewOrder;
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
-use Beike\Mail\CustomerNewOrder;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
 class NewOrderNotification extends Notification implements ShouldQueue
 {
@@ -76,7 +76,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
     public function toDatabase()
     {
         return [
-            'order' => $this->order
+            'order' => $this->order,
         ];
     }
 }

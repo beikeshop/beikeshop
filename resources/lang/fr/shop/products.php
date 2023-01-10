@@ -10,12 +10,12 @@
  */
 
 return [
-    'search' => 'chercher',
+    'search'           => 'chercher',
     'add_to_favorites' => 'ajouter aux Favoris',
-    'add_to_cart' => 'ajouter au panier',
-    'buy_now' => 'Acheter maintenant',
-    'product_details' => 'détails du produit',
-    'in_stock' => 'En stock',
-    'out_stock' => 'En rupture de stock',
-    'model' => 'maquette',
+    'add_to_cart'      => 'ajouter au panier',
+    'buy_now'          => 'Acheter maintenant',
+    'product_details'  => 'détails du produit',
+    'in_stock'         => 'En stock',
+    'out_stock'        => 'En rupture de stock',
+    'model'            => 'maquette',
 ];

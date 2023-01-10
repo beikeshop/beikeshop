@@ -10,10 +10,10 @@
  */
 
 return [
-    'select_all' => 'Comprobar todo',
-    'unselect_all' => 'desmarcar',
-    'role_name' => 'Nombre de rol',
+    'select_all'      => 'Comprobar todo',
+    'unselect_all'    => 'desmarcar',
+    'role_name'       => 'Nombre de rol',
     'role_management' => 'gestión de roles',
-    'permission' => 'permiso',
-    'error_roles' => 'Seleccione al menos un rol',
+    'permission'      => 'permiso',
+    'error_roles'     => 'Seleccione al menos un rol',
 ];

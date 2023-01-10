@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => 'Steps',
-    'cart' => 'Cart',
-    'checkout' => 'Checkout',
+    'index'                  => 'Steps',
+    'cart'                   => 'Cart',
+    'checkout'               => 'Checkout',
     'submitted_successfully' => 'Place Order',
-    'payment' => 'Payment',
+    'payment'                => 'Payment',
 ];

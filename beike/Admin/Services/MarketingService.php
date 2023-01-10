@@ -11,11 +11,11 @@
 
 namespace Beike\Admin\Services;
 
-use ZanySoft\Zip\Zip;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Client\PendingRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use ZanySoft\Zip\Zip;
 
 class MarketingService
 {
@@ -35,7 +35,6 @@ class MarketingService
         return new self;
     }
 
-
     /**
      * 获取可插件市场插件列表
      *
@@ -45,12 +44,12 @@ class MarketingService
     public function getList(array $filters = []): mixed
     {
         $url = config('beike.api_url') . '/api/plugins';
-        if (!empty($filters)) {
+        if (! empty($filters)) {
             $url .= '?' . http_build_query($filters);
         }
+
         return $this->httpClient->get($url)->json();
     }
-
 
     /**
      * 获取插件市场单个插件信息
@@ -60,14 +59,14 @@ class MarketingService
      */
     public function getPlugin($pluginCode): mixed
     {
-        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}";
+        $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}";
         $plugin = $this->httpClient->get($url)->json();
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件不存在或已下架');
         }
+
         return $plugin;
     }
-
 
     /**
      * 购买插件市场单个插件
@@ -85,11 +84,10 @@ class MarketingService
         $status = $content['status'] ?? '';
         if ($status == 'success') {
             return $content['data'];
-        } else {
-            throw new \Exception($content['message'] ?? '');
         }
-    }
 
+            throw new \Exception($content['message'] ?? '');
+    }
 
     /**
      * 下载插件到网站
@@ -100,7 +98,7 @@ class MarketingService
     public function download($pluginCode)
     {
         $datetime = date('Y-m-d');
-        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/download";
+        $url      = config('beike.api_url') . "/api/plugins/{$pluginCode}/download";
 
         $content = $this->httpClient->get($url)->body();
 
@@ -108,7 +106,7 @@ class MarketingService
         Storage::disk('local')->put($pluginPath, $content);
 
         $pluginZip = storage_path('app/' . $pluginPath);
-        $zipFile = Zip::open($pluginZip);
+        $zipFile   = Zip::open($pluginZip);
         $zipFile->extract(base_path('plugins'));
     }
 }

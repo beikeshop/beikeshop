@@ -11,10 +11,10 @@
 
 namespace Beike\Services;
 
-use Illuminate\Support\Str;
 use Beike\Repositories\BrandRepo;
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\BrandDetail;
+use Illuminate\Support\Str;
 
 class DesignService
 {
@@ -32,9 +32,9 @@ class DesignService
             }
             $modulesData[$index] = $moduleData;
         }
+
         return ['modules' => $modulesData];
     }
-
 
     /**
      * @throws \Exception
@@ -50,9 +50,9 @@ class DesignService
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
         }
+
         return $content;
     }
-
 
     /**
      * 处理 SlideShow 模块
@@ -69,6 +69,7 @@ class DesignService
         }
 
         $content['images'] = self::handleImages($images);
+
         return $content;
     }
 
@@ -82,13 +83,13 @@ class DesignService
     private static function handleBrand($content): array
     {
         $brandIds = $content['brands'] ?? [];
-        $brands = BrandDetail::collection(BrandRepo::getListByIds($brandIds))->jsonSerialize();
+        $brands   = BrandDetail::collection(BrandRepo::getListByIds($brandIds))->jsonSerialize();
 
         $content['brands'] = $brands;
-        $content['title'] = $content['title'][locale()] ?? '';
+        $content['title']  = $content['title'][locale()] ?? '';
+
         return $content;
     }
-
 
     /**
      * 处理 SlideShow 模块
@@ -105,10 +106,10 @@ class DesignService
         }
 
         $content['images'] = self::handleImages($images);
-        $content['full'] = $content['full'] ?? false;
+        $content['full']   = $content['full'] ?? false;
+
         return $content;
     }
-
 
     /**
      * 处理选项卡商品列表模块
@@ -125,16 +126,16 @@ class DesignService
 
         foreach ($tabs as $index => $tab) {
             $tabs[$index]['title'] = $tab['title'][locale()] ?? '';
-            $productsIds = $tab['products'];
+            $productsIds           = $tab['products'];
             if ($productsIds) {
                 $tabs[$index]['products'] = ProductRepo::getProductsByIds($productsIds)->jsonSerialize();
             }
         }
-        $content['tabs'] = $tabs;
+        $content['tabs']  = $tabs;
         $content['title'] = $content['title'][locale()] ?? '';
+
         return $content;
     }
-
 
     /**
      * 处理图片以及链接
@@ -147,7 +148,7 @@ class DesignService
         }
 
         foreach ($images as $index => $image) {
-            $imagePath = $image['image'][locale()] ?? '';
+            $imagePath               = $image['image'][locale()] ?? '';
             $images[$index]['image'] = image_origin($imagePath);
 
             $link = $image['link'];
@@ -155,14 +156,13 @@ class DesignService
                 continue;
             }
 
-            $type = $link['type'] ?? '';
-            $value = $link['type'] == 'custom' ? $link['value'] : ((int)$link['value'] ?? 0);
+            $type                           = $link['type'] ?? '';
+            $value                          = $link['type'] == 'custom' ? $link['value'] : ((int) $link['value'] ?? 0);
             $images[$index]['link']['link'] = self::handleLink($type, $value);
         }
 
         return $images;
     }
-
 
     /**
      * 处理链接

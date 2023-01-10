@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => 'page d\'information',
-     'info_title' => 'titre des informations',
-     'info_content' => 'contenu',
+    'index'        => 'page d\'information',
+    'info_title'   => 'titre des informations',
+    'info_content' => 'contenu',
 
-     'pages_index' => 'Liste de pages simples',
-     'pages_create' => 'Créer une seule page',
-     'pages_show' => 'Détails d\'une seule page',
-     'pages_update' => 'Modification d\'une seule page',
-     'pages_delete' => 'Supprimer une seule page'
+    'pages_index'  => 'Liste de pages simples',
+    'pages_create' => 'Créer une seule page',
+    'pages_show'   => 'Détails d\'une seule page',
+    'pages_update' => 'Modification d\'une seule page',
+    'pages_delete' => 'Supprimer une seule page',
 ];

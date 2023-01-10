@@ -38,10 +38,11 @@ class CurrencyRepo
     public static function update($id, $data)
     {
         $item = Currency::query()->find($id);
-        if (!$item) {
+        if (! $item) {
             throw new \Exception("货币id {$id} 不存在");
         }
         $item->update($data);
+
         return $item;
     }
 
@@ -66,7 +67,6 @@ class CurrencyRepo
         }
     }
 
-
     /**
      * 获取所有货币列表
      *
@@ -76,7 +76,6 @@ class CurrencyRepo
     {
         return Currency::query()->get();
     }
-
 
     /**
      * 查找所有已开启货币
@@ -88,9 +87,9 @@ class CurrencyRepo
         if (self::$enabledCurrencies !== null) {
             return self::$enabledCurrencies;
         }
+
         return self::$enabledCurrencies = Currency::query()->where('status', true)->get();
     }
-
 
     /**
      * 根据code查找货币

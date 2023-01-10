@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     public array $links = [];
+
     private ?AdminUser $adminUser;
 
     /**
@@ -20,7 +21,6 @@ class Header extends Component
         $this->adminUser = current_user();
     }
 
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -28,31 +28,31 @@ class Header extends Component
      */
     public function render()
     {
-        $sidebar = new Sidebar();
+        $sidebar       = new Sidebar();
         $preparedMenus = $this->prepareMenus();
 
         foreach ($preparedMenus as $menu) {
             if ($menu['code']) {
-                $routes = [];
+                $routes         = [];
                 $sideMenuRoutes = $sidebar->{"get{$menu['code']}SubRoutes"}();
 
                 foreach ($sideMenuRoutes as $route) {
                     $route_first = explode('.', $route['route'])[0] ?? '';
-                    $routes[] = "admin." . $route['route'];
-                    $routes[] = 'admin.' . $route_first .  '.edit';
-                    $routes[] = 'admin.' . $route_first .  '.show';
+                    $routes[]    = 'admin.' . $route['route'];
+                    $routes[]    = 'admin.' . $route_first . '.edit';
+                    $routes[]    = 'admin.' . $route_first . '.show';
                 }
 
                 $is_route = equal_route($routes);
             } else {
-                $is_route = equal_route("admin." . $menu['route']);
+                $is_route = equal_route('admin.' . $menu['route']);
             }
 
             $this->addLink($menu['name'], $menu['route'], $is_route);
         }
+
         return view('admin::components.header');
     }
-
 
     /**
      * 默认菜单
@@ -68,9 +68,9 @@ class Header extends Component
             ['name' => trans('admin/common.setting'), 'route' => 'settings.index', 'code' => 'Setting'],
             // ['name' => trans('admin/common.marketing'), 'route' => 'marketing.index', 'code' => ''],
         ];
+
         return hook_filter('admin.header_menus', $menus);
     }
-
 
     /**
      * 添加后台顶部菜单链接
@@ -86,11 +86,11 @@ class Header extends Component
             return;
         }
 
-        $url = admin_route($route);
+        $url           = admin_route($route);
         $this->links[] = [
-            'title' => $title,
-            'url' => $url,
-            'active' => $active
+            'title'  => $title,
+            'url'    => $url,
+            'active' => $active,
         ];
     }
 }

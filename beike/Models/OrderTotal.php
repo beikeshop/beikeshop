@@ -14,7 +14,7 @@ namespace Beike\Models;
 class OrderTotal extends Base
 {
     protected $fillable = [
-        'order_id', 'code', 'value', 'title', 'reference'
+        'order_id', 'code', 'value', 'title', 'reference',
     ];
 
     protected $appends = ['value_format'];

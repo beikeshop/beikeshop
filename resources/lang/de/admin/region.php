@@ -10,14 +10,14 @@
  */
 
 return [
-     'index' => 'Regionsgruppe',
-     'regions_index' => 'Regionsgruppenliste',
-     'regions_create' => 'Regionsgruppe erstellen',
-     'regions_show' => 'Regionsgruppendetails',
-     'regions_update' => 'Regionsgruppe aktualisieren',
-     'regions_delete' => 'Regionsgruppe löschen',
-     'name' => 'Name',
-     'describe' => 'beschreiben',
-     'country' => 'Land',
-     'zone' => 'Provinz',
+    'index'          => 'Regionsgruppe',
+    'regions_index'  => 'Regionsgruppenliste',
+    'regions_create' => 'Regionsgruppe erstellen',
+    'regions_show'   => 'Regionsgruppendetails',
+    'regions_update' => 'Regionsgruppe aktualisieren',
+    'regions_delete' => 'Regionsgruppe löschen',
+    'name'           => 'Name',
+    'describe'       => 'beschreiben',
+    'country'        => 'Land',
+    'zone'           => 'Provinz',
 ];

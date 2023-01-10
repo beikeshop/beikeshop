@@ -13,9 +13,9 @@ namespace Beike\Repositories;
 
 use Beike\Models\Order;
 use Beike\Models\OrderProduct;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderProductRepo
 {
@@ -29,24 +29,23 @@ class OrderProductRepo
     {
         $orderProducts = [];
         foreach ($cartProducts as $cartProduct) {
-            $productName = $cartProduct['name'];
+            $productName   = $cartProduct['name'];
             $variantLabels = $cartProduct['variant_labels'] ?? '';
             if ($variantLabels) {
                 $productName .= " - {$variantLabels}";
             }
             $orderProducts[] = [
-                'product_id' => $cartProduct['product_id'],
+                'product_id'   => $cartProduct['product_id'],
                 'order_number' => $order->number,
-                'product_sku' => $cartProduct['product_sku'],
-                'name' => $productName,
-                'image' => $cartProduct['image'],
-                'quantity' => $cartProduct['quantity'],
-                'price' => $cartProduct['price'],
+                'product_sku'  => $cartProduct['product_sku'],
+                'name'         => $productName,
+                'image'        => $cartProduct['image'],
+                'quantity'     => $cartProduct['quantity'],
+                'price'        => $cartProduct['price'],
             ];
         }
         $order->orderProducts()->createMany($orderProducts);
     }
-
 
     /**
      * 查找单条商品明细数据

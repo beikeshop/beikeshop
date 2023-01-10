@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => 'marcher',
-    'cart' => 'Panier',
-    'checkout' => 'L\'addition s\'il-vous-plaît',
+    'index'                  => 'marcher',
+    'cart'                   => 'Panier',
+    'checkout'               => 'L\'addition s\'il-vous-plaît',
     'submitted_successfully' => 'Soumis avec succès',
-    'payment' => 'Paiement',
+    'payment'                => 'Paiement',
 ];

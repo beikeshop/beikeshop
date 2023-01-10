@@ -10,16 +10,16 @@
  */
 
 return [
-    'index' => 'Editar dirección',
-    'name' => 'Nombre',
-    'phone' => 'número de teléfono',
+    'index'      => 'Editar dirección',
+    'name'       => 'Nombre',
+    'phone'      => 'número de teléfono',
     'country_id' => 'Identificación del país',
-    'zone' => 'provincia',
-    'zone_id' => 'Identificación de la provincia',
-    'address_1' => 'Dirección 1',
-    'address_2' => 'dirección 2',
-    'address' => 'Dirección',
+    'zone'       => 'provincia',
+    'zone_id'    => 'Identificación de la provincia',
+    'address_1'  => 'Dirección 1',
+    'address_2'  => 'dirección 2',
+    'address'    => 'Dirección',
     'enter_city' => 'ingresa la direccion',
-    'post_code' => 'codigo postal',
-    'default' => 'dirección predeterminada',
+    'post_code'  => 'codigo postal',
+    'default'    => 'dirección predeterminada',
 ];

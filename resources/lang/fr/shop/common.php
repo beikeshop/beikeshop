@@ -10,10 +10,10 @@
  */
 
 return [
-    'home' => 'page de garde',
-    'submit' => 'nous faire parvenir',
-    'cancel' => 'Annuler',
+    'home'    => 'page de garde',
+    'submit'  => 'nous faire parvenir',
+    'cancel'  => 'Annuler',
     'confirm' => 'Bien sûr',
-    'no' => 'non',
-    'yes' => 'Oui',
+    'no'      => 'non',
+    'yes'     => 'Oui',
 ];

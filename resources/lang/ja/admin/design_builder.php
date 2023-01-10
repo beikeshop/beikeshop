@@ -10,9 +10,9 @@
  */
 
 return [
-     'module_brand' => 'ブランドモジュール',
-     'module_banner' => 'バナーモジュール',
-     'module_four_image_pro' => '1 行 4 つの画像 PRO',
-     'module_slideshow' => 'スライド モジュール',
-     'module_tab_products' => 'タブ製品',
+    'module_brand'          => 'ブランドモジュール',
+    'module_banner'         => 'バナーモジュール',
+    'module_four_image_pro' => '1 行 4 つの画像 PRO',
+    'module_slideshow'      => 'スライド モジュール',
+    'module_tab_products'   => 'タブ製品',
 ];

@@ -11,13 +11,13 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Beike\Models\Order;
-use Beike\Services\ShipmentService;
-use Illuminate\Http\Request;
-use Beike\Repositories\OrderRepo;
-use Beike\Services\StateMachineService;
 use Beike\Admin\Http\Resources\OrderSimple;
+use Beike\Models\Order;
+use Beike\Repositories\OrderRepo;
+use Beike\Services\ShipmentService;
+use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\OrderList;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -31,13 +31,13 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = OrderRepo::filterOrders($request->all());
-        $data = [
-            'orders' => OrderList::collection($orders),
+        $data   = [
+            'orders'   => OrderList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
         ];
+
         return view('admin::pages.orders.index', $data);
     }
-
 
     /**
      * 导出订单列表
@@ -50,49 +50,50 @@ class OrderController extends Controller
     {
         try {
             $orders = OrderRepo::filterAll($request->all());
-            $items = OrderSimple::collection($orders)->jsonSerialize();
+            $items  = OrderSimple::collection($orders)->jsonSerialize();
+
             return $this->downloadCsv('orders', $items, 'order');
         } catch (\Exception $e) {
             return redirect(admin_route('orders.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
 
-
     /**
      * 查看单个订单
      *
      * @param Request $request
-     * @param Order $order
+     * @param Order   $order
      * @return mixed
      * @throws \Exception
      */
     public function show(Request $request, Order $order)
     {
         $order->load(['orderTotals', 'orderHistories', 'orderShipments']);
-        $data = hook_filter('admin_order_detail', ['order' => $order, 'html_items' => []]);
+        $data             = hook_filter('admin_order_detail', ['order' => $order, 'html_items' => []]);
         $data['statuses'] = StateMachineService::getInstance($order)->nextBackendStatuses();
+
         return view('admin::pages.orders.form', $data);
     }
-
 
     /**
      * 更新订单状态,添加订单更新日志
      *
      * @param Request $request
-     * @param Order $order
+     * @param Order   $order
      * @return array
      * @throws \Throwable
      */
     public function updateStatus(Request $request, Order $order)
     {
-        $status = $request->get('status');
+        $status  = $request->get('status');
         $comment = $request->get('comment');
-        $notify = $request->get('notify');
+        $notify  = $request->get('notify');
 
         $shipment = ShipmentService::handleShipment(\request('express_code'), \request('express_number'));
 
         $stateMachine = new StateMachineService($order);
         $stateMachine->setShipment($shipment)->changeStatus($status, $comment, $notify);
+
         return json_success(trans('common.updated_success'));
     }
 }

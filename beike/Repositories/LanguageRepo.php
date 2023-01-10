@@ -12,9 +12,9 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Language;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class LanguageRepo
 {
@@ -26,13 +26,14 @@ class LanguageRepo
     public static function create($data)
     {
         $languageData = [
-            'name' => $data['name'] ?? '',
-            'code' => $data['code'] ?? '',
-            'locale' => $data['locale'] ?? '',
-            'image' => $data['image'] ?? '',
-            'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? 1),
+            'name'       => $data['name']   ?? '',
+            'code'       => $data['code']   ?? '',
+            'locale'     => $data['locale'] ?? '',
+            'image'      => $data['image']  ?? '',
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status'] ?? 1),
         ];
+
         return Language::query()->create($languageData);
     }
 
@@ -45,18 +46,19 @@ class LanguageRepo
     public static function update($id, $data)
     {
         $item = Language::query()->find($id);
-        if (!$item) {
+        if (! $item) {
             throw new \Exception("语言id {$id} 不存在");
         }
         $languageData = [
-            'name' => $data['name'] ?? '',
-            'code' => $data['code'] ?? '',
-            'locale' => $data['locale'] ?? '',
-            'image' => $data['image'] ?? '',
-            'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? 1),
+            'name'       => $data['name']   ?? '',
+            'code'       => $data['code']   ?? '',
+            'locale'     => $data['locale'] ?? '',
+            'image'      => $data['image']  ?? '',
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status'] ?? 1),
         ];
         $item->update($languageData);
+
         return $item;
     }
 

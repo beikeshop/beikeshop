@@ -33,13 +33,14 @@ class AddressRepo
      */
     public static function update($address, $data)
     {
-        if (!$address instanceof Address) {
+        if (! $address instanceof Address) {
             $address = Address::query()->find($address);
         }
-        if (!$address) {
+        if (! $address) {
             throw new \Exception("地址id {$address} 不存在");
         }
         $address->update($data);
+
         return $address;
     }
 
@@ -64,7 +65,6 @@ class AddressRepo
         }
     }
 
-
     /**
      * 获取某个客户地址列表
      *
@@ -78,8 +78,9 @@ class AddressRepo
         }
         if ($customer) {
             return $customer->addresses()->with('country')->get();
-        } else {
-            return collect();
         }
+
+            return collect();
+
     }
 }

@@ -10,17 +10,17 @@
  */
 
 return [
-    'list' => 'Order List',
+    'list'                 => 'Order List',
 
-    'order_quantity' => 'Order Quantity',
-    'order_amount' => 'Order Amount',
-    'orders_index' => 'Index',
-    'orders_create' => 'Create',
-    'orders_show' => 'Detail',
-    'orders_export' => 'Export',
-    'orders_update' => 'Update',
-    'orders_delete' => 'Delete',
-    'notify' => 'Whether to remind',
+    'order_quantity'       => 'Order Quantity',
+    'order_amount'         => 'Order Amount',
+    'orders_index'         => 'Index',
+    'orders_create'        => 'Create',
+    'orders_show'          => 'Detail',
+    'orders_export'        => 'Export',
+    'orders_update'        => 'Update',
+    'orders_delete'        => 'Delete',
+    'notify'               => 'Whether to remind',
     'orders_update_status' => 'Update Status',
-    'error_status' => 'Please select a status',
+    'error_status'         => 'Please select a status',
 ];

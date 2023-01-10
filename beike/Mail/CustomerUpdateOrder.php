@@ -13,9 +13,9 @@ namespace Beike\Mail;
 
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\App;
 
 class CustomerUpdateOrder extends Mailable implements ShouldQueue
@@ -23,6 +23,7 @@ class CustomerUpdateOrder extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     private Order $order;
+
     private string $fromCode;
 
     /**
@@ -32,7 +33,7 @@ class CustomerUpdateOrder extends Mailable implements ShouldQueue
      */
     public function __construct(Order $order, string $fromCode)
     {
-        $this->order = $order;
+        $this->order    = $order;
         $this->fromCode = $fromCode;
     }
 
@@ -45,6 +46,7 @@ class CustomerUpdateOrder extends Mailable implements ShouldQueue
     {
         $orderLocale = $this->order->locale;
         App::setLocale($orderLocale);
+
         return $this->view('mails.order_update', ['order' => $this->order, 'from_code' => $this->fromCode]);
     }
 }

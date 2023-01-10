@@ -34,7 +34,7 @@ class CustomerGroupRequest extends FormRequest
     {
         return [
             'name.*' => 'required|max:64',
-            'level' => 'required|max:16',
+            'level'  => 'required|max:16',
         ];
     }
 
@@ -42,7 +42,7 @@ class CustomerGroupRequest extends FormRequest
     {
         return [
             'descriptions.*.name' => trans('customer_group.name'),
-            'level' => trans('customer_group.level'),
+            'level'               => trans('customer_group.level'),
         ];
     }
 }

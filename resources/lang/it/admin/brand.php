@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => 'marca',
+    'index'         => 'marca',
 
-    'brands_index' => 'Elenco marche',
+    'brands_index'  => 'Elenco marche',
     'brands_create' => 'Crea un marchio',
-    'brands_show' => 'Dettagli del marchio',
+    'brands_show'   => 'Dettagli del marchio',
     'brands_update' => 'Aggiorna il marchio',
     'brands_delete' => 'rimuovere il marchio',
-    'error_upload' => "si prega di caricare l'icona"
+    'error_upload'  => "si prega di caricare l'icona",
 ];

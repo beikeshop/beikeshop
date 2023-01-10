@@ -25,10 +25,10 @@ class CountryRepo
     private static function handleParams($data)
     {
         return [
-            'name' => $data['name'] ?? '',
-            'code' => $data['code'] ?? '',
-            'sort_order' => (int)$data['sort_order'] ?? 0,
-            'status' => (bool)$data['status'] ?? 0,
+            'name'       => $data['name']             ?? '',
+            'code'       => $data['code']             ?? '',
+            'sort_order' => (int) $data['sort_order'] ?? 0,
+            'status'     => (bool) $data['status']    ?? 0,
         ];
     }
 
@@ -40,6 +40,7 @@ class CountryRepo
     public static function create($data)
     {
         $data = self::handleParams($data);
+
         return Country::query()->create($data);
     }
 
@@ -51,12 +52,13 @@ class CountryRepo
      */
     public static function update($id, $data)
     {
-        $data = self::handleParams($data);
+        $data    = self::handleParams($data);
         $country = Country::query()->find($id);
-        if (!$country) {
+        if (! $country) {
             throw new \Exception("国家id {$id} 不存在");
         }
         $country->update($data);
+
         return $country;
     }
 
@@ -102,7 +104,6 @@ class CountryRepo
         return $builder->paginate(perPage())->withQueryString();
     }
 
-
     /**
      * 获取已启用国家列表
      * @return Builder[]|Collection
@@ -111,7 +112,6 @@ class CountryRepo
     {
         return Country::query()->where('status', true)->select('id', 'name')->get();
     }
-
 
     /**
      * 获取所有国家列表

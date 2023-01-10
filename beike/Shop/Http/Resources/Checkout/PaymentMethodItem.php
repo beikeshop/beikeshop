@@ -17,12 +17,13 @@ class PaymentMethodItem extends JsonResource
     public function toArray($request): array
     {
         $pluginSetting = $this->plugin;
+
         return [
-            'type' => $this->type,
-            'code' => $this->code,
-            'name' => $pluginSetting->name,
+            'type'        => $this->type,
+            'code'        => $this->code,
+            'name'        => $pluginSetting->name,
             'description' => $pluginSetting->description,
-            'icon' => plugin_resize($this->code, $pluginSetting->icon),
+            'icon'        => plugin_resize($this->code, $pluginSetting->icon),
         ];
     }
 }

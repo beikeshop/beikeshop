@@ -10,10 +10,10 @@
  */
 
 return [
-     'admin_roles_index' => 'liste des rôles',
-     'admin_roles_create' => 'Créer des rôles',
-     'admin_roles_show' => 'détails des rôles',
-     'admin_roles_update' => 'mettre à jour les rôles',
-     'admin_roles_delete' => 'supprimer le rôle',
-     'select_one_at_least' => 'Les permissions ne peuvent pas être vides, veuillez en sélectionner au moins une'
+    'admin_roles_index'   => 'liste des rôles',
+    'admin_roles_create'  => 'Créer des rôles',
+    'admin_roles_show'    => 'détails des rôles',
+    'admin_roles_update'  => 'mettre à jour les rôles',
+    'admin_roles_delete'  => 'supprimer le rôle',
+    'select_one_at_least' => 'Les permissions ne peuvent pas être vides, veuillez en sélectionner au moins une',
 ];

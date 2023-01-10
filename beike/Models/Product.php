@@ -2,9 +2,9 @@
 
 namespace Beike\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Base
 {
@@ -12,10 +12,11 @@ class Product extends Base
     use SoftDeletes;
 
     protected $fillable = ['images', 'video', 'position', 'brand_id', 'tax_class_id', 'active', 'variables'];
+
     protected $casts = [
-        'active' => 'boolean',
+        'active'    => 'boolean',
         'variables' => 'array',
-        'images' => 'array',
+        'images'    => 'array',
     ];
 
     protected $appends = ['image'];
@@ -45,30 +46,31 @@ class Product extends Base
         return $this->hasMany(ProductSku::class);
     }
 
-    public function attributes() : HasMany
+    public function attributes(): HasMany
     {
         return $this->hasMany(ProductAttribute::class);
     }
 
     public function master_sku()
     {
-        return $this->hasOne(ProductSku::Class)->where('is_default', 1);
+        return $this->hasOne(ProductSku::class)->where('is_default', 1);
     }
 
     public function brand()
     {
-        return $this->belongsTo(Brand::Class, 'brand_id', 'id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 
     public function relations()
     {
-        return $this->belongsToMany(Product::class, ProductRelation::class, 'product_id', 'relation_id')->withTimestamps();
+        return $this->belongsToMany(self::class, ProductRelation::class, 'product_id', 'relation_id')->withTimestamps();
     }
 
     public function inCurrentWishlist()
     {
-        $customer = current_customer();
+        $customer   = current_customer();
         $customerId = $customer ? $customer->id : 0;
+
         return $this->hasOne(CustomerWishlist::class)->where('customer_id', $customerId);
     }
 
@@ -80,6 +82,7 @@ class Product extends Base
     public function getImageAttribute()
     {
         $images = $this->images ?? [];
+
         return $images[0] ?? '';
     }
 }

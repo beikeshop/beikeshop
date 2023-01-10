@@ -10,16 +10,16 @@
  */
 
 return [
-     'index' => 'Adresse bearbeiten',
-     'name' => 'Name',
-     'phone' => 'Telefonnummer',
-     'country_id' => 'Landes-ID',
-     'zone' => 'Provinz',
-     'zone_id' => 'Provinz-ID',
-     'address_1' => 'Adresse 1',
-     'adresse_2' => 'Adresse 2',
-     'adresse' => 'Adresse',
-     'enter_city' => 'Adresse eingeben',
-     'post_code' => 'Postleitzahl',
-     'default' => 'Standardadresse',
+    'index'      => 'Adresse bearbeiten',
+    'name'       => 'Name',
+    'phone'      => 'Telefonnummer',
+    'country_id' => 'Landes-ID',
+    'zone'       => 'Provinz',
+    'zone_id'    => 'Provinz-ID',
+    'address_1'  => 'Adresse 1',
+    'adresse_2'  => 'Adresse 2',
+    'adresse'    => 'Adresse',
+    'enter_city' => 'Adresse eingeben',
+    'post_code'  => 'Postleitzahl',
+    'default'    => 'Standardadresse',
 ];

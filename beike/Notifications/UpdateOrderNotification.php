@@ -11,17 +11,18 @@
 
 namespace Beike\Notifications;
 
+use Beike\Mail\CustomerUpdateOrder;
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
-use Beike\Mail\CustomerUpdateOrder;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
 class UpdateOrderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private Order $order;
+
     private string $fromCode;
 
     /**
@@ -31,7 +32,7 @@ class UpdateOrderNotification extends Notification implements ShouldQueue
      */
     public function __construct(Order $order, $fromCode)
     {
-        $this->order = $order;
+        $this->order    = $order;
         $this->fromCode = $fromCode;
     }
 
@@ -78,7 +79,7 @@ class UpdateOrderNotification extends Notification implements ShouldQueue
     public function toDatabase()
     {
         return [
-            'order' => $this->order
+            'order' => $this->order,
         ];
     }
 }

@@ -11,8 +11,8 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Address extends Base
 {
@@ -30,4 +30,3 @@ class Address extends Base
         return $this->belongsTo(Zone::class);
     }
 }
-

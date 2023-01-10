@@ -35,5 +35,4 @@ class OrderProduct extends Base
     {
         return currency_format($this->price);
     }
-
 }

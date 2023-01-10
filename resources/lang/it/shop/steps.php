@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => 'passo',
-    'cart' => 'carrello della spesa',
-    'checkout' => 'checkout',
+    'index'                  => 'passo',
+    'cart'                   => 'carrello della spesa',
+    'checkout'               => 'checkout',
     'submitted_successfully' => 'inviato con successo',
-    'payment' => 'pagamento',
+    'payment'                => 'pagamento',
 ];

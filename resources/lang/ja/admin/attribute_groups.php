@@ -10,6 +10,6 @@
  */
 
 return [
-    'index' => '属性グループ',
+    'index'            => '属性グループ',
     'create_at_groups' => '属性グループの作成',
 ];

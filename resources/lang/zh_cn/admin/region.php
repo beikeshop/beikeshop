@@ -10,14 +10,14 @@
  */
 
 return [
-    'index' => '区域组',
-    'regions_index' => '区域组列表',
+    'index'          => '区域组',
+    'regions_index'  => '区域组列表',
     'regions_create' => '创建区域组',
-    'regions_show' => '区域组详情',
+    'regions_show'   => '区域组详情',
     'regions_update' => '更新区域组',
     'regions_delete' => '删除区域组',
-    'name' => '名称',
-    'describe' => '描述',
-    'country' => '国家',
-    'zone' => '省份',
+    'name'           => '名称',
+    'describe'       => '描述',
+    'country'        => '国家',
+    'zone'           => '省份',
 ];

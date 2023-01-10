@@ -11,15 +11,16 @@
 
 namespace Beike\Services;
 
-use Intervention\Image\Facades\Image;
 use Intervention\Image\Exception\NotReadableException;
+use Intervention\Image\Facades\Image;
 
 class ImageService
 {
     private $image;
+
     private $imagePath;
 
-    const PLACEHOLDER_IMAGE = 'catalog/placeholder.png';
+    public const PLACEHOLDER_IMAGE = 'catalog/placeholder.png';
 
     /**
      * @param $image
@@ -27,10 +28,9 @@ class ImageService
      */
     public function __construct($image)
     {
-        $this->image = $image ?: self::PLACEHOLDER_IMAGE;
+        $this->image     = $image ?: self::PLACEHOLDER_IMAGE;
         $this->imagePath = public_path($this->image);
     }
-
 
     /**
      * 设置插件目录名称
@@ -48,7 +48,7 @@ class ImageService
         if (file_exists($this->imagePath)) {
             $this->image = strtolower('plugin/' . $dirName . $originImage);
         } else {
-            $this->image = self::PLACEHOLDER_IMAGE;
+            $this->image     = self::PLACEHOLDER_IMAGE;
             $this->imagePath = public_path($this->image);
         }
 
@@ -64,20 +64,20 @@ class ImageService
     public function resize(int $width = 100, int $height = 100): string
     {
         try {
-            if (!file_exists($this->imagePath)) {
-                $this->image = self::PLACEHOLDER_IMAGE;
+            if (! file_exists($this->imagePath)) {
+                $this->image     = self::PLACEHOLDER_IMAGE;
                 $this->imagePath = public_path($this->image);
             }
-            if (!file_exists($this->imagePath)) {
+            if (! file_exists($this->imagePath)) {
                 return '';
             }
 
             $extension = pathinfo($this->imagePath, PATHINFO_EXTENSION);
-            $newImage = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
+            $newImage  = 'cache/' . mb_substr($this->image, 0, mb_strrpos($this->image, '.')) . '-' . $width . 'x' . $height . '.' . $extension;
 
             $newImagePath = public_path($newImage);
-            if (!is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
-                ini_set("memory_limit", "-1");
+            if (! is_file($newImagePath) || (filemtime($this->imagePath) > filemtime($newImagePath))) {
+                ini_set('memory_limit', '-1');
                 create_directories(dirname($newImage));
                 $img = Image::make($this->imagePath);
 
@@ -89,12 +89,12 @@ class ImageService
                 $canvas->insert($img, 'center');
                 $canvas->save($newImagePath);
             }
+
             return asset($newImage);
         } catch (NotReadableException $e) {
             return $this->originUrl();
         }
     }
-
 
     /**
      * 获取原图地址

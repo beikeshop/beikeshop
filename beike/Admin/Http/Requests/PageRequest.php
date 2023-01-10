@@ -33,9 +33,9 @@ class PageRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'descriptions.*.title' => 'required|string|min:3|max:32',
+            'descriptions.*.title'   => 'required|string|min:3|max:32',
             'descriptions.*.content' => 'required|string',
-            'descriptions.*.locale' => 'required|string',
+            'descriptions.*.locale'  => 'required|string',
         ];
 
         return $rules;
@@ -44,7 +44,7 @@ class PageRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => trans('page.title'),
+            'title'   => trans('page.title'),
             'content' => trans('page.content'),
         ];
     }

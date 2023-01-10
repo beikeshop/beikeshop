@@ -17,38 +17,42 @@ use Illuminate\Support\Str;
 
 class TotalService
 {
-    const TOTAL_CODES = [
+    public const TOTAL_CODES = [
         'subtotal',
         'tax',
         'shipping',
-        'order_total'
+        'order_total',
     ];
 
     public Cart $currentCart;
+
     public array $cartProducts;
+
     public array $taxes = [];
+
     public array $totals;
+
     public float $amount = 0;
+
     public string $shippingMethod = '';
 
     public function __construct($currentCart, $cartProducts)
     {
-        $this->currentCart = $currentCart;
+        $this->currentCart  = $currentCart;
         $this->cartProducts = $cartProducts;
         $this->setShippingMethod($currentCart->shipping_method_code);
         $this->getTaxes();
     }
 
-
     /**
      * 设置配送方式
      */
-    public function setShippingMethod($methodCode): TotalService
+    public function setShippingMethod($methodCode): self
     {
         $this->shippingMethod = $methodCode;
+
         return $this;
     }
-
 
     /**
      * 获取税费数据
@@ -59,7 +63,7 @@ class TotalService
     {
         $addressInfo = [
             'shipping_address' => $this->currentCart->shippingAddress,
-            'payment_address' => $this->currentCart->paymentAddress,
+            'payment_address'  => $this->currentCart->paymentAddress,
         ];
         $taxLib = Tax::getInstance($addressInfo);
 
@@ -70,7 +74,7 @@ class TotalService
 
             $taxRates = $taxLib->getRates($product['price'], $product['tax_class_id']);
             foreach ($taxRates as $taxRate) {
-                if (!isset($this->taxes[$taxRate['tax_rate_id']])) {
+                if (! isset($this->taxes[$taxRate['tax_rate_id']])) {
                     $this->taxes[$taxRate['tax_rate_id']] = ($taxRate['amount'] * $product['quantity']);
                 } else {
                     $this->taxes[$taxRate['tax_rate_id']] += ($taxRate['amount'] * $product['quantity']);
@@ -81,7 +85,6 @@ class TotalService
         return $this->taxes;
     }
 
-
     /**
      * @param CheckoutService $checkout
      * @return array
@@ -90,8 +93,8 @@ class TotalService
     {
         foreach (self::TOTAL_CODES as $code) {
             $serviceName = Str::studly($code) . 'Service';
-            $service = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
-            if (!class_exists($service) || !method_exists($service, 'getTotal')) {
+            $service     = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+            if (! class_exists($service) || ! method_exists($service, 'getTotal')) {
                 continue;
             }
             $service::getTotal($checkout);

@@ -24,7 +24,7 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:2|max:16',
+            'name'  => 'required|string|min:2|max:16',
             'email' => 'required|email:rfc|unique:customers,email,' . current_customer()->id,
         ];
     }
@@ -32,7 +32,7 @@ class EditRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => trans('shop/account.edit.name'),
+            'name'  => trans('shop/account.edit.name'),
             'email' => trans('shop/account.edit.email'),
         ];
     }

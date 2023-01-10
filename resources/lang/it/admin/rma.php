@@ -10,21 +10,21 @@
  */
 
 return [
-    'index' => 'Applicazione post-vendita',
+    'index'             => 'Applicazione post-vendita',
 
-    'rmas_index' => 'Elenco servizi post-vendita',
-    'rmas_show' => 'Dettagli servizio post-vendita',
-    'rmas_update' => 'Aggiorna servizio post-vendita',
-    'rmas_delete' => 'Elimina servizio post-vendita',
+    'rmas_index'        => 'Elenco servizi post-vendita',
+    'rmas_show'         => 'Dettagli servizio post-vendita',
+    'rmas_update'       => 'Aggiorna servizio post-vendita',
+    'rmas_delete'       => 'Elimina servizio post-vendita',
 
-    'customers_name' => 'nome cliente',
-    'quantity' => 'quantità',
-    'service_type' => 'tipo di servizio',
-    'rma_details' => 'Dettagli dell\'applicazione post-vendita',
-    'reasons_return' => 'Motivo del reso',
-    'current_state' => 'stato corrente',
-    'modify_status' => 'modifica stato',
-    'remarks' => 'osservazioni',
-    'update_status' => 'stato di aggiornamento',
+    'customers_name'    => 'nome cliente',
+    'quantity'          => 'quantità',
+    'service_type'      => 'tipo di servizio',
+    'rma_details'       => 'Dettagli dell\'applicazione post-vendita',
+    'reasons_return'    => 'Motivo del reso',
+    'current_state'     => 'stato corrente',
+    'modify_status'     => 'modifica stato',
+    'remarks'           => 'osservazioni',
+    'update_status'     => 'stato di aggiornamento',
     'operation_history' => 'storia_operazione',
 ];

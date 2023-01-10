@@ -25,4 +25,3 @@ class Country extends Base
         return $this->hasMany(Zone::class);
     }
 }
-

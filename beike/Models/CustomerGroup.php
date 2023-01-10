@@ -10,7 +10,6 @@ class CustomerGroup extends Base
 
     protected $fillable = ['total', 'reward_point_factor', 'use_point_factor', 'discount_factor', 'level'];
 
-
     public function description()
     {
         return $this->hasOne(CustomerGroupDescription::class)->where('locale', locale());
@@ -20,5 +19,4 @@ class CustomerGroup extends Base
     {
         return $this->hasMany(CustomerGroupDescription::class);
     }
-
 }

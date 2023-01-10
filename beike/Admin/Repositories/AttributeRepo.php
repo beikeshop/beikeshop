@@ -11,10 +11,8 @@
 
 namespace Beike\Admin\Repositories;
 
-use Beike\Admin\Http\Resources\TaxClassDetail;
 use Beike\Models\Attribute;
 use Beike\Models\AttributeValue;
-use Beike\Models\TaxClass;
 
 class AttributeRepo
 {
@@ -27,14 +25,14 @@ class AttributeRepo
     {
         $attribute = Attribute::query()->create([
             'attribute_group_id' => $data['attribute_group_id'],
-            'sort_order' => $data['sort_order'],
+            'sort_order'         => $data['sort_order'],
         ]);
 
         $descriptions = [];
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attribute->descriptions()->createMany($descriptions);
@@ -46,14 +44,14 @@ class AttributeRepo
     {
         $attribute = Attribute::query()->updateOrCreate(['id' => $id], [
             'attribute_group_id' => $data['attribute_group_id'],
-            'sort_order' => $data['sort_order'],
+            'sort_order'         => $data['sort_order'],
         ]);
 
         $descriptions = [];
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attribute->descriptions()->delete();
@@ -72,7 +70,7 @@ class AttributeRepo
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attributeValue->descriptions()->createMany($descriptions);
@@ -88,7 +86,7 @@ class AttributeRepo
         foreach ($data['name'] as $locale => $name) {
             $descriptions[] = [
                 'locale' => $locale,
-                'name' => $name,
+                'name'   => $name,
             ];
         }
         $attributeValue->descriptions()->delete();
@@ -113,7 +111,6 @@ class AttributeRepo
         $attribute->values()->delete();
         $attribute->delete();
     }
-
 
     public static function autocomplete($name)
     {

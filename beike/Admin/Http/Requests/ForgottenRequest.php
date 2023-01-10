@@ -31,7 +31,7 @@ class ForgottenRequest extends FormRequest
     public function attributes()
     {
         return [
-            'password' => trans('customer.password')
+            'password' => trans('customer.password'),
         ];
     }
 }

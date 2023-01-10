@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => 'Kategorie',
-     'edit_category' => 'Kategorie bearbeiten',
-     'upper_category' => 'höhere Kategorie',
+    'index'             => 'Kategorie',
+    'edit_category'     => 'Kategorie bearbeiten',
+    'upper_category'    => 'höhere Kategorie',
 
-     'categories_index' => 'Kategorieliste',
-     'categories_create' => 'Kategorien erstellen',
-     'categories_show' => 'Kategoriedetails',
-     'categories_update' => 'Kategorien aktualisieren',
-     'categories_delete' => 'Kategorie löschen',
+    'categories_index'  => 'Kategorieliste',
+    'categories_create' => 'Kategorien erstellen',
+    'categories_show'   => 'Kategoriedetails',
+    'categories_update' => 'Kategorien aktualisieren',
+    'categories_delete' => 'Kategorie löschen',
 ];

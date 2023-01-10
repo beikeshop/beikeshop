@@ -33,7 +33,7 @@ class FinalInstallManager
     {
         try {
             if (config('installer.final.key')) {
-                Artisan::call('key:generate', ['--force'=> true], $outputLog);
+                Artisan::call('key:generate', ['--force' => true], $outputLog);
             }
         } catch (Exception $e) {
             return static::response($e->getMessage(), $outputLog);
@@ -71,8 +71,8 @@ class FinalInstallManager
     private static function response($message, BufferedOutput $outputLog)
     {
         return [
-            'status' => 'error',
-            'message' => $message,
+            'status'      => 'error',
+            'message'     => $message,
             'dbOutputLog' => $outputLog->fetch(),
         ];
     }

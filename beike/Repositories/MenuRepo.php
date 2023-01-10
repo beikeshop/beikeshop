@@ -27,13 +27,13 @@ class MenuRepo
         }
 
         $locale = locale();
-        $menus = $menuSetting['menus'];
+        $menus  = $menuSetting['menus'];
 
         foreach ($menus as $index => $menu) {
-            $menu['new_window'] = $menu['link']['new_window'] ?? false;
-            $menu['link'] = handle_link($menu['link'])['link'] ?? '';
-            $menu['name'] = $menu['name'][$locale] ?? '';
-            $menu['badge']['name'] = $menu['badge']['name'][$locale] ?? '';
+            $menu['new_window']    = $menu['link']['new_window']        ?? false;
+            $menu['link']          = handle_link($menu['link'])['link'] ?? '';
+            $menu['name']          = $menu['name'][$locale]             ?? '';
+            $menu['badge']['name'] = $menu['badge']['name'][$locale]    ?? '';
 
             if ($menu['childrenGroup']) {
                 $menu['children_group'] = self::handleChildrenGroup($menu['childrenGroup']);
@@ -43,7 +43,6 @@ class MenuRepo
 
         return $menus;
     }
-
 
     /**
      * 处理头部 menu 子菜单数据
@@ -59,15 +58,16 @@ class MenuRepo
             $childrenGroup['name'] = $childrenGroup['name'][$locale] ?? '';
             if ($childrenGroup['type'] == 'image') {
                 $childrenGroup['image']['image'] = image_origin($childrenGroup['image']['image'][$locale] ?? '');
-                $childrenGroup['image']['link'] = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
+                $childrenGroup['image']['link']  = type_route($childrenGroup['image']['link']['type'], $childrenGroup['image']['link']['value']);
             } elseif ($childrenGroup['children']) {
                 foreach ($childrenGroup['children'] as $childrenIndex => $children) {
-                    $children['link'] = handle_link($children['link']);
+                    $children['link']                          = handle_link($children['link']);
                     $childrenGroup['children'][$childrenIndex] = $children;
                 }
             }
             $childrenGroups[$groupIndex] = $childrenGroup;
         }
+
         return $childrenGroups;
     }
 }

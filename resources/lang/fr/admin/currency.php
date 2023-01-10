@@ -9,11 +9,11 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-     'decimal_point' => '.',
-     'thousand_point' => ',',
-     'currencies_index' => 'liste des devises',
-     'currencies_create' => 'Créer une devise',
-     'currencies_show' => 'détails de la devise',
-     'currencies_update' => 'mettre à jour la devise',
-     'currencies_delete' => 'Supprimer la devise',
+    'decimal_point'     => '.',
+    'thousand_point'    => ',',
+    'currencies_index'  => 'liste des devises',
+    'currencies_create' => 'Créer une devise',
+    'currencies_show'   => 'détails de la devise',
+    'currencies_update' => 'mettre à jour la devise',
+    'currencies_delete' => 'Supprimer la devise',
 ];

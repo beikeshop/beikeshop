@@ -11,7 +11,6 @@
 
 namespace Beike\Services;
 
-
 use Beike\Models\Brand;
 use Beike\Models\Category;
 use Beike\Models\Page;
@@ -21,7 +20,7 @@ class SitemapService
 {
     public static function gen(): void
     {
-        $sitemap = resolve("sitemap");
+        $sitemap = resolve('sitemap');
 
         $sitemap->add(shop_route('brands.index'), date('c'));
         $sitemap->add(shop_route('categories.index'), date('c'));
@@ -32,22 +31,22 @@ class SitemapService
 
         $products = Product::query()->where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($products as $item) {
-            $sitemap->add(shop_route('products.show', ['product'=>$item->id]), $item->updated_at->format('c'));
+            $sitemap->add(shop_route('products.show', ['product' => $item->id]), $item->updated_at->format('c'));
         }
 
         $brands = Brand::query()->where('status', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($brands as $item) {
-            $sitemap->add(shop_route('brands.show', ['id'=>$item->id]), $item->updated_at->format('c'));
+            $sitemap->add(shop_route('brands.show', ['id' => $item->id]), $item->updated_at->format('c'));
         }
 
         $categories = Category::query()->where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($categories as $item) {
-            $sitemap->add(shop_route('categories.show', ['category'=>$item->id]), $item->updated_at->format('c'));
+            $sitemap->add(shop_route('categories.show', ['category' => $item->id]), $item->updated_at->format('c'));
         }
 
         $pages = Page::query()->where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($pages as $item) {
-            $sitemap->add(shop_route('pages.show', ['page'=>$item->id]), $item->updated_at->format('c'));
+            $sitemap->add(shop_route('pages.show', ['page' => $item->id]), $item->updated_at->format('c'));
         }
 
         $sitemap->store('xml', 'sitemap');

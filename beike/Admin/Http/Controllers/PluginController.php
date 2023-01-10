@@ -11,12 +11,12 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Exception;
-use Illuminate\Http\Request;
+use Beike\Admin\Http\Resources\PluginResource;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
+use Exception;
 use Illuminate\Contracts\View\View;
-use Beike\Admin\Http\Resources\PluginResource;
+use Illuminate\Http\Request;
 
 class PluginController extends Controller
 {
@@ -25,11 +25,11 @@ class PluginController extends Controller
      */
     public function index()
     {
-        $plugins = app('plugin')->getPlugins();
+        $plugins         = app('plugin')->getPlugins();
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+
         return view('admin::pages.plugins.index', $data);
     }
-
 
     /**
      * 上传插件
@@ -38,9 +38,9 @@ class PluginController extends Controller
     {
         $zipFile = $request->file('file');
         app('plugin')->import($zipFile);
+
         return json_success(trans('common.success'));
     }
-
 
     /**
      * @param Request $request
@@ -52,9 +52,9 @@ class PluginController extends Controller
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::installPlugin($plugin);
+
         return json_success(trans('common.success'));
     }
-
 
     /**
      * @param Request $request
@@ -66,9 +66,9 @@ class PluginController extends Controller
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::uninstallPlugin($plugin);
+
         return json_success(trans('common.success'));
     }
-
 
     /**
      * @param Request $request
@@ -78,12 +78,12 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code): View
     {
-        $plugin = app('plugin')->getPluginOrFail($code);
+        $plugin     = app('plugin')->getPluginOrFail($code);
         $columnView = $plugin->getColumnView();
-        $view = $columnView ?: 'admin::pages.plugins.form';
+        $view       = $columnView ?: 'admin::pages.plugins.form';
+
         return view($view, ['plugin' => $plugin]);
     }
-
 
     /**
      * @param Request $request
@@ -104,9 +104,9 @@ class PluginController extends Controller
 
         SettingRepo::update('plugin', $code, $fields);
         hook_action('after_edit_plugin', ['plugin_code' => $code, 'fields' => $fields]);
+
         return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
     }
-
 
     /**
      * @param Request $request
@@ -119,6 +119,7 @@ class PluginController extends Controller
         app('plugin')->getPluginOrFail($code);
         $status = $request->get('status');
         SettingRepo::update('plugin', $code, ['status' => $status]);
+
         return json_success(trans('common.updated_success'));
     }
 }

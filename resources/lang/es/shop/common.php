@@ -10,10 +10,10 @@
  */
 
 return [
-    'home' => 'página delantera',
-    'submit' => 'enviar',
-    'cancel' => 'Cancelar',
+    'home'    => 'página delantera',
+    'submit'  => 'enviar',
+    'cancel'  => 'Cancelar',
     'confirm' => 'Por supuesto',
-    'no' => 'no',
-    'yes' => 'Sí',
+    'no'      => 'no',
+    'yes'     => 'Sí',
 ];

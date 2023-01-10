@@ -10,9 +10,9 @@
  */
 
 return [
-    'module_brand' => 'Brand Module',
-    'module_banner' => 'Banner Module',
+    'module_brand'          => 'Brand Module',
+    'module_banner'         => 'Banner Module',
     'module_four_image_pro' => 'For Image PRO Module',
-    'module_slideshow' => 'Slideshow Module',
-    'module_tab_products' => 'Tab Products Module',
+    'module_slideshow'      => 'Slideshow Module',
+    'module_tab_products'   => 'Tab Products Module',
 ];

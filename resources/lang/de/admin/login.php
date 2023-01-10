@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => 'Melden Sie sich beim BeikeShop-Backend an',
-    'log_in' => 'Einloggen',
+    'log_in'        => 'Einloggen',
 ];

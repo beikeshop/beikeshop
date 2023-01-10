@@ -22,12 +22,12 @@ class OrderTotalService
     public static function getTotal(CheckoutService $checkout)
     {
         $totalService = $checkout->totalService;
-        $amount = $totalService->amount;
-        $totalData = [
-            'code' => 'order_total',
-            'title' => trans('shop/carts.order_total'),
-            'amount' => $amount,
-            'amount_format' => currency_format($amount)
+        $amount       = $totalService->amount;
+        $totalData    = [
+            'code'          => 'order_total',
+            'title'         => trans('shop/carts.order_total'),
+            'amount'        => $amount,
+            'amount_format' => currency_format($amount),
         ];
 
         $totalService->amount += $totalData['amount'];

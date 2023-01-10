@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => 'Steuerkategorie',
-     'rule' => 'Regel',
-     'based_on' => 'basierend auf',
-     'priority' => 'Priorität',
-     'tax_classes_index' => 'Liste der Steuerklassen',
-     'tax_classes_create' => 'Steuerklassen erstellen',
-     'tax_classes_show' => 'Steuerklassendetails',
-     'tax_classes_update' => 'Steuerklassen aktualisieren',
-     'tax_classes_delete' => 'Steuerklasse löschen',
+    'index'              => 'Steuerkategorie',
+    'rule'               => 'Regel',
+    'based_on'           => 'basierend auf',
+    'priority'           => 'Priorität',
+    'tax_classes_index'  => 'Liste der Steuerklassen',
+    'tax_classes_create' => 'Steuerklassen erstellen',
+    'tax_classes_show'   => 'Steuerklassendetails',
+    'tax_classes_update' => 'Steuerklassen aktualisieren',
+    'tax_classes_delete' => 'Steuerklasse löschen',
 ];

@@ -24,11 +24,11 @@ class CurrencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'code' => 'required|max:16',
-            'symbol_left' => 'max:16',
-            'symbol_right' => 'max:16',
-            'value' => 'required',
+            'name'          => 'required',
+            'code'          => 'required|max:16',
+            'symbol_left'   => 'max:16',
+            'symbol_right'  => 'max:16',
+            'value'         => 'required',
             'decimal_place' => 'required|max:1',
         ];
     }
@@ -36,11 +36,11 @@ class CurrencyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => trans('currency.name'),
-            'code' => trans('currency.code'),
-            'symbol_left' => trans('currency.symbol_left'),
-            'symbol_right' => trans('currency.symbol_right'),
-            'value' => trans('currency.value'),
+            'name'          => trans('currency.name'),
+            'code'          => trans('currency.code'),
+            'symbol_left'   => trans('currency.symbol_left'),
+            'symbol_right'  => trans('currency.symbol_right'),
+            'value'         => trans('currency.value'),
             'decimal_place' => trans('currency.decimal_place'),
         ];
     }

@@ -1,21 +1,21 @@
 <?php
 
+use Beike\Models\AdminUser;
 use Beike\Models\Customer;
 use Beike\Models\Language;
-use Beike\Models\AdminUser;
-use Illuminate\Support\Str;
-use Beike\Repositories\PageRepo;
 use Beike\Repositories\BrandRepo;
-use Illuminate\Support\Collection;
-use Beike\Repositories\ProductRepo;
-use Beike\Services\CurrencyService;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
-use TorMorten\Eventy\Facades\Eventy;
+use Beike\Repositories\PageRepo;
+use Beike\Repositories\ProductRepo;
+use Beike\Services\CurrencyService;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use TorMorten\Eventy\Facades\Eventy;
 
 /**
  * 获取后台设置到 settings 表的值
@@ -63,6 +63,7 @@ function admin_name(): string
     } elseif ($settingAdminName = system_setting('base.admin_name')) {
         return Str::snake($settingAdminName);
     }
+
     return 'admin';
 }
 
@@ -71,7 +72,7 @@ function admin_name(): string
  */
 function load_settings()
 {
-    if (is_installer() || !file_exists(__DIR__ . '/../storage/installed')) {
+    if (is_installer() || ! file_exists(__DIR__ . '/../storage/installed')) {
         return;
     }
     $result = \Beike\Repositories\SettingRepo::getGroupedSettings();
@@ -88,6 +89,7 @@ function load_settings()
 function admin_route($route, $params = []): string
 {
     $adminName = admin_name();
+
     return route("{$adminName}.{$route}", $params);
 }
 
@@ -126,7 +128,7 @@ function plugin_route($route, $params = []): string
 function type_route($type, $value): string
 {
     $types = ['category', 'product', 'brand', 'page', 'order', 'rma', 'static', 'custom'];
-    if (empty($type) || empty($value) || !in_array($type, $types)) {
+    if (empty($type) || empty($value) || ! in_array($type, $types)) {
         return '';
     }
     if (is_array($value)) {
@@ -150,6 +152,7 @@ function type_route($type, $value): string
     } elseif ($type == 'custom') {
         return $value;
     }
+
     return '';
 }
 
@@ -164,12 +167,12 @@ function type_route($type, $value): string
 function type_label($type, $value, array $texts = []): string
 {
     $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
-    if (empty($type) || empty($value) || !in_array($type, $types)) {
+    if (empty($type) || empty($value) || ! in_array($type, $types)) {
         return '';
     }
 
     $locale = locale();
-    $text = $texts[$locale] ?? '';
+    $text   = $texts[$locale] ?? '';
     if ($text) {
         return $text;
     }
@@ -187,6 +190,7 @@ function type_label($type, $value, array $texts = []): string
     } elseif ($type == 'custom') {
         return $text;
     }
+
     return '';
 }
 
@@ -199,9 +203,9 @@ function type_label($type, $value, array $texts = []): string
  */
 function handle_link($link): array
 {
-    $type = $link['type'] ?? '';
+    $type  = $link['type']  ?? '';
     $value = $link['value'] ?? '';
-    $texts = $link['text'] ?? [];
+    $texts = $link['text']  ?? [];
 
     $link['link'] = type_route($type, $value);
     $link['text'] = type_label($type, $value, $texts);
@@ -216,13 +220,13 @@ function handle_link($link): array
 function is_admin(): bool
 {
     $adminName = admin_name();
-    $uri = request()->getRequestUri();
+    $uri       = request()->getRequestUri();
     if (Str::startsWith($uri, "/{$adminName}")) {
         return true;
     }
+
     return false;
 }
-
 
 /**
  * 是否访问安装页面
@@ -231,9 +235,9 @@ function is_admin(): bool
 function is_installer(): bool
 {
     $uri = request()->getRequestUri();
-    return Str::startsWith($uri, "/installer");
-}
 
+    return Str::startsWith($uri, '/installer');
+}
 
 /**
  * 是否为当前访问路由
@@ -278,10 +282,11 @@ function current_customer(): ?Customer
 function locales(): array
 {
     $locales = LanguageRepo::enabled()->toArray();
+
     return array_map(function ($item) {
         return [
             'name' => $item['name'],
-            'code' => $item['code']
+            'code' => $item['code'],
         ];
     }, $locales);
 }
@@ -294,10 +299,12 @@ function locales(): array
 function locale(): string
 {
     if (is_admin()) {
-        $locales = collect(locales())->pluck('code');
+        $locales    = collect(locales())->pluck('code');
         $userLocale = current_user()->locale;
+
         return ($locales->contains($userLocale)) ? $userLocale : 'en';
     }
+
     return Session::get('locale') ?? system_setting('base.locale');
 }
 
@@ -311,6 +318,7 @@ function admin_locale(): string
     if (is_admin()) {
         return current_user()->locale;
     }
+
     return locale();
 }
 
@@ -320,14 +328,15 @@ function admin_locale(): string
  * @param $price
  * @param string $currency
  * @param string $value
- * @param bool $format
+ * @param bool   $format
  * @return string
  */
 function currency_format($price, string $currency = '', string $value = '', bool $format = true): string
 {
-    if (!$currency) {
+    if (! $currency) {
         $currency = is_admin() ? system_setting('base.currency') : current_currency_code();
     }
+
     return CurrencyService::getInstance()->format($price, $currency, $value, $format);
 }
 
@@ -345,9 +354,9 @@ function time_format($datetime = null)
     } elseif (is_int($datetime)) {
         return date($format, $datetime);
     }
+
     return date($format);
 }
-
 
 /**
  * 获取插件根目录
@@ -359,7 +368,6 @@ function plugin_path(string $path = ''): string
 {
     return base_path('plugins') . ($path ? DIRECTORY_SEPARATOR . ltrim($path, DIRECTORY_SEPARATOR) : $path);
 }
-
 
 /**
  * 插件图片缩放
@@ -378,6 +386,7 @@ function plugin_resize($pluginCode, $image, int $width = 100, int $height = 100)
         return $image;
     }
     $pluginDirName = $plugin->getDirname();
+
     return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->resize($width, $height);
 }
 
@@ -395,6 +404,7 @@ function image_resize($image, int $width = 100, int $height = 100)
     if (Str::startsWith($image, 'http')) {
         return $image;
     }
+
     return (new \Beike\Services\ImageService($image))->resize($width, $height);
 }
 
@@ -407,6 +417,7 @@ function image_origin($image)
     if (Str::startsWith($image, 'http')) {
         return $image;
     }
+
     return (new \Beike\Services\ImageService($image))->originUrl();
 }
 
@@ -428,6 +439,7 @@ function languages(): Collection
 function current_language()
 {
     $code = locale();
+
     return Language::query()->where('code', $code)->first();
 }
 
@@ -438,10 +450,11 @@ function current_language()
  */
 function admin_languages(): array
 {
-    $packages = language_packages();
+    $packages       = language_packages();
     $adminLanguages = collect($packages)->filter(function ($package) {
         return file_exists(resource_path("lang/{$package}/admin"));
     })->toArray();
+
     return array_values($adminLanguages);
 }
 
@@ -452,7 +465,8 @@ function admin_languages(): array
 function language_packages(): array
 {
     $languageDir = resource_path('lang');
-    return array_values(array_diff(scandir($languageDir), array('..', '.')));
+
+    return array_values(array_diff(scandir($languageDir), ['..', '.']));
 }
 
 /**
@@ -481,7 +495,8 @@ function current_currency_code(): string
 function current_currency_id(): string
 {
     $currencyCode = current_currency_code();
-    $currency = \Beike\Models\Currency::query()->where('code', $currencyCode)->first();
+    $currency     = \Beike\Models\Currency::query()->where('code', $currencyCode)->first();
+
     return $currency->id ?? 0;
 }
 
@@ -501,9 +516,10 @@ function quantity_format($quantity)
         return round($quantity / 1000000, 1) . 'M';
     } elseif ($quantity > 1000) {
         return round($quantity / 1000, 1) . 'K';
-    } else {
-        return $quantity;
     }
+
+        return $quantity;
+
 }
 
 /**
@@ -512,9 +528,9 @@ function quantity_format($quantity)
 function json_success($message, $data = []): array
 {
     return [
-        'status' => 'success',
+        'status'  => 'success',
         'message' => $message,
-        'data' => $data,
+        'data'    => $data,
     ];
 }
 
@@ -524,16 +540,16 @@ function json_success($message, $data = []): array
 function json_fail($message, $data = []): array
 {
     return [
-        'status' => 'fail',
+        'status'  => 'fail',
         'message' => $message,
-        'data' => $data,
+        'data'    => $data,
     ];
 }
 
-if (!function_exists('sub_string')) {
+if (! function_exists('sub_string')) {
     /**
      * @param $string
-     * @param int $length
+     * @param int    $length
      * @param string $dot
      * @return string
      */
@@ -560,8 +576,9 @@ function to_sql($builder): array|string|null
     $sql = $builder->toSql();
     foreach ($builder->getBindings() as $binding) {
         $value = is_numeric($binding) ? $binding : "'" . $binding . "'";
-        $sql = preg_replace('/\?/', $value, $sql, 1);
+        $sql   = preg_replace('/\?/', $value, $sql, 1);
     }
+
     return $sql;
 }
 
@@ -571,11 +588,11 @@ function to_sql($builder): array|string|null
  */
 function create_directories($directoryPath)
 {
-    $path = '';
+    $path        = '';
     $directories = explode('/', $directoryPath);
     foreach ($directories as $directory) {
         $path = $path . '/' . $directory;
-        if (!is_dir(public_path($path))) {
+        if (! is_dir(public_path($path))) {
             @mkdir(public_path($path), 0755);
         }
     }
@@ -651,7 +668,6 @@ function is_mobile(): bool
     return (new \Jenssegers\Agent\Agent())->isMobile();
 }
 
-
 /**
  * 当前访问协议是否为 https
  *
@@ -659,20 +675,20 @@ function is_mobile(): bool
  */
 function is_secure(): bool
 {
-    if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+    if (! empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
         return true;
     } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https') {
         return true;
-    } elseif (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+    } elseif (! empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
         return true;
     } elseif (isset($_SERVER['SERVER_PORT']) && intval($_SERVER['SERVER_PORT']) === 443) {
         return true;
     } elseif (isset($_SERVER['REQUEST_SCHEME']) && strtolower($_SERVER['REQUEST_SCHEME']) === 'https') {
         return true;
     }
+
     return false;
 }
-
 
 /**
  * 每页商品显示数量
@@ -681,5 +697,5 @@ function is_secure(): bool
  */
 function perPage(): int
 {
-    return (int)system_setting('base.product_per_page', 20);
+    return (int) system_setting('base.product_per_page', 20);
 }

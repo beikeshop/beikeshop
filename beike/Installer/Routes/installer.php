@@ -8,7 +8,6 @@ use Beike\Installer\Controllers\RequirementsController;
 use Beike\Installer\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('installer')
     ->name('installer.')
     ->middleware(\App\Http\Middleware\SetLocaleInstaller::class)

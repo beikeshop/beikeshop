@@ -10,6 +10,6 @@
  */
 
 return [
-    'add_wishlist_success' => 'Ajouter aux favoris avec succès',
+    'add_wishlist_success'    => 'Ajouter aux favoris avec succès',
     'remove_wishlist_success' => 'Supprimer le favori avec succès',
 ];

@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => 'ステップ',
-    'cart' => 'ショッピングカート',
-    'checkout' => 'お勘定お願いします',
+    'index'                  => 'ステップ',
+    'cart'                   => 'ショッピングカート',
+    'checkout'               => 'お勘定お願いします',
     'submitted_successfully' => '正常に送信されました',
-    'payment' => '支払い',
+    'payment'                => '支払い',
 ];

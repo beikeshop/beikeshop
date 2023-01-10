@@ -10,13 +10,13 @@
  */
 
 return [
-    'decimal_point' => '.',
+    'decimal_point'  => '.',
     'thousand_point' => ',',
-    'name' => 'Nom',
-    'code' => 'codage',
-    'icon' => 'icône',
-    'symbol_left' => 'signe gauche',
-    'symbol_right' => 'bon signe',
-    'value' => 'valeur du taux de change',
-    'decimal_place' => 'décimales',
+    'name'           => 'Nom',
+    'code'           => 'codage',
+    'icon'           => 'icône',
+    'symbol_left'    => 'signe gauche',
+    'symbol_right'   => 'bon signe',
+    'value'          => 'valeur du taux de change',
+    'decimal_place'  => 'décimales',
 ];

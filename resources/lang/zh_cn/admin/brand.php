@@ -10,12 +10,12 @@
  */
 
 return [
-    'index' => '品牌',
+    'index'         => '品牌',
 
-    'brands_index' => '品牌列表',
+    'brands_index'  => '品牌列表',
     'brands_create' => '创建品牌',
-    'brands_show' => '品牌详情',
+    'brands_show'   => '品牌详情',
     'brands_update' => '更新品牌',
     'brands_delete' => '删除品牌',
-    'error_upload' => '请上传图标'
+    'error_upload'  => '请上传图标',
 ];

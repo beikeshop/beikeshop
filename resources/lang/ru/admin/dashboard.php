@@ -11,14 +11,14 @@
 
 return [
     'customer_view' => 'посещения пользователей',
-    'order_total' => 'сумма заказа',
-    'customer_new' => 'Добавить пользователя',
-    'order_amount' => 'Продажи',
-    'yesterday' => 'вчера',
-    'day_before' => 'за день до',
+    'order_total'   => 'сумма заказа',
+    'customer_new'  => 'Добавить пользователя',
+    'order_amount'  => 'Продажи',
+    'yesterday'     => 'вчера',
+    'day_before'    => 'за день до',
 
-    'order_report' => 'статистика заказов',
-    'latest_month' => 'месяц',
-    'latest_week' => 'неделя',
-    'latest_year' => 'один год',
+    'order_report'  => 'статистика заказов',
+    'latest_month'  => 'месяц',
+    'latest_week'   => 'неделя',
+    'latest_year'   => 'один год',
 ];

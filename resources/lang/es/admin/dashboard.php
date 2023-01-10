@@ -11,14 +11,14 @@
 
 return [
     'customer_view' => 'Visitas de usuarios',
-    'order_total' => 'Volumen de pedidos',
-    'customer_new' => 'Usuarios nuevos',
-    'order_amount' => 'Ventas',
-    'yesterday' => 'el dia de ayer',
-    'day_before' => 'que el día anterior',
+    'order_total'   => 'Volumen de pedidos',
+    'customer_new'  => 'Usuarios nuevos',
+    'order_amount'  => 'Ventas',
+    'yesterday'     => 'el dia de ayer',
+    'day_before'    => 'que el día anterior',
 
-    'order_report' => 'Estadísticas de pedidos',
-    'latest_month' => 'un mes',
-    'latest_week' => 'una semana',
-    'latest_year' => 'un año',
+    'order_report'  => 'Estadísticas de pedidos',
+    'latest_month'  => 'un mes',
+    'latest_week'   => 'una semana',
+    'latest_year'   => 'un año',
 ];

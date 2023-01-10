@@ -12,7 +12,7 @@ class ProductSku extends Base
 
     protected $casts = [
         'variants' => 'array',
-        'images' => 'array',
+        'images'   => 'array',
     ];
 
     protected $appends = ['image'];
@@ -25,22 +25,24 @@ class ProductSku extends Base
     public function getImageAttribute()
     {
         $images = $this->images ?? [];
+
         return $images[0] ?? '';
     }
 
     public function getVariantLabel(): string
     {
-        $product = $this->product;
-        $localeCode = locale();
+        $product      = $this->product;
+        $localeCode   = locale();
         $variantLabel = '';
         foreach ($product->variables as $index => $variable) {
-            $valueIndex = $this->variants[$index];
-            $variantName = $variable['name'][$localeCode] ?? '';
+            $valueIndex   = $this->variants[$index];
+            $variantName  = $variable['name'][$localeCode]                        ?? '';
             $variantValue = $variable['values'][$valueIndex]['name'][$localeCode] ?? '';
             if ($variantName && $variantValue) {
                 $variantLabel .= $variantName . ': ' . $variantValue . '; ';
             }
         }
+
         return $variantLabel;
     }
 }

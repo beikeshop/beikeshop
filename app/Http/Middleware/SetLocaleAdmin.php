@@ -23,6 +23,7 @@ class SetLocaleAdmin
         } else {
             App::setLocale('en');
         }
+
         return $next($request);
     }
 }

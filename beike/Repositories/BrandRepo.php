@@ -17,7 +17,6 @@ use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Database\Eloquent\Model;
 
 class BrandRepo
@@ -32,12 +31,13 @@ class BrandRepo
     public static function create($data)
     {
         $brandData = [
-            'name' => $data['name'] ?? '',
-            'first' => $data['first'] ?? '',
-            'logo' => $data['logo'] ?? '',
-            'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? 1),
+            'name'       => $data['name']  ?? '',
+            'first'      => $data['first'] ?? '',
+            'logo'       => $data['logo']  ?? '',
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status'] ?? 1),
         ];
+
         return Brand::query()->create($brandData);
     }
 
@@ -49,21 +49,22 @@ class BrandRepo
      */
     public static function update($brand, $data)
     {
-        if (!$brand instanceof Brand) {
+        if (! $brand instanceof Brand) {
             $brand = Brand::query()->find($brand);
         }
-        if (!$brand) {
+        if (! $brand) {
             throw new Exception("品牌id $brand 不存在");
         }
 
         $brandData = [
-            'name' => $data['name'] ?? '',
-            'first' => $data['first'] ?? '',
-            'logo' => $data['logo'] ?? '',
-            'sort_order' => (int)($data['sort_order'] ?? 0),
-            'status' => (bool)($data['status'] ?? 1),
+            'name'       => $data['name']  ?? '',
+            'first'      => $data['first'] ?? '',
+            'logo'       => $data['logo']  ?? '',
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status'] ?? 1),
         ];
         $brand->update($brandData);
+
         return $brand;
     }
 
@@ -95,9 +96,9 @@ class BrandRepo
     public static function list($filters): LengthAwarePaginator
     {
         $builder = self::getBuilder($filters);
+
         return $builder->paginate(perPage())->withQueryString();
     }
-
 
     /**
      * 获取商品品牌筛选builder
@@ -117,9 +118,9 @@ class BrandRepo
             $builder->where('status', $filters['status']);
         }
         $builder->orderByDesc('created_at');
+
         return $builder;
     }
-
 
     public static function listGroupByFirst(): array
     {
@@ -130,6 +131,7 @@ class BrandRepo
             $results[$brand->first][] = (new BrandDetail($brand))->jsonSerialize();
         }
         ksort($results);
+
         return $results;
     }
 
@@ -145,7 +147,6 @@ class BrandRepo
         return $builder->limit(10)->get();
     }
 
-
     /**
      * @param $ids
      * @return array
@@ -153,10 +154,11 @@ class BrandRepo
     public static function getNames($ids): array
     {
         $brands = self::getListByIds($ids);
+
         return $brands->map(function ($brand) {
             return [
-                'id' => $brand->id,
-                'name' => $brand->name ?? ''
+                'id'   => $brand->id,
+                'name' => $brand->name ?? '',
             ];
         })->toArray();
     }
@@ -170,11 +172,11 @@ class BrandRepo
         if (empty($ids)) {
             return [];
         }
+
         return Brand::query()
             ->whereIn('id', $ids)
             ->get();
     }
-
 
     /**
      * 通过品牌ID获取品牌名称
@@ -183,11 +185,11 @@ class BrandRepo
      */
     public static function getName($brand)
     {
-        $id = is_int($brand) ? $brand : $brand->id;
+        $id         = is_int($brand) ? $brand : $brand->id;
         $categories = self::getAllBrandsWithName();
+
         return $categories[$id]['name'] ?? '';
     }
-
 
     /**
      * 获取所有商品分类ID和名称列表
@@ -199,14 +201,15 @@ class BrandRepo
             return self::$allBrandsWithName;
         }
 
-        $items = [];
+        $items  = [];
         $brands = self::getBuilder()->select(['id', 'name'])->get();
         foreach ($brands as $brand) {
             $items[$brand->id] = [
-                'id' => $brand->id,
+                'id'   => $brand->id,
                 'name' => $brand->name ?? '',
             ];
         }
+
         return self::$allBrandsWithName = $items;
     }
 }

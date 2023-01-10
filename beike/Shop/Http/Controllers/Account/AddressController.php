@@ -11,20 +11,20 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
+use Beike\Repositories\AddressRepo;
+use Beike\Repositories\CountryRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\AddressRequest;
 use Beike\Shop\Http\Resources\Account\AddressResource;
-use Beike\Repositories\AddressRepo;
 use Beike\Shop\Services\AddressService;
 use Illuminate\Http\Request;
-use Beike\Repositories\CountryRepo;
 
 class AddressController extends Controller
 {
     public function index(Request $request)
     {
         $addresses = AddressRepo::listByCustomer(current_customer());
-        $data = [
+        $data      = [
             'countries' => CountryRepo::all(),
             'addresses' => AddressResource::collection($addresses),
         ];
@@ -41,15 +41,17 @@ class AddressController extends Controller
 
     public function store(AddressRequest $request)
     {
-        $data = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
+        $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
         $address = AddressService::create($data);
+
         return json_success(trans('common.created_success'), new AddressResource($address));
     }
 
     public function update(AddressRequest $request, int $id)
     {
-        $data = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
+        $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
         $address = AddressService::update($id, $data);
+
         return json_success(trans('common.updated_success'), new AddressResource($address));
     }
 

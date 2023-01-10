@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class Filter extends Component
 {
     public string $url;
+
     public array $queries;
 
     /**
@@ -16,7 +17,7 @@ class Filter extends Component
      */
     public function __construct(string $url)
     {
-        $this->url = $url;
+        $this->url     = $url;
         $this->queries = request()->query() ?? [];
     }
 

@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => '步骤',
-    'cart' => '购物车',
-    'checkout' => '结账',
+    'index'                  => '步骤',
+    'cart'                   => '购物车',
+    'checkout'               => '结账',
     'submitted_successfully' => '提交成功',
-    'payment' => '付款',
+    'payment'                => '付款',
 ];

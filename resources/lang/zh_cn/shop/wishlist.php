@@ -10,6 +10,6 @@
  */
 
 return [
-    'add_wishlist_success' => '加入收藏成功',
+    'add_wishlist_success'    => '加入收藏成功',
     'remove_wishlist_success' => '移除收藏成功',
 ];

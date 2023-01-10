@@ -2,8 +2,8 @@
 
 namespace Beike\Shop\View\Components;
 
-use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
 
 class AccountSidebar extends Component
 {
@@ -29,6 +29,7 @@ class AccountSidebar extends Component
         $data = [
             'customer' => $this->customer,
         ];
+
         return view('components.account.sidebar', $data);
     }
 }

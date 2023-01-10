@@ -4,8 +4,6 @@ namespace Beike\Installer\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-
 
 class InstallerServiceProvider extends ServiceProvider
 {
@@ -16,7 +14,7 @@ class InstallerServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../Routes/installer.php');
 
-        if (!is_installer()) {
+        if (! is_installer()) {
             return;
         }
 

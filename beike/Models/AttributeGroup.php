@@ -25,14 +25,13 @@ class AttributeGroup extends Base
         return $this->hasOne(AttributeGroupDescription::class)->where('locale', locale());
     }
 
-    public function descriptions() :HasMany
+    public function descriptions(): HasMany
     {
-        return $this->hasMany(AttributeGroupDescription::Class);
+        return $this->hasMany(AttributeGroupDescription::class);
     }
 
-    public function attributes() :HasMany
+    public function attributes(): HasMany
     {
-        return $this->hasMany(Attribute::Class);
+        return $this->hasMany(Attribute::class);
     }
 }
-

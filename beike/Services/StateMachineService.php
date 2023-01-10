@@ -11,27 +11,36 @@
 
 namespace Beike\Services;
 
-use Throwable;
 use Beike\Models\Order;
 use Beike\Models\OrderHistory;
 use Beike\Models\OrderShipment;
+use Throwable;
 
 class StateMachineService
 {
     private Order $order;
+
     private int $orderId;
+
     private string $comment;
+
     private bool $notify;
+
     private array $shipment;
 
-    const CREATED = 'created';                  // 已创建
-    const UNPAID = 'unpaid';                    // 待支付
-    const PAID = 'paid';                        // 已支付
-    const SHIPPED = 'shipped';                  // 已发货
-    const COMPLETED = 'completed';              // 已完成
-    const CANCELLED = 'cancelled';              // 已取消
+    public const CREATED = 'created';                  // 已创建
 
-    const ORDER_STATUS = [
+    public const UNPAID = 'unpaid';                    // 待支付
+
+    public const PAID = 'paid';                        // 已支付
+
+    public const SHIPPED = 'shipped';                  // 已发货
+
+    public const COMPLETED = 'completed';              // 已完成
+
+    public const CANCELLED = 'cancelled';              // 已取消
+
+    public const ORDER_STATUS = [
         self::CREATED,
         self::UNPAID,
         self::PAID,
@@ -40,27 +49,27 @@ class StateMachineService
         self::CANCELLED,
     ];
 
-    const MACHINES = [
+    public const MACHINES = [
         self::CREATED => [
             self::UNPAID => ['updateStatus', 'addHistory', 'notifyNewOrder'],
         ],
-        self::UNPAID => [
-            self::PAID => ['updateStatus', 'addHistory', 'subStock', 'notifyUpdateOrder'],
+        self::UNPAID  => [
+            self::PAID      => ['updateStatus', 'addHistory', 'subStock', 'notifyUpdateOrder'],
             self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
-        self::PAID => [
+        self::PAID    => [
             self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
-            self::SHIPPED => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder'],
-            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder']
+            self::SHIPPED   => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder'],
+            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::SHIPPED => [
-            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder']
-        ]
+            self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
+        ],
     ];
 
     public function __construct(Order $order)
     {
-        $this->order = $order;
+        $this->order   = $order;
         $this->orderId = $order->id;
     }
 
@@ -77,6 +86,7 @@ class StateMachineService
     public function setComment($comment): self
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -87,7 +97,8 @@ class StateMachineService
      */
     public function setNotify($flag): self
     {
-        $this->notify = (bool)$flag;
+        $this->notify = (bool) $flag;
+
         return $this;
     }
 
@@ -100,9 +111,9 @@ class StateMachineService
     public function setShipment(array $shipment = []): self
     {
         $this->shipment = $shipment;
+
         return $this;
     }
-
 
     /**
      * 获取所有订单状态列表
@@ -112,7 +123,7 @@ class StateMachineService
      */
     public static function getAllStatuses(): array
     {
-        $result = [];
+        $result   = [];
         $statuses = self::ORDER_STATUS;
         foreach ($statuses as $status) {
             if ($status == self::CREATED) {
@@ -120,9 +131,10 @@ class StateMachineService
             }
             $result[] = [
                 'status' => $status,
-                'name' => trans("order.{$status}")
+                'name'   => trans("order.{$status}"),
             ];
         }
+
         return $result;
     }
 
@@ -135,31 +147,32 @@ class StateMachineService
     public function nextBackendStatuses(): array
     {
         $currentStatusCode = $this->order->status;
-        $nextStatus = self::MACHINES[$currentStatusCode] ?? [];
+        $nextStatus        = self::MACHINES[$currentStatusCode] ?? [];
 
         if (empty($nextStatus)) {
             return [];
         }
         $nextStatusCodes = array_keys($nextStatus);
-        $result = [];
+        $result          = [];
         foreach ($nextStatusCodes as $status) {
             $result[] = [
                 'status' => $status,
-                'name' => trans("order.{$status}")
+                'name'   => trans("order.{$status}"),
             ];
         }
+
         return $result;
     }
 
     /**
      * @param $status
-     * @param string $comment
-     * @param bool $notify
+     * @param  string     $comment
+     * @param  bool       $notify
      * @throws \Exception
      */
     public function changeStatus($status, string $comment = '', bool $notify = false)
     {
-        $order = $this->order;
+        $order         = $this->order;
         $oldStatusCode = $order->status;
         $newStatusCode = $status;
 
@@ -171,7 +184,7 @@ class StateMachineService
             return;
         }
         foreach ($functions as $function) {
-            if (!method_exists($this, $function)) {
+            if (! method_exists($this, $function)) {
                 throw new \Exception("{$function} not exist in StateMachine!");
             }
             $this->{$function}($oldStatusCode, $status);
@@ -179,7 +192,6 @@ class StateMachineService
     }
 
     /**
-     *
      * 检测当前订单是否可以变更为某个状态
      *
      * @param $statusCode
@@ -187,16 +199,17 @@ class StateMachineService
      */
     private function validStatusCode($statusCode)
     {
-        if (!in_array($statusCode, self::ORDER_STATUS)) {
+        if (! in_array($statusCode, self::ORDER_STATUS)) {
             $statusCodeString = implode(', ', self::ORDER_STATUS);
+
             throw new \Exception("Invalid order status, must be one of the '{$statusCodeString}'");
         }
-        $orderId = $this->orderId;
-        $orderNumber = $this->order->number;
+        $orderId           = $this->orderId;
+        $orderNumber       = $this->order->number;
         $currentStatusCode = $this->order->status;
 
         $nextStatusCodes = collect($this->nextBackendStatuses())->pluck('status')->toArray();
-        if (!in_array($statusCode, $nextStatusCodes)) {
+        if (! in_array($statusCode, $nextStatusCodes)) {
             throw new \Exception("Order {$orderId}({$orderNumber}) is {$currentStatusCode}, cannot be changed to $statusCode");
         }
     }
@@ -212,7 +225,6 @@ class StateMachineService
     {
         return self::MACHINES[$oldStatus][$newStatus] ?? [];
     }
-
 
     /**
      * 更新订单状态
@@ -238,13 +250,12 @@ class StateMachineService
     {
         $history = new OrderHistory([
             'order_id' => $this->orderId,
-            'status' => $newCode,
-            'notify' => (int)$this->notify,
-            'comment' => (string)$this->comment,
+            'status'   => $newCode,
+            'notify'   => (int) $this->notify,
+            'comment'  => (string) $this->comment,
         ]);
         $history->saveOrFail();
     }
-
 
     /**
      * 减扣库存
@@ -255,7 +266,7 @@ class StateMachineService
     private function subStock($oldCode, $newCode)
     {
         $this->order->loadMissing([
-            'orderProducts.productSku'
+            'orderProducts.productSku',
         ]);
         $orderProducts = $this->order->orderProducts;
         foreach ($orderProducts as $orderProduct) {
@@ -267,51 +278,47 @@ class StateMachineService
         }
     }
 
-
     /**
      * 添加发货单号
      */
     private function addShipment($oldCode, $newCode)
     {
-        $shipment = $this->shipment;
-        $expressCode = $shipment['express_code'] ?? '';
+        $shipment       = $this->shipment;
+        $expressCode    = $shipment['express_code']    ?? '';
         $expressCompany = $shipment['express_company'] ?? '';
-        $expressNumber = $shipment['express_number'] ?? '';
+        $expressNumber  = $shipment['express_number']  ?? '';
         if ($expressCode && $expressCompany && $expressNumber) {
             $orderShipment = new OrderShipment([
-                'order_id' => $this->orderId,
-                'express_code' => $expressCode,
+                'order_id'        => $this->orderId,
+                'express_code'    => $expressCode,
                 'express_company' => $expressCompany,
-                'express_number' => $expressNumber,
+                'express_number'  => $expressNumber,
             ]);
             $orderShipment->saveOrFail();
         }
     }
-
 
     /**
      * 发送新订单通知
      */
     private function notifyNewOrder($oldCode, $newCode)
     {
-        if (!$this->notify) {
+        if (! $this->notify) {
             return;
         }
         $this->order->notifyNewOrder();
     }
-
 
     /**
      * 发送订单状态更新通知
      */
     private function notifyUpdateOrder($oldCode, $newCode)
     {
-        if (!$this->notify) {
+        if (! $this->notify) {
             return;
         }
         $this->order->notifyUpdateOrder($oldCode);
     }
-
 
     /**
      * 恢复库存

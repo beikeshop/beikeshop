@@ -11,7 +11,6 @@
 
 namespace Beike\Repositories;
 
-
 use Beike\Models\VerifyCode;
 
 class VerifyCodeRepo
@@ -24,6 +23,7 @@ class VerifyCodeRepo
     public static function create($data)
     {
         $verifyCode = VerifyCode::query()->create($data);
+
         return $verifyCode;
     }
 

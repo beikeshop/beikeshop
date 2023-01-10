@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => 'catégorie de taxe',
-     'rule' => 'règle',
-     'based_on' => 'basé sur',
-     'priority' => 'priorité',
-     'tax_classes_index' => 'liste des classes de taxes',
-     'tax_classes_create' => 'Créer des classes de taxes',
-     'tax_classes_show' => 'détails de la classe de taxes',
-     'tax_classes_update' => 'Mettre à jour les classes de taxes',
-     'tax_classes_delete' => 'supprimer la classe de taxe',
+    'index'              => 'catégorie de taxe',
+    'rule'               => 'règle',
+    'based_on'           => 'basé sur',
+    'priority'           => 'priorité',
+    'tax_classes_index'  => 'liste des classes de taxes',
+    'tax_classes_create' => 'Créer des classes de taxes',
+    'tax_classes_show'   => 'détails de la classe de taxes',
+    'tax_classes_update' => 'Mettre à jour les classes de taxes',
+    'tax_classes_delete' => 'supprimer la classe de taxe',
 ];

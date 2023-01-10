@@ -16,9 +16,11 @@ use Beike\Repositories\CurrencyRepo;
 class CurrencyService
 {
     private static $instance;
-    private $currencies = array();
 
-    public function __construct() {
+    private $currencies = [];
+
+    public function __construct()
+    {
         foreach (CurrencyRepo::listEnabled() as $result) {
             $this->currencies[$result->code] = $result;
         }
@@ -26,9 +28,10 @@ class CurrencyService
 
     public static function getInstance()
     {
-        if (!self::$instance) {
+        if (! self::$instance) {
             self::$instance = new self();
         }
+
         return self::$instance;
     }
 
@@ -38,19 +41,19 @@ class CurrencyService
             return $amount;
         }
 
-        $symbol_left = $this->currencies[$currency]->symbol_left;
-        $symbol_right = $this->currencies[$currency]->symbol_right;
+        $symbol_left   = $this->currencies[$currency]->symbol_left;
+        $symbol_right  = $this->currencies[$currency]->symbol_right;
         $decimal_place = $this->currencies[$currency]->decimal_place;
 
-        if (!$value) {
+        if (! $value) {
             $value = $this->currencies[$currency]->value;
         }
 
-        $amount = $value ? (float)$amount * $value : (float)$amount;
+        $amount = $value ? (float) $amount * $value : (float) $amount;
 
-        $amount = round($amount, (int)$decimal_place);
+        $amount = round($amount, (int) $decimal_place);
 
-        if (!$format) {
+        if (! $format) {
             return $amount;
         }
 
@@ -63,7 +66,7 @@ class CurrencyService
             $string .= $symbol_left;
         }
 
-        $string .= number_format(abs($amount), (int)$decimal_place, __('currency.decimal_point'), __('currency.thousand_point'));
+        $string .= number_format(abs($amount), (int) $decimal_place, __('currency.decimal_point'), __('currency.thousand_point'));
 
         if ($symbol_right) {
             $string .= $symbol_right;
@@ -72,8 +75,8 @@ class CurrencyService
         return $string;
     }
 
-
-    public function convert($value, $from, $to) {
+    public function convert($value, $from, $to)
+    {
         if (isset($this->currencies[$from])) {
             $from = $this->currencies[$from]->value;
         } else {
@@ -88,5 +91,4 @@ class CurrencyService
 
         return $value * ($to / $from);
     }
-
 }

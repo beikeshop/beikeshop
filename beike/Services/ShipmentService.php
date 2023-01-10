@@ -11,7 +11,6 @@
 
 namespace Beike\Services;
 
-
 class ShipmentService
 {
     /**
@@ -33,12 +32,11 @@ class ShipmentService
         }
 
         return [
-            'express_code' => $expressCode,
+            'express_code'    => $expressCode,
             'express_company' => $expressCompany,
-            'express_number' => $expressNumber,
+            'express_number'  => $expressNumber,
         ];
     }
-
 
     /**
      * 根据快递公司编号获取快递公司名称
@@ -53,6 +51,7 @@ class ShipmentService
             return '';
         }
         $company = collect($expressCompanies)->where('code', $expressCode)->first();
+
         return $company ? $company['name'] ?? '' : '';
     }
 }

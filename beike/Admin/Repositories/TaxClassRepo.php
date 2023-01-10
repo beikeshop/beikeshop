@@ -16,13 +16,13 @@ use Beike\Models\TaxClass;
 
 class TaxClassRepo
 {
-    const BASE_TYPES = ['store', 'payment', 'shipping'];
+    public const BASE_TYPES = ['store', 'payment', 'shipping'];
 
     public static function getList()
     {
         $taxClass = TaxClass::query()->with([
             'taxRates.region',
-            'taxRules'
+            'taxRules',
         ])->get();
 
         return TaxClassDetail::collection($taxClass)->jsonSerialize();
@@ -37,7 +37,7 @@ class TaxClassRepo
             $taxClass = new TaxClass();
         }
         $taxClass->fill([
-            'title' => $data['title'],
+            'title'       => $data['title'],
             'description' => $data['description'],
         ]);
         $taxClass->saveOrFail();
@@ -46,13 +46,14 @@ class TaxClassRepo
         foreach ($data['tax_rules'] as $rule) {
             $rules[] = [
                 'tax_rate_id' => $rule['tax_rate_id'],
-                'based' => $rule['based'],
-                'priority' => (int)$rule['priority'],
+                'based'       => $rule['based'],
+                'priority'    => (int) $rule['priority'],
             ];
         }
         $taxClass->taxRules()->delete();
         $taxClass->taxRules()->createMany($rules);
         $taxClass->load(['taxRules']);
+
         return $taxClass;
     }
 

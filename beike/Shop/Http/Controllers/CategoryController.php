@@ -3,9 +3,9 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Category;
-use Illuminate\Http\Request;
-use Beike\Repositories\ProductRepo;
 use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\ProductRepo;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -21,9 +21,9 @@ class CategoryController extends Controller
         $category->load('description');
 
         $data = [
-            'category' => $category,
+            'category'        => $category,
             'products_format' => $products->jsonSerialize(),
-            'products' => $products,
+            'products'        => $products,
         ];
 
         return view('category', $data);

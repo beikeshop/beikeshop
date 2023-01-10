@@ -10,8 +10,8 @@
  */
 
 return [
-    'name' => '姓名',
-    'email' => 'Email',
-    'from' => '注册来源',
+    'name'           => '姓名',
+    'email'          => 'Email',
+    'from'           => '注册来源',
     'customer_group' => '用户组',
 ];

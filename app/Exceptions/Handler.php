@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 use Illuminate\Support\Arr;
 use Throwable;
-use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -41,27 +41,25 @@ class Handler extends ExceptionHandler
         });
     }
 
-
     /**
      * Convert the given exception to an array.
      *
-     * @param  \Throwable  $e
+     * @param \Throwable $e
      * @return array
      */
     protected function convertExceptionToArray(Throwable $e)
     {
 
         return config('app.debug') ? [
-            'message' => $e->getMessage(),
+            'message'   => $e->getMessage(),
             'exception' => get_class($e),
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-            'trace' => collect($e->getTrace())->map(fn ($trace) => Arr::except($trace, ['args']))->all(),
+            'file'      => $e->getFile(),
+            'line'      => $e->getLine(),
+            'trace'     => collect($e->getTrace())->map(fn ($trace) => Arr::except($trace, ['args']))->all(),
         ] : [
             'message' => $this->isHttpException($e) ? $e->getMessage() : 'Server Error',
         ];
     }
-
 
     /**
      * 自定义错误信息页面, 前台与后台不同, 需要分开定义

@@ -17,18 +17,18 @@ class LanguageService
         $result = [];
         foreach (admin_languages() as $languageCode) {
             $langFile = resource_path("lang/$languageCode/admin/base.php");
-            if (!is_file($langFile)) {
+            if (! is_file($langFile)) {
                 throw new \Exception("File ($langFile) not exist!");
             }
-            $baseData = require($langFile);
-            $name = $baseData['name'] ?? $languageCode;
+            $baseData = require $langFile;
+            $name     = $baseData['name'] ?? $languageCode;
             $result[] = [
-                'code' => $languageCode,
-                'name' => $name,
-                'id' => $languages[$languageCode]['id'] ?? 0,
-                'image' => $languages[$languageCode]['image'] ?? '',
+                'code'       => $languageCode,
+                'name'       => $name,
+                'id'         => $languages[$languageCode]['id']         ?? 0,
+                'image'      => $languages[$languageCode]['image']      ?? '',
                 'sort_order' => $languages[$languageCode]['sort_order'] ?? '',
-                'status' => $languages[$languageCode]['status'] ?? '',
+                'status'     => $languages[$languageCode]['status']     ?? '',
             ];
         }
 
@@ -46,7 +46,7 @@ class LanguageService
         $models = self::$models;
         foreach ($models as $className) {
             $className = "\\Beike\\Models\\$className";
-            $items = $className::query()->where('locale', system_setting('base.locale', 'en'))->get()->toArray();
+            $items     = $className::query()->where('locale', system_setting('base.locale', 'en'))->get()->toArray();
             foreach ($items as &$item) {
                 if (isset($item['created_at'])) {
                     $item['created_at'] = now();
@@ -59,13 +59,14 @@ class LanguageService
             }
             $className::query()->insert($items);
         }
+
         return $language;
     }
 
     public static function delete($id)
     {
         $language = LanguageRepo::find($id);
-        if (!$language) {
+        if (! $language) {
             return;
         }
         if ($language->code == system_setting('base.locale')) {

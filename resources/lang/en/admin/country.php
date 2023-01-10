@@ -9,9 +9,9 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'country_name' => 'Country Name',
+    'country_name'     => 'Country Name',
 
-    'countries_index' => 'Country List',
+    'countries_index'  => 'Country List',
     'countries_create' => 'Create Country',
     'countries_update' => 'Update Country',
     'countries_delete' => 'Delete Country',

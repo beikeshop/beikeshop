@@ -11,5 +11,5 @@
 
 return [
     'level' => 'Klasse',
-    'name' => 'Name der Kundengruppe',
+    'name'  => 'Name der Kundengruppe',
 ];

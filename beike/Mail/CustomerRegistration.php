@@ -13,9 +13,9 @@ namespace Beike\Mail;
 
 use Beike\Models\Customer;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CustomerRegistration extends Mailable implements ShouldQueue
 {

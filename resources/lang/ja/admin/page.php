@@ -10,13 +10,13 @@
  */
 
 return [
-     'index' => '情報ページ',
-     'info_title' => '情報タイトル',
-     'info_content' => 'コンテンツ',
+    'index'        => '情報ページ',
+    'info_title'   => '情報タイトル',
+    'info_content' => 'コンテンツ',
 
-     'pages_index' => '単一ページリスト',
-     'pages_create' => '単一のページを作成',
-     'pages_show' => '単一ページの詳細',
-     'pages_update' => '単一ページ編集',
-     'pages_delete' => '単一のページを削除',
+    'pages_index'  => '単一ページリスト',
+    'pages_create' => '単一のページを作成',
+    'pages_show'   => '単一ページの詳細',
+    'pages_update' => '単一ページ編集',
+    'pages_delete' => '単一のページを削除',
 ];

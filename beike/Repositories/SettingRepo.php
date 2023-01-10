@@ -11,8 +11,8 @@
 
 namespace Beike\Repositories;
 
-use Carbon\Carbon;
 use Beike\Models\Setting;
+use Carbon\Carbon;
 
 class SettingRepo
 {
@@ -26,12 +26,12 @@ class SettingRepo
         $result = [];
         foreach ($settings as $setting) {
             $type = $setting->type;
-            if (!in_array($type, Setting::TYPES)) {
+            if (! in_array($type, Setting::TYPES)) {
                 continue;
             }
 
             $space = $setting->space;
-            $name = $setting->name;
+            $name  = $setting->name;
             $value = $setting->value;
             if ($setting->json) {
                 $result[$type][$space][$name] = json_decode($value, true);
@@ -39,9 +39,9 @@ class SettingRepo
                 $result[$type][$space][$name] = $value;
             }
         }
+
         return $result;
     }
-
 
     /**
      * 获取插件默认字段
@@ -51,13 +51,12 @@ class SettingRepo
     public static function getPluginStatusColumn(): array
     {
         return [
-            'name' => 'status',
-            'label' => trans('common.whether_open'),
-            'type' => 'bool',
+            'name'     => 'status',
+            'label'    => trans('common.whether_open'),
+            'type'     => 'bool',
             'required' => true,
         ];
     }
-
 
     /**
      * 获取单个插件所有字段
@@ -73,7 +72,6 @@ class SettingRepo
             ->keyBy('name');
     }
 
-
     /**
      * 获取单个插件状态
      *
@@ -83,9 +81,9 @@ class SettingRepo
     public static function getPluginStatus($pluginCode): bool
     {
         $status = plugin_setting("{$pluginCode}.status");
-        return (bool)$status;
-    }
 
+        return (bool) $status;
+    }
 
     /**
      * 批量更新设置
@@ -109,11 +107,11 @@ class SettingRepo
                 continue;
             }
             $rows[] = [
-                'type' => $type,
-                'space' => $code,
-                'name' => $name,
-                'value' => (string)$value,
-                'json' => 0,
+                'type'       => $type,
+                'space'      => $code,
+                'name'       => $name,
+                'value'      => (string) $value,
+                'json'       => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];
@@ -121,14 +119,13 @@ class SettingRepo
         Setting::query()->insert($rows);
     }
 
-
     /**
      * 创建或更新单条记录
      *
      * @param $name
      * @param $value
-     * @param string $space
-     * @param string $type
+     * @param  string     $space
+     * @param  string     $type
      * @throws \Throwable
      */
     public static function storeValue($name, $value, string $space = 'base', string $type = 'system')
@@ -144,11 +141,11 @@ class SettingRepo
             ->first();
 
         $settingData = [
-            'type' => $type,
+            'type'  => $type,
             'space' => $space,
-            'name' => $name,
+            'name'  => $name,
             'value' => is_array($value) ? json_encode($value) : $value,
-            'json' => is_array($value),
+            'json'  => is_array($value),
         ];
 
         if (empty($setting)) {

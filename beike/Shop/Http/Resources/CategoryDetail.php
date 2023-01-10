@@ -16,9 +16,9 @@ class CategoryDetail extends JsonResource
     public function toArray($request): array
     {
         $item = [
-            'id' => $this->id,
+            'id'   => $this->id,
             'name' => $this->description->name ?? '',
-            'url' => shop_route('categories.show', ['category' => $this])
+            'url'  => shop_route('categories.show', ['category' => $this]),
         ];
 
         if ($this->relationLoaded('children') && $this->children->count() > 0) {
@@ -26,6 +26,7 @@ class CategoryDetail extends JsonResource
         } else {
             $item['children'] = [];
         }
+
         return $item;
     }
 }

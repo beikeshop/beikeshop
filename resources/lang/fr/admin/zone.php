@@ -9,13 +9,13 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-     'zone_name' => 'nom de la province',
-     'country_of_origin' => 'pays d\'origine',
+    'zone_name'         => 'nom de la province',
+    'country_of_origin' => 'pays d\'origine',
 
-     'zones_index' => 'liste des provinces',
-     'zones_create' => 'créer province',
-     'zones_update' => 'mettre à jour la province',
-     'zones_delete' => 'Supprimer la province',
+    'zones_index'       => 'liste des provinces',
+    'zones_create'      => 'créer province',
+    'zones_update'      => 'mettre à jour la province',
+    'zones_delete'      => 'Supprimer la province',
 
-     'error_country' => 'Veuillez sélectionner un pays',
+    'error_country'     => 'Veuillez sélectionner un pays',
 ];

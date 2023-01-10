@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => 'Iniciar sesión en el backend de BeikeShop',
-    'log_in' => 'Iniciar sesión',
+    'log_in'        => 'Iniciar sesión',
 ];

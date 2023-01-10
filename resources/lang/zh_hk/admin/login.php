@@ -11,5 +11,5 @@
 
 return [
     'plugins_index' => '登錄到 BeikeShop 後台',
-    'log_in' => '登錄',
+    'log_in'        => '登錄',
 ];

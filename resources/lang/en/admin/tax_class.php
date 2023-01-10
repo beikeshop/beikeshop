@@ -10,13 +10,13 @@
  */
 
 return [
-    'index' => 'Tax',
-    'rule' => 'Rule',
-    'based_on' => 'Based',
-    'priority' => 'Priority',
-    'tax_classes_index' => 'Index',
+    'index'              => 'Tax',
+    'rule'               => 'Rule',
+    'based_on'           => 'Based',
+    'priority'           => 'Priority',
+    'tax_classes_index'  => 'Index',
     'tax_classes_create' => 'Create',
-    'tax_classes_show' => 'Detail',
+    'tax_classes_show'   => 'Detail',
     'tax_classes_update' => 'Edit',
-    'tax_classes_delete' => 'Delete'
+    'tax_classes_delete' => 'Delete',
 ];

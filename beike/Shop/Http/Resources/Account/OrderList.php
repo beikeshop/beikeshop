@@ -18,7 +18,7 @@ class OrderList extends JsonResource
     public function toArray($request): array
     {
         $data = [
-            'id' => $this->id,
+            'id'     => $this->id,
             'number' => $this->number,
         ];
 

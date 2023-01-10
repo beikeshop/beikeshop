@@ -33,24 +33,25 @@ class CustomerRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|max:64',
-            'email' => 'required|email:rfc|unique:customers',
+            'name'              => 'required|max:64',
+            'email'             => 'required|email:rfc|unique:customers',
             'customer_group_id' => 'required|exists:customer_groups,id',
         ];
-        if (!$this->id) {
+        if (! $this->id) {
             $rules['password'] = 'required|max:64';
         } else {
             $rules['email'] = 'required|email:rfc|unique:customers,email,' . $this->id;
         }
+
         return $rules;
     }
 
     public function attributes()
     {
         return [
-            'name' => trans('customer.name'),
-            'email' => trans('customer.email'),
-            'password' => trans('customer.password'),
+            'name'              => trans('customer.name'),
+            'email'             => trans('customer.email'),
+            'password'          => trans('customer.password'),
             'customer_group_id' => trans('customer.customer_group_id'),
         ];
     }

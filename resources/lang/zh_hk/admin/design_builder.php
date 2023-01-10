@@ -10,9 +10,9 @@
  */
 
 return [
-    'module_brand' => '品牌模塊',
-    'module_banner' => '橫幅模塊',
+    'module_brand'          => '品牌模塊',
+    'module_banner'         => '橫幅模塊',
     'module_four_image_pro' => '一行四圖 PRO',
-    'module_slideshow' => '幻燈片模塊',
-    'module_tab_products' => '選項卡商品',
+    'module_slideshow'      => '幻燈片模塊',
+    'module_tab_products'   => '選項卡商品',
 ];

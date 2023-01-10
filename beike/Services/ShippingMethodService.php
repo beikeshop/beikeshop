@@ -11,9 +11,9 @@
 
 namespace Beike\Services;
 
-use Illuminate\Support\Str;
 use Beike\Repositories\PluginRepo;
 use Beike\Shop\Services\CheckoutService;
+use Illuminate\Support\Str;
 
 class ShippingMethodService
 {
@@ -30,23 +30,24 @@ class ShippingMethodService
 
         $shippingMethods = [];
         foreach ($shippingPlugins as $shippingPlugin) {
-            $plugin = $shippingPlugin->plugin;
+            $plugin     = $shippingPlugin->plugin;
             $pluginCode = $shippingPlugin->code;
             $pluginName = Str::studly($pluginCode);
-            $className = "Plugin\\{$pluginName}\\Bootstrap";
+            $className  = "Plugin\\{$pluginName}\\Bootstrap";
 
-            if (!method_exists($className, 'getQuotes')) {
+            if (! method_exists($className, 'getQuotes')) {
                 throw new \Exception("请在插件 {$className} 实现方法: public function getQuotes(\$currentCart)");
             }
             $quotes = (new $className)->getQuotes($checkout, $plugin);
             if ($quotes) {
                 $shippingMethods[] = [
-                    'code' => $pluginCode,
-                    'name' => $plugin->name,
-                    'quotes' => $quotes
+                    'code'   => $pluginCode,
+                    'name'   => $plugin->name,
+                    'quotes' => $quotes,
                 ];
             }
         }
+
         return $shippingMethods;
     }
 }

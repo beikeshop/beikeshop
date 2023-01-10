@@ -10,7 +10,7 @@
  */
 
 return [
-    'sku_id' => 'SKU ID',
-    'quantity' => 'Quantità d\'acquisto',
+    'sku_id'    => 'SKU ID',
+    'quantity'  => 'Quantità d\'acquisto',
     'stock_out' => 'Carenza di inventario',
 ];

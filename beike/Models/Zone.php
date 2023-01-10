@@ -19,4 +19,3 @@ class Zone extends Base
 
     protected $fillable = ['country_id', 'name', 'code', 'sort_order', 'status'];
 }
-

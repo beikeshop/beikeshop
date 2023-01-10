@@ -11,17 +11,18 @@
 
 namespace Beike\Notifications;
 
+use Beike\Mail\UserForgotten;
 use Beike\Models\AdminUser;
 use Illuminate\Bus\Queueable;
-use Beike\Mail\UserForgotten;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 
 class AdminForgottenNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private AdminUser $user;
+
     private string $code;
 
     /**
@@ -78,7 +79,7 @@ class AdminForgottenNotification extends Notification implements ShouldQueue
     public function toDatabase()
     {
         return [
-            'user' => $this->user
+            'user' => $this->user,
         ];
     }
 }

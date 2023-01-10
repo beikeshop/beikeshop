@@ -12,8 +12,8 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\RmaReasonDetail;
-use Beike\Repositories\RmaReasonRepo;
 use Beike\Repositories\LanguageRepo;
+use Beike\Repositories\RmaReasonRepo;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -24,7 +24,7 @@ class RmaReasonController extends Controller
         $rmaReasons = RmaReasonRepo::list($request->only('name'));
 
         $data = [
-            'languages' => LanguageRepo::all(),
+            'languages'  => LanguageRepo::all(),
             'rmaReasons' => RmaReasonDetail::collection($rmaReasons)->jsonSerialize(),
         ];
 
@@ -38,6 +38,7 @@ class RmaReasonController extends Controller
     public function store(Request $request): array
     {
         $rmaReason = RmaReasonRepo::create($request->only('name'));
+
         return json_success(trans('common.created_success'), $rmaReason);
     }
 

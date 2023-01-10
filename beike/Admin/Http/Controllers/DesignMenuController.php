@@ -2,10 +2,9 @@
 
 namespace Beike\Admin\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Beike\Repositories\FooterRepo;
 use Beike\Repositories\SettingRepo;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DesignMenuController extends Controller
 {
@@ -20,6 +19,7 @@ class DesignMenuController extends Controller
         $data = [
             'design_settings' => system_setting('base.menu_setting', []),
         ];
+
         return view('admin::pages.design.builder.menu', $data);
     }
 
@@ -34,7 +34,8 @@ class DesignMenuController extends Controller
     {
         $content = json_decode($request->getContent(), true);
 
-        SettingRepo::storeValue("menu_setting", $content);
+        SettingRepo::storeValue('menu_setting', $content);
+
         return json_success(trans('common.updated_success'));
     }
 }

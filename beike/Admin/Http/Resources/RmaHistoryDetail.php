@@ -21,12 +21,12 @@ class RmaHistoryDetail extends JsonResource
         $statuses = RmaRepo::getStatuses();
 
         return [
-            'id' => $this->id,
-            'rma_id' => $this->rma_id,
-            'status' => $statuses[$this->status],
+            'id'         => $this->id,
+            'rma_id'     => $this->rma_id,
+            'status'     => $statuses[$this->status],
             'created_at' => time_format($this->created_at),
-            'notify' => $this->notify,
-            'comment' => $this->comment,
+            'notify'     => $this->notify,
+            'comment'    => $this->comment,
         ];
     }
 }

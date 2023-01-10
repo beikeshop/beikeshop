@@ -3,7 +3,6 @@
 namespace Beike\Admin\Services;
 
 use Beike\Models\Product;
-use Beike\Models\ProductDescription;
 use Illuminate\Support\Facades\DB;
 
 class ProductService
@@ -11,6 +10,7 @@ class ProductService
     public function create(array $data): Product
     {
         $product = new Product;
+
         return $this->createOrUpdate($product, $data);
     }
 
@@ -26,7 +26,7 @@ class ProductService
         try {
             DB::beginTransaction();
 
-            $data['brand_id'] = (int)$data['brand_id'];
+            $data['brand_id']  = (int) $data['brand_id'];
             $data['variables'] = json_decode($data['variables']);
             $product->fill($data);
             $product->save();
@@ -39,7 +39,7 @@ class ProductService
 
             $descriptions = [];
             foreach ($data['descriptions'] as $locale => $description) {
-                $description['locale'] = $locale;
+                $description['locale']  = $locale;
                 $description['content'] = $description['content'] ?? '';
 
                 $descriptions[] = $description;
@@ -50,11 +50,11 @@ class ProductService
 
             $skus = [];
             foreach ($data['skus'] as $index => $sku) {
-                $sku['position'] = $index;
-                $sku['origin_price'] = (float)$sku['origin_price'];
-                $sku['cost_price'] = (float)$sku['cost_price'];
-                $sku['quantity'] = (int)$sku['quantity'];
-                $skus[] = $sku;
+                $sku['position']     = $index;
+                $sku['origin_price'] = (float) $sku['origin_price'];
+                $sku['cost_price']   = (float) $sku['cost_price'];
+                $sku['quantity']     = (int) $sku['quantity'];
+                $skus[]              = $sku;
             }
             $product->skus()->createMany($skus);
 
@@ -66,6 +66,7 @@ class ProductService
             return $product;
         } catch (\Exception $e) {
             DB::rollBack();
+
             throw $e;
         }
     }

@@ -34,7 +34,7 @@ class DatabaseManager
     private function migrate(BufferedOutput $outputLog)
     {
         try {
-            Artisan::call('migrate', ['--force'=> true], $outputLog);
+            Artisan::call('migrate', ['--force' => true], $outputLog);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 'error', $outputLog);
         }
@@ -62,16 +62,16 @@ class DatabaseManager
     /**
      * Return a formatted error messages.
      *
-     * @param string $message
-     * @param string $status
+     * @param string                                           $message
+     * @param string                                           $status
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      * @return array
      */
     private function response($message, $status, BufferedOutput $outputLog)
     {
         return [
-            'status' => $status,
-            'message' => $message,
+            'status'      => $status,
+            'message'     => $message,
             'dbOutputLog' => $outputLog->fetch(),
         ];
     }
@@ -89,7 +89,7 @@ class DatabaseManager
                 touch($database);
                 DB::reconnect(Config::get('database.default'));
             }
-            $outputLog->write('Using SqlLite database: '.$database, 1);
+            $outputLog->write('Using SqlLite database: ' . $database, 1);
         }
     }
 }

@@ -10,13 +10,13 @@
  */
 
 return [
-    'decimal_point' => '.',
+    'decimal_point'  => '.',
     'thousand_point' => ',',
-    'name' => 'Name',
-    'code' => 'code',
-    'icon' => 'Symbol',
-    'symbol_left' => 'linkes Symbol',
-    'symbol_right' => 'rechtes Symbol',
-    'value' => 'Wechselkurswert',
-    'decimal_place' => 'Nachkommastellen',
+    'name'           => 'Name',
+    'code'           => 'code',
+    'icon'           => 'Symbol',
+    'symbol_left'    => 'linkes Symbol',
+    'symbol_right'   => 'rechtes Symbol',
+    'value'          => 'Wechselkurswert',
+    'decimal_place'  => 'Nachkommastellen',
 ];

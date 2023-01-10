@@ -11,8 +11,8 @@
 
 namespace Beike\Shop\Providers;
 
-use Beike\Plugin\Manager;
 use Beike\Models\AdminUser;
+use Beike\Plugin\Manager;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,17 +32,16 @@ class PluginServiceProvider extends ServiceProvider
         });
     }
 
-
     /**
      * Bootstrap Plugin Service Provider
      */
     public function boot()
     {
-        if (!installed()) {
+        if (! installed()) {
             return;
         }
-        $manager = app('plugin');
-        $plugins = $manager->getEnabledPlugins();
+        $manager              = app('plugin');
+        $plugins              = $manager->getEnabledPlugins();
         $this->pluginBasePath = base_path('plugins');
 
         foreach ($plugins as $plugin) {
@@ -59,7 +58,6 @@ class PluginServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 调用插件 Bootstrap::boot()
      *
@@ -67,7 +65,7 @@ class PluginServiceProvider extends ServiceProvider
      */
     private function bootPlugin($plugin)
     {
-        $filePath = $plugin->getBootFile();
+        $filePath   = $plugin->getBootFile();
         $pluginCode = $plugin->getDirname();
         if (file_exists($filePath)) {
             $className = "Plugin\\{$pluginCode}\\Bootstrap";
@@ -76,7 +74,6 @@ class PluginServiceProvider extends ServiceProvider
             }
         }
     }
-
 
     /**
      * 加载插件数据库迁移脚本
@@ -91,7 +88,6 @@ class PluginServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 加载插件路由
      *
@@ -100,7 +96,7 @@ class PluginServiceProvider extends ServiceProvider
     private function loadRoutes($pluginCode)
     {
         $pluginBasePath = $this->pluginBasePath;
-        $shopRoutePath = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
+        $shopRoutePath  = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
         if (file_exists($shopRoutePath)) {
             Route::prefix('plugin')
                 ->middleware('shop')
@@ -121,7 +117,6 @@ class PluginServiceProvider extends ServiceProvider
         }
     }
 
-
     /**
      * 加载多语言
      */
@@ -130,7 +125,6 @@ class PluginServiceProvider extends ServiceProvider
         $pluginBasePath = $this->pluginBasePath;
         $this->loadTranslationsFrom("{$pluginBasePath}/{$pluginCode}/Lang", $pluginCode);
     }
-
 
     /**
      * 加载模板目录

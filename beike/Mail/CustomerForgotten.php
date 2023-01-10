@@ -12,15 +12,16 @@
 namespace Beike\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CustomerForgotten extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
     private string $code;
+
     private string $email;
 
     /**
@@ -30,7 +31,7 @@ class CustomerForgotten extends Mailable implements ShouldQueue
      */
     public function __construct(string $code, string $email)
     {
-        $this->code = $code;
+        $this->code  = $code;
         $this->email = $email;
     }
 

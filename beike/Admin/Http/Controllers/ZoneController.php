@@ -22,8 +22,8 @@ class ZoneController extends Controller
         $zones = ZoneRepo::list($request->only('name', 'code', 'status'));
 
         $data = [
-            'zones' => $zones,
-            'countries' => CountryRepo::all()
+            'zones'     => $zones,
+            'countries' => CountryRepo::all(),
         ];
 
         if ($request->expectsJson()) {

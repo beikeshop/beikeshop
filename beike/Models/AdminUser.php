@@ -3,20 +3,19 @@
 namespace Beike\Models;
 
 use Beike\Notifications\AdminForgottenNotification;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as AuthUser;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AdminUser extends AuthUser
 {
     use HasFactory, HasRoles;
     use Notifiable;
 
-    const AUTH_GUARD = 'web_admin';
+    public const AUTH_GUARD = 'web_admin';
 
     protected $fillable = ['name', 'email', 'locale', 'password', 'active'];
-
 
     public function notifyVerifyCodeForForgotten($code)
     {

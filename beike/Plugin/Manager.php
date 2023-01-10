@@ -11,16 +11,17 @@
 
 namespace Beike\Plugin;
 
-use ZanySoft\Zip\Zip;
-use Illuminate\Support\Arr;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Collection;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use ZanySoft\Zip\Zip;
 
 class Manager
 {
     protected $plugins;
+
     protected Filesystem $filesystem;
 
     public function __construct()
@@ -44,8 +45,8 @@ class Manager
         $plugins = new Collection();
         foreach ($existed as $dirname => $package) {
             $pluginPath = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
-            $plugin = new Plugin($pluginPath, $package);
-            $status = $plugin->getStatus();
+            $plugin     = new Plugin($pluginPath, $package);
+            $status     = $plugin->getStatus();
             $plugin->setDirname($dirname);
             $plugin->setName(Arr::get($package, 'name'));
             $plugin->setDescription(Arr::get($package, 'description'));
@@ -68,7 +69,6 @@ class Manager
         return $this->plugins;
     }
 
-
     /**
      * 获取已开启的插件
      *
@@ -78,6 +78,7 @@ class Manager
     public function getEnabledPlugins(): Collection
     {
         $allPlugins = $this->getPlugins();
+
         return $allPlugins->filter(function (Plugin $plugin) {
             return $plugin->getInstalled() && $plugin->getEnabled();
         });
@@ -97,7 +98,7 @@ class Manager
             if ($this->filesystem->exists($file = $plugin->getBootFile())) {
                 $bootstraps->push([
                     'code' => $plugin->getDirName(),
-                    'file' => $file
+                    'file' => $file,
                 ]);
             }
         }
@@ -113,6 +114,7 @@ class Manager
     public function getPlugin($code): ?Plugin
     {
         $plugins = $this->getPlugins();
+
         return $plugins[$code] ?? null;
     }
 
@@ -128,6 +130,7 @@ class Manager
             throw new \Exception('无效的插件');
         }
         $plugin->handleLabel();
+
         return $plugin;
     }
 
@@ -140,7 +143,7 @@ class Manager
     protected function getPluginsConfig(): array
     {
         $installed = [];
-        $resource = opendir($this->getPluginsDir());
+        $resource  = opendir($this->getPluginsDir());
         while ($filename = @readdir($resource)) {
             if ($filename == '.' || $filename == '..') {
                 continue;
@@ -154,6 +157,7 @@ class Manager
             }
         }
         closedir($resource);
+
         return $installed;
     }
 
@@ -167,7 +171,6 @@ class Manager
         return config('plugins.directory') ?: base_path('plugins');
     }
 
-
     /**
      * 上传插件并解压
      * @throws \Exception
@@ -175,8 +178,8 @@ class Manager
     public function import(UploadedFile $file)
     {
         $originalName = $file->getClientOriginalName();
-        $destPath = storage_path('upload');
-        $newFilePath = $destPath . '/' . $originalName;
+        $destPath     = storage_path('upload');
+        $newFilePath  = $destPath . '/' . $originalName;
         $file->move($destPath, $originalName);
 
         $zipFile = Zip::open($newFilePath);

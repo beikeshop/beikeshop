@@ -21,7 +21,7 @@ class AddressController extends Controller
     public function index(Request $request, int $customerId)
     {
         $addresses = AddressRepo::listByCustomer($customerId);
-        $data = [
+        $data      = [
             'addresses' => AddressResource::collection($addresses),
         ];
 
@@ -31,6 +31,7 @@ class AddressController extends Controller
     public function store(Request $request, int $customerId)
     {
         $address = AddressService::addForCustomer($customerId, $request->all());
+
         return json_success(trans('common.created_success'), $address);
     }
 

@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email:rfc',
+            'email'    => 'required|email:rfc',
             'password' => 'required',
         ];
     }
@@ -32,7 +32,7 @@ class LoginRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => trans('shop/login.email_address'),
+            'email'    => trans('shop/login.email_address'),
             'password' => trans('shop/login.password'),
         ];
     }

@@ -10,7 +10,7 @@
  */
 
 return [
-    'name' => '品牌名称',
-    'icon' => '图标',
+    'name'         => '品牌名称',
+    'icon'         => '图标',
     'first_letter' => '首字母',
 ];

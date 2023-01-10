@@ -11,13 +11,13 @@
 
 namespace Beike\Shop\Http\Controllers\Account;
 
-use Beike\Repositories\OrderRepo;
-use Illuminate\Support\Facades\Hash;
 use Beike\Repositories\CustomerRepo;
+use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\ForgottenRequest;
-use Beike\Shop\Http\Resources\CustomerResource;
 use Beike\Shop\Http\Resources\Account\OrderList;
+use Beike\Shop\Http\Resources\CustomerResource;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -29,10 +29,11 @@ class AccountController extends Controller
     public function index()
     {
         $customer = current_customer();
-        $data = [
-            'customer' => new CustomerResource($customer),
+        $data     = [
+            'customer'      => new CustomerResource($customer),
             'latest_orders' => OrderList::collection(OrderRepo::getLatestOrders($customer, 10)),
         ];
+
         return view('account/account', $data);
     }
 

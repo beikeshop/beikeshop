@@ -11,18 +11,14 @@
 
 namespace Beike\Admin\Services;
 
-use Illuminate\Support\Facades\File;
-
 class FileManagerService
 {
     private $fileBasePath = '';
-
 
     public function __construct()
     {
         $this->fileBasePath = public_path('catalog');
     }
-
 
     /**
      * 获取某个目录下所有文件夹
@@ -30,14 +26,14 @@ class FileManagerService
     public function getDirectories($baseFolder = '/'): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
-        $directories = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
+        $directories     = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
 
         $result = [];
         foreach ($directories as $directory) {
             $baseName = basename($directory);
-            $dirName = str_replace($this->fileBasePath, '', $directory);
+            $dirName  = str_replace($this->fileBasePath, '', $directory);
             if (is_dir($directory)) {
-                $item = $this->handleFolder($dirName, $baseName);
+                $item           = $this->handleFolder($dirName, $baseName);
                 $subDirectories = $this->getDirectories($dirName);
                 if ($subDirectories) {
                     $item['children'] = $subDirectories;
@@ -45,9 +41,9 @@ class FileManagerService
                 $result[] = $item;
             }
         }
+
         return $result;
     }
-
 
     /**
      * 获取某个目录下的文件和文件夹
@@ -61,9 +57,9 @@ class FileManagerService
     public function getFiles($baseFolder, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
-        $files = glob($currentBasePath . '/*');
+        $files           = glob($currentBasePath . '/*');
         usort($files, function ($a, $b) {
-            return filemtime($a) - filemtime($b) <0;
+            return filemtime($a) - filemtime($b) < 0;
         });
 
         $images = [];
@@ -78,16 +74,15 @@ class FileManagerService
             }
         }
 
-        $page = $page > 0 ? $page : 1;
+        $page            = $page > 0 ? $page : 1;
         $imageCollection = collect($images);
 
         return [
-            'images' => $imageCollection->forPage($page, $perPage)->values()->toArray(),
+            'images'      => $imageCollection->forPage($page, $perPage)->values()->toArray(),
             'image_total' => $imageCollection->count(),
-            'image_page' => $page,
+            'image_page'  => $page,
         ];
     }
-
 
     /**
      * 创建目录
@@ -97,13 +92,12 @@ class FileManagerService
     public function createDirectory($folderName)
     {
         $catalogFolderPath = "catalog/{$folderName}";
-        $folderPath = public_path($catalogFolderPath);
+        $folderPath        = public_path($catalogFolderPath);
         if (is_dir($folderPath)) {
             throw new \Exception(trans('admin/file_manager.directory_already_exist'));
         }
         create_directories($catalogFolderPath);
     }
-
 
     /**
      * 删除文件或文件夹
@@ -125,7 +119,6 @@ class FileManagerService
         }
     }
 
-
     /**
      * 批量删除文件
      *
@@ -145,7 +138,6 @@ class FileManagerService
         }
     }
 
-
     /**
      * 修改文件夹或者文件名称
      *
@@ -156,17 +148,16 @@ class FileManagerService
     public function updateName($originPath, $newPath)
     {
         $originPath = public_path("catalog/{$originPath}");
-        if (!is_dir($originPath) && !file_exists($originPath)) {
+        if (! is_dir($originPath) && ! file_exists($originPath)) {
             throw new \Exception(trans('admin/file_manager.target_not_exist'));
         }
         $originBase = dirname($originPath);
-        $newPath = $originBase . '/' . $newPath;
+        $newPath    = $originBase . '/' . $newPath;
         if ($originPath == $newPath) {
             return;
         }
         @rename($originPath, $newPath);
     }
-
 
     /**
      * 处理文件夹
@@ -179,10 +170,9 @@ class FileManagerService
     {
         return [
             'path' => $folderPath,
-            'name' => $baseName
+            'name' => $baseName,
         ];
     }
-
 
     /**
      * 检测是否含有子文件夹
@@ -192,16 +182,16 @@ class FileManagerService
      */
     private function hasSubFolders($folderPath): bool
     {
-        $path = public_path("catalog/{$folderPath}");
+        $path     = public_path("catalog/{$folderPath}");
         $subFiles = glob($path . '/*');
         foreach ($subFiles as $subFile) {
             if (is_dir($subFile)) {
                 return true;
             }
         }
+
         return false;
     }
-
 
     /**
      * 处理文件
@@ -214,11 +204,11 @@ class FileManagerService
     private function handleImage($filePath, $baseName): array
     {
         return [
-            'path' => 'catalog' . $filePath,
-            'name' => $baseName,
-            'url' => image_resize("catalog{$filePath}"),
+            'path'       => 'catalog' . $filePath,
+            'name'       => $baseName,
+            'url'        => image_resize("catalog{$filePath}"),
             'origin_url' => image_origin("catalog{$filePath}"),
-            'selected' => false,
+            'selected'   => false,
         ];
     }
 }

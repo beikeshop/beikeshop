@@ -10,18 +10,18 @@
  */
 
 return [
-    'name' => '名前',
-    'sku' => 'SKU',
-    'price' => '価格',
-    'origin_price' => '元値',
-    'cost_price' => '原価',
-    'brand' => 'ブランド',
-    'category' => '分類',
-    'model' => 'モデル',
-    'quantity' => '在庫あり',
-    'image' => '写真',
+    'name'              => '名前',
+    'sku'               => 'SKU',
+    'price'             => '価格',
+    'origin_price'      => '元値',
+    'cost_price'        => '原価',
+    'brand'             => 'ブランド',
+    'category'          => '分類',
+    'model'             => 'モデル',
+    'quantity'          => '在庫あり',
+    'image'             => '写真',
 
-    'active' => '棚の上',
-    'inactive' => '降ろす',
+    'active'            => '棚の上',
+    'inactive'          => '降ろす',
     'has_been_inactive' => 'この商品は販売を終了しました',
 ];

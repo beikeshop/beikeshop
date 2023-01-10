@@ -11,8 +11,8 @@
  */
 
 return [
-    'invalid_order' => '無効な注文',
-    'confirm_order' => 'ユーザーが受領を確認',
-    'cancel_order' => 'ユーザーが注文をキャンセル',
+    'invalid_order'      => '無効な注文',
+    'confirm_order'      => 'ユーザーが受領を確認',
+    'cancel_order'       => 'ユーザーが注文をキャンセル',
     'order_already_paid' => '支払った注文',
 ];

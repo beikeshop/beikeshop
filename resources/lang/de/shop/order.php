@@ -11,8 +11,8 @@
  */
 
 return [
-     'invalid_order' => 'ungültige Bestellung',
-     'confirm_order' => 'Benutzer bestätigt Erhalt',
-     'cancel_order' => 'Benutzer storniert die Bestellung',
-     'order_already_paid' => 'Bestellung bezahlt',
+    'invalid_order'      => 'ungültige Bestellung',
+    'confirm_order'      => 'Benutzer bestätigt Erhalt',
+    'cancel_order'       => 'Benutzer storniert die Bestellung',
+    'order_already_paid' => 'Bestellung bezahlt',
 ];

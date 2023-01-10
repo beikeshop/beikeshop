@@ -12,8 +12,8 @@
 
 namespace Beike\Shop\Services\TotalServices;
 
-use Beike\Shop\Services\CheckoutService;
 use Beike\Admin\Repositories\TaxRateRepo;
+use Beike\Shop\Services\CheckoutService;
 
 class TaxService
 {
@@ -24,8 +24,8 @@ class TaxService
     public static function getTotal(CheckoutService $checkout): ?array
     {
         $totalService = $checkout->totalService;
-        $taxEnabled = system_setting('base.tax', false);
-        if (!$taxEnabled) {
+        $taxEnabled   = system_setting('base.tax', false);
+        if (! $taxEnabled) {
             return null;
         }
 
@@ -36,16 +36,17 @@ class TaxService
             if ($value <= 0) {
                 continue;
             }
-            $totalItems[] = array(
-                'code' => 'tax',
-                'title' => TaxRateRepo::getNameByRateId($taxRateId),
-                'amount' => $value,
-                'amount_format' => currency_format($value)
-            );
+            $totalItems[] = [
+                'code'          => 'tax',
+                'title'         => TaxRateRepo::getNameByRateId($taxRateId),
+                'amount'        => $value,
+                'amount_format' => currency_format($value),
+            ];
             $totalService->amount += $value;
         }
 
         $totalService->totals = array_merge($totalService->totals, $totalItems);
+
         return $totalItems;
     }
 }

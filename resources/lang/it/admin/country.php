@@ -9,9 +9,9 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'country_name' => 'nome paese',
+    'country_name'     => 'nome paese',
 
-    'countries_index' => 'Elenco paesi',
+    'countries_index'  => 'Elenco paesi',
     'countries_create' => 'crea paese',
     'countries_update' => 'aggiorna paese',
 ];

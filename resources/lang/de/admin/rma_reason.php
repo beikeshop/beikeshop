@@ -10,8 +10,8 @@
  */
 
 return [
-     'rma_reasons_index' => 'Ursachenliste',
-     'rma_reasons_create' => 'Erstellungsgrund',
-     'rma_reasons_update' => 'Aktualisierungsgrund',
-     'rma_reasons_delete' => 'Löschgrund'
+    'rma_reasons_index'  => 'Ursachenliste',
+    'rma_reasons_create' => 'Erstellungsgrund',
+    'rma_reasons_update' => 'Aktualisierungsgrund',
+    'rma_reasons_delete' => 'Löschgrund',
 ];

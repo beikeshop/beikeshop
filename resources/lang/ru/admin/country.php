@@ -9,9 +9,9 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'country_name' => 'Имя страны',
+    'country_name'     => 'Имя страны',
 
-    'countries_index' => 'список стран',
+    'countries_index'  => 'список стран',
     'countries_create' => 'создать страну',
     'countries_update' => 'обновить страну',
 ];
