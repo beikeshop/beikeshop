@@ -28,9 +28,9 @@ class AccountService
     public static function register(array $data)
     {
         $data['customer_group_id'] = system_setting('base.default_customer_group_id', 0); // default_customer_group_id为默认客户组名称
-        $data['status'] = !system_setting('base.approve_customer'); // approve_customer为是否需要审核客户
-        $data['from'] = $data['from'] ?? 'pc';
-        $data['locale'] = locale();
+        $data['status']            = ! system_setting('base.approve_customer'); // approve_customer为是否需要审核客户
+        $data['from']              = $data['from'] ?? 'pc';
+        $data['locale']            = locale();
 
         if ($data['email'] ?? '') {
             $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));
@@ -59,7 +59,7 @@ class AccountService
         VerifyCodeRepo::deleteByAccount($email);
         VerifyCodeRepo::create([
             'account' => $email,
-            'code' => $code,
+            'code'    => $code,
         ]);
 
         Log::info("找回密码验证码：{$code}");
@@ -91,7 +91,7 @@ class AccountService
 
         if ($type == 'email') {
             $customer = CustomerRepo::findByEmail($account);
-            if (!$customer) {
+            if (! $customer) {
                 throw new \Exception(trans('shop/account.account_not_exist'));
             }
         } elseif ($type == 'telephone') {
