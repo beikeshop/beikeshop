@@ -233,7 +233,7 @@
 
         source: {
           mailEngines: [
-            {name: '{{ __('common.cancel') }}', code: ''},
+            {name: '{{ __('admin/builder.text_no') }}', code: ''},
             {name: 'SMTP', code: 'smtp'},
             {name: 'Sendmail', code: 'sendmail'},
             {name: 'Mailgun', code: 'mailgun'},
