@@ -11,6 +11,8 @@
 
 namespace Beike\Repositories;
 
+use Beike\Models\Attribute;
+use Beike\Models\AttributeValue;
 use Beike\Models\Product;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,7 +45,7 @@ class ProductRepo
      */
     public static function getProductsByCategory($categoryId): AnonymousResourceCollection
     {
-        $builder  = self::getBuilder(['category_id' => $categoryId, 'active' => 1]);
+        $builder  = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
         $products = $builder->with('inCurrentWishlist')->paginate(perPage());
 
         return ProductSimple::collection($products);
@@ -73,7 +75,7 @@ class ProductRepo
      */
     public static function getBuilder(array $data = []): Builder
     {
-        $builder = Product::query()->with('description', 'skus', 'master_sku');
+        $builder = Product::query()->with('description', 'skus', 'master_sku', 'attributes');
 
         if (isset($data['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($data) {
@@ -92,6 +94,17 @@ class ProductRepo
             $builder->orderByRaw("FIELD(products.id, {$productIds})");
         }
 
+        // attr 格式:attr=10:10/13|11:34/23|3:4
+        if (isset($data['attr']) && $data['attr']) {
+            $attributes = self::parseFilterParamsAttr($data['attr']);
+            foreach ($attributes as $attribute) {
+                $builder->whereHas('attributes', function ($query) use ($attribute) {
+                    $query->where('attribute_id', $attribute['attr'])
+                        ->whereIn('attribute_value_id', $attribute['value']);
+                });
+            }
+        }
+
         if (isset($data['sku']) || isset($data['model'])) {
             $builder->whereHas('skus', function ($query) use ($data) {
                 if (isset($data['sku'])) {
@@ -99,6 +112,18 @@ class ProductRepo
                 }
                 if (isset($data['model'])) {
                     $query->where('model', 'like', "%{$data['model']}%");
+                }
+            });
+        }
+
+        if (isset($data['price']) && $data['price']) {
+            $builder->whereHas('skus', function ($query) use ($data) {
+                // price 格式:price=30-100
+                $prices = explode('-', $data['price']);
+                if (! $prices[1]) {
+                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', 1);
+                } else {
+                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', 1);
                 }
             });
         }
@@ -137,9 +162,77 @@ class ProductRepo
         return $builder;
     }
 
+    public static function parseFilterParamsAttr($attr)
+    {
+        $attributes = explode('|', $attr);
+        $attributes = array_map(function ($item) {
+            $itemArr = explode(':', $item);
+            if (count($itemArr) != 2) {
+                throw new \Exception('Params attr has an error format!');
+            }
+
+            return [
+                'attr'  => $itemArr[0],
+                'value' => explode('/', $itemArr[1]),
+            ];
+        }, $attributes);
+
+        return $attributes;
+    }
+
+    public static function getFilterAttribute($data)
+    {
+        $builder = self::getBuilder($data)->with(['attributes.attribute.description', 'attributes.attribute_value.description'])->leftJoin('product_attributes as pa', 'pa.product_id', 'products.id')
+            ->whereNotNull('pa.attribute_id')
+            ->select(['pa.attribute_id', 'pa.attribute_value_id'])
+            ->distinct()
+            ->reorder('pa.attribute_id');
+        $productAttributes = $builder->get();
+
+        $attributeMap      = array_column(Attribute::query()->with('description')->orderBy('sort_order')->get()->toArray(), null, 'id');
+        $attributeValueMap = array_column(AttributeValue::query()->with('description')->get()->toArray(), null, 'id');
+
+        $attributes    = isset($data['attr']) ? self::parseFilterParamsAttr($data['attr']) : [];
+        $attributeMaps = array_column($attributes, 'value', 'attr');
+        $results       = [];
+        foreach ($productAttributes as $item) {
+            if (! isset($attributeMap[$item['attribute_id']]) || ! isset($attributeValueMap[$item['attribute_value_id']])) {
+                continue;
+            }
+            $attribute      = $attributeMap[$item['attribute_id']];
+            $attributeValue = $attributeValueMap[$item['attribute_value_id']];
+            if (! isset($results[$item['attribute_id']])) {
+                $results[$item['attribute_id']] = [
+                    'id'   => $attribute['id'],
+                    'name' => $attribute['description']['name'],
+                ];
+            }
+            if (! isset($results[$item['attribute_id']]['values'][$item['attribute_value_id']])) {
+                $results[$item['attribute_id']]['values'][$item['attribute_value_id']] = [
+                    'id'       => $attributeValue['id'],
+                    'name'     => $attributeValue['description']['name'],
+                    'selected' => in_array($attributeValue['id'], $attributeMaps[$attribute['id']] ?? []),
+                ];
+            }
+        }
+
+        return $results;
+    }
+
+    public static function getFilterPrice($data)
+    {
+        $builder = self::getBuilder($data)->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
+            ->where('ps.is_default', 1);
+
+        return [
+            'min' => $builder->min('ps.price'),
+            'max' => $builder->max('ps.price'),
+        ];
+    }
+
     public static function list($data = [])
     {
-        return self::getBuilder($data)->paginate($data['per_page'] ?? perPage());
+        return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
 
     public static function autocomplete($name)

@@ -38,7 +38,9 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $keyword  = $request->get('keyword');
-        $products = ProductRepo::getBuilder(['keyword' => $keyword])
+        $attr     = $request->get('attr');
+        $price    = $request->get('price');
+        $products = ProductRepo::getBuilder(['keyword' => $keyword, 'attr' => $attr])
             ->where('active', true)
             ->paginate(perPage())
             ->withQueryString();
