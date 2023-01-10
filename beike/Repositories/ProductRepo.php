@@ -43,7 +43,7 @@ class ProductRepo
      * @param $categoryId
      * @return AnonymousResourceCollection
      */
-    public static function getProductsByCategory($categoryId): AnonymousResourceCollection
+    public static function getProductsByCategory($categoryId, $filterData): AnonymousResourceCollection
     {
         $builder  = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
         $products = $builder->with('inCurrentWishlist')->paginate(perPage());
