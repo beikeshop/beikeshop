@@ -235,8 +235,8 @@ class ProductRepo
         return [
             'min' => $min,
             'max' => $max,
-            'select_min' =>  $selectMin ?: $min,
-            'select_max' => $selectMax ?: $max,
+            'select_min' =>  ($selectMin && $selectMin > $min) ? $selectMin : $min,
+            'select_max' => ($selectMax && $selectMax < $max) ? $selectMax: $max,
         ];
     }
 
