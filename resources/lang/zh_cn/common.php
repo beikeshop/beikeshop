@@ -38,6 +38,7 @@ return [
     'no'                   => '否',
     'yes'                  => '是',
     'delete'               => '删除',
+    'delete_all'           => '删除所有',
     'sign_out'             => '退出登录',
     'contact_us'           => '联系我们',
     'input'                => '在此处输入您的搜索',
@@ -67,6 +68,9 @@ return [
     'whether_open'         => '是否开启',
     'default'              => '默认',
     'to_setting'           => '去配置',
+    'low'                  => '低',
+    'high'                 => '高',
+    'sales'                => '销量',
 
     'id'                   => 'ID',
     'created_at'           => '创建时间',

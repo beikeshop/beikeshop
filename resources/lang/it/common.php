@@ -38,6 +38,7 @@ return [
     'no'                   => 'No',
     'yes'                  => 'Yes',
     'delete'               => 'Elimina',
+    'delete_all'           => 'elimina tutto',
     'sign_out'             => 'disconnessione',
     'contact_us'           => 'Contattaci',
     'input'                => 'inserisci qui la tua ricerca',

@@ -38,6 +38,7 @@ return [
     'no'                   => '番号',
     'yes'                  => 'はい',
     'delete'               => '消去',
+    'delete_all'           => 'すべて削除',
     'sign_out'             => 'サインアウト',
     'contact_us'           => 'お問い合わせ',
     'input'                => 'ここに検索を入力してください',

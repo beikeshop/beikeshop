@@ -324,14 +324,7 @@
 
           <div class="tab-pane fade" id="tab-seo">
             <h6 class="border-bottom pb-3 mb-4">SEO</h6>
-            <x-admin::form.row title="Meta title">
-              @foreach ($languages as $language)
-              <div class="input-group w-max-600">
-                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_title', $product->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
-              </div>
-              @endforeach
-            </x-admin::form.row>
+            <x-admin-form-input-locale :width="600" name="descriptions.*.meta_title" title="Meta title" :value="$descriptions"/>
             <x-admin::form.row title="Meta keywords">
               @foreach ($languages as $language)
               <div class="input-group w-max-600">

@@ -38,6 +38,7 @@ return [
     'no'                   => '否',
     'yes'                  => '是',
     'delete'               => '刪除',
+    'delete_all'           => '刪除所有',
     'sign_out'             => '退出登錄',
     'contact_us'           => '聯繫我們',
     'input'                => '在此處輸入您的搜索',
@@ -66,6 +67,9 @@ return [
     'menu'                 => '菜單',
     'whether_open'         => '是否開啟',
     'to_setting'           => '去配置',
+    'low'                  => '低',
+    'high'                 => '高',
+    'sales'                => '銷量',
 
     'id'                   => 'ID',
     'created_at'           => '創建時間',

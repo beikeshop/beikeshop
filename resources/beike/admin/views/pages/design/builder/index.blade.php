@@ -185,6 +185,7 @@
 
           $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
             $(previewWindow.document).find('#module-' + data.module_id).replaceWith(res);
+            $(previewWindow.document).find('.tooltip').remove();
             const tooltipTriggerList = previewWindow.document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new previewWindow.bootstrap.Tooltip(tooltipTriggerEl))
           })

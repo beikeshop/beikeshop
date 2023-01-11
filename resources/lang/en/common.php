@@ -39,6 +39,7 @@ return [
     'no'                   => 'No',
     'yes'                  => 'Yes',
     'delete'               => 'Delete',
+    'delete_all'           => 'Delete all',
     'sign_out'             => 'Sign Out',
     'contact_us'           => 'Contact us',
     'input'                => 'Type your search here',
@@ -67,6 +68,9 @@ return [
     'whether_open'         => 'Status',
     'default'              => 'Default',
     'to_setting'           => 'to configure',
+    'low'                  => 'Low',
+    'high'                 => 'High',
+    'sales'                => 'Sales',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

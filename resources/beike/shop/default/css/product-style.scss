@@ -8,12 +8,56 @@
  * @LastEditTime  2022-09-16 20:56:27
  */
 
+.product-list-wrap {
+  .col-12:not(:last-of-type) {
+    .product-wrap {
+      border-bottom: 1px solid #E6E6E6;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.4rem;
+
+      &:hover {
+        box-shadow: none;
+        .image {
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-wrap {
+          bottom: 10px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
 .product-wrap {
   margin-bottom: 20px;
   text-align: center;
   padding-bottom: .7rem;
   transition: all 0.3s ease-in-out;
   background-color: #fff;
+
+  &.list {
+    display: flex;
+    padding-bottom: 0;
+
+    .image {
+      width: 200px;
+      margin-bottom: 0;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .product-bottom-info {
+      padding-top: 10px;
+      padding-left: 20px;
+      flex: 1;
+      text-align: left;
+
+      .product-name {
+        font-size: 18px;
+      }
+    }
+  }
 
   .image {
     margin-bottom: 10px;

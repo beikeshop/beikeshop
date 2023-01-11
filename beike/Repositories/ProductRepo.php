@@ -41,14 +41,14 @@ class ProductRepo
      * 通过单个或多个商品分类获取商品列表
      *
      * @param $categoryId
-     * @return AnonymousResourceCollection
+     * @return
      */
-    public static function getProductsByCategory($categoryId, $filterData): AnonymousResourceCollection
+    public static function getProductsByCategory($categoryId, $filterData)
     {
         $builder  = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
-        $products = $builder->with('inCurrentWishlist')->paginate(perPage());
+        $products = $builder->with('inCurrentWishlist')->paginate($filterData['per_page'] ?? perPage());
 
-        return ProductSimple::collection($products);
+        return $products;
     }
 
     /**
@@ -161,7 +161,7 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
-        $sort  = $data['sort']  ?? 'products.updated_at';
+        $sort  = $data['sort']  ?? 'products.position';
         $order = $data['order'] ?? 'desc';
         $builder->orderBy($sort, $order);
 
@@ -193,7 +193,7 @@ class ProductRepo
             ->select(['pa.attribute_id', 'pa.attribute_value_id'])
             ->distinct()
             ->reorder('pa.attribute_id');
-        $productAttributes = $builder->get();
+        $productAttributes = $builder->get()->toArray();
 
         $attributeMap      = array_column(Attribute::query()->with('description')->orderBy('sort_order')->get()->toArray(), null, 'id');
         $attributeValueMap = array_column(AttributeValue::query()->with('description')->get()->toArray(), null, 'id');
@@ -222,7 +222,12 @@ class ProductRepo
             }
         }
 
-        return $results;
+        $results = array_map(function($item) {
+            $item['values'] = array_values($item['values']);
+            return $item;
+        }, $results);
+
+        return array_values($results);
     }
 
     public static function getFilterPrice($data)
