@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (env('APP_FORCE_HTTPS', false)) {
+        if (config('beike.force_url_https', false)) {
             URL::forceScheme('https');
         }
     }

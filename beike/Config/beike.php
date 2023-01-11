@@ -10,7 +10,9 @@
  */
 
 return [
-    'api_url' => env('BEIKE_API_URL', 'https://beikeshop.com'),
-    'version' => '1.2.5',
-    'build'   => '20221226',
+    'api_url'         => env('BEIKE_API_URL', 'https://beikeshop.com'),
+    'version'         => '1.2.5',
+    'build'           => '20221226',
+
+    'force_url_https' => env('APP_FORCE_HTTPS', false),
 ];
