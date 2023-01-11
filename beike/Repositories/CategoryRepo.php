@@ -68,6 +68,21 @@ class CategoryRepo
     }
 
     /**
+     * 生成每页产品数列表, 客户可以自己选择如何分页
+     *
+     * @return array
+     */
+    public static function getPerPages(): array
+    {
+        $perPages = [];
+        $configPerPage = system_setting('base.product_per_page', 20);
+        for ($index = 1; $index <= 5; $index++) {
+            $perPages[] = $configPerPage * $index;
+        }
+        return $perPages;
+    }
+
+    /**
      * 获取顶级及其子分类
      */
     public static function getTwoLevelCategories()
@@ -150,9 +165,9 @@ class CategoryRepo
                 $pathName .= $path->pathCategory->description->name;
             }
             $results[] = [
-                'id'     => $category->id,
+                'id' => $category->id,
                 'status' => $category->active,
-                'name'   => $pathName,
+                'name' => $pathName,
             ];
         }
 
@@ -167,7 +182,7 @@ class CategoryRepo
     {
         if (is_int($category)) {
             $category = Category::query()->findOrFail($category);
-        } elseif (! ($category instanceof Category)) {
+        } elseif (!($category instanceof Category)) {
             throw new \Exception('invalid category');
         }
         $category->descriptions()->delete();
@@ -183,7 +198,7 @@ class CategoryRepo
      */
     public static function getName($category)
     {
-        $id         = is_int($category) ? $category : $category->id;
+        $id = is_int($category) ? $category : $category->id;
         $categories = self::getAllCategoriesWithName();
 
         return $categories[$id]['name'] ?? '';
@@ -199,11 +214,11 @@ class CategoryRepo
             return self::$allCategoryWithName;
         }
 
-        $items      = [];
+        $items = [];
         $categories = self::getBuilder()->select('id')->get();
         foreach ($categories as $category) {
             $items[$category->id] = [
-                'id'   => $category->id,
+                'id' => $category->id,
                 'name' => $category->description->name ?? '',
             ];
         }

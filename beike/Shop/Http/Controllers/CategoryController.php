@@ -27,6 +27,7 @@ class CategoryController extends Controller
             'filter_data'     => ['attr' => ProductRepo::getFilterAttribute($filterData), 'price' => ProductRepo::getFilterPrice($filterData)],
             'products_format' => $products->jsonSerialize(),
             'products'        => $products,
+            'per_pages'       => CategoryRepo::getPerPages(),
         ];
 
         return view('category', $data);
