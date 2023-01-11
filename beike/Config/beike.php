@@ -14,5 +14,6 @@ return [
     'version'         => '1.2.5',
     'build'           => '20221226',
 
+    'admin_name'      => env('ADMIN_NAME'),
     'force_url_https' => env('APP_FORCE_HTTPS', false),
 ];

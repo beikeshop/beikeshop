@@ -33,7 +33,8 @@ class DatabaseController extends Controller
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         $rows   = DB::select('SHOW TABLES');
-        $tables = array_column($rows, 'Tables_in_' . env('DB_DATABASE'));
+        $database = config('database.connections.mysql.database');
+        $tables = array_column($rows, 'Tables_in_' . $database);
         foreach ($tables as $table) {
             Schema::drop($table);
         }

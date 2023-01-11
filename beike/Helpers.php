@@ -58,7 +58,7 @@ function plugin_setting($key, $default = null)
  */
 function admin_name(): string
 {
-    if ($envAdminName = env('ADMIN_NAME')) {
+    if ($envAdminName = config('beike.admin_name')) {
         return Str::snake($envAdminName);
     } elseif ($settingAdminName = system_setting('base.admin_name')) {
         return Str::snake($settingAdminName);
