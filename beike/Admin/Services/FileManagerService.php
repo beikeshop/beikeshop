@@ -77,8 +77,14 @@ class FileManagerService
         $page            = $page > 0 ? $page : 1;
         $imageCollection = collect($images);
 
+        $currentImages = $imageCollection->forPage($page, $perPage);
+        $currentImages = $currentImages->map(function ($item) {
+            $item['url'] = image_resize("{$item['path']}");
+            return $item;
+        });
+
         return [
-            'images'      => $imageCollection->forPage($page, $perPage)->values()->toArray(),
+            'images'      => $currentImages->values(),
             'image_total' => $imageCollection->count(),
             'image_page'  => $page,
         ];
@@ -203,11 +209,11 @@ class FileManagerService
      */
     private function handleImage($filePath, $baseName): array
     {
+        $path = "catalog{$filePath}";
         return [
-            'path'       => 'catalog' . $filePath,
+            'path'       => $path,
             'name'       => $baseName,
-            'url'        => image_resize("catalog{$filePath}"),
-            'origin_url' => image_origin("catalog{$filePath}"),
+            'origin_url' => image_origin($path),
             'selected'   => false,
         ];
     }
