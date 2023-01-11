@@ -1,4 +1,4 @@
-<div class="product-wrap {{ $style_list ?? '' }}">
+<div class="product-wrap {{ request('style_list') ?? '' }}">
   <div class="image">
     <a href="{{ $product['url'] }}">
       <div class="image-old">

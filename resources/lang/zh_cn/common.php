@@ -71,6 +71,7 @@ return [
     'low'                  => '低',
     'high'                 => '高',
     'sales'                => '销量',
+    'showing_page'         => '1-:per_page 共 :total 条数据',
 
     'id'                   => 'ID',
     'created_at'           => '创建时间',

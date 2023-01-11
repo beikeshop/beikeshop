@@ -15,6 +15,13 @@ body.page-product {
     }
   }
 
+  #product-description {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
   .product-image {
     #swiper {
       height: 250px;

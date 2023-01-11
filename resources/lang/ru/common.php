@@ -67,6 +67,10 @@ return [
     'menu'                 => 'меню',
     'whether_open'         => 'открывать ли',
     'to_setting'           => 'настроить',
+    'low'                  => 'низкий',
+    'high'                 => 'высокий',
+    'sales'                => 'продажи',
+    'showing_page'         => 'Showing 1-:per_page of :total item(s)',
 
     'id'                   => 'ID',
     'created_at'           => 'время создания',

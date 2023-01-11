@@ -67,6 +67,10 @@ return [
     'menu'                 => 'Menü',
     'whether_open'         => 'ob öffnen',
     'to_setting'           => 'zu konfigurieren',
+    'low'                  => 'niedrig',
+    'high'                 => 'hoch',
+    'sales'                => 'Verkauf',
+    'showing_page'         => 'Showing 1-:per_page of :total item(s)',
 
     'id'                   => 'ID',
     'created_at'           => 'Erstellungszeit',

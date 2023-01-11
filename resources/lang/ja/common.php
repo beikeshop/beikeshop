@@ -67,6 +67,10 @@ return [
     'menu'                 => 'メニュー',
     'whether_open'         => '開くかどうか',
     'to_setting'           => '設定する',
+    'low'                  => '低い',
+    'high'                 => '高い',
+    'sales'                => '売上',
+    'showing_page'         => 'Showing 1-:per_page of :total item(s)',
 
     'id'                   => 'ID',
     'created_at'           => '作成時間',

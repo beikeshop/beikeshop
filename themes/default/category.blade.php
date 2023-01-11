@@ -16,6 +16,27 @@
 
     <div class="row">
       <div class="col-12 col-lg-3 pe-lg-4 left-column">
+        <div class="mb-4 module-category-wrap">
+          <h4 class="mb-3"><span>{{ __('product.category') }}</span></h4>
+          <ul class="sidebar-widget mb-0" id="category-one">
+            @foreach ($all_categories as $key_a => $category_all)
+            <li class="{{ $category_all['id'] == $category->id ? 'active' : ''}}">
+              <a href="{{ shop_route('categories.show', [$category_all['id']]) }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
+              @if ($category_all['children'])
+                <button class="toggle-icon btn {{ $category_all['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}"><i class="bi bi-chevron-up"></i></button>
+                <ul id="category-{{ $key_a }}" class="accordion-collapse collapse {{ $category_all['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-one">
+                  @foreach ($category_all['children'] as $key_b => $child)
+                  <li class="{{ $child['id'] == $category->id ? 'active' : ''}} child-category">
+                    <a href="{{ shop_route('categories.show', [$child['id']]) }}" title="{{ $child['name'] }}">{{ $child['name'] }}</a>
+                  </li>
+                  @endforeach
+                </ul>
+              @endif
+            </li>
+            @endforeach
+          </ul>
+        </div>
+
         <div class="filter-box">
           @if ($filter_data['price']['min'] != $filter_data['price']['max'])
             <div class="card">
@@ -70,35 +91,7 @@
           </ul>
         </div>
 
-        <div class="product-tool d-flex justify-content-between align-items-center mb-4">
-          <div class="style-wrap">
-            <span class="{{ !request('style_list') || request('style_list') == 'grid' ? 'active' : ''}}">
-              <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><rect width="5" height="5"></rect><rect x="7" width="5" height="5"></rect><rect x="14" width="5" height="5"></rect><rect y="7" width="5" height="5"></rect><rect x="7" y="7" width="5" height="5"></rect><rect x="14" y="7" width="5" height="5"></rect><rect y="14" width="5" height="5"></rect><rect x="7" y="14" width="5" height="5"></rect><rect x="14" y="14" width="5" height="5"></rect></svg>
-            </span>
-            <span class="ms-1 class="{{ request('style_list') == 'list' ? 'active' : ''}}">
-              <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><rect width="5" height="5"></rect><rect x="7" height="5" width="12"></rect><rect y="7" width="5" height="5"></rect><rect x="7" y="7" height="5" width="12"></rect><rect y="14" width="5" height="5"></rect><rect x="7" y="14" height="5" width="12"></rect></svg>
-            </span>
-          </div>
-          <div class="d-flex">
-            {{-- <div>Showing 1-19 of 20 item(s)</div> --}}
-
-            <select class="form-select perpage-select">
-              @foreach ($per_pages as $val)
-              <option value="{{ $val }}" {{ request('per_page') == $val ? 'selected' : '' }}>{{ $val }}</option>
-              @endforeach
-            </select>
-
-            <select class="form-select order-select ms-2">
-              <option value="">{{ __('common.default') }}</option>
-              <option value="products.sales|asc" {{ request('sort') == 'products.sales' && request('order') == 'asc' ? 'selected' : '' }}>{{ __('common.sales') }} ({{ __('common.low') . '-' . __('common.high')}})</option>
-              <option value="products.sales|desc" {{ request('sort') == 'products.sales' && request('order') == 'desc' ? 'selected' : '' }}>{{ __('common.sales') }} ({{ __('common.high') . '-' . __('common.low')}})</option>
-              <option value="pd.name|asc" {{ request('sort') == 'pd.name' && request('order') == 'asc' ? 'selected' : '' }}>{{ __('common.name') }} (A - Z)</option>
-              <option value="pd.name|desc" {{ request('sort') == 'pd.name' && request('order') == 'desc' ? 'selected' : '' }}>{{ __('common.name') }} (Z - A)</option>
-              <option value="product_skus.price|asc" {{ request('sort') == 'product_skus.price' && request('order') == 'asc' ? 'selected' : '' }}>{{ __('product.price') }} ({{ __('common.low') . '-' . __('common.high')}})</option>
-              <option value="product_skus.price|desc" {{ request('sort') == 'product_skus.price' && request('order') == 'desc' ? 'selected' : '' }}>{{ __('product.price') }} ({{ __('common.high') . '-' . __('common.low')}})</option>
-            </select>
-          </div>
-        </div>
+        @include('shared.filter_bar_block')
 
         @if (count($products_format))
         <div class="row {{ request('style_list') == 'list' ? 'product-list-wrap' : ''}}">
@@ -142,8 +135,8 @@
   $(document).ready(function () {
     $("#slider").slider({
       range: true,
-      min: {{ $filter_data['price']['min'] }},
-      max: {{ $filter_data['price']['max'] }},
+      min: {{ $filter_data['price']['min'] ?? 0 }},
+      max: {{ $filter_data['price']['max'] ?? 0 }},
       values: [{{ $filter_data['price']['select_min'] }}, {{ $filter_data['price']['select_max'] }}],
       change: function(event, ui) {
         $('input.price-min').val(ui.values[0])
@@ -156,13 +149,20 @@
     });
   });
 
+  $('.child-category').each(function(index, el) {
+    if ($(this).hasClass('active')) {
+      $(this).parent('ul').addClass('show').siblings('button').removeClass('collapsed')
+      $(this).parents('li').addClass('active')
+    }
+  });
+
   $('.attr-value-check').change(function(event) {
     let [attr, val] = [$(this).data('attr'),$(this).data('attrval')];
     filterAttr[attr].values[val].selected = $(this).is(":checked");
     filterProductData();
   });
 
-  $('.form-select').change(function(event) {
+  $('.form-select, input[name="style_list"]').change(function(event) {
     filterProductData();
   });
 
@@ -190,6 +190,7 @@
     let [priceMin, priceMax] = [$('.price-min').val(), $('.price-max').val()];
     let order = $('.order-select').val();
     let perpage = $('.perpage-select').val();
+    let styleList = $('input[name="style_list"]:checked').val();
 
     layer.load(2, {shade: [0.3,'#fff'] })
 
@@ -209,6 +210,10 @@
 
     if (perpage) {
       url = bk.updateQueryStringParameter(url, 'per_page', perpage);
+    }
+
+    if (styleList) {
+     url = bk.updateQueryStringParameter(url, 'style_list', styleList);
     }
 
     location = url;
