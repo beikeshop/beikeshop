@@ -77,6 +77,12 @@ class ProductRepo
     {
         $builder = Product::query()->with('description', 'skus', 'master_sku', 'attributes');
 
+        $builder->leftJoin('product_descriptions as pd', function ($build) {
+            $build->whereColumn('pd.product_id', 'products.id')
+                ->where('locale', locale());
+        });
+        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+
         if (isset($data['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($data) {
                 if (is_array($data['category_id'])) {
@@ -89,7 +95,7 @@ class ProductRepo
 
         $productIds = $data['product_ids'] ?? [];
         if ($productIds) {
-            $builder->whereIn('id', $productIds);
+            $builder->whereIn('products.id', $productIds);
             $productIds = implode(',', $productIds);
             $builder->orderByRaw("FIELD(products.id, {$productIds})");
         }

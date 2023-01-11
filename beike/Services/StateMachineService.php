@@ -14,6 +14,7 @@ namespace Beike\Services;
 use Beike\Models\Order;
 use Beike\Models\OrderHistory;
 use Beike\Models\OrderShipment;
+use Beike\Models\Product;
 use Throwable;
 
 class StateMachineService
@@ -54,7 +55,7 @@ class StateMachineService
             self::UNPAID => ['updateStatus', 'addHistory', 'notifyNewOrder'],
         ],
         self::UNPAID  => [
-            self::PAID      => ['updateStatus', 'addHistory', 'subStock', 'notifyUpdateOrder'],
+            self::PAID      => ['updateStatus', 'addHistory', 'updateSales', 'subStock', 'notifyUpdateOrder'],
             self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::PAID    => [
@@ -237,6 +238,21 @@ class StateMachineService
     {
         $this->order->status = $newCode;
         $this->order->saveOrFail();
+    }
+
+    /**
+     * 更新订单商品销量
+     * @return void
+     */
+    private function updateSales()
+    {
+        $this->order->loadMissing([
+            'orderProducts'
+        ]);
+        $orderProducts = $this->order->orderProducts;
+        foreach ($orderProducts as $orderProduct) {
+            Product::query()->where('id', $orderProduct->product_id)->increment('sales', $orderProduct->quantity);
+        }
     }
 
     /**
