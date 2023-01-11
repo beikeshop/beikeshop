@@ -22,6 +22,7 @@ class CategoryController extends Controller
         $category->load('description');
         $filterData = array_merge($filterData, ['category_id' => $category->id, 'active' => 1]);
         $data       = [
+            'all_categories' => CategoryRepo::getTwoLevelCategories(),
             'category'        => $category,
             'filter_data'     => ['attr' => ProductRepo::getFilterAttribute($filterData), 'price' => ProductRepo::getFilterPrice($filterData)],
             'products_format' => $products->jsonSerialize(),
