@@ -81,7 +81,11 @@ class ProductRepo
             $build->whereColumn('pd.product_id', 'products.id')
                 ->where('locale', locale());
         });
-        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+        $builder->leftJoin('product_skus', function ($build) {
+            $build->whereColumn('product_skus.product_id', 'products.id')
+                ->where('is_default', 1);
+        });
+        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name', 'product_skus.price']);
 
         if (isset($data['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($data) {
@@ -135,9 +139,7 @@ class ProductRepo
         }
 
         if (isset($data['name'])) {
-            $builder->whereHas('description', function ($query) use ($data) {
-                $query->where('name', 'like', "%{$data['name']}%");
-            });
+            $builder->where('pd.name', 'like', "%{$data['name']}%");
         }
 
         $keyword = $data['keyword'] ?? '';
@@ -146,9 +148,7 @@ class ProductRepo
                 $query->whereHas('skus', function (Builder $query) use ($keyword) {
                     $query->where('sku', 'like', "%{$keyword}%")
                         ->orWhere('model', 'like', "%{$keyword}%");
-                })->orWhereHas('description', function ($query) use ($keyword) {
-                    $query->where('name', 'like', "%{$keyword}%");
-                });
+                })->orWhere('pd.name', 'like', "%{$keyword}%");
             });
         }
 
