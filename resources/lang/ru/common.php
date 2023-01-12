@@ -71,6 +71,10 @@ return [
     'high'                 => 'высокий',
     'sales'                => 'продажи',
     'showing_page'         => 'Showing 1-:per_page of :total item(s)',
+    'text_grid'            => 'сетка',
+    'text_list'            => 'список',
+    'text_form'            => 'от',
+    'text_to'              => 'кому',
 
     'id'                   => 'ID',
     'created_at'           => 'время создания',

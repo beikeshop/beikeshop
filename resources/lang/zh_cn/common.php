@@ -72,6 +72,10 @@ return [
     'high'                 => '高',
     'sales'                => '销量',
     'showing_page'         => '1-:per_page 共 :total 条数据',
+    'text_grid'            => '网格',
+    'text_list'            => '列表',
+    'text_form'            => '从',
+    'text_to'              => '到',
 
     'id'                   => 'ID',
     'created_at'           => '创建时间',

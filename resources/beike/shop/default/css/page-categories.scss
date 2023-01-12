@@ -9,13 +9,13 @@
  */
 
 body.page-categories {
-  .right-column {
+  .col-lg-9.right-column {
     @media (min-width: 992px) {
       width: 78%;
     }
   }
 
-  .left-column {
+  .col-lg-3.left-column {
     @media (min-width: 992px) {
       width: 22%;
     }
@@ -89,12 +89,17 @@ body.page-categories {
       position: absolute;
       top: 50%;
       border-radius: 0;
-      height: 2px;
-      margin-top: -1px;
+      height: 3px;
+      margin-top: -3px;
     }
 
-    .ui-slider-active {
-      border: none;
+    .slider-bg {
+      background: #e3e3e3;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 3px;
+      margin-top: -3px;
     }
 
     .ui-slider-handle {
@@ -104,6 +109,7 @@ body.page-categories {
       border: none !important;
       border-radius: 0;
       background: $primary;
+      outline: none !important;
     }
   }
 }

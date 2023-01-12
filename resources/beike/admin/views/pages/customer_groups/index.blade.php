@@ -62,6 +62,7 @@
           </el-form-item>
         </el-form-item>
 
+        @if (0)
         <el-form-item label="{{ __('customer_group.level') }}">
           <el-input class="mb-0" v-model="dialog.form.level" placeholder="{{ __('customer_group.level') }}"></el-input>
         </el-form-item>
@@ -81,6 +82,7 @@
         <el-form-item label="{{ __('admin/customer_group.integral_factor') }}">
           <el-input class="mb-0" type="number" v-model="dialog.form.use_point_factor" placeholder="{{ __('admin/customer_group.integral_factor') }}"></el-input>
         </el-form-item>
+        @endif
 
         <el-form-item>
           <div class="d-flex d-lg-block">
@@ -115,6 +117,7 @@
             name: {},
             description: {},
             total: '', //消费额度
+            level: '1',
             discount_factor: '', // 折扣率
             reward_point_factor: '', // 奖励积分系数使用积分系数
             use_point_factor: '', // 使用积分系数

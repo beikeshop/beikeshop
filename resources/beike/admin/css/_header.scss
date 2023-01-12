@@ -20,14 +20,21 @@
 
   .header-left {
     width: 190px;
-    display: flex;
-    align-items: center; // flex-start | center
-    justify-content: center; // flex-end | center | space-between
     // flex-wrap: wrap;
 
     .logo {
-      max-width: 76%;
-      max-height: 30px;
+      a {
+        max-width: 76%;
+        height: 40px;
+        margin: auto;
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: center; // flex-end | center | space-between
+
+        img {
+          max-height: 100%;
+        }
+      }
     }
   }
 
@@ -146,8 +153,14 @@
   box-shadow: 0 2px 14px 0 rgba(0, 0, 0, .05);
 
   > .logo {
-    max-width: 150px;
-    max-height: 30px;
+    a {
+      max-width: 150px;
+      height: 40px;
+      margin: auto;
+      display: flex;
+      align-items: center; // flex-start | center
+      justify-content: center; // flex-end | center | space-between
+    }
 
     img {
       max-height: 100%;

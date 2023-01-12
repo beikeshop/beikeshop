@@ -71,6 +71,10 @@ return [
     'high'                 => 'hoch',
     'sales'                => 'Verkauf',
     'showing_page'         => 'Showing 1-:per_page of :total item(s)',
+    'text_grid'            => 'Gitter',
+    'text_list'            => 'Liste',
+    'text_form'            => 'von',
+    'text_to'              => 'an',
 
     'id'                   => 'ID',
     'created_at'           => 'Erstellungszeit',

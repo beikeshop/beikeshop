@@ -71,6 +71,10 @@ return [
     'high'                 => 'alto',
     'sales'                => 'ventas',
     'showing_page'         => 'Showing 1-:per_page of :total item(s)',
+    'text_grid'            => 'cuadrícula',
+    'text_list'            => 'lista',
+    'text_form'            => 'desde',
+    'texto_a'              => 'a',
 
     'id'                   => 'ID',
     'created_at'           => 'tiempo de creación',

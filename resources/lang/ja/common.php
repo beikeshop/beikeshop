@@ -71,6 +71,10 @@ return [
     'high'                 => '高い',
     'sales'                => '売上',
     'showing_page'         => 'Showing 1-:per_page of :total item(s)',
+    'text_grid'            => 'グリッド',
+    'text_list'            => 'リスト',
+    'text_form'            => 'From',
+    'text_to'              => 'To',
 
     'id'                   => 'ID',
     'created_at'           => '作成時間',

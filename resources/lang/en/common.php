@@ -71,7 +71,11 @@ return [
     'low'                  => 'Low',
     'high'                 => 'High',
     'sales'                => 'Sales',
-    'showing_page'         => 'Showing 1-:per_page of :total item(s)',
+    'showing_page'         => 'Showing 1-:per_page of :total products',
+    'text_grid'            => 'Grid',
+    'text_list'            => 'List',
+    'text_form'            => 'From',
+    'text_to'              => 'To',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',
