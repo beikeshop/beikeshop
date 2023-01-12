@@ -15,9 +15,9 @@
           </div>
         @endforeach
       </div>
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination slideshow-pagination-{{ $module_id }}"></div>
+      <div class="swiper-button-prev slideshow-btnprev-{{ $module_id }}"></div>
+      <div class="swiper-button-next slideshow-btnnext-{{ $module_id }}"></div>
     </div>
   </div>
 
@@ -30,13 +30,14 @@
 
       // 如果需要分页器
       pagination: {
-        el: '.swiper-pagination',
+        el: '.slideshow-pagination-{{ $module_id }}',
+        clickable :true
       },
 
       // 如果需要前进后退按钮
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.slideshow-btnnext-{{ $module_id }}',
+        prevEl: '.slideshow-btnprev-{{ $module_id }}',
       },
     })
   </script>

@@ -259,4 +259,13 @@ body.page-product {
       }
     }
   }
+
+  .relations-wrap {
+    .swiper-pagination {
+      .swiper-pagination-bullet {
+        height: 3px;
+        border-radius: 0;
+      }
+    }
+  }
 }

@@ -41,6 +41,7 @@ export default {
     const btnHtml = $btn.html();
     const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
     $btn.html(loadHtml).prop('disabled', true);
+    $(document).find('.tooltip').remove();
 
     $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
       this.getCarts();
@@ -61,6 +62,7 @@ export default {
     const btnHtml = $btn.html();
     const isWishlist = $btn.attr('data-in-wishlist') * 1;
     const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
+    $(document).find('.tooltip').remove();
 
     if (isWishlist) {
       $btn.html(loadHtml).prop('disabled', true);

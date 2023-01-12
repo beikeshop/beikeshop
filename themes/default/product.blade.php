@@ -44,7 +44,7 @@
                   <img :src="image.preview" class="img-fluid">
                 </div>
               </div>
-              <div class="swiper-pagination"></div>
+              <div class="swiper-pagination mobile-pagination"></div>
             </div>
           @endif
         </div>
@@ -181,6 +181,7 @@
               @endforeach
             </div>
           </div>
+          <div class="swiper-pagination relations-pagination"></div>
           <div class="swiper-button-prev relations-swiper-prev"></div>
           <div class="swiper-button-next relations-swiper-next"></div>
         </div>
@@ -350,6 +351,7 @@
     });
 
     var relationsSwiper = new Swiper ('.relations-swiper', {
+      watchSlidesProgress: true,
       breakpoints:{
         320: {
           slidesPerView: 2,
@@ -366,14 +368,19 @@
         nextEl: '.relations-swiper-next',
         prevEl: '.relations-swiper-prev',
       },
+
+      // 如果需要分页器
+      pagination: {
+        el: '.relations-pagination',
+        clickable: true,
+      },
     })
 
     @if (is_mobile())
       swiperMobile = new Swiper("#swiper-mobile", {
         slidesPerView: 1,
         pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
+          el: ".mobile-pagination",
         },
         observer: true,
         observeParents: true
