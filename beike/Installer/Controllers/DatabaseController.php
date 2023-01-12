@@ -32,9 +32,9 @@ class DatabaseController extends Controller
     public function index()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        $rows   = DB::select('SHOW TABLES');
+        $rows     = DB::select('SHOW TABLES');
         $database = config('database.connections.mysql.database');
-        $tables = array_column($rows, 'Tables_in_' . $database);
+        $tables   = array_column($rows, 'Tables_in_' . $database);
         foreach ($tables as $table) {
             Schema::drop($table);
         }

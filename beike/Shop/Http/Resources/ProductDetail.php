@@ -22,7 +22,7 @@ class ProductDetail extends JsonResource
     {
         $attributes = [];
         foreach ($this->attributes as $ProductAttribute) {
-            if (!isset($attributes[$ProductAttribute->attribute->attribute_group_id]['attribute_group_name'])) {
+            if (! isset($attributes[$ProductAttribute->attribute->attribute_group_id]['attribute_group_name'])) {
                 $attributes[$ProductAttribute->attribute->attribute_group_id]['attribute_group_name'] = $ProductAttribute->attribute->attributeGroup->description->name;
             }
             $attributes[$ProductAttribute->attribute->attribute_group_id]['attributes'][] = [

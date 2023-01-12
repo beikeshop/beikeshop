@@ -222,8 +222,9 @@ class ProductRepo
             }
         }
 
-        $results = array_map(function($item) {
+        $results = array_map(function ($item) {
             $item['values'] = array_values($item['values']);
+
             return $item;
         }, $results);
 
@@ -239,15 +240,15 @@ class ProductRepo
         $min = $builder->min('ps.price');
         $max = $builder->max('ps.price');
 
-        $priceArr = explode('-', $selectPrice);
+        $priceArr  = explode('-', $selectPrice);
         $selectMin = $priceArr[0];
         $selectMax = $priceArr[1];
 
         return [
-            'min' => $min,
-            'max' => $max,
-            'select_min' =>  ($selectMin && $selectMin > $min) ? $selectMin : $min,
-            'select_max' => ($selectMax && $selectMax < $max) ? $selectMax: $max,
+            'min'        => $min,
+            'max'        => $max,
+            'select_min' => ($selectMin && $selectMin > $min) ? $selectMin : $min,
+            'select_max' => ($selectMax && $selectMax < $max) ? $selectMax : $max,
         ];
     }
 

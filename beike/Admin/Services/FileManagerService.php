@@ -80,6 +80,7 @@ class FileManagerService
         $currentImages = $imageCollection->forPage($page, $perPage);
         $currentImages = $currentImages->map(function ($item) {
             $item['url'] = image_resize("{$item['path']}");
+
             return $item;
         });
 
@@ -210,6 +211,7 @@ class FileManagerService
     private function handleImage($filePath, $baseName): array
     {
         $path = "catalog{$filePath}";
+
         return [
             'path'       => $path,
             'name'       => $baseName,

@@ -80,7 +80,6 @@ class AddressRepo
             return $customer->addresses()->with('country')->get();
         }
 
-            return collect();
-
+        return collect();
     }
 }

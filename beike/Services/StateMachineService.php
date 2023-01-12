@@ -247,7 +247,7 @@ class StateMachineService
     private function updateSales()
     {
         $this->order->loadMissing([
-            'orderProducts'
+            'orderProducts',
         ]);
         $orderProducts = $this->order->orderProducts;
         foreach ($orderProducts as $orderProduct) {
