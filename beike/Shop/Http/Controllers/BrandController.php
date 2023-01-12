@@ -23,7 +23,7 @@ class BrandController extends Controller
         $brand    = BrandRepo::find($id);
         $products = $brand->products()
             ->with([
-                'master_sku',
+                'masterSku',
                 'description',
                 'inCurrentWishlist',
             ])

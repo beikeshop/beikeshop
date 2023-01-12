@@ -51,7 +51,7 @@ class Product extends Base
         return $this->hasMany(ProductAttribute::class);
     }
 
-    public function master_sku()
+    public function masterSku()
     {
         return $this->hasOne(ProductSku::class)->where('is_default', 1);
     }

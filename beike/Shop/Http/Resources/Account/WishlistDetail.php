@@ -21,7 +21,7 @@ class WishlistDetail extends JsonResource
     public function toArray($request): array
     {
         $product     = $this->product;
-        $masterSku   = $product->master_sku;
+        $masterSku   = $product->masterSku;
         $image       = $this->product->image ?: $masterSku->image;
         $productName = $product->description->name ?? '';
 

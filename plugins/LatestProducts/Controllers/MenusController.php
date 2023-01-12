@@ -29,7 +29,7 @@ class MenusController extends Controller
     public function latestProducts()
     {
         $products = ProductRepo::getBuilder(['active' => 1])
-            ->whereHas('master_sku')
+            ->whereHas('masterSku')
             ->with('inCurrentWishlist')
             ->paginate(perPage());
 

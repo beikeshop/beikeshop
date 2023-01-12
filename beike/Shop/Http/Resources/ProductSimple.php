@@ -25,7 +25,7 @@ class ProductSimple extends JsonResource
      */
     public function toArray($request): array
     {
-        $masterSku = $this->master_sku;
+        $masterSku = $this->masterSku;
         if (empty($masterSku)) {
             throw new \Exception("invalid master sku for product {$this->id}");
         }

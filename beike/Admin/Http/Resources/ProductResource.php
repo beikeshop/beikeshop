@@ -16,7 +16,7 @@ class ProductResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $masterSku = $this->master_sku;
+        $masterSku = $this->masterSku;
 
         $data = [
             'id'              => $this->id,

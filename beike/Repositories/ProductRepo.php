@@ -32,7 +32,7 @@ class ProductRepo
         if (is_int($product)) {
             $product = Product::query()->findOrFail($product);
         }
-        $product->load('description', 'skus', 'master_sku', 'brand', 'relations');
+        $product->load('description', 'skus', 'masterSku', 'brand', 'relations');
 
         return $product;
     }
@@ -61,7 +61,7 @@ class ProductRepo
         if (! $productIds) {
             return ProductSimple::collection(new Collection());
         }
-        $builder  = self::getBuilder(['product_ids' => $productIds])->whereHas('master_sku');
+        $builder  = self::getBuilder(['product_ids' => $productIds])->whereHas('masterSku');
         $products = $builder->with('inCurrentWishlist')->get();
 
         return ProductSimple::collection($products);
@@ -75,7 +75,7 @@ class ProductRepo
      */
     public static function getBuilder(array $data = []): Builder
     {
-        $builder = Product::query()->with('description', 'skus', 'master_sku', 'attributes');
+        $builder = Product::query()->with('description', 'skus', 'masterSku', 'attributes');
 
         $builder->leftJoin('product_descriptions as pd', function ($build) {
             $build->whereColumn('pd.product_id', 'products.id')
