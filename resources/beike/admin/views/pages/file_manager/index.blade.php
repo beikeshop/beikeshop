@@ -87,7 +87,7 @@
         <div class="content-footer">
           <div class="right"></div>
           <div class="pagination-wrap">
-            {{-- <el-pagination @current-change="pageCurrentChange" :page-size="20" layout="prev, pager, next"
+            {{-- <el-pagination @current-change="pageCurrentChange" :page-size="20" layout="total, prev, pager, next"
               :total="image_total">
             </el-pagination> --}}
 

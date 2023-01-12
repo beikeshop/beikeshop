@@ -94,7 +94,7 @@
         </table>
       </div>
 
-      <el-pagination v-if="customers.data.length" layout="prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
+      <el-pagination v-if="customers.data.length" layout="total, prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
         :total="customers.total"></el-pagination>
     </div>
 

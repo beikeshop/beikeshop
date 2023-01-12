@@ -149,7 +149,7 @@
             </table>
           </div>
 
-          <el-pagination layout="prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
+          <el-pagination layout="total, prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
             :total="product.total"></el-pagination>
         </template>
 

@@ -44,7 +44,7 @@
         </table>
       </div>
 
-      <el-pagination v-if="country.data.length" layout="prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
+      <el-pagination v-if="country.data.length" layout="total, prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
         :total="country.total"></el-pagination>
     </div>
 

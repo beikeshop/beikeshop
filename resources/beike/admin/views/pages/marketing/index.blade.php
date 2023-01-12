@@ -74,7 +74,7 @@
         <x-admin-no-data />
       </div>
 
-      <el-pagination v-if="plugins.data.length" layout="prev, pager, next" background :page-size="plugins.meta.per_page"
+      <el-pagination v-if="plugins.data.length" layout="total, prev, pager, next" background :page-size="plugins.meta.per_page"
         :current-page.sync="page" :total="plugins.meta.total"></el-pagination>
     </div>
 

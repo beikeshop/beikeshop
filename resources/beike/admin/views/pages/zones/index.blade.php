@@ -44,7 +44,7 @@
         </table>
       </div>
 
-      <el-pagination v-if="zones.data.length" :pager-count="5" layout="prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
+      <el-pagination v-if="zones.data.length" :pager-count="5" layout="total, prev, pager, next" background :page-size="zones.per_page" :current-page.sync="page"
         :total="zones.total"></el-pagination>
     </div>
 
