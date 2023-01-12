@@ -34,7 +34,7 @@ class RmaService
             'customer_id'      => $customer->id,
             'name'             => $customer->name,
             'email'            => $customer->email,
-            'telephone'        => $customer->telephone ?? '',
+            'telephone'        => $customer->telephone ?? ($orderProduct->order->telephone ?: $orderProduct->order->shipping_telephone),
             'product_name'     => $orderProduct->name,
             'sku'              => $orderProduct->product_sku,
             'quantity'         => $data['quantity'],
