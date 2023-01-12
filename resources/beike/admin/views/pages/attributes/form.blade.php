@@ -70,9 +70,9 @@
     </div>
 
     <el-dialog title="{{ __('admin/attribute.attribute_value') }}" :visible.sync="dialog.show" width="670px"
-      @close="closeDialog('form')" :close-on-click-modal="false">
+      @close="closeDialog('valuesform')" :close-on-click-modal="false">
 
-      <el-form ref="form" :rules="attributeRules" :model="dialog.form" label-width="155px">
+      <el-form ref="valuesform" :rules="attributeRules" :model="dialog.form" label-width="155px">
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -85,8 +85,8 @@
 
         <el-form-item>
           <div class="d-flex d-lg-block mt-4">
-            <el-button type="primary" @click="formSubmit('form')">{{ __('common.save') }}</el-button>
-            <el-button @click="closeDialog('form')">{{ __('common.cancel') }}</el-button>
+            <el-button type="primary" @click="formSubmit('valuesform')">{{ __('common.save') }}</el-button>
+            <el-button @click="closeDialog('valuesform')">{{ __('common.cancel') }}</el-button>
           </div>
         </el-form-item>
       </el-form>
