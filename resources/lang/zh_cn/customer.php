@@ -13,5 +13,5 @@ return [
     'name'           => '姓名',
     'email'          => 'Email',
     'from'           => '注册来源',
-    'customer_group' => '用户组',
+    'customer_group' => '客户组',
 ];

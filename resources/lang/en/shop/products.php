@@ -12,7 +12,7 @@
 return [
     'search'           => 'Search',
     'add_to_favorites' => 'Add To Favorites',
-    'add_to_cart'      => 'Add to Shopping Cart',
+    'add_to_cart'      => 'Add To Cart',
     'buy_now'          => 'Buy Now',
     'product_details'  => 'Product Details',
     'in_stock'         => 'In Stock',

@@ -42,11 +42,10 @@
           @else
           <x-shop-no-data />
         @endif
+
+        {{ $products->links('shared/pagination/bootstrap-4') }}
       </div>
     </div>
-
-    {{ $products->links('shared/pagination/bootstrap-4') }}
-
   </div>
 
 @endsection

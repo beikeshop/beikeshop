@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', __('customer.customer_group'))
+@section('title', __('admin/common.customer_groups_index'))
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>
@@ -42,7 +42,7 @@
       {{-- {{ $customer_groups->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
-    <el-dialog title="{{ __('customer.customer_group') }}" :visible.sync="dialog.show" width="670px"
+    <el-dialog title="{{ __('admin/common.customer_groups_index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">

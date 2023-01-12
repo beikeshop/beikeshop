@@ -153,14 +153,19 @@
         </div>
         <div class="tab-pane fade" id="product-attributes" role="tabpanel">
           <table class="table table-bordered attribute-table">
-            <tbody>
-              @foreach ($product['attributes'] as $item)
-              <tr>
-                <td>{{ $item['attribute'] }}</td>
-                <td>{{ $item['attribute_value'] }}</td>
-              </tr>
-              @endforeach
-            </tbody>
+            @foreach ($product['attributes'] as $group)
+              <thead class="table-light">
+                <tr><td colspan="2"><strong>{{ $group['attribute_group_name'] }}</strong></td></tr>
+              </thead>
+              <tbody>
+                @foreach ($group['attributes'] as $item)
+                <tr>
+                  <td>{{ $item['attribute'] }}</td>
+                  <td>{{ $item['attribute_value'] }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            @endforeach
           </table>
         </div>
       </div>
