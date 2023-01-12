@@ -20,6 +20,17 @@ class ProductDetail extends JsonResource
      */
     public function toArray($request): array
     {
+        $attributes = [];
+        foreach ($this->attributes as $ProductAttribute) {
+            if (!isset($attributes[$ProductAttribute->attribute->attribute_group_id]['attribute_group_name'])) {
+                $attributes[$ProductAttribute->attribute->attribute_group_id]['attribute_group_name'] = $ProductAttribute->attribute->attributeGroup->description->name;
+            }
+            $attributes[$ProductAttribute->attribute->attribute_group_id]['attributes'][] = [
+                'attribute'       => $ProductAttribute->attribute->description->name,
+                'attribute_value' => $ProductAttribute->attributeValue->description->name,
+            ];
+        }
+
         return [
             'id'               => $this->id,
             'name'             => $this->description->name             ?? '',
@@ -36,12 +47,7 @@ class ProductDetail extends JsonResource
                     'thumb'   => image_resize($image, 150, 150),
                 ];
             }, $this->images ?? []),
-            'attributes'       => $this->attributes->map(function ($attribute) {
-                return [
-                    'attribute'       => $attribute->attribute->description->name,
-                    'attribute_value' => $attribute->attributeValue->description->name,
-                ];
-            })->toArray(),
+            'attributes'       => $attributes,
             'category_id'      => $this->category_id ?? null,
             'variables'        => $this->decodeVariables($this->variables),
             'skus'             => SkuDetail::collection($this->skus)->jsonSerialize(),
