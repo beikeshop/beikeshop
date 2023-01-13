@@ -191,11 +191,13 @@ class ProductRepo
         return $attributes;
     }
 
-    public static function getFilterAttribute($data)
+    public static function getFilterAttribute($data): array
     {
-        $builder = self::getBuilder($data)->with(['attributes.attribute.description', 'attributes.attribute_value.description'])->leftJoin('product_attributes as pa', 'pa.product_id', 'products.id')
-            ->whereNotNull('pa.attribute_id')
+        $builder = self::getBuilder($data)
             ->select(['pa.attribute_id', 'pa.attribute_value_id'])
+            ->with(['attributes.attribute.description', 'attributes.attribute_value.description'])
+            ->leftJoin('product_attributes as pa', 'pa.product_id', 'products.id')
+            ->whereNotNull('pa.attribute_id')
             ->distinct()
             ->reorder('pa.attribute_id');
         $productAttributes = $builder->get()->toArray();
