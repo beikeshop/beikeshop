@@ -16,7 +16,6 @@ use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\OrderList;
 use Beike\Shop\Services\PaymentService;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -78,15 +77,19 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @param $number
-     * @return Factory|View
+     * @return mixed
      * @throws \Exception
      */
     public function pay(Request $request, $number)
     {
-        $customer = current_customer();
-        $order    = OrderRepo::getOrderByNumber($number, $customer);
+        try {
+            $customer = current_customer();
+            $order    = OrderRepo::getOrderByNumber($number, $customer);
 
-        return (new PaymentService($order))->pay();
+            return (new PaymentService($order))->pay();
+        } catch (\Exception $e) {
+            return redirect(shop_route('account.order.show', $number))->withErrors($e->getMessage());
+        }
     }
 
     /**

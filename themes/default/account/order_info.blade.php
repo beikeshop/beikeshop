@@ -11,6 +11,13 @@
       <x-shop-sidebar />
 
       <div class="col-12 col-md-9">
+
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            <x-shop-alert type="danger" msg="{{ $error }}" class="mt-4" />
+          @endforeach
+        @endif
+
         <div class="card mb-4 order-head">
           <div class="card-header d-flex align-items-center justify-content-between">
             <h6 class="card-title">{{ __('shop/account.order.order_info.order_details') }}</h6>
