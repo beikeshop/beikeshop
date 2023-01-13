@@ -3,6 +3,7 @@
 use Beike\Models\AdminUser;
 use Beike\Models\Customer;
 use Beike\Models\Language;
+use Beike\Models\Currency;
 use Beike\Repositories\BrandRepo;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
@@ -338,6 +339,19 @@ function currency_format($price, string $currency = '', string $value = '', bool
     }
 
     return CurrencyService::getInstance()->format($price, $currency, $value, $format);
+}
+
+
+/**
+ * 获取指定货币汇率
+ *
+ * @return string
+ */
+function current_currency_rate(): float
+{
+    $currency = current_currency_code();
+
+    return Currency::query()->where('code', $currency)->value('value') ?? 1;
 }
 
 /**

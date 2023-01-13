@@ -169,7 +169,8 @@
             </div>
 
             <div v-if="mail_engine == 'sendmail'">
-              <x-admin-form-input name="sendmail[path]" required title="{{ __('admin/setting.sendmail_path') }}" value="{{ old('path', system_setting('base.sendmail.path', '')) }}">
+              <x-admin-form-input name="sendmail[path]" :placeholder="222" required title="{{ __('admin/setting.sendmail_path') }}" value="{{ old('path', system_setting('base.sendmail.path', '')) }}">
+                <div class="help-text font-size-12 lh-base">系统 sendmail 执行路径, 一般为 /usr/sbin/sendmail -bs</div>
               </x-admin-form-input>
             </div>
 

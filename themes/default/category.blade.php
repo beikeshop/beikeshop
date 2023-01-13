@@ -87,7 +87,7 @@
 
   function filterProductData() {
     let url = bk.removeURLParameters(window.location.href, 'attr', 'price', 'sort', 'order');
-    let [priceMin, priceMax] = [$('.price-min').val(), $('.price-max').val()];
+    let [psMin, psMax, pMin, pMax] = [$('.price-select-min').val(), $('.price-select-max').val(), $('.price-min').val(), $('.price-max').val()];
     let order = $('.order-select').val();
     let perpage = $('.perpage-select').val();
     let styleList = $('input[name="style_list"]:checked').val();
@@ -98,8 +98,8 @@
       url = bk.updateQueryStringParameter(url, 'attr', filterAttrChecked(filterAttr));
     }
 
-    if (priceMin || priceMax) {
-      url = bk.updateQueryStringParameter(url, 'price', `${priceMin}-${priceMax}`);
+    if ((psMin != pMin) || (psMax != pMax)) {
+      url = bk.updateQueryStringParameter(url, 'price', `${psMin}-${psMax}`);
     }
 
     if (order) {

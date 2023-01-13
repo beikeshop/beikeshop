@@ -42,8 +42,10 @@
             <span class="max">{{ currency_format($filter_data['price']['select_max'], current_currency_code()) }}</span>
           </div>
         </div>
-        <input value="{{ $filter_data['price']['select_min'] }}" class="price-min d-none">
-        <input value="{{ $filter_data['price']['select_max'] }}" class="price-max d-none">
+        <input value="{{ $filter_data['price']['select_min'] }}" class="price-select-min d-none">
+        <input value="{{ $filter_data['price']['select_max'] }}" class="price-select-max d-none">
+        <input value="{{ $filter_data['price']['min'] }}" class="price-min d-none">
+        <input value="{{ $filter_data['price']['max'] }}" class="price-max d-none">
       </div>
     </div>
   @endif
@@ -68,6 +70,8 @@
 
 @push('add-scripts')
 <script>
+  const currencyRate = {{ current_currency_rate() }};
+
   $("#price-slider").slider({
     range: true,
     step: 0.01,
@@ -75,15 +79,15 @@
     max: {{ $filter_data['price']['max'] ?? 0 }},
     values: [{{ $filter_data['price']['select_min'] }}, {{ $filter_data['price']['select_max'] }}],
     change: function(event, ui) {
-      $('input.price-min').val(ui.values[0])
-      $('input.price-max').val(ui.values[1])
+      $('input.price-select-min').val(ui.values[0])
+      $('input.price-select-max').val(ui.values[1])
       filterProductData();
     },
     slide: function(event, ui) {
       let min = $('.price-range .min').html();
       let max = $('.price-range .max').html();
-      $('.price-range .min').html(min.replace(min.replace(/[^0-9.]/g, ''), ui.values[0]));
-      $('.price-range .max').html(max.replace(max.replace(/[^0-9.]/g, ''), ui.values[1]));
+      $('.price-range .min').html(min.replace(min.replace(/[^0-9.,]/g, ''), (ui.values[0] * currencyRate).toFixed(2)));
+      $('.price-range .max').html(max.replace(max.replace(/[^0-9.,]/g, ''), (ui.values[1] * currencyRate).toFixed(2)));
     }
   });
 </script>
