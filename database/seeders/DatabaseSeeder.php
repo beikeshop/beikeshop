@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PluginsSeeder::class,
             ZonesSeeder::class,
             ProductsSeeder::class,
+            AttributesSeeder::class,
             SettingsSeeder::class,
         ]);
     }
