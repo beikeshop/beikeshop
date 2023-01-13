@@ -20,4 +20,5 @@ return [
     'btn_at'           => 'Go now',
     'btn_later'        => 'Later',
     'to_info_values'   => 'Please go to the details page to edit attribute values',
+    'error_cannot_delete_product_used' => 'Attribute used by products (ID: :product_ids), can not be deleted!'
 ];

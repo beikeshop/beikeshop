@@ -20,4 +20,5 @@ return [
     'btn_at'           => '立即前往',
     'btn_later'        => '稍后再去',
     'to_info_values'   => '请前往详情页编辑属性值',
+    'error_cannot_delete_product_used' => '属性不能删除，由于该属性被商品（商品ID: :product_ids）使用'
 ];

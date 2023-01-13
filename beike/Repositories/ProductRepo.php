@@ -14,6 +14,11 @@ namespace Beike\Repositories;
 use Beike\Models\Attribute;
 use Beike\Models\AttributeValue;
 use Beike\Models\Product;
+use Beike\Models\ProductAttribute;
+use Beike\Models\ProductCategory;
+use Beike\Models\ProductDescription;
+use Beike\Models\ProductRelation;
+use Beike\Models\ProductSku;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -370,6 +375,16 @@ class ProductRepo
 
     public static function forceDeleteTrashed()
     {
-        Product::onlyTrashed()->forceDelete();
+        $products = Product::onlyTrashed();
+
+        $productsIds = $products->pluck('id')->toArray();
+
+        ProductRelation::query()->whereIn('product_id', $productsIds)->orWhere('relation_id', $productsIds)->delete();
+        ProductAttribute::query()->whereIn('product_id', $productsIds)->delete();
+        ProductCategory::query()->whereIn('product_id', $productsIds)->delete();
+        ProductSku::query()->whereIn('product_id', $productsIds)->delete();
+        ProductDescription::query()->whereIn('product_id', $productsIds)->delete();
+
+        $products->forceDelete();
     }
 }

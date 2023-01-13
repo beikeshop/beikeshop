@@ -13,6 +13,7 @@ namespace Beike\Admin\Repositories;
 
 use Beike\Models\Attribute;
 use Beike\Models\AttributeValue;
+use Beike\Models\ProductAttribute;
 
 class AttributeRepo
 {
@@ -107,6 +108,10 @@ class AttributeRepo
 
     public static function delete($id)
     {
+        $productIds = ProductAttribute::query()->where('attribute_id', $id)->pluck('product_id')->toArray();
+        if ($productIds) {
+            throw New \Exception(trans('admin/attribute.error_cannot_delete_product_used', ['product_ids' => implode(', ', $productIds)]));
+        }
         $attribute = Attribute::query()->findOrFail($id);
         $attribute->descriptions()->delete();
         $attribute->values()->delete();
