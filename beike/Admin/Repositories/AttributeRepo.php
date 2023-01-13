@@ -108,6 +108,7 @@ class AttributeRepo
     public static function delete($id)
     {
         $attribute = Attribute::query()->findOrFail($id);
+        $attribute->descriptions()->delete();
         $attribute->values()->delete();
         $attribute->delete();
     }

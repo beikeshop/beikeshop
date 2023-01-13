@@ -69,6 +69,10 @@ class AttributeGroupRepo
     public static function delete($id)
     {
         $group = AttributeGroup::query()->findOrFail($id);
+        if ($group->attributes->count()) {
+            throw New \Exception(trans('admin/attribute_groups.error_cannot_delete_attribute_used', ['attributes' => implode(', ', $group->attributes->pluck('id')->toArray())]));
+        }
+        $group->descriptions()->delete();
         $group->delete();
     }
 }
