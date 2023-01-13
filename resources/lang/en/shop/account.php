@@ -66,7 +66,7 @@ return [
             'order_details'     => 'Order Details',
             'to_pay'            => 'Pay',
             'cancel'            => 'Cancel',
-            'confirm_receipt'   => 'Confirm the receipt of goods',
+            'confirm_receipt'   => 'Confirm the receipt of products',
             'order_number'      => 'Order Number',
             'order_date'        => 'Order Date',
             'state'             => 'State',
