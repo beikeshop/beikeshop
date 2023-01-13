@@ -10,7 +10,7 @@
  */
 
 return [
-    'index'            => '属性组',
-    'create_at_groups' => '创建属性组',
-    'error_cannot_delete_attribute_used' => '属性组不能删除，由于该属性组被属性（属性ID: :attributes）使用'
+    'index'                              => '属性组',
+    'create_at_groups'                   => '创建属性组',
+    'error_cannot_delete_attribute_used' => '属性组不能删除，由于该属性组被属性（属性ID: :attributes）使用',
 ];

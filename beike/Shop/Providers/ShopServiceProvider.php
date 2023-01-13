@@ -95,17 +95,25 @@ class ShopServiceProvider extends ServiceProvider
      */
     protected function loadMailConfig()
     {
-        $mailEngine = system_setting('base.mail_engine', 'smtp');
+        $mailEngine = system_setting('base.mail_engine');
         $storeMail  = system_setting('base.email', '');
+
+        if (empty($mailEngine)) {
+            return;
+        }
 
         Config::set('mail.default', $mailEngine);
         Config::set('mail.from.address', $storeMail);
         Config::set('mail.from.name', \config('app.name'));
 
-        $smtpSetting = system_setting('base.smtp');
-        if ($smtpSetting) {
-            $smtpSetting['transport'] = 'smtp';
-            Config::set('mail.mailers.smtp', $smtpSetting);
+        if ($setting = system_setting('base.smtp')) {
+            $setting['transport'] = 'smtp';
+            Config::set('mail.mailers.smtp', $setting);
+        } elseif ($setting = system_setting('base.mailgun')) {
+            Config::set('services.mailgun', $setting);
+        } elseif ($setting = system_setting('base.sendmail')) {
+            $setting['transport'] = 'sendmail';
+            Config::set('mail.mailers.sendmail', $setting);
         }
     }
 

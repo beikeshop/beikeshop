@@ -14,13 +14,12 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Shop\Http\Requests\ForgottenRequest;
 use Beike\Shop\Http\Requests\VerifyCodeRequest;
 use Beike\Shop\Services\AccountService;
-use Illuminate\Http\Request;
 
 class ForgottenController
 {
     /**
      * 找回密码页面
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return mixed
      */
     public function index()
     {
@@ -29,10 +28,10 @@ class ForgottenController
 
     /**
      * 接收email地址，生成验证码发送到邮件地址
-     * @param Request $request
+     * @param VerifyCodeRequest $request
      * @return array
      */
-    public function sendVerifyCode(VerifyCodeRequest $request)
+    public function sendVerifyCode(VerifyCodeRequest $request): array
     {
         AccountService::sendVerifyCodeForForgotten($request->get('email'), 'email');
 
@@ -41,10 +40,11 @@ class ForgottenController
 
     /**
      * 接收验证码和新密码、确认密码，验证验证码是否正确、密码和确认密码是否相等，然后修改密码
-     * @param Request $request
+     * @param ForgottenRequest $request
      * @return array
+     * @throws \Exception
      */
-    public function changePassword(ForgottenRequest $request)
+    public function changePassword(ForgottenRequest $request): array
     {
         AccountService::verifyAndChangePassword($request->get('code'), $request->get('email'), $request->get('password'));
 

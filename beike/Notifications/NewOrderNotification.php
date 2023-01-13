@@ -41,7 +41,13 @@ class NewOrderNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        $drivers[]  = 'database';
+        $mailEngine = system_setting('base.mail_engine');
+        if ($mailEngine) {
+            $drivers[] = 'mail';
+        }
+
+        return $drivers;
     }
 
     /**
