@@ -199,3 +199,16 @@ body.page-categories {
     }
   }
 }
+
+.filter-box {
+  .attribute-item {
+    .form-check-label {
+      cursor: pointer;
+      &:hover {
+        .form-check-input {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+}

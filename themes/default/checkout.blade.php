@@ -19,7 +19,7 @@
 
     <div class="row mt-5">
       <div class="col-12 col-md-8 left-column">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm fixed-top-left">
           <div class="card-body p-lg-4">
             @include('checkout._address')
 

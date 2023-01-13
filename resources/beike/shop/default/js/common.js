@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2022-11-07 09:29:34
+ * @LastEditTime  2023-01-13 11:29:27
  */
 
 export default {
@@ -92,26 +92,18 @@ export default {
     $(document).ready(() => {
       if (!$('.fixed-top-line').length) return;
       if ($(window).width() < 768) return;
-      const totalWrapTop = $('.fixed-top-line').offset().top;
-      const totalWrapWidth = $('.fixed-top-line').outerWidth();
-      const totalWrapHeight = $('.fixed-top-line').outerHeight();
-      const totalWrapLeft = $('.fixed-top-line').offset().left;
-      const footerTop = $('footer').offset().top;
-      const footerMarginTop = Math.abs(parseInt($('footer').css("marginTop")));
+      const [fTop, tLeft] = [$('.fixed-top-line'), $('.fixed-top-left')]
+      const fTopTop = fTop.offset().top;
+      const fTopWidth = fTop.outerWidth();
+      const fTopHeight = fTop.outerHeight();
 
       $(window).scroll(function () {
-        if ($(this).scrollTop() > totalWrapTop) {
-          $('.fixed-top-line').css({position: 'fixed', top: 0, bottom: 'auto', 'width': totalWrapWidth})
-          if (!$('.total-old').length) {
-            $('.fixed-top-line').before('<div class="total-old" style="height:' + totalWrapHeight + 'px; width:100%;"></div>');
-          }
+        const topLeftHeight = tLeft.outerHeight();
 
-          if ($(this).scrollTop() + totalWrapHeight > footerTop - footerMarginTop) {
-            $('.fixed-top-line').css({position: 'absolute', top: 'auto', bottom: '0', 'width': totalWrapWidth})
-          }
+        if ($(this).scrollTop() > fTopTop && topLeftHeight > fTopHeight) {
+          fTop.css({position: 'fixed', top: 0, bottom: 'auto', 'width': fTopWidth})
         } else {
-          $('.total-old').remove();
-          $('.fixed-top-line').removeAttr('style')
+          fTop.removeAttr('style')
         }
       })
     })
