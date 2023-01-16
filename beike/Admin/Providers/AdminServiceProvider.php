@@ -19,6 +19,7 @@ use Beike\Admin\View\Components\Form\InputLocale;
 use Beike\Admin\View\Components\Form\Select;
 use Beike\Admin\View\Components\Form\SwitchRadio;
 use Beike\Admin\View\Components\Form\Textarea;
+use Beike\Admin\View\Components\Form\Richtext;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Sidebar;
@@ -139,6 +140,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-select'       => Select::class,
             'form-image'        => Image::class,
             'form-textarea'     => Textarea::class,
+            'form-richtext'     => Richtext::class,
             'no-data'           => NoData::class,
         ]);
     }

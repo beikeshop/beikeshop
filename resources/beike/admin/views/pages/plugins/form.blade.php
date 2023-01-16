@@ -52,13 +52,25 @@
               :name="$column['name']"
               :title="$column['label']"
               :required="$column['required'] ? true : false"
-              :html="isset($column['html']) ? true : false"
               :value="old($column['name'], $column['value'] ?? '')">
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
               @endif
             </x-admin-form-textarea>
           @endif
+
+          @if ($column['type'] == 'richtext')
+          <x-admin-form-richtext
+            :name="$column['name']"
+            :title="$column['label']"
+            :required="$column['required'] ? true : false"
+            :value="old($column['name'], $column['value'] ?? '')">
+            @if (isset($column['description']))
+              <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
+            @endif
+          </x-admin-form-richtext>
+        @endif
+
         @endforeach
 
         <x-admin::form.row title="">

@@ -4,7 +4,7 @@ namespace Beike\Admin\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Textarea extends Component
+class Richtext extends Component
 {
     public string $name;
 
@@ -24,6 +24,6 @@ class Textarea extends Component
 
     public function render()
     {
-        return view('admin::components.form.textarea');
+        return view('admin::components.form.richtext');
     }
 }
