@@ -39,35 +39,35 @@ class Sidebar extends Component
         $routeNameWithPrefix = request()->route()->getName();
         $routeName           = str_replace($adminName . '.', '', $routeNameWithPrefix);
 
-        if (Str::startsWith($routeName, ['home.'])) {
+        if (Str::startsWith($routeName, $this->getHomeSubPrefix())) {
             $routes = $this->getHomeSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['products.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'])) {
+        } elseif (Str::startsWith($routeName, $this->getProductSubPrefix())) {
             $routes = $this->getProductSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['customers.', 'customer_groups.'])) {
+        } elseif (Str::startsWith($routeName, $this->getCustomerSubPrefix())) {
             $routes = $this->getCustomerSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['orders.', 'rmas.', 'rma_reasons.'])) {
+        } elseif (Str::startsWith($routeName, $this->getOrderSubPrefix())) {
             $routes = $this->getOrderSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['pages.'])) {
-            $routes = $this->getPagesSubRoutes();
+        } elseif (Str::startsWith($routeName, $this->getPageSubPrefix())) {
+            $routes = $this->getPageSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
-        } elseif (Str::startsWith($routeName, ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'])) {
+        } elseif (Str::startsWith($routeName, $this->getSettingSubPrefix())) {
             $routes = $this->getSettingSubRoutes();
             foreach ($routes as $route) {
-                $this->addLink($route['route'], $route['icon'] ?? '', $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
+                $this->addLink($route, $this->equalRoute($route['route']), (bool) ($route['blank'] ?? false), $route['hide_mobile'] ?? 0);
             }
         }
 
@@ -77,19 +77,25 @@ class Sidebar extends Component
     /**
      * 添加左侧菜单链接
      *
-     * @param $route
-     * @param $icon
+     * @param $routeData
      * @param $active
      * @param false $newWindow
+     * @param int   $hide_mobile
      */
-    public function addLink($route, $icon, $active, bool $newWindow = false, $hide_mobile = 0)
+    private function addLink($routeData, $active, bool $newWindow = false, int $hide_mobile = 0)
     {
+        $route = $routeData['route'];
+        $icon  = $routeData['icon']  ?? '';
+        $title = $routeData['title'] ?? '';
+
         $permissionRoute = str_replace('.', '_', $route);
         if ($this->adminUser->cannot($permissionRoute)) {
             return;
         }
 
-        $title         = trans("admin/common.{$permissionRoute}");
+        if (empty($title)) {
+            $title = trans("admin/common.{$permissionRoute}");
+        }
         $url           = admin_route($route);
         $this->links[] = [
             'title'       => $title,
@@ -99,6 +105,66 @@ class Sidebar extends Component
             'hide_mobile' => $hide_mobile,
             'new_window'  => $newWindow,
         ];
+    }
+
+    /**
+     * 获取后台首页子页面路由前缀列表
+     */
+    private function getHomeSubPrefix()
+    {
+        $prefix = ['home.'];
+
+        return hook_filter('sidebar.home.prefix', $prefix);
+    }
+
+    /**
+     * 获取后台产品子页面路由前缀列表
+     */
+    private function getProductSubPrefix()
+    {
+        $prefix = ['products.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'];
+
+        return hook_filter('sidebar.product.prefix', $prefix);
+    }
+
+    /**
+     * 获取后台客户子页面路由前缀列表
+     */
+    private function getCustomerSubPrefix()
+    {
+        $prefix = ['customers.', 'customer_groups.'];
+
+        return hook_filter('sidebar.customer.prefix', $prefix);
+    }
+
+    /**
+     * 获取后台订单子页面路由前缀列表
+     */
+    private function getOrderSubPrefix()
+    {
+        $prefix = ['orders.', 'rmas.', 'rma_reasons.'];
+
+        return hook_filter('sidebar.order.prefix', $prefix);
+    }
+
+    /**
+     * 获取后台内容子页面路由前缀列表
+     */
+    private function getPageSubPrefix()
+    {
+        $prefix = ['pages.'];
+
+        return hook_filter('sidebar.page.prefix', $prefix);
+    }
+
+    /**
+     * 获取后台系统设置子页面路由前缀列表
+     */
+    private function getSettingSubPrefix()
+    {
+        $prefix = ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'];
+
+        return hook_filter('sidebar.setting.prefix', $prefix);
     }
 
     /**
@@ -167,7 +233,7 @@ class Sidebar extends Component
      * 获取内容管理子页面路由
      * @return mixed
      */
-    public function getPagesSubRoutes()
+    public function getPageSubRoutes()
     {
         $routes = [
             ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
