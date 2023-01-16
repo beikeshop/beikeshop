@@ -268,7 +268,7 @@ class ProductRepo
     {
         $products = Product::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
-                $query->where('name', 'like', "{$name}%");
+                $query->where('name', 'like', "%{$name}%");
             })->limit(10)->get();
         $results = [];
         foreach ($products as $product) {
