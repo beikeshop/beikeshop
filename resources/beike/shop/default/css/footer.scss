@@ -83,7 +83,7 @@ footer {
     color: #666;
 
     @media (min-width:768px) {
-      height: 60px;
+      min-height: 60px;
     }
 
     @media (max-width:768px) {
