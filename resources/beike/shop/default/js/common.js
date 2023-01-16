@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2023-01-13 11:29:27
+ * @LastEditTime  2023-01-16 10:42:11
  */
 
 export default {
@@ -84,31 +84,6 @@ export default {
     }
   },
 
-  /**
-   * @description: 滑动固定顶部
-   * @return {*}
-   */
-  slidingFixed() {
-    $(document).ready(() => {
-      if (!$('.fixed-top-line').length) return;
-      if ($(window).width() < 768) return;
-      const [fTop, tLeft] = [$('.fixed-top-line'), $('.fixed-top-left')]
-      const fTopTop = fTop.offset().top;
-      const fTopWidth = fTop.outerWidth();
-      const fTopHeight = fTop.outerHeight();
-
-      $(window).scroll(function () {
-        const topLeftHeight = tLeft.outerHeight();
-
-        if ($(this).scrollTop() > fTopTop && topLeftHeight > fTopHeight) {
-          fTop.css({position: 'fixed', top: 0, bottom: 'auto', 'width': fTopWidth})
-        } else {
-          fTop.removeAttr('style')
-        }
-      })
-    })
-  },
-
   openLogin() {
     layer.open({
       type: 2,
@@ -119,14 +94,6 @@ export default {
       skin: 'login-pop-box',
       content: 'login?iframe=true' //iframe的url
     });
-  },
-
-  openWin(url, name = '', iWidth = 700, iHeight = 500) {
-    var iTop = (window.screen.height - 30 - iHeight) / 2;;
-    var iLeft = (window.screen.width - 10 - iWidth) / 2;;
-    window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight
-　　　　+ ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft
-　　　　+ ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
   },
 
   getQueryString(name, defaultValue) {

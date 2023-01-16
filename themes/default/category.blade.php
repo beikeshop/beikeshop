@@ -4,6 +4,10 @@
 @section('keywords', $category->description->meta_keywords ?: system_setting('base.meta_keyword'))
 @section('description', $category->description->meta_description ?: system_setting('base.meta_description'))
 
+@push('header')
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
+@endpush
+
 @section('content')
   <div class="container">
 
@@ -11,7 +15,7 @@
 
     <div class="row">
       <div class="col-12 col-lg-3 pe-lg-4 left-column d-none d-lg-block">
-        @include('shared.filter_sidebar_block')
+        <div class="x-fixed-top">@include('shared.filter_sidebar_block')</div>
       </div>
 
       <div class="col-12 col-lg-9 right-column">

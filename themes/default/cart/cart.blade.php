@@ -5,6 +5,7 @@
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 @endpush
 
@@ -23,7 +24,7 @@
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9 left-column">
-        <div class="card shadow-sm fixed-top-left">
+        <div class="card shadow-sm">
           <div class="card-body p-lg-4">
             <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.commodity') }}</h4></div>
             <div class="cart-products-wrap table-responsive">
@@ -78,7 +79,7 @@
         </div>
       </div>
       <div class="col-12 col-md-3 right-column">
-        <div class="card shadow-sm fixed-top-line">
+        <div class="card shadow-sm x-fixed-top">
           <div class="card-body p-lg-4">
             <div class="card total-wrap">
               <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.product_total') }}</h4></div>

@@ -15,7 +15,11 @@
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
             <pb-image-selector v-model="item.image"></pb-image-selector>
-            <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 1060 x 380</div>
+            <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
+              <span v-if="index == 0">780 x 614</span>
+              <span v-if="index == 1 || index == 2">372 x 292</span>
+              <span v-if="index == 3">780 x 292</span>
+            </div>
           </div>
           <link-selector v-model="item.link"></link-selector>
         </div>

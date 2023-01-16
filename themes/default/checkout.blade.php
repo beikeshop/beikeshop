@@ -4,6 +4,7 @@
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
 @endpush
@@ -19,7 +20,7 @@
 
     <div class="row mt-5">
       <div class="col-12 col-md-8 left-column">
-        <div class="card shadow-sm fixed-top-left">
+        <div class="card shadow-sm">
           <div class="card-body p-lg-4">
             @include('checkout._address')
 
@@ -66,7 +67,7 @@
       </div>
 
       <div class="col-12 col-md-4 right-column">
-        <div class="fixed-top-line">
+        <div class="x-fixed-top">
           @if (!current_customer())
             <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
               <div class="card-header">
