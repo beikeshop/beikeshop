@@ -18,12 +18,12 @@ return new class extends Migration
         }
 
         Schema::table('carts', function (Blueprint $table) {
-            $table->string('session_id')->default('')->after('customer_id');
-            $table->json('guest_shipping_address')->nullable()->after('shipping_address_id');
-            $table->json('guest_payment_address')->nullable()->after('payment_address_id');
+            $table->string('session_id')->comment('当前用户会话 ID')->default('')->after('customer_id');
+            $table->json('guest_shipping_address')->comment('游客配送地址')->nullable()->after('shipping_address_id');
+            $table->json('guest_payment_address')->comment('游客发票地址')->nullable()->after('payment_address_id');
         });
         Schema::table('cart_products', function (Blueprint $table) {
-            $table->string('session_id')->default('')->after('customer_id');
+            $table->string('session_id')->comment('当前用户会话 ID')->default('')->after('customer_id');
         });
     }
 

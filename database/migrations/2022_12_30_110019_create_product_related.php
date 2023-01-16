@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_relations', function (Blueprint $table) {
+            $table->comment('相关商品表');
             $table->id();
             $table->unsignedInteger('product_id')->comment('商品 ID')->index('product_id');
             $table->unsignedInteger('relation_id')->comment('关联商品 ID')->index('relation_id');

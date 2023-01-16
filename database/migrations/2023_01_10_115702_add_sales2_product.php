@@ -18,7 +18,7 @@ return new class extends Migration
         }
 
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('sales')->default(0)->after('tax_class_id');
+            $table->integer('sales')->comment('销量')->default(0)->after('tax_class_id');
         });
     }
 
