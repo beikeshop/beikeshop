@@ -20,6 +20,7 @@ use Beike\Models\ProductDescription;
 use Beike\Models\ProductRelation;
 use Beike\Models\ProductSku;
 use Beike\Shop\Http\Resources\ProductSimple;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
@@ -46,14 +47,16 @@ class ProductRepo
      * 通过单个或多个商品分类获取商品列表
      *
      * @param $categoryId
-     * @return
+     * @param $filterData
+     * @return LengthAwarePaginator
      */
     public static function getProductsByCategory($categoryId, $filterData)
     {
         $builder  = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
-        $products = $builder->with('inCurrentWishlist')->paginate($filterData['per_page'] ?? perPage());
 
-        return $products;
+        return $builder->with('inCurrentWishlist')
+            ->paginate($filterData['per_page'] ?? perPage())
+            ->withQueryString();
     }
 
     /**

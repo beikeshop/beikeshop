@@ -25,7 +25,10 @@ class CategoryController extends Controller
         $data       = [
             'all_categories'  => CategoryRepo::getTwoLevelCategories(),
             'category'        => $category,
-            'filter_data'     => ['attr' => ProductRepo::getFilterAttribute($filterData), 'price' => ProductRepo::getFilterPrice($filterData)],
+            'filter_data'     => [
+                'attr'  => ProductRepo::getFilterAttribute($filterData),
+                'price' => ProductRepo::getFilterPrice($filterData),
+            ],
             'products_format' => ProductSimple::collection($products)->jsonSerialize(),
             'products'        => $products,
             'per_pages'       => CategoryRepo::getPerPages(),

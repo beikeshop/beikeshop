@@ -41,10 +41,10 @@ class RmaController extends Controller
      */
     public function show(int $id)
     {
-        $rma  = RmaRepo::find($id);
-        $statuses = RmaRepo::getStatuses();
+        $rma         = RmaRepo::find($id);
+        $statuses    = RmaRepo::getStatuses();
         $rma->status = $statuses[$rma->status];
-        $data = [
+        $data        = [
             'rma'          => $rma,
             'orderProduct' => OrderProductRepo::find($rma->order_product_id),
             'statuses'     => RmaRepo::getStatuses(),
