@@ -8,7 +8,7 @@
  * @LastEditTime  2022-09-16 20:56:17
  */
 
-body.page-list {
+body.page-brands {
   .brand-item {
     display: flex;
     align-items: center; // flex-start | center
@@ -23,27 +23,44 @@ body.page-list {
     }
   }
 
-  li {
-    list-style: none;
+  .brand-list {
+    li {
+      list-style: none;
 
-    a{
-      color: #242424;
-      text-decoration: none;
+      a {
+        color: #242424;
+        text-decoration: none;
+      }
     }
   }
 
-  .curser {
+  .curser-list {
     cursor: pointer;
 
-    >li>a {
+    @media (max-width: 768px) {
       display: block;
+
+      li {
+        display: inline-block;
+        margin-bottom: 6px;
+
+        & + .list-group-item {
+          border-left: 1px solid #e4e4e4;
+        }
+      }
+    }
+
+    >li>a {
       color: #242424;
-      transition: all .5s;
-      margin: 0 auto;
+      transition: all .3s;
+      text-decoration: none;
 
       &:hover {
-        text-decoration: none;
         background-color: #eee;
+      }
+
+      &:active {
+        background-color: #aaa;
       }
     }
   }

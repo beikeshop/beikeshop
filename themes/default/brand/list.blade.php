@@ -1,26 +1,23 @@
 @extends('layout.master')
-@section('body-class', 'page-list')
+@section('body-class', 'page-brands')
 
 @section('content')
 <div class="container">
 
-  <x-shop-breadcrumb type="static" value="brands.index" /> 
+  <x-shop-breadcrumb type="static" value="brands.index" />
+  <p class="fw-bold fs-3 d-flex justify-content-center mb-4">{{ __('shop/brands.index') }}</p>
 
-  <div>
-    <p class="fw-bold fs-3 d-flex justify-content-center mt-5 mb-4">{{ __('shop/brands.index') }}</p>
-  </div>
-
-  <ul class="d-flex justify-content-start mt-3 align-items-baseline mb-3 curser flex-wrap">
+  <ul class="list-group list-group-horizontal mb-5 curser-list">
     @foreach ($brands as $brand)
-      <li class="fs-6 border align-content-center text-center">
-        <a href="brands#{{ $brand['0']['first'] }}" class="py-2 px-3">{{ $brand['0']['first'] }}</a>
+      <li class="list-group-item p-0 flex-grow-1">
+        <a href="brands#{{ $brand['0']['first'] }}" class="py-2 px-3 text-center fw-bold d-block">{{ $brand['0']['first'] }}</a>
       </li>
     @endforeach
   </ul>
 
-  <ul>
+  <ul class="brand-list ps-0">
     @foreach ($brands as $brand)
-    <li class="d-flex border-top py-2">
+    <li class="d-flex border-top py-3">
       <p class="px-2 fs-5 mt-4 fw-bold py-5" id="{{ $brand['0']['first'] }}">{{ $brand['0']['first'] }}</p>
       <div class="container">
         <div class="row">
