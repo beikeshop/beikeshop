@@ -94,7 +94,6 @@ class CategoryRepo
             ->where('parent_id', 0)
             ->where('active', true)
             ->orderBy('position')
-            ->limit(6)
             ->get();
 
         $categoryList = CategoryDetail::collection($topCategories);
