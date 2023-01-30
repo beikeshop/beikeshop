@@ -59,7 +59,7 @@
             </x-admin-form-textarea>
           @endif
 
-          @if ($column['type'] == 'richtext')
+          @if ($column['type'] == 'rich-text')
           <x-admin-form-richtext
             :name="$column['name']"
             :title="$column['label']"

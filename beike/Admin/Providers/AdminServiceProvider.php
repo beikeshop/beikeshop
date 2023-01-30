@@ -140,7 +140,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-select'       => Select::class,
             'form-image'        => Image::class,
             'form-textarea'     => Textarea::class,
-            'form-richtext'     => Richtext::class,
+            'form-rich-text'    => RichText::class,
             'no-data'           => NoData::class,
         ]);
     }

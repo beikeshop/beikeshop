@@ -4,7 +4,7 @@ namespace Beike\Admin\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class Richtext extends Component
+class RichText extends Component
 {
     public string $name;
 
@@ -14,7 +14,7 @@ class Richtext extends Component
 
     public bool $required;
 
-    public function __construct(string $name, string $title, ?string $value, bool $required = false)
+    public function __construct(string $name, string $title, string $value = '', bool $required = false)
     {
         $this->name     = $name;
         $this->title    = $title;
@@ -24,6 +24,6 @@ class Richtext extends Component
 
     public function render()
     {
-        return view('admin::components.form.richtext');
+        return view('admin::components.form.rich-text');
     }
 }
