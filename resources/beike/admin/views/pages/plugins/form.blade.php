@@ -60,7 +60,7 @@
           @endif
 
           @if ($column['type'] == 'rich-text')
-          <x-admin-form-richtext
+          <x-admin-form-rich-text
             :name="$column['name']"
             :title="$column['label']"
             :required="$column['required'] ? true : false"
@@ -68,7 +68,7 @@
             @if (isset($column['description']))
               <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
             @endif
-          </x-admin-form-richtext>
+          </x-admin-form-rich-text>
         @endif
 
         @endforeach
