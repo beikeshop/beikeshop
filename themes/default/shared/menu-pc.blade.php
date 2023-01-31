@@ -1,4 +1,5 @@
 <ul class="navbar-nav mx-auto">
+  @hook('header.menu.before')
   @foreach ($menu_content as $menu)
     @if ($menu['name'])
       <li
@@ -56,4 +57,5 @@
       </li>
     @endif
   @endforeach
+  @hook('header.menu.after')
 </ul>

@@ -1,5 +1,6 @@
 <?php
 
+use Beike\Hook\Facades\Hook;
 use Beike\Models\AdminUser;
 use Beike\Models\Currency;
 use Beike\Models\Customer;
@@ -616,7 +617,7 @@ function create_directories($directoryPath)
 }
 
 /**
- * hook filter 埋点
+ * PHP 代码 hook filter 埋点
  *
  * @param $hookKey
  * @param $hookValue
@@ -628,7 +629,7 @@ function hook_filter($hookKey, $hookValue): mixed
 }
 
 /**
- * hook action 埋点
+ * PHP 代码 hook action 埋点
  *
  * @param $hookKey
  * @param $hookValue
@@ -639,30 +640,42 @@ function hook_action($hookKey, $hookValue)
 }
 
 /**
- * 添加 Filter
+ * 添加 Filter, 执行 PHP 逻辑
  *
- * @param $hook
+ * @param $hookKey
  * @param $callback
  * @param int $priority
  * @param int $arguments
  * @return mixed
  */
-function add_filter($hook, $callback, int $priority = 20, int $arguments = 1)
+function add_filter($hookKey, $callback, int $priority = 20, int $arguments = 1)
 {
-    return Eventy::addFilter($hook, $callback, $priority, $arguments);
+    return Eventy::addFilter($hookKey, $callback, $priority, $arguments);
 }
 
 /**
- * 添加 Action
+ * 添加 Action, 执行 PHP 逻辑
  *
- * @param $hook
+ * @param $hookKey
  * @param $callback
  * @param int $priority
  * @param int $arguments
  */
-function add_action($hook, $callback, int $priority = 20, int $arguments = 1)
+function add_action($hookKey, $callback, int $priority = 20, int $arguments = 1)
 {
-    Eventy::addAction($hook, $callback, $priority, $arguments);
+    Eventy::addAction($hookKey, $callback, $priority, $arguments);
+}
+
+/**
+ * 采用 Hook 修改 Blade 代码
+ *
+ * @param $hookKey
+ * @param $callback
+ * @param int $priority
+ */
+function blade_hook($hookKey, $callback, int $priority = 0)
+{
+    Hook::listen($hookKey, $callback, $priority);
 }
 
 /**

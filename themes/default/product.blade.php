@@ -60,6 +60,7 @@
             </div>
           </div>
           <div class="stock-and-sku mb-4">
+            @hook('product.detail.quantity', true)
             <div class="d-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
               <div :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
@@ -67,14 +68,24 @@
                 <template v-else>{{ __('shop/products.out_stock') }}</template>
               </div>
             </div>
+            @endhook
+
             @if ($product['brand_id'])
+            @hook('product.detail.brand', true)
             <div class="d-flex">
               <span class="title text-muted">{{ __('product.brand') }}:</span>
               <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
             </div>
+            @endhook
             @endif
+
+            @hook('product.detail.sku', true)
             <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
+            @endhook
+
+            @hook('product.detail.model', true)
             <div class="d-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
+            @endhook
           </div>
           @if (0)
           <div class="rating-wrap d-flex">
@@ -106,6 +117,7 @@
 
           @if ($product['active'])
             <div class="quantity-btns">
+              @hook('product.detail.buy.before')
               <div class="quantity-wrap">
                 <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
                 <div class="right">
@@ -125,6 +137,7 @@
                 @click="addCart(true, this)"
                 ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
               </button>
+              @hook('product.detail.buy.after')
             </div>
             <div class="add-wishlist">
               <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">

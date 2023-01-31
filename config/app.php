@@ -180,6 +180,7 @@ return [
         Beike\Shop\Providers\ShopServiceProvider::class,
         Beike\Shop\Providers\PluginServiceProvider::class,
         Beike\Installer\Providers\InstallerServiceProvider::class,
+        Beike\Hook\HookServiceProvider::class,
 
     ],
 
@@ -235,6 +236,7 @@ return [
         'URL'          => Illuminate\Support\Facades\URL::class,
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
+        'Hook'         => Beike\Hook\Facades\Hook::class,
 
     ],
 

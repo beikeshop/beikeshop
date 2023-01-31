@@ -2,6 +2,7 @@
   <div class="top-wrap">
     <div class="container d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
+        @hook('header.top.currency', true)
         <div class="dropdown">
           <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
             aria-expanded="false">
@@ -33,6 +34,9 @@
             @endforeach
           </div>
         </div>
+        @endhook
+
+        @hook('header.top.language', true)
         <div class="dropdown">
           <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
             aria-expanded="false">
@@ -47,11 +51,14 @@
             @endforeach
           </div>
         </div>
+        @endhook
       </div>
 
       @if (system_setting('base.telephone', ''))
       <div class="right nav">
+        @hook('header.top.telephone', true)
         <span class="px-2"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</span>
+        @endhook
       </div>
       @endif
     </div>
@@ -59,9 +66,11 @@
 
   <div class="header-content d-none d-lg-block py-3">
     <div class="container navbar-expand-lg">
+      @hook('header.menu.logo', true)
       <div class="logo"><a href="{{ shop_route('home.index') }}">
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
+      @endhook
       <div class="menu-wrap">
         @if (!is_mobile())
           @include('shared.menu-pc')
@@ -69,6 +78,7 @@
       </div>
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
+          @hook('header.menu.icon', true)
           <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas"
               aria-controls="offcanvasExample" class="nav-link"><i class="iconfont">&#xe8d6;</i></a></li>
           <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><i
@@ -100,6 +110,7 @@
               @endauth
             </ul>
           </li>
+          @endhook
           <li class="nav-item">
             <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
               href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"

@@ -48,7 +48,8 @@
     },
     "exclude": [
         "database",
-        "plugins"
+        "plugins",
+        "beike/Hook"
     ],
     "notName": [
         "server.php"
