@@ -52,7 +52,9 @@
 
       <div class="col-12 col-lg-6">
         <div class="peoduct-info">
+          @hook('product.detail.name', true)
           <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
+          @endhook
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price && product.origin_price !== 0">

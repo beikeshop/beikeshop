@@ -22,7 +22,22 @@ class Bootstrap
 
         // $this->modifyHeader();
         // $this->modifyProductDetail();
+
+        // $this->modifyAdminProductEdit();
     }
+
+
+    /**
+     * 后台产品编辑页添加自定义字段
+     */
+    private function modifyAdminProductEdit()
+    {
+        blade_hook('admin.product.edit.extra', function ($callback, $output, $data) {
+            $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
+            return $output . $view;
+        }, 1);
+    }
+
 
     /**
      * 在前台网页头部添加二级菜单链接
@@ -35,7 +50,7 @@ class Bootstrap
                 "link" => plugin_route('latest_products'),
             ];
             return $data;
-        });
+        }, 0);
     }
 
 
@@ -61,7 +76,7 @@ class Bootstrap
         });
 
         blade_hook('header.menu.icon', function ($callback, $output, $data) {
-            $view = view('LatestProducts::header_icon')->render();
+            $view = view('LatestProducts::shop.header_icon')->render();
             return $output . $view;
         });
     }
@@ -69,17 +84,23 @@ class Bootstrap
 
     /**
      * 修改产品详情页
+     * 1. 在产品名称上面添加 Hot 标签
      * 1. 品牌下面添加信息
      * 2. 立即购买后添加按钮
      */
     private function modifyProductDetail()
     {
+        blade_hook('product.detail.name', function ($callback, $output, $data) {
+            $badge = '<span class="badge" style="background-color: #FF4D00; color: #ffffff; border-color: #FF4D00">Hot</span>';
+            return $badge . $output;
+        });
+
         blade_hook('product.detail.brand', function ($callback, $output, $data) {
             return $output . '<div class="d-flex"><span class="title text-muted">Brand 2:</span>品牌 2</div>';
         });
 
         blade_hook('product.detail.buy.after', function ($callback, $output, $data) {
-            $view = view('LatestProducts::product_button')->render();
+            $view = view('LatestProducts::shop.product_button')->render();
             return $output . $view;
         });
     }

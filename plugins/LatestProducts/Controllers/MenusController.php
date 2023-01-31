@@ -37,6 +37,6 @@ class MenusController extends Controller
             'products' => $products,
             'items' => ProductSimple::collection($products)->jsonSerialize(),
         ];
-        return view("LatestProducts::latest_products", $data);
+        return view('LatestProducts::shop.latest_products', $data);
     }
 }
