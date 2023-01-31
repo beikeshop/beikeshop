@@ -28,18 +28,6 @@ class Bootstrap
 
 
     /**
-     * 后台产品编辑页添加自定义字段
-     */
-    private function modifyAdminProductEdit()
-    {
-        blade_hook('admin.product.edit.extra', function ($callback, $output, $data) {
-            $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
-            return $output . $view;
-        }, 1);
-    }
-
-
-    /**
      * 在前台网页头部添加二级菜单链接
      */
     private function addLatestProducts()
@@ -55,7 +43,7 @@ class Bootstrap
 
 
     /**
-     * 修改前台全局 header 模板
+     * 修改前台全局 header 模板演示
      */
     private function modifyHeader()
     {
@@ -83,10 +71,10 @@ class Bootstrap
 
 
     /**
-     * 修改产品详情页
+     * 修改产品详情页演示
      * 1. 在产品名称上面添加 Hot 标签
-     * 1. 品牌下面添加信息
-     * 2. 立即购买后添加按钮
+     * 2. 品牌下面添加信息
+     * 3. 立即购买后添加按钮
      */
     private function modifyProductDetail()
     {
@@ -104,4 +92,17 @@ class Bootstrap
             return $output . $view;
         });
     }
+
+
+    /**
+     * 后台产品编辑页添加自定义字段演示
+     */
+    private function modifyAdminProductEdit()
+    {
+        blade_hook('admin.product.edit.extra', function ($callback, $output, $data) {
+            $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
+            return $output . $view;
+        }, 1);
+    }
+
 }
