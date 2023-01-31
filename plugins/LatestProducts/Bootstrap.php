@@ -13,12 +13,15 @@ namespace Plugin\LatestProducts;
 
 class Bootstrap
 {
+    /**
+     * 去除注释后可以观察网站头部以及产品详情页页面变化
+     */
     public function boot()
     {
         $this->addLatestProducts();
 
-        $this->modifyHeader();
-        $this->modifyProductDetail();
+        // $this->modifyHeader();
+        // $this->modifyProductDetail();
     }
 
     /**
@@ -38,7 +41,6 @@ class Bootstrap
 
     /**
      * 修改前台全局 header 模板
-     * 打开后可以查看页面头部变化
      */
     private function modifyHeader()
     {
