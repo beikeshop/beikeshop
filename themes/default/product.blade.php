@@ -55,7 +55,9 @@
           <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
-            <div class="old-price text-muted text-decoration-line-through">@{{ product.origin_price_format }}</div>
+            <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price">
+              @{{ product.origin_price_format }}
+            </div>
           </div>
           <div class="stock-and-sku mb-4">
             <div class="d-flex">

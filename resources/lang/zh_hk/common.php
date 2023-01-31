@@ -75,6 +75,7 @@ return [
     'text_list'            => '列表',
     'text_form'            => '從',
     'text_to'              => '到',
+    'batch_setting'        => '批量設置',
 
     'id'                   => 'ID',
     'created_at'           => '創建時間',

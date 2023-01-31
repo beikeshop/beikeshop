@@ -62,7 +62,7 @@
                 :list="form.images"
                 :options="{animation: 200, handle: '.product-item'}"
                 >
-                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2 mb-2">
+                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2 mb-2 border d-flex justify-content-center align-items-center max-h-100 overflow-hidden">
                   <div class="position-absolute top-0 end-0">
                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                   </div>
@@ -168,7 +168,29 @@
                       <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
                     </div>
 
-                    <div v-if="form.skus.length && form.variables.length" class="mt-3 table-push">
+                    <div v-if="form.skus.length && form.variables.length" class="mt-3 table-push table-responsive">
+                      <div class="batch-setting d-flex align-items-center mb-3 p-2 bg-body">
+                        <div v-for="(variant, index) in form.variables" :key="index" class="me-2">
+                          <select class="form-select me-2 bg-white" aria-label="Default select example" v-model="variablesBatch.variables[index]">
+                            <option selected value="">@{{ variant.name[current_language_code] || 'No name' }}</option>
+                            <option :value="value_index" v-for="value, value_index in variant.values" :key="index+'-'+value_index" >
+                              @{{ value.name[current_language_code]}}
+                            </option>
+                          </select>
+                        </div>
+                        <div role="button" class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40 me-2 bg-white" @click="batchSettingVariantImage">
+                          <img :src="thumbnail(variablesBatch.image)" class="img-fluid" v-if="variablesBatch.image">
+                          <i class="bi bi-plus fs-3 text-muted" v-else></i>
+                        </div>
+                        <input type="text" class="form-control me-2 bg-white" v-model="variablesBatch.model" placeholder="{{ __('admin/product.model') }}">
+                        <input type="text" class="form-control me-2 bg-white" v-model="variablesBatch.sku" placeholder="sku">
+                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.price" placeholder="{{ __('admin/product.price') }}">
+                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.origin_price" placeholder="{{ __('admin/product.origin_price') }}">
+                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.cost_price" placeholder="{{ __('admin/product.cost_price') }}">
+                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.quantity" placeholder="{{ __('admin/product.quantity') }}">
+                        <button type="button" class="btn btn-primary text-nowrap" @click="batchSettingVariant">{{ __('common.batch_setting') }}</button>
+                      </div>
+
                       <table class="table table-bordered table-hover">
                         <thead>
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
@@ -200,7 +222,7 @@
                                   <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'"
                                 placeholder="image">
                                 </div>
-                                <div class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40" @click="addProductImages(skuIndex)"><i class="bi bi-plus fs-3 text-muted"></i></div>
+                                <div class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40" role="button" @click="addProductImages(skuIndex)"><i class="bi bi-plus fs-3 text-muted"></i></div>
                               </div>
                               <input type="hidden" class="form-control" :name="'skus[' + skuIndex + '][is_default]'" :value="skuIndex == 0 ? 1 : 0">
                               <input v-for="(variantValueIndex, j) in sku.variants" type="hidden"
@@ -383,7 +405,7 @@
         </div>
 
         <x-admin::form.row title="">
-          <button type="submit" class="btn btn-primary mt-3 btn-lg">{{ __('common.save') }}</button>
+          <button type="button" @click="productsSubmit" class="btn btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
         </x-admin::form.row>
 
         <el-dialog
@@ -457,6 +479,18 @@
           skus: @json($product->skus ?? []),
         },
 
+        variablesBatch: {
+          variables: [],
+          model: '',
+          sku: '',
+          price: '',
+          origin_price: '',
+          cost_price: '',
+          quantity: '',
+          image: '',
+          status: false,
+        },
+
         relations: {
           keyword: '',
           products: @json($relations ?? []),
@@ -491,6 +525,7 @@
 
         rules: {}
       },
+
       computed: {
         // variant value 重复次数
         variantValueRepetitions() {
@@ -509,6 +544,13 @@
           return (this.form.skus.length && this.form.skus[0].variants.length) || ''
         }
       },
+
+      beforeMount() {
+        if (this.form.variables.length) {
+          this.variablesBatch.variables = this.form.variables.map((v, i) => '');
+        }
+      },
+
       watch: {
         'source.variables': {
           deep: true,
@@ -525,13 +567,27 @@
             }
 
             this.form.variables = variants;
+            // 在 variablesBatch.variables 生成对应的 variants 的index
+            this.variablesBatch.variables = variants.map((v, i) => '');
 
             if (this.isMove) return;
             this.remakeSkus();
           }
         }
       },
+
       methods: {
+        // 表单提交，检测是否开启多规格 做处理
+        productsSubmit() {
+          if (!this.editing.isVariable) {
+            this.source.variables = [];
+          }
+
+          setTimeout(() => {
+            $('form#app').submit();
+          }, 0);
+        },
+
         relationsQuerySearch(keyword, cb) {
           $http.get('products/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
             cb(res.data);
@@ -550,9 +606,9 @@
         },
 
         isVariableChange(e) {
-          if (!e) {
-            this.source.variables = [];
-          }
+          // if (!e) {
+          //   this.source.variables = [];
+          // }
         },
 
         variantIsImage(e, index) {
@@ -561,6 +617,12 @@
               v.image = '';
             })
           }
+        },
+
+        batchSettingVariantImage() {
+          bk.fileManagerIframe(images => {
+            this.variablesBatch.image = images[0].path;
+          })
         },
 
         addProductImages(skuIndex) {
@@ -583,6 +645,61 @@
 
         removeSkuImages(variantIndex, index) {
           this.form.skus[variantIndex].images.splice(index, 1)
+        },
+
+        batchSettingVariant() {
+          // 要修改的 skuIndex 下标
+          let setSkuIndex = [];
+
+          this.form.skus.forEach((sku, skuIndex) => {
+            this.variablesBatch.variables.forEach((variantIndex, index) => {
+              if (variantIndex !== '') {
+                // 根据 variantIndex, index，修改 sku.variants[index] 的值
+                if (sku.variants[index] == variantIndex) {
+                  setSkuIndex.push(skuIndex);
+                }
+
+                return;
+              }
+
+              // 如果 variantIndex 全部为空，就把所有的 skuIndex 都加入到 setSkuIndex 中
+              if (this.variablesBatch.variables.every(v => v === '')) {
+                setSkuIndex.push(skuIndex);
+              }
+            })
+
+            // 修改 skuIndex 下标对应的 sku
+            setSkuIndex.forEach((index) => {
+              if (this.variablesBatch.model) {
+                this.form.skus[index].model = this.variablesBatch.model + '-' + (index + 1);
+              }
+              if (this.variablesBatch.sku) {
+                this.form.skus[index].sku = this.variablesBatch.sku + '-' + (index + 1);
+              }
+              if (this.variablesBatch.image) {
+                this.form.skus[index].images = [this.variablesBatch.image];
+              }
+              if (this.variablesBatch.price) {
+                this.form.skus[index].price = this.variablesBatch.price;
+              }
+              if (this.variablesBatch.origin_price) {
+                this.form.skus[index].origin_price = this.variablesBatch.origin_price;
+              }
+              if (this.variablesBatch.cost_price) {
+                this.form.skus[index].cost_price = this.variablesBatch.cost_price;
+              }
+              if (this.variablesBatch.quantity) {
+                this.form.skus[index].quantity = this.variablesBatch.quantity;
+              }
+            })
+          })
+
+          // this.variablesBatch 对象内除了 variables 之外的值都清空
+          for (let key in this.variablesBatch) {
+            if (key !== 'variables') {
+              this.variablesBatch[key] = '';
+            }
+          }
         },
 
         dialogVariablesFormSubmit(form) {

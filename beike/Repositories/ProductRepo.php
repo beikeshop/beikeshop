@@ -244,8 +244,8 @@ class ProductRepo
     public static function getFilterPrice($data)
     {
         $selectPrice = $data['price'] ?? '-';
-        unset($data['price']);
-        $builder = self::getBuilder($data)->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
+        // unset($data['price']);
+        $builder = self::getBuilder(['category_id' => $data['category_id']])->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
             ->where('ps.is_default', 1);
         $min = $builder->min('ps.price');
         $max = $builder->max('ps.price');

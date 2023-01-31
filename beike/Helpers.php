@@ -151,7 +151,11 @@ function type_route($type, $value): string
     } elseif ($type == 'static') {
         return shop_route($value);
     } elseif ($type == 'custom') {
-        return $value;
+        if (Str::startsWith($value, ['http://', 'https://'])) {
+            return $value;
+        } else {
+            return "//{$value}";
+        }
     }
 
     return '';
