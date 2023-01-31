@@ -17,8 +17,8 @@ class Bootstrap
     {
         $this->addLatestProducts();
 
-        // $this->modifyHeader();
-        // $this->modifyProductDetail();
+        $this->modifyHeader();
+        $this->modifyProductDetail();
     }
 
     /**
@@ -38,11 +38,12 @@ class Bootstrap
 
     /**
      * 修改前台全局 header 模板
+     * 打开后可以查看页面头部变化
      */
     private function modifyHeader()
     {
         blade_hook('header.top.currency', function ($callback, $output, $data) {
-            return $output . '货币后';
+            return '货币前' . $output;
         });
 
         blade_hook('header.top.language', function ($callback, $output, $data) {
@@ -54,7 +55,7 @@ class Bootstrap
         });
 
         blade_hook('header.menu.logo', function ($callback, $output, $data) {
-            return $output . 'logo后';
+            return $output . 'Logo后';
         });
 
         blade_hook('header.menu.icon', function ($callback, $output, $data) {
@@ -63,6 +64,12 @@ class Bootstrap
         });
     }
 
+
+    /**
+     * 修改产品详情页
+     * 1. 品牌下面添加信息
+     * 2. 立即购买后添加按钮
+     */
     private function modifyProductDetail()
     {
         blade_hook('product.detail.brand', function ($callback, $output, $data) {
