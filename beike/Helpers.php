@@ -154,9 +154,9 @@ function type_route($type, $value): string
     } elseif ($type == 'custom') {
         if (Str::startsWith($value, ['http://', 'https://'])) {
             return $value;
-        } else {
-            return "//{$value}";
         }
+
+        return "//{$value}";
     }
 
     return '';

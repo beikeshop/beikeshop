@@ -21,6 +21,10 @@ class BrandController extends Controller
     public function show(int $id)
     {
         $brand    = BrandRepo::find($id);
+        if (empty($brand)) {
+            return redirect(shop_route('brands.index'));
+        }
+
         $products = $brand->products()
             ->with([
                 'masterSku',
