@@ -31,27 +31,39 @@
   .swiper-button-prev,.swiper-button-next {
     width: 34px;
     height: 37px;
-    color: #333;
+    color: #999;
     @media (max-width: 768px) {
       display: none;
     }
 
-    &:after {
-      font-size: 22px;
+    &:hover {
+      color: $primary;
     }
+
+    &:after {
+      font-size: 26px;
+    }
+
   }
 
   .swiper-button-prev {
-    left: -50px;
+    left: -40px;
   }
 
   .swiper-button-next {
-    right: -50px;
+    right: -40px;
   }
 
   .swiper-pagination {
     .swiper-pagination-bullet-active {
       background: $primary;
+    }
+
+    &.rectangle {
+      span {
+        border-radius: 0;
+        height: 3px;
+      }
     }
   }
 }

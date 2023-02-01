@@ -31,7 +31,9 @@
     <div class="product-name">{{ $product['name_format'] }}</div>
     <div class="product-price">
       <span class="price-new">{{ $product['price_format'] }}</span>
-      <span class="price-lod">{{ $product['origin_price_format'] }}</span>
+      @if ($product['price'] != $product['origin_price'] && $product['origin_price'] > 0)
+        <span class="price-old">{{ $product['origin_price_format'] }}</span>
+      @endif
     </div>
 
     @if (request('style_list') == 'list')

@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => 'eine Zeile vier Bilder PRO',
     'module_slideshow'      => 'Folienmodul',
     'module_tab_products'   => 'Tab-Produkte',
+    'module_product'        => 'Warenmodul',
+    'module_icons'          => 'Symbolmodul',
 ];

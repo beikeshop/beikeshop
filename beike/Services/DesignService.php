@@ -49,6 +49,10 @@ class DesignService
             return self::handleBrand($content);
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
+        } elseif ($moduleCode == 'product') {
+            return self::handleProducts($content);
+        } elseif ($moduleCode == 'icons') {
+            return self::handleIcons($content);
         }
 
         return $content;
@@ -112,6 +116,35 @@ class DesignService
     }
 
     /**
+     * 处理 icons 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleIcons($content): array
+    {
+        $content['title'] = $content['title'][locale()] ?? '';
+
+        if (empty($content['images'])) {
+            return $content;
+        }
+
+        $images = [];
+        foreach ($content['images'] as $image) {
+            $images[] = [
+                'image' => image_origin($image['image'] ?? ''),
+                'text'  => $image['text'][locale()] ?? '',
+                'link'  => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
+            ];
+        }
+
+        $content['images'] = $images;
+
+        return $content;
+    }
+
+    /**
      * 处理选项卡商品列表模块
      *
      * @param $content
@@ -134,6 +167,19 @@ class DesignService
         $content['tabs']  = $tabs;
         $content['title'] = $content['title'][locale()] ?? '';
 
+        return $content;
+    }
+
+    /**
+     * 处理商品模块
+     *
+     * @param $content
+     * @return array
+     */
+    private static function handleProducts($content): array
+    {
+        $content['products'] = ProductRepo::getProductsByIds($content['products'])->jsonSerialize();
+        $content['title'] = $content['title'][locale()] ?? '';
         return $content;
     }
 

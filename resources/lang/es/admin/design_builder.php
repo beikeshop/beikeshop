@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => 'Cuatro imágenes en una línea PRO',
     'module_slideshow'      => 'módulo de presentación de diapositivas',
     'module_tab_products'   => 'elemento de pestaña',
+    'module_product'        => 'módulo de productos básicos',
+    'module_icons'          => 'módulo de iconos',
 ];

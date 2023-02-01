@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => 'Четыре картинки в одну строку PRO',
     'module_slideshow'      => 'модуль слайд-шоу',
     'module_tab_products'   => 'элемент вкладки',
+    'module_product'        => 'товарный модуль',
+    'module_icons'          => 'модуль значков',
 ];

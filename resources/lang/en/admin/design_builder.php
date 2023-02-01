@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => 'For Image PRO Module',
     'module_slideshow'      => 'Slideshow Module',
     'module_tab_products'   => 'Tab Products Module',
+    'module_product'        => 'Products Module',
+    'module_icons'          => 'Icon module',
 ];

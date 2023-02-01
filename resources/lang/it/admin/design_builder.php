@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => 'una riga quattro immagini PRO',
     'module_slideshow'      => 'modulo diapositiva',
     'module_tab_products'   => 'scheda prodotti',
+    'module_product'        => 'modulo merci',
+    'module_icons'          => 'modulo icona',
 ];

@@ -15,4 +15,6 @@ return [
     'module_four_image_pro' => '一行四圖 PRO',
     'module_slideshow'      => '幻燈片模塊',
     'module_tab_products'   => '選項卡商品',
+    'module_icons'          => '圖標模塊',
+    'module_product'        => '商品模塊',
 ];
