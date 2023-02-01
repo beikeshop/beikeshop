@@ -48,7 +48,6 @@ class ProductDetail extends JsonResource
                 ];
             }, $this->images ?? []),
             'attributes'       => $attributes,
-            'category_id'      => $this->category_id ?? null,
             'variables'        => $this->decodeVariables($this->variables),
             'skus'             => SkuDetail::collection($this->skus)->jsonSerialize(),
             'in_wishlist'      => $this->inCurrentWishlist->id ?? 0,
