@@ -55,6 +55,7 @@ class PluginServiceProvider extends ServiceProvider
             $this->loadRoutes($pluginCode);
             $this->loadViews($pluginCode);
             $this->loadTranslations($pluginCode);
+            $this->registerMiddleware($pluginCode);
         }
     }
 
@@ -135,5 +136,56 @@ class PluginServiceProvider extends ServiceProvider
     {
         $pluginBasePath = $this->pluginBasePath;
         $this->loadViewsFrom("{$pluginBasePath}/{$pluginCode}/Views", $pluginCode);
+    }
+
+    /**
+     * 注册插件定义的中间件
+     */
+    private function registerMiddleware($pluginCode)
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $middlewarePath = "{$pluginBasePath}/{$pluginCode}/Middleware";
+
+        $router           = $this->app['router'];
+        $shopMiddlewares  = $this->loadMiddlewares("$middlewarePath/Shop");
+        $adminMiddlewares = $this->loadMiddlewares("$middlewarePath/Admin");
+
+        if ($shopMiddlewares) {
+            foreach ($shopMiddlewares as $shopMiddleware) {
+                $router->pushMiddlewareToGroup('shop', $shopMiddleware);
+            }
+        }
+
+        if ($adminMiddlewares) {
+            foreach ($adminMiddlewares as $adminMiddleware) {
+                $router->pushMiddlewareToGroup('admin', $adminMiddleware);
+            }
+        }
+    }
+
+    /**
+     * 获取插件中间件
+     * @param $path
+     * @return array
+     */
+    private function loadMiddlewares($path): array
+    {
+        if (! file_exists($path)) {
+            return [];
+        }
+
+        $middlewares = [];
+        $files       = glob("$path/*");
+        foreach ($files as $file) {
+            $baseName      = basename($file, '.php');
+            $namespacePath = 'Plugin' . dirname(str_replace($this->pluginBasePath, '', $file)) . '/';
+            $className     = str_replace('/', '\\', $namespacePath . $baseName);
+
+            if (class_exists($className)) {
+                $middlewares[] = $className;
+            }
+        }
+
+        return $middlewares;
     }
 }
