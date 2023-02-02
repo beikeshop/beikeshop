@@ -16,7 +16,7 @@ use Beike\Admin\View\Components\Filter;
 use Beike\Admin\View\Components\Form\Image;
 use Beike\Admin\View\Components\Form\Input;
 use Beike\Admin\View\Components\Form\InputLocale;
-use Beike\Admin\View\Components\Form\Richtext;
+use Beike\Admin\View\Components\Form\RichText;
 use Beike\Admin\View\Components\Form\Select;
 use Beike\Admin\View\Components\Form\SwitchRadio;
 use Beike\Admin\View\Components\Form\Textarea;
