@@ -8,11 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class HookServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        $this->bootDirectives();
-    }
-
     public function register()
     {
         $this->commands([
@@ -24,18 +19,26 @@ class HookServiceProvider extends ServiceProvider
         });
     }
 
-    protected function bootDirectives()
+
+    public function boot()
+    {
+        $this->bootHookDirectives();
+        $this->bootWrapperHookDirectives();
+    }
+
+    /**
+     * 添加 blade hook 标签, 不需要 @endhook
+     * @hook('xxx'), 添加 hook 直接输出到页面
+     */
+    protected function bootHookDirectives()
     {
         Blade::directive('hook', function ($parameter) {
-            $parameter  = trim($parameter, '()');
+            $parameter = trim($parameter, '()');
             $parameters = explode(',', $parameter);
 
             $name = trim($parameters[0], "'");
 
-            // $parameters[1] => bool => is this wrapper component?
-            if (!isset($parameters[1])) {
-                return ' <'.'?php
-
+            return ' <?php
                 $__definedVars = (get_defined_vars()["__data"]);
                 if (empty($__definedVars))
                 {
@@ -44,17 +47,31 @@ class HookServiceProvider extends ServiceProvider
                 $output = \Hook::get("' . $name . '",["data"=>$__definedVars],function($data) { return null; });
                 if ($output)
                 echo $output;
-                ?'.'>';
-            } else {
-                return ' <'.'?php
-                    $__hook_name="'. $name .'";
+                ?>';
+        });
+    }
+
+
+    /**
+     * 添加 blade wrapper hook 标签
+     *
+     * @wrapperhook('xxx') --- @endwrapperhook, 将某段代码打包输出再添加 hook 输出
+     */
+    protected function bootWrapperHookDirectives()
+    {
+        Blade::directive('wrapperhook', function ($parameter) {
+            $parameter = trim($parameter, '()');
+            $parameters = explode(',', $parameter);
+            $name = trim($parameters[0], "'");
+
+            return ' <?php
+                    $__hook_name="' . $name . '";
                     ob_start();
-                ?'.'>';
-            }
+                ?>';
         });
 
-        Blade::directive('endhook', function ($parameter) {
-            return ' <'.'?php
+        Blade::directive('endwrapperhook', function () {
+            return ' <?php
                 $__definedVars = (get_defined_vars()["__data"]);
                 if (empty($__definedVars))
                 {
@@ -66,7 +83,7 @@ class HookServiceProvider extends ServiceProvider
                 unset($__hook_content);
                 if ($output)
                 echo $output;
-                ?'.'>';
+                ?>';
         });
     }
 }

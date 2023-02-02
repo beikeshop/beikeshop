@@ -76,12 +76,12 @@
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
             <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
 
-            @hook('admin.product.edit.brand', true)
+            @wrapperhook('admin.product.edit.brand')
             <x-admin::form.row :title="__('admin/brand.index')">
               <input type="text" value="{{ $product->brand->name ?? '' }}" id="brand-autocomplete" class="form-control wp-400 " />
               <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
             </x-admin::form.row>
-            @endhook
+            @endwrapperhook
 
             <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
             <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
