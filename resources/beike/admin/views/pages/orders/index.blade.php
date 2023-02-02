@@ -89,6 +89,7 @@
                     <td>{{ $order->updated_at }}</td>
                     <td><a href="{{ admin_route('orders.show', [$order->id]) }}"
                         class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
+                        @hook('admin.order.list.action')
                     </td>
                   </tr>
                 @endforeach
@@ -109,6 +110,8 @@
     </div>
   </div>
 @endsection
+
+@hook('admin.order.list.content.footer')
 
 @push('footer')
   <script>

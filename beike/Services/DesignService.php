@@ -179,7 +179,8 @@ class DesignService
     private static function handleProducts($content): array
     {
         $content['products'] = ProductRepo::getProductsByIds($content['products'])->jsonSerialize();
-        $content['title'] = $content['title'][locale()] ?? '';
+        $content['title']    = $content['title'][locale()] ?? '';
+
         return $content;
     }
 
