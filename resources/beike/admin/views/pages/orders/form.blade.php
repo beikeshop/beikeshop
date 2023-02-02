@@ -6,6 +6,7 @@
 @hook('order.detail.title.right')
 @endsection
 
+
 @section('content')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
