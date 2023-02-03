@@ -27,11 +27,7 @@ class PaypalController
 {
     private PayPal $paypalClient;
 
-    /**
-     * PaypalController constructor.
-     * @throws \Throwable
-     */
-    public function __construct()
+    private function initPaypal()
     {
         $paypalSetting = plugin_setting('paypal');
         $config = [
@@ -65,6 +61,7 @@ class PaypalController
      */
     public function create(Request $request): JsonResponse
     {
+        $this->initPaypal();
         $data = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
         $customer = current_customer();
@@ -96,6 +93,7 @@ class PaypalController
      */
     public function capture(Request $request): JsonResponse
     {
+        $this->initPaypal();
         $data = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
         $customer = current_customer();
