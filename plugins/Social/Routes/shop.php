@@ -12,5 +12,5 @@
 use Illuminate\Support\Facades\Route;
 use Plugin\Social\Controllers\ShopSocialController;
 
-Route::get('/social/redirect/{provider}', [ShopSocialController::class, 'redirect'])->name('plugin.social.redirect');
-Route::get('/social/callbacks/{provider}', [ShopSocialController::class, 'callback'])->name('plugin.social.callback');
+Route::get('/social/redirect/{provider}', [ShopSocialController::class, 'redirect'])->name('social.redirect');
+Route::get('/social/callbacks/{provider}', [ShopSocialController::class, 'callback'])->name('social.callback');

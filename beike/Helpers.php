@@ -108,18 +108,6 @@ function shop_route($route, $params = []): string
 }
 
 /**
- * 获取插件链接
- *
- * @param $route
- * @param mixed $params
- * @return string
- */
-function plugin_route($route, $params = []): string
-{
-    return route('plugin.' . $route, $params);
-}
-
-/**
  * 获取 category, product, brand, page, static, custom 路由链接
  *
  * @param $type

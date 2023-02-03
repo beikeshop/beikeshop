@@ -14,7 +14,7 @@
         // Call your server to set up the transaction
         createOrder: function (data, actions) {
             const token = $('meta[name="csrf-token"]').attr('content')
-            return fetch('/plugin/paypal/create', {
+            return fetch('/paypal/create', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-Token': token
@@ -43,7 +43,7 @@
         // Call your server to finalize the transaction
         onApprove: function (data, actions) {
             const token = $('meta[name="csrf-token"]').attr('content')
-            return fetch('/plugin/paypal/capture', {
+            return fetch('/paypal/capture', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-Token': token

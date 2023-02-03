@@ -35,7 +35,7 @@ class Bootstrap
         add_filter('menu.content', function ($data) {
             $data[] = [
                 'name' => trans('LatestProducts::header.latest_products'),
-                "link" => plugin_route('latest_products'),
+                "link" => shop_route('latest_products'),
             ];
             return $data;
         }, 0);

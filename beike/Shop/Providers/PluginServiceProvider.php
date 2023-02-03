@@ -99,7 +99,7 @@ class PluginServiceProvider extends ServiceProvider
         $pluginBasePath = $this->pluginBasePath;
         $shopRoutePath  = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
         if (file_exists($shopRoutePath)) {
-            Route::prefix('plugin')
+            Route::name('shop.')
                 ->middleware('shop')
                 ->group(function () use ($shopRoutePath) {
                     $this->loadRoutesFrom($shopRoutePath);
