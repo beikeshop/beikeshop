@@ -462,6 +462,8 @@
       </form>
     </div>
   </div>
+
+  @hook('admin.product.form.footer')
 @endsection
 
 @push('footer')

@@ -48,6 +48,8 @@
                 <option value="0">{{ __('product.inactive') }}</option>
               </select>
             </div>
+
+            @hook('admin.product.list.filter')
           </div>
 
           <div class="row">
@@ -111,6 +113,7 @@
                   @if ($type != 'trashed')
                     <th>{{ __('common.status') }}</th>
                   @endif
+                  @hook('admin.product.list.column')
                   <th class="text-end">{{ __('common.action') }}</th>
                 </tr>
               </thead>
@@ -135,12 +138,15 @@
                       </span>
                     </td>
                   @endif
+                  @hook('admin.product.list.column_value')
                   <td width="140" class="text-end">
                     @if ($product['deleted_at'] == '')
                       <a href="{{ admin_route('products.edit', [$product->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                       <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
+                      @hook('admin.product.list.action')
                     @else
                       <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
+                      @hook('admin.products.trashed.action')
                     @endif
                   </td>
                 </tr>
@@ -156,6 +162,8 @@
       </div>
     </div>
   </div>
+
+  @hook('admin.product.list.content.footer')
 @endsection
 
 @push('footer')

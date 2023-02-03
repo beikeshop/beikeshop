@@ -59,15 +59,9 @@
       </form>
     </div>
   </div>
+
+  @hook('admin.page.form.footer')
 @endsection
-
-@push('footer')
-  {{-- <script>
-    $(function() {
-
-    });
-  </script> --}}
-@endpush
 
 
 

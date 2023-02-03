@@ -14,6 +14,9 @@
             <el-form-item label="{{ __('customer.email') }}">
               <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
             </el-form-item>
+            <el-form-item label="{{ __('customer.email') }}">
+              <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
+            </el-form-item>
             <el-form-item label="{{ __('customer.customer_group') }}">
               <el-select size="small" v-model="filter.customer_group_id" placeholder="{{ __('common.please_choose') }}">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
@@ -28,6 +31,8 @@
                 <el-option label="{{ __('common.disabled') }}" value="0"></el-option>
               </el-select>
             </el-form-item>
+
+            @hook('admin.customer.list.filter')
           </div>
         </el-form>
 
@@ -59,8 +64,9 @@
                 <th>{{ __('customer.from') }}</th>
                 <th>{{ __('customer.customer_group') }}</th>
                 <th>{{ __('common.status') }}</th>
-                  <th>{{ __('common.created_at') }}</th>
-                  <th>{{ __('common.action') }}</th>
+                <th>{{ __('common.created_at') }}</th>
+                @hook('admin.customer.list.column')
+                <th>{{ __('common.action') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -81,14 +87,17 @@
                   </span>
                 </td>
                 <td>{{ $customer['created_at'] }}</td>
+                @hook('admin.customer.list.column_value')
                 <td>
                   @if ($type != 'trashed')
                     <a class="btn btn-outline-secondary btn-sm" href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                    @hook('admin.customer.list.action')
                   @else
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                      @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
+                    @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                    @hook('admin.customer.trashed.action')
                   @endif
                 </td>
               </tr>
@@ -131,6 +140,8 @@
       </el-form>
     </el-dialog>
   </div>
+
+  @hook('admin.customer.list.content.footer')
 @endsection
 
 @push('footer')

@@ -22,6 +22,7 @@
               <th>{{ __('common.status') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th>{{ __('common.updated_at') }}</th>
+              @hook('admin.page.list.column')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -38,12 +39,13 @@
                   </td>
                   <td>{{ $page['created_at'] }}</td>
                   <td>{{ $page['updated_at'] }}</td>
+                  @hook('admin.page.list.column_value')
                   <td class="text-end">
                     <a href="{{ admin_route('pages.edit', [$page['id']]) }}"
                       class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-
                     <button class="btn btn-outline-danger btn-sm delete-btn" type='button'
                       data-id="{{ $page['id'] }}">{{ __('common.delete') }}</button>
+                    @hook('admin.page.list.action')
                   </td>
                 </tr>
               @endforeach
@@ -58,6 +60,8 @@
 
     </div>
   </div>
+
+  @hook('admin.page.list.content.footer')
 @endsection
 
 @push('footer')

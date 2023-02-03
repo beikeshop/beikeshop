@@ -125,7 +125,8 @@
       </el-form>
     </el-dialog>
   </div>
-  {{-- {{ admin_route($customer->id ? 'customers.update' : 'customers.store', $customer) }} --}}
+
+  @hook('admin.customer.form.footer')
 @endsection
 
 @push('footer')

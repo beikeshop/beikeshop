@@ -42,7 +42,7 @@
         </table>
       </div>
 
-      <el-pagination v-if="brands.data.length" layout="total, prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
+      <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
         :total="brands.total"></el-pagination>
     </div>
 
