@@ -12,6 +12,9 @@
         @endforeach
       </ul>
       <ul class="navbar navbar-right">
+        <li class="nav-item update-btn" style="display: none">
+          <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>
+        </li>
         <li class="nav-item">
           <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.marketing')</a>
         </li>
@@ -48,22 +51,17 @@
 
 <div class="header-mobile d-lg-none">
   <div class="header-mobile-wrap">
-
     <div class="header-mobile-left">
       <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
-
     </div>
-
     <div class="logo">
       <a href=""><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a>
     </div>
-
     <div class="header-mobile-right">
       <div class="mobile-to-front">
         <a target="_blank" href="{{ shop_route('home.index') }}" class="nav-divnk"><i class="bi bi-send"></i></a>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -106,3 +104,35 @@
     </div>
   </div>
 </div>
+<div class="update-pop p-3" style="display: none">
+  <div class="mb-4 fs-5 fw-bold text-center">{{ __('admin/common.update_title') }}</div>
+  <div class="py-3 px-4 bg-light mx-3 lh-lg mb-4">
+    <div>{{ __('admin/common.update_new_version') }}：<span class="new-version fs-5 fw-bold text-success"></span></div>
+    <div>{{ __('admin/common.update_old_version') }}：<span class="fs-5">v{{ config('beike.version') }}</span></div>
+    <div>{{ __('admin/common.update_date') }}：<span class="update-date fs-5"></span></div>
+  </div>
+
+  <div class="d-flex justify-content-center mb-3">
+    <button class="btn btn-outline-secondary me-3 ">{{ __('common.cancel') }}</button>
+    <a href="https://beikeshop.com/download" target="_blank" class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
+  </div>
+</div>
+
+@push('footer')
+  <script>
+    let updatePop = null;
+
+    $('.update-btn').click(function() {
+      updatePop = layer.open({
+        type: 1,
+        title: '{{ __('common.text_hint') }}',
+        area: ['400px'],
+        content: $('.update-pop'),
+      });
+    });
+
+    $('.update-pop .btn-outline-secondary').click(function() {
+      layer.close(updatePop)
+    });
+  </script>
+@endpush

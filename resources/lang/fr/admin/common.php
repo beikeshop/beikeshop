@@ -71,4 +71,10 @@ return [
     'customer_groups_index' => 'groupe de clients',
     'countries_index'       => 'Gestion des pays',
     'zones_index'           => 'gestion des provinces',
+    'update_nav'            => 'mettre à jour',
+    'update_title'          => 'Trouver une nouvelle version de BeikeShop, si mettre à jour maintenant',
+    'update_new_version'    => 'dernière version',
+    'update_old_version'    => 'version actuelle',
+    'update_date'           => 'date de mise à jour',
+    'update_btn'            => 'aller au téléchargement',
 ];

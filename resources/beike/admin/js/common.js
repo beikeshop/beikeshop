@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-02-03 10:12:59
+ * @LastEditTime  2023-02-03 17:50:57
  */
 
 export default {
@@ -100,5 +100,18 @@ export default {
     }
 
     return obj;
+  },
+
+  // 设置版本更新提示
+  setVersionUpdateTips() {
+    const version = JSON.parse(localStorage.getItem('beike_version'));
+    if (version && version.has_new_version) {
+      localStorage.setItem('version', process.env.VUE_APP_VERSION);
+      $('.new-version').text(version.latest);
+      $('.update-date').text(version.release_date);
+      $('.update-btn').show();
+    } else {
+      $('.update-btn').hide();
+    }
   }
 }

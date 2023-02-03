@@ -121,12 +121,17 @@
 
       &.navbar-right {
         > li {
-          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
-            padding: 0 .5rem;
-          }
+          padding: 0 0.3rem !important;
 
           a.nav-link {
             padding: 0 10px;
+          }
+
+          &.update-btn a {
+            padding-top: 0.15rem;
+            padding-bottom: 0.15rem;
+            border-radius: 2px;
+            font-size: 12px;
           }
         }
       }

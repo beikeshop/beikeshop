@@ -75,4 +75,10 @@ return [
     'customer_groups_index'  => '客户组',
     'countries_index'        => '国家管理',
     'zones_index'            => '省份管理',
+    'update_nav'             => '更新',
+    'update_title'           => '发现新的BeikeShop版本，是否立即更新',
+    'update_new_version'     => '最新版本',
+    'update_old_version'     => '当前版本',
+    'update_date'            => '更新日期',
+    'update_btn'             => '前往下载',
 ];

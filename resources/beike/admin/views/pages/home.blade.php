@@ -119,8 +119,6 @@
     </div>
   </div>
   @endif
-
-
 @endsection
 
 @push('footer')
@@ -283,14 +281,12 @@
             beginAtZero: true,
             grid: {
               drawBorder: false,
-              // drawOnChartArea: false,
               display: false
             },
           }
         },
       }
     });
-    // console.log(ordersChart)
 
     function upDate(chart, label, data) {
       chart.data.labels = label;
@@ -304,11 +300,18 @@
       const day = $(this).data('type'); // 天数
       const labels = eval(day).period;
       const data = [eval(day).totals, eval(day).amounts];
-      // const labels = Array.from({length: day}, (v, k) => k + 1);
-      // const data = Array.from({length: day}, () => Math.floor(Math.random() * 123.7));
       $(this).addClass('btn-info text-white').siblings().removeClass('btn-info text-white');
-
       upDate(ordersChart, labels, data);
+    });
+  </script>
+
+  <script>
+    $.ajax({
+      url: 'https://beikeshop.com/api/version?version={{ config('beike.version') }}',
+      success: function(data) {
+        localStorage.setItem('beike_version', JSON.stringify(data));
+        bk.setVersionUpdateTips()
+      }
     });
   </script>
 @endpush

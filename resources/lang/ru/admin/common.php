@@ -71,4 +71,10 @@ return [
     'customer_groups_index' => 'группа клиентов',
     'countries_index'       => 'Государственное управление',
     'zones_index'           => 'Управление провинции',
+    'update_nav'            => 'обновить',
+    'update_title'          => 'Найти новую версию BeikeShop, обновить ли сейчас',
+    'update_new_version'    => 'последняя версия',
+    'update_old_version'    => 'текущая версия',
+    'update_date'           => 'дата обновления',
+    'update_btn'            => 'перейти к загрузке',
 ];

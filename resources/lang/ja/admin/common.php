@@ -71,4 +71,10 @@ return [
     'customer_groups_index' => '顧客グループ',
     'countries_index'       => '国の管理',
     'zones_index'           => '州管理',
+    'update_nav'            => 'アップデート',
+    'update_title'          => 'BeikeShop の新しいバージョンを見つけて、今すぐ更新するかどうか',
+    'update_new_version'    => '最新バージョン',
+    'update_old_version'    => '現在のバージョン',
+    'update_date'           => '更新日',
+    'update_btn'            => 'ダウンロードする',
 ];
