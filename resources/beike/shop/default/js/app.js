@@ -37,6 +37,7 @@ $(document).ready(function ($) {
 
   if ($(window).width() > 992 && $('.x-fixed-top').length) {
     $('.x-fixed-top').scrollToFixed({
+      zIndex: 999,
       limit: function () {
         var limit = $('footer').offset().top - 84 - $('.x-fixed-top').outerHeight(true);
         return limit
