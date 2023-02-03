@@ -36,7 +36,7 @@
     <div id="content">
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <h5 class="page-title">@yield('title')</h5>
-        @yield('page-title-right')
+        <div>@yield('page-title-right')</div>
       </div>
       <div class="container-fluid p-0">
         @yield('content')

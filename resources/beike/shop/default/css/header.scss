@@ -46,7 +46,8 @@ header {
 
   .header-content {
     position: relative;
-
+    background-color: #fff;
+    
     > .container {
       display: flex;
       align-items: center;
@@ -95,8 +96,6 @@ header {
           > .nav-link {
             font-size: 15px;
             padding: 1rem;
-            // padding-right: 1rem;
-            // padding-left: 1rem;
             position: relative;
 
             .badge {
@@ -136,18 +135,11 @@ header {
           }
         }
       }
-      // .nav-link {
-      //   color: #333;
-      //   // font-weight: bold;
-      //   font-size: .9rem;
-      //   padding-left: 1rem;
-      //   padding-right: 1rem;
-      // }
     }
 
     .logo {
       img {
-        max-width: 180px;
+        max-width: 200px;
         max-height: 50px;
       }
     }

@@ -68,18 +68,18 @@
             <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
           @endif
 
-          @if ($type != 'trashed')
-          <div class="right nowrap" v-if="product.data.length">
-            <button class="btn btn-outline-secondary" :disabled="!selected.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
-            <button class="btn btn-outline-secondary" :disabled="!selected.length"
-            @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
-            <button class="btn btn-outline-secondary" :disabled="!selected.length"
-            @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
-          </div>
+          @if ($type != 'trashed' && $products->total())
+            <div class="right nowrap">
+              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
+              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
+              @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
+              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
+              @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+            </div>
           @endif
         </div>
 
-        <template v-if="product.data.length">
+        @if ($products->total())
           <div class="table-push">
             <table class="table table-hover">
               <thead>
@@ -93,8 +93,8 @@
                     <div class="d-flex align-items-center">
                         {{ __('common.created_at') }}
                       <div class="d-flex flex-column ml-1 order-by-wrap">
-                        <i class="el-icon-caret-top" @click="orderBy = 'created_at:asc'"></i>
-                        <i class="el-icon-caret-bottom" @click="orderBy = 'created_at:desc'"></i>
+                        <i class="el-icon-caret-top" @click="checkedOrderBy('created_at:asc')"></i>
+                        <i class="el-icon-caret-bottom" @click="checkedOrderBy('created_at:desc')"></i>
                       </div>
                     </div>
                   </th>
@@ -103,8 +103,8 @@
                     <div class="d-flex align-items-center">
                         {{ __('common.sort_order') }}
                       <div class="d-flex flex-column ml-1 order-by-wrap">
-                        <i class="el-icon-caret-top" @click="orderBy = 'position:asc'"></i>
-                        <i class="el-icon-caret-bottom" @click="orderBy = 'position:desc'"></i>
+                        <i class="el-icon-caret-top" @click="checkedOrderBy('position:asc')"></i>
+                        <i class="el-icon-caret-bottom" @click="checkedOrderBy('position:desc')"></i>
                       </div>
                     </div>
                   </th>
@@ -115,45 +115,44 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item, index) in product.data" :key="item.id">
-                  <td><input type="checkbox" :value="item.id" v-model="selected" /></td>
-                  <td>@{{ item.id }}</td>
+                @foreach ($products as $product)
+                <tr>
+                  <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds" /></td>
+                  <td>{{ $product['id'] }}</td>
                   <td>
-                    <div class="wh-60 border d-flex justify-content-between align-items-center"><img :src="item.images[0] || 'image/placeholder.png'" class="img-fluid"></div>
+                    <div class="wh-60 border d-flex justify-content-between align-items-center"><img src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid"></div>
                   </td>
                   <td>
-                    <a :href="item.url" target="_blank" :title="item.name" class="text-dark">@{{ stringLengthInte(item.name, 90) }}</a>
+                    <a href="{{ $product['url'] }}" target="_blank" title="{{ $product['name'] }}" class="text-dark">{{ $product['name'] }}</a>
                   </td>
-                  <td>@{{ item.price_formatted }}</td>
-                  <td>@{{ item.created_at }}</td>
-                  <td>@{{ item.position }}</td>
+                  <td>{{ $product['price_formatted'] }}</td>
+                  <td>{{ $product['created_at'] }}</td>
+                  <td>{{ $product['position'] }}</td>
                   @if ($type != 'trashed')
                     <td>
-                      <span v-if="item.active" class="text-success">{{ __('common.enable') }}</span>
-                      <span v-else class="text-secondary">{{ __('common.disable') }}</span>
+                      <span class="{{ $product['active'] ? 'text-success' : 'text-secondary' }}">
+                        {{ $product['active'] ? __('common.enable') : __('common.disable') }}
+                      </span>
                     </td>
                   @endif
                   <td width="140" class="text-end">
-                    <template v-if="item.deleted_at == ''">
-                      <a :href="item.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
-                        @click.prevent="deleteProduct(index)">{{ __('common.delete') }}</a>
-                    </template>
-                    <template v-else>
-                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                        @click.prevent="restoreProduct(index)">{{ __('common.restore') }}</a>
-                    </template>
+                    @if ($product['deleted_at'] == '')
+                      <a href="{{ admin_route('products.edit', [$product->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
+                    @else
+                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
+                    @endif
                   </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
 
-          <el-pagination layout="total, prev, pager, next" background :page-size="product.per_page" :current-page.sync="page"
-            :total="product.total"></el-pagination>
-        </template>
-
-        <div v-else><x-admin-no-data /></div>
+          {{ $products->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
+        @else
+          <x-admin-no-data />
+        @endif
       </div>
     </div>
   </div>
@@ -161,92 +160,46 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#product-app',
       data: {
-        product: @json($products),
+        url: '{{ $type == 'trashed' ? admin_route("products.trashed") : admin_route("products.index") }}',
         filter: {
           name: bk.getQueryString('name'),
+          page: bk.getQueryString('page'),
           category_id: bk.getQueryString('category_id'),
           sku: bk.getQueryString('sku'),
           model: bk.getQueryString('model'),
           active: bk.getQueryString('active'),
+          order_by: bk.getQueryString('order_by', ''),
         },
-        selected: [],
-        page: bk.getQueryString('page', 1) * 1,
-        orderBy: bk.getQueryString('order_by', 'products.id:desc'),
+        selectedIds: [],
+        productIds: @json($products->pluck('id')),
       },
 
       computed: {
-        url: function() {
-          let filter = {};
-          if (this.orderBy != 'products.id:desc') {
-            filter.order_by = this.orderBy;
-          }
-
-          if (this.page > 1) {
-            filter.page = this.page;
-          }
-
-          for (key in this.filter) {
-            const value = this.filter[key];
-            if (value !== '' && value !== null) {
-              filter[key] = value;
-            }
-          }
-
-          const query = Object.keys(filter).map(key => key + '=' + filter[key]).join('&');
-          // const url = @json(admin_route('products.index'));
-
-          @if ($type == 'products')
-            const url = @json(admin_route('products.index'));
-          @else
-            const url = @json(admin_route('products.trashed'));
-          @endif
-
-          if (query) {
-            return url + '?' + query;
-          }
-
-          return url;
-        },
-
         allSelected: {
-          get() {
-            return this.selected.length == this.product.data.length;
+          get(e) {
+            return this.selectedIds.length == this.productIds.length;
           },
           set(val) {
-            return this.selected = val ? this.product.data.map(e => e.id) : [];
+            return val ? this.selectedIds = this.productIds : this.selectedIds = [];
           }
         }
       },
 
-      watch: {
-        page: function() {
-          this.loadData();
-        },
-
-        orderBy: function() {
-          this.loadData();
-        }
+      created() {
+        bk.addFilterCondition(this);
       },
-      methods: {
-        loadData: function() {
-          window.history.pushState('', '', this.url);
-          $http.get(this.url).then((res) => {
-            this.product = res;
-          })
-        },
 
+      methods: {
         batchDelete() {
           this.$confirm('{{ __('admin/product.confirm_batch_product') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.delete('products/delete', {
-              ids: this.selected
-            }).then((res) => {
+            $http.delete('products/delete', {ids: this.selectedIds}).then((res) => {
               layer.msg(res.message)
               location.reload();
             })
@@ -259,50 +212,51 @@
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.post('products/status', {
-              ids: this.selected,
-              status: type
-            }).then((res) => {
+            $http.post('products/status', {ids: this.selectedIds, status: type}).then((res) => {
               layer.msg(res.message)
               location.reload();
             })
           }).catch(()=>{});
         },
 
-        search: function() {
-          this.page = 1;
-          this.loadData();
+        search() {
+          this.filter.page = '';
+          location = bk.objectToUrlParams(this.filter, this.url)
+        },
+
+        checkedOrderBy(orderBy) {
+          this.filter.order_by = orderBy;
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
         resetSearch() {
-          Object.keys(this.filter).forEach(key => this.filter[key] = '')
-          this.loadData();
+          this.filter = bk.clearObjectValue(this.filter)
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
-        deleteProduct: function(index) {
-          const product = this.product.data[index];
+        deleteProduct(index) {
+          const id = this.productIds[index];
 
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
-            $http.delete('products/' + product.id).then((res) => {
+            $http.delete('products/' + id).then((res) => {
+              this.$message.success(res.message);
               location.reload();
             })
-          });
+          }).catch(()=>{});;
         },
 
-        restoreProduct: function(index) {
-          const product = this.product.data[index];
+        restoreProduct(index) {
+          const id = this.productIds[index];
 
           this.$confirm('{{ __('admin/product.confirm_batch_restore') }}', '{{ __('common.text_hint') }}', {
             type: 'warning'
           }).then(() => {
-            $http.put('products/restore', {
-              id: product.id
-            }).then((res) => {
+            $http.put('products/restore', {id: id}).then((res) => {
               location.reload();
             })
-          });
+          }).catch(()=>{});;
         },
 
         clearRestore() {
@@ -312,7 +266,7 @@
             $http.post('products/trashed/clear').then((res) => {
               location.reload();
             })
-          });
+          }).catch(()=>{});;
         }
       }
     });

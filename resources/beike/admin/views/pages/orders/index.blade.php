@@ -10,11 +10,10 @@
   <div id="customer-app" class="card h-min-600">
     <div class="card-body">
       <div class="bg-light p-4 mb-3" id="app">
-        <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
+        <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
           <div>
             <el-form-item label="{{ __('order.number') }}">
               <el-input @keyup.enter.native="search" v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
-              {{-- <input @keyup.enter="search" type="text" v-model="filter.number" class="form-control" placeholder="{{ __('order.number') }}"> --}}
             </el-form-item>
             <el-form-item label="{{ __('order.customer_name') }}">
               <el-input @keyup.enter.native="search" v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
@@ -109,13 +108,13 @@
       @endif
     </div>
   </div>
-@endsection
 
-@hook('admin.order.list.content.footer')
+  @hook('admin.order.list.content.footer')
+@endsection
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#app',
       data: {
         url: @json(admin_route('orders.index')),
@@ -130,34 +129,22 @@
         },
       },
 
-      computed: {
-        query() {
-          let query = '';
-          const filter = Object.keys(this.filter)
-            .filter(key => this.filter[key])
-            .map(key => key + '=' + this.filter[key])
-            .join('&');
-
-          if (filter) {
-            query += '?' + filter;
-          }
-
-          return query;
-        }
+      created() {
+        bk.addFilterCondition(this);
       },
 
       methods: {
         search() {
-          location = this.url + this.query
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
         resetSearch() {
-          Object.keys(this.filter).forEach(key => this.filter[key] = '')
-          location = this.url + this.query
+          this.filter = bk.clearObjectValue(this.filter)
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
         exportOrder() {
-          location = this.exportUrl + this.query
+          location = bk.objectToUrlParams(this.filter, this.exportUrl)
         },
       }
     });

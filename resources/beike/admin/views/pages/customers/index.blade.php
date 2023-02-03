@@ -47,55 +47,59 @@
           <button type="button" class="btn btn-primary" @click="checkedCustomerSclearRestore">{{ __('admin/product.clear_restore') }}</button>
         @endif
       </div>
-      <div class="table-push">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>{{ __('common.id') }}</th>
-              <th>{{ __('customer.email') }}</th>
-              <th>{{ __('customer.name') }}</th>
-              <th>{{ __('customer.from') }}</th>
-              <th>{{ __('customer.customer_group') }}</th>
-              <th>{{ __('common.status') }}</th>
-                <th>{{ __('common.created_at') }}</th>
-                <th>{{ __('common.action') }}</th>
-            </tr>
-          </thead>
-          <tbody v-if="customers.data.length">
-            <tr v-for="customer, index in customers.data" :key="index">
-              <td>@{{ customer.id }}</td>
-              <td>@{{ customer.email }}</td>
-              <td>
-                <div class="d-flex align-items-center">
-                  {{-- <img src="@{{ customer.avatar }}" class="img-fluid rounded-circle me-2" style="width: 40px;"> --}}
-                  <div>@{{ customer.name }}</div>
-                </div>
-              </td>
-              <td>@{{ customer.from }}</td>
-              <td>@{{ customer.customer_group_name }}</td>
-              <td>
-                <span v-if="customer.status" class="text-success">{{ __('common.enable') }}</span>
-                <span v-else class="text-secondary">{{ __('common.disable') }}</span>
-              </td>
-              <td>@{{ customer.created_at }}</td>
-              <td>
-                @if ($type != 'trashed')
-                  <a class="btn btn-outline-secondary btn-sm" :href="customer.edit">{{ __('common.edit') }}</a>
-                  <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(customer.delete, index)">{{ __('common.delete') }}</button>
-                @else
-                  <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                    @click.prevent="restore(customer.id, index)">{{ __('common.restore') }}</a>
-                  <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteTrashedCustomer(customer.id, index)">{{ __('common.delete') }}</button>
-                @endif
-              </td>
-            </tr>
-          </tbody>
-          <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
-        </table>
-      </div>
 
-      <el-pagination v-if="customers.data.length" layout="total, prev, pager, next" background :page-size="customers.per_page" :current-page.sync="page"
-        :total="customers.total"></el-pagination>
+      @if ($customers->total())
+        <div class="table-push">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>{{ __('common.id') }}</th>
+                <th>{{ __('customer.email') }}</th>
+                <th>{{ __('customer.name') }}</th>
+                <th>{{ __('customer.from') }}</th>
+                <th>{{ __('customer.customer_group') }}</th>
+                <th>{{ __('common.status') }}</th>
+                  <th>{{ __('common.created_at') }}</th>
+                  <th>{{ __('common.action') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($customers as $customer)
+              <tr>
+                <td>{{ $customer['id'] }}</td>
+                <td>{{ $customer['email'] }}</td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <div>{{ $customer['name'] }}</div>
+                  </div>
+                </td>
+                <td>{{ $customer['from'] }}</td>
+                <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
+                <td>
+                  <span class="{{ $customer['active'] ? 'text-success' : 'text-secondary' }}">
+                    {{ $customer['active'] ? __('common.enable') : __('common.disable') }}
+                  </span>
+                </td>
+                <td>{{ $customer['created_at'] }}</td>
+                <td>
+                  @if ($type != 'trashed')
+                    <a class="btn btn-outline-secondary btn-sm" href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                  @else
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                      @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                  @endif
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        {{ $customers->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
+      @else
+        <x-admin-no-data />
+      @endif
     </div>
 
     <el-dialog title="{{ __('admin/customer.customers_create') }}" :visible.sync="dialogCustomers.show" width="670px"
@@ -135,9 +139,6 @@
       el: '#customer-app',
 
       data: {
-        page: 1,
-        customers: @json($customers ?? []),
-
         source: {
           customer_group: @json($customer_groups ?? []),
         },
@@ -163,48 +164,24 @@
           password: [{required: true,message: '{{ __('common.error_required', ['name' => __('shop/login.password')] ) }}',trigger: 'blur'}, ],
         },
 
-        url: @json(admin_route('customers.index')),
+        url: '{{ $type == 'trashed' ? admin_route('customers.trashed') : admin_route('customers.index') }}',
 
         filter: {
+          page: bk.getQueryString('page'),
           email: bk.getQueryString('email'),
           name: bk.getQueryString('name'),
           customer_group_id: bk.getQueryString('customer_group_id'),
           status: bk.getQueryString('status'),
         },
+
+        customerIds: @json($customers->pluck('id')),
       },
 
-      mounted () {
-      },
-
-      watch: {
-        page: function() {
-          this.loadData();
-        },
-      },
-
-      computed: {
-        query() {
-          let query = '';
-          const filter = Object.keys(this.filter)
-            .filter(key => this.filter[key])
-            .map(key => key + '=' + this.filter[key])
-            .join('&');
-
-          if (filter) {
-            query += '?' + filter;
-          }
-
-          return query;
-        }
+      created() {
+        bk.addFilterCondition(this);
       },
 
       methods: {
-        loadData() {
-          $http.get(`customers?page=${this.page}`).then((res) => {
-            this.customers = res.data.customers;
-          })
-        },
-
         checkedCustomersCreate() {
           this.dialogCustomers.show = true
         },
@@ -254,23 +231,22 @@
 
             $http.post('customers', this.dialogCustomers.form).then((res) => {
               this.$message.success(res.message);
-              this.loadData();// this.customers.data.push(res.data);
+              window.location.reload();
               this.dialogCustomers.show = false
             })
           });
         },
 
-        deleteCustomer(url, index) {
+        deleteCustomer(id) {
           const self = this;
           this.$confirm('{{ __('common.confirm_delete') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',
             cancelButtonText: '{{ __('common.cancel') }}',
             type: 'warning'
           }).then(() => {
-            $http.delete(url).then((res) => {
+            $http.delete(`customers/${id}`).then((res) => {
               self.$message.success(res.message);
               window.location.reload();
-              // self.customers.splice(index, 1)
             })
           }).catch(()=>{})
         },
@@ -281,12 +257,12 @@
         },
 
         search() {
-          location = this.url + this.query
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
         resetSearch() {
-          Object.keys(this.filter).forEach(key => this.filter[key] = '')
-          location = this.url + this.query
+          this.filter = bk.clearObjectValue(this.filter)
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
       }
     })
