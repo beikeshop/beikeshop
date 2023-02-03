@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'onglet produits',
     'module_product'        => 'module marchandise',
     'module_icons'          => 'module d\'icônes',
+    'module_rich_text'      => 'texte enrichi',
 ];

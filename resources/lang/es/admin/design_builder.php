@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'elemento de pestaña',
     'module_product'        => 'módulo de productos básicos',
     'module_icons'          => 'módulo de iconos',
+    'module_rich_text'      => 'texto enriquecido',
 ];

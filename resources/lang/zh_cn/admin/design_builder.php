@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => '选项卡商品',
     'module_product'        => '商品模块',
     'module_icons'          => '图标模块',
+    'module_rich_text'      => '富文本模块',
 ];

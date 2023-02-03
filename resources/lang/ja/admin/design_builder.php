@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'タブ製品',
     'module_product'        => '商品モジュール',
     'module_icons'          => 'アイコンモジュール',
+    'module_rich_text'      => 'リッチテキスト',
 ];

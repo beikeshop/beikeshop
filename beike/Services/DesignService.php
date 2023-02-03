@@ -53,6 +53,8 @@ class DesignService
             return self::handleProducts($content);
         } elseif ($moduleCode == 'icons') {
             return self::handleIcons($content);
+        } elseif ($moduleCode == 'rich_text') {
+            return self::handleRichText($content);
         }
 
         return $content;
@@ -141,6 +143,19 @@ class DesignService
 
         $content['images'] = $images;
 
+        return $content;
+    }
+
+    /**
+     * 处理 rich_text 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleRichText($content): array
+    {
+        $content['data'] = $content['text'][locale()] ?? '';
         return $content;
     }
 

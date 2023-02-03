@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => '選項卡商品',
     'module_icons'          => '圖標模塊',
     'module_product'        => '商品模塊',
+    'module_rich_text'      => '富文本模塊',
 ];

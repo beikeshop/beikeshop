@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'элемент вкладки',
     'module_product'        => 'товарный модуль',
     'module_icons'          => 'модуль значков',
+    'module_rich_text'      => 'форматированный текст',
 ];

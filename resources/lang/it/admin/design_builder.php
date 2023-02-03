@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'scheda prodotti',
     'module_product'        => 'modulo merci',
     'module_icons'          => 'modulo icona',
+    'module_rich_text'      => 'rich text',
 ];

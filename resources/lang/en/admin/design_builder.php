@@ -10,11 +10,12 @@
  */
 
 return [
-    'module_brand'          => 'Brand Module',
-    'module_banner'         => 'Banner Module',
-    'module_four_image_pro' => 'For Image PRO Module',
-    'module_slideshow'      => 'Slideshow Module',
-    'module_tab_products'   => 'Tab Products Module',
-    'module_product'        => 'Products Module',
-    'module_icons'          => 'Icon module',
+    'module_brand'          => 'Brand',
+    'module_banner'         => 'Banner',
+    'module_four_image_pro' => 'For Image PRO',
+    'module_slideshow'      => 'Slideshow',
+    'module_tab_products'   => 'Tab Products',
+    'module_product'        => 'Products',
+    'module_icons'          => 'Icons',
+    'module_rich_text'      => 'Rich Text',
 ];

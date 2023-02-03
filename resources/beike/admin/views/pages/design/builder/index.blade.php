@@ -16,6 +16,7 @@
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
+  <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
@@ -141,6 +142,7 @@
   @include('admin::pages.design.builder.component.image_selector')
   @include('admin::pages.design.builder.component.link_selector')
   @include('admin::pages.design.builder.component.text_i18n')
+  @include('admin::pages.design.builder.component.rich_text_i18n')
 
   <script>
     let app = new Vue({

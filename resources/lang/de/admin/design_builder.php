@@ -17,4 +17,5 @@ return [
     'module_tab_products'   => 'Tab-Produkte',
     'module_product'        => 'Warenmodul',
     'module_icons'          => 'Symbolmodul',
+    'module_rich_text'      => 'Rich-Text',
 ];
