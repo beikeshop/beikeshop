@@ -156,6 +156,7 @@ class DesignService
     private static function handleRichText($content): array
     {
         $content['data'] = $content['text'][locale()] ?? '';
+
         return $content;
     }
 

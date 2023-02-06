@@ -45,17 +45,18 @@ class PluginServiceProvider extends ServiceProvider
         $this->pluginBasePath = base_path('plugins');
 
         foreach ($plugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
             $this->bootPlugin($plugin);
+            $this->registerRoutes($pluginCode);
+            $this->registerMiddleware($pluginCode);
         }
 
         $allPlugins = $manager->getPlugins();
         foreach ($allPlugins as $plugin) {
             $pluginCode = $plugin->getDirname();
             $this->loadMigrations($pluginCode);
-            $this->loadRoutes($pluginCode);
             $this->loadViews($pluginCode);
             $this->loadTranslations($pluginCode);
-            $this->registerMiddleware($pluginCode);
         }
     }
 
@@ -90,11 +91,11 @@ class PluginServiceProvider extends ServiceProvider
     }
 
     /**
-     * 加载插件路由
+     * 加载插件路由并注册
      *
      * @param $pluginCode
      */
-    private function loadRoutes($pluginCode)
+    private function registerRoutes($pluginCode)
     {
         $pluginBasePath = $this->pluginBasePath;
         $shopRoutePath  = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
