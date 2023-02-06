@@ -166,7 +166,7 @@
             return;
           }
 
-          $http.post("social/setting", this.form.social).then((res) => {
+          $http.post("{{ admin_route('social.setting') }}", this.form.social).then((res) => {
             layer.msg(res.message)
           })
         });
