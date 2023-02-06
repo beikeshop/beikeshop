@@ -110,7 +110,7 @@ class PluginServiceProvider extends ServiceProvider
         if (file_exists($adminRoutePath)) {
             $adminName = admin_name();
             Route::prefix($adminName)
-                ->name('admin.')
+                ->name("{$adminName}.")
                 ->middleware(['admin', 'admin_auth:' . AdminUser::AUTH_GUARD])
                 ->group(function () use ($adminRoutePath) {
                     $this->loadRoutesFrom($adminRoutePath);
