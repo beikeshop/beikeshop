@@ -115,7 +115,7 @@ class CheckoutService
             StateMachineService::getInstance($order)->changeStatus(StateMachineService::UNPAID, '', true);
             CartRepo::clearSelectedCartProducts($customer);
 
-            hook_action('after_checkout_confirm', ['order' => $order, 'cart' => $this->cart]);
+            hook_action('checkout.order.confirm.after', ['order' => $order, 'cart' => $this->cart]);
 
             DB::commit();
         } catch (\Exception $e) {
