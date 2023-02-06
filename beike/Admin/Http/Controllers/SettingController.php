@@ -16,6 +16,7 @@ use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\SettingRepo;
+use Beike\Repositories\ThemeRepo;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -27,10 +28,7 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $themes = [
-            ['value' => 'default', 'label' => trans('admin/setting.theme_default')],
-            ['value' => 'black', 'label' => trans('admin/setting.theme_black')],
-        ];
+        $themes = ThemeRepo::getAllThemes();
 
         $tax_address = [
             ['value' => 'shipping', 'label' => trans('admin/setting.shipping_address')],
