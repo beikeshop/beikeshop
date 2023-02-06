@@ -55,11 +55,11 @@ class HookServiceProvider extends ServiceProvider
     /**
      * 添加 blade wrapper hook 标签
      *
-     * @wrapperhook('xxx') --- @endwrapperhook, 将某段代码打包输出再添加 hook 输出
+     * @hookwrapper('xxx') --- @endhookwrapper, 将某段代码打包输出再添加 hook 输出
      */
     protected function bootWrapperHookDirectives()
     {
-        Blade::directive('wrapperhook', function ($parameter) {
+        Blade::directive('hookwrapper', function ($parameter) {
             $parameter = trim($parameter, '()');
             $parameters = explode(',', $parameter);
             $name = trim($parameters[0], "'");
@@ -70,7 +70,7 @@ class HookServiceProvider extends ServiceProvider
                 ?>';
         });
 
-        Blade::directive('endwrapperhook', function () {
+        Blade::directive('endhookwrapper', function () {
             return ' <?php
                 $__definedVars = (get_defined_vars()["__data"]);
                 if (empty($__definedVars))

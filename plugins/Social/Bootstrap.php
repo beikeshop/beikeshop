@@ -24,7 +24,7 @@ class Bootstrap
      */
     private function addSocialData()
     {
-        add_filter('login.social.buttons', function ($buttons) {
+        add_hook_filter('login.social.buttons', function ($buttons) {
             $providers = plugin_setting('social.setting');
             if (empty($providers)) {
                 return $buttons;

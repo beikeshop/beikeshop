@@ -52,9 +52,9 @@
 
       <div class="col-12 col-lg-6">
         <div class="peoduct-info">
-          @wrapperhook('product.detail.name')
+          @hookwrapper('product.detail.name')
           <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
-          @endwrapperhook
+          @endhookwrapper
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price && product.origin_price !== 0">
@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="stock-and-sku mb-4">
-            @wrapperhook('product.detail.quantity')
+            @hookwrapper('product.detail.quantity')
             <div class="d-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
               <div :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
@@ -70,24 +70,24 @@
                 <template v-else>{{ __('shop/products.out_stock') }}</template>
               </div>
             </div>
-            @endwrapperhook
+            @endhookwrapper
 
             @if ($product['brand_id'])
-            @wrapperhook('product.detail.brand')
+            @hookwrapper('product.detail.brand')
             <div class="d-flex">
               <span class="title text-muted">{{ __('product.brand') }}:</span>
               <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
             </div>
-            @endwrapperhook
+            @endhookwrapper
             @endif
 
-            @wrapperhook('product.detail.sku')
+            @hookwrapper('product.detail.sku')
             <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
-            @endwrapperhook
+            @endhookwrapper
 
-            @wrapperhook('product.detail.model')
+            @hookwrapper('product.detail.model')
             <div class="d-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
-            @endwrapperhook
+            @endhookwrapper
           </div>
           @if (0)
           <div class="rating-wrap d-flex">

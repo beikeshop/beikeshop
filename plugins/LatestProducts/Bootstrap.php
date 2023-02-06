@@ -32,7 +32,7 @@ class Bootstrap
      */
     private function addLatestProducts()
     {
-        add_filter('menu.content', function ($data) {
+        add_hook_filter('menu.content', function ($data) {
             $data[] = [
                 'name' => trans('LatestProducts::header.latest_products'),
                 "link" => shop_route('latest_products'),
@@ -47,23 +47,23 @@ class Bootstrap
      */
     private function modifyHeader()
     {
-        blade_hook('header.top.currency', function ($callback, $output, $data) {
+        add_hook_blade('header.top.currency', function ($callback, $output, $data) {
             return '货币前' . $output;
         });
 
-        blade_hook('header.top.language', function ($callback, $output, $data) {
+        add_hook_blade('header.top.language', function ($callback, $output, $data) {
             return $output . '语言后';
         });
 
-        blade_hook('header.top.telephone', function ($callback, $output, $data) {
+        add_hook_blade('header.top.telephone', function ($callback, $output, $data) {
             return '电话前' . $output;
         });
 
-        blade_hook('header.menu.logo', function ($callback, $output, $data) {
+        add_hook_blade('header.menu.logo', function ($callback, $output, $data) {
             return $output . 'Logo后';
         });
 
-        blade_hook('header.menu.icon', function ($callback, $output, $data) {
+        add_hook_blade('header.menu.icon', function ($callback, $output, $data) {
             $view = view('LatestProducts::shop.header_icon')->render();
             return $output . $view;
         });
@@ -78,16 +78,16 @@ class Bootstrap
      */
     private function modifyProductDetail()
     {
-        blade_hook('product.detail.name', function ($callback, $output, $data) {
+        add_hook_blade('product.detail.name', function ($callback, $output, $data) {
             $badge = '<span class="badge" style="background-color: #FF4D00; color: #ffffff; border-color: #FF4D00">Hot</span>';
             return $badge . $output;
         });
 
-        blade_hook('product.detail.brand', function ($callback, $output, $data) {
+        add_hook_blade('product.detail.brand', function ($callback, $output, $data) {
             return $output . '<div class="d-flex"><span class="title text-muted">Brand 2:</span>品牌 2</div>';
         });
 
-        blade_hook('product.detail.buy.after', function ($callback, $output, $data) {
+        add_hook_blade('product.detail.buy.after', function ($callback, $output, $data) {
             $view = view('LatestProducts::shop.product_button')->render();
             return $output . $view;
         });
@@ -99,7 +99,7 @@ class Bootstrap
      */
     private function modifyAdminProductEdit()
     {
-        blade_hook('admin.product.edit.extra', function ($callback, $output, $data) {
+        add_hook_blade('admin.product.edit.extra', function ($callback, $output, $data) {
             $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
             return $output . $view;
         }, 1);

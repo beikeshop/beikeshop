@@ -636,7 +636,7 @@ function hook_action($hookKey, $hookValue)
  * @param int $arguments
  * @return mixed
  */
-function add_filter($hookKey, $callback, int $priority = 20, int $arguments = 1)
+function add_hook_filter($hookKey, $callback, int $priority = 20, int $arguments = 1): mixed
 {
     return Eventy::addFilter($hookKey, $callback, $priority, $arguments);
 }
@@ -649,7 +649,7 @@ function add_filter($hookKey, $callback, int $priority = 20, int $arguments = 1)
  * @param int $priority
  * @param int $arguments
  */
-function add_action($hookKey, $callback, int $priority = 20, int $arguments = 1)
+function add_hook_action($hookKey, $callback, int $priority = 20, int $arguments = 1)
 {
     Eventy::addAction($hookKey, $callback, $priority, $arguments);
 }
@@ -661,7 +661,7 @@ function add_action($hookKey, $callback, int $priority = 20, int $arguments = 1)
  * @param $callback
  * @param int $priority
  */
-function blade_hook($hookKey, $callback, int $priority = 0)
+function add_hook_blade($hookKey, $callback, int $priority = 0)
 {
     Hook::listen($hookKey, $callback, $priority);
 }
