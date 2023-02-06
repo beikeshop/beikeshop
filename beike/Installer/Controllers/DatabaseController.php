@@ -58,7 +58,7 @@ class DatabaseController extends Controller
             'name'     => substr($email, 0, strpos($email, '@')),
             'email'    => $email,
             'password' => request('admin_password'),
-            'locale'   => session('locale') ?? 'en',
+            'locale'   => session('locale') ?? 'zh_cn',
             'active'   => true,
         ];
         AdminUserRepo::createAdminUser($data);
