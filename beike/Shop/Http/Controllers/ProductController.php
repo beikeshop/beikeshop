@@ -52,6 +52,8 @@ class ProductController extends Controller
             'items'    => ProductSimple::collection($products)->jsonSerialize(),
         ];
 
+        $data = hook_filter('product.search.data', $data);
+
         return view('search', $data);
     }
 }

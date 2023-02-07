@@ -34,6 +34,10 @@ class HomeController extends Controller
             }
         }
 
-        return view('home', ['modules' => $moduleItems]);
+        $data = ['modules' => $moduleItems];
+
+        $data = hook_filter('home.index.data', $data);
+
+        return view('home', $data);
     }
 }

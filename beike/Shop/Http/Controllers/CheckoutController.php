@@ -20,6 +20,7 @@ class CheckoutController extends Controller
     {
         try {
             $data = (new CheckoutService)->checkoutData();
+            $data = hook_filter('checkout.index.data', $data);
 
             return view('checkout', $data);
         } catch (\Exception $e) {
@@ -38,7 +39,9 @@ class CheckoutController extends Controller
         try {
             $requestData = $request->all();
 
-            return (new CheckoutService)->update($requestData);
+            $data = (new CheckoutService)->update($requestData);
+
+            return hook_filter('checkout.update.data', $data);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
@@ -52,6 +55,8 @@ class CheckoutController extends Controller
      */
     public function confirm()
     {
-        return (new CheckoutService)->confirm();
+        $data = (new CheckoutService)->confirm();
+
+        return hook_filter('checkout.confirm.data', $data);
     }
 }

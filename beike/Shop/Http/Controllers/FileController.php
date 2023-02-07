@@ -13,9 +13,13 @@ class FileController extends Controller
 
         $path = $file->store($type . '/', 'upload');
 
-        return json_success(trans('shop/file.uploaded_success'), [
+        $data = [
             'url'   => asset('upload/' . $path),
             'value' => 'upload/' . $path,
-        ]);
+        ];
+
+        $data = hook_filter('file.store.data', $data);
+
+        return json_success(trans('shop/file.uploaded_success'), $data);
     }
 }

@@ -15,6 +15,8 @@ class BrandController extends Controller
             'brands' => $brands,
         ];
 
+        $data = hook_filter('brand.index.data', $data);
+
         return view('brand/list', $data);
     }
 
@@ -38,6 +40,8 @@ class BrandController extends Controller
             'products'        => $products,
             'products_format' => ProductSimple::collection($products)->jsonSerialize(),
         ];
+
+        $data = hook_filter('brand.show.data', $data);
 
         return view('brand/info', $data);
     }

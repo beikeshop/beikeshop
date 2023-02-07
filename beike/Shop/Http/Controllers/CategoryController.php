@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        return CategoryRepo::list();
+        return redirect('/');
     }
 
     public function show(Request $request, Category $category)
@@ -33,6 +33,8 @@ class CategoryController extends Controller
             'products'        => $products,
             'per_pages'       => CategoryRepo::getPerPages(),
         ];
+
+        $data = hook_filter('category.show.data', $data);
 
         return view('category', $data);
     }

@@ -23,6 +23,8 @@ class PageController extends Controller
             'page' => (new PageDetail($page))->jsonSerialize(),
         ];
 
+        $data = hook_filter('page.show.data', $data);
+
         return view('pages/detail', $data);
     }
 }

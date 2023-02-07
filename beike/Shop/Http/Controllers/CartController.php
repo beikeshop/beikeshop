@@ -19,6 +19,8 @@ class CartController extends Controller
             'data' => CartService::reloadData(),
         ];
 
+        $data = hook_filter('cart.index.data', $data);
+
         return view('cart/cart', $data);
     }
 
@@ -36,6 +38,8 @@ class CartController extends Controller
         CartService::select($customer, $cartIds);
 
         $data = CartService::reloadData();
+
+        $data = hook_filter('cart.select.data', $data);
 
         return json_success(trans('common.updated_success'), $data);
     }
@@ -64,6 +68,8 @@ class CartController extends Controller
             CartService::select($customer, [$cart->id]);
         }
 
+        $cart = hook_filter('cart.store.data', $cart);
+
         return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
 
@@ -81,6 +87,8 @@ class CartController extends Controller
 
         $data = CartService::reloadData();
 
+        $data = hook_filter('cart.update.data', $data);
+
         return json_success(trans('common.updated_success'), $data);
     }
 
@@ -97,6 +105,8 @@ class CartController extends Controller
 
         $data = CartService::reloadData();
 
+        $data = hook_filter('cart.destroy.data', $data);
+
         return json_success(trans('common.deleted_success'), $data);
     }
 
@@ -112,6 +122,8 @@ class CartController extends Controller
         $data['html']         = view('cart/mini', $reloadData)->render();
         $data['quantity']     = $reloadData['quantity'];
         $data['quantity_all'] = $reloadData['quantity_all'];
+
+        $data = hook_filter('cart.mini_cart.data', $data);
 
         return json_success(trans('common.success'), $data);
     }

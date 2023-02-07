@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Session;
 
 class CurrencyController extends Controller
 {
-    public function index($lang)
+    public function index($currency)
     {
-        if (in_array($lang, currencies()->where('status', true)->pluck('code')->toArray())) {
-            Session::put('currency', $lang);
+        if (in_array($currency, currencies()->where('status', true)->pluck('code')->toArray())) {
+            Session::put('currency', $currency);
         }
+
+        hook_action('currency.index', $currency);
 
         return Redirect::back();
     }
