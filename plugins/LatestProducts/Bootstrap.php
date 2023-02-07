@@ -24,6 +24,7 @@ class Bootstrap
         // $this->modifyProductDetail();
 
         // $this->modifyAdminProductEdit();
+        // $this->modifySetting();
     }
 
 
@@ -81,13 +82,12 @@ class Bootstrap
     {
         // 通过数据 hook 修改产品详情页产品名称
         add_hook_filter('product.show.data', function ($product) {
-            $product['product']['name'] = '[疯狂热销]'. $product['product']['name'];
+            $product['product']['name'] = '[疯狂热销]' . $product['product']['name'];
             return $product;
         });
 
         // 通过模板 hook 在产品详情页名称上面添加 Hot 标签
         add_hook_blade('product.detail.name', function ($callback, $output, $data) {
-            return $output;
             $badge = '<span class="badge" style="background-color: #FF4D00; color: #ffffff; border-color: #FF4D00">Hot</span>';
             return $badge . $output;
         });
@@ -114,6 +114,21 @@ class Bootstrap
             $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
             return $output . $view;
         }, 1);
+    }
+
+
+    /**
+     * 系统设置添加新 tab
+     */
+    private function modifySetting()
+    {
+        add_hook_blade('admin.setting.nav.after', function ($callback, $output, $data) {
+            return view('LatestProducts::admin.setting.nav')->render();
+        });
+
+        add_hook_blade('admin.setting.after', function ($callback, $output, $data) {
+            return view('LatestProducts::admin.setting.tab')->render();
+        });
     }
 
 }

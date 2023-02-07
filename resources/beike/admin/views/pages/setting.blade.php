@@ -26,18 +26,26 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-mail">{{ __('admin/setting.mail_settings') }}</a>
           </li>
+
+          @hook('admin.setting.nav.after')
+
         </ul>
 
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-general">
+            @hook('admin.setting.general.before')
             <x-admin-form-input name="meta_title" title="{{ __('admin/setting.meta_title') }}" value="{{ old('meta_title', system_setting('base.meta_title', '')) }}" />
             <x-admin-form-textarea name="meta_description" title="{{ __('admin/setting.meta_description') }}" value="{{ old('meta_description', system_setting('base.meta_description', '')) }}" />
             <x-admin-form-textarea name="meta_keywords" title="{{ __('admin/setting.meta_keywords') }}" value="{{ old('meta_keywords', system_setting('base.meta_keywords', '')) }}" />
             <x-admin-form-input name="telephone" title="{{ __('admin/setting.telephone') }}" value="{{ old('telephone', system_setting('base.telephone', '')) }}" />
             <x-admin-form-input name="email" title="{{ __('admin/setting.email') }}" value="{{ old('email', system_setting('base.email', '')) }}" />
+            @hook('admin.setting.general.after')
           </div>
 
           <div class="tab-pane fade" id="tab-store">
+
+            @hook('admin.setting.store.before')
+
             <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
             </x-admin-form-switch>
 
@@ -95,9 +103,15 @@
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
             </x-admin-form-textarea>
+
+            @hook('admin.setting.store.after')
+
           </div>
 
           <div class="tab-pane fade" id="tab-image">
+
+            @hook('admin.setting.image.before')
+
             <x-admin-form-image name="logo" title="logo" :value="old('logo', system_setting('base.logo', ''))">
               <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 380*100</div>
             </x-admin-form-image>
@@ -109,9 +123,13 @@
             <x-admin-form-image name="placeholder" title="{{ __('admin/setting.placeholder_image') }}" :value="old('placeholder', system_setting('base.placeholder', ''))">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.placeholder_image_info') }}</div>
             </x-admin-form-image>
+
+            @hook('admin.setting.image.after')
+
           </div>
 
           <div class="tab-pane fade" id="tab-express-company">
+            @hook('admin.setting.express.before')
             <x-admin::form.row title="{{ __('order.express_company') }}">
               <table class="table table-bordered w-max-600">
                 <thead>
@@ -138,9 +156,13 @@
                 </tbody>
               </table>
             </x-admin::form.row>
+            @hook('admin.setting.express.after')
           </div>
 
           <div class="tab-pane fade" id="tab-mail">
+
+            @hook('admin.setting.mail.before')
+
             <x-admin-form-switch name="use_queue" title="{{ __('admin/setting.use_queue') }}" value="{{ old('use_queue', system_setting('base.use_queue', '0')) }}">
               {{-- <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div> --}}
             </x-admin-form-switch>
@@ -182,7 +204,13 @@
               <x-admin-form-input name="mailgun[endpoint]" required title="{{ __('admin/setting.mailgun_endpoint') }}" value="{{ old('endpoint', system_setting('base.mailgun.endpoint', '')) }}">
               </x-admin-form-input>
             </div>
+
+            @hook('admin.setting.mail.after')
+
           </div>
+
+          @hook('admin.setting.after')
+
         </div>
 
         <x-admin::form.row title="">

@@ -114,7 +114,7 @@ class Sidebar extends Component
     {
         $prefix = ['home.'];
 
-        return hook_filter('sidebar.home.prefix', $prefix);
+        return hook_filter('admin.sidebar.home.prefix', $prefix);
     }
 
     /**
@@ -124,7 +124,7 @@ class Sidebar extends Component
     {
         $prefix = ['products.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'];
 
-        return hook_filter('sidebar.product.prefix', $prefix);
+        return hook_filter('admin.sidebar.product.prefix', $prefix);
     }
 
     /**
@@ -134,7 +134,7 @@ class Sidebar extends Component
     {
         $prefix = ['customers.', 'customer_groups.'];
 
-        return hook_filter('sidebar.customer.prefix', $prefix);
+        return hook_filter('admin.sidebar.customer.prefix', $prefix);
     }
 
     /**
@@ -144,7 +144,7 @@ class Sidebar extends Component
     {
         $prefix = ['orders.', 'rmas.', 'rma_reasons.'];
 
-        return hook_filter('sidebar.order.prefix', $prefix);
+        return hook_filter('admin.sidebar.order.prefix', $prefix);
     }
 
     /**
@@ -154,7 +154,7 @@ class Sidebar extends Component
     {
         $prefix = ['pages.'];
 
-        return hook_filter('sidebar.page.prefix', $prefix);
+        return hook_filter('admin.sidebar.page.prefix', $prefix);
     }
 
     /**
@@ -164,7 +164,7 @@ class Sidebar extends Component
     {
         $prefix = ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'];
 
-        return hook_filter('sidebar.setting.prefix', $prefix);
+        return hook_filter('admin.sidebar.setting.prefix', $prefix);
     }
 
     /**
@@ -181,7 +181,7 @@ class Sidebar extends Component
             ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
         ];
 
-        return hook_filter('sidebar.home_routes', $routes);
+        return hook_filter('admin.sidebar.home_routes', $routes);
     }
 
     /**
@@ -198,7 +198,7 @@ class Sidebar extends Component
             ['route' => 'products.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
 
-        return hook_filter('sidebar.product_routes', $routes);
+        return hook_filter('admin.sidebar.product_routes', $routes);
     }
 
     /**
@@ -212,7 +212,7 @@ class Sidebar extends Component
             ['route' => 'customers.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
 
-        return hook_filter('sidebar.customer_routes', $routes);
+        return hook_filter('admin.sidebar.customer_routes', $routes);
     }
 
     /**
@@ -226,7 +226,7 @@ class Sidebar extends Component
             ['route' => 'rma_reasons.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
 
-        return hook_filter('sidebar.order_routes', $routes);
+        return hook_filter('admin.sidebar.order_routes', $routes);
     }
 
     /**
@@ -239,7 +239,7 @@ class Sidebar extends Component
             ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
 
-        return hook_filter('sidebar.pages_routes', $routes);
+        return hook_filter('admin.sidebar.pages_routes', $routes);
     }
 
     /**
@@ -265,7 +265,7 @@ class Sidebar extends Component
             ['route' => 'design_menu.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
         ];
 
-        return hook_filter('sidebar.setting_routes', $routes);
+        return hook_filter('admin.sidebar.setting_routes', $routes);
     }
 
     /**
