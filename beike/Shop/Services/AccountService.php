@@ -37,10 +37,12 @@ class AccountService
         }
         $data['avatar'] = $data['avatar'] ?? '';
 
+        hook_action('service.account.register.before', $data);
+
         $customer = CustomerRepo::create($data);
         if ($customer) {
             $customer->notifyRegistration();
-            hook_action('after_register', $customer);
+            hook_action('service.account.register.after', $customer);
         }
 
         return $customer;

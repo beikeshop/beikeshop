@@ -22,7 +22,7 @@ class CurrencyController extends Controller
             Session::put('currency', $currency);
         }
 
-        hook_action('currency.index', $currency);
+        hook_action('currency.index.after', $currency);
 
         return Redirect::back();
     }

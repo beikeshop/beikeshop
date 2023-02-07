@@ -73,6 +73,8 @@ class CheckoutService
         $guestShippingAddress = $requestData['guest_shipping_address'] ?? [];
         $guestPaymentAddress  = $requestData['guest_payment_address']  ?? [];
 
+        hook_action('service.checkout.update.before', ['request_data' => $requestData, 'cart' => $this->cart]);
+
         if ($shippingAddressId) {
             $this->updateShippingAddressId($shippingAddressId);
         }
@@ -93,7 +95,7 @@ class CheckoutService
             $this->updateGuestPaymentAddress($guestPaymentAddress);
         }
 
-        hook_action('after_checkout_update', ['request_data' => $requestData, 'cart' => $this->cart]);
+        hook_action('service.checkout.update.after', ['request_data' => $requestData, 'cart' => $this->cart]);
 
         return $this->checkoutData();
     }
@@ -181,7 +183,7 @@ class CheckoutService
             throw new \Exception(trans('shop/carts.invalid_payment_method'));
         }
 
-        hook_action('after_checkout_validate', $checkoutData);
+        hook_action('service.checkout.validate_confirm.after', $checkoutData);
     }
 
     private function updateShippingAddressId($shippingAddressId)

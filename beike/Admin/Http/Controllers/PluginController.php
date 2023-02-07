@@ -102,8 +102,12 @@ class PluginController extends Controller
             }
         }
 
+        $data = ['plugin_code' => $code, 'fields' => $fields];
+        hook_action('plugin.update.before', $data);
+
         SettingRepo::update('plugin', $code, $fields);
-        hook_action('after_edit_plugin', ['plugin_code' => $code, 'fields' => $fields]);
+
+        hook_action('plugin.update.after', $data);
 
         return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
     }

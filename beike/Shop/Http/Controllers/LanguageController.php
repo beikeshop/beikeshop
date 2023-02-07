@@ -22,7 +22,7 @@ class LanguageController extends Controller
             Session::put('locale', $lang);
         }
 
-        hook_action('language.index', $lang);
+        hook_action('language.index.after', $lang);
 
         return Redirect::back();
     }
