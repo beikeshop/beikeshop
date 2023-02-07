@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => 'ナビゲーション エディター',
     'product_per_page'       => '各ページに表示される商品の数',
 
+    'checkout_settings'      => 'チェックアウト設定',
     'basic_settings'         => '基本設定',
     'store_settings'         => 'ストア設定',
     'picture_settings'       => '画像設定',

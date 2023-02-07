@@ -304,14 +304,4 @@
       upDate(ordersChart, labels, data);
     });
   </script>
-
-  <script>
-    $.ajax({
-      url: 'https://beikeshop.com/api/version?version={{ config('beike.version') }}',
-      success: function(data) {
-        localStorage.setItem('beike_version', JSON.stringify(data));
-        bk.setVersionUpdateTips()
-      }
-    });
-  </script>
 @endpush

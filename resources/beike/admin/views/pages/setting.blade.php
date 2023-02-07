@@ -18,6 +18,9 @@
             <a class="nav-link" data-bs-toggle="tab" href="#tab-store">{{ __('admin/setting.store_settings') }}</a>
           </li>
           <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-checkout">{{ __('admin/setting.checkout_settings') }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-image">{{ __('admin/setting.picture_settings') }}</a>
           </li>
           <li class="nav-item" role="presentation">
@@ -26,9 +29,7 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-mail">{{ __('admin/setting.mail_settings') }}</a>
           </li>
-
           @hook('admin.setting.nav.after')
-
         </ul>
 
         <div class="tab-content">
@@ -43,12 +44,7 @@
           </div>
 
           <div class="tab-pane fade" id="tab-store">
-
             @hook('admin.setting.store.before')
-
-            <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
-            </x-admin-form-switch>
-
             <x-admin::form.row title="{{ __('admin/setting.default_address') }}">
               <div class="d-lg-flex">
                 <div>
@@ -91,13 +87,6 @@
 
             <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
               <div class="help-text font-size-12 lh-base">主题模板选择</div>
-            </x-admin-form-select>
-
-            <x-admin-form-switch name="tax" title="{{ __('admin/setting.enable_tax') }}" value="{{ old('tax', system_setting('base.tax', '0')) }}">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div>
-            </x-admin-form-switch>
-
-            <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
             </x-admin-form-select>
 
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
@@ -209,8 +198,19 @@
 
           </div>
 
-          @hook('admin.setting.after')
+          <div class="tab-pane fade" id="tab-checkout">
+            <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
+            </x-admin-form-switch>
 
+            <x-admin-form-switch name="tax" title="{{ __('admin/setting.enable_tax') }}" value="{{ old('tax', system_setting('base.tax', '0')) }}">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div>
+            </x-admin-form-switch>
+
+            <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
+            </x-admin-form-select>
+          </div>
+
+          @hook('admin.setting.after')
         </div>
 
         <x-admin::form.row title="">

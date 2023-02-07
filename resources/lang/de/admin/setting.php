@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => 'Navigationseditor',
     'product_per_page'       => 'Die Anzahl der auf jeder Seite angezeigten Produkte',
 
+    'checkout_settings'      => 'Checkout-Einstellungen',
     'basic_settings'         => 'Grundeinstellungen',
     'store_settings'         => 'Store-Einstellungen',
     'picture_settings'       => 'Bildeinstellungen',

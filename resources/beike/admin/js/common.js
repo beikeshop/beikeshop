@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-02-03 17:50:57
+ * @LastEditTime  2023-02-08 15:36:09
  */
 
 export default {
@@ -103,15 +103,44 @@ export default {
   },
 
   // 设置版本更新提示
-  setVersionUpdateTips() {
-    const version = JSON.parse(localStorage.getItem('beike_version'));
-    if (version && version.has_new_version) {
-      localStorage.setItem('version', process.env.VUE_APP_VERSION);
-      $('.new-version').text(version.latest);
-      $('.update-date').text(version.release_date);
-      $('.update-btn').show();
+  versionUpdateTips() {
+    const data = JSON.parse(Cookies.get('beike_version') || null);
+
+    if (data) {
+      if (data.latest === config.beike_version) {
+        return;
+      }
+
+      if (data.has_new_version) {
+        $('.new-version').text(data.latest);
+        $('.update-date').text(data.release_date);
+        $('.update-btn').show();
+      } else {
+        $('.update-btn').hide();
+      }
     } else {
-      $('.update-btn').hide();
+      $http.get(`https://beikeshop.com/api/version?version=${config.beike_version}`).then((res) => {
+        Cookies.set('beike_version', res, { expires: 1 });
+
+        bk.versionUpdateTips();
+      })
     }
-  }
+  },
+
+  // 设置vip更新提示
+  vipUpdateTips() {
+    const data = JSON.parse(Cookies.get('beike_vip') || null);
+
+    if (data) {
+      if (data.vip) {
+        $('.vip-serve').addClass('active');
+      }
+    } else {
+      $http.get(`https://beikeshop.com/api/vip?domain=${config.app_url}`).then((res) => {
+        Cookies.set('beike_vip', res, { expires: 1 });
+
+        bk.vipUpdateTips();
+      })
+    }
+  },
 }

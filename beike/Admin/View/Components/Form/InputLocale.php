@@ -17,7 +17,7 @@ class InputLocale extends Component
 
     public bool $required;
 
-    public function __construct(string $name, string $title, $value, ?string $width = '400', ?bool $required = false)
+    public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false)
     {
         $this->name     = $name;
         $this->title    = $title;

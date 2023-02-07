@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => 'Design Menu',
     'product_per_page'       => 'The Number of Per Page',
 
+    'checkout_settings'      => 'checkout settings',
     'basic_settings'         => 'Basic Settings',
     'store_settings'         => 'Store Settings',
     'picture_settings'       => 'Picture Settings',

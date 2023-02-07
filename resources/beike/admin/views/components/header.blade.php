@@ -12,11 +12,14 @@
         @endforeach
       </ul>
       <ul class="navbar navbar-right">
-        <li class="nav-item update-btn" style="display: none">
+        <li class="nav-item update-btn me-2" style="display: none">
           <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>
         </li>
+        <li class="nav-item vip-serve">
+          <a href="javascript:void(0)" class="nav-link"><img src="/image/vip-icon.png" class="img-fluid"> <span>VIP</span></a>
+        </li>
         <li class="nav-item">
-          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.marketing')</a>
+          <a href="{{ admin_route('marketing.index') }}" class="nav-link">@lang('admin/common.marketing')</a>
         </li>
         <li class="nav-item">
           <div class="dropdown">
@@ -108,7 +111,7 @@
   <div class="mb-4 fs-5 fw-bold text-center">{{ __('admin/common.update_title') }}</div>
   <div class="py-3 px-4 bg-light mx-3 lh-lg mb-4">
     <div>{{ __('admin/common.update_new_version') }}：<span class="new-version fs-5 fw-bold text-success"></span></div>
-    <div>{{ __('admin/common.update_old_version') }}：<span class="fs-5">v{{ config('beike.version') }}</span></div>
+    <div>{{ __('admin/common.update_old_version') }}：<span class="fs-5">{{ config('beike.version') }}</span></div>
     <div>{{ __('admin/common.update_date') }}：<span class="update-date fs-5"></span></div>
   </div>
 
@@ -117,6 +120,7 @@
     <a href="https://beikeshop.com/download" target="_blank" class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
   </div>
 </div>
+
 
 @push('footer')
   <script>
@@ -133,6 +137,15 @@
 
     $('.update-pop .btn-outline-secondary').click(function() {
       layer.close(updatePop)
+    });
+
+    $('.vip-serve').click(function(event) {
+      layer.open({
+        type: 1,
+        title: '',
+        area: ['500px', '80%'],
+        content: '<div><img src="image/vip-info.webp" class="img-fluid"></div>',
+      });
     });
   </script>
 @endpush

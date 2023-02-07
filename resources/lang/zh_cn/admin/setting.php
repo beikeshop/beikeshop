@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => '导航编辑器',
     'product_per_page'       => '每页显示数量',
 
+    'checkout_settings'      => '结账设置',
     'basic_settings'         => '基础设置',
     'store_settings'         => '商店设置',
     'picture_settings'       => '图片设置',

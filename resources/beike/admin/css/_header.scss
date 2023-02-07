@@ -49,16 +49,6 @@
       padding: 0;
       list-style: none;
       > li {
-        html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
-          padding: 0 1rem;
-        }
-
-        @media screen and (max-width: 1200px) {
-          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
-            padding: 0 .2rem;
-          }
-        }
-
         .dropdown {
           &:hover {
             .nav-link {
@@ -92,6 +82,16 @@
     .navbar {
       &.navbar-left {
         li {
+          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
+            padding: 0 1rem;
+          }
+
+          @media screen and (max-width: 1200px) {
+            html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
+              padding: 0 .2rem;
+            }
+          }
+
           a.nav-link {
             position: relative;
 
@@ -121,10 +121,34 @@
 
       &.navbar-right {
         > li {
-          padding: 0 0.3rem !important;
+          &.vip-serve {
+            &:not(.active) {
+              a {
+                color: #999;
+
+                img {
+                  filter: grayscale(100%);
+                }
+              }
+            }
+
+            a {
+              color: #ff6c00;
+            }
+
+            img {
+              width: 22px;
+              position: relative;
+              top: -3px;
+            }
+
+            span {
+              margin-left: 3px;
+            }
+          }
 
           a.nav-link {
-            padding: 0 10px;
+            padding: 0 14px;
           }
 
           &.update-btn a {

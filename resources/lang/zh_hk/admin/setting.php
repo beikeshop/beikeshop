@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => '導航編輯器',
     'product_per_page'       => '每頁顯示商品個數',
 
+    'checkout_settings'      => '結賬設置',
     'basic_settings'         => '基礎設置',
     'store_settings'         => '商店設置',
     'picture_settings'       => '圖片設置',

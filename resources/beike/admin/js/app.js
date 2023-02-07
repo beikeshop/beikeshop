@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-02-03 17:46:06
+ * @LastEditTime  2023-02-08 15:35:25
  */
 
 import http from "../../../js/http";
@@ -51,7 +51,8 @@ if (typeof Vue != 'undefined') {
 }
 
 $(document).ready(function ($) {
-  bk.setVersionUpdateTips();
+  bk.versionUpdateTips();
+  bk.vipUpdateTips();
 
   $.ajaxSetup({
     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},

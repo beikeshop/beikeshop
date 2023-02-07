@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => 'Редактор навигации',
     'product_per_page'       => 'Количество товаров, отображаемых на каждой странице',
 
+    'checkout_settings'      => 'настройки оформления заказа',
     'basic_settings'         => 'Базовые настройки',
     'store_settings'         => 'Настройки магазина',
     'picture_settings'       => 'Настройки изображения',

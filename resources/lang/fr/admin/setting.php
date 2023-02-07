@@ -18,6 +18,7 @@ return [
     'design_menu_index'      => 'Éditeur de navigation',
     'product_per_page'       => 'Le nombre de produits affichés sur chaque page',
 
+    'checkout_settings'      => 'paramètres de paiement',
     'basic_settings'         => 'paramètres de base',
     'store_settings'         => 'paramètres du magasin',
     'picture_settings'       => 'paramètres de l\'image',
