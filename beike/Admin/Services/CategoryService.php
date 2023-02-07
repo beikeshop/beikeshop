@@ -140,7 +140,7 @@ class CategoryService
      *
      * @param int $parentId
      */
-    public function repairCategories(int $parentId = 0)
+    public static function repairCategories(int $parentId = 0)
     {
         $categories = Category::query()->where('parent_id', $parentId)->get();
 
@@ -176,7 +176,7 @@ class CategoryService
                 CategoryPath::query()->create($pathData);
             }
 
-            $this->repairCategories($category->id);
+            self::repairCategories($category->id);
         }
     }
 }

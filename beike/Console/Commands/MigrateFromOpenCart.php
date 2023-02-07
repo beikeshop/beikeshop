@@ -11,8 +11,12 @@
 
 namespace Beike\Console\Commands;
 
+use Beike\Admin\Services\CategoryService;
 use Beike\Admin\Services\ProductService;
 use Beike\Models\Brand;
+use Beike\Models\Category;
+use Beike\Models\CategoryDescription;
+use Beike\Models\CategoryPath;
 use Beike\Models\Product;
 use Beike\Models\ProductDescription;
 use Beike\Models\ProductSku;
@@ -46,6 +50,8 @@ class MigrateFromOpenCart extends Command
 
     private $ocProductImages;
 
+    private $ocProductCategories;
+
     private int $page = 1;
 
     public function __construct()
@@ -59,8 +65,53 @@ class MigrateFromOpenCart extends Command
      */
     public function handle()
     {
-        // $this->importBrands();
-        // $this->importProducts();
+        $this->importCategories();
+        $this->importBrands();
+        $this->importProducts();
+    }
+
+    /**
+     * 导入分类数据
+     */
+    private function importCategories()
+    {
+        Category::query()->truncate();
+        CategoryDescription::query()->truncate();
+        CategoryPath::query()->truncate();
+
+        $this->ocdb->table('category')
+            ->orderBy('category_id')
+            ->chunk(self::PER_PAGE, function ($ocCategories) {
+                $bkCategories = [];
+                foreach ($ocCategories as $ocCategory) {
+                    $bkCategories[] = [
+                        'id'              => $ocCategory->category_id,
+                        'parent_id'       => $ocCategory->parent_id,
+                        'position'        => $ocCategory->sort_order,
+                        'active'          => $ocCategory->status,
+                        'created_at'      => now(),
+                        'updated_at'      => now(),
+                    ];
+                }
+                Category::query()->insert($bkCategories);
+            });
+
+        $descriptions   = [];
+        $ocDescriptions = $this->ocdb->table('category_description')->orderBy('category_id')->get();
+        $langMapping    = array_flip(self::LANG_MAPPING);
+        foreach ($ocDescriptions as $description) {
+            $descriptions[] = [
+                'category_id'     => $description->category_id,
+                'locale'          => $langMapping[$description->language_id],
+                'name'            => $description->name,
+                'content'         => html_entity_decode($description->description),
+                'created_at'      => now(),
+                'updated_at'      => now(),
+            ];
+        }
+        CategoryDescription::query()->insert($descriptions);
+
+        CategoryService::repairCategories();
     }
 
     /**
@@ -94,11 +145,12 @@ class MigrateFromOpenCart extends Command
      */
     private function importProducts()
     {
-        $this->ocProductVariants          = $this->ocdb->table('product_variant')->get()->groupBy('product_id');
-        $this->ocVariantDescriptions      = $this->ocdb->table('variant_description')->get()->groupBy('variant_id');
-        $this->ocVariantValues            = $this->ocdb->table('variant_value')->get()->keyBy('variant_value_id');
-        $this->ocVariantValueDescriptions = $this->ocdb->table('variant_value_description')->get()->groupBy('variant_value_id');
-        $this->ocProductImages            = $this->ocdb->table('product_image')->get()->groupBy('product_id');
+        $this->ocProductVariants              = $this->ocdb->table('product_variant')->get()->groupBy('product_id');
+        $this->ocVariantDescriptions          = $this->ocdb->table('variant_description')->get()->groupBy('variant_id');
+        $this->ocVariantValues                = $this->ocdb->table('variant_value')->get()->keyBy('variant_value_id');
+        $this->ocVariantValueDescriptions     = $this->ocdb->table('variant_value_description')->get()->groupBy('variant_value_id');
+        $this->ocProductImages                = $this->ocdb->table('product_image')->get()->groupBy('product_id');
+        $this->ocProductCategories            = $this->ocdb->table('product_to_category')->get()->groupBy('product_id');
 
         $this->clearData();
         $this->ocdb->table('product')
@@ -147,11 +199,13 @@ class MigrateFromOpenCart extends Command
         $bkProduct['descriptions'] = $this->generateDescriptions($ocProduct);
         $bkProduct['images']       = [$ocProduct->image];
         $bkProduct['skus']         = $this->generateSkus($ocProduct, $productVariants, $childProducts, $variables);
+        $bkProduct['categories']   = $this->generateCategories($ocProduct);
 
         return $bkProduct;
     }
 
     /**
+     * 生成 beike 产品规格
      * @return array[]
      */
     private function generateVariables($ocProduct, $childProducts): array
@@ -376,6 +430,22 @@ class MigrateFromOpenCart extends Command
         }
 
         return $items;
+    }
+
+    /**
+     * 生成商品分类关联
+     *
+     * @param $ocProduct
+     * @return array
+     */
+    private function generateCategories($ocProduct): array
+    {
+        $ocProductCategories   = $this->ocProductCategories[$ocProduct->product_id] ?? [];
+        if ($ocProductCategories) {
+            return $ocProductCategories->pluck('category_id')->toArray();
+        }
+
+        return [];
     }
 
     /**
