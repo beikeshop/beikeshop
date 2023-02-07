@@ -21,6 +21,7 @@
 
 <div class="filter-box">
   @if ($filter_data['price']['min'] != $filter_data['price']['max'])
+    @hookwrapper('category.filter.sidebar.price')
     @push('header')
       <script src="{{ asset('vendor/jquery/jquery-ui/jquery-ui.min.js') }}"></script>
       <link rel="stylesheet" href="{{ asset('vendor/jquery/jquery-ui/jquery-ui.min.css') }}">
@@ -48,8 +49,10 @@
         <input value="{{ $filter_data['price']['max'] }}" class="price-max d-none">
       </div>
     </div>
+    @endhookwrapper
   @endif
 
+  @hookwrapper('category.filter.sidebar.attr')
   @foreach ($filter_data['attr'] as $index => $attr)
   <div class="card">
     <div class="card-header fw-bold p-0">
@@ -66,6 +69,7 @@
     </ul>
   </div>
   @endforeach
+  @endhookwrapper
 </div>
 
 @push('add-scripts')
