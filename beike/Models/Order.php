@@ -13,6 +13,7 @@ namespace Beike\Models;
 
 use Beike\Notifications\NewOrderNotification;
 use Beike\Notifications\UpdateOrderNotification;
+use Beike\Services\StateMachineService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
@@ -58,6 +59,13 @@ class Order extends Base
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function subTotal()
+    {
+        $totals = $this->orderTotals;
+
+        return $totals->where('code', 'sub_total')->first();
+    }
+
     public function getStatusFormatAttribute()
     {
         return trans('order.' . $this->status);
@@ -66,6 +74,17 @@ class Order extends Base
     public function getTotalFormatAttribute()
     {
         return currency_format($this->total, $this->currency_code, $this->currency_value);
+    }
+
+    /**
+     * 获取该订单可以变更的状态
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getNextStatuses()
+    {
+        return StateMachineService::getInstance($this)->nextBackendStatuses();
     }
 
     /**
