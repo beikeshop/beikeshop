@@ -83,7 +83,9 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         try {
-            (new ProductService)->update($product, $request->all());
+            $productData = $request->all();
+            $product     = (new ProductService)->update($product, $productData);
+            hook_action('admin.product.update.after', ['product' => $product, 'data' => $productData]);
 
             return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
@@ -114,6 +116,8 @@ class ProductController extends Controller
             $product->load('brand', 'attributes');
         }
 
+        $product = hook_filter('admin.product.form.product', $product);
+
         $data = [
             'product'            => $product,
             'descriptions'       => $descriptions ?? [],
@@ -127,6 +131,8 @@ class ProductController extends Controller
             ],
             '_redirect'          => $this->getRedirect(),
         ];
+
+        $data = hook_filter('admin.product.form.data', $data);
 
         return view('admin::pages.products.form.form', $data);
     }
