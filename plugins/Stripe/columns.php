@@ -15,7 +15,7 @@ return [
         'label_key' => 'common.publishable_key',
         'type' => 'string',
         'required' => true,
-        'rules' => 'required|size:32',
+        'rules' => 'required|min:32',
         'description' => '公钥(Publishable key)',
     ],
     [
@@ -23,7 +23,7 @@ return [
         'label' => '密钥',
         'type' => 'string',
         'required' => true,
-        'rules' => 'required|size:32',
+        'rules' => 'required|min:32',
         'description' => '密钥(Secret key)',
     ],
     [
