@@ -18,8 +18,11 @@ class OrderList extends JsonResource
     public function toArray($request): array
     {
         $data = [
-            'id'     => $this->id,
-            'number' => $this->number,
+            'id'            => $this->id,
+            'number'        => $this->number,
+            'status_format' => $this->status_format,
+            'next_status'   => $this->getNextStatuses(),
+            'status'        => $this->status,
         ];
 
         return $data;
