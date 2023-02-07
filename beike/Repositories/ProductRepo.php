@@ -40,6 +40,8 @@ class ProductRepo
         }
         $product->load('description', 'skus', 'masterSku', 'brand', 'relations');
 
+        hook_filter('repo.product.get_detail', $product);
+
         return $product;
     }
 

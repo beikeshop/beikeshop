@@ -52,9 +52,9 @@ class OrderController extends Controller
     {
         $customer = current_customer();
         $order    = OrderRepo::getOrderByNumber($number, $customer);
-        $html     = hook_filter('account_order_detail', ['order' => $order, 'html_items' => []]);
+        $data     = hook_filter('account.order.show.data', ['order' => $order, 'html_items' => []]);
 
-        return view('account/order_info', $html);
+        return view('account/order_info', $data);
     }
 
     /**

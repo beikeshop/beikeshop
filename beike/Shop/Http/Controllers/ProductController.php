@@ -25,7 +25,8 @@ class ProductController extends Controller
             'product'   => (new ProductDetail($product))->jsonSerialize(),
             'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
         ];
-        $data = hook_filter('product.show', $data);
+
+        $data = hook_filter('product.show.data', $data);
 
         return view('product', $data);
     }
