@@ -13,7 +13,6 @@
 namespace Beike\Shop\Services\TotalServices;
 
 use Beike\Shop\Services\CheckoutService;
-use Beike\Shop\Services\TotalService;
 
 class SubtotalService
 {
@@ -24,7 +23,7 @@ class SubtotalService
     public static function getTotal(CheckoutService $checkout)
     {
         $totalService = $checkout->totalService;
-        $amount       = self::getAmount($totalService);
+        $amount       = $totalService->getSubTotal();
         $totalData    = [
             'code'          => 'sub_total',
             'title'         => trans('shop/carts.product_total'),
@@ -36,12 +35,5 @@ class SubtotalService
         $totalService->totals[] = $totalData;
 
         return $totalData;
-    }
-
-    public static function getAmount(TotalService $totalService)
-    {
-        $carts = $totalService->cartProducts;
-
-        return collect($carts)->sum('subtotal');
     }
 }

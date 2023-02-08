@@ -102,4 +102,16 @@ class TotalService
 
         return $this->totals;
     }
+
+    /**
+     * 获取当前购物车商品总额
+     *
+     * @return mixed
+     */
+    public function getSubTotal(): mixed
+    {
+        $carts = $this->cartProducts;
+
+        return collect($carts)->sum('subtotal');
+    }
 }
