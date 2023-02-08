@@ -11,6 +11,7 @@
 
 namespace Plugin\FlatShipping;
 
+use Beike\Admin\Http\Resources\PluginResource;
 use Beike\Plugin\Plugin;
 use Beike\Shop\Services\CheckoutService;
 
@@ -27,12 +28,13 @@ class Bootstrap
     public function getQuotes(CheckoutService $checkout, Plugin $plugin): array
     {
         $code = $plugin->code;
+        $pluginResource = (new PluginResource($plugin))->jsonSerialize();
         $quotes[] = [
             'type' => 'shipping',
             'code' => "{$code}.0",
-            'name' => $plugin->getName(),
-            'description' => $plugin->getDescription(),
-            'icon' => plugin_resize($code, $plugin->icon),
+            'name' => $pluginResource['name'],
+            'description' => $pluginResource['description'],
+            'icon' => $pluginResource['icon'],
             'cost' => $this->getShippingFee($checkout),
         ];
         return $quotes;

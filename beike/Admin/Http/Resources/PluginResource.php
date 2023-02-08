@@ -18,7 +18,7 @@ class PluginResource extends JsonResource
     {
         $currentLocale = locale();
 
-        $name = is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
+        $name        = is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
         $description = is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
 
         $data = [

@@ -11,6 +11,7 @@
 
 namespace Beike\Services;
 
+use Beike\Admin\Http\Resources\PluginResource;
 use Beike\Repositories\PluginRepo;
 use Beike\Shop\Services\CheckoutService;
 use Illuminate\Support\Str;
@@ -40,9 +41,10 @@ class ShippingMethodService
             }
             $quotes = (new $className)->getQuotes($checkout, $plugin);
             if ($quotes) {
+                $pluginResource    = (new PluginResource($plugin))->jsonSerialize();
                 $shippingMethods[] = [
                     'code'   => $pluginCode,
-                    'name'   => $plugin->name,
+                    'name'   => $pluginResource['name'],
                     'quotes' => $quotes,
                 ];
             }

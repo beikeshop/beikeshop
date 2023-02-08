@@ -1,7 +1,13 @@
 {
     "code": "flat_shipping",
-    "name": "固定运费",
-    "description": "按订单总额收取固定运费",
+    "name": {
+        "zh_cn": "固定运费",
+        "en": "Flat Rate Shipping"
+    },
+    "description": {
+        "zh_cn": "按订单总额收取固定运费",
+        "en": "Fixed shipping fee by order total"
+    },
     "type": "shipping",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
