@@ -26,6 +26,7 @@ return [
 
     'shipping'              => '配送方式',
     'payment'               => '支付方式',
+    'social'                => '社交網絡',
     'total'                 => '訂單計算',
-    'view'                  => '頁面修改',
+    'feature'               => '功能模塊',
 ];

@@ -27,5 +27,6 @@ return [
     'shipping'              => 'metodo di spedizione',
     'payment'               => 'metodo di pagamento',
     'total'                 => 'Calcolo dell\'ordine',
-    'view'                  => 'modifica pagina',
+    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];

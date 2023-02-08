@@ -2,7 +2,7 @@
     "code": "latest_products",
     "name": "最新商品列表",
     "description": "首页菜单添加最新商品列表功能",
-    "type": "view",
+    "type": "feature",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
     "author": {

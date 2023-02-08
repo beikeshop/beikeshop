@@ -28,6 +28,5 @@ return [
     'payment'               => 'Payment',
     'social'                => 'Social',
     'total'                 => 'Total',
-    'view'                  => 'View',
-    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];

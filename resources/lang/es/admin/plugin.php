@@ -27,5 +27,6 @@ return [
     'shipping'              => 'Método de entrega',
     'payment'               => 'método de pago',
     'total'                 => 'Cálculo de pedidos',
-    'view'                  => 'modificación de página',
+    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];

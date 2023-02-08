@@ -27,5 +27,6 @@ return [
     'shipping'              => 'способ доставки',
     'payment'               => 'метод оплаты',
     'total'                 => 'Расчет заказа',
-    'view'                  => 'модификация страницы',
+    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];

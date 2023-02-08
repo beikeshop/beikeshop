@@ -27,5 +27,6 @@ return [
     'shipping'              => '配送方法',
     'payment'               => '支払い方法',
     'total'                 => '注文計算',
-    'view'                  => 'ページの変更',
+    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];

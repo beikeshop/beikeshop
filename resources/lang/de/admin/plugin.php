@@ -27,5 +27,6 @@ return [
     'shipping'              => 'Versandart',
     'payment'               => 'Zahlungsmethode',
     'total'                 => 'Auftragsberechnung',
-    'view'                  => 'Seitenänderung',
+    'social'                => 'Social',
+    'feature'               => 'Feature',
 ];
