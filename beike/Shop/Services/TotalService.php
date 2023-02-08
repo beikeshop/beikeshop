@@ -21,6 +21,7 @@ class TotalService
         'subtotal',
         'tax',
         'shipping',
+        'customer_discount',
         'order_total',
     ];
 

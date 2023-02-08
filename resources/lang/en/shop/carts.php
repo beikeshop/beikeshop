@@ -17,6 +17,7 @@ return [
     'quantity'                 => 'Quantity',
     'subtotal'                 => 'Subtotal',
     'product_total'            => 'Product Total',
+    'customer_discount'        => 'Customer Discount',
     'order_total'              => 'Order Total',
     'shipping_fee'             => 'Shipping Fee',
     'all'                      => 'All',

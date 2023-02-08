@@ -17,6 +17,7 @@ return [
     'quantity'                 => '数量',
     'subtotal'                 => '小计',
     'product_total'            => '商品总计',
+    'customer_discount'        => '会员优惠',
     'order_total'              => '应付总金额',
     'shipping_fee'             => '运费',
     'all'                      => '全部',
