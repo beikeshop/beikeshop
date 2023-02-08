@@ -147,8 +147,10 @@ class StateMachineService
      */
     public function nextBackendStatuses(): array
     {
+        $machines = $this->getMachines();
+
         $currentStatusCode = $this->order->status;
-        $nextStatus        = self::MACHINES[$currentStatusCode] ?? [];
+        $nextStatus        = $machines[$currentStatusCode] ?? [];
 
         if (empty($nextStatus)) {
             return [];
@@ -185,6 +187,12 @@ class StateMachineService
             return;
         }
         foreach ($functions as $function) {
+            if ($function instanceof \Closure) {
+                $function();
+
+                continue;
+            }
+
             if (! method_exists($this, $function)) {
                 throw new \Exception("{$function} not exist in StateMachine!");
             }
@@ -216,6 +224,17 @@ class StateMachineService
     }
 
     /**
+     * 获取状态机流程, 此处通过 filter hook 可以被外部插件修改
+     * @return mixed
+     */
+    private function getMachines()
+    {
+        $machines = self::MACHINES;
+
+        return hook_filter('service.state_machine.machines', $machines);
+    }
+
+    /**
      * 通过订单当前状态以及即将变为的状态获取需要触发的事件
      *
      * @param $oldStatus
@@ -224,7 +243,9 @@ class StateMachineService
      */
     private function getFunctions($oldStatus, $newStatus): array
     {
-        return self::MACHINES[$oldStatus][$newStatus] ?? [];
+        $machines = $this->getMachines();
+
+        return $machines[$oldStatus][$newStatus] ?? [];
     }
 
     /**
