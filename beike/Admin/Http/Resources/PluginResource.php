@@ -16,13 +16,18 @@ class PluginResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $currentLocale = locale();
+
+        $name = is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
+        $description = is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
+
         $data = [
-            'name'        => $this->name,
+            'code'        => $this->code,
+            'name'        => $name,
+            'description' => $description,
+            'path'        => $this->path,
             'version'     => $this->version,
             'dir_name'    => $this->dirName,
-            'path'        => $this->path,
-            'code'        => $this->code,
-            'description' => $this->description,
             'type'        => $this->type,
             'type_format' => trans('admin/plugin.' . $this->type),
             'icon'        => plugin_resize($this->code, $this->icon),

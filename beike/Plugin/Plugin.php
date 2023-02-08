@@ -66,14 +66,14 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this;
     }
 
-    public function setName(string $name): self
+    public function setName(string|array $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(string|array $description): self
     {
         $this->description = $description;
 
