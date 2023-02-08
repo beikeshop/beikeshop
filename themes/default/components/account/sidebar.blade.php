@@ -25,6 +25,9 @@
       <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.rma.index') || equal_route('shop.account.rma.show') ? 'active' : '' }}"
         href="{{ shop_route('account.rma.index') }}">
         <span>{{ __('shop/account.rma.index') }}</span></a>
+
+        @hook('account.sidebar.before.logout')
+
       <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
         <span>{{ __('common.sign_out') }}</span></a>
     </nav>

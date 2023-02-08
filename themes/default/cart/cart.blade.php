@@ -75,6 +75,7 @@
                 </tbody>
               </table>
             </div>
+            @hook('carts.products.after')
           </div>
         </div>
       </div>
