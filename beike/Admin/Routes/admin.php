@@ -154,15 +154,25 @@ Route::prefix($adminName)
                 Route::middleware('can:marketing_buy')->post('marketing/{code}/buy', [Controllers\MarketingController::class, 'buy'])->name('marketing.buy');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
 
-                // 单页
+                // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
                 Route::middleware('can:pages_index')->get('pages/autocomplete', [Controllers\PagesController::class, 'autocomplete'])->name('pages.autocomplete');
                 Route::middleware('can:pages_create')->get('pages/create', [Controllers\PagesController::class, 'create'])->name('pages.create');
-                Route::middleware('can:pages_show')->get('pages/{code}/edit', [Controllers\PagesController::class, 'edit'])->name('pages.edit');
+                Route::middleware('can:pages_show')->get('pages/{page}/edit', [Controllers\PagesController::class, 'edit'])->name('pages.edit');
                 Route::middleware('can:pages_show')->get('pages/{page}/name', [Controllers\PagesController::class, 'name'])->name('pages.name');
                 Route::middleware('can:pages_create')->post('pages', [Controllers\PagesController::class, 'store'])->name('pages.store');
                 Route::middleware('can:pages_update')->put('pages/{page}', [Controllers\PagesController::class, 'update'])->name('pages.update');
                 Route::middleware('can:pages_delete')->delete('pages/{page}', [Controllers\PagesController::class, 'destroy'])->name('pages.destroy');
+
+                // 文章分类
+                Route::middleware('can:page_categories_index')->get('page_categories', [Controllers\PageCategoryController::class, 'index'])->name('page_categories.index');
+                Route::middleware('can:page_categories_index')->get('page_categories/autocomplete', [Controllers\PageCategoryController::class, 'autocomplete'])->name('page_categories.autocomplete');
+                Route::middleware('can:page_categories_create')->get('page_categories/create', [Controllers\PageCategoryController::class, 'create'])->name('page_categories.create');
+                Route::middleware('can:page_categories_show')->get('page_categories/{page_category}/edit', [Controllers\PageCategoryController::class, 'edit'])->name('page_categories.edit');
+                Route::middleware('can:page_categories_show')->get('page_categories/{page_category}/name', [Controllers\PageCategoryController::class, 'name'])->name('page_categories.name');
+                Route::middleware('can:page_categories_create')->post('page_categories', [Controllers\PageCategoryController::class, 'store'])->name('page_categories.store');
+                Route::middleware('can:page_categories_update')->put('page_categories/{page_category}', [Controllers\PageCategoryController::class, 'update'])->name('page_categories.update');
+                Route::middleware('can:page_categories_delete')->delete('page_categories/{page_category}', [Controllers\PageCategoryController::class, 'destroy'])->name('page_categories.destroy');
 
                 // 商品
                 Route::middleware('can:products_restore')->put('products/restore', [Controllers\ProductController::class, 'restore']);

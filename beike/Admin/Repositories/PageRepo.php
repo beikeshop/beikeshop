@@ -70,14 +70,31 @@ class PageRepo
             $page = new Page();
         }
         $page->fill([
-            'position' => $data['position'] ?? 0,
-            'active'   => $data['active']   ?? true,
+            'page_category_id' => (int) ($data['page_category_id'] ?? 0),
+            'position'         => $data['position'] ?? 0,
+            'active'           => $data['active']   ?? true,
+            'author'           => $data['author']   ?? true,
+            'views'            => $data['views']    ?? 0,
         ]);
+
         $page->saveOrFail();
 
         $page->descriptions()->delete();
         $page->descriptions()->createMany($data['descriptions']);
-        $page->load(['descriptions']);
+
+        $products = $data['products'] ?? [];
+        if ($products) {
+            $items = [];
+            foreach ($products as $item) {
+                $items[] = [
+                    'product_id' => $item,
+                ];
+            }
+            $page->pageProducts()->delete();
+            $page->pageProducts()->createMany($items);
+        }
+
+        $page->load(['descriptions', 'pageProducts']);
 
         return $page;
     }

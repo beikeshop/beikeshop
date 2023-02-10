@@ -7,8 +7,10 @@
 @section('content')
   <div class="container">
     <x-shop-breadcrumb type="page" :value="$page['id']" />
-    <div class="row">
-      {!! $page['content'] !!}
+    <div class="card">
+      <div class="card-body">
+        {!! $page_format['content'] !!}
+      </div>
     </div>
   </div>
 @endsection

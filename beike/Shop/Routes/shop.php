@@ -19,6 +19,7 @@ use Beike\Shop\Http\Controllers\CurrencyController;
 use Beike\Shop\Http\Controllers\FileController;
 use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\LanguageController;
+use Beike\Shop\Http\Controllers\PageCategoryController;
 use Beike\Shop\Http\Controllers\PageController;
 use Beike\Shop\Http\Controllers\ProductController;
 use Beike\Shop\Http\Controllers\ZoneController;
@@ -54,6 +55,8 @@ Route::prefix('/')
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
+        Route::get('page_categories', [PageCategoryController::class, 'home'])->name('page_categories.home');
+        Route::get('page_categories/{page_category}', [PageCategoryController::class, 'show'])->name('page_categories.show');
         Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
 
         Route::get('products/search', [ProductController::class, 'search'])->name('products.search');

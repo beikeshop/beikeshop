@@ -152,7 +152,7 @@ class Sidebar extends Component
      */
     private function getPageSubPrefix()
     {
-        $prefix = ['pages.'];
+        $prefix = ['pages.', 'page_categories.'];
 
         return hook_filter('admin.sidebar.page.prefix', $prefix);
     }
@@ -230,12 +230,13 @@ class Sidebar extends Component
     }
 
     /**
-     * 获取内容管理子页面路由
+     * 获取文章管理子页面路由
      * @return mixed
      */
     public function getPageSubRoutes()
     {
         $routes = [
+            ['route' => 'page_categories.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'pages.index', 'icon' => 'fa fa-tachometer-alt'],
         ];
 

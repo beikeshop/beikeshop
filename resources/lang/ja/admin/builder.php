@@ -12,6 +12,7 @@
 
 return [
     'heading_title'                    => 'ページ編集',
+    'page_category' => '記事分類',
     'modules_instructions'             => '利用可能なモジュール、クリックしてページに追加',
     'text_floor_prompt'                => '設定 (ページを更新するには、フロア構成を保存して更新する必要があります)',
     'text_new_page'                    => '新しいページを追加',

@@ -140,9 +140,9 @@
           {type: 'product', label: '{{ __('admin/builder.modules_product') }}'},
           {type: 'category', label: '{{ __('admin/builder.text_category') }}'},
           {type: 'page', label: '{{ __('admin/builder.text_information') }}'},
+          {type: 'page_category', label: '{{ __('admin/builder.page_category') }}'},
           {type: 'brand', label: '{{ __('admin/builder.text_manufacturer') }}'},
           {type: 'static',label: '{{ __('admin/builder.text_static') }}'},
-          // {type: 'blog',label: '博客'},
           {type: 'custom',label: '{{ __('admin/builder.text_custom') }}'}
         ],
         static: [
@@ -208,6 +208,9 @@
             break;
           case 'page':
             url = '{{ admin_route('pages.index') }}';
+            break;
+          case 'page_category':
+            url = '{{ admin_route('page_categories.index') }}';
             break;
           default:
             null;
@@ -297,8 +300,11 @@
           case 'brand':
             url = 'brands/autocomplete?name=';
             break;
-            case 'page':
+          case 'page':
             url = 'pages/autocomplete?name=';
+            break;
+          case 'page_category':
+            url = 'page_categories/autocomplete?name=';
             break;
           default:
             null;
@@ -350,8 +356,11 @@
           case 'brand':
             url = `brands/${this.link.value}/name`;
             break;
-            case 'page':
+          case 'page':
             url = `pages/${this.link.value}/name`;
+            break;
+          case 'page_category':
+            url = `page_categories/${this.link.value}/name`;
             break;
           default:
             null;

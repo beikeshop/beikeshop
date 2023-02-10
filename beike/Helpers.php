@@ -9,6 +9,7 @@ use Beike\Repositories\BrandRepo;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
+use Beike\Repositories\PageCategoryRepo;
 use Beike\Repositories\PageRepo;
 use Beike\Repositories\ProductRepo;
 use Beike\Services\CurrencyService;
@@ -117,7 +118,7 @@ function shop_route($route, $params = []): string
  */
 function type_route($type, $value): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'order', 'rma', 'static', 'custom'];
+    $types = ['category', 'product', 'brand', 'page', 'page_category', 'order', 'rma', 'static', 'custom'];
     if (empty($type) || empty($value) || ! in_array($type, $types)) {
         return '';
     }
@@ -133,6 +134,8 @@ function type_route($type, $value): string
         return shop_route('brands.show', [$value]);
     } elseif ($type == 'page') {
         return shop_route('pages.show', ['page' => $value]);
+    } elseif ($type == 'page_category') {
+        return shop_route('page_categories.show', ['page_category' => $value]);
     } elseif ($type == 'order') {
         return shop_route('account.order.show', ['number' => $value]);
     } elseif ($type == 'rma') {
@@ -160,7 +163,7 @@ function type_route($type, $value): string
  */
 function type_label($type, $value, array $texts = []): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'static', 'custom'];
+    $types = ['category', 'product', 'brand', 'page', 'page_category', 'static', 'custom'];
     if (empty($type) || empty($value) || ! in_array($type, $types)) {
         return '';
     }
@@ -179,7 +182,9 @@ function type_label($type, $value, array $texts = []): string
         return BrandRepo::getName($value);
     } elseif ($type == 'page') {
         return PageRepo::getName($value);
-    } elseif ($type == 'static') {
+    } elseif ($type == 'page_category') {
+        return PageCategoryRepo::getName($value);
+    }  elseif ($type == 'static') {
         return trans('shop/' . $value);
     } elseif ($type == 'custom') {
         return $text;

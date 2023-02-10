@@ -11,6 +11,8 @@
 
 namespace Beike\Shop\View\Components;
 
+use Beike\Models\Page;
+use Beike\Models\PageCategory;
 use Beike\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -42,6 +44,10 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleOrderLinks($value));
         } elseif ($type == 'rma') {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleRmaLinks($value));
+        } elseif ($type == 'page') {
+            $breadcrumbs = array_merge($breadcrumbs, $this->handlePageLinks($value));
+        } elseif ($type == 'page_category') {
+            $breadcrumbs = array_merge($breadcrumbs, $this->handlePageCategoryLinks($value));
         } elseif (Str::startsWith($value, 'account')) {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleAccountLinks($value));
         } else {
@@ -169,6 +175,70 @@ class Breadcrumb extends Component
             'title' => $value,
             'url'   => $link['link'],
         ];
+
+        return $links;
+    }
+
+    /**
+     * 获取文章页面包屑
+     *
+     * @param $value
+     * @return array
+     * @throws \Exception
+     */
+    private function handlePageLinks($value): array
+    {
+        $pageId = 0;
+        if (is_array($value)) {
+            $pageId = $value['id'] ?? 0;
+        } elseif (is_int($value)) {
+            $pageId = $value;
+        }
+
+        if (empty($pageId)) {
+            return [];
+        }
+
+        $links    = [];
+        $page     = Page::query()->find($pageId);
+        $category = $page->category;
+        if ($category) {
+            $categoryLink = handle_link(['type' => 'page_category', 'value' => $category]);
+            $links[]      = ['title' => $categoryLink['text'], 'url' => $categoryLink['link']];
+        }
+
+        $productLink = handle_link(['type' => 'page', 'value' => $value]);
+        $links[]     = ['title' => $productLink['text'], 'url' => $productLink['link']];
+
+        return $links;
+    }
+
+    /**
+     * 获取文章页面包屑
+     *
+     * @param $value
+     * @return array
+     * @throws \Exception
+     */
+    private function handlePageCategoryLinks($value): array
+    {
+        $id = 0;
+        if (is_array($value)) {
+            $id = $value['id'] ?? 0;
+        } elseif (is_int($value)) {
+            $id = $value;
+        }
+
+        if (empty($id)) {
+            return [];
+        }
+
+        $links    = [];
+        $category = PageCategory::query()->find($id);
+        if ($category) {
+            $categoryLink = handle_link(['type' => 'page_category', 'value' => $category]);
+            $links[]      = ['title' => $categoryLink['text'], 'url' => $categoryLink['link']];
+        }
 
         return $links;
     }

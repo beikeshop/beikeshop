@@ -12,19 +12,30 @@
 namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Page;
+use Beike\Repositories\PageCategoryRepo;
 use Beike\Shop\Http\Resources\PageDetail;
+use Beike\Shop\Http\Resources\ProductSimple;
 
 class PageController extends Controller
 {
     public function show(Page $page)
     {
-        $page->load('description');
+        $page->load(['description', 'category.description', 'products.description']);
+        $page->increment('views');
+
         $data = [
-            'page' => (new PageDetail($page))->jsonSerialize(),
+            'page'                   => $page,
+            'active_page_categories' => PageCategoryRepo::getActiveList(),
+            'page_format'            => (new PageDetail($page))->jsonSerialize(),
+            'products'               => ProductSimple::collection($page->products)->jsonSerialize(),
         ];
 
         $data = hook_filter('page.show.data', $data);
 
-        return view('pages/detail', $data);
+        if ($page->category) {
+            return view('pages/article', $data);
+        }
+
+        return view('pages/single', $data);
     }
 }

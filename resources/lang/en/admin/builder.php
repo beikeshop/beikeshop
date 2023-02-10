@@ -12,6 +12,7 @@
 
 return [
     'heading_title'                    => 'Page editing',
+    'page_category' => 'Article Category',
     'modules_instructions'             => 'Available modules, click Add to page',
     'text_floor_prompt'                => 'Settings',
     'text_new_page'                    => 'Add new page',
@@ -69,7 +70,7 @@ return [
     'text_disable'                     => 'Disable',
     'text_no_data'                     => 'Data does not exist or has been deleted',
     'text_to_add'                      => 'Go to add',
-    'text_category'                    => 'Category',
+    'text_category'                    => 'Porudct Category',
     'text_information'                 => 'Information',
     'text_manufacturer'                => 'Brand',
     'text_static'                      => 'Fixed connection',

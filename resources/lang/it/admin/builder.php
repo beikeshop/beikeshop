@@ -12,6 +12,7 @@
 
 return [
     'heading_title'                    => 'modifica della pagina',
+    'page_category' => 'classificazione articolo',
     'modules_instructions'             => 'Moduli disponibili, fare clic su Aggiungi alla pagina',
     'text_floor_prompt'                => 'Impostazioni (la configurazione del piano deve essere salvata e aggiornata per aggiornare la pagina)',
     'text_new_page'                    => 'Aggiungi nuova pagina',

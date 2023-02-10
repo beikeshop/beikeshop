@@ -12,15 +12,53 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Page;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
 class PageRepo
 {
     private static $allPagesWithName;
 
-    public static function getBuilder(): Builder
+    /**
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getBuilder(array $filters = []): Builder
     {
-        return Page::query()->with('description');
+        $builder = Page::query()->with('description');
+        if (isset($filters['is_active'])) {
+            $builder->where('active', (bool) $filters['is_active']);
+        }
+
+        return $builder;
+    }
+
+    /**
+     * 获取所有启用的文章列表
+     *
+     * @param array $filters
+     * @return LengthAwarePaginator
+     */
+    public static function getActivePages(array $filters = []): LengthAwarePaginator
+    {
+        $filters['is_active']   = 1;
+        $filters['category_id'] = 0;
+        $builder                = self::getBuilder($filters);
+
+        return $builder->paginate(perPage());
+    }
+
+    /**
+     * 获取启用的非单页
+     *
+     * @return LengthAwarePaginator
+     */
+    public static function getCategoryPages(): LengthAwarePaginator
+    {
+        $filters['is_active'] = 1;
+        $builder              = self::getBuilder($filters)->whereNot('page_category_id', 0);
+
+        return $builder->paginate(perPage());
     }
 
     /**

@@ -15,10 +15,11 @@ use Beike\Admin\Http\Requests\PageRequest;
 use Beike\Admin\Repositories\PageRepo;
 use Beike\Models\Page;
 use Beike\Shop\Http\Resources\PageDetail;
+use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class PagesController
+class PagesController extends Controller
 {
     /**
      * 显示单页列表
@@ -66,14 +67,17 @@ class PagesController
 
     /**
      * @param Request $request
-     * @param int     $pageId
+     * @param Page    $page
      * @return mixed
      */
-    public function edit(Request $request, int $pageId)
+    public function edit(Request $request, Page $page)
     {
+        $page->load(['products.description', 'category.description']);
+
         $data = [
-            'page'         => PageRepo::findByPageId($pageId),
-            'descriptions' => PageRepo::getDescriptionsByLocale($pageId),
+            'page'         => $page,
+            'products'     => ProductSimple::collection($page->products)->jsonSerialize(),
+            'descriptions' => PageRepo::getDescriptionsByLocale($page->id),
         ];
 
         return view('admin::pages.pages.form', $data);

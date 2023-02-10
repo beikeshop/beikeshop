@@ -1,0 +1,112 @@
+@extends('admin::layouts.master')
+
+@section('title', __('admin/page_categories.index'))
+
+@section('page-title-right')
+<x-admin::form.row title="">
+  <button type="button" class="mt-3 btn btn-primary submit-form">{{ __('common.save') }}</button>
+</x-admin::form.row>
+@endsection
+
+@section('content')
+  @if ($errors->has('error'))
+  <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+  @endif
+
+  <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" >{{ __('admin/product.basic_information') }}</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-set" type="button">{{ __('common.data') }}</button>
+    </li>
+  </ul>
+
+  <div id="customer-app-form" class="card">
+    <div class="card-body h-min-600">
+      <form novalidate class="needs-validation"
+        action="{{ $page_category->id ? admin_route('page_categories.update', [$page_category->id]) : admin_route('page_categories.store') }}"
+        method="POST">
+        @csrf
+        @method($page_category->id ? 'PUT' : 'POST')
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="tab-content">
+            <ul class="nav nav-tabs mb-3" role="tablist">
+              @foreach (locales() as $language)
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link {{ $loop->first ? 'active' : '' }}" data-bs-toggle="tab" data-bs-target="#tab-{{ $language['code'] }}" type="button" >{{ $language['name'] }}</button>
+                </li>
+              @endforeach
+            </ul>
+            <div class="tab-content">
+              @foreach (locales() as $language)
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
+                  @php
+                    $error_title = $errors->first("descriptions.{$language['code']}.title");
+                  @endphp
+                  <x-admin-form-input
+                    error="{{ $error_title }}"
+                    name="descriptions[{{ $language['code'] }}][title]"
+                    title="{{ __('admin/page.info_title') }}"
+                    :required="true"
+                    value="{{ old('descriptions.' . $language['code'] . '.title', $descriptions[$language['code']]['title'] ?? '') }}"
+                  />
+                  <x-admin::form.row title="{{ __('page_category.text_summary') }}">
+                    <div class="input-group w-max-400">
+                      <textarea rows="4" type="text" name="descriptions[{{ $language['code'] }}][summary]" class="form-control wp-400" placeholder="分类概述">{{ old('descriptions.' . $language['code'] . '.summary', $descriptions[$language['code']]['summary'] ?? '') }}</textarea>
+                    </div>
+                  </x-admin::form.row>
+
+                  <input type="hidden" name="descriptions[{{ $language['code'] }}][locale]" value="{{ $language['code'] }}">
+                  <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_title') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
+                  <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="{{ __('admin/setting.meta_description') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
+                  <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keywords]" title="{{ __('admin/setting.meta_keywords') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_keywords', $descriptions[$language['code']]['meta_keywords'] ?? '') }}" />
+                </div>
+              @endforeach
+            </div>
+          </div>
+          <div class="tab-pane fade" id="tab-set">
+            <x-admin::form.row title="{{ __('admin/category.upper_category') }}">
+              <div class="wp-400">
+                <input type="text" value="{{ $page_category->parent->description->title ?? '' }}" id="categories-autocomplete" class="form-control wp-400 " />
+                <input type="hidden" name="parent_id" value="{{ old('categories_id', $page_category->parent->id ?? '') }}" />
+              </div>
+            </x-admin::form.row>
+            <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" value="{{ old('position', $page_category->position ?? 0) }}" />
+            <x-admin-form-switch name="active" title="{{ __('common.status') }}" value="{{ old('active', $page_category->active ?? 1) }}" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+@endsection
+
+@push('footer')
+  <script>
+    $(document).ready(function($) {
+      $('.submit-form').click(function () {
+        $('.needs-validation').submit()
+      })
+
+      $('#categories-autocomplete').autocomplete({
+        'source': function(request, response) {
+          $http.get(`page_categories/autocomplete?name=${encodeURIComponent(request)}`, null, {
+            hload: true
+          }).then((res) => {
+            response($.map(res.data, function(item) {
+              return {
+                label: item['name'],
+                value: item['id']
+              }
+            }));
+          })
+        },
+        'select': function(item) {
+          $(this).val(item['label']);
+          $('input[name="parent_id"]').val(item['value']);
+        }
+      });
+    })
+  </script>
+@endpush

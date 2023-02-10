@@ -12,6 +12,7 @@
 
 return [
     'heading_title'                    => '页面编辑',
+    'page_category'                    => '文章分类',
     'modules_instructions'             => '可用模块，点击添加至页面',
     'text_floor_prompt'                => '设置（楼层配置需要保存刷新页面才会更新）',
     'text_new_page'                    => '添加新页面',
@@ -69,9 +70,9 @@ return [
     'text_disable'                     => '禁用',
     'text_no_data'                     => '数据不存在或已被删除',
     'text_to_add'                      => '去添加',
-    'text_category'                    => '分类',
-    'text_information'                 => '信息页面',
-    'text_manufacturer'                => '品牌',
+    'text_category'                    => '商品分类',
+    'text_information'                 => '特定页面',
+    'text_manufacturer'                => '商品品牌',
     'text_static'                      => '固定连接',
     'text_custom'                      => '自定义',
     'text_top_text'                    => '顶部文字',
