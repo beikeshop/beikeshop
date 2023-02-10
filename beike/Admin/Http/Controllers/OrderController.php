@@ -35,6 +35,7 @@ class OrderController extends Controller
             'orders'   => OrderList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
         ];
+        $data = hook_filter('admin.order.index.data', $data);
 
         return view('admin::pages.orders.index', $data);
     }
@@ -51,6 +52,7 @@ class OrderController extends Controller
         try {
             $orders = OrderRepo::filterAll($request->all());
             $items  = OrderSimple::collection($orders)->jsonSerialize();
+            $items  = hook_filter('admin.order.export.data', $items);
 
             return $this->downloadCsv('orders', $items, 'order');
         } catch (\Exception $e) {
@@ -71,6 +73,7 @@ class OrderController extends Controller
         $order->load(['orderTotals', 'orderHistories', 'orderShipments']);
         $data             = hook_filter('admin.order.show.data', ['order' => $order, 'html_items' => []]);
         $data['statuses'] = StateMachineService::getInstance($order)->nextBackendStatuses();
+        $data             = hook_filter('admin.order.show.data', $data);
 
         return view('admin::pages.orders.form', $data);
     }
@@ -93,6 +96,10 @@ class OrderController extends Controller
 
         $stateMachine = new StateMachineService($order);
         $stateMachine->setShipment($shipment)->changeStatus($status, $comment, $notify);
+
+        $orderStatusData = $request->all();
+
+        hook_action('admin.order.update_status.after', $orderStatusData);
 
         return json_success(trans('common.updated_success'));
     }

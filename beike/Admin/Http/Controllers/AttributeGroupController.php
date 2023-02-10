@@ -21,6 +21,7 @@ class AttributeGroupController extends Controller
         $data = [
             'attribute_groups' => AttributeGroupRepo::getList(),
         ];
+        $data = hook_filter('admin.attribute_group.index.data', $data);
 
         return view('admin::pages.attribute_group.index', $data);
     }

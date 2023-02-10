@@ -28,6 +28,8 @@ class RmaReasonController extends Controller
             'rmaReasons' => RmaReasonDetail::collection($rmaReasons)->jsonSerialize(),
         ];
 
+        $data = hook_filter('admin.rma_reason.index.data', $data);
+
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
         }

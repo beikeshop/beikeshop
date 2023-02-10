@@ -21,6 +21,7 @@ class DesignController extends Controller
             'editors'         => ['editor-slide_show', 'editor-image401', 'editor-tab_product', 'editor-product', 'editor-image100', 'editor-brand', 'editor-icons', 'editor-rich_text'],
             'design_settings' => system_setting('base.design_setting'),
         ];
+        $data = hook_filter('admin.design.index.data', $data);
 
         return view('admin::pages.design.builder.index', $data);
     }
@@ -47,6 +48,7 @@ class DesignController extends Controller
             'content'   => DesignService::handleModuleContent($moduleCode, $content),
             'design'    => (bool) $request->get('design'),
         ];
+        $viewData = hook_filter('admin.design.preview.data', $viewData);
 
         return view($viewPath, $viewData);
     }
@@ -63,6 +65,8 @@ class DesignController extends Controller
         $content    = json_decode($request->getContent(), true);
         $moduleData = DesignService::handleRequestModules($content);
         SettingRepo::storeValue('design_setting', $moduleData);
+
+        hook_action('admin.design.update.after', $moduleData);
 
         return json_success(trans('common.updated_success'));
     }

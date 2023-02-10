@@ -29,6 +29,8 @@ class ProductController extends Controller
             'type'       => 'products',
         ];
 
+        $data = hook_filter('admin.product.index.data', $data);
+
         if ($request->expectsJson()) {
             return $products;
         }
@@ -49,6 +51,8 @@ class ProductController extends Controller
             'type'       => 'trashed',
         ];
 
+        $data = hook_filter('admin.product.trashed.data', $data);
+
         if ($request->expectsJson()) {
             return $products;
         }
@@ -64,7 +68,15 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         try {
-            (new ProductService)->create($request->all());
+            $requestData = $request->all();
+            $product     = (new ProductService)->create($requestData);
+
+            $data = [
+                'request_data' => $requestData,
+                'product'      => $product,
+            ];
+
+            hook_action('admin.product.store.after', $data);
 
             return redirect()->to(admin_route('products.index'))
                 ->with('success', trans('common.created_success'));
@@ -83,9 +95,14 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         try {
-            $productData = $request->all();
-            $product     = (new ProductService)->update($product, $productData);
-            hook_action('admin.product.update.after', ['product' => $product, 'data' => $productData]);
+            $requestData = $request->all();
+            $product     = (new ProductService)->update($product, $requestData);
+
+            $data = [
+                'request_data' => $requestData,
+                'product'      => $product,
+            ];
+            hook_action('admin.product.update.after', $data);
 
             return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
@@ -96,6 +113,7 @@ class ProductController extends Controller
     public function destroy(Request $request, Product $product)
     {
         $product->delete();
+        hook_action('admin.product.destroy.after', $product);
 
         return json_success(trans('common.deleted_success'));
     }
@@ -104,6 +122,8 @@ class ProductController extends Controller
     {
         $productId = $request->id ?? 0;
         Product::withTrashed()->find($productId)->restore();
+
+        hook_action('admin.product.restore.after', $productId);
 
         return ['success' => true];
     }
@@ -174,7 +194,10 @@ class ProductController extends Controller
 
     public function destroyByIds(Request $request)
     {
-        ProductRepo::DeleteByIds($request->get('ids'));
+        $productIds = $request->get('ids');
+        ProductRepo::DeleteByIds($productIds);
+
+        hook_action('admin.product.destroy_by_ids.after', $productIds);
 
         return json_success(trans('common.deleted_success'), []);
     }

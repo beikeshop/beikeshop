@@ -23,7 +23,7 @@ class CountryController extends Controller
         $data = [
             'country' => $countries,
         ];
-
+        $data = hook_filter('admin.country.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
         }
@@ -33,21 +33,27 @@ class CountryController extends Controller
 
     public function store(Request $request)
     {
-        $Country = CountryRepo::create($request->only('name', 'code', 'sort_order', 'status'));
+        $country = CountryRepo::create($request->only('name', 'code', 'sort_order', 'status'));
 
-        return json_success(trans('common.created_success'), $Country);
+        hook_action('admin.country.store.after', $country);
+
+        return json_success(trans('common.created_success'), $country);
     }
 
     public function update(Request $request, int $id)
     {
-        $Country = CountryRepo::update($id, $request->only('name', 'code', 'sort_order', 'status'));
+        $country = CountryRepo::update($id, $request->only('name', 'code', 'sort_order', 'status'));
 
-        return json_success(trans('common.updated_success'), $Country);
+        hook_action('admin.country.store.after', $country);
+
+        return json_success(trans('common.updated_success'), $country);
     }
 
     public function destroy(int $id)
     {
         CountryRepo::delete($id);
+
+        hook_action('admin.country.destroy.after', $id);
 
         return json_success(trans('common.deleted_success'));
     }

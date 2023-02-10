@@ -27,6 +27,7 @@ class PluginController extends Controller
     {
         $plugins         = app('plugin')->getPlugins();
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data            = hook_filter('admin.plugin.index.data', $data);
 
         return view('admin::pages.plugins.index', $data);
     }
@@ -82,7 +83,14 @@ class PluginController extends Controller
         $columnView = $plugin->getColumnView();
         $view       = $columnView ?: 'admin::pages.plugins.form';
 
-        return view($view, ['plugin' => $plugin]);
+        $data = [
+            'view'   => $view,
+            'plugin' => $plugin,
+        ];
+
+        $data = hook_filter('admin.plugin.edit.data', $data);
+
+        return view($view, $data);
     }
 
     /**

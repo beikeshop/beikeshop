@@ -29,6 +29,7 @@ class LanguageController extends Controller
         $data = [
             'languages' => $languages,
         ];
+        $data = hook_filter('admin.language.index.data', $data);
 
         return view('admin::pages.languages.index', $data);
     }

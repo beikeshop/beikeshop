@@ -16,6 +16,7 @@ class FileManagerController extends Controller
     public function index()
     {
         $data = (new FileManagerService)->getDirectories();
+        $data = hook_filter('admin.file_manager.index.data', $data);
 
         return view('admin::pages.file_manager.index', ['directories' => $data]);
     }
@@ -33,7 +34,9 @@ class FileManagerController extends Controller
         $page       = (int) $request->get('page');
         $perPage    = (int) $request->get('per_page');
 
-        return (new FileManagerService)->getFiles($baseFolder, $page, $perPage);
+        $data = (new FileManagerService)->getFiles($baseFolder, $page, $perPage);
+
+        return hook_filter('admin.file_manager.files.data', $data);
     }
 
     /**
@@ -46,7 +49,9 @@ class FileManagerController extends Controller
     {
         $baseFolder = $request->get('base_folder');
 
-        return (new FileManagerService)->getDirectories($baseFolder);
+        $data = (new FileManagerService)->getDirectories($baseFolder);
+
+        return hook_filter('admin.file_manager.directories.data', $data);
     }
 
     /**

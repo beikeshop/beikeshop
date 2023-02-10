@@ -24,6 +24,8 @@ class RegionController
             'countries' => CountryRepo::all(),
         ];
 
+        $data = hook_filter('admin.region.index.data', $data);
+
         return view('admin::pages.regions.index', $data);
     }
 

@@ -28,7 +28,7 @@ class BrandController extends Controller
         $data   = [
             'brands' => $brands,
         ];
-
+        $data = hook_filter('admin.brand.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
         }
@@ -44,7 +44,10 @@ class BrandController extends Controller
      */
     public function store(Request $request): array
     {
+        $beforeData = $request->all();
+        hook_action('admin.brand.store.before', $beforeData);
         $brand = BrandRepo::create($request->all());
+        hook_action('admin.brand.store.after', $brand);
 
         return json_success(trans('common.created_success'), $brand);
     }
@@ -54,14 +57,22 @@ class BrandController extends Controller
      */
     public function update(Request $request, int $id): array
     {
+        $requestData = $request->all();
+        $beforeData  = [
+            'brand_id' => $id,
+            'data'     => $requestData,
+        ];
+        hook_action('admin.brand.update.before', $beforeData);
         $brand = BrandRepo::update($id, $request->all());
+        hook_action('admin.brand.update.after', $brand);
 
         return json_success(trans('common.updated_success'), $brand);
     }
 
-    public function destroy(int $addressId): array
+    public function destroy(int $brandId): array
     {
-        BrandRepo::delete($addressId);
+        BrandRepo::delete($brandId);
+        hook_action('admin.brand.destroy.after', $brandId);
 
         return json_success(trans('common.deleted_success'));
     }

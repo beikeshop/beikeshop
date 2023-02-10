@@ -26,6 +26,8 @@ class RmaController extends Controller
             'rmas_format' => RmaDetail::collection($rmas)->jsonSerialize(),
         ];
 
+        $data = hook_filter('admin.rma.index.data', $data);
+
         return view('admin::pages.rmas.index', $data);
     }
 
@@ -43,24 +45,29 @@ class RmaController extends Controller
             'types'     => RmaRepo::getTypes(),
         ];
 
+        $data = hook_filter('admin.rma.show.data', $data);
+
         return view('admin::pages.rmas.info', $data);
     }
 
     public function addHistory(Request $request, int $id)
     {
         RmaRepo::addHistory($id, $request->only('status', 'notify', 'comment'));
+        $data = [
+            'rma'      => (new RmaDetail(RmaRepo::find($id)))->jsonSerialize(),
+            'statuses' => RmaRepo::getStatuses(),
+        ];
 
-         $data = [
-             'rma'      => (new RmaDetail(RmaRepo::find($id)))->jsonSerialize(),
-             'statuses' => RmaRepo::getStatuses(),
-         ];
+        hook_filter('admin.rma.add_history.data', $data);
 
-       return json_success(trans('common.updated_success'), $data);
+        return json_success(trans('common.updated_success'), $data);
     }
 
     public function destroy(int $id): array
     {
         RmaRepo::delete($id);
+
+        hook_action('admin.rma.destroy.after', $id);
 
         return json_success(trans('common.deleted_success'));
     }

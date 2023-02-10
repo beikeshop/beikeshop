@@ -20,6 +20,7 @@ class DesignFooterController extends Controller
         $data = [
             'design_settings' => system_setting('base.footer_setting'),
         ];
+        $data = hook_filter('admin.design_footer.index.data', $data);
 
         return view('admin::pages.design.builder.footer', $data);
     }
@@ -37,9 +38,11 @@ class DesignFooterController extends Controller
         $viewPath = 'layout.footer';
 
         $viewData = [
+            'view_path'      => $viewPath,
             'footer_content' => FooterRepo::handleFooterData($content),
             'design'         => (bool) $request->get('design'),
         ];
+        $viewData = hook_filter('admin.design_footer.index.data', $viewData);
 
         return view($viewPath, $viewData);
     }

@@ -20,6 +20,7 @@ class CategoryController extends Controller
         $data       = [
             'categories' => CategoryResource::collection($categories),
         ];
+        $data = hook_filter('admin.category.index.data', $data);
 
         return view('admin::pages.categories.index', $data);
     }
@@ -54,6 +55,7 @@ class CategoryController extends Controller
     public function destroy(Request $request, Category $category): array
     {
         CategoryRepo::delete($category);
+        hook_action('admin.category.destroy.after', $category);
 
         return json_success(trans('common.deleted_success'));
     }
@@ -78,13 +80,16 @@ class CategoryController extends Controller
             'categories'   => CategoryRepo::flatten(locale()),
             '_redirect'    => $this->getRedirect(),
         ];
+        $data = hook_filter('admin.category.form.data', $data);
 
         return view('admin::pages.categories.form', $data);
     }
 
     protected function save(Request $request, ?Category $category = null)
     {
-        (new CategoryService())->createOrUpdate($request->all(), $category);
+        $category = (new CategoryService())->createOrUpdate($request->all(), $category);
+
+        hook_action('admin.category.save.after', $category);
 
         return redirect($this->getRedirect())->with('success', 'Category created successfully');
     }

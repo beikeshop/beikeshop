@@ -33,7 +33,7 @@ class MarketingController
             'domain'  => str_replace(['http://', 'https://'], '', config('app.url')),
             'types'   => PluginRepo::getTypes(),
         ];
-
+        $data = hook_filter('admin.marketing.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
         }
@@ -53,6 +53,9 @@ class MarketingController
                 'domain' => str_replace(['http://', 'https://'], '', config('app.url')),
                 'plugin' => $plugin,
             ];
+
+            $data = hook_filter('admin.marketing.show.data', $data);
+
             if ($request->expectsJson()) {
                 return $data;
             }

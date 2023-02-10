@@ -29,7 +29,7 @@ class AttributeController extends Controller
             'attribute_list_format' => AttributeResource::collection($attributes),
             'attribute_group'       => AttributeGroupRepo::getList(),
         ];
-
+        $data = hook_filter('admin.attribute.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('success'), $data);
         }
@@ -43,6 +43,7 @@ class AttributeController extends Controller
             'attribute'       => (new AttributeDetailResource(AttributeRepo::find($id)))->jsonSerialize(),
             'attribute_group' => AttributeGroupRepo::getList(),
         ];
+        $data = hook_filter('admin.attribute.show.data', $data);
 
         return view('admin::pages.attributes.form', $data);
     }

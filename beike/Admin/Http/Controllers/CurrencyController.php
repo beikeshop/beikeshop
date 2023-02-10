@@ -26,6 +26,7 @@ class CurrencyController extends Controller
         $data = [
             'currencies' => $currencies,
         ];
+        $data = hook_filter('admin.currency.index.data', $data);
 
         return view('admin::pages.currencies.index', $data);
     }
@@ -42,6 +43,7 @@ class CurrencyController extends Controller
             'status'        => (int) $request->get('status', 0),
         ];
         $currency = CurrencyRepo::create($data);
+        hook_action('admin.currency.store.after', $currency);
 
         return json_success(trans('common.created_success'), $currency);
     }
@@ -65,6 +67,7 @@ class CurrencyController extends Controller
     public function destroy(Request $request, int $currencyId)
     {
         CurrencyRepo::delete($currencyId);
+        hook_action('admin.currency.destroy.after', $currencyId);
 
         return json_success(trans('common.deleted_success'));
     }

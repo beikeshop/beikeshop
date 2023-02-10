@@ -25,6 +25,7 @@ class AdminRoleController extends Controller
         $data = [
             'roles' => Role::query()->get(),
         ];
+        $data = hook_filter('admin.admin_role.index.data', $data);
 
         return view('admin::pages.admin_roles.index', $data);
     }
@@ -35,6 +36,8 @@ class AdminRoleController extends Controller
         $data           = [
             'permissions' => $permissionRepo->getAllPermissions(),
         ];
+
+        $data = hook_filter('admin.admin_role.create.data', $data);
 
         return view('admin::pages.admin_roles.edit', $data);
     }
@@ -48,6 +51,7 @@ class AdminRoleController extends Controller
             'permissions' => $permissionRepo->getAllPermissions(),
             'role'        => $role,
         ];
+        $data = hook_filter('admin.admin_role.edit.data', $data);
 
         return view('admin::pages.admin_roles.edit', $data);
     }

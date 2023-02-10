@@ -43,6 +43,8 @@ class SettingController extends Controller
             'themes'          => $themes,
         ];
 
+        $data = hook_filter('admin.setting.index.data', $data);
+
         return view('admin::pages.setting', $data);
     }
 

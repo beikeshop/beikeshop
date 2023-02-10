@@ -29,6 +29,7 @@ class AdminUserController extends Controller
             'admin_users' => AdminUserRepo::getAdminUsers(),
             'admin_roles' => Role::query()->get(),
         ];
+        $data = hook_filter('admin.admin_user.index.data', $data);
 
         return view('admin::pages.admin_users.index', $data);
     }

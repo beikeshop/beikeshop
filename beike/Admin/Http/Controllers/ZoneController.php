@@ -26,6 +26,8 @@ class ZoneController extends Controller
             'countries' => CountryRepo::all(),
         ];
 
+        $data = hook_filter('admin.zone.index.data', $data);
+
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
         }

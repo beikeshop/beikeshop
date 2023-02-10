@@ -34,7 +34,7 @@ class CustomerController extends Controller
             'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'type'             => 'customer',
         ];
-
+        $data = hook_filter('admin.customer.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('success'), $data);
         }
@@ -52,7 +52,7 @@ class CustomerController extends Controller
             'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'type'             => 'trashed',
         ];
-
+        $data = hook_filter('admin.customer.trashed.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('success'), $data);
         }
@@ -80,6 +80,7 @@ class CustomerController extends Controller
             'country_id'      => system_setting('base.country_id'),
             '_redirect'       => $this->getRedirect(),
         ];
+        $data = hook_filter('admin.customer.edit.data', $data);
 
         return view('admin::pages.customers.form', $data);
     }
@@ -92,12 +93,15 @@ class CustomerController extends Controller
         }
         $customer = CustomerRepo::update($customerId, $data);
 
+        hook_action('admin.customer.update.after', $customer);
+
         return json_success(trans('common.updated_success'), $customer);
     }
 
     public function destroy(Request $request, int $customerId)
     {
         CustomerRepo::delete($customerId);
+        hook_action('admin.customer.destroy.after', $customerId);
 
         return json_success(trans('common.deleted_success'));
     }
@@ -105,20 +109,23 @@ class CustomerController extends Controller
     public function restore(Request $request, int $customerId)
     {
         CustomerRepo::restore($customerId);
+        hook_action('admin.customer.restore.after', $customerId);
 
         return json_success(trans('common.restored_success'));
     }
 
     public function forceDelete(Request $request, int $customerId)
     {
-        $customer = CustomerRepo::forceDelete($customerId);
+        CustomerRepo::forceDelete($customerId);
+        hook_action('admin.customer.force_delete.after', $customerId);
 
         return json_success(trans('common.success'));
     }
 
     public function forceDeleteAll(Request $request)
     {
-        $customer = CustomerRepo::forceDeleteAll();
+        CustomerRepo::forceDeleteAll();
+        hook_action('admin.customer.force_delete_all.after', ['module' => 'customer']);
 
         return json_success(trans('common.success'));
     }

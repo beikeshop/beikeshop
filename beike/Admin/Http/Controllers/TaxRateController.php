@@ -25,6 +25,8 @@ class TaxRateController
             'regions'   => Region::all(),
         ];
 
+        $data = hook_filter('admin.tax_rate.index.data', $data);
+
         return view('admin::pages.tax_rates.index', $data);
     }
 
