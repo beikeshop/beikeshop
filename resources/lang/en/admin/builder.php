@@ -12,7 +12,7 @@
 
 return [
     'heading_title'                    => 'Page editing',
-    'page_category' => 'Article Category',
+    'page_category'                    => 'Article Category',
     'modules_instructions'             => 'Available modules, click Add to page',
     'text_floor_prompt'                => 'Settings',
     'text_new_page'                    => 'Add new page',

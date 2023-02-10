@@ -12,7 +12,7 @@
 
 return [
     'heading_title'                    => 'edición de página',
-    'page_category' => 'clasificación de artículos',
+    'page_category'                    => 'clasificación de artículos',
     'modules_instructions'             => 'Módulos disponibles, haga clic para agregar a la página',
     'text_floor_prompt'                => 'Configuración (la configuración del piso debe guardarse y actualizarse para actualizar la página)',
     'text_new_page'                    => 'Agregar una nueva página',
