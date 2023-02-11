@@ -3,6 +3,8 @@
     $locale = locale();
   @endphp
 
+  @hook('footer.services.before')
+
   @if ($footer_content['services']['enable'])
     <div class="services-wrap">
       <div class="container">
@@ -22,6 +24,9 @@
       </div>
     </div>
   @endif
+
+  @hook('footer.services.after')
+
   <div class="container">
     <div class="footer-content">
       <div class="row">
@@ -51,6 +56,9 @@
             </ul>
           </div>
         @endfor
+
+        @hook('footer.contact.before')
+        @hookwrapper('footer.contact')
         <div class="col-12 col-md-3 footer-content-contact">
           <h6 class="text-uppercase text-dark mb-3">{{ __('common.contact_us') }}</h6>
           <ul class="list-unstyled">
@@ -65,9 +73,14 @@
             @endif
           </ul>
         </div>
+        @endhookwrapper
+        @hook('footer.contact.after')
+
       </div>
     </div>
   </div>
+
+  @hookwrapper('footer.copyright')
   <div class="footer-bottom">
     <div class="container">
       <div class="row align-items-center">
@@ -82,4 +95,6 @@
       </div>
     </div>
   </div>
+  @endhookwrapper
+
 </footer>
