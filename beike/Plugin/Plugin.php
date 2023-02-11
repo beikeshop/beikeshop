@@ -155,6 +155,7 @@ class Plugin implements Arrayable, \ArrayAccess
     public function getLocaleName(): string
     {
         $currentLocale = locale();
+
         return is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
     }
 
@@ -166,6 +167,7 @@ class Plugin implements Arrayable, \ArrayAccess
     public function getLocaleDescription(): string
     {
         $currentLocale = locale();
+
         return is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
     }
 

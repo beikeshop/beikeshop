@@ -71,10 +71,10 @@ class PageRepo
         }
         $page->fill([
             'page_category_id' => (int) ($data['page_category_id'] ?? 0),
-            'position'         => $data['position'] ?? 0,
-            'active'           => $data['active']   ?? true,
-            'author'           => $data['author']   ?? true,
-            'views'            => $data['views']    ?? 0,
+            'position'         => (int) ($data['position'] ?? 0),
+            'active'           => (bool) ($data['active']   ?? true),
+            'author'           => (bool) ($data['author']   ?? true),
+            'views'            => (int) ($data['views']    ?? 0),
         ]);
 
         $page->saveOrFail();

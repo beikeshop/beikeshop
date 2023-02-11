@@ -22,7 +22,7 @@ class CustomerDiscountService
     public static function getTotal(CheckoutService $checkout)
     {
         $totalService = $checkout->totalService;
-        $customer = current_customer();
+        $customer     = current_customer();
         if (empty($customer)) {
             return null;
         }
