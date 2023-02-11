@@ -5,7 +5,7 @@
 @section('content')
   <div class="card">
     <div class="card-body">
-      <h6 class="border-bottom pb-3 mb-4">{{ $plugin->name }}</h6>
+      <h6 class="border-bottom pb-3 mb-4">{{ $plugin->getLocaleName() }}</h6>
 
       @if (session('success'))
         <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>

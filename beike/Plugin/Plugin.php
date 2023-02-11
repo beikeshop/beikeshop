@@ -152,9 +152,21 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this->name;
     }
 
+    public function getLocaleName(): string
+    {
+        $currentLocale = locale();
+        return is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getLocaleDescription(): string
+    {
+        $currentLocale = locale();
+        return is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
     }
 
     public function getDirname(): string
