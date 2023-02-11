@@ -22,10 +22,14 @@ class CustomerDiscountService
     public static function getTotal(CheckoutService $checkout)
     {
         $totalService = $checkout->totalService;
+        $customer = current_customer();
+        if (empty($customer)) {
+            return null;
+        }
 
-        $discountFactor = current_customer()->customerGroup->discount_factor;
+        $discountFactor = $customer->customerGroup->discount_factor;
         if ($discountFactor <= 0) {
-            return;
+            return null;
         }
         if ($discountFactor > 1) {
             $discountFactor = 1;
