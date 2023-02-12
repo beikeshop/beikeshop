@@ -18,7 +18,7 @@ class Textarea extends Component
     {
         $this->name     = $name;
         $this->title    = $title;
-        $this->value    = html_entity_decode($value);
+        $this->value    = html_entity_decode($value, ENT_QUOTES);
         $this->required = $required;
     }
 

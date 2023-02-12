@@ -104,7 +104,7 @@ class MigrateFromOpenCart extends Command
                 'category_id'     => $description->category_id,
                 'locale'          => $langMapping[$description->language_id],
                 'name'            => $description->name,
-                'content'         => html_entity_decode($description->description),
+                'content'         => html_entity_decode($description->description, ENT_QUOTES),
                 'created_at'      => now(),
                 'updated_at'      => now(),
             ];
@@ -283,7 +283,7 @@ class MigrateFromOpenCart extends Command
             $ocDescription                 = $ocDescriptions[self::LANG_MAPPING[$locale['code']]];
             $descriptions[$locale['code']] = [
                 'name'    => $ocDescription->name,
-                'content' => html_entity_decode($ocDescription->description),
+                'content' => html_entity_decode($ocDescription->description, ENT_QUOTES),
             ];
         }
 
