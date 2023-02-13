@@ -28,7 +28,7 @@ class OrderProduct extends Base
 
     public function productSku(): BelongsTo
     {
-        return $this->belongsTo(ProductSku::class, 'product_sku', 'id');
+        return $this->belongsTo(ProductSku::class, 'product_sku', 'sku');
     }
 
     public function getPriceFormatAttribute()

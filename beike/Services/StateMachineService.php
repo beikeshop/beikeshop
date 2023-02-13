@@ -229,9 +229,14 @@ class StateMachineService
      */
     private function getMachines()
     {
-        $machines = self::MACHINES;
+        $data = [
+            'order'    => $this->order,
+            'machines' => self::MACHINES,
+        ];
 
-        return hook_filter('service.state_machine.machines', $machines);
+        $data = hook_filter('service.state_machine.machines', $data);
+
+        return $data['machines'] ?? [];
     }
 
     /**
