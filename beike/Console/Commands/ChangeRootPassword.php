@@ -26,7 +26,7 @@ class ChangeRootPassword extends Command
     public function handle()
     {
         $user        = AdminUser::query()->first();
-        $newPassword = $this->ask("请为管理员 {$user->email} 设置新密码:");
+        $newPassword = $this->ask("请为管理员 {$user->email} 设置新密码");
 
         if (! $newPassword) {
             $this->info('请输入新密码');
