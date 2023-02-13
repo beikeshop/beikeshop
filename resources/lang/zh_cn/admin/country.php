@@ -14,4 +14,5 @@ return [
     'countries_index'  => '国家列表',
     'countries_create' => '创建国家',
     'countries_update' => '更新国家',
+    'countries_delete' => '删除国家',
 ];

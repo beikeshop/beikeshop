@@ -9,15 +9,22 @@
  * @modified   2022-08-02 14:22:41
  */
 
-return [
-    'index'            => 'attributo',
-    'attribute_info'   => 'informazioni sugli attributi',
-    'create_at'        => 'crea attributo',
-    'attribute_value'  => 'valore attributo',
-    'set_attribute'    => 'attributo di configurazione',
-    'add_attribute'    => 'aggiungi valore attributo',
-    'before_attribute' => 'Si prega di selezionare prima l\'attributo di sinistra',
-    'btn_at'           => 'Vai ora',
-    'btn_later'        => 'più tardi',
-    'to_info_values'   => 'Vai alla pagina dei dettagli per modificare i valori degli attributi',
+ return [
+    'index'                            => 'Attribute',
+    'attribute_info'                   => 'Attribute information',
+    'create_at'                        => 'Create attribute',
+    'attribute_value'                  => 'Cttribute value',
+    'set_attribute'                    => 'Configuration attribute',
+    'add_attribute'                    => 'Add attribute value',
+    'before_attribute'                 => 'Please select the left attribute first',
+    'btn_at'                           => 'Go now',
+    'btn_later'                        => 'Later',
+    'to_info_values'                   => 'Please go to the details page to edit attribute values',
+    'error_cannot_delete_product_used' => 'Attribute used by products (ID: :product_ids), can not be deleted!',
+
+    'attributes_index'                 => 'attribute list',
+    'attributes_create'                => 'create attributes',
+    'attributes_show'                  => 'attribute details',
+    'attributes_update'                => 'update attributes',
+    'attributes_delete'                => 'delete attribute',
 ];

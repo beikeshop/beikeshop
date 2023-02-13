@@ -14,4 +14,5 @@ return [
     'countries_index'  => 'lista de países',
     'countries_create' => 'crear un país',
     'countries_update' => 'actualizar país',
+    'countries_delete' => 'eliminar país',
 ];

@@ -9,15 +9,22 @@
  * @modified   2022-08-02 14:22:41
  */
 
-return [
-    'index'            => 'атрибут',
-    'attribute_info'   => 'информация об атрибутах',
-    'create_at'        => 'создать атрибут',
-    'attribute_value'  => 'значение атрибута',
-    'set_attribute'    => 'атрибут конфигурации',
-    'add_attribute'    => 'добавить значение атрибута',
-    'before_attribute' => 'Сначала выберите левый атрибут',
-    'btn_at'           => 'Иди сейчас',
-    'btn_later'        => 'позже',
-    'to_info_values'   => 'Пожалуйста, перейдите на страницу сведений, чтобы изменить значения атрибутов',
+ return [
+    'index'                            => 'Attribute',
+    'attribute_info'                   => 'Attribute information',
+    'create_at'                        => 'Create attribute',
+    'attribute_value'                  => 'Cttribute value',
+    'set_attribute'                    => 'Configuration attribute',
+    'add_attribute'                    => 'Add attribute value',
+    'before_attribute'                 => 'Please select the left attribute first',
+    'btn_at'                           => 'Go now',
+    'btn_later'                        => 'Later',
+    'to_info_values'                   => 'Please go to the details page to edit attribute values',
+    'error_cannot_delete_product_used' => 'Attribute used by products (ID: :product_ids), can not be deleted!',
+
+    'attributes_index'                 => 'attribute list',
+    'attributes_create'                => 'create attributes',
+    'attributes_show'                  => 'attribute details',
+    'attributes_update'                => 'update attributes',
+    'attributes_delete'                => 'delete attribute',
 ];

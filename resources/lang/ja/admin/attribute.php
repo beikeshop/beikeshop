@@ -9,15 +9,22 @@
  * @modified   2022-08-02 14:22:41
  */
 
-return [
-    'index'            => '属性',
-    'attribute_info'   => '属性情報',
-    'create_at'        => '属性を作成',
-    'attribute_value'  => '属性値',
-    'set_attribute'    => '構成属性',
-    'add_attribute'    => '属性値を追加',
-    'before_attribute' => '最初に左の属性を選択してください',
-    'btn_at'           => '今すぐ行く',
-    'btn_later'        => '後で',
-    'to_info_values'   => '詳細ページに移動して属性値を編集してください',
+ return [
+    'index'                            => 'Attribute',
+    'attribute_info'                   => 'Attribute information',
+    'create_at'                        => 'Create attribute',
+    'attribute_value'                  => 'Cttribute value',
+    'set_attribute'                    => 'Configuration attribute',
+    'add_attribute'                    => 'Add attribute value',
+    'before_attribute'                 => 'Please select the left attribute first',
+    'btn_at'                           => 'Go now',
+    'btn_later'                        => 'Later',
+    'to_info_values'                   => 'Please go to the details page to edit attribute values',
+    'error_cannot_delete_product_used' => 'Attribute used by products (ID: :product_ids), can not be deleted!',
+
+    'attributes_index'                 => 'attribute list',
+    'attributes_create'                => 'create attributes',
+    'attributes_show'                  => 'attribute details',
+    'attributes_update'                => 'update attributes',
+    'attributes_delete'                => 'delete attribute',
 ];

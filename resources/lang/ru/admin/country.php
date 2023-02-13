@@ -14,4 +14,5 @@ return [
     'countries_index'  => 'список стран',
     'countries_create' => 'создать страну',
     'countries_update' => 'обновить страну',
+    'countries_delete' => 'удалить страну',
 ];

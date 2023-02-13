@@ -14,4 +14,5 @@ return [
     'countries_index'  => '国リスト',
     'countries_create' => '国を作成',
     'countries_update' => '国を更新',
+    'countries_delete' => '国を削除',
 ];

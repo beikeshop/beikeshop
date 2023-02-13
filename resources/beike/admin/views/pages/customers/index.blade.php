@@ -14,9 +14,6 @@
             <el-form-item label="{{ __('customer.email') }}">
               <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
             </el-form-item>
-            <el-form-item label="{{ __('customer.email') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
-            </el-form-item>
             <el-form-item label="{{ __('customer.customer_group') }}">
               <el-select size="small" v-model="filter.customer_group_id" placeholder="{{ __('common.please_choose') }}">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"

@@ -12,7 +12,7 @@
 
         <el-form-item label="{{ __('admin/admin_roles.permission') }}" prop="roles">
           <div class="roles-wrap border w-max-900">
-            <div class="header-wrap bg-dark p-2 text-dark bg-opacity-10 px-2">
+            <div class="bg-dark p-2 text-dark bg-opacity-10 px-2">
               <el-button size="small" @click="updateAllState(true)">@lang('admin/admin_roles.select_all')</el-button>
               <el-button size="small" @click="updateAllState(false)">@lang('admin/admin_roles.unselect_all')</el-button>
             </div>
