@@ -23,10 +23,11 @@ use Beike\Admin\View\Components\Form\Textarea;
 use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Sidebar;
+use Beike\Console\Commands\ChangeRootPassword;
 use Beike\Console\Commands\GenerateDatabaseDict;
+use Beike\Console\Commands\GenerateSitemap;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Console\Commands\MigrateFromOpenCart;
-use Beike\Console\Commands\Sitemap;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
@@ -84,10 +85,11 @@ class AdminServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                ChangeRootPassword::class,
+                GenerateDatabaseDict::class,
+                GenerateSitemap::class,
                 MakeRootAdminUser::class,
                 MigrateFromOpenCart::class,
-                GenerateDatabaseDict::class,
-                Sitemap::class,
             ]);
         }
     }

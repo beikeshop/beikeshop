@@ -5,7 +5,7 @@ namespace Beike\Console\Commands;
 use Beike\Services\SitemapService;
 use Illuminate\Console\Command;
 
-class Sitemap extends Command
+class GenerateSitemap extends Command
 {
     /**
      * The name and signature of the console command.
