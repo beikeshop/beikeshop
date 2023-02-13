@@ -28,7 +28,7 @@ class WelcomeController extends Controller
         }
 
         $data['languages'] = $this->languages;
-        $data['locale']    = $_COOKIE['locale'] ?? 'en';
+        $data['locale']    = $_COOKIE['locale'] ?? 'zh_cn';
         $data['steps']     = 1;
 
         return view('installer::welcome', $data);
