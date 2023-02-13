@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-02-08 15:36:09
+ * @LastEditTime  2023-02-13 14:29:46
  */
 
 export default {
@@ -119,7 +119,7 @@ export default {
         $('.update-btn').hide();
       }
     } else {
-      $http.get(`https://beikeshop.com/api/version?version=${config.beike_version}`).then((res) => {
+      $http.get(`${config.api_url}/api/version?version=${config.beike_version}`).then((res) => {
         Cookies.set('beike_version', res, { expires: 1 });
 
         bk.versionUpdateTips();
@@ -136,7 +136,7 @@ export default {
         $('.vip-serve').addClass('active');
       }
     } else {
-      $http.get(`https://beikeshop.com/api/vip?domain=${config.app_url}`).then((res) => {
+      $http.get(`${config.api_url}/api/vip?domain=${config.app_url}`).then((res) => {
         Cookies.set('beike_vip', res, { expires: 1 });
 
         bk.vipUpdateTips();

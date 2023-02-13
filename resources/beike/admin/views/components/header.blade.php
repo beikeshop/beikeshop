@@ -141,10 +141,10 @@
 
     $('.vip-serve').click(function(event) {
       layer.open({
-        type: 1,
+        type: 2,
         title: '',
-        area: ['500px', '80%'],
-        content: '<div><img src="image/vip-info.webp" class="img-fluid"></div>',
+        area: ['700px', '80%'],
+        content: `${config.api_url}/api/vip_rights?domain=${config.app_url}`,
       });
     });
   </script>
