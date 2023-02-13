@@ -4,12 +4,12 @@
 
 @section('body-class', 'page-marketing')
 
-@section('content')
-
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
+  <a href="{{ config('beike.api_url') }}/account/plugins/create" class="btn btn-outline-info" target="_blank">我要发布</a>
 @endsection
 
+@section('content')
   <div id="app" class="card h-min-600" v-cloak>
     <div class="card-body">
       @if (session()->has('errors'))
