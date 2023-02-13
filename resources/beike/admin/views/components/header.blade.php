@@ -12,15 +12,25 @@
         @endforeach
       </ul>
       <ul class="navbar navbar-right">
+        @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
           <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>
         </li>
+        @endhookwrapper
+
+        @hookwrapper('admin.header.vip')
         <li class="nav-item vip-serve">
           <a href="javascript:void(0)" class="nav-link"><img src="/image/vip-icon.png" class="img-fluid"> <span>VIP</span></a>
         </li>
+        @endhookwrapper
+
+        @hookwrapper('admin.header.marketing')
         <li class="nav-item">
           <a href="{{ admin_route('marketing.index') }}" class="nav-link">@lang('admin/common.marketing')</a>
         </li>
+        @endhookwrapper
+
+        @hookwrapper('admin.header.language')
         <li class="nav-item">
           <div class="dropdown">
             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $admin_language['name'] }}</a>
@@ -32,6 +42,9 @@
             </ul>
           </div>
         </li>
+        @endhookwrapper
+
+        @hookwrapper('admin.header.user')
         <li class="nav-item me-3">
           <div class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -47,6 +60,7 @@
             </ul>
           </div>
         </li>
+        @endhookwrapper
       </ul>
     </div>
   </div>

@@ -3,7 +3,9 @@
 @section('title', __('admin/plugin.plugin_list'))
 
 @section('page-title-right')
+  @hookwrapper('admin.plugin.marketing')
   <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
+  @endhookwrapper
 @endsection
 
 @section('content')
