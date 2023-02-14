@@ -14,7 +14,7 @@
             <tr>
               <th>{{ __('common.id') }}</th>
               <th>{{ __('common.name') }}</th>
-              <th>{{ __('admin/attribute_groups.index') }}</th>
+              <th>{{ __('admin/attribute_group.index') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th width="150px">{{ __('common.action') }}</th>
             </tr>
@@ -53,7 +53,7 @@
           </el-form-item>
         </el-form-item>
 
-        <el-form-item label="{{ __('admin/attribute_groups.index') }}" required prop="attribute_group_id">
+        <el-form-item label="{{ __('admin/attribute_group.index') }}" required prop="attribute_group_id">
           <el-select v-model="dialog.form.attribute_group_id" placeholder="{{ __('common.please_choose') }}">
             <el-option
               v-for="item in source.attribute_group"
@@ -108,7 +108,7 @@
 
         rules: {
           attribute_group_id: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('admin/attribute_groups.index')] ) }}', trigger: 'blur'},
+            {required: true, message: '{{ __('common.error_required', ['name' => __('admin/attribute_group.index')] ) }}', trigger: 'blur'},
           ],
           sort_order: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.sort_order')])}}',trigger: 'blur'}, ],
         },

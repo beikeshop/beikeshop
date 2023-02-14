@@ -19,7 +19,7 @@
                 </el-form-item>
               </el-form-item>
 
-              <el-form-item label="{{ __('admin/attribute_groups.index') }}" required prop="attribute_group_id">
+              <el-form-item label="{{ __('admin/attribute_group.index') }}" required prop="attribute_group_id">
                 <el-select v-model="form.attribute_group_id" placeholder="{{ __('common.please_choose') }}">
                   <el-option
                     v-for="item in source.attributeGroup"

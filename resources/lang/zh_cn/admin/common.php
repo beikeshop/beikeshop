@@ -28,6 +28,8 @@ return [
     'rma_reason'             => '退换货原因管理',
     'product'                => '商品管理',
     'brand'                  => '品牌管理',
+    'attribute'              => '属性管理',
+    'attribute_group'        => '属性组管理',
     'category'               => '分类管理',
     'customer_group'         => '客户组管理',
     'customer'               => '客户管理',

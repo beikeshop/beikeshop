@@ -49,6 +49,8 @@ class PermissionRepo
             ['title' => trans('admin/common.product'), 'permissions' => $this->getProductPermissions()],
             ['title' => trans('admin/common.category'), 'permissions' => $this->getCategoryPermissions()],
             ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
+            ['title' => trans('admin/common.attribute'), 'permissions' => $this->getAttributePermissions()],
+            ['title' => trans('admin/common.attribute_group'), 'permissions' => $this->getAttributeGroupPermissions()],
             ['title' => trans('admin/common.customer'), 'permissions' => $this->getCustomerPermissions()],
             ['title' => trans('admin/common.customer_group'), 'permissions' => $this->getCustomerGroupPermissions()],
             ['title' => trans('admin/common.page'), 'permissions' => $this->getPagePermissions()],
@@ -147,6 +149,32 @@ class PermissionRepo
         $items  = $this->getPermissionList('brand', $routes);
 
         return hook_filter('role.brand_permissions', $items);
+    }
+
+    /**
+     * 属性权限列表
+     *
+     * @return \string[][]
+     */
+    private function getAttributePermissions(): array
+    {
+        $routes = ['attributes_index', 'attributes_create', 'attributes_show', 'attributes_update', 'attributes_delete'];
+        $items  = $this->getPermissionList('attribute', $routes);
+
+        return hook_filter('role.attribute_permissions', $items);
+    }
+
+    /**
+     * 属性组权限列表
+     *
+     * @return \string[][]
+     */
+    private function getAttributeGroupPermissions(): array
+    {
+        $routes = ['attribute_groups_index', 'attribute_groups_create', 'attribute_groups_update', 'attribute_groups_delete'];
+        $items  = $this->getPermissionList('attribute_group', $routes);
+
+        return hook_filter('role.attribute_group_permissions', $items);
     }
 
     /**

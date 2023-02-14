@@ -21,4 +21,10 @@ return [
     'btn_later'                        => '稍后再去',
     'to_info_values'                   => '请前往详情页编辑属性值',
     'error_cannot_delete_product_used' => '属性不能删除，由于该属性被商品（商品ID: :product_ids）使用',
+
+    'attributes_index'  => '属性列表',
+    'attributes_create' => '创建属性',
+    'attributes_show'   => '属性详情',
+    'attributes_update' => '更新属性',
+    'attributes_delete' => '删除属性',
 ];

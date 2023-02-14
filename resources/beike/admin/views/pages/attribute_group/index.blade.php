@@ -1,12 +1,12 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/attribute_groups.index'))
+@section('title', __('admin/attribute_group.index'))
 
 @section('content')
   <div id="customer-app" class="card" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
-        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/attribute_groups.create_at_groups') }}</button>
+        <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/attribute_group.create_at_groups') }}</button>
       </div>
       <div class="table-push">
         <table class="table">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <el-dialog title="{{ __('admin/attribute_groups.index') }}" :visible.sync="dialog.show" width="670px"
+    <el-dialog title="{{ __('admin/attribute_group.index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">
