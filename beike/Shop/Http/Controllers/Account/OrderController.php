@@ -85,7 +85,7 @@ class OrderController extends Controller
         try {
             $customer = current_customer();
             $order    = OrderRepo::getOrderByNumber($number, $customer);
-
+            hook_action('account.order.pay.before', ['order' => $order]);
             return (new PaymentService($order))->pay();
         } catch (\Exception $e) {
             return redirect(shop_route('account.order.show', $number))->withErrors($e->getMessage());
