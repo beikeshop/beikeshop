@@ -12,7 +12,7 @@
 return [
     'index'             => 'Kategorie',
     'edit_category'     => 'Kategorie bearbeiten',
-    'upper_category'    => 'höhere Kategorie',
+    'parent_category'   => 'höhere Kategorie',
 
     'categories_index'  => 'Kategorieliste',
     'categories_create' => 'Kategorien erstellen',

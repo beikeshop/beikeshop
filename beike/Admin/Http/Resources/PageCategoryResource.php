@@ -23,7 +23,7 @@ class PageCategoryResource extends JsonResource
             'id'               => $this->id,
             'active'           => $this->active,
             'title'            => $description->title,
-            'title_format'     => sub_string($description->title),
+            'title_format'     => sub_string($description->title, 64),
             'summary'          => $description->summary,
             'summary_format'   => sub_string($description->summary, 128),
             'meta_title'       => $description->meta_title,

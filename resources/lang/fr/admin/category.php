@@ -10,13 +10,13 @@
  */
 
 return [
-    'index'             => 'Classification',
-    'edit_category'     => 'Modifier la catégorie',
-    'upper_category'    => 'catégorie supérieure',
+    'index'              => 'Classification',
+    'edit_category'      => 'Modifier la catégorie',
+    'parent_category'    => 'catégorie supérieure',
 
-    'categories_index'  => 'liste des catégories',
-    'categories_create' => 'Créer des catégories',
-    'categories_show'   => 'détails de la catégorie',
-    'categories_update' => 'Mettre à jour les catégories',
-    'categories_delete' => 'Supprimer la catégorie',
+    'categories_index'   => 'liste des catégories',
+    'categories_create'  => 'Créer des catégories',
+    'categories_show'    => 'détails de la catégorie',
+    'categories_update'  => 'Mettre à jour les catégories',
+    'categories_delete'  => 'Supprimer la catégorie',
 ];

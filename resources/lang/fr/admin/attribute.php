@@ -9,7 +9,7 @@
  * @modified   2022-08-02 14:22:41
  */
 
- return [
+return [
     'index'                            => 'Attribute',
     'attribute_info'                   => 'Attribute information',
     'create_at'                        => 'Create attribute',

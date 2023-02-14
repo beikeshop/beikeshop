@@ -21,7 +21,7 @@
 
         {{-- <x-admin-form-select title="上级分类" name="parent_id" :value="old('parent_id', $category->parent_id ?? 0)" :options="$categories->toArray()" key="id" label="name" /> --}}
 
-        <x-admin::form.row title="{{ __('admin/category.upper_category') }}">
+        <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
           @php
             $_parent_id = old('parent_id', $category->parent_id ?? 0);
           @endphp

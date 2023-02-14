@@ -12,7 +12,7 @@
 return [
     'index'             => 'Category',
     'edit_category'     => 'Edit Category',
-    'upper_category'    => 'Upper Category',
+    'parent_category'   => 'Parent Category',
 
     'categories_index'  => 'Index',
     'categories_create' => 'Create',

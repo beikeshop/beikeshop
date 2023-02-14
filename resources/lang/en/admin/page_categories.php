@@ -10,9 +10,9 @@
  */
 
 return [
-    'index'        => 'article classification',
-    'info_title'   => 'information title',
-    'info_content' => 'content',
+    'index'        => 'Catalogs',
+    'info_title'   => 'Title',
+    'info_content' => 'Content',
 
-    'pages_index'  => 'category list',
+    'pages_index'  => 'Catalogs',
 ];

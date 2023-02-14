@@ -10,13 +10,13 @@
  */
 
 return [
-    'index'             => '分類',
-    'edit_category'     => '編輯分類',
-    'upper_category'    => '上級分類',
+    'index'              => '分類',
+    'edit_category'      => '編輯分類',
+    'parent_category'    => '上級分類',
 
-    'categories_index'  => '分類列表',
-    'categories_create' => '創建分類',
-    'categories_show'   => '分類詳情',
-    'categories_update' => '更新分類',
-    'categories_delete' => '刪除分類',
+    'categories_index'   => '分類列表',
+    'categories_create'  => '創建分類',
+    'categories_show'    => '分類詳情',
+    'categories_update'  => '更新分類',
+    'categories_delete'  => '刪除分類',
 ];

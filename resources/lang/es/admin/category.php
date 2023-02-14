@@ -12,7 +12,7 @@
 return [
     'index'             => 'Clasificación',
     'edit_category'     => 'Editar categoria',
-    'upper_category'    => 'subtítulos',
+    'parent_category'   => 'subtítulos',
 
     'categories_index'  => 'Lista de categoría',
     'categories_create' => 'Crear una taxonomía',

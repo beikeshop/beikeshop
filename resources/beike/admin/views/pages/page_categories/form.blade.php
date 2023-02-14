@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="tab-pane fade" id="tab-set">
-            <x-admin::form.row title="{{ __('admin/category.upper_category') }}">
+            <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
               <div class="wp-400">
                 <input type="text" value="{{ $page_category->parent->description->title ?? '' }}" id="categories-autocomplete" class="form-control wp-400 " />
                 <input type="hidden" name="parent_id" value="{{ old('categories_id', $page_category->parent->id ?? '') }}" />

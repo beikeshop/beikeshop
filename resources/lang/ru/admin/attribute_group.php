@@ -9,7 +9,7 @@
  * @modified   2022-08-02 14:22:41
  */
 
- return [
+return [
     'index'                              => 'Attribute group',
     'create_at_groups'                   => 'Create attribute group',
     'error_cannot_delete_attribute_used' => 'Attribute Group used by attribute (ID: :attributes), can not be deleted!',
