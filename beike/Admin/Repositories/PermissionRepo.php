@@ -51,7 +51,8 @@ class PermissionRepo
             ['title' => trans('admin/common.brand'), 'permissions' => $this->getBrandPermissions()],
             ['title' => trans('admin/common.customer'), 'permissions' => $this->getCustomerPermissions()],
             ['title' => trans('admin/common.customer_group'), 'permissions' => $this->getCustomerGroupPermissions()],
-            ['title' => trans('admin/common.content'), 'permissions' => $this->getContentPermissions()],
+            ['title' => trans('admin/common.page'), 'permissions' => $this->getPagePermissions()],
+            ['title' => trans('admin/common.page_category'), 'permissions' => $this->getPageCategoryPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
@@ -188,10 +189,10 @@ class PermissionRepo
     }
 
     /**
-     * 内容管理列表
-     * @return mixed
+     * 文章管理列表
+     * @return array
      */
-    private function getContentPermissions()
+    private function getPagePermissions(): array
     {
         $routes = ['pages_index', 'pages_create', 'pages_show', 'pages_update', 'pages_delete'];
         $items  = $this->getPermissionList('page', $routes);
@@ -200,9 +201,21 @@ class PermissionRepo
     }
 
     /**
+     * 文章分类管理列表
+     * @return array
+     */
+    private function getPageCategoryPermissions(): array
+    {
+        $routes = ['page_categories_index', 'page_categories_create', 'page_categories_show', 'page_categories_update', 'page_categories_delete'];
+        $items  = $this->getPermissionList('page_category', $routes);
+
+        return hook_filter('role.page_category_permissions', $items);
+    }
+
+    /**
      * 插件权限列表
      *
-     * @return array[]
+     * @return array
      */
     private function getPluginPermissions(): array
     {
@@ -215,9 +228,9 @@ class PermissionRepo
     /**
      * 后台管理员权限列表
      *
-     * @return mixed
+     * @return array
      */
-    private function getAdminUserPermissions()
+    private function getAdminUserPermissions(): array
     {
         $routes = ['admin_users_index', 'admin_users_create', 'admin_users_show', 'admin_users_update', 'admin_users_delete'];
         $items  = $this->getPermissionList('user', $routes);
@@ -228,9 +241,9 @@ class PermissionRepo
     /**
      * 后台管理员权限列表
      *
-     * @return mixed
+     * @return array
      */
-    private function getAdminRolePermissions()
+    private function getAdminRolePermissions(): array
     {
         $routes = ['admin_roles_index', 'admin_roles_create', 'admin_roles_show', 'admin_roles_update', 'admin_roles_delete'];
         $items  = $this->getPermissionList('role', $routes);
@@ -241,7 +254,7 @@ class PermissionRepo
     /**
      * 区域分组权限列表
      *
-     * @return array[]
+     * @return array
      */
     private function getRegionPermissions(): array
     {

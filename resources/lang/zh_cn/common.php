@@ -63,7 +63,6 @@ return [
     'return'               => '返回',
     'language'             => '语言',
     'select_all'           => '全选',
-    'sign_out'             => '退出登录',
     'menu'                 => '菜单',
     'whether_open'         => '是否开启',
     'default'              => '默认',
