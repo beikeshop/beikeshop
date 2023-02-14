@@ -154,9 +154,17 @@ class Plugin implements Arrayable, \ArrayAccess
 
     public function getLocaleName(): string
     {
-        $currentLocale = locale();
+        $currentLocale = admin_locale();
 
-        return is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
+        if (is_array($this->name)) {
+            if ($this->name[$currentLocale] ?? '') {
+                return $this->name[$currentLocale];
+            }
+
+            return array_values($this->name)[0];
+        }
+
+        return (string) $this->name;
     }
 
     public function getDescription(): string
@@ -166,9 +174,17 @@ class Plugin implements Arrayable, \ArrayAccess
 
     public function getLocaleDescription(): string
     {
-        $currentLocale = locale();
+        $currentLocale = admin_locale();
 
-        return is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
+        if (is_array($this->description)) {
+            if ($this->description[$currentLocale] ?? '') {
+                return $this->description[$currentLocale];
+            }
+
+            return array_values($this->description)[0];
+        }
+
+        return (string) $this->description;
     }
 
     public function getDirname(): string

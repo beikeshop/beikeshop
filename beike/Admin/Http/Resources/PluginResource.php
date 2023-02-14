@@ -16,15 +16,10 @@ class PluginResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $currentLocale = locale();
-
-        $name        = is_array($this->name) ? ($this->name[$currentLocale] ?? '') : (string) $this->name;
-        $description = is_array($this->description) ? ($this->description[$currentLocale] ?? '') : (string) $this->description;
-
-        $data = [
+        return [
             'code'        => $this->code,
-            'name'        => $name,
-            'description' => $description,
+            'name'        => $this->getLocaleName(),
+            'description' => $this->getLocaleDescription(),
             'path'        => $this->path,
             'version'     => $this->version,
             'dir_name'    => $this->dirName,
@@ -36,7 +31,5 @@ class PluginResource extends JsonResource
             'installed'   => $this->getInstalled(),
             'edit_url'    => $this->getEditUrl(),
         ];
-
-        return $data;
     }
 }
