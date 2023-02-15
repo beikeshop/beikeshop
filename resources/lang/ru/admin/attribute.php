@@ -22,9 +22,9 @@ return [
     'to_info_values'                   => 'Please go to the details page to edit attribute values',
     'error_cannot_delete_product_used' => 'Attribute used by products (ID: :product_ids), can not be deleted!',
 
-    'attributes_index'                 => 'attribute list',
-    'attributes_create'                => 'create attributes',
-    'attributes_show'                  => 'attribute details',
-    'attributes_update'                => 'update attributes',
-    'attributes_delete'                => 'delete attribute',
+    'attributes_index'                 => 'Index',
+    'attributes_create'                => 'Create',
+    'attributes_show'                  => 'Details',
+    'attributes_update'                => 'Update',
+    'attributes_delete'                => 'Delete',
 ];

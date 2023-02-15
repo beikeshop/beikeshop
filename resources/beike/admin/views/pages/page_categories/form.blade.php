@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/page_categories.index'))
+@section('title', __('admin/page_category.index'))
 
 @section('page-title-right')
 <x-admin::form.row title="">

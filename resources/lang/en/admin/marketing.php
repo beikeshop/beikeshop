@@ -10,8 +10,11 @@
  */
 
 return [
-    'marketing_list'       => 'Plugin Marketing',
-    'marketing_show'       => 'Plugin Detail',
+    'marketing_list'       => 'Marketing',
+    'marketing_index'      => 'Index',
+    'marketing_show'       => 'Detail',
+    'marketing_buy'        => 'Buy',
+    'marketing_download'   => 'Download',
     'set_token'            => 'Set Token',
     'get_token_text'       => 'Log in to BeikeShop official website personal center - bind domain name, add current domain name',
     'get_token'            => 'Get Token',

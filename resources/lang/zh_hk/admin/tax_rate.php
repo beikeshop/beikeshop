@@ -10,13 +10,17 @@
  */
 
 return [
-    'index'              => '稅類',
-    'rule'               => '規則',
-    'based_on'           => '基於',
-    'priority'           => '優先級',
-    'tax_classes_index'  => '稅類列表',
-    'tax_classes_create' => '創建稅類',
-    'tax_classes_show'   => '稅類詳情',
-    'tax_classes_update' => '更新稅類',
-    'tax_classes_delete' => '刪除稅類',
+    'index'             => '稅率設置',
+    'tax_classes_index' => '稅類設置',
+    'tax'               => '稅種',
+    'tax_rate'          => '稅率',
+    'type'              => '類型',
+    'area'              => '區域',
+    'percentage'        => '百分比',
+    'fixed_tax_rate'    => '固定稅率',
+    'tax_rates_index'   => '稅率列表',
+    'tax_rates_create'  => '創建稅率',
+    'tax_rates_show'    => '稅率詳情',
+    'tax_rates_update'  => '更新稅率',
+    'tax_rates_delete'  => '刪除稅率',
 ];

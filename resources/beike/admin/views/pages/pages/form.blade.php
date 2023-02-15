@@ -82,7 +82,7 @@
           </div>
           <div class="tab-pane fade" id="tab-set">
             <x-admin-form-input name="author" title="{{ __('page_category.author') }}" value="{{ old('author', $page->author ?? '') }}" />
-            <x-admin::form.row title="{{ __('admin/page_categories.index') }}">
+            <x-admin::form.row title="{{ __('admin/page_category.index') }}">
               <div class="wp-400">
                 <el-autocomplete
                 v-model="page_category_name"

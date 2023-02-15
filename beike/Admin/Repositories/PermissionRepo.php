@@ -38,7 +38,7 @@ class PermissionRepo
     /**
      * 所有权限列表
      *
-     * @return \string[][][]
+     * @return array
      */
     public function getAllPermissions(): array
     {
@@ -58,6 +58,7 @@ class PermissionRepo
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
+            ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
             ['title' => trans('admin/common.admin_user'), 'permissions' => $this->getAdminUserPermissions()],
             ['title' => trans('admin/common.admin_role'), 'permissions' => $this->getAdminRolePermissions()],
             ['title' => trans('admin/common.region'), 'permissions' => $this->getRegionPermissions()],
@@ -76,7 +77,7 @@ class PermissionRepo
     /**
      * 订单权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getOrderPermissions(): array
     {
@@ -89,7 +90,7 @@ class PermissionRepo
     /**
      * 售后（退换货）权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getRmaPermissions(): array
     {
@@ -102,7 +103,7 @@ class PermissionRepo
     /**
      * 售后（退换货）原因权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getRmaReasonPermissions(): array
     {
@@ -115,7 +116,7 @@ class PermissionRepo
     /**
      * 商品权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getProductPermissions(): array
     {
@@ -128,7 +129,7 @@ class PermissionRepo
     /**
      * 分类权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getCategoryPermissions(): array
     {
@@ -141,7 +142,7 @@ class PermissionRepo
     /**
      * 品牌权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getBrandPermissions(): array
     {
@@ -154,7 +155,7 @@ class PermissionRepo
     /**
      * 属性权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getAttributePermissions(): array
     {
@@ -167,7 +168,7 @@ class PermissionRepo
     /**
      * 属性组权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getAttributeGroupPermissions(): array
     {
@@ -180,7 +181,7 @@ class PermissionRepo
     /**
      * 客户权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getCustomerPermissions(): array
     {
@@ -193,7 +194,7 @@ class PermissionRepo
     /**
      * 客户组权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getCustomerGroupPermissions(): array
     {
@@ -206,7 +207,7 @@ class PermissionRepo
     /**
      * 设置权限列表
      *
-     * @return \string[][]
+     * @return array
      */
     private function getSettingPermissions(): array
     {
@@ -251,6 +252,19 @@ class PermissionRepo
         $items  = $this->getPermissionList('plugin', $routes);
 
         return hook_filter('role.plugin_permissions', $items);
+    }
+
+    /**
+     * 插件权限列表
+     *
+     * @return array
+     */
+    private function getMarketingPermissions(): array
+    {
+        $routes = ['marketing_index', 'marketing_show', 'marketing_buy', 'marketing_download'];
+        $items  = $this->getPermissionList('marketing', $routes);
+
+        return hook_filter('role.marketing_permissions', $items);
     }
 
     /**

@@ -28,6 +28,8 @@ return [
     'rma_reason'            => '返品理由管理',
     'product'               => '製品管理',
     'brand'                 => 'ブランド管理',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'              => 'カテゴリ管理',
     'customer_group'        => '顧客グループ管理',
     'customer'              => '顧客管理',

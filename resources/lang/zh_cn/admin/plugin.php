@@ -10,7 +10,7 @@
  */
 
 return [
-    'plugins_index'         => '插件列表',
+    'plugins_index'         => '插件设置',
     'plugins_import'        => '上传插件',
     'plugins_show'          => '插件详情',
     'plugins_update'        => '插件更新',
@@ -18,7 +18,7 @@ return [
     'plugins_install'       => '安装',
     'plugins_uninstall'     => '卸载',
 
-    'plugin_list'           => '插件列表',
+    'plugin_list'           => '插件设置',
     'plugin_code'           => '插件代码',
     'plugin_type'           => '插件类型',
     'plugin_description'    => '插件描述',

@@ -55,7 +55,7 @@ return [
     'attributes_index'       => '属性',
     'settings_index'         => '系统设置',
     'admin_users_index'      => '后台用户',
-    'plugins_index'          => '插件列表',
+    'plugins_index'          => '插件设置',
     'marketing_index'        => '插件市场',
     'regions_index'          => '区域分组',
     'tax_rates_index'        => '税率设置',

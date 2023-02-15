@@ -28,6 +28,8 @@ return [
     'rma_reason'            => 'Gestione del motivo di reso',
     'product'               => 'gestione delle merci',
     'brand'                 => 'gestione del marchio',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'              => 'Gestione della classificazione',
     'customer_group'        => 'Gestione del gruppo di clienti',
     'customer'              => 'gestione dei clienti',

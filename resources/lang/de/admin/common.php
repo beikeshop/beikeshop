@@ -28,6 +28,8 @@ return [
     'rma_reason'            => 'Rücksendegrundverwaltung',
     'product'               => 'Produktmanagement',
     'brand'                 => 'Markenführung',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'              => 'category management',
     'customer_group'        => 'Kundengruppenverwaltung',
     'customer'              => 'Kundenverwaltung',

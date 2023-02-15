@@ -28,6 +28,8 @@ return [
     'rma_reason'            => 'Управление причинами возврата',
     'product'               => 'управление продуктом',
     'brand'                 => 'управление брендом',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'              => 'управление категориями',
     'customer_group'        => 'управление группой клиентов',
     'customer'              => 'управление клиентами',

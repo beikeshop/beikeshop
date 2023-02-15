@@ -28,6 +28,8 @@ return [
     'rma_reason'            => 'Gestion des motifs de retour',
     'product'               => 'gestion des produits',
     'brand'                 => 'gestion de la marque',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'              => 'gestion des catégories',
     'customer_group'        => 'gestion des groupes de clients',
     'customer'              => 'gestion des clients',

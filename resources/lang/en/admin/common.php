@@ -28,6 +28,8 @@ return [
     'rma_reason'                       => 'RMA Reason',
     'product'                          => 'Products',
     'brand'                            => 'Brands',
+    'attribute'             => 'attribute',
+    'attribute_group'       => 'attribute group',
     'category'                         => 'Categories',
     'customer_group'                   => 'Customer Groups',
     'customer'                         => 'Customers',

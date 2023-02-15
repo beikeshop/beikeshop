@@ -11,7 +11,10 @@
 
 return [
     'marketing_list'       => '插件市场',
+    'marketing_index'      => '市场首页',
     'marketing_show'       => '插件详情',
+    'marketing_buy'        => '购买插件',
+    'marketing_download'   => '下载插件',
     'set_token'            => '设置 Token',
     'get_token_text'       => '登录 BeikeShop 官网个人中心-绑定域名，添加当前域名',
     'get_token'            => '点击获取 Token',
