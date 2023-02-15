@@ -11,5 +11,5 @@
 
 return [
     'sandbox_mode' => '沙盒模式',
-    'enabled' => '开启',
+    'enabled'      => '开启',
 ];

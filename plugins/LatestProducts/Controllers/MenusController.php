@@ -20,11 +20,10 @@ class MenusController extends Controller
     public function getRoutes(): array
     {
         return [
-            'method' => __METHOD__,
-            'route_list' => []
+            'method'     => __METHOD__,
+            'route_list' => [],
         ];
     }
-
 
     public function latestProducts()
     {
@@ -35,8 +34,9 @@ class MenusController extends Controller
 
         $data = [
             'products' => $products,
-            'items' => ProductSimple::collection($products)->jsonSerialize(),
+            'items'    => ProductSimple::collection($products)->jsonSerialize(),
         ];
+
         return view('LatestProducts::shop.latest_products', $data);
     }
 }

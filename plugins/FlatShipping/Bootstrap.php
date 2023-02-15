@@ -21,25 +21,25 @@ class Bootstrap
      * 获取固定运费方式
      *
      * @param CheckoutService $checkout
-     * @param Plugin $plugin
+     * @param Plugin          $plugin
      * @return array
      * @throws \Exception
      */
     public function getQuotes(CheckoutService $checkout, Plugin $plugin): array
     {
-        $code = $plugin->code;
+        $code           = $plugin->code;
         $pluginResource = (new PluginResource($plugin))->jsonSerialize();
-        $quotes[] = [
-            'type' => 'shipping',
-            'code' => "{$code}.0",
-            'name' => $pluginResource['name'],
+        $quotes[]       = [
+            'type'        => 'shipping',
+            'code'        => "{$code}.0",
+            'name'        => $pluginResource['name'],
             'description' => $pluginResource['description'],
-            'icon' => $pluginResource['icon'],
-            'cost' => $this->getShippingFee($checkout),
+            'icon'        => $pluginResource['icon'],
+            'cost'        => $this->getShippingFee($checkout),
         ];
+
         return $quotes;
     }
-
 
     /**
      * 计算固定运费
@@ -49,16 +49,17 @@ class Bootstrap
      */
     public function getShippingFee(CheckoutService $checkout): float|int
     {
-        $totalService = $checkout->totalService;
-        $amount = $totalService->amount;
-        $shippingType = plugin_setting('flat_shipping.type', 'fixed');
+        $totalService  = $checkout->totalService;
+        $amount        = $totalService->amount;
+        $shippingType  = plugin_setting('flat_shipping.type', 'fixed');
         $shippingValue = plugin_setting('flat_shipping.value', 0);
         if ($shippingType == 'fixed') {
             return $shippingValue;
         } elseif ($shippingType == 'percent') {
             return $amount * $shippingValue / 100;
-        } else {
-            return 0;
         }
+
+            return 0;
+
     }
 }

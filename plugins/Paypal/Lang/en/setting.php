@@ -11,5 +11,5 @@
 
 return [
     'sandbox_mode' => 'Sandbox Mode',
-    'enabled' => 'Enabled',
+    'enabled'      => 'Enabled',
 ];

@@ -27,7 +27,6 @@ class Bootstrap
         // $this->modifySetting();
     }
 
-
     /**
      * 在前台网页头部添加二级菜单链接
      */
@@ -36,12 +35,12 @@ class Bootstrap
         add_hook_filter('menu.content', function ($data) {
             $data[] = [
                 'name' => trans('LatestProducts::header.latest_products'),
-                "link" => shop_route('latest_products'),
+                'link' => shop_route('latest_products'),
             ];
+
             return $data;
         }, 0);
     }
-
 
     /**
      * 修改前台全局 header 模板演示
@@ -66,10 +65,10 @@ class Bootstrap
 
         add_hook_blade('header.menu.icon', function ($callback, $output, $data) {
             $view = view('LatestProducts::shop.header_icon')->render();
+
             return $output . $view;
         });
     }
-
 
     /**
      * 修改产品详情页演示
@@ -83,12 +82,14 @@ class Bootstrap
         // 通过数据 hook 修改产品详情页产品名称
         add_hook_filter('product.show.data', function ($product) {
             $product['product']['name'] = '[疯狂热销]' . $product['product']['name'];
+
             return $product;
         });
 
         // 通过模板 hook 在产品详情页名称上面添加 Hot 标签
         add_hook_blade('product.detail.name', function ($callback, $output, $data) {
             $badge = '<span class="badge" style="background-color: #FF4D00; color: #ffffff; border-color: #FF4D00">Hot</span>';
+
             return $badge . $output;
         });
 
@@ -100,10 +101,10 @@ class Bootstrap
         // 通过模板 hook 在产品详情页立即购买后添加按钮
         add_hook_blade('product.detail.buy.after', function ($callback, $output, $data) {
             $view = '<button class="btn btn-dark ms-3 fw-bold"><i class="bi bi-bag-fill me-1"></i>新增按钮</button>';
+
             return $output . $view;
         });
     }
-
 
     /**
      * 后台产品编辑页添加自定义字段演示
@@ -112,10 +113,10 @@ class Bootstrap
     {
         add_hook_blade('admin.product.edit.extra', function ($callback, $output, $data) {
             $view = view('LatestProducts::admin.product.edit_extra_field', $data)->render();
+
             return $output . $view;
         }, 1);
     }
-
 
     /**
      * 系统设置添加新 tab
@@ -130,5 +131,4 @@ class Bootstrap
             return view('LatestProducts::admin.setting.tab')->render();
         });
     }
-
 }

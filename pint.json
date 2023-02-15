@@ -48,7 +48,6 @@
     },
     "exclude": [
         "database",
-        "plugins",
         "beike/Hook"
     ],
     "notName": [

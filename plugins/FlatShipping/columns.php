@@ -11,19 +11,19 @@
 
 return [
     [
-        'name' => 'type',
+        'name'      => 'type',
         'label_key' => 'common.flat_shipping',
-        'type' => 'select',
-        'options' => [
+        'type'      => 'select',
+        'options'   => [
             ['value' => 'fixed', 'label_key' => 'common.flat_shipping'],
-            ['value' => 'percent', 'label_key' => 'common.percentage']
+            ['value' => 'percent', 'label_key' => 'common.percentage'],
         ],
-        'required' => true,
+        'required'  => true,
     ],
     [
-        'name' => 'value',
+        'name'      => 'value',
         'label_key' => 'common.shipping_value',
-        'type' => 'string',
-        'required' => true,
-    ]
+        'type'      => 'string',
+        'required'  => true,
+    ],
 ];

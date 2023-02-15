@@ -20,7 +20,7 @@ class CustomerSocial extends Model
     public $table = 'customer_socials';
 
     public $fillable = [
-        'customer_id', 'provider', 'user_id', 'union_id', 'access_token', 'extra'
+        'customer_id', 'provider', 'user_id', 'union_id', 'access_token', 'extra',
     ];
 
     public function customer(): BelongsTo

@@ -11,17 +11,16 @@
  * https://www.zongscan.com/demo333/1311.html
  * https://clickysoft.com/how-to-integrate-paypal-payment-gateway-in-laravel/
  * https://www.positronx.io/how-to-integrate-paypal-payment-gateway-in-laravel/
- *
  */
 
 namespace Plugin\Paypal\Controllers;
 
-use Illuminate\Http\Request;
 use Beike\Repositories\OrderRepo;
+use Beike\Services\StateMachineService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Srmklive\PayPal\Services\PayPal;
-use Beike\Services\StateMachineService;
 
 class PaypalController
 {
@@ -30,28 +29,27 @@ class PaypalController
     private function initPaypal()
     {
         $paypalSetting = plugin_setting('paypal');
-        $config = [
-            'mode' => $paypalSetting['sandbox_mode'] ? 'sandbox' : 'live',
-            'sandbox' => [
-                'client_id' => $paypalSetting['sandbox_client_id'],
+        $config        = [
+            'mode'           => $paypalSetting['sandbox_mode'] ? 'sandbox' : 'live',
+            'sandbox'        => [
+                'client_id'     => $paypalSetting['sandbox_client_id'],
                 'client_secret' => $paypalSetting['sandbox_secret'],
             ],
-            'live' => [
-                'client_id' => $paypalSetting['live_client_id'],
+            'live'           => [
+                'client_id'     => $paypalSetting['live_client_id'],
                 'client_secret' => $paypalSetting['live_secret'],
             ],
             'payment_action' => 'Sale',
-            'currency' => 'USD',
-            'notify_url' => '',
-            'locale' => 'en_US',
-            'validate_ssl' => false,
+            'currency'       => 'USD',
+            'notify_url'     => '',
+            'locale'         => 'en_US',
+            'validate_ssl'   => false,
         ];
         config(['paypal' => null]);
         $this->paypalClient = new PayPal($config);
-        $token = $this->paypalClient->getAccessToken();
+        $token              = $this->paypalClient->getAccessToken();
         $this->paypalClient->setAccessToken($token);
     }
-
 
     /**
      * 创建 paypal 订单
@@ -62,28 +60,27 @@ class PaypalController
     public function create(Request $request): JsonResponse
     {
         $this->initPaypal();
-        $data = \json_decode($request->getContent(), true);
+        $data        = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
-        $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
-        $total = round($order->total, 2);
+        $customer    = current_customer();
+        $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $total       = round($order->total, 2);
 
         $paypalOrder = $this->paypalClient->createOrder([
-            "intent" => "CAPTURE",
-            "purchase_units" => [
+            'intent'         => 'CAPTURE',
+            'purchase_units' => [
                 [
-                    "amount" => [
-                        "currency_code" => $order->currency_code,
-                        "value" => $total,
+                    'amount'      => [
+                        'currency_code' => $order->currency_code,
+                        'value'         => $total,
                     ],
-                    'description' => 'test'
-                ]
+                    'description' => 'test',
+                ],
             ],
         ]);
 
         return response()->json($paypalOrder);
     }
-
 
     /**
      * 客户同意后扣款回调
@@ -94,17 +91,17 @@ class PaypalController
     public function capture(Request $request): JsonResponse
     {
         $this->initPaypal();
-        $data = \json_decode($request->getContent(), true);
+        $data        = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
-        $customer = current_customer();
-        $order = OrderRepo::getOrderByNumber($orderNumber, $customer);
+        $customer    = current_customer();
+        $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
 
         $paypalOrderId = $data['paypalOrderId'];
-        $result = $this->paypalClient->capturePaymentOrder($paypalOrderId);
+        $result        = $this->paypalClient->capturePaymentOrder($paypalOrderId);
 
         try {
             DB::beginTransaction();
-            if ($result['status'] === "COMPLETED") {
+            if ($result['status'] === 'COMPLETED') {
                 StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID);
                 DB::commit();
             }
@@ -112,6 +109,7 @@ class PaypalController
             DB::rollBack();
             dd($e);
         }
+
         return response()->json($result);
     }
 }

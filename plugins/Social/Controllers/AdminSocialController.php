@@ -11,9 +11,9 @@
 
 namespace Plugin\Social\Controllers;
 
-use Illuminate\Http\Request;
-use Beike\Repositories\SettingRepo;
 use Beike\Admin\Http\Controllers\Controller;
+use Beike\Repositories\SettingRepo;
+use Illuminate\Http\Request;
 
 class AdminSocialController extends Controller
 {
@@ -23,6 +23,7 @@ class AdminSocialController extends Controller
     public function saveSetting(Request $request): array
     {
         SettingRepo::storeValue('setting', $request->all(), 'social', 'plugin');
+
         return json_success('保存成功');
     }
 }

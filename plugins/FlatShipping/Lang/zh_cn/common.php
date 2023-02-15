@@ -10,8 +10,8 @@
  */
 
 return [
-    'way' => '方式',
-    'flat_shipping' => '固定运费',
-    'percentage' => '百分比',
+    'way'            => '方式',
+    'flat_shipping'  => '固定运费',
+    'percentage'     => '百分比',
     'shipping_value' => '运费值',
 ];

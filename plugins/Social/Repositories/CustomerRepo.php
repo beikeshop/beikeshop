@@ -12,12 +12,12 @@
 namespace Plugin\Social\Repositories;
 
 use Beike\Models\Customer;
+use Beike\Shop\Services\AccountService;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Two\User;
-use Beike\Shop\Services\AccountService;
-use Illuminate\Database\Eloquent\Model;
 use Plugin\Social\Models\CustomerSocial;
-use Illuminate\Database\Eloquent\Builder;
 
 class CustomerRepo
 {
@@ -35,10 +35,11 @@ class CustomerRepo
         $items = [];
         foreach (self::PROVIDERS as $provider) {
             $items[] = [
-                'code' => $provider,
-                'label' => trans("Social::providers.{$provider}")
+                'code'  => $provider,
+                'label' => trans("Social::providers.{$provider}"),
             ];
         }
+
         return $items;
     }
 
@@ -51,7 +52,7 @@ class CustomerRepo
      */
     public static function createCustomer($provider, User $userData): Customer
     {
-        $social = self::getCustomerByProvider($provider, $userData->getId());
+        $social   = self::getCustomerByProvider($provider, $userData->getId());
         $customer = $social->customer ?? null;
         if ($customer) {
             return $customer;
@@ -64,18 +65,18 @@ class CustomerRepo
         $customer = Customer::query()->where('email', $email)->first();
         if (empty($customer)) {
             $customerData = [
-                'from' => $provider,
-                'email' => $email,
-                'name' => $userData->getName(),
+                'from'   => $provider,
+                'email'  => $email,
+                'name'   => $userData->getName(),
                 'avatar' => $userData->getAvatar(),
             ];
             $customer = AccountService::register($customerData);
         }
 
         self::createSocial($customer, $provider, $userData);
+
         return $customer;
     }
-
 
     /**
      * @param $customer
@@ -91,16 +92,16 @@ class CustomerRepo
         }
 
         $socialData = [
-            'customer_id' => $customer->id,
-            'provider' => $provider,
-            'user_id' => $userData->getId(),
-            'union_id' => '',
+            'customer_id'  => $customer->id,
+            'provider'     => $provider,
+            'user_id'      => $userData->getId(),
+            'union_id'     => '',
             'access_token' => $userData->token,
-            'extra' => json_encode($userData->getRaw())
+            'extra'        => json_encode($userData->getRaw()),
         ];
+
         return CustomerSocial::query()->create($socialData);
     }
-
 
     /**
      * 通过 provider 和 user_id 获取已存在 social

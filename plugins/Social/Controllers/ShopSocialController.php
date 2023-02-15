@@ -11,11 +11,11 @@
 
 namespace Plugin\Social\Controllers;
 
+use Beike\Admin\Http\Controllers\Controller;
 use Beike\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Laravel\Socialite\Facades\Socialite;
-use Beike\Admin\Http\Controllers\Controller;
 use Plugin\Social\Repositories\CustomerRepo;
 
 class ShopSocialController extends Controller
@@ -29,9 +29,9 @@ class ShopSocialController extends Controller
                 continue;
             }
             $config = [
-                'client_id' => $providerSetting['key'],
+                'client_id'     => $providerSetting['key'],
                 'client_secret' => $providerSetting['secret'],
-                'redirect' => shop_route('social.callback', $provider),
+                'redirect'      => shop_route('social.callback', $provider),
             ];
             Config::set("services.{$provider}", $config);
         }
@@ -46,7 +46,7 @@ class ShopSocialController extends Controller
         try {
             return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
-            die($e->getMessage());
+            exit($e->getMessage());
         }
     }
 
@@ -60,9 +60,10 @@ class ShopSocialController extends Controller
             $userData = Socialite::driver($provider)->user();
             $customer = CustomerRepo::createCustomer($provider, $userData);
             Auth::guard(Customer::AUTH_GUARD)->login($customer);
+
             return view('Social::shop/callback');
         } catch (\Exception $e) {
-            die($e->getMessage());
+            exit($e->getMessage());
         }
     }
 }

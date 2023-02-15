@@ -10,8 +10,8 @@
  */
 
 return [
-    'way' => 'Way',
-    'flat_shipping' => 'Flat Shipping',
-    'percentage' => 'Percentage',
+    'way'            => 'Way',
+    'flat_shipping'  => 'Flat Shipping',
+    'percentage'     => 'Percentage',
     'shipping_value' => 'Shipping Value',
 ];

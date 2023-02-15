@@ -10,7 +10,7 @@
  */
 
 return [
-// Text
+    // Text
     'text_module'         => 'Modules',
     'text_success'        => 'Success: You have modified module OpenCart OmniAuth!',
     'text_copyright'      => 'OpenCart.cn <a href="http://www.opencart.cn" target="_blank">OmniAuth</a> &copy; %s',
@@ -27,7 +27,7 @@ return [
     'text_twitter_title'  => 'Twitter login application address',
     'text_help_msg'       => 'help information',
 
-// Entry
+    // Entry
     'entry_status'        => 'Status',
     'entry_bind'          => 'Force Bind',
     'entry_debug'         => 'Debug Mode',
@@ -39,13 +39,13 @@ return [
     'entry_callback'      => 'Callback URL',
     'entry_sort_order'    => 'Sort Order',
 
-// Button
+    // Button
     'button_add_row'      => 'Add Provider',
 
-// Error
+    // Error
     'error_permission'    => 'Warning: You do not have permission to modify module OpenCart OmniAuth!',
 
-// Providers
+    // Providers
     'wechat'              => 'WeChat',
     'wechatofficial'      => 'WeChatOfficial',
     'qq'                  => 'QQ',
@@ -54,5 +54,5 @@ return [
     'google'              => 'Google',
     'twitter'             => 'Twitter',
 
-    'instagram' => 'Instagram',
+    'instagram'           => 'Instagram',
 ];

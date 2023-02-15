@@ -12,20 +12,20 @@
 return [
     'publishable_key' => 'Publishable Key',
 
-    'title_info' => 'Card information',
-    'cardnum' => 'Cardnum',
+    'title_info'      => 'Card information',
+    'cardnum'         => 'Cardnum',
     'expiration_date' => 'Expiration Date',
-    'year' => 'Year',
-    'month' => 'Month',
-    'cvv' => 'Cvv',
-    'remenber' => 'Keep this card in mind for future use',
-    'btn_submit' => 'Submit',
+    'year'            => 'Year',
+    'month'           => 'Month',
+    'cvv'             => 'Cvv',
+    'remenber'        => 'Keep this card in mind for future use',
+    'btn_submit'      => 'Submit',
 
-    'error_cardnum' => 'Please enter the card number',
-    'error_cvv' => 'Please enter the security code',
-    'error_year' => 'Please select the year',
-    'error_month' => 'Please select a month',
+    'error_cardnum'   => 'Please enter the card number',
+    'error_cvv'       => 'Please enter the security code',
+    'error_year'      => 'Please select the year',
+    'error_month'     => 'Please select a month',
 
     'capture_success' => 'Capture Successfully',
-    'capture_fail' => 'Capture Failed',
+    'capture_fail'    => 'Capture Failed',
 ];

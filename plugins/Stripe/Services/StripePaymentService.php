@@ -11,15 +11,15 @@
 
 namespace Plugin\Stripe\Services;
 
-use Stripe\Token;
-use Stripe\Stripe;
 use Beike\Shop\Services\PaymentService;
 use Stripe\Exception\ApiErrorException;
+use Stripe\Stripe;
+use Stripe\Token;
 
 class StripePaymentService extends PaymentService
 {
     // 零位十进制货币 https://stripe.com/docs/currencies#special-cases
-    const ZERO_DECIMAL = [
+    public const ZERO_DECIMAL = [
         'BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA',
         'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF',
     ];
@@ -33,36 +33,36 @@ class StripePaymentService extends PaymentService
         Stripe::setApiKey($apiKey);
         $token = Token::create([
             'card' => [
-                'number' => $creditCardData['cardnum'],
-                'exp_year' => $creditCardData['year'],
+                'number'    => $creditCardData['cardnum'],
+                'exp_year'  => $creditCardData['year'],
                 'exp_month' => $creditCardData['month'],
-                'cvc' => $creditCardData['cvv'],
+                'cvc'       => $creditCardData['cvv'],
             ],
         ]);
 
-        $tokenId = $token['id'];
+        $tokenId  = $token['id'];
         $currency = $this->order->currency_code;
 
-        if (!in_array($currency, self::ZERO_DECIMAL)) {
+        if (! in_array($currency, self::ZERO_DECIMAL)) {
             $total = round($this->order->total, 2) * 100;
         } else {
             $total = floor($this->order->total);
         }
 
-        $stripeChargeParameters = array(
-            'amount' => $total,
+        $stripeChargeParameters = [
+            'amount'   => $total,
             'currency' => $currency,
-            'metadata' => array(
+            'metadata' => [
                 'orderId' => $this->order->id,
-            ),
-            'source' => $tokenId,
+            ],
+            'source'   => $tokenId,
             // 'customer' => $this->createCustomer(),
-        );
+        ];
 
         $charge = \Stripe\Charge::create($stripeChargeParameters);
+
         return $charge['paid'] && $charge['captured'];
     }
-
 
     /**
      * 创建 stripe customer
@@ -74,6 +74,7 @@ class StripePaymentService extends PaymentService
         $customer = \Stripe\Customer::create([
             'email' => $this->order->email,
         ]);
+
         return $customer['id'];
     }
 }

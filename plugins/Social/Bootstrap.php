@@ -11,7 +11,6 @@
 
 namespace Plugin\Social;
 
-
 class Bootstrap
 {
     public function boot()
@@ -33,6 +32,7 @@ class Bootstrap
             foreach ($providers as $provider) {
                 $buttons[] = view('Social::shop/social_button', ['provider' => $provider])->render();
             }
+
             return $buttons;
         });
     }
