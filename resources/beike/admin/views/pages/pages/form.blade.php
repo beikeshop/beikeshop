@@ -94,7 +94,7 @@
                 placeholder="{{ __('common.input') }}"
                 @select="(e) => {handleSelect(e, 'page_categories')}"
                 ></el-autocomplete>
-                <input type="hidden" name="page_category_id" :value="page_category_id" />
+                <input type="hidden" name="page_category_id" :value="page_category_name ? page_category_id : ''" />
               </div>
             </x-admin::form.row>
               <x-admin-form-input name="views" title="{{ __('page_category.views') }}" value="{{ old('views', $page->views ?? '') }}" />

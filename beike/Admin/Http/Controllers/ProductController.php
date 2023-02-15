@@ -137,6 +137,8 @@ class ProductController extends Controller
         }
 
         $product = hook_filter('admin.product.form.product', $product);
+        $taxClasses = TaxClassRepo::getList();
+        array_unshift($taxClasses, ['title' => trans('admin/builder.text_no'), 'id' => 0]);
 
         $data = [
             'product'            => $product,
@@ -145,7 +147,7 @@ class ProductController extends Controller
             'product_attributes' => ProductAttributeResource::collection($product->attributes),
             'relations'          => ProductResource::collection($product->relations)->resource,
             'languages'          => LanguageRepo::all(),
-            'tax_classes'        => TaxClassRepo::getList(),
+            'tax_classes'        => $taxClasses,
             'source'             => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],

@@ -21,6 +21,27 @@ hr.horizontal.dark {
   background-image: linear-gradient(90deg,transparent,rgba(0,0,0,.4),transparent);
 }
 
+.nav-tabs {
+  .nav-item {
+    .nav-link {
+      &.error-invalid {
+        color: #dc3545 !important;
+        font-weight: bold;
+        position: relative;
+        padding-left: 17px;
+
+        &:before {
+          content: '\F333';
+          left: 0;
+          top: 1px;
+          font-family: 'bootstrap-icons';
+          position: absolute;
+        }
+      }
+    }
+  }
+}
+
 .nav-tabs.nav-bordered {
   // border-width: 2px;
 
@@ -40,20 +61,6 @@ hr.horizontal.dark {
       color: #6c757d;
       border: none;
       padding: 0 .2rem 0.7rem;
-      &.error-invalid {
-        color: #dc3545 !important;
-        font-weight: bold;
-        position: relative;
-        padding-left: 17px;
-
-        &:before {
-          content: '\F333';
-          left: 0;
-          top: 1px;
-          font-family: 'bootstrap-icons';
-          position: absolute;
-        }
-      }
 
       &.active {
         // color: $primary;

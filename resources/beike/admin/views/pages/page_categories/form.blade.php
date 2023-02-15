@@ -68,15 +68,26 @@
           </div>
           <div class="tab-pane fade" id="tab-set">
             <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
-              <div class="wp-400">
-                <input type="text" value="{{ $page_category->parent->description->title ?? '' }}" id="categories-autocomplete" class="form-control wp-400 " />
-                <input type="hidden" name="parent_id" value="{{ old('categories_id', $page_category->parent->id ?? '') }}" />
+              <div class="wp-400" id="app">
+                <el-autocomplete
+                v-model="category_name"
+                value-key="name"
+                size="small"
+                name="category_name"
+                class="w-100"
+                :fetch-suggestions="relationsQuerySearch"
+                placeholder="{{ __('common.input') }}"
+                @select="handleSelect"
+                ></el-autocomplete>
+                <input type="hidden" name="parent_id" :value="category_name ? category_id : ''" />
               </div>
             </x-admin::form.row>
             <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" value="{{ old('position', $page_category->position ?? 0) }}" />
             <x-admin-form-switch name="active" title="{{ __('common.status') }}" value="{{ old('active', $page_category->active ?? 1) }}" />
           </div>
         </div>
+
+        <button type="submit" class="d-none">{{ __('common.save') }}</button>
       </form>
     </div>
   </div>
@@ -86,27 +97,31 @@
   <script>
     $(document).ready(function($) {
       $('.submit-form').click(function () {
-        $('.needs-validation').submit()
+        // $('.needs-validation').submit()
+        $('.needs-validation').find('button[type="submit"]').click()
       })
+    })
 
-      $('#categories-autocomplete').autocomplete({
-        'source': function(request, response) {
-          $http.get(`page_categories/autocomplete?name=${encodeURIComponent(request)}`, null, {
-            hload: true
-          }).then((res) => {
-            response($.map(res.data, function(item) {
-              return {
-                label: item['name'],
-                value: item['id']
-              }
-            }));
+    var app = new Vue({
+      el: '#app',
+
+      data: {
+        category_name: '{{ old('category_name', $page_category->parent->description->title ?? '') }}',
+        category_id: '{{ old('categories_id', $page_category->parent->id ?? '') }}',
+      },
+
+      methods: {
+        relationsQuerySearch(keyword, cb) {
+          $http.get('page_categories/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+            cb(res.data);
           })
         },
-        'select': function(item) {
-          $(this).val(item['label']);
-          $('input[name="parent_id"]').val(item['value']);
-        }
-      });
+
+        handleSelect(item) {
+          this.category_name = item.name
+          this.category_id = item.id
+        },
+      }
     })
   </script>
 @endpush
