@@ -80,7 +80,7 @@ class AdminForgottenNotification extends Notification implements ShouldQueue
 
     /**
      * 保存到 DB
-     * @return User[]
+     * @return AdminUser[]
      */
     public function toDatabase()
     {

@@ -7,7 +7,7 @@ class RequirementsChecker
     /**
      * Minimum PHP Version Supported (Override is in installer.php config file).
      *
-     * @var _minPhpVersion
+     * @var string
      */
     private $_minPhpVersion = '7.0.0';
 
