@@ -96,7 +96,7 @@ class AttributeRepo
         return $attributeValue;
     }
 
-    public function deleteValue($id)
+    public static function deleteValue($id)
     {
         AttributeValue::query()->findOrFail($id)->delete();
     }

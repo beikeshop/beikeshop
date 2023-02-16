@@ -302,16 +302,19 @@ class Plugin implements Arrayable, \ArrayAccess
         return Arr::has($this->packageInfo, $key);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         return $this->packageInfoAttribute($key);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $value)
     {
         return Arr::set($this->packageInfo, $key, $value);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($key)
     {
         unset($this->packageInfo[$key]);
