@@ -81,4 +81,5 @@ return [
     'update_old_version'    => 'versión actual',
     'update_date'           => 'fecha de actualización',
     'update_btn'            => 'ir a descargar',
+    'expired_at'            => 'fecha de caducidad',
 ];

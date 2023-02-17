@@ -20,7 +20,11 @@
 
         @hookwrapper('admin.header.vip')
         <li class="nav-item vip-serve">
-          <a href="javascript:void(0)" class="nav-link"><img src="/image/vip-icon.png" class="img-fluid"> <span>VIP</span></a>
+          <a href="javascript:void(0)" class="nav-link">
+            <img src="/image/vip-icon.png" class="img-fluid">
+            <span class="vip-text ms-1">VIP</span>
+            <div class="expired-text text-danger ms-2" style="display: none">@lang('admin/common.expired_at')：<span class="ms-0"></span></div>
+          </a>
         </li>
         @endhookwrapper
 

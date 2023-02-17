@@ -85,4 +85,5 @@ return [
     'update_old_version'     => '当前版本',
     'update_date'            => '更新日期',
     'update_btn'             => '前往下载',
+    'expired_at'             => '到期时间',
 ];

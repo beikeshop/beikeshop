@@ -232,7 +232,7 @@
 
     // 获取省份
     const getZones = (country_id) => {
-      $http.get(`countries/${country_id}/zones`).then((res) => {
+      $http.get(`countries/${country_id}/zones`, null, {hload: true}).then((res) => {
         if (res.data.zones.length > 0) {
           $('select[name="zone_id"]').html('');
           res.data.zones.forEach((zone) => {

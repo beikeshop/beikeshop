@@ -81,4 +81,5 @@ return [
     'update_old_version'    => '現在のバージョン',
     'update_date'           => '更新日',
     'update_btn'            => 'ダウンロードする',
+    'expired_at'            => '有効期限',
 ];

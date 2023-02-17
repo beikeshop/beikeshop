@@ -81,4 +81,5 @@ return [
     'update_old_version'    => 'текущая версия',
     'update_date'           => 'дата обновления',
     'update_btn'            => 'перейти к загрузке',
+    'expired_at'            => 'срок действия',
 ];
