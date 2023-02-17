@@ -32,7 +32,7 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 ## DEMO 演示
 <a href="https://demo.beikeshop.com/" target="_blank">BeikeShop Demo</a>
 <p>
-  <a href="https://beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;"><img src="https://beikeshop.com/image/gif/demo.gif" width="500"></a>
+  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;"><img src="https://beikeshop.com/image/gif/demo.gif"></a>
 </p>
 
 ## 安装教程(面向非开发者)
