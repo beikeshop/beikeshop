@@ -29,6 +29,12 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 - Tokenizer PHP Extension
 - XML PHP Extension
 
+## DEMO 演示
+<a href="https://demo.beikeshop.com/" target="_blank">BeikeShop Demo</a>
+<video autoplay="true" loop="" muted="" class="img-fluid box-shadow box-radius">
+  <source src="https://cdn.beikeshop.com/videos/home_features.mp4" type="video/mp4">
+    您的浏览器不支持video标签！
+</video>
 
 ## 安装教程(面向非开发者)
 1. <a href="https://beikeshop.com/download" target="_blank">下载BeikeShop</a>
