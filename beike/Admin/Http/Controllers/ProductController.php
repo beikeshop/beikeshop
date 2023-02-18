@@ -136,7 +136,7 @@ class ProductController extends Controller
             $product->load('brand', 'attributes');
         }
 
-        $product = hook_filter('admin.product.form.product', $product);
+        $product    = hook_filter('admin.product.form.product', $product);
         $taxClasses = TaxClassRepo::getList();
         array_unshift($taxClasses, ['title' => trans('admin/builder.text_no'), 'id' => 0]);
 

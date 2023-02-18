@@ -9,7 +9,7 @@
  * @modified   2022-08-02 14:22:41
  */
 
- return [
+return [
     'index'                  => 'catalogs',
     'info_title'             => 'category title',
     'info_content'           => 'content',
