@@ -56,6 +56,9 @@ class PaymentService
             'order'           => $this->order,
             'payment_setting' => plugin_setting($orderPaymentCode),
         ];
+
+        $paymentData = hook_filter('service.payment.pay.data', $paymentData);
+
         $paymentView = view($viewPath, $paymentData)->render();
 
         return view('checkout.payment', ['order' => $this->order, 'payment' => $paymentView]);
