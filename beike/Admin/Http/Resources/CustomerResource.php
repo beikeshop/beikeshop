@@ -2,6 +2,7 @@
 
 namespace Beike\Admin\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CustomerResource extends JsonResource
@@ -9,8 +10,9 @@ class CustomerResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
      */
     public function toArray($request)
     {
@@ -27,6 +29,11 @@ class CustomerResource extends JsonResource
             'delete'              => admin_route('customers.destroy', $this->id),
         ];
 
-        return $data;
+        $params = [
+            'object' => $this,
+            'data'   => $data,
+        ];
+
+        return hook_filter('resource.customer', $params)['data'];
     }
 }

@@ -62,8 +62,13 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-        $data     = $request->only(['email', 'name', 'password', 'status', 'customer_group_id']);
-        $customer = CustomerService::create($data);
+        $requestData = $request->all();
+
+        hook_action('admin.customer.store.before', ['request_data' => $requestData]);
+
+        $customer = CustomerService::create($requestData);
+
+        hook_action('admin.customer.store.after', ['customer_id' => $customer->id, 'request_data' => $requestData]);
 
         return json_success(trans('common.success'), new CustomerResource($customer));
     }
@@ -87,13 +92,17 @@ class CustomerController extends Controller
 
     public function update(CustomerRequest $request, int $customerId)
     {
-        $data = $request->only(['email', 'name', 'status', 'customer_group_id']);
-        if ($request->get('password')) {
-            $data['password'] = $request->get('password');
+        $requestData = $request->all();
+        $password    = $requestData['password'] ?? '';
+        if (empty($password)) {
+            unset($requestData['password']);
         }
-        $customer = CustomerRepo::update($customerId, $data);
 
-        hook_action('admin.customer.update.after', $customer);
+        hook_action('admin.customer.update.before', ['customer_id' => $customerId, 'request_data' => $requestData]);
+
+        $customer = CustomerRepo::update($customerId, $requestData);
+
+        hook_action('admin.customer.update.after', ['customer_id' => $customerId, 'request_data' => $requestData]);
 
         return json_success(trans('common.updated_success'), $customer);
     }
