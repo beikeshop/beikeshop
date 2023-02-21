@@ -17,8 +17,8 @@ class Plugin extends Base
         'shipping',  // 配送方式
         'payment',   // 支付方式
         'total',     // 订单金额
-        'social',    // 第三方登录
-        'view',       // 其他UI更改
+        'social',    // 社交网络
+        'feature',   // 功能模块
     ];
 
     protected $fillable = ['type', 'code'];
