@@ -10,6 +10,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-pdo": "*",
+        "ext-simplexml": "*",
         "ext-zip": "*",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
