@@ -68,7 +68,7 @@
             </thead>
             <tbody>
               @foreach ($customers as $customer)
-              <tr>
+              <tr data-item='@json($customer)'>
                 <td>{{ $customer['id'] }}</td>
                 <td>{{ $customer['email'] }}</td>
                 <td>
