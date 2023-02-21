@@ -139,6 +139,8 @@
 
           </div>
         </div>
+
+        <button type="submit" class="d-none">{{ __('common.save') }}</button>
       </form>
     </div>
   </div>
@@ -149,7 +151,7 @@
 @push('footer')
 <script>
   $('.submit-form').click(function () {
-    $('.needs-validation').submit()
+    $('.needs-validation').find('button[type="submit"]').click()
   })
 
   var app = new Vue({

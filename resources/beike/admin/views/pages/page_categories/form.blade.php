@@ -97,7 +97,6 @@
   <script>
     $(document).ready(function($) {
       $('.submit-form').click(function () {
-        // $('.needs-validation').submit()
         $('.needs-validation').find('button[type="submit"]').click()
       })
     })

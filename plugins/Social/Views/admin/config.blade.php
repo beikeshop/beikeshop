@@ -72,7 +72,7 @@
               <td>
                 <el-form-item label="" class="mb-0">
                   <div class="input-group">
-                    <input size="small" class="form-control" :value="item.callback" disabled placeholder="{{ __('Social::setting.entry_callback') }}"></input>
+                    <input size="small" class="form-control" :value="item.callback" placeholder="{{ __('Social::setting.entry_callback') }}"></input>
                     <a href="javascript:void(0)" class="btn btn-outline-secondary opacity-75 copy-code" :data-clipboard-text="item.callback" @click="copyCode"><i class="bi bi-front"></i></a>
                   </div>
                 </el-form-item>
