@@ -110,8 +110,8 @@ class SettingRepo
                 'type'       => $type,
                 'space'      => $code,
                 'name'       => $name,
-                'value'      => (string) $value,
-                'json'       => 0,
+                'value'      => is_array($value) ? json_encode($value) : (string)$value,
+                'json'       => is_array($value),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ];
