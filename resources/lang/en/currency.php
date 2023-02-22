@@ -18,4 +18,5 @@ return [
     'symbol_right'   => 'Symbol Right',
     'value'          => 'Value',
     'decimal_place'  => 'Decimal Place',
+    'latest_value'   => 'Latest Value',
 ];

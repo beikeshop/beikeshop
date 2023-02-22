@@ -19,4 +19,5 @@ return [
     'symbol_right'   => '右符号',
     'value'          => '汇率值',
     'decimal_place'  => '小数位数',
+    'latest_value'   => '最新汇率值',
 ];

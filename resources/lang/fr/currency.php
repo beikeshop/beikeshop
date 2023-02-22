@@ -19,4 +19,5 @@ return [
     'symbol_right'   => 'bon signe',
     'value'          => 'valeur du taux de change',
     'decimal_place'  => 'décimales',
+    'latest_value'   => 'dernière valeur du taux de change',
 ];

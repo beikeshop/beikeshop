@@ -12,6 +12,7 @@
 namespace Beike\Services;
 
 use Beike\Repositories\CurrencyRepo;
+use Illuminate\Support\Facades\Http;
 
 class CurrencyService
 {
@@ -90,5 +91,19 @@ class CurrencyService
         }
 
         return $value * ($to / $from);
+    }
+
+    public function getRatesFromApi(string $date)
+    {
+        $cacheKey = 'currency:rates:' . $date;
+        if ($rates = cache()->get($cacheKey)) {
+            return $rates;
+        }
+        $data = Http::get(sprintf('https://v6.exchangerate-api.com/v6/%s/latest/USD', config('beike.rate_key')))
+            ->json();
+        $rates = $data['conversion_rates'] ?? [];
+        cache()->set($cacheKey, $rates);
+
+        return $rates;
     }
 }

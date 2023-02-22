@@ -19,4 +19,5 @@ return [
     'symbol_right'   => '右記号',
     'value'          => '為替レート値',
     'decimal_place'  => '小数位',
+    'latest_value'   => '最新の為替レート値',
 ];

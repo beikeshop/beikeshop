@@ -19,4 +19,5 @@ return [
     'symbol_right'   => 'rechtes Symbol',
     'value'          => 'Wechselkurswert',
     'decimal_place'  => 'Nachkommastellen',
+    'latest_value'   => 'letzten Wechselkurswert',
 ];

@@ -19,4 +19,5 @@ return [
     'symbol_right'   => 'signo correcto',
     'value'          => 'valor del tipo de cambio',
     'decimal_place'  => 'lugares decimales',
+    'latest_value'   => 'último valor del tipo de cambio',
 ];

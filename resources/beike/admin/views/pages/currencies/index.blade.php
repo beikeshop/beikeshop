@@ -19,6 +19,7 @@
               <th>{{ __('currency.symbol_right') }}</th>
               <th>{{ __('currency.decimal_place') }}</th>
               <th>{{ __('currency.value') }}</th>
+              <th>{{ __('currency.latest_value') }}</th>
               <th>{{ __('common.status') }}</th>
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
@@ -32,6 +33,7 @@
               <td>@{{ language.symbol_right }}</td>
               <td>@{{ language.decimal_place }}</td>
               <td>@{{ language.value }}</td>
+              <td>@{{ language.latest_value }}</td>
               <td>
                 <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>

@@ -28,6 +28,7 @@ use Beike\Console\Commands\GenerateDatabaseDict;
 use Beike\Console\Commands\GenerateSitemap;
 use Beike\Console\Commands\MakeRootAdminUser;
 use Beike\Console\Commands\MigrateFromOpenCart;
+use Beike\Console\Commands\FetchCurrencyRate;
 use Beike\Models\AdminUser;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
@@ -90,6 +91,7 @@ class AdminServiceProvider extends ServiceProvider
                 GenerateSitemap::class,
                 MakeRootAdminUser::class,
                 MigrateFromOpenCart::class,
+                FetchCurrencyRate::class,
             ]);
         }
     }
