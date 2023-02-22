@@ -68,4 +68,5 @@ return [
     'placeholder_image'      => '占位图',
     'head_code'              => '插入代码',
     'head_code_info'         => '会将输入框中的代码插入到前端页面 head 中，可用于统计代码或者添加特殊插件等',
+    'rate_api_key'           => '汇率 API KEY',
 ];

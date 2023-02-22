@@ -70,4 +70,5 @@ return [
     'placeholder_image_info' => 'La imagen del marcador de posición se muestra cuando no hay imagen o no se encuentra la imagen, tamaño recomendado: 500*500',
     'head_code'              => 'insertar código',
     'head_code_info'         => 'El código en el cuadro de entrada se insertará en el encabezado de la página principal, que se puede usar para contar el código o agregar complementos especiales, etc.',
+    'rate_api_key'           => 'tipo de cambio API KEY',
 ];

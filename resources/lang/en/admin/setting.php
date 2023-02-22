@@ -70,4 +70,5 @@ return [
     'placeholder_image_info' => 'The placeholder image displayed when there is no image or the image is not found, recommended size: 500*500',
     'head_code'              => 'Insert code',
     'head_code_info'         => 'The code in the input box will be inserted into the head of the front-end page, which can be used to count the code or add special plug-ins, etc',
+    'rate_api_key'           => 'Exchange rate API KEY',
 ];

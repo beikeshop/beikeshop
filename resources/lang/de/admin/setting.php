@@ -69,4 +69,5 @@ return [
     'placeholder_image_info' => 'Das Platzhalterbild wird angezeigt, wenn kein Bild vorhanden ist oder das Bild nicht gefunden wird, empfohlene Größe: 500*500',
     'head_code'              => 'Code einfügen',
     'head_code_info'         => 'Der Code im Eingabefeld wird in den Kopf der Frontend-Seite eingefügt, die zum Zählen des Codes oder zum Hinzufügen spezieller Plug-Ins usw. verwendet werden kann',
+    'rate_api_key'           => 'Tauschrate API KEY',
 ];

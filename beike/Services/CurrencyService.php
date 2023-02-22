@@ -99,8 +99,16 @@ class CurrencyService
         if ($rates = cache()->get($cacheKey)) {
             return $rates;
         }
-        $data = Http::get(sprintf('https://v6.exchangerate-api.com/v6/%s/latest/USD', config('beike.rate_key')))
-            ->json();
+        if (empty(system_setting('base.rate_api_key'))) {
+            return [];
+        }
+        $data = Http::get(
+            sprintf(
+                'https://v6.exchangerate-api.com/v6/%s/latest/%s',
+                system_setting('base.rate_api_key'),
+                system_setting('base.currency', 'USD')
+            )
+        )->json();
         $rates = $data['conversion_rates'] ?? [];
         cache()->set($cacheKey, $rates);
 

@@ -69,4 +69,5 @@ return [
     'placeholder_image_info' => 'Immagine segnaposto visualizzata quando non viene trovata alcuna immagine o immagine, dimensione consigliata: 500*500',
     'head_code'              => 'inserisci codice',
     'head_code_info'         => 'Il codice nella casella di input verrà inserito nell\'intestazione della pagina front-end, che può essere utilizzata per contare il codice o aggiungere plug-in speciali, ecc.',
+    'rate_api_key'           => 'tasso di cambio API KEY',
 ];

@@ -32,6 +32,4 @@ class FetchCurrencyRate extends Command
             $this->error(sprintf('获取 %s 汇率数据失败', $today));
         }
     }
-
-
 }

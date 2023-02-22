@@ -208,6 +208,9 @@
 
             <x-admin-form-select title="{{ __('admin/setting.tax_address') }}" name="tax_address" :value="old('tax_address', system_setting('base.tax_address', 'shipping'))" :options="$tax_address">
             </x-admin-form-select>
+
+            <x-admin-form-input name="rate_api_key" title="{{ __('admin/setting.rate_api_key') }}" value="{{ old('rate_api_key', system_setting('base.rate_api_key', '')) }}">
+            </x-admin-form-input>
           </div>
 
           @hook('admin.setting.after')

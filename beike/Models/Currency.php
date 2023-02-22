@@ -33,6 +33,4 @@ class Currency extends Base
             return $this->value;
         }
     }
-
-
 }

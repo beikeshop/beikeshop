@@ -69,4 +69,5 @@ return [
     'placeholder_image_info' => 'L\'image d\'espace réservé s\'affiche lorsqu\'il n\'y a pas d\'image ou si l\'image n\'est pas trouvée, taille recommandée: 500*500',
     'head_code'              => 'insérer le code',
     'head_code_info'         => 'Le code dans la zone de saisie sera inséré dans l\'en-tête de la page frontale, qui peut être utilisé pour compter le code ou ajouter des plug-ins spéciaux, etc',
+    'rate_api_key'           => 'taux de change API KEY',
 ];
