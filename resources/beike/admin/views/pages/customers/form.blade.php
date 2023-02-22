@@ -139,7 +139,7 @@
           id: @json($customer['id'] ?? null),
           name: @json($customer['name']),
           email: @json($customer['email']),
-          password: '',
+          password: @json($customer['plain_password'] ?? ''),
           customer_group_id: @json($customer['customer_group_id']),
           status: @json($customer['status']) * 1,
         },
