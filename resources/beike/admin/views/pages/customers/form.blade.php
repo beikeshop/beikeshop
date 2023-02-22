@@ -131,7 +131,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#customer-app-form',
       data: {
         customerTab: 'customer',
@@ -310,5 +310,7 @@
         }
       }
     });
+
+    @hook('admin.customer.form.js.after')
   </script>
 @endpush
