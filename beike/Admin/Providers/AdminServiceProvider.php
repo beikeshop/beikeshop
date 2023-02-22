@@ -87,11 +87,11 @@ class AdminServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ChangeRootPassword::class,
+                FetchCurrencyRate::class,
                 GenerateDatabaseDict::class,
                 GenerateSitemap::class,
                 MakeRootAdminUser::class,
                 MigrateFromOpenCart::class,
-                FetchCurrencyRate::class,
             ]);
         }
     }
