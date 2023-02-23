@@ -77,7 +77,7 @@
             <tbody>
               @if (count($orders))
                 @foreach ($orders as $order)
-                  <tr>
+                  <tr data-hook-id={{ $order->id }}>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->number }}</td>
                     <td>{{ sub_string($order->customer_name, 14) }}</td>
