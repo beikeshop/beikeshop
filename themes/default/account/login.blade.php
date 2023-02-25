@@ -23,13 +23,19 @@
             <h6 class="text-uppercase mb-0">{{ __('shop/login.login') }}</h6>
           </div>
           <div class="card-body px-md-2">
+            @hookwrapper('account.login.email')
             <el-form-item label="{{ __('shop/login.email') }}" prop="email">
               <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" v-model="loginForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
             </el-form-item>
+            @endhookwrapper
 
+            @hookwrapper('account.login.password')
             <el-form-item label="{{ __('shop/login.password') }}" prop="password">
               <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" type="password" v-model="loginForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
             </el-form-item>
+            @endhookwrapper
+
+            @hook('account.login.password.after')
 
             @if (!request('iframe'))
               <a class="text-muted forgotten-link" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
@@ -60,18 +66,25 @@
         </div>
         <div class="card-body px-md-2">
             <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
+              @hookwrapper('account.login.new.email')
               <el-form-item label="{{ __('shop/login.email') }}" prop="email">
                 <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.email" placeholder="{{ __('shop/login.email_address') }}"></el-input>
               </el-form-item>
+              @endhookwrapper
 
+              @hookwrapper('account.login.new.password')
               <el-form-item label="{{ __('shop/login.password') }}" prop="password">
                 <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password" placeholder="{{ __('shop/login.password') }}"></el-input>
               </el-form-item>
+              @endhookwrapper
 
+              @hookwrapper('account.login.new.confirm_password')
               <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
                 <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
               </el-form-item>
+              @endhookwrapper
 
+              @hook('account.login.new.confirm_password.bottom')
 
               <div class="mt-5 mb-3">
                 <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
@@ -181,5 +194,8 @@
         }
       }
     })
+
+    @hook('account.login.form.js.after')
+
   </script>
 @endpush
