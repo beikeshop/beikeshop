@@ -31,6 +31,11 @@ class Category extends Base
         return $this->hasMany(self::class, 'parent_id');
     }
 
+    public function activeChildren(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id')->where('active', true);
+    }
+
     public function descriptions(): HasMany
     {
         return $this->hasMany(CategoryDescription::class);

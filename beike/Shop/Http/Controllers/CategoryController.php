@@ -17,6 +17,9 @@ class CategoryController extends Controller
 
     public function show(Request $request, Category $category)
     {
+        if (! $category->active) {
+            return redirect(shop_route('home.index'));
+        }
         $filterData = $request->only('attr', 'price', 'sort', 'order', 'per_page');
         $products   = ProductRepo::getProductsByCategory($category->id, $filterData);
         $category->load('description');

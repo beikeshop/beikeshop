@@ -21,8 +21,8 @@ class CategoryDetail extends JsonResource
             'url'  => shop_route('categories.show', ['category' => $this]),
         ];
 
-        if ($this->relationLoaded('children') && $this->children->count() > 0) {
-            $item['children'] = self::collection($this->children);
+        if ($this->relationLoaded('activeChildren') && $this->activeChildren->count() > 0) {
+            $item['children'] = self::collection($this->activeChildren);
         } else {
             $item['children'] = [];
         }

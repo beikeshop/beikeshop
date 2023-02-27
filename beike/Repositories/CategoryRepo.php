@@ -90,7 +90,7 @@ class CategoryRepo
     {
         $topCategories = Category::query()
             ->from('categories as c')
-            ->with(['description', 'children.description'])
+            ->with(['description', 'activeChildren.description'])
             ->where('parent_id', 0)
             ->where('active', true)
             ->orderBy('position')
