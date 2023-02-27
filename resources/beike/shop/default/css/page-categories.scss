@@ -27,6 +27,21 @@ body.page-categories {
     }
   }
 
+  .children-wrap {
+    @media (max-width: 992px) {
+      display: none;
+    }
+
+    a {
+      color: #333;
+      margin-right: 4px;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
   .style-wrap {
     label {
       cursor: pointer;

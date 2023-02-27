@@ -11,4 +11,5 @@
 
 return [
     'name' => '分類名稱',
+    'children' => '子分類',
 ];

@@ -10,6 +10,7 @@
   <script src="{{ asset('vendor/vue/2.7/vue.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
   {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
+  <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/batch_select.js') }}"></script>
@@ -21,6 +22,20 @@
     <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif
   <title>beike filemanager</title>
+  <script>
+    @if (locale() != 'zh_cn')
+      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
+    @endif
+    const lang = {
+      file_manager: '{{ __('admin/file_manager.file_manager') }}',
+    }
+
+    const config = {
+      beike_version: '{{ config('beike.version') }}',
+      api_url: '{{ config('beike.api_url') }}',
+      app_url: '{{ config('app.url') }}',
+    }
+  </script>
 </head>
 
 <body class="page-filemanager">

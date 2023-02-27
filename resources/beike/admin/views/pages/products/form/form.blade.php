@@ -409,7 +409,7 @@
         </div>
 
         <x-admin::form.row title="">
-          <button type="button" @click="productsSubmit" class="btn btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
+          <button type="submit" @click="productsSubmit" class="btn btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
         </x-admin::form.row>
 
         <el-dialog
@@ -482,7 +482,7 @@
           sku: @json($product->skus[0]['sku'] ?? ''),
           status: @json($product->skus[0]['status'] ?? false),
           variables: @json($product->variables ?? []),
-          skus: @json($product->skus ?? []),
+          skus: @json(old('skus', $product->skus) ?? []),
         },
 
         variablesBatch: {
@@ -588,10 +588,6 @@
           if (!this.editing.isVariable) {
             this.source.variables = [];
           }
-
-          setTimeout(() => {
-            $('form#app').submit();
-          }, 0);
         },
 
         relationsQuerySearch(keyword, cb) {
@@ -656,48 +652,44 @@
         batchSettingVariant() {
           // 要修改的 skuIndex 下标
           let setSkuIndex = [];
+          const skus = JSON.parse(JSON.stringify(this.form.skus));
 
-          this.form.skus.forEach((sku, skuIndex) => {
-            this.variablesBatch.variables.forEach((variantIndex, index) => {
-              if (variantIndex !== '') {
-                // 根据 variantIndex, index，修改 sku.variants[index] 的值
-                if (sku.variants[index] == variantIndex) {
-                  setSkuIndex.push(skuIndex);
-                }
-
-                return;
-              }
-
-              // 如果 variantIndex 全部为空，就把所有的 skuIndex 都加入到 setSkuIndex 中
-              if (this.variablesBatch.variables.every(v => v === '')) {
-                setSkuIndex.push(skuIndex);
+          skus.forEach((sku, skuIndex) => {
+            this.variablesBatch.variables.forEach((v, i) => {
+              if (v === '') {
+                // sku.variants 数据中 i 的值修改为 ‘’
+                sku.variants[i] = '';
               }
             })
 
-            // 修改 skuIndex 下标对应的 sku
-            setSkuIndex.forEach((index) => {
-              if (this.variablesBatch.model) {
-                this.form.skus[index].model = this.variablesBatch.model + '-' + (index + 1);
-              }
-              if (this.variablesBatch.sku) {
-                this.form.skus[index].sku = this.variablesBatch.sku + '-' + (index + 1);
-              }
-              if (this.variablesBatch.image) {
-                this.form.skus[index].images = [this.variablesBatch.image];
-              }
-              if (this.variablesBatch.price) {
-                this.form.skus[index].price = this.variablesBatch.price;
-              }
-              if (this.variablesBatch.origin_price) {
-                this.form.skus[index].origin_price = this.variablesBatch.origin_price;
-              }
-              if (this.variablesBatch.cost_price) {
-                this.form.skus[index].cost_price = this.variablesBatch.cost_price;
-              }
-              if (this.variablesBatch.quantity) {
-                this.form.skus[index].quantity = this.variablesBatch.quantity;
-              }
-            })
+            if (this.variablesBatch.variables.toString() === sku.variants.toString()) {
+              setSkuIndex.push(skuIndex);
+            }
+          })
+
+          // 修改 skuIndex 下标对应的 sku
+          setSkuIndex.forEach((index) => {
+            if (this.variablesBatch.model) {
+              this.form.skus[index].model = this.variablesBatch.model + '-' + (index + 1);
+            }
+            if (this.variablesBatch.sku) {
+              this.form.skus[index].sku = this.variablesBatch.sku + '-' + (index + 1);
+            }
+            if (this.variablesBatch.image) {
+              this.form.skus[index].images = [this.variablesBatch.image];
+            }
+            if (this.variablesBatch.price) {
+              this.form.skus[index].price = this.variablesBatch.price;
+            }
+            if (this.variablesBatch.origin_price) {
+              this.form.skus[index].origin_price = this.variablesBatch.origin_price;
+            }
+            if (this.variablesBatch.cost_price) {
+              this.form.skus[index].cost_price = this.variablesBatch.cost_price;
+            }
+            if (this.variablesBatch.quantity) {
+              this.form.skus[index].quantity = this.variablesBatch.quantity;
+            }
           })
 
           // this.variablesBatch 对象内除了 variables 之外的值都清空
