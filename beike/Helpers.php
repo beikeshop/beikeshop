@@ -1,5 +1,6 @@
 <?php
 
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Beike\Hook\Facades\Hook;
 use Beike\Models\AdminUser;
 use Beike\Models\Currency;
@@ -184,7 +185,7 @@ function type_label($type, $value, array $texts = []): string
         return PageRepo::getName($value);
     } elseif ($type == 'page_category') {
         return PageCategoryRepo::getName($value);
-    }  elseif ($type == 'static') {
+    } elseif ($type == 'static') {
         return trans('shop/' . $value);
     } elseif ($type == 'custom') {
         return $text;
@@ -529,7 +530,7 @@ function quantity_format($quantity)
         return round($quantity / 1000, 1) . 'K';
     }
 
-        return $quantity;
+    return $quantity;
 
 }
 
@@ -618,6 +619,10 @@ function create_directories($directoryPath)
  */
 function hook_filter($hookKey, $hookValue): mixed
 {
+    if (config('app.debug')) {
+        Debugbar::log('HOOK === hook_filter: ' . $hookKey);
+    }
+
     return Eventy::filter($hookKey, $hookValue);
 }
 
@@ -629,6 +634,9 @@ function hook_filter($hookKey, $hookValue): mixed
  */
 function hook_action($hookKey, $hookValue)
 {
+    if (config('app.debug')) {
+        Debugbar::log('HOOK === hook_action: ' . $hookKey);
+    }
     Eventy::action($hookKey, $hookValue);
 }
 

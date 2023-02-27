@@ -5,6 +5,7 @@
 
 namespace Beike\Hook;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Arr;
 
 class Hook
@@ -45,6 +46,37 @@ class Hook
         unset($callbackObject);
 
         return $output;
+    }
+
+    /**
+     * @param string $hook
+     * @param array $params
+     * @param callable|null $callback
+     * @param string $htmlContent
+     * @return string|void|null
+     */
+    public function getHook(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
+    {
+        if (config('app.debug')) {
+            Debugbar::log("HOOK === @hook: {$hook}");
+        }
+        return $this->get($hook, $params, $callback, $htmlContent);
+    }
+
+
+    /**
+     * @param string $hook
+     * @param array $params
+     * @param callable|null $callback
+     * @param string $htmlContent
+     * @return string|void|null
+     */
+    public function getWrapper(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
+    {
+        if (config('app.debug')) {
+            Debugbar::log("HOOK === @hookwrapper: {$hook}");
+        }
+        return $this->get($hook, $params, $callback, $htmlContent);
     }
 
     /**

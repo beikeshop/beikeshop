@@ -44,7 +44,7 @@ class HookServiceProvider extends ServiceProvider
                 {
                     $__definedVars = [];
                 }
-                $output = \Hook::get("' . $name . '",["data"=>$__definedVars],function($data) { return null; });
+                $output = \Hook::getHook("' . $name . '",["data"=>$__definedVars],function($data) { return null; });
                 if ($output)
                 echo $output;
                 ?>';
@@ -78,7 +78,7 @@ class HookServiceProvider extends ServiceProvider
                     $__definedVars = [];
                 }
                 $__hook_content = ob_get_clean();
-                $output = \Hook::get("$__hook_name",["data"=>$__definedVars],function($data) { return null; },$__hook_content);
+                $output = \Hook::getWrapper("$__hook_name",["data"=>$__definedVars],function($data) { return null; },$__hook_content);
                 unset($__hook_name);
                 unset($__hook_content);
                 if ($output)
