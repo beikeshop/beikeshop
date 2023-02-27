@@ -109,7 +109,7 @@ return [
         'select_province' => 'Por favor seleccione provincia',
         'enter_city'      => 'Por favor complete la ciudad',
         'confirm_delete'  => '¿Está seguro de que desea eliminar la dirección?',
-        'hint'            => '提示',
+        'hint'            => 'Pista',
         'check_form'      => 'Por favor, compruebe que el formulario se ha rellenado correctamente.',
     ],
 
