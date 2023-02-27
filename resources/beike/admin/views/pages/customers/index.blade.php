@@ -79,8 +79,8 @@
                 <td>{{ $customer['from'] }}</td>
                 <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
                 <td>
-                  <span class="{{ $customer['active'] ? 'text-success' : 'text-secondary' }}">
-                    {{ $customer['active'] ? __('common.enable') : __('common.disable') }}
+                  <span class="{{ $customer['status'] ? 'text-success' : 'text-secondary' }}">
+                    {{ $customer['status'] ? __('common.enable') : __('common.disable') }}
                   </span>
                 </td>
                 <td>{{ $customer['created_at'] }}</td>
