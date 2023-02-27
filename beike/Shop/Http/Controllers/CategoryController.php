@@ -5,6 +5,7 @@ namespace Beike\Shop\Http\Controllers;
 use Beike\Models\Category;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\ProductRepo;
+use Beike\Shop\Http\Resources\CategoryDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ class CategoryController extends Controller
         $data       = [
             'all_categories'  => CategoryRepo::getTwoLevelCategories(),
             'category'        => $category,
+            'children'        => CategoryDetail::collection($category->activeChildren)->jsonSerialize(),
             'filter_data'     => [
                 'attr'  => ProductRepo::getFilterAttribute($filterData),
                 'price' => ProductRepo::getFilterPrice($filterData),
