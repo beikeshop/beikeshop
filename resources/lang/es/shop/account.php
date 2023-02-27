@@ -77,7 +77,7 @@ return [
             'logistics_status'  => 'Estado logístico',
             'order_status'      => 'Estado del pedido',
             'remark'            => 'Observación',
-            'update_time'       => '更新时间',
+            'update_time'       => 'tiempo de actualizacion',
         ],
 
         'order_success' => [
