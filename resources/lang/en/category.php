@@ -11,4 +11,5 @@
 
 return [
     'name' => 'Name',
+    'children' => 'Subcategory',
 ];
