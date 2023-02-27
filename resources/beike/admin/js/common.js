@@ -76,7 +76,7 @@ export default {
       const params = location.search.substr(1).split('&');
       params.forEach(param => {
         const [key, value] = param.split('=');
-        app.$set(app.filter, key, value);
+        app.$set(app.filter, key, decodeURIComponent(value));
       });
     }
   },
