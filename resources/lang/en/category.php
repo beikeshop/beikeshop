@@ -10,6 +10,6 @@
  */
 
 return [
-    'name' => 'Name',
+    'name'     => 'Name',
     'children' => 'Subcategory',
 ];
