@@ -611,6 +611,16 @@ function create_directories($directoryPath)
 }
 
 /**
+ * 是否安装 debugbar
+ *
+ * @return bool
+ */
+function has_debugbar(): bool
+{
+    return class_exists(\Barryvdh\Debugbar\Facades\Debugbar::class);
+}
+
+/**
  * PHP 代码 hook filter 埋点
  *
  * @param $hookKey
@@ -619,7 +629,7 @@ function create_directories($directoryPath)
  */
 function hook_filter($hookKey, $hookValue): mixed
 {
-    if (config('app.debug')) {
+    if (config('app.debug') && has_debugbar()) {
         Debugbar::log('HOOK === hook_filter: ' . $hookKey);
     }
 
@@ -634,7 +644,7 @@ function hook_filter($hookKey, $hookValue): mixed
  */
 function hook_action($hookKey, $hookValue)
 {
-    if (config('app.debug')) {
+    if (config('app.debug') && has_debugbar()) {
         Debugbar::log('HOOK === hook_action: ' . $hookKey);
     }
     Eventy::action($hookKey, $hookValue);

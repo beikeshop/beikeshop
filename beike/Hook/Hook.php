@@ -57,7 +57,7 @@ class Hook
      */
     public function getHook(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
     {
-        if (config('app.debug')) {
+        if (config('app.debug') && has_debugbar()) {
             Debugbar::log("HOOK === @hook: {$hook}");
         }
         return $this->get($hook, $params, $callback, $htmlContent);
@@ -73,7 +73,7 @@ class Hook
      */
     public function getWrapper(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
     {
-        if (config('app.debug')) {
+        if (config('app.debug') && has_debugbar()) {
             Debugbar::log("HOOK === @hookwrapper: {$hook}");
         }
         return $this->get($hook, $params, $callback, $htmlContent);
