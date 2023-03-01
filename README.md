@@ -1,10 +1,46 @@
-<p align="center"><a href="https://beikeshop.com/" target="_blank"><img src="https://beikeshop.com/image/beike.svg" width="400"></a></p>
+<img height=70 src="https://beikeshop.com/image/beike.svg" >
 
-## BeikeShop
+#  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;—— 一款开源好用的跨境电商系统
 
-BeikeShop 一款开源好用的跨境电商系统
 
+
+## BeikeShop介绍
 BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外贸，跨境行业提供的商品管理、订单管理、会员管理、支付、物流、系统管理等功能。
+<br>
+<br>
+
+
+<a href="https://beikeshop.com/">
+    <img src="https://beikeshop.com/readme/README-1.png">
+</a>
+
+
+## BeikeShop系统亮点
+- **全新！支持ChatGPT：BeikeShop1.3.2 集成ChatGPT，打造高效智能化跨境电商系统**
+- 开源免费：BeikeShop以开源方式发布，OSL-3.0协议允许用户自由使用、修改。
+- 轻量级框架：BeikeShop基于Laravel框架开发，具有高效、灵活、易用等特点。
+- 灵活的插件机制：BeikeShop提供灵活的Hook插件机制，可以方便地扩展和定制系统功能。
+- 多语言多货币支持：支持多种语言/货币切换，可灵活扩展其他语言/货币。
+- 多种支付方式：支持 PayPal、Stripe、Alipay、WeChat Pay 等多种支付方式，覆盖全球主要外贸国家
+- 快速搭建：向VIP提供一键安装脚本，帮助用户快速搭建起一个稳定、高效、易用的跨境电商独立站。
+![ ](https://beikeshop.com/readme/README-2.png)
+
+<br>
+
+## BeikeShop 商城预览视频
+
+<p>
+  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;"><img src="https://beikeshop.com/image/gif/demo.gif"></a>
+</p>
+<a href="https://demo.beikeshop.com/" target="_blank">点击立刻试用：BeikeShop演示站</a>
+<br>
+<br>
+
+## 页面展示
+![ ](https://beikeshop.com/readme/README-7.png)
+![ ](https://beikeshop.com/readme/README-5.png)
+![ ](https://beikeshop.com/readme/README-6.png)
+![ ](https://beikeshop.com/readme/README-8.png)
 
 
 ## 软件架构
@@ -29,11 +65,11 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 - Tokenizer PHP Extension
 - XML PHP Extension
 
-## DEMO 演示
-<a href="https://demo.beikeshop.com/" target="_blank">BeikeShop Demo</a>
-<p>
-  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;"><img src="https://beikeshop.com/image/gif/demo.gif"></a>
-</p>
+
+
+<a href="https://beikeshop.com/download">
+    <img src="https://beikeshop.com/readme/README-3.png">
+</a>
 
 ## 安装教程(面向非开发者)
 1. <a href="https://beikeshop.com/download" target="_blank">下载BeikeShop</a>
@@ -52,11 +88,16 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 1. 通过浏览器访问网站, 根据提示完成安装
 1. 如需升级请在服务器端网站根目录运行`git pull && composer install && php artisan migrate`
 
+## vip服务会员购买
+如果您需要更多的技术服务支持，可以选择购买我们的vip服务会员
+<a href="http://https://beikeshop.com/vip">
+    <img src="https://beikeshop.com/readme/README-4.png">
+</a>
+
 ## 参与贡献
 1. Fork 本仓库
 1. 新建 feature-xxx 分支
 1. 提交代码
 1. 新建 Merge Request
 
-## QQ交流群
-1. 639108380
+## QQ交流群： 639108380
