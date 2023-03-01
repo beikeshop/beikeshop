@@ -210,6 +210,9 @@
             </x-admin-form-select>
 
             <x-admin-form-input name="rate_api_key" title="{{ __('admin/setting.rate_api_key') }}" value="{{ old('rate_api_key', system_setting('base.rate_api_key', '')) }}">
+              <div class="help-text font-size-12 lh-base">
+                <a class="text-secondary" href="https://www.exchangerate-api.com/" target="_blank">www.exchangerate-api.com</a>
+              </div>
             </x-admin-form-input>
           </div>
 
