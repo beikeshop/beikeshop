@@ -54,4 +54,19 @@ class ShipmentService
 
         return $company ? $company['name'] ?? '' : '';
     }
+
+    /**
+     * @param $orderShipment
+     * @param $data
+     * @throws \Throwable
+     */
+    public static function updateShipment($orderShipment, $data)
+    {
+        $shipmentData = [
+            'express_code'      => $data['express_code']    ?? '',
+            'express_company'   => $data['express_name']    ?? '',
+            'express_number'    => $data['express_number']  ?? '',
+        ];
+        $orderShipment->updateOrFail($shipmentData);
+    }
 }

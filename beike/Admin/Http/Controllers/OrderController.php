@@ -13,6 +13,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\OrderSimple;
 use Beike\Models\Order;
+use Beike\Models\OrderShipment;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\ShipmentService;
 use Beike\Services\StateMachineService;
@@ -100,6 +101,22 @@ class OrderController extends Controller
         $orderStatusData = $request->all();
 
         hook_action('admin.order.update_status.after', $orderStatusData);
+
+        return json_success(trans('common.updated_success'));
+    }
+
+    /**
+     * 更新发货信息
+     */
+    public function updateShipment(Request $request, Order $order, int $orderShipmentId): array
+    {
+        $data          = $request->all();
+        $orderShipment = OrderShipment::query()->where('order_id', $order->id)->findOrFail($orderShipmentId);
+        ShipmentService::updateShipment($orderShipment, $data);
+        hook_action('admin.order.update_shipment.after', [
+            'request_data' => $data,
+            'shipment'     => $orderShipment,
+        ]);
 
         return json_success(trans('common.updated_success'));
     }

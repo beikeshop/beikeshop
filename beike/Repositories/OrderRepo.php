@@ -184,8 +184,8 @@ class OrderRepo
 
             $shippingAddress->country    = $shippingAddress->country->name ?? '';
             $shippingAddress->country_id = $shippingAddress->country->id   ?? 0;
-            $paymentAddress->country    = $paymentAddress->country->name ?? '';
-            $paymentAddress->country_id = $paymentAddress->country->id   ?? 0;
+            $paymentAddress->country     = $paymentAddress->country->name  ?? '';
+            $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
         } else {
             $shippingAddress = (Object) ($current['guest_shipping_address'] ?? []);
             $paymentAddress  = (Object) ($current['guest_payment_address'] ?? []);

@@ -138,6 +138,7 @@ Route::prefix($adminName)
                 Route::middleware('can:orders_export')->get('orders/export', [Controllers\OrderController::class, 'export'])->name('orders.export');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/status', [Controllers\OrderController::class, 'updateStatus'])->name('orders.update_status');
+                Route::middleware('can:orders_update_status')->put('orders/{order}/shipments/{shipment}', [Controllers\OrderController::class, 'updateShipment'])->name('orders.update_shipment');
 
                 // 插件
                 Route::middleware('can:plugins_index')->get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');

@@ -215,10 +215,28 @@
             </thead>
             <tbody>
               @foreach ($order->orderShipments as $ship)
-              <tr>
-                <td>{{ $ship->express_company }}</td>
-                <td>{{ $ship->express_number }}</td>
-                <td>{{ $ship->created_at }}</td>
+              <tr data-id="{{ $ship->id }}">
+                <td>
+                  <div class="edit-show">{{ $ship->express_company }}</div>
+
+                  <select class="form-select edit-form express-code d-none" aria-label="Default select example">
+                    @foreach (system_setting('base.express_company', []) as $item)
+                    <option value="{{ $item['code'] }}" {{ $ship->express_code == $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                    @endforeach
+                  </select>
+                </td>
+                <td>
+                  <div class="edit-show">{{ $ship->express_number }}</div>
+                  <input type="text" class="form-control edit-form express-number d-none" placeholder="{{ __('order.express_number') }}" value="{{ $ship->express_number }}">
+                </td>
+                <td class="d-flex justify-content-between align-items-center">
+                  {{ $ship->created_at }}
+                  <div class="btn btn-outline-primary btn-sm edit-shipment">{{ __('common.edit') }}</div>
+                  <div class="d-none shipment-tool">
+                    <div class="btn btn-primary btn-sm">{{ __('common.confirm') }}</div>
+                    <div class="btn btn-outline-secondary btn-sm">{{ __('common.cancel') }}</div>
+                  </div>
+                </td>
               </tr>
               @endforeach
             </tbody>
@@ -258,6 +276,40 @@
 @push('footer')
   @can('orders_update_status')
     <script>
+      $('.edit-shipment').click(function() {
+        $(this).siblings('.shipment-tool').removeClass('d-none');
+        $(this).addClass('d-none');
+
+        $(this).parents('tr').find('.edit-show').addClass('d-none');
+        $(this).parents('tr').find('.edit-form').removeClass('d-none');
+      });
+
+      $('.shipment-tool .btn-outline-secondary').click(function() {
+        $(this).parent().siblings('.edit-shipment').removeClass('d-none');
+        $(this).parent().addClass('d-none');
+
+        $(this).parents('tr').find('.edit-show').removeClass('d-none');
+        $(this).parents('tr').find('.edit-form').addClass('d-none');
+      });
+
+      $('.shipment-tool .btn-primary').click(function() {
+        const id = $(this).parents('tr').data('id');
+        const express_code = $(this).parents('tr').find('.express-code').val();
+        const express_name = $(this).parents('tr').find('.express-code option:selected').text();
+        const express_number = $(this).parents('tr').find('.express-number').val();
+
+        $(this).parent().siblings('.edit-shipment').removeClass('d-none');
+        $(this).parent().addClass('d-none');
+
+        $(this).parents('tr').find('.edit-show').removeClass('d-none');
+        $(this).parents('tr').find('.edit-form').addClass('d-none');
+
+        $http.put(`/orders/{{ $order->id }}/shipments/${id}`, {express_code,express_name,express_number}).then((res) => {
+          layer.msg(res.message);
+          window.location.reload();
+        })
+      });
+
     new Vue({
       el: '#app',
 
