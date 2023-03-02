@@ -134,12 +134,9 @@
 
             let answer = marked.parse(data.response.choices[0].text);
             html += '<div class="answer-list">',
-              html +=
-              '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' +
-              question + '</div></div>',
-              html +=
-              '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' +
-              answer + '</div></div>'
+              html += '<div class="created-at"><span>' + data.created_at + '</span></div>',
+              html += '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' + question + '</div></div>',
+              html += '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' + answer + '</div></div>'
             html += '</div>'
 
             $('#ai-input').val('');
@@ -183,12 +180,9 @@
             let html = '';
             data.data.forEach(function(item, index) {
               html += '<div class="answer-list ' + (!index ? 'first' : '') + '">',
-                html +=
-                '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' +
-                item.question + '</div></div>',
-                html +=
-                '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' +
-                marked.parse(item.answer) + '</div></div>'
+                html += '<div class="created-at"><span>' + item.created_at + '</span></div>',
+                html += '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' + item.question + '</div></div>',
+                html += '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' + marked.parse(item.answer) + '</div></div>'
               html += '</div>'
             })
 
@@ -232,10 +226,10 @@
     }
 
     .answer-list {
-      padding-bottom: 20px;
-      margin-bottom: 20px;
+      /* padding-bottom: 20px; */
+      /* margin-bottom: 20px; */
       white-space: pre-wrap;
-      border-bottom: 1px solid #eee;
+      /* border-bottom: 1px solid #eee; */
     }
 
     .answer-list p {
@@ -243,9 +237,34 @@
     }
 
     .answer-list:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
+      /* border-bottom: none; */
+      /* margin-bottom: 0; */
+      /* padding-bottom: 0; */
+    }
+
+    .created-at {
+      text-align: center;
+      color: #999;
+      font-size: 12px;
+      margin: 30px 0;
+      position: relative;
+    }
+
+    .created-at span {
+      background-color: #fff;
+      padding: 0 10px;
+      position: relative;
+    }
+
+    .created-at:before {
+      content: '';
+      display: inline-block;
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
+      position: absolute;
+      top: 50%;
+      left: 0;
     }
 
     pre {
@@ -267,6 +286,12 @@
       border: 0px !important;
       background-color: #283646 !important;
       color: #FFF;
+    }
+
+    ol, ul, dl {
+      margin-bottom: 0;
+      padding-left: 14px;
+      line-height: 1;
     }
   </style>
 @endsection
