@@ -17,15 +17,6 @@
         <svg viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><rect width="5" height="5"></rect><rect x="7" height="5" width="12"></rect><rect y="7" width="5" height="5"></rect><rect x="7" y="7" height="5" width="12"></rect><rect y="14" width="5" height="5"></rect><rect x="7" y="14" height="5" width="12"></rect></svg>
         <input class="d-none" value="list" type="radio" name="style_list">
       </label>
-
-      @if ($children)
-        <div class="children-wrap ms-4 me-2">
-          <span class="text-secondary">{{ __('category.children') }}：</span>
-          @foreach ($children as $item)
-          <a href="{{ $item['url'] }}">{{ $item['name'] }}</a>
-          @endforeach
-        </div>
-      @endif
     </div>
   @endif
   <div class="d-flex align-items-center">

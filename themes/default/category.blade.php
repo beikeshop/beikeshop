@@ -36,6 +36,14 @@
 
         @if (count($products_format))
           @include('shared.filter_bar_block')
+          @if ($children)
+            <div class="children-wrap me-2 mb-3 mt-n3">
+              <span class="text-secondary">{{ __('category.children') }}：</span>
+              @foreach ($children as $item)
+              <a href="{{ $item['url'] }}">{{ $item['name'] }}</a>
+              @endforeach
+            </div>
+          @endif
           <div class="row {{ request('style_list') == 'list' ? 'product-list-wrap' : ''}}">
             @foreach ($products_format as $product)
               <div class="{{ !request('style_list') || request('style_list') == 'grid' ? 'col-6 col-md-4' : 'col-12'}}">
