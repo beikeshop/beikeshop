@@ -21,14 +21,14 @@ class PermissionRepo
 
     private ?Role $adminRole = null;
 
-    public function setUser(AdminUser $user): self
+    public function setUser($user): self
     {
         $this->adminUser = $user;
 
         return $this;
     }
 
-    public function setRole(Role $role): self
+    public function setRole($role): self
     {
         $this->adminRole = $role;
 
@@ -39,10 +39,11 @@ class PermissionRepo
      * 所有权限列表
      *
      * @return array
+     * @throws \Exception
      */
     public function getAllPermissions(): array
     {
-        $permissions = [
+        $corePermissions = [
             ['title' => trans('admin/common.order'), 'permissions' => $this->getOrderPermissions()],
             ['title' => trans('admin/common.rma'), 'permissions' => $this->getRmaPermissions()],
             ['title' => trans('admin/common.rma_reason'), 'permissions' => $this->getRmaReasonPermissions()],
@@ -71,7 +72,12 @@ class PermissionRepo
             ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
         ];
 
-        return hook_filter('role.all_permissions', $permissions);
+        $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
+        $pluginPermissions = hook_filter('role.permissions.plugin', []);
+
+        $pluginPermissions = $this->handlePluginPermission($pluginPermissions);
+
+        return array_merge($corePermissions, $pluginPermissions);
     }
 
     /**
@@ -395,6 +401,36 @@ class PermissionRepo
         $items  = $this->getPermissionList('country', $routes);
 
         return hook_filter('role.country_permissions', $items);
+    }
+
+    /**
+     * 处理第三方插件权限
+     *
+     * @param $pluginPermissions
+     * @return array
+     * @throws \Exception
+     */
+    private function handlePluginPermission($pluginPermissions): array
+    {
+        if (empty($pluginPermissions)) {
+            return [];
+        }
+
+        foreach ($pluginPermissions as $index => $pluginPermission) {
+            $itemPermissions = $pluginPermission['permissions'] ?? [];
+            if (empty($itemPermissions)) {
+                throw new \Exception('Empty plugin permission!');
+            }
+            foreach ($itemPermissions as $ipIndex => $itemPermission) {
+                $code = $itemPermission['code'] ?? '';
+                if (empty($code)) {
+                    throw new \Exception('Empty plugin permission code!');
+                }
+                $pluginPermissions[$index]['permissions'][$ipIndex]['selected'] = $this->hasPermission($code);
+            }
+        }
+
+        return $pluginPermissions;
     }
 
     /**
