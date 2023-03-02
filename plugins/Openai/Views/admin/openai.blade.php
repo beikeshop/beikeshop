@@ -34,10 +34,13 @@
     let last_page = 0;
     let current_page = 1;
 
-    // hljs.initHighlightingOnLoad();
     marked.setOptions({
       highlight: function(code, lang) {
-        return hljs.highlight(lang, code).value;
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(lang, code, true).value;
+        } else {
+          return hljs.highlightAuto(code).value;
+        }
       }
     });
 
@@ -69,7 +72,19 @@
     $('#answer').height($(window).height() - 260);
     $(document).ready(function() {
       loadQuantities();
-      loadHistories();
+      loadHistories(1 , function() {
+        // 获取 answer .answer-list 内容高度
+        let height = 0;
+        $('.answer-list').each(function() {
+          height += $(this).height();
+        })
+
+        let answerHeight = $('#answer').height();
+
+        if (height < answerHeight) {
+          loadHistories(current_page + 1);
+        }
+      });
 
       $('#ai-input').keydown(function(e) {
         if (e.keyCode == 13) {
@@ -147,7 +162,7 @@
       })
     }
 
-    function loadHistories(page = 1) {
+    function loadHistories(page = 1, callback = null) {
       $.ajax({
         url: `${config.api_url}/api/openai/histories?domain=${config.app_url}&page=${page}`,
         headers: {
@@ -155,11 +170,15 @@
         },
         success: function(data) {
           $('.text-loading').remove();
+
           last_page = data.last_page;
           current_page = data.current_page;
 
-          if (data.data.length) {
+          if (data.data && data.data.length) {
             $('.not-answer').remove();
+
+            // data.data 倒叙
+            data.data.reverse();
 
             let html = '';
             data.data.forEach(function(item, index) {
@@ -174,11 +193,16 @@
             })
 
             $('#answer').prepend(html);
+
             if (page == 1) {
               $('#answer').scrollTop($('#answer')[0].scrollHeight);
             } else {
               $('#answer').scrollTop($('#answer .answer-list.first:eq(1)').offset().top - 100 - $('#answer')
               .offset().top);
+            }
+
+            if (callback) {
+              callback();
             }
           }
         }
@@ -194,7 +218,6 @@
     #answer {
       overflow-y: auto;
       border-radius: 0.25rem;
-      white-space: pre-wrap;
     }
 
     .not-answer {
@@ -211,6 +234,7 @@
     .answer-list {
       padding-bottom: 20px;
       margin-bottom: 20px;
+      white-space: pre-wrap;
       border-bottom: 1px solid #eee;
     }
 
