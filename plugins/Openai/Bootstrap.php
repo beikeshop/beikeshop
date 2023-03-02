@@ -29,5 +29,19 @@ class Bootstrap
 
             return $data;
         });
+
+        add_hook_filter('role.permissions.plugin', function ($data) {
+            $data[] = [
+                'title'       => 'OpenAI',
+                'permissions' => [
+                    [
+                        'code' => 'openai',
+                        'name' => 'ChatGPT',
+                    ],
+                ],
+            ];
+
+            return $data;
+        });
     }
 }
