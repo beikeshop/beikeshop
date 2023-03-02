@@ -134,7 +134,7 @@
 
             let answer = marked.parse(data.response.choices[0].text);
             html += '<div class="answer-list">',
-              html += '<div class="created-at"><span>' + data.created_at + '</span></div>',
+              html += '<div class="created-at"><span>' + data.created_format + '</span></div>',
               html += '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' + question + '</div></div>',
               html += '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' + answer + '</div></div>'
             html += '</div>'
@@ -180,7 +180,7 @@
             let html = '';
             data.data.forEach(function(item, index) {
               html += '<div class="answer-list ' + (!index ? 'first' : '') + '">',
-                html += '<div class="created-at"><span>' + item.created_at + '</span></div>',
+                html += '<div class="created-at"><span>' + item.created_format + '</span></div>',
                 html += '<div class="d-flex mb-2"><div class="text-secondary">{{ __('Openai::common.qa_q') }}：</div><div class="w-100">' + item.question + '</div></div>',
                 html += '<div class="d-flex"><div class="text-secondary">{{ __('Openai::common.qa_a') }}：</div><div class="w-100">' + marked.parse(item.answer) + '</div></div>'
               html += '</div>'
