@@ -1,12 +1,12 @@
 {
     "code": "openai",
     "name": {
-        "zh_cn": "ChatGPT(OpenAI)智能聊天助手",
-        "en": "Integration with OpenAI"
+        "zh_cn": "ChatGPT 智能聊天助手",
+        "en": "Integration with OpenAI ChatGPT API"
     },
     "description": {
-        "zh_cn": "ChatGPT(OpenAI)智能聊天助手, 基于OpenAI GPT3.0 集成开发, 如有疑问详询QQ群 639108380",
-        "en": "Integration with OpenAI"
+        "zh_cn": "ChatGPT 智能聊天助手, 基于 OpenAI API(gpt-3.5-turbo) 开发, 如有疑问详询QQ群 639108380",
+        "en": "Integration with OpenAI ChatGPT API"
     },
     "type": "feature",
     "version": "v1.0.0",
