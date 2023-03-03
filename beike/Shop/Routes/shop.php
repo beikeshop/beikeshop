@@ -21,6 +21,7 @@ use Beike\Shop\Http\Controllers\HomeController;
 use Beike\Shop\Http\Controllers\LanguageController;
 use Beike\Shop\Http\Controllers\PageCategoryController;
 use Beike\Shop\Http\Controllers\PageController;
+use Beike\Shop\Http\Controllers\PluginController;
 use Beike\Shop\Http\Controllers\ProductController;
 use Beike\Shop\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,8 @@ Route::prefix('/')
 
         Route::get('register', [RegisterController::class, 'index'])->name('register.index');
         Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+
+        Route::get('plugin/{code}/{path}', [PluginController::class, 'asset'])->where('path', '(.*)')->name('plugin.asset');
 
         Route::middleware('checkout_auth:' . Customer::AUTH_GUARD)
             ->group(function () {

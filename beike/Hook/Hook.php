@@ -60,6 +60,7 @@ class Hook
         if (config('app.debug') && has_debugbar()) {
             Debugbar::log("HOOK === @hook: {$hook}");
         }
+
         return $this->get($hook, $params, $callback, $htmlContent);
     }
 
@@ -76,6 +77,7 @@ class Hook
         if (config('app.debug') && has_debugbar()) {
             Debugbar::log("HOOK === @hookwrapper: {$hook}");
         }
+
         return $this->get($hook, $params, $callback, $htmlContent);
     }
 

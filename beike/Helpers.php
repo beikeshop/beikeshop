@@ -58,6 +58,17 @@ function plugin_setting($key, $default = null)
 }
 
 /**
+ * 获取插件静态文件
+ *
+ * @param $code , 插件编码
+ * @param $filePath , 相对于插件目录 static 的文件路径
+ */
+function plugin_asset($code, $filePath): string
+{
+    return shop_route('plugin.asset', ['code' => $code, 'path' => $filePath]);
+}
+
+/**
  * 获取后台管理前缀名称, 默认为 admin
  */
 function admin_name(): string
