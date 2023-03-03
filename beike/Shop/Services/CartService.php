@@ -40,6 +40,13 @@ class CartService
                 $item->delete();
             }
 
+            $cartQuantity = $item->quantity;
+            $skuQuantity  =  $item->sku->quantity;
+            if ($cartQuantity > $skuQuantity) {
+                $item->quantity = $skuQuantity;
+                $item->save();
+            }
+
             return $description && $product;
         });
 
@@ -80,6 +87,12 @@ class CartService
                 'quantity'       => $quantity,
                 'selected'       => true,
             ]);
+        }
+
+        $cartQuantity = $cart->quantity;
+        $skuQuantity  =  $cart->sku->quantity;
+        if ($cartQuantity > $skuQuantity) {
+            throw new \Exception(trans('cart.stock_out'));
         }
 
         return $cart;
