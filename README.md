@@ -88,12 +88,6 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 1. 通过浏览器访问网站, 根据提示完成安装
 1. 如需升级请在服务器端网站根目录运行`git pull && composer install && php artisan migrate`
 
-## vip服务会员购买
-如果您需要更多的技术服务支持，可以选择购买我们的vip服务会员
-<a href="http://https://beikeshop.com/vip">
-    <img src="https://beikeshop.com/readme/README-4.png">
-</a>
-
 ## 参与贡献
 1. Fork 本仓库
 1. 新建 feature-xxx 分支
