@@ -267,7 +267,7 @@
       left: 0;
     }
 
-    pre {
+    .answer-wrap pre {
       display: block;
       background-color: #f3f3f3;
       padding: .5rem !important;
@@ -278,17 +278,17 @@
       margin-bottom: 0;
     }
 
-    pre {
+    .answer-wrap pre {
       background-color: #283646 !important;
     }
 
-    pre>code {
+    .answer-wrap pre>code {
       border: 0px !important;
       background-color: #283646 !important;
       color: #FFF;
     }
 
-    ol, ul, dl {
+    .answer-wrap ol, .answer-wrap ul, .answer-wrap dl {
       margin-bottom: 0;
       padding-left: 14px;
       line-height: 1;
