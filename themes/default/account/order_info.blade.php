@@ -206,7 +206,7 @@
                 <tbody>
                   @foreach ($order->orderHistories as $orderHistory)
                     <tr>
-                      <td>{{ $orderHistory->status }}</td>
+                      <td>{{ $orderHistory->status_format }}</td>
                       <td><span class="fw-bold">{{ $orderHistory->comment }}</span></td>
                       <td><span class="fw-bold">{{ $orderHistory->created_at }}</span></td>
                     </tr>
