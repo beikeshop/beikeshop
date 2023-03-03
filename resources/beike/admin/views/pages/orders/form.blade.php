@@ -8,6 +8,7 @@
 
 
 @section('content')
+  @hookwrapper('admin.order.form.base')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
     <div class="card-body order-top-info">
@@ -61,7 +62,9 @@
       </div>
     </div>
   </div>
+  @endhookwrapper
 
+  @hookwrapper('admin.order.form.address')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
     <div class="card-body">
@@ -103,12 +106,14 @@
       </table>
     </div>
   </div>
+  @endhookwrapper
 
   @foreach ($html_items as $item)
     {!! $item !!}
   @endforeach
 
   @can('orders_update_status')
+  @hookwrapper('admin.order.form.status')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.order_status') }}</h6></div>
     <div class="card-body" id="app">
@@ -154,8 +159,10 @@
       </el-form>
     </div>
   </div>
+  @endhookwrapper
   @endcan
 
+  @hookwrapper('admin.order.form.products')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.product_info') }}</h6></div>
     <div class="card-body">
@@ -199,6 +206,7 @@
       </div>
     </div>
   </div>
+  @endhookwrapper
 
   @if ($order->orderShipments)
     <div class="card mb-4">
