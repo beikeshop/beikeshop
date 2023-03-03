@@ -54,23 +54,27 @@ class CartController extends Controller
      */
     public function store(CartRequest $request)
     {
-        $skuId    = $request->sku_id;
-        $quantity = $request->quantity       ?? 1;
-        $buyNow   = (bool) $request->buy_now ?? false;
-        $customer = current_customer();
+        try {
+            $skuId    = $request->sku_id;
+            $quantity = $request->quantity       ?? 1;
+            $buyNow   = (bool) $request->buy_now ?? false;
+            $customer = current_customer();
 
-        $sku = ProductSku::query()
-            ->whereRelation('product', 'active', '=', true)
-            ->findOrFail($skuId);
+            $sku = ProductSku::query()
+                ->whereRelation('product', 'active', '=', true)
+                ->findOrFail($skuId);
 
-        $cart = CartService::add($sku, $quantity, $customer);
-        if ($buyNow) {
-            CartService::select($customer, [$cart->id]);
+            $cart = CartService::add($sku, $quantity, $customer);
+            if ($buyNow) {
+                CartService::select($customer, [$cart->id]);
+            }
+
+            $cart = hook_filter('cart.store.data', $cart);
+
+            return json_success(trans('shop/carts.added_to_cart'), $cart);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
         }
-
-        $cart = hook_filter('cart.store.data', $cart);
-
-        return json_success(trans('shop/carts.added_to_cart'), $cart);
     }
 
     /**

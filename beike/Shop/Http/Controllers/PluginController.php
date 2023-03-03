@@ -21,13 +21,15 @@ class PluginController extends Controller
         $contents = Asset::getInstance($code)->getContent($path);
 
         $content = $contents['content'] ?? '';
-        $type = $contents['type'] ?? '';
+        $type    = $contents['type']    ?? '';
 
         if ($content && $type) {
             $response = Response::make($content);
             $response->header('Content-Type', $type);
+
             return $response;
         }
+
         return '';
     }
 }

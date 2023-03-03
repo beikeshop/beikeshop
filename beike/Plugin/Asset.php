@@ -18,19 +18,19 @@ class Asset
 {
     private $pluginPath;
 
-    const CONTENT_TYPES = [
-        'js' => 'application/javascript',
-        'css' => 'text/css',
-        'jpg' => 'image/jpeg',
+    public const CONTENT_TYPES = [
+        'js'   => 'application/javascript',
+        'css'  => 'text/css',
+        'jpg'  => 'image/jpeg',
         'apng' => 'image/apng',
         'avif' => 'image/avif',
-        'gif' => 'image/gif',
+        'gif'  => 'image/gif',
         'jpeg' => 'image/jpeg',
-        'png' => 'image/png',
-        'svg' => 'image/svg+xml',
+        'png'  => 'image/png',
+        'svg'  => 'image/svg+xml',
         'webp' => 'image/webp',
         'webm' => 'video/webm',
-        'ogg' => 'video/ogg',
+        'ogg'  => 'video/ogg',
     ];
 
     public function __construct($pluginCode)
@@ -38,7 +38,7 @@ class Asset
         if (empty($pluginCode)) {
             throw new \Exception('Empty plugin code!');
         }
-        $folderName = Str::studly($pluginCode);
+        $folderName       = Str::studly($pluginCode);
         $this->pluginPath = base_path('plugins/' . $folderName);
     }
 
@@ -46,7 +46,6 @@ class Asset
     {
         return new self($pluginCode);
     }
-
 
     /**
      * Get content and type
@@ -59,11 +58,13 @@ class Asset
         $filePath = $this->pluginPath . '/Static/' . $file;
         if (is_file($filePath)) {
             $extension = File::extension($filePath);
+
             return [
-                'type' => self::CONTENT_TYPES[$extension] ?? '',
+                'type'    => self::CONTENT_TYPES[$extension] ?? '',
                 'content' => file_get_contents($filePath),
             ];
         }
+
         return [];
     }
 }
