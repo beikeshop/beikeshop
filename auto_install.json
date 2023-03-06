@@ -1,0 +1,16 @@
+{
+    "php_ext":"opcache,ioncube",
+    "chmod":[
+        {"mode":755,"path":"/storage"},
+        {"mode":755,"path":"/bootstrap/cache"},
+        {"mode":755,"path":"/public/cache"}
+    ],
+    "success_url":"/index.php",
+    "php_versions":"80,81,82",
+    "db_config":"",
+    "admin_username":"",
+    "admin_password":"",
+    "run_path":"/public",
+    "remove_file":["/.user.ini"],
+    "enable_functions":["putenv"]
+}
