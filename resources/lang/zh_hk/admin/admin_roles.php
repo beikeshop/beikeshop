@@ -14,7 +14,7 @@ return [
     'unselect_all'    => '取消選中',
     'role_name'       => '角色名稱',
     'role_management' => '角色管理',
-    'permission'      => '權限',
+    'permission'      => '系統權限',
     'plugin_permission'      => '插件權限',
     'error_roles'     => '請至少選擇一個角色',
 ];

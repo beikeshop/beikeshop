@@ -14,7 +14,7 @@ return [
     'unselect_all'    => 'Auswahl aufheben',
     'role_name'       => 'Rollenname',
     'role_management' => 'Rollenverwaltung',
-    'permission'      => 'Erlaubnis',
+    'permission'      => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
     'error_roles'     => 'Bitte mindestens eine Rolle auswählen',
 ];

@@ -14,6 +14,6 @@ return [
     'unselect_all'    => 'deseleziona',
     'role_name'       => 'Nome ruolo',
     'role_management' => 'gestione dei ruoli',
-    'permission'      => 'autorizzazione',
+    'permission'      => 'System Authority',
     'error_roles'     => 'Seleziona almeno un ruolo',
 ];

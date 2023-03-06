@@ -14,7 +14,7 @@ return [
     'unselect_all'    => 'unselect',
     'role_name'       => '役割名',
     'role_management' => '役割管理',
-    'permission'      => '許可',
+    'permission'      => 'システム権限',
     'plugin_permission' => 'プラグインのパーミッション',
     'error_roles'     => '少なくとも 1 つのロールを選択してください',
 ];
