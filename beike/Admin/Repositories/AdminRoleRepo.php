@@ -26,7 +26,7 @@ class AdminRoleRepo
     public static function createAdminRole($data): Role
     {
         $adminRole   = Role::findOrCreate($data['name'], 'web_admin');
-        $permissions = $data['permissions'];
+        $permissions = array_merge($data['core_permissions'], $data['plugin_permissions']);
         self::syncPermissions($adminRole, $permissions);
 
         return $adminRole;
@@ -47,7 +47,7 @@ class AdminRoleRepo
             'guard_name' => 'web_admin',
         ]);
 
-        $permissions = $data['permissions'];
+        $permissions = array_merge($data['core_permissions'], $data['plugin_permissions']);
         self::syncPermissions($adminRole, $permissions);
 
         return $adminRole;
