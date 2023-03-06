@@ -12,4 +12,4 @@
 use Illuminate\Support\Facades\Route;
 use Plugin\Openai\Controllers\OpenaiController;
 
-Route::get('/openai', [OpenaiController::class, 'index'])->name('openai');
+Route::middleware('can:openai_index')->get('/openai', [OpenaiController::class, 'index'])->name('openai.index');
