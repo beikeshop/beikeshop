@@ -32,7 +32,7 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="{{ __('admin/admin_roles.plugin_permission') }}" prop="roles">
+        <el-form-item label="{{ __('admin/admin_roles.plugin_permission') }}" prop="roles" v-if="form.plugin_permissions.length">
           <div class="roles-wrap border w-max-900">
             <div class="bg-dark p-2 text-dark bg-opacity-10 px-2">
               <el-button size="small" @click="updateAllState('plugin_permissions', true)">@lang('admin/admin_roles.select_all')</el-button>
