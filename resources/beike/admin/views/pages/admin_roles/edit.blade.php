@@ -51,6 +51,7 @@
           id: @json($role->id ?? null),
           name: @json($role->name ?? ''),
           permissions: @json($permissions ?? []),
+          plugins_permissions: @json($plugins_permissions ?? []),
         },
 
         source: {
