@@ -16,5 +16,6 @@ return [
     'role_management' => '角色管理',
     'role'            => '角色',
     'permission'      => '权限',
+    'plugin_permission'      => '插件权限',
     'error_roles'     => '请至少选择一个角色',
 ];

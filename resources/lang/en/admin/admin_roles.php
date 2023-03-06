@@ -16,5 +16,6 @@ return [
     'role_name'       => 'Role Name',
     'role_management' => 'Role Management',
     'permission'      => 'Permission',
+    'plugin_permission' => 'Plugin permissions',
     'error_roles'     => 'Please select at least one role',
 ];

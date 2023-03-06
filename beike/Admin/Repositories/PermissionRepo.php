@@ -41,7 +41,7 @@ class PermissionRepo
      * @return array
      * @throws \Exception
      */
-    public function getAllPermissions(): array
+    public function getRoleCorePermissions(): array
     {
         $corePermissions = [
             ['title' => trans('admin/common.order'), 'permissions' => $this->getOrderPermissions()],
@@ -73,11 +73,23 @@ class PermissionRepo
         ];
 
         $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
+
+        return $corePermissions;
+    }
+
+    /**
+     * 插件权限
+     *
+     * @return array
+     * @throws \Exception
+     */
+    public function getRolePluginPermissions(): array
+    {
         $pluginPermissions = hook_filter('role.permissions.plugin', []);
 
         $pluginPermissions = $this->handlePluginPermission($pluginPermissions);
 
-        return array_merge($corePermissions, $pluginPermissions);
+        return $pluginPermissions;
     }
 
     /**
