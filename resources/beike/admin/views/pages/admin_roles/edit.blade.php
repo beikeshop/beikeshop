@@ -13,13 +13,13 @@
         <el-form-item label="{{ __('admin/admin_roles.permission') }}" prop="roles">
           <div class="roles-wrap border w-max-900">
             <div class="bg-dark p-2 text-dark bg-opacity-10 px-2">
-              <el-button size="small" @click="updateAllState('permissions', true)">@lang('admin/admin_roles.select_all')</el-button>
-              <el-button size="small" @click="updateAllState('permissions', false)">@lang('admin/admin_roles.unselect_all')</el-button>
+              <el-button size="small" @click="updateAllState('core_permissions', true)">@lang('admin/admin_roles.select_all')</el-button>
+              <el-button size="small" @click="updateAllState('core_permissions', false)">@lang('admin/admin_roles.unselect_all')</el-button>
             </div>
-            <div v-for="role, index in form.permissions" :key="index">
+            <div v-for="role, index in form.core_permissions" :key="index">
               <div class="bg-light px-2 d-flex">
                 @{{ role.title }}
-                <div class="row-update ms-2 link-secondary">[<span @click="updateState('permissions', true, index)">{{ __('common.select_all') }}</span> / <span @click="updateState('permissions', false, index)">{{ __('common.cancel') }}</span>]</div>
+                <div class="row-update ms-2 link-secondary">[<span @click="updateState('core_permissions', true, index)">{{ __('common.select_all') }}</span> / <span @click="updateState('core_permissions', false, index)">{{ __('common.cancel') }}</span>]</div>
               </div>
               <div class="role-methods">
                 <div class="d-flex flex-wrap px-3">
@@ -72,7 +72,7 @@
         form: {
           id: @json($role->id ?? null),
           name: @json($role->name ?? ''),
-          permissions: @json($core_permissions ?? []),
+          core_permissions: @json($core_permissions ?? []),
           plugin_permissions: @json($plugin_permissions ?? []),
         },
 
