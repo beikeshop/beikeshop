@@ -14,7 +14,7 @@ return [
     'unselect_all'    => 'отменить выбор',
     'role_name'       => 'имя роли',
     'role_management' => 'управление ролями',
-    'permission'      => 'разрешение',
+    'permission'      => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
     'error_roles'     => 'Выберите хотя бы одну роль',
 ];

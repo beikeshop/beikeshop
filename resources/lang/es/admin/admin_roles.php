@@ -14,7 +14,7 @@ return [
     'unselect_all'    => 'desmarcar',
     'role_name'       => 'Nombre de rol',
     'role_management' => 'gestión de roles',
-    'permission'      => 'permiso',
+    'permission'      => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
     'error_roles'     => 'Seleccione al menos un rol',
 ];
