@@ -14,6 +14,8 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外�
     <img src="https://beikeshop.com/readme/README-1.png">
 </a>
 
+请保留我公司版权信息，如要移除，需要我公司授权。
+
 
 ## BeikeShop系统亮点
 - **全新！支持ChatGPT：BeikeShop1.3.2 集成ChatGPT，打造高效智能化跨境电商系统**
@@ -104,4 +106,5 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
 1. 提交代码
 1. 新建 Merge Request
 
-## QQ交流群： 639108380
+## QQ交流群： 
+群1: 639108380
