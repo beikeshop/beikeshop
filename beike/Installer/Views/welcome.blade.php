@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="content-main d-flex justify-content-center align-items-center flex-column">
-      <div class="welcome-img"><img src="{{ asset('/install/image/install-1.png') }}" class="img-fluid"></div>
+      <div class="welcome-img"><img src="https://beikeshop.com/install/install-1.png?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="img-fluid"></div>
       <h5 class="mb-5 text-muted fw-3 fw-normal guide-text text-center lh-base">{{ __('installer::installer_messages.welcome.describe') }}</h5>
 
       <p class="text-center">
