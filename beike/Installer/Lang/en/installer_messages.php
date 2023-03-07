@@ -29,9 +29,9 @@ return [
         'next'             => 'Check Requirements',
         'copyright_btn'    => 'I have read the agreement and agree',
         'copyright_title'  => 'Copyright Description',
-        'copyright_list_1' => '1. The copyright of this system belongs to Chengdu GuangDa Network Technology Co., Ltd. ',
+        'copyright_list_1' => '1. The copyright of this system belongs to Chengdu GuangDa Network Technology Co., Ltd.',
         'copyright_list_2' => '2. Any individual or organization can not be allowed to sell or lease this system and its derivatives without our explicit written authorization.',
-        'copyright_list_3' => '3. This system can be downloaded, forwarded, installed, modified and used freely without authorization from our company. ',
+        'copyright_list_3' => '3. Please keep the copyright information, and please contact us if you wanna remove it.',
     ],
 
     /*
