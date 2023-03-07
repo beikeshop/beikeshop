@@ -10,11 +10,11 @@
  */
 
 return [
-    'select_all'      => 'alle auswählen',
-    'unselect_all'    => 'Auswahl aufheben',
-    'role_name'       => 'Rollenname',
-    'role_management' => 'Rollenverwaltung',
-    'permission'      => 'System Authority',
+    'select_all'        => 'alle auswählen',
+    'unselect_all'      => 'Auswahl aufheben',
+    'role_name'         => 'Rollenname',
+    'role_management'   => 'Rollenverwaltung',
+    'permission'        => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
-    'error_roles'     => 'Bitte mindestens eine Rolle auswählen',
+    'error_roles'       => 'Bitte mindestens eine Rolle auswählen',
 ];

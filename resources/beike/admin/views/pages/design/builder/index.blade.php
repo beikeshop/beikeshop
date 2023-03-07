@@ -12,6 +12,7 @@
   <title>{{ __('admin/builder.text_edit_home') }}</title>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
+  <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
@@ -22,8 +23,17 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
   @stack('header')
   <script>
+    @if (locale() != 'zh_cn')
+      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
+    @endif
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
+    }
+
+    const config = {
+      beike_version: '{{ config('beike.version') }}',
+      api_url: '{{ config('beike.api_url') }}',
+      app_url: '{{ config('app.url') }}',
     }
   </script>
 </head>
@@ -64,11 +74,6 @@
       <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
-
-
-  @foreach($editors as $editor)
-    <x-dynamic-component :component="$editor" />
-  @endforeach
 
   <script>
     var $languages = @json(locales());
@@ -139,6 +144,10 @@
     });
   </script>
 
+  @foreach($editors as $editor)
+  <x-dynamic-component :component="$editor" />
+  @endforeach
+
   @include('admin::pages.design.builder.component.image_selector')
   @include('admin::pages.design.builder.component.link_selector')
   @include('admin::pages.design.builder.component.text_i18n')
@@ -201,6 +210,7 @@
             content: sourceModule.make,
             module_id: module_id,
             name: sourceModule.name,
+            view_path: sourceModule.view_path || '',
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {

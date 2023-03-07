@@ -41,7 +41,7 @@ class PluginRepo
      */
     public static function installPlugin(BPlugin $bPlugin)
     {
-        self::publishStaticFiles($bPlugin);
+        // self::publishStaticFiles($bPlugin);
         self::migrateDatabase($bPlugin);
         $type   = $bPlugin->type;
         $code   = $bPlugin->code;

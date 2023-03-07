@@ -1,0 +1,12 @@
+{
+    "code": "bestseller",
+    "name": "热卖商品模块",
+    "description": "首页装修热卖商品模块",
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "yangjin@guangda.work"
+    }
+}

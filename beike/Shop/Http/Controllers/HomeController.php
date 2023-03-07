@@ -20,10 +20,15 @@ class HomeController extends Controller
 
         $moduleItems = [];
         foreach ($modules as $module) {
-            $code     = $module['code'];
-            $moduleId = $module['module_id'] ?? '';
-            $content  = $module['content'];
-            $viewPath = "design.{$code}";
+            $code       = $module['code'];
+            $moduleId   = $module['module_id'] ?? '';
+            $content    = $module['content'];
+            $viewPath   = $module['view_path'] ?? '';
+
+            if (empty($viewPath)) {
+                $viewPath = "design.{$code}";
+            }
+
             if (view()->exists($viewPath) && $moduleId) {
                 $moduleItems[] = [
                     'code'      => $code,

@@ -10,11 +10,11 @@
  */
 
 return [
-    'select_all'      => 'выбрать все',
-    'unselect_all'    => 'отменить выбор',
-    'role_name'       => 'имя роли',
-    'role_management' => 'управление ролями',
-    'permission'      => 'System Authority',
+    'select_all'        => 'выбрать все',
+    'unselect_all'      => 'отменить выбор',
+    'role_name'         => 'имя роли',
+    'role_management'   => 'управление ролями',
+    'permission'        => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
-    'error_roles'     => 'Выберите хотя бы одну роль',
+    'error_roles'       => 'Выберите хотя бы одну роль',
 ];

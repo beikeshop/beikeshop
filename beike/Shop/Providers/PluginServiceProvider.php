@@ -15,6 +15,7 @@ use Beike\Models\AdminUser;
 use Beike\Plugin\Manager;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,7 @@ class PluginServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap Plugin Service Provider
+     * @throws \Exception
      */
     public function boot()
     {
@@ -41,15 +43,7 @@ class PluginServiceProvider extends ServiceProvider
             return;
         }
         $manager              = app('plugin');
-        $plugins              = $manager->getEnabledPlugins();
         $this->pluginBasePath = base_path('plugins');
-
-        foreach ($plugins as $plugin) {
-            $pluginCode = $plugin->getDirname();
-            $this->bootPlugin($plugin);
-            $this->registerRoutes($pluginCode);
-            $this->registerMiddleware($pluginCode);
-        }
 
         $allPlugins = $manager->getPlugins();
         foreach ($allPlugins as $plugin) {
@@ -57,6 +51,15 @@ class PluginServiceProvider extends ServiceProvider
             $this->loadMigrations($pluginCode);
             $this->loadViews($pluginCode);
             $this->loadTranslations($pluginCode);
+        }
+
+        $enabledPlugins = $manager->getEnabledPlugins();
+        foreach ($enabledPlugins as $plugin) {
+            $pluginCode = $plugin->getDirname();
+            $this->bootPlugin($plugin);
+            $this->registerRoutes($pluginCode);
+            $this->registerMiddleware($pluginCode);
+            $this->loadDesignComponents($pluginCode);
         }
     }
 
@@ -188,5 +191,32 @@ class PluginServiceProvider extends ServiceProvider
         }
 
         return $middlewares;
+    }
+
+    /**
+     * 加载插件内首页 page builder 相关组件
+     *
+     * @throws \Exception
+     */
+    protected function loadDesignComponents($pluginCode)
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $builderPath    = "{$pluginBasePath}/{$pluginCode}/Admin/View/DesignBuilders/";
+
+        $builders = glob($builderPath . '*');
+        foreach ($builders as $builder) {
+            $builderName   = basename($builder, '.php');
+            $aliasName     = Str::snake($builderName);
+            $componentName = Str::studly($builderName);
+            $classBaseName = "\\Plugin\\{$pluginCode}\\Admin\\View\\DesignBuilders\\{$componentName}";
+
+            if (! class_exists($classBaseName)) {
+                throw new \Exception("请先定义自定义模板类 {$classBaseName}");
+            }
+
+            $this->loadViewComponentsAs('editor', [
+                $aliasName => $classBaseName,
+            ]);
+        }
     }
 }

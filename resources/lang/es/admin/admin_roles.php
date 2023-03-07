@@ -10,11 +10,11 @@
  */
 
 return [
-    'select_all'      => 'Comprobar todo',
-    'unselect_all'    => 'desmarcar',
-    'role_name'       => 'Nombre de rol',
-    'role_management' => 'gestión de roles',
-    'permission'      => 'System Authority',
+    'select_all'        => 'Comprobar todo',
+    'unselect_all'      => 'desmarcar',
+    'role_name'         => 'Nombre de rol',
+    'role_management'   => 'gestión de roles',
+    'permission'        => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
-    'error_roles'     => 'Seleccione al menos un rol',
+    'error_roles'       => 'Seleccione al menos un rol',
 ];

@@ -10,11 +10,11 @@
  */
 
 return [
-    'select_all'      => 'tout sélectionner',
-    'unselect_all'    => 'désélectionner',
-    'role_name'       => 'nom du rôle',
-    'role_management' => 'gestion des rôles',
-    'permission'      => 'System Authority',
+    'select_all'        => 'tout sélectionner',
+    'unselect_all'      => 'désélectionner',
+    'role_name'         => 'nom du rôle',
+    'role_management'   => 'gestion des rôles',
+    'permission'        => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
-    'error_roles'     => 'Veuillez sélectionner au moins un rôle',
+    'error_roles'       => 'Veuillez sélectionner au moins un rôle',
 ];

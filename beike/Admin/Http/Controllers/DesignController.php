@@ -18,9 +18,13 @@ class DesignController extends Controller
     public function index(Request $request): View
     {
         $data = [
-            'editors'         => ['editor-slide_show', 'editor-image401', 'editor-tab_product', 'editor-product', 'editor-image100', 'editor-brand', 'editor-icons', 'editor-rich_text'],
+            'editors'         => [
+                'editor-slide_show', 'editor-image401', 'editor-tab_product', 'editor-product', 'editor-image100',
+                'editor-brand', 'editor-icons', 'editor-rich_text',
+            ],
             'design_settings' => system_setting('base.design_setting'),
         ];
+
         $data = hook_filter('admin.design.index.data', $data);
 
         return view('admin::pages.design.builder.index', $data);
@@ -39,7 +43,11 @@ class DesignController extends Controller
         $moduleId   = $module['module_id'] ?? '';
         $moduleCode = $module['code']      ?? '';
         $content    = $module['content']   ?? '';
-        $viewPath   = "design.{$moduleCode}";
+        $viewPath   = $module['view_path'] ?? '';
+
+        if (empty($viewPath)) {
+            $viewPath   = "design.{$moduleCode}";
+        }
 
         $viewData = [
             'code'      => $moduleCode,
@@ -48,6 +56,7 @@ class DesignController extends Controller
             'content'   => DesignService::handleModuleContent($moduleCode, $content),
             'design'    => (bool) $request->get('design'),
         ];
+
         $viewData = hook_filter('admin.design.preview.data', $viewData);
 
         return view($viewPath, $viewData);

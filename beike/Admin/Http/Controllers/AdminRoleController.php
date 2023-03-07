@@ -34,7 +34,7 @@ class AdminRoleController extends Controller
     {
         $permissionRepo = (new PermissionRepo());
         $data           = [
-            'core_permissions' => $permissionRepo->getRoleCorePermissions(),
+            'core_permissions'   => $permissionRepo->getRoleCorePermissions(),
             'plugin_permissions' => $permissionRepo->getRolePluginPermissions(),
         ];
 
@@ -49,9 +49,9 @@ class AdminRoleController extends Controller
         $role           = Role::query()->findOrFail($id);
         $permissionRepo = (new PermissionRepo())->setRole($role);
         $data           = [
-            'core_permissions' => $permissionRepo->getRoleCorePermissions(),
+            'core_permissions'   => $permissionRepo->getRoleCorePermissions(),
             'plugin_permissions' => $permissionRepo->getRolePluginPermissions(),
-            'role'        => $role,
+            'role'               => $role,
         ];
         $data = hook_filter('admin.admin_role.edit.data', $data);
 

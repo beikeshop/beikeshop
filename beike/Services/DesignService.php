@@ -30,6 +30,12 @@ class DesignService
             if (empty($moduleId)) {
                 $moduleData['module_id'] = Str::random(16);
             }
+
+            $viewPath = $moduleData['view_path'] ?? '';
+            if ($viewPath == 'design.') {
+                $moduleData['view_path'] = '';
+            }
+
             $modulesData[$index] = $moduleData;
         }
 
@@ -41,6 +47,7 @@ class DesignService
      */
     public static function handleModuleContent($moduleCode, $content)
     {
+        $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
         } elseif (in_array($moduleCode, ['image401', 'image100'])) {
@@ -57,7 +64,7 @@ class DesignService
             return self::handleRichText($content);
         }
 
-        return $content;
+        return hook_filter('admin.service.design.module.content', $content);
     }
 
     /**
