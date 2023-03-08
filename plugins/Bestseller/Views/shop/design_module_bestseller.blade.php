@@ -14,8 +14,8 @@
           </div>
         </div>
         <div class="swiper-pagination rectangle module-bs-product-{{ $module_id }}-pagination"></div>
-        <div class="swiper-button-prev product-bs-prev"></div>
-        <div class="swiper-button-next product-bs-next"></div>
+        <div class="swiper-button-prev product-bs-{{ $module_id }}-prev"></div>
+        <div class="swiper-button-next product-bs-{{ $module_id }}-next"></div>
       @elseif (!$content['products'] and $design)
       <div class="row">
         @for ($s = 0; $s < 4; $s++)
@@ -59,8 +59,8 @@
 
       // 如果需要前进后退按钮
       navigation: {
-        nextEl: '.product-bs-next',
-        prevEl: '.product-bs-prev',
+        nextEl: '.product-bs-{{ $module_id }}-next',
+        prevEl: '.product-bs-{{ $module_id }}-prev',
       },
     })
   </script>

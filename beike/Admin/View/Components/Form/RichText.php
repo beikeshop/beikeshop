@@ -10,16 +10,25 @@ class RichText extends Component
 
     public string $title;
 
-    public string $value;
+    public $value;
 
     public bool $required;
 
-    public function __construct(string $name, string $title, string $value = '', bool $required = false)
+    public bool $multiple;
+
+    public function __construct(string $name, string $title, $value = '', bool $required = false, bool $multiple = false)
     {
+        $value = html_entity_decode($value, ENT_QUOTES);
+
+        if ($multiple) {
+            $value = json_decode($value, true);
+        }
+
         $this->name     = $name;
         $this->title    = $title;
-        $this->value    = html_entity_decode($value, ENT_QUOTES);
+        $this->value    = $value;
         $this->required = $required;
+        $this->multiple = $multiple;
     }
 
     public function render()

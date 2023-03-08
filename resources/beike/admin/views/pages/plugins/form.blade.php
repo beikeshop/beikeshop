@@ -63,8 +63,10 @@
           <x-admin-form-rich-text
             :name="$column['name']"
             :title="$column['label']"
+            :value="old($column['name'], $column['value'] ?? '')"
             :required="$column['required'] ? true : false"
-            :value="old($column['name'], $column['value'] ?? '')">
+            :multiple="$column['multiple']"
+            >
             @if (isset($column['description']))
               <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
             @endif
