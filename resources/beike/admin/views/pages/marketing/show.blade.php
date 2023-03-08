@@ -91,7 +91,7 @@
   <div class="card h-min-200">
     <div class="card-header"><h6 class="card-title">{{ __('admin/marketing.download_description') }}</h6></div>
     <div class="card-body">
-      {{ $data['description'] }}
+      {!! $data['description'] !!}
     </div>
   </div>
   @endif
