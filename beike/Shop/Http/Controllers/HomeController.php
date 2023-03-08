@@ -29,6 +29,15 @@ class HomeController extends Controller
                 $viewPath = "design.{$code}";
             }
 
+            $paths = explode('::', $viewPath);
+            if (count($paths) == 2) {
+                $pluginCode = $paths[0];
+                $plugin     = app('plugin')->getPlugin($pluginCode);
+                if (! $plugin || ! $plugin->getEnabled()) {
+                    continue;
+                }
+            }
+
             if (view()->exists($viewPath) && $moduleId) {
                 $moduleItems[] = [
                     'code'      => $code,

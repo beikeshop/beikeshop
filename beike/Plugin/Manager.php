@@ -16,6 +16,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use ZanySoft\Zip\Zip;
 
 class Manager
@@ -113,6 +114,7 @@ class Manager
      */
     public function getPlugin($code): ?Plugin
     {
+        $code    = Str::snake($code);
         $plugins = $this->getPlugins();
 
         return $plugins[$code] ?? null;

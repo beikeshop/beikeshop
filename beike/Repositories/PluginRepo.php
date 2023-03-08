@@ -17,6 +17,7 @@ use Beike\Shop\Services\TotalServices\ShippingService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class PluginRepo
 {
@@ -114,6 +115,20 @@ class PluginRepo
     }
 
     /**
+     * Get plugin by code
+     *
+     * @param $code
+     * @return mixed
+     */
+    public static function getPlugin($code): mixed
+    {
+        $code    = Str::camel($code);
+        $plugins = self::getPluginsByCode();
+
+        return $plugins->get($code);
+    }
+
+    /**
      * 判断插件是否安装
      *
      * @param $code
@@ -124,6 +139,19 @@ class PluginRepo
         $plugins = self::getPluginsByCode();
 
         return $plugins->has($code);
+    }
+
+    /**
+     * 判断插件是否安装
+     *
+     * @param $code
+     * @return bool
+     */
+    public static function enabled($code): bool
+    {
+        $code = Str::camel($code);
+
+        return SettingRepo::getPluginStatus($code);
     }
 
     /**
@@ -144,7 +172,7 @@ class PluginRepo
      * 获取所有已安装插件
      * @return Plugin[]|Collection
      */
-    public static function getPluginsByCode()
+    public static function getPluginsByCode(): Collection|array
     {
         $allPlugins = self::allPlugins();
 
