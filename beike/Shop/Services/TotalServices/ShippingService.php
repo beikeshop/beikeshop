@@ -33,8 +33,7 @@ class ShippingService
         $shippingPluginCode = self::parseShippingPluginCode($shippingMethod);
         $pluginCode         = Str::studly($shippingPluginCode);
 
-        $plugin = app('plugin')->getPlugin($shippingPluginCode);
-        if (empty($plugin) || ! $plugin->getInstalled() || ! $plugin->getEnabled()) {
+        if (! app('plugin')->checkActive($shippingPluginCode)) {
             $cart                       = $checkout->cart;
             $cart->shipping_method_code = '';
             $cart->saveOrFail();

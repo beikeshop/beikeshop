@@ -32,8 +32,7 @@ class HomeController extends Controller
             $paths = explode('::', $viewPath);
             if (count($paths) == 2) {
                 $pluginCode = $paths[0];
-                $plugin     = app('plugin')->getPlugin($pluginCode);
-                if (! $plugin || ! $plugin->getEnabled()) {
+                if (! app('plugin')->checkActive($pluginCode)) {
                     continue;
                 }
             }

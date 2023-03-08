@@ -137,6 +137,23 @@ class Manager
     }
 
     /**
+     * Check plugin is active, include existed, installed and enabled
+     *
+     * @param $code
+     * @return bool
+     * @throws \Exception
+     */
+    public function checkActive($code): bool
+    {
+        $plugin    = $this->getPlugin($code);
+        if (empty($plugin) || ! $plugin->getInstalled() || ! $plugin->getEnabled()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * 获取插件目录以及配置
      *
      * @return array
