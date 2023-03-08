@@ -121,7 +121,7 @@ Vue.component('module-editor-product', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

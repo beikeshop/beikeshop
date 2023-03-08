@@ -36,7 +36,7 @@ Vue.component('module-editor-bestseller', {
 </script>
 
 {{-- 定义模块的配置项 --}}
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

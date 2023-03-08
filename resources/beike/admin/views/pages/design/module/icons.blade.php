@@ -88,7 +88,7 @@ Vue.component('module-editor-icons', {
 
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

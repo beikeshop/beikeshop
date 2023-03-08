@@ -50,7 +50,7 @@ Vue.component('module-editor-image100', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

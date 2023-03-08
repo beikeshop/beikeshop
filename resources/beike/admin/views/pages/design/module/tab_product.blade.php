@@ -159,7 +159,7 @@ Vue.component('module-editor-tab-product', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

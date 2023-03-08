@@ -107,7 +107,7 @@ Vue.component('module-editor-brand', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

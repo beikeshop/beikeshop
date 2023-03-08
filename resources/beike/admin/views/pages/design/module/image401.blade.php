@@ -62,7 +62,7 @@ Vue.component('module-editor-image401', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 

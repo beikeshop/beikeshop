@@ -269,6 +269,6 @@
       },
     })
   </script>
-  @stack('add-script')
+  @stack('footer-script')
 </body>
 </html>

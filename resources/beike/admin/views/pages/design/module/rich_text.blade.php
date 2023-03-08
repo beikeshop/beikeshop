@@ -39,7 +39,7 @@ Vue.component('module-editor-rich-text', {
 });
 </script>
 
-@push('add-script')
+@push('footer-script')
   <script>
     register = @json($register);
 
