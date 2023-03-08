@@ -6,7 +6,7 @@
       <text-i18n v-model="module.title"></text-i18n>
     </div>
     <div class="module-edit-group">
-      <div class="module-edit-title">数量限制</div>
+      <div class="module-edit-title">{{ __('Bestseller::common.limit') }}</div>
       <el-input type="number" v-model="module.limit" size="small"></el-input>
     </div>
   </div>
@@ -33,19 +33,22 @@ Vue.component('module-editor-bestseller', {
     }
   },
 });
-
-const register = @json($register);
-
-// 定义模块的配置项
-register.make = {
-  style: {
-    background_color: ''
-  },
-  title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-  limit: 8,
-}
-
-setTimeout(() => {
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+{{-- 定义模块的配置项 --}}
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+      limit: 8,
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush
+

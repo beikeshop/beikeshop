@@ -29,4 +29,6 @@ return [
     'social'                => 'Social',
     'total'                 => 'Total',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

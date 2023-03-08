@@ -119,20 +119,21 @@ Vue.component('module-editor-product', {
     },
   }
 });
-
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    floor: languagesFill(''),
-    products: [],
-    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      floor: languagesFill(''),
+      products: [],
+      title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+    };
+
+    app.source.modules.push(register)
+  </script>
+@endpush

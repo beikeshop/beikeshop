@@ -29,4 +29,6 @@ return [
     'social'                => '社交网络',
     'total'                 => '订单计算',
     'feature'               => '功能模块',
+    'language'              => '语言翻译',
+    'theme'                 => '主题模板',
 ];

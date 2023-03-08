@@ -29,4 +29,6 @@ return [
     'total'                 => 'Calcul de la commande',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

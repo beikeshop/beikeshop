@@ -29,4 +29,6 @@ return [
     'total'                 => 'Calcolo dell\'ordine',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

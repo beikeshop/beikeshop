@@ -19,6 +19,8 @@ class Plugin extends Base
         'total',     // 订单金额
         'social',    // 社交网络
         'feature',   // 功能模块
+        'language',  // 语言翻译
+        'theme',     // 主题模板
     ];
 
     protected $fillable = ['type', 'code'];

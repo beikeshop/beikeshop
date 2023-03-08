@@ -29,4 +29,6 @@ return [
     'total'                 => 'Cálculo de pedidos',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

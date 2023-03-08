@@ -157,20 +157,22 @@ Vue.component('module-editor-tab-product', {
     }
   }
 });
-
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    floor: languagesFill(''),
-    tabs: [{title: languagesFill('Tab 1'), products: []}],
-    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    // 定义模块的配置项
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      floor: languagesFill(''),
+      tabs: [{title: languagesFill('Tab 1'), products: []}],
+      title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush

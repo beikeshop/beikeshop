@@ -29,4 +29,6 @@ return [
     'total'                 => '注文計算',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

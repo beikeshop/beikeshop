@@ -37,19 +37,21 @@ Vue.component('module-editor-rich-text', {
 
   }
 });
-
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    floor: languagesFill(''),
-    text: {}
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    // 定义模块的配置项
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      floor: languagesFill(''),
+      text: {}
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush

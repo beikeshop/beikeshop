@@ -93,36 +93,39 @@ Vue.component('module-editor-slideshow', {
   }
 });
 
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    full: true,
-    floor: languagesFill(''),
-    images: [
-      {
-        image: languagesFill('catalog/demo/banner/banner-4-en.jpg'),
-        show: true,
-        link: {
-          type: 'product',
-          value:''
-        }
-      },
-      {
-        image: languagesFill('catalog/demo/banner/banner-3-en.jpg'),
-        show: false,
-        link: {
-          type: 'product',
-          value:''
-        }
-      }
-    ]
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    // 定义模块的配置项
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      full: true,
+      floor: languagesFill(''),
+      images: [
+        {
+          image: languagesFill('catalog/demo/banner/banner-4-en.jpg'),
+          show: true,
+          link: {
+            type: 'product',
+            value:''
+          }
+        },
+        {
+          image: languagesFill('catalog/demo/banner/banner-3-en.jpg'),
+          show: false,
+          link: {
+            type: 'product',
+            value:''
+          }
+        }
+      ]
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush

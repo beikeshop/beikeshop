@@ -33,7 +33,7 @@ class Bootstrap
             $module = $data['module_code'] ?? '';
 
             if ($module == 'bestseller') {
-                $data['title'] = $data['title'][locale()] ?? '';
+                $data['title']    = $data['title'][locale()] ?? '';
                 $data['products'] = ProductRepo::getBestSellerProducts($data['limit']);
             }
 

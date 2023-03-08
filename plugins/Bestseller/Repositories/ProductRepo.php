@@ -25,11 +25,12 @@ class ProductRepo
     {
         $products = \Beike\Repositories\ProductRepo::getBuilder([
             'active' => 1,
-            'sort' => 'products.sales',
-            'order' => 'desc',
+            'sort'   => 'products.sales',
+            'order'  => 'desc',
         ])
             ->whereHas('masterSku')
             ->limit($limit)->get();
+
         return ProductSimple::collection($products)->jsonSerialize();
     }
 }

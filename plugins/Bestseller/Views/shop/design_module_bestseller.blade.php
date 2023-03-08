@@ -4,7 +4,7 @@
     <div class="container position-relative">
       <div class="module-title">{{ $content['title'] }}</div>
       @if ($content['products'])
-        <div class="swiper module-product-{{ $module_id }} module-slideshow">
+        <div class="swiper module-bs-product-{{ $module_id }} module-slideshow">
           <div class="swiper-wrapper">
             @foreach ($content['products'] as $product)
             <div class="swiper-slide">
@@ -13,9 +13,9 @@
             @endforeach
           </div>
         </div>
-        <div class="swiper-pagination rectangle module-product-{{ $module_id }}-pagination"></div>
-        <div class="swiper-button-prev product-prev"></div>
-        <div class="swiper-button-next product-next"></div>
+        <div class="swiper-pagination rectangle module-bs-product-{{ $module_id }}-pagination"></div>
+        <div class="swiper-button-prev product-bs-prev"></div>
+        <div class="swiper-button-next product-bs-next"></div>
       @elseif (!$content['products'] and $design)
       <div class="row">
         @for ($s = 0; $s < 4; $s++)
@@ -36,30 +36,31 @@
   </div>
 
   <script>
-    new Swiper ('.module-product-{{ $module_id }}', {
-      loop: 1,
+    new Swiper ('.module-bs-product-{{ $module_id }}', {
       watchSlidesProgress: true,
-      breakpoints:{
+      breakpoints: {
         320: {
           slidesPerView: 2,
+          slidesPerGroup: 2,
           spaceBetween: 10,
         },
         768: {
           slidesPerView: 4,
+          slidesPerGroup: 4,
           spaceBetween: 30,
         },
       },
       spaceBetween: 30,
       // 如果需要分页器
       pagination: {
-        el: '.module-product-{{ $module_id }}-pagination',
+        el: '.module-bs-product-{{ $module_id }}-pagination',
         clickable: true,
       },
 
       // 如果需要前进后退按钮
       navigation: {
-        nextEl: '.product-next',
-        prevEl: '.product-prev',
+        nextEl: '.product-bs-next',
+        prevEl: '.product-bs-prev',
       },
     })
   </script>

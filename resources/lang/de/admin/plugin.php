@@ -29,4 +29,6 @@ return [
     'total'                 => 'Auftragsberechnung',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

@@ -168,9 +168,15 @@ body.page-design {
           display: flex;
           justify-content: center;
           align-items: center;
-          img {
-            max-width: 100%;
-            max-height: auto;
+
+          .img-icon {
+            width: 36px;
+            height: 36px;
+
+            img {
+              max-width: 100%;
+              max-height: auto;
+            }
           }
 
           i {

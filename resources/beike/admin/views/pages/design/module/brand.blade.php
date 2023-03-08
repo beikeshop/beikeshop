@@ -105,21 +105,22 @@ Vue.component('module-editor-brand', {
     },
   }
 });
-
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    floor: languagesFill(''),
-    full: true,
-    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-    brands: []
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      floor: languagesFill(''),
+      full: true,
+      title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+      brands: []
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush

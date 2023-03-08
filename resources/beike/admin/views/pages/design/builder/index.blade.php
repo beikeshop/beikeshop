@@ -62,7 +62,10 @@
           <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
             <div @click="addModuleButtonClicked(item.code)" class="module-list">
               <div class="module-info">
-                <div class="icon"><i :style="item.style" class="iconfont" v-html="item.icon"></i></div>
+                <div class="icon">
+                  <i :style="item.style" class="iconfont" v-if="isIcon(item.icon)" v-html="item.icon"></i>
+                  <div class="img-icon" v-else><img :src="item.icon" class="img-fluid"></div>
+                </div>
                 <div class="name">@{{ item.name }}</div>
               </div>
             </div>
@@ -154,6 +157,8 @@
   @include('admin::pages.design.builder.component.rich_text_i18n')
 
   <script>
+    let register = null;
+
     let app = new Vue({
       el: '#app',
       data: {
@@ -244,8 +249,12 @@
         },
 
         viewHome() {
-          // window.open('/');
           location = '/';
+        },
+
+        isIcon(code) {
+          // 判断 code 是否以 &# 开头
+          return code.indexOf('&#') == 0;
         },
 
         showAllModuleButtonClicked() {
@@ -260,5 +269,6 @@
       },
     })
   </script>
+  @stack('add-script')
 </body>
 </html>

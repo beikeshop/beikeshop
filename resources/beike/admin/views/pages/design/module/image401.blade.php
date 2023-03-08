@@ -60,52 +60,54 @@ Vue.component('module-editor-image401', {
     },
   }
 });
-
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    floor: languagesFill(''),
-    images: [
-      {
-        image: languagesFill('catalog/demo/image_plus_1-en.png'),
-        show: true,
-        link: {
-          type: 'product',
-          value:''
-        }
-      },
-      {
-        image: languagesFill('catalog/demo/image_plus_2-en.png'),
-        show: false,
-        link: {
-          type: 'product',
-          value:''
-        }
-      },
-      {
-        image: languagesFill('catalog/demo/image_plus_3-en.png'),
-        show: false,
-        link: {
-          type: 'product',
-          value:''
-        }
-      },
-      {
-        image: languagesFill('catalog/demo/image_plus_4-en.png'),
-        show: false,
-        link: {
-          type: 'product',
-          value:''
-        }
-      }
-    ]
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    // 定义模块的配置项
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      floor: languagesFill(''),
+      images: [
+        {
+          image: languagesFill('catalog/demo/image_plus_1-en.png'),
+          show: true,
+          link: {
+            type: 'product',
+            value:''
+          }
+        },
+        {
+          image: languagesFill('catalog/demo/image_plus_2-en.png'),
+          show: false,
+          link: {
+            type: 'product',
+            value:''
+          }
+        },
+        {
+          image: languagesFill('catalog/demo/image_plus_3-en.png'),
+          show: false,
+          link: {
+            type: 'product',
+            value:''
+          }
+        },
+        {
+          image: languagesFill('catalog/demo/image_plus_4-en.png'),
+          show: false,
+          link: {
+            type: 'product',
+            value:''
+          }
+        }
+      ]
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush

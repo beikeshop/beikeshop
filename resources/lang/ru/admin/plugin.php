@@ -29,4 +29,6 @@ return [
     'total'                 => 'Расчет заказа',
     'social'                => 'Social',
     'feature'               => 'Feature',
+    'language'              => 'Language',
+    'theme'                 => 'Theme',
 ];

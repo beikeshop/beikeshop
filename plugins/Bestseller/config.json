@@ -1,7 +1,13 @@
 {
     "code": "bestseller",
-    "name": "热卖商品模块",
-    "description": "首页装修热卖商品模块",
+    "name": {
+        "zh_cn": "热卖商品模块",
+        "en": "Hot Items Module"
+    },
+    "description": {
+        "zh_cn": "首页装修热卖商品模块",
+        "en": "Home Decoration Hot Products Module"
+    },
     "type": "feature",
     "version": "v1.0.0",
     "icon": "/image/logo.png",

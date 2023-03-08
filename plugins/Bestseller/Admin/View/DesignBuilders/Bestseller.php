@@ -33,11 +33,10 @@ class Bestseller extends Component
     public function render(): View
     {
         $data['register'] = [
-            'code' => 'bestseller',
-            'sort' => 0,
-            // 'name' => trans('admin/design_builder.module_brand'),
-            'name'      => 'Bestseller',
-            'icon'      => '&#xe602;',
+            'code'      => 'bestseller',
+            'sort'      => 0,
+            'name'      => trans('Bestseller::common.module_name'),
+            'icon'      => plugin_asset('Bestseller', 'image/icon.png'),
             'view_path' => 'Bestseller::shop/design_module_bestseller',
         ];
 

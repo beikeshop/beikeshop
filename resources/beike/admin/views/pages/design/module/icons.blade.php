@@ -86,19 +86,21 @@ Vue.component('module-editor-icons', {
   }
 });
 
-setTimeout(() => {
-  const make = {
-    style: {
-      background_color: ''
-    },
-    title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-    floor: languagesFill(''),
-    images: []
-  }
-
-  let register = @json($register);
-
-  register.make = make;
-  app.source.modules.push(register)
-}, 100)
 </script>
+
+@push('add-script')
+  <script>
+    register = @json($register);
+
+    register.make = {
+      style: {
+        background_color: ''
+      },
+      title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
+      floor: languagesFill(''),
+      images: []
+    }
+
+    app.source.modules.push(register)
+  </script>
+@endpush
