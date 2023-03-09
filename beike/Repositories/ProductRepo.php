@@ -19,6 +19,7 @@ use Beike\Models\ProductCategory;
 use Beike\Models\ProductDescription;
 use Beike\Models\ProductRelation;
 use Beike\Models\ProductSku;
+use Illuminate\Support\Facades\DB;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -365,6 +366,7 @@ class ProductRepo
         $products = Product::query()
             ->with(['description'])
             ->whereIn('id', $productIds)
+            ->orderByRaw(DB::raw('FIELD(id, ' . implode(',', $productIds) . ')'))
             ->get();
 
         return $products;
