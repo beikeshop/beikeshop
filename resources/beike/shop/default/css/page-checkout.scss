@@ -53,6 +53,7 @@ body.page-checkout {
       .radio {
         position: relative;
         width: 18px;
+        flex: 0 0 18px;
         height: 18px;
         border: 1px solid #d4d4d4;
         border-radius: 50%;
@@ -62,6 +63,7 @@ body.page-checkout {
         margin-right: 10px;
         display: flex;
         align-items: center;
+        flex: 0 0 88px;
 
         img {
           width: 60px;

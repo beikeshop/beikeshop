@@ -17,7 +17,7 @@
             </div>
             <div class="right">
               <h3 class="order-title">{{ __('shop/checkout.payment.please_pay') }}</h3>
-              <div class="order-info">
+              <div class="order-info mb-4">
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
