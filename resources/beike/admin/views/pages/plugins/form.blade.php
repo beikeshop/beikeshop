@@ -26,6 +26,15 @@
                 :value="old($column['name'], $column['value'] ?? '')" />
             @endif
 
+            @if ($column['type'] == 'string-multiple')
+              <x-admin-form-input-locale
+                :name="$column['name'].'.*'"
+                :title="$column['label']"
+                :error="$errors->first($column['name'])"
+                :required="$column['required'] ? true : false"
+                :value="old($column['name'], $column['value'] ?? '')" />
+            @endif
+
             @if ($column['type'] == 'select')
               <x-admin-form-select
                 :name="$column['name']"
@@ -67,7 +76,7 @@
               :title="$column['label']"
               :value="old($column['name'], $column['value'] ?? '')"
               :required="$column['required'] ? true : false"
-              :multiple="$column['multiple']"
+              :multiple="$column['multiple'] ?? false"
               >
               @if (isset($column['description']))
                 <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
