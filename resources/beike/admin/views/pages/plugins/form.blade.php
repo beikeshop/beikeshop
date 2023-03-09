@@ -73,19 +73,39 @@
             @endif
 
             @if ($column['type'] == 'rich-text')
-            <x-admin-form-rich-text
-              :name="$column['name']"
-              :title="$column['label']"
-              :value="old($column['name'], $column['value'] ?? '')"
-              :required="$column['required'] ? true : false"
-              :multiple="$column['multiple'] ?? false"
-              >
-              @if (isset($column['description']))
-                <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
-              @endif
-            </x-admin-form-rich-text>
-          @endif
+              <x-admin-form-rich-text
+                :name="$column['name']"
+                :title="$column['label']"
+                :value="old($column['name'], $column['value'] ?? '')"
+                :required="$column['required'] ? true : false"
+                :multiple="$column['multiple'] ?? false"
+                >
+                @if (isset($column['description']))
+                  <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
+                @endif
+              </x-admin-form-rich-text>
+            @endif
 
+            @if ($column['type'] == 'checkbox')
+              <x-admin::form.row :title="$column['label']" :required="$column['required'] ? true : false">
+                <div class="form-checkbox">
+                  @foreach ($column['options'] as $item)
+                  <div class="form-check d-inline-block mt-2 me-3">
+                    <input
+                      class="form-check-input"
+                      name="{{ $column['name'] }}[]"
+                      type="checkbox"
+                      value="{{ old($column['name'], $item['value']) }}"
+                      {{ in_array($item['value'], old($column['name'], json_decode($column['value'] ?? '[]', true))) ? 'checked' : '' }}
+                      id="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
+                    <label class="form-check-label" for="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
+                      {{ $item['label'] }}
+                    </label>
+                  </div>
+                  @endforeach
+                </div>
+              </x-admin::form.row>
+            @endif
           @endforeach
 
           <x-admin::form.row title="">
@@ -98,3 +118,20 @@
 
   <img src="https://beikeshop.com/install/plugin.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}&plugin={{ $plugin->code }}" class="d-none">
 @endsection
+
+@push('footer')
+  <script>
+    $(function () {
+      $('.form-checkbox input[type="checkbox"]').on('change', function () {
+        const isAllUnchecked = $(this).parents('.form-checkbox').find('input[type="checkbox"]:checked').length === 0;
+        const name = $(this).attr('name');
+
+        if (isAllUnchecked) {
+          $(this).parents('.form-checkbox').append(`<input type="hidden" name="${name}" class="placeholder-input" value="">`);
+        } else {
+          $(this).parents('.form-checkbox').find('.placeholder-input').remove();
+        }
+      });
+    });
+  </script>
+@endpush
