@@ -19,11 +19,8 @@ class Bootstrap
 
         add_hook_blade('admin.plugin.form', function ($callback, $output, $data) {
             $code = $data['plugin']->code;
-
             if ($code == 'social') {
-                $view = view('Social::admin.config_form', $data)->render();
-
-                return $view;
+                return view('Social::admin.config_form', $data)->render();
             }
 
             return $output;

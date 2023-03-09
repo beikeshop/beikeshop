@@ -19,13 +19,13 @@ use Beike\Models\ProductCategory;
 use Beike\Models\ProductDescription;
 use Beike\Models\ProductRelation;
 use Beike\Models\ProductSku;
-use Illuminate\Support\Facades\DB;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepo
 {

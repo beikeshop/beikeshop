@@ -22,12 +22,12 @@ class InputLocale extends Component
 
     public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false, string $placeholder = '')
     {
-        $this->name     = $name;
-        $this->title    = $title;
-        $this->width    = $width;
+        $this->name        = $name;
+        $this->title       = $title;
+        $this->width       = $width;
         $this->placeholder = $placeholder;
-        $this->value    = $value;
-        $this->required = $required;
+        $this->value       = $value;
+        $this->required    = $required;
     }
 
     public function render()
