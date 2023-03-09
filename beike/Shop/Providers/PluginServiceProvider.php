@@ -94,22 +94,24 @@ class PluginServiceProvider extends ServiceProvider
     }
 
     /**
-     * 加载插件路由并注册
+     * Load and register for admin and shop
      *
      * @param $pluginCode
      */
     private function registerRoutes($pluginCode)
     {
-        $pluginBasePath = $this->pluginBasePath;
-        $shopRoutePath  = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
-        if (file_exists($shopRoutePath)) {
-            Route::name('shop.')
-                ->middleware('shop')
-                ->group(function () use ($shopRoutePath) {
-                    $this->loadRoutesFrom($shopRoutePath);
-                });
-        }
+        $this->registerAdminRoutes($pluginCode);
+        $this->registerShopRoutes($pluginCode);
+    }
 
+    /**
+     * Register admin routes
+     *
+     * @param $pluginCode
+     */
+    private function registerAdminRoutes($pluginCode)
+    {
+        $pluginBasePath = $this->pluginBasePath;
         $adminRoutePath = "{$pluginBasePath}/{$pluginCode}/Routes/admin.php";
         if (file_exists($adminRoutePath)) {
             $adminName = admin_name();
@@ -118,6 +120,24 @@ class PluginServiceProvider extends ServiceProvider
                 ->middleware(['admin', 'admin_auth:' . AdminUser::AUTH_GUARD])
                 ->group(function () use ($adminRoutePath) {
                     $this->loadRoutesFrom($adminRoutePath);
+                });
+        }
+    }
+
+    /**
+     * Register shop routes
+     *
+     * @param $pluginCode
+     */
+    private function registerShopRoutes($pluginCode)
+    {
+        $pluginBasePath = $this->pluginBasePath;
+        $shopRoutePath  = "{$pluginBasePath}/{$pluginCode}/Routes/shop.php";
+        if (file_exists($shopRoutePath)) {
+            Route::name('shop.')
+                ->middleware('shop')
+                ->group(function () use ($shopRoutePath) {
+                    $this->loadRoutesFrom($shopRoutePath);
                 });
         }
     }
