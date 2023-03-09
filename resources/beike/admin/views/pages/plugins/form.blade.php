@@ -21,6 +21,7 @@
               <x-admin-form-input
                 :name="$column['name']"
                 :title="$column['label']"
+                :placeholder="$column['placeholder'] ?? ''"
                 :error="$errors->first($column['name'])"
                 :required="$column['required'] ? true : false"
                 :value="old($column['name'], $column['value'] ?? '')" />
@@ -30,6 +31,7 @@
               <x-admin-form-input-locale
                 :name="$column['name'].'.*'"
                 :title="$column['label']"
+                :placeholder="$column['placeholder'] ?? ''"
                 :error="$errors->first($column['name'])"
                 :required="$column['required'] ? true : false"
                 :value="old($column['name'], $column['value'] ?? '')" />
