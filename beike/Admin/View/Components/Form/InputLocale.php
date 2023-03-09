@@ -3,6 +3,7 @@
 namespace Beike\Admin\View\Components\Form;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
 class InputLocale extends Component
@@ -49,17 +50,31 @@ class InputLocale extends Component
         return $key;
     }
 
+    /**
+     * Get value from database
+     *
+     * @param $code
+     * @return mixed
+     */
     public function formatValue($code)
     {
         $oldKey = str_replace('*', $code, $this->name);
 
-        // descriptions.*.name
-        $segments = explode('.', $this->name);
-        array_shift($segments);
-        $valueKey = implode('.', $segments);
-        $valueKey = str_replace('*', $code, $valueKey);
+        if (is_string($this->value)) {
+            $value = json_decode($this->value, true);
 
-        return old($oldKey, Arr::get($this->value, $valueKey, ''));
+            return old($oldKey, Arr::get($value, $code, ''));
+        } elseif ($this->value instanceof Collection) {
+            // descriptions.*.name
+            $segments = explode('.', $this->name);
+            array_shift($segments);
+            $valueKey = implode('.', $segments);
+            $valueKey = str_replace('*', $code, $valueKey);
+
+            return old($oldKey, Arr::get($this->value, $valueKey, ''));
+        }
+
+        return '';
     }
 
     public function errorKey($code)
