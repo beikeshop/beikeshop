@@ -147,7 +147,7 @@ class Plugin implements Arrayable, \ArrayAccess
         return $item;
     }
 
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -167,7 +167,7 @@ class Plugin implements Arrayable, \ArrayAccess
         return (string) $this->name;
     }
 
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
