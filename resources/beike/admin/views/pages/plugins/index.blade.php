@@ -29,7 +29,7 @@
               <td>@{{ plugin.type_format }}</td>
               <td>
                 <div class="plugin-describe d-flex align-items-center">
-                  <div class="me-2" style="width: 50px;"><img :src="plugin.icon" class="img-fluid"></div>
+                  <div class="me-2" style="flex: 0 0 50px;"><img :src="plugin.icon" class="img-fluid border"></div>
                   <div>
                     <h6>@{{ plugin.name }}</h6>
                     <div class="" v-html="plugin.description"></div>
@@ -41,7 +41,9 @@
               </td>
               <td>
                 <div v-if="plugin.installed">
-                  <a class="btn btn-outline-secondary btn-sm" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
+                  <span :style="!plugin.status ? 'cursor: not-allowed':''">
+                    <a :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
+                  </span>
                   <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
                 </div>
                 <div v-else>

@@ -33,7 +33,7 @@
                       <span class="radio"></span>
                       <img src="{{ $payment['icon'] }}" class="img-fluid">
                     </div>
-                    <div class="right ms-3">
+                    <div class="right ms-2">
                       <div class="title">{{ $payment['name'] }}</div>
                       <div class="sub-title">{!! $payment['description'] !!}</div>
                     </div>
@@ -52,7 +52,7 @@
                       <span class="radio"></span>
                       <img src="{{ $shipping['icon'] }}" class="img-fluid">
                     </div>
-                    <div class="right ms-3">
+                    <div class="right ms-2">
                       <div class="title">{{ $shipping['name'] }}</div>
                       <div class="sub-title">{!! $shipping['description'] !!}</div>
                       <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>

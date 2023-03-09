@@ -108,11 +108,12 @@ Vue.component('module-editor-tab-product', {
     tabsValueProductData() {
       var that = this;
 
-      if (!this.module.tabs[0].products.length) return;
+      if (!this.module.tabs[this.editableTabsValue].products.length) return;
       this.loading = true;
 
       $http.get('products/names?product_ids='+this.module.tabs[this.editableTabsValue].products.join(','), {hload: true}).then((res) => {
         this.loading = false;
+        this.module.tabs[this.editableTabsValue].products = res.data.map(e => e.id);
         that.productData = res.data;
       })
     },
