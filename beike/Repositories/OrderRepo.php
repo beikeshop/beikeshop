@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Address;
+use Beike\Models\Customer;
 use Beike\Models\Order;
 use Beike\Services\StateMachineService;
 use Carbon\Carbon;
@@ -130,13 +131,21 @@ class OrderRepo
      * @param $customer
      * @return Builder|Model|object|null
      */
-    public static function getOrderByNumber($number, $customer)
+    public static function getOrderByNumber($number, $customer = null)
     {
         $builder = Order::query()
             ->with(['orderProducts', 'orderTotals', 'orderHistories'])
             ->where('number', $number);
-        if ($customer) {
-            $builder->where('customer_id', $customer->id);
+
+        $customerId = 0;
+        if (is_int($customer)) {
+            $customerId = $customer;
+        } elseif ($customer instanceof Customer) {
+            $customerId = $customer->id;
+        }
+
+        if ($customerId) {
+            $builder->where('customer_id', $customerId);
         }
 
         return $builder->first();
@@ -149,17 +158,26 @@ class OrderRepo
      * @param $customer
      * @return Builder|Model|object|null
      */
-    public static function getOrderByIdOrNumber($number, $customer)
+    public static function getOrderByIdOrNumber($number, $customer = null)
     {
-        $order = Order::query()
+        $builder = Order::query()
             ->where(function ($query) use ($number) {
                 $query->where('number', $number)
                     ->orWhere('id', $number);
-            })
-            ->where('customer_id', $customer->id)
-            ->first();
+            });
 
-        return $order;
+        $customerId = 0;
+        if (is_int($customer)) {
+            $customerId = $customer;
+        } elseif ($customer instanceof Customer) {
+            $customerId = $customer->id;
+        }
+
+        if ($customerId) {
+            $builder->where('customer_id', $customerId);
+        }
+
+        return $builder->first();
     }
 
     /**
@@ -187,8 +205,8 @@ class OrderRepo
             $paymentAddress->country     = $paymentAddress->country->name  ?? '';
             $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
         } else {
-            $shippingAddress = (Object) ($current['guest_shipping_address'] ?? []);
-            $paymentAddress  = (Object) ($current['guest_payment_address'] ?? []);
+            $shippingAddress = (object) ($current['guest_shipping_address'] ?? []);
+            $paymentAddress  = (object) ($current['guest_payment_address'] ?? []);
         }
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
@@ -218,10 +236,10 @@ class OrderRepo
             'shipping_method_code'   => $shippingMethodCode,
             'shipping_method_name'   => trans($shippingMethodCode),
             'shipping_customer_name' => $shippingAddress->name,
-            'shipping_calling_code'  => $shippingAddress->calling_code  ?? 0,
-            'shipping_telephone'     => $shippingAddress->phone         ?? '',
-            'shipping_country'       => $shippingAddress->country       ?? '',
-            'shipping_country_id'    => $shippingAddress->country_id    ?? 0,
+            'shipping_calling_code'  => $shippingAddress->calling_code ?? 0,
+            'shipping_telephone'     => $shippingAddress->phone        ?? '',
+            'shipping_country'       => $shippingAddress->country      ?? '',
+            'shipping_country_id'    => $shippingAddress->country_id   ?? 0,
             'shipping_zone'          => $shippingAddress->zone,
             'shipping_zone_id'       => $shippingAddress->zone_id ?? 0,
             'shipping_city'          => $shippingAddress->city,
@@ -231,10 +249,10 @@ class OrderRepo
             'payment_method_code'    => $paymentMethodCode,
             'payment_method_name'    => trans($paymentMethodCode),
             'payment_customer_name'  => $paymentAddress->name,
-            'payment_calling_code'   => $paymentAddress->calling_code  ?? 0,
-            'payment_telephone'      => $paymentAddress->phone         ?? '',
-            'payment_country'        => $paymentAddress->country       ?? '',
-            'payment_country_id'     => $paymentAddress->country_id    ?? 0,
+            'payment_calling_code'   => $paymentAddress->calling_code ?? 0,
+            'payment_telephone'      => $paymentAddress->phone        ?? '',
+            'payment_country'        => $paymentAddress->country      ?? '',
+            'payment_country_id'     => $paymentAddress->country_id   ?? 0,
             'payment_zone'           => $paymentAddress->zone,
             'payment_zone_id'        => $paymentAddress->zone_id ?? 0,
             'payment_city'           => $paymentAddress->city,
