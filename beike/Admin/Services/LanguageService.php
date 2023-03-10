@@ -7,7 +7,10 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class LanguageService
 {
-    private static $models = ['ProductDescription', 'CategoryDescription', 'CustomerGroupDescription', 'PageDescription'];
+    private static $models = [
+        'AttributeDescription', 'AttributeGroupDescription', 'AttributeValueDescription', 'CategoryDescription',
+        'CustomerGroupDescription', 'PageCategoryDescription', 'PageDescription', 'ProductDescription',
+    ];
 
     public static function all(): array
     {
@@ -32,7 +35,7 @@ class LanguageService
             ];
         }
 
-        return  $result;
+        return $result;
     }
 
     public static function create($data)
