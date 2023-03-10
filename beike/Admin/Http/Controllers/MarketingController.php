@@ -26,6 +26,7 @@ class MarketingController
         $filters = [
             'type'    => $request->get('type'),
             'keyword' => $request->get('keyword'),
+            'page' => $request->get('page'),
         ];
         $plugins = MarketingService::getInstance()->getList($filters);
         $data    = [
