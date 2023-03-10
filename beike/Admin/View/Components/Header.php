@@ -32,18 +32,31 @@ class Header extends Component
         $preparedMenus = $this->prepareMenus();
 
         foreach ($preparedMenus as $menu) {
-            if ($menu['code']) {
-                $routes         = [];
-                $sideMenuRoutes = $sidebar->{"get{$menu['code']}SubRoutes"}();
-
-                foreach ($sideMenuRoutes as $route) {
-                    $route_first = explode('.', $route['route'])[0] ?? '';
-                    $routes[]    = 'admin.' . $route['route'];
-                    $routes[]    = 'admin.' . $route_first . '.edit';
-                    $routes[]    = 'admin.' . $route_first . '.show';
+            $menuCode = $menu['code'] ?? '';
+            if ($menuCode) {
+                $routes          = [];
+                $subRoutesMethod = "get{$menu['code']}SubRoutes";
+                if (method_exists($sidebar, $subRoutesMethod)) {
+                    $sideMenuRoutes = $sidebar->{"get{$menu['code']}SubRoutes"}();
+                    foreach ($sideMenuRoutes as $route) {
+                        $routeFirst  = explode('.', $route['route'])[0] ?? '';
+                        $routes[]    = 'admin.' . $route['route'];
+                        $routes[]    = 'admin.' . $routeFirst . '.edit';
+                        $routes[]    = 'admin.' . $routeFirst . '.show';
+                    }
                 }
 
-                $is_route = equal_route($routes);
+                $data = [
+                    'menu_code' => $menuCode,
+                    'routes'    => $routes,
+                ];
+                $filterRoutes = hook_filter('admin.components.header.routes', $data);
+                $routes       = $filterRoutes['routes'] ?? [];
+                if (empty($routes)) {
+                    $is_route = equal_route('admin.' . $menu['route']);
+                } else {
+                    $is_route = equal_route($routes);
+                }
             } else {
                 $is_route = equal_route('admin.' . $menu['route']);
             }
