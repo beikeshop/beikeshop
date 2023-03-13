@@ -191,7 +191,7 @@
                 this.customer_groups[this.dialog.index] = res.data
               }
               this.dialog.show = false;
-              this.dialog.form.level = '1'
+              this.dialog.form.level = 1
             })
           });
         },
@@ -216,7 +216,7 @@
           this.dialog.form.name = {};
           this.dialog.form.description = {};
           this.dialog.show = false;
-          this.dialog.form.level = '1'
+          this.dialog.form.level = 1
         }
       }
     })
