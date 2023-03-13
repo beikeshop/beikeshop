@@ -20,4 +20,8 @@ return [
     'qa_q'                   => '问',
     'qa_a'                   => '答',
     'number_free'            => '当日剩余免费次数',
+    'api_type'               => 'API 方式',
+    'own'                    => '自有Key',
+    'beikeshop'              => 'BeikeShop平台',
+    'empty_api_key'          => 'API Key 为空, 请先到插件设置 - OpenAI - 编辑 填写API Key',
 ];

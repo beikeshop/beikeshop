@@ -9,24 +9,32 @@
 @endpush
 
 @section('content')
-  <div class="row">
-    <div class="col-md-7 col-12 answer-wrap">
-      <div class="border p-3 bg-white" id="answer">
-        <div class="not-answer"><i class="bi bi-activity"></i> {{ __('Openai::common.no_question') }}</div>
-      </div>
-
+<div class="row">
+  <div class="col-md-7 col-12 answer-wrap">
+    <div class="border p-3 bg-white" id="answer">
+      <div class="not-answer"><i class="bi bi-activity"></i> {{ __('Openai::common.no_question') }}</div>
+    </div>
       <div class="input-group mb-3 mt-4">
         <input type="text" id="ai-input" class="form-control rounded-0 form-control-lg"
-          placeholder="{{ __('Openai::common.enter_question') }}" aria-label="{{ __('Openai::common.enter_question') }}"
+          placeholder="{{ __('Openai::common.enter_question') }}" {{ $error ? 'disabled' : '' }} aria-label="{{ __('Openai::common.enter_question') }}"
           aria-describedby="button-addon2">
-        <button class="btn btn-primary px-4 rounded-0" type="button" id="ai-submit"><i class="bi bi-send-fill"></i>
+        <button class="btn btn-primary px-4 rounded-0" {{ $error ? 'disabled' : '' }} type="button" id="ai-submit"><i class="bi bi-send-fill"></i>
           {{ __('common.confirm') }}</button>
       </div>
     </div>
     <div class="col-md-5 col-12">
       <div class="mb-2"><i class="bi bi-megaphone text-secondary fs-3"></i> </div>
-      <div class="number-free mb-3 fs-5">{{ __('Openai::common.number_free') }}:
-        <span>{{ __('Openai::common.loading') }}</span></div>
+        @if ($type != 'own')
+        <div class="number-free mb-3 fs-5">{{ __('Openai::common.number_free') }}:
+          <span>{{ __('Openai::common.loading') }}</span>
+        </div>
+        @endif
+        @if ($error)
+        <div class="alert alert-danger alert-dismissible">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          {{ $error }}
+        </div>
+        @endif
       <div class="text-secondary">{{ $description }}</div>
     </div>
   </div>
@@ -71,7 +79,9 @@
 
     $('#answer').height($(window).height() - 260);
     $(document).ready(function() {
-      loadQuantities();
+      @if ($type != 'own')
+        loadQuantities();
+      @endif
       loadHistories(1 , function() {
         // 获取 answer .answer-list 内容高度
         let height = 0;
@@ -105,7 +115,7 @@
         let html = '';
 
         $.ajax({
-          url: `${config.api_url}/api/openai/completions`,
+          url: `{{ $base }}/completions`,
           type: 'POST',
           headers: {
             'token': '{{ system_setting('base.developer_token') ?? '' }}'
@@ -149,7 +159,7 @@
 
     function loadQuantities() {
       $.ajax({
-        url: `${config.api_url}/api/openai/quantities?domain=${config.app_url}`,
+        url: `{{ $base }}/quantities?domain=${config.app_url}`,
         headers: {
           'token': '{{ system_setting('base.developer_token') ?? '' }}'
         },
@@ -161,7 +171,7 @@
 
     function loadHistories(page = 1, callback = null) {
       $.ajax({
-        url: `${config.api_url}/api/openai/histories?domain=${config.app_url}&page=${page}`,
+        url: `{{ $base }}/histories?domain=${config.app_url}&page=${page}`,
         headers: {
           'token': '{{ system_setting('base.developer_token') ?? '' }}'
         },

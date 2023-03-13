@@ -22,6 +22,7 @@
                 :name="$column['name']"
                 :title="$column['label']"
                 :placeholder="$column['placeholder'] ?? ''"
+                :description="$column['description'] ?? ''"
                 :error="$errors->first($column['name'])"
                 :required="$column['required'] ? true : false"
                 :value="old($column['name'], $column['value'] ?? '')" />

@@ -20,4 +20,8 @@ return [
     'qa_q'           => 'ask',
     'qa_a'           => 'answer',
     'number_free'    => 'The remaining free times of the day',
+    'api_type'       => 'API Method',
+    'own'            => 'Own Key',
+    'beikeshop'      => 'BeikeShop',
+    'empty_api_key'  => 'API Key is empty, please go to the plugin settings - OpenAI - Edit and fill in the API Key first.',
 ];

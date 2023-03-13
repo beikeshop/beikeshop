@@ -50,10 +50,12 @@ return [
     |
     */
     'permissions'            => [
-        'storage/framework/' => '755',
-        'storage/logs/'      => '755',
-        'bootstrap/cache/'   => '755',
-        '.env'               => '755',
+        '.env'                => '755',
+        'bootstrap/cache/'    => '755',
+        'public/cache/'       => '755',
+        'public/plugin/'      => '755',
+        'storage/framework/'  => '755',
+        'storage/logs/'       => '755',
     ],
 
     /*

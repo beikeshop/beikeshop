@@ -79,9 +79,17 @@ class PluginRepo
     {
         $migrationPath = "{$bPlugin->getPath()}/Migrations";
         if (is_dir($migrationPath)) {
-            Artisan::call('migrate', [
-                '--force' => true,
-            ]);
+            $files = glob($migrationPath . '/*');
+            asort($files);
+
+            foreach ($files as $file) {
+                $file = str_replace(base_path(), '', $file);
+                Artisan::call('migrate', [
+                    '--force' => true,
+                    '--step'  => 1,
+                    '--path'  => $file,
+                ]);
+            }
         }
     }
 
@@ -91,7 +99,8 @@ class PluginRepo
      */
     public static function uninstallPlugin(BPlugin $bPlugin)
     {
-        self::removeStaticFiles($bPlugin);
+        // self::removeStaticFiles($bPlugin);
+        self::rollbackDatabase($bPlugin);
         $type = $bPlugin->type;
         $code = $bPlugin->code;
         Plugin::query()
@@ -111,6 +120,27 @@ class PluginRepo
         $staticPath = $path . '/static';
         if (is_dir($staticPath)) {
             File::deleteDirectory(public_path('plugin/' . $code));
+        }
+    }
+
+    /**
+     * 数据库回滚
+     */
+    public static function rollbackDatabase(BPlugin $bPlugin)
+    {
+        $migrationPath = "{$bPlugin->getPath()}/Migrations";
+        if (is_dir($migrationPath)) {
+            $files = glob($migrationPath . '/*');
+            arsort($files);
+
+            foreach ($files as $file) {
+                $file = str_replace(base_path(), '', $file);
+                Artisan::call('migrate:rollback', [
+                    '--force' => true,
+                    '--step'  => 1,
+                    '--path'  => $file,
+                ]);
+            }
         }
     }
 
