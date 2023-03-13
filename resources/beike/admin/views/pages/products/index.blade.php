@@ -118,7 +118,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($products as $product)
+                @foreach ($products_format as $product)
                 <tr>
                   <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds" /></td>
                   <td>{{ $product['id'] }}</td>
@@ -141,7 +141,7 @@
                   @hook('admin.product.list.column_value')
                   <td width="140" class="text-end">
                     @if ($product['deleted_at'] == '')
-                      <a href="{{ admin_route('products.edit', [$product->id]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                      <a href="{{ admin_route('products.edit', [$product['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                       <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
                       @hook('admin.product.list.action')
                     @else

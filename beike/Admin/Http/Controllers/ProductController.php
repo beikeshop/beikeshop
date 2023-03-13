@@ -21,10 +21,12 @@ class ProductController extends Controller
     {
         $requestData = $request->all();
         $productList = ProductRepo::list($requestData);
-        $products    = ProductResource::collection($productList)->resource;
+        $products    = ProductResource::collection($productList);
+        $productsFormat =  $products->jsonSerialize();
 
         $data = [
             'categories' => CategoryRepo::flatten(locale()),
+            'products_format' => $productsFormat,
             'products'   => $products,
             'type'       => 'products',
         ];
@@ -32,7 +34,7 @@ class ProductController extends Controller
         $data = hook_filter('admin.product.index.data', $data);
 
         if ($request->expectsJson()) {
-            return $products;
+            return $productsFormat;
         }
 
         return view('admin::pages.products.index', $data);
