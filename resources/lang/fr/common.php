@@ -75,6 +75,8 @@ return [
     'text_list'            => 'liste',
     'text_form'            => 'de',
     'text_to'              => 'à',
+    'batch_setting'        => 'paramétrage par lots',
+    'show_all'             => 'Voir tout',
 
     'id'                   => 'ID',
     'created_at'           => 'temps de creation',

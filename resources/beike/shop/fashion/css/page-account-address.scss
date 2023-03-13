@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-09-01 16:23:34
+ * @LastEditTime  2022-09-16 20:55:54
+ */
+
+body.page-account-address, body.page-checkout {
+  .addresses-wrap {
+    .item {
+      position: relative;
+      padding: 14px 14px 14px 18px;
+      margin-bottom: 1.3rem;
+      border: 1px solid #e8e8e8;
+      height: 130px;
+      cursor: pointer;
+
+      @media (max-width: 768px) {
+        padding: 10px 10px 10px 14px;
+      }
+
+      &:hover {
+        border-color: #222;
+      }
+
+      &.active {
+        border-left: none;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: -1px;
+          left: 0;
+          width: 4px;
+          height: calc(100% + 2px);
+          background-color: #4991F4;
+          background: repeating-linear-gradient(-45deg, #d60404 0, #d60404 10px, #fff 10px, #fff 20px, #4991F4 20px, #4991F4 30px, #fff 30px, #fff 40px);
+        }
+      }
+
+      .name-wrap {
+        margin-bottom: .6rem;
+        line-height: 1;
+
+        .name {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+
+        .phone {
+          font-size: .8rem;
+          color: #666;
+        }
+      }
+
+      .zipcode {
+        margin-bottom: .3rem;
+      }
+
+      .address-info {
+        // margin-bottom: .9rem;
+        height: 32px;
+        line-height: 1.3;
+      }
+
+      .address-bottom {
+        display: flex;
+        align-items: center; // flex-start | center
+        justify-content: space-between; // flex-end | center | space-between
+        // flex-wrap: wrap;
+        a {
+          color: #2d68a8;
+        }
+      }
+    }
+  }
+
+  .mobileWidth {
+    width: 600px;
+    @media (max-width: 768px) {
+      width: 95%;
+      }
+    }
+
+  .dialog-address {
+    display: block;
+
+    >div {
+    @media (max-width:768px) {
+      width: 100%;
+      // margin-bottom: 10px;
+      // &:nth-last-child(){
+      //   margin-bottom: 0;
+      // }
+    }
+    }
+
+    @media (min-width:768px) {
+      display: flex;
+    }
+  }
+
+
+}

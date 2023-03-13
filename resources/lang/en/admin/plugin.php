@@ -17,6 +17,7 @@ return [
     'plugins_update_status' => 'Update Status',
     'plugins_install'       => 'Install',
     'plugins_uninstall'     => 'Uninstall',
+    'to_enable'             => 'To Enable',
 
     'plugin_list'           => 'Plugin List',
     'plugin_code'           => 'Code',

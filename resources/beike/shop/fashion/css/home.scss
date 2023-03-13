@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-09-16 20:55:22
+ */
+
+.module-item {
+  position: relative;
+
+  &.module-item-design {
+    &:hover {
+      .module-edit {
+        display: flex;
+      }
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  &:after {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    z-index: 9;
+    outline: 2px solid $primary;
+  }
+
+  .module-edit {
+    // position: relative;
+    position: absolute;
+    top: -28px;
+    left: 0;
+    width: 100%;
+    z-index: 9;
+    // display: flex;
+    align-items: center; // flex-start | center
+    justify-content: center; // flex-end | center | space-between
+    display: none;
+
+    .edit-wrap {
+      background-color: $primary;
+      color: #fff;
+      display: flex;
+      align-items: center;
+
+      > div {
+        height: 28px;
+        line-height: 30px;
+        padding: 0 10px;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+
+        &:first-of-type {
+          &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            border: solid #0000;
+            border-right: solid $primary;
+            border-width: 28px 10px 0 0;
+            right: 100%;
+          }
+          &:hover {
+            &:after {
+              border-right-color: darken($primary, 6%);
+            }
+          }
+        }
+
+        &:last-of-type {
+          &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            border: solid #0000;
+            border-left: solid $primary;
+            border-width: 28px 0 0 10px;
+            left: 100%;
+          }
+          &:hover {
+            &:after {
+              border-left-color: darken($primary, 6%);
+            }
+          }
+        }
+
+        &:hover {
+          background-color: darken($primary, 6%);
+        }
+      }
+      // flex-wrap: wrap;
+    }
+  }
+}

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ProductsSeeder::class,
             AttributesSeeder::class,
             SettingsSeeder::class,
+            ThemeSeeder::class,
         ]);
     }
 

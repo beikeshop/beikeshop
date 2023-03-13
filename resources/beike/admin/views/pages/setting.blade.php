@@ -85,10 +85,6 @@
             <x-admin-form-input name="product_per_page" title="{{ __('admin/setting.product_per_page') }}" required value="{{ old('product_per_page', system_setting('base.product_per_page', 20)) }}">
             </x-admin-form-input>
 
-            <x-admin-form-select title="模版主题" name="theme" :value="old('theme', system_setting('base.theme', 'default'))" :options="$themes">
-              <div class="help-text font-size-12 lh-base">主题模板选择</div>
-            </x-admin-form-select>
-
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
             </x-admin-form-textarea>

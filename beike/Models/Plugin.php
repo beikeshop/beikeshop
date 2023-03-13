@@ -13,15 +13,5 @@ namespace Beike\Models;
 
 class Plugin extends Base
 {
-    public const TYPES = [
-        'shipping',  // 配送方式
-        'payment',   // 支付方式
-        'total',     // 订单金额
-        'social',    // 社交网络
-        'feature',   // 功能模块
-        'language',  // 语言翻译
-        'theme',     // 主题模板
-    ];
-
     protected $fillable = ['type', 'code'];
 }

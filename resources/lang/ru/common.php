@@ -75,6 +75,8 @@ return [
     'text_list'            => 'список',
     'text_form'            => 'от',
     'text_to'              => 'кому',
+    'batch_setting'        => 'пакетная настройка',
+    'show_all'             => 'Просмотреть все',
 
     'id'                   => 'ID',
     'created_at'           => 'время создания',

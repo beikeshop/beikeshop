@@ -48,6 +48,7 @@ class Manager
             $pluginPath = $this->getPluginsDir() . DIRECTORY_SEPARATOR . $dirname;
             $plugin     = new Plugin($pluginPath, $package);
             $status     = $plugin->getStatus();
+            $plugin->setType(Arr::get($package, 'type'));
             $plugin->setDirname($dirname);
             $plugin->setName(Arr::get($package, 'name'));
             $plugin->setDescription(Arr::get($package, 'description'));

@@ -17,5 +17,10 @@
         @endforeach
       </div>
     </div>
+    @if ($content['brands'])
+    <div class="d-flex justify-content-center mt-4">
+      <a class="btn btn-outline-secondary btn-lg" href="{{ shop_route('brands.index') }}">{{ __('common.show_all') }}</a>
+    </div>
+    @endif
   </div>
 </section>

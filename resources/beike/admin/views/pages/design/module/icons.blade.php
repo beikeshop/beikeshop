@@ -24,7 +24,10 @@
             <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 200x200</div>
           </div>
+          <div class="module-edit-title">{{ __('admin/builder.text_set_title') }}</div>
           <text-i18n v-model="item.text" style="margin-bottom: 10px"></text-i18n>
+          <div class="module-edit-title">{{ __('admin/builder.text_set_subtitle') }}</div>
+          <text-i18n v-model="item.sub_text" style="margin-bottom: 10px"></text-i18n>
           <link-selector v-model="item.link"></link-selector>
         </div>
       </div>
@@ -74,6 +77,7 @@ Vue.component('module-editor-icons', {
           value:''
         },
         text: languagesFill(''),
+        sub_text: languagesFill(''),
         show: true
       })
 

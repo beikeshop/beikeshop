@@ -1,0 +1,230 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-09-16 20:56:05
+ */
+
+body.page-categories {
+  .col-lg-9.right-column {
+    @media (min-width: 992px) {
+      width: 78%;
+    }
+  }
+
+  .col-lg-3.left-column {
+    @media (min-width: 992px) {
+      width: 22%;
+    }
+
+    .card:not(:last-of-type) {
+      border-bottom: 1px solid #E6E6E6;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.4rem;
+    }
+  }
+
+  .children-wrap {
+    @media (max-width: 992px) {
+      display: none;
+    }
+
+    a {
+      color: #333;
+      margin-right: 4px;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .style-wrap {
+    label {
+      cursor: pointer;
+      &.active {
+        svg {
+          fill: $primary;
+        }
+      }
+
+      svg {
+        fill: #999;
+      }
+    }
+  }
+
+  .filter-value-wrap {
+    .list-group {
+      display: block;
+
+      .list-group-item {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 12px;
+        background: #f3f3f3;
+        border: none;
+        color: #666;
+        padding: 4px 12px;
+        &.delete-all {
+          background: $primary;
+          color: #fff;
+        }
+
+        &:hover {
+          background: $primary;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .product-tool {
+    @media (min-width: 992px) {
+      .order-select {
+        min-width: 170px;
+      }
+    }
+  }
+
+  .ui-widget-content {
+    border-radius: 0;
+    position: relative;
+    border: none;
+    margin-right: 4px;
+    margin-bottom: 0;
+    background: none;
+    cursor: pointer;
+
+    .ui-widget-header {
+      background: $primary;
+      position: absolute;
+      top: 50%;
+      border-radius: 0;
+      height: 3px;
+      margin-top: -3px;
+    }
+
+    .slider-bg {
+      background: #e3e3e3;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 3px;
+      margin-top: -3px;
+    }
+
+    .ui-slider-handle {
+      width: 4px;
+      margin-left: 0;
+      cursor: ew-resize;
+      border: none !important;
+      border-radius: 0;
+      background: $primary;
+      outline: none !important;
+    }
+  }
+}
+
+.sidebar-widget {
+  list-style: none;
+  padding: 0 0 1.4rem;
+  border-bottom: 1px solid #E6E6E6;
+
+  > li {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    // border-bottom: 1px solid #e9ecef;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    .category-href {
+      display: inline-block;
+      position: relative;
+      color: #333;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      width: calc(100% - 36px);
+    }
+
+    &.active {
+      > a {
+        font-weight: bold;
+        color: $primary;
+      }
+    }
+  }
+
+  ul {
+    padding-left: 12px;
+    list-style: none;
+
+    li {
+      line-height: 1;
+      margin: 16px 0;
+
+      ul {
+        margin-top: 8px;
+        padding-left: 14px;
+      }
+
+      &:last-of-type {
+        border: none;
+      }
+
+      &.active {
+        > a {
+          color: $primary;
+          font-weight: bold;
+        }
+      }
+
+      a {
+        color: #868e96;
+        &:first-of-type {
+          width: calc(100% - 26px);
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          display: inline-block;
+        }
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+
+  .toggle-icon {
+    float: right;
+    font-size: 16px;
+    padding: 0 6px;
+    i {
+      color: #aaa;
+    }
+
+    &.collapsed {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.filter-box {
+  .attribute-item {
+    .form-check-label {
+      cursor: pointer;
+      &:hover {
+        .form-check-input {
+          border-color: $primary;
+        }
+      }
+    }
+  }
+}

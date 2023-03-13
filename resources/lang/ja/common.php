@@ -75,6 +75,8 @@ return [
     'text_list'            => 'リスト',
     'text_form'            => 'From',
     'text_to'              => 'To',
+    'batch_setting'        => 'バッチ設定',
+    'show_all'             => 'すべて表示',
 
     'id'                   => 'ID',
     'created_at'           => '作成時間',

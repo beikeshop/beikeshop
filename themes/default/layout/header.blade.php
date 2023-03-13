@@ -3,54 +3,58 @@
     <div class="container d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
         @hookwrapper('header.top.currency')
-        <div class="dropdown">
-          <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
-            aria-expanded="false">
-            @foreach (currencies() as $currency)
-              @if ($currency->code == current_currency_code())
-                @if ($currency->symbol_left)
-                {{ $currency->symbol_left }}
+        @if (currencies()->count() > 1)
+          <div class="dropdown">
+            <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
+              aria-expanded="false">
+              @foreach (currencies() as $currency)
+                @if ($currency->code == current_currency_code())
+                  @if ($currency->symbol_left)
+                  {{ $currency->symbol_left }}
+                  @endif
+                  {{ $currency->name }}
+                  @if ($currency->symbol_right)
+                  {{ $currency->symbol_right }}
+                  @endif
                 @endif
-                {{ $currency->name }}
-                @if ($currency->symbol_right)
-                {{ $currency->symbol_right }}
-                @endif
-              @endif
-            @endforeach
-          </a>
+              @endforeach
+            </a>
 
-          <div class="dropdown-menu" aria-labelledby="currency-dropdown">
-            @foreach (currencies() as $currency)
-              <a class="dropdown-item"
-                href="{{ shop_route('currency.switch', [$currency->code]) }}">
-                @if ($currency->symbol_left)
-                {{ $currency->symbol_left }}
-                @endif
-                {{ $currency->name }}
-                @if ($currency->symbol_right)
-                {{ $currency->symbol_right }}
-                @endif
-                </a>
-            @endforeach
+            <div class="dropdown-menu" aria-labelledby="currency-dropdown">
+              @foreach (currencies() as $currency)
+                <a class="dropdown-item"
+                  href="{{ shop_route('currency.switch', [$currency->code]) }}">
+                  @if ($currency->symbol_left)
+                  {{ $currency->symbol_left }}
+                  @endif
+                  {{ $currency->name }}
+                  @if ($currency->symbol_right)
+                  {{ $currency->symbol_right }}
+                  @endif
+                  </a>
+              @endforeach
+            </div>
           </div>
-        </div>
+        @endif
         @endhookwrapper
 
         @hookwrapper('header.top.language')
-        <div class="dropdown">
-          <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
-            aria-expanded="false">
-            {{ current_language()->name }}
-          </a>
+        @if (count($languages) > 1)
+          <div class="dropdown">
+            <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
+              aria-expanded="false">
+              {{ current_language()->name }}
+            </a>
 
-          <div class="dropdown-menu" aria-labelledby="language-dropdown">
-            @foreach ($languages as $language)
-              <a class="dropdown-item" href="{{ shop_route('lang.switch', [$language->code]) }}">
-                {{ $language->name }}
-              </a>
-            @endforeach
+            <div class="dropdown-menu" aria-labelledby="language-dropdown">
+              @foreach ($languages as $language)
+                <a class="dropdown-item" href="{{ shop_route('lang.switch', [$language->code]) }}">
+                  {{ $language->name }}
+                </a>
+              @endforeach
+            </div>
           </div>
-        </div>
+        @endif
         @endhookwrapper
       </div>
 

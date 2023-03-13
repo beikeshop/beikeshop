@@ -51,6 +51,7 @@ return [
     'access_frontend'                  => 'Frontend',
 
     // sidebar
+    'theme_index'                      => 'Theme Setting',
     'attribute_groups_index'           => 'Attribute Group',
     'attributes_index'                 => 'Attributes',
     'settings_index'                   => 'Setting',

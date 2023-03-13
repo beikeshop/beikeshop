@@ -17,6 +17,7 @@ return [
     'plugins_update_status' => '更新ステータス',
     'plugins_install'       => 'インストール',
     'plugins_uninstall'     => 'アンインストール',
+    'to_enable'             => '有効にする',
 
     'plugin_list'           => 'プラグイン リスト',
     'plugin_code'           => 'プラグインコード',

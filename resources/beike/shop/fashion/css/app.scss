@@ -1,0 +1,38 @@
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-02 19:19:52
+ * @LastEditTime  2022-09-16 20:45:17
+ */
+
+@charset "UTF-8";
+
+$primary: #ee403d;
+$sub_color: #78e723;
+$price: $primary;
+
+@import './iconfont';
+@import './global';
+
+@import './header';
+@import './footer';
+@import './product-style';
+@import './news';
+@import './login';
+@import './account/account';
+@import './page-product';
+@import './cart';
+@import './page-checkout';
+@import './page-categories';
+@import './element-ui';
+@import './order-success';
+@import './page-account-order';
+@import './page-account-address';
+@import './page-brands';
+@import './home';
+@import './module/module-image-plus';
+@import './module/module-brand';
+@import './module/module-tab-product';
+@import './module/module-icon';
+@import './module/slideshow';

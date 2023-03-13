@@ -76,6 +76,7 @@ return [
     'text_form'            => '從',
     'text_to'              => '到',
     'batch_setting'        => '批量設置',
+    'show_all'             => '查看所有',
 
     'id'                   => 'ID',
     'created_at'           => '創建時間',

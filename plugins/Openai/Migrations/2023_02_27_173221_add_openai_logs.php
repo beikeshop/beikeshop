@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('openai_logs', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->index('user_id');
-            $table->text('question');
-            $table->text('answer');
-            $table->string('request_ip');
-            $table->text('user_agent');
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('openai_logs')) {
+            Schema::create('openai_logs', function (Blueprint $table) {
+                $table->id();
+                $table->integer('user_id')->index('user_id');
+                $table->text('question');
+                $table->text('answer');
+                $table->string('request_ip');
+                $table->text('user_agent');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

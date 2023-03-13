@@ -20,6 +20,18 @@ use Illuminate\Support\Str;
 
 class Plugin implements Arrayable, \ArrayAccess
 {
+    public const TYPES = [
+        'shipping',  // 配送方式
+        'payment',   // 支付方式
+        'total',     // 订单金额
+        'social',    // 社交网络
+        'feature',   // 功能模块
+        'language',  // 语言翻译
+        'theme',     // 主题模板
+    ];
+
+    protected $type;
+
     protected $path;
 
     protected $name;
@@ -57,6 +69,21 @@ class Plugin implements Arrayable, \ArrayAccess
     public function packageInfoAttribute($name)
     {
         return Arr::get($this->packageInfo, $name);
+    }
+
+    /**
+     * Set plugin Type
+     *
+     * @throws \Exception
+     */
+    public function setType(string $type): self
+    {
+        if (! in_array($type, self::TYPES)) {
+            throw new \Exception('Invalid plugin type, must be one of ' . implode(',', self::TYPES));
+        }
+        $this->type = $type;
+
+        return $this;
     }
 
     public function setDirname(string $dirName): self
@@ -185,6 +212,11 @@ class Plugin implements Arrayable, \ArrayAccess
         }
 
         return (string) $this->description;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     public function getDirname(): string

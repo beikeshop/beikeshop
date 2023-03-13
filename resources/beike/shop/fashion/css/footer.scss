@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-09-03 22:32:29
+ * @LastEditTime  2022-09-16 20:48:00
+ */
+
+footer {
+  // background: #F8F9FA;
+  background: #161616;
+  margin-top: 5rem;
+  color: #cdcdcd;
+
+  @media (max-width:768px) {
+    margin-top: 2rem;
+  }
+
+  .footer-content-left {
+    @media (min-width: 992px) {
+      padding-right: 30px;
+    }
+  }
+
+  .footer-active {
+    outline: 2px dashed #4bb1f0 !important;
+  }
+
+  .services-wrap {
+    padding: 2.2rem 0;
+    border-bottom: 1px solid #222;
+
+    .service-item {
+      display: flex;
+      align-items: center;
+
+      .icon {
+        width: 34px;
+        margin-right: 14px;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+
+      .title {
+        margin-bottom: 2px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .sub-title {
+        font-size: .6rem;
+        color: #8D94A0;
+      }
+    }
+  }
+
+  .footer-content {
+    padding: 3rem 0;
+
+    a {
+      color: #cdcdcd;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .logo {
+      max-width: 240px;
+      margin-bottom: 20px;
+    }
+
+    .text {
+      color: #cdcdcd;
+    }
+
+    h6 {
+      font-size: 14px;
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #232323;
+
+    @media (min-width:768px) {
+      min-height: 60px;
+    }
+
+    @media (max-width:768px) {
+      padding: 10px 0;
+    }
+
+    .right-img {
+      max-height: 42px;
+    }
+  }
+}

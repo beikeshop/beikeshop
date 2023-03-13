@@ -17,6 +17,7 @@ return [
     'plugins_update_status' => 'état de mise à jour',
     'plugins_install'       => 'installer',
     'plugins_uninstall'     => 'désinstaller',
+    'to_enable'             => 'To Enable',
 
     'plugin_list'           => 'liste des plugins',
     'plugin_code'           => 'code du plugin',

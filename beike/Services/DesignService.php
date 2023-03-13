@@ -50,7 +50,7 @@ class DesignService
         $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif (in_array($moduleCode, ['image401', 'image100'])) {
+        } elseif (in_array($moduleCode, ['image401', 'image100', 'image200', 'image300'])) {
             return self::handleImage401($content);
         } elseif ($moduleCode == 'brand') {
             return self::handleBrand($content);
@@ -142,9 +142,10 @@ class DesignService
         $images = [];
         foreach ($content['images'] as $image) {
             $images[] = [
-                'image' => image_origin($image['image'] ?? ''),
-                'text'  => $image['text'][locale()] ?? '',
-                'link'  => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
+                'image'     => image_origin($image['image'] ?? ''),
+                'text'      => $image['text'][locale()]     ?? '',
+                'sub_text'  => $image['sub_text'][locale()] ?? '',
+                'link'      => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
             ];
         }
 

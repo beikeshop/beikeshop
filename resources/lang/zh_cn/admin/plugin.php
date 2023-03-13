@@ -17,6 +17,7 @@ return [
     'plugins_update_status' => '更新状态',
     'plugins_install'       => '安装',
     'plugins_uninstall'     => '卸载',
+    'to_enable'             => '去启用',
 
     'plugin_list'           => '插件设置',
     'plugin_code'           => '插件代码',

@@ -24,7 +24,7 @@ class OpenaiController extends Controller
      */
     public function index()
     {
-        $plugin = app('plugin')->getPlugin('openai');
+        $plugin = plugin('openai');
 
         $error   = '';
         $baseUrl = config('beike.api_url') . '/api/openai';

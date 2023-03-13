@@ -6,6 +6,7 @@ use Beike\Models\AdminUser;
 use Beike\Models\Currency;
 use Beike\Models\Customer;
 use Beike\Models\Language;
+use Beike\Plugin\Plugin;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Services\CurrencyService;
@@ -329,6 +330,15 @@ function plugin_path(string $path = ''): string
 }
 
 /**
+ * @param $code
+ * @return Plugin|null
+ */
+function plugin($code): ?Plugin
+{
+    return app('plugin')->getPlugin($code);
+}
+
+/**
  * 插件图片缩放
  *
  * @param $pluginCode
@@ -344,7 +354,7 @@ function plugin_resize($pluginCode, $image, int $width = 100, int $height = 100)
         return $image;
     }
 
-    $plugin        = app('plugin')->getPlugin($pluginCode);
+    $plugin        = plugin($pluginCode);
     $pluginDirName = $plugin->getDirname();
 
     return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->resize($width, $height);
@@ -364,7 +374,7 @@ function plugin_origin($pluginCode, $image)
         return $image;
     }
 
-    $plugin        = app('plugin')->getPlugin($pluginCode);
+    $plugin        = plugin($pluginCode);
     $pluginDirName = $plugin->getDirname();
 
     return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->originUrl();

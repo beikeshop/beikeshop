@@ -107,7 +107,7 @@
 
       data: {
         plugins: @json($plugins ?? []),
-        page: 1,
+        page: bk.getQueryString('page', 1) * 1,
 
         filter: {
           keyword: bk.getQueryString('keyword'),
@@ -118,6 +118,21 @@
           show: false,
           token: @json(system_setting('base.developer_token') ?? ''),
         }
+      },
+
+      mounted() {
+        // 监听浏览器返回事件
+        window.addEventListener('popstate', () => {
+          const page = bk.getQueryString('page');
+
+          if (this.page < 2) {
+            window.history.back(-1);
+            return;
+          }
+
+          this.page = page * 1 - 1;
+          this.loadData();
+        });
       },
 
       computed: {

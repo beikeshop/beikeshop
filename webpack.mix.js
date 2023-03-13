@@ -31,6 +31,11 @@ mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/bu
 mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
+// 如果安装有某一个模版 ，需要修改其 scss/js ，那么你需要添加如下 fashion 模版的编译代码
+// mix.sass('resources/beike/shop/fashion/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/fashion/css/bootstrap.css');
+// mix.sass('resources/beike/shop/fashion/css/app.scss', 'public/build/beike/shop/fashion/css/app.css');
+// mix.js('resources/beike/shop/fashion/js/app.js', 'public/build/beike/shop/fashion/js/app.js');
+
 // 安装引导
 mix.sass('beike/Installer/assets/scss/app.scss', 'public/install/css/app.css');
 

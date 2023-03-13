@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2022 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2022-08-15 17:35:29
+ * @LastEditTime  2022-09-16 20:47:16
+ */
+
+body.page-checkout, body.page-cart {
+  background-color: #f6f8fa;
+
+  .left-column {
+    @media (min-width: 992px) {
+      width: 70%;
+    }
+  }
+
+  .right-column {
+    @media (min-width: 992px) {
+      width: 30%;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 1.4rem;
+    }
+  }
+}
+
+body.page-cart {
+  .cart-products-wrap {
+    .table {
+      tbody {
+        border-top: none;
+        td {
+          vertical-align: middle;
+          border-color: #f0f2f4;
+        }
+
+        // tr {
+        //   &.active {
+        //     background-color: #fff6f1;
+        //   }
+        // }
+      }
+
+      thead {
+        background-color: #F8F9FA;
+
+        th {
+          border-bottom: none;
+          padding: 0.7rem 0.5rem;
+          box-shadow: none;
+          white-space: nowrap;
+        }
+      }
+
+      .p-image {
+        input {
+          flex: 0 0 1;
+        }
+      }
+    }
+  }
+
+  .total-wrap {
+    &.total-wrap-fixed {
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
+
+    .card-header {
+      padding-top: 1rem;
+      border-bottom: none;
+      background-color: transparent;
+    }
+
+    .list-group {
+      li {
+        background-color: transparent;
+        padding: 0.7rem 0;
+        border-color: #EEEEEE;
+
+        &:not(.d-grid) {
+          display: flex;
+          align-items: center; // flex-start | center
+          justify-content: space-between; // flex-end | center | space-between
+        }
+
+        .total-price {
+          color: #222222;
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

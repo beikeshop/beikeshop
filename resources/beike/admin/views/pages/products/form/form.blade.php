@@ -53,7 +53,9 @@
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
-            <x-admin-form-input-locale :width="600" name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
+            <x-admin-form-input-locale
+              :width="600" name="descriptions.*.name" title="{{ __('common.name') }}"
+              :value="$descriptions" :required="true" />
             <x-admin::form.row title="{{ __('common.image') }}">
               <draggable
                 element="div"
@@ -480,7 +482,7 @@
         isMove: false,
         form: {
           attributes: @json(old('pickups', $product_attributes) ?? []),
-          images: @json($product->images ?? []),
+          images: @json(old('images', $product->images) ?? []),
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
           quantity: @json($product->skus[0]['quantity'] ?? ''),

@@ -75,6 +75,8 @@ return [
     'text_list'            => 'Liste',
     'text_form'            => 'von',
     'text_to'              => 'an',
+    'batch_setting'        => 'Stapeleinstellung',
+    'show_all'             => 'Alle anzeigen',
 
     'id'                   => 'ID',
     'created_at'           => 'Erstellungszeit',

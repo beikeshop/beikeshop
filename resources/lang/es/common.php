@@ -75,6 +75,8 @@ return [
     'text_list'            => 'lista',
     'text_form'            => 'desde',
     'texto_a'              => 'a',
+    'batch_setting'        => 'configuración de lote',
+    'show_all'             => 'Ver todo',
 
     'id'                   => 'ID',
     'created_at'           => 'tiempo de creación',

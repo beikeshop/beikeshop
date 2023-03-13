@@ -161,7 +161,7 @@
       layer.open({
         type: 2,
         title: '',
-        area: ['700px', '80%'],
+        area: ['840px', '80%'],
         content: `${config.api_url}/api/vip_rights?domain=${config.app_url}`,
       });
     });

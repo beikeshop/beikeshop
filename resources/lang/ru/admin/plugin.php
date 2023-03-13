@@ -17,6 +17,7 @@ return [
     'plugins_update_status' => 'статус обновления',
     'plugins_install'       => 'Установить',
     'plugins_uninstall'     => 'удалить',
+    'to_enable'             => 'включить',
 
     'plugin_list'           => 'Список плагинов',
     'plugin_code'           => 'код плагина',

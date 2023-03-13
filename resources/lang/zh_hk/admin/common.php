@@ -51,6 +51,7 @@ return [
     'access_frontend'                  => '訪問前台',
 
     // sidebar
+    'theme_index'                      => '模板設置',
     'attribute_groups_index'           => '屬性組',
     'attributes_index'                 => '屬性',
     'settings_index'                   => '系統設置',

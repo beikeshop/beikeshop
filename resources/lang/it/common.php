@@ -75,6 +75,8 @@ return [
     'text_list'            => 'lista',
     'text_form'            => 'da',
     'text_to'              => 'a',
+    'batch_setting'        => 'impostazione batch',
+    'show_all'             => 'Visualizza tutto',
 
     'id'                   => 'ID',
     'created_at'           => 'tempo di creazione',

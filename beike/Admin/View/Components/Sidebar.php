@@ -162,7 +162,7 @@ class Sidebar extends Component
      */
     private function getSettingSubPrefix()
     {
-        $prefix = ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'];
+        $prefix = ['settings.', 'admin_users.', 'admin_roles.', 'plugins.', 'theme.', 'marketing.', 'tax_classes', 'tax_rates', 'regions', 'currencies', 'languages', 'design_menu', 'countries', 'zones'];
 
         return hook_filter('admin.sidebar.setting.prefix', $prefix);
     }
@@ -253,6 +253,7 @@ class Sidebar extends Component
             ['route' => 'settings.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'admin_users.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'plugins.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
+            ['route' => 'theme.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
             ['route' => 'marketing.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
             ['route' => 'regions.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'tax_rates.index', 'icon' => 'fa fa-tachometer-alt'],

@@ -77,6 +77,7 @@ return [
     'text_form'            => 'From',
     'text_to'              => 'To',
     'batch_setting'        => 'Batch setting',
+    'show_all'             => 'View all',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

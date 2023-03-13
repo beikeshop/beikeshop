@@ -26,7 +26,7 @@ class PluginRepo
     public static function getTypes(): array
     {
         $types = [];
-        foreach (Plugin::TYPES as $item) {
+        foreach (BPlugin::TYPES as $item) {
             $types[] = [
                 'value' => $item,
                 'label' => trans("admin/plugin.{$item}"),
@@ -38,11 +38,12 @@ class PluginRepo
 
     /**
      * 安装插件到系统: 插入数据
-     * @param BPlugin $bPlugin
+     * @param  BPlugin    $bPlugin
+     * @throws \Exception
      */
     public static function installPlugin(BPlugin $bPlugin)
     {
-        // self::publishStaticFiles($bPlugin);
+        self::publishThemeFiles($bPlugin);
         self::migrateDatabase($bPlugin);
         $type   = $bPlugin->type;
         $code   = $bPlugin->code;
@@ -73,6 +74,51 @@ class PluginRepo
     }
 
     /**
+     * Publish theme files, include public and blade files.
+     *
+     * @param $bPlugin
+     */
+    public static function publishThemeFiles($bPlugin)
+    {
+        if ($bPlugin->getType() != 'theme') {
+            return;
+        }
+
+        $publicPath = $bPlugin->getPath() . '/Static/public';
+        if (is_dir($publicPath)) {
+            File::copyDirectory($publicPath, public_path('/'));
+        }
+
+        $themePath = $bPlugin->getPath() . '/Themes';
+        if (is_dir($themePath)) {
+            File::copyDirectory($themePath, base_path('themes'));
+        }
+    }
+
+    /**
+     * Run plugin seeder
+     *
+     * @param $bPlugin
+     * @throws \Exception
+     */
+    public static function runSeeder($bPlugin)
+    {
+        $seederPath = $bPlugin->getPath() . '/Seeders/';
+        if (is_dir($seederPath)) {
+
+            $seederFiles = glob($seederPath . '*');
+            foreach ($seederFiles as $seederFile) {
+                $seederName   = basename($seederFile, '.php');
+                $className    = "\\Plugin\\{$bPlugin->getDirname()}\\Seeders\\{$seederName}";
+                if (class_exists($className)) {
+                    $seeder = new $className;
+                    $seeder->run();
+                }
+            }
+        }
+    }
+
+    /**
      * 数据库迁移
      */
     public static function migrateDatabase(BPlugin $bPlugin)
@@ -99,7 +145,6 @@ class PluginRepo
      */
     public static function uninstallPlugin(BPlugin $bPlugin)
     {
-        // self::removeStaticFiles($bPlugin);
         self::rollbackDatabase($bPlugin);
         $type = $bPlugin->type;
         $code = $bPlugin->code;
@@ -217,7 +262,7 @@ class PluginRepo
         $allPlugins = self::allPlugins();
 
         return $allPlugins->where('type', 'shipping')->filter(function ($item) {
-            $plugin = app('plugin')->getPlugin($item->code);
+            $plugin = plugin($item->code);
             if ($plugin) {
                 $item->plugin = $plugin;
             }
@@ -234,7 +279,24 @@ class PluginRepo
         $allPlugins = self::allPlugins();
 
         return $allPlugins->where('type', 'payment')->filter(function ($item) {
-            $plugin = app('plugin')->getPlugin($item->code);
+            $plugin = plugin($item->code);
+            if ($plugin) {
+                $item->plugin = $plugin;
+            }
+
+            return $plugin && $plugin->getEnabled();
+        });
+    }
+
+    /**
+     * Get all enabled themes
+     */
+    public static function getEnabledThemes(): Collection
+    {
+        $allPlugins = self::allPlugins();
+
+        return $allPlugins->where('type', 'theme')->filter(function ($item) {
+            $plugin = plugin($item->code);
             if ($plugin) {
                 $item->plugin = $plugin;
             }

@@ -1,5 +1,6 @@
 /node_modules
 /public/.htaccess
+/public/cache
 /public/hot
 /public/storage
 /public/upload/avatar
@@ -23,4 +24,3 @@ yarn-error.log
 mix-manifest.json
 package-lock.json
 dist
-/public/cache
