@@ -190,7 +190,8 @@
               } else {
                 this.customer_groups[this.dialog.index] = res.data
               }
-              this.dialog.show = false
+              this.dialog.show = false;
+              this.dialog.form.level = 1
             })
           });
         },
@@ -214,7 +215,8 @@
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.name = {};
           this.dialog.form.description = {};
-          this.dialog.show = false
+          this.dialog.show = false;
+          this.dialog.form.level = 1
         }
       }
     })
