@@ -76,7 +76,10 @@ class Product extends Base
 
     public function getUrlAttribute()
     {
-        return shop_route('products.show', ['product' => $this]);
+        $url     = shop_route('products.show', ['product' => $this]);
+        $filters = hook_filter('model.product.url', ['url' => $url, 'product' => $this]);
+
+        return $filters['url'] ?? '';
     }
 
     public function getImageAttribute()

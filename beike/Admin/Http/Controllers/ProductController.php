@@ -19,16 +19,16 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $requestData = $request->all();
-        $productList = ProductRepo::list($requestData);
-        $products    = ProductResource::collection($productList);
+        $requestData    = $request->all();
+        $productList    = ProductRepo::list($requestData);
+        $products       = ProductResource::collection($productList);
         $productsFormat =  $products->jsonSerialize();
 
         $data = [
-            'categories' => CategoryRepo::flatten(locale()),
+            'categories'      => CategoryRepo::flatten(locale()),
             'products_format' => $productsFormat,
-            'products'   => $products,
-            'type'       => 'products',
+            'products'        => $products,
+            'type'            => 'products',
         ];
 
         $data = hook_filter('admin.product.index.data', $data);

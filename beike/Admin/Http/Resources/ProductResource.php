@@ -27,12 +27,12 @@ class ProductResource extends JsonResource
             'price_formatted' => currency_format($masterSku->price),
             'active'          => $this->active,
             'position'        => $this->position,
-            'url'             => shop_route('products.show', $this->id),
+            'url'             => $this->url,
             'created_at'      => time_format($this->created_at),
             'deleted_at'      => $this->deleted_at ? time_format($this->deleted_at) : '',
             'url_edit'        => admin_route('products.edit', $this->id),
         ];
 
-        return $data;
+        return hook_filter('resource.product', $data);
     }
 }

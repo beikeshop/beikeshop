@@ -37,12 +37,12 @@ class ProductSimple extends JsonResource
             $images = $this->images ?? [];
         }
 
-        return [
+        $data = [
             'id'                  => $this->id,
             'sku_id'              => $masterSku->id,
             'name'                => $name,
             'name_format'         => $name,
-            'url'                 => shop_route('products.show', ['product' => $this]),
+            'url'                 => $this->url,
             'price'               => $masterSku->price,
             'origin_price'        => $masterSku->origin_price,
             'price_format'        => currency_format($masterSku->price),
@@ -54,5 +54,7 @@ class ProductSimple extends JsonResource
                 return image_resize($item, 400, 400);
             }, $images),
         ];
+
+        return hook_filter('resource.product.simple', $data);
     }
 }
