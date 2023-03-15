@@ -55,4 +55,12 @@ class Category extends Base
     {
         return $this->hasMany(ProductCategory::class);
     }
+
+    public function getUrlAttribute()
+    {
+        $url     = shop_route('categories.show', ['category' => $this]);
+        $filters = hook_filter('model.category.url', ['url' => $url, 'category' => $this]);
+
+        return $filters['url'] ?? '';
+    }
 }

@@ -6,13 +6,8 @@ use Beike\Models\AdminUser;
 use Beike\Models\Currency;
 use Beike\Models\Customer;
 use Beike\Models\Language;
-use Beike\Repositories\BrandRepo;
-use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
-use Beike\Repositories\PageCategoryRepo;
-use Beike\Repositories\PageRepo;
-use Beike\Repositories\ProductRepo;
 use Beike\Services\CurrencyService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -130,39 +125,7 @@ function shop_route($route, $params = []): string
  */
 function type_route($type, $value): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'page_category', 'order', 'rma', 'static', 'custom'];
-    if (empty($type) || empty($value) || ! in_array($type, $types)) {
-        return '';
-    }
-    if (is_array($value)) {
-        throw new \Exception('Value must be integer, string or object');
-    }
-
-    if ($type == 'category') {
-        return shop_route('categories.show', ['category' => $value]);
-    } elseif ($type == 'product') {
-        return shop_route('products.show', ['product' => $value]);
-    } elseif ($type == 'brand') {
-        return shop_route('brands.show', [$value]);
-    } elseif ($type == 'page') {
-        return shop_route('pages.show', ['page' => $value]);
-    } elseif ($type == 'page_category') {
-        return shop_route('page_categories.show', ['page_category' => $value]);
-    } elseif ($type == 'order') {
-        return shop_route('account.order.show', ['number' => $value]);
-    } elseif ($type == 'rma') {
-        return shop_route('account.rma.show', ['id' => $value]);
-    } elseif ($type == 'static') {
-        return shop_route($value);
-    } elseif ($type == 'custom') {
-        if (Str::startsWith($value, ['http://', 'https://'])) {
-            return $value;
-        }
-
-        return "//{$value}";
-    }
-
-    return '';
+    return \Beike\Libraries\Url::getInstance()->link($type, $value);
 }
 
 /**
@@ -175,34 +138,7 @@ function type_route($type, $value): string
  */
 function type_label($type, $value, array $texts = []): string
 {
-    $types = ['category', 'product', 'brand', 'page', 'page_category', 'static', 'custom'];
-    if (empty($type) || empty($value) || ! in_array($type, $types)) {
-        return '';
-    }
-
-    $locale = locale();
-    $text   = $texts[$locale] ?? '';
-    if ($text) {
-        return $text;
-    }
-
-    if ($type == 'category') {
-        return CategoryRepo::getName($value);
-    } elseif ($type == 'product') {
-        return ProductRepo::getName($value);
-    } elseif ($type == 'brand') {
-        return BrandRepo::getName($value);
-    } elseif ($type == 'page') {
-        return PageRepo::getName($value);
-    } elseif ($type == 'page_category') {
-        return PageCategoryRepo::getName($value);
-    } elseif ($type == 'static') {
-        return trans('shop/' . $value);
-    } elseif ($type == 'custom') {
-        return $text;
-    }
-
-    return '';
+    return \Beike\Libraries\Url::getInstance()->label($type, $value, $texts);
 }
 
 /**

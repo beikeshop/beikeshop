@@ -87,9 +87,14 @@ class CategoryController extends Controller
 
     protected function save(Request $request, ?Category $category = null)
     {
-        $category = (new CategoryService())->createOrUpdate($request->all(), $category);
+        $requestData = $request->all();
+        $category    = (new CategoryService())->createOrUpdate($requestData, $category);
+        $data        = [
+            'category'     => $category,
+            'request_data' => $requestData,
+        ];
 
-        hook_action('admin.category.save.after', $category);
+        hook_action('admin.category.save.after', $data);
 
         return redirect($this->getRedirect())->with('success', 'Category created successfully');
     }
