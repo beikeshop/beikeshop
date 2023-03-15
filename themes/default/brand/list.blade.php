@@ -23,7 +23,7 @@
         <div class="row">
           @foreach ($brand as $item)
             <div class="text-center col-6 col-md-4 col-lg-2 mt-2">
-              <a href="{{ shop_route('brands.show', [$item['id']]) }}">
+              <a href="{{ type_route('brand', $item['id']) }}">
                 <div class="brand-item">
                   <img src="{{ $item['logo'] }}" class="img-fluid" alt="{{ $item['name'] }}">
                 </div>

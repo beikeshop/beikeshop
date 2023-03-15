@@ -48,4 +48,12 @@ class PageCategory extends Model
     {
         return $this->hasMany(Page::class, 'page_category_id');
     }
+
+    public function getUrlAttribute()
+    {
+        $url     = shop_route('page_categories.show', ['page_category' => $this]);
+        $filters = hook_filter('model.page_category.url', ['url' => $url, 'page_category' => $this]);
+
+        return $filters['url'] ?? '';
+    }
 }

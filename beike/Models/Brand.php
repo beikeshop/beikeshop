@@ -24,4 +24,12 @@ class Brand extends Base
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getUrlAttribute()
+    {
+        $url     = shop_route('brands.show', ['id' => $this->id]);
+        $filters = hook_filter('model.brand.url', ['url' => $url, 'brand' => $this]);
+
+        return $filters['url'] ?? '';
+    }
 }

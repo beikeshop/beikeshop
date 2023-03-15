@@ -46,4 +46,12 @@ class Page extends Base
     {
         return $this->belongsToMany(Product::class, PageProduct::class, 'page_id', 'product_id')->withTimestamps();
     }
+
+    public function getUrlAttribute()
+    {
+        $url     = shop_route('pages.show', ['page' => $this]);
+        $filters = hook_filter('model.page.url', ['url' => $url, 'page' => $this]);
+
+        return $filters['url'] ?? '';
+    }
 }
