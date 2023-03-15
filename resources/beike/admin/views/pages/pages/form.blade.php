@@ -23,7 +23,7 @@
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" >{{ __('admin/product.basic_information') }}</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-set" type="button">{{ __('common.data') }}</button>
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-data" type="button">{{ __('common.data') }}</button>
     </li>
   </ul>
 
@@ -80,7 +80,9 @@
               @endforeach
             </div>
           </div>
-          <div class="tab-pane fade" id="tab-set">
+          <div class="tab-pane fade" id="tab-data">
+            @hook('admin.page.data.before')
+
             <x-admin-form-input name="author" title="{{ __('page_category.author') }}" value="{{ old('author', $page->author ?? '') }}" />
             <x-admin::form.row title="{{ __('admin/page_category.index') }}">
               <div class="wp-400">
@@ -135,8 +137,9 @@
               </div>
             </x-admin::form.row>
 
-            <x-admin-form-switch name="active" title="{{ __('common.status') }}" value="{{ old('active', $page->active ?? 1) }}" />
+            @hook('admin.page.data.after')
 
+            <x-admin-form-switch name="active" title="{{ __('common.status') }}" value="{{ old('active', $page->active ?? 1) }}" />
           </div>
         </div>
 

@@ -58,12 +58,11 @@ class PageCategoryController extends Controller
     public function store(PageCategoryRequest $request)
     {
         try {
-
             $requestData = $request->all();
             hook_action('admin.page_category.store.before', $requestData);
             $pageCategory = PageCategoryRepo::createOrUpdate($requestData);
 
-            hook_action('admin.page_category.store.after', $pageCategory);
+            hook_action('admin.page_category.store.after', ['page_category' => $pageCategory, 'request_data' => $requestData]);
 
             return redirect(admin_route('page_categories.index'));
         } catch (\Exception $e) {
@@ -105,7 +104,7 @@ class PageCategoryController extends Controller
             $requestData['id'] = $pageCategory->id;
             hook_action('admin.page_category.update.before', $requestData);
             $pageCategory = PageCategoryRepo::createOrUpdate($requestData);
-            hook_action('admin.page_category.store.after', $pageCategory);
+            hook_action('admin.page_category.update.after', ['page_category' => $pageCategory, 'request_data' => $requestData]);
 
             return redirect()->to(admin_route('page_categories.index'));
         } catch (\Exception $e) {

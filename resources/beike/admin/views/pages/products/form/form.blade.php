@@ -350,6 +350,9 @@
 
           <div class="tab-pane fade" id="tab-seo">
             <h6 class="border-bottom pb-3 mb-4">SEO</h6>
+
+            @hook('admin.product.seo.before')
+
             <x-admin-form-input-locale :width="600" name="descriptions.*.meta_title" title="Meta title" :value="$descriptions"/>
             <x-admin::form.row title="Meta keywords">
               @foreach ($languages as $language)
@@ -367,6 +370,8 @@
               </div>
               @endforeach
             </x-admin::form.row>
+
+            @hook('admin.product.seo.after')
           </div>
 
           <div class="tab-pane fade" id="tab-relations">

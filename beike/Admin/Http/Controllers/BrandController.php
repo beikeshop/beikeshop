@@ -44,10 +44,14 @@ class BrandController extends Controller
      */
     public function store(Request $request): array
     {
-        $beforeData = $request->all();
-        hook_action('admin.brand.store.before', $beforeData);
-        $brand = BrandRepo::create($request->all());
-        hook_action('admin.brand.store.after', $brand);
+        $requestData = $request->all();
+        $data        = [
+            'request_data' => $requestData,
+        ];
+
+        hook_action('admin.brand.store.before', $data);
+        $brand = BrandRepo::create($requestData);
+        hook_action('admin.brand.store.after', ['brand' => $brand, 'request_data' => $requestData]);
 
         return json_success(trans('common.created_success'), $brand);
     }
@@ -58,13 +62,13 @@ class BrandController extends Controller
     public function update(Request $request, int $id): array
     {
         $requestData = $request->all();
-        $beforeData  = [
-            'brand_id' => $id,
-            'data'     => $requestData,
+        $data        = [
+            'brand_id'     => $id,
+            'request_data' => $requestData,
         ];
-        hook_action('admin.brand.update.before', $beforeData);
-        $brand = BrandRepo::update($id, $request->all());
-        hook_action('admin.brand.update.after', $brand);
+        hook_action('admin.brand.update.before', $data);
+        $brand = BrandRepo::update($id, $requestData);
+        hook_action('admin.brand.update.after', $data);
 
         return json_success(trans('common.updated_success'), $brand);
     }

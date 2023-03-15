@@ -50,6 +50,8 @@
       @close="closeDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
+        @hook('admin.brand.form.before')
+
         <el-form-item label="{{ __('brand.name') }}" prop="name">
           <el-input class="mb-0" v-model="dialog.form.name" placeholder="{{ __('brand.name') }}"></el-input>
         </el-form-item>
@@ -65,6 +67,8 @@
         <el-form-item label="{{ __('common.sort_order') }}">
           <el-input class="mb-0" type="number" v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
+
+        @hook('admin.brand.form.after')
 
         <el-form-item label="{{ __('common.status') }}">
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>

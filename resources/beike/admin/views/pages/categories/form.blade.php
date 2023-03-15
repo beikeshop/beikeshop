@@ -16,6 +16,8 @@
           <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
         @endif
 
+        @hook('admin.category.form.before')
+
         <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
         <x-admin-form-input-locale name="descriptions.*.content" title="{{ __('admin/builder.modules_content') }}" :value="$descriptions" />
 
@@ -59,6 +61,8 @@
           </div>
           @endforeach
         </x-admin::form.row>
+
+        @hook('admin.category.form.after')
 
         <x-admin-form-switch title="{{ __('common.status') }}" name="active" :value="old('active', $category->active ?? 1)" />
 

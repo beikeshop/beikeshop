@@ -57,7 +57,8 @@ class PagesController extends Controller
     {
         try {
             $requestData = $request->all();
-            PageRepo::createOrUpdate($requestData);
+            $page        = PageRepo::createOrUpdate($requestData);
+            hook_action('admin.page.store.after', ['request_data' => $requestData, 'page' => $page]);
 
             return redirect(admin_route('pages.index'));
         } catch (\Exception $e) {
@@ -95,7 +96,8 @@ class PagesController extends Controller
         try {
             $requestData       = $request->all();
             $requestData['id'] = $pageId;
-            PageRepo::createOrUpdate($requestData);
+            $page              = PageRepo::createOrUpdate($requestData);
+            hook_action('admin.page.update.after', ['request_data' => $requestData, 'page' => $page]);
 
             return redirect()->to(admin_route('pages.index'));
         } catch (\Exception $e) {
