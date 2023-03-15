@@ -404,13 +404,34 @@ function plugin_path(string $path = ''): string
  */
 function plugin_resize($pluginCode, $image, int $width = 100, int $height = 100)
 {
-    $plugin = app('plugin')->getPlugin($pluginCode);
     if (Str::startsWith($image, 'http')) {
         return $image;
     }
+
+    $plugin        = app('plugin')->getPlugin($pluginCode);
     $pluginDirName = $plugin->getDirname();
 
     return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->resize($width, $height);
+}
+
+/**
+ * Get origin image from plugin
+ *
+ * @param $pluginCode
+ * @param $image
+ * @return mixed|void
+ * @throws Exception
+ */
+function plugin_origin($pluginCode, $image)
+{
+    if (Str::startsWith($image, 'http')) {
+        return $image;
+    }
+
+    $plugin        = app('plugin')->getPlugin($pluginCode);
+    $pluginDirName = $plugin->getDirname();
+
+    return (new \Beike\Services\ImageService($image))->setPluginDirName($pluginDirName)->originUrl();
 }
 
 /**
