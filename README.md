@@ -56,7 +56,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外�
 
 
 ## 软件架构
-PHP语言开发，基于 Laravel 框架，前端 Blade 模版 + Vue
+PHP语言开发，基于 Laravel 框架，前端 Blade 模板 + Vue
 
 ## 环境要求
 - PHP 8.0.2+
