@@ -8,6 +8,7 @@
   <title>@yield('title', system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统 - BeikeShop官网') . ' Powered By BeikeShop')</title>
   <meta name="keywords" content="@yield('keywords', system_setting('base.meta_keywords'))">
   <meta name="description" content="@yield('description', system_setting('base.meta_description'))">
+  <meta name="generator" content="BeikeShop v{{ config('beike.version') }}({{ config('beike.build') }})">
   <base href="{{ $shop_base_url }}">
   <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/default/css/bootstrap.css') }}">
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
