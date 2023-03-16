@@ -11,7 +11,7 @@
 
 return [
     'page_title'         => 'Mi plantilla',
-    'theme_name'         => 'tema predeterminado',
+    'theme_name'         => 'Default',
     'enabled_text'       => 'actualmente habilitado',
     'theme_pop_checkbox' => 'importar datos de plantilla',
     'theme_pop_text'     => 'Si verifica los datos de la plantilla de importación, es posible que se sobrescriba el diseño de página, la clasificación, el producto y otros datos configurados existentes. ¡Haga una copia de seguridad primero! ',

@@ -11,7 +11,7 @@
 
 return [
     'page_title'         => 'My template',
-    'theme_name'         => 'default theme',
+    'theme_name'         => 'Default',
     'enabled_text'       => 'Currently enabled',
     'theme_pop_checkbox' => 'import template data',
     'theme_pop_text'     => 'If you check the import template data, it may overwrite the existing configured page layout, classification, product and other data, please make a backup first! ',
