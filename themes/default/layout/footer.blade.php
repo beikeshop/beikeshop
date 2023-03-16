@@ -84,7 +84,10 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col">
-          <div class="d-flex">Powered By &nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a> {!! $footer_content['bottom']['copyright'][$locale] ?? '' !!}</div>
+          <div class="d-flex">
+            Powered By&nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a>&nbsp;
+            {!! $footer_content['bottom']['copyright'][$locale] ?? '' !!}
+          </div>
         </div>
         @if (isset($footer_content['bottom']['image']) && $footer_content['bottom']['image'])
           <div class="col-auto right-img">
