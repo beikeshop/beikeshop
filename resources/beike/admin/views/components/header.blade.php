@@ -162,7 +162,7 @@
         type: 2,
         title: '',
         area: ['840px', '80%'],
-        content: `${config.api_url}/api/vip_rights?domain=${config.app_url}`,
+        content: `${config.api_url}/api/vip_rights?domain=${config.app_url}&developer_token={{ system_setting('base.developer_token') }}`,
       });
     });
   </script>
