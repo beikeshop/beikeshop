@@ -23,13 +23,13 @@
               @foreach ($category_pages as $page)
                 <div>
                   <h5 class="card-title mb-2"><a class="text-black"
-                      href="{{ shop_route('pages.show', [$page->id]) }}">{{ $page->description->title }}</a></h5>
+                      href="{{ type_route('page', $page) }}">{{ $page->description->title }}</a></h5>
                   <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
                   @if ($page->description->summary)
                     <p class="card-text mb-4">{{ $page->description->summary ?? '' }}</p>
                   @endif
                   <div class="text-danger"><a
-                      href="{{ shop_route('pages.show', [$page->id]) }}">{{ __('shop/account.check_details') }}<i
+                      href="{{ type_route('page', $page) }}">{{ __('shop/account.check_details') }}<i
                         class="bi bi-arrow-right-short"></i></a></div>
                 </div>
 
@@ -56,7 +56,7 @@
               <ul class="list-group list-group-flush">
                 @foreach ($active_page_categories as $category)
                   <li class="list-group-item p-0">
-                    <a href="{{ shop_route('page_categories.show', [$category->id]) }}"
+                    <a href="{{ type_route('page_category', $category) }}"
                       class="p-2 list-group-item-action nav-link">{{ $category->description->title }}</a>
                   </li>
                 @endforeach
