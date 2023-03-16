@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2022-11-04 16:00:27
+ * @LastEditTime  2023-03-16 17:30:20
  */
 
 $(function () {
@@ -80,9 +80,10 @@ $(function () {
     if ($(el).children('.dropdown-menu').length) {
       const offsetLeft = $(el).children('.dropdown-menu').offset().left;
       const width = $(el).children('.dropdown-menu').width();
+      const offsetRight = offsetLeft + width;
       const windowWidth = $(window).width();
 
-      if (offsetLeft < 0) {
+      if (offsetLeft < 0 || offsetRight > windowWidth) {
         $(el).addClass('position-static')
         .children('.dropdown-menu')
         .css({'left': (windowWidth - width) / 2, 'transform': 'translate(0, 0.5rem)'});
