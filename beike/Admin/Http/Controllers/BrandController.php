@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Models\Brand;
 use Beike\Repositories\BrandRepo;
 use Exception;
 use Illuminate\Http\Request;
@@ -57,30 +58,43 @@ class BrandController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Brand   $brand
+     * @return array
      * @throws Exception
      */
-    public function update(Request $request, int $id): array
+    public function update(Request $request, Brand $brand): array
     {
         $requestData = $request->all();
         $data        = [
-            'brand_id'     => $id,
+            'brand_id'     => $brand,
             'request_data' => $requestData,
         ];
         hook_action('admin.brand.update.before', $data);
-        $brand = BrandRepo::update($id, $requestData);
+        $brand = BrandRepo::update($brand, $requestData);
         hook_action('admin.brand.update.after', $data);
 
         return json_success(trans('common.updated_success'), $brand);
     }
 
-    public function destroy(int $brandId): array
+    /**
+     * @param Request $request
+     * @param Brand   $brand
+     * @return array
+     */
+    public function destroy(Request $request, Brand $brand): array
     {
-        BrandRepo::delete($brandId);
-        hook_action('admin.brand.destroy.after', $brandId);
+        hook_action('admin.brand.destroy.before', $brand);
+        BrandRepo::delete($brand);
+        hook_action('admin.brand.destroy.after', $brand);
 
         return json_success(trans('common.deleted_success'));
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function autocomplete(Request $request): array
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
@@ -88,6 +102,10 @@ class BrandController extends Controller
         return json_success(trans('common.get_success'), $brands);
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function name(int $id): array
     {
         $name = BrandRepo::getName($id);

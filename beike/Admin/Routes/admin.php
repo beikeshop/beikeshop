@@ -44,8 +44,8 @@ Route::prefix($adminName)
                 Route::middleware('can:brands_show')->get('brands/{id}/name', [Controllers\BrandController::class, 'name'])->name('brands.name');
                 Route::middleware('can:brands_index')->get('brands', [Controllers\BrandController::class, 'index'])->name('brands.index');
                 Route::middleware('can:brands_create')->post('brands', [Controllers\BrandController::class, 'store'])->name('brands.store');
-                Route::middleware('can:brands_update')->put('brands/{id}', [Controllers\BrandController::class, 'update'])->name('brands.update');
-                Route::middleware('can:brands_delete')->delete('brands/{id}', [Controllers\BrandController::class, 'destroy'])->name('brands.destroy');
+                Route::middleware('can:brands_update')->put('brands/{brand}', [Controllers\BrandController::class, 'update'])->name('brands.update');
+                Route::middleware('can:brands_delete')->delete('brands/{brand}', [Controllers\BrandController::class, 'destroy'])->name('brands.destroy');
 
                 // 商品分类
                 Route::middleware('can:categories_index')->get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');

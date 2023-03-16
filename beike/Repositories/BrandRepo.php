@@ -78,12 +78,15 @@ class BrandRepo
     }
 
     /**
-     * @param $id
+     * @param $brand
      * @return void
      */
-    public static function delete($id)
+    public static function delete($brand)
     {
-        $brand = Brand::query()->find($id);
+        if (! $brand instanceof Brand) {
+            $brand = Brand::query()->find((int) $brand);
+        }
+
         if ($brand) {
             $brand->delete();
         }
