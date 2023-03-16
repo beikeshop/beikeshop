@@ -63,8 +63,8 @@ class TotalService
     public function getTaxes(): array
     {
         $addressInfo = [
-            'shipping_address' => $this->currentCart->shippingAddress,
-            'payment_address'  => $this->currentCart->paymentAddress,
+            'shipping_address' => $this->currentCart->shippingAddress ?? $this->currentCart->guest_shipping_address,
+            'payment_address'  => $this->currentCart->paymentAddress ?? $this->currentCart->guest_payment_address,
         ];
         $taxLib = Tax::getInstance($addressInfo);
 
