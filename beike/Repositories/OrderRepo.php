@@ -193,7 +193,7 @@ class OrderRepo
         $totals     = $data['totals']   ?? [];
         $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
-        if (current_customer()) {
+        if ($customer) {
             $shippingAddressId = $current['shipping_address_id'] ?? 0;
             $paymentAddressId  = $current['payment_address_id']  ?? 0;
 
@@ -204,9 +204,11 @@ class OrderRepo
             $shippingAddress->country_id = $shippingAddress->country->id   ?? 0;
             $paymentAddress->country     = $paymentAddress->country->name  ?? '';
             $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
+            $email = $customer->email;
         } else {
-            $shippingAddress = (object) ($current['guest_shipping_address'] ?? []);
-            $paymentAddress  = (object) ($current['guest_payment_address'] ?? []);
+            $shippingAddress = new Address($current['guest_shipping_address'] ?? []);
+            $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
+            $email = $current['guest_shipping_address']['email'];
         }
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
@@ -223,7 +225,7 @@ class OrderRepo
             'shipping_address_id'    => $shippingAddress->id         ?? 0,
             'payment_address_id'     => $paymentAddress->id          ?? 0,
             'customer_name'          => $customer->name              ?? '',
-            'email'                  => $customer ? $customer->email : $shippingAddress->email,
+            'email'                  => $email,
             'calling_code'           => $customer->calling_code ?? 0,
             'telephone'              => $customer->telephone    ?? '',
             'total'                  => $orderTotal['amount'],
