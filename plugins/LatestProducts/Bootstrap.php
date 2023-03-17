@@ -25,6 +25,7 @@ class Bootstrap
 
         // $this->modifyAdminProductEdit();
         // $this->modifySetting();
+        // $this->handlePaidOrder();
     }
 
     /**
@@ -130,5 +131,17 @@ class Bootstrap
         add_hook_blade('admin.setting.after', function ($callback, $output, $data) {
             return view('LatestProducts::admin.setting.tab')->render();
         });
+    }
+
+    /**
+     * 修改订单状态机流程演示
+     */
+    private function handlePaidOrder() {
+        add_hook_filter('service.state_machine.machines', function ($data) {
+            $data['machines']['unpaid']['paid'][] = function (){
+                // 这里写订单由 unpaid 变为 paid 执行的逻辑
+            };
+            return $data;
+        }, 0);
     }
 }
