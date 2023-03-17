@@ -45,12 +45,14 @@ class ProductController extends Controller
         $requestData            = $request->all();
         $requestData['trashed'] = true;
         $productList            = ProductRepo::list($requestData);
-        $products               = ProductResource::collection($productList)->resource;
+        $products               = ProductResource::collection($productList);
+        $productsFormat         =  $products->jsonSerialize();
 
         $data = [
-            'categories' => CategoryRepo::flatten(locale()),
-            'products'   => $products,
-            'type'       => 'trashed',
+            'categories'      => CategoryRepo::flatten(locale()),
+            'products_format' => $productsFormat,
+            'products'        => $products,
+            'type'            => 'trashed',
         ];
 
         $data = hook_filter('admin.product.trashed.data', $data);
