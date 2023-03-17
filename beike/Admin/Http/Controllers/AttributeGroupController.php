@@ -12,39 +12,56 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Repositories\AttributeGroupRepo;
+use Exception;
 use Illuminate\Http\Request;
 
 class AttributeGroupController extends Controller
 {
     public function index()
     {
-        $data = [
-            'attribute_groups' => AttributeGroupRepo::getList(),
-        ];
-        $data = hook_filter('admin.attribute_group.index.data', $data);
+        try {
+            $data = [
+                'attribute_groups' => AttributeGroupRepo::getList(),
+            ];
+            $data = hook_filter('admin.attribute_group.index.data', $data);
+        } catch (Exception $e) {
+            return view('admin::pages.attribute_group.index', $data)->withErrors(['error' => $e->getMessage()]);
+        }
 
         return view('admin::pages.attribute_group.index', $data);
     }
 
     public function store(Request $request)
     {
-        $requestData = json_decode($request->getContent(), true);
-        $item        = AttributeGroupRepo::create($requestData);
+        try {
+            $requestData = json_decode($request->getContent(), true);
+            $item = AttributeGroupRepo::create($requestData);
+        } catch (Exception $e) {
+            return json_fail($e->getMessage(), []);
+        }
 
         return json_success(trans('common.created_success'), $item);
     }
 
     public function update(Request $request, int $id)
     {
-        $requestData = json_decode($request->getContent(), true);
-        $item        = AttributeGroupRepo::update($id, $requestData);
+        try {
+            $requestData = json_decode($request->getContent(), true);
+            $item        = AttributeGroupRepo::update($id, $requestData);
+        } catch (Exception $e) {
+            return json_fail($e->getMessage(), []);
+        }
 
         return json_success(trans('common.updated_success'), $item);
     }
 
     public function destroy(Request $request, int $id)
     {
-        AttributeGroupRepo::delete($id);
+        try {
+            AttributeGroupRepo::delete($id);
+        } catch (Exception $e) {
+            return json_fail($e->getMessage(), []);
+        }
 
         return json_success(trans('common.deleted_success'));
     }
