@@ -166,9 +166,13 @@
             type: 'warning'
           }).then(() => {
             $http.delete(`attributes/${id}`).then((res) => {
-              self.$message.success(res.message);
+              if (res.status == 'fail') {
+                layer.msg(res.message,()=>{})
+                return;
+              }
+
+              layer.msg(res.message)
               window.location.reload();
-              // self.customers.splice(index, 1)
             })
           }).catch(()=>{})
         },
