@@ -193,7 +193,7 @@ class OrderRepo
         $totals     = $data['totals']   ?? [];
         $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
-        if (current_customer()) {
+        if ($customer) {
             $shippingAddressId = $current['shipping_address_id'] ?? 0;
             $paymentAddressId  = $current['payment_address_id']  ?? 0;
 
