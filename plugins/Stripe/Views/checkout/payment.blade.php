@@ -18,13 +18,13 @@
         </el-form-item>
         <el-form-item label="{{ __('Stripe::common.expiration_date') }}" required>
           <div class="d-flex align-items-center">
-            <el-form-item prop="year">
-              <el-date-picker class="w-auto me-2" v-model="form.year" format="yyyy" value-format="yyyy"
+            <el-form-item prop="year" class="flex-grow-1">
+              <el-date-picker class="w-100 me-2" v-model="form.year" format="yyyy" value-format="yyyy"
                 type="year" placeholder="{{ __('Stripe::common.year') }}">
               </el-date-picker>
             </el-form-item>
-            <el-form-item prop="month">
-              <el-date-picker v-model="form.month" class="w-auto" format="MM" value-format="MM" type="month"
+            <el-form-item prop="month" class="flex-grow-1 ms-3">
+              <el-date-picker v-model="form.month" class="w-100" format="MM" value-format="MM" type="month"
                 placeholder="{{ __('Stripe::common.month') }}">
               </el-date-picker>
             </el-form-item>
