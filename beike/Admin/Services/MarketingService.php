@@ -106,7 +106,7 @@ class MarketingService
         Storage::disk('local')->put($pluginPath, $content);
 
         $pluginZip = storage_path('app/' . $pluginPath);
-        $zipFile   = Zip::open($pluginZip);
+        $zipFile   = (new Zip)->open($pluginZip);
         $zipFile->extract(base_path('plugins'));
     }
 }
