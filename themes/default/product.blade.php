@@ -55,12 +55,14 @@
           @hookwrapper('product.detail.name')
           <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
           @endhookwrapper
+          @hookwrapper('product.detail.price')
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price && product.origin_price !== 0">
               @{{ product.origin_price_format }}
             </div>
           </div>
+          @endhookwrapper
           <div class="stock-and-sku mb-4">
             @hookwrapper('product.detail.quantity')
             <div class="d-flex">
