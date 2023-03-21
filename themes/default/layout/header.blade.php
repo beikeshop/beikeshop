@@ -76,9 +76,7 @@
       </div>
       @endhookwrapper
       <div class="menu-wrap">
-        @if (!is_mobile())
-          @include('shared.menu-pc')
-        @endif
+        @include('shared.menu-pc')
       </div>
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
@@ -151,9 +149,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mobile-menu-wrap">
-      @if (is_mobile())
-        @include('shared.menu-mobile')
-      @endif
+      @include('shared.menu-mobile')
     </div>
   </div>
 
