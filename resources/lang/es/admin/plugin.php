@@ -18,6 +18,7 @@ return [
     'plugins_install'       => 'Instalar',
     'plugins_uninstall'     => 'desinstalar',
     'to_enable'             => 'To Enable',
+    'uninstall_hint'        => 'Desinstalar el complemento eliminará todos los datos relacionados con el complemento, ¿está seguro de que desea desinstalarlo? ',
 
     'plugin_list'           => 'Lista de complementos',
     'plugin_code'           => 'código de complemento',

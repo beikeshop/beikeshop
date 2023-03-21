@@ -18,6 +18,7 @@ return [
     'plugins_install'       => '安裝',
     'plugins_uninstall'     => '卸載',
     'to_enable'             => '去啟用',
+    'uninstall_hint'        => '卸載插件會刪除該插件的所有相關數據，確定要卸載嗎？ ',
 
     'plugin_list'           => '插件設置',
     'plugin_code'           => '插件代碼',

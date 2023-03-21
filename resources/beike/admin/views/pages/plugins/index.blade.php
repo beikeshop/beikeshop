@@ -84,11 +84,25 @@
         },
 
         installedPlugin(code, type, index) {
-          const self = this;
+          if (type == 'uninstall') {
+            layer.confirm('{{ __('admin/plugin.uninstall_hint') }}', {
+              title: "{{ __('common.text_hint') }}",
+              btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+              area: ['400px'],
+              btn2: () => {
+                this.installedPluginXhr(code, type, index);
+              }
+            })
+            return;
+          }
 
+          this.installedPluginXhr(code, type, index);
+        },
+
+        installedPluginXhr(code, type, index) {
           $http.post(`plugins/${code}/${type}`).then((res) => {
             layer.msg(res.message)
-            self.plugins[index].installed = type == 'install' ? true : false;
+            this.plugins[index].installed = type == 'install' ? true : false;
           })
         }
       }

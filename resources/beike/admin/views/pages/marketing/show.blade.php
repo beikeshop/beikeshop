@@ -43,18 +43,24 @@
           </div>
 
           <div class="mb-4">
-            @if ($data['downloadable'])
-              <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{ __('admin/marketing.download_plugin') }}</button>
-              <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i class="bi bi-cursor-fill"></i> <span></span></a></div>
+            @if ($data['available'])
+              @if ($data['downloadable'])
+                <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{ __('admin/marketing.download_plugin') }}</button>
+                <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i class="bi bi-cursor-fill"></i> <span></span></a></div>
+              @else
+                <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
+                <div class="mb-4">
+                  <el-radio-group v-model="payCode" size="small" class="radio-group">
+                    <el-radio class="rounded-0 me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}" class="img-fluid"></el-radio>
+                    <el-radio class="rounded-0" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
+                  </el-radio-group>
+                </div>
+                <button class="btn btn-primary btn-lg" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }} ({{ $data['price_format'] }})</button>
+              @endif
             @else
-              <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
-              <div class="mb-4">
-                <el-radio-group v-model="payCode" size="small" class="radio-group">
-                  <el-radio class="rounded-0 me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}" class="img-fluid"></el-radio>
-                  <el-radio class="rounded-0" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
-                </el-radio-group>
+              <div class="alert alert-warning" role="alert">
+                {!! __('admin/marketing.version_compatible_text') !!}
               </div>
-              <button class="btn btn-primary btn-lg" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }} ({{ $data['price_format'] }})</button>
             @endif
           </div>
         </div>

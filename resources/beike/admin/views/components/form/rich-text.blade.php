@@ -15,7 +15,7 @@
     <div class="tab-content w-max-1000" id="myTabContent">
       @foreach (locales() as $locale)
       <div class="tab-pane fade {{ $loop->first ? 'show active' : ''}}" id="{{ $locale['code'] }}-pane" role="tabpanel" aria-labelledby="{{ $locale['code'] }}">
-        <textarea rows="4" type="text" name="{{ $name }}[{{ $locale['code'] }}]" class="tinymce" placeholder="{{ $title }}">{{ $value[$locale['code']] }}</textarea>
+        <textarea rows="4" type="text" name="{{ $name }}[{{ $locale['code'] }}]" class="tinymce" placeholder="{{ $title }}">{{ $value[$locale['code']] ?? '' }}</textarea>
       </div>
       @endforeach
     </div>

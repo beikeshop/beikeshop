@@ -34,4 +34,7 @@ return [
     'pay_success_text'     => '插件购买成功，点击确定刷新页面',
     'ali_pay_success'      => '已完成支付？',
     'ali_pay_text'         => '已完成支付，请刷新页面',
+    'ali_pay_text'         => '已完成支付，请刷新页面',
+    'version_compatible_text'         => '该插件不兼容当前系统版本，请升级到 <a href="' . config('beike.api_url') . '/download" target="_blank">最新版本</a>',
+    'to_update'         => '去升级',
 ];

@@ -18,6 +18,7 @@ return [
     'plugins_install'       => 'インストール',
     'plugins_uninstall'     => 'アンインストール',
     'to_enable'             => '有効にする',
+    'uninstall_hint'        => 'プラグインをアンインストールすると、プラグインに関連するすべてのデータが削除されます。本当にアンインストールしますか? ',
 
     'plugin_list'           => 'プラグイン リスト',
     'plugin_code'           => 'プラグインコード',

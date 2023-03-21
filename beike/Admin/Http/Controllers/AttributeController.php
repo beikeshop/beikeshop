@@ -26,10 +26,10 @@ class AttributeController extends Controller
     {
         try {
             $attributes = AttributeRepo::getList();
-            $data = [
-                'attribute_list' => $attributes,
+            $data       = [
+                'attribute_list'        => $attributes,
                 'attribute_list_format' => AttributeResource::collection($attributes),
-                'attribute_group' => AttributeGroupRepo::getList(),
+                'attribute_group'       => AttributeGroupRepo::getList(),
             ];
             $data = hook_filter('admin.attribute.index.data', $data);
             if ($request->expectsJson()) {
