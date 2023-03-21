@@ -18,6 +18,7 @@ return [
     'plugins_install'       => 'installa',
     'plugins_uninstall'     => 'disinstalla',
     'to_enable'             => 'To Enable',
+    'uninstall_hint' => 'La disinstallazione del plug-in eliminerà tutti i relativi dati del plug-in, sei sicuro di voler disinstallare? ',
 
     'plugin_list'           => 'elenco dei plugin',
     'plugin_code'           => 'codice plugin',

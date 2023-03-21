@@ -18,6 +18,7 @@ return [
     'plugins_install'       => 'Install',
     'plugins_uninstall'     => 'Uninstall',
     'to_enable'             => 'To Enable',
+    'uninstall_hint' => 'Uninstalling the plug-in will delete all related data of the plug-in, are you sure you want to uninstall? ',
 
     'plugin_list'           => 'Plugin List',
     'plugin_code'           => 'Code',

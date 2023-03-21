@@ -18,6 +18,7 @@ return [
     'plugins_install'       => 'installieren',
     'plugins_uninstall'     => 'deinstallieren',
     'to_enable'             => 'To Enable',
+    'uninstall_hint' => 'Das Deinstallieren des Plug-ins löscht alle zugehörigen Daten des Plug-ins, möchten Sie es wirklich deinstallieren? ',
 
     'plugin_list'           => 'Plugin-Liste',
     'plugin_code'           => 'plugin-code',
