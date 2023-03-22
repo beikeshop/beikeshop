@@ -15,9 +15,17 @@
     justify-content: center; // flex-end | center | space-between
     box-shadow: 0 6px 18px rgba(0, 0, 0, .07);
     margin-bottom: 10px;
-    height: 90px;
+    height: 120px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in-out;
 
-    >img {
+    &:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .1);
+      border: 1px solid $primary;
+    }
+
+    > img {
       max-height: 100%;
     }
   }
