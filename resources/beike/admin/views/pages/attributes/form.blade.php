@@ -179,7 +179,7 @@
             cancelButtonText: '{{__('common.cancel')}}',
             type: 'warning'
           }).then(() => {
-            $http.delete(`customers/{{ $attribute['id'] }}/addresses/${id}`).then((res) => {
+            $http.delete(`attributes/{{ $attribute['id'] }}/values/${id}`).then((res) => {
               this.$message.success(res.message);
               this.source.attributeValues.splice(index, 1)
             })
