@@ -1,0 +1,5 @@
+# https://laravel.com/docs/9.x/deployment#nginx
+
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
