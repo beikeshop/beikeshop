@@ -78,6 +78,17 @@
             {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
             <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
 
+            <x-admin::form.row :title="__('admin/product.weight_text')">
+              <div class="d-flex wp-400">
+                <input type="text" name="weight" placeholder="{{ __('admin/product.weight_text') }}" value="{{ old('weight', $product->weight ?? '') }}" class="form-control" style="flex: 0 0 260px" />
+                <select class="form-select ms-4 bg-white" name="weight_class">
+                  @foreach ($weight_classes as $item)
+                    <option value="{{ $item }}" {{ $product->weight_class == $item ? 'selected' : '' }}>{{ __('product.' . $item) }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </x-admin::form.row>
+
             @hookwrapper('admin.product.edit.brand')
             <x-admin::form.row :title="__('admin/brand.index')">
               <input type="text" value="{{ $product->brand->name ?? '' }}" id="brand-autocomplete" class="form-control wp-400 " />

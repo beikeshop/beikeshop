@@ -39,6 +39,8 @@ return [
     'add_variable_image'     => 'Spezifikationsbild hinzufügen',
     'default_main_product'   => 'Standard-Hauptprodukt',
     'modify_order'           => 'Zum Ändern doppelklicken, zum Anpassen der Reihenfolge ziehen',
+    'weight_text'            => 'Gewicht',
+    'weight_class'           => 'Gewichtseinheit',
 
     'confirm_batch_product'  => 'Möchten Sie die ausgewählten Elemente wirklich in großen Mengen löschen?',
     'confirm_batch_status'   => 'Möchten Sie den Status der ausgewählten Artikel wirklich per Bulk-Verfahren bearbeiten?',
