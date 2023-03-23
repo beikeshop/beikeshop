@@ -20,7 +20,7 @@ class ImageService
 
     private $imagePath;
 
-    public const PLACEHOLDER_IMAGE = 'catalog/placeholder.png';
+    private $placeholderImage = 'catalog/placeholder.png';
 
     /**
      * @param $image
@@ -28,8 +28,9 @@ class ImageService
      */
     public function __construct($image)
     {
-        $this->image     = $image ?: self::PLACEHOLDER_IMAGE;
+        $this->image     = $image ?: $this->placeholderImage;
         $this->imagePath = public_path($this->image);
+        $this->placeholderImage = system_setting('base.placeholder');
     }
 
     /**
@@ -40,7 +41,7 @@ class ImageService
     public function setPluginDirName($dirName): static
     {
         $originImage = $this->image;
-        if ($this->image == self::PLACEHOLDER_IMAGE) {
+        if ($this->image == $this->placeholderImage) {
             return $this;
         }
 
@@ -48,7 +49,7 @@ class ImageService
         if (file_exists($this->imagePath)) {
             $this->image = strtolower('plugin/' . $dirName . $originImage);
         } else {
-            $this->image     = self::PLACEHOLDER_IMAGE;
+            $this->image     = $this->placeholderImage;
             $this->imagePath = public_path($this->image);
         }
 
@@ -65,7 +66,7 @@ class ImageService
     {
         try {
             if (! file_exists($this->imagePath)) {
-                $this->image     = self::PLACEHOLDER_IMAGE;
+                $this->image     = $this->placeholderImage;
                 $this->imagePath = public_path($this->image);
             }
             if (! file_exists($this->imagePath)) {
