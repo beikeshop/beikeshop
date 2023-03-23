@@ -44,7 +44,7 @@
 
             <div class="checkout-black">
               <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
-              <div class="radio-line-wrap">
+              <div class="radio-line-wrap" id="shipping-methods-wrap">
                 @foreach ($shipping_methods as $methods)
                   @foreach ($methods['quotes'] as $shipping)
                   <div class="radio-line-item {{ $shipping['code'] == $current['shipping_method_code'] ? 'active':'' }}" data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
@@ -123,18 +123,13 @@
 @push('add-scripts')
 <script>
   $(document).ready(function() {
-    $('.radio-line-item').click(function(event) {
+    $(document).on('click', '.radio-line-item', function(event) {
       const key = $(this).data('key');
       const value = $(this).data('value');
-      let html = '';
 
       $http.put('/checkout', {[key]: value}).then((res) => {
         $(this).addClass('active').siblings().removeClass('active')
-        res.totals.forEach((item) => {
-          html += `<li><span>${item.title}</span><span>${item.amount_format}</span></li>`
-        })
-
-        $('ul.totals').html(html);
+        updateTotal(res.totals)
       })
     });
 
@@ -158,5 +153,37 @@
       bk.openLogin();
     });
   });
+
+  function updateTotal(totals) {
+    let html = '';
+
+    totals.forEach((item) => {
+      html += `<li><span>${item.title}</span><span>${item.amount_format}</span></li>`
+    })
+
+    $('ul.totals').html(html);
+  }
+
+  function updateShippingMethods(data, shipping_method_code) {
+    let html = '';
+
+    data.forEach((methods) => {
+      methods.quotes.forEach((quote) => {
+        html += `<div class="radio-line-item d-flex align-items-center ${shipping_method_code == quote.code ? 'active' : ''}" data-key="shipping_method_code" data-value="${quote.code}">
+          <div class="left">
+            <span class="radio"></span>
+            <img src="${quote.icon}" class="img-fluid">
+          </div>
+          <div class="right ms-3">
+            <div class="title">${quote.name}</div>
+            <div class="sub-title">${quote.description}</div>
+            <div class="mt-2">${quote.html || ''}</div>
+          </div>
+        </div>`;
+      })
+    })
+
+    $('#shipping-methods-wrap').html(html);
+  }
 </script>
 @endpush

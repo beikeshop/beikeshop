@@ -282,6 +282,9 @@
           this.form = res.current
           this.source.totals = res.totals
 
+          updateTotal(res.totals)
+          updateShippingMethods(res.shipping_methods, res.current.shipping_method_code)
+
           this.isAllAddress = false
           this.isAllAddressPayment = false
         })
