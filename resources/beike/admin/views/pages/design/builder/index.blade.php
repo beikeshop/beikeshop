@@ -20,6 +20,9 @@
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  @if (locale() != 'zh_cn')
+    <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
+  @endif
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
   @stack('header')
   <script>
