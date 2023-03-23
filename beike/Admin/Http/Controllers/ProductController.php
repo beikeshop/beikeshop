@@ -7,6 +7,7 @@ use Beike\Admin\Http\Resources\ProductAttributeResource;
 use Beike\Admin\Http\Resources\ProductResource;
 use Beike\Admin\Repositories\TaxClassRepo;
 use Beike\Admin\Services\ProductService;
+use Beike\Libraries\Weight;
 use Beike\Models\Product;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
@@ -152,6 +153,7 @@ class ProductController extends Controller
             'relations'          => ProductResource::collection($product->relations)->resource,
             'languages'          => LanguageRepo::all(),
             'tax_classes'        => $taxClasses,
+            'weight_classes'        => Weight::getWeightUnits(),
             'source'             => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],
