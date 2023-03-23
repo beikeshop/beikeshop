@@ -136,11 +136,13 @@ class Bootstrap
     /**
      * 修改订单状态机流程演示
      */
-    private function handlePaidOrder() {
+    private function handlePaidOrder()
+    {
         add_hook_filter('service.state_machine.machines', function ($data) {
-            $data['machines']['unpaid']['paid'][] = function (){
+            $data['machines']['unpaid']['paid'][] = function () {
                 // 这里写订单由 unpaid 变为 paid 执行的逻辑
             };
+
             return $data;
         }, 0);
     }

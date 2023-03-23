@@ -35,7 +35,7 @@ class AttributeGroupController extends Controller
     {
         try {
             $requestData = json_decode($request->getContent(), true);
-            $item = AttributeGroupRepo::create($requestData);
+            $item        = AttributeGroupRepo::create($requestData);
         } catch (Exception $e) {
             return json_fail($e->getMessage(), []);
         }
