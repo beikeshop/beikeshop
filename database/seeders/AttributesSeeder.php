@@ -111,8 +111,8 @@ class AttributesSeeder extends Seeder
     private function getGroupDescriptions(): array
     {
         return [
-            ["attribute_group_id" => 1, "locale" => "zh_cn", "name" => "女装"],
-            ["attribute_group_id" => 1, "locale" => "en", "name" => "Women's clothing"],
+            ["attribute_group_id" => 1, "locale" => "zh_cn", "name" => "默认"],
+            ["attribute_group_id" => 1, "locale" => "en", "name" => "Default"],
             ["attribute_group_id" => 2, "locale" => "zh_cn", "name" => "衣服"],
             ["attribute_group_id" => 2, "locale" => "en", "name" => "Clothing"],
             ["attribute_group_id" => 3, "locale" => "zh_cn", "name" => "运动户外"],
