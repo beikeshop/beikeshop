@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Libraries\Weight;
 use Beike\Models\Address;
 use Beike\Models\Country;
 use Beike\Models\Customer;
@@ -140,7 +141,7 @@ class CheckoutService
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            // $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
+            $weight += Weight::convert($product->product['weight'], $product->product['weight_class']);
         }
 
         return $weight;
@@ -189,11 +190,13 @@ class CheckoutService
     private function updateShippingAddressId($shippingAddressId)
     {
         $this->cart->update(['shipping_address_id' => $shippingAddressId]);
+        $this->cart->load('shippingAddress');
     }
 
     private function updatePaymentAddressId($paymentAddressId)
     {
         $this->cart->update(['payment_address_id' => $paymentAddressId]);
+        $this->cart->load('paymentAddress');
     }
 
     private function updateGuestShippingAddress($guestShippingAddress)
@@ -235,6 +238,14 @@ class CheckoutService
         $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodService::getShippingMethods($this);
         $payments  = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+
+        $shipmentCodes = [];
+        foreach ($shipments as $shipment) {
+            $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
+        }
+        if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
+            $this->updateShippingMethod($shipmentCodes[0]);
+        }
 
         $data = [
             'current'          => [
