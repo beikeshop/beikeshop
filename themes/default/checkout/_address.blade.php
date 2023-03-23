@@ -246,6 +246,8 @@
               }
               this.source[this.dialogAddress.type] = res.current[this.dialogAddress.type];
             }
+            updateTotal(res.totals)
+            updateShippingMethods(res.shipping_methods, res.current.shipping_method_code)
             this.$message.success('{{ __('common.edit_success') }}');
             this.$refs['address-dialog'].closeAddressDialog()
           })
@@ -256,10 +258,10 @@
               this.source.addresses[this.dialogAddress.index] = res.data
             } else {
               this.source.addresses.push(res.data)
-              this.updateCheckout(res.data.id, this.dialogAddress.type)
               this.form[this.dialogAddress.type] = res.data.id
             }
 
+            this.updateCheckout(res.data.id, this.dialogAddress.type)
             this.dialogAddress.index = null;
             this.$forceUpdate()
             this.$refs['address-dialog'].closeAddressDialog()
@@ -268,9 +270,9 @@
       },
 
       updateCheckout(id, key) {
-        if (this.form[key] === id && key != 'same_as_shipping_address') {
-          return
-        }
+        // if (this.form[key] === id && key != 'same_as_shipping_address') {
+        //   return
+        // }
 
         if (key == 'shipping_address_id' && this.same_as_shipping_address) {
           this.form.payment_address_id = id
