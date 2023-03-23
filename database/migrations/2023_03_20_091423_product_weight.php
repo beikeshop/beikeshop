@@ -19,7 +19,7 @@ return new class extends Migration
 
         Schema::table('products', function (Blueprint $table) {
             $table->float('weight')->comment('重量')->default(0)->after('tax_class_id');
-            $table->float('weight_class')->comment('重量单位')->default(0)->after('weight');
+            $table->string('weight_class')->comment('重量单位')->default('')->after('weight');
         });
     }
 
