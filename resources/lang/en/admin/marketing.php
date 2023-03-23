@@ -34,4 +34,6 @@ return [
     'pay_success_text'     => 'The plug-in purchase is successful, click OK to refresh the page',
     'ali_pay_success'      => 'Payment completed? ',
     'ali_pay_text'         => 'Payment has been completed, please refresh the page',
+    'version_compatible_text' => 'This plugin is not compatible with the current system version, please upgrade to <a href="' .config('beike.api_url') . '/download" target="_blank">Latest Version</a>' ,
+    'to_update' => 'To Upgrade',
 ];

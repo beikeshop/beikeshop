@@ -20,7 +20,7 @@
 
         @hookwrapper('admin.header.vip')
         <li class="nav-item vip-serve">
-          <a href="javascript:void(0)" class="nav-link">
+          <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}" target="_blank" class="nav-link">
             <img src="/image/vip-icon.png" class="img-fluid">
             <span class="vip-text ms-1">VIP</span>
             <div class="expired-text text-danger ms-2" style="display: none">@lang('admin/common.expired_at')：<span class="ms-0"></span></div>
@@ -157,13 +157,13 @@
       layer.close(updatePop)
     });
 
-    $('.vip-serve').click(function(event) {
-      layer.open({
-        type: 2,
-        title: '',
-        area: ['840px', '80%'],
-        content: `${config.api_url}/api/vip_rights?domain=${config.app_url}&developer_token={{ system_setting('base.developer_token') }}`,
-      });
-    });
+    // $('.vip-serve').click(function(event) {
+    //   layer.open({
+    //     type: 2,
+    //     title: '',
+    //     area: ['840px', '80%'],
+    //     content: `${config.api_url}/api/vip_rights?domain=${config.app_url}&developer_token={{ system_setting('base.developer_token') }}`,
+    //   });
+    // });
   </script>
 @endpush
