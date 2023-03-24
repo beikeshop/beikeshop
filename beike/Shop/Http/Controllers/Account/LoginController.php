@@ -35,20 +35,30 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request)
     {
-        $guestCartProduct = CartRepo::allCartProducts(0);
-        if (! auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
-            throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
+        $data = [
+            'request_data' => $request->all(),
+        ];
+
+        try {
+            hook_action('shop.account.login.before', $data);
+
+            $guestCartProduct = CartRepo::allCartProducts(0);
+            if (! auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
+                throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
+            }
+
+            $customer = current_customer();
+            if ($customer && $customer->status != 1) {
+                Auth::guard(Customer::AUTH_GUARD)->logout();
+
+                throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
+            }
+
+            CartRepo::mergeGuestCart($customer, $guestCartProduct);
+
+            return json_success(trans('shop/login.login_successfully'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
         }
-
-        $customer = current_customer();
-        if ($customer && $customer->status != 1) {
-            Auth::guard(Customer::AUTH_GUARD)->logout();
-
-            throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
-        }
-
-        CartRepo::mergeGuestCart($customer, $guestCartProduct);
-
-        return json_success(trans('shop/login.login_successfully'));
     }
 }

@@ -17,7 +17,7 @@ class SkuDetail extends JsonResource
 {
     public function toArray($request): array
     {
-        return [
+        $result = [
             'id'                  => $this->id,
             'variants'            => $this->variants ?: [],
             'position'            => $this->position,
@@ -37,5 +37,7 @@ class SkuDetail extends JsonResource
             'quantity'            => $this->quantity,
             'is_default'          => $this->is_default,
         ];
+
+        return hook_filter('resource.sku.detail', $result);
     }
 }

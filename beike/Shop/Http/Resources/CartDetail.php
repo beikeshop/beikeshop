@@ -26,7 +26,7 @@ class CartDetail extends JsonResource
         $subTotal    = $price * $this->quantity;
         $image       = $sku->image ?: $product->image;
 
-        return [
+        $result = [
             'cart_id'         => $this->id,
             'product_id'      => $this->product_id,
             'sku_id'          => $this->product_sku_id,
@@ -44,5 +44,7 @@ class CartDetail extends JsonResource
             'subtotal_format' => currency_format($subTotal),
             'variant_labels'  => trim($sku->getVariantLabel()),
         ];
+
+        return hook_filter('resource.cart.detail', $result);
     }
 }
