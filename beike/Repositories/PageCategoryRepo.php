@@ -153,8 +153,9 @@ class PageCategoryRepo
      * @param $page
      * @return string
      */
-    public static function getName($page)
+    public static function getName($pageCategoryId)
     {
-        return $page->description->title ?? '';
+        $page_category = PageCategory::query()->findOrFail($pageCategoryId);
+        return $page_category->description->title ?? '';
     }
 }
