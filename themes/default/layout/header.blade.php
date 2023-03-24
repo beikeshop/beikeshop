@@ -58,6 +58,8 @@
         @endhookwrapper
       </div>
 
+      @hook('header.top.language.after')
+
       @if (system_setting('base.telephone', ''))
       <div class="right nav">
         @hookwrapper('header.top.telephone')

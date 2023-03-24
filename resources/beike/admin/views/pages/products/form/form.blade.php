@@ -107,9 +107,11 @@
             <div>
               <h5 class="border-bottom pb-3 mb-4">{{ __('admin/product.stocks') }}</h5>
 
+              @hookwrapper('admin.product.edit.switch')
               <x-admin::form.row :title="__('admin/product.enable_multi_spec')">
                 <el-switch v-model="editing.isVariable" @change="isVariableChange" class="mt-2"></el-switch>
               </x-admin::form.row>
+              @endhookwrapper
 
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
@@ -265,6 +267,7 @@
                 </div>
               </div>
 
+              @hookwrapper('admin.product.edit.variable')
               <template v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
@@ -277,6 +280,7 @@
                 <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
                 <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
               </template>
+              @endhookwrapper
             </div>
           </div>
           <div class="tab-pane fade" id="tab-descriptions">
