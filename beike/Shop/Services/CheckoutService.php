@@ -248,7 +248,7 @@ class CheckoutService
             ],
             'country_id'       => (int) system_setting('base.country_id'),
             'customer_id'      => $customer->id ?? null,
-            'countries'        => CountryRepo::all(),
+            'countries'        => CountryRepo::listEnabled(),
             'addresses'        => AddressResource::collection($addresses),
             'shipping_methods' => $shipments,
             'payment_methods'  => $payments,

@@ -25,7 +25,7 @@ class AddressController extends Controller
     {
         $addresses = AddressRepo::listByCustomer(current_customer());
         $data      = [
-            'countries' => CountryRepo::all(),
+            'countries' => CountryRepo::listEnabled(),
             'addresses' => AddressResource::collection($addresses),
         ];
 
