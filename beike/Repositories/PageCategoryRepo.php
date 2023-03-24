@@ -155,7 +155,11 @@ class PageCategoryRepo
      */
     public static function getName($pageCategoryId)
     {
-        $page_category = PageCategory::query()->findOrFail($pageCategoryId);
-        return $page_category->description->title ?? '';
+        // 根据 pageCategoryId 获取 name，判断是否存在
+        $pageCategory = PageCategory::query()->whereHas('description', function ($query) use ($pageCategoryId) {
+            $query->where('page_category_id', $pageCategoryId);
+        })->first();
+
+        return $pageCategory->description->title ?? '';
     }
 }
