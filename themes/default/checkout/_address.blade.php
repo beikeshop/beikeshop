@@ -229,7 +229,7 @@
         if (!this.source.isLogin) {
           let data = {[this.dialogAddress.type]: form}
 
-          if (this.source.guest_payment_address === null && this.source.guest_shipping_address === null) {
+          if (this.same_as_shipping_address) {
             data = {
               guest_shipping_address: form,
               guest_payment_address: form
