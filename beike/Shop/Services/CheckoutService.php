@@ -141,7 +141,7 @@ class CheckoutService
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            $weight += Weight::convert($product->product['weight'], $product->product['weight_class']);
+            $weight += Weight::convert($product->product['weight'] * $product['quantity'], $product->product['weight_class']);
         }
 
         return $weight;
@@ -244,7 +244,8 @@ class CheckoutService
             $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
         }
         if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
-            $this->updateShippingMethod($shipmentCodes[0]);
+            $this->updateShippingMethod($shipmentCodes[0] ?? '');
+            $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
         }
 
         $data = [
