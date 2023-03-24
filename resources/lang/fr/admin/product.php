@@ -39,6 +39,8 @@ return [
     'add_variable_image'     => 'Ajouter une image de spécification',
     'default_main_product'   => 'produit principal par défaut',
     'modify_order'           => 'Double-cliquez pour modifier, faites glisser pour ajuster la commande',
+    'weight_text'            => 'poids',
+    'weight_class'           => 'unité de poids',
 
     'confirm_batch_product'  => 'Êtes-vous sûr de vouloir supprimer les produits sélectionnés par lots? ',
     'confirm_batch_status'   => 'Confirmer pour modifier le statut des produits sélectionnés par lots? ',

@@ -39,6 +39,8 @@ return [
     'add_variable_image'     => '添加规格图片',
     'default_main_product'   => '默认主商品',
     'modify_order'           => '双击修改、拖动调整顺序',
+    'weight_text'            => '重量',
+    'weight_class'           => '重量单位',
 
     'confirm_batch_product'  => '确认要批量删除选中的商品吗？',
     'confirm_batch_status'   => '确认要批量修改选中的商品的状态吗？',

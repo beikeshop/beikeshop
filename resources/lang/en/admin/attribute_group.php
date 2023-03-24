@@ -13,6 +13,7 @@ return [
     'index'                              => 'Attribute group',
     'create_at_groups'                   => 'Create',
     'error_cannot_delete_attribute_used' => 'Attribute Group used by attribute (ID: :attributes), can not be deleted!',
+    'error_cannot_delete_default_group'  => 'The attribute group with ID 1 is the default attribute group and cannot be deleted.',
 
     'attribute_groups_index'             => 'Index',
     'attribute_groups_create'            => 'Create',

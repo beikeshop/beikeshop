@@ -241,6 +241,9 @@
               this.source.guest_shipping_address = res.current.guest_shipping_address;
               this.source.guest_payment_address = res.current.guest_payment_address;
             } else {
+              if (this.same_as_shipping_address) {
+                this.source.guest_payment_address = res.current.guest_shipping_address;
+              }
               this.source[this.dialogAddress.type] = res.current[this.dialogAddress.type];
             }
             this.$message.success('{{ __('common.edit_success') }}');

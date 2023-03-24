@@ -20,6 +20,10 @@ return [
     'model'             => '型号',
     'quantity'          => '库存',
     'image'             => '图片',
+    'kg'                => '千克',
+    'g'                 => '克',
+    'oz'                => '盎司',
+    'lb'                => '磅',
 
     'active'            => '上架',
     'inactive'          => '下架',
