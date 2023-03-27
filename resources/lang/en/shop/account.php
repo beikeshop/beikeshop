@@ -19,7 +19,7 @@ return [
     'pending_payment'     => 'Pending Payment',
     'pending_send'        => 'To be delivered',
     'pending_receipt'     => 'Pending Receipt',
-    'after_sales'         => 'After Sales',
+    'after_sales'         => 'RMA',
     'no_order'            => "You don't have an order yet!",
     'to_buy'              => 'To place an order',
     'order_number'        => 'Order Number',
@@ -35,7 +35,7 @@ return [
 
     'edit'                => [
         'index'                 => 'Edit',
-        'modify_avatar'         => 'Modify Avatar',
+        'modify_avatar'         => 'Profile Picture',
         'suggest'               => 'Upload a JPG or PNG image. 300 x 300 is recommended.',
         'name'                  => 'Name',
         'email'                 => 'Email',
@@ -72,7 +72,7 @@ return [
             'state'             => 'State',
             'order_amount'      => 'Order Amount',
             'order_items'       => 'Order Items',
-            'apply_after_sales' => 'Apply for after-sales',
+            'apply_after_sales' => 'Apply for RMA',
             'order_total'       => 'Order Total',
             'logistics_status'  => 'Logistics Status',
             'order_status'      => 'Order Status',
@@ -114,7 +114,7 @@ return [
     ],
 
     'rma'                 => [
-        'index'         => 'Rma',
+        'index'         => 'RMA',
         'commodity'     => 'Commodity',
         'quantity'      => 'Quantity',
         'service_type'  => 'Service Type',
@@ -127,7 +127,7 @@ return [
         ],
 
         'rma_form'      => [
-            'index'           => 'Submit after-sales information',
+            'index'           => 'Submit RMA information',
             'service_type'    => 'Service Type',
             'return_quantity' => 'Return Quantity',
             'unpacked'        => 'Unpacked',

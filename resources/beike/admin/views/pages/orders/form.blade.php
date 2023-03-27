@@ -68,7 +68,7 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
     <div class="card-body">
-      <table class="table ">
+      <table class="table">
         <thead class="">
           <tr>
             <th>{{ __('order.shipping_address') }}</th>
