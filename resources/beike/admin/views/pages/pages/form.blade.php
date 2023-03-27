@@ -5,8 +5,6 @@
 @section('body-class', 'page-pages-form')
 
 @push('header')
-  <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
-  <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
 @endpush
 
@@ -17,7 +15,6 @@
 @endsection
 
 @section('content')
-
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" >{{ __('admin/product.basic_information') }}</button>
