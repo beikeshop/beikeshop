@@ -20,9 +20,9 @@ use Plugin\Social\Repositories\CustomerRepo;
 
 class ShopSocialController extends Controller
 {
-    public function __construct()
+    public function initSocial()
     {
-        $providerSettings = plugin_setting('social.setting');
+        $providerSettings = plugin_setting('social.setting', []);
         foreach ($providerSettings as $providerSetting) {
             $provider = $providerSetting['provider'];
             if (empty($provider)) {
@@ -44,6 +44,8 @@ class ShopSocialController extends Controller
     public function redirect($provider)
     {
         try {
+            $this->initSocial();
+
             return Socialite::driver($provider)->redirect();
         } catch (\Exception $e) {
             exit($e->getMessage());
@@ -57,6 +59,7 @@ class ShopSocialController extends Controller
     public function callback($provider)
     {
         try {
+            $this->initSocial();
             $userData = Socialite::driver($provider)->user();
             $customer = CustomerRepo::createCustomer($provider, $userData);
             Auth::guard(Customer::AUTH_GUARD)->login($customer);
