@@ -71,6 +71,7 @@
                   <img :src="thumbnail(image)" class="img-fluid">
                   <input type="hidden" name="images[]" :value="image">
                 </div>
+                <div v-if="!form.images.length" class="d-none"><input type="hidden" name="images[]" value=""></div>
                 <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
               </draggable>
               <div class="help-text mb-1 mt-1">{{ __('admin/product.image_help') }}</div>
@@ -156,12 +157,6 @@
                                :options="{animation: 100}"
                                >
                                <div v-for="(value, value_index) in variant.values" :key="value_index" class="variants-item" @dblclick="modalVariantOpenButtonClicked(variantIndex, value_index)">
-                                 {{-- <div class="value-img" v-if="variant.isImage"> --}}
-                                   {{-- <a href="" :id="'value-img-' + i + '-' + value_index" data-toggle="image" data-no-preview> --}}
-                                     {{-- <img :src="thumbnail(value.image)" class="img-responsive" /> --}}
-                                   {{-- </a> --}}
-                                 {{-- </div> --}}
-
                                  <div class="open-file-manager variant-value-img" v-if="variant.isImage">
                                    <div>
                                      <img :src="thumbnail(value.image)" class="img-fluid">
