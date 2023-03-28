@@ -130,6 +130,10 @@
       $http.put('/checkout', {[key]: value}).then((res) => {
         $(this).addClass('active').siblings().removeClass('active')
         updateTotal(res.totals)
+
+        if (typeof checkoutPutCallback === 'function') {
+          checkoutPutCallback(res)
+        }
       })
     });
 
