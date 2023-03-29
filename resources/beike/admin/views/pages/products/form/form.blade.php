@@ -746,17 +746,6 @@
           });
         },
 
-        swapSourceVariantValue(e, variantIndex) {
-          // 将 sku.variants[variantIndex] == e.oldIndex 的 sku[0] 与 sku.variants[variantIndex] == e.newIndex 的 sku[1] 交换顺序
-          this.form.skus.forEach(function(sku) {
-            const oldIndex = sku.variants[variantIndex];
-            const newIndex = sku.variants[variantIndex] == e.oldIndex ? e.newIndex.toString() : e.oldIndex.toString()
-            sku.variants[variantIndex] = newIndex;
-          });
-
-          this.remakeSkus()
-        },
-
         closedialogVariablesFormDialog(form) {
           this.dialogVariables.show = false;
           this.dialogVariables.variantIndex = null;
@@ -767,9 +756,6 @@
 
         removeSourceVariantValue(variantIndex, variantValueIndex) {
           this.source.variables[variantIndex].values.splice(variantValueIndex, 1);
-          // this.form.variants = this.validSourceVariants;
-
-
         },
 
         modalVariantOpenButtonClicked(variantIndex, variantValueIndex) {
@@ -909,6 +895,20 @@
           }
 
           this.form.skus = skus;
+        },
+
+        // 规格值拖拽
+        swapSourceVariantValue(e, variantIndex) {
+          this.form.skus.forEach(function(sku) {
+            const oldIndex = sku.variants[variantIndex];
+            if (oldIndex == e.oldIndex) {
+              sku.variants[variantIndex] = e.newIndex.toString();
+            } else if (oldIndex == e.newIndex) {
+              sku.variants[variantIndex] = e.oldIndex.toString();
+            }
+          });
+
+          this.remakeSkus()
         },
       }
     });
