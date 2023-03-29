@@ -13,6 +13,7 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Shop\Services\CheckoutService;
 use Illuminate\Http\Request;
+use Beike\Repositories\OrderRepo;
 
 class CheckoutController extends Controller
 {
@@ -58,5 +59,16 @@ class CheckoutController extends Controller
         $data = (new CheckoutService)->confirm();
 
         return hook_filter('checkout.confirm.data', $data);
+    }
+
+    public function success()
+    {
+        $order_number = request('order_number');
+
+        $customer = current_customer();
+        $order    = OrderRepo::getOrderByNumber($order_number, $customer);
+        $data     = hook_filter('account.order.show.data', ['order' => $order, 'html_items' => []]);
+
+        return view('checkout/success', $data);
     }
 }

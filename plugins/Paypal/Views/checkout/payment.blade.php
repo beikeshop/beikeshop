@@ -61,7 +61,11 @@
                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 let captureStatus = orderData.status
                 if (captureStatus === 'COMPLETED') {
-                    window.location.href = "{{ shop_route('account.order.show', $order->number) }}"
+                    @if (current_customer())
+                        window.location.href = "{{ shop_route('account.order.show', $order->number) }}"
+                    @else
+                        location = "{{ shop_route('checkout.success', ['order_number' => $order->number]) }}"
+                    @endif
                 }
             });
         }

@@ -78,6 +78,7 @@ Route::prefix('/')
 
                 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
                 Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
+                Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
                 Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
                 Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('orders.success');
                 Route::get('orders/{number}/pay', [OrderController::class, 'pay'])->name('orders.pay');

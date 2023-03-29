@@ -29,6 +29,7 @@ return [
     'enter_city'               => '請填寫城市',
     'check_form'               => '請檢查表單是否填寫正確',
     'error_payment_address'    => '請選擇賬單地址',
+    'checkout_success_title'   => '訂單已付款成功！',
 
     'payment'                  => [
         'index'           => '請付款',
