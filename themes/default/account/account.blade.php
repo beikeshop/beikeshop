@@ -3,14 +3,11 @@
 @section('body-class', 'page-account')
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="account.index" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="account.index" />
-
     <div class="row">
-
       <x-shop-sidebar />
-
       <div class="col-12 col-md-9">
         @if (\Session::has('success'))
           <div class="alert alert-success">

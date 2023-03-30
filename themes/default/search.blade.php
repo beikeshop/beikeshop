@@ -2,10 +2,9 @@
 @section('body-class', 'page-categories')
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="products.search" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="products.search" />
-
     <div class="row">
       @if (count($items))
         @foreach ($items as $product)

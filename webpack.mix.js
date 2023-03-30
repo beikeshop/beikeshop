@@ -1,27 +1,15 @@
 const mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
- | file for the application as well as bundling up all the JS files.
- |
- */
-
-// mix.js('resources/js/app.js', 'public/build/js')
-//     .postCss('resources/css/app.css', 'public/build/css', [
-//         //
-//     ]);
-
-// mix.sass('resources/css/app.scss', 'public/build/css');
-// 后台
-
+// 后台 scss/js
 mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/beike/admin/css/bootstrap.css');
 mix.sass('resources/beike/admin/css/app.scss', 'public/build/beike/admin/css/app.css');
 mix.js('resources/beike/admin/js/app.js', 'public/build/beike/admin/js/app.js');
+
+// 安装引导
+mix.sass('beike/Installer/assets/scss/app.scss', 'public/install/css/app.css');
+
+// design
+mix.sass('resources/beike/admin/css/design/app.scss', 'public/build/beike/admin/css/design.css');
 
 // filemanager
 mix.sass('resources/beike/admin/css/filemanager/app.scss', 'public/build/beike/admin/css/filemanager.css');
@@ -31,34 +19,24 @@ mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/bu
 mix.sass('resources/beike/shop/default/css/app.scss', 'public/build/beike/shop/default/css/app.css');
 mix.js('resources/beike/shop/default/js/app.js', 'public/build/beike/shop/default/js/app.js');
 
-// 如果安装有某一个模板 ，需要修改其 scss/js ，那么你需要添加如下 fashion 模板的编译代码
-// mix.sass('resources/beike/shop/fashion/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/fashion/css/bootstrap.css');
-// mix.sass('resources/beike/shop/fashion/css/app.scss', 'public/build/beike/shop/fashion/css/app.css');
-// mix.js('resources/beike/shop/fashion/js/app.js', 'public/build/beike/shop/fashion/js/app.js');
+/* 如果安装有某一个模板 ，要修改其 scss/js ，那么需要开启下面代码，并替换 fashion 为模版 code
+mix.sass('resources/beike/shop/fashion/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/fashion/css/bootstrap.css');
+mix.sass('resources/beike/shop/fashion/css/app.scss', 'public/build/beike/shop/fashion/css/app.css');
+mix.js('resources/beike/shop/fashion/js/app.js', 'public/build/beike/shop/fashion/js/app.js');
+*/
 
-// 安装引导
-mix.sass('beike/Installer/assets/scss/app.scss', 'public/install/css/app.css');
+/* 如果开发新模版，编译需要开启下面代码, 将 themeFileName 的值修改为你的模版文件名
+const themeFileName =  'Fashion_2';
+const themeCode = themeCode.toLowerCase();
 
-
-// design
-mix.sass('resources/beike/admin/css/design/app.scss', 'public/build/beike/admin/css/design.css');
+// 拷贝模版 blade 文件 到 themes 目录下
+mix.copy(`plugins/${themeFileName}/Themes`, 'themes');
+// 编译模版 scss/js 到 public/build 下
+mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/bootstrap/bootstrap.scss`, `public/build/beike/shop/${themeCode}/css/bootstrap.css`);
+mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/app.scss`, `public/build/beike/shop/${themeCode}/css/app.css`);
+mix.js(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/js/app.js`, `public/build/beike/shop/${themeCode}/js/app.js`);
+*/
 
 if (mix.inProduction()) {
-    mix.version();
-}
-
-mix.browserSync({
-    proxy: 'laravel.test'
-});
-
-// 前端热更新
-if ( typeof process.env.MIX_PROXY != "undefined" || process.env.MIX_PROXY != '' ) {
-  mix.browserSync({
-    proxy: process.env.MIX_PROXY,   // apache或iis等代理地址
-    port: 1001,
-    notify: false,        // 刷新是否提示
-    watchTask: true,
-    open: false,
-    host: process.env.MIX_HOST,  // 本机ip, 这样其他设备才可实时看到更新
-  });
+  mix.version();
 }

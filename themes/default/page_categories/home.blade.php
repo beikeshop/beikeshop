@@ -2,8 +2,9 @@
 @section('body-class', 'page-categories-home')
 
 @section('content')
+  {{ $breadcrumb->render() }}
+
   <div class="container">
-    {{ $breadcrumb->render() }}
     <div class="row">
       <div class="col-lg-9 col-12">
         <div class="card mb-4 shadow-sm p-3 h-min-600">

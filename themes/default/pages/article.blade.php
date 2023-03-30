@@ -10,8 +10,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="page" :value="$page['id']" />
+
   <div class="container">
-    <x-shop-breadcrumb type="page" :value="$page['id']" />
     <div class="row">
       <div class="{{ $page->category ? "col-lg-9 col-12" : 'col-12' }}">
         <div class="card shadow-sm">

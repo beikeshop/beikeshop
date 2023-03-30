@@ -10,10 +10,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="checkout.index" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="checkout.index" />
-
     <div class="row mt-1 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 2])</div>
     </div>

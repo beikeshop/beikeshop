@@ -6,8 +6,9 @@
 @section('description', $category->description->meta_description ?: system_setting('base.meta_description'))
 
 @section('content')
+  <x-shop-breadcrumb type="page_category" :value="$category['id']" />
+
   <div class="container">
-    <x-shop-breadcrumb type="page_category" :value="$category['id']" />
     <div class="row">
       <div class="col-lg-9 col-12">
         <div class="card mb-4 shadow-sm">

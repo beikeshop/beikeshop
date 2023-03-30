@@ -10,10 +10,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="carts.index" />
+
   <div class="container" id="app-cart" v-cloak>
-
-    <x-shop-breadcrumb type="static" value="carts.index" />
-
     <div class="row mt-1 justify-content-center mb-2">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
     </div>

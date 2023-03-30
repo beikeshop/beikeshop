@@ -7,10 +7,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="rma" value="{{ $rma->id }}" />
+
   <div class="container" id="address-app">
-
-    <x-shop-breadcrumb type="rma" value="{{ $rma->id }}" />
-
     <div class="row">
       <x-shop-sidebar />
 

@@ -2,26 +2,13 @@
 
 @section('body-class', 'page-account-rmas')
 
-@push('header')
-  {{-- <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script> --}}
-@endpush
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="account.rma.index" />
+
   <div class="container" id="address-app">
-
-    <x-shop-breadcrumb type="static" value="account.rma.index" /> 
-
-    {{-- <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
-      </ol>
-    </nav> --}}
-
-
     <div class="row">
       <x-shop-sidebar/>
-
       <div class="col-12 col-md-9">
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
@@ -42,8 +29,6 @@
 
             <form action="{{ shop_route('account.rma.store') }}" method="POST">
               @csrf
-              {{-- {{ method_field('put') }} --}}
-
               @if (session('success'))
                 <x-shop-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
               @endif
