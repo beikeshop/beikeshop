@@ -29,6 +29,7 @@ class ProductService
             $data['brand_id']  = (int) $data['brand_id'];
             $data['variables'] = json_decode($data['variables']);
             $product->fill($data);
+            $product->updated_at = now();
             $product->save();
 
             if ($isUpdating) {

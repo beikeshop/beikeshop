@@ -21,6 +21,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $requestData    = $request->all();
+        if (!isset($requestData['sort'])) {
+            $requestData['sort'] = 'products.updated_at';
+        }
         $productList    = ProductRepo::list($requestData);
         $products       = ProductResource::collection($productList);
         $productsFormat =  $products->jsonSerialize();
