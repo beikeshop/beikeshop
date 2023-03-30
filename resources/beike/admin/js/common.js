@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-02-17 17:57:40
+ * @LastEditTime  2023-03-30 17:30:08
  */
 
 export default {
@@ -129,22 +129,29 @@ export default {
 
   // 设置vip更新提示
   vipUpdateTips() {
-    const data = JSON.parse(Cookies.get('beike_vip') || null);
+    let data = JSON.parse(Cookies.get('beike_vip') || null);
+    const isHome = document.body.classList.contains('admin-home');
 
-    if (data) {
+    if (!data || isHome) {
+      $http.get(`${config.api_url}/api/vip?domain=${config.app_url}`, null, {hload: true}).then((res) => {
+        setVipUi(res)
+        Cookies.set('beike_vip', res, { expires: 1 });
+      })
+    }
+
+    setVipUi(data)
+
+    function setVipUi(data) {
       if (data.vip) {
         $('.vip-serve').addClass('active');
 
         if (data.expiring) {
           $('.vip-serve .expired-text').show().find('span').text(data.expired_at);
         }
+      } else {
+        $('.vip-serve').removeClass('active');
+        $('.vip-serve .expired-text').hide();
       }
-    } else {
-      $http.get(`${config.api_url}/api/vip?domain=${config.app_url}`, null, {hload: true}).then((res) => {
-        Cookies.set('beike_vip', res, { expires: 1 });
-
-        bk.vipUpdateTips();
-      })
     }
   },
 }
