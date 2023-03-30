@@ -137,7 +137,7 @@
       let checkedAtValues = [];
       item.values.forEach((val) => val.selected ? checkedAtValues.push(val.id) : '')
       if (checkedAtValues.length) {
-        filterAtKey.push(`${item.id}:${checkedAtValues.join('/')}`)
+        filterAtKey.push(`${item.id}:${checkedAtValues.join(',')}`)
       }
     })
 

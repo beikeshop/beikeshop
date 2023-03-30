@@ -900,11 +900,15 @@
         // 规格值拖拽
         swapSourceVariantValue(e, variantIndex) {
           this.form.skus.forEach(function(sku) {
-            const oldIndex = sku.variants[variantIndex];
+            const oldIndex = parseInt(sku.variants[variantIndex]);
             if (oldIndex == e.oldIndex) {
               sku.variants[variantIndex] = e.newIndex.toString();
-            } else if (oldIndex == e.newIndex) {
-              sku.variants[variantIndex] = e.oldIndex.toString();
+            } else if (oldIndex > e.oldIndex && oldIndex <= e.newIndex) {
+              sku.variants[variantIndex] = (oldIndex - 1).toString();
+            } else if (oldIndex < e.oldIndex && oldIndex >= e.newIndex) {
+              sku.variants[variantIndex] = (oldIndex + 1).toString();
+            } else {
+              sku.variants[variantIndex] = oldIndex.toString();
             }
           });
 
