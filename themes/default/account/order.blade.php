@@ -3,15 +3,14 @@
 @section('body-class', 'page-account-order-list')
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="account.order.index" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="account.order.index" />
-
     <div class="row">
       <x-shop-sidebar />
 
       <div class="col-12 col-md-9">
-        <div class="card mb-4 account-card order-wrap">
+        <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account.order.index') }}</h5>
           </div>

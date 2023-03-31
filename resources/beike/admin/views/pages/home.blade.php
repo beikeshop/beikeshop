@@ -2,6 +2,8 @@
 
 @section('title', __('admin/common.admin_panel'))
 
+@section('body-class', 'admin-home')
+
 @push('header')
   <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
 @endpush

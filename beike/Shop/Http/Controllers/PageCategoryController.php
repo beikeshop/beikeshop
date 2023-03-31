@@ -43,7 +43,7 @@ class PageCategoryController extends Controller
             'category'               => new PageCategoryDetail($pageCategory),
             'active_page_categories' => PageCategoryRepo::getActiveList(),
             'breadcrumb'             => $breadCrumb,
-            'category_pages'         => $pageCategory->pages()->paginate(perPage()),
+            'category_pages'         => $pageCategory->pages()->paginate(12),
         ];
 
         return view('page_categories/show', $data);

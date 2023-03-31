@@ -199,17 +199,16 @@ class OrderRepo
 
             $shippingAddress = Address::query()->findOrFail($shippingAddressId);
             $paymentAddress  = Address::query()->findOrFail($paymentAddressId);
-
-            $shippingAddress->country    = $shippingAddress->country->name ?? '';
-            $shippingAddress->country_id = $shippingAddress->country->id   ?? 0;
-            $paymentAddress->country     = $paymentAddress->country->name  ?? '';
-            $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
-            $email                       = $customer->email;
+            $email = $customer->email;
         } else {
             $shippingAddress = new Address($current['guest_shipping_address'] ?? []);
             $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
             $email           = $current['guest_shipping_address']['email'];
         }
+        $shippingAddress->country    = $shippingAddress->country->name ?? '';
+        $shippingAddress->country_id = $shippingAddress->country->id   ?? 0;
+        $paymentAddress->country     = $paymentAddress->country->name  ?? '';
+        $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $paymentMethodCode  = $current['payment_method_code']  ?? '';

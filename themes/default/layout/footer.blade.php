@@ -90,7 +90,7 @@
           </div>
         </div>
         @if (isset($footer_content['bottom']['image']) && $footer_content['bottom']['image'])
-          <div class="col-auto right-img">
+          <div class="col-auto right-img py-2">
             <img src="{{ image_origin($footer_content['bottom']['image']) }}" class="img-fluid">
           </div>
         @endif

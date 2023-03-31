@@ -8,10 +8,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="account.edit.index" />
+
   <div class="container" id="address-app">
-
-    <x-shop-breadcrumb type="static" value="account.edit.index" />
-
     <div class="row">
       <x-shop-sidebar />
 

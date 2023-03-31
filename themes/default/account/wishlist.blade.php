@@ -3,9 +3,9 @@
 @section('body-class', 'page-account-wishlist')
 
 @section('content')
-  <div class="container">
-    <x-shop-breadcrumb type="static" value="account.wishlist.index" />
+  <x-shop-breadcrumb type="static" value="account.wishlist.index" />
 
+  <div class="container">
     <div class="row">
       <x-shop-sidebar />
 

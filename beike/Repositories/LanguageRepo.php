@@ -98,6 +98,6 @@ class LanguageRepo
      */
     public static function enabled()
     {
-        return Language::query()->where('status', true)->get();
+        return Language::query()->where('status', true)->orderBy('sort_order', 'asc')->get();
     }
 }

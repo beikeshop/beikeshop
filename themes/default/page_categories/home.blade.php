@@ -1,9 +1,14 @@
 @extends('layout.master')
 @section('body-class', 'page-categories-home')
 
+@push('header')
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
+@endpush
+
 @section('content')
+  {{ $breadcrumb->render() }}
+
   <div class="container">
-    {{ $breadcrumb->render() }}
     <div class="row">
       <div class="col-lg-9 col-12">
         <div class="card mb-4 shadow-sm p-3 h-min-600">
@@ -28,7 +33,7 @@
 
       @if ($active_page_categories)
         <div class="col-lg-3 col-12">
-          <div class="card mb-3 shadow-sm">
+          <div class="card mb-3 shadow-sm h-min-300 x-fixed-top">
             <div class="card-header d-flex justify-content-between align-items-center">
               <h5 class="card-title">{{ __('product.category') }}</h5>
             </div>

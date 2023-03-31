@@ -3,10 +3,9 @@
 @section('body-class', 'page-account-rmas')
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="account.rma.index" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="static" value="account.rma.index" />
-
     <div class="row">
       <x-shop-sidebar />
       <div class="col-12 col-md-9">

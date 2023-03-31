@@ -9,10 +9,9 @@
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="category" :value="$category" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="category" :value="$category" />
-
     <div class="row">
       <div class="col-12 col-lg-3 pe-lg-4 left-column d-none d-lg-block">
         <div class="x-fixed-top">@include('shared.filter_sidebar_block')</div>
@@ -137,7 +136,7 @@
       let checkedAtValues = [];
       item.values.forEach((val) => val.selected ? checkedAtValues.push(val.id) : '')
       if (checkedAtValues.length) {
-        filterAtKey.push(`${item.id}:${checkedAtValues.join('/')}`)
+        filterAtKey.push(`${item.id}:${checkedAtValues.join(',')}`)
       }
     })
 

@@ -5,20 +5,22 @@
 @section('keywords', $category->description->meta_keywords ?: system_setting('base.meta_keyword'))
 @section('description', $category->description->meta_description ?: system_setting('base.meta_description'))
 
+@push('header')
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
+@endpush
+
 @section('content')
+  <x-shop-breadcrumb type="page_category" :value="$category['id']" />
+
   <div class="container">
-    <x-shop-breadcrumb type="page_category" :value="$category['id']" />
     <div class="row">
       <div class="col-lg-9 col-12">
-        <div class="card mb-4 shadow-sm">
+        <div class="card mb-4 shadow-sm h-min-600">
           <div class="card-body">
-            <h3>{{ $category->description->title }}</h3>
-            <div>{{ $category->description->summary }}</div>
-          </div>
-        </div>
-
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body">
+            <div class="mb-4">
+              <h3>{{ $category->description->title }}</h3>
+              <div>{{ $category->description->summary }}</div>
+            </div>
             @if ($category_pages->count() > 0)
               @foreach ($category_pages as $page)
                 <div>
@@ -48,7 +50,7 @@
 
       @if ($active_page_categories)
         <div class="col-lg-3 col-12">
-          <div class="card mb-3 shadow-sm">
+          <div class="card mb-3 shadow-sm h-min-300 x-fixed-top">
             <div class="card-header d-flex justify-content-between align-items-center">
               <h5 class="card-title">{{ __('product.category') }}</h5>
             </div>

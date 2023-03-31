@@ -12,6 +12,13 @@ body.page-marketing {
   .marketing-item {
     box-shadow: none;
     border: 1px solid #eee;
+    transition: .3s ease-in-out;
+
+    &:hover {
+      // border-color: $primary;
+      margin-top: -5px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
 
     .plugin-img {
       margin: -1rem -1rem 0 -1rem;

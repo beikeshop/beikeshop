@@ -29,6 +29,7 @@ return [
     'enter_city'               => 'Please fill in the city    ',
     'check_form'               => 'Please check that the form is filled out correctly',
     'error_payment_address'    => 'Please select a billing address',
+    'checkout_success_title'    => 'Thank you for your order!',
 
     'payment'                  => [
         'index'           => 'Please Pay',

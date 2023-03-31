@@ -3,10 +3,9 @@
 @section('body-class', 'page-account-order-info')
 
 @section('content')
+  <x-shop-breadcrumb type="order" value="{{ $order->number }}" />
+
   <div class="container">
-
-    <x-shop-breadcrumb type="order" value="{{ $order->number }}" />
-
     <div class="row">
       <x-shop-sidebar />
 

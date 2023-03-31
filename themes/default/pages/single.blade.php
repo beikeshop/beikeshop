@@ -5,8 +5,9 @@
 @section('description', $page['meta_description'])
 
 @section('content')
+  <x-shop-breadcrumb type="page" :value="$page['id']" />
+
   <div class="container">
-    <x-shop-breadcrumb type="page" :value="$page['id']" />
     <div class="card">
       <div class="card-body">
         {!! $page_format['content'] !!}

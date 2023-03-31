@@ -10,10 +10,9 @@
 
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="forgotten.index" />
+
   <div class="container" id="page-forgotten" v-cloak>
-
-    <x-shop-breadcrumb type="static" value="forgotten.index" />
-
     <div class="row my-5 justify-content-md-center">
       <div class="col-lg-5 col-xxl-4">
         <div class="card">

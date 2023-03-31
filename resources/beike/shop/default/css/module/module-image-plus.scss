@@ -14,21 +14,6 @@
     padding-left: 0;
   }
 
-  a {
-    overflow: hidden;
-    display: block;
-
-    img {
-      transition: .3s ease-in-out;
-    }
-
-    &:hover {
-      img {
-        transform: rotate(6deg) scale(1.3);
-      }
-    }
-  }
-
   .module-image-plus-top {
     display: flex;
 
@@ -46,5 +31,22 @@
   .container-fluid {
     padding-right: 0;
     padding-left: 0;
+  }
+}
+
+.banner-magnify-hover {
+  .image-wrap {
+    overflow: hidden;
+    display: block;
+
+    img {
+      transition: .3s ease-in-out;
+    }
+
+    &:hover {
+      img {
+        transform: rotate(6deg) scale(1.3);
+      }
+    }
   }
 }

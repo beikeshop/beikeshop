@@ -6,12 +6,14 @@
 
 @push('header')
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
 @endpush
 
 @section('content')
+  <x-shop-breadcrumb type="page" :value="$page['id']" />
+
   <div class="container">
-    <x-shop-breadcrumb type="page" :value="$page['id']" />
     <div class="row">
       <div class="{{ $page->category ? "col-lg-9 col-12" : 'col-12' }}">
         <div class="card shadow-sm">
@@ -52,7 +54,7 @@
 
       @if ($page->category)
         <div class="col-lg-3 col-12">
-          <div class="card mb-3 shadow-sm">
+          <div class="card mb-3 shadow-sm h-min-300 x-fixed-top">
             <div class="card-header d-flex justify-content-between align-items-center">
               <h5 class="card-title">{{ __('product.category') }}</h5>
             </div>
@@ -80,10 +82,12 @@
       breakpoints:{
         320: {
           slidesPerView: 2,
+          slidesPerGroup: 2,
           spaceBetween: 10,
         },
         768: {
           slidesPerView: 4,
+          slidesPerGroup: 4,
           spaceBetween: 30,
         },
       },
