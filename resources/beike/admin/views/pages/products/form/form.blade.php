@@ -56,6 +56,7 @@
             <x-admin-form-input-locale
               :width="600" name="descriptions.*.name" title="{{ __('common.name') }}"
               :value="$descriptions" :required="true" />
+            @hook('admin.product.name.after')
             <x-admin::form.row title="{{ __('common.image') }}">
               <draggable
                 element="div"
@@ -309,6 +310,7 @@
                     </textarea>
                   </div>
                 @endforeach
+                @hook('admin.product.content.after')
               </div>
             </x-admin::form.row>
           </div>

@@ -82,7 +82,7 @@
               @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
             <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length"
               @click="selectAll()" icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
-            @hook('admin.file_manager.content.head.btns.after')
+             @hook('admin.file_manager.content.head.btns.after')
           </div>
           <div class="right">
             <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
