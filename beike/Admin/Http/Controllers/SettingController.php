@@ -34,10 +34,15 @@ class SettingController extends Controller
             ['value' => 'shipping', 'label' => trans('admin/setting.shipping_address')],
             ['value' => 'payment', 'label' => trans('admin/setting.payment_address')],
         ];
+        $multi_filter = system_setting('base.multi_filter');
+        if ($attributeIds = $multi_filter['attribute'] ?? []) {
+            $multi_filter['attribute'] = AttributeRepo::getByIds($attributeIds);
+        }
 
         $data = [
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
+            'multi_filter'   => $multi_filter,
             'tax_address'     => $tax_address,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,

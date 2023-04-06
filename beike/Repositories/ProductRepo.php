@@ -206,6 +206,11 @@ class ProductRepo
             ->whereNotNull('pa.attribute_id')
             ->distinct()
             ->reorder('pa.attribute_id');
+
+        if ($attributesIds = system_setting('base.multi_filter', [])['attribute'] ?? []) {
+            $builder->whereIn('pa.attribute_id', $attributesIds);
+        }
+
         $productAttributes = $builder->get()->toArray();
 
         $attributeMap      = array_column(Attribute::query()->with('description')->orderBy('sort_order')->get()->toArray(), null, 'id');
