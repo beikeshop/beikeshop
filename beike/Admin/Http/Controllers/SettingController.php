@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerGroupDetail;
+use Beike\Admin\Repositories\AttributeRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\CustomerGroupRepo;

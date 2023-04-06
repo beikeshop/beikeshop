@@ -347,6 +347,10 @@
           })
         },
 
+        attributesRemoveProduct(index) {
+          this.multi_filter.filters.attribute.splice(index, 1);
+        },
+
         handleSelect(item, key) {
           if (key == 'product_attributes') {
             if (!this.multi_filter.filters.attribute.find(v => v.id * 1 == item.id * 1)) {
