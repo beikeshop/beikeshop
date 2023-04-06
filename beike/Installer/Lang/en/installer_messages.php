@@ -32,6 +32,9 @@ return [
         'copyright_list_1' => '1. The copyright of this system belongs to Chengdu GuangDa Network Technology Co., Ltd.',
         'copyright_list_2' => '2. Any individual or organization can not be allowed to sell or lease this system and its derivatives without our explicit written authorization.',
         'copyright_list_3' => '3. Please keep the copyright information, and please contact us if you wanna remove it.',
+        'copyright_text'   => 'Thank you for choosing to use BeikeShop to build your website. We hereby remind that this software is only for use by legitimate e-commerce site operators. BeikeShop has nothing to do with any consequences of using this software for illegal activities.
+        Please abide by the relevant laws and regulations of the country and region where you are using this software. All legal responsibilities caused by illegal acts will be borne by the user, and BeikeShop will not assume any responsibility!
+        Hereby declare.',
     ],
 
     /*

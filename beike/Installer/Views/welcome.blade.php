@@ -51,6 +51,7 @@
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_1') }}</p>
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_2') }}</p>
           <p>{{ trans('installer::installer_messages.welcome.copyright_list_3') }}</p>
+          <p>{{ trans('installer::installer_messages.welcome.copyright_text') }}</p>
           <p>
             Open Software License ("OSL") v 3.0
 
