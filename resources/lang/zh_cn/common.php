@@ -77,6 +77,7 @@ return [
     'text_to'              => '到',
     'batch_setting'        => '批量设置',
     'show_all'             => '查看所有',
+    'no_repeat'            => '请勿重复添加',
 
     'id'                   => 'ID',
     'created_at'           => '创建时间',

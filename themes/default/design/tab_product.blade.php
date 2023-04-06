@@ -1,7 +1,7 @@
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @include('design._partial._module_tool')
 
-  <div class="module-info module-tab-product">
+  <div class="module-info module-tab-product mb-lg-5">
     <div class="module-title">{{ $content['title'] }}</div>
     <div class="container">
       @if ($content['tabs'])

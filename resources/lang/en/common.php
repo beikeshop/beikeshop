@@ -78,6 +78,7 @@ return [
     'text_to'              => 'To',
     'batch_setting'        => 'Batch setting',
     'show_all'             => 'View all',
+    'no_repeat'            => 'Do not add repeatedly',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

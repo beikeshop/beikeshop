@@ -162,7 +162,7 @@
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">
       <input type="text" class="form-control input-group-lg border-0 fs-4" focus
-        placeholder="{{ __('common.input') }}" aria-label="Type your search here" aria-describedby="button-addon2">
+        placeholder="{{ __('common.input') }}" value="{{ request('keyword') }}" aria-label="Type your search here" aria-describedby="button-addon2">
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
   </div>
