@@ -17,6 +17,9 @@ class PermissionsController extends Controller
      */
     public function __construct(PermissionsChecker $checker)
     {
+        if (installed()) {
+            exit('Already installed');
+        }
         $this->permissions = $checker;
     }
 

@@ -17,6 +17,9 @@ class RequirementsController extends Controller
      */
     public function __construct(RequirementsChecker $checker)
     {
+        if (installed()) {
+            exit('Already installed');
+        }
         $this->requirements = $checker;
     }
 

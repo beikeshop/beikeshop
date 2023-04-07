@@ -34,6 +34,7 @@ return [
             'PDO',
             'Tokenizer',
             'XML',
+            'ZIP',
         ],
         'apache' => [
             'mod_rewrite',
