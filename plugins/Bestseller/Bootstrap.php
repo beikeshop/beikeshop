@@ -29,7 +29,7 @@ class Bootstrap
         /**
          * Get module content for home page and preview.
          */
-        add_hook_filter('admin.service.design.module.content', function ($data) {
+        add_hook_filter('service.design.module.content', function ($data) {
             $module = $data['module_code'] ?? '';
 
             if ($module == 'bestseller') {
