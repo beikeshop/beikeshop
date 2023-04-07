@@ -11,12 +11,8 @@
 
 namespace App\Http\Middleware;
 
-use Beike\Repositories\FooterRepo;
-use Beike\Repositories\LanguageRepo;
-use Beike\Repositories\MenuRepo;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class CheckInstalled
 {
@@ -28,5 +24,4 @@ class CheckInstalled
 
         return $next($request);
     }
-
 }
