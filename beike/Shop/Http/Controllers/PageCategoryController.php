@@ -41,7 +41,7 @@ class PageCategoryController extends Controller
 
         $data = [
             'category'               => new PageCategoryDetail($pageCategory),
-            'active_page_categories' => PageCategoryRepo::getActiveList(),
+            'active_page_categories' => PageCategoryRepo::getActiveList(['limit' => 5]),
             'breadcrumb'             => $breadCrumb,
             'category_pages'         => $pageCategory->pages()->paginate(12),
         ];

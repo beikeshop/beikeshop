@@ -31,12 +31,16 @@ class PageCategoryRepo
 
     /**
      * @param array $filters
-     * @return LengthAwarePaginator
+     * @return mixed
      */
-    public static function getActiveList(array $filters = []): LengthAwarePaginator
+    public static function getActiveList(array $filters = []): mixed
     {
         $filters['is_active'] = 1;
+        $limit                = (int) ($filters['limit'] ?? 0);
         $builder              = self::getBuilder($filters);
+        if ($limit > 0) {
+            return $builder->limit($limit)->get();
+        }
 
         return $builder->paginate(perPage());
     }
