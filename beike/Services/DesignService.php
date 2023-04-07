@@ -64,7 +64,7 @@ class DesignService
             return self::handleRichText($content);
         }
 
-        return hook_filter('admin.service.design.module.content', $content);
+        return hook_filter('service.design.module.content', $content);
     }
 
     /**
