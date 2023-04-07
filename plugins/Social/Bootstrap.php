@@ -24,7 +24,7 @@ class Bootstrap
             }
 
             return $output;
-        },1);
+        }, 1);
     }
 
     /**

@@ -199,7 +199,7 @@ class ProductRepo
 
     public static function getFilterAttribute($data): array
     {
-        $builder = self::getBuilder(array_diff_key($data, ['attr'=>'', 'price'=>'']))
+        $builder = self::getBuilder(array_diff_key($data, ['attr' => '', 'price' => '']))
             ->select(['pa.attribute_id', 'pa.attribute_value_id'])
             ->with(['attributes.attribute.description', 'attributes.attribute_value.description'])
             ->leftJoin('product_attributes as pa', 'pa.product_id', 'products.id')

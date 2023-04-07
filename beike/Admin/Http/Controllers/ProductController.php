@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $requestData    = $request->all();
-        if (!isset($requestData['sort'])) {
+        if (! isset($requestData['sort'])) {
             $requestData['sort'] = 'products.updated_at';
         }
         $productList    = ProductRepo::list($requestData);
@@ -149,15 +149,15 @@ class ProductController extends Controller
         array_unshift($taxClasses, ['title' => trans('admin/builder.text_no'), 'id' => 0]);
 
         $data = [
-            'product'            => $product,
-            'descriptions'       => $descriptions ?? [],
-            'category_ids'       => $categoryIds  ?? [],
-            'product_attributes' => ProductAttributeResource::collection($product->attributes),
-            'relations'          => ProductResource::collection($product->relations)->resource,
-            'languages'          => LanguageRepo::all(),
-            'tax_classes'        => $taxClasses,
+            'product'               => $product,
+            'descriptions'          => $descriptions ?? [],
+            'category_ids'          => $categoryIds  ?? [],
+            'product_attributes'    => ProductAttributeResource::collection($product->attributes),
+            'relations'             => ProductResource::collection($product->relations)->resource,
+            'languages'             => LanguageRepo::all(),
+            'tax_classes'           => $taxClasses,
             'weight_classes'        => Weight::getWeightUnits(),
-            'source'             => [
+            'source'                => [
                 'categories' => CategoryRepo::flatten(locale()),
             ],
             '_redirect'          => $this->getRedirect(),

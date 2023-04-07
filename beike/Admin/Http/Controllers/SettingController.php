@@ -42,7 +42,7 @@ class SettingController extends Controller
         $data = [
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
-            'multi_filter'   => $multiFilter,
+            'multi_filter'    => $multiFilter,
             'tax_address'     => $taxAddress,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,

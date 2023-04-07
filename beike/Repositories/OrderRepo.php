@@ -199,7 +199,7 @@ class OrderRepo
 
             $shippingAddress = Address::query()->findOrFail($shippingAddressId);
             $paymentAddress  = Address::query()->findOrFail($paymentAddressId);
-            $email = $customer->email;
+            $email           = $customer->email;
         } else {
             $shippingAddress = new Address($current['guest_shipping_address'] ?? []);
             $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
