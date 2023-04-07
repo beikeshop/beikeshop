@@ -69,4 +69,7 @@ return [
     'head_code'              => '插入代码',
     'head_code_info'         => '会将输入框中的代码插入到前端页面 head 中，可用于统计代码或者添加特殊插件等',
     'rate_api_key'           => '汇率 API KEY',
+    'multi_filter'           => '高级筛选',
+    'please_select'          => '请添加',
+    'multi_filter_helper'    => '请选择需要在筛选模块显示的属性',
 ];

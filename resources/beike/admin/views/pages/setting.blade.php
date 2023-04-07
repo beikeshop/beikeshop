@@ -113,6 +113,42 @@
 
           </div>
 
+          <div class="tab-pane fade" id="tab-attribute">
+            <x-admin::form.row title="__('admin/setting.multi_filter')">
+              <div class="module-edit-group wp-600">
+                <div class="autocomplete-group-wrapper">
+                  <el-autocomplete
+                    class="inline-input"
+                    v-model="attributes.keyword"
+                    value-key="name"
+                    size="small"
+                    :fetch-suggestions="(keyword, cb) => {attributesQuerySearch(keyword, cb, 'products')}"
+                    placeholder="{{ __('admin/builder.modules_keywords_search') }}"
+                    @select="(e) => {handleSelect(e, 'product_attributes')}"
+                  ></el-autocomplete>
+
+                  <div class="item-group-wrapper" v-loading="attributes.loading">
+                    <template v-if="attributes.multi_filter.attribute.length">
+                      <div v-for="(item, index) in attributes.multi_filter.attribute" :key="index" class="item">
+                        <div>
+                          <i class="el-icon-s-unfold"></i>
+                          <span>@{{ item.name }}</span>
+                        </div>
+                        <i class="el-icon-delete right" @click="attributesRemoveProduct(index)"></i>
+                        <input type="text" :name="'multi_filter[attribute]['+ index +']'" v-model="item.id" class="form-control d-none">
+                      </div>
+                    </template>
+                    <template v-else>
+                      {{ __('admin/setting.please_select') }}
+                      <input type="text" name="multi_filter" value="" class="form-control d-none">
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <div class="help-text font-size-12 lh-base">{{ __('admin/builder.multi_filter_helper') }}</div>
+            </x-admin::form.row>
+          </div>
+
           <div class="tab-pane fade" id="tab-express-company">
             @hook('admin.setting.express.before')
             <x-admin::form.row title="{{ __('order.express_company') }}">

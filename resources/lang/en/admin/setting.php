@@ -71,4 +71,7 @@ return [
     'head_code'              => 'Insert code',
     'head_code_info'         => 'The code in the input box will be inserted into the head of the front-end page, which can be used to count the code or add special plug-ins, etc',
     'rate_api_key'           => 'Exchange rate API KEY',
+    'multi_filter'           => 'Multi Filter',
+    'please_select'          => 'Please select',
+    'multi_filter_helper'    => 'Please select the attributes to be displayed in the Multi Filter module.',
 ];

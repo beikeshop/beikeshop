@@ -27,6 +27,7 @@ class ProductService
             DB::beginTransaction();
 
             $data['brand_id']  = (int) $data['brand_id'];
+            $data['weight']  = (float) $data['weight'];
             $data['variables'] = json_decode($data['variables']);
             $product->fill($data);
             $product->updated_at = now();
