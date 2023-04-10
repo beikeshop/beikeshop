@@ -18,10 +18,8 @@ class AdminUserToken extends Model
 {
     protected $fillable = ['admin_user_id', 'token'];
 
-
     public function adminUser(): BelongsTo
     {
         return $this->belongsTo(AdminUser::class);
     }
-
 }

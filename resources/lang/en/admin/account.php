@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token'             => 'Create Token',
+    'create_token'              => 'Create Token',
     'password_text'             => 'If the password is left blank, it will not be modified',
 ];

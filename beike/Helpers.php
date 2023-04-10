@@ -209,7 +209,12 @@ function equal_route($routeName): bool
  */
 function current_user(): ?AdminUser
 {
-    return auth()->guard(AdminUser::AUTH_GUARD)->user();
+    $user = auth()->guard(AdminUser::AUTH_GUARD)->user();
+    if (empty($user)) {
+        $user = registry('admin_user');
+    }
+
+    return $user;
 }
 
 /**
@@ -717,4 +722,24 @@ function is_secure(): bool
 function perPage(): int
 {
     return (int) system_setting('base.product_per_page', 20);
+}
+
+/**
+ * @param $key
+ * @param $value
+ * @param bool $force
+ */
+function register($key, $value, bool $force = false)
+{
+    \Beike\Libraries\Registry::set($key, $value, $force);
+}
+
+/**
+ * @param $key
+ * @param null $default
+ * @return mixed
+ */
+function registry($key, $default = null): mixed
+{
+    return \Beike\Libraries\Registry::get($key, $default);
 }

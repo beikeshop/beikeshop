@@ -53,6 +53,7 @@ class AdminServiceProvider extends ServiceProvider
 
         load_settings();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
+        $this->registerGuard();
 
         $adminName = admin_name();
         if (! Str::startsWith($uri, "/{$adminName}")) {
@@ -68,8 +69,6 @@ class AdminServiceProvider extends ServiceProvider
         });
 
         $this->loadAdminViewComponents();
-
-        $this->registerGuard();
 
         Config::set('filesystems.disks.catalog', [
             'driver' => 'local',

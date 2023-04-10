@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token'             => '生成 Token',
+    'create_token'              => '生成 Token',
     'password_text'             => '密码留空则不修改',
 ];

@@ -16,37 +16,58 @@ use Beike\Models\AdminUserToken;
 
 class AdminUserTokenRepo
 {
+    /**
+     * @param $adminUser
+     * @return mixed
+     */
     public static function getTokenByAdminUser($adminUser)
     {
         $adminUserId = self::getAdminUserId($adminUser);
         if (empty($adminUserId)) {
             return null;
         }
+
         return AdminUserToken::query()->where('admin_user_id', $adminUserId)->get();
     }
 
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public static function getAdminUserTokenByToken($token)
+    {
+        return AdminUserToken::query()->where('token', $token)->first();
+    }
 
+    /**
+     * @param $adminUser
+     * @param $tokens
+     * @return void
+     */
     public static function updateTokensByUser($adminUser, $tokens)
     {
         $adminUserId = self::getAdminUserId($adminUser);
         if (empty($adminUserId)) {
-            return null;
+            return;
         }
 
         AdminUserToken::query()->where('admin_user_id', $adminUserId)->delete();
         if (empty($tokens)) {
-            return null;
+            return;
         }
 
         foreach ($tokens as $token) {
             AdminUserToken::query()->create([
                 'admin_user_id' => $adminUserId,
-                'token' => $token
+                'token'         => $token,
             ]);
         }
     }
 
-
+    /**
+     * @param $adminUser
+     * @return int|mixed
+     */
     private static function getAdminUserId($adminUser)
     {
         $adminUserId = 0;
@@ -55,6 +76,7 @@ class AdminUserTokenRepo
         } elseif (is_int($adminUser)) {
             $adminUserId = $adminUser;
         }
+
         return $adminUserId;
     }
 }

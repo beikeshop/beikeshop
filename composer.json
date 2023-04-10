@@ -7,8 +7,8 @@
     "require": {
         "php": "^8.0.2",
         "ext-curl": "*",
-        "ext-iconv": "*",
         "ext-fileinfo": "*",
+        "ext-iconv": "*",
         "ext-json": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
@@ -26,6 +26,7 @@
         "srmklive/paypal": "^3.0",
         "stripe/stripe-php": "^8.8",
         "tormjens/eventy": "^0.8.0",
+        "tymon/jwt-auth": "^2.0",
         "ultrono/laravel-sitemap": "^9.1",
         "unisharp/doc-us": "^1.3",
         "zanysoft/laravel-zip": "^2.0"
