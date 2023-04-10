@@ -21,6 +21,7 @@ abstract class DuskTestCase extends BaseTestCase
     {
         if (! static::runningInSail()) {
             static::startChromeDriver();
+//            static::startFirefoxDriver();
         }
     }
 

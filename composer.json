@@ -33,6 +33,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
+        "codeception/codeception": "^5.0",
         "fakerphp/faker": "^1.9.1",
         "laravel-lang/attributes": "^1.0",
         "laravel-lang/lang": "^10.9",
