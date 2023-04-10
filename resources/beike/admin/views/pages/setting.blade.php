@@ -27,6 +27,9 @@
             <a class="nav-link" data-bs-toggle="tab" href="#tab-express-company">{{ __('order.express_company') }}</a>
           </li>
           <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-multi-filter">{{ __('admin/setting.multi_filter') }}</a>
+          </li>
+          <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-mail">{{ __('admin/setting.mail_settings') }}</a>
           </li>
           @hook('admin.setting.nav.after')
@@ -110,16 +113,15 @@
             </x-admin-form-image>
 
             @hook('admin.setting.image.after')
-
           </div>
 
-          <div class="tab-pane fade" id="tab-attribute">
-            <x-admin::form.row title="__('admin/setting.multi_filter')">
+          <div class="tab-pane fade" id="tab-multi-filter">
+            <x-admin::form.row :title="__('admin/setting.filter_attribute')">
               <div class="module-edit-group wp-600">
                 <div class="autocomplete-group-wrapper">
                   <el-autocomplete
                     class="inline-input"
-                    v-model="attributes.keyword"
+                    v-model="multi_filter.keyword"
                     value-key="name"
                     size="small"
                     :fetch-suggestions="(keyword, cb) => {attributesQuerySearch(keyword, cb, 'products')}"
@@ -127,9 +129,9 @@
                     @select="(e) => {handleSelect(e, 'product_attributes')}"
                   ></el-autocomplete>
 
-                  <div class="item-group-wrapper" v-loading="attributes.loading">
-                    <template v-if="attributes.multi_filter.attribute.length">
-                      <div v-for="(item, index) in attributes.multi_filter.attribute" :key="index" class="item">
+                  <div class="item-group-wrapper" v-loading="multi_filter.loading">
+                    <template v-if="multi_filter.filters.attribute.length">
+                      <div v-for="(item, index) in multi_filter.filters.attribute" :key="index" class="item">
                         <div>
                           <i class="el-icon-s-unfold"></i>
                           <span>@{{ item.name }}</span>
@@ -143,9 +145,9 @@
                       <input type="text" name="multi_filter" value="" class="form-control d-none">
                     </template>
                   </div>
+                  <div class="help-text font-size-12 lh-base">{{ __('admin/setting.multi_filter_helper') }}</div>
                 </div>
               </div>
-              <div class="help-text font-size-12 lh-base">{{ __('admin/builder.multi_filter_helper') }}</div>
             </x-admin::form.row>
           </div>
 
@@ -299,6 +301,12 @@
     new Vue({
       el: '#app',
       data: {
+        multi_filter: {
+          keyword: '',
+          filters: @json($multi_filter ?? null),
+          loading: null,
+        },
+
         mail_engine: @json(old('mail_engine', system_setting('base.mail_engine', ''))),
         express_company: @json(old('express_company', system_setting('base.express_company', []))),
 
@@ -312,6 +320,16 @@
           ]
         },
       },
+      created() {
+        const multi_filter = @json($multi_filter ?? null);
+        if (multi_filter) {
+          this.multi_filter.filters = multi_filter;
+        } else {
+          this.multi_filter.filters = {
+            attribute: [],
+          }
+        }
+      },
       methods: {
         addCompany() {
           if (typeof this.express_company == 'string') {
@@ -319,7 +337,29 @@
           }
 
           this.express_company.push({name: '', code: ''})
-        }
+        },
+
+        attributesQuerySearch(keyword, cb, url) {
+          $http.get('attributes/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+            cb(res.data);
+          })
+        },
+
+        attributesRemoveProduct(index) {
+          this.multi_filter.filters.attribute.splice(index, 1);
+        },
+
+        handleSelect(item, key) {
+          if (key == 'product_attributes') {
+            if (!this.multi_filter.filters.attribute.find(v => v.id * 1 == item.id * 1)) {
+              this.multi_filter.filters.attribute.push(item);
+            } else {
+              layer.msg('{{ __('common.no_repeat') }}', () => {})
+            }
+
+            this.multi_filter.keyword = ""
+          }
+        },
       }
     });
 

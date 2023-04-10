@@ -53,7 +53,7 @@
 
       <div class="marketing-wrap" v-if="plugins.data.length">
         <div class="row">
-          <div class="col-xxl-2 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
+          <div class="col-xxl-20 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
                 <div class="plugin-img mb-3"><a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
@@ -146,12 +146,12 @@
             filter.page = this.page;
           }
 
-          for (key in this.filter) {
+          Object.keys(this.filter).forEach(key => {
             const value = this.filter[key];
             if (value !== '' && value !== null) {
               filter[key] = value;
             }
-          }
+          })
 
           const query = Object.keys(filter).map(key => key + '=' + filter[key]).join('&');
 

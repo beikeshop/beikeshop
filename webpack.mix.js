@@ -27,7 +27,7 @@ mix.js('resources/beike/shop/fashion/js/app.js', 'public/build/beike/shop/fashio
 
 /* 如果开发新模版，编译需要开启下面代码, 将 themeFileName 的值修改为你的模版文件名
 const themeFileName =  'Fashion2';
-const themeCode = themeCode.toLowerCase();
+const themeCode = themeFileName.toLowerCase();
 
 // 拷贝模版 blade 文件 到 themes 目录下
 mix.copy(`plugins/${themeFileName}/Themes`, 'themes');

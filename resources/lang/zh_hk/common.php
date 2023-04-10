@@ -84,6 +84,7 @@ return [
     'sort_order'           => '排序',
     'error_page'           => '您訪問的數據不存在或已被刪除~',
     'error_page_btn'       => '返回上一頁',
+    'no_repeat'            => '請勿重新添加',
 
     'order'                => [
         'unpaid'    => '待支付',
