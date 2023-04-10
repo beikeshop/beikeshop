@@ -85,6 +85,7 @@ return [
     'sort_order'           => 'Sort Order',
     'error_page'           => 'The data you accessed does not exist or has been deleted~',
     'error_page_btn'       => 'Return to previous page',
+    'no_repeat'            => 'Do not re-add',
 
     'order'                => [
         'unpaid'    => 'Unpaid',

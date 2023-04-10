@@ -70,4 +70,8 @@ return [
     'head_code'              => '插入代碼',
     'head_code_info'         => '會將輸入框中的代碼插入到前端頁面 head 中，可用於統計代碼或者添加特殊插件等',
     'rate_api_key'           => '匯率 API KEY',
+    'multi_filter'           => '高級篩選',
+    'please_select'          => '請添加',
+    'multi_filter_helper'    => '請選擇需要在篩選模塊顯示的屬性',
+    'filter_attribute'    => '屬性篩選',
 ];

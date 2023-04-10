@@ -56,6 +56,7 @@
     @endif
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
+      error_form: '{{ __('common.error_form') }}',
     }
 
     const config = {

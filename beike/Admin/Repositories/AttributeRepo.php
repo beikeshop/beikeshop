@@ -12,6 +12,7 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Attribute;
+use Beike\Models\AttributeDescription;
 use Beike\Models\AttributeValue;
 use Beike\Models\ProductAttribute;
 
@@ -137,5 +138,15 @@ class AttributeRepo
             });
 
         return $builder->limit(10)->get();
+    }
+
+    public static function getByIds($ids)
+    {
+        return AttributeDescription::query()
+            ->where('locale', locale())
+            ->whereIn('attribute_id', $ids)
+            ->select(['attribute_id as id', 'name'])
+            ->get()
+            ->toArray();
     }
 }

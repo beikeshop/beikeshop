@@ -10,12 +10,14 @@
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
 @endpush
 
+@section('page-title-right')
+  <button type="button" class="btn btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
+@endsection
+
 @section('content')
     @if ($errors->has('error'))
       <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
     @endif
-
-
     @if ($errors->any())
       <div class="alert alert-danger">
         @foreach ($errors->all() as $error)
@@ -428,7 +430,7 @@
         </div>
 
         <x-admin::form.row title="">
-          <button type="submit" @click="productsSubmit" class="btn btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
+          <button type="submit" @click="productsSubmit" class="btn d-none btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
         </x-admin::form.row>
 
         <el-dialog
@@ -950,6 +952,10 @@
     }
 
     $(document).ready(function ($) {
+      $('.submit-form').click(function () {
+        $('.needs-validation').find('button[type="submit"]').click()
+      })
+
       $('#brand-autocomplete').autocomplete({
         'source': function(request, response) {
           $http.get(`brands/autocomplete?name=${encodeURIComponent(request)}`, null, {hload: true}).then((res) => {
