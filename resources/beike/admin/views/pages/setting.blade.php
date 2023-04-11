@@ -2,6 +2,10 @@
 
 @section('title', __('admin/setting.index'))
 
+@section('page-title-right')
+  <button type="button" class="btn btn-lg btn-primary submit-form" form="app">{{ __('common.save') }}</button>
+@endsection
+
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
@@ -254,7 +258,7 @@
         </div>
 
         <x-admin::form.row title="">
-          <button type="submit" class="btn btn-primary mt-4">{{ __('common.submit') }}</button>
+          <button type="submit" class="btn btn-primary d-none mt-4">{{ __('common.submit') }}</button>
         </x-admin::form.row>
       </form>
     </div>

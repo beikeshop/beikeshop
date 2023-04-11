@@ -43,7 +43,7 @@
       </div>
 
       <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
-        :total="brands.total"></el-pagination>
+        :total="brands.total" :current-page.sync="page"></el-pagination>
     </div>
 
     <el-dialog title="{{ __('admin/common.brand') }}" :visible.sync="dialog.show" width="600px"
@@ -93,12 +93,7 @@
 
       data: {
         brands: @json($brands ?? []),
-        page: 1,
-        source: {
-          // languages: ['zh-ck','en-gb']
-          languages: @json($languages ?? []),
-        },
-
+        page: bk.getQueryString('page', 1) * 1,
         dialog: {
           show: false,
           index: null,
@@ -126,8 +121,25 @@
         },
       },
 
+      mounted() {
+        bk.ajaxPageReloadData(this)
+      },
+
+      computed: {
+        url() {
+          const url = @json(admin_route('brands.index'));
+
+          if (this.page) {
+            return url + '?page=' + this.page;
+          }
+
+          return url;
+        },
+      },
+
       methods: {
         loadData() {
+          window.history.pushState('', '', this.url);
           $http.get(`brands?page=${this.page}`).then((res) => {
             this.brands = res.data.brands;
           })

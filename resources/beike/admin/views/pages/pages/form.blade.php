@@ -10,7 +10,7 @@
 
 @section('page-title-right')
 <x-admin::form.row title="">
-  <button type="button" class="mt-3 btn btn-primary submit-form">{{ __('common.save') }}</button>
+  <button type="button" class="mt-3 btn btn-primary submit-form btn-lg" form="form-page">{{ __('common.save') }}</button>
 </x-admin::form.row>
 @endsection
 
@@ -26,7 +26,7 @@
 
   <div id="app" class="card h-min-600">
     <div class="card-body">
-      <form novalidate class="needs-validation" action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
+      <form novalidate id="form-page" class="needs-validation" action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-content">
             @csrf
@@ -150,10 +150,6 @@
 
 @push('footer')
 <script>
-  $('.submit-form').click(function () {
-    $('.needs-validation').find('button[type="submit"]').click()
-  })
-
   var app = new Vue({
     el: '#app',
 
