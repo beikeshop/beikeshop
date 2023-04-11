@@ -3,9 +3,8 @@
 namespace Beike\Installer\Controllers;
 
 use Beike\Installer\Helpers\PermissionsChecker;
-use Illuminate\Routing\Controller;
 
-class PermissionsController extends Controller
+class PermissionsController extends BaseController
 {
     /**
      * @var PermissionsChecker
@@ -17,9 +16,6 @@ class PermissionsController extends Controller
      */
     public function __construct(PermissionsChecker $checker)
     {
-        if (installed()) {
-            exit('Already installed');
-        }
         $this->permissions = $checker;
     }
 
@@ -30,6 +26,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        $this->checkInstalled();
         $permissions = $this->permissions->check(
             config('installer.permissions')
         );

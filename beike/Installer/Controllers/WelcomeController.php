@@ -11,10 +11,9 @@
 
 namespace Beike\Installer\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
-class WelcomeController extends Controller
+class WelcomeController extends BaseController
 {
     private $languages = [
         'zh_cn' => '简体中文',
@@ -23,10 +22,7 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        if (installed()) {
-            exit('Already installed');
-        }
-
+        $this->checkInstalled();
         $data['languages'] = $this->languages;
         $data['locale']    = $_COOKIE['locale'] ?? 'zh_cn';
         $data['steps']     = 1;

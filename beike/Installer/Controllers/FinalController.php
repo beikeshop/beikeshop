@@ -5,9 +5,8 @@ namespace Beike\Installer\Controllers;
 use Beike\Installer\Helpers\EnvironmentManager;
 use Beike\Installer\Helpers\FinalInstallManager;
 use Beike\Installer\Helpers\InstalledFileManager;
-use Illuminate\Routing\Controller;
 
-class FinalController extends Controller
+class FinalController extends BaseController
 {
     /**
      * Update installed file and display finished view.
@@ -19,6 +18,8 @@ class FinalController extends Controller
      */
     public function index(InstalledFileManager $fileManager, FinalInstallManager $finalInstall, EnvironmentManager $environment)
     {
+        $this->checkInstalled();
+
         $finalMessages      = $finalInstall->runFinal();
         $finalStatusMessage = $fileManager->update();
         $finalEnvFile       = $environment->getEnvContent();

@@ -5,11 +5,10 @@ namespace Beike\Installer\Controllers;
 use Beike\Admin\Repositories\AdminUserRepo;
 use Beike\Installer\Helpers\DatabaseManager;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class DatabaseController extends Controller
+class DatabaseController extends BaseController
 {
     /**
      * @var DatabaseManager
@@ -31,6 +30,7 @@ class DatabaseController extends Controller
      */
     public function index()
     {
+        $this->checkInstalled();
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         $rows     = DB::select('SHOW TABLES');
         $database = config('database.connections.mysql.database');

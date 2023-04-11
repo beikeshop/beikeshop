@@ -5,12 +5,11 @@ namespace Beike\Installer\Controllers;
 use Beike\Installer\Helpers\EnvironmentManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class EnvironmentController extends Controller
+class EnvironmentController extends BaseController
 {
     /**
      * @var EnvironmentManager
@@ -32,6 +31,7 @@ class EnvironmentController extends Controller
      */
     public function index()
     {
+        $this->checkInstalled();
         $steps = 4;
 
         return view('installer::environment-wizard', compact('steps'));
@@ -46,6 +46,7 @@ class EnvironmentController extends Controller
      */
     public function saveWizard(Request $request, Redirector $redirect): RedirectResponse
     {
+        $this->checkInstalled();
         $rules    = config('installer.environment.form.rules');
         $messages = [
             'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
@@ -78,6 +79,7 @@ class EnvironmentController extends Controller
      */
     public function validateDatabase(Request $request): array
     {
+        $this->checkInstalled();
         $rules    = config('installer.environment.form.rules');
         $messages = [
             'environment_custom.required_if' => trans('installer::installer_messages.environment.name_required'),
@@ -108,6 +110,7 @@ class EnvironmentController extends Controller
      */
     private function checkDatabaseConnection(Request $request): bool|array
     {
+        $this->checkInstalled();
         $connection = $request->input('database_connection');
 
         $settings = config("database.connections.$connection");

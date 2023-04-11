@@ -3,9 +3,8 @@
 namespace Beike\Installer\Controllers;
 
 use Beike\Installer\Helpers\RequirementsChecker;
-use Illuminate\Routing\Controller;
 
-class RequirementsController extends Controller
+class RequirementsController extends BaseController
 {
     /**
      * @var RequirementsChecker
@@ -17,9 +16,6 @@ class RequirementsController extends Controller
      */
     public function __construct(RequirementsChecker $checker)
     {
-        if (installed()) {
-            exit('Already installed');
-        }
         $this->requirements = $checker;
     }
 
@@ -30,6 +26,7 @@ class RequirementsController extends Controller
      */
     public function index()
     {
+        $this->checkInstalled();
         $phpSupportInfo = $this->requirements->checkPHPversion(
             config('installer.core.minPhpVersion')
         );
