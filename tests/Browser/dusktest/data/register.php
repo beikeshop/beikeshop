@@ -1,8 +1,19 @@
 <?php
 
 
-const ture = [
-    'email' => 'test@163.com',
+const true_register = [
+    'email' => 'testtest@163.com',
     'password' => '123456',
-    're_password'=> '123456',
+    'assert' => 'Sign Out',
 ];
+
+const false_register = [
+    'false_email' => 'test@163.com',  //已注册的email
+    'illegal_email' => 'test',
+    'false_password' => '1234567',
+    'false_assert' => 'User login and registration',
+    'illegal_assert' => 'Please enter a valid email address!',
+
+];
+
+

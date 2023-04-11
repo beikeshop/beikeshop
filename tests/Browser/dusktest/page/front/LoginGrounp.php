@@ -6,8 +6,6 @@ namespace Tests\Browser;
 namespace App\Http\Controllers;
 namespace  App\Http\Controllers\LoginGrounp;
 
-
-
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Http\Controllers\By;
@@ -17,11 +15,6 @@ require_once(dirname(__FILE__) . '/../../data/login_page.php');
 
 class LoginGrounp extends DuskTestCase
 {
-
-//    const LOGIN_DATA = [
-//        'aa'
-//    ];
-
     /**
      * A basic browser test example.
      */
