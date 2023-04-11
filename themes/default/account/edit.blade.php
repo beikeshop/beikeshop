@@ -50,6 +50,7 @@
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account.edit.name')]) }}</span>
                 </div>
+                @hookwrapper('account.edit.email')
                 <div class="col-sm-6">
                   <label class="form-label">{{ __('shop/account.edit.email') }}</label>
                   <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
@@ -57,6 +58,7 @@
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account.edit.email')]) }}</span>
                 </div>
+                @endhookwrapper
                 <div class="col-12 mt-4">
                   <button class="btn btn-primary mt-sm-0" type="submit">{{ __('common.submit') }}</button>
                 </div>

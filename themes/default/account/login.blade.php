@@ -156,7 +156,8 @@
           password_confirmation: [
             {required: true, validator: validatePass2, trigger: 'change'}
           ]
-        }
+        },
+        @stack('login.vue.data')
       },
 
       beforeMount () {
@@ -192,7 +193,8 @@
               @endif
             })
           });
-        }
+        },
+        @stack('login.vue.method')
       }
     })
 

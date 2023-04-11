@@ -3,7 +3,9 @@
     <div class="head">
       <div class="portrait"><img src="{{ image_resize($customer->avatar, 200, 200) }}" class="img-fluid"></div>
       <div class="account-name">{{ $customer->name }}</div>
+      @hookwrapper('account.sidebar.email')
       <div class="account-email">{{ $customer->email }}</div>
+      @endhookwrapper
     </div>
 
     <nav class="list-group account-links">
