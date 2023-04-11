@@ -11,7 +11,7 @@
 @endpush
 
 @section('page-title-right')
-  <button type="button" class="btn btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
+  <button type="button" class="btn btn-lg btn-primary submit-form" form="app">{{ __('common.save') }}</button>
 @endsection
 
 @section('content')
@@ -101,7 +101,6 @@
             @endhookwrapper
 
             <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
-            <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 
             <x-admin::form.row :title="__('admin/category.index')">
               <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
@@ -116,6 +115,8 @@
                 @endforeach
               </div>
             </x-admin::form.row>
+
+            <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 
             @hook('admin.product.edit.extra')
 
@@ -952,10 +953,6 @@
     }
 
     $(document).ready(function ($) {
-      $('.submit-form').click(function () {
-        $('.needs-validation').find('button[type="submit"]').click()
-      })
-
       $('#brand-autocomplete').autocomplete({
         'source': function(request, response) {
           $http.get(`brands/autocomplete?name=${encodeURIComponent(request)}`, null, {hload: true}).then((res) => {

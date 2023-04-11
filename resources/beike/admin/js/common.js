@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-03-30 17:30:08
+ * @LastEditTime  2023-04-10 15:47:07
  */
 
 export default {
@@ -153,5 +153,20 @@ export default {
         $('.vip-serve .expired-text').hide();
       }
     }
+  },
+
+  // 列表页使用 vue ajax 分页，点击浏览起前进后退按钮时，重新加载数据
+  ajaxPageReloadData(app) {
+    window.addEventListener('popstate', () => {
+      const page = this.getQueryString('page');
+
+      if (app.page < 2) {
+        window.history.back(-1);
+        return;
+      }
+
+      app.page = page * 1 - 1;
+      app.loadData();
+    });
   },
 }

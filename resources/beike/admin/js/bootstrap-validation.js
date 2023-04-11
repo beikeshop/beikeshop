@@ -3,12 +3,23 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2023-04-10 13:56:07
+ * @LastEditTime  2023-04-11 09:28:34
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 $(function () {
   var forms = document.querySelectorAll(".needs-validation");
+
+  // 触发表单提交
+  $(document).on('click', '.submit-form', function(event) {
+    const form = $(this).attr('form');
+
+    if ($(`form#${form}`).find('button[type="submit"]').length > 0) {
+      $(`form#${form}`).find('button[type="submit"]')[0].click();
+    } else {
+      $(`form#${form}`).submit();
+    }
+  });
 
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms).forEach(function (form) {
