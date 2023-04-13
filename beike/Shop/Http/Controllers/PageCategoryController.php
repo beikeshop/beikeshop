@@ -30,7 +30,7 @@ class PageCategoryController extends Controller
             'active_page_categories' => PageCategoryRepo::getActiveList(),
             'active_pages'           => PageRepo::getCategoryPages(),
         ];
-
+        $data = hook_filter('page_categories.home.data', $data);
         return view('page_categories/home', $data);
     }
 
@@ -45,7 +45,7 @@ class PageCategoryController extends Controller
             'breadcrumb'             => $breadCrumb,
             'category_pages'         => $pageCategory->pages()->paginate(12),
         ];
-
+        $data = hook_filter('page_categories.show.data', $data);
         return view('page_categories/show', $data);
     }
 }
