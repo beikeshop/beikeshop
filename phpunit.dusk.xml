@@ -10,7 +10,8 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Browser Test Suite">
-            <directory suffix="Test.php">./tests/Browser</directory>
+            <directory suffix="Test.php">tests\Browser\dusktest\page\front\RegisterTest.php</directory>
         </testsuite>
     </testsuites>
 </phpunit>
+

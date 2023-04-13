@@ -4,7 +4,7 @@
 namespace Tests\Browser;
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -13,7 +13,7 @@ require_once(dirname(__FILE__) . '/../../data/login_page.php');
 
 class RegisterTest extends DuskTestCase
 {
-    use RefreshDatabase;
+
     /**
      * A basic browser test example.
      */
@@ -23,7 +23,7 @@ class RegisterTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
-                ->type(register['register_email'], false_register['false_email'])
+                ->type(register['register_email'], false_register['exist_email'])
                 ->type(register['register_pwd'], true_register['password'])
                 ->type(register['register_re_pwd'], true_register['password'])
                 ->press(register['register_btn'])
@@ -102,6 +102,7 @@ class RegisterTest extends DuskTestCase
                 ->type(register['register_pwd'], true_register['password'])
                 ->type(register['register_re_pwd'], true_register['password'])
                 ->press(register['register_btn'])
+                ->pause(3000)
                 ->assertSee(true_register['assert']);
         });
     }

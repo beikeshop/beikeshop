@@ -48,7 +48,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser)
         {
             $browser->visit(login['login_url'])
-                ->type(login['login_email'], false_login['false_email'])
+                ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], false_login['false_password'])
                 ->press(login['login_btn'])
                 ->assertSee(false_login['false_assert']);
@@ -60,7 +60,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser)
         {
             $browser->visit(login['login_url'])
-                ->type(login['login_email'], false_login['false_email'])
+                ->type(login['login_email'], true_login['email'])
                 ->press(login['login_btn'])
                 ->assertSee(false_login['false_assert']);
         });
@@ -71,7 +71,7 @@ class LoginTest extends DuskTestCase
         $this->browse(function (Browser $browser)
         {
             $browser->visit(login['login_url'])
-                ->type(login['login_pwd'], false_login['false_password'])
+                ->type(login['login_pwd'], true_login['email'])
                 ->press(login['login_btn'])
                 ->assertSee(false_login['false_assert']);
         });
