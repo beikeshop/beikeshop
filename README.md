@@ -95,7 +95,7 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模板 + Vue
 1. 打开命令行克隆代码 `git clone https://gitee.com/beikeshop/beikeshop.git`
 1. 命令行进入 `beikeshop` 目录, 执行 `composer install` 安装第三方包
 1. 接着执行 `cp .env.example .env` 创建配置文件
-1. 接着执行 `npm install`（node 版本需16+） 以及 `npm run dev` 编译前端 js 和 css 文件
+1. 接着执行 `npm install`（node 版本需16+） 以及 `npm run prod` 编译前端 js 和 css 文件
 1. 将项目文件夹下的 `public` 设置为网站根目录
 1. 通过浏览器访问网站, 根据提示完成安装
 1. 如需升级请在服务器端网站根目录运行`git pull && composer install && php artisan migrate`
