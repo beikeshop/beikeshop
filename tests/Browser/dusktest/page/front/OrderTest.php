@@ -31,7 +31,7 @@ class OrderTest extends DuskTestCase
                 ->assertUrlIs('http://autotest.test/account', $browser->driver->getCurrentURL())
 //打印查看当前网址
 //                $html = $browser->driver->getCurrentURL();
-//                print_r($html);
+//                print_r($html)
 //                ->driver->getCurrentURL()
             //2.点击home跳转到首页
                ->clickLink(account['go_index'])
