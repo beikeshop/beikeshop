@@ -9,10 +9,10 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Http\Controllers\By;
 
-require_once(dirname(__FILE__) . '/../../data/login.php');
-require_once(dirname(__FILE__) . '/../../data/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/account.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/account.php');
 
 
 

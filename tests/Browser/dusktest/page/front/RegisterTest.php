@@ -8,8 +8,8 @@ namespace App\Http\Controllers;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/register.php');
-require_once(dirname(__FILE__) . '/../../data/login_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/register.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/ogin_page.php');
 
 class RegisterTest extends DuskTestCase
 {

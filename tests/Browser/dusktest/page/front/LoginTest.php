@@ -5,8 +5,8 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/login.php');
-require_once(dirname(__FILE__) . '/../../data/login_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
 
 class LoginTest extends DuskTestCase
 {

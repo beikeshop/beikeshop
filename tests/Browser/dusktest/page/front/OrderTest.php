@@ -7,12 +7,12 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use App\Http\Controllers\By;
 
-require_once(dirname(__FILE__) . '/../../data/login.php');
-require_once(dirname(__FILE__) . '/../../data/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/checkout_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
 
 //已注册客户且有地址，直接购买商品
 class OrderTest extends DuskTestCase
