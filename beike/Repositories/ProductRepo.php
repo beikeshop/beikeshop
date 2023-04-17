@@ -153,13 +153,25 @@ class ProductRepo
             $builder->where('pd.name', 'like', "%{$data['name']}%");
         }
 
-        $keyword = $data['keyword'] ?? '';
+        $keyword = trim($data['keyword'] ?? '');
         if ($keyword) {
-            $builder->where(function (Builder $query) use ($keyword) {
-                $query->whereHas('skus', function (Builder $query) use ($keyword) {
-                    $query->where('sku', 'like', "%{$keyword}%")
-                        ->orWhere('model', 'like', "%{$keyword}%");
-                })->orWhere('pd.name', 'like', "%{$keyword}%");
+            $keywords = explode(' ', $keyword);
+            $keywords = array_unique($keywords);
+            $keywords = array_diff($keywords, ['']);
+            $builder->where(function (Builder $query) use ($keywords) {
+                $query->whereHas('skus', function (Builder $query) use ($keywords) {
+                    $keywordFirst = array_shift($keywords);
+                    $query->where('sku', 'like', "%{$keywordFirst}%")
+                        ->orWhere('model', 'like', "%{$keywordFirst}%");
+
+                    foreach ($keywords as $keyword) {
+                        $query->orWhere('sku', 'like', "%{$keyword}%")
+                            ->orWhere('model', 'like', "%{$keyword}%");
+                    }
+                });
+                foreach ($keywords as $keyword) {
+                    $query->orWhere('pd.name', 'like', "%{$keyword}%");
+                }
             });
         }
 
