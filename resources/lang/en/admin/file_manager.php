@@ -10,6 +10,13 @@
  */
 
 return [
+    'file_sorting'            => 'File Sorting',
+    'text_type'               => 'Type',
+    'text_created'            => 'Created Time',
+    'file_name'               => 'File Name',
+    'to_sort'                 => 'Sort',
+    'text_desc'               => 'Descent',
+    'text_asc'                => 'Ascent',
     'file_manager_create'     => 'Create',
     'file_manager_show'       => 'View',
     'file_manager_update'     => 'Rename',
@@ -20,7 +27,7 @@ return [
     'create_folder'           => 'Create folder',
     'rename'                  => 'Rename',
     'download'                => 'Download',
-    'upload_files'            => 'Upload Files',
+    'upload_files'            => 'Upload',
     'click_upload'            => 'Click upload, or drag image here',
     'image_uploading'         => 'Image Uploading',
     'no_file'                 => 'No File',

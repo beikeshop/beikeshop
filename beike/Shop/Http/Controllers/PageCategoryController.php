@@ -31,6 +31,7 @@ class PageCategoryController extends Controller
             'active_pages'           => PageRepo::getCategoryPages(),
         ];
         $data = hook_filter('page_categories.home.data', $data);
+
         return view('page_categories/home', $data);
     }
 
@@ -46,6 +47,7 @@ class PageCategoryController extends Controller
             'category_pages'         => $pageCategory->pages()->paginate(12),
         ];
         $data = hook_filter('page_categories.show.data', $data);
+
         return view('page_categories/show', $data);
     }
 }

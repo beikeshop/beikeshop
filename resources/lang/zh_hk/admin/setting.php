@@ -73,5 +73,5 @@ return [
     'multi_filter'           => '高級篩選',
     'please_select'          => '請添加',
     'multi_filter_helper'    => '請選擇需要在篩選模塊顯示的屬性',
-    'filter_attribute'    => '屬性篩選',
+    'filter_attribute'       => '屬性篩選',
 ];

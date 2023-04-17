@@ -22,7 +22,8 @@ class EditController extends Controller
     {
         $customer         = current_customer();
         $data['customer'] = $customer;
-        $data = hook_filter('account.edit.index', $data);
+        $data             = hook_filter('account.edit.index', $data);
+
         return view('account/edit', $data);
     }
 

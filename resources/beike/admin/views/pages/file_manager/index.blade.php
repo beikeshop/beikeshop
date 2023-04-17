@@ -85,6 +85,29 @@
              @hook('admin.file_manager.content.head.btns.after')
           </div>
           <div class="right">
+            <el-popover
+              placement="bottom"
+              width="260"
+              class="me-2"
+              trigger="click">
+              <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
+              <div class="mb-3">
+                <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
+                <el-radio-group v-model="filter.sort" size="small">
+                  <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
+                  <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
+                </el-radio-group>
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
+                <el-radio-group v-model="filter.order" size="small">
+                  <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
+                  <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
+                </el-radio-group>
+              </div>
+              <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
+            </el-popover>
             <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
           </div>
         </div>
@@ -103,10 +126,6 @@
         <div class="content-footer">
           <div class="right"></div>
           <div class="pagination-wrap">
-            {{-- <el-pagination @current-change="pageCurrentChange" :page-size="20" layout="total, prev, pager, next"
-              :total="image_total">
-            </el-pagination> --}}
-
             <el-pagination
               @size-change="pageSizeChange"
               @current-change="pageCurrentChange"
@@ -175,6 +194,11 @@
 
         selectImageIndex: [],
 
+        filter: {
+          sort: 'created',
+          order: 'desc'
+        },
+
         treeData: [{
           name: '{{ __('admin/file_manager.picture_space') }}',
           path: '/',
@@ -227,6 +251,14 @@
             item.selected = indexs.includes(index);
           });
         },
+
+        filter: {
+          handler(val) {
+            this.image_page = 1;
+            this.loadData()
+          },
+          deep: true
+        }
       },
       // 组件方法
       methods: {
@@ -265,6 +297,10 @@
 
         openUploadFile() {
           this.uploadFileDialog.show = true
+        },
+
+        openFileSort() {
+          console.log(11);
         },
 
         beforePhotoUpload(file) {
@@ -337,7 +373,9 @@
 
           $http.get(`file_manager/files?base_folder=${this.folderCurrent}`, {
             page: this.image_page,
-            per_page: this.per_page
+            per_page: this.per_page,
+            sort: this.filter.sort,
+            order: this.filter.order
           }, {
             hload: true
           }).then((res) => {

@@ -49,18 +49,34 @@ class FileManagerService
      * 获取某个目录下的文件和文件夹
      *
      * @param $baseFolder
+     * @param $sort
+     * @param $order
      * @param int $page
      * @param int $perPage
      * @return array
      * @throws \Exception
      */
-    public function getFiles($baseFolder, int $page = 1, int $perPage = 20): array
+    public function getFiles($baseFolder, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $files           = glob($currentBasePath . '/*');
-        usort($files, function ($a, $b) {
-            return filemtime($a) - filemtime($b) < 0;
-        });
+
+        if ($sort == 'created') {
+            if ($order == 'desc') {
+                usort($files, function ($a, $b) {
+                    return filemtime($a) - filemtime($b) < 0;
+                });
+            } else {
+                usort($files, function ($a, $b) {
+                    return filemtime($a) - filemtime($b) >= 0;
+                });
+            }
+        } else {
+            natcasesort($files);
+            if ($order == 'desc') {
+                $files = array_reverse($files);
+            }
+        }
 
         $images = [];
         foreach ($files as $file) {

@@ -68,8 +68,9 @@ class Order extends Base
 
     public function getStatusFormatAttribute()
     {
-        $status_format = trans('order.' . $this->status);
+        $status_format     = trans('order.' . $this->status);
         $status_format     = hook_filter('order.status_format', $status_format);
+
         return $status_format;
     }
 

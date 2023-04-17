@@ -31,10 +31,12 @@ class FileManagerController extends Controller
     public function getFiles(Request $request): array
     {
         $baseFolder = $request->get('base_folder');
+        $sort       = $request->get('sort', 'created');
+        $order      = $request->get('order', 'desc');
         $page       = (int) $request->get('page');
         $perPage    = (int) $request->get('per_page');
 
-        $data = (new FileManagerService)->getFiles($baseFolder, $page, $perPage);
+        $data = (new FileManagerService)->getFiles($baseFolder, $sort, $order, $page, $perPage);
 
         return hook_filter('admin.file_manager.files.data', $data);
     }

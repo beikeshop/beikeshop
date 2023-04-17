@@ -12,6 +12,4 @@ class BaseController extends Controller
             exit('Already installed');
         }
     }
-
-
 }

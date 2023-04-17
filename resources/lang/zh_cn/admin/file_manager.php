@@ -10,6 +10,13 @@
  */
 
 return [
+    'file_sorting'            => '文件排序',
+    'text_type'               => '类型',
+    'text_created'            => '创建时间',
+    'file_name'               => '文件名称',
+    'to_sort'                 => '排序',
+    'text_desc'               => '倒序',
+    'text_asc'                => '顺序',
     'file_manager_create'     => '创建目录/文件',
     'file_manager_show'       => '查看目录/文件',
     'file_manager_update'     => '重命名',

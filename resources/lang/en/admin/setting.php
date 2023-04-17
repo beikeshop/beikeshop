@@ -74,5 +74,5 @@ return [
     'multi_filter'           => 'Multi Filter',
     'please_select'          => 'Please select',
     'multi_filter_helper'    => 'Please select the attributes to be displayed in the Multi Filter module.',
-    'filter_attribute'    => 'Attribute Filter',
+    'filter_attribute'       => 'Attribute Filter',
 ];
