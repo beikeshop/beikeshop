@@ -46,10 +46,10 @@ abstract class DuskTestCase extends BaseTestCase
             )
         );
     }
-        protected function baseUrl()
-    {
-        return 'http://beikeshop.test';
-    }
+//        protected function baseUrl()
+//    {
+//        return 'http://beikeshop.test';
+//    }
 
     /**
      * Determine whether the Dusk command has disabled headless mode.
