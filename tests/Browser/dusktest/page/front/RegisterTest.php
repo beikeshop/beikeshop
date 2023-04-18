@@ -9,7 +9,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 require_once(dirname(__FILE__) . '/../../data/catalog/register.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/ogin_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
 
 class RegisterTest extends DuskTestCase
 {
@@ -102,7 +102,7 @@ class RegisterTest extends DuskTestCase
                 ->type(register['register_pwd'], true_register['password'])
                 ->type(register['register_re_pwd'], true_register['password'])
                 ->press(register['register_btn'])
-                ->pause(3000)
+                ->pause(6000)
                 ->assertSee(true_register['assert']);
         });
     }

@@ -9,13 +9,13 @@ require_once(dirname(__FILE__) . '/../../data/admin/login.php');
 require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
 
-class GopLuginsTest extends DuskTestCase
+class LanguageSwitchTest extends DuskTestCase
 {
     /**
      * A basic browser test example.
      * @return void
      */
-        public function testGopLugins()
+        public function testGoVip()
     {
 
         $this->browse(function (Browser $browser)
@@ -26,12 +26,15 @@ class GopLuginsTest extends DuskTestCase
                 ->type(admin_login['login_pwd'], admin_true_login['password'])
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
-                //2.插件市场
-                ->clickLink(admin_top['VIP'])
-                //3.切换到第二个窗口并获取断言
-                ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->assertSee(admin_top['vip_assert'])
-                ->pause(9000);
+                //2.点击切换语言
+                ->clickLink(admin_top['sw_language'])
+                //3.切换为英文
+                ->clickLink(admin_top['en_language'])
+                ->pause(4000)
+                ->assertSee(admin_assert['en_assert'])
+                //切换回中文
+                ->clickLink(admin_top['en_language'])
+                ->clickLink(admin_top['sw_language'])
             ;
         });
     }

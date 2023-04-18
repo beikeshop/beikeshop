@@ -9,13 +9,13 @@ require_once(dirname(__FILE__) . '/../../data/admin/login.php');
 require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
 
-class GoVipTest extends DuskTestCase
+class GoPluginsTest extends DuskTestCase
 {
     /**
      * A basic browser test example.
      * @return void
      */
-        public function testGoVip()
+        public function testGopLugins()
     {
 
         $this->browse(function (Browser $browser)
@@ -26,13 +26,12 @@ class GoVipTest extends DuskTestCase
                 ->type(admin_login['login_pwd'], admin_true_login['password'])
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
-                //2.点击vip图标
-                ->clickLink(admin_top['VIP'])
+                //2.插件市场
+                ->clickLink(admin_top['plugins_market'])
                 ->pause(2000)
                 //3.切换到第二个窗口并获取断言
-                ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->assertSee(admin_assert['vip_assert'])
-
+                ->assertPathIs(admin_assert['plugins_assert'])
+;
             ;
         });
     }

@@ -1,6 +1,6 @@
 <?php
 const account = [
-    "login_url" =>"/account",
+    "url" =>"/account",
     "go_index"=>"Home",//beikeshop图标
     "SignOut"=>"Sign Out"//sign
 ];
@@ -35,7 +35,9 @@ const Wishlist = [
     "login_url" =>"/account/edit",
     "go_Wishlist"=>"Wishlist",//点击Wishlist
     "Check_Details"=>"Check Details",//查看详情按钮
-    "remove_Wishlist"=>"body > div.container > div > div.col-12.col-md-9 > div > div.card-body > table > tbody > tr > td.text-end > div > button",
+    "remove_Wishlist"=>".btn btn-danger btn-sm remove-wishlist",
+    //body > div.container > div > div.col-12.col-md-9 > div > div.card-body > table > tbody > tr > td.text-end > div > button > i
+
     "no_data"=>".text-secondary fs-4 mb-3",
 
 ];

@@ -26,9 +26,9 @@ class OrderTest extends DuskTestCase
                 ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
-                ->pause(2000)
+                ->pause(5000)
                 //当前网址断言
-                ->assertUrlIs('http://autotest.test/account', $browser->driver->getCurrentURL())
+                ->assertPathIs(account['url'])
 //打印查看当前网址
 //                $html = $browser->driver->getCurrentURL();
 //                print_r($html)

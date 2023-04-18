@@ -12,7 +12,7 @@ require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/product_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/cre_product_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/cre_product.php');
-class AddGoodsTest extends DuskTestCase
+class EditProductTest extends DuskTestCase
 {
     /**
      * A basic browser test example.
@@ -22,7 +22,7 @@ class AddGoodsTest extends DuskTestCase
 
 
 //场景1 email不合法
-    public function testAddGoods()
+    public function testEditProduct()
     {
 
         $this->browse(function (Browser $browser)
@@ -35,19 +35,20 @@ class AddGoodsTest extends DuskTestCase
                 ->pause(2000)
                 //2.点击商品管理
                 ->clickLink(admin_top['mg_product'])
-                //3.点击添加商品
-                ->press(products_top['create_product'])
+                //3.点击编辑商品
+                ->press(products_top['edit_product'])
                 //4.填写商品信息
-                ->type(product_top['ch_name'], product_info['ch_name'])
-                ->type(product_top['en_name'], product_info['en_name'])
-                ->type(product_top['sku'], product_info['sku'])
-                ->type(product_top['price'], product_info['price'])
-                ->type(product_top['origin_price'], product_info['origin_price'])
-                ->type(product_top['cost_price'], product_info['cost_price'])
-                ->type(product_top['quantity'], product_info['quantity'])
+                ->type(product_top['ch_name'], alter_product['ch_name'])
+                ->type(product_top['en_name'], alter_product['en_name'])
+                ->type(product_top['sku'], alter_product['sku'])
+                ->type(product_top['price'], alter_product['price'])
+                ->type(product_top['origin_price'], alter_product['origin_price'])
+                ->type(product_top['cost_price'], alter_product['cost_price'])
+                ->type(product_top['quantity'], alter_product['quantity'])
                 //5.点击保存
                 ->press(product_top['save_btn'])
-                ->assertSee(product_top['assert'])
+                ->pause(3000)
+                ->assertSee(cre_assert['alter_ful_assert'])
 
             ;
                 });

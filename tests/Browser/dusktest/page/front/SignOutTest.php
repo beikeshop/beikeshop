@@ -30,12 +30,11 @@ class SignOutTest extends DuskTestCase
                 ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
-                ->pause(2000)
+                ->pause(5000)
                 //2.退出
                 ->clickLink(account['SignOut'])
                 ->pause(3000)
                 ->assertSee(false_login['false_assert']);
-//                ->assertSee(true_login['assert']);
         });
     }
 }

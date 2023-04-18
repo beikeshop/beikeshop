@@ -30,6 +30,7 @@ class WishlistTest extends DuskTestCase
 
                 //2.点击home跳转到首页
                 ->clickLink(account['go_index'])
+                ->pause(2000)
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(index['product_img'])
                 ->pause(2000)

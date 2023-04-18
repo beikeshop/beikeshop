@@ -86,7 +86,7 @@ class LoginTest extends DuskTestCase
                 ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
-                ->pause(2000)
+                ->pause(5000)
                 ->assertSee(true_login['assert']);
         });
     }

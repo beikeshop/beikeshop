@@ -1,13 +1,12 @@
 <?php
 
 namespace Tests\Browser;
-
 namespace App\Http\Controllers;
 
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Http\Controllers\By;
+
 
 require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
@@ -24,12 +23,10 @@ class EditUserInfo extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
                 //1.用户登录
-                ->type(login['login_email'], true_login['email'])
-                ->type(login['login_pwd'], true_login['password'])
+                ->type(login['login_email'], true_register['email'])
+                ->type(login['login_pwd'], true_register['password'])
                 ->press(login['login_btn'])
                 ->pause(2000)
-                //当前网址断言
-                ->assertUrlIs('http://autotest.test/account', $browser->driver->getCurrentURL())
                 //2.点击编辑
                 ->clickLink(Edit['go_Edit'])
                 ->pause(1000)

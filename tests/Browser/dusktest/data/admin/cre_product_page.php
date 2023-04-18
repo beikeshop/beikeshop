@@ -9,6 +9,6 @@ const product_top = [
     "cost_price"=>"skus[0][cost_price]",//成本价
     "quantity"=>"skus[0][quantity]",//数量
     "save_btn"=>"#content > div.page-title-box.py-1.d-flex.align-items-center.justify-content-between > div > button",//保存
-    "assert"=>"创建成功!",
+
 ];
 

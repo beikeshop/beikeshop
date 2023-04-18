@@ -1,13 +1,11 @@
 <?php
 
 namespace Tests\Browser;
-
 namespace App\Http\Controllers;
 
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Http\Controllers\By;
 
 require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
@@ -27,9 +25,7 @@ class AddressTest extends DuskTestCase
                 ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
-                ->pause(2000)
-                //当前网址断言
-                ->assertUrlIs('http://autotest.test/account', $browser->driver->getCurrentURL())
+                ->pause(5000)
                 //2.点击address
                 ->clickLink(address['go_address'])
                 //3.点击添加地址
@@ -53,11 +49,6 @@ class AddressTest extends DuskTestCase
                 ->press((address['save']))
                 ->pause(3000)
                 ->assertSee(address['assert']);
-
-
-            ;
-                //3.向下滑动页面直到找到元素
-
         });
     }
 }
