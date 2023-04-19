@@ -13,6 +13,7 @@ namespace Beike\Admin\Repositories;
 
 use Beike\Admin\Http\Resources\AdminUserDetail;
 use Beike\Models\AdminUser;
+use Beike\Repositories\AdminUserTokenRepo;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class AdminUserRepo
@@ -73,7 +74,14 @@ class AdminUserRepo
             $userData['password'] = bcrypt($password);
         }
         $adminUser->update($userData);
-        $adminUser->syncRoles($data['roles']);
+
+        $roles = $data['roles'] ?? [];
+        if ($roles) {
+            $adminUser->syncRoles($roles);
+        }
+
+        $tokens = $data['tokens'] ?? [];
+        AdminUserTokenRepo::updateTokensByUser($adminUser, $tokens);
 
         return $adminUser;
     }

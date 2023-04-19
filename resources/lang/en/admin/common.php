@@ -52,6 +52,7 @@ return [
     'copyright_buy'                    => 'Copyright Buy',
 
     // sidebar
+    'account_index'                    => 'Personal Center',
     'multi_filter_index'               => 'Advanced Filter',
     'theme_index'                      => 'Theme Setting',
     'attribute_groups_index'           => 'Attribute Group',

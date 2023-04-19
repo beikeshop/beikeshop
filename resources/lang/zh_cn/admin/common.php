@@ -52,6 +52,7 @@ return [
     'copyright_buy'          => '版权购买',
 
     // sidebar
+    'account_index'          => '个人中心',
     'multi_filter_index'     => '高级筛选',
     'theme_index'            => '模板设置',
     'attribute_groups_index' => '属性组',

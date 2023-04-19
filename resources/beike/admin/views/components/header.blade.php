@@ -67,6 +67,7 @@
               <li>
                 <a target="_blank" href="{{ shop_route('home.index') }}" class="dropdown-item"><i class="bi bi-send me-1"></i> @lang('admin/common.access_frontend')</a>
               </li>
+              <li><a href="{{ admin_route('account.index') }}" class="dropdown-item"><i class="bi bi-person-circle"></i> {{ __('admin/common.account_index') }}</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a href="{{ admin_route('logout.index') }}" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}</a></li>
             </ul>
