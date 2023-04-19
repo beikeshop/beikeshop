@@ -20,6 +20,10 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
 
+                //个人中心
+                Route::middleware('can:account_index')->get('account', [Controllers\AccountController::class, 'index'])->name('account.index');
+                Route::middleware('can:account_update')->put('account', [Controllers\AccountController::class, 'update'])->name('account.update');
+
                 // 属性
                 Route::middleware('can:attributes_update')->post('attributes/{id}/values', [Controllers\AttributeController::class, 'storeValue'])->name('attributes.values.store');
                 Route::middleware('can:attributes_show')->get('attributes/{id}/values/autocomplete', [Controllers\AttributeController::class, 'autocompleteValue'])->name('attributes.values.autocomplete');

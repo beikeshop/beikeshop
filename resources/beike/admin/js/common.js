@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-04-10 15:47:07
+ * @LastEditTime  2023-04-19 15:26:41
  */
 
 export default {
@@ -44,10 +44,13 @@ export default {
   },
 
   // 生成随机字符串
-  randomString(length) {
+  randomString(length = 32) {
     let str = '';
-    for (; str.length < length; str += Math.random().toString(36).substr(2));
-    return str.substr(0, length);
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < length; i++) {
+      str += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return str;
   },
 
   // 获取url参数
