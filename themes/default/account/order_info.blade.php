@@ -161,6 +161,7 @@
         @endif
 
         @if ($order->orderShipments->count())
+          @hookwrapper('account.order_info.shipments')
           <div class="card mb-4">
             <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
             <div class="card-body">
@@ -186,6 +187,7 @@
               </div>
             </div>
           </div>
+          @endhookwrapper
         @endif
 
         @if ($order->orderHistories->count())

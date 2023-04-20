@@ -209,6 +209,7 @@
   @endhookwrapper
 
   @if ($order->orderShipments)
+    @hookwrapper('admin.order.form.shipments')
     <div class="card mb-4">
       <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
       <div class="card-body">
@@ -252,6 +253,7 @@
         </div>
       </div>
     </div>
+    @endhookwrapper
   @endif
 
   <div class="card mb-4">
