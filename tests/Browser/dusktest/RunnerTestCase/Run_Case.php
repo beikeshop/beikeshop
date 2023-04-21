@@ -37,6 +37,10 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AddCusGroupTest.php');//添加用户组
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\EditCusGroupTest.php');//编辑用户组
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCusGroupTest.php');//删除用户组
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\CusEmptyRecycleTest.php');//清空回收站
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\CustomerRecycleTest.php');//恢复客户信息
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCusRecycleTest.php');//从回收站删除客户信息
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AddExpressTest.php');//添加快递公司
 
 
 //前后台联测

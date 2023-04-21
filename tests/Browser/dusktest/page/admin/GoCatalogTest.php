@@ -31,11 +31,10 @@ class GoCatalogTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.去往前台
-                ->clickLink(admin_top['root'])
-                ->pause(2000)
+                ->clicklink(admin_top['root'])
+                ->pause(3000)
                 ->clickLink(admin_top['go_catalog'])
                 ->pause(2000)
-                //3.切换到第二个窗口并断言
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
                 $browser->assertPathIs(index['login_url'])
                     ;

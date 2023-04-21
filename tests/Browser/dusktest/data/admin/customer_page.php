@@ -52,7 +52,15 @@ const cre_cus_group = [
     "discount"=>"#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(3) > div > div > input",
     "save_btn"=>"#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(4) > div > div > button.el-button.el-button--primary",
 ];
-const customer_assert = [
+const empty_recycle = [
+    "empty_btn"=>"#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button",//清空数据按钮
+    "recycle_btn"=>"#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > a",//恢复按钮
+    "recycle_del"=>"#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > button",//删除按钮
+    //获取即将被删除的客户email
+    "customer_text"=>"#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(2)",
+    "sure_btn"=>"确定",
+    "assert_text"=>"暂无数据～",
 
 ];
+
 

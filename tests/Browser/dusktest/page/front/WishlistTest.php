@@ -43,7 +43,7 @@ class WishlistTest extends DuskTestCase
                 ->press(product['Wishlist_icon'])
                 ->pause(3000)
                 //6.点击顶部收藏认按钮
-                ->clickLink(index_top['wishlist_btn'])
+                ->click(index_top['wishlist_btn'])
                 ->pause(1000)
                 //7.点击查看详情按钮
                 ->clickLink(Wishlist['Check_Details'])

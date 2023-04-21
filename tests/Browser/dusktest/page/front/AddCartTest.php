@@ -26,7 +26,7 @@ class AddCartTest extends DuskTestCase
                 ->type(login['login_email'], true_login['email'])
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
-                ->pause(2000)
+                ->pause(5000)
                 //2.点击home跳转到首页
                 ->clickLink(account['go_index'])
                 //3.向下滑动页面直到找到元素
@@ -47,7 +47,7 @@ class AddCartTest extends DuskTestCase
                 ->press(product['add_cart'])
                 ->pause(3000)
                 //6.点击购物车按钮
-                ->clickLink(index_cart['cart_icon'])
+                ->click(index_cart['cart_icon'])
                 ->pause(10000);
                 //6.断言购物车内商品是否与先前商品相同
                $browser->assertSeeIn(index_cart['product_text'],$product_description)
