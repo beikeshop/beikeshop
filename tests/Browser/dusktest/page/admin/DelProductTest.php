@@ -34,17 +34,13 @@ class DelProductTest extends DuskTestCase
                ->type(admin_login['login_pwd'], admin_true_login['password'])
                ->press(admin_login['login_btn'])
                ->pause(2000)
-               ->clickLink(admin_top['mg_product']);
-
+               ->click(admin_top['mg_product']);
                $product1_text=$browser->text(products_top['get_name']);
                echo $product1_text;
-               //2.点击商品管理
-
-               //3.点击添加商品
+               //2.删除按钮
                $browser->press(products_top['del_product'])
                //确认
                ->press(products_top['sure_btn']);
-
                $browser->pause(2000)
                ->assertDontSee($product1_text)
                ->pause(5000)

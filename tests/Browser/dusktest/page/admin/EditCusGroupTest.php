@@ -28,7 +28,7 @@ class EditCusGroupTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.点击客户管理
-                ->clickLink(admin_top['mg_customers'])
+                ->click(admin_top['mg_customers'])
                 ->pause(3000)
                 //4.点击客户组
                 ->clickLink(customer_left['customer_group'])
@@ -40,8 +40,6 @@ class EditCusGroupTest extends DuskTestCase
                 ->type(cre_cus_group['ch_description'], alter_cus_group_info['ch_description'])
                 ->type(cre_cus_group['en_description'], alter_cus_group_info['en_description'])
                 ->type(cre_cus_group['discount'], alter_cus_group_info['discount'])
-
-
                 //5.点击保存
                 ->press(cre_cus_group['save_btn'])
                 ->pause(5000)

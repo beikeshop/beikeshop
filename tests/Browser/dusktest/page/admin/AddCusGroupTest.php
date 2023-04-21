@@ -28,7 +28,7 @@ class AddCusGroupTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.点击客户管理
-                ->clickLink(admin_top['mg_customers'])
+                ->click(admin_top['mg_customers'])
                 ->pause(3000)
                 //4.点击客户组
                 ->clickLink(customer_left['customer_group'])

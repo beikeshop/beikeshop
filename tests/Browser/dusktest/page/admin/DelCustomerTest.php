@@ -35,17 +35,12 @@ class DelCustomerTest extends DuskTestCase
                ->pause(2000)
                //2.点击客户管理
                ->clickLink(admin_top['mg_customers']);
-
-
                $customer_text=$browser->text(customer_list['get_assert']);
                echo $customer_text;
-               //2.点击商品管理
-
-               //3.点击添加商品
+               //2.删除按钮
                $browser->press(customer_list['del_customer'])
                //确认
                ->press(customer_list['sure_btn']);
-
                $browser->pause(2000)
                ->assertDontSee($customer_text)
                ->pause(5000)

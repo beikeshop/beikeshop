@@ -28,7 +28,7 @@ class AddCustomerTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.点击客户管理
-                ->clickLink(admin_top['mg_customers'])
+                ->click(admin_top['mg_customers'])
                 //3.点击创建客户
                 ->press(customer_list['cre_customer'])
                 //4.填写客户信息

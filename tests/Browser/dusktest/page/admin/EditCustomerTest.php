@@ -28,14 +28,13 @@ class EditCustomerTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.点击客户管理
-                ->clickLink(admin_top['mg_customers'])
+                ->click(admin_top['mg_customers'])
                 //3.点击删除按钮
                 ->press(customer_list['edit_customer'])
                 //4.填写客户信息
                 ->type(alter_customer['name'], customer_info_alter['name'])
                 ->type(alter_customer['email'], customer_info_alter['email'])
                 ->type(alter_customer['pwd'], customer_info_alter['pwd'])
-
                 //5.点击保存
                 ->press(alter_customer['save_btn'])
                 ->pause(5000)

@@ -34,7 +34,7 @@ class EditProductTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.点击商品管理
-                ->clickLink(admin_top['mg_product'])
+                ->click(admin_top['mg_product'])
                 //3.点击编辑商品
                 ->press(products_top['edit_product'])
                 //4.填写商品信息
