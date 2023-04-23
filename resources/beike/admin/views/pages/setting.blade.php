@@ -31,9 +31,6 @@
             <a class="nav-link" data-bs-toggle="tab" href="#tab-express-company">{{ __('order.express_company') }}</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" href="#tab-multi-filter">{{ __('admin/setting.multi_filter') }}</a>
-          </li>
-          <li class="nav-item" role="presentation">
             <a class="nav-link" data-bs-toggle="tab" href="#tab-mail">{{ __('admin/setting.mail_settings') }}</a>
           </li>
           @hook('admin.setting.nav.after')
@@ -117,42 +114,6 @@
             </x-admin-form-image>
 
             @hook('admin.setting.image.after')
-          </div>
-
-          <div class="tab-pane fade" id="tab-multi-filter">
-            <x-admin::form.row :title="__('admin/setting.filter_attribute')">
-              <div class="module-edit-group wp-600">
-                <div class="autocomplete-group-wrapper">
-                  <el-autocomplete
-                    class="inline-input"
-                    v-model="multi_filter.keyword"
-                    value-key="name"
-                    size="small"
-                    :fetch-suggestions="(keyword, cb) => {attributesQuerySearch(keyword, cb, 'products')}"
-                    placeholder="{{ __('admin/builder.modules_keywords_search') }}"
-                    @select="(e) => {handleSelect(e, 'product_attributes')}"
-                  ></el-autocomplete>
-
-                  <div class="item-group-wrapper" v-loading="multi_filter.loading">
-                    <template v-if="multi_filter.filters.attribute.length">
-                      <div v-for="(item, index) in multi_filter.filters.attribute" :key="index" class="item">
-                        <div>
-                          <i class="el-icon-s-unfold"></i>
-                          <span>@{{ item.name }}</span>
-                        </div>
-                        <i class="el-icon-delete right" @click="attributesRemoveProduct(index)"></i>
-                        <input type="text" :name="'multi_filter[attribute]['+ index +']'" v-model="item.id" class="form-control d-none">
-                      </div>
-                    </template>
-                    <template v-else>
-                      {{ __('admin/setting.please_select') }}
-                      <input type="text" name="multi_filter" value="" class="form-control d-none">
-                    </template>
-                  </div>
-                  <div class="help-text font-size-12 lh-base">{{ __('admin/setting.multi_filter_helper') }}</div>
-                </div>
-              </div>
-            </x-admin::form.row>
           </div>
 
           <div class="tab-pane fade" id="tab-express-company">
@@ -293,24 +254,31 @@
     }
 
     $(function() {
+      const [tab, line] = [bk.getQueryString('tab'), bk.getQueryString('line')];
       getZones(country_id);
 
       $('select[name="country_id"]').on('change', function () {
         getZones($(this).val());
       });
+
+      if (tab) {
+        $(`a[href="#${tab}"]`)[0].click()
+      }
+
+      if (line) {
+        $(`textarea[name="${line}"], select[name="${line}"], input[name="${line}"]`).parents('.row').addClass('active-line');
+
+        setTimeout(() => {
+          $('div').removeClass('active-line');
+        }, 1200);
+      }
     });
   </script>
 
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#app',
       data: {
-        multi_filter: {
-          keyword: '',
-          filters: @json($multi_filter ?? null),
-          loading: null,
-        },
-
         mail_engine: @json(old('mail_engine', system_setting('base.mail_engine', ''))),
         express_company: @json(old('express_company', system_setting('base.express_company', []))),
 
@@ -324,16 +292,6 @@
           ]
         },
       },
-      created() {
-        const multi_filter = @json($multi_filter ?? null);
-        if (multi_filter) {
-          this.multi_filter.filters = multi_filter;
-        } else {
-          this.multi_filter.filters = {
-            attribute: [],
-          }
-        }
-      },
       methods: {
         addCompany() {
           if (typeof this.express_company == 'string') {
@@ -342,35 +300,8 @@
 
           this.express_company.push({name: '', code: ''})
         },
-
-        attributesQuerySearch(keyword, cb, url) {
-          $http.get('attributes/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
-            cb(res.data);
-          })
-        },
-
-        attributesRemoveProduct(index) {
-          this.multi_filter.filters.attribute.splice(index, 1);
-        },
-
-        handleSelect(item, key) {
-          if (key == 'product_attributes') {
-            if (!this.multi_filter.filters.attribute.find(v => v.id * 1 == item.id * 1)) {
-              this.multi_filter.filters.attribute.push(item);
-            } else {
-              layer.msg('{{ __('common.no_repeat') }}', () => {})
-            }
-
-            this.multi_filter.keyword = ""
-          }
-        },
       }
     });
-
-    const tab = bk.getQueryString('tab');
-    if (tab) {
-      $(`a[href="#${bk.getQueryString('tab')}"]`)[0].click()
-    }
   </script>
 @endpush
 

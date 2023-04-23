@@ -71,6 +71,6 @@ return [
     'rate_api_key'           => '汇率 API KEY',
     'multi_filter'           => '高级筛选',
     'please_select'          => '请添加',
-    'multi_filter_helper'    => '请选择需要在筛选模块显示的属性',
+    'multi_filter_helper'    => '请选择需要在前台商品列表筛选区域显示的属性，留空则显示全部',
     'filter_attribute'       => '属性筛选',
 ];

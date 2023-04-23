@@ -32,6 +32,9 @@ Route::prefix($adminName)
                 Route::middleware('can:attributes_update')->put('attributes/{id}', [Controllers\AttributeController::class, 'update'])->name('attributes.update');
                 Route::middleware('can:attributes_delete')->delete('attributes/{id}', [Controllers\AttributeController::class, 'destroy'])->name('attributes.destroy');
 
+                // 高级筛选
+                Route::middleware('can:multi_filter_index')->get('multi_filter', [Controllers\MultiFilterController::class, 'index'])->name('multi_filter.index');
+                Route::middleware('can:multi_filter_update')->post('multi_filter', [Controllers\MultiFilterController::class, 'store'])->name('multi_filter.store');
                 // 属性组
                 Route::middleware('can:attribute_groups_index')->get('attribute_groups', [Controllers\AttributeGroupController::class, 'index'])->name('attribute_groups.index');
                 Route::middleware('can:attribute_groups_create')->post('attribute_groups', [Controllers\AttributeGroupController::class, 'store'])->name('attribute_groups.store');

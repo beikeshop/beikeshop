@@ -72,6 +72,6 @@ return [
     'rate_api_key'           => '匯率 API KEY',
     'multi_filter'           => '高級篩選',
     'please_select'          => '請添加',
-    'multi_filter_helper'    => '請選擇需要在篩選模塊顯示的屬性',
+    'multi_filter_helper'    => '請選擇需要在前台商品列表篩選區域顯示的屬性，留空則顯示全部',
     'filter_attribute'       => '屬性篩選',
 ];

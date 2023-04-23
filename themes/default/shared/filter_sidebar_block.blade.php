@@ -27,28 +27,30 @@
       <link rel="stylesheet" href="{{ asset('vendor/jquery/jquery-ui/jquery-ui.min.css') }}">
     @endpush
 
-    <div class="card">
-      <div class="card-header p-0">
-        <h4 class="mb-3">{{ __('product.price') }}</h4>
-      </div>
-      <div class="card-body p-0">
-        <div id="price-slider" class="mb-2"><div class="slider-bg"></div></div>
-        <div class="text-secondary price-range d-flex justify-content-between">
-          <div>
-            {{ __('common.text_form') }}
-            <span class="min">{{ currency_format($filter_data['price']['select_min'], current_currency_code()) }}</span>
-          </div>
-          <div>
-            {{ __('common.text_to') }}
-            <span class="max">{{ currency_format($filter_data['price']['select_max'], current_currency_code()) }}</span>
-          </div>
+    @if (system_setting('base.multi_filter.price_filter', 1))
+      <div class="card">
+        <div class="card-header p-0">
+          <h4 class="mb-3">{{ __('product.price') }}</h4>
         </div>
-        <input value="{{ $filter_data['price']['select_min'] }}" class="price-select-min d-none">
-        <input value="{{ $filter_data['price']['select_max'] }}" class="price-select-max d-none">
-        <input value="{{ $filter_data['price']['min'] }}" class="price-min d-none">
-        <input value="{{ $filter_data['price']['max'] }}" class="price-max d-none">
+        <div class="card-body p-0">
+          <div id="price-slider" class="mb-2"><div class="slider-bg"></div></div>
+          <div class="text-secondary price-range d-flex justify-content-between">
+            <div>
+              {{ __('common.text_form') }}
+              <span class="min">{{ currency_format($filter_data['price']['select_min'], current_currency_code()) }}</span>
+            </div>
+            <div>
+              {{ __('common.text_to') }}
+              <span class="max">{{ currency_format($filter_data['price']['select_max'], current_currency_code()) }}</span>
+            </div>
+          </div>
+          <input value="{{ $filter_data['price']['select_min'] }}" class="price-select-min d-none">
+          <input value="{{ $filter_data['price']['select_max'] }}" class="price-select-max d-none">
+          <input value="{{ $filter_data['price']['min'] }}" class="price-min d-none">
+          <input value="{{ $filter_data['price']['max'] }}" class="price-max d-none">
+        </div>
       </div>
-    </div>
+    @endif
     @endhookwrapper
   @endif
 

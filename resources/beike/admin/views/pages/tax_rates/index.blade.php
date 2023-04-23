@@ -2,6 +2,10 @@
 
 @section('title', __('admin/tax_rate.index'))
 
+@section('page-title-right')
+  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=tax_address" class="btn btn-outline-info" target="_blank">{{ __('admin/setting.tax_address') }}</a>
+@endsection
+
 @section('content')
   <ul class="nav-bordered nav nav-tabs mb-3">
     <li class="nav-item">

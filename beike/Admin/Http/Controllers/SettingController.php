@@ -12,7 +12,6 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerGroupDetail;
-use Beike\Admin\Repositories\AttributeRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\CustomerGroupRepo;
@@ -35,15 +34,10 @@ class SettingController extends Controller
             ['value' => 'shipping', 'label' => trans('admin/setting.shipping_address')],
             ['value' => 'payment', 'label' => trans('admin/setting.payment_address')],
         ];
-        $multiFilter = system_setting('base.multi_filter');
-        if ($attributeIds = $multiFilter['attribute'] ?? []) {
-            $multiFilter['attribute'] = AttributeRepo::getByIds($attributeIds);
-        }
 
         $data = [
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
-            'multi_filter'    => $multiFilter,
             'tax_address'     => $taxAddress,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,

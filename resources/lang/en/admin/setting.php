@@ -73,6 +73,6 @@ return [
     'rate_api_key'           => 'Exchange rate API KEY',
     'multi_filter'           => 'Multi Filter',
     'please_select'          => 'Please select',
-    'multi_filter_helper'    => 'Please select the attributes to be displayed in the Multi Filter module.',
+    'multi_filter_helper'    => 'Please select the attributes that need to be displayed in the filter area of the product list at the front desk, if left blank, all will be displayed',
     'filter_attribute'       => 'Attribute Filter',
 ];

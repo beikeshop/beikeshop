@@ -49,8 +49,10 @@ return [
     'country'                          => 'Country',
     'file_manager'                     => 'File Manager',
     'access_frontend'                  => 'Frontend',
+    'copyright_buy'                    => 'Copyright Buy',
 
     // sidebar
+    'multi_filter_index'               => 'Advanced Filter',
     'theme_index'                      => 'Theme Setting',
     'attribute_groups_index'           => 'Attribute Group',
     'attributes_index'                 => 'Attributes',
