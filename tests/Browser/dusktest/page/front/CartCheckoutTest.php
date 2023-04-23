@@ -28,7 +28,7 @@ class CartCheckoutTest extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(2000)
                 //2.点击home跳转到首页
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(index['product_img'])
                 ->pause(2000)

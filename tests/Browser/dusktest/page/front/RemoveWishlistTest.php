@@ -28,7 +28,7 @@ class RemoveWishlistTest extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(3000)
                 //2.点击home跳转到首页
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 ->pause(2000)
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(index['product_img'])
@@ -42,13 +42,13 @@ class RemoveWishlistTest extends DuskTestCase
                 ->press(product['Wishlist_icon'])
                 ->pause(3000)
                 //6.点击顶部收藏认按钮
-                ->clickLink(index_top['wishlist_btn'])
+                ->click(index_top['wishlist_btn'])
 //                ->pause(1000)
                 //7.点击移除按钮
                 ->press(Wishlist['remove_Wishlist'])
-                ->pause(1000)
+                ->pause(3000)
                 //8.断言
-                ->assertUrlIs($ProductUrl,$browser->driver->getCurrentURL())
+                ->assertVisible(Wishlist['no_data'])//no_data
             ;
         });
     }

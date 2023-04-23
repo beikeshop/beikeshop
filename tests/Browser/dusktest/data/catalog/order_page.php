@@ -10,7 +10,11 @@ const order = [
 ];
 const ca_order_status = [
     "Unpaid"=>"Unpaid",//待支付
-    "paid"=>"paid",//已支付
+    "Paid"=>"Paid",//已支付
     "Shipped"=>"Shipped",//已发货
-    "Completed"=>"Completed",
+    "Completed"=>"Completed",//已完成
 ];
+const get_order_status = [
+    "status_text"=>".table.table-borderless.mb-0 tbody tr:first-child td:nth-child(3)",//获取当前状态
+];
+//

@@ -12,6 +12,7 @@ require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/account.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/register.php');
 
 
 
@@ -28,7 +29,7 @@ class EditUserInfo extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(2000)
                 //2.点击编辑
-                ->clickLink(Edit['go_Edit'])
+                ->click(account['go_Edit'])
                 ->pause(1000)
                 //3.点击上传头像按钮
 //                ->press(Edit['upload_btn'])

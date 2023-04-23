@@ -28,7 +28,7 @@ class AddCartTest extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(5000)
                 //2.点击home跳转到首页
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(index['product_img'])
 //              ->mouseover(index['product_img'])

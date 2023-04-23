@@ -32,7 +32,7 @@ class SignOutTest extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(5000)
                 //2.退出
-                ->clickLink(account['SignOut'])
+                ->click(account['SignOut'])
                 ->pause(3000)
                 ->assertSee(false_login['false_assert']);
         });

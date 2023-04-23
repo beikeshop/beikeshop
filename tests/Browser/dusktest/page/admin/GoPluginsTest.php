@@ -27,9 +27,9 @@ class GoPluginsTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.插件市场
-                ->clickLink(admin_top['plugins_market'])
+                ->click(admin_top['plugins_market'])
                 ->pause(2000)
-                //3.切换到第二个窗口并获取断言
+                //3.根据地址获取断言
                 ->assertPathIs(admin_assert['plugins_assert'])
 ;
             ;

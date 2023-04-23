@@ -10,13 +10,16 @@ const order_details = [//订单详情页
 //    "paid"=>".el-select-dropdown__item",//已支付
     "paid"=>".el-scrollbar__view.el-select-dropdown__list li:nth-child(1)",//已支付
     "cancel"=>".el-scrollbar__view.el-select-dropdown__list li:nth-child(2)",//已取消
-    "alter_btn"=>"#app > form > div:nth-child(5) > div > button > span",
+    "alter_btn"=>"#app > form > div:nth-child(5) > div > button > span",//更新状态按钮
     "Shipped"=>".el-scrollbar__view.el-select-dropdown__list li:nth-of-type(2)",//已发货
     "express_btn"=>"#app > form > div:nth-child(3) > div > div > div > span > span > i",//快递下拉按钮
-    //
-    "express_1"=>".el-scrollbar__view.el-select-dropdown__list:nth-of-type(2) > ul > li:nth-child(1)",//选择第一个快递
+    "Completed"=>".el-scrollbar__view.el-select-dropdown__list li:nth-child(1)",//已支付//
+
+    "express_1"=>".el-scrollbar__view.el-select-dropdown__list",//选择第一个快递
     "order_number"=>"#app > form > div:nth-child(4) > div > div > input",//订单号
     "submit"=>"#app > form > div:nth-child(7) > div > button",//提交按钮
+    "submit_btn2"=>"#app > form > div:nth-child(5) > div > button",//提交按钮
+    //#app > form > div:nth-child(5) > div > button
     ""=>"",
 ];
 

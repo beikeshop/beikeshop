@@ -19,19 +19,14 @@ const index_top = [
 ];
 const index_cart = [
     "cart_product_text" => "#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > a",
-    "cart_icon"=>"",//购物车图标
-//    "cart_icon"=>".navbar-nav.flex-row li:nth-child(4)",//购物车图标
+    "cart_icon"=>".nav-link.position-relative",//购物车图标
     "product_text"=>"#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > a",//购物车内商品名字
     "Delete_btn" => "#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > div.product-bottom.d-flex.justify-content-between.align-items-center > span", //删除按钮
     "product_num"=>"#offcanvas-right-cart > div.offcanvas-footer > div.d-flex.justify-content-between.align-items-center.mb-2.p-3.bg-light.top-footer > div:nth-child(2) > strong:nth-child(2) > span",
     "cart_Checkout"=>"#offcanvas-right-cart > div.offcanvas-footer > div.p-4 > a.btn.w-100.fw-bold.btn-dark.to-checkout",
 ];
 const index_login = [
-    "login_icon"=>".navbar-nav.flex-row li:nth-child(3)",//购物车图标
-    "product_text"=>"#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > a",//购物车内商品名字
-    "Delete_btn" => "#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > div.product-bottom.d-flex.justify-content-between.align-items-center > span", //删除按钮
-    "product_num"=>"#offcanvas-right-cart > div.offcanvas-footer > div.d-flex.justify-content-between.align-items-center.mb-2.p-3.bg-light.top-footer > div:nth-child(2) > strong:nth-child(2) > span",
-    "cart_Checkout"=>"#offcanvas-right-cart > div.offcanvas-footer > div.p-4 > a.btn.w-100.fw-bold.btn-dark.to-checkout",
+    "login_icon"=>".navbar-nav.flex-row li:nth-child(3)",//登录图标
 ];
 
 

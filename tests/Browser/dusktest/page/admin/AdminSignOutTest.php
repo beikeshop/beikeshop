@@ -33,8 +33,8 @@ class AdminSignOutTest extends DuskTestCase
                 //2.退出
                 ->clickLink(admin_top['root'])
                 ->pause(2000)
-                ->clickLink(admin_top['sign_out'])
-                ->pause(3000)
+                ->click(admin_top['sign_out'])
+                ->pause(10000)
                 ->assertSee(admin_login['tltle']);
 //                ->assertSee(true_login['assert']);
         });

@@ -27,7 +27,7 @@ class AddressTest extends DuskTestCase
                 ->press(login['login_btn'])
                 ->pause(5000)
                 //2.点击address
-                ->clickLink(address['go_address'])
+                ->click(account['go_address'])
                 //3.点击添加地址
                 ->press(address['add_btn'])
                 ->pause(3000)

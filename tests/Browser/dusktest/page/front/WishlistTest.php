@@ -29,7 +29,7 @@ class WishlistTest extends DuskTestCase
                 ->pause(2000)
 
                 //2.点击home跳转到首页
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 ->pause(2000)
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(index['product_img'])
@@ -46,10 +46,10 @@ class WishlistTest extends DuskTestCase
                 ->click(index_top['wishlist_btn'])
                 ->pause(1000)
                 //7.点击查看详情按钮
-                ->clickLink(Wishlist['Check_Details'])
+                ->click(Wishlist['Check_Details'])
                 ->pause(1000)
                 //8.断言
-                ->assertUrlIs($ProductUrl,$browser->driver->getCurrentURL())
+                ->assertVisible($ProductUrl,$browser->driver->getCurrentURL())
                   ;
         });
     }
