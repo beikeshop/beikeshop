@@ -18,7 +18,6 @@ class CustomerRecycleTest extends DuskTestCase
 
 
 
-//场景1 email不合法
 
    public function testEmptyRecycle()
    {
@@ -31,7 +30,7 @@ class CustomerRecycleTest extends DuskTestCase
                ->type(admin_login['login_pwd'], admin_true_login['password'])
                ->press(admin_login['login_btn'])
                ->pause(2000)
-               ->clickLink(admin_top['mg_customers'])
+               ->click(admin_top['mg_customers'])
                //2.点击回收站
                ->clickLink(customer_left['re_station']);
                $customer_text=$browser->text(empty_recycle['customer_text']);

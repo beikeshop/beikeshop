@@ -1,5 +1,7 @@
 <?php
-
+const common = [
+    "save_btn"=>".btn.btn-lg.btn-primary.submit-form"
+];
 
 const system_set = [
     "basic_set"=>".nav.nav-tabs.nav-bordered.mb-5 li:nth-child(1)",//基础设置
@@ -9,6 +11,8 @@ const system_set = [
     "express_set"=>".nav.nav-tabs.nav-bordered.mb-5 li:nth-child(5)",//快递公司
     "advanced_filter"=>".nav.nav-tabs.nav-bordered.mb-5 li:nth-child(6)",//高级筛选
     "email_set"=>".nav.nav-tabs.nav-bordered.mb-5 li:nth-child(7)",//邮件设置
+    "close_visitor_checkout"=>"#tab-checkout > div:nth-child(1) > div > div > div:nth-child(2) > label",//游客结账  禁用
+    "open_visitor_checkout"=>"#guest_checkout-1",//游客结账  启用
 ];
 const express_set = [  //快递公司
     "add_btn"=>".bi.bi-plus-circle.cursor-pointer.fs-4",//加号

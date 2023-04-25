@@ -31,7 +31,7 @@ class CusEmptyRecycleTest extends DuskTestCase
                ->type(admin_login['login_pwd'], admin_true_login['password'])
                ->press(admin_login['login_btn'])
                ->pause(2000)
-               ->clickLink(admin_top['mg_customers'])
+               ->click(admin_top['mg_customers'])
                //2.点击回收站
                ->clickLink(customer_left['re_station'])
                //3.点击清空回收站

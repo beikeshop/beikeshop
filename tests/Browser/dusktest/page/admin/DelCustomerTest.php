@@ -37,7 +37,6 @@ class DelCustomerTest extends DuskTestCase
                ->clickLink(admin_top['mg_customers']);
                $customer_text=$browser->text(customer_list['get_assert']);
                echo $customer_text;
-               //2.删除按钮
                $browser->press(customer_list['del_customer'])
                //确认
                ->press(customer_list['sure_btn']);

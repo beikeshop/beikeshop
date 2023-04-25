@@ -49,7 +49,7 @@ class WishlistTest extends DuskTestCase
                 ->click(Wishlist['Check_Details'])
                 ->pause(1000)
                 //8.断言
-                ->assertVisible($ProductUrl,$browser->driver->getCurrentURL())
+                ->assertUrlIs($ProductUrl,$browser->driver->getCurrentURL())
                   ;
         });
     }

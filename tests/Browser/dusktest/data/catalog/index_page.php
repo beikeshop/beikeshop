@@ -6,11 +6,17 @@ const index = [
     "address_btn" => "#checkout-address-app > div.checkout-black > div.addresses-wrap > div > div > div > button", //添加地址
     "login_text" => "Home",
     "right_icon"=>".navbar-nav flex-row",
+    "top_Sports"=>".navbar-nav.mx-auto li:nth-child(1)",
+    "top_Fashion"=>".navbar-nav.mx-auto li:nth-child(2)",
+    "top_Digital"=>".navbar-nav.mx-auto li:nth-child(3)",
+    "top_Hot"=>".navbar-nav.mx-auto li:nth-child(4)",
+    "top_Brand"=>".navbar-nav.mx-auto li:nth-child(5)",
+    "top_Latest_Products"=>".navbar-nav.mx-auto li:nth-child(6)",
 ];
 const index_top = [
 //    "wishlist_btn" => "",//收藏商品图标
     "wishlist_btn" => ".navbar-nav.flex-row li:nth-child(2)",//收藏商品图标
-    "top_Sports"=>"Sports",
+
     "buy_btn" => "#product-top > div:nth-child(2) > div > div.quantity-btns > button.btn.btn-dark.ms-3.fw-bold",//购买按钮
     "address_btn" => "#checkout-address-app > div.checkout-black > div.addresses-wrap > div > div > div > button", //添加地址
     "login_text" => "Home",

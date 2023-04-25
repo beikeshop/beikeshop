@@ -22,10 +22,10 @@ require_once(dirname(__FILE__) . '/../../data/admin/order_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
 require_once(dirname(__FILE__) . '/../../data/admin/express.php');
 
-//已注册客户且有地址，直接购买商品
-class AlterOrderStationTest extends DuskTestCase
+////前台下单，后台取消
+class CancelOrderTest extends DuskTestCase
 {
-    public function testAlterOrderStation()
+    public function testCancelOrder()
     {
         $this->browse(function (Browser $browser)
         {
@@ -38,7 +38,7 @@ class AlterOrderStationTest extends DuskTestCase
                 //去往前台
                 ->clicklink(admin_top['root'])
                 ->pause(3000)
-                ->clickLink(admin_top['go_catalog'])
+                ->click(admin_top['go_catalog'])
                 ->pause(2000)
                 //切换到前台下单
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
@@ -49,7 +49,7 @@ class AlterOrderStationTest extends DuskTestCase
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
                 ->pause(5000)
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 //3.向下滑动页面直到找到商品
                 ->pause(2000)
                 ->scrollIntoView(index['product_img'])
@@ -83,7 +83,7 @@ class AlterOrderStationTest extends DuskTestCase
                 ->press(order_details['pull_btn'])
                 //修改状态为已支付
                 ->pause(2000)
-                ->click(order_details['paid'])
+                ->click(order_details['cancel'])
                 ->press(order_details['alter_btn'])
                 ->pause(3000)
             //切换到前台
@@ -91,36 +91,10 @@ class AlterOrderStationTest extends DuskTestCase
                 $browser->pause(3000)
                 //刷新页面
                 ->refresh()
-                ->pause(5000);
-                // 断言是否已支付
-                 $text = $browser->text(get_order_status['status_text']);
-                $browser->assertSeeIn($text,ca_order_status['paid'])
-            //切换到后台，将状态改为已发货
-                ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
-                $browser->pause(2000)
-                ->press(order_details['pull_btn'])
-                //修改状态为已支付
-                ->pause(2000)
-                ->click(order_details['paid'])
-                ->press(order_details['express_btn'])
-                //选择快递并填写订单号
-                ->pause(2000);
-                // 找到所有 class 为 el-scrollbar__view el-select-dropdown__list 的元素
-                $elements = $browser->elements(order_details['express_1']);
-                // 获取第二个元素
-                $secondElement = $elements[1];
-                // 找到第一个子元素并点击它
-                $secondElement->findElement(WebDriverBy::xpath('./*[1]'))->click();
-                $browser->type(order_details['order_number'], express['express_code'])
-                ->press(order_details['submit'])
-                ->pause(3000)
-            //切换到前台,断言是否已发货
-                ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->pause(3000)
-                ->refresh()
-                ->pause(4000);
-                $text = $browser->text(get_order_status['status_text']);
-                $browser->assertSeeIn($text,ca_order_status['Shipped'])
+                ->pause(5000)
+                // 断言是否已取消
+                ->assertSeeIn(get_order_status['status_text'],ca_order_status['Cancelled'])
+
                     ;
 
 

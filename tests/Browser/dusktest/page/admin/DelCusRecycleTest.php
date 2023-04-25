@@ -31,7 +31,7 @@ class DelCusRecycleTest extends DuskTestCase
                ->type(admin_login['login_pwd'], admin_true_login['password'])
                ->press(admin_login['login_btn'])
                ->pause(2000)
-               ->clickLink(admin_top['mg_customers'])
+               ->click(admin_top['mg_customers'])
                //先删除一个客户
                ->press(customer_list['del_customer'])
                ->press(customer_list['sure_btn'])

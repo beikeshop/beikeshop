@@ -16,3 +16,7 @@ const register = [
     "register_btn"=> "Register",
     "register_text"=> "Home",
 ];
+const iframe = [
+    "iframe_name"=>"#layui-layer-iframe1",
+];
+

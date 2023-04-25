@@ -18,8 +18,8 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\AddressTest.php');//添加地址
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\AddCartTest.php');//加入购物车
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\RemoveCartTest.php');//移除购物车
+    $suite->addTestFile('.\tests\Browser\dusktest\page\front\RemoveWishlistTest.php');//移除喜欢
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\WishlistTest.php');//加入喜欢
-//    $suite->addTestFile('.\tests\Browser\dusktest\page\front\RemoveWishlistTest.php');//移除喜欢
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\EditUserInfo.php');//修改个人信息
 //后台
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AdminLoginTest.php'); //后台登录
@@ -44,9 +44,10 @@ use PHPUnit\TextUI\DefaultResultPrinter;
 
 
 //前后台联测
-//场景1  前台下单，后台取消订单
-    $suite->addTestFile('.\tests\Browser\dusktest\page\front\OrderTest.php');//商品页下单
-    $suite->addTestFile('.\tests\Browser\dusktest\page\front\CartCheckoutTest.php');//购物车下单
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\AlterOrderStationTest.php');//商订单状态修改
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CloseVisiterCheckoutTest.php');//禁用游客结账
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\OpenVisiterCheckoutTest.php');//开启游客结账
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CreateCategoriesTest.php');//添加商品分类
     // 运行测试套件
     $result = $suite->run();
     // 输出测试结果

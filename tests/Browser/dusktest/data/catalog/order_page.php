@@ -12,7 +12,8 @@ const ca_order_status = [
     "Unpaid"=>"Unpaid",//待支付
     "Paid"=>"Paid",//已支付
     "Shipped"=>"Shipped",//已发货
-    "Completed"=>"Completed",//已完成
+    "Completed"=>"Completed",//已完成  Cancelled
+    "Cancelled"=>"Cancelled",//已完成  Cancelled
 ];
 const get_order_status = [
     "status_text"=>".table.table-borderless.mb-0 tbody tr:first-child td:nth-child(3)",//获取当前状态
