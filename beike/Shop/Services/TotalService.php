@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 
 class TotalService
 {
-    public const TOTAL_CODES = [
+    private const TOTAL_CODES = [
         'subtotal',
         'tax',
         'shipping',
@@ -92,16 +92,31 @@ class TotalService
      */
     public function getTotals(CheckoutService $checkout): array
     {
-        foreach (self::TOTAL_CODES as $code) {
-            $serviceName = Str::studly($code) . 'Service';
-            $service     = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+        $maps = $this->getTotalClassMaps();
+        foreach ($maps as $service) {
             if (! class_exists($service) || ! method_exists($service, 'getTotal')) {
                 continue;
             }
             $service::getTotal($checkout);
         }
 
-        return $this->totals;
+        return hook_filter('service.total.totals', $this->totals);
+    }
+
+    /**
+     * total 与类名 映射
+     *
+     * @return mixed
+     */
+    private function getTotalClassMaps()
+    {
+        $maps = [];
+        foreach (self::TOTAL_CODES as $code) {
+            $serviceName  = Str::studly($code) . 'Service';
+            $maps[$code] = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+        }
+
+        return hook_filter('service.total.maps', $maps);
     }
 
     /**
