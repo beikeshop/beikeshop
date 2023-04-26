@@ -15,30 +15,46 @@
     $data = $plugin['data'];
   @endphp
   <div class="card mb-4" id="app">
-    <div class="card-header"><h6 class="card-title">{{ __('admin/marketing.marketing_show') }}</h6></div>
+    <div class="card-header"><h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5></div>
     <div class="card-body">
-      <div class="d-lg-flex">
-        <div class="border wp-400 hp-400 d-flex justify-content-between align-items-center"><img src="{{ $data['icon_big'] }}" class="img-fluid"></div>
+      <div class="d-lg-flex plugin-info">
+        <div class="d-flex justify-content-between align-items-center plugin-icon-wrap">
+          <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
+          <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
+        </div>
         <div class="ms-lg-5 mt-2">
-          <h3 class="card-title mb-4">{{ $data['name'] }}</h3>
+          <h2 class="card-title mb-4">{{ $data['name'] }}</h2>
           <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
             <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span class="vr lh-1 bg-secondary"></span>
-            <div class="mx-3">{{ __('admin/marketing.last_update') }}：{{ $data['updated_at'] }}</div><span class="vr lh-1 bg-secondary"></span>
-            <div class="mx-3">{{ __('admin/marketing.text_version') }}：{{ $data['version'] }}</div>
+            <div class="mx-3">{{ __('page_category.views') }}：{{ $data['viewed'] }}</div><span class="vr lh-1 bg-secondary"></span>
+            <div class="mx-3">{{ __('admin/marketing.last_update') }}：{{ $data['updated_at'] }}</div><span class="lh-1 bg-secondary"></span>
+          </div>
+
+          <div class="mb-4">
+            <div class="mb-2 fw-bold">{{ __('product.price') }}：</div>
+            <div class="fs-3 fw-bold">{{ $data['price_format'] }}</div>
+          </div>
+
+          <div class="mb-4">
+            <div class="mb-2 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
+            <div>{{ $data['version'] }}</div>
           </div>
 
           <div class="mb-4">
             <div class="mb-2 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
             <div>{{ $data['version_name_format'] }}</div>
           </div>
+
           <div class="mb-4">
             <div class="mb-2 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
-            <div class="d-flex">
-              <div class="border wh-60 d-flex justify-content-between align-items-center"><img src="{{ $data['developer']['avatar'] }}" class="img-fluid"></div>
-              <div class="ms-3">
-                <div class="mb-2 fw-bold">{{ $data['developer']['name'] }}</div>
-                <div>{{ $data['developer']['email'] }}</div>
-              </div>
+            <div class="d-inline-block">
+              <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank" class="d-flex align-items-center text-dark">
+                <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
+                <div class="ms-2">
+                  <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
+                  <div>{{ $data['developer']['email'] }}</div>
+                </div>
+              </a>
             </div>
           </div>
 
@@ -51,11 +67,11 @@
                 <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
                 <div class="mb-4">
                   <el-radio-group v-model="payCode" size="small" class="radio-group">
-                    <el-radio class="rounded-0 me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}" class="img-fluid"></el-radio>
-                    <el-radio class="rounded-0" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
+                    <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}" class="img-fluid"></el-radio>
+                    <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
                   </el-radio-group>
                 </div>
-                <button class="btn btn-primary btn-lg" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }} ({{ $data['price_format'] }})</button>
+                <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }}</button>
               @endif
             @else
               <div class="alert alert-warning" role="alert">
@@ -95,7 +111,7 @@
 
   @if ($data['description'])
   <div class="card h-min-200">
-    <div class="card-header"><h6 class="card-title">{{ __('admin/marketing.download_description') }}</h6></div>
+    <div class="card-header"><h5 class="card-title">{{ __('admin/marketing.download_description') }}</h5></div>
     <div class="card-body">
       {!! $data['description'] !!}
     </div>

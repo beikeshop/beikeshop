@@ -4,7 +4,7 @@
 
 @section('page-title-right')
   @hookwrapper('admin.plugin.marketing')
-  <a href="{{ admin_route('marketing.index') }}" class="btn btn-outline-info">{{ __('admin/marketing.marketing_list') }}</a>
+  <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}" class="btn btn-outline-info">{{ __('common.get_more') }}</a>
   @endhookwrapper
 @endsection
 
@@ -13,7 +13,7 @@
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="mt-4 table-push" style="">
-        <table class="table">
+        <table class="table" v-if="plugins.length">
           <thead>
             <tr>
               <th>{{ __('admin/plugin.plugin_code') }}</th>
@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="plugin, index in plugins" :key="index" v-if="plugins.length">
+            <tr v-for="plugin, index in plugins" :key="index">
               <td>@{{ plugin.code }}</td>
               <td>@{{ plugin.type_format }}</td>
               <td>
@@ -54,6 +54,13 @@
             </tr>
           </tbody>
         </table>
+        <div v-else>
+          <x-admin-no-data>
+            <x-slot:text>
+              {{ __('common.no_data') }} <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}" ><i class="bi bi-link-45deg"></i> {{ __('common.get_more') }}</a>
+            </x-slot>
+          </x-admin-no-data>
+        </div>
       </div>
     </div>
   </div>

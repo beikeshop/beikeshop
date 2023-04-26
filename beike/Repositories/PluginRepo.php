@@ -190,20 +190,6 @@ class PluginRepo
     }
 
     /**
-     * Get plugin by code
-     *
-     * @param $code
-     * @return mixed
-     */
-    public static function getPlugin($code): mixed
-    {
-        $code    = Str::camel($code);
-        $plugins = self::getPluginsByCode();
-
-        return $plugins->get($code);
-    }
-
-    /**
      * 判断插件是否安装
      *
      * @param $code

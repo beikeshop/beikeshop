@@ -6,51 +6,39 @@
       </div>
     </div>
     <div class="header-right">
-      {{-- <ul class="navbar navbar-left">
-        @foreach ($links as $link)
-          <li class="nav-item {{ $link['active'] ? 'active' : '' }}"><a href="{{ $link['url'] }}" class="nav-link">{{ $link['title'] }}</a></li>
-        @endforeach
-      </ul> --}}
       <div class="search-wrap">
         <div class="input-wrap">
           <div class="search-icon"><i class="bi bi-search"></i></div>
-          <input type="text" class="form-control" placeholder="Search in front">
+          <input type="text" id="header-search-input" autocomplete="off" class="form-control" placeholder="{{ __('admin/common.header_search_input') }}">
           <button class="btn close-icon" type="button"><i class="bi bi-x-lg"></i></button>
         </div>
 
         <div class="dropdown-menu">
+          <div class="search-ing"><i class="el-icon-loading"></i></div>
+          <div class="dropdown-search">
+            <div class="dropdown-header fw-bold">{{ __('admin/common.header_search_title') }}</div>
+            <div class="common-links"></div>
+            <div class="header-search-no-data"><i class="bi bi-file-earmark"></i> {{ __('common.no_data') }}</div>
+          </div>
           <div class="dropdown-wrap">
-            <div class="link-item recent-search">
-              <div class="dropdown-header fw-bold mb-2">最近搜索</div>
-              <div class="recent-search-links">
-                <a href="{{ admin_route('design_menu.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.design_menu_index') }}</a>
-                <a href="{{ admin_route('languages.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.languages_index') }}</a>
-                <a href="{{ admin_route('currencies.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.currencies_index') }}</a>
-                <a href="{{ admin_route('plugins.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.plugins_index') }}</a>
+            @if ($historyLinks)
+              <div class="link-item recent-search">
+                <div class="dropdown-header fw-bold mb-2">{{ __('admin/common.recent_view') }}</div>
+                <div class="recent-search-links">
+                  @foreach ($historyLinks as $link)
+                    <a href="{{ $link['url'] }}"><i class="bi bi-search"></i> {{ $link['title'] }}</a>
+                  @endforeach
+                </div>
               </div>
-            </div>
-            <div class="dropdown-divider"></div>
+            @endif
             <div class="link-item">
-              <div class="dropdown-header fw-bold">常用链接</div>
+              <div class="dropdown-header fw-bold">{{ __('admin/common.common_link') }}</div>
               <div class="common-links">
-                <a class="dropdown-item" href="{{ admin_route('design.index') }}" target="_blank">
-                  <span><i class="bi bi-palette"></i></span> {{ __('admin/common.design_index') }}
-                </a>
-                <a class="dropdown-item" href="{{ admin_route('design_footer.index') }}" target="_blank">
-                  <span><i class="bi bi-palette"></i></span> {{ __('admin/common.design_footer_index') }}
-                </a>
-                <a class="dropdown-item" href="{{ admin_route('design_menu.index') }}">
-                  <span><i class="bi bi-list"></i></span> {{ __('admin/common.design_menu_index') }}
-                </a>
-                <a class="dropdown-item" href="{{ admin_route('languages.index') }}">
-                  <span><i class="bi bi-globe2"></i></span> {{ __('admin/common.languages_index') }}
-                </a>
-                <a class="dropdown-item" href="{{ admin_route('currencies.index') }}">
-                  <span><i class="bi bi-currency-dollar"></i></span> {{ __('admin/common.currencies_index') }}
-                </a>
-                <a class="dropdown-item" href="{{ admin_route('plugins.index') }}">
-                  <span><i class="bi bi-plug"></i></span> {{ __('admin/common.plugins_index') }}
-                </a>
+                @foreach ($commonLinks as $link)
+                  <a class="dropdown-item" href="{{ $link['url'] }}" target="{{ $link['blank'] ? '_blank' : '_self' }}">
+                    <span><i class="{{ $link['icon'] }}"></i></span> {{ $link['title'] }}
+                  </a>
+                @endforeach
               </div>
             </div>
           </div>
@@ -76,7 +64,7 @@
         @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
-            <span class="vip-text ms-1">@lang('admin/common.copyright_buy')</span>
+            @lang('admin/common.copyright_buy')
           </a>
         </li>
         @endhookwrapper
@@ -110,11 +98,21 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
               <li>
-                <a target="_blank" href="{{ shop_route('home.index') }}" class="dropdown-item"><i class="bi bi-send me-1"></i> @lang('admin/common.access_frontend')</a>
+                <a target="_blank" href="{{ shop_route('home.index') }}" class="dropdown-item py-2">
+                  <i class="bi bi-send me-1"></i> {{ __('admin/common.access_frontend') }}
+                </a>
               </li>
-              <li><a href="{{ admin_route('account.index') }}" class="dropdown-item"><i class="bi bi-person-circle"></i> {{ __('admin/common.account_index') }}</a></li>
+              <li>
+                <a href="{{ admin_route('account.index') }}" class="dropdown-item py-2">
+                  <i class="bi bi-person-circle me-1"></i> {{ __('admin/common.account_index') }}
+                </a>
+              </li>
               <li><hr class="dropdown-divider"></li>
-              <li><a href="{{ admin_route('logout.index') }}" class="dropdown-item"><i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}</a></li>
+              <li>
+                <a href="{{ admin_route('logout.index') }}" class="dropdown-item py-2">
+                  <i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}
+                </a>
+              </li>
             </ul>
           </div>
         </li>
@@ -140,45 +138,6 @@
   </div>
 </div>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas-mobile-menu">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title fw-bold" id="offcanvasWithBothOptionsLabel">{{ __('common.menu') }}</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body mobile-menu-wrap">
-    @if (is_mobile())
-      <ul class="mobile-navbar">
-        @foreach ($links as $link)
-          <li class="nav-item {{ $link['active'] ? 'active' : '' }}">
-            <a href="{{ $link['url'] }}" class="nav-link">{{ $link['title'] }}</a>
-            @if ($link['active'])
-            <x-admin-sidebar />
-            @endif
-          </li>
-        @endforeach
-      </ul>
-    @endif
-  </div>
-
-  <div class="offcanvas-footer">
-    <div class="offcanvas-btns">
-      <div class="lang">
-        <div class="dropdown">
-          <a class="nav-link dropdown-toggle text-dark" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $admin_language['name'] }}</a>
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            @foreach ($admin_languages as $language)
-            <li><a href="{{ admin_route('edit.locale', ['locale' => $language['code']]) }}" class="dropdown-item">{{ $language['name'] }}</a></li>
-            @endforeach
-          </ul>
-        </div>
-      </div>
-      <div class="user">
-        <a href="{{ admin_route('logout.index') }}" class="nav-link text-dark"><i class="bi bi-box-arrow-left"></i> {{ __('common.sign_out') }}</a>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="update-pop p-3" style="display: none">
   <div class="mb-4 fs-5 fw-bold text-center">{{ __('admin/common.update_title') }}</div>
   <div class="py-3 px-4 bg-light mx-3 lh-lg mb-4">
@@ -192,23 +151,3 @@
     <a href="https://beikeshop.com/download" target="_blank" class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
   </div>
 </div>
-
-
-@push('footer')
-  <script>
-    let updatePop = null;
-
-    $('.update-btn').click(function() {
-      updatePop = layer.open({
-        type: 1,
-        title: '{{ __('common.text_hint') }}',
-        area: ['400px'],
-        content: $('.update-pop'),
-      });
-    });
-
-    $('.update-pop .btn-outline-secondary').click(function() {
-      layer.close(updatePop)
-    });
-  </script>
-@endpush

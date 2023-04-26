@@ -6,7 +6,10 @@
 
 @section('content')
   <div id="customer-app" class="card h-min-600">
-    <div class="card-header"><h5 class="card-title">{{ __('admin/theme.page_title') }}</h5></div>
+    <div class="card-header d-flex justify-content-between align-items-start">
+      <h5 class="card-title">{{ __('admin/theme.page_title') }}</h5>
+      <a href="{{ admin_route('marketing.index') }}?type=theme" class="btn btn-outline-info">{{ __('common.get_more') }}</a>
+    </div>
     <div class="card-body">
       <div class="theme-wrap">
         <div class="row">

@@ -10,6 +10,7 @@
  */
 
 return [
+    'product_total' => 'Product Total',
     'customer_view' => 'visite degli utenti',
     'order_total'   => 'importo dell\'ordine',
     'customer_new'  => 'Aggiungi utente',

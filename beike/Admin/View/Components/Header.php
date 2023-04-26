@@ -3,6 +3,7 @@
 namespace Beike\Admin\View\Components;
 
 use Beike\Models\AdminUser;
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 
 class Header extends Component
@@ -10,6 +11,10 @@ class Header extends Component
     public array $links = [];
 
     private ?AdminUser $adminUser;
+
+    public array $commonLinks;
+
+    public array $historyLinks;
 
     /**
      * Create a new component instance.
@@ -28,81 +33,102 @@ class Header extends Component
      */
     public function render()
     {
-        $sidebar       = new Sidebar();
-        $preparedMenus = $this->prepareMenus();
-
-        foreach ($preparedMenus as $menu) {
-            $menuCode = $menu['code'] ?? '';
-            if ($menuCode) {
-                $routes          = [];
-                $subRoutesMethod = "get{$menu['code']}SubRoutes";
-                if (method_exists($sidebar, $subRoutesMethod)) {
-                    $sideMenuRoutes = $sidebar->{"get{$menu['code']}SubRoutes"}();
-                    foreach ($sideMenuRoutes as $route) {
-                        $routeFirst  = explode('.', $route['route'])[0] ?? '';
-                        $routes[]    = 'admin.' . $route['route'];
-                        $routes[]    = 'admin.' . $routeFirst . '.edit';
-                        $routes[]    = 'admin.' . $routeFirst . '.show';
-                    }
-                }
-
-                $data = [
-                    'menu_code' => $menuCode,
-                    'routes'    => $routes,
-                ];
-                $filterRoutes = hook_filter('admin.components.header.routes', $data);
-                $routes       = $filterRoutes['routes'] ?? [];
-                if (empty($routes)) {
-                    $is_route = equal_route('admin.' . $menu['route']);
-                } else {
-                    $is_route = equal_route($routes);
-                }
-            } else {
-                $is_route = equal_route('admin.' . $menu['route']);
-            }
-
-            $this->addLink($menu['name'], $menu['route'], $is_route);
-        }
+        $this->commonLinks  = $this->getCommonLinks();
+        $this->historyLinks = $this->handleHistoryLinks();
 
         return view('admin::components.header');
     }
 
     /**
-     * 默认菜单
+     * 常用功能链接
      */
-    private function prepareMenus()
+    private function getCommonLinks()
     {
-        $menus = [
-            ['name' => trans('admin/common.home'), 'route' => 'home.index', 'code' => ''],
-            ['name' => trans('admin/common.order'), 'route' => 'orders.index', 'code' => 'Order'],
-            ['name' => trans('admin/common.product'), 'route' => 'products.index', 'code' => 'Product'],
-            ['name' => trans('admin/common.customer'), 'route' => 'customers.index', 'code' => 'Customer'],
-            ['name' => trans('admin/common.page'), 'route' => 'pages.index', 'code' => 'Page'],
-            ['name' => trans('admin/common.setting'), 'route' => 'settings.index', 'code' => 'Setting'],
+        $commonLinks = [
+            ['route' => 'design.index', 'icon'  => 'bi bi-palette', 'blank' => true],
+            ['route' => 'design_footer.index', 'icon' => 'bi bi-palette', 'blank' => true],
+            ['route' => 'design_menu.index', 'icon' => 'bi bi-list', 'blank' => false],
+            ['route' => 'languages.index', 'icon' => 'bi bi-globe2', 'blank' => false],
+            ['route' => 'currencies.index', 'icon' => 'bi bi-currency-dollar', 'blank' => false],
+            ['route' => 'plugins.index', 'icon' => 'bi bi-plug', 'blank' => false],
         ];
 
-        return hook_filter('admin.header_menus', $menus);
+        foreach ($commonLinks as $index => $commonLink) {
+            $route                        = $commonLink['route'];
+            $permissionRoute              = str_replace('.', '_', $route);
+            $commonLinks[$index]['url']   = admin_route($route);
+            $commonLinks[$index]['title'] = trans("admin/common.{$permissionRoute}");
+        }
+
+        return hook_filter('admin.components.header.common_links', $commonLinks);
     }
 
     /**
-     * 添加后台顶部菜单链接
-     *
-     * @param $title
-     * @param $route
-     * @param false $active
+     * 处理最近访问链接
      */
-    private function addLink($title, $route, bool $active = false)
+    private function handleHistoryLinks(): array
     {
-        $permissionRoute = str_replace('.', '_', $route);
-        if ($this->adminUser->cannot($permissionRoute) && $route != 'home.index') {
-            return;
+        $links     = [];
+        $histories = $this->getHistoryRoutesFromSession();
+        foreach ($histories as $history) {
+            $routeName       = str_replace('admin.', '', $history);
+            $permissionRoute = str_replace('.', '_', $routeName);
+
+            if (stripos($routeName, 'plugins.') !== false) {
+                $type  = str_replace('plugins.', '', $routeName);
+                if ($type == 'index') {
+                    $title = trans("admin/common.{$permissionRoute}");
+                } else {
+                $title = trans("admin/plugin.{$type}");
+                }
+            } else {
+                $title = trans("admin/common.{$permissionRoute}");
+            }
+
+            if (stripos($title, 'admin/common.') !== false) {
+                $tempRouteName = str_replace('s.index', '', $routeName);
+                $title         = trans("admin/common.{$tempRouteName}");
+            }
+
+            try {
+                $url = admin_route($routeName);
+            } catch (\Exception $e) {
+                $url = '';
+            }
+            if (empty($url)) {
+                continue;
+            }
+
+            $links[] = [
+                'route' => $routeName,
+                'url'   => $url,
+                'title' => $title,
+            ];
         }
 
-        $url           = admin_route($route);
-        $this->links[] = [
-            'title'  => $title,
-            'url'    => $url,
-            'active' => $active,
-        ];
+        return $links;
+    }
+
+    /**
+     * 从 session 获取最近访问的链接
+     *
+     * @return array
+     */
+    private function getHistoryRoutesFromSession(): array
+    {
+        $histories = session('histories', []);
+
+        $currentRoute = request()->route()->getName();
+        $routeName    = str_replace('admin.', '', $currentRoute);
+
+        if (in_array($routeName, ['edit.locale', 'home.menus'])) {
+            return $histories;
+        }
+
+        array_unshift($histories, $currentRoute);
+        $histories = array_slice(array_unique($histories), 0, 6);
+        session(['histories' => $histories]);
+
+        return $histories;
     }
 }

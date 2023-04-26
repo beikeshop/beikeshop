@@ -33,6 +33,111 @@ class PluginController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function shipping()
+    {
+        $type            = 'shipping';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function payment()
+    {
+        $type            = 'payment';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function total()
+    {
+        $type            = 'total';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function social()
+    {
+        $type            = 'social';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function feature()
+    {
+        $type            = 'feature';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function language()
+    {
+        $type            = 'language';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function theme()
+    {
+        $type            = 'theme';
+        $plugins         = app('plugin')->getPlugins();
+        $plugins         = $plugins->where('type', $type);
+        $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
+        $data['type']    = $type;
+        $data            = hook_filter('admin.plugin.index.data', $data);
+
+        return view('admin::pages.plugins.index', $data);
+    }
+
+    /**
      * 上传插件
      */
     public function import(Request $request): array

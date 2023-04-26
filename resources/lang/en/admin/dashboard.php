@@ -10,6 +10,7 @@
  */
 
 return [
+    'product_total' => 'Product Total',
     'customer_view' => 'Customer View',
     'order_total'   => 'Order Total',
     'customer_new'  => 'Customer New',

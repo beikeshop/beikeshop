@@ -135,11 +135,20 @@
         border-radius: 0.5rem;
         // box-shadow: 0 0.6125rem 2.5rem 0.6125rem rgba(140,152,164,.175);
         box-shadow: 0 0.8rem 2.5rem 0.6125rem rgba(140, 152, 164, 0.286);
-        .dropdown-wrap {
-          max-height: 380px;
+
+        .search-ing {
+          height: 80px;
+          text-align: center;
+          line-height: 80px;
+          display: none;
+        }
+
+        .dropdown-search {
+          padding: 0 0.5rem;
+          max-height: 460px;
           overflow-y: auto;
           overflow-x: hidden;
-          padding: 0 0.5rem;
+          display: none;
 
           // 修改滚动条样式
           &::-webkit-scrollbar {
@@ -154,7 +163,34 @@
           }
         }
 
+        .header-search-no-data {
+          display: none;
+          height: 80px;
+          text-align: center;
+          line-height: 80px;
+        }
+
+        .dropdown-wrap {
+          padding: 0 0.5rem;
+        }
+
         .link-item {
+          &::after {
+            content: '';
+            display: block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            width: calc(100% + 1rem);
+            margin-left: -0.5rem;
+          }
+
+          &:last-of-type:after {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+          }
+
           a {
             color: #333;
           }
@@ -181,6 +217,7 @@
             padding: 0 1rem;
             display: flex;
             flex-wrap: wrap;
+            margin-right: -0.6rem;
 
             a {
               background-color: rgba(19,33,68,.1);
@@ -188,7 +225,7 @@
               padding: 0.3rem 0.7rem;
               font-size: .75rem;
               margin-bottom: 0.5rem;
-              margin-right: 0.3rem;
+              margin-right: 0.6rem;
               &:hover {
                 background-color: $primary;
                 color: #fff;
@@ -205,8 +242,23 @@
 
         a.dropdown-item {
           border-radius: 0.3rem;
-          padding: 0.5rem 1rem;
-          &:hover {
+          padding: 0.5rem 1.2rem 0.5rem 1rem;
+          position: relative;
+
+          &.active {
+            &::after {
+              content: '\F131';
+              position: absolute;
+              right: 4px;
+              top: 50%;
+              color: #666;
+              margin-top: -9px;
+              font-family: 'bootstrap-icons';
+            }
+          }
+
+          &.active, &:hover {
+            color: #333;
             background-color: rgba(189, 197, 209, 0.2);
           }
         }
@@ -249,45 +301,6 @@
     }
 
     .navbar {
-      &.navbar-left {
-        li {
-          html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
-            padding: 0 1rem;
-          }
-
-          @media screen and (max-width: 1200px) {
-            html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] &, html[lang="ja"] & {
-              padding: 0 .2rem;
-            }
-          }
-
-          a.nav-link {
-            position: relative;
-
-            &:after {
-              content: '';
-              position: absolute;
-              left: 0;
-              display: none;
-              bottom: 0;
-              width: 100%;
-              height: 3px;
-              background-color: $primary;
-            }
-          }
-
-          &.active, &:hover {
-            font-weight: bold;
-
-            a {
-              &:after {
-                display: block;
-              }
-            }
-          }
-        }
-      }
-
       &.navbar-right {
         > li {
           &.vip-serve {
@@ -397,92 +410,6 @@
           font-size: 1.2rem;
           line-height: 1;
         }
-      }
-    }
-  }
-}
-
-#offcanvas-mobile-menu {
-  width: 80%;
-
-  .offcanvas-header {
-    padding: 10px 20px 10px 10px;
-    border-bottom: 1px solid #e5e5e5;
-
-  }
-
-  .mobile-menu-wrap {
-    padding: 0;
-
-    ul.mobile-navbar {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 0;
-
-      > .nav-item {
-        &.active {
-          background-color: #f9f9f9;
-
-           & > a {
-            background-color: #e2e2e2;
-          }
-        }
-      }
-
-      .nav-link:active {
-        background-color: #eee;
-      }
-
-      .navbar-nav {
-        a {
-          padding-left: 36px;
-        }
-
-        >.nav-item {
-          &:last-of-type {
-            border: none;
-          }
-
-          &.active {
-             & > a {
-              background-color: #eee;
-            }
-          }
-        }
-      }
-    }
-
-    .navbar-nav,.mobile-navbar {
-      .nav-item {
-        border-bottom: 1px solid #e5e5e5;
-
-        a {
-          color: var(--bs-body-color);
-          flex: 1;
-          height: 44px;
-          padding-left: 20px;
-          display: flex;
-          align-items: center;
-        }
-      }
-    }
-  }
-
-  .offcanvas-footer {
-    .offcanvas-btns {
-      display: flex;
-      justify-content: space-between;
-
-      .nav-link{
-        padding: 10px;
-      }
-
-      .dropdown-toggle::after {
-        color: var(--bs-body-color);
-      }
-
-      .dropdown-menu {
-        border-color: rgba(0, 0, 0, .2);;
       }
     }
   }

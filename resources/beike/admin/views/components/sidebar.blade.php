@@ -1,16 +1,31 @@
-<ul class="list-unstyled navbar-nav">
-  @foreach ($links as $link)
-    @if (is_mobile())
-      @if (!$link['hide_mobile'])
+<aside class="sidebar-box navbar-expand-xs border-radius-xl">
+  <div class="sidebar-info">
+    <div class="left">
+      <ul class="list-unstyled navbar-nav">
+        @foreach ($links as $link)
         <li class="nav-item {{ $link['active'] ? 'active' : '' }}">
-          <a target="{{ $link['new_window'] ? '_blank' : '_self' }}" class="nav-link" href="{{ $link['url'] }}"> {{ $link['title'] }}</a>
+          <a target="{{ $link['blank'] ? '_blank' : '_self' }}" class="nav-link" href="{{ $link['url'] }}">
+            <i class="{{ $link['icon'] }}"></i> <span>{{ $link['title'] }}</span>
+          </a>
         </li>
-      @endif
-    @else
-      <li class="nav-item {{ $link['active'] ? 'active' : '' }}">
-        <a target="{{ $link['new_window'] ? '_blank' : '_self' }}" class="nav-link" href="{{ $link['url'] }}"> {{ $link['title'] }}</a>
-      </li>
+        @endforeach
+      </ul>
+    </div>
+
+    @if ($currentLink['children'] ?? [])
+      <div class="right">
+        <h4 class="title">{{ $currentLink['title'] }}</h4>
+        <ul class="list-unstyled navbar-nav">
+          @foreach ($currentLink['children'] as $link)
+          <li class="nav-item {{ $link['active'] ? 'active' : '' }}">
+            <a target="{{ $link['blank'] ? '_blank' : '_self' }}" class="nav-link" href="{{ $link['url'] }}">
+              {{ $link['title'] }}
+            </a>
+          </li>
+          @endforeach
+        </ul>
+      </div>
     @endif
-  @endforeach
-</ul>
+  </div>
+</aside>
 

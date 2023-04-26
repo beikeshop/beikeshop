@@ -63,11 +63,13 @@
 
         <div class="d-flex justify-content-between my-4">
           @if ($type != 'trashed')
-            <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
-              <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
-            </a>
+          <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
+            <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
+          </a>
           @else
-            <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
+            @if ($products->total())
+              <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
+            @endif
           @endif
 
           @if ($type != 'trashed' && $products->total())

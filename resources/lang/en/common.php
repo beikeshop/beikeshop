@@ -78,6 +78,7 @@ return [
     'text_to'              => 'To',
     'batch_setting'        => 'Batch setting',
     'show_all'             => 'View all',
+    'get_more'             => 'Get More',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

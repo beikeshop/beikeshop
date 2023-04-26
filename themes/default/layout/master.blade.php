@@ -14,7 +14,7 @@
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <link rel="shortcut icon" href="{{ image_origin(system_setting('base.favicon')) }}">
-  <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ mix('/build/beike/shop/'.system_setting('base.theme').'/js/app.js') }}"></script>
   <link rel="stylesheet" type="text/css" href="{{ mix('/build/beike/shop/'.system_setting('base.theme').'/css/app.css') }}">
   @if (system_setting('base.head_code'))

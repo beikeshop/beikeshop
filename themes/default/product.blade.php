@@ -415,5 +415,14 @@
       $('#zoom').trigger('zoom.destroy');
       $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
     });
+
+    const selectedVariantsIndex = app.selectedVariantsIndex;
+    const variables = app.source.variables;
+
+    const selectedVariants = variables.map((variable, index) => {
+      return variable.values[selectedVariantsIndex[index]]
+    });
+
+    console.log(selectedVariants);
   </script>
 @endpush

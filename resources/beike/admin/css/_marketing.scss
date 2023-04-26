@@ -37,6 +37,33 @@ body.page-marketing {
 }
 
 body.page-marketing-info {
+  .plugin-info {
+    align-items: flex-start;
+  }
+
+  .plugin-icon-wrap {
+    position: relative;
+
+    .plugin-icon {
+      border-radius: 6%;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    }
+
+    .plugin-icon-shadow {
+      bottom: -14px;
+      filter: blur(10px);
+      left: 50%;
+      border-radius: 4%;
+      transform: translateX(-50%);
+      width: 88%;
+      opacity: 50%;
+      position: absolute;
+      // z-index: -1;
+    }
+  }
+
   .radio-group {
     > .el-radio {
       height: auto;

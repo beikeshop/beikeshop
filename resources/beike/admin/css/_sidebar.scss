@@ -8,61 +8,177 @@
  * @LastEditTime  2022-09-16 19:05:52
  */
 
-.sidebar {
-  background: #293042;
+.sidebar-box {
   direction: ltr;
-  width: 220px;
   transition: all .2s ease-in-out;
   background: #fff;
-  border-right: 1px solid #f1f1f1;
-  html[lang="zh_cn"] &, html[lang="zh_hk"] &, html[lang="en"] & {
-    width: 190px;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    visibility: hidden;
+    z-index: 99;
+    height: calc(100% - 54px);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
-  // @media screen and (max-width: 991px) {
-  //   position: fixed;
-  //   top: 0;
-  //   bottom: 0;
-  // }
+  &.active {
+    @media (max-width: 768px) {
+      visibility: visible;
+    }
 
-  .navbar-nav {
-    > li.nav-item {
-      position: relative;
+    .sidebar-info {
+      left: 0;
+    }
+  }
 
-      a {
-        padding: .7rem 1rem .7rem 1.5rem;
-        // color: rgba(58,65,111, .9);
-        color: #333;
-        transition: all .1s ease-in-out;
+  .sidebar-info {
+    display: flex;
+    height: 100%;
+    transition: all .2s ease-in-out;
 
-        i {
-          margin-right: 7px;
+    @media (max-width: 768px) {
+      position: absolute;
+      left: -100%;
+      bottom: 0;
+      z-index: 999;
+      border-top: 1px solid #eee;
+    }
+
+    > .left {
+      padding-top: 8px;
+      min-width: 92px;
+      background-color: #eff3f7;
+      max-width: 130px;
+
+      // 背景图
+      background-image: url('/image/admin-menu.png');
+      background-repeat: no-repeat;
+      background-position: bottom;
+      background-size: contain;
+
+      ul {
+        li {
+          position: relative;
+
+          a {
+            padding: 1rem .5rem 1rem .8rem;
+            color: #333;
+            display: flex;
+            text-decoration: none;
+            &::after {
+              content: '';
+              display: inline-block;
+              width: 3px;
+              height: 3px;
+            }
+
+            i {
+              margin-right: 7px;
+            }
+          }
+
+          &.active, &:hover {
+            background-color: #fff;
+            a {
+              font-weight: bold;
+              &::after {
+                display: none;
+              }
+            }
+
+            body.admin-home & {
+              background-color: #f9fbfd;
+            }
+
+            &:before, &:after {
+              display: block;
+            }
+          }
+
+          &:before, &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            overflow: hidden;
+            display: none;
+            background: radial-gradient(circle closest-side,transparent 0,transparent 50%,#fff 0) 200% 200%/400% 400%;
+          }
+
+          &:before {
+            top: -8px;
+          }
+
+          &:after {
+            bottom: -8px;
+            transform: scaleY(-1);
+            // transform:rotate(180deg);
+          }
         }
       }
+    }
 
-      &:hover {
-        background-color: #f4f4f4;
+    > .right {
+      min-width: 120px;
+      padding: 0 .5rem;
+      background-color: #fff;
+      overflow-y: auto;
+      max-width: 200px;
+
+      @media (min-width: 768px) {
+        border-right: 1px solid #f1f1f1;
       }
 
-      &.active {
-        a {
-          // color: $primary;
-          background-color: #eee;
+      > .title {
+        padding: 1rem;
+        margin-top: .3rem;
+        margin-bottom: 0;
+      }
+
+      .navbar-nav {
+        > li.nav-item {
+          position: relative;
+          margin-bottom: .7rem;
+
+          a {
+            padding: .5rem 1rem;
+            color: #333;
+            transition: all .1s ease-in-out;
+            border-radius: .3rem;
+
+            &:hover {
+              background-color: rgba(189, 197, 209, 0.2);
+            }
+
+            i {
+              margin-right: 7px;
+            }
+          }
+
+          &.active {
+            a {
+              // background-color: rgba(189, 197, 209, 0.2);
+              position: relative;
+              color: $primary;
+
+              &::after {
+                // content: "\F138";
+                content: "\F135";
+                position: absolute;
+                right: 0;
+                top: 50%;
+                line-height: 1;
+                margin-top: -6px;
+                font-family: "bootstrap-icons";
+              }
+            }
+          }
         }
       }
-
-      // &.active {
-      //   &:before {
-      //     content: '';
-      //     position: absolute;
-      //     left: 0;
-      //     top: 0;
-      //     width: 2px;
-      //     height: 100%;
-      //     z-index: 1;
-      //     background: $primary;
-      //   }
-      // }
     }
   }
 }

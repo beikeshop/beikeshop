@@ -23,6 +23,7 @@ return [
 
     // header
     'home'                             => 'Home',
+    'home_index'                       => 'Home',
     'order'                            => 'Orders',
     'rma'                              => 'RMA',
     'rma_reason'                       => 'RMA Reason',
@@ -37,6 +38,7 @@ return [
     'page_category'                    => 'Page Category',
     'setting'                          => 'Settings',
     'plugin'                           => 'Plugin',
+    'design'                           => 'Design',
     'marketing'                        => 'Plugin Marketing',
     'admin_user'                       => 'Admin User',
     'admin_role'                       => 'Admin Role',
@@ -50,6 +52,10 @@ return [
     'file_manager'                     => 'File Manager',
     'access_frontend'                  => 'Frontend',
     'copyright_buy'                    => 'Copyright Buy',
+    'recent_view'                      => 'Recently Visited',
+    'common_link'                      => 'Common Links',
+    'header_search_input'              => 'Search Features',
+    'header_search_title'              => 'Search Results',
 
     // sidebar
     'account_index'                    => 'Personal Center',

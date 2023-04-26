@@ -12,7 +12,7 @@
   <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
-  <script src="{{ asset('vendor/bootstrap/5.1.3/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
@@ -31,9 +31,7 @@
   <x-admin-header />
 
   <div class="main-content">
-    <aside class="sidebar navbar-expand-xs border-radius-xl d-none d-lg-block">
-      <x-admin-sidebar />
-    </aside>
+    <x-admin-sidebar />
     <div id="content">
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <h5 class="page-title">@yield('title')</h5>
@@ -57,6 +55,7 @@
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
       error_form: '{{ __('common.error_form') }}',
+      text_hint: '{{ __('common.text_hint') }}',
     }
 
     const config = {

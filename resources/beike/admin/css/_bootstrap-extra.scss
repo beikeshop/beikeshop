@@ -60,12 +60,12 @@ hr.horizontal.dark {
     .nav-link {
       color: #6c757d;
       border: none;
-      padding: 0 .2rem 0.7rem;
+      padding: 0 .6rem 0.7rem;
 
       &.active {
-        // color: $primary;
+        color: $primary;
         // color: #12263f;
-        color: #1a1a1a;
+        // color: #1a1a1a;
         font-weight: bold;
         background-color: transparent;
         border-bottom: 2px solid $primary;
@@ -75,11 +75,13 @@ hr.horizontal.dark {
 }
 
 .card {
-  box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
-  border: none;
+  // box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
+  box-shadow: 0 0.375rem 0.75rem rgba(140,152,164,.075);
 
   .card-header {
-    padding: 1rem 1rem .3rem;
+    // padding: 1rem 1rem .3rem;
+    padding-top: 1.3rem;
+    padding-bottom: 0;
     background-color: #fff;
     font-weight: bold;
     // font-size: .8rem;
@@ -98,7 +100,7 @@ hr.horizontal.dark {
   }
 
   .card-body {
-    padding: 1rem;
+    // padding: 1rem;
   }
 }
 
@@ -238,4 +240,17 @@ table.table {
   background-repeat: no-repeat;
   background-position: right calc(0.375em + 0.1875rem) center;
   background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.input-for-group {
+  span.input-group-text {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  input {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -1px;
+  }
 }

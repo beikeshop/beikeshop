@@ -20,7 +20,7 @@ return [
     'get_token'                       => '点击获取 Token',
     'download_count'                  => '下载次数',
     'last_update'                     => '最后更新',
-    'text_version'                    => '版本',
+    'text_version'                    => '插件版本',
     'text_compatibility'              => '兼容性',
     'text_author'                     => '插件作者',
     'download_plugin'                 => '下载插件',

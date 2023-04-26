@@ -66,6 +66,7 @@ return [
     'favicon'                => 'favicon',
     'favicon_info'           => '显示在浏览器选项卡上的小图标，必须为PNG格式大小为：32*32',
     'placeholder_image'      => '占位图',
+    'placeholder_image_info' => '没有图片或找不到图片时显示的占位图片，推荐尺寸：500*500',
     'head_code'              => '插入代码',
     'head_code_info'         => '会将输入框中的代码插入到前端页面 head 中，可用于统计代码或者添加特殊插件等',
     'rate_api_key'           => '汇率 API KEY',

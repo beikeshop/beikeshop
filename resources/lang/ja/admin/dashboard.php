@@ -10,6 +10,7 @@
  */
 
 return [
+    'product_total' => 'Product Total',
     'customer_view' => 'ユーザーの訪問',
     'order_total'   => '注文金額',
     'customer_new'  => 'ユーザーを追加',

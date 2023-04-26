@@ -19,6 +19,7 @@ Route::prefix($adminName)
         Route::middleware('admin_auth:' . \Beike\Models\AdminUser::AUTH_GUARD)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
+                Route::get('/menus', [Controllers\HomeController::class, 'menus'])->name('home.menus');
 
                 //个人中心
                 Route::middleware('can:account_index')->get('account', [Controllers\AccountController::class, 'index'])->name('account.index');
@@ -160,6 +161,15 @@ Route::prefix($adminName)
                 Route::middleware('can:plugins_update_status')->put('plugins/{code}/status', [Controllers\PluginController::class, 'updateStatus'])->name('plugins.update_status');
                 Route::middleware('can:plugins_install')->post('plugins/{code}/install', [Controllers\PluginController::class, 'install'])->name('plugins.install');
                 Route::middleware('can:plugins_uninstall')->post('plugins/{code}/uninstall', [Controllers\PluginController::class, 'uninstall'])->name('plugins.uninstall');
+
+                // 插件分组
+                Route::middleware('can:plugins_index')->get('plugins/shipping', [Controllers\PluginController::class, 'shipping'])->name('plugins.shipping');
+                Route::middleware('can:plugins_index')->get('plugins/payment', [Controllers\PluginController::class, 'payment'])->name('plugins.payment');
+                Route::middleware('can:plugins_index')->get('plugins/total', [Controllers\PluginController::class, 'total'])->name('plugins.total');
+                Route::middleware('can:plugins_index')->get('plugins/social', [Controllers\PluginController::class, 'social'])->name('plugins.social');
+                Route::middleware('can:plugins_index')->get('plugins/feature', [Controllers\PluginController::class, 'feature'])->name('plugins.feature');
+                Route::middleware('can:plugins_index')->get('plugins/language', [Controllers\PluginController::class, 'language'])->name('plugins.language');
+                Route::middleware('can:plugins_index')->get('plugins/theme', [Controllers\PluginController::class, 'theme'])->name('plugins.theme');
 
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
