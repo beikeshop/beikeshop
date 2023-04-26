@@ -28,7 +28,7 @@
         </li>
         @endhookwrapper
 
-        @hookwrapper('admin.header.vip')
+        @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
             <span class="vip-text ms-1">@lang('admin/common.copyright_buy')</span>
