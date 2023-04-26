@@ -10,5 +10,5 @@
  */
 
 return [
-  'price_filter'          => '价格筛选',
+    'price_filter'          => '价格筛选',
 ];

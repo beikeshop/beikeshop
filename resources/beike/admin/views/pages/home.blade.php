@@ -13,18 +13,17 @@
     <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
-          <span>{{ __('admin/dashboard.customer_view') }}</span>
+          <span>{{ __('admin/dashboard.product_total') }}</span>
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
         </div>
         <div class="card-body">
-          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.customer_view') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">{{ $views['total'] }}</div>
+              <div class="fs-2 lh-1 fw-bold">{{ $products['total'] }}</div>
             </div>
-            {{-- <div><i class="fs-4 bi bi-cart"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">{{ $views['percentage'] }}%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">{{ $products['percentage'] }}%</span>
+            <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
@@ -35,14 +34,13 @@
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
         </div>
         <div class="card-body">
-          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.order_total') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="fs-2 lh-1 fw-bold">{{ $orders['total'] }}</div>
             </div>
-            {{-- <div><i class="fs-4 bi bi-journal-text"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">{{ $orders['percentage'] }}%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-success">{{ $orders['percentage'] }}%</span>
+            <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
@@ -53,14 +51,13 @@
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
         </div>
         <div class="card-body">
-          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.customer_new') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <div class="fs-2 lh-1 fw-bold">{{ $customers['total'] }}</div>
             </div>
-            {{-- <div><i class="fs-4 bi bi-person"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">{{ $customers['percentage'] }}%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">{{ $customers['percentage'] }}%</span>
+            <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>
@@ -71,15 +68,14 @@
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.yesterday') }}</span>
         </div>
         <div class="card-body">
-          {{-- <h6 class="text-uppercase text-black-50 mb-3">{{ __('admin/dashboard.order_amount') }}</h6> --}}
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
               <img src="https://beikeshop.com/install/install-enter.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="d-none">
               <div class="fs-2 lh-1 fw-bold">{{ $order_totals['total'] }}</div>
             </div>
-            {{-- <div><i class="fs-4 bi bi-person"></i></div> --}}
           </div>
-          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">{{ $order_totals['percentage'] }}%</span> <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
+          <div class="mt-3 d-flex align-items-center lh-1"><span class="text-danger">{{ $order_totals['percentage'] }}%</span>
+            <span class="vr mx-2"></span> <span class="text-muted">{{ __('admin/dashboard.day_before') }}</span></div>
         </div>
       </div>
     </div>

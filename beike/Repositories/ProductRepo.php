@@ -55,7 +55,7 @@ class ProductRepo
      */
     public static function getProductsByCategory($categoryId, $filterData)
     {
-        $builder  = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
+        $builder = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
 
         return $builder->with('inCurrentWishlist')
             ->paginate($filterData['per_page'] ?? perPage())
@@ -81,10 +81,11 @@ class ProductRepo
     /**
      * 获取商品筛选对象
      *
-     * @param array $data
+     * @param array $filters
      * @return Builder
+     * @throws \Exception
      */
-    public static function getBuilder(array $data = []): Builder
+    public static function getBuilder(array $filters = []): Builder
     {
         $builder = Product::query()->with('description', 'skus', 'masterSku', 'attributes');
 
@@ -98,17 +99,17 @@ class ProductRepo
         });
         $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name', 'product_skus.price']);
 
-        if (isset($data['category_id'])) {
-            $builder->whereHas('categories', function ($query) use ($data) {
-                if (is_array($data['category_id'])) {
-                    $query->whereIn('category_id', $data['category_id']);
+        if (isset($filters['category_id'])) {
+            $builder->whereHas('categories', function ($query) use ($filters) {
+                if (is_array($filters['category_id'])) {
+                    $query->whereIn('category_id', $filters['category_id']);
                 } else {
-                    $query->where('category_id', $data['category_id']);
+                    $query->where('category_id', $filters['category_id']);
                 }
             });
         }
 
-        $productIds = $data['product_ids'] ?? [];
+        $productIds = $filters['product_ids'] ?? [];
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
             $productIds = implode(',', $productIds);
@@ -116,8 +117,8 @@ class ProductRepo
         }
 
         // attr 格式:attr=10:10,13|11:34,23|3:4
-        if (isset($data['attr']) && $data['attr']) {
-            $attributes = self::parseFilterParamsAttr($data['attr']);
+        if (isset($filters['attr']) && $filters['attr']) {
+            $attributes = self::parseFilterParamsAttr($filters['attr']);
             foreach ($attributes as $attribute) {
                 $builder->whereHas('attributes', function ($query) use ($attribute) {
                     $query->where('attribute_id', $attribute['attr'])
@@ -126,21 +127,21 @@ class ProductRepo
             }
         }
 
-        if (isset($data['sku']) || isset($data['model'])) {
-            $builder->whereHas('skus', function ($query) use ($data) {
-                if (isset($data['sku'])) {
-                    $query->where('sku', 'like', "%{$data['sku']}%");
+        if (isset($filters['sku']) || isset($filters['model'])) {
+            $builder->whereHas('skus', function ($query) use ($filters) {
+                if (isset($filters['sku'])) {
+                    $query->where('sku', 'like', "%{$filters['sku']}%");
                 }
-                if (isset($data['model'])) {
-                    $query->where('model', 'like', "%{$data['model']}%");
+                if (isset($filters['model'])) {
+                    $query->where('model', 'like', "%{$filters['model']}%");
                 }
             });
         }
 
-        if (isset($data['price']) && $data['price']) {
-            $builder->whereHas('skus', function ($query) use ($data) {
+        if (isset($filters['price']) && $filters['price']) {
+            $builder->whereHas('skus', function ($query) use ($filters) {
                 // price 格式:price=30-100
-                $prices = explode('-', $data['price']);
+                $prices = explode('-', $filters['price']);
                 if (! $prices[1]) {
                     $query->where('price', '>', $prices[0] ?: 0)->where('is_default', 1);
                 } else {
@@ -149,11 +150,11 @@ class ProductRepo
             });
         }
 
-        if (isset($data['name'])) {
-            $builder->where('pd.name', 'like', "%{$data['name']}%");
+        if (isset($filters['name'])) {
+            $builder->where('pd.name', 'like', "%{$filters['name']}%");
         }
 
-        $keyword = trim($data['keyword'] ?? '');
+        $keyword = trim($filters['keyword'] ?? '');
         if ($keyword) {
             $keywords = explode(' ', $keyword);
             $keywords = array_unique($keywords);
@@ -175,17 +176,25 @@ class ProductRepo
             });
         }
 
-        if (isset($data['active'])) {
-            $builder->where('active', (int) $data['active']);
+        if (isset($filters['created_start'])) {
+            $builder->where('products.created_at', '>', $filters['created_start']);
+        }
+
+        if (isset($filters['created_end'])) {
+            $builder->where('products.created_at', '>', $filters['created_end']);
+        }
+
+        if (isset($filters['active'])) {
+            $builder->where('active', (int) $filters['active']);
         }
 
         // 回收站
-        if (isset($data['trashed']) && $data['trashed']) {
+        if (isset($filters['trashed']) && $filters['trashed']) {
             $builder->onlyTrashed();
         }
 
-        $sort  = $data['sort']  ?? 'products.position';
-        $order = $data['order'] ?? 'desc';
+        $sort  = $filters['sort']  ?? 'products.position';
+        $order = $filters['order'] ?? 'desc';
         $builder->orderBy($sort, $order);
 
         return $builder;

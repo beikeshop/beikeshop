@@ -10,14 +10,14 @@
  */
 
 return [
-    'products_index'         => '商品列表',
-    'products_create'        => '创建商品',
-    'products_show'          => '商品详情',
-    'products_update'        => '更新商品',
-    'products_delete'        => '删除商品',
-    'products_trashed'       => '回收站',
-    'products_restore'       => '恢复回收站',
-    'clear_restore'          => '清空回收站',
+    'products_index'            => '商品列表',
+    'products_create'           => '创建商品',
+    'products_show'             => '商品详情',
+    'products_update'           => '更新商品',
+    'products_delete'           => '删除商品',
+    'products_trashed'          => '回收站',
+    'products_restore'          => '恢复回收站',
+    'clear_restore'             => '清空回收站',
     'products_filter_index'     => '查看高级筛选',
     'products_filter_update'    => '修改高级筛选',
 

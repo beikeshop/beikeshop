@@ -113,7 +113,7 @@ class TotalService
         $maps = [];
         foreach (self::TOTAL_CODES as $code) {
             $serviceName  = Str::studly($code) . 'Service';
-            $maps[$code] = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+            $maps[$code]  = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
         }
 
         return hook_filter('service.total.maps', $maps);

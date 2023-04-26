@@ -10,5 +10,5 @@
  */
 
 return [
-  'price_filter'          => '價格篩選',
+    'price_filter'          => '價格篩選',
 ];

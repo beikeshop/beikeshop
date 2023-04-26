@@ -10,5 +10,5 @@
  */
 
 return [
-  'price_filter'          => 'Price Filter',
+    'price_filter'          => 'Price Filter',
 ];

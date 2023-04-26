@@ -10,6 +10,7 @@
  */
 
 return [
+    'product_total' => '产品总数',
     'customer_view' => '用户访问量',
     'order_total'   => '订单量',
     'customer_new'  => '新增用户',

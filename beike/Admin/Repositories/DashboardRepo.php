@@ -11,9 +11,9 @@
 
 namespace Beike\Admin\Repositories;
 
-use Beike\Models\Product;
 use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\OrderRepo;
+use Beike\Repositories\ProductRepo;
 
 class DashboardRepo
 {
@@ -21,12 +21,22 @@ class DashboardRepo
      * 获取商品总数
      *
      * @return array
+     * @throws \Exception
      */
     public static function getProductData(): array
     {
+        $today      = ProductRepo::getBuilder(['created_start' => today()->subDay(), 'created_end' => today()])->count();
+        $yesterday  = ProductRepo::getBuilder(['created_start' => today()->subDays(2), 'created_end' => today()->subDay()])->count();
+        $difference = $today - $yesterday;
+        if ($difference && $yesterday) {
+            $percentage = round(($difference / $yesterday) * 100);
+        } else {
+            $percentage = 0;
+        }
+
         return [
-            'total'      => quantity_format(Product::query()->count()),
-            'percentage' => 0,
+            'total'      => $today,
+            'percentage' => $percentage,
         ];
     }
 

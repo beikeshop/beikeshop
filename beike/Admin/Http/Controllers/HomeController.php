@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'views'        => DashboardRepo::getCustomerViewData(),
+            'products'     => DashboardRepo::getProductData(),
+            // 'views'        => DashboardRepo::getCustomerViewData(),
             'orders'       => DashboardRepo::getOrderData(),
             'customers'    => DashboardRepo::getCustomerData(),
             'order_totals' => DashboardRepo::getTotalData(),
