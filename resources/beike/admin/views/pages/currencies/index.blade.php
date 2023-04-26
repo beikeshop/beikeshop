@@ -3,7 +3,7 @@
 @section('title', __('admin/common.currency'))
 
 @section('page-title-right')
-  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=tax_address" class="btn btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
+  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
 @endsection
 
 @section('content')
