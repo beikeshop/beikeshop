@@ -63,8 +63,6 @@
           loading: null,
         },
 
-        mail_engine: @json(old('mail_engine', system_setting('base.mail_engine', ''))),
-
         source: {
           mailEngines: [
             {name: '{{ __('admin/builder.text_no') }}', code: ''},
