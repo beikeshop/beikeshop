@@ -49,8 +49,10 @@ return [
     'country'                          => '國家管理',
     'file_manager'                     => '文件管理器',
     'access_frontend'                  => '訪問前台',
+    'copyright_buy'                    => '版權購買',
 
     // sidebar
+    'multi_filter_index'               => '高級篩選',
     'theme_index'                      => '模板設置',
     'attribute_groups_index'           => '屬性組',
     'attributes_index'                 => '屬性',

@@ -122,7 +122,7 @@ class Sidebar extends Component
      */
     private function getProductSubPrefix()
     {
-        $prefix = ['products.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'];
+        $prefix = ['products.', 'multi_filter.', 'categories.', 'brands.', 'attribute_groups.', 'attributes.'];
 
         return hook_filter('admin.sidebar.product.prefix', $prefix);
     }
@@ -190,11 +190,12 @@ class Sidebar extends Component
     public function getProductSubRoutes()
     {
         $routes = [
-            ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'products.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'categories.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'brands.index', 'icon' => 'fa fa-tachometer-alt', 'hide_mobile' => 1],
             ['route' => 'attribute_groups.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'attributes.index', 'icon' => 'fa fa-tachometer-alt'],
+            ['route' => 'multi_filter.index', 'icon' => 'fa fa-tachometer-alt'],
             ['route' => 'products.trashed', 'icon' => 'fa fa-tachometer-alt'],
         ];
 

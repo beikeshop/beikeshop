@@ -15,7 +15,7 @@
               <th>ID</th>
               <th>{{ __('common.name') }}</th>
               <th>{{ __('admin/region.describe') }}</th>
-              <th>{{ __('customer_group.level') }}</th>
+              {{-- <th>{{ __('customer_group.level') }}</th> --}}
               <th>{{ __('common.created_at') }}</th>
               <th width="130px">{{ __('common.action') }}</th>
             </tr>
@@ -28,7 +28,7 @@
                 <div :title="group.description?.description || ''" class="w-max-500">
                   @{{ stringLengthInte(group.description?.description || '') }}</div>
               </td>
-              <td>@{{ group.level }}</td>
+              {{-- <td>@{{ group.level }}</td> --}}
               <td>@{{ group.created_at }}</td>
               <td>
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>

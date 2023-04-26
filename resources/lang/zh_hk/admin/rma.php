@@ -17,6 +17,7 @@ return [
     'rmas_update'       => '更新售後服務',
     'rmas_delete'       => '刪除售後服務',
 
+    'rma_list_title'    => '售後申請列表',
     'customers_name'    => '客戶姓名',
     'quantity'          => '數量',
     'service_type'      => '服務類型',

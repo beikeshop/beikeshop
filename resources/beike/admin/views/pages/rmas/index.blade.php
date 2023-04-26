@@ -5,6 +5,7 @@
 @section('content')
   <div id="customer-app" class="card h-min-600">
     <div class="card-body">
+      <div class="mb-2">{{ __('admin/rma.rma_list_title') }}</div>
       @if (count($rmas))
         <div class="table-push">
           <table class="table">

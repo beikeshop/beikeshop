@@ -525,3 +525,18 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
     }
   }
 }
+
+.active-line {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 1rem);
+    background-color: rgba($primary, 0.04);
+    border: 1px dashed rgba($primary, 0.5);
+  }
+}

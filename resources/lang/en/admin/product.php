@@ -18,6 +18,8 @@ return [
     'products_trashed'       => 'Trashed',
     'products_restore'       => 'Restore',
     'clear_restore'          => 'Empty Recycle Bin',
+    'products_filter_index'  => 'View Filters',
+    'products_filter_update' => 'Modify Filters',
 
     'batch_delete'           => 'Batch Delete',
     'batch_active'           => 'Batch Active',

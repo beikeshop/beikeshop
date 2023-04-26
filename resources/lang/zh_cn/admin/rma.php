@@ -10,17 +10,18 @@
  */
 
 return [
-    'index'             => '售后申请',
+    'index'             => '售后管理',
 
     'rmas_index'        => '售后服务列表',
     'rmas_show'         => '售后服务详情',
     'rmas_update'       => '更新售后服务',
     'rmas_delete'       => '删除售后服务',
 
+    'rma_list_title'    => '售后申请列表',
     'customers_name'    => '客户姓名',
     'quantity'          => '数量',
     'service_type'      => '服务类型',
-    'rma_details'       => '售后申请详情',
+    'rma_details'       => '售后管理详情',
     'reasons_return'    => '退货原因',
     'current_state'     => '当前状态',
     'modify_status'     => '修改状态',

@@ -17,6 +17,7 @@ return [
     'rmas_update'       => 'Update',
     'rmas_delete'       => 'Delete',
 
+    'rma_list_title'    => 'Rmas application list',
     'customers_name'    => 'Customers Name',
     'quantity'          => 'Quantity',
     'service_type'      => 'Service Type',
