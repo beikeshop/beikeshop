@@ -6,11 +6,56 @@
       </div>
     </div>
     <div class="header-right">
-      <ul class="navbar navbar-left">
+      {{-- <ul class="navbar navbar-left">
         @foreach ($links as $link)
           <li class="nav-item {{ $link['active'] ? 'active' : '' }}"><a href="{{ $link['url'] }}" class="nav-link">{{ $link['title'] }}</a></li>
         @endforeach
-      </ul>
+      </ul> --}}
+      <div class="search-wrap">
+        <div class="input-wrap">
+          <div class="search-icon"><i class="bi bi-search"></i></div>
+          <input type="text" class="form-control" placeholder="Search in front">
+          <button class="btn close-icon" type="button"><i class="bi bi-x-lg"></i></button>
+        </div>
+
+        <div class="dropdown-menu">
+          <div class="dropdown-wrap">
+            <div class="link-item recent-search">
+              <div class="dropdown-header fw-bold mb-2">最近搜索</div>
+              <div class="recent-search-links">
+                <a href="{{ admin_route('design_menu.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.design_menu_index') }}</a>
+                <a href="{{ admin_route('languages.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.languages_index') }}</a>
+                <a href="{{ admin_route('currencies.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.currencies_index') }}</a>
+                <a href="{{ admin_route('plugins.index') }}"><i class="bi bi-search"></i> {{ __('admin/common.plugins_index') }}</a>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="link-item">
+              <div class="dropdown-header fw-bold">常用链接</div>
+              <div class="common-links">
+                <a class="dropdown-item" href="{{ admin_route('design.index') }}" target="_blank">
+                  <span><i class="bi bi-palette"></i></span> {{ __('admin/common.design_index') }}
+                </a>
+                <a class="dropdown-item" href="{{ admin_route('design_footer.index') }}" target="_blank">
+                  <span><i class="bi bi-palette"></i></span> {{ __('admin/common.design_footer_index') }}
+                </a>
+                <a class="dropdown-item" href="{{ admin_route('design_menu.index') }}">
+                  <span><i class="bi bi-list"></i></span> {{ __('admin/common.design_menu_index') }}
+                </a>
+                <a class="dropdown-item" href="{{ admin_route('languages.index') }}">
+                  <span><i class="bi bi-globe2"></i></span> {{ __('admin/common.languages_index') }}
+                </a>
+                <a class="dropdown-item" href="{{ admin_route('currencies.index') }}">
+                  <span><i class="bi bi-currency-dollar"></i></span> {{ __('admin/common.currencies_index') }}
+                </a>
+                <a class="dropdown-item" href="{{ admin_route('plugins.index') }}">
+                  <span><i class="bi bi-plug"></i></span> {{ __('admin/common.plugins_index') }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <ul class="navbar navbar-right">
         @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
@@ -165,14 +210,5 @@
     $('.update-pop .btn-outline-secondary').click(function() {
       layer.close(updatePop)
     });
-
-    // $('.vip-serve').click(function(event) {
-    //   layer.open({
-    //     type: 2,
-    //     title: '',
-    //     area: ['840px', '80%'],
-    //     content: `${config.api_url}/api/vip_rights?domain=${config.app_url}&developer_token={{ system_setting('base.developer_token') }}`,
-    //   });
-    // });
   </script>
 @endpush

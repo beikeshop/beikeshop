@@ -20,7 +20,6 @@
 
   .header-left {
     width: 190px;
-    // flex-wrap: wrap;
 
     .logo {
       a {
@@ -43,6 +42,176 @@
     align-items: center;
     justify-content: space-between;
     flex: 1;
+
+    .search-wrap {
+      margin-left: 30px;
+      position: relative;
+
+      &:hover {
+        .input-wrap {
+          background-color: #f0f3f8;
+          .search-icon {
+            color: #4f5b68;
+          }
+        }
+      }
+
+      .input-wrap {
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 14px;
+        height: 35px;
+        transition: all .2s ease-in-out;
+        width: 330px;
+        border-radius: 6px;
+        font-size: 16px;
+        background-color: #f6f7fa;
+
+        .search-icon {
+          // color: #8c98a4;
+          // color: #798591;
+          color: #626f7c;
+        }
+
+        &.active {
+          // background-color: #f6f7fa;
+          background-color: #f0f3f8;
+          height: 40px;
+          .search-icon {
+            color: #4f5b68;
+          }
+
+          .close-icon {
+            display: block;
+          }
+
+          & ~ .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            top: 140%;
+            pointer-events: auto;
+          }
+        }
+
+        .close-icon {
+          color: #aaa;
+          outline: none;
+          display: none;
+          box-shadow: none;
+
+          i {
+            font-size: 16px;
+          }
+
+          &:hover {
+            i {
+              color: $primary;
+            }
+          }
+        }
+
+        input {
+          border: none;
+          font-size: 14px;
+          background-color: transparent;
+          height: 40px;
+          // 设置 placeholder 颜色
+          &::-webkit-input-placeholder {
+            color: #8c98a4;
+          }
+        }
+      }
+
+      .dropdown-menu {
+        top: 180%;
+        width: 100%;
+        animation-duration: 300ms;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        border: none;
+        transition: all .2s ease-in-out;
+        padding: .7rem 0;
+        border-radius: 0.5rem;
+        // box-shadow: 0 0.6125rem 2.5rem 0.6125rem rgba(140,152,164,.175);
+        box-shadow: 0 0.8rem 2.5rem 0.6125rem rgba(140, 152, 164, 0.286);
+        .dropdown-wrap {
+          max-height: 380px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          padding: 0 0.5rem;
+
+          // 修改滚动条样式
+          &::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
+            background-color: transparent;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: #d1d5da;
+            border-radius: 0;
+          }
+        }
+
+        .link-item {
+          a {
+            color: #333;
+          }
+        }
+
+        .common-links {
+          a {
+            span {
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              display: inline-block;
+              line-height: 24px;
+              margin-right: 0.2rem;
+              text-align: center;
+              background-color: rgba(19,33,68,.1);
+              font-size: 12px;
+            }
+          }
+        }
+
+        .recent-search {
+          .recent-search-links {
+            padding: 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+
+            a {
+              background-color: rgba(19,33,68,.1);
+              border-radius: 20px;
+              padding: 0.3rem 0.7rem;
+              font-size: .75rem;
+              margin-bottom: 0.5rem;
+              margin-right: 0.3rem;
+              &:hover {
+                background-color: $primary;
+                color: #fff;
+              }
+            }
+          }
+        }
+
+        .dropdown-divider {
+          width: calc(100% + 1rem);
+          margin-left: -0.5rem;
+          opacity: 0.5;
+        }
+
+        a.dropdown-item {
+          border-radius: 0.3rem;
+          padding: 0.5rem 1rem;
+          &:hover {
+            background-color: rgba(189, 197, 209, 0.2);
+          }
+        }
+      }
+    }
 
     > .navbar {
       margin-bottom: 0;
