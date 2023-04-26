@@ -138,7 +138,7 @@ class PermissionRepo
      */
     private function getProductPermissions(): array
     {
-        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed', 'products_restore'];
+        $routes = ['products_index', 'products_create', 'products_show', 'products_update', 'products_delete', 'products_trashed', 'products_restore', 'products_filter_index', 'products_filter_update'];
         $items  = $this->getPermissionList('product', $routes);
 
         return hook_filter('role.product_permissions', $items);

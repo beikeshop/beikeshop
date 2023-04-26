@@ -18,6 +18,8 @@ return [
     'products_trashed'       => '回收站',
     'products_restore'       => '恢复回收站',
     'clear_restore'          => '清空回收站',
+    'products_filter_index'     => '查看高级筛选',
+    'products_filter_update'    => '修改高级筛选',
 
     'batch_delete'           => '批量删除',
     'batch_active'           => '批量上架',
