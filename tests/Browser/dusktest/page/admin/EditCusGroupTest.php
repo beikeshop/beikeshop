@@ -32,7 +32,7 @@ class EditCusGroupTest extends DuskTestCase
                 ->pause(3000)
                 //4.点击客户组
                 ->clickLink(customer_left['customer_group'])
-                //5.点击创建客户组
+                //5.点击编辑客户组
                 ->press(customer_group['edit_cus_group'])
                 //4.填写客户组信息
                 ->type(cre_cus_group['ch_group_name'], alter_cus_group_info['ch_group_name'])

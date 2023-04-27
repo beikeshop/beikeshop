@@ -37,7 +37,7 @@ const customer_group = [
     //创建客户组
     "cre_cus_group"=>"#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button",
     //编辑客户组
-    "edit_cus_group" =>"#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(6) > button.btn.btn-outline-secondary.btn-sm",
+    "edit_cus_group" =>".btn.btn-outline-secondary.btn-sm",
     //删除客户组
     "del_cus_group" =>"#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(6) > button.btn.btn-outline-danger.btn-sm.ml-1",
     "get_assert"=>"#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(2)",

@@ -22,7 +22,7 @@ class DelCustomerTest extends DuskTestCase
 
 //场景1 email不合法
 
-   public function testEditProduct()
+   public function testDelCustomer()
    {
 
        $this->browse(function (Browser $browser)
@@ -34,7 +34,7 @@ class DelCustomerTest extends DuskTestCase
                ->press(admin_login['login_btn'])
                ->pause(2000)
                //2.点击客户管理
-               ->clickLink(admin_top['mg_customers']);
+               ->click(admin_top['mg_customers']);
                $customer_text=$browser->text(customer_list['get_assert']);
                echo $customer_text;
                $browser->press(customer_list['del_customer'])

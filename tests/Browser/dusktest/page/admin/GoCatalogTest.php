@@ -31,7 +31,7 @@ class GoCatalogTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.去往前台
-                ->clicklink(admin_top['root'])
+                ->click(admin_top['root'])
                 ->pause(3000)
                 ->click(admin_top['go_catalog'])
                 ->pause(2000)

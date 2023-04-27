@@ -36,7 +36,7 @@ class CancelOrderTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //去往前台
-                ->clicklink(admin_top['root'])
+                ->click(admin_top['root'])
                 ->pause(3000)
                 ->click(admin_top['go_catalog'])
                 ->pause(2000)
@@ -67,7 +67,7 @@ class CancelOrderTest extends DuskTestCase
                 //打印订单号
                 echo $order_num;
                 $browser->clickLink(checkout['view_order'])
-            //进入后台,修改订单状态为已支付
+            //进入后台,修改订单状态为已取消
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 //点击订单管理按钮
                 $browser->click(admin_top['mg_order'])
@@ -81,7 +81,7 @@ class CancelOrderTest extends DuskTestCase
                 //点击状态栏下拉按钮
                 ->pause(2000)
                 ->press(order_details['pull_btn'])
-                //修改状态为已支付
+                //修改状态为已取消
                 ->pause(2000)
                 ->click(order_details['cancel'])
                 ->press(order_details['alter_btn'])

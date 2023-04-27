@@ -9,6 +9,6 @@ const checkout = [
     //订单号
     'order_num'=>'.fw-bold',
     'view_order'=>'View Order ',
-    ///
+    'method_pay'=>'.radio-line-item',
 
 ];

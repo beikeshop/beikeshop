@@ -10,7 +10,7 @@ use PHPUnit\TextUI\DefaultResultPrinter;
 
     $suite = new TestSuite();
     // 向测试套件中添加测试用例
-//后台
+//前台
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\RegisterFirst.php');//先注册一个账户
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\RegisterTest.php');//场景注册
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\LoginTest.php'); //前台登录场景
@@ -21,6 +21,9 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\RemoveWishlistTest.php');//移除喜欢
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\WishlistTest.php');//加入喜欢
     $suite->addTestFile('.\tests\Browser\dusktest\page\front\EditUserInfo.php');//修改个人信息
+    $suite->addTestFile('.\tests\Browser\dusktest\page\front\CartCheckoutTest.php');//从购物车结账
+    $suite->addTestFile('.\tests\Browser\dusktest\page\front\ChangePayMethodTest.php');//下单时更改支付方式
+    $suite->addTestFile('.\tests\Browser\dusktest\page\front\OrderTest.php');//下单
 //后台
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AdminLoginTest.php'); //后台登录
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AdminSignOutTest.php'); //后台退出
@@ -44,10 +47,14 @@ use PHPUnit\TextUI\DefaultResultPrinter;
 
 
 //前后台联测
-    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\AlterOrderStationTest.php');//商订单状态修改
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\AlterOrderStationTest.php');//订单状态修改 已支付-已发货-一已完成
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CancelOrderTest.php');//取消商品订单
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CloseVisiterCheckoutTest.php');//禁用游客结账
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\OpenVisiterCheckoutTest.php');//开启游客结账
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CreateCategoriesTest.php');//添加商品分类
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\EnableProductTest.php');//启用商品
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\DisableProductTest.php');//禁用商品
+
     // 运行测试套件
     $result = $suite->run();
     // 输出测试结果

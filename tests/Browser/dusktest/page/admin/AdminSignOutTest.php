@@ -31,7 +31,7 @@ class AdminSignOutTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //2.退出
-                ->clickLink(admin_top['root'])
+                ->click(admin_top['root'])
                 ->pause(2000)
                 ->click(admin_top['sign_out'])
                 ->pause(10000)

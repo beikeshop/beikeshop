@@ -39,7 +39,7 @@ class CartCheckoutTest extends DuskTestCase
                 ->press(product['add_cart'])
                 ->pause(3000)
                 //6.点击购物车按钮
-                ->clickLink(index_cart['cart_icon'])
+                ->click(index_cart['cart_icon'])
                 ->pause(3000)
                 //7.点击结账按钮
                 ->press(index_cart['cart_Checkout'])

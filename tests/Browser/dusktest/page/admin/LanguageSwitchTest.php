@@ -15,7 +15,7 @@ class LanguageSwitchTest extends DuskTestCase
      * A basic browser test example.
      * @return void
      */
-        public function testGoVip()
+        public function testLanguageSwitch()
     {
 
         $this->browse(function (Browser $browser)
