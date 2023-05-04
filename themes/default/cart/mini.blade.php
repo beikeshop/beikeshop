@@ -14,7 +14,7 @@
             <i class="bi {{ $cart['selected'] ? 'bi-check-circle-fill' : 'bi-circle' }}" data-id="{{ $cart['cart_id'] }}"></i>
           </div>
           <div class="product-info d-flex align-items-center">
-            <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image'] ?: image_resize('', 160, 160) }}" class="img-fluid"></a></div>
+            <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image_url'] ?: image_resize('', 160, 160) }}" class="img-fluid"></a></div>
             <div class="right flex-grow-1">
               <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark text-truncate-2" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
               <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>

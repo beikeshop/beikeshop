@@ -2,7 +2,11 @@
   <div class="image">
     <a href="{{ $product['url'] }}">
       <div class="image-old">
-        <img src="{{ $product['images'][0] ?? image_resize('', 400, 400) }}" class="img-fluid">
+        <img
+          data-sizes="auto"
+          data-src="{{ $product['images'][0] ?? image_resize('', 400, 400) }}"
+          src="{{ image_resize('', 400, 400) }}"
+          class="img-fluid lazyload">
       </div>
     </a>
     @if (!request('style_list') || request('style_list') == 'grid')
