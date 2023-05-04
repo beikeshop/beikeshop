@@ -47,7 +47,7 @@ header {
   .header-content {
     position: relative;
     background-color: #fff;
-    
+
     > .container {
       display: flex;
       align-items: center;
@@ -378,13 +378,25 @@ header {
           }
         }
 
-        .accordion-collapse {
-          padding: 10px;
+        > .accordion-collapse {
+          padding: 0 10px;
           border-top: 1px solid #e5e5e5;
 
           .children-group {
-            .group-name {
-              margin-bottom: 4px;
+            .children-title {
+              span {
+                width: 26px;
+                height: 26px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &[aria-expanded="true"] {
+                  i::before {
+                    content: "\F63B";
+                  }
+                }
+              }
             }
 
             .nav {
