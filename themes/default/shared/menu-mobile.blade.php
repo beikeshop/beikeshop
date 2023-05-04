@@ -17,24 +17,29 @@
         </div>
         @if (isset($menu['children_group']) && $menu['children_group'])
         <div class="accordion-collapse collapse" id="flush-menu-{{ $key }}" data-bs-parent="#menu-accordion">
-          @forelse ($menu['children_group'] as $group)
-          <div class="children-group mb-3">
+          @forelse ($menu['children_group'] as $c_key => $group)
+          <div class="children-group">
             @if ($group['name'])
-            <div class="group-name">{{ $group['name'] }}</div>
+            <div class="d-flex justify-content-between align-items-center py-2 children-title">
+              <div>{{ $group['name'] }}</div>
+              <span class="collapsed" data-bs-toggle="collapse" data-bs-target="#children-menu-{{ $key }}-{{ $c_key }}"><i class="bi bi-plus-lg"></i></span>
+            </div>
             @endif
-            @if ($group['type'] == 'image')
-            <a target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}" href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
-            @else
-            <ul class="nav flex-column ul-children">
-              @foreach ($group['children'] as $children)
-              @if (!is_array($children['link']['text']) && $children['link']['text'])
-              <li class="nav-item">
-                <a target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}" class="nav-link px-0" href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
-              </li>
+            <div class="accordion-collapse collapse {{ !$group['name'] ? 'd-block' : '' }}" id="children-menu-{{ $key }}-{{ $c_key }}" data-bs-parent="#flush-menu-{{ $key }}">
+              @if ($group['type'] == 'image')
+              <a target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}" href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
+              @else
+              <ul class="nav flex-column ul-children">
+                @foreach ($group['children'] as $children)
+                @if (!is_array($children['link']['text']) && $children['link']['text'])
+                <li class="nav-item">
+                  <a target="{{ isset($children['link']['new_window']) && $children['link']['new_window'] ? '_blank' : '_self' }}" class="nav-link px-0" href="{{ $children['link']['link'] }}">{{ $children['link']['text'] }}</a>
+                </li>
+                @endif
+                @endforeach
+              </ul>
               @endif
-              @endforeach
-            </ul>
-            @endif
+            </div>
           </div>
           @endforeach
         </div>
