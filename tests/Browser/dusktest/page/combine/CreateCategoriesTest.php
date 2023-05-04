@@ -28,7 +28,7 @@ require_once(dirname(__FILE__) . '/../../data/admin/cre_categories_page.php');
 //增加商品分类
 class CreateCategoriesTest extends DuskTestCase
 {
-    public function testCancelOrder()
+    public function testCreateCategories()
     {
         $this->browse(function (Browser $browser)
         {
@@ -42,7 +42,7 @@ class CreateCategoriesTest extends DuskTestCase
                 ->click(admin_top['mg_product'])
                 //点击商品分类
                 ->click(products_left['product_cate'])
-                ->pause(2000)
+                ->pause(5000)
                 //点击创建分类按钮
                 ->press(product_cla['cre_cate_btn'])
                 //填写分类信息

@@ -37,7 +37,7 @@ class DelCusRecycleTest extends DuskTestCase
                ->press(customer_list['sure_btn'])
                ->pause(1000)
                //2.点击回收站
-               ->clickLink(customer_left['re_station']);
+               ->click(customer_left['re_station']);
                $customer_text=$browser->text(empty_recycle['customer_text']);
                echo $customer_text;
                //3.点击删除按钮

@@ -28,8 +28,10 @@ class AddExpressTest extends DuskTestCase
                 ->type(admin_login['login_pwd'], admin_true_login['password'])
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
-                //2.点击系统设置
+                //点击系统
                 ->click(admin_top['system_set'])
+                //2.点击系统设置
+                ->click(system_left['system_set'])
                 //3.点击邮件设置
                 ->click(system_set['express_set'])
                 ->pause(2000)

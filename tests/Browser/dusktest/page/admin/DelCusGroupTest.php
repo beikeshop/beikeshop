@@ -31,7 +31,7 @@ class DelCusGroupTest extends DuskTestCase
                 ->click(admin_top['mg_customers'])
                 ->pause(3000)
                 //4.点击客户组
-                ->clickLink(customer_left['customer_group']);
+                ->click(customer_left['customer_group']);
 
                 $cus_group_text=$browser->text(customer_group['get_assert']);
                 echo $cus_group_text;

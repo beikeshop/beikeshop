@@ -7,6 +7,8 @@ use Tests\DuskTestCase;
 
 require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
+
 
 class LoginTest extends DuskTestCase
 {
@@ -87,7 +89,7 @@ class LoginTest extends DuskTestCase
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
                 ->pause(5000)
-                ->assertUrlIs(account['url']);
+                ->assertPathIs(account['url']);
         });
     }
 }

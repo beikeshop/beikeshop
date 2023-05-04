@@ -16,6 +16,7 @@ const alter_product = [
     "origin_price"=>"500",//原价
     "cost_price"=>"50",//成本价
     "quantity"=>"30",//数量
+    "low_quantity"=>"5",//少量商品 ，测试库存不足
 ];
 
 

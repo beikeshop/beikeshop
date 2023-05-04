@@ -66,7 +66,7 @@ class CancelOrderTest extends DuskTestCase
                 $order_num =$elements[15]->getText();
                 //打印订单号
                 echo $order_num;
-                $browser->clickLink(checkout['view_order'])
+                $browser->click(checkout['view_order'])
             //进入后台,修改订单状态为已取消
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 //点击订单管理按钮

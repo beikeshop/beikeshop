@@ -36,9 +36,9 @@ class AlterOrderStationTest extends DuskTestCase
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
                 //去往前台
-                ->clicklink(admin_top['root'])
+                ->click(admin_top['root'])
                 ->pause(3000)
-                ->clickLink(admin_top['go_catalog'])
+                ->click(admin_top['go_catalog'])
                 ->pause(2000)
                 //切换到前台下单
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
@@ -49,7 +49,7 @@ class AlterOrderStationTest extends DuskTestCase
                 ->type(login['login_pwd'], true_login['password'])
                 ->press(login['login_btn'])
                 ->pause(5000)
-                ->clickLink(account['go_index'])
+                ->click(account['go_index'])
                 //3.向下滑动页面直到找到商品
                 ->pause(2000)
                 ->scrollIntoView(index['product_img'])
@@ -66,7 +66,7 @@ class AlterOrderStationTest extends DuskTestCase
                 $order_num =$elements[15]->getText();
                 //打印订单号
                 echo $order_num;
-                $browser->clickLink(checkout['view_order'])
+                $browser->click(checkout['view_order'])
             //进入后台,修改订单状态为已支付
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 //点击订单管理按钮
@@ -91,17 +91,16 @@ class AlterOrderStationTest extends DuskTestCase
                 $browser->pause(3000)
                 //刷新页面
                 ->refresh()
-                ->pause(5000);
+                ->pause(1000)
                 // 断言是否已支付
-                 $text = $browser->text(get_order_status['status_text']);
-                $browser->assertSeeIn($text,ca_order_status['paid'])
+                ->assertSeeIn(get_order_status['status_text'],ca_order_status['Paid'])
             //切换到后台，将状态改为已发货
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 $browser->pause(2000)
                 ->press(order_details['pull_btn'])
-                //修改状态为已支付
+                //修改状态为发货
                 ->pause(2000)
-                ->click(order_details['paid'])
+                ->click(order_details['Shipped'])
                 ->press(order_details['express_btn'])
                 //选择快递并填写订单号
                 ->pause(2000);
@@ -112,15 +111,20 @@ class AlterOrderStationTest extends DuskTestCase
                 // 找到第一个子元素并点击它
                 $secondElement->findElement(WebDriverBy::xpath('./*[1]'))->click();
                 $browser->type(order_details['order_number'], express['express_code'])
-                ->press(order_details['submit'])
+                ->pause(2000)
+                //向下滑动找到更新按钮
+                ->scrollIntoView(order_details['alter_btn'])
+                ->pause(2000)
+                //按下更新按钮
+                ->press(order_details['alter_btn'])
                 ->pause(3000)
             //切换到前台,断言是否已发货
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
                 $browser->pause(3000)
                 ->refresh()
-                ->pause(4000);
-                $text = $browser->text(get_order_status['status_text']);
-                $browser->assertSeeIn($text,ca_order_status['Shipped'])
+                ->pause(4000)
+                ->assertSeeIn(get_order_status['status_text'],ca_order_status['Shipped'])
+            //切换到后台，修改状态为已完成
                     ;
 
 

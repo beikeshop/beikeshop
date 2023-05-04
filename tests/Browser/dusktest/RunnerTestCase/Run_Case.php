@@ -40,8 +40,10 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AddCusGroupTest.php');//添加用户组
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\EditCusGroupTest.php');//编辑用户组
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCusGroupTest.php');//删除用户组
-    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\CusEmptyRecycleTest.php');//清空回收站
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\CustomerRecycleTest.php');//恢复客户信息
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCustomerTest.php');//删除用户
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\CusEmptyRecycleTest.php');//清空回收站
+    $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCustomerTest.php');//删除用户
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\DelCusRecycleTest.php');//从回收站删除客户信息
     $suite->addTestFile('.\tests\Browser\dusktest\page\admin\AddExpressTest.php');//添加快递公司
 
@@ -54,6 +56,7 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CreateCategoriesTest.php');//添加商品分类
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\EnableProductTest.php');//启用商品
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\DisableProductTest.php');//禁用商品
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\UnderstockOrderTest.php');//库存不足下单
 
     // 运行测试套件
     $result = $suite->run();

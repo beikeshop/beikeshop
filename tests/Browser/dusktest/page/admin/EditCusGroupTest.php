@@ -31,7 +31,7 @@ class EditCusGroupTest extends DuskTestCase
                 ->click(admin_top['mg_customers'])
                 ->pause(3000)
                 //4.点击客户组
-                ->clickLink(customer_left['customer_group'])
+                ->click(customer_left['customer_group'])
                 //5.点击编辑客户组
                 ->press(customer_group['edit_cus_group'])
                 //4.填写客户组信息

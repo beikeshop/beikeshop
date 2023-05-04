@@ -11,12 +11,14 @@ const products_top = [
     "get_name"=>"#product-app > div > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(4) > a",
 ];
 const products_left = [
-    "product_cate"=>".list-unstyled.navbar-nav li:nth-child(1)",//商品分类
-    "product_mg"=>".list-unstyled.navbar-nav li:nth-child(2)",//商品管理
-    "product_brand"=>".list-unstyled.navbar-nav li:nth-child(3)",//商品品牌
-    "attribute_group"=>".list-unstyled.navbar-nav li:nth-child(4)",//属性组
-    "attribute"=>".list-unstyled.navbar-nav li:nth-child(5)",//属性
-    "Recy_station"=>".list-unstyled.navbar-nav li:nth-child(6)",//回收站
+    "product_mg"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)",//商品管理
+    "product_cate"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)",//商品分类
+
+    "product_brand"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(3)",//商品品牌
+    "attribute_group"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(4)",//属性组
+    "attribute"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(5)",//属性
+    "advanced_filter"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(5)",//高级筛选
+    "Recy_station"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(7)",//回收站
 ];
 const product_cla = [
     "cre_cate_btn"=>"#category-app > div > a",//创建分类按钮

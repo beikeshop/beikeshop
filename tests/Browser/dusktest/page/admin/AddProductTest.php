@@ -33,9 +33,11 @@ class AddProductTest extends DuskTestCase
                 ->type(admin_login['login_pwd'], admin_true_login['password'])
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
-                //2.点击商品管理
+                //2.点击商品
                 ->click(admin_top['mg_product'])
-                //3.点击添加商品
+                //2.点击商品管理
+                ->click(products_left['product_mg'])
+                //3.点击创建
                 ->press(products_top['create_product'])
                 //4.填写商品信息
                 ->type(product_top['ch_name'], product_info['ch_name'])

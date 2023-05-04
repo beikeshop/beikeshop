@@ -1,9 +1,12 @@
 <?php
 const customer_left = [
     "url" =>"/admin/customers",
-    "customer_list"=>"客户列表",//客户列表
-    "customer_group"=>"客户组",//客户组
-    "re_station"=>"回收站",//回收站
+//    "customer_list"=>"客户列表",//客户列表
+//    "customer_group"=>"客户组",//客户组
+//    "re_station"=>"回收站",//回收站
+    "customer_list"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)",//客户列表
+    "customer_group"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)",//客户组
+    "re_station"=>".list-unstyled.navbar-nav:nth-child(2) li:nth-child(3)",//回收站
 ];
 const cre_customer = [
     "name" =>"#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(1) > div > div > input",
@@ -39,7 +42,7 @@ const customer_group = [
     //编辑客户组
     "edit_cus_group" =>".btn.btn-outline-secondary.btn-sm",
     //删除客户组
-    "del_cus_group" =>"#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(6) > button.btn.btn-outline-danger.btn-sm.ml-1",
+    "del_cus_group" =>".btn.btn-outline-danger.btn-sm.ml-1",
     "get_assert"=>"#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(2)",
     "sure_btn"=>"确定",
 

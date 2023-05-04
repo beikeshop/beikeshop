@@ -19,7 +19,7 @@ class CustomerRecycleTest extends DuskTestCase
 
 
 
-   public function testEmptyRecycle()
+   public function testCustomerRecycle()
    {
 
        $this->browse(function (Browser $browser)
@@ -32,14 +32,14 @@ class CustomerRecycleTest extends DuskTestCase
                ->pause(2000)
                ->click(admin_top['mg_customers'])
                //2.点击回收站
-               ->clickLink(customer_left['re_station']);
+               ->click(customer_left['re_station']);
                $customer_text=$browser->text(empty_recycle['customer_text']);
                echo $customer_text;
                //3.点击恢复按钮
                $browser->press(empty_recycle['recycle_btn'])
                ->pause(2000)
                //4.点击客户列表
-               ->clickLink(customer_left['customer_list'])
+               ->click(customer_left['customer_list'])
                    //验证客户信息是否存在于页面
                ->assertSee($customer_text)
                ;

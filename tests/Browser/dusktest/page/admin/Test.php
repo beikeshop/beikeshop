@@ -37,20 +37,16 @@ class Test extends DuskTestCase
                 ->type(admin_login['login_pwd'], admin_true_login['password'])
                 ->press(admin_login['login_btn'])
                 ->pause(2000)
-                ->click(admin_top['mg_product'])
+                ->click(admin_top['mg_order'])
                 ->pause(2000)
-                ->click(products_left['product_cla'])
+                ->click(order_child['mg_order'])
                 ->pause(2000)
-                ->click(products_left['product_mg'])
+                ->click(order_child['mg_sale_after'])
                 ->pause(2000)
-                ->click(products_left['product_brand'])
+                ->click(order_child['ca_sale_after'])
                 ->pause(2000)
-                ->click(products_left['attribute_group'])
-                ->pause(2000)
-                ->click(products_left['attribute'])
-                ->pause(2000)
-                ->click(products_left['Recy_station'])
-                ->pause(2000)
+
+
                 ;
         });
     }
