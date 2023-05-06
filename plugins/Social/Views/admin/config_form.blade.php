@@ -180,7 +180,7 @@
       },
 
       copyCode() {
-        layer.msg('Ok');
+        layer.msg('{{ __('Social::setting.copy_success') }}');
       }
     }
   })

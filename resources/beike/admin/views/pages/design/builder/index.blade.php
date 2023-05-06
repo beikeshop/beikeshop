@@ -43,7 +43,7 @@
 
 <body class="page-design">
   <div class="design-box">
-    <div class="sidebar-edit-wrap" id="app" v-cloak>
+    <div class="sidebar-edit-wrap" id="app" v-cloak v-loading="!design.ready">
       <div class="design-head">
         <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>{{ __('common.return') }}</div>
         <div @click="viewHome"><i class="el-icon-switch-button"></i>{{ __('common.exit') }}</div>

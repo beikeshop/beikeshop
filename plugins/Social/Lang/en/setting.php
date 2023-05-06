@@ -27,6 +27,8 @@ return [
     'text_twitter_title'  => 'Twitter login application address',
     'text_help_msg'       => 'help information',
 
+    'copy_success'             => 'Copy Success',
+
     // Entry
     'entry_status'        => 'Status',
     'entry_bind'          => 'Force Bind',

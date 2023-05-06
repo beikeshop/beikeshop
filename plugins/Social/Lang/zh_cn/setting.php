@@ -27,6 +27,8 @@ return [
     'text_twitter_title'       => 'Twitter登录申请地址',
     'text_help_msg'            => '帮助信息',
 
+    'copy_success'             => '复制成功',
+
     // Entry
     'entry_status'             => '状态',
     'entry_bind'               => '强制绑定',

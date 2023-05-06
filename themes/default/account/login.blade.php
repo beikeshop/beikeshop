@@ -10,7 +10,9 @@
 
 
 @section('content')
-  <x-shop-breadcrumb type="static" value="login.index" />
+  @if (!request('iframe'))
+    <x-shop-breadcrumb type="static" value="login.index" />
+  @endif
 
   <div class="{{ request('iframe') ? 'container-fluid form-iframe mt-5' : 'container' }}" id="page-login" v-cloak>
     @if (!request('iframe'))
