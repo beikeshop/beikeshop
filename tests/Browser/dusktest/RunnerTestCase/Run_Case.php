@@ -56,7 +56,9 @@ use PHPUnit\TextUI\DefaultResultPrinter;
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CreateCategoriesTest.php');//添加商品分类
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\EnableProductTest.php');//启用商品
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\DisableProductTest.php');//禁用商品
+    $suite->addTestFile('.\tests\Browser\dusktest\page\combine\EnableProductTest.php');//启用商品
     $suite->addTestFile('.\tests\Browser\dusktest\page\combine\UnderstockOrderTest.php');//库存不足下单
+        $suite->addTestFile('.\tests\Browser\dusktest\page\combine\CustomerGroupDiscountTest.php');//客户组折扣检验
 
     // 运行测试套件
     $result = $suite->run();
