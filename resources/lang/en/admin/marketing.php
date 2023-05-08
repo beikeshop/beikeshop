@@ -36,4 +36,7 @@ return [
     'ali_pay_text'            => 'Payment has been completed, please refresh the page',
     'version_compatible_text' => 'This plugin is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">Latest Version</a>',
     'to_update'               => 'To Upgrade',
+    'bk_register_hint' => 'Register a new account with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_login_hint' => 'login with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> account',
+    'bind_bk_token'                       => 'Bind BeikeShop account and get Token automatically',
 ];

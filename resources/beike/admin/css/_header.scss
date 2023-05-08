@@ -49,9 +49,15 @@
 
       &:hover {
         .input-wrap {
-          background-color: #f0f3f8;
+          background-color: #f1f3f8;
           .search-icon {
-            color: #4f5b68;
+            color: #2a343f;
+          }
+        }
+
+        input#header-search-input {
+          &::-webkit-input-placeholder {
+            color: #546371;
           }
         }
       }
@@ -65,20 +71,25 @@
         width: 330px;
         border-radius: 6px;
         font-size: 16px;
-        background-color: #f6f7fa;
+        background-color: #f2f4f7;
 
         .search-icon {
-          // color: #8c98a4;
-          // color: #798591;
-          color: #626f7c;
+          color: #52606f;
         }
 
         &.active {
           // background-color: #f6f7fa;
-          background-color: #f0f3f8;
+          background-color: #ebeff5;
+          border-radius: 8px;
           height: 40px;
           .search-icon {
-            color: #4f5b68;
+            color: #2a343f;
+          }
+
+          input#header-search-input {
+            &::-webkit-input-placeholder {
+              color: #546371;
+            }
           }
 
           .close-icon {
@@ -117,7 +128,7 @@
           height: 40px;
           // 设置 placeholder 颜色
           &::-webkit-input-placeholder {
-            color: #8c98a4;
+            color: #7b8996;
           }
         }
       }
@@ -274,6 +285,7 @@
           &:hover {
             .nav-link {
               background-color: #eee;
+              color: #333 !important;
             }
 
             .dropdown-menu {
@@ -330,7 +342,11 @@
           }
 
           a.nav-link {
-            padding: 0 14px;
+            padding: 0 20px;
+
+            &:hover {
+              color: $primary;
+            }
           }
 
           &.update-btn a {

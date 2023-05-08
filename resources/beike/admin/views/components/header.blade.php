@@ -93,7 +93,7 @@
         <li class="nav-item me-3">
           <div class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-              <span class="text-dark ml-2">{{ current_user()->name }}</span>
+              <span class="ml-2">{{ current_user()->name }}</span>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">

@@ -489,7 +489,7 @@
               type: 'warning'
             }).then(() => {
               $http.delete(`file_manager/directories`, {
-                name: this.folderCurrent
+                name: data.path
               }).then((res) => {
                 layer.msg(res.message)
                 this.$refs.tree.setCurrentKey(node.parent.data.path)
@@ -522,13 +522,22 @@
         },
 
         openInputBox(type, node, data) {
+          let fileSuffix, fileName = '';
+
+          if (type == 'image') {
+            const image = this.images[this.selectImageIndex].name;
+            // 获取文件后缀
+            fileSuffix = image.substring(image.lastIndexOf('.') + 1);
+            // 获取文件名
+            fileName = image.substring(0, image.lastIndexOf('.'));
+          }
+
           this.$prompt('', type == 'addFolder' ? '{{ __('admin/file_manager.new_folder') }}' : '{{ __('admin/file_manager.rename') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',
             cancelButtonText: '{{ __('common.cancel') }}',
             inputPattern: /^.+$/,
             closeOnClickModal: false,
-            inputValue: type == 'image' ? this.images[this.selectImageIndex].name : (type == 'renameFolder' ? data
-              .name : '{{ __('admin/file_manager.new_folder') }}'),
+            inputValue: type == 'image' ? fileName : (type == 'renameFolder' ? data.name : '{{ __('admin/file_manager.new_folder') }}'),
             inputErrorMessage: '{{ __('admin/file_manager.can_empty') }}'
           }).then(({
             value
@@ -555,8 +564,10 @@
             }
 
             if (type == 'renameFolder') {
+              this.folderCurrent = data.path;
+
               $http.post(`file_manager/rename`, {
-                origin_name: this.folderCurrent,
+                origin_name: data.path,
                 new_name: value
               }).then((res) => {
                 layer.msg(res.message)
@@ -574,8 +585,9 @@
 
               $http.post(`file_manager/rename`, {
                 origin_name: origin_name,
-                new_name: value
+                new_name: value + '.' + fileSuffix
               }).then((res) => {
+                this.images[this.selectImageIndex].name = value + '.' + fileSuffix;
                 layer.msg(res.message)
               })
             }

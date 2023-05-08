@@ -25,7 +25,7 @@
             <tr v-for="brand, index in brands.data" :key="index">
               <td>@{{ brand.id }}</td>
               <td>@{{ brand.name }}</td>
-              <td><div class="wh-50"><img :src="thumbnail(brand.logo)" class="img-fluid"></div></td>
+              <td><div class="wh-50 border d-flex justify-content-center rounded-2 align-items-center"><img :src="thumbnail(brand.logo)" class="img-fluid rounded-2"></div></td>
               <td>@{{ brand.sort_order }}</td>
               <td>@{{ brand.first }}</td>
               <td>

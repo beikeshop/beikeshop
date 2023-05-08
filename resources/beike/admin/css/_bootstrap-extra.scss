@@ -46,8 +46,8 @@ hr.horizontal.dark {
   // border-width: 2px;
 
   .nav-item {
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
+    margin-left: 0.65rem;
+    margin-right: 0.65rem;
 
     &:first-child {
       margin-left: 0;
@@ -60,7 +60,7 @@ hr.horizontal.dark {
     .nav-link {
       color: #6c757d;
       border: none;
-      padding: 0 .6rem 0.7rem;
+      padding: 0 1rem 0.7rem;
 
       &.active {
         color: $primary;
@@ -107,8 +107,11 @@ hr.horizontal.dark {
 table.table {
   thead {
     th {
-      background-color: #f9fbfd;
+      // background-color: #f9fbfd;
+      background-color: #f5f7f8;
       // color: #74859e;
+      padding-top: .7rem;
+      padding-bottom: .7rem;
       font-size: .825rem;
       border-top-width: 0;
       border-bottom: none;
@@ -252,5 +255,55 @@ table.table {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
     margin-left: -1px;
+  }
+}
+
+.pagination {
+  > li {
+    margin: 0 5px;
+    font-weight: bold;
+    a, span {
+      text-align: center;
+      border-radius: 2px !important;
+      min-width: 30px;
+    }
+  }
+}
+
+.dropdown-menu {
+  box-shadow: 0 .5rem 2rem 0.125rem rgba(140, 152, 164, 0.286);
+}
+
+.input-locale-wrap {
+  > .input-for-group, .input-group {
+    & + .input-for-group, & + .input-group {
+      margin-top: -1px;
+    }
+
+    input, span, textarea {
+      border-radius: 0;
+    }
+
+    // 选择第一个
+    &:first-child {
+      input, textarea {
+        border-top-right-radius: 0.2rem;
+      }
+
+      span {
+        border-top-left-radius: 0.2rem;
+      }
+    }
+
+    // 选择最后一个
+    &:last-child {
+      input, textarea {
+        border-bottom-right-radius: 0.2rem;
+      }
+
+      span {
+        border-bottom-left-radius: 0.2rem;
+      }
+    }
   }
 }

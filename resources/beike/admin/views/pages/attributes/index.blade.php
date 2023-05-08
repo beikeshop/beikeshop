@@ -35,7 +35,7 @@
         </table>
       </div>
 
-      <el-pagination v-if="attributes.data.length" layout="total, prev, pager, next" background :page-size="attributes.per_page" :current-page.sync="page"
+      <el-pagination v-if="attributes.data.length" layout="prev, pager, next" background :page-size="attributes.per_page" :current-page.sync="page"
         :total="attributes.total"></el-pagination>
     </div>
 

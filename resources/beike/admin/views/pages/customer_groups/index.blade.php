@@ -3,7 +3,7 @@
 @section('title', __('admin/common.customer_groups_index'))
 
 @section('content')
-  <div id="customer-app" class="card" v-cloak>
+  <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/customer_group.customer_groups_create') }}</button>

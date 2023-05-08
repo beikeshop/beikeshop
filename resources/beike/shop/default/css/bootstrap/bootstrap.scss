@@ -74,6 +74,17 @@ $alert-padding-y: 0.5rem;
 $form-feedback-icon-valid: none;
 $form-feedback-icon-valid-color: inherit;
 
+$pagination-border-width: 0;
+$pagination-bg: #f4f4f5;
+$pagination-color: #606266;
+$pagination-border-radius: 2px;
+$pagination-disabled-bg: $pagination-bg;
+$pagination-disabled-color: #c0c4cc;
+$pagination-hover-color: $primary;
+$pagination-padding-x: 4px;
+$pagination-padding-y: .3rem;
+$pagination-focus-color: #606266;
+
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap/scss/bootstrap';
@@ -162,6 +173,18 @@ $form-feedback-icon-valid-color: inherit;
       &~.form-check-label {
         color: inherit;
       }
+    }
+  }
+}
+
+.pagination {
+  > li {
+    margin: 0 5px;
+    font-weight: bold;
+    a, span {
+      text-align: center;
+      border-radius: 2px !important;
+      min-width: 30px;
     }
   }
 }

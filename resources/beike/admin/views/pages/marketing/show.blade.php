@@ -24,7 +24,7 @@ $data = $plugin['data'];
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>
-      <div class="ms-lg-5 mt-2">
+      <div class="ms-lg-5">
         <h2 class="card-title mb-4">{{ $data['name'] }}</h2>
         <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
           <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span
@@ -35,23 +35,23 @@ $data = $plugin['data'];
             class="lh-1 bg-secondary"></span>
         </div>
 
-        <div class="mb-4">
-          <div class="mb-2 fw-bold">{{ __('product.price') }}：</div>
-          <div class="fs-3 fw-bold">{{ $data['price_format'] }}</div>
+        <div class="mb-3">
+          <div class="mb-1 fw-bold">{{ __('product.price') }}：</div>
+          <div class="fs-3 fw-bold" style="margin-left: -4px">{{ $data['price_format'] }}</div>
         </div>
 
-        <div class="mb-4">
-          <div class="mb-2 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
+        <div class="mb-3">
+          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
           <div>{{ $data['version'] }}</div>
         </div>
 
-        <div class="mb-4">
-          <div class="mb-2 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
+        <div class="mb-3">
+          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
           <div>{{ $data['version_name_format'] }}</div>
         </div>
 
-        <div class="mb-4">
-          <div class="mb-2 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
+        <div class="mb-3">
+          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
           <div class="d-inline-block">
             <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
               class="d-flex align-items-center text-dark">
@@ -101,26 +101,25 @@ $data = $plugin['data'];
     <div class="d-flex justify-content-center align-items-center" id="code-info"></div>
   </div>
 
-  <el-dialog title="{{ __('admin/marketing.set_token') }}" :close-on-click-modal="false"
-    :visible.sync="setTokenDialog.show" width="820px" @close="dialogOnClose">
-    {{-- <el-input type="textarea" :rows="3" placeholder="{{ __('admin/marketing.set_token') }}"
-      v-model="setTokenDialog.token">
-    </el-input>
-    <div class="mt-3 text-secondary fs-6">{{ __('admin/marketing.get_token_text') }} <a
-        href="{{ config('beike.api_url') }}/account/websites?domain={{ $domain }}" class="link-primary"
-        target="_blank">{{ __('admin/marketing.get_token') }}</a></div>
-    <div class="d-flex justify-content-end align-items-center mt-4">
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>
-        <el-button type="primary" @click="submitToken">{{ __('common.confirm') }}</el-button>
-      </span>
-    </div> --}}
-    <div class="login-wrap d-flex mb-4 px-2">
-      <div class="card w-50 border-0 p-0 shadow-none">
-        <div class="p-0 card-header">
-          <h5 class="bg-light px-2 py-3 text-black mb-3">{{ __('shop/login.login') }}</h5>
-        </div>
-        <div class="card-body p-0">
+  <el-dialog title="{{ __('admin/marketing.bind_bk_token') }}" :close-on-click-modal="false"
+    :visible.sync="setTokenDialog.show" width="520px" @close="dialogOnClose">
+
+    <div class="login-wrap mb-4 px-2" style="margin-top: -20px">
+      <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+        <li class="nav-item flex-1 text-center" role="presentation">
+          <button class="nav-link active w-100" data-bs-toggle="tab" data-bs-target="#tab-login" type="button" >{{ __('shop/login.login') }}</button>
+        </li>
+        <li class="nav-item flex-1 text-center" role="presentation">
+          <button class="nav-link w-100" data-bs-toggle="tab" data-bs-target="#tab-register" type="button">{{ __('shop/login.register') }}</button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-login">
+          <div class="alert alert-info" role="alert">
+            <i class="bi bi-question-circle"></i> {!! __('admin/marketing.bk_login_hint') !!}
+          </div>
+
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
             <el-form-item label="{{ __('shop/login.email') }}" prop="email">
               <el-input @keyup.enter.native="checkedBtnLogin('loginForm')" v-model="loginForm.email"
@@ -138,16 +137,12 @@ $data = $plugin['data'];
             </div>
           </el-form>
         </div>
-      </div>
 
-      <div class="d-flex vr-wrap mx-5">
-        <div class="vr bg-secondary"></div>
-      </div>
-      <div class="card w-50 border-0 p-0 shadow-none">
-        <div class="p-0 card-header">
-          <h5 class="bg-light px-2 py-3 text-black mb-3">{{ __('shop/login.new') }}</h5>
-        </div>
-        <div class="card-body p-0">
+        <div class="tab-pane fade" id="tab-register">
+          <div class="alert alert-info" role="alert">
+            <i class="bi bi-question-circle"></i> {!! __('admin/marketing.bk_register_hint') !!}
+          </div>
+
           <el-form ref="registerForm" :model="registerForm" :rules="registeRules">
             <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
               <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.name"
@@ -208,51 +203,51 @@ $data = $plugin['data'];
       },
 
       loginForm: {
-          email: '',
-          password: '',
-        },
+        email: '',
+        password: '',
+      },
 
-        registerForm: {
-          email: '',
-          name: '',
-          telephone: '',
-          qq: '',
-          password: '',
-        },
+      registerForm: {
+        email: '',
+        name: '',
+        telephone: '',
+        qq: '',
+        password: '',
+      },
 
-        loginRules: {
-          email: [
-            {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'change'},
-            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
-          ],
-          password: [
-            {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'change'}
-          ]
-        },
+      loginRules: {
+        email: [
+          {required: true, message: '{{ __('shop/login.enter_email') }}', trigger: 'change'},
+          {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
+        ],
+        password: [
+          {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'change'}
+        ]
+      },
 
-        registeRules: {
-          name: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')]) }}', trigger: 'change'},
-          ],
-          telephone: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('address.phone')]) }}', trigger: 'change'},
-          ],
-          email: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('shop/login.email')]) }}', trigger: 'change'},
-            {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
-          ],
-          password: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('shop/login.password')]) }}', trigger: 'change'},
-          ],
-        },
+      registeRules: {
+        name: [
+          {required: true, message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')]) }}', trigger: 'change'},
+        ],
+        telephone: [
+          {required: true, message: '{{ __('common.error_required', ['name' => __('address.phone')]) }}', trigger: 'change'},
+        ],
+        email: [
+          {required: true, message: '{{ __('common.error_required', ['name' => __('shop/login.email')]) }}', trigger: 'change'},
+          {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
+        ],
+        password: [
+          {required: true, message: '{{ __('common.error_required', ['name' => __('shop/login.password')]) }}', trigger: 'change'},
+        ],
+      },
     },
 
     methods: {
       checkedBtnLogin(form) {
-        let _data = this.loginForm, url = '/login'
+        let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
 
         if (form == 'registerForm') {
-          _data = this.registerForm, url = '/register'
+          _data = this.registerForm, url = `${config.api_url}/api/register?domain=${config.app_url}`
         }
 
         this.$refs['loginForm'].clearValidate();
@@ -264,10 +259,19 @@ $data = $plugin['data'];
             return;
           }
 
-          return;
-
           $http.post(url, _data).then((res) => {
-            layer.msg(res.message)
+            if (res.status == 'fail') {
+              layer.msg(res.message, ()=>{});
+              return;
+            }
+
+            layer.msg(res.message);
+
+            this.setTokenDialog.token = res.data.token;
+
+            $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
+              this.setTokenDialog.show = false;
+            })
           })
         });
       },
@@ -294,7 +298,6 @@ $data = $plugin['data'];
 
       marketingBuy() {
         if (!this.setTokenDialog.token) {
-          console.log(1);
           return this.setTokenDialog.show = true;
         }
 

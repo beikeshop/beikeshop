@@ -37,4 +37,7 @@ return [
     'ali_pay_text'                    => '已完成支付，请刷新页面',
     'version_compatible_text'         => '该插件不兼容当前系统版本，请升级到 <a href="' . config('beike.api_url') . '/download" target="_blank">最新版本</a>',
     'to_update'                       => '去升级',
+    'bk_register_hint'                       => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 上注册新账号',
+    'bk_login_hint'                       => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 账号登录',
+    'bind_bk_token'                       => '绑定BeikeShop账号，自动获取Token',
 ];

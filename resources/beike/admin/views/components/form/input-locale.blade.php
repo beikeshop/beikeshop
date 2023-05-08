@@ -1,4 +1,5 @@
 <x-admin::form.row :title="$title" :required="$required">
+<div class="input-locale-wrap">
   @foreach (locales() as $index => $locale)
     <div class="d-flex wp-{{ $width }} input-for-group">
       <span class="input-group-text wp-100 px-1" id="basic-addon1">{{ $locale['name'] }}</span>
@@ -13,4 +14,5 @@
       @enderror
     @endif
   @endforeach
+</div>
 </x-admin::form.row>

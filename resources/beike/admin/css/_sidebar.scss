@@ -50,7 +50,10 @@
     > .left {
       padding-top: 8px;
       min-width: 92px;
-      background-color: #eff3f7;
+      // background-color: #eff3f7;
+      // background-color: #dce5ee;
+      // background-color: #e4ebf2;
+      background-color: #ebf1f6;
       max-width: 130px;
 
       // 背景图
@@ -68,26 +71,20 @@
             color: #333;
             display: flex;
             text-decoration: none;
-            &::after {
-              content: '';
-              display: inline-block;
-              width: 3px;
-              height: 3px;
-            }
 
             i {
               margin-right: 7px;
             }
           }
 
-          &.active, &:hover {
-            background-color: #fff;
+          &.active {
             a {
               font-weight: bold;
-              &::after {
-                display: none;
-              }
             }
+          }
+
+          &.active, &:hover {
+            background-color: #fff;
 
             body.admin-home & {
               background-color: #f9fbfd;

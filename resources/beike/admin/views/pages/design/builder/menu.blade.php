@@ -84,7 +84,7 @@
                 <el-switch v-model="currentMenu.isFull"></el-switch>
               </div>
             </div>
-            <draggable class="children-group d-lg-flex" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
+            <draggable class="children-group d-lg-flex flex-wrap" style="margin: 0 -0.5rem" :list="currentMenu.childrenGroup"
               :options="{ animation: 330, handle: '.el-icon-rank' }">
               <div class="card border mx-2 mb-3 group-item" v-for="group, group_index in currentMenu.childrenGroup"
                 :key="group_index">

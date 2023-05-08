@@ -5,7 +5,7 @@
 @section('body-class', 'page-categories')
 
 @section('content')
-  <div id="category-app" class="card">
+  <div id="category-app" class="card h-min-600">
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">{{ __('admin/category.categories_create') }}</a>
       <div class="mt-4" style="" v-if="categories.length">

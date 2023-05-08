@@ -54,6 +54,23 @@ $nav-link-color: #555;
 $nav-link-hover-color: #555;
 $nav-tabs-link-active-color: #222;
 
+$pagination-border-width: 0;
+$pagination-bg: #f4f4f5;
+$pagination-color: #606266;
+$pagination-border-radius: 2px;
+$pagination-disabled-bg: $pagination-bg;
+$pagination-disabled-color: #c0c4cc;
+$pagination-hover-color: $primary;
+$pagination-padding-x: 4px;
+$pagination-padding-y: .3rem;
+$pagination-focus-color: #606266;
+
+$dropdown-box-shadow: 0 0.8rem 2.5rem 0.6125rem rgba(140, 152, 164, 0.286);
+$dropdown-item-padding-y:  0.45rem;
+$dropdown-border-color:  rgba(0, 0, 0, 0.064);
+// $dropdown-border-color: transparent;
+$dropdown-border-radius: 0.4rem;
+
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap/scss/bootstrap';
 // @import 'node_modules/bootstrap/scss/bootstrap';

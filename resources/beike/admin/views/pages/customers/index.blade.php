@@ -3,10 +3,10 @@
 @section('title', __('admin/common.customer'))
 
 @section('content')
-  <div id="customer-app" class="card" v-cloak>
+  <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
       <div class="bg-light p-4 mb-3">
-        <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="100px">
+        <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="70px">
           <div>
             <el-form-item label="{{ __('customer.name') }}">
               <el-input @keyup.enter.native="search" v-model="filter.name" size="small" placeholder="{{ __('customer.name') }}"></el-input>
@@ -34,7 +34,7 @@
         </el-form>
 
         <div class="row">
-          <label class="wp-100"></label>
+          <label style="width: 70px"></label>
           <div class="col-auto">
             <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>

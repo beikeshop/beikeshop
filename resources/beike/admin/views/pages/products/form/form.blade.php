@@ -67,15 +67,15 @@
                 :list="form.images"
                 :options="{animation: 200, handle: '.product-item'}"
                 >
-                <div v-for="image, index in form.images" :key="index" class="wh-80 product-item position-relative me-2 mb-2 border d-flex justify-content-center align-items-center max-h-100 overflow-hidden">
+                <div v-for="image, index in form.images" :key="index" class="wh-80 rounded-2 product-item position-relative me-2 mb-2 border d-flex justify-content-center align-items-center max-h-100 overflow-hidden">
                   <div class="position-absolute top-0 end-0">
                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeImages(index)" type="button"><i class="bi bi-trash"></i></button>
                   </div>
-                  <img :src="thumbnail(image)" class="img-fluid">
+                  <img :src="thumbnail(image)" class="img-fluid rounded-2">
                   <input type="hidden" name="images[]" :value="image">
                 </div>
                 <div v-if="!form.images.length" class="d-none"><input type="hidden" name="images[]" value=""></div>
-                <div class="set-product-img wh-80" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
+                <div class="set-product-img wh-80 rounded-2" @click="addProductImages"><i class="bi bi-plus fs-1 text-muted"></i></div>
               </draggable>
               <div class="help-text mb-1 mt-1">{{ __('admin/product.image_help') }}</div>
             </x-admin::form.row>
@@ -318,6 +318,7 @@
             </x-admin::form.row>
           </div>
           <div class="tab-pane fade" id="tab-attribute">
+            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/attribute.index') }}</h6>
             <x-admin::form.row title="{{ __('admin/attribute.set_attribute') }}">
               <div class="pdf-table">
                 <table class="table table-bordered w-max-600">
@@ -372,26 +373,32 @@
 
             <x-admin-form-input-locale :width="600" name="descriptions.*.meta_title" title="Meta title" :value="$descriptions"/>
             <x-admin::form.row title="Meta keywords">
-              @foreach ($languages as $language)
-              <div class="input-group w-max-600">
-                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $product->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+              <div class="input-locale-wrap">
+                @foreach ($languages as $language)
+                <div class="input-group w-max-600">
+                  <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                  <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $product->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+                </div>
+                @endforeach
               </div>
-              @endforeach
             </x-admin::form.row>
             <x-admin::form.row title="Meta description">
-              @foreach ($languages as $language)
-              <div class="input-group w-max-600">
-                <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-                <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control wp-400" placeholder="Meta description">{{ old('meta_description', $product->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+              <div class="input-locale-wrap">
+                @foreach ($languages as $language)
+                <div class="input-group w-max-600">
+                  <span class="input-group-text wp-100">{{ $language['name'] }}</span>
+                  <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control wp-400" placeholder="Meta description">{{ old('meta_description', $product->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+                </div>
+                @endforeach
               </div>
-              @endforeach
             </x-admin::form.row>
 
             @hook('admin.product.seo.after')
           </div>
 
           <div class="tab-pane fade" id="tab-relations">
+            <h6 class="border-bottom pb-3 mb-4">{{ __('admin/product.product_relations') }}</h6>
+
             <x-admin::form.row title="{{ __('admin/product.product_relations') }}">
               <div class="module-edit-group wp-600">
                 <div class="autocomplete-group-wrapper">
