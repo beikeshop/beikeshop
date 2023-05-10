@@ -100,8 +100,12 @@
 
           $http.post(`/stripe/capture`, this.form).then((res) => {
             layer.msg(res.message)
-            console.log(res)
-            location = "{{ shop_route('account.order.show', ['number' => $order->number]) }}"
+
+            @if (current_customer())
+                location = "{{ shop_route('account.order.show', ['number' => $order->number]) }}"
+            @else
+                location = "{{ shop_route('checkout.success', ['order_number' => $order->number]) }}"
+            @endif
           })
         });
       }

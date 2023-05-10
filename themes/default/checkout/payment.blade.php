@@ -5,7 +5,7 @@
 @section('content')
   <div class="container">
     <div class="row mt-5 mb-5 justify-content-center">
-      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 4])</div>
+      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 3])</div>
     </div>
 
     <div class="col-12">

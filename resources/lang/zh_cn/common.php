@@ -78,6 +78,8 @@ return [
     'batch_setting'        => '批量设置',
     'show_all'             => '查看所有',
     'get_more'             => '获取更多',
+    'view_more'            => '查看更多',
+    'view_details'         => '查看详情',
 
     'id'                   => 'ID',
     'created_at'           => '创建时间',
