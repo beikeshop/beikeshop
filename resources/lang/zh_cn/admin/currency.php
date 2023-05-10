@@ -16,4 +16,6 @@ return [
     'currencies_show'   => '货币详情',
     'currencies_update' => '更新货币',
     'currencies_delete' => '删除货币',
+
+    'order_exist' => '该货币有订单正在使用, 无法删除!',
 ];

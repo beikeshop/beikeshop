@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CurrencyRequest;
+use Beike\Models\Order;
 use Beike\Repositories\CurrencyRepo;
 use Illuminate\Http\Request;
 
@@ -66,9 +67,19 @@ class CurrencyController extends Controller
 
     public function destroy(Request $request, int $currencyId)
     {
-        CurrencyRepo::delete($currencyId);
-        hook_action('admin.currency.destroy.after', $currencyId);
+        try {
+            $currency   = CurrencyRepo::find($currencyId);
+            $orderExist = Order::query()->where('currency_code', $currency->code)->exists();
+            if ($orderExist) {
+                throw new \Exception(trans('admin/currency.order_exist'));
+            }
 
-        return json_success(trans('common.deleted_success'));
+            CurrencyRepo::delete($currencyId);
+            hook_action('admin.currency.destroy.after', $currencyId);
+
+            return json_success(trans('common.deleted_success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 }

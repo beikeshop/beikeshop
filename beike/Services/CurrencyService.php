@@ -42,12 +42,17 @@ class CurrencyService
             return $amount;
         }
 
-        $symbol_left   = $this->currencies[$currency]->symbol_left;
-        $symbol_right  = $this->currencies[$currency]->symbol_right;
-        $decimal_place = $this->currencies[$currency]->decimal_place;
+        $currencyRow = $this->currencies[$currency] ?? null;
+        if (empty($currencyRow)) {
+            return $amount;
+        }
+
+        $symbol_left   = $currencyRow->symbol_left;
+        $symbol_right  = $currencyRow->symbol_right;
+        $decimal_place = $currencyRow->decimal_place;
 
         if (! $value) {
-            $value = $this->currencies[$currency]->value;
+            $value = $currencyRow->value;
         }
 
         $amount = $value ? (float) $amount * $value : (float) $amount;
