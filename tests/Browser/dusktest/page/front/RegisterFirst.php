@@ -13,6 +13,7 @@ use App\Http\Controllers\By;
 require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
 require_once(dirname(__FILE__) . '/../../data/catalog/register.php');
+require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
 
 
 class RegisterFirst extends DuskTestCase
@@ -34,7 +35,7 @@ class RegisterFirst extends DuskTestCase
                 ->pause(2000)
                 ->press(register['register_btn'])
                 ->pause(6000)
-                ->assertSee(true_register['assert'])
+                ->assertPathIs(account['url'])
                 ->pause(2000)
             ;
         });

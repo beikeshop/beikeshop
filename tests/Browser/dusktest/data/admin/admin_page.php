@@ -1,7 +1,7 @@
 <?php
 const admin_top = [
     "login_url" =>"/admin",
-    "root"=> ".text-dark.ml-2",
+    "root"=> ".nav-item.me-3",
     "mg_index"=>".list-unstyled.navbar-nav li:nth-child(1)",//管理首页  .list-unstyled.navbar-nav
     "mg_order"=>".list-unstyled.navbar-nav li:nth-child(2)",//管理订单
     "mg_product"=>".list-unstyled.navbar-nav li:nth-child(3)",//管理商品
