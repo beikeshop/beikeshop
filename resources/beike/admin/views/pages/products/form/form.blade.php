@@ -197,7 +197,7 @@
                           </select>
                         </div>
                         <div role="button" class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40 me-2 bg-white" @click="batchSettingVariantImage">
-                          <img :src="thumbnail(variablesBatch.image)" class="img-fluid" v-if="variablesBatch.image">
+                          <img :src="thumbnail(variablesBatch.image)" class="img-fluid" v-if="variablesBatch.image" style="max-height: 40px;">
                           <i class="bi bi-plus fs-3 text-muted" v-else></i>
                         </div>
                         <input type="text" class="form-control me-2 bg-white" v-model="variablesBatch.model" placeholder="{{ __('admin/product.model') }}">
@@ -236,7 +236,7 @@
                                   <div class="position-absolute top-0 end-0">
                                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeSkuImages(skuIndex, index)" type="button"><i class="bi bi-trash"></i></button>
                                   </div>
-                                  <img :src="thumbnail(image)" class="img-fluid">
+                                  <img :src="thumbnail(image)" class="img-fluid" style="max-height: 40px;">
                                   <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'"
                                 placeholder="image">
                                 </div>
