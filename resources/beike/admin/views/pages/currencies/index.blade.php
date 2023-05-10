@@ -172,7 +172,12 @@
             type: 'warning'
           }).then(() => {
             $http.delete('currencies/' + id).then((res) => {
-              this.$message.success(res.message);
+              if (res.status == 'fail') {
+                layer.msg(res.message, () => {});
+                return;
+              }
+
+              layer.msg(res.message);
               self.currencies.splice(index, 1)
             })
           }).catch(()=>{})
