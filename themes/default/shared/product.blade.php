@@ -32,6 +32,7 @@
     @endif
   </div>
   <div class="product-bottom-info">
+    @hook('product_list.item.name.before')
     <div class="product-name">{{ $product['name_format'] }}</div>
     <div class="product-price">
       <span class="price-new">{{ $product['price_format'] }}</span>
