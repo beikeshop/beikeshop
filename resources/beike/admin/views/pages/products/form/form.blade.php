@@ -11,7 +11,7 @@
 @endpush
 
 @section('page-title-right')
-  <button type="button" class="btn btn-lg btn-primary submit-form" form="app">{{ __('common.save') }}</button>
+  <button type="button" class="btn btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
 @endsection
 
 @section('content')
@@ -497,6 +497,17 @@
 
 @push('footer')
   <script>
+    $('.submit-form').on('click', function () {
+      // 关闭多规格提交 清空 variables
+      if (!app.editing.isVariable) {
+        app.source.variables = [];
+      }
+
+      setTimeout(() => {
+        $(`form#app`).find('button[type="submit"]')[0].click();
+      }, 0);
+    })
+
     var app = new Vue({
       el: '#app',
       data: {
