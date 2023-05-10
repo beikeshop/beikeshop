@@ -79,6 +79,8 @@ return [
     'batch_setting'        => 'Batch setting',
     'show_all'             => 'View all',
     'get_more'             => 'Get More',
+    'view_more'            => 'View more',
+    'view_details'         => 'Check Details',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

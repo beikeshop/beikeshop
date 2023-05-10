@@ -148,7 +148,7 @@
       }
 
       $http.post('/checkout/confirm').then((res) => {
-        location = 'orders/' + res.number + '/success?type=create'
+        location = 'orders/' + res.number + '/pay?type=create'
       })
     });
 
