@@ -27,9 +27,15 @@ class MenusController extends Controller
 
     public function latestProducts()
     {
-        $products = ProductRepo::getBuilder(['active' => 1])
+        $products = ProductRepo::getBuilder(
+            [
+                'active' => 1,
+                'sort'   => 'created_at',
+                'order'  => 'desc',
+            ])
             ->whereHas('masterSku')
             ->with('inCurrentWishlist')
+            ->orderByDesc('created_at')
             ->paginate(perPage());
 
         $data = [

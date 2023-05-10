@@ -5,9 +5,9 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
 
 class SignOutTest extends DuskTestCase
 {
@@ -16,15 +16,11 @@ class SignOutTest extends DuskTestCase
      * @return void
      */
 
-
-
 //场景1 email不合法
     public function testSignOut()
-
     {
 
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
                 //1.登录
                 ->type(login['login_email'], true_login['email'])

@@ -1,26 +1,25 @@
 <?php
-namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace Tests\Browser;
+
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use App\Http\Controllers\By;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/product_1.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/checkout_page.php';
 
 //已注册客户且有地址，在下单时更换支付方式购买
 class ChangePayMethodTest extends DuskTestCase
 {
     public function testChangePayMethod()
     {
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
                 //1.用户登录
                 ->type(login['login_email'], true_login['email'])

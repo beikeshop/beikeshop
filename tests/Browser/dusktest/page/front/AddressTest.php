@@ -1,18 +1,16 @@
 <?php
 
 namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account.php');
-
-
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account.php';
 
 //已注册客户且有地址，直接购买商品
 class AddressTest extends DuskTestCase

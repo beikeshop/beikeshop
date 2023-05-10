@@ -16,7 +16,7 @@ class HomePage
     /**
      * Assert that the browser is on the page.
      *
-     * @param  Browser  $browser
+     * @param Browser $browser
      * @return void
      */
     public function assert(Browser $browser)
@@ -37,7 +37,7 @@ class HomePage
     /**
      * Click on the login link.
      *
-     * @param  Browser  $browser
+     * @param Browser $browser
      * @return void
      */
     public function clickLoginLink(Browser $browser)
@@ -48,8 +48,8 @@ class HomePage
     /**
      * Fill in the email field.
      *
-     * @param  Browser  $browser
-     * @param  string  $email
+     * @param Browser $browser
+     * @param string  $email
      * @return void
      */
     public function fillInEmailField(Browser $browser, $email)
@@ -60,8 +60,8 @@ class HomePage
     /**
      * Fill in the password field.
      *
-     * @param  Browser  $browser
-     * @param  string  $password
+     * @param Browser $browser
+     * @param string  $password
      * @return void
      */
     public function fillInPasswordField(Browser $browser, $password)
@@ -72,7 +72,7 @@ class HomePage
     /**
      * Submit the login form.
      *
-     * @param  Browser  $browser
+     * @param Browser $browser
      * @return void
      */
     public function submitLoginForm(Browser $browser)

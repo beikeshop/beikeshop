@@ -5,21 +5,20 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
 
 class LanguageSwitchTest extends DuskTestCase
 {
-    /**
-     * A basic browser test example.
-     * @return void
-     */
+        /**
+         * A basic browser test example.
+         * @return void
+         */
         public function testLanguageSwitch()
-    {
-
-        $this->browse(function (Browser $browser)
         {
+
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
                 //1.登录
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -35,8 +34,7 @@ class LanguageSwitchTest extends DuskTestCase
                 //切换回中文
                 ->click(admin_top['sw_language'])
                 ->click(admin_top['ch_language'])
-                ->assertSee(admin_assert['ch_assert'])
-            ;
+                ->assertSee(admin_assert['ch_assert']);
         });
     }
 }

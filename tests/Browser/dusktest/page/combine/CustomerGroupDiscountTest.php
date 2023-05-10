@@ -1,38 +1,33 @@
 <?php
-namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace Tests\Browser;
+
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Laravel\Dusk\TestCase;
-use Facebook\WebDriver\WebDriverBy;
-use App\Http\Controllers\By;
-use function PHPUnit\Framework\assertEquals;
-use function PHPUnit\Framework\assertNotEquals;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/express.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cus_grounp.php');
-require_once(dirname(__FILE__) . '/../../data/admin/customer_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/product_1.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/checkout_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/express.php';
+require_once dirname(__FILE__) . '/../../data/admin/cus_grounp.php';
+require_once dirname(__FILE__) . '/../../data/admin/customer_page.php';
 
 ///客户组折扣判断
 class CustomerGroupDiscountTest extends DuskTestCase
 {
     public function testCustomerGroupDiscount()
     {
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
             //1.后台登录，设置客户组折扣为30
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -76,15 +71,15 @@ class CustomerGroupDiscountTest extends DuskTestCase
                 ->pause(5000);
             //获取购买商品价格
                 $old_product_price = $browser->element(checkout['product_price']);
-                $text = $old_product_price->getText();
-                $matches = [];
+                $text              = $old_product_price->getText();
+                $matches           = [];
                 preg_match('/[\d\.]+/', $text, $matches);
-                $new_product_price= $matches[0];
+                $new_product_price = $matches[0];
 
             // 获取购买商品的数量
-                $old_quantity= $browser->element(checkout['quantity']);
-                $text = $old_quantity->getText();
-                $matches = [];
+                $old_quantity = $browser->element(checkout['quantity']);
+                $text         = $old_quantity->getText();
+                $matches      = [];
                 preg_match('/\d+/', $text, $matches);
                 $new_quantity = $matches[0];
             //商品总价
@@ -95,8 +90,8 @@ class CustomerGroupDiscountTest extends DuskTestCase
 //                $new_product_total = $matches[0];
             //运费
                 $old_shipping_fee = $browser->element(checkout['shipping_fee']);
-                $text = $old_shipping_fee->getText();
-                $matches = [];
+                $text             = $old_shipping_fee->getText();
+                $matches          = [];
                 preg_match('/[\d\.]+/', $text, $matches);
                 $new_shipping_fee = $matches[0];
             //折扣金额
@@ -118,17 +113,12 @@ class CustomerGroupDiscountTest extends DuskTestCase
 //                echo $new_shipping_fee;
 //                echo $new_customer_discount;
 //                echo $new_order_total;
-                $discunt_price=$new_product_price*$new_quantity*(30/100);
+                $discunt_price = $new_product_price * $new_quantity * (30 / 100);
 //                 echo $discunt_price;
-                $true_price=$new_product_price*$new_quantity-$discunt_price+$new_shipping_fee;
-                $browser->assertSeeIn(checkout['customer_discount'],$discunt_price,)
-                ->assertSeeIn(checkout['order_total'],$true_price);
+                $true_price = $new_product_price * $new_quantity - $discunt_price + $new_shipping_fee;
+                $browser->assertSeeIn(checkout['customer_discount'], $discunt_price)
+                ->assertSeeIn(checkout['order_total'], $true_price);
                 //5.点击确认按钮
-
-
-                    ;
-
-
 
         });
     }

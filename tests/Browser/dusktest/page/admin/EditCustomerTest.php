@@ -5,11 +5,11 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/customer.php');
-require_once(dirname(__FILE__) . '/../../data/admin/customer_page.php');
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/customer.php';
+require_once dirname(__FILE__) . '/../../data/admin/customer_page.php';
 class EditCustomerTest extends DuskTestCase
 {
     /**
@@ -19,8 +19,7 @@ class EditCustomerTest extends DuskTestCase
     public function testEditCustomer()
     {
 
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
                 //1.登录
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -38,9 +37,7 @@ class EditCustomerTest extends DuskTestCase
                 //5.点击保存
                 ->press(alter_customer['save_btn'])
                 ->pause(5000)
-                ->assertSee(customer_info_alter['email'])
-
-            ;
+                ->assertSee(customer_info_alter['email']);
                 });
     }
 }

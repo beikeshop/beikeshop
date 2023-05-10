@@ -1,25 +1,22 @@
 <?php
 
-
 namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/register.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/register.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
 
 class RegisterTest extends DuskTestCase
 {
-
     /**
      * A basic browser test example.
      */
     //场景1  使用已注册过的邮箱注册
     public function testUsedEmail()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -30,9 +27,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景2  前后密码输入不一致
     public function testDiffPwd()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -43,9 +40,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景3  邮箱格式不合法
     public function testIllegalEmail()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -56,9 +53,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景4  邮箱为空
     public function testNoEmail()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -68,9 +65,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景5  密码为空
     public function testNoPwd()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -80,9 +77,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景6  第二次密码为空
     public function testNoRepwd()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -92,9 +89,9 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(false_register['false_assert']);
         });
     }
+
     //场景7  第二次密码为空
     public function testRegisterFul()
-
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(login['login_url'])
@@ -106,5 +103,4 @@ class RegisterTest extends DuskTestCase
                 ->assertSee(true_register['assert']);
         });
     }
-
 }

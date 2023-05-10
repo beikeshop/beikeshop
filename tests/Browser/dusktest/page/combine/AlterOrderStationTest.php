@@ -1,34 +1,32 @@
 <?php
+
 namespace Tests\Browser;
+
 namespace App\Http\Controllers;
 
-
+use Facebook\WebDriver\WebDriverBy;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Facebook\WebDriver\WebDriverBy;
-use App\Http\Controllers\By;
-use function PHPUnit\Framework\assertNotEquals;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/express.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/product_1.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/checkout_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/express.php';
 
 //已注册客户且有地址，直接购买商品
 class AlterOrderStationTest extends DuskTestCase
 {
     public function testAlterOrderStation()
     {
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
             //登录后台
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -62,8 +60,8 @@ class AlterOrderStationTest extends DuskTestCase
                 //5.点击确认按钮
                 ->press(checkout['submit'])
                 ->pause(5000);
-                $elements = $browser->elements(checkout['order_num']);
-                $order_num =$elements[15]->getText();
+                $elements  = $browser->elements(checkout['order_num']);
+                $order_num = $elements[15]->getText();
                 //打印订单号
                 echo $order_num;
                 $browser->click(checkout['view_order'])
@@ -72,7 +70,7 @@ class AlterOrderStationTest extends DuskTestCase
                 //点击订单管理按钮
                 $browser->click(admin_top['mg_order'])
                 //搜索框输入刚下单的订单号
-                ->type(order_right['search_order'],$order_num)
+                ->type(order_right['search_order'], $order_num)
                 //点击搜索按钮
                 ->press(order_right['search_bth'])
                 ->assertSee($order_num)
@@ -93,7 +91,7 @@ class AlterOrderStationTest extends DuskTestCase
                 ->refresh()
                 ->pause(1000)
                 // 断言是否已支付
-                ->assertSeeIn(get_order_status['status_text'],ca_order_status['Paid'])
+                ->assertSeeIn(get_order_status['status_text'], ca_order_status['Paid'])
             //切换到后台，将状态改为已发货
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 $browser->pause(2000)
@@ -123,11 +121,9 @@ class AlterOrderStationTest extends DuskTestCase
                 $browser->pause(3000)
                 ->refresh()
                 ->pause(4000)
-                ->assertSeeIn(get_order_status['status_text'],ca_order_status['Shipped'])
+                ->assertSeeIn(get_order_status['status_text'], ca_order_status['Shipped'])
             //切换到后台，修改状态为已完成
-                    ;
-
-
+;
 
         });
     }

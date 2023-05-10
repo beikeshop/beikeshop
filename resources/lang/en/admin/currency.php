@@ -16,5 +16,5 @@ return [
     'currencies_show'   => 'Detail',
     'currencies_update' => 'Edit',
     'currencies_delete' => 'Delete',
-    'order_exist' => 'This currency has orders in use and cannot be deleted!',
+    'order_exist'       => 'This currency has orders in use and cannot be deleted!',
 ];

@@ -5,13 +5,13 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/product_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cre_product_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cre_product.php');
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/product_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/cre_product_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/cre_product.php';
 class EditProductTest extends DuskTestCase
 {
     /**
@@ -19,14 +19,11 @@ class EditProductTest extends DuskTestCase
      * @return void
      */
 
-
-
 //场景1 email不合法
     public function testEditProduct()
     {
 
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
                 //1.登录
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -48,9 +45,7 @@ class EditProductTest extends DuskTestCase
                 //5.点击保存
                 ->press(product_top['save_btn'])
                 ->pause(3000)
-                ->assertSee(cre_assert['alter_ful_assert'])
-
-            ;
+                ->assertSee(cre_assert['alter_ful_assert']);
                 });
     }
 }

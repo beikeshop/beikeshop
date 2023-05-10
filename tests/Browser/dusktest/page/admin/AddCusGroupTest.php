@@ -5,11 +5,11 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cus_grounp.php');
-require_once(dirname(__FILE__) . '/../../data/admin/customer_page.php');
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/cus_grounp.php';
+require_once dirname(__FILE__) . '/../../data/admin/customer_page.php';
 class AddCusGroupTest extends DuskTestCase
 {
     /**
@@ -19,8 +19,7 @@ class AddCusGroupTest extends DuskTestCase
     public function testAddCusGroup()
     {
 
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
                 //1.登录
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -41,13 +40,10 @@ class AddCusGroupTest extends DuskTestCase
                 ->type(cre_cus_group['en_description'], cus_group_info['en_description'])
                 ->type(cre_cus_group['discount'], cus_group_info['discount'])
 
-
                 //5.点击保存
                 ->press(cre_cus_group['save_btn'])
                 ->pause(5000)
-                ->assertSee(cus_group_info['ch_group_name'])
-
-            ;
+                ->assertSee(cus_group_info['ch_group_name']);
         });
     }
 }

@@ -5,12 +5,12 @@ namespace Tests\Browser;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/systemset_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/customer_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/express.php');
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/systemset_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/customer_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/express.php';
 class AddExpressTest extends DuskTestCase
 {
     /**
@@ -20,8 +20,7 @@ class AddExpressTest extends DuskTestCase
     public function testExpressTest()
     {
 
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
                 //1.登录
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -44,10 +43,7 @@ class AddExpressTest extends DuskTestCase
                 ->pause(5000)
 
                 ->assertSee(express_assert['assert_ful'])
-                ->pause(3000)
-
-            ;
+                ->pause(3000);
         });
     }
-
 }

@@ -1,37 +1,34 @@
 <?php
-namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace Tests\Browser;
+
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Facebook\WebDriver\WebDriverBy;
-use App\Http\Controllers\By;
-use function PHPUnit\Framework\assertNotEquals;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/express.php');
-require_once(dirname(__FILE__) . '/../../data/admin/systemset_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/product_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cre_categories.php');
-require_once(dirname(__FILE__) . '/../../data/admin/cre_categories_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/product_1.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/checkout_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/express.php';
+require_once dirname(__FILE__) . '/../../data/admin/systemset_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/product_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/cre_categories.php';
+require_once dirname(__FILE__) . '/../../data/admin/cre_categories_page.php';
 //增加商品分类
 class CreateCategoriesTest extends DuskTestCase
 {
     public function testCreateCategories()
     {
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
         //登录后台
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -69,13 +66,7 @@ class CreateCategoriesTest extends DuskTestCase
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
                 $browser->click(index['top_Sports'])
                 ->pause(4000)
-                ->assertSee(categories_data['ch_name'])
-
-
-
-                ;
-
-
+                ->assertSee(categories_data['ch_name']);
 
         });
     }

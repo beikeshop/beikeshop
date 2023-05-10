@@ -1,35 +1,32 @@
 <?php
-namespace Tests\Browser;
-namespace App\Http\Controllers;
 
+namespace Tests\Browser;
+
+namespace App\Http\Controllers;
 
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
-use Facebook\WebDriver\WebDriverBy;
-use App\Http\Controllers\By;
-use function PHPUnit\Framework\assertNotEquals;
 
-require_once(dirname(__FILE__) . '/../../data/catalog/login.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/account_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/product_1.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/index_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/checkout_page.php');
-require_once(dirname(__FILE__) . '/../../data/catalog/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login.php');
-require_once(dirname(__FILE__) . '/../../data/admin/login_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/order_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/admin_page.php');
-require_once(dirname(__FILE__) . '/../../data/admin/express.php');
-require_once(dirname(__FILE__) . '/../../data/admin/systemset_page.php');
+require_once dirname(__FILE__) . '/../../data/catalog/login.php';
+require_once dirname(__FILE__) . '/../../data/catalog/login_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/account_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/product_1.php';
+require_once dirname(__FILE__) . '/../../data/catalog/index_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/checkout_page.php';
+require_once dirname(__FILE__) . '/../../data/catalog/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/login.php';
+require_once dirname(__FILE__) . '/../../data/admin/login_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/order_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/admin_page.php';
+require_once dirname(__FILE__) . '/../../data/admin/express.php';
+require_once dirname(__FILE__) . '/../../data/admin/systemset_page.php';
 
 //禁止游客结账
 class OpenVisiterCheckoutTest extends DuskTestCase
 {
     public function testCancelOrder()
     {
-        $this->browse(function (Browser $browser)
-        {
+        $this->browse(function (Browser $browser) {
             $browser->visit(admin_login['login_url'])
         //登录后台
                 ->type(admin_login['login_email'], admin_true_login['email'])
@@ -64,12 +61,7 @@ class OpenVisiterCheckoutTest extends DuskTestCase
                 ->press(product['product_1'])
                 ->pause(5000)
         //断言：出现登录窗体则通过
-                ->assertPathIs(checkout['url'])
-
-
-                    ;
-
-
+                ->assertPathIs(checkout['url']);
 
         });
     }
