@@ -50,7 +50,9 @@ class CartService
             return $description && $product;
         });
 
-        return CartDetail::collection($cartItems)->jsonSerialize();
+        $cartList = CartDetail::collection($cartItems)->jsonSerialize();
+
+        return hook_filter('service.cart.list', $cartList);
     }
 
     /**
