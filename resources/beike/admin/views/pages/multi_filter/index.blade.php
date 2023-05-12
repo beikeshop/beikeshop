@@ -21,21 +21,15 @@
               @select="(e) => {handleSelect(e, 'product_attributes')}"></el-autocomplete>
 
             <div class="item-group-wrapper" v-loading="multi_filter.loading">
-              <template v-if="multi_filter.filters.attribute.length">
-                <div v-for="(item, index) in multi_filter.filters.attribute" :key="index" class="item">
-                  <div>
-                    <i class="el-icon-s-unfold"></i>
-                    <span>@{{ item.name }}</span>
-                  </div>
-                  <i class="el-icon-delete right" @click="attributesRemoveProduct(index)"></i>
-                  <input type="text" :name="'multi_filter[attribute]['+ index +']'" v-model="item.id"
-                    class="form-control d-none">
+              <div v-for="(item, index) in multi_filter.filters.attribute" :key="index" class="item">
+                <div>
+                  <i class="el-icon-s-unfold"></i>
+                  <span>@{{ item.name }}</span>
                 </div>
-              </template>
-              <template v-else>
-                {{ __('admin/setting.please_select') }}
-                <input type="text" name="multi_filter" value="" class="form-control d-none">
-              </template>
+                <i class="el-icon-delete right" @click="attributesRemoveProduct(index)"></i>
+                <input type="text" :name="'multi_filter[attribute]['+ index +']'" v-model="item.id"
+                  class="form-control d-none">
+              </div>
             </div>
             <div class="help-text font-size-12 lh-base">{{ __('admin/setting.multi_filter_helper') }}</div>
           </div>
@@ -72,16 +66,6 @@
             {name: 'Log', code: 'log'},
           ]
         },
-      },
-      created() {
-        const multi_filter = @json($multi_filter ?? null);
-        if (multi_filter) {
-          this.multi_filter.filters = multi_filter;
-        } else {
-          this.multi_filter.filters = {
-            attribute: [],
-          }
-        }
       },
       methods: {
         attributesQuerySearch(keyword, cb, url) {
