@@ -10,9 +10,6 @@
             <el-input v-model="form.email"></el-input>
           </el-form-item>
         @endif
-        <el-form-item label="{{ __('address.phone') }}" prop="phone">
-          <el-input maxlength="11" v-model="form.phone" type="number"></el-input>
-        </el-form-item>
         <el-form-item label="{{ __('address.address') }}" required>
           <div class="row dialog-address">
             <div class="col-4">
@@ -40,14 +37,17 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="{{ __('address.post_code') }}" prop="zipcode">
-          <el-input v-model="form.zipcode"></el-input>
-        </el-form-item>
         <el-form-item label="{{ __('address.address_1') }}" prop="address_1">
           <el-input v-model="form.address_1"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.address_2') }}">
           <el-input v-model="form.address_2"></el-input>
+        </el-form-item>
+        <el-form-item label="{{ __('address.post_code') }}" prop="zipcode">
+          <el-input v-model="form.zipcode"></el-input>
+        </el-form-item>
+        <el-form-item label="{{ __('address.phone') }}">
+          <el-input maxlength="11" v-model="form.phone" type="number"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.default') }}" v-if="source.isLogin">
           <el-switch
@@ -100,11 +100,6 @@
           required: true,
           type: 'email',
           message: '{{ __('shop/login.enter_email') }}',
-          trigger: 'blur'
-        }, ],
-        phone: [{
-          required: true,
-          message: '{{ __('shop/account.addresses.enter_phone') }}',
           trigger: 'blur'
         }, ],
         address_1: [{
