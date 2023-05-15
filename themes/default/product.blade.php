@@ -151,6 +151,8 @@
           @else
             <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
           @endif
+
+          @hook('product.detail.after')
         </div>
       </div>
     </div>
