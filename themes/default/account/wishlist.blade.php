@@ -35,9 +35,9 @@
                       <td>{{ $item['price'] }}</td>
                       <td class="text-end">
                         <div class="">
-                          <a class="btn btn-dark btn-sm add-cart"
+                          <a class="btn btn-outline-secondary btn-sm add-cart"
                             href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
-                          <button class="btn btn-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
+                          <button class="btn btn-outline-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
                         </div>
                       </td>
                     </tr>

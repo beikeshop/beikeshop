@@ -104,7 +104,7 @@
             @foreach ($order->orderProducts as $product)
               <div class="product-list">
                 <div class="d-flex">
-                  <div class="left border d-flex justify-content-between align-items-center"><img src="{{ $product->image }}" class="img-fluid"></div>
+                  <div class="left border d-flex justify-content-center align-items-center wh-80"><img src="{{ $product->image }}" class="img-fluid"></div>
                   <div class="right">
                     <div class="name">
                     <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>

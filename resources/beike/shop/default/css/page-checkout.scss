@@ -170,9 +170,8 @@ body.page-checkout, body.page-bk-stripe {
           align-items: center; // flex-start | center
           padding-right: 4px;
 
-          img {
-            width: 40px;
-            margin-right: 10px;
+          .img {
+            flex: 0 0 40px;
           }
 
           .quantity {

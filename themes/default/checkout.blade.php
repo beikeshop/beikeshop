@@ -88,7 +88,9 @@
                 @foreach ($carts['carts'] as $cart)
                   <div class="item">
                     <div class="image">
-                      <img src="{{ $cart['image'] }}" class="img-fluid">
+                      <div class="img border d-flex align-items-center justify-content-center wh-40 me-2">
+                        <img src="{{ image_resize($cart['image'], 100, 100) }}" class="img-fluid">
+                      </div>
                       <div class="name">
                         <div title="{{ $cart['name'] }}" class="text-truncate-2">{{ $cart['name'] }}</div>
                         @if ($cart['variant_labels'])
