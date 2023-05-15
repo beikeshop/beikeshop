@@ -40,7 +40,7 @@
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>{{ __('common.name') }}</th>
+                    <th>{{ __('address.name') }}</th>
                     <th>{{ __('common.phone') }}</th>
                     <th>{{ __('common.created_at') }}</th>
                     <th>{{ __('common.action') }}</th>
@@ -76,7 +76,7 @@
     <el-dialog title="{{ __('admin/customer.edit_address') }}" :visible.sync="dialogAddress.show" width="650px"
       @close="closeAddressDialog('addressForm')">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
-        <el-form-item label="{{ __('common.name') }}" prop="name">
+        <el-form-item label="{{ __('address.name') }}" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('common.phone') }}" prop="phone">
