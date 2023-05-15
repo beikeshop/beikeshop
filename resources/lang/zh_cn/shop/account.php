@@ -37,7 +37,7 @@ return [
         'index'                 => '修改个人信息',
         'modify_avatar'         => '修改头像',
         'suggest'               => '上传JPG或PNG图片。建议300 x 300。',
-        'name'                  => '名称',
+        'name'                  => '昵称',
         'email'                 => '邮箱',
         'crop'                  => '裁剪',
         'password_edit_success' => '密码修改成功',
@@ -48,7 +48,7 @@ return [
         'index'         => '我的收藏',
         'product'       => '商品',
         'price'         => '价格',
-        'check_details' => '查看详情',
+        'check_details' => '查看',
     ],
 
     'order'               => [

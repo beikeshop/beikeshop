@@ -12,14 +12,15 @@ body.page-account-address, body.page-checkout {
   .addresses-wrap {
     .item {
       position: relative;
-      padding: 14px 14px 14px 18px;
+      padding: 14px;
       margin-bottom: 1.3rem;
-      border: 1px solid #e8e8e8;
-      height: 130px;
+      border: 1px solid #e5e5e5;
+      height: 140px;
       cursor: pointer;
 
       @media (max-width: 768px) {
-        padding: 10px 10px 10px 14px;
+        padding: 10px;
+        height: auto;
       }
 
       &:hover {
@@ -71,9 +72,6 @@ body.page-account-address, body.page-checkout {
         align-items: center; // flex-start | center
         justify-content: space-between; // flex-end | center | space-between
         // flex-wrap: wrap;
-        a {
-          color: #2d68a8;
-        }
       }
     }
   }

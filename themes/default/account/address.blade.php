@@ -19,13 +19,13 @@
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account.addresses.index') }}</h5>
-          </div>
-          <div class="card-body h-600">
-            <button v-if="addresses.length" class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
+            <button v-if="addresses.length" class="btn btn-primary btn-sm mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
               {{ __('shop/account.addresses.add_address') }}</button>
+          </div>
+          <div class="card-body h-600 pt-0">
             <div class="addresses-wrap" v-cloak>
               <div class="row" v-if="addresses.length">
-                <div class="col-6" v-for="address, index in addresses" :key="index">
+                <div class="col-md-6 col-12" v-for="address, index in addresses" :key="index">
                   <div class="item">
                     <div class="name-wrap">
                       <span class="name">@{{ address.name }}</span>
@@ -38,8 +38,8 @@
                       <div><span class="badge bg-success"
                           v-if="address.default">{{ __('shop/account.addresses.default_address') }}</span></div>
                       <div>
-                        <a class="me-2" @click.stop="deleteAddress(index)">{{ __('shop/account.addresses.delete') }}</a>
-                        <a href="javascript:void(0)" @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</a>
+                        <button type="button" class="me-2 btn btn-outline-secondary btn-sm" @click.stop="deleteAddress(index)">{{ __('shop/account.addresses.delete') }}</button>
+                        <button type="button" href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.stop="editAddress(index)">{{ __('shop/account.addresses.edit') }}</button>
                       </div>
                     </div>
                   </div>
