@@ -59,6 +59,7 @@ body.page-account-address, body.page-checkout {
 
       .zipcode {
         margin-bottom: .3rem;
+        min-height: 20px;
       }
 
       .address-info {
@@ -68,6 +69,7 @@ body.page-account-address, body.page-checkout {
       }
 
       .address-bottom {
+        min-height: 28px;
         display: flex;
         align-items: center; // flex-start | center
         justify-content: space-between; // flex-end | center | space-between

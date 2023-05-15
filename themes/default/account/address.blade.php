@@ -31,7 +31,7 @@
                       <span class="name">@{{ address.name }}</span>
                       <span class="phone">@{{ address.phone }}</span>
                     </div>
-                    <div class="zipcode" style="min-height: 20px">@{{ address.zipcode }}</div>
+                    <div class="zipcode">@{{ address.zipcode }}</div>
                     <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
                       @{{ address.address_1 }}</div>
                     <div class="address-bottom">
