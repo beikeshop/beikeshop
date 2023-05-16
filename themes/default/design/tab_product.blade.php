@@ -2,9 +2,9 @@
   @include('design._partial._module_tool')
 
   <div class="module-info module-tab-product">
-    <div class="module-title">{{ $content['title'] }}</div>
+    <div class="module-title">{{ $content['title'] ?? '' }}</div>
     <div class="container">
-      @if ($content['tabs'])
+      @if ($content['tabs'] ?? false)
         <div class="nav justify-content-center mb-3">
           @foreach ($content['tabs'] as $key => $tabs)
           <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
