@@ -83,6 +83,8 @@ class PageRepo
         $page->descriptions()->createMany($data['descriptions']);
 
         $products = $data['products'] ?? [];
+        $page->pageProducts()->delete();
+
         if ($products) {
             $items = [];
             foreach ($products as $item) {
@@ -90,7 +92,6 @@ class PageRepo
                     'product_id' => $item,
                 ];
             }
-            $page->pageProducts()->delete();
             $page->pageProducts()->createMany($items);
         }
 

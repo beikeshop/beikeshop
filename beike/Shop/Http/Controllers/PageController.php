@@ -32,10 +32,6 @@ class PageController extends Controller
 
         $data = hook_filter('page.show.data', $data);
 
-        if ($page->category) {
-            return view('pages/article', $data);
-        }
-
         return view('pages/single', $data);
     }
 }

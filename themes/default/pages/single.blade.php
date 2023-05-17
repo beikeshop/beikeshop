@@ -1,8 +1,8 @@
 @extends('layout.master')
 @section('body-class', 'page-pages')
-@section('title', $page['meta_title'] ?: $page['title'])
-@section('keywords', $page['meta_keywords'])
-@section('description', $page['meta_description'])
+@section('title', $page->description->meta_title ?: $page->description->title)
+@section('keywords', $page->description->meta_keywords)
+@section('description', $page->description->meta_description)
 
 @section('content')
   <x-shop-breadcrumb type="page" :value="$page['id']" />
