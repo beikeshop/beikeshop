@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2023-02-13 09:26:05
+ * @LastEditTime  2023-05-17 13:49:44
  */
 
 export default {
@@ -129,4 +129,35 @@ export default {
     + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft
     + ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
   },
+
+  // 判断 js 插件是否加载，如果未加载则往页面添加 script 标签
+  loadScript(url, callback) {
+    // 判断页面中是否已经存在指定的 js 插件
+    if (!document.querySelector(`script[src="${url}"]`)) {
+      // 创建一个新的 script 标签
+      const script = document.createElement('script');
+      script.src = url;
+      // 将 script 标签添加到 head 标签中
+      document.head.appendChild(script);
+      // 监听 js 插件加载完成事件
+      script.onload = function () {
+        callback && callback();
+      }
+    } else {
+      callback && callback();
+    }
+  },
+
+  // 判断 css 插件是否加载，如果未加载则往页面添加 link 标签
+  loadStyle(url) {
+    // 判断页面中是否已经存在指定的 css 插件
+    if (!document.querySelector(`link[href="${url}"]`)) {
+      // 创建一个新的 link 标签
+      const link = document.createElement('link');
+      link.href = url;
+      link.rel = 'stylesheet';
+      // 将 link 标签添加到 head 标签中
+      document.head.appendChild(link);
+    }
+  }
 }
