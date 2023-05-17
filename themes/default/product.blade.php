@@ -149,11 +149,14 @@
               </button>
               @hook('product.detail.buy.after')
             </div>
+
+            @if (current_customer() || !request('iframe'))
             <div class="add-wishlist">
               <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
                 <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
               </button>
             </div>
+            @endif
           @else
             <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
           @endif
