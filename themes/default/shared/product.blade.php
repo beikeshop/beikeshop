@@ -15,6 +15,14 @@
           class="btn btn-dark text-light mx-1 rounded-3"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
+          title="{{ __('common.quick_view') }}"
+          onclick="bk.productQuickView({{ $product['id'] }})">
+          <i class="bi bi-eye"></i>
+        </button>
+        <button
+          class="btn btn-dark text-light mx-1 rounded-3"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
           title="{{ __('shop/products.add_to_favorites') }}"
           data-in-wishlist="{{ $product['in_wishlist'] }}"
           onclick="bk.addWishlist('{{ $product['id'] }}', this)">

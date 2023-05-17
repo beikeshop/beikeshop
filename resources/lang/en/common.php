@@ -81,6 +81,7 @@ return [
     'get_more'             => 'Get More',
     'view_more'            => 'View more',
     'view_details'         => 'Check Details',
+    'quick_view'           => 'Quick View',
 
     'id'                   => 'ID',
     'created_at'           => 'Created At',

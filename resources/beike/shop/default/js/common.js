@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2023-05-17 13:49:44
+ * @LastEditTime  2023-05-17 18:00:51
  */
 
 export default {
@@ -31,7 +31,7 @@ export default {
    * @param {*} isBuyNow  是否立即购买
    * @return {*}  返回Promise
    */
-  addCart({sku_id, quantity = 1, isBuyNow = false}, event) {
+  addCart({sku_id, quantity = 1, isBuyNow = false}, event, callback) {
     if (!config.isLogin && !config.guestCheckout) {
       this.openLogin()
       return;
@@ -48,6 +48,11 @@ export default {
       layer.msg(res.message)
       if (isBuyNow) {
         location.href = 'checkout'
+        return;
+      }
+
+      if (callback) {
+        callback(res)
       }
     }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
   },
@@ -93,6 +98,18 @@ export default {
       area: ['900px', '600px'],
       skin: 'login-pop-box',
       content: 'login?iframe=true' //iframe的url
+    });
+  },
+
+  productQuickView(id, callback) {
+    layer.open({
+      type: 2,
+      title: '',
+      shadeClose: true,
+      scrollbar: false,
+      area: ['1000px', '600px'],
+      skin: 'login-pop-box',
+      content: `products/${id}?iframe=true`
     });
   },
 

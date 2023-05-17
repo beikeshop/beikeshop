@@ -11,15 +11,21 @@
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
 @endpush
 
-@section('content')
-  <x-shop-breadcrumb type="product" :value="$product['id']" />
+@php
+  $iframeClass = request('iframe') ? 'd-none' : '';
+@endphp
 
-  <div class="container" id="product-app" v-cloak>
+@section('content')
+  @if (!request('iframe'))
+    <x-shop-breadcrumb type="product" :value="$product['id']" />
+  @endif
+
+  <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
     <div class="row mb-5 mt-3 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-3">
         <div class="product-image d-flex align-items-start">
           @if(!is_mobile())
-            <div class="left"  v-if="images.length">
+            <div class="left {{ $iframeClass }}"  v-if="images.length">
               <div class="swiper" id="swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
@@ -157,7 +163,7 @@
       </div>
     </div>
 
-    <div class="product-description">
+    <div class="product-description {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
         <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
@@ -193,7 +199,7 @@
     </div>
   </div>
 
-  @if ($relations)
+  @if ($relations && !request('iframe'))
     <div class="relations-wrap mt-5">
       <div class="container position-relative">
         <div class="title text-center fs-1 mb-4">{{ __('admin/product.product_relations') }}</div>
@@ -309,7 +315,15 @@
         },
 
         addCart(isBuyNow = false) {
-          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow});
+          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
+            @if (request('iframe'))
+              let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+              setTimeout(() => {
+                parent.layer.close(index); //再执行关闭
+                parent.bk.getCarts();
+              }, 400);
+            @endif
+          });
         },
 
         updateSelectedVariantsIndex() {
@@ -424,7 +438,5 @@
     const selectedVariants = variables.map((variable, index) => {
       return variable.values[selectedVariantsIndex[index]]
     });
-
-    console.log(selectedVariants);
   </script>
 @endpush
