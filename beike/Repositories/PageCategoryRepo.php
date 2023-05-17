@@ -154,12 +154,16 @@ class PageCategoryRepo
     }
 
     /**
-     * @param $page
+     * @param $pageCategory
      * @return string
      */
-    public static function getName($pageCategoryId)
+    public static function getName($pageCategory): string
     {
-        // 根据 pageCategoryId 获取 name，判断是否存在
+        if ($pageCategory instanceof PageCategory) {
+            return $pageCategory->description->title ?? '';
+        }
+
+        $pageCategoryId = (int)$pageCategory;
         $pageCategory = PageCategory::query()->whereHas('description', function ($query) use ($pageCategoryId) {
             $query->where('page_category_id', $pageCategoryId);
         })->first();
