@@ -142,4 +142,9 @@ class TotalService
     {
         return $this->cartProducts;
     }
+
+    public function getCurrentCart()
+    {
+        return $this->currentCart;
+    }
 }

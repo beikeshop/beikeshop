@@ -266,6 +266,7 @@ class OrderRepo
         OrderProductRepo::createOrderProducts($order, $carts['carts']);
         OrderTotalRepo::createTotals($order, $totals);
 
+        hook_filter('repository.order.create.after', ['order' => $order, 'data' => $data]);
         return $order;
     }
 

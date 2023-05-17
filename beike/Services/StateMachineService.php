@@ -152,7 +152,7 @@ class StateMachineService
             ];
         }
 
-        return $result;
+        return hook_filter('service.state_machine.all_statuses', $result);
     }
 
     /**
@@ -214,6 +214,8 @@ class StateMachineService
             }
             $this->{$function}($oldStatusCode, $status);
         }
+
+        hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
     }
 
     /**
@@ -224,11 +226,6 @@ class StateMachineService
      */
     private function validStatusCode($statusCode)
     {
-        if (! in_array($statusCode, self::ORDER_STATUS)) {
-            $statusCodeString = implode(', ', self::ORDER_STATUS);
-
-            throw new \Exception("Invalid order status, must be one of the '{$statusCodeString}'");
-        }
         $orderId           = $this->orderId;
         $orderNumber       = $this->order->number;
         $currentStatusCode = $this->order->status;
