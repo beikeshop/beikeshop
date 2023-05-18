@@ -283,9 +283,9 @@
       },
 
       methods: {
-        checkedVariableValue(variable_idnex, value_index, value) {
+        checkedVariableValue(variable_index, value_index, value) {
           $('.product-image .swiper .swiper-slide').eq(0).addClass('active').siblings().removeClass('active');
-          this.source.variables[variable_idnex].values.forEach((v, i) => {
+          this.source.variables[variable_index].values.forEach((v, i) => {
             v.selected = i == value_index
           })
 
