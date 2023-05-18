@@ -1,3 +1,8 @@
+@push('header')
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+@endpush
+
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @include('design._partial._module_tool')
 
@@ -37,32 +42,44 @@
   </div>
 
   <script>
-    new Swiper ('.module-product-{{ $module_id }}', {
-      watchSlidesProgress: true,
-      breakpoints:{
-        320: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 10,
+    function productSwiper() {
+      new Swiper ('.module-product-{{ $module_id }}', {
+        watchSlidesProgress: true,
+        breakpoints:{
+          320: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 30,
+          },
         },
-        768: {
-          slidesPerView: 4,
-          slidesPerGroup: 4,
-          spaceBetween: 30,
+        spaceBetween: 30,
+        // 如果需要分页器
+        pagination: {
+          el: '.module-product-{{ $module_id }}-pagination',
+          clickable: true,
         },
-      },
-      spaceBetween: 30,
-      // 如果需要分页器
-      pagination: {
-        el: '.module-product-{{ $module_id }}-pagination',
-        clickable: true,
-      },
 
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: '.product-next',
-        prevEl: '.product-prev',
-      },
-    })
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: '.product-next',
+          prevEl: '.product-prev',
+        },
+      })
+    }
+
+    @if ($design)
+      bk.loadStyle('{{ asset('vendor/swiper/swiper-bundle.min.css') }}');
+      bk.loadScript('{{ asset('vendor/swiper/swiper-bundle.min.js') }}', () => {
+        productSwiper();
+      })
+    @else
+      productSwiper();
+    @endif
+
   </script>
 </section>

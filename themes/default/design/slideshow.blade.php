@@ -1,3 +1,8 @@
+@push('header')
+  <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+@endpush
+
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @include('design._partial._module_tool')
 
@@ -18,8 +23,7 @@
   </div>
 
   <script>
-    bk.loadStyle('{{ asset('vendor/swiper/swiper-bundle.min.css') }}');
-    bk.loadScript('{{ asset('vendor/swiper/swiper-bundle.min.js') }}', () => {
+    function slideshowSwiper() {
       new Swiper ('.module-swiper-{{ $module_id }}', {
         loop: '{{ count($content['images']) > 1 ? true : false }}', // 循环模式选项
         autoplay: true,
@@ -38,6 +42,15 @@
           prevEl: '.slideshow-btnprev-{{ $module_id }}',
         },
       })
+    }
+
+  @if ($design)
+    bk.loadStyle('{{ asset('vendor/swiper/swiper-bundle.min.css') }}');
+    bk.loadScript('{{ asset('vendor/swiper/swiper-bundle.min.js') }}', () => {
+      slideshowSwiper();
     })
+  @else
+    slideshowSwiper();
+  @endif
   </script>
 </section>
