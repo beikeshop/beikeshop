@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            @hook('checkout.body.footer')
+            @hook('checkout.bottom')
           </div>
         </div>
       </div>
