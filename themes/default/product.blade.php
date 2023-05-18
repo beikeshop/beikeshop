@@ -228,6 +228,7 @@
 @push('add-scripts')
   <script>
     let swiperMobile = null;
+    const isIframe = bk.getQueryString('iframe', false);
 
     let app = new Vue({
       el: '#product-app',
@@ -319,13 +320,24 @@
 
         addCart(isBuyNow = false) {
           bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
-            @if (request('iframe'))
-              let index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            if (isIframe) {
+              let index = parent.layer.getFrameIndex(window.name); //当前iframe层的索引
+              parent.bk.getCarts();
+
               setTimeout(() => {
-                parent.layer.close(index); //再执行关闭
-                parent.bk.getCarts();
+                parent.layer.close(index);
+
+                if (isBuyNow) {
+                  parent.location.href = 'checkout'
+                } else {
+                  parent.$('.btn-right-cart')[0].click()
+                }
               }, 400);
-            @endif
+            } else {
+              if (isBuyNow) {
+                location.href = 'checkout'
+              }
+            }
           });
         },
 

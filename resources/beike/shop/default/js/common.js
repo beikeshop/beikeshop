@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2023-05-17 18:00:51
+ * @LastEditTime  2023-05-18 09:02:44
  */
 
 export default {
@@ -46,10 +46,6 @@ export default {
     $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
       this.getCarts();
       layer.msg(res.message)
-      if (isBuyNow) {
-        location.href = 'checkout'
-        return;
-      }
 
       if (callback) {
         callback(res)
