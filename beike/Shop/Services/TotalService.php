@@ -22,7 +22,6 @@ class TotalService
         'tax',
         'shipping',
         'customer_discount',
-        'order_total',
     ];
 
     public Cart $currentCart;
@@ -112,11 +111,14 @@ class TotalService
     {
         $maps = [];
         foreach (self::TOTAL_CODES as $code) {
-            $serviceName  = Str::studly($code) . 'Service';
-            $maps[$code]  = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+            $serviceName = Str::studly($code) . 'Service';
+            $maps[$code] = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
         }
 
-        return hook_filter('service.total.maps', $maps);
+        $maps                = hook_filter('service.total.maps', $maps);
+        $maps['order_total'] = "\Beike\\Shop\\Services\\TotalServices\\OrderTotalService";
+
+        return $maps;
     }
 
     /**

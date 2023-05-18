@@ -9,6 +9,6 @@
  * @modified   2022-07-28 20:59:38
  */
 return [
-    'title' => '제목',
+    'title'   => '제목',
     'content' => '내용',
 ];

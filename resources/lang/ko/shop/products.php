@@ -10,12 +10,12 @@
  */
 
 return [
-    'search' => '검색',
+    'search'           => '검색',
     'add_to_favorites' => '즐겨찾기',
-    'add_to_cart' => '장바구니 넣기',
-    'buy_now' => '바로 구매하기',
-    'product_details' => '상품상세',
-    'in_stock' => '재고 있음',
-    'out_stock' => '품절',
-    'model' => '모델',
+    'add_to_cart'      => '장바구니 넣기',
+    'buy_now'          => '바로 구매하기',
+    'product_details'  => '상품상세',
+    'in_stock'         => '재고 있음',
+    'out_stock'        => '품절',
+    'model'            => '모델',
 ];

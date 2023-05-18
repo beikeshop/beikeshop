@@ -10,9 +10,9 @@
  */
 
 return [
-    'index' => '단계',
-    'cart' => '장바구니',
-    'checkout' => '계산',
+    'index'                  => '단계',
+    'cart'                   => '장바구니',
+    'checkout'               => '계산',
     'submitted_successfully' => '제출 성공',
-    'payment' => '결제',
+    'payment'                => '결제',
 ];

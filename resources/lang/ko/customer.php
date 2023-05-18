@@ -10,8 +10,8 @@
  */
 
 return [
-    'name' => '이름',
-    'email' => 'Email',
-    'from' => '등록출처',
+    'name'           => '이름',
+    'email'          => 'Email',
+    'from'           => '등록출처',
     'customer_group' => '고객 그룹',
 ];

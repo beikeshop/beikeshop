@@ -10,6 +10,6 @@
  */
 
 return [
-    'add_wishlist_success' => '즐겨찾기에 추가됨',
+    'add_wishlist_success'    => '즐겨찾기에 추가됨',
     'remove_wishlist_success' => '즐겨찾기 제거 성공',
 ];

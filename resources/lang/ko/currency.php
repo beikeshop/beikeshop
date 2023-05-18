@@ -10,14 +10,14 @@
  */
 
 return [
-    'decimal_point' => '.',
+    'decimal_point'  => '.',
     'thousand_point' => ',',
-    'name' => '이름',
-    'code' => '코딩',
-    'icon' => '아이콘',
-    'symbol_left' => '왼쪽 기호',
-    'symbol_right' => '오른쪽 기호',
-    'value' => '환율값',
-    'decimal_place' => '소수 자리수',
-    'latest_value' => '최신 환율값',
+    'name'           => '이름',
+    'code'           => '코딩',
+    'icon'           => '아이콘',
+    'symbol_left'    => '왼쪽 기호',
+    'symbol_right'   => '오른쪽 기호',
+    'value'          => '환율값',
+    'decimal_place'  => '소수 자리수',
+    'latest_value'   => '최신 환율값',
 ];

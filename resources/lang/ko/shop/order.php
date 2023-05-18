@@ -11,8 +11,8 @@
  */
 
 return [
-    'invalid_order' => '무효 주문',
-    'confirm_order' => '사용자가 수령 확인',
-    'cancel_order' => '사용자의 주문 취소',
+    'invalid_order'      => '무효 주문',
+    'confirm_order'      => '사용자가 수령 확인',
+    'cancel_order'       => '사용자의 주문 취소',
     'order_already_paid' => '주문 결제 완료',
 ];

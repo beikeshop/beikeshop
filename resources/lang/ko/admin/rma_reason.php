@@ -10,7 +10,7 @@
  */
 
 return [
-    'rma_reasons_index' => '원인 목록',
+    'rma_reasons_index'  => '원인 목록',
     'rma_reasons_create' => '작성 이유',
     'rma_reasons_update' => '업데이트 이유',
     'rma_reasons_delete' => '삭제 사유',

@@ -9,10 +9,10 @@
  * @modified   2022-08-29 17:21:38
  */
 return [
-    'zone_name' => '성 이름',
+    'zone_name'         => '성 이름',
     'country_of_origin' => '소속 국가',
 
-    'zones_index' => '성 목록',
+    'zones_index'  => '성 목록',
     'zones_create' => '성 만들기',
     'zones_update' => '갱신된 성',
     'zones_delete' => '성 삭제',

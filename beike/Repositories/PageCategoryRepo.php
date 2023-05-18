@@ -163,8 +163,8 @@ class PageCategoryRepo
             return $pageCategory->description->title ?? '';
         }
 
-        $pageCategoryId = (int)$pageCategory;
-        $pageCategory = PageCategory::query()->whereHas('description', function ($query) use ($pageCategoryId) {
+        $pageCategoryId = (int) $pageCategory;
+        $pageCategory   = PageCategory::query()->whereHas('description', function ($query) use ($pageCategoryId) {
             $query->where('page_category_id', $pageCategoryId);
         })->first();
 
