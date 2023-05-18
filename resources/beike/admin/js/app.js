@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-05-18 11:52:03
+ * @LastEditTime  2023-05-18 15:33:10
  */
 
 import http from "../../../js/http";
@@ -92,7 +92,8 @@ const tinymceInit = () => {
     toolbar_mode: 'wrap',
     font_formats:
       "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
-      fontsize_formats: "10px 12px 14px 18px 24px 36px 48px 56px 72px 96px",
+    fontsize_formats: "10px 12px 14px 18px 24px 36px 48px 56px 72px 96px",
+    lineheight_formats: "1 1.1 1.2 1.3 1.4 1.5 1.7 2.4 3 4",
     setup: function(ed) {
       const height = ed.getElement().dataset.tinymceHeight;
       // console.log(ed);
