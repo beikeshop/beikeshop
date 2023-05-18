@@ -137,14 +137,8 @@
     $(document).on('click', '.radio-line-item', function(event) {
       const key = $(this).data('key');
       const value = $(this).data('value');
-
-      $http.put('/checkout', {[key]: value}).then((res) => {
+      updateCheckout(key, value, () => {
         $(this).addClass('active').siblings().removeClass('active')
-        updateTotal(res.totals)
-
-        if (typeof checkoutPutCallback === 'function') {
-          checkoutPutCallback(res)
-        }
       })
     });
 
@@ -169,7 +163,17 @@
     });
   });
 
-  function updateTotal(totals) {
+  const updateCheckout = (key, value, callback) => {
+    $http.put('/checkout', {[key]: value}).then((res) => {
+      updateTotal(res.totals)
+
+      if (typeof callback === 'function') {
+        callback(res)
+      }
+    })
+  }
+
+  const updateTotal = (totals) => {
     let html = '';
 
     totals.forEach((item) => {
@@ -179,7 +183,7 @@
     $('ul.totals').html(html);
   }
 
-  function updateShippingMethods(data, shipping_method_code) {
+  const updateShippingMethods = (data, shipping_method_code) => {
     let html = '';
 
     data.forEach((methods) => {
