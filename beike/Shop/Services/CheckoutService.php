@@ -232,7 +232,7 @@ class CheckoutService
 
         $cartList           = CartService::list($customer, true);
         $carts              = CartService::reloadData($cartList);
-        $totalClass         = hook_filter('service.checkout.total_service', 'TotalService');
+        $totalClass         = hook_filter('service.checkout.total_service', 'Beike\Shop\Services\TotalService');
         $totalService       = (new $totalClass($currentCart, $cartList));
         $this->totalService = $totalService;
 
