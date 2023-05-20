@@ -80,6 +80,7 @@ return [
     'get_more'             => '獲取更多',
     'view_more'            => '查看更多',
     'view_details'         => '查看詳情',
+    'quick_view'           => '快速預覽',
 
     'id'                   => 'ID',
     'created_at'           => '創建時間',

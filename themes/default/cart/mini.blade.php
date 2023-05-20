@@ -6,48 +6,48 @@
   @php $check = 0 @endphp
 
   @if ($carts)
-    <div class="offcanvas-right-products">
-      @foreach ($carts as $cart)
-        @if ($cart['selected']) @php $check = $check + 1 @endphp @endif
-        <div class="product-list d-flex align-items-center">
-          <div class="select-wrap">
-            <i class="bi {{ $cart['selected'] ? 'bi-check-circle-fill' : 'bi-circle' }}" data-id="{{ $cart['cart_id'] }}"></i>
-          </div>
-          <div class="product-info d-flex align-items-center">
-            <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image_url'] ?: image_resize('', 160, 160) }}" class="img-fluid"></a></div>
-            <div class="right flex-grow-1">
-              <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark text-truncate-2" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
-              <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>
-              <div class="product-bottom d-flex justify-content-between align-items-center">
-                <div class="price d-flex align-items-center">
-                  {{ $cart['price_format'] }} x
-                  <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
-                   data-id="{{ $cart['cart_id'] }}" data-sku="{{ $cart['sku_id'] }}" class="form-control p-1" value="{{ $cart['quantity'] }}">
-                </div>
-                <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
-                  {{ __('common.delete') }}</span>
+  <div class="offcanvas-right-products">
+    @foreach ($carts as $cart)
+      @if ($cart['selected']) @php $check = $check + 1 @endphp @endif
+      <div class="product-list d-flex align-items-center">
+        <div class="select-wrap">
+          <i class="bi {{ $cart['selected'] ? 'bi-check-circle-fill' : 'bi-circle' }}" data-id="{{ $cart['cart_id'] }}"></i>
+        </div>
+        <div class="product-info d-flex align-items-center">
+          <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-between align-items-center h-100"><img src="{{ $cart['image_url'] ?: image_resize('', 160, 160) }}" class="img-fluid"></a></div>
+          <div class="right flex-grow-1">
+            <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark text-truncate-2" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
+            <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>
+            <div class="product-bottom d-flex justify-content-between align-items-center">
+              <div class="price d-flex align-items-center">
+                {{ $cart['price_format'] }} x
+                <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                data-id="{{ $cart['cart_id'] }}" data-sku="{{ $cart['sku_id'] }}" class="form-control p-1" value="{{ $cart['quantity'] }}">
               </div>
+              <span class="offcanvas-products-delete" data-id="{{ $cart['cart_id'] }}"><i class="bi bi-x-lg"></i>
+                {{ __('common.delete') }}</span>
             </div>
           </div>
         </div>
-      @endforeach
-    </div>
-  @else
-    <div class="d-flex justify-content-center align-items-center flex-column">
-      <div class="empty-cart-wrap text-center mt-5">
-        <div class="empty-cart-icon mb-3">
-          <i class="bi bi-cart fs-1"></i>
-        </div>
-        <div class="empty-cart-text mb-3">
-          <h5>{{ __('shop/carts.cart_empty') }}</h5>
-          <p class="text-muted">{{ __('shop/carts.go_buy') }}</p>
-        </div>
-        <div class="empty-cart-action">
-          <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/carts.go_shopping') }}</a>
-        </div>
+      </div>
+    @endforeach
+  </div>
+  @endif
+
+  <div class="d-flex justify-content-center align-items-center flex-column empty-cart {{ $carts ? 'd-none' : '' }}">
+    <div class="empty-cart-wrap text-center mt-5">
+      <div class="empty-cart-icon mb-3">
+        <i class="bi bi-cart fs-1"></i>
+      </div>
+      <div class="empty-cart-text mb-3">
+        <h5>{{ __('shop/carts.cart_empty') }}</h5>
+        <p class="text-muted">{{ __('shop/carts.go_buy') }}</p>
+      </div>
+      <div class="empty-cart-action">
+        <a href="{{ shop_route('home.index') }}" class="btn btn-primary">{{ __('shop/carts.go_shopping') }}</a>
       </div>
     </div>
-  @endif
+  </div>
 </div>
 
 @if ($carts)

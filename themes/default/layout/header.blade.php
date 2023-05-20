@@ -116,9 +116,13 @@
           </li>
           @endhookwrapper
           <li class="nav-item">
-            <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
+            {{-- <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
               href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"
               aria-controls="offcanvasExample">
+              <i class="iconfont">&#xe634;</i>
+              <span class="cart-badge-quantity"></span>
+            </a> --}}
+            <a class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}" href="javascript:void(0);" role="button">
               <i class="iconfont">&#xe634;</i>
               <span class="cart-badge-quantity"></span>
             </a>
@@ -155,9 +159,7 @@
     </div>
   </div>
 
-  @if (!equal_route('shop.carts.index'))
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
-  @endif
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">

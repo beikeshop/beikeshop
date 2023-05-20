@@ -11,15 +11,21 @@
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
 @endpush
 
-@section('content')
-  <x-shop-breadcrumb type="product" :value="$product['id']" />
+@php
+  $iframeClass = request('iframe') ? 'd-none' : '';
+@endphp
 
-  <div class="container" id="product-app" v-cloak>
+@section('content')
+  @if (!request('iframe'))
+    <x-shop-breadcrumb type="product" :value="$product['id']" />
+  @endif
+
+  <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
     <div class="row mb-5 mt-3 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-3">
         <div class="product-image d-flex align-items-start">
           @if(!is_mobile())
-            <div class="left"  v-if="images.length">
+            <div class="left {{ $iframeClass }}"  v-if="images.length">
               <div class="swiper" id="swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images">
@@ -143,11 +149,14 @@
               </button>
               @hook('product.detail.buy.after')
             </div>
+
+            @if (current_customer() || !request('iframe'))
             <div class="add-wishlist">
               <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
                 <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
               </button>
             </div>
+            @endif
           @else
             <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
           @endif
@@ -157,7 +166,7 @@
       </div>
     </div>
 
-    <div class="product-description">
+    <div class="product-description {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
         <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
@@ -193,7 +202,7 @@
     </div>
   </div>
 
-  @if ($relations)
+  @if ($relations && !request('iframe'))
     <div class="relations-wrap mt-5">
       <div class="container position-relative">
         <div class="title text-center fs-1 mb-4">{{ __('admin/product.product_relations') }}</div>
@@ -219,6 +228,7 @@
 @push('add-scripts')
   <script>
     let swiperMobile = null;
+    const isIframe = bk.getQueryString('iframe', false);
 
     let app = new Vue({
       el: '#product-app',
@@ -273,9 +283,9 @@
       },
 
       methods: {
-        checkedVariableValue(variable_idnex, value_index, value) {
+        checkedVariableValue(variable_index, value_index, value) {
           $('.product-image .swiper .swiper-slide').eq(0).addClass('active').siblings().removeClass('active');
-          this.source.variables[variable_idnex].values.forEach((v, i) => {
+          this.source.variables[variable_index].values.forEach((v, i) => {
             v.selected = i == value_index
           })
 
@@ -309,7 +319,26 @@
         },
 
         addCart(isBuyNow = false) {
-          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow});
+          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
+            if (isIframe) {
+              let index = parent.layer.getFrameIndex(window.name); //当前iframe层的索引
+              parent.bk.getCarts();
+
+              setTimeout(() => {
+                parent.layer.close(index);
+
+                if (isBuyNow) {
+                  parent.location.href = 'checkout'
+                } else {
+                  parent.$('.btn-right-cart')[0].click()
+                }
+              }, 400);
+            } else {
+              if (isBuyNow) {
+                location.href = 'checkout'
+              }
+            }
+          });
         },
 
         updateSelectedVariantsIndex() {
@@ -424,7 +453,5 @@
     const selectedVariants = variables.map((variable, index) => {
       return variable.values[selectedVariantsIndex[index]]
     });
-
-    console.log(selectedVariants);
   </script>
 @endpush

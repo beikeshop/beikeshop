@@ -35,8 +35,9 @@
                       <td>{{ $item['price'] }}</td>
                       <td class="text-end">
                         <div class="">
-                          <a class="btn btn-outline-secondary btn-sm add-cart"
+                          <a class="btn btn-outline-secondary btn-sm"
                             href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
+                          <button class="btn btn-outline-secondary add-cart btn-sm">{{ __('shop/products.add_to_cart') }}</button>
                           <button class="btn btn-outline-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
                         </div>
                       </td>
@@ -60,21 +61,23 @@
 
 @push('add-scripts')
   <script>
-    $(document).ready(function() {
-      $('.remove-wishlist').click(function() {
-        const product_id = $(this).closest('tr').data('id');
+    $('.remove-wishlist').click(function() {
+      const product_id = $(this).closest('tr').data('id');
 
-        $http.delete('account/wishlist/' + product_id).then((res) => {
-          if (res.status == 'success') {
-            $(this).closest('tr').fadeOut(function() {
-              $(this).remove();
-              if ($('.remove-wishlist').length == 0) {
-                location.reload();
-              }
-            });
-          }
-        })
-      });
+      $http.delete('account/wishlist/' + product_id).then((res) => {
+        if (res.status == 'success') {
+          $(this).closest('tr').fadeOut(function() {
+            $(this).remove();
+            if ($('.remove-wishlist').length == 0) {
+              location.reload();
+            }
+          });
+        }
+      })
+    });
+
+    $('.add-cart').click(function() {
+      bk.productQuickView($(this).closest('tr').data('id'))
     });
   </script>
 @endpush
