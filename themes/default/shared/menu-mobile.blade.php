@@ -3,7 +3,7 @@
     @if ($menu['name'])
       <div class="accordion-item">
         <div class="nav-item-text">
-          <a class="nav-link" target="{{ isset($menu['new_window']) && $menu['new_window'] ? '_blank' : '_self' }}" href="{{ $menu['link'] ?? '' }}">
+          <a class="nav-link" target="{{ isset($menu['new_window']) && $menu['new_window'] ? '_blank' : '_self' }}" href="{{ $menu['link'] ?: '#flush-menu-' . $key }}" data-bs-toggle="{{  !$menu['link'] ? 'collapse' : ''}}">
             {{ $menu['name'] }}
             @if (isset($menu['badge']) && $menu['badge']['name'])
             <span class="badge" style="background-color: {{ $menu['badge']['bg_color'] }}; color: {{ $menu['badge']['text_color'] }}; border-color: {{ $menu['badge']['bg_color'] }}">
@@ -20,9 +20,11 @@
           @forelse ($menu['children_group'] as $c_key => $group)
           <div class="children-group">
             @if ($group['name'])
-            <div class="d-flex justify-content-between align-items-center py-2 children-title">
+            <div class="d-flex justify-content-between align-items-center children-title" data-bs-toggle="collapse" data-bs-target="#children-menu-{{ $key }}-{{ $c_key }}">
               <div>{{ $group['name'] }}</div>
+              @if ($group['children'])
               <span class="collapsed" data-bs-toggle="collapse" data-bs-target="#children-menu-{{ $key }}-{{ $c_key }}"><i class="bi bi-plus-lg"></i></span>
+              @endif
             </div>
             @endif
             <div class="accordion-collapse collapse {{ !$group['name'] ? 'd-block' : '' }}" id="children-menu-{{ $key }}-{{ $c_key }}" data-bs-parent="#flush-menu-{{ $key }}">

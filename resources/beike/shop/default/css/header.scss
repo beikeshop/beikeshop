@@ -384,12 +384,17 @@ header {
 
           .children-group {
             .children-title {
+              height: 44px;
               span {
-                width: 26px;
-                height: 26px;
+                margin-right: -10px;
+                width: 44px;
+                height: 42px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                &:active {
+                  background-color: #eee;
+                }
 
                 &[aria-expanded="true"] {
                   i::before {
