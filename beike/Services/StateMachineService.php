@@ -156,6 +156,24 @@ class StateMachineService
     }
 
     /**
+     * 获取所有有效订单状态
+     * @return string[]
+     */
+    public static function getValidStatuses(): array
+    {
+        $statuses = [
+            self::CREATED,
+            self::UNPAID,
+            self::PAID,
+            self::SHIPPED,
+            self::COMPLETED,
+            self::CANCELLED,
+        ];
+
+        return $statuses;
+    }
+
+    /**
      * 获取当前订单可以变为的状态
      *
      * @return array
