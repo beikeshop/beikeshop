@@ -33,7 +33,7 @@ class TaxRateRequest extends FormRequest
     public function rules(): array
     {
         $rule = [
-            'name'      => 'required|string|max:10',
+            'name'      => 'required|string|max:32',
             'rate'      => 'required|numeric',
             'type'      => 'required|in:percent,flat',
             'region_id' => 'required|int',
