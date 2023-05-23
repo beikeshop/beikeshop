@@ -31,7 +31,7 @@ class OrderRepo
      */
     public static function filterAll(array $filters = [])
     {
-        $builder = self::getListBuilder($filters)->orderByDesc('created_at');
+        $builder = static::getListBuilder($filters)->orderByDesc('created_at');
 
         return $builder->get();
     }
@@ -44,7 +44,7 @@ class OrderRepo
      */
     public static function getListByCustomer($customer): LengthAwarePaginator
     {
-        $builder = self::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
+        $builder = static::getListBuilder(['customer' => $customer])->orderByDesc('created_at');
 
         return $builder->paginate(perPage());
     }
@@ -56,7 +56,7 @@ class OrderRepo
      */
     public static function getLatestOrders($customer, $limit)
     {
-        return self::getListBuilder(['customer' => $customer])
+        return static::getListBuilder(['customer' => $customer])
             ->orderByDesc('created_at')
             ->take($limit)
             ->get();
@@ -68,7 +68,7 @@ class OrderRepo
      */
     public static function filterOrders(array $filters = []): LengthAwarePaginator
     {
-        $builder = self::getListBuilder($filters)->orderByDesc('created_at');
+        $builder = static::getListBuilder($filters)->orderByDesc('created_at');
 
         return $builder->paginate(perPage());
     }
