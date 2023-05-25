@@ -23,4 +23,7 @@ return [
     'notify'               => 'Whether to remind',
     'orders_update_status' => 'Update Status',
     'error_status'         => 'Please select a status',
+    'payments_history'         => 'Payment History',
+    'text_response'         => 'Pesponse',
+    'text_request'         => 'Pequest',
 ];

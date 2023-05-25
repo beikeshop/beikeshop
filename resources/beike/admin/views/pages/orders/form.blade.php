@@ -208,6 +208,40 @@
   </div>
   @endhookwrapper
 
+  @if ($order->orderPayments)
+    @hookwrapper('admin.order.form.payments')
+    <div class="card mb-4">
+      <div class="card-header"><h6 class="card-title">{{ __('admin/order.payments_history') }}</h6></div>
+      <div class="card-body">
+        <div class="table-push">
+          <table class="table ">
+            <thead class="">
+              <tr>
+                <th>ID</th>
+                <th>{{ __('admin/order.text_response') }}</th>
+                <th>{{ __('admin/order.text_request') }}</th>
+                <th>{{ __('order.created_at') }}</th>
+                <th>{{ __('order.updated_at') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($order->orderPayments as $payment)
+              <tr>
+                <td>{{ $payment->id }}</td>
+                <td>{{ $payment->response }}</td>
+                <td>{{ $payment->request }}</td>
+                <td>{{ $payment->created_at }}</td>
+                <td>{{ $payment->updated_at }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    @endhookwrapper
+  @endif
+
   @if ($order->orderShipments)
     @hookwrapper('admin.order.form.shipments')
     <div class="card mb-4">
@@ -219,7 +253,7 @@
               <tr>
                 <th>{{ __('order.express_company') }}</th>
                 <th>{{ __('order.express_number') }}</th>
-                <th>{{ __('order.history_created_at') }}</th>
+                <th>{{ __('order.updated_at') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -265,7 +299,7 @@
             <tr>
               <th>{{ __('order.history_status') }}</th>
               <th>{{ __('order.history_comment') }}</th>
-              <th>{{ __('order.history_created_at') }}</th>
+              <th>{{ __('order.updated_at') }}</th>
             </tr>
           </thead>
           <tbody>
