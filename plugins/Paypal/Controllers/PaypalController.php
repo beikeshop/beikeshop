@@ -15,6 +15,7 @@
 
 namespace Plugin\Paypal\Controllers;
 
+use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
 use Illuminate\Http\JsonResponse;
@@ -96,8 +97,10 @@ class PaypalController
         $customer    = current_customer();
         $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
 
+        OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $data]);
         $paypalOrderId = $data['paypalOrderId'];
         $result        = $this->paypalClient->capturePaymentOrder($paypalOrderId);
+        OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
 
         try {
             DB::beginTransaction();

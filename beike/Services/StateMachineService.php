@@ -15,6 +15,7 @@ use Beike\Models\Order;
 use Beike\Models\OrderHistory;
 use Beike\Models\OrderShipment;
 use Beike\Models\Product;
+use Beike\Repositories\OrderPaymentRepo;
 use Throwable;
 
 class StateMachineService
@@ -28,6 +29,8 @@ class StateMachineService
     private bool $notify;
 
     private array $shipment;
+
+    private array $payment;
 
     public const CREATED = 'created';                  // 已创建
 
@@ -112,6 +115,19 @@ class StateMachineService
     public function setShipment(array $shipment = []): self
     {
         $this->shipment = $shipment;
+
+        return $this;
+    }
+
+    /**
+     * 设置支付信息
+     *
+     * @param array $payment
+     * @return $this
+     */
+    public function setPayment(array $payment = []): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
@@ -338,6 +354,18 @@ class StateMachineService
             ]);
             $orderShipment->saveOrFail();
         }
+    }
+
+    /**
+     * 添加发货单号
+     * @throws Throwable
+     */
+    private function addPayment($oldCode, $newCode)
+    {
+        if (empty($this->payment)) {
+            return;
+        }
+        OrderPaymentRepo::createOrUpdatePayment($this->orderId, $this->payment);
     }
 
     /**

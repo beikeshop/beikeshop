@@ -11,6 +11,7 @@
 
 namespace Plugin\Stripe\Controllers;
 
+use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
@@ -24,6 +25,7 @@ class StripeController extends Controller
      *
      * @param Request $request
      * @return array
+     * @throws \Throwable
      */
     public function capture(Request $request): array
     {
@@ -32,14 +34,18 @@ class StripeController extends Controller
             $customer       = current_customer();
             $order          = OrderRepo::getOrderByNumber($number, $customer);
             $creditCardData = $request->all();
-            $result         = (new StripePaymentService($order))->capture($creditCardData);
+
+            OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $creditCardData]);
+            $result = (new StripePaymentService($order))->capture($creditCardData);
+            OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
+
             if ($result) {
-                StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID);
+                StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
 
                 return json_success(trans('Stripe::common.capture_success'));
             }
 
-                return json_success(trans('Stripe::common.capture_fail'));
+            return json_success(trans('Stripe::common.capture_fail'));
 
         } catch (\Exception $e) {
             return json_fail($e->getMessage());

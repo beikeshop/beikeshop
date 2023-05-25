@@ -59,6 +59,11 @@ class Order extends Base
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function orderPayments(): HasMany
+    {
+        return $this->hasMany(OrderPayment::class);
+    }
+
     public function subTotal()
     {
         $totals = $this->orderTotals;
