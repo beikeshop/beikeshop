@@ -217,9 +217,12 @@
           <table class="table ">
             <thead class="">
               <tr>
-                <th>ID</th>
-                <th>{{ __('admin/order.text_response') }}</th>
+                <th>{{ __('admin/order.order_id') }}</th>
+                <th>{{ __('admin/order.text_transaction_id') }}</th>
                 <th>{{ __('admin/order.text_request') }}</th>
+                <th>{{ __('admin/order.text_response') }}</th>
+                <th>{{ __('admin/order.text_callback') }}</th>
+                <th>{{ __('admin/order.text_receipt') }}</th>
                 <th>{{ __('order.created_at') }}</th>
                 <th>{{ __('order.updated_at') }}</th>
               </tr>
@@ -227,9 +230,16 @@
             <tbody>
               @foreach ($order->orderPayments as $payment)
               <tr>
-                <td>{{ $payment->id }}</td>
-                <td>{{ $payment->response }}</td>
+                <td>{{ $payment->order_id }}</td>
+                <td>{{ $payment->transaction_id }}</td>
                 <td>{{ $payment->request }}</td>
+                <td>{{ $payment->response }}</td>
+                <td>{{ $payment->callback }}</td>
+                <td>
+                  @if ($payment->receipt)
+                  <a href="{{ image_origin($payment->receipt) }}" target="_blank">{{ __('admin/order.text_click_view') }}</a>
+                  @endif
+                </td>
                 <td>{{ $payment->created_at }}</td>
                 <td>{{ $payment->updated_at }}</td>
               </tr>

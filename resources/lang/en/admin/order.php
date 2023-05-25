@@ -26,4 +26,10 @@ return [
     'payments_history'         => 'Payment History',
     'text_response'         => 'Pesponse',
     'text_request'         => 'Pequest',
+    'text_callback'         => 'Callback',
+    'text_callback'         => 'Callback',
+    'text_receipt'         => 'Receipt',
+    'order_id'         => 'Order Id',
+    'text_transaction_id'         => 'Transaction Id',
+    'text_click_view'         => 'Click To View',
 ];

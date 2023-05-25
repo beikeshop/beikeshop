@@ -26,4 +26,9 @@ return [
     'payments_history'         => '支付记录',
     'text_response'         => '返回数据',
     'text_request'         => '请求参数',
+    'text_callback'         => '回调',
+    'text_receipt'         => '凭据',
+    'order_id'         => '订单ID',
+    'text_transaction_id'         => '交易ID',
+    'text_click_view'         => '点击查看',
 ];
