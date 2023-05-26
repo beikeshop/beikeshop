@@ -10,6 +10,7 @@
         "ext-fileinfo": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-simplexml": "*",
         "ext-zip": "*",
