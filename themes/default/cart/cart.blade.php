@@ -114,6 +114,7 @@
     </div>
   </div>
 
+  @hook('carts.footer')
 @endsection
 
 @push('add-scripts')
@@ -126,15 +127,13 @@
         amount: @json($data['amount']),
         amount_format: @json($data['amount_format']),
       },
-      // components: {},
-      // 计算属性
+
       computed: {
         allSelected: {
           get() {
             return !this.products.length ? false : this.products.every(s => s.selected)
           },
           set(val) {
-            // return
             this.products.map(e => e.selected = val)
             this.selectedBtnSelected()
           }
@@ -144,9 +143,7 @@
           return this.products.map(e => e.quantity).reduce((n,m) => n + m);
         },
       },
-      // 侦听器
-      watch: {},
-      // 组件方法
+
       methods: {
         checkedBtnToCheckout() {
           if (!this.products.some(e => e.selected)) {
@@ -173,7 +170,6 @@
         },
 
         checkedCartTr(index) {
-          // this.products[index].selected = !this.products[index].selected;
           this.selectedBtnSelected();
         },
 
@@ -192,9 +188,6 @@
           this.total_quantity = res.data.quantity
           bk.getCarts()
         }
-      },
-      // 实例被挂载后调用
-      mounted () {
       },
     })
   </script>

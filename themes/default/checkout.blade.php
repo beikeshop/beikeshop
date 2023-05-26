@@ -21,6 +21,8 @@
       <div class="col-12 col-md-8 left-column">
         <div class="card shadow-sm">
           <div class="card-body p-lg-4">
+            @hook('checkout.body.header')
+
             @include('checkout._address')
 
             <div class="checkout-black">
@@ -61,6 +63,8 @@
                 @endforeach
               </div>
             </div>
+
+            @hook('checkout.body.footer')
           </div>
         </div>
       </div>
@@ -84,6 +88,8 @@
               <span class="rounded-circle bg-primary">{{ $carts['quantity'] }}</span>
             </div>
             <div class="card-body">
+              @hook('checkout.total.header')
+
               <div class="products-wrap">
                 @foreach ($carts['carts'] as $cart)
                   <div class="item">
@@ -113,13 +119,17 @@
               <div class="d-grid gap-2 mt-3">
                 <button class="btn btn-primary fw-bold fs-5" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
               </div>
+
+              @hook('checkout.total.footer')
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  @endsection
+
+  @hook('checkout.footer')
+@endsection
 
 @push('add-scripts')
 <script>

@@ -223,6 +223,8 @@
       </div>
     </div>
   @endif
+
+  @hook('product.detail.footer')
 @endsection
 
 @push('add-scripts')
