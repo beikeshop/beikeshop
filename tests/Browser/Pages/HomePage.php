@@ -7,7 +7,7 @@ use Laravel\Dusk\Browser;
 class HomePage extends Page
 {
     /**
-     * Get the URL for the page.
+     * Get the URL for the Page.
      */
     public function url(): string
     {
@@ -15,7 +15,7 @@ class HomePage extends Page
     }
 
     /**
-     * Assert that the browser is on the page.
+     * Assert that the browser is on the Page.
      */
     public function assert(Browser $browser): void
     {
@@ -23,7 +23,7 @@ class HomePage extends Page
     }
 
     /**
-     * Get the element shortcuts for the page.
+     * Get the element shortcuts for the Page.
      *
      * @return array<string, string>
      */
