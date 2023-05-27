@@ -93,6 +93,8 @@
           </div>
         </div>
       </div>
+
+      @hook('checkout.success.footer')
     </div>
   </div>
 </div>
@@ -102,5 +104,4 @@
     background-color: #f5f5f5;
   }
 </style>
-
 @endsection
