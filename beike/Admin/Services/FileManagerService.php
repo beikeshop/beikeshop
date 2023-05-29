@@ -13,7 +13,7 @@ namespace Beike\Admin\Services;
 
 class FileManagerService
 {
-    private $fileBasePath = '';
+    protected $fileBasePath = '';
 
     public function __construct()
     {
@@ -180,6 +180,19 @@ class FileManagerService
             return;
         }
         @rename($originPath, $newPath);
+    }
+
+    /**
+     * 保存上传文件
+     * @param $file
+     * @param $savePath
+     * @param $originName
+     * @return mixed\
+     */
+    public function uploadFile($file, $savePath, $originName)
+    {
+        $savePath = $this->basePath . $savePath;
+        return $file->storeAs($savePath, $originName, 'catalog');
     }
 
     /**
