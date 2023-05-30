@@ -50,7 +50,9 @@ class CartService
             return $description && $product;
         });
 
-        return CartDetail::collection($cartItems)->jsonSerialize();
+        $cartList = CartDetail::collection($cartItems)->jsonSerialize();
+
+        return hook_filter('service.cart.list', $cartList);
     }
 
     /**
@@ -183,6 +185,6 @@ class CartService
             'amount_format' => currency_format($amount),
         ];
 
-        return hook_filter('cart.data', $data);
+        return hook_filter('service.cart.data', $data);
     }
 }

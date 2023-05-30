@@ -232,7 +232,8 @@ class CheckoutService
 
         $cartList           = CartService::list($customer, true);
         $carts              = CartService::reloadData($cartList);
-        $totalService       = (new TotalService($currentCart, $cartList));
+        $totalClass         = hook_filter('service.checkout.total_service', 'Beike\Shop\Services\TotalService');
+        $totalService       = (new $totalClass($currentCart, $cartList));
         $this->totalService = $totalService;
 
         $addresses = AddressRepo::listByCustomer($customer);
@@ -268,7 +269,7 @@ class CheckoutService
             'totals'           => $totalService->getTotals($this),
         ];
 
-        return hook_filter('checkout.data', $data);
+        return hook_filter('service.checkout.data', $data);
     }
 
     public static function formatAddress($address)

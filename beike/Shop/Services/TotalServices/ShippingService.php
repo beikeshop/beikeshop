@@ -25,7 +25,7 @@ class ShippingService
     public static function getTotal(CheckoutService $checkout): ?array
     {
         $totalService   = $checkout->totalService;
-        $shippingMethod = $totalService->shippingMethod;
+        $shippingMethod = $totalService->getShippingMethod();
         if (empty($shippingMethod)) {
             return null;
         }
