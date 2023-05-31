@@ -171,6 +171,13 @@ class Plugin implements Arrayable, \ArrayAccess
             $item['label'] = trans($languageKey);
         }
 
+        $descriptionKey = $item['description_key'] ?? '';
+        $description    = $item['description']     ?? '';
+        if (empty($description) && $descriptionKey) {
+            $languageKey         = "{$this->dirName}::{$descriptionKey}";
+            $item['description'] = trans($languageKey);
+        }
+
         return $item;
     }
 
