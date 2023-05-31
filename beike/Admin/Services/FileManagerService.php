@@ -14,6 +14,7 @@ namespace Beike\Admin\Services;
 class FileManagerService
 {
     protected $fileBasePath = '';
+
     protected $basePath = '';
 
     public function __construct()
@@ -187,6 +188,7 @@ class FileManagerService
     public function uploadFile($file, $savePath, $originName)
     {
         $savePath = $this->basePath . $savePath;
+
         return $file->storeAs($savePath, $originName, 'catalog');
     }
 

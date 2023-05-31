@@ -126,7 +126,7 @@ class FileManagerController extends Controller
         $savePath = $request->get('path');
 
         $originName = $file->getClientOriginalName();
-        $filePath = (new FileManagerService)->uploadFile($file, $savePath, $originName);
+        $filePath   = (new FileManagerService)->uploadFile($file, $savePath, $originName);
 
         return [
             'name' => $originName,
