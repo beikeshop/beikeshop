@@ -14,6 +14,7 @@
         <button
           class="btn btn-dark text-light btn-quick-view mx-1 rounded-3"
           product-id="{{ $product['sku_id'] }}"
+          product-price="{{ $product['price'] }}"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title="{{ __('common.quick_view') }}"
@@ -23,6 +24,7 @@
         <button
           class="btn btn-dark text-light btn-wishlist mx-1 rounded-3"
           product-id="{{ $product['sku_id'] }}"
+          product-price="{{ $product['price'] }}"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title="{{ __('shop/products.add_to_favorites') }}"
@@ -33,6 +35,7 @@
         <button
           class="btn btn-dark text-light btn-add-cart mx-1 rounded-3"
           product-id="{{ $product['sku_id'] }}"
+          product-price="{{ $product['price'] }}"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title="{{ __('shop/products.add_to_cart') }}"

@@ -138,6 +138,7 @@
               <button
                 class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
                 :product-id="product.id"
+                :product-price="product.price"
                 :disabled="!product.quantity"
                 @click="addCart(false, this)"
                 ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
@@ -146,6 +147,7 @@
                 class="btn btn-dark ms-3 fw-bold"
                 :disabled="!product.quantity"
                 :product-id="product.id"
+                :product-price="product.price"
                 @click="addCart(true, this)"
                 ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
               </button>
