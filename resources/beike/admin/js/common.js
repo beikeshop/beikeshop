@@ -145,7 +145,7 @@ export default {
     setVipUi(data)
 
     function setVipUi(data) {
-      if (data.vip) {
+      if (data && data.vip) {
         $('.vip-serve').addClass('active');
 
         if (data.expiring) {
