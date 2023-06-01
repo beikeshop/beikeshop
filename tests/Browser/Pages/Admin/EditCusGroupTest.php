@@ -3,14 +3,12 @@
 namespace Tests\Browser\Pages\Admin;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Admin\CusGrounp;
-use Tests\DuskTestCase;
-use Tests\Data\Admin\LoginData;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
+use Tests\Data\Admin\CusGrounp;
 use Tests\Data\Admin\CustomerPage;
-
-
+use Tests\Data\Admin\LoginData;
+use Tests\DuskTestCase;
 
 class EditCusGroupTest extends DuskTestCase
 {

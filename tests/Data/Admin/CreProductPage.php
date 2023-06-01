@@ -1,8 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
 
-class CreProductPage{
-const Product_Top = [
+class CreProductPage
+{
+public const Product_Top = [
     'login_url'    => '/Admin/products/create', //
     'ch_name'      => 'descriptions[zh_cn][name]', //中文名称
     'en_name'      => 'descriptions[en][name]', //英文名称
@@ -15,7 +17,8 @@ const Product_Top = [
     'Disable'      => '#active-0',
     'save_btn'     => '.btn.btn-lg.btn-primary.submit-form', //保存
 ];
-const Product_Assert = [
+
+public const Product_Assert = [
     'Disable_text' => '.text-danger', //商品禁用后显示的文本class
 ];
 }

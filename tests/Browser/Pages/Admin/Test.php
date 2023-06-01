@@ -2,12 +2,9 @@
 
 namespace Tests\Browser\Pages\Admin;
 
-use Beike\Models\Language;
 use Laravel\Dusk\Browser;
 use Tests\Data\Admin\AdminLoginPage;
-use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\LoginData;
-use Tests\Data\Admin\LoginPage;
 use Tests\DuskTestCase;
 
 class Test extends DuskTestCase

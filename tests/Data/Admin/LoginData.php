@@ -1,13 +1,17 @@
 <?php
+
 namespace Tests\Data\Admin;
-class LoginData{
-const Ture_Data = [
+
+class LoginData
+{
+public const Ture_Data = [
     'email'    => 'root@guangda.work',
     'password' => '123456',
     'assert'   => '后台管理',
 
 ];
-const False_Data = [
+
+public const False_Data = [
     'false_email'    => 'test1@163.com',
     'illegal_email'  => 'test',
     'false_password' => '1234567',

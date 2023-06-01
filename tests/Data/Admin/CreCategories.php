@@ -1,7 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
-class CreCategories{
-const  Cate_Data= [
+
+class CreCategories
+{
+public const  Cate_Data = [
     'ch_name'        => 'categories_test',
     'en_name'        => 'categories_test',
     'ch_content'     => 'categories_content_test',

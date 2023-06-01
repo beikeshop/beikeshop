@@ -4,19 +4,19 @@ namespace Tests\Browser\Pages\Combine;
 
 use Facebook\WebDriver\WebDriverBy;
 use Laravel\Dusk\Browser;
+use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminOrderPage;
+use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\Express;
+use Tests\Data\Admin\LoginData;
 use Tests\Data\Catalog\AccountPage;
 use Tests\Data\Catalog\CataLoginData;
 use Tests\Data\Catalog\CheckoutPage;
+use Tests\Data\Catalog\IndexPage;
 use Tests\Data\Catalog\LoginPage;
 use Tests\Data\Catalog\OrderPage;
-use Tests\DuskTestCase;
-use Tests\Data\Admin\LoginData;
-use Tests\Data\Admin\AdminLoginPage;
-use Tests\Data\Admin\AdminPage;
-use Tests\Data\Catalog\IndexPage;
 use Tests\Data\Catalog\ProductOne;
+use Tests\DuskTestCase;
 
 //已注册客户且有地址，直接购买商品
 class AlterOrderStationTest extends DuskTestCase
@@ -67,7 +67,6 @@ class AlterOrderStationTest extends DuskTestCase
                 ->click(AccountPage::Order['check_btn'])
                 ->pause(3000)
 
-
 //                $browser->click(CheckoutPage::Checkout['view_order'])
             //进入后台,修改订单状态为已支付
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
@@ -96,7 +95,7 @@ class AlterOrderStationTest extends DuskTestCase
                 ->refresh()
                 ->pause(1000)
                 // 断言是否已支付
-                ->assertSeeIn(OrderPage::Get_Order_Status['status_text'],OrderPage::Order_Status['Paid'])
+                ->assertSeeIn(OrderPage::Get_Order_Status['status_text'], OrderPage::Order_Status['Paid'])
             //切换到后台，将状态改为已发货
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
                 $browser->pause(2000)

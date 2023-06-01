@@ -3,12 +3,12 @@
 namespace Tests\Browser\Pages\Combine;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Admin\CreProductPage;
-use Tests\Data\Admin\ProductPage;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
+use Tests\Data\Admin\CreProductPage;
 use Tests\Data\Admin\LoginData;
+use Tests\Data\Admin\ProductPage;
+use Tests\DuskTestCase;
 
 class DisableProductTest extends DuskTestCase
 {

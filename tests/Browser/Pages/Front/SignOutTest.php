@@ -14,7 +14,6 @@ class SignOutTest extends DuskTestCase
      * A basic browser test example.
      * @return void
      */
-
     public function testSignOut()
     {
 

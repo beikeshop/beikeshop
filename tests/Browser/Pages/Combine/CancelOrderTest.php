@@ -2,22 +2,19 @@
 
 namespace Tests\Browser\Pages\Combine;
 
-
-use Tests\Data\Catalog\CataLoginData;
-use Tests\Data\Catalog\LoginPage;
 use Laravel\Dusk\Browser;
-use Tests\Data\Catalog\ProductOne;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
+use Tests\Data\Admin\AdminOrderPage;
 use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\LoginData;
 use Tests\Data\Catalog\AccountPage;
-use Tests\Data\Catalog\IndexPage;
+use Tests\Data\Catalog\CataLoginData;
 use Tests\Data\Catalog\CheckoutPage;
-use Tests\Data\Admin\AdminOrderPage;
+use Tests\Data\Catalog\IndexPage;
+use Tests\Data\Catalog\LoginPage;
 use Tests\Data\Catalog\OrderPage;
-
-
+use Tests\Data\Catalog\ProductOne;
+use Tests\DuskTestCase;
 
 ////前台下单，后台取消
 class CancelOrderTest extends DuskTestCase

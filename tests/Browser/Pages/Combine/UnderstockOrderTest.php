@@ -3,20 +3,14 @@
 namespace Tests\Browser\Pages\Combine;
 
 use Laravel\Dusk\Browser;
+use Tests\Data\Admin\AdminLoginPage;
+use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\CreProduct;
 use Tests\Data\Admin\CreProductPage;
-use Tests\Data\Admin\CusGrounp;
-use Tests\Data\Admin\CustomerPage;
+use Tests\Data\Admin\LoginData;
 use Tests\Data\Admin\ProductPage;
 use Tests\Data\Catalog\ProductOne;
 use Tests\DuskTestCase;
-use Tests\Data\Admin\AdminLoginPage;
-use Tests\Data\Admin\AdminPage;
-use Tests\Data\Admin\LoginData;
-use Tests\Data\Catalog\IndexPage;
-use Tests\Data\Catalog\LoginPage;
-use Tests\Data\Catalog\AccountPage;
-use Tests\Data\Catalog\CheckoutPage;
 
 ////库存不足时下单
 class UnderstockOrderTest extends DuskTestCase

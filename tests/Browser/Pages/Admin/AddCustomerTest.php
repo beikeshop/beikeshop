@@ -2,14 +2,13 @@
 
 namespace Tests\Browser\Pages\Admin;
 
-use Beike\Models\Customer;
 use Laravel\Dusk\Browser;
+use Tests\Data\Admin\AdminLoginPage;
+use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\CustomerData;
 use Tests\Data\Admin\CustomerPage;
-use Tests\DuskTestCase;
-use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\LoginData;
-use Tests\Data\Admin\AdminPage;
+use Tests\DuskTestCase;
 
 class AddCustomerTest extends DuskTestCase
 {

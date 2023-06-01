@@ -1,8 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
 
-class ProductPage{
-const Product_Top = [
+class ProductPage
+{
+public const Product_Top = [
     'login_url'      => '/Admin/products',
     'create_product' => '#product-app > div > div > div.d-flex.justify-content-between.my-4 > a > button', //创建商品按钮
     //编辑商品按钮
@@ -12,7 +14,8 @@ const Product_Top = [
     'sure_btn'    => '确定',
     'get_name'    => '#product-app > div > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(4) > a',
 ];
-const Product_Left = [
+
+public const Product_Left = [
     'product_mg'   => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)', //商品管理
     'product_cate' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)', //商品分类
 
@@ -22,11 +25,13 @@ const Product_Left = [
     'advanced_filter' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(5)', //高级筛选
     'Recy_station'    => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(7)', //回收站
 ];
-const Cre_class = [
+
+public const Cre_class = [
     'cre_cate_btn' => '#category-app > div > a', //创建分类按钮
 
 ];
-const Assert = [
+
+public const Assert = [
     'cre_ful_assert'   => '创建成功!',
     'alter_ful_assert' => '更新成功!',
     'del_ful_assert'   => '删除成功!',

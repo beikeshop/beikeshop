@@ -1,14 +1,17 @@
 <?php
+
 namespace Tests\Data\Admin;
 
-class CustomerPage{
-const Left = [
-    'url' => '/Admin/customers',
+class CustomerPage
+{
+public const Left = [
+    'url'            => '/Admin/customers',
     'customer_list'  => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)', //客户列表
     'customer_group' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)', //客户组
     're_station'     => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(3)', //回收站
 ];
-const Create = [
+
+public const Create = [
     'name'           => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(1) > div > div > input',
     'email'          => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(2) > div > div > input',
     'pwd'            => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(3) > div > div > input',
@@ -16,7 +19,8 @@ const Create = [
     'state'          => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(5) > div',
     'save_btn'       => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(6) > div > button.el-button.el-button--primary',
 ];
-const Alter = [
+
+public const Alter = [
     'name'           => '#pane-customer > div > div:nth-child(1) > div > div > input',
     'email'          => '#pane-customer > div > div:nth-child(2) > div > div > input',
     'pwd'            => '#pane-customer > div > div:nth-child(3) > div > div > input',
@@ -25,7 +29,8 @@ const Alter = [
     'save_btn'       => '#pane-customer > div > div:nth-child(6) > div > button',
 
 ];
-const Group_list = [
+
+public const Group_list = [
     //创建客户
     'cre_customer' => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button',
     //编辑客户
@@ -36,7 +41,8 @@ const Group_list = [
     'sure_btn'     => '确定',
 
 ];
-const Customer_Group = [
+
+public const Customer_Group = [
     //创建客户组
     'cre_cus_group' => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button',
     //编辑客户组
@@ -47,7 +53,8 @@ const Customer_Group = [
     'sure_btn'      => '确定',
 
 ];
-const Create_Group = [
+
+public const Create_Group = [
     'ch_group_name'  => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div.el-form-item.language-inputs.is-required > div > div:nth-child(1) > div > div > input',
     'en_group_name'  => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div.el-form-item.language-inputs.is-required > div > div:nth-child(2) > div > div > input',
     'ch_description' => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(2) > div > div:nth-child(1) > div > div > input',
@@ -55,7 +62,8 @@ const Create_Group = [
     'discount'       => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(3) > div > div > input',
     'save_btn'       => '#customer-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div:nth-child(4) > div > div > button.el-button.el-button--primary',
 ];
-const Empty_Recycle = [
+
+public const Empty_Recycle = [
     'empty_btn'   => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button', //清空数据按钮
     'recycle_btn' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > a', //恢复按钮
     'recycle_del' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > button', //删除按钮

@@ -3,11 +3,11 @@
 namespace Tests\Browser\Pages\Admin;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Catalog\IndexPage;
-use Tests\DuskTestCase;
-use Tests\Data\Admin\LoginData;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
+use Tests\Data\Admin\LoginData;
+use Tests\Data\Catalog\IndexPage;
+use Tests\DuskTestCase;
 
 class GoCatalogTest extends DuskTestCase
 {

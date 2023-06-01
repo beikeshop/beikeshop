@@ -10,7 +10,6 @@ use Tests\Data\Admin\CustomerPage;
 use Tests\Data\Admin\LoginData;
 use Tests\DuskTestCase;
 
-
 class AddCusGroupTest extends DuskTestCase
 {
     /**

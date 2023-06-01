@@ -2,13 +2,11 @@
 
 namespace Tests\Browser\Pages\Front;
 
-
 use Laravel\Dusk\Browser;
 use Tests\Data\Catalog\AccountPage;
 use Tests\Data\Catalog\CataLoginData;
 use Tests\Data\Catalog\LoginPage;
 use Tests\DuskTestCase;
-use Tests\Data\Catalog\IndexPage;
 
 class LoginTest extends DuskTestCase
 {

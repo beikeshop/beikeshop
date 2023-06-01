@@ -3,16 +3,14 @@
 namespace Tests\Browser\Pages\Combine;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Catalog\CheckoutPage;
-use Tests\Data\Admin\SystemSetPage;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\LoginData;
+use Tests\Data\Admin\SystemSetPage;
+use Tests\Data\Catalog\CheckoutPage;
 use Tests\Data\Catalog\IndexPage;
 use Tests\Data\Catalog\ProductOne;
-
-
+use Tests\DuskTestCase;
 
 //禁止游客结账
 class OpenVisiterCheckoutTest extends DuskTestCase

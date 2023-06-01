@@ -1,7 +1,10 @@
 <?php
+
 namespace Tests\Data\Catalog;
-class IndexPage{
-const Index = [
+
+class IndexPage
+{
+public const Index = [
     'login_url'           => '/',
     'product_img'         => '#tab-product-0 > div > div:nth-child(1) > div > div.image > a', //购买商品图标
     'buy_btn'             => '#product-top > div:nth-child(2) > div > div.quantity-btns > button.btn.btn-dark.ms-3.fw-bold', //购买按钮
@@ -15,7 +18,8 @@ const Index = [
     'top_Brand'           => '.navbar-nav.mx-auto li:nth-child(5)',
     'top_Latest_Products' => '.navbar-nav.mx-auto li:nth-child(6)',
 ];
-const Index_Top = [
+
+public const Index_Top = [
     //    "wishlist_btn" => "",//收藏商品图标
     'wishlist_btn' => '.navbar-nav.flex-row li:nth-child(2)', //收藏商品图标
 
@@ -24,7 +28,8 @@ const Index_Top = [
     'login_text'  => 'Home',
 
 ];
-const Index_Cart = [
+
+public const Index_Cart = [
     'cart_product_text' => '#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > a',
     'cart_icon'         => '.nav-link.position-relative', //购物车图标
     'product_text'      => '#offcanvas-right-cart > div.offcanvas-body.pt-0 > div > div > div.product-info.d-flex.align-items-center > div.right.flex-grow-1 > a', //购物车内商品名字
@@ -33,10 +38,11 @@ const Index_Cart = [
     'cart_Checkout'     => '#offcanvas-right-cart > div.offcanvas-footer > div.p-4 > a.btn.w-100.fw-bold.btn-dark.to-checkout',
 ];
 
-    const Index_Account = [
+    public const Index_Account = [
         'login_icon' => '.navbar-nav.flex-row li:nth-child(3)', //登录图标
     ];
-const Index_Login = [
+
+public const Index_Login = [
     'login_icon' => '.navbar-nav.flex-row li:nth-child(3)', //登录图标
 ];
 }

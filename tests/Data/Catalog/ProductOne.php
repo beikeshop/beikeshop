@@ -1,7 +1,10 @@
 <?php
+
 namespace Tests\Data\Catalog;
-class  ProductOne{
-const Product = [
+
+class ProductOne
+{
+public const Product = [
     'login_url'         => '/products/1',
     'product_1'         => '.btn.btn-dark.ms-3.fw-bold', //购买商品
     'Wishlist_icon'     => '.btn.btn-link.ps-0.text-secondary', //收藏

@@ -1,8 +1,10 @@
 <?php
+
 namespace Tests\Data\Catalog;
 
-class CheckoutPage{
-const Checkout = [
+class CheckoutPage
+{
+public const Checkout = [
     'url'    => '/checkout', //
     'submit' => '#submit-checkout', //提交按钮
     //订单成功验证信息

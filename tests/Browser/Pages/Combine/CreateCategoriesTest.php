@@ -3,17 +3,14 @@
 namespace Tests\Browser\Pages\Combine;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Admin\CreCategories;
-use Tests\Data\Admin\CreCategoriesPage;
-use Tests\Data\Admin\CreProduct;
-use Tests\Data\Admin\CreProductPage;
-use Tests\Data\Admin\ProductPage;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
+use Tests\Data\Admin\CreCategories;
+use Tests\Data\Admin\CreCategoriesPage;
 use Tests\Data\Admin\LoginData;
+use Tests\Data\Admin\ProductPage;
 use Tests\Data\Catalog\IndexPage;
-use Tests\Data\Catalog\OrderPage;
+use Tests\DuskTestCase;
 
 //增加商品分类
 class CreateCategoriesTest extends DuskTestCase

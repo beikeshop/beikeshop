@@ -3,12 +3,12 @@
 namespace Tests\Browser\Pages\Admin;
 
 use Laravel\Dusk\Browser;
+use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
 use Tests\Data\Admin\Express;
+use Tests\Data\Admin\LoginData;
 use Tests\Data\Admin\SystemSetPage;
 use Tests\DuskTestCase;
-use Tests\Data\Admin\AdminLoginPage;
-use Tests\Data\Admin\LoginData;
 
 class AddExpressTest extends DuskTestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
 namespace Tests\Browser\Pages\Admin;
+
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
-use Tests\Data\Admin\LoginData;
 use Tests\Data\Admin\CustomerPage;
-
+use Tests\Data\Admin\LoginData;
+use Tests\DuskTestCase;
 
 class DelCustomerTest extends DuskTestCase
 {

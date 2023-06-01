@@ -1,12 +1,16 @@
 <?php
+
 namespace Tests\Data\Catalog;
-class CataLoginData{
-const True_Login = [
+
+class CataLoginData
+{
+public const True_Login = [
     'email'    => 'test@163.com',
     'password' => '123456',
     'assert'   => 'Sign Out',
 ];
-const False_Login = [
+
+public const False_Login = [
     'false_email'    => 'test1@163.com',
     'illegal_email'  => 'test',
     'false_password' => '1234567',

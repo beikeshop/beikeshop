@@ -3,14 +3,13 @@
 namespace Tests\Browser\Pages\Front;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Catalog\ProductOne;
 use Tests\Data\Catalog\AccountPage;
-use Tests\Data\Catalog\CheckoutPage;
-use Tests\Data\Catalog\LoginPage;
-use Tests\DuskTestCase;
-use Tests\Data\Catalog\IndexPage;
 use Tests\Data\Catalog\CataLoginData;
-
+use Tests\Data\Catalog\CheckoutPage;
+use Tests\Data\Catalog\IndexPage;
+use Tests\Data\Catalog\LoginPage;
+use Tests\Data\Catalog\ProductOne;
+use Tests\DuskTestCase;
 
 //已注册客户且有地址，在下单时更换支付方式购买
 class ChangePayMethodTest extends DuskTestCase

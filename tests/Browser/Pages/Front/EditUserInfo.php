@@ -2,15 +2,12 @@
 
 namespace Tests\Browser\Pages\Front;
 
-
 use Laravel\Dusk\Browser;
 use Tests\Data\Catalog\AccountData;
 use Tests\Data\Catalog\AccountPage;
-use Tests\Data\Catalog\CataLoginData;
 use Tests\Data\Catalog\LoginPage;
 use Tests\Data\Catalog\RegisterData;
 use Tests\DuskTestCase;
-use Tests\Data\Catalog\IndexPage;
 
 //已注册客户且有地址，直接购买商品
 class EditUserInfo extends DuskTestCase

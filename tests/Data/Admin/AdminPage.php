@@ -1,9 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
 
-class AdminPage {
-
-    const TOP = [
+class AdminPage
+{
+    public const TOP = [
         'login_url'       => '/admin',
         'root'            => '.ml-2',
         'mg_index'        => '.list-unstyled.navbar-nav li:nth-child(1)', //管理首页  .list-unstyled.navbar-nav
@@ -26,11 +27,10 @@ class AdminPage {
         'ch_language'     => '.dropdown-menu.dropdown-menu-end.show li:nth-child(10)', //切换中文
     ];
 
-    const Assert = [
+    public const Assert = [
         'vip_assert'     => '登录购买VIP服务',
         'plugins_assert' => '/admin/marketing',
         'en_assert'      => 'Admin Panel', //切换为中文断言
         'ch_assert'      => '后台管理', //切换为英文断言
     ];
 }
-

@@ -3,23 +3,21 @@
 namespace Tests\Browser\Pages\Combine;
 
 use Laravel\Dusk\Browser;
-use Tests\Data\Admin\CusGrounp;
-use Tests\Data\Admin\CustomerPage;
-use Tests\Data\Catalog\CataLoginData;
-use Tests\Data\Catalog\ProductOne;
-use Tests\DuskTestCase;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
+use Tests\Data\Admin\CusGrounp;
+use Tests\Data\Admin\CustomerPage;
 use Tests\Data\Admin\LoginData;
+use Tests\Data\Catalog\AccountPage;
+use Tests\Data\Catalog\CataLoginData;
+use Tests\Data\Catalog\CheckoutPage;
 use Tests\Data\Catalog\IndexPage;
 use Tests\Data\Catalog\LoginPage;
-use Tests\Data\Catalog\AccountPage;
-use Tests\Data\Catalog\CheckoutPage;
+use Tests\Data\Catalog\ProductOne;
+use Tests\DuskTestCase;
+
 ///客户组折扣判断
-class
-
-
-CustomerGroupDiscountTest extends DuskTestCase
+class CustomerGroupDiscountTest extends DuskTestCase
 {
     public function testCustomerGroupDiscount()
     {

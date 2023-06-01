@@ -1,7 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
-class CreProduct{
-const Puoduct_Info = [
+
+class CreProduct
+{
+public const Puoduct_Info = [
     'ch_name'      => 'test', //中文名称
     'en_name'      => 'test', //英文名称
     'sku'          => '123', //sku
@@ -10,7 +13,8 @@ const Puoduct_Info = [
     'cost_price'   => '5', //成本价
     'quantity'     => '3', //数量
 ];
-const Alter = [
+
+public const Alter = [
     'ch_name'      => 'alter_test', //中文名称
     'en_name'      => 'alter_test', //英文名称
     'sku'          => '456', //sku

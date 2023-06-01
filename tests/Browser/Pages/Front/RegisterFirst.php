@@ -2,14 +2,10 @@
 
 namespace Tests\Browser\Pages\Front;
 
-
 use Laravel\Dusk\Browser;
 use Tests\Data\Catalog\LoginPage;
 use Tests\Data\Catalog\RegisterData;
 use Tests\DuskTestCase;
-use Tests\Data\Catalog\IndexPage;
-
-
 
 class RegisterFirst extends DuskTestCase
 {

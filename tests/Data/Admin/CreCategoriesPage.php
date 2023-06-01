@@ -1,7 +1,10 @@
 <?php
+
 namespace Tests\Data\Admin;
-class CreCategoriesPage{
-const Cate_Page = [
+
+class CreCategoriesPage
+{
+public const Cate_Page = [
     'ch_name'        => 'descriptions[zh_cn][name]',
     'en_name'        => 'descriptions[en][name]',
     'ch_content'     => 'descriptions[zh_cn][content]',

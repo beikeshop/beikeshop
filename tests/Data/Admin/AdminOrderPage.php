@@ -1,19 +1,23 @@
 <?php
+
 namespace Tests\Data\Admin;
 
-class AdminOrderPage{
-const Right = [
+class AdminOrderPage
+{
+public const Right = [
     'url'          => '/Admin/orders',
     'search_order' => '#app > form > div:nth-child(1) > div:nth-child(1) > div > div > input', //搜索栏--订单号
     'search_bth'   => '#app > div > div > button:nth-child(1)', //搜索按钮
     'view_btn'     => '#customer-app > div > div.table-push > table > tbody > tr > td:nth-child(9) > a', //查看按钮
 ];
-const Child= [
+
+public const Child = [
     'mg_order'      => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)', //订单列表
     'mg_sale_after' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)', //售后管理
     'ca_sale_after' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(3)', //售后原因
 ];
-const Details = [//订单详情页
+
+public const Details = [//订单详情页
     'pull_btn' => '#app > form > div.el-form-item.is-required > div > div > div > span > span > i', //状态栏下拉按钮
     //    "paid"=>".el-select-dropdown__item",//已支付
     'paid'        => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付
