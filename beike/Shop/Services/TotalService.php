@@ -166,6 +166,7 @@ class TotalService
     public function countProducts(): mixed
     {
         $cartProducts = $this->getCartProducts();
+
         return collect($cartProducts)->sum('quantity');
     }
 }
