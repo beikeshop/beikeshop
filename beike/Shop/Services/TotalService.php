@@ -138,13 +138,34 @@ class TotalService
         return collect($carts)->sum('subtotal');
     }
 
-    public function getCartProducts()
+    /**
+     * Get Cart Products
+     *
+     * @return array
+     */
+    public function getCartProducts(): array
     {
         return $this->cartProducts;
     }
 
+    /**
+     * Get Current Cart
+     *
+     * @return Cart
+     */
     public function getCurrentCart()
     {
         return $this->currentCart;
+    }
+
+    /**
+     * Get Cart Product Amount
+     *
+     * @return mixed
+     */
+    public function countProducts(): mixed
+    {
+        $cartProducts = $this->getCartProducts();
+        return collect($cartProducts)->sum('quantity');
     }
 }
