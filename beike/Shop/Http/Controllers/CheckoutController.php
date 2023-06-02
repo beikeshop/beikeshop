@@ -11,7 +11,6 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Exceptions\CartException;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Services\CheckoutService;
 use Illuminate\Http\Request;
@@ -25,10 +24,8 @@ class CheckoutController extends Controller
             $data = hook_filter('checkout.index.data', $data);
 
             return view('checkout', $data);
-        } catch (CartException $e) {
-            return redirect(shop_route('carts.index'))->withErrors(['error' => $e->getMessage()]);
         } catch (\Exception $e) {
-            return redirect(shop_route('checkout.index'))->withErrors(['error' => $e->getMessage()]);
+            return redirect(shop_route('carts.index'))->withErrors(['error' => $e->getMessage()]);
         }
     }
 
