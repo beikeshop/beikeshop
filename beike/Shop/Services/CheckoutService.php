@@ -11,10 +11,10 @@
 
 namespace Beike\Shop\Services;
 
+use Beike\Exceptions\CartException;
 use Beike\Libraries\Weight;
 use Beike\Models\Address;
 use Beike\Models\Country;
-use Beike\Models\Customer;
 use Beike\Models\Order;
 use Beike\Models\Zone;
 use Beike\Repositories\AddressRepo;
@@ -46,13 +46,11 @@ class CheckoutService
         if (is_int($customer) || empty($customer)) {
             $this->customer = current_customer();
         }
-        // if (empty($this->customer) || !($this->customer instanceof Customer)) {
-        //     // throw new \Exception(trans('shop/carts.invalid_customer'));
-        // }
+
         $this->cart             = CartRepo::createCart($this->customer);
         $this->selectedProducts = CartRepo::selectedCartProducts($this->customer->id ?? 0);
         if ($this->selectedProducts->count() == 0) {
-            throw new \Exception(trans('shop/carts.empty_selected_products'));
+            throw new CartException(trans('shop/carts.empty_selected_products'));
         }
     }
 
