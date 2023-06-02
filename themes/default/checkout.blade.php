@@ -165,6 +165,11 @@
 
   const updateCheckout = (key, value, callback) => {
     $http.put('/checkout', {[key]: value}).then((res) => {
+      if (res.status == 'fail') {
+        layer.msg(res.message, ()=>{})
+        return;
+      }
+
       updateTotal(res.totals)
 
       if (typeof callback === 'function') {
