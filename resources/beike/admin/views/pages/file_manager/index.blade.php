@@ -9,7 +9,6 @@
   <meta name="asset" content="{{ asset('/') }}">
   <script src="{{ asset('vendor/vue/2.7/vue.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
-  {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
   <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
@@ -151,7 +150,7 @@
       @close="uploadFileDialogClose" custom-class="upload-wrap">
       <el-upload class="photos-upload" target="photos-upload" id="photos-upload" element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
         element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
-        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4" :before-upload="beforePhotoUpload"
+        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp" :before-upload="beforePhotoUpload"
         :on-success="handlePhotoSuccess" :on-change="handleUploadChange" :http-request="uploadFile"
         :multiple="true">
         <i class="el-icon-upload"></i>
@@ -299,10 +298,6 @@
           this.uploadFileDialog.show = true
         },
 
-        openFileSort() {
-          console.log(11);
-        },
-
         beforePhotoUpload(file) {
           // this.editing.photoLoading = true;
         },
@@ -319,9 +314,6 @@
         uploadFile(file) {
           const that = this;
           let newFile = {};
-          if (file.file.type != 'image/png' && file.file.type != 'image/jpeg') {
-            return;
-          }
 
           var formData = new FormData();
           formData.append("file", file.file, file.file.name);

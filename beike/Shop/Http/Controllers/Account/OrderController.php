@@ -58,21 +58,6 @@ class OrderController extends Controller
     }
 
     /**
-     * 订单提交成功页
-     *
-     * @param Request $request
-     * @param $number
-     * @return View
-     */
-    public function success(Request $request, $number): View
-    {
-        $customer = current_customer();
-        $order    = OrderRepo::getOrderByNumber($number, $customer);
-
-        return view('account/order_success', ['order' => $order]);
-    }
-
-    /**
      * 订单支付页面
      *
      * @param Request $request
