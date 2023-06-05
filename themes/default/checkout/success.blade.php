@@ -93,6 +93,37 @@
           </div>
         </div>
       </div>
+
+      @if ($order->orderShipments->count())
+        @hookwrapper('checkout.order.shipments')
+        <div class="card mb-4">
+          <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
+          <div class="card-body">
+            <div class="table-push">
+              <table class="table ">
+                <thead class="">
+                <tr>
+                  <th>{{ __('order.express_company') }}</th>
+                  <th>{{ __('order.express_number') }}</th>
+                  <th>{{ __('order.history_created_at') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($order->orderShipments as $ship)
+                  <tr>
+                    <td>{{ $ship->express_company }}</td>
+                    <td>{{ $ship->express_number }}</td>
+                    <td>{{ $ship->created_at }}</td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        @endhookwrapper
+      @endif
+
     </div>
   </div>
 </div>
