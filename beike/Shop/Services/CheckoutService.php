@@ -94,9 +94,10 @@ class CheckoutService
             $this->updateGuestPaymentAddress($guestPaymentAddress);
         }
 
+        $data = $this->checkoutData();
         hook_action('service.checkout.update.after', ['request_data' => $requestData, 'checkout' => $this]);
 
-        return $this->checkoutData();
+        return $data;
     }
 
     /**
