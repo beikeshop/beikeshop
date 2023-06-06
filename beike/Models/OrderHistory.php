@@ -11,6 +11,8 @@
 
 namespace Beike\Models;
 
+use Beike\Services\StateMachineService;
+
 class OrderHistory extends Base
 {
     protected $fillable = [
@@ -21,6 +23,7 @@ class OrderHistory extends Base
 
     public function getStatusFormatAttribute()
     {
-        return trans("order.{$this->status}");
+        $statusMap = array_column(StateMachineService::getAllStatuses(), 'name', 'status');
+        return $statusMap[$this->status];
     }
 }
