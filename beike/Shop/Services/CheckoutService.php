@@ -94,8 +94,8 @@ class CheckoutService
             $this->updateGuestPaymentAddress($guestPaymentAddress);
         }
 
-        $data = $this->checkoutData();
         hook_action('service.checkout.update.after', ['request_data' => $requestData, 'checkout' => $this]);
+        $data = $this->checkoutData();
 
         return $data;
     }
@@ -218,6 +218,14 @@ class CheckoutService
         $this->cart->update(['payment_method_code' => $paymentMethodCode]);
     }
 
+    public function initTotalService()
+    {
+        $customer    = $this->customer;
+        $totalClass         = hook_filter('service.checkout.total_service', 'Beike\Shop\Services\TotalService');
+        $totalService       = (new $totalClass($this->cart, CartService::list($customer, true)));
+        $this->totalService = $totalService;
+    }
+
     /**
      * 获取结账页数据
      *
@@ -231,9 +239,10 @@ class CheckoutService
 
         $cartList           = CartService::list($customer, true);
         $carts              = CartService::reloadData($cartList);
-        $totalClass         = hook_filter('service.checkout.total_service', 'Beike\Shop\Services\TotalService');
-        $totalService       = (new $totalClass($currentCart, $cartList));
-        $this->totalService = $totalService;
+
+        if (!$this->totalService) {
+            $this->initTotalService();
+        }
 
         $addresses = AddressRepo::listByCustomer($customer);
         $shipments = ShippingMethodService::getShippingMethods($this);
@@ -265,7 +274,7 @@ class CheckoutService
             'shipping_methods' => $shipments,
             'payment_methods'  => $payments,
             'carts'            => $carts,
-            'totals'           => $totalService->getTotals($this),
+            'totals'           => $this->totalService->getTotals($this),
         ];
 
         return hook_filter('service.checkout.data', $data);
