@@ -56,6 +56,8 @@ Route::prefix('/')
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
+        Route::get('orders/{number}', [\Beike\Shop\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+
         Route::get('page_categories', [PageCategoryController::class, 'home'])->name('page_categories.home');
         Route::get('page_categories/{page_category}', [PageCategoryController::class, 'show'])->name('page_categories.show');
         Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
