@@ -9,36 +9,61 @@
  */
 
 header {
-  // box-shadow: 0px 1px 10px  rgba(0, 0, 0, .04);
   background: #fff;
   body:not(.page-home) & {
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .04);
-    // border-bottom: 1px solid #e5e5e5;
   }
 
 
   .top-wrap {
-    // padding: 10px;
     height: 40px;
-    // max-height: 50px;
     background: #F7F8FA;
     display: flex;
-  }
 
-  .top-wrap, .header-content {
     .dropdown {
       &:hover {
         background-color: #fff;
 
         .dropdown-menu {
-          margin: 0;
           display: block;
-          box-shadow: 0 0 15px rgb(0, 0, 0, .1);
           border: none;
+          box-shadow: 0 0 15px rgb(0, 0, 0, .1);
 
           &.dropdown-menu-end {
             right: 0;
           }
+        }
+      }
+    }
+  }
+
+  .header-content {
+    .nav-item {
+      &:hover {
+        > a {
+          color: $primary;
+        }
+      }
+    }
+
+    .dropdown {
+      .dropdown-menu {
+        border: none;
+        left: 50%;
+        visibility: hidden;
+        opacity: 0;
+        display: block;
+        transform-origin: top center;
+        transition: all .2s ease-in-out;
+        transform: translate(-50%, 0.5rem);
+        box-shadow: 0 0 15px rgb(0, 0, 0, .1);
+      }
+
+      &:hover {
+        .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translate(-50%);
         }
       }
     }
@@ -57,36 +82,6 @@ header {
     .menu-wrap {
       .container {
         max-width: 1140px;
-      }
-
-      @media (min-width: 1200px) {
-        .navbar-nav {
-          .dropdown {
-
-            &.position-static >.dropdown-menu {
-              // top: 100%;
-            }
-
-            &:hover {
-              .dropdown-menu {
-                opacity: 1;
-                visibility: visible;
-                transform: translate(-50%);
-              }
-            }
-
-            >.dropdown-menu {
-              left: 50%;
-              transform: translate(-50%, 0.5rem);
-              transition: all .2s ease-in-out;
-              transition-property: visibility,transform,opacity;
-              visibility: hidden;
-              opacity: 0;
-              display: block;
-              transform-origin: top center;
-            }
-          }
-        }
       }
 
       > .navbar-nav {

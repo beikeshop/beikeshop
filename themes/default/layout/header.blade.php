@@ -89,7 +89,7 @@
                 class="iconfont">&#xe662;</i></a></li>
           <li class="nav-item dropdown">
             <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu">
               @auth('web_shop')
                 <li class="dropdown-item">
                   <h6 class="mb-0">{{ current_customer()->name }}</h6>
