@@ -11,7 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\OrderRepo;
+use Beike\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -23,7 +23,7 @@ class OrderController extends Controller
             return null;
         }
 
-        $order = OrderRepo::getListBuilder(['number' => $number, 'email' => $email])->firstOrFail();
+        $order = Order::query()->where('number', $number)->where('email', $email)->firstOrFail();
         $data = hook_filter('order.show.data', ['order' => $order, 'html_items' => []]);
 
         return $data;
