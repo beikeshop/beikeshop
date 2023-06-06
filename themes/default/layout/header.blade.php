@@ -38,7 +38,6 @@
         @endif
         @endhookwrapper
 
-        @hookwrapper('header.top.language')
         @if (count($languages) > 1)
           <div class="dropdown">
             <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
@@ -56,6 +55,8 @@
           </div>
         @endif
         @endhookwrapper
+
+        @hook('header.top.left')
       </div>
 
       @hook('header.top.language.after')
@@ -67,6 +68,8 @@
         @endhookwrapper
       </div>
       @endif
+
+      @hook('header.top.right')
     </div>
   </div>
 
