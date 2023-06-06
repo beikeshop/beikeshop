@@ -38,6 +38,7 @@
         @endif
         @endhookwrapper
 
+        @hookwrapper('header.top.language')
         @if (count($languages) > 1)
           <div class="dropdown">
             <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
@@ -59,17 +60,15 @@
         @hook('header.top.left')
       </div>
 
-      @hook('header.top.language.after')
-
-      @if (system_setting('base.telephone', ''))
       <div class="right nav">
-        @hookwrapper('header.top.telephone')
-        <span class="px-2"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</span>
-        @endhookwrapper
-      </div>
-      @endif
+        @if (system_setting('base.telephone', ''))
+          @hookwrapper('header.top.telephone')
+          <div class="px-2 my-auto"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</div>
+          @endhookwrapper
+        @endif
 
-      @hook('header.top.right')
+        @hook('header.top.right')
+      </div>
     </div>
   </div>
 
