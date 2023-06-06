@@ -87,7 +87,7 @@ class FileManagerService
             if ($baseName == 'index.html') {
                 continue;
             }
-            $fileName = str_replace($this->fileBasePath, '', $file);
+            $fileName = str_replace(public_path('catalog'), '', $file);
             if (is_file($file)) {
                 $images[] = $this->handleImage($fileName, $baseName);
             }
