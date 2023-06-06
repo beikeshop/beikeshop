@@ -51,6 +51,10 @@ class AuthController extends Controller
     {
         $customer = auth('api_customer')->user();
 
+        if (empty($customer)) {
+            return json_fail('Empty Customer', [], 401);
+        }
+
         return response()->json(new CustomerResource($customer));
     }
 
@@ -88,7 +92,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => auth('api_customer')->factory()->getTTL() * 60,
+            'expires_in'   => auth('api_customer')->factory()->getTTL() * 120,
         ]);
     }
 }

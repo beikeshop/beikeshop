@@ -226,7 +226,10 @@ function current_user(): ?AdminUser
  */
 function current_customer(): ?Customer
 {
-    return auth()->guard(Customer::AUTH_GUARD)->user();
+    $customer = auth()->guard(Customer::AUTH_GUARD)->user();
+    if (empty($customer)) {
+        return auth('api_customer')->user();
+    }
 }
 
 /**

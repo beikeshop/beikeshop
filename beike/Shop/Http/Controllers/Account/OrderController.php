@@ -14,7 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
-use Beike\Shop\Http\Resources\Account\OrderList;
+use Beike\Shop\Http\Resources\Account\OrderSimpleList;
 use Beike\Shop\Services\PaymentService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class OrderController extends Controller
         ];
         $orders = OrderRepo::filterOrders($filters);
         $data   = [
-            'orders' => OrderList::collection($orders),
+            'orders' => OrderSimpleList::collection($orders),
         ];
 
         return view('account/order', $data);

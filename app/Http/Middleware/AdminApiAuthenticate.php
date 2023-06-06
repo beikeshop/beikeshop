@@ -11,6 +11,7 @@
 
 namespace App\Http\Middleware;
 
+use Beike\Models\AdminUser;
 use Beike\Repositories\AdminUserTokenRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,7 +50,7 @@ class AdminApiAuthenticate
         return $next($request);
     }
 
-    private function hasPermission($adminUser)
+    private function hasPermission(AdminUser $adminUser): bool
     {
         // $routeUri = Route::current()->uri();
         $routeName = Route::currentRouteName();
@@ -67,7 +68,7 @@ class AdminApiAuthenticate
         return $adminUser->can($permissionName);
     }
 
-    private function mapPermissionByRoute($routePath)
+    private function mapPermissionByRoute($routePath): string
     {
         $maps = [
             'categories.index'  => 'categories_index',
