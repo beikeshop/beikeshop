@@ -23,7 +23,7 @@ class OrderController extends Controller
             return null;
         }
 
-        $order = OrderRepo::getListBuilder(['email' => $email])->firstOrFail();
+        $order = OrderRepo::getListBuilder(['number' => $number, 'email' => $email])->firstOrFail();
         $data = hook_filter('order.show.data', ['order' => $order, 'html_items' => []]);
 
         return $data;
