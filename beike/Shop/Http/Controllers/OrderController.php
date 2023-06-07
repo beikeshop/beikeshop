@@ -26,6 +26,6 @@ class OrderController extends Controller
         $order = Order::query()->where('number', $number)->where('email', $email)->firstOrFail();
         $data = hook_filter('order.show.data', ['order' => $order, 'html_items' => []]);
 
-        return $data;
+        return view('order_info', $data);
     }
 }

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('body-class', 'page-checkout-success')
+@section('body-class', 'page-account-order-info')
 @section('title',  __('shop/checkout.checkout_success_title'))
 
 @section('content')
@@ -22,6 +22,8 @@
               <h5 class="card-title">{{ __('shop/account.order.order_info.order_details') }}</h5>
               @if (current_customer())
                 <a class="btn btn-sm btn-primary" href="{{ shop_route('account.order.show', $order->number) }}">{{ __('common.view_more') }}</a>
+                @else
+                <a class="btn btn-sm btn-primary" href="{{ shop_route('orders.show', ['number' => $order->number, 'email' => $order->email]) }}">{{ __('common.view_more') }}</a>
               @endif
             </div>
             <div class="card-body">
@@ -98,10 +100,4 @@
     </div>
   </div>
 </div>
-
-<style>
-  body {
-    background-color: #f5f5f5;
-  }
-</style>
 @endsection
