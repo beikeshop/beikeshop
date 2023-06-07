@@ -220,7 +220,7 @@ class CheckoutService
 
     public function initTotalService()
     {
-        $customer    = $this->customer;
+        $customer           = $this->customer;
         $totalClass         = hook_filter('service.checkout.total_service', 'Beike\Shop\Services\TotalService');
         $totalService       = (new $totalClass($this->cart, CartService::list($customer, true)));
         $this->totalService = $totalService;
@@ -240,7 +240,7 @@ class CheckoutService
         $cartList           = CartService::list($customer, true);
         $carts              = CartService::reloadData($cartList);
 
-        if (!$this->totalService) {
+        if (! $this->totalService) {
             $this->initTotalService();
         }
 
