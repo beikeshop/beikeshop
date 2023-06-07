@@ -158,7 +158,7 @@ class ProductController extends Controller
             'tax_classes'           => $taxClasses,
             'weight_classes'        => Weight::getWeightUnits(),
             'source'                => [
-                'categories' => CategoryRepo::flatten(locale()),
+                'categories' => CategoryRepo::flatten(locale(), false),
             ],
             '_redirect'          => $this->getRedirect(),
         ];
