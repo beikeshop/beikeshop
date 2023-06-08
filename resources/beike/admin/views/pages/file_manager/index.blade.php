@@ -143,7 +143,6 @@
       </div>
     @else
     <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
-
     @endif
 
     <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
@@ -161,11 +160,13 @@
           <div class="info">
             <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
             <div class="status">
-              <span v-if="image.status == 'complete'">{{ __('admin/file_manager.finish') }}</span>
+              <span v-if="image.status == 'complete'" class="text-success">{{ __('admin/file_manager.finish') }}</span>
+              <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail') }}</span>
               <span v-else>{{ __('admin/file_manager.uploading') }}</span>
             </div>
           </div>
-          <el-progress :percentage="image.progre" :show-text="false" :stroke-width="4"></el-progress>
+          <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'" :show-text="false" :stroke-width="4"></el-progress>
+          <div v-if="image.fail_text" class="mt-1 text-danger" v-text="image.fail_text"></div>
         </div>
       </div>
     </el-dialog>
@@ -330,12 +331,16 @@
 
           let index = this.uploadFileDialog.images.length - 1;
 
-          $http.post('file_manager/upload', formData).then((res) => {
+          $http.post('file_manager/upload', formData, {hmsg: true}).then((res) => {
             this.uploadFileDialog.images[index].status = 'complete';
             this.uploadFileDialog.images[index].progre = 100;
+          }).catch((err) => {
+            this.uploadFileDialog.images[index].status = 'fail';
+            this.uploadFileDialog.images[index].progre = 80;
+            this.uploadFileDialog.images[index].fail_text = err.response.data.message;
           }).finally(() => {
             index += 1
-          })
+          });
         },
 
         handleUploadChange(e) {

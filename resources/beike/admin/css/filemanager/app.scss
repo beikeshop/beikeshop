@@ -295,22 +295,34 @@ body.page-filemanager {
     }
 
     .upload-image {
-      height: 200px;
+      min-height: 200px;
+      max-height: 300px;
       overflow-y: auto;
+      margin-right: -4px;
+      padding-right: 6px;
+
+      // 滚动条 透明背景
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 1px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: #ddd;
+      }
 
       .list {
-        background-color: #f2f2f2;
-        padding: 6px 10px;
-        border-radius: 4px;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        padding-bottom: 14px;
         font-size: 12px;
+        border-bottom: 1px solid #f1f1f1;
 
         .info {
           display: flex;
           align-items: center; // flex-start | center
           justify-content: space-between; // flex-end | center | space-between
           margin-bottom: 6px;
-
         }
 
         .name {
