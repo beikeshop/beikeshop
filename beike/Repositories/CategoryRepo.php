@@ -63,7 +63,7 @@ class CategoryRepo
         $sql .= ' LEFT JOIN categories c2 ON (cp.path_id = c2.id)';
         $sql .= ' LEFT JOIN category_descriptions cd1 ON (cp.path_id = cd1.category_id)';
         $sql .= " WHERE cd1.locale = '" . $locale . "' ";
-        if (!$includeInactive) {
+        if (! $includeInactive) {
             $sql .= ' AND c1.active = 1 ';
         }
         $sql .= ' GROUP BY cp.category_id ORDER BY c1.position ASC';

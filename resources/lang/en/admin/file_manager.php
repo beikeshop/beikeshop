@@ -40,6 +40,6 @@ return [
     'can_empty'               => 'Can not be empty',
     'finish'                  => 'Finish',
     'uploading'               => 'loading...',
-    'upload_fail' => 'Upload failed',
+    'upload_fail'             => 'Upload failed',
     'file_manager'            => 'File Manager',
 ];

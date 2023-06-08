@@ -236,12 +236,19 @@ class FileManagerService
      */
     private function handleImage($filePath, $baseName): array
     {
-        $path = "catalog{$filePath}";
+        $path     = "catalog{$filePath}";
+        $realPath = $this->fileBasePath . $filePath;
+
+        $mime = '';
+        if(file_exists($realPath)) {
+            $mime = mime_content_type($realPath);
+        }
 
         return [
             'path'       => $path,
             'name'       => $baseName,
             'origin_url' => image_origin($path),
+            'mime'       => $mime,
             'selected'   => false,
         ];
     }
