@@ -261,9 +261,6 @@
         }
       },
 
-      computed: {
-      },
-
       beforeMount () {
         const skus = JSON.parse(JSON.stringify(this.source.skus));
         const skuDefault = skus.find(e => e.is_default)
@@ -279,7 +276,7 @@
           })
 
           this.checkedVariants()
-          this.getSelectedSku();
+          this.getSelectedSku(false);
           this.updateSelectedVariantsStatus()
         } else {
           // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
@@ -307,12 +304,17 @@
           })
         },
 
-        getSelectedSku() {
+        getSelectedSku(reload = true) {
           // 通过 selectedVariantsIndex 的值比对 skus 的 variables
           const sku = this.source.skus.find(sku => sku.variants.toString() == this.selectedVariantsIndex.toString())
-          const spuImages = @json($product['images'] ?? []);
-          this.images = [...sku.images, ...spuImages]
+          this.images = @json($product['images'] ?? [])
+
+          if (reload) {
+            this.images.unshift(...sku.images)
+          }
+
           this.product = sku;
+
           if (swiperMobile) {
             swiperMobile.slideTo(0, 0, false)
           }
