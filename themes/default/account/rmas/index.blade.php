@@ -14,40 +14,41 @@
             <h5 class="card-title">{{ __('shop/account.rma.index') }}</h5>
           </div>
           <div class="card-body">
-            <table class="table ">
-              <thead>
-                <tr>
-                  <th>{{ __('shop/account.rma.commodity') }}</th>
-                  <th>{{ __('shop/account.rma.quantity') }}</th>
-                  <th>{{ __('shop/account.rma.service_type') }}</th>
-                  <th>{{ __('shop/account.rma.return_reason') }}</th>
-                  <th>{{ __('shop/account.rma.creation_time') }}</th>
-                  {{-- <th>状态</th> --}}
-                  <th class="text-end">{{ __('common.action') }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                @if (count($rmas))
-                  @foreach ($rmas as $rma)
-                    <tr>
-                      <td>{{ sub_string($rma['product_name'], 80) }}</td>
-                      <td>{{ $rma['quantity'] }}</td>
-                      <td>{{ $rma['type'] }}</td>
-                      <td>{{ $rma['reason'] }}</td>
-                      <td>{{ $rma['created_at'] }}</td>
-                      <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
-                          class="btn btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
-                    </tr>
-                  @endforeach
-                @else
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
                   <tr>
-                    <td colspan="6" class="border-0">
-                      <x-shop-no-data />
-                    </td>
+                    <th>{{ __('shop/account.rma.commodity') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account.rma.quantity') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account.rma.service_type') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account.rma.creation_time') }}</th>
+                    <th class="text-end">{{ __('common.action') }}</th>
                   </tr>
-                @endif
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  @if (count($rmas))
+                    @foreach ($rmas as $rma)
+                      <tr>
+                        <td>
+                          <div class="text-ellipsis line-2 w-min-100 w-max-300">{{ sub_string($rma['product_name'], 80) }}</div>
+                        </td>
+                        <td>{{ $rma['quantity'] }}</td>
+                        <td>{{ $rma['type'] }}</td>
+                        <td class="text-nowrap">{{ $rma['created_at'] }}</td>
+                        <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
+                            class="btn text-nowrap btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
+                      </tr>
+                    @endforeach
+                  @else
+                    <tr>
+                      <td colspan="6" class="border-0">
+                        <x-shop-no-data />
+                      </td>
+                    </tr>
+                  @endif
+                </tbody>
+              </table>
+            </div>
 
             {{-- {{ $rmas->links('shared/pagination/bootstrap-4') }} --}}
           </div>

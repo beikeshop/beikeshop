@@ -107,19 +107,18 @@ Vue.component('rich-text-i18n', {
         fontsize_formats: "10px 12px 14px 18px 24px 36px 48px 56px 72px 96px",
         lineheight_formats: "1 1.1 1.2 1.3 1.4 1.5 1.7 2.4 3 4",
         relative_urls : true,
-        // init_instance_callback: function (ed) {
-          // let code = ed.getElement().dataset.code
-          // ed.setContent(self.value[code])
-        // },
         setup: function(ed) {
           ed.ui.registry.addButton('toolbarImageButton', {
-            // text: '',
             icon: 'image',
             onAction:function() {
               bk.fileManagerIframe(images => {
                 if (images.length) {
                   images.forEach(e => {
-                    ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                    if (e.mime == 'video/mp4') {
+                      ed.insertContent(`<video src='/${e.path}' controls loop muted class="img-fluid" />`);
+                    } else {
+                      ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                    }
                   });
                 }
               })

@@ -73,8 +73,8 @@
         <div class="content-head">
           <div class="left d-lg-flex">
             <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
-            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download"
-              @click="downloadImages">{{ __('admin/file_manager.download') }}</el-link>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view"
+              @click="viewImages">{{ __('common.view') }}</el-link>
             <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
               icon="el-icon-delete">{{ __('common.delete') }}</el-link>
             <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
@@ -114,7 +114,10 @@
           v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
           <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images"
             :key="index" @click="checkedImage(index)">
-            <div class="img"><img :src="file.url"></div>
+            <div class="img">
+              <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
+              <img v-else :src="file.url">
+            </div>
             <div class="text">
               <span :title="file.name">@{{ file.name }}</span>
               <i v-if="file.selected" class="el-icon-check"></i>
@@ -515,6 +518,13 @@
             a.download = e.name;
             // 触发 a 标签的 click 事件
             a.click();
+          });
+        },
+
+        viewImages() {
+          const selectedImages = this.images.filter(e => e.selected);
+          selectedImages.forEach(e => {
+            window.open(e.origin_url);
           });
         },
 

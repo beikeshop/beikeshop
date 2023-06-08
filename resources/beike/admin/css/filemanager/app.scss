@@ -171,26 +171,21 @@ body.page-filemanager {
 
       .content-center {
         height: calc(100% - 56px);
-        // display: flex;
-        // align-items: flex-start;
-        // flex-wrap: wrap;
-        // align-items: center; // flex-start | center
         background: #f7f9fc;
         padding: 16px 6px;
-        // justify-content: space-between; // flex-end | center | space-between
-        // flex-wrap: wrap;
-        // margin-right: -20px;
         overflow-y: auto;
         align-content: flex-start;
 
         &::-webkit-scrollbar {
-          width: 4px;
+          width: 8px;
           height: 1px;
         }
+
         &::-webkit-scrollbar-thumb {
-          border-radius: 2px;
-          background: $primary;
+          border-radius: 4px;
+          background: #ccc;
         }
+
         &::-webkit-scrollbar-track {
           background: transparent;
         }
@@ -199,27 +194,10 @@ body.page-filemanager {
           // display: flex;
           // flex-direction: column;
           display: inline-block;
-          // align-items: center;
-          // margin-bottom: 20px;
           background: #fff;
           margin: 0 8px 16px;
           box-shadow: 0 0 2px 1px rgba(0, 0, 0, .07);
           cursor: pointer;
-          // width: calc(20% - 20px);
-
-          // @media (min-width: 600px) {
-          //   width: calc(25% - 20px);
-          // }
-
-          // @media (min-width: 1000px) {
-          //   width: calc(20% - 20px);
-          // }
-
-          // @media (min-width: 1300px) {
-          //   width: calc(16.666% - 20px);
-          // }
-
-          // border: 1px solid transparent;
 
           .img {
             width: 137px;
@@ -231,6 +209,12 @@ body.page-filemanager {
             img {
               max-width: 100%;
               max-height: 100%;
+            }
+
+            i {
+              font-size: 86px;
+              color: #333;
+              font-weight: 400;
             }
           }
 

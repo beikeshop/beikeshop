@@ -23,6 +23,7 @@ return [
     'g'                 => 'Gram',
     'oz'                => 'Ounce',
     'lb'                => 'Pound',
+    'video'             => 'Video',
 
     'active'            => 'Active',
     'inactive'          => 'Inactive',

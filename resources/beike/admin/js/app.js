@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-05-18 15:33:10
+ * @LastEditTime  2023-06-08 19:18:24
  */
 
 import http from "../../../js/http";
@@ -95,21 +95,17 @@ const tinymceInit = () => {
     fontsize_formats: "10px 12px 14px 18px 24px 36px 48px 56px 72px 96px",
     lineheight_formats: "1 1.1 1.2 1.3 1.4 1.5 1.7 2.4 3 4",
     setup: function(ed) {
-      const height = ed.getElement().dataset.tinymceHeight;
-      // console.log(ed);
-      // 修改 tinymce 的高度
-      // if (height) {
-        // ed.theme.resizeTo(null, height);
-      // }
-
       ed.ui.registry.addButton('toolbarImageButton',{
-        // text: '',
         icon: 'image',
         onAction:function() {
           bk.fileManagerIframe(images => {
             if (images.length) {
               images.forEach(e => {
-                ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                if (e.mime == 'video/mp4') {
+                  ed.insertContent(`<video src='/${e.path}' controls loop muted class="img-fluid" />`);
+                } else {
+                  ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                }
               });
             }
           })
