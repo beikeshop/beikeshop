@@ -3,13 +3,14 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-04-19 15:26:41
+ * @LastEditTime  2023-06-09 08:53:52
  */
 
 export default {
   // 打开文件管理器
-  fileManagerIframe(callback) {
+  fileManagerIframe(callback, params) {
     const base = document.querySelector('base').href;
+    params = params ? `?${Object.keys(params).map(key => `${key}=${params[key]}`).join('&')}` : '';
 
     layer.open({
       type: 2,
@@ -19,7 +20,7 @@ export default {
       scrollbar: false,
       shade: 0.4,
       area: ['1060px', '680px'],
-      content: `${base}/file_manager`,
+      content: `${base}/file_manager${params}`,
       success: function(layerInstance, index) {
         var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
         iframeWindow.callback = function(images) {

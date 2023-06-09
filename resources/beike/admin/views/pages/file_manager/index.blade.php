@@ -190,13 +190,10 @@
         paneLengthPercent: 26,
         triggerLength: 10,
         isShift: false,
-
-        ssss: [],
+        mime: @json(request('mime')),
         loading: false,
         isBatchSelect: false,
-
         selectImageIndex: [],
-
         filter: {
           sort: 'created',
           order: 'desc'
@@ -449,6 +446,20 @@
         // 选取
         fileChecked() {
           let typedFiles = this.images.filter(e => e.selected)
+
+          if (this.mime) {
+            // 判断 typedFiles 数组内 mime 是否有不是 image 开头的
+            if (this.mime == 'image' && typedFiles.some(e => !e.mime.startsWith('image'))) {
+              layer.msg('{{ __('admin/file_manager.verify_select_image') }}', () => {});
+              return;
+            }
+
+            // 判断 typedFiles 数组内 mime 是否有不是 video 开头的
+            if (this.mime == 'video' && typedFiles.some(e => !e.mime.startsWith('video'))) {
+              layer.msg('{{ __('admin/file_manager.verify_select_video') }}', () => {});
+              return;
+            }
+          }
 
           if (callback !== null) {
             callback(typedFiles);

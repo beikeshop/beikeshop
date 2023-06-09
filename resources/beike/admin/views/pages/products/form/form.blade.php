@@ -694,13 +694,13 @@
               return;
             }
             this.form.images.push(...images.map(e => e.path))
-          })
+          }, {mime: 'image'})
         },
 
         addProductVideo() {
           bk.fileManagerIframe(images => {
             this.form.video = {path: images[0].path, url: images[0].url}
-          })
+          }, {mime: 'video'})
         },
 
         removeImages(index) {

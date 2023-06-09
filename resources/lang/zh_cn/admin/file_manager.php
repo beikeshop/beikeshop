@@ -33,6 +33,8 @@ return [
     'no_file'                 => '没有文件',
     'picture_space'           => '图片空间',
     'show_pc'                 => '请到PC端操作',
+    'verify_select_image'                 => '请选择图片',
+    'verify_select_video'                 => '请选择视频',
 
     'confirm_delete_file'       => '是否要删除选中文件',
     'confirm_delete_folder'     => '正在进行删除文件夹操作，文件夹内所有文件都将被删除，是否确认？',
