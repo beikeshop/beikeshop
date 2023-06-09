@@ -36,6 +36,7 @@ return [
     'quantity'               => 'Quantity',
     'enable_multi_spec'      => 'Enable multi-spec',
     'image_help'             => 'The first picture will be used as the main picture of the product, and multiple pictures can be uploaded at the same time, and the position of multiple pictures can be adjusted at will',
+    'video_help'             => 'If the prompt exceeds the system size limit, please modify the php.ini parameter post_max_size',
     'add_variable'           => 'Add Specs',
     'add_variable_value'     => 'Add Specification Value',
     'add_variable_image'     => 'Add Spec Image',

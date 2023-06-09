@@ -24,6 +24,7 @@ class OrderHistory extends Base
     public function getStatusFormatAttribute()
     {
         $statusMap = array_column(StateMachineService::getAllStatuses(), 'name', 'status');
+
         return $statusMap[$this->status];
     }
 }

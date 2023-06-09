@@ -24,6 +24,7 @@ return [
     'g'                 => '克',
     'oz'                => '盎司',
     'lb'                => '磅',
+    'video'             => '视频',
 
     'active'            => '上架',
     'inactive'          => '下架',

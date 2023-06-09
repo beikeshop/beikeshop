@@ -79,7 +79,19 @@
               </draggable>
               <div class="help-text mb-1 mt-1">{{ __('admin/product.image_help') }}</div>
             </x-admin::form.row>
-            {{-- <x-admin-form-input name="video" title="视频" :value="old('video', $product->video ?? '')" /> --}}
+
+            <x-admin::form.row title="{{ __('product.video') }}">
+              <div class="d-flex align-items-end">
+                <div class="set-product-img wh-80 rounded-2 me-2" @click="addProductVideo">
+                  <i v-if="form.video.path" class="bi bi-play-circle fs-1"></i>
+                  <i v-else class="bi bi-plus fs-1 text-muted"></i>
+                </div>
+                <input type="hidden" name="video" :value="form.video.path">
+                <a v-if="form.video.path" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
+              </div>
+              <div class="help-text mb-1 mt-1">{{ __('admin/product.video_help') }}</div>
+            </x-admin::form.row>
+
             <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
 
             <x-admin::form.row :title="__('admin/product.weight_text')">
@@ -516,6 +528,10 @@
         form: {
           attributes: @json(old('pickups', $product_attributes) ?? []),
           images: @json(old('images', $product->images) ?? []),
+          video: {
+            path: @json(old('video', $product->video ?? '')),
+            url: @json(image_origin(old('video', $product->video ?? ''))),
+          },
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
           quantity: @json($product->skus[0]['quantity'] ?? ''),
@@ -678,7 +694,13 @@
               return;
             }
             this.form.images.push(...images.map(e => e.path))
-          })
+          }, {mime: 'image'})
+        },
+
+        addProductVideo() {
+          bk.fileManagerIframe(images => {
+            this.form.video = {path: images[0].path, url: images[0].url}
+          }, {mime: 'video'})
         },
 
         removeImages(index) {

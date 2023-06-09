@@ -9,6 +9,10 @@
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
+  @if ($product['video'])
+  <script src="{{ asset('vendor/video/video.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/video/video-js.min.css') }}">
+  @endif
 @endpush
 
 @php
@@ -41,9 +45,11 @@
               </div>
             </div>
             <div class="right" id="zoom">
+              @include('product.product-video')
               <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
             </div>
           @else
+            @include('product.product-video')
             <div class="swiper" id="swiper-mobile">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="image, index in images">
@@ -324,6 +330,8 @@
             $('#zoom').trigger('zoom.destroy');
             $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
           })
+
+          closeVideo()
         },
 
         addCart(isBuyNow = false) {
@@ -385,6 +393,7 @@
       $('#zoom').trigger('zoom.destroy');
       $('#zoom img').attr('src', $(this).attr('data-image'));
       $('#zoom').zoom({url: $(this).attr('data-zoom-image')});
+      closeVideo()
     });
 
     var swiper = new Swiper("#swiper", {
