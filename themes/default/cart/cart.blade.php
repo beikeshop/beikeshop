@@ -23,7 +23,7 @@
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9 left-column">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-min-600">
           <div class="card-body p-lg-4">
             <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.commodity') }}</h4></div>
             <div class="cart-products-wrap table-responsive">
@@ -36,8 +36,8 @@
                         {{ __('shop/carts.select_all') }}
                       </label>
                     </th>
-                    <th width="40%">{{ __('shop/carts.index') }}</th>
-                    <th width="170">{{ __('shop/carts.commodity') }}</th>
+                    <th width="40%">{{ __('shop/carts.commodity') }}</th>
+                    <th width="170">{{ __('shop/carts.quantity') }}</th>
                     <th width="170">{{ __('shop/carts.subtotal') }}</th>
                     <th width="100" class="text-end">{{ __('common.action') }}</th>
                   </tr>
