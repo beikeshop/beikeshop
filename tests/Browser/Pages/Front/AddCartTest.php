@@ -1,4 +1,13 @@
 <?php
+/**
+ * BrandController.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     licy <licy@guangda.work>
+ * @created    2023-06-06 17:17:04
+ * @modified   2023-06-06 17:17:04
+ */
 
 namespace Tests\Browser\Pages\Front;
 
@@ -26,7 +35,6 @@ class AddCartTest extends DuskTestCase
                 ->click(AccountPage::Account['go_index'])
                 //3.向下滑动页面直到找到元素
                 ->scrollIntoView(IndexPage::Index['product_img'])
-//              ->mouseover(index['product_img'])
                 ->pause(2000)
                 //2.点击要加入购物车的商品
                 ->press(IndexPage::Index['product_img'])

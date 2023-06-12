@@ -5,8 +5,8 @@ namespace Tests\Data\Admin;
 class CreProduct
 {
 public const Puoduct_Info = [
-    'ch_name'      => 'test', //中文名称
-    'en_name'      => 'test', //英文名称
+    'ch_name'      => '测试商品', //中文名称
+    'en_name'      => '测试商品', //英文名称
     'sku'          => '123', //sku
     'price'        => '500', //价格
     'origin_price' => '50', //原价
@@ -15,8 +15,8 @@ public const Puoduct_Info = [
 ];
 
 public const Alter = [
-    'ch_name'      => 'alter_test', //中文名称
-    'en_name'      => 'alter_test', //英文名称
+    'ch_name'      => '修改测试商品', //中文名称
+    'en_name'      => '修改测试商品', //英文名称
     'sku'          => '456', //sku
     'price'        => '5000', //价格
     'origin_price' => '500', //原价

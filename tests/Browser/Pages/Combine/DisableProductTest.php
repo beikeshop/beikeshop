@@ -1,4 +1,13 @@
 <?php
+/**
+ * BrandController.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     licy <licy@guangda.work>
+ * @created    2023-06-06 17:17:04
+ * @modified   2023-06-06 17:17:04
+ */
 
 namespace Tests\Browser\Pages\Combine;
 
@@ -34,7 +43,9 @@ class DisableProductTest extends DuskTestCase
                echo $product1_text;
                //编辑商品
                $browser->press(ProductPage::Product_Top['edit_product'])
-               //启用商品
+               ->scrollIntoView(CreProductPage::Product_Top['Disable'])
+               ->pause(2000)
+               //禁用商品
                ->click(CreProductPage::Product_Top['Disable'])
                //点击保存
                ->press(CreProductPage::Product_Top['save_btn'])
