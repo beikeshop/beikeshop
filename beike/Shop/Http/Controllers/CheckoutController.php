@@ -33,9 +33,9 @@ class CheckoutController extends Controller
      * 更改结算信息
      *
      * @param Request $request
-     * @return array
+     * @return mixed
      */
-    public function update(Request $request): array
+    public function update(Request $request): mixed
     {
         try {
             $requestData = $request->all();
@@ -56,9 +56,13 @@ class CheckoutController extends Controller
      */
     public function confirm()
     {
-        $data = (new CheckoutService)->confirm();
+        try {
+            $data = (new CheckoutService)->confirm();
 
-        return hook_filter('checkout.confirm.data', $data);
+            return hook_filter('checkout.confirm.data', $data);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     public function success()

@@ -520,13 +520,14 @@ function quantity_format($quantity)
 /**
  * 返回json序列化结果
  */
-function json_success($message, $data = []): array
+function json_success($message, $data = [], $status=422): \Illuminate\Http\JsonResponse
 {
-    return [
+    $data = [
         'status'  => 'success',
         'message' => $message,
         'data'    => $data,
     ];
+    return response()->json($data, $status);
 }
 
 /**
