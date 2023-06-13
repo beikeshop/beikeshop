@@ -34,6 +34,7 @@ class PageRequest extends FormRequest
     {
         $rules = [
             'descriptions.*.title'   => 'required|string|min:3|max:128',
+            'descriptions.*.summary' => 'string|max:180',
             'descriptions.*.content' => 'required|string',
             'descriptions.*.locale'  => 'required|string',
         ];
