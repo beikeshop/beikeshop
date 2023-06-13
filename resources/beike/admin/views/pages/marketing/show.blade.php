@@ -20,7 +20,7 @@ $data = $plugin['data'];
   </div>
   <div class="card-body">
     <div class="d-lg-flex plugin-info">
-      <div class="d-flex justify-content-between align-items-center plugin-icon-wrap">
+      <div class="d-flex justify-content-between align-items-center plugin-icon-wrap w-max-400">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>

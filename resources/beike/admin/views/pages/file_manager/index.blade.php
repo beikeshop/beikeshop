@@ -8,13 +8,13 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="asset" content="{{ asset('/') }}">
   <script src="{{ asset('vendor/vue/2.7/vue.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/batch_select.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.9/index.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index-blue.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   @if (locale() != 'zh_cn')

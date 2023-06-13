@@ -4,9 +4,9 @@
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
 @endpush
 
 @section('content')

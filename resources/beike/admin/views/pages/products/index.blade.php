@@ -141,7 +141,7 @@
                     </td>
                   @endif
                   @hook('admin.product.list.column_value')
-                  <td class="text-end">
+                  <td class="text-end text-nowrap">
                     @if ($product['deleted_at'] == '')
                       <a href="{{ admin_route('products.edit', [$product['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                       <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
