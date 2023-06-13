@@ -121,7 +121,7 @@
         <el-form-item label="{{ __('order.current_status') }}">
           {{ $order->status_format }}
         </el-form-item>
-        @if ($order->status != 'completed')
+        @if (count($statuses))
           <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
             <el-select class="wp-200" size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
               <el-option
