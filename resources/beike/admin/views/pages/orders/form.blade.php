@@ -184,7 +184,7 @@
               <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
+                  <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid max-h-100"></div>{{ $product->name }}
                 </div>
               </td>
               <td class="">{{ $product->product_sku }}</td>

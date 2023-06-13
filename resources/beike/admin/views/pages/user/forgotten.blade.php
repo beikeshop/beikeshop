@@ -10,8 +10,8 @@
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
   {{-- <link href="{{ mix('build/css/admin/login.css') }}" rel="stylesheet"> --}}
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
