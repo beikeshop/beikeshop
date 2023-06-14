@@ -1060,7 +1060,7 @@ class ThemeSeeder extends Seeder
                             "type" => "page",
                             "value" => 21,
                             "text" => [
-                                "en" => "about us",
+                                "en" => "About us",
                                 "zh_cn" => "关于我们"
                             ]
                         ],
