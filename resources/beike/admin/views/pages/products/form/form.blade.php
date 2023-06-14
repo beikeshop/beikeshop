@@ -284,8 +284,10 @@
                       </table>
                     </div>
                   </div>
-                  <input class="form-control d-none" :value="skuIsEmpty" required>
-                  <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
+                  <div v-if="editing.isVariable">
+                    <input class="form-control d-none" :value="skuIsEmpty" required>
+                    <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
+                  </div>
                 </div>
               </div>
 
