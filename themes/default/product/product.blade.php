@@ -134,6 +134,7 @@
           @if ($product['active'])
             <div class="quantity-btns">
               @hook('product.detail.buy.before')
+              @hookwrapper('product.detail.quantity.input')
               <div class="quantity-wrap">
                 <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
                 <div class="right">
@@ -141,6 +142,8 @@
                   <i class="bi bi-chevron-down"></i>
                 </div>
               </div>
+              @endhookwrapper
+              @hookwrapper('product.detail.add_to_cart')
               <button
                 class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
                 :product-id="product.id"
@@ -149,6 +152,8 @@
                 @click="addCart(false, this)"
                 ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
               </button>
+              @endhookwrapper
+              @hookwrapper('product.detail.buy_now')
               <button
                 class="btn btn-dark ms-3 fw-bold"
                 :disabled="!product.quantity"
@@ -157,19 +162,24 @@
                 @click="addCart(true, this)"
                 ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
               </button>
+              @endhookwrapper
+
               @hook('product.detail.buy.after')
             </div>
 
             @if (current_customer() || !request('iframe'))
-            <div class="add-wishlist">
-              <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
-                <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
-              </button>
-            </div>
+              @hookwrapper('product.detail.wishlist')
+              <div class="add-wishlist">
+                <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+                  <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
+                </button>
+              </div>
+              @endhookwrapper
             @endif
           @else
             <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
           @endif
+
 
           @hook('product.detail.after')
         </div>
