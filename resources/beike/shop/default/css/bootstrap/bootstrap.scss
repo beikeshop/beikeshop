@@ -65,7 +65,7 @@ $form-floating-height:        50px;
 
 $dropdown-border-color: rgba(0, 0, 0, 0.1);
 $dropdown-item-padding-y: .4rem;
-
+$dropdown-bg :#fff;
 
 $card-border-width: 0;
 $card-bg: #fff;
@@ -85,6 +85,8 @@ $pagination-hover-color: $primary;
 $pagination-padding-x: 4px;
 $pagination-padding-y: .3rem;
 $pagination-focus-color: #606266;
+
+$table-bg: #fff;
 
 // $dropdown-divider-bg:               rgba(0, 0, 0, 0.1);
 @import './bootstrap-icons';
