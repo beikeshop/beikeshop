@@ -131,34 +131,6 @@ export default {
     }
   },
 
-  // 设置vip更新提示
-  vipUpdateTips() {
-    let data = JSON.parse(Cookies.get('beike_vip') || null);
-    const isHome = document.body.classList.contains('admin-home');
-
-    if (!data || isHome) {
-      $http.get(`${config.api_url}/api/vip?domain=${config.app_url}`, null, {hload: true}).then((res) => {
-        setVipUi(res)
-        Cookies.set('beike_vip', res, { expires: 1 });
-      })
-    }
-
-    setVipUi(data)
-
-    function setVipUi(data) {
-      if (data && data.vip) {
-        $('.vip-serve').addClass('active');
-
-        if (data.expiring) {
-          $('.vip-serve .expired-text').show().find('span').text(data.expired_at);
-        }
-      } else {
-        $('.vip-serve').removeClass('active');
-        $('.vip-serve .expired-text').hide();
-      }
-    }
-  },
-
   // 列表页使用 vue ajax 分页，点击浏览起前进后退按钮时，重新加载数据
   ajaxPageReloadData(app) {
     window.addEventListener('popstate', () => {

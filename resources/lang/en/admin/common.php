@@ -56,6 +56,7 @@ return [
     'common_link'                      => 'Common Links',
     'header_search_input'              => 'Search Features',
     'header_search_title'              => 'Search Results',
+    'license_services'                 => 'License & Services',
 
     // sidebar
     'account_index'                    => 'Personal Center',
