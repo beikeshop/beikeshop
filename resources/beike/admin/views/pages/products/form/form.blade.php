@@ -143,7 +143,7 @@
 
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
-              <div class="row g-3 mb-3" v-if="editing.isVariable">
+              <div class="row g-3 mb-3" v-show="editing.isVariable">
                 <label for="" class="wp-200 col-form-label text-end"></label>
                 <div class="col-auto wp-200-">
                   <div class="selectable-variants">
@@ -290,7 +290,7 @@
               </div>
 
               @hookwrapper('admin.product.edit.variable')
-              <template v-if="!editing.isVariable">
+              <div v-show="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
                 <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
@@ -301,7 +301,7 @@
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
                 <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
                 <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
-              </template>
+              </div>
               @endhookwrapper
             </div>
           </div>
@@ -933,8 +933,6 @@
             return;
           }
 
-          // const ssss = JSON.parse(JSON.stringify(this.form.skus));
-
           // 找出已存在的组合
           const productVariantCombos = this.form.skus.map(v => v.variants.join()); // ['0,0,0', '0,0,1']
           let skus = [];
@@ -942,7 +940,6 @@
             const combo = combos[i]; // 0,0,0
             const index = productVariantCombos.indexOf(combo.join());
             if (index > -1) {
-              // console.log(ssss[index]);
               skus.push(this.form.skus[index]);
             } else {
               skus.push({
@@ -957,15 +954,6 @@
                 is_default: i == 0,
               });
             }
-          }
-
-          // 第一个子商品用主商品的值
-          if (!this.isMove) {
-            skus[0].model = this.form.model;
-            skus[0].sku = this.form.sku;
-            skus[0].price = this.form.price;
-            skus[0].quantity = this.form.quantity;
-            skus[0].status = this.form.status;
           }
 
           this.form.skus = skus;
