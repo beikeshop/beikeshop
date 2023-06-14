@@ -621,7 +621,7 @@
             let variants = [];
             const sourceVariants = JSON.parse(JSON.stringify(this.source.variables));
             for (var i = 0; i < sourceVariants.length; i++) {
-              const sourceVariant = sourceVariants[i];
+              let sourceVariant = sourceVariants[i];
               // 排除掉没有规格值的
               if (sourceVariant.values.length > 0) {
                 variants.push(sourceVariant);
@@ -801,6 +801,32 @@
 
         removeSourceVariantValue(variantIndex, variantValueIndex) {
           this.source.variables[variantIndex].values.splice(variantValueIndex, 1);
+          // 找出 this.form.skus 中 variants[variantIndex] === variantValueIndex 的 sku，删除
+          this.form.skus = this.form.skus.filter(sku => sku.variants[variantIndex] * 1 !== variantValueIndex * 1);
+
+          // 根据现在的 this.source.variables values 重新生成迪卡尔积 ['0,0', '0,1']...
+          const variants = this.source.variables.map(e => e.values.map((v, i) => i));
+          const cartesian = this.cartesian(...variants);
+
+          // 用 cartesian 跟新 this.form.skus 中的 variants
+          cartesian.forEach((c, i) => {
+            this.form.skus[i].variants = c.map(e => e + '');
+          })
+        },
+
+        cartesian(...args) {
+          if (args.length < 2) return args[0] || [];
+          return [].reduce.call(args, (col, set) => {
+            let res = [];
+            col.forEach(c => {
+              set.forEach(s => {
+                let t = [].concat(Array.isArray(c) ? c : [c]);
+                t.push(s);
+                res.push(t);
+              });
+            });
+            return res;
+          });
         },
 
         modalVariantOpenButtonClicked(variantIndex, variantValueIndex) {
@@ -907,6 +933,8 @@
             return;
           }
 
+          // const ssss = JSON.parse(JSON.stringify(this.form.skus));
+
           // 找出已存在的组合
           const productVariantCombos = this.form.skus.map(v => v.variants.join()); // ['0,0,0', '0,0,1']
           let skus = [];
@@ -914,6 +942,7 @@
             const combo = combos[i]; // 0,0,0
             const index = productVariantCombos.indexOf(combo.join());
             if (index > -1) {
+              // console.log(ssss[index]);
               skus.push(this.form.skus[index]);
             } else {
               skus.push({
@@ -989,6 +1018,7 @@
           }
         }
       }
+
       return results;
     }
 
