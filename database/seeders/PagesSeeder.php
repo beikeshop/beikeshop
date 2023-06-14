@@ -78,6 +78,22 @@ class PagesSeeder extends Seeder
                 'author' => 'BeikeShop',
                 'active' => 1
             ],
+            [
+                "id" =>22,
+                "page_category_id" =>1,
+                "position" =>0,
+                "views" =>1,
+                "author" =>"BeikeShop",
+                "active" =>1,
+            ],
+            [
+                "id" =>23,
+                "page_category_id" =>1,
+                "position" =>0,
+                "views" =>1,
+                "author" =>"BeikeShop",
+                "active" =>1,
+            ]
         ];
     }
 
@@ -188,6 +204,50 @@ class PagesSeeder extends Seeder
 				"created_at" => "2022-09-02 11:04:30",
 				"updated_at" => "2022-09-02 11:04:30"
 			],
+            [
+                "id" =>199,
+                "page_id" =>22,
+                "locale" =>"zh_cn",
+                "title" =>"Beikeshop 1.3.7 新版版本发布！！！",
+                "summary" =>"",
+                "content" =>"<p>Beikeshop 1.3.7 新版版本发布！！！</p>",
+                "meta_title" =>"",
+                "meta_description" =>"",
+                "meta_keywords" =>"",
+            ],
+            [
+                "id" =>200,
+                "page_id" =>22,
+                "locale" =>"en",
+                "title" =>"Beikeshop 1.3.7 new version released! ! !",
+                "summary" =>"",
+                "content" =>"<p>Beikeshop 1.3.7 new version released! ! !</p>",
+                "meta_title" =>"",
+                "meta_description" =>"",
+                "meta_keywords" =>"",
+            ],
+            [
+                "id" =>203,
+                "page_id" =>23,
+                "locale" =>"zh_cn",
+                "title" =>"新一代开源跨境电商系统，BeikeShop重磅上线！",
+                "summary" =>"",
+                "content" =>"随着一带一路的蓬勃发展，以及中国制造亟需出海拓展全球市场，外贸行业仍然是大国创造GDP的核心引擎.光大网络科技长期深耕跨境电商行业，经过多年的摸索与思考，开发出了一套更加符合国内出海企业需求的开源电商系统&mdash;&mdash;BeikeShop&mdash;&mdash;助力企业品牌出海。",
+                "meta_title" =>"",
+                "meta_description" =>"",
+                "meta_keywords" =>"",
+            ],
+            [
+                "id" =>204,
+                "page_id" =>23,
+                "locale" =>"en",
+                "title" =>"A new generation of open source cross-border e-commerce system, BeikeShop is launched!",
+                "summary" =>"",
+                "content" =>"随着一带一路的蓬勃发展，以及中国制造亟需出海拓展全球市场，外贸行业仍然是大国创造GDP的核心引擎.光大网络科技长期深耕跨境电商行业，经过多年的摸索与思考，开发出了一套更加符合国内出海企业需求的开源电商系统&mdash;&mdash;BeikeShop&mdash;&mdash;助力企业品牌出海",
+                "meta_title" =>"",
+                "meta_description" =>"",
+                "meta_keywords" =>"",
+            ]
         ];
     }
 }

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CustomerGroupsSeeder::class,
             LanguagesSeeder::class,
             PagesSeeder::class,
+            PageCategoriesSeeder::class,
             PluginsSeeder::class,
             ZonesSeeder::class,
             ProductsSeeder::class,
