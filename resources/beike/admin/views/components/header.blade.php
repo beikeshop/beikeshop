@@ -51,20 +51,10 @@
         </li>
         @endhookwrapper
 
-        @hookwrapper('admin.header.vip')
-        <li class="nav-item vip-serve">
-          <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-vip" target="_blank" class="nav-link">
-            <img src="/image/vip-icon.png" class="img-fluid">
-            <span class="vip-text ms-1">VIP</span>
-            <div class="expired-text text-danger ms-2" style="display: none">@lang('admin/common.expired_at')：<span class="ms-0"></span></div>
-          </a>
-        </li>
-        @endhookwrapper
-
         @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
-            @lang('admin/common.copyright_buy')
+            <i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.license_services')
           </a>
         </li>
         @endhookwrapper

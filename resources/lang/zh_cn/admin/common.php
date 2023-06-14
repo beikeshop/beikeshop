@@ -56,6 +56,7 @@ return [
     'common_link'            => '常用链接',
     'header_search_input'    => '搜索后台功能',
     'header_search_title'    => '搜索结果',
+    'license_services'       => '版权与服务',
 
     // sidebar
     'account_index'          => '个人中心',
