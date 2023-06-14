@@ -119,7 +119,7 @@
                 @foreach ($source['categories'] as $_category)
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}"
-                  id="category-{{ $_category->id }}" {{ in_array($_category->id, $category_ids) ? 'checked' : '' }}>
+                  id="category-{{ $_category->id }}" {{ in_array($_category->id, old('categories', $category_ids)) ? 'checked' : '' }}>
                   <label class="form-check-label" for="category-{{ $_category->id }}">
                     {{ $_category->name }}
                   </label>
