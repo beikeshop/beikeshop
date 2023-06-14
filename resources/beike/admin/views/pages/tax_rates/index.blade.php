@@ -41,7 +41,7 @@
               <td>@{{ tax.name }}</td>
               <td>@{{ tax.rate }}</td>
               <td>@{{ tax.type }}</td>
-              <td>@{{ tax.region.name }}</td>
+              <td>@{{ tax.region ? tax.region.name : '' }}</td>
               <td>@{{ tax.created_at }}</td>
               <td>@{{ tax.updated_at }}</td>
               <td class="text-end">
@@ -130,7 +130,7 @@
           this.dialog.show = true
           this.dialog.type = type
           this.dialog.index = index
-          this.dialog.form.region_id = this.source.regions[0].id
+          this.dialog.form.region_id = this.source.regions.length ? this.source.regions[0].id : 0
 
           if (type == 'edit') {
             let tax = this.tax_rates[index];
