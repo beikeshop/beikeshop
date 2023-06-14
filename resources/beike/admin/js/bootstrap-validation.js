@@ -33,7 +33,8 @@ $(function () {
 
         form.classList.add("was-validated");
         $('.nav-link, .nav-item').removeClass('error-invalid');
-        $('.invalid-feedback').hide();
+        $('.is-invalid').removeClass('is-invalid');
+        $('.invalid-feedback').removeClass('d-block');
 
         // 如果错误输入框在 tab 页面，则高亮显示对应的选项卡
         $('.invalid-feedback').each(function(index, el) {
