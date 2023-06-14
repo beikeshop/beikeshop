@@ -119,7 +119,7 @@
                 @foreach ($source['categories'] as $_category)
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}"
-                  id="category-{{ $_category->id }}" {{ in_array($_category->id, $category_ids) ? 'checked' : '' }}>
+                  id="category-{{ $_category->id }}" {{ in_array($_category->id, old('categories', $category_ids)) ? 'checked' : '' }}>
                   <label class="form-check-label" for="category-{{ $_category->id }}">
                     {{ $_category->name }}
                   </label>
@@ -143,7 +143,7 @@
 
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
-              <div class="row g-3 mb-3" v-show="editing.isVariable">
+              <div class="row g-3 mb-3" v-if="editing.isVariable">
                 <label for="" class="wp-200 col-form-label text-end"></label>
                 <div class="col-auto wp-200-">
                   <div class="selectable-variants">
@@ -284,15 +284,13 @@
                       </table>
                     </div>
                   </div>
-                  <div v-if="editing.isVariable">
-                    <input class="form-control d-none" :value="skuIsEmpty" required>
-                    <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
-                  </div>
+                  <input class="form-control d-none" :value="skuIsEmpty" required>
+                  <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
                 </div>
               </div>
 
               @hookwrapper('admin.product.edit.variable')
-              <div v-show="!editing.isVariable">
+              <div v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
                 <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
