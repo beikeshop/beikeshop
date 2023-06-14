@@ -15,8 +15,7 @@
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <link rel="shortcut icon" href="{{ asset('/image/favicon.png') }}">
-  {{-- <script src="{{ asset('vendor/bootstrapjs/bootstrap.min.js') }}"></script> --}}
-  <script src="{{ asset('vendor/bootstrapjs/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <link rel="stylesheet" type="text/css" href="{{ asset('/install/css/app.css') }}">
   @yield('style')
 </head>

@@ -716,6 +716,30 @@ class ThemeSeeder extends Seeder
                     ],
                     "isChildren" => false,
                     "childrenGroup" => []
+                ],
+                [
+                    "isFull" => false,
+                    "badge" => [
+                        "isShow" => false,
+                        "name" => [
+                            "en" => "",
+                            "zh_cn" => ""
+                        ],
+                        "bg_color" => "",
+                        "text_color" => ""
+                    ],
+                    "link" => [
+                        "type" => "page_category",
+                        "value" => "1",
+                        "text" => [],
+                        "link" => ""
+                    ],
+                    "name" => [
+                        "en" => "News",
+                        "zh_cn" => "公司新闻"
+                    ],
+                    "isChildren" => false,
+                    "childrenGroup" => []
                 ]
             ]
         ];
