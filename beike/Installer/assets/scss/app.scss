@@ -11,6 +11,8 @@
 $primary: #fd560f;
 
 body {
+  background-color: #f3f6f8;
+
   .install-box {
     background-color: #f3f6f8;
     display: flex;
@@ -44,6 +46,10 @@ body {
         width: auto
       }
     }
+  }
+
+  .table {
+    --bs-table-bg: transparent;
   }
 }
 
