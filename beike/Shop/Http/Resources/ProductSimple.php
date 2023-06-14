@@ -30,12 +30,8 @@ class ProductSimple extends JsonResource
             throw new \Exception("invalid master sku for product {$this->id}");
         }
 
-        $name = $this->description->name ?? '';
-        if ($masterSku && $masterSku->images) {
-            $images = $masterSku->images;
-        } else {
-            $images = $this->images ?? [];
-        }
+        $name   = $this->description->name ?? '';
+        $images = $this->images;
 
         $data = [
             'id'                  => $this->id,

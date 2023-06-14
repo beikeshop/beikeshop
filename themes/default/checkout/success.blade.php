@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('body-class', 'page-checkout-success')
+@section('body-class', 'page-account-order-info')
 @section('title',  __('shop/checkout.checkout_success_title'))
 
 @section('content')
@@ -22,6 +22,8 @@
               <h5 class="card-title">{{ __('shop/account.order.order_info.order_details') }}</h5>
               @if (current_customer())
                 <a class="btn btn-sm btn-primary" href="{{ shop_route('account.order.show', $order->number) }}">{{ __('common.view_more') }}</a>
+                @else
+                <a class="btn btn-sm btn-primary" href="{{ shop_route('orders.show', ['number' => $order->number, 'email' => $order->email]) }}">{{ __('common.view_more') }}</a>
               @endif
             </div>
             <div class="card-body">
@@ -94,44 +96,8 @@
         </div>
       </div>
 
-      @if ($order->orderShipments->count())
-        @hookwrapper('checkout.order.shipments')
-        <div class="card mb-4">
-          <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
-          <div class="card-body">
-            <div class="table-push">
-              <table class="table ">
-                <thead class="">
-                <tr>
-                  <th>{{ __('order.express_company') }}</th>
-                  <th>{{ __('order.express_number') }}</th>
-                  <th>{{ __('order.history_created_at') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($order->orderShipments as $ship)
-                  <tr>
-                    <td>{{ $ship->express_company }}</td>
-                    <td>{{ $ship->express_number }}</td>
-                    <td>{{ $ship->created_at }}</td>
-                  </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        @endhookwrapper
-      @endif
-
+      @hook('checkout.success.footer')
     </div>
   </div>
 </div>
-
-<style>
-  body {
-    background-color: #f5f5f5;
-  }
-</style>
-
 @endsection

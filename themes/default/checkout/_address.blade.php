@@ -28,8 +28,8 @@
                   <span class="badge bg-success"
                     v-if="form.shipping_address_id == address.id">{{ __('shop/checkout.chosen') }}</span>
                 </div>
-                <a href="javascript:void(0)" class=""
-                  @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</a>
+                <button type="button" class="btn btn-outline-secondary btn-sm"
+                  @click.stop="editAddress(index, 'shipping_address_id')">{{ __('shop/checkout.edit') }}</button>
               </div>
             </div>
           </div>
@@ -59,8 +59,8 @@
                 <div>
                   <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
                 </div>
-                <a class="javascript:void(0)"
-                  @click.stop="editAddress(null, 'guest_shipping_address')">{{ __('shop/checkout.edit') }}</a>
+                <button type="button" class="btn btn-outline-secondary btn-sm"
+                  @click.stop="editAddress(null, 'guest_shipping_address')">{{ __('shop/checkout.edit') }}</button>
               </div>
             </div>
           </div>

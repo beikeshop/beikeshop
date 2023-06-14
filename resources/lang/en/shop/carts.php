@@ -13,7 +13,7 @@ return [
     'index'                    => 'Cart',
     'added_to_cart'            => 'Added To Cart',
     'select_all'               => 'Select All',
-    'commodity'                => 'Commodity',
+    'commodity'                => 'Product',
     'quantity'                 => 'Quantity',
     'subtotal'                 => 'Subtotal',
     'product_total'            => 'Product Total',

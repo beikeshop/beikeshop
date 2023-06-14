@@ -56,6 +56,8 @@ Route::prefix('/')
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
         Route::get('logout', [LogoutController::class, 'index'])->name('logout');
 
+        Route::get('orders/{number}', [\Beike\Shop\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
+
         Route::get('page_categories', [PageCategoryController::class, 'home'])->name('page_categories.home');
         Route::get('page_categories/{page_category}', [PageCategoryController::class, 'show'])->name('page_categories.show');
         Route::get('pages/{page}', [PageController::class, 'show'])->name('pages.show');
@@ -80,7 +82,6 @@ Route::prefix('/')
                 Route::put('checkout', [CheckoutController::class, 'update'])->name('checkout.update');
                 Route::get('checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
                 Route::post('checkout/confirm', [CheckoutController::class, 'confirm'])->name('checkout.confirm');
-                Route::get('orders/{number}/success', [OrderController::class, 'success'])->name('orders.success');
                 Route::get('orders/{number}/pay', [OrderController::class, 'pay'])->name('orders.pay');
                 Route::post('orders/{number}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
                 Route::post('orders/{number}/complete', [OrderController::class, 'complete'])->name('orders.complete');

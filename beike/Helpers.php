@@ -11,6 +11,7 @@ use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Services\CurrencyService;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -520,25 +521,28 @@ function quantity_format($quantity)
 /**
  * 返回json序列化结果
  */
-function json_success($message, $data = []): array
+function json_success($message, $data = [])
 {
     return [
         'status'  => 'success',
         'message' => $message,
         'data'    => $data,
     ];
+
 }
 
 /**
  * 返回json序列化结果
  */
-function json_fail($message, $data = []): array
+function json_fail($message, $data = [], $status = 422): JsonResponse
 {
-    return [
+    $data = [
         'status'  => 'fail',
         'message' => $message,
         'data'    => $data,
     ];
+
+    return response()->json($data, $status);
 }
 
 if (! function_exists('sub_string')) {

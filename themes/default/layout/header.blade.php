@@ -56,17 +56,21 @@
           </div>
         @endif
         @endhookwrapper
+
+        @hook('header.top.left')
       </div>
 
       @hook('header.top.language.after')
 
-      @if (system_setting('base.telephone', ''))
       <div class="right nav">
-        @hookwrapper('header.top.telephone')
-        <span class="px-2"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</span>
-        @endhookwrapper
+        @if (system_setting('base.telephone', ''))
+          @hookwrapper('header.top.telephone')
+          <div class="px-2 my-auto"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</div>
+          @endhookwrapper
+        @endif
+
+        @hook('header.top.right')
       </div>
-      @endif
     </div>
   </div>
 
@@ -89,7 +93,7 @@
                 class="iconfont">&#xe662;</i></a></li>
           <li class="nav-item dropdown">
             <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul class="dropdown-menu">
               @auth('web_shop')
                 <li class="dropdown-item">
                   <h6 class="mb-0">{{ current_customer()->name }}</h6>
@@ -116,9 +120,13 @@
           </li>
           @endhookwrapper
           <li class="nav-item">
-            <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
+            {{-- <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
               href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"
               aria-controls="offcanvasExample">
+              <i class="iconfont">&#xe634;</i>
+              <span class="cart-badge-quantity"></span>
+            </a> --}}
+            <a class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}" href="javascript:void(0);" role="button">
               <i class="iconfont">&#xe634;</i>
               <span class="cart-badge-quantity"></span>
             </a>
@@ -155,9 +163,7 @@
     </div>
   </div>
 
-  @if (!equal_route('shop.carts.index'))
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
-  @endif
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">

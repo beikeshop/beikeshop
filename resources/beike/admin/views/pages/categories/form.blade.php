@@ -21,7 +21,7 @@
         <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
         <x-admin-form-input-locale name="descriptions.*.content" title="{{ __('admin/builder.modules_content') }}" :value="$descriptions" />
 
-        {{-- <x-admin-form-select title="上级分类" name="parent_id" :value="old('parent_id', $category->parent_id ?? 0)" :options="$categories->toArray()" key="id" label="name" /> --}}
+        <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" :value="old('position', $category->position ?? 0)" />
 
         <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
           @php

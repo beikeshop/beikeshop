@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2022-09-16 20:58:16
+ * @LastEditTime  2023-05-29 18:56:35
  */
 
 window.axios = require('axios');
@@ -25,8 +25,8 @@ export default {
    * @param url 接口路由
    * @returns {AxiosPromise<any>}
    */
-  get (url, params, {hmsg, hload}={}) {
-    return this.request('get', url, params = params, {hmsg, hload});
+  get (url, params, {hmsg, hload, base}={}) {
+    return this.request('get', url, params = params, {hmsg, hload, base});
   },
 
   /**
@@ -37,8 +37,8 @@ export default {
    * @returns {AxiosPromise<any>}
    */
 
-  post (url, params, {hmsg, hload}={}) {
-    return this.request('post', url, params, {hmsg, hload});
+  post (url, params, {hmsg, hload, base}={}) {
+    return this.request('post', url, params, {hmsg, hload, base});
   },
 
   /**
@@ -48,8 +48,8 @@ export default {
   * @returns {Promise}
   */
 
-  delete (url, params, {hmsg, hload}={}) {
-    return this.request('delete', url, params, {hmsg, hload});
+  delete (url, params, {hmsg, hload, base}={}) {
+    return this.request('delete', url, params, {hmsg, hload, base});
   },
 
   /**
@@ -59,8 +59,8 @@ export default {
   * @returns {Promise}
   */
 
-  put (url, params, {hmsg, hload}={}) {
-    return this.request('put', url, params, {hmsg, hload});
+  put (url, params, {hmsg, hload, base}={}) {
+    return this.request('put', url, params, {hmsg, hload, base});
   },
 
 
@@ -73,9 +73,13 @@ export default {
    * @returns {Promise<any>}
    */
   // 错误和失败信息都在这里进行处理，界面中调用的时候只处理正确数据即可
-  request(method, url, params = {}, {hmsg, hload} = {}) {
+  request(method, url, params = {}, {hmsg, hload, base} = {}) {
     if (!hload) {
       layer.load(2, {shade: [0.3,'#fff'] })
+    }
+
+    if (base) {
+      axios.defaults.baseURL = base;
     }
 
     return new Promise((resolve, reject) => {

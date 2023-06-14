@@ -11,7 +11,7 @@
 
 return [
     'index'      => 'Edit Address',
-    'name'       => 'Name',
+    'name'       => 'Full name',
     'phone'      => 'Phone',
     'country_id' => 'Country ID',
     'zone'       => 'Zone',

@@ -18,6 +18,8 @@ use Exception;
 
 class CartService
 {
+    private static $cartList = null;
+
     /**
      * 获取购物车商品列表
      *
@@ -27,6 +29,10 @@ class CartService
      */
     public static function list($customer, bool $selected = false): array
     {
+        if (self::$cartList !== null) {
+            return self::$cartList;
+        }
+
         $cartBuilder = CartRepo::allCartProductsBuilder($customer->id ?? 0);
         if ($selected) {
             $cartBuilder->where('selected', true);
@@ -50,7 +56,9 @@ class CartService
             return $description && $product;
         });
 
-        return CartDetail::collection($cartItems)->jsonSerialize();
+        $cartList = CartDetail::collection($cartItems)->jsonSerialize();
+
+        return self::$cartList = hook_filter('service.cart.list', $cartList);
     }
 
     /**
@@ -183,6 +191,6 @@ class CartService
             'amount_format' => currency_format($amount),
         ];
 
-        return hook_filter('cart.data', $data);
+        return hook_filter('service.cart.data', $data);
     }
 }

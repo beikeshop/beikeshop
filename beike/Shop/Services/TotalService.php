@@ -17,17 +17,16 @@ use Illuminate\Support\Str;
 
 class TotalService
 {
-    private const TOTAL_CODES = [
+    protected const TOTAL_CODES = [
         'subtotal',
         'tax',
         'shipping',
         'customer_discount',
-        'order_total',
     ];
 
-    public Cart $currentCart;
+    protected Cart $currentCart;
 
-    public array $cartProducts;
+    protected array $cartProducts;
 
     public array $taxes = [];
 
@@ -35,7 +34,7 @@ class TotalService
 
     public float $amount = 0;
 
-    public string $shippingMethod = '';
+    protected string|array $shippingMethod = '';
 
     public function __construct($currentCart, $cartProducts)
     {
@@ -53,6 +52,11 @@ class TotalService
         $this->shippingMethod = $methodCode;
 
         return $this;
+    }
+
+    public function getShippingMethod(): string
+    {
+        return $this->shippingMethod;
     }
 
     /**
@@ -112,11 +116,14 @@ class TotalService
     {
         $maps = [];
         foreach (self::TOTAL_CODES as $code) {
-            $serviceName  = Str::studly($code) . 'Service';
-            $maps[$code]  = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
+            $serviceName = Str::studly($code) . 'Service';
+            $maps[$code] = "\Beike\\Shop\\Services\\TotalServices\\{$serviceName}";
         }
 
-        return hook_filter('service.total.maps', $maps);
+        $maps                = hook_filter('service.total.maps', $maps);
+        $maps['order_total'] = "\Beike\\Shop\\Services\\TotalServices\\OrderTotalService";
+
+        return $maps;
     }
 
     /**
@@ -129,5 +136,37 @@ class TotalService
         $carts = $this->cartProducts;
 
         return collect($carts)->sum('subtotal');
+    }
+
+    /**
+     * Get Cart Products
+     *
+     * @return array
+     */
+    public function getCartProducts(): array
+    {
+        return $this->cartProducts;
+    }
+
+    /**
+     * Get Current Cart
+     *
+     * @return Cart
+     */
+    public function getCurrentCart()
+    {
+        return $this->currentCart;
+    }
+
+    /**
+     * Get Cart Product Amount
+     *
+     * @return mixed
+     */
+    public function countProducts(): mixed
+    {
+        $cartProducts = $this->getCartProducts();
+
+        return collect($cartProducts)->sum('quantity');
     }
 }

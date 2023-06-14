@@ -33,6 +33,8 @@ return [
     'no_file'                 => 'No File',
     'picture_space'           => 'Picture Space',
     'show_pc'                 => 'Please go to the PC side to operate',
+    'verify_select_image'     => 'Please select a picture',
+    'verify_select_video'     => 'Please select video',
 
     'confirm_delete_file'     => 'Do you want to delete the selected file',
     'confirm_delete_folder'   => 'The folder deletion operation is in progress, all files in the folder will be deleted, do you want to confirm?',
@@ -40,5 +42,6 @@ return [
     'can_empty'               => 'Can not be empty',
     'finish'                  => 'Finish',
     'uploading'               => 'loading...',
+    'upload_fail'             => 'Upload failed',
     'file_manager'            => 'File Manager',
 ];

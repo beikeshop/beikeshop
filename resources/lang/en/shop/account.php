@@ -100,7 +100,7 @@ return [
     'addresses'           => [
         'index'           => 'Addresses',
         'add_address'     => 'Add New Address',
-        'default_address' => 'Default Address',
+        'default_address' => 'Default',
         'delete'          => 'Delete',
         'edit'            => 'Edit',
         'enter_name'      => 'Please type in your name',

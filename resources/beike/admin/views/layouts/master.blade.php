@@ -9,13 +9,13 @@
   <meta name="asset" content="{{ asset('/') }}">
   <meta name="editor_language" content="{{ locale() }}">
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
   @if (locale() != 'zh_cn')
     <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif

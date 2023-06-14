@@ -36,6 +36,7 @@ return [
     'quantity'               => '数量',
     'enable_multi_spec'      => '启用多规格',
     'image_help'             => '第一张图片将作为商品主图,支持同时上传多张图片,多张图片之间可随意调整位置',
+    'video_help'             => '如果提示超出系统大小限制，请修改 php.ini  参数 post_max_size',
     'add_variable'           => '添加规格',
     'add_variable_value'     => '添加规格值',
     'add_variable_image'     => '添加规格图片',

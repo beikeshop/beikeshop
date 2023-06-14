@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-03-16 17:30:20
+ * @LastEditTime  2023-05-18 10:27:58
  */
 
 $(function () {
@@ -21,6 +21,35 @@ $(function () {
       });
     });
   }
+
+  // 购物车侧边栏弹出
+  $(document).on("click", ".btn-right-cart", function () {
+    const currentUrl = window.location.pathname;
+    if (currentUrl == '/checkout' || currentUrl == '/carts') {
+      return;
+    }
+
+    const offcanvasRightCart = new bootstrap.Offcanvas('#offcanvas-right-cart')
+    offcanvasRightCart.show()
+  });
+
+  // 侧边栏购物车删除商品
+  $(document).on('click', '.offcanvas-products-delete', function () {
+    const id = $(this).data('id');
+
+    $http.delete(`carts/${id}`).then((res) => {
+      $(this).parents('.product-list').remove();
+      if (!res.data.quantity) {
+        $('.cart-badge-quantity').hide();
+        $('.empty-cart').removeClass('d-none');
+      } else {
+        $('.cart-badge-quantity').show().html(res.data.quantity > 99 ? '99+' : res.data.quantity);
+      }
+
+      $('.offcanvas-right-cart-count').text(res.data.quantity);
+      $('.offcanvas-right-cart-amount').text(res.data.amount_format);
+    })
+  })
 
   // 响应式下弹窗菜单交互
   $(document).on("click", ".mobile-open-menu", function () {

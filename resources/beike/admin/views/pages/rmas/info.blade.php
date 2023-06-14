@@ -7,11 +7,11 @@
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.rma_details') }}</h6></div>
     <div class="card-body">
       <div class="row">
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-4 col-12 order-top-info">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td style="width:40%">ID：</td>
+                <td>ID：</td>
                 <td>{{ $rma['id'] }}</td>
               </tr>
               <tr>
@@ -25,11 +25,11 @@
             </tbody>
           </table>
         </div>
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-4 col-12 order-top-info">
           <table class="table table-borderless">
             <tbody>
               <tr>
-                <td style="width:40%">{{ __('admin/builder.modules_product') }}：</td>
+                <td>{{ __('admin/builder.modules_product') }}：</td>
                 <td>{{ $rma['product_name'] }}</td>
               </tr>
               <tr>

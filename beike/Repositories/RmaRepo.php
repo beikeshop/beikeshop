@@ -95,9 +95,9 @@ class RmaRepo
 
     /**
      * @param $data
-     * @return LengthAwarePaginator
+     * @return Builder
      */
-    public static function list($data): LengthAwarePaginator
+    public static function getBuilder($data): Builder
     {
         $builder = Rma::query();
 
@@ -124,7 +124,16 @@ class RmaRepo
         }
         $builder->orderBy('id', 'DESC');
 
-        return $builder->paginate(perPage())->withQueryString();
+        return $builder;
+    }
+
+    /**
+     * @param $data
+     * @return LengthAwarePaginator
+     */
+    public static function list($data): LengthAwarePaginator
+    {
+        return self::getBuilder($data)->paginate(perPage())->withQueryString();
     }
 
     /**

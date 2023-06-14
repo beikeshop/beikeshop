@@ -15,6 +15,7 @@ use Beike\Models\Order;
 use Beike\Models\OrderHistory;
 use Beike\Models\OrderShipment;
 use Beike\Models\Product;
+use Beike\Repositories\OrderPaymentRepo;
 use Throwable;
 
 class StateMachineService
@@ -28,6 +29,8 @@ class StateMachineService
     private bool $notify;
 
     private array $shipment;
+
+    private array $payment;
 
     public const CREATED = 'created';                  // 已创建
 
@@ -117,6 +120,19 @@ class StateMachineService
     }
 
     /**
+     * 设置支付信息
+     *
+     * @param array $payment
+     * @return $this
+     */
+    public function setPayment(array $payment = []): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
      * 获取所有订单状态列表
      *
      * @return array
@@ -136,7 +152,25 @@ class StateMachineService
             ];
         }
 
-        return $result;
+        return hook_filter('service.state_machine.all_statuses', $result);
+    }
+
+    /**
+     * 获取所有有效订单状态
+     * @return string[]
+     */
+    public static function getValidStatuses(): array
+    {
+        $statuses = [
+            self::CREATED,
+            self::UNPAID,
+            self::PAID,
+            self::SHIPPED,
+            self::COMPLETED,
+            self::CANCELLED,
+        ];
+
+        return $statuses;
     }
 
     /**
@@ -198,6 +232,8 @@ class StateMachineService
             }
             $this->{$function}($oldStatusCode, $status);
         }
+
+        hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
     }
 
     /**
@@ -208,11 +244,6 @@ class StateMachineService
      */
     private function validStatusCode($statusCode)
     {
-        if (! in_array($statusCode, self::ORDER_STATUS)) {
-            $statusCodeString = implode(', ', self::ORDER_STATUS);
-
-            throw new \Exception("Invalid order status, must be one of the '{$statusCodeString}'");
-        }
         $orderId           = $this->orderId;
         $orderNumber       = $this->order->number;
         $currentStatusCode = $this->order->status;
@@ -338,6 +369,18 @@ class StateMachineService
             ]);
             $orderShipment->saveOrFail();
         }
+    }
+
+    /**
+     * 添加发货单号
+     * @throws Throwable
+     */
+    private function addPayment($oldCode, $newCode)
+    {
+        if (empty($this->payment)) {
+            return;
+        }
+        OrderPaymentRepo::createOrUpdatePayment($this->orderId, $this->payment);
     }
 
     /**

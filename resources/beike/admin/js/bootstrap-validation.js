@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2023-04-11 09:28:34
+ * @LastEditTime  2023-06-13 17:27:49
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -33,12 +33,13 @@ $(function () {
 
         form.classList.add("was-validated");
         $('.nav-link, .nav-item').removeClass('error-invalid');
-
+        $('.invalid-feedback').hide();
 
         // 如果错误输入框在 tab 页面，则高亮显示对应的选项卡
         $('.invalid-feedback').each(function(index, el) {
           if ($(el).css('display') == 'block') {
             layer.msg(lang.error_form, () => {});
+
             // 兼容使用 element ui input、autocomplete 组件，在传统提交报错ui显示
             if ($(el).siblings('div[class^="el-"]')) {
               $(el).siblings('div[class^="el-"]').find('.el-input__inner').addClass('error-invalid-input')

@@ -55,7 +55,7 @@ class ProductRepo
      */
     public static function getProductsByCategory($categoryId, $filterData)
     {
-        $builder = self::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
+        $builder = static::getBuilder(array_merge(['category_id' => $categoryId, 'active' => 1], $filterData));
 
         return $builder->with('inCurrentWishlist')
             ->paginate($filterData['per_page'] ?? perPage())
@@ -72,7 +72,7 @@ class ProductRepo
         if (! $productIds) {
             return ProductSimple::collection(new Collection());
         }
-        $builder  = self::getBuilder(['product_ids' => $productIds])->whereHas('masterSku');
+        $builder  = static::getBuilder(['product_ids' => $productIds])->whereHas('masterSku');
         $products = $builder->with('inCurrentWishlist')->get();
 
         return ProductSimple::collection($products);
@@ -220,7 +220,7 @@ class ProductRepo
 
     public static function getFilterAttribute($data): array
     {
-        $builder = self::getBuilder(array_diff_key($data, ['attr' => '', 'price' => '']))
+        $builder = static::getBuilder(array_diff_key($data, ['attr' => '', 'price' => '']))
             ->select(['pa.attribute_id', 'pa.attribute_value_id'])
             ->with(['attributes.attribute.description', 'attributes.attribute_value.description'])
             ->leftJoin('product_attributes as pa', 'pa.product_id', 'products.id')
@@ -274,7 +274,7 @@ class ProductRepo
     {
         $selectPrice = $data['price'] ?? '-';
         // unset($data['price']);
-        $builder = self::getBuilder(['category_id' => $data['category_id']])->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
+        $builder = static::getBuilder(['category_id' => $data['category_id']])->leftJoin('product_skus as ps', 'products.id', 'ps.product_id')
             ->where('ps.is_default', 1);
         $min = $builder->min('ps.price');
         $max = $builder->max('ps.price');
@@ -293,7 +293,7 @@ class ProductRepo
 
     public static function list($data = [])
     {
-        return self::getBuilder($data)->paginate($data['per_page'] ?? 20);
+        return static::getBuilder($data)->paginate($data['per_page'] ?? 20);
     }
 
     public static function autocomplete($name)
@@ -353,7 +353,7 @@ class ProductRepo
         }
 
         $items    = [];
-        $products = self::getBuilder()->select('id')->get();
+        $products = static::getBuilder()->select('id')->get();
         foreach ($products as $product) {
             $items[$product->id] = [
                 'id'   => $product->id,

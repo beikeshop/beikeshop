@@ -67,7 +67,7 @@
         </el-form-item>
 
         <el-form-item label="{{ __('shop/login.password') }}" :prop="dialog.form.id === null || dialog.form.id == '' ? 'password' : ''">
-          <el-input v-model="dialog.form.password" placeholder="{{ __('common.password') }}"></el-input>
+          <el-input v-model="dialog.form.password" placeholder="{{ __('shop/login.password') }}"></el-input>
         </el-form-item>
 
         <el-form-item label="{{ __('common.language') }}">

@@ -23,6 +23,8 @@ body.page-product {
   }
 
   .product-image {
+    position: relative;
+
     #swiper {
       height: 250px;
       @media (min-width: 480px) {
@@ -117,6 +119,68 @@ body.page-product {
 
     .right {
       border: 1px solid #eee;
+      position: relative;
+    }
+
+    #product-video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 99;
+      display: none;
+    }
+
+    .open-video {
+      position: absolute;
+      bottom: 10px;
+      z-index: 99;
+      line-height: 1;
+      cursor: pointer;
+
+      @media (min-width: 768px) {
+        transform: translateX(-50%);
+        left: 50%;
+      }
+
+      @media (max-width: 768px) {
+        right: 10px;
+      }
+
+      &:hover {
+        i {
+          color: #fff;
+          background-color: rgba(0, 0, 0, 0.648);
+        }
+      }
+
+      i {
+        font-size: 3.5rem;
+        line-height: 1;
+        border-radius: 50%;
+        font-weight: 400;
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.948);
+        background-color: rgba(0, 0, 0, 0.348);
+
+        @media (max-width: 768px) {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    .close-video {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      z-index: 9999;
+      color: #aaa;
+      font-size: 30px;
+      cursor: pointer;
+      &:hover {
+        color: #fff;
+      }
     }
   }
 

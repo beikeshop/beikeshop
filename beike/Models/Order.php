@@ -59,6 +59,11 @@ class Order extends Base
         return $this->hasMany(OrderShipment::class);
     }
 
+    public function orderPayments(): HasMany
+    {
+        return $this->hasMany(OrderPayment::class);
+    }
+
     public function subTotal()
     {
         $totals = $this->orderTotals;
@@ -68,10 +73,9 @@ class Order extends Base
 
     public function getStatusFormatAttribute()
     {
-        $status_format     = trans('order.' . $this->status);
-        $status_format     = hook_filter('order.status_format', $status_format);
+        $statusMap = array_column(StateMachineService::getAllStatuses(), 'name', 'status');
 
-        return $status_format;
+        return $statusMap[$this->status];
     }
 
     public function getTotalFormatAttribute()

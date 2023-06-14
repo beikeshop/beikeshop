@@ -19,7 +19,7 @@ class MultiFilterController extends Controller
 {
     public function index()
     {
-        $multiFilter = system_setting('base.multi_filter');
+        $multiFilter              = system_setting('base.multi_filter') ?: [];
         $multiFilter['attribute'] = $multiFilter['attribute'] ?? [];
 
         if ($attributeIds = $multiFilter['attribute'] ?? []) {

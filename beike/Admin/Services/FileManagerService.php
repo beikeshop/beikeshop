@@ -13,11 +13,13 @@ namespace Beike\Admin\Services;
 
 class FileManagerService
 {
-    private $fileBasePath = '';
+    protected $fileBasePath = '';
+
+    protected $basePath = '';
 
     public function __construct()
     {
-        $this->fileBasePath = public_path('catalog');
+        $this->fileBasePath = public_path('catalog') . $this->basePath;
     }
 
     /**
@@ -26,6 +28,7 @@ class FileManagerService
     public function getDirectories($baseFolder = '/'): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
+
         $directories     = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
 
         $result = [];
@@ -84,7 +87,7 @@ class FileManagerService
             if ($baseName == 'index.html') {
                 continue;
             }
-            $fileName = str_replace($this->fileBasePath, '', $file);
+            $fileName = str_replace(public_path('catalog'), '', $file);
             if (is_file($file)) {
                 $images[] = $this->handleImage($fileName, $baseName);
             }
@@ -114,7 +117,7 @@ class FileManagerService
      */
     public function createDirectory($folderName)
     {
-        $catalogFolderPath = "catalog/{$folderName}";
+        $catalogFolderPath = "catalog{$this->basePath}/{$folderName}";
         $folderPath        = public_path($catalogFolderPath);
         if (is_dir($folderPath)) {
             throw new \Exception(trans('admin/file_manager.directory_already_exist'));
@@ -130,7 +133,7 @@ class FileManagerService
      */
     public function deleteDirectoryOrFile($filePath)
     {
-        $filePath = public_path("catalog/{$filePath}");
+        $filePath = public_path("catalog{$this->basePath}/{$filePath}");
         if (is_dir($filePath)) {
             $files = glob($filePath . '/*');
             if ($files) {
@@ -154,7 +157,7 @@ class FileManagerService
             return;
         }
         foreach ($files as $file) {
-            $filePath = public_path("catalog/{$basePath}/$file");
+            $filePath = public_path("catalog{$this->basePath}/{$basePath}/$file");
             if (file_exists($filePath)) {
                 @unlink($filePath);
             }
@@ -170,7 +173,7 @@ class FileManagerService
      */
     public function updateName($originPath, $newPath)
     {
-        $originPath = public_path("catalog/{$originPath}");
+        $originPath = public_path("catalog{$this->basePath}/{$originPath}");
         if (! is_dir($originPath) && ! file_exists($originPath)) {
             throw new \Exception(trans('admin/file_manager.target_not_exist'));
         }
@@ -180,6 +183,13 @@ class FileManagerService
             return;
         }
         @rename($originPath, $newPath);
+    }
+
+    public function uploadFile($file, $savePath, $originName)
+    {
+        $savePath = $this->basePath . $savePath;
+
+        return $file->storeAs($savePath, $originName, 'catalog');
     }
 
     /**
@@ -205,7 +215,7 @@ class FileManagerService
      */
     private function hasSubFolders($folderPath): bool
     {
-        $path     = public_path("catalog/{$folderPath}");
+        $path     = public_path("catalog{$this->basePath}/{$folderPath}");
         $subFiles = glob($path . '/*');
         foreach ($subFiles as $subFile) {
             if (is_dir($subFile)) {
@@ -226,12 +236,19 @@ class FileManagerService
      */
     private function handleImage($filePath, $baseName): array
     {
-        $path = "catalog{$filePath}";
+        $path     = "catalog{$filePath}";
+        $realPath = $this->fileBasePath . $filePath;
+
+        $mime = '';
+        if(file_exists($realPath)) {
+            $mime = mime_content_type($realPath);
+        }
 
         return [
             'path'       => $path,
             'name'       => $baseName,
             'origin_url' => image_origin($path),
+            'mime'       => $mime,
             'selected'   => false,
         ];
     }

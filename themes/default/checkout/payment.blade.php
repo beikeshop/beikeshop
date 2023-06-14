@@ -34,6 +34,8 @@
               {!! $payment !!}
             </div>
           </div>
+
+          @hook('payment.footer')
         </div>
       </div>
     </div>

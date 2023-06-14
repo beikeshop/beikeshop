@@ -121,7 +121,7 @@
         <el-form-item label="{{ __('order.current_status') }}">
           {{ $order->status_format }}
         </el-form-item>
-        @if ($order->status != 'completed')
+        @if (count($statuses))
           <el-form-item label="{{ __('order.change_to_status') }}" prop="status">
             <el-select class="wp-200" size="small" v-model="form.status" placeholder="{{ __('common.please_choose') }}">
               <el-option
@@ -184,7 +184,7 @@
               <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid"></div>{{ $product->name }}
+                  <div class="wh-60 me-2"><img src="{{ $product->image }}" class="img-fluid max-h-100"></div>{{ $product->name }}
                 </div>
               </td>
               <td class="">{{ $product->product_sku }}</td>
@@ -208,6 +208,50 @@
   </div>
   @endhookwrapper
 
+  @if ($order->orderPayments)
+    @hookwrapper('admin.order.form.payments')
+    <div class="card mb-4">
+      <div class="card-header"><h6 class="card-title">{{ __('admin/order.payments_history') }}</h6></div>
+      <div class="card-body">
+        <div class="table-push">
+          <table class="table ">
+            <thead class="">
+              <tr>
+                <th>{{ __('admin/order.order_id') }}</th>
+                <th>{{ __('admin/order.text_transaction_id') }}</th>
+                <th>{{ __('admin/order.text_request') }}</th>
+                <th>{{ __('admin/order.text_response') }}</th>
+                <th>{{ __('admin/order.text_callback') }}</th>
+                <th>{{ __('admin/order.text_receipt') }}</th>
+                <th>{{ __('order.created_at') }}</th>
+                <th>{{ __('order.updated_at') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($order->orderPayments as $payment)
+              <tr>
+                <td>{{ $payment->order_id }}</td>
+                <td>{{ $payment->transaction_id }}</td>
+                <td>{{ $payment->request }}</td>
+                <td>{{ $payment->response }}</td>
+                <td>{{ $payment->callback }}</td>
+                <td>
+                  @if ($payment->receipt)
+                  <a href="{{ image_origin($payment->receipt) }}" target="_blank">{{ __('admin/order.text_click_view') }}</a>
+                  @endif
+                </td>
+                <td>{{ $payment->created_at }}</td>
+                <td>{{ $payment->updated_at }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    @endhookwrapper
+  @endif
+
   @if ($order->orderShipments)
     @hookwrapper('admin.order.form.shipments')
     <div class="card mb-4">
@@ -219,7 +263,7 @@
               <tr>
                 <th>{{ __('order.express_company') }}</th>
                 <th>{{ __('order.express_number') }}</th>
-                <th>{{ __('order.history_created_at') }}</th>
+                <th>{{ __('order.updated_at') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -265,7 +309,7 @@
             <tr>
               <th>{{ __('order.history_status') }}</th>
               <th>{{ __('order.history_comment') }}</th>
-              <th>{{ __('order.history_created_at') }}</th>
+              <th>{{ __('order.updated_at') }}</th>
             </tr>
           </thead>
           <tbody>

@@ -8,14 +8,13 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="asset" content="{{ asset('/') }}">
   <script src="{{ asset('vendor/vue/2.7/vue.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.9/index.js') }}"></script>
-  {{-- <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script> --}}
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/batch_select.js') }}"></script>
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.9/index.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index-blue.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   @if (locale() != 'zh_cn')
@@ -74,8 +73,8 @@
         <div class="content-head">
           <div class="left d-lg-flex">
             <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
-            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-download"
-              @click="downloadImages">{{ __('admin/file_manager.download') }}</el-link>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view"
+              @click="viewImages">{{ __('common.view') }}</el-link>
             <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
               icon="el-icon-delete">{{ __('common.delete') }}</el-link>
             <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
@@ -115,7 +114,10 @@
           v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
           <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images"
             :key="index" @click="checkedImage(index)">
-            <div class="img"><img :src="file.url"></div>
+            <div class="img">
+              <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
+              <img v-else :src="file.url">
+            </div>
             <div class="text">
               <span :title="file.name">@{{ file.name }}</span>
               <i v-if="file.selected" class="el-icon-check"></i>
@@ -144,14 +146,13 @@
       </div>
     @else
     <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
-
     @endif
 
     <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
       @close="uploadFileDialogClose" custom-class="upload-wrap">
       <el-upload class="photos-upload" target="photos-upload" id="photos-upload" element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
         element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
-        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4" :before-upload="beforePhotoUpload"
+        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp" :before-upload="beforePhotoUpload"
         :on-success="handlePhotoSuccess" :on-change="handleUploadChange" :http-request="uploadFile"
         :multiple="true">
         <i class="el-icon-upload"></i>
@@ -162,11 +163,13 @@
           <div class="info">
             <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
             <div class="status">
-              <span v-if="image.status == 'complete'">{{ __('admin/file_manager.finish') }}</span>
+              <span v-if="image.status == 'complete'" class="text-success">{{ __('admin/file_manager.finish') }}</span>
+              <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail') }}</span>
               <span v-else>{{ __('admin/file_manager.uploading') }}</span>
             </div>
           </div>
-          <el-progress :percentage="image.progre" :show-text="false" :stroke-width="4"></el-progress>
+          <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'" :show-text="false" :stroke-width="4"></el-progress>
+          <div v-if="image.fail_text" class="mt-1 text-danger" v-text="image.fail_text"></div>
         </div>
       </div>
     </el-dialog>
@@ -187,13 +190,10 @@
         paneLengthPercent: 26,
         triggerLength: 10,
         isShift: false,
-
-        ssss: [],
+        mime: @json(request('mime')),
         loading: false,
         isBatchSelect: false,
-
         selectImageIndex: [],
-
         filter: {
           sort: 'created',
           order: 'desc'
@@ -299,10 +299,6 @@
           this.uploadFileDialog.show = true
         },
 
-        openFileSort() {
-          console.log(11);
-        },
-
         beforePhotoUpload(file) {
           // this.editing.photoLoading = true;
         },
@@ -319,9 +315,6 @@
         uploadFile(file) {
           const that = this;
           let newFile = {};
-          if (file.file.type != 'image/png' && file.file.type != 'image/jpeg') {
-            return;
-          }
 
           var formData = new FormData();
           formData.append("file", file.file, file.file.name);
@@ -338,12 +331,16 @@
 
           let index = this.uploadFileDialog.images.length - 1;
 
-          $http.post('file_manager/upload', formData).then((res) => {
+          $http.post('file_manager/upload', formData, {hmsg: true}).then((res) => {
             this.uploadFileDialog.images[index].status = 'complete';
             this.uploadFileDialog.images[index].progre = 100;
+          }).catch((err) => {
+            this.uploadFileDialog.images[index].status = 'fail';
+            this.uploadFileDialog.images[index].progre = 80;
+            this.uploadFileDialog.images[index].fail_text = err.response.data.message;
           }).finally(() => {
             index += 1
-          })
+          });
         },
 
         handleUploadChange(e) {
@@ -450,6 +447,20 @@
         fileChecked() {
           let typedFiles = this.images.filter(e => e.selected)
 
+          if (this.mime) {
+            // 判断 typedFiles 数组内 mime 是否有不是 image 开头的
+            if (this.mime == 'image' && typedFiles.some(e => !e.mime.startsWith('image'))) {
+              layer.msg('{{ __('admin/file_manager.verify_select_image') }}', () => {});
+              return;
+            }
+
+            // 判断 typedFiles 数组内 mime 是否有不是 video 开头的
+            if (this.mime == 'video' && typedFiles.some(e => !e.mime.startsWith('video'))) {
+              layer.msg('{{ __('admin/file_manager.verify_select_video') }}', () => {});
+              return;
+            }
+          }
+
           if (callback !== null) {
             callback(typedFiles);
           }
@@ -518,6 +529,13 @@
             a.download = e.name;
             // 触发 a 标签的 click 事件
             a.click();
+          });
+        },
+
+        viewImages() {
+          const selectedImages = this.images.filter(e => e.selected);
+          selectedImages.forEach(e => {
+            window.open(e.origin_url);
           });
         },
 

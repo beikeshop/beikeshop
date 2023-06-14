@@ -21,6 +21,7 @@
   @if (system_setting('base.head_code'))
     {!! system_setting('base.head_code') !!}
   @endif
+  @hook('layout.header.code')
   @stack('header')
 </head>
 <body class="@yield('body-class')">

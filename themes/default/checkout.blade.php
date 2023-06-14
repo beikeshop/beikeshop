@@ -5,8 +5,8 @@
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
 @endpush
 
 @section('content')
@@ -21,6 +21,8 @@
       <div class="col-12 col-md-8 left-column">
         <div class="card shadow-sm">
           <div class="card-body p-lg-4">
+            @hook('checkout.body.header')
+
             @include('checkout._address')
 
             <div class="checkout-black">
@@ -61,6 +63,8 @@
                 @endforeach
               </div>
             </div>
+
+            @hook('checkout.bottom')
           </div>
         </div>
       </div>
@@ -84,11 +88,14 @@
               <span class="rounded-circle bg-primary">{{ $carts['quantity'] }}</span>
             </div>
             <div class="card-body">
+              @hookwrapper('checkout.products')
               <div class="products-wrap">
                 @foreach ($carts['carts'] as $cart)
                   <div class="item">
                     <div class="image">
-                      <img src="{{ $cart['image'] }}" class="img-fluid">
+                      <div class="img border d-flex align-items-center justify-content-center wh-40 me-2">
+                        <img src="{{ image_resize($cart['image'], 100, 100) }}" class="img-fluid">
+                      </div>
                       <div class="name">
                         <div title="{{ $cart['name'] }}" class="text-truncate-2">{{ $cart['name'] }}</div>
                         @if ($cart['variant_labels'])
@@ -103,6 +110,7 @@
                   </div>
                 @endforeach
               </div>
+              @endhookwrapper
               <ul class="totals">
                 @foreach ($totals as $total)
                   <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
@@ -111,13 +119,17 @@
               <div class="d-grid gap-2 mt-3">
                 <button class="btn btn-primary fw-bold fs-5" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
               </div>
+
+              @hook('checkout.total.footer')
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  @endsection
+
+  @hook('checkout.footer')
+@endsection
 
 @push('add-scripts')
 <script>
@@ -125,14 +137,8 @@
     $(document).on('click', '.radio-line-item', function(event) {
       const key = $(this).data('key');
       const value = $(this).data('value');
-
-      $http.put('/checkout', {[key]: value}).then((res) => {
+      updateCheckout(key, value, () => {
         $(this).addClass('active').siblings().removeClass('active')
-        updateTotal(res.totals)
-
-        if (typeof checkoutPutCallback === 'function') {
-          checkoutPutCallback(res)
-        }
       })
     });
 
@@ -157,7 +163,22 @@
     });
   });
 
-  function updateTotal(totals) {
+  const updateCheckout = (key, value, callback) => {
+    $http.put('/checkout', {[key]: value}).then((res) => {
+      if (res.status == 'fail') {
+        layer.msg(res.message, ()=>{})
+        return;
+      }
+
+      updateTotal(res.totals)
+
+      if (typeof callback === 'function') {
+        callback(res)
+      }
+    })
+  }
+
+  const updateTotal = (totals) => {
     let html = '';
 
     totals.forEach((item) => {
@@ -167,7 +188,7 @@
     $('ul.totals').html(html);
   }
 
-  function updateShippingMethods(data, shipping_method_code) {
+  const updateShippingMethods = (data, shipping_method_code) => {
     let html = '';
 
     data.forEach((methods) => {

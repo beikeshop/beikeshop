@@ -61,6 +61,12 @@
           </table>
         @endif
 
+        <p style="font-size: 14px; color: rgb(51, 51, 51); line-height: 24px; margin: 6px 0px 0px; word-wrap: break-word; word-break: break-all;">
+          <a href="{{ shop_route('orders.show', ['number' => $order->number, 'email' => $order->email]) }}" title="" style="font-size: 16px; line-height: 45px; display: block; background-color: #fd560f; color: rgb(255, 255, 255); text-align: center; text-decoration: none; margin-top: 20px; border-radius: 3px;">
+            {{ __('shop/account.order.order_success.view_order') }}
+          </a>
+        </p>
+
         <dl style="font-size: 14px; color: rgb(51, 51, 51); line-height: 18px;">
           <dd style="margin: 0px 0px 6px; padding: 0px; font-size: 12px; line-height: 22px;">
             <p style="font-size: 14px; line-height: 26px; word-wrap: break-word; word-break: break-all; margin-top: 32px;">

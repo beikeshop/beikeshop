@@ -63,7 +63,7 @@ class ProductController
      * 创建商品
      *
      * @param ProductRequest $request
-     * @return array
+     * @return mixed
      */
     public function store(ProductRequest $request)
     {
@@ -88,7 +88,7 @@ class ProductController
      *
      * @param ProductRequest $request
      * @param Product        $product
-     * @return array
+     * @return mixed
      */
     public function update(ProductRequest $request, Product $product)
     {

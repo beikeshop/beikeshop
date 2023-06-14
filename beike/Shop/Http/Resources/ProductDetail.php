@@ -40,6 +40,7 @@ class ProductDetail extends JsonResource
             'meta_description' => $this->description->meta_description ?? '',
             'brand_id'         => $this->brand->id                     ?? 0,
             'brand_name'       => $this->brand->name                   ?? '',
+            'video'            => $this->video                         ?? '',
             'images'           => array_map(function ($image) {
                 return [
                     'preview' => image_resize($image, 500, 500),

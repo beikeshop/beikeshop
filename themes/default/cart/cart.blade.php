@@ -4,9 +4,9 @@
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
-  <script src="{{ asset('vendor/element-ui/2.15.6/js.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
   <script src="{{ asset('vendor/scrolltofixed/jquery-scrolltofixed-min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/2.15.6/css.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
 @endpush
 
 @section('content')
@@ -23,7 +23,7 @@
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9 left-column">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm h-min-600">
           <div class="card-body p-lg-4">
             <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.commodity') }}</h4></div>
             <div class="cart-products-wrap table-responsive">
@@ -36,8 +36,8 @@
                         {{ __('shop/carts.select_all') }}
                       </label>
                     </th>
-                    <th width="40%">{{ __('shop/carts.index') }}</th>
-                    <th width="170">{{ __('shop/carts.commodity') }}</th>
+                    <th width="40%">{{ __('shop/carts.commodity') }}</th>
+                    <th width="170">{{ __('shop/carts.quantity') }}</th>
                     <th width="170">{{ __('shop/carts.subtotal') }}</th>
                     <th width="100" class="text-end">{{ __('common.action') }}</th>
                   </tr>
@@ -47,7 +47,7 @@
                     <td>
                       <div class="d-flex align-items-center p-image">
                         <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-                        <div class="border d-flex align-items-center justify-content-between wh-80 ms-3"><img :src="product.image_url" class="img-fluid"></div>
+                        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" class="img-fluid"></div>
                       </div>
                     </td>
                     <td>
@@ -114,6 +114,7 @@
     </div>
   </div>
 
+  @hook('carts.footer')
 @endsection
 
 @push('add-scripts')
@@ -126,15 +127,13 @@
         amount: @json($data['amount']),
         amount_format: @json($data['amount_format']),
       },
-      // components: {},
-      // 计算属性
+
       computed: {
         allSelected: {
           get() {
             return !this.products.length ? false : this.products.every(s => s.selected)
           },
           set(val) {
-            // return
             this.products.map(e => e.selected = val)
             this.selectedBtnSelected()
           }
@@ -144,9 +143,7 @@
           return this.products.map(e => e.quantity).reduce((n,m) => n + m);
         },
       },
-      // 侦听器
-      watch: {},
-      // 组件方法
+
       methods: {
         checkedBtnToCheckout() {
           if (!this.products.some(e => e.selected)) {
@@ -173,7 +170,6 @@
         },
 
         checkedCartTr(index) {
-          // this.products[index].selected = !this.products[index].selected;
           this.selectedBtnSelected();
         },
 
@@ -192,9 +188,6 @@
           this.total_quantity = res.data.quantity
           bk.getCarts()
         }
-      },
-      // 实例被挂载后调用
-      mounted () {
       },
     })
   </script>
