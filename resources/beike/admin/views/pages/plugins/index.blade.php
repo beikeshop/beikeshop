@@ -17,6 +17,7 @@
           <thead>
             <tr>
               <th>{{ __('admin/plugin.plugin_code') }}</th>
+              <th>{{ __('admin/plugin.plugin_version') }}</th>
               <th>{{ __('admin/plugin.plugin_type') }}</th>
               <th width="50%">{{ __('admin/plugin.plugin_description') }}</th>
               <th>{{ __('admin/common.status') }}</th>
@@ -26,6 +27,7 @@
           <tbody>
             <tr v-for="plugin, index in plugins" :key="index">
               <td>@{{ plugin.code }}</td>
+              <td>@{{ plugin.version }}</td>
               <td>@{{ plugin.type_format }}</td>
               <td>
                 <div class="plugin-describe d-flex align-items-center">

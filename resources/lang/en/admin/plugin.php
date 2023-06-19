@@ -20,11 +20,12 @@ return [
     'to_enable'             => 'To Enable',
     'uninstall_hint'        => 'Uninstalling the plug-in will delete all related data of the plug-in, are you sure you want to uninstall? ',
 
-    'plugin_list'           => 'Plugin List',
-    'plugin_code'           => 'Code',
-    'plugin_type'           => 'Type',
-    'plugin_description'    => 'Description',
-    'plugin_upload'         => 'Upload(Only for zip file)',
+    'plugin_list'              => 'Plugin List',
+    'plugin_code'              => 'Code',
+    'plugin_type'              => 'Type',
+    'plugin_version'           => 'Version',
+    'plugin_description'       => 'Description',
+    'plugin_upload'            => 'Upload(Only for zip file)',
 
     'shipping'              => 'Shipping',
     'payment'               => 'Payment',

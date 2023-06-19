@@ -23,6 +23,7 @@ return [
     'plugin_list'           => '插件設置',
     'plugin_code'           => '插件代碼',
     'plugin_type'           => '插件類型',
+    'plugin_version'        => '版本號',
     'plugin_description'    => '插件描述',
     'plugin_upload'         => '上傳插件(僅支持 zip 文件)',
 

@@ -23,9 +23,9 @@ class Bootstrap
 
         add_hook_filter('admin.sidebar.setting_routes', function ($data) {
             $data[] = [
-                'route' => 'openai.index',
+                'route'    => 'openai.index',
                 'prefixes' => ['openai'],
-                'title' => 'ChatGPT',
+                'title'    => 'ChatGPT',
             ];
 
             return $data;

@@ -20,11 +20,12 @@ return [
     'to_enable'             => '去启用',
     'uninstall_hint'        => '卸载插件会删除该插件的所有相关数据，确定要卸载吗？',
 
-    'plugin_list'           => '插件设置',
-    'plugin_code'           => '插件代码',
-    'plugin_type'           => '插件类型',
-    'plugin_description'    => '插件描述',
-    'plugin_upload'         => '上传插件(仅支持 zip 文件)',
+    'plugin_list'              => '插件设置',
+    'plugin_code'              => '插件代码',
+    'plugin_type'              => '插件类型',
+    'plugin_version'           => '版本号',
+    'plugin_description'       => '插件描述',
+    'plugin_upload'            => '上传插件(仅支持 zip 文件)',
 
     'shipping'              => '配送方式',
     'payment'               => '支付方式',
