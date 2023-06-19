@@ -344,3 +344,30 @@ img {
     -webkit-line-clamp: 3;
   }
 }
+
+.mobile-paginator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .input-group {
+    max-width: 60px;
+    margin: 0 10px;
+
+    .input-group-text {
+      padding: 0.46rem 0.56rem;
+    }
+
+    #mb-page-input {
+      padding: 0.46rem 0.26rem;
+      text-align: center;
+    }
+  }
+
+  .btn  {
+    border: 1px solid var(--bs-border-color);
+    &:active {
+      background-color: #eee;
+    }
+  }
+}

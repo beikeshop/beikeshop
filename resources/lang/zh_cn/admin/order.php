@@ -23,7 +23,7 @@ return [
     'notify'                      => '是否提醒',
     'orders_update_status'        => '更新状态',
     'error_status'                => '请选择状态',
-    'payments_history'            => '支付记录',
+    'payments_history'            => '支付信息',
     'text_response'               => '返回数据',
     'text_request'                => '请求参数',
     'text_callback'               => '回调',
