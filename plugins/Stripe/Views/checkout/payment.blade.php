@@ -10,7 +10,7 @@
     <h5 class="checkout-title">{{ __('Stripe::common.title_info') }}</h5>
     <div class="">
       <div class="mb-2">
-        <img src="{{ plugin_resize('stripe','/image/pay-image.png') }}" class="img-fluid">
+        <img src="{{ plugin_origin('stripe','/image/pay-image.png') }}" class="img-fluid">
       </div>
       <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
         <el-form-item label="{{ __('Stripe::common.cardnum') }}" prop="cardnum">
