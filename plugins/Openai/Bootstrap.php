@@ -15,15 +15,16 @@ class Bootstrap
 {
     public function boot()
     {
-        add_hook_filter('admin.sidebar.home.prefix', function ($data) {
+        add_hook_filter('admin.sidebar.setting.prefix', function ($data) {
             $data[] = 'openai';
 
             return $data;
         });
 
-        add_hook_filter('admin.sidebar.home_routes', function ($data) {
+        add_hook_filter('admin.sidebar.setting_routes', function ($data) {
             $data[] = [
                 'route' => 'openai.index',
+                'prefixes' => ['openai'],
                 'title' => 'ChatGPT',
             ];
 
