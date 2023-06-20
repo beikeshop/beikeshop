@@ -3,7 +3,7 @@
     <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_full_screen') }}</div>
-      <el-switch v-model="module.full"></el-switch>
+      <el-switch v-model="form.full"></el-switch>
     </div>
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
@@ -11,10 +11,10 @@
       <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <draggable
         ghost-class="dragabble-ghost"
-        :list="module.images"
+        :list="form.images"
         :options="{animation: 330, handle: '.icon-rank'}"
       >
-        <div class="pb-images-selector" v-for="(item, index) in module.images" :key="index">
+        <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
           <div class="selector-head" @click="itemShow(index)">
             <div class="left">
               <el-tooltip class="icon-rank" effect="dark" content="{{ __('admin/builder.text_drag_sort') }}" placement="left">
@@ -57,15 +57,13 @@ Vue.component('module-editor-slideshow', {
 
   data: function () {
     return {
-      // full: true
+      form: null
     }
   },
 
   watch: {
-    module: {
+    form: {
       handler: function (val) {
-        // console.log(previewWindow)
-        // $(previewWindow.document).find('.product-description h1').css('font-size', newValue);
         this.$emit('on-changed', val);
       },
       deep: true,
@@ -73,22 +71,22 @@ Vue.component('module-editor-slideshow', {
   },
 
   created: function () {
-    // console.log(this.module)
+    this.form = JSON.parse(JSON.stringify(this.module));
   },
 
   methods: {
     removeImage(index) {
-      this.module.images.splice(index, 1);
+      this.form.images.splice(index, 1);
     },
 
     itemShow(index) {
-      this.module.images.find((e, key) => {if (index != key) return e.show = false});
-      this.module.images[index].show = !this.module.images[index].show;
+      this.form.images.find((e, key) => {if (index != key) return e.show = false});
+      this.form.images[index].show = !this.form.images[index].show;
     },
 
     addImage() {
-      this.module.images.find(e => e.show = false);
-      this.module.images.push({image: languagesFill('catalog/demo/banner/banner-4-en.jpg'), show: true, link: {type: 'product', value:''}});
+      this.form.images.find(e => e.show = false);
+      this.form.images.push({image: languagesFill('catalog/demo/banner/banner-4-en.jpg'), show: true, link: {type: 'product', value:''}});
     }
   }
 });

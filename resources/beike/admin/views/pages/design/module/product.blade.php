@@ -3,7 +3,7 @@
     <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
-      <text-i18n v-model="module.title"></text-i18n>
+      <text-i18n v-model="form.title"></text-i18n>
     </div>
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
@@ -59,11 +59,12 @@ Vue.component('module-editor-product', {
       keyword: '',
       productData: [],
       loading: null,
+      form: null
     }
   },
 
   watch: {
-    module: {
+    form: {
       handler: function (val) {
         this.$emit('on-changed', val);
       },
@@ -72,6 +73,7 @@ Vue.component('module-editor-product', {
   },
 
   created: function () {
+    this.form = JSON.parse(JSON.stringify(this.module));
     this.tabsValueProductData();
   },
 
@@ -86,10 +88,10 @@ Vue.component('module-editor-product', {
     tabsValueProductData() {
       var that = this;
 
-      if (!this.module.products.length) return;
+      if (!this.form.products.length) return;
       this.loading = true;
 
-      $http.get('products/names?product_ids='+this.module.products.join(','), {hload: true}).then((res) => {
+      $http.get('products/names?product_ids='+this.form.products.join(','), {hload: true}).then((res) => {
         this.loading = false;
         that.productData = res.data;
       })
@@ -102,20 +104,20 @@ Vue.component('module-editor-product', {
     },
 
     handleSelect(item) {
-      if (!this.module.products.find(v => v == item.id)) {
-        this.module.products.push(item.id * 1);
+      if (!this.form.products.find(v => v == item.id)) {
+        this.form.products.push(item.id * 1);
         this.productData.push(item);
       }
       this.keyword = ""
     },
 
     itemChange(evt) {
-      this.module.products = this.productData.map(e => e.id * 1);
+      this.form.products = this.productData.map(e => e.id * 1);
     },
 
     removeProduct(index) {
       this.productData.splice(index, 1)
-      this.module.products.splice(index, 1);
+      this.form.products.splice(index, 1);
     },
   }
 });
