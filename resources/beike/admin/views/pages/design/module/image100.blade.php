@@ -3,17 +3,17 @@
     <div class="module-editor-row">设置</div>
     <div class="module-edit-group">
       <div class="module-edit-title">是否全屏</div>
-      <el-switch v-model="module.full"></el-switch>
+      <el-switch v-model="form.full"></el-switch>
     </div>
     <div class="module-editor-row">内容</div>
     <div class="module-edit-group">
       <div class="module-edit-title">选择图片</div>
       <div class="">
         <div class="pb-images-top">
-          <pb-image-selector v-model="module.images[0].image"></pb-image-selector>
+          <pb-image-selector v-model="form.images[0].image"></pb-image-selector>
           <div class="tag">建议尺寸: 1920 x 500</div>
         </div>
-        <link-selector v-model="module.images[0].link"></link-selector>
+        <link-selector v-model="form.images[0].link"></link-selector>
       </div>
     </div>
   </div>
@@ -27,12 +27,12 @@ Vue.component('module-editor-image100', {
 
   data: function () {
     return {
-      //
+      form: null
     }
   },
 
   watch: {
-    module: {
+    form: {
       handler: function (val) {
         this.$emit('on-changed', val);
       },
@@ -41,7 +41,7 @@ Vue.component('module-editor-image100', {
   },
 
   created: function () {
-    //
+    this.form = JSON.parse(JSON.stringify(this.module));
   },
 
   methods: {

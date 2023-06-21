@@ -93,7 +93,11 @@
 
       methods: {
         removeImage() {
-          this.src = '';
+          if (this.isLanguage) {
+            this.src[this.tabActiveId] = '';
+          } else {
+            this.src = '';
+          }
         },
 
         tabClick(e) {

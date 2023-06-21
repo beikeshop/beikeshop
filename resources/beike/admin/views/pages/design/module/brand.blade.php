@@ -3,7 +3,7 @@
     <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
-      <text-i18n v-model="module.title"></text-i18n>
+      <text-i18n v-model="form.title"></text-i18n>
     </div>
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
@@ -54,12 +54,13 @@ Vue.component('module-editor-brand', {
     return {
       loading: null,
       brands: [],
+      form: null,
       keyword: '',
     }
   },
 
   watch: {
-    module: {
+    form: {
       handler: function (val) {
         this.$emit('on-changed', val);
       },
@@ -68,8 +69,10 @@ Vue.component('module-editor-brand', {
   },
 
   created: function () {
-    if (!this.module.brands.length) return;
-    const ids = this.module.brands.join(',');
+    this.form = JSON.parse(JSON.stringify(this.module));
+    if (!this.form.brands.length) return;
+
+    const ids = this.form.brands.join(',');
     this.loading = true;
     $http.get(`brands/names?ids=${ids}`, null, {hload:true}).then((res) => {
       this.brands = res.data
@@ -88,8 +91,8 @@ Vue.component('module-editor-brand', {
     },
 
     handleSelect(item) {
-      if (!this.module.brands.find(v => v == item.id)) {
-        this.module.brands.push(item.id * 1);
+      if (!this.form.brands.find(v => v == item.id)) {
+        this.form.brands.push(item.id * 1);
         this.brands.push(item);
       }
       this.keyword = ""
@@ -97,11 +100,11 @@ Vue.component('module-editor-brand', {
 
     removeProduct(index) {
       this.brands.splice(index, 1)
-      this.module.brands.splice(index, 1);
+      this.form.brands.splice(index, 1);
     },
 
     itemChange(evt) {
-      this.module.brands = this.brands.map(e => e.id * 1);
+      this.form.brands = this.brands.map(e => e.id * 1);
     },
   }
 });

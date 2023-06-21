@@ -3,7 +3,7 @@
     <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
-      <div class="pb-images-selector" v-for="(item, index) in module.images" :key="index">
+      <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
@@ -36,12 +36,12 @@ Vue.component('module-editor-image401', {
 
   data: function () {
     return {
-      //
+      form: null
     }
   },
 
   watch: {
-    module: {
+    form: {
       handler: function (val) {
         this.$emit('on-changed', val);
       },
@@ -50,13 +50,13 @@ Vue.component('module-editor-image401', {
   },
 
   created: function () {
-    //
+    this.form = JSON.parse(JSON.stringify(this.module));
   },
 
   methods: {
     itemShow(index) {
-      this.module.images.find((e, key) => {if (index != key) return e.show = false});
-      this.module.images[index].show = !this.module.images[index].show;
+      this.form.images.find((e, key) => {if (index != key) return e.show = false});
+      this.form.images[index].show = !this.form.images[index].show;
     },
   }
 });

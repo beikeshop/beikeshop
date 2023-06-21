@@ -199,7 +199,8 @@
       watch: {},
       // 组件方法
       methods: {
-        moduleUpdated: bk.debounce(function() {
+        moduleUpdated: bk.debounce(function(val) {
+          this.form.modules[this.design.editingModuleIndex].content = val;
           const data = this.form.modules[this.design.editingModuleIndex]
 
           $http.post('design/builder/preview?design=1', data, {hload: true}).then((res) => {
@@ -266,7 +267,7 @@
         }
       },
       created () {
-        this.form = @json($design_settings)
+        this.form = @json($design_settings ?: ['modules' => []])
       },
       mounted () {
       },
