@@ -196,6 +196,7 @@
           {{ __('admin/attribute.index') }}
         </a>
         @endif
+        @hook('product.tab.after.link')
       </div>
       <div class="tab-content">
         <div class="tab-pane fade show active" id="product-description" role="tabpanel">
@@ -218,6 +219,7 @@
             @endforeach
           </table>
         </div>
+        @hook('product.tab.after.pane')
       </div>
     </div>
   </div>
