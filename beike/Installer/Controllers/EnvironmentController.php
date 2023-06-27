@@ -3,6 +3,7 @@
 namespace Beike\Installer\Controllers;
 
 use Beike\Installer\Helpers\EnvironmentManager;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -75,9 +76,9 @@ class EnvironmentController extends BaseController
      * 数据库信息检测
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse|array
      */
-    public function validateDatabase(Request $request): array
+    public function validateDatabase(Request $request): JsonResponse|array
     {
         $this->checkInstalled();
         $rules    = config('installer.environment.form.rules');
