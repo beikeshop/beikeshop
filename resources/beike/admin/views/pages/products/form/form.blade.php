@@ -810,6 +810,7 @@
 
           // 用 cartesian 跟新 this.form.skus 中的 variants
           cartesian.forEach((c, i) => {
+            c = !Array.isArray(c) ? [c] : c;
             this.form.skus[i].variants = c.map(e => e + '');
           })
         },
