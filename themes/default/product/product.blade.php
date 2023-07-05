@@ -163,7 +163,6 @@
                 ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
               </button>
               @endhookwrapper
-
               @hook('product.detail.buy.after')
             </div>
 
