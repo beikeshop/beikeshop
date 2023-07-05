@@ -20,19 +20,20 @@ class Controller extends \App\Http\Controllers\Controller
      */
     public function downloadCsv($filename, $header, $records): mixed
     {
-        if (!str_contains($filename, '.csv')) {
+        if (! str_contains($filename, '.csv')) {
             $filename = $filename . '-' . date('YmdHis') . '.csv';
         }
 
         $headers = [
-            'Content-Type' => 'application/octet-stream',
+            'Content-Type'              => 'application/octet-stream',
             'Content-Transfer-Encoding' => 'binary',
-            'Content-Disposition' => 'attachment; filename=' . $filename,
+            'Content-Disposition'       => 'attachment; filename=' . $filename,
         ];
 
         $csv = \League\Csv\Writer::createFromString('');
         $csv->insertOne($header);
         $csv->insertAll($records);
+
         return response($csv, 200, $headers);
     }
 }
