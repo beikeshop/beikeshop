@@ -27,6 +27,7 @@
         "spatie/laravel-permission": "^5.5",
         "srmklive/paypal": "^3.0",
         "stripe/stripe-php": "^8.8",
+        "symfony/dom-crawler": "^6.0",
         "tormjens/eventy": "^0.8.0",
         "tymon/jwt-auth": "^2.0",
         "ultrono/laravel-sitemap": "^9.1",
