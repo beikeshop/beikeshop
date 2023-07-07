@@ -5,6 +5,7 @@ namespace Beike\Hook;
 use Beike\Hook\Console\HookListeners;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class HookServiceProvider extends ServiceProvider
             $parameters = explode(',', $parameter);
 
             $name = trim($parameters[0], "'");
+            $definedVars = $this->parseParameters($parameters);
 
             return ' <?php
                 $__definedVars = (get_defined_vars()["__data"]);
@@ -43,6 +45,7 @@ class HookServiceProvider extends ServiceProvider
                 {
                     $__definedVars = [];
                 }
+                '. $definedVars .'
                 $output = \Hook::getHook("' . $name . '",["data"=>$__definedVars],function($data) { return null; });
                 if ($output)
                 echo $output;
@@ -83,5 +86,24 @@ class HookServiceProvider extends ServiceProvider
                 echo $output;
                 ?>';
         });
+    }
+
+    /**
+     * Parse parameters from Blade
+     *
+     * @param $parameters
+     * @return string
+     */
+    protected function parseParameters($parameters):string
+    {
+        $definedVars = '';
+        foreach ($parameters as $paraItem) {
+            $paraItem = trim($paraItem);
+            if (Str::startsWith($paraItem,'$')) {
+                $paraKey = trim($paraItem,  '$');
+                $definedVars .= '$__definedVars["'.$paraKey.'"] = $'.$paraKey.';';
+            }
+        }
+        return $definedVars;
     }
 }
