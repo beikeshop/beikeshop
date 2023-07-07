@@ -19,7 +19,6 @@ class HookServiceProvider extends ServiceProvider
         });
     }
 
-
     public function boot()
     {
         $this->bootHookDirectives();
@@ -33,7 +32,7 @@ class HookServiceProvider extends ServiceProvider
     protected function bootHookDirectives()
     {
         Blade::directive('hook', function ($parameter) {
-            $parameter = trim($parameter, '()');
+            $parameter  = trim($parameter, '()');
             $parameters = explode(',', $parameter);
 
             $name = trim($parameters[0], "'");
@@ -51,7 +50,6 @@ class HookServiceProvider extends ServiceProvider
         });
     }
 
-
     /**
      * 添加 blade wrapper hook 标签
      *
@@ -60,9 +58,9 @@ class HookServiceProvider extends ServiceProvider
     protected function bootWrapperHookDirectives()
     {
         Blade::directive('hookwrapper', function ($parameter) {
-            $parameter = trim($parameter, '()');
+            $parameter  = trim($parameter, '()');
             $parameters = explode(',', $parameter);
-            $name = trim($parameters[0], "'");
+            $name       = trim($parameters[0], "'");
 
             return ' <?php
                     $__hook_name="' . $name . '";
