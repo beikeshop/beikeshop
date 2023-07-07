@@ -49,10 +49,10 @@ class Hook
     }
 
     /**
-     * @param string $hook
-     * @param array $params
+     * @param string        $hook
+     * @param array         $params
      * @param callable|null $callback
-     * @param string $htmlContent
+     * @param string        $htmlContent
      * @return string|void|null
      */
     public function getHook(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
@@ -64,12 +64,11 @@ class Hook
         return $this->get($hook, $params, $callback, $htmlContent);
     }
 
-
     /**
-     * @param string $hook
-     * @param array $params
+     * @param string        $hook
+     * @param array         $params
      * @param callable|null $callback
-     * @param string $htmlContent
+     * @param string        $htmlContent
      * @return string|void|null
      */
     public function getWrapper(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
@@ -114,11 +113,15 @@ class Hook
             $priority = null;
         }
 
+        if (isset($this->watch[$hook][$priority])) {
+            $priority++;
+        }
+
         $this->watch[$hook][$priority] = [
             'function' => $function,
             'caller'   => [
-                //'file' => $caller['file'],
-                //'line' => $caller['line'],
+                'file'   => $caller['file'],
+                'line'  => $caller['line'],
                 'class' => Arr::get($caller, 'class'),
             ],
         ];
@@ -192,7 +195,7 @@ class Hook
      * Return a new callback object.
      *
      * @param callable $callback function
-     * @param array $params parameters
+     * @param array    $params   parameters
      *
      * @return Callback
      */
