@@ -9,7 +9,7 @@
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_set_product') }}</div>
-      <el-tabs v-model="editableTabsValue" class="tab-edit-category" type="card" editable @edit="handleTabsEdit">
+      <el-tabs v-model="form.editableTabsValue" class="tab-edit-category" type="card" editable @edit="handleTabsEdit">
         <el-tab-pane
           v-for="(item, index) in form.tabs"
           :key="index"
@@ -77,7 +77,6 @@ Vue.component('module-editor-tab-product', {
       productData: [],
       loading: null,
       form: null,
-      editableTabsValue: '0',
     }
   },
 
@@ -88,7 +87,7 @@ Vue.component('module-editor-tab-product', {
       },
       deep: true
     },
-    editableTabsValue() {
+    'form.editableTabsValue'() {
       this.productData = [];
       this.tabsValueProductData();
     }
@@ -110,12 +109,12 @@ Vue.component('module-editor-tab-product', {
     tabsValueProductData() {
       var that = this;
 
-      if (!this.form.tabs[this.editableTabsValue].products.length) return;
+      if (!this.form.tabs[this.form.editableTabsValue].products.length) return;
       this.loading = true;
 
-      $http.get('products/names?product_ids='+this.form.tabs[this.editableTabsValue].products.join(','), {hload: true}).then((res) => {
+      $http.get('products/names?product_ids='+this.form.tabs[this.form.editableTabsValue].products.join(','), {hload: true}).then((res) => {
         this.loading = false;
-        this.form.tabs[this.editableTabsValue].products = res.data.map(e => e.id);
+        this.form.tabs[this.form.editableTabsValue].products = res.data.map(e => e.id);
         that.productData = res.data;
       })
     },
@@ -127,34 +126,34 @@ Vue.component('module-editor-tab-product', {
     },
 
     handleSelect(item) {
-      if (!this.form.tabs[this.editableTabsValue].products.find(v => v == item.id)) {
-        this.form.tabs[this.editableTabsValue].products.push(item.id * 1);
+      if (!this.form.tabs[this.form.editableTabsValue].products.find(v => v == item.id)) {
+        this.form.tabs[this.form.editableTabsValue].products.push(item.id * 1);
         this.productData.push(item);
       }
       this.keyword = ""
     },
 
     itemChange(evt) {
-      this.form.tabs[this.editableTabsValue].products = this.productData.map(e => e.id * 1);
+      this.form.tabs[this.form.editableTabsValue].products = this.productData.map(e => e.id * 1);
     },
 
     removeProduct(index) {
       this.productData.splice(index, 1)
-      this.form.tabs[this.editableTabsValue].products.splice(index, 1);
+      this.form.tabs[this.form.editableTabsValue].products.splice(index, 1);
     },
 
     handleTabsEdit(targetName, action) {
       if (action === 'add') {
         this.form.tabs.push({title: languagesFill('Tab ' + (this.form.tabs.length + 1)), products: []});
-        this.editableTabsValue = this.form.tabs.length - 1 + '';
+        this.form.editableTabsValue = this.form.tabs.length - 1 + '';
       }
 
       if (action === 'remove') {
         let tabs = this.form.tabs;
         tabs.splice(targetName, 1);
-        let activeName = this.editableTabsValue == 0 ? '0' : targetName * 1 - 1 + '';
+        let activeName = this.form.editableTabsValue == 0 ? '0' : targetName * 1 - 1 + '';
 
-        this.editableTabsValue = activeName;
+        this.form.editableTabsValue = activeName;
         this.form.tabs = tabs.filter(tab => tab.name !== targetName);
       }
     }
@@ -171,6 +170,7 @@ Vue.component('module-editor-tab-product', {
       style: {
         background_color: ''
       },
+      editableTabsValue: '0',
       floor: languagesFill(''),
       tabs: [{title: languagesFill('Tab 1'), products: []}],
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),

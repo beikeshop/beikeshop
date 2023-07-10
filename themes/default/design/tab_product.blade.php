@@ -7,12 +7,12 @@
       @if ($content['tabs'] ?? false)
         <div class="nav justify-content-center mb-3">
           @foreach ($content['tabs'] as $key => $tabs)
-          <a class="nav-link {{ $loop->first ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
+          <a class="nav-link {{ ($design ? $content['editableTabsValue'] == $key : $loop->first) ? 'active' : '' }}" href="#tab-product-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
           @endforeach
         </div>
         <div class="tab-content">
-          @foreach ($content['tabs'] as $products)
-          <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="tab-product-{{ $loop->index }}">
+          @foreach ($content['tabs'] as $key => $products)
+          <div class="tab-pane fade show {{ ($design ? $content['editableTabsValue'] == $key : $loop->first) ? 'active' : '' }}" id="tab-product-{{ $loop->index }}">
             <div class="row">
               @if ($products['products'])
                 @foreach ($products['products'] as $product)
