@@ -34,6 +34,11 @@ class ProductSku extends Base
         $product      = $this->product;
         $localeCode   = locale();
         $variantLabel = '';
+
+        if(empty($product->variables)) {
+            return '';
+        }
+
         foreach ($product->variables as $index => $variable) {
             $valueIndex   = $this->variants[$index];
             $variantName  = $variable['name'][$localeCode]                        ?? '';
