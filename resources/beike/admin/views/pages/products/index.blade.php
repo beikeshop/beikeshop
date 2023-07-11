@@ -136,7 +136,7 @@
                   @if ($type != 'trashed')
                     <td>
                       <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" data-active="{{ $product['active'] ? true : false }}" data-id="{{ $product['id'] }}" @change="turnOnOff($event)" {{ $product['active'] ? 'checked' : '' }}>
+                        <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $product['active'] ? true : false }}" data-id="{{ $product['id'] }}" @change="turnOnOff($event)" {{ $product['active'] ? 'checked' : '' }}>
                       </div>
                     </td>
                   @endif
