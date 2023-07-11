@@ -197,7 +197,7 @@ class ProductRepo
         $order = $filters['order'] ?? 'desc';
         $builder->orderBy($sort, $order);
 
-        return $builder;
+        return hook_filter('repo.product.builder', $builder);
     }
 
     public static function parseFilterParamsAttr($attr)
