@@ -11,10 +11,9 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PageProduct extends Model
+class PageProduct extends Base
 {
     protected $table = 'page_products';
 

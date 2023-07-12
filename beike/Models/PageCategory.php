@@ -11,12 +11,11 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class PageCategory extends Model
+class PageCategory extends Base
 {
     protected $table = 'page_categories';
 
