@@ -44,6 +44,7 @@ class CartService
             $product     = $item->product                   ?? null;
             if (empty($description) || empty($product)) {
                 $item->delete();
+
                 return false;
             }
 

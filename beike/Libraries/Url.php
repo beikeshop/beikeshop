@@ -65,7 +65,7 @@ class Url
             return $value->url ?? '';
         } elseif ($type == 'page') {
             if (! $value instanceof \Beike\Models\Page) {
-                $page = \Beike\Models\Page::query()->find($value);
+                $page  = \Beike\Models\Page::query()->find($value);
                 $value = $page->active ? $page : null;
             }
 
