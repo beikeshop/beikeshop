@@ -135,9 +135,9 @@
                   <td>{{ $product['position'] }}</td>
                   @if ($type != 'trashed')
                     <td>
-                      <span class="{{ $product['active'] ? 'text-success' : 'text-secondary' }}">
-                        {{ $product['active'] ? __('common.enable') : __('common.disable') }}
-                      </span>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $product['active'] ? true : false }}" data-id="{{ $product['id'] }}" @change="turnOnOff($event)" {{ $product['active'] ? 'checked' : '' }}>
+                      </div>
                     </td>
                   @endif
                   @hook('admin.product.list.column_value')
@@ -203,6 +203,17 @@
       },
 
       methods: {
+        turnOnOff() {
+          let id = event.currentTarget.getAttribute("data-id");
+          let checked = event.currentTarget.getAttribute("data-active");
+          let type = true;
+          if (checked) type = false;
+          $http.post('products/status', {ids: [id], status: type}).then((res) => {
+            layer.msg(res.message)
+            location.reload();
+          })
+        },
+
         batchDelete() {
           this.$confirm('{{ __('admin/product.confirm_batch_product') }}', '{{ __('common.text_hint') }}', {
             confirmButtonText: '{{ __('common.confirm') }}',
