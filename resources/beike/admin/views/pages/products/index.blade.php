@@ -125,7 +125,7 @@
                   <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds" /></td>
                   <td>{{ $product['id'] }}</td>
                   <td>
-                    <div class="wh-60 border d-flex rounded-2 justify-content-between align-items-center"><img src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid rounded-2"></div>
+                    <div class="wh-60 border d-flex rounded-2 justify-content-center align-items-center"><img src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid max-h-100"></div>
                   </td>
                   <td>
                     <a href="{{ $product['url'] }}" target="_blank" title="{{ $product['name'] }}" class="text-dark">{{ $product['name'] }}</a>
