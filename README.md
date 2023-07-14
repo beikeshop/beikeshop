@@ -115,9 +115,9 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模板 + Vue
 1. 新建 Merge Request
 
 ## 特别鸣谢
-插件开发者：撸串青年、Aegis
-PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo
-感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！
+插件开发者：撸串青年、Aegis  
+PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo  
+感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！  
 
 ## QQ交流群： 
 群1: 639108380
