@@ -11,9 +11,8 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class PageCategoryDescription extends Model
+class PageCategoryDescription extends Base
 {
     protected $table = 'page_category_descriptions';
 
