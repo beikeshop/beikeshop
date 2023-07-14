@@ -11,10 +11,9 @@
 
 namespace Beike\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AdminUserToken extends Model
+class AdminUserToken extends Base
 {
     protected $fillable = ['admin_user_id', 'token'];
 
