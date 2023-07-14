@@ -870,6 +870,7 @@ class ThemeSeeder extends Seeder
                             "zh_cn" => "",
                             "en" => ""
                         ],
+                        "editableTabsValue" => "0",
                         "tabs" => [
                             [
                                 "title" => [
