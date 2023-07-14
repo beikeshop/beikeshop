@@ -11,7 +11,6 @@
 
 namespace Beike\Models;
 
-
 class PageCategoryDescription extends Base
 {
     protected $table = 'page_category_descriptions';
