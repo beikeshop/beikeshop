@@ -18,13 +18,18 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外�
 
 
 ## BeikeShop系统亮点
-- **全新！支持ChatGPT：BeikeShop1.3.2 集成ChatGPT，打造高效智能化跨境电商系统**
-- 开源免费：BeikeShop以开源方式发布，OSL-3.0协议允许用户自由使用、修改。
-- 轻量级框架：BeikeShop基于Laravel框架开发，具有高效、灵活、易用等特点。
-- 灵活的插件机制：BeikeShop提供灵活的Hook插件机制，可以方便地扩展和定制系统功能。
-- 多语言多货币支持：支持多种语言/货币切换，可灵活扩展其他语言/货币。
-- 多种支付方式：支持 PayPal、Stripe、Alipay、WeChat Pay 等多种支付方式，覆盖全球主要外贸国家
-- 快速搭建：向VIP提供一键安装脚本，帮助用户快速搭建起一个稳定、高效、易用的跨境电商独立站。
+- 0元起步：BeikeShop是真正的独立站，代码100%开源，数据信息100%自主可控
+- 基于Laravel框架：BeikeShop使用Laravel框架进行开发，拥有成熟的框架支持。
+- 无佣金和手续费：BeikeShop没有佣金、年费或手续费，降低了建站成本
+- 微内核和插件化：采用微内核架构和插件化设计，使系统易维护&扩展
+- 清晰的代码分层和格式规范：系统代码采用分层清晰、格式规范的结构，提高代码的可读性和可维护性。
+- Event机制实现Hook功能：通过Event机制实现了灵活的Hook功能，方便扩展和定制化开发。
+- 丰富的插件市场：官方提供了丰富的插件市场，可以方便地购买需要的功能
+- 多语言和多货币支持：系统支持多语言和多货币，方便面向不同地区和国家的用户。
+- 界面美观和可视化装修：系统界面设计美观，支持可视化装修，提供良好的用户体验。
+- 严格遵循MVC架构：系统严格遵循MVC架构，提高了代码的可维护性和可扩展性。
+- 操作简单易上手：BeikeShop操作简单，易于上手，可以快速上线使用。
+
 ![ ](https://beikeshop.com/readme/README-2.png)
 
 <br>
@@ -38,10 +43,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统，主要面向外�
 </p>
 
 
-
 <a href="https://demo.beikeshop.com/" target="_blank">点击立刻体验：BeikeShop演示站</a>
-
-
 
 
 
@@ -107,6 +109,11 @@ PHP语言开发，基于 Laravel 框架，前端 Blade 模板 + Vue
 1. 新建 feature-xxx 分支
 1. 提交代码
 1. 新建 Merge Request
+
+## 特别鸣谢
+插件开发者：撸串青年、Aegis
+PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo
+感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！
 
 ## QQ交流群： 
 群1: 639108380
