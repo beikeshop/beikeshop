@@ -21,7 +21,7 @@
                 </el-select>
               </el-form-item>
             </div>
-            <div class="col-4 mt-2 mt-sm-0">
+            <div class="col-4 mt-2 mt-sm-0" v-if="source.zones.length">
               <el-form-item prop="zone_id">
                 <el-select v-model="form.zone_id" filterable placeholder="{{ __('address.zone') }}">
                   <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
@@ -30,7 +30,7 @@
                 </el-select>
               </el-form-item>
             </div>
-            <div class="col-4 mt-2 mt-sm-0">
+            <div :class="[source.zones.length ? 'col-4' : 'col-8' ,'mt-2 mt-sm-0']">
               <el-form-item prop="city">
                 <el-input v-model="form.city" placeholder="{{ __('shop/account.addresses.enter_city') }}"></el-input>
               </el-form-item>
