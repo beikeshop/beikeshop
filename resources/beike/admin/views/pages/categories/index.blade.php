@@ -16,8 +16,8 @@
               <span class="me-4 badge bg-success" v-if="data.active">{{ __('common.enabled') }}</span>
               <span class="me-4 badge bg-secondary" v-else>{{ __('common.disabled') }}</span>
               <div>
-                <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-                <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">{{ __('common.delete') }}</a>
+                <button type="button" @click.stop="toEdit(data.url_edit)" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" @click.stop="removeCategory(node, data)">{{ __('common.delete') }}</button>
               </div>
             </div>
           </div>
@@ -53,6 +53,10 @@
             })
           }).catch(()=>{})
         },
+
+        toEdit(url) {
+          location.href = url;
+        }
       }
     });
   </script>
