@@ -255,16 +255,12 @@
     }
 
     $(function() {
-      const [tab, line] = [bk.getQueryString('tab'), bk.getQueryString('line')];
+      const line = bk.getQueryString('line');
       getZones(country_id);
 
       $('select[name="country_id"]').on('change', function () {
         getZones($(this).val());
       });
-
-      if (tab) {
-        $(`a[href="#${tab}"]`)[0].click()
-      }
 
       if (line) {
         $(`textarea[name="${line}"], select[name="${line}"], input[name="${line}"]`).parents('.row').addClass('active-line');
