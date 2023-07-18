@@ -747,3 +747,22 @@ function registry($key, $default = null): mixed
 {
     return \Beike\Libraries\Registry::get($key, $default);
 }
+
+/**
+ * Check domain ha license.
+ * 删除版权信息, 请先购买授权 https://beikeshop.com/vip/subscription
+ *
+ * @return bool
+ */
+function check_license(): bool
+{
+    $configLicenceCode = system_setting('base.license_code');
+    $appDomain         = config('app.url');
+    $domain            = new \Utopia\Domains\Domain($appDomain);
+    $registerDomain    = $domain->getRegisterable();
+    if (empty($registerDomain)) {
+        return true;
+    }
+
+    return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
+}
