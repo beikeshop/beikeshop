@@ -3,13 +3,13 @@
   <ul class="sidebar-widget mb-0" id="category-one">
     @foreach ($all_categories as $key_a => $category_all)
     <li class="{{ $category_all['id'] == $category->id ? 'active' : ''}}">
-      <a href="{{ shop_route('categories.show', [$category_all['id']]) }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
+      <a href="{{ $category_all['url'] }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
       @if ($category_all['children'])
         <button class="toggle-icon btn {{ $category_all['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}"><i class="bi bi-chevron-up"></i></button>
         <ul id="category-{{ $key_a }}" class="accordion-collapse collapse {{ $category_all['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-one">
           @foreach ($category_all['children'] as $key_b => $child)
           <li class="{{ $child['id'] == $category->id ? 'active' : ''}} child-category">
-            <a href="{{ shop_route('categories.show', [$child['id']]) }}" title="{{ $child['name'] }}">{{ $child['name'] }}</a>
+            <a href="{{ $child['url'] }}" title="{{ $child['name'] }}">{{ $child['name'] }}</a>
           </li>
           @endforeach
         </ul>

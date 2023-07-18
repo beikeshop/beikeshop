@@ -18,7 +18,7 @@ class CategoryDetail extends JsonResource
         $item = [
             'id'   => $this->id,
             'name' => $this->description->name ?? '',
-            'url'  => shop_route('categories.show', ['category' => $this]),
+            'url'  => $this->url,
         ];
 
         if ($this->relationLoaded('activeChildren') && $this->activeChildren->count() > 0) {
