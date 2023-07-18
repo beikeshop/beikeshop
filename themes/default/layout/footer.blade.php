@@ -85,7 +85,10 @@
       <div class="row align-items-center">
         <div class="col">
           <div class="d-flex">
-            Powered By&nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a>&nbsp;
+            <!-- 删除版权信息, 请先购买授权 https://beikeshop.com/vip/subscription -->
+            @if(!check_license())
+              Powered By&nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a>&nbsp;-&nbsp;
+            @endif
             {!! $footer_content['bottom']['copyright'][$locale] ?? '' !!}
           </div>
         </div>

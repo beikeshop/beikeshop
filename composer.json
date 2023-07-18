@@ -32,6 +32,7 @@
         "tymon/jwt-auth": "^2.0",
         "ultrono/laravel-sitemap": "^9.1",
         "unisharp/doc-us": "^1.3",
+        "utopia-php/domains": "^1.1",
         "zanysoft/laravel-zip": "^2.0"
     },
     "require-dev": {
