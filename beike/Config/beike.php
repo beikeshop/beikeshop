@@ -12,7 +12,7 @@
 return [
     'api_url'         => env('BEIKE_API_URL', 'https://beikeshop.com'),
     'version'         => '1.3.8',
-    'build'           => '20230718',
+    'build'           => '20230719',
 
     'admin_name'      => env('ADMIN_NAME'),
     'force_url_https' => env('APP_FORCE_HTTPS', false),
