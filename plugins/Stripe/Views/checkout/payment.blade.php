@@ -21,14 +21,14 @@
           </div>
         </div>
         <div v-if="errors.cardholderName" class="text-danger mt-n2 mb-3">@{{ errors.cardholderName }}</div>
-        
+
         <div class="mb-3">
           <div class="mb-2">Credit Card Number</div>
           <div id="card-number-element" :class="['px-2 border card-input', errors.cardNumber ? 'border-danger' : '']">
           </div>
         </div>
         <div class="text-danger mt-n2 mb-3" v-if="errors.cardNumber">@{{ errors.cardNumber }}</div>
-        
+
         <div class="mb-3">
           <div class="mb-2">Expiration Date</div>
           <div :class="['px-2 border card-input', errors.cardExpiry ? 'border-danger' : '']" id="card-expiry-element">
@@ -50,9 +50,7 @@
 </div>
 
 <script>
-  let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null,
-    cardholderNameElement = null;
-  let currentPayment = '{{ $current['payment_method_code'] ?? ''}}';
+  let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null;
 
   var stripeForm = new Vue({
     el: '#stripe-form',
@@ -110,10 +108,6 @@
         elements = stripe.elements({
           locale: "en" // 设置默认显示语种   en 英文 cn 中文 auto 自动获取语种
         })
-
-        // 创建 cardholder Name 并实例化
-        // cardholderNameElement = elements.create("cardholderName", { style: style })
-        // cardholderNameElement.mount("#card-cardholder-name")
 
         // 创建cardNumber并实例化
         cardNumberElement = elements.create("cardNumber", {
@@ -192,14 +186,6 @@
             })
           }
         })
-      },
-
-      // 获取stripe card-number-element 、card-expiry-element、card-cvc-element 的值
-      getStripeElementValue() {
-        this.form.cardnum = cardNumberElement.getValue()
-        this.form.year = cardExpiryElement.getValue().split("/")[1]
-        this.form.month = cardExpiryElement.getValue().split("/")[0]
-        this.form.cvv = cardCvcElement.getValue()
       },
     }
   })
