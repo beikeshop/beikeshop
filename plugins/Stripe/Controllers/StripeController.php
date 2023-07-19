@@ -27,7 +27,7 @@ class StripeController extends Controller
      * @return array
      * @throws \Throwable
      */
-    public function capture(Request $request): array
+    public function capture(Request $request)
     {
         try {
             $number         = request('order_number');
