@@ -29,7 +29,7 @@ class ProductService
             $data['brand_id']  = (int) ($data['brand_id'] ?? 0);
             $data['position']  = (int) ($data['position'] ?? 0);
             $data['weight']    = (float) ($data['weight'] ?? 0);
-            $data['variables'] = json_decode($data['variables'] ?? '');
+            $data['variables'] = json_decode($data['variables'] ?? '[]');
             $product->fill($data);
             $product->updated_at = now();
             $product->save();
