@@ -15,19 +15,20 @@
           <div class="mb-2">Cardholder Name</div>
           <div id="card-cardholder-name">
             <input type="text" @input="cardholderNameInput"
-              :class="['form-control', errors.cardholderName ? 'border-danger' : '']" v-model="form.cardholder_Name"
-              placeholder="Cardholder Name" style="height: 40px; border-color: #dee2e6">
+                   :class="['form-control', errors.cardholderName ? 'border-danger' : '']"
+                   v-model="form.cardholder_Name"
+                   placeholder="Cardholder Name" style="height: 40px; border-color: #dee2e6">
           </div>
         </div>
         <div v-if="errors.cardholderName" class="text-danger mt-n2 mb-3">@{{ errors.cardholderName }}</div>
-
+        
         <div class="mb-3">
           <div class="mb-2">Credit Card Number</div>
           <div id="card-number-element" :class="['px-2 border card-input', errors.cardNumber ? 'border-danger' : '']">
           </div>
         </div>
         <div class="text-danger mt-n2 mb-3" v-if="errors.cardNumber">@{{ errors.cardNumber }}</div>
-
+        
         <div class="mb-3">
           <div class="mb-2">Expiration Date</div>
           <div :class="['px-2 border card-input', errors.cardExpiry ? 'border-danger' : '']" id="card-expiry-element">
@@ -41,13 +42,16 @@
         <div class="text-danger mt-n2 mb-3" v-if="errors.cardCvc">@{{ errors.cardCvc }}</div>
       </div>
     </div>
-    <div><button class="btn btn-primary btn-lg" type="button" @click="checkedBtnCheckoutConfirm">{{
-        __('Stripe::common.btn_submit') }}</button></div>
+    <div>
+      <button class="btn btn-primary btn-lg" type="button" @click="checkedBtnCheckoutConfirm">{{
+        __('Stripe::common.btn_submit') }}</button>
+    </div>
   </div>
 </div>
 
 <script>
-  let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null, cardholderNameElement = null;
+  let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null,
+    cardholderNameElement = null;
   let currentPayment = '{{ $current['payment_method_code'] ?? ''}}';
 
   var stripeForm = new Vue({
@@ -121,11 +125,11 @@
         cardNumberElement.mount("#card-number-element")
 
         // 创建cardExpiry并实例化
-        cardExpiryElement = elements.create("cardExpiry", { style: style })
+        cardExpiryElement = elements.create("cardExpiry", {style: style})
         cardExpiryElement.mount("#card-expiry-element")
 
         // 创建cardCvc并实例化
-        cardCvcElement = elements.create("cardCvc", { style: style , placeholder: 'CVV'})
+        cardCvcElement = elements.create("cardCvc", {style: style, placeholder: 'CVV'})
         cardCvcElement.mount("#card-cvc-element")
       },
 
@@ -138,55 +142,57 @@
       },
 
       checkedBtnCheckoutConfirm() {
-          // 判断 stripeForm.errors 里面的值是否都为空
+        // 判断 stripeForm.errors 里面的值是否都为空
         if (stripeForm.form.cardholder_Name == '') {
           stripeForm.errors.cardholderName = 'Please fill out a cardholder name.'
         }
 
         // if (Object.values(stripeForm.errors).every(e => e == '')) {
-          const options = {
-            name: stripeForm.form.cardholder_Name,
-          };
+        const options = {
+          name: stripeForm.form.cardholder_Name,
+        };
 
-          layer.load(2, {shade: [0.3,'#fff'] })
+        layer.load(2, {shade: [0.3, '#fff']})
 
-          stripe.createToken(cardNumberElement, options).then(function(stripeResult) {
-            if (stripeResult.error) {
+        stripe.createToken(cardNumberElement, options).then(function (stripeResult) {
+          if (stripeResult.error) {
 
-              layer.msg(stripeResult.error.message, ()=>{})
-              layer.closeAll('loading')
-            } else {
-              $http.post('/checkout/confirm').then((res) => {
-                $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: res.number}).then((pay) => {
-                  if (pay.status == 'success') {
-                    layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
-                      title: "{{__('common.text_hint')}}",
-                      closeBtn: 0,
-                      anim: 5,
+            layer.msg(stripeResult.error.message, () => {
+            })
+            layer.closeAll('loading')
+          } else {
+            $http.post('/checkout/confirm').then((res) => {
+              $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: res.number}).then((pay) => {
+                if (pay.status == 'success') {
+                  layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
+                    title: "{{__('common.text_hint')}}",
+                    closeBtn: 0,
+                    anim: 5,
+                    @if (current_customer())
+                    btn: ['{{ __('shop/account.order.order_success.view_order') }}', '{{ __('common.go_shopping') }}'],
+                    @else
+                    btn: ['{{ __('common.go_shopping') }}'],
+                    @endif
+                    yes: function (index, layero) {
                       @if (current_customer())
-                        btn: ['{{ __('shop/account.order.order_success.view_order') }}','{{ __('common.go_shopping') }}'],
-                      @else
-                        btn: ['{{ __('common.go_shopping') }}'],
-                      @endif
-                      yes: function(index, layero) {
-                        @if (current_customer())
                         location = "account/orders/" + res.number
-                        @else
+                      @else
                         location = "checkout/success?order_number=" + res.number
-                        @endif
-                      },
-                      btn2: function(index, layero) {
-                        window.location.href = '/';
-                      }
-                    });
-                  } else {
-                    layer.msg(pay.message, ()=>{})
-                  }
-                })
+                      @endif
+                    },
+                    btn2: function (index, layero) {
+                      window.location.href = '/';
+                    }
+                  });
+                } else {
+                  layer.msg(pay.message, () => {
+                  })
+                }
               })
-            }
-          })
-        },
+            })
+          }
+        })
+      },
 
       // 获取stripe card-number-element 、card-expiry-element、card-cvc-element 的值
       getStripeElementValue() {
