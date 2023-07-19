@@ -54,7 +54,11 @@ class PluginServiceProvider extends ServiceProvider
         }
 
         $enabledPlugins = $manager->getEnabledPlugins();
+        $currentTheme   = system_setting('base.theme');
         foreach ($enabledPlugins as $plugin) {
+            if($plugin->type == 'theme' && $plugin->code != $currentTheme) {
+                continue;
+            }
             $pluginCode = $plugin->getDirname();
             $this->bootPlugin($plugin);
             $this->registerRoutes($pluginCode);

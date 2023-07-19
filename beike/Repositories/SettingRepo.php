@@ -159,7 +159,6 @@ class SettingRepo
         self::clearCache();
     }
 
-
     /**
      * Clear all cache.
      */
