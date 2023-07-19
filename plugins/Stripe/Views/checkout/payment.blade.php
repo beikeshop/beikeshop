@@ -48,9 +48,9 @@
     </div>
   </div>
 </div>
-
 <script>
   let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null;
+  const orderNumber = @json($order->number ?? '');
 
   var stripeForm = new Vue({
     el: '#stripe-form',
@@ -155,34 +155,32 @@
             })
             layer.closeAll('loading')
           } else {
-            $http.post('/checkout/confirm').then((res) => {
-              $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: res.number}).then((pay) => {
-                if (pay.status == 'success') {
-                  layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
-                    title: "{{__('common.text_hint')}}",
-                    closeBtn: 0,
-                    anim: 5,
+            $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
+              if (pay.status == 'success') {
+                layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
+                  title: "{{__('common.text_hint')}}",
+                  closeBtn: 0,
+                  anim: 5,
+                  @if (current_customer())
+                  btn: ['{{ __('shop/account.order.order_success.view_order') }}', '{{ __('common.go_shopping') }}'],
+                  @else
+                  btn: ['{{ __('common.go_shopping') }}'],
+                  @endif
+                  yes: function (index, layero) {
                     @if (current_customer())
-                    btn: ['{{ __('shop/account.order.order_success.view_order') }}', '{{ __('common.go_shopping') }}'],
+                      location = "account/orders/" + orderNumber
                     @else
-                    btn: ['{{ __('common.go_shopping') }}'],
+                      location = "checkout/success?order_number=" + orderNumber
                     @endif
-                    yes: function (index, layero) {
-                      @if (current_customer())
-                        location = "account/orders/" + res.number
-                      @else
-                        location = "checkout/success?order_number=" + res.number
-                      @endif
-                    },
-                    btn2: function (index, layero) {
-                      window.location.href = '/';
-                    }
-                  });
-                } else {
-                  layer.msg(pay.message, () => {
-                  })
-                }
-              })
+                  },
+                  btn2: function (index, layero) {
+                    window.location.href = '/';
+                  }
+                });
+              } else {
+                layer.msg(pay.message, () => {
+                })
+              }
             })
           }
         })
