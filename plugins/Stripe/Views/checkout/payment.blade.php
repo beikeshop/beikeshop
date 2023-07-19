@@ -41,7 +41,8 @@
         <div class="text-danger mt-n2 mb-3" v-if="errors.cardCvc">@{{ errors.cardCvc }}</div>
       </div>
     </div>
-    <div><button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">{{ __('Stripe::common.btn_submit') }}</button></div>
+    <div><button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">{{
+        __('Stripe::common.btn_submit') }}</button></div>
   </div>
 </div>
 
@@ -126,11 +127,6 @@
         // 创建cardCvc并实例化
         cardCvcElement = elements.create("cardCvc", { style: style , placeholder: 'CVV'})
         cardCvcElement.mount("#card-cvc-element")
-
-        // 异常文字抛出
-        cardNumberElement.on("change", (e) => {this.setValidationError(e, "cardNumber")})
-        cardExpiryElement.on("change", (e) => {this.setValidationError(e, "cardExpiry")})
-        cardCvcElement.on("change", (e) => {this.setValidationError(e, "cardCvc")})
       },
 
       cardholderNameInput(e) {
@@ -140,22 +136,61 @@
           this.errors.cardholderName = ''
         }
       },
-      // 获取异常文字
-      setValidationError(event, key) {
-        this.errors[key] = event.error ? event.error.message : ""
-        if (currentPayment == 'stripe') {
-          return;
-        }
-
-        $http.put('/checkout', {payment_method_code: 'stripe'}).then((res) => {
-          $('.radio-line-item.stripe').addClass('active').siblings().removeClass('active')
-          currentPayment = res.current.payment_method_code;
-        })
-      },
 
       checkedBtnCheckoutConfirm() {
-        console.log(111);
-      },
+          // 判断 stripeForm.errors 里面的值是否都为空
+        if (stripeForm.form.cardholder_Name == '') {
+          stripeForm.errors.cardholderName = 'Please fill out a cardholder name.'
+        }
+
+        // if (Object.values(stripeForm.errors).every(e => e == '')) {
+          const options = {
+            name: stripeForm.form.cardholder_Name,
+          };
+
+          layer.load(2, {shade: [0.3,'#fff'] })
+
+          stripe.createToken(cardNumberElement, options).then(function(stripeResult) {
+            if (stripeResult.error) {
+
+              layer.msg(stripeResult.error.message, ()=>{})
+              layer.closeAll('loading')
+            } else {
+              $http.post('/checkout/confirm').then((res) => {
+                $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: res.number}).then((pay) => {
+                  if (pay.status == 'success') {
+                    layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
+                      title: "{{__('common.text_hint')}}",
+                      closeBtn: 0,
+                      anim: 5,
+                      @if (current_customer())
+                        btn: ['{{ __('shop/account.order.order_success.view_order') }}','{{ __('common.go_shopping') }}'],
+                      @else
+                        btn: ['{{ __('common.go_shopping') }}'],
+                      @endif
+                      yes: function(index, layero) {
+                        @if (current_customer())
+                        location = "account/orders/" + res.number
+                        @else
+                        location = "checkout/success?order_number=" + res.number
+                        @endif
+                      },
+                      btn2: function(index, layero) {
+                        window.location.href = '/';
+                      }
+                    });
+                  } else {
+                    layer.msg(pay.message, ()=>{})
+                  }
+                })
+              })
+            }
+          })
+        // } else {
+        //   layer.closeAll('loading')
+        //   layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
+        // }
+        }
 
       // 获取stripe card-number-element 、card-expiry-element、card-cvc-element 的值
       getStripeElementValue() {
