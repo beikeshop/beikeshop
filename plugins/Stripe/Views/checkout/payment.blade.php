@@ -10,7 +10,7 @@
       <div class="mb-4">
         <img src="{{ plugin_origin('stripe','/image/pay-image.png') }}" class="img-fluid">
       </div>
-      <div class="stripe-card">
+      <div class="stripe-card w-max-600">
         <div class="mb-3">
           <div class="mb-2">Cardholder Name</div>
           <div id="card-cardholder-name">
@@ -41,7 +41,7 @@
         <div class="text-danger mt-n2 mb-3" v-if="errors.cardCvc">@{{ errors.cardCvc }}</div>
       </div>
     </div>
-    <div><button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm">{{
+    <div><button class="btn btn-primary btn-lg" type="button" @click="checkedBtnCheckoutConfirm">{{
         __('Stripe::common.btn_submit') }}</button></div>
   </div>
 </div>
@@ -186,11 +186,7 @@
               })
             }
           })
-        // } else {
-        //   layer.closeAll('loading')
-        //   layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
-        // }
-        }
+        },
 
       // 获取stripe card-number-element 、card-expiry-element、card-cvc-element 的值
       getStripeElementValue() {
