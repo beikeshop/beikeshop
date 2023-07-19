@@ -157,29 +157,9 @@
           } else {
             $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
               if (pay.status == 'success') {
-                layer.alert("{{ __('admin/marketing.pay_success_title') }}", {
-                  title: "{{__('common.text_hint')}}",
-                  closeBtn: 0,
-                  anim: 5,
-                  @if (current_customer())
-                  btn: ['{{ __('shop/account.order.order_success.view_order') }}', '{{ __('common.go_shopping') }}'],
-                  @else
-                  btn: ['{{ __('common.go_shopping') }}'],
-                  @endif
-                  yes: function (index, layero) {
-                    @if (current_customer())
-                      location = "account/orders/" + orderNumber
-                    @else
-                      location = "checkout/success?order_number=" + orderNumber
-                    @endif
-                  },
-                  btn2: function (index, layero) {
-                    window.location.href = '/';
-                  }
-                });
+                location = "checkout/success?order_number=" + orderNumber
               } else {
-                layer.msg(pay.message, () => {
-                })
+                layer.msg(pay.message, () => {})
               }
             })
           }
