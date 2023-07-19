@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-06-14 14:30:05
+ * @LastEditTime  2023-07-14 18:15:09
  */
 
 import http from "../../../js/http";
@@ -64,6 +64,7 @@ $(document).ready(function ($) {
     },
   });
 
+  autoActiveTab()
   tinymceInit()
 });
 
@@ -114,3 +115,17 @@ const tinymceInit = () => {
   });
 }
 
+const autoActiveTab = () => {
+  const tab = bk.getQueryString('tab');
+
+  if (tab) {
+    if ($(`a[href="#${tab}"]`).length) {
+      $(`a[href="#${tab}"]`)[0].click()
+      return;
+    }
+
+    if ($(`button[data-bs-target="#${tab}"]`).length) {
+      $(`button[data-bs-target="#${tab}"]`)[0].click()
+    }
+  }
+}

@@ -1,114 +1,170 @@
 <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
-<script src="{{ asset('vendor/element-ui/index.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
+<script src="https://js.stripe.com/v3/"></script>
 
-<script src="{{ asset('plugin/stripe/js/demo.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('plugin/stripe/css/demo.css') }}">
-<div class="mt-5" id="bk-stripe-app" v-cloak>
+<div class="mt-5" id="stripe-form" v-cloak>
   <hr class="mb-4">
   <div class="checkout-black">
     <h5 class="checkout-title">{{ __('Stripe::common.title_info') }}</h5>
     <div class="">
-      <div class="mb-2">
+      <div class="mb-4">
         <img src="{{ plugin_origin('stripe','/image/pay-image.png') }}" class="img-fluid">
       </div>
-      <el-form ref="form" label-position="top" :rules="rules" :model="form" class="form-wrap w-max-500">
-        <el-form-item label="{{ __('Stripe::common.cardnum') }}" prop="cardnum">
-          <el-input v-model="form.cardnum"></el-input>
-        </el-form-item>
-        <el-form-item label="{{ __('Stripe::common.expiration_date') }}" required>
-          <div class="d-flex align-items-center">
-            <el-form-item prop="year" class="flex-grow-1">
-              <el-date-picker class="w-100 me-2" v-model="form.year" format="yyyy" value-format="yyyy"
-                type="year" placeholder="{{ __('Stripe::common.year') }}">
-              </el-date-picker>
-            </el-form-item>
-            <el-form-item prop="month" class="flex-grow-1 ms-3">
-              <el-date-picker v-model="form.month" class="w-100" format="MM" value-format="MM" type="month"
-                placeholder="{{ __('Stripe::common.month') }}">
-              </el-date-picker>
-            </el-form-item>
+      <div class="stripe-card w-max-600">
+        <div class="mb-3">
+          <div class="mb-2">Cardholder Name</div>
+          <div id="card-cardholder-name">
+            <input type="text" @input="cardholderNameInput"
+                   :class="['form-control', errors.cardholderName ? 'border-danger' : '']"
+                   v-model="form.cardholder_Name"
+                   placeholder="Cardholder Name" style="height: 40px; border-color: #dee2e6">
           </div>
-        </el-form-item>
-        <el-form-item label="{{ __('Stripe::common.cvv') }}" prop="cvv">
-          <el-input v-model="form.cvv"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-checkbox v-model="form.remenber">{{ __('Stripe::common.remenber') }}</el-checkbox>
-        </el-form-item>
-        <el-form-item>
-          <button class="btn btn-primary" type="button" @click="checkedBtnCheckoutConfirm('form')">{{ __('Stripe::common.btn_submit') }}</button>
-        </el-form-item>
-      </el-form>
+        </div>
+        <div v-if="errors.cardholderName" class="text-danger mt-n2 mb-3">@{{ errors.cardholderName }}</div>
+
+        <div class="mb-3">
+          <div class="mb-2">Credit Card Number</div>
+          <div id="card-number-element" :class="['px-2 border card-input', errors.cardNumber ? 'border-danger' : '']">
+          </div>
+        </div>
+        <div class="text-danger mt-n2 mb-3" v-if="errors.cardNumber">@{{ errors.cardNumber }}</div>
+
+        <div class="mb-3">
+          <div class="mb-2">Expiration Date</div>
+          <div :class="['px-2 border card-input', errors.cardExpiry ? 'border-danger' : '']" id="card-expiry-element">
+          </div>
+        </div>
+        <div class="text-danger mt-n2 mb-3" v-if="errors.cardExpiry">@{{ errors.cardExpiry }}</div>
+        <div class="mb-3">
+          <div class="mb-2">CVV</div>
+          <div :class="['px-2 border card-input', errors.cardCvc ? 'border-danger' : '']" id="card-cvc-element"></div>
+        </div>
+        <div class="text-danger mt-n2 mb-3" v-if="errors.cardCvc">@{{ errors.cardCvc }}</div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary btn-lg" type="button" @click="checkedBtnCheckoutConfirm">{{
+        __('Stripe::common.btn_submit') }}</button>
     </div>
   </div>
 </div>
-
 <script>
-  new Vue({
-    el: '#bk-stripe-app',
+  let cardNumberElement = null, cardExpiryElement = null, cardCvcElement = null, stripe = null, elements = null;
+  const orderNumber = @json($order->number ?? '');
+
+  var stripeForm = new Vue({
+    el: '#stripe-form',
 
     data: {
       form: {
-        order_number: @json($order->number ?? null),
+        order_number: '',
         cardnum: '',
         year: '',
         month: '',
         cvv: '',
         remenber: false,
+
+        // 以上为以前自定义表单的字段
+        cardholder_Name: '',
       },
 
-      source: {
-        order: @json($order ?? null),
+      errors: {
+        cardNumber: '',
+        cardExpiry: '',
+        cardCvc: '',
+        cardholderName: ''
       },
-
-      rules: {
-        cardnum: [{
-          required: true,
-          message: "{{ __('Stripe::common.error_cardnum') }}",
-          trigger: 'blur'
-        }, ],
-        cvv: [{
-          required: true,
-          message: "{{ __('Stripe::common.error_cvv') }}",
-          trigger: 'blur'
-        }, ],
-        year: [{
-          required: true,
-          message: "{{ __('Stripe::common.error_year') }}",
-          trigger: 'blur'
-        }, ],
-        month: [{
-          required: true,
-          message: "{{ __('Stripe::common.error_month') }}",
-          trigger: 'blur'
-        }, ],
-      }
     },
 
     beforeMount() {
-      // console.log(33)
+      stripe = Stripe("{{ plugin_setting('stripe.publishable_key') }}");
+    },
+
+    mounted() {
+      this.createAndMountFormElements()
     },
 
     methods: {
-      checkedBtnCheckoutConfirm(form) {
-        this.$refs[form].validate((valid) => {
-          if (!valid) {
-            // this.$message.error('请检查表单是否填写正确');
-            return;
+      // stripe生成卡号校验部分
+      createAndMountFormElements() {
+        // stripe 样式，带边框
+        const style = {
+          base: {
+            color: "#32325d",
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: "antialiased",
+            lineHeight: "40px",
+            fontSize: "16px",
+            "::placeholder": {
+              color: "#aab7c4"
+            }
+          },
+          invalid: {
+            color: "#fa755a",
+            iconColor: "#fa755a"
           }
+        }
 
-          $http.post(`/stripe/capture`, this.form).then((res) => {
-            layer.msg(res.message)
+        elements = stripe.elements({
+          locale: "en" // 设置默认显示语种   en 英文 cn 中文 auto 自动获取语种
+        })
 
-            @if (current_customer())
-                location = "{{ shop_route('account.order.show', ['number' => $order->number]) }}"
-            @else
-                location = "{{ shop_route('checkout.success', ['order_number' => $order->number]) }}"
-            @endif
-          })
-        });
-      }
+        // 创建cardNumber并实例化
+        cardNumberElement = elements.create("cardNumber", {
+          style: style,
+          showIcon: true, // 设置卡片icon，默认值为false
+          placeholder: this.cardNumberplaceholder
+        })
+
+        cardNumberElement.mount("#card-number-element")
+
+        // 创建cardExpiry并实例化
+        cardExpiryElement = elements.create("cardExpiry", {style: style})
+        cardExpiryElement.mount("#card-expiry-element")
+
+        // 创建cardCvc并实例化
+        cardCvcElement = elements.create("cardCvc", {style: style, placeholder: 'CVV'})
+        cardCvcElement.mount("#card-cvc-element")
+      },
+
+      cardholderNameInput(e) {
+        if (e.target.value == '') {
+          this.errors.cardholderName = 'Please fill out a cardholder name.'
+        } else {
+          this.errors.cardholderName = ''
+        }
+      },
+
+      checkedBtnCheckoutConfirm() {
+        // 判断 stripeForm.errors 里面的值是否都为空
+        if (stripeForm.form.cardholder_Name == '') {
+          stripeForm.errors.cardholderName = 'Please fill out a cardholder name.'
+        }
+
+        // if (Object.values(stripeForm.errors).every(e => e == '')) {
+        const options = {
+          name: stripeForm.form.cardholder_Name,
+        };
+
+        layer.load(2, {shade: [0.3, '#fff']})
+
+        stripe.createToken(cardNumberElement, options).then(function (stripeResult) {
+          if (stripeResult.error) {
+
+            layer.msg(stripeResult.error.message, () => {
+            })
+            layer.closeAll('loading')
+          } else {
+            $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
+              if (pay.status == 'success') {
+                location = "checkout/success?order_number=" + orderNumber
+              } else {
+                layer.msg(pay.message, () => {})
+              }
+            })
+          }
+        })
+      },
     }
   })
 </script>

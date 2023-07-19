@@ -26,21 +26,16 @@ class StripePaymentService extends PaymentService
 
     /**
      * @throws ApiErrorException
+     * @throws \Exception
      */
     public function capture($creditCardData): bool
     {
         $apiKey = plugin_setting('stripe.secret_key');
         Stripe::setApiKey($apiKey);
-        $token = Token::create([
-            'card' => [
-                'number'    => $creditCardData['cardnum'],
-                'exp_year'  => $creditCardData['year'],
-                'exp_month' => $creditCardData['month'],
-                'cvc'       => $creditCardData['cvv'],
-            ],
-        ]);
-
-        $tokenId  = $token['id'];
+        $tokenId  = $creditCardData['token'] ?? '';
+        if (empty($tokenId)) {
+            throw new \Exception('Invalid token');
+        }
         $currency = $this->order->currency_code;
 
         if (! in_array($currency, self::ZERO_DECIMAL)) {
