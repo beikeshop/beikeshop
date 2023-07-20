@@ -14,7 +14,6 @@ namespace Plugin\Stripe\Services;
 use Beike\Shop\Services\PaymentService;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
-use Stripe\Token;
 
 class StripePaymentService extends PaymentService
 {
