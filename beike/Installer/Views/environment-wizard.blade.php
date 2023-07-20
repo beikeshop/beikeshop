@@ -230,29 +230,27 @@
           $('.database-loading').addClass('d-none');
         },
         success: function(json) {
-          if (json.status == 'fail') {
-            var data = Object.keys(json.data);
+          $('.database-link-wrap input').addClass('is-valid')
+          $('.title-status .text-success').removeClass('d-none')
+          $('.admin-data-wrap').removeClass('d-none')
+        },
+        error: function(json) {
+          json = json.responseJSON;
+          var data = Object.keys(json.data);
 
-            data.forEach((e)=> {
-              $('.database-link-wrap input[name="' + e + '"]').addClass('is-invalid').next('.invalid-feedback').text(json.data[e])
-            })
+          data.forEach((e)=> {
+            $('.database-link-wrap input[name="' + e + '"]').addClass('is-invalid').next('.invalid-feedback').text(json.data[e])
+          })
 
-            if (json.data.database_version) {
-              $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_version);
-            }
-
-            if (json.data.database_other) {
-              $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_other);
-            }
-
-            $('.admin-data-wrap').addClass('d-none')
+          if (json.data.database_version) {
+            $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_version);
           }
 
-          if (json.status == 'success') {
-            $('.database-link-wrap input').addClass('is-valid')
-            $('.title-status .text-success').removeClass('d-none')
-            $('.admin-data-wrap').removeClass('d-none')
+          if (json.data.database_other) {
+            $('.title-status .text-danger').removeClass('d-none').find('span').text(json.data.database_other);
           }
+
+          $('.admin-data-wrap').addClass('d-none')
         }
       });
     }
