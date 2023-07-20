@@ -32,8 +32,9 @@
       <div class="row">
         <div class="col-12 col-md-3">
           <div class="footer-content-left">
-            <div class="logo"><a href="http://"><img
-                  src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
+            @if ($footer_content['content']['intro']['logo'] ?? false)
+              <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
+            @endif
             <div class="text tinymce-format-p">{!! $footer_content['content']['intro']['text'][$locale] ?? '' !!}</div>
           </div>
         </div>
