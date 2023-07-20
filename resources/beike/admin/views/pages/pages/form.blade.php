@@ -54,8 +54,11 @@
 
                   <x-admin::form.row title="{{ __('page_category.text_summary') }}">
                     <div class="input-group w-max-400">
-                      <textarea rows="3" type="text" name="descriptions[{{ $language['code'] }}][summary]" class="form-control wp-400" placeholder="{{ __('page_category.text_summary') }}">{{ old('descriptions.' . $language['code'] . '.summary', $descriptions[$language['code']]['summary'] ?? '') }}</textarea>
+                      <textarea rows="3" type="text" name="descriptions[{{ $language['code'] }}][summary]" class="form-control wp-400 {{ $errors->has("descriptions.{$language['code']}.summary") ? 'is-invalid' : '' }}" placeholder="{{ __('page_category.text_summary') }}">{{ old('descriptions.' . $language['code'] . '.summary', $descriptions[$language['code']]['summary'] ?? '') }}</textarea>
                     </div>
+                    @if ($errors->has("descriptions.{$language['code']}.summary"))
+                      <span class="invalid-feedback d-block" role="alert">{{ $errors->first("descriptions.{$language['code']}.summary") }}</span>
+                    @endif
                   </x-admin::form.row>
 
                   <x-admin::form.row title="{{ __('admin/page.info_content') }}">

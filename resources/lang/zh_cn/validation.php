@@ -158,6 +158,8 @@ return [
     'attributes'           => [
         'descriptions.en.title'    => '英文标题',
         'descriptions.zh_cn.title' => '中文标题',
+        'descriptions.en.summary' => '英文副标题',
+        'descriptions.zh_cn.summary' => '中文副标题',
 
         'tax_rate'                 => [
             'name' => '税种名称',
