@@ -75,4 +75,6 @@ return [
     'multi_filter_helper'    => '请选择需要在前台商品列表筛选区域显示的属性，留空则显示全部',
     'filter_attribute'       => '属性筛选',
     'license_code'           => '授权码',
+    'order_auto_cancel'      => '订单自动取消',
+    'order_auto_complete'    => '订单自动完成',
 ];
