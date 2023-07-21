@@ -44,7 +44,14 @@ class ProcessOrder extends Command
     private function cancelOrders()
     {
         $this->logInfo("====== 自动取消未支付订单 ======");
-        $minDatetime = now()->subWeek();
+
+        $cancelHours = (int)system_setting('base.order_auto_cancel');
+        if ($cancelHours) {
+            $minDatetime = now()->subHours($cancelHours);
+        } else {
+            $minDatetime = now()->subWeek();
+        }
+
         $this->logInfo("Min Datetime: $minDatetime");
 
         $unpaidOrders = OrderRepo::getListBuilder(['status' => StateMachineService::UNPAID])
@@ -68,7 +75,14 @@ class ProcessOrder extends Command
     private function completeOrders()
     {
         $this->logInfo("====== 自动完成已发货订单 ======");
-        $minDatetime = now()->subWeek();
+
+        $completeHours = (int)system_setting('base.order_auto_complete');
+        if ($completeHours) {
+            $minDatetime = now()->subHours($completeHours);
+        } else {
+            $minDatetime = now()->subWeek();
+        }
+
         $this->logInfo("Min Datetime: $minDatetime");
 
         $unpaidOrders = OrderRepo::getListBuilder(['status' => StateMachineService::SHIPPED])
