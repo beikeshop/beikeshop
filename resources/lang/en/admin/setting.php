@@ -76,4 +76,6 @@ return [
     'multi_filter_helper'    => 'Please select the attributes that need to be displayed in the filter area of the product list at the front desk, if left blank, all will be displayed',
     'filter_attribute'       => 'Attribute Filter',
     'license_code'           => 'License Code',
+    'order_auto_cancel'      => 'Order Auto Cancel',
+    'order_auto_complete'    => 'Order Auto Complete',
 ];
