@@ -43,9 +43,9 @@ class ProcessOrder extends Command
      */
     private function cancelOrders()
     {
-        $this->logInfo("====== 自动取消未支付订单 ======");
+        $this->logInfo('====== 自动取消未支付订单 ======');
 
-        $cancelHours = (int)system_setting('base.order_auto_cancel');
+        $cancelHours = (int) system_setting('base.order_auto_cancel');
         if ($cancelHours) {
             $minDatetime = now()->subHours($cancelHours);
         } else {
@@ -74,9 +74,9 @@ class ProcessOrder extends Command
      */
     private function completeOrders()
     {
-        $this->logInfo("====== 自动完成已发货订单 ======");
+        $this->logInfo('====== 自动完成已发货订单 ======');
 
-        $completeHours = (int)system_setting('base.order_auto_complete');
+        $completeHours = (int) system_setting('base.order_auto_complete');
         if ($completeHours) {
             $minDatetime = now()->subHours($completeHours);
         } else {
@@ -116,7 +116,7 @@ class ProcessOrder extends Command
     {
         return Log::build([
             'driver' => 'single',
-            'path' => storage_path('logs/process_order.log')
+            'path'   => storage_path('logs/process_order.log'),
         ]);
     }
 

@@ -91,7 +91,6 @@ return [
     'no_repeat'            => '请勿重新添加',
     'text_hour'            => '小时',
 
-
     'order'                => [
         'unpaid'    => '待支付',
         'paid'      => '已支付',
