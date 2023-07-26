@@ -4,6 +4,8 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\UploadRequest;
 use Beike\Admin\Services\FileManagerService;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FileManagerController extends Controller
@@ -11,9 +13,9 @@ class FileManagerController extends Controller
     /**
      * 获取文件夹和文件列表
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
-    public function index()
+    public function index(): mixed
     {
         $data = (new FileManagerService)->getDirectories();
         $data = hook_filter('admin.file_manager.index.data', $data);
@@ -26,7 +28,7 @@ class FileManagerController extends Controller
      *
      * @param Request $request
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     public function getFiles(Request $request): array
     {
@@ -44,10 +46,10 @@ class FileManagerController extends Controller
     /**
      * 获取文件夹列表
      * @param Request $request
-     * @return mixed
-     * @throws \Exception
+     * @return array
+     * @throws Exception
      */
-    public function getDirectories(Request $request)
+    public function getDirectories(Request $request): array
     {
         $baseFolder = $request->get('base_folder');
 
@@ -59,58 +61,74 @@ class FileManagerController extends Controller
     /**
      * 创建文件夹
      * POST      /admin/file_manager
-     * @throws \Exception
+     * @throws Exception
      */
-    public function createDirectory(Request $request): array
+    public function createDirectory(Request $request): JsonResponse
     {
-        $folderName = $request->get('name');
-        (new FileManagerService)->createDirectory($folderName);
+        try {
+            $folderName = $request->get('name');
+            (new FileManagerService)->createDirectory($folderName);
 
-        return json_success(trans('common.created_success'));
+            return json_success(trans('common.created_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**
      * 文件或文件夹改名
      * PUT       /admin/file_manager/rename
-     * @throws \Exception
+     * @throws Exception
      */
-    public function rename(Request $request): array
+    public function rename(Request $request): JsonResponse
     {
-        $originPath = $request->get('origin_name');
-        $newPath    = $request->get('new_name');
-        (new FileManagerService)->updateName($originPath, $newPath);
+        try {
+            $originPath = $request->get('origin_name');
+            $newPath    = $request->get('new_name');
+            (new FileManagerService)->updateName($originPath, $newPath);
 
-        return json_success(trans('common.updated_success'));
+            return json_success(trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**
      * 删除文件或文件夹
      * DELETE    /admin/file_manager/files  {"path":"/xx/yy", "files":["1.jpg", "2.png"]}
-     * @throws \Exception
+     * @throws Exception
      */
-    public function destroyFiles(Request $request): array
+    public function destroyFiles(Request $request): JsonResponse
     {
-        $requestData = json_decode($request->getContent(), true);
-        $basePath    = $requestData['path']  ?? '';
-        $files       = $requestData['files'] ?? [];
-        (new FileManagerService)->deleteFiles($basePath, $files);
+        try {
+            $requestData = json_decode($request->getContent(), true);
+            $basePath    = $requestData['path']  ?? '';
+            $files       = $requestData['files'] ?? [];
+            (new FileManagerService)->deleteFiles($basePath, $files);
 
-        return json_success(trans('common.deleted_success'));
+            return json_success(trans('common.deleted_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**
      * 删除文件夹
      *
      * @param Request $request
-     * @return array
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
-    public function destroyDirectories(Request $request): array
+    public function destroyDirectories(Request $request): JsonResponse
     {
-        $folderName = $request->get('name');
-        (new FileManagerService)->deleteDirectoryOrFile($folderName);
+        try {
+            $folderName = $request->get('name');
+            (new FileManagerService)->deleteDirectoryOrFile($folderName);
 
-        return json_success(trans('common.deleted_success'));
+            return json_success(trans('common.deleted_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**

@@ -521,14 +521,15 @@ function quantity_format($quantity)
 /**
  * 返回json序列化结果
  */
-function json_success($message, $data = [])
+function json_success($message, $data = []): JsonResponse
 {
-    return [
+    $data = [
         'status'  => 'success',
         'message' => $message,
         'data'    => $data,
     ];
 
+    return response()->json($data);
 }
 
 /**
