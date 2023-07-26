@@ -63,7 +63,6 @@
                 <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
                     class="el-icon-delete"></i></span>
               </el-tooltip>
-
             </div>
           </div>
         </el-tree>
@@ -561,7 +560,7 @@
             value
           }) => {
             if (type == 'addFolder') {
-              let fileAllPathName = this.folderCurrent + '/' + value;
+              let fileAllPathName = data.path + '/' + value;
               $http.post(`file_manager/directories`, {
                 name: fileAllPathName
               }).then((res) => {
