@@ -48,9 +48,10 @@ class StripePaymentService extends PaymentService
             'amount' => $total,
             'currency' => $currency,
             'metadata' => [
-                'orderId' => $this->order->id,
+                'order_number' => $this->order->number,
             ],
             'customer' => $stripeCustomer->id,
+            'shipping' => $this->getShippingAddress(),
         ];
 
         $charge = \Stripe\Charge::create($stripeChargeParameters);
@@ -80,21 +81,29 @@ class StripePaymentService extends PaymentService
                 'postal_code' => $this->order->payment_zipcode,
                 'state' => $this->order->payment_zone,
             ],
-            'shipping' => [
-                'name' => $this->order->shipping_customer_name,
-                'phone' => $this->order->shipping_telephone,
-                'address' => [
-                    'city' => $this->order->shipping_city,
-                    'country' => $this->order->shipping_country,
-                    'line1' => $this->order->shipping_address_1,
-                    'line2' => $this->order->shipping_address_2,
-                    'postal_code' => $this->order->shipping_zipcode,
-                    'state' => $this->order->shipping_zone,
-                ],
-            ],
+            'shipping' => $this->getShippingAddress(),
             'metadata' => [
                 'order_number' => $this->order->number,
             ],
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getShippingAddress():array
+    {
+        return [
+            'name' => $this->order->shipping_customer_name,
+            'phone' => $this->order->shipping_telephone,
+            'address' => [
+                'city' => $this->order->shipping_city,
+                'country' => $this->order->shipping_country,
+                'line1' => $this->order->shipping_address_1,
+                'line2' => $this->order->shipping_address_2,
+                'postal_code' => $this->order->shipping_zipcode,
+                'state' => $this->order->shipping_zone,
+            ],
+        ];
     }
 }
