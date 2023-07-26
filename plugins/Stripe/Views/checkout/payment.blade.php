@@ -141,6 +141,28 @@
           stripeForm.errors.cardholderName = 'Please fill out a cardholder name.'
         }
 
+        stripe.confirmPayment({
+          elements,
+          confirmParams: {
+            payment_method_data: {
+              billing_details: {
+                name: 'pushuo',
+                email: 'pushuo@qq.com',
+                phone: '1234567890',
+                address: {
+                  line1: '1234 Main Street',
+                  city: 'San Francisco',
+                  state: 'CA',
+                  country: 'US',
+                  postal_code: '94111',
+                },
+              },
+            },
+            // Make sure to change this to your payment completion page
+            return_url: "{{ url('checkout/success') }}?order_number=" + orderNumber,
+          },
+        });
+
         // if (Object.values(stripeForm.errors).every(e => e == '')) {
         const options = {
           name: stripeForm.form.cardholder_Name,
