@@ -11,7 +11,7 @@ class FileController extends Controller
         $file = $request->file('file');
         $type = $request->get('type');
 
-        $path = $file->store($type . '/', 'upload');
+        $path = $file->store($type, 'upload');
 
         $data = [
             'url'   => asset('upload/' . $path),
