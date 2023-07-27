@@ -8,10 +8,15 @@ class FileController extends Controller
 {
     public function store(UploadRequest $request)
     {
+        $request->validate([
+            "file" => "required|file",
+            "type" => "required|alpha_dash",
+        ]);
+
         $file = $request->file('file');
         $type = $request->get('type');
 
-        $path = $file->store($type . '/', 'upload');
+        $path = $file->store($type, 'upload');
 
         $data = [
             'url'   => asset('upload/' . $path),
