@@ -36,7 +36,7 @@ class StripePaymentService extends PaymentService
         }
         $currency = $this->order->currency_code;
 
-        if (!in_array($currency, self::ZERO_DECIMAL)) {
+        if (! in_array($currency, self::ZERO_DECIMAL)) {
             $total = round($this->order->total, 2) * 100;
         } else {
             $total = floor($this->order->total);
@@ -45,7 +45,7 @@ class StripePaymentService extends PaymentService
         $stripeCustomer = $this->createCustomer($tokenId);
 
         $stripeChargeParameters = [
-            'amount' => $total,
+            'amount'   => $total,
             'currency' => $currency,
             'metadata' => [
                 'order_number' => $this->order->number,
@@ -68,18 +68,18 @@ class StripePaymentService extends PaymentService
     private function createCustomer(string $source = ''): \Stripe\Customer
     {
         return \Stripe\Customer::create([
-            'source' => $source,
-            'email' => $this->order->email,
+            'source'      => $source,
+            'email'       => $this->order->email,
             'description' => setting('base.meta_title'),
-            'name' => $this->order->customer_name,
-            'phone' => $this->order->shipping_telephone,
-            'address' => [
-                'city' => $this->order->payment_city,
-                'country' => $this->order->payment_country,
-                'line1' => $this->order->payment_address_1,
-                'line2' => $this->order->payment_address_2,
+            'name'        => $this->order->customer_name,
+            'phone'       => $this->order->shipping_telephone,
+            'address'     => [
+                'city'        => $this->order->payment_city,
+                'country'     => $this->order->payment_country,
+                'line1'       => $this->order->payment_address_1,
+                'line2'       => $this->order->payment_address_2,
                 'postal_code' => $this->order->payment_zipcode,
-                'state' => $this->order->payment_zone,
+                'state'       => $this->order->payment_zone,
             ],
             'shipping' => $this->getShippingAddress(),
             'metadata' => [
@@ -91,18 +91,18 @@ class StripePaymentService extends PaymentService
     /**
      * @return array
      */
-    private function getShippingAddress():array
+    private function getShippingAddress(): array
     {
         return [
-            'name' => $this->order->shipping_customer_name,
-            'phone' => $this->order->shipping_telephone,
+            'name'    => $this->order->shipping_customer_name,
+            'phone'   => $this->order->shipping_telephone,
             'address' => [
-                'city' => $this->order->shipping_city,
-                'country' => $this->order->shipping_country,
-                'line1' => $this->order->shipping_address_1,
-                'line2' => $this->order->shipping_address_2,
+                'city'        => $this->order->shipping_city,
+                'country'     => $this->order->shipping_country,
+                'line1'       => $this->order->shipping_address_1,
+                'line2'       => $this->order->shipping_address_2,
                 'postal_code' => $this->order->shipping_zipcode,
-                'state' => $this->order->shipping_zone,
+                'state'       => $this->order->shipping_zone,
             ],
         ];
     }
