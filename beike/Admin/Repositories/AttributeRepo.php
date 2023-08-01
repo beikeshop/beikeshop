@@ -99,6 +99,10 @@ class AttributeRepo
 
     public static function deleteValue($id)
     {
+        $productIds = ProductAttribute::query()->where('attribute_value_id', $id)->pluck('product_id')->toArray();
+        if ($productIds) {
+            throw new \Exception(trans('admin/attribute.error_cannot_delete_product_used', ['product_ids' => implode(', ', $productIds)]));
+        }
         AttributeValue::query()->findOrFail($id)->delete();
     }
 
