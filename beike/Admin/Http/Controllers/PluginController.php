@@ -16,6 +16,7 @@ use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PluginController extends Controller
@@ -140,7 +141,7 @@ class PluginController extends Controller
     /**
      * 上传插件
      */
-    public function import(Request $request): array
+    public function import(Request $request): JsonResponse
     {
         $zipFile = $request->file('file');
         app('plugin')->import($zipFile);
@@ -151,10 +152,10 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @return array
+     * @return JsonResponse
      * @throws Exception
      */
-    public function install(Request $request, $code): array
+    public function install(Request $request, $code): JsonResponse
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::installPlugin($plugin);
@@ -165,10 +166,10 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @return array
+     * @return JsonResponse
      * @throws Exception
      */
-    public function uninstall(Request $request, $code): array
+    public function uninstall(Request $request, $code): JsonResponse
     {
         $plugin = app('plugin')->getPluginOrFail($code);
         PluginRepo::uninstallPlugin($plugin);
@@ -228,10 +229,9 @@ class PluginController extends Controller
     /**
      * @param Request $request
      * @param $code
-     * @return array
-     * @throws Exception
+     * @return JsonResponse
      */
-    public function updateStatus(Request $request, $code): array
+    public function updateStatus(Request $request, $code): JsonResponse
     {
         app('plugin')->getPluginOrFail($code);
         $status = $request->get('status');
