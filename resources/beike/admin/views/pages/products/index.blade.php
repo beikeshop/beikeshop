@@ -181,7 +181,8 @@
           sku: bk.getQueryString('sku'),
           model: bk.getQueryString('model'),
           active: bk.getQueryString('active'),
-          order_by: bk.getQueryString('order_by', ''),
+          sort: bk.getQueryString('sort', ''),
+          order: bk.getQueryString('order', ''),
         },
         selectedIds: [],
         productIds: @json($products->pluck('id')),
@@ -246,7 +247,8 @@
         },
 
         checkedOrderBy(orderBy) {
-          this.filter.order_by = orderBy;
+          this.filter.sort = orderBy.split(':')[0];
+          this.filter.order = orderBy.split(':')[1];
           location = bk.objectToUrlParams(this.filter, this.url)
         },
 
