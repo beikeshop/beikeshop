@@ -31,49 +31,72 @@ Vue.directive('batch-select', {
     area.innerHTML = ''
     el.appendChild(area)
     el.onmousedown = (e) => {
+      let isContentCenter = false
+      // 判断 鼠标按下时是否在元素上（div.content-center)
+      if (e.target.className === 'content-center') {
+        // 清空选中的图片
+        binding.value.selectImageIndex.length = 0
+        isContentCenter = true
+      }
+
+      // 获取 父元素 .image-list 在列表中的 index
+      const $image = $(e.target).parents('.image-list');
+
       // 获取鼠标按下时相对box的坐标
       const startX = e.clientX - elPos.x
       const startY = e.clientY - elPos.y
       // 判断鼠标按下后是否发生移动的标识
       let hasMove = false
 
-
       document.onmousemove = (e) => {
+        if ($image.index() != -1 && !$image.hasClass('active')) {
+          binding.value.selectImageIndex.length = 0
+          app.checkedImage($image.index())
+          binding.value.selectImageIndex.push($image.index())
+        }
+
         hasMove = true
         binding.value.setSelectStatus(true)
-        // 显示area
-        area.style.visibility = 'visible'
-        // 获取鼠标移动过程中指针的实时位置
-        const endX = e.clientX - elPos.x
-        const endY = e.clientY - elPos.y
-        // 这里使用绝对值是为了兼容鼠标从各个方向框选的情况
-        const width = Math.abs(endX - startX)
-        const height = Math.abs(endY - startY)
-        // 根据初始位置和实时位置计算出area的left、top、width、height
-        const left = Math.min(startX, endX)
-        const top = Math.min(startY, endY)
-        // 实时绘制
-        area.style.left = `${left}px`
-        area.style.top = `${top}px`
-        area.style.width = `${width}px`
-        area.style.height = `${height}px`
 
-        const areaTop = parseInt(top)
-        const areaRight = parseInt(left) + parseInt(width)
-        const areaBottom = parseInt(top) + parseInt(height)
-        const areaLeft = parseInt(left)
-        binding.value.selectImageIndex.length = 0
-        optionsXYWH.forEach((v, i) => {
-          const optionTop = v.y
-          const optionRight = v.x + v.w
-          const optionBottom = v.y + v.h
-          const optionLeft = v.x
-          if (!(areaTop > optionBottom || areaRight < optionLeft || areaBottom < optionTop || areaLeft > optionRight)) {
-            // 该指令的调用者可以监听到selectIdxs的变化
-            binding.value.selectImageIndex.push(i)
-          }
-        })
-
+        if (isContentCenter) {
+          // 显示area
+          area.style.visibility = 'visible'
+          // 获取鼠标移动过程中指针的实时位置
+          const endX = e.clientX - elPos.x
+          const endY = e.clientY - elPos.y
+          // 这里使用绝对值是为了兼容鼠标从各个方向框选的情况
+          const width = Math.abs(endX - startX)
+          const height = Math.abs(endY - startY)
+          // 根据初始位置和实时位置计算出area的left、top、width、height
+          const left = Math.min(startX, endX)
+          const top = Math.min(startY, endY)
+          // 实时绘制
+          area.style.left = `${left}px`
+          area.style.top = `${top}px`
+          area.style.width = `${width}px`
+          area.style.height = `${height}px`
+          const areaTop = parseInt(top)
+          const areaRight = parseInt(left) + parseInt(width)
+          const areaBottom = parseInt(top) + parseInt(height)
+          const areaLeft = parseInt(left)
+          binding.value.selectImageIndex.length = 0
+          optionsXYWH.forEach((v, i) => {
+            const optionTop = v.y
+            const optionRight = v.x + v.w
+            const optionBottom = v.y + v.h
+            const optionLeft = v.x
+            if (!(areaTop > optionBottom || areaRight < optionLeft || areaBottom < optionTop || areaLeft > optionRight)) {
+              // 该指令的调用者可以监听到selectIdxs的变化
+              binding.value.selectImageIndex.push(i)
+            }
+          })
+        } else {
+          $('.select-tip').css({
+            left: `${e.clientX + 10}px`,
+            top: `${e.clientY + 10}px`,
+            display: 'flex'
+          })
+        }
       }
 
       document.onmouseup = (e) => {
@@ -85,8 +108,17 @@ Vue.directive('batch-select', {
             binding.value.setSelectStatus(false)
           }, 100);
         }
+
+        const [path, name] = [$(e.target).attr('path'), $(e.target).attr('name')]
+
+        if (path) {
+          binding.value.imgMove(path, name, binding.value.selectImageIndex)
+        }
+
+        $('.select-tip').hide().html('')
         // 恢复以下数据
         hasMove = false
+        isContentCenter = false
         area.style.visibility = 'hidden'
         area.style.left = 0
         area.style.top = 0
@@ -94,6 +126,17 @@ Vue.directive('batch-select', {
         area.style.height = 0
         return false
       }
+
+      setTimeout(() => {
+        const selectImages = binding.value.selectImageIndex.map(v => app.images[v])
+        selectImages.forEach((v, i) => {
+          $('.select-tip').append(`<div class="s-img">${v.mime == 'video/mp4' ? '<i class="el-icon-video-play""></i>' : '<img src=' + v.url + '></img>'}</div>`)
+        })
+
+        if (selectImages.length) {
+          $('.select-tip').append(`<div class="quantity">${selectImages.length}</div>`)
+        }
+      }, 100);
     }
   },
   // update: (el, binding) => {}
