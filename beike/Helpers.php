@@ -767,3 +767,24 @@ function check_license(): bool
 
     return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
 }
+
+/**
+ * @param $folderPath
+ * @param $zipPath
+ * @return ZipArchive
+ */
+function zip_folder($folderPath, $zipPath): ZipArchive
+{
+    $newZip = new ZipArchive;
+    if($newZip->open($zipPath, ZipArchive::CREATE) === true) {
+        $dir = opendir($folderPath);
+        while($file = readdir($dir)) {
+            if(is_file($folderPath . $file)) {
+                $newZip->addFile($folderPath . $file, $file);
+            }
+        }
+        $newZip->close();
+    }
+
+    return $newZip;
+}
