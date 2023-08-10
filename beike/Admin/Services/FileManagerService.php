@@ -161,6 +161,20 @@ class FileManagerService
     }
 
     /**
+     * 批量移动图片文件
+     *
+     * @param $images
+     * @param $destPath
+     */
+    public function moveFiles($images, $destPath)
+    {
+        foreach ($images as $image) {
+            $sourceDirPath = public_path("catalog{$this->basePath}{$image}");
+            File::move($sourceDirPath, $destPath);
+        }
+    }
+
+    /**
      * 删除文件或文件夹
      *
      * @param $filePath

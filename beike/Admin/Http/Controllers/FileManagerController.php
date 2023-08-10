@@ -151,6 +151,25 @@ class FileManagerController extends Controller
     }
 
     /**
+     * 移动多个图片文件
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function moveFiles(Request $request): JsonResponse
+    {
+        try {
+            $images     = $request->get('images');
+            $destPath   = $request->get('dest_path');
+            (new FileManagerService)->moveFiles($images, $destPath);
+
+            return json_success(trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
      * 上传文件
      * POST      /admin/file_manager/upload
      *
