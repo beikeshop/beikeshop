@@ -13,6 +13,7 @@ use Beike\Services\CurrencyService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -787,4 +788,22 @@ function zip_folder($folderPath, $zipPath): ZipArchive
     }
 
     return $newZip;
+}
+
+/**
+ * 移动文件夹
+ *
+ * @param $dir
+ * @param $dirNew
+ */
+function move_dir($dir, $dirNew)
+{
+    $dirNewPath = $dirNew . basename($dir);
+    File::makeDirectory($dirNewPath, 0777, false);
+    $dirFiles = File::files($dir);
+    foreach ($dirFiles as $dirFile) {
+        $filename = basename($dirFile);
+        File::move($dirFile, $dirNewPath . '/' . $filename);
+    }
+    File::deleteDirectory($dir, $preserve = false);
 }

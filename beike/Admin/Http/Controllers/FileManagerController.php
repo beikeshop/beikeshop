@@ -141,8 +141,9 @@ class FileManagerController extends Controller
     {
         try {
             $sourcePath = $request->get('source_path');
-            $destPath = $request->get('dest_path');
+            $destPath   = $request->get('dest_path');
             (new FileManagerService)->moveDirectory($sourcePath, $destPath);
+
             return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
             return json_fail($e->getMessage());

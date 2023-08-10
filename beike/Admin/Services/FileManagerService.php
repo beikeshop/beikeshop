@@ -31,7 +31,7 @@ class FileManagerService
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
 
-        $directories     = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
+        $directories = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
 
         $result = [];
         foreach ($directories as $directory) {
@@ -143,10 +143,18 @@ class FileManagerService
             throw new \Exception(trans('admin/file_manager.empty_dest_path'));
         }
 
-        $sourcePath = $this->basePath . $sourcePath;
-        $destPath = $this->basePath . $destPath;
-        if (! File::exists($destPath)) {
-            File::move($sourcePath, $destPath);
+        $folderName    = basename($sourcePath);
+        $sourceDirPath = public_path("catalog{$this->basePath}{$sourcePath}/");
+
+        if ($destPath != '/') {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}/");
+        } else {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}");
+        }
+
+        $destFullPath = public_path("catalog{$this->basePath}{$destPath}/{$folderName}");
+        if (! File::exists($destFullPath)) {
+            move_dir($sourceDirPath, $destDirPath);
         } else {
             throw new \Exception(trans('admin/file_manager.target_dir_exist'));
         }
@@ -275,7 +283,7 @@ class FileManagerService
         $realPath = $this->fileBasePath . $filePath;
 
         $mime = '';
-        if(file_exists($realPath)) {
+        if (file_exists($realPath)) {
             $mime = mime_content_type($realPath);
         }
 
