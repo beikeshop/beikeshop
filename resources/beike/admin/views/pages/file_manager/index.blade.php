@@ -364,7 +364,7 @@
             type: "warning"
           }).then(() => {
             console.log(path, dropPath, dropName);
-            $http.post('file_manager/move', {source_path:dropPath, dest_path:dropName }).then((res) => {
+            $http.post('file_manager/move', {source_path:path, dest_path:dropPath }).then((res) => {
               console.log(res);
             })
           }).catch(() => {
