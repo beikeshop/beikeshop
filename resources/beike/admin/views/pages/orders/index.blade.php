@@ -34,13 +34,13 @@
           <el-form-item label="{{ __('order.created_at') }}">
             <el-form-item>
               <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" v-model="filter.start" style="width: 100%;">
+                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(1)" v-model="filter.start" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
             <span>-</span>
             <el-form-item>
               <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" v-model="filter.end" style="width: 100%;">
+                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(0)" v-model="filter.end" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
           </el-form-item>
@@ -129,11 +129,38 @@
         },
       },
 
+      watch: {
+        "filter.start": {
+          handler(newVal,oldVal) {
+            if(!newVal) {
+              this.filter.start = ''
+            }
+          }
+        },
+        "filter.end": {
+          handler(newVal,oldVal) {
+            if(!newVal) {
+              this.filter.end = ''
+            }
+          }
+        }
+      },
+
       created() {
         bk.addFilterCondition(this);
       },
 
       methods: {
+        pickerDate(type) {
+          if(this.filter.end && this.filter.start > this.filter.end) {
+             if(type) {
+              this.filter.start = ''
+            } else {
+              this.filter.end = ''
+            }
+          }
+        },
+
         search() {
           location = bk.objectToUrlParams(this.filter, this.url)
         },
