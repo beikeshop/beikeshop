@@ -11,6 +11,8 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Support\Facades\File;
+
 class FileManagerService
 {
     protected $fileBasePath = '';
@@ -126,6 +128,31 @@ class FileManagerService
     }
 
     /**
+     * 移动文件夹
+     *
+     * @param $sourcePath
+     * @param $destPath
+     * @throws \Exception
+     */
+    public function moveDirectory($sourcePath, $destPath)
+    {
+        if (empty($sourcePath)) {
+            throw new \Exception(trans('admin/file_manager.empty_source_path'));
+        }
+        if (empty($destPath)) {
+            throw new \Exception(trans('admin/file_manager.empty_dest_path'));
+        }
+
+        $sourcePath = $this->basePath . $sourcePath;
+        $destPath = $this->basePath . $destPath;
+        if (! File::exists($destPath)) {
+            File::move($sourcePath, $destPath);
+        } else {
+            throw new \Exception(trans('admin/file_manager.target_dir_exist'));
+        }
+    }
+
+    /**
      * 删除文件或文件夹
      *
      * @param $filePath
@@ -185,7 +212,15 @@ class FileManagerService
         @rename($originPath, $newPath);
     }
 
-    public function uploadFile($file, $savePath, $originName)
+    /**
+     * 上传文件
+     *
+     * @param $file
+     * @param $savePath
+     * @param $originName
+     * @return mixed
+     */
+    public function uploadFile($file, $savePath, $originName): mixed
     {
         $savePath = $this->basePath . $savePath;
 

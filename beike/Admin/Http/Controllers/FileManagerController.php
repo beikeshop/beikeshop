@@ -7,6 +7,7 @@ use Beike\Admin\Services\FileManagerService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FileManagerController extends Controller
 {
@@ -125,6 +126,24 @@ class FileManagerController extends Controller
             (new FileManagerService)->deleteDirectoryOrFile($folderName);
 
             return json_success(trans('common.deleted_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * 移动目录
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function moveDirectories(Request $request): JsonResponse
+    {
+        try {
+            $sourcePath = $request->get('source_path');
+            $destPath = $request->get('dest_path');
+            (new FileManagerService)->moveDirectory($sourcePath, $destPath);
+            return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }
