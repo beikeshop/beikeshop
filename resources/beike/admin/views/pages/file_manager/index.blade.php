@@ -364,6 +364,9 @@
             type: "warning"
           }).then(() => {
             console.log(path, dropPath, dropName);
+            $http.post('file_manager/move', {source_path:dropPath, dest_path:dropName }).then((res) => {
+              console.log(res);
+            })
           }).catch(() => {
             this.treeData = this.copyTreeData
           });
