@@ -793,17 +793,18 @@ function zip_folder($folderPath, $zipPath): ZipArchive
 /**
  * 移动文件夹
  *
- * @param $dir
- * @param $dirNew
+ * @param $sourcePath
+ * @param $destinationPath
  */
-function move_dir($dir, $dirNew)
+function move_dir($sourcePath, $destinationPath)
 {
-    $dirNewPath = $dirNew . basename($dir);
-    File::makeDirectory($dirNewPath, 0777, false);
-    $dirFiles = File::files($dir);
-    foreach ($dirFiles as $dirFile) {
-        $filename = basename($dirFile);
-        File::move($dirFile, $dirNewPath . '/' . $filename);
+    $baseSourceName = basename($sourcePath);
+    foreach (File::allFiles($sourcePath) as $file) {
+        $relativePath = $file->getRelativePath();
+        $newBasePath  = "{$destinationPath}{$baseSourceName}/{$relativePath}/";
+        $newFilePath  = $newBasePath . $file->getFilename();
+        File::ensureDirectoryExists($newBasePath);
+        File::move($file->getPathname(), $newFilePath);
     }
-    File::deleteDirectory($dir, $preserve = false);
+    File::deleteDirectory($sourcePath);
 }
