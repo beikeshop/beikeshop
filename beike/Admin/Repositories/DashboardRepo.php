@@ -25,17 +25,20 @@ class DashboardRepo
      */
     public static function getProductData(): array
     {
-        $today      = ProductRepo::getBuilder(['created_start' => today()->subDay(), 'created_end' => today()])->count();
-        $yesterday  = ProductRepo::getBuilder(['created_start' => today()->subDays(2), 'created_end' => today()->subDay()])->count();
+        $today      = ProductRepo::getBuilder(['created_start' => today()->startOfDay(), 'created_end' => today()->endOfDay()])->count();
+        $yesterday  = ProductRepo::getBuilder(['created_start' => today()->subDay()->startOfDay(), 'created_end' => today()->subDay()->endOfDay()])->count();
         $difference = $today - $yesterday;
-        if ($difference && $yesterday) {
+        if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
-        } else {
+        } elseif (empty($difference)) {
             $percentage = 0;
+        } else {
+            $percentage = 100;
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -50,14 +53,17 @@ class DashboardRepo
         $today      = 10;
         $yesterday  = 8;
         $difference = $today - $yesterday;
-        if ($difference && $yesterday) {
+        if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
-        } else {
+        } elseif (empty($difference)) {
             $percentage = 0;
+        } else {
+            $percentage = 100;
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -69,17 +75,20 @@ class DashboardRepo
      */
     public static function getOrderData(): array
     {
-        $today      = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
-        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->count();
+        $today      = OrderRepo::getListBuilder(['start' => today()->startOfDay(), 'end' => today()->endOfDay()])->count();
+        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->count();
         $difference = $today - $yesterday;
-        if ($difference && $yesterday) {
+        if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
-        } else {
+        } elseif (empty($difference)) {
             $percentage = 0;
+        } else {
+            $percentage = 100;
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -91,17 +100,20 @@ class DashboardRepo
      */
     public static function getCustomerData(): array
     {
-        $today      = CustomerRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->count();
-        $yesterday  = CustomerRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->count();
+        $today      = CustomerRepo::getListBuilder(['start' => today()->startOfDay(), 'end' => today()->endOfDay()])->count();
+        $yesterday  = CustomerRepo::getListBuilder(['start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->count();
         $difference = $today - $yesterday;
-        if ($difference && $yesterday) {
+        if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
+        } elseif (empty($difference)) {
+            $percentage = 0;
         } else {
             $percentage = 0;
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -113,17 +125,20 @@ class DashboardRepo
      */
     public static function getTotalData(): array
     {
-        $today      = OrderRepo::getListBuilder(['start' => today()->subDay(), 'end' => today()])->sum('total');
-        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDays(2), 'end' => today()->subDay()])->sum('total');
+        $today      = OrderRepo::getListBuilder(['start' => today()->startOfDay(), 'end' => today()->endOfDay()])->sum('total');
+        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->sum('total');
         $difference = $today - $yesterday;
-        if ($difference && $yesterday) {
+        if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
-        } else {
+        } elseif (empty($difference)) {
             $percentage = 0;
+        } else {
+            $percentage = 100;
         }
 
         return [
-            'total'      => currency_format($today),
+            'today'      => currency_format($today),
+            'yesterday'  => currency_format($yesterday),
             'percentage' => $percentage,
         ];
     }

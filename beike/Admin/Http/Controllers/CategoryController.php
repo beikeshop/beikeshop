@@ -48,7 +48,7 @@ class CategoryController extends Controller
 
     /**
      * 删除分类
-     * @param Request $request
+     * @param Request  $request
      * @param Category $category
      * @return JsonResponse
      * @throws \Exception

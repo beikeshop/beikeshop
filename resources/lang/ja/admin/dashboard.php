@@ -15,6 +15,7 @@ return [
     'order_total'   => '注文金額',
     'customer_new'  => 'ユーザーを追加',
     'order_amount'  => '売上',
+    'today'         => '今日',
     'yesterday'     => '昨日',
     'day_before'    => '前日',
 

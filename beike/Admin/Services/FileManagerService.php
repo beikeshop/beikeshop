@@ -11,6 +11,8 @@
 
 namespace Beike\Admin\Services;
 
+use Illuminate\Support\Facades\File;
+
 class FileManagerService
 {
     protected $fileBasePath = '';
@@ -29,7 +31,7 @@ class FileManagerService
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
 
-        $directories     = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
+        $directories = glob("{$currentBasePath}/*", GLOB_ONLYDIR);
 
         $result = [];
         foreach ($directories as $directory) {
@@ -126,6 +128,74 @@ class FileManagerService
     }
 
     /**
+     * 移动文件夹
+     *
+     * @param $sourcePath
+     * @param $destPath
+     * @throws \Exception
+     */
+    public function moveDirectory($sourcePath, $destPath)
+    {
+        if (empty($sourcePath)) {
+            throw new \Exception(trans('admin/file_manager.empty_source_path'));
+        }
+        if (empty($destPath)) {
+            throw new \Exception(trans('admin/file_manager.empty_dest_path'));
+        }
+
+        $folderName    = basename($sourcePath);
+        $sourceDirPath = public_path("catalog{$this->basePath}{$sourcePath}/");
+
+        if ($destPath != '/') {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}/");
+        } else {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}");
+        }
+
+        $destFullPath = public_path("catalog{$this->basePath}{$destPath}/{$folderName}");
+        if (! File::exists($destFullPath)) {
+            move_dir($sourceDirPath, $destDirPath);
+        } else {
+            throw new \Exception(trans('admin/file_manager.target_dir_exist'));
+        }
+    }
+
+    /**
+     * 批量移动图片文件
+     *
+     * @param $images
+     * @param $destPath
+     */
+    public function moveFiles($images, $destPath)
+    {
+        if ($destPath != '/') {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}/");
+        } else {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}");
+        }
+
+        foreach ($images as $image) {
+            $sourceDirPath = public_path("{$this->basePath}{$image}");
+            File::move($sourceDirPath, $destDirPath . basename($sourceDirPath));
+        }
+    }
+
+    /**
+     * @param $imagePath
+     * @return string
+     */
+    public function zipFolder($imagePath): string
+    {
+        $realPath = public_path("catalog{$imagePath}");
+        $dirName  = basename($realPath);
+        $zipName  = $dirName . '-' . date('Ymd') . '.zip';
+        $zipPath  = public_path("{$zipName}");
+        zip_folder($realPath, $zipPath);
+
+        return $zipPath;
+    }
+
+    /**
      * 删除文件或文件夹
      *
      * @param $filePath
@@ -185,7 +255,15 @@ class FileManagerService
         @rename($originPath, $newPath);
     }
 
-    public function uploadFile($file, $savePath, $originName)
+    /**
+     * 上传文件
+     *
+     * @param $file
+     * @param $savePath
+     * @param $originName
+     * @return mixed
+     */
+    public function uploadFile($file, $savePath, $originName): mixed
     {
         $savePath = $this->basePath . $savePath;
 
@@ -240,7 +318,7 @@ class FileManagerService
         $realPath = $this->fileBasePath . $filePath;
 
         $mime = '';
-        if(file_exists($realPath)) {
+        if (file_exists($realPath)) {
             $mime = mime_content_type($realPath);
         }
 

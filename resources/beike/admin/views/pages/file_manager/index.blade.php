@@ -18,7 +18,7 @@
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   @if (locale() != 'zh_cn')
-    <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
+  <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif
   <title>beike filemanager</title>
   <script>
@@ -39,121 +39,135 @@
 
 <body class="page-filemanager">
   <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak ref="splitPane">
+    <div class="select-tip"></div>
     @if (!is_mobile())
-      <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
-        <el-tree :props="defaultProps" node-key="path" :data="treeData" :current-node-key="folderCurrent"
-          :default-expanded-keys="defaultkeyarr" :expand-on-click-node="false" highlight-current ref="tree"
-          @node-click="handleNodeClick" @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
-          @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
-          <div class="custom-tree-node" slot-scope="{ node, data }">
-            <div>@{{ node.label }}</div>
-            {{-- v-if="node.isCurrent" --}}
-            <div class="right">
-              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}" placement="top">
-                <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
-                    class="el-icon-circle-plus-outline"></i></span>
-              </el-tooltip>
+    <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
+      <el-tree
+        :props="defaultProps"
+        node-key="path"
+        :data="treeData"
+        :current-node-key="folderCurrent"
+        :default-expanded-keys="defaultkeyarr"
+        :expand-on-click-node="false"
+        highlight-current ref="tree"
+        draggable
+        :allow-drop="allowDrop"
+        @node-drag-start="handleDragStart"
+        @node-drop="handleDrop"
+        @node-click="handleNodeClick"
+        @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
+        @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
+        <div class="custom-tree-node" slot-scope="{ node, data }" :path="data.path" :name="data.name">
+          <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
+          {{-- v-if="node.isCurrent" --}}
+          <div class="right">
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.download') }}"
+              placement="top">
+              <span @click.stop="() => {openInputBox('download', node, data)}"><i
+                class="el-icon-download"></i></span>
+            </el-tooltip>
 
-              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
-                <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
-                    class="el-icon-edit"></i></span>
-              </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
+              placement="top">
+              <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
+                  class="el-icon-circle-plus-outline"></i></span>
+            </el-tooltip>
 
-              <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
-                <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
-                    class="el-icon-delete"></i></span>
-              </el-tooltip>
-            </div>
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
+              <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
+                  class="el-icon-edit"></i></span>
+            </el-tooltip>
+
+            <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
+              <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
+                  class="el-icon-delete"></i></span>
+            </el-tooltip>
           </div>
-        </el-tree>
+        </div>
+      </el-tree>
+    </div>
+    <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
+    <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
+      <div class="content-head">
+        <div class="left d-lg-flex">
+          <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
+            :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
+          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view" @click="viewImages">{{
+            __('common.view') }}</el-link>
+          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-document-copy" @click="copyLink">{{
+            __('admin/file_manager.copy_link') }}</el-link>
+          <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile" icon="el-icon-delete">
+            {{ __('common.delete') }}</el-link>
+          <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
+            @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
+          <el-link v-if="isMultiple" :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()"
+            icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
+          @hook('admin.file_manager.content.head.btns.after')
+        </div>
+        <div class="right">
+          <el-popover placement="bottom" width="260" class="me-2" trigger="click">
+            <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
+            <div class="mb-3">
+              <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
+              <el-radio-group v-model="filter.sort" size="small">
+                <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
+                <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
+              </el-radio-group>
+            </div>
+
+            <div class="mb-3">
+              <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
+              <el-radio-group v-model="filter.order" size="small">
+                <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
+                <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
+              </el-radio-group>
+            </div>
+            <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
+          </el-popover>
+          <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{
+            __('admin/file_manager.upload_files') }}</el-button>
+        </div>
       </div>
-      <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
-      <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
-        <div class="content-head">
-          <div class="left d-lg-flex">
-            <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked" :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
-            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view"
-              @click="viewImages">{{ __('common.view') }}</el-link>
-            <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile"
-              icon="el-icon-delete">{{ __('common.delete') }}</el-link>
-            <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
-              @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
-            <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length"
-              @click="selectAll()" icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
-             @hook('admin.file_manager.content.head.btns.after')
+      <div v-if="images.length" class="content-center"
+        v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus, imgMove: imgMove }">
+        <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index"
+          @click="checkedImage(index)">
+          <div class="img">
+            <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
+            <img v-else :src="file.url" draggable="false" />
           </div>
-          <div class="right">
-            <el-popover
-              placement="bottom"
-              width="260"
-              class="me-2"
-              trigger="click">
-              <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
-              <div class="mb-3">
-                <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
-                <el-radio-group v-model="filter.sort" size="small">
-                  <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
-                  <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
-                </el-radio-group>
-              </div>
-
-              <div class="mb-3">
-                <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
-                <el-radio-group v-model="filter.order" size="small">
-                  <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
-                  <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
-                </el-radio-group>
-              </div>
-              <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
-            </el-popover>
-            <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{ __('admin/file_manager.upload_files') }}</el-button>
-          </div>
-        </div>
-        <div v-if="images.length" class="content-center"
-          v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus }">
-          <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images"
-            :key="index" @click="checkedImage(index)">
-            <div class="img">
-              <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
-              <img v-else :src="file.url">
-            </div>
-            <div class="text">
-              <span :title="file.name">@{{ file.name }}</span>
-              <i v-if="file.selected" class="el-icon-check"></i>
-            </div>
-          </div>
-        </div>
-        <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
-        <div class="content-footer">
-          <div class="right"></div>
-          <div class="pagination-wrap">
-            <el-pagination
-              @size-change="pageSizeChange"
-              @current-change="pageCurrentChange"
-              :current-page="image_page"
-              :page-sizes="[20, 40, 60, 80, 100]"
-              :page-size="20"
-              layout="total, sizes, prev, pager, next, jumper"
-              :total="image_total">
-            </el-pagination>
-
-          </div>
-          <div class="right">
-
+          <div class="text">
+            <span :title="file.name">@{{ file.name }}</span>
+            <i v-if="file.selected" class="el-icon-check"></i>
           </div>
         </div>
       </div>
+      <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
+      <div class="content-footer">
+        <div class="right"></div>
+        <div class="pagination-wrap">
+          <el-pagination @size-change="pageSizeChange" @current-change="pageCurrentChange" :current-page="image_page"
+            :page-sizes="[20, 40, 60, 80, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper"
+            :total="image_total">
+          </el-pagination>
+
+        </div>
+        <div class="right">
+
+        </div>
+      </div>
+    </div>
     @else
     <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
     @endif
 
-    <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show" width="500px"
-      @close="uploadFileDialogClose" custom-class="upload-wrap">
-      <el-upload class="photos-upload" target="photos-upload" id="photos-upload" element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
+    <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show"
+      width="500px" @close="uploadFileDialogClose" custom-class="upload-wrap">
+      <el-upload class="photos-upload" target="photos-upload" id="photos-upload"
+        element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
         element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
-        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp" :before-upload="beforePhotoUpload"
-        :on-success="handlePhotoSuccess" :on-change="handleUploadChange" :http-request="uploadFile"
-        :multiple="true">
+        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp"
+        :on-change="handleUploadChange" :http-request="uploadFile" :multiple="true">
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">{{ __('admin/file_manager.click_upload') }}</div>
       </el-upload>
@@ -163,15 +177,20 @@
             <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
             <div class="status">
               <span v-if="image.status == 'complete'" class="text-success">{{ __('admin/file_manager.finish') }}</span>
-              <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail') }}</span>
+              <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail')
+                }}</span>
               <span v-else>{{ __('admin/file_manager.uploading') }}</span>
             </div>
           </div>
-          <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'" :show-text="false" :stroke-width="4"></el-progress>
+          <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'"
+            :show-text="false" :stroke-width="4"></el-progress>
           <div v-if="image.fail_text" class="mt-1 text-danger" v-text="image.fail_text"></div>
         </div>
       </div>
     </el-dialog>
+
+    <div class="drop_file_hint d-none">{!! __('admin/file_manager.drop_file_hint') !!}</div>
+    <div class="drop_folder_hint d-none">{!! __('admin/file_manager.drop_folder_hint') !!}</div>
   </div>
 
   <script>
@@ -190,8 +209,9 @@
         triggerLength: 10,
         isShift: false,
         mime: @json(request('mime')),
+        isMultiple: {{ request('is_multiple', true) }}, // 是否允许多选
         loading: false,
-        isBatchSelect: false,
+        isBatchSelect: false, // 当前是否正在是否批量选择
         selectImageIndex: [],
         filter: {
           sort: 'created',
@@ -203,6 +223,8 @@
           path: '/',
           children: @json($directories)
         }],
+
+        copyTreeData: [], // 用于恢复树形结构
 
         defaultProps: {
           children: 'children',
@@ -259,7 +281,49 @@
           deep: true
         }
       },
-      // 组件方法
+
+      created() {
+        const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
+        const folderCurrent = sessionStorage.getItem('folderCurrent');
+
+        if (defaultkeyarr) {
+          this.defaultkeyarr = defaultkeyarr.split(',');
+        }
+
+        if (folderCurrent) {
+          this.folderCurrent = folderCurrent;
+        }
+      },
+
+      // 实例被挂载后调用
+      mounted() {
+        this.loadData()
+
+        if (this.isMultiple) {
+          // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
+          document.addEventListener('keydown', (e) => {
+            this.isShift = e.shiftKey;
+            this.isCtrl = e.ctrlKey || e.metaKey;
+          })
+
+          // 获取键盘事件 是否松开 shift/ctrl 键
+          document.addEventListener('keyup', (e) => {
+            this.isShift = e.shiftKey;
+            this.isCtrl = e.ctrlKey || e.metaKey;
+          })
+
+          // 判断鼠标是否点击 .image-list 元素
+          document.addEventListener('click', (e) => {
+            if (this.isBatchSelect) return;
+            const targets = ['filemanager-navbar', 'content-center']
+            if (targets.indexOf(e.target.className) > -1) {
+              this.selectImageIndex = [];
+              this.images.map(e => e.selected = false)
+            }
+          })
+        }
+      },
+
       methods: {
         handleNodeClick(e, node) {
           if (e.path == this.folderCurrent) {
@@ -298,16 +362,62 @@
           this.uploadFileDialog.show = true
         },
 
-        beforePhotoUpload(file) {
-          // this.editing.photoLoading = true;
+        handleDrop(draggingNode, dropNode, dropType, ev) {
+          const name = draggingNode.data.name;
+          const path = draggingNode.data.path;
+          const dropPath = dropNode.data.path;
+          const dropName = dropNode.data.name;
+
+          $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropPath);
+          this.$confirm($('.drop_folder_hint').html(),"{{ __('common.text_hint') }}", {
+            dangerouslyUseHTMLString: true,
+            type: "warning"
+          }).then(() => {
+            $http.post('file_manager/move_directories', {source_path:path, dest_path:dropPath }).then((res) => {
+              // 修改path
+              dropNode.data.children[dropNode.data.children.length - 1].path = dropPath + '/' + name;
+              // 如果当前激活目录是移动的目录，则修改当前激活目录为移动后的目录 path
+              if (this.folderCurrent == path) {
+                this.folderCurrent = dropPath + '/' + name;
+                sessionStorage.setItem('folderCurrent', this.folderCurrent);
+              }
+            })
+          }).catch(() => {
+            this.treeData = this.copyTreeData
+          });
         },
 
-        handlePhotoSuccess(data) {
-          // this.editing.photoLoading = false;
+        handleDragStart(e) {
+          this.copyTreeData = JSON.parse(
+            JSON.stringify(this.treeData)
+          );
+        },
 
-          // if (data.images) {
-          //   this.images.push(data.images);
-          // }
+        // allowDrop
+        allowDrop(draggingNode, dropNode, type) {
+          if (type == 'prev' || type == 'next') {
+            return;
+          }
+
+          return true;
+        },
+
+        // 图片拖动到文件夹
+        imgMove(path, name, selectImageIndex) {
+          console.log(path, selectImageIndex);
+          $('.drop_file_hint').find('span:first-child').text(selectImageIndex.length).siblings('span').text(name);
+          this.$confirm($('.drop_file_hint').html(),"{{ __('common.text_hint') }}", {
+            dangerouslyUseHTMLString:true,
+            type: "warning"
+          }).then(() => {
+            // console.log(path, dropPath, dropName);
+            const imagePaths = this.images.filter((item, index) => selectImageIndex.includes(index)).map(e => e.path);
+            console.log(path, imagePaths);
+
+            $http.post('file_manager/move_files', {images:imagePaths, dest_path:path }).then((res) => {
+              this.loadData()
+            })
+          })
         },
 
         // 文件上传
@@ -538,8 +648,25 @@
           });
         },
 
+        copyLink() {
+          const selectedImages = this.images.filter(e => e.selected);
+          const text = selectedImages.map(e => e.origin_url).join('\n');
+          const input = document.createElement('textarea');
+          input.value = text;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          layer.msg('{{ __('admin/file_manager.copy_success') }}')
+        },
+
         openInputBox(type, node, data) {
           let fileSuffix, fileName = '';
+
+          if (type == 'download') {
+            window.open(`{{ admin_route('file_manager.export') }}?path=${data.path}`);
+            return;
+          }
 
           if (type == 'image') {
             const image = this.images[this.selectImageIndex].name;
@@ -629,44 +756,6 @@
           }
         }
         @stack('admin.file_manager.vue.method')
-      },
-
-      created() {
-        const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
-        const folderCurrent = sessionStorage.getItem('folderCurrent');
-
-        if (defaultkeyarr) {
-          this.defaultkeyarr = defaultkeyarr.split(',');
-        }
-
-        if (folderCurrent) {
-          this.folderCurrent = folderCurrent;
-        }
-      },
-      // 实例被挂载后调用
-      mounted() {
-        this.loadData()
-        // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
-        document.addEventListener('keydown', (e) => {
-          this.isShift = e.shiftKey;
-          this.isCtrl = e.ctrlKey || e.metaKey;
-        })
-
-        // 获取键盘事件 是否松开 shift/ctrl 键
-        document.addEventListener('keyup', (e) => {
-          this.isShift = e.shiftKey;
-          this.isCtrl = e.ctrlKey || e.metaKey;
-        })
-
-        // 判断鼠标是否点击 .image-list 元素
-        document.addEventListener('click', (e) => {
-          if (this.isBatchSelect) return;
-          const targets = ['filemanager-navbar', 'content-center']
-          if (targets.indexOf(e.target.className) > -1) {
-            this.selectImageIndex = [];
-            this.images.map(e => e.selected = false)
-          }
-        })
       },
     })
   </script>

@@ -110,7 +110,7 @@ class PagesController extends Controller
      * 删除单页
      *
      * @param Request $request
-     * @param int $pageId
+     * @param int     $pageId
      * @return JsonResponse
      */
     public function destroy(Request $request, int $pageId): JsonResponse

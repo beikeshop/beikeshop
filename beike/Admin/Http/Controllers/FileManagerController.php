@@ -7,6 +7,7 @@ use Beike\Admin\Services\FileManagerService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class FileManagerController extends Controller
 {
@@ -27,10 +28,10 @@ class FileManagerController extends Controller
      * 获取某个文件夹下面的文件列表
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return mixed
      * @throws Exception
      */
-    public function getFiles(Request $request): JsonResponse
+    public function getFiles(Request $request): mixed
     {
         $baseFolder = $request->get('base_folder');
         $sort       = $request->get('sort', 'created');
@@ -46,9 +47,9 @@ class FileManagerController extends Controller
     /**
      * 获取文件夹列表
      * @param Request $request
-     * @return JsonResponse
+     * @return mixed
      */
-    public function getDirectories(Request $request): JsonResponse
+    public function getDirectories(Request $request): mixed
     {
         $baseFolder = $request->get('base_folder');
 
@@ -131,13 +132,73 @@ class FileManagerController extends Controller
     }
 
     /**
+     * 移动目录
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function moveDirectories(Request $request): JsonResponse
+    {
+        try {
+            $sourcePath = $request->get('source_path');
+            $destPath   = $request->get('dest_path');
+            (new FileManagerService)->moveDirectory($sourcePath, $destPath);
+
+            return json_success(trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * 移动多个图片文件
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function moveFiles(Request $request): JsonResponse
+    {
+        try {
+            $images   = $request->get('images');
+            $destPath = $request->get('dest_path');
+            (new FileManagerService)->moveFiles($images, $destPath);
+
+            return json_success(trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * 压缩文件夹下载ZIP
+     *
+     * @param Request $request
+     */
+    public function exportZip(Request $request)
+    {
+        try {
+            $imagePath = $request->get('path');
+            $zipFile   = (new FileManagerService)->zipFolder($imagePath);
+
+            header('Content-Type: application/zip');
+            header('Content-Disposition: attachment; filename="' . basename($zipFile) . '"');
+            header('Content-Length: ' . filesize($zipFile));
+            readfile($zipFile);
+            unlink($zipFile);
+
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
      * 上传文件
      * POST      /admin/file_manager/upload
      *
      * @param UploadRequest $request
-     * @return JsonResponse
+     * @return array
      */
-    public function uploadFiles(UploadRequest $request): JsonResponse
+    public function uploadFiles(UploadRequest $request): array
     {
         $file     = $request->file('file');
         $savePath = $request->get('path');

@@ -49,7 +49,7 @@ class LanguageController extends Controller
 
     /**
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      * @return JsonResponse
      * @throws Exception
      */

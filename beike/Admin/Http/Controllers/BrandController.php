@@ -60,7 +60,7 @@ class BrandController extends Controller
 
     /**
      * @param Request $request
-     * @param Brand $brand
+     * @param Brand   $brand
      * @return JsonResponse
      * @throws Exception
      */
@@ -80,7 +80,7 @@ class BrandController extends Controller
 
     /**
      * @param Request $request
-     * @param Brand $brand
+     * @param Brand   $brand
      * @return JsonResponse
      */
     public function destroy(Request $request, Brand $brand): JsonResponse

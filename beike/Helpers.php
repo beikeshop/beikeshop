@@ -13,6 +13,7 @@ use Beike\Services\CurrencyService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -769,22 +770,48 @@ function check_license(): bool
 }
 
 /**
- * @param $folderPath
+ * @param $sourceFolder
  * @param $zipPath
  * @return ZipArchive
  */
-function zip_folder($folderPath, $zipPath): ZipArchive
+function zip_folder($sourceFolder, $zipPath): ZipArchive
 {
-    $newZip = new ZipArchive;
-    if($newZip->open($zipPath, ZipArchive::CREATE) === true) {
-        $dir = opendir($folderPath);
-        while($file = readdir($dir)) {
-            if(is_file($folderPath . $file)) {
-                $newZip->addFile($folderPath . $file, $file);
+    $zip = new ZipArchive;
+    if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
+        $dirIterator = new RecursiveDirectoryIterator($sourceFolder);
+        $iterator    = new RecursiveIteratorIterator($dirIterator);
+        foreach ($iterator as $file) {
+            if (! $dirIterator->isDot()) {
+                $filePath     = $file->getPathname();
+                $relativePath = substr($filePath, strlen($sourceFolder));
+                if ($file->isDir()) {
+                    $zip->addEmptyDir($relativePath);
+                } else {
+                    $zip->addFile($filePath, $relativePath);
+                }
             }
         }
-        $newZip->close();
+        $zip->close();
     }
 
-    return $newZip;
+    return $zip;
+}
+
+/**
+ * 移动文件夹
+ *
+ * @param $sourcePath
+ * @param $destinationPath
+ */
+function move_dir($sourcePath, $destinationPath)
+{
+    $baseSourceName = basename($sourcePath);
+    foreach (File::allFiles($sourcePath) as $file) {
+        $relativePath = $file->getRelativePath();
+        $newBasePath  = "{$destinationPath}{$baseSourceName}/{$relativePath}/";
+        $newFilePath  = $newBasePath . $file->getFilename();
+        File::ensureDirectoryExists($newBasePath);
+        File::move($file->getPathname(), $newFilePath);
+    }
+    File::deleteDirectory($sourcePath);
 }

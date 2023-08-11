@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
-    public function index()
+    /**
+     * @throws \Exception
+     */
+    public function index(): mixed
     {
         $data = [
-            'products' => DashboardRepo::getProductData(),
-            // 'views'        => DashboardRepo::getCustomerViewData(),
+            'products'     => DashboardRepo::getProductData(),
             'orders'       => DashboardRepo::getOrderData(),
             'customers'    => DashboardRepo::getCustomerData(),
             'order_totals' => DashboardRepo::getTotalData(),
