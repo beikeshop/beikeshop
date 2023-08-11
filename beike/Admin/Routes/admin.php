@@ -139,6 +139,7 @@ Route::prefix($adminName)
                 Route::middleware('can:file_manager_delete')->delete('file_manager/directories', [Controllers\FileManagerController::class, 'destroyDirectories'])->name('file_manager.delete_directories');
                 Route::middleware('can:file_manager_update')->post('file_manager/move_directories', [Controllers\FileManagerController::class, 'moveDirectories'])->name('file_manager.move_directories');
                 Route::middleware('can:file_manager_update')->post('file_manager/move_files', [Controllers\FileManagerController::class, 'moveFiles'])->name('file_manager.move_files');
+                Route::middleware('can:file_manager_show')->get('file_manager/export', [Controllers\FileManagerController::class, 'exportZip'])->name('file_manager.export');
 
                 Route::get('logout', [Controllers\LogoutController::class, 'index'])->name('logout.index');
 
