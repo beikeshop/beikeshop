@@ -61,6 +61,12 @@
           <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
           {{-- v-if="node.isCurrent" --}}
           <div class="right">
+            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.download') }}"
+              placement="top">
+              <span @click.stop="() => {openInputBox('download', node, data)}"><i
+                class="el-icon-download"></i></span>
+            </el-tooltip>
+
             <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
               placement="top">
               <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
@@ -357,22 +363,22 @@
           const path = draggingNode.data.path;
           const dropPath = dropNode.data.path;
           const dropName = dropNode.data.name;
-          $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropName);
 
+          $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropName);
           this.$confirm($('.drop_folder_hint').html(),"{{ __('common.text_hint') }}", {
             dangerouslyUseHTMLString:true,
             type: "warning"
           }).then(() => {
-            console.log(path, dropPath, dropName);
-            $http.post('file_manager/move', {source_path:path, dest_path:dropPath }).then((res) => {
-              console.log(res);
+            $http.post('file_manager/move_directories', {source_path:path, dest_path:dropPath }).then((res) => {
+              // 修改path
+              dropNode.data.children[dropNode.data.children.length - 1].path = dropPath + '/' + name;
             })
           }).catch(() => {
             this.treeData = this.copyTreeData
           });
         },
 
-        handleDragStart() {
+        handleDragStart(e) {
           this.copyTreeData = JSON.parse(
             JSON.stringify(this.treeData)
           );
@@ -398,6 +404,10 @@
             // console.log(path, dropPath, dropName);
             const imagePaths = this.images.filter((item, index) => selectImageIndex.includes(index)).map(e => e.path);
             console.log(path, imagePaths);
+
+            $http.post('file_manager/move_files', {images:imagePaths, dest_path:path }).then((res) => {
+              this.loadData()
+            })
           })
         },
 
@@ -643,6 +653,11 @@
 
         openInputBox(type, node, data) {
           let fileSuffix, fileName = '';
+
+          if (type == 'download') {
+            console.log(data.path);
+            return;
+          }
 
           if (type == 'image') {
             const image = this.images[this.selectImageIndex].name;
