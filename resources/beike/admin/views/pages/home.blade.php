@@ -24,7 +24,7 @@
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $products['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $products['yesterday'] }}%</span>
+            <span class="text-{{ $products['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $products['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
             <span class="text-{{ $products['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $products['percentage'] }}%</span>
@@ -46,7 +46,7 @@
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $orders['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $orders['yesterday'] }}%</span>
+            <span class="text-{{ $orders['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $orders['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
             <span class="text-{{ $orders['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $orders['percentage'] }}%</span>
@@ -68,7 +68,7 @@
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $customers['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $customers['yesterday'] }}%</span>
+            <span class="text-{{ $customers['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $customers['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
             <span class="text-{{ $customers['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $customers['percentage'] }}%</span>
@@ -91,7 +91,7 @@
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $order_totals['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['yesterday'] }}%</span>
+            <span class="text-{{ $order_totals['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
             <span class="text-{{ $order_totals['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['percentage'] }}%</span>
