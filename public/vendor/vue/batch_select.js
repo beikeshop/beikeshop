@@ -3,6 +3,9 @@ Vue.directive('batch-select', {
   // 当被绑定的元素插入到 DOM 中时……
   // inserted: (el, binding) => {}
   componentUpdated: (el, binding) => {
+    if (!app.isMultiple) {
+      return;
+    }
     // 设置被绑定元素el（即上述的box）的position为relative，目的是让蓝色半透明遮罩area相对其定位
     el.style.position = 'relative';
     // 记录el在视窗中的位置elPos
@@ -31,6 +34,7 @@ Vue.directive('batch-select', {
     area.innerHTML = ''
     el.appendChild(area)
     el.onmousedown = (e) => {
+      if (e.button !== 0) return
       let isContentCenter = false
       // 判断 鼠标按下时是否在元素上（div.content-center)
       if (e.target.className === 'content-center') {

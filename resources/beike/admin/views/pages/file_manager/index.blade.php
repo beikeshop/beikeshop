@@ -100,7 +100,7 @@
             {{ __('common.delete') }}</el-link>
           <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
             @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
-          <el-link :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()"
+          <el-link v-if="isMultiple" :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()"
             icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
           @hook('admin.file_manager.content.head.btns.after')
         </div>
@@ -209,8 +209,9 @@
         triggerLength: 10,
         isShift: false,
         mime: @json(request('mime')),
+        isMultiple: {{ request('is_multiple', true) }}, // 是否允许多选
         loading: false,
-        isBatchSelect: false,
+        isBatchSelect: false, // 当前是否正在是否批量选择
         selectImageIndex: [],
         filter: {
           sort: 'created',
@@ -297,27 +298,30 @@
       // 实例被挂载后调用
       mounted() {
         this.loadData()
-        // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
-        document.addEventListener('keydown', (e) => {
-          this.isShift = e.shiftKey;
-          this.isCtrl = e.ctrlKey || e.metaKey;
-        })
 
-        // 获取键盘事件 是否松开 shift/ctrl 键
-        document.addEventListener('keyup', (e) => {
-          this.isShift = e.shiftKey;
-          this.isCtrl = e.ctrlKey || e.metaKey;
-        })
+        if (this.isMultiple) {
+          // 获取键盘事件 是否按住 shift/ctrl 键 兼容 mac 和 windows
+          document.addEventListener('keydown', (e) => {
+            this.isShift = e.shiftKey;
+            this.isCtrl = e.ctrlKey || e.metaKey;
+          })
 
-        // 判断鼠标是否点击 .image-list 元素
-        document.addEventListener('click', (e) => {
-          if (this.isBatchSelect) return;
-          const targets = ['filemanager-navbar', 'content-center']
-          if (targets.indexOf(e.target.className) > -1) {
-            this.selectImageIndex = [];
-            this.images.map(e => e.selected = false)
-          }
-        })
+          // 获取键盘事件 是否松开 shift/ctrl 键
+          document.addEventListener('keyup', (e) => {
+            this.isShift = e.shiftKey;
+            this.isCtrl = e.ctrlKey || e.metaKey;
+          })
+
+          // 判断鼠标是否点击 .image-list 元素
+          document.addEventListener('click', (e) => {
+            if (this.isBatchSelect) return;
+            const targets = ['filemanager-navbar', 'content-center']
+            if (targets.indexOf(e.target.className) > -1) {
+              this.selectImageIndex = [];
+              this.images.map(e => e.selected = false)
+            }
+          })
+        }
       },
 
       methods: {
@@ -660,7 +664,7 @@
           let fileSuffix, fileName = '';
 
           if (type == 'download') {
-            console.log(data.path);
+            window.open(`file_manager/export?path=${data.path}`);
             return;
           }
 
