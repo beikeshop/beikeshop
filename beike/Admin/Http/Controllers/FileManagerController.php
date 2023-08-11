@@ -7,7 +7,6 @@ use Beike\Admin\Services\FileManagerService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class FileManagerController extends Controller
 {
