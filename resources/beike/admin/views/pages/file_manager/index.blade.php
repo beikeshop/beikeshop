@@ -664,7 +664,7 @@
           let fileSuffix, fileName = '';
 
           if (type == 'download') {
-            window.open(`file_manager/export?path=${data.path}`);
+            window.open(`{{ admin_route('file_manager.export') }}?path=${data.path}`);
             return;
           }
 
