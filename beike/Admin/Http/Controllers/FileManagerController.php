@@ -173,16 +173,21 @@ class FileManagerController extends Controller
      * 压缩文件夹下载ZIP
      *
      * @param Request $request
-     * @return JsonResponse
      */
-    public function exportZip(Request $request): JsonResponse
+    public function exportZip(Request $request)
     {
         try {
             $imagePath   = $request->get('path');
+            $zipFile     = (new FileManagerService)->zipFolder($imagePath);
 
-            return json_success(trans('common.get_success'));
+            header('Content-Type: application/zip');
+            header('Content-Disposition: attachment; filename="' . basename($zipFile) . '"');
+            header('Content-Length: ' . filesize($zipFile));
+            readfile($zipFile);
+            unlink($zipFile);
+
         } catch (Exception $e) {
-            return json_fail($e->getMessage());
+            echo $e->getMessage();
         }
     }
 

@@ -770,24 +770,31 @@ function check_license(): bool
 }
 
 /**
- * @param $folderPath
+ * @param $sourceFolder
  * @param $zipPath
  * @return ZipArchive
  */
-function zip_folder($folderPath, $zipPath): ZipArchive
+function zip_folder($sourceFolder, $zipPath): ZipArchive
 {
-    $newZip = new ZipArchive;
-    if($newZip->open($zipPath, ZipArchive::CREATE) === true) {
-        $dir = opendir($folderPath);
-        while($file = readdir($dir)) {
-            if(is_file($folderPath . $file)) {
-                $newZip->addFile($folderPath . $file, $file);
+    $zip = new ZipArchive;
+    if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
+        $dirIterator = new RecursiveDirectoryIterator($sourceFolder);
+        $iterator    = new RecursiveIteratorIterator($dirIterator);
+        foreach ($iterator as $file) {
+            if (! $dirIterator->isDot()) {
+                $filePath     = $file->getPathname();
+                $relativePath = substr($filePath, strlen($sourceFolder));
+                if ($file->isDir()) {
+                    $zip->addEmptyDir($relativePath);
+                } else {
+                    $zip->addFile($filePath, $relativePath);
+                }
             }
         }
-        $newZip->close();
+        $zip->close();
     }
 
-    return $newZip;
+    return $zip;
 }
 
 /**

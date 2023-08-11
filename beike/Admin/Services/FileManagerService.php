@@ -181,6 +181,21 @@ class FileManagerService
     }
 
     /**
+     * @param $imagePath
+     * @return string
+     */
+    public function zipFolder($imagePath): string
+    {
+        $realPath = public_path("catalog{$imagePath}");
+        $dirName  = basename($realPath);
+        $zipName  = $dirName . '-' . date('Ymd') . '.zip';
+        $zipPath  = public_path("{$zipName}");
+        zip_folder($realPath, $zipPath);
+
+        return $zipPath;
+    }
+
+    /**
      * 删除文件或文件夹
      *
      * @param $filePath
