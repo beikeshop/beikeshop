@@ -181,7 +181,7 @@ class ProductRepo
         }
 
         if (isset($filters['created_end'])) {
-            $builder->where('products.created_at', '>', $filters['created_end']);
+            $builder->where('products.created_at', '<', $filters['created_end']);
         }
 
         if (isset($filters['active'])) {

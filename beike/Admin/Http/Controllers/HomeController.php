@@ -13,10 +13,10 @@ class HomeController extends Controller
     /**
      * @throws \Exception
      */
-    public function index():mixed
+    public function index(): mixed
     {
         $data = [
-            'products' => DashboardRepo::getProductData(),
+            'products'     => DashboardRepo::getProductData(),
             'orders'       => DashboardRepo::getOrderData(),
             'customers'    => DashboardRepo::getCustomerData(),
             'order_totals' => DashboardRepo::getTotalData(),
