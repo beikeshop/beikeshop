@@ -16,6 +16,7 @@ use Beike\Admin\Repositories\PageRepo;
 use Beike\Models\Page;
 use Beike\Shop\Http\Resources\PageDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -109,10 +110,10 @@ class PagesController extends Controller
      * 删除单页
      *
      * @param Request $request
-     * @param int     $pageId
-     * @return array
+     * @param int $pageId
+     * @return JsonResponse
      */
-    public function destroy(Request $request, int $pageId): array
+    public function destroy(Request $request, int $pageId): JsonResponse
     {
         PageRepo::deleteById($pageId);
 
@@ -122,9 +123,9 @@ class PagesController extends Controller
     /**
      * 搜索页面标题自动完成
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function autocomplete(Request $request): array
+    public function autocomplete(Request $request): JsonResponse
     {
         $products = PageRepo::autocomplete($request->get('name') ?? '');
 
@@ -134,9 +135,9 @@ class PagesController extends Controller
     /**
      * 获取单页名称
      * @param Page $page
-     * @return array
+     * @return JsonResponse
      */
-    public function name(Page $page): array
+    public function name(Page $page): JsonResponse
     {
         $name = $page->description->title ?? '';
 

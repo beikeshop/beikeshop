@@ -8,6 +8,7 @@ use Beike\Admin\Services\CategoryService;
 use Beike\Models\Category;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -47,12 +48,12 @@ class CategoryController extends Controller
 
     /**
      * 删除分类
-     * @param Request  $request
+     * @param Request $request
      * @param Category $category
-     * @return array
+     * @return JsonResponse
      * @throws \Exception
      */
-    public function destroy(Request $request, Category $category): array
+    public function destroy(Request $request, Category $category): JsonResponse
     {
         CategoryRepo::delete($category);
         hook_action('admin.category.destroy.after', $category);

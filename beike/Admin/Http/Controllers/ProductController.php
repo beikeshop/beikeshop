@@ -12,6 +12,7 @@ use Beike\Models\Product;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\ProductRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -179,9 +180,9 @@ class ProductController extends Controller
      * 根据商品ID批量获取商品名称
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function getNames(Request $request): array
+    public function getNames(Request $request): JsonResponse
     {
         $productIds = explode(',', $request->get('product_ids'));
         $name       = ProductRepo::getNames($productIds);

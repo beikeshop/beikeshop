@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Models\Brand;
 use Beike\Repositories\BrandRepo;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -41,9 +42,9 @@ class BrandController extends Controller
      * 创建品牌
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function store(Request $request): array
+    public function store(Request $request): JsonResponse
     {
         $requestData = $request->all();
         $data        = [
@@ -59,11 +60,11 @@ class BrandController extends Controller
 
     /**
      * @param Request $request
-     * @param Brand   $brand
-     * @return array
+     * @param Brand $brand
+     * @return JsonResponse
      * @throws Exception
      */
-    public function update(Request $request, Brand $brand): array
+    public function update(Request $request, Brand $brand): JsonResponse
     {
         $requestData = $request->all();
         $data        = [
@@ -79,10 +80,10 @@ class BrandController extends Controller
 
     /**
      * @param Request $request
-     * @param Brand   $brand
-     * @return array
+     * @param Brand $brand
+     * @return JsonResponse
      */
-    public function destroy(Request $request, Brand $brand): array
+    public function destroy(Request $request, Brand $brand): JsonResponse
     {
         hook_action('admin.brand.destroy.before', $brand);
         BrandRepo::delete($brand);
@@ -93,9 +94,9 @@ class BrandController extends Controller
 
     /**
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function autocomplete(Request $request): array
+    public function autocomplete(Request $request): JsonResponse
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
 
@@ -104,9 +105,9 @@ class BrandController extends Controller
 
     /**
      * @param int $id
-     * @return array
+     * @return JsonResponse
      */
-    public function name(int $id): array
+    public function name(int $id): JsonResponse
     {
         $name = BrandRepo::getName($id);
 
@@ -117,9 +118,9 @@ class BrandController extends Controller
      * 根据商品ID批量获取商品名称
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function getNames(Request $request): array
+    public function getNames(Request $request): JsonResponse
     {
         $ids  = explode(',', $request->get('ids'));
         $name = BrandRepo::getNames($ids);

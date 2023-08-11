@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Http\Resources\RmaDetail;
 use Beike\Admin\Http\Resources\RmaHistoryDetail;
 use Beike\Repositories\RmaRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RmaController extends Controller
@@ -63,7 +64,7 @@ class RmaController extends Controller
         return json_success(trans('common.updated_success'), $data);
     }
 
-    public function destroy(int $id): array
+    public function destroy(int $id): JsonResponse
     {
         RmaRepo::delete($id);
 

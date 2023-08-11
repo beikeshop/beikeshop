@@ -18,6 +18,7 @@ use Beike\Repositories\OrderRepo;
 use Beike\Services\ShipmentService;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\OrderList;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -108,7 +109,7 @@ class OrderController extends Controller
     /**
      * 更新发货信息
      */
-    public function updateShipment(Request $request, Order $order, int $orderShipmentId): array
+    public function updateShipment(Request $request, Order $order, int $orderShipmentId): JsonResponse
     {
         $data          = $request->all();
         $orderShipment = OrderShipment::query()->where('order_id', $order->id)->findOrFail($orderShipmentId);

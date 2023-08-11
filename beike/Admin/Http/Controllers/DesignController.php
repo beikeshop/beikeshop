@@ -4,6 +4,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Repositories\SettingRepo;
 use Beike\Services\DesignService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -66,10 +67,10 @@ class DesignController extends Controller
      * 更新所有数据
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      * @throws \Throwable
      */
-    public function update(Request $request): array
+    public function update(Request $request): JsonResponse
     {
         $content    = json_decode($request->getContent(), true);
         $moduleData = DesignService::handleRequestModules($content);

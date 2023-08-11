@@ -18,6 +18,7 @@ use Beike\Admin\Http\Resources\AutocompleteResource;
 use Beike\Admin\Repositories\AttributeGroupRepo;
 use Beike\Admin\Repositories\AttributeRepo;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AttributeController extends Controller
@@ -127,7 +128,7 @@ class AttributeController extends Controller
         return json_success(trans('common.deleted_success'));
     }
 
-    public function autocomplete(Request $request): array
+    public function autocomplete(Request $request): JsonResponse
     {
         try {
             $items = AttributeRepo::autocomplete($request->get('name') ?? '', 0);
@@ -138,7 +139,7 @@ class AttributeController extends Controller
         return json_success(trans('common.get_success'), AutocompleteResource::collection($items));
     }
 
-    public function autocompleteValue(Request $request, int $id): array
+    public function autocompleteValue(Request $request, int $id): JsonResponse
     {
         try {
             $items = AttributeRepo::autocompleteValue($id, $request->get('name') ?? '');

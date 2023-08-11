@@ -15,6 +15,7 @@ use Beike\Admin\Http\Requests\PageCategoryRequest;
 use Beike\Admin\Http\Resources\PageCategoryResource;
 use Beike\Models\PageCategory;
 use Beike\Repositories\PageCategoryRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -116,10 +117,10 @@ class PageCategoryController extends Controller
      * 删除单页
      *
      * @param Request $request
-     * @param int     $pageId
-     * @return array
+     * @param int $pageId
+     * @return JsonResponse
      */
-    public function destroy(Request $request, int $pageId): array
+    public function destroy(Request $request, int $pageId): JsonResponse
     {
         PageCategoryRepo::deleteById($pageId);
         hook_action('admin.page_category.store.after', $pageId);
@@ -130,9 +131,9 @@ class PageCategoryController extends Controller
     /**
      * 搜索页面标题自动完成
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function autocomplete(Request $request): array
+    public function autocomplete(Request $request): JsonResponse
     {
         $products = PageCategoryRepo::autocomplete($request->get('name') ?? '');
 
@@ -142,9 +143,9 @@ class PageCategoryController extends Controller
     /**
      * 获取单页名称
      * @param PageCategory $pageCategory
-     * @return array
+     * @return JsonResponse
      */
-    public function name(PageCategory $pageCategory): array
+    public function name(PageCategory $pageCategory): JsonResponse
     {
         $name = $pageCategory->description->title ?? '';
 

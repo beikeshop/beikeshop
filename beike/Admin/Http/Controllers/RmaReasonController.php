@@ -15,6 +15,7 @@ use Beike\Admin\Http\Resources\RmaReasonDetail;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\RmaReasonRepo;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RmaReasonController extends Controller
@@ -37,7 +38,7 @@ class RmaReasonController extends Controller
         return view('admin::pages.rma_reasons.index', $data);
     }
 
-    public function store(Request $request): array
+    public function store(Request $request): JsonResponse
     {
         $rmaReason = RmaReasonRepo::create($request->only('name'));
 
@@ -47,14 +48,14 @@ class RmaReasonController extends Controller
     /**
      * @throws Exception
      */
-    public function update(Request $request, int $id): array
+    public function update(Request $request, int $id): JsonResponse
     {
         $rmaReason = RmaReasonRepo::update($id, $request->only('name'));
 
         return json_success(trans('common.updated_success'), $rmaReason);
     }
 
-    public function destroy(int $id): array
+    public function destroy(int $id): JsonResponse
     {
         RmaReasonRepo::delete($id);
 

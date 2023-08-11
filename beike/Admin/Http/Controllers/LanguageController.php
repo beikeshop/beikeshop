@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Services\LanguageService;
 use Beike\Repositories\LanguageRepo;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
@@ -37,9 +38,9 @@ class LanguageController extends Controller
     /**
      * 新建语言
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function store(Request $request): array
+    public function store(Request $request): JsonResponse
     {
         $language = LanguageService::create($request->only('name', 'code'));
 
@@ -48,11 +49,11 @@ class LanguageController extends Controller
 
     /**
      * @param Request $request
-     * @param int     $id
-     * @return array
+     * @param int $id
+     * @return JsonResponse
      * @throws Exception
      */
-    public function update(Request $request, int $id): array
+    public function update(Request $request, int $id): JsonResponse
     {
         $language = LanguageRepo::update($id, $request->except('status'));
 
@@ -62,10 +63,10 @@ class LanguageController extends Controller
     /**
      * 删除语言
      *
-     * @param int $currencyId
-     * @return array
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy(int $id): array
+    public function destroy(int $id): JsonResponse
     {
         LanguageService::delete($id);
 

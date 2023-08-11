@@ -27,10 +27,10 @@ class FileManagerController extends Controller
      * 获取某个文件夹下面的文件列表
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      * @throws Exception
      */
-    public function getFiles(Request $request): array
+    public function getFiles(Request $request): JsonResponse
     {
         $baseFolder = $request->get('base_folder');
         $sort       = $request->get('sort', 'created');
@@ -46,10 +46,9 @@ class FileManagerController extends Controller
     /**
      * 获取文件夹列表
      * @param Request $request
-     * @return array
-     * @throws Exception
+     * @return JsonResponse
      */
-    public function getDirectories(Request $request): array
+    public function getDirectories(Request $request): JsonResponse
     {
         $baseFolder = $request->get('base_folder');
 
@@ -136,9 +135,9 @@ class FileManagerController extends Controller
      * POST      /admin/file_manager/upload
      *
      * @param UploadRequest $request
-     * @return array
+     * @return JsonResponse
      */
-    public function uploadFiles(UploadRequest $request): array
+    public function uploadFiles(UploadRequest $request): JsonResponse
     {
         $file     = $request->file('file');
         $savePath = $request->get('path');
