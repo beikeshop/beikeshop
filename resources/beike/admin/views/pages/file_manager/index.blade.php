@@ -364,14 +364,19 @@
           const dropPath = dropNode.data.path;
           const dropName = dropNode.data.name;
 
-          $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropName);
+          $('.drop_folder_hint').find('span:first-child').text(name).siblings('span').text(dropPath);
           this.$confirm($('.drop_folder_hint').html(),"{{ __('common.text_hint') }}", {
-            dangerouslyUseHTMLString:true,
+            dangerouslyUseHTMLString: true,
             type: "warning"
           }).then(() => {
             $http.post('file_manager/move_directories', {source_path:path, dest_path:dropPath }).then((res) => {
               // 修改path
               dropNode.data.children[dropNode.data.children.length - 1].path = dropPath + '/' + name;
+              // 如果当前激活目录是移动的目录，则修改当前激活目录为移动后的目录 path
+              if (this.folderCurrent == path) {
+                this.folderCurrent = dropPath + '/' + name;
+                sessionStorage.setItem('folderCurrent', this.folderCurrent);
+              }
             })
           }).catch(() => {
             this.treeData = this.copyTreeData
