@@ -35,7 +35,8 @@ class DashboardRepo
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -57,7 +58,8 @@ class DashboardRepo
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -79,7 +81,8 @@ class DashboardRepo
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -101,7 +104,8 @@ class DashboardRepo
         }
 
         return [
-            'total'      => $today,
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
@@ -123,7 +127,8 @@ class DashboardRepo
         }
 
         return [
-            'total'      => currency_format($today),
+            'today'      => $today,
+            'yesterday'  => $yesterday,
             'percentage' => $percentage,
         ];
     }
