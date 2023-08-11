@@ -168,9 +168,15 @@ class FileManagerService
      */
     public function moveFiles($images, $destPath)
     {
+        if ($destPath != '/') {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}/");
+        } else {
+            $destDirPath = public_path("catalog{$this->basePath}{$destPath}");
+        }
+
         foreach ($images as $image) {
-            $sourceDirPath = public_path("catalog{$this->basePath}{$image}");
-            File::move($sourceDirPath, $destPath);
+            $sourceDirPath = public_path("{$this->basePath}{$image}");
+            File::move($sourceDirPath, $destDirPath . basename($sourceDirPath));
         }
     }
 
