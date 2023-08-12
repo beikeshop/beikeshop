@@ -1,7 +1,13 @@
 {
     "code": "stripe",
-    "name": "Stripe 支付",
-    "description": "Stripe 支付 <a href='https://stripe.com/' target='_blank'>Stripe</a>",
+    "name": {
+        "zh_cn": "Stripe 支付",
+        "en": "Stripe"
+    },
+    "description": {
+        "zh_cn": "Stripe 支付 <a href='https://stripe.com/' target='_blank'>Stripe</a>",
+        "en": "Stripe"
+    },
     "type": "payment",
     "version": "v1.0.0",
     "icon": "/image/logo.png",

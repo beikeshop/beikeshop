@@ -1,7 +1,13 @@
 {
     "code": "paypal",
-    "name": "PayPal",
-    "description": "PayPal 支付 <a href='https://developer.paypal.com/' target='_blank'>PayPal Developer</a>",
+    "name": {
+        "zh_cn": "PayPal",
+        "en": "PayPal"
+    },
+    "description": {
+        "zh_cn": "PayPal 支付 <a href='https://developer.paypal.com/' target='_blank'>PayPal Developer</a>",
+        "en": "PayPal"
+    },
     "type": "payment",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
