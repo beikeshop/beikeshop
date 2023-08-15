@@ -14,6 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Shop\Http\Requests\ForgottenRequest;
 use Beike\Shop\Http\Requests\VerifyCodeRequest;
 use Beike\Shop\Services\AccountService;
+use Illuminate\Http\JsonResponse;
 
 class ForgottenController
 {
@@ -29,9 +30,9 @@ class ForgottenController
     /**
      * 接收email地址，生成验证码发送到邮件地址
      * @param VerifyCodeRequest $request
-     * @return array
+     * @return JsonResponse
      */
-    public function sendVerifyCode(VerifyCodeRequest $request): array
+    public function sendVerifyCode(VerifyCodeRequest $request): JsonResponse
     {
         AccountService::sendVerifyCodeForForgotten($request->get('email'), 'email');
 
@@ -41,10 +42,10 @@ class ForgottenController
     /**
      * 接收验证码和新密码、确认密码，验证验证码是否正确、密码和确认密码是否相等，然后修改密码
      * @param ForgottenRequest $request
-     * @return array
+     * @return JsonResponse
      * @throws \Exception
      */
-    public function changePassword(ForgottenRequest $request): array
+    public function changePassword(ForgottenRequest $request): JsonResponse
     {
         AccountService::verifyAndChangePassword($request->get('code'), $request->get('email'), $request->get('password'));
 
