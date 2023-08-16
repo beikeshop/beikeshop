@@ -22,7 +22,6 @@ class PageCategoryController extends Controller
 {
     public function home()
     {
-        dd(53);
         $breadCrumb = Breadcrumb::getInstance()
             ->addLink(shop_route('page_categories.home'), trans('page_category.index'));
 
