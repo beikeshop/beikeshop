@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Resources\Account\OrderDetailList;
+use Beike\Shop\Http\Resources\Account\OrderDetailResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,7 @@ class OrderController extends Controller
 
     public function show(Order $order): JsonResponse
     {
-        return json_success(trans('common.get_success'), $order);
+        $orderData = new OrderDetailResource($order);
+        return json_success(trans('common.get_success'), $orderData);
     }
 }

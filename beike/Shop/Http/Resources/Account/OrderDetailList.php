@@ -25,7 +25,7 @@ class OrderDetailList extends JsonResource
             'status'         => $this->status,
             'total'          => $this->total,
             'total_format'   => $this->total_format,
-            'created_at'     => $this->created_at->toDateTimeString(),
+            'created_at'     => time_format($this->created_at),
             'order_products' => OrderProductSimple::collection($this->orderProducts),
         ];
 
