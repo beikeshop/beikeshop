@@ -224,12 +224,14 @@ function current_user(): ?AdminUser
  *
  * @return mixed
  */
-function current_customer(): ?Customer
+function current_customer(): mixed
 {
     $customer = auth()->guard(Customer::AUTH_GUARD)->user();
     if (empty($customer)) {
         return auth('api_customer')->user();
     }
+
+    return $customer;
 }
 
 /**

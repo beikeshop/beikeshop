@@ -48,13 +48,12 @@ class LoginController extends Controller
             }
 
             $customer = current_customer();
-            if ($customer && $customer->status != 1) {
+            if (empty($customer) || ($customer && $customer->status != 1)) {
                 Auth::guard(Customer::AUTH_GUARD)->logout();
 
                 throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
             }
-
-            CartRepo::mergeGuestCart($customer, $guestCartProduct);
+                CartRepo::mergeGuestCart($customer, $guestCartProduct);
 
             return json_success(trans('shop/login.login_successfully'));
         } catch (\Exception $e) {
