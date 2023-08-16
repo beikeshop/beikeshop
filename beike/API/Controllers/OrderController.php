@@ -44,6 +44,7 @@ class OrderController extends Controller
     public function show(Order $order): JsonResponse
     {
         $orderData = new OrderDetailResource($order);
+
         return json_success(trans('common.get_success'), $orderData);
     }
 }
