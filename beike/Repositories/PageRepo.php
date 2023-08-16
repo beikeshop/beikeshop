@@ -30,6 +30,13 @@ class PageRepo
             $builder->where('active', (bool) $filters['is_active']);
         }
 
+        if (isset($filters['page_category_id'])) {
+            $pageCategoryId = (int) ($filters['page_category_id'] ?? 0);
+            $builder->where('page_category_id', $pageCategoryId);
+        }
+
+        $builder->orderByDesc('id');
+
         return $builder;
     }
 
@@ -41,8 +48,9 @@ class PageRepo
      */
     public static function getActivePages(array $filters = []): LengthAwarePaginator
     {
-        $filters['is_active']   = 1;
-        $filters['category_id'] = 0;
+        $filters['is_active']        = 1;
+        $filters['page_category_id'] = 0;
+
         $builder                = self::getBuilder($filters);
 
         return $builder->paginate(perPage());
@@ -56,6 +64,7 @@ class PageRepo
     public static function getCategoryPages(): LengthAwarePaginator
     {
         $filters['is_active'] = 1;
+
         $builder              = self::getBuilder($filters)->whereNot('page_category_id', 0);
 
         return $builder->paginate(perPage());

@@ -22,6 +22,7 @@ class PageCategoryController extends Controller
 {
     public function home()
     {
+        dd(53);
         $breadCrumb = Breadcrumb::getInstance()
             ->addLink(shop_route('page_categories.home'), trans('page_category.index'));
 
@@ -40,11 +41,13 @@ class PageCategoryController extends Controller
         $breadCrumb = Breadcrumb::getInstance()
             ->addLink(shop_route('page_categories.home'), trans('page_category.index'));
 
+        $categoryPages = PageRepo::getBuilder(['page_category_id' => $pageCategory->id])->paginate(12);
+
         $data = [
             'category'               => new PageCategoryDetail($pageCategory),
             'active_page_categories' => PageCategoryRepo::getActiveList(['limit' => 5]),
             'breadcrumb'             => $breadCrumb,
-            'category_pages'         => $pageCategory->pages()->paginate(12),
+            'category_pages'         => $categoryPages,
         ];
         $data = hook_filter('page_categories.show.data', $data);
 
