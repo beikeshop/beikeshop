@@ -14,6 +14,7 @@ namespace Beike\Shop\Http\Controllers\Account;
 use Beike\Repositories\CustomerRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Resources\Account\WishlistDetail;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
@@ -28,7 +29,11 @@ class WishlistController extends Controller
         return view('account/wishlist', $data);
     }
 
-    public function add(Request $request): array
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function add(Request $request): JsonResponse
     {
         $productId = $request->get('product_id');
         $wishlist  = CustomerRepo::addToWishlist(current_customer(), $productId);
@@ -36,7 +41,11 @@ class WishlistController extends Controller
         return json_success(trans('shop/wishlist.add_wishlist_success'), $wishlist);
     }
 
-    public function remove(Request $request): array
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function remove(Request $request): JsonResponse
     {
         $id = $request->id;
         CustomerRepo::removeFromWishlist(current_customer(), $id);

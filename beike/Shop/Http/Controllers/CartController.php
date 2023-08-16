@@ -6,6 +6,7 @@ use Beike\Models\ProductSku;
 use Beike\Shop\Http\Requests\CartRequest;
 use Beike\Shop\Services\CartService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -29,9 +30,9 @@ class CartController extends Controller
      *
      * POST /carts/select {cart_ids:[1, 2]}
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function select(Request $request): array
+    public function select(Request $request): JsonResponse
     {
         $cartIds  = $request->get('cart_ids');
         $customer = current_customer();
@@ -81,9 +82,9 @@ class CartController extends Controller
      * PUT /carts/{cart_id} {sku_id:1, quantity: 2}
      * @param CartRequest $request
      * @param $cartId
-     * @return array
+     * @return JsonResponse
      */
-    public function update(CartRequest $request, $cartId): array
+    public function update(CartRequest $request, $cartId): JsonResponse
     {
         $customer = current_customer();
         $quantity = (int) $request->get('quantity');
@@ -100,9 +101,9 @@ class CartController extends Controller
      * DELETE /carts/{cart_id}
      * @param Request $request
      * @param $cartId
-     * @return array
+     * @return JsonResponse
      */
-    public function destroy(Request $request, $cartId): array
+    public function destroy(Request $request, $cartId): JsonResponse
     {
         $customer = current_customer();
         CartService::delete($customer, $cartId);
