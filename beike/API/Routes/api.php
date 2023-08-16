@@ -53,6 +53,8 @@ Route::prefix('api')
         Route::post('rmas', [ShopControllers\RmaController::class, 'store']);
         Route::get('rmas/{rma}', [ShopControllers\RmaController::class, 'show']);
 
+        Route::get('settings', [ShopControllers\SettingController::class, 'index']);
+
         Route::get('wishlists', [ShopControllers\WishlistController::class, 'index']);
         Route::post('wishlists', [ShopControllers\WishlistController::class, 'store']);
         Route::delete('wishlists/{wishlist}', [ShopControllers\WishlistController::class, 'destroy']);

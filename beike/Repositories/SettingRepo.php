@@ -159,6 +159,22 @@ class SettingRepo
         self::clearCache();
     }
 
+    public static function getMobileSetting()
+    {
+        return [
+            'system' => [
+                'country_id' => system_setting('base.country_id'),
+                'zone_id'    => system_setting('base.zone_id'),
+                'currency'   => system_setting('base.currency'),
+                'locale'     => system_setting('base.locale'),
+            ],
+            'rma_statuses' => RmaRepo::getStatuses(),
+            'rma_types'    => RmaRepo::getTypes(),
+            'locales'      => locales(),
+            'currencies'   => currencies(),
+        ];
+    }
+
     /**
      * Clear all cache.
      */
