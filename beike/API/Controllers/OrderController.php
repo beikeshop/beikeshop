@@ -12,8 +12,10 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
+use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Resources\Account\OrderDetailList;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -38,8 +40,8 @@ class OrderController extends Controller
         }
     }
 
-    public function show()
+    public function show(Order $order): JsonResponse
     {
-
+        return json_success(trans('common.get_success'), $order);
     }
 }
