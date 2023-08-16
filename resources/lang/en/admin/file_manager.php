@@ -35,6 +35,10 @@ return [
     'show_pc'                 => 'Please go to the PC side to operate',
     'verify_select_image'     => 'Please select a picture',
     'verify_select_video'     => 'Please select video',
+    'copy_link'               => 'Copy Link',
+    'copy_success'            => 'Copy Success',
+    'drop_file_hint'          => 'Do you want to move <span class="drop-hint"></span> files inside <span class="drop-hint"></span>?',
+    'drop_folder_hint'        => 'Do you want to move <span class="drop-hint"></span> inside <span class="drop-hint"></span>?',
 
     'confirm_delete_file'     => 'Do you want to delete the selected file',
     'confirm_delete_folder'   => 'The folder deletion operation is in progress, all files in the folder will be deleted, do you want to confirm?',
