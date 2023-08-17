@@ -33,9 +33,12 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         AccountService::register($credentials);
-        auth('api_customer')->attempt($credentials);
 
-        return json_success(trans('shop/login.register_success'));
+        if (! $token = auth('api_customer')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /**
