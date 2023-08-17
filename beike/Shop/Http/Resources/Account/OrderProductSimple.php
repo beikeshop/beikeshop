@@ -19,6 +19,7 @@ class OrderProductSimple extends JsonResource
     {
         $data = [
             'id'            => $this->id,
+            'product_id'    => $this->product_id,
             'name'          => $this->name,
             'quantity'      => $this->quantity,
             'price'         => currency_format($this->price),
