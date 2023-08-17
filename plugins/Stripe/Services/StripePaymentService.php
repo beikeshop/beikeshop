@@ -11,8 +11,12 @@
 
 namespace Plugin\Stripe\Services;
 
+use Beike\Models\Country;
 use Beike\Shop\Services\PaymentService;
+use Stripe\Customer;
 use Stripe\Exception\ApiErrorException;
+use Stripe\PaymentIntent;
+use Stripe\StripeClient;
 
 class StripePaymentService extends PaymentService
 {
@@ -22,14 +26,27 @@ class StripePaymentService extends PaymentService
         'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF',
     ];
 
+    private StripeClient $stripeClient;
+
+    /**
+     * @throws \Exception
+     */
+    public function __construct($order)
+    {
+        parent::__construct($order);
+        $apiKey = plugin_setting('stripe.secret_key');
+        if (empty($apiKey)) {
+            throw new \Exception('Invalid stripe secret key');
+        }
+        $this->stripeClient = new StripeClient($apiKey);
+    }
+
     /**
      * @throws ApiErrorException
      * @throws \Exception
      */
     public function capture($creditCardData): bool
     {
-        $apiKey = plugin_setting('stripe.secret_key');
-        \Stripe\Stripe::setApiKey($apiKey);
         $tokenId = $creditCardData['token'] ?? '';
         if (empty($tokenId)) {
             throw new \Exception('Invalid token');
@@ -54,7 +71,8 @@ class StripePaymentService extends PaymentService
             'shipping' => $this->getShippingAddress(),
         ];
 
-        $charge = \Stripe\Charge::create($stripeChargeParameters);
+        // $charge = \Stripe\Charge::create($stripeChargeParameters);
+        $charge = $this->stripeClient->charges->create($stripeChargeParameters);
 
         return $charge['paid'] && $charge['captured'];
     }
@@ -62,13 +80,12 @@ class StripePaymentService extends PaymentService
     /**
      * 创建 stripe customer
      * @param string $source
-     * @return \Stripe\Customer
+     * @return Customer
      * @throws ApiErrorException
      */
-    private function createCustomer(string $source = ''): \Stripe\Customer
+    private function createCustomer(string $source = ''): Customer
     {
-        return \Stripe\Customer::create([
-            'source'      => $source,
+        $customerData = [
             'email'       => $this->order->email,
             'description' => setting('base.meta_title'),
             'name'        => $this->order->customer_name,
@@ -85,7 +102,13 @@ class StripePaymentService extends PaymentService
             'metadata' => [
                 'order_number' => $this->order->number,
             ],
-        ]);
+        ];
+
+        if ($source) {
+            $customerData['source'] = $source;
+        }
+
+        return $this->stripeClient->customers->create($customerData);
     }
 
     /**
@@ -105,5 +128,83 @@ class StripePaymentService extends PaymentService
                 'state'       => $this->order->shipping_zone,
             ],
         ];
+    }
+
+    /**
+     * 获取支付参数给 uniapp 使用
+     * @return array
+     * @throws ApiErrorException
+     */
+    public function getMobilePaymentData()
+    {
+        $stripeCustomer = $this->createCustomer();
+        $ephemeralKey   = $this->stripeClient->ephemeralKeys->create(
+            ['customer' => $stripeCustomer->id],
+            ['stripe_version' => '2022-08-01']
+        );
+
+        $paymentIntent = $this->createPaymentIntent();
+
+        return [
+            'customer'       => $stripeCustomer->id,
+            'ephemeralKey'   => $ephemeralKey->id,
+            'isAllowDelay'   => true,
+            'merchantName'   => system_setting('base.meta_title'),
+            'paymentIntent'  => $paymentIntent->client_secret,
+            'publishKey'     => plugin_setting('stripe.publishable_key'),
+            'billingDetails' => $this->getBillingDetails(),
+        ];
+    }
+
+    /**
+     * 获取支付地址
+     *
+     * @return array
+     */
+    private function getBillingDetails(): array
+    {
+        $order = $this->order;
+        $name  = $order->firstname;
+        if ($order->lastname) {
+            $name .= ' ' . $order->lastname;
+        }
+        $country = Country::query()->find($order->payment_country_id);
+
+        return [
+            'name'    => $name,
+            'email'   => $order->email,
+            'phone'   => $order->telephone,
+            'address' => [
+                'city'       => $order->payment_city,
+                'country'    => $country->iso_code_2 ?? '',
+                'line1'      => $order->payment_address_1,
+                'line2'      => $order->payment_address_2,
+                'postalCode' => $order->payment_postcode,
+                'state'      => $order->payment_zone,
+            ],
+        ];
+    }
+
+    /**
+     * Create payment intent
+     * @return PaymentIntent
+     * @throws ApiErrorException
+     */
+    public function createPaymentIntent(): PaymentIntent
+    {
+        $currency = $this->order->currency_code;
+        if (! in_array($currency, self::ZERO_DECIMAL)) {
+            $total = round($this->order->total, 2) * 100;
+        } else {
+            $total = floor($this->order->total);
+        }
+
+        return $this->stripeClient->paymentIntents->create([
+            'amount'                    => $total,
+            'currency'                  => $currency,
+            'automatic_payment_methods' => [
+                'enabled' => true,
+            ],
+        ]);
     }
 }

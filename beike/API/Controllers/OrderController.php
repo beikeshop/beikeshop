@@ -16,6 +16,7 @@ use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Resources\Account\OrderDetailList;
 use Beike\Shop\Http\Resources\Account\OrderDetailResource;
+use Beike\Shop\Services\PaymentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -46,5 +47,22 @@ class OrderController extends Controller
         $orderData = new OrderDetailResource($order);
 
         return json_success(trans('common.get_success'), $orderData);
+    }
+
+    public function pay(Request $request, Order $order)
+    {
+        try {
+            $customer = current_customer();
+            if (empty($customer)) {
+                throw new \Exception('Empty customer');
+            }
+            if ($order->customer_id != $customer->id) {
+                throw new \Exception('Order dose not belong to customer');
+            }
+
+            return (new PaymentService($order))->mobilePay();
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 }

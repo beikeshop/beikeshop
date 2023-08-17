@@ -15,6 +15,7 @@ use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Plugin\Stripe\Services\StripePaymentService;
 
@@ -24,10 +25,10 @@ class StripeController extends Controller
      * 订单支付扣款
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      * @throws \Throwable
      */
-    public function capture(Request $request)
+    public function capture(Request $request): JsonResponse
     {
         try {
             $number         = request('order_number');
