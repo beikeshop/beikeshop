@@ -12,7 +12,6 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
-use Beike\Models\Customer;
 use Beike\Shop\Http\Requests\RegisterRequest;
 use Beike\Shop\Http\Resources\CustomerResource;
 use Beike\Shop\Services\AccountService;

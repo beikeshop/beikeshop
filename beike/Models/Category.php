@@ -12,9 +12,7 @@ class Category extends Base
     use HasFactory;
 
     protected $fillable = [
-        'parent_id',
-        'position',
-        'active',
+        'parent_id', 'position', 'image', 'active',
     ];
 
     protected $casts = [
