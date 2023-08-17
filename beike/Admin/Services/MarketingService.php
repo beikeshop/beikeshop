@@ -90,6 +90,27 @@ class MarketingService
     }
 
     /**
+     * 购买插件服务
+     *
+     * @throws \Exception
+     */
+    public function buyService($pluginServiceId, $postData)
+    {
+        $url = config('beike.api_url') . "/api/plugin_services/{$pluginServiceId}/buy";
+
+        $content = $this->httpClient->withBody($postData, 'application/json')
+            ->post($url)
+            ->json();
+
+        $status = $content['status'] ?? '';
+        if ($status == 'success') {
+            return $content['data'];
+        }
+
+        throw new \Exception($content['message'] ?? '');
+    }
+
+    /**
      * 下载插件到网站
      *
      * @param $pluginCode

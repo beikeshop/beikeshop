@@ -84,6 +84,22 @@ class MarketingController
     }
 
     /**
+     * 下单购买插件服务
+     */
+    public function buyService(Request $request)
+    {
+        try {
+            $postData   = $request->getContent();
+            $id = $request->plugin_service_id;
+            $result     = MarketingService::getInstance()->buyService($id, $postData);
+
+            return json_success('获取成功', $result);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
      * 下载插件安装包到本地
      */
     public function download(Request $request)
