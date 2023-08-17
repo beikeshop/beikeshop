@@ -28,6 +28,8 @@ Route::prefix('api')
         Route::get('products', [ShopControllers\ProductController::class, 'index']);
         Route::get('products/{product}', [ShopControllers\ProductController::class, 'show']);
 
+        Route::get('categories', [ShopControllers\CategoryController::class, 'index']);
+
         Route::get('carts', [ShopControllers\CartController::class, 'index']);
         Route::post('carts', [ShopControllers\CartController::class, 'store']);
         Route::put('carts/{cart}', [ShopControllers\CartController::class, 'update']);
