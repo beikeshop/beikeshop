@@ -20,6 +20,7 @@ Route::prefix('api')
     ->group(function () {
         Route::post('login', [ShopControllers\AuthController::class, 'login']);
 
+        Route::post('register', [ShopControllers\AuthController::class, 'register']);
         Route::post('logout', [ShopControllers\AuthController::class, 'logout']);
         Route::post('refresh', [ShopControllers\AuthController::class, 'refresh']);
         Route::get('me', [ShopControllers\AuthController::class, 'me']);

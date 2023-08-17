@@ -12,7 +12,10 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
+use Beike\Models\Customer;
+use Beike\Shop\Http\Requests\RegisterRequest;
 use Beike\Shop\Http\Resources\CustomerResource;
+use Beike\Shop\Services\AccountService;
 
 class AuthController extends Controller
 {
@@ -24,6 +27,16 @@ class AuthController extends Controller
     public function __construct()
     {
         // $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        AccountService::register($credentials);
+        auth('api_customer')->attempt($credentials);
+
+        return json_success(trans('shop/login.register_success'));
     }
 
     /**
