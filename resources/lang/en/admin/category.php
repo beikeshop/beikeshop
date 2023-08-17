@@ -13,6 +13,7 @@ return [
     'index'             => 'Category',
     'edit_category'     => 'Edit Category',
     'parent_category'   => 'Parent Category',
+    'category_image'    => 'category image',
 
     'categories_index'  => 'Index',
     'categories_create' => 'Create',

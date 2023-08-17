@@ -13,6 +13,7 @@ return [
     'index'              => '分类',
     'edit_category'      => '编辑分类',
     'parent_category'    => '上级分类',
+    'category_image'     => '分类图片',
 
     'categories_index'   => '分类列表',
     'categories_create'  => '创建分类',

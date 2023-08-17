@@ -13,6 +13,7 @@ return [
     'index'              => '分類',
     'edit_category'      => '編輯分類',
     'parent_category'    => '上級分類',
+    'category_image'     => '分類圖片',
 
     'categories_index'   => '分類列表',
     'categories_create'  => '創建分類',
