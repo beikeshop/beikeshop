@@ -11,7 +11,6 @@
 
 namespace Plugin\Stripe\Services;
 
-use Beike\Models\Country;
 use Beike\Shop\Services\PaymentService;
 use Stripe\Customer;
 use Stripe\Exception\ApiErrorException;
@@ -163,8 +162,7 @@ class StripePaymentService extends PaymentService
      */
     private function getBillingDetails(): array
     {
-        $order   = $this->order;
-        $country = Country::query()->find($order->payment_country_id);
+        $order = $this->order;
 
         return [
             'name'    => $order->customer_name,
@@ -172,7 +170,7 @@ class StripePaymentService extends PaymentService
             'phone'   => $order->telephone ?: $order->payment_telephone,
             'address' => [
                 'city'       => $order->payment_city,
-                'country'    => $country->code ?? '',
+                'country'    => $order->payment_country,
                 'line1'      => $order->payment_address_1,
                 'line2'      => $order->payment_address_2,
                 'postalCode' => $order->payment_postcode,

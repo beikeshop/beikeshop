@@ -51,7 +51,7 @@ Route::prefix('api')
 
         Route::get('orders', [ShopControllers\OrderController::class, 'index']);
         Route::get('orders/{order}', [ShopControllers\OrderController::class, 'show']);
-        Route::get('orders/{order}/pay', [ShopControllers\OrderController::class, 'pay']);
+        Route::post('orders/{order}/pay', [ShopControllers\OrderController::class, 'pay']);
 
         Route::get('rmas', [ShopControllers\RmaController::class, 'index']);
         Route::post('rmas', [ShopControllers\RmaController::class, 'store']);
