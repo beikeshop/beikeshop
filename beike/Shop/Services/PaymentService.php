@@ -76,7 +76,7 @@ class PaymentService
             'params'          => null,
         ];
 
-        $paymentData = hook_filter('service.payment.pay.data', $paymentData);
+        $paymentData = hook_filter('service.payment.mobile_pay.data', $paymentData);
         $params      = $paymentData['params'] ?? [];
         if (empty($params)) {
             throw new \Exception("Empty payment params for {$orderPaymentCode}, please add filter hook: service.payment.pay.data");
