@@ -163,20 +163,16 @@ class StripePaymentService extends PaymentService
      */
     private function getBillingDetails(): array
     {
-        $order = $this->order;
-        $name  = $order->firstname;
-        if ($order->lastname) {
-            $name .= ' ' . $order->lastname;
-        }
+        $order   = $this->order;
         $country = Country::query()->find($order->payment_country_id);
 
         return [
-            'name'    => $name,
+            'name'    => $order->customer_name,
             'email'   => $order->email,
-            'phone'   => $order->telephone,
+            'phone'   => $order->telephone ?: $order->payment_telephone,
             'address' => [
                 'city'       => $order->payment_city,
-                'country'    => $country->iso_code_2 ?? '',
+                'country'    => $country->code ?? '',
                 'line1'      => $order->payment_address_1,
                 'line2'      => $order->payment_address_2,
                 'postalCode' => $order->payment_postcode,
