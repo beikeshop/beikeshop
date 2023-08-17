@@ -61,6 +61,7 @@ class MarketingService
     {
         $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version');
         $plugin = $this->httpClient->get($url)->json();
+        // dd($plugin);
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件不存在或已下架');
         }

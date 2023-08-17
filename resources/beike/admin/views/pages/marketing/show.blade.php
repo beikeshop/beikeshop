@@ -12,8 +12,9 @@
 
 @section('content')
 @php
-$data = $plugin['data'];
+$data = $plugin;
 @endphp
+
 <div class="card mb-4" id="app">
   <div class="card-header">
     <h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5>
