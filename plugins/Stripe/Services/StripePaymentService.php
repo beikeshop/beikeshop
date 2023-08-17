@@ -173,7 +173,7 @@ class StripePaymentService extends PaymentService
                 'country'    => $order->payment_country,
                 'line1'      => $order->payment_address_1,
                 'line2'      => $order->payment_address_2,
-                'postalCode' => $order->payment_postcode,
+                'postalCode' => $order->payment_zipcode,
                 'state'      => $order->payment_zone,
             ],
         ];
