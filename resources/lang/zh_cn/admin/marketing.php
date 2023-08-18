@@ -27,6 +27,7 @@ return [
     'download_description'                   => '插件描述',
     'text_free'                              => '免费',
     'btn_buy'                                => '购买',
+    'btn_buy_service'                        => '售后服务',
     'text_pay'                               => '支付金额',
     'select_pay'                             => '选择支付方式',
     'wxpay'                                  => '微信扫码支付!',

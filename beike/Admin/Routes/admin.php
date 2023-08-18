@@ -182,6 +182,7 @@ Route::prefix($adminName)
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
                 Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');
                 Route::middleware('can:marketing_buy')->post('marketing/{code}/buy', [Controllers\MarketingController::class, 'buy'])->name('marketing.buy');
+                Route::middleware('can:marketing_buy_service')->post('marketing/{id}/buy_service', [Controllers\MarketingController::class, 'buyService'])->name('marketing.buy_service');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
 
                 // 文章

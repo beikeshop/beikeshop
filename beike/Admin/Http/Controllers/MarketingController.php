@@ -90,7 +90,7 @@ class MarketingController
     {
         try {
             $postData   = $request->getContent();
-            $id = $request->plugin_service_id;
+            $id = $request->id;
             $result     = MarketingService::getInstance()->buyService($id, $postData);
 
             return json_success('获取成功', $result);

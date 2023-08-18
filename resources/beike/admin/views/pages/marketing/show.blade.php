@@ -15,6 +15,8 @@
 $data = $plugin;
 @endphp
 
+{{-- {{ dd($data) }} --}}
+
 <div class="card mb-4" id="app">
   <div class="card-header">
     <h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5>
@@ -68,24 +70,26 @@ $data = $plugin;
 
         <div class="mb-4">
           @if ($data['available'])
-          @if ($data['downloadable'])
-          <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
-            __('admin/marketing.download_plugin') }}</button>
-          <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
-                class="bi bi-cursor-fill"></i> <span></span></a></div>
-          @else
-          <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
-          <div class="mb-4">
-            <el-radio-group v-model="payCode" size="small" class="radio-group">
-              <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
-                  class="img-fluid"></el-radio>
-              <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
-              </el-radio>
-            </el-radio-group>
-          </div>
-          <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
-            __('admin/marketing.btn_buy') }}</button>
-          @endif
+            @if ($data['downloadable'])
+            <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
+              __('admin/marketing.download_plugin') }}</button>
+            <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
+                  class="bi bi-cursor-fill"></i> <span></span></a></div>
+            @else
+            <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
+            <div class="mb-4">
+              <el-radio-group v-model="payCode" size="small" class="radio-group">
+                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
+                    class="img-fluid"></el-radio>
+                <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
+                </el-radio>
+              </el-radio-group>
+            </div>
+            <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
+              __('admin/marketing.btn_buy') }}</button>
+            <button class="btn btn-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+              __('admin/marketing.btn_buy_service') }}</button>
+            @endif
           @else
           <div class="alert alert-warning" role="alert">
             {!! __('admin/marketing.version_compatible_text') !!}
@@ -175,18 +179,83 @@ $data = $plugin;
       </div>
     </div>
   </el-dialog>
+
+  <el-dialog title="{{ __('admin/marketing.btn_buy_service') }}" :close-on-click-modal="false"
+    :visible.sync="serviceDialog.show" width="520px" @close="serviceDialogOnClose">
+    <div class="service-wx-pop" v-if="wechatpay_price">
+      <div class="text-center py-3 fs-5">{{ __('admin/marketing.text_pay') }}：<span class="fs-3 text-danger fw-bold">@{{
+          wechatpay_price }}</span></div>
+      <div class="d-flex justify-content-center align-items-center" id="service-info"></div>
+    </div>
+    <div id="service-content" v-else>
+      <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
+        <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
+          <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
+            <span class="fs-4">@{{ item.months }}个月 / @{{ item.price }}元</span>
+          </el-radio>
+        </div>
+      </el-radio-group>
+      <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuyService">{{
+        __('admin/marketing.btn_buy') }}</button>
+    </div>
+  </el-dialog>
 </div>
 
-@if ($data['description'])
-<div class="card h-min-200">
-  <div class="card-header">
-    <h5 class="card-title">{{ __('admin/marketing.download_description') }}</h5>
-  </div>
-  <div class="card-body">
-    {!! $data['description'] !!}
+<div class="card h-min-200 p-4">
+  <ul class="nav nav-tabs nav-bordered mb-5" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">购买记录</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tab-description">
+      @if ($data['description'])
+      {!! $data['description'] !!}
+      @endif
+    </div>
+    <div class="tab-pane fade" id="tab-histories">
+      @if (1)
+        <div class="table-push">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>订单id</th>
+                <th>购买规格</th>
+                <th>订单金额</th>
+                <th>支付方式</th>
+                <th>下单时间</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (1)
+                <tr>
+                  <td>1</td>
+                  <td>3个月</td>
+                  <td>60</td>
+                  <td>微信</td>
+                  <td>2023.08.18</td>
+                </tr>
+              @else
+                <tr>
+                  <td colspan="9" class="border-0">
+                    <x-admin-no-data />
+                  </td>
+                </tr>
+              @endif
+            </tbody>
+          </table>
+        </div>
+        {{-- {{ $orders->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      @else
+        <x-admin-no-data />
+      @endif
+    </div>
   </div>
 </div>
-@endif
 @endsection
 
 @push('footer')
@@ -201,6 +270,12 @@ $data = $plugin;
       setTokenDialog: {
         show: false,
         token: @json(system_setting('base.developer_token') ?? ''),
+      },
+
+      serviceDialog: {
+        show: false,
+        id: '',
+        plugin_services: @json($data['plugin_services'] ?? []),
       },
 
       loginForm: {
@@ -277,6 +352,11 @@ $data = $plugin;
         });
       },
 
+      serviceDialogOnClose() {
+        this.serviceDialog.months = ''
+        this.serviceDialog.price = ''
+      },
+
       dialogOnClose() {
         Object.keys(this.loginForm).forEach(key => this.loginForm[key] = '');
         Object.keys(this.registerForm).forEach(key => this.registerForm[key] = '');
@@ -294,6 +374,52 @@ $data = $plugin;
 
         $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}').then((res) => {
           $('.download-help').removeClass('d-none').find('span').text(res.message);
+        })
+      },
+
+      openService() {
+        if (!this.setTokenDialog.token) {
+          return this.setTokenDialog.show = true;
+        }
+
+        this.serviceDialog.show = true
+      },
+
+      marketingBuyService() {
+        if (!this.setTokenDialog.token) {
+          return this.setTokenDialog.show = true;
+        }
+
+        $http.post(`marketing/${this.serviceDialog.id}/buy_service`, {
+          payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
+          console.log(res)
+          return;
+
+
+          if (res.status == "fail") {
+            layer.msg(res.message, () => {})
+            return;
+          }
+
+          if (res.data.payment_code == 'wechatpay') {
+            this.wechatpay_price = res.data.price_format
+            this.getQrcode(res.data.pay_url);
+          }
+
+          if (res.data.payment_code == 'alipay') {
+            window.open(res.data.pay_url, '_blank');
+
+            Swal.fire({
+              title: '{{ __('admin/marketing.ali_pay_success') }}',
+              text: '{{ __('admin/marketing.ali_pay_text') }}',
+              icon: 'question',
+              confirmButtonColor: '#fd560f',
+              confirmButtonText: '{{ __('common.confirm') }}',
+              willClose: function () {
+                window.location.reload();
+              },
+            })
+          }
         })
       },
 
