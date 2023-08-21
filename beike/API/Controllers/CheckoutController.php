@@ -53,7 +53,7 @@ class CheckoutController extends Controller
      * @return mixed
      * @throws \Throwable
      */
-    public function confirm()
+    public function confirm(): mixed
     {
         try {
             $data = (new CheckoutService)->confirm();
