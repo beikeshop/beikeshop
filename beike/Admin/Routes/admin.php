@@ -121,6 +121,9 @@ Route::prefix($adminName)
                 Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
                 Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
 
+                Route::middleware('can:design_app_home_index')->get('design_app_home/builder', [Controllers\DesignAppController::class, 'index'])->name('design_app_home.index');
+                Route::middleware('can:design_app_home_index')->put('design_app_home/builder', [Controllers\DesignAppController::class, 'update'])->name('design_app_home.update');
+
                 // 模板主题
                 Route::middleware('can:theme_index')->get('themes', [Controllers\ThemeController::class, 'index'])->name('theme.index');
                 Route::middleware('can:theme_update')->put('themes/{code}', [Controllers\ThemeController::class, 'update'])->name('theme.update');

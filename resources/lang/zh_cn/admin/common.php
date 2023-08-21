@@ -78,6 +78,7 @@ return [
     'page_categories_index'  => '文章分类',
     'design_footer_index'    => '页尾装修',
     'design_menu_index'      => '导航配置',
+    'design_app_home_index'  => 'APP首页设计',
     'categories_index'       => '商品分类',
     'products_index'         => '商品管理',
     'products_trashed'       => '回收站',

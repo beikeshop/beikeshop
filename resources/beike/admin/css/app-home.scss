@@ -1,0 +1,109 @@
+.design-app-home {
+  .main-content>#content {
+    overflow: hidden;
+  }
+
+  #app {
+    .card-body {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+
+      > div {
+        flex: 1;
+        padding: 14px;
+      }
+
+      .c-title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .module-wrap {
+        .modules-list {
+          .list-item {
+            width: 33.33%;
+            display: inline-block;
+            height: 100px;
+            border: 1px solid #eee;
+            padding: 10px;
+            text-align: center;
+          }
+        }
+      }
+
+      .perview-wrap {
+        flex: 0 0 46%;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        border-left: 1px solid #eee;
+        border-right: 1px solid #eee;
+
+        .view-modules-list {
+          flex: 1;
+
+          .list-item {
+            width: 100%;
+            border: 1px solid transparent;
+            margin: 7px 0;
+
+            &.sortable-ghost {
+              padding: 6px 10px;
+              border: 1px dashed #ccc;
+              text-align: center;
+            }
+
+            &.active {
+              border-color: $primary;
+            }
+          }
+        }
+      }
+
+      .edit-wrap {
+        .module-editor-row {
+          height: 47px;
+          line-height: 47px;
+          background-color: #f5f5f5;
+          padding: 0 20px;
+          margin: 0 -14px 14px;
+          font-size: 16px;
+          color: #212121;
+        }
+
+        .module-edit-group {
+          margin-bottom: 20px;
+
+          &:last-of-type {
+            border-bottom: none;
+          }
+
+          .module-edit-title {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 6px;
+            display: flex;
+            justify-content: space-between;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 3px;
+              width: 2px;
+              height: 14px;
+              background: #0072ff;
+            }
+          }
+
+          .module-edit-sub-title {
+
+          }
+        }
+      }
+    }
+  }
+}
