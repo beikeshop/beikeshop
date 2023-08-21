@@ -205,10 +205,10 @@ class OrderRepo
             $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
             $email           = $current['guest_shipping_address']['email'];
         }
-        $shippingAddress->country    = $shippingAddress->country->name ?? '';
-        $shippingAddress->country_id = $shippingAddress->country->id   ?? 0;
-        $paymentAddress->country     = $paymentAddress->country->name  ?? '';
-        $paymentAddress->country_id  = $paymentAddress->country->id    ?? 0;
+        $shippingAddress->country_name = $shippingAddress->country->name ?? '';
+        $shippingAddress->country_id   = $shippingAddress->country->id   ?? 0;
+        $paymentAddress->country_name  = $paymentAddress->country->name  ?? '';
+        $paymentAddress->country_id    = $paymentAddress->country->id    ?? 0;
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $paymentMethodCode  = $current['payment_method_code']  ?? '';
@@ -239,7 +239,7 @@ class OrderRepo
             'shipping_customer_name' => $shippingAddress->name,
             'shipping_calling_code'  => $shippingAddress->calling_code ?? 0,
             'shipping_telephone'     => $shippingAddress->phone        ?? '',
-            'shipping_country'       => $shippingAddress->country      ?? '',
+            'shipping_country'       => $shippingAddress->country_name ?? '',
             'shipping_country_id'    => $shippingAddress->country_id   ?? 0,
             'shipping_zone'          => $shippingAddress->zone,
             'shipping_zone_id'       => $shippingAddress->zone_id ?? 0,
@@ -252,7 +252,7 @@ class OrderRepo
             'payment_customer_name'  => $paymentAddress->name,
             'payment_calling_code'   => $paymentAddress->calling_code ?? 0,
             'payment_telephone'      => $paymentAddress->phone        ?? '',
-            'payment_country'        => $paymentAddress->country      ?? '',
+            'payment_country'        => $paymentAddress->country_name ?? '',
             'payment_country_id'     => $paymentAddress->country_id   ?? 0,
             'payment_zone'           => $paymentAddress->zone,
             'payment_zone_id'        => $paymentAddress->zone_id ?? 0,
