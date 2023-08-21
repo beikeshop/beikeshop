@@ -11,6 +11,7 @@
 
 namespace Plugin\Stripe\Services;
 
+use Beike\Models\Country;
 use Beike\Shop\Services\PaymentService;
 use Stripe\Customer;
 use Stripe\Exception\ApiErrorException;
@@ -84,14 +85,15 @@ class StripePaymentService extends PaymentService
      */
     private function createCustomer(string $source = ''): Customer
     {
-        $customerData = [
+        $paymentCountry = Country::query()->find($this->order->payment_country_id);
+        $customerData   = [
             'email'       => $this->order->email,
             'description' => setting('base.meta_title'),
             'name'        => $this->order->customer_name,
             'phone'       => $this->order->shipping_telephone,
             'address'     => [
                 'city'        => $this->order->payment_city,
-                'country'     => $this->order->payment_country,
+                'country'     => $paymentCountry->code ?? '',
                 'line1'       => $this->order->payment_address_1,
                 'line2'       => $this->order->payment_address_2,
                 'postal_code' => $this->order->payment_zipcode,
@@ -115,12 +117,14 @@ class StripePaymentService extends PaymentService
      */
     private function getShippingAddress(): array
     {
+        $shippingCountry = Country::query()->find($this->order->shipping_country_id);
+
         return [
             'name'    => $this->order->shipping_customer_name,
             'phone'   => $this->order->shipping_telephone,
             'address' => [
                 'city'        => $this->order->shipping_city,
-                'country'     => $this->order->shipping_country,
+                'country'     => $shippingCountry->code ?? '',
                 'line1'       => $this->order->shipping_address_1,
                 'line2'       => $this->order->shipping_address_2,
                 'postal_code' => $this->order->shipping_zipcode,
@@ -162,7 +166,8 @@ class StripePaymentService extends PaymentService
      */
     private function getBillingDetails(): array
     {
-        $order = $this->order;
+        $order          = $this->order;
+        $paymentCountry = Country::query()->find($order->payment_country_id);
 
         return [
             'name'    => $order->customer_name,
@@ -170,7 +175,7 @@ class StripePaymentService extends PaymentService
             'phone'   => $order->telephone ?: $order->payment_telephone,
             'address' => [
                 'city'       => $order->payment_city,
-                'country'    => $order->payment_country,
+                'country'    => $paymentCountry->code ?? '',
                 'line1'      => $order->payment_address_1,
                 'line2'      => $order->payment_address_2,
                 'postalCode' => $order->payment_zipcode,
