@@ -58,18 +58,35 @@ class StripeController extends Controller
      * Webhook from stripe
      * https://dashboard.stripe.com/webhooks
      * @param Request $request
-     * @return void
+     * @return JsonResponse
      */
-    public function callback(Request $request): void
+    public function callback(Request $request): JsonResponse
     {
-        Log::info("====== Start Stripe Callback ======");
+        Log::info('====== Start Stripe Callback ======');
+
         try {
             $requestData = $request->all();
-            Log::info("Request data: " . json_encode($requestData));
+            Log::info('Request data: ' . json_encode($requestData));
 
+            $type        = $requestData['type'];
+            $orderNumber = $request['data']['object']['metadata']['order_number'] ?? '';
+            $order       = OrderRepo::getOrderByNumber($orderNumber);
+
+            Log::info('Request type: ' . $type);
+            Log::info('Request number: ' . $orderNumber);
+
+            if ($type == 'charge.succeeded' && $order) {
+                StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
+
+                return json_success(trans('Stripe::common.capture_success'));
+            }
+
+            return json_success(trans('Stripe::common.capture_fail'));
 
         } catch (\Exception $e) {
-            Log::info("Stripe error: " . $e->getMessage());
+            Log::info('Stripe error: ' . $e->getMessage());
+
+            return json_success($e->getMessage());
         }
     }
 }
