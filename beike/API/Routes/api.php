@@ -33,10 +33,10 @@ Route::prefix('api')
 
         Route::get('carts', [ShopControllers\CartController::class, 'index']);
         Route::post('carts', [ShopControllers\CartController::class, 'store']);
-        Route::put('carts/{cart}', [ShopControllers\CartController::class, 'update']);
-        Route::delete('carts/{cart}', [ShopControllers\CartController::class, 'destroy']);
         Route::put('carts/select', [ShopControllers\CartController::class, 'select']);
         Route::put('carts/unselect', [ShopControllers\CartController::class, 'unselect']);
+        Route::put('carts/{cart}', [ShopControllers\CartController::class, 'update']);
+        Route::delete('carts/{cart}', [ShopControllers\CartController::class, 'destroy']);
 
         Route::get('checkout', [ShopControllers\CheckoutController::class, 'index']);
         Route::put('checkout', [ShopControllers\CheckoutController::class, 'update']);
