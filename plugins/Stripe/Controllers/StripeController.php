@@ -17,6 +17,7 @@ use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Plugin\Stripe\Services\StripePaymentService;
 
 class StripeController extends Controller
@@ -50,6 +51,25 @@ class StripeController extends Controller
 
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * Webhook from stripe
+     * https://dashboard.stripe.com/webhooks
+     * @param Request $request
+     * @return void
+     */
+    public function callback(Request $request): void
+    {
+        Log::info("====== Start Stripe Callback ======");
+        try {
+            $requestData = $request->all();
+            Log::info("Request data: " . json_encode($requestData));
+
+
+        } catch (\Exception $e) {
+            Log::info("Stripe error: " . $e->getMessage());
         }
     }
 }
