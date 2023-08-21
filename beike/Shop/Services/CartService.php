@@ -130,6 +130,27 @@ class CartService
     }
 
     /**
+     * 反选购物车商品
+     *
+     * @param $customer
+     * @param $cartIds
+     */
+    public static function unselect($customer, $cartIds)
+    {
+        if ($customer) {
+            $builder = CartProduct::query()->where('customer_id', $customer->id);
+        } else {
+            $builder = CartProduct::query()->where('session_id', session()->getId());
+        }
+        $builder->update(['selected' => 1]);
+        if (empty($cartIds)) {
+            return;
+        }
+        $builder->whereIn('id', $cartIds)
+            ->update(['selected' => 0]);
+    }
+
+    /**
      * 更新购物车数量
      */
     public static function updateQuantity($customer, $cartId, $quantity)
