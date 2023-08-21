@@ -138,7 +138,7 @@ class StripePaymentService extends PaymentService
      * @return array
      * @throws ApiErrorException
      */
-    public function getMobilePaymentData()
+    public function getMobilePaymentData(): array
     {
         $stripeCustomer = $this->createCustomer();
         $ephemeralKey   = $this->stripeClient->ephemeralKeys->create(
@@ -203,6 +203,9 @@ class StripePaymentService extends PaymentService
             'currency'                  => $currency,
             'automatic_payment_methods' => [
                 'enabled' => true,
+            ],
+            'metadata' => [
+                'order_number' => $this->order->number,
             ],
         ]);
     }
