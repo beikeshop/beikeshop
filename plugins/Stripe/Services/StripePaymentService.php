@@ -146,7 +146,7 @@ class StripePaymentService extends PaymentService
             ['stripe_version' => '2022-08-01']
         );
 
-        $paymentIntent = $this->createPaymentIntent();
+        $paymentIntent = $this->createPaymentIntent($stripeCustomer);
 
         return [
             'customer'       => $stripeCustomer->id,
@@ -186,10 +186,11 @@ class StripePaymentService extends PaymentService
 
     /**
      * Create payment intent
+     * @param $stripeCustomer
      * @return PaymentIntent
      * @throws ApiErrorException
      */
-    public function createPaymentIntent(): PaymentIntent
+    public function createPaymentIntent($stripeCustomer): PaymentIntent
     {
         $currency = $this->order->currency_code;
         if (! in_array($currency, self::ZERO_DECIMAL)) {
@@ -204,6 +205,7 @@ class StripePaymentService extends PaymentService
             'automatic_payment_methods' => [
                 'enabled' => true,
             ],
+            'customer' => $stripeCustomer->id,
             'metadata' => [
                 'order_number' => $this->order->number,
             ],
