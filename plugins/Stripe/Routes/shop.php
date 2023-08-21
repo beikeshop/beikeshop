@@ -13,3 +13,4 @@ use Illuminate\Support\Facades\Route;
 use Plugin\Stripe\Controllers\StripeController;
 
 Route::post('/stripe/capture', [StripeController::class, 'capture'])->name('stripe_capture');
+Route::post('/callback/stripe', [StripeController::class, 'callback'])->name('stripe_callback');
