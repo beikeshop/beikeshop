@@ -26,6 +26,7 @@ class AccountController extends Controller
     {
         try {
             CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
+
             return json_success(trans('common.edit_success'));
         } catch (\Exception $e) {
             return json_fail($e->getMessage());

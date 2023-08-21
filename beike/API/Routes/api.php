@@ -27,6 +27,7 @@ Route::prefix('api')
         Route::put('me', [ShopControllers\AccountController::class, 'update']);
 
         Route::post('files', [ShopControllers\FileController::class, 'store']);
+        Route::get('articles', [ShopControllers\ArticleController::class, 'index']);
 
         Route::get('home', [ShopControllers\HomeController::class, 'index']);
         Route::get('products', [ShopControllers\ProductController::class, 'index']);

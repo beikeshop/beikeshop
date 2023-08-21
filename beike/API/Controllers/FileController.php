@@ -5,8 +5,8 @@
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2023-08-15 11:02:22
- * @modified   2023-08-15 11:02:22
+ * @created    2023-08-21 18:02:22
+ * @modified   2023-08-21 18:02:22
  */
 
 namespace Beike\API\Controllers;
@@ -29,11 +29,12 @@ class FileController extends Controller
             $path = $file->store($type, 'upload');
 
             $data = [
-                'url' => asset('upload/' . $path),
+                'url'   => asset('upload/' . $path),
                 'value' => 'upload/' . $path,
             ];
 
             $data = hook_filter('file.store.data', $data);
+
             return json_success(trans('shop/file.uploaded_success'), $data);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
