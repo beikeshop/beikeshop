@@ -209,6 +209,7 @@ class StripePaymentService extends PaymentService
             'metadata' => [
                 'order_number' => $this->order->number,
             ],
+            'shipping' => $this->getShippingAddress(),
         ]);
     }
 }
