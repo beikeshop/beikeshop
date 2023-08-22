@@ -121,6 +121,7 @@ class MarketingService
     {
         $url    = config('beike.api_url') . "/api/plugin_services/{$pluginServiceOrderId}?version=" . config('beike.version');
         $plugin = $this->httpClient->get($url)->json();
+        // dd($url,$plugin);
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件服务订单不存在或已下架');
         }

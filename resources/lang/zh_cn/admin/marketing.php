@@ -32,7 +32,7 @@ return [
     'select_pay'                             => '选择支付方式',
     'wxpay'                                  => '微信扫码支付!',
     'pay_success_title'                      => '支付成功!',
-    'pay_success_text'                       => '插件购买成功，点击确定刷新页面',
+    'pay_success_text'                       => '购买成功，点击确定刷新页面',
     'ali_pay_success'                        => '已完成支付？',
     'ali_pay_text'                           => '已完成支付，请刷新页面',
     'ali_pay_text'                           => '已完成支付，请刷新页面',

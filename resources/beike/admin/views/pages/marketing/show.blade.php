@@ -271,6 +271,7 @@ $data = $plugin;
     data: {
       payCode: 'wechatpay',
       service_wechatpay_price: '',
+      service_id: '',
       wechatpay_price: '',
       radio3: '1',
       setTokenDialog: {
@@ -406,6 +407,7 @@ $data = $plugin;
 
           if (res.data.payment_code == 'wechatpay') {
             this.service_wechatpay_price = res.data.amount
+            this.service_id = res.data.id
             this.getQrcode(res.data.pay_url,'service');
           }
 
@@ -506,27 +508,10 @@ $data = $plugin;
           }, 500);
 
           setTimeout(() => {
-            Swal.fire({
-              title: '{{ __('admin/marketing.wxpay') }}',
-              width: 400,
-              height: 470,
-              heightAuto: false,
-              html: $('.service-wx-pop').html(),
-              showConfirmButton: false,
-              didOpen: function () {
-                // 微信支付二维码 轮询监控支付状态
-                self.chekOrderStatus();
-                self.timer = window.setInterval(() => {
-                  setTimeout(self.chekOrderStatus(), 0);
-                }, 1000)
-              },
-              didClose: function () {
-                $('#service-info').html('');
-              },
-              didDestroy: function () {
-                window.clearInterval(self.timer)
-              },
-            })
+            self.chekServiceOrderStatus();
+            self.timer = window.setInterval(() => {
+              setTimeout(self.chekServiceOrderStatus(), 0);
+            }, 1000)
           }, 100)
         }
       },
@@ -535,6 +520,34 @@ $data = $plugin;
         $http.get('{{ admin_route('marketing.show', ['code' => $data['code']]) }}', null, {hload: true}).then((res) => {
           if (res.plugin.data.downloadable) {
             window.clearInterval(this.timer)
+            Swal.fire({
+              title: '{{ __('admin/marketing.pay_success_title') }}',
+              text: '{{ __('admin/marketing.pay_success_text') }}',
+              icon: 'success',
+              focusConfirm: false,
+              confirmButtonColor: '#75bc4d',
+              confirmButtonText: '{{ __('common.confirm') }}',
+              didClose: function () {
+                window.location.reload();
+              },
+            })
+          }
+        })
+      },
+
+      chekServiceOrderStatus() {
+        let that = this
+        $http.get(`marketing/service_orders/${this.service_id}`, null, {hload: true}).then((res) => {
+          if (res.data.status == 'fail') {
+            window.clearInterval(this.timer)
+            layer.msg(res.data.message, () => {})
+          }
+
+          if (res.data.data.status == 'paid') {
+            window.clearInterval(this.timer)
+            that.serviceDialog.id = ''
+            that.service_wechatpay_price = ''
+            that.serviceDialog.show = false
             Swal.fire({
               title: '{{ __('admin/marketing.pay_success_title') }}',
               text: '{{ __('admin/marketing.pay_success_text') }}',
