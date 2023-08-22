@@ -67,7 +67,7 @@
                 <span>@{{ item.text[source.locale] }}</span>
               </div>
             </div>
-            <div v-if="module.code == 'product'">
+            <div v-if="module.code == 'product' || module.code == 'category' || module.code == 'latest'">
               <div v-if="module.content.title[source.locale]" class="module-title">@{{ module.content.title[source.locale] }}</div>
               <div v-if="!module.content.products.length" class="hint-right-edit">请在右侧配置模块</div>
               <div class="product-grid">
@@ -109,14 +109,21 @@
 @include('admin::pages.design.builder.app_component.slideshow')
 @include('admin::pages.design.builder.app_component.icons')
 @include('admin::pages.design.builder.app_component.product')
+@include('admin::pages.design.builder.app_component.category')
+@include('admin::pages.design.builder.app_component.latest')
 
 @include('admin::pages.design.builder.component.image_selector')
 @include('admin::pages.design.builder.component.link_selector')
 @include('admin::pages.design.builder.component.text_i18n')
 <script>
-  const wh = window.innerHeight - 140;
-  $('#app').height(wh);
-  $('.perview-content').height(wh - 90);
+  $(document).ready(function ($) {
+    const wh = window.innerHeight - 140;
+    const perviewHead = $('.perview-content .head').height();
+    console.log(perviewHead);
+    $('#app').height(wh);
+    $('.perview-content').height(wh - 90);
+    $('.view-modules-list').height(wh - 94 - perviewHead);
+  })
 
   let app = new Vue({
     el: '#app',

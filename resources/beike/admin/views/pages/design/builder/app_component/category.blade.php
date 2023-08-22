@@ -1,5 +1,5 @@
-<template id="module-editor-product-template">
-  <div class="module-editor-product-template">
+<template id="module-editor-category-template">
+  <div class="module-editor-category-template">
     <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
@@ -8,7 +8,7 @@
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
-      <div class="module-edit-title">{{ __('admin/builder.modules_set_product') }}</div>
+      <div class="module-edit-title">搜索分类</div>
       <div class="tab-info">
         <div class="module-edit-group">
           <div class="autocomplete-group-wrapper">
@@ -22,37 +22,21 @@
               :highlight-first-item="true"
               @select="handleSelect"
             ></el-autocomplete>
-
-            <div class="item-group-wrapper" v-loading="loading">
-              <template v-if="productData.length">
-                <draggable
-                  ghost-class="dragabble-ghost"
-                  :list="productData"
-                  @change="itemChange"
-                  :options="{animation: 330}"
-                >
-                  <div v-for="(item, index) in productData" :key="index" class="item">
-                    <div>
-                      <i class="el-icon-s-unfold"></i>
-                      <span>${item.name}</span>
-                    </div>
-                    <i class="el-icon-delete right" @click="removeProduct(index)"></i>
-                  </div>
-                </draggable>
-              </template>
-              <template v-else>{{ __('admin/builder.modules_please_products') }}</template>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="module-edit-group">
+      <div class="module-edit-title">数量</div>
+      <el-input v-model="form.limit" type="muner" size="small" @input="limitChange"></el-input>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
-Vue.component('module-editor-product', {
+Vue.component('module-editor-category', {
   delimiters: ['${', '}'],
-  template: '#module-editor-product-template',
+  template: '#module-editor-category-template',
   props: ['module'],
   data: function () {
     return {
@@ -98,18 +82,26 @@ Vue.component('module-editor-product', {
     },
 
     querySearch(keyword, cb) {
-      $http.get('products/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
+      $http.get('categories/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
         cb(res.data);
       })
     },
 
     handleSelect(item) {
-      if (!this.form.products.find(v => v == item.id)) {
-        this.form.products.push(item);
-        this.productData.push(item);
-      }
+      this.form.category_id = item.id;
+      this.form.category_name = item.name;
+      this.getCategories();
+    },
 
-      this.keyword = ""
+    limitChange(e) {
+      this.form.limit = e;
+      this.getCategories();
+    },
+
+    getCategories() {
+      $http.get(`categories/${this.form.category_id}/products`, {limit: this.form.limit}, {hload:true}).then((res) => {
+        this.form.products = res.data
+      })
     },
 
     itemChange(evt) {
@@ -131,13 +123,18 @@ Vue.component('module-editor-product', {
 @push('footer')
   <script>
     app.source.modules.push({
-      title: '{{__('admin/app_builder.module_product')}}',
-      code: 'product',
+      title: '{{__('admin/app_builder.module_category')}}',
+      code: 'category',
       icon: '&#xe607;',
       content: {
         style: {
           background_color: ''
         },
+        limit: 10,
+        order: 'asc',
+        category_id: '',
+        category_name: '',
+        sort: 'sales',
         floor: languagesFill(''),
         products: [],
         title: languagesFill('{{ __('admin/builder.text_module_title') }}'),

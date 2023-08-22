@@ -60,7 +60,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 10px;
-            border-radius: 6px;
+            border-radius: 4px;
             &:hover {
               border-color: $primary;
             }
@@ -138,7 +138,7 @@
 
             &.sortable-ghost {
               padding: 6px 10px;
-              border: 1px dashed #ccc;
+              border: 1px dashed #aaa;
               display: flex;
               align-items: center;
               justify-content: center;
