@@ -184,6 +184,7 @@ Route::prefix($adminName)
                 Route::middleware('can:marketing_buy')->post('marketing/{code}/buy', [Controllers\MarketingController::class, 'buy'])->name('marketing.buy');
                 Route::post('marketing/{id}/buy_service', [Controllers\MarketingController::class, 'buyService'])->name('marketing.buy_service');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
+                Route::middleware('can:marketing_show')->get('marketing/service_orders/{id}', [Controllers\MarketingController::class, 'serviceOrder'])->name('marketing.service_order');
 
                 // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');

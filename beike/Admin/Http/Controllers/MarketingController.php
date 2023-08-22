@@ -100,6 +100,23 @@ class MarketingController
     }
 
     /**
+     * 获取单个插件详情
+     */
+    public function serviceOrder(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $pluginServiceOrder     = MarketingService::getInstance()->getPluginServiceOrder($id);
+
+            if ($request->expectsJson()) {
+                return json_success('成功', $pluginServiceOrder);
+            }
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
      * 下载插件安装包到本地
      */
     public function download(Request $request)

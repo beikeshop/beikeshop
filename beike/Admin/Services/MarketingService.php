@@ -112,6 +112,23 @@ class MarketingService
     }
 
     /**
+     * 获取插件服务订单信息
+     *
+     * @param $pluginServiceOrderId
+     * @return mixed
+     */
+    public function getPluginServiceOrder($pluginServiceOrderId): mixed
+    {
+        $url    = config('beike.api_url') . "/api/plugin_services/{$pluginServiceOrderId}?version=" . config('beike.version');
+        $plugin = $this->httpClient->get($url)->json();
+        if (empty($plugin)) {
+            throw new NotFoundHttpException('该插件服务订单不存在或已下架');
+        }
+
+        return $plugin;
+    }
+
+    /**
      * 下载插件到网站
      *
      * @param $pluginCode
