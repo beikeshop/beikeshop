@@ -12,11 +12,13 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        return system_setting('base.design_setting');
+        $appHomeData = system_setting('base.app_home_setting');
+        return json_success(trans('common.get_success'), $appHomeData);
     }
 }
