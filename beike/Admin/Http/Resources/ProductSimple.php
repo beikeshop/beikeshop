@@ -22,6 +22,7 @@ class ProductSimple extends JsonResource
             'name'         => $this->description->name,
             'image'        => $this->image,
             'image_format' => image_resize($this->image),
+            'status'       => $this->active,
         ];
 
         return hook_filter('resource.product.simple', $data);

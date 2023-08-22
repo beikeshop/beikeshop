@@ -19,6 +19,7 @@ class HomeController extends Controller
     public function index(): JsonResponse
     {
         $appHomeData = system_setting('base.app_home_setting');
+
         return json_success(trans('common.get_success'), $appHomeData);
     }
 }
