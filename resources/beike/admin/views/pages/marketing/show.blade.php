@@ -74,6 +74,8 @@ $data = $plugin;
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
+              <button class="btn btn-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+                __('admin/marketing.btn_buy_service') }}</button>
             </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
                   class="bi bi-cursor-fill"></i> <span></span></a></div>
@@ -89,8 +91,6 @@ $data = $plugin;
             </div>
             <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
               __('admin/marketing.btn_buy') }}</button>
-            <button class="btn btn-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
-              __('admin/marketing.btn_buy_service') }}</button>
             @endif
           @else
           <div class="alert alert-warning" role="alert">
@@ -359,8 +359,8 @@ $data = $plugin;
       },
 
       serviceDialogOnClose() {
-        this.serviceDialog.months = ''
-        this.serviceDialog.price = ''
+        this.serviceDialog.id = ''
+        this.service_wechatpay_price = ''
       },
 
       dialogOnClose() {
@@ -405,7 +405,7 @@ $data = $plugin;
           }
 
           if (res.data.payment_code == 'wechatpay') {
-            this.service_wechatpay_price = res.data.amount_format
+            this.service_wechatpay_price = res.data.amount
             this.getQrcode(res.data.pay_url,'service');
           }
 
@@ -496,7 +496,6 @@ $data = $plugin;
         }
 
         if (type == 'service') {
-          console.log(111)
           setTimeout(() => {
             new QRCode('service-info', {
               text: url,
@@ -504,7 +503,7 @@ $data = $plugin;
               height: 270,
               correctLevel : QRCode.CorrectLevel.M
             });
-          }, 300);
+          }, 500);
 
           setTimeout(() => {
             Swal.fire({
@@ -530,11 +529,10 @@ $data = $plugin;
             })
           }, 100)
         }
-      },  
+      },
 
       chekOrderStatus() {
         $http.get('{{ admin_route('marketing.show', ['code' => $data['code']]) }}', null, {hload: true}).then((res) => {
-          console.log(res.plugin.data.downloadable)
           if (res.plugin.data.downloadable) {
             window.clearInterval(this.timer)
             Swal.fire({
