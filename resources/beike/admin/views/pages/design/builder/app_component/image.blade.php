@@ -8,7 +8,7 @@
           <pb-image-selector v-model="form.images[0].image"></pb-image-selector>
           <div class="tag">建议尺寸: 1000 x 480</div>
         </div>
-        <link-selector v-model="form.images[0].link"></link-selector>
+        <link-selector :hide-types="['page_category']" v-model="form.images[0].link"></link-selector>
       </div>
     </div>
   </div>

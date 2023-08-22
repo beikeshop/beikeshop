@@ -22,7 +22,7 @@
           </div>
           <div class="module-edit-title">{{ __('admin/builder.text_set_title') }}</div>
           <text-i18n v-model="item.text" style="margin-bottom: 10px"></text-i18n>
-          <link-selector v-model="item.link"></link-selector>
+          <link-selector :hide-types="['page_category']" v-model="item.link"></link-selector>
         </div>
       </div>
       <div class="add-items" style="margin-top: 20px">

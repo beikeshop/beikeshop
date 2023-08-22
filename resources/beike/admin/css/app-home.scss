@@ -37,6 +37,7 @@
       .component-wrap {
         padding: 0 14px;
         overflow-y: auto;
+        height: calc(100% - 60px);
       }
 
       .c-title {
