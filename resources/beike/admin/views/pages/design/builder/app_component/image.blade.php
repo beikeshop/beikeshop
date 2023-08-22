@@ -49,7 +49,7 @@ Vue.component('module-editor-image', {
   <script>
     // 定义模块的配置项
     app.source.modules.push({
-      title: '{{__('admin/builder.text_image')}}',
+      title: '{{__('admin/app_builder.module_image')}}',
       code: 'image',
       icon: '&#xe663;',
       content: {

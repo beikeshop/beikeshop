@@ -9,7 +9,7 @@
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">数量</div>
-      <el-input v-model="form.limit" type="muner" size="small"></el-input>
+      <el-input v-model="form.limit" type="muner" size="small" @input="limitChange"></el-input>
     </div>
   </div>
 </template>
@@ -51,21 +51,19 @@ Vue.component('module-editor-latest', {
     },
 
     tabsValueProductData() {
-      var that = this;
-
-      if (!this.form.products.length) return;
       this.loading = true;
-
-      $http.get('products/names?product_ids='+this.form.products.map(e => e.id).join(','), {hload: true}).then((res) => {
-        this.loading = false;
-        that.productData = res.data;
-      })
+      this.getLatest();
     },
 
-    querySearch(keyword, cb) {
-      const url = this.form.data_type == 'product' ? 'products/autocomplete' : 'categories/autocomplete';
-      $http.get(url + '?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
-        cb(res.data);
+    limitChange(e) {
+      this.form.limit = e;
+      this.getLatest();
+    },
+
+    getLatest() {
+      $http.get('products/latest', {limit: this.form.limit}, {hload: true}).then((res) => {
+        this.loading = false;
+        this.form.products = res.data;
       })
     },
 

@@ -91,7 +91,7 @@ Vue.component('module-editor-slideshow', {
   <script>
     // 定义模块的配置项
     app.source.modules.push({
-      title: '{{__('admin/builder.modules_slideshow')}}',
+      title: '{{__('admin/app_builder.module_slideshow')}}',
       code: 'slideshow',
       icon: '&#xe663;',
       content: {

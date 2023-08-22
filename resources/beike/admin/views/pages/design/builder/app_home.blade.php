@@ -47,7 +47,7 @@
         <div class="head"><img src="{{ asset('image/app-app/builder-mb-bg.png') }}" class="img-fluid"></div>
         <div class="hint" v-if="!form.modules.length">
           <i class="bi bi-brightness-high fs-2"></i>
-          <div class="mt-2">请从左边拖动模块到这里</div>
+          <div class="mt-2">请从左边模块列表拖动模块到这里</div>
         </div>
         <draggable class="view-modules-list dragArea list-group" :options="{animation: 300, group:'people'}"
           :list="form.modules" group="people">
@@ -119,7 +119,6 @@
   $(document).ready(function ($) {
     const wh = window.innerHeight - 140;
     const perviewHead = $('.perview-content .head').height();
-    console.log(perviewHead);
     $('#app').height(wh);
     $('.perview-content').height(wh - 90);
     $('.view-modules-list').height(wh - 94 - perviewHead);

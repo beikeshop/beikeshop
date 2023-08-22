@@ -88,7 +88,7 @@ Vue.component('module-editor-icons', {
 @push('footer')
   <script>
     app.source.modules.push({
-      title: '{{__('admin/builder.text_service_icon')}}',
+      title: '{{__('admin/app_builder.module_icons')}}',
       code: 'icons',
       icon: '&#xe60e;',
       content: {
