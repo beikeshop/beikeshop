@@ -71,8 +71,10 @@ $data = $plugin;
         <div class="mb-4">
           @if ($data['available'])
             @if ($data['downloadable'])
-            <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
-              __('admin/marketing.download_plugin') }}</button>
+            <div>
+              <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
+                __('admin/marketing.download_plugin') }}</button>
+            </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
                   class="bi bi-cursor-fill"></i> <span></span></a></div>
             @else
@@ -182,9 +184,12 @@ $data = $plugin;
 
   <el-dialog title="{{ __('admin/marketing.btn_buy_service') }}" :close-on-click-modal="false"
     :visible.sync="serviceDialog.show" width="520px" @close="serviceDialogOnClose">
-    <div class="service-wx-pop" v-if="wechatpay_price">
+    <div class="service-wx-pop" v-if="service_wechatpay_price">
+      <div class="text-center">
+        <span class="fw-bold fs-2">{{ __('admin/marketing.wxpay') }}</span>
+      </div>
       <div class="text-center py-3 fs-5">{{ __('admin/marketing.text_pay') }}：<span class="fs-3 text-danger fw-bold">@{{
-          wechatpay_price }}</span></div>
+          service_wechatpay_price }}</span></div>
       <div class="d-flex justify-content-center align-items-center" id="service-info"></div>
     </div>
     <div id="service-content" v-else>
@@ -265,6 +270,7 @@ $data = $plugin;
 
     data: {
       payCode: 'wechatpay',
+      service_wechatpay_price: '',
       wechatpay_price: '',
       radio3: '1',
       setTokenDialog: {
@@ -392,9 +398,6 @@ $data = $plugin;
 
         $http.post(`marketing/${this.serviceDialog.id}/buy_service`, {
           payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
-          console.log(res)
-          return;
-
 
           if (res.status == "fail") {
             layer.msg(res.message, () => {})
@@ -402,8 +405,8 @@ $data = $plugin;
           }
 
           if (res.data.payment_code == 'wechatpay') {
-            this.wechatpay_price = res.data.price_format
-            this.getQrcode(res.data.pay_url);
+            this.service_wechatpay_price = res.data.amount_format
+            this.getQrcode(res.data.pay_url,'service');
           }
 
           if (res.data.payment_code == 'alipay') {
@@ -437,7 +440,7 @@ $data = $plugin;
 
           if (res.data.payment_code == 'wechatpay') {
             this.wechatpay_price = res.data.price_format
-            this.getQrcode(res.data.pay_url);
+            this.getQrcode(res.data.pay_url,'plugin');
           }
 
           if (res.data.payment_code == 'alipay') {
@@ -457,39 +460,77 @@ $data = $plugin;
         })
       },
 
-      getQrcode(url) {
+      getQrcode(url,type) {
         const self = this;
-        new QRCode('code-info', {
-          text: url,
-          width: 270,
-          height: 270,
-          correctLevel : QRCode.CorrectLevel.M
-        });
+        if (type == 'plugin') {
+          new QRCode('code-info', {
+            text: url,
+            width: 270,
+            height: 270,
+            correctLevel : QRCode.CorrectLevel.M
+          });
 
-        setTimeout(() => {
-          Swal.fire({
-            title: '{{ __('admin/marketing.wxpay') }}',
-            width: 400,
-            height: 470,
-            heightAuto: false,
-            html: $('.code-pop').html(),
-            showConfirmButton: false,
-            didOpen: function () {
-              // 微信支付二维码 轮询监控支付状态
-              self.chekOrderStatus();
-              self.timer = window.setInterval(() => {
-                setTimeout(self.chekOrderStatus(), 0);
-              }, 1000)
-            },
-            didClose: function () {
-              $('#code-info').html('');
-            },
-            didDestroy: function () {
-              window.clearInterval(self.timer)
-            },
-          })
-        }, 100)
-      },
+          setTimeout(() => {
+            Swal.fire({
+              title: '{{ __('admin/marketing.wxpay') }}',
+              width: 400,
+              height: 470,
+              heightAuto: false,
+              html: $('.code-pop').html(),
+              showConfirmButton: false,
+              didOpen: function () {
+                // 微信支付二维码 轮询监控支付状态
+                self.chekOrderStatus();
+                self.timer = window.setInterval(() => {
+                  setTimeout(self.chekOrderStatus(), 0);
+                }, 1000)
+              },
+              didClose: function () {
+                $('#code-info').html('');
+              },
+              didDestroy: function () {
+                window.clearInterval(self.timer)
+              },
+            })
+          }, 100)
+        }
+
+        if (type == 'service') {
+          console.log(111)
+          setTimeout(() => {
+            new QRCode('service-info', {
+              text: url,
+              width: 270,
+              height: 270,
+              correctLevel : QRCode.CorrectLevel.M
+            });
+          }, 300);
+
+          setTimeout(() => {
+            Swal.fire({
+              title: '{{ __('admin/marketing.wxpay') }}',
+              width: 400,
+              height: 470,
+              heightAuto: false,
+              html: $('.service-wx-pop').html(),
+              showConfirmButton: false,
+              didOpen: function () {
+                // 微信支付二维码 轮询监控支付状态
+                self.chekOrderStatus();
+                self.timer = window.setInterval(() => {
+                  setTimeout(self.chekOrderStatus(), 0);
+                }, 1000)
+              },
+              didClose: function () {
+                $('#service-info').html('');
+              },
+              didDestroy: function () {
+                window.clearInterval(self.timer)
+              },
+            })
+          }, 100)
+        }
+      },  
 
       chekOrderStatus() {
         $http.get('{{ admin_route('marketing.show', ['code' => $data['code']]) }}', null, {hload: true}).then((res) => {
