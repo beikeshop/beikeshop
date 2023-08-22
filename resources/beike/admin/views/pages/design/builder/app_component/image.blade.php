@@ -47,12 +47,11 @@ Vue.component('module-editor-image', {
 
 @push('footer')
   <script>
-    let register = null;
-
     // 定义模块的配置项
-    register = {
+    app.source.modules.push({
       title: '{{__('admin/builder.text_image')}}',
       code: 'image',
+      icon: '&#xe663;',
       content: {
         style: {
           background_color: ''
@@ -68,8 +67,6 @@ Vue.component('module-editor-image', {
           }
         ]
       }
-    }
-
-    app.source.modules.push(register)
+    })
   </script>
 @endpush

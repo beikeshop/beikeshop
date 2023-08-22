@@ -20,6 +20,7 @@ class DesignAppController extends Controller
         $data = [
             'design_settings' => system_setting('base.app_home_setting', ['modules' => []]),
         ];
+
         $data = hook_filter('admin.design_app_home.index.data', $data);
 
         return view('admin::pages.design.builder.app_home', $data);
