@@ -211,6 +211,7 @@ Route::prefix($adminName)
                 Route::middleware('can:products_show')->get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
                 Route::middleware('can:products_index')->get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
                 Route::middleware('can:products_index')->get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
+                Route::middleware('can:products_index')->get('products/latest', [Controllers\ProductController::class, 'latest'])->name('products.latest');
 
                 Route::middleware('can:products_update')->post('products/status', [Controllers\ProductController::class, 'updateStatus'])->name('products.update_status');
                 Route::middleware('can:products_delete')->delete('products/delete', [Controllers\ProductController::class, 'destroyByIds'])->name('products.batch_delete');

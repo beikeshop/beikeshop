@@ -5,6 +5,7 @@ namespace Beike\Admin\Http\Controllers;
 use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Admin\Http\Resources\ProductAttributeResource;
 use Beike\Admin\Http\Resources\ProductResource;
+use Beike\Admin\Http\Resources\ProductSimple;
 use Beike\Admin\Repositories\TaxClassRepo;
 use Beike\Admin\Services\ProductService;
 use Beike\Libraries\Weight;
@@ -193,6 +194,18 @@ class ProductController extends Controller
     public function autocomplete(Request $request)
     {
         $products = ProductRepo::autocomplete($request->get('name') ?? '');
+
+        return json_success(trans('common.get_success'), $products);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function latest(Request $request): JsonResponse
+    {
+        $limit          = $request->get('limit', 10);
+        $productList    = ProductRepo::getBuilder(['active' => 1, 'sort' => 'id'])->limit($limit)->get();
+        $products       = ProductSimple::collection($productList)->jsonSerialize();
 
         return json_success(trans('common.get_success'), $products);
     }
