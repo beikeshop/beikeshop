@@ -47,6 +47,7 @@ class DesignService
      */
     public static function handleModuleContent($moduleCode, $content)
     {
+        $productCodes           = ['product', 'category', 'latest'];
         $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
@@ -56,7 +57,7 @@ class DesignService
             return self::handleBrand($content);
         } elseif ($moduleCode == 'tab_product') {
             return self::handleTabProducts($content);
-        } elseif ($moduleCode == 'product') {
+        } elseif (in_array($moduleCode, $productCodes)) {
             return self::handleProducts($content);
         } elseif ($moduleCode == 'icons') {
             return self::handleIcons($content);
