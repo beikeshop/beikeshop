@@ -18,7 +18,7 @@ use Beike\Shop\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Plugin\Stripe\Services\StripePaymentService;
+use Plugin\Stripe\Services\StripeService;
 
 class StripeController extends Controller
 {
@@ -38,7 +38,7 @@ class StripeController extends Controller
             $creditCardData = $request->all();
 
             OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $creditCardData]);
-            $result = (new StripePaymentService($order))->capture($creditCardData);
+            $result = (new StripeService($order))->capture($creditCardData);
             OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
 
             if ($result) {

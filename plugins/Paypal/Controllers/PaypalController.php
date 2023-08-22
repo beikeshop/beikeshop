@@ -27,7 +27,12 @@ class PaypalController
 {
     private PayPal $paypalClient;
 
-    private function initPaypal()
+    /**
+     * Init Paypal
+     *
+     * @throws \Throwable
+     */
+    private function initPaypal(): void
     {
         $paypalSetting = plugin_setting('paypal');
         $config        = [
