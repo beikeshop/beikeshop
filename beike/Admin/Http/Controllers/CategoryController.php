@@ -112,16 +112,17 @@ class CategoryController extends Controller
     /**
      * 获取分类下商品列表
      *
-     * @param Request $request
+     * @param Request  $request
      * @param Category $category
      * @return JsonResponse
      * @throws \Exception
      */
     public function getProducts(Request $request, Category $category): JsonResponse
     {
-        $limit = $request->get('limit', 10);
-        $productList = ProductRepo::getBuilder(['category_id'=>$category->id, 'active'=>1])->limit($limit)->get();
+        $limit          = $request->get('limit', 10);
+        $productList    = ProductRepo::getBuilder(['category_id' => $category->id, 'active' => 1])->limit($limit)->get();
         $products       = ProductResource::collection($productList)->jsonSerialize();
+
         return json_success(trans('common.get_success'), $products);
     }
 }
