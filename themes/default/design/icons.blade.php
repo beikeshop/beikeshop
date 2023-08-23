@@ -9,7 +9,7 @@
       <div class="row">
         @foreach ($content['images'] as $image)
         <div class="col-6 col-md-4 col-lg-2">
-          <a href="{{ $image['link'] ?: 'javascript:void(0)' }}" class="text-decoration-none">
+          <a href="{{ $image['url'] ?: 'javascript:void(0)' }}" class="text-decoration-none">
             <div class="image-item d-flex justify-content-center mb-3">
               <img src="{{ $image['image'] }}" class="img-fluid">
             </div>
