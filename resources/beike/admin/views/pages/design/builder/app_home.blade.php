@@ -122,6 +122,7 @@
     $('#app').height(wh);
     $('.perview-content').height(wh - 90);
     $('.view-modules-list').height(wh - 94 - perviewHead);
+    $('.modules-list, .component-wrap').height(wh - 70);
   })
 
   let app = new Vue({
