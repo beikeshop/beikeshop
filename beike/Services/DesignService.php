@@ -143,10 +143,11 @@ class DesignService
         $images = [];
         foreach ($content['images'] as $image) {
             $images[] = [
-                'image'     => image_origin($image['image'] ?? ''),
-                'text'      => $image['text'][locale()]     ?? '',
-                'sub_text'  => $image['sub_text'][locale()] ?? '',
-                'link'      => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
+                'image'    => image_origin($image['image'] ?? ''),
+                'text'     => $image['text'][locale()]         ?? '',
+                'sub_text' => $image['sub_text'][locale()] ?? '',
+                'link'     => $image['link'],
+                'url'      => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
             ];
         }
 

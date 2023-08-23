@@ -35,7 +35,7 @@ class PaypalController
      */
     private function initPaypal($order): void
     {
-        $paypalService = new PaypalService($order);
+        $paypalService      = new PaypalService($order);
         $this->paypalClient = $paypalService->paypalClient;
     }
 
