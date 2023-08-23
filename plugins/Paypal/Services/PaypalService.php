@@ -80,7 +80,7 @@ class PaypalService extends PaymentService
             'clientId'    => $clientId,
             'currency'    => $this->order->currency_code,
             'environment' => $mode,
-            'orderId'     => $paypalOrder->id,
+            'orderId'     => $paypalOrder['id'],
             'userAction'  => 'paynow',  //'paynow/continue'
         ];
     }
