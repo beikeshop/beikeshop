@@ -21,6 +21,7 @@ use Beike\Services\StateMachineService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Plugin\Paypal\Services\PaypalService;
 use Srmklive\PayPal\Services\PayPal;
 
 class PaypalController
@@ -32,29 +33,10 @@ class PaypalController
      *
      * @throws \Throwable
      */
-    private function initPaypal(): void
+    private function initPaypal($order): void
     {
-        $paypalSetting = plugin_setting('paypal');
-        $config        = [
-            'mode'           => $paypalSetting['sandbox_mode'] ? 'sandbox' : 'live',
-            'sandbox'        => [
-                'client_id'     => $paypalSetting['sandbox_client_id'],
-                'client_secret' => $paypalSetting['sandbox_secret'],
-            ],
-            'live'           => [
-                'client_id'     => $paypalSetting['live_client_id'],
-                'client_secret' => $paypalSetting['live_secret'],
-            ],
-            'payment_action' => 'Sale',
-            'currency'       => 'USD',
-            'notify_url'     => '',
-            'locale'         => 'en_US',
-            'validate_ssl'   => false,
-        ];
-        config(['paypal' => null]);
-        $this->paypalClient = new PayPal($config);
-        $token              = $this->paypalClient->getAccessToken();
-        $this->paypalClient->setAccessToken($token);
+        $paypalService = new PaypalService($order);
+        $this->paypalClient = $paypalService->paypalClient;
     }
 
     /**
@@ -65,13 +47,13 @@ class PaypalController
      */
     public function create(Request $request): JsonResponse
     {
-        $this->initPaypal();
         $data        = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
         $customer    = current_customer();
         $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
         $total       = round($order->total, 2);
 
+        $this->initPaypal($order);
         $paypalOrder = $this->paypalClient->createOrder([
             'intent'         => 'CAPTURE',
             'purchase_units' => [
@@ -96,12 +78,12 @@ class PaypalController
      */
     public function capture(Request $request): JsonResponse
     {
-        $this->initPaypal();
         $data        = \json_decode($request->getContent(), true);
         $orderNumber = $data['orderNumber'];
         $customer    = current_customer();
         $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
 
+        $this->initPaypal($order);
         OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $data]);
         $paypalOrderId = $data['paypalOrderId'];
         $result        = $this->paypalClient->capturePaymentOrder($paypalOrderId);
