@@ -1,4 +1,4 @@
-<template id="module-editor-image-template">
+<template id="module-editor-image100-template">
   <div class="image-edit-wrapper">
     <div class="module-editor-row">内容</div>
     <div class="module-edit-group">
@@ -15,8 +15,8 @@
 </template>
 
 <script type="text/javascript">
-Vue.component('module-editor-image', {
-  template: '#module-editor-image-template',
+Vue.component('module-editor-image100', {
+  template: '#module-editor-image100-template',
 
   props: ['module'],
 
@@ -50,7 +50,7 @@ Vue.component('module-editor-image', {
     // 定义模块的配置项
     app.source.modules.push({
       title: '{{__('admin/app_builder.module_image')}}',
-      code: 'image',
+      code: 'image100',
       icon: '&#xe663;',
       content: {
         style: {

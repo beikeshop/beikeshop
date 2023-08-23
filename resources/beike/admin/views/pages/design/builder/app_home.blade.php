@@ -57,7 +57,7 @@
             <div v-if="module.code == 'slideshow'">
               <img :src="module.content.images[0].image[source.locale]" class="img-fluid">
             </div>
-            <div v-if="module.code == 'image'">
+            <div v-if="module.code == 'image100'">
               <img :src="module.content.images[0].image[source.locale]" class="img-fluid">
             </div>
             <div v-if="module.code == 'icons'" :class="['quick-icon-wrapper', 'quick-icon-' + module.content.images.length]">
