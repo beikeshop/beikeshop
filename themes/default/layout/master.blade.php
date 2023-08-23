@@ -55,6 +55,8 @@
       }
     @endif
   </script>
+
+  @stack('add-scripts')
 </body>
 <!-- BeikeShop v{{ config('beike.version') }}({{ config('beike.build') }}) -->
 </html>
