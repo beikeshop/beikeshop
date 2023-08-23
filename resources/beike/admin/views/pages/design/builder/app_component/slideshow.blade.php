@@ -30,7 +30,7 @@
               <pb-image-selector v-model="item.image"></pb-image-selector>
               <div class="tag">{{ __('admin/builder.text_suggested_size') }} 1000 x 500</div>
             </div>
-            <link-selector :hide-types="['page_category']" v-model="item.link"></link-selector>
+            <link-selector :hide-types="['page_category', 'static']" v-model="item.link"></link-selector>
           </div>
         </div>
       </draggable>
