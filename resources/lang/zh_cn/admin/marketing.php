@@ -41,4 +41,5 @@ return [
     'bk_register_hint'                       => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 上注册新账号',
     'bk_login_hint'                          => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 账号登录',
     'bind_bk_token'                          => '绑定BeikeShop账号，自动获取Token',
+    'no_choose'                              => '未选择！',
 ];

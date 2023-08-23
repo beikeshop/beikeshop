@@ -74,7 +74,7 @@ $data = $plugin;
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
-              <button class="btn btn-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+              <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
             </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
@@ -196,12 +196,14 @@ $data = $plugin;
       <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
         <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
           <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
-            <span class="fs-4">@{{ item.months }}个月 / @{{ item.price }}元</span>
+            <span style="font-size: .85rem">@{{ item.months }}个月 / @{{ item.price }}元</span>
           </el-radio>
         </div>
       </el-radio-group>
-      <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuyService">{{
-        __('admin/marketing.btn_buy') }}</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary btn-lg w-min-100 px-5 fw-bold" @click="marketingBuyService">{{
+          __('admin/marketing.btn_buy') }}</button>
+      </div>
     </div>
   </el-dialog>
 </div>
@@ -223,7 +225,8 @@ $data = $plugin;
       @endif
     </div>
     <div class="tab-pane fade" id="tab-histories">
-      @if (1)
+      {{-- {{ dd($data['service_buy_histories']) }} --}}
+      @if ($data['service_buy_histories'])
         <div class="table-push">
           <table class="table">
             <thead>
@@ -236,14 +239,16 @@ $data = $plugin;
               </tr>
             </thead>
             <tbody>
-              @if (1)
+              @if (count($data['service_buy_histories']))
+              @foreach ($data['service_buy_histories'] as $item)
                 <tr>
-                  <td>1</td>
-                  <td>3个月</td>
-                  <td>60</td>
-                  <td>微信</td>
-                  <td>2023.08.18</td>
+                  <td>{{ $item['id'] }}</td>
+                  <td>{{ $item['service_months'] }} 个月</td>
+                  <td>{{ $item['amount_format'] }}</td>
+                  <td>{{ $item['payment_code'] }}</td>
+                  <td>{{ $item['created_at_format'] }}</td>
                 </tr>
+              @endforeach
               @else
                 <tr>
                   <td colspan="9" class="border-0">
@@ -254,7 +259,7 @@ $data = $plugin;
             </tbody>
           </table>
         </div>
-        {{-- {{ $orders->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }} --}}
+        {{-- {{ $data['service_buy_histories']->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }} --}}
       @else
         <x-admin-no-data />
       @endif
@@ -360,6 +365,7 @@ $data = $plugin;
       },
 
       serviceDialogOnClose() {
+        window.clearInterval(this.timer)
         this.serviceDialog.id = ''
         this.service_wechatpay_price = ''
       },
@@ -395,6 +401,11 @@ $data = $plugin;
       marketingBuyService() {
         if (!this.setTokenDialog.token) {
           return this.setTokenDialog.show = true;
+        }
+
+        if (!this.serviceDialog.id) {
+          layer.msg('{{ __('admin/marketing.no_choose') }}')
+          return
         }
 
         $http.post(`marketing/${this.serviceDialog.id}/buy_service`, {
