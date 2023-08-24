@@ -265,6 +265,11 @@ function locale(): string
         return ($locales->contains($userLocale)) ? $userLocale : 'en';
     }
 
+    $registerLocale = registry('locale');
+    if ($registerLocale) {
+        return $registerLocale;
+    }
+
     return Session::get('locale') ?? system_setting('base.locale');
 }
 

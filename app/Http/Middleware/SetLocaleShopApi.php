@@ -33,6 +33,7 @@ class SetLocaleShopApi
         $locale = $locale ?? 'zh_cn';
 
         $languages = languages()->toArray();
+        register('locale', $locale);
         if (in_array($locale, $languages)) {
             App::setLocale($locale);
         } else {
