@@ -31,7 +31,7 @@
 <div class="card" id="app" v-cloak>
   <div class="card-body">
     <div class="module-wrap">
-      <div class="c-title">模块列表</div>
+      <div class="c-title">{{ __('admin/app_builder.module_list') }}</div>
       <draggable class="modules-list dragArea list-group"
         :options="{group:{ name: 'people', pull: 'clone', put: false }}" :list="source.modules"
         :clone="cloneDefaultField" @end="perviewEnd">
@@ -42,12 +42,12 @@
       </draggable>
     </div>
     <div class="perview-wrap">
-      <div class="c-title">效果预览</div>
+      <div class="c-title">{{ __('admin/app_builder.per_view') }}</div>
       <div class="perview-content">
         <div class="head"><img src="{{ asset('image/app-app/builder-mb-bg.png') }}" class="img-fluid"></div>
         <div class="hint" v-if="!form.modules.length">
           <i class="bi bi-brightness-high fs-2"></i>
-          <div class="mt-2">请从左边模块列表拖动模块到这里</div>
+          <div class="mt-2">{{ __('admin/app_builder.module_left_drag') }}</div>
         </div>
         <draggable class="view-modules-list dragArea list-group" :options="{animation: 300, group:'people'}"
           :list="form.modules" group="people">
@@ -61,7 +61,7 @@
               <img :src="module.content.images[0].image[source.locale]" class="img-fluid">
             </div>
             <div v-if="module.code == 'icons'" :class="['quick-icon-wrapper', 'quick-icon-' + module.content.images.length]">
-              <div v-if="!module.content.images.length" class="hint-right-edit">请在右侧配置模块</div>
+              <div v-if="!module.content.images.length" class="hint-right-edit">{{ __('admin/app_builder.module_right_edit') }}</div>
               <div class="link-item" v-for="item, icon_index in module.content.images" :key="icon_index">
                 <img :src="item.image" class="img-fluid">
                 <span>@{{ item.text[source.locale] }}</span>
@@ -69,7 +69,7 @@
             </div>
             <div v-if="module.code == 'product' || module.code == 'category' || module.code == 'latest'">
               <div v-if="module.content.title[source.locale]" class="module-title">@{{ module.content.title[source.locale] }}</div>
-              <div v-if="!module.content.products.length" class="hint-right-edit">请在右侧配置模块</div>
+              <div v-if="!module.content.products.length" class="hint-right-edit">{{ __('admin/app_builder.module_right_edit') }}</div>
               <div class="product-grid">
                 <div class="product-item" v-for="item, product_index in module.content.products" :key="product_index">
                   <img :src="item.image" class="img-fluid">
@@ -83,7 +83,7 @@
       </div>
     </div>
     <div class="module-edit">
-      <div class="c-title">模块编辑</div>
+      <div class="c-title">{{ __('admin/app_builder.module_edit') }}</div>
       <div v-if="form.modules.length > 0" class="component-wrap">
         <component :is="editingModuleComponent" :key="design.editingModuleIndex"
           :module="form.modules[design.editingModuleIndex].content" @on-changed="moduleUpdated"></component>
@@ -120,8 +120,8 @@
     const wh = window.innerHeight - 140;
     const perviewHead = $('.perview-content .head').height();
     $('#app').height(wh);
-    $('.perview-content').height(wh - 90);
-    $('.view-modules-list').height(wh - 94 - perviewHead);
+    $('.perview-content').height(wh - 70);
+    $('.view-modules-list').height(wh - 74 - perviewHead);
     $('.modules-list, .component-wrap').height(wh - 70);
   })
 

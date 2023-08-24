@@ -171,8 +171,9 @@
     margin-bottom: 20rpx;
 
     .link-item {
-      margin-bottom: 24rpx;
-      font-size: 26rpx;
+      margin-bottom: 10px;
+      font-size: 12px;
+      padding: 5px;
       width: 20%;
       text-align: center;
       display: flex;
@@ -186,10 +187,10 @@
       }
 
       span {
-        margin-top: 16rpx;
+        margin-top: 7px;
         display: block;
         line-height: 1.3;
-        font-size: 22rpx;
+        font-size: 12px;
       }
     }
 
