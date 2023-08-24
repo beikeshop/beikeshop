@@ -225,6 +225,10 @@
             Modified License has been approved by Open Source Initiative (OSI) and You
             comply with its license review and certification process.
           </p>
+          <p class="fw-bold">{{ trans('installer::installer_messages.welcome.statement_1') }}</p>
+          <p>{{ trans('installer::installer_messages.welcome.statement_2') }}</p>
+          <p>{{ trans('installer::installer_messages.welcome.statement_3') }}</p>
+          <p>{{ trans('installer::installer_messages.welcome.statement_4') }}</p>
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button type="button" class="btn btn-primary" disabled data-bs-dismiss="modal">{{ trans('installer::installer_messages.welcome.copyright_btn') }}</button>
