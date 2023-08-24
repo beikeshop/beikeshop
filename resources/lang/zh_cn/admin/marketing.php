@@ -42,4 +42,12 @@ return [
     'bk_login_hint'                          => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 账号登录',
     'bind_bk_token'                          => '绑定BeikeShop账号，自动获取Token',
     'no_choose'                              => '未选择！',
+
+    'munths'                                 => '个月',
+    'yuan'                                   => '元',
+    'service_buy_histories'                  => '购买记录',
+    'month'                                  => '购买规格',
+    'amount'                                 => '订单金额',
+    'payment_method'                         => '支付方式',
+    'create_date'                            => '下单时间',
 ];

@@ -27,6 +27,7 @@ return [
     'download_description'                => 'Plugin description',
     'text_free'                           => 'free',
     'btn_buy'                             => 'Buy',
+    'btn_buy_service'                     => 'After-sale service',
     'text_pay'                            => 'Payment Amount',
     'select_pay'                          => 'select payment method',
     'wxpay'                               => 'WeChat scan code payment!',
@@ -39,4 +40,11 @@ return [
     'bk_register_hint'                    => 'Register a new account with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'bk_login_hint'                       => 'login with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> account',
     'bind_bk_token'                       => 'Bind BeikeShop account and get Token automatically',
+
+    'munths'                              => 'months',
+    'service_buy_histories'               => 'Purchase records',
+    'month'                               => 'Purchase specifications',
+    'amount'                              => 'Order amount',
+    'payment_method'                      => 'Payment method',
+    'create_date'                         => 'Order placement time',
 ];

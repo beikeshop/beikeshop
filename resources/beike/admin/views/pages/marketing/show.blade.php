@@ -196,7 +196,7 @@ $data = $plugin;
       <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
         <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
           <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
-            <span style="font-size: .85rem">@{{ item.months }}个月 / @{{ item.price }}元</span>
+            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price }}</span>
           </el-radio>
         </div>
       </el-radio-group>
@@ -214,7 +214,7 @@ $data = $plugin;
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">购买记录</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
     </li>
   </ul>
 
@@ -231,11 +231,11 @@ $data = $plugin;
           <table class="table">
             <thead>
               <tr>
-                <th>订单id</th>
-                <th>购买规格</th>
-                <th>订单金额</th>
-                <th>支付方式</th>
-                <th>下单时间</th>
+                <th>ID</th>
+                <th>{{ __('admin/marketing.month') }}</th>
+                <th>{{ __('admin/marketing.amount') }}</th>
+                <th>{{ __('admin/marketing.payment_method') }}</th>
+                <th>{{ __('admin/marketing.create_date') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -243,7 +243,7 @@ $data = $plugin;
               @foreach ($data['service_buy_histories'] as $item)
                 <tr>
                   <td>{{ $item['id'] }}</td>
-                  <td>{{ $item['service_months'] }} 个月</td>
+                  <td>{{ $item['service_months'] }} {{ __('admin/marketing.munths') }}</td>
                   <td>{{ $item['amount_format'] }}</td>
                   <td>{{ $item['payment_code'] }}</td>
                   <td>{{ $item['created_at_format'] }}</td>
