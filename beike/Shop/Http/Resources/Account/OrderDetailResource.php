@@ -50,7 +50,8 @@ class OrderDetailResource extends JsonResource
             'created_at'             => time_format($this->created_at),
             'order_products'         => OrderProductSimple::collection($this->orderProducts),
             'order_totals'           => $this->orderTotals,
-            'order_histories'        => $this->orderHistories,
+            'order_histories'        => OrderHistoryList::collection($this->orderHistories),
+            'order_shipments'        => $this->orderShipments,
         ];
 
         return $data;

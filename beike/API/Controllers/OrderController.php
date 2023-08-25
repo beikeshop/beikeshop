@@ -45,9 +45,22 @@ class OrderController extends Controller
 
     public function show(Order $order): JsonResponse
     {
-        $orderData = new OrderDetailResource($order);
+        try {
+            $customer = current_customer();
+            if (empty($customer)) {
+                throw new \Exception('Empty customer');
+            }
+            if ($order->customer_id != $customer->id) {
+                throw new \Exception('Order dose not belong to customer');
+            }
 
-        return json_success(trans('common.get_success'), $orderData);
+            $orderData = new OrderDetailResource($order);
+
+            return json_success(trans('common.get_success'), $orderData);
+
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     public function pay(Request $request, Order $order)
