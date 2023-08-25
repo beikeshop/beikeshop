@@ -109,6 +109,7 @@ class CheckoutService
         $customer                 = current_customer();
         $checkoutData             = self::checkoutData();
         $checkoutData['customer'] = $customer;
+        $checkoutData['comment']  = request('comment');
         $this->validateConfirm($checkoutData);
 
         try {

@@ -38,4 +38,6 @@ return [
         'amounts_payable' => 'Amount',
         'payment_method'  => 'Payment Method',
     ],
+
+    'comment'             => 'Comment',
 ];

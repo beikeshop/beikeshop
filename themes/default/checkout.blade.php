@@ -64,6 +64,13 @@
               </div>
             </div>
 
+            <div class="checkout-black">
+              <h5 class="checkout-title">{{ __('shop/checkout.comment') }}</h5>
+              <div class="comment-wrap" id="comment-wrap">
+                <textarea rows="5" type="text" class="form-control" name="comment" placeholder="{{ __('shop/checkout.comment') }}">{{ old('comment', $comment ?? '') }}</textarea>
+              </div>
+            </div>
+
             @hook('checkout.bottom')
           </div>
         </div>
@@ -155,7 +162,11 @@
         return;
       }
 
-      $http.post('/checkout/confirm').then((res) => {
+      let data = {
+        comment: $('textarea[name=comment]').val()
+      }
+
+      $http.post('/checkout/confirm',data).then((res) => {
         location = 'orders/' + res.number + '/pay?type=create'
       })
     });

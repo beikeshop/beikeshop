@@ -191,6 +191,7 @@ class OrderRepo
         $current    = $data['current']  ?? [];
         $carts      = $data['carts']    ?? [];
         $totals     = $data['totals']   ?? [];
+        $comment    = $data['comment']  ?? '';
         $orderTotal = collect($totals)->where('code', 'order_total')->first();
 
         if ($customer) {
@@ -233,6 +234,7 @@ class OrderRepo
             'currency_value'         => $currencyValue,
             'ip'                     => request()->getClientIp(),
             'user_agent'             => request()->userAgent(),
+            'comment'                => $comment,
             'status'                 => StateMachineService::CREATED,
             'shipping_method_code'   => $shippingMethodCode,
             'shipping_method_name'   => trans($shippingMethodCode),

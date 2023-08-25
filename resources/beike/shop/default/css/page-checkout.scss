@@ -100,6 +100,17 @@ body.page-checkout {
       }
     }
   }
+
+  .comment-wrap {
+    .commentTxt {
+      border-color: #e5e5e5;
+      
+      &:focus-visible {
+        border-color: $primary;
+        outline: 0;
+      }
+    }
+  }
 }
 
 body.page-checkout, body.page-bk-stripe {

@@ -51,4 +51,5 @@ return [
     'shipped'            => 'Shipped',
     'completed'          => 'Completed',
     'cancelled'          => 'Cancelled',
+    'order_comment'      => 'Customer Comment',
 ];

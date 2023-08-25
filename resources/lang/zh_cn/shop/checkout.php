@@ -38,4 +38,6 @@ return [
         'amounts_payable' => '应付金额',
         'payment_method'  => '支付方式',
     ],
+
+    'comment'             => '订单备注',
 ];

@@ -208,6 +208,13 @@
   </div>
   @endhookwrapper
 
+  @if ($order->comment)
+    <div class="card mb-4">
+      <div class="card-header"><h6 class="card-title">{{ __('order.order_comment') }}</h6></div>
+      <div class="card-body">{{ $order->comment }}</div>
+    </div>
+  @endif
+
   @if ($order->orderPayments)
     @hookwrapper('admin.order.form.payments')
     <div class="card mb-4">
