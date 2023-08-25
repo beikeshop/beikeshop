@@ -35,7 +35,7 @@ class AuthController extends Controller
         AccountService::register($credentials);
 
         if (! $token = auth('api_customer')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => trans('auth.failed')], 401);
         }
 
         return $this->respondWithToken($token);
@@ -51,7 +51,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api_customer')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => trans('auth.failed')], 401);
         }
 
         return $this->respondWithToken($token);
@@ -67,7 +67,7 @@ class AuthController extends Controller
         $customer = auth('api_customer')->user();
 
         if (empty($customer)) {
-            return json_fail('Empty Customer', [], 401);
+            return json_fail(trans('auth.empty_customer'), [], 401);
         }
 
         return response()->json(new CustomerResource($customer));
@@ -82,7 +82,7 @@ class AuthController extends Controller
     {
         auth('api_customer')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => trans('logout_success')]);
     }
 
     /**
