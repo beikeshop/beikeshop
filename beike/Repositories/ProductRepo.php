@@ -110,7 +110,7 @@ class ProductRepo
             });
         }
 
-        $brandId = $filters['category_id'] ?? 0;
+        $brandId = $filters['brand_id'] ?? 0;
         if ($brandId) {
             $builder->where('brand_id', $brandId);
         }

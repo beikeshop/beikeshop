@@ -12,6 +12,8 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
+use Beike\Models\Brand;
+use Beike\Models\Category;
 use Beike\Models\Product;
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\ProductDetail;
@@ -31,7 +33,13 @@ class ProductController extends Controller
         $filterData = $request->only('attr', 'price', 'sort', 'order', 'per_page', 'category_id', 'brand_id');
         $products   = ProductRepo::getBuilder($filterData)->with('inCurrentWishlist')->paginate($filterData['per_page'] ?? perPage());
 
-        return ProductSimple::collection($products);
+        $category = Category::query()->find($request->get('category_id'));
+        $brand    = Brand::query()->find($request->get('brand_id'));
+
+        return ProductSimple::collection($products)->additional([
+            'category_name' => $category->description->name ?? '',
+            'brand_name'    => $brand->name                 ?? '',
+        ]);
     }
 
     /**
