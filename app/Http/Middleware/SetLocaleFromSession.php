@@ -15,11 +15,19 @@ class SetLocaleFromSession
      * @param Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
+        $requestLocale = $request->header('locale');
+        if (empty($requestLocale)) {
+            $requestLocale = $request->get('locale');
+        }
+
         $sessionLocale = session('locale');
-        if ($sessionLocale && in_array($sessionLocale, languages()->toArray())) {
-            App::setLocale($sessionLocale);
+
+        $locale = $requestLocale ?: $sessionLocale;
+        if ($locale && in_array($locale, languages()->toArray())) {
+            App::setLocale($locale);
+            session(['locale' => $locale]);
         } else {
             $configLocale = system_setting('base.locale');
             App::setLocale($configLocale);
