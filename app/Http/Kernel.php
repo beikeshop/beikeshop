@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \App\Http\Middleware\SetLocaleShopApi::class,
+            \App\Http\Middleware\SetCurrencyShopApi::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 

@@ -491,6 +491,11 @@ function currencies()
  */
 function current_currency_code(): string
 {
+    $registerLocale = registry('currency');
+    if ($registerLocale) {
+        return $registerLocale;
+    }
+
     return Session::get('currency') ?? system_setting('base.currency');
 }
 
