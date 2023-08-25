@@ -66,6 +66,7 @@ class ProductRepo
      * 通过商品ID获取商品列表
      * @param $productIds
      * @return AnonymousResourceCollection
+     * @throws \Exception
      */
     public static function getProductsByIds($productIds): AnonymousResourceCollection
     {
@@ -87,7 +88,7 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $builder = Product::query()->with('description', 'skus', 'masterSku', 'attributes');
+        $builder = Product::query()->with('description', 'skus', 'masterSku', 'attributes', 'brand');
 
         $builder->leftJoin('product_descriptions as pd', function ($build) {
             $build->whereColumn('pd.product_id', 'products.id')
@@ -107,6 +108,11 @@ class ProductRepo
                     $query->where('category_id', $filters['category_id']);
                 }
             });
+        }
+
+        $brandId = $filters['category_id'] ?? 0;
+        if ($brandId) {
+            $builder->where('brand_id', $brandId);
         }
 
         $productIds = $filters['product_ids'] ?? [];

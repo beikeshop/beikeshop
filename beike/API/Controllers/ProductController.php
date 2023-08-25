@@ -17,18 +17,31 @@ use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\ProductDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Product list with filters
+     *
+     * @throws \Exception
+     */
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $filterData = $request->only('attr', 'price', 'sort', 'order', 'per_page', 'category_id');
+        $filterData = $request->only('attr', 'price', 'sort', 'order', 'per_page', 'category_id', 'brand_id');
         $products   = ProductRepo::getBuilder($filterData)->with('inCurrentWishlist')->paginate($filterData['per_page'] ?? perPage());
 
         return ProductSimple::collection($products);
     }
 
-    public function show(Request $request, Product $product)
+    /**
+     * Product detail page
+     *
+     * @param Request $request
+     * @param Product $product
+     * @return ProductDetail
+     */
+    public function show(Request $request, Product $product): ProductDetail
     {
         return new ProductDetail($product);
     }
