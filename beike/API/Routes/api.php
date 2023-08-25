@@ -25,6 +25,7 @@ Route::prefix('api')
         Route::post('refresh', [ShopControllers\AuthController::class, 'refresh']);
         Route::get('me', [ShopControllers\AuthController::class, 'me']);
         Route::put('me', [ShopControllers\AccountController::class, 'update']);
+        Route::delete('me', [ShopControllers\AccountController::class, 'destroy']);
 
         Route::post('files', [ShopControllers\FileController::class, 'store']);
         Route::get('articles', [ShopControllers\ArticleController::class, 'index']);
@@ -58,6 +59,7 @@ Route::prefix('api')
         Route::get('orders', [ShopControllers\OrderController::class, 'index']);
         Route::get('orders/{order}', [ShopControllers\OrderController::class, 'show']);
         Route::post('orders/{order}/pay', [ShopControllers\OrderController::class, 'pay']);
+        Route::post('orders/{order}/cancel', [ShopControllers\OrderController::class, 'cancel']);
 
         Route::get('rmas', [ShopControllers\RmaController::class, 'index']);
         Route::post('rmas', [ShopControllers\RmaController::class, 'store']);

@@ -32,4 +32,18 @@ class AccountController extends Controller
             return json_fail($e->getMessage());
         }
     }
+
+    public function destroy(): JsonResponse
+    {
+        try {
+            $customer = current_customer();
+            if ($customer) {
+                $customer->delete();
+            }
+
+            return json_success(trans('common.delete_success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
 }

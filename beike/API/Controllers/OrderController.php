@@ -14,6 +14,7 @@ namespace Beike\API\Controllers;
 use App\Http\Controllers\Controller;
 use Beike\Models\Order;
 use Beike\Repositories\OrderRepo;
+use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\OrderDetailList;
 use Beike\Shop\Http\Resources\Account\OrderDetailResource;
 use Beike\Shop\Services\PaymentService;
@@ -61,6 +62,26 @@ class OrderController extends Controller
             }
 
             return (new PaymentService($order))->mobilePay();
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    public function cancel(Request $request, Order $order): JsonResponse
+    {
+        try {
+            $customer = current_customer();
+            if (empty($customer)) {
+                throw new \Exception('Empty customer');
+            }
+            if ($order->customer_id != $customer->id) {
+                throw new \Exception('Order dose not belong to customer');
+            }
+
+            StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED);
+
+            return json_success(trans('common.edit_success'));
+
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
