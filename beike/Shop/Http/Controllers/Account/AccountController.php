@@ -15,7 +15,7 @@ use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\ForgottenRequest;
-use Beike\Shop\Http\Resources\Account\OrderList;
+use Beike\Shop\Http\Resources\Account\OrderSimpleList;
 use Beike\Shop\Http\Resources\CustomerResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +32,7 @@ class AccountController extends Controller
         $customer = current_customer();
         $data     = [
             'customer'      => new CustomerResource($customer),
-            'latest_orders' => OrderList::collection(OrderRepo::getLatestOrders($customer, 10)),
+            'latest_orders' => OrderSimpleList::collection(OrderRepo::getLatestOrders($customer, 10)),
         ];
 
         return view('account/account', $data);

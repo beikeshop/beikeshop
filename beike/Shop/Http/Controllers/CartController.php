@@ -67,7 +67,7 @@ class CartController extends Controller
 
             $cart = CartService::add($sku, $quantity, $customer);
             if ($buyNow) {
-                CartService::select($customer, [$cart->id]);
+                CartService::select($customer, [$cart->id], true);
             }
 
             $cart = hook_filter('cart.store.data', $cart);

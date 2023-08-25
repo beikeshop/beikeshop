@@ -24,14 +24,14 @@
   @hook('layout.header.code')
   @stack('header')
 </head>
-<body class="@yield('body-class')">
-  @if (!request('iframe'))
+<body class="@yield('body-class') {{ request('_from') }}">
+  @if (!request('iframe') && request('_from') != 'app')
     @include('layout.header')
   @endif
 
   @yield('content')
 
-  @if (!request('iframe'))
+  @if (!request('iframe') && request('_from') != 'app')
     @include('layout.footer')
   @endif
 

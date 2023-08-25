@@ -12,7 +12,9 @@
 namespace Beike\API\Controllers;
 
 use App\Http\Controllers\Controller;
+use Beike\Shop\Http\Requests\RegisterRequest;
 use Beike\Shop\Http\Resources\CustomerResource;
+use Beike\Shop\Services\AccountService;
 
 class AuthController extends Controller
 {
@@ -26,6 +28,19 @@ class AuthController extends Controller
         // $this->middleware('auth:api', ['except' => ['login']]);
     }
 
+    public function register(RegisterRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        AccountService::register($credentials);
+
+        if (! $token = auth('api_customer')->attempt($credentials)) {
+            return response()->json(['error' => trans('auth.failed')], 401);
+        }
+
+        return $this->respondWithToken($token);
+    }
+
     /**
      * Get a JWT via given credentials.
      *
@@ -36,7 +51,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth('api_customer')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => trans('auth.failed')], 401);
         }
 
         return $this->respondWithToken($token);
@@ -51,6 +66,10 @@ class AuthController extends Controller
     {
         $customer = auth('api_customer')->user();
 
+        if (empty($customer)) {
+            return json_fail(trans('auth.empty_customer'), [], 401);
+        }
+
         return response()->json(new CustomerResource($customer));
     }
 
@@ -63,7 +82,7 @@ class AuthController extends Controller
     {
         auth('api_customer')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => trans('logout_success')]);
     }
 
     /**
@@ -88,7 +107,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => auth('api_customer')->factory()->getTTL() * 60,
+            'expires_in'   => auth('api_customer')->factory()->getTTL() * 120,
         ]);
     }
 }

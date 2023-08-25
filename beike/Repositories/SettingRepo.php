@@ -11,6 +11,7 @@
 
 namespace Beike\Repositories;
 
+use Beike\Admin\Http\Resources\RmaReasonDetail;
 use Beike\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -157,6 +158,26 @@ class SettingRepo
             $setting->update($settingData);
         }
         self::clearCache();
+    }
+
+    public static function getMobileSetting()
+    {
+        $rmaReasonList = RmaReasonRepo::list();
+        $rmaReasons    = RmaReasonDetail::collection($rmaReasonList)->jsonSerialize();
+
+        return [
+            'system' => [
+                'country_id' => system_setting('base.country_id'),
+                'zone_id'    => system_setting('base.zone_id'),
+                'currency'   => system_setting('base.currency'),
+                'locale'     => system_setting('base.locale'),
+            ],
+            'rma_statuses' => RmaRepo::getStatuses(),
+            'rma_types'    => RmaRepo::getTypes(),
+            'rma_reasons'  => $rmaReasons,
+            'locales'      => locales(),
+            'currencies'   => currencies(),
+        ];
     }
 
     /**

@@ -59,6 +59,7 @@ Route::prefix($adminName)
                 // 商品分类
                 Route::middleware('can:categories_index')->get('categories/autocomplete', [Controllers\CategoryController::class, 'autocomplete'])->name('categories.autocomplete');
                 Route::middleware('can:categories_show')->get('categories/{category}/name', [Controllers\CategoryController::class, 'name'])->name('categories.name');
+                Route::middleware('can:categories_show')->get('categories/{category}/products', [Controllers\CategoryController::class, 'getProducts'])->name('categories.products');
                 Route::middleware('can:categories_index')->get('categories', [Controllers\CategoryController::class, 'index'])->name('categories.index');
                 Route::middleware('can:categories_create')->get('categories/create', [Controllers\CategoryController::class, 'create'])->name('categories.create');
                 Route::middleware('can:categories_create')->post('categories', [Controllers\CategoryController::class, 'store'])->name('categories.store');
@@ -120,6 +121,9 @@ Route::prefix($adminName)
 
                 Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
                 Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
+
+                Route::middleware('can:design_app_home_index')->get('design_app_home/builder', [Controllers\DesignAppController::class, 'index'])->name('design_app_home.index');
+                Route::middleware('can:design_app_home_index')->put('design_app_home/builder', [Controllers\DesignAppController::class, 'update'])->name('design_app_home.update');
 
                 // 模板主题
                 Route::middleware('can:theme_index')->get('themes', [Controllers\ThemeController::class, 'index'])->name('theme.index');
@@ -207,6 +211,7 @@ Route::prefix($adminName)
                 Route::middleware('can:products_show')->get('products/{id}/name', [Controllers\ProductController::class, 'name'])->name('products.name');
                 Route::middleware('can:products_index')->get('products/names', [Controllers\ProductController::class, 'getNames'])->name('products.names');
                 Route::middleware('can:products_index')->get('products/autocomplete', [Controllers\ProductController::class, 'autocomplete'])->name('products.autocomplete');
+                Route::middleware('can:products_index')->get('products/latest', [Controllers\ProductController::class, 'latest'])->name('products.latest');
 
                 Route::middleware('can:products_update')->post('products/status', [Controllers\ProductController::class, 'updateStatus'])->name('products.update_status');
                 Route::middleware('can:products_delete')->delete('products/delete', [Controllers\ProductController::class, 'destroyByIds'])->name('products.batch_delete');

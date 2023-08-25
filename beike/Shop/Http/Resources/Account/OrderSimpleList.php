@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderList.php
+ * OrderSimpleList.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -13,7 +13,7 @@ namespace Beike\Shop\Http\Resources\Account;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderList extends JsonResource
+class OrderSimpleList extends JsonResource
 {
     public function toArray($request): array
     {

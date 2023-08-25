@@ -16,6 +16,20 @@ body[class^="page-account-"] {
   background-color: #F7F8FA;
 }
 
+body.app {
+  .breadcrumb-wrap {
+    height: 10px;
+
+    .container {
+      display: none;
+    }
+  }
+
+  .col-lg-3.col-12 {
+    display: none;
+  }
+}
+
 @font-face {font-family: 'Poppins';
   src: url('/fonts/poppins/Poppins-Regular.ttf') format("truetype");
   font-style: normal;

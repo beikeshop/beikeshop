@@ -31,7 +31,7 @@ class PageRepo
         }
 
         if (isset($filters['page_category_id'])) {
-            $pageCategoryId = (int) ($filters['page_category_id'] ?? 0);
+            $pageCategoryId = (int) $filters['page_category_id'];
             $builder->where('page_category_id', $pageCategoryId);
         }
 
@@ -65,7 +65,7 @@ class PageRepo
     {
         $filters['is_active'] = 1;
 
-        $builder              = self::getBuilder($filters)->whereNot('page_category_id', 0);
+        $builder              = self::getBuilder($filters)->where('page_category_id', '>', 0);
 
         return $builder->paginate(perPage());
     }

@@ -17,7 +17,7 @@ use Beike\Models\OrderShipment;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\ShipmentService;
 use Beike\Services\StateMachineService;
-use Beike\Shop\Http\Resources\Account\OrderList;
+use Beike\Shop\Http\Resources\Account\OrderSimpleList;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class OrderController extends Controller
     {
         $orders = OrderRepo::filterOrders($request->all());
         $data   = [
-            'orders'   => OrderList::collection($orders),
+            'orders'   => OrderSimpleList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
         ];
         $data = hook_filter('admin.order.index.data', $data);

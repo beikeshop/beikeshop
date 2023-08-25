@@ -49,7 +49,7 @@ class CartService
             }
 
             $cartQuantity = $item->quantity;
-            $skuQuantity  =  $item->sku->quantity;
+            $skuQuantity  = $item->sku->quantity;
             if ($cartQuantity > $skuQuantity) {
                 $item->quantity = $skuQuantity;
                 $item->save();
@@ -100,7 +100,7 @@ class CartService
         }
 
         $cartQuantity = $cart->quantity;
-        $skuQuantity  =  $cart->sku->quantity;
+        $skuQuantity  = $cart->sku->quantity;
         if ($cartQuantity > $skuQuantity) {
             throw new \Exception(trans('cart.stock_out'));
         }
@@ -113,20 +113,41 @@ class CartService
      *
      * @param $customer
      * @param $cartIds
+     * @param bool $buyNow
      */
-    public static function select($customer, $cartIds)
+    public static function select($customer, $cartIds, bool $buyNow = false): void
     {
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
             $builder = CartProduct::query()->where('session_id', session()->getId());
         }
-        $builder->update(['selected' => 0]);
+        if ($buyNow) {
+            $builder->update(['selected' => 0]);
+        }
         if (empty($cartIds)) {
             return;
         }
-        $builder->whereIn('id', $cartIds)
-            ->update(['selected' => 1]);
+        $builder->whereIn('id', $cartIds)->update(['selected' => 1]);
+    }
+
+    /**
+     * 反选购物车商品
+     *
+     * @param $customer
+     * @param $cartIds
+     */
+    public static function unselect($customer, $cartIds): void
+    {
+        if (empty($cartIds)) {
+            return;
+        }
+        if ($customer) {
+            $builder = CartProduct::query()->where('customer_id', $customer->id);
+        } else {
+            $builder = CartProduct::query()->where('session_id', session()->getId());
+        }
+        $builder->whereIn('id', $cartIds)->update(['selected' => 0]);
     }
 
     /**

@@ -16,9 +16,10 @@ class CategoryDetail extends JsonResource
     public function toArray($request): array
     {
         $item = [
-            'id'   => $this->id,
-            'name' => $this->description->name ?? '',
-            'url'  => $this->url,
+            'id'    => $this->id,
+            'name'  => $this->description->name ?? '',
+            'image' => image_resize($this->image, 300, 300),
+            'url'   => $this->url,
         ];
 
         if ($this->relationLoaded('activeChildren') && $this->activeChildren->count() > 0) {

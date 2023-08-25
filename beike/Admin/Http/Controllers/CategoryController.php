@@ -4,10 +4,12 @@ namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;
+use Beike\Admin\Http\Resources\ProductSimple;
 use Beike\Admin\Services\CategoryService;
 use Beike\Models\Category;
 use Beike\Repositories\CategoryRepo;
 use Beike\Repositories\LanguageRepo;
+use Beike\Repositories\ProductRepo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -105,5 +107,22 @@ class CategoryController extends Controller
         $categories = CategoryRepo::autocomplete($request->get('name') ?? '');
 
         return json_success(trans('common.get_success'), $categories);
+    }
+
+    /**
+     * 获取分类下商品列表
+     *
+     * @param Request  $request
+     * @param Category $category
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function getProducts(Request $request, Category $category): JsonResponse
+    {
+        $limit          = $request->get('limit', 10);
+        $productList    = ProductRepo::getBuilder(['category_id' => $category->id, 'active' => 1])->limit($limit)->get();
+        $products       = ProductSimple::collection($productList)->jsonSerialize();
+
+        return json_success(trans('common.get_success'), $products);
     }
 }

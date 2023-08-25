@@ -224,9 +224,14 @@ function current_user(): ?AdminUser
  *
  * @return mixed
  */
-function current_customer(): ?Customer
+function current_customer(): mixed
 {
-    return auth()->guard(Customer::AUTH_GUARD)->user();
+    $customer = auth()->guard(Customer::AUTH_GUARD)->user();
+    if (empty($customer)) {
+        return auth('api_customer')->user();
+    }
+
+    return $customer;
 }
 
 /**
@@ -258,6 +263,11 @@ function locale(): string
         $userLocale = current_user()->locale;
 
         return ($locales->contains($userLocale)) ? $userLocale : 'en';
+    }
+
+    $registerLocale = registry('locale');
+    if ($registerLocale) {
+        return $registerLocale;
     }
 
     return Session::get('locale') ?? system_setting('base.locale');

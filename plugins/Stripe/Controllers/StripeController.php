@@ -15,8 +15,10 @@ use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Plugin\Stripe\Services\StripePaymentService;
+use Illuminate\Support\Facades\Log;
+use Plugin\Stripe\Services\StripeService;
 
 class StripeController extends Controller
 {
@@ -24,10 +26,10 @@ class StripeController extends Controller
      * 订单支付扣款
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      * @throws \Throwable
      */
-    public function capture(Request $request)
+    public function capture(Request $request): JsonResponse
     {
         try {
             $number         = request('order_number');
@@ -36,7 +38,7 @@ class StripeController extends Controller
             $creditCardData = $request->all();
 
             OrderPaymentRepo::createOrUpdatePayment($order->id, ['request' => $creditCardData]);
-            $result = (new StripePaymentService($order))->capture($creditCardData);
+            $result = (new StripeService($order))->capture($creditCardData);
             OrderPaymentRepo::createOrUpdatePayment($order->id, ['response' => $result]);
 
             if ($result) {
@@ -49,6 +51,42 @@ class StripeController extends Controller
 
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * Webhook from stripe
+     * https://dashboard.stripe.com/webhooks
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function callback(Request $request): JsonResponse
+    {
+        Log::info('====== Start Stripe Callback ======');
+
+        try {
+            $requestData = $request->all();
+            Log::info('Request data: ' . json_encode($requestData));
+
+            $type        = $requestData['type'];
+            $orderNumber = $request['data']['object']['metadata']['order_number'] ?? '';
+            $order       = OrderRepo::getOrderByNumber($orderNumber);
+
+            Log::info('Request type: ' . $type);
+            Log::info('Request number: ' . $orderNumber);
+
+            if ($type == 'charge.succeeded' && $order) {
+                StateMachineService::getInstance($order)->setShipment()->changeStatus(StateMachineService::PAID);
+
+                return json_success(trans('Stripe::common.capture_success'));
+            }
+
+            return json_success(trans('Stripe::common.capture_fail'));
+
+        } catch (\Exception $e) {
+            Log::info('Stripe error: ' . $e->getMessage());
+
+            return json_success($e->getMessage());
         }
     }
 }

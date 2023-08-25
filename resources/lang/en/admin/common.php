@@ -77,6 +77,7 @@ return [
     'languages_index'                  => 'Languages',
     'design_index'                     => 'Page Builder',
     'design_footer_index'              => 'Footer Builder',
+    'design_app_home_index'            => 'APP Builder',
     'design_menu_index'                => 'Menu Builder',
     'categories_index'                 => 'Categories',
     'products_index'                   => 'Products',
