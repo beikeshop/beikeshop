@@ -50,7 +50,7 @@ class CartService
 
             $cartQuantity = $item->quantity;
             $skuQuantity  = $item->sku->quantity;
-            if ($cartQuantity > $skuQuantity) {
+            if ($cartQuantity > $skuQuantity && $skuQuantity > 0) {
                 $item->quantity = $skuQuantity;
                 $item->save();
             }
