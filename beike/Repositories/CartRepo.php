@@ -37,8 +37,7 @@ class CartRepo
         } else {
             $cart = Cart::query()->where('session_id', $sessionId)->first();
         }
-        $defaultAddress   = AddressRepo::listByCustomer($customer)->first();
-        $defaultAddressId = $defaultAddress->id ?? 0;
+        $defaultAddressId = $customer->address_id;
 
         if (empty($cart)) {
             $shippingMethod     = PluginRepo::getShippingMethods()->first();
