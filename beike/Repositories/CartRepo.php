@@ -39,7 +39,7 @@ class CartRepo
         }
         $defaultAddressId = $customer->address_id ?? 0;
         if (empty($defaultAddressId) && $customer) {
-            $firstAddress   = AddressRepo::listByCustomer($customer)->first();
+            $firstAddress     = AddressRepo::listByCustomer($customer)->first();
             $defaultAddressId = $firstAddress->id ?? 0;
         }
 

@@ -9,7 +9,7 @@
  * @modified   2023-04-20 14:51:26
  */
 
-namespace Beike\API\Controllers\Admin;
+namespace Beike\AdminAPI\Controllers;
 
 class UserController
 {

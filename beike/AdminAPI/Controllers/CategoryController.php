@@ -9,7 +9,7 @@
  * @modified   2023-04-20 17:00:40
  */
 
-namespace Beike\API\Controllers\Admin;
+namespace Beike\AdminAPI\Controllers;
 
 use Beike\Admin\Http\Requests\CategoryRequest;
 use Beike\Admin\Http\Resources\CategoryResource;

@@ -9,7 +9,7 @@
  * @modified   2023-04-20 16:48:47
  */
 
-namespace Beike\API\Controllers\Admin;
+namespace Beike\AdminAPI\Controllers;
 
 use Beike\Admin\Http\Requests\ProductRequest;
 use Beike\Admin\Http\Resources\ProductResource;
@@ -51,7 +51,7 @@ class ProductController
         $relationIds = $product->relations->pluck('id')->toArray();
         $product     = ProductRepo::getProductDetail($product);
 
-        $data        = [
+        $data = [
             'product'   => (new ProductDetail($product))->jsonSerialize(),
             'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
         ];

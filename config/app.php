@@ -180,7 +180,8 @@ return [
         Beike\Shop\Providers\ShopServiceProvider::class,
         Beike\Shop\Providers\PluginServiceProvider::class,
         Beike\Installer\Providers\InstallerServiceProvider::class,
-        Beike\API\Providers\APIServiceProvider::class,
+        Beike\AdminAPI\Providers\AdminAPIServiceProvider::class,
+        // Beike\ShopAPI\Providers\ShopAPIServiceProvider::class,
         Beike\Hook\HookServiceProvider::class,
 
     ],

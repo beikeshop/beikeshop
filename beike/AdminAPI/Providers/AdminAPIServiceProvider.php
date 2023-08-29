@@ -9,14 +9,14 @@
  * @modified   2023-04-11 16:08:04
  */
 
-namespace Beike\API\Providers;
+namespace Beike\AdminAPI\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
-class APIServiceProvider extends ServiceProvider
+class AdminAPIServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if (is_installer()) {
             return;
@@ -28,7 +28,7 @@ class APIServiceProvider extends ServiceProvider
     /**
      * 注册后台用户 guard
      */
-    protected function registerGuard()
+    protected function registerGuard(): void
     {
         Config::set('auth.guards.api_customer', [
             'driver'   => 'jwt',

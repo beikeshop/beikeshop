@@ -9,7 +9,7 @@
  * @modified   2023-04-20 16:40:35
  */
 
-namespace Beike\API\Controllers\Admin;
+namespace Beike\AdminAPI\Controllers;
 
 use Beike\Models\Order;
 use Beike\Models\OrderShipment;

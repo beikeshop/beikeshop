@@ -9,7 +9,7 @@
  * @modified   2023-04-20 17:19:51
  */
 
-namespace Beike\API\Controllers\Admin;
+namespace Beike\AdminAPI\Controllers;
 
 use Beike\Models\Brand;
 use Beike\Repositories\BrandRepo;
