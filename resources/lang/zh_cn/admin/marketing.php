@@ -27,7 +27,10 @@ return [
     'download_description'                   => '插件描述',
     'text_free'                              => '免费',
     'btn_buy'                                => '购买',
-    'btn_buy_service'                        => '售后服务',
+    'btn_buy_service'                        => '购买售后',
+    'service_date_to'                        => '售后到期',
+    'days'                                   => '天',
+    'free_days'                              => '赠送',
     'text_pay'                               => '支付金额',
     'select_pay'                             => '选择支付方式',
     'wxpay'                                  => '微信扫码支付!',
@@ -50,4 +53,5 @@ return [
     'amount'                                 => '订单金额',
     'payment_method'                         => '支付方式',
     'create_date'                            => '下单时间',
+    'over_date'                              => '到期时间',
 ];

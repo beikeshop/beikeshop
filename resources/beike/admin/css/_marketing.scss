@@ -41,6 +41,12 @@ body.page-marketing-info {
     align-items: flex-start;
   }
 
+  .text-last {
+    width: 60px;
+    display: inline-block;
+    text-align-last: justify;
+  }
+
   .plugin-icon-wrap {
     position: relative;
 

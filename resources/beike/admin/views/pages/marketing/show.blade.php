@@ -38,35 +38,42 @@ $data = $plugin;
             class="lh-1 bg-secondary"></span>
         </div>
 
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('product.price') }}：</div>
-          <div class="fs-3 fw-bold" style="margin-left: -4px">{{ $data['price_format'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
-          <div>{{ $data['version'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
-          <div>{{ $data['version_name_format'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
-          <div class="d-inline-block">
-            <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
-              class="d-flex align-items-center text-dark">
-              <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img
-                  src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
-              <div class="ms-2">
-                <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
-                <div>{{ $data['developer']['email'] }}</div>
+        <table class="bg-light mb-2 w-100">
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
+            <td class="border p-2 fw-bold text-center"><div class="fs-3 fw-bold" style="margin-left: -4px">{{ $data['price_format'] }} ( {{ __('admin/marketing.free_days') }} )</div></td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
+            <td class="border p-2 fw-bold text-center"><div>{{ $data['version'] }}</div></td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
+            <td class="border p-2 fw-bold text-center"><div>{{ $data['version_name_format'] }}</div></td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
+            <td class="border p-2 fw-bold d-flex justify-content-center">
+              <div class="d-inline-block">
+                <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
+                  class="d-flex align-items-center text-dark">
+                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img
+                      src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
+                  <div class="ms-2">
+                    <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
+                    <div>{{ $data['developer']['email'] }}</div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </div>
+            </td>
+          </tr>
+          @if ($data['service_date_to'])
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
+            <td class="border p-2 fw-bold text-center">{{ $data['service_date_to'] }} ( {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }})</td>
+          </tr>
+          @endif
+        </table>
 
         <div class="mb-4">
           @if ($data['available'])
@@ -225,7 +232,6 @@ $data = $plugin;
       @endif
     </div>
     <div class="tab-pane fade" id="tab-histories">
-      {{-- {{ dd($data['service_buy_histories']) }} --}}
       @if ($data['service_buy_histories'])
         <div class="table-push">
           <table class="table">
@@ -236,6 +242,7 @@ $data = $plugin;
                 <th>{{ __('admin/marketing.amount') }}</th>
                 <th>{{ __('admin/marketing.payment_method') }}</th>
                 <th>{{ __('admin/marketing.create_date') }}</th>
+                <th>{{ __('admin/marketing.over_date') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -247,6 +254,7 @@ $data = $plugin;
                   <td>{{ $item['amount_format'] }}</td>
                   <td>{{ $item['payment_code'] }}</td>
                   <td>{{ $item['created_at_format'] }}</td>
+                  <td>{{ $item['service_date_to'] }}</td>
                 </tr>
               @endforeach
               @else

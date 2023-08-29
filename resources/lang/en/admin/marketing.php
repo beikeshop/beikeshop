@@ -27,7 +27,9 @@ return [
     'download_description'                => 'Plugin description',
     'text_free'                           => 'free',
     'btn_buy'                             => 'Buy',
-    'btn_buy_service'                     => 'After-sale service',
+    'btn_buy_service'                     => 'Buy service',
+    'service_date_to'                     => 'After sales date',
+    'days'                                => 'days',
     'text_pay'                            => 'Payment Amount',
     'select_pay'                          => 'select payment method',
     'wxpay'                               => 'WeChat scan code payment!',
@@ -47,4 +49,5 @@ return [
     'amount'                              => 'Order amount',
     'payment_method'                      => 'Payment method',
     'create_date'                         => 'Order placement time',
+    'over_date'                           => 'Expiration time',
 ];
