@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderProduct extends Base
 {
     protected $fillable = [
-        'product_id', 'order_number', 'product_sku', 'name', 'image', 'quantity', 'price',
+        'order_id', 'product_id', 'order_number', 'product_sku', 'name', 'image', 'quantity', 'price',
     ];
 
     protected $appends = ['price_format'];
@@ -31,7 +31,7 @@ class OrderProduct extends Base
         return $this->belongsTo(ProductSku::class, 'product_sku', 'sku');
     }
 
-    public function getPriceFormatAttribute()
+    public function getPriceFormatAttribute(): string
     {
         return currency_format($this->price);
     }
