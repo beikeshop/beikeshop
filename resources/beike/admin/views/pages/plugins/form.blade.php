@@ -105,6 +105,9 @@
                   </div>
                   @endforeach
                 </div>
+                @if (isset($column['description']))
+                  <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
+                @endif
               </x-admin::form.row>
             @endif
           @endforeach

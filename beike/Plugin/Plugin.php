@@ -143,7 +143,7 @@ class Plugin implements Arrayable, \ArrayAccess
      * 处理插件后台设置字段多语言 优先级: label > label_key
      * 有label字段则直接返回, label_key 则翻译
      */
-    public function handleLabel()
+    public function handleLabel(): void
     {
         $this->columns = collect($this->columns)->map(function ($item) {
             $item = $this->transLabel($item);
@@ -162,7 +162,7 @@ class Plugin implements Arrayable, \ArrayAccess
      * @param $item
      * @return mixed
      */
-    private function transLabel($item)
+    private function transLabel($item): mixed
     {
         $labelKey = $item['label_key'] ?? '';
         $label    = $item['label']     ?? '';
