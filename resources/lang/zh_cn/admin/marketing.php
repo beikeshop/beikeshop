@@ -31,6 +31,7 @@ return [
     'service_date_to'                        => '售后到期',
     'days'                                   => '天',
     'free_days'                              => '赠送',
+    'free_days_over'                         => '个月售后',
     'text_pay'                               => '支付金额',
     'select_pay'                             => '选择支付方式',
     'wxpay'                                  => '微信扫码支付!',

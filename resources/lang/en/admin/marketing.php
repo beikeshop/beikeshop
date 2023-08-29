@@ -30,6 +30,8 @@ return [
     'btn_buy_service'                     => 'Buy service',
     'service_date_to'                     => 'After sales date',
     'days'                                => 'days',
+    'free_days'                           => 'Free',
+    'free_days_over'                      => 'months of after-sales service',
     'text_pay'                            => 'Payment Amount',
     'select_pay'                          => 'select payment method',
     'wxpay'                               => 'WeChat scan code payment!',
