@@ -38,6 +38,11 @@ class ShopServiceProvider extends ServiceProvider
         }
         $this->loadRoutesFrom(__DIR__ . '/../Routes/shop.php');
 
+        $apiRoute = __DIR__ . '/../../ShopAPI/Routes/api.php';
+        if (file_exists($apiRoute)) {
+            $this->loadRoutesFrom($apiRoute);
+        }
+
         load_settings();
 
         $this->registerGuard();
