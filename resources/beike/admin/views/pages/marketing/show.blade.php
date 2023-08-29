@@ -15,6 +15,7 @@
 $data = $plugin;
 @endphp
 
+
 <div class="card mb-4" id="app">
   <div class="card-header">
     <h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5>
@@ -39,7 +40,7 @@ $data = $plugin;
         <table class="bg-light mb-2 w-100">
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center"><div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div> <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] }} {{ __('admin/marketing.free_days_over') }} )</span></td>
+            <td class="border p-2 fw-bold text-center"><div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div> <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span></td>
           </tr>
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
@@ -65,7 +66,7 @@ $data = $plugin;
               </div>
             </td>
           </tr>
-          @if ($data['service_date_to'])
+          @if ($data['service_date_to'] ?? 0)
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
             <td class="border p-2 fw-bold text-center">{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
@@ -88,8 +89,10 @@ $data = $plugin;
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
+              @if (count($data['plugin_services']))
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
+              @endif
             </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
                   class="bi bi-cursor-fill"></i> <span></span></a></div>
@@ -230,7 +233,7 @@ $data = $plugin;
       @endif
     </div>
     <div class="tab-pane fade" id="tab-histories">
-      @if ($data['service_buy_histories'])
+      @if ($data['service_buy_histories'] ?? 0)
         <div class="table-push">
           <table class="table">
             <thead>
@@ -265,7 +268,6 @@ $data = $plugin;
             </tbody>
           </table>
         </div>
-        {{-- {{ $data['service_buy_histories']->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }} --}}
       @else
         <x-admin-no-data />
       @endif
