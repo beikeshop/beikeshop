@@ -227,7 +227,7 @@ function current_user(): ?AdminUser
 function current_customer(): mixed
 {
     $customer = auth()->guard(Customer::AUTH_GUARD)->user();
-    if (empty($customer)) {
+    if (empty($customer) && config('jwt.secret')) {
         return auth('api_customer')->user();
     }
 
