@@ -141,16 +141,9 @@ class StripeService extends PaymentService
     public function getMobilePaymentData(): array
     {
         $stripeCustomer = $this->createCustomer();
-        $ephemeralKey   = $this->stripeClient->ephemeralKeys->create(
-            ['customer' => $stripeCustomer->id],
-            ['stripe_version' => '2022-08-01']
-        );
-
         $paymentIntent = $this->createPaymentIntent($stripeCustomer);
 
         return [
-            'customer'       => $stripeCustomer->id,
-            'ephemeralKey'   => $ephemeralKey->id,
             'isAllowDelay'   => true,
             'merchantName'   => system_setting('base.meta_title'),
             'paymentIntent'  => $paymentIntent->client_secret,
