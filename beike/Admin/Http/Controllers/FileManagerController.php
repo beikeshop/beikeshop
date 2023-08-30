@@ -209,11 +209,11 @@ class FileManagerController extends Controller
         $savePath = $request->get('path');
 
         $originName = $file->getClientOriginalName();
-        $filePath   = $this->fileManagerService->uploadFile($file, $savePath, $originName);
+        $fileUrl   = $this->fileManagerService->uploadFile($file, $savePath, $originName);
 
         return [
             'name' => $originName,
-            'url'  => asset('catalog/' . $filePath),
+            'url'  => $fileUrl,
         ];
     }
 }

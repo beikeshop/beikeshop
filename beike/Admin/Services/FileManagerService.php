@@ -266,8 +266,9 @@ class FileManagerService
     public function uploadFile($file, $savePath, $originName): mixed
     {
         $savePath = $this->basePath . $savePath;
+        $filePath = $file->storeAs($savePath, $originName, 'catalog');
 
-        return $file->storeAs($savePath, $originName, 'catalog');
+        return asset('catalog/' . $filePath);
     }
 
     /**
