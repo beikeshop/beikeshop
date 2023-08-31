@@ -54,6 +54,9 @@
           <div :class="['list-item', design.editingModuleIndex == index ? 'active' : '']"
             @click="design.editingModuleIndex = index"
             v-for="module, index in form.modules" :key="index">
+            <div class="module-tool">
+              <div class="module-delete" @click="deleteDodule(index)"><i class="bi bi-trash"></i></div>
+            </div>
             <div v-if="module.code == 'slideshow'">
               <img :src="module.content.images[0].image[source.locale]" class="img-fluid">
             </div>
@@ -175,6 +178,21 @@
 
       cloneDefaultField(e) {
         return JSON.parse(JSON.stringify(e));
+      },
+
+      deleteDodule(index) {
+        this.form.modules.splice(index, 1);
+        if (this.design.editingModuleIndex == index) {
+          if (index - 1 < 0) {
+            this.design.editingModuleIndex = 0;
+            return;
+          }
+          this.design.editingModuleIndex = index - 1;
+        }
+
+        if (this.design.editingModuleIndex >= this.form.modules.length) {
+          this.design.editingModuleIndex = this.form.modules.length - 1;
+        }
       },
 
       moduleUpdated(e) {
