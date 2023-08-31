@@ -33,7 +33,7 @@
                           <div class="text-ellipsis line-2 w-min-100 w-max-300">{{ sub_string($rma['product_name'], 80) }}</div>
                         </td>
                         <td>{{ $rma['quantity'] }}</td>
-                        <td>{{ $rma['type'] }}</td>
+                        <td>{{ $rma['type_format'] }}</td>
                         <td class="text-nowrap">{{ $rma['created_at'] }}</td>
                         <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
                             class="btn text-nowrap btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>

@@ -11,16 +11,12 @@
 
 namespace Beike\Shop\Http\Resources;
 
-use Beike\Repositories\RmaRepo;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RmaDetail extends JsonResource
 {
     public function toArray($request): array
     {
-        $types    = RmaRepo::getTypes();
-        $statuses = RmaRepo::getStatuses();
-
         if ($this->reason) {
             $reason = json_decode($this->reason->name, true)[locale()] ?? '';
         } else {
@@ -29,12 +25,15 @@ class RmaDetail extends JsonResource
 
         return [
             'id'               => $this->id,
+            'order_id'         => $this->order_id,
             'order_product_id' => $this->order_product_id,
             'quantity'         => $this->quantity,
             'opened'           => $this->opened,
-            'type'             => $types[$this->type],
+            'type'             => $this->type,
+            'type_format'      => $this->type_format,
             'comment'          => $this->comment,
-            'status'           => $statuses[$this->status],
+            'status'           => $this->status,
+            'status_format'    => $this->status_format,
             'created_at'       => time_format($this->created_at),
             'email'            => $this->email,
             'telephone'        => $this->telephone,
@@ -42,7 +41,6 @@ class RmaDetail extends JsonResource
             'name'             => $this->name,
             'sku'              => $this->sku,
             'reason'           => $reason,
-            'type_text'        => $this->type_text,
         ];
     }
 }

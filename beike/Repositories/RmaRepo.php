@@ -19,6 +19,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RmaRepo
 {
@@ -138,21 +139,15 @@ class RmaRepo
 
     /**
      * @param $customer
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public static function listByCustomer($customer): array
+    public static function listByCustomer($customer): AnonymousResourceCollection
     {
         if (! $customer instanceof Customer) {
             $customer = CustomerRepo::find($customer->id);
         }
 
-        $results = [];
-
-        foreach ($customer->rmas()->with('reason')->get() as $rma) {
-            $results[] = (new RmaDetail($rma))->jsonSerialize();
-        }
-
-        return $results;
+        return RmaDetail::collection($customer->rmas()->with('reason')->get());
     }
 
     public static function getStatuses(): array

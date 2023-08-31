@@ -45,4 +45,14 @@ class Rma extends Base
     {
         return $this->hasMany(RmaHistory::class);
     }
+
+    public function getTypeFormatAttribute(): mixed
+    {
+        return trans("rma.type_{$this->type}");
+    }
+
+    public function getStatusFormatAttribute(): mixed
+    {
+        return trans("rma.status_{$this->status}");
+    }
 }

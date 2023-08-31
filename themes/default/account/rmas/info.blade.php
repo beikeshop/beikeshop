@@ -34,7 +34,7 @@
               <div class="col-sm-6 mb-4">
                 <label class="form-label">{{ __('shop/account.rma.rma_form.service_type') }}</label>
                   @foreach ($types as $key => $item)
-                    @if ($key == $rma->type)
+                    @if ($key == $rma->type_format)
                       <div>{{ $item}}</div>
                     @endif
                   @endforeach
