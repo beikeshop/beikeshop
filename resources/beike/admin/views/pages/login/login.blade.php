@@ -50,6 +50,11 @@
           </div>
         </div>
       </div>
+
+      <p class="text-center text-secondary mt-5">
+        <a href="https://beikeshop.com/" class="ms-2" target="_blank">BeikeShop</a>
+        v{{ config('beike.version') }}({{ config('beike.build') }})
+        &copy; {{ date('Y') }} All Rights Reserved</p>
     </div>
   </div>
 </body>

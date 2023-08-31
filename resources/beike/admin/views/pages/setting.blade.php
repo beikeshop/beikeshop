@@ -6,6 +6,11 @@
   <button type="button" class="btn btn-lg btn-primary submit-form" form="app">{{ __('common.save') }}</button>
 @endsection
 
+@push('header')
+  <script src="{{ asset('vendor/cropper/cropper.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('vendor/cropper/cropper.min.css') }}">
+@endpush
+
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
@@ -102,17 +107,29 @@
 
             @hook('admin.setting.image.before')
 
-            <x-admin-form-image name="logo" title="logo" :value="old('logo', system_setting('base.logo', ''))">
+            <x-admin::form.row title="Logo">
+              <div class="open-crop cursor-pointer bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative" ratio="380/100">
+                <img src="{{ image_resize(old('logo', system_setting('base.logo', ''))) }}" class="img-fluid">
+              </div>
+              <input type="hidden" value="{{ old('logo', system_setting('base.logo', '')) }}" name="logo">
               <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 380*100</div>
-            </x-admin-form-image>
+            </x-admin::form.row>
 
-            <x-admin-form-image name="favicon" title="favicon" :value="old('favicon', system_setting('base.favicon', ''))">
+            <x-admin::form.row title="favicon">
+              <div class="open-crop cursor-pointer bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative" ratio="32/32">
+                <img src="{{ image_resize(old('favicon', system_setting('base.favicon', ''))) }}" class="img-fluid">
+              </div>
+              <input type="hidden" value="{{ old('favicon', system_setting('base.favicon', '')) }}" name="favicon">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.favicon_info') }}</div>
-            </x-admin-form-image>
+            </x-admin::form.row>
 
-            <x-admin-form-image name="placeholder" title="{{ __('admin/setting.placeholder_image') }}" :value="old('placeholder', system_setting('base.placeholder', ''))">
+            <x-admin::form.row :title="__('admin/setting.placeholder_image')">
+              <div class="open-crop cursor-pointer bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative" ratio="500/500">
+                <img src="{{ image_resize(old('placeholder', system_setting('base.placeholder', ''))) }}" class="img-fluid">
+              </div>
+              <input type="hidden" value="{{ old('placeholder', system_setting('base.placeholder', '')) }}" name="placeholder">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.placeholder_image_info') }}</div>
-            </x-admin-form-image>
+            </x-admin::form.row>
 
             @hook('admin.setting.image.after')
           </div>
@@ -239,6 +256,27 @@
       </form>
     </div>
   </div>
+
+  <div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account.edit.crop') }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="img-container">
+            <img id="cropper-image" src="{{ image_resize('/') }}" class="img-fluid">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('shop/common.cancel') }}</button>
+          <button type="button" class="btn btn-primary cropper-crop">{{ __('shop/common.confirm') }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('footer')
@@ -282,6 +320,72 @@
         setTimeout(() => {
           $('div').removeClass('active-line');
         }, 1200);
+      }
+    });
+  </script>
+
+  <script>
+    let ratio = 1;
+    let $crop = null
+    var cropper;
+
+    $(function() {
+      $('.open-crop').click(function() {
+        var image = document.getElementById('cropper-image');
+        $crop = $(this);
+        ratio = $(this).attr('ratio')
+        var cropper;
+        var $input = $('<input type="file" accept="image/*" class="d-none">');
+        $input.click();
+        $input.change(function() {
+          var files = this.files;
+          var done = function(url) {
+            image.src = url;
+            $('#modal').modal('show');
+          };
+
+          if (files && files.length > 0) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              done(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+          }
+        });
+      });
+    });
+
+    $('#modal').on('shown.bs.modal', function() {
+      var image = document.getElementById('cropper-image');
+      cropper = new Cropper(image, {
+        initialAspectRatio: ratio.split('/')[0] / ratio.split('/')[1],
+        autoCropArea: 1,
+        viewMode: 1,
+      });
+    }).on('hidden.bs.modal', function() {
+      cropper.destroy();
+      cropper = null;
+    });
+
+    $('.cropper-crop').click(function(event) {
+      var canvas;
+
+      $('#modal').modal('hide');
+
+      if (cropper) {
+        canvas = cropper.getCroppedCanvas({
+          imageSmoothingQuality: 'high',
+        });
+        canvas.toBlob(function(blob) {
+          var formData = new FormData();
+
+          formData.append('file', blob, 'avatar.png');
+          formData.append('type', 'avatar');
+          $http.post('{{ shop_route('file.store') }}', formData).then(res => {
+            $crop.find('img').attr('src', res.data.url);
+            $crop.next('input').val(res.data.value);
+          })
+        });
       }
     });
   </script>

@@ -62,6 +62,7 @@
       beike_version: '{{ config('beike.version') }}',
       api_url: '{{ config('beike.api_url') }}',
       app_url: '{{ config('app.url') }}',
+      has_license: !!{{ check_license() }}
     }
   </script>
   @stack('footer')
