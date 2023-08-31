@@ -141,7 +141,7 @@ class StripeService extends PaymentService
     public function getMobilePaymentData(): array
     {
         $stripeCustomer = $this->createCustomer();
-        $paymentIntent = $this->createPaymentIntent($stripeCustomer);
+        $paymentIntent  = $this->createPaymentIntent($stripeCustomer);
 
         return [
             'isAllowDelay'   => true,
