@@ -86,7 +86,9 @@
       </div>
     </div>
     <div class="module-edit">
-      <div class="c-title">{{ __('admin/app_builder.module_edit') }}</div>
+      <div class="c-title">
+        {{ __('admin/app_builder.module_edit') }} - <span v-if="form.modules.length">@{{ form.modules[design.editingModuleIndex].title }}</span>
+      </div>
       <div v-if="form.modules.length > 0" class="component-wrap">
         <component :is="editingModuleComponent" :key="design.editingModuleIndex"
           :module="form.modules[design.editingModuleIndex].content" @on-changed="moduleUpdated"></component>
