@@ -197,18 +197,28 @@ class PluginController extends Controller
      */
     public function edit(Request $request, $code): View
     {
-        $plugin     = app('plugin')->getPluginOrFail($code);
-        $columnView = $plugin->getColumnView();
-        $view       = $columnView ?: 'admin::pages.plugins.form';
+        try {
+            $plugin     = app('plugin')->getPluginOrFail($code);
+            $columnView = $plugin->getColumnView();
+            $view       = $columnView ?: 'admin::pages.plugins.form';
 
-        $data = [
-            'view'   => $view,
-            'plugin' => $plugin,
-        ];
+            $data = [
+                'view'   => $view,
+                'plugin' => $plugin,
+            ];
+            $data = hook_filter('admin.plugin.edit.data', $data);
 
-        $data = hook_filter('admin.plugin.edit.data', $data);
+            return view($view, $data);
+        } catch (\Exception $e) {
+            $plugin     = app('plugin')->getPlugin($code);
+            $data       = [
+                'error'       => $e->getMessage(),
+                'plugin_code' => $code,
+                'plugin'      => $plugin,
+            ];
 
-        return view($view, $data);
+            return view('admin::pages.plugins.error', $data);
+        }
     }
 
     /**

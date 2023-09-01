@@ -132,6 +132,7 @@ class Manager
         if (empty($plugin)) {
             throw new \Exception('无效的插件');
         }
+        $plugin->checkLicenseValid();
         $plugin->handleLabel();
 
         return $plugin;

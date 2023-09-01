@@ -11,6 +11,7 @@
 
 namespace Beike\Plugin;
 
+use Beike\Admin\Services\MarketingService;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Illuminate\Contracts\Support\Arrayable;
@@ -328,35 +329,77 @@ class Plugin implements Arrayable, \ArrayAccess
         return $this->getPath() . '/Bootstrap.php';
     }
 
+    /**
+     * Check plugin has license.
+     *
+     * @return bool
+     * @throws \Exception
+     */
+    public function checkLicenseValid(): bool
+    {
+        $appDomain         = request()->getHost();
+        $domain            = new \Utopia\Domains\Domain($appDomain);
+        $registerDomain    = $domain->getRegisterable();
+        if (empty($registerDomain)) {
+            return true;
+        }
+        $license = MarketingService::getInstance()->checkLicense($this->code, $registerDomain);
+        $status  = $license['status'] ?? 'fail';
+        if ($status == 'fail') {
+            SettingRepo::update('plugin', $this->code, ['status' => false]);
+
+            throw new \Exception($license['message'] ?? '插件授权未知错误, 请联系 beikeshop.com');
+        }
+
+        return $license['data']['has_license'] ?? false;
+    }
+
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
-        return (array) array_merge([
+        return array_merge([
             'name'    => $this->name,
             'version' => $this->getVersion(),
             'path'    => $this->path,
         ], $this->packageInfo);
     }
 
-    public function offsetExists($key): bool
+    /**
+     * @param $offset
+     * @return bool
+     */
+    public function offsetExists($offset): bool
     {
-        return Arr::has($this->packageInfo, $key);
+        return Arr::has($this->packageInfo, $offset);
     }
 
-    #[\ReturnTypeWillChange]
-    public function offsetGet($key)
+    /**
+     * @param $offset
+     * @return mixed
+     */
+    public function offsetGet($offset): mixed
     {
-        return $this->packageInfoAttribute($key);
+        return $this->packageInfoAttribute($offset);
     }
 
-    #[\ReturnTypeWillChange]
-    public function offsetSet($key, $value)
+    /**
+     * @param $offset
+     * @param $value
+     * @return array
+     */
+    public function offsetSet($offset, $value): array
     {
-        return Arr::set($this->packageInfo, $key, $value);
+        return Arr::set($this->packageInfo, $offset, $value);
     }
 
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($key)
+    /**
+     * @param $offset
+     * @return void
+     */
+    public function offsetUnset($offset): void
     {
-        unset($this->packageInfo[$key]);
+        unset($this->packageInfo[$offset]);
     }
 }
