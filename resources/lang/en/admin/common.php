@@ -98,4 +98,5 @@ return [
     'update_date'                      => 'Update date',
     'update_btn'                       => 'Download',
     'expired_at'                       => 'Expired',
+    'copyright_hint_text'              => 'Please reserve the copyright, or go to <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a>',
 ];

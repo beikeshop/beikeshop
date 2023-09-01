@@ -98,4 +98,5 @@ return [
     'update_date'            => '更新日期',
     'update_btn'             => '前往下载',
     'expired_at'             => '到期时间',
+    'copyright_hint_text'    => '请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a>',
 ];
