@@ -45,6 +45,10 @@
         </div>
       </div>
       <ul class="navbar navbar-right">
+        <div class="alert alert-warning mb-0 warning-copyright d-none">
+          <i class="bi bi-exclamation-triangle-fill"></i> {!! __('admin/common.copyright_hint_text') !!}
+        </div>
+
         @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
           <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>
