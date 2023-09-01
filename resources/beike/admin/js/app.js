@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-01 16:02:15
+ * @LastEditTime  2023-09-01 16:12:34
  */
 
 import http from "../../../js/http";
@@ -151,7 +151,7 @@ const checkRemoveCopyRight = () => {
     isRemove = true;
   }
 
-  if (isRemove) {
+  if (!config.has_license && isRemove) {
     $('.warning-copyright').removeClass('d-none')
     if (!$('.warning-copyright').length) {
       $('.header-content .header-right .navbar-right').prepend('<div class="alert alert-warning mb-0 warning-copyright"><i class="bi bi-exclamation-triangle-fill"></i> 请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a></div>')
