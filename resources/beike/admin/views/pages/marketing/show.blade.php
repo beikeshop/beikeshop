@@ -376,6 +376,7 @@ $data = $plugin;
         window.clearInterval(this.timer)
         this.serviceDialog.id = ''
         this.service_wechatpay_price = ''
+        $('#service-info').html('')
       },
 
       dialogOnClose() {
@@ -566,6 +567,7 @@ $data = $plugin;
             window.clearInterval(this.timer)
             that.serviceDialog.id = ''
             that.service_wechatpay_price = ''
+            $('#service-info').html('')
             that.serviceDialog.show = false
             Swal.fire({
               title: '{{ __('admin/marketing.pay_success_title') }}',
