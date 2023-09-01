@@ -18,6 +18,7 @@
       </div>
 
       <div class="col-12 col-lg-9 right-column">
+        @hook('category.products.before')
         <div class="filter-value-wrap mb-2 d-none">
           <ul class="list-group list-group-horizontal">
             @foreach ($filter_data['attr'] as $index => $attr)
@@ -55,6 +56,8 @@
         @endif
 
         {{ $products->links('shared/pagination/bootstrap-4') }}
+
+        @hook('category.products.after')
       </div>
     </div>
   </div>
