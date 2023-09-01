@@ -1,5 +1,10 @@
 @extends('admin::layouts.master')
-@section('title', __('admin/common.design_app_home_index'))
+
+@section('title')
+{{ __('admin/common.design_app_home_index') }}
+<a class="ms-3 btn btn-outline-primary btn-sm" href="https://beikeshop.com/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>
+@endsection
+
 @section('body-class', 'design-app-home')
 
 @push('header')
@@ -54,6 +59,9 @@
           <div :class="['list-item', design.editingModuleIndex == index ? 'active' : '']"
             @click="design.editingModuleIndex = index"
             v-for="module, index in form.modules" :key="index">
+            <div class="module-tool">
+              <div class="module-delete" @click="deleteDodule(index)"><i class="bi bi-trash"></i></div>
+            </div>
             <div v-if="module.code == 'slideshow'">
               <img :src="module.content.images[0].image[source.locale]" class="img-fluid">
             </div>
@@ -83,7 +91,9 @@
       </div>
     </div>
     <div class="module-edit">
-      <div class="c-title">{{ __('admin/app_builder.module_edit') }}</div>
+      <div class="c-title">
+        {{ __('admin/app_builder.module_edit') }} - <span v-if="form.modules.length">@{{ form.modules[design.editingModuleIndex].title }}</span>
+      </div>
       <div v-if="form.modules.length > 0" class="component-wrap">
         <component :is="editingModuleComponent" :key="design.editingModuleIndex"
           :module="form.modules[design.editingModuleIndex].content" @on-changed="moduleUpdated"></component>
@@ -175,6 +185,21 @@
 
       cloneDefaultField(e) {
         return JSON.parse(JSON.stringify(e));
+      },
+
+      deleteDodule(index) {
+        this.form.modules.splice(index, 1);
+        if (this.design.editingModuleIndex == index) {
+          if (index - 1 < 0) {
+            this.design.editingModuleIndex = 0;
+            return;
+          }
+          this.design.editingModuleIndex = index - 1;
+        }
+
+        if (this.design.editingModuleIndex >= this.form.modules.length) {
+          this.design.editingModuleIndex = this.form.modules.length - 1;
+        }
       },
 
       moduleUpdated(e) {

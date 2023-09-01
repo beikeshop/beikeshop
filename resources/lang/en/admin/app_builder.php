@@ -22,4 +22,5 @@ return [
     'module_product'    => 'Commodity module',
     'module_category'   => 'Classified commodity module',
     'module_latest'     => 'Latest product module',
+    'to_buy'            => 'To Buy',
 ];
