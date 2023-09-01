@@ -40,7 +40,12 @@ $data = $plugin;
         <table class="bg-light mb-2 w-100">
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center"><div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div> <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span></td>
+            <td class="border p-2 fw-bold text-center">
+              <div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div>
+              @if ($data['id'] !== 61)
+              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
+              @endif
+            </td>
           </tr>
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
