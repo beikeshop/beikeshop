@@ -89,7 +89,7 @@ $data = $plugin;
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
-              @if (count($data['plugin_services']))
+              @if (count($data['plugin_services']) && $data['id'] !== 61 )
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
               @endif
@@ -221,9 +221,11 @@ $data = $plugin;
     <li class="nav-item" role="presentation">
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
+    @if ($data['id'] !== 61)
     <li class="nav-item" role="presentation">
       <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
     </li>
+    @endif
   </ul>
 
   <div class="tab-content">
@@ -232,6 +234,7 @@ $data = $plugin;
       {!! $data['description'] !!}
       @endif
     </div>
+    @if ($data['id'] !== 61)
     <div class="tab-pane fade" id="tab-histories">
       @if ($data['service_buy_histories'] ?? 0)
         <div class="table-push">
@@ -272,6 +275,7 @@ $data = $plugin;
         <x-admin-no-data />
       @endif
     </div>
+    @endif
   </div>
 </div>
 @endsection
