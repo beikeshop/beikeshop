@@ -1,5 +1,6 @@
 @if ($product['video'])
 <div class="video-wrap">
+  @if ($product['video'] && strpos($product['video'], 'www.youtube.com') === false)
   <video
     id="product-video"
     class="video-js vjs-big-play-centered vjs-fluid vjs-16-9"
@@ -7,12 +8,16 @@
   >
     <source src="{{ image_origin($product['video']) }}" type="video/mp4" />
   </video>
+  @else
+  <div id="product-video"></div>
+  @endif
   <div class="close-video d-none"><i class="bi bi-x-circle"></i></div>
   <div class="open-video d-none"><i class="bi bi-play-circle"></i></div>
 </div>
 @endif
 
 @push('add-scripts')
+@if ($product['video'] && strpos($product['video'], 'www.youtube.com') === false)
   <script>
     let pVideo = null;
 
@@ -47,4 +52,30 @@
       }
     }
   </script>
+@else
+  <script>
+    const ytVideoIframe = '{!! $product['video'] !!}';
+    $('.open-video').removeClass('d-none');
+    $('#product-video').html(ytVideoIframe)
+
+    $(document).on('click', '.open-video', function () {
+      $('#product-video iframe').attr({width: '100%', height: '100%'});
+      $('#product-video iframe').attr('src', $('#product-video iframe').attr('src') + '&autoplay=1&muted=1');
+      $(this).addClass('d-none');
+      $('#product-video').fadeIn();
+      $('.close-video').removeClass('d-none');
+    });
+
+    $(document).on('click', '.close-video', function () {
+      closeVideo()
+    });
+
+    function closeVideo() {
+      $('#product-video').fadeOut();
+      $('#product-video').html()
+      $('.close-video').addClass('d-none');
+      $('.open-video').removeClass('d-none');
+    }
+  </script>
+@endif
 @endpush

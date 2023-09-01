@@ -81,15 +81,36 @@
             </x-admin::form.row>
 
             <x-admin::form.row title="{{ __('product.video') }}">
-              <div class="d-flex align-items-end">
-                <div class="set-product-img wh-80 rounded-2 me-2" @click="addProductVideo">
-                  <i v-if="form.video.path" class="bi bi-play-circle fs-1"></i>
-                  <i v-else class="bi bi-plus fs-1 text-muted"></i>
+              <div class="wp-400 border">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button :class="['nav-link rounded-0', videoType == 'local' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
+                  <button :class="['nav-link rounded-0', videoType == 'youtube' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-youtube" type="button">YouTube</button>
+                  <button :class="['nav-link rounded-0', videoType == 'custom' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
                 </div>
-                <input type="hidden" name="video" :value="form.video.path">
-                <a v-if="form.video.path" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
+
+                <div class="tab-content p-3" id="nav-tabContent">
+                  <div :class="['tab-pane fade ', videoType == 'local' ? 'show active' : '']" id="nav-v-local">
+                    <div class="d-flex align-items-end">
+                      <div class="set-product-img wh-80 rounded-2 me-2" @click="addProductVideo">
+                        <i v-if="form.video.path" class="bi bi-play-circle fs-1"></i>
+                        <i v-else class="bi bi-plus fs-1 text-muted"></i>
+                      </div>
+                      <input type="hidden" name="video" :value="form.video.path">
+                      <a v-if="form.video.path" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
+                      <span v-if="form.video.path" @click="form.video.path = ''" class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
+                    </div>
+                    <div class="help-text mt-1">{{ __('admin/product.video_help') }}</div>
+                  </div>
+                  <div :class="['tab-pane fade', videoType == 'youtube' ? 'show active' : '']" id="nav-v-youtube">
+                    <textarea class="form-control" rows="3" placeholder="YouTube" name="video" v-model="form.video.path"></textarea>
+                    <div class="help-text mt-1">{{ __('admin/product.video_yt_hint') }}</div>
+                  </div>
+                  <div :class="['tab-pane fade', videoType == 'custom' ? 'show active' : '']" id="nav-v-custom">
+                    <input class="form-control" placeholder="{{ __('admin/product.video_path') }}" name="video" v-model="form.video.path">
+                    <div class="help-text mt-1">{{ __('admin/product.video_path_hint') }}</div>
+                  </div>
+                </div>
               </div>
-              <div class="help-text mb-1 mt-1">{{ __('admin/product.video_help') }}</div>
             </x-admin::form.row>
 
             <x-admin-form-input name="position" :title="__('common.sort_order')" :value="old('position', $product->position ?? '0')" />
@@ -605,6 +626,18 @@
 
         skuIsEmpty() {
           return (this.form.skus.length && this.form.skus[0].variants.length) || ''
+        },
+
+        videoType() {
+          if (this.form.video.path.indexOf('www.youtube.com') > -1) {
+            return 'youtube';
+          }
+
+          if (this.form.video.path.indexOf('http') > -1) {
+            return 'custom';
+          }
+
+          return 'local';
         }
       },
 
@@ -977,6 +1010,11 @@
           });
 
           this.remakeSkus()
+        },
+
+        videoTypeChange() {
+          this.form.video.path = '';
+          this.form.video.url = '';
         },
       }
     });
