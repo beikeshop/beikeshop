@@ -94,8 +94,6 @@
   }
 }
 
-
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -175,11 +173,24 @@
     padding: 0 1rem 4rem;
     // margin-top: 44px;
     overflow-y: auto;
+    position: relative;
 
     @media screen and (max-width: 991px) {
       padding: 0 1rem 1.5rem;
     }
   }
+}
+
+.page-bottom-btns {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20px 0;
+  border-top: 1px solid #eee;
+  z-index: 10;
+  padding: 20px 1rem;
 }
 
 .page-title-box {

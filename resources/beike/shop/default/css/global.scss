@@ -16,6 +16,13 @@ body[class^="page-account-"] {
   background-color: #F7F8FA;
 }
 
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  -webkit-text-size-adjust: none;
+}
+
 body.app {
   .breadcrumb-wrap {
     height: 10px;

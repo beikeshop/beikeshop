@@ -47,6 +47,8 @@
             <a href="https://beikeshop.com/" class="ms-2" target="_blank">BeikeShop</a>
             v{{ config('beike.version') }}({{ config('beike.build') }})
             &copy; {{ date('Y') }} All Rights Reserved</p>
+
+        <div class="page-bottom-btns">@yield('page-bottom-btns')</div>
       </div>
     </div>
   </div>
