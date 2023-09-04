@@ -144,7 +144,7 @@
               <input type="hidden" name="variables" :value="JSON.stringify(form.variables)">
 
               <div class="row g-3 mb-3" v-if="editing.isVariable">
-                <label for="" class="wp-200 col-form-label text-end"></label>
+                <label class="wp-200 col-form-label text-end"></label>
                 <div class="col-auto wp-200-">
                   <div class="selectable-variants">
                     <div>
