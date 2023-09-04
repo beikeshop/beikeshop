@@ -10,6 +10,10 @@
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
+@section('page-title-after')
+请注意：每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！
+@endsection
+
 @section('content')
 @php
 $data = $plugin;
@@ -40,7 +44,7 @@ $data = $plugin;
         <table class="bg-light mb-2 w-100">
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center">
+            <td class="border p-2 fw-bold">
               <div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div>
               @if ($data['id'] !== 61)
               <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
@@ -49,15 +53,15 @@ $data = $plugin;
           </tr>
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center"><div>{{ $data['version'] }}</div></td>
+            <td class="border p-2 fw-bold"><div>{{ $data['version'] }}</div></td>
           </tr>
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center"><div>{{ $data['version_name_format'] }}</div></td>
+            <td class="border p-2 fw-bold"><div>{{ $data['version_name_format'] }}</div></td>
           </tr>
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
-            <td class="border p-2 fw-bold d-flex justify-content-center">
+            <td class="border p-2 fw-bold d-flex">
               <div class="d-inline-block">
                 <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
@@ -74,7 +78,7 @@ $data = $plugin;
           @if ($data['service_date_to'] ?? 0)
           <tr>
             <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
-            <td class="border p-2 fw-bold text-center">{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
+            <td class="border p-2 fw-bold">{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
           </tr>
           @endif
         </table>

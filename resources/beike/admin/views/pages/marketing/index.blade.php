@@ -2,7 +2,12 @@
 
 @section('title', __('admin/marketing.marketing_list'))
 
+
 @section('body-class', 'page-marketing')
+
+@section('page-title-after')
+请注意：每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！
+@endsection
 
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
