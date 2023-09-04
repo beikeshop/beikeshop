@@ -6,7 +6,7 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-请注意：每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！
+  {{ __('admin/marketing.attention') }}
 @endsection
 
 @section('page-title-right')
