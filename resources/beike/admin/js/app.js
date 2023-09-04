@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-01 16:12:34
+ * @LastEditTime  2023-09-04 16:52:40
  */
 
 import http from "../../../js/http";
@@ -67,6 +67,22 @@ $(document).ready(function ($) {
   autoActiveTab()
   tinymceInit()
   checkRemoveCopyRight()
+
+  if ($('.page-bottom-btns').html().trim()) {
+    const contentInfoTop = $('.content-info').offset().top + $('.content-info').height();
+
+    $('#content').css({'padding-bottom': '6rem'})
+    $('.page-bottom-btns').css({'left': $('#content').offset().left})
+    $('.page-bottom-btns').fadeIn(150)
+
+    $('#content').scroll(function () {
+      if ($(this).scrollTop() + $(this).height() > contentInfoTop - 78) {
+        $('.page-bottom-btns').css({'position': 'initial'})
+      } else {
+        $('.page-bottom-btns').css({'position': 'fixed'})
+      }
+    });
+  }
 });
 
 const tinymceInit = () => {

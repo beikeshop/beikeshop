@@ -2,10 +2,8 @@
 
 @section('title', __('admin/page_category.index'))
 
-@section('page-title-right')
-<x-admin::form.row title="">
-  <button type="button" class="mt-3 btn btn-primary submit-form btn-lg" form="form-page-categories">{{ __('common.save') }}</button>
-</x-admin::form.row>
+@section('page-bottom-btns')
+  <button type="button" class="mt-3 btn w-min-100 btn-primary submit-form btn-lg" form="form-page-categories">{{ __('common.save') }}</button>
 @endsection
 
 @section('content')

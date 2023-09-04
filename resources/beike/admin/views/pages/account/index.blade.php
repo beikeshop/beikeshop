@@ -2,8 +2,8 @@
 
 @section('title', __('admin/common.account_index'))
 
-@section('page-title-right')
-  <button type="button" class="btn btn-lg btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
+@section('page-bottom-btns')
+  <button type="button" class="btn btn-lg w-min-100 btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
 @endsection
 
 @section('content')

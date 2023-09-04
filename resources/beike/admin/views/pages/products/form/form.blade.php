@@ -10,8 +10,9 @@
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
 @endpush
 
-@section('page-title-right')
-  <button type="button" class="btn btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
+@section('page-bottom-btns')
+  <button type="button" class="btn w-min-100 btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
+  <button class="btn btn-lg btn-default ms-2" onclick="bk.back()">{{ __('common.return') }}</button>
 @endsection
 
 @section('content')

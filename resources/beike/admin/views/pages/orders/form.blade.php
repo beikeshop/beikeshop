@@ -2,7 +2,7 @@
 
 @section('title', __('admin/common.order'))
 
-@section('page-title-right')
+@section('page-bottom-btns')
 @hook('order.detail.title.right')
 @endsection
 

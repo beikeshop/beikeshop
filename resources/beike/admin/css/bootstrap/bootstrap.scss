@@ -86,6 +86,14 @@ $dropdown-bg :#fff;
   color: #fff !important;
 }
 
+.btn-default {
+  border: 1px solid #e1e1e1;
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
 .form-switch {
   margin-bottom: 0;
 

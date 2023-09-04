@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-09-01 15:29:20
+ * @LastEditTime  2023-09-04 15:52:08
  */
 
 export default {
@@ -145,4 +145,8 @@ export default {
       app.loadData();
     });
   },
+
+  back() {
+    window.history.back(-1);
+  }
 }
