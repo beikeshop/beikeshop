@@ -181,6 +181,22 @@
   }
 }
 
+.auto-translation-wrap {
+  background-color: #f5f5f5;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+
+  .translate-btn {
+    font-size: 0.7175rem;
+  }
+}
+
+.translation-error {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
 .page-bottom-btns {
   position: fixed;
   bottom: 0;

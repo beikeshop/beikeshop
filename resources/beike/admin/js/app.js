@@ -66,10 +66,35 @@ $(document).ready(function ($) {
 
   autoActiveTab()
   tinymceInit()
+  inputLocaleTranslate()
   checkRemoveCopyRight()
 
   pageBottomBtns()
 });
+
+const inputLocaleTranslate = () => {
+  $('.translate-btn').click(function () {
+    var from = $(this).siblings('.from-locale-code').val();
+    var to = $(this).siblings('.to-locale-code').val();
+    let $parents = $(this).parents('.input-locale-wrap').length ? $(this).parents('.input-locale-wrap') : $(this).parents('.col-auto');
+    var text = $parents.find('.input-' + from).val();
+    if (!text) {
+      return layer.msg(lang.translate_form, () => {});
+    }
+
+    // 发请求之前删除所有错样式
+    $http.post('translation', {from, to, text}).then((res) => {
+      res.data.forEach((e) => {
+        $parents.find('.input-' + e.locale).removeClass('translation-error');
+
+        $parents.find('.input-' + e.locale).val(e.result);
+        if (e.error) {
+          $parents.find('.input-' + e.locale).addClass('translation-error');
+        }
+      });
+    })
+  });
+}
 
 const tinymceInit = () => {
   if (typeof tinymce == 'undefined') {

@@ -177,6 +177,7 @@ Route::prefix($adminName)
                 Route::middleware('can:plugins_index')->get('plugins/feature', [Controllers\PluginController::class, 'feature'])->name('plugins.feature');
                 Route::middleware('can:plugins_index')->get('plugins/language', [Controllers\PluginController::class, 'language'])->name('plugins.language');
                 Route::middleware('can:plugins_index')->get('plugins/theme', [Controllers\PluginController::class, 'theme'])->name('plugins.theme');
+                Route::middleware('can:plugins_index')->get('plugins/translator', [Controllers\PluginController::class, 'translator'])->name('plugins.translator');
 
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
@@ -223,6 +224,9 @@ Route::prefix($adminName)
                 Route::middleware('can:products_show')->get('products/{product}/edit', [Controllers\ProductController::class, 'edit'])->name('products.edit');
                 Route::middleware('can:products_update')->put('products/{product}', [Controllers\ProductController::class, 'update'])->name('products.update');
                 Route::middleware('can:products_delete')->delete('products/{product}', [Controllers\ProductController::class, 'destroy'])->name('products.destroy');
+
+                // 翻译
+                Route::post('translation', [Controllers\TranslationController::class, 'translateText'])->name('translation.translate');
 
                 // 区域组
                 Route::middleware('can:regions_index')->get('regions', [Controllers\RegionController::class, 'index'])->name('regions.index');

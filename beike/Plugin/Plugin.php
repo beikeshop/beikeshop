@@ -21,13 +21,14 @@ use Illuminate\Support\Str;
 class Plugin implements Arrayable, \ArrayAccess
 {
     public const TYPES = [
-        'payment',   // 支付方式
-        'shipping',  // 配送方式
-        'theme',     // 主题模板
-        'feature',   // 功能模块
-        'total',     // 订单金额
-        'social',    // 社交网络
-        'language',  // 语言翻译
+        'payment',    // 支付方式
+        'shipping',   // 配送方式
+        'theme',      // 主题模板
+        'feature',    // 功能模块
+        'total',      // 订单金额
+        'social',     // 社交网络
+        'language',   // 语言翻译
+        'translator', // 翻译工具
     ];
 
     protected $type;

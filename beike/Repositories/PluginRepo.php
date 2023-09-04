@@ -274,6 +274,20 @@ class PluginRepo
         });
     }
 
+    public static function getTranslators()
+    {
+        $allPlugins = self::allPlugins();
+
+        return $allPlugins->where('type', 'translator')->filter(function ($item) {
+            $plugin = plugin($item->code);
+            if ($plugin) {
+                $item->plugin = $plugin;
+            }
+
+            return $plugin && $plugin->getEnabled();
+        });
+    }
+
     /**
      * Get all enabled themes
      */

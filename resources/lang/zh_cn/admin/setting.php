@@ -77,4 +77,5 @@ return [
     'license_code'           => '授权码',
     'order_auto_cancel'      => '订单自动取消',
     'order_auto_complete'    => '订单自动完成',
+    'translation_tools'      => '翻译工具',
 ];

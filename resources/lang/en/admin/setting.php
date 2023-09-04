@@ -78,4 +78,5 @@ return [
     'license_code'           => 'License Code',
     'order_auto_cancel'      => 'Order Auto Cancel',
     'order_auto_complete'    => 'Order Auto Complete',
+    'translation_tools'      => 'Translation Tools',
 ];

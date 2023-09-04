@@ -34,4 +34,5 @@ return [
     'feature'               => 'Feature',
     'language'              => 'Language',
     'theme'                 => 'Theme',
+    'translator'            => 'Translation',
 ];

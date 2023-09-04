@@ -1,0 +1,18 @@
+{
+    "code": "youdao",
+    "name": {
+        "zh_cn": "有道翻译",
+        "en": "Youdao Translator"
+    },
+    "description": {
+        "zh_cn": "有道翻译插件, 可以翻译商品、分类、文章",
+        "en": "Translate product, category and page by Youdao Translator"
+    },
+    "type": "translator",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "yangjin@guangda.work"
+    }
+}

@@ -778,7 +778,7 @@ function check_license(): bool
     $domain            = new \Utopia\Domains\Domain($appDomain);
     $registerDomain    = $domain->getRegisterable();
     if (empty($registerDomain)) {
-        return true;
+        return false;
     }
 
     return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));

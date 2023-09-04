@@ -4,7 +4,7 @@
     <div class="d-flex wp-{{ $width }} input-for-group">
       <span class="input-group-text wp-100 px-1" id="basic-addon1">{{ $locale['name'] }}</span>
       <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}"
-        class="form-control short" placeholder="{{ $placeholder ?: $locale['name'] }}" @if ($required) required @endif>
+        class="form-control short input-{{ $locale['code'] }}" placeholder="{{ $placeholder ?: $locale['name'] }}" @if ($required) required @endif>
       <span class="invalid-feedback w-auto"
         style="white-space:nowrap;">{{ __('common.error_required', ['name' => $title]) }}</span>
     </div>
@@ -14,5 +14,9 @@
       @enderror
     @endif
   @endforeach
+
+  @if (true)
+  @include('admin::shared.auto-translation')
+  @endif
 </div>
 </x-admin::form.row>
