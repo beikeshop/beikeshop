@@ -61,10 +61,10 @@
           <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
           {{-- v-if="node.isCurrent" --}}
           <div class="right">
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.download') }}"
-              placement="top">
-              <span @click.stop="() => {openInputBox('download', node, data)}"><i
-                class="el-icon-download"></i></span>
+            <el-tooltip class="item file-download" effect="dark" content="{{ __('admin/file_manager.download') }}"
+            placement="top">
+            <span @click.stop="() => {openInputBox('download', node, data)}"><i
+              class="el-icon-download"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
