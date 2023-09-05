@@ -2,10 +2,6 @@
 
 @section('title', __('admin/common.account_index'))
 
-@section('page-bottom-btns')
-  <button type="button" class="btn btn-lg w-min-100 btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
-@endsection
-
 @section('content')
 <div id="plugins-app-form" class="card h-min-600">
   <div class="card-body">
@@ -63,6 +59,11 @@
             </div>
           </x-admin::form.row>
         </div>
+      </div>
+      <div>
+        <x-admin::form.row title="">
+        <button type="submit" class="mt-5 btn btn-lg w-min-100 btn-primary" form="form-account">{{ __('common.save') }}</button>
+        </x-admin::form.row>
       </div>
     </form>
   </div>

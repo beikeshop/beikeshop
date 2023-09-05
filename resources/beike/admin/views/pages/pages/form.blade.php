@@ -9,7 +9,8 @@
 @endpush
 
 @section('page-bottom-btns')
-  <button type="button" class="mt-3 w-min-100 btn btn-primary submit-form btn-lg" form="form-page">{{ __('common.save') }}</button>
+  <button type="button" class="w-min-100 btn btn-primary submit-form btn-lg" form="form-page">{{ __('common.save') }}</button>
+  <button class="btn btn-lg btn-default ms-2" onclick="bk.back()">{{ __('common.return') }}</button>
 @endsection
 
 @section('content')
