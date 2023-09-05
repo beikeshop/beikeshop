@@ -1,6 +1,6 @@
 @if ($product['video'])
 <div class="video-wrap">
-  @if ($product['video'] && strpos($product['video'], 'www.youtube.com') === false)
+  @if ($product['video'] && strpos($product['video'], '<iframe') === false)
   <video
     id="product-video"
     class="video-js vjs-big-play-centered vjs-fluid vjs-16-9"
@@ -17,7 +17,7 @@
 @endif
 
 @push('add-scripts')
-@if ($product['video'] && strpos($product['video'], 'www.youtube.com') === false)
+@if ($product['video'] && strpos($product['video'], '<iframe') === false)
   <script>
     let pVideo = null;
 

@@ -83,9 +83,9 @@
             <x-admin::form.row title="{{ __('product.video') }}">
               <div class="wp-400 border">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <button :class="['nav-link rounded-0', videoType == 'local' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
-                  <button :class="['nav-link rounded-0', videoType == 'youtube' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-youtube" type="button">YouTube</button>
-                  <button :class="['nav-link rounded-0', videoType == 'custom' ? 'active' : '']" @click="videoTypeChange" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
+                  <button :class="['nav-link rounded-0', videoType == 'local' ? 'active' : '']" @click="videoTypeChange('local')" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
+                  <button :class="['nav-link rounded-0', videoType == 'iframe' ? 'active' : '']" @click="videoTypeChange('iframe')" data-bs-toggle="tab" data-bs-target="#nav-v-iframe" type="button">{{ __('admin/product.iframe_code') }}</button>
+                  <button :class="['nav-link rounded-0', videoType == 'custom' ? 'active' : '']" @click="videoTypeChange('custom')" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
                 </div>
 
                 <div class="tab-content p-3" id="nav-tabContent">
@@ -101,9 +101,9 @@
                     </div>
                     <div class="help-text mt-1">{{ __('admin/product.video_help') }}</div>
                   </div>
-                  <div :class="['tab-pane fade', videoType == 'youtube' ? 'show active' : '']" id="nav-v-youtube">
-                    <textarea class="form-control" rows="3" placeholder="YouTube" name="video" v-model="form.video.path"></textarea>
-                    <div class="help-text mt-1">{{ __('admin/product.video_yt_hint') }}</div>
+                  <div :class="['tab-pane fade', videoType == 'iframe' ? 'show active' : '']" id="nav-v-iframe">
+                    <textarea class="form-control" rows="3" placeholder="{{ __('admin/product.iframe_code') }}" name="video" v-model="form.video.path"></textarea>
+                    <div class="help-text mt-1">{{ __('admin/product.iframe_code_hint') }}</div>
                   </div>
                   <div :class="['tab-pane fade', videoType == 'custom' ? 'show active' : '']" id="nav-v-custom">
                     <input class="form-control" placeholder="{{ __('admin/product.video_path') }}" name="video" v-model="form.video.path">
@@ -607,7 +607,9 @@
           }
         },
 
-        rules: {}
+        rules: {},
+
+        videoType: 'local',
       },
 
       computed: {
@@ -627,23 +629,17 @@
         skuIsEmpty() {
           return (this.form.skus.length && this.form.skus[0].variants.length) || ''
         },
-
-        videoType() {
-          if (this.form.video.path.indexOf('www.youtube.com') > -1) {
-            return 'youtube';
-          }
-
-          if (this.form.video.path.indexOf('http') > -1) {
-            return 'custom';
-          }
-
-          return 'local';
-        }
       },
 
       beforeMount() {
         if (this.form.variables.length) {
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
+        }
+
+        if (this.form.video.path.indexOf('<iframe') > -1) {
+          this.videoType = 'iframe';
+        } else if (this.form.video.path.indexOf('http') > -1) {
+          this.videoType = 'custom';
         }
       },
 
@@ -1012,7 +1008,8 @@
           this.remakeSkus()
         },
 
-        videoTypeChange() {
+        videoTypeChange(code) {
+          this.videoType = code;
           this.form.video.path = '';
           this.form.video.url = '';
         },

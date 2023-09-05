@@ -51,6 +51,7 @@ return [
     'confirm_delete_restore' => '确认要清空回收站吗？',
     'video_local' => '本地',
     'video_path' => '视频地址',
+    'iframe_code' => 'Iframe 嵌入代码',
     'video_path_hint' => '远程视频，必须是以 .mp4 结尾的视频地址',
-    'video_yt_hint' => 'youtube点击分享再点击嵌入，复制里面的代码',
+    'iframe_code_hint' => '视频网站 Iframe 嵌入代码，如youtube视频下方点击分享再点击嵌入，复制里面的代码',
 ];
