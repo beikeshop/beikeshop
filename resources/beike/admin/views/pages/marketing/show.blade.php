@@ -41,34 +41,35 @@ $data = $plugin['data'];
             class="lh-1 bg-secondary"></span>
         </div>
 
-        <table class="bg-light mb-2 w-100">
+        <table class="bg-light mb-2 table table-bordered">
           <tr>
-            <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
-            <td class="border p-2 fw-bold">
-              <div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div>
+            <td><div class="text-last">{{ __('product.price') }}</div>：</td>
+            <td>
+              <div class="fs-3 me-1 d-inline-block fw-bold" style="margin-left: -4px">{{ $data['price_format'] }}</div>
               @if ($data['id'] !== 61)
               <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
               @endif
             </td>
           </tr>
           <tr>
-            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
-            <td class="border p-2 fw-bold"><div>{{ $data['version'] }}</div></td>
+            <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
+            <td><div>{{ $data['version'] }}</div></td>
           </tr>
           <tr>
-            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
-            <td class="border p-2 fw-bold"><div>{{ $data['version_name_format'] }}</div></td>
+            <td><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
+            <td><div>{{ $data['version_name_format'] }}</div></td>
           </tr>
           <tr>
-            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
-            <td class="border p-2 fw-bold d-flex">
+            <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
+            <td>
               <div class="d-inline-block">
                 <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
-                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img
-                      src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
+                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white">
+                    <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
+                  </div>
                   <div class="ms-2">
-                    <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
+                    <div class="mb-1">{{ $data['developer']['name'] }}</div>
                     <div>{{ $data['developer']['email'] }}</div>
                   </div>
                 </a>
@@ -77,15 +78,15 @@ $data = $plugin['data'];
           </tr>
           @if ($data['service_date_to'] ?? 0)
           <tr>
-            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
-            <td class="border p-2 fw-bold">{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
+            <td><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
+            <td>{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
           </tr>
           @endif
         </table>
 
         <div class="mb-4">
           @if ($data['available'])
-            <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
+            <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
                 <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"

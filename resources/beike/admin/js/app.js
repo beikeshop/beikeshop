@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-05 15:47:55
+ * @LastEditTime  2023-09-05 18:13:30
  */
 
 import http from "../../../js/http";
@@ -68,7 +68,6 @@ $(document).ready(function ($) {
   tinymceInit()
   inputLocaleTranslate()
   checkRemoveCopyRight()
-
   pageBottomBtns()
 });
 
