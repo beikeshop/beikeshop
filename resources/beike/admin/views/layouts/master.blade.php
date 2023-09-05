@@ -36,7 +36,7 @@
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <div class="d-flex">
           <h5 class="page-title">@yield('title')</h5>
-          <p class="ms-4 text-danger">@yield('page-title-after')</p>
+          <div class="ms-4 text-danger">@yield('page-title-after')</div>
         </div>
         <div>@yield('page-title-right')</div>
       </div>
