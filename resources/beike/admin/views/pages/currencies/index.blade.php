@@ -2,8 +2,8 @@
 
 @section('title', __('admin/common.currency'))
 
-@section('page-title-right')
-  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
+@section('page-bottom-btns')
+  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
 @endsection
 
 @section('content')

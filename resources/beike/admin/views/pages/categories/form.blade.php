@@ -71,7 +71,7 @@
         <x-admin-form-switch title="{{ __('common.status') }}" name="active" :value="old('active', $category->active ?? 1)" />
 
         <x-admin::form.row>
-          <button type="submit" class="btn btn-primary mt-3">{{ __('common.save') }}</button>
+          <button type="submit" class="btn btn-primary w-min-100 btn-lg mt-3">{{ __('common.save') }}</button>
         </x-admin::form.row>
       </form>
 

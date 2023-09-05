@@ -2,8 +2,9 @@
 
 @section('title', __('admin/common.account_index'))
 
-@section('page-title-right')
-  <button type="button" class="btn btn-lg btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
+@section('page-bottom-btns')
+  <button type="button" class="btn btn-lg w-min-100 btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
+  <button class="btn btn-lg btn-default w-min-100 ms-3" onclick="bk.back()">{{ __('common.return') }}</button>
 @endsection
 
 @section('content')
@@ -63,6 +64,11 @@
             </div>
           </x-admin::form.row>
         </div>
+      </div>
+      <div>
+        <x-admin::form.row title="">
+        <button type="submit" class="mt-5 btn btn-lg d-none w-min-100 btn-primary" form="form-account">{{ __('common.save') }}</button>
+        </x-admin::form.row>
       </div>
     </form>
   </div>

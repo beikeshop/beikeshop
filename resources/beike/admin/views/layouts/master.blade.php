@@ -36,17 +36,22 @@
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <div class="d-flex">
           <h5 class="page-title">@yield('title')</h5>
-          <p class="ms-4 text-danger">@yield('page-title-after')</p>
+          <div class="ms-4 text-danger">@yield('page-title-after')</div>
         </div>
         <div>@yield('page-title-right')</div>
       </div>
       <div class="container-fluid p-0">
-        @yield('content')
+        <div class="content-info">@yield('content')</div>
+
+        <div class="page-bottom-btns">
+          @yield('page-bottom-btns')
+        </div>
 
         <p class="text-center text-secondary mt-5" id="copyright-text">
             <a href="https://beikeshop.com/" class="ms-2" target="_blank">BeikeShop</a>
             v{{ config('beike.version') }}({{ config('beike.build') }})
             &copy; {{ date('Y') }} All Rights Reserved</p>
+
       </div>
     </div>
   </div>
