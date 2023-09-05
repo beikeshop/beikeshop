@@ -64,6 +64,7 @@
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
       error_form: '{{ __('common.error_form') }}',
       text_hint: '{{ __('common.text_hint') }}',
+      translate_form: '{{ __('admin/common.translate_form') }}',
     }
 
     const config = {

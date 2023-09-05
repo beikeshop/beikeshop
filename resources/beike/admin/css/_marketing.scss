@@ -41,10 +41,15 @@ body.page-marketing-info {
     align-items: flex-start;
   }
 
+  &.zh_cn, &.zh_hk {
+    .text-last {
+      width: 60px;
+      text-align-last: justify;
+    }
+  }
+
   .text-last {
-    width: 60px;
     display: inline-block;
-    text-align-last: justify;
   }
 
   .red {

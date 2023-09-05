@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-05 15:47:55
+ * @LastEditTime  2023-09-05 18:13:30
  */
 
 import http from "../../../js/http";
@@ -66,10 +66,34 @@ $(document).ready(function ($) {
 
   autoActiveTab()
   tinymceInit()
+  inputLocaleTranslate()
   checkRemoveCopyRight()
-
   pageBottomBtns()
 });
+
+const inputLocaleTranslate = () => {
+  $('.translate-btn').click(function () {
+    var from = $(this).siblings('.from-locale-code').val();
+    var to = $(this).siblings('.to-locale-code').val();
+    let $parents = $(this).parents('.input-locale-wrap').length ? $(this).parents('.input-locale-wrap') : $(this).parents('.col-auto');
+    var text = $parents.find('.input-' + from).val();
+    if (!text) {
+      return layer.msg(lang.translate_form, () => {});
+    }
+
+    // 发请求之前删除所有错样式
+    $http.post('translation', {from, to, text}).then((res) => {
+      res.data.forEach((e) => {
+        $parents.find('.input-' + e.locale).removeClass('translation-error');
+
+        $parents.find('.input-' + e.locale).val(e.result);
+        if (e.error) {
+          $parents.find('.input-' + e.locale).addClass('translation-error');
+        }
+      });
+    })
+  });
+}
 
 const tinymceInit = () => {
   if (typeof tinymce == 'undefined') {

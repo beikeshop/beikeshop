@@ -45,25 +45,28 @@
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control wp-400" placeholder="Meta title">{{ old('meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta title">{{ old('meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
           </div>
           @endforeach
+          @include('admin::shared.auto-translation')
         </x-admin::form.row>
         <x-admin::form.row title="Meta keywords">
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
           </div>
           @endforeach
+          @include('admin::shared.auto-translation')
         </x-admin::form.row>
         <x-admin::form.row title="Meta description">
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control wp-400" placeholder="Meta description">{{ old('meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta description">{{ old('meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
           </div>
           @endforeach
+          @include('admin::shared.auto-translation')
         </x-admin::form.row>
 
         @hook('admin.category.form.after')
