@@ -16,7 +16,7 @@
 
 @section('content')
 @php
-$data = $plugin;
+$data = $plugin['data'];
 @endphp
 
 
