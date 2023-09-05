@@ -770,13 +770,19 @@ function registry($key, $default = null): mixed
  * 删除版权信息, 请先购买授权 https://beikeshop.com/vip/subscription
  *
  * @return bool
+ * @throws Exception
  */
 function check_license(): bool
 {
     $configLicenceCode = system_setting('base.license_code');
     $appDomain         = config('app.url');
-    $domain            = new \Utopia\Domains\Domain($appDomain);
-    $registerDomain    = $domain->getRegisterable();
+
+    try {
+        $domain         = new \Utopia\Domains\Domain($appDomain);
+        $registerDomain = $domain->getRegisterable();
+    } catch (\Exception $e) {
+        $registerDomain = '';
+    }
     if (empty($registerDomain)) {
         return false;
     }

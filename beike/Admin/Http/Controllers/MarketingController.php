@@ -90,7 +90,7 @@ class MarketingController
     {
         try {
             $postData   = $request->getContent();
-            $id = $request->id;
+            $id         = $request->id;
             $result     = MarketingService::getInstance()->buyService($id, $postData);
 
             return json_success('获取成功', $result);
@@ -105,7 +105,7 @@ class MarketingController
     public function serviceOrder(Request $request)
     {
         try {
-            $id = $request->id;
+            $id                     = $request->id;
             $pluginServiceOrder     = MarketingService::getInstance()->getPluginServiceOrder($id);
 
             if ($request->expectsJson()) {
