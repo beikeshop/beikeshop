@@ -10,10 +10,16 @@
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
+@section('page-title-after')
+{{ __('admin/marketing.attention') }}
+@endsection
+
 @section('content')
 @php
-$data = $plugin['data'];
+$data = $plugin;
 @endphp
+
+
 <div class="card mb-4" id="app">
   <div class="card-header">
     <h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5>
@@ -35,56 +41,74 @@ $data = $plugin['data'];
             class="lh-1 bg-secondary"></span>
         </div>
 
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('product.price') }}：</div>
-          <div class="fs-3 fw-bold" style="margin-left: -4px">{{ $data['price_format'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
-          <div>{{ $data['version'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
-          <div>{{ $data['version_name_format'] }}</div>
-        </div>
-
-        <div class="mb-3">
-          <div class="mb-1 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
-          <div class="d-inline-block">
-            <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
-              class="d-flex align-items-center text-dark">
-              <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img
-                  src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
-              <div class="ms-2">
-                <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
-                <div>{{ $data['developer']['email'] }}</div>
+        <table class="bg-light mb-2 w-100">
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('product.price') }}</div>：</td>
+            <td class="border p-2 fw-bold">
+              <div class="fs-3 fw-bold me-1 d-inline-block" style="margin-left: -4px">{{ $data['price_format'] }}</div>
+              @if ($data['id'] !== 61)
+              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
+              @endif
+            </td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
+            <td class="border p-2 fw-bold"><div>{{ $data['version'] }}</div></td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
+            <td class="border p-2 fw-bold"><div>{{ $data['version_name_format'] }}</div></td>
+          </tr>
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
+            <td class="border p-2 fw-bold d-flex">
+              <div class="d-inline-block">
+                <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
+                  class="d-flex align-items-center text-dark">
+                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center"><img
+                      src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5"></div>
+                  <div class="ms-2">
+                    <div class="mb-1 fw-bold">{{ $data['developer']['name'] }}</div>
+                    <div>{{ $data['developer']['email'] }}</div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </div>
+            </td>
+          </tr>
+          @if ($data['service_date_to'] ?? 0)
+          <tr>
+            <td class="border p-2 fw-bold"><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
+            <td class="border p-2 fw-bold">{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
+          </tr>
+          @endif
+        </table>
 
         <div class="mb-4">
           @if ($data['available'])
-          @if ($data['downloadable'])
-          <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
-            __('admin/marketing.download_plugin') }}</button>
-          <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
-                class="bi bi-cursor-fill"></i> <span></span></a></div>
-          @else
-          <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
-          <div class="mb-4">
-            <el-radio-group v-model="payCode" size="small" class="radio-group">
-              <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
-                  class="img-fluid"></el-radio>
-              <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
-              </el-radio>
-            </el-radio-group>
-          </div>
-          <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
-            __('admin/marketing.btn_buy') }}</button>
-          @endif
+            <div class="mb-2 fw-bold">{{ __('admin/marketing.select_pay') }}</div>
+            <div class="mb-4">
+              <el-radio-group v-model="payCode" size="small" class="radio-group">
+                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
+                    class="img-fluid"></el-radio>
+                <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
+                </el-radio>
+              </el-radio-group>
+            </div>
+            @if ($data['downloadable'])
+            <div>
+              <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
+                __('admin/marketing.download_plugin') }}</button>
+              @if (count($data['plugin_services']) && $data['id'] !== 61 )
+              <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+                __('admin/marketing.btn_buy_service') }}</button>
+              @endif
+            </div>
+            <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
+                  class="bi bi-cursor-fill"></i> <span></span></a></div>
+            @else
+            <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
+              __('admin/marketing.btn_buy') }}</button>
+            @endif
           @else
           <div class="alert alert-warning" role="alert">
             {!! __('admin/marketing.version_compatible_text') !!}
@@ -174,18 +198,95 @@ $data = $plugin['data'];
       </div>
     </div>
   </el-dialog>
+
+  <el-dialog title="{{ __('admin/marketing.btn_buy_service') }}" :close-on-click-modal="false"
+    :visible.sync="serviceDialog.show" width="520px" @close="serviceDialogOnClose">
+    <div class="service-wx-pop" v-if="service_wechatpay_price">
+      <div class="text-center">
+        <span class="fw-bold fs-2">{{ __('admin/marketing.wxpay') }}</span>
+      </div>
+      <div class="text-center py-3 fs-5">{{ __('admin/marketing.text_pay') }}：<span class="fs-3 text-danger fw-bold">@{{
+          service_wechatpay_price }}</span></div>
+      <div class="d-flex justify-content-center align-items-center" id="service-info"></div>
+    </div>
+    <div id="service-content" v-else>
+      <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
+        <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
+          <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
+            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price }}</span>
+          </el-radio>
+        </div>
+      </el-radio-group>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary btn-lg w-min-100 px-5 fw-bold" @click="marketingBuyService">{{
+          __('admin/marketing.btn_buy') }}</button>
+      </div>
+    </div>
+  </el-dialog>
 </div>
 
-@if ($data['description'])
-<div class="card h-min-200">
-  <div class="card-header">
-    <h5 class="card-title">{{ __('admin/marketing.download_description') }}</h5>
-  </div>
-  <div class="card-body">
-    {!! $data['description'] !!}
+<div class="card h-min-200 p-4">
+  <ul class="nav nav-tabs nav-bordered mb-5" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
+    </li>
+    @if ($data['id'] !== 61)
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
+    </li>
+    @endif
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="tab-description">
+      @if ($data['description'])
+      {!! $data['description'] !!}
+      @endif
+    </div>
+    @if ($data['id'] !== 61)
+    <div class="tab-pane fade" id="tab-histories">
+      @if ($data['service_buy_histories'] ?? 0)
+        <div class="table-push">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>{{ __('admin/marketing.month') }}</th>
+                <th>{{ __('admin/marketing.amount') }}</th>
+                <th>{{ __('admin/marketing.payment_method') }}</th>
+                <th>{{ __('admin/marketing.create_date') }}</th>
+                <th>{{ __('admin/marketing.over_date') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (count($data['service_buy_histories']))
+              @foreach ($data['service_buy_histories'] as $item)
+                <tr>
+                  <td>{{ $item['id'] }}</td>
+                  <td>{{ $item['service_months'] }} {{ __('admin/marketing.munths') }}</td>
+                  <td>{{ $item['amount_format'] }}</td>
+                  <td>{{ $item['payment_code'] }}</td>
+                  <td>{{ $item['created_at_format'] }}</td>
+                  <td>{{ $item['service_date_to'] }}</td>
+                </tr>
+              @endforeach
+              @else
+                <tr>
+                  <td colspan="9" class="border-0">
+                    <x-admin-no-data />
+                  </td>
+                </tr>
+              @endif
+            </tbody>
+          </table>
+        </div>
+      @else
+        <x-admin-no-data />
+      @endif
+    </div>
+    @endif
   </div>
 </div>
-@endif
 @endsection
 
 @push('footer')
@@ -195,11 +296,19 @@ $data = $plugin['data'];
 
     data: {
       payCode: 'wechatpay',
+      service_wechatpay_price: '',
+      service_id: '',
       wechatpay_price: '',
       radio3: '1',
       setTokenDialog: {
         show: false,
         token: @json(system_setting('base.developer_token') ?? ''),
+      },
+
+      serviceDialog: {
+        show: false,
+        id: '',
+        plugin_services: @json($data['plugin_services'] ?? []),
       },
 
       loginForm: {
@@ -276,6 +385,13 @@ $data = $plugin['data'];
         });
       },
 
+      serviceDialogOnClose() {
+        window.clearInterval(this.timer)
+        this.serviceDialog.id = ''
+        this.service_wechatpay_price = ''
+        $('#service-info').html('')
+      },
+
       dialogOnClose() {
         Object.keys(this.loginForm).forEach(key => this.loginForm[key] = '');
         Object.keys(this.registerForm).forEach(key => this.registerForm[key] = '');
@@ -296,21 +412,36 @@ $data = $plugin['data'];
         })
       },
 
-      marketingBuy() {
+      openService() {
         if (!this.setTokenDialog.token) {
           return this.setTokenDialog.show = true;
         }
 
-        $http.post('{{ admin_route('marketing.buy', ['code' => $data['code']]) }}', {
+        this.serviceDialog.show = true
+      },
+
+      marketingBuyService() {
+        if (!this.setTokenDialog.token) {
+          return this.setTokenDialog.show = true;
+        }
+
+        if (!this.serviceDialog.id) {
+          layer.msg('{{ __('admin/marketing.no_choose') }}')
+          return
+        }
+
+        $http.post(`marketing/${this.serviceDialog.id}/buy_service`, {
           payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
+
           if (res.status == "fail") {
             layer.msg(res.message, () => {})
             return;
           }
 
           if (res.data.payment_code == 'wechatpay') {
-            this.wechatpay_price = res.data.price_format
-            this.getQrcode(res.data.pay_url);
+            this.service_wechatpay_price = res.data.amount
+            this.service_id = res.data.id
+            this.getQrcode(res.data.pay_url,'service');
           }
 
           if (res.data.payment_code == 'alipay') {
@@ -330,45 +461,127 @@ $data = $plugin['data'];
         })
       },
 
-      getQrcode(url) {
-        const self = this;
-        new QRCode('code-info', {
-          text: url,
-          width: 270,
-          height: 270,
-          correctLevel : QRCode.CorrectLevel.M
-        });
+      marketingBuy() {
+        if (!this.setTokenDialog.token) {
+          return this.setTokenDialog.show = true;
+        }
 
-        setTimeout(() => {
-          Swal.fire({
-            title: '{{ __('admin/marketing.wxpay') }}',
-            width: 400,
-            height: 470,
-            heightAuto: false,
-            html: $('.code-pop').html(),
-            showConfirmButton: false,
-            didOpen: function () {
-              // 微信支付二维码 轮询监控支付状态
-              self.chekOrderStatus();
-              self.timer = window.setInterval(() => {
-                setTimeout(self.chekOrderStatus(), 0);
-              }, 1000)
-            },
-            didClose: function () {
-              $('#code-info').html('');
-            },
-            didDestroy: function () {
-              window.clearInterval(self.timer)
-            },
-          })
-        }, 100)
+        $http.post('{{ admin_route('marketing.buy', ['code' => $data['code']]) }}', {
+          payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
+          if (res.status == "fail") {
+            layer.msg(res.message, () => {})
+            return;
+          }
+
+          if (res.data.payment_code == 'wechatpay') {
+            this.wechatpay_price = res.data.price_format
+            this.getQrcode(res.data.pay_url,'plugin');
+          }
+
+          if (res.data.payment_code == 'alipay') {
+            window.open(res.data.pay_url, '_blank');
+
+            Swal.fire({
+              title: '{{ __('admin/marketing.ali_pay_success') }}',
+              text: '{{ __('admin/marketing.ali_pay_text') }}',
+              icon: 'question',
+              confirmButtonColor: '#fd560f',
+              confirmButtonText: '{{ __('common.confirm') }}',
+              willClose: function () {
+                window.location.reload();
+              },
+            })
+          }
+        })
+      },
+
+      getQrcode(url,type) {
+        const self = this;
+        if (type == 'plugin') {
+          new QRCode('code-info', {
+            text: url,
+            width: 270,
+            height: 270,
+            correctLevel : QRCode.CorrectLevel.M
+          });
+
+          setTimeout(() => {
+            Swal.fire({
+              title: '{{ __('admin/marketing.wxpay') }}',
+              width: 400,
+              height: 470,
+              heightAuto: false,
+              html: $('.code-pop').html(),
+              showConfirmButton: false,
+              didOpen: function () {
+                // 微信支付二维码 轮询监控支付状态
+                self.chekOrderStatus();
+                self.timer = window.setInterval(() => {
+                  setTimeout(self.chekOrderStatus(), 0);
+                }, 1000)
+              },
+              didClose: function () {
+                $('#code-info').html('');
+              },
+              didDestroy: function () {
+                window.clearInterval(self.timer)
+              },
+            })
+          }, 100)
+        }
+
+        if (type == 'service') {
+          setTimeout(() => {
+            new QRCode('service-info', {
+              text: url,
+              width: 270,
+              height: 270,
+              correctLevel : QRCode.CorrectLevel.M
+            });
+          }, 500);
+
+          setTimeout(() => {
+            self.chekServiceOrderStatus();
+            self.timer = window.setInterval(() => {
+              setTimeout(self.chekServiceOrderStatus(), 0);
+            }, 1000)
+          }, 100)
+        }
       },
 
       chekOrderStatus() {
         $http.get('{{ admin_route('marketing.show', ['code' => $data['code']]) }}', null, {hload: true}).then((res) => {
-          console.log(res.plugin.data.downloadable)
           if (res.plugin.data.downloadable) {
             window.clearInterval(this.timer)
+            Swal.fire({
+              title: '{{ __('admin/marketing.pay_success_title') }}',
+              text: '{{ __('admin/marketing.pay_success_text') }}',
+              icon: 'success',
+              focusConfirm: false,
+              confirmButtonColor: '#75bc4d',
+              confirmButtonText: '{{ __('common.confirm') }}',
+              didClose: function () {
+                window.location.reload();
+              },
+            })
+          }
+        })
+      },
+
+      chekServiceOrderStatus() {
+        let that = this
+        $http.get(`marketing/service_orders/${this.service_id}`, null, {hload: true}).then((res) => {
+          if (res.data.status == 'fail') {
+            window.clearInterval(this.timer)
+            layer.msg(res.data.message, () => {})
+          }
+
+          if (res.data.data.status == 'paid') {
+            window.clearInterval(this.timer)
+            that.serviceDialog.id = ''
+            that.service_wechatpay_price = ''
+            $('#service-info').html('')
+            that.serviceDialog.show = false
             Swal.fire({
               title: '{{ __('admin/marketing.pay_success_title') }}',
               text: '{{ __('admin/marketing.pay_success_text') }}',

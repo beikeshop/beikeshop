@@ -61,6 +61,7 @@ class MarketingService
     {
         $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version');
         $plugin = $this->httpClient->get($url)->json();
+
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件不存在或已下架');
         }
@@ -87,6 +88,45 @@ class MarketingService
         }
 
             throw new \Exception($content['message'] ?? '');
+    }
+
+    /**
+     * 购买插件服务
+     *
+     * @throws \Exception
+     */
+    public function buyService($pluginServiceId, $postData)
+    {
+        $url = config('beike.api_url') . "/api/plugin_services/{$pluginServiceId}/buy";
+
+        $content = $this->httpClient->withBody($postData, 'application/json')
+            ->post($url)
+            ->json();
+
+        $status = $content['status'] ?? '';
+        if ($status == 'success') {
+            return $content['data'];
+        }
+
+        throw new \Exception($content['message'] ?? '');
+    }
+
+    /**
+     * 获取插件服务订单信息
+     *
+     * @param $pluginServiceOrderId
+     * @return mixed
+     */
+    public function getPluginServiceOrder($pluginServiceOrderId): mixed
+    {
+        $url    = config('beike.api_url') . "/api/plugin_services/{$pluginServiceOrderId}?version=" . config('beike.version');
+        $plugin = $this->httpClient->get($url)->json();
+
+        if (empty($plugin)) {
+            throw new NotFoundHttpException('该插件服务订单不存在或已下架');
+        }
+
+        return $plugin;
     }
 
     /**

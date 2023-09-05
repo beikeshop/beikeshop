@@ -27,7 +27,7 @@ class RmaController extends Controller
     public function index()
     {
         $rmas = RmaRepo::listByCustomer(current_customer());
-        // dd($rmas);
+
         $data = [
             'rmas' => $rmas,
         ];

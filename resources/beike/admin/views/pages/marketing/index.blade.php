@@ -2,7 +2,12 @@
 
 @section('title', __('admin/marketing.marketing_list'))
 
+
 @section('body-class', 'page-marketing')
+
+@section('page-title-after')
+  {{ __('admin/marketing.attention') }}
+@endsection
 
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>

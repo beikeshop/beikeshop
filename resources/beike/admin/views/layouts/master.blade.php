@@ -34,7 +34,10 @@
     <x-admin-sidebar />
     <div id="content">
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
-        <h5 class="page-title">@yield('title')</h5>
+        <div class="d-flex">
+          <h5 class="page-title">@yield('title')</h5>
+          <p class="ms-4 text-danger">@yield('page-title-after')</p>
+        </div>
         <div>@yield('page-title-right')</div>
       </div>
       <div class="container-fluid p-0">
