@@ -49,4 +49,9 @@ return [
     'confirm_batch_status'   => 'Confirm to modify the status of the selected products in batches? ',
     'confirm_batch_restore'  => 'Confirm to restore the selected product? ',
     'confirm_delete_restore' => 'Are you sure you want to empty the recycle bin? ',
+    'video_local'            => 'local',
+    'iframe_code'            => 'Iframe embed code',
+    'video_path'             => 'video address',
+    'video_path_hint'        => 'Remote video must be a video address ending with .mp4',
+    'iframe_code_hint' => 'Video website Iframe embed code, such as click share below the youtube video and then click embed, copy the code inside',
 ];

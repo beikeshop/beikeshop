@@ -9,7 +9,7 @@
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-  @if ($product['video'])
+  @if ($product['video'] && strpos($product['video'], '<iframe') === false)
   <script src="{{ asset('vendor/video/video.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/video/video-js.min.css') }}">
   @endif
