@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-05 09:32:14
+ * @LastEditTime  2023-09-05 15:47:55
  */
 
 import http from "../../../js/http";
@@ -80,7 +80,7 @@ const tinymceInit = () => {
     selector: '.tinymce',
     language: editor_language,
     branding: false,
-    height: 400,
+    height: 500,
     convert_urls: false,
     // document_base_url: 'ssssss',
     inline: false,
@@ -140,18 +140,6 @@ const pageBottomBtns = () => {
     $('#content').css({'padding-bottom': '6rem'})
     $('.page-bottom-btns').css({'left': $('#content').offset().left})
     $('.page-bottom-btns').fadeIn(150)
-
-    if ($('#content').scrollTop() + $('#content').height() > contentInfoTop - 78) {
-      $('.page-bottom-btns').css({'position': 'initial'})
-    }
-
-    $('#content').scroll(function () {
-      if ($(this).scrollTop() + $(this).height() > contentInfoTop - 78) {
-        $('.page-bottom-btns').css({'position': 'initial'})
-      } else {
-        $('.page-bottom-btns').css({'position': 'fixed'})
-      }
-    });
   }
 }
 

@@ -4,6 +4,7 @@
 
 @section('page-bottom-btns')
   <button type="button" class="btn btn-lg w-min-100 btn-primary submit-form" form="app">{{ __('common.save') }}</button>
+  <button class="btn btn-lg btn-default w-min-100 ms-3" onclick="bk.back()">{{ __('common.return') }}</button>
 @endsection
 
 @push('header')
