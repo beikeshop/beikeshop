@@ -60,6 +60,10 @@
                     @endif
                   </x-admin::form.row>
 
+                  <x-admin-form-image name="descriptions[{{ $language['code'] }}][cover_image]" title="{{ __('admin/page.cover_picture') }}" value="{{ old('descriptions.' . $language['code'] . '.cover_image', $descriptions[$language['code']]['cover_image'] ?? '') }}">
+                    <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }}: 500*300</div>
+                  </x-admin-form-image>
+
                   <x-admin::form.row title="{{ __('admin/page.info_content') }}">
                     <div class="w-max-1000">
                       <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
