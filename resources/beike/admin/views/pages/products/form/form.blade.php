@@ -686,7 +686,10 @@
           }
 
           this.form.video.path = videoPath;
-          this.form.video.url = @json(image_origin(old('video', $product->video ?? '')));
+
+          if (videoPath) {
+            this.form.video.url = @json(image_origin(old('video', $product->video ?? '')));
+          }
         },
 
         // 视频数据提交的时候格式化
