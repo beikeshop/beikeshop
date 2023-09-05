@@ -82,34 +82,35 @@
 
             <x-admin::form.row title="{{ __('product.video') }}">
               <div class="wp-400 border">
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <button :class="['nav-link rounded-0', videoType == 'local' ? 'active' : '']" @click="videoTypeChange('local')" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
-                  <button :class="['nav-link rounded-0', videoType == 'iframe' ? 'active' : '']" @click="videoTypeChange('iframe')" data-bs-toggle="tab" data-bs-target="#nav-v-iframe" type="button">{{ __('admin/product.iframe_code') }}</button>
-                  <button :class="['nav-link rounded-0', videoType == 'custom' ? 'active' : '']" @click="videoTypeChange('custom')" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
+                <div class="nav nav-tabs" role="tablist">
+                  <button :class="['nav-link rounded-0', form.video.videoType == 'local' ? 'active' : '']" @click="videoTypeChange('local')" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
+                  <button :class="['nav-link rounded-0', form.video.videoType == 'iframe' ? 'active' : '']" @click="videoTypeChange('iframe')" data-bs-toggle="tab" data-bs-target="#nav-v-iframe" type="button">{{ __('admin/product.iframe_code') }}</button>
+                  <button :class="['nav-link rounded-0', form.video.videoType == 'custom' ? 'active' : '']" @click="videoTypeChange('custom')" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
                 </div>
 
                 <div class="tab-content p-3" id="nav-tabContent">
-                  <div :class="['tab-pane fade ', videoType == 'local' ? 'show active' : '']" id="nav-v-local">
+                  <div :class="['tab-pane fade ', form.video.videoType == 'local' ? 'show active' : '']" id="nav-v-local">
                     <div class="d-flex align-items-end">
                       <div class="set-product-img wh-80 rounded-2 me-2" @click="addProductVideo">
-                        <i v-if="form.video.path" class="bi bi-play-circle fs-1"></i>
+                        <i v-if="form.video.url" class="bi bi-play-circle fs-1"></i>
                         <i v-else class="bi bi-plus fs-1 text-muted"></i>
                       </div>
-                      <input type="hidden" name="video" :value="form.video.path">
-                      <a v-if="form.video.path" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
-                      <span v-if="form.video.path" @click="form.video.path = ''" class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
+                      <a v-if="form.video.url" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
+                      <span v-if="form.video.url" @click="form.video.path = ''" class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
                     </div>
                     <div class="help-text mt-1">{{ __('admin/product.video_help') }}</div>
                   </div>
-                  <div :class="['tab-pane fade', videoType == 'iframe' ? 'show active' : '']" id="nav-v-iframe">
-                    <textarea class="form-control" rows="3" placeholder="{{ __('admin/product.iframe_code') }}" name="video" v-model="form.video.path"></textarea>
+                  <div :class="['tab-pane fade', form.video.videoType == 'iframe' ? 'show active' : '']" id="nav-v-iframe">
+                    <textarea class="form-control" rows="3" placeholder="{{ __('admin/product.iframe_code') }}" v-model="form.video.iframe"></textarea>
                     <div class="help-text mt-1">{{ __('admin/product.iframe_code_hint') }}</div>
                   </div>
-                  <div :class="['tab-pane fade', videoType == 'custom' ? 'show active' : '']" id="nav-v-custom">
-                    <input class="form-control" placeholder="{{ __('admin/product.video_path') }}" name="video" v-model="form.video.path">
+                  <div :class="['tab-pane fade', form.video.videoType == 'custom' ? 'show active' : '']" id="nav-v-custom">
+                    <input class="form-control" placeholder="{{ __('admin/product.video_path') }}" v-model="form.video.custom">
                     <div class="help-text mt-1">{{ __('admin/product.video_path_hint') }}</div>
                   </div>
                 </div>
+
+                <input type="hidden" name="video" :value="form.video.path">
               </div>
             </x-admin::form.row>
 
@@ -471,7 +472,7 @@
         </div>
 
         <x-admin::form.row title="">
-          <button type="submit" @click="productsSubmit" class="btn d-none btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
+          <button type="submit" class="btn d-none btn-primary btn-submit mt-3 btn-lg">{{ __('common.save') }}</button>
         </x-admin::form.row>
 
         <el-dialog
@@ -537,6 +538,8 @@
         app.source.variables = [];
       }
 
+      app.videoSubmitFormat()
+
       setTimeout(() => {
         $(`form#app`).find('button[type="submit"]')[0].click();
       }, 0);
@@ -552,7 +555,10 @@
           images: @json(old('images', $product->images) ?? []),
           video: {
             path: @json(old('video', $product->video ?? '')),
-            url: @json(image_origin(old('video', $product->video ?? ''))),
+            url: '',
+            iframe: '',
+            custom: '',
+            videoType: 'local',
           },
           model: @json($product->skus[0]['model'] ?? ''),
           price: @json($product->skus[0]['price'] ?? ''),
@@ -608,8 +614,6 @@
         },
 
         rules: {},
-
-        videoType: 'local',
       },
 
       computed: {
@@ -636,11 +640,7 @@
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
         }
 
-        if (this.form.video.path.indexOf('<iframe') > -1) {
-          this.videoType = 'iframe';
-        } else if (this.form.video.path.indexOf('http') > -1) {
-          this.videoType = 'custom';
-        }
+        this.videoDataFormat()
       },
 
       watch: {
@@ -669,10 +669,34 @@
       },
 
       methods: {
-        // 表单提交，检测是否开启多规格 做处理
-        productsSubmit() {
-          if (!this.editing.isVariable) {
-            this.source.variables = [];
+        // 视频数据格式化 type
+        videoDataFormat() {
+          const videoPath = @json(old('video', $product->video ?? ''));
+
+          if (videoPath.indexOf('<iframe') > -1) {
+            this.form.video.videoType = 'iframe';
+            this.form.video.iframe = videoPath;
+            return
+          }
+
+          if (videoPath.indexOf('http') > -1) {
+            this.form.video.videoType = 'custom';
+            this.form.video.custom = videoPath;
+            return
+          }
+
+          this.form.video.path = videoPath;
+          this.form.video.url = @json(image_origin(old('video', $product->video ?? '')));
+        },
+
+        // 视频数据提交的时候格式化
+        videoSubmitFormat() {
+          if (this.form.video.videoType == 'iframe')  {
+            this.form.video.path = this.form.video.iframe;
+          }
+
+          if (this.form.video.videoType == 'custom')  {
+            this.form.video.path = this.form.video.custom;
           }
         },
 
@@ -729,7 +753,8 @@
 
         addProductVideo() {
           bk.fileManagerIframe(images => {
-            this.form.video = {path: images[0].path, url: images[0].url}
+            this.form.video.path = images[0].path
+            this.form.video.url = images[0].url
           }, {mime: 'video'})
         },
 
@@ -1009,9 +1034,9 @@
         },
 
         videoTypeChange(code) {
-          this.videoType = code;
-          this.form.video.path = '';
-          this.form.video.url = '';
+          this.form.video.videoType = code;
+          // this.form.video.path = '';
+          // this.form.video.url = '';
         },
       }
     });
