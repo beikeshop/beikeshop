@@ -836,3 +836,13 @@ function move_dir($sourcePath, $destinationPath)
     }
     File::deleteDirectory($sourcePath);
 }
+
+/**
+ * 是否有开启的翻译工具
+ *
+ * @return bool
+ */
+function has_translator(): bool
+{
+    return \Beike\Repositories\PluginRepo::getTranslators()->count() > 0;
+}
