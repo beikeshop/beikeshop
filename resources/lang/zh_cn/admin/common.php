@@ -98,6 +98,7 @@ return [
     'update_date'            => '更新日期',
     'update_btn'             => '前往下载',
     'expired_at'             => '到期时间',
+    'to_buy'                 => '去购买',
     'auto_translation'       => '自动翻译',
     'text_translate'         => '翻译',
     'all_others'             => '其他所有',

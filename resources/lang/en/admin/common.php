@@ -98,6 +98,7 @@ return [
     'update_date'                      => 'Update date',
     'update_btn'                       => 'Download',
     'expired_at'                       => 'Expired',
+    'to_buy'                           => 'To Buy',
     'auto_translation'                 => 'Auto Translation',
     'text_translate'                   => 'Translate',
     'all_others'                       => 'All Others',

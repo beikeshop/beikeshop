@@ -70,6 +70,20 @@ class MarketingService
     }
 
     /**
+     * Check plugin license
+     *
+     * @param $pluginCode
+     * @param $domain
+     * @return array|mixed
+     */
+    public function checkLicense($pluginCode, $domain): mixed
+    {
+        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/license?domain={$domain}";
+
+        return $this->httpClient->get($url)->json();
+    }
+
+    /**
      * 购买插件市场单个插件
      *
      * @throws \Exception
@@ -87,7 +101,7 @@ class MarketingService
             return $content['data'];
         }
 
-            throw new \Exception($content['message'] ?? '');
+        throw new \Exception($content['message'] ?? '');
     }
 
     /**
