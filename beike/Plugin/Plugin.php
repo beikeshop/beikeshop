@@ -167,14 +167,14 @@ class Plugin implements Arrayable, \ArrayAccess
     private function transLabel($item): mixed
     {
         $labelKey = $item['label_key'] ?? '';
-        $label    = $item['label']     ?? '';
+        $label    = $item['label']        ?? '';
         if (empty($label) && $labelKey) {
             $languageKey   = "{$this->dirName}::{$labelKey}";
             $item['label'] = trans($languageKey);
         }
 
         $descriptionKey = $item['description_key'] ?? '';
-        $description    = $item['description']     ?? '';
+        $description    = $item['description']        ?? '';
         if (empty($description) && $descriptionKey) {
             $languageKey         = "{$this->dirName}::{$descriptionKey}";
             $item['description'] = trans($languageKey);
@@ -337,12 +337,19 @@ class Plugin implements Arrayable, \ArrayAccess
      */
     public function checkLicenseValid(): bool
     {
-        $appDomain         = request()->getHost();
-        $domain            = new \Utopia\Domains\Domain($appDomain);
-        $registerDomain    = $domain->getRegisterable();
+        $appDomain = request()->getHost();
+
+        try {
+            $domain         = new \Utopia\Domains\Domain($appDomain);
+            $registerDomain = $domain->getRegisterable();
+        } catch (\Exception $e) {
+            $registerDomain = '';
+        }
+
         if (empty($registerDomain)) {
             return true;
         }
+
         $license = MarketingService::getInstance()->checkLicense($this->code, $registerDomain);
         $status  = $license['status'] ?? 'fail';
         if ($status == 'fail') {
