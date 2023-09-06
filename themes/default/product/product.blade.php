@@ -46,14 +46,16 @@
             </div>
             <div class="right" id="zoom">
               @include('product.product-video')
-              <img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+              <div class="product-img"><img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid"></div>
+              {{-- <div class="product-img"><img src="https://via.placeholder.com/250x1000" class="img-fluid"></div> --}}
             </div>
           @else
             @include('product.product-video')
             <div class="swiper" id="swiper-mobile">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="image, index in images">
-                  <img :src="image.preview" class="img-fluid">
+                  {{-- <img :src="image.preview" class="img-fluid"> --}}
+                  <img src="https://via.placeholder.com/250x1000" class="img-fluid">
                 </div>
               </div>
               <div class="swiper-pagination mobile-pagination"></div>

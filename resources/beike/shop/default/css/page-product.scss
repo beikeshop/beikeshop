@@ -120,6 +120,27 @@ body.page-product {
     .right {
       border: 1px solid #eee;
       position: relative;
+
+      .product-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (min-width: 992px) {
+          width: 360px;
+          height: 360px;
+        }
+
+        @media (min-width: 1200px) {
+          width: 450px;
+          height: 450px;
+        }
+
+        @media (min-width: 1400px) {
+          width: 500px;
+          height: 500px;
+        }
+      }
     }
 
     #product-video {
