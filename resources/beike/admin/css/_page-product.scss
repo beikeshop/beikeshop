@@ -21,6 +21,19 @@ body.page-product-form {
     }
   }
 
+  .video-nav-tabs {
+    margin-left: -1px;
+
+    .nav-link {
+      border-top: none;
+      color: #666;
+
+      &.active {
+        color: $primary;
+      }
+    }
+  }
+
   .batch-setting {
     .form-control {
       max-width: 100px;

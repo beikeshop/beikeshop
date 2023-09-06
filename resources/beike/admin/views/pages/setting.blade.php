@@ -263,7 +263,10 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account.edit.crop') }}</h5>
+          <div class="d-flex align-items-center">
+            <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account.edit.crop') }}</h5>
+            <div class="cropper-size ms-4">{{ __('common.cropper_size') }}：<span></span></div>
+          </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -301,7 +304,7 @@
           });
         } else {
           $('select[name="zone_id"]').html(`
-            <option value="">请选择</option>
+            <option value="">{{ __('common.please_choose') }}</option>
           `);
         }
       })
@@ -362,6 +365,10 @@
         initialAspectRatio: ratio.split('/')[0] / ratio.split('/')[1],
         autoCropArea: 1,
         viewMode: 1,
+        // 回调 获取尺寸
+        crop: function(event) {
+          $('.cropper-size span').html(parseInt(event.detail.width) + ' * ' + parseInt(event.detail.height))
+        }
       });
     }).on('hidden.bs.modal', function() {
       cropper.destroy();

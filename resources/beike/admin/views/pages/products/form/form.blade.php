@@ -83,7 +83,7 @@
 
             <x-admin::form.row title="{{ __('product.video') }}">
               <div class="wp-400 border">
-                <div class="nav nav-tabs" role="tablist">
+                <div class="nav nav-tabs video-nav-tabs" role="tablist">
                   <button :class="['nav-link rounded-0', form.video.videoType == 'local' ? 'active' : '']" @click="videoTypeChange('local')" data-bs-toggle="tab" data-bs-target="#nav-v-local" type="button">{{ __('admin/product.video_local') }}</button>
                   <button :class="['nav-link rounded-0', form.video.videoType == 'iframe' ? 'active' : '']" @click="videoTypeChange('iframe')" data-bs-toggle="tab" data-bs-target="#nav-v-iframe" type="button">{{ __('admin/product.iframe_code') }}</button>
                   <button :class="['nav-link rounded-0', form.video.videoType == 'custom' ? 'active' : '']" @click="videoTypeChange('custom')" data-bs-toggle="tab" data-bs-target="#nav-v-custom" type="button">{{ __('admin/builder.text_custom') }}</button>
