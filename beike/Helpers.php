@@ -473,7 +473,7 @@ function language_packages(): array
 {
     $languageDir = resource_path('lang');
 
-    return array_values(array_diff(scandir($languageDir), ['..', '.']));
+    return array_values(array_diff(scandir($languageDir), ['..', '.', '.DS_Store']));
 }
 
 /**
