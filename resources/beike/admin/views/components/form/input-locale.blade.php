@@ -15,8 +15,6 @@
     @endif
   @endforeach
 
-  @if (true)
   @include('admin::shared.auto-translation')
-  @endif
 </div>
 </x-admin::form.row>

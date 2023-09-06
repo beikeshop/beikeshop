@@ -91,6 +91,7 @@ return [
     'error_page_btn'       => 'Return to previous page',
     'no_repeat'            => 'Do not re-add',
     'text_hour'            => 'Hour',
+    'cropper_size'         => 'Crop Size',
 
     'order'                => [
         'unpaid'    => 'Unpaid',

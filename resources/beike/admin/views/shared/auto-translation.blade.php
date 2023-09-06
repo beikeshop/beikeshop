@@ -13,6 +13,6 @@
         <option value="{{ $locale['code'] }}">{{ $locale['name'] }}</option>
       @endforeach
     </select>
-    <button type="button" class="btn btn-outline-secondary btn-sm ms-2 translate-btn">{{ __('admin/common.text_translate') }}</button>
+    <button type="button" class="btn btn-default btn-sm ms-2 translate-btn">{{ __('admin/common.text_translate') }}</button>
   </div>
 </div>

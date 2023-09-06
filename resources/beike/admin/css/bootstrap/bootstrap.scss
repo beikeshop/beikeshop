@@ -88,6 +88,8 @@ $dropdown-bg :#fff;
 
 .btn-default {
   border: 1px solid #ddd;
+  background-color: #fff;
+
   &:hover {
     border-color: $primary;
     color: $primary;
