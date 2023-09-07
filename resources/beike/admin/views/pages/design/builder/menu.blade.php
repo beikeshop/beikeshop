@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('/build/beike/admin/css/design.css') }}">
 @endpush
 
-@section('page-bottom-btns')
+@section('page-title-right')
   <button type="button" class="btn w-min-100 btn-primary save-btn">{{ __('common.save') }}</button>
 @endsection
 

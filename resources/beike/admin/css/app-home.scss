@@ -55,13 +55,23 @@
           overflow-y: auto;
 
           .list-item {
-            border: 1px solid #ddd;
-            padding: 10px 16px;
+            border: 1px solid #eee;
+            padding: 10px 24px 10px 16px;
             cursor: move;
             display: flex;
             align-items: center;
             margin-bottom: 10px;
-            border-radius: 4px;
+            border-radius: 2px;
+            position: relative;
+
+            &:after {
+              content: '\F3FE';
+              font-family: 'bootstrap-icons';
+              position: absolute;
+              right: 8px;
+              font-size: 16px;
+              color: #999;
+            }
             &:hover {
               border-color: $primary;
             }
@@ -75,6 +85,7 @@
               // align-items: center;
               i {
                 font-size: 26px;
+                color: #666;
                 line-height: 1;
               }
             }
@@ -83,6 +94,7 @@
               font-size: 12px;
               // height: 27px;
               overflow: hidden;
+              font-weight: bold;
             }
           }
         }

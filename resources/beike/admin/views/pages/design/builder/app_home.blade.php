@@ -28,7 +28,7 @@
 </style>
 @endpush
 
-@section('page-bottom-btns')
+@section('page-title-right')
 <button type="button" class="btn w-min-100 btn-primary save-btn">{{ __('common.save') }}</button>
 @endsection
 
