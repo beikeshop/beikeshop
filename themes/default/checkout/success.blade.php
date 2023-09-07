@@ -19,7 +19,7 @@
         <div class="mt-4">
           <div class="card mb-2 order-head">
             <div class="card-header d-flex align-items-center justify-content-between">
-              <h5 class="card-title">{{ __('shop/account.order.order_info.order_details') }}</h5>
+              <h5 class="card-title">{{ __('shop/account/order_info.order_details') }}</h5>
               @if (current_customer())
                 <a class="btn btn-sm btn-primary" href="{{ shop_route('account.order.show', $order->number) }}">{{ __('common.view_more') }}</a>
                 @else
@@ -31,10 +31,10 @@
                 <table class="table table-borderless mb-0">
                   <thead>
                     <tr>
-                      <th>{{ __('shop/account.order.order_info.order_number') }}</th>
-                      <th class="nowrap">{{ __('shop/account.order.order_info.order_date') }}</th>
-                      <th>{{ __('shop/account.order.order_info.state') }}</th>
-                      <th>{{ __('shop/account.order.order_info.order_amount') }}</th>
+                      <th>{{ __('shop/account/order_info.order_number') }}</th>
+                      <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
+                      <th>{{ __('shop/account/order_info.state') }}</th>
+                      <th>{{ __('shop/account/order_info.order_amount') }}</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Page extends Base
 {
     protected $fillable = [
-        'page_category_id', 'position', 'views', 'author', 'active',
+        'page_category_id', 'image', 'position', 'views', 'author', 'active',
     ];
 
     public function description(): HasOne

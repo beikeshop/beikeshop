@@ -32,7 +32,7 @@
             </div>
             <div class="col-4 mt-2 mt-sm-0">
               <el-form-item prop="city">
-                <el-input v-model="form.city" placeholder="{{ __('shop/account.addresses.enter_city') }}"></el-input>
+                <el-input v-model="form.city" placeholder="{{ __('shop/account/addresses.enter_city') }}"></el-input>
               </el-form-item>
             </div>
           </div>
@@ -93,7 +93,7 @@
       rules: {
         name: [{
           required: true,
-          message: '{{ __('shop/account.addresses.enter_name') }}',
+          message: '{{ __('shop/account/addresses.enter_name') }}',
           trigger: 'blur'
         }, ],
         email: [{
@@ -104,17 +104,17 @@
         }, ],
         address_1: [{
           required: true,
-          message: ' {{ __('shop/account.addresses.enter_address') }}',
+          message: ' {{ __('shop/account/addresses.enter_address') }}',
           trigger: 'blur'
         }, ],
         zone_id: [{
           required: true,
-          message: '{{ __('shop/account.addresses.select_province') }}',
+          message: '{{ __('shop/account/addresses.select_province') }}',
           trigger: 'blur'
         }, ],
         city: [{
           required: true,
-          message: '{{ __('shop/account.addresses.enter_city') }}',
+          message: '{{ __('shop/account/addresses.enter_city') }}',
           trigger: 'blur'
         }, ],
       },

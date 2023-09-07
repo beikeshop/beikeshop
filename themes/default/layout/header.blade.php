@@ -106,7 +106,7 @@
                 <li><a href="{{ shop_route('account.order.index') }}" class="dropdown-item"><i
                       class="bi bi-clipboard-check me-1"></i> {{ __('shop/account.order.index') }}</a></li>
                 <li><a href="{{ shop_route('account.wishlist.index') }}" class="dropdown-item"><i
-                      class="bi bi-heart me-1"></i> {{ __('shop/account.wishlist.index') }}</a></li>
+                      class="bi bi-heart me-1"></i> {{ __('shop/account/wishlist.index') }}</a></li>
                 <li>
                   <hr class="dropdown-divider opacity-100">
                 </li>

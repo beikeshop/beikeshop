@@ -96,7 +96,7 @@ class OrderController extends Controller
         $comment = trans('shop/order.confirm_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::COMPLETED, $comment);
 
-        return json_success(trans('shop/account.order.completed'));
+        return json_success(trans('shop/account/order.completed'));
     }
 
     /**
@@ -117,6 +117,6 @@ class OrderController extends Controller
         $comment = trans('shop/order.cancel_order');
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
 
-        return json_success(trans('shop/account.order.cancelled'));
+        return json_success(trans('shop/account/order.cancelled'));
     }
 }

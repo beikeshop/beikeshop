@@ -147,8 +147,8 @@
         ],
         static: [
           {name: '{{ __('shop/account.index') }}', value: 'account.index'},
-          {name: '{{ __('shop/account.wishlist.index') }}', value: 'account.wishlist.index'},
-          {name: '{{ __('shop/account.order.index') }}', value: 'account.order.index'},
+          {name: '{{ __('shop/account/wishlist.index') }}', value: 'account.wishlist.index'},
+          {name: '{{ __('shop/account/order.index') }}', value: 'account.order.index'},
           // {name: '最新商品', value: 'account.index'},
           {name: '{{ __('shop/brands.index') }}', value: 'brands.index'},
         ],

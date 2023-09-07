@@ -32,8 +32,8 @@ class EditRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'  => trans('shop/account.edit.name'),
-            'email' => trans('shop/account.edit.email'),
+            'name'  => trans('shop/account/edit.name'),
+            'email' => trans('shop/account/edit.email'),
         ];
     }
 }
