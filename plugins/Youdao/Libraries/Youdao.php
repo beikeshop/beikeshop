@@ -87,24 +87,18 @@ class Youdao
      * @param $from
      * @param $to
      * @return array
+     * @throws \Exception
      */
     public function translateBatch($data, $from, $to): array
     {
+        $this->baseUrl = 'https://openapi.youdao.com/v2/api';
         if (! $data || ! is_array($data)) {
             return [];
         }
-        $result = [];
-        foreach ($data as $field => $text) {
-            if (empty($text)) {
-                $result[$field] = '';
 
-                continue;
-            }
-            $item           = $this->translate($text, $from, $to);
-            $result[$field] = $item;
-        }
-
-        return $result;
+        $text   = implode('&', $data);
+        $result = $this->translate($text, $from, $to);
+        dd($result);
     }
 
     /**
@@ -214,9 +208,9 @@ class Youdao
         if (function_exists('mb_strlen')) {
             return mb_strlen($str, 'utf-8');
         }
-            preg_match_all('/./u', $str, $ar);
+        preg_match_all('/./u', $str, $ar);
 
-            return count($ar[0]);
+        return count($ar[0]);
 
     }
 
@@ -258,13 +252,12 @@ class Youdao
      */
     private function callOnce($url, $args = null, $method = 'post', $withCookie = false, $timeout = self::CURL_TIMEOUT, $headers = []): bool|string
     {
-        $ch = curl_init();
+        $ch   = curl_init();
+        $data = $this->convert($args);
         if ($method == 'post') {
-            $data = $this->convert($args);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_POST, 1);
         } else {
-            $data = $this->convert($args);
             if ($data) {
                 if (stripos($url, '?') > 0) {
                     $url .= "&$data";

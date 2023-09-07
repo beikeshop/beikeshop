@@ -16,14 +16,53 @@ use Beike\Services\TranslatorService;
 class TranslationService
 {
     /**
+     * @param string       $source
+     * @param array|string $targets
+     * @param array|string $text
+     * @return array
      * @throws \Exception
      */
-    public static function translate($source, $target, $text): array
+    public static function translate(string $source, array|string $targets, array|string $text): array
     {
-        if (empty($source) || empty($target) || empty($text)) {
+        if (empty($source) || empty($targets) || empty($text)) {
             return [];
         }
 
+        $translator = self::getTranslator();
+        $targets    = self::handleTargets($targets, $source);
+
+        $items = [];
+        foreach ($targets as $target) {
+            try {
+                $result = $error = '';
+                if (is_array($text)) {
+                    $result = $translator->batchTranslate($source, $target, $text);
+                } elseif (is_string($text)) {
+                    $result = $translator->translate($source, $target, $text);
+                }
+            } catch (\Exception $e) {
+                $result = $text;
+                $error  = $e->getMessage();
+            }
+            $item = [
+                'locale' => $target,
+                'result' => $result,
+                'error'  => $error,
+            ];
+            $items[] = $item;
+        }
+
+        return $items;
+    }
+
+    /**
+     * 获取翻译工具对象
+     *
+     * @return TranslatorService|null
+     * @throws \Exception
+     */
+    private static function getTranslator(): ?TranslatorService
+    {
         $translatorName = hook_filter('admin.service.translator', '');
         if (empty($translatorName)) {
             throw new \Exception('Empty translator name');
@@ -36,29 +75,22 @@ class TranslationService
             throw new \Exception("{$translatorName} should implement " . TranslatorService::class);
         }
 
-        if ($target == 'all') {
-            $target = collect(locales())->where('code', '<>', $source)->pluck('code')->toArray();
-        } elseif (is_string($target)) {
-            $target = [$target];
+        return $translator;
+    }
+
+    /**
+     * @param $targets
+     * @param $source
+     * @return array
+     */
+    private static function handleTargets($targets, $source): array
+    {
+        if ($targets == 'all') {
+            $targets = collect(locales())->where('code', '<>', $source)->pluck('code')->toArray();
+        } elseif (is_string($targets)) {
+            $targets = [$targets];
         }
 
-        $items      = [];
-        foreach ($target as $toLocale) {
-            try {
-                $error  = '';
-                $result = $translator->translate($source, $toLocale, $text);
-            } catch (\Exception $e) {
-                $result = $text;
-                $error  = $e->getMessage();
-            }
-            $item = [
-                'locale' => $toLocale,
-                'result' => $result,
-                'error'  => $error,
-            ];
-            $items[] = $item;
-        }
-
-        return $items;
+        return $targets;
     }
 }

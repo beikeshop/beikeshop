@@ -37,6 +37,22 @@ class YoudaoService implements TranslatorService
     }
 
     /**
+     * 批量翻译
+     *
+     * @param $from
+     * @param $to
+     * @param $texts
+     * @return array
+     */
+    public function batchTranslate($from, $to, $texts): array
+    {
+        $from = $this->mapCode($from);
+        $to   = $this->mapCode($to);
+
+        return $this->translator->translateBatch($texts, $from, $to);
+    }
+
+    /**
      * @param $code
      * @return string
      */
