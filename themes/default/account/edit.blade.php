@@ -17,7 +17,7 @@
       <div class="col-12 col-md-9">
         <div class="card h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">{{ __('shop/account.edit.index') }}</h5>
+            <h5 class="card-title">{{ __('shop/account/edit.index') }}</h5>
           </div>
           <div class="card-body h-600">
             <form novalidate class="needs-validation" action="{{ shop_route('account.edit.update') }}" method="POST">
@@ -34,29 +34,29 @@
                     width="90">
                   <div class="ps-3">
                     <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
-                      <i class="bi bi-arrow-repeat"></i> {{ __('shop/account.edit.modify_avatar') }}
+                      <i class="bi bi-arrow-repeat"></i> {{ __('shop/account/edit.modify_avatar') }}
                       <input type="file" class="d-none" id="update-btn" name="" accept="image/*">
                       <input type="hidden" id="avatar-input" name="avatar" value="{{ $customer->avatar }}">
                     </label>
-                    <div class="p mb-0 fs-ms text-muted">{{ __('shop/account.edit.suggest') }}</div>
+                    <div class="p mb-0 fs-ms text-muted">{{ __('shop/account/edit.suggest') }}</div>
                   </div>
                 </div>
               </div>
               <div class="row gx-4 gy-3">
                 <div class="col-sm-6">
-                  <label class="form-label">{{ __('shop/account.edit.name') }}</label>
+                  <label class="form-label">{{ __('shop/account/edit.name') }}</label>
                   <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"
                     value="{{ old('name', $customer->name ?? '') }}" required>
                   <span class="invalid-feedback"
-                    role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account.edit.name')]) }}</span>
+                    role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account/edit.name')]) }}</span>
                 </div>
                 @hookwrapper('account.edit.email')
                 <div class="col-sm-6">
-                  <label class="form-label">{{ __('shop/account.edit.email') }}</label>
+                  <label class="form-label">{{ __('shop/account/edit.email') }}</label>
                   <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email"
                     name="email" value="{{ old('email', $customer->email ?? '') }}" required>
                   <span class="invalid-feedback"
-                    role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account.edit.email')]) }}</span>
+                    role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account/edit.email')]) }}</span>
                 </div>
                 @endhookwrapper
                 <div class="col-12 mt-4">
@@ -75,7 +75,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account.edit.crop') }}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account/edit.crop') }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

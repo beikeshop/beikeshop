@@ -12,15 +12,15 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">{{ __('shop/account.wishlist.index') }}</h5>
+            <h5 class="card-title">{{ __('shop/account/wishlist.index') }}</h5>
           </div>
           <div class="card-body">
             <table class="table align-middle">
               <thead>
                 <tr>
                   <th width="90px"></th>
-                  <th>{{ __('shop/account.wishlist.product') }}</th>
-                  <th>{{ __('shop/account.wishlist.price') }}</th>
+                  <th>{{ __('shop/account/wishlist.product') }}</th>
+                  <th>{{ __('shop/account/wishlist.price') }}</th>
                   <th class="text-end"></th>
                 </tr>
               </thead>
@@ -36,7 +36,7 @@
                       <td class="text-end">
                         <div class="">
                           <a class="btn btn-outline-secondary btn-sm"
-                            href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account.wishlist.check_details') }}</a>
+                            href="{{ shop_route('products.show', $item['product_id']) }}">{{ __('shop/account/wishlist.check_details') }}</a>
                           <button class="btn btn-outline-secondary add-cart btn-sm">{{ __('shop/products.add_to_cart') }}</button>
                           <button class="btn btn-outline-danger btn-sm remove-wishlist"><i class="bi bi-x-lg"></i></button>
                         </div>
