@@ -135,6 +135,8 @@ class Url
     }
 
     /**
+     * preg_replace('/\/([^\/]+)$/', '.$1', str_replace(".", "/", $value));
+     *
      * @param $value
      * @return string
      */
