@@ -1,20 +1,18 @@
 <?php
+/**
+ * Lang.php
+ *
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-07 08:38:20
+ */
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed'   => 'ketidakcocokan kata sandi akun',
-    'password' => 'Kata sandi salah',
-    'throttle' => 'Terlalu banyak kegagalan. Tolong :seconds Coba lagi dalam hitungan menit.',
-
+    'empty_customer' => 'Pengguna kosong, silahkan login dulu',
+    'failed'         => 'ketidakcocokan kata sandi akun',
+    'logout_success' => 'Log masuk keluar berhasil',
+    'password'       => 'Kata sandi salah',
+    'throttle'       => 'Terlalu banyak kegagalan. Tolong :seconds Coba lagi dalam hitungan menit.',
 ];
