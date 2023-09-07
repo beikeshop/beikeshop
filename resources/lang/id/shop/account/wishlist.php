@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => 'Koleksi Saya',
-  'product'       => 'Komoditas',
-  'price'         => 'Harga',
-  'check_details' => 'Lihat Detail',
+    'index'         => 'Koleksi Saya',
+    'product'       => 'Komoditas',
+    'price'         => 'Harga',
+    'check_details' => 'Lihat Detail',
 ];

@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'                 => 'Edit',
-  'modify_avatar'         => 'Profile Picture',
-  'suggest'               => 'Upload a JPG or PNG image. 300 x 300 is recommended.',
-  'name'                  => 'Name',
-  'email'                 => 'Email',
-  'crop'                  => 'Crop',
-  'password_edit_success' => 'Change password successfully!',
-  'origin_password_fail'  => 'Origin password incorrect!',
+    'index'                 => 'Edit',
+    'modify_avatar'         => 'Profile Picture',
+    'suggest'               => 'Upload a JPG or PNG image. 300 x 300 is recommended.',
+    'name'                  => 'Name',
+    'email'                 => 'Email',
+    'crop'                  => 'Crop',
+    'password_edit_success' => 'Change password successfully!',
+    'origin_password_fail'  => 'Origin password incorrect!',
 ];

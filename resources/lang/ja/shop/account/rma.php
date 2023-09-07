@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => '私のアフターセールス',
-  'commodity'     => '商品',
-  'quantity'      => '数量',
-  'service_type'  => 'サービス タイプ',
-  'return_reason' => '返品理由',
-  'creation_time' => '作成時間',
-  'check'         => 'チェック',
+    'index'         => '私のアフターセールス',
+    'commodity'     => '商品',
+    'quantity'      => '数量',
+    'service_type'  => 'サービス タイプ',
+    'return_reason' => '返品理由',
+    'creation_time' => '作成時間',
+    'check'         => 'チェック',
 ];

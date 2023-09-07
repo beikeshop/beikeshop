@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'                 => '修改個人信息',
-  'modify_avatar'         => '修改頭像',
-  'suggest'               => '上傳JPG或PNG圖片。建議300 x 300。 ',
-  'name'                  => '名稱',
-  'email'                 => '郵箱',
-  'crop'                  => '裁剪',
-  'password_edit_success' => '密碼修改成功',
-  'origin_password_fail'  => '原密碼錯誤',
+    'index'                 => '修改個人信息',
+    'modify_avatar'         => '修改頭像',
+    'suggest'               => '上傳JPG或PNG圖片。建議300 x 300。 ',
+    'name'                  => '名稱',
+    'email'                 => '郵箱',
+    'crop'                  => '裁剪',
+    'password_edit_success' => '密碼修改成功',
+    'origin_password_fail'  => '原密碼錯誤',
 ];

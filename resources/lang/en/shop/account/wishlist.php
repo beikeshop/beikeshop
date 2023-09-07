@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => 'Wishlist',
-  'product'       => 'Product',
-  'price'         => 'Price',
-  'check_details' => 'Check Details',
+    'index'         => 'Wishlist',
+    'product'       => 'Product',
+    'price'         => 'Price',
+    'check_details' => 'Check Details',
 ];

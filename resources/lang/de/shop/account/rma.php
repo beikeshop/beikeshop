@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => 'Mein Kundendienst',
-  'commodity'     => 'Ware',
-  'quantity'      => 'Menge',
-  'service_type'  => 'Diensttyp',
-  'return_reason' => 'Rücksendegrund',
-  'creation_time' => 'Erstellungszeit',
-  'check'         => 'prüfen',
+    'index'         => 'Mein Kundendienst',
+    'commodity'     => 'Ware',
+    'quantity'      => 'Menge',
+    'service_type'  => 'Diensttyp',
+    'return_reason' => 'Rücksendegrund',
+    'creation_time' => 'Erstellungszeit',
+    'check'         => 'prüfen',
 ];

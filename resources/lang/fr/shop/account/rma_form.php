@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'Soumettre des informations après-vente',
-  'service_type'    => 'Type de service',
-  'return_quantity' => 'Quantité retournée',
-  'unpacked'        => 'déballé',
-  'return_reason'   => 'Raison du retour',
-  'remark'          => 'Remarque',
+    'index'           => 'Soumettre des informations après-vente',
+    'service_type'    => 'Type de service',
+    'return_quantity' => 'Quantité retournée',
+    'unpacked'        => 'déballé',
+    'return_reason'   => 'Raison du retour',
+    'remark'          => 'Remarque',
 ];

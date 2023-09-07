@@ -10,5 +10,5 @@
  */
 
 return [
-  'index' => 'A/S 내역',
+    'index' => 'A/S 내역',
 ];

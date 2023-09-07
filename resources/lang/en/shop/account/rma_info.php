@@ -10,5 +10,5 @@
  */
 
 return [
-  'index' => 'RMA Details',
+    'index' => 'RMA Details',
 ];

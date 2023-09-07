@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => 'Purna jual saya',
-  'commodity'     => 'Komoditas',
-  'quantity'      => 'kuantitas',
-  'service_type'  => 'jenis layanan',
-  'return_reason' => 'alasan pengembalian',
-  'creation_time' => 'waktu penciptaan',
-  'check'         => 'Lihat',
+    'index'         => 'Purna jual saya',
+    'commodity'     => 'Komoditas',
+    'quantity'      => 'kuantitas',
+    'service_type'  => 'jenis layanan',
+    'return_reason' => 'alasan pengembalian',
+    'creation_time' => 'waktu penciptaan',
+    'check'         => 'Lihat',
 ];

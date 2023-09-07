@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'                 => 'modifica informazioni personali',
-  'modify_avatar'         => 'modifica avatar',
-  'suggest'               => 'Carica immagine JPG o PNG. Si consiglia 300 x 300. x 300。',
-  'name'                  => 'nome',
-  'email'                 => 'cassetta postale',
-  'crop'                  => 'ritaglia',
-  'password_edit_success' => 'Password modificata con successo',
-  'origin_password_fail'  => 'errore password originale',
+    'index'                 => 'modifica informazioni personali',
+    'modify_avatar'         => 'modifica avatar',
+    'suggest'               => 'Carica immagine JPG o PNG. Si consiglia 300 x 300. x 300。',
+    'name'                  => 'nome',
+    'email'                 => 'cassetta postale',
+    'crop'                  => 'ritaglia',
+    'password_edit_success' => 'Password modificata con successo',
+    'origin_password_fail'  => 'errore password originale',
 ];

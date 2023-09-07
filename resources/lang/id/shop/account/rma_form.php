@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'Kirim informasi purna jual',
-  'service_type'    => 'jenis layanan',
-  'return_quantity' => 'Jumlah pengembalian',
-  'unpacked'        => 'Dibongkar',
-  'return_reason'   => 'alasan pengembalian',
-  'remark'          => 'Keterangan',
+    'index'           => 'Kirim informasi purna jual',
+    'service_type'    => 'jenis layanan',
+    'return_quantity' => 'Jumlah pengembalian',
+    'unpacked'        => 'Dibongkar',
+    'return_reason'   => 'alasan pengembalian',
+    'remark'          => 'Keterangan',
 ];

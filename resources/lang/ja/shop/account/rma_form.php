@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'アフターセールス情報の送信',
-  'service_type'    => 'サービス タイプ',
-  'return_quantity' => '返品数量',
-  'unpacked'        => 'unpacked',
-  'return_reason'   => '返品理由',
-  'remark'          => 'コメント',
+    'index'           => 'アフターセールス情報の送信',
+    'service_type'    => 'サービス タイプ',
+    'return_quantity' => '返品数量',
+    'unpacked'        => 'unpacked',
+    'return_reason'   => '返品理由',
+    'remark'          => 'コメント',
 ];

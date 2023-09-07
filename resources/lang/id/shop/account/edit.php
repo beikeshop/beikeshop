@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'                 => 'Koreksi Informasi Pribadi',
-  'modify_avatar'         => 'Ubah avatar',
-  'suggest'               => 'Unggah gambar JPG atau PNG. 300 x 300 direkomendasikan. ',
-  'name'                  => 'Nama',
-  'email'                 => 'kotak surat',
-  'crop'                  => 'pangkas',
-  'password_edit_success' => 'Kata sandi berhasil diubah',
-  'origin_password_fail'  => 'kesalahan kata sandi asli',
+    'index'                 => 'Koreksi Informasi Pribadi',
+    'modify_avatar'         => 'Ubah avatar',
+    'suggest'               => 'Unggah gambar JPG atau PNG. 300 x 300 direkomendasikan. ',
+    'name'                  => 'Nama',
+    'email'                 => 'kotak surat',
+    'crop'                  => 'pangkas',
+    'password_edit_success' => 'Kata sandi berhasil diubah',
+    'origin_password_fail'  => 'kesalahan kata sandi asli',
 ];

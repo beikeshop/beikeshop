@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => '나의 컬렉션',
-  'product'       => '상품',
-  'price'         => '가격',
-  'check_details' => '상세보기',
+    'index'         => '나의 컬렉션',
+    'product'       => '상품',
+    'price'         => '가격',
+    'check_details' => '상세보기',
 ];

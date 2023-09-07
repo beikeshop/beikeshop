@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'         => 'Mi pedido',
-  'completed'     => 'Recibo confirmado',
-  'cancelled'     => 'orden cancelada',
-  'order_details' => 'detalles del pedido',
-  'amount'        => 'Monto',
-  'state'         => 'estado',
-  'order_number'  => 'Número de orden',
-  'check'         => 'Controlar',
+    'index'         => 'Mi pedido',
+    'completed'     => 'Recibo confirmado',
+    'cancelled'     => 'orden cancelada',
+    'order_details' => 'detalles del pedido',
+    'amount'        => 'Monto',
+    'state'         => 'estado',
+    'order_number'  => 'Número de orden',
+    'check'         => 'Controlar',
 ];

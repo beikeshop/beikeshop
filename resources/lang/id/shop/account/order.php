@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'         => 'Pesanan Saya',
-  'completed'     => 'Tanda terima dikonfirmasi',
-  'cancelled'     => 'Pesanan dibatalkan',
-  'order_details' => 'Detail pesanan',
-  'amount'        => 'jumlah',
-  'state'         => 'Status',
-  'order_number'  => 'Nomor pesanan',
-  'check'         => 'Lihat',
+    'index'         => 'Pesanan Saya',
+    'completed'     => 'Tanda terima dikonfirmasi',
+    'cancelled'     => 'Pesanan dibatalkan',
+    'order_details' => 'Detail pesanan',
+    'amount'        => 'jumlah',
+    'state'         => 'Status',
+    'order_number'  => 'Nomor pesanan',
+    'check'         => 'Lihat',
 ];

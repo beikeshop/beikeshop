@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => '我的售后',
-  'commodity'     => '商品',
-  'quantity'      => '数量',
-  'service_type'  => '服务类型',
-  'return_reason' => '退换原因',
-  'creation_time' => '创建时间',
-  'check'         => '查看',
+    'index'         => '我的售后',
+    'commodity'     => '商品',
+    'quantity'      => '数量',
+    'service_type'  => '服务类型',
+    'return_reason' => '退换原因',
+    'creation_time' => '创建时间',
+    'check'         => '查看',
 ];

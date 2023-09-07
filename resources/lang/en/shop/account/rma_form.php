@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'Submit RMA information',
-  'service_type'    => 'Service Type',
-  'return_quantity' => 'Return Quantity',
-  'unpacked'        => 'Unpacked',
-  'return_reason'   => 'Reason For Return',
-  'remark'          => 'Remark',
+    'index'           => 'Submit RMA information',
+    'service_type'    => 'Service Type',
+    'return_quantity' => 'Return Quantity',
+    'unpacked'        => 'Unpacked',
+    'return_reason'   => 'Reason For Return',
+    'remark'          => 'Remark',
 ];

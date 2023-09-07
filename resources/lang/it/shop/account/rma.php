@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => 'il mio post vendita',
-  'commodity'     => 'merce',
-  'quantity'      => 'quantità',
-  'service_type'  => 'Tipo di servizio',
-  'return_reason' => 'un motivo per ritornare',
-  'creation_time' => 'tempo di creazione',
-  'check'         => 'Dai un\'occhiata',
+    'index'         => 'il mio post vendita',
+    'commodity'     => 'merce',
+    'quantity'      => 'quantità',
+    'service_type'  => 'Tipo di servizio',
+    'return_reason' => 'un motivo per ritornare',
+    'creation_time' => 'tempo di creazione',
+    'check'         => 'Dai un\'occhiata',
 ];

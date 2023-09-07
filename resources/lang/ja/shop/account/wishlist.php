@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => 'お気に入り',
-  'product'       => '製品',
-  'price'         => '価格',
-  'check_details' => '詳細を確認',
+    'index'         => 'お気に入り',
+    'product'       => '製品',
+    'price'         => '価格',
+    'check_details' => '詳細を確認',
 ];

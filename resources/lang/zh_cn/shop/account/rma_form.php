@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => '提交售后信息',
-  'service_type'    => '服务类型',
-  'return_quantity' => '退换数量',
-  'unpacked'        => '已打开包装',
-  'return_reason'   => '退换原因',
-  'remark'          => '备注',
+    'index'           => '提交售后信息',
+    'service_type'    => '服务类型',
+    'return_quantity' => '退换数量',
+    'unpacked'        => '已打开包装',
+    'return_reason'   => '退换原因',
+    'remark'          => '备注',
 ];

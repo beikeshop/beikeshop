@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => 'RMA',
-  'commodity'     => 'Commodity',
-  'quantity'      => 'Quantity',
-  'service_type'  => 'Service Type',
-  'return_reason' => 'Reason For Return',
-  'creation_time' => 'Creation Time',
-  'check'         => 'Check',
+    'index'         => 'RMA',
+    'commodity'     => 'Commodity',
+    'quantity'      => 'Quantity',
+    'service_type'  => 'Service Type',
+    'return_reason' => 'Reason For Return',
+    'creation_time' => 'Creation Time',
+    'check'         => 'Check',
 ];

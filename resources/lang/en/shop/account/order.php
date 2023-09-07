@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'         => 'Order',
-  'completed'     => 'Completed',
-  'cancelled'     => 'Cancelled',
-  'order_details' => 'Order Details',
-  'amount'        => 'Amount',
-  'state'         => 'State',
-  'order_number'  => 'Order Number',
-  'check'         => 'Check',
+    'index'         => 'Order',
+    'completed'     => 'Completed',
+    'cancelled'     => 'Cancelled',
+    'order_details' => 'Order Details',
+    'amount'        => 'Amount',
+    'state'         => 'State',
+    'order_number'  => 'Order Number',
+    'check'         => 'Check',
 ];

@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'         => '私の注文',
-  'completed'     => '受領確認',
-  'cancelled'     => '注文がキャンセルされました',
-  'order_details' => '注文の詳細',
-  'amount'        => '金額',
-  'state'         => '状態',
-  'order_number'  => '注文番号',
-  'check'         => 'チェック',
+    'index'         => '私の注文',
+    'completed'     => '受領確認',
+    'cancelled'     => '注文がキャンセルされました',
+    'order_details' => '注文の詳細',
+    'amount'        => '金額',
+    'state'         => '状態',
+    'order_number'  => '注文番号',
+    'check'         => 'チェック',
 ];

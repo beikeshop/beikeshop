@@ -10,11 +10,11 @@
  */
 
 return [
-  'index'         => 'mi posventa',
-  'commodity'     => 'producto',
-  'quantity'      => 'cantidad',
-  'service_type'  => 'Tipo de servicio',
-  'return_reason' => 'razón para regresar',
-  'creation_time' => 'tiempo de creación',
-  'check'         => 'Controlar',
+    'index'         => 'mi posventa',
+    'commodity'     => 'producto',
+    'quantity'      => 'cantidad',
+    'service_type'  => 'Tipo de servicio',
+    'return_reason' => 'razón para regresar',
+    'creation_time' => 'tiempo de creación',
+    'check'         => 'Controlar',
 ];

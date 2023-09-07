@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => '我的收藏',
-  'product'       => '商品',
-  'price'         => '價格',
-  'check_details' => '查看詳情',
+    'index'         => '我的收藏',
+    'product'       => '商品',
+    'price'         => '價格',
+    'check_details' => '查看詳情',
 ];

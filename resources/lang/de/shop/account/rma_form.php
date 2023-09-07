@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'Kundendienstinformationen übermitteln',
-  'service_type'    => 'Diensttyp',
-  'return_quantity' => 'Rückgabemenge',
-  'unpacked'        => 'ausgepackt',
-  'return_reason'   => 'Rücksendegrund',
-  'remark'          => 'Bemerkung',
+    'index'           => 'Kundendienstinformationen übermitteln',
+    'service_type'    => 'Diensttyp',
+    'return_quantity' => 'Rückgabemenge',
+    'unpacked'        => 'ausgepackt',
+    'return_reason'   => 'Rücksendegrund',
+    'remark'          => 'Bemerkung',
 ];

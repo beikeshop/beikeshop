@@ -10,5 +10,5 @@
  */
 
 return [
-  'index' => 'Dettagli post vendita',
+    'index' => 'Dettagli post vendita',
 ];

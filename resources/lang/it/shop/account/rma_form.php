@@ -10,10 +10,10 @@
  */
 
 return [
-  'index'           => 'Invia informazioni post-vendita',
-  'service_type'    => 'Tipo di servizio',
-  'return_quantity' => 'Quantità di reso',
-  'unpacked'        => 'disimballato',
-  'return_reason'   => 'un motivo per ritornare',
-  'remark'          => 'Nota',
+    'index'           => 'Invia informazioni post-vendita',
+    'service_type'    => 'Tipo di servizio',
+    'return_quantity' => 'Quantità di reso',
+    'unpacked'        => 'disimballato',
+    'return_reason'   => 'un motivo per ritornare',
+    'remark'          => 'Nota',
 ];

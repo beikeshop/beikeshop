@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'                 => 'Modificar información personal',
-  'modify_avatar'         => 'Modificar avatar',
-  'suggest'               => 'Sube una imagen JPG o PNG. Se recomienda 300 x 300.',
-  'name'                  => 'nombre',
-  'email'                 => 'Correo',
-  'crop'                  => 'cultivo',
-  'password_edit_success' => 'Restablecimiento de contraseña completo',
-  'origin_password_fail'  => 'La contraseña original es incorrecta',
+    'index'                 => 'Modificar información personal',
+    'modify_avatar'         => 'Modificar avatar',
+    'suggest'               => 'Sube una imagen JPG o PNG. Se recomienda 300 x 300.',
+    'name'                  => 'nombre',
+    'email'                 => 'Correo',
+    'crop'                  => 'cultivo',
+    'password_edit_success' => 'Restablecimiento de contraseña completo',
+    'origin_password_fail'  => 'La contraseña original es incorrecta',
 ];

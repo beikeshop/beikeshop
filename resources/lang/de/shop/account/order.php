@@ -10,12 +10,12 @@
  */
 
 return [
-  'index'         => 'Meine Bestellung',
-  'completed'     => 'bestätigter Eingang',
-  'cancelled'     => 'Bestellung storniert',
-  'order_details' => 'Bestelldetails',
-  'amount'        => 'Betrag',
-  'state'         => 'Staat',
-  'order_number'  => 'Bestellnummer',
-  'check'         => 'prüfen',
+    'index'         => 'Meine Bestellung',
+    'completed'     => 'bestätigter Eingang',
+    'cancelled'     => 'Bestellung storniert',
+    'order_details' => 'Bestelldetails',
+    'amount'        => 'Betrag',
+    'state'         => 'Staat',
+    'order_number'  => 'Bestellnummer',
+    'check'         => 'prüfen',
 ];

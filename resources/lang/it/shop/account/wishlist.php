@@ -10,8 +10,8 @@
  */
 
 return [
-  'index'         => 'I miei preferiti',
-  'product'       => 'prodotto',
-  'price'         => 'prezzo',
-  'check_details' => 'controlla i dettagli',
+    'index'         => 'I miei preferiti',
+    'product'       => 'prodotto',
+    'price'         => 'prezzo',
+    'check_details' => 'controlla i dettagli',
 ];
