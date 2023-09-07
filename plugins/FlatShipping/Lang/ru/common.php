@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Постоянный фрахт',
-    'percentage' => '百分比',
+    'flat_shipping'  => 'Постоянный фрахт',
+    'percentage'     => '百分比',
     'shipping_value' => 'Стоимость фрахта',
-    'way' => 'как',
+    'way'            => 'как',
 ];

@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Lieferung täglich?',
-    'percentage' => 'Prozent?',
+    'flat_shipping'  => 'Lieferung täglich?',
+    'percentage'     => 'Prozent?',
     'shipping_value' => 'Der lieferpreis.',
-    'way' => 'Methode?',
+    'way'            => 'Methode?',
 ];

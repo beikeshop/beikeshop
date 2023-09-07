@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Biaya pengiriman tetap',
-    'percentage' => 'persentase',
+    'flat_shipping'  => 'Biaya pengiriman tetap',
+    'percentage'     => 'persentase',
     'shipping_value' => 'Harga pengiriman',
-    'way' => 'cara',
+    'way'            => 'cara',
 ];

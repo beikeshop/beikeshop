@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => 'l’ouverture',
+    'enabled'      => 'l’ouverture',
     'sandbox_mode' => 'Le mode sandbox',
 ];

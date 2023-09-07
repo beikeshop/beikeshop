@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => '固定運賃です',
-    'percentage' => 'パーセントです',
+    'flat_shipping'  => '固定運賃です',
+    'percentage'     => 'パーセントです',
     'shipping_value' => '運賃値です',
-    'way' => '方式です',
+    'way'            => '方式です',
 ];

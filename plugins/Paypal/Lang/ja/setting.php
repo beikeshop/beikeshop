@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => '開きます',
+    'enabled'      => '開きます',
     'sandbox_mode' => 'サンドボックス方式です',
 ];

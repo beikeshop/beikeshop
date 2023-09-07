@@ -43,6 +43,7 @@ class YoudaoService implements TranslatorService
      * @param $to
      * @param $texts
      * @return array
+     * @throws \Exception
      */
     public function batchTranslate($from, $to, $texts): array
     {

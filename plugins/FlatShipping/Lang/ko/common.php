@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => '고정 운임',
-    'percentage' => '백분율',
+    'flat_shipping'  => '고정 운임',
+    'percentage'     => '백분율',
     'shipping_value' => '운임가치',
-    'way' => '방식',
+    'way'            => '방식',
 ];

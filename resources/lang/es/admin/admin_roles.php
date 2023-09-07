@@ -1,20 +1,21 @@
 <?php
 /**
- * header.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 19:03:19
- * @modified   2022-08-02 19:03:19
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-07 09:28:46
  */
 
 return [
-    'select_all'        => 'Comprobar todo',
-    'unselect_all'      => 'desmarcar',
-    'role_name'         => 'Nombre de rol',
-    'role_management'   => 'gestión de roles',
+    'error_roles'       => 'Seleccione al menos un rol',
     'permission'        => 'System Authority',
     'plugin_permission' => 'Plugin permissions',
-    'error_roles'       => 'Seleccione al menos un rol',
+    'role'              => 'papel',
+    'role_management'   => 'gestión de roles',
+    'role_name'         => 'Nombre de rol',
+    'select_all'        => 'Comprobar todo',
+    'unselect_all'      => 'desmarcar',
 ];

@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => '열',
+    'enabled'      => '열',
     'sandbox_mode' => '샌드박스 모드',
 ];

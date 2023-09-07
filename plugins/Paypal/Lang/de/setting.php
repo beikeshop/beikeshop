@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => 'Einschalten.',
+    'enabled'      => 'Einschalten.',
     'sandbox_mode' => 'Im sandkasten.',
 ];

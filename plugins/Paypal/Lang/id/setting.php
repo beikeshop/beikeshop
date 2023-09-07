@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => 'Terbuka.',
+    'enabled'      => 'Terbuka.',
     'sandbox_mode' => 'Pola pasir kotak',
 ];

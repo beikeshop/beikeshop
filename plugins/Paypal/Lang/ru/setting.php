@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => 'нача',
+    'enabled'      => 'нача',
     'sandbox_mode' => 'Режим песочницы',
 ];

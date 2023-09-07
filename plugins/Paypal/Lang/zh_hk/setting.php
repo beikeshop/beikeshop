@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => '開啓',
+    'enabled'      => '開啓',
     'sandbox_mode' => '沙盒模式',
 ];

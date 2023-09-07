@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => '固定運費',
-    'percentage' => '百分比',
+    'flat_shipping'  => '固定運費',
+    'percentage'     => '百分比',
     'shipping_value' => '運費值',
-    'way' => '方式',
+    'way'            => '方式',
 ];

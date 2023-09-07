@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Frais d’expédition fixes',
-    'percentage' => 'Pourcentage de',
+    'flat_shipping'  => 'Frais d’expédition fixes',
+    'percentage'     => 'Pourcentage de',
     'shipping_value' => 'Valeur du fret',
-    'way' => 'mode',
+    'way'            => 'mode',
 ];

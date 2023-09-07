@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Tarifa de envío fija',
-    'percentage' => 'porcentaje',
+    'flat_shipping'  => 'Tarifa de envío fija',
+    'percentage'     => 'porcentaje',
     'shipping_value' => 'Valor del envío',
-    'way' => 'forma',
+    'way'            => 'forma',
 ];

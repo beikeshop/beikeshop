@@ -10,6 +10,6 @@
  */
 
 return [
-    'enabled' => 'l’apertura',
+    'enabled'      => 'l’apertura',
     'sandbox_mode' => 'Modello di cassaforte',
 ];

@@ -10,8 +10,8 @@
  */
 
 return [
-    'flat_shipping' => 'Nolo fisso',
-    'percentage' => 'percentuale',
+    'flat_shipping'  => 'Nolo fisso',
+    'percentage'     => 'percentuale',
     'shipping_value' => 'Valore delle merci',
-    'way' => 'Il modo in cui',
+    'way'            => 'Il modo in cui',
 ];
