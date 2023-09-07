@@ -63,7 +63,7 @@ $data = $plugin['data'];
             <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
             <td>
               <div class="d-inline-block">
-                <a href="{{ config('app.url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
+                <a href="{{ config('beike.api_url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
                   <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white">
                     <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
@@ -99,7 +99,7 @@ $data = $plugin['data'];
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
-              @if (count($data['plugin_services']) && $data['id'] !== 61 )
+              @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61 )
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
               @endif
