@@ -86,6 +86,7 @@ $data = $plugin['data'];
 
         <div class="mb-4">
           @if ($data['available'])
+            @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
@@ -95,6 +96,7 @@ $data = $plugin['data'];
                 </el-radio>
               </el-radio-group>
             </div>
+            @endif
             @if ($data['downloadable'])
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
