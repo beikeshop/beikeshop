@@ -99,11 +99,6 @@ class FileManagerService
         $imageCollection = collect($images);
 
         $currentImages = $imageCollection->forPage($page, $perPage);
-        $currentImages = $currentImages->map(function ($item) {
-            $item['url'] = image_resize("{$item['path']}");
-
-            return $item;
-        });
 
         return [
             'images'      => $currentImages->values(),
@@ -324,9 +319,10 @@ class FileManagerService
         }
 
         return [
-            'path'       => $path,
+            'path'       => '/' . $path,
             'name'       => $baseName,
             'origin_url' => image_origin($path),
+            'url'        => image_resize($path),
             'mime'       => $mime,
             'selected'   => false,
         ];
