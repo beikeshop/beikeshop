@@ -3,11 +3,11 @@
     <el-dialog custom-class="mobileWidth" title="{{ __('address.index') }}" :visible.sync="editShow" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
       <el-form ref="addressForm" :rules="rules" :model="form" label-width="100px">
         <el-form-item label="{{ __('address.name') }}" prop="name">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.name" placeholder="{{ __('address.name') }}"></el-input>
         </el-form-item>
         @if (!current_customer())
           <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'">
-            <el-input v-model="form.email"></el-input>
+            <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
           </el-form-item>
         @endif
         <el-form-item label="{{ __('address.address') }}" required>
@@ -38,16 +38,16 @@
           </div>
         </el-form-item>
         <el-form-item label="{{ __('address.address_1') }}" prop="address_1">
-          <el-input v-model="form.address_1"></el-input>
+          <el-input v-model="form.address_1" placeholder="{{ __('address.address_1') }}"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.address_2') }}">
-          <el-input v-model="form.address_2"></el-input>
+          <el-input v-model="form.address_2" placeholder="{{ __('address.address_2') }}"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.post_code') }}" prop="zipcode">
-          <el-input v-model="form.zipcode"></el-input>
+          <el-input v-model="form.zipcode" placeholder="{{ __('address.post_code') }}"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.phone') }}">
-          <el-input maxlength="11" v-model="form.phone" type="number"></el-input>
+          <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
         </el-form-item>
         <el-form-item label="{{ __('address.default') }}" v-if="source.isLogin">
           <el-switch

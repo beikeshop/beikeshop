@@ -12,16 +12,16 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">{{ __('shop/account.order.index') }}</h5>
+            <h5 class="card-title">{{ __('shop/account/order.index') }}</h5>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table ">
                 <thead>
                   <tr>
-                    <th>{{ __('shop/account.order.order_details') }}</th>
-                    <th width="160px">{{ __('shop/account.order.amount') }}</th>
-                    <th width="100px">{{ __('shop/account.order.state') }}</th>
+                    <th>{{ __('shop/account/order.order_details') }}</th>
+                    <th width="160px">{{ __('shop/account/order.amount') }}</th>
+                    <th width="100px">{{ __('shop/account/order.state') }}</th>
                     <th width="100px" class="text-end">{{ __('common.action') }}</th>
                   </tr>
                 </thead>
@@ -35,7 +35,7 @@
                         <td colspan="4">
                           <span class="order-created me-4">{{ $order->created_at }}</span>
                           <span
-                            class="order-number">{{ __('shop/account.order.order_number') }}：{{ $order->number }}</span>
+                            class="order-number">{{ __('shop/account/order.order_number') }}：{{ $order->number }}</span>
                         </td>
                       </tr>
                       @foreach ($order->orderProducts as $product)
@@ -56,7 +56,7 @@
                             <td rowspan="{{ $loop->count }}">{{$order->status_format}}</td>
                             <td rowspan="{{ $loop->count }}" class="text-end">
                               <a href="{{ shop_route('account.order.show', ['number' => $order->number]) }}"
-                                class="btn btn-outline-secondary btn-sm">{{ __('shop/account.order.check') }}</a>
+                                class="btn btn-outline-secondary btn-sm">{{ __('shop/account/order.check') }}</a>
                             </td>
                           @endif
                         </tr>

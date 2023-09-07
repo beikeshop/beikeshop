@@ -11,17 +11,17 @@
       <div class="col-12 col-md-9">
         <div class="card mb-4 account-card order-wrap h-min-600">
           <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">{{ __('shop/account.rma.index') }}</h5>
+            <h5 class="card-title">{{ __('shop/account/rma.index') }}</h5>
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>{{ __('shop/account.rma.commodity') }}</th>
-                    <th class="text-nowrap">{{ __('shop/account.rma.quantity') }}</th>
-                    <th class="text-nowrap">{{ __('shop/account.rma.service_type') }}</th>
-                    <th class="text-nowrap">{{ __('shop/account.rma.creation_time') }}</th>
+                    <th>{{ __('shop/account/rma.commodity') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account/rma.quantity') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account/rma.service_type') }}</th>
+                    <th class="text-nowrap">{{ __('shop/account/rma.creation_time') }}</th>
                     <th class="text-end">{{ __('common.action') }}</th>
                   </tr>
                 </thead>
@@ -36,7 +36,7 @@
                         <td>{{ $rma['type_format'] }}</td>
                         <td class="text-nowrap">{{ $rma['created_at'] }}</td>
                         <td class="text-end"><a href="{{ shop_route('account.rma.show', [$rma['id']]) }}"
-                            class="btn text-nowrap btn-outline-secondary btn-sm">{{ __('shop/account.rma.check') }}</a> </td>
+                            class="btn text-nowrap btn-outline-secondary btn-sm">{{ __('shop/account/rma.check') }}</a> </td>
                       </tr>
                     @endforeach
                   @else
