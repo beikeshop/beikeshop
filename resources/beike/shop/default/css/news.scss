@@ -10,4 +10,23 @@
 
 .page-categories-home, .page-pages {
   background-color: #f6f6f6;
+
+  .post-item {
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    .image {
+      flex: 0 0 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      border: 1px solid #eee;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
 }

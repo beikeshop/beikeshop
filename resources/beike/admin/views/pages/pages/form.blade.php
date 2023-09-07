@@ -100,7 +100,7 @@
             </x-admin::form.row>
 
             <x-admin-form-image name="image" title="{{ __('admin/page.cover_picture') }}" value="{{ old('image', $page->image ?? '') }}">
-              <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }}: 500*300</div>
+              <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }}: 500*350</div>
             </x-admin-form-image>
 
             <x-admin-form-input name="views" title="{{ __('page_category.views') }}" value="{{ old('views', $page->views ?? '') }}" />

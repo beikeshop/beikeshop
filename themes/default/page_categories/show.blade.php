@@ -23,16 +23,23 @@
             </div>
             @if ($category_pages->count() > 0)
               @foreach ($category_pages as $page)
-                <div>
-                  <h5 class="card-title mb-2"><a class="text-black"
-                      href="{{ type_route('page', $page) }}">{{ $page->description->title }}</a></h5>
-                  <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
-                  @if ($page->description->summary)
-                    <p class="card-text mb-4">{{ $page->description->summary ?? '' }}</p>
+                <div class="post-item">
+                  @if ($page->image)
+                  <a class="image" href="{{ shop_route('pages.show', [$page->id]) }}">
+                    <img src="{{ image_origin($page->image) }}" class="img-fluid">
+                  </a>
                   @endif
-                  <div class="text-danger"><a
-                      href="{{ type_route('page', $page) }}">{{ __('shop/account.check_details') }}<i
-                        class="bi bi-arrow-right-short"></i></a></div>
+                  <div class="post-info">
+                    <h5 class="card-title mb-2"><a class="text-black"
+                        href="{{ type_route('page', $page) }}">{{ $page->description->title }}</a></h5>
+                    <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
+                    @if ($page->description->summary)
+                      <p class="card-text mb-4">{{ $page->description->summary ?? '' }}</p>
+                    @endif
+                    <div class="text-danger"><a
+                        href="{{ type_route('page', $page) }}">{{ __('shop/account.check_details') }}<i
+                          class="bi bi-arrow-right-short"></i></a></div>
+                  </div>
                 </div>
 
                 @if (!$loop->last)

@@ -11,16 +11,23 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-9 col-12">
-        <div class="card mb-4 shadow-sm p-3 h-min-600">
+        <div class="card mb-4 shadow-sm h-min-600">
           <div class="card-body">
             @foreach ($active_pages as $page)
-              <div>
-                <h5 class="card-title mb-2"><a class="text-black" href="{{ shop_route('pages.show', [$page->id]) }}">{{ $page->description->title }}</a></h5>
-                <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
-                @if ($page->description->summary)
-                  <p class="card-text mb-3">{{ $page->description->summary ?? '' }}</p>
+              <div class="post-item">
+                @if ($page->image)
+                <a class="image" href="{{ shop_route('pages.show', [$page->id]) }}">
+                  <img src="{{ image_resize($page->image, 200, 200) }}" class="img-fluid">
+                </a>
                 @endif
-                <div class="text-danger"><a href="{{ shop_route('pages.show', [$page->id]) }}">{{ __('shop/account.check_details') }}<i class="bi bi-arrow-right-short"></i></a></div>
+                <div class="post-info">
+                  <h5 class="card-title mb-2"><a class="text-black" href="{{ shop_route('pages.show', [$page->id]) }}">{{ $page->description->title }}</a></h5>
+                  <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
+                  @if ($page->description->summary)
+                    <p class="card-text mb-3">{{ $page->description->summary ?? '' }}</p>
+                  @endif
+                  <div class="text-danger"><a href="{{ shop_route('pages.show', [$page->id]) }}">{{ __('shop/account.check_details') }}<i class="bi bi-arrow-right-short"></i></a></div>
+                </div>
               </div>
 
               @if (!$loop->last)
