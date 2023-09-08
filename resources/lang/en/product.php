@@ -1,31 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:11:02
  */
 
 return [
-    'name'              => 'Name',
-    'sku'               => 'SKU',
-    'price'             => 'Price',
-    'origin_price'      => 'Origin Price',
-    'cost_price'        => 'Cost Price',
+    'active'            => 'Active',
     'brand'             => 'Brand',
     'category'          => 'Category',
-    'model'             => 'Model',
-    'quantity'          => 'Quantity',
-    'kg'                => 'Kilogram',
+    'cost_price'        => 'Cost Price',
     'g'                 => 'Gram',
-    'oz'                => 'Ounce',
-    'lb'                => 'Pound',
-    'video'             => 'Video',
-
-    'active'            => 'Active',
-    'inactive'          => 'Inactive',
     'has_been_inactive' => 'The product has been inactive',
+    'image'             => 'picture',
+    'inactive'          => 'Inactive',
+    'kg'                => 'Kilogram',
+    'lb'                => 'Pound',
+    'model'             => 'Model',
+    'name'              => 'Name',
+    'origin_price'      => 'Origin Price',
+    'oz'                => 'Ounce',
+    'price'             => 'Price',
+    'quantity'          => 'Quantity',
+    'sku'               => 'SKU',
+    'video'             => 'Video',
 ];

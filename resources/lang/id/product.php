@@ -1,31 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     Edward Yang <service@tuikehome.com>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:23:30
  */
 
 return [
-    'name'              => 'Nama',
-    'sku'               => 'SKU',
-    'price'             => 'Harga',
-    'origin_price'      => 'Harga asli',
-    'cost_price'        => 'harga biaya',
+    'active'            => 'di rak',
     'brand'             => 'merek',
     'category'          => 'klasifikasi',
-    'model'             => 'Model',
-    'quantity'          => 'inventaris',
-    'image'             => 'Gambar',
-    'kg'                => 'kg',
+    'cost_price'        => 'harga biaya',
     'g'                 => 'g',
-    'oz'                => 'ons',
-    'lb'                => 'pound',
-
-    'active'            => 'di rak',
-    'inactive'          => 'penghapusan',
     'has_been_inactive' => 'Item telah dihapus',
+    'image'             => 'Gambar',
+    'inactive'          => 'penghapusan',
+    'kg'                => 'kg',
+    'lb'                => 'pound',
+    'model'             => 'Model',
+    'name'              => 'Nama',
+    'origin_price'      => 'Harga asli',
+    'oz'                => 'ons',
+    'price'             => 'Harga',
+    'quantity'          => 'inventaris',
+    'sku'               => 'SKU',
+    'video'             => 'video',
 ];

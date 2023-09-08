@@ -6,12 +6,13 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-07 08:36:04
+ * @modified   2023-09-08 06:03:07
  */
 
 return [
     'address'    => 'Die adresse.',
     'address_1'  => 'Adresse 1',
+    'address_2'  => 'Adresse - 2.',
     'country_id' => 'Landes-ID',
     'default'    => 'Standardadresse',
     'enter_city' => 'Adresse eingeben',

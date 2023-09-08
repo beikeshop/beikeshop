@@ -1,27 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:23:54
  */
 
 return [
-    'name'              => 'nom',
-    'sku'               => 'UGS',
-    'price'             => 'le prix',
-    'origin_price'      => 'prix d\'origine',
-    'cost_price'        => 'prix de revient',
+    'active'            => 'sur l\'étagère',
     'brand'             => 'marque',
     'category'          => 'Classification',
-    'model'             => 'maquette',
-    'quantity'          => 'en stock',
-    'image'             => 'image',
-
-    'active'            => 'sur l\'étagère',
-    'inactive'          => 'descendre',
+    'cost_price'        => 'prix de revient',
+    'g'                 => 'g',
     'has_been_inactive' => 'Cet article a été arrêté',
+    'image'             => 'image',
+    'inactive'          => 'descendre',
+    'kg'                => 'kg',
+    'lb'                => 'Pound',
+    'model'             => 'maquette',
+    'name'              => 'nom',
+    'origin_price'      => 'prix d\'origine',
+    'oz'                => 'Ounce',
+    'price'             => 'le prix',
+    'quantity'          => 'en stock',
+    'sku'               => 'UGS',
+    'video'             => 'Video',
 ];

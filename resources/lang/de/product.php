@@ -1,27 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:25:51
  */
 
 return [
-    'name'              => 'Name',
-    'sku'               => 'SKU',
-    'price'             => 'Preis',
-    'origin_price'      => 'ursprünglicher Preis',
-    'cost_price'        => 'Kostenpreis',
+    'active'            => 'im Regal',
     'brand'             => 'Marke',
     'category'          => 'Kategorie',
-    'model'             => 'Modell',
-    'quantity'          => 'Lager',
-    'image'             => 'Bild',
-
-    'active'            => 'im Regal',
-    'inactive'          => 'von der Stange',
+    'cost_price'        => 'Kostenpreis',
+    'g'                 => ',',
     'has_been_inactive' => 'Das Produkt wurde entfernt',
+    'image'             => 'Bild',
+    'inactive'          => 'von der Stange',
+    'kg'                => 'Kilo.',
+    'lb'                => 'pfund',
+    'model'             => 'Modell',
+    'name'              => 'Name',
+    'origin_price'      => 'ursprünglicher Preis',
+    'oz'                => '30 gramm.',
+    'price'             => 'Preis',
+    'quantity'          => 'Lager',
+    'sku'               => 'SKU',
+    'video'             => 'Na video.',
 ];

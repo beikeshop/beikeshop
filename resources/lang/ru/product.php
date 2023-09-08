@@ -1,27 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:23:46
  */
 
 return [
-    'name'              => 'имя',
-    'sku'               => 'SKU',
-    'price'             => 'цена',
-    'origin_price'      => 'первоначальная цена',
-    'cost_price'        => 'стоимость',
+    'active'            => 'на полке',
     'brand'             => 'марка',
     'category'          => 'Классификация',
-    'model'             => 'модель',
-    'quantity'          => 'в наличии',
-    'image'             => 'картина',
-
-    'active'            => 'на полке',
-    'inactive'          => 'снять',
+    'cost_price'        => 'стоимость',
+    'g'                 => ',',
     'has_been_inactive' => 'Этот пункт был прекращен',
+    'image'             => 'картина',
+    'inactive'          => 'снять',
+    'kg'                => 'килограмм',
+    'lb'                => 'фунт',
+    'model'             => 'модель',
+    'name'              => 'имя',
+    'origin_price'      => 'первоначальная цена',
+    'oz'                => 'унц',
+    'price'             => 'цена',
+    'quantity'          => 'в наличии',
+    'sku'               => 'SKU',
+    'video'             => 'виде',
 ];

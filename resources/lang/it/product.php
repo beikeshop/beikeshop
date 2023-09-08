@@ -1,27 +1,31 @@
 <?php
 /**
- * product.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 06:25:54
  */
 
 return [
-    'name'              => 'nome',
-    'sku'               => 'SKU',
-    'price'             => 'prezzo',
-    'origin_price'      => 'prezzo originale',
-    'cost_price'        => 'prezzo di costo',
+    'active'            => 'sul ripiano',
     'brand'             => 'marca',
     'category'          => 'Classificazione',
-    'model'             => 'modello',
-    'quantity'          => 'disponibile',
-    'image'             => 'immagine',
-
-    'active'            => 'sul ripiano',
-    'inactive'          => 'prendere nota',
+    'cost_price'        => 'prezzo di costo',
+    'g'                 => 'g',
     'has_been_inactive' => 'Questo articolo è stato interrotto',
+    'image'             => 'immagine',
+    'inactive'          => 'prendere nota',
+    'kg'                => 'kg',
+    'lb'                => 'libbre',
+    'model'             => 'modello',
+    'name'              => 'nome',
+    'origin_price'      => 'prezzo originale',
+    'oz'                => 'once',
+    'price'             => 'prezzo',
+    'quantity'          => 'disponibile',
+    'sku'               => 'SKU',
+    'video'             => 'video',
 ];
