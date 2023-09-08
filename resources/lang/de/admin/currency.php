@@ -1,19 +1,21 @@
 <?php
 /**
- * currency.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-07-28 17:21:38
- * @modified   2022-07-28 17:21:38
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 10:49:37
  */
+
 return [
-    'decimal_point'     => '.',
-    'thousand_point'    => ',',
-    'currencies_index'  => 'Währungsliste',
     'currencies_create' => 'Währung erstellen',
+    'currencies_delete' => 'Währung löschen',
+    'currencies_index'  => 'Währungsliste',
     'currencies_show'   => 'Währungsdetails',
     'currencies_update' => 'Währung aktualisieren',
-    'currencies_delete' => 'Währung löschen',
+    'decimal_point'     => '.',
+    'order_exist'       => 'Diese währung wird benutzt und kann nicht gelöscht werden',
+    'thousand_point'    => ',',
 ];

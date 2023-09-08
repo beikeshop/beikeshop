@@ -1,19 +1,21 @@
 <?php
 /**
- * currency.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-07-28 17:21:38
- * @modified   2022-07-28 17:21:38
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 10:49:49
  */
+
 return [
-    'decimal_point'     => '.',
-    'thousand_point'    => ',',
-    'currencies_index'  => 'Список валют',
     'currencies_create' => 'Создать валюту',
+    'currencies_delete' => 'удалить валюту',
+    'currencies_index'  => 'Список валют',
     'currencies_show'   => 'Детали валюты',
     'currencies_update' => 'обновить валюту',
-    'currencies_delete' => 'удалить валюту',
+    'decimal_point'     => '.',
+    'order_exist'       => 'В этой валюте есть заказы, которые нельзя удалить!',
+    'thousand_point'    => ',',
 ];
