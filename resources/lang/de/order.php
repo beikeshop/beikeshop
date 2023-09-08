@@ -1,54 +1,51 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 07:29:57
  */
 
 return [
-    'id'                 => 'ID',
-    'nummer'             => 'Bestellnummer',
-    'customer_name'      => 'Kundenname',
-    'payment_method'     => 'Zahlungsmethode',
-    'email'              => 'E-Mail',
-    'telephone'          => 'Telefon kontaktieren',
-    'created_at'         => 'Erstellungszeit',
-    'updated_at'         => 'aktualisierte Zeit',
-    'status'             => 'Status',
-    'status_format'      => 'status',
-    'total'              => 'Bestellsumme',
-    'express_number'     => 'Express-Bestellnummer',
-    'express_company'    => 'express company',
-    'order_shipments'    => 'Sendungsinformationen',
-
+    'action_history'     => 'Betriebsprotokoll',
     'address_info'       => 'Adressinformationen',
-    'shipping_address'   => 'Lieferadresse',
-    'payment_address'    => 'Rechnungsadresse',
-    'order_status'       => 'Bestellstatus',
-    'current_status'     => 'aktueller Status',
+    'cancelled'          => 'Storniert',
     'change_to_status'   => 'Status ändern',
     'comment'            => 'remark information',
-    'submit_status'      => 'Status aktualisieren',
-
+    'completed'          => 'abgeschlossen',
+    'created_at'         => 'Erstellungszeit',
+    'current_status'     => 'aktueller Status',
+    'customer_name'      => 'Kundenname',
+    'email'              => 'E-Mail',
+    'express_company'    => 'express company',
+    'express_number'     => 'Express-Bestellnummer',
+    'history_comment'    => 'Bemerkungen',
+    'history_created_at' => 'Aktualisierungsdatum',
+    'history_status'     => 'status',
+    'id'                 => 'ID',
+    'number'             => 'Null.',
+    'order_comment'      => 'Die bemerkungen',
+    'order_shipments'    => 'Sendungsinformationen',
+    'order_status'       => 'Bestellstatus',
+    'paid'               => 'bezahlt',
+    'payment_address'    => 'Rechnungsadresse',
+    'payment_method'     => 'Zahlungsmethode',
     'product_info'       => 'Produktinformationen',
     'product_name'       => 'name',
     'product_price'      => 'Preis',
-    'product_sub_price'  => 'Zwischensumme',
     'product_quantity'   => 'Menge',
     'product_sku'        => 'SKU',
-
-    'action_history'     => 'Betriebsprotokoll',
-    'history_status'     => 'status',
-    'history_comment'    => 'Bemerkungen',
-    'history_created_at' => 'Aktualisierungsdatum',
-
-    'unpaid'             => 'zu bezahlen',
-    'paid'               => 'bezahlt',
+    'product_sub_price'  => 'Zwischensumme',
     'shipped'            => 'versandt',
-    'completed'          => 'abgeschlossen',
-    'cancelled'          => 'Storniert',
+    'shipping_address'   => 'Lieferadresse',
+    'status'             => 'Status',
+    'status_format'      => 'status',
+    'submit_status'      => 'Status aktualisieren',
+    'telephone'          => 'Telefon kontaktieren',
+    'total'              => 'Bestellsumme',
+    'unpaid'             => 'zu bezahlen',
+    'updated_at'         => 'aktualisierte Zeit',
 ];

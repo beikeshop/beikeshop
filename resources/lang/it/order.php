@@ -1,54 +1,51 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 07:29:44
  */
 
 return [
-    'id'                 => 'ID',
-    'number'             => 'numero d\'ordine',
-    'customer_name'      => 'Nome del cliente',
-    'payment_method'     => 'metodo di pagamento',
-    'email'              => 'Email',
-    'telephone'          => 'numero di contatto',
-    'created_at'         => 'tempo di creazione',
-    'updated_at'         => 'tempo di aggiornamento',
-    'status'             => 'stato',
-    'status_format'      => 'stato',
-    'total'              => 'ordine totale',
-    'express_number'     => 'numero ordine espresso',
-    'express_company'    => 'azienda espressa',
-    'order_shipments'    => 'informazioni sulla spedizione',
-
+    'action_history'     => 'Registro delle operazioni',
     'address_info'       => 'Informazioni sull\'indirizzo',
-    'shipping_address'   => 'indirizzo di consegna',
-    'payment_address'    => 'Indirizzo Di Fatturazione',
-    'order_status'       => 'Lo stato dell\'ordine',
-    'current_status'     => 'stato Osservazioni',
+    'cancelled'          => 'Annullato',
     'change_to_status'   => 'Modifica stato',
     'comment'            => 'Osservazioni',
-    'submit_status'      => 'aggiorna stato',
-
+    'completed'          => 'completato',
+    'created_at'         => 'tempo di creazione',
+    'current_status'     => 'stato Osservazioni',
+    'customer_name'      => 'Nome del cliente',
+    'email'              => 'Email',
+    'express_company'    => 'azienda espressa',
+    'express_number'     => 'numero ordine espresso',
+    'history_comment'    => 'Nota',
+    'history_created_at' => 'Aggiornato',
+    'history_status'     => 'stato',
+    'id'                 => 'ID',
+    'number'             => 'numero d\'ordine',
+    'order_comment'      => 'Osservazioni del cliente',
+    'order_shipments'    => 'informazioni sulla spedizione',
+    'order_status'       => 'Lo stato dell\'ordine',
+    'paid'               => 'Pagato',
+    'payment_address'    => 'Indirizzo Di Fatturazione',
+    'payment_method'     => 'metodo di pagamento',
     'product_info'       => 'Informazioni sul prodotto',
     'product_name'       => 'nome',
     'product_price'      => 'prezzo',
-    'product_sub_price'  => 'totale parziale',
     'product_quantity'   => 'quantità',
     'product_sku'        => 'SKU',
-
-    'action_history'     => 'Registro delle operazioni',
-    'history_status'     => 'stato',
-    'history_comment'    => 'Nota',
-    'history_created_at' => 'Aggiornato',
-
-    'unpaid'             => 'Essere pagato',
-    'paid'               => 'Pagato',
+    'product_sub_price'  => 'totale parziale',
     'shipped'            => 'Spedito',
-    'completed'          => 'completato',
-    'cancelled'          => 'Annullato',
+    'shipping_address'   => 'indirizzo di consegna',
+    'status'             => 'stato',
+    'status_format'      => 'stato',
+    'submit_status'      => 'aggiorna stato',
+    'telephone'          => 'numero di contatto',
+    'total'              => 'ordine totale',
+    'unpaid'             => 'Essere pagato',
+    'updated_at'         => 'tempo di aggiornamento',
 ];
