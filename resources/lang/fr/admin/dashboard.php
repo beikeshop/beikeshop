@@ -1,25 +1,25 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 10:57:54
  */
 
 return [
-    'product_total' => 'Product Total',
-    'customer_view' => 'visites des utilisateurs',
-    'order_total'   => 'montant de la commande',
     'customer_new'  => 'Ajouter un utilisateur',
-    'order_amount'  => 'Ventes',
-    'yesterday'     => 'hier',
+    'customer_view' => 'visites des utilisateurs',
     'day_before'    => 'un jour avant',
-
-    'order_report'  => 'statistiques de commande',
     'latest_month'  => 'mois',
     'latest_week'   => 'semaine',
     'latest_year'   => 'un an',
+    'order_amount'  => 'Ventes',
+    'order_report'  => 'statistiques de commande',
+    'order_total'   => 'montant de la commande',
+    'product_total' => 'Product Total',
+    'today'         => 'aujourd\'hui',
+    'yesterday'     => 'hier',
 ];
