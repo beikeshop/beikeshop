@@ -1,16 +1,18 @@
 <?php
 /**
- * page.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-07-28 20:59:38
- * @modified   2022-07-28 20:59:38
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 07:39:41
  */
+
 return [
-    'index'      => 'Blog d\'actualités',
-    'author'     => 'Auteur',
-    'views'      => 'numéro de vue',
-    'created_at' => 'heure de sortie',
+    'author'       => 'Auteur',
+    'created_at'   => 'heure de sortie',
+    'index'        => 'Blog d\'actualités',
+    'text_summary' => 'résumé',
+    'views'        => 'numéro de vue',
 ];

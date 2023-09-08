@@ -17,6 +17,7 @@ return [
     'design_footer_index'    => '页尾编辑器',
     'design_menu_index'      => '导航编辑器',
     'product_per_page'       => '每页显示数量',
+    'cdn_url'                => 'CDN URL',
 
     'checkout_settings'      => '结账设置',
     'basic_settings'         => '基础设置',

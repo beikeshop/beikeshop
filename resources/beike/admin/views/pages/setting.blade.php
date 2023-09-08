@@ -96,6 +96,9 @@
             <x-admin-form-input name="product_per_page" title="{{ __('admin/setting.product_per_page') }}" required value="{{ old('product_per_page', system_setting('base.product_per_page', 20)) }}">
             </x-admin-form-input>
 
+            <x-admin-form-input name="cdn_url" title="{{ __('admin/setting.cdn_url') }}" value="{{ old('cdn_url', system_setting('base.cdn_url', '')) }}">
+            </x-admin-form-input>
+
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>
             </x-admin-form-textarea>

@@ -47,6 +47,7 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->registerGuard();
         $this->loadMailConfig();
+        $this->registerCDNUrl();
 
         if (Str::startsWith($uri, '/admin')) {
             return;
@@ -119,6 +120,20 @@ class ShopServiceProvider extends ServiceProvider
         } elseif ($setting = system_setting('base.sendmail')) {
             $setting['transport'] = 'sendmail';
             Config::set('mail.mailers.sendmail', $setting);
+        }
+    }
+
+    /**
+     * 从后台获取CDN url 并注册
+     *
+     * @return void
+     */
+    protected function registerCDNUrl(): void
+    {
+        $appAssetUrl = config('app.asset_url');
+        $cdnUrl      = system_setting('base.cdn_url');
+        if (empty($appAssetUrl) && $cdnUrl && !is_admin()) {
+            Config::set('app.asset_url', $cdnUrl);
         }
     }
 
