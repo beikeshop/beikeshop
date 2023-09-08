@@ -42,7 +42,6 @@ class TranslationService
                 }
                 $result = addslashes(str_replace('’', '\'', $result));
             } catch (\Exception $e) {
-                $result = $text;
                 $error  = $e->getMessage();
             }
             $item = [

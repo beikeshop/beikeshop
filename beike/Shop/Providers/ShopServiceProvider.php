@@ -132,7 +132,7 @@ class ShopServiceProvider extends ServiceProvider
     {
         $appAssetUrl = config('app.asset_url');
         $cdnUrl      = system_setting('base.cdn_url');
-        if (empty($appAssetUrl) && $cdnUrl && !is_admin()) {
+        if (empty($appAssetUrl) && $cdnUrl && ! is_admin()) {
             Config::set('app.asset_url', $cdnUrl);
         }
     }

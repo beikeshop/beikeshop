@@ -71,7 +71,7 @@ class PageRepo
         }
         $page->fill([
             'page_category_id' => (int) ($data['page_category_id'] ?? 0),
-            'image'           => $data['image'] ?? '',
+            'image'            => $data['image'] ?? '',
             'position'         => (int) ($data['position'] ?? 0),
             'active'           => (bool) ($data['active'] ?? true),
             'author'           => $data['author'] ?? '',
