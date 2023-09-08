@@ -16,14 +16,14 @@
             <span style="font-weight: bold;">{{ __('mail.not_oneself') }}</span>
           </span>
         </p>
-        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account.order.order_info.order_details') }}：</p>
+        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account/order_info.order_details') }}：</p>
         <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse; background-color:#f8f9fa">
           <thead>
             <tr>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account.order.order_info.order_number') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account.order.order_info.order_date') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account.order.order_info.state') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account.order.order_info.order_amount') }}</td>
+              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_number') }}</td>
+              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_date') }}</td>
+              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.state') }}</td>
+              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_amount') }}</td>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +38,7 @@
           </tbody>
         </table>
 
-        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account.order.order_info.order_items') }}：</p>
+        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account/order_info.order_items') }}：</p>
         <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse; ">
           <thead>
             <tr>
@@ -60,7 +60,7 @@
           </tbody>
         </table>
 
-        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account.order.order_info.order_total') }}：</p>
+        <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account/order_info.order_total') }}：</p>
         <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse;border:1px solid #eee;">
           <tbody>
             @foreach ($order->orderTotals as $total)
@@ -74,7 +74,7 @@
 
         <p style="font-size: 14px; color: rgb(51, 51, 51); line-height: 24px; margin: 6px 0px 0px; word-wrap: break-word; word-break: break-all;">
           <a href="{{ shop_route('orders.show', ['number' => $order->number, 'email' => $order->email]) }}" title="" style="font-size: 16px; line-height: 45px; display: block; background-color: #fd560f; color: rgb(255, 255, 255); text-align: center; text-decoration: none; margin-top: 20px; border-radius: 3px;">
-            {{ __('shop/account.order.order_success.view_order') }}
+            {{ __('shop/account.order/order_success.view_order') }}
           </a>
         </p>
 

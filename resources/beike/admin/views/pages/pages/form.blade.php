@@ -98,7 +98,12 @@
                 <input type="hidden" name="page_category_id" :value="page_category_name ? page_category_id : ''" />
               </div>
             </x-admin::form.row>
-              <x-admin-form-input name="views" title="{{ __('page_category.views') }}" value="{{ old('views', $page->views ?? '') }}" />
+
+            <x-admin-form-image name="image" title="{{ __('admin/page.cover_picture') }}" value="{{ old('image', $page->image ?? '') }}">
+              <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }}: 500*350</div>
+            </x-admin-form-image>
+
+            <x-admin-form-input name="views" title="{{ __('page_category.views') }}" value="{{ old('views', $page->views ?? '') }}" />
 
             <x-admin::form.row title="{{ __('admin/product.product_relations') }}">
               <div class="module-edit-group wp-600">

@@ -65,7 +65,7 @@ class Url
             return $value->url ?? '';
         } elseif ($type == 'page') {
             if (! $value instanceof \Beike\Models\Page) {
-                $value  = \Beike\Models\Page::query()->where('active', 1)->find($value);
+                $value = \Beike\Models\Page::query()->where('active', 1)->find($value);
             }
 
             return $value->url ?? '';
@@ -124,11 +124,40 @@ class Url
         } elseif ($type == 'page_category') {
             return PageCategoryRepo::getName($value);
         } elseif ($type == 'static') {
+            $value = $this->handleLocale($value);
+
             return trans('shop/' . $value);
         } elseif ($type == 'custom') {
             return $text;
         }
 
         return '';
+    }
+
+    /**
+     * preg_replace('/\/([^\/]+)$/', '.$1', str_replace(".", "/", $value));
+     *
+     * @param $value
+     * @return string
+     */
+    private function handleLocale($value): string
+    {
+        $parts = explode('.', $value);
+        if (count($parts) < 2) {
+            return $value;
+        }
+
+        $result = '';
+        foreach ($parts as $index => $part) {
+            if ($index < count($parts) - 2) {
+                $result .= $part . '/';
+            } elseif ($index < count($parts) - 1) {
+                $result .= $part . '.';
+            } else {
+                $result .= $part;
+            }
+        }
+
+        return $result;
     }
 }

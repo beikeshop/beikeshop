@@ -10,13 +10,14 @@
  */
 
 return [
-    'index'        => 'Information',
-    'info_title'   => 'Information Title',
-    'info_content' => 'Content',
+    'index'         => 'Information',
+    'info_title'    => 'Information Title',
+    'info_content'  => 'Content',
 
-    'pages_index'  => 'Index',
-    'pages_create' => 'Create',
-    'pages_show'   => 'Detail',
-    'pages_update' => 'Edit',
-    'pages_delete' => 'Delete',
+    'pages_index'   => 'Index',
+    'pages_create'  => 'Create',
+    'pages_show'    => 'Detail',
+    'pages_update'  => 'Edit',
+    'pages_delete'  => 'Delete',
+    'cover_picture' => 'Cover Picture',
 ];
