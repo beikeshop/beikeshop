@@ -40,6 +40,7 @@ class TranslationService
                 } elseif (is_string($text)) {
                     $result = $translator->translate($source, $target, $text);
                 }
+                $result = addslashes(str_replace('’', '\'', $result));
             } catch (\Exception $e) {
                 $result = $text;
                 $error  = $e->getMessage();
