@@ -1,22 +1,22 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     Edward Yang <service@tuikehome.com>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 10:55:36
  */
 
 return [
-    'index'              => 'Klasifikasi',
-    'edit_category'      => 'Edit Kategori',
-    'parent_category'    => 'Sub-judul',
-
-    'categories_index'   => 'Daftar Kategori',
-    'categories_create'  => 'Buat klasifikasi',
-    'categories_show'    => 'Detail kategori',
-    'categories_update'  => 'Perbarui klasifikasi',
-    'categories_delete'  => 'Hapus kategori',
+    'categories_create' => 'Buat klasifikasi',
+    'categories_delete' => 'Hapus kategori',
+    'categories_index'  => 'Daftar Kategori',
+    'categories_show'   => 'Detail kategori',
+    'categories_update' => 'Perbarui klasifikasi',
+    'category_image'    => 'Urutkan gambar',
+    'edit_category'     => 'Edit Kategori',
+    'index'             => 'Klasifikasi',
+    'parent_category'   => 'Sub-judul',
 ];

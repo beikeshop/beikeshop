@@ -1,22 +1,22 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-08 10:55:37
  */
 
 return [
-    'index'              => 'Classificazione',
-    'edit_category'      => 'Modifica categoria',
-    'parent_category'    => 'Sottotitoli',
-
-    'categories_index'   => 'Elenco delle categorie',
-    'categories_create'  => 'Crea una tassonomia',
-    'categories_show'    => 'Dettagli della categoria',
-    'categories_update'  => 'Aggiorna la classificazione',
-    'categories_delete'  => 'elimina categoria',
+    'categories_create' => 'Crea una tassonomia',
+    'categories_delete' => 'elimina categoria',
+    'categories_index'  => 'Elenco delle categorie',
+    'categories_show'   => 'Dettagli della categoria',
+    'categories_update' => 'Aggiorna la classificazione',
+    'category_image'    => 'Classificazione delle immagini',
+    'edit_category'     => 'Modifica categoria',
+    'index'             => 'Classificazione',
+    'parent_category'   => 'Sottotitoli',
 ];
