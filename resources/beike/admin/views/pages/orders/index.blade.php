@@ -208,7 +208,6 @@
     const id = $(this).data('id');
 
     $http.put(`orders/restore/${id}`).then((res) => {
-      layer.msg(res.message);
       window.location.reload();
     })
   });
