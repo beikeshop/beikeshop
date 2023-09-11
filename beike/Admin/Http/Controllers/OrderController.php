@@ -36,6 +36,7 @@ class OrderController extends Controller
         $data   = [
             'orders'   => OrderSimpleList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
+            'type'            => 'trashed',
         ];
         $data = hook_filter('admin.order.index.data', $data);
 
@@ -56,6 +57,7 @@ class OrderController extends Controller
         $data   = [
             'orders'   => OrderSimpleList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
+            'type'            => 'trashed',
         ];
         $data = hook_filter('admin.order.trashed.data', $data);
 
