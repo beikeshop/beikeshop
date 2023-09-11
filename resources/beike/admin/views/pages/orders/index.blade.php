@@ -204,7 +204,7 @@
     })
   });
 
-  $('.delete-btn').click(function(event) {
+  $('.restore-btn').click(function(event) {
     const id = $(this).data('id');
 
     $http.put(`orders/restore/${id}`).then((res) => {
