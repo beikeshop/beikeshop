@@ -87,10 +87,16 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
                     <td>
+                      @if (!$order->deleted_at)
                       <a href="{{ admin_route('orders.show', [$order->id]) }}"
                         class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}
                       </a>
                       <button type="button" data-id="{{ $order->id }}" class="btn btn-outline-danger btn-sm delete-btn">{{ __('common.delete') }}</button>
+                      @else
+                      <button type="button" data-id="{{ $order->id }}" class="btn btn-outline-secondary btn-sm restore-btn">{{ __('common.restore') }}</button>
+                      @hook('admin.products.trashed.action')
+                      @endif
+
                       @hook('admin.order.list.action')
                     </td>
                   </tr>
@@ -195,6 +201,15 @@
           window.location.reload();
         })
       }
+    })
+  });
+
+  $('.delete-btn').click(function(event) {
+    const id = $(this).data('id');
+
+    $http.put(`orders/restore/${id}`).then((res) => {
+      layer.msg(res.message);
+      window.location.reload();
     })
   });
 </script>
