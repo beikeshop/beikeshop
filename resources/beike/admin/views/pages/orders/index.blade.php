@@ -126,7 +126,7 @@
     let app = new Vue({
       el: '#app',
       data: {
-        url: @json(admin_route('orders.index')),
+        url: '{{ $type == 'trashed' ? admin_route("orders.trashed") : admin_route("orders.index") }}',
         exportUrl: @json(admin_route('orders.export')),
         filter: {
           number: bk.getQueryString('number'),
