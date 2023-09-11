@@ -334,7 +334,8 @@ class Sidebar extends Component
     public function getOrderSubRoutes()
     {
         $routes = [
-            ['route' => 'orders.index', 'prefixes' => ['orders']],
+            ['route' => 'orders.index', 'prefixes' => ['orders'], 'excludes' => ['orders.trashed']],
+            ['route' => 'orders.trashed', 'prefixes' => ['orders'], 'excludes' => ['orders.index', 'orders.show']],
             ['route' => 'rmas.index', 'prefixes' => ['rmas']],
             ['route' => 'rma_reasons.index', 'prefixes' => ['rma_reasons']],
         ];

@@ -85,6 +85,7 @@ return [
     'customers_trashed'                => 'Trashed',
     'brands_index'                     => 'Brands',
     'orders_index'                     => 'Orders',
+    'orders_trashed'                   => 'Trashed',
     'rmas_index'                       => 'RMA',
     'rma_reasons_index'                => 'Rma Reasons',
     'customers_index'                  => 'Customers',
