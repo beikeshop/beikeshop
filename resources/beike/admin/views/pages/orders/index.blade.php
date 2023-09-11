@@ -86,9 +86,12 @@
                     <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->updated_at }}</td>
-                    <td><a href="{{ admin_route('orders.show', [$order->id]) }}"
-                        class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}</a>
-                        @hook('admin.order.list.action')
+                    <td>
+                      <a href="{{ admin_route('orders.show', [$order->id]) }}"
+                        class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}
+                      </a>
+                      <button type="button" data-id="{{ $order->id }}" class="btn btn-outline-danger btn-sm delete-btn">{{ __('common.delete') }}</button>
+                      @hook('admin.order.list.action')
                     </td>
                   </tr>
                 @endforeach
@@ -176,4 +179,23 @@
       }
     });
   </script>
+
+<script>
+  $('.delete-btn').click(function(event) {
+    const id = $(this).data('id');
+    const self = $(this);
+
+    layer.confirm('{{ __('common.confirm_delete') }}', {
+      title: "{{ __('common.text_hint') }}",
+      btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+      area: ['400px'],
+      btn2: () => {
+        $http.delete(`orders/${id}`).then((res) => {
+          layer.msg(res.message);
+          window.location.reload();
+        })
+      }
+    })
+  });
+</script>
 @endpush
