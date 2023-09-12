@@ -29,6 +29,7 @@ class PageDetail extends JsonResource
             'id'                   => $this->id,
             'parent_id'            => $this->parent_id,
             'active'               => $this->active,
+            'image_format'         => image_resize($this->image),
             'author'               => $this->author,
             'views'                => $this->views,
             'title'                => $description->title,
