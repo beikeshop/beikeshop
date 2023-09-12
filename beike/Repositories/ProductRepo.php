@@ -88,17 +88,14 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $builder = Product::query()->with('description', 'skus', 'masterSku', 'attributes', 'brand');
+        $builder = Product::query()->with(['description', 'skus', 'masterSku', 'attributes', 'brand']);
 
         $builder->leftJoin('product_descriptions as pd', function ($build) {
             $build->whereColumn('pd.product_id', 'products.id')
                 ->where('locale', locale());
         });
-        $builder->leftJoin('product_skus', function ($build) {
-            $build->whereColumn('product_skus.product_id', 'products.id')
-                ->where('is_default', 1);
-        });
-        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name', 'product_skus.price']);
+
+        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
