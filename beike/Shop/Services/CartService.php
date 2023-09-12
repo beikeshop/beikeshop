@@ -216,4 +216,22 @@ class CartService
 
         return hook_filter('service.cart.data', $data);
     }
+
+    public static function getAllQuantity(array $carts = [])
+    {
+        if (empty($carts)) {
+            $carts = self::list(current_customer());
+        }
+
+        return collect($carts)->sum('quantity');
+    }
+
+    public static function getSelectedQuantity(array $carts = [])
+    {
+        if (empty($carts)) {
+            $carts = self::list(current_customer(), true);
+        }
+
+        return collect($carts)->sum('quantity');
+    }
 }
