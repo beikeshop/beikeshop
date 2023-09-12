@@ -148,6 +148,7 @@ class RmaRepo
         }
 
         $rmas = $customer->rmas()->orderByDesc('id')->with('reason')->get();
+
         return RmaDetail::collection($rmas);
     }
 
