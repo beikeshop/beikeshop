@@ -147,7 +147,8 @@ class RmaRepo
             $customer = CustomerRepo::find($customer->id);
         }
 
-        return RmaDetail::collection($customer->rmas()->with('reason')->get());
+        $rmas = $customer->rmas()->orderByDesc('id')->with('reason')->get();
+        return RmaDetail::collection($rmas);
     }
 
     public static function getStatuses(): array
