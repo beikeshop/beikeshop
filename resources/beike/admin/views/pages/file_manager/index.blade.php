@@ -468,20 +468,23 @@
         },
 
         updateDefaultExpandedKeys(node, type) {
-          const isExist = this.defaultkeyarr.some(item => item === node.path)
+          let defaultkeyarr = sessionStorage.getItem('defaultkeyarr') ? sessionStorage.getItem('defaultkeyarr').split(',') : [];
+          const isExist = defaultkeyarr.some(item => item === node.path)
 
           if (type == 'expand') {
             if (!isExist) {
-              this.defaultkeyarr.push(node.path)
+              defaultkeyarr.push(node.path)
             }
           } else {
-            const index = this.defaultkeyarr.findIndex(e => e == node.path);
+            const index = defaultkeyarr.findIndex(e => e == node.path);
             if (index > -1) {
-              this.defaultkeyarr.splice(index, 1);
+              defaultkeyarr.splice(index, 1);
+              // 删除以 node.path 开头的所有元素，除了当前激活目录 -> this.folderCurrent
+              defaultkeyarr = defaultkeyarr.filter(e => e == this.folderCurrent || !e.startsWith(node.path));
             }
           }
 
-          sessionStorage.setItem('defaultkeyarr', this.defaultkeyarr);
+          sessionStorage.setItem('defaultkeyarr', defaultkeyarr);
         },
 
         loadData(e, node) {
