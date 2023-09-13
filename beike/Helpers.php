@@ -823,16 +823,22 @@ function zip_folder($sourceFolder, $zipPath): ZipArchive
  *
  * @param $sourcePath
  * @param $destinationPath
+ * @throws Exception
  */
 function move_dir($sourcePath, $destinationPath)
 {
     $baseSourceName = basename($sourcePath);
-    foreach (File::allFiles($sourcePath) as $file) {
-        $relativePath = $file->getRelativePath();
-        $newBasePath  = "{$destinationPath}{$baseSourceName}/{$relativePath}/";
-        $newFilePath  = $newBasePath . $file->getFilename();
-        File::ensureDirectoryExists($newBasePath);
-        File::move($file->getPathname(), $newFilePath);
+    $files          = File::allFiles($sourcePath);
+    if (empty($files)) {
+        File::ensureDirectoryExists("{$destinationPath}{$baseSourceName}");
+    } else {
+        foreach ($files as $file) {
+            $relativePath = $file->getRelativePath();
+            $newBasePath  = "{$destinationPath}{$baseSourceName}/{$relativePath}/";
+            $newFilePath  = $newBasePath . $file->getFilename();
+            File::ensureDirectoryExists($newBasePath);
+            File::move($file->getPathname(), $newFilePath);
+        }
     }
     File::deleteDirectory($sourcePath);
 }
