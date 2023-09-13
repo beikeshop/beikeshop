@@ -19,7 +19,7 @@ return [
     'order_amount'  => 'Продажи',
     'order_report'  => 'статистика заказов',
     'order_total'   => 'сумма заказа',
-    'product_total' => 'Product Total',
+    'product_total' => 'Новый продукт',
     'today'         => 'сегодн',
     'yesterday'     => 'вчера',
 ];

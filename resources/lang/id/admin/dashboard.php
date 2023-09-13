@@ -19,7 +19,7 @@ return [
     'order_amount'  => 'Penjualan',
     'order_report'  => 'Statistik Pesanan',
     'order_total'   => 'Volume pesanan',
-    'product_total' => 'Product Total',
+    'product_total' => 'Produk baru',
     'today'         => 'Hari ini.',
     'yesterday'     => 'Kemarin',
 ];

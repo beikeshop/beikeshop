@@ -13,21 +13,22 @@
     <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
-          <span>{{ __('admin/dashboard.product_total') }}</span>
+          <span>{{ __('admin/dashboard.order_amount') }}</span>
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
         </div>
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <div class="fs-2 lh-1 fw-bold">{{ $products['today'] }}</div>
+              <img src="https://beikeshop.com/install/install-enter.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="d-none">
+              <div class="fs-2 lh-1 fw-bold">{{ $order_totals['today'] }}</div>
             </div>
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $products['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $products['yesterday'] }}</span>
+            <span class="text-{{ $order_totals['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
-            <span class="text-{{ $products['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $products['percentage'] }}%</span>
+            <span class="text-{{ $order_totals['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['percentage'] }}%</span>
           </div>
         </div>
       </div>
@@ -79,22 +80,21 @@
     <div class="col-xl-3 col-6">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between">
-          <span>{{ __('admin/dashboard.order_amount') }}</span>
+          <span>{{ __('admin/dashboard.product_total') }}</span>
           <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
         </div>
         <div class="card-body">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-              <img src="https://beikeshop.com/install/install-enter.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="d-none">
-              <div class="fs-2 lh-1 fw-bold">{{ $order_totals['today'] }}</div>
+              <div class="fs-2 lh-1 fw-bold">{{ $products['today'] }}</div>
             </div>
           </div>
           <div class="mt-3 d-flex align-items-center lh-1">
             <span class="text-muted me-1">{{ __('admin/dashboard.yesterday') }}</span>
-            <span class="text-{{ $order_totals['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['yesterday'] }}</span>
+            <span class="text-{{ $products['yesterday'] >= 0 ? 'success' : 'danger' }}">{{ $products['yesterday'] }}</span>
             <span class="vr mx-2"></span>
             <span class="text-muted me-1">{{ __('admin/dashboard.day_before') }}</span>
-            <span class="text-{{ $order_totals['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $order_totals['percentage'] }}%</span>
+            <span class="text-{{ $products['percentage'] >= 0 ? 'success' : 'danger' }}">{{ $products['percentage'] }}%</span>
           </div>
         </div>
       </div>
@@ -116,107 +116,11 @@
       <canvas id="orders-chart" height="380"></canvas>
     </div>
   </div>
-
-  @if (0)
-  <div class="row">
-    <div class="col-xl-8 col-12">
-      <div class="card mb-4">
-        <div class="card-header">客户统计</div>
-        <div class="card-body">
-          <canvas id="customer-chart" height="380"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4 col-12">
-      <div class="card mb-4">
-        <div class="card-header">注册来源</div>
-        <div class="card-body">
-          <canvas id="customer-chart-1" height="380"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  @endif
 @endsection
 
 @push('footer')
   <script>
     const orders = document.getElementById('orders-chart').getContext('2d');
-
-    @if (0)
-    const ctx = document.getElementById('customer-chart').getContext('2d');
-    const ctx1 = document.getElementById('customer-chart-1').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['新注册', '最近访问', '活跃用户', '近期下单'],
-        datasets: [{
-          label: '# of Votes',
-          // backgroundColor: '#ffadb9',
-          // borderColor: '#f7072b',
-          // barThickness: 30,
-          // borderRadius: 20, // This will round the corners
-          // borderSkipped: false, // To make all side rounded
-          data: [12, 19, 3, 5],
-          // borderRadius: 5,
-          backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-          ],
-          borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: {
-              drawBorder: false,
-            },
-          },
-          x: {
-            beginAtZero: true,
-            grid: {
-              drawBorder: false,
-              display: false
-            },
-          }
-        }
-      }
-    });
-
-    const myChart1 = new Chart(ctx1, {
-      type: 'doughnut',
-      data: {
-        labels: ['Red', 'Orange', 'Yellow'],
-        datasets: [{
-          label: '# of Votes',
-          data: [112, 19, 3],
-          cutout: '80%',
-          radius: '80%',
-          spacing: 6,
-          hoverOffset: 4,
-          backgroundColor: ['#2c7be4','#a5c5f7','#d2ddec',],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
-    @endif
-
 
     const orderGradient = orders.createLinearGradient(0, 0, 0, 380);
           orderGradient.addColorStop(0, 'rgba(180,223,253,1)');

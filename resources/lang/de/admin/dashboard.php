@@ -19,7 +19,7 @@ return [
     'order_amount'  => 'Umsatz',
     'order_report'  => 'Bestellstatistik',
     'order_total'   => 'Bestellmenge',
-    'product_total' => 'Product Total',
+    'product_total' => 'Neues Produkt',
     'today'         => 'heute',
     'yesterday'     => 'gestern',
 ];

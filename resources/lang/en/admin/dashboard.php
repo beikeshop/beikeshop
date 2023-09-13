@@ -19,7 +19,7 @@ return [
     'order_amount'  => 'Order Amount',
     'order_report'  => 'Order Report',
     'order_total'   => 'Order Total',
-    'product_total' => 'Product Total',
+    'product_total' => 'New product',
     'today'         => 'today',
     'yesterday'     => 'Yesterday',
 ];
