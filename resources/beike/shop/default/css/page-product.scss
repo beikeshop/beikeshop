@@ -62,13 +62,24 @@ body.page-product {
     .left {
       margin-right: 1rem;
 
-      .swiper > div > div{
+      .swiper > div > div {
         border: 1px solid #eee;
         margin-bottom: 10px;
         width: 80px;
         // height: 80px !important;
         padding: 2px;
         cursor: pointer;
+
+        > a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+
+          img {
+            max-height: 100%;
+          }
+        }
 
         &.active, &:hover {
           border: 1px solid #3a3a3a;
