@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * BrandController.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     licy <licy@guangda.work>
+ * @created    2023-06-06 17:17:04
+ * @modified   2023-06-06 17:17:04
+ */
 require_once __DIR__ . '/../../../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestSuite;
@@ -27,22 +35,32 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\admin\GoCatalogTest.php'); //跳转前台
     $suite->addTestFile('.\tests\Browser\Pages\admin\GopLuginsTest.php'); //跳转插件市场
     $suite->addTestFile('.\tests\Browser\Pages\admin\AddProductTest.php'); //添加商品
-    $suite->addTestFile('.\tests\Browser\Pages\admin\EditProductTest.php'); //编辑商品
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelProductTest.php'); //删除商品
-    $suite->addTestFile('.\tests\Browser\Pages\admin\GoVipTest.php'); //跳转vip界面
+    $suite->addTestFile('.\tests\Browser\Pages\admin\EditProductTest.php'); //编辑商品
+    $suite->addTestFile('.\tests\Browser\Pages\admin\GoCopyrightAndServiceTest.php'); //跳转版权服务
     $suite->addTestFile('.\tests\Browser\Pages\admin\LanguageSwitchTest.php'); //切换语言
     $suite->addTestFile('.\tests\Browser\Pages\admin\AddExpressTest.php'); //添加快递公司
-
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AddProductBrandsTest.php'); //添加商品品牌
+    $suite->addTestFile('.\tests\Browser\Pages\admin\EditProductBrandsTest.php'); //编辑商品品牌
+    $suite->addTestFile('.\tests\Browser\Pages\admin\DelProductBrandsTest.php'); //删除商品品牌
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AddArticleCataTest.php'); //添加文章分类
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AlterArticleCataTest.php'); //编辑文章分类
+    $suite->addTestFile('.\tests\Browser\Pages\admin\DelArticleTest.php'); //删除文章分类
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AddArticleTest.php'); //添加文章
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AlterArticleTest.php'); //编辑文章
+    $suite->addTestFile('.\tests\Browser\Pages\admin\DelArticleTest.php'); //删除文章
 //前后台联测
     $suite->addTestFile('.\tests\Browser\Pages\combine\AlterOrderStationTest.php'); //订单状态修改 已支付-已发货-一已完成
     $suite->addTestFile('.\tests\Browser\Pages\combine\CancelOrderTest.php'); //取消商品订单
     $suite->addTestFile('.\tests\Browser\Pages\combine\CloseVisiterCheckoutTest.php'); //禁用游客结账
     $suite->addTestFile('.\tests\Browser\Pages\combine\OpenVisiterCheckoutTest.php'); //开启游客结账
-    $suite->addTestFile('.\tests\Browser\Pages\combine\CreateCategoriesTest.php'); //添加商品分类
     $suite->addTestFile('.\tests\Browser\Pages\combine\DisableProductTest.php'); //禁用商品
     $suite->addTestFile('.\tests\Browser\Pages\combine\EnableProductTest.php'); //启用商品
     $suite->addTestFile('.\tests\Browser\Pages\combine\UnderstockOrderTest.php'); //库存不足下单
     $suite->addTestFile('.\tests\Browser\Pages\combine\CustomerGroupDiscountTest.php'); //客户组折扣检验
+    $suite->addTestFile('.\tests\Browser\Pages\combine\CreateCategoriesTest.php'); //增加商品分类
+    $suite->addTestFile('.\tests\Browser\Pages\combine\AlterCategoriesTest.php'); //更改商品分类
+    $suite->addTestFile('.\tests\Browser\Pages\combine\DelCategoriesTest.php'); //删除商品分类
 
 //后台删除用户操作
     $suite->addTestFile('.\tests\Browser\Pages\admin\AddCustomerTest.php'); //创建用户
@@ -56,6 +74,10 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\admin\CusEmptyRecycleTest.php'); //清空回收站
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelCustomerTest.php'); //删除用户
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelCusRecycleTest.php'); //从回收站删除客户信息
+
+//插件测试
+    $suite->addTestFile('.\tests\Browser\Pages\front\PaypalOrderTest.php');//paypal插件测试  沙盒
+    $suite->addTestFile('.\tests\Browser\Pages\front\StripeOrderTest.php');//stripe插件测试  沙盒
 
     // 运行测试套件
     $result = $suite->run();

@@ -40,7 +40,7 @@ public const System_Express
         'add_btn'         => '.bi.bi-plus-circle.cursor-pointer.fs-4', //加号
         'express_company' => 'input[name="express_company[0][name]"]', //公司名字
         'express_code'    => 'input[name="express_company[0][code]"]', //code
-        'save_btn'        => '#content > div.page-title-box.py-1.d-flex.align-items-center.justify-content-between > div > button',
+        'save_btn'        => '#content > div.container-fluid.p-0 > div.page-bottom-btns > button.btn.btn-lg.w-min-100.btn-primary.submit-form',
 
     ];
 

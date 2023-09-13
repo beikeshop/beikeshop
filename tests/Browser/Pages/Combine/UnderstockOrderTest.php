@@ -1,4 +1,13 @@
 <?php
+/**
+ * BrandController.php
+ *
+ * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     licy <licy@guangda.work>
+ * @created    2023-06-06 17:17:04
+ * @modified   2023-06-06 17:17:04
+ */
 
 namespace Tests\Browser\Pages\Combine;
 
@@ -31,6 +40,10 @@ class UnderstockOrderTest extends DuskTestCase
                  echo $product1_text;
                 //点击编辑商品
                 $browser->press(ProductPage::Product_Top['edit_product'])
+                ->scrollIntoView(CreProductPage::Product_Top['Enable'])
+                ->pause(2000)
+                //启用商品
+                ->click(CreProductPage::Product_Top['Enable'])
                 //修改商品库存为5
                 ->type(CreProductPage::Product_Top['quantity'], CreProduct::Alter['low_quantity'])
                 //5.点击保存

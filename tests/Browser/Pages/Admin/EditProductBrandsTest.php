@@ -5,8 +5,8 @@
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     licy <licy@guangda.work>
- * @created    2023-06-06 17:17:04
- * @modified   2023-06-06 17:17:04
+ * @created    2023-07-04 15:01:04
+ * @modified   2023-07-04 15:01:04
  */
 
 namespace Tests\Browser\Pages\Admin;
@@ -14,18 +14,18 @@ namespace Tests\Browser\Pages\Admin;
 use Laravel\Dusk\Browser;
 use Tests\Data\Admin\AdminLoginPage;
 use Tests\Data\Admin\AdminPage;
-use Tests\Data\Admin\CustomerData;
-use Tests\Data\Admin\CustomerPage;
+use Tests\Data\Admin\CreBrandsData;
 use Tests\Data\Admin\LoginData;
+use Tests\Data\Admin\ProductPage;
 use Tests\DuskTestCase;
 
-class EditCustomerTest extends DuskTestCase
+class EditProductBrandsTest extends DuskTestCase
 {
     /**
      * A basic browser test example.
      * @return void
      */
-    public function testEditCustomer()
+    public function testEditProductBrands()
     {
 
         $this->browse(function (Browser $browser) {
@@ -35,18 +35,19 @@ class EditCustomerTest extends DuskTestCase
                 ->type(AdminLoginPage::Admin_Login['login_pwd'], LoginData::Ture_Data['password'])
                 ->press(AdminLoginPage::Admin_Login['login_btn'])
                 ->pause(2000)
-                //2.点击客户管理
-                ->click(AdminPage::TOP['mg_customers'])
+                //2.点击商品
+                ->click(AdminPage::TOP['mg_product'])
+                //2.点击商品品牌
+                ->click(ProductPage::Product_Left['product_brand'])
                 //3.点击编辑按钮
-                ->press(CustomerPage::Group_list['edit_customer'])
-                //4.填写客户信息
-                ->type(CustomerPage::Alter['name'], CustomerData::Customer_Info_Alter['name'])
-                ->type(CustomerPage::Alter['email'], CustomerData::Customer_Info_Alter['email'])
-                ->type(CustomerPage::Alter['pwd'], CustomerData::Customer_Info_Alter['pwd'])
+                ->press(ProductPage::Cre_brand['edit_brand_btn'])
+                //4.填写商品品牌信息
+                ->type(ProductPage::Cre_brand['brand_name'], CreBrandsData::Alter_Brands_Info['alter_brand_name'])
+                ->type(ProductPage::Cre_brand['brand_first_letter'], CreBrandsData::Alter_Brands_Info['alter_brand_first_letter'])
                 //5.点击保存
-                ->press(CustomerPage::Alter['save_btn'])
-                ->pause(5000)
-                ->assertSee(CustomerData::Customer_Info_Alter['email']);
+                ->press(ProductPage::Cre_brand['save_btn'])
+                ->pause(3000)
+                ->assertSee(CreBrandsData::Alter_Brands_Info['alter_brand_name']);
                 });
     }
 }
