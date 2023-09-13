@@ -823,7 +823,6 @@ function zip_folder($sourceFolder, $zipPath): ZipArchive
  *
  * @param $sourcePath
  * @param $destinationPath
- * @throws Exception
  */
 function move_dir($sourcePath, $destinationPath)
 {
