@@ -10,12 +10,14 @@ use Illuminate\Http\Request;
 class FileManagerController extends Controller
 {
     protected $fileManagerService;
+
     public function __construct()
     {
         $class = hook_filter('controller.file_manager.construct', "Beike\Admin\Services\FileManagerService");
 
         $this->fileManagerService = new $class();
     }
+
     /**
      * 获取文件夹和文件列表
      * @return mixed
@@ -209,7 +211,7 @@ class FileManagerController extends Controller
         $savePath = $request->get('path');
 
         $originName = $file->getClientOriginalName();
-        $fileUrl   = $this->fileManagerService->uploadFile($file, $savePath, $originName);
+        $fileUrl    = $this->fileManagerService->uploadFile($file, $savePath, $originName);
 
         return [
             'name' => $originName,

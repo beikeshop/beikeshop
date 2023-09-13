@@ -169,10 +169,14 @@ class PluginController extends Controller
      */
     public function install(Request $request, $code): JsonResponse
     {
-        $plugin = app('plugin')->getPluginOrFail($code);
-        PluginRepo::installPlugin($plugin);
+        try {
+            $plugin = app('plugin')->getPluginOrFail($code);
+            PluginRepo::installPlugin($plugin);
 
-        return json_success(trans('common.success'));
+            return json_success(trans('common.success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**
@@ -183,10 +187,15 @@ class PluginController extends Controller
      */
     public function uninstall(Request $request, $code): JsonResponse
     {
-        $plugin = app('plugin')->getPluginOrFail($code);
-        PluginRepo::uninstallPlugin($plugin);
+        try {
 
-        return json_success(trans('common.success'));
+            $plugin = app('plugin')->getPluginOrFail($code);
+            PluginRepo::uninstallPlugin($plugin);
+
+            return json_success(trans('common.success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**
@@ -210,8 +219,8 @@ class PluginController extends Controller
 
             return view($view, $data);
         } catch (\Exception $e) {
-            $plugin     = app('plugin')->getPlugin($code);
-            $data       = [
+            $plugin = app('plugin')->getPlugin($code);
+            $data   = [
                 'error'       => $e->getMessage(),
                 'plugin_code' => $code,
                 'plugin'      => $plugin,
@@ -255,10 +264,14 @@ class PluginController extends Controller
      */
     public function updateStatus(Request $request, $code): JsonResponse
     {
-        app('plugin')->getPluginOrFail($code);
-        $status = $request->get('status');
-        SettingRepo::update('plugin', $code, ['status' => $status]);
+        try {
+            app('plugin')->getPluginOrFail($code);
+            $status = $request->get('status');
+            SettingRepo::update('plugin', $code, ['status' => $status]);
 
-        return json_success(trans('common.updated_success'));
+            return json_success(trans('common.updated_success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 }
