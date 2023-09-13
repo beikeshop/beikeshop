@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-05 18:13:30
+ * @LastEditTime  2023-09-13 11:05:52
  */
 
 import http from "../../../js/http";
@@ -158,7 +158,7 @@ const autoActiveTab = () => {
 }
 
 const pageBottomBtns = () => {
-  if ($('.page-bottom-btns').html().trim()) {
+  if ($('.page-bottom-btns').length && $('.page-bottom-btns').html().trim()) {
     const contentInfoTop = $('.content-info').offset().top + $('.content-info').height();
 
     $('#content').css({'padding-bottom': '6rem'})

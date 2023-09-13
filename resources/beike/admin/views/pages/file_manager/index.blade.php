@@ -697,7 +697,7 @@
             value
           }) => {
             if (type == 'addFolder') {
-              let fileAllPathName = data.path + '/' + value;
+              let fileAllPathName = data.path == '/' ? '/' + value : data.path + '/' + value;
               $http.post(`file_manager/directories`, {
                 name: fileAllPathName
               }).then((res) => {
