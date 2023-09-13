@@ -99,11 +99,6 @@ class FileManagerService
         $imageCollection = collect($images);
 
         $currentImages = $imageCollection->forPage($page, $perPage);
-        $currentImages = $currentImages->map(function ($item) {
-            $item['url'] = image_resize("{$item['path']}");
-
-            return $item;
-        });
 
         return [
             'images'      => $currentImages->values(),
@@ -266,8 +261,9 @@ class FileManagerService
     public function uploadFile($file, $savePath, $originName): mixed
     {
         $savePath = $this->basePath . $savePath;
+        $filePath = $file->storeAs($savePath, $originName, 'catalog');
 
-        return $file->storeAs($savePath, $originName, 'catalog');
+        return asset('catalog/' . $filePath);
     }
 
     /**
@@ -323,9 +319,10 @@ class FileManagerService
         }
 
         return [
-            'path'       => $path,
+            'path'       => '/' . $path,
             'name'       => $baseName,
             'origin_url' => image_origin($path),
+            'url'        => image_resize($path),
             'mime'       => $mime,
             'selected'   => false,
         ];

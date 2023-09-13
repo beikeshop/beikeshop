@@ -61,10 +61,10 @@
           <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
           {{-- v-if="node.isCurrent" --}}
           <div class="right">
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.download') }}"
-              placement="top">
-              <span @click.stop="() => {openInputBox('download', node, data)}"><i
-                class="el-icon-download"></i></span>
+            <el-tooltip class="item file-download" effect="dark" content="{{ __('admin/file_manager.download') }}"
+            placement="top">
+            <span @click.stop="() => {openInputBox('download', node, data)}"><i
+              class="el-icon-download"></i></span>
             </el-tooltip>
 
             <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
@@ -105,6 +105,7 @@
           @hook('admin.file_manager.content.head.btns.after')
         </div>
         <div class="right">
+          @hook('admin.file_manager.content_head.right')
           <el-popover placement="bottom" width="260" class="me-2" trigger="click">
             <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
             <div class="mb-3">
@@ -193,6 +194,8 @@
     <div class="drop_folder_hint d-none">{!! __('admin/file_manager.drop_folder_hint') !!}</div>
   </div>
 
+  @stack('admin.file_manager.footer')
+
   <script>
     @if (locale() != 'zh_cn')
       ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
@@ -221,7 +224,7 @@
         treeData: [{
           name: '{{ __('admin/file_manager.picture_space') }}',
           path: '/',
-          children: @json($directories)
+          children: []
         }],
 
         copyTreeData: [], // 用于恢复树形结构
@@ -297,6 +300,7 @@
 
       // 实例被挂载后调用
       mounted() {
+        this.loadDirectories()
         this.loadData()
 
         if (this.isMultiple) {
@@ -325,6 +329,12 @@
       },
 
       methods: {
+        loadDirectories() {
+          $http.get('file_manager/directories').then((res) => {
+            this.treeData[0].children = res;
+          })
+        },
+
         handleNodeClick(e, node) {
           if (e.path == this.folderCurrent) {
             return;
@@ -760,5 +770,4 @@
     })
   </script>
 </body>
-
 </html>

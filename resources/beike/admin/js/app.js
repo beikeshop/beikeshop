@@ -129,9 +129,9 @@ const tinymceInit = () => {
             if (images.length) {
               images.forEach(e => {
                 if (e.mime == 'video/mp4') {
-                  ed.insertContent(`<video src='/${e.path}' controls loop muted class="img-fluid" />`);
+                  ed.insertContent(`<video src='${e.path}' controls loop muted class="img-fluid" />`);
                 } else {
-                  ed.insertContent(`<img src='/${e.path}' class="img-fluid" />`);
+                  ed.insertContent(`<img src='${e.path}' class="img-fluid" />`);
                 }
               });
             }

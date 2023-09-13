@@ -3,13 +3,19 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Requests\UploadRequest;
-use Beike\Admin\Services\FileManagerService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class FileManagerController extends Controller
 {
+    protected $fileManagerService;
+    public function __construct()
+    {
+        $class = hook_filter('controller.file_manager.construct', "Beike\Admin\Services\FileManagerService");
+
+        $this->fileManagerService = new $class();
+    }
     /**
      * 获取文件夹和文件列表
      * @return mixed
@@ -17,7 +23,7 @@ class FileManagerController extends Controller
      */
     public function index(): mixed
     {
-        $data = (new FileManagerService)->getDirectories();
+        $data = $this->fileManagerService->getDirectories();
         $data = hook_filter('admin.file_manager.index.data', $data);
 
         return view('admin::pages.file_manager.index', ['directories' => $data]);
@@ -38,7 +44,7 @@ class FileManagerController extends Controller
         $page       = (int) $request->get('page');
         $perPage    = (int) $request->get('per_page');
 
-        $data = (new FileManagerService)->getFiles($baseFolder, $sort, $order, $page, $perPage);
+        $data = $this->fileManagerService->getFiles($baseFolder, $sort, $order, $page, $perPage);
 
         return hook_filter('admin.file_manager.files.data', $data);
     }
@@ -52,7 +58,7 @@ class FileManagerController extends Controller
     {
         $baseFolder = $request->get('base_folder');
 
-        $data = (new FileManagerService)->getDirectories($baseFolder);
+        $data = $this->fileManagerService->getDirectories($baseFolder);
 
         return hook_filter('admin.file_manager.directories.data', $data);
     }
@@ -66,7 +72,7 @@ class FileManagerController extends Controller
     {
         try {
             $folderName = $request->get('name');
-            (new FileManagerService)->createDirectory($folderName);
+            $this->fileManagerService->createDirectory($folderName);
 
             return json_success(trans('common.created_success'));
         } catch (Exception $e) {
@@ -84,7 +90,7 @@ class FileManagerController extends Controller
         try {
             $originPath = $request->get('origin_name');
             $newPath    = $request->get('new_name');
-            (new FileManagerService)->updateName($originPath, $newPath);
+            $this->fileManagerService->updateName($originPath, $newPath);
 
             return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
@@ -103,7 +109,7 @@ class FileManagerController extends Controller
             $requestData = json_decode($request->getContent(), true);
             $basePath    = $requestData['path']  ?? '';
             $files       = $requestData['files'] ?? [];
-            (new FileManagerService)->deleteFiles($basePath, $files);
+            $this->fileManagerService->deleteFiles($basePath, $files);
 
             return json_success(trans('common.deleted_success'));
         } catch (Exception $e) {
@@ -122,7 +128,7 @@ class FileManagerController extends Controller
     {
         try {
             $folderName = $request->get('name');
-            (new FileManagerService)->deleteDirectoryOrFile($folderName);
+            $this->fileManagerService->deleteDirectoryOrFile($folderName);
 
             return json_success(trans('common.deleted_success'));
         } catch (Exception $e) {
@@ -141,7 +147,7 @@ class FileManagerController extends Controller
         try {
             $sourcePath = $request->get('source_path');
             $destPath   = $request->get('dest_path');
-            (new FileManagerService)->moveDirectory($sourcePath, $destPath);
+            $this->fileManagerService->moveDirectory($sourcePath, $destPath);
 
             return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
@@ -160,7 +166,7 @@ class FileManagerController extends Controller
         try {
             $images   = $request->get('images');
             $destPath = $request->get('dest_path');
-            (new FileManagerService)->moveFiles($images, $destPath);
+            $this->fileManagerService->moveFiles($images, $destPath);
 
             return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
@@ -177,7 +183,7 @@ class FileManagerController extends Controller
     {
         try {
             $imagePath = $request->get('path');
-            $zipFile   = (new FileManagerService)->zipFolder($imagePath);
+            $zipFile   = $this->fileManagerService->zipFolder($imagePath);
 
             header('Content-Type: application/zip');
             header('Content-Disposition: attachment; filename="' . basename($zipFile) . '"');
@@ -203,11 +209,11 @@ class FileManagerController extends Controller
         $savePath = $request->get('path');
 
         $originName = $file->getClientOriginalName();
-        $filePath   = (new FileManagerService)->uploadFile($file, $savePath, $originName);
+        $fileUrl   = $this->fileManagerService->uploadFile($file, $savePath, $originName);
 
         return [
             'name' => $originName,
-            'url'  => asset('catalog/' . $filePath),
+            'url'  => $fileUrl,
         ];
     }
 }
