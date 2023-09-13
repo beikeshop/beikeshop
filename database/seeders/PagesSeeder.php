@@ -99,6 +99,7 @@ class PagesSeeder extends Seeder
 
     public function getPageDescriptions()
     {
+        $version = config('beike.version');
         return [
             [
                 "id" => "55",
@@ -208,9 +209,9 @@ class PagesSeeder extends Seeder
                 "id" =>199,
                 "page_id" =>22,
                 "locale" =>"zh_cn",
-                "title" =>"Beikeshop 1.3.7 新版版本发布！！！",
+                "title" =>"Beikeshop {$version} 新版版本发布！！！",
                 "summary" =>"",
-                "content" =>"<p>Beikeshop 1.3.7 新版版本发布！！！</p>",
+                "content" =>"<p>Beikeshop {$version} 新版版本发布！！！</p>",
                 "meta_title" =>"",
                 "meta_description" =>"",
                 "meta_keywords" =>"",
@@ -219,9 +220,9 @@ class PagesSeeder extends Seeder
                 "id" =>200,
                 "page_id" =>22,
                 "locale" =>"en",
-                "title" =>"Beikeshop 1.3.7 new version released! ! !",
+                "title" =>"Beikeshop {$version} new version released! ! !",
                 "summary" =>"",
-                "content" =>"<p>Beikeshop 1.3.7 new version released! ! !</p>",
+                "content" =>"<p>Beikeshop {$version} new version released! ! !</p>",
                 "meta_title" =>"",
                 "meta_description" =>"",
                 "meta_keywords" =>"",
