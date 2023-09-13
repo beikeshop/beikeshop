@@ -29,21 +29,28 @@ class Youdao
     /**
      * @var string 应用密钥
      */
-    private string $secKey = '';
+    private string $appSecret = '';
 
     private string $baseUrl = '';
 
     private bool $isHtml;
 
     /**
-     * @param string $appKey
-     * @param string $secKey
-     * @param bool   $html
+     * @param  string     $appKey
+     * @param  string     $appSecret
+     * @param  bool       $html
+     * @throws \Exception
      */
-    public function __construct(string $appKey = '', string $secKey = '', bool $html = false)
+    public function __construct(string $appKey = '', string $appSecret = '', bool $html = false)
     {
-        $this->appKey = $appKey;
-        $this->secKey = $secKey;
+        if (empty($appKey)) {
+            throw new \Exception('有道翻译 app key 不能为空!');
+        }
+        if (empty($appSecret)) {
+            throw new \Exception('有道翻译 app secret 不能为空!');
+        }
+        $this->appKey    = $appKey;
+        $this->appSecret = $appSecret;
         if ($html) {
             $this->baseUrl = self::API_HTML_URL;
         } else {
@@ -120,7 +127,7 @@ class Youdao
         $args['signType'] = 'v3';
         $currentTime      = strtotime('now');
         $args['curtime']  = $currentTime;
-        $signStr          = $this->appKey . $this->truncate($text) . $salt . $currentTime . $this->secKey;
+        $signStr          = $this->appKey . $this->truncate($text) . $salt . $currentTime . $this->appSecret;
         $args['sign']     = hash('sha256', $signStr);
         $args['vocabId']  = '您的用户词表ID';
         $ret              = $this->call($this->baseUrl, $args);

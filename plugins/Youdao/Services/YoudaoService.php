@@ -20,8 +20,8 @@ class YoudaoService implements TranslatorService
 
     public function __construct()
     {
-        $appKey           = plugin_setting('youdao.app_key');
-        $appSecret        = plugin_setting('youdao.app_secret');
+        $appKey           = plugin_setting('youdao.app_key', '');
+        $appSecret        = plugin_setting('youdao.app_secret', '');
         $this->translator = new Youdao($appKey, $appSecret);
     }
 
