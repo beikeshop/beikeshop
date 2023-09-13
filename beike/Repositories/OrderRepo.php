@@ -121,6 +121,11 @@ class OrderRepo
             $builder->where('status', $status);
         }
 
+        // 回收站
+        if (isset($filters['trashed']) && $filters['trashed']) {
+            $builder->onlyTrashed();
+        }
+
         return $builder;
     }
 

@@ -85,6 +85,7 @@ return [
     'customers_trashed'      => '回收站',
     'brands_index'           => '商品品牌',
     'orders_index'           => '订单列表',
+    'orders_trashed'         => '回收站',
     'rmas_index'             => '售后管理',
     'rma_reasons_index'      => '售后原因',
     'customers_index'        => '客户列表',

@@ -154,9 +154,12 @@ Route::prefix($adminName)
                 Route::middleware('can:languages_delete')->delete('languages/{id}', [Controllers\LanguageController::class, 'destroy'])->name('languages.destroy');
 
                 // 订单
+                Route::middleware('can:orders_restore')->put('orders/restore/{id}', [Controllers\OrderController::class, 'restore']);
+                Route::middleware('can:orders_trashed')->get('orders/trashed', [Controllers\OrderController::class, 'trashed'])->name('orders.trashed');
                 Route::middleware('can:orders_index')->get('orders', [Controllers\OrderController::class, 'index'])->name('orders.index');
                 Route::middleware('can:orders_export')->get('orders/export', [Controllers\OrderController::class, 'export'])->name('orders.export');
                 Route::middleware('can:orders_show')->get('orders/{order}', [Controllers\OrderController::class, 'show'])->name('orders.show');
+                Route::middleware('can:orders_delete')->delete('orders/{order}', [Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/status', [Controllers\OrderController::class, 'updateStatus'])->name('orders.update_status');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/shipments/{shipment}', [Controllers\OrderController::class, 'updateShipment'])->name('orders.update_shipment');
 

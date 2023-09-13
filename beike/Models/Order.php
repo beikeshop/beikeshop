@@ -16,11 +16,13 @@ use Beike\Notifications\UpdateOrderNotification;
 use Beike\Services\StateMachineService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Order extends Base
 {
     use Notifiable;
+    use SoftDeletes;
 
     protected $fillable = [
         'number', 'customer_id', 'customer_group_id', 'shipping_address_id', 'payment_address_id', 'customer_name',

@@ -36,8 +36,30 @@ class OrderController extends Controller
         $data   = [
             'orders'   => OrderSimpleList::collection($orders),
             'statuses' => StateMachineService::getAllStatuses(),
+            'type'            => 'trashed',
         ];
         $data = hook_filter('admin.order.index.data', $data);
+
+        return view('admin::pages.orders.index', $data);
+    }
+    /**
+     * 获取订单回收站列表
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \Exception
+     */
+    public function trashed(Request $request)
+    {
+        $requestData            = $request->all();
+        $requestData['trashed'] = true;
+        $orders = OrderRepo::filterOrders($requestData);
+        $data   = [
+            'orders'   => OrderSimpleList::collection($orders),
+            'statuses' => StateMachineService::getAllStatuses(),
+            'type'            => 'trashed',
+        ];
+        $data = hook_filter('admin.order.trashed.data', $data);
 
         return view('admin::pages.orders.index', $data);
     }
@@ -120,5 +142,23 @@ class OrderController extends Controller
         ]);
 
         return json_success(trans('common.updated_success'));
+    }
+
+    public function destroy(Request $request, Order $order)
+    {
+        $order->delete();
+        hook_action('admin.order.destroy.after', $order);
+
+        return json_success(trans('common.deleted_success'));
+    }
+
+    public function restore(Request $request)
+    {
+        $id = $request->id ?? 0;
+        Order::withTrashed()->find($id)->restore();
+
+        hook_action('admin.product.restore.after', $id);
+
+        return ['success' => true];
     }
 }
