@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-05 18:13:30
+ * @LastEditTime  2023-09-13 14:17:39
  */
 
 import http from "../../../js/http";
@@ -115,7 +115,7 @@ const tinymceInit = () => {
     // contextmenu: "link image imagetools table",
     toolbar_items_size: 'small',
     image_caption: true,
-    // imagetools_toolbar: 'imageoptions',
+    imagetools_toolbar: '',
     toolbar_mode: 'wrap',
     font_formats:
       "微软雅黑='Microsoft YaHei';黑体=黑体;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Georgia=georgia,palatino;Helvetica=helvetica;Times New Roman=times new roman,times;Verdana=verdana,geneva",
@@ -158,7 +158,7 @@ const autoActiveTab = () => {
 }
 
 const pageBottomBtns = () => {
-  if ($('.page-bottom-btns').html().trim()) {
+  if ($('.page-bottom-btns').length && $('.page-bottom-btns').html().trim()) {
     const contentInfoTop = $('.content-info').offset().top + $('.content-info').height();
 
     $('#content').css({'padding-bottom': '6rem'})

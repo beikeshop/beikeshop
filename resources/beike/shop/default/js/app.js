@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-29 17:32:51
- * @LastEditTime  2023-05-18 10:18:09
+ * @LastEditTime  2023-09-13 14:07:44
  */
 
 import http from "../../../../js/http";
@@ -31,6 +31,11 @@ $(document).ready(function ($) {
 
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+  bk.productImageResize11()
+  window.addEventListener('resize', function () {
+    bk.productImageResize11()
+  })
 });
 
 bk.getCarts(); // 页面初始加载购物车数据

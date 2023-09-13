@@ -48,4 +48,6 @@ return [
     'uploading'                 => '上传中',
     'upload_fail'               => '上传失败',
     'file_manager'              => '图片管理器',
+    'target_dir_exist'          => '目标目录已存在',
+    'source_dir_empty'          => '源目录不能为空',
 ];

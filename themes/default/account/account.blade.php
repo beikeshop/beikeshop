@@ -64,7 +64,7 @@
                       @foreach ($latest_orders as $order)
                       <tr class="align-middle">
                         <td style="width: 62px">
-                          <div class="img border wh-60 d-flex justify-content-between align-items-center">
+                          <div class="img border wh-60 d-flex justify-content-center align-items-center">
                             <img src="{{ $order->orderProducts[0]->image ?? '' }}" class="img-fluid">
                           </div>
                         </td>

@@ -100,7 +100,7 @@
                 @foreach ($carts['carts'] as $cart)
                   <div class="item">
                     <div class="image">
-                      <div class="img border d-flex align-items-center justify-content-center wh-40 me-2">
+                      <div class="img border d-flex align-items-center justify-content-center wh-50 me-2">
                         <img src="{{ image_resize($cart['image'], 100, 100) }}" class="img-fluid">
                       </div>
                       <div class="name">

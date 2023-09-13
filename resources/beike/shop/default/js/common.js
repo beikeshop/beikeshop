@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2023-05-18 09:02:44
+ * @LastEditTime  2023-09-13 14:07:30
  */
 
 export default {
@@ -171,6 +171,13 @@ export default {
       link.rel = 'stylesheet';
       // 将 link 标签添加到 head 标签中
       document.head.appendChild(link);
+    }
+  },
+
+  // 处理用户采集来的商品 图片尺寸比例失衡问题，强制 1:1
+  productImageResize11() {
+    if ($('.image-old').length) {
+      $('.image-old').height($('.image-old').width())
     }
   }
 }
