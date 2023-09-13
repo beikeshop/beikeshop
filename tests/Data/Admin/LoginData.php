@@ -17,7 +17,7 @@ public const False_Data = [
     'false_password' => '1234567',
     'false_assert'   => '账号密码不匹配',
     'illegal_assert' => 'email 必须是一个有效的电子邮件地址。',
-    'no_email'       => 'email 字段是必须的。',
-    'no_pwd'         => 'password 字段是必须的。',
+    'no_email'       => '请输入 email',
+    'no_pwd'         => '请输入 password',
 ];
 }
