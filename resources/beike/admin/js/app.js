@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-13 14:17:39
+ * @LastEditTime  2023-09-13 17:31:20
  */
 
 import http from "../../../js/http";
@@ -83,12 +83,16 @@ const inputLocaleTranslate = () => {
 
     // 发请求之前删除所有错样式
     $http.post('translation', {from, to, text}).then((res) => {
+      $('.translation-error-text').remove()
+
       res.data.forEach((e) => {
         $parents.find('.input-' + e.locale).removeClass('translation-error');
 
-        $parents.find('.input-' + e.locale).val(e.result);
         if (e.error) {
           $parents.find('.input-' + e.locale).addClass('translation-error');
+          $parents.find('.input-' + e.locale).parents('.input-for-group').after('<div class="invalid-feedback translation-error-text mb-1 d-block" style="margin-left: 86px">' + e.error + '</div>');
+        } else {
+          $parents.find('.input-' + e.locale).val(e.result);
         }
       });
     })
