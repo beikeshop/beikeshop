@@ -217,23 +217,26 @@ class StateMachineService
 
         $this->validStatusCode($status);
         $functions = $this->getFunctions($oldStatusCode, $newStatusCode);
-        if (empty($functions)) {
-            return;
-        }
-        foreach ($functions as $function) {
-            if ($function instanceof \Closure) {
-                $function();
+        if ($functions) {
+            foreach ($functions as $function) {
+                if ($function instanceof \Closure) {
+                    $function();
 
-                continue;
-            }
+                    continue;
+                }
 
-            if (! method_exists($this, $function)) {
-                throw new \Exception("{$function} not exist in StateMachine!");
+                if (! method_exists($this, $function)) {
+                    throw new \Exception("{$function} not exist in StateMachine!");
+                }
+                $this->{$function}($oldStatusCode, $status);
             }
-            $this->{$function}($oldStatusCode, $status);
         }
 
         hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
+
+        if (!$order->shipping_method_code && $status == self::PAID) {
+            $this->changeStatus(self::COMPLETED, $comment, $notify);
+        }
     }
 
     /**
