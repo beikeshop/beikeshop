@@ -215,12 +215,14 @@ class CheckoutService
 
     private function updateShippingMethod($shippingMethodCode)
     {
-        $this->cart->update(['shipping_method_code' => $shippingMethodCode]);
+        $this->cart->shipping_method_code = $shippingMethodCode;
+        $this->cart->save();
     }
 
     private function updatePaymentMethod($paymentMethodCode)
     {
-        $this->cart->update(['payment_method_code' => $paymentMethodCode]);
+        $this->cart->payment_method_code = $paymentMethodCode;
+        $this->cart->save();
     }
 
     public function initTotalService()
@@ -293,6 +295,7 @@ class CheckoutService
             }
         } else {
             $this->updateShippingMethod('');
+            $this->totalService->setShippingMethod('');
         }
 
     }
