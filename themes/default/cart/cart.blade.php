@@ -51,7 +51,7 @@
                       </div>
                     </td>
                     <td>
-                      <div class="name text-truncate-2 mb-1 fw-bold" v-text="product.name"></div>
+                      <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="'products/' + product.id" v-text="product.name"></a>
                       <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
                       <div class="price text-muted">@{{ product.price_format }}</div>
                     </td>
