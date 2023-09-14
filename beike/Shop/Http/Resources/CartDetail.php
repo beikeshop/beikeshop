@@ -38,6 +38,7 @@ class CartDetail extends JsonResource
             'quantity'        => $this->quantity,
             'selected'        => $this->selected,
             'price'           => $price,
+            'shipping'        => $this->shipping,
             'price_format'    => currency_format($price),
             'tax_class_id'    => $product->tax_class_id,
             'subtotal'        => $subTotal,
