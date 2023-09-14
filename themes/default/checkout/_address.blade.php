@@ -1,5 +1,5 @@
 <div id="checkout-address-app" v-cloak>
-  <div class="checkout-black">
+  <div class="checkout-black" v-if="shippingRequired">
     <div class="checkout-title">
       <div class="d-flex">
         <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
@@ -162,6 +162,7 @@
 
       isAllAddress: false,
       isAllAddressPayment: false,
+      shippingRequired: @json($shipping_require ?? true),
 
       source: {
         addresses: @json($addresses ?? []),
@@ -179,6 +180,7 @@
     computed: {
       same_as_shipping_address: {
         get() {
+          console.log(this.shippingRequired);
           if (!this.source.isLogin) {
             return JSON.stringify(this.source.guest_shipping_address) === JSON.stringify(this.source.guest_payment_address);
           }
