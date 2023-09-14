@@ -28,6 +28,7 @@ return [
     'select_province'          => 'Bitte wählen Sie eine Provinz aus',
     'enter_city'               => 'Bitte Stadt eingeben',
     'check_form'               => 'Bitte prüfen Sie, ob das Formular korrekt ausgefüllt ist',
+    'error_address'            => 'Bitte wählen Sie eine Adresse aus',
     'error_payment_address'    => 'Bitte wählen Sie die Rechnungsadresse',
 
     'payment'                  => [

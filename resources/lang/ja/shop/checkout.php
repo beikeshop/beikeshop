@@ -28,6 +28,7 @@ return [
     'select_province'          => '都道府県を選択してください',
     'enter_city'               => '都市を入力してください',
     'check_form'               => 'フォームが正しく記入されていることを確認してください',
+    'error_address'            => 'アドレスを選択してください',
     'error_payment_address'    => '請求先住所を選択してください',
 
     'payment'                  => [

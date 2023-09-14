@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <div class="checkout-black" v-if='!same_as_shipping_address'>
+  <div class="checkout-black" v-if='!this.shippingRequired || !same_as_shipping_address'>
     <div class="checkout-title">
       <div class="d-flex">
         <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
@@ -148,6 +148,7 @@
 
   <address-dialog ref="address-dialog" @change="onAddressDialogChange"></address-dialog>
 </div>
+
 @push('add-scripts')
 @include('shared.address-form')
 <script>
@@ -180,7 +181,6 @@
     computed: {
       same_as_shipping_address: {
         get() {
-          console.log(this.shippingRequired);
           if (!this.source.isLogin) {
             return JSON.stringify(this.source.guest_shipping_address) === JSON.stringify(this.source.guest_payment_address);
           }
