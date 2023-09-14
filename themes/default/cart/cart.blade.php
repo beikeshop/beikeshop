@@ -137,7 +137,7 @@
           },
           set(val) {
             this.products.map(e => e.selected = val)
-            this.selectedBtnSelected()
+            this.allSelectedBtn()
           }
         },
 
@@ -172,14 +172,17 @@
         },
 
         checkedCartTr(index) {
-          this.selectedBtnSelected();
+          const selected = this.products[index].selected;
+          const cart_id = this.products[index].cart_id;
+          $http.post(`/carts/${selected ? 'select' : 'unselect'}`, {cart_ids: [cart_id]}, {hload: true}).then((res) => {
+            this.setUpdateData(res);
+          })
         },
 
-        selectedBtnSelected() {
-          const self = this;
-          const cart_ids = this.products.filter(e => e.selected).map(x => x.cart_id)
+        allSelectedBtn() {
+          const cart_ids = this.products.map(x => x.cart_id)
 
-          $http.post(`/carts/select`, {cart_ids: cart_ids}, {hload: true}).then((res) => {
+          $http.post(`/carts/${this.allSelected ? 'select' : 'unselect'}`, {cart_ids: cart_ids}, {hload: true}).then((res) => {
             this.setUpdateData(res);
           })
         },
