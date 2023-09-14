@@ -58,7 +58,12 @@
         <tr>
           @if ($order->shipping_country)
             <td>
-              <div>{{ __('address.name') }}：{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
+              <div>
+                {{ __('address.name') }}：{{ $order->shipping_customer_name }}
+                @if ($order->shipping_telephone)
+                ({{ $order->shipping_telephone }})
+                @endif
+              </div>
               <div>
                 {{ __('address.address') }}：
                 {{ $order->shipping_address_1 }}
@@ -71,7 +76,12 @@
             </td>
           @endif
           <td>
-            <div>{{ __('address.name') }}：{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
+            <div>
+              {{ __('address.name') }}：{{ $order->payment_customer_name }}
+              @if ($order->payment_telephone)
+              ({{ $order->payment_telephone }})
+              @endif
+            </div>
             <div>
               {{ __('address.address') }}：
               {{ $order->payment_address_1 }}
