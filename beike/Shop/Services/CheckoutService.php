@@ -269,7 +269,7 @@ class CheckoutService
         $data = [
             'current'          => [
                 'shipping_address_id'    => $shippingRequired ? $currentCart->shipping_address_id : 0,
-                'guest_shipping_address' => $shippingRequired ? $currentCart->guest_shipping_address : [],
+                'guest_shipping_address' => $shippingRequired ? $currentCart->guest_shipping_address : null,
                 'shipping_method_code'   => $shippingRequired ? $currentCart->shipping_method_code : '',
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
