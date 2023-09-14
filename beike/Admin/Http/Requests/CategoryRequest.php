@@ -35,9 +35,9 @@ class CategoryRequest extends FormRequest
     {
         return [
             'descriptions.*.name'             => trans('category.name'),
-            'descriptions.*.meta_title'       => trans('category.meta_title'),
-            'descriptions.*.meta_keywords'    => trans('category.meta_keywords'),
-            'descriptions.*.meta_description' => trans('category.meta_description'),
+            'descriptions.*.meta_title'       => 'Meta Title',
+            'descriptions.*.meta_keywords'    => 'Meta Keywords',
+            'descriptions.*.meta_description' => 'Meta Description',
         ];
     }
 }
