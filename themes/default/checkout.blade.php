@@ -152,14 +152,15 @@
     });
 
     $('#submit-checkout').click(function(event) {
-      if (checkoutAddressApp.shippingRequired) { // 虚拟商品不需要填写地址
-        if (!config.isLogin && checkoutAddressApp.source.guest_shipping_address === null) {
-          layer.msg('{{ __('shop/checkout.error_address') }}', ()=>{})
-          return;
-        }
+      const address = config.isLogin ? checkoutAddressApp.form.shipping_address_id : checkoutAddressApp.source.guest_shipping_address;
+      const payment = config.isLogin ? checkoutAddressApp.form.payment_address_id : checkoutAddressApp.source.guest_payment_address;
+
+      if (checkoutAddressApp.shippingRequired && !address) {
+        layer.msg('{{ __('shop/checkout.error_address') }}', ()=>{})
+        return;
       }
 
-      if (config.isLogin && !checkoutAddressApp.form.payment_address_id) {
+      if (!payment) {
         layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
         return;
       }
@@ -168,10 +169,9 @@
         comment: $('textarea[name=comment]').val()
       }
 
-      console.log(11);
-      // $http.post('/checkout/confirm',data).then((res) => {
-      //   location = 'orders/' + res.number + '/pay?type=create'
-      // })
+      $http.post('/checkout/confirm',data).then((res) => {
+        location = 'orders/' + res.number + '/pay?type=create'
+      })
     });
 
     $('.guest-checkout-login').click(function(event) {
