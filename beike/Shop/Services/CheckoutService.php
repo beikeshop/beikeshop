@@ -252,7 +252,8 @@ class CheckoutService
         $addresses = AddressRepo::listByCustomer($customer);
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
         $shipments = [];
-        if ($this->shippingRequired()) {
+        $shippingRequired = $this->shippingRequired();
+        if ($shippingRequired) {
             $shipments = ShippingMethodService::getShippingMethods($this);
 
             $shipmentCodes = [];
@@ -267,14 +268,15 @@ class CheckoutService
 
         $data = [
             'current'          => [
-                'shipping_address_id'    => $this->shippingRequired() ? $currentCart->shipping_address_id : 0,
-                'guest_shipping_address' => $this->shippingRequired() ? $currentCart->guest_shipping_address : 0,
-                'shipping_method_code'   => $this->shippingRequired() ? $currentCart->shipping_method_code : 0,
+                'shipping_address_id'    => $shippingRequired ? $currentCart->shipping_address_id : 0,
+                'guest_shipping_address' => $shippingRequired ? $currentCart->guest_shipping_address : [],
+                'shipping_method_code'   => $shippingRequired ? $currentCart->shipping_method_code : '',
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
                 'payment_method_code'    => $currentCart->payment_method_code,
                 'extra'                  => $currentCart->extra,
             ],
+            'shipping_require' => $shippingRequired,
             'country_id'       => (int) system_setting('base.country_id'),
             'customer_id'      => $customer->id ?? null,
             'countries'        => CountryRepo::listEnabled(),
