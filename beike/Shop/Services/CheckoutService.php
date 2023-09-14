@@ -292,14 +292,9 @@ class CheckoutService
 
     private function shippingRequired(): bool
     {
-        $cartList           = CartService::list(current_customer(), true);
-        foreach ($cartList as $item) {
-            if ($item['shipping']){
-                return true;
-            }
-        }
+        $customer = current_customer();
 
-        return false;
+        return CartRepo::shippingRequired($customer->id);
     }
 
     public static function formatAddress($address)

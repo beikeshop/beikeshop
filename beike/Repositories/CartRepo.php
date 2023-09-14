@@ -44,9 +44,11 @@ class CartRepo
         }
 
         if (empty($cart)) {
-            $shippingMethod     = PluginRepo::getShippingMethods()->first();
-            $paymentMethod      = PluginRepo::getPaymentMethods()->first();
+            if (self::shippingRequired($customerId)) {
+                $shippingMethod = PluginRepo::getShippingMethods()->first();
+            }
             $shippingMethodCode = $shippingMethod->code ?? '';
+            $paymentMethod      = PluginRepo::getPaymentMethods()->first();
             $cart               = Cart::query()->create([
                 'customer_id'          => $customerId,
                 'session_id'           => $sessionId,
@@ -89,6 +91,18 @@ class CartRepo
             Cart::query()->where('session_id', session()->getId())->delete();
         }
         self::selectedCartProductsBuilder($customerId)->delete();
+    }
+
+    public static function shippingRequired($customerId)
+    {
+        $cartList           = self::selectedCartProducts($customerId);
+        foreach ($cartList as $item) {
+            if ($item['shipping']){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
