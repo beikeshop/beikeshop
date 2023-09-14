@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'Generar un Token',
+    'create_token'  => 'Generar un Token',
     'password_text' => 'Contraseña dejada en blanco no se modifica',
 ];

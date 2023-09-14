@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'Produzione totale',
+    'create_token'  => 'Produzione totale',
     'password_text' => 'La password non viene modificata',
 ];

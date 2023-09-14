@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'Générer un Token',
+    'create_token'  => 'Générer un Token',
     'password_text' => 'Le mot de passe laissé vide n\'est pas modifié',
 ];

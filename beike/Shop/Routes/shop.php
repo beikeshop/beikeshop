@@ -76,6 +76,7 @@ Route::prefix('/')
                 Route::post('carts', [CartController::class, 'store'])->name('carts.store');
                 Route::put('carts/{cart}', [CartController::class, 'update'])->name('carts.update');
                 Route::post('carts/select', [CartController::class, 'select'])->name('carts.select');
+                Route::post('carts/unselect', [CartController::class, 'unselect'])->name('carts.unselect');
                 Route::delete('carts/{cart}', [CartController::class, 'destroy'])->name('carts.destroy');
 
                 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');

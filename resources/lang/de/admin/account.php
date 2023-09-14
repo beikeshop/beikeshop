@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'Wir haben Token gestalkt.',
+    'create_token'  => 'Wir haben Token gestalkt.',
     'password_text' => 'Ein entspertes passwort wird nicht geändert',
 ];

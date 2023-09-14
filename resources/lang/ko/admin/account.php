@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => '토큰 생성',
+    'create_token'  => '토큰 생성',
     'password_text' => '비밀번호가 비어 있으면 변경하지 않습니다',
 ];
