@@ -155,9 +155,11 @@ class CheckoutService
         $current = $checkoutData['current'];
 
         if ($this->customer) {
-            $shippingAddressId = $current['shipping_address_id'];
-            if (empty(Address::query()->find($shippingAddressId))) {
-                throw new \Exception(trans('shop/carts.invalid_shipping_address'));
+            if ($this->shippingRequired()) {
+                $shippingAddressId = $current['shipping_address_id'];
+                if (empty(Address::query()->find($shippingAddressId))) {
+                    throw new \Exception(trans('shop/carts.invalid_shipping_address'));
+                }
             }
 
             $paymentAddressId = $current['payment_address_id'];
@@ -165,7 +167,7 @@ class CheckoutService
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }
         } else {
-            if (! $current['guest_shipping_address']) {
+            if ($this->shippingRequired() && ! $current['guest_shipping_address']) {
                 throw new \Exception(trans('shop/carts.invalid_shipping_address'));
             }
 
@@ -174,9 +176,11 @@ class CheckoutService
             }
         }
 
-        $shippingMethodCode = $current['shipping_method_code'];
-        if (! PluginRepo::shippingEnabled($shippingMethodCode)) {
-            throw new \Exception(trans('shop/carts.invalid_shipping_method'));
+        if ($this->shippingRequired()) {
+            $shippingMethodCode = $current['shipping_method_code'];
+            if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
+                throw new \Exception(trans('shop/carts.invalid_shipping_method'));
+            }
         }
 
         $paymentMethodCode = $current['payment_method_code'];
@@ -246,23 +250,26 @@ class CheckoutService
         }
 
         $addresses = AddressRepo::listByCustomer($customer);
-        $shipments = ShippingMethodService::getShippingMethods($this);
-        $payments  = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+        $shipments = [];
+        if ($this->shippingRequired()) {
+            $shipments = ShippingMethodService::getShippingMethods($this);
 
-        $shipmentCodes = [];
-        foreach ($shipments as $shipment) {
-            $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
-        }
-        if (! in_array($currentCart->shipping_method_code, $shipmentCodes)) {
-            $this->updateShippingMethod($shipmentCodes[0] ?? '');
-            $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
+            $shipmentCodes = [];
+            foreach ($shipments as $shipment) {
+                $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
+            }
+            if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
+                $this->updateShippingMethod($shipmentCodes[0] ?? '');
+                $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
+            }
         }
 
         $data = [
             'current'          => [
-                'shipping_address_id'    => $currentCart->shipping_address_id,
-                'guest_shipping_address' => $currentCart->guest_shipping_address,
-                'shipping_method_code'   => $currentCart->shipping_method_code,
+                'shipping_address_id'    => $this->shippingRequired() ? $currentCart->shipping_address_id : 0,
+                'guest_shipping_address' => $this->shippingRequired() ? $currentCart->guest_shipping_address : 0,
+                'shipping_method_code'   => $this->shippingRequired() ? $currentCart->shipping_method_code : 0,
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
                 'payment_method_code'    => $currentCart->payment_method_code,
@@ -279,6 +286,18 @@ class CheckoutService
         ];
 
         return hook_filter('service.checkout.data', $data);
+    }
+
+    private function shippingRequired(): bool
+    {
+        $cartList           = CartService::list(current_customer(), true);
+        foreach ($cartList as $item) {
+            if ($item['shipping']){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function formatAddress($address)

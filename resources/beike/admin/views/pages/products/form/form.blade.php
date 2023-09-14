@@ -150,6 +150,7 @@
                 @endforeach
               </div>
             </x-admin::form.row>
+            <x-admin-form-switch name="shipping" :title="__('admin/common.shipping')" :value="old('shipping', $product->shipping ?? 1)" />
 
             <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 

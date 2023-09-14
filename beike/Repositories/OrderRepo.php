@@ -203,7 +203,7 @@ class OrderRepo
             $shippingAddressId = $current['shipping_address_id'] ?? 0;
             $paymentAddressId  = $current['payment_address_id']  ?? 0;
 
-            $shippingAddress = Address::query()->findOrFail($shippingAddressId);
+            $shippingAddress = $shippingAddressId ? Address::query()->findOrFail($shippingAddressId) : new Address();
             $paymentAddress  = Address::query()->findOrFail($paymentAddressId);
             $email           = $customer->email;
         } else {
@@ -243,17 +243,17 @@ class OrderRepo
             'status'                 => StateMachineService::CREATED,
             'shipping_method_code'   => $shippingMethodCode,
             'shipping_method_name'   => trans($shippingMethodCode),
-            'shipping_customer_name' => $shippingAddress->name,
+            'shipping_customer_name' => $shippingAddress->name ?? '',
             'shipping_calling_code'  => $shippingAddress->calling_code ?? 0,
             'shipping_telephone'     => $shippingAddress->phone        ?? '',
             'shipping_country'       => $shippingAddress->country_name ?? '',
             'shipping_country_id'    => $shippingAddress->country_id   ?? 0,
-            'shipping_zone'          => $shippingAddress->zone,
+            'shipping_zone'          => $shippingAddress->zone ?? '',
             'shipping_zone_id'       => $shippingAddress->zone_id ?? 0,
-            'shipping_city'          => $shippingAddress->city,
-            'shipping_address_1'     => $shippingAddress->address_1,
-            'shipping_address_2'     => $shippingAddress->address_2,
-            'shipping_zipcode'       => $shippingAddress->zipcode,
+            'shipping_city'          => $shippingAddress->city ?? '',
+            'shipping_address_1'     => $shippingAddress->address_1 ?? '',
+            'shipping_address_2'     => $shippingAddress->address_2 ?? '',
+            'shipping_zipcode'       => $shippingAddress->zipcode ?? '',
             'payment_method_code'    => $paymentMethodCode,
             'payment_method_name'    => trans($paymentMethodCode),
             'payment_customer_name'  => $paymentAddress->name,
