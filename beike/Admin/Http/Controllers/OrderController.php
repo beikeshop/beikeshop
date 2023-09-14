@@ -34,14 +34,15 @@ class OrderController extends Controller
     {
         $orders = OrderRepo::filterOrders($request->all());
         $data   = [
-            'orders'   => OrderSimpleList::collection($orders),
-            'statuses' => StateMachineService::getAllStatuses(),
+            'orders'          => OrderSimpleList::collection($orders),
+            'statuses'        => StateMachineService::getAllStatuses(),
             'type'            => 'trashed',
         ];
         $data = hook_filter('admin.order.index.data', $data);
 
         return view('admin::pages.orders.index', $data);
     }
+
     /**
      * 获取订单回收站列表
      *
@@ -53,10 +54,10 @@ class OrderController extends Controller
     {
         $requestData            = $request->all();
         $requestData['trashed'] = true;
-        $orders = OrderRepo::filterOrders($requestData);
-        $data   = [
-            'orders'   => OrderSimpleList::collection($orders),
-            'statuses' => StateMachineService::getAllStatuses(),
+        $orders                 = OrderRepo::filterOrders($requestData);
+        $data                   = [
+            'orders'          => OrderSimpleList::collection($orders),
+            'statuses'        => StateMachineService::getAllStatuses(),
             'type'            => 'trashed',
         ];
         $data = hook_filter('admin.order.trashed.data', $data);

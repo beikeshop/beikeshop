@@ -21,17 +21,23 @@ class CategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'descriptions.*.name' => 'required|max:255',
+            'descriptions.*.name'             => 'required|max:255',
+            'descriptions.*.meta_title'       => 'max:191',
+            'descriptions.*.meta_keywords'    => 'max:191',
+            'descriptions.*.meta_description' => 'max:191',
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
-            'descriptions.*.name' => trans('category.name'),
+            'descriptions.*.name'             => trans('category.name'),
+            'descriptions.*.meta_title'       => 'Meta Title',
+            'descriptions.*.meta_keywords'    => 'Meta Keywords',
+            'descriptions.*.meta_description' => 'Meta Description',
         ];
     }
 }

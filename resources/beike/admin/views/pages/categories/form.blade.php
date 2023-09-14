@@ -45,7 +45,9 @@
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta title">{{ old('meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_title]"
+              class="{{ $errors->first("descriptions.{$language['code']}.meta_title") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta title">{{ old('descriptions.' . $language['code'] . '.meta_title', $category->descriptions->keyBy('locale')[$language->code]->meta_title ?? '') }}</textarea>
+            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_title") }}</div>
           </div>
           @endforeach
           @include('admin::shared.auto-translation')
@@ -54,7 +56,9 @@
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta keywords">{{ old('meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_keywords]"
+              class="{{ $errors->first("descriptions.{$language['code']}.meta_keywords") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta keywords">{{ old('descriptions.' . $language['code'] . '.meta_keywords', $category->descriptions->keyBy('locale')[$language->code]->meta_keywords ?? '') }}</textarea>
+            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_keywords") }}</div>
           </div>
           @endforeach
           @include('admin::shared.auto-translation')
@@ -63,7 +67,9 @@
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
             <span class="input-group-text wp-100">{{ $language['name'] }}</span>
-            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]" class="form-control input-{{ $language['code'] }} wp-400" placeholder="Meta description">{{ old('meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+            <textarea rows="2" type="text" name="descriptions[{{ $language['code'] }}][meta_description]"
+              class="{{ $errors->first("descriptions.{$language['code']}.meta_description") ? 'is-invalid' : '' }} form-control input-{{ $language['code'] }} wp-400" placeholder="Meta description">{{ old('descriptions.' . $language['code'] . '.meta_description', $category->descriptions->keyBy('locale')[$language->code]->meta_description ?? '') }}</textarea>
+            <div class="invalid-feedback">{{ $errors->first("descriptions.{$language['code']}.meta_description") }}</div>
           </div>
           @endforeach
           @include('admin::shared.auto-translation')

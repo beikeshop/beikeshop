@@ -42,7 +42,7 @@ class CartService
         $cartItems = $cartItems->filter(function ($item) {
             $description = $item->sku->product->description ?? '';
             $product     = $item->product                   ?? null;
-            if (empty($description) || empty($product)) {
+            if (empty($description) || empty($product) || !$product->active) {
                 $item->delete();
 
                 return false;
