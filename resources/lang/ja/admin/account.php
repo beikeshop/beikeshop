@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'トークンを生成します',
+    'create_token'  => 'トークンを生成します',
     'password_text' => 'パスワードが空ければ変更しません',
 ];

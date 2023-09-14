@@ -34,15 +34,43 @@ class CartController extends Controller
      */
     public function select(Request $request): JsonResponse
     {
-        $cartIds  = $request->get('cart_ids');
-        $customer = current_customer();
-        CartService::select($customer, $cartIds);
+        try {
+            $cartIds  = $request->get('cart_ids');
+            $customer = current_customer();
+            CartService::select($customer, $cartIds);
 
-        $data = CartService::reloadData();
+            $data = CartService::reloadData();
 
-        $data = hook_filter('cart.select.data', $data);
+            $data = hook_filter('cart.select.data', $data);
 
-        return json_success(trans('common.updated_success'), $data);
+            return json_success(trans('common.updated_success'), $data);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    /**
+     * 不选中购物车商品
+     *
+     * POST /carts/unselect {cart_ids:[1, 2]}
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unselect(Request $request): JsonResponse
+    {
+        try {
+            $cartIds  = $request->get('cart_ids');
+            $customer = current_customer();
+            CartService::unselect($customer, $cartIds);
+
+            $data = CartService::reloadData();
+
+            $data = hook_filter('cart.select.data', $data);
+
+            return json_success(trans('common.updated_success'), $data);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**

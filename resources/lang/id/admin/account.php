@@ -10,6 +10,6 @@
  */
 
 return [
-    'create_token' => 'Untuk menghasilkan Token',
+    'create_token'  => 'Untuk menghasilkan Token',
     'password_text' => 'Password tetap kosong',
 ];
