@@ -251,20 +251,9 @@ class CheckoutService
 
         $addresses = AddressRepo::listByCustomer($customer);
         $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
-        $shipments = [];
+        $shipments = ShippingMethodService::getShippingMethodsForCurrentCart($this);
         $shippingRequired = $this->shippingRequired();
-        if ($shippingRequired) {
-            $shipments = ShippingMethodService::getShippingMethods($this);
-
-            $shipmentCodes = [];
-            foreach ($shipments as $shipment) {
-                $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
-            }
-            if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
-                $this->updateShippingMethod($shipmentCodes[0] ?? '');
-                $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
-            }
-        }
+        $this->setDefaultCurrentShippingMethod($shipments);
 
         $data = [
             'current'          => [
@@ -288,6 +277,24 @@ class CheckoutService
         ];
 
         return hook_filter('service.checkout.data', $data);
+    }
+
+    private function setDefaultCurrentShippingMethod($shipments)
+    {
+        $currentCart = $this->cart;
+        if ($this->shippingRequired()) {
+            $shipmentCodes = [];
+            foreach ($shipments as $shipment) {
+                $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
+            }
+            if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
+                $this->updateShippingMethod($shipmentCodes[0] ?? '');
+                $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
+            }
+        } else {
+            $this->updateShippingMethod('');
+        }
+
     }
 
     private function shippingRequired(): bool

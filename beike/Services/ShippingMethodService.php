@@ -12,6 +12,7 @@
 namespace Beike\Services;
 
 use Beike\Admin\Http\Resources\PluginResource;
+use Beike\Repositories\CartRepo;
 use Beike\Repositories\PluginRepo;
 use Beike\Shop\Services\CheckoutService;
 use Illuminate\Support\Str;
@@ -51,5 +52,21 @@ class ShippingMethodService
         }
 
         return $shippingMethods;
+    }
+
+    /**
+     * 获取配送方式, 二维数组, 一个配送插件对应多个配送方式
+     *
+     * @param CheckoutService $checkout
+     * @return array
+     * @throws \Exception
+     */
+    public static function getShippingMethodsForCurrentCart(CheckoutService $checkout): array
+    {
+        $customerId = current_customer()->id ?? 0;
+        if (CartRepo::shippingRequired($customerId)) {
+            return [];
+        }
+        return self::getShippingMethods($checkout);
     }
 }
