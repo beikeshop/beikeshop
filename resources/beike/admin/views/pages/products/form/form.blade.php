@@ -137,6 +137,8 @@
 
             <x-admin-form-select :title="__('admin/tax_class.index')" name="tax_class_id" :value="old('tax_class_id', $product->tax_class_id ?? '')" :options="$tax_classes" key="id" label="title" />
 
+            <x-admin-form-select name="shipping" :title="__('admin/common.shipping')" :value="old('shipping', $product->shipping ?? 1)" :options="[['title' => __('common.yes'), 'id' => 1], ['title' => __('common.no'),'id' => 0]]" key="id" label="title" />
+
             <x-admin::form.row :title="__('admin/category.index')">
               <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
                 @foreach ($source['categories'] as $_category)
@@ -150,7 +152,6 @@
                 @endforeach
               </div>
             </x-admin::form.row>
-            <x-admin-form-switch name="shipping" :title="__('admin/common.shipping')" :value="old('shipping', $product->shipping ?? 1)" />
 
             <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 
