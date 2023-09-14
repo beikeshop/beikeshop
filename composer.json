@@ -24,6 +24,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "league/csv": "^9.8",
+        "mollie/mollie-api-php": "^2.61",
         "phpoffice/phpspreadsheet": "^1.28",
         "spatie/laravel-permission": "^5.5",
         "srmklive/paypal": "^3.0",
