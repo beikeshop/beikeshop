@@ -294,7 +294,7 @@ class CheckoutService
     {
         $customer = current_customer();
 
-        return CartRepo::shippingRequired($customer->id);
+        return CartRepo::shippingRequired($customer->id ?? 0);
     }
 
     public static function formatAddress($address)
