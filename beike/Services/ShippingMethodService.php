@@ -64,7 +64,7 @@ class ShippingMethodService
     public static function getShippingMethodsForCurrentCart(CheckoutService $checkout): array
     {
         $customerId = current_customer()->id ?? 0;
-        if (CartRepo::shippingRequired($customerId)) {
+        if (!CartRepo::shippingRequired($customerId)) {
             return [];
         }
         return self::getShippingMethods($checkout);
