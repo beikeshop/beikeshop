@@ -13,6 +13,7 @@ namespace Beike\AdminAPI\Controllers;
 
 use Beike\Models\Brand;
 use Beike\Repositories\BrandRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class BrandController
@@ -48,9 +49,9 @@ class BrandController
      * 创建品牌
      *
      * @param Request $request
-     * @return array
+     * @return JsonResponse
      */
-    public function store(Request $request): array
+    public function store(Request $request): JsonResponse
     {
         $requestData = $request->all();
         $data        = [
@@ -67,10 +68,10 @@ class BrandController
     /**
      * @param Request $request
      * @param Brand   $brand
-     * @return array
+     * @return JsonResponse
      * @throws \Exception
      */
-    public function update(Request $request, Brand $brand): array
+    public function update(Request $request, Brand $brand): JsonResponse
     {
         $requestData = $request->all();
         $data        = [
@@ -87,9 +88,9 @@ class BrandController
     /**
      * @param Request $request
      * @param Brand   $brand
-     * @return array
+     * @return JsonResponse
      */
-    public function destroy(Request $request, Brand $brand): array
+    public function destroy(Request $request, Brand $brand): JsonResponse
     {
         hook_action('admin_api.brand.destroy.before', $brand);
         BrandRepo::delete($brand);

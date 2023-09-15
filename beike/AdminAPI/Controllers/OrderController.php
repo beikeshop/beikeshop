@@ -16,6 +16,7 @@ use Beike\Models\OrderShipment;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\ShipmentService;
 use Beike\Services\StateMachineService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController
@@ -56,10 +57,10 @@ class OrderController
      *
      * @param Request $request
      * @param Order   $order
-     * @return array
+     * @return JsonResponse
      * @throws \Throwable
      */
-    public function updateStatus(Request $request, Order $order)
+    public function updateStatus(Request $request, Order $order): JsonResponse
     {
         $status  = $request->get('status');
         $comment = $request->get('comment');
@@ -80,7 +81,7 @@ class OrderController
     /**
      * 更新发货信息
      */
-    public function updateShipment(Request $request, Order $order, int $orderShipmentId): array
+    public function updateShipment(Request $request, Order $order, int $orderShipmentId): JsonResponse
     {
         $data          = $request->all();
         $orderShipment = OrderShipment::query()->where('order_id', $order->id)->findOrFail($orderShipmentId);
