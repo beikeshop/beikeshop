@@ -62,7 +62,7 @@
               </div>
 
               <div class="col-sm-6 mb-4">
-                <label class="form-label">{{ __('shop/account/creation_time') }}</label>
+                <label class="form-label">{{ __('shop/account/rma.creation_time') }}</label>
                 <div>
                   {{ $rma->created_at }}
                 </div>
