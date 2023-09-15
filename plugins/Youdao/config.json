@@ -5,7 +5,7 @@
         "en": "Youdao Translator"
     },
     "description": {
-        "zh_cn": "有道翻译插件, 可以翻译商品、分类、文章",
+        "zh_cn": "有道翻译插件, 可以翻译商品、分类",
         "en": "Translate product, category and page by Youdao Translator"
     },
     "type": "translator",
