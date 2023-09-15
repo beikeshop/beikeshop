@@ -65,9 +65,9 @@ class TranslationService
     {
         $translatorName = hook_filter('admin.service.translator', '');
         if (empty($translatorName)) {
-            throw new \Exception('Empty translator name');
+            throw new \Exception(trans('admin/translation.empty_translator'));
         } elseif (! class_exists($translatorName)) {
-            throw new \Exception("Cannot found the class {$translatorName}");
+            throw new \Exception(trans('admin/translation.class_not_found', ['translator_name' => $translatorName]));
         }
 
         $translator = new $translatorName;
