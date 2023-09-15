@@ -19,6 +19,8 @@ class AdminUser extends AuthUser implements JWTSubject
 
     protected $fillable = ['name', 'email', 'locale', 'password', 'active'];
 
+    protected $appends = ['is_root'];
+
     public function tokens(): HasMany
     {
         return $this->hasMany(AdminUserToken::class);
@@ -32,6 +34,12 @@ class AdminUser extends AuthUser implements JWTSubject
         } else {
             $this->notifyNow(new AdminForgottenNotification($this, $code));
         }
+    }
+
+
+    public function getIsRootAttribute()
+    {
+        return $this->id == 1;
     }
 
     /**
