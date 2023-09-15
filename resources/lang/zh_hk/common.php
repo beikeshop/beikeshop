@@ -89,12 +89,4 @@ return [
     'error_page'           => '您訪問的數據不存在或已被刪除~',
     'error_page_btn'       => '返回上一頁',
     'no_repeat'            => '請勿重新添加',
-
-    'order'                => [
-        'unpaid'    => '待支付',
-        'paid'      => '已支付',
-        'shipped'   => '已發貨',
-        'completed' => '已完成',
-        'cancelled' => '已取消',
-    ],
 ];

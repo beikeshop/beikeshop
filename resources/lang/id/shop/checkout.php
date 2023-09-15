@@ -28,16 +28,12 @@ return [
     'select_province'          => 'Silakan pilih provinsi',
     'enter_city'               => 'Silakan isi kota',
     'check_form'               => 'Harap periksa apakah formulir diisi dengan benar',
-
     'error_address'            => 'Silakan pilih alamat',
     'error_payment_address'    => 'Silakan pilih alamat penagihan',
     'checkout_success_title'   => 'Pesanan berhasil dibayar! ',
-
-    'payment'                  => [
-        'index'           => 'Tolong bayar',
-        'please_pay'      => 'Pesanan berhasil dikirim, harap bayar',
-        'order_number'    => 'Nomor pesanan',
-        'amounts_payable' => 'Jumlah yang harus dibayar',
-        'payment_method'  => 'Metode Pembayaran',
-    ],
+    'payment_index'            => 'Tolong bayar',
+    'payment_please_pay'       => 'Pesanan berhasil dikirim, harap bayar',
+    'payment_order_number'     => 'Nomor pesanan',
+    'payment_amounts_payable'  => 'Jumlah yang harus dibayar',
+    'payment_payment_method'   => 'Metode Pembayaran',
 ];

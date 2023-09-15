@@ -84,12 +84,4 @@ return [
     'sort_order'           => '選別',
     'error_page'           => 'アクセスしたデータは存在しないか削除されています~',
     'error_page_btn'       => '前のページに戻る',
-
-    'order'                => [
-        'unpaid'    => '支払われる',
-        'paid'      => '有料',
-        'shipped'   => '発送済み',
-        'completed' => '完了',
-        'cancelled' => 'キャンセル',
-    ],
 ];

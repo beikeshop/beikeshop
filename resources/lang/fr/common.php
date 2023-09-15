@@ -84,12 +84,4 @@ return [
     'sort_order'           => 'trier',
     'error_page'           => 'Les données auxquelles vous avez accédé n\'existent pas ou ont été supprimées~',
     'error_page_btn'       => 'Retour à la page précédente',
-
-    'order'                => [
-        'unpaid'    => 'Être payé',
-        'paid'      => 'Payé',
-        'shipped'   => 'Expédié',
-        'completed' => 'complété',
-        'cancelled' => 'Annulé',
-    ],
 ];

@@ -31,14 +31,10 @@ return [
     'error_address'            => '请选择地址',
     'error_payment_address'    => '请选择账单地址',
     'checkout_success_title'   => '订单已付款成功！',
-
-    'payment'                  => [
-        'index'           => '请付款',
-        'please_pay'      => '订单提交成功，请付款',
-        'order_number'    => '订单编号',
-        'amounts_payable' => '应付金额',
-        'payment_method'  => '支付方式',
-    ],
-
-    'comment'             => '订单备注',
+    'payment_index'            => '请付款',
+    'payment_please_pay'       => '订单提交成功，请付款',
+    'payment_order_number'     => '订单编号',
+    'payment_amounts_payable'  => '应付金额',
+    'payment_payment_method'   => '支付方式',
+    'comment'                  => '订单备注',
 ];

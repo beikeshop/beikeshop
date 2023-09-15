@@ -31,12 +31,9 @@ return [
     'error_address'            => '請選擇地址',
     'error_payment_address'    => '請選擇賬單地址',
     'checkout_success_title'   => '訂單已付款成功！',
-
-    'payment'                  => [
-        'index'           => '請付款',
-        'please_pay'      => '訂單提交成功，請付款',
-        'order_number'    => '訂單編號',
-        'amounts_payable' => '應付金額',
-        'payment_method'  => '支付方式',
-    ],
+    'payment_index'            => '請付款',
+    'payment_please_pay'       => '訂單提交成功，請付款',
+    'payment_order_number'     => '訂單編號',
+    'payment_amounts_payable'  => '應付金額',
+    'payment_payment_method'   => '支付方式',
 ];

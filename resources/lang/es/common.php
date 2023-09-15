@@ -84,12 +84,4 @@ return [
     'sort_order'           => 'clasificar',
     'error_page'           => 'Los datos a los que accedió no existen o han sido eliminados~',
     'error_page_btn'       => 'Volver a la página anterior',
-
-    'order'                => [
-        'unpaid'    => 'A pagar',
-        'paid'      => 'Pagado',
-        'shipped'   => 'Enviado',
-        'completed' => 'terminado',
-        'cancelled' => 'Cancelado',
-    ],
 ];

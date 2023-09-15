@@ -16,16 +16,16 @@
               <i class="bi bi-credit-card-2-back"></i>
             </div>
             <div class="right">
-              <h3 class="order-title">{{ __('shop/checkout.payment.please_pay') }}</h3>
+              <h3 class="order-title">{{ __('shop/checkout.payment_please_pay') }}</h3>
               <div class="order-info mb-4">
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
-                      <td>{{ __('shop/checkout.payment.order_number') }}：<span class="fw-bold">{{ $order['number'] }}</span></td>
-                      <td>{{ __('shop/checkout.payment.amounts_payable') }}：<span class="fw-bold">{{ $order['total_format'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment_order_number') }}：<span class="fw-bold">{{ $order['number'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment_amounts_payable') }}：<span class="fw-bold">{{ $order['total_format'] }}</span></td>
                     </tr>
                     <tr>
-                      <td>{{ __('shop/checkout.payment.payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
+                      <td>{{ __('shop/checkout.payment_payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
                     </tr>
                   </tbody>
                 </table>

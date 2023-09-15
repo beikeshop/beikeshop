@@ -30,12 +30,9 @@ return [
     'check_form'               => 'フォームが正しく記入されていることを確認してください',
     'error_address'            => 'アドレスを選択してください',
     'error_payment_address'    => '請求先住所を選択してください',
-
-    'payment'                  => [
-        'index'           => '支払ってください',
-        'please_pay'      => '注文が正常に送信されました。お支払いください',
-        'order_number'    => '注文番号',
-        'amounts_payable' => '支払額',
-        'payment_method'  => '支払方法',
-    ],
+    'payment_index'            => '支払ってください',
+    'payment_please_pay'       => '注文が正常に送信されました。お支払いください',
+    'payment_order_number'     => '注文番号',
+    'payment_amounts_payable'  => '支払額',
+    'payment_payment_method'   => '支払方法',
 ];

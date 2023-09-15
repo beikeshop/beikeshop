@@ -30,12 +30,9 @@ return [
     'check_form'               => 'Bitte prüfen Sie, ob das Formular korrekt ausgefüllt ist',
     'error_address'            => 'Bitte wählen Sie eine Adresse aus',
     'error_payment_address'    => 'Bitte wählen Sie die Rechnungsadresse',
-
-    'payment'                  => [
-        'index'           => 'bitte bezahlen',
-        'please_pay'      => 'Bestellung erfolgreich übermittelt, bitte bezahlen',
-        'order_number'    => 'Bestellnummer',
-        'amounts_payable' => 'zu zahlender Betrag',
-        'payment_method'  => 'Zahlungsmethode',
-    ],
+    'payment_index'            => 'bitte bezahlen',
+    'payment_please_pay'       => 'Bestellung erfolgreich übermittelt, bitte bezahlen',
+    'payment_order_number'     => 'Bestellnummer',
+    'payment_amounts_payable'  => 'zu zahlender Betrag',
+    'payment_payment_method'   => 'Zahlungsmethode',
 ];
