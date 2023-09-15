@@ -1,38 +1,40 @@
 <?php
 /**
- * common.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-17 23:10:20
- * @modified   2022-08-17 23:10:20
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-15 09:17:05
  */
 
 return [
-    'index'                    => 'Счет, пожалуйста',
-    'address'                  => 'адресс доставки',
-    'payment_address'          => 'Адрес для выставления счета',
-    'same_as_shipping_address' => 'Платежный адрес и адрес доставки',
-    'chosen'                   => 'выбранный',
-    'edit'                     => 'редактировать',
-    'choose_another_address'   => 'Выбрать другой адрес',
     'add_new_address'          => 'Добавить новый адрес',
-    'payment_method'           => 'метод оплаты',
-    'delivery_method'          => 'способ доставки',
+    'address'                  => 'адресс доставки',
     'cart_totals'              => 'Общее количество тележек',
-    'submit_order'             => 'Подтвердить заказ',
+    'check_form'               => 'Пожалуйста, проверьте правильность заполнения формы',
+    'checkout_success_title'   => 'Заказ оплачен!',
+    'choose_another_address'   => 'Выбрать другой адрес',
+    'chosen'                   => 'выбранный',
+    'comment'                  => 'Внимание!',
+    'delivery_method'          => 'способ доставки',
+    'edit'                     => 'редактировать',
+    'enter_address'            => 'Пожалуйста, введите подробный адрес 1',
+    'enter_city'               => 'Пожалуйста, заполните город',
     'enter_name'               => 'Пожалуйста, введите ваше имя',
     'enter_phone'              => 'Пожалуйста, введите свой номер телефона',
-    'enter_address'            => 'Пожалуйста, введите подробный адрес 1',
-    'select_province'          => 'Выберите провинцию',
-    'enter_city'               => 'Пожалуйста, заполните город',
-    'check_form'               => 'Пожалуйста, проверьте правильность заполнения формы',
     'error_address'            => 'Пожалуйста, выберите адрес',
     'error_payment_address'    => 'Пожалуйста, выберите платежный адрес',
-    'payment_index'            => 'пожалуйста оплатите',
-    'payment_please_pay'       => 'Заказ отправлен успешно, пожалуйста, оплатите',
-    'payment_order_number'     => 'порядковый номер',
+    'index'                    => 'Счет, пожалуйста',
+    'payment_address'          => 'Адрес для выставления счета',
     'payment_amounts_payable'  => 'Суммы к оплате',
+    'payment_index'            => 'пожалуйста оплатите',
+    'payment_method'           => 'метод оплаты',
+    'payment_order_number'     => 'порядковый номер',
     'payment_payment_method'   => 'метод оплаты',
+    'payment_please_pay'       => 'Заказ отправлен успешно, пожалуйста, оплатите',
+    'same_as_shipping_address' => 'Платежный адрес и адрес доставки',
+    'select_province'          => 'Выберите провинцию',
+    'submit_order'             => 'Подтвердить заказ',
 ];
