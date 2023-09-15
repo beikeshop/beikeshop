@@ -1,5 +1,5 @@
 <div id="checkout-address-app" v-cloak>
-  <div class="checkout-black">
+  <div class="checkout-black" v-if="shippingRequired">
     <div class="checkout-title">
       <div class="d-flex">
         <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <div class="checkout-black" v-if='!same_as_shipping_address'>
+  <div class="checkout-black" v-if='!this.shippingRequired || !same_as_shipping_address'>
     <div class="checkout-title">
       <div class="d-flex">
         <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
@@ -148,6 +148,7 @@
 
   <address-dialog ref="address-dialog" @change="onAddressDialogChange"></address-dialog>
 </div>
+
 @push('add-scripts')
 @include('shared.address-form')
 <script>
@@ -162,6 +163,7 @@
 
       isAllAddress: false,
       isAllAddressPayment: false,
+      shippingRequired: @json($shipping_require ?? true),
 
       source: {
         addresses: @json($addresses ?? []),

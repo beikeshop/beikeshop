@@ -13,6 +13,7 @@ return [
     'admin_panel'            => '后台管理',
     'edit'                   => '编辑',
     'status'                 => '状态',
+    'shipping'               => '是否需要配送',
     'action'                 => '操作',
     'install'                => '安装',
     'uninstall'              => '卸载',

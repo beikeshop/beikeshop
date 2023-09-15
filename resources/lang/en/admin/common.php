@@ -13,6 +13,7 @@ return [
     'admin_panel'                      => 'Admin Panel',
     'edit'                             => 'Edit',
     'status'                           => 'Status',
+    'shipping'                         => 'Shipping?',
     'action'                           => 'Action',
     'install'                          => 'Install',
     'uninstall'                        => 'Uninstall',

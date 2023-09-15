@@ -28,6 +28,7 @@ return [
     'select_province'          => 'Seleziona una provincia',
     'enter_city'               => 'Compila la città',
     'check_form'               => 'Verifica se il modulo è compilato correttamente',
+    'error_address'            => 'Seleziona un indirizzo',
     'error_payment_address'    => 'Seleziona l\'indirizzo di fatturazione',
 
     'payment'                  => [

@@ -28,6 +28,7 @@ return [
     'select_province'          => '성을 선택하십시오',
     'enter_city'               => '도시를 적어주세요',
     'check_form'               => '양식이 올바르게 작성되었는지 확인하십시오',
+    'error_address'            => '주소를 선택해주세요',
     'error_payment_address'    => '계산서 주소를 선택하세요',
     'checkout_success_title'   => '주문 결제 완료!',
 

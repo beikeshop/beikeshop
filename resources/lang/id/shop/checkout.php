@@ -28,6 +28,8 @@ return [
     'select_province'          => 'Silakan pilih provinsi',
     'enter_city'               => 'Silakan isi kota',
     'check_form'               => 'Harap periksa apakah formulir diisi dengan benar',
+
+    'error_address'            => 'Silakan pilih alamat',
     'error_payment_address'    => 'Silakan pilih alamat penagihan',
     'checkout_success_title'   => 'Pesanan berhasil dibayar! ',
 

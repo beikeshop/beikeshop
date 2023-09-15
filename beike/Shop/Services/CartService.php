@@ -54,6 +54,7 @@ class CartService
                 $item->quantity = $skuQuantity;
                 $item->save();
             }
+            $item->shipping = $product->shipping;
 
             return $description && $product;
         });

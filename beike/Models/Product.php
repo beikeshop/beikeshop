@@ -11,7 +11,7 @@ class Product extends Base
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['images', 'video', 'position', 'brand_id', 'tax_class_id', 'weight', 'weight_class', 'active', 'variables'];
+    protected $fillable = ['images', 'video', 'position', 'brand_id', 'tax_class_id', 'weight', 'weight_class', 'active', 'shipping', 'variables'];
 
     protected $casts = [
         'active'    => 'boolean',

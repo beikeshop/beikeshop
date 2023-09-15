@@ -43,26 +43,28 @@
               </div>
             </div>
 
-            <div class="checkout-black">
-              <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
-              <div class="radio-line-wrap" id="shipping-methods-wrap">
-                @foreach ($shipping_methods as $methods)
-                  @foreach ($methods['quotes'] as $shipping)
-                  <div class="radio-line-item {{ $shipping['code'] == $current['shipping_method_code'] ? 'active':'' }}" data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
-                    <div class="left">
-                      <span class="radio"></span>
-                      <img src="{{ $shipping['icon'] }}" class="img-fluid">
+            @if ($shipping_require)
+              <div class="checkout-black">
+                <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
+                <div class="radio-line-wrap" id="shipping-methods-wrap">
+                  @foreach ($shipping_methods as $methods)
+                    @foreach ($methods['quotes'] as $shipping)
+                    <div class="radio-line-item {{ $shipping['code'] == $current['shipping_method_code'] ? 'active':'' }}" data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
+                      <div class="left">
+                        <span class="radio"></span>
+                        <img src="{{ $shipping['icon'] }}" class="img-fluid">
+                      </div>
+                      <div class="right ms-2">
+                        <div class="title">{{ $shipping['name'] }}</div>
+                        <div class="sub-title">{!! $shipping['description'] !!}</div>
+                        <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>
+                      </div>
                     </div>
-                    <div class="right ms-2">
-                      <div class="title">{{ $shipping['name'] }}</div>
-                      <div class="sub-title">{!! $shipping['description'] !!}</div>
-                      <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>
-                    </div>
-                  </div>
+                    @endforeach
                   @endforeach
-                @endforeach
+                </div>
               </div>
-            </div>
+            @endif
 
             <div class="checkout-black">
               <h5 class="checkout-title">{{ __('shop/checkout.comment') }}</h5>
@@ -152,12 +154,15 @@
     });
 
     $('#submit-checkout').click(function(event) {
-      if (!config.isLogin && checkoutAddressApp.source.guest_shipping_address === null) {
-        layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
+      const address = config.isLogin ? checkoutAddressApp.form.shipping_address_id : checkoutAddressApp.source.guest_shipping_address;
+      const payment = config.isLogin ? checkoutAddressApp.form.payment_address_id : checkoutAddressApp.source.guest_payment_address;
+
+      if (checkoutAddressApp.shippingRequired && !address) {
+        layer.msg('{{ __('shop/checkout.error_address') }}', ()=>{})
         return;
       }
 
-      if (config.isLogin && !checkoutAddressApp.form.payment_address_id) {
+      if (!payment) {
         layer.msg('{{ __('shop/checkout.error_payment_address') }}', ()=>{})
         return;
       }

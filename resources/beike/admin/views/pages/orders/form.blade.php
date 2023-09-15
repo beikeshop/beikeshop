@@ -6,7 +6,6 @@
 @hook('order.detail.title.right')
 @endsection
 
-
 @section('content')
   @hookwrapper('admin.order.form.base')
   <div class="card mb-4">
@@ -71,14 +70,22 @@
       <table class="table">
         <thead class="">
           <tr>
+            @if ($order->shipping_country)
             <th>{{ __('order.shipping_address') }}</th>
+            @endif
             <th>{{ __('order.payment_address') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            @if ($order->shipping_country)
             <td>
-              <div>{{ __('address.name') }}：{{ $order->shipping_customer_name }} ({{ $order->shipping_telephone }})</div>
+              <div>
+                {{ __('address.name') }}：{{ $order->shipping_customer_name }}
+                @if ($order->shipping_telephone)
+                ({{ $order->shipping_telephone }})
+                @endif
+              </div>
               <div>
                 {{ __('address.address') }}：
                 {{ $order->shipping_address_1 }}
@@ -89,8 +96,14 @@
               </div>
               <div>{{ __('address.post_code') }}：{{ $order->shipping_zipcode }}</div>
             </td>
+            @endif
             <td>
-              <div>{{ __('address.name') }}：{{ $order->payment_customer_name }} ({{ $order->payment_telephone }})</div>
+              <div>
+                {{ __('address.name') }}：{{ $order->payment_customer_name }}
+                @if ($order->payment_telephone)
+                ({{ $order->payment_telephone }})
+                @endif
+              </div>
               <div>
                 {{ __('address.address') }}：
                 {{ $order->payment_address_1 }}

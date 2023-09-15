@@ -155,9 +155,11 @@ class CheckoutService
         $current = $checkoutData['current'];
 
         if ($this->customer) {
-            $shippingAddressId = $current['shipping_address_id'];
-            if (empty(Address::query()->find($shippingAddressId))) {
-                throw new \Exception(trans('shop/carts.invalid_shipping_address'));
+            if ($this->shippingRequired()) {
+                $shippingAddressId = $current['shipping_address_id'];
+                if (empty(Address::query()->find($shippingAddressId))) {
+                    throw new \Exception(trans('shop/carts.invalid_shipping_address'));
+                }
             }
 
             $paymentAddressId = $current['payment_address_id'];
@@ -165,7 +167,7 @@ class CheckoutService
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }
         } else {
-            if (! $current['guest_shipping_address']) {
+            if ($this->shippingRequired() && ! $current['guest_shipping_address']) {
                 throw new \Exception(trans('shop/carts.invalid_shipping_address'));
             }
 
@@ -174,9 +176,11 @@ class CheckoutService
             }
         }
 
-        $shippingMethodCode = $current['shipping_method_code'];
-        if (! PluginRepo::shippingEnabled($shippingMethodCode)) {
-            throw new \Exception(trans('shop/carts.invalid_shipping_method'));
+        if ($this->shippingRequired()) {
+            $shippingMethodCode = $current['shipping_method_code'];
+            if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
+                throw new \Exception(trans('shop/carts.invalid_shipping_method'));
+            }
         }
 
         $paymentMethodCode = $current['payment_method_code'];
@@ -211,12 +215,14 @@ class CheckoutService
 
     private function updateShippingMethod($shippingMethodCode)
     {
-        $this->cart->update(['shipping_method_code' => $shippingMethodCode]);
+        $this->cart->shipping_method_code = $shippingMethodCode;
+        $this->cart->save();
     }
 
     private function updatePaymentMethod($paymentMethodCode)
     {
-        $this->cart->update(['payment_method_code' => $paymentMethodCode]);
+        $this->cart->payment_method_code = $paymentMethodCode;
+        $this->cart->save();
     }
 
     public function initTotalService()
@@ -246,28 +252,22 @@ class CheckoutService
         }
 
         $addresses = AddressRepo::listByCustomer($customer);
-        $shipments = ShippingMethodService::getShippingMethods($this);
-        $payments  = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
-
-        $shipmentCodes = [];
-        foreach ($shipments as $shipment) {
-            $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
-        }
-        if (! in_array($currentCart->shipping_method_code, $shipmentCodes)) {
-            $this->updateShippingMethod($shipmentCodes[0] ?? '');
-            $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
-        }
+        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+        $shipments = ShippingMethodService::getShippingMethodsForCurrentCart($this);
+        $shippingRequired = $this->shippingRequired();
+        $this->setDefaultCurrentShippingMethod($shipments);
 
         $data = [
             'current'          => [
-                'shipping_address_id'    => $currentCart->shipping_address_id,
-                'guest_shipping_address' => $currentCart->guest_shipping_address,
-                'shipping_method_code'   => $currentCart->shipping_method_code,
+                'shipping_address_id'    => $shippingRequired ? $currentCart->shipping_address_id : 0,
+                'guest_shipping_address' => $shippingRequired ? $currentCart->guest_shipping_address : null,
+                'shipping_method_code'   => $shippingRequired ? $currentCart->shipping_method_code : '',
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
                 'payment_method_code'    => $currentCart->payment_method_code,
                 'extra'                  => $currentCart->extra,
             ],
+            'shipping_require' => $shippingRequired,
             'country_id'       => (int) system_setting('base.country_id'),
             'customer_id'      => $customer->id ?? null,
             'countries'        => CountryRepo::listEnabled(),
@@ -279,6 +279,32 @@ class CheckoutService
         ];
 
         return hook_filter('service.checkout.data', $data);
+    }
+
+    private function setDefaultCurrentShippingMethod($shipments)
+    {
+        $currentCart = $this->cart;
+        if ($this->shippingRequired()) {
+            $shipmentCodes = [];
+            foreach ($shipments as $shipment) {
+                $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
+            }
+            if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
+                $this->updateShippingMethod($shipmentCodes[0] ?? '');
+                $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
+            }
+        } else {
+            $this->updateShippingMethod('');
+            $this->totalService->setShippingMethod('');
+        }
+
+    }
+
+    private function shippingRequired(): bool
+    {
+        $customer = current_customer();
+
+        return CartRepo::shippingRequired($customer->id ?? 0);
     }
 
     public static function formatAddress($address)

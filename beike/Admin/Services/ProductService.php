@@ -30,6 +30,7 @@ class ProductService
             $data['position']  = (int) ($data['position'] ?? 0);
             $data['weight']    = (float) ($data['weight'] ?? 0);
             $data['variables'] = json_decode($data['variables'] ?? '[]');
+            $data['shipping']  = (bool) ($data['shipping'] ?? 1);
             $product->fill($data);
             $product->updated_at = now();
             $product->save();
