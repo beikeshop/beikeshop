@@ -44,7 +44,7 @@ class CartRepo
         }
 
         if (empty($cart)) {
-            $shippingMethod = PluginRepo::getShippingMethods()->first();
+            $shippingMethod     = PluginRepo::getShippingMethods()->first();
             $shippingMethodCode = $shippingMethod->code ?? '';
             $paymentMethod      = PluginRepo::getPaymentMethods()->first();
             $cart               = Cart::query()->create([
@@ -95,7 +95,7 @@ class CartRepo
     {
         $cartList           = self::selectedCartProducts($customerId);
         foreach ($cartList as $item) {
-            if ($item->product->shipping){
+            if ($item->product->shipping) {
                 return true;
             }
         }

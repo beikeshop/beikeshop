@@ -178,7 +178,7 @@ class CheckoutService
 
         if ($this->shippingRequired()) {
             $shippingMethodCode = $current['shipping_method_code'];
-            if (!PluginRepo::shippingEnabled($shippingMethodCode)) {
+            if (! PluginRepo::shippingEnabled($shippingMethodCode)) {
                 throw new \Exception(trans('shop/carts.invalid_shipping_method'));
             }
         }
@@ -251,9 +251,9 @@ class CheckoutService
             $this->initTotalService();
         }
 
-        $addresses = AddressRepo::listByCustomer($customer);
-        $payments = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
-        $shipments = ShippingMethodService::getShippingMethodsForCurrentCart($this);
+        $addresses        = AddressRepo::listByCustomer($customer);
+        $payments         = PaymentMethodItem::collection(PluginRepo::getPaymentMethods())->jsonSerialize();
+        $shipments        = ShippingMethodService::getShippingMethodsForCurrentCart($this);
         $shippingRequired = $this->shippingRequired();
         $this->setDefaultCurrentShippingMethod($shipments);
 
@@ -289,7 +289,7 @@ class CheckoutService
             foreach ($shipments as $shipment) {
                 $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
             }
-            if (!in_array($currentCart->shipping_method_code, $shipmentCodes)) {
+            if (! in_array($currentCart->shipping_method_code, $shipmentCodes)) {
                 $this->updateShippingMethod($shipmentCodes[0] ?? '');
                 $this->totalService->setShippingMethod($shipmentCodes[0] ?? '');
             }
