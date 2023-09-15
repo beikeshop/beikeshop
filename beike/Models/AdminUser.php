@@ -19,8 +19,6 @@ class AdminUser extends AuthUser implements JWTSubject
 
     protected $fillable = ['name', 'email', 'locale', 'password', 'active'];
 
-    protected $appends = ['is_root'];
-
     public function tokens(): HasMany
     {
         return $this->hasMany(AdminUserToken::class);
