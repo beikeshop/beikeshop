@@ -146,6 +146,17 @@
   </div>
 </div>
 
+@if ($order->comment)
+  <div class="card mb-4">
+    <div class="card-header">
+      <h6 class="card-title">{{ __('order.comment') }}</h6>
+    </div>
+    <div class="card-body">
+      {{ $order->comment }}
+    </div>
+  </div>
+@endif
+
 @foreach ($html_items as $item)
   {!! $item !!}
 @endforeach
