@@ -30,12 +30,9 @@ return [
     'check_form'               => 'Пожалуйста, проверьте правильность заполнения формы',
     'error_address'            => 'Пожалуйста, выберите адрес',
     'error_payment_address'    => 'Пожалуйста, выберите платежный адрес',
-
-    'payment'                  => [
-        'index'           => 'пожалуйста оплатите',
-        'please_pay'      => 'Заказ отправлен успешно, пожалуйста, оплатите',
-        'order_number'    => 'порядковый номер',
-        'amounts_payable' => 'Суммы к оплате',
-        'payment_method'  => 'метод оплаты',
-    ],
+    'payment_index'            => 'пожалуйста оплатите',
+    'payment_please_pay'       => 'Заказ отправлен успешно, пожалуйста, оплатите',
+    'payment_order_number'     => 'порядковый номер',
+    'payment_amounts_payable'  => 'Суммы к оплате',
+    'payment_payment_method'   => 'метод оплаты',
 ];

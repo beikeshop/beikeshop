@@ -88,12 +88,4 @@ return [
     'error_page'     => '접속한 데이터가 존재하지 않거나 삭제되었습니다~',
     'error_page_btn' => '이전 페이지로 돌아가기',
     'no_repeat'      => '다시 추가하지 마세요',
-
-    'order' => [
-        'unpaid'    => '지불할 것',
-        'paid'      => '지불완료',
-        'shipped'   => '발송되었습니다',
-        'completed' => '완료됨',
-        'cancelled' => '취소되었습니다',
-    ],
 ];

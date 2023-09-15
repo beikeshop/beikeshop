@@ -13,7 +13,7 @@
         </p>
         <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
           <span style="color: rgb(51, 51, 51); font-size: 14px;">{{ __('mail.order_update_status', ['number' => $order->number]) }}：
-            <span style="font-weight: bold;">{{ __("common.order.{$order->status}") }}</span>
+            <span style="font-weight: bold;">{{ $order->status_format }}</span>
           </span>
         </p>
 

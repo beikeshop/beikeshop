@@ -92,12 +92,4 @@ return [
     'no_repeat'            => 'Do not re-add',
     'text_hour'            => 'Hour',
     'cropper_size'         => 'Crop Size',
-
-    'order'                => [
-        'unpaid'    => 'Unpaid',
-        'paid'      => 'Paid',
-        'shipped'   => 'Shipped',
-        'completed' => 'Completed',
-        'cancelled' => 'Cancelled',
-    ],
 ];

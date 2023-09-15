@@ -30,12 +30,9 @@ return [
     'check_form'               => 'Veuillez vérifier que le formulaire est correctement rempli',
     'error_address'            => 'Veuillez sélectionner une adresse',
     'error_payment_address'    => 'Veuillez sélectionner une adresse de facturation',
-
-    'payment'                  => [
-        'index'           => 'payez s\'il vous plait',
-        'please_pay'      => 'Commande soumise avec succès, veuillez payer',
-        'order_number'    => 'numéro de commande',
-        'amounts_payable' => 'Montants à payer',
-        'payment_method'  => 'mode de paiement',
-    ],
+    'payment_index'            => 'payez s\'il vous plait',
+    'payment_please_pay'       => 'Commande soumise avec succès, veuillez payer',
+    'payment_order_number'     => 'numéro de commande',
+    'payment_amounts_payable'  => 'Montants à payer',
+    'payment_payment_method'   => 'mode de paiement',
 ];

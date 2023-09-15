@@ -30,12 +30,9 @@ return [
     'check_form'               => 'Verifica se il modulo è compilato correttamente',
     'error_address'            => 'Seleziona un indirizzo',
     'error_payment_address'    => 'Seleziona l\'indirizzo di fatturazione',
-
-    'payment'                  => [
-        'index'           => 'per favore paga',
-        'please_pay'      => 'Ordine inviato con successo, si prega di pagare',
-        'order_number'    => 'numero d\'ordine',
-        'amounts_payable' => 'Importi da pagare',
-        'payment_method'  => 'metodo di pagamento',
-    ],
+    'payment_index'            => 'per favore paga',
+    'payment_please_pay'       => 'Ordine inviato con successo, si prega di pagare',
+    'payment_order_number'     => 'numero d\'ordine',
+    'payment_amounts_payable'  => 'Importi da pagare',
+    'payment_payment_method'   => 'metodo di pagamento',
 ];

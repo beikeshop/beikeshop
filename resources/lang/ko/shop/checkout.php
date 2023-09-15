@@ -31,12 +31,9 @@ return [
     'error_address'            => '주소를 선택해주세요',
     'error_payment_address'    => '계산서 주소를 선택하세요',
     'checkout_success_title'   => '주문 결제 완료!',
-
-    'payment' => [
-        'index'           => '지불하세요',
-        'please_pay'      => '주문 제출 완료, 결제 부탁드립니다',
-        'order_number'    => '주문번호',
-        'amounts_payable' => '미지급금액',
-        'payment_method'  => '지불방식',
-    ],
+    'payment_index'            => '지불하세요',
+    'payment_please_pay'       => '주문 제출 완료, 결제 부탁드립니다',
+    'payment_order_number'     => '주문번호',
+    'payment_amounts_payable'  => '미지급금액',
+    'payment_payment_method'   => '지불방식',
 ];

@@ -91,12 +91,4 @@ return [
     'no_repeat'            => '请勿重新添加',
     'text_hour'            => '小时',
     'cropper_size'         => '裁剪框尺寸',
-
-    'order'                => [
-        'unpaid'    => '待支付',
-        'paid'      => '已支付',
-        'shipped'   => '已发货',
-        'completed' => '已完成',
-        'cancelled' => '已取消',
-    ],
 ];

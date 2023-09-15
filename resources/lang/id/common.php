@@ -86,11 +86,4 @@ return [
     'error_page_btn'       => 'Kembali ke halaman sebelumnya',
     'no_repeat'            => 'Jangan tambahkan kembali',
 
-    'order'                => [
-        'unpaid'    => 'Dibayar',
-        'paid'      => 'dibayar',
-        'shipped'   => 'dikirim',
-        'completed' => 'Selesai',
-        'cancelled' => 'dibatalkan',
-    ],
 ];
