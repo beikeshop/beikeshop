@@ -33,6 +33,12 @@ class AdminUser extends AuthUser
         }
     }
 
+
+    public function getIsRootAttribute()
+    {
+        return $this->id == 1;
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
