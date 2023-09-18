@@ -244,11 +244,11 @@
             </x-admin::form.row>
 
             <x-admin::form.row :title="__('admin/setting.order_auto_complete')">
-            <div class="input-group wp-400">
-              <input type="number" value="{{ old('order_auto_cancel', system_setting('base.order_auto_cancel', '')) }}" name="order_auto_complete" class="form-control" placeholder="{{ __('admin/setting.order_auto_complete') }}">
-              <span class="input-group-text">{{ __('common.text_hour') }}</span>
-            </div>
-          </x-admin::form.row>
+              <div class="input-group wp-400">
+                <input type="number" value="{{ old('order_auto_complete', system_setting('base.order_auto_complete', '')) }}" name="order_auto_complete" class="form-control" placeholder="{{ __('admin/setting.order_auto_complete') }}">
+                <span class="input-group-text">{{ __('common.text_hour') }}</span>
+              </div>
+            </x-admin::form.row>
           </div>
 
           @hook('admin.setting.after')
