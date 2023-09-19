@@ -97,7 +97,7 @@
                         <i v-else class="bi bi-plus fs-1 text-muted"></i>
                       </div>
                       <a v-if="form.video.url" target="_blank" :href="form.video.url">{{ __('common.view') }}</a>
-                      <span v-if="form.video.url" @click="form.video.path = ''" class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
+                      <span v-if="form.video.url" @click="deleteVideo" class="text-danger cursor-pointer ms-2">{{ __('common.delete') }}</span>
                     </div>
                     <div class="help-text mt-1">{{ __('admin/product.video_help') }}</div>
                   </div>
@@ -706,6 +706,11 @@
           if (this.form.video.videoType == 'custom')  {
             this.form.video.path = this.form.video.custom;
           }
+        },
+
+        deleteVideo() {
+          this.form.video.path = ''
+          this.form.video.url = ''
         },
 
         relationsQuerySearch(keyword, cb) {
