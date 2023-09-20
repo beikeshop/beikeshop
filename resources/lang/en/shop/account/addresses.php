@@ -19,7 +19,7 @@ return [
     'enter_phone'     => 'Please type your phone number',
     'enter_address'   => 'Please enter detailed address 1',
     'select_province' => 'Please select province',
-    'enter_city'      => 'Please fill in the city',
+    'enter_city'      => 'City',
     'confirm_delete'  => 'Are you sure you want to delete the address?',
     'hint'            => 'Hint',
     'check_form'      => 'Please check that the form is filled out correctly',
