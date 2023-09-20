@@ -30,8 +30,20 @@
           </el-form-item>
         </div>
         <div class="d-flex dialog-address">
-          <el-form-item prop="city" label="{{ __('shop/account/addresses.enter_city') }}" required class="w-50">
+          <el-form-item label="{{ __('address.phone') }}" class="w-50">
+            <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
+          </el-form-item>
+          <el-form-item prop="city" label="{{ __('shop/account/addresses.enter_city') }}" required class="w-50 ms-3">
             <el-input v-model="form.city" placeholder="{{ __('shop/account/addresses.enter_city') }}"></el-input>
+          </el-form-item>
+        </div>
+        <div class="d-flex">
+          <el-form-item label="{{ __('address.country') }}" required class="w-50">
+            <el-select v-model="form.country_id" class="w-100" filterable placeholder="{{ __('address.country_id') }}" @change="countryChange">
+              <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
+              :value="item.id">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item prop="zone_id" label="{{ __('address.zone') }}" class="w-50 ms-3">
             <el-select v-model="form.zone_id" class="w-100" filterable placeholder="{{ __('address.zone') }}">
@@ -39,18 +51,6 @@
                 :value="item.id">
               </el-option>
             </el-select>
-          </el-form-item>
-        </div>
-        <div class="d-flex">
-          <el-form-item label="{{ __('address.country') }}" required class="w-50">
-            <el-select v-model="form.country_id" class="w-100" filterable placeholder="{{ __('address.country_id') }}" @change="countryChange">
-              <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
-                :value="item.id">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="{{ __('address.phone') }}" class="w-50 ms-3">
-            <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
           </el-form-item>
         </div>
         <el-form-item label="" v-if="source.isLogin">
