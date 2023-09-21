@@ -13,6 +13,7 @@ return [
     'index'      => 'Edit Address',
     'name'       => 'Full name',
     'phone'      => 'Phone',
+    'country'    => 'Country',
     'country_id' => 'Country ID',
     'zone'       => 'Zone',
     'zone_id'    => 'Zone ID',

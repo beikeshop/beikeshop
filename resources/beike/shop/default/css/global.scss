@@ -397,3 +397,9 @@ img {
     }
   }
 }
+
+.address-dialog {
+  .el-form-item__label {
+    line-height: initial;
+  }
+}
