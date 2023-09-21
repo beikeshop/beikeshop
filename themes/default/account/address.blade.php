@@ -32,8 +32,7 @@
                       <span class="phone">@{{ address.phone }}</span>
                     </div>
                     <div class="zipcode">@{{ address.zipcode }}</div>
-                    <div class="address-info">@{{ address.country }} @{{ address.zone }} @{{ address.city }}
-                      @{{ address.address_1 }}</div>
+                    <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
                     <div class="address-bottom">
                       <div><span class="badge bg-success"
                           v-if="address.default">{{ __('shop/account/addresses.default_address') }}</span></div>

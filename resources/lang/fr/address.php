@@ -1,25 +1,26 @@
 <?php
 /**
- * address.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-22 18:18:59
- * @modified   2022-08-22 18:18:59
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-09-20 03:20:49
  */
 
 return [
+    'address'    => 'adresse',
+    'address_1'  => 'Adresse 1',
+    'address_2'  => 'Adresse 2',
+    'country'    => 'pays',
+    'country_id' => 'Identifiant du pays',
+    'default'    => 'Adresse par défaut',
+    'enter_city' => 'entrer l\'adresse',
     'index'      => 'Modifier l\'adresse',
     'name'       => 'Nom',
     'phone'      => 'numéro de téléphone',
-    'country_id' => 'Identifiant du pays',
+    'post_code'  => 'code postal',
     'zone'       => 'Province',
     'zone_id'    => 'Identifiant provincial',
-    'address_1'  => 'Adresse 1',
-    'address_2'  => 'Adresse 2',
-    'address'    => 'adresse',
-    'enter_city' => 'entrer l\'adresse',
-    'post_code'  => 'code postal',
-    'default'    => 'Adresse par défaut',
 ];

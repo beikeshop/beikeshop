@@ -1,59 +1,60 @@
 <template id="address-dialog">
-  <div>
+  <div class="address-dialog">
     <el-dialog custom-class="mobileWidth" title="{{ __('address.index') }}" :visible.sync="editShow" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
-      <el-form ref="addressForm" :rules="rules" :model="form" label-width="100px">
-        <el-form-item label="{{ __('address.name') }}" prop="name">
-          <el-input v-model="form.name" placeholder="{{ __('address.name') }}"></el-input>
-        </el-form-item>
-        @if (!current_customer())
-          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'">
+      <el-form ref="addressForm" :rules="rules" label-position="top" :model="form" label-width="100px">
+        <div class="d-flex">
+          <el-form-item label="{{ __('address.name') }}" class="w-50" prop="name">
+            <el-input v-model="form.name" placeholder="{{ __('address.name') }}"></el-input>
+          </el-form-item>
+          @if (!current_customer())
+          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'" class="w-50 ms-3">
             <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
           </el-form-item>
-        @endif
-        <el-form-item label="{{ __('address.address') }}" required>
-          <div class="row dialog-address">
-            <div class="col-4">
-              <el-form-item>
-                <el-select v-model="form.country_id" filterable placeholder="{{ __('address.country_id') }}" @change="countryChange">
-                  <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </div>
-            <div class="col-4 mt-2 mt-sm-0">
-              <el-form-item prop="zone_id">
-                <el-select v-model="form.zone_id" filterable placeholder="{{ __('address.zone') }}">
-                  <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
-                    :value="item.id">
-                  </el-option>
-                </el-select>
-              </el-form-item>
-            </div>
-            <div class="col-4 mt-2 mt-sm-0">
-              <el-form-item prop="city">
-                <el-input v-model="form.city" placeholder="{{ __('shop/account/addresses.enter_city') }}"></el-input>
-              </el-form-item>
-            </div>
-          </div>
-        </el-form-item>
+          @else
+          <el-form-item label="{{ __('address.address_1') }}"  class="w-50 ms-3" prop="address_1">
+            <el-input v-model="form.address_1" placeholder="{{ __('address.address_1') }}"></el-input>
+          </el-form-item>
+          @endif
+        </div>
+        @if (!current_customer())
         <el-form-item label="{{ __('address.address_1') }}" prop="address_1">
           <el-input v-model="form.address_1" placeholder="{{ __('address.address_1') }}"></el-input>
         </el-form-item>
-        <el-form-item label="{{ __('address.address_2') }}">
-          <el-input v-model="form.address_2" placeholder="{{ __('address.address_2') }}"></el-input>
-        </el-form-item>
-        <el-form-item label="{{ __('address.post_code') }}" prop="zipcode">
-          <el-input v-model="form.zipcode" placeholder="{{ __('address.post_code') }}"></el-input>
-        </el-form-item>
-        <el-form-item label="{{ __('address.phone') }}">
-          <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
-        </el-form-item>
-        <el-form-item label="{{ __('address.default') }}" v-if="source.isLogin">
-          <el-switch
-            v-model="form.default"
-            >
-          </el-switch>
+        @endif
+        <div class="d-flex">
+          <el-form-item label="{{ __('address.address_2') }}" class="w-50">
+            <el-input v-model="form.address_2" placeholder="{{ __('address.address_2') }}"></el-input>
+          </el-form-item>
+          <el-form-item label="{{ __('address.post_code') }}" class="w-50 ms-3">
+            <el-input v-model="form.zipcode" placeholder="{{ __('address.post_code') }}"></el-input>
+          </el-form-item>
+        </div>
+        <div class="d-flex dialog-address">
+          <el-form-item label="{{ __('address.phone') }}" class="w-50">
+            <el-input maxlength="11" v-model="form.phone" type="number" placeholder="{{ __('address.phone') }}"></el-input>
+          </el-form-item>
+          <el-form-item prop="city" label="{{ __('shop/account/addresses.enter_city') }}" required class="w-50 ms-3">
+            <el-input v-model="form.city" placeholder="{{ __('shop/account/addresses.enter_city') }}"></el-input>
+          </el-form-item>
+        </div>
+        <div class="d-flex">
+          <el-form-item label="{{ __('address.country') }}" required class="w-50">
+            <el-select v-model="form.country_id" class="w-100" filterable placeholder="{{ __('address.country_id') }}" @change="countryChange">
+              <el-option v-for="item in source.countries" :key="item.id" :label="item.name"
+              :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item prop="zone_id" label="{{ __('address.zone') }}" class="w-50 ms-3">
+            <el-select v-model="form.zone_id" class="w-100" filterable placeholder="{{ __('address.zone') }}">
+              <el-option v-for="item in source.zones" :key="item.id" :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </div>
+        <el-form-item label="" v-if="source.isLogin">
+          <span class="me-2">{{ __('address.default') }}</span> <el-switch v-model="form.default"></el-switch>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="addressFormSubmit('addressForm')">{{ __('common.save') }}</el-button>
@@ -80,6 +81,7 @@
       type: 'shipping_address_id',
       form: {
         name: '',
+        email: '',
         phone: '',
         country_id: @json((int) system_setting('base.country_id')),
         zipcode: '',
