@@ -44,6 +44,7 @@ class PluginRepo
     public static function installPlugin(BPlugin $bPlugin)
     {
         self::publishThemeFiles($bPlugin);
+        self::publishLangFiles($bPlugin);
         self::migrateDatabase($bPlugin);
         $type   = $bPlugin->type;
         $code   = $bPlugin->code;
@@ -78,7 +79,7 @@ class PluginRepo
      *
      * @param $bPlugin
      */
-    public static function publishThemeFiles($bPlugin)
+    public static function publishThemeFiles($bPlugin): void
     {
         if ($bPlugin->getType() != 'theme') {
             return;
@@ -96,6 +97,24 @@ class PluginRepo
     }
 
     /**
+     * Publish lang files
+     *
+     * @param $bPlugin
+     * @return void
+     */
+    public static function publishLangFiles($bPlugin): void
+    {
+        if ($bPlugin->getType() != 'language') {
+            return;
+        }
+
+        $langPath = $bPlugin->getPath() . '/Lang';
+        if (is_dir($langPath)) {
+            File::copyDirectory($langPath, resource_path('lang'));
+        }
+    }
+
+    /**
      * Run plugin seeder
      *
      * @param $bPlugin
@@ -108,8 +127,8 @@ class PluginRepo
 
             $seederFiles = glob($seederPath . '*');
             foreach ($seederFiles as $seederFile) {
-                $seederName   = basename($seederFile, '.php');
-                $className    = "\\Plugin\\{$bPlugin->getDirname()}\\Seeders\\{$seederName}";
+                $seederName = basename($seederFile, '.php');
+                $className  = "\\Plugin\\{$bPlugin->getDirname()}\\Seeders\\{$seederName}";
                 if (class_exists($className)) {
                     $seeder = new $className;
                     $seeder->run();

@@ -33,7 +33,6 @@ class AdminUser extends AuthUser
         }
     }
 
-
     public function getIsRootAttribute()
     {
         return $this->id == 1;
