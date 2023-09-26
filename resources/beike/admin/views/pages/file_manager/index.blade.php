@@ -17,14 +17,20 @@
   <link rel="stylesheet" href="{{ asset('vendor/element-ui/index-blue.css') }}">
   <link href="{{ mix('build/beike/admin/css/filemanager.css') }}" rel="stylesheet">
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
-  @if (locale() != 'zh_cn')
-  <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
-  @endif
   <title>beike filemanager</title>
   <script>
-    @if (locale() != 'zh_cn')
-      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
-    @endif
+    // 获取 iframe 父级 html 标签的 lang 属性
+    const htmlLang = parent.document.getElementsByTagName('html')[0].getAttribute('lang');
+
+    if (htmlLang != 'zh_cn') {
+      const js = document.createElement('script');
+      js.src = `vendor/element-ui/language/${htmlLang}.js`;
+      document.head.appendChild(js);
+      js.onload = () => {
+        ELEMENT.locale(ELEMENT.lang[htmlLang])
+      }
+    }
+
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
     }
@@ -197,9 +203,6 @@
   @stack('admin.file_manager.footer')
 
   <script>
-    @if (locale() != 'zh_cn')
-      ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
-    @endif
     var callback = null;
 
     var app = new Vue({
