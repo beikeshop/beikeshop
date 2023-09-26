@@ -677,7 +677,8 @@
           let fileSuffix, fileName = '';
 
           if (type == 'download') {
-            window.open(`{{ admin_route('file_manager.export') }}?path=${data.path}`);
+            const base = document.getElementsByTagName('base')[0].href;
+            window.open(base + `/file_manager/export?path=${data.path}`);
             return;
           }
 
