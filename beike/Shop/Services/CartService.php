@@ -193,12 +193,14 @@ class CartService
      * 获取购物车相关数据
      *
      * @param array $carts
+     * @param null  $customer
      * @return array
      */
-    public static function reloadData(array $carts = []): array
+    public static function reloadData(array $carts = [], $customer = null): array
     {
+        $customer = $customer ?: current_customer();
         if (empty($carts)) {
-            $carts = self::list(current_customer());
+            $carts = self::list($customer);
         }
 
         $cartList = collect($carts)->where('selected', 1);
