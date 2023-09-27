@@ -52,6 +52,7 @@ class ProductRepo
      * @param $categoryId
      * @param $filterData
      * @return LengthAwarePaginator
+     * @throws \Exception
      */
     public static function getProductsByCategory($categoryId, $filterData)
     {
@@ -198,7 +199,16 @@ class ProductRepo
 
         $sort  = $filters['sort']  ?? 'products.position';
         $order = $filters['order'] ?? 'desc';
-        $builder->orderBy($sort, $order);
+        if ($sort == 'product_skus.price') {
+            $builder->join('product_skus', function ($query) {
+                $query->on('product_skus.product_id', '=', 'products.id')
+                    ->where('is_default', true);
+            });
+        }
+
+        if (in_array($sort, ['products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
+            $builder->orderBy($sort, $order);
+        }
 
         return hook_filter('repo.product.builder', $builder);
     }
