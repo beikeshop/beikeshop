@@ -44,8 +44,10 @@ class CheckoutService
     public function __construct($customer = null)
     {
         if (is_int($customer) || empty($customer)) {
-            $this->customer = current_customer();
+            $customer = current_customer();
         }
+
+        $this->customer = $customer;
 
         $this->cart             = CartRepo::createCart($this->customer);
         $this->selectedProducts = CartRepo::selectedCartProducts($this->customer->id ?? 0);
@@ -106,7 +108,7 @@ class CheckoutService
      */
     public function confirm(): Order
     {
-        $customer                 = current_customer();
+        $customer                 = $this->customer;
         $checkoutData             = self::checkoutData();
         $checkoutData['customer'] = $customer;
         $checkoutData['comment']  = request('comment');
