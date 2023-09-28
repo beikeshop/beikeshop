@@ -766,6 +766,22 @@ function registry($key, $default = null): mixed
 }
 
 /**
+ * 处理域名, 去除协议前缀
+ *
+ * @param $domain
+ * @return string
+ */
+function clean_domain($domain): string
+{
+    $domain = trim($domain);
+    if (empty($domain)) {
+        return '';
+    }
+
+    return trim(str_replace(['http://', 'https://'], '', $domain));
+}
+
+/**
  * Check domain ha license.
  * 删除版权信息, 请先购买授权 https://beikeshop.com/vip/subscription
  *
@@ -775,7 +791,7 @@ function registry($key, $default = null): mixed
 function check_license(): bool
 {
     $configLicenceCode = system_setting('base.license_code');
-    $appDomain         = config('app.url');
+    $appDomain         = clean_domain(config('app.url'));
 
     try {
         $domain         = new \Utopia\Domains\Domain($appDomain);
