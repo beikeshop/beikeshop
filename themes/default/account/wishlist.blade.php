@@ -27,7 +27,7 @@
               <tbody>
                 @if (count($wishlist))
                   @foreach ($wishlist as $item)
-                    <tr data-id="{{ $item['product_id'] }}">
+                    <tr data-id="{{ $item['id'] }}">
                       <td>
                         <div class="wh-70 border d-flex justify-content-between align-items-center"><img src="{{ $item['image'] }}" class="img-fluid"></div>
                       </td>

@@ -10,5 +10,5 @@
  */
 
 return [
-    'name' => 'Russian',
+    'name' => 'Русский',
 ];
