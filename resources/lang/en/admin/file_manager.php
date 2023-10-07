@@ -48,5 +48,6 @@ return [
     'upload_files'            => 'Upload',
     'uploading'               => 'loading...',
     'verify_select_image'     => 'Please select a picture',
+    'rename_failed'           => 'Rename failed, please check the name',
     'verify_select_video'     => 'Please select video',
 ];

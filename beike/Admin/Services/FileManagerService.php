@@ -170,7 +170,7 @@ class FileManagerService
         }
 
         foreach ($images as $image) {
-            $sourceDirPath = public_path("{$this->basePath}{$image}");
+            $sourceDirPath = public_path($image);
             File::move($sourceDirPath, $destDirPath . basename($sourceDirPath));
         }
     }
@@ -181,7 +181,7 @@ class FileManagerService
      */
     public function zipFolder($imagePath): string
     {
-        $realPath = public_path("catalog{$imagePath}");
+        $realPath = $this->fileBasePath . $imagePath;
         $dirName  = basename($realPath);
         $zipName  = $dirName . '-' . date('Ymd') . '.zip';
         $zipPath  = public_path("{$zipName}");
@@ -247,7 +247,10 @@ class FileManagerService
         if ($originPath == $newPath) {
             return;
         }
-        @rename($originPath, $newPath);
+        $result = @rename($originPath, $newPath);
+        if (!$result) {
+            throw new \Exception(trans('admin/file_manager.rename_failed'));
+        }
     }
 
     /**
@@ -311,7 +314,7 @@ class FileManagerService
     private function handleImage($filePath, $baseName): array
     {
         $path     = "catalog{$filePath}";
-        $realPath = $this->fileBasePath . $filePath;
+        $realPath = $this->fileBasePath . str_replace($this->basePath, '', $filePath);
 
         $mime = '';
         if (file_exists($realPath)) {
