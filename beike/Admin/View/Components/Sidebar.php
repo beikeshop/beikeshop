@@ -308,7 +308,7 @@ class Sidebar extends Component
             ['route' => 'attribute_groups.index', 'prefixes' => ['attribute_groups']],
             ['route' => 'attributes.index', 'prefixes' => ['attributes']],
             ['route' => 'multi_filter.index', 'prefixes' => ['multi_filter']],
-            ['route' => 'products.trashed', 'prefixes' => ['products'], 'excludes' => ['products.index', 'products.edit']],
+            ['route' => 'products.trashed', 'prefixes' => ['products'], 'excludes' => ['products.index', 'products.edit', 'products.create']],
         ];
 
         return hook_filter('admin.sidebar.product_routes', $routes);
