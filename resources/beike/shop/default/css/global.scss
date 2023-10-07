@@ -141,7 +141,7 @@ img {
 }
 
 .login-pop-box {
-  overflow: inherit;
+  overflow: initial;
 
   @media (max-width: 768px) {
     width: 90% !important;
