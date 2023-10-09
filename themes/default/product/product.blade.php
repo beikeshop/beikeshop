@@ -113,7 +113,7 @@
             <span class="text-muted">132 reviews</span>
           </div>
           @endif
-
+          @hookwrapper('product.detail.variables')
           <div class="variables-wrap mb-4" v-if="source.variables.length">
             <div class="variable-group mb-2" v-for="variable, variable_index in source.variables" :key="variable_index">
               <p class="mb-2">@{{ variable.name }}</p>
@@ -132,6 +132,7 @@
               </div>
             </div>
           </div>
+          @endhookwrapper
 
           @if ($product['active'])
             <div class="quantity-btns">
