@@ -65,7 +65,6 @@ class InputLocale extends Component
 
         if (is_string($this->value)) {
             $value = json_decode($this->value, true);
-
             return old($oldKey, Arr::get($value, $code, ''));
         } elseif ($this->value instanceof Collection) {
             // descriptions.*.name
@@ -75,6 +74,8 @@ class InputLocale extends Component
             $valueKey = str_replace('*', $code, $valueKey);
 
             return old($oldKey, Arr::get($this->value, $valueKey, ''));
+        } elseif (is_array($this->value)) {
+            return old($oldKey, Arr::get($this->value, $code, ''));
         }
 
         return '';
