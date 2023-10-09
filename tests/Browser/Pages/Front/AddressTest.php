@@ -40,15 +40,15 @@ class AddressTest extends DuskTestCase
                 ->type(AccountPage::Address['add_name'], AccountData::Add_Address['add_name'])
                 //3.2 phone
 //                ->type(AccountPage::Address['add_phone'], AccountData::Add_Address['add_phone'])
-                //3.3 address
+                //3.3 city
                 ->type(AccountPage::Address['add_address'], AccountData::Add_Address['add_province'])
 //                //3.4 code
 //                ->type(AccountPage::Address['add_code'], AccountData::Add_Address['add_code'])
                 //3.5 address1
                 ->type(AccountPage::Address['add_address1'], AccountData::Add_Address['add_address1'])
-//                //3.6 address2
+//                //3.6 city
 //                ->type(AccountPage::Address['add_address2'], AccountData::Add_Address['add_address2'])
-                //3.7 defaule
+                //3.7 default
                 ->press((AccountPage::Address['default']))
                 //3.8 save
                 ->press((AccountPage::Address['save']))
