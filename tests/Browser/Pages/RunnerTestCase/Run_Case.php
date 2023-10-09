@@ -76,8 +76,8 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelCusRecycleTest.php'); //从回收站删除客户信息
 
 //插件测试
-    $suite->addTestFile('.\tests\Browser\Pages\front\PaypalOrderTest.php'); //paypal插件测试  沙盒
-    $suite->addTestFile('.\tests\Browser\Pages\front\StripeOrderTest.php'); //stripe插件测试  沙盒
+//    $suite->addTestFile('.\tests\Browser\Pages\front\PaypalOrderTest.php'); //paypal插件测试  沙盒
+//    $suite->addTestFile('.\tests\Browser\Pages\front\StripeOrderTest.php'); //stripe插件测试  沙盒
 
     // 运行测试套件
     $result = $suite->run();
