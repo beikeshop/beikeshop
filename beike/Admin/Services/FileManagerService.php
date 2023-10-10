@@ -248,7 +248,7 @@ class FileManagerService
             return;
         }
         $result = @rename($originPath, $newPath);
-        if (!$result) {
+        if (! $result) {
             throw new \Exception(trans('admin/file_manager.rename_failed'));
         }
     }

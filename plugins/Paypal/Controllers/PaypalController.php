@@ -15,7 +15,6 @@
 
 namespace Plugin\Paypal\Controllers;
 
-use Beike\Models\Currency;
 use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\CurrencyService;
