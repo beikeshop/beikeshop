@@ -15,8 +15,10 @@
 
 namespace Plugin\Paypal\Controllers;
 
+use Beike\Models\Currency;
 use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
+use Beike\Services\CurrencyService;
 use Beike\Services\StateMachineService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,7 +53,8 @@ class PaypalController
         $orderNumber = $data['orderNumber'];
         $customer    = current_customer();
         $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
-        $total       = round($order->total, 2);
+        $total       = CurrencyService::getInstance()->format($order->total, 'USD', $order->currency_value, false);
+        $total       = round($total, 2);
 
         $this->initPaypal($order);
         $paypalOrder = $this->paypalClient->createOrder([
