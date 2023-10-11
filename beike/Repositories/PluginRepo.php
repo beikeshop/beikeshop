@@ -46,6 +46,9 @@ class PluginRepo
         self::publishThemeFiles($bPlugin);
         self::publishLangFiles($bPlugin);
         self::migrateDatabase($bPlugin);
+        if ($bPlugin->type != 'theme') {
+            self::runSeeder($bPlugin);
+        }
         $type   = $bPlugin->type;
         $code   = $bPlugin->code;
         $plugin = Plugin::query()
