@@ -571,7 +571,7 @@
           quantity: @json($product->skus[0]['quantity'] ?? ''),
           sku: @json($product->skus[0]['sku'] ?? ''),
           status: @json($product->skus[0]['status'] ?? false),
-          variables: @json($product->variables ?? []),
+          variables: [],
           skus: @json(old('skus', $product->skus) ?? []),
         },
 
@@ -594,12 +594,12 @@
         },
 
         source: {
-          variables: @json($product->variables ?? []),
+          variables: [],
           languages: @json($languages ?? []),
         },
 
         editing: {
-          isVariable: @json(($product->variables ?? null) != null),
+          isVariable: @json(old('variables', $product->variables ?? null) != null),
         },
 
         dialogVariables: {
@@ -642,6 +642,15 @@
       },
 
       beforeMount() {
+        let variables = @json(old('variables', $product->variables) ?? []);
+        // 修复表单提交报错后，编辑好的规格不存在问题，old 返回的规格是字符串，variables 如果是字符串，需要转数组
+        if (typeof variables === 'string') {
+          variables = JSON.parse(variables);
+        }
+
+        this.form.variables = variables
+        this.source.variables = variables
+
         if (this.form.variables.length) {
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
         }
