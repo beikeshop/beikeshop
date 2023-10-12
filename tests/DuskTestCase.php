@@ -50,7 +50,7 @@ abstract class DuskTestCase extends BaseTestCase
         protected function baseUrl()
         {
 
-        return 'http://bkautotest.gdemo.cn'; //测试地址
+        return 'http://test.com'; //测试地址
 
     }
 
