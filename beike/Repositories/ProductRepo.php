@@ -198,7 +198,7 @@ class ProductRepo
         }
 
         $sort  = $filters['sort']  ?? 'products.position';
-        $order = $filters['order'] ?? 'desc';
+        $order = $filters['order'] ?? 'asc';
         if ($sort == 'product_skus.price') {
             $builder->join('product_skus', function ($query) {
                 $query->on('product_skus.product_id', '=', 'products.id')
