@@ -24,7 +24,8 @@ class ProductController extends Controller
     {
         $requestData    = $request->all();
         if (! isset($requestData['sort'])) {
-            $requestData['sort'] = 'products.updated_at';
+            $requestData['sort']  = 'products.updated_at';
+            $requestData['order'] = 'desc';
         }
         $productList    = ProductRepo::list($requestData);
         $products       = ProductResource::collection($productList);
