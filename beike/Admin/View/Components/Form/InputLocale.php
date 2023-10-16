@@ -65,6 +65,7 @@ class InputLocale extends Component
 
         if (is_string($this->value)) {
             $value = json_decode($this->value, true);
+
             return old($oldKey, Arr::get($value, $code, ''));
         } elseif ($this->value instanceof Collection) {
             // descriptions.*.name

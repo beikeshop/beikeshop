@@ -197,8 +197,14 @@ class ProductRepo
             $builder->onlyTrashed();
         }
 
-        $sort  = $filters['sort']  ?? 'products.position';
-        $order = $filters['order'] ?? 'asc';
+        if (is_admin()) {
+            $sort  = $filters['sort']  ?? 'products.created_at';
+            $order = $filters['order'] ?? 'desc';
+        } else {
+            $sort  = $filters['sort']  ?? 'products.position';
+            $order = $filters['order'] ?? 'asc';
+        }
+
         if ($sort == 'product_skus.price') {
             $builder->join('product_skus', function ($query) {
                 $query->on('product_skus.product_id', '=', 'products.id')
@@ -206,7 +212,7 @@ class ProductRepo
             });
         }
 
-        if (in_array($sort, ['products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
+        if (in_array($sort, ['products.created_at', 'products.updated_at', 'products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
             $builder->orderBy($sort, $order);
         }
 
