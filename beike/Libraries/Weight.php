@@ -23,15 +23,30 @@ class Weight
 
     public const DEFAULT_CLASS = 'kg';
 
+    private string $baseWeight;
+
+    public function __construct()
+    {
+        $this->baseWeight = system_setting('base.weight', self::DEFAULT_CLASS);
+    }
+
+    /**
+     * @return self
+     */
+    public static function getInstance()
+    {
+        return new self;
+    }
+
     public static function getWeightUnits(): array
     {
         return array_keys(self::WEIGHT_CLASS);
     }
 
-    public static function convert($weight, $from, $to = ''): float
+    public function convert($weight, $from, $to = ''): float
     {
         if (! $to) {
-            $to = self::DEFAULT_CLASS;
+            $to = $this->baseWeight;
         }
         if (empty($weight)) {
             return 0;
