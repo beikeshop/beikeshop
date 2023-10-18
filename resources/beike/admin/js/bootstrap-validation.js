@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2023-06-13 17:27:49
+ * @LastEditTime  2023-10-18 17:46:11
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -18,6 +18,13 @@ $(function () {
       $(`form#${form}`).find('button[type="submit"]')[0].click();
     } else {
       $(`form#${form}`).submit();
+    }
+  });
+
+  // 表单保存统一添加加载动画
+  $(document).on('submit', 'form', function(event) {
+    if (!$(this).hasClass('no-load')) {
+      layer.load(2, { shade: [0.2, '#fff'] });
     }
   });
 
