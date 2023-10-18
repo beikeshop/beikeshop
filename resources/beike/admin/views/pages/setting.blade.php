@@ -85,6 +85,13 @@
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_language') }}</div>
             </x-admin-form-select>
 
+            @php
+              $weights = [['code'=>'kg','name'=>'kg'], ['code'=>'g','name'=>'g'], ['code'=>'oz','name'=>'oz'], ['code'=>'lb','name'=>'lb']];
+            @endphp
+            <x-admin-form-select title="{{ __('admin/setting.weight_unit') }}" name="weight" :value="old('weight', system_setting('base.weight', 'kg'))" :options="$weights" key="code" label="name">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.weight_unit') }}</div>
+            </x-admin-form-select>
+
             <x-admin-form-select title="{{ __('admin/setting.default_customer_group') }}" name="default_customer_group_id" :value="old('locale', system_setting('base.default_customer_group_id', ''))" :options="$customer_groups" key="id" label="name">
                 <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_customer_group') }}</div>
             </x-admin-form-select>
