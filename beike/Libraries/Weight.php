@@ -14,24 +14,21 @@ namespace Beike\Libraries;
 class Weight
 {
     public const WEIGHT_CLASS = [
-        'kg' => 0.001,
-        'g'  => 1,
-        'oz' => 0.035,
-        'lb' => 0.0022046,
+        'kg' => 1,
+        'g'  => 1000,
+        'oz' => 35.2739619,
+        'lb' => 2.2046226,
+        'ct' => 5000,
     ];
 
-    public const DEFAULT_CLASS = 'g';
-
-    public function __construct()
-    {
-    }
+    public const DEFAULT_CLASS = 'kg';
 
     public static function getWeightUnits(): array
     {
         return array_keys(self::WEIGHT_CLASS);
     }
 
-    public static function convert($weight, $from, $to = '')
+    public static function convert($weight, $from, $to = ''): float
     {
         if (! $to) {
             $to = self::DEFAULT_CLASS;
@@ -40,6 +37,6 @@ class Weight
             return 0;
         }
 
-        return $weight * self::WEIGHT_CLASS[$to] / self::WEIGHT_CLASS[$from];
+        return (float) ($weight * self::WEIGHT_CLASS[$to] / self::WEIGHT_CLASS[$from]);
     }
 }
