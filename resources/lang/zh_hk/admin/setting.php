@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-08 07:53:55
+ * @modified   2023-10-18 07:54:41
  */
 
 return [
@@ -77,4 +77,5 @@ return [
     'theme_default'          => '默認主題',
     'translation_tools'      => '翻譯工具',
     'use_queue'              => '是否使用隊列',
+    'weight_unit'            => '重量單位',
 ];
