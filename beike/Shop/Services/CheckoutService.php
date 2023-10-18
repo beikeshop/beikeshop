@@ -134,16 +134,16 @@ class CheckoutService
     }
 
     /**
-     * 计算当前选中商品总重量, 当前产品无重量, 待处理
-     * @return int
-     * @todo
+     * 计算当前选中商品总重量
+     *
+     * @return float
      */
-    public function getCartWeight(): int
+    public function getCartWeight(): float
     {
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            $weight += Weight::convert($product->product['weight'] * $product['quantity'], $product->product['weight_class']);
+            $weight += Weight::getInstance()->convert($product->product['weight'] * $product['quantity'], $product->product['weight_class']);
         }
 
         return $weight;
