@@ -149,23 +149,23 @@ header {
           font-size: 1.1rem;
         }
       }
-
-      .cart-badge-quantity {
-        position: absolute;
-        left: 21px;
-        top: -3px;
-        text-align: center;
-        font-size: 12px;
-        display: none;
-        width: 23px;
-        zoom: 0.9;
-        height: 23px;
-        line-height: 24px;
-        background-color: #fd560f;
-        color: #fff;
-        border-radius: 50%;
-      }
     }
+  }
+
+  .cart-badge-quantity {
+    position: absolute;
+    left: 21px;
+    top: -3px;
+    text-align: center;
+    font-size: 12px;
+    display: none;
+    width: 23px;
+    zoom: 0.9;
+    height: 23px;
+    line-height: 24px;
+    background-color: #fd560f;
+    color: #fff;
+    border-radius: 50%;
   }
 
   .header-mobile {
@@ -214,6 +214,16 @@ header {
       .right {
         display: flex;
         justify-content: flex-end;
+
+        .m-cart {
+          .cart-badge-quantity {
+            left: 11px;
+            top: -9px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+          }
+        }
 
         .nav-link {
           padding: 0;

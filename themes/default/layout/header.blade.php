@@ -149,7 +149,7 @@
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
-        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3"><i class="iconfont">&#xe634;</i></a>
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i> <span class="cart-badge-quantity"></span></a>
       </div>
     </div>
   </div>
