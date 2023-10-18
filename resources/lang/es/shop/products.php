@@ -12,7 +12,7 @@
 return [
     'search'           => 'búsqueda',
     'add_to_favorites' => 'agregar a los favoritos',
-    'add_to_cart'      => 'agregar al carrito de compras',
+    'add_to_cart'      => 'agregar al carrito',
     'buy_now'          => 'Comprar ahora',
     'product_details'  => 'Detalles de producto',
     'in_stock'         => 'En stock',
