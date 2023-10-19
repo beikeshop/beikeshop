@@ -142,6 +142,9 @@ table.table {
 
 .btn {
   font-size: 0.8rem;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .btn-check {
