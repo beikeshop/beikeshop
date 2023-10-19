@@ -30,12 +30,12 @@
       @endif
       <div class="bg-light p-4 mb-4">
         <div class="row">
-          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-            <label class="filter-title">{{ __('product.name') }}</label>
-            <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('product.name') }}">
+          <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('admin/builder.text_search') }}</label>
+            <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('admin/marketing.plugin_name') }}">
           </div>
-          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
-            <label class="filter-title">{{ __('admin/tax_rate.type') }}</label>
+          <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label>
             <select v-model="filter.type" class="form-control">
               <option value="">{{ __('common.all') }}</option>
               @foreach ($types as $type)
@@ -49,9 +49,9 @@
           <label class="filter-title"></label>
           <div class="col-auto">
             <button type="button" @click="search"
-              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+              class="btn btn-outline-primary btn-sm">{{ __('admin/builder.text_search') }}</button>
             <button type="button" @click="resetSearch"
-              class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
           </div>
         </div>
       </div>

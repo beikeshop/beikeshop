@@ -60,7 +60,7 @@
                     @endif
                   </x-admin::form.row>
 
-                  <x-admin::form.row title="{{ __('admin/page.info_content') }}">
+                  <x-admin::form.row title="{{ __('admin/page.info_content') }}" required>
                     <div class="w-max-1000">
                       <textarea name="descriptions[{{ $language['code'] }}][content]" data-tinymce-height="600" class="form-control tinymce">
                         {{ old('descriptions.' . $language['code'] . '.content', $descriptions[$language['code']]['content'] ?? '') }}
