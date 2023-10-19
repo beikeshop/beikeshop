@@ -153,7 +153,7 @@
             {type: 'email', message: '{{ __('shop/login.email_err') }}', trigger: 'change'},
           ],
           password: [
-            {required: true, trigger: 'change'}
+            {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'change'}
           ],
           password_confirmation: [
             {required: true, validator: validatePass2, trigger: 'change'}
