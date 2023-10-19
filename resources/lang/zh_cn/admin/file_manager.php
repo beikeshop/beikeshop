@@ -49,6 +49,6 @@ return [
     'upload_fail'               => '上传失败',
     'file_manager'              => '图片管理器',
     'target_dir_exist'          => '目标目录已存在',
-    'rename_failed'             => '改名失败，清检查文件名是否合法或是否重名',
+    'rename_failed'             => '改名失败，请检查文件名是否合法或是否重名',
     'source_dir_empty'          => '源目录不能为空',
 ];
