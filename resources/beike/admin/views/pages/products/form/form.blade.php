@@ -295,6 +295,7 @@
                               <input type="number" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'" step="any"
                                 placeholder="{{ __('admin/product.price') }}" required>
                               <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/product.price')]) }}</span>
+                              @hook('admin.product.edit.sku.price.tiered')
                             </td>
                             <td><input type="number" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'" step="any"
                               placeholder="{{ __('admin/product.origin_price') }}" required>
@@ -620,6 +621,7 @@
         },
 
         rules: {},
+        @stack('admin.product.edit.vue.data')
       },
 
       computed: {
@@ -1061,6 +1063,7 @@
           // this.form.video.path = '';
           // this.form.video.url = '';
         },
+        @stack('admin.product.edit.vue.method')
       }
     });
 
