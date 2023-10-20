@@ -335,9 +335,9 @@ class Sidebar extends Component
     {
         $routes = [
             ['route' => 'orders.index', 'prefixes' => ['orders'], 'excludes' => ['orders.trashed']],
-            ['route' => 'orders.trashed', 'prefixes' => ['orders'], 'excludes' => ['orders.index', 'orders.show']],
             ['route' => 'rmas.index', 'prefixes' => ['rmas']],
             ['route' => 'rma_reasons.index', 'prefixes' => ['rma_reasons']],
+            ['route' => 'orders.trashed', 'prefixes' => ['orders'], 'excludes' => ['orders.index', 'orders.show']],
         ];
 
         return hook_filter('admin.sidebar.order_routes', $routes);
