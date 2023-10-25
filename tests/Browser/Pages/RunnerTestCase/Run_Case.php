@@ -56,8 +56,8 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelArticleTest.php'); //删除文章
     $suite->addTestFile('.\tests\Browser\Pages\admin\AddRmaReasonsTest.php'); //添加售后原因
 //前后台联测
-    $suite->addTestFile('.\tests\Browser\Pages\combine\OrderRmaTest.php'); //订单状态修改 已支付-已发货-一已完成
-    $suite->addTestFile('.\tests\Browser\Pages\combine\AlterOrderStationTest.php'); //商品退换测试
+    $suite->addTestFile('.\tests\Browser\Pages\combine\AlterOrderStationTest.php'); //订单状态修改 已支付-已发货-一已完成OrderRmaTest
+    $suite->addTestFile('.\tests\Browser\Pages\combine\OrderRmaTest.php'); //商品退换测试
     $suite->addTestFile('.\tests\Browser\Pages\combine\CancelOrderTest.php'); //取消商品订单
     $suite->addTestFile('.\tests\Browser\Pages\combine\CloseVisiterCheckoutTest.php'); //禁用游客结账
     $suite->addTestFile('.\tests\Browser\Pages\combine\OpenVisiterCheckoutTest.php'); //开启游客结账
