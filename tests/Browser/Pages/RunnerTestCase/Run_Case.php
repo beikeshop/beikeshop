@@ -25,10 +25,15 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\front\RemoveCartTest.php'); //移除购物车
     $suite->addTestFile('.\tests\Browser\Pages\front\RemoveWishlistTest.php'); //移除喜欢
     $suite->addTestFile('.\tests\Browser\Pages\front\WishlistTest.php'); //加入喜欢
+    $suite->addTestFile('.\tests\Browser\Pages\front\AscPriceTest.php'); //价格升序
+    $suite->addTestFile('.\tests\Browser\Pages\front\DescPriceTest.php'); //价格降序
+    $suite->addTestFile('.\tests\Browser\Pages\front\AscNameTest.php'); //name升序
+    $suite->addTestFile('.\tests\Browser\Pages\front\DescNameTest.php'); //name降序
     $suite->addTestFile('.\tests\Browser\Pages\front\EditUserInfo.php'); //修改个人信息
     $suite->addTestFile('.\tests\Browser\Pages\front\CartCheckoutTest.php'); //从购物车结账
     $suite->addTestFile('.\tests\Browser\Pages\front\ChangePayMethodTest.php'); //下单时更改支付方式
     $suite->addTestFile('.\tests\Browser\Pages\front\OrderTest.php'); //下单
+
 //后台
     $suite->addTestFile('.\tests\Browser\Pages\admin\AdminLoginTest.php'); //后台登录
     $suite->addTestFile('.\tests\Browser\Pages\admin\AdminSignOutTest.php'); //后台退出
@@ -49,8 +54,10 @@ $suite = new TestSuite();
     $suite->addTestFile('.\tests\Browser\Pages\admin\AddArticleTest.php'); //添加文章
     $suite->addTestFile('.\tests\Browser\Pages\admin\AlterArticleTest.php'); //编辑文章
     $suite->addTestFile('.\tests\Browser\Pages\admin\DelArticleTest.php'); //删除文章
+    $suite->addTestFile('.\tests\Browser\Pages\admin\AddRmaReasonsTest.php'); //添加售后原因
 //前后台联测
-    $suite->addTestFile('.\tests\Browser\Pages\combine\AlterOrderStationTest.php'); //订单状态修改 已支付-已发货-一已完成
+    $suite->addTestFile('.\tests\Browser\Pages\combine\OrderRmaTest.php'); //订单状态修改 已支付-已发货-一已完成
+    $suite->addTestFile('.\tests\Browser\Pages\combine\AlterOrderStationTest.php'); //商品退换测试
     $suite->addTestFile('.\tests\Browser\Pages\combine\CancelOrderTest.php'); //取消商品订单
     $suite->addTestFile('.\tests\Browser\Pages\combine\CloseVisiterCheckoutTest.php'); //禁用游客结账
     $suite->addTestFile('.\tests\Browser\Pages\combine\OpenVisiterCheckoutTest.php'); //开启游客结账
