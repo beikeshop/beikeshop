@@ -24,6 +24,7 @@ class MarketingController
     public function index(Request $request)
     {
         $filters = [
+            'locale'  => admin_locale(),
             'type'    => $request->get('type'),
             'keyword' => $request->get('keyword'),
             'page'    => $request->get('page'),
