@@ -136,7 +136,20 @@ class AlterOrderStationTest extends DuskTestCase
                 ->pause(4000)
                 ->assertSeeIn(OrderPage::Get_Order_Status['status_text'], OrderPage::Order_Status['Shipped'])
             //切换到后台，修改状态为已完成
-;
+                ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
+                $browser->pause(2000)
+                ->press(AdminOrderPage::Details['pull_btn'])
+                //修改状态为已完成
+                ->pause(2000)
+                ->press(AdminOrderPage::Details['Completed'])
+                //按下更新按钮
+                ->press(AdminOrderPage::Details['alter_btn'])
+                ->pause(2000)
+                ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
+                $browser->pause(3000)
+                ->refresh()
+                ->pause(4000)
+                ->assertSeeIn(OrderPage::Get_Order_Status['status_text'], OrderPage::Order_Status['Completed']);
 
         });
     }

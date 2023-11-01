@@ -15,6 +15,10 @@ public const Child = [
     'mg_order'      => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(1)', //订单列表
     'mg_sale_after' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(2)', //售后管理
     'ca_sale_after' => '.list-unstyled.navbar-nav:nth-child(2) li:nth-child(3)', //售后原因
+    'add_rma_btn'   => '#tax-classes-app > div.card-body.h-min-600 > div > button',
+    'zh_name'       => '#tax-classes-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div.el-form-item.language-inputs.is-required > div > div:nth-child(1) > div > div > input',
+    'en_name'       => '#tax-classes-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div.el-form-item.language-inputs.is-required > div > div:nth-child(2) > div > div > input',
+    'save_btn'      => '#tax-classes-app > div.el-dialog__wrapper > div > div.el-dialog__body > form > div.el-form-item.mt-5 > div > button.el-button.el-button--primary > span',
 ];
 
 public const Details = [//订单详情页
@@ -34,4 +38,12 @@ public const Details = [//订单详情页
     //#app > form > div:nth-child(5) > div > button
 
 ];
+
+    public const Rams = [//售后详情页
+        'Check_btn'  => '#customer-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a', //列表查看按钮
+        'Pull_btn'   => '#app > form > div.el-form-item.is-required > div > div > div > span > span', //状态下拉按钮
+        'Completed'  => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(5)', //状态已完成
+        'Update_btn' => '#app > form > div:nth-child(4) > div > button', //更新按钮
+
+    ];
 }
