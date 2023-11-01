@@ -47,6 +47,7 @@ public const Edit = [
 
 public const Order = [
     'check_btn' => '.btn.btn-outline-secondary.btn-sm', //order页面第一个订单的查看详情按钮
+    'rma-btn'   => '.btn.btn-outline-primary.btn-sm', //售后按钮
 ];
 
 public const Wishlist = [
