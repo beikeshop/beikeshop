@@ -577,3 +577,53 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
     border: 1px dashed rgba($primary, 0.5);
   }
 }
+
+.sale-wrap {
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 38px;
+  line-height: 36px;
+  padding: 0 2px;
+  text-align: center;
+  height: 34px;
+  border: none !important;
+  background-color: #ff3600;
+  z-index: 9;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 0 !important;
+  box-shadow: 2px 15px 8px rgba(0,0,0,.1);
+
+  .icon-triangle {
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 0;
+    height: 0;
+    border-bottom: 6px solid #a02402;
+    border-left: 5px solid transparent;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #ff3600;
+    border-right: 19px solid transparent;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #ff3600;
+    border-left: 19px solid transparent;
+  }
+}
