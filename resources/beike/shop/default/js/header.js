@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-05-18 10:27:58
+ * @LastEditTime  2023-11-02 10:02:47
  */
 
 $(function () {
@@ -58,21 +58,17 @@ $(function () {
   });
 
   // 右侧购物车弹出层内交互
-  $(document).on("click", "#offcanvas-right-cart .select-wrap", function () {
+  $(document).on("click", "#offcanvas-right-cart .product-list .select-wrap", function () {
     const [unchecked, checked] = ['bi bi-circle', 'bi bi-check-circle-fill'];
     const productListAll = $('#offcanvas-right-cart .product-list').length;
+    const cartId = $(this).find('i.bi').data('id');
 
     const isChecked = $(this).children('i').hasClass(unchecked);
     $(this).children('i').prop('class', isChecked ? checked : unchecked);
 
     const checkedProduct = $('#offcanvas-right-cart .offcanvas-right-products i.bi-check-circle-fill').length;
 
-    if ($(this).hasClass('all-select')) {
-      const isAll = $('.all-select i').hasClass(checked);
-      $('#offcanvas-right-cart .product-list').find('.select-wrap i').prop('class', isAll ? checked : unchecked)
-    } else {
-      $('.offcanvas-footer .all-select i').prop('class', productListAll == checkedProduct ? checked : unchecked);
-    }
+    $('.offcanvas-footer .all-select i').prop('class', productListAll == checkedProduct ? checked : unchecked);
 
     const checkedIds = $('#offcanvas-right-cart .product-list').map(function() {
       return $(this).find('i.bi-check-circle-fill').data('id');
@@ -84,10 +80,27 @@ $(function () {
       $('#offcanvas-right-cart .to-checkout').removeClass('disabled')
     }
 
-    $http.post(`/carts/select`, {cart_ids: checkedIds}, {hload: true}).then((res) => {
+    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {cart_ids: [cartId]}, {hload: true}).then((res) => {
       updateMiniCartData(res);
     })
   });
+
+  $(document).on("click", "#offcanvas-right-cart .all-select", function () {
+    const [unchecked, checked] = ['bi bi-circle', 'bi bi-check-circle-fill'];
+
+    const checkedIds = $('#offcanvas-right-cart .product-list').map(function() {
+      return $(this).find('i.bi').data('id');
+    }).get();
+
+    const isChecked = $(this).children('i').hasClass(unchecked);
+    $(this).children('i').prop('class', isChecked ? checked : unchecked);
+
+    $('#offcanvas-right-cart .product-list').find('.select-wrap i').prop('class', isChecked ? checked : unchecked);
+
+    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {cart_ids: checkedIds}, {hload: true}).then((res) => {
+      updateMiniCartData(res);
+    })
+  })
 
   // 右侧购物车弹出层内交互
   $(document).on("change", "#offcanvas-right-cart .price input", function () {
