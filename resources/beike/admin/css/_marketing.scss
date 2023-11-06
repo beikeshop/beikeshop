@@ -47,6 +47,12 @@ body.page-marketing-info {
   .plugin-info {
     align-items: flex-start;
 
+    .sale-wrap {
+      width: 72px;
+      left: -4px;
+      top: -4px;
+    }
+
     .origin-price {
       font-weight: 400;
       font-size: 12px;

@@ -28,7 +28,7 @@ $data = $plugin['data'];
     <div class="d-lg-flex plugin-info">
       <div class="d-flex justify-content-between align-items-center plugin-icon-wrap w-max-400">
         @if ($data['origin_price'])
-        <div class="sale-wrap"><span class="icon-triangle"></span><span class="sale-icon">SALE</span></div>
+        <div class="sale-wrap"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
         @endif
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">

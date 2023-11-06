@@ -62,7 +62,7 @@
             <div class="card mb-4 marketing-item">
               <div class="card-body">
                 <div class="plugin-img mb-3">
-                  <div class="sale-wrap" v-if="plugin.origin_price"><span class="icon-triangle"></span><span class="sale-icon">SALE</span></div>
+                  <div class="sale-wrap" v-if="plugin.origin_price"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
                   <a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
                       class="img-fluid"></a>
                 </div>
