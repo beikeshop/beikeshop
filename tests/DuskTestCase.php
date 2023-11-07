@@ -53,7 +53,6 @@ abstract class DuskTestCase extends BaseTestCase
 //        return 'http://beikeshop.test';
         return 'http://bkautotest.gdemo.cn';
 
-
     }
 
     /**
