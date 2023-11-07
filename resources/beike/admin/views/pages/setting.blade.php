@@ -81,7 +81,7 @@
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_currency') }}</div>
             </x-admin-form-select>
 
-            <x-admin-form-select title="{{ __('admin/setting.default_language') }}" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$admin_languages" key="code" label="name">
+            <x-admin-form-select title="{{ __('admin/setting.default_language') }}" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$languages" key="code" label="name">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_language') }}</div>
             </x-admin-form-select>
 

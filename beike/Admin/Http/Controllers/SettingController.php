@@ -15,6 +15,7 @@ use Beike\Admin\Http\Resources\CustomerGroupDetail;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\CustomerGroupRepo;
+use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\ThemeRepo;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class SettingController extends Controller
         $data = [
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
+            'languages'       => LanguageRepo::enabled()->toArray(),
             'tax_address'     => $taxAddress,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,
