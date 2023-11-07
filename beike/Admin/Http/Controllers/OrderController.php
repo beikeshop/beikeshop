@@ -98,7 +98,7 @@ class OrderController extends Controller
         $order->load(['orderTotals', 'orderHistories', 'orderShipments', 'orderPayments']);
         $data             = hook_filter('admin.order.show.data', ['order' => $order, 'html_items' => []]);
         $data['statuses'] = StateMachineService::getInstance($order)->nextBackendStatuses();
-        $data             = hook_filter('admin.order.show.data', $data);
+        hook_action('admin.order.show.after', $data);
 
         return view('admin::pages.orders.form', $data);
     }
