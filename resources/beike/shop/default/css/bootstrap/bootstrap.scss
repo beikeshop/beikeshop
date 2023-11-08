@@ -118,9 +118,6 @@ $table-bg: transparent;
 }
 
 .card {
-  // box-shadow: rgba(0, 0, 0, .1) 0px 1px 4px 0px;
-  // border: none;
-
   .card-header {
     padding: 1rem 1rem .3rem;
     background-color: #fff;
@@ -138,6 +135,12 @@ $table-bg: transparent;
       border-left: 3px solid $primary;
       line-height: 1;
       // font-size: 14px;
+    }
+  }
+
+  .card-body {
+    @media (max-width: 768px) {
+      padding: 10px;
     }
   }
 }
