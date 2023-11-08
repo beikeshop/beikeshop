@@ -12,9 +12,7 @@
   background-color: #f6f6f6;
 
   .post-item {
-    @media (min-width: 768px) {
-      display: flex;
-    }
+    display: flex;
 
     .image {
       flex: 0 0 150px;
@@ -25,7 +23,8 @@
       border: 1px solid #eee;
 
       @media (max-width: 768px) {
-        display: none;
+        margin-right: 10px;
+        flex: 0 0 100px;
       }
     }
   }
