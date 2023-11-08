@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-11-02 10:02:47
+ * @LastEditTime  2023-11-08 14:47:08
  */
 
 $(function () {
@@ -26,6 +26,7 @@ $(function () {
   $(document).on("click", ".btn-right-cart", function () {
     const currentUrl = window.location.pathname;
     if (currentUrl == '/checkout' || currentUrl == '/carts') {
+      location.href = '/carts';
       return;
     }
 
