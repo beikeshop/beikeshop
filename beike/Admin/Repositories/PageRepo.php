@@ -113,9 +113,10 @@ class PageRepo
         $pages = Page::query()->with('description')
             ->whereIn('id', $pageIds)
             ->get();
-            $names = [];
-            foreach ($pages as $page) {
-                $names[] = [
+
+        $names = [];
+        foreach ($pages as $page) {
+            $names[] = [
                 'id'   => $page->id,
                 'name' => $page->description->title,
             ];
