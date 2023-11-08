@@ -71,7 +71,7 @@ class Header extends Component
         $links     = [];
         $histories = $this->getHistoryRoutesFromSession();
         foreach ($histories as $history) {
-            $routeName       = str_replace('admin.', '', $history);
+            $routeName       = str_replace(admin_name().'.', '', $history);
             $permissionRoute = str_replace('.', '_', $routeName);
 
             if (stripos($routeName, 'plugins.') !== false) {
@@ -119,7 +119,7 @@ class Header extends Component
         $histories = session('histories', []);
 
         $currentRoute = request()->route()->getName();
-        $routeName    = str_replace('admin.', '', $currentRoute);
+        $routeName    = str_replace(admin_name().'.', '', $currentRoute);
 
         if (in_array($routeName, ['edit.locale', 'home.menus'])) {
             return $histories;
