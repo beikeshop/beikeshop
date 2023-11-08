@@ -18,4 +18,5 @@ return [
     'module_icons'          => '圖標模塊',
     'module_product'        => '商品模塊',
     'module_rich_text'      => '富文本模塊',
+    'module_page'           => '文章模組',
 ];

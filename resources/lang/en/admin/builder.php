@@ -229,6 +229,8 @@ return [
     'mobile_search_normal'             => 'Not fixed at the top of the screen',
     'mobile_search_hide'               => 'Do not display the top search bar',
     'mobile_search_fixed'              => 'Fixed at the top of the screen (default)',
+    'modules_set_page'                 => 'Configuration article',
+    'modules_please_pages'             => 'Please add articles',
 
     // Menu
     'main_menu'                        => 'Main Menu',

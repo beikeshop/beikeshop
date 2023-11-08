@@ -193,6 +193,7 @@ Route::prefix($adminName)
                 // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');
                 Route::middleware('can:pages_index')->get('pages/autocomplete', [Controllers\PagesController::class, 'autocomplete'])->name('pages.autocomplete');
+                Route::middleware('can:pages_index')->get('pages/names', [Controllers\PagesController::class, 'getNames'])->name('pages.names');
                 Route::middleware('can:pages_create')->get('pages/create', [Controllers\PagesController::class, 'create'])->name('pages.create');
                 Route::middleware('can:pages_show')->get('pages/{page}/edit', [Controllers\PagesController::class, 'edit'])->name('pages.edit');
                 Route::middleware('can:pages_show')->get('pages/{page}/name', [Controllers\PagesController::class, 'name'])->name('pages.name');

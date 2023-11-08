@@ -108,6 +108,31 @@ class PageRepo
         $page->delete();
     }
 
+    public static function getNames($pageIds)
+    {
+        $pages = Page::query()->with('description')
+            ->whereIn('id', $pageIds)
+            ->get();
+            $names = [];
+            foreach ($pages as $page) {
+                $names[] = [
+                'id'   => $page->id,
+                'name' => $page->description->title,
+            ];
+        }
+
+        return $names;
+    }
+
+    public static function getPagesByIds($pageIds)
+    {
+        $pages = Page::query()->with('description')
+            ->whereIn('id', $pageIds)
+            ->get();
+
+        return $pages;
+    }
+
     /**
      * 页面内容自动完成
      *

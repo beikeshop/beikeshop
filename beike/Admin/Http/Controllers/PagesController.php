@@ -133,6 +133,21 @@ class PagesController extends Controller
     }
 
     /**
+     * 根据文章ID批量获取文章名称
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getNames(Request $request): JsonResponse
+    {
+
+        $pageIds = explode(',', $request->get('page_ids'));
+        $name    = PageRepo::getNames($pageIds);
+
+        return json_success(trans('common.get_success'), $name);
+    }
+
+    /**
      * 获取单页名称
      * @param Page $page
      * @return JsonResponse
