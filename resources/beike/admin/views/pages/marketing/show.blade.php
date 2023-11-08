@@ -27,6 +27,9 @@ $data = $plugin['data'];
   <div class="card-body">
     <div class="d-lg-flex plugin-info">
       <div class="d-flex justify-content-between align-items-center plugin-icon-wrap w-max-400">
+        @if ($data['origin_price'])
+        <div class="sale-wrap"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
+        @endif
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>
@@ -45,7 +48,13 @@ $data = $plugin['data'];
           <tr>
             <td><div class="text-last">{{ __('product.price') }}</div>：</td>
             <td>
-              <div class="fs-3 me-1 d-inline-block fw-bold" style="margin-left: -4px">{{ $data['price_format'] }}</div>
+              <div class="fs-3 me-1 d-inline-block fw-bold" style="margin-left: -4px">
+                <span>{{ $data['price_format'] }}</span>
+                @if ($data['origin_price'])
+                  <span class="origin-price text-decoration-line-through text-secondary">{{ $data['origin_price_format'] }}</span>
+                @endif
+                <span></span>
+              </div>
               @if ($data['id'] !== 61)
               <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
               @endif

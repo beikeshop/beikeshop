@@ -89,7 +89,7 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            let tax = this.rmaReasons[index];
+            let tax = JSON.parse(JSON.stringify(this.rmaReasons[index]));
 
             this.dialog.form = {
               id: tax.id,
