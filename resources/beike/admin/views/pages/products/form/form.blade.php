@@ -600,7 +600,7 @@
         },
 
         editing: {
-          isVariable: @json(old('variables', $product->variables ?? null) != null),
+          isVariable: false,
         },
 
         dialogVariables: {
@@ -652,6 +652,7 @@
 
         this.form.variables = variables
         this.source.variables = variables
+        this.editing.isVariable = variables.length > 0
 
         if (this.form.variables.length) {
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
