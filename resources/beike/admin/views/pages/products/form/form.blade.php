@@ -130,7 +130,7 @@
 
             @hookwrapper('admin.product.edit.brand')
             <x-admin::form.row :title="__('admin/brand.index')">
-              <input type="text" value="{{ $product->brand->name ?? '' }}" id="brand-autocomplete" class="form-control wp-400 " />
+              <input type="text" name="brand_name" value="{{ old('brand_name', $product->brand->name ?? '') }}" placeholder="{{ __('admin/builder.modules_keywords_search') }}" id="brand-autocomplete" class="form-control wp-400 " />
               <input type="hidden" name="brand_id" value="{{ old('brand_id', $product->brand_id ?? '') }}" />
             </x-admin::form.row>
             @endhookwrapper
