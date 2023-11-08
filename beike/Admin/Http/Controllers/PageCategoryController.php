@@ -123,7 +123,7 @@ class PageCategoryController extends Controller
     public function destroy(Request $request, int $pageId): JsonResponse
     {
         PageCategoryRepo::deleteById($pageId);
-        hook_action('admin.page_category.store.after', $pageId);
+        hook_action('admin.page_category.destroy.after', $pageId);
 
         return json_success(trans('common.deleted_success'));
     }
