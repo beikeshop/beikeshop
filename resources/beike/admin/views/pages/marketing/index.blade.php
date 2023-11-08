@@ -61,13 +61,16 @@
           <div class="col-xxl-20 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
             <div class="card mb-4 marketing-item">
               <div class="card-body">
-                <div class="plugin-img mb-3"><a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
-                      class="img-fluid"></a></div>
+                <div class="plugin-img mb-3">
+                  <div class="sale-wrap" v-if="plugin.origin_price"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
+                  <a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
+                      class="img-fluid"></a>
+                </div>
                 <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
-                <div class="d-flex align-items-center justify-content-between">
-                  <span class="text-success" v-if="plugin.price == 0">{{ __('admin/marketing.text_free') }}</span>
-                  <span class="text-success" v-else>@{{ plugin.price_format }}</span>
-                  <span class="text-secondary">{{ __('admin/marketing.download_count') }}：@{{ plugin.downloaded }}</span>
+                <div class="d-flex align-items-center">
+                  <span class="text-success fs-5" v-if="plugin.price == 0">{{ __('admin/marketing.text_free') }}</span>
+                  <span class="text-success fs-5" v-else>@{{ plugin.price_format }}</span>
+                  <span v-if="plugin.origin_price" class="text-decoration-line-through text-secondary ms-2">@{{ plugin.origin_price_format }}</span>
                 </div>
               </div>
             </div>
