@@ -216,7 +216,7 @@
             <span class="radio"></span>
             <img src="${quote.icon}" class="img-fluid">
           </div>
-          <div class="right ms-3">
+          <div class="right ms-2">
             <div class="title">${quote.name}</div>
             <div class="sub-title">${quote.description}</div>
             <div class="mt-2">${quote.html || ''}</div>
@@ -225,7 +225,7 @@
       })
     })
 
-    $('#shipping-methods-wrap').html(html);
+    $('#shipping-methods-wrap').replaceWith('<div class="radio-line-wrap" id="shipping-methods-wrap">' + html + '</div>');
   }
 </script>
 @endpush
