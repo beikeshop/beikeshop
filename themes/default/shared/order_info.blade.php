@@ -22,20 +22,22 @@
       <table class="table table-borderless mb-0">
         <thead>
           <tr>
-            <th>{{ __('shop/account/order_info.order_number') }}</th>
+            <th class="nowrap">{{ __('shop/account/order_info.order_number') }}</th>
             <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
-            <th>{{ __('shop/account/order_info.state') }}</th>
-            <th>{{ __('shop/account/order_info.order_amount') }}</th>
+            <th class="nowrap">{{ __('shop/account/order_info.state') }}</th>
+            <th class="nowrap">{{ __('shop/account/order_info.order_amount') }}</th>
+            <th class="nowrap">{{ __('shop/checkout.payment_method') }}</th>
+            <th class="nowrap">{{ __('shop/checkout.delivery_method') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>{{ $order->number }}</td>
-            <td>{{ $order->created_at }}</td>
-            <td>
-              {{$order->status_format}}
-            </td>
+            <td class="nowrap">{{ $order->created_at }}</td>
+            <td class="nowrap">{{$order->status_format}}</td>
             <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+            <td>{{ $order->payment_method_name }}</td>
+            <td>{{ $order->shipping_method_name }}</td>
           </tr>
         </tbody>
       </table>
