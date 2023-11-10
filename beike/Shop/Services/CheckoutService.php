@@ -259,11 +259,14 @@ class CheckoutService
         $shippingRequired = $this->shippingRequired();
         $this->setDefaultCurrentShippingMethod($shipments);
 
+        $shippingQuote = ShippingMethodService::getCurrentQuote($shipments, $currentCart->shipping_method_code);
+
         $data = [
             'current'          => [
                 'shipping_address_id'    => $shippingRequired ? $currentCart->shipping_address_id : 0,
                 'guest_shipping_address' => $shippingRequired ? $currentCart->guest_shipping_address : null,
                 'shipping_method_code'   => $shippingRequired ? $currentCart->shipping_method_code : '',
+                'shipping_method_name'   => $shippingQuote['name'] ?? '',
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
                 'payment_method_code'    => $currentCart->payment_method_code,

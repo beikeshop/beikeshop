@@ -217,6 +217,7 @@ class OrderRepo
         $paymentAddress->country_id    = $paymentAddress->country->id    ?? 0;
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
+        $shippingMethodName = $current['shipping_method_name'] ?? '';
         $paymentMethodCode  = $current['payment_method_code']  ?? '';
 
         $currencyCode  = current_currency_code();
@@ -255,7 +256,7 @@ class OrderRepo
             'shipping_address_2'     => $shippingAddress->address_2    ?? '',
             'shipping_zipcode'       => $shippingAddress->zipcode      ?? '',
             'payment_method_code'    => $paymentMethodCode,
-            'payment_method_name'    => trans($paymentMethodCode),
+            'payment_method_name'    => $shippingMethodName,
             'payment_customer_name'  => $paymentAddress->name,
             'payment_calling_code'   => $paymentAddress->calling_code ?? 0,
             'payment_telephone'      => $paymentAddress->phone        ?? '',

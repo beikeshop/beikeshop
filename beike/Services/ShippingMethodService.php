@@ -32,20 +32,20 @@ class ShippingMethodService
 
         $shippingMethods = [];
         foreach ($shippingPlugins as $shippingPlugin) {
-            $plugin     = $shippingPlugin->plugin;
+            $plugin = $shippingPlugin->plugin;
             $pluginCode = $shippingPlugin->code;
             $pluginName = Str::studly($pluginCode);
-            $className  = "Plugin\\{$pluginName}\\Bootstrap";
+            $className = "Plugin\\{$pluginName}\\Bootstrap";
 
-            if (! method_exists($className, 'getQuotes')) {
+            if (!method_exists($className, 'getQuotes')) {
                 throw new \Exception("请在插件 {$className} 实现方法: public function getQuotes(\$currentCart)");
             }
             $quotes = (new $className)->getQuotes($checkout, $plugin);
             if ($quotes) {
-                $pluginResource    = (new PluginResource($plugin))->jsonSerialize();
+                $pluginResource = (new PluginResource($plugin))->jsonSerialize();
                 $shippingMethods[] = [
-                    'code'   => $pluginCode,
-                    'name'   => $pluginResource['name'],
+                    'code' => $pluginCode,
+                    'name' => $pluginResource['name'],
                     'quotes' => $quotes,
                 ];
             }
@@ -64,10 +64,33 @@ class ShippingMethodService
     public static function getShippingMethodsForCurrentCart(CheckoutService $checkout): array
     {
         $customerId = current_customer()->id ?? 0;
-        if (! CartRepo::shippingRequired($customerId)) {
+        if (!CartRepo::shippingRequired($customerId)) {
             return [];
         }
 
         return self::getShippingMethods($checkout);
+    }
+
+    /**
+     * 获取当前使用的配送方式
+     *
+     * @param $shipments
+     * @param $methodCode
+     * @return void
+     */
+    public static function getCurrentQuote($shipments, $methodCode)
+    {
+        if (empty($shipments) || empty($methodCode)) {
+            return null;
+        }
+        foreach ($shipments as $method) {
+            $quotes = $method['quotes'] ?? [];
+            foreach ($quotes as $quote) {
+                if ($quote['code'] == $methodCode) {
+                    return $quote;
+                }
+            }
+        }
+        return null;
     }
 }
