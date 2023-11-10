@@ -18,4 +18,5 @@ return [
     'module_product'        => 'Products',
     'module_icons'          => 'Icons',
     'module_rich_text'      => 'Rich Text',
+    'module_page'           => 'Article module',
 ];
