@@ -14,6 +14,7 @@ namespace Beike\Services;
 use Beike\Repositories\BrandRepo;
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\BrandDetail;
+use Beike\Admin\Repositories\PageRepo;
 use Illuminate\Support\Str;
 
 class DesignService
@@ -63,6 +64,8 @@ class DesignService
             return self::handleIcons($content);
         } elseif ($moduleCode == 'rich_text') {
             return self::handleRichText($content);
+        } elseif ($moduleCode == 'page') {
+            return self::handlePage($content);
         }
 
         return hook_filter('service.design.module.content', $content);
@@ -192,6 +195,20 @@ class DesignService
         }
         $content['tabs']  = $tabs;
         $content['title'] = $content['title'][locale()] ?? '';
+
+        return $content;
+    }
+
+    /**
+     * 处理文章模块
+     *
+     * @param $content
+     * @return array
+     */
+    private static function handlePage($content): array
+    {
+        $content['title'] = $content['title'][locale()] ?? '';
+        $content['items'] = PageRepo::getPagesByIds($content['items'])->jsonSerialize();
 
         return $content;
     }

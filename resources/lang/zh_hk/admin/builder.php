@@ -225,6 +225,8 @@ return [
     'modules_profession'               => '職業',
     'modules_video_cover'              => '視頻封面',
     'modules_video'                    => '視頻',
+    'modules_set_page'                 => '配置文章',
+    'modules_please_pages'             => '請加文章',
 
     // mobile
     'mobile_search'                    => '搜索條',
