@@ -22,6 +22,7 @@ use Beike\Repositories\CartRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Repositories\PluginRepo;
+use Beike\Services\PaymentMethodService;
 use Beike\Services\ShippingMethodService;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Http\Resources\Account\AddressResource;
@@ -260,6 +261,7 @@ class CheckoutService
         $this->setDefaultCurrentShippingMethod($shipments);
 
         $shippingQuote = ShippingMethodService::getCurrentQuote($shipments, $currentCart->shipping_method_code);
+        $paymentMethod = PaymentMethodService::getCurrentMethod($payments, $currentCart->payment_method_code);
 
         $data = [
             'current'          => [
@@ -270,6 +272,7 @@ class CheckoutService
                 'payment_address_id'     => $currentCart->payment_address_id,
                 'guest_payment_address'  => $currentCart->guest_payment_address,
                 'payment_method_code'    => $currentCart->payment_method_code,
+                'payment_method_name'    => $paymentMethod['name'] ?? '',
                 'extra'                  => $currentCart->extra,
             ],
             'shipping_require' => $shippingRequired,

@@ -218,7 +218,9 @@ class OrderRepo
 
         $shippingMethodCode = $current['shipping_method_code'] ?? '';
         $shippingMethodName = $current['shipping_method_name'] ?? '';
+
         $paymentMethodCode  = $current['payment_method_code']  ?? '';
+        $paymentMethodName  = $current['payment_method_name']  ?? '';
 
         $currencyCode  = current_currency_code();
         $currency      = CurrencyRepo::findByCode($currencyCode);
@@ -243,7 +245,7 @@ class OrderRepo
             'comment'                => $comment,
             'status'                 => StateMachineService::CREATED,
             'shipping_method_code'   => $shippingMethodCode,
-            'shipping_method_name'   => trans($shippingMethodCode),
+            'shipping_method_name'   => $shippingMethodName,
             'shipping_customer_name' => $shippingAddress->name         ?? '',
             'shipping_calling_code'  => $shippingAddress->calling_code ?? 0,
             'shipping_telephone'     => $shippingAddress->phone        ?? '',
@@ -256,7 +258,7 @@ class OrderRepo
             'shipping_address_2'     => $shippingAddress->address_2    ?? '',
             'shipping_zipcode'       => $shippingAddress->zipcode      ?? '',
             'payment_method_code'    => $paymentMethodCode,
-            'payment_method_name'    => $shippingMethodName,
+            'payment_method_name'    => $paymentMethodName,
             'payment_customer_name'  => $paymentAddress->name,
             'payment_calling_code'   => $paymentAddress->calling_code ?? 0,
             'payment_telephone'      => $paymentAddress->phone        ?? '',

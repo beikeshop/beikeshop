@@ -11,10 +11,10 @@
 
 namespace Beike\Services;
 
+use Beike\Admin\Repositories\PageRepo;
 use Beike\Repositories\BrandRepo;
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\BrandDetail;
-use Beike\Admin\Repositories\PageRepo;
 use Illuminate\Support\Str;
 
 class DesignService
