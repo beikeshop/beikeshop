@@ -51,7 +51,9 @@ class ShippingMethodService
             }
         }
 
-        return $shippingMethods;
+        $data = hook_filter('service.shipping_method.data', ['shipping_methods' => $shippingMethods, 'checkout' => $checkout]);
+
+        return $data['shipping_methods'];
     }
 
     /**
