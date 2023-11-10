@@ -24,8 +24,8 @@
                 <td>{{ $order->payment_method_name }}</td>
               </tr>
               <tr>
-                <td>{{ __('order.total') }}：</td>
-                <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+                <td>{{ __('admin/plugin.shipping') }}：</td>
+                <td>{{ $order->shipping_method_name }}</td>
               </tr>
             </tbody>
           </table>
@@ -33,6 +33,10 @@
         <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
+              <tr>
+                <td>{{ __('order.total') }}：</td>
+                <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+              </tr>
               <tr>
                 <td>{{ __('order.customer_name') }}：</td>
                 <td>{{ $order->customer_name }}</td>
@@ -41,16 +45,16 @@
                 <td>{{ __('common.email') }}：</td>
                 <td>{{ $order->email }}</td>
               </tr>
-              <tr>
-                <td>{{ __('order.created_at') }}：</td>
-                <td>{{ $order->created_at }}</td>
-              </tr>
             </tbody>
           </table>
         </div>
         <div class="col-lg-4 col-12">
           <table class="table table-borderless">
             <tbody>
+              <tr>
+                <td>{{ __('order.created_at') }}：</td>
+                <td>{{ $order->created_at }}</td>
+              </tr>
               <tr>
                 <td>{{ __('order.updated_at') }}：</td>
                 <td>{{ $order->updated_at }}</td>
