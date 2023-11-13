@@ -88,6 +88,26 @@ body.page-categories {
         min-width: 170px;
       }
     }
+
+
+    .right-per-page {
+      @media (max-width: 768px) {
+        flex: 1;
+        justify-content: space-between;
+
+        .perpage-select {
+          max-width: 60px;
+          padding-right: 8px;
+        }
+
+        .form-select {
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
+          padding-left: 0.5rem;
+          font-size: 0.7rem;
+        }
+      }
+    }
   }
 
   .ui-widget-content {

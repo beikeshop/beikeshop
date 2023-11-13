@@ -65,7 +65,7 @@
       <div class="col-12 col-lg-6">
         <div class="peoduct-info">
           @hookwrapper('product.detail.name')
-          <h1 class="mb-4 product-name">{{ $product['name'] }}</h1>
+          <h1 class="mb-lg-4 mb-2 product-name">{{ $product['name'] }}</h1>
           @endhookwrapper
           @hookwrapper('product.detail.price')
           <div class="price-wrap d-flex align-items-end">
@@ -75,20 +75,20 @@
             </div>
           </div>
           @endhookwrapper
-          <div class="stock-and-sku mb-4">
+          <div class="stock-and-sku mb-lg-4 mb-2">
             @hookwrapper('product.detail.quantity')
-            <div class="d-flex">
+            <div class="d-lg-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
-              <div :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
+              <span :class="product.quantity > 0 ? 'text-success' : 'text-secondary'">
                 <template v-if="product.quantity > 0">{{ __('shop/products.in_stock') }}</template>
                 <template v-else>{{ __('shop/products.out_stock') }}</template>
-              </div>
+              </span>
             </div>
             @endhookwrapper
 
             @if ($product['brand_id'])
             @hookwrapper('product.detail.brand')
-            <div class="d-flex">
+            <div class="d-lg-flex">
               <span class="title text-muted">{{ __('product.brand') }}:</span>
               <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
             </div>
@@ -96,15 +96,15 @@
             @endif
 
             @hookwrapper('product.detail.sku')
-            <div class="d-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
+            <div class="d-lg-flex"><span class="title text-muted">SKU:</span>@{{ product.sku }}</div>
             @endhookwrapper
 
             @hookwrapper('product.detail.model')
-            <div class="d-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
+            <div class="d-lg-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
             @endhookwrapper
           </div>
           @if (0)
-          <div class="rating-wrap d-flex">
+          <div class="rating-wrap d-lg-flex">
             <div class="rating">
               @for ($i = 0; $i < 5; $i++)
               <i class="iconfont">&#xe628;</i>
@@ -438,6 +438,7 @@
 
     var relationsSwiper = new Swiper ('.relations-swiper', {
       watchSlidesProgress: true,
+      autoHeight: true,
       breakpoints:{
         320: {
           slidesPerView: 2,

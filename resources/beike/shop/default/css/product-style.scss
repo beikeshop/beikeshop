@@ -31,11 +31,14 @@
 }
 
 .product-wrap {
-  margin-bottom: 20px;
   text-align: center;
   padding-bottom: .7rem;
   transition: all 0.3s ease-in-out;
   background-color: #fff;
+
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+  }
 
   &.list {
     display: flex;
@@ -106,21 +109,33 @@
   }
 
   .product-name {
-    height: 39px;
-    margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    color: #3d3d3d;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+
+    @media (min-width: 768px) {
+      height: 39px;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      color: #3d3d3d;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    @media (max-width: 768px) {
+      white-space: nowrap;
+      height: 22px;
+    }
   }
 
   .product-price {
     .price-new {
       color: $primary;
-      font-size: 1.1rem;
       font-weight: bold;
+      font-size: 1.1rem;
+
+      @media (max-width: 768px) {
+        font-size: .9rem;
+      }
     }
 
     .price-old {
