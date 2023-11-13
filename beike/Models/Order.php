@@ -97,6 +97,34 @@ class Order extends Base
     }
 
     /**
+     * 获取订单所有商品名称并用;分割, 如果网站名称超出长度则只保留产品名称
+     *
+     * @param int $length
+     * @return string
+     */
+    public function getOrderDesc(int $length = 256): string
+    {
+        $productsName = trim(system_setting('base.meta_title'));
+        if (strlen($productsName) > $length) {
+            $productsName = '';
+        }
+
+        foreach ($this->orderProducts as $product) {
+            $newProductsName = $productsName;
+            if ($newProductsName) {
+                $newProductsName .= '; ';
+            }
+            $newProductsName .= $product->name;
+            if (strlen($newProductsName) > $length) {
+                return $productsName;
+            }
+            $productsName = $newProductsName;
+        }
+
+        return $productsName;
+    }
+
+    /**
      * 新订单通知
      */
     public function notifyNewOrder()

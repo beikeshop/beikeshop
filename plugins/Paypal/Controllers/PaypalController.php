@@ -64,7 +64,7 @@ class PaypalController
                         'currency_code' => $order->currency_code,
                         'value'         => $total,
                     ],
-                    'description' => 'test',
+                    'description' => $order->getOrderDesc(),
                 ],
             ],
         ]);
