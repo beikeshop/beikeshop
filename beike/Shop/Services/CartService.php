@@ -80,7 +80,7 @@ class CartService
         if ($customerId) {
             $builder = CartProduct::query()->where('customer_id', $customerId);
         } else {
-            $builder = CartProduct::query()->where('session_id', session()->getId());
+            $builder = CartProduct::query()->where('session_id', get_session_id());
         }
         $cart = $builder->where('product_id', $productId)
             ->where('product_sku_id', $skuId)
@@ -92,7 +92,7 @@ class CartService
         } else {
             $cart = CartProduct::query()->create([
                 'customer_id'    => $customerId,
-                'session_id'     => session()->getId(),
+                'session_id'     => get_session_id(),
                 'product_id'     => $productId,
                 'product_sku_id' => $skuId,
                 'quantity'       => $quantity,
@@ -121,7 +121,7 @@ class CartService
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
-            $builder = CartProduct::query()->where('session_id', session()->getId());
+            $builder = CartProduct::query()->where('session_id', get_session_id());
         }
         if ($buyNow) {
             $builder->update(['selected' => 0]);
@@ -146,7 +146,7 @@ class CartService
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
-            $builder = CartProduct::query()->where('session_id', session()->getId());
+            $builder = CartProduct::query()->where('session_id', get_session_id());
         }
         $builder->whereIn('id', $cartIds)->update(['selected' => 0]);
     }
@@ -162,7 +162,7 @@ class CartService
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
-            $builder = CartProduct::query()->where('session_id', session()->getId());
+            $builder = CartProduct::query()->where('session_id', session_id());
         }
         $builder->where('id', $cartId)
             ->update(['quantity' => $quantity, 'selected' => 1]);
@@ -183,7 +183,7 @@ class CartService
         if ($customerId) {
             $builder = CartProduct::query()->where('customer_id', $customerId);
         } else {
-            $builder = CartProduct::query()->orWhere('session_id', session()->getId());
+            $builder = CartProduct::query()->orWhere('session_id', get_session_id());
         }
         $builder->where('id', $cartId)
             ->delete();

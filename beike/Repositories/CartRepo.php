@@ -31,7 +31,7 @@ class CartRepo
             $customer = Customer::query()->find($customer);
         }
         $customerId = $customer->id ?? 0;
-        $sessionId  = session()->getId();
+        $sessionId  = get_session_id();
         if ($customerId) {
             $cart = Cart::query()->where('customer_id', $customerId)->first();
         } else {
@@ -86,7 +86,7 @@ class CartRepo
         if ($customer) {
             Cart::query()->where('customer_id', $customerId)->delete();
         } else {
-            Cart::query()->where('session_id', session()->getId())->delete();
+            Cart::query()->where('session_id', get_session_id())->delete();
         }
         self::selectedCartProductsBuilder($customerId)->delete();
     }
@@ -149,22 +149,26 @@ class CartRepo
         if ($customerId) {
             $builder->where('customer_id', $customerId);
         } else {
-            $builder->where('session_id', session()->getId());
+            $builder->where('session_id', get_session_id());
         }
         $builder->orderByDesc('id');
 
         return $builder;
     }
 
-    public static function mergeGuestCart($customer, $guestCartProducts)
+    /**
+     * @param $customer
+     * @return void
+     */
+    public static function mergeGuestCart($customer): void
     {
-        $guestCartProductSkuIds = $guestCartProducts->pluck('product_sku_id');
+        $guestCartProduct = CartRepo::allCartProducts(0);
+        $guestCartProductSkuIds = $guestCartProduct->pluck('product_sku_id');
         self::allCartProductsBuilder($customer->id)->whereIn('product_sku_id', $guestCartProductSkuIds)->delete();
 
-        foreach ($guestCartProducts as $cartProduct) {
+        foreach ($guestCartProduct as $cartProduct) {
             $cartProduct->customer_id = $customer->id;
             $cartProduct->save();
         }
-
     }
 }

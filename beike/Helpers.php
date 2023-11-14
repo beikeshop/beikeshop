@@ -235,6 +235,19 @@ function current_customer(): mixed
 }
 
 /**
+ * 获取 session id
+ */
+function get_session_id(): string
+{
+    $headerSessionId = request()->header('Bksessionid');
+    if($headerSessionId) {
+        return $headerSessionId;
+    }
+
+    return session()->getId();
+}
+
+/**
  * 获取语言列表
  *
  * @return array

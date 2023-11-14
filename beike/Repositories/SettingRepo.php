@@ -167,10 +167,11 @@ class SettingRepo
 
         return [
             'system' => [
-                'country_id' => system_setting('base.country_id'),
-                'zone_id'    => system_setting('base.zone_id'),
-                'currency'   => system_setting('base.currency'),
-                'locale'     => system_setting('base.locale'),
+                'country_id'     => system_setting('base.country_id'),
+                'zone_id'        => system_setting('base.zone_id'),
+                'currency'       => system_setting('base.currency'),
+                'locale'         => system_setting('base.locale'),
+                'guest_checkout' => system_setting('base.guest_checkout'),
             ],
             'rma_statuses' => RmaRepo::getStatuses(),
             'rma_types'    => RmaRepo::getTypes(),
