@@ -28,7 +28,7 @@ class AdminPage
     ];
 
     public const Assert = [
-        'vip_assert'     => 'License授权',
+        'vip_assert'     => 'License',
         'plugins_assert' => '/admin/marketing',
         'en_assert'      => 'Admin Panel', //切换为中文断言
         'ch_assert'      => '后台管理', //切换为英文断言
