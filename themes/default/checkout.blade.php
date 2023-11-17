@@ -27,7 +27,7 @@
 
             <div class="checkout-black">
               <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>
-              <div class="radio-line-wrap">
+              <div class="radio-line-wrap" id="payment-methods-wrap">
                 @foreach ($payment_methods as $payment)
                   <div class="radio-line-item {{ $payment['code'] == $current['payment_method_code'] ? 'active' : '' }}" data-key="payment_method_code" data-value="{{ $payment['code'] }}">
                     <div class="left">
@@ -57,7 +57,9 @@
                       <div class="right ms-2">
                         <div class="title">{{ $shipping['name'] }}</div>
                         <div class="sub-title">{!! $shipping['description'] !!}</div>
-                        <div class="mt-2">{!! $shipping['html'] ?? '' !!}</div>
+                        @if (isset($shipping['html']))
+                          <div class="mt-2">{!! $shipping['html'] !!}</div>
+                        @endif
                       </div>
                     </div>
                     @endforeach
@@ -146,11 +148,8 @@
 <script>
   $(document).ready(function() {
     $(document).on('click', '.radio-line-item', function(event) {
-      const key = $(this).data('key');
-      const value = $(this).data('value');
-      updateCheckout(key, value, () => {
-        $(this).addClass('active').siblings().removeClass('active')
-      })
+      if ($(this).hasClass('active')) return;
+      updateCheckout($(this).data('key'), $(this).data('value'))
     });
 
     $('#submit-checkout').click(function(event) {
@@ -189,6 +188,8 @@
       }
 
       updateTotal(res.totals)
+      updateShippingMethods(res.shipping_methods, res.current.shipping_method_code)
+      updatePaymentMethods(res.payment_methods, res.current.payment_method_code)
 
       if (typeof callback === 'function') {
         callback(res)
@@ -197,13 +198,7 @@
   }
 
   const updateTotal = (totals) => {
-    let html = '';
-
-    totals.forEach((item) => {
-      html += `<li><span>${item.title}</span><span>${item.amount_format}</span></li>`
-    })
-
-    $('ul.totals').html(html);
+    $('ul.totals').html(totals.map((item) => `<li><span>${item.title}</span><span>${item.amount_format}</span></li>`).join(''));
   }
 
   const updateShippingMethods = (data, shipping_method_code) => {
@@ -219,13 +214,32 @@
           <div class="right ms-2">
             <div class="title">${quote.name}</div>
             <div class="sub-title">${quote.description}</div>
-            <div class="mt-2">${quote.html || ''}</div>
+            <div class="mt-2 ${!quote.html ? 'd-none' : ''}">${quote.html || ''}</div>
           </div>
         </div>`;
       })
     })
 
     $('#shipping-methods-wrap').replaceWith('<div class="radio-line-wrap" id="shipping-methods-wrap">' + html + '</div>');
+  }
+
+  const updatePaymentMethods = (data, payment_method_code) => {
+    let html = '';
+
+    data.forEach((item) => {
+      html += `<div class="radio-line-item d-flex align-items-center ${payment_method_code == item.code ? 'active' : ''}" data-key="payment_method_code" data-value="${item.code}">
+        <div class="left">
+          <span class="radio"></span>
+          <img src="${item.icon}" class="img-fluid">
+        </div>
+        <div class="right ms-2">
+          <div class="title">${item.name}</div>
+          <div class="sub-title">${item.description || ''}</div>
+        </div>
+      </div>`;
+    })
+
+    $('#payment-methods-wrap').replaceWith('<div class="radio-line-wrap" id="payment-methods-wrap">' + html + '</div>');
   }
 </script>
 @endpush

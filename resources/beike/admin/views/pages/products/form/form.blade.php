@@ -289,7 +289,7 @@
                             <td>
                               <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
                               <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => 'sku']) }}</span>
-                              <span v-if="sku.is_default" class="text-success">{{ __('admin/product.default_main_product') }}</span>
+                              <span v-if="sku.is_default * 1" class="text-success">{{ __('admin/product.default_main_product') }}</span>
                             </td>
                             <td>
                               <input type="number" class="form-control" v-model="sku.price" :name="'skus[' + skuIndex + '][price]'" step="any"
