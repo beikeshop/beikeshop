@@ -52,17 +52,14 @@ class PaypalController
         $orderNumber = $data['orderNumber'];
         $customer    = current_customer();
         $order       = OrderRepo::getOrderByNumber($orderNumber, $customer);
-        $total       = CurrencyService::getInstance()->format($order->total, 'USD', $order->currency_value, false);
-        $total       = round($total, 2);
-
         $this->initPaypal($order);
         $paypalOrder = $this->paypalClient->createOrder([
             'intent'         => 'CAPTURE',
             'purchase_units' => [
                 [
                     'amount'      => [
-                        'currency_code' => $order->currency_code,
-                        'value'         => $total,
+                        'currency_code' => system_setting('base.currency'),
+                        'value'         => round($order->total, 2),
                     ],
                     'description' => $order->getOrderDesc(),
                 ],

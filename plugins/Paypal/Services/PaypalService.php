@@ -47,7 +47,7 @@ class PaypalService extends PaymentService
                 'client_secret' => $paypalSetting['live_secret'],
             ],
             'payment_action' => 'Sale',
-            'currency'       => 'USD',
+            'currency'       => system_setting('base.currency'),
             'notify_url'     => '',
             'locale'         => 'en_US',
             'validate_ssl'   => false,
