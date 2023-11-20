@@ -17,7 +17,6 @@ namespace Plugin\Paypal\Controllers;
 
 use Beike\Repositories\OrderPaymentRepo;
 use Beike\Repositories\OrderRepo;
-use Beike\Services\CurrencyService;
 use Beike\Services\StateMachineService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

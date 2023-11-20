@@ -83,7 +83,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @param $number
-     * @return array
+     * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
     public function complete(Request $request, $number)
