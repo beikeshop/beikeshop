@@ -44,6 +44,7 @@
             </div>
 
             @if ($shipping_require)
+              @hookwrapper('checkout.shipping_method')
               <div class="checkout-black">
                 <h5 class="checkout-title">{{ __('shop/checkout.delivery_method') }}</h5>
                 <div class="radio-line-wrap" id="shipping-methods-wrap">
@@ -66,6 +67,7 @@
                   @endforeach
                 </div>
               </div>
+              @endhookwrapper
             @endif
 
             <div class="checkout-black">

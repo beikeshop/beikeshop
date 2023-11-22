@@ -179,7 +179,7 @@ class CheckoutService
             }
         }
 
-        if ($this->shippingRequired()) {
+        if ($this->showShippingMethod()) {
             $shippingMethodCode = $current['shipping_method_code'];
             if (! PluginRepo::shippingEnabled($shippingMethodCode)) {
                 throw new \Exception(trans('shop/carts.invalid_shipping_method'));
@@ -292,7 +292,7 @@ class CheckoutService
     private function setDefaultCurrentShippingMethod($shipments)
     {
         $currentCart = $this->cart;
-        if ($this->shippingRequired()) {
+        if ($this->showShippingMethod()) {
             $shipmentCodes = [];
             foreach ($shipments as $shipment) {
                 $shipmentCodes = array_merge($shipmentCodes, array_column($shipment['quotes'], 'code'));
@@ -313,6 +313,11 @@ class CheckoutService
         $customer = current_customer();
 
         return CartRepo::shippingRequired($customer->id ?? 0);
+    }
+
+    private function showShippingMethod(): bool
+    {
+        return hook_filter('service.checkout.show_shipping_method', $this->shippingRequired());
     }
 
     public static function formatAddress($address)
