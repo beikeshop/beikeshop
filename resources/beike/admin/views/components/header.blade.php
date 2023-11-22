@@ -57,7 +57,7 @@
 
         @hookwrapper('admin.header.license')
         <li class="nav-item">
-          <a href="{{ config('beike.api_url') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
+          <a href="{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
             <i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.license_services')
           </a>
         </li>

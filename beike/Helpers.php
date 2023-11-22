@@ -880,3 +880,17 @@ function has_translator(): bool
 {
     return \Beike\Repositories\PluginRepo::getTranslators()->count() > 0;
 }
+
+/**
+ * @return string
+ */
+function beike_api_url(): string
+{
+    $apiUrl      = config('beike.api_url');
+    $adminLocale = admin_locale();
+    if ($adminLocale == 'zh_cn') {
+        return str_replace('beikeshop.com', 'beikeshop.cn', $apiUrl);
+    }
+
+    return $apiUrl;
+}

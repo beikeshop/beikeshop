@@ -72,7 +72,7 @@ $data = $plugin['data'];
             <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
             <td>
               <div class="d-inline-block">
-                <a href="{{ config('beike.api_url') }}/account/{{ $data['developer']['id'] }}" target="_blank"
+                <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
                   <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white">
                     <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">

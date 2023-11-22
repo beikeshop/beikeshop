@@ -11,7 +11,7 @@
 
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
-  <a href="{{ config('beike.api_url') }}/account/plugins/create" class="btn btn-outline-info" target="_blank">我要发布</a>
+  <a href="{{ beike_api_url() }}/account/plugins/create" class="btn btn-outline-info" target="_blank">我要发布</a>
 @endsection
 
 @section('content')
@@ -97,7 +97,7 @@
         placeholder="{{ __('admin/marketing.set_token') }}"
         v-model="setTokenDialog.token">
       </el-input>
-      <div class="mt-3 text-secondary fs-6">{{ __('admin/marketing.get_token_text') }} <a href="{{ config('beike.api_url') }}/account/websites?domain={{ $domain }}" class="link-primary" target="_blank">{{ __('admin/marketing.get_token') }}</a></div>
+      <div class="mt-3 text-secondary fs-6">{{ __('admin/marketing.get_token_text') }} <a href="{{ beike_api_url() }}/account/websites?domain={{ $domain }}" class="link-primary" target="_blank">{{ __('admin/marketing.get_token') }}</a></div>
       <div class="d-flex justify-content-end align-items-center mt-4">
         <span slot="footer" class="dialog-footer">
           <el-button @click="setTokenDialog.show = false">{{ __('common.cancel') }}</el-button>

@@ -35,7 +35,7 @@
 
     const config = {
       beike_version: '{{ config('beike.version') }}',
-      api_url: '{{ config('beike.api_url') }}',
+      api_url: '{{ beike_api_url() }}',
       app_url: '{{ config('app.url') }}',
     }
   </script>
