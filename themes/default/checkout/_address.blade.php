@@ -12,7 +12,7 @@
     <div class="addresses-wrap">
       <div class="row">
         <template v-if="source.isLogin">
-          <div class="col-6" v-for="address, index in source.addresses" :key="index"
+          <div class="col-lg-6 col-12" v-for="address, index in source.addresses" :key="index"
             v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
             <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
               @click="updateCheckout(address.id, 'shipping_address_id')">
@@ -32,9 +32,9 @@
               </div>
             </div>
           </div>
-          <div class="col-6" v-if="!isAllAddress">
+          <div class="col-lg-6 col-12" v-if="!isAllAddress">
             <div class="item address-right">
-              <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+              <button class="btn btn-outline-dark w-100 mb-md-3" v-if="source.addresses.length > 1"
                 @click="isAllAddress = true">{{ __('shop/checkout.choose_another_address') }}</button>
               <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'shipping_address_id')"><i
                   class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
@@ -42,7 +42,7 @@
           </div>
         </template>
         <template v-else>
-          <div class="col-6" v-if="source.guest_shipping_address">
+          <div class="col-lg-6 col-12" v-if="source.guest_shipping_address">
             <div class="item active">
               <div class="name-wrap">
                 <span class="name">@{{ source.guest_shipping_address.name }}</span>
@@ -62,7 +62,7 @@
               </div>
             </div>
           </div>
-          <div class="col-6" v-if="!source.guest_shipping_address">
+          <div class="col-lg-6 col-12" v-if="!source.guest_shipping_address">
             <div class="item address-right">
               <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_shipping_address')"><i
                   class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
@@ -84,7 +84,7 @@
     <div class="addresses-wrap">
       <div class="row">
         <template v-if="source.isLogin">
-          <div class="col-6" v-for="address, index in source.addresses" :key="index"
+          <div class="col-lg-6 col-12" v-for="address, index in source.addresses" :key="index"
             v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
             <div :class="['item', address.id == form.payment_address_id ? 'active' : '']"
               @click="updateCheckout(address.id, 'payment_address_id')">
@@ -104,9 +104,9 @@
               </div>
             </div>
           </div>
-          <div class="col-6" v-if="!isAllAddressPayment">
+          <div class="col-lg-6 col-12" v-if="!isAllAddressPayment">
             <div class="item address-right">
-              <button class="btn btn-outline-dark w-100 mb-3" v-if="source.addresses.length > 1"
+              <button class="btn btn-outline-dark w-100 mb-md-3" v-if="source.addresses.length > 1"
                 @click="isAllAddressPayment = true">{{ __('shop/checkout.choose_another_address') }}</button>
               <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'payment_address_id')"><i
                   class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>
@@ -114,7 +114,7 @@
           </div>
         </template>
         <template v-else>
-          <div class="col-6" v-if="source.guest_payment_address">
+          <div class="col-lg-6 col-12" v-if="source.guest_payment_address">
             <div class="item active">
               <div class="name-wrap">
                 <span class="name">@{{ source.guest_payment_address.name }}</span>
@@ -131,7 +131,7 @@
               </div>
             </div>
           </div>
-          <div class="col-6" v-if="!source.guest_payment_address">
+          <div class="col-lg-6 col-12" v-if="!source.guest_payment_address">
             <div class="item address-right">
               <button class="btn btn-outline-dark w-100" @click="editAddress(null, 'guest_payment_address')"><i
                   class="bi bi-plus-square-dotted"></i> {{ __('shop/checkout.add_new_address') }}</button>

@@ -13,6 +13,7 @@ return [
     'module_brand'          => 'Brand',
     'module_banner'         => 'Banner',
     'module_four_image_pro' => 'For Image PRO',
+    'module_image_402'      => 'Four image Pro-2',
     'module_slideshow'      => 'Slideshow',
     'module_tab_products'   => 'Tab Products',
     'module_product'        => 'Products',

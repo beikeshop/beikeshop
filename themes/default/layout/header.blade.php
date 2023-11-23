@@ -1,6 +1,7 @@
 <header>
+  @hook('header.before')
   <div class="top-wrap">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
         @hookwrapper('header.top.currency')
         @if (currencies()->count() > 1)
@@ -65,7 +66,7 @@
       <div class="right nav">
         @if (system_setting('base.telephone', ''))
           @hookwrapper('header.top.telephone')
-          <div class="px-2 my-auto"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</div>
+          <div class="my-auto"><i class="bi bi-telephone-forward me-2"></i> {{ system_setting('base.telephone') }}</div>
           @endhookwrapper
         @endif
 
@@ -74,8 +75,8 @@
     </div>
   </div>
 
-  <div class="header-content d-none d-lg-block py-3">
-    <div class="container navbar-expand-lg">
+  <div class="header-content d-none d-lg-block">
+    <div class="container-fluid navbar-expand-lg">
       @hookwrapper('header.menu.logo')
       <div class="logo"><a href="{{ shop_route('home.index') }}">
           <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
@@ -145,10 +146,15 @@
         </div>
       </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
-          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="right">
-        <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
+        <a href="{{ shop_route('account.index') }}" class="nav-link mb-account-icon">
+          <i class="iconfont">&#xe619;</i>
+          @if (strstr(current_route(), 'shop.account'))
+            <span></span>
+          @endif
+        </a>
         <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i> <span class="cart-badge-quantity"></span></a>
       </div>
     </div>
@@ -171,4 +177,5 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
   </div>
+  @hook('header.after')
 </header>

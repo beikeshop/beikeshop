@@ -57,7 +57,7 @@ return [
     'common_link'                      => 'Common Links',
     'header_search_input'              => 'Search Features',
     'header_search_title'              => 'Search Results',
-    'license_services'                 => 'License & Services',
+    'license_services'                 => 'Technical Support',
 
     // sidebar
     'account_index'                    => 'Personal Center',
@@ -105,6 +105,7 @@ return [
     'text_translate'                   => 'Translate',
     'all_others'                       => 'All Others',
     'not_enabled'                      => 'Not Rnabled',
+    'buy_copyright'                    => 'Buy Copyright',
     'translate_form'                   => 'Please enter the content to be translated',
     'copyright_hint_text'              => 'Please reserve the copyright, or go to <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a>',
 ];

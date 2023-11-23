@@ -3,10 +3,14 @@
 @section('body-class', 'page-payment')
 
 @section('content')
+  <x-shop-breadcrumb type="static" value="checkout.index" :text="[31231]" />
+
   <div class="container">
+    @if (!is_mobile())
     <div class="row mt-5 mb-5 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 3])</div>
     </div>
+    @endif
 
     <div class="col-12">
       <div class="card order-wrap border">
@@ -17,7 +21,7 @@
             </div>
             <div class="right">
               <h3 class="order-title">{{ __('shop/checkout.payment_please_pay') }}</h3>
-              <div class="order-info mb-4">
+              <div class="order-info mb-lg-4 mb-2">
                 <table class="table table-borderless">
                   <tbody>
                     <tr>

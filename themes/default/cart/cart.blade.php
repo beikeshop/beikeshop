@@ -13,13 +13,14 @@
   <x-shop-breadcrumb type="static" value="carts.index" />
 
   <div class="container" id="app-cart" v-cloak>
-    <div class="row mt-1 justify-content-center mb-2">
-      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
-    </div>
-
     @if ($errors->has('error'))
       <x-shop-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
     @endif
+
+    @if (!is_mobile())
+    <div class="row mt-1 justify-content-center mb-2">
+      <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 1])</div>
+    </div>
 
     <div class="row mt-5" v-if="products.length">
       <div class="col-12 col-md-9 left-column">
@@ -114,6 +115,9 @@
         </div>
       </div>
     </div>
+    @else
+      @include('cart.cart_mb')
+    @endif
   </div>
 
   @hook('carts.footer')

@@ -10,8 +10,26 @@
 
 body.page-product {
   @media (max-width: 768px) {
-    .breadcrumb {
+    background-color: #f2f2f3;
+    padding-bottom: 64px;
+
+    .breadcrumb-wrap {
       display: none
+    }
+  }
+
+  #product-app.container {
+    @media (max-width: 768px) {
+      padding: 0;
+      overflow-x: hidden;
+    }
+  }
+
+  .product-mb-block {
+    @media (max-width: 768px) {
+      background-color: #fff;
+      margin-bottom: 10px;
+      padding: 10px;
     }
   }
 
@@ -240,6 +258,14 @@ body.page-product {
   }
 
   .variables-wrap {
+    .variable-group {
+      margin-bottom: 10px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
     .variable-info {
       > div {
         display: inline-flex;
@@ -254,7 +280,7 @@ body.page-product {
         text-align: center;
         font-weight: bold;
         flex-direction: column;
-        // border-radius: 2rem;
+        border-radius: 4px;
         transition: all .1s ease-in-out;
         &:hover, &.selected {
           border-color: #222;
@@ -275,6 +301,55 @@ body.page-product {
             color: #999;
             font-weight: initial;
           }
+        }
+      }
+    }
+  }
+
+  .product-btns {
+    @media (max-width: 768px) {
+      z-index: 100;
+      max-height: 102px;
+      display: flex;
+      align-items: center;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: #fff;
+      position: fixed;
+      bottom: 0;
+      box-shadow: 0 -8px 12px 0 rgba(0,0,0,.10196078431372549);
+      flex-wrap: wrap;
+      padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+
+      .quantity-btns {
+        flex: 1;
+        display: flex;
+      }
+
+      .btn-buy-now {
+        display: none;
+      }
+
+      .add-cart {
+        flex: 1;
+        margin: 0 10px;
+        background-color: #212529;
+        color: #fff;
+      }
+
+      .add-wishlist {
+        .btn {
+          padding: 0;
+          color: #333 !important;
+        }
+
+        span {
+          display: none;
+        }
+
+        i {
+          font-size: 20px;
         }
       }
     }
@@ -323,9 +398,6 @@ body.page-product {
 
       .quantity-wrap {
         height: 43px;
-        @media (max-width: 768px) {
-          margin-bottom: 10px;
-        }
       }
     }
   }
@@ -368,6 +440,23 @@ body.page-product {
   }
 
   .relations-wrap {
+    .container {
+      @media (max-width: 768px) {
+        padding: 0 0 10px;
+      }
+    }
+
+    .title {
+      font-size: 20px;
+      margin-bottom: 22px;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+    }
+
     .swiper-pagination {
       bottom: -10px;
 

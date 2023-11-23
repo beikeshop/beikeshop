@@ -53,4 +53,5 @@ return [
     'completed'          => '已完成',
     'cancelled'          => '已取消',
     'order_comment'      => '客户备注',
+    'order_all'          => '所有订单',
 ];

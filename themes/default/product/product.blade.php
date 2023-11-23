@@ -25,8 +25,8 @@
   @endif
 
   <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
-    <div class="row mb-5 mt-3 mt-md-0" id="product-top">
-      <div class="col-12 col-lg-6 mb-3">
+    <div class="row mb-md-5 mt-md-0" id="product-top">
+      <div class="col-12 col-lg-6 mb-2">
         <div class="product-image d-flex align-items-start">
           @if(!is_mobile())
             <div class="left {{ $iframeClass }}"  v-if="images.length">
@@ -63,7 +63,7 @@
       </div>
 
       <div class="col-12 col-lg-6">
-        <div class="peoduct-info">
+        <div class="peoduct-info product-mb-block">
           @hookwrapper('product.detail.name')
           <h1 class="mb-lg-4 mb-2 product-name">{{ $product['name'] }}</h1>
           @endhookwrapper
@@ -120,8 +120,8 @@
           </div>
           @endif
           @hookwrapper('product.detail.variables')
-          <div class="variables-wrap mb-4" v-if="source.variables.length">
-            <div class="variable-group mb-2" v-for="variable, variable_index in source.variables" :key="variable_index">
+          <div class="variables-wrap mb-md-4" v-if="source.variables.length">
+            <div class="variable-group" v-for="variable, variable_index in source.variables" :key="variable_index">
               <p class="mb-2">@{{ variable.name }}</p>
               <div class="variable-info">
                 <div
@@ -140,61 +140,62 @@
           </div>
           @endhookwrapper
 
-          @if ($product['active'])
-            <div class="quantity-btns">
-              @hook('product.detail.buy.before')
-              @hookwrapper('product.detail.quantity.input')
-              <div class="quantity-wrap">
-                <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
-                <div class="right">
-                  <i class="bi bi-chevron-up"></i>
-                  <i class="bi bi-chevron-down"></i>
+          <div class="product-btns">
+            @if ($product['active'])
+              <div class="quantity-btns">
+                @hook('product.detail.buy.before')
+                @hookwrapper('product.detail.quantity.input')
+                <div class="quantity-wrap">
+                  <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
+                  <div class="right">
+                    <i class="bi bi-chevron-up"></i>
+                    <i class="bi bi-chevron-down"></i>
+                  </div>
                 </div>
-              </div>
-              @endhookwrapper
-              @hookwrapper('product.detail.add_to_cart')
-              <button
-                class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
-                :product-id="product.id"
-                :product-price="product.price"
-                :disabled="!product.quantity"
-                @click="addCart(false, this)"
-                ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
-              </button>
-              @endhookwrapper
-              @hookwrapper('product.detail.buy_now')
-              <button
-                class="btn btn-dark ms-3 fw-bold"
-                :disabled="!product.quantity"
-                :product-id="product.id"
-                :product-price="product.price"
-                @click="addCart(true, this)"
-                ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
-              </button>
-              @endhookwrapper
-              @hook('product.detail.buy.after')
-            </div>
-
-            @if (current_customer() || !request('iframe'))
-              @hookwrapper('product.detail.wishlist')
-              <div class="add-wishlist">
-                <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
-                  <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
+                @endhookwrapper
+                @hookwrapper('product.detail.add_to_cart')
+                <button
+                  class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
+                  :product-id="product.id"
+                  :product-price="product.price"
+                  :disabled="!product.quantity"
+                  @click="addCart(false, this)"
+                  ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
                 </button>
+                @endhookwrapper
+                @hookwrapper('product.detail.buy_now')
+                <button
+                  class="btn btn-dark ms-3 btn-buy-now fw-bold"
+                  :disabled="!product.quantity"
+                  :product-id="product.id"
+                  :product-price="product.price"
+                  @click="addCart(true, this)"
+                  ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
+                </button>
+                @endhookwrapper
+                @hook('product.detail.buy.after')
               </div>
-              @endhookwrapper
-            @endif
-          @else
-            <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
-          @endif
 
+              @if (current_customer() || !request('iframe'))
+                @hookwrapper('product.detail.wishlist')
+                <div class="add-wishlist">
+                  <button class="btn btn-link ps-md-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+                    <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> <span>{{ __('shop/products.add_to_favorites') }}</span>
+                  </button>
+                </div>
+                @endhookwrapper
+              @endif
+            @else
+              <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
+            @endif
+          </div>
 
           @hook('product.detail.after')
         </div>
       </div>
     </div>
 
-    <div class="product-description {{ $iframeClass }}">
+    <div class="product-description product-mb-block {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
         <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
@@ -233,9 +234,9 @@
   </div>
 
   @if ($relations && !request('iframe'))
-    <div class="relations-wrap mt-5">
+    <div class="relations-wrap mt-2 mt-md-5 product-mb-block">
       <div class="container position-relative">
-        <div class="title text-center fs-1 mb-4">{{ __('admin/product.product_relations') }}</div>
+        <div class="title text-center">{{ __('admin/product.product_relations') }}</div>
         <div class="product swiper-style-plus">
           <div class="swiper relations-swiper">
             <div class="swiper-wrapper">
@@ -484,12 +485,6 @@
       $('#zoom').trigger('zoom.destroy');
       $('#zoom').zoom({url: $('#swiper a').attr('data-zoom-image')});
     });
-
-    const windowWidth = $(window).width() - 24;
-
-    if ($(window).width() < 768) {
-      $('.swiper-wrapper').css('height', windowWidth + 'px');
-    }
 
     const selectedVariantsIndex = app.selectedVariantsIndex;
     const variables = app.source.variables;

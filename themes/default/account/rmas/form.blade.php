@@ -36,7 +36,7 @@
               <input type="hidden" name="order_product_id" value="{{ $orderProduct->id }}">
 
               <div class="row">
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.service_type') }}</label>
                   <select class="form-select" name="type">
                     @foreach ($types as $key => $item)
@@ -45,7 +45,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.return_quantity') }}</label>
                   <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text" name="quantity" value="{{ old('quantity', $orderProduct->quantity ?? '1') }}">
                   @if ($errors->has('quantity'))
@@ -53,7 +53,7 @@
                   @endif
                 </div>
 
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.unpacked') }}</label>
                   <select class="form-select" name="opened">
                     <option selected value="0">{{ __('common.no') }}</option>
@@ -61,7 +61,7 @@
                   </select>
                 </div>
 
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.return_reason') }}</label>
                   <select class="form-select {{ $errors->has('rma_reason_id') ? 'is-invalid' : '' }}" name="rma_reason_id">
                     @foreach ($reasons as $item)
@@ -76,7 +76,7 @@
 
                 <div class="col-12 "></div>
 
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
                   <textarea rows="4" type="text" name="comment" class="form-control">{{ old('comment', '') }}</textarea>
                 </div>

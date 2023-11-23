@@ -91,6 +91,30 @@ body.page-design {
       width: 300px;
       background-color: #fff;
       border-right: 1px solid #eee;
+      position: relative;
+      transition: all .1s ease-in-out;
+
+      &.v-hide {
+        margin-left: -300px;
+      }
+
+      .switch-design {
+        position: absolute;
+        top: 44%;
+        right: -18px;
+        z-index: 999;
+        cursor: pointer;
+        background-color: #eef1f9;
+        width: 18px;
+        height: 50px;
+        line-height: 50px;
+        box-shadow: 3px 1px 5px 1px rgba(0,0,0,.12);
+        color: #000;
+
+        &:hover {
+          background-color: rgb(166, 187, 237);
+        }
+      }
 
       .modules-list {
         background: #e6e9ec;
@@ -108,6 +132,7 @@ body.page-design {
           background: #fff;
           color: #556068;
           transition: all .25s ease-in-out;
+          cursor: move;
 
           &:hover {
             color: #0072ff;
@@ -117,7 +142,6 @@ body.page-design {
 
         .icon {
           padding: 12px 0 7px;
-          // width: 36px;
           height: 36px;
           display: flex;
           justify-content: center;
@@ -126,10 +150,13 @@ body.page-design {
           .img-icon {
             width: 36px;
             height: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             img {
               max-width: 100%;
-              max-height: auto;
+              max-height: 100%;
             }
           }
 
@@ -156,6 +183,10 @@ body.page-design {
   padding: 0 10px 14px;
   overflow-y: auto;
   height: 100%;
+
+  .image-edit-wrapper {
+    margin-bottom: 100px;
+  }
 
   .module-editor-row {
     height: 47px;

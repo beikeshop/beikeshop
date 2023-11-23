@@ -10,32 +10,37 @@
     <div class="container position-relative">
       <div class="module-title">{{ $content['title'] }}</div>
       @if ($content['items'])
-      <div class="row">
-        @foreach ($content['items'] as $item)
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="pages-wrap">
-            <div class="image"><a href="{{ shop_route('pages.show', [$item['id']]) }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
-            </div>
-            <div class="page-info">
-              <div class="pages-title"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ $item['description']['title'] ?? '' }}</a></div>
-              <div class="pages-summary">{{ $item['description']['summary'] ?? '' }}</div>
-              <div class="pages-view"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ __('shop/account.check_details') }}<i class="bi bi-arrow-right-short"></i></a></div>
+        <div class="row">
+          @foreach ($content['items'] as $item)
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="pages-wrap">
+              <div class="image"><a href="{{ shop_route('pages.show', [$item['id']]) }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
+              </div>
+              <div class="page-info">
+                <div class="pages-title"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ $item['description']['title'] ?? '' }}</a></div>
+                <div class="pages-summary">{{ $item['description']['summary'] ?? '' }}</div>
+                <div class="pages-view"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ __('shop/account.check_details') }}<i class="bi bi-arrow-right-short"></i></a></div>
+              </div>
             </div>
           </div>
+          @endforeach
         </div>
-        @endforeach
-      </div>
+        @if (count($content['items']) > 4)
+        <div class="d-flex justify-content-center mt-4">
+          <a class="btn btn-outline-secondary btn-lg" href="{{ shop_route('page_categories.home') }}">{{ __('common.show_all') }}</a>
+        </div>
+        @endif
       @elseif (!$content['items'] and $design)
-      <div class="row">
-        @for ($s = 0; $s < 4; $s++) <div class="col-6 col-md-4 col-lg-3">
-          <div class="pages-wrap">
-            <div class="image"><a href="javascript:void(0)"><img src="{{ asset('catalog/placeholder.png') }}" class="img-fluid"></a></div>
-            <div class="pages-name">请配置文章</div>
-          </div>
+        <div class="row">
+          @for ($s = 0; $s < 4; $s++) <div class="col-6 col-md-4 col-lg-3">
+            <div class="pages-wrap">
+              <div class="image"><a href="javascript:void(0)"><img src="{{ asset('catalog/placeholder.png') }}" class="img-fluid"></a></div>
+              <div class="pages-name">请配置文章</div>
+            </div>
+          @endfor
+        </div>
       </div>
-      @endfor
+      @endif
     </div>
-    @endif
-  </div>
   </div>
 </section>

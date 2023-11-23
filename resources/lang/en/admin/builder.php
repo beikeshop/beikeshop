@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => 'Page editing',
     'page_category'                    => 'Article Category',
-    'modules_instructions'             => 'Available modules, click Add to page',
+    'modules_instructions'             => 'Available modules, click or drag to the page',
     'text_floor_prompt'                => 'Settings',
     'text_new_page'                    => 'Add new page',
     'text_quit'                        => 'Quit',
@@ -248,8 +248,9 @@ return [
     'type'                             => 'Type',
 
     // footer
-    'footer_edit'                      => 'Footer editor',
+    'footer_edit'                      => 'Footer Editor',
     'sub_title'                        => 'Sub Title',
     'introduction'                     => 'Introduction',
-    'copyright_settings'               => 'Copyright settings',
+    'copyright_settings'               => 'Copyright Settings',
+    'social_media_icons'               => 'Social Media Icons',
 ];

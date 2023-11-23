@@ -11,6 +11,32 @@
 body.page-checkout {
   background-color: #f6f8fa;
 
+  @media (max-width: 992px) {
+    .submit-checkout-wrap {
+      position: fixed;
+      left: 0;
+      right: 0;
+      align-items: center;
+      background: #fff;
+      z-index: 100;
+      padding: 8px 12px;
+      bottom: 0;
+      display: flex !important;
+      justify-content: space-between;
+      box-shadow: 0 -8px 12px 0 rgba(0, 0, 0, 0.1019607843);
+      transition: transform .3s ease-in-out;
+      padding-bottom: calc(8px + env(safe-area-inset-bottom));
+
+      #submit-checkout {
+        width: 50%;
+      }
+
+      .text-total {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
   .radio-line-wrap {
     .radio-line-item {
       display: flex;
@@ -18,6 +44,10 @@ body.page-checkout {
       cursor: pointer;
       padding: 20px;
       border: 1px solid transparent;
+
+      @media (max-width: 768px) {
+        padding: 10px;
+      }
 
       &:not(:last-of-type) {
         margin-bottom: 1rem;
@@ -89,14 +119,20 @@ body.page-checkout {
 
         @media (max-width: 768px) {
           padding: 0;
+          button:first-of-type {
+            margin-right: 10px;
+          }
         }
 
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         cursor: auto;
         border: none;
+
+        @media (min-width: 768px) {
+          flex-direction: column;
+        }
       }
     }
   }
@@ -116,6 +152,10 @@ body.page-checkout {
 body.page-checkout, body.page-bk-stripe {
   .checkout-black {
     margin-bottom: 2.6rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 1rem;
+    }
   }
 
   .checkout-title {
@@ -126,6 +166,11 @@ body.page-checkout, body.page-bk-stripe {
     display: flex;
     align-items: center; // flex-start | center
     justify-content: space-between; // flex-end | center | space-between
+
+    @media (max-width: 768px) {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
 
     .btn {
       margin-bottom: -10px;
@@ -167,8 +212,10 @@ body.page-checkout, body.page-bk-stripe {
       border-bottom: 1px solid #E6E6E6;
       margin-bottom: 1.3rem;
       padding-bottom: .3rem;
-      max-height: 380px;
-      overflow-y: auto;
+      @media (min-width: 768px) {
+        max-height: 380px;
+        overflow-y: auto;
+      }
 
       .item {
         display: flex;
@@ -196,9 +243,12 @@ body.page-checkout, body.page-bk-stripe {
     .totals {
       padding-left: 0;
       list-style: none;
-      padding-bottom: .3rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid #E6E6E6;
+      margin-bottom: 0;
+      @media (min-width: 768px) {
+        padding-bottom: .3rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #E6E6E6;
+      }
 
       > li {
         display: flex;
@@ -207,6 +257,9 @@ body.page-checkout, body.page-bk-stripe {
         margin-bottom: 14px;
         &:last-of-type {
           font-weight: bold;
+          @media (max-width: 768px) {
+            margin-bottom: 0;
+          }
 
           > span {
             &:last-of-type {

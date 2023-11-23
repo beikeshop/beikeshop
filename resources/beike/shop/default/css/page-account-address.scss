@@ -19,8 +19,12 @@ body.page-account-address, body.page-checkout {
       cursor: pointer;
 
       @media (max-width: 768px) {
+        margin-bottom: 0.9rem;
         padding: 10px;
         height: auto;
+        &.address-right {
+          margin-bottom: 0;
+        }
       }
 
       &:hover {

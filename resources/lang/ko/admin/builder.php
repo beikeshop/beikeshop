@@ -13,7 +13,7 @@
 return [
     'heading_title'               => '페이지 편집',
     'page_category'               => '문장 분류',
-    'modules_instructions'        => '사용 가능한 모듈, 페이지에 추가하기 클릭',
+    'modules_instructions'        => '사용 가능한 모듈, 클릭하거나 페이지로 드래그하세요',
     'text_floor_prompt'           => '설정(층 구성은 새로 고침 페이지를 저장해야 업데이트됩니다)',
     'text_new_page'               => '새 페이지 추가',
     'text_quit'                   => '로그아웃',

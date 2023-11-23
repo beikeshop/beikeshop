@@ -15,8 +15,6 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
     .page-info {
-      padding: 0 10px 14px;
-
       .pages-title {
         a {
           color: $primary;
@@ -35,7 +33,7 @@
 
   .page-info {
     transition: all 0.3s ease-in-out;
-    padding-bottom: 14px;
+    padding: 0 5px 10px;
   }
 
   .pages-title {
@@ -59,7 +57,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     height: 40px;
-    color: #666;
+    color: #888;
     margin-bottom: 10px;
   }
 }

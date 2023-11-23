@@ -565,7 +565,7 @@
           }
 
           this.images.map((e, i) => i != index ? e.selected = false : '')
-          this.images[index].selected = !this.images[index].selected
+          this.images[index].selected = true
         },
 
         // 选取

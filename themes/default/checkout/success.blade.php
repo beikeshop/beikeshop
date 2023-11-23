@@ -5,8 +5,8 @@
 @section('content')
 
 <div class="container">
-  <div class="card mt-5 w-max-1000 mx-auto">
-    <div class="card-body">
+  <div class="card mt-lg-5 mt-3 w-max-1000 mx-auto">
+    <div class="card-body p-0">
       <div class="text-center">
         <div class="text-success mb-3">
           <i class="bi bi-check-circle" style="font-size: 60px"></i>
@@ -28,26 +28,45 @@
             </div>
             <div class="card-body">
               <div class="bg-light p-2 table-responsive">
-                <table class="table table-borderless mb-0">
-                  <thead>
-                    <tr>
-                      <th>{{ __('shop/account/order_info.order_number') }}</th>
-                      <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
-                      <th>{{ __('shop/account/order_info.state') }}</th>
-                      <th>{{ __('shop/account/order_info.order_amount') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{{ $order->number }}</td>
-                      <td>{{ $order->created_at }}</td>
-                      <td>
-                        {{ $order->status_format }}
-                      </td>
-                      <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                @if (!is_mobile())
+                  <table class="table table-borderless mb-0">
+                    <thead>
+                      <tr>
+                        <th>{{ __('shop/account/order_info.order_number') }}</th>
+                        <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
+                        <th>{{ __('shop/account/order_info.state') }}</th>
+                        <th>{{ __('shop/account/order_info.order_amount') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ $order->number }}</td>
+                        <td>{{ $order->created_at }}</td>
+                        <td>
+                          {{ $order->status_format }}
+                        </td>
+                        <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                @else
+                  <div class="d-flex justify-content-between mb-2">
+                    <div>{{ __('shop/account/order_info.order_number') }}</div>
+                    <div class="fw-bold">{{ $order->number }}</div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <div>{{ __('shop/account/order_info.order_date') }}</div>
+                    <div class="fw-bold">{{ $order->created_at }}</div>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                    <div>{{ __('shop/account/order_info.state') }}</div>
+                    <div class="fw-bold">{{ $order->status_format }}</div>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <div>{{ __('shop/account/order_info.order_amount') }}</div>
+                    <div class="fw-bold">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</div>
+                  </div>
+                @endif
               </div>
             </div>
           </div>

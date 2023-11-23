@@ -11,13 +11,16 @@
 @endpush
 
 @section('page-bottom-btns')
-  <button type="button" class="btn w-min-100 btn-lg btn-primary submit-form">{{ __('common.save') }}</button>
-  <button class="btn btn-lg btn-default w-min-100 ms-3" onclick="bk.back()">{{ __('common.return') }}</button>
+  <button type="button" class="btn w-min-100 btn-lg btn-primary submit-form-edit">{{ $product->id ? __('common.save') : __('common.save_new') }}</button>
+  <button type="button" class="btn w-min-100 btn-lg btn-default submit-form ms-2">{{ __('common.save_return') }}</button>
 @endsection
 
 @section('content')
     @if ($errors->has('error'))
       <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+    @endif
+    @if (session()->has('success'))
+      <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
     @endif
     @if ($errors->any())
       <div class="alert alert-danger">
@@ -541,6 +544,12 @@
 
 @push('footer')
   <script>
+    $('.submit-form-edit').on('click', function () {
+      const action = $(`form#app`).attr('action');
+      $(`form#app`).attr('action', bk.updateQueryStringParameter(action, 'action_type', 'stay'));
+      $(`form#app`).find('button[type="submit"]')[0].click();
+    })
+
     $('.submit-form').on('click', function () {
       // 关闭多规格提交 清空 variables
       if (!app.editing.isVariable) {
@@ -1115,6 +1124,22 @@
           $('input[name="brand_id"]').val(item['value']);
         }
       });
+    });
+
+    // 回车键 功能修改为 tab建的功能
+    $(document).on('keydown', '*', function(e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        var inputs = $(this).parents("form").eq(0).find(":input:visible:not([disabled]):not([readonly])");
+        var idx = inputs.index(this);
+        if (idx == inputs.length - 1) {
+          inputs[0].select()
+        } else {
+          inputs[idx + 1].focus();
+          inputs[idx + 1].select();
+        }
+        return false;
+      }
     });
   </script>
 @endpush

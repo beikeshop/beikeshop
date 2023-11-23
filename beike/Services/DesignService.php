@@ -52,7 +52,7 @@ class DesignService
         $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif (in_array($moduleCode, ['image401', 'image100', 'image200', 'image300'])) {
+        } elseif (in_array($moduleCode, ['image401', 'image402', 'image100', 'image200', 'image300', 'image301'])) {
             return self::handleImage401($content);
         } elseif ($moduleCode == 'brand') {
             return self::handleBrand($content);
@@ -238,7 +238,7 @@ class DesignService
         }
 
         foreach ($images as $index => $image) {
-            $imagePath               = $image['image'][locale()] ?? '';
+            $imagePath = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
             $images[$index]['image'] = image_origin($imagePath);
 
             $link = $image['link'];

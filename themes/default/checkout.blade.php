@@ -13,12 +13,25 @@
   <x-shop-breadcrumb type="static" value="checkout.index" />
 
   <div class="container">
+    @if (!is_mobile())
     <div class="row mt-1 justify-content-center">
       <div class="col-12 col-md-9">@include('shared.steps', ['steps' => 2])</div>
     </div>
+    @endif
 
-    <div class="row mt-5">
+    <div class="row {{ !is_mobile() ? 'mt-5' : ''}}">
       <div class="col-12 col-md-8 left-column">
+        @if (!current_customer() && is_mobile())
+          <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
+            <div class="card-header">
+              <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
+            </div>
+            <div class="card-body">
+              <button class="btn btn-outline-dark guest-checkout-login"><i class="bi bi-box-arrow-in-right me-2"></i>{{ __('shop/login.login_and_sign') }}</button>
+            </div>
+          </div>
+        @endif
+
         <div class="card shadow-sm">
           <div class="card-body p-lg-4">
             @hook('checkout.body.header')
@@ -84,7 +97,7 @@
 
       <div class="col-12 col-md-4 right-column">
         <div class="x-fixed-top">
-          @if (!current_customer())
+          @if (!current_customer() && !is_mobile())
             <div class="card total-wrap mb-4 p-lg-4 shadow-sm">
               <div class="card-header">
                 <h5 class="mb-0">{{ __('shop/login.login_and_sign') }}</h5>
@@ -126,10 +139,16 @@
               @endhookwrapper
               <ul class="totals">
                 @foreach ($totals as $total)
-                  <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
+                <li><span>{{ $total['title'] }}</span><span>{{ $total['amount_format'] }}</span></li>
                 @endforeach
               </ul>
-              <div class="d-grid gap-2 mt-3">
+              <div class="d-grid gap-2 mt-3 submit-checkout-wrap">
+                @if (is_mobile())
+                <div class="text-nowrap">
+                  <span>{{ __('common.text_total') }}</span>: <span class="fw-bold text-total">{{ $totals[count($totals) - 1]['amount_format'] }}</span>
+                </div>
+                @endif
+
                 @hookwrapper('checkout.confirm')
                 <button class="btn btn-primary fw-bold fs-5" type="button" id="submit-checkout">{{ __('shop/checkout.submit_order') }}</button>
                 @endhookwrapper

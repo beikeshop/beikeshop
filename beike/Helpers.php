@@ -190,6 +190,16 @@ function is_installer(): bool
 }
 
 /**
+ * 获取当前路由
+ *
+ * @return string
+ */
+function current_route(): string
+{
+    return Route::getCurrentRoute()->getName();
+}
+
+/**
  * 是否为当前访问路由
  *
  * @param $routeName

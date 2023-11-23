@@ -46,7 +46,7 @@ $data = $plugin['data'];
 
         <table class="bg-light mb-2 table table-bordered">
           <tr>
-            <td><div class="text-last">{{ __('product.price') }}</div>：</td>
+            <td><div class="text-last">{{ __('product.price') }}</div></td>
             <td>
               <div class="fs-3 me-1 d-inline-block fw-bold" style="margin-left: -4px">
                 <span>{{ $data['price_format'] }}</span>
@@ -55,21 +55,21 @@ $data = $plugin['data'];
                 @endif
                 <span></span>
               </div>
-              @if ($data['id'] !== 61)
+              @if ($data['free_service_months'])
               <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
               @endif
             </td>
           </tr>
           <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div>：</td>
+            <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div></td>
             <td><div>{{ $data['version'] }}</div></td>
           </tr>
           <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div>：</td>
+            <td><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div></td>
             <td><div>{{ $data['version_name_format'] }}</div></td>
           </tr>
           <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div>：</td>
+            <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div></td>
             <td>
               <div class="d-inline-block">
                 <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
@@ -109,7 +109,7 @@ $data = $plugin['data'];
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
-              @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61 )
+              @if (isset($data['plugin_services']) && count($data['plugin_services']))
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
               @endif
@@ -237,7 +237,7 @@ $data = $plugin['data'];
 </div>
 
 <div class="card h-min-200 p-4">
-  <ul class="nav nav-tabs nav-bordered mb-5" role="tablist">
+  <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
     <li class="nav-item" role="presentation">
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
@@ -256,7 +256,7 @@ $data = $plugin['data'];
     </div>
     @if ($data['id'] !== 61)
     <div class="tab-pane fade" id="tab-histories">
-      @if ($data['service_buy_histories'] ?? 0)
+      @if ($plugin['service_buy_histories'] ?? 0)
         <div class="table-push">
           <table class="table">
             <thead>
@@ -270,8 +270,8 @@ $data = $plugin['data'];
               </tr>
             </thead>
             <tbody>
-              @if (count($data['service_buy_histories']))
-              @foreach ($data['service_buy_histories'] as $item)
+              @if (count($plugin['service_buy_histories']))
+              @foreach ($plugin['service_buy_histories'] as $item)
                 <tr>
                   <td>{{ $item['id'] }}</td>
                   <td>{{ $item['service_months'] }} {{ __('admin/marketing.munths') }}</td>

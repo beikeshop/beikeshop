@@ -929,8 +929,8 @@ class ThemeSeeder extends Seeder
                         "images" => [
                             [
                                 "image" => [
-                                    "en" => "catalog/demo/banner/banner-2-en.png",
-                                    "zh_cn" => "catalog/demo/banner/banner-2.png"
+                                    "en" => "catalog/demo/banner/banner-2-en.jpg",
+                                    "zh_cn" => "catalog/demo/banner/banner-2.jpg"
                                 ],
                                 "show" => true,
                                 "link" => [

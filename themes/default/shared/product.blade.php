@@ -12,7 +12,15 @@
     @if (!request('style_list') || request('style_list') == 'grid')
       <div class="button-wrap">
         <button
-          class="btn btn-dark text-light btn-quick-view mx-1 rounded-3"
+          class="btn btn-dark text-light btn-add-cart"
+          product-id="{{ $product['sku_id'] }}"
+          product-price="{{ $product['price'] }}"
+          onclick="bk.addCart({sku_id: '{{ $product['sku_id'] }}'}, this)">
+          <i class="bi bi-cart"></i>
+          {{ __('shop/products.add_to_cart') }}
+        </button>
+        <button
+          class="btn btn-dark text-light btn-quick-view"
           product-id="{{ $product['sku_id'] }}"
           product-price="{{ $product['price'] }}"
           data-bs-toggle="tooltip"
@@ -22,7 +30,7 @@
           <i class="bi bi-eye"></i>
         </button>
         <button
-          class="btn btn-dark text-light btn-wishlist mx-1 rounded-3"
+          class="btn btn-dark text-light btn-wishlist"
           product-id="{{ $product['sku_id'] }}"
           product-price="{{ $product['price'] }}"
           data-bs-toggle="tooltip"
@@ -31,16 +39,6 @@
           data-in-wishlist="{{ $product['in_wishlist'] }}"
           onclick="bk.addWishlist('{{ $product['id'] }}', this)">
           <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }}"></i>
-        </button>
-        <button
-          class="btn btn-dark text-light btn-add-cart mx-1 rounded-3"
-          product-id="{{ $product['sku_id'] }}"
-          product-price="{{ $product['price'] }}"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          title="{{ __('shop/products.add_to_cart') }}"
-          onclick="bk.addCart({sku_id: '{{ $product['sku_id'] }}'}, this)">
-          <i class="bi bi-cart"></i>
         </button>
       </div>
     @endif
@@ -71,8 +69,17 @@
         </button>
       </div>
 
-      <div>
-        <button class="btn btn-link ps-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+      <div class="mt-2">
+        <button
+        class="btn btn-link p-0 btn-quick-view text-secondary"
+        product-id="{{ $product['sku_id'] }}"
+        product-price="{{ $product['price'] }}"
+        onclick="bk.productQuickView({{ $product['id'] }})">
+        <i class="bi bi-eye"></i>
+        {{ __('common.quick_view') }}
+      </button>
+        <br>
+        <button class="btn btn-link p-0 mt-1 text-secondary btn-wishlist" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
           <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> {{ __('shop/products.add_to_favorites') }}
         </button>
       </div>
