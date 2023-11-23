@@ -328,6 +328,7 @@
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
                 <input type="hidden" name="skus[0][position]" placeholder="position" value="0">
                 <input type="hidden" name="skus[0][is_default]" placeholder="is_default" value="1">
+                @hook('admin.product.edit.sku.price.single.tiered')
               </div>
               @endhookwrapper
             </div>
