@@ -103,7 +103,7 @@ class CartService
         $cartQuantity = $cart->quantity;
         $skuQuantity  = $cart->sku->quantity;
         if ($cartQuantity > $skuQuantity) {
-            throw new \Exception(trans('cart.stock_out'));
+            throw new Exception(trans('cart.stock_out'));
         }
 
         return $cart;
@@ -154,7 +154,7 @@ class CartService
     /**
      * 更新购物车数量
      */
-    public static function updateQuantity($customer, $cartId, $quantity)
+    public static function updateQuantity($customer, $cartId, $quantity): void
     {
         if (empty($cartId) || $quantity == 0) {
             return;
@@ -162,7 +162,7 @@ class CartService
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
-            $builder = CartProduct::query()->where('session_id', session_id());
+            $builder = CartProduct::query()->where('session_id', get_session_id());
         }
         $builder->where('id', $cartId)
             ->update(['quantity' => $quantity, 'selected' => 1]);
@@ -174,7 +174,7 @@ class CartService
      * @param $customer
      * @param $cartId
      */
-    public static function delete($customer, $cartId)
+    public static function delete($customer, $cartId): void
     {
         if (empty($cartId)) {
             return;
