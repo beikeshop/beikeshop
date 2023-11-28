@@ -56,4 +56,5 @@ return [
     'wxpay'                   => '微信掃碼支付!',
     'yuan'                    => '元',
     'same_domain_error'       => '目前存取網域名稱與根目錄下 .env 檔案 APP_URL 不一致，請修改',
+    'check_token_error'       => 'token與目前造訪網站不匹配，請重新取得',
 ];

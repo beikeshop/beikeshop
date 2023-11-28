@@ -212,9 +212,16 @@
             return;
           }
 
-          $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
-            this.setTokenDialog.show = false;
-            layer.msg(res.message);
+          $http.get(`${config.api_url}/api/website/check_token`, {domain: config.app_url, token: this.setTokenDialog.token}).then((res) => {
+            if (!res.exist) {
+              layer.msg('{{ __('admin/marketing.check_token_error') }}', () => {});
+              return;
+            }
+
+            $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
+              this.setTokenDialog.show = false;
+              layer.msg(res.message);
+            })
           })
         }
       }

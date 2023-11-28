@@ -57,4 +57,5 @@ return [
     'over_date'             => '到期时间',
     'attention'             => '请注意：每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'same_domain_error'     => '当前访问域名与根目录下 .env 文件 APP_URL 不一致, 请修改',
+    'check_token_error'     => 'token与当前访问网站不匹配，请重新获取',
 ];

@@ -56,4 +56,5 @@ return [
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
     'same_domain_error'       => 'The currently accessed domain name is inconsistent with the .env file APP_URL in the root directory, please modify',
+    'check_token_error'       => 'The token does not match the website you are currently visiting, please obtain it again',
 ];
