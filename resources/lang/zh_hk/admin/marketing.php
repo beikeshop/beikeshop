@@ -55,4 +55,5 @@ return [
     'version_compatible_text' => '該插件不兼容當前系統版本，請升級到 <a href=\\\\\\\"https://beikeshop.com/download\\\\\\\" target=\\\\\\\"_blank\\\\\\\">最新版本</a>',
     'wxpay'                   => '微信掃碼支付!',
     'yuan'                    => '元',
+    'same_domain_error'       => '目前存取網域名稱與根目錄下 .env 檔案 APP_URL 不一致，請修改',
 ];

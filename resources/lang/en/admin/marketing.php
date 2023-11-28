@@ -55,4 +55,5 @@ return [
     'version_compatible_text' => 'This plugin is not compatible with the current system version, please upgrade to <a href=\\\"https://beikeshop.com/download\\\" target=\\\"_blank\\\">Latest Version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
+    'same_domain_error'       => 'The currently accessed domain name is inconsistent with the .env file APP_URL in the root directory, please modify',
 ];

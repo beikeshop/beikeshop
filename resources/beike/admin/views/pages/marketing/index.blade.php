@@ -115,6 +115,7 @@
 
       data: {
         plugins: @json($plugins ?? []),
+        same_domain: @json($same_domain ?? false),
         page: bk.getQueryString('page', 1) * 1,
 
         filter: {
@@ -198,6 +199,11 @@
         },
 
         setToken() {
+          if (!this.same_domain) {
+            layer.alert('{{ __('admin/marketing.same_domain_error') }}', {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+            return;
+          }
+
           this.setTokenDialog.show = true;
         },
 
