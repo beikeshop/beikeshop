@@ -17,6 +17,7 @@ use Beike\Models\OrderShipment;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\ShipmentService;
 use Beike\Services\StateMachineService;
+use Beike\Shop\Http\Resources\Account\OrderShippingList;
 use Beike\Shop\Http\Resources\Account\OrderSimpleList;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -161,5 +162,23 @@ class OrderController extends Controller
         hook_action('admin.product.restore.after', $id);
 
         return ['success' => true];
+    }
+
+    public function shipping(Request $request)
+    {
+        $orderIds = $request->get('selected', []);
+        $orderId = $request->get('order_id');
+        if (!$orderIds && $orderId) {
+            $orderIds[] = $orderId;
+        }
+        $orders = OrderRepo::filterAll(['order_ids' => $orderIds]);
+
+        $data = [
+            'orders' => OrderShippingList::collection($orders)->jsonSerialize(),
+        ];
+
+        $data = hook_filter('admin.order.shipping.data', $data);
+
+        return view('admin::pages.orders.shipping', $data);
     }
 }
