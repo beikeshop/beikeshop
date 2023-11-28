@@ -894,3 +894,15 @@ function beike_api_url(): string
 
     return $apiUrl;
 }
+
+/**
+ * 检测当前访问域名和 .env 配置域名是否一致
+ *
+ * @return bool
+ */
+function check_same_domain(): bool
+{
+    $envDomain = clean_domain(env('APP_URL'));
+    $requestDomain = clean_domain(request()->getHost());
+    return $envDomain == $requestDomain;
+}

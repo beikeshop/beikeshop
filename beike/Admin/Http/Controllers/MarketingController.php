@@ -34,6 +34,7 @@ class MarketingController
             'plugins' => $plugins,
             'domain'  => str_replace(['http://', 'https://'], '', config('app.url')),
             'types'   => PluginRepo::getTypes(),
+            'same_domain' => check_same_domain(),
         ];
         $data = hook_filter('admin.marketing.index.data', $data);
         if ($request->expectsJson()) {
