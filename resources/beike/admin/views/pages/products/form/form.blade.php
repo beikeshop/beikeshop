@@ -298,7 +298,7 @@
                               @hook('admin.product.edit.sku.price.tiered')
                             </td>
                             <td><input type="number" class="form-control" v-model="sku.origin_price" :name="'skus[' + skuIndex + '][origin_price]'" step="any"
-                              placeholder="{{ __('admin/product.origin_price') }}" required>
+                              placeholder="{{ __('admin/product.origin_price') }}">
                               <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => __('admin/product.origin_price')]) }}</span>
                             </td>
                             <td><input type="number" class="form-control" v-model="sku.cost_price" :name="'skus[' + skuIndex + '][cost_price]'" step="any"
