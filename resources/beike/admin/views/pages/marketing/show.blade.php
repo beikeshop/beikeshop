@@ -99,10 +99,9 @@ $data = $plugin['data'];
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
-                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
-                    class="img-fluid"></el-radio>
-                <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
-                </el-radio>
+                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
+                <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
+                <el-radio class="" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
               </el-radio-group>
             </div>
             @endif
@@ -450,6 +449,13 @@ $data = $plugin['data'];
             return;
           }
 
+          this.serviceDialog.show = false
+
+          if (res.data.payment_code == 'stripe') {
+            window.open(`${res.data.pay_url}`, '_blank');
+            this.paySuccessAlert();
+          }
+
           if (res.data.payment_code == 'wechatpay') {
             this.service_wechatpay_price = res.data.amount
             this.service_id = res.data.id
@@ -458,17 +464,7 @@ $data = $plugin['data'];
 
           if (res.data.payment_code == 'alipay') {
             window.open(res.data.pay_url, '_blank');
-
-            Swal.fire({
-              title: '{{ __('admin/marketing.ali_pay_success') }}',
-              text: '{{ __('admin/marketing.ali_pay_text') }}',
-              icon: 'question',
-              confirmButtonColor: '#fd560f',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              willClose: function () {
-                window.location.reload();
-              },
-            })
+            this.paySuccessAlert();
           }
         })
       },
@@ -485,6 +481,11 @@ $data = $plugin['data'];
             return;
           }
 
+          if (this.payCode == 'stripe') {
+            window.open(`${res.data.pay_url}`, '_blank');
+            this.paySuccessAlert();
+          }
+
           if (res.data.payment_code == 'wechatpay') {
             this.wechatpay_price = res.data.price_format
             this.getQrcode(res.data.pay_url,'plugin');
@@ -492,17 +493,7 @@ $data = $plugin['data'];
 
           if (res.data.payment_code == 'alipay') {
             window.open(res.data.pay_url, '_blank');
-
-            Swal.fire({
-              title: '{{ __('admin/marketing.ali_pay_success') }}',
-              text: '{{ __('admin/marketing.ali_pay_text') }}',
-              icon: 'question',
-              confirmButtonColor: '#fd560f',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              willClose: function () {
-                window.location.reload();
-              },
-            })
+            this.paySuccessAlert();
           }
         })
       },
@@ -577,6 +568,19 @@ $data = $plugin['data'];
               },
             })
           }
+        })
+      },
+
+      paySuccessAlert() {
+        Swal.fire({
+          title: '{{ __('admin/marketing.ali_pay_success') }}',
+          text: '{{ __('admin/marketing.ali_pay_text') }}',
+          icon: 'question',
+          confirmButtonColor: '#fd560f',
+          confirmButtonText: '{{ __('common.confirm') }}',
+          willClose: function () {
+            window.location.reload();
+          },
         })
       },
 
