@@ -46,6 +46,11 @@ class Product extends Base
         return $this->hasMany(ProductSku::class);
     }
 
+    public function views()
+    {
+        return $this->hasMany(ProductView::class);
+    }
+
     public function attributes(): HasMany
     {
         return $this->hasMany(ProductAttribute::class);

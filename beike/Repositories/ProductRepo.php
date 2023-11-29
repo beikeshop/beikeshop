@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\HigherOrderBuilderProxy;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
+use function request;
 
 class ProductRepo
 {
@@ -434,5 +436,20 @@ class ProductRepo
         ProductDescription::query()->whereIn('product_id', $productsIds)->delete();
 
         $products->forceDelete();
+    }
+
+    public static function viewAdd(Product $product)
+    {
+        $minutes = system_setting('base.product_view_minutes', 1);
+        $count = $product->views()->where('session_id', get_session_id())->where('created_at', '>', now()->subMinutes($minutes))->count();
+        // 如果当前session_id对该商品$minutes分钟内有个访问记录，则不重复记录访问次数。
+        if ($count) {
+            return;
+        }
+        $product->views()->create([
+            'customer_id' => current_customer()->id ?? 0,
+            'ip'          => request()->getClientIp(),
+            'session_id'  => get_session_id()
+        ]);
     }
 }
