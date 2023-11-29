@@ -75,6 +75,9 @@ class Order extends Base
 
     public function getStatusFormatAttribute()
     {
+        if ($this->status === null) {
+            return null;
+        }
         $statusMap = array_column(StateMachineService::getAllStatuses(), 'name', 'status');
 
         return $statusMap[$this->status];
@@ -82,6 +85,9 @@ class Order extends Base
 
     public function getTotalFormatAttribute()
     {
+        if ($this->total === null) {
+            return null;
+        }
         return currency_format($this->total, $this->currency_code, $this->currency_value);
     }
 

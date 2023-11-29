@@ -156,18 +156,15 @@ class StateMachineService
     }
 
     /**
-     * 获取所有有效订单状态
+     * 获取所有有效订单状态(从订单已支付到订单已完成的所有状态)
      * @return string[]
      */
     public static function getValidStatuses(): array
     {
         $statuses = [
-            self::CREATED,
-            self::UNPAID,
             self::PAID,
             self::SHIPPED,
             self::COMPLETED,
-            self::CANCELLED,
         ];
 
         return $statuses;

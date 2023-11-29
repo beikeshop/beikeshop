@@ -186,6 +186,9 @@ Route::prefix($adminName)
                 Route::middleware('can:plugins_index')->get('plugins/theme', [Controllers\PluginController::class, 'theme'])->name('plugins.theme');
                 Route::middleware('can:plugins_index')->get('plugins/translator', [Controllers\PluginController::class, 'translator'])->name('plugins.translator');
 
+                // 报表
+                Route::middleware('can:plugins_index')->get('reports/sale', [Controllers\ReportController::class, 'sale'])->name('reports.sale');
+
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
                 Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');

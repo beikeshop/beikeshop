@@ -11,7 +11,10 @@
 
 namespace Beike\Admin\Repositories\Report;
 
+use Beike\Models\Order;
+use Beike\Repositories\OrderProductRepo;
 use Beike\Repositories\OrderRepo;
+use Beike\Services\StateMachineService;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\DB;
@@ -139,5 +142,36 @@ class OrderReportRepo
         ];
 
         return hook_filter('dashboard.order_report_year', $data);
+    }
+
+    public static function getSaleInfoByProducts($order, $limit = 20, $start = null, $end = null)
+    {
+        return OrderProductRepo::getBuilder(['date_start' => $start, 'date_end' => $end, 'order' => $order, 'limit' => $limit])->get();
+    }
+
+    public static function getSaleInfoByCustomers($order, $limit = 20, $start = null, $end = null)
+    {
+        $builder = Order::query()->with(['customer'])
+            ->whereIn('status', StateMachineService::getValidStatuses());
+
+        if ($start) {
+            $builder->where('created_at', '>=', $start);
+        }
+
+        if ($end) {
+            $builder->where('created_at', '<', Carbon::createFromFormat('Y-m-d', $end)->subDay());
+        }
+
+        if ($order) {
+            $builder->orderBy($order, 'desc');
+        }
+
+        if ($limit) {
+            $builder->limit($limit);
+        }
+
+        return $builder->groupBy('customer_id')
+            ->selectRaw("`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount")
+            ->get();
     }
 }
