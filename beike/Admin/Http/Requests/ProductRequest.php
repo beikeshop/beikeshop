@@ -37,7 +37,6 @@ class ProductRequest extends FormRequest
             'brand_id'            => 'int',
             'skus.*.sku'          => 'required|string',
             'skus.*.price'        => 'required|numeric',
-            'skus.*.origin_price' => 'required|numeric',
             'skus.*.cost_price'   => 'numeric',
         ];
     }
@@ -49,7 +48,6 @@ class ProductRequest extends FormRequest
             'brand_id'            => trans('product.brand'),
             'skus.*.sku'          => trans('product.sku'),
             'skus.*.price'        => trans('product.price'),
-            'skus.*.origin_price' => trans('product.origin_price'),
             'skus.*.cost_price'   => trans('product.cost_price'),
         ];
     }

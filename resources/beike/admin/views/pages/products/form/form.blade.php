@@ -322,7 +322,7 @@
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
                 <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
                 <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required />
-                <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any" required />
+                <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any" />
                 <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any" />
                 <x-admin-form-input name="skus[0][quantity]" type="number" :title="__('admin/product.quantity')" :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')" />
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
