@@ -99,10 +99,9 @@ $data = $plugin['data'];
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
-                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"
-                    class="img-fluid"></el-radio>
-                <el-radio class="" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid">
-                </el-radio>
+                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
+                <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
+                <el-radio class="" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
               </el-radio-group>
             </div>
             @endif
@@ -477,6 +476,22 @@ $data = $plugin['data'];
         if (!this.setTokenDialog.token) {
           return this.setTokenDialog.show = true;
         }
+
+        // if (this.payCode == 'stripe') {
+        //   window.open(`${config.app_url}`);
+
+        //   Swal.fire({
+        //     title: '{{ __('admin/marketing.ali_pay_success') }}',
+        //     text: '{{ __('admin/marketing.ali_pay_text') }}',
+        //     icon: 'question',
+        //     confirmButtonColor: '#fd560f',
+        //     confirmButtonText: '{{ __('common.confirm') }}',
+        //     willClose: function () {
+        //       window.location.reload();
+        //     },
+        //   })
+        //   return;
+        // }
 
         $http.post('{{ admin_route('marketing.buy', ['code' => $data['code']]) }}', {
           payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
