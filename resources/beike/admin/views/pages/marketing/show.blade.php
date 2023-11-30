@@ -507,17 +507,7 @@ $data = $plugin['data'];
 
           if (res.data.payment_code == 'alipay') {
             window.open(res.data.pay_url, '_blank');
-
-            Swal.fire({
-              title: '{{ __('admin/marketing.ali_pay_success') }}',
-              text: '{{ __('admin/marketing.ali_pay_text') }}',
-              icon: 'question',
-              confirmButtonColor: '#fd560f',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              willClose: function () {
-                window.location.reload();
-              },
-            })
+            this.paySuccessAlert();
           }
         })
       },
@@ -592,6 +582,19 @@ $data = $plugin['data'];
               },
             })
           }
+        })
+      },
+
+      paySuccessAlert() {
+        Swal.fire({
+          title: '{{ __('admin/marketing.ali_pay_success') }}',
+          text: '{{ __('admin/marketing.ali_pay_text') }}',
+          icon: 'question',
+          confirmButtonColor: '#fd560f',
+          confirmButtonText: '{{ __('common.confirm') }}',
+          willClose: function () {
+            window.location.reload();
+          },
         })
       },
 
