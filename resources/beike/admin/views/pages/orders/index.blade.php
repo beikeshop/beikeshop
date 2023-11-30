@@ -7,6 +7,10 @@
     <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
   @endif
 
+  @section('page-title-right')
+    <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+  @endsection
+
   <div id="orders-app" class="card h-min-600">
     <div class="card-body">
       <div class="bg-light p-4 mb-3">
@@ -60,10 +64,6 @@
       </div>
 
       @if (count($orders))
-        <div class="d-flex justify-content-between my-4">
-          <button :disabled="!selectedIds.length" type="button" @click="btnPrint" class="btn btn-outline-primary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
-        </div>
-
         <div class="table-push">
           <table class="table">
             <thead>
@@ -189,6 +189,9 @@
 
       methods: {
         btnPrint() {
+          if (!this.selectedIds.length) {
+            return layer.msg('{{ __('admin/order.order_print_error') }}', ()=>{});
+          }
           window.open(this.btnPrintUrl);
         },
 

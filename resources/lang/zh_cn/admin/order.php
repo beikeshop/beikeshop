@@ -53,4 +53,5 @@ return [
     'quantity' => '数量',
     'price' => '单价',
     'total' => '总计',
+    'order_print_error' => '请勾选要打印的订单',
 ];
