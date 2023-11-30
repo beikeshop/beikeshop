@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>{{ __("admin/order.pick_list") }}</title>
+  <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
   <div id="print-button">
     <style media="print">.printer {display:none;} .btn {display:none;}</style>
-    <p style="text-align: right;"><button class="btn right" type="button" onclick="window.print()" class="printer">{{ __("admin/order.btn_print") }}</button></p>
+    <p style="text-align: right;"><button class="btn btn-primary right" type="button" onclick="window.print()" class="printer">{{ __("admin/order.btn_print") }}</button></p>
   </div>
   @foreach ($orders as $order)
   <div style="page-break-after: always;">
@@ -29,7 +30,7 @@
       </tr>
       </tbody>
     </table>
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
       <tr>
         <td><b>{{ __("admin/order.index") }}</b></td>
@@ -60,9 +61,9 @@
     <table class="table table-tdborder-no">
       <thead style="border-top: 1px solid #ddd;">
       <tr>
-        <td><b>{{ __("admin/order.product_total") }}</b>{{ $order['product_total'] }}</td>
+        <td><b>{{ __("admin/order.product_total") }}</b>: {{ $order['product_total'] }}</td>
         <td></td>
-        <td><b>{{ __("admin/order.order_total") }}</b>{{ $order['total'] }}</td>
+        <td><b>{{ __("admin/order.order_total") }}</b>: {{ $order['total'] }}</td>
       </tr>
       </thead>
       <tbody>

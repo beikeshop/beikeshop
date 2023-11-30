@@ -7,9 +7,9 @@
     <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
   @endif
 
-  <div id="customer-app" class="card h-min-600">
+  <div id="orders-app" class="card h-min-600">
     <div class="card-body">
-      <div class="bg-light p-4 mb-3" id="app">
+      <div class="bg-light p-4 mb-3">
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
           <div>
             <el-form-item label="{{ __('order.number') }}">
@@ -58,11 +58,17 @@
           </div>
         </div>
       </div>
+
       @if (count($orders))
+        <div class="d-flex justify-content-between my-4">
+          <button :disabled="!selectedIds.length" type="button" @click="btnPrint" class="btn btn-outline-primary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+        </div>
+
         <div class="table-push">
           <table class="table">
             <thead>
               <tr>
+                <th><input type="checkbox" v-model="allSelected" /></th>
                 <th>{{ __('order.id') }}</th>
                 <th>{{ __('order.number') }}</th>
                 <th>{{ __('order.customer_name') }}</th>
@@ -78,6 +84,7 @@
               @if (count($orders))
                 @foreach ($orders as $order)
                   <tr data-hook-id={{ $order->id }}>
+                    <td><input type="checkbox" :value="{{ $order['id'] }}" v-model="selectedIds" /></td>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->number }}</td>
                     <td>{{ sub_string($order->customer_name, 14) }}</td>
@@ -124,10 +131,13 @@
 @push('footer')
   <script>
     let app = new Vue({
-      el: '#app',
+      el: '#orders-app',
       data: {
         url: '{{ $type == 'trashed' ? admin_route("orders.trashed") : admin_route("orders.index") }}',
         exportUrl: @json(admin_route('orders.export')),
+        selectedIds: [],
+        orderIds: @json($orders->pluck('id')),
+        btnPrintUrl: '',
         filter: {
           number: bk.getQueryString('number'),
           status: bk.getQueryString('status'),
@@ -152,6 +162,24 @@
               this.filter.end = ''
             }
           }
+        },
+        "selectedIds": {
+          handler(newVal,oldVal) {
+            this.btnPrintUrl = `{{ admin_route('orders.shipping.get') }}?selected=${newVal}`;
+          }
+        }
+      },
+
+      computed: {
+        allSelected: {
+          get(e) {
+            return this.selectedIds.length == this.orderIds.length;
+          },
+          set(val) {
+            val ? this.selectedIds = this.orderIds : this.selectedIds = [];
+            this.btnPrintUrl = `{{ admin_route('orders.shipping.get') }}?selected=${this.selectedIds}`;
+            return val;
+          }
         }
       },
 
@@ -160,6 +188,10 @@
       },
 
       methods: {
+        btnPrint() {
+          window.open(this.btnPrintUrl);
+        },
+
         pickerDate(type) {
           if(this.filter.end && this.filter.start > this.filter.end) {
              if(type) {

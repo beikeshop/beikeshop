@@ -166,11 +166,12 @@ class OrderController extends Controller
 
     public function shipping(Request $request)
     {
-        $orderIds = $request->get('selected', []);
+        $orderIds = $request->get('selected', '');
         $orderId = $request->get('order_id');
         if (!$orderIds && $orderId) {
-            $orderIds[] = $orderId;
+            $orderIds = $orderId;
         }
+        $orderIds = explode(',', $orderIds);
         $orders = OrderRepo::filterAll(['order_ids' => $orderIds]);
 
         $data = [
