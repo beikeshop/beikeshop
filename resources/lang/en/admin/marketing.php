@@ -18,7 +18,7 @@ return [
     'bk_login_hint'           => 'login with <a href=\\\"https://beikeshop.com/account\\\" target=\\\"_blank\\\">beikeshop.com</a> account',
     'bk_register_hint'        => 'Register a new account with <a href=\\\"https://beikeshop.com/account\\\" target=\\\"_blank\\\">beikeshop.com</a>',
     'btn_buy'                 => 'Buy',
-    'btn_buy_service'         => 'Buy service',
+    'btn_buy_service'         => 'Buy technical support',
     'create_date'             => 'Order placement time',
     'days'                    => 'days',
     'download_count'          => 'download count',
@@ -55,4 +55,5 @@ return [
     'version_compatible_text' => 'This plugin is not compatible with the current system version, please upgrade to <a href=\\\"https://beikeshop.com/download\\\" target=\\\"_blank\\\">Latest Version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
+    'plugin_ticket'           => 'Plugin Ticket',
 ];

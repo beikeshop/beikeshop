@@ -35,5 +35,5 @@ return [
     'language'              => 'Language',
     'theme'                 => 'Theme',
     'translator'            => 'Translation',
-    'ticket'                => 'Help',
+    'ticket'                => 'Technical support',
 ];

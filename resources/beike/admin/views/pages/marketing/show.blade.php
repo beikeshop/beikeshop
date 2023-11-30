@@ -110,10 +110,12 @@ $data = $plugin['data'];
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
-              <a :href="toBkTicketUrl()" target="_blank" class="btn btn-primary btn-lg ms-2"><i class="bi bi-ticket-detailed-fill"></i> {{ __('admin/plugin.ticket') }}</a>
               @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61 )
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
+              @endif
+              @if ( $data['service_date_to'] ?? 0)
+              <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
               @endif
             </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i

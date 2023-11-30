@@ -35,5 +35,5 @@ return [
     'language'              => '语言翻译',
     'theme'                 => '主题模板',
     'translator'            => '翻译工具',
-    'ticket'                => '帮助',
+    'ticket'                => '技术支持',
 ];

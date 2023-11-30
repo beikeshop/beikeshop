@@ -28,7 +28,7 @@ return [
     'download_description'    => '插件描述',
     'text_free'               => '免费',
     'btn_buy'                 => '购买',
-    'btn_buy_service'         => '购买售后',
+    'btn_buy_service'         => '购买技术支持',
     'service_date_to'         => '售后到期',
     'days'                    => '天',
     'free_days'               => '赠送',
@@ -56,4 +56,5 @@ return [
     'create_date'           => '下单时间',
     'over_date'             => '到期时间',
     'attention'             => '请注意：每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
+    'plugin_ticket'         => '提交工单',
 ];
