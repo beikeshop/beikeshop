@@ -12,6 +12,8 @@
 namespace Beike\Admin\Repositories\Report;
 
 use Beike\Models\Order;
+use Beike\Models\Product;
+use Beike\Models\ProductView;
 use Beike\Repositories\OrderProductRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Services\StateMachineService;
@@ -173,5 +175,48 @@ class OrderReportRepo
         return $builder->groupBy('customer_id')
             ->selectRaw("`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount")
             ->get();
+    }
+
+    /**
+     * 获取所有商品的浏览数量列表
+     * @return void
+     */
+    public static function getProductViews()
+    {
+        Product::query()->with(['description'])
+            ->selectSub(
+                ProductView::query()->where('product.id', 'product_view.product_id')->count()
+            );
+
+    }
+
+    /**
+     * 获取最近一个月的按天浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
+     * @param $productId
+     * @return void
+     */
+    public static function getViewsLatestMonth($productId = 0)
+    {
+
+    }
+
+    /**
+     * 获取最近一周的按天浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
+     * @param $productId
+     * @return void
+     */
+    public static function getViewsLatestWeek($productId = 0)
+    {
+
+    }
+
+    /**
+     * 获取最近一年的按月浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
+     * @param $productId
+     * @return void
+     */
+    public static function getViewsLatestYear($productId = 0)
+    {
+
     }
 }

@@ -28,4 +28,22 @@ class ReportController extends Controller
 
         return view('admin::pages.report.sale', $data);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function view(Request $request): mixed
+    {
+        $data = [
+            'views' => OrderReportRepo::getProductViews(),
+            'views_trends' => [
+                'latest_month' => OrderReportRepo::getViewsLatestMonth(),
+                'latest_week'  => OrderReportRepo::getViewsLatestWeek(),
+                'latest_year'  => OrderReportRepo::getViewsLatestYear(),
+            ],
+        ];
+
+        return view('admin::pages.report.view', $data);
+    }
 }
