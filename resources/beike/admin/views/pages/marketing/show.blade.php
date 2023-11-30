@@ -477,27 +477,16 @@ $data = $plugin['data'];
           return this.setTokenDialog.show = true;
         }
 
-        // if (this.payCode == 'stripe') {
-        //   window.open(`${config.app_url}`);
-
-        //   Swal.fire({
-        //     title: '{{ __('admin/marketing.ali_pay_success') }}',
-        //     text: '{{ __('admin/marketing.ali_pay_text') }}',
-        //     icon: 'question',
-        //     confirmButtonColor: '#fd560f',
-        //     confirmButtonText: '{{ __('common.confirm') }}',
-        //     willClose: function () {
-        //       window.location.reload();
-        //     },
-        //   })
-        //   return;
-        // }
-
         $http.post('{{ admin_route('marketing.buy', ['code' => $data['code']]) }}', {
           payment_code: this.payCode, return_url: '{{ admin_route('marketing.show', ['code' => $data['code']]) }}'}).then((res) => {
           if (res.status == "fail") {
             layer.msg(res.message, () => {})
             return;
+          }
+
+          if (this.payCode == 'stripe') {
+            window.open(res.data.pay_url, '_blank');
+            this.paySuccessAlert();
           }
 
           if (res.data.payment_code == 'wechatpay') {
