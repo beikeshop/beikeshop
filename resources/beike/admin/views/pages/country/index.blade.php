@@ -5,6 +5,37 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
+      <div class="bg-light p-4 mb-2">
+        <div class="row">
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('product.name') }}</label>
+            <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control" placeholder="{{ __('product.name') }}">
+          </div>
+
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('currency.code') }}</label>
+            <input @keyup.enter="search" type="text" v-model="filter.code" class="form-control" placeholder="{{ __('currency.code') }}">
+          </div>
+
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('common.status') }}</label>
+            <select v-model="filter.status" class="form-select">
+              <option value="">{{ __('common.all') }}</option>
+              <option value="1">{{ __('common.enable') }}</option>
+              <option value="0">{{ __('common.disable') }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="filter-title"></label>
+          <div class="col-auto">
+            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+          </div>
+        </div>
+      </div>
+
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
       </div>
@@ -101,6 +132,14 @@
           },
         },
 
+        filter: {
+          name: bk.getQueryString('name'),
+          code: bk.getQueryString('code'),
+          status: bk.getQueryString('status'),
+        },
+
+        url: '{{ admin_route("countries.index") }}',
+
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/country.country_name')]) }}',trigger: 'blur'}, ],
         }
@@ -131,10 +170,15 @@
 
         statusChange(e, index) {
           const id = this.country.data[index].id;
+        },
 
-          // $http.put(`languages/${id}`).then((res) => {
-          //   layer.msg(res.message);
-          // })
+        search() {
+          location = bk.objectToUrlParams(this.filter, this.url)
+        },
+
+        resetSearch() {
+          this.filter = bk.clearObjectValue(this.filter)
+          location = bk.objectToUrlParams(this.filter, this.url)
         },
 
         addFormSubmit(form) {

@@ -95,7 +95,7 @@ class CountryRepo
             $builder->where('countries.name', 'like', "%{$data['name']}%");
         }
         if (isset($data['code'])) {
-            $builder->where('countries.code', 'like', "%{$data['email']}%");
+            $builder->where('countries.code', 'like', "%{$data['code']}%");
         }
         if (isset($data['status'])) {
             $builder->where('countries.status', $data['status']);
