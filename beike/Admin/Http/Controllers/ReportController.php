@@ -16,9 +16,9 @@ class ReportController extends Controller
     public function sale(Request $request): mixed
     {
         $data = [
-            'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', 10, $request->get('start'), $request->get('end'))->toArray(),
-            'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', 10, $request->get('start'), $request->get('end'))->toArray(),
-            'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', 10, $request->get('start'), $request->get('end'))->toArray(),
+            'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', 10, $request->get('start'), $request->get('end'))->toArray(), // 商品销量排行
+            'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', 10, $request->get('start'), $request->get('end'))->toArray(), // 商品金额排行
+            'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', 10, $request->get('start'), $request->get('end'))->toArray(),  // 用户购买金额排行
             'order_trends' => [
                 'latest_month' => OrderReportRepo::getLatestMonth(),
                 'latest_week'  => OrderReportRepo::getLatestWeek(),

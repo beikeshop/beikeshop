@@ -92,7 +92,7 @@ class OrderProductRepo
         }
 
         $builder->groupBy(['product_id', 'name'])
-            ->selectRaw("'product_id', 'name', SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount");
+            ->selectRaw("`product_id`, `name`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount");
 
         return $builder;
     }
