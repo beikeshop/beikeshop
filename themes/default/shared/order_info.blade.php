@@ -15,6 +15,7 @@
       @if ($order->status == 'shipped')
         <button class="btn btn-primary btn-sm shipped-ed" type="button">{{ __('shop/account/order_info.confirm_receipt') }}</button>
       @endif
+      @hook('account.order.info.order_details.top.btns')
     </div>
   </div>
   <div class="card-body">

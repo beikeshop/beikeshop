@@ -245,6 +245,7 @@
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.cost_price" placeholder="{{ __('admin/product.cost_price') }}">
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.quantity" placeholder="{{ __('admin/product.quantity') }}">
                         <button type="button" class="btn btn-primary text-nowrap" @click="batchSettingVariant">{{ __('common.batch_setting') }}</button>
+                        @hook('admin.product.edit.variables.batch.after')
                       </div>
 
                       <table class="table table-bordered table-hover">
