@@ -44,7 +44,7 @@
               <label class="filter-title">{{ __('common.status') }}</label>
               <select v-model="filter.active" class="form-select">
                 <option value="">{{ __('common.all') }}</option>
-              variant-value-img  <option value="1">{{ __('product.active') }}</option>
+                <option value="1">{{ __('product.active') }}</option>
                 <option value="0">{{ __('product.inactive') }}</option>
               </select>
             </div>
