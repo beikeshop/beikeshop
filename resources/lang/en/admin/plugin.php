@@ -35,4 +35,5 @@ return [
     'language'              => 'Language',
     'theme'                 => 'Theme',
     'translator'            => 'Translation',
+    'ticket'                => 'Ticket',
 ];

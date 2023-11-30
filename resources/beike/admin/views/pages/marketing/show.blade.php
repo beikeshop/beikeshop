@@ -110,6 +110,7 @@ $data = $plugin['data'];
             <div>
               <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                 __('admin/marketing.download_plugin') }}</button>
+              <a :href="toBkTicketUrl()" class="btn btn-primary btn-lg ms-2"><i class="bi bi-ticket-detailed-fill"></i> {{ __('admin/plugin.ticket') }}</a>
               @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61 )
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
@@ -364,6 +365,11 @@ $data = $plugin['data'];
     },
 
     methods: {
+      toBkTicketUrl() {
+        let code = "{{ $data['code'] }}"
+        return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+      },
+
       checkedBtnLogin(form) {
         let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
 

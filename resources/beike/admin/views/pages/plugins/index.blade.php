@@ -48,7 +48,8 @@
                     <a v-else :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]" href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
                   </span>
                   <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
-                  <a class="btn btn-outline-danger btn-sm" target="_blank" href="{{ config('beike.api_url') }}/account/plugin_tickets/create?domain=beikeshop.test&plugin=fashion2">工单</a>
+
+                  <a class="btn btn-outline-danger btn-sm" target="_blank" :href="toBkTicketUrl(plugin.code)">{{ __('admin/plugin.ticket') }}</a>
                 </div>
                 <div v-else>
                   <a class="btn btn-outline-success btn-sm" @click="installedPlugin(plugin.code, 'install', index)">{{ __('admin/common.install') }}</a>
@@ -107,6 +108,10 @@
           }
 
           this.installedPluginXhr(code, type, index);
+        },
+
+        toBkTicketUrl(code) {
+          return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
         },
 
         installedPluginXhr(code, type, index) {
