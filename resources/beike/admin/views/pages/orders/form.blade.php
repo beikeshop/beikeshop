@@ -7,7 +7,7 @@
 @endsection
 
 @section('page-title-right')
-  <a href="{{ admin_route('orders.shipping.get') }}?order_id={{ $order->id }}"target="_blank" class="btn btn-outline-primary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</a>
+  <a href="{{ admin_route('orders.shipping.get') }}?order_id={{ $order->id }}"target="_blank" class="btn btn-outline-secondary"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</a>
 @endsection
 
 @section('content')
