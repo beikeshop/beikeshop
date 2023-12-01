@@ -485,7 +485,7 @@ $data = $plugin['data'];
           }
 
           if (this.payCode == 'stripe') {
-            window.open(res.data.pay_url, '_blank');
+            window.open(`${res.data.pay_url}?type=plugin_order`, '_blank');
             this.paySuccessAlert();
           }
 
