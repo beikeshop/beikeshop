@@ -449,6 +449,11 @@ $data = $plugin['data'];
             return;
           }
 
+          if (this.payCode == 'stripe') {
+            window.open(`${res.data.pay_url}`, '_blank');
+            this.paySuccessAlert();
+          }
+
           if (res.data.payment_code == 'wechatpay') {
             this.service_wechatpay_price = res.data.amount
             this.service_id = res.data.id
@@ -457,17 +462,7 @@ $data = $plugin['data'];
 
           if (res.data.payment_code == 'alipay') {
             window.open(res.data.pay_url, '_blank');
-
-            Swal.fire({
-              title: '{{ __('admin/marketing.ali_pay_success') }}',
-              text: '{{ __('admin/marketing.ali_pay_text') }}',
-              icon: 'question',
-              confirmButtonColor: '#fd560f',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              willClose: function () {
-                window.location.reload();
-              },
-            })
+            this.paySuccessAlert();
           }
         })
       },
@@ -485,7 +480,7 @@ $data = $plugin['data'];
           }
 
           if (this.payCode == 'stripe') {
-            window.open(`${res.data.pay_url}?type=plugin_order`, '_blank');
+            window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }
 
