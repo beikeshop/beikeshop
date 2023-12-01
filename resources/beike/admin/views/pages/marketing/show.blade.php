@@ -449,7 +449,7 @@ $data = $plugin['data'];
             return;
           }
 
-          if (this.payCode == 'stripe') {
+          if (res.data.payment_code == 'stripe') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }
