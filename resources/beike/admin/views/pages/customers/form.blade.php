@@ -28,6 +28,13 @@
               <el-form-item label="{{ __('common.status') }}" prop="status">
                 <el-switch v-model="form.status" :active-value="1" :inactive-value="0"></el-switch>
               </el-form-item>
+              <el-form-item label="{{ __('common.examine') }}" prop="examine">
+                <el-select v-model="form.customer_group_id" placeholder="请选择">
+                  <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+              </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
               </el-form-item>
