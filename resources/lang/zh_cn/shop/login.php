@@ -39,8 +39,4 @@ return [
     'login_successfully'      => '登录成功',
     'register_success'        => '注册成功',
     'third_party_logins'      => '第三方登录',
-
-    approved => 1
-
-
 ];
