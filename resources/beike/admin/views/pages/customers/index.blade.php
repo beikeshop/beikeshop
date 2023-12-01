@@ -204,10 +204,9 @@
           let id = event.currentTarget.getAttribute("data-id");
           let checked = event.currentTarget.getAttribute("data-active");
           let type = 1;
-          if (checked) {
+          if (checked * 1) {
             type = 0;
           }
-          console.log(checked,type)
           $http.put(`customers/${id}/update_active`, {active: type}).then((res) => {
             layer.msg(res.message)
             location.reload();
