@@ -179,15 +179,18 @@ class OrderReportRepo
 
     /**
      * 获取所有商品的浏览数量列表
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function getProductViews()
     {
-        Product::query()->with(['description'])
-            ->selectSub(
-                ProductView::query()->where('product.id', 'product_view.product_id')->count()
-            );
+        $builder = Product::query()->with(['description', 'views'])
+            ->leftJoin('product_views', 'product_views.product_id', 'products.id')
+            ->groupBy('products.id')
+            ->select(['products.id'])
+            ->selectRaw('COUNT(product_views.id) AS view_count')
+            ->orderBy('view_count', 'desc');
 
+        return $builder->get();
     }
 
     /**
@@ -197,7 +200,21 @@ class OrderReportRepo
      */
     public static function getViewsLatestMonth($productId = 0)
     {
+        $builder = ProductView::query()->where('created_at', '>', today()->subMonth())
+            ->where('created_at', '>', today())
+            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
+            ->groupBy('date');
+        if ($productId) {
+            $builder->where('product_id', $productId);
+        }
+        $totals = $builder->get()
+            ->keyBy('date');
 
+        $data = [
+            'totals'  => $totals,
+        ];
+
+        return hook_filter('dashboard.order_report_views_month', $data);
     }
 
     /**
@@ -207,7 +224,21 @@ class OrderReportRepo
      */
     public static function getViewsLatestWeek($productId = 0)
     {
+        $builder = ProductView::query()->where('created_at', '>', today()->subWeek())
+            ->where('created_at', '>', today())
+            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
+            ->groupBy('date');
+        if ($productId) {
+            $builder->where('product_id', $productId);
+        }
+        $totals = $builder->get()
+            ->keyBy('date');
 
+        $data = [
+            'totals'  => $totals,
+        ];
+
+        return hook_filter('dashboard.order_report_views_week', $data);
     }
 
     /**
@@ -217,6 +248,25 @@ class OrderReportRepo
      */
     public static function getViewsLatestYear($productId = 0)
     {
+        $builder = ProductView::query()->where('created_at', '>', today()->subYear())
+            ->where('created_at', '>', today())
+            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
+            ->groupBy(['year', 'month']);
+        if ($productId) {
+            $builder->where('product_id', $productId);
+        }
+        $totals = $builder->get();
 
+        $monthTotals = [];
+        foreach ($totals as $total) {
+            $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
+            $monthTotals[$key] = $total['total'];
+        }
+
+        $data = [
+            'totals'  => $monthTotals,
+        ];
+
+        return hook_filter('dashboard.order_report_views_year', $data);
     }
 }
