@@ -27,7 +27,7 @@ class EditProductTest extends DuskTestCase
      * @return void
      */
 
-//场景1 email不合法
+    //场景1 email不合法
     public function testEditProduct()
     {
 
@@ -54,6 +54,6 @@ class EditProductTest extends DuskTestCase
                 ->press(CreProductPage::Product_Top['save_btn'])
                 ->pause(3000)
                 ->assertSee(ProductPage::Assert['alter_ful_assert']);
-                });
+        });
     }
 }

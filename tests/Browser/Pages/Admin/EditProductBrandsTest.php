@@ -48,6 +48,6 @@ class EditProductBrandsTest extends DuskTestCase
                 ->press(ProductPage::Cre_brand['save_btn'])
                 ->pause(3000)
                 ->assertSee(CreBrandsData::Alter_Brands_Info['alter_brand_name']);
-                });
+        });
     }
 }

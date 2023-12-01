@@ -109,7 +109,7 @@ class CartController extends Controller
     /**
      * PUT /carts/{cart_id} {sku_id:1, quantity: 2}
      * @param CartRequest $request
-     * @param $cartId
+     * @param             $cartId
      * @return JsonResponse
      */
     public function update(CartRequest $request, $cartId): JsonResponse
@@ -128,7 +128,7 @@ class CartController extends Controller
     /**
      * DELETE /carts/{cart_id}
      * @param Request $request
-     * @param $cartId
+     * @param         $cartId
      * @return JsonResponse
      */
     public function destroy(Request $request, $cartId): JsonResponse

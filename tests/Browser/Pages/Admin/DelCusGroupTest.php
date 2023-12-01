@@ -40,10 +40,10 @@ class DelCusGroupTest extends DuskTestCase
                 //4.点击客户组
                 ->click(CustomerPage::Left['customer_group']);
 
-                $cus_group_text = $browser->text(CustomerPage::Customer_Group['get_assert']);
-                echo $cus_group_text;
-                //5.点击删除按钮
-                $browser->press(CustomerPage::Customer_Group['del_cus_group'])
+            $cus_group_text = $browser->text(CustomerPage::Customer_Group['get_assert']);
+            echo $cus_group_text;
+            //5.点击删除按钮
+            $browser->press(CustomerPage::Customer_Group['del_cus_group'])
                 ->pause(2000)
                 ->assertSee($cus_group_text);
         });

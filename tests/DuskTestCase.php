@@ -21,7 +21,7 @@ abstract class DuskTestCase extends BaseTestCase
     {
         if (! static::runningInSail()) {
             static::startChromeDriver();
-//            static::startFirefoxDriver();
+            //            static::startFirefoxDriver();
         }
     }
 
@@ -47,10 +47,10 @@ abstract class DuskTestCase extends BaseTestCase
         );
     }
 
-        protected function baseUrl()
-        {
+    protected function baseUrl()
+    {
 
-         return 'http://beikeshop.test';
+        return 'http://beikeshop.test';
 
     }
 

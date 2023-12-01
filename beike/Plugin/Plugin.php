@@ -19,7 +19,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class Plugin implements Arrayable, \ArrayAccess
+class Plugin implements \ArrayAccess, Arrayable
 {
     public const TYPES = [
         'payment',    // 支付方式

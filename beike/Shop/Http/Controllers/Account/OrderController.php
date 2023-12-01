@@ -45,7 +45,7 @@ class OrderController extends Controller
      * 获取当前客户订单列表
      *
      * @param Request $request
-     * @param $number
+     * @param         $number
      * @return View
      */
     public function show(Request $request, $number): View
@@ -61,7 +61,7 @@ class OrderController extends Controller
      * 订单支付页面
      *
      * @param Request $request
-     * @param $number
+     * @param         $number
      * @return mixed
      * @throws \Exception
      */
@@ -82,7 +82,7 @@ class OrderController extends Controller
      * 完成订单
      *
      * @param Request $request
-     * @param $number
+     * @param         $number
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -103,7 +103,7 @@ class OrderController extends Controller
      * 取消订单
      *
      * @param Request $request
-     * @param $number
+     * @param         $number
      * @return array
      * @throws \Exception
      */

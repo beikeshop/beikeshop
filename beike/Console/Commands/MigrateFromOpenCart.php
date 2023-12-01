@@ -293,9 +293,9 @@ class MigrateFromOpenCart extends Command
     /**
      * 生成 beike 产品 SKU
      *
-     * @param $ocProduct
-     * @param $productVariants
-     * @param $childProducts
+     * @param       $ocProduct
+     * @param       $productVariants
+     * @param       $childProducts
      * @param array $variables
      * @return array
      */

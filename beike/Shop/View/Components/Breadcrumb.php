@@ -275,8 +275,8 @@ class Breadcrumb extends Component
     /**
      * 获取普通链接
      *
-     * @param $type
-     * @param $value
+     * @param       $type
+     * @param       $value
      * @param array $text
      * @return array
      * @throws \Exception

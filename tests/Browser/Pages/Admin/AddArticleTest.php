@@ -48,60 +48,60 @@ class AddArticleTest extends DuskTestCase
                 //填写基础信息
                 ->type(ArticlePage::Cn_info['title'], ArticleData::Cn_info['title'])
                 ->type(ArticlePage::Cn_info['summary'], ArticleData::Cn_info['summary']);
-               //切换窗口
-                //填写卡号
-                $wait              = new WebDriverWait($browser->driver, 10);
-                $iframeElementTab1 = $wait->until(function () use ($browser) {
-                    return $browser->driver->findElement(WebDriverBy::cssSelector('#mce_0_ifr'));
-                });
+            //切换窗口
+            //填写卡号
+            $wait              = new WebDriverWait($browser->driver, 10);
+            $iframeElementTab1 = $wait->until(function () use ($browser) {
+                return $browser->driver->findElement(WebDriverBy::cssSelector('#mce_0_ifr'));
+            });
 
-                // 切换到 tab1 下的 iframe
-                $browser->driver->switchTo()->frame($iframeElementTab1);
+            // 切换到 tab1 下的 iframe
+            $browser->driver->switchTo()->frame($iframeElementTab1);
 
-                // 在 tab1 下的 iframe 中查找并修改第一个 <p> 元素的文本
-                $paragraphTab1 = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
-                    WebDriverBy::tagName('p')
-                ));
-                $cn_content = ArticleData::Cn_info['content'];
-                $browser->driver->executeScript("
+            // 在 tab1 下的 iframe 中查找并修改第一个 <p> 元素的文本
+            $paragraphTab1 = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
+                WebDriverBy::tagName('p')
+            ));
+            $cn_content = ArticleData::Cn_info['content'];
+            $browser->driver->executeScript("
                     var paragraphTab1 = arguments[0];
                     if (paragraphTab1) {
                     paragraphTab1.innerHTML = '$cn_content';
                 }
                 ", [$paragraphTab1]);
-                $browser->driver->switchTo()->defaultContent();
-                $browser->pause(2000);
-                $browser->driver->switchTo()->defaultContent();
-                $browser->press(ArticlePage::Top['En'])
-                    ->type(ArticlePage::En_info['title'], ArticleData::En_info['title'])
-                    ->type(ArticlePage::En_info['summary'], ArticleData::En_info['summary']);
-                //切换窗口、填写内容
-                $wait              = new WebDriverWait($browser->driver, 10);
-                $iframeElementTab2 = $wait->until(function () use ($browser) {
+            $browser->driver->switchTo()->defaultContent();
+            $browser->pause(2000);
+            $browser->driver->switchTo()->defaultContent();
+            $browser->press(ArticlePage::Top['En'])
+                ->type(ArticlePage::En_info['title'], ArticleData::En_info['title'])
+                ->type(ArticlePage::En_info['summary'], ArticleData::En_info['summary']);
+            //切换窗口、填写内容
+            $wait              = new WebDriverWait($browser->driver, 10);
+            $iframeElementTab2 = $wait->until(function () use ($browser) {
                 return $browser->driver->findElement(WebDriverBy::cssSelector('#mce_2_ifr'));
-                });
+            });
 
-                // 切换到 tab2 下的 iframe
-                $browser->driver->switchTo()->frame($iframeElementTab2);
-                $browser->pause(2000);
+            // 切换到 tab2 下的 iframe
+            $browser->driver->switchTo()->frame($iframeElementTab2);
+            $browser->pause(2000);
 
-                // 在 tab2 下的 iframe 中查找并修改第一个 <p> 元素的文本
-                $paragraphTab2 = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
+            // 在 tab2 下的 iframe 中查找并修改第一个 <p> 元素的文本
+            $paragraphTab2 = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
                 WebDriverBy::tagName('p')
-                ));
-                $en_content = ArticleData::En_info['content'];
-                $browser->driver->executeScript("
+            ));
+            $en_content = ArticleData::En_info['content'];
+            $browser->driver->executeScript("
                     var paragraphTab2 = arguments[0];
                     if (paragraphTab2) {
                     paragraphTab2.innerHTML = '$en_content';
                 }
                 ", [$paragraphTab2]);
-                $browser->driver->switchTo()->defaultContent();
-                $browser->pause(2000);
-                //5.点击保存
-                $browser->press(ArticlePage::Common['save_btn'])
+            $browser->driver->switchTo()->defaultContent();
+            $browser->pause(2000);
+            //5.点击保存
+            $browser->press(ArticlePage::Common['save_btn'])
                 ->pause(2000)
                 ->assertSee(ArticleData::Cn_info['title']);
-                });
+        });
     }
 }

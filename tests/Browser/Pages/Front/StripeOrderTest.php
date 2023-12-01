@@ -52,44 +52,44 @@ class StripeOrderTest extends DuskTestCase
                 //点击第二种支付方式
 
                 ->elements(CheckoutPage::Checkout['method_pay'])[1]->click();
-                $browser->pause(5000)
-                //5.点击确认按钮
+            $browser->pause(5000)
+            //5.点击确认按钮
                 ->press(CheckoutPage::Checkout['submit'])
                 ->pause(5000)
-                //填写卡号信息
+            //填写卡号信息
                 ->type(OrderPage::Stripe_Plugin['Cardholder_Name'], PaymentData::Payment_Stripe['Cardholder_Name']);
-                //切换窗口
-                //填写卡号
-                $wait          = new WebDriverWait($browser->driver, 10);
-                $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
-                    WebDriverBy::cssSelector('#card-number-element > div > iframe')
-                ));
-                $browser->driver->switchTo()->frame($iframeElement);
-                $browser->type(OrderPage::Stripe_Plugin['Card_Number'], PaymentData::Payment_Stripe['Card_Number'])
+            //切换窗口
+            //填写卡号
+            $wait          = new WebDriverWait($browser->driver, 10);
+            $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
+                WebDriverBy::cssSelector('#card-number-element > div > iframe')
+            ));
+            $browser->driver->switchTo()->frame($iframeElement);
+            $browser->type(OrderPage::Stripe_Plugin['Card_Number'], PaymentData::Payment_Stripe['Card_Number'])
                 ->driver->switchTo()->defaultContent();
 
-                //填写过期时间
-                $wait          = new WebDriverWait($browser->driver, 10);
-                $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
-                    WebDriverBy::cssSelector('#card-expiry-element > div > iframe')
-                ));
-                $browser->driver->switchTo()->frame($iframeElement);
-                $browser->pause(5000)
+            //填写过期时间
+            $wait          = new WebDriverWait($browser->driver, 10);
+            $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
+                WebDriverBy::cssSelector('#card-expiry-element > div > iframe')
+            ));
+            $browser->driver->switchTo()->frame($iframeElement);
+            $browser->pause(5000)
                 ->type(OrderPage::Stripe_Plugin['Expiration_Date'], PaymentData::Payment_Stripe['Expiration_Date'])
                 ->driver->switchTo()->defaultContent();
 
-                // 填写cvv
-                $wait          = new WebDriverWait($browser->driver, 10);
-                $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
-                    WebDriverBy::cssSelector('#card-cvc-element > div > iframe')
-                ));
-                $browser->driver->switchTo()->frame($iframeElement)
+            // 填写cvv
+            $wait          = new WebDriverWait($browser->driver, 10);
+            $iframeElement = $wait->until(WebDriverExpectedCondition::presenceOfElementLocated(
+                WebDriverBy::cssSelector('#card-cvc-element > div > iframe')
+            ));
+            $browser->driver->switchTo()->frame($iframeElement)
                 ->wait(OrderPage::Stripe_Plugin['Card_Number']);
-                $browser->type(OrderPage::Stripe_Plugin['CVV'], PaymentData::Payment_Stripe['CVV'])
+            $browser->type(OrderPage::Stripe_Plugin['CVV'], PaymentData::Payment_Stripe['CVV'])
                 ->driver->switchTo()->defaultContent();
-                $browser->press(OrderPage::Stripe_Plugin['Submit_Btn'])
+            $browser->press(OrderPage::Stripe_Plugin['Submit_Btn'])
                 ->pause(5000)
-                //6.断言
+            //6.断言
                 ->assertSee(OrderPage::Stripe_Plugin['Assert_Test']);
         });
     }

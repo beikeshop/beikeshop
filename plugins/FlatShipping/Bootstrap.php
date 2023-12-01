@@ -59,7 +59,7 @@ class Bootstrap
             return $amount * $shippingValue / 100;
         }
 
-            return 0;
+        return 0;
 
     }
 }

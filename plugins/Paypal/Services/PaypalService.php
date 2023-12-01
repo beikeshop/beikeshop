@@ -19,7 +19,7 @@ class PaypalService extends PaymentService
     public PayPal $paypalClient;
 
     /**
-     * @param $order
+     * @param             $order
      * @throws \Exception
      * @throws \Throwable
      */

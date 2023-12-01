@@ -56,8 +56,8 @@ class ShipmentService
     }
 
     /**
-     * @param $orderShipment
-     * @param $data
+     * @param             $orderShipment
+     * @param             $data
      * @throws \Throwable
      */
     public static function updateShipment($orderShipment, $data)

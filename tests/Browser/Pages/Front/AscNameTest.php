@@ -37,21 +37,21 @@ class AscNameTest extends DuskTestCase
                 ->click(IndexPage::Index['top_Sports'])
                 ->click(CategoriesPage::Categories['sort_button'])
                 ->click(CategoriesPage::Categories['asc_name']);
-                $product       = $browser->elements(CategoriesPage::Categories['product_name']);
-                $product_1     = $product[1]->getText(); //获取第一个商品名
-                $first_letter1 = substr($product_1, 0, 1);
-                $product_2     = $product[2]->getText(); //获取第二个商品名
-                $first_letter2 = substr($product_2, 0, 1);
-                $product_3     = $product[3]->getText(); //获取第三个商品名
-                $first_letter3 = substr($product_3, 0, 1);
-                //打印订单号
-                echo $first_letter1;
-                echo $first_letter2;
-                echo $first_letter3;
-                // 断言函数：判断三个变量是否正序排列
-                assert(ord($first_letter1) <= ord($first_letter2) && ord($first_letter2) <= ord($first_letter3), '变量未正序排列');
+            $product       = $browser->elements(CategoriesPage::Categories['product_name']);
+            $product_1     = $product[1]->getText(); //获取第一个商品名
+            $first_letter1 = substr($product_1, 0, 1);
+            $product_2     = $product[2]->getText(); //获取第二个商品名
+            $first_letter2 = substr($product_2, 0, 1);
+            $product_3     = $product[3]->getText(); //获取第三个商品名
+            $first_letter3 = substr($product_3, 0, 1);
+            //打印订单号
+            echo $first_letter1;
+            echo $first_letter2;
+            echo $first_letter3;
+            // 断言函数：判断三个变量是否正序排列
+            assert(ord($first_letter1) <= ord($first_letter2) && ord($first_letter2) <= ord($first_letter3), '变量未正序排列');
 
-                $browser->pause(10000);
+            $browser->pause(10000);
 
         });
     }

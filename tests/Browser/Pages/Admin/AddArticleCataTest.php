@@ -53,6 +53,6 @@ class AddArticleCataTest extends DuskTestCase
                 ->pause(3000)
                 ->assertSee(ArticleCataData::Cn_info['title']);
 
-                });
+        });
     }
 }

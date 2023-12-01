@@ -35,7 +35,7 @@ class ProductSku extends Base
         $localeCode   = locale();
         $variantLabel = '';
 
-        if(empty($product->variables)) {
+        if (empty($product->variables)) {
             return '';
         }
 

@@ -19,12 +19,12 @@ use Tests\DuskTestCase;
 
 class GoPluginsTest extends DuskTestCase
 {
-        /**
-         * A basic browser test example.
-         * @return void
-         */
-        public function testGopLugins()
-        {
+    /**
+     * A basic browser test example.
+     * @return void
+     */
+    public function testGopLugins()
+    {
 
         $this->browse(function (Browser $browser) {
             $browser->visit(AdminLoginPage::Admin_Login['login_url'])

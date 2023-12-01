@@ -27,7 +27,7 @@ class Registry
     }
 
     /**
-     * @param $key
+     * @param      $key
      * @param null $default
      * @return mixed
      */
@@ -37,8 +37,8 @@ class Registry
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param      $key
+     * @param      $value
      * @param bool $force
      */
     public static function set($key, $value, bool $force = false)
@@ -55,7 +55,7 @@ class Registry
     }
 
     /**
-     * @param $key
+     * @param      $key
      * @param null $default
      * @return mixed
      */

@@ -15,6 +15,7 @@ use Beike\Models\Customer;
 use Beike\Shop\Http\Controllers\Controller;
 use Beike\Shop\Http\Requests\RegisterRequest;
 use Beike\Shop\Services\AccountService;
+
 use function view;
 
 class RegisterController extends Controller

@@ -35,11 +35,11 @@ class DelCategoriesTest extends DuskTestCase
                 //点击商品分类
                 ->click(ProductPage::Product_Left['product_cate'])
                 ->pause(5000);
-                //获取即将删除的商品分类名称
-                $cata_name  = $browser->text(ProductPage::Cre_class['del_cate_text']);
-                echo $cata_name;
-                //点击删除
-                $browser->press(ProductPage::Cre_class['del_cate_btn'])
+            //获取即将删除的商品分类名称
+            $cata_name  = $browser->text(ProductPage::Cre_class['del_cate_text']);
+            echo $cata_name;
+            //点击删除
+            $browser->press(ProductPage::Cre_class['del_cate_btn'])
                 ->press(ProductPage::Cre_class['sure_del_btn'])
                 ->pause(2000)
                 ->assertDontSee($cata_name);

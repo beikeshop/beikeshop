@@ -47,6 +47,6 @@ class EditCustomerTest extends DuskTestCase
                 ->press(CustomerPage::Alter['save_btn'])
                 ->pause(5000)
                 ->assertSee(CustomerData::Customer_Info_Alter['email']);
-                });
+        });
     }
 }

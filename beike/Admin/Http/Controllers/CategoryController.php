@@ -88,7 +88,7 @@ class CategoryController extends Controller
         return view('admin::pages.categories.form', $data);
     }
 
-    protected function save(Request $request, ?Category $category = null)
+    protected function save(Request $request, Category $category = null)
     {
         $requestData = $request->all();
         $category    = (new CategoryService())->createOrUpdate($requestData, $category);

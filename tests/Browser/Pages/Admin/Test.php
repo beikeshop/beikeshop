@@ -15,7 +15,7 @@ class Test extends DuskTestCase
      */
     public function testHomePage()
     {
-//        \Tests\Data\Admin\AdminPage::TOP['login_url'];
+        //        \Tests\Data\Admin\AdminPage::TOP['login_url'];
 
         $this->browse(function (Browser $browser) {
             $browser->visit(AdminLoginPage::ADMINLOGIN['login_url'])

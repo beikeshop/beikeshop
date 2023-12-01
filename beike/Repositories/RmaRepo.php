@@ -66,7 +66,7 @@ class RmaRepo
     }
 
     /**
-     * @param $rma
+     * @param       $rma
      * @param array $data
      * @return Rma
      */

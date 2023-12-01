@@ -28,7 +28,7 @@ class FetchCurrencyRate extends Command
             $this->table(['货币', '汇率'], $tableRows);
 
             $this->info(sprintf('获取 %s 汇率数据完成', $today));
-        }catch (\Exception) {
+        } catch (\Exception) {
             $this->error(sprintf('获取 %s 汇率数据失败', $today));
         }
     }

@@ -44,6 +44,6 @@ class DelProductBrandsTest extends DuskTestCase
                 ->press(ProductPage::Cre_brand['del_sure_btn'])
                 ->pause(3000)
                 ->assertDontSee(CreBrandsData::Alter_Brands_Info['alter_brand_name']);
-                });
+        });
     }
 }

@@ -23,7 +23,7 @@ class ImageService
     private $placeholderImage = 'catalog/placeholder.png';
 
     /**
-     * @param $image
+     * @param             $image
      * @throws \Exception
      */
     public function __construct($image)

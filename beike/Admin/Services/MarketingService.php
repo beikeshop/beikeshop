@@ -146,7 +146,7 @@ class MarketingService
     /**
      * 下载插件到网站
      *
-     * @param $pluginCode
+     * @param             $pluginCode
      * @throws \Exception
      */
     public function download($pluginCode)

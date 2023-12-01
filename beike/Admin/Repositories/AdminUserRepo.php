@@ -89,7 +89,7 @@ class AdminUserRepo
     /**
      * 删除后台用户
      *
-     * @param $adminUserId
+     * @param             $adminUserId
      * @throws \Exception
      */
     public static function deleteAdminUser($adminUserId)

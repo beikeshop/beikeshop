@@ -53,9 +53,9 @@ class FileManagerService
     /**
      * 获取某个目录下的文件和文件夹
      *
-     * @param $baseFolder
-     * @param $sort
-     * @param $order
+     * @param     $baseFolder
+     * @param     $sort
+     * @param     $order
      * @param int $page
      * @param int $perPage
      * @return array
@@ -109,7 +109,7 @@ class FileManagerService
 
     /**
      * 创建目录
-     * @param $folderName
+     * @param             $folderName
      * @throws \Exception
      */
     public function createDirectory($folderName)
@@ -125,8 +125,8 @@ class FileManagerService
     /**
      * 移动文件夹
      *
-     * @param $sourcePath
-     * @param $destPath
+     * @param             $sourcePath
+     * @param             $destPath
      * @throws \Exception
      */
     public function moveDirectory($sourcePath, $destPath)
@@ -193,7 +193,7 @@ class FileManagerService
     /**
      * 删除文件或文件夹
      *
-     * @param $filePath
+     * @param             $filePath
      * @throws \Exception
      */
     public function deleteDirectoryOrFile($filePath)
@@ -232,8 +232,8 @@ class FileManagerService
     /**
      * 修改文件夹或者文件名称
      *
-     * @param $originPath
-     * @param $newPath
+     * @param             $originPath
+     * @param             $newPath
      * @throws \Exception
      */
     public function updateName($originPath, $newPath)

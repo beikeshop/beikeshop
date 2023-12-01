@@ -127,7 +127,7 @@ class Sidebar extends Component
      *
      * @return array|null
      */
-    private function getCurrentLink(): array|null
+    private function getCurrentLink(): ?array
     {
         foreach ($this->links as $link) {
             $prefixes = $link['prefixes'] ?? [];

@@ -23,7 +23,7 @@ class OrderProductRepo
      * 创建商品明细
      *
      * @param Order $order
-     * @param $cartProducts
+     * @param       $cartProducts
      */
     public static function createOrderProducts(Order $order, $cartProducts)
     {

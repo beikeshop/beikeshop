@@ -16,8 +16,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Customer extends Authenticatable implements JWTSubject
 {
     use HasFactory;
-    use SoftDeletes;
     use Notifiable;
+    use SoftDeletes;
 
     public const AUTH_GUARD = 'web_shop';
 

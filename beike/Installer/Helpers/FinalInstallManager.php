@@ -64,7 +64,7 @@ class FinalInstallManager
     /**
      * Return a formatted error messages.
      *
-     * @param $message
+     * @param                                                  $message
      * @param \Symfony\Component\Console\Output\BufferedOutput $outputLog
      * @return array
      */

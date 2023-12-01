@@ -132,8 +132,8 @@ class Tax
      * $tax->setShippingAddress(1, 0);
      * $tax->calculate(123.45, 9, $tax->config->getValue('config_tax'))
      *
-     * @param $value
-     * @param $taxClassId
+     * @param           $value
+     * @param           $taxClassId
      * @param bool|true $calculate
      * @return mixed
      */
@@ -153,7 +153,7 @@ class Tax
             return $value + $amount;
         }
 
-            return $value;
+        return $value;
 
     }
 
@@ -175,7 +175,7 @@ class Tax
             return $taxRate->name;
         }
 
-            return false;
+        return false;
 
     }
 

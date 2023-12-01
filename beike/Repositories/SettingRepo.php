@@ -125,8 +125,8 @@ class SettingRepo
     /**
      * 创建或更新单条记录
      *
-     * @param $name
-     * @param $value
+     * @param             $name
+     * @param             $value
      * @param  string     $space
      * @param  string     $type
      * @throws \Throwable

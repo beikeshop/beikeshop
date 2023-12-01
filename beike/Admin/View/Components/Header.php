@@ -79,7 +79,7 @@ class Header extends Component
                 if ($type == 'index') {
                     $title = trans("admin/common.{$permissionRoute}");
                 } else {
-                $title = trans("admin/plugin.{$type}");
+                    $title = trans("admin/plugin.{$type}");
                 }
             } else {
                 $title = trans("admin/common.{$permissionRoute}");

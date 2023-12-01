@@ -40,19 +40,19 @@ class WishlistTest extends DuskTestCase
                 ->pause(2000)
                 ->press(IndexPage::Index['product_img'])
                 ->pause(2000);
-                //4.保存当前网址
-                $ProductUrl = $browser->driver->getCurrentURL();
-                //5.点击收藏按钮
-                $browser->visit($ProductUrl)
+            //4.保存当前网址
+            $ProductUrl = $browser->driver->getCurrentURL();
+            //5.点击收藏按钮
+            $browser->visit($ProductUrl)
                 ->press(ProductOne::Product['Wishlist_icon'])
                 ->pause(3000)
-                //6.点击顶部收藏认按钮
+            //6.点击顶部收藏认按钮
                 ->click(IndexPage::Index_Top['wishlist_btn'])
                 ->pause(1000)
-                //7.点击查看详情按钮
+            //7.点击查看详情按钮
                 ->click(AccountPage::Wishlist['Check_Details'])
                 ->pause(1000)
-                //8.断言
+            //8.断言
                 ->assertUrlIs($ProductUrl);
         });
     }

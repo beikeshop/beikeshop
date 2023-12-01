@@ -57,7 +57,7 @@ class ThemeController extends Controller
      * Enable theme
      *
      * @param Request $request
-     * @param $themeCode
+     * @param         $themeCode
      * @return mixed
      * @throws \Exception
      */

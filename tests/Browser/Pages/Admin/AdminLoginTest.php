@@ -23,7 +23,7 @@ class AdminLoginTest extends DuskTestCase
      * @return void
      */
 
-//场景1 email不合法
+    //场景1 email不合法
     public function testEmailIllegal()
     {
         $this->browse(function (Browser $browser) {
@@ -47,7 +47,7 @@ class AdminLoginTest extends DuskTestCase
         });
     }
 
-//场景3 密码错误
+    //场景3 密码错误
     public function testPwdFalse()
     {
         $this->browse(function (Browser $browser) {

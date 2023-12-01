@@ -19,12 +19,12 @@ use Tests\DuskTestCase;
 
 class GoCopyrightAndServiceTest extends DuskTestCase
 {
-        /**
-         * A basic browser test example.
-         * @return void
-         */
-        public function testGoCopyrightAndService()
-        {
+    /**
+     * A basic browser test example.
+     * @return void
+     */
+    public function testGoCopyrightAndService()
+    {
 
         $this->browse(function (Browser $browser) {
             $browser->visit(AdminLoginPage::Admin_Login['login_url'])
@@ -38,7 +38,7 @@ class GoCopyrightAndServiceTest extends DuskTestCase
                 ->pause(2000)
                 //3.切换到第二个窗口并获取断言
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->assertSee(AdminPage::Assert['vip_assert']);
+            $browser->assertSee(AdminPage::Assert['vip_assert']);
         });
     }
 }

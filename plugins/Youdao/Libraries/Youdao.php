@@ -224,8 +224,8 @@ class Youdao
     /**
      * 发起网络请求
      *
-     * @param $url
-     * @param $args
+     * @param        $url
+     * @param        $args
      * @param string $method
      * @param int    $timeout
      * @param array  $headers
@@ -236,8 +236,9 @@ class Youdao
         $ret = false;
         $i   = 0;
         while ($ret === false) {
-            if ($i > 1)
+            if ($i > 1) {
                 break;
+            }
             if ($i > 0) {
                 sleep(1);
             }

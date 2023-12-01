@@ -38,16 +38,16 @@ class DelArticleTest extends DuskTestCase
                 ->click(AdminPage::TOP['mg_article'])
                 //点击点击文章管理
                 ->press(ArticlePage::Left['mg_article']);
-                //获取第一行文章分类标题
-                $artice_title = $browser->text(ArticlePage::Common['artice_title_Text']);
-                echo $artice_title;
-                //点击删除按钮
-                $browser->press(ArticlePage::Common['del_btn'])
+            //获取第一行文章分类标题
+            $artice_title = $browser->text(ArticlePage::Common['artice_title_Text']);
+            echo $artice_title;
+            //点击删除按钮
+            $browser->press(ArticlePage::Common['del_btn'])
                 ->pause(3000)
                 ->click(ArticlePage::Common['del_sure_btn'])
                 ->pause(3000)
                 ->assertDontSee($artice_title);
 
-                });
+        });
     }
 }

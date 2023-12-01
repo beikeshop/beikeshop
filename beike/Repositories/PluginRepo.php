@@ -120,7 +120,7 @@ class PluginRepo
     /**
      * Run plugin seeder
      *
-     * @param $bPlugin
+     * @param             $bPlugin
      * @throws \Exception
      */
     public static function runSeeder($bPlugin)

@@ -51,13 +51,13 @@ class CloseVisiterCheckoutTest extends DuskTestCase
                 //切换到前台下单
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
             //前台用户登录
-                $browser->pause(2000)
-                //向下滑动页面直到找到商品
+            $browser->pause(2000)
+            //向下滑动页面直到找到商品
                 ->scrollIntoView(IndexPage::Index['product_img'])
                 ->pause(2000)
-                //点击要购买的商品
+            //点击要购买的商品
                 ->press(IndexPage::Index['product_img'])
-                //点击购买按钮
+            //点击购买按钮
                 ->press(ProductOne::Product['product_1'])
                 ->pause(5000)
         //断言：出现登录窗体则通过

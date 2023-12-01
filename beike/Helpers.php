@@ -22,7 +22,7 @@ use TorMorten\Eventy\Facades\Eventy;
 /**
  * 获取后台设置到 settings 表的值
  *
- * @param $key
+ * @param      $key
  * @param null $default
  * @return mixed
  */
@@ -34,7 +34,7 @@ function setting($key, $default = null)
 /**
  * 获取系统 settings
  *
- * @param $key
+ * @param      $key
  * @param null $default
  * @return mixed
  */
@@ -46,7 +46,7 @@ function system_setting($key, $default = null)
 /**
  * 获取后台设置到 settings 表的值
  *
- * @param $key
+ * @param      $key
  * @param null $default
  * @return mixed
  */
@@ -58,7 +58,7 @@ function plugin_setting($key, $default = null)
 /**
  * 获取插件静态文件
  *
- * @param $code , 插件编码
+ * @param $code     , 插件编码
  * @param $filePath , 相对于插件目录 static 的文件路径
  */
 function plugin_asset($code, $filePath): string
@@ -95,7 +95,7 @@ function load_settings()
 /**
  * 获取后台链接
  *
- * @param $route
+ * @param       $route
  * @param mixed $params
  * @return string
  */
@@ -109,7 +109,7 @@ function admin_route($route, $params = []): string
 /**
  * 获取前台链接
  *
- * @param $route
+ * @param       $route
  * @param mixed $params
  * @return string
  */
@@ -134,8 +134,8 @@ function type_route($type, $value): string
 /**
  * 获取 category, product, brand, page, static, custom 链接名称
  *
- * @param $type
- * @param $value
+ * @param       $type
+ * @param       $value
  * @param array $texts
  * @return string
  */
@@ -240,7 +240,7 @@ function current_customer(): mixed
 function get_session_id(): string
 {
     $headerSessionId = request()->header('Bksessionid');
-    if($headerSessionId) {
+    if ($headerSessionId) {
         return $headerSessionId;
     }
 
@@ -303,7 +303,7 @@ function admin_locale(): string
 /**
  * 货币格式化
  *
- * @param $price
+ * @param        $price
  * @param string $currency
  * @param string $value
  * @param bool   $format
@@ -371,8 +371,8 @@ function plugin($code): ?Plugin
 /**
  * 插件图片缩放
  *
- * @param $pluginCode
- * @param $image
+ * @param     $pluginCode
+ * @param     $image
  * @param int $width
  * @param int $height
  * @return mixed|void
@@ -413,7 +413,7 @@ function plugin_origin($pluginCode, $image)
 /**
  * 图片缩放
  *
- * @param $image
+ * @param     $image
  * @param int $width
  * @param int $height
  * @return mixed|void
@@ -577,7 +577,7 @@ function json_fail($message, $data = [], $status = 422): JsonResponse
 
 if (! function_exists('sub_string')) {
     /**
-     * @param $string
+     * @param        $string
      * @param int    $length
      * @param string $dot
      * @return string
@@ -670,8 +670,8 @@ function hook_action($hookKey, $hookValue)
 /**
  * 添加 Filter, 执行 PHP 逻辑
  *
- * @param $hookKey
- * @param $callback
+ * @param     $hookKey
+ * @param     $callback
  * @param int $priority
  * @param int $arguments
  * @return mixed
@@ -684,8 +684,8 @@ function add_hook_filter($hookKey, $callback, int $priority = 20, int $arguments
 /**
  * 添加 Action, 执行 PHP 逻辑
  *
- * @param $hookKey
- * @param $callback
+ * @param     $hookKey
+ * @param     $callback
  * @param int $priority
  * @param int $arguments
  */
@@ -697,8 +697,8 @@ function add_hook_action($hookKey, $callback, int $priority = 20, int $arguments
 /**
  * 采用 Hook 修改 Blade 代码
  *
- * @param $hookKey
- * @param $callback
+ * @param     $hookKey
+ * @param     $callback
  * @param int $priority
  */
 function add_hook_blade($hookKey, $callback, int $priority = 0)
@@ -759,8 +759,8 @@ function perPage(): int
 }
 
 /**
- * @param $key
- * @param $value
+ * @param      $key
+ * @param      $value
  * @param bool $force
  */
 function register($key, $value, bool $force = false)
@@ -769,7 +769,7 @@ function register($key, $value, bool $force = false)
 }
 
 /**
- * @param $key
+ * @param      $key
  * @param null $default
  * @return mixed
  */
@@ -902,7 +902,8 @@ function beike_api_url(): string
  */
 function check_same_domain(): bool
 {
-    $envDomain = clean_domain(env('APP_URL'));
+    $envDomain     = clean_domain(env('APP_URL'));
     $requestDomain = clean_domain(request()->getHost());
+
     return $envDomain == $requestDomain;
 }

@@ -163,7 +163,7 @@ class PluginController extends Controller
 
     /**
      * @param Request $request
-     * @param $code
+     * @param         $code
      * @return JsonResponse
      * @throws Exception
      */
@@ -181,7 +181,7 @@ class PluginController extends Controller
 
     /**
      * @param Request $request
-     * @param $code
+     * @param         $code
      * @return JsonResponse
      * @throws Exception
      */
@@ -200,7 +200,7 @@ class PluginController extends Controller
 
     /**
      * @param Request $request
-     * @param $code
+     * @param         $code
      * @return View
      * @throws Exception
      */
@@ -232,7 +232,7 @@ class PluginController extends Controller
 
     /**
      * @param Request $request
-     * @param $code
+     * @param         $code
      * @return mixed
      * @throws Exception
      */
@@ -259,7 +259,7 @@ class PluginController extends Controller
 
     /**
      * @param Request $request
-     * @param $code
+     * @param         $code
      * @return JsonResponse
      */
     public function updateStatus(Request $request, $code): JsonResponse

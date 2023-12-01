@@ -46,7 +46,7 @@ class CustomerRepo
     /**
      * 创建客户, 关联第三方用户数据
      *
-     * @param $provider
+     * @param      $provider
      * @param User $userData
      * @return Customer
      */
@@ -79,8 +79,8 @@ class CustomerRepo
     }
 
     /**
-     * @param $customer
-     * @param $provider
+     * @param      $customer
+     * @param      $provider
      * @param User $userData
      * @return Model|Builder
      */

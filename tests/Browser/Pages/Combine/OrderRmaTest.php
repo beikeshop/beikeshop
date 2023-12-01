@@ -43,39 +43,38 @@ class OrderRmaTest extends DuskTestCase
                 //切换到前台下单
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
             //前台用户登录
-                //点击登录图标
-                $browser->click(IndexPage::Index_Login['login_icon'])
+            //点击登录图标
+            $browser->click(IndexPage::Index_Login['login_icon'])
                 ->type(LoginPage::Login['login_email'], CataLoginData::True_Login['email'])
                 ->type(LoginPage::Login['login_pwd'], CataLoginData::True_Login['password'])
                 ->press(LoginPage::Login['login_btn'])
                 ->pause(5000)
-
                 ->click(AccountPage::Account['go_order'])
-                //点击订单-详情
+            //点击订单-详情
                 ->click(AccountPage::Account['go_order'])
                 ->click(AccountPage::Order['check_btn'])
-                //点击售后按钮
+            //点击售后按钮
                 ->click(AccountPage::Order['rma-btn'])
-                //填写售后信息
+            //填写售后信息
                 ->type(RmasPage::Rmas['Remark'], RmasData::Rmas['Remark_text'])
                 ->press(RmasPage::Rmas['Submit'])
-                //进入后台,查看售后订单
+            //进入后台,查看售后订单
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[0]);
-                //点击订单管理按钮
-                $browser->click(AdminPage::TOP['mg_order'])
+            //点击订单管理按钮
+            $browser->click(AdminPage::TOP['mg_order'])
                 ->press(AdminOrderPage::Child['mg_sale_after'])
                 ->pause(3000)
-                //点击查看按钮-修改状态为已完成
+            //点击查看按钮-修改状态为已完成
                 ->click(AdminOrderPage::Rams['Check_btn'])
                 ->click(AdminOrderPage::Rams['Pull_btn'])
                 ->click(AdminOrderPage::Rams['Completed'])
                 ->press(AdminOrderPage::Rams['Update_btn'])
                 ->pause(10000)
-                //切换到前台
+            //切换到前台
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->pause(3000)
+            $browser->pause(3000)
                 ->click(RmasPage::Rmas['Checkout-btn'])
-                //刷新页面
+            //刷新页面
                 ->assertSee(RmasData::Rmas['Asser_text']);
 
         });

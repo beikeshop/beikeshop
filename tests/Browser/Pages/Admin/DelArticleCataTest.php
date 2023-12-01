@@ -38,15 +38,15 @@ class DelArticleCataTest extends DuskTestCase
                 ->click(AdminPage::TOP['mg_article'])
                 //点击点击文章分类
                 ->press(ArticlePage::Left['catalog_article']);
-                //获取第一行文章分类标题
-                $cata_title = $browser->text(ArticlePage::Common['cata_title_Text']);
-                echo $cata_title;
-                //点击删除按钮
-                $browser->press(ArticlePage::Common['del_btn'])
+            //获取第一行文章分类标题
+            $cata_title = $browser->text(ArticlePage::Common['cata_title_Text']);
+            echo $cata_title;
+            //点击删除按钮
+            $browser->press(ArticlePage::Common['del_btn'])
                 ->click(ArticlePage::Common['sure_btn'])
                 ->pause(3000)
                 ->assertDontSee($cata_title);
 
-                });
+        });
     }
 }

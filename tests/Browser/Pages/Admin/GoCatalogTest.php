@@ -25,7 +25,7 @@ class GoCatalogTest extends DuskTestCase
      * @return void
      */
 
-//场景1 email不合法
+    //场景1 email不合法
     public function testGoCatalog()
     {
 
@@ -42,7 +42,7 @@ class GoCatalogTest extends DuskTestCase
                 ->click(AdminPage::TOP['go_catalog'])
                 ->pause(2000)
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->assertPathIs(IndexPage::Index['login_url']);
-                });
+            $browser->assertPathIs(IndexPage::Index['login_url']);
+        });
     }
 }

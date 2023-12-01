@@ -49,6 +49,6 @@ class AddRmaReasonsTest extends DuskTestCase
                 ->press(AdminOrderPage::Child['save_btn'])
                 ->pause(5000)
                 ->assertSee(RmaData::Zh_reason['titie']);
-                });
+        });
     }
 }

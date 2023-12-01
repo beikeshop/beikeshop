@@ -41,20 +41,19 @@ class AddCartTest extends DuskTestCase
                 ->press(IndexPage::Index['product_img'])
                 ->pause(2000);
 
-             //3.获取当前产品标题
-                $product_description = $browser->text(ProductOne::Product['product1_name']);
-                $ProductUrl          = $browser->driver->getCurrentURL();
+            //3.获取当前产品标题
+            $product_description = $browser->text(ProductOne::Product['product1_name']);
+            $ProductUrl          = $browser->driver->getCurrentURL();
             //4.点击收藏按钮
-               $browser->visit($ProductUrl)
+            $browser->visit($ProductUrl)
             //5.点击加入购物车
-
                 ->press(ProductOne::Product['add_cart'])
                 ->pause(3000)
-                //6.点击购物车按钮
+             //6.点击购物车按钮
                 ->click(IndexPage::Index_Cart['cart_icon'])
                 ->pause(10000);
-                //6.断言购物车内商品是否与先前商品相同
-               $browser->assertSeeIn(IndexPage::Index_Cart['product_text'], $product_description);
+            //6.断言购物车内商品是否与先前商品相同
+            $browser->assertSeeIn(IndexPage::Index_Cart['product_text'], $product_description);
         });
     }
 }

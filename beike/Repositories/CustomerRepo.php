@@ -147,7 +147,7 @@ class CustomerRepo
     }
 
     /**
-     * @param $customer ,  Customer对象或id
+     * @param $customer  ,  Customer对象或id
      * @param $productId
      * @return Customer|Builder|Builder[]|Collection|Model|mixed|null
      */
@@ -191,7 +191,7 @@ class CustomerRepo
     }
 
     /**
-     * @param $product , 商品id或对象
+     * @param $product  , 商品id或对象
      * @param $customer , 顾客id或对象
      * @return int
      */

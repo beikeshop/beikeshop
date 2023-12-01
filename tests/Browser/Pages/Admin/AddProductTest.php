@@ -27,7 +27,7 @@ class AddProductTest extends DuskTestCase
      * @return void
      */
 
-//场景1 email不合法
+    //场景1 email不合法
     public function testAddProduct()
     {
 
@@ -55,6 +55,6 @@ class AddProductTest extends DuskTestCase
                 //5.点击保存
                 ->press(CreProductPage::Product_Top['save_btn'])
                 ->assertSee(ProductPage::Assert['cre_ful_assert']);
-                });
+        });
     }
 }

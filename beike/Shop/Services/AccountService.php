@@ -71,10 +71,10 @@ class AccountService
 
     /**
      * 验证验证码是否正确，并修改密码为新密码
-     * @param $code
-     * @param $account
-     * @param $password
-     * @param string $type $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
+     * @param        $code
+     * @param        $account
+     * @param        $password
+     * @param string $type     $account类型，email代表$account为邮箱地址，telephone代表$account为手机号码
      * @return void
      * @throws \Exception
      */

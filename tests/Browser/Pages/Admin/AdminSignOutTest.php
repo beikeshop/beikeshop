@@ -24,7 +24,7 @@ class AdminSignOutTest extends DuskTestCase
      * @return void
      */
 
-//后台退出
+    //后台退出
     public function testAdminSignOut()
     {
 
@@ -41,7 +41,7 @@ class AdminSignOutTest extends DuskTestCase
                 ->click(AdminPage::TOP['sign_out'])
                 ->pause(10000)
                 ->assertSee(AdminLoginPage::Admin_Login['tltle']);
-//                ->assertSee(true_login['assert']);
+            //                ->assertSee(true_login['assert']);
         });
     }
 }

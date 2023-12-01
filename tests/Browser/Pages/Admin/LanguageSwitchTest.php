@@ -19,12 +19,12 @@ use Tests\DuskTestCase;
 
 class LanguageSwitchTest extends DuskTestCase
 {
-        /**
-         * A basic browser test example.
-         * @return void
-         */
-        public function testLanguageSwitch()
-        {
+    /**
+     * A basic browser test example.
+     * @return void
+     */
+    public function testLanguageSwitch()
+    {
 
         $this->browse(function (Browser $browser) {
             $browser->visit(AdminLoginPage::Admin_Login['login_url'])

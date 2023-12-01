@@ -50,7 +50,7 @@ class EditUserInfo extends DuskTestCase
                 ->press((AccountPage::Edit['Submit']))
                 ->pause(3000)
                 ->assertSee(AccountPage::Edit['assert']);
-                //3.向下滑动页面直到找到元素
+            //3.向下滑动页面直到找到元素
 
         });
     }

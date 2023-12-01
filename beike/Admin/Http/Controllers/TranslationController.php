@@ -31,7 +31,7 @@ class TranslationController extends Controller
             $result = TranslationService::translate($from, $to, $text);
 
             return json_success(trans('common.get_success'), $result);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
     }

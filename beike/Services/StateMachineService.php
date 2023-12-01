@@ -202,7 +202,7 @@ class StateMachineService
     }
 
     /**
-     * @param $status
+     * @param             $status
      * @param  string     $comment
      * @param  bool       $notify
      * @throws \Exception
@@ -242,7 +242,7 @@ class StateMachineService
     /**
      * 检测当前订单是否可以变更为某个状态
      *
-     * @param $statusCode
+     * @param             $statusCode
      * @throws \Exception
      */
     private function validStatusCode($statusCode)
@@ -290,8 +290,8 @@ class StateMachineService
     /**
      * 更新订单状态
      *
-     * @param $oldCode
-     * @param $newCode
+     * @param             $oldCode
+     * @param             $newCode
      * @throws \Throwable
      */
     private function updateStatus($oldCode, $newCode)
@@ -318,8 +318,8 @@ class StateMachineService
     /**
      * 添加更改记录
      *
-     * @param $oldCode
-     * @param $newCode
+     * @param            $oldCode
+     * @param            $newCode
      * @throws Throwable
      */
     private function addHistory($oldCode, $newCode)

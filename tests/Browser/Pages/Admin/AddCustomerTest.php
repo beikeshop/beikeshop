@@ -49,6 +49,6 @@ class AddCustomerTest extends DuskTestCase
                 ->pause(5000)
                 ->assertSee(CustomerData::Customer_Info['email']);
 
-                });
+        });
     }
 }

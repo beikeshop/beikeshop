@@ -23,7 +23,7 @@ class CartService
     /**
      * 获取购物车商品列表
      *
-     * @param $customer
+     * @param      $customer
      * @param bool $selected
      * @return array
      */
@@ -112,8 +112,8 @@ class CartService
     /**
      * 选择购物车商品
      *
-     * @param $customer
-     * @param $cartIds
+     * @param      $customer
+     * @param      $cartIds
      * @param bool $buyNow
      */
     public static function select($customer, $cartIds, bool $buyNow = false): void

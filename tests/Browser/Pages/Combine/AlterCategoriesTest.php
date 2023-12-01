@@ -62,7 +62,7 @@ class AlterCategoriesTest extends DuskTestCase
                 ->click(AdminPage::TOP['go_catalog'])
                 ->pause(2000)
                 ->driver->switchTo()->window($browser->driver->getWindowHandles()[1]);
-                $browser->click(IndexPage::Index['top_Sports'])
+            $browser->click(IndexPage::Index['top_Sports'])
                 ->pause(4000)
                 ->assertSee(CreCategories::Alter_Cate_Data['ch_name']);
 

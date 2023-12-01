@@ -56,8 +56,8 @@ class AdminRoleRepo
     /**
      * 同步所有权限
      *
-     * @param Role $adminRole
-     * @param $permissions
+     * @param  Role       $adminRole
+     * @param             $permissions
      * @throws \Exception
      */
     private static function syncPermissions(Role $adminRole, $permissions)
