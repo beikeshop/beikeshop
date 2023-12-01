@@ -33,6 +33,7 @@ class CustomerController extends Controller
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
             'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'type'             => 'customer',
+            'statues'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.index.data', $data);
         if ($request->expectsJson()) {

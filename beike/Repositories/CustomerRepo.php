@@ -209,4 +209,22 @@ class CustomerRepo
 
         return $customer->wishlists()->where('product_id', $product)->count();
     }
+
+    /**
+     * Get customer statuses.
+     *
+     * @return array
+     */
+    public static function getStatuses(): array
+    {
+        $result = [];
+        foreach (Customer::STATUSES as $status) {
+            $result[] = [
+                'code'  => $status,
+                'label' => trans("customer.{$status}"),
+            ];
+        }
+
+        return $result;
+    }
 }
