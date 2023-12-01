@@ -449,6 +449,8 @@ $data = $plugin['data'];
             return;
           }
 
+          this.serviceDialog.show = false
+
           if (res.data.payment_code == 'stripe') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
