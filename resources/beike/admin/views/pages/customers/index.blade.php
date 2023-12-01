@@ -203,10 +203,12 @@
         turnOnOff() {
           let id = event.currentTarget.getAttribute("data-id");
           let checked = event.currentTarget.getAttribute("data-active");
-          console.log(checked)
           let type = 1;
-          if (checked) type = 0;
-          $http.put(`customers/${id}/update_active`, {status: type}).then((res) => {
+          if (checked) {
+            type = 0;
+          }
+          console.log(checked,type)
+          $http.put(`customers/${id}/update_active`, {active: type}).then((res) => {
             layer.msg(res.message)
             location.reload();
           })
