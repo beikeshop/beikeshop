@@ -86,6 +86,7 @@ class CustomerController extends Controller
             'countries'       => CountryRepo::all(),
             'country_id'      => system_setting('base.country_id'),
             '_redirect'       => $this->getRedirect(),
+            'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.edit.data', $data);
 

@@ -86,13 +86,11 @@
                 </td>
                 <td>
                   <select class="form-select customer-status form-select-sm" data-id="{{ $customer['id'] }}" style="max-width: 100px">
-                    {{-- @foreach ($statuses as $status)
-                      <option value="{{ $status }}" {{ $status == $item->approved ? 'selected' : '' }}>
-                        {{ $status }}
+                    @foreach ($statuses as $status)
+                      <option value="{{ $status['code'] }}" {{ $status['code'] == $customer['status'] ? 'selected' : '' }}>
+                        {{ $status['label'] }}
                       </option>
-                      @endforeach --}}
-                      <option value="1" selected>1</option>
-                      <option value="0" >0</option>
+                      @endforeach
                   </select>
                 </td>
                 <td>{{ $customer['created_at'] }}</td>
@@ -207,11 +205,10 @@
           let checked = event.currentTarget.getAttribute("data-active");
           let type = true;
           if (checked) type = false;
-          console.log(id,type)
-          // $http.post('products/status', {ids: [id], status: type}).then((res) => {
-          //   layer.msg(res.message)
-          //   location.reload();
-          // })
+          $http.put(`customers/${id}/update_active`, {status: type}).then((res) => {
+            layer.msg(res.message)
+            location.reload();
+          })
         },
 
         checkedCustomersCreate() {
@@ -303,11 +300,9 @@
     const id = $(this).data('id');
     const status = $(this).val();
     const self = $(this);
-    console.log(id,status)
-
-    // $http.put(`developers/${id}/status`, {approved: status}).then((res) => {
-    //   layer.msg('修改状态成功');
-    // })
+    $http.put(`customers/${id}/update_status`, {status: status}).then((res) => {
+      layer.msg('修改状态成功');
+    })
   });
   </script>
 @endpush
