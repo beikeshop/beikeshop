@@ -27,7 +27,7 @@ class Customer extends Authenticatable implements JWTSubject
         'rejected',
     ];
 
-    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'status', 'from'];
+    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'active', 'from'];
 
     protected function serializeDate(\DateTimeInterface $date): string
     {
