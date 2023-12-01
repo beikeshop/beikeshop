@@ -81,7 +81,7 @@
                 <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
                 <td>
                   <div class="form-check form-switch">
-                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $customer['status'] ? true : false }}" data-id="{{ $customer['id'] }}" @change="turnOnOff($event)" {{ $customer['status'] ? 'checked' : '' }}>
+                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $customer['active'] ? 1 : 0 }}" data-id="{{ $customer['id'] }}" @change="turnOnOff($event)" {{ $customer['active'] ? 'checked' : '' }}>
                   </div>
                 </td>
                 <td>
@@ -203,8 +203,9 @@
         turnOnOff() {
           let id = event.currentTarget.getAttribute("data-id");
           let checked = event.currentTarget.getAttribute("data-active");
-          let type = true;
-          if (checked) type = false;
+          console.log(checked)
+          let type = 1;
+          if (checked) type = 0;
           $http.put(`customers/${id}/update_active`, {status: type}).then((res) => {
             layer.msg(res.message)
             location.reload();
