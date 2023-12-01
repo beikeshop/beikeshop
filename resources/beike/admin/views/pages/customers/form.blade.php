@@ -25,8 +25,15 @@
                   </el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="{{ __('common.status') }}" prop="status">
-                <el-switch v-model="form.status" :active-value="1" :inactive-value="0"></el-switch>
+              <el-form-item label="{{ __('common.status') }}" prop="active">
+                <el-switch v-model="form.active" :active-value="1" :inactive-value="0"></el-switch>
+              </el-form-item>
+              <el-form-item label="{{ __('common.examine') }}" prop="examine">
+                <el-select v-model="form.status" placeholder="请选择">
+                  <el-option v-for="item in source.statuses" :key="item.code" :label="item.label"
+                    :value="item.code">
+                  </el-option>
+                </el-select>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
@@ -141,7 +148,8 @@
           email: @json($customer['email']),
           password: '',
           customer_group_id: @json($customer['customer_group_id']),
-          status: @json($customer['status']) * 1,
+          active: @json($customer['active']),
+          status: @json($customer['status']),
         },
 
         addresses: @json($customer['addresses'] ?? []),
@@ -149,6 +157,7 @@
         source: {
           customer_group: @json($customer_groups ?? []),
           countries: @json($countries ?? []),
+          statuses: @json($statuses ?? []),
           zones: []
         },
 

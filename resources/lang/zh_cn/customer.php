@@ -14,4 +14,7 @@ return [
     'email'          => 'Email',
     'from'           => '注册来源',
     'customer_group' => '客户组',
+    'pending'        => '待审核',
+    'approved'       => '已审核',
+    'rejected'       => '已拒绝',
 ];

@@ -34,6 +34,8 @@ return [
     'check_form'              => '请检查表单是否填写正确',
     'email_or_password_error' => '邮件或密码错误!',
     'customer_inactive'       => '用户已被禁用',
+    'empty_customer'          => '找不到该用户',
+    'customer_not_approved'   => '该用户未审核',
     'login_successfully'      => '登录成功',
     'register_success'        => '注册成功',
     'third_party_logins'      => '第三方登录',

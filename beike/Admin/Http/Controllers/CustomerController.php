@@ -16,6 +16,7 @@ use Beike\Admin\Http\Resources\AddressResource;
 use Beike\Admin\Http\Resources\CustomerGroupDetail;
 use Beike\Admin\Http\Resources\CustomerResource;
 use Beike\Admin\Services\CustomerService;
+use Beike\Models\Customer;
 use Beike\Repositories\AddressRepo;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CustomerGroupRepo;
@@ -33,6 +34,7 @@ class CustomerController extends Controller
             'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
             'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'type'             => 'customer',
+            'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.index.data', $data);
         if ($request->expectsJson()) {
@@ -84,6 +86,7 @@ class CustomerController extends Controller
             'countries'       => CountryRepo::all(),
             'country_id'      => system_setting('base.country_id'),
             '_redirect'       => $this->getRedirect(),
+            'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.edit.data', $data);
 
@@ -137,5 +140,26 @@ class CustomerController extends Controller
         hook_action('admin.customer.force_delete_all.after', ['module' => 'customer']);
 
         return json_success(trans('common.success'));
+    }
+
+    public function updateActive(Request $request, Customer $customer)
+    {
+        $customer->active = (boolean)$request->get('active');
+        $customer->saveOrFail();
+        hook_action('admin.customer.update_active.after', $customer);
+
+        return json_success(trans('common.updated_success'));
+    }
+
+    public function updateStatus(Request $request, Customer $customer)
+    {
+        $status = $request->get('status');
+        if (in_array($status, Customer::STATUSES)) {
+            $customer->status = $status;
+            $customer->saveOrFail();
+        }
+        hook_action('admin.customer.update_status.after', $customer);
+
+        return json_success(trans('common.updated_success'));
     }
 }

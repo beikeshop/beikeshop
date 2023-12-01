@@ -21,7 +21,13 @@ class Customer extends Authenticatable implements JWTSubject
 
     public const AUTH_GUARD = 'web_shop';
 
-    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'status', 'from'];
+    public const STATUSES = [
+        'pending',
+        'approved',
+        'rejected',
+    ];
+
+    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'active', 'from'];
 
     protected function serializeDate(\DateTimeInterface $date): string
     {

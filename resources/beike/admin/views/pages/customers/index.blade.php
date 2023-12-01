@@ -61,6 +61,7 @@
                 <th>{{ __('customer.from') }}</th>
                 <th>{{ __('customer.customer_group') }}</th>
                 <th>{{ __('common.status') }}</th>
+                <th>{{ __('common.examine') }}</th>
                 <th>{{ __('common.created_at') }}</th>
                 @hook('admin.customer.list.column')
                 <th>{{ __('common.action') }}</th>
@@ -79,9 +80,18 @@
                 <td>{{ $customer['from'] }}</td>
                 <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
                 <td>
-                  <span class="{{ $customer['status'] ? 'text-success' : 'text-secondary' }}">
-                    {{ $customer['status'] ? __('common.enable') : __('common.disable') }}
-                  </span>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $customer['active'] ? 1 : 0 }}" data-id="{{ $customer['id'] }}" @change="turnOnOff($event)" {{ $customer['active'] ? 'checked' : '' }}>
+                  </div>
+                </td>
+                <td>
+                  <select class="form-select customer-status form-select-sm" data-id="{{ $customer['id'] }}" style="max-width: 100px">
+                    @foreach ($statuses as $status)
+                      <option value="{{ $status['code'] }}" {{ $status['code'] == $customer['status'] ? 'selected' : '' }}>
+                        {{ $status['label'] }}
+                      </option>
+                      @endforeach
+                  </select>
                 </td>
                 <td>{{ $customer['created_at'] }}</td>
                 @hook('admin.customer.list.column_value')
@@ -190,6 +200,19 @@
       },
 
       methods: {
+        turnOnOff() {
+          let id = event.currentTarget.getAttribute("data-id");
+          let checked = event.currentTarget.getAttribute("data-active");
+          let type = 1;
+          if (checked * 1) {
+            type = 0;
+          }
+          $http.put(`customers/${id}/update_active`, {active: type}).then((res) => {
+            layer.msg(res.message)
+            location.reload();
+          })
+        },
+
         checkedCustomersCreate() {
           this.dialogCustomers.show = true
         },
@@ -274,5 +297,14 @@
         },
       }
     })
+
+    $('.customer-status').change(function(event) {
+    const id = $(this).data('id');
+    const status = $(this).val();
+    const self = $(this);
+    $http.put(`customers/${id}/update_status`, {status: status}).then((res) => {
+      layer.msg('修改状态成功');
+    })
+  });
   </script>
 @endpush

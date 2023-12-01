@@ -47,10 +47,14 @@ class LoginController extends Controller
             }
 
             $customer = current_customer();
-            if (empty($customer) || ($customer && $customer->status != 1)) {
+            if (empty($customer)) {
+                throw new NotFoundHttpException(trans('shop/login.empty_customer'));
+            } elseif ($customer->active != 1) {
                 Auth::guard(Customer::AUTH_GUARD)->logout();
-
                 throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
+            } elseif ($customer->status != 'approved') {
+                Auth::guard(Customer::AUTH_GUARD)->logout();
+                throw new NotFoundHttpException(trans('shop/login.customer_not_approved'));
             }
 
             CartRepo::mergeGuestCart($customer);

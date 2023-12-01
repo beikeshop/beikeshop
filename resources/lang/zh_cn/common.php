@@ -91,4 +91,6 @@ return [
     'no_repeat'            => '请勿重新添加',
     'text_hour'            => '小时',
     'cropper_size'         => '裁剪框尺寸',
+
+    'examine'                => '审核',
 ];

@@ -85,6 +85,8 @@ Route::prefix($adminName)
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
                 Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
                 Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
+                Route::middleware('can:customers_update')->put('customers/{customer}/update_active', [Controllers\CustomerController::class, 'updateActive'])->name('customers.update_active');
+                Route::middleware('can:customers_update')->put('customers/{customer}/update_status', [Controllers\CustomerController::class, 'updateStatus'])->name('customers.update_status');
                 Route::middleware('can:customers_create')->delete('customers/{id}/restore', [Controllers\CustomerController::class, 'restore'])->name('customers.restore');
                 Route::middleware('can:customers_delete')->delete('customers/{id}', [Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
                 Route::middleware('can:customers_delete')->delete('customers/{id}/force', [Controllers\CustomerController::class, 'forceDelete'])->name('customers.force_delete');

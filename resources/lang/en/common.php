@@ -92,4 +92,6 @@ return [
     'no_repeat'            => 'Do not re-add',
     'text_hour'            => 'Hour',
     'cropper_size'         => 'Crop Size',
+
+    'examine'              => 'Examine',
 ];
