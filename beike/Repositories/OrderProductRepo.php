@@ -66,7 +66,7 @@ class OrderProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $builder = OrderProduct::query()->with(['order'])
+        $builder = OrderProduct::query()->with(['order', 'product.description'])
             ->whereHas('order', function ($query) {
                 $query->whereIn('status', StateMachineService::getValidStatuses());
             });
@@ -91,8 +91,8 @@ class OrderProductRepo
             $builder->limit($limit);
         }
 
-        $builder->groupBy(['product_id', 'name'])
-            ->selectRaw("`product_id`, `name`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount");
+        $builder->groupBy(['product_id'])
+            ->selectRaw("`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount");
 
         return $builder;
     }

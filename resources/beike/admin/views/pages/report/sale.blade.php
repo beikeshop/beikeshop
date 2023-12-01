@@ -49,7 +49,7 @@
                     {{ $loop->iteration }}
                   @endif
                 </td>
-                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['name'] }}</a></td>
+                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
                 <td>{{ $item['total_amount'] }}</td>
               </tr>
             @endforeach
@@ -82,7 +82,7 @@
                     {{ $loop->iteration }}
                   @endif
                 </td>
-                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['name'] }}</a></td>
+                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
                 <td>{{ $item['total_amount'] }}</td>
               </tr>
             @endforeach

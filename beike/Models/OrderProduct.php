@@ -31,6 +31,11 @@ class OrderProduct extends Base
         return $this->belongsTo(ProductSku::class, 'product_sku', 'sku');
     }
 
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+
     public function getPriceFormatAttribute(): string
     {
         return currency_format($this->price);
