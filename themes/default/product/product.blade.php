@@ -68,12 +68,14 @@
           <h1 class="mb-lg-4 mb-2 product-name">{{ $product['name'] }}</h1>
           @endhookwrapper
           @hookwrapper('product.detail.price')
+          @if ((system_setting('base.login_show_price') and current_customer()) or !system_setting('base.login_show_price'))
           <div class="price-wrap d-flex align-items-end">
             <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
             <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price && product.origin_price !== 0">
               @{{ product.origin_price_format }}
             </div>
           </div>
+          @endif
           @endhookwrapper
           <div class="stock-and-sku mb-lg-4 mb-2">
             @hookwrapper('product.detail.quantity')

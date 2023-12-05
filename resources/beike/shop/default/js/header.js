@@ -24,6 +24,19 @@ $(function () {
 
   // 购物车侧边栏弹出
   $(document).on("click", ".btn-right-cart", function () {
+    if (!config.isLogin && config.loginShowPrice) {
+      layer.open({
+        type: 2,
+        title: '',
+        shadeClose: true,
+        scrollbar: false,
+        area: ['900px', '600px'],
+        skin: 'login-pop-box',
+        content: 'login?iframe=true' //iframe的url
+      });
+      return;
+    }
+
     const currentUrl = window.location.pathname;
     if (currentUrl == '/checkout' || currentUrl == '/carts') {
       location.href = '/carts';

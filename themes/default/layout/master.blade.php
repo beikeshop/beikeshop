@@ -39,6 +39,7 @@
     const config = {
       isLogin: !!{{ current_customer()->id ?? 'null' }},
       guestCheckout: !!{{ system_setting('base.guest_checkout', 1) }},
+      loginShowPrice: !!{{ system_setting('base.login_show_price', 1) }},
     }
 
     // 如果页面使用了ElementUI，且当前语言不是中文，则加载对应的语言包
