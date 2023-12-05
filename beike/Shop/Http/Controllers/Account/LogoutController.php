@@ -16,8 +16,6 @@ use Beike\Shop\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function redirect;
-
 class LogoutController extends Controller
 {
     public function index(Request $request)
