@@ -227,6 +227,10 @@
           </div>
 
           <div class="tab-pane fade" id="tab-checkout">
+            <x-admin-form-switch name="login_show_price" title="{{ __('admin/setting.login_show_price') }}" value="{{ old('login_show_price', system_setting('base.login_show_price', '0')) }}">
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.login_show_price_tips') }}</div>
+            </x-admin-form-switch>
+
             <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
             </x-admin-form-switch>
 

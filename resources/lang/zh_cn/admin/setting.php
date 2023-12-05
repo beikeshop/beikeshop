@@ -41,6 +41,8 @@ return [
     'mail_log'               => '说明：日志引擎一般用于测试目的！邮件将不会被真实发送至收件地址，邮件内容会以日志形式保存在 `/storage/logs/laravel.log`',
     'express_code_help'      => '数字、字母、下划线',
 
+    'login_show_price'       => '登录显示价格',
+    'login_show_price_tips'  => '启用后将自动关闭游客结账功能',
     'guest_checkout'         => '游客结账',
     'theme_default'          => '默认主题',
     'theme_black'            => '黑色主题',
