@@ -24,7 +24,7 @@ $(function () {
 
   // 购物车侧边栏弹出
   $(document).on("click", ".btn-right-cart", function () {
-    if (!config.isLogin && config.loginShowPrice) {
+    if (!config.isLogin && (config.loginShowPrice || !config.guestCheckout)) {
       layer.open({
         type: 2,
         title: '',
