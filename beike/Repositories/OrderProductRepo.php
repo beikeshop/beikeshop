@@ -66,10 +66,18 @@ class OrderProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $builder = OrderProduct::query()->with(['order', 'product.description'])
-            ->whereHas('order', function ($query) {
-                $query->whereIn('status', StateMachineService::getValidStatuses());
+        $builder = OrderProduct::query()->with(['order', 'product.description']);
+
+        $order_statuses = $filters['order_statuses'] ?? StateMachineService::getValidStatuses();
+        if ($order_statuses) {
+            $builder->whereHas('order', function ($query) use ($order_statuses) {
+                $query->whereIn('status', $order_statuses);
             });
+        } else {
+            $builder->whereHas('order', function ($query) use ($order_statuses) {
+                $query->where('status', '<>', StateMachineService::CREATED);
+            });
+        }
 
         $start = $filters['date_start'] ?? null;
         if ($start) {

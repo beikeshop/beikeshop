@@ -4,7 +4,6 @@ namespace Beike\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Beike\Admin\Repositories\Report\OrderReportRepo;
-use Beike\Repositories\ProductRepo;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -15,14 +14,21 @@ class ReportController extends Controller
      */
     public function sale(Request $request): mixed
     {
+        $statuses = $request->get('statuses');
+        $filter = [
+            'order_statuses' => $statuses,
+            'date_start' => $request->get('start'),
+            'date_end' => $request->get('end'),
+            'limit' => 10
+        ];
         $data = [
-            'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', 10, $request->get('start'), $request->get('end'))->toArray(), // 商品销量排行
-            'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', 10, $request->get('start'), $request->get('end'))->toArray(), // 商品金额排行
-            'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', 10, $request->get('start'), $request->get('end'))->toArray(),  // 用户购买金额排行
+            'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', $filter)->toArray(), // 商品销量排行
+            'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', $filter)->toArray(), // 商品金额排行
+            'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', $filter)->toArray(),  // 用户购买金额排行
             'order_trends' => [
-                'latest_month' => OrderReportRepo::getLatestMonth(),
-                'latest_week'  => OrderReportRepo::getLatestWeek(),
-                'latest_year'  => OrderReportRepo::getLatestYear(),
+                'latest_month' => OrderReportRepo::getLatestMonth($statuses),
+                'latest_week'  => OrderReportRepo::getLatestWeek($statuses),
+                'latest_year'  => OrderReportRepo::getLatestYear($statuses),
             ],
         ];
 
@@ -33,7 +39,7 @@ class ReportController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function vieidw(Request $request): mixed
+    public function view(Request $request): mixed
     {
         $data = [
             'views' => OrderReportRepo::getProductViews(),

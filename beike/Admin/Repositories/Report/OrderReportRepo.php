@@ -27,15 +27,15 @@ class OrderReportRepo
      * 获取最近一个月每日销售订单数
      * @return mixed
      */
-    public static function getLatestMonth()
+    public static function getLatestMonth($statuses = [])
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
@@ -65,15 +65,15 @@ class OrderReportRepo
     /**
      * 获取最近一周每日销售订单数
      */
-    public static function getLatestWeek()
+    public static function getLatestWeek($statuses = [])
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
             ->get()
             ->keyBy('date');
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, sum(total) as amount'))
             ->groupBy('date')
             ->get()
@@ -103,9 +103,9 @@ class OrderReportRepo
     /**
      * 获取最近一年每月销售订单数
      */
-    public static function getLatestYear()
+    public static function getLatestYear($statuses = [])
     {
-        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()])
+        $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
             ->groupBy(['year', 'month'])
             ->get();
@@ -115,7 +115,7 @@ class OrderReportRepo
             $orderMonthTotals[$key] = $orderTotal['total'];
         }
 
-        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today()])
+        $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, sum(total) as amount'))
             ->groupBy(['year', 'month'])
             ->get();
@@ -146,20 +146,29 @@ class OrderReportRepo
         return hook_filter('dashboard.order_report_year', $data);
     }
 
-    public static function getSaleInfoByProducts($order, $limit = 20, $start = null, $end = null)
+    public static function getSaleInfoByProducts($order, $filter)
     {
-        return OrderProductRepo::getBuilder(['date_start' => $start, 'date_end' => $end, 'order' => $order, 'limit' => $limit])->get();
+        $filter['order'] = $order;
+        return OrderProductRepo::getBuilder($filter)->get();
     }
 
-    public static function getSaleInfoByCustomers($order, $limit = 20, $start = null, $end = null)
+    public static function getSaleInfoByCustomers($order, $filter)
     {
-        $builder = Order::query()->with(['customer'])
-            ->whereIn('status', StateMachineService::getValidStatuses());
+        $builder = Order::query()->with(['customer']);
 
+        $order_statuses = $filters['order_statuses'] ?? StateMachineService::getValidStatuses();
+        if ($order_statuses) {
+            $builder->whereIn('status', StateMachineService::getValidStatuses());
+        } else {
+            $builder->where('status', '<>', StateMachineService::CREATED);
+        }
+
+        $start = $filter['start'] ?? null;
         if ($start) {
             $builder->where('created_at', '>=', $start);
         }
 
+        $end = $filter['end'] ?? null;
         if ($end) {
             $builder->where('created_at', '<', Carbon::createFromFormat('Y-m-d', $end)->subDay());
         }
@@ -168,6 +177,7 @@ class OrderReportRepo
             $builder->orderBy($order, 'desc');
         }
 
+        $limit = $filter['limit'] ?? null;
         if ($limit) {
             $builder->limit($limit);
         }
