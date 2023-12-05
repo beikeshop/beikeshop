@@ -93,4 +93,8 @@ return [
     'cropper_size'         => '裁剪框尺寸',
 
     'examine'                => '审核',
+
+    'before'               => '请',
+    'login'                => '登录',
+    'show_price'           => '以查看价格',
 ];

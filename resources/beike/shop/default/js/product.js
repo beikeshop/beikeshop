@@ -29,3 +29,15 @@ $(document).on('click', '.quantity-wrap .right i', function(event) {
   input.val(input.val() * 1 - 1)
   input.get(0).dispatchEvent(new Event('input'));
 });
+
+$(document).on('click','.login-before-show-price',function () {
+  layer.open({
+    type: 2, 
+    title: '',
+    shadeClose: true,
+    scrollbar: false,
+    area: ['900px', '600px'],
+    skin: 'login-pop-box',
+    content: 'login?iframe=true' //iframe的url
+  });
+})
