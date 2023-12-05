@@ -189,6 +189,7 @@ Route::prefix($adminName)
                 // 报表
                 Route::middleware('can:plugins_index')->get('reports/sale', [Controllers\ReportController::class, 'sale'])->name('reports.sale');
                 Route::middleware('can:plugins_index')->get('reports/view', [Controllers\ReportController::class, 'view'])->name('reports.view');
+                Route::middleware('can:plugins_index')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports.product_view');
 
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');

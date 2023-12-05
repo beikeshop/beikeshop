@@ -33,7 +33,7 @@ class ReportController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function view(Request $request): mixed
+    public function vieidw(Request $request): mixed
     {
         $data = [
             'views' => OrderReportRepo::getProductViews(),
@@ -51,13 +51,13 @@ class ReportController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function productView(Request $request): mixed
+    public function productView(Request $request, int $productId): mixed
     {
         $data = [
             'views_trends' => [
-                'latest_month' => OrderReportRepo::getViewsLatestMonth($request->get('product_id')),
-                'latest_week'  => OrderReportRepo::getViewsLatestWeek($request->get('product_id')),
-                'latest_year'  => OrderReportRepo::getViewsLatestYear($request->get('product_id')),
+                'latest_month' => OrderReportRepo::getViewsLatestMonth($productId),
+                'latest_week'  => OrderReportRepo::getViewsLatestWeek($productId),
+                'latest_year'  => OrderReportRepo::getViewsLatestYear($productId),
             ],
         ];
 
