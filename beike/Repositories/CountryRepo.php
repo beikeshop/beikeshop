@@ -84,24 +84,35 @@ class CountryRepo
     }
 
     /**
-     * @param $data
+     * @param array $filters
      * @return LengthAwarePaginator
      */
-    public static function list($data): LengthAwarePaginator
+    public static function list(array $filters = []): LengthAwarePaginator
+    {
+        $builder = self::getBuilder($filters);
+
+        return $builder->paginate(perPage())->withQueryString();
+    }
+
+    /**
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getBuilder(array $filters = []): Builder
     {
         $builder = Country::query();
 
-        if (isset($data['name'])) {
-            $builder->where('countries.name', 'like', "%{$data['name']}%");
+        if (isset($filters['name'])) {
+            $builder->where('countries.name', 'like', "%{$filters['name']}%");
         }
-        if (isset($data['code'])) {
-            $builder->where('countries.code', 'like', "%{$data['code']}%");
+        if (isset($filters['code'])) {
+            $builder->where('countries.code', 'like', "%{$filters['code']}%");
         }
-        if (isset($data['status'])) {
-            $builder->where('countries.status', $data['status']);
+        if (isset($filters['status'])) {
+            $builder->where('countries.status', $filters['status']);
         }
 
-        return $builder->paginate(perPage())->withQueryString();
+        return $builder;
     }
 
     /**

@@ -15,6 +15,7 @@
         "ext-simplexml": "*",
         "ext-zip": "*",
         "doctrine/dbal": "^3.3",
+        "geoip2/geoip2": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "jenssegers/agent": "^2.6",
