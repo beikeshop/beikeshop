@@ -55,6 +55,10 @@
           <span class="price-old">{{ $product['origin_price_format'] }}</span>
         @endif
       </div>
+    @else
+      <div class="product-price">
+        <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price" href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}</div>
+      </div>
     @endif
 
     @if (request('style_list') == 'list')
