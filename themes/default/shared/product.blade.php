@@ -48,6 +48,8 @@
   <div class="product-bottom-info">
     @hook('product_list.item.name.before')
     <div class="product-name">{{ $product['name_format'] }}</div>
+    {{-- {{ dd(system_setting('base.login_show_price')) }} --}}
+    {{-- {{ dd(current_customer()) }} --}}
     <div class="product-price">
       <span class="price-new">{{ $product['price_format'] }}</span>
       @if ($product['price'] != $product['origin_price'] && $product['origin_price'] > 0)
