@@ -51,9 +51,11 @@ class LoginController extends Controller
                 throw new NotFoundHttpException(trans('shop/login.empty_customer'));
             } elseif ($customer->active != 1) {
                 Auth::guard(Customer::AUTH_GUARD)->logout();
+
                 throw new NotFoundHttpException(trans('shop/login.customer_inactive'));
             } elseif ($customer->status != 'approved') {
                 Auth::guard(Customer::AUTH_GUARD)->logout();
+
                 throw new NotFoundHttpException(trans('shop/login.customer_not_approved'));
             }
 

@@ -30,10 +30,10 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list($request->only(['name', 'email', 'status', 'from', 'customer_group_id']));
 
         $data = [
-            'customers'        => $customers,
-            'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
-            'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'type'             => 'customer',
+            'customers'         => $customers,
+            'customers_format'  => CustomerResource::collection($customers)->jsonSerialize(),
+            'customer_groups'   => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type'              => 'customer',
             'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.index.data', $data);
@@ -80,12 +80,12 @@ class CustomerController extends Controller
         $addresses = AddressRepo::listByCustomer($customerId);
         $customer  = CustomerRepo::find($customerId);
         $data      = [
-            'customer'        => $customer,
-            'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'addresses'       => AddressResource::collection($addresses)->jsonSerialize(),
-            'countries'       => CountryRepo::all(),
-            'country_id'      => system_setting('base.country_id'),
-            '_redirect'       => $this->getRedirect(),
+            'customer'          => $customer,
+            'customer_groups'   => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'addresses'         => AddressResource::collection($addresses)->jsonSerialize(),
+            'countries'         => CountryRepo::all(),
+            'country_id'        => system_setting('base.country_id'),
+            '_redirect'         => $this->getRedirect(),
             'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.edit.data', $data);
@@ -144,7 +144,7 @@ class CustomerController extends Controller
 
     public function updateActive(Request $request, Customer $customer)
     {
-        $customer->active = (boolean)$request->get('active');
+        $customer->active = (bool) $request->get('active');
         $customer->saveOrFail();
         hook_action('admin.customer.update_active.after', $customer);
 

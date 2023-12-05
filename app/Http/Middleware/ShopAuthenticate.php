@@ -25,7 +25,7 @@ class ShopAuthenticate extends Middleware
         $this->authenticate($request, $guards);
 
         $customer = current_customer();
-        if ($customer->status != 1) {
+        if ($customer->active != 1 || $customer->status != 'approved') {
             Auth::guard(Customer::AUTH_GUARD)->logout();
 
             return redirect(shop_route('login.index'));
