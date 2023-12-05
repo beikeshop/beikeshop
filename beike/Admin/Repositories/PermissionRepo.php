@@ -60,6 +60,7 @@ class PermissionRepo
 
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
+            ['title' => trans('admin/common.report'), 'permissions' => $this->getReportPermissions()],
             ['title' => trans('admin/common.admin_user'), 'permissions' => $this->getAdminUserPermissions()],
             ['title' => trans('admin/common.admin_role'), 'permissions' => $this->getAdminRolePermissions()],
             ['title' => trans('admin/common.region'), 'permissions' => $this->getRegionPermissions()],
@@ -283,6 +284,19 @@ class PermissionRepo
         $items  = $this->getPermissionList('marketing', $routes);
 
         return hook_filter('role.marketing_permissions', $items);
+    }
+
+    /**
+     * 报表权限列表
+     *
+     * @return array
+     */
+    private function getReportPermissions(): array
+    {
+        $routes = ['reports_sale', 'reports_view'];
+        $items  = $this->getPermissionList('report', $routes);
+
+        return hook_filter('role.report_permissions', $items);
     }
 
     /**

@@ -187,9 +187,9 @@ Route::prefix($adminName)
                 Route::middleware('can:plugins_index')->get('plugins/translator', [Controllers\PluginController::class, 'translator'])->name('plugins.translator');
 
                 // 报表
-                Route::middleware('can:plugins_index')->get('reports/sale', [Controllers\ReportController::class, 'sale'])->name('reports.sale');
-                Route::middleware('can:plugins_index')->get('reports/view', [Controllers\ReportController::class, 'view'])->name('reports.view');
-                Route::middleware('can:plugins_index')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports.product_view');
+                Route::middleware('can:reports_sale')->get('reports/sale', [Controllers\ReportController::class, 'sale'])->name('reports_sale.index');
+                Route::middleware('can:reports_view')->get('reports/view', [Controllers\ReportController::class, 'view'])->name('reports_view.index');
+                Route::middleware('can:reports_view')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports_view.product');
 
                 // 插件市场
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
