@@ -18,6 +18,7 @@ use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\ThemeRepo;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -55,9 +56,13 @@ class SettingController extends Controller
      *
      * @throws \Throwable
      */
-    public function store(Request $request)
+    public function store(Request $request): mixed
     {
-        $settings = $request->all();
+        $settings            = $request->all();
+        $showPriceAfterLogin = $settings['show_price_after_login'];
+        if ($showPriceAfterLogin) {
+            $settings['guest_checkout'] = false;
+        }
         foreach ($settings as $key => $value) {
             SettingRepo::storeValue($key, $value);
         }
@@ -69,7 +74,12 @@ class SettingController extends Controller
         return redirect($settingUrl)->with('success', trans('common.updated_success'));
     }
 
-    public function storeDeveloperToken(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Throwable
+     */
+    public function storeDeveloperToken(Request $request): JsonResponse
     {
         SettingRepo::storeValue('developer_token', $request->get('developer_token'));
 

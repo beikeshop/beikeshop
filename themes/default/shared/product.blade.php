@@ -48,7 +48,7 @@
   <div class="product-bottom-info">
     @hook('product_list.item.name.before')
     <div class="product-name">{{ $product['name_format'] }}</div>
-    @if ((system_setting('base.login_show_price') and current_customer()) or !system_setting('base.login_show_price'))
+    @if ((system_setting('base.show_price_after_login') and current_customer()) or !system_setting('base.show_price_after_login'))
       <div class="product-price">
         <span class="price-new">{{ $product['price_format'] }}</span>
         @if ($product['price'] != $product['origin_price'] && $product['origin_price'] > 0)
