@@ -214,7 +214,7 @@ class OrderReportRepo
             'totals'  => $totals,
         ];
 
-        return hook_filter('dashboard.order_report_views_month', $data);
+        return hook_filter('report.order_report_views_month', $data);
     }
 
     /**
@@ -238,7 +238,7 @@ class OrderReportRepo
             'totals'  => $totals,
         ];
 
-        return hook_filter('dashboard.order_report_views_week', $data);
+        return hook_filter('report.order_report_views_week', $data);
     }
 
     /**
@@ -267,6 +267,6 @@ class OrderReportRepo
             'totals'  => $monthTotals,
         ];
 
-        return hook_filter('dashboard.order_report_views_year', $data);
+        return hook_filter('report.order_report_views_year', $data);
     }
 }
