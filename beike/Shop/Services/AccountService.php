@@ -27,8 +27,9 @@ class AccountService
      */
     public static function register(array $data)
     {
+        $customerApproved            = system_setting('base.customer_approved', 0); // approve_customer为是否需要审核客户
+
         $data['customer_group_id'] = system_setting('base.default_customer_group_id', 0); // default_customer_group_id为默认客户组名称
-        $data['status']            = ! system_setting('base.approve_customer'); // approve_customer为是否需要审核客户
         $data['from']              = $data['from'] ?? 'pc';
         $data['locale']            = locale();
 
@@ -37,13 +38,20 @@ class AccountService
         }
         $data['avatar'] = $data['avatar'] ?? '';
 
+        if ($customerApproved) {
+            $data['active'] = 0;
+            $data['status'] = 'pending';
+        } else {
+            $data['active'] = 1;
+            $data['status'] = 'approved';
+        }
+
         hook_action('service.account.register.before', $data);
 
         $customer = CustomerRepo::create($data);
-        if ($customer) {
-            $customer->notifyRegistration();
-            hook_action('service.account.register.after', $customer);
-        }
+        $customer->notifyRegistration();
+
+        hook_action('service.account.register.after', $customer);
 
         return $customer;
     }
