@@ -44,6 +44,7 @@ return [
     'show_price_after_login'       => '登录显示价格',
     'show_price_after_login_tips'  => '启用后将自动关闭游客结账功能',
     'guest_checkout'               => '游客结账',
+    'customer_approved'            => '用户审核',
     'theme_default'                => '默认主题',
     'theme_black'                  => '黑色主题',
     'shipping_address'             => '发货地址',

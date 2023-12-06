@@ -233,6 +233,8 @@
 
             <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
             </x-admin-form-switch>
+            <x-admin-form-switch name="customer_approved" title="{{ __('admin/setting.customer_approved') }}" value="{{ old('customer_approved', system_setting('base.customer_approved', '0')) }}">
+            </x-admin-form-switch>
 
             <x-admin-form-switch name="tax" title="{{ __('admin/setting.enable_tax') }}" value="{{ old('tax', system_setting('base.tax', '0')) }}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div>
