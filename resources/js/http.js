@@ -93,7 +93,7 @@ export default {
       }).catch((res) => {
         reject(res);
         if (!hmsg) {
-          layer.msg(res.response.data.message || res.message, ()=>{});
+          layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
         }
       }).finally(() => {
         layer.closeAll('loading')
