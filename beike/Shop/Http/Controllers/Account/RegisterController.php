@@ -27,9 +27,14 @@ class RegisterController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        AccountService::register($credentials);
+        $customer = AccountService::register($credentials);
         auth(Customer::AUTH_GUARD)->attempt($credentials);
 
-        return json_success(trans('shop/login.register_success'));
+        if ($customer->status == 'approved') {
+            return json_success(trans('shop/login.register_success'));
+        }
+
+        return json_success(trans('shop/login.should_be_approved'));
+
     }
 }

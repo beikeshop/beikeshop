@@ -1,40 +1,42 @@
 <?php
-
 /**
- * currency.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-07-28 17:21:38
- * @modified   2022-07-28 17:21:38
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-07 07:15:11
  */
 
 return [
-    'index'                   => 'Benutzeranmeldung und Registrierung',
-    'login_and_sign'          => 'anmelden/registrieren',
-    'home'                    => 'home',
-    'library'                 => 'persönliches Zentrum',
-    'login'                   => 'Anmeldung',
     'already'                 => 'Schon unser Kunde? ',
+    'check_form'              => 'Bitte überprüfen Sie, ob das Formular korrekt ausgefüllt ist',
+    'confirm_password'        => 'Passwort bestätigen',
+    'customer_inactive'       => 'Benutzer wurde deaktiviert',
+    'customer_not_approved'   => 'Der nutzer ließ keine prüfung zu',
     'description'             => 'Schon unser Kunde? ',
     'email'                   => 'Mail',
     'email_address'           => 'E-Mail-Adresse',
-    'passwort'                => 'Passwort',
+    'email_err'               => 'Bitte geben Sie die richtige E-Mail-Adresse ein!',
+    'email_or_password_error' => 'E-Mail- oder Passwortfehler!',
+    'empty_customer'          => '\"Der user ist nicht auffindbar',
+    'enter_email'             => 'Bitte geben Sie Ihre E-Mail-Adresse ein',
+    'enter_password'          => 'Bitte geben Sie Ihr Passwort ein',
     'forget_password'         => 'Passwort vergessen',
+    'home'                    => 'home',
+    'index'                   => 'Benutzeranmeldung und Registrierung',
+    'library'                 => 'persönliches Zentrum',
+    'login'                   => 'Anmeldung',
+    'login_and_sign'          => 'anmelden/registrieren',
+    'login_successfully'      => 'erfolgreich angemeldet',
     'new'                     => 'neues Konto',
     'not_already'             => 'Noch kein registrierter Kunde? ',
-    'confirm_password'        => 'Passwort bestätigen',
-    'register'                => 'registrieren',
-    'enter_password'          => 'Bitte geben Sie Ihr Passwort ein',
-    'enter_email'             => 'Bitte geben Sie Ihre E-Mail-Adresse ein',
-    'please_confirm'          => 'Bitte bestätigen Sie das Passwort',
+    'password'                => 'kennwort',
     'password_err'            => 'Die zweimal eingegebenen Passwörter sind inkonsistent!',
-    'email_err'               => 'Bitte geben Sie die richtige E-Mail-Adresse ein!',
-    'check_form'              => 'Bitte überprüfen Sie, ob das Formular korrekt ausgefüllt ist',
-    'email_or_password_error' => 'E-Mail- oder Passwortfehler!',
-    'customer_inactive'       => 'Benutzer wurde deaktiviert',
-    'login_successfully'      => 'erfolgreich angemeldet',
+    'please_confirm'          => 'Bitte bestätigen Sie das Passwort',
+    'register'                => 'registrieren',
     'register_success'        => 'erfolgreich registriert',
+    'should_be_approved'      => 'Sie können sich nur anmelden, wenn der backstage-chefredakteur sie geprüft hat',
     'third_party_logins'      => 'erwähnenswert',
 ];

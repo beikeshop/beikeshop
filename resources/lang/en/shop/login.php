@@ -1,40 +1,42 @@
 <?php
-
 /**
- * currency.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-07-28 17:21:38
- * @modified   2022-07-28 17:21:38
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-07 07:15:40
  */
 
 return [
-    'index'                   => 'User login and registration',
-    'login_and_sign'          => 'Login/Sign In',
-    'home'                    => 'Home',
-    'library'                 => 'Library',
-    'login'                   => 'Login',
     'already'                 => 'Already our customer?',
+    'check_form'              => 'Please check that the form is filled out correctly',
+    'confirm_password'        => 'Confirm Password',
+    'customer_inactive'       => 'The customer is inactive!',
+    'customer_not_approved'   => 'The user is not audited',
     'description'             => 'Already our customer?',
     'email'                   => 'Email',
     'email_address'           => 'Email Address',
-    'password'                => 'Password',
+    'email_err'               => 'Please enter a valid email address!',
+    'email_or_password_error' => 'Email or Password is incorrect!',
+    'empty_customer'          => 'The user could not be found',
+    'enter_email'             => 'Please input your email',
+    'enter_password'          => 'Please enter password',
     'forget_password'         => 'Forget password',
+    'home'                    => 'Home',
+    'index'                   => 'User login and registration',
+    'library'                 => 'Library',
+    'login'                   => 'Login',
+    'login_and_sign'          => 'Login/Sign In',
+    'login_successfully'      => 'Login successfully!',
     'new'                     => 'New Account',
     'not_already'             => 'Not yet our registered customer?',
-    'confirm_password'        => 'Confirm Password',
-    'register'                => 'Register',
-    'enter_password'          => 'Please enter password',
-    'enter_email'             => 'Please input your email',
-    'please_confirm'          => 'Please confirm your password',
+    'password'                => 'Password',
     'password_err'            => 'The passwords entered twice do not match!',
-    'email_err'               => 'Please enter a valid email address!',
-    'check_form'              => 'Please check that the form is filled out correctly',
-    'email_or_password_error' => 'Email or Password is incorrect!',
-    'customer_inactive'       => 'The customer is inactive!',
-    'login_successfully'      => 'Login successfully!',
+    'please_confirm'          => 'Please confirm your password',
+    'register'                => 'Register',
     'register_success'        => 'Registered successfully',
+    'should_be_approved'      => 'The account must be approved by the administrator',
     'third_party_logins'      => 'Third-party Login',
 ];
