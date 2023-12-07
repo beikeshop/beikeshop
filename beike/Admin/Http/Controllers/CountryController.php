@@ -22,6 +22,7 @@ class CountryController extends Controller
 
         $data = [
             'country' => $countries,
+            'continents' => ['AF','AN','AS','EU','NA','OA','SA','none'],
         ];
         $data = hook_filter('admin.country.index.data', $data);
         if ($request->expectsJson()) {
