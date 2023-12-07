@@ -212,6 +212,10 @@ class ProductRepo
             });
         }
 
+        if (in_array($sort, ['created_at', 'updated_at', 'sales', 'position'])) {
+            $sort = 'products.' . $sort;
+        }
+
         if (in_array($sort, ['products.created_at', 'products.updated_at', 'products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
             $builder->orderBy($sort, $order);
         }

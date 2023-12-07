@@ -179,6 +179,7 @@ class BrandRepo
         $builder = Brand::query()->whereIn('id', $ids);
         $ids     = implode(',', $ids);
         $builder->orderByRaw("FIELD(id, {$ids})");
+
         return $builder->get();
     }
 
