@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-07 07:15:11
+ * @modified   2023-12-07 07:54:54
  */
 
 return [
@@ -15,12 +15,13 @@ return [
     'confirm_password'        => 'Passwort bestätigen',
     'customer_inactive'       => 'Benutzer wurde deaktiviert',
     'customer_not_approved'   => 'Der nutzer ließ keine prüfung zu',
+    'customer_rejected'       => 'Die benutzerprüfung wurde abgelehnt',
     'description'             => 'Schon unser Kunde? ',
     'email'                   => 'Mail',
     'email_address'           => 'E-Mail-Adresse',
     'email_err'               => 'Bitte geben Sie die richtige E-Mail-Adresse ein!',
     'email_or_password_error' => 'E-Mail- oder Passwortfehler!',
-    'empty_customer'          => '\"Der user ist nicht auffindbar',
+    'empty_customer'          => 'Der user ist nicht auffindbar',
     'enter_email'             => 'Bitte geben Sie Ihre E-Mail-Adresse ein',
     'enter_password'          => 'Bitte geben Sie Ihr Passwort ein',
     'forget_password'         => 'Passwort vergessen',

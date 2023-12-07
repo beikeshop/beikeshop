@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-07 07:15:42
+ * @modified   2023-12-07 07:55:48
  */
 
 return [
@@ -15,6 +15,7 @@ return [
     'confirm_password'        => 'Confirmez le mot de passe',
     'customer_inactive'       => 'L\'utilisateur est désactivé',
     'customer_not_approved'   => 'Cet utilisateur n\'a pas été évalué',
+    'customer_rejected'       => 'Cet avis utilisateur n\'a pas réussi',
     'description'             => 'Déjà notre client ?',
     'email'                   => 'courrier',
     'email_address'           => 'adresse e-mail',
