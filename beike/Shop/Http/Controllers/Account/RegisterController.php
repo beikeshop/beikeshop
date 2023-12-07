@@ -34,7 +34,7 @@ class RegisterController extends Controller
             return json_success(trans('shop/login.register_success'));
         }
 
-        return json_success(trans('shop/login.should_be_approved'));
+        return json_fail(trans('shop/login.should_be_approved'));
 
     }
 }
