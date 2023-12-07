@@ -97,4 +97,5 @@ return [
     'before'               => '请',
     'login'                => '登录',
     'show_price'           => '以查看价格',
+    'continent'            => '洲',
 ];

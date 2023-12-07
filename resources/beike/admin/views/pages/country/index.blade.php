@@ -46,6 +46,7 @@
               <th>ID</th>
               <th>{{ __('common.name') }}</th>
               <th>{{ __('currency.code') }}</th>
+              <th>{{ __('common.continent') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th>{{ __('common.updated_at') }}</th>
               <th>{{ __('common.sort_order') }}</th>
@@ -58,6 +59,13 @@
               <td>@{{ country.id }}</td>
               <td>@{{ country.name }}</td>
               <td>@{{ country.code }}</td>
+              <td>
+                <select v-model="country.continent" class="form-select">
+                  @foreach ($continents as $continent)
+                    <option value="{{ $continent }}">{{ __('country.'.$continent) }}</option>
+                  @endforeach
+                </select>
+              </td>
               <td>@{{ country.created_at }}</td>
               <td>@{{ country.updated_at }}</td>
               <td>@{{ country.sort_order }}</td>
@@ -85,6 +93,13 @@
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
         <el-form-item label="{{ __('admin/country.country_name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('admin/country.country_name') }}"></el-input>
+        </el-form-item>
+
+        <el-form-item label="{{ __('common.continent') }}">
+          <el-select v-model="dialog.form.continent" placeholder="">
+            @foreach ($continents as $continent)
+              <el-option label="{{ __('country.'.$continent) }}" value="{{ $continent }}"></el-option>
+            @endforeach
         </el-form-item>
 
         <el-form-item label="{{ __('common.sort_order') }}">
@@ -126,6 +141,7 @@
           form: {
             id: null,
             name: '',
+            continent: '',
             code: '',
             sort_order: '',
             status: 1,
@@ -191,6 +207,8 @@
               this.$message.error('{{ __('common.error_form') }}');
               return;
             }
+
+            console.log(this.dialog.form)
 
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
