@@ -33,7 +33,7 @@ class CountryController extends Controller
 
     public function store(Request $request)
     {
-        $country = CountryRepo::create($request->only('name', 'code', 'sort_order', 'status'));
+        $country = CountryRepo::create($request->all());
 
         hook_action('admin.country.store.after', $country);
 
@@ -42,7 +42,7 @@ class CountryController extends Controller
 
     public function update(Request $request, int $id)
     {
-        $country = CountryRepo::update($id, $request->only('name', 'code', 'sort_order', 'status'));
+        $country = CountryRepo::update($id, $request->all());
 
         hook_action('admin.country.store.after', $country);
 
