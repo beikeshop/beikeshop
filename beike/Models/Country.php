@@ -18,7 +18,7 @@ class Country extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'country_id', 'code', 'sort_order', 'status'];
+    protected $fillable = ['name', 'country_id', 'code', 'continent', 'sort_order', 'status'];
 
     public function zones(): HasMany
     {
