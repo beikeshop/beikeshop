@@ -1,40 +1,42 @@
 <?php
-
 /**
- * currency.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     TL <lucianldg@tuikehome.com>
- * @created    2022-07-28 17:21:38
- * @modified   2022-07-28 17:21:38
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-07 07:15:20
  */
 
 return [
-    'index'                   => 'Login dan Pendaftaran Pengguna',
-    'login_and_sign'          => 'Login/Registrasi',
-    'home'                    => 'Rumah',
-    'library'                 => 'Pusat Pribadi',
-    'login'                   => 'Masuk',
     'already'                 => 'Sudah menjadi pelanggan kami? ',
+    'check_form'              => 'Harap periksa apakah formulir diisi dengan benar',
+    'confirm_password'        => 'Konfirmasi Kata Sandi',
+    'customer_inactive'       => 'Pengguna telah dinonaktifkan',
+    'customer_not_approved'   => 'Pengguna ini tidak diperiksa',
     'description'             => 'Sudah menjadi pelanggan kami? ',
     'email'                   => 'Surat',
     'email_address'           => 'alamat email',
-    'password'                => 'kata sandi',
+    'email_err'               => 'Silakan masukkan alamat email yang benar!',
+    'email_or_password_error' => 'Email atau kata sandi salah!',
+    'empty_customer'          => 'Tidak dapat menemukan pengguna',
+    'enter_email'             => 'Silakan masukkan email',
+    'enter_password'          => 'Silakan masukkan kata sandi',
     'forget_password'         => 'Lupa kata sandi',
+    'home'                    => 'Rumah',
+    'index'                   => 'Login dan Pendaftaran Pengguna',
+    'library'                 => 'Pusat Pribadi',
+    'login'                   => 'Masuk',
+    'login_and_sign'          => 'Login/Registrasi',
+    'login_successfully'      => 'Login berhasil',
     'new'                     => 'Akun Baru',
     'not_already'             => 'Belum menjadi pelanggan terdaftar kami? ',
-    'confirm_password'        => 'Konfirmasi Kata Sandi',
-    'register'                => 'Daftar',
-    'enter_password'          => 'Silakan masukkan kata sandi',
-    'enter_email'             => 'Silakan masukkan email',
-    'please_confirm'          => 'Harap konfirmasi kata sandi',
+    'password'                => 'kata sandi',
     'password_err'            => 'Kata sandi yang dimasukkan dua kali tidak konsisten!',
-    'email_err'               => 'Silakan masukkan alamat email yang benar!',
-    'check_form'              => 'Harap periksa apakah formulir diisi dengan benar',
-    'email_or_password_error' => 'Email atau kata sandi salah!',
-    'customer_inactive'       => 'Pengguna telah dinonaktifkan',
-    'login_successfully'      => 'Login berhasil',
+    'please_confirm'          => 'Harap konfirmasi kata sandi',
+    'register'                => 'Daftar',
     'register_success'        => 'Pendaftaran berhasil',
+    'should_be_approved'      => 'Perlu ditinjau ulang oleh admin untuk login',
     'third_party_logins'      => 'Login Pihak Ketiga',
 ];
