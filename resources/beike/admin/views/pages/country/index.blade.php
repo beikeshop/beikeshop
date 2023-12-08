@@ -25,6 +25,16 @@
               <option value="0">{{ __('common.disable') }}</option>
             </select>
           </div>
+
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('common.continent') }}</label>
+            <select v-model="filter.continent" class="form-select">
+              <option value="">{{ __('common.all') }}</option>
+              @foreach ($continents as $continent)
+                <option value="{{ $continent['code'] }}">{{ $continent['label'] }}</option>
+              @endforeach
+            </select>
+          </div>
         </div>
 
         <div class="row">
@@ -59,13 +69,7 @@
               <td>@{{ country.id }}</td>
               <td>@{{ country.name }}</td>
               <td>@{{ country.code }}</td>
-              <td>
-                <select v-model="country.continent" class="form-select">
-                  @foreach ($continents as $continent)
-                    <option value="{{ $continent }}">{{ __('country.'.$continent) }}</option>
-                  @endforeach
-                </select>
-              </td>
+              <td>@{{ country.continent_format }}</td>
               <td>@{{ country.created_at }}</td>
               <td>@{{ country.updated_at }}</td>
               <td>@{{ country.sort_order }}</td>
@@ -98,7 +102,7 @@
         <el-form-item label="{{ __('common.continent') }}">
           <el-select v-model="dialog.form.continent" placeholder="">
             @foreach ($continents as $continent)
-              <el-option label="{{ __('country.'.$continent) }}" value="{{ $continent }}"></el-option>
+              <el-option label="{{ $continent['label'] }}" value="{{ $continent['code'] }}"></el-option>
             @endforeach
         </el-form-item>
 
@@ -131,7 +135,7 @@
       el: '#tax-classes-app',
 
       data: {
-        country: @json($country ?? []),
+        country: @json($countries ?? []),
         page: 1,
 
         dialog: {
@@ -152,6 +156,7 @@
           name: bk.getQueryString('name'),
           code: bk.getQueryString('code'),
           status: bk.getQueryString('status'),
+          continent: bk.getQueryString('continent'),
         },
 
         url: '{{ admin_route("countries.index") }}',
@@ -170,7 +175,7 @@
       methods: {
         loadData() {
           $http.get(`countries?page=${this.page}`).then((res) => {
-            this.country = res.data.country;
+            this.country = res.data.countries;
           })
         },
 
@@ -208,12 +213,9 @@
               return;
             }
 
-            console.log(this.dialog.form)
-
             $http[type](url, this.dialog.form).then((res) => {
               this.$message.success(res.message);
               if (this.dialog.type == 'add') {
-                // this.country.data.push(res.data)
                 this.loadData();
               } else {
                 this.country.data[this.dialog.index] = res.data
@@ -234,7 +236,6 @@
             $http.delete('countries/' + id).then((res) => {
               this.$message.success(res.message);
               this.loadData();
-              // self.country.data.splice(index, 1)
             })
           }).catch(()=>{})
         },

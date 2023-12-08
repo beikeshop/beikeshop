@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Controllers;
 
+use Beike\Admin\Http\Resources\CountryResource;
 use Beike\Repositories\CountryRepo;
 use Illuminate\Http\Request;
 
@@ -18,12 +19,14 @@ class CountryController extends Controller
 {
     public function index(Request $request)
     {
-        $countries = CountryRepo::list($request->only('name', 'code', 'status'));
+        $countries = CountryRepo::list($request->all());
 
         $data = [
-            'country' => $countries,
-            'continents' => ['AF','AN','AS','EU','NA','OA','SA','none'],
+            'countries'         => $countries,
+            'countries_format'  => CountryResource::collection($countries)->jsonSerialize(),
+            'continents'        => CountryRepo::getContinents(),
         ];
+
         $data = hook_filter('admin.country.index.data', $data);
         if ($request->expectsJson()) {
             return json_success(trans('common.success'), $data);
