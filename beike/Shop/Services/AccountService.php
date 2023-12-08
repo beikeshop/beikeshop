@@ -37,12 +37,11 @@ class AccountService
             $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));
         }
         $data['avatar'] = $data['avatar'] ?? '';
+        $data['active'] = 1;
 
         if ($customerApproved) {
-            $data['active'] = 0;
             $data['status'] = 'pending';
         } else {
-            $data['active'] = 1;
             $data['status'] = 'approved';
         }
 
