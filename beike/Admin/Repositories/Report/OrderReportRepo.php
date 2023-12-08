@@ -211,7 +211,7 @@ class OrderReportRepo
     public static function getViewsLatestMonth($productId = 0)
     {
         $builder = ProductView::query()->where('created_at', '>', today()->subMonth())
-            ->where('created_at', '>', today())
+            ->where('created_at', '<', today())
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date');
         if ($productId) {
@@ -235,7 +235,7 @@ class OrderReportRepo
     public static function getViewsLatestWeek($productId = 0)
     {
         $builder = ProductView::query()->where('created_at', '>', today()->subWeek())
-            ->where('created_at', '>', today())
+            ->where('created_at', '<', today())
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date');
         if ($productId) {
@@ -259,7 +259,7 @@ class OrderReportRepo
     public static function getViewsLatestYear($productId = 0)
     {
         $builder = ProductView::query()->where('created_at', '>', today()->subYear())
-            ->where('created_at', '>', today())
+            ->where('created_at', '<', today())
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
             ->groupBy(['year', 'month']);
         if ($productId) {
