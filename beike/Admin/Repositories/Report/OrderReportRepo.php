@@ -210,18 +210,18 @@ class OrderReportRepo
      */
     public static function getViewsLatestMonth($productId = 0)
     {
-        $builder = ProductView::query()->where('created_at', '>', today()->subMonth())
-            ->where('created_at', '<', today())
-            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
+        $builder = ProductView::query()->where('created_at', '>=', today()->subMonth())
+            ->where('created_at', '<', today()->addDay())
+            ->select(DB::raw('DATE(created_at) as date, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
             ->groupBy('date');
         if ($productId) {
             $builder->where('product_id', $productId);
         }
         $totals = $builder->get()->toArray();
-        $totals = array_column($totals, 'total', 'date');
 
         $data = [
-            'totals'  => $totals,
+            'pv_totals'  => array_column($totals, 'pv_totals', 'date'),
+            'uv_totals'  => array_column($totals, 'uv_totals', 'date'),
         ];
 
         return hook_filter('report.order_report_views_month', $data);
@@ -234,18 +234,18 @@ class OrderReportRepo
      */
     public static function getViewsLatestWeek($productId = 0)
     {
-        $builder = ProductView::query()->where('created_at', '>', today()->subWeek())
-            ->where('created_at', '<', today())
-            ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
+        $builder = ProductView::query()->where('created_at', '>=', today()->subWeek())
+            ->where('created_at', '<', today()->addDay())
+            ->select(DB::raw('DATE(created_at) as date, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
             ->groupBy('date');
         if ($productId) {
             $builder->where('product_id', $productId);
         }
         $totals = $builder->get()->toArray();
-        $totals = array_column($totals, 'total', 'date');
 
         $data = [
-            'totals'  => $totals,
+            'pv_totals'  => array_column($totals, 'pv_totals', 'date'),
+            'uv_totals'  => array_column($totals, 'uv_totals', 'date'),
         ];
 
         return hook_filter('report.order_report_views_week', $data);
@@ -258,23 +258,26 @@ class OrderReportRepo
      */
     public static function getViewsLatestYear($productId = 0)
     {
-        $builder = ProductView::query()->where('created_at', '>', today()->subYear())
-            ->where('created_at', '<', today())
-            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
+        $builder = ProductView::query()->where('created_at', '>=', today()->subYear())
+            ->where('created_at', '<', today()->addDay())
+            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
             ->groupBy(['year', 'month']);
         if ($productId) {
             $builder->where('product_id', $productId);
         }
         $totals = $builder->get();
 
-        $monthTotals = [];
+        $monthPVTotals = [];
+        $monthUVTotals = [];
         foreach ($totals as $total) {
             $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
-            $monthTotals[$key] = $total['total'];
+            $monthPVTotals[$key] = $total['pv_totals'];
+            $monthUVTotals[$key] = $total['uv_totals'];
         }
 
         $data = [
-            'totals'  => $monthTotals,
+            'pv_totals'  => $monthPVTotals,
+            'uv_totals'  => $monthUVTotals,
         ];
 
         return hook_filter('report.order_report_views_year', $data);
