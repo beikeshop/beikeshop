@@ -50,7 +50,7 @@ class ReportController extends Controller
             ],
         ];
 
-        return view('admin::pages.report.view', $data);
+        return view('admin::pages.report.product_view', $data);
     }
 
     /**
