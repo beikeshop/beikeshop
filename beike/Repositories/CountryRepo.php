@@ -112,6 +112,13 @@ class CountryRepo
         if (isset($filters['status'])) {
             $builder->where('countries.status', $filters['status']);
         }
+        if (isset($filters['continent'])) {
+            $continent = $filters['continent'];
+            if ($continent == 'null') {
+                $continent = '';
+            }
+            $builder->where('countries.continent', $continent);
+        }
 
         return $builder;
     }
@@ -132,5 +139,21 @@ class CountryRepo
     public static function all()
     {
         return Country::query()->select('id', 'name')->get();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getContinents(): array
+    {
+        $result = [];
+        foreach (Country::CONTINENTS as $continent) {
+            $result[] = [
+                'code'  => $continent,
+                'label' => trans("country.{$continent}"),
+            ];
+        }
+
+        return $result;
     }
 }
