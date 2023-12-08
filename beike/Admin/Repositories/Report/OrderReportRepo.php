@@ -217,8 +217,8 @@ class OrderReportRepo
         if ($productId) {
             $builder->where('product_id', $productId);
         }
-        $totals = $builder->get()
-            ->keyBy('date');
+        $totals = $builder->get()->toArray();
+        $totals = array_column($totals, 'total', 'date');
 
         $data = [
             'totals'  => $totals,
@@ -241,8 +241,8 @@ class OrderReportRepo
         if ($productId) {
             $builder->where('product_id', $productId);
         }
-        $totals = $builder->get()
-            ->keyBy('date');
+        $totals = $builder->get()->toArray();
+        $totals = array_column($totals, 'total', 'date');
 
         $data = [
             'totals'  => $totals,
