@@ -88,6 +88,7 @@ class Order extends Base
         if ($this->total === null) {
             return null;
         }
+
         return currency_format($this->total, $this->currency_code, $this->currency_value);
     }
 

@@ -11,12 +11,9 @@
 
 namespace Beike\Repositories;
 
-use Beike\Models\Cart;
 use Beike\Models\CartProduct;
-use Beike\Models\Customer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 class CartProductRepo
 {
@@ -49,10 +46,10 @@ class CartProductRepo
 
         $product = $filters['product'] ?? null;
         if ($product) {
-            $builder->where(function($query) use ($product) {
+            $builder->where(function ($query) use ($product) {
                 $query->whereHas('product.description', function ($query) use ($product) {
-                        $query->where('name', 'like', "%{$product}%");
-                    })
+                    $query->where('name', 'like', "%{$product}%");
+                })
                     ->orWereHas('product', function ($query) use ($product) {
                         $query->where('sku', 'like', "%{$product}%");
                     });

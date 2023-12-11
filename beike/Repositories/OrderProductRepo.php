@@ -74,7 +74,7 @@ class OrderProductRepo
                 $query->whereIn('status', $order_statuses);
             });
         } else {
-            $builder->whereHas('order', function ($query) use ($order_statuses) {
+            $builder->whereHas('order', function ($query) {
                 $query->where('status', '<>', StateMachineService::CREATED);
             });
         }
@@ -100,7 +100,7 @@ class OrderProductRepo
         }
 
         $builder->groupBy(['product_id'])
-            ->selectRaw("`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount");
+            ->selectRaw('`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount');
 
         return $builder;
     }

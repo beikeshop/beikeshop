@@ -149,6 +149,7 @@ class OrderReportRepo
     public static function getSaleInfoByProducts($order, $filter)
     {
         $filter['order'] = $order;
+
         return OrderProductRepo::getBuilder($filter)->get();
     }
 
@@ -183,7 +184,7 @@ class OrderReportRepo
         }
 
         return $builder->groupBy('customer_id')
-            ->selectRaw("`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount")
+            ->selectRaw('`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount')
             ->get();
     }
 
@@ -222,10 +223,10 @@ class OrderReportRepo
 
         $mapPvTotals = array_column($totals, 'pv_totals', 'date');
         $mapUvTotals = array_column($totals, 'uv_totals', 'date');
-        $pvTotals = [];
-        $uvTotals = [];
+        $pvTotals    = [];
+        $uvTotals    = [];
         foreach ($period as $date) {
-            $dateFormat  = $date->format('Y-m-d');
+            $dateFormat            = $date->format('Y-m-d');
             $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? 0;
             $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? 0;
         }
@@ -257,10 +258,10 @@ class OrderReportRepo
 
         $mapPvTotals = array_column($totals, 'pv_totals', 'date');
         $mapUvTotals = array_column($totals, 'uv_totals', 'date');
-        $pvTotals = [];
-        $uvTotals = [];
+        $pvTotals    = [];
+        $uvTotals    = [];
         foreach ($period as $date) {
-            $dateFormat  = $date->format('Y-m-d');
+            $dateFormat            = $date->format('Y-m-d');
             $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? 0;
             $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? 0;
         }
@@ -293,12 +294,12 @@ class OrderReportRepo
 
         $mapPvTotals = array_column($totals, 'pv_totals', 'ym');
         $mapUvTotals = array_column($totals, 'uv_totals', 'ym');
-        $pvTotals = [];
-        $uvTotals = [];
+        $pvTotals    = [];
+        $uvTotals    = [];
         foreach ($period as $total) {
             $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
-            $pvTotals[$key] = $mapPvTotals[$key] ?? 0;
-            $uvTotals[$key] = $mapUvTotals[$key] ?? 0;
+            $pvTotals[$key]         = $mapPvTotals[$key] ?? 0;
+            $uvTotals[$key]         = $mapUvTotals[$key] ?? 0;
         }
 
         $data = [
