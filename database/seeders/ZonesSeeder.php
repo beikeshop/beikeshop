@@ -4105,6 +4105,11 @@ class ZonesSeeder extends Seeder
             ["id" => 4239, "country_id" => 44, "name" => "台湾省", "code" => "TW", "sort_order" => 0, "status" => 1,],
             ["id" => 4240, "country_id" => 44, "name" => "西藏自治区", "code" => "XZ", "sort_order" => 0, "status" => 1,],
             ["id" => 4241, "country_id" => 4, "name" => "Los Angeles", "code" => "LosAngeles", "sort_order" => 0, "status" => 1,],
+            ["id" => 4242, "country_id" => 188, "name" => "Central Region", "code" => "CR", "sort_order" => 0, "status" => 1,],
+            ["id" => 4243, "country_id" => 188, "name" => "East Region", "code" => "ER", "sort_order" => 0, "status" => 1,],
+            ["id" => 4244, "country_id" => 188, "name" => "West Region", "code" => "WR", "sort_order" => 0, "status" => 1,],
+            ["id" => 4245, "country_id" => 188, "name" => "South Region", "code" => "SR", "sort_order" => 0, "status" => 1,],
+            ["id" => 4246, "country_id" => 188, "name" => "North Region", "code" => "NR", "sort_order" => 0, "status" => 1,],
         ];
     }
 }
