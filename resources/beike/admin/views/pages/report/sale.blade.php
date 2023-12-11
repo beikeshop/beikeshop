@@ -295,7 +295,7 @@
       },
 
       changeSearch(e) {
-        if (!isStatusOpen) {
+        if (!this.isStatusOpen) {
           location = bk.objectToUrlParams(this.filter, this.url)
         }
       },
