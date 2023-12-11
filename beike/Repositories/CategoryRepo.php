@@ -66,7 +66,7 @@ class CategoryRepo
         if (! $includeInactive) {
             $sql .= ' AND c1.active = 1 ';
         }
-        $sql .= ' GROUP BY cp.category_id ORDER BY c1.position ASC';
+        $sql .= ' GROUP BY cp.category_id ORDER BY c1.position ASC, name ASC';
 
         return DB::select($sql);
     }
