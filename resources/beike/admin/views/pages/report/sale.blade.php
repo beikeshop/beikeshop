@@ -251,6 +251,7 @@
     data: {
       url: '{{ admin_route("reports_sale.index") }}',
       statuses: @json($statuses),
+      isStatusOpen: false,
       filter: {
         statuses: @json($statuses_selected ?? []),
         start: bk.getQueryString('start'),
@@ -287,15 +288,14 @@
       },
 
       search(e) {
+        this.isStatusOpen = e
         if (!e) {
           location = bk.objectToUrlParams(this.filter, this.url)
         }
       },
 
       changeSearch(e) {
-        const statuses_selected = @json($statuses_selected ?? []);
-
-        if (e.length < statuses_selected.length) {
+        if (!isStatusOpen) {
           location = bk.objectToUrlParams(this.filter, this.url)
         }
       },
