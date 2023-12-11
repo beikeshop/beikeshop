@@ -226,8 +226,8 @@ class OrderReportRepo
         $uvTotals = [];
         foreach ($period as $date) {
             $dateFormat  = $date->format('Y-m-d');
-            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? null;
-            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? null;
+            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? 0;
+            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? 0;
         }
 
         $data = [
@@ -261,8 +261,8 @@ class OrderReportRepo
         $uvTotals = [];
         foreach ($period as $date) {
             $dateFormat  = $date->format('Y-m-d');
-            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? null;
-            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? null;
+            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? 0;
+            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? 0;
         }
 
         $data = [
@@ -297,8 +297,8 @@ class OrderReportRepo
         $uvTotals = [];
         foreach ($period as $total) {
             $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
-            $pvTotals[$key] = $mapPvTotals[$key] ?? null;
-            $uvTotals[$key] = $mapUvTotals[$key] ?? null;
+            $pvTotals[$key] = $mapPvTotals[$key] ?? 0;
+            $uvTotals[$key] = $mapUvTotals[$key] ?? 0;
         }
 
         $data = [
