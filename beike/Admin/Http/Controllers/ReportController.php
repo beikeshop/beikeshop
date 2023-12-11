@@ -15,7 +15,8 @@ class ReportController extends Controller
      */
     public function sale(Request $request): mixed
     {
-        $statuses = explode(',', $request->get('statuses')) ?? StateMachineService::getValidStatuses();
+        $statuses = $request->get('statuses') ? explode(',', $request->get('statuses')) : StateMachineService::getValidStatuses();
+
         $filter = [
             'order_statuses' => $statuses,
             'date_start' => $request->get('start'),
