@@ -262,7 +262,7 @@
       url: '{{ admin_route("reports_sale.index") }}',
       statuses: @json($statuses),
       filter: {
-        statuses: bk.getQueryString('statuses') ? bk.getQueryString('statuses').split(',') : [],
+        statuses: @json($statuses_selected),
         start: bk.getQueryString('start'),
         end: bk.getQueryString('end'),
       },
