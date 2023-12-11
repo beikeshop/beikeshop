@@ -21,7 +21,40 @@
       </div>
     </div>
     <div class="card-body">
-      <canvas id="orders-chart" height="400"></canvas>
+      <div class="bg-light p-4 mb-3" id="app">
+        <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
+          <el-form-item label="{{ __('common.status') }}">
+            <el-select v-model="filter.statuses" multiple placeholder="请选择" size="small" class="wp-400">
+              <el-option v-for="item in statuses" :key="item.status" :label="item.name" :value="item.status"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="{{ __('order.created_at') }}">
+            <el-form-item>
+              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
+                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(1)" v-model="filter.start" style="width: 100%;">
+              </el-date-picker>
+            </el-form-item>
+            <span>-</span>
+            <el-form-item>
+              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
+                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(0)" v-model="filter.end" style="width: 100%;">
+              </el-date-picker>
+            </el-form-item>
+          </el-form-item>
+        </el-form>
+
+        <div class="row">
+          <label class="wp-100"></label>
+          <div class="col-auto">
+            <button type="button" @click="search"
+              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="resetSearch"
+              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+          </div>
+        </div>
+      </div>
+
+      <div><canvas id="orders-chart" height="400"></canvas></div>
     </div>
   </div>
   <div class="row">
@@ -234,6 +267,57 @@
     const data = [eval(day).totals, eval(day).amounts];
     $(this).addClass('btn-info text-white').siblings().removeClass('btn-info text-white');
     upDate(ordersChart, labels, data);
+  });
+
+  let app = new Vue({
+    el: '#app',
+    data: {
+      url: '{{ admin_route("reports_sale.index") }}',
+      statuses: @json($statuses),
+      filter: {
+        statuses: bk.getQueryString('statuses') ? bk.getQueryString('statuses').split(',') : [],
+        start: bk.getQueryString('start'),
+        end: bk.getQueryString('end'),
+      },
+    },
+
+    watch: {
+      "filter.start": {
+        handler(newVal,oldVal) {
+          if(!newVal) {
+            this.filter.start = ''
+          }
+        }
+      },
+      "filter.end": {
+        handler(newVal,oldVal) {
+          if(!newVal) {
+            this.filter.end = ''
+          }
+        }
+      }
+    },
+
+    methods: {
+      pickerDate(type) {
+        if(this.filter.end && this.filter.start > this.filter.end) {
+            if(type) {
+            this.filter.start = ''
+          } else {
+            this.filter.end = ''
+          }
+        }
+      },
+
+      search() {
+        location = bk.objectToUrlParams(this.filter, this.url)
+      },
+
+      resetSearch() {
+        this.filter = bk.clearObjectValue(this.filter)
+        location = bk.objectToUrlParams(this.filter, this.url)
+      },
+    }
   });
 </script>
 @endpush

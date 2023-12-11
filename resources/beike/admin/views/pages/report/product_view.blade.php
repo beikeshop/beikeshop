@@ -11,7 +11,7 @@
 @section('content')
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div>{{ __('admin/report.reports_view_chart') }}</div>
+      <div class="chart-title">{{ __('admin/report.reports_view_chart') }} <span>{{ __('admin/report.all_product') }}</span></div>
       <div class="orders-right">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
           <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">{{ __('admin/dashboard.latest_month') }}</button>
@@ -21,7 +21,15 @@
       </div>
     </div>
     <div class="card-body">
-      <canvas id="orders-chart" height="400"></canvas>
+      <div class="bg-light p-3 mb-2">
+        <div class="input-group w-max-500">
+          <input id="product-autocomplete" type="text" class="form-control" placeholder="{{ __('product.name') }}">
+          <button type="button" class="btn btn-outline-primary btn-sm px-3 product-filter">{{ __('common.filter') }}</button>
+          <button type="button" class="btn btn-outline-secondary btn-sm btn-reset">{{ __('common.reset') }}</button>
+        </div>
+      </div>
+
+      <div><canvas id="orders-chart" height="400"></canvas></div>
     </div>
   </div>
 
@@ -44,7 +52,7 @@
         @foreach ($views as $item)
           <tr>
             <td>{{ $item->description->product_id }}</td>
-            <td>{{ $item->description->name }}</td>
+            <td class="product-name">{{ $item->description->name }}</td>
             <td>{{ $item->view_count }}</td>
             <td>{{ $item->description->created_at }}</td>
             <td><button type="button" class="btn btn-sm btn-outline-secondary view-product-chart" data-id="{{ $item->description->product_id }}">{{ __('admin/report.view_product_chart') }}</button></td>
@@ -73,37 +81,41 @@
   let latest_week = viewsTrends.latest_week;
   let latest_year = viewsTrends.latest_year;
 
+  let productFilterId = 0;
+
   const ordersChart = new Chart(orders, {
     type: 'line',
     data: {
-      // labels: Array.from({length: 30}, (v, k) => k + 1),
-      labels: latest_month.period,
+      labels: Object.keys(latest_month.pv_totals),
       datasets: [
         {
-          label: ["{{ __('admin/report.view_count') }}"],
+          label: ["{{ __('admin/report.pv_total') }}"],
           fill: true,
-          backgroundColor : orderGradient, // Put the gradient here as a fill color
+          backgroundColor : orderGradient,
           borderColor : "#4da4f9",
           borderWidth: 2,
-          // data: Array.from({length: 30}, () => Math.floor(Math.random() * 23.7)),
-          data: latest_month.totals,
-          // borderDash: [],
+          data: Object.values(latest_month.pv_totals),
           responsive: true,
           lineTension: 0.4,
           datasetStrokeWidth: 3,
           pointDotStrokeWidth: 4,
-          // pointStyle: 'rect',
           pointHoverBorderWidth: 8,
-          // pointBorderColor: [],
           pointBackgroundColor: '#4da4f9',
-
-          // pointColor : "#fff",
-          // pointStrokeColor : "#ff6c23",
-          // pointHighlightFill: "#fff",
-          // pointHighlightStroke: "#ff6c23",
-          // pointRadius: 3,
         },
-
+        {
+          label: ["{{ __('admin/report.uv_total') }}"],
+          fill: true,
+          backgroundColor : amountGradient,
+          borderColor : "#20c997",
+          borderWidth: 2,
+          data: Object.values(latest_month.uv_totals),
+          responsive: true,
+          lineTension: 0.4,
+          datasetStrokeWidth: 3,
+          pointDotStrokeWidth: 4,
+          pointHoverBorderWidth: 8,
+          pointBackgroundColor: '#20c997',
+        },
       ],
     },
     options: {
@@ -147,21 +159,34 @@
 
   $('.orders-right .btn-group > .btn').on('click', function() {
     const day = $(this).data('type'); // 天数
-    const labels = Object.keys(eval(day).totals);
-    const data = [eval(day).totals];
+    const labels = Object.keys(eval(day).pv_totals);
+    const data = [Object.values(eval(day).pv_totals), Object.values(eval(day).uv_totals)];
     $(this).addClass('btn-info text-white').siblings().removeClass('btn-info text-white');
     upDate(ordersChart, labels, data);
   });
 
   $('.view-product-chart').on('click', function() {
     const id = $(this).data('id');
+    const self = $(this);
+    $('#product-autocomplete').val('');
+    productFilterId = 0;
 
+    getProducrReports(id, () => {
+      $('.chart-title span').text(self.parents('tr').find('.product-name').text());
+    });
+  });
+
+  $('.btn-reset').on('click', function() {
+    location.reload();
+  });
+
+  function getProducrReports(id, callback) {
     $http.get(`reports/product_view/${id}`).then(function(res) {
       // 页面滚动到顶部
       $('#content').animate({scrollTop: 0}, 200);
       viewsTrends = res.data.views_trends;
-      ordersChart.data.labels = Object.keys(viewsTrends.latest_month.totals);
-      ordersChart.data.datasets[0].data = viewsTrends.latest_month.totals;
+      ordersChart.data.labels = Object.keys(viewsTrends.latest_month.pv_totals);
+      ordersChart.data.datasets[0].data = viewsTrends.latest_month.pv_totals;
       // 同时更新  latest_month, latest_week, latest_year
       latest_month = viewsTrends.latest_month;
       latest_week = viewsTrends.latest_week;
@@ -171,8 +196,36 @@
       $('.orders-right .btn-group > .btn[data-type="latest_month"]').addClass('btn-info text-white');
 
       ordersChart.update();
+
+      if (callback) {
+        callback();
+      }
     });
-  });
+  }
+
+  $(function ($) {
+    $('#product-autocomplete').autocomplete({
+      'source': function(request, response) {
+        $http.get(`products/autocomplete?name=${encodeURIComponent(request)}`, null, {hload: true}).then((res) => {
+          response($.map(res.data, function(item) {
+            return {label: item['name'], value: item['id']}
+          }));
+        })
+      },
+      'select': function(item) {
+        $(this).val(item['label']);
+        productFilterId = item['value']
+      }
+    });
+
+    $('.product-filter').on('click', function() {
+      if (productFilterId) {
+        getProducrReports(productFilterId, () => {
+          $('.chart-title span').text($('#product-autocomplete').val());
+        });
+      }
+    });
+  })
 </script>
 @endpush
 

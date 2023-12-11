@@ -12,7 +12,10 @@
 return [
   'reports_sale'       => '商品销售',
   'reports_view'       => '商品浏览(前20)',
-  'reports_view_chart' => '商品浏览趋势图',
+  'reports_view_chart' => '商品展现量（PV）:',
+  'all_product'        => '所有商品',
   'view_count'         => '浏览次数',
+  'pv_total'           => '商品展现量',
+  'uv_total'           => '商品访客数',
   'view_product_chart' => '查看趋势',
 ];
