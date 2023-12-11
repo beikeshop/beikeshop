@@ -52,7 +52,7 @@
         <td>{{ $product['sku'] }}</td>
         <td class="text-right">{{ $product['quantity'] }}</td>
         <td class="text-right">{{ $product['price'] }}</td>
-        <td class="text-right">{{ $product['total'] }}</td>
+        <td class="text-right">{{ $product['total_format'] }}</td>
       </tr>
       @endforeach
       @endif
