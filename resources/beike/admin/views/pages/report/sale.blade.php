@@ -24,7 +24,7 @@
       <div class="bg-light p-2 mb-3" id="app">
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
           <el-form-item label="{{ __('common.status') }}" class="mb-0">
-            <el-select v-model="filter.statuses" multiple placeholder="请选择" size="small" class="wp-400" @change="search">
+            <el-select v-model="filter.statuses" multiple placeholder="请选择" size="small" class="wp-400" @change="changeSearch" @visible-change="search">
               <el-option v-for="item in statuses" :key="item.status" :label="item.name" :value="item.status"></el-option>
             </el-select>
           </el-form-item>
@@ -286,8 +286,18 @@
         }
       },
 
-      search() {
-        location = bk.objectToUrlParams(this.filter, this.url)
+      search(e) {
+        if (!e) {
+          location = bk.objectToUrlParams(this.filter, this.url)
+        }
+      },
+
+      changeSearch(e) {
+        const statuses_selected = @json($statuses_selected ?? []);
+
+        if (e.length < statuses_selected.length) {
+          location = bk.objectToUrlParams(this.filter, this.url)
+        }
       },
 
       resetSearch() {
