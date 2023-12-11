@@ -15,7 +15,7 @@ class ReportController extends Controller
      */
     public function sale(Request $request): mixed
     {
-        $statuses = explode(',', $request->get('statuses')) ?? [];
+        $statuses = explode(',', $request->get('statuses')) ?? StateMachineService::getValidStatuses();
         $filter = [
             'order_statuses' => $statuses,
             'date_start' => $request->get('start'),
@@ -23,6 +23,7 @@ class ReportController extends Controller
             'limit' => 10
         ];
         $data = [
+            'statuses_selected' => $statuses,
             'statuses'        => StateMachineService::getAllStatuses(),
             'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', $filter)->toArray(), // 商品销量排行
             'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', $filter)->toArray(), // 商品金额排行
