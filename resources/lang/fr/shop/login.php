@@ -19,7 +19,7 @@ return [
     'description'             => 'Déjà notre client ?',
     'email'                   => 'courrier',
     'email_address'           => 'adresse e-mail',
-    'email_err'               => 'S\\il vous plaît, mettez une adresse email valide!',
+    'email_err'               => 'Sil vous plaît, mettez une adresse email valide!',
     'email_or_password_error' => 'Erreur de courriel ou de mot de passe!',
     'empty_customer'          => 'L\'utilisateur n\'a pas été trouvé',
     'enter_email'             => 'merci d\'entrer votre email',

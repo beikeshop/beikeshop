@@ -94,6 +94,7 @@ $data = $plugin['data'];
         </table>
 
         <div class="mb-4">
+          {{ __('admin/marketing.plugin_ticket') }}
           @if ($data['available'])
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
@@ -112,6 +113,9 @@ $data = $plugin['data'];
               @if (isset($data['plugin_services']) && count($data['plugin_services']))
               <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                 __('admin/marketing.btn_buy_service') }}</button>
+              @endif
+              @if ( $data['service_date_to'] ?? 0)
+              <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
               @endif
             </div>
             <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
@@ -363,6 +367,10 @@ $data = $plugin['data'];
     },
 
     methods: {
+      toBkTicketUrl() {
+        let code = "{{ $data['code'] }}"
+        return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+      },
       checkedBtnLogin(form) {
         let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
 

@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:40:15
+ * @modified   2023-12-11 10:16:29
  */
 
 return [
@@ -15,8 +15,6 @@ return [
     'amount'                  => '주문 금액',
     'attention'               => '참고:플러그인을 구매할 때마다 해당 도메인에서만 사용할 수 있습니다!한 번에 여러 도메인을 구입해서 사용하는 것을 금지하며, 어떠한 위반 행위든지 법적책임을 추궁당할 것입니다!',
     'bind_bk_token'           => 'beikeshop 계정을 연동하여 자동으로 토큰을 획득한다',
-    'bk_login_hint'           => '. < a href로 = https://beikeshop.com/account\\\\\\\"target = _blank 」 > beikeshop.com/a > 계정 로그인',
-    'bk_register_hint'        => '. < a href로 = https://beikeshop.com/account\\\\\\\"target = _blank 」 > beikeshop.com/a >에서 새로 등록 번호',
     'btn_buy'                 => '구매',
     'btn_buy_service'         => '구매 애프터서비스',
     'check_token_error'       => '토큰이 현재 방문한 사이트와 일치하지 않습니다. 다시 가져오십시오',
@@ -43,6 +41,7 @@ return [
     'pay_success_title'       => '결제 성공!',
     'payment_method'          => '지불 방식',
     'plugin_name'             => '플러그인 이름',
+    'plugin_ticket'           => '작업 명세서를 제출하다.',
     'same_domain_error'       => '현재 도메인 이름이 루트 디렉터리의.env 파일 app_url과 일치하지 않습니다. 수정해 주십시오',
     'select_pay'              => '결제수단 선택',
     'service_buy_histories'   => '구매 기록',
@@ -54,7 +53,10 @@ return [
     'text_pay'                => '지급금액',
     'text_version'            => '버전',
     'to_update'               => '업그레이드하러 가기',
-    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다 <a href=\\\\\\\"https://beikeshop.com/download\\\\\\\" target=\\\\\\\"_blank\\\\\\\"> 최신 버전 </a>로 업그레이드하십시오.',
     'wxpay'                   => '위챗 코드 스캔 결제!',
     'yuan'                    => '위안',
+
+    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="' . config('beike.api_url') . '/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
+    'bk_register_hint'        => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>에 새 계정을 등록하세요',
+    'bk_login_hint'           => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 계정으로 로그인하세요',
 ];
