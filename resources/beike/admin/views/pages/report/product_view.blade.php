@@ -24,7 +24,6 @@
       <div class="bg-light p-3 mb-2">
         <div class="input-group w-max-500">
           <input id="product-autocomplete" type="text" class="form-control" placeholder="{{ __('product.name') }}">
-          <button type="button" class="btn btn-outline-primary btn-sm px-3 product-filter">{{ __('common.filter') }}</button>
           <button type="button" class="btn btn-outline-secondary btn-sm btn-reset">{{ __('common.reset') }}</button>
         </div>
       </div>
@@ -80,8 +79,6 @@
   let latest_month = viewsTrends.latest_month;
   let latest_week = viewsTrends.latest_week;
   let latest_year = viewsTrends.latest_year;
-
-  let productFilterId = 0;
 
   const ordersChart = new Chart(orders, {
     type: 'line',
@@ -214,13 +211,7 @@
       },
       'select': function(item) {
         $(this).val(item['label']);
-        productFilterId = item['value']
-      }
-    });
-
-    $('.product-filter').on('click', function() {
-      if (productFilterId) {
-        getProducrReports(productFilterId, () => {
+        getProducrReports(item['value'], () => {
           $('.chart-title span').text($('#product-autocomplete').val());
         });
       }
