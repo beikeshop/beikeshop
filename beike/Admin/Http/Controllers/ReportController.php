@@ -4,6 +4,7 @@ namespace Beike\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Beike\Admin\Repositories\Report\OrderReportRepo;
+use Beike\Services\StateMachineService;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -14,7 +15,7 @@ class ReportController extends Controller
      */
     public function sale(Request $request): mixed
     {
-        $statuses = $request->get('statuses');
+        $statuses = explode(',', $request->get('statuses')) ?? [];
         $filter = [
             'order_statuses' => $statuses,
             'date_start' => $request->get('start'),
@@ -22,6 +23,7 @@ class ReportController extends Controller
             'limit' => 10
         ];
         $data = [
+            'statuses'        => StateMachineService::getAllStatuses(),
             'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', $filter)->toArray(), // 商品销量排行
             'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', $filter)->toArray(), // 商品金额排行
             'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', $filter)->toArray(),  // 用户购买金额排行

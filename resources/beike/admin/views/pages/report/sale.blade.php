@@ -28,19 +28,6 @@
               <el-option v-for="item in statuses" :key="item.status" :label="item.name" :value="item.status"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="{{ __('order.created_at') }}">
-            <el-form-item>
-              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(1)" v-model="filter.start" style="width: 100%;">
-              </el-date-picker>
-            </el-form-item>
-            <span>-</span>
-            <el-form-item>
-              <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(0)" v-model="filter.end" style="width: 100%;">
-              </el-date-picker>
-            </el-form-item>
-          </el-form-item>
         </el-form>
 
         <div class="row">
