@@ -21,24 +21,14 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="bg-light p-4 mb-3" id="app">
+      <div class="bg-light p-2 mb-3" id="app">
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
-          <el-form-item label="{{ __('common.status') }}">
-            <el-select v-model="filter.statuses" multiple placeholder="请选择" size="small" class="wp-400">
+          <el-form-item label="{{ __('common.status') }}" class="mb-0">
+            <el-select v-model="filter.statuses" multiple placeholder="请选择" size="small" class="wp-400" @change="search">
               <el-option v-for="item in statuses" :key="item.status" :label="item.name" :value="item.status"></el-option>
             </el-select>
           </el-form-item>
         </el-form>
-
-        <div class="row">
-          <label class="wp-100"></label>
-          <div class="col-auto">
-            <button type="button" @click="search"
-              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
-            <button type="button" @click="resetSearch"
-              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
-          </div>
-        </div>
       </div>
 
       <div><canvas id="orders-chart" height="400"></canvas></div>
