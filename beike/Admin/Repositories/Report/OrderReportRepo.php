@@ -218,10 +218,21 @@ class OrderReportRepo
             $builder->where('product_id', $productId);
         }
         $totals = $builder->get()->toArray();
+        $period = CarbonPeriod::create(today()->subMonth(), today()->subDay())->toArray();
+
+        $mapPvTotals = array_column($totals, 'pv_totals', 'date');
+        $mapUvTotals = array_column($totals, 'uv_totals', 'date');
+        $pvTotals = [];
+        $uvTotals = [];
+        foreach ($period as $date) {
+            $dateFormat  = $date->format('Y-m-d');
+            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? null;
+            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? null;
+        }
 
         $data = [
-            'pv_totals'  => array_column($totals, 'pv_totals', 'date'),
-            'uv_totals'  => array_column($totals, 'uv_totals', 'date'),
+            'pv_totals'  => $pvTotals,
+            'uv_totals'  => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_month', $data);
@@ -242,10 +253,21 @@ class OrderReportRepo
             $builder->where('product_id', $productId);
         }
         $totals = $builder->get()->toArray();
+        $period = CarbonPeriod::create(today()->subWeek(), today()->subDay())->toArray();
+
+        $mapPvTotals = array_column($totals, 'pv_totals', 'date');
+        $mapUvTotals = array_column($totals, 'uv_totals', 'date');
+        $pvTotals = [];
+        $uvTotals = [];
+        foreach ($period as $date) {
+            $dateFormat  = $date->format('Y-m-d');
+            $pvTotals[$dateFormat] = $mapPvTotals[$dateFormat] ?? null;
+            $uvTotals[$dateFormat] = $mapUvTotals[$dateFormat] ?? null;
+        }
 
         $data = [
-            'pv_totals'  => array_column($totals, 'pv_totals', 'date'),
-            'uv_totals'  => array_column($totals, 'uv_totals', 'date'),
+            'pv_totals'  => $pvTotals,
+            'uv_totals'  => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_week', $data);
@@ -260,24 +282,28 @@ class OrderReportRepo
     {
         $builder = ProductView::query()->where('created_at', '>=', today()->subYear())
             ->where('created_at', '<', today()->addDay())
-            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
-            ->groupBy(['year', 'month']);
+            ->select(DB::raw('CONCAT(YEAR(created_at), \'-\', MONTH(created_at)) AS ym, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
+            ->groupBy(['ym']);
         if ($productId) {
             $builder->where('product_id', $productId);
         }
-        $totals = $builder->get();
 
-        $monthPVTotals = [];
-        $monthUVTotals = [];
-        foreach ($totals as $total) {
+        $totals = $builder->get()->toArray();
+        $period = CarbonPeriod::create(today()->subYear()->endOfMonth(), '1 month', today()->endOfMonth())->toArray();
+
+        $mapPvTotals = array_column($totals, 'pv_totals', 'ym');
+        $mapUvTotals = array_column($totals, 'uv_totals', 'ym');
+        $pvTotals = [];
+        $uvTotals = [];
+        foreach ($period as $total) {
             $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
-            $monthPVTotals[$key] = $total['pv_totals'];
-            $monthUVTotals[$key] = $total['uv_totals'];
+            $pvTotals[$key] = $mapPvTotals[$key] ?? null;
+            $uvTotals[$key] = $mapUvTotals[$key] ?? null;
         }
 
         $data = [
-            'pv_totals'  => $monthPVTotals,
-            'uv_totals'  => $monthUVTotals,
+            'pv_totals'  => $pvTotals,
+            'uv_totals'  => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_year', $data);

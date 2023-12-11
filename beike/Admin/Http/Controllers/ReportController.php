@@ -5,7 +5,6 @@ namespace Beike\Admin\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Beike\Admin\Repositories\Report\OrderReportRepo;
 use Illuminate\Http\Request;
-use Beike\Services\StateMachineService;
 
 class ReportController extends Controller
 {
@@ -17,21 +16,19 @@ class ReportController extends Controller
     {
         $statuses = $request->get('statuses');
         $filter = [
-            'order_statuses' => explode(',', $statuses) ?? [],
+            'order_statuses' => $statuses,
             'date_start' => $request->get('start'),
             'date_end' => $request->get('end'),
             'limit' => 10
         ];
-
         $data = [
-            'statuses'        => StateMachineService::getAllStatuses(),
             'quantity_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_quantity', $filter)->toArray(), // 商品销量排行
             'amount_by_products'     => OrderReportRepo::getSaleInfoByProducts('total_amount', $filter)->toArray(), // 商品金额排行
             'amount_by_customers'    => OrderReportRepo::getSaleInfoByCustomers('order_amount', $filter)->toArray(),  // 用户购买金额排行
             'order_trends' => [
-                'latest_month' => OrderReportRepo::getLatestMonth(explode(',', $statuses) ?? []),
-                'latest_week'  => OrderReportRepo::getLatestWeek(explode(',', $statuses) ?? []),
-                'latest_year'  => OrderReportRepo::getLatestYear(explode(',', $statuses) ?? []),
+                'latest_month' => OrderReportRepo::getLatestMonth($statuses),
+                'latest_week'  => OrderReportRepo::getLatestWeek($statuses),
+                'latest_year'  => OrderReportRepo::getLatestYear($statuses),
             ],
         ];
 
