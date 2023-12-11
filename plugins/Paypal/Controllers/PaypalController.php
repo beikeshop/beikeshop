@@ -60,7 +60,7 @@ class PaypalController
                         'currency_code' => system_setting('base.currency'),
                         'value'         => round($order->total, 2),
                     ],
-                    'description' => $order->getOrderDesc(),
+                    'description' => $order->getOrderDesc(128),
                 ],
             ],
         ]);
