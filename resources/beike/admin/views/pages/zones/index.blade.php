@@ -66,7 +66,7 @@
               <td>@{{ zone.id }}</td>
               <td>@{{ zone.name }}</td>
               <td>@{{ zone.code }}</td>
-              <td>@{{ zone.country_id }}</td>
+              <td>@{{ zone.country.name }}</td>
               <td>@{{ zone.created_at }}</td>
               <td>@{{ zone.updated_at }}</td>
               <td>@{{ zone.sort_order }}</td>
