@@ -99,7 +99,7 @@ class Sidebar extends Component
             [
                 'route'    => 'reports_sale.index',
                 'title'    => trans('admin/common.report'),
-                'icon'     => 'bi bi-file-earmark-text',
+                'icon'     => 'bi bi-bar-chart-line',
                 'prefixes' => $this->getReportSubPrefix(),
                 'children' => $this->getReportSubRoutes(),
             ],
