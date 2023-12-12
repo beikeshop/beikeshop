@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => 'Ha sido revisado',
+    'approved'       => 'Ha sido revisado',
     'customer_group' => 'grupo de usuario',
-    'email' => 'Email',
-    'from' => 'fuente registrada',
-    'name' => 'Nombre',
-    'pending' => 'Pendiente de revisión',
-    'rejected' => 'Ha sido rechazado',
+    'email'          => 'Email',
+    'from'           => 'fuente registrada',
+    'name'           => 'Nombre',
+    'pending'        => 'Pendiente de revisión',
+    'rejected'       => 'Ha sido rechazado',
 ];

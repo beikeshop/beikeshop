@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'Karat.',
-    'g' => '.',
+    'g'  => '.',
     'kg' => 'Kc.',
     'lb' => 'pon',
     'oz' => 'ons',

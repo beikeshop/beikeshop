@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'cramer',
-    'g' => 'g',
+    'g'  => 'g',
     'kg' => 'kg',
     'lb' => 'libbre',
     'oz' => 'once',

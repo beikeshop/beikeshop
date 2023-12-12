@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'cracovia',
-    'g' => 'g',
+    'g'  => 'g',
     'kg' => 'kg',
     'lb' => 'libra',
     'oz' => 'oz',

@@ -10,12 +10,12 @@
  */
 
 return [
-    'AF' => 'En afrique',
-    'AN' => 'Antarctique',
-    'AS' => 'asie',
-    'EU' => 'l\'europe',
-    'NA' => 'Amérique du nord',
-    'OA' => 'océanie',
-    'SA' => 'Amérique du sud',
+    'AF'   => 'En afrique',
+    'AN'   => 'Antarctique',
+    'AS'   => 'asie',
+    'EU'   => 'l\'europe',
+    'NA'   => 'Amérique du nord',
+    'OA'   => 'océanie',
+    'SA'   => 'Amérique du sud',
     'null' => 'inconnu',
 ];

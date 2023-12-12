@@ -10,13 +10,13 @@
  */
 
 return [
-    'module_banner' => 'Modul spanduk',
-    'module_brand' => 'Modul Merek',
+    'module_banner'         => 'Modul spanduk',
+    'module_brand'          => 'Modul Merek',
     'module_four_image_pro' => 'Satu baris dan empat angka PRO',
-    'module_icons' => 'modul ikon',
-    'module_page' => 'Modul artikel',
-    'module_product' => 'Modul Komoditas',
-    'module_rich_text' => 'Modul Teks Kaya',
-    'module_slideshow' => 'Modul Slide',
-    'module_tab_products' => 'Tab Barang',
+    'module_icons'          => 'modul ikon',
+    'module_page'           => 'Modul artikel',
+    'module_product'        => 'Modul Komoditas',
+    'module_rich_text'      => 'Modul Teks Kaya',
+    'module_slideshow'      => 'Modul Slide',
+    'module_tab_products'   => 'Tab Barang',
 ];

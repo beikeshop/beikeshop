@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => 'Gambar sampul',
-    'index' => 'Manajemen Artikel',
-    'info_content' => 'Konten',
-    'info_title' => 'Judul Informasi',
-    'pages_create' => 'Buat artikel',
-    'pages_delete' => 'Hapus artikel',
-    'pages_index' => 'Daftar Artikel',
-    'pages_show' => 'Detail Artikel',
-    'pages_update' => 'Penyuntingan Artikel',
+    'index'         => 'Manajemen Artikel',
+    'info_content'  => 'Konten',
+    'info_title'    => 'Judul Informasi',
+    'pages_create'  => 'Buat artikel',
+    'pages_delete'  => 'Hapus artikel',
+    'pages_index'   => 'Daftar Artikel',
+    'pages_show'    => 'Detail Artikel',
+    'pages_update'  => 'Penyuntingan Artikel',
 ];

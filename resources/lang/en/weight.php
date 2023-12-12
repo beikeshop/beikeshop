@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'karat',
-    'g' => 'g',
+    'g'  => 'g',
     'kg' => 'kilogram',
     'lb' => 'pounds',
     'oz' => 'ounce',

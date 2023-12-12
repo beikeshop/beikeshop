@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => 'Approved',
+    'approved'       => 'Approved',
     'customer_group' => 'Group',
-    'email' => 'Email',
-    'from' => 'From',
-    'name' => 'Name',
-    'pending' => 'Pending',
-    'rejected' => 'Rejected',
+    'email'          => 'Email',
+    'from'           => 'From',
+    'name'           => 'Name',
+    'pending'        => 'Pending',
+    'rejected'       => 'Rejected',
 ];

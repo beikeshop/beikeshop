@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => 'Mapa de portada',
-    'index' => 'página de información',
-    'info_content' => 'contenido',
-    'info_title' => 'título de la información',
-    'pages_create' => 'Crear una sola página',
-    'pages_delete' => 'eliminar una sola página',
-    'pages_index' => 'lista de una sola página',
-    'pages_show' => 'Detalles de una sola página',
-    'pages_update' => 'edición de una sola página',
+    'index'         => 'página de información',
+    'info_content'  => 'contenido',
+    'info_title'    => 'título de la información',
+    'pages_create'  => 'Crear una sola página',
+    'pages_delete'  => 'eliminar una sola página',
+    'pages_index'   => 'lista de una sola página',
+    'pages_show'    => 'Detalles de una sola página',
+    'pages_update'  => 'edición de una sola página',
 ];

@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => 'Telah ditinjau',
+    'approved'       => 'Telah ditinjau',
     'customer_group' => 'Grup Pelanggan',
-    'email' => 'Surel',
-    'from' => 'Sumber Terdaftar',
-    'name' => 'Nama',
-    'pending' => 'Untuk ditinjau',
-    'rejected' => 'Telah ditolak',
+    'email'          => 'Surel',
+    'from'           => 'Sumber Terdaftar',
+    'name'           => 'Nama',
+    'pending'        => 'Untuk ditinjau',
+    'rejected'       => 'Telah ditolak',
 ];

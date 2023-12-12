@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => '封面圖',
-    'index' => '文章管理',
-    'info_content' => '內容',
-    'info_title' => '信息標題',
-    'pages_create' => '創建文章',
-    'pages_delete' => '刪除文章',
-    'pages_index' => '文章列表',
-    'pages_show' => '文章詳情',
-    'pages_update' => '文章編輯',
+    'index'         => '文章管理',
+    'info_content'  => '內容',
+    'info_title'    => '信息標題',
+    'pages_create'  => '創建文章',
+    'pages_delete'  => '刪除文章',
+    'pages_index'   => '文章列表',
+    'pages_show'    => '文章詳情',
+    'pages_update'  => '文章編輯',
 ];

@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => 'Schema di copertina',
-    'index' => 'pagina informativa',
-    'info_content' => 'contenuto',
-    'info_title' => 'titolo delle informazioni',
-    'pages_create' => 'Crea una singola pagina',
-    'pages_delete' => 'Elimina una singola pagina',
-    'pages_index' => 'Elenco di pagine singole',
-    'pages_show' => 'Dettagli pagina singola',
-    'pages_update' => 'Modifica pagina singola',
+    'index'         => 'pagina informativa',
+    'info_content'  => 'contenuto',
+    'info_title'    => 'titolo delle informazioni',
+    'pages_create'  => 'Crea una singola pagina',
+    'pages_delete'  => 'Elimina una singola pagina',
+    'pages_index'   => 'Elenco di pagine singole',
+    'pages_show'    => 'Dettagli pagina singola',
+    'pages_update'  => 'Modifica pagina singola',
 ];

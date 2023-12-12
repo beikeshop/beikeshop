@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => 'Plan de couverture',
-    'index' => 'page d\'information',
-    'info_content' => 'contenu',
-    'info_title' => 'titre des informations',
-    'pages_create' => 'Créer une seule page',
-    'pages_delete' => 'Supprimer une seule page',
-    'pages_index' => 'Liste de pages simples',
-    'pages_show' => 'Détails d\'une seule page',
-    'pages_update' => 'Modification d\'une seule page',
+    'index'         => 'page d\'information',
+    'info_content'  => 'contenu',
+    'info_title'    => 'titre des informations',
+    'pages_create'  => 'Créer une seule page',
+    'pages_delete'  => 'Supprimer une seule page',
+    'pages_index'   => 'Liste de pages simples',
+    'pages_show'    => 'Détails d\'une seule page',
+    'pages_update'  => 'Modification d\'une seule page',
 ];

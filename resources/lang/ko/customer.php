@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => '승인됨',
+    'approved'       => '승인됨',
     'customer_group' => '고객 그룹',
-    'email' => 'Email',
-    'from' => '등록출처',
-    'name' => '이름',
-    'pending' => '심의를 기다리다',
-    'rejected' => '거부됨',
+    'email'          => 'Email',
+    'from'           => '등록출처',
+    'name'           => '이름',
+    'pending'        => '심의를 기다리다',
+    'rejected'       => '거부됨',
 ];

@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => 'Oggetto dell\'audit',
+    'approved'       => 'Oggetto dell\'audit',
     'customer_group' => 'gruppo di utenti',
-    'email' => 'Email',
-    'from' => 'fonte registrata',
-    'name' => 'Nome',
-    'pending' => 'Da esaminare',
-    'rejected' => 'respinto',
+    'email'          => 'Email',
+    'from'           => 'fonte registrata',
+    'name'           => 'Nome',
+    'pending'        => 'Da esaminare',
+    'rejected'       => 'respinto',
 ];

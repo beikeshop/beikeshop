@@ -11,12 +11,12 @@
 
 return [
     'cover_picture' => 'Titelbild.',
-    'index' => 'Artikelverwaltung',
-    'info_content' => 'Inhalt',
-    'info_title' => 'Informationstitel',
-    'pages_create' => 'Artikel erstellen',
-    'pages_delete' => 'Artikel löschen',
-    'pages_index' => 'Artikelliste',
-    'pages_show' => 'Artikeldetails',
-    'pages_update' => 'Artikelbearbeitung',
+    'index'         => 'Artikelverwaltung',
+    'info_content'  => 'Inhalt',
+    'info_title'    => 'Informationstitel',
+    'pages_create'  => 'Artikel erstellen',
+    'pages_delete'  => 'Artikel löschen',
+    'pages_index'   => 'Artikelliste',
+    'pages_show'    => 'Artikeldetails',
+    'pages_update'  => 'Artikelbearbeitung',
 ];

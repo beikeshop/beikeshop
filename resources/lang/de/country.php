@@ -10,12 +10,12 @@
  */
 
 return [
-    'AF' => 'In afrika.',
-    'AN' => 'Ln der antarktis.',
-    'AS' => 'Asien.',
-    'EU' => 'europa',
-    'NA' => 'nordamerika',
-    'OA' => 'ozeanien',
-    'SA' => 'Nach südamerika.',
+    'AF'   => 'In afrika.',
+    'AN'   => 'Ln der antarktis.',
+    'AS'   => 'Asien.',
+    'EU'   => 'europa',
+    'NA'   => 'nordamerika',
+    'OA'   => 'ozeanien',
+    'SA'   => 'Nach südamerika.',
     'null' => 'Unbekannt. - unbekannt.',
 ];

@@ -10,13 +10,13 @@
  */
 
 return [
-    'module_banner' => 'module bannière',
-    'module_brand' => 'module de marque',
+    'module_banner'         => 'module bannière',
+    'module_brand'          => 'module de marque',
     'module_four_image_pro' => 'une ligne quatre images PRO',
-    'module_icons' => 'module d\'icônes',
-    'module_page' => 'Module pour articles',
-    'module_product' => 'module marchandise',
-    'module_rich_text' => 'texte enrichi',
-    'module_slideshow' => 'module diapositive',
-    'module_tab_products' => 'onglet produits',
+    'module_icons'          => 'module d\'icônes',
+    'module_page'           => 'Module pour articles',
+    'module_product'        => 'module marchandise',
+    'module_rich_text'      => 'texte enrichi',
+    'module_slideshow'      => 'module diapositive',
+    'module_tab_products'   => 'onglet produits',
 ];

@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'carats',
-    'g' => 'g',
+    'g'  => 'g',
     'kg' => 'kg',
     'lb' => 'De kompong thom',
     'oz' => 'onces',

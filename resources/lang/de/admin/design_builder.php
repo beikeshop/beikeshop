@@ -10,13 +10,13 @@
  */
 
 return [
-    'module_banner' => 'Bannermodul',
-    'module_brand' => 'Markenmodul',
+    'module_banner'         => 'Bannermodul',
+    'module_brand'          => 'Markenmodul',
     'module_four_image_pro' => 'eine Zeile vier Bilder PRO',
-    'module_icons' => 'Symbolmodul',
-    'module_page' => 'Modul für aufsätze',
-    'module_product' => 'Warenmodul',
-    'module_rich_text' => 'Rich-Text',
-    'module_slideshow' => 'Folienmodul',
-    'module_tab_products' => 'Tab-Produkte',
+    'module_icons'          => 'Symbolmodul',
+    'module_page'           => 'Modul für aufsätze',
+    'module_product'        => 'Warenmodul',
+    'module_rich_text'      => 'Rich-Text',
+    'module_slideshow'      => 'Folienmodul',
+    'module_tab_products'   => 'Tab-Produkte',
 ];

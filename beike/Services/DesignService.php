@@ -238,7 +238,7 @@ class DesignService
         }
 
         foreach ($images as $index => $image) {
-            $imagePath = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
+            $imagePath               = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
             $images[$index]['image'] = image_origin($imagePath);
 
             $link = $image['link'];

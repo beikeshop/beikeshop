@@ -10,11 +10,11 @@
  */
 
 return [
-    'approved' => '審査済みです',
+    'approved'       => '審査済みです',
     'customer_group' => 'ユーザー・グループ',
-    'email' => 'Email',
-    'from' => '登録ソース',
-    'name' => '名前',
-    'pending' => '審査待ちです',
-    'rejected' => 'お断りしました',
+    'email'          => 'Email',
+    'from'           => '登録ソース',
+    'name'           => '名前',
+    'pending'        => '審査待ちです',
+    'rejected'       => 'お断りしました',
 ];

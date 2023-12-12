@@ -11,7 +11,7 @@
 
 return [
     'ct' => 'Kola?',
-    'g' => ',',
+    'g'  => ',',
     'kg' => 'Kilo.',
     'lb' => 'pfund',
     'oz' => '30 gramm.',

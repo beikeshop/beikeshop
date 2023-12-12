@@ -11,7 +11,7 @@
 
 return [
     'check_details' => 'Details prüfen',
-    'index' => 'Meine Favoriten',
-    'price' => 'Dem preis?',
-    'product' => 'Handelswaren.',
+    'index'         => 'Meine Favoriten',
+    'price'         => 'Dem preis?',
+    'product'       => 'Handelswaren.',
 ];
