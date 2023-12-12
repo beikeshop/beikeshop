@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-12 col-md-3 me-lg-5">
           <div class="footer-content-left footer-link-wrap">
-            <h6 class="text-uppercase text-dark intro-title">{{ __('common.company_profile') }}<span class="icon-open"><i class="bi bi-plus-lg"></i></span></h6>
+            <h6 class="text-uppercase text-dark intro-title">{{ __('shop/common.company_profile') }}<span class="icon-open"><i class="bi bi-plus-lg"></i></span></h6>
             <div class="intro-wrap">
               @if ($footer_content['content']['intro']['logo'] ?? false)
                 <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>

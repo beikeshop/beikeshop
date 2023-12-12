@@ -20,6 +20,10 @@
     text-align: center;
     margin-bottom: 30px;
     font-size: 0.9rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+    }
   }
 
   .module-image-info {

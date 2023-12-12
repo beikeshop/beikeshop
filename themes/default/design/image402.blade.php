@@ -4,10 +4,10 @@
   <div class="module-image-402 banner-magnify-hover module-info mb-3 mb-md-5">
     <div class="container">
       @if ($content['title'][locale()] ?? false)
-      <div class="image-402-title">{{ $content['title'][locale()] }}</div>
+      <div class="module-title">{{ $content['title'][locale()] }}</div>
       @endif
       @if ($content['sub_title'][locale()] ?? false)
-      <div class="image-402-sub-title">{{ $content['sub_title'][locale()] }}</div>
+      <div class="image-402-sub-title mt-n3">{{ $content['sub_title'][locale()] }}</div>
       @endif
       <div class="module-image-info d-grid grid-4">
         <div class="image-402-1">
