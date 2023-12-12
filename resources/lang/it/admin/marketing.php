@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:40:20
+ * @modified   2023-12-11 10:16:20
  */
 
 return [
@@ -15,8 +15,6 @@ return [
     'amount'                  => 'Importo delle ordinazioni',
     'attention'               => 'N. B. : ogni singolo acquisto è autorizzato solo per il dominio di acquisto corrispondente! E\' vietato un unico acquisto in più nomi di dominio e qualsiasi violazione sarà perseguibile penalmente!',
     'bind_bk_token'           => '(\') tenuto conto del numero di catalogo BeikeShop',
-    'bk_login_hint'           => 'Con < a href = \\\\\\\"https://beikeshop.com/account\\\\\\\" target \\\\\\\"_blank > beikeshop.com < / > account logon',
-    'bk_register_hint'        => 'Con < a href = \\\\\\\\\"https://beikeshop.com/account\\\\\\\\\" target \\\\\\\\\"_blank > beikeshop.com su nuovi account iscriversi < / >',
     'btn_buy'                 => 'acquisti',
     'btn_buy_service'         => 'Acquisto dopo la vendita',
     'check_token_error'       => 'Token non corrisponde al sito attuale',
@@ -43,6 +41,7 @@ return [
     'pay_success_title'       => 'I pagamenti hanno successo!',
     'payment_method'          => 'Modalità di pagamento',
     'plugin_name'             => 'Nome dell\'unità modulare',
+    'plugin_ticket'           => 'Presentazione del plico di lavoro',
     'same_domain_error'       => 'Gli attuali nomi di dominio di accesso non sono compatibili con il file env',
     'select_pay'              => 'Scelta dei mezzi di pagamento',
     'service_buy_histories'   => 'Registrazione degli acquisti',
@@ -54,7 +53,10 @@ return [
     'text_pay'                => 'Importo versato',
     'text_version'            => 'versione',
     'to_update'               => 'deaggiornamento',
-    'version_compatible_text' => 'La versione incompatibilità attuali sistemi modulari, invita a < a href = \\\\\\\\\\\"https://beikeshop.com/download\\\\\\\\\\\" target \\\\\\\\\\\"_blank > l\'ultima versione < / >',
     'wxpay'                   => 'Pagare il prezzo di wechat!',
     'yuan'                    => 'yuan',
+
+    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="' . config('beike.api_url') . '/download" target="_blank">versione più recente </a>',
+    'bk_register_hint'        => 'Registra un nuovo account su <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_login_hint'           => 'Accedi con l\'account <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
 ];

@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:47:28
+ * @modified   2023-12-11 10:16:56
  */
 
 return [
@@ -29,6 +29,7 @@ return [
     'shipping'              => 'Método de entrega',
     'social'                => 'Social',
     'theme'                 => 'Theme',
+    'ticket'                => 'Soporte técnico',
     'to_enable'             => 'To Enable',
     'total'                 => 'Cálculo de pedidos',
     'translator'            => 'Herramienta de traducción',

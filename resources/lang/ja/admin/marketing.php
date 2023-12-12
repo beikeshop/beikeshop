@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:40:30
+ * @modified   2023-12-11 10:16:24
  */
 
 return [
@@ -15,8 +15,6 @@ return [
     'amount'                  => 'ご註文金額です',
     'attention'               => 'ご注意ください:プラグインを購入するたびに、購入に対応するドメイン名でのみ使用を許可します!一度の購入で復数のドメイン名を使用することは禁止されており、違反行為は法的責任を問われます!',
     'bind_bk_token'           => 'BeikeShopのアカウントと連携すると自動的にトークンが取得されます',
-    'bk_login_hint'           => '< aきゃ= \\\\\\\\\\\\\\\" https://beikeshop.com/account \\\\\\\\\\\\\\\" lang = ja \\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\" > beikeshop.com < / a >アカウント登录',
-    'bk_register_hint'        => '< aきゃ= \\\\\\\\\\\\\\\" https://beikeshop.com/account \\\\\\\\\\\\\\\" lang = ja \\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\" > beikeshop.com < / a >に登録した新アカウント',
     'btn_buy'                 => '購入します',
     'btn_buy_service'         => 'アフターサービスです',
     'check_token_error'       => 'tokenは現在アクセスしているサイトと一致しません,再取得してください',
@@ -43,6 +41,7 @@ return [
     'pay_success_title'       => '支払い成功です!',
     'payment_method'          => '支払い方法です',
     'plugin_name'             => 'プラグイン名です',
+    'plugin_ticket'           => '作業伝票を提出する',
     'same_domain_error'       => '現在のアクセスドメイン名とルートディレクトリ下の。envファイルAPP_URLが一致しません。修正してください。',
     'select_pay'              => '支払い方法を選択します',
     'service_buy_histories'   => '購入履歴です',
@@ -54,7 +53,10 @@ return [
     'text_pay'                => '支払い金額です',
     'text_version'            => 'バージョン',
     'to_update'               => '進級します',
-    'version_compatible_text' => '同アドインを兼用しない現在のシステムバージョン、にグレードアップしてください< aきゃ= \\\\\\\\\\\\\\\" https://beikeshop.com/download \\\\\\\\\\\\\\\" lang = ja \\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\" >最新バージョン< / a >',
     'wxpay'                   => '微信コード決済です!',
     'yuan'                    => '元です',
+
+    'version_compatible_text' => 'このプラグインは現在のシステム バージョンと互換性がありません。<a href="' . config('beike.api_url') . '/download" target="_blank">最新バージョンにアップグレードしてください。 </a>',
+    'bk_register_hint'        => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> に新しいアカウントを登録します',
+    'bk_login_hint'           => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> アカウントでログイン',
 ];
