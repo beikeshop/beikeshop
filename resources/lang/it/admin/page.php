@@ -1,22 +1,22 @@
 <?php
 /**
- * page.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:14
  */
 
 return [
-    'index'        => 'pagina informativa',
-    'info_title'   => 'titolo delle informazioni',
-    'info_content' => 'contenuto',
-
-    'pages_index'  => 'Elenco di pagine singole',
-    'pages_create' => 'Crea una singola pagina',
-    'pages_show'   => 'Dettagli pagina singola',
-    'pages_update' => 'Modifica pagina singola',
-    'pages_delete' => 'Elimina una singola pagina',
+    'cover_picture' => 'Schema di copertina',
+    'index'         => 'pagina informativa',
+    'info_content'  => 'contenuto',
+    'info_title'    => 'titolo delle informazioni',
+    'pages_create'  => 'Crea una singola pagina',
+    'pages_delete'  => 'Elimina una singola pagina',
+    'pages_index'   => 'Elenco di pagine singole',
+    'pages_show'    => 'Dettagli pagina singola',
+    'pages_update'  => 'Modifica pagina singola',
 ];

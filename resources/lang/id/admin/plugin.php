@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     Edward Yang <service@tuikehome.com>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:30
  */
 
 return [
-    'plugins_index'         => 'Pengaturan plugin',
-    'plugins_import'        => 'unggah plugin',
-    'plugins_show'          => 'Detail plugin',
-    'plugins_update'        => 'pembaruan plugin',
-    'plugins_update_status' => 'Perbarui Status',
-    'plugins_install'       => 'Instal',
-    'plugins_uninstall'     => 'Copot pemasangan',
-    'to_enable'             => 'Pergi aktifkan',
-    'uninstall_hint'        => 'Menghapus plugin menghapus semua data yang relevan untuk plugin itu, apakah Anda yakin ingin menghapusnya?',
-
-    'plugin_list'           => 'Pengaturan plugin',
-    'plugin_code'           => 'kode plugin',
-    'plugin_type'           => 'jenis plugin',
-    'plugin_description'    => 'deskripsi plugin',
-    'plugin_upload'         => 'unggah plugin (hanya file zip)',
-
-    'shipping'              => 'metode pengiriman',
-    'payment'               => 'Metode Pembayaran',
-    'social'                => 'jejaring sosial',
-    'total'                 => 'Perhitungan pesanan',
     'feature'               => 'modul fungsi',
     'language'              => 'Terjemahan bahasa',
+    'payment'               => 'Metode Pembayaran',
+    'plugin_code'           => 'kode plugin',
+    'plugin_description'    => 'deskripsi plugin',
+    'plugin_list'           => 'Pengaturan plugin',
+    'plugin_type'           => 'jenis plugin',
+    'plugin_upload'         => 'unggah plugin (hanya file zip)',
+    'plugin_version'        => 'Nomor versi',
+    'plugins_import'        => 'unggah plugin',
+    'plugins_index'         => 'Pengaturan plugin',
+    'plugins_install'       => 'Instal',
+    'plugins_show'          => 'Detail plugin',
+    'plugins_uninstall'     => 'Copot pemasangan',
+    'plugins_update'        => 'pembaruan plugin',
+    'plugins_update_status' => 'Perbarui Status',
+    'shipping'              => 'metode pengiriman',
+    'social'                => 'jejaring sosial',
     'theme'                 => 'Template Tema',
+    'to_enable'             => 'Pergi aktifkan',
+    'total'                 => 'Perhitungan pesanan',
+    'translator'            => 'Alat terjemahan',
+    'uninstall_hint'        => 'Menghapus plugin menghapus semua data yang relevan untuk plugin itu, apakah Anda yakin ingin menghapusnya?',
 ];

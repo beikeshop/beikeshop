@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-07 09:16:05
+ * @modified   2023-12-12 07:29:13
  */
 
 return [
@@ -17,5 +17,5 @@ return [
     'NA'   => '北アメリカです',
     'OA'   => 'オセアニアです',
     'SA'   => '南アメリカです',
-    'none' => '未知です',
+    'null' => '未知です',
 ];

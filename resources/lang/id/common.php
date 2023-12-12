@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-05 10:28:07
+ * @modified   2023-12-12 07:30:01
  */
 
 return [
@@ -19,6 +19,7 @@ return [
     'confirm'              => 'OKE',
     'confirm_delete'       => 'Apakah Anda yakin ingin menghapus?',
     'contact_us'           => 'Hubungi Kami',
+    'continent'            => 'Benua ini.',
     'created_at'           => 'waktu penciptaan',
     'created_success'      => 'Berhasil dibuat!',
     'cropper_size'         => 'Potong dimensi bingkai',

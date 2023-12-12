@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:26
  */
 
 return [
-    'plugins_index'         => 'Plugin-Liste',
-    'plugins_import'        => 'Plugin hochladen',
-    'plugins_show'          => 'Plugins-Details',
-    'plugins_update'        => 'plugins-aktualisierung',
-    'plugins_update_status' => 'Aktualisierungsstatus',
-    'plugins_install'       => 'installieren',
-    'plugins_uninstall'     => 'deinstallieren',
-    'to_enable'             => 'To Enable',
-    'uninstall_hint'        => 'Das Deinstallieren des Plug-ins löscht alle zugehörigen Daten des Plug-ins, möchten Sie es wirklich deinstallieren? ',
-
-    'plugin_list'           => 'Plugin-Liste',
-    'plugin_code'           => 'plugin-code',
-    'plugin_type'           => 'plugin-typ',
-    'plugin_description'    => 'plugin-beschreibung',
-    'plugin_upload'         => 'Plugin hochladen (unterstützt nur Zip-Dateien)',
-
-    'shipping'              => 'Versandart',
-    'payment'               => 'Zahlungsmethode',
-    'total'                 => 'Auftragsberechnung',
-    'social'                => 'Social',
     'feature'               => 'Feature',
     'language'              => 'Language',
+    'payment'               => 'Zahlungsmethode',
+    'plugin_code'           => 'plugin-code',
+    'plugin_description'    => 'plugin-beschreibung',
+    'plugin_list'           => 'Plugin-Liste',
+    'plugin_type'           => 'plugin-typ',
+    'plugin_upload'         => 'Plugin hochladen (unterstützt nur Zip-Dateien)',
+    'plugin_version'        => 'Ja? Seriennummer?',
+    'plugins_import'        => 'Plugin hochladen',
+    'plugins_index'         => 'Plugin-Liste',
+    'plugins_install'       => 'installieren',
+    'plugins_show'          => 'Plugins-Details',
+    'plugins_uninstall'     => 'deinstallieren',
+    'plugins_update'        => 'plugins-aktualisierung',
+    'plugins_update_status' => 'Aktualisierungsstatus',
+    'shipping'              => 'Versandart',
+    'social'                => 'Social',
     'theme'                 => 'Theme',
+    'to_enable'             => 'To Enable',
+    'total'                 => 'Auftragsberechnung',
+    'translator'            => 'Ein übersetzungswerkzeug.',
+    'uninstall_hint'        => 'Das Deinstallieren des Plug-ins löscht alle zugehörigen Daten des Plug-ins, möchten Sie es wirklich deinstallieren? ',
 ];

@@ -1,25 +1,25 @@
 <?php
 /**
- * account.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-04 10:59:15
- * @modified   2022-08-04 10:59:15
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:25:25
  */
 
 return [
-    'order_success'            => 'Herzlichen Glückwunsch, die Bestellung wurde erfolgreich generiert! ',
-    'order_number'             => 'Bestellnummer',
-    'amounts_payable'          => 'Zahlungsbetrag',
-    'payment_method'           => 'Zahlungsmethode',
-    'view_order'               => 'Bestelldetails anzeigen',
-    'pay_now'                  => 'jetzt bezahlen',
-    'kind_tips'                => 'Herzliche Erinnerung: Ihre Bestellung wurde erfolgreich generiert, bitte schließen Sie die Zahlung so schnell wie möglich ab~',
     'also'                     => 'Du kannst auch',
-    'continue_purchase'        => 'mit dem Kauf fortfahren',
+    'amounts_payable'          => 'Zahlungsbetrag',
     'contact_customer_service' => 'Bei Fragen während des Bestellvorgangs können Sie sich jederzeit an unseren Kundenservice wenden',
-    'email'                    => 'Postfach',
+    'continue_purchase'        => 'mit dem Kauf fortfahren',
+    'emaill'                   => 'Briefkasten.',
+    'kind_tips'                => 'Herzliche Erinnerung: Ihre Bestellung wurde erfolgreich generiert, bitte schließen Sie die Zahlung so schnell wie möglich ab~',
+    'order_number'             => 'Bestellnummer',
+    'order_success'            => 'Herzlichen Glückwunsch, die Bestellung wurde erfolgreich generiert! ',
+    'pay_now'                  => 'jetzt bezahlen',
+    'payment_method'           => 'Zahlungsmethode',
     'service_hotline'          => 'Service-Hotline',
+    'view_order'               => 'Bestelldetails anzeigen',
 ];

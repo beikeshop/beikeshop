@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:48:08
+ * @modified   2023-12-12 07:38:29
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => 'Direktori sudah ada',
     'directory_not_empty'     => 'Direktori ini tidak kosong',
     'download'                => 'Unduh',
-    'drop_file_hint'          => 'Do you want to move <span class="drop-hint"></span> files inside <span class="drop-hint"></span>?',
-    'drop_folder_hint'        => 'Do you want to move <span class="drop-hint"></span> inside <span class="drop-hint"></span>?',
+    'drop_file_hint'          => 'Do you want to move <span class=\"drop-hint\"></span> files inside <span class=\"drop-hint\"></span>?',
+    'drop_folder_hint'        => 'Do you want to move <span class=\"drop-hint\"></span> inside <span class=\"drop-hint\"></span>?',
     'file_manager'            => 'Manajer Gambar',
     'file_manager_create'     => 'Buat direktori / file',
     'file_manager_delete'     => 'Hapus direktori / file',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => 'Tidak ada dokumen',
     'picture_space'           => 'ruang gambar',
     'rename'                  => 'Ubah nama',
+    'rename_failed'           => 'Perubahan nama gagal silakan cek apakah nama berkas itu sah atau tidak',
     'show_pc'                 => 'Silakan pergi ke PC untuk beroperasi',
     'source_dir_empty'        => 'Direktori sumber tidak bisa kosong',
     'target_dir_exist'        => 'Direktori tujuan telah ada',

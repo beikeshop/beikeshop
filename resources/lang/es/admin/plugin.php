@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:28
  */
 
 return [
-    'plugins_index'         => 'Lista de complementos',
-    'plugins_import'        => 'Subir complemento',
-    'plugins_show'          => 'Detalles del complemento',
-    'plugins_update'        => 'Actualización del complemento',
-    'plugins_update_status' => 'estado de actualización',
-    'plugins_install'       => 'Instalar',
-    'plugins_uninstall'     => 'desinstalar',
-    'to_enable'             => 'To Enable',
-    'uninstall_hint'        => 'Desinstalar el complemento eliminará todos los datos relacionados con el complemento, ¿está seguro de que desea desinstalarlo? ',
-
-    'plugin_list'           => 'Lista de complementos',
-    'plugin_code'           => 'código de complemento',
-    'plugin_type'           => 'Tipo de complemento',
-    'plugin_description'    => 'Descripción del complemento',
-    'plugin_upload'         => 'Complemento de carga (solo se admiten archivos zip)',
-
-    'shipping'              => 'Método de entrega',
-    'payment'               => 'método de pago',
-    'total'                 => 'Cálculo de pedidos',
-    'social'                => 'Social',
     'feature'               => 'Feature',
     'language'              => 'Language',
+    'payment'               => 'método de pago',
+    'plugin_code'           => 'código de complemento',
+    'plugin_description'    => 'Descripción del complemento',
+    'plugin_list'           => 'Lista de complementos',
+    'plugin_type'           => 'Tipo de complemento',
+    'plugin_upload'         => 'Complemento de carga (solo se admiten archivos zip)',
+    'plugin_version'        => 'Número de versión',
+    'plugins_import'        => 'Subir complemento',
+    'plugins_index'         => 'Lista de complementos',
+    'plugins_install'       => 'Instalar',
+    'plugins_show'          => 'Detalles del complemento',
+    'plugins_uninstall'     => 'desinstalar',
+    'plugins_update'        => 'Actualización del complemento',
+    'plugins_update_status' => 'estado de actualización',
+    'shipping'              => 'Método de entrega',
+    'social'                => 'Social',
     'theme'                 => 'Theme',
+    'to_enable'             => 'To Enable',
+    'total'                 => 'Cálculo de pedidos',
+    'translator'            => 'Herramienta de traducción',
+    'uninstall_hint'        => 'Desinstalar el complemento eliminará todos los datos relacionados con el complemento, ¿está seguro de que desea desinstalarlo? ',
 ];

@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-05 10:11:24
+ * @modified   2023-12-12 07:29:57
  */
 
 return [
@@ -19,6 +19,7 @@ return [
     'confirm'              => 'bestätigen',
     'confirm_delete'       => 'Sind Sie sicher, dass Sie löschen möchten?',
     'contact_us'           => 'kontaktiere uns',
+    'continent'            => 'in',
     'created_at'           => 'Erstellungszeit',
     'created_success'      => 'Erfolgreich erstellt!',
     'cropper_size'         => 'Schneidegröße: boxergrößen',

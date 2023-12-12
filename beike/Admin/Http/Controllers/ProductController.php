@@ -109,7 +109,7 @@ class ProductController extends Controller
     {
         try {
             $requestData = $request->all();
-            $actionType = $requestData['action_type'] ?? '';
+            $actionType  = $requestData['action_type'] ?? '';
             $product     = (new ProductService)->update($product, $requestData);
 
             $data = [

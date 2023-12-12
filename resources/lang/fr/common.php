@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-27 08:46:26
+ * @modified   2023-12-12 07:29:42
  */
 
 return [
@@ -14,10 +14,12 @@ return [
     'add'                  => 'Ajouter à',
     'all'                  => 'tout',
     'batch_setting'        => 'paramétrage par lots',
+    'before'               => 'veuillez',
     'cancel'               => 'Annuler',
     'confirm'              => 'Bien sûr',
     'confirm_delete'       => 'Vous êtes sûr de vouloir le supprimer?',
     'contact_us'           => 'Nous contacter',
+    'continent'            => 'continent',
     'created_at'           => 'temps de creation',
     'created_success'      => 'Créé avec succès!',
     'cropper_size'         => 'Taille du cadre de coupe',
@@ -39,6 +41,7 @@ return [
     'error_page'           => 'Les données auxquelles vous avez accédé n\'existent pas ou ont été supprimées~',
     'error_page_btn'       => 'Retour à la page précédente',
     'error_required'       => 'Merci de renseigner :nom',
+    'examine'              => 'l\'audit',
     'exit'                 => 'quitter',
     'export'               => 'exporter',
     'filter'               => 'filtre',
@@ -50,6 +53,7 @@ return [
     'image'                => 'image',
     'input'                => 'entrez votre recherche ici',
     'language'             => 'Langue',
+    'login'                => 'connexion',
     'low'                  => 'faible',
     'menu'                 => 'menu',
     'name'                 => 'Nom',
@@ -69,6 +73,7 @@ return [
     'save'                 => 'enregistrer',
     'select_all'           => 'tout sélectionner',
     'show_all'             => 'Voir tout',
+    'show_price'           => 'Pour voir les prix',
     'showing_page'         => 'Showing 1-:per_page of :total item(s)',
     'sign_out'             => 'se déconnecter',
     'sort_order'           => 'trier',

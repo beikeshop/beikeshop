@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-10-19 02:25:11
+ * @modified   2023-12-12 07:40:11
  */
 
 return [
@@ -15,10 +15,11 @@ return [
     'amount'                  => 'Jumlah pesanan',
     'attention'               => 'Perlu dicatat: setiap pembelian plugin, hanya berhak menggunakan nama domain yang berhubungan dengan pembelian! Pelanggaran apapun akan dianggap bertanggung jawab secara hukum karena pembelian sekali pakai dalam beberapa nama domain!',
     'bind_bk_token'           => 'Mengikat akun BeikeShop, dengan otomatis akses Token',
-    'bk_login_hint'           => 'Dengan normally less than a href = \\\"https://beikeshop.com/account\\\" targets at \\\"_blank\\\" > beikeshop.com < / a > login ke nomor rekening',
-    'bk_register_hint'        => 'Dengan normally less than a href = \\\"https://beikeshop.com/account\\\" targets at \\\"_blank\\\" > beikeshop.com nomor rekening baru masuk di salah satu < / a',
+    'bk_login_hint'           => 'Dengan normally less than a href = \\\\\"https://beikeshop.com/account\\\\\" targets at \\\\\"_blank\\\\\" > beikeshop.com < / a > login ke nomor rekening',
+    'bk_register_hint'        => 'Dengan normally less than a href = \\\\\"https://beikeshop.com/account\\\\\" targets at \\\\\"_blank\\\\\" > beikeshop.com nomor rekening baru masuk di salah satu < / a',
     'btn_buy'                 => 'Beli',
     'btn_buy_service'         => 'Setelah pembelian',
+    'check_token_error'       => 'Token tidak sesuai dengan situs akses saat ini, mohon request',
     'create_date'             => 'Memesan waktu',
     'days'                    => 'hari',
     'download_count'          => 'jumlah unduhan',
@@ -42,6 +43,7 @@ return [
     'pay_success_title'       => 'Pembayaran berhasil!',
     'payment_method'          => 'Sarana pembayaran',
     'plugin_name'             => 'Nama plugin',
+    'same_domain_error'       => 'Kunjungi nama ranah saat ini tidak konsisten dengan direktori akar. Env berkas APP_URL, silakan modifikasilah',
     'select_pay'              => 'Pilih metode pembayaran',
     'service_buy_histories'   => 'Catatan pembelian',
     'service_date_to'         => 'Karena setelah terjual',
@@ -52,7 +54,7 @@ return [
     'text_pay'                => 'Jumlah Pembayaran',
     'text_version'            => 'versi',
     'to_update'               => 'Pergi untuk meningkatkan',
-    'version_compatible_text' => 'Plugin tidak kompatibel dengan versi sistem saat ini, silakan tingkatkan ke <a href=\\\\\"https://beikeshop.com/download\\\\\" target=\\\\\"_blank\\\\\">Versi terbaru</a>',
+    'version_compatible_text' => 'Plugin tidak kompatibel dengan versi sistem saat ini, silakan tingkatkan ke <a href=\\\\\\\"https://beikeshop.com/download\\\\\\\" target=\\\\\\\"_blank\\\\\\\">Versi terbaru</a>',
     'wxpay'                   => 'Pembayaran kode pindai WeChat!',
     'yuan'                    => 'Yuan.',
 ];

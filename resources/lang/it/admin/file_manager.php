@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:48:49
+ * @modified   2023-12-12 07:38:30
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => 'directory esiste già',
     'directory_not_empty'     => 'La directory non è vuota',
     'download'                => 'Scarica',
-    'drop_file_hint'          => 'Do you want to move <span class="drop-hint"></span> files inside <span class="drop-hint"></span>?',
-    'drop_folder_hint'        => 'Do you want to move <span class="drop-hint"></span> inside <span class="drop-hint"></span>?',
+    'drop_file_hint'          => 'Do you want to move <span class=\"drop-hint\"></span> files inside <span class=\"drop-hint\"></span>?',
+    'drop_folder_hint'        => 'Do you want to move <span class=\"drop-hint\"></span> inside <span class=\"drop-hint\"></span>?',
     'file_manager'            => 'Gestore delle immagini',
     'file_manager_create'     => 'Crea directory/file',
     'file_manager_delete'     => 'cancella directory/file',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => 'nessun file',
     'picture_space'           => 'spazio dell\'immagine',
     'rename'                  => 'Rinominare',
+    'rename_failed'           => 'Se il cambiamento della denominazione non ha avuto luogo, verificare se il nome del documento è legittimo o rinomato',
     'show_pc'                 => 'Si prega di andare sul lato PC per operare',
     'source_dir_empty'        => 'Il catalogo delle fonti non deve rimanere vuoto',
     'target_dir_exist'        => 'Esiste già un catalogo di obiettivi',

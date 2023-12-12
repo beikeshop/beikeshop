@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-05 10:26:03
+ * @modified   2023-12-12 07:30:09
  */
 
 return [
@@ -19,6 +19,7 @@ return [
     'confirm'              => 'もちろん',
     'confirm_delete'       => '削除してもよろしいですか?',
     'contact_us'           => 'お問い合わせ',
+    'continent'            => 'しゅうです',
     'created_at'           => '作成時間',
     'created_success'      => '正常に作成されました!',
     'cropper_size'         => '枠サイズを裁断します。',

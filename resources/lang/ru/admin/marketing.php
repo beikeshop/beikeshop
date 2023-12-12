@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-10-19 02:25:01
+ * @modified   2023-12-12 07:40:18
  */
 
 return [
@@ -15,10 +15,11 @@ return [
     'amount'                  => 'Сумма заказа',
     'attention'               => 'Внимание: каждый плагин покупается только для использования в соответствующем доменном имени! Запрещается одна покупка в нескольких доменных именах, и любое нарушение может быть привлечено к ответственности по закону!',
     'bind_bk_token'           => 'Свяжите аккаунт в бейкешопе и автоматически получите токена',
-    'bk_login_hint'           => 'Использова < a href = \\\\\\\\\"https://beikeshop.com/account\\\\\\\\\" target = \\\\\\\\\"_blank\\\\\\\\\" > beikeshop.com < / a > аккаунт залогин',
-    'bk_register_hint'        => 'Использова < a href = \\\\\\\\\"https://beikeshop.com/account\\\\\\\\\" target = \\\\\\\\\"_blank\\\\\\\\\" > beikeshop.com < / a > зарегистрирова на нов аккаунт',
+    'bk_login_hint'           => 'Использова < a href = \\\\\\\\\\\"https://beikeshop.com/account\\\\\\\\\\\" target = \\\\\\\\\\\"_blank\\\\\\\\\\\" > beikeshop.com < / a > аккаунт залогин',
+    'bk_register_hint'        => 'Использова < a href = \\\\\\\\\\\"https://beikeshop.com/account\\\\\\\\\\\" target = \\\\\\\\\\\"_blank\\\\\\\\\\\" > beikeshop.com < / a > зарегистрирова на нов аккаунт',
     'btn_buy'                 => 'покупк',
     'btn_buy_service'         => 'После покупки и продажи',
+    'check_token_error'       => 'Токен не совпадает с текущим посещением сайта',
     'create_date'             => 'В следующий раз.',
     'days'                    => 'дне',
     'download_count'          => 'количество загрузок',
@@ -42,6 +43,7 @@ return [
     'pay_success_title'       => 'Плати!',
     'payment_method'          => 'Способ оплаты',
     'plugin_name'             => 'Название плагина',
+    'same_domain_error'       => 'Текущее имя домена доступа не согласуется с файлом.env APP_URL в корневом каталоге',
     'select_pay'              => 'Выбрать способ оплаты',
     'service_buy_histories'   => 'Записи покупок.',
     'service_date_to'         => 'Срок годности после продажи',
@@ -52,7 +54,7 @@ return [
     'text_pay'                => 'Сумма выплаты',
     'text_version'            => 'версия',
     'to_update'               => 'Обновление.',
-    'version_compatible_text' => 'Плагин несовместим текущ систем верс, пожалуйст, перейт на < a href = \\\\\\\\\"https://beikeshop.com/download\\\\\\\\\" target = \\\\\\\\\"_blank\\\\\\\\\" > последн верс < / a >',
+    'version_compatible_text' => 'Плагин несовместим текущ систем верс, пожалуйст, перейт на < a href = \\\\\\\\\\\"https://beikeshop.com/download\\\\\\\\\\\" target = \\\\\\\\\\\"_blank\\\\\\\\\\\" > последн верс < / a >',
     'wxpay'                   => 'Плата за микро-код!',
     'yuan'                    => 'доллар',
 ];

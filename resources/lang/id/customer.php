@@ -1,17 +1,20 @@
 <?php
 /**
- * customer.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     Edward Yang <service@tuikehome.com>
- * @created    2022-08-26 18:41:07
- * @modified   2022-08-26 18:41:07
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:15:56
  */
 
 return [
-    'name'           => 'Nama',
+    'approved'       => 'Telah ditinjau',
+    'customer_group' => 'Grup Pelanggan',
     'email'          => 'Surel',
     'from'           => 'Sumber Terdaftar',
-    'customer_group' => 'Grup Pelanggan',
+    'name'           => 'Nama',
+    'pending'        => 'Untuk ditinjau',
+    'rejected'       => 'Telah ditolak',
 ];

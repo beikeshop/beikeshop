@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:48:12
+ * @modified   2023-12-12 07:38:31
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => 'ディレクトリは既に存在します',
     'directory_not_empty'     => 'ディレクトリは空ではありません',
     'download'                => 'ダウンロード',
-    'drop_file_hint'          => '<span class="drop-hint"></span>個のファイルを<span class="drop-hint"></span>内に移働しますか?',
-    'drop_folder_hint'        => '<span class="drop-hint"></span>を<span class="drop-hint"></span>内に移働しますか?',
+    'drop_file_hint'          => '<span class=\"drop-hint\"></span>個のファイルを<span class=\"drop-hint\"></span>内に移働しますか?',
+    'drop_folder_hint'        => '<span class=\"drop-hint\"></span>を<span class=\"drop-hint\"></span>内に移働しますか?',
     'file_manager'            => '画像マネージャー',
     'file_manager_create'     => 'ディレクトリ/ファイルを作成',
     'file_manager_delete'     => 'ディレクトリ/ファイルを削除',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => 'ファイルなし',
     'picture_space'           => 'ピクチャースペース',
     'rename'                  => 'rename',
+    'rename_failed'           => '改名に失敗した場合、ファイル名が正当であるか、または重名前であるかをチェックしてください。',
     'show_pc'                 => ' PCで操作してください',
     'source_dir_empty'        => 'ソースディレクトリは空ではいけません。',
     'target_dir_exist'        => 'ターゲットリストは存在します',

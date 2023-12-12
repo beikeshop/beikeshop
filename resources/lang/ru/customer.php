@@ -1,17 +1,20 @@
 <?php
 /**
- * customer.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-26 18:41:07
- * @modified   2022-08-26 18:41:07
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:15:47
  */
 
 return [
-    'name'           => 'имя',
+    'approved'       => 'Проверено.',
+    'customer_group' => 'группа пользователей',
     'email'          => 'Email',
     'from'           => 'источник регистрации',
-    'customer_group' => 'группа пользователей',
+    'name'           => 'имя',
+    'pending'        => 'Проверка.',
+    'rejected'       => 'Отклонено.',
 ];

@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-10-19 02:20:41
+ * @modified   2023-12-12 07:40:08
  */
 
 return [
@@ -15,10 +15,11 @@ return [
     'amount'                  => 'Cantidad del pedido',
     'attention'               => 'Tenga en cuenta: ¡Cada compra de plugin, solo autoriza su uso en el dominio correspondiente a la compra! Está prohibido comprar una vez para usar en más de un dominio. Cualquier violación será considerada legalmente responsable!',
     'bind_bk_token'           => 'Vincular la cuenta BeikeShop y obtener tokens automáticamente',
-    'bk_login_hint'           => 'Se oponen a = \\\"https://beikeshop.com/account\\\" target = \\\"_blank\\\" > beikeshop.com cuentas < / a > inicio',
-    'bk_register_hint'        => 'Se oponen a = \\\"https://beikeshop.com/account\\\" target = \\\"_blank\\\" > beikeshop.com < / a > en cuenta de nuevo',
+    'bk_login_hint'           => 'Se oponen a = \\\\\"https://beikeshop.com/account\\\\\" target = \\\\\"_blank\\\\\" > beikeshop.com cuentas < / a > inicio',
+    'bk_register_hint'        => 'Se oponen a = \\\\\"https://beikeshop.com/account\\\\\" target = \\\\\"_blank\\\\\" > beikeshop.com < / a > en cuenta de nuevo',
     'btn_buy'                 => 'compra',
     'btn_buy_service'         => 'Comprar después de venta',
+    'check_token_error'       => 'El token no coincide con el sitio web actualmente visitado. Por favor, vuelva a obtenerlo',
     'create_date'             => 'Hora de orden',
     'days'                    => 'días',
     'download_count'          => 'recuento de descargas',
@@ -42,6 +43,7 @@ return [
     'pay_success_title'       => 'Pago realizado con éxito!',
     'payment_method'          => 'Formas de pago',
     'plugin_name'             => 'Nombre del plugin',
+    'same_domain_error'       => 'El dominio de acceso actual no coincide con el archivo.env APP_URL en la raíz. Modifique',
     'select_pay'              => 'Selecciona el método de pago',
     'service_buy_histories'   => 'Registro de compra',
     'service_date_to'         => 'Vencimiento post-venta',
@@ -52,7 +54,7 @@ return [
     'text_pay'                => 'Cantidad a pagar',
     'text_version'            => 'versión',
     'to_update'               => 'Ir a upgrade',
-    'version_compatible_text' => 'Este complemento no es compatible con la versión del sistema actual, por favor al < se oponen a https://beikeshop.com/download \\\"target =\\\" _blank \\\"> versión < / a >',
+    'version_compatible_text' => 'Este complemento no es compatible con la versión del sistema actual, por favor al < se oponen a https://beikeshop.com/download \\\\\"target =\\\\\" _blank \\\\\"> versión < / a >',
     'wxpay'                   => 'Wechat barrido código de pago!',
     'yuan'                    => 'yuan',
 ];

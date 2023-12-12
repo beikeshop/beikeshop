@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:35
  */
 
 return [
-    'plugins_index'         => 'список плагинов',
-    'plugins_import'        => 'Загрузить плагин',
-    'plugins_show'          => 'детали плагинов',
-    'plugins_update'        => 'обновление плагинов',
-    'plugins_update_status' => 'статус обновления',
-    'plugins_install'       => 'Установить',
-    'plugins_uninstall'     => 'удалить',
-    'to_enable'             => 'включить',
-    'uninstall_hint'        => 'Удаление плагина приведет к удалению всех связанных с ним данных. Вы уверены, что хотите удалить? ',
-
-    'plugin_list'           => 'Список плагинов',
-    'plugin_code'           => 'код плагина',
-    'plugin_type'           => 'Тип плагина',
-    'plugin_description'    => 'Описание плагина',
-    'plugin_upload'         => 'Загрузить плагин (поддерживаются только zip-файлы)',
-
-    'shipping'              => 'способ доставки',
-    'payment'               => 'метод оплаты',
-    'total'                 => 'Расчет заказа',
-    'social'                => 'Social',
     'feature'               => 'Feature',
     'language'              => 'Language',
+    'payment'               => 'метод оплаты',
+    'plugin_code'           => 'код плагина',
+    'plugin_description'    => 'Описание плагина',
+    'plugin_list'           => 'Список плагинов',
+    'plugin_type'           => 'Тип плагина',
+    'plugin_upload'         => 'Загрузить плагин (поддерживаются только zip-файлы)',
+    'plugin_version'        => 'Номер версии.',
+    'plugins_import'        => 'Загрузить плагин',
+    'plugins_index'         => 'список плагинов',
+    'plugins_install'       => 'Установить',
+    'plugins_show'          => 'детали плагинов',
+    'plugins_uninstall'     => 'удалить',
+    'plugins_update'        => 'обновление плагинов',
+    'plugins_update_status' => 'статус обновления',
+    'shipping'              => 'способ доставки',
+    'social'                => 'Social',
     'theme'                 => 'Theme',
+    'to_enable'             => 'включить',
+    'total'                 => 'Расчет заказа',
+    'translator'            => 'Инструменты перевода.',
+    'uninstall_hint'        => 'Удаление плагина приведет к удалению всех связанных с ним данных. Вы уверены, что хотите удалить? ',
 ];

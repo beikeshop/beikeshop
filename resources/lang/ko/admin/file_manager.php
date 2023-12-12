@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:49:07
+ * @modified   2023-12-12 07:38:39
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => '디렉토리 존재',
     'directory_not_empty'     => '디렉터리는 비울수 없습니다',
     'download'                => '다운로드',
-    'drop_file_hint'          => '<span class="drop-hint"></span> 파일을 <span class="drop-hint"></span>로 이동하시겠습니까?',
-    'drop_folder_hint'        => '<span class="drop-hint"></span>을 <span class="drop-hint"></span> 안으로 이동하시겠습니까?',
+    'drop_file_hint'          => '<span class=\\\"drop-hint\\\"></span> 파일을 <span class=\\\"drop-hint\\\"></span>로 이동하시겠습니까?',
+    'drop_folder_hint'        => '<span class=\\\"drop-hint\\\"></span>을 <span class=\\\"drop-hint\\\"></span> 안으로 이동하시겠습니까?',
     'file_manager'            => '이미지 관리',
     'file_manager_create'     => '디렉토리/파일 만들기',
     'file_manager_delete'     => '디렉토리/파일 삭제',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => '파일 없음',
     'picture_space'           => '이미지 공간',
     'rename'                  => '이름 바꾸기',
+    'rename_failed'           => '이름을 바꾸는데 실패했습니다. 파일 이름이 올바른지, 같은 이름인지 확인하십시오',
     'show_pc'                 => 'PC에서 작업하세요',
     'source_dir_empty'        => '원본 디렉터리가 비어 있을 수 없습니다',
     'target_dir_exist'        => '대상 디렉터리가 이미 존재합니다',

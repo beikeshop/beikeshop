@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:48:47
+ * @modified   2023-12-12 07:38:27
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => 'le répertoire existe déjà',
     'directory_not_empty'     => 'Le répertoire n\'est pas vide',
     'download'                => 'télécharger',
-    'drop_file_hint'          => 'Do you want to move <span class="drop-hint"></span> files inside <span class="drop-hint"></span>?',
-    'drop_folder_hint'        => 'Do you want to move <span class="drop-hint"></span> inside <span class="drop-hint"></span>?',
+    'drop_file_hint'          => 'Do you want to move <span class=\"drop-hint\"></span> files inside <span class=\"drop-hint\"></span>?',
+    'drop_folder_hint'        => 'Do you want to move <span class=\"drop-hint\"></span> inside <span class=\"drop-hint\"></span>?',
     'file_manager'            => 'gestionnaire d\'images',
     'file_manager_create'     => 'Créer répertoire/fichier',
     'file_manager_delete'     => 'supprimer répertoire/fichier',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => 'pas de fichier',
     'picture_space'           => 'espace image',
     'rename'                  => 'renommer',
+    'rename_failed'           => 'Échec du changement de nom, vérifiez si le nom du fichier est légitime ou surnommé',
     'show_pc'                 => 'Veuillez passer du côté PC pour opérer',
     'source_dir_empty'        => 'Le répertoire source ne peut pas être vide',
     'target_dir_exist'        => 'Le catalogue cible existe déjà',

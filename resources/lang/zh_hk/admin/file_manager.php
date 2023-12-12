@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-09-13 05:48:58
+ * @modified   2023-12-12 07:38:33
  */
 
 return [
@@ -20,8 +20,8 @@ return [
     'directory_already_exist' => '目錄已存在',
     'directory_not_empty'     => '該目錄不為空',
     'download'                => '下載',
-    'drop_file_hint'          => '是否將<span class="drop-hint"></span>個文件移動到<span class="drop-hint"></span>內?',
-    'drop_folder_hint'        => '是否將<span class="drop-hint"></span>移動到<span class="drop-hint"></span>內?',
+    'drop_file_hint'          => '是否將<span class=\"drop-hint\"></span>個文件移動到<span class=\"drop-hint\"></span>內?',
+    'drop_folder_hint'        => '是否將<span class=\"drop-hint\"></span>移動到<span class=\"drop-hint\"></span>內?',
     'file_manager'            => '圖片管理器',
     'file_manager_create'     => '創建目錄/文件',
     'file_manager_delete'     => '刪除目錄/文件',
@@ -35,6 +35,7 @@ return [
     'no_file'                 => '沒有文件',
     'picture_space'           => '圖片空間',
     'rename'                  => '重命名',
+    'rename_failed'           => '改名失敗，請檢查文件名是否合法或是否重名',
     'show_pc'                 => '請到PC端操作',
     'source_dir_empty'        => '源目錄不能爲空',
     'target_dir_exist'        => '目標目錄已存在',
