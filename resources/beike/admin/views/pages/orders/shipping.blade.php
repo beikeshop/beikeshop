@@ -69,10 +69,10 @@
       <tbody>
       <tr>
         <td colspan="3">
-          <b>{{ $order['store_name'] }}</b> <br />
-          <b>{{ __("admin/order.telephone") }}</b> {{ $order['shipping_telephone'] }}<br />
-          <b>{{ __("admin/order.email") }}</b> {{ $order['email'] }}<br />
-          <b>{{ __("admin/order.website") }}</b> <a href="{{ $order['website'] }}">{{ $order['website'] }}</a></td>
+          <b>{{ $order['store_name'] }}: </b> <br />
+          <b>{{ __("admin/order.telephone") }}: </b> {{ $order['shipping_telephone'] }}<br />
+          <b>{{ __("admin/order.email") }}: </b> {{ $order['email'] }}<br />
+          <b>{{ __("admin/order.website") }}: </b> <a href="{{ $order['website'] }}">{{ $order['website'] }}</a></td>
         </td>
       </tr>
       </tbody>
