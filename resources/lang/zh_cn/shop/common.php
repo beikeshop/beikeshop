@@ -10,10 +10,11 @@
  */
 
 return [
-    'home'    => '首页',
-    'submit'  => '提交',
-    'cancel'  => '取消',
-    'confirm' => '确定',
-    'no'      => '否',
-    'yes'     => '是',
+    'home'            => '首页',
+    'submit'          => '提交',
+    'cancel'          => '取消',
+    'confirm'         => '确定',
+    'no'              => '否',
+    'yes'             => '是',
+    'company_profile' => '公司简介',
 ];

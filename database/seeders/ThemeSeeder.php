@@ -754,130 +754,159 @@ class ThemeSeeder extends Seeder
     private function getHomeSetting(): array
     {
         return [
-            "modules" => [
+            "modules" =>[
                 [
                     "content" => [
                         "style" => [
-                            "background_color" => ""
+                            "background_color" =>""
                         ],
-                        "full" => true,
+                        "full" =>true,
                         "floor" => [
-                            "2" => "",
-                            "3" => ""
+                            "2" =>"",
+                            "3" =>""
                         ],
-                        "images" => [
+                        "images" =>[
                             [
                                 "image" => [
-                                    "en" => "catalog/demo/banner/banner-4-en.jpg",
-                                    "zh_cn" => "catalog/demo/banner/banner-4.jpg"
+                                    "en" =>"catalog/demo/banner/banner-4-en.jpg",
+                                    "zh_cn" =>"catalog/demo/banner/banner-4.jpg"
                                 ],
-                                "show" => true,
+                                "show" =>true,
                                 "link" => [
-                                    "type" => "category",
-                                    "value" => 100012,
-                                    "link" => ""
+                                    "type" =>"category",
+                                    "value" =>100012,
+                                    "link" =>""
                                 ]
                             ],
                             [
                                 "image" => [
-                                    "en" => "catalog/demo/banner/banner-3-en.jpg",
-                                    "zh_cn" => "catalog/demo/banner/banner-3.jpg"
+                                    "en" =>"catalog/demo/banner/banner-3-en.jpg",
+                                    "zh_cn" =>"catalog/demo/banner/banner-3.jpg"
                                 ],
-                                "show" => false,
+                                "show" =>false,
                                 "link" => [
-                                    "type" => "category",
-                                    "value" => 100008,
-                                    "link" => ""
+                                    "type" =>"category",
+                                    "value" =>100008,
+                                    "link" =>""
                                 ]
                             ]
                         ]
                     ],
-                    "code" => "slideshow",
-                    "name" => "幻灯片",
-                    "module_id" => "b0448efb0989"
+                    "code" =>"slideshow",
+                    "name" =>"幻灯片",
+                    "module_id" =>"b0448efb0989"
                 ],
                 [
-                    "code" => "image401",
+                    "code" =>"image402",
                     "content" => [
                         "style" => [
-                            "background_color" => ""
+                            "background_color" =>""
                         ],
                         "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
+                            "zh_cn" =>"",
+                            "en" =>""
                         ],
-                        "images" => [
+                        "title" => [
+                            "zh_cn" =>"时尚穿搭推荐",
+                            "en" =>"Minimalist style outfit"
+                        ],
+                        "sub_title" => [
+                            "zh_cn" =>"极简风的穿搭，越简单就越高级，这一套着装打扮整体是比较休闲舒适的",
+                            "en" =>"Minimalist style, the simpler, the more advanced, this outfit is casual and comfortable"
+                        ],
+                        "images" =>[
                             [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_1-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_1.png"
+                                "image" =>"catalog/demo/banner/banner-402-1.jpg",
+                                "show" =>false,
+                                "title" => [
+                                    "zh_cn" =>"女上装",
+                                    "en" =>"women's tops"
                                 ],
-                                "show" => false,
                                 "link" => [
-                                    "type" => "category",
-                                    "value" => 100000,
-                                    "link" => ""
+                                    "type" =>"product",
+                                    "value" =>"",
+                                    "link" =>""
                                 ]
                             ],
                             [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_2-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_2.png"
+                                "image" =>"catalog/demo/banner/banner-402-2.jpg",
+                                "show" =>false,
+                                "title" => [
+                                    "zh_cn" =>"眼镜",
+                                    "en" =>"Glasses"
                                 ],
-                                "show" => false,
                                 "link" => [
-                                    "type" => "category",
-                                    "value" => 100007,
-                                    "link" => ""
+                                    "type" =>"product",
+                                    "value" =>"",
+                                    "link" =>""
                                 ]
                             ],
                             [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_3-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_3.png"
+                                "image" =>"catalog/demo/banner/banner-402-3.jpg",
+                                "show" =>false,
+                                "title" => [
+                                    "zh_cn" =>"手表",
+                                    "en" =>"watch"
                                 ],
-                                "show" => false,
                                 "link" => [
-                                    "type" => "product",
-                                    "value" => "",
-                                    "link" => ""
+                                    "type" =>"product",
+                                    "value" =>"",
+                                    "link" =>""
                                 ]
                             ],
                             [
-                                "image" => [
-                                    "en" => "catalog/demo/image_plus_4-en.png",
-                                    "zh_cn" => "catalog/demo/image_plus_4.png"
+                                "image" =>"catalog/demo/banner/banner-402-4.jpg",
+                                "show" =>false,
+                                "title" => [
+                                    "zh_cn" =>"护肤品",
+                                    "en" =>"Skin care products"
                                 ],
-                                "show" => true,
                                 "link" => [
-                                    "type" => "product",
-                                    "value" => 2,
-                                    "link" => ""
+                                    "type" =>"product",
+                                    "value" =>"",
+                                    "link" =>""
                                 ]
                             ]
                         ]
                     ],
-                    "module_id" => "g1vrlixfzfjk9a3k",
-                    "name" => "一行四图-pro"
+                    "module_id" =>"00pS1Akotn8h58YZ",
+                    "name" =>"一行四图-2",
+                    "view_path" =>""
                 ],
                 [
-                    "code" => "tab_product",
+                    "code" =>"tab_product",
                     "content" => [
                         "style" => [
-                            "background_color" => ""
+                            "background_color" =>""
                         ],
                         "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
+                            "zh_cn" =>"",
+                            "en" =>""
                         ],
-                        "editableTabsValue" => "0",
-                        "tabs" => [
+                        "editableTabsValue" =>"0",
+                        "tabs" =>[
                             [
                                 "title" => [
-                                    "en" => "latest promotions",
-                                    "zh_cn" => "最新促销"
+                                    "zh_cn" =>"时尚单品",
+                                    "en" =>"Fashion sheet"
                                 ],
-                                "products" => [
+                                "products" =>[
+                                    5,
+                                    9,
+                                    10,
+                                    11,
+                                    12,
+                                    13,
+                                    14,
+                                    15
+                                ]
+                            ],
+                            [
+                                "title" => [
+                                    "zh_cn" =>"最新促销",
+                                    "en" =>"latest promotions"
+                                ],
+                                "products" =>[
                                     1,
                                     2,
                                     3,
@@ -887,79 +916,61 @@ class ThemeSeeder extends Seeder
                                     8,
                                     11
                                 ]
-                            ],
-                            [
-                                "title" => [
-                                    "en" => "Fashion sheet",
-                                    "zh_cn" => "时尚单品"
-                                ],
-                                "products" => [
-                                    6,
-                                    49,
-                                    328,
-                                    9,
-                                    10,
-                                    11,
-                                    12,
-                                    13,
-                                    14,
-                                    15
-                                ]
                             ]
                         ],
                         "title" => [
-                            "en" => "Recommended products",
-                            "zh_cn" => "推荐商品"
+                            "zh_cn" =>"推荐商品",
+                            "en" =>"Fashion items"
                         ]
                     ],
-                    "module_id" => "s6e7e3vucriazzbi",
-                    "name" => "选项卡商品"
+                    "module_id" =>"s6e7e3vucriazzbi",
+                    "name" =>"选项卡商品"
                 ],
                 [
-                    "code" => "image100",
+                    "code" =>"image100",
                     "content" => [
                         "style" => [
-                            "background_color" => ""
+                            "background_color" =>""
                         ],
                         "floor" => [
-                            "zh_cn" => "",
-                            "en" => ""
+                            "zh_cn" =>"",
+                            "en" =>""
                         ],
-                        "full" => true,
-                        "images" => [
+                        "full" =>true,
+                        "images" =>[
                             [
                                 "image" => [
-                                    "en" => "catalog/demo/banner/banner-2-en.jpg",
-                                    "zh_cn" => "catalog/demo/banner/banner-2.jpg"
+                                    "zh_cn" =>"catalog/demo/banner/banner-2.jpg",
+                                    "en" =>"/catalog/demo/banner/banner-2.jpg"
                                 ],
-                                "show" => true,
+                                "show" =>true,
                                 "link" => [
-                                    "type" => "category",
-                                    "value" => 100003,
-                                    "link" => ""
+                                    "type" =>"category",
+                                    "value" =>100003,
+                                    "link" =>""
                                 ]
                             ]
                         ]
                     ],
-                    "module_id" => "0htwy33z3xcituyx",
-                    "name" => "单图模块"
+                    "module_id" =>"0htwy33z3xcituyx",
+                    "name" =>"单图模块"
                 ],
                 [
-                    "code" => "brand",
+                    "code" =>"brand",
                     "content" => [
                         "style" => [
-                            "background_color" => ""
+                            "background_color" =>""
                         ],
                         "floor" => [
-                            "en" => "",
-                            "zh_cn" => ""
+                            "en" =>"",
+                            "zh_cn" =>""
                         ],
-                        "full" => true,
+                        "full" =>true,
                         "title" => [
-                            "en" => "Recommended Brand",
-                            "zh_cn" => "推荐品牌"
+                            "en" =>"Recommended Brand",
+                            "zh_cn" =>"推荐品牌"
                         ],
-                        "brands" => [
+                        "brands" =>[
                             1,
                             2,
                             3,
@@ -974,8 +985,33 @@ class ThemeSeeder extends Seeder
                             12
                         ]
                     ],
-                    "module_id" => "yln7isoqlxovqz3k",
-                    "name" => "品牌模块"
+                    "module_id" =>"yln7isoqlxovqz3k",
+                    "name" =>"品牌模块"
+                ],
+                [
+                    "code" =>"page",
+                    "content" => [
+                        "style" => [
+                            "background_color" =>""
+                        ],
+                        "floor" => [
+                            "zh_cn" =>"",
+                            "en" =>""
+                        ],
+                        "items" =>[
+                            22,
+                            23,
+                            24,
+                            25
+                        ],
+                        "title" => [
+                            "zh_cn" =>"新闻博客",
+                            "en" =>"News Blog"
+                        ]
+                    ],
+                    "module_id" =>"24P9p4bRwk1nbtXE",
+                    "name" =>"文章模块",
+                    "view_path" =>""
                 ]
             ]
         ];
@@ -1048,7 +1084,33 @@ class ThemeSeeder extends Seeder
                         "en" => "<p>Chengdu Guangda Network Technology Co., Ltd. is a high-tech enterprise mainly engaged in Internet development. The company was established in August 2014.</p>",
                         "zh_cn" => "<p style=\"line-height: 1.4;\"><strong>成都光大网络科技有限公司</strong></p>\n<p style=\"line-height: 1.4;\">是一家专业互联网开发的高科技企业，公司成立于2014年8月。</p>\n<p style=\"line-height: 1.4;\">公司以为客户创造价值为核心价值观，帮助中小企业利用互联网工具提升产品销售。</p>"
                     ],
-                    "social_network" => []
+                    "social_network" =>[
+                        [
+                            "image" =>"/catalog/demo/social/twitter.png",
+                            "link" =>"/",
+                            "show" =>false
+                        ],
+                        [
+                            "image" =>"/catalog/demo/social/facebook.png",
+                            "link" =>"/",
+                            "show" =>false
+                        ],
+                        [
+                            "image" =>"/catalog/demo/social/youtube.png",
+                            "link" =>"/",
+                            "show" =>false
+                        ],
+                        [
+                            "image" =>"/catalog/demo/social/instagram.png",
+                            "link" =>"/",
+                            "show" =>false
+                        ],
+                        [
+                            "image" =>"/catalog/demo/social/pinterest.png",
+                            "link" =>"/",
+                            "show" =>false
+                        ]
+                    ]
                 ],
                 "link1" => [
                     "title" => [

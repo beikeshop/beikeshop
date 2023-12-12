@@ -8,7 +8,7 @@
     <div class="module-title">{{ $content['title'] ?? '' }}</div>
     <div class="container">
       @if ($content['tabs'] ?? false)
-        <div class="nav justify-content-center mb-3">
+        <div class="nav justify-content-center mb-lg-3 mt-n2">
           @foreach ($content['tabs'] as $key => $tabs)
           <a class="nav-link {{ ($design ? $editableTabsValue == $key : $loop->first) ? 'active' : '' }}" href="#tab-product-{{ $module_id }}-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
           @endforeach

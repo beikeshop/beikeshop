@@ -10,10 +10,11 @@
  */
 
 return [
-    'home'    => 'Home',
-    'submit'  => 'Submit',
-    'cancel'  => 'Cancel',
-    'confirm' => 'Confirm',
-    'no'      => 'No',
-    'yes'     => 'Yes',
+    'home'            => 'Home',
+    'submit'          => 'Submit',
+    'cancel'          => 'Cancel',
+    'confirm'         => 'Confirm',
+    'no'              => 'No',
+    'yes'             => 'Yes',
+    'company_profile' => 'Company Profile',
 ];
