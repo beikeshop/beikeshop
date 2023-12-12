@@ -406,7 +406,7 @@ class ProductRepo
         $products = Product::query()
             ->with(['description'])
             ->whereIn('id', $productIds)
-            ->orderByRaw(DB::raw('FIELD(id, ' . implode(',', $productIds) . ')'))
+            ->orderByRaw('FIELD(id, ' . implode(',', $productIds) . ')')
             ->get();
 
         return $products;
