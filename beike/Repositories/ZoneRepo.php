@@ -87,16 +87,19 @@ class ZoneRepo
      */
     public static function list(array $data = [])
     {
-        $builder = Zone::query();
+        $builder = Zone::query()->with(['country']);
 
         if (isset($data['name'])) {
             $builder->where('zones.name', 'like', "%{$data['name']}%");
         }
         if (isset($data['code'])) {
-            $builder->where('zones.code', 'like', "%{$data['email']}%");
+            $builder->where('zones.code', 'like', "%{$data['code']}%");
         }
         if (isset($data['status'])) {
             $builder->where('zones.status', $data['status']);
+        }
+        if (isset($data['country_id'])) {
+            $builder->where('zones.country_id', $data['country_id']);
         }
 
         return $builder->paginate(perPage())->withQueryString();

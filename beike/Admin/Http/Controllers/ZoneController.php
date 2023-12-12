@@ -19,7 +19,7 @@ class ZoneController extends Controller
 {
     public function index(Request $request)
     {
-        $zones = ZoneRepo::list($request->only('name', 'code', 'status'));
+        $zones = ZoneRepo::list($request->all());
 
         $data = [
             'zones'     => $zones,
