@@ -16,7 +16,7 @@
 
   <div class="{{ request('iframe') ? 'container-fluid form-iframe mt-5' : 'container' }}" id="page-login" v-cloak>
     @if (!request('iframe'))
-      <div class="hero-content pb-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
+      <div class="hero-content pb-3 pb-lg-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
     @endif
 
     <div class="login-wrap">

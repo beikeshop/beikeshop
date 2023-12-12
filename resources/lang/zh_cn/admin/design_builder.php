@@ -13,6 +13,7 @@ return [
     'module_brand'          => '品牌模块',
     'module_banner'         => '横幅模块',
     'module_four_image_pro' => '一行四图 PRO',
+    'module_image_402'      => '一行四图-2',
     'module_slideshow'      => '幻灯片模块',
     'module_tab_products'   => '选项卡商品',
     'module_product'        => '商品模块',

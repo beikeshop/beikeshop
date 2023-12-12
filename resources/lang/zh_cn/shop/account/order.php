@@ -17,5 +17,5 @@ return [
     'amount'        => '金额',
     'state'         => '状态',
     'order_number'  => '订单号',
-    'check'         => '查看',
+    'check'         => '查看详情',
 ];

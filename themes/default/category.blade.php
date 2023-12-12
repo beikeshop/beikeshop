@@ -46,7 +46,7 @@
           @endif
           <div class="row {{ request('style_list') == 'list' ? 'product-list-wrap' : ''}}">
             @foreach ($products_format as $product)
-              <div class="{{ !request('style_list') || request('style_list') == 'grid' ? 'col-6 col-md-4' : 'col-12'}}">
+              <div class="{{ !request('style_list') || request('style_list') == 'grid' ? 'product-grid col-6 col-md-4' : 'col-12'}}">
                 @include('shared.product')
               </div>
             @endforeach

@@ -57,7 +57,7 @@ return [
     'common_link'            => '常用链接',
     'header_search_input'    => '搜索后台功能',
     'header_search_title'    => '搜索结果',
-    'license_services'       => '版权与服务',
+    'license_services'       => '技术支持',
 
     // sidebar
     'account_index'          => '个人中心',
@@ -106,5 +106,6 @@ return [
     'all_others'             => '其他所有',
     'not_enabled'            => '不启用',
     'translate_form'         => '请输入要翻译的内容',
+    'buy_copyright'          => '购买版权',
     'copyright_hint_text'    => '请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a>',
 ];

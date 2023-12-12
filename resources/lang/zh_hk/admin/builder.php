@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => '頁面編輯',
     'page_category'                    => '文章分類',
-    'modules_instructions'             => '可用模塊，點擊添加至頁面',
+    'modules_instructions'             => '可用模組，點擊或拖曳至頁面',
     'text_floor_prompt'                => '設置（樓層配置需要保存刷新頁面才會更新）',
     'text_new_page'                    => '添加新頁面',
     'text_quit'                        => '退出',

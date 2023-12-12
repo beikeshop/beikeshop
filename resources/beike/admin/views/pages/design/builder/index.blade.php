@@ -43,7 +43,9 @@
 
 <body class="page-design">
   <div class="design-box">
-    <div class="sidebar-edit-wrap" id="app" v-cloak v-loading="!design.ready">
+    <div :class="['sidebar-edit-wrap', !design.sidebar ? 'v-hide' : '']" id="app" v-cloak v-loading="!design.ready">
+      <div class="switch-design" :class="['hide-design', !design.sidebar ? 'v-hide' : '']" @click="design.sidebar = !design.sidebar"><i class="iconfont">@{{ design.sidebar ? '&#xe659;' : '&#xe65b;' }}</i></div>
+
       <div class="design-head">
         <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>{{ __('common.return') }}</div>
         <div @click="viewHome"><i class="el-icon-switch-button"></i>{{ __('common.exit') }}</div>
@@ -61,9 +63,9 @@
       <div class="modules-list">
         <div style="padding: 5px; color: #666;"><i class="el-icon-microphone"></i> {{ __('admin/builder.modules_instructions') }}</div>
 
-        <el-row v-if="design.editType == 'add'">
-          <el-col :span="12" v-for="(item, index) in source.modules" :key="index">
-            <div @click="addModuleButtonClicked(item.code)" class="module-list">
+        <el-row v-show="design.editType == 'add'" id="module-list-wrap">
+          <el-col :span="12" v-for="(item, index) in source.modules" :key="index" class="iframe-modules-sortable-ghost">
+            <div @click="addModuleButtonClicked(item.code)" class="module-list" :data-code="item.code">
               <div class="module-info">
                 <div class="icon">
                   <i :style="item.style" class="iconfont" v-if="isIcon(item.icon)" v-html="item.icon"></i>
@@ -99,7 +101,6 @@
     $('#preview-iframe').on('load', function(event) {
       previewWindow = document.getElementById("preview-iframe").contentWindow;
       app.design.ready = true;
-      app.design.sidebar = true;
 
       // 编辑模块
       $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
@@ -147,6 +148,44 @@
         }
         app.form.modules = modules;
       });
+
+      new Sortable(document.getElementById('module-list-wrap'), {
+        group: {
+          name: 'shared',
+          pull: 'clone',
+          put: false // 不允许拖拽进这个列表
+        },
+        // ghostClass: 'iframe-modules-sortable-ghost',
+        animation: 150,
+        sort: false, // 设为false，禁止sort
+        onEnd: function (evt) {
+          if (evt.to.id != 'home-modules-box') {
+            return;
+          }
+
+          // 获取 当前位置 在modules-box 是第几个
+          const index = $(previewWindow.document).find('.modules-box').children().index(evt.item);
+          const moduleCode = $(evt.item).find('.module-list').data('code');
+
+          app.addModuleButtonClicked(moduleCode, index, () => {
+            evt.item.parentNode.removeChild(evt.item);
+          });
+        }
+      });
+
+      new Sortable(previewWindow.document.getElementById('home-modules-box'), {
+        group: {
+          name: 'shared',
+          pull: 'clone',
+        },
+        animation: 150,
+        onUpdate: function (evt) {
+          const modules = app.form.modules;
+          const module = modules.splice(evt.oldIndex, 1)[0];
+          modules.splice(evt.newIndex, 0, module);
+          app.form.modules = modules;
+        }
+      });
     });
   </script>
 
@@ -172,7 +211,7 @@
         design: {
           type: 'pc',
           editType: 'add',
-          sidebar: false,
+          sidebar: true,
           editingModuleIndex: 0,
           ready: false,
           moduleLoadCount: 0, // 第一次选择已配置模块时，不需要请求数据，
@@ -200,6 +239,7 @@
       // 组件方法
       methods: {
         moduleUpdated: bk.debounce(function(val) {
+          if (!this.design.moduleLoadCount) return this.design.moduleLoadCount = 1;
           this.form.modules[this.design.editingModuleIndex].content = val;
           const data = this.form.modules[this.design.editingModuleIndex]
 
@@ -211,7 +251,7 @@
           })
         }, 300),
 
-        addModuleButtonClicked(code) {
+        addModuleButtonClicked(code, moduleItemIndex = null, callback = null) {
           const sourceModule = this.source.modules.find(e => e.code == code)
           const module_id = bk.randomString(16)
           const _data = {
@@ -223,21 +263,33 @@
           }
 
           $http.post('design/builder/preview?design=1', _data, {hload: true}).then((res) => {
-            $(previewWindow.document).find('.modules-box').append(res);
-            this.form.modules.push(_data);
-            this.design.editingModuleIndex = this.form.modules.length - 1;
-            this.design.editType = 'module';
+            if (moduleItemIndex === null) {
+              $(previewWindow.document).find('.modules-box').append(res);
+              this.form.modules.push(_data);
+              this.design.editingModuleIndex = this.form.modules.length - 1;
+              this.design.editType = 'module';
+            } else {
+              $(previewWindow.document).find('.modules-box').children().eq(moduleItemIndex).before(res);
+              this.form.modules.splice(moduleItemIndex, 0, _data);
+              this.design.editingModuleIndex = moduleItemIndex;
+              this.design.editType = 'module';
+            }
 
             setTimeout(() => {
               $(previewWindow.document).find("html, body").animate({
-                scrollTop: $(previewWindow.document).find('#module-' + module_id).offset().top - 30
+                scrollTop: $(previewWindow.document).find('#module-' + module_id).offset().top - 96
               }, 50);
             }, 200)
+          }).finally(() => {
+            if (callback) {
+              callback();
+            }
           })
         },
 
         // 编辑模块
         editModuleButtonClicked(index) {
+          this.design.moduleLoadCount = 0;
           this.design.editingModuleIndex = index;
           this.design.editType = 'module';
         },

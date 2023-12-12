@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => 'Seitenbearbeitung',
     'page_category'                    => 'Artikelklassifizierung',
-    'modules_instructions'             => 'Verfügbare Module, zum Hinzufügen zur Seite klicken',
+    'modules_instructions'             => 'Verfügbare Module, klicken oder ziehen Sie auf die Seite',
     'text_floor_prompt'                => 'Einstellungen (Etagenkonfiguration muss gespeichert und aktualisiert werden, um die Seite zu aktualisieren)',
     'text_new_page'                    => 'Neue Seite hinzufügen',
     'text_quit'                        => 'Beenden',

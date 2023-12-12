@@ -13,9 +13,9 @@ $success: #71c20b;
 
 $font-size-base: 0.8rem;
 $font-family-base: "PingFang SC", "Poppins","Helvetica","Arial","sans-serif";
-$border-radius: 0;
+$border-radius: 0.275rem;
 $form-check-input-width: 1.2em;
-$form-check-input-border-radius: 0;
+// $form-check-input-border-radius: 0;
 
 // 开启负边距
 $enable-negative-margins: true;
@@ -26,7 +26,7 @@ $hr-color: #bcbcbc;
 // Breadcrumbs
 // scss-docs-start breadcrumb-variables
 // $breadcrumb-font-size:              null !default;
-$breadcrumb-padding-y:              1.4rem;
+$breadcrumb-padding-y:              .7rem;
 $breadcrumb-padding-x:              0;
 // $breadcrumb-item-padding-x:         .5rem !default;
 $breadcrumb-margin-bottom:          0;
@@ -37,7 +37,7 @@ $breadcrumb-bg:                     transparent;
 // $breadcrumb-divider-flipped:        $breadcrumb-divider !default;
 // $breadcrumb-border-radius:          null !default;
 
-$border-radius:               0;
+// $border-radius:               0;
 $input-btn-padding-y:         .46rem;
 $input-btn-font-size:         0.85rem;
 $input-btn-focus-box-shadow:  0  0 11px 0 rgba($color: $primary, $alpha: .1);
@@ -45,10 +45,10 @@ $form-select-focus-box-shadow: 0 0 11px 0 rgba($color: $primary, $alpha: .1);
 
 // $input-btn-padding-x:         .75rem !default;
 $btn-focus-width: 0;
-$border-radius:  0;
-$btn-border-radius: 0;
-$btn-border-radius-sm: 0;
-$btn-border-radius-lg: 0;
+// $border-radius:  0;
+// $btn-border-radius: 0;
+$btn-border-radius-sm: 0.175rem;
+$btn-border-radius-lg: 0.275rem;
 // $btn-padding-y:               $input-btn-padding-y !default;
 // $btn-focus-box-shadow: 0  0 11px 0 rgba($color: $primary, $alpha: .1);
 
@@ -113,28 +113,21 @@ $table-bg: transparent;
   border-top: none;
 }
 
-.btn {
-  border-radius: 0;
-}
+// .btn {
+//   border-radius: 0;
+// }
 
 .card {
   .card-header {
     padding: 1rem 1rem .3rem;
-    background-color: #fff;
-    // font-weight: bold;
-    // font-size: .8rem;
+    background-color: rgba(255,255,255, 0.03);
     border-bottom: 0 solid rgba(0,0,0,.125);
-
-    &:first-child {
-      border-radius: 0;
-    }
 
     .card-title {
       margin-bottom: 0;
       padding-left: 10px;
       border-left: 3px solid $primary;
       line-height: 1;
-      // font-size: 14px;
     }
   }
 
@@ -149,13 +142,13 @@ $table-bg: transparent;
   .breadcrumb-item {
     &:last-of-type {
       a {
-        color: #666;
-        font-weight: 600;
+        color: #111;
+        font-weight: bold;
       }
     }
   }
   a {
-    color: #888;
+    color: #333;
   }
 }
 

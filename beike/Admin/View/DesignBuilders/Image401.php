@@ -36,7 +36,7 @@ class Image401 extends Component
             'code' => 'image401',
             'sort' => 0,
             'name' => trans('admin/design_builder.module_four_image_pro'),
-            'icon' => '&#xe663;',
+            'icon' => asset('image/module/image_401.png'),
         ];
 
         return view('admin::pages.design.module.image401', $data);

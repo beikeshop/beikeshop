@@ -16,7 +16,7 @@
           <div class="pb-images-top">
             <pb-image-selector v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
-              <span>400 x 200</span>
+              <span>440 x 200</span>
             </div>
           </div>
           <link-selector v-model="item.link"></link-selector>
@@ -72,7 +72,7 @@ Vue.component('module-editor-image300', {
       floor: languagesFill(''),
       images: [
         {
-          image: languagesFill('https://via.placeholder.com/400x200/eeeeee'),
+          image: languagesFill('https://via.placeholder.com/440x200/eeeeee'),
           show: true,
           link: {
             type: 'product',
@@ -80,7 +80,7 @@ Vue.component('module-editor-image300', {
           }
         },
         {
-          image: languagesFill('https://via.placeholder.com/400x200/eeeeee'),
+          image: languagesFill('https://via.placeholder.com/440x200/eeeeee'),
           show: false,
           link: {
             type: 'product',
@@ -88,7 +88,7 @@ Vue.component('module-editor-image300', {
           }
         },
         {
-          image: languagesFill('https://via.placeholder.com/400x200/eeeeee'),
+          image: languagesFill('https://via.placeholder.com/440x200/eeeeee'),
           show: false,
           link: {
             type: 'product',

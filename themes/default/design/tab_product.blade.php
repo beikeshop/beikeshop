@@ -19,13 +19,13 @@
             <div class="row">
               @if ($products['products'])
                 @foreach ($products['products'] as $product)
-                <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-grid col-6 col-md-4 col-lg-3">
                   @include('shared.product')
                 </div>
                 @endforeach
               @elseif (!$products['products'] and $design)
                 @for ($s = 0; $s < 8; $s++)
-                <div class="col-6 col-md-4 col-lg-3">
+                <div class="product-grid col-6 col-md-4 col-lg-3">
                   <div class="product-wrap">
                     <div class="image"><a href="javascript:void(0)"><img src="{{ asset('catalog/placeholder.png') }}" class="img-fluid"></a></div>
                     <div class="product-name">请配置商品</div>

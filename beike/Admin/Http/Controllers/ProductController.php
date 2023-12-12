@@ -31,6 +31,8 @@ class ProductController extends Controller
         $products       = ProductResource::collection($productList);
         $productsFormat =  $products->jsonSerialize();
 
+        session(['page' => $request->get('page', 1)]);
+
         $data = [
             'categories'      => CategoryRepo::flatten(locale()),
             'products_format' => $productsFormat,
@@ -80,6 +82,7 @@ class ProductController extends Controller
     {
         try {
             $requestData = $request->all();
+            $actionType  = $requestData['action_type'] ?? '';
             $product     = (new ProductService)->create($requestData);
 
             $data = [
@@ -89,8 +92,7 @@ class ProductController extends Controller
 
             hook_action('admin.product.store.after', $data);
 
-            return redirect()->to(admin_route('products.index'))
-                ->with('success', trans('common.created_success'));
+            return redirect()->to($actionType == 'stay' ? admin_route('products.create') : admin_route('products.index'))->with('success', trans('common.created_success'));
         } catch (\Exception $e) {
             return redirect(admin_route('products.create'))
                 ->withInput()
@@ -107,6 +109,7 @@ class ProductController extends Controller
     {
         try {
             $requestData = $request->all();
+            $actionType = $requestData['action_type'] ?? '';
             $product     = (new ProductService)->update($product, $requestData);
 
             $data = [
@@ -114,8 +117,9 @@ class ProductController extends Controller
                 'product'      => $product,
             ];
             hook_action('admin.product.update.after', $data);
+            $page = session('page', 1);
 
-            return redirect()->to($this->getRedirect())->with('success', trans('common.updated_success'));
+            return redirect()->to($actionType == 'stay' ? admin_route('products.edit', [$product->id]) : admin_route('products.index', ['page' => $page]))->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
             return redirect(admin_route('products.edit', $product))->withErrors(['error' => $e->getMessage()]);
         }

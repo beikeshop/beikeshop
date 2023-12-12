@@ -12,8 +12,9 @@
   display: none;
 }
 
-body[class^="page-account-"] {
-  background-color: #F7F8FA;
+body[class^="page-account"] {
+  // background-color: #F7F8FA;
+  background-color: #f4f4f4;
 }
 
 body {
@@ -239,6 +240,11 @@ img {
   display: flex;
   align-content: space-between;
   border: 1px solid #ced4da;
+
+  @media (max-width: 768px) {
+    width: 60px;
+  }
+
   input {
     border: none;
     padding: 0.5rem;
@@ -273,13 +279,69 @@ img {
   top: 0;
 }
 
+.account-sides-wrap {
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 9999;
+    background: rgba(0,0,0,.4);
+    visibility: hidden;
+    transition: all .3s ease-out;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+
+      .account-sides-info {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
 .account-sides-info {
+  @media (max-width: 768px) {
+    position: fixed;
+    z-index: 1046;
+    width: 80%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translateX(-100%);
+    background-color: #fff;
+    transition: all .3s ease-out;
+  }
+
+  .mb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
   .head {
     display: flex;
-    flex-direction: column;
     align-items: center;
     padding: 2rem 1rem;
     background-color: #fff;
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 0.275rem;
+    border-top-right-radius: 0.275rem;
+
+    @media (min-width: 768px) {
+      flex-direction: column;
+    }
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+    }
 
     .portrait {
       width: 100px;
@@ -288,7 +350,16 @@ img {
       box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.14);
       border: 2px solid #FFFFFF;
       overflow: hidden;
-      margin-bottom: 1rem;
+
+      @media (min-width: 768px) {
+        margin-bottom: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+        margin-right: 14px;
+      }
     }
 
     .account-name {
@@ -343,10 +414,19 @@ img {
   -webkit-line-clamp: 2;
 }
 
-.breadcrumb {
+.breadcrumb-wrap {
+  background-color: #f6f6f6;
+  margin-bottom: 20px;
+
   @media (max-width: 768px) {
-    padding-top: .8rem;
-    padding-bottom: .8rem;
+    margin-bottom: 10px;
+  }
+
+  .breadcrumb {
+    @media (max-width: 768px) {
+      padding-top: .4rem;
+      padding-bottom: .4rem;
+    }
   }
 }
 
@@ -401,5 +481,19 @@ img {
 .address-dialog {
   .el-form-item__label {
     line-height: initial;
+  }
+}
+
+.iframe-modules-sortable-ghost {
+  background-color: #f7f7f7;
+  border: 1px dashed $primary;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+
+  .icon {
+    display: none;
   }
 }

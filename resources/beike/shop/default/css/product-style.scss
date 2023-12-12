@@ -17,6 +17,7 @@
 
       &:hover {
         box-shadow: none;
+
         .image {
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
@@ -40,14 +41,22 @@
     margin-bottom: 20px;
   }
 
+  .product-bottom-info {
+    padding: 0 5px;
+  }
+
   &.list {
     display: flex;
     padding-bottom: 0;
 
     .image {
-      width: 200px;
+      flex: 0 0 200px;
       margin-bottom: 0;
       transition: all 0.3s ease-in-out;
+
+      .image-old {
+        height: auto !important;
+      }
     }
 
     .product-name {
@@ -70,6 +79,7 @@
   .image {
     margin-bottom: 10px;
     position: relative;
+    overflow: hidden;
 
     .image-old {
       opacity: 1;
@@ -85,11 +95,39 @@
       z-index: 40;
       bottom: -30px;
       opacity: 0;
-      transition: all .3s ease-out;
       display: flex;
       justify-content: center;
+      transition: all .2s ease-in-out;
+
+      .btn-add-cart {
+        flex: 1;
+      }
+
+      .btn-quick-view {
+        i {
+          font-size: 16px;
+        }
+      }
+
+      .btn-wishlist,
+      .btn-quick-view {
+        flex: 0 0 46px;
+      }
 
       button {
+        background-color: #111;
+        font-weight: bold;
+        border: none;
+        border-right: 1px solid #333;
+        border-radius: 0;
+        &:last-child {
+          border-right: none;
+        }
+
+        i {
+          line-height: 1;
+        }
+
         &:hover {
           background-color: rgb(70, 70, 70);
         }
@@ -102,7 +140,7 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 
       .button-wrap {
-        bottom: 10px;
+        bottom: 0;
         opacity: 1;
       }
     }
@@ -111,30 +149,21 @@
   .product-name {
     overflow: hidden;
     text-overflow: ellipsis;
-
-    @media (min-width: 768px) {
-      height: 39px;
-      margin-bottom: 10px;
-      display: -webkit-box;
-      color: #3d3d3d;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-    }
-
-    @media (max-width: 768px) {
-      white-space: nowrap;
-      height: 22px;
-    }
+    white-space: nowrap;
+    height: 22px;
+    font-size: .9rem;
+    font-weight: bold;
+    margin-bottom: 6px;
   }
 
   .product-price {
     .price-new {
       color: $primary;
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1rem;
 
       @media (max-width: 768px) {
-        font-size: .9rem;
+        font-size: .8rem;
       }
     }
 
@@ -142,6 +171,18 @@
       color: #aaa;
       margin-left: 4px;
       text-decoration: line-through;
+    }
+  }
+}
+
+.product-grid {
+  @media (max-width: 768px) {
+    &:nth-child(2n+1) {
+      padding-right: 5px;
+    }
+
+    &:nth-child(2n+2) {
+      padding-left: 5px;
     }
   }
 }

@@ -31,22 +31,22 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.service_type') }}</label>
                 <div>{{ $rma['type_format']}}</div>
                 </div>
 
-                <div class="col-sm-6 mb-4">
+                <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.return_quantity') }}</label>
                   <div>{{ $rma['quantity'] }}</div>
               </div>
 
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('common.status') }}</label>
                 <div>{{ $rma['status_format'] }}</div>
               </div>
 
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.unpacked') }}</label>
                 <div>
                   @if ($rma['opened'])
@@ -57,21 +57,21 @@
                 </div>
               </div>
 
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma.creation_time') }}</label>
                 <div>
                   {{ $rma['created_at'] }}
                 </div>
               </div>
 
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.return_reason') }}</label>
                 <div>
                   {{$rma['reason']}}
                 </div>
               </div>
 
-              <div class="col-sm-6 mb-4">
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
                 <div>{{$rma['comment']}}</div>
               </div>

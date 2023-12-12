@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => '页面编辑',
     'page_category'                    => '文章分类',
-    'modules_instructions'             => '可用模块，点击添加至页面',
+    'modules_instructions'             => '可用模块，点击或拖动至页面',
     'text_floor_prompt'                => '设置（楼层配置需要保存刷新页面才会更新）',
     'text_new_page'                    => '添加新页面',
     'text_quit'                        => '退出',
@@ -254,4 +254,5 @@ return [
     'sub_title'                        => '副标题',
     'introduction'                     => '简介',
     'copyright_settings'               => '版权设置',
+    'social_media_icons'               => '社交媒体图标',
 ];

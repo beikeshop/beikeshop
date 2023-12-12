@@ -9,7 +9,21 @@
  */
 
 body.page-account-order-list {
-  background-color: #F7F8FA;
+  .order-status-wrap {
+    @media (max-width: 768px) {
+      li {
+        flex: 1;
+        text-align: center;
+      }
+
+      margin-bottom: 14px;
+
+      .nav-link {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  }
 
   .order-wrap {
     .table {
@@ -51,7 +65,6 @@ body.page-account-order-list {
           margin-right: 10px;
 
           @media (max-width:768px) {
-            // display: none;
             flex: 0 0 50px;
             width: 50px
           }
@@ -70,6 +83,24 @@ body.page-account-order-list {
           }
         }
       }
+    }
+  }
+
+  .order-mb-wrap {
+    .order-mb-list {
+      border-radius: 4px;
+    }
+
+    .header-wrapper {
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .footer-wrapper {
+      padding-top: 10px;
+      margin-top: 12px;
+      border-top: 1px solid #eee;
     }
   }
 }
@@ -97,7 +128,10 @@ body.page-account-order-info {
 
     .right {
       color: #767676;
-      font-size: .9375rem;
+
+      @media (min-width: 768px) {
+        font-size: .9375rem;
+      }
 
       .name {
         // font-weight: bold;

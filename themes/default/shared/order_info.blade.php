@@ -4,7 +4,7 @@
   @endforeach
 @endif
 
-<div class="card mb-4 order-head">
+<div class="card mb-lg-4 mb-2 order-head">
   <div class="card-header d-flex align-items-center justify-content-between">
     <h6 class="card-title">{{ __('shop/account/order_info.order_details') }}</h6>
     <div>
@@ -20,32 +20,61 @@
   </div>
   <div class="card-body">
     <div class="bg-light p-2 table-responsive">
-      <table class="table table-borderless mb-0">
-        <thead>
-          <tr>
-            <th class="nowrap">{{ __('shop/account/order_info.order_number') }}</th>
-            <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
-            <th class="nowrap">{{ __('shop/account/order_info.state') }}</th>
-            <th class="nowrap">{{ __('shop/account/order_info.order_amount') }}</th>
-            <th class="nowrap">{{ __('shop/checkout.payment_method') }}</th>
-            <th class="nowrap">{{ __('shop/checkout.delivery_method') }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ $order->number }}</td>
-            <td class="nowrap">{{ $order->created_at }}</td>
-            <td class="nowrap">{{$order->status_format}}</td>
-            <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-            <td>{{ $order->payment_method_name }}</td>
-            <td>{{ $order->shipping_method_name }}</td>
-          </tr>
-        </tbody>
-      </table>
+      @if (!is_mobile())
+        <table class="table table-borderless mb-0">
+          <thead>
+            <tr>
+              <th class="nowrap">{{ __('shop/account/order_info.order_number') }}</th>
+              <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
+              <th class="nowrap">{{ __('shop/account/order_info.state') }}</th>
+              <th class="nowrap">{{ __('shop/account/order_info.order_amount') }}</th>
+              <th class="nowrap">{{ __('shop/checkout.payment_method') }}</th>
+              <th class="nowrap">{{ __('shop/checkout.delivery_method') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ $order->number }}</td>
+              <td class="nowrap">{{ $order->created_at }}</td>
+              <td class="nowrap">{{$order->status_format}}</td>
+              <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+              <td>{{ $order->payment_method_name }}</td>
+              <td>{{ $order->shipping_method_name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      @else
+        <div>
+          <div class="d-flex justify-content-between mb-2">
+            <div>{{ __('shop/account/order_info.order_number') }}</div>
+            <div class="fw-bold">{{ $order->number }}</div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div>{{ __('shop/account/order_info.order_date') }}</div>
+            <div class="fw-bold">{{ $order->created_at }}</div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div>{{ __('shop/account/order_info.state') }}</div>
+            <div class="fw-bold">{{ $order->status_format }}</div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div>{{ __('shop/account/order_info.order_amount') }}</div>
+            <div class="fw-bold">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div>{{ __('shop/checkout.payment_method') }}</div>
+            <div class="fw-bold">{{ $order->payment_method_name }}</div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <div>{{ __('shop/checkout.delivery_method') }}</div>
+            <div class="fw-bold">{{ $order->shipping_method_name }}</div>
+          </div>
+        </div>
+      @endif
     </div>
   </div>
 </div>
-<div class="card mb-4">
+<div class="card mb-lg-4 mb-2">
   <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
   <div class="card-body">
     <table class="table ">
@@ -100,7 +129,7 @@
     </table>
   </div>
 </div>
-<div class="card mb-4">
+<div class="card mb-lg-4 mb-2">
   <div class="card-header">
     <h6 class="card-title">{{ __('shop/account/order_info.order_items') }}</h6>
   </div>
@@ -129,7 +158,7 @@
   </div>
 </div>
 
-<div class="card mb-4">
+<div class="card mb-lg-4 mb-2">
   <div class="card-header">
     <h6 class="card-title">{{ __('shop/account/order_info.order_total') }}</h6>
   </div>
@@ -150,7 +179,7 @@
 </div>
 
 @if ($order->comment)
-  <div class="card mb-4">
+  <div class="card mb-lg-4 mb-2">
     <div class="card-header">
       <h6 class="card-title">{{ __('order.comment') }}</h6>
     </div>
@@ -168,7 +197,7 @@
 
 @if ($order->orderShipments->count())
   @hookwrapper('account.order_info.shipments')
-  <div class="card mb-4">
+  <div class="card mb-lg-4 mb-2">
     <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
     <div class="card-body">
       <div class="table-push">
@@ -197,7 +226,7 @@
 @endif
 
 @if ($order->orderHistories->count())
-  <div class="card mb-4">
+  <div class="card mb-lg-4 mb-2">
     <div class="card-header">
       <h6 class="card-title">{{ __('shop/account/order_info.order_status') }}</h6>
     </div>

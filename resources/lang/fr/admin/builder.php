@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => 'édition de pages',
     'page_category'                    => 'classification des articles',
-    'modules_instructions'             => 'Modules disponibles, cliquez pour ajouter à la page',
+    'modules_instructions'             => 'Módulos disponibles, haga clic o arrastre a la página',
     'text_floor_prompt'                => 'Paramètres (la configuration de l\'étage doit être enregistrée et actualisée pour mettre à jour la page)',
     'text_new_page'                    => 'Ajouter une nouvelle page',
     'text_quit'                        => 'abandonner',

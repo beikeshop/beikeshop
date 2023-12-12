@@ -11,3 +11,9 @@
 .el-input__inner {
   border-radius: 0 !important;
 }
+
+.el-message-box {
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
+}

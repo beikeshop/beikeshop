@@ -3,10 +3,10 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-19 18:21:32
- * @LastEditTime  2022-09-16 20:57:00
+ * @LastEditTime  2023-11-30 11:12:53
  */
 
-$(document).on('click', '.quantity-wrap .right i', function(event) {
+$(document).on('click', '.quantity-wrap .right i, .quantity-wrap-line .right i', function(event) {
   event.stopPropagation();
   event.preventDefault();
 

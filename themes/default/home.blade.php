@@ -2,7 +2,7 @@
 @section('body-class', 'page-home')
 @section('content')
 
-<div class="modules-box">
+<div class="modules-box" id="home-modules-box">
 
   @hook('home.modules.before')
 

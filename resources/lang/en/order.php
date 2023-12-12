@@ -52,4 +52,5 @@ return [
     'completed'          => 'Completed',
     'cancelled'          => 'Cancelled',
     'order_comment'      => 'Customer Comment',
+    'order_all'          => 'All',
 ];

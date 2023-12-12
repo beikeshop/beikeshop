@@ -58,7 +58,6 @@
                       <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
                     </div>
 
-                    {{-- <div class="right"><i :class="'fa fa-angle-'+(item.show ? 'up' : 'down')"></i></div> --}}
                     <div class="right">
                       <i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i>
                     </div>
@@ -83,6 +82,38 @@
             <div class="module-edit-group">
               <div class="module-edit-title">{{ __('admin/builder.introduction') }}</div>
               <rich-text-i18n v-model="form.content.intro.text"></rich-text-i18n>
+            </div>
+            <div class="module-edit-group" style="margin-bottom: 0">
+              <div class="module-edit-title">{{ __('admin/builder.social_media_icons') }}</div>
+
+              <draggable
+                ghost-class="dragabble-ghost"
+                :list="form.content.intro.social_network"
+                :options="{animation: 330, handle: '.icon-rank'}"
+              >
+                <div class="pb-images-selector" v-for="(item, index) in form.content.intro.social_network" :key="index">
+                  <div class="selector-head" @click="socialItemShow(index)">
+                    <div class="left">
+
+                      <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+                    </div>
+
+                    <div class="right">
+                      <span @click="form.content.intro.social_network.splice(index, 1);" class="remove-item"><i class="el-icon-delete"></i></span>
+                      <i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i>
+                    </div>
+                  </div>
+                  <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
+                    <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
+                    <div class="tag">{{ __('admin/builder.text_suggested_size') }} 60 x 60</div>
+
+                    <el-input placeholder="{{ __('admin/builder.text_enter_link') }}" size="small" v-model="item.link"></el-input>
+                  </div>
+                </div>
+                <div>
+                  <el-button class="add-item" size="mini" type="primary" plain @click="form.content.intro.social_network.push({image: '', link: '', show: true})">{{ __('admin/builder.text_add_link') }}</el-button>
+                </div>
+              </draggable>
             </div>
           </el-collapse-item>
           @for ($i = 1; $i <= 3; $i++)
@@ -181,15 +212,6 @@
       el: '#app',
       data: {
         form: @json($design_settings),
-
-        design: {
-        },
-
-        source: {
-        },
-      },
-      // 计算属性
-      computed: {
       },
       // 侦听器
       watch: {
@@ -218,12 +240,6 @@
           $footer.find(`.${val}`).addClass('footer-active');
         },
 
-        // 编辑模块
-        editModuleButtonClicked(index) {
-          this.design.editingModuleIndex = index;
-          this.design.editType = 'module';
-        },
-
         topLinkAddLinkButtonClicked(index) {
           this.form.content['link' + index].links.push({type: 'page', value: '', text: {}});
         },
@@ -244,6 +260,11 @@
           this.$forceUpdate();
         },
 
+        socialItemShow(index) {
+          this.form.content.intro.social_network.find((e, key) => {if (index != key) return e.show = false});
+          this.form.content.intro.social_network[index].show = !this.form.content.intro.social_network[index].show;
+        },
+
         exitDesign() {
           history.back();
         },
@@ -251,11 +272,6 @@
         viewHome() {
           location = '/';
         },
-
-        showAllModuleButtonClicked() {
-          this.design.editType = 'add';
-          this.design.editingModuleIndex = 0;
-        }
       },
       created () {
       },

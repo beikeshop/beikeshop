@@ -10,15 +10,19 @@
 
 header {
   background: #fff;
-  body:not(.page-home) & {
-    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .04);
-  }
-
 
   .top-wrap {
     height: 40px;
     background: #F7F8FA;
     display: flex;
+
+    > .container, .container-fluid {
+      max-width: 1700px;
+
+      @media (max-width:768px) {
+        padding: 0 10px;
+      }
+    }
 
     .dropdown {
       &:hover {
@@ -72,11 +76,30 @@ header {
   .header-content {
     position: relative;
     background-color: #fff;
+    padding: 1rem 0;
+    transition: all .2s ease-in-out;
+    border-bottom: 1px solid #eee;
 
-    > .container {
+    // body:not(.page-home) & {
+    //   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .04);
+    // }
+
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      padding: .4rem 0;
+      border-color: transparent;
+      box-shadow: 0 6px 12px 0 rgba(0, 0, 0, .06);
+    }
+
+    > .container, .container-fluid {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      max-width: 1700px;
     }
 
     .menu-wrap {
@@ -96,6 +119,7 @@ header {
             .badge {
               position: absolute;
               bottom: 80%;
+              border-radius: 0;
               padding: 2px 4px;
               font-weight: 400;
               left: calc(50% - 0px);
@@ -169,6 +193,19 @@ header {
   }
 
   .header-mobile {
+    border-bottom: 1px solid #eee;
+
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      box-shadow: 0 8px 14px 0 rgba(0, 0, 0, .1);
+      background: #fff;
+      border-color: transparent;
+    }
+
     .mobile-content {
       padding: 10px;
       display: flex;
@@ -222,6 +259,18 @@ header {
             width: 20px;
             height: 20px;
             line-height: 20px;
+          }
+        }
+
+        .mb-account-icon {
+          span {
+            margin-right: -2px;
+            display: inline-block;
+            vertical-align: 0.255em;
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
           }
         }
 

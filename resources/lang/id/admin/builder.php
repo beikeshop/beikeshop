@@ -13,7 +13,7 @@
 return [
     'heading_title'                    => 'Pengeditan Halaman',
     'page_category'                    => 'klasifikasi artikel',
-    'modules_instructions'             => 'Modul yang tersedia, klik untuk menambahkan ke halaman',
+    'modules_instructions'             => 'Modul yang tersedia, klik atau seret ke halaman',
     'text_floor_prompt'                => 'Pengaturan (konfigurasi lantai perlu disimpan dan disegarkan untuk memperbarui halaman)',
     'text_new_page'                    => 'Tambah halaman baru',
     'text_quit'                        => 'berhenti',

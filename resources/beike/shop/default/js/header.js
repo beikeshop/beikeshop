@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-11-08 14:47:08
+ * @LastEditTime  2023-11-30 11:17:07
  */
 
 $(function () {
@@ -84,7 +84,7 @@ $(function () {
 
     $('.offcanvas-footer .all-select i').prop('class', productListAll == checkedProduct ? checked : unchecked);
 
-    const checkedIds = $('#offcanvas-right-cart .product-list').map(function() {
+    const checkedIds = $('#offcanvas-right-cart .product-list').map(function () {
       return $(this).find('i.bi-check-circle-fill').data('id');
     }).get();
 
@@ -94,7 +94,11 @@ $(function () {
       $('#offcanvas-right-cart .to-checkout').removeClass('disabled')
     }
 
-    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {cart_ids: [cartId]}, {hload: true}).then((res) => {
+    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {
+      cart_ids: [cartId]
+    }, {
+      hload: true
+    }).then((res) => {
       updateMiniCartData(res);
     })
   });
@@ -102,7 +106,7 @@ $(function () {
   $(document).on("click", "#offcanvas-right-cart .all-select", function () {
     const [unchecked, checked] = ['bi bi-circle', 'bi bi-check-circle-fill'];
 
-    const checkedIds = $('#offcanvas-right-cart .product-list').map(function() {
+    const checkedIds = $('#offcanvas-right-cart .product-list').map(function () {
       return $(this).find('i.bi').data('id');
     }).get();
 
@@ -111,7 +115,11 @@ $(function () {
 
     $('#offcanvas-right-cart .product-list').find('.select-wrap i').prop('class', isChecked ? checked : unchecked);
 
-    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {cart_ids: checkedIds}, {hload: true}).then((res) => {
+    $http.post(`/carts/${isChecked ? 'select' : 'unselect'}`, {
+      cart_ids: checkedIds
+    }, {
+      hload: true
+    }).then((res) => {
       updateMiniCartData(res);
     })
   })
@@ -121,7 +129,12 @@ $(function () {
     const [id, sku_id, quantity] = [$(this).data('id'), $(this).data('sku'), $(this).val() * 1];
     if ($(this).val() === '') $(this).val(1);
 
-    $http.put(`/carts/${id}`, {quantity: quantity, sku_id}, {hload: true}).then((res) => {
+    $http.put(`/carts/${id}`, {
+      quantity: quantity,
+      sku_id
+    }, {
+      hload: true
+    }).then((res) => {
       updateMiniCartData(res);
     })
   })
@@ -132,7 +145,7 @@ $(function () {
   }
 
   // 导航菜单防止小屏幕下(非手机端)，配置列数过多 显示错误
-  $('.menu-wrap > ul > li').each(function(index, el) {
+  $('.menu-wrap > ul > li').each(function (index, el) {
     if ($(el).children('.dropdown-menu').length) {
       const offsetLeft = $(el).children('.dropdown-menu').offset().left;
       const width = $(el).children('.dropdown-menu').width();
@@ -141,9 +154,52 @@ $(function () {
 
       if (offsetLeft < 0 || offsetRight > windowWidth) {
         $(el).addClass('position-static')
-        .children('.dropdown-menu')
-        .css({'left': (windowWidth - width) / 2, 'transform': 'translate(0, 0.5rem)'});
+          .children('.dropdown-menu')
+          .css({
+            'left': (windowWidth - width) / 2,
+            'transform': 'translate(0, 0.5rem)'
+          });
       }
     }
   });
+
+  // 手机端个人中心弹出菜单
+  (function () {
+    $('.mb-account-icon').click(function (e) {
+      if ($('.account-sides-wrap').length) {
+        e.preventDefault();
+      }
+      $('.account-sides-wrap').addClass('active');
+    })
+
+    $('.mb-header .btn-close').click(function (e) {
+      $('.account-sides-wrap').removeClass('active');
+    })
+
+    $(document).click(function (e) {
+      if (!$(e.target).closest('.account-sides-info').length && !$(e.target).closest('.mb-account-icon').length) {
+        $('.account-sides-wrap').removeClass('active');
+      }
+    })
+  }());
+
+  // PC/MB 头部滑动固定
+  (function () {
+    const pbHeader = $(window).width() > 768 ? $('.header-content') : $('.header-mobile');
+    if (!pbHeader.length) return;
+    const headerContentTop = pbHeader.offset().top;
+    const headerContentHeight = pbHeader.outerHeight(true);
+    $(window).scroll(function () {
+      const scrollTop = $(this).scrollTop();
+      if (scrollTop > headerContentTop) {
+        pbHeader.addClass('fixed');
+        if (!$('.header-content-placeholder').length)
+          pbHeader.before('<div class="header-content-placeholder" style="height: ' + headerContentHeight + 'px"></div>');
+      } else {
+        pbHeader.removeClass('fixed');
+        $('.header-content-placeholder').remove();
+      }
+    })
+  }());
 });
+
