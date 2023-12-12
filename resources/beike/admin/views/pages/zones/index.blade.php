@@ -25,6 +25,14 @@
               <option value="0">{{ __('common.disable') }}</option>
             </select>
           </div>
+
+          <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
+            <label class="filter-title">{{ __('admin/zone.country_of_origin') }}</label>
+            <select v-model="filter.country_id" class="form-select">
+              <option value="">{{ __('common.all') }}</option>
+              <option v-for="item in countries" :value="item.id">@{{ item.name }}</option>
+            </select>
+          </div>
         </div>
 
         <div class="row">
@@ -157,6 +165,7 @@
           name: bk.getQueryString('name'),
           code: bk.getQueryString('code'),
           status: bk.getQueryString('status'),
+          country_id: bk.getQueryString('country_id'),
         },
 
         url: '{{ admin_route("zones.index") }}',
