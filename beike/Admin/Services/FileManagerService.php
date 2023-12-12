@@ -270,7 +270,7 @@ class FileManagerService
         $savePath = $this->basePath . $savePath;
         if (is_file(public_path('catalog' . $savePath . '/' . $originName))) {
             $originNameInfo = pathinfo($originName);
-            $originName = $originNameInfo['filename'] . '-' . current_user()->id . '-' . time() . '.' . $originNameInfo['extension'];
+            $originName     = $originNameInfo['filename'] . '-' . current_user()->id . '-' . time() . '.' . $originNameInfo['extension'];
         }
         $filePath = $file->storeAs($savePath, $originName, 'catalog');
 
