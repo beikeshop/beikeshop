@@ -87,7 +87,7 @@ class ZoneRepo
      */
     public static function list(array $data = [])
     {
-        $builder = Zone::query();
+        $builder = Zone::query()->with(['country']);
 
         if (isset($data['name'])) {
             $builder->where('zones.name', 'like', "%{$data['name']}%");
