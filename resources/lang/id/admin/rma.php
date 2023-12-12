@@ -1,30 +1,29 @@
 <?php
 /**
- * rma.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     TL <lucianldg@tuikehome.com>
- * @created    2022-08-16 17:22:41
- * @modified   2022-08-16 17:22:41
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:48:16
  */
 
 return [
-    'index'             => 'Aplikasi purna jual',
-
-    'rmas_index'        => 'Daftar layanan purna jual',
-    'rmas_show'         => 'Detail layanan purna jual',
-    'rmas_update'       => 'Perbarui layanan purna jual',
-    'rmas_delete'       => 'Hapus layanan purna jual',
-
-    'customers_name'    => 'Nama Pelanggan',
-    'quantity'          => 'kuantitas',
-    'service_type'      => 'jenis layanan',
-    'rma_details'       => 'Detail aplikasi purna jual',
-    'reasons_return'    => 'alasan pengembalian',
-    'current_state'     => 'keadaan saat ini',
-    'modify_status'     => 'ubah status',
-    'remarks'           => 'Informasi Keterangan',
-    'update_status'     => 'Perbarui Status',
+    'current_state' => 'keadaan saat ini',
+    'customers_name' => 'Nama Pelanggan',
+    'index' => 'Aplikasi purna jual',
+    'modify_status' => 'ubah status',
     'operation_history' => 'Sejarah Operasi',
+    'quantity' => 'kuantitas',
+    'reasons_return' => 'alasan pengembalian',
+    'remarks' => 'Informasi Keterangan',
+    'rma_details' => 'Detail aplikasi purna jual',
+    'rma_list_title' => 'Daftar aplikasi setelah jual',
+    'rmas_delete' => 'Hapus layanan purna jual',
+    'rmas_index' => 'Daftar layanan purna jual',
+    'rmas_show' => 'Detail layanan purna jual',
+    'rmas_update' => 'Perbarui layanan purna jual',
+    'service_type' => 'jenis layanan',
+    'update_status' => 'Perbarui Status',
 ];

@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:45
  */
 
 return [
-    'plugins_index'         => 'liste des plugins',
-    'plugins_import'        => 'Télécharger le plugin',
-    'plugins_show'          => 'détails des plugins',
-    'plugins_update'        => 'mise à jour des plugins',
+    'feature' => 'Feature',
+    'language' => 'Language',
+    'payment' => 'mode de paiement',
+    'plugin_code' => 'code du plugin',
+    'plugin_description' => 'description du plugin',
+    'plugin_list' => 'liste des plugins',
+    'plugin_type' => 'type de plugin',
+    'plugin_upload' => 'Télécharger le plugin (supporte uniquement les fichiers zip)',
+    'plugin_version' => 'Numéro de version',
+    'plugins_import' => 'Télécharger le plugin',
+    'plugins_index' => 'liste des plugins',
+    'plugins_install' => 'installer',
+    'plugins_show' => 'détails des plugins',
+    'plugins_uninstall' => 'désinstaller',
+    'plugins_update' => 'mise à jour des plugins',
     'plugins_update_status' => 'état de mise à jour',
-    'plugins_install'       => 'installer',
-    'plugins_uninstall'     => 'désinstaller',
-    'to_enable'             => 'To Enable',
-    'uninstall_hint'        => 'La désinstallation du plug-in supprimera toutes les données associées au plug-in, êtes-vous sûr de vouloir désinstaller ? ',
-
-    'plugin_list'           => 'liste des plugins',
-    'plugin_code'           => 'code du plugin',
-    'plugin_type'           => 'type de plugin',
-    'plugin_description'    => 'description du plugin',
-    'plugin_upload'         => 'Télécharger le plugin (supporte uniquement les fichiers zip)',
-
-    'shipping'              => 'méthode de livraison',
-    'payment'               => 'mode de paiement',
-    'total'                 => 'Calcul de la commande',
-    'social'                => 'Social',
-    'feature'               => 'Feature',
-    'language'              => 'Language',
-    'theme'                 => 'Theme',
+    'shipping' => 'méthode de livraison',
+    'social' => 'Social',
+    'theme' => 'Theme',
+    'to_enable' => 'To Enable',
+    'total' => 'Calcul de la commande',
+    'translator' => 'Outil de traduction',
+    'uninstall_hint' => 'La désinstallation du plug-in supprimera toutes les données associées au plug-in, êtes-vous sûr de vouloir désinstaller ? ',
 ];

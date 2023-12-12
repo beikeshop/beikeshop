@@ -1,36 +1,36 @@
 <?php
 /**
- * order.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-02 14:22:41
- * @modified   2022-08-02 14:22:41
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:47:31
  */
 
 return [
-    'plugins_index'         => 'elenco dei plugin',
-    'plugins_import'        => 'Carica plugin',
-    'plugins_show'          => 'dettagli plugin',
-    'plugins_update'        => 'aggiornamento plugin',
+    'feature' => 'Feature',
+    'language' => 'Language',
+    'payment' => 'metodo di pagamento',
+    'plugin_code' => 'codice plugin',
+    'plugin_description' => 'descrizione plugin',
+    'plugin_list' => 'elenco dei plugin',
+    'plugin_type' => 'tipo di plugin',
+    'plugin_upload' => 'Carica plugin (supporta solo file zip)',
+    'plugin_version' => 'Numero dell\'edizione',
+    'plugins_import' => 'Carica plugin',
+    'plugins_index' => 'elenco dei plugin',
+    'plugins_install' => 'installa',
+    'plugins_show' => 'dettagli plugin',
+    'plugins_uninstall' => 'disinstalla',
+    'plugins_update' => 'aggiornamento plugin',
     'plugins_update_status' => 'stato di aggiornamento',
-    'plugins_install'       => 'installa',
-    'plugins_uninstall'     => 'disinstalla',
-    'to_enable'             => 'To Enable',
-    'uninstall_hint'        => 'La disinstallazione del plug-in eliminerà tutti i relativi dati del plug-in, sei sicuro di voler disinstallare? ',
-
-    'plugin_list'           => 'elenco dei plugin',
-    'plugin_code'           => 'codice plugin',
-    'plugin_type'           => 'tipo di plugin',
-    'plugin_description'    => 'descrizione plugin',
-    'plugin_upload'         => 'Carica plugin (supporta solo file zip)',
-
-    'shipping'              => 'metodo di spedizione',
-    'payment'               => 'metodo di pagamento',
-    'total'                 => 'Calcolo dell\'ordine',
-    'social'                => 'Social',
-    'feature'               => 'Feature',
-    'language'              => 'Language',
-    'theme'                 => 'Theme',
+    'shipping' => 'metodo di spedizione',
+    'social' => 'Social',
+    'theme' => 'Theme',
+    'to_enable' => 'To Enable',
+    'total' => 'Calcolo dell\'ordine',
+    'translator' => 'Strumenti di traduzione',
+    'uninstall_hint' => 'La disinstallazione del plug-in eliminerà tutti i relativi dati del plug-in, sei sicuro di voler disinstallare? ',
 ];

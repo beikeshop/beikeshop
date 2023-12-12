@@ -1,21 +1,22 @@
 <?php
 /**
- * design_builder.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
- * @created    2022-08-30 11:03:19
- * @modified   2022-08-30 11:03:19
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:38:03
  */
 
 return [
-    'module_brand'          => 'ブランドモジュール',
-    'module_banner'         => 'バナーモジュール',
+    'module_banner' => 'バナーモジュール',
+    'module_brand' => 'ブランドモジュール',
     'module_four_image_pro' => '1 行 4 つの画像 PRO',
-    'module_slideshow'      => 'スライド モジュール',
-    'module_tab_products'   => 'タブ製品',
-    'module_product'        => '商品モジュール',
-    'module_icons'          => 'アイコンモジュール',
-    'module_rich_text'      => 'リッチテキスト',
+    'module_icons' => 'アイコンモジュール',
+    'module_page' => '記事モジュールです',
+    'module_product' => '商品モジュール',
+    'module_rich_text' => 'リッチテキスト',
+    'module_slideshow' => 'スライド モジュール',
+    'module_tab_products' => 'タブ製品',
 ];

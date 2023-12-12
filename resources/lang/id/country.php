@@ -6,16 +6,16 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-07 09:15:12
+ * @modified   2023-12-12 07:29:07
  */
 
 return [
-    'AF'   => 'afrika',
-    'AN'   => 'Antartika.',
-    'AS'   => 'asia',
-    'EU'   => 'eropa',
-    'NA'   => 'Amerika utara',
-    'OA'   => 'oceania',
-    'SA'   => 'Amerika selatan',
-    'none' => 'Tak dikenal.',
+    'AF' => 'afrika',
+    'AN' => 'Antartika.',
+    'AS' => 'asia',
+    'EU' => 'eropa',
+    'NA' => 'Amerika utara',
+    'OA' => 'oceania',
+    'SA' => 'Amerika selatan',
+    'null' => 'Tak dikenal.',
 ];

@@ -1,21 +1,22 @@
 <?php
 /**
- * design_builder.php
+ * Lang.php
  *
- * @copyright  2022 tuikehome.com - All Rights Reserved
- * @link       https://www.tuikehome.com
- * @author     TL <lucianldg@tuikehome.com>
- * @created    2022-08-30 11:03:19
- * @modified   2022-08-30 11:03:19
+ * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     Edward Yang <yangjin@guangda.work>
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:38:00
  */
 
 return [
-    'module_brand'          => 'Modul Merek',
-    'module_banner'         => 'Modul spanduk',
+    'module_banner' => 'Modul spanduk',
+    'module_brand' => 'Modul Merek',
     'module_four_image_pro' => 'Satu baris dan empat angka PRO',
-    'module_slideshow'      => 'Modul Slide',
-    'module_tab_products'   => 'Tab Barang',
-    'module_product'        => 'Modul Komoditas',
-    'module_icons'          => 'modul ikon',
-    'module_rich_text'      => 'Modul Teks Kaya',
+    'module_icons' => 'modul ikon',
+    'module_page' => 'Modul artikel',
+    'module_product' => 'Modul Komoditas',
+    'module_rich_text' => 'Modul Teks Kaya',
+    'module_slideshow' => 'Modul Slide',
+    'module_tab_products' => 'Tab Barang',
 ];

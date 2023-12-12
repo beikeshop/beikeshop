@@ -1,17 +1,20 @@
 <?php
 /**
- * customer.php
+ * Lang.php
  *
- * @copyright  2022 beikeshop.com - All Rights Reserved
+ * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
- * @created    2022-08-26 18:41:07
- * @modified   2022-08-26 18:41:07
+ * @created    2023-09-09 09:09:09
+ * @modified   2023-12-12 07:15:45
  */
 
 return [
-    'name'           => '姓名',
-    'email'          => 'Email',
-    'from'           => '註冊來源',
+    'approved' => '已審覈',
     'customer_group' => '用戶組',
+    'email' => 'Email',
+    'from' => '註冊來源',
+    'name' => '姓名',
+    'pending' => '待審覈',
+    'rejected' => '已拒絕',
 ];
