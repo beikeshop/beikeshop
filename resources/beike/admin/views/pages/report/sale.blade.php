@@ -46,7 +46,7 @@
               <tr>
                 <th class="text-center" width="74">{{ __('admin/report_sale.text_ranking') }}</th>
                 <th>{{ __('admin/common.product') }}</th>
-                <th>{{ __('shop/account.amount') }}</th>
+                <th>{{ __('common.sales') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@
                   @endif
                 </td>
                 <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
-                <td>{{ $item['total_amount'] }}</td>
+                <td>{{ $item['total_quantity'] }}</td>
               </tr>
             @endforeach
             </tbody>
