@@ -12,6 +12,7 @@
 namespace Beike\Admin\Services;
 
 use Illuminate\Support\Facades\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileManagerService
 {
@@ -264,9 +265,13 @@ class FileManagerService
      * @param $originName
      * @return mixed
      */
-    public function uploadFile($file, $savePath, $originName): mixed
+    public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
         $savePath = $this->basePath . $savePath;
+        if (is_file(public_path('catalog' . $savePath . '/' . $originName))) {
+            $originNameInfo = pathinfo($originName);
+            $originName     = $originNameInfo['filename'] . '-' . current_user()->id . '-' . time() . '.' . $originNameInfo['extension'];
+        }
         $filePath = $file->storeAs($savePath, $originName, 'catalog');
 
         return asset('catalog/' . $filePath);

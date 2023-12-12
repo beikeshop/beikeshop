@@ -116,6 +116,11 @@ class OrderRepo
             $builder->where('created_at', '<', $end);
         }
 
+        $orderIds = $filters['order_ids'] ?? null;
+        if ($orderIds) {
+            $builder->whereIn('id', $orderIds);
+        }
+
         $status = $filters['status'] ?? '';
         if ($status) {
             $builder->where('status', $status);
