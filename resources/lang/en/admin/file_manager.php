@@ -17,7 +17,7 @@ return [
     'copy_link'               => 'Copy Link',
     'copy_success'            => 'Copy Success',
     'create_folder'           => 'Create folder',
-    'directory_already_exist' => 'The directory not exist!',
+    'directory_already_exist' => 'The directory already exist!',
     'directory_not_empty'     => 'The directory not empty!',
     'download'                => 'Download',
     'drop_file_hint'          => 'Do you want to move <span class="drop-hint"></span> files inside <span class="drop-hint"></span>?',
