@@ -466,7 +466,6 @@ $data = $plugin['data'];
           if (res.data.payment_code == 'wechatpay') {
             this.service_wechatpay_price = res.data.amount
             this.service_id = res.data.id
-            this.serviceDialog.show = true
             this.getQrcode(res.data.pay_url,'service');
           }
 
