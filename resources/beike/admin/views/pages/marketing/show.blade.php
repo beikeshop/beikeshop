@@ -466,6 +466,7 @@ $data = $plugin['data'];
           if (res.data.payment_code == 'wechatpay') {
             this.service_wechatpay_price = res.data.amount
             this.service_id = res.data.id
+            this.serviceDialog.show = true
             this.getQrcode(res.data.pay_url,'service');
           }
 
@@ -541,14 +542,15 @@ $data = $plugin['data'];
         }
 
         if (type == 'service') {
-          setTimeout(() => {
+          this.serviceDialog.show = true
+          this.$nextTick(() => {
             new QRCode('service-info', {
               text: url,
               width: 270,
               height: 270,
               correctLevel : QRCode.CorrectLevel.M
             });
-          }, 500);
+          })
 
           setTimeout(() => {
             self.chekServiceOrderStatus();
