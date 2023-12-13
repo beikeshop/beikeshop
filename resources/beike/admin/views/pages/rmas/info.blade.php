@@ -22,6 +22,14 @@
                   <td>{{ __('common.phone') }}：</td>
                   <td>{{ $rma['telephone'] }}</td>
               </tr>
+              <tr>
+                  <td>{{ __('admin/rma.service_type') }}：</td>
+                  <td>{{  $rma['type_text'] }}</td>
+              </tr>
+              <tr>
+                  <td>{{ __('admin/rma.order_id') }}：</td>
+                  <td>{{ $rma['order_id'] }}</td>
+              </tr>
             </tbody>
           </table>
         </div>

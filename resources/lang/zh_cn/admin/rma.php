@@ -28,4 +28,5 @@ return [
     'remarks'           => '备注信息',
     'update_status'     => '更新状态',
     'operation_history' => '操作历史',
+    'order_id'          => '订单ID',
 ];
