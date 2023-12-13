@@ -28,7 +28,7 @@
               </tr>
               <tr>
                   <td>{{ __('admin/rma.order_id') }}：</td>
-                  <td>{{ $rma['order_id'] }}</td>
+                  <td><a href="{{ admin_route('orders.show', ['order' => $rma['order_id']]) }}">{{ $rma['order_id'] }}</a></td>
               </tr>
             </tbody>
           </table>
