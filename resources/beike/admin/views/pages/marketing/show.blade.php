@@ -282,7 +282,7 @@ $data = $plugin['data'];
                   <td>{{ $item['amount_format'] }}</td>
                   <td>{{ $item['payment_code'] }}</td>
                   <td>{{ $item['created_at_format'] }}</td>
-                  <td>{{ $item['service_date_to'] }}</td>
+                  <td>{{ $item['service_date_to_format'] }}</td>
                 </tr>
               @endforeach
               @else
