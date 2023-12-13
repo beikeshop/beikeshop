@@ -12,12 +12,14 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\CustomerGroupDetail;
+use Beike\Admin\Services\SettingService;
 use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\ThemeRepo;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -63,8 +65,10 @@ class SettingController extends Controller
         if ($showPriceAfterLogin) {
             $settings['guest_checkout'] = false;
         }
-        foreach ($settings as $key => $value) {
-            SettingRepo::storeValue($key, $value);
+        try {
+            SettingService::storeSettings($settings);
+        } catch (Exception $e) {
+            return redirect(admin_route('settings.index'))->withInput()->with('error', $e->getMessage());
         }
 
         $oldAdminName = admin_name();

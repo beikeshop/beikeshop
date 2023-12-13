@@ -20,6 +20,11 @@
         @if (session('success'))
           <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
         @endif
+        @if (session('error'))
+          <div class="alert alert-danger">
+            {{ session('error') }}
+          </div>
+        @endif
         <ul class="nav nav-tabs nav-bordered mb-5" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" data-bs-toggle="tab" href="#tab-general">{{ __('admin/setting.basic_settings') }}</a>
