@@ -10,12 +10,12 @@
  */
 
 return [
-    'all_product' => 'All goods',
-    'pv_total' => 'Display volume',
-    'reports_sale' => 'merchandising',
-    'reports_view' => 'Product View (Top 20)',
+    'all_product'        => 'All goods',
+    'pv_total'           => 'Display volume',
+    'reports_sale'       => 'merchandising',
+    'reports_view'       => 'Product View (Top 20)',
     'reports_view_chart' => 'Product display volume (PV) :',
-    'uv_total' => 'Merchandise visitors',
-    'view_count' => 'Number of views',
+    'uv_total'           => 'Merchandise visitors',
+    'view_count'         => 'Number of views',
     'view_product_chart' => 'View trends',
 ];

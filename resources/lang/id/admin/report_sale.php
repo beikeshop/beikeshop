@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Eksposisi uang pembelian pengguna',
-    'amount_by_products' => 'Perpindahan uang komoditas',
+    'amount_by_customers'  => 'Eksposisi uang pembelian pengguna',
+    'amount_by_products'   => 'Perpindahan uang komoditas',
     'quantity_by_products' => 'Penjualan barang luar biasa',
-    'text_ranking' => 'peringkat',
-    'text_report' => 'Laporan keuangan',
+    'text_ranking'         => 'peringkat',
+    'text_report'          => 'Laporan keuangan',
 ];

@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => '用戶購買金額排行',
-    'amount_by_products' => '商品金額排行',
+    'amount_by_customers'  => '用戶購買金額排行',
+    'amount_by_products'   => '商品金額排行',
     'quantity_by_products' => '商品銷量排行',
-    'text_ranking' => '排名',
-    'text_report' => '報表',
+    'text_ranking'         => '排名',
+    'text_report'          => '報表',
 ];

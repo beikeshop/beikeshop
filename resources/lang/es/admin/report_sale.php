@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Ranking de usuarios por cantidad comprada',
-    'amount_by_products' => 'Mercancía cantidad ranking',
+    'amount_by_customers'  => 'Ranking de usuarios por cantidad comprada',
+    'amount_by_products'   => 'Mercancía cantidad ranking',
     'quantity_by_products' => 'Lista de productos vendidos',
-    'text_ranking' => 'Las clasificaciones',
-    'text_report' => 'Los estados',
+    'text_ranking'         => 'Las clasificaciones',
+    'text_report'          => 'Los estados',
 ];

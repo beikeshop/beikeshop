@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'ユーザー購入金額ランキングです',
-    'amount_by_products' => '商品金額ランキングです',
+    'amount_by_customers'  => 'ユーザー購入金額ランキングです',
+    'amount_by_products'   => '商品金額ランキングです',
     'quantity_by_products' => '商品売り上げランキングです',
-    'text_ranking' => '順位です',
-    'text_report' => 'レポートです',
+    'text_ranking'         => '順位です',
+    'text_report'          => 'レポートです',
 ];

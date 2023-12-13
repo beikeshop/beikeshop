@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => '사용자 구매 금액 순위',
-    'amount_by_products' => '상품의 금액 순위',
+    'amount_by_customers'  => '사용자 구매 금액 순위',
+    'amount_by_products'   => '상품의 금액 순위',
     'quantity_by_products' => '상품 판매량 순위',
-    'text_ranking' => '위',
-    'text_report' => '보고서',
+    'text_ranking'         => '위',
+    'text_report'          => '보고서',
 ];

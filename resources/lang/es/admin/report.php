@@ -10,12 +10,12 @@
  */
 
 return [
-    'all_product' => 'Todos los bienes',
-    'pv_total' => 'Volumen de exhibición de mercancías',
-    'reports_sale' => 'merchandising',
-    'reports_view' => 'Artículos vistos (top 20)',
+    'all_product'        => 'Todos los bienes',
+    'pv_total'           => 'Volumen de exhibición de mercancías',
+    'reports_sale'       => 'merchandising',
+    'reports_view'       => 'Artículos vistos (top 20)',
     'reports_view_chart' => 'Volumen de exhibición de la mercancía (PV) :',
-    'uv_total' => 'Visitantes de mercancía',
-    'view_count' => 'Número de visitas',
+    'uv_total'           => 'Visitantes de mercancía',
+    'view_count'         => 'Número de visitas',
     'view_product_chart' => 'Ver las tendencias',
 ];

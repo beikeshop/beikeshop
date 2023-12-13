@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Verbraucher zahlen zahlen in einer liste',
-    'amount_by_products' => 'Die artikel liegen in reihen',
+    'amount_by_customers'  => 'Verbraucher zahlen zahlen in einer liste',
+    'amount_by_products'   => 'Die artikel liegen in reihen',
     'quantity_by_products' => 'Die Waren liegen weit zurück',
-    'text_ranking' => 'Ranking.',
-    'text_report' => 'Ein bericht.',
+    'text_ranking'         => 'Ranking.',
+    'text_report'          => 'Ein bericht.',
 ];

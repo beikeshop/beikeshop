@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'User purchase amount rankings',
-    'amount_by_products' => 'Commodity value ranking',
+    'amount_by_customers'  => 'User purchase amount rankings',
+    'amount_by_products'   => 'Commodity value ranking',
     'quantity_by_products' => 'Sales ranking',
-    'text_ranking' => 'Ranking',
-    'text_report' => 'statement',
+    'text_ranking'         => 'Ranking',
+    'text_report'          => 'statement',
 ];

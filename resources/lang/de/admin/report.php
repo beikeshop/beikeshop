@@ -10,12 +10,12 @@
  */
 
 return [
-    'all_product' => 'Auf alle Waren.',
-    'pv_total' => 'Ware liefere.',
-    'reports_sale' => 'Absatz der Waren',
-    'reports_view' => 'Einkaufen (top 20)',
+    'all_product'        => 'Auf alle Waren.',
+    'pv_total'           => 'Ware liefere.',
+    'reports_sale'       => 'Absatz der Waren',
+    'reports_view'       => 'Einkaufen (top 20)',
     'reports_view_chart' => 'Vertrieb Von ware (p) :',
-    'uv_total' => 'Anzahl der handelsbesucher',
-    'view_count' => 'Anzahl der mal?',
+    'uv_total'           => 'Anzahl der handelsbesucher',
+    'view_count'         => 'Anzahl der mal?',
     'view_product_chart' => 'Kontrollieren sie trends.',
 ];

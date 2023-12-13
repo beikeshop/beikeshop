@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Spese di acquisto',
-    'amount_by_products' => '(\') importo delle merci',
+    'amount_by_customers'  => 'Spese di acquisto',
+    'amount_by_products'   => '(\') importo delle merci',
     'quantity_by_products' => 'Volume delle vendite all\'ingrosso',
-    'text_ranking' => 'classifica',
-    'text_report' => 'rendiconto',
+    'text_ranking'         => 'classifica',
+    'text_report'          => 'rendiconto',
 ];

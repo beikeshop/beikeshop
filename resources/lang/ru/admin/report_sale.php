@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Количество покупок пользователем ограничено',
-    'amount_by_products' => 'Выстроена сумма товара',
+    'amount_by_customers'  => 'Количество покупок пользователем ограничено',
+    'amount_by_products'   => 'Выстроена сумма товара',
     'quantity_by_products' => 'распродажа',
-    'text_ranking' => 'мест',
-    'text_report' => 'отчет',
+    'text_ranking'         => 'мест',
+    'text_report'          => 'отчет',
 ];

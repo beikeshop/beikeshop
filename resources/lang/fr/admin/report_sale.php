@@ -10,9 +10,9 @@
  */
 
 return [
-    'amount_by_customers' => 'Classement des montants achetés par les utilisateurs',
-    'amount_by_products' => 'Article montant rang',
+    'amount_by_customers'  => 'Classement des montants achetés par les utilisateurs',
+    'amount_by_products'   => 'Article montant rang',
     'quantity_by_products' => 'Classement des marchandises vendues',
-    'text_ranking' => 'Le classement',
-    'text_report' => 'Les états',
+    'text_ranking'         => 'Le classement',
+    'text_report'          => 'Les états',
 ];
