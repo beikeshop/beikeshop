@@ -11,7 +11,7 @@
 @section('content')
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="chart-title">{{ __('admin/report.reports_view_chart') }} <span>{{ __('admin/report.all_product') }}</span></div>
+      <div class="chart-title"><span>{{ __('admin/report.all_product') }}</span></div>
       <div class="orders-right">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
           <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">{{ __('admin/dashboard.latest_month') }}</button>
