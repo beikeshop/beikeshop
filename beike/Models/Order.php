@@ -80,7 +80,7 @@ class Order extends Base
         }
         $statusMap = array_column(StateMachineService::getAllStatuses(), 'name', 'status');
 
-        return $statusMap[$this->status];
+        return $statusMap[$this->status] ?? '';
     }
 
     public function getTotalFormatAttribute()
