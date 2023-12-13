@@ -24,6 +24,7 @@ class RmaDetail extends JsonResource
         return [
             'id'               => $this->id,
             'order_id'         => $this->order_id,
+            'order_number'     => $this->order->number ?? '--',
             'order_product_id' => $this->order_product_id,
             'quantity'         => $this->quantity,
             'opened'           => $this->opened,
