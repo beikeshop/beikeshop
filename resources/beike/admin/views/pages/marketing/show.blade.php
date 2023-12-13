@@ -94,7 +94,6 @@ $data = $plugin['data'];
         </table>
 
         <div class="mb-4">
-          {{ __('admin/marketing.plugin_ticket') }}
           @if ($data['available'])
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
