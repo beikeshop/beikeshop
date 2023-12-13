@@ -23,7 +23,7 @@ class CurrencyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name'          => 'required',
             'code'          => 'required|max:16',
             'symbol_left'   => 'max:16',
@@ -31,6 +31,12 @@ class CurrencyRequest extends FormRequest
             'value'         => 'required',
             'decimal_place' => 'required|max:1',
         ];
+
+        if ($this->id && $this->code == system_setting('base.currency')) {
+            $rules['value'] = 'required|in:1';
+        }
+
+        return $rules;
     }
 
     public function attributes()
@@ -43,5 +49,13 @@ class CurrencyRequest extends FormRequest
             'value'         => trans('currency.value'),
             'decimal_place' => trans('currency.decimal_place'),
         ];
+    }
+
+    public function messages()
+    {
+        $messages = parent::messages();
+        $messages['value'] = trans('currency.error_value');
+
+        return $messages;
     }
 }
