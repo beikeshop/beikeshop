@@ -42,7 +42,7 @@ class LoginController extends Controller
         try {
             hook_action('shop.account.login.before', $data);
 
-            if (! auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
+            if (!auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
                 throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
             }
 
@@ -66,8 +66,10 @@ class LoginController extends Controller
             CartRepo::mergeGuestCart($customer);
 
             return json_success(trans('shop/login.login_successfully'));
+        } catch (NotAcceptableHttpException $e) {
+            return json_fail($e->getMessage(), ['error' => 'password']);
         } catch (\Exception $e) {
-            return json_fail($e->getMessage());
+            return json_fail($e->getMessage(), ['error' => 'status']);
         }
     }
 }

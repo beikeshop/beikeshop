@@ -17,6 +17,13 @@ body.page-login, body.page-forgotten {
     margin-left: 0;
   }
 
+  .login-alert {
+    .layui-layer-btn0 {
+      background-color: #222;
+      border-color: #222;
+    }
+  }
+
   .forgotten-link {
     display: block;
     margin-top: -14px;

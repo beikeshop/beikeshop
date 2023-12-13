@@ -29,7 +29,7 @@ return [
     'category'               => 'Kategori',
     'common_link'            => 'Link yang umum digunakan',
     'copyright_buy'          => 'Pembelian hak cipta',
-    'copyright_hint_text'    => 'Silahkan tunggu untuk situs di bawah hak cipta, dan sampai ke < a href = \\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\" targets at \\\\\\\"_blank\\\\\\\" > < / a > membeli resmi',
+    'copyright_hint_text'    => 'Harap simpan hak cipta di bagian bawah situs web, atau kunjungi <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">pembelian lisensi</a>',
     'countries_index'        => 'Nasional',
     'country'                => 'Nasional',
     'currencies_index'       => 'Mata uang',

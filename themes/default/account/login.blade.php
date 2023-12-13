@@ -182,7 +182,7 @@
               return;
             }
 
-            $http.post(url, _data).then((res) => {
+            $http.post(url, _data, {hmsg: true}).then((res) => {
               layer.msg(res.message)
               @if (!request('iframe'))
                 location = "{{ shop_route('account.index') }}"
@@ -193,6 +193,13 @@
                   parent.window.location.reload()
                 }, 400);
               @endif
+            }).catch((err) => {
+              if (err.response.data.data && err.response.data.data.error == 'password') {
+                layer.msg(err.response.data.message, ()=>{})
+                return
+              }
+
+              layer.alert(err.response.data.message, {title: '{{ __('common.text_hint') }}', btn: ['{{ __('common.confirm') }}'], skin: 'login-alert'})
             })
           });
         },

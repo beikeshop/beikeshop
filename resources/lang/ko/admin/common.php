@@ -29,7 +29,7 @@ return [
     'category'               => '분류관리',
     'common_link'            => '일반 링크',
     'copyright_buy'          => '판권 구매',
-    'copyright_hint_text'    => '아랫부분 사이트 판권을 유보 해 달라 거나 찾. < a href = https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\\\\\\\"target = _blank 」 > 구매 위임 </a >',
+    'copyright_hint_text'    => '저작권은 홈페이지 하단에 보관하시거나 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">구매로 이동하세요. 라이센스</a>',
     'countries_index'        => '국가 관리',
     'country'                => '국가관리',
     'currencies_index'       => '화폐 관리',

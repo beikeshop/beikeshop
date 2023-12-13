@@ -228,11 +228,11 @@
 
           <div class="tab-pane fade" id="tab-checkout">
             <x-admin-form-switch name="show_price_after_login" title="{{ __('admin/setting.show_price_after_login') }}" value="{{ old('show_price_after_login', system_setting('base.show_price_after_login', '0')) }}">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.show_price_after_login_tips') }}</div>
+              <div class="help-text font-size-12 lh-base show-price-error-text">{{ __('admin/setting.show_price_after_login_tips') }}</div>
             </x-admin-form-switch>
 
-            <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}">
-            </x-admin-form-switch>
+            <x-admin-form-switch name="guest_checkout" title="{{ __('admin/setting.guest_checkout') }}" value="{{ old('guest_checkout', system_setting('base.guest_checkout', '1')) }}" />
+
             <x-admin-form-switch name="customer_approved" title="{{ __('admin/setting.customer_approved') }}" value="{{ old('customer_approved', system_setting('base.customer_approved', '0')) }}">
             </x-admin-form-switch>
 
@@ -342,6 +342,7 @@
         }, 1200);
       }
     });
+
   </script>
 
   <script>
@@ -372,6 +373,26 @@
             reader.readAsDataURL(files[0]);
           }
         });
+      });
+
+      $('input[name="show_price_after_login"]').change(function () {
+        if ($(this).val() == 1 && $('input[name="guest_checkout"]').prop('checked') == true) {
+          $('input[name="guest_checkout"]').prop('checked', true);
+          $('.show-price-error-text').addClass('text-danger fw-bold');
+          setTimeout(() => {
+            $('.show-price-error-text').removeClass('text-danger fw-bold');
+          }, 1200);
+        }
+      });
+
+      $('input[name="guest_checkout"]').change(function () {
+        if ($(this).val() == 1 && $('input[name="show_price_after_login"]').prop('checked') == true) {
+          $('input[name="show_price_after_login"]').prop('checked', 1);
+          $('.show-price-error-text').addClass('text-danger fw-bold');
+          setTimeout(() => {
+            $('.show-price-error-text').removeClass('text-danger fw-bold');
+          }, 1200);
+        }
       });
     });
 
