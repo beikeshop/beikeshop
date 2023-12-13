@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:36:24
+ * @modified   2023-12-12 08:35:34
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'カテゴリ',
     'common_link'            => 'よく使われるリンクです',
     'copyright_buy'          => '著作権購入です',
-    'copyright_hint_text'    => 'に保留してサイトの底の著作権や、< aきゃ= \" https://beikeshop.com/vip/subscription?type=tab-license \" lang = ja \": \" >購入ライセンス< / a >',
+    'copyright_hint_text'    => 'に保留してサイトの底の著作権や、< aきゃ= \\\\\\\" https://beikeshop.com/vip/subscription?type=tab-license \\\\\\\" lang = ja \\\\\\\": \\\\\\\" >購入ライセンス< / a >',
     'countries_index'        => '国の管理',
     'country'                => '国の管理',
     'currencies_index'       => '通貨管理',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => '最近訪問しました',
     'region'                 => '地域のグループ化',
     'regions_index'          => '地域のグループ化',
+    'report'                 => 'レポートです',
+    'reports_sale_index'     => '商品の販売です',
+    'reports_view_index'     => '商品閲覧',
     'rma'                    => 'アフターサービス',
     'rma_reason'             => '返品理由',
     'rma_reasons_index'      => 'アフターセールスの理由',

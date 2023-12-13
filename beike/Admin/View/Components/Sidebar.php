@@ -97,6 +97,13 @@ class Sidebar extends Component
                 'children' => $this->getPageSubRoutes(),
             ],
             [
+                'route'    => 'reports_sale.index',
+                'title'    => trans('admin/common.report'),
+                'icon'     => 'bi bi-bar-chart-line',
+                'prefixes' => $this->getReportSubPrefix(),
+                'children' => $this->getReportSubRoutes(),
+            ],
+            [
                 'route'    => 'theme.index',
                 'title'    => trans('admin/common.design'),
                 'icon'     => 'bi bi-palette',
@@ -254,6 +261,16 @@ class Sidebar extends Component
     }
 
     /**
+     * 获取后台报表子页面路由前缀列表
+     */
+    private function getReportSubPrefix()
+    {
+        $prefix = ['reports_sale', 'reports_view'];
+
+        return hook_filter('admin.sidebar.report.prefix', $prefix);
+    }
+
+    /**
      * 获取后台设计子页面路由前缀列表
      */
     private function getDesignSubPrefix()
@@ -355,6 +372,20 @@ class Sidebar extends Component
         ];
 
         return hook_filter('admin.sidebar.pages_routes', $routes);
+    }
+
+    /**
+     * 获取报表子页面路由
+     * @return mixed
+     */
+    public function getReportSubRoutes()
+    {
+        $routes = [
+            ['route' => 'reports_sale.index', 'prefixes' => ['reports_sale']],
+            ['route' => 'reports_view.index', 'prefixes' => ['reports_view']],
+        ];
+
+        return hook_filter('admin.sidebar.reports_routes', $routes);
     }
 
     /**

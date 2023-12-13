@@ -13,6 +13,8 @@ namespace Beike\Repositories;
 
 use Beike\Models\Order;
 use Beike\Models\OrderProduct;
+use Beike\Services\StateMachineService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -56,5 +58,50 @@ class OrderProductRepo
     public static function find($id): Model|Collection|Builder|array|null
     {
         return OrderProduct::query()->findOrFail($id);
+    }
+
+    /**
+     * @param array $filters
+     * @return Builder
+     */
+    public static function getBuilder(array $filters = []): Builder
+    {
+        $builder = OrderProduct::query()->with(['order', 'product.description']);
+
+        $order_statuses = $filters['order_statuses'] ?? StateMachineService::getValidStatuses();
+        if ($order_statuses) {
+            $builder->whereHas('order', function ($query) use ($order_statuses) {
+                $query->whereIn('status', $order_statuses);
+            });
+        } else {
+            $builder->whereHas('order', function ($query) {
+                $query->where('status', '<>', StateMachineService::CREATED);
+            });
+        }
+
+        $start = $filters['date_start'] ?? null;
+        if ($start) {
+            $builder->where('created_at', '>=', $start);
+        }
+
+        $end = $filters['date_end'] ?? null;
+        if ($end) {
+            $builder->where('created_at', '<', Carbon::createFromFormat('Y-m-d', $end)->subDay());
+        }
+
+        $order = $filters['order'] ?? null;
+        if ($order) {
+            $builder->orderBy($order, 'desc');
+        }
+
+        $limit = $filters['limit'] ?? null;
+        if ($limit) {
+            $builder->limit($limit);
+        }
+
+        $builder->groupBy(['product_id'])
+            ->selectRaw('`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount');
+
+        return $builder;
     }
 }

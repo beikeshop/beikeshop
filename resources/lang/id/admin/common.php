@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:36:50
+ * @modified   2023-12-12 08:35:30
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'Kategori',
     'common_link'            => 'Link yang umum digunakan',
     'copyright_buy'          => 'Pembelian hak cipta',
-    'copyright_hint_text'    => 'Silahkan tunggu untuk situs di bawah hak cipta, dan sampai ke < a href = \"https://beikeshop.com/vip/subscription?type=tab-license\" targets at \"_blank\" > < / a > membeli resmi',
+    'copyright_hint_text'    => 'Silahkan tunggu untuk situs di bawah hak cipta, dan sampai ke < a href = \\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\" targets at \\\\\\\"_blank\\\\\\\" > < / a > membeli resmi',
     'countries_index'        => 'Nasional',
     'country'                => 'Nasional',
     'currencies_index'       => 'Mata uang',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Baru saja dikunjungi',
     'region'                 => 'Pengelompokan wilayah',
     'regions_index'          => 'Pengelompokan wilayah',
+    'report'                 => 'Laporan keuangan',
+    'reports_sale_index'     => 'Penjualan barang',
+    'reports_view_index'     => 'Tampilan barang',
     'rma'                    => 'Layanan purna jual',
     'rma_reason'             => 'Pengembalian alasan manajemen',
     'rma_reasons_index'      => 'Alasan purna jual',

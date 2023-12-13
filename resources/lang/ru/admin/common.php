@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:37:05
+ * @modified   2023-12-12 08:35:39
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'категориями',
     'common_link'            => 'Постоянная связь',
     'copyright_buy'          => 'Покупка авторских прав',
-    'copyright_hint_text'    => 'ѕрош, подожд пок сайт дне авторск прав, ил в < a href = \\\\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\\\" target = \\\\\\\\\"_blank\\\\\\\\\" > покупк уполномоч < / a >',
+    'copyright_hint_text'    => 'ѕрош, подожд пок сайт дне авторск прав, ил в < a href = \\\\\\\\\\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\\\\\\\\\" target = \\\\\\\\\\\\\\\"_blank\\\\\\\\\\\\\\\" > покупк уполномоч < / a >',
     'countries_index'        => 'Государственное управление',
     'country'                => 'страной',
     'currencies_index'       => 'валютой',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Недавний визит',
     'region'                 => 'группировка регионов',
     'regions_index'          => 'группировка регионов',
+    'report'                 => 'отчет',
+    'reports_sale_index'     => 'Продажа товара',
+    'reports_view_index'     => 'товарооборот',
     'rma'                    => 'послепродажным обслуживанием',
     'rma_reason'             => 'Управление причинами возврата',
     'rma_reasons_index'      => 'Причина послепродажного обслуживания',

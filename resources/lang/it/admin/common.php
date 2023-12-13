@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:37:16
+ * @modified   2023-12-12 08:35:31
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'Della classificazione',
     'common_link'            => 'Collegamenti comuni',
     'copyright_buy'          => 'Acquisto di diritti d\'autore',
-    'copyright_hint_text'    => 'Tenete sito del diritto d\'autore in basso, o verso < a href = \"https://beikeshop.com/vip/subscription?type=tab-license\" target \"_blank > l\'autorizzazione all\'acquisto < / >',
+    'copyright_hint_text'    => 'Tenete sito del diritto d\'autore in basso, o verso < a href = \\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\" target \\\\\\\"_blank > l\'autorizzazione all\'acquisto < / >',
     'countries_index'        => 'Statale',
     'country'                => 'Statale',
     'currencies_index'       => 'gestione del denaro',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Recenti visite',
     'region'                 => 'Raggruppamento regionale',
     'regions_index'          => 'Raggruppamento regionale',
+    'report'                 => 'rendiconto',
+    'reports_sale_index'     => 'Vendita di beni',
+    'reports_view_index'     => 'Navigazione marittima',
     'rma'                    => 'Del servizio post vendita',
     'rma_reason'             => 'Del motivo di reso',
     'rma_reasons_index'      => 'Motivo post vendita',

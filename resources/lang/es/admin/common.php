@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:36:01
+ * @modified   2023-12-12 08:35:29
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'Clasificaciones',
     'common_link'            => 'Enlaces comunes',
     'copyright_buy'          => 'Compra de derechos',
-    'copyright_hint_text'    => 'Sitio bajo reserva de derechos de autor, o se oponen a = https://beikeshop.com/vip/subscription?type=tab-license \"target =\" _blank \"> compra autorizado < / a >',
+    'copyright_hint_text'    => 'Sitio bajo reserva de derechos de autor, o se oponen a = https://beikeshop.com/vip/subscription?type=tab-license \\\\\\\"target =\\\\\\\" _blank \\\\\\\"> compra autorizado < / a >',
     'countries_index'        => 'Administración del Estado',
     'country'                => 'Administración del Estado',
     'currencies_index'       => 'administración del dinero',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Recientemente visitado por',
     'region'                 => 'Agrupación regional',
     'regions_index'          => 'Agrupación regional',
+    'report'                 => 'Los estados',
+    'reports_sale_index'     => 'merchandising',
+    'reports_view_index'     => 'Navegación por mercancía',
     'rma'                    => 'servicio postventa',
     'rma_reason'             => 'Motivos de devolución',
     'rma_reasons_index'      => 'Motivo posventa',

@@ -126,6 +126,11 @@ class OrderRepo
             $builder->where('status', $status);
         }
 
+        $statuses = $filters['statuses'] ?? [];
+        if ($statuses) {
+            $builder->whereIn('status', $statuses);
+        }
+
         // 回收站
         if (isset($filters['trashed']) && $filters['trashed']) {
             $builder->onlyTrashed();

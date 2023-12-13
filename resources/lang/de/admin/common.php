@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:34:36
+ * @modified   2023-12-12 08:35:21
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'category management',
     'common_link'            => 'Alte verbindung.',
     'copyright_buy'          => 'Copyright-verträge kaufen.',
-    'copyright_hint_text'    => 'Bitte bewahren sie ihren website unten rechte, Oder nach \"a href =\" https://beikeshop.com/vip/subscription?type=tab-license \"target =\" _blank \"> kaufen ermächtigt/a\"',
+    'copyright_hint_text'    => 'Bitte bewahren sie ihren website unten rechte, Oder nach \\\\\\\"a href =\\\\\\\" https://beikeshop.com/vip/subscription?type=tab-license \\\\\\\"target =\\\\\\\" _blank \\\\\\\"> kaufen ermächtigt/a\\\\\\\"',
     'countries_index'        => 'Landesverwaltung',
     'country'                => 'Landes',
     'currencies_index'       => 'Währungsverwaltung',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Unlängst interviews.',
     'region'                 => 'Regionsgruppierung',
     'regions_index'          => 'Regionsgruppierung',
+    'report'                 => 'Ein bericht.',
+    'reports_sale_index'     => 'Absatz der Waren',
+    'reports_view_index'     => 'Ein schaufenster',
     'rma'                    => 'Kundendienst',
     'rma_reason'             => 'Rücksendegrund',
     'rma_reasons_index'      => 'Nachverkaufsgrund',

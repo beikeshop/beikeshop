@@ -29,4 +29,9 @@ class CartProduct extends Base
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }

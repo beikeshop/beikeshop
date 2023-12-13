@@ -588,3 +588,29 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
   font-size: 12px;
   border: 0 !important;
 }
+
+.table-ranking-list {
+  .ranking-icon {
+    width: 30px;
+  }
+
+  tbody {
+    tr {
+      // 第一名 第二名 第三名 不同的背景色
+      &:nth-child(1) {
+        // 金色
+        background-color: rgba($color: #ffd700, $alpha: .1);
+      }
+
+      &:nth-child(2) {
+        // 银色
+        background-color: rgba($color: #c0c0c0, $alpha: .1);
+      }
+
+      &:nth-child(3) {
+        // 铜色
+        background-color: rgba($color: #cd7f32, $alpha: .1);
+      }
+    }
+  }
+}

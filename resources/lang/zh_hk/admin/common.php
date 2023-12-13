@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:37:06
+ * @modified   2023-12-12 08:35:59
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => '分類管理',
     'common_link'            => '常用鏈接',
     'copyright_buy'          => '版權購買',
-    'copyright_hint_text'    => '請保留網站底部版權，或前往 <a href=\"https://beikeshop.com/vip/subscription?type=tab-license\" target=\"_blank\">購買授權</a>',
+    'copyright_hint_text'    => '請保留網站底部版權，或前往 <a href=\\\\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\\\" target=\\\\\\\\\"_blank\\\\\\\\\">購買授權</a>',
     'countries_index'        => '國家管理',
     'country'                => '國家管理',
     'currencies_index'       => '貨幣管理',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => '最近訪問',
     'region'                 => '區域分組',
     'regions_index'          => '區域分組',
+    'report'                 => '報表',
+    'reports_sale_index'     => '商品銷售',
+    'reports_view_index'     => '商品瀏覽',
     'rma'                    => '售後服務管理',
     'rma_reason'             => '退換貨原因管理',
     'rma_reasons_index'      => '售後原因',

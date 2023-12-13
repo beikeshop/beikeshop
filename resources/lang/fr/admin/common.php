@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:37:02
+ * @modified   2023-12-12 08:35:05
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => 'Catégories',
     'common_link'            => 'Liens fréquemment utilisés',
     'copyright_buy'          => 'Achat de droits',
-    'copyright_hint_text'    => 'Veuillez consulter le site des réserves sur le fond du droit d\'auteur, ou < a href = \"https://beikeshop.com/vip/subscription?type=tab-license target surprenantes de [> < / a > l\' autorisation d\' achat',
+    'copyright_hint_text'    => 'Veuillez consulter le site des réserves sur le fond du droit d\'auteur, ou < a href = \\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license target surprenantes de [> < / a > l\' autorisation d\' achat',
     'countries_index'        => 'Gestion des pays',
     'country'                => 'gestion pays',
     'currencies_index'       => 'Devises',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => 'Plus récemment visité',
     'region'                 => 'groupement de régions',
     'regions_index'          => 'groupement de régions',
+    'report'                 => 'Les états',
+    'reports_sale_index'     => 'Vente de marchandises',
+    'reports_view_index'     => 'Parcourir par marchandise',
     'rma'                    => 'gestion du service après-vente',
     'rma_reason'             => 'Gestion des motifs de retour',
     'rma_reasons_index'      => 'raison après-vente',

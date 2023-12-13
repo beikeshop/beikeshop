@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:36:55
+ * @modified   2023-12-12 08:34:58
  */
 
 return [
@@ -29,7 +29,7 @@ return [
     'category'               => '분류관리',
     'common_link'            => '일반 링크',
     'copyright_buy'          => '판권 구매',
-    'copyright_hint_text'    => '아랫부분 사이트 판권을 유보 해 달라 거나 찾. < a href = https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\"target = _blank 」 > 구매 위임 </a >',
+    'copyright_hint_text'    => '아랫부분 사이트 판권을 유보 해 달라 거나 찾. < a href = https://beikeshop.com/vip/subscription?type=tab-license\\\\\\\\\\\\\"target = _blank 」 > 구매 위임 </a >',
     'countries_index'        => '국가 관리',
     'country'                => '국가관리',
     'currencies_index'       => '화폐 관리',
@@ -76,6 +76,9 @@ return [
     'recent_view'            => '최근 방문',
     'region'                 => '영역 그룹',
     'regions_index'          => '영역 그룹',
+    'report'                 => '보고서',
+    'reports_sale_index'     => '상품 판매',
+    'reports_view_index'     => '상품 스캔',
     'rma'                    => 'A/S 관리',
     'rma_reason'             => '반품교환원인관리',
     'rma_reasons_index'      => 'A/S 사유',

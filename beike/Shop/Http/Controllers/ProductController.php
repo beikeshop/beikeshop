@@ -20,6 +20,7 @@ class ProductController extends Controller
     {
         $relationIds = $product->relations->pluck('id')->toArray();
         $product     = ProductRepo::getProductDetail($product);
+        ProductRepo::viewAdd($product);
 
         $data        = [
             'product'   => (new ProductDetail($product))->jsonSerialize(),
