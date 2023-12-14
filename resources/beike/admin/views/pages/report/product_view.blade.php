@@ -184,6 +184,7 @@
       viewsTrends = res.data.views_trends;
       ordersChart.data.labels = Object.keys(viewsTrends.latest_month.pv_totals);
       ordersChart.data.datasets[0].data = viewsTrends.latest_month.pv_totals;
+      ordersChart.data.datasets[1].data = viewsTrends.latest_month.uv_totals;
       // 同时更新  latest_month, latest_week, latest_year
       latest_month = viewsTrends.latest_month;
       latest_week = viewsTrends.latest_week;
