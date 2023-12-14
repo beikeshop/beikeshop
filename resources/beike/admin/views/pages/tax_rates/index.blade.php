@@ -140,7 +140,7 @@
               name: tax.name,
               rate: tax.rate,
               type: tax.type,
-              region_id: tax.region.id,
+              region_id: tax.region_id,
             }
           }
         },
