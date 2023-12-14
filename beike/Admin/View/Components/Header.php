@@ -86,7 +86,8 @@ class Header extends Component
             }
 
             if (stripos($title, 'admin/common.') !== false) {
-                $tempRouteName = str_replace('s.index', '', $routeName);
+                $routeName     = str_replace(['ies.index', 'ies.create'], 'y', $routeName);
+                $tempRouteName = str_replace(['s.index', 's.create'], '', $routeName);
                 $title         = trans("admin/common.{$tempRouteName}");
             }
 
