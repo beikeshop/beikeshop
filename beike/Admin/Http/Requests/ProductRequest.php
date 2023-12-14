@@ -38,6 +38,7 @@ class ProductRequest extends FormRequest
             'skus.*.sku'          => 'required|string',
             'skus.*.price'        => 'required|numeric',
             'skus.*.cost_price'   => 'numeric',
+            'skus.*.quantity'     => 'numeric|max:2000000000',
         ];
     }
 
@@ -49,6 +50,7 @@ class ProductRequest extends FormRequest
             'skus.*.sku'          => trans('product.sku'),
             'skus.*.price'        => trans('product.price'),
             'skus.*.cost_price'   => trans('product.cost_price'),
+            'skus.*.quantity'     => trans('product.quantity'),
         ];
     }
 }
