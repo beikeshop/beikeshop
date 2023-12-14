@@ -111,7 +111,11 @@ class CartRepo
      */
     public static function selectedCartProducts($customerId)
     {
-        return self::selectedCartProductsBuilder($customerId)->get();
+        $cartProducts = self::selectedCartProductsBuilder($customerId)->get();
+        
+        $cartProducts = hook_filter("cart.repo.selected.products",$cartProducts);
+
+        return $cartProducts;
     }
 
     /**
