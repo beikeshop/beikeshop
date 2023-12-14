@@ -298,24 +298,27 @@
               @foreach ($order->orderShipments as $ship)
               <tr data-id="{{ $ship->id }}">
                 <td>
-                  <div class="edit-show">{{ $ship->express_company }}</div>
-
+                  <div class="edit-show express-company">{{ $ship->express_company }}</div>
+                  @if($expressCompanies)
                   <select class="form-select edit-form express-code d-none" aria-label="Default select example">
-                    @foreach (system_setting('base.express_company', []) as $item)
-                    <option value="{{ $item['code'] }}" {{ $ship->express_code == $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
+                    @foreach ($expressCompanies as $item)
+                      <option value="{{ $item['code'] }}" {{ $ship->express_code == $item['code'] ? 'selected' : '' }}>{{ $item['name'] }}</option>
                     @endforeach
                   </select>
+                  @endif
                 </td>
                 <td>
                   <div class="edit-show">{{ $ship->express_number }}</div>
                   <input type="text" class="form-control edit-form express-number d-none" placeholder="{{ __('order.express_number') }}" value="{{ $ship->express_number }}">
                 </td>
-                <td class="d-flex justify-content-between align-items-center">
-                  {{ $ship->created_at }}
-                  <div class="btn btn-outline-primary btn-sm edit-shipment">{{ __('common.edit') }}</div>
-                  <div class="d-none shipment-tool">
-                    <div class="btn btn-primary btn-sm">{{ __('common.confirm') }}</div>
-                    <div class="btn btn-outline-secondary btn-sm">{{ __('common.cancel') }}</div>
+                <td>
+                  <div class="d-flex justify-content-between align-items-center">
+                    {{ $ship->created_at }}
+                    <div class="btn btn-outline-primary btn-sm edit-shipment">{{ __('common.edit') }}</div>
+                    <div class="d-none shipment-tool">
+                      <div class="btn btn-primary btn-sm">{{ __('common.confirm') }}</div>
+                      <div class="btn btn-outline-secondary btn-sm">{{ __('common.cancel') }}</div>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -364,6 +367,9 @@
 
         $(this).parents('tr').find('.edit-show').addClass('d-none');
         $(this).parents('tr').find('.edit-form').removeClass('d-none');
+        @if(!$expressCompanies)
+        $(this).parents('tr').find('.express-company').removeClass('d-none');
+        @endif
       });
 
       $('.shipment-tool .btn-outline-secondary').click(function() {
