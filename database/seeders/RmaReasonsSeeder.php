@@ -43,7 +43,7 @@ class RmaReasonsSeeder extends Seeder
             ["name" => '{"en": "Received Wrong Item", "zh_cn": "发错商品"}'],
             ["name" => '{"en": "Order Error", "zh_cn": "错误下单"}'],
             ["name" => '{"en": "Faulty, please supply remark", "zh_cn": "商品损坏，请添加备注"}'],
-            ["name" => '{"en": "Other, please supply remark", "zh_cn": "请添加备注"}'],
+            ["name" => '{"en": "Other, please supply remark", "zh_cn": "其他，请添加备注"}'],
         ];
     }
 }
