@@ -94,7 +94,6 @@ $data = $plugin['data'];
         </table>
 
         <div class="mb-4">
-          {{ __('admin/marketing.plugin_ticket') }}
           @if ($data['available'])
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
@@ -542,14 +541,15 @@ $data = $plugin['data'];
         }
 
         if (type == 'service') {
-          setTimeout(() => {
+          this.serviceDialog.show = true
+          this.$nextTick(() => {
             new QRCode('service-info', {
               text: url,
               width: 270,
               height: 270,
               correctLevel : QRCode.CorrectLevel.M
             });
-          }, 500);
+          })
 
           setTimeout(() => {
             self.chekServiceOrderStatus();
