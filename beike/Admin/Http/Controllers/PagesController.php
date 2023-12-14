@@ -117,6 +117,8 @@ class PagesController extends Controller
     {
         PageRepo::deleteById($pageId);
 
+        hook_action('admin.page.destroy.after', $pageId);
+
         return json_success(trans('common.deleted_success'));
     }
 
