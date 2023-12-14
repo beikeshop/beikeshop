@@ -15,7 +15,6 @@
       <div class="orders-right">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
           <button type="button" class="btn btn-sm btn-outline-info btn-info text-white" data-type="latest_month">{{ __('admin/dashboard.latest_month') }}</button>
-          <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_week">{{ __('admin/dashboard.latest_week') }}</button>
           <button type="button" class="btn btn-sm btn-outline-info" data-type="latest_year">{{ __('admin/dashboard.latest_year') }}</button>
         </div>
       </div>
@@ -151,7 +150,6 @@
         amountGradient.addColorStop(1, 'rgba(32,201,151,0)');
 
   const latest_month = @json($order_trends['latest_month']);
-  const latest_week = @json($order_trends['latest_week']);
   const latest_year = @json($order_trends['latest_year']);
 
   const ordersChart = new Chart(orders, {
