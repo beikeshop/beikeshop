@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-12 07:29:42
+ * @modified   2023-12-14 02:45:52
  */
 
 return [
@@ -71,6 +71,9 @@ return [
     'return'               => 'revenir',
     'sales'                => 'ventes',
     'save'                 => 'enregistrer',
+    'save_edit'            => 'Sauvegarder et continuer à éditer',
+    'save_new'             => 'Sauvegarder et continuer nouveau',
+    'save_return'          => 'Sauvegarder et revenir',
     'select_all'           => 'tout sélectionner',
     'show_all'             => 'Voir tout',
     'show_price'           => 'Pour voir les prix',

@@ -1,9 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title')
-{{ __('admin/common.design_app_home_index') }}
-<a class="ms-3 btn btn-outline-primary btn-sm" href="https://beikeshop.com/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>
-@endsection
+@section('title', __('admin/common.design_app_home_index'))
 
 @section('body-class', 'design-app-home')
 
@@ -102,6 +99,8 @@
   </div>
 </div>
 <script>
+  $('.page-title').append('<a class="ms-3 btn btn-outline-primary btn-sm" href="https://beikeshop.com/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>')
+
   var $languages = @json(locales());
   var $locale = '{{ locale() }}';
 

@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-05 10:26:37
+ * @modified   2023-12-14 02:45:38
  */
 
 return [
@@ -19,6 +19,7 @@ return [
     'confirm'              => '確定',
     'confirm_delete'       => '確定要刪除嗎?',
     'contact_us'           => '聯繫我們',
+    'continent'            => '洲',
     'created_at'           => '創建時間',
     'created_success'      => '創建成功!',
     'cropper_size'         => '裁剪框尺寸',
@@ -70,9 +71,9 @@ return [
     'return'               => '返回',
     'sales'                => '銷量',
     'save'                 => '保存',
-    'save_return'          => '儲存並返回',
     'save_edit'            => '儲存並繼續編輯',
     'save_new'             => '儲存並繼續新建',
+    'save_return'          => '儲存並返回',
     'select_all'           => '全選',
     'show_all'             => '查看所有',
     'show_price'           => '以查看價格',

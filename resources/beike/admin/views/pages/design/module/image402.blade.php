@@ -22,8 +22,8 @@
           <div class="pb-images-top">
             <pb-image-selector :is-language="false" v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
-              <span v-if="index == 0 || index == 3">500 x 800</span>
-              <span v-if="index == 1 || index == 2">500 x 490</span>
+              <span v-if="index == 0 || index == 3">500 x 700</span>
+              <span v-if="index == 1 || index == 2">500 x 338</span>
             </div>
           </div>
           <div class="module-edit-title">{{ __('admin/builder.text_word') }}</div>

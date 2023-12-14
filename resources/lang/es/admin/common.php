@@ -29,7 +29,7 @@ return [
     'category'               => 'Clasificaciones',
     'common_link'            => 'Enlaces comunes',
     'copyright_buy'          => 'Compra de derechos',
-    'copyright_hint_text'    => 'Sitio bajo reserva de derechos de autor, o se oponen a = https://beikeshop.com/vip/subscription?type=tab-license \\\\\\\"target =\\\\\\\" _blank \\\\\\\"> compra autorizado < / a >',
+    'copyright_hint_text'    => 'Conserve los derechos de autor en la parte inferior del sitio web o vaya a <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">comprar licencia</a>',
     'countries_index'        => 'Administración del Estado',
     'country'                => 'Administración del Estado',
     'currencies_index'       => 'administración del dinero',

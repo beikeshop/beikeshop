@@ -38,7 +38,7 @@
           <h5 class="page-title">@yield('title')</h5>
           <div class="ms-4 text-danger">@yield('page-title-after')</div>
         </div>
-        <div>@yield('page-title-right')</div>
+        <div class="text-nowrap">@yield('page-title-right')</div>
       </div>
       <div class="container-fluid p-0">
         <div class="content-info">@yield('content')</div>

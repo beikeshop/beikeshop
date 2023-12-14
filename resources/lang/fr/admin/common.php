@@ -29,7 +29,7 @@ return [
     'category'               => 'Catégories',
     'common_link'            => 'Liens fréquemment utilisés',
     'copyright_buy'          => 'Achat de droits',
-    'copyright_hint_text'    => 'Veuillez consulter le site des réserves sur le fond du droit d\'auteur, ou < a href = \\\\\\\"https://beikeshop.com/vip/subscription?type=tab-license target surprenantes de [> < / a > l\' autorisation d\' achat',
+    'copyright_hint_text'    => 'Veuillez conserver les droits d\'auteur en bas du site Web ou allez sur <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">acheter licence</a>',
     'countries_index'        => 'Gestion des pays',
     'country'                => 'gestion pays',
     'currencies_index'       => 'Devises',
