@@ -28,4 +28,5 @@ return [
     'type_repair'      => 'Repair',
     'type_reissue'     => 'Reissue',
     'type_refund'      => 'Refund',
+    'order_number'     => 'Order Number',
 ];

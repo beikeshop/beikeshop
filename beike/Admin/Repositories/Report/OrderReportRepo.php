@@ -29,6 +29,8 @@ class OrderReportRepo
      */
     public static function getLatestMonth($statuses = [])
     {
+        $statuses = $statuses ?: StateMachineService::getValidStatuses();
+
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subMonth(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
@@ -67,6 +69,7 @@ class OrderReportRepo
      */
     public static function getLatestWeek($statuses = [])
     {
+        $statuses    = $statuses ?: StateMachineService::getValidStatuses();
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subWeek(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('DATE(created_at) as date, count(*) as total'))
             ->groupBy('date')
@@ -105,6 +108,7 @@ class OrderReportRepo
      */
     public static function getLatestYear($statuses = [])
     {
+        $statuses    = $statuses ?: StateMachineService::getValidStatuses();
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today(), 'statuses' => $statuses])
             ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
             ->groupBy(['year', 'month'])

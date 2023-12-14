@@ -20,4 +20,6 @@ return [
     'value'          => '汇率值',
     'decimal_place'  => '小数位数',
     'latest_value'   => '最新汇率值',
+
+    'error_value'   => '汇率值必填，且默认货币必须为1',
 ];

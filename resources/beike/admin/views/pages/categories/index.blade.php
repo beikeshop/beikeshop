@@ -11,7 +11,7 @@
       <div class="mt-4" style="" v-if="categories.length">
         <el-tree :data="categories" node-key="id" ref="tree">
           <div class="custom-tree-node d-flex align-items-center justify-content-between w-100" slot-scope="{ node, data }">
-            <div><span>@{{ data.name }}</span></div>
+            <div><span>@{{ data.id }} - @{{ data.name }}</span></div>
             <div class="d-flex align-items-center">
               <span class="me-4 badge bg-success" v-if="data.active">{{ __('common.enabled') }}</span>
               <span class="me-4 badge bg-secondary" v-else>{{ __('common.disabled') }}</span>

@@ -32,7 +32,7 @@
                     <td>{{ $rma['product_name'] }}</td>
                     <td>{{ $rma['sku'] }}</td>
                     <td>{{ $rma['quantity'] }}</td>
-                    <td>{{ $rma['type'] }}</td>
+                    <td>{{ $rma['type_text'] }}</td>
                     <td>{{ $rma['status'] }}</td>
                     <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}"
                         class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>

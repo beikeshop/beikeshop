@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             AttributesSeeder::class,
             SettingsSeeder::class,
             ThemeSeeder::class,
+            RmaReasonsSeeder::class,
         ]);
     }
 

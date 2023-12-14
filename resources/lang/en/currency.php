@@ -19,4 +19,6 @@ return [
     'value'          => 'Value',
     'decimal_place'  => 'Decimal Place',
     'latest_value'   => 'Latest Value',
+
+    'error_value'   => 'Value required, and it must fill in 1 if the currency is default',
 ];

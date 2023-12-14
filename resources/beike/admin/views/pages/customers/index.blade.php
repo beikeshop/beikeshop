@@ -60,8 +60,10 @@
                 <th>{{ __('customer.name') }}</th>
                 <th>{{ __('customer.from') }}</th>
                 <th>{{ __('customer.customer_group') }}</th>
+                @if ($type != 'trashed')
                 <th>{{ __('common.status') }}</th>
                 <th>{{ __('common.examine') }}</th>
+                @endif
                 <th>{{ __('common.created_at') }}</th>
                 @hook('admin.customer.list.column')
                 <th>{{ __('common.action') }}</th>
@@ -79,6 +81,7 @@
                 </td>
                 <td>{{ $customer['from'] }}</td>
                 <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
+                @if ($type != 'trashed')
                 <td>
                   <div class="form-check form-switch">
                     <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $customer['active'] ? 1 : 0 }}" data-id="{{ $customer['id'] }}" @change="turnOnOff($event)" {{ $customer['active'] ? 'checked' : '' }}>
@@ -93,6 +96,7 @@
                       @endforeach
                   </select>
                 </td>
+                @endif
                 <td>{{ $customer['created_at'] }}</td>
                 @hook('admin.customer.list.column_value')
                 <td>

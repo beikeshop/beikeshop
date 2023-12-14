@@ -49,10 +49,11 @@ class CustomerController extends Controller
         $customers = CustomerRepo::list(array_merge($request->only(['name', 'email', 'status', 'from', 'customer_group_id']), ['only_trashed' => true]));
 
         $data = [
-            'customers'        => $customers,
-            'customers_format' => CustomerResource::collection($customers)->jsonSerialize(),
-            'customer_groups'  => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
-            'type'             => 'trashed',
+            'customers'         => $customers,
+            'customers_format'  => CustomerResource::collection($customers)->jsonSerialize(),
+            'customer_groups'   => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
+            'type'              => 'trashed',
+            'statuses'          => CustomerRepo::getStatuses(),
         ];
         $data = hook_filter('admin.customer.trashed.data', $data);
         if ($request->expectsJson()) {

@@ -31,7 +31,6 @@ class ReportController extends Controller
             'amount_by_customers'      => OrderReportRepo::getSaleInfoByCustomers('order_amount', $filter)->toArray(),  // 用户购买金额排行
             'order_trends'             => [
                 'latest_month' => OrderReportRepo::getLatestMonth($statuses),
-                'latest_week'  => OrderReportRepo::getLatestWeek($statuses),
                 'latest_year'  => OrderReportRepo::getLatestYear($statuses),
             ],
         ];
