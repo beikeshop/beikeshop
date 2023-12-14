@@ -32,7 +32,7 @@ return [
     ],
     'boolean'              => ':attribute 字符必须是 true 或 false。',
     'confirmed'            => ':attribute 二次确认不匹配。',
-    'current_password'     => '密码不不正确。',
+    'current_password'     => '密码不正确。',
     'date'                 => ':attribute 必须是一个有效的日期。',
     'date_equals'          => ':attribute 必须相同于 :date。',
     'date_format'          => ':attribute 与给定的格式 :format 不符合。',

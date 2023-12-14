@@ -22,6 +22,9 @@
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.edit.index') ? 'active' : '' }}"
           href="{{ shop_route('account.edit.index') }}">
           <span>{{ __('shop/account/edit.index') }}</span></a>
+        <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.password.index') ? 'active' : '' }}"
+           href="{{ shop_route('account.password.index') }}">
+          <span>{{ __('shop/account/password.index') }}</span></a>
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.order.index') || equal_route('shop.account.order.show') ? 'active' : '' }}"
           href="{{ shop_route('account.order.index') }}">
           <span>{{ __('shop/account/order.index') }}</span></a>

@@ -75,6 +75,15 @@ class Customer extends Authenticatable implements JWTSubject
     }
 
     /**
+     * @param string $password
+     * @return bool
+     */
+    public function matchPassword(string $password): bool
+    {
+        return password_verify($password, $this->password);
+    }
+
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

@@ -52,6 +52,29 @@ class CustomerRepo
         return $customer->update($data);
     }
 
+    /**
+     * Update current password
+     *
+     * @param Customer $customer
+     * @param          $data
+     * @return bool
+     * @throws \Exception
+     */
+    public static function updatePassword(Customer $customer, $data): bool
+    {
+        $oldPassword        = $data['old_password'];
+        $newPassword        = $data['new_password']              ?? '';
+        $newPasswordConfirm = $data['new_password_confirmation'] ?? '';
+
+        if (! $customer->matchPassword($oldPassword)) {
+            throw new \Exception('invalid_password');
+        } elseif ($newPassword != $newPasswordConfirm) {
+            throw new \Exception('new_password_must_keep_same');
+        }
+
+        return $customer->update(['password' => bcrypt($newPassword)]);
+    }
+
     public static function findByEmail($email)
     {
         return Customer::query()->where('email', $email)->first();

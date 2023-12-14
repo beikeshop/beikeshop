@@ -8,6 +8,7 @@ use Beike\Shop\Http\Controllers\Account\ForgottenController;
 use Beike\Shop\Http\Controllers\Account\LoginController;
 use Beike\Shop\Http\Controllers\Account\LogoutController;
 use Beike\Shop\Http\Controllers\Account\OrderController;
+use Beike\Shop\Http\Controllers\Account\PasswordController;
 use Beike\Shop\Http\Controllers\Account\RegisterController;
 use Beike\Shop\Http\Controllers\Account\RmaController;
 use Beike\Shop\Http\Controllers\Account\WishlistController;
@@ -95,6 +96,9 @@ Route::prefix('/')
                 Route::get('/', [AccountController::class, 'index'])->name('index');
                 Route::resource('addresses', AddressController::class);
                 Route::get('edit', [EditController::class, 'index'])->name('edit.index');
+
+                Route::get('password', [PasswordController::class, 'index'])->name('password.index');
+                Route::post('password', [PasswordController::class, 'update'])->name('password.update');
 
                 Route::get('rmas', [RmaController::class, 'index'])->name('rma.index');
                 Route::get('rmas/{id}', [RmaController::class, 'show'])->name('rma.show');
