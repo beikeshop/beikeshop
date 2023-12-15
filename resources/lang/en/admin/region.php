@@ -18,6 +18,6 @@ return [
     'regions_delete' => 'Delete',
     'name'           => 'Name',
     'describe'       => 'Describe',
-    'country'        => 'Country',
+    'country'        => 'Country/Region',
     'zone'           => 'Zone',
 ];

@@ -79,7 +79,7 @@
                   <div>{{ $order->status_format }}</div>
                 </div>
                 <div class="content-wrapper">
-                  <div class="order-product-wrap mb-2">
+                  <div class="order-product-wrap mb-2" onclick="window.location.href='{{ shop_route('account.order.show', ['number' => $order->number]) }}'">
                     @foreach ($order->orderProducts as $product)
                     <div class="product-info d-flex mb-2">
                       <div class="img border d-flex justify-content-center align-items-center wh-60"><img src="{{ $product->image }}" class="img-fluid"></div>
@@ -94,7 +94,7 @@
                 <div class="footer-wrapper">
                   <div class="d-flex justify-content-between">
                     <div class="text-secondary">{{ $order->created_at }}</div>
-                    <div class="fw-bold">{{ __('common.text_total') }}：<span class="amount text-primary">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</span></div>
+                    <div class="fw-bold">{{ __('admin/order.total') }}：<span class="amount text-primary">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</span></div>
                   </div>
                   <div class="footer-btns d-flex justify-content-end mt-2">
                     @if ($order->status == 'unpaid')

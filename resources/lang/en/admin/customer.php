@@ -24,7 +24,7 @@ return [
     'no_address'             => 'The current account has no address',
     'edit_address'           => 'Edit address',
     'address'                => 'Address',
-    'choose_country'         => 'Choose Country',
+    'choose_country'         => 'Choose Country/Region',
     'zones'                  => 'Zones',
     'choose_zones'           => 'Choose Zones',
     'enter_city'             => 'Enter city',
