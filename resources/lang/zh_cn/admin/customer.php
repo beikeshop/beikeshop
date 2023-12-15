@@ -24,7 +24,7 @@ return [
     'no_address'             => '当前账号无地址',
     'edit_address'           => '编辑地址',
     'address'                => '地址',
-    'choose_country'         => '选择国家',
+    'choose_country'         => '选择国家/地区',
     'zones'                  => '省份',
     'choose_zones'           => '选择省份',
     'enter_city'             => '输入城市',

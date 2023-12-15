@@ -55,7 +55,7 @@ return [
     'telephone'                    => '联系电话',
     'email'                        => '邮箱',
     'default_address'              => '默认地址',
-    'default_country_set'          => '默认国家设置',
+    'default_country_set'          => '默认国家/地区设置',
     'default_zone_set'             => '默认省份设置',
     'default_language'             => '默认语言',
     'default_currency'             => '默认货币',

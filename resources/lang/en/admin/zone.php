@@ -10,12 +10,12 @@
  */
 return [
     'zone_name'         => 'Province Name',
-    'country_of_origin' => 'Country Of Origin',
+    'country_of_origin' => 'Country/Region Of Origin',
 
     'zones_index'       => 'Province List',
     'zones_create'      => 'Create Province',
     'zones_update'      => 'Update Province',
     'zones_delete'      => 'Delete Province',
 
-    'error_country'     => 'Please select a country',
+    'error_country'     => 'Please select a Country/Region',
 ];

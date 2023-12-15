@@ -52,7 +52,7 @@ return [
     'currency'                         => 'Currency',
     'language'                         => 'Language',
     'zone'                             => 'Zone',
-    'country'                          => 'Country',
+    'country'                          => 'Country/Region',
     'file_manager'                     => 'File Manager',
     'access_frontend'                  => 'Frontend',
     'copyright_buy'                    => 'Copyright Buy',

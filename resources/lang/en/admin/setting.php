@@ -17,7 +17,7 @@ return [
     'checkout_settings'           => 'checkout settings',
     'customer_approved'           => 'User audit',
     'default_address'             => 'Default Address',
-    'default_country_set'         => 'Default Country Setting',
+    'default_country_set'         => 'Default Country/Region Setting',
     'default_currency'            => 'Default Currency',
     'default_customer_group'      => 'Default Customer Group',
     'default_language'            => 'Default Language',
