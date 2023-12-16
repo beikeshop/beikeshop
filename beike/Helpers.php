@@ -823,7 +823,7 @@ function check_license(): bool
         $registerDomain = '';
     }
     if (empty($registerDomain)) {
-        return false;
+        return true;
     }
 
     return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));

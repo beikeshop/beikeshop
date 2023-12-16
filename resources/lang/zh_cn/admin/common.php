@@ -94,7 +94,7 @@ return [
     'rma_reasons_index'      => '售后原因',
     'customers_index'        => '客户列表',
     'customer_groups_index'  => '客户组',
-    'countries_index'        => '国家/地区管理',
+    'countries_index'        => '国家/地区',
     'zones_index'            => '省份管理',
     'update_nav'             => '更新',
     'update_title'           => '发现新的BeikeShop版本，是否立即更新',
