@@ -9,11 +9,12 @@ class AccountPage
         'go_index'    => '.logo', //beikeshop图标
         'go_account'  => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(1)', //
         'go_Edit'     => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(2)', //编辑信息
-        'go_order'    => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(3)', //查看订单
-        'go_address'  => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(4)', //添加地址
-        'go_Wishlist' => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(5)', //添收藏
-        'go_rma'      => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(6)', //售后
-        'SignOut'     => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(7)', //sign out
+        'change_password'     => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(3)', //修改密码
+        'go_order'    => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(4)', //订单
+        'go_address'  => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(5)', //添加地址
+        'go_Wishlist' => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(6)', //添收藏
+        'go_rma'      => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(8)', //售后
+        'SignOut'     => '.list-group-item.d-flex.justify-content-between.align-items-center:nth-child(8)', //sign out
     ];
 
     public const Address = [

@@ -12,9 +12,10 @@ class AdminPage
         'mg_product'                => '.list-unstyled.navbar-nav li:nth-child(3)', //管理商品
         'mg_customers'              => '.list-unstyled.navbar-nav li:nth-child(4)', //管理客户
         'mg_article'                => '.list-unstyled.navbar-nav li:nth-child(5)', //管理文章
-        'mg_design'                 => '.list-unstyled.navbar-nav li:nth-child(6)', //设计
-        'mg_plugin'                 => '.list-unstyled.navbar-nav li:nth-child(7)', //插件
-        'system_set'                => '.list-unstyled.navbar-nav li:nth-child(8)', //系统设置
+        'mg_report'                => '.list-unstyled.navbar-nav li:nth-child(6)', //报表
+        'mg_design'                 => '.list-unstyled.navbar-nav li:nth-child(7)', //设计
+        'mg_plugin'                 => '.list-unstyled.navbar-nav li:nth-child(8)', //插件
+        'system_set'                => '.list-unstyled.navbar-nav li:nth-child(9)', //系统设置
         'go_catalog'                => '.dropdown-menu.dropdown-menu-end.show li:nth-child(1)', //去往前台
         'personal_center'           => '.dropdown-menu.dropdown-menu-end.show li:nth-child(2)', //个人中心
         'sign_out'                  => '.dropdown-menu.dropdown-menu-end.show li:nth-child(4)', //退出登录

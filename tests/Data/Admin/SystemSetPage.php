@@ -30,8 +30,8 @@ class SystemSetPage
         'express_set'            => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(5)', //快递公司
         'advanced_filter'        => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(6)', //高级筛选
         'email_set'              => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(7)', //邮件设置
-        'close_visitor_checkout' => '#tab-checkout > div:nth-child(1) > div > div > div:nth-child(2) > label', //游客结账  禁用
-        'open_visitor_checkout'  => '#guest_checkout-1', //游客结账  启用
+        'close_visitor_checkout' => '#guest_checkout-0', //游客结账  禁用
+        'open_visitor_checkout'  => '#tab-checkout > div:nth-child(2) > div > div > div:nth-child(1)', //游客结账  启用
     ];
 
     public const System_Express
