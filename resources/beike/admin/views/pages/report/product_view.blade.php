@@ -86,7 +86,7 @@
       labels: Object.keys(latest_month.pv_totals),
       datasets: [
         {
-          label: ["{{ __('admin/report.pv_total') }}"],
+          label: ["{{ __('admin/report.pv_total') }}(PV)"],
           fill: true,
           backgroundColor : orderGradient,
           borderColor : "#4da4f9",
@@ -100,7 +100,7 @@
           pointBackgroundColor: '#4da4f9',
         },
         {
-          label: ["{{ __('admin/report.uv_total') }}"],
+          label: ["{{ __('admin/report.uv_total') }}(UV)"],
           fill: true,
           backgroundColor : amountGradient,
           borderColor : "#20c997",
