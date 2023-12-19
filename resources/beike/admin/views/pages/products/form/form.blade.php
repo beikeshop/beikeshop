@@ -247,6 +247,7 @@
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.origin_price" placeholder="{{ __('admin/product.origin_price') }}">
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.cost_price" placeholder="{{ __('admin/product.cost_price') }}">
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.quantity" placeholder="{{ __('admin/product.quantity') }}">
+                        @hook('admin.product.edit.variables.batch.input.after')
                         <button type="button" class="btn btn-primary text-nowrap" @click="batchSettingVariant">{{ __('common.batch_setting') }}</button>
                         @hook('admin.product.edit.variables.batch.after')
                       </div>
@@ -263,6 +264,7 @@
                           <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
                           <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
                           <th class="w-min-100">{{ __('admin/product.quantity') }}</th>
+                          @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
                           <tr v-for="(sku, skuIndex) in form.skus" :key="skuIndex">
@@ -310,6 +312,7 @@
                             </td>
                             <td><input type="number" class="form-control" v-model="sku.quantity" :name="'skus[' + skuIndex + '][quantity]'"
                                 placeholder="{{ __('admin/product.quantity') }}"></td>
+                            @hook('admin.product.edit.sku.variants.after')
                           </tr>
                         </tbody>
                       </table>
@@ -844,6 +847,7 @@
             if (this.variablesBatch.quantity) {
               this.form.skus[index].quantity = this.variablesBatch.quantity;
             }
+            @stack('admin.product.edit.vue.method.batchSettingVariant')
           })
 
           // this.variablesBatch 对象内除了 variables 之外的值都清空
