@@ -903,8 +903,24 @@ class ThemeSeeder extends Seeder
                             ],
                             [
                                 "title" => [
+                                    "zh_cn" =>"潮流穿搭",
+                                    "en" =>"Trendy outfits"
+                                ],
+                                "products" =>[
+                                    39,
+                                    15,
+                                    1,
+                                    4,
+                                    13,
+                                    7,
+                                    8,
+                                    4
+                                ]
+                            ],
+                            [
+                                "title" => [
                                     "zh_cn" =>"最新促销",
-                                    "en" =>"latest promotions"
+                                    "en" =>"Latest promotions"
                                 ],
                                 "products" =>[
                                     1,

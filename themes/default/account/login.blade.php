@@ -60,7 +60,7 @@
         @endif
       </div>
 
-      <div class="d-flex vr-wrap">
+      <div class="d-flex vr-wrap d-none d-md-flex">
         <div class="vr bg-secondary"></div>
       </div>
       <div class="card">

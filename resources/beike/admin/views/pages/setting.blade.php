@@ -285,7 +285,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <div class="d-flex align-items-center">
-            <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account.edit.crop') }}</h5>
+            <h5 class="modal-title" id="exampleModalLabel">{{ __('shop/account/edit.crop') }}</h5>
             <div class="cropper-size ms-4">{{ __('common.cropper_size') }}：<span></span></div>
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
