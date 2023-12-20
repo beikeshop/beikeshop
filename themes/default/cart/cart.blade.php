@@ -54,7 +54,7 @@
                     <td>
                       <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="'products/' + product.product_id" v-text="product.name"></a>
                       <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
-                      <div class="price text-muted">@{{ product.price_format }}</div>
+                      <div class="price text-muted" v-html="product.price_format"></div>
                     </td>
                     <td>
                       <div class="quantity-wrap">
@@ -65,7 +65,7 @@
                         </div>
                       </div>
                     </td>
-                    <td>@{{ product.subtotal_format }}</td>
+                    <td><div class="sub-total" v-html="product.subtotal_format"></div></td>
                     <td class="text-end">
                       <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
                         <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
