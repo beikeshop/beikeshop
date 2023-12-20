@@ -54,6 +54,7 @@ class WishlistTest extends DuskTestCase
                 ->pause(1000)
             //8.断言
                 ->assertUrlIs($ProductUrl);
+                //->press(AccountPage::Wishlist['remove_Wishlist']);
         });
     }
 }

@@ -26,7 +26,7 @@ class CustomerPage
         'pwd'            => '#pane-customer > div > div:nth-child(3) > div > div > input',
         'customer_group' => '#pane-customer > div > div:nth-child(4) > div > div > div.el-input.el-input--suffix > span > span > i',
         'state'          => '#pane-customer > div > div:nth-child(5) > div > div > span',
-        'save_btn'       => '#pane-customer > div > div:nth-child(6) > div > button',
+        'save_btn'       => '#pane-customer > div > div:nth-child(7) > div > button',
 
     ];
 
@@ -34,9 +34,9 @@ class CustomerPage
         //创建客户
         'cre_customer' => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button',
         //编辑客户
-        'edit_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(8) > a',
+        'edit_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a',
         //删除客户
-        'del_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(8) > button',
+        'del_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > button',
         'get_assert'   => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(2)',
         'sure_btn'     => '确定',
 
@@ -65,8 +65,8 @@ class CustomerPage
 
     public const Empty_Recycle = [
         'empty_btn'   => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button', //清空数据按钮
-        'recycle_btn' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > a', //恢复按钮
-        'recycle_del' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(8) > button', //删除按钮
+        'recycle_btn' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(7) > a', //恢复按钮
+        'recycle_del' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(7) > button', //删除按钮
         //获取即将被删除的客户email
         'customer_text' => '#customer-app > div.card-body > div.table-push > table > tbody > tr > td:nth-child(2)',
         'sure_btn'      => '确定',

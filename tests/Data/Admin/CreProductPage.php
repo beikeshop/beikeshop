@@ -15,7 +15,7 @@ class CreProductPage
         'quantity'     => 'skus[0][quantity]', //数量
         'Enable'       => '#active-1',
         'Disable'      => '#active-0',
-        'save_btn'     => '.btn.btn-lg.btn-primary.submit-form', //保存
+        'save_btn'     => '#content > div.container-fluid.p-0 > div.page-bottom-btns > button.btn.w-min-100.btn-lg.btn-default.submit-form.ms-2', //保存
     ];
 
     public const Product_Assert = [

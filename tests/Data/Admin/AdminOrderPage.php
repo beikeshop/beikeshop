@@ -6,9 +6,9 @@ class AdminOrderPage
 {
     public const Right = [
         'url'          => '/Admin/orders',
-        'search_order' => '#app > form > div:nth-child(1) > div:nth-child(1) > div > div > input', //搜索栏--订单号
-        'search_bth'   => '#app > div > div > button:nth-child(1)', //搜索按钮
-        'view_btn'     => '#customer-app > div > div.table-push > table > tbody > tr > td:nth-child(9) > a', //查看按钮
+        'search_order' => '#orders-app > div > div.bg-light.p-4.mb-3 > form > div:nth-child(1) > div:nth-child(1) > div > div > input', //搜索栏--订单号
+        'search_bth'   => '#orders-app > div > div.bg-light.p-4.mb-3 > div > div > button:nth-child(1)', //搜索按钮
+        'view_btn'     => '#orders-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(10) > a', //查看按钮
     ];
 
     public const Child = [
@@ -32,7 +32,7 @@ class AdminOrderPage
         'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付//
 
         'express_1'    => '.el-scrollbar__view.el-select-dropdown__list', //选择第一个快递
-        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号
+        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号  #orders-app > div > div.bg-light.p-4.mb-3 > form > div:nth-child(1) > div:nth-child(1) > div > div > input
         'submit'       => '#app > form > div:nth-child(7) > div > button', //提交按钮
         'submit_btn2'  => '#app > form > div:nth-child(5) > div > button', //提交按钮
         //#app > form > div:nth-child(5) > div > button
