@@ -159,7 +159,7 @@ class OrderReportRepo
 
     public static function getSaleInfoByCustomers($order, $filter)
     {
-        $builder = Order::query()->with(['customer']);
+        $builder = Order::query()->with(['customer'])->where('customer_id', '>', 0);
 
         $order_statuses = $filters['order_statuses'] ?? StateMachineService::getValidStatuses();
         if ($order_statuses) {
