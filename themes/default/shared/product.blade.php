@@ -1,5 +1,7 @@
 <div class="product-wrap {{ request('style_list') ?? '' }}">
   <div class="image">
+    @hook('product_list.item.image.tag')
+
     <a href="{{ $product['url'] }}">
       <div class="image-old">
         <img
@@ -85,4 +87,6 @@
       </div>
     @endif
   </div>
+
+  @hook('product_list.item.after')
 </div>
