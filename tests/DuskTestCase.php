@@ -50,7 +50,7 @@ abstract class DuskTestCase extends BaseTestCase
     protected function baseUrl()
     {
 
-        return 'http://beikeshop.com';
+        return 'http://beikeshop.test';
 
     }
 
