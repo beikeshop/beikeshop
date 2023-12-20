@@ -12,7 +12,7 @@ class AdminPage
         'mg_product'                => '.list-unstyled.navbar-nav li:nth-child(3)', //管理商品
         'mg_customers'              => '.list-unstyled.navbar-nav li:nth-child(4)', //管理客户
         'mg_article'                => '.list-unstyled.navbar-nav li:nth-child(5)', //管理文章
-        'mg_report'                => '.list-unstyled.navbar-nav li:nth-child(6)', //报表
+        'mg_report'                 => '.list-unstyled.navbar-nav li:nth-child(6)', //报表
         'mg_design'                 => '.list-unstyled.navbar-nav li:nth-child(7)', //设计
         'mg_plugin'                 => '.list-unstyled.navbar-nav li:nth-child(8)', //插件
         'system_set'                => '.list-unstyled.navbar-nav li:nth-child(9)', //系统设置
