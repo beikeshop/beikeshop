@@ -19,6 +19,7 @@ class SkuDetail extends JsonResource
     {
         $result = [
             'id'                  => $this->id,
+            'product_id'          => $this->product_id,
             'variants'            => $this->variants ?: [],
             'position'            => $this->position,
             'images'              => array_map(function ($image) {
