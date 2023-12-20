@@ -31,7 +31,7 @@ class ProductDetail extends JsonResource
             ];
         }
 
-        return [
+        $data = [
             'id'               => $this->id,
             'name'             => $this->description->name             ?? '',
             'description'      => $this->description->content          ?? '',
@@ -54,6 +54,8 @@ class ProductDetail extends JsonResource
             'in_wishlist'      => $this->inCurrentWishlist->id ?? 0,
             'active'           => (bool) $this->active,
         ];
+
+        return hook_filter('resource.product.detail', $data);
     }
 
     /**
