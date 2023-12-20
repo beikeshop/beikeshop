@@ -80,6 +80,9 @@
             <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price" href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}</div>
           </div>
           @endif
+
+          @hook('product.detail.price.after')
+
           @endhookwrapper
           <div class="stock-and-sku mb-lg-4 mb-2">
             @hookwrapper('product.detail.quantity')
