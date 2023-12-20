@@ -1,12 +1,12 @@
 @if ($paginator->hasPages())
   @if(is_mobile())
     <div class="mobile-paginator">
-      <a class="btn {{ !$paginator->previousPageUrl() ? 'disabled' : '' }}" href="{{ $paginator->previousPageUrl() ?? 'javascript:void(0)' }}"><i class="bi bi-chevron-left"></i> @lang('pagination.previous')</a>
+      <a class="btn bg-white {{ !$paginator->previousPageUrl() ? 'disabled' : '' }}" href="{{ $paginator->previousPageUrl() ?? 'javascript:void(0)' }}"><i class="bi bi-chevron-left"></i> @lang('pagination.previous')</a>
       <div class="input-group">
         <input type="text" class="form-control" id="mb-page-input" onkeyup="this.value=this.value.replace(/\D/g,'')" value="{{ $paginator->currentPage() }}">
         <span class="input-group-text">{{ $paginator->lastPage() }}</span>
       </div>
-      <a class="btn {{ !$paginator->nextPageUrl() ? 'disabled' : '' }}" href="{{ $paginator->nextPageUrl() ?? 'javascript:void(0)' }}">@lang('pagination.next') <i class="bi bi-chevron-right"></i></a>
+      <a class="btn bg-white {{ !$paginator->nextPageUrl() ? 'disabled' : '' }}" href="{{ $paginator->nextPageUrl() ?? 'javascript:void(0)' }}">@lang('pagination.next') <i class="bi bi-chevron-right"></i></a>
     </div>
 
     <script>

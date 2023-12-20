@@ -65,6 +65,8 @@
                 @endif
               </table>
             </div>
+
+            {{ $orders->links('shared/pagination/bootstrap-4') }}
           </div>
         </div>
         @else
@@ -108,6 +110,8 @@
               </div>
             </div>
             @endforeach
+
+            {{ $orders->links('shared/pagination/bootstrap-4') }}
           @else
             <x-shop-no-data />
           @endif
