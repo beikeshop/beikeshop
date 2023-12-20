@@ -322,7 +322,7 @@ class FileManagerService
     private function handleImage($filePath, $baseName): array
     {
         $path     = "catalog{$filePath}";
-        $realPath = $this->fileBasePath . str_replace($this->basePath, '', $filePath);
+        $realPath = str_replace($this->fileBasePath . $this->basePath, $this->fileBasePath, $this->fileBasePath . $filePath);
 
         $mime = '';
         if (file_exists($realPath)) {
