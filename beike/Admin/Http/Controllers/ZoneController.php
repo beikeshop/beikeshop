@@ -45,6 +45,7 @@ class ZoneController extends Controller
     public function update(Request $request, int $id)
     {
         $zone = ZoneRepo::update($id, $request->only('country_id', 'name', 'code', 'sort_order', 'status'));
+        $zone->load('country');
 
         return json_success(trans('common.updated_success'), $zone);
     }
