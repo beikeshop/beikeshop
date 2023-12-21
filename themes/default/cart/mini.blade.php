@@ -20,7 +20,7 @@
             <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>
             <div class="product-bottom d-flex justify-content-between align-items-center">
               <div class="price d-flex align-items-center">
-                {{ $cart['price_format'] }} x
+                {!! $cart['price_format'] !!} x
                 <input type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"
                 data-id="{{ $cart['cart_id'] }}" data-sku="{{ $cart['sku_id'] }}" class="form-control p-1" value="{{ $cart['quantity'] }}">
               </div>
