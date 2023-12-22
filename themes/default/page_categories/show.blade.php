@@ -34,7 +34,7 @@
                         href="{{ type_route('page', $page) }}">{{ $page->description->title }}</a></h5>
                     <p class="fs-6 mb-3 text-secondary">{{ $page->created_at }}</p>
                     @if ($page->description->summary)
-                      <p class="card-text mb-4">{{ $page->description->summary ?? '' }}</p>
+                      <p class="card-text mb-4 text-summary">{{ $page->description->summary ?? '' }}</p>
                     @endif
                     <div class="text-danger"><a
                         href="{{ type_route('page', $page) }}">{{ __('shop/account.check_details') }}<i
