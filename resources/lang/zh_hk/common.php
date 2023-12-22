@@ -99,4 +99,5 @@ return [
     'view_more'            => '查看更多',
     'whether_open'         => '是否開啟',
     'yes'                  => '是',
+    'text_total'           => '總計',
 ];

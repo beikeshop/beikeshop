@@ -99,4 +99,5 @@ return [
     'view_more'            => 'Voir plus de',
     'whether_open'         => 'Que ce soit pour ouvrir',
     'yes'                  => 'Oui',
+    'text_total'           => 'Total',
 ];

@@ -99,4 +99,5 @@ return [
     'view_more'            => 'Lihat lebih',
     'whether_open'         => 'Apakah itu dihidupkan atau tidak',
     'yes'                  => 'Iya',
+    'text_total'           => 'Jumlah',
 ];
