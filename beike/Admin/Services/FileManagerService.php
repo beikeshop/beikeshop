@@ -267,14 +267,39 @@ class FileManagerService
      */
     public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
-        $savePath = $this->basePath . $savePath;
-        if (is_file(public_path('catalog' . $savePath . '/' . $originName))) {
-            $originNameInfo = pathinfo($originName);
-            $originName     = $originNameInfo['filename'] . '-' . current_user()->id . '-' . time() . '.' . $originNameInfo['extension'];
-        }
-        $filePath = $file->storeAs($savePath, $originName, 'catalog');
+        $originName = $this->getUniqueFileName($savePath, $originName);
+        $filePath = $file->storeAs($this->basePath . $savePath, $originName, 'catalog');
 
         return asset('catalog/' . $filePath);
+    }
+
+    public function getUniqueFileName($savePath, $originName): string
+    {
+        $originName = $this->getNewFileName($originName);
+        if (is_file(public_path('catalog' . $this->basePath . $savePath . '/' . $originName))) {
+            $originName     = $this->getUniqueFileName($savePath, $originName);
+        }
+
+        return $originName;
+    }
+
+    public function getNewFileName($originName): string
+    {
+        $originNameInfo = pathinfo($originName);
+
+        $fileName = $originNameInfo['filename'];
+        $index = 1;
+
+        $hyphenPos = mb_strrpos($fileName, '-');
+        $indexPending = mb_substr($fileName, $hyphenPos + 1);
+        if (is_numeric($indexPending)) {
+            $fileName = mb_substr($fileName, 0, $hyphenPos);
+            $index = $indexPending + 1;
+        }
+
+        $originName     = $fileName . '-' . $index . '.' . $originNameInfo['extension'];
+
+        return $originName;
     }
 
     /**
