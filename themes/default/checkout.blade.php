@@ -130,7 +130,7 @@
                       </div>
                     </div>
                     <div class="price text-end">
-                      <div>{{ $cart['price_format'] }}</div>
+                      <div>{!! $cart['price_format'] !!}</div>
                       <div class="quantity">x {{ $cart['quantity'] }}</div>
                     </div>
                   </div>

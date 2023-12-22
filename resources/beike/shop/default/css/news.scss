@@ -27,5 +27,11 @@
         flex: 0 0 100px;
       }
     }
+
+    .text-summary {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
   }
 }
