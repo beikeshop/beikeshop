@@ -99,6 +99,10 @@
       justify-content: center;
       transition: all .2s ease-in-out;
 
+      @media (max-width: 992px) {
+        display: none;
+      }
+
       .btn-add-cart {
         flex: 1;
       }
