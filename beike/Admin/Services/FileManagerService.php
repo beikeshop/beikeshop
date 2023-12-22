@@ -275,8 +275,8 @@ class FileManagerService
 
     public function getUniqueFileName($savePath, $originName): string
     {
-        $originName = $this->getNewFileName($originName);
         if (is_file(public_path('catalog' . $this->basePath . $savePath . '/' . $originName))) {
+            $originName = $this->getNewFileName($originName);
             $originName     = $this->getUniqueFileName($savePath, $originName);
         }
 
