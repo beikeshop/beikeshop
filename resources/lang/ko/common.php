@@ -99,4 +99,5 @@ return [
     'view_more'            => '자세히 보기',
     'whether_open'         => '열지 말지',
     'yes'                  => '예',
+    'text_total'           => '전체',
 ];

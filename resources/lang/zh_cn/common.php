@@ -101,4 +101,5 @@ return [
     'login'                => '登录',
     'show_price'           => '以查看价格',
     'continent'            => '洲',
+    'text_total'           => '总计',
 ];

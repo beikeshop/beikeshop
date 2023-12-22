@@ -99,4 +99,5 @@ return [
     'view_more'            => 'もっと調べます',
     'whether_open'         => '開くかどうか',
     'yes'                  => 'はい',
+    'text_total'           => '合計',
 ];

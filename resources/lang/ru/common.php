@@ -99,4 +99,5 @@ return [
     'view_more'            => 'Проверь еще.',
     'whether_open'         => 'открывать ли',
     'yes'                  => 'да',
+    'text_total'           => 'Итого',
 ];
