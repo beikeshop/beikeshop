@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-12-22 09:26:33
+ * @LastEditTime  2023-12-23 12:52:09
  */
 
 $(function () {
@@ -24,16 +24,8 @@ $(function () {
 
   // 购物车侧边栏弹出
   $(document).on("click", ".btn-right-cart", function () {
-    if (!config.isLogin && (config.loginShowPrice || !config.guestCheckout)) {
-      layer.open({
-        type: 2,
-        title: '',
-        shadeClose: true,
-        scrollbar: false,
-        area: ['900px', '600px'],
-        skin: 'login-pop-box',
-        content: 'login?iframe=true' //iframe的url
-      });
+    if (!config.isLogin && !config.guestCheckout) {
+      bk.openLogin()
       return;
     }
 
