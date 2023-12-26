@@ -59,7 +59,7 @@
             <x-admin::form.row title="{{ __('admin/setting.license_code') }}">
               <div class="input-group wp-400">
                 <input type="text" class="form-control" name="license_code" placeholder="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}">
-                <button class="btn btn-outline-primary get-license-code" type="button">Button</button>
+                <button class="btn btn-outline-primary get-license-code" type="button">{{ __('admin/setting.license_code_get') }}</button>
               </div>
             </x-admin::form.row>
             @hook('admin.setting.general.after')
@@ -352,6 +352,26 @@
           $('div').removeClass('active-line');
         }, 1200);
       }
+
+      $('.get-license-code').click(function (event) {
+        $http.get(`${config.api_url}/api/licensed`, {domain: config.app_url}).then((res) => {
+          if (res.license_code == '') {
+            layer.alert('{{ __('admin/setting.license_code_get_error') }}', {
+              icon: 7,
+              btn: ['{{ __('common.cancel') }}', '{{ __('admin/setting.license_Buy') }}'],
+              title: '{{__("common.text_hint")}}',
+              btn2: function(index, layero) {
+                window.open('{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license');
+                layer.close(index);
+              }
+            });
+
+            return;
+          }
+
+          $('input[name="license_code"]').val(res.license_code);
+        })
+      })
     });
 
   </script>
