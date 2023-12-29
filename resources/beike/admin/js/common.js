@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2023-11-29 16:26:45
+ * @LastEditTime  2023-12-25 18:12:10
  */
 
 export default {
@@ -19,6 +19,7 @@ export default {
       skin: 'file-manager-box',
       scrollbar: false,
       shade: 0.4,
+      resize: false,
       area: ['1060px', '680px'],
       content: `${base}/file_manager${params}`,
       success: function(layerInstance, index) {

@@ -138,7 +138,7 @@
       <div v-if="images.length" class="content-center"
         v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus, imgMove: imgMove }">
         <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index"
-          @click="checkedImage(index)">
+          @click="checkedImage(index)" @dblclick="checkedImageDouble(index)">
           <div class="img">
             <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
             <img v-else :src="file.url" draggable="false" />
@@ -566,6 +566,11 @@
 
           this.images.map((e, i) => i != index ? e.selected = false : '')
           this.images[index].selected = true
+        },
+
+        checkedImageDouble(index) {
+          this.images.map((e, i) => i != index ? e.selected = false : e.selected = true)
+          this.fileChecked()
         },
 
         // 选取
