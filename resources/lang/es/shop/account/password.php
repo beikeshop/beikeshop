@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Cambiar mi contraseña',
-    'new_password' => 'Una nueva contraseña',
+    'index'                     => 'Cambiar mi contraseña',
+    'new_password'              => 'Una nueva contraseña',
     'new_password_confirmation' => 'Nueva contraseña confirmada',
-    'new_password_err' => 'Contraseñas no coinciden',
-    'old_password' => 'La contraseña original',
-    'origin_password_fail' => 'Contraseña original incorrecta',
-    'password_edit_success' => 'Contraseña cambiada con éxito',
+    'new_password_err'          => 'Contraseñas no coinciden',
+    'old_password'              => 'La contraseña original',
+    'origin_password_fail'      => 'Contraseña original incorrecta',
+    'password_edit_success'     => 'Contraseña cambiada con éxito',
 ];

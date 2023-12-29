@@ -268,7 +268,7 @@ class FileManagerService
     public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
         $originName = $this->getUniqueFileName($savePath, $originName);
-        $filePath = $file->storeAs($this->basePath . $savePath, $originName, 'catalog');
+        $filePath   = $file->storeAs($this->basePath . $savePath, $originName, 'catalog');
 
         return asset('catalog/' . $filePath);
     }
@@ -276,7 +276,7 @@ class FileManagerService
     public function getUniqueFileName($savePath, $originName): string
     {
         if (is_file(public_path('catalog' . $this->basePath . $savePath . '/' . $originName))) {
-            $originName = $this->getNewFileName($originName);
+            $originName     = $this->getNewFileName($originName);
             $originName     = $this->getUniqueFileName($savePath, $originName);
         }
 
@@ -288,13 +288,13 @@ class FileManagerService
         $originNameInfo = pathinfo($originName);
 
         $fileName = $originNameInfo['filename'];
-        $index = 1;
+        $index    = 1;
 
-        $hyphenPos = mb_strrpos($fileName, '-');
+        $hyphenPos    = mb_strrpos($fileName, '-');
         $indexPending = mb_substr($fileName, $hyphenPos + 1);
         if (is_numeric($indexPending)) {
             $fileName = mb_substr($fileName, 0, $hyphenPos);
-            $index = $indexPending + 1;
+            $index    = $indexPending + 1;
         }
 
         $originName     = $fileName . '-' . $index . '.' . $originNameInfo['extension'];

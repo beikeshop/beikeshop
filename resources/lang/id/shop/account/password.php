@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Ubah sandi',
-    'new_password' => 'Kata sandi baru',
+    'index'                     => 'Ubah sandi',
+    'new_password'              => 'Kata sandi baru',
     'new_password_confirmation' => 'Sandi baru dikonfirmasi.',
-    'new_password_err' => 'Kata sandi tidak konsisten',
-    'old_password' => 'Sandi asli',
-    'origin_password_fail' => 'Sandi asli salah',
-    'password_edit_success' => 'Pengubahan sandi berhasil.',
+    'new_password_err'          => 'Kata sandi tidak konsisten',
+    'old_password'              => 'Sandi asli',
+    'origin_password_fail'      => 'Sandi asli salah',
+    'password_edit_success'     => 'Pengubahan sandi berhasil.',
 ];

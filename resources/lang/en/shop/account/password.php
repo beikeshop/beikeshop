@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Change password',
-    'new_password' => 'New password',
+    'index'                     => 'Change password',
+    'new_password'              => 'New password',
     'new_password_confirmation' => 'New password confirmation',
-    'new_password_err' => 'Password inconsistency',
-    'old_password' => 'Old password',
-    'origin_password_fail' => 'Old password error',
-    'password_edit_success' => 'Password changed successfully',
+    'new_password_err'          => 'Password inconsistency',
+    'old_password'              => 'Old password',
+    'origin_password_fail'      => 'Old password error',
+    'password_edit_success'     => 'Password changed successfully',
 ];

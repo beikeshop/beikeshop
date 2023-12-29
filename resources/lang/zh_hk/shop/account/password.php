@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => '修改密碼',
-    'new_password' => '新密碼',
+    'index'                     => '修改密碼',
+    'new_password'              => '新密碼',
     'new_password_confirmation' => '新密碼確認',
-    'new_password_err' => '密碼不一致',
-    'old_password' => '原密碼',
-    'origin_password_fail' => '原密碼錯誤',
-    'password_edit_success' => '密碼修改成功',
+    'new_password_err'          => '密碼不一致',
+    'old_password'              => '原密碼',
+    'origin_password_fail'      => '原密碼錯誤',
+    'password_edit_success'     => '密碼修改成功',
 ];

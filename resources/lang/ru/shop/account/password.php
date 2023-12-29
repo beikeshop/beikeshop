@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Измени код.',
-    'new_password' => 'Новый пароль.',
+    'index'                     => 'Измени код.',
+    'new_password'              => 'Новый пароль.',
     'new_password_confirmation' => 'Новый пароль подтвержден.',
-    'new_password_err' => 'Код не совпадает.',
-    'old_password' => 'Оригинальный код.',
-    'origin_password_fail' => 'Оригинальная ошибка.',
-    'password_edit_success' => 'Код изменен.',
+    'new_password_err'          => 'Код не совпадает.',
+    'old_password'              => 'Оригинальный код.',
+    'origin_password_fail'      => 'Оригинальная ошибка.',
+    'password_edit_success'     => 'Код изменен.',
 ];

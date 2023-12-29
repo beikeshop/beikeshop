@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Codes ändern.',
-    'new_password' => 'Neuer code.',
+    'index'                     => 'Codes ändern.',
+    'new_password'              => 'Neuer code.',
     'new_password_confirmation' => 'Neuer code bestätigt.',
-    'new_password_err' => 'Die codes stimmen nicht überein.',
-    'old_password' => 'Der ursprüngliche code.',
-    'origin_password_fail' => 'Falsches passwort',
-    'password_edit_success' => 'Kryptographie bestätigt.',
+    'new_password_err'          => 'Die codes stimmen nicht überein.',
+    'old_password'              => 'Der ursprüngliche code.',
+    'origin_password_fail'      => 'Falsches passwort',
+    'password_edit_success'     => 'Kryptographie bestätigt.',
 ];
