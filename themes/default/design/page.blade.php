@@ -32,11 +32,13 @@
         @endif
       @elseif (!$content['items'] and $design)
         <div class="row">
-          @for ($s = 0; $s < 4; $s++) <div class="col-6 col-md-4 col-lg-3">
+          @for ($s = 0; $s < 4; $s++)
+          <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">
               <div class="image"><a href="javascript:void(0)"><img src="{{ asset('catalog/placeholder.png') }}" class="img-fluid"></a></div>
               <div class="pages-name">请配置文章</div>
             </div>
+          </div>
           @endfor
         </div>
       </div>
