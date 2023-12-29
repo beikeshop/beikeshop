@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'パスワードを変更します',
-    'new_password' => '新しいパスワードです',
+    'index'                     => 'パスワードを変更します',
+    'new_password'              => '新しいパスワードです',
     'new_password_confirmation' => '新しいパスワードの確認です',
-    'new_password_err' => 'パスワードが一致しません',
-    'old_password' => '元のパスワードです',
-    'origin_password_fail' => 'パスワードが間違っています。',
-    'password_edit_success' => 'パスワード変更に成功しました',
+    'new_password_err'          => 'パスワードが一致しません',
+    'old_password'              => '元のパスワードです',
+    'origin_password_fail'      => 'パスワードが間違っています。',
+    'password_edit_success'     => 'パスワード変更に成功しました',
 ];

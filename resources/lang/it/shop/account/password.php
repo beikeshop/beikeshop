@@ -10,11 +10,11 @@
  */
 
 return [
-    'index' => 'Modifica della password',
-    'new_password' => 'Nuove password',
+    'index'                     => 'Modifica della password',
+    'new_password'              => 'Nuove password',
     'new_password_confirmation' => 'Conferma della nuova password',
-    'new_password_err' => 'La parola d\'ordine non è coerente',
-    'old_password' => 'Codice iniziale',
-    'origin_password_fail' => 'Errore della parola iniziale',
-    'password_edit_success' => 'Modifica password riuscita',
+    'new_password_err'          => 'La parola d\'ordine non è coerente',
+    'old_password'              => 'Codice iniziale',
+    'origin_password_fail'      => 'Errore della parola iniziale',
+    'password_edit_success'     => 'Modifica password riuscita',
 ];
