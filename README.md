@@ -19,7 +19,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 
 ## BeikeShop系统亮点
 - 0元起步：BeikeShop 是真正的独立站，代码100%开源，数据信息100%自主可控
-- 基于 Laravel 9 框架：BeikeShop 使用 Laravel 9 框架进行开发，拥有成熟的框架支持
+- 基于 Laravel 10 框架：BeikeShop 使用 Laravel 10 框架进行开发，拥有成熟的框架支持
 - 无佣金和手续费：BeikeShop 没有佣金、年费或手续费，降低了建站成本
 - 微内核和插件化：采用微内核架构和插件化设计，使系统易维护 & 扩展
 - 清晰的代码分层和格式规范：系统代码采用分层清晰、格式规范的结构，提高代码的可读性和可维护性
@@ -30,7 +30,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 - 严格遵循 MVC 架构：系统严格遵循 MVC 架构，提高了代码的可维护性和可扩展性
 - 操作简单易上手：BeikeShop 操作简单，易于上手，可以快速上线使用
 
-![ ](https://beikeshop.com/readme/README-2.png)
+![系统亮点](https://beikeshop.com/readme/README-2.png)
 
 <br>
 
@@ -50,20 +50,34 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 <br>
 <br>
 
+
+
+
+
+
+
+
+
+
+
 ## 页面展示
 
-![ ](https://beikeshop.com/readme/README-7.png)
-![ ](https://beikeshop.com/readme/README-5.png)
-![ ](https://beikeshop.com/readme/README-6.png)
-![ ](https://beikeshop.com/readme/README-8.png)
-![ ](https://beikeshop.com/readme/README-9.png)
+![页面展示1_商城DIY装修](https://beikeshop.com/readme/README-3.png)
+![页面展示2_商品列表页](https://beikeshop.com/readme/README-4.png)
+![页面展示3_商品详情页](https://beikeshop.com/readme/README-5.png)
+![页面展示4_后台商品列表](https://beikeshop.com/readme/README-6.png)
+![页面展示5_后台功能搜索](https://beikeshop.com/readme/README-7.png)
+
+=====================
 
 ## 技术服务展示
-![ ](https://beikeshop.com/readme/README-4.png)
+![服务展示1_](https://beikeshop.com/readme/README-8.png)
+![服务展示2_](https://beikeshop.com/readme/README-9.png)
+![服务展示3_](https://beikeshop.com/readme/README-10.png)
 
 ## 软件架构
-使用语言 PHP 8.0   
-基于 Laravel 9 框架  
+使用语言 PHP 8.1   
+基于 Laravel 10 框架  
 前端 Blade 模板 + Vue
 
 ## 环境要求
@@ -90,7 +104,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 
 
 <a href="https://beikeshop.com/download">
-    <img src="https://beikeshop.com/readme/README-3.png">
+    <img src="https://beikeshop.com/readme/README-11.png">
 </a>
 
 ## 安装教程(面向非开发者)
@@ -117,8 +131,8 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 1. 新建 Merge Request
 
 ## 特别鸣谢
-插件开发者：撸串青年、Aegis  
-PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo  
+插件开发者：撸串青年、老柳、Aegis、olives等
+PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo等
 感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！  
 
 ## QQ交流群： 
