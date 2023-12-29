@@ -31,13 +31,5 @@ $(document).on('click', '.quantity-wrap .right i, .quantity-wrap-line .right i',
 });
 
 $(document).on('click','.login-before-show-price',function () {
-  layer.open({
-    type: 2, 
-    title: '',
-    shadeClose: true,
-    scrollbar: false,
-    area: ['900px', '600px'],
-    skin: 'login-pop-box',
-    content: 'login?iframe=true' //iframe的url
-  });
+  bk.openLogin()
 })
