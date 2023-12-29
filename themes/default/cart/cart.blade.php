@@ -191,7 +191,10 @@
           })
         },
 
-        setUpdateData(res) {
+        setUpdateData(res) {  
+          if(res.status != 'success'){
+            layer.msg(res.message)
+          }            
           this.products = res.data.carts
           this.amount_format = res.data.amount_format
           this.total_quantity = res.data.quantity

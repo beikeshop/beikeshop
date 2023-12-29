@@ -126,14 +126,19 @@ $(function () {
   $(document).on("change", "#offcanvas-right-cart .price input", function () {
     const [id, sku_id, quantity] = [$(this).data('id'), $(this).data('sku'), $(this).val() * 1];
     if ($(this).val() === '') $(this).val(1);
-
+    let that = this;
     $http.put(`/carts/${id}`, {
       quantity: quantity,
       sku_id
     }, {
       hload: true
     }).then((res) => {
-      updateMiniCartData(res);
+       if(res.status != 'success'){
+        layer.msg(res.message)
+        $(that).val(res.data.quantity);
+      }else {
+        updateMiniCartData(res);
+      }
     })
   })
 
