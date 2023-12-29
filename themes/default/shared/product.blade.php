@@ -13,6 +13,7 @@
     </a>
     @if (!request('style_list') || request('style_list') == 'grid')
       <div class="button-wrap">
+        @hookwrapper('shared.product.btn.add_cart')
         <button
           class="btn btn-dark text-light btn-add-cart"
           product-id="{{ $product['sku_id'] }}"
@@ -21,6 +22,7 @@
           <i class="bi bi-cart"></i>
           {{ __('shop/products.add_to_cart') }}
         </button>
+        @endhookwrapper
         <button
           class="btn btn-dark text-light btn-quick-view"
           product-id="{{ $product['sku_id'] }}"
