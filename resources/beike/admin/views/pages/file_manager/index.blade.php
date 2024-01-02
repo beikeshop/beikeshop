@@ -343,10 +343,6 @@
 
       methods: {
         searchFile() {
-          if (!this.filterKeyword) {
-            return;
-          }
-
           this.image_page = 1;
           this.loadData()
         },
