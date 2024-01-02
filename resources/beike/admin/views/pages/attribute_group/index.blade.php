@@ -46,6 +46,9 @@
           >
             <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
+          
+          @hook('admin.product.attributes.group.edit.dialog.name.after')
+
         </el-form-item>
 
         <el-form-item label="{{ __('common.sort_order') }}" prop="sort_order">
@@ -65,7 +68,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#customer-app',
 
       data: {

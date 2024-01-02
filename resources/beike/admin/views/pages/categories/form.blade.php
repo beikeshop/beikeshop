@@ -19,8 +19,9 @@
         @hook('admin.category.form.before')
 
         <x-admin-form-input-locale name="descriptions.*.name" title="{{ __('common.name') }}" :value="$descriptions" :required="true" />
+        @hook('admin.product.categories.edit.name.after')
         <x-admin-form-input-locale name="descriptions.*.content" title="{{ __('admin/builder.modules_content') }}" :value="$descriptions" />
-
+        @hook('admin.product.categories.edit.content.after')
         <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" :value="old('position', $category->position ?? 0)" />
 
         <x-admin-form-image name="image" title="{{ __('admin/category.category_image') }}" :value="old('image', $category->image ?? '')">
@@ -52,6 +53,7 @@
           @endforeach
           @include('admin::shared.auto-translation')
         </x-admin::form.row>
+        @hook('admin.product.categories.edit.meta_title.after')
         <x-admin::form.row title="Meta keywords">
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
@@ -63,6 +65,7 @@
           @endforeach
           @include('admin::shared.auto-translation')
         </x-admin::form.row>
+        @hook('admin.product.categories.edit.meta_keywords.after')
         <x-admin::form.row title="Meta description">
           @foreach ($languages as $language)
           <div class="input-group w-max-600">
@@ -74,6 +77,7 @@
           @endforeach
           @include('admin::shared.auto-translation')
         </x-admin::form.row>
+        @hook('admin.product.categories.edit.meta_description.after')
 
         @hook('admin.category.form.after')
 

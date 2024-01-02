@@ -51,6 +51,9 @@
           >
             <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
+
+          @hook('admin.product.attributes.add.dialog.name.after')
+
         </el-form-item>
 
         <el-form-item label="{{ __('admin/attribute_group.index') }}" required prop="attribute_group_id">
@@ -81,7 +84,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+   let app = new Vue({
       el: '#app',
 
       data: {
