@@ -77,6 +77,7 @@
                   <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keywords]" title="{{ __('admin/setting.meta_keywords') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_keywords', $descriptions[$language['code']]['meta_keywords'] ?? '') }}" />
                 </div>
               @endforeach
+              @hook('admin.page.edit.base.after')
             </div>
           </div>
           <div class="tab-pane fade" id="tab-data">
