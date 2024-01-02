@@ -55,6 +55,7 @@ class FileManagerService
      * 获取某个目录下的文件和文件夹
      *
      * @param     $baseFolder
+     * @param $keyword
      * @param     $sort
      * @param     $order
      * @param int $page
@@ -62,7 +63,7 @@ class FileManagerService
      * @return array
      * @throws \Exception
      */
-    public function getFiles($baseFolder, $sort, $order, int $page = 1, int $perPage = 20): array
+    public function getFiles($baseFolder, $keyword, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
         $files           = glob($currentBasePath . '/*');
@@ -88,6 +89,9 @@ class FileManagerService
         foreach ($files as $file) {
             $baseName = basename($file);
             if ($baseName == 'index.html') {
+                continue;
+            }
+            if ($keyword && !str_contains($baseName, $keyword)) {
                 continue;
             }
             $fileName = str_replace(public_path('catalog'), '', $file);

@@ -96,7 +96,7 @@
     <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
       <div class="content-head">
         <div class="left d-lg-flex">
-          <el-button class="me-5 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
+          <el-button class="me-4 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
             :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
           <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view" @click="viewImages">{{
             __('common.view') }}</el-link>
@@ -112,7 +112,15 @@
         </div>
         <div class="right">
           @hook('admin.file_manager.content_head.right')
-          <el-popover placement="bottom" width="260" class="me-2" trigger="click">
+          <el-popover placement="bottom" width="360" class="me-1" trigger="click">
+            <div>
+              <el-input placeholder="{{ __('common.input') }}" v-model="filterKeyword" class="input-with-select" @keyup.enter.native="searchFile">
+                <el-button slot="append" icon="el-icon-search" @click="searchFile"></el-button>
+              </el-input>
+            </div>
+            <el-button slot="reference" size="small" plain type="primary" icon="el-icon-search"></el-button>
+          </el-popover>
+          <el-popover placement="bottom" width="260" class="me-1" trigger="click">
             <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
             <div class="mb-3">
               <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
@@ -219,9 +227,11 @@
         loading: false,
         isBatchSelect: false, // 当前是否正在是否批量选择
         selectImageIndex: [],
+        filterKeyword: '',
         filter: {
           sort: 'created',
-          order: 'desc'
+          order: 'desc',
+          keyword: ''
         },
 
         treeData: [{
@@ -332,6 +342,15 @@
       },
 
       methods: {
+        searchFile() {
+          if (!this.filterKeyword) {
+            return;
+          }
+
+          this.image_page = 1;
+          this.loadData()
+        },
+
         loadDirectories() {
           $http.get('file_manager/directories').then((res) => {
             this.treeData[0].children = res;
@@ -497,6 +516,7 @@
             page: this.image_page,
             per_page: this.per_page,
             sort: this.filter.sort,
+            keyword: this.filterKeyword,
             order: this.filter.order
           }, {
             hload: true

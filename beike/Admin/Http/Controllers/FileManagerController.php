@@ -13,7 +13,7 @@ class FileManagerController extends Controller
 
     public function __construct()
     {
-        $class = hook_filter('controller.file_manager.construct', "Beike\Admin\Services\FileManagerService");
+        $class = hook_filter('controller.file_manager.construct', \Beike\Admin\Services\FileManagerService::class);
 
         $this->fileManagerService = new $class();
     }
@@ -41,12 +41,13 @@ class FileManagerController extends Controller
     public function getFiles(Request $request): mixed
     {
         $baseFolder = $request->get('base_folder');
+        $keyword    = $request->get('keyword');
         $sort       = $request->get('sort', 'created');
         $order      = $request->get('order', 'desc');
         $page       = (int) $request->get('page');
         $perPage    = (int) $request->get('per_page');
 
-        $data = $this->fileManagerService->getFiles($baseFolder, $sort, $order, $page, $perPage);
+        $data = $this->fileManagerService->getFiles($baseFolder, $keyword, $sort, $order, $page, $perPage);
 
         return hook_filter('admin.file_manager.files.data', $data);
     }
