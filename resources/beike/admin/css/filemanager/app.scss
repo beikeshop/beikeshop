@@ -196,6 +196,13 @@ body.page-filemanager {
         .left {
           a {
             margin-right: 28px;
+            &:last-child {
+              margin-right: 0;
+            }
+
+            &:not(html[lang="zh_cn"] &) {
+              margin-right: 10px;
+            }
 
             &:not(.is-disabled) {
               color: #17191c;
@@ -225,6 +232,12 @@ body.page-filemanager {
             a {
               margin-right: 25px;
             }
+          }
+        }
+
+        .right {
+          .el-button {
+            padding: 9px 10px;
           }
         }
       }
