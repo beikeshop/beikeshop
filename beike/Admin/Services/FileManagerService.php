@@ -55,7 +55,7 @@ class FileManagerService
      * 获取某个目录下的文件和文件夹
      *
      * @param     $baseFolder
-     * @param $keyword
+     * @param     $keyword
      * @param     $sort
      * @param     $order
      * @param int $page
@@ -91,7 +91,7 @@ class FileManagerService
             if ($baseName == 'index.html') {
                 continue;
             }
-            if ($keyword && !str_contains($baseName, $keyword)) {
+            if ($keyword && ! str_contains($baseName, $keyword)) {
                 continue;
             }
             $fileName = str_replace(public_path('catalog'), '', $file);
