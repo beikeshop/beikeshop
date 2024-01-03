@@ -60,7 +60,15 @@ class ShopSocialController extends Controller
     {
         try {
             $this->initSocial();
-            $userData = Socialite::driver($provider)->user();
+            $user     = Socialite::driver($provider)->user();
+            $userData = [
+                'uid'    => $user->getId(),
+                'email'  => $user->getEmail(),
+                'name'   => $user->getName(),
+                'avatar' => $user->getAvatar(),
+                'token'  => $user->token,
+                'raw'    => $user->getRaw(),
+            ];
             $customer = CustomerRepo::createCustomer($provider, $userData);
             Auth::guard(Customer::AUTH_GUARD)->login($customer);
 

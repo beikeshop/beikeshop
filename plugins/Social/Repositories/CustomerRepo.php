@@ -46,19 +46,19 @@ class CustomerRepo
     /**
      * 创建客户, 关联第三方用户数据
      *
-     * @param      $provider
-     * @param User $userData
+     * @param       $provider
+     * @param array $userData
      * @return Customer
      */
-    public static function createCustomer($provider, User $userData): Customer
+    public static function createCustomer($provider, array $userData): Customer
     {
-        $social   = self::getCustomerByProvider($provider, $userData->getId());
+        $social   = self::getCustomerByProvider($provider, $userData['uid']);
         $customer = $social->customer ?? null;
         if ($customer) {
             return $customer;
         }
 
-        $email = $userData->getEmail();
+        $email = $userData['email'];
         if (empty($email)) {
             $email = strtolower(Str::random(8)) . "@{$provider}.com";
         }
@@ -67,8 +67,8 @@ class CustomerRepo
             $customerData = [
                 'from'   => $provider,
                 'email'  => $email,
-                'name'   => $userData->getName(),
-                'avatar' => $userData->getAvatar(),
+                'name'   => $userData['name'],
+                'avatar' => $userData['avatar'],
             ];
             $customer = AccountService::register($customerData);
         }
@@ -79,14 +79,14 @@ class CustomerRepo
     }
 
     /**
-     * @param      $customer
-     * @param      $provider
-     * @param User $userData
+     * @param       $customer
+     * @param       $provider
+     * @param array $userData
      * @return Model|Builder
      */
-    public static function createSocial($customer, $provider, User $userData): Model|Builder
+    public static function createSocial($customer, $provider, array $userData): Model|Builder
     {
-        $social = self::getCustomerByProvider($provider, $userData->getId());
+        $social = self::getCustomerByProvider($provider, $userData['uid']);
         if ($social) {
             return $social;
         }
@@ -94,10 +94,10 @@ class CustomerRepo
         $socialData = [
             'customer_id'  => $customer->id,
             'provider'     => $provider,
-            'user_id'      => $userData->getId(),
+            'user_id'      => $userData['uid'],
             'union_id'     => '',
-            'access_token' => $userData->token,
-            'extra'        => json_encode($userData->getRaw()),
+            'access_token' => $userData['token'],
+            'extra'        => json_encode($userData['raw']),
         ];
 
         return CustomerSocial::query()->create($socialData);
@@ -109,7 +109,7 @@ class CustomerRepo
      * @param $userId
      * @return Model|Builder|null
      */
-    private static function getCustomerByProvider($provider, $userId): Model|Builder|null
+    public static function getCustomerByProvider($provider, $userId): Model|Builder|null
     {
         return CustomerSocial::query()
             ->with(['customer'])
