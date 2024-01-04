@@ -327,15 +327,15 @@ body.page-product {
         display: flex;
       }
 
-      .btn-buy-now {
-        display: none;
-      }
-
       .add-cart {
         flex: 1;
-        margin: 0 10px;
-        background-color: #212529;
-        color: #fff;
+        margin-left: 10px;
+        // background-color: #212529;
+        // color: #fff;
+      }
+
+      .btn-buy-now {
+        margin: 0 10px !important;
       }
 
       .add-wishlist {
