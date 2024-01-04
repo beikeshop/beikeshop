@@ -25,7 +25,7 @@ class CartProductFactory extends Factory
             'customer_id' => 0,
             'selected' => 1,
             'product_id' => rand(1, 1000),
-            'product_sku_id' => rand(1, 1000),
+            'product_sku' => rand(1, 1000),
             'quantity' => rand(1, 10)
         ];
     }

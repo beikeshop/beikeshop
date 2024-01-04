@@ -167,8 +167,8 @@ class CartRepo
     public static function mergeGuestCart($customer): void
     {
         $guestCartProduct       = self::allCartProducts(0);
-        $guestCartProductSkuIds = $guestCartProduct->pluck('product_sku_id');
-        self::allCartProductsBuilder($customer->id)->whereIn('product_sku_id', $guestCartProductSkuIds)->delete();
+        $guestCartProductSkus = $guestCartProduct->pluck('product_sku');
+        self::allCartProductsBuilder($customer->id)->whereIn('product_sku', $guestCartProductSkus)->delete();
 
         foreach ($guestCartProduct as $cartProduct) {
             $cartProduct->customer_id = $customer->id;

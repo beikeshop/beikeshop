@@ -29,7 +29,8 @@ class CartDetail extends JsonResource
         $result = [
             'cart_id'         => $this->id,
             'product_id'      => $this->product_id,
-            'sku_id'          => $this->product_sku_id,
+            'sku_id'          => $sku->id,
+            'sku'             => $this->product_sku,
             'product_sku'     => $skuCode,
             'name'            => $productName,
             'name_format'     => sub_string($productName),
