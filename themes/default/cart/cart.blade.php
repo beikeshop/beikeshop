@@ -128,10 +128,10 @@
     var app = new Vue({
       el: "#app-cart",
       data: {
-        products: @json($data['carts']),
-        total_quantity: @json($data['quantity']),
-        amount: @json($data['amount']),
-        amount_format: @json($data['amount_format']),
+        products: @json($carts),
+        total_quantity: @json($quantity),
+        amount: @json($amount),
+        amount_format: @json($amount_format),
       },
 
       computed: {
