@@ -16,9 +16,7 @@ class CartController extends Controller
      */
     public function index(): View
     {
-        $data = [
-            'data' => CartService::reloadData(),
-        ];
+        $data = CartService::reloadData();
 
         $data = hook_filter('cart.index.data', $data);
 
