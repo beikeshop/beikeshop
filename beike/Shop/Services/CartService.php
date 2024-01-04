@@ -71,19 +71,21 @@ class CartService
     public static function add($sku, int $quantity, $customer = null)
     {
         $customerId = $customer->id ?? 0;
-        $productId  = $sku->product_id;
-        $skuId      = $sku->id;
 
         if (empty($sku) || $quantity == 0) {
             return null;
         }
+
+        $productId  = $sku->product_id;
+        $skuCode    = $sku->sku;
+
         if ($customerId) {
             $builder = CartProduct::query()->where('customer_id', $customerId);
         } else {
             $builder = CartProduct::query()->where('session_id', get_session_id());
         }
         $cart = $builder->where('product_id', $productId)
-            ->where('product_sku_id', $skuId)
+            ->where('product_sku', $skuCode)
             ->first();
 
         if ($cart) {
@@ -94,7 +96,7 @@ class CartService
                 'customer_id'    => $customerId,
                 'session_id'     => get_session_id(),
                 'product_id'     => $productId,
-                'product_sku_id' => $skuId,
+                'product_sku'    => $skuCode,
                 'quantity'       => $quantity,
                 'selected'       => true,
             ]);

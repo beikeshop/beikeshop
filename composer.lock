@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "203095495e2adb90b50ed487b2a95293",
+    "content-hash": "5df298e7f31c3c3648d7c81ea9277e8b",
     "packages": [
         {
             "name": "brick/math",
@@ -407,22 +407,11 @@
         {
             "name": "doctrine/dbal",
             "version": "3.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/dbal.git",
-                "reference": "0ac3c270590e54910715e9a1a044cc368df282b2"
-            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/0ac3c270590e54910715e9a1a044cc368df282b2",
+                "url": "https://mirrors.cloud.tencent.com/repository/composer/doctrine/dbal/3.7.2/doctrine-dbal-3.7.2.zip",
                 "reference": "0ac3c270590e54910715e9a1a044cc368df282b2",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2",
@@ -459,7 +448,6 @@
                     "Doctrine\\DBAL\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -502,24 +490,6 @@
                 "sqlite",
                 "sqlserver",
                 "sqlsrv"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.7.2"
-            },
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdbal",
-                    "type": "tidelift"
-                }
             ],
             "time": "2023-11-19T08:06:58+00:00"
         },
