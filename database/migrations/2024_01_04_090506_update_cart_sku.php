@@ -18,6 +18,10 @@ return new class extends Migration
         Schema::table('cart_products', function (Blueprint $table){
             $table->string('product_sku', '32')->change();
         });
+
+        Schema::table('product_skus', function (Blueprint $table){
+            $table->unique('sku');
+        });
     }
 
     /**
