@@ -917,3 +917,11 @@ function check_same_domain(): bool
 
     return $envDomain == $requestDomain;
 }
+
+/**
+ * @return bool
+ */
+function is_miniapp(): bool
+{
+    return \request()->header('platform') == 'miniapp';
+}
