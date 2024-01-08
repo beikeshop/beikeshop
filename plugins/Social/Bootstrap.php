@@ -11,12 +11,37 @@
 
 namespace Plugin\Social;
 
+use Plugin\Social\Models\CustomerSocial;
+
 class Bootstrap
 {
-    public function boot()
+    /**
+     * @return void
+     */
+    public function boot(): void
     {
+        $this->adminSettingPage();
+        $this->deleteSocial();
         $this->addSocialData();
+    }
 
+    /**
+     * @return void
+     */
+    private function deleteSocial(): void
+    {
+        add_hook_action('admin.customer.destroy.after', function ($data) {
+            $customerId = $data;
+            CustomerSocial::query()->where('customer_id', $customerId)->delete();
+        });
+
+    }
+
+    /**
+     * @return void
+     */
+    private function adminSettingPage(): void
+    {
         add_hook_blade('admin.plugin.form', function ($callback, $output, $data) {
             $code = $data['plugin']->code;
             if ($code == 'social') {
@@ -30,7 +55,7 @@ class Bootstrap
     /**
      * 增加第三方登录方式
      */
-    private function addSocialData()
+    private function addSocialData(): void
     {
         add_hook_filter('login.social.buttons', function ($buttons) {
             $providers = plugin_setting('social.setting');
@@ -39,8 +64,8 @@ class Bootstrap
             }
 
             foreach ($providers as $provider) {
-                $status = (bool) ($provider['status'] ?? false);
-                if (! $status) {
+                $status = (bool)($provider['status'] ?? false);
+                if (!$status) {
                     continue;
                 }
                 $buttons[] = view('Social::shop/social_button', ['provider' => $provider])->render();
