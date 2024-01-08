@@ -42,6 +42,7 @@ class LoginController extends Controller
         try {
             hook_action('shop.account.login.before', $data);
 
+            $guestCartProduct       = CartRepo::allCartProducts(0);
             if (! auth(Customer::AUTH_GUARD)->attempt($request->only('email', 'password'))) {
                 throw new NotAcceptableHttpException(trans('shop/login.email_or_password_error'));
             }
@@ -63,7 +64,7 @@ class LoginController extends Controller
                 throw new NotFoundHttpException(trans('shop/login.customer_rejected'));
             }
 
-            CartRepo::mergeGuestCart($customer);
+            CartRepo::mergeGuestCart($customer, $guestCartProduct);
 
             return json_success(trans('shop/login.login_successfully'));
         } catch (NotAcceptableHttpException $e) {
