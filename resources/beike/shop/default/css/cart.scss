@@ -10,6 +10,12 @@
 
 body.page-checkout, body.page-cart {
   background-color: #f6f8fa;
+
+  .breadcrumb-wrap {
+    background-color: transparent;
+    margin-bottom: 0;
+  }
+
   @media (max-width: 768px) {
     padding-bottom: 64px;
 
@@ -36,6 +42,10 @@ body.page-checkout, body.page-cart {
 }
 
 body.page-cart {
+  #app-cart {
+    min-height: 200px;
+  }
+
   .cart-products-wrap {
     .table {
       tbody {

@@ -252,7 +252,7 @@
                         @hook('admin.product.edit.variables.batch.after')
                       </div>
 
-                      <table class="table table-bordered table-hover">
+                      <table class="table table-bordered table-hover table-skus">
                         <thead>
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}
@@ -263,7 +263,7 @@
                           <th class="w-min-100">{{ __('admin/product.price') }}</th>
                           <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
                           <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
-                          <th class="w-min-100">{{ __('admin/product.quantity') }}</th>
+                          <th style="width: 70px">{{ __('admin/product.quantity') }}</th>
                           @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
@@ -281,8 +281,7 @@
                                     <button class="btn btn-danger btn-sm wh-20 p-0" @click="removeSkuImages(skuIndex, index)" type="button"><i class="bi bi-trash"></i></button>
                                   </div>
                                   <img :src="thumbnail(image)" class="img-fluid" style="max-height: 40px;">
-                                  <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'"
-                                placeholder="image">
+                                  <input type="hidden" class="form-control" v-model="sku.images[index]" :name="'skus[' + skuIndex + '][images][]'" placeholder="image">
                                 </div>
                                 <div class="border d-flex justify-content-center align-items-center border-dashed bg-light wh-40" role="button" @click="addProductImages(skuIndex)"><i class="bi bi-plus fs-3 text-muted"></i></div>
                               </div>
@@ -1127,6 +1126,12 @@
           $(this).val(item['label']);
           $('input[name="brand_id"]').val(item['value']);
         }
+      });
+
+      // skus[*][sku] 只能填写 数字、字母、中横线、下划线
+      $(document).on('input', 'input[name^="skus"][name$="[sku]"]', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9-_]/g, ''));
+        $(this)[0].dispatchEvent(new Event('input'));
       });
     });
 
