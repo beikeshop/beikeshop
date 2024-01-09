@@ -25,6 +25,7 @@ class OrderDetailResource extends JsonResource
             'status'                 => $this->status,
             'total'                  => $this->total,
             'total_format'           => $this->total_format,
+            'comment'                => $this->comment,
             'shipping_method_code'   => $this->shipping_method_code,
             'shipping_method_name'   => $this->shipping_method_name,
             'shipping_customer_name' => $this->shipping_customer_name,
