@@ -64,8 +64,8 @@ class Bootstrap
             }
 
             foreach ($providers as $provider) {
-                $status = (bool)($provider['status'] ?? false);
-                if (!$status) {
+                $status = (bool) ($provider['status'] ?? false);
+                if (! $status) {
                     continue;
                 }
                 $buttons[] = view('Social::shop/social_button', ['provider' => $provider])->render();
