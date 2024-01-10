@@ -58,7 +58,7 @@
             {{-- <x-admin-form-input name="license_code" title="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}" /> --}}
             <x-admin::form.row title="{{ __('admin/setting.license_code') }}">
               <div class="input-group wp-400">
-                <input type="text" class="form-control" name="license_code" placeholder="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}">
+                <input type="text" class="form-control text-uppercase bg-light" name="license_code" placeholder="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}" readonly="readonly">
                 <button class="btn btn-outline-primary get-license-code" type="button">{{ __('admin/setting.license_code_get') }}</button>
               </div>
             </x-admin::form.row>
