@@ -13,7 +13,7 @@ namespace Beike\Admin\Services;
 
 use Beike\Repositories\CurrencyRepo;
 use Beike\Repositories\SettingRepo;
-use PHPUnit\Util\Exception;
+use Exception;
 
 class SettingService
 {
