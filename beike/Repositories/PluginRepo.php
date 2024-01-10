@@ -286,7 +286,7 @@ class PluginRepo
     {
         $allPlugins = self::allPlugins();
 
-        return $allPlugins->where('type', 'payment')->filter(function ($item) {
+        $result = $allPlugins->where('type', 'payment')->filter(function ($item) {
             $plugin = plugin($item->code);
             if ($plugin) {
                 $item->plugin = $plugin;
@@ -294,6 +294,8 @@ class PluginRepo
 
             return $plugin && $plugin->getEnabled();
         });
+
+        return hook_filter('repo.plugin.payment_methods', $result);
     }
 
     public static function getTranslators()
