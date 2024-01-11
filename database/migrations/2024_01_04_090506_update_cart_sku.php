@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cart_products', function (Blueprint $table){
-            $table->renameColumn('product_sku_id', 'product_sku');
-        });
+        if (Schema::hasColumn('cart_products', 'product_sku_id')) {
+            Schema::table('cart_products', function (Blueprint $table) {
+                $table->renameColumn('product_sku_id', 'product_sku');
+            });
+        }
 
         Schema::table('cart_products', function (Blueprint $table){
             $table->string('product_sku', '32')->change();
