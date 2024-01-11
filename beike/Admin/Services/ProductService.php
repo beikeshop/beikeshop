@@ -3,6 +3,7 @@
 namespace Beike\Admin\Services;
 
 use Beike\Models\Product;
+use Beike\Models\ProductSku;
 use Illuminate\Support\Facades\DB;
 
 class ProductService
@@ -22,6 +23,12 @@ class ProductService
     protected function createOrUpdate(Product $product, array $data): Product
     {
         $isUpdating = $product->id > 0;
+        foreach ($data['skus'] as $sku) {
+            $productSku = ProductSku::query()->where('sku', $sku['sku'])->first();
+            if ($productSku && $productSku->product_id != $product->id) {
+                throw new \Exception(trans('validation.unique', ['attribute' => 'SKU']));
+            }
+        }
 
         try {
             DB::beginTransaction();
