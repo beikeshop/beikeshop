@@ -112,13 +112,13 @@
         </div>
         <div class="right">
           @hook('admin.file_manager.content_head.right')
-          <el-popover placement="bottom" width="360" class="me-1" trigger="click">
-            <div>
+          <el-popover placement="bottom" width="360" class="me-1" trigger="manual" v-model="filterKeywordVisible" ref="keyword-popover">
+            <div class="d-flex keyword-popover-area">
               <el-input placeholder="{{ __('common.input') }}" v-model="filterKeyword" class="input-with-select" @keyup.enter.native="searchFile">
                 <el-button slot="append" icon="el-icon-search" @click="searchFile"></el-button>
               </el-input>
             </div>
-            <el-button slot="reference" size="small" plain type="primary" icon="el-icon-search"></el-button>
+            <el-button slot="reference" size="mini" plain type="primary" class="keyword-popover-area" icon="el-icon-search" @click="filterKeywordVisible = !filterKeywordVisible"></el-button>
           </el-popover>
           <el-popover placement="bottom" width="260" class="me-1" trigger="click">
             <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
@@ -228,6 +228,7 @@
         isBatchSelect: false, // 当前是否正在是否批量选择
         selectImageIndex: [],
         filterKeyword: '',
+        filterKeywordVisible: false,
         filter: {
           sort: 'created',
           order: 'desc',
@@ -357,6 +358,10 @@
           if (e.path == this.folderCurrent) {
             return;
           }
+
+          // 重置搜索框
+          this.filterKeyword = '';
+          this.$refs['keyword-popover'].doClose()
 
           this.folderCurrent = e.path
           this.image_page = 1;
@@ -796,6 +801,12 @@
         @stack('admin.file_manager.vue.method')
       },
     })
+
+  $('#filemanager-wrap-app').click(function () {
+    if (!$(event.target).hasClass('keyword-popover-area')) {
+      app.filterKeywordVisible = false;
+    }
+  })
   </script>
 </body>
 </html>
