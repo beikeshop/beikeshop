@@ -16,19 +16,14 @@
 @endsection
 
 @section('content')
-    @if ($errors->has('error'))
-      <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
-    @endif
-    @if (session()->has('success'))
-      <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
-    @endif
-    @if ($errors->any())
-      <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-          <div>{{ $error }}</div>
-        @endforeach
-      </div>
-    @endif
+  @if (session()->has('success'))
+    <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
+  @endif
+  @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <x-admin-alert type="danger" msg="{{ $error }}" class="mt-4" />
+    @endforeach
+  @endif
 
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
     <li class="nav-item" role="presentation">
