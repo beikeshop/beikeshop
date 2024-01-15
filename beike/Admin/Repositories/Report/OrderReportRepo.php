@@ -211,9 +211,9 @@ class OrderReportRepo
     /**
      * 获取最近一个月的按天浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
      * @param $productId
-     * @return void
+     * @return array
      */
-    public static function getViewsLatestMonth($productId = 0)
+    public static function getViewsLatestMonth($productId = 0): array
     {
         $builder = ProductView::query()->where('created_at', '>=', today()->subMonth())
             ->where('created_at', '<', today()->addDay())
@@ -236,8 +236,8 @@ class OrderReportRepo
         }
 
         $data = [
-            'pv_totals'  => $pvTotals,
-            'uv_totals'  => $uvTotals,
+            'pv_totals' => $pvTotals,
+            'uv_totals' => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_month', $data);
@@ -246,9 +246,9 @@ class OrderReportRepo
     /**
      * 获取最近一周的按天浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
      * @param $productId
-     * @return void
+     * @return array
      */
-    public static function getViewsLatestWeek($productId = 0)
+    public static function getViewsLatestWeek($productId = 0): array
     {
         $builder = ProductView::query()->where('created_at', '>=', today()->subWeek())
             ->where('created_at', '<', today()->addDay())
@@ -271,8 +271,8 @@ class OrderReportRepo
         }
 
         $data = [
-            'pv_totals'  => $pvTotals,
-            'uv_totals'  => $uvTotals,
+            'pv_totals' => $pvTotals,
+            'uv_totals' => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_week', $data);
@@ -281,9 +281,9 @@ class OrderReportRepo
     /**
      * 获取最近一年的按月浏览数量统计表。 $productId有值则只统计该商品的浏览数量，不传则统计所有商品的浏览数量
      * @param $productId
-     * @return void
+     * @return array
      */
-    public static function getViewsLatestYear($productId = 0)
+    public static function getViewsLatestYear($productId = 0): array
     {
         $builder = ProductView::query()->where('created_at', '>=', today()->subYear())
             ->where('created_at', '<', today()->addDay())
@@ -301,14 +301,14 @@ class OrderReportRepo
         $pvTotals    = [];
         $uvTotals    = [];
         foreach ($period as $total) {
-            $key                    = Carbon::create($total->year, $total->month)->format('Y-m');
-            $pvTotals[$key]         = $mapPvTotals[$key] ?? 0;
-            $uvTotals[$key]         = $mapUvTotals[$key] ?? 0;
+            $key            = Carbon::create($total->year, $total->month)->format('Y-m');
+            $pvTotals[$key] = $mapPvTotals[$key] ?? 0;
+            $uvTotals[$key] = $mapUvTotals[$key] ?? 0;
         }
 
         $data = [
-            'pv_totals'  => $pvTotals,
-            'uv_totals'  => $uvTotals,
+            'pv_totals' => $pvTotals,
+            'uv_totals' => $uvTotals,
         ];
 
         return hook_filter('report.order_report_views_year', $data);
