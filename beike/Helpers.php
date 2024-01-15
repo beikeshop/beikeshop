@@ -912,8 +912,17 @@ function beike_api_url(): string
  */
 function check_same_domain(): bool
 {
+    $request       = request();
     $envDomain     = clean_domain(env('APP_URL'));
-    $requestDomain = clean_domain(request()->getHost());
+
+    $host = $request->getHost();
+    $port = $request->getPort();
+
+    if (in_array($port, [80, 443])) {
+        $requestDomain = clean_domain($host);
+    } else {
+        $requestDomain = $host . ':' . $port;
+    }
 
     return $envDomain == $requestDomain;
 }
