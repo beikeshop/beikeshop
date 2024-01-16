@@ -163,6 +163,7 @@
                 <thead>
                   <th>{{ __('order.express_company') }}</th>
                   <th>Code</th>
+                  @hook('admin.setting.express.table.thead.th')
                   <th></th>
                 </thead>
                 <tbody>
@@ -175,6 +176,7 @@
                       <input required placeholder="{{ __('admin/setting.express_code_help') }}" type="text" :name="'express_company['+ index +'][code]'" v-model="item.code" class="form-control">
                       <div class="invalid-feedback">{{ __('common.error_required', ['name' => 'Code']) }}</div>
                     </td>
+                    @hook('admin.setting.express.table.tbody.td')
                     <td><i @click="express_company.splice(index, 1)" class="bi bi-x-circle fs-4 text-danger cursor-pointer"></i></td>
                   </tr>
                   <tr>

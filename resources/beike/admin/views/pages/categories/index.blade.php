@@ -8,6 +8,7 @@
   <div id="category-app" class="card h-min-600">
     <div class="card-body">
       <a href="{{ admin_route('categories.create') }}" class="btn btn-primary">{{ __('admin/category.categories_create') }}</a>
+      @hook('admin.categories.create.after')
       <div class="mt-4" style="" v-if="categories.length">
         <el-tree :data="categories" node-key="id" ref="tree">
           <div class="custom-tree-node d-flex align-items-center justify-content-between w-100" slot-scope="{ node, data }">

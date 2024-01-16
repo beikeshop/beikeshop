@@ -41,6 +41,7 @@
 
         @if ($order->orderShipments->count())
           <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('order.order_shipments') }}</p>
+          @hookwrapper('order.update.order_shipments.table')
           <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse; ">
             <thead class="">
               <tr>
@@ -59,6 +60,7 @@
               @endforeach
             </tbody>
           </table>
+          @endhookwrapper
         @endif
 
         <p style="font-size: 14px; color: rgb(51, 51, 51); line-height: 24px; margin: 6px 0px 0px; word-wrap: break-word; word-break: break-all;">
