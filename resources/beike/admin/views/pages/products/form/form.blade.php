@@ -139,6 +139,7 @@
 
             <x-admin-form-select name="shipping" :title="__('admin/common.shipping')" :value="old('shipping', $product->shipping ?? 1)" :options="[['title' => __('common.yes'), 'id' => 1], ['title' => __('common.no'),'id' => 0]]" key="id" label="title" />
 
+            @hookwrapper('admin.product.edit.category')
             <x-admin::form.row :title="__('admin/category.index')">
               <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
                 @foreach ($source['categories'] as $_category)
@@ -152,6 +153,7 @@
                 @endforeach
               </div>
             </x-admin::form.row>
+            @endhookwrapper
 
             <x-admin-form-switch name="active" :title="__('common.status')" :value="old('active', $product->active ?? 1)" />
 
@@ -443,7 +445,7 @@
 
           <div class="tab-pane fade" id="tab-relations">
             <h6 class="border-bottom pb-3 mb-4">{{ __('admin/product.product_relations') }}</h6>
-
+            @hook('admin.product.edit.product_relations.before')
             <x-admin::form.row title="{{ __('admin/product.product_relations') }}">
               <div class="module-edit-group wp-600">
                 <div class="autocomplete-group-wrapper">
