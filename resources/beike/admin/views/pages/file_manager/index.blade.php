@@ -803,7 +803,7 @@
     })
 
   $('#filemanager-wrap-app').click(function () {
-    if (!$(event.target).hasClass('keyword-popover-area')) {
+    if (!$(event.target).hasClass('keyword-popover-area') && !$(event.target).hasClass('el-icon-search')) {
       app.filterKeywordVisible = false;
     }
   })
