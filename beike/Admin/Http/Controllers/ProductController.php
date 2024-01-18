@@ -166,6 +166,7 @@ class ProductController extends Controller
             'weight_classes'        => Weight::getWeightUnits(),
             'source'                => [
                 'categories' => CategoryRepo::flatten(locale(), false),
+                'categoriesTwoLevel' => CategoryRepo::getTwoLevelCategories(),
             ],
             '_redirect'          => $this->getRedirect(),
         ];

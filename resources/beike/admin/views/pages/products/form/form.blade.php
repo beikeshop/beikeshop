@@ -141,16 +141,20 @@
 
             @hookwrapper('admin.product.edit.category')
             <x-admin::form.row :title="__('admin/category.index')">
-              <div class="wp-400 form-control" style="max-height: 240px;overflow-y: auto">
-                @foreach ($source['categories'] as $_category)
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $_category->id }}"
-                  id="category-{{ $_category->id }}" {{ in_array($_category->id, old('categories', $category_ids)) ? 'checked' : '' }}>
-                  <label class="form-check-label" for="category-{{ $_category->id }}">
-                    {{ $_category->name }}
-                  </label>
+              <el-cascader
+                :options="source.categoriesTwoLevel"
+                size="small"
+                ref="refCascader"
+                placeholder="{{ __('admin/product.category_placeholder') }}"
+                :class="['wp-400 category-cascader', !form.categories.length ? 'no-data' : '']"
+                :props="{ label: 'name', value: 'id', children: 'children', checkStrictly: true}"
+                @change="categoriesChange" filterable></el-cascader>
+              <div class="wp-400 form-control category-data" v-if="categoryFormat.length">
+                <div v-for="item, index in categoryFormat" :key="index" class="d-flex align-items-center">
+                  <div class="me-2 cursor-pointer delete-icon" @click="form.categories.splice(index, 1)"><i class="bi bi-dash-circle"></i></div>
+                  <div class="category-name">@{{ item.name }}</div>
+                  <input type="hidden" name="categories[]" :value="item.id">
                 </div>
-                @endforeach
               </div>
             </x-admin::form.row>
             @endhookwrapper
@@ -570,6 +574,7 @@
         current_language_code: '{{ locale() }}',
         isMove: false,
         form: {
+          categories: @json(old('categories', $category_ids) ?? []),
           attributes: @json(old('pickups', $product_attributes) ?? []),
           images: @json(old('images', $product->images) ?? []),
           video: {
@@ -609,6 +614,8 @@
         source: {
           variables: [],
           languages: @json($languages ?? []),
+          categories: @json($source['categories'] ?? []),
+          categoriesTwoLevel: @json($source['categoriesTwoLevel'] ?? []),
         },
 
         editing: {
@@ -653,6 +660,21 @@
         skuIsEmpty() {
           return (this.form.skus.length && this.form.skus[0].variants.length) || ''
         },
+
+        categoryFormat() {
+          const categories = JSON.parse(JSON.stringify(this.source.categories));
+          const categoryIds = this.form.categories;
+          const categoryFormat = [];
+
+          categoryIds.forEach((categoryId, index) => {
+            const category = categories.find(v => v.id == categoryId);
+            if (category) {
+              categoryFormat.push(category);
+            }
+          })
+
+          return categoryFormat;
+        }
       },
 
       beforeMount() {
@@ -671,6 +693,19 @@
         }
 
         this.videoDataFormat()
+
+        // 递归判断children是否为空数组，如果是，删除children属性
+        function deleteChildren(categories) {
+          categories.forEach((category, index) => {
+            if (category.children.length === 0) {
+              delete category.children;
+            } else {
+              deleteChildren(category.children);
+            }
+          })
+        }
+
+        deleteChildren(this.source.categoriesTwoLevel);
       },
 
       watch: {
@@ -699,6 +734,23 @@
       },
 
       methods: {
+        categoriesChange(e) {
+          const last = e[e.length - 1];
+
+          this.$nextTick(() => {
+            this.$refs.refCascader.dropDownVisible = false
+            // this.$refs.refCascader.$refs.panel.checkedValue = [];
+            this.$refs.refCascader.$refs.panel.activePath = [];
+            this.$refs.refCascader.$refs.panel.syncActivePath()
+            this.$refs.refCascader.panel.clearCheckedNodes()
+          });
+
+          if (this.form.categories.find(v => v == last)) return layer.msg('{{ __('admin/product.category_already') }}');
+          if (last) {
+            this.form.categories.push(last);
+          }
+        },
+
         // 视频数据格式化 type
         videoDataFormat() {
           const videoPath = @json(old('video', $product->video ?? ''));
