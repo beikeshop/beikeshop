@@ -547,22 +547,30 @@
   <script>
     $('.submit-form-edit').on('click', function () {
       const action = $(`form#app`).attr('action');
+      submitBeforeFormat()
       $(`form#app`).attr('action', bk.updateQueryStringParameter(action, 'action_type', 'stay'));
-      $(`form#app`).find('button[type="submit"]')[0].click();
+
+      setTimeout(() => {
+        $(`form#app`).find('button[type="submit"]')[0].click();
+      }, 0);
     })
 
     $('.submit-form').on('click', function () {
+      submitBeforeFormat()
+
+      setTimeout(() => {
+        $(`form#app`).find('button[type="submit"]')[0].click();
+      }, 0);
+    })
+
+    function submitBeforeFormat() {
       // 关闭多规格提交 清空 variables
       if (!app.editing.isVariable) {
         app.source.variables = [];
       }
 
       app.videoSubmitFormat()
-
-      setTimeout(() => {
-        $(`form#app`).find('button[type="submit"]')[0].click();
-      }, 0);
-    })
+    }
 
     var app = new Vue({
       el: '#app',
