@@ -110,6 +110,27 @@
                 @endif
               </x-admin::form.row>
             @endif
+
+            @if ($column['type'] == 'string_group')
+              <x-admin::form.row :title="$column['label']" :required="$column['required'] ? true : false">
+                <div class="input-group wp-400">
+                  @if ($column['left'] ?? false)
+                  <span class="input-group-text">{{ $column['left'] }}</span>
+                  @endif
+                  <input type="text" class="form-control {{ $errors->first($column['name']) ? 'is-invalid' : '' }}" name="{{ $column['name'] }}" :value="old($column['name'], $column['value'] ?? '')" placeholder="{{ $column['placeholder'] ?? '' }}">
+                  @if ($column['right'] ?? false)
+                  <span class="input-group-text">{{ $column['right'] }}</span>
+                  @endif
+                </div>
+                @if ($errors->first($column['name']))
+                  <div class="invalid-feedback d-block">{{ $errors->first($column['name']) }}</div>
+                @endif
+
+                @if (isset($column['description']))
+                  <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
+                @endif
+              </x-admin::form.row>
+            @endif
           @endforeach
 
           <x-admin::form.row title="">
