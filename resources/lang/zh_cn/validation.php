@@ -81,7 +81,7 @@ return [
         'array'   => ':attribute 必须少于或等于 :value 项。',
     ],
     'max'                  => [
-        'numeric' => ':attribute 的最大长度为 :max 位数。',
+        'numeric' => ':attribute 的最大值为 :max 。',
         'file'    => ':attribute 的大小最多为 :max KB。',
         'string'  => ':attribute 的最大长度为 :max 字符。',
         'array'   => ':attribute 最多为 :max 项。',
@@ -89,7 +89,7 @@ return [
     'mimes'                => ':attribute 的文件类型必须是 :values。',
     'mimetypes'            => ':attribute 的文件类型必须是 :values。',
     'min'                  => [
-        'numeric' => ':attribute 的最小长度为 :min 位数。',
+        'numeric' => ':attribute 的最小值为 :min。',
         'file'    => ':attribute 的大小至少为 :min KB。',
         'string'  => ':attribute 的最小长度为 :min 字符。',
         'array'   => ':attribute 至少有 :min 项。',
