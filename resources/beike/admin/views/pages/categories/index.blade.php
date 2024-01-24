@@ -31,7 +31,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let category_app = new Vue({
       el: '#category-app',
       data: {
         categories: @json($categories),

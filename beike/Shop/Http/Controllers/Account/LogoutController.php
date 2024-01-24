@@ -20,6 +20,9 @@ class LogoutController extends Controller
 {
     public function index(Request $request)
     {
+
+        hook_action('shop.account.logout.before', current_customer());
+
         Auth::guard(Customer::AUTH_GUARD)->logout();
 
         $request->session()->regenerate();

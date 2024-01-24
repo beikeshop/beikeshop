@@ -66,6 +66,8 @@ class LoginController extends Controller
 
             CartRepo::mergeGuestCart($customer, $guestCartProduct);
 
+            hook_action('shop.account.login.after', $data);
+
             return json_success(trans('shop/login.login_successfully'));
         } catch (NotAcceptableHttpException $e) {
             return json_fail($e->getMessage(), ['error' => 'password']);
