@@ -42,6 +42,7 @@ class RmaService
             'rma_reason_id'    => $data['rma_reason_id'],
             'type'             => $data['type'],
             'comment'          => $data['comment'],
+            'images'           => $data['images'],
             'status'           => 'pending',
         ];
 
