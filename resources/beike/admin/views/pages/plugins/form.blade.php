@@ -117,7 +117,7 @@
                   @if ($column['left'] ?? false)
                   <span class="input-group-text">{{ $column['left'] }}</span>
                   @endif
-                  <input type="text" class="form-control {{ $errors->first($column['name']) ? 'is-invalid' : '' }}" name="{{ $column['name'] }}" :value="old($column['name'], $column['value'] ?? '')" placeholder="{{ $column['placeholder'] ?? '' }}">
+                  <input type="text" class="form-control {{ $errors->first($column['name']) ? 'is-invalid' : '' }}" name="{{ $column['name'] }}" value="{{ old($column['name'], $column['value'] ?? '') }}" placeholder="{{ $column['placeholder'] ?? '' }}">
                   @if ($column['right'] ?? false)
                   <span class="input-group-text">{{ $column['right'] }}</span>
                   @endif
