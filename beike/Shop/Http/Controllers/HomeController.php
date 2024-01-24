@@ -2,7 +2,6 @@
 
 namespace Beike\Shop\Http\Controllers;
 
-use Beike\Repositories\FlattenCategoryRepo;
 use Beike\Services\DesignService;
 use Illuminate\Contracts\View\View;
 
