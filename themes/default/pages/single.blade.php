@@ -15,7 +15,7 @@
   <div class="container">
     <div class="row">
       <div class="{{ $page->category ? "col-lg-9 col-12" : 'col-12' }}">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm page-content">
           <div class="card-body h-min-600 p-lg-4">
             <h2 class="mb-3">{{ $page->description->title }}</h2>
 

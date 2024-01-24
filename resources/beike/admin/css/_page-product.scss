@@ -21,6 +21,51 @@ body.page-product-form {
     }
   }
 
+  .category-cascader {
+    &:not(.no-data) {
+      .el-input__inner {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  .category-data {
+    margin-top: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    max-height: 200px;
+    padding-left: 0;
+    padding-right: 0;
+    overflow-y: auto;
+    & > div {
+      padding: 3px 10px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #eee;
+      }
+
+      .category-name {
+        transition: all 0.2s ease-in-out;
+      }
+
+      .delete-icon {
+        color: #999;
+
+        &:hover {
+          color: #d80000;
+        }
+      }
+
+      &:hover {
+        .category-name {
+          padding-left: 4px;
+        }
+      }
+    }
+  }
+
   .video-nav-tabs {
     margin-left: -1px;
 

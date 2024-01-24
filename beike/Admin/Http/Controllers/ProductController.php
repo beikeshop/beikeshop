@@ -11,6 +11,7 @@ use Beike\Admin\Services\ProductService;
 use Beike\Libraries\Weight;
 use Beike\Models\Product;
 use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\FlattenCategoryRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\ProductRepo;
 use Illuminate\Http\JsonResponse;
@@ -143,6 +144,12 @@ class ProductController extends Controller
         return ['success' => true];
     }
 
+    /**
+     * @param Request $request
+     * @param Product $product
+     * @return mixed
+     * @throws \Exception
+     */
     protected function form(Request $request, Product $product)
     {
         if ($product->id) {
@@ -165,7 +172,8 @@ class ProductController extends Controller
             'tax_classes'           => $taxClasses,
             'weight_classes'        => Weight::getWeightUnits(),
             'source'                => [
-                'categories' => CategoryRepo::flatten(locale(), false),
+                'flatten_categories' => FlattenCategoryRepo::getCategoryList(),
+                'categories'         => CategoryRepo::flatten(locale(), false),
             ],
             '_redirect'          => $this->getRedirect(),
         ];

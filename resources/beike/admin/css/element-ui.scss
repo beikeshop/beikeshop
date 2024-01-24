@@ -38,6 +38,30 @@
   }
 }
 
+.el-input--small {
+  .el-input__inner {
+    height: 33.6px;
+    line-height: 33.6px;
+    border-radius: var(--bs-border-radius);
+    border-color: #e2e2e2;
+    padding-left: 0.75rem;
+    &::-webkit-input-placeholder {
+      color: #666;
+    }
+  }
+}
+
+.el-input {
+  .el-input__suffix {
+    right: 8px;
+
+    .el-icon-arrow-down {
+      color: #333;
+      font-weight: 900;
+    }
+  }
+}
+
 .bs-el-input-inner-sm {
   height: 32px;
   margin-top: 3px;

@@ -44,6 +44,8 @@ return [
     'modify_order'           => '双击修改、拖动调整顺序',
     'weight_text'            => '重量',
     'weight_class'           => '重量单位',
+    'category_placeholder'   => '请选择/搜索',
+    'category_already'       => '分类已存在',
 
     'confirm_batch_product'  => '确认要批量删除选中的商品吗？',
     'confirm_batch_status'   => '确认要批量修改选中的商品的状态吗？',
