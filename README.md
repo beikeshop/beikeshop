@@ -1,3 +1,6 @@
+#  **请移步到 https://github.com/beikeshop/beikeshop** 
+
+
 <img height=70 src="https://beikeshop.com/image/beike.svg" >
 
 #  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一款开源好用的跨境电商系统
@@ -137,3 +140,5 @@ PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、
 
 ## QQ交流群： 
 群1: 639108380
+
+#  **请移步到 https://github.com/beikeshop/beikeshop** 
