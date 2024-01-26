@@ -6,7 +6,14 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-  {{ __('admin/marketing.attention') }}
+<div class="d-flex">
+  <div>{{ __('admin/marketing.attention_1') }}</div>
+  <div>
+    {{ __('admin/marketing.attention_2') }}
+    <br>
+    {{ __('admin/marketing.attention_3') }}
+  </div>
+</div>
 @endsection
 
 @section('page-title-right')
