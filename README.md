@@ -73,9 +73,12 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 
 =====================
 
-## 技术服务展示
+## 相关服务
+如果您没有任何技术基础，或想要快速的拥有自己的独立站，可以购买我们的托管服务！
 ![服务展示1_](https://beikeshop.com/readme/README-8.png)
 ![服务展示2_](https://beikeshop.com/readme/README-9.png)
+
+如果希望使用 BeikeShop 满足您的更多需求，我们还提供1对1的定制咨询服务！
 ![服务展示3_](https://beikeshop.com/readme/README-10.png)
 
 ## 软件架构
