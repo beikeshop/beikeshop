@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Es geht nicht um die virtuelle ware, sondern um die software selbst, die nicht zurückgegeben werden kann.
 ',
     'bind_bk_token' => 'Wir haben das beik-account manipuliert und sich selbst Token kaufen lassen',
-    'bk_login_hint' => 'Mit <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> Konto anmelden',
-    'bk_register_hint' => 'Registrieren Sie ein neues Konto bei <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Mit <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> Konto anmelden',
+    'bk_register_hint' => 'Registrieren Sie ein neues Konto bei <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'Kaufen.',
     'btn_buy_service' => 'Ich kaufe einen verkauf.',
     'check_token_error' => 'Token hat keine übereinstimmung mit aktuellen webseiten. Bitte, übertinken sie',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Was genau zu zahlen ist.',
     'text_version' => 'Version',
     'to_update' => 'Wir rüsten sie auf.',
-    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">neueste Version </a>',
+    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="http://beikeshop.cn.test/download" target="_blank">neueste Version </a>',
     'wxpay' => 'Wechat übernimmt die rechnung.',
     'yuan' => 'dollar',
 ];

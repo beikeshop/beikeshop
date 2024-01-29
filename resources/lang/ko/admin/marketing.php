@@ -18,8 +18,8 @@ return [
     'attention_3' => '소프트웨어 자체의 문제가 아니면 가상 상품은 일체 교환되지 않는다.
 ',
     'bind_bk_token' => 'beikeshop 계정을 연동하여 자동으로 토큰을 획득한다',
-    'bk_login_hint' => '<a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> 계정으로 로그인하세요',
-    'bk_register_hint' => '<a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>에 새 계정을 등록하세요',
+    'bk_login_hint' => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 계정으로 로그인하세요',
+    'bk_register_hint' => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>에 새 계정을 등록하세요',
     'btn_buy' => '구매',
     'btn_buy_service' => '구매 애프터서비스',
     'check_token_error' => '토큰이 현재 방문한 사이트와 일치하지 않습니다. 다시 가져오십시오',
@@ -58,7 +58,7 @@ return [
     'text_pay' => '지급금액',
     'text_version' => '버전',
     'to_update' => '업그레이드하러 가기',
-    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">최신 버전으로 업그레이드하세요. </a>',
+    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="http://beikeshop.cn.test/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
     'wxpay' => '위챗 코드 스캔 결제!',
     'yuan' => '위안',
 ];

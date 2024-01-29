@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Los productos virtuales, que no son problemas del software en sí, no pueden ser devueltos o intercambiados.
 ',
     'bind_bk_token' => 'Vincular la cuenta BeikeShop y obtener tokens automáticamente',
-    'bk_login_hint' => 'Iniciar sesión con la cuenta <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
-    'bk_register_hint' => 'Registrar una nueva cuenta con <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Iniciar sesión con la cuenta <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint' => 'Registrar una nueva cuenta con <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'compra',
     'btn_buy_service' => 'Comprar después de venta',
     'check_token_error' => 'El token no coincide con el sitio web actualmente visitado. Por favor, vuelva a obtenerlo',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Cantidad a pagar',
     'text_version' => 'versión',
     'to_update' => 'Ir a upgrade',
-    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">última versión </a>',
+    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="http://beikeshop.cn.test/download" target="_blank">última versión </a>',
     'wxpay' => 'Wechat barrido código de pago!',
     'yuan' => 'yuan',
 ];

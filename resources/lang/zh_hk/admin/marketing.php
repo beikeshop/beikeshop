@@ -18,8 +18,8 @@ return [
     'attention_3' => '虛擬商品,非軟件本身問題,概不退換。
 ',
     'bind_bk_token' => '綁定BeikeShop賬號，自動獲取Token',
-    'bk_login_hint' => '用 <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> 帳號登入',
-    'bk_register_hint' => '用 <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> 上註冊新帳號',
+    'bk_login_hint' => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 帳號登入',
+    'bk_register_hint' => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 上註冊新帳號',
     'btn_buy' => '購買',
     'btn_buy_service' => '購買售後',
     'check_token_error' => 'token與目前造訪網站不匹配，請重新取得',
@@ -57,7 +57,7 @@ return [
     'text_pay' => '支付金額',
     'text_version' => '版本',
     'to_update' => '去升級',
-    'version_compatible_text' => '該插件不相容於當前系統版本，請升級到 <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">最新版本</a>',
+    'version_compatible_text' => '該插件不相容於當前系統版本，請升級到 <a href="http://beikeshop.cn.test/download" target="_blank">最新版本</a>',
     'wxpay' => '微信掃碼支付!',
     'yuan' => '元',
 ];

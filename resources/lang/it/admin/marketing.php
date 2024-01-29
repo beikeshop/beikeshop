@@ -18,8 +18,8 @@ return [
     'attention_3' => 'I prodotti virtuali, che non sono il software stesso, non richiedono alcuna restituzione.
 ',
     'bind_bk_token' => '(\') tenuto conto del numero di catalogo BeikeShop',
-    'bk_login_hint' => 'Accedi con l\'account <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
-    'bk_register_hint' => 'Registra un nuovo account su <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Accedi con l\'account <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint' => 'Registra un nuovo account su <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'acquisti',
     'btn_buy_service' => 'Acquisto dopo la vendita',
     'check_token_error' => 'Token non corrisponde al sito attuale',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Importo versato',
     'text_version' => 'versione',
     'to_update' => 'deaggiornamento',
-    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">versione più recente </a>',
+    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="http://beikeshop.cn.test/download" target="_blank">versione più recente </a>',
     'wxpay' => 'Pagare il prezzo di wechat!',
     'yuan' => 'yuan',
 ];

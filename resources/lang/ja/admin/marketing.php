@@ -18,8 +18,8 @@ return [
     'attention_3' => '仮想商品は、ソフトウェア自体の問題でなければ返品・交換は一切致しません。
 ',
     'bind_bk_token' => 'BeikeShopのアカウントと連携すると自動的にトークンが取得されます',
-    'bk_login_hint' => '<a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> アカウントでログイン',
-    'bk_register_hint' => '<a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> に新しいアカウントを登録します',
+    'bk_login_hint' => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> アカウントでログイン',
+    'bk_register_hint' => '<a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> に新しいアカウントを登録します',
     'btn_buy' => '購入します',
     'btn_buy_service' => 'アフターサービスです',
     'check_token_error' => 'tokenは現在アクセスしているサイトと一致しません,再取得してください',
@@ -58,7 +58,7 @@ return [
     'text_pay' => '支払い金額です',
     'text_version' => 'バージョン',
     'to_update' => '進級します',
-    'version_compatible_text' => 'このプラグインは現在のシステム バージョンと互換性がありません。<a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">最新バージョンにアップグレードしてください。 </a>',
+    'version_compatible_text' => 'このプラグインは現在のシステム バージョンと互換性がありません。<a href="http://beikeshop.cn.test/download" target="_blank">最新バージョンにアップグレードしてください。 </a>',
     'wxpay' => '微信コード決済です!',
     'yuan' => '元です',
 ];

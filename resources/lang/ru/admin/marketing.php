@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Виртуальные товары, не связанные с программами, не могут быть возвращены.
 ',
     'bind_bk_token' => 'Свяжите аккаунт в бейкешопе и автоматически получите токена',
-    'bk_login_hint' => 'Войдите в систему, используя учетную запись <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
-    'bk_register_hint' => 'Зарегистрируйте новую учетную запись на <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Войдите в систему, используя учетную запись <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint' => 'Зарегистрируйте новую учетную запись на <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'покупк',
     'btn_buy_service' => 'После покупки и продажи',
     'check_token_error' => 'Токен не совпадает с текущим посещением сайта',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Сумма выплаты',
     'text_version' => 'версия',
     'to_update' => 'Обновление.',
-    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">последней версии </a>',
+    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="http://beikeshop.cn.test/download" target="_blank">последней версии </a>',
     'wxpay' => 'Плата за микро-код!',
     'yuan' => 'доллар',
 ];

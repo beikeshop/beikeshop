@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Barang virtual, masalah non piranti lunak itu sendiri, tak pernah bisa dikembalikan.
 ',
     'bind_bk_token' => 'Mengikat akun BeikeShop, dengan otomatis akses Token',
-    'bk_login_hint' => 'Masuk dengan akun <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
-    'bk_register_hint' => 'Daftarkan akun baru dengan <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Masuk dengan akun <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint' => 'Daftarkan akun baru dengan <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'Beli',
     'btn_buy_service' => 'Setelah pembelian',
     'check_token_error' => 'Token tidak sesuai dengan situs akses saat ini, mohon request',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Jumlah Pembayaran',
     'text_version' => 'versi',
     'to_update' => 'Pergi untuk meningkatkan',
-    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">versi terbaru </a>',
+    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href="http://beikeshop.cn.test/download" target="_blank">versi terbaru </a>',
     'wxpay' => 'Pembayaran kode pindai WeChat!',
     'yuan' => 'Yuan.',
 ];

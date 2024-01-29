@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Les produits virtuels, qui ne sont pas des problèmes de logiciel lui-même, ne seront pas retournés ou échangés.
 ',
     'bind_bk_token' => 'Lier le compte BeikeShop et obtenir des jetons automatiquement',
-    'bk_login_hint' => 'Connectez-vous avec votre compte <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
-    'bk_register_hint' => 'Enregistrer un nouveau compte avec <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Connectez-vous avec votre compte <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint' => 'Enregistrer un nouveau compte avec <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'L\'achat de',
     'btn_buy_service' => 'Acheter après vente',
     'check_token_error' => 'Le jeton ne correspond pas au site actuellement visité, veuillez le récupérer à nouveau',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Montant à payer',
     'text_version' => 'version',
     'to_update' => 'Aller à upgrade',
-    'version_compatible_text' => 'Ce plug-in n\'est pas compatible avec la version actuelle du système, veuillez mettre à niveau vers la <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">dernière version </a>',
+    'version_compatible_text' => 'Ce plug-in n\'est pas compatible avec la version actuelle du système, veuillez mettre à niveau vers la <a href="http://beikeshop.cn.test/download" target="_blank">dernière version </a>',
     'wxpay' => 'Wechat balayage code de paiement!',
     'yuan' => 'Les métadonnées',
 ];

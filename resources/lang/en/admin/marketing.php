@@ -18,8 +18,8 @@ return [
     'attention_3' => 'Virtual goods, not the software itself, will not be returned.
 ',
     'bind_bk_token' => 'Bind BeikeShop account and get Token automatically',
-    'bk_login_hint' => 'Log in with <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a> account',
-    'bk_register_hint' => 'Register a new account with <a href=\\\\\"https://beikeshop.com/account\\\\\" target=\\\\\"_blank\\\\\">beikeshop.com</a>',
+    'bk_login_hint' => 'Log in with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> account',
+    'bk_register_hint' => 'Register a new account with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy' => 'Buy',
     'btn_buy_service' => 'Buy service',
     'check_token_error' => 'The token does not match the website you are currently visiting, please obtain it again',
@@ -58,7 +58,7 @@ return [
     'text_pay' => 'Payment Amount',
     'text_version' => 'version',
     'to_update' => 'To Upgrade',
-    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href=\\\\\"http://beikeshop.cn.test/download\\\\\" target=\\\\\"_blank\\\\\">latest version</a>',
+    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="http://beikeshop.cn.test/download" target="_blank">latest version</a>',
     'wxpay' => 'WeChat scan code payment!',
     'yuan' => 'yuan',
 ];
