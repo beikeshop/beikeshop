@@ -58,7 +58,7 @@
                     {{ $loop->iteration }}
                   @endif
                 </td>
-                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
+                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link text-break">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
                 <td>{{ $item['total_quantity'] }}</td>
               </tr>
             @endforeach
@@ -91,7 +91,7 @@
                     {{ $loop->iteration }}
                   @endif
                 </td>
-                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
+                <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link text-break">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
                 <td>{{ $item['total_amount'] }}</td>
               </tr>
             @endforeach
@@ -125,7 +125,7 @@
                     {{ $loop->iteration }}
                   @endif
                 </td>
-                <td><a target="_blank" href="{{ admin_route('customers.edit', [$item['customer']['id'] ?? 0]) }}" class="text-link">{{ $item['customer']['name'] ?? '' }}</a></td>
+                <td><a target="_blank" href="{{ admin_route('customers.edit', [$item['customer']['id'] ?? 0]) }}" class="text-link text-break">{{ $item['customer']['name'] ?? '' }}</a></td>
                 <td>{{ $item['order_amount'] }}</td>
               </tr>
             @endforeach

@@ -69,3 +69,11 @@
   height: 32px;
   margin-top: 3px;
 }
+
+.el-date-editor {
+  &.el-input--small {
+    .el-input__inner {
+      padding-left: 1.75rem;
+    }
+  }
+}

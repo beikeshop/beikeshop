@@ -74,7 +74,18 @@
                   @endif
                 </div>
 
-                <div class="col-12 "></div>
+                <div class="col-6 mb-4">
+                  <label class="form-label">{{ __('common.image') }}</label>
+                  <div class="p-2 bg-light h-min-100">
+                    <div class="image-wrap d-flex flex-wrap">
+                      <div class="up-img d-flex align-items-center flex-wrap"></div>
+                      <label class="btn wh-60 btn-light d-flex align-items-center justify-content-center shadow-sm bg-body">
+                        <i class="bi bi-plus-lg fs-3"></i>
+                        <input type="file" class="d-none" id="update-btn" name="" accept="image/*" multiple>
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="col-6 mb-4">
                   <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
@@ -82,7 +93,7 @@
                 </div>
 
                 <div class="col-12 mt-4">
-                  <button class="btn btn-primary mt-sm-0" type="submit">{{ __('shop/common.submit') }}</button>
+                  <button class="btn btn-primary mt-sm-0 w-min-100" type="submit">{{ __('shop/common.submit') }}</button>
                 </div>
               </div>
             </form>
@@ -94,5 +105,27 @@
 @endsection
 
 @push('add-scripts')
+<script>
+  $(document).on('change', '#update-btn', function(e) {
+    var files = e.target.files;
 
+    for (var i = 0; i < files.length; i++) {
+      var image = files[i];
+      var formData = new FormData();
+      formData.append('file', image);
+      formData.append('type', 'rma');
+      $http.post('{{ shop_route('file.store') }}', formData).then(res => {
+        if (res.data.value) {
+          var html = '<div class="img-item wh-60 me-2 mb-2 border rounded position-relative d-flex align-items-center justify-content-center"><img src="' + res.data.url + '" class="img-fluid"><input type="hidden" name="images[]" value="' + res.data.value + '"><i class="bi bi-x-lg position-absolute top-0 end-0 cursor-pointer px-1 text-white bg-danger"></i></div>';
+          $('.image-wrap .up-img').append(html);
+          $('#update-btn').val('');
+        }
+      })
+    }
+  });
+
+  $(document).on('click', '.image-wrap .up-img .img-item i', function() {
+    $(this).parent().remove();
+  });
+</script>
 @endpush

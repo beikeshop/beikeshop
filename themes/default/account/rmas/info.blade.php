@@ -72,6 +72,11 @@
               </div>
 
               <div class="col-6 mb-4">
+                <label class="form-label">{{ __('common.image') }}</label>
+                {{-- <div>{{$rma['comment']}}</div> --}}
+              </div>
+
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
                 <div>{{$rma['comment']}}</div>
               </div>
