@@ -52,6 +52,18 @@
                 <td>{{ __('admin/rma.reasons_return') }}：</td>
                 <td>{{ $rma['reason'] }}</td>
               </tr>
+              <tr>
+                <td>{{ __('common.image') }}：</td>
+                @if ($rma['images'] && count($rma['images']) > 0)
+                  <td class="d-flex align-items-center flex-wrap">
+                    @foreach ($rma['images'] as $image)
+                      <a class="img-item wh-60 me-2 mb-2 border rounded position-relative d-flex align-items-center justify-content-center" target="_blank" href="{{ image_origin($image) }}" data-toggle="tooltip" title="{{ __('common.quick_view') }}"><img src="{{ image_resize($image, 200, 200) }}" class="img-fluid"></a>
+                    @endforeach
+                  </td>
+                @else
+                  <td>{{ __('admin/builder.text_no') }}</td>
+                @endif
+              </tr>
             </tbody>
           </table>
         </div>

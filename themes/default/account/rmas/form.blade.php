@@ -27,7 +27,7 @@
               </div>
             </div>
 
-            <form action="{{ shop_route('account.rma.store') }}" method="POST">
+            <form action="{{ shop_route('account.rma.store') }}" method="POST" novalidate id="form-page" class="needs-validation">
               @csrf
               @if (session('success'))
                 <x-shop-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
@@ -37,7 +37,7 @@
 
               <div class="row">
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('shop/account/rma_form.service_type') }}</label>
+                  <label class="col-form-label">{{ __('shop/account/rma_form.service_type') }}</label>
                   <select class="form-select" name="type">
                     @foreach ($types as $key => $item)
                       <option value="{{ $key }}" {{ $key == old('type', '') ? 'selected': '' }}>{{ $item }}</option>
@@ -46,15 +46,13 @@
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('shop/account/rma_form.return_quantity') }}</label>
-                  <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text" name="quantity" value="{{ old('quantity', $orderProduct->quantity ?? '1') }}">
-                  @if ($errors->has('quantity'))
-                    <span class="invalid-feedback" role="alert">{{ $errors->first('quantity') }}</span>
-                  @endif
+                  <label class="col-form-label required">{{ __('shop/account/rma_form.return_quantity') }}</label>
+                  <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="text" name="quantity" required value="{{ old('quantity', $orderProduct->quantity ?? '1') }}" placeholder="{{ __('shop/account/rma_form.return_quantity') }}">
+                  <span class="invalid-feedback {{ $errors->has('quantity') ? 'd-block' : '' }}" role="alert">{{ __('common.error_required', ['name' => __('shop/account/rma_form.return_quantity')]) }}</span>
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('shop/account/rma_form.unpacked') }}</label>
+                  <label class="col-form-label">{{ __('shop/account/rma_form.unpacked') }}</label>
                   <select class="form-select" name="opened">
                     <option selected value="0">{{ __('common.no') }}</option>
                     <option value="1">{{ __('common.yes') }}</option>
@@ -62,7 +60,7 @@
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('shop/account/rma_form.return_reason') }}</label>
+                  <label class="col-form-label">{{ __('shop/account/rma_form.return_reason') }}</label>
                   <select class="form-select {{ $errors->has('rma_reason_id') ? 'is-invalid' : '' }}" name="rma_reason_id">
                     @foreach ($reasons as $item)
                       <option value="{{ $item['id'] }}" {{ $item['id'] == old('opened', '') ? 'selected': '' }}>{{ $item['name'] }}</option>
@@ -75,7 +73,7 @@
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('common.image') }}</label>
+                  <label class="col-form-label">{{ __('common.image') }}</label>
                   <div class="p-2 bg-light h-min-100">
                     <div class="image-wrap d-flex flex-wrap">
                       <div class="up-img d-flex align-items-center flex-wrap"></div>
@@ -88,7 +86,7 @@
                 </div>
 
                 <div class="col-6 mb-4">
-                  <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
+                  <label class="col-form-label">{{ __('shop/account/rma_form.remark') }}</label>
                   <textarea rows="4" type="text" name="comment" class="form-control">{{ old('comment', '') }}</textarea>
                 </div>
 
