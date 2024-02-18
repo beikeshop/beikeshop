@@ -11,7 +11,7 @@
 @endpush
 
 @section('page-title-after')
-{{ __('admin/marketing.attention') }}
+{{ __('admin/marketing.attention_2') }}
 @endsection
 
 @section('content')
