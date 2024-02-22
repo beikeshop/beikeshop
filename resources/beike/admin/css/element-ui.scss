@@ -45,6 +45,9 @@
     border-radius: var(--bs-border-radius);
     border-color: #e2e2e2;
     padding-left: 0.75rem;
+  }
+
+  .el-textarea__inner, .el-input__inner {
     &::-webkit-input-placeholder {
       color: #666;
     }
