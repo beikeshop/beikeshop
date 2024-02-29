@@ -124,6 +124,7 @@
         plugins: @json($plugins ?? []),
         same_domain: @json($same_domain ?? false),
         page: bk.getQueryString('page', 1) * 1,
+        isBack: false,
 
         filter: {
           keyword: bk.getQueryString('keyword'),
@@ -140,14 +141,15 @@
         // 监听浏览器返回事件
         window.addEventListener('popstate', () => {
           const page = bk.getQueryString('page');
+          this.isBack = true;
 
           if (this.page < 2) {
             window.history.back(-1);
             return;
           }
 
-          this.page = page * 1 - 1;
-          this.loadData();
+          this.page = page * 1;
+          this.loadData(true);
         });
       },
 
@@ -189,9 +191,12 @@
 
       methods: {
         loadData() {
-          window.history.pushState('', '', this.url);
+          if (!this.isBack) {
+            window.history.pushState('', '', this.url);
+          }
           $http.get(this.url).then((res) => {
             this.plugins = res.data.plugins;
+            this.isBack = false;
           })
         },
 
