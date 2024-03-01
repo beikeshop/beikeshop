@@ -73,7 +73,7 @@ class BrandController extends Controller
         ];
         hook_action('admin.brand.update.before', $data);
         $brand = BrandRepo::update($brand, $requestData);
-        $brand = hook_filter('admin.brand.update.after', $brand);
+        hook_action('admin.brand.update.after', ['brand' => $brand, 'request_data' => $requestData]);
 
         return json_success(trans('common.updated_success'), $brand);
     }
