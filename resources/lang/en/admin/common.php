@@ -111,4 +111,5 @@ return [
     'buy_copyright'                    => 'Buy Copyright',
     'translate_form'                   => 'Please enter the content to be translated',
     'copyright_hint_text'              => 'Please reserve the copyright, or go to <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a>',
+    'help'                             => 'Help',
 ];

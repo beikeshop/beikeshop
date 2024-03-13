@@ -55,13 +55,14 @@
             <x-admin-form-textarea name="meta_keywords" title="{{ __('admin/setting.meta_keywords') }}" value="{{ old('meta_keywords', system_setting('base.meta_keywords', '')) }}" />
             <x-admin-form-input name="telephone" title="{{ __('admin/setting.telephone') }}" value="{{ old('telephone', system_setting('base.telephone', '')) }}" />
             <x-admin-form-input name="email" title="{{ __('admin/setting.email') }}" value="{{ old('email', system_setting('base.email', '')) }}" />
-            {{-- <x-admin-form-input name="license_code" title="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}" /> --}}
             <x-admin::form.row title="{{ __('admin/setting.license_code') }}">
               <div class="input-group wp-400">
                 <input type="text" class="form-control text-uppercase bg-light" name="license_code" placeholder="{{ __('admin/setting.license_code') }}" value="{{ old('license_code', system_setting('base.license_code', '')) }}" readonly="readonly">
                 <button class="btn btn-outline-primary get-license-code" type="button">{{ __('admin/setting.license_code_get') }}</button>
               </div>
             </x-admin::form.row>
+
+            <x-admin-form-switch name="guide" title="{{ __('admin/guide.heading_title') }}" value="{{ old('guide', system_setting('base.guide', '1')) }}" />
             @hook('admin.setting.general.after')
           </div>
 

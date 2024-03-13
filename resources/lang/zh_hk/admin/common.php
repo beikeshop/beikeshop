@@ -104,4 +104,5 @@ return [
     'update_title'           => '發現新的BeikeShop版本，是否立即更新',
     'zone'                   => '省份管理',
     'zones_index'            => '省份管理',
+    'help'                   => '幫助',
 ];

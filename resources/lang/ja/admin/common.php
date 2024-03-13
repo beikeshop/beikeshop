@@ -104,4 +104,5 @@ return [
     'update_title'           => 'BeikeShop の新しいバージョンを見つけて、今すぐ更新するかどうか',
     'zone'                   => '地方管理',
     'zones_index'            => '州管理',
+    'help'                   => 'ヘルプ',
 ];

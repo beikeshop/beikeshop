@@ -61,6 +61,7 @@ return [
     'header_search_input'    => '搜索后台功能',
     'header_search_title'    => '搜索结果',
     'license_services'       => '技术支持',
+    'help'                   => '帮助',
 
     // sidebar
     'account_index'          => '个人中心',

@@ -260,6 +260,7 @@ Route::prefix($adminName)
 
                 Route::middleware('can:settings_index')->get('settings', [Controllers\SettingController::class, 'index'])->name('settings.index');
                 Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
+                Route::middleware('can:settings_update')->put('settings/values', [Controllers\SettingController::class, 'updateValues'])->name('settings.update_values');
                 Route::middleware('can:settings_update')->post('settings/store_token', [Controllers\SettingController::class, 'storeDeveloperToken'])->name('settings.store_token');
 
                 // 税类
@@ -279,6 +280,9 @@ Route::prefix($adminName)
                 Route::middleware('can:admin_users_create')->post('admin_users', [Controllers\AdminUserController::class, 'store'])->name('admin_users.store');
                 Route::middleware('can:admin_users_update')->put('admin_users/{user_id}', [Controllers\AdminUserController::class, 'update'])->name('admin_users.update');
                 Route::middleware('can:admin_users_delete')->delete('admin_users/{user_id}', [Controllers\AdminUserController::class, 'destroy'])->name('admin_users.destroy');
+
+                // help
+                Route::middleware('can:help_index')->get('help', [Controllers\HelpController::class, 'index'])->name('help.index');
 
                 // 后台用户组
                 Route::middleware('can:admin_roles_index')->get('admin_roles', [Controllers\AdminRoleController::class, 'index'])->name('admin_roles.index');

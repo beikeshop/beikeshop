@@ -104,4 +104,5 @@ return [
     'update_title'           => 'Temukan TuikeShop versi baru, apakah akan diperbarui sekarang',
     'zone'                   => 'Pengelolaan Provinsi',
     'zones_index'            => 'Pengelolaan Provinsi',
+    'help'                   => 'Bantuan',
 ];

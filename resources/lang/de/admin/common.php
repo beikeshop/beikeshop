@@ -104,4 +104,5 @@ return [
     'update_title'           => 'Neue Version von BeikeShop suchen, jetzt aktualisieren',
     'zone'                   => 'Provinz',
     'zones_index'            => 'Provinzverwaltung',
+    'help'                   => 'Helfen',
 ];

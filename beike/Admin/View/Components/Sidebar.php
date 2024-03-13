@@ -124,6 +124,13 @@ class Sidebar extends Component
                 'prefixes' => $this->getSettingSubPrefix(),
                 'children' => $this->getSettingSubRoutes(),
             ],
+            [
+                'route'    => 'help.index',
+                'title'    => trans('admin/common.help'),
+                'icon'     => 'bi bi-question-circle',
+                'prefixes' => ['help'],
+                'children' => [],
+            ],
         ];
 
         return hook_filter('admin.components.sidebar.menus', $menus);
