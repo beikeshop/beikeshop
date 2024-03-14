@@ -1,3 +1,6 @@
+#  **请移步到 https://github.com/beikeshop/beikeshop** 
+
+
 <img height=70 src="https://beikeshop.com/image/beike.svg" >
 
 #  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一款开源好用的跨境电商系统
@@ -68,11 +71,14 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 ![页面展示4_后台商品列表](https://beikeshop.com/readme/README-6.png)
 ![页面展示5_后台功能搜索](https://beikeshop.com/readme/README-7.png)
 
-=====================
 
-## 技术服务展示
+
+## 相关服务
+如果您没有任何技术基础，或想要快速的拥有自己的独立站，可以购买我们的托管服务！
 ![服务展示1_](https://beikeshop.com/readme/README-8.png)
 ![服务展示2_](https://beikeshop.com/readme/README-9.png)
+
+如果希望使用 BeikeShop 满足您的更多需求，我们还提供1对1的定制咨询服务！
 ![服务展示3_](https://beikeshop.com/readme/README-10.png)
 
 ## 软件架构
@@ -137,3 +143,5 @@ PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、
 
 ## QQ交流群： 
 群1: 639108380
+
+#  **请移步到 https://github.com/beikeshop/beikeshop** 
