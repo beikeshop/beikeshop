@@ -104,5 +104,5 @@ return [
     'update_title'           => 'Buscar una nueva versión de BeikeShop, ya sea para actualizar ahora',
     'zone'                   => 'Provincia',
     'zones_index'            => 'Provincia',
-    'help'                   => 'Ayuda',
+    'help_index'                   => 'Ayuda',
 ];

@@ -104,5 +104,5 @@ return [
     'update_title'           => '새로운 BeikeShop 버전을 발견, 즉시 업데이트하시겠습니까?',
     'zone'                   => '성 관리',
     'zones_index'            => '성 관리',
-    'help'                   => '돕다',
+    'help_index'                   => '돕다',
 ];

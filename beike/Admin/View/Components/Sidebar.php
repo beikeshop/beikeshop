@@ -126,7 +126,7 @@ class Sidebar extends Component
             ],
             [
                 'route'    => 'help.index',
-                'title'    => trans('admin/common.help'),
+                'title'    => trans('admin/common.help_index'),
                 'icon'     => 'bi bi-question-circle',
                 'prefixes' => ['help'],
                 'children' => [],
