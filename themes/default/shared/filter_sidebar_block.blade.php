@@ -4,12 +4,22 @@
     @foreach ($all_categories as $key_a => $category_all)
     <li class="{{ $category_all['id'] == $category->id ? 'active' : ''}}">
       <a href="{{ $category_all['url'] }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
-      @if ($category_all['children'])
+      @if ($category_all['children'] ?? false)
         <button class="toggle-icon btn {{ $category_all['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}"><i class="bi bi-chevron-up"></i></button>
         <ul id="category-{{ $key_a }}" class="accordion-collapse collapse {{ $category_all['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-one">
           @foreach ($category_all['children'] as $key_b => $child)
           <li class="{{ $child['id'] == $category->id ? 'active' : ''}} child-category">
-            <a href="{{ $child['url'] }}" title="{{ $child['name'] }}">{{ $child['name'] }}</a>
+            <a href="{{ $child['url'] }}" title="{{ $child['name'] }}" class="category-href">{{ $child['name'] }}</a>
+            @if ($child['children'] ?? false)
+              <button class="toggle-icon btn {{ $child['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}-{{ $key_b }}"><i class="bi bi-chevron-up"></i></button>
+              <ul id="category-{{ $key_a }}-{{ $key_b }}" class="accordion-collapse collapse {{ $child['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-{{ $key_a }}">
+                @foreach ($child['children'] as $key_c => $sub_child)
+                <li class="{{ $sub_child['id'] == $category->id ? 'active' : ''}} child-category">
+                  <a href="{{ $sub_child['url'] }}" title="{{ $sub_child['name'] }}" class="category-href">{{ $sub_child['name'] }}</a>
+                </li>
+                @endforeach
+              </ul>
+            @endif
           </li>
           @endforeach
         </ul>
@@ -101,5 +111,12 @@
       }
     });
   })
+
+  $('.child-category').each(function(index, el) {
+    if ($(this).hasClass('active')) {
+      $(this).parents('ul').addClass('show').siblings('button').removeClass('collapsed')
+      $(this).parents('li').addClass('active')
+    }
+  });
 </script>
 @endpush

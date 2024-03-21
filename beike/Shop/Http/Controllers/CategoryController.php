@@ -4,6 +4,7 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Models\Category;
 use Beike\Repositories\CategoryRepo;
+use Beike\Repositories\FlattenCategoryRepo;
 use Beike\Repositories\ProductRepo;
 use Beike\Shop\Http\Resources\CategoryDetail;
 use Beike\Shop\Http\Resources\ProductSimple;
@@ -27,7 +28,7 @@ class CategoryController extends Controller
         $filterData = array_merge($filterData, ['category_id' => $category->id, 'active' => 1]);
 
         $data       = [
-            'all_categories'  => CategoryRepo::getTwoLevelCategories(),
+            'all_categories'  => FlattenCategoryRepo::getCategoryList(),
             'category'        => $category,
             'children'        => CategoryDetail::collection($category->activeChildren)->jsonSerialize(),
             'filter_data'     => [
