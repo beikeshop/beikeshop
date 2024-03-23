@@ -13,6 +13,7 @@
         </div>
         <div class="checkout-success__header__title">
           <h1>{{ __('shop/checkout.checkout_success_title') }}</h1>
+          @hook('checkout.success.checkout_success_title.after')
         </div>
       </div>
       <div class="checkout-success__body">
