@@ -401,6 +401,7 @@ $data = $plugin['data'];
 
             $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
               this.setTokenDialog.show = false;
+              window.location.reload();
             })
           })
         });
