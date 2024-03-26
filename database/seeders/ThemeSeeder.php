@@ -1243,12 +1243,12 @@ class ThemeSeeder extends Seeder
                     ]
                 ],
                 "contact" => [
-                    "telephone" => "028-87966209",
+                    "telephone" => "028-88888888",
                     "address" => [
-                        "en" => "G8 Tianfu Software Park Chengdu China, Guangda Network Technology Co., Ltd.",
-                        "zh_cn" => "成都市高新区益州大道中段1858号天府软件园G8 成都光大网络科技有限公司"
+                        "en" => "Your company address",
+                        "zh_cn" => "您的公司地址"
                     ],
-                    "email" => "marketing@guangda.work"
+                    "email" => "support@example.com"
                 ]
             ],
             "bottom" => [

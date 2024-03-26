@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2023-09-13 17:31:20
+ * @LastEditTime  2024-03-26 08:51:01
  */
 
 import http from "../../../js/http";
@@ -64,6 +64,7 @@ $(document).ready(function ($) {
     },
   });
 
+  checkHasLicenseCode()
   autoActiveTab()
   tinymceInit()
   inputLocaleTranslate()
@@ -195,5 +196,17 @@ const checkRemoveCopyRight = () => {
     if (!$('.warning-copyright').length) {
       $('.header-content .header-right .navbar-right').prepend('<div class="alert alert-warning mb-0 warning-copyright"><i class="bi bi-exclamation-triangle-fill"></i> 请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a></div>')
     }
+  }
+}
+
+// 检查 license_code 为空的话则发请求 获取，有值就写入 setting
+const checkHasLicenseCode = () => {
+  if (!config.has_license_code) {
+    $http.get(`${config.api_url}/api/licensed`, {domain: config.app_url}, {hload: true}).then((res) => {
+      if (res.license_code) {
+        $http.put('settings/values', {license_code: res.license_code}, {hload: true});
+        $('input[name="license_code"]').val(res.license_code)
+      }
+    })
   }
 }
