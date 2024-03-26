@@ -2,19 +2,24 @@
 /**
  * Lang.php
  *
- * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-11 10:15:35
+ * @modified   2024-01-26 03:03:23
  */
 
 return [
     'ali_pay_success'         => 'Payment completed? ',
+    'login_download'          => 'Login Of Download',
     'ali_pay_text'            => 'Payment has been completed, please refresh the page',
     'amount'                  => 'Order amount',
-    'attention'               => 'Please note: Each plugin purchase is only authorized for use in the domain name purchased! It is prohibited to use multiple domain names in one purchase, and any violation will be held legally responsible!',
+    'attention_1'             => 'Please note:',
+    'attention_2'             => 'Each plugin purchase is only authorized to be used in the corresponding purchased domain name! It is prohibited to use multiple domain names in one purchase, and any violation will be held legally responsible!',
+    'attention_3'             => 'Virtual goods, not the software itself, will not be returned.',
     'bind_bk_token'           => 'Bind BeikeShop account and get Token automatically',
+    'bk_login_hint'           => 'Log in with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> account',
+    'bk_register_hint'        => 'Register a new account with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy'                 => 'Buy',
     'btn_buy_service'         => 'Buy service',
     'check_token_error'       => 'The token does not match the website you are currently visiting, please obtain it again',
@@ -53,10 +58,7 @@ return [
     'text_pay'                => 'Payment Amount',
     'text_version'            => 'version',
     'to_update'               => 'To Upgrade',
+    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="http://beikeshop.cn.test/download" target="_blank">latest version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
-
-    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
-    'bk_register_hint'        => 'Register a new account with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
-    'bk_login_hint'           => 'Log in with <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> account',
 ];

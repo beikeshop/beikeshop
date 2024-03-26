@@ -2,19 +2,23 @@
 /**
  * Lang.php
  *
- * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-11 10:16:05
+ * @modified   2024-01-26 03:03:26
  */
 
 return [
     'ali_pay_success'         => '¿Ya ha realizado el pago?',
     'ali_pay_text'            => 'Pago completado, por favor refresque la página',
     'amount'                  => 'Cantidad del pedido',
-    'attention'               => 'Tenga en cuenta: ¡Cada compra de plugin, solo autoriza su uso en el dominio correspondiente a la compra! Está prohibido comprar una vez para usar en más de un dominio. Cualquier violación será considerada legalmente responsable!',
+    'attention_1'             => 'Tenga en cuenta que:',
+    'attention_2'             => 'Con cada compra de plugin, sólo se autoriza su uso en el dominio correspondiente a la compra! Está prohibido comprar una vez para usar en más de un dominio. Cualquier violación será considerada legalmente responsable!',
+    'attention_3'             => 'Los productos virtuales, que no son problemas del software en sí, no pueden ser devueltos o intercambiados.',
     'bind_bk_token'           => 'Vincular la cuenta BeikeShop y obtener tokens automáticamente',
+    'bk_login_hint'           => 'Iniciar sesión con la cuenta <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
+    'bk_register_hint'        => 'Registrar una nueva cuenta con <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy'                 => 'compra',
     'btn_buy_service'         => 'Comprar después de venta',
     'check_token_error'       => 'El token no coincide con el sitio web actualmente visitado. Por favor, vuelva a obtenerlo',
@@ -53,10 +57,7 @@ return [
     'text_pay'                => 'Cantidad a pagar',
     'text_version'            => 'versión',
     'to_update'               => 'Ir a upgrade',
+    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="http://beikeshop.cn.test/download" target="_blank">última versión </a>',
     'wxpay'                   => 'Wechat barrido código de pago!',
     'yuan'                    => 'yuan',
-
-    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="' . config('beike.api_url') . '/download" target="_blank">última versión </a>',
-    'bk_register_hint'        => 'Registrar una nueva cuenta con <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
-    'bk_login_hint'           => 'Iniciar sesión con la cuenta <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
 ];

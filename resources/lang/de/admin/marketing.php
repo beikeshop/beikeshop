@@ -2,19 +2,23 @@
 /**
  * Lang.php
  *
- * @copyright  2023 beikeshop.com - All Rights Reserved
+ * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2023-12-11 10:16:00
+ * @modified   2024-01-26 03:03:20
  */
 
 return [
     'ali_pay_success'         => 'Schon bezahlt?',
     'ali_pay_text'            => 'Die rechnung ist bezahlt, bitte aktualisieren sie die seite',
     'amount'                  => 'Der umfang der bestellung',
-    'attention'               => 'Beachten sie: für jedes modul ist nur der gebrauch der betreffenden domain erlaubt! Ein einziger kauf Von domain-namen ist verboten, und verstöße werden zur rechenschaft gezogen!',
+    'attention_1'             => 'Wir Bitten um eines:',
+    'attention_2'             => 'Zum kaufen jedes modul ist nur der gebrauch der betreffenden domain erlaubt! Ein einziger kauf Von domain-namen ist verboten, und verstöße werden zur rechenschaft gezogen!',
+    'attention_3'             => 'Es geht nicht um die virtuelle ware, sondern um die software selbst, die nicht zurückgegeben werden kann.',
     'bind_bk_token'           => 'Wir haben das beik-account manipuliert und sich selbst Token kaufen lassen',
+    'bk_login_hint'           => 'Mit <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> Konto anmelden',
+    'bk_register_hint'        => 'Registrieren Sie ein neues Konto bei <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
     'btn_buy'                 => 'Kaufen.',
     'btn_buy_service'         => 'Ich kaufe einen verkauf.',
     'check_token_error'       => 'Token hat keine übereinstimmung mit aktuellen webseiten. Bitte, übertinken sie',
@@ -53,10 +57,7 @@ return [
     'text_pay'                => 'Was genau zu zahlen ist.',
     'text_version'            => 'Version',
     'to_update'               => 'Wir rüsten sie auf.',
+    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="http://beikeshop.cn.test/download" target="_blank">neueste Version </a>',
     'wxpay'                   => 'Wechat übernimmt die rechnung.',
     'yuan'                    => 'dollar',
-
-    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="' . config('beike.api_url') . '/download" target="_blank">neueste Version </a>',
-    'bk_register_hint'        => 'Registrieren Sie ein neues Konto bei <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a>',
-    'bk_login_hint'           => 'Mit <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> Konto anmelden',
 ];
