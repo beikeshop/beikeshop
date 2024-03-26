@@ -105,23 +105,26 @@ $data = $plugin['data'];
               </el-radio-group>
             </div>
             @endif
-            @if ($data['downloadable'])
-            <div>
-              <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
-                __('admin/marketing.download_plugin') }}</button>
-              @if (isset($data['plugin_services']) && count($data['plugin_services']))
-              <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
-                __('admin/marketing.btn_buy_service') }}</button>
-              @endif
-              @if ( $data['service_date_to'] ?? 0)
-              <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
-              @endif
-            </div>
-            <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
-                  class="bi bi-cursor-fill"></i> <span></span></a></div>
+
+            @if (!system_setting('base.developer_token'))
+              <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">
+                {{ __('admin/marketing.login_download') }}
+              </button>
+            @elseif ($data['downloadable'])
+              <div>
+                <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
+                  __('admin/marketing.download_plugin') }}</button>
+                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+                  __('admin/marketing.btn_buy_service') }}</button>
+                @endif
+                @if ( $data['service_date_to'] ?? 0)
+                <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
+                @endif
+              </div>
+              <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i class="bi bi-cursor-fill"></i> <span></span></a></div>
             @else
-            <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
-              __('admin/marketing.btn_buy') }}</button>
+              <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }}</button>
             @endif
           @else
           <div class="alert alert-warning" role="alert">

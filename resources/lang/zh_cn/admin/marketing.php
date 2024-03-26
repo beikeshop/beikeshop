@@ -11,6 +11,7 @@
 
 return [
     'marketing_list'          => '插件市场',
+    'login_download'          => '登录后下载',
     'plugin_name'             => '插件名称',
     'marketing_index'         => '市场首页',
     'marketing_show'          => '插件详情',

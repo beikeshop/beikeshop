@@ -11,6 +11,7 @@
 
 return [
     'ali_pay_success'         => 'Payment completed? ',
+    'login_download'          => 'Login Of Download',
     'ali_pay_text'            => 'Payment has been completed, please refresh the page',
     'amount'                  => 'Order amount',
     'attention_1'             => 'Please note:',
