@@ -179,7 +179,14 @@
 
       methods: {
         loadData() {
-          $http.get(`zones?page=${this.page}`).then((res) => {
+          let filter = {}
+          Object.keys(this.filter).forEach(key => {
+            if (this.filter[key]) {
+              filter[key] = this.filter[key]
+            }
+          })
+
+          $http.get(`zones?page=${this.page}`, filter).then((res) => {
             this.zones = res.data.zones;
           })
         },
