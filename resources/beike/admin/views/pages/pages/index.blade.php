@@ -33,7 +33,7 @@
             <td>{{ $page['id'] }}</td>
             <td>
               <div title="{{ $page['title'] ?? '' }}"><a class="text-dark"
-                  href="{{ shop_route('pages.show', $page['id']) }}" target="_blank">{{ $page['title_format'] ?? ''
+                  href="{{ $page['url'] }}" target="_blank">{{ $page['title_format'] ?? ''
                   }}</a></div>
             </td>
             <td class="{{ $page['active'] ? 'text-success' : 'text-secondary' }}">
