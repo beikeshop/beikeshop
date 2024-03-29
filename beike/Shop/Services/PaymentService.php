@@ -50,8 +50,8 @@ class PaymentService
         $paymentCode      = Str::studly($orderPaymentCode);
         $viewPath         = "$paymentCode::checkout.payment";
 
-        $viewPath = hook_filter('service.payment.pay.view_path',$viewPath);
-        
+        $viewPath = hook_filter('service.payment.pay.view_path', $viewPath);
+
         if (! view()->exists($viewPath)) {
             throw new \Exception("找不到支付方式 {$orderPaymentCode} 模板 {$viewPath}");
         }
