@@ -56,6 +56,8 @@ return [
 
     'asset_url'       => env('ASSET_URL', null),
 
+    'trusted_hosts'   => explode(',', env('TRUSTED_HOSTS')),
+    'trusted_proxies' => explode(',', env('TRUSTED_PROXIES')),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
