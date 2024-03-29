@@ -105,4 +105,5 @@ return [
     'zone'                         => 'Pengelolaan Provinsi',
     'zones_index'                  => 'Pengelolaan Provinsi',
     'help_index'                   => 'Bantuan',
+    'license_bought' => 'Resmi',
 ];

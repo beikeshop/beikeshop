@@ -105,4 +105,5 @@ return [
     'zone'                         => 'Provinz',
     'zones_index'                  => 'Provinzverwaltung',
     'help_index'                   => 'Helfen',
+    'license_bought' => 'Autorisiert',
 ];

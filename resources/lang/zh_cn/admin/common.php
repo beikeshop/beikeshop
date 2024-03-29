@@ -111,5 +111,6 @@ return [
     'not_enabled'            => '不启用',
     'translate_form'         => '请输入要翻译的内容',
     'buy_copyright'          => '购买版权',
+    'license_bought'         => '已授权',
     'copyright_hint_text'    => '请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a>',
 ];

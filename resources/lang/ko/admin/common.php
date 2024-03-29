@@ -105,4 +105,5 @@ return [
     'zone'                         => '성 관리',
     'zones_index'                  => '성 관리',
     'help_index'                   => '돕다',
+    'license_bought' => '인정 받은',
 ];
