@@ -191,8 +191,35 @@ $data = $plugin['data'];
             </el-form-item>
 
             <el-form-item label="{{ __('address.phone') }}" prop="telephone">
-              <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.telephone"
-                placeholder="{{ __('address.phone') }}"></el-input>
+              <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" class="v-input-calling-code" v-model="registerForm.telephone"
+                placeholder="{{ __('address.phone') }}">
+                <el-dropdown slot="prepend" placement="bottom-start" trigger="click" class="v-dropdown-calling-code">
+                  <span class="el-dropdown-link">
+                    <img :src="'https://beikeshop.com/image/flag/' + callingCode.icon + '.png'" class="img-fluid" style="width: 16px">
+                    @{{ callingCode.region }} + @{{ callingCode.code }} <i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <div class="calling-code-dropdown el">
+                      <div class="position-relative">
+                        <i class="bi bi-search position-absolute top-0 start-0 ms-2" style="margin-top: 6px">&#xe65b;</i>
+                        <input type="text" placeholder="{{ __('admin/marketing.code_keyword') }}" class="form-control ps-4" v-model="codeKeyword" @input="searchCode">
+                      </div>
+                      <hr>
+                      <el-dropdown-item>
+                        <ul class="code-list ps-0">
+                          <li v-for="item, index in callingCodes" :key="index" @click="checkedCode(index)">
+                            <span>
+                              <img :src="'https://beikeshop.com/image/flag/' + item.icon + '.png'" class="img-fluid">
+                              @{{ item.region }}
+                            </span>
+                            <span>@{{ item.code }}</span>
+                          </li>
+                        </ul>
+                      </el-dropdown-item>
+                    </div>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </el-input>
             </el-form-item>
 
             <el-form-item label="{{ __('shop/login.email') }}" prop="email">
@@ -337,9 +364,17 @@ $data = $plugin['data'];
         email: '',
         name: '',
         telephone: '',
+        calling_code: document.documentElement.lang === 'zh_cn' ? '86' : '1',
         qq: '',
         password: '',
       },
+
+      callingCodes: @json($plugin['calling_codes'] ?? []),
+      source: {
+        callingCodes: @json($plugin['calling_codes'] ?? []),
+      },
+
+      codeKeyword: '',
 
       loginRules: {
         email: [
@@ -368,11 +403,32 @@ $data = $plugin['data'];
       },
     },
 
+    computed: {
+      callingCode() {
+        return this.source.callingCodes.find(item => item.code === this.registerForm.calling_code) || 'zh_cn';
+      },
+    },
+
+    mounted() {
+      this.source.callingCodes.forEach(item => {
+        item.region_code = item.region + '' + item.code;
+      });
+    },
+
     methods: {
+      searchCode(e) {
+        this.callingCodes = this.source.callingCodes.filter(item => item.region_code.toLowerCase().includes(this.codeKeyword.toLowerCase()));
+      },
+
+      checkedCode(index) {
+        this.registerForm.calling_code = this.callingCodes[index].code;
+      },
+
       toBkTicketUrl() {
         let code = "{{ $data['code'] }}"
         return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
       },
+
       checkedBtnLogin(form) {
         let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
 

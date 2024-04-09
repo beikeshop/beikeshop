@@ -62,4 +62,5 @@ return [
     'same_domain_error'     => '当前访问域名与根目录下 .env 文件 APP_URL 不一致, 请修改',
     'check_token_error'     => 'token与当前访问网站不匹配，请重新获取',
     'plugin_ticket'         => '提交工单',
+    'code_keyword'         => '搜索您的国家和地区',
 ];
