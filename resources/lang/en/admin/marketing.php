@@ -61,4 +61,5 @@ return [
     'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="http://beikeshop.cn.test/download" target="_blank">latest version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
+    'code_keyword'         => 'Search your country and region',
 ];
