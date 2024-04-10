@@ -59,7 +59,7 @@ class MarketingService
      */
     public function getPlugin($pluginCode): mixed
     {
-        $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version');
+        $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version') . '&locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
         $plugin = $this->httpClient->get($url)->json();
 
         if (empty($plugin)) {
