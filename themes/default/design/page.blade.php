@@ -14,7 +14,7 @@
           @foreach ($content['items'] as $item)
           <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">
-              <div class="image"><a href="{{ shop_route('pages.show', [$item['id']]) }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
+              <div class="image"><a href="{{ (isset($item['url'])?$item['url']:shop_route('pages.show', [$item['id']])) }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
               </div>
               <div class="page-info">
                 <div class="pages-title"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ $item['description']['title'] ?? '' }}</a></div>
