@@ -208,7 +208,9 @@ class DesignService
     private static function handlePage($content): array
     {
         $content['title'] = $content['title'][locale()] ?? '';
-        $content['items'] = PageRepo::getPagesByIds($content['items'])->jsonSerialize();
+        $items            = PageRepo::getPagesByIds($content['items'])->jsonSerialize();
+        $items            = hook_filter('service.design.module.page.handle', $items);
+        $content['items'] = $items;
 
         return $content;
     }
