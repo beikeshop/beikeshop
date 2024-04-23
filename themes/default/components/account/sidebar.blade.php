@@ -28,9 +28,11 @@
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.order.index') || equal_route('shop.account.order.show') ? 'active' : '' }}"
           href="{{ shop_route('account.order.index') }}">
           <span>{{ __('shop/account/order.index') }}</span></a>
+        @hookwrapper('account.sidebar.nav.addresses')
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.addresses.index') ? 'active' : '' }}"
           href="{{ shop_route('account.addresses.index') }}">
           <span>{{ __('shop/account/addresses.index') }}</span></a>
+        @endhookwrapper
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.wishlist.index') ? 'active' : '' }}"
           href="{{ shop_route('account.wishlist.index') }}">
           <span>{{ __('shop/account/wishlist.index') }}</span></a>
