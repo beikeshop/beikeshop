@@ -71,7 +71,7 @@
               </div>
             </div>
           </div>
-
+          @hookwrapper('checkout.success.address_info')
           <div class="card">
             <div class="card-header"><h5 class="card-title">{{ __('order.address_info') }}</h5></div>
             <div class="card-body">
@@ -113,6 +113,7 @@
               </table>
             </div>
           </div>
+          @endhookwrapper
         </div>
       </div>
 
