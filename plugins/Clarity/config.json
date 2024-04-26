@@ -1,0 +1,18 @@
+{
+    "code": "clarity",
+    "name": {
+        "zh_cn": "Clarity",
+        "en": "Microsoft Clarity"
+    },
+    "description": {
+        "zh_cn": "Clarity 是一种行为分析工具，帮助您了解用户体验，让您的网站更好地运行",
+        "en": "Clarity is a cutting-edge behavioral analysis tool that helps you understand user interaction with your website. By using Clarity's robust analysis tools, you can enhance your website for your clients and your business."
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "",
+    "author": {
+        "name": "jiangy",
+        "email": "jiangliu0316@outlook.com"
+    }
+}
