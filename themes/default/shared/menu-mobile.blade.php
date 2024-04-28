@@ -1,4 +1,5 @@
 <div class="accordion accordion-flush" id="menu-accordion">
+  @hook('header.menu.mobile.before')
   @foreach ($menu_content as $key => $menu)
     @if ($menu['name'])
       <div class="accordion-item">
@@ -49,4 +50,5 @@
       </div>
     @endif
   @endforeach
+  @hook('header.menu.mobile.after')
 </div>
