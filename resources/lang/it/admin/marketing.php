@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:33
+ * @modified   2024-04-25 10:56:37
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Ottieni token',
     'get_token_text'          => 'Logon BeikeShop personal centre - consolidated name, a cui si aggiungono i nomi di dominio attuali',
     'last_update'             => 'ultimo aggiornamento',
+    'lv1_developer'           => 'LV1 sviluppo',
+    'lv2_developer'           => 'La commissione ha deciso di avviare la procedura di cui all\'articolo 88, paragrafo 2, del trattato ce',
+    'lv3_developer'           => 'LV3 sviluppo',
     'marketing_buy'           => 'Acquisto di unità modulari',
     'marketing_download'      => 'Scaricamento unità modulari',
     'marketing_index'         => 'Mercato delle prime pagine',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Specifiche d\'acquisto',
     'munths'                  => 'mesi',
     'no_choose'               => 'Nessuna scelta!',
+    'official_developer'      => 'Enti pubblici di sviluppo',
     'over_date'               => 'scadenza',
     'pay_success_text'        => 'Per acquistare un successo, cliccare su come ordinare la nuova pagina',
     'pay_success_title'       => 'I pagamenti hanno successo!',

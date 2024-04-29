@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:28
+ * @modified   2024-04-25 10:56:20
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Obtenir le jeton',
     'get_token_text'          => 'Aller sur le site officiel de BeikeShop personal center - lier le domaine, ajouter le domaine actuel',
     'last_update'             => 'dernière mise à jour',
+    'lv1_developer'           => 'Développeur pour LV1',
+    'lv2_developer'           => 'Développeur pour LV2',
+    'lv3_developer'           => 'Développeur pour LV3',
     'marketing_buy'           => 'Acheter le plugin',
     'marketing_download'      => 'Télécharger le plugin',
     'marketing_index'         => 'Accueil du marché',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Acheter les spécifications',
     'munths'                  => 'mois',
     'no_choose'               => 'Pas de sélection!',
+    'official_developer'      => 'Le développeur officiel',
     'over_date'               => 'Durée de l\'expiration',
     'pay_success_text'        => 'Achat réussi, cliquez sur ok pour rafraîchir la page',
     'pay_success_title'       => 'Paiement effectué avec succès!',

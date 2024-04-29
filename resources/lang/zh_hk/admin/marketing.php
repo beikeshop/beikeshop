@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:42
+ * @modified   2024-04-25 10:57:12
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => '點擊獲取 Token',
     'get_token_text'          => '登錄 BeikeShop 官網個人中心-綁定域名，添加當前域名',
     'last_update'             => '最後更新',
+    'lv1_developer'           => 'LV1開發者',
+    'lv2_developer'           => 'LV2開發者',
+    'lv3_developer'           => 'LV3開發者',
     'marketing_buy'           => '購買插件',
     'marketing_download'      => '下載插件',
     'marketing_index'         => '市場首頁',
@@ -40,6 +43,7 @@ return [
     'month'                   => '購買規格',
     'munths'                  => '個月',
     'no_choose'               => '未選擇！',
+    'official_developer'      => '官方開發者',
     'over_date'               => '到期時間',
     'pay_success_text'        => '購買成功，點擊確定刷新頁面',
     'pay_success_title'       => '支付成功!',
