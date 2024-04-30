@@ -105,4 +105,5 @@ return [
     'zone'                         => 'gestion de la province',
     'zones_index'                  => 'Provinces',
     'help_index'                   => 'Aide',
+    'license_bought' => 'Autorisé',
 ];

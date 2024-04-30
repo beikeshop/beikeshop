@@ -105,4 +105,5 @@ return [
     'zone'                         => '地方管理',
     'zones_index'                  => '州管理',
     'help_index'                   => 'ヘルプ',
+    'license_bought' => '認可された',
 ];
