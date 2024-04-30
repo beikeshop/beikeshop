@@ -90,7 +90,7 @@ class MarketingService
      */
     public function buy($pluginCode, $postData)
     {
-        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/buy";
+        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/buy?".'locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
 
         $content = $this->httpClient->withBody($postData, 'application/json')
             ->post($url)
