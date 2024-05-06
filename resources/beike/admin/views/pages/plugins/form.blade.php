@@ -17,6 +17,18 @@
           {{ method_field('put') }}
 
           @foreach ($plugin->getColumns() as $column)
+            @if ($column['type'] == 'image')
+              <x-admin-form-image
+                :name="$column['name']"
+                :title="$column['label']"
+                :description="$column['description'] ?? ''"
+                :error="$errors->first($column['name'])"
+                :required="$column['required'] ? true : false"
+                :value="old($column['name'], $column['value'] ?? '')">
+                <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} {{ $column['recommend_size'] ?? '100*100' }}</div>
+              </x-admin-form-image>
+            @endif
+
             @if ($column['type'] == 'string')
               <x-admin-form-input
                 :name="$column['name']"
