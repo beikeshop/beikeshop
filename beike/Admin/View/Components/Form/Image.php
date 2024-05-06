@@ -12,11 +12,14 @@ class Image extends Component
 
     public string $value;
 
-    public function __construct(string $name, ?string $title, ?string $value)
+    public string $description;
+
+    public function __construct(string $name, ?string $title, ?string $value, ?string $description = '')
     {
         $this->name  = $name;
         $this->title = $title ?? '';
         $this->value = $value ?? '';
+        $this->description = $description ?? '';
     }
 
     public function render()
