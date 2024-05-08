@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:20
+ * @modified   2024-04-25 10:55:58
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Token abrufen',
     'get_token_text'          => 'Wenn wir uns an das beikesin-center in auftrag geben, müssen wir die aktuellen domains hinzufügen',
     'last_update'             => 'letzte Aktualisierung',
+    'lv1_developer'           => 'Cindy? - der entwickler',
+    'lv2_developer'           => 'Dann die lv-2',
+    'lv3_developer'           => 'Cindy - entwickler und niemand arbeitet im supermarkt',
     'marketing_buy'           => 'Das modul kaufen',
     'marketing_download'      => 'Download modul zum download',
     'marketing_index'         => 'Die erste seite vom markt.',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Die spezifikationen?',
     'munths'                  => '1 monat.',
     'no_choose'               => 'Was für eine wahl!',
+    'official_developer'      => 'Offiziell entwickler',
     'over_date'               => 'Sie ist fällig!',
     'pay_success_text'        => 'Klicken sie, um die neue seite zu aktualisieren',
     'pay_success_title'       => 'Rechnung bezahlt!',
@@ -57,7 +61,7 @@ return [
     'text_pay'                => 'Was genau zu zahlen ist.',
     'text_version'            => 'Version',
     'to_update'               => 'Wir rüsten sie auf.',
-    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="http://beikeshop.cn.test/download" target="_blank">neueste Version </a>',
+    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="' . config('beike.api_url') . '/download" target="_blank">neueste Version </a>',
     'wxpay'                   => 'Wechat übernimmt die rechnung.',
     'yuan'                    => 'dollar',
 ];

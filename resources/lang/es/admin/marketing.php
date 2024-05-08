@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:26
+ * @modified   2024-04-25 10:56:13
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Obtener token',
     'get_token_text'          => 'Ir a la página web oficial de BeikeShop personal center - enlazar el dominio, añadir el dominio actual',
     'last_update'             => 'última actualización',
+    'lv1_developer'           => 'Desarrollador en LV1',
+    'lv2_developer'           => 'Desarrollador de LV2',
+    'lv3_developer'           => 'Desarrollador en LV3',
     'marketing_buy'           => 'Comprar el plugin',
     'marketing_download'      => 'Descargar el plugin',
     'marketing_index'         => 'Mercado home page',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Especificaciones para comprar',
     'munths'                  => 'meses',
     'no_choose'               => '¡No seleccionado!',
+    'official_developer'      => 'El desarrollador oficial',
     'over_date'               => 'Tiempo de expiración',
     'pay_success_text'        => 'Compra exitosa, haga clic en ok para actualizar la página',
     'pay_success_title'       => 'Pago realizado con éxito!',
@@ -57,7 +61,7 @@ return [
     'text_pay'                => 'Cantidad a pagar',
     'text_version'            => 'versión',
     'to_update'               => 'Ir a upgrade',
-    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="http://beikeshop.cn.test/download" target="_blank">última versión </a>',
+    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="' . config('beike.api_url') . '/download" target="_blank">última versión </a>',
     'wxpay'                   => 'Wechat barrido código de pago!',
     'yuan'                    => 'yuan',
 ];

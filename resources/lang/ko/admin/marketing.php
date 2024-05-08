@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:38
+ * @modified   2024-04-25 10:56:55
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Token을 클릭하여 획득합니다',
     'get_token_text'          => 'BeikeShop 홈페이지 개인센터 로그인 - 도메인 이름 바인딩, 현재 도메인 이름 추가',
     'last_update'             => '마지막 업데이트',
+    'lv1_developer'           => 'lv1개발자',
+    'lv2_developer'           => 'lv2개발자',
+    'lv3_developer'           => 'lv3개발자',
     'marketing_buy'           => '플러그인 구매',
     'marketing_download'      => '플러그인 다운로드',
     'marketing_index'         => '마켓 초기화면',
@@ -40,6 +43,7 @@ return [
     'month'                   => '구매 스펙',
     'munths'                  => '개월',
     'no_choose'               => '선택되지 않음!',
+    'official_developer'      => '오피니언 개발자',
     'over_date'               => '기한',
     'pay_success_text'        => '플러그인 구매 성공, 페이지 새로 고침 확정 클릭',
     'pay_success_title'       => '결제 성공!',
@@ -57,7 +61,7 @@ return [
     'text_pay'                => '지급금액',
     'text_version'            => '버전',
     'to_update'               => '업그레이드하러 가기',
-    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="http://beikeshop.cn.test/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
+    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="' . config('beike.api_url') . '/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
     'wxpay'                   => '위챗 코드 스캔 결제!',
     'yuan'                    => '위안',
 ];

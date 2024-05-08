@@ -6,12 +6,11 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:23
+ * @modified   2024-04-25 10:56:05
  */
 
 return [
     'ali_pay_success'         => 'Payment completed? ',
-    'login_download'          => 'Login Of Download',
     'ali_pay_text'            => 'Payment has been completed, please refresh the page',
     'amount'                  => 'Order amount',
     'attention_1'             => 'Please note:',
@@ -23,6 +22,7 @@ return [
     'btn_buy'                 => 'Buy',
     'btn_buy_service'         => 'Buy service',
     'check_token_error'       => 'The token does not match the website you are currently visiting, please obtain it again',
+    'code_keyword'            => 'Search your country and region',
     'create_date'             => 'Order placement time',
     'days'                    => 'days',
     'download_count'          => 'download count',
@@ -33,6 +33,10 @@ return [
     'get_token'               => 'Get Token',
     'get_token_text'          => 'Log in to BeikeShop official website personal center - bind domain name, add current domain name',
     'last_update'             => 'last update',
+    'login_download'          => 'Login Of Download',
+    'lv1_developer'           => 'LV1 Developer',
+    'lv2_developer'           => 'LV2 Developers',
+    'lv3_developer'           => 'LV3 Developer',
     'marketing_buy'           => 'Buy',
     'marketing_download'      => 'Download',
     'marketing_index'         => 'Index',
@@ -41,6 +45,7 @@ return [
     'month'                   => 'Purchase specifications',
     'munths'                  => 'months',
     'no_choose'               => 'Not selected!',
+    'official_developer'      => 'Official developer',
     'over_date'               => 'Expiration time',
     'pay_success_text'        => 'Successful, click OK to refresh the page',
     'pay_success_title'       => 'Payment successful!',
@@ -58,8 +63,7 @@ return [
     'text_pay'                => 'Payment Amount',
     'text_version'            => 'version',
     'to_update'               => 'To Upgrade',
-    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="http://beikeshop.cn.test/download" target="_blank">latest version</a>',
+    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
-    'code_keyword'         => 'Search your country and region',
 ];
