@@ -49,7 +49,9 @@
         <div class="alert alert-warning mb-0 warning-copyright">
           <i class="bi bi-exclamation-triangle-fill"></i> {!! __('admin/common.copyright_hint_text') !!}
         </div>
-        @else
+        @endif
+
+        @if (check_license() && !Str::endsWith(config('app.url'), '.test'))
         <li class="nav-item mx-2 license-ok">
           <div class="license-text">
             <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
