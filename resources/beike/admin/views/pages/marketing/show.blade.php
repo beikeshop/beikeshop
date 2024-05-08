@@ -11,7 +11,7 @@
 @endpush
 
 @section('page-title-after')
-{{ __('admin/marketing.attention') }}
+{{ __('admin/marketing.attention_2') }}
 @endsection
 
 @section('content')
@@ -71,15 +71,39 @@ $data = $plugin['data'];
           <tr>
             <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div></td>
             <td>
+                @php
+                $lvClass = '';
+
+                if ($data['developer']['lv'] == 3) {
+                  $lvClass = 'lv3-border';
+                } elseif ($data['developer']['lv'] == 2) {
+                  $lvClass = 'lv2-border';
+                } elseif ($data['developer']['lv'] == 1) {
+                  $lvClass = 'lv1-border';
+                }
+              @endphp
               <div class="d-inline-block">
                 <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
-                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white">
+                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white avatar-wrap {{ $lvClass }} {{ $data['developer']['is_official'] ? 'official' : '' }}" @if ($data['developer']['is_official']) title="{{ __('admin/marketing.official_developer') }}" @elseif ($data['developer']['lv'] == 3) title="{{ __('admin/marketing.lv3_developer') }}" @elseif ($data['developer']['lv'] == 2) title="{{ __('admin/marketing.lv2_developer') }}" @elseif ($data['developer']['lv'] == 1) title="{{ __('admin/marketing.lv1_developer') }}"  @endif>
                     <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
+                    @if (!$data['developer']['is_official'])
+                      @if ($data['developer']['lv'] == 3)
+                      <div class="tags">lv3</div>
+                      @elseif ($data['developer']['lv'] == 2)
+                      <div class="tags">lv2</div>
+                      @elseif ($data['developer']['lv'] == 1)
+                      <div class="tags">lv1</div>
+                      @endif
+                    @else
+                    <div class="tags">V</div>
+                    @endif
                   </div>
-                  <div class="ms-2">
-                    <div class="mb-1">{{ $data['developer']['name'] }}</div>
-                    <div>{{ $data['developer']['email'] }}</div>
+                  <div class="ms-2 d-flex">
+                    <div>
+                      <div class="mb-1">{{ $data['developer']['name'] }}</div>
+                      <div>{{ $data['developer']['email'] }}</div>
+                    </div>
                   </div>
                 </a>
               </div>
@@ -105,23 +129,26 @@ $data = $plugin['data'];
               </el-radio-group>
             </div>
             @endif
-            @if ($data['downloadable'])
-            <div>
-              <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
-                __('admin/marketing.download_plugin') }}</button>
-              @if (isset($data['plugin_services']) && count($data['plugin_services']))
-              <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
-                __('admin/marketing.btn_buy_service') }}</button>
-              @endif
-              @if ( $data['service_date_to'] ?? 0)
-              <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
-              @endif
-            </div>
-            <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i
-                  class="bi bi-cursor-fill"></i> <span></span></a></div>
+
+            @if (!system_setting('base.developer_token'))
+              <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">
+                {{ __('admin/marketing.login_download') }}
+              </button>
+            @elseif ($data['downloadable'])
+              <div>
+                <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
+                  __('admin/marketing.download_plugin') }}</button>
+                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
+                  __('admin/marketing.btn_buy_service') }}</button>
+                @endif
+                @if ( $data['service_date_to'] ?? 0)
+                <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
+                @endif
+              </div>
+              <div class="mt-3 d-none download-help"><a href="{{ admin_route('plugins.index') }}" class=""><i class="bi bi-cursor-fill"></i> <span></span></a></div>
             @else
-            <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{
-              __('admin/marketing.btn_buy') }}</button>
+              <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }}</button>
             @endif
           @else
           <div class="alert alert-warning" role="alert">
@@ -188,8 +215,35 @@ $data = $plugin['data'];
             </el-form-item>
 
             <el-form-item label="{{ __('address.phone') }}" prop="telephone">
-              <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" v-model="registerForm.telephone"
-                placeholder="{{ __('address.phone') }}"></el-input>
+              <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" class="v-input-calling-code" v-model="registerForm.telephone"
+                placeholder="{{ __('address.phone') }}">
+                <el-dropdown slot="prepend" placement="bottom-start" trigger="click" class="v-dropdown-calling-code">
+                  <span class="el-dropdown-link">
+                    <img :src="'https://beikeshop.com/image/flag/' + callingCode.icon + '.png'" class="img-fluid" style="width: 16px">
+                    @{{ callingCode.region }} + @{{ callingCode.code }} <i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <div class="calling-code-dropdown el">
+                      <div class="position-relative">
+                        <i class="bi bi-search position-absolute top-0 start-0 ms-2" style="margin-top: 6px">&#xe65b;</i>
+                        <input type="text" placeholder="{{ __('admin/marketing.code_keyword') }}" class="form-control ps-4" v-model="codeKeyword" @input="searchCode">
+                      </div>
+                      <hr>
+                      <el-dropdown-item>
+                        <ul class="code-list ps-0">
+                          <li v-for="item, index in callingCodes" :key="index" @click="checkedCode(index)">
+                            <span>
+                              <img :src="'https://beikeshop.com/image/flag/' + item.icon + '.png'" class="img-fluid">
+                              @{{ item.region }}
+                            </span>
+                            <span>@{{ item.code }}</span>
+                          </li>
+                        </ul>
+                      </el-dropdown-item>
+                    </div>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </el-input>
             </el-form-item>
 
             <el-form-item label="{{ __('shop/login.email') }}" prop="email">
@@ -334,9 +388,17 @@ $data = $plugin['data'];
         email: '',
         name: '',
         telephone: '',
+        calling_code: document.documentElement.lang === 'zh_cn' ? '86' : '1',
         qq: '',
         password: '',
       },
+
+      callingCodes: @json($plugin['calling_codes'] ?? []),
+      source: {
+        callingCodes: @json($plugin['calling_codes'] ?? []),
+      },
+
+      codeKeyword: '',
 
       loginRules: {
         email: [
@@ -365,11 +427,32 @@ $data = $plugin['data'];
       },
     },
 
+    computed: {
+      callingCode() {
+        return this.source.callingCodes.find(item => item.code === this.registerForm.calling_code) || 'zh_cn';
+      },
+    },
+
+    mounted() {
+      this.source.callingCodes.forEach(item => {
+        item.region_code = item.region + '' + item.code;
+      });
+    },
+
     methods: {
+      searchCode(e) {
+        this.callingCodes = this.source.callingCodes.filter(item => item.region_code.toLowerCase().includes(this.codeKeyword.toLowerCase()));
+      },
+
+      checkedCode(index) {
+        this.registerForm.calling_code = this.callingCodes[index].code;
+      },
+
       toBkTicketUrl() {
         let code = "{{ $data['code'] }}"
         return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
       },
+
       checkedBtnLogin(form) {
         let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
 
@@ -398,6 +481,7 @@ $data = $plugin['data'];
 
             $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
               this.setTokenDialog.show = false;
+              window.location.reload();
             })
           })
         });
