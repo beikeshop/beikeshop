@@ -45,7 +45,7 @@ class MarketingService
     {
         $url = config('beike.api_url') . '/api/plugins?locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
         if (! empty($filters)) {
-            $url .= '?' . http_build_query($filters);
+            $url .= '&' . http_build_query($filters);
         }
 
         return $this->httpClient->get($url)->json();
