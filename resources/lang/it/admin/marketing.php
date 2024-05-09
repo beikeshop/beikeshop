@@ -61,7 +61,7 @@ return [
     'text_pay'                => 'Importo versato',
     'text_version'            => 'versione',
     'to_update'               => 'deaggiornamento',
-    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="http://beikeshop.cn.test/download" target="_blank">versione più recente </a>',
+    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="' . config('beike.api_url') . '/download" target="_blank">versione più recente </a>',
     'wxpay'                   => 'Pagare il prezzo di wechat!',
     'yuan'                    => 'yuan',
 ];

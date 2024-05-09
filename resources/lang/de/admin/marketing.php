@@ -61,7 +61,7 @@ return [
     'text_pay'                => 'Was genau zu zahlen ist.',
     'text_version'            => 'Version',
     'to_update'               => 'Wir rüsten sie auf.',
-    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="http://beikeshop.cn.test/download" target="_blank">neueste Version </a>',
+    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="' . config('beike.api_url') . '/download" target="_blank">neueste Version </a>',
     'wxpay'                   => 'Wechat übernimmt die rechnung.',
     'yuan'                    => 'dollar',
 ];

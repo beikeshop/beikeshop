@@ -61,7 +61,7 @@ return [
     'text_pay'                => '지급금액',
     'text_version'            => '버전',
     'to_update'               => '업그레이드하러 가기',
-    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="http://beikeshop.cn.test/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
+    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="' . config('beike.api_url') . '/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
     'wxpay'                   => '위챗 코드 스캔 결제!',
     'yuan'                    => '위안',
 ];
