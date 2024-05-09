@@ -63,7 +63,7 @@ return [
     'text_pay'                => 'Payment Amount',
     'text_version'            => 'version',
     'to_update'               => 'To Upgrade',
-    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="http://beikeshop.cn.test/download" target="_blank">latest version</a>',
+    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
 ];

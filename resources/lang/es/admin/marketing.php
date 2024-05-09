@@ -61,7 +61,7 @@ return [
     'text_pay'                => 'Cantidad a pagar',
     'text_version'            => 'versión',
     'to_update'               => 'Ir a upgrade',
-    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="http://beikeshop.cn.test/download" target="_blank">última versión </a>',
+    'version_compatible_text' => 'Este complemento no es compatible con la versión actual del sistema; actualice a <a href="' . config('beike.api_url') . '/download" target="_blank">última versión </a>',
     'wxpay'                   => 'Wechat barrido código de pago!',
     'yuan'                    => 'yuan',
 ];
