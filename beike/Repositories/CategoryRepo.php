@@ -49,7 +49,7 @@ class CategoryRepo
                 $category->parent_id = 0;
                 $category->save();
             }
-            if (empty($category->description)) {
+            if (empty($category->descriptions)) {
                 $category->delete();
             }
         }
