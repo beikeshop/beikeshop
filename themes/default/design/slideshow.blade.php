@@ -11,8 +11,13 @@
       <div class="swiper-wrapper">
         @foreach($content['images'] as $image)
         <div class="swiper-slide">
-          <a href="{{ $image['link']['link'] ?: 'javascript:void(0)' }}" class="d-flex justify-content-center"><img
-              src="{{ $image['image'] }}" class="img-fluid"></a>
+          <a href="{{ $image['link']['link'] ?: 'javascript:void(0)' }}" class="d-flex justify-content-center">
+            @if (($image['type'] ?? 'image') == 'video')
+            <video src="{{ $image['image'] }}" class="img-fluid w-100" controls loop autoplay muted></video>
+            @else
+            <img src="{{ $image['image'] }}" class="img-fluid">
+            @endif
+          </a>
         </div>
         @endforeach
       </div>
