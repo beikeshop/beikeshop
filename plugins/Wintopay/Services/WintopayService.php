@@ -164,7 +164,7 @@ class WintopayService extends PaymentService
                 $redirect_url = shop_route('checkout.success', ['order_number' => $order->number]);
             }else{
                 $redirect_url = shop_route('account.order.show', ['number' => $order->number]);
-                StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage.'error:'.$result['message']);
+                StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $preMessage.'error:'.$result['message']);
             }
             header('Location: '.$redirect_url);
             exit;
