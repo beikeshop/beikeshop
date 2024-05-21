@@ -1,0 +1,18 @@
+{
+    "code": "wintopay",
+    "name": {
+        "zh_cn": "赢支付",
+        "en": "Wintopay"
+    },
+    "description": {
+        "zh_cn": "Wintopay <a href='https://www.wintopay.com/support/detail' target='_blank'>Wintopay</a>",
+        "en": "Wintopay <a href='https://www.wintopay.com/support/detail' target='_blank'>Wintopay</a>"
+    },
+    "type": "payment",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "成都光大网络科技有限公司",
+        "email": "mengwb@guangda.work"
+    }
+}
