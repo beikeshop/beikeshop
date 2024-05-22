@@ -10,6 +10,7 @@
   @section('page-title-right')
     @if ($type != 'trashed')
       <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+      @hook('admin.order.list.buttons')
     @endif
   @endsection
 
