@@ -72,7 +72,7 @@ class WintopayService extends PaymentService
             'payment_method' => $paymentMethod,
             'amount' => currency_format($this->order->total, $this->order->currency_code, $this->order->currency_value, false),
             'currency' => $this->order->currency_code,
-            'merchant_reference' => $this->orderId,
+            'merchant_reference' => $this->orderId . '-' . time(),
             'products' => $products,
             'customer_email' => $this->order->email,
             'return_url' => shop_route('plugin.wintopay.notify'),
@@ -154,7 +154,7 @@ class WintopayService extends PaymentService
                 $order_arr = explode('_',$orderId);
                 $orderId = $order_arr[0];
             }
-            $order = Order::find($orderId);
+            $order = Order::find((int)$orderId);
             $preMessage = 'WTP-RETURN: ';
             if($result['status'] == 'paid'){
                 //支付成功
