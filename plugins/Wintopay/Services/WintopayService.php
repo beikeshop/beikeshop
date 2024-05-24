@@ -111,7 +111,7 @@ class WintopayService extends PaymentService
             'X-ADDON-TYPE'=>'web',
         );
         $payResult = $wtp->pay($this->url, $requestData, $headers, $userAgent);
-        if (!$payResult['status']) {
+        if (!$payResult['status'] || $payResult['status'] == 'canceled') {
             throw (new \Exception('Payment Error: ' . $payResult['wtp_format_fail_message']));
         }
 
