@@ -23,6 +23,7 @@ return [
     'service_type'      => 'Service Type',
     'rma_details'       => 'Rma Details',
     'reasons_return'    => 'Reasons Return',
+    'sale_price'        => 'Price for sale',
     'current_state'     => 'Current State',
     'modify_status'     => 'Modify Status',
     'remarks'           => 'Remarks',

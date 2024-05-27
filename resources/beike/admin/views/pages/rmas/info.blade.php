@@ -53,6 +53,10 @@
                 <td>{{ $rma['reason'] }}</td>
               </tr>
               <tr>
+                <td>{{ __('admin/rma.sale_price') }}：</td>
+                <td>{{ $rma['price'] }}</td>
+              </tr>
+              <tr>
                 <td>{{ __('common.image') }}：</td>
                 @if ($rma['images'] && count($rma['images']) > 0)
                   <td class="d-flex align-items-center flex-wrap">
