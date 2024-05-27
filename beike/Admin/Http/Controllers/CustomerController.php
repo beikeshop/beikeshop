@@ -22,6 +22,7 @@ use Beike\Repositories\CountryRepo;
 use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\CustomerRepo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -110,6 +111,18 @@ class CustomerController extends Controller
 
         return json_success(trans('common.updated_success'), $customer);
     }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function login(int $id)
+    {
+        Auth::guard(Customer::AUTH_GUARD)->loginUsingId($id);
+
+        return redirect()->to(shop_route('account.index'));
+    }
+
 
     public function destroy(Request $request, int $customerId)
     {

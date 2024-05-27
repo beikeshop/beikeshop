@@ -84,6 +84,7 @@ Route::prefix($adminName)
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
                 Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+                Route::middleware('can:customers_show')->get('customers/{id}/login', [Controllers\CustomerController::class, 'login'])->name('customers.login');
                 Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
                 Route::middleware('can:customers_update')->put('customers/{customer}/update_active', [Controllers\CustomerController::class, 'updateActive'])->name('customers.update_active');
                 Route::middleware('can:customers_update')->put('customers/{customer}/update_status', [Controllers\CustomerController::class, 'updateStatus'])->name('customers.update_status');
