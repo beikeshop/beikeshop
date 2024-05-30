@@ -43,7 +43,7 @@
           </div>
           <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label>
-            <select v-model="filter.type" class="form-control">
+            <select v-model="filter.type" class="form-control" @change="search">
               <option value="">{{ __('common.all') }}</option>
               @foreach ($types as $type)
                 <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
