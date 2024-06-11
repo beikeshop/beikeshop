@@ -356,19 +356,7 @@ class StateMachineService
      */
     private function addShipment($oldCode, $newCode)
     {
-        $shipment       = $this->shipment;
-        $expressCode    = $shipment['express_code']    ?? '';
-        $expressCompany = $shipment['express_company'] ?? '';
-        $expressNumber  = $shipment['express_number']  ?? '';
-        if ($expressCode && $expressCompany && $expressNumber) {
-            $orderShipment = new OrderShipment([
-                'order_id'        => $this->orderId,
-                'express_code'    => $expressCode,
-                'express_company' => $expressCompany,
-                'express_number'  => $expressNumber,
-            ]);
-            $orderShipment->saveOrFail();
-        }
+        ShipmentService::addShipment($this->orderId, $this->shipment);
     }
 
     /**

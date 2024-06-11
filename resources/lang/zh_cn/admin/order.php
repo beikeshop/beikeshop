@@ -33,6 +33,7 @@ return [
     'order_id'                    => '订单ID',
     'text_transaction_id'         => '交易ID',
     'text_click_view'             => '点击查看',
+    'add_express'             => '添加快递',
 
     'btn_print'              => '打印',
     'pick_list'              => '发货单',

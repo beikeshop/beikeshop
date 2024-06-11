@@ -51,4 +51,5 @@ return [
     'text_transaction_id'    => 'Transaction Id',
     'total'                  => 'total',
     'website'                => 'WEBSITE',
+    'add_express'             => 'Add courier',
 ];

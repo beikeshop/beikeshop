@@ -147,6 +147,16 @@ class OrderController extends Controller
         return json_success(trans('common.updated_success'));
     }
 
+    public function createShipment(Request $request, Order $order)
+    {
+        $shipment = ShipmentService::handleShipment(\request('express_code'), \request('express_number'));
+        ShipmentService::addShipment($order->id, $shipment);
+
+        hook_action('admin.order.add_shipment.after', $request->all());
+
+        return json_success(trans('common.created_success'));
+    }
+
     public function destroy(Request $request, Order $order)
     {
         $order->delete();
