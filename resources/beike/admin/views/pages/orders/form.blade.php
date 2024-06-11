@@ -324,6 +324,13 @@
               </tr>
               @endforeach
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-end">
+                  <a href="#" class="btn btn-sm btn-outline-secondary add-express">{{ __('admin/order.add_express') }}</a>
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
@@ -359,6 +366,56 @@
 @endsection
 
 @push('footer')
+  <script>
+    const express_company = @json(system_setting('base.express_company', []));
+
+    $('.add-express').on('click', function(e) {
+      e.preventDefault();
+      let html = '<div class="px-3 pt-3 add-express-wrap">';
+      html += '<div class="form-group mb-2">';
+      html += '<label for="express_company" class="form-label">{{ __('order.express_company') }}</label>';
+      html += '<select class="form-select" id="express_company" aria-label="Default select example">';
+      html += '<option value="">{{ __('common.please_choose') }}</option>';
+      express_company.forEach(item => {
+        html += `<option value="${item.code}">${item.name}</option>`;
+      });
+      html += '</select>';
+      html += '</div>';
+      html += '<div class="form-group mb-2">';
+      html += '<label for="express_number" class="form-label">{{ __('order.express_number') }}</label>';
+      html += '<input type="text" class="form-control" id="express_number" placeholder="{{ __('order.express_number') }}">';
+      html += '</div>';
+      html += '</div>';
+
+      layer.open({
+        type: 1,
+        title: '{{ __('admin/order.add_express') }}',
+        content: html,
+        area: ['400px', '300px'],
+        btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+        btn2: function(index, layero) {
+          const express_code = $('#express_company').val();
+          const express_number = $('#express_number').val();
+          if (!express_code) {
+            layer.msg('{{ __('common.error_required', ['name' => __('order.express_company')]) }}');
+            return false;
+          }
+          if (!express_number) {
+            layer.msg('{{ __('common.error_required', ['name' => __('order.express_number')]) }}');
+            return false;
+          }
+
+          $http.post(`/orders/{{ $order->id }}/shipments`, {express_code, express_number}).then((res) => {
+            layer.msg(res.message);
+            window.location.reload();
+          });
+
+          return false; // 阻止默认关闭行为
+        }
+      });
+    });
+  </script>
+
   @can('orders_update_status')
     <script>
       $('.edit-shipment').click(function() {
@@ -402,7 +459,6 @@
       el: '#app',
 
       data: {
-        // statuses: [{"value":"pending","label":"待处理"},{"value":"rejected","label":"已拒绝"},{"value":"approved","label":"已批准（待顾客寄回商品）"},{"value":"shipped","label":"已发货（寄回商品）"},{"value":"completed","label":"已完成"}],
         statuses: @json($statuses ?? []),
         form: {
           status: "",
@@ -422,16 +478,6 @@
           express_number: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_number')]) }}',trigger: 'blur'}, ],
         }
       },
-
-      // beforeMount() {
-      //   let statuses = @json($statuses ?? []);
-      //   this.statuses = Object.keys(statuses).map(key => {
-      //     return {
-      //       value: key,
-      //       label: statuses[name]
-      //     }
-      //   });
-      // },
 
       methods: {
         submitForm(form) {
