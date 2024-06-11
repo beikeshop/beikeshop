@@ -46,6 +46,7 @@
           @php
             $link = $footer_content['content']['link' . $i];
           @endphp
+          @if ($design || ($link['title'][locale()] ?? false))
           <div class="col-12 col-md footer-content-link{{ $i }} footer-link-wrap">
             <h6 class="text-uppercase text-dark">{{ $link['title'][locale()] ?? '' }}<span class="icon-open"><i class="bi bi-plus-lg"></i></span></h6>
             <ul class="list-unstyled">
@@ -60,6 +61,7 @@
               @endforeach
             </ul>
           </div>
+          @endif
         @endfor
 
         @hook('footer.contact.before')

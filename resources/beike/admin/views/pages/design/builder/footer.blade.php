@@ -172,7 +172,7 @@
       </div>
     </div>
     <div class="preview-iframe">
-      <iframe src="{{ url('/') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
+      <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
 
