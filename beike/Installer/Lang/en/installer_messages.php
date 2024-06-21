@@ -137,6 +137,7 @@ return [
         'finished'       => 'Congratulations, the system is successfully installed, let\'s experience it now',
         'to_front'       => 'Shop',
         'to_admin'       => 'Admin Panel',
+        'nginx_alert' => 'Nginx server needs to configure pseudo-static rules, click <a href="https://docs.beikeshop.com/install/source.html#nginx" target="_blank">View configuration method</a>',
     ],
 
     /*

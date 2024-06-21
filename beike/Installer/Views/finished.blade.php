@@ -19,6 +19,12 @@
 
 			<h5 class="text-center mb-4">{{ __('installer::installer_messages.final.finished') }}</h5>
 
+			@if (isset($is_nginx) && $is_nginx)
+				<div class="alert alert-warning text-center mb-4" role="alert">
+					{!! __('installer::installer_messages.final.nginx_alert') !!}
+				</div>
+			@endif
+
 			<div class="mb-5 d-flex align-items-center">
 				<div>{{ trans('installer::installer_messages.environment.admin_email') }}: {{ $admin_email }}</div>
 				<div class="ms-4">{{ trans('installer::installer_messages.environment.admin_password') }}: {{ $admin_password }}</div>

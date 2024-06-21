@@ -109,5 +109,6 @@ return [
         'finished'       => '恭喜您，系统安装成功，赶快体验吧',
         'to_front'       => '访问前台',
         'to_admin'       => '访问后台',
+        'nginx_alert'       => 'Nginx 服务器需要配置伪静态规则，点击 <a href="https://docs.beikeshop.com/install/source.html#nginx" target="_blank">查看配置方法</a>',
     ],
 ];
