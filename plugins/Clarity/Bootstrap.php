@@ -1,5 +1,9 @@
 <?php
+
 namespace Plugin\Clarity;
+
+use Beike\Admin\Http\Resources\PluginResource;
+use Beike\Plugin\Plugin;
 
 class Bootstrap
 {
@@ -13,8 +17,11 @@ class Bootstrap
 
     public function addScript(): void
     {
+//        $pluginResource = (new PluginResource($plugin))->jsonSerialize();
+//        $version = $plugin->getVersion();
         add_hook_blade('layout.header.code', function ($callback, $output, $data) {
             $script = plugin_setting('clarity.value') ?? '';
+
             // $script = <<<EOF
             // <script type="text/javascript">
             //     (function(c,l,a,r,i,t,y){
@@ -24,8 +31,12 @@ class Bootstrap
             //     })(window, document, "clarity", "script", "m12gb2u3dy");
             // </script>
             // EOF;
-            print $script;
-            return $output . $script;
+            $logs = <<<EOF
+             <script type="text/javascript">
+                 console.log(`clarity plugin enabled`)
+            </script>
+            EOF;
+            return $output . $script . $logs;
         });
     }
 }
