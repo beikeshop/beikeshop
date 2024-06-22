@@ -105,7 +105,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#customer-app',
 
       data: {
