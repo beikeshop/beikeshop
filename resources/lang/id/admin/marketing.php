@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:31
+ * @modified   2024-04-25 10:56:29
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Klik untuk mendapatkan token',
     'get_token_text'          => 'Masuk ke pusat pribadi situs web resmi TuikeShop - ikat nama domain, tambahkan nama domain saat ini',
     'last_update'             => 'Terakhir Diperbarui',
+    'lv1_developer'           => 'Pengembang LV1',
+    'lv2_developer'           => 'Pengembang LV2',
+    'lv3_developer'           => 'Pengembang LV3',
     'marketing_buy'           => 'Beli plugin',
     'marketing_download'      => 'Unduh plugin',
     'marketing_index'         => 'Pasar Rumah',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Membeli spesifikasi',
     'munths'                  => 'bulan',
     'no_choose'               => 'Tak ada pilihan!',
+    'official_developer'      => 'Pengembang resmi',
     'over_date'               => 'Waktu karena',
     'pay_success_text'        => 'Pembelian plugin berhasil, klik OK untuk menyegarkan halaman',
     'pay_success_title'       => 'Pembayaran berhasil!',
@@ -57,7 +61,7 @@ return [
     'text_pay'                => 'Jumlah Pembayaran',
     'text_version'            => 'versi',
     'to_update'               => 'Pergi untuk meningkatkan',
-    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href="http://beikeshop.cn.test/download" target="_blank">versi terbaru </a>',
+    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href="' . config('beike.api_url') . '/download" target="_blank">versi terbaru </a>',
     'wxpay'                   => 'Pembayaran kode pindai WeChat!',
     'yuan'                    => 'Yuan.',
 ];

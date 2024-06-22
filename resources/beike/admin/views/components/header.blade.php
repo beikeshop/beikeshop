@@ -51,6 +51,15 @@
         </div>
         @endif
 
+        @if (check_license() && !Str::endsWith(config('app.url'), '.test'))
+        <li class="nav-item mx-2 license-ok">
+          <div class="license-text">
+            <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
+            <span>{{ __('admin/common.license_bought') }}</span>
+          </div>
+        </li>
+        @endif
+
         @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
           <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>

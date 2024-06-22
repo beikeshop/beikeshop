@@ -71,15 +71,39 @@ $data = $plugin['data'];
           <tr>
             <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div></td>
             <td>
+                @php
+                $lvClass = '';
+
+                if ($data['developer']['lv'] == 3) {
+                  $lvClass = 'lv3-border';
+                } elseif ($data['developer']['lv'] == 2) {
+                  $lvClass = 'lv2-border';
+                } elseif ($data['developer']['lv'] == 1) {
+                  $lvClass = 'lv1-border';
+                }
+              @endphp
               <div class="d-inline-block">
                 <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
                   class="d-flex align-items-center text-dark">
-                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white">
+                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white avatar-wrap {{ $lvClass }} {{ $data['developer']['is_official'] ? 'official' : '' }}" @if ($data['developer']['is_official']) title="{{ __('admin/marketing.official_developer') }}" @elseif ($data['developer']['lv'] == 3) title="{{ __('admin/marketing.lv3_developer') }}" @elseif ($data['developer']['lv'] == 2) title="{{ __('admin/marketing.lv2_developer') }}" @elseif ($data['developer']['lv'] == 1) title="{{ __('admin/marketing.lv1_developer') }}"  @endif>
                     <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
+                    @if (!$data['developer']['is_official'])
+                      @if ($data['developer']['lv'] == 3)
+                      <div class="tags">lv3</div>
+                      @elseif ($data['developer']['lv'] == 2)
+                      <div class="tags">lv2</div>
+                      @elseif ($data['developer']['lv'] == 1)
+                      <div class="tags">lv1</div>
+                      @endif
+                    @else
+                    <div class="tags">V</div>
+                    @endif
                   </div>
-                  <div class="ms-2">
-                    <div class="mb-1">{{ $data['developer']['name'] }}</div>
-                    <div>{{ $data['developer']['email'] }}</div>
+                  <div class="ms-2 d-flex">
+                    <div>
+                      <div class="mb-1">{{ $data['developer']['name'] }}</div>
+                      <div>{{ $data['developer']['email'] }}</div>
+                    </div>
                   </div>
                 </a>
               </div>

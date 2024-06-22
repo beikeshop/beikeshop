@@ -6,7 +6,7 @@
  * @link       https://beikeshop.com
  * @author     Edward Yang <yangjin@guangda.work>
  * @created    2023-09-09 09:09:09
- * @modified   2024-01-26 03:03:40
+ * @modified   2024-04-25 10:57:04
  */
 
 return [
@@ -32,6 +32,9 @@ return [
     'get_token'               => 'Получить токен',
     'get_token_text'          => 'Авторизованный личный центр bikeshop — связывающий домен, добавивший современный домен',
     'last_update'             => 'последнее обновление',
+    'lv1_developer'           => 'Разработчик LV1',
+    'lv2_developer'           => 'Разработчик LV2',
+    'lv3_developer'           => 'Разработчик LV3',
     'marketing_buy'           => 'Купить плагин',
     'marketing_download'      => 'Загрузка плагина',
     'marketing_index'         => 'Главная страница рынка',
@@ -40,6 +43,7 @@ return [
     'month'                   => 'Спецификация на покупку',
     'munths'                  => 'месяц',
     'no_choose'               => 'Выбора нет!',
+    'official_developer'      => 'Официальный застройщик',
     'over_date'               => 'Время истечения срока',
     'pay_success_text'        => 'Покупка прошла успешно, нажмите на страницу обновления',
     'pay_success_title'       => 'Плати!',
@@ -57,7 +61,7 @@ return [
     'text_pay'                => 'Сумма выплаты',
     'text_version'            => 'версия',
     'to_update'               => 'Обновление.',
-    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="http://beikeshop.cn.test/download" target="_blank">последней версии </a>',
+    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="' . config('beike.api_url') . '/download" target="_blank">последней версии </a>',
     'wxpay'                   => 'Плата за микро-код!',
     'yuan'                    => 'доллар',
 ];
