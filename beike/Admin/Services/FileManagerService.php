@@ -66,7 +66,18 @@ class FileManagerService
     public function getFiles($baseFolder, $keyword, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
-        $files           = glob($currentBasePath . '/*');
+        //.jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp
+        $files    = glob($currentBasePath . '/*.png');
+        $files = array_merge($files,glob($currentBasePath . '/*.jpg'));
+        $files = array_merge($files,glob($currentBasePath . '/*.jpeg'));
+        $files = array_merge($files,glob($currentBasePath . '/*.JPG'));
+        $files = array_merge($files,glob($currentBasePath . '/*.JPEG'));
+        $files = array_merge($files,glob($currentBasePath . '/*.mp4'));
+        $files = array_merge($files,glob($currentBasePath . '/*.MP4'));
+        $files = array_merge($files,glob($currentBasePath . '/*.PNG'));
+        $files = array_merge($files,glob($currentBasePath . '/*.gif'));
+        $files = array_merge($files,glob($currentBasePath . '/*.webp'));
+        $files    = array_unique($files);
 
         if ($sort == 'created') {
             if ($order == 'desc') {
