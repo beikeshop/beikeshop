@@ -1,0 +1,16 @@
+{
+    "code": "upsell",
+    "name": {
+        "zh_cn": "追加销售优惠"
+    },
+    "description": {
+        "zh_cn": "追加销售优惠"
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "",
+    "author": {
+        "name": "jiangy",
+        "email": "jiangliu0316@outlook.com"
+    }
+}

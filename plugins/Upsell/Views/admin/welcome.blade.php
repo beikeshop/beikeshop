@@ -1,0 +1,1 @@
+<div>plugin settings</div>
