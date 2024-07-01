@@ -75,6 +75,7 @@
                 </tbody>
               </table>
             </div>
+            carts.products.after
             @hook('carts.products.after')
           </div>
         </div>
@@ -90,6 +91,7 @@
                   <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
                   <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
                   <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
+                    cart.confirm
                     @hookwrapper('cart.confirm')
                     <button type="button" class="btn btn-primary fs-5 fw-bold" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
                     @endhookwrapper
@@ -119,7 +121,7 @@
       @include('cart.cart_mb')
     @endif
   </div>
-
+  carts.footer
   @hook('carts.footer')
 @endsection
 
@@ -191,10 +193,10 @@
           })
         },
 
-        setUpdateData(res) {  
+        setUpdateData(res) {
           if(res.status != 'success'){
             layer.msg(res.message)
-          }            
+          }
           this.products = res.data.carts
           this.amount_format = res.data.amount_format
           this.total_quantity = res.data.quantity

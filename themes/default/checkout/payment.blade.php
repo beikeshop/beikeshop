@@ -38,7 +38,7 @@
               {!! $payment !!}
             </div>
           </div>
-
+          payment.footer
           @hook('payment.footer')
         </div>
       </div>

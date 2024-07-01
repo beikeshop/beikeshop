@@ -13,7 +13,7 @@ export default {
    */
   getCarts() {
     $(document).ready(() => {
-      $http.get('carts/mini', null, {hload: true}).then((res) => {
+      $http.get('carts/mini', null, { hload: true }).then((res) => {
         $('#offcanvas-right-cart').html(res.data.html);
         if (!res.data.quantity_all) {
           $('.cart-badge-quantity').hide();
@@ -31,7 +31,7 @@ export default {
    * @param {*} isBuyNow  是否立即购买
    * @return {*}  返回Promise
    */
-  addCart({sku_id, quantity = 1, isBuyNow = false}, event, callback) {
+  addCart({ sku_id, quantity = 1, isBuyNow = false }, event, callback) {
     if (!config.isLogin && !config.guestCheckout) {
       this.openLogin()
       return;
@@ -43,7 +43,7 @@ export default {
     $btn.html(loadHtml).prop('disabled', true);
     $(document).find('.tooltip').remove();
 
-    $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
+    $http.post('/carts', { sku_id, quantity, buy_now: isBuyNow }, { hload: !!event }).then((res) => {
       this.getCarts();
       if (!isBuyNow) {
         layer.msg(res.message)
@@ -52,7 +52,31 @@ export default {
       if (callback) {
         callback(res)
       }
-    }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
+    }).finally(() => { $btn.html(btnHtml).prop('disabled', false) })
+  },
+
+  addCart1({ sku_id, quantity = 1, isBuyNow = false }, event, callback) {
+    if (!config.isLogin && !config.guestCheckout) {
+      this.openLogin()
+      return;
+    }
+
+    const $btn = $(event);
+    const btnHtml = $btn.html();
+    const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
+    $btn.html(loadHtml).prop('disabled', true);
+    $(document).find('.tooltip').remove();
+
+    $http.post('/carts1', { sku_id, quantity, buy_now: isBuyNow, from: 'upsell' }, { hload: !!event }).then((res) => {
+      this.getCarts();
+      if (!isBuyNow) {
+        layer.msg(res.message)
+      }
+
+      if (callback) {
+        callback(res)
+      }
+    }).finally(() => { $btn.html(btnHtml).prop('disabled', false) })
   },
 
   addWishlist(id, event) {
@@ -69,7 +93,7 @@ export default {
 
     if (isWishlist) {
       $btn.html(loadHtml).prop('disabled', true);
-      $http.delete(`account/wishlist/${isWishlist}`, null, {hload: true}).then((res) => {
+      $http.delete(`account/wishlist/${isWishlist}`, null, { hload: true }).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', '0');
       }).finally((e) => {
@@ -77,7 +101,7 @@ export default {
       })
     } else {
       $btn.html(loadHtml).prop('disabled', true);
-      $http.post('account/wishlist', {product_id: id}, {hload: true}).then((res) => {
+      $http.post('account/wishlist', { product_id: id }, { hload: true }).then((res) => {
         layer.msg(res.message)
         $btn.attr('data-in-wishlist', res.data.id);
         $btn.html(btnHtml).prop('disabled', false).find('i.bi').prop('class', 'bi bi-heart-fill')
@@ -118,7 +142,7 @@ export default {
       return decodeURIComponent(r[2]);
     }
 
-    return typeof(defaultValue) != 'undefined' ? defaultValue : '';
+    return typeof (defaultValue) != 'undefined' ? defaultValue : '';
   },
 
   removeURLParameters(url, ...parameters) {
@@ -141,8 +165,8 @@ export default {
     var iTop = (window.screen.height - 30 - iHeight) / 2;
     var iLeft = (window.screen.width - 10 - iWidth) / 2;
     window.open(url, name, 'height=' + iHeight + ',innerHeight=' + iHeight
-    + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft
-    + ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+      + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft
+      + ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
   },
 
   // 判断 js 插件是否加载，如果未加载则往页面添加 script 标签
