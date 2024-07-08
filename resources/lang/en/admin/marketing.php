@@ -66,4 +66,9 @@ return [
     'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
+    'data_request_error'      => 'Data request error',
+    'request_error_1'         => 'Please check whether the network connection is normal',
+    'request_error_2'         => 'Please check the .env file in the root directory of the website, BEIKE_API_URL configuration, the correct value is: BEIKE_API_URL=https://beikeshop.com',
+    'request_error_text'      => 'The above checks are normal, but the data cannot be obtained. Can you give us',
+    'submit_work_order'       => 'Submit the work order',
 ];

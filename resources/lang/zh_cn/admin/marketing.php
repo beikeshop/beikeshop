@@ -47,6 +47,11 @@ return [
     'bk_login_hint'           => '用 <a href="https://beikeshop.com/account" target="_blank">beikeshop.com</a> 账号登录',
     'bind_bk_token'           => '绑定BeikeShop账号，自动获取Token',
     'no_choose'               => '未选择！',
+    'data_request_error'               => '数据请求错误',
+    'request_error_1'               => '请检查网络连接是否正常',
+    'request_error_2'               => '请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
+    'request_error_text'               => '上述检查都正常，还是无法获取数据，可以给我们',
+    'submit_work_order'               => '提交工单',
 
     'munths'                         => '个月',
     'yuan'                           => '元',

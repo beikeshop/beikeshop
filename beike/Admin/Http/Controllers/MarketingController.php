@@ -29,7 +29,13 @@ class MarketingController
             'keyword' => $request->get('keyword'),
             'page'    => $request->get('page'),
         ];
-        $plugins = MarketingService::getInstance()->getList($filters);
+
+        try {
+            $plugins = MarketingService::getInstance()->getList($filters);
+        } catch (\Exception $e) {
+            $plugins = null;
+        }
+
         $data    = [
             'plugins'     => $plugins,
             'domain'      => str_replace(['http://', 'https://'], '', config('app.url')),

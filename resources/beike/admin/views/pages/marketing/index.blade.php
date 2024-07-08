@@ -35,62 +35,82 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @endif
-      <div class="bg-light p-4 mb-4">
-        <div class="row">
-          <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
-            <label class="filter-title">{{ __('admin/builder.text_search') }}</label>
-            <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('admin/marketing.plugin_name') }}">
+
+      <template v-if="plugins">
+        <div class="bg-light p-4 mb-4">
+          <div class="row">
+            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
+              <label class="filter-title">{{ __('admin/builder.text_search') }}</label>
+              <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('admin/marketing.plugin_name') }}">
+            </div>
+            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
+              <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label>
+              <select v-model="filter.type" class="form-control" @change="search">
+                <option value="">{{ __('common.all') }}</option>
+                @foreach ($types as $type)
+                  <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
-          <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
-            <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label>
-            <select v-model="filter.type" class="form-control" @change="search">
-              <option value="">{{ __('common.all') }}</option>
-              @foreach ($types as $type)
-                <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
-              @endforeach
-            </select>
+
+          <div class="row">
+            <label class="filter-title"></label>
+            <div class="col-auto">
+              <button type="button" @click="search"
+                class="btn btn-outline-primary btn-sm">{{ __('admin/builder.text_search') }}</button>
+              <button type="button" @click="resetSearch"
+                class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+            </div>
           </div>
         </div>
-
-        <div class="row">
-          <label class="filter-title"></label>
-          <div class="col-auto">
-            <button type="button" @click="search"
-              class="btn btn-outline-primary btn-sm">{{ __('admin/builder.text_search') }}</button>
-            <button type="button" @click="resetSearch"
-              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="marketing-wrap" v-if="plugins.data.length">
-        <div class="row">
-          <div class="col-xxl-20 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
-            <div class="card mb-4 marketing-item">
-              <div class="card-body">
-                <div class="plugin-img mb-3">
-                  <div class="sale-wrap" v-if="plugin.origin_price"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
-                  <a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
-                      class="img-fluid"></a>
-                </div>
-                <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
-                <div class="d-flex align-items-center">
-                  <span class="text-success fs-5" v-if="plugin.price == 0">{{ __('admin/marketing.text_free') }}</span>
-                  <span class="text-success fs-5" v-else>@{{ plugin.price_format }}</span>
-                  <span v-if="plugin.origin_price" class="text-decoration-line-through text-secondary ms-2">@{{ plugin.origin_price_format }}</span>
+        <div class="marketing-wrap" v-if="plugins.data.length">
+          <div class="row">
+            <div class="col-xxl-20 col-xl-3 col-md-4 col-6" v-for="plugin, index in plugins.data" :key="index">
+              <div class="card mb-4 marketing-item">
+                <div class="card-body">
+                  <div class="plugin-img mb-3">
+                    <div class="sale-wrap" v-if="plugin.origin_price"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
+                    <a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
+                        class="img-fluid"></a>
+                  </div>
+                  <div class="plugin-name fw-bold mb-2">@{{ plugin.name }}</div>
+                  <div class="d-flex align-items-center">
+                    <span class="text-success fs-5" v-if="plugin.price == 0">{{ __('admin/marketing.text_free') }}</span>
+                    <span class="text-success fs-5" v-else>@{{ plugin.price_format }}</span>
+                    <span v-if="plugin.origin_price" class="text-decoration-line-through text-secondary ms-2">@{{ plugin.origin_price_format }}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div v-else>
-        <x-admin-no-data />
-      </div>
+        <div v-else>
+          <x-admin-no-data />
+        </div>
 
-      <el-pagination v-if="plugins.data.length" layout="total, prev, pager, next" background :page-size="plugins.meta.per_page"
-        :current-page.sync="page" :total="plugins.meta.total"></el-pagination>
+        <el-pagination v-if="plugins.data.length" layout="total, prev, pager, next" background :page-size="plugins.meta.per_page"
+          :current-page.sync="page" :total="plugins.meta.total"></el-pagination>
+      </template>
+      <template v-else>
+        <div class="cart">
+          <div class="cart-body">
+            <div class="alert alert-warning py-3" role="alert">
+              <h4 class="alert-heading">{{ __('admin/marketing.data_request_error') }}</h4>
+              <ol class="ps-3">
+                <li>{{ __('admin/marketing.request_error_1') }}</li>
+                <li>{{ __('admin/marketing.request_error_2') }}</li>
+              </ol>
+              <hr>
+              <p class="mb-0">
+                {{ __('admin/marketing.request_error_text') }}
+                <a href="https://beikeshop.cn/account/tickets/create" target="_blank">{{ __('admin/marketing.submit_work_order') }} <i class="bi bi-box-arrow-up-right"></i></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </template>
     </div>
 
     <el-dialog
@@ -121,7 +141,7 @@
       el: '#app',
 
       data: {
-        plugins: @json($plugins ?? []),
+        plugins: @json($plugins ?? null),
         same_domain: @json($same_domain ?? false),
         page: bk.getQueryString('page', 1) * 1,
         isBack: false,
