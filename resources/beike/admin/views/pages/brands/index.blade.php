@@ -177,6 +177,7 @@
                 this.brands.data[this.dialog.index] = res.data
               }
               this.dialog.show = false
+              this.loadData()
             })
           });
         },

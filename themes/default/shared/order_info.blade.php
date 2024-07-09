@@ -74,6 +74,7 @@
     </div>
   </div>
 </div>
+@hookwrapper('account.order_info.address_info')
 <div class="card mb-lg-4 mb-2">
   <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
   <div class="card-body">
@@ -129,6 +130,7 @@
     </table>
   </div>
 </div>
+@endhookwrapper
 <div class="card mb-lg-4 mb-2">
   <div class="card-header">
     <h6 class="card-title">{{ __('shop/account/order_info.order_items') }}</h6>
