@@ -62,11 +62,13 @@
           </el-form-item>
         </el-form-item>
 
+        @hookwrapper('admin.customer_group.dialog.from.discount_factor')
         <el-form-item label="{{ __('admin/customer_group.discount_rate') }}">
           <el-input class="mb-0" type="number" v-model="dialog.form.discount_factor" placeholder="{{ __('admin/customer_group.discount_rate') }}">
             <template slot="append">%</template>
           </el-input>
         </el-form-item>
+        @endhookwrapper
 
         @if (0)
         <el-form-item label="{{ __('customer_group.level') }}">
@@ -103,7 +105,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#customer-app',
 
       data: {

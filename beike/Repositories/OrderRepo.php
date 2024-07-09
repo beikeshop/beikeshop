@@ -136,6 +136,8 @@ class OrderRepo
             $builder->onlyTrashed();
         }
 
+        $builder = hook_filter('admin.order.repo.list.builder.after', $builder);
+
         return $builder;
     }
 
