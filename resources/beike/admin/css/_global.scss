@@ -360,6 +360,12 @@ body.page-seller-product {
   }
 }
 
+.layui-layer {
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
+}
+
 .layui-layer-btn {
   .layui-layer-btn0 {
     border: 1px solid #dedede;
@@ -610,6 +616,56 @@ table.table thead th, .fw-bold, h1,h2,h3, h4, h5, h6, b, strong, .card .card-hea
       &:nth-child(3) {
         // 铜色
         background-color: rgba($color: #cd7f32, $alpha: .1);
+      }
+    }
+  }
+}
+
+.table-mb {
+  @media (max-width: 768px) {
+    thead {
+      display: none;
+    }
+
+    td {
+      display: block;
+      text-align: right !important;
+      clear: both;
+      white-space: normal;
+      background-color: #fff !important;
+      > div, > img, > .form-select, > .form-control {
+        margin-left: auto;
+        justify-content: flex-end;
+      }
+
+      .form-check {
+        display: inline-block;
+      }
+
+      &::before {
+        content: attr(data-label) "";
+        float: left;
+        font-weight: bold;
+        margin-right: 10px;
+
+        @media (min-width: 768px) {
+          display: none;
+        }
+      }
+
+      border-bottom: none;
+      padding: 4px 0;
+
+      .btn-sm {
+        font-size: 11px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+
+      &:last-child {
+        border-bottom: 1px solid #e6e6e6;
+        padding-bottom: 14px;
+        margin-bottom: 14px;
       }
     }
   }

@@ -255,7 +255,7 @@
                         @hook('admin.product.edit.variables.batch.after')
                       </div>
 
-                      <table class="table table-bordered table-hover table-skus">
+                      <table class="table table-bordered table-hover table-skus table-no-mb">
                         <thead>
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}

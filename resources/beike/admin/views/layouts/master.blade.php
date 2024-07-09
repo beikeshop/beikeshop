@@ -69,6 +69,7 @@
       error_form: '{{ __('common.error_form') }}',
       text_hint: '{{ __('common.text_hint') }}',
       translate_form: '{{ __('admin/common.translate_form') }}',
+      choose: '{{ __('common.choose') }}',
     }
 
     const config = {
@@ -87,6 +88,8 @@
 
       return obj;
     }
+
+    bk.tableResponsive()
   </script>
   @stack('footer')
 </body>

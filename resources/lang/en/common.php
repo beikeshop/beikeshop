@@ -43,6 +43,7 @@ return [
     'error_required'       => 'Please fill out the :name',
     'examine'              => 'Examine',
     'exit'                 => 'Exit',
+    'choose'               => 'Choose',
     'export'               => 'Export',
     'filter'               => 'Filter',
     'get_more'             => 'Get More',
