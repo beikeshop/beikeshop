@@ -71,7 +71,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#plugins-app',
 
       data: {
@@ -86,7 +86,7 @@
         toBkTicketUrl(code) {
           return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
         },
-        
+
         pluginStatusChange(e, code, index) {
           const self = this;
 
