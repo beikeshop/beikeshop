@@ -2,7 +2,7 @@
   <div class="header-wrap">
     <div class="header-left">
       <div class="logo">
-        <a href=""><img src="{{ asset('image/logo.png') }}" class="img-fluid"></a>
+        <a href=""><img src="{{ asset(system_setting('base.admin_logo', 'image/logo.png')) }}" class="img-fluid"></a>
       </div>
     </div>
     <div class="header-right">
