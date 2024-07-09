@@ -55,4 +55,6 @@ return [
     'price'                  => '单价',
     'total'                  => '总计',
     'order_print_error'      => '请勾选要打印的订单',
+    'error_no_express_company'      => '没有快递公司，请先添加',
+    'to_add_express_company'      => '去添加',
 ];

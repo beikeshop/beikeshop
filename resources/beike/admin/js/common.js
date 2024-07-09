@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2024-07-09 10:22:11
+ * @LastEditTime  2024-07-09 17:34:22
  */
 
 export default {
@@ -163,17 +163,25 @@ export default {
 
   // table 响应式，可以添加 table-no-mb 类名来禁用
   tableResponsive() {
-    if (!$('.table').hasClass('table-no-mb')) {
-      $('.table').addClass('table-mb')
-      $('.table tbody tr').each((hi, tr) => {
-        $(tr).find('td').each((ti, td) => {
-          let th = $(td).parents('table').find('thead th').eq(ti);
-          if (th.html().indexOf('checkbox') === -1) {
-            $(td).attr('data-label', th.text())
-          } else {
-            $(td).attr('data-label', lang.choose)
-          }
-        })
+    if ($(window).width() <= 768) {
+      $('.table').each((index, table) => {
+        if (!$(table).hasClass('table-no-mb')) {
+          $(table).addClass('table-mb')
+          $(table).find('tbody tr').each((hi, tr) => {
+            $(tr).find('td').each((ti, td) => {
+              let th = $(td).parents('table').find('thead th').eq(ti);
+              if (th.length) {
+                if (th.html().indexOf('checkbox') === -1) {
+                  $(td).attr('data-label', th.text())
+                } else {
+                  $(td).attr('data-label', lang.choose)
+                }
+              } else {
+                $(td).parents('table').removeClass('table-mb')
+              }
+            })
+          })
+        }
       })
     }
   },

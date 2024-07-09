@@ -75,7 +75,7 @@
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
     <div class="card-body">
-      <table class="table">
+      <table class="table table-no-mb">
         <thead class="">
           <tr>
             @if ($order->shipping_country)
@@ -242,7 +242,7 @@
       <div class="card-header"><h6 class="card-title">{{ __('admin/order.payments_history') }}</h6></div>
       <div class="card-body">
         <div class="table-push">
-          <table class="table ">
+          <table class="table">
             <thead class="">
               <tr>
                 <th>{{ __('admin/order.order_id') }}</th>
@@ -286,7 +286,7 @@
       <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
       <div class="card-body">
         <div class="table-push">
-          <table class="table ">
+          <table class="table">
             <thead class="">
               <tr>
                 <th>{{ __('order.express_company') }}</th>
@@ -371,6 +371,18 @@
 
     $('.add-express').on('click', function(e) {
       e.preventDefault();
+
+      if (!express_company) {
+        layer.alert('{{ __('admin/order.error_no_express_company') }}', {
+          title: '{{ __('common.text_hint') }}',
+          btn: ['{{ __('admin/order.to_add_express_company') }}'],
+          btn1: function(index, layero) {
+            window.open('{{ admin_route('settings.index') }}?tab=tab-express-company');
+          }
+        });
+        return;
+      }
+
       let html = '<div class="px-3 pt-3 add-express-wrap">';
       html += '<div class="form-group mb-2">';
       html += '<label for="express_company" class="form-label">{{ __('order.express_company') }}</label>';
@@ -416,46 +428,46 @@
     });
   </script>
 
-  @can('orders_update_status')
-    <script>
-      $('.edit-shipment').click(function() {
-        $(this).siblings('.shipment-tool').removeClass('d-none');
-        $(this).addClass('d-none');
+@can('orders_update_status')
+  <script>
+    $('.edit-shipment').click(function() {
+      $(this).siblings('.shipment-tool').removeClass('d-none');
+      $(this).addClass('d-none');
 
-        $(this).parents('tr').find('.edit-show').addClass('d-none');
-        $(this).parents('tr').find('.edit-form').removeClass('d-none');
-        @if(!$expressCompanies)
-        $(this).parents('tr').find('.express-company').removeClass('d-none');
-        @endif
-      });
+      $(this).parents('tr').find('.edit-show').addClass('d-none');
+      $(this).parents('tr').find('.edit-form').removeClass('d-none');
+      @if(!$expressCompanies)
+      $(this).parents('tr').find('.express-company').removeClass('d-none');
+      @endif
+    });
 
-      $('.shipment-tool .btn-outline-secondary').click(function() {
-        $(this).parent().siblings('.edit-shipment').removeClass('d-none');
-        $(this).parent().addClass('d-none');
+    $('.shipment-tool .btn-outline-secondary').click(function() {
+      $(this).parent().siblings('.edit-shipment').removeClass('d-none');
+      $(this).parent().addClass('d-none');
 
-        $(this).parents('tr').find('.edit-show').removeClass('d-none');
-        $(this).parents('tr').find('.edit-form').addClass('d-none');
-      });
+      $(this).parents('tr').find('.edit-show').removeClass('d-none');
+      $(this).parents('tr').find('.edit-form').addClass('d-none');
+    });
 
-      $('.shipment-tool .btn-primary').click(function() {
-        const id = $(this).parents('tr').data('id');
-        const express_code = $(this).parents('tr').find('.express-code').val();
-        const express_name = $(this).parents('tr').find('.express-code option:selected').text();
-        const express_number = $(this).parents('tr').find('.express-number').val();
+    $('.shipment-tool .btn-primary').click(function() {
+      const id = $(this).parents('tr').data('id');
+      const express_code = $(this).parents('tr').find('.express-code').val();
+      const express_name = $(this).parents('tr').find('.express-code option:selected').text();
+      const express_number = $(this).parents('tr').find('.express-number').val();
 
-        $(this).parent().siblings('.edit-shipment').removeClass('d-none');
-        $(this).parent().addClass('d-none');
+      $(this).parent().siblings('.edit-shipment').removeClass('d-none');
+      $(this).parent().addClass('d-none');
 
-        $(this).parents('tr').find('.edit-show').removeClass('d-none');
-        $(this).parents('tr').find('.edit-form').addClass('d-none');
+      $(this).parents('tr').find('.edit-show').removeClass('d-none');
+      $(this).parents('tr').find('.edit-form').addClass('d-none');
 
-        $http.put(`/orders/{{ $order->id }}/shipments/${id}`, {express_code,express_name,express_number}).then((res) => {
-          layer.msg(res.message);
-          window.location.reload();
-        })
-      });
+      $http.put(`/orders/{{ $order->id }}/shipments/${id}`, {express_code,express_name,express_number}).then((res) => {
+        layer.msg(res.message);
+        window.location.reload();
+      })
+    });
 
-    new Vue({
+    let app = new Vue({
       el: '#app',
 
       data: {
@@ -469,7 +481,7 @@
         },
 
         source: {
-          express_company: @json(system_setting('base.express_company', [])),
+          express_company: @json(system_setting('base.express_company', [])) || [],
         },
 
         rules: {
