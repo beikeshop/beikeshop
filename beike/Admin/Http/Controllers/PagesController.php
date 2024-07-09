@@ -63,7 +63,7 @@ class PagesController extends Controller
 
             return redirect(admin_route('pages.index'));
         } catch (\Exception $e) {
-            return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
+            return $this->handleDatabaseException($e);
         }
     }
 
@@ -100,9 +100,9 @@ class PagesController extends Controller
             $page              = PageRepo::createOrUpdate($requestData);
             hook_action('admin.page.update.after', ['request_data' => $requestData, 'page' => $page]);
 
-            return redirect()->to(admin_route('pages.index'));
+            return redirect()->to(admin_route('pages.index'))->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
-            return redirect(admin_route('pages.index'))->withErrors(['error' => $e->getMessage()]);
+            return $this->handleDatabaseException($e);
         }
     }
 
@@ -160,4 +160,22 @@ class PagesController extends Controller
 
         return json_success(trans('common.get_success'), $name);
     }
+
+    // 文章提交异常处理，优化长度限制提示
+    private function handleDatabaseException(\Exception $e)
+    {
+        $errorMessage = $e->getMessage();
+        $userFriendlyMessage = $errorMessage;
+
+        if (strpos($errorMessage, 'SQLSTATE[22001]') !== false) {
+            preg_match("/Data too long for column '(\w+)'/", $errorMessage, $matches);
+            if (isset($matches[1])) {
+                $columnName = $matches[1];
+                $userFriendlyMessage = trans('admin/common.error_length_text', ['key' => $columnName]);
+            }
+        }
+
+        return redirect()->back()->withInput()->withErrors(['error' => $userFriendlyMessage]);
+    }
+
 }

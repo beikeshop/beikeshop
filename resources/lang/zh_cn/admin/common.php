@@ -113,4 +113,5 @@ return [
     'buy_copyright'          => '购买版权',
     'license_bought'         => '已授权',
     'copyright_hint_text'    => '请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a>',
+    'error_length_text'      => '字段 :key 的输入数据超出了允许的最大长度。',
 ];
