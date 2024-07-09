@@ -101,7 +101,7 @@
 
             @if ($column['type'] == 'checkbox')
               <x-admin::form.row :title="$column['label']" :required="$column['required'] ? true : false">
-                <div class="form-checkbox">
+                <div class="form-checkbox {{ $column['required'] ? 'required' : '' }}">
                   @foreach ($column['options'] as $item)
                   <div class="form-check d-inline-block mt-2 me-3">
                     <input
@@ -116,6 +116,7 @@
                     </label>
                   </div>
                   @endforeach
+                  <div class="invalid-feedback">{{ __('common.please_choose') }}</div>
                 </div>
                 @if (isset($column['description']))
                   <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
