@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2024-03-25 15:39:12
+ * @LastEditTime  2024-07-09 18:22:44
  */
 
 import http from "../../../js/http";
@@ -35,6 +35,10 @@ if (typeof Vue != 'undefined') {
   Vue.prototype.thumbnail = function thumbnail(image) {
     if (!image) {
       return 'image/placeholder.png';
+    }
+
+    if (image.indexOf('.mp4') !== -1) {
+      return asset + 'image/video-icon.png';
     }
 
     // 判断 image 是否以 http 开头
