@@ -462,6 +462,8 @@
       if (cropper) {
         canvas = cropper.getCroppedCanvas({
           imageSmoothingQuality: 'high',
+          width: 800, //最大宽度
+          height: 800, //最大高度
         });
         canvas.toBlob(function(blob) {
           var formData = new FormData();
