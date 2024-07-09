@@ -22,7 +22,7 @@
         @endif
         @if (session('error'))
           <div class="alert alert-danger">
-            {{ session('error') }}
+            {!! session('error') !!}
           </div>
         @endif
         <ul class="nav nav-tabs nav-bordered mb-3  mb-lg-5" role="tablist">
