@@ -11,7 +11,14 @@
 @endpush
 
 @section('page-title-after')
-{{ __('admin/marketing.attention_2') }}
+<div class="d-flex">
+  <div>{{ __('admin/marketing.attention_show_1') }}</div>
+  <div>
+    {{ __('admin/marketing.attention_show_2') }}
+    <br>
+    {{ __('admin/marketing.attention_show_3') }}
+  </div>
+</div>
 @endsection
 
 @section('content')
@@ -33,7 +40,7 @@ $data = $plugin['data'];
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>
-      <div class="ms-lg-5">
+      <div class="ms-lg-5 wp-600 mt-3 mt-lg-0">
         <h2 class="card-title mb-4">{{ $data['name'] }}</h2>
         <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
           <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span
@@ -56,10 +63,28 @@ $data = $plugin['data'];
                 <span></span>
               </div>
               @if ($data['free_service_months'])
-              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
+              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ $data['is_subscribe'] ?  __('admin/marketing.free_days_dy') : __('admin/marketing.free_days_over') }} )</span>
               @endif
             </td>
           </tr>
+          @if (isset($data['plugin_services']) && count($data['plugin_services']))
+          <tr>
+            <td>
+              <div class="text-last">
+                @if ($data['is_subscribe'])
+                {{ __('admin/marketing.subscription_price') }}
+                @else
+                {{ __('admin/marketing.after_sales_price') }}
+                @endif
+              </div>
+            </td>
+            <td>
+              @foreach ($data['plugin_services'] as $item)
+              {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
+              @endforeach
+            </td>
+          </tr>
+          @endif
           <tr>
             <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div></td>
             <td><div>{{ $data['version'] }}</div></td>
@@ -102,7 +127,15 @@ $data = $plugin['data'];
                   <div class="ms-2 d-flex">
                     <div>
                       <div class="mb-1">{{ $data['developer']['name'] }}</div>
-                      <div>{{ $data['developer']['email'] }}</div>
+                      @if ($data['developer']['is_official'])
+                      <div class="text-secondary">{{ __('admin/marketing.official_developer') }}</div>
+                      @elseif ($data['developer']['lv'] == 3)
+                      <div class="text-secondary">{{ __('admin/marketing.lv3_developer') }}</div>
+                      @elseif ($data['developer']['lv'] == 2)
+                      <div class="text-secondary">{{ __('admin/marketing.lv2_developer') }}</div>
+                      @elseif ($data['developer']['lv'] == 1)
+                      <div class="text-secondary">{{ __('admin/marketing.lv1_developer') }}</div>
+                      @endif
                     </div>
                   </div>
                 </a>
@@ -119,7 +152,7 @@ $data = $plugin['data'];
 
         <div class="mb-4">
           @if ($data['available'])
-            @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
+            @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe']))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
@@ -138,7 +171,7 @@ $data = $plugin['data'];
               <div>
                 <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                   __('admin/marketing.download_plugin') }}</button>
-                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                @if (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe'])
                 <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                   __('admin/marketing.btn_buy_service') }}</button>
                 @endif
@@ -281,7 +314,7 @@ $data = $plugin['data'];
       <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
         <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
           <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
-            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price }}</span>
+            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price_format }}</span>
           </el-radio>
         </div>
       </el-radio-group>
@@ -298,7 +331,7 @@ $data = $plugin['data'];
     <li class="nav-item" role="presentation">
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
-    @if ($data['id'] !== 61)
+    @if (!$data['is_subscribe'])
     <li class="nav-item" role="presentation">
       <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
     </li>
@@ -311,7 +344,7 @@ $data = $plugin['data'];
       {!! $data['description'] !!}
       @endif
     </div>
-    @if ($data['id'] !== 61)
+    @if (!$data['is_subscribe'])
     <div class="tab-pane fade" id="tab-histories">
       @if ($plugin['service_buy_histories'] ?? 0)
         <div class="table-push">
