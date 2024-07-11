@@ -45,6 +45,7 @@ return [
     'subscription_price'      => 'Subscription price',
     'marketing_buy'           => 'Buy',
     'marketing_download'      => 'Download',
+    'buy_subscription'        => 'Buy Subscription',
     'marketing_index'         => 'Index',
     'marketing_list'          => 'Marketing',
     'marketing_show'          => 'Detail',

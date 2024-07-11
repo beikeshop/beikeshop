@@ -35,6 +35,7 @@ return [
     'free_days'               => '赠送',
     'free_days_over'          => '个月售后',
     'free_days_dy'            => '个月订阅',
+    'buy_subscription'        => '购买订阅',
     'text_pay'                => '支付金额',
     'select_pay'              => '选择支付方式',
     'wxpay'                   => '微信扫码支付!',

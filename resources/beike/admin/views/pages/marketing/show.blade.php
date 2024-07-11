@@ -171,11 +171,14 @@ $data = $plugin['data'];
               <div>
                 <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                   __('admin/marketing.download_plugin') }}</button>
-                @if (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe'])
-                <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
-                  __('admin/marketing.btn_buy_service') }}</button>
+                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                  @if (!$data['is_subscribe'])
+                  <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{ __('admin/marketing.btn_buy_service') }}</button>
+                  @else
+                    <a class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" href="{{ config('beike.api_url') }}/subscribe/{{ $data['code'] }}" target="_blank">{{ __('admin/marketing.buy_subscription') }}</a>
+                  @endif
                 @endif
-                @if ( $data['service_date_to'] ?? 0)
+                @if ( $data['service_date_to'] ?? 0 && !$data['is_subscribe'])
                 <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
                 @endif
               </div>
