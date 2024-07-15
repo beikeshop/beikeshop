@@ -134,6 +134,7 @@ class FlattenCategoryRepo
         foreach ($categories as $category) {
             $imagePath               = $category->image;
             $item['id']              = $category->id;
+            $item['url']             = $category->url;
             $item['original_image']  = image_origin($imagePath);
             $item['image']           = image_resize($imagePath, $width, $height);
             $item['name']            = html_entity_decode($category->description->name);

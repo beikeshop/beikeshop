@@ -83,12 +83,6 @@
               </el-form-item>
               @endhookwrapper
 
-              @hookwrapper('account.login.new.confirm_password')
-              <el-form-item label="{{ __('shop/login.confirm_password') }}" prop="password_confirmation">
-                <el-input @keyup.enter.native="checkedBtnLogin('registerForm')" type="password" v-model="registerForm.password_confirmation" placeholder="{{ __('shop/login.confirm_password') }}"></el-input>
-              </el-form-item>
-              @endhookwrapper
-
               @hook('account.login.new.confirm_password.bottom')
 
               <div class="mt-5 mb-3">
@@ -103,27 +97,6 @@
 
 @push('add-scripts')
   <script>
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('{{ __('shop/login.enter_password') }}'));
-      } else {
-        if (value !== '') {
-          app.$refs.registerForm.validateField('password_confirmation');
-        }
-        callback();
-      }
-    };
-
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('{{ __('shop/login.please_confirm') }}'));
-      } else if (value !== app.registerForm.password) {
-        callback(new Error('{{ __('shop/login.password_err') }}'));
-      } else {
-        callback();
-      }
-    };
-
     let app = new Vue({
       el: '#page-login',
 
@@ -157,9 +130,6 @@
           password: [
             {required: true, message: '{{ __('shop/login.enter_password')}}', trigger: 'change'}
           ],
-          password_confirmation: [
-            {required: true, validator: validatePass2, trigger: 'change'}
-          ]
         },
         @stack('login.vue.data')
       },
@@ -173,6 +143,7 @@
 
           if (form == 'registerForm') {
             _data = this.registerForm, url = '/register'
+            this.registerForm.password_confirmation = this.registerForm.password
           }
 
           this.$refs['loginForm'].clearValidate();

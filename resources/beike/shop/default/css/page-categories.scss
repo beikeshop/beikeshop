@@ -154,9 +154,12 @@ body.page-categories {
   padding: 0 0 1.4rem;
   border-bottom: 1px solid #E6E6E6;
 
-  > li {
+  li {
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
+    overflow: hidden;
+    width: 100%;
+    line-height: 24px;
     // border-bottom: 1px solid #e9ecef;
 
     &:last-of-type {
@@ -164,7 +167,6 @@ body.page-categories {
     }
 
     .category-href {
-      display: inline-block;
       position: relative;
       color: #333;
       overflow: hidden;
@@ -184,49 +186,15 @@ body.page-categories {
   ul {
     padding-left: 12px;
     list-style: none;
-
-    li {
-      // line-height: 1;
-      margin: 16px 0;
-
-      ul {
-        margin-top: 8px;
-        padding-left: 14px;
-      }
-
-      &:last-of-type {
-        border: none;
-      }
-
-      &.active {
-        > a {
-          color: $primary;
-          font-weight: bold;
-        }
-      }
-
-      a {
-        color: #868e96;
-        &:first-of-type {
-          width: calc(100% - 26px);
-          overflow: hidden;
-          text-overflow:ellipsis;
-          white-space: nowrap;
-          display: inline-block;
-          line-height: 1.2;
-        }
-
-        &:hover {
-          color: $primary;
-        }
-      }
-    }
   }
 
   .toggle-icon {
     float: right;
     font-size: 16px;
-    padding: 0 6px;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    text-align: center;
     i {
       color: #aaa;
     }

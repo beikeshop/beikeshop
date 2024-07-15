@@ -12,7 +12,9 @@
 namespace Beike\Admin\Repositories;
 
 use Beike\Models\Page;
+use Beike\Shop\Http\Resources\PageSimple;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 
 class PageRepo
@@ -125,13 +127,20 @@ class PageRepo
         return $names;
     }
 
-    public static function getPagesByIds($pageIds)
+    /**
+     * 根据文章 IDs 获取文章
+     * @param $pageIds
+     * @return AnonymousResourceCollection
+     */
+    public static function getPagesByIds($pageIds): AnonymousResourceCollection
     {
-        $pages = Page::query()->with('description')
+        $pages = Page::query()
+            ->with('description')
             ->whereIn('id', $pageIds)
+            ->where('active', true)
             ->get();
 
-        return $pages;
+        return PageSimple::collection($pages);
     }
 
     /**

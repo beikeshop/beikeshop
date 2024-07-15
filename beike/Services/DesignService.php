@@ -220,6 +220,7 @@ class DesignService
      *
      * @param $content
      * @return array
+     * @throws \Exception
      */
     private static function handleProducts($content): array
     {

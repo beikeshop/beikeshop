@@ -16,6 +16,7 @@ use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\ProductRepo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -82,6 +83,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         try {
+            DB::beginTransaction();
             $requestData = $request->all();
             $actionType  = $requestData['action_type'] ?? '';
             $product     = (new ProductService)->create($requestData);
@@ -93,8 +95,10 @@ class ProductController extends Controller
 
             hook_action('admin.product.store.after', $data);
 
+            DB::commit();
             return redirect()->to($actionType == 'stay' ? admin_route('products.create') : admin_route('products.index'))->with('success', trans('common.created_success'));
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect(admin_route('products.create'))
                 ->withInput()
                 ->withErrors(['error' => $e->getMessage()]);
@@ -109,6 +113,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         try {
+            DB::beginTransaction();
             $requestData = $request->all();
             $actionType  = $requestData['action_type'] ?? '';
             $product     = (new ProductService)->update($product, $requestData);
@@ -120,8 +125,10 @@ class ProductController extends Controller
             hook_action('admin.product.update.after', $data);
             $page = session('page', 1);
 
+            DB::commit();
             return redirect()->to($actionType == 'stay' ? admin_route('products.edit', [$product->id]) : admin_route('products.index', ['page' => $page]))->with('success', trans('common.updated_success'));
         } catch (\Exception $e) {
+            DB::rollBack();
             return redirect(admin_route('products.edit', $product))->withErrors(['error' => $e->getMessage()]);
         }
     }

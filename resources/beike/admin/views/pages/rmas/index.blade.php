@@ -19,6 +19,7 @@
                 <th>{{ __('admin/rma.quantity') }}</th>
                 <th>{{ __('admin/rma.service_type') }}</th>
                 <th>{{ __('common.status') }}</th>
+                <th>{{ __('common.created_at') }}</th>
                 <th>{{ __('common.action') }}</th>
               </tr>
             </thead>
@@ -34,6 +35,7 @@
                     <td>{{ $rma['quantity'] }}</td>
                     <td>{{ $rma['type_text'] }}</td>
                     <td>{{ $rma['status'] }}</td>
+                    <td>{{ $rma['created_at'] }}</td>
                     <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}"
                         class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>
                     </td>

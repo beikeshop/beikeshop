@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2024 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        pu shuo <pushuo@guangda.work>
+ * @Date          2024-03-13 15:31:31
+ * @LastEditTime  2024-03-13 15:31:57
+ */
+
+body.help-page {
+  .page-title-box {
+    display: none !important;
+  }
+
+  .help-title {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: bold;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: $primary;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
+  }
+
+  .top-links-wrap {
+    background-color: #fff;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    background-image: linear-gradient(180deg, #fff7f7 0, #fff 78%);
+    padding: 40px 30px;
+
+    @media (max-width: 768px) {
+      padding: 20px 0;
+    }
+
+    .top-links-info {
+      text-align: center;
+      border: 1px solid #ffe3da;
+      border-radius: 16px;
+      padding: 40px 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+      background-image: linear-gradient(180deg, #fff 0, #fffcfa 100%);
+      box-shadow: 0 10px 30px #f2eeed;
+
+      &:hover {
+        border-color: $primary;
+      }
+
+      .icon {
+        color: #f00;
+        margin-bottom: 40px;
+        // background-color: rgba(253, 86, 15, 0.1);
+        display: inline-block;
+        width: 90px;
+        height: 90px;
+        border-radius: 8px;
+        line-height: 100px;
+        position: relative;
+
+        span {
+          position: relative;
+          z-index: 1;
+        }
+
+        &::after {
+          position: absolute;
+          left: 0;
+          top: 0;
+          content: "";
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          background: #edf1f9;
+          transform: rotate(45deg);
+          background-image: linear-gradient(-45deg, #ffe2d4 0, #fff 78%);
+        }
+
+        i {
+          font-size: 47px;
+          position: relative;
+        }
+      }
+
+      .title {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .btn {
+        // background-color: $primary;
+        // color: #fff;
+        border-radius: 50px;
+        min-width: 100px;
+      }
+    }
+  }
+
+  .links-wrap {
+    background-image: linear-gradient(180deg, #f1f6fb 0, #f9fbfd 100%);
+    padding: 40px 30px;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    @media (max-width: 768px) {
+      padding: 20px 0;
+    }
+
+    .help-links-wrap {
+      // display: flex;
+      // justify-content: space-between;
+      // align-items: center;
+      font-size: 14px;
+      border: 1px solid #eee;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      background-color: #fff;
+      transition: all 0.3s;
+
+      &:hover {
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .title-wrap {
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        .icon {
+          margin-right: 6px;
+          line-height: 1;
+          i {
+            color: $primary;
+            font-size: 20px;
+          }
+        }
+
+        a {
+          color: #666;
+        }
+      }
+
+      .description {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+
+        @media (min-width: 768px) {
+          html[lang="zh_cn"] &, html[lang="zh-CN"] & {
+            height: 66px;
+          }
+        }
+      }
+
+      a.link {
+        border-bottom: 1px solid $primary;
+        color: $primary;
+      }
+    }
+  }
+}

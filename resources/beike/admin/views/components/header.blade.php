@@ -51,6 +51,15 @@
         </div>
         @endif
 
+        @if (check_license() && !Str::endsWith(config('app.url'), '.test'))
+        <li class="nav-item mx-2 license-ok">
+          <div class="license-text">
+            <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
+            <span>{{ __('admin/common.license_bought') }}</span>
+          </div>
+        </li>
+        @endif
+
         @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
           <a href="javascript:void(0)" class="btn btn-outline-primary btn-sm">@lang('admin/common.update_nav')</a>
@@ -60,14 +69,14 @@
         @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a href="{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
-            <i class="bi bi-wrench-adjustable-circle text-info"></i>&nbsp;@lang('admin/common.license_services')
+            <i class="bi bi-wrench-adjustable-circle fs-5 text-info"></i>&nbsp;@lang('admin/common.license_services')
           </a>
         </li>
         @endhookwrapper
 
         @hookwrapper('admin.header.marketing')
         <li class="nav-item">
-          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.marketing')</a>
+          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-puzzle fs-5 text-info"></i>&nbsp;@lang('admin/common.marketing')</a>
         </li>
         @endhookwrapper
 

@@ -44,7 +44,7 @@
 
     // 如果页面使用了ElementUI，且当前语言不是中文，则加载对应的语言包
     @if (locale() != 'zh_cn')
-      if (typeof ELEMENT !== 'undefined') {
+    if (typeof ELEMENT !== 'undefined') {
         const elLocale = '{{ asset('vendor/element-ui/language/'.locale().'.js') }}';
         document.write("<script src='" + elLocale + "'><\/script>")
 

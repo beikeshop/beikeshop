@@ -27,6 +27,7 @@ class PageDetail extends JsonResource
 
         return [
             'id'                   => $this->id,
+            'url'                  => $this->url,
             'parent_id'            => $this->parent_id,
             'active'               => $this->active,
             'image_format'         => $this->image ? image_resize($this->image, 300, 210) : '',

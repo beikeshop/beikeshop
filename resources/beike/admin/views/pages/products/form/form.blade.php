@@ -295,8 +295,9 @@
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
                                 placeholder="{{ __('admin/product.model') }}"></td>
                             <td>
-                              <input type="text" class="form-control" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
-                              <span role="alert" class="invalid-feedback">{{ __('common.error_required', ['name' => 'sku']) }}</span>
+                              <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
+                              <span role="alert" class="invalid-feedback" v-if="sku.sku_error">{{ __('admin/product.sku_error_repeat', ['name' => 'sku']) }}</span>
+                              <span role="alert" class="invalid-feedback" v-else>{{ __('common.error_required', ['name' => 'sku']) }}</span>
                               <span v-if="sku.is_default * 1" class="text-success">{{ __('admin/product.default_main_product') }}</span>
                             </td>
                             <td>
@@ -549,18 +550,16 @@
 
 @push('footer')
   <script>
-    $('.submit-form-edit').on('click', function () {
-      const action = $(`form#app`).attr('action');
+    $('.submit-form-edit, .submit-form').on('click', function () {
       submitBeforeFormat()
-      $(`form#app`).attr('action', bk.updateQueryStringParameter(action, 'action_type', 'stay'));
+      if (!app.validateSku()) {
+        return layer.msg('{{ __('admin/product.sku_error_repeat') }}', ()=>{});
+      }
 
-      setTimeout(() => {
-        $(`form#app`).find('button[type="submit"]')[0].click();
-      }, 0);
-    })
-
-    $('.submit-form').on('click', function () {
-      submitBeforeFormat()
+      if ($(this).hasClass('submit-form-edit')) {
+        const action = $(`form#app`).attr('action');
+        $(`form#app`).attr('action', bk.updateQueryStringParameter(action, 'action_type', 'stay'));
+      }
 
       setTimeout(() => {
         $(`form#app`).find('button[type="submit"]')[0].click();
@@ -778,6 +777,22 @@
           if (this.form.video.videoType == 'custom')  {
             this.form.video.path = this.form.video.custom;
           }
+        },
+
+        validateSku() {
+          let skuList = [];
+          let validate = true;
+          this.form.skus.forEach((sku, index) => {
+            if (skuList.includes(sku.sku)) {
+              this.$set(this.form.skus[index], 'sku_error', true);
+              validate = false;
+            } else {
+              this.$set(this.form.skus[index], 'sku_error', false);
+            }
+            skuList.push(sku.sku);
+          })
+
+          return validate;
         },
 
         deleteVideo() {

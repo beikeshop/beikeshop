@@ -145,7 +145,7 @@
                     @if ($product['deleted_at'] == '')
                       <a href="{{ admin_route('products.edit', [$product['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                       <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
-                      @hook('admin.product.list.action')
+                      @hook('admin.product.list.action', $product)
                     @else
                       <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
                       @hook('admin.products.trashed.action')

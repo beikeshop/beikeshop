@@ -25,6 +25,10 @@
   <title>BeikeShop - @yield('title')</title>
   @stack('header')
   {{-- <x-analytics /> --}}
+  <script>
+    const $languages = @json(locales());
+    const $locale = '{{ locale() }}';
+  </script>
 </head>
 
 <body class="@yield('body-class') {{ admin_locale() }}">
@@ -71,7 +75,17 @@
       beike_version: '{{ config('beike.version') }}',
       api_url: '{{ beike_api_url() }}',
       app_url: '{{ config('app.url') }}',
-      has_license: {{ json_encode(check_license()) }}
+      has_license: {{ json_encode(check_license()) }},
+      has_license_code: '{{ system_setting("base.license_code", "") }}',
+    }
+
+    function languagesFill(text) {
+      var obj = {};
+      $languages.map(e => {
+        obj[e.code] = text
+      })
+
+      return obj;
     }
   </script>
   @stack('footer')

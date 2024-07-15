@@ -60,10 +60,11 @@ class SettingController extends Controller
      */
     public function store(Request $request): mixed
     {
-        $settings            = $request->all();
-        $showPriceAfterLogin = $settings['show_price_after_login'];
-        if ($showPriceAfterLogin) {
-            $settings['guest_checkout'] = false;
+        $settings = $request->all();
+        if (isset($settings['show_price_after_login'])) {
+            if ($settings['show_price_after_login']) {
+                $settings['guest_checkout'] = false;
+            }
         }
 
         try {
@@ -77,6 +78,24 @@ class SettingController extends Controller
         $settingUrl   = str_replace($oldAdminName, $newAdminName, admin_route('settings.index'));
 
         return redirect($settingUrl)->with('success', trans('common.updated_success'));
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Throwable
+     */
+    public function updateValues(Request $request): JsonResponse
+    {
+        $settings = $request->all();
+
+        try {
+            SettingService::storeSettings($settings);
+
+            return json_success(trans('common.updated_success'));
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
     }
 
     /**

@@ -8,7 +8,9 @@
   @endif
 
   @section('page-title-right')
-    <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+    @if ($type != 'trashed')
+      <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+    @endif
   @endsection
 
   <div id="orders-app" class="card h-min-600">
