@@ -135,7 +135,9 @@ class OrderRepo
         if (isset($filters['trashed']) && $filters['trashed']) {
             $builder->onlyTrashed();
         }
-
+        
+        $builder = hook_filter('admin.order.repo.list.builder.after', $builder);
+        
         return $builder;
     }
 

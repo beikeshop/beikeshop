@@ -127,7 +127,7 @@ class CustomerRepo
             $builder->where('customers.email', 'like', "%{$filters['email']}%");
         }
         if (isset($filters['status'])) {
-            $builder->where('customers.status', (int) $filters['status']);
+            $builder->where('customers.active', (int) $filters['status']);
         }
         if (isset($filters['from'])) {
             $builder->where('customers.from', $filters['from']);

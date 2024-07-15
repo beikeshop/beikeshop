@@ -1,4 +1,4 @@
-#  **请移步到 https://github.com/beikeshop/beikeshop** 
+#  **请移步到 https://github.com/beikeshop/beikeshop**
 
 
 <img height=70 src="https://beikeshop.com/image/beike.svg" >
@@ -8,7 +8,7 @@
 
 
 ## BeikeShop介绍
-BeikeShop 是基于 Laravel 开发的一款开源商城系统  
+BeikeShop 是基于 Laravel 开发的一款开源商城系统
 主要面向外贸，跨境行业提供的商品管理、订单管理、会员管理、支付、物流、系统管理等功能
 <br>
 
@@ -72,7 +72,6 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 ![页面展示5_后台功能搜索](https://beikeshop.com/readme/README-7.png)
 
 
-
 ## 相关服务
 如果您没有任何技术基础，或想要快速的拥有自己的独立站，可以购买我们的托管服务！
 ![服务展示1_](https://beikeshop.com/readme/README-8.png)
@@ -82,8 +81,8 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 ![服务展示3_](https://beikeshop.com/readme/README-10.png)
 
 ## 软件架构
-使用语言 PHP 8.1   
-基于 Laravel 10 框架  
+使用语言 PHP 8.1
+基于 Laravel 10 框架
 前端 Blade 模板 + Vue
 
 ## 环境要求
@@ -139,9 +138,9 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 ## 特别鸣谢
 插件开发者：撸串青年、老柳、Aegis、olives等
 PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo等
-感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！  
+感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！
 
-## QQ交流群： 
+## QQ交流群：
 群1: 639108380
 
-#  **请移步到 https://github.com/beikeshop/beikeshop** 
+#  **请移步到 https://github.com/beikeshop/beikeshop**

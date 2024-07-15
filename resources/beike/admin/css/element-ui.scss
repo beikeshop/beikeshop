@@ -45,6 +45,9 @@
     border-radius: var(--bs-border-radius);
     border-color: #e2e2e2;
     padding-left: 0.75rem;
+  }
+
+  .el-textarea__inner, .el-input__inner {
     &::-webkit-input-placeholder {
       color: #666;
     }
@@ -65,4 +68,12 @@
 .bs-el-input-inner-sm {
   height: 32px;
   margin-top: 3px;
+}
+
+.el-date-editor {
+  &.el-input--small {
+    .el-input__inner {
+      padding-left: 1.75rem;
+    }
+  }
 }

@@ -6,6 +6,9 @@
       <i class="bi bi-plus fs-1 text-muted"></i>
     @endif
   </div>
+  @if ($description)
+  <div class="help-text font-size-12 lh-base">{!! $description !!}</div>
+  @endif
   <input type="hidden" value="{{ $value }}" name="{{ $name }}">
   {{ $slot }}
 </x-admin::form.row>

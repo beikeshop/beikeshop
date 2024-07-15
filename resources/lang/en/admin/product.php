@@ -56,4 +56,5 @@ return [
     'video_path'             => 'video address',
     'video_path_hint'        => 'Remote video must be a video address ending with .mp4',
     'iframe_code_hint'       => 'Video website Iframe embed code, such as click share below the youtube video and then click embed, copy the code inside',
+    'sku_error_repeat'       => 'sku repeat',
 ];

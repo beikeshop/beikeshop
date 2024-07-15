@@ -150,10 +150,6 @@
 @endsection
 
 @push('footer')
-  <script>
-    var $languages = @json(locales());
-  </script>
-
   @include('admin::pages.design.builder.component.image_selector')
   @include('admin::pages.design.builder.component.link_selector')
   @include('admin::pages.design.builder.component.text_i18n')

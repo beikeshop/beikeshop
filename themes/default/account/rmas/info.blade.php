@@ -72,6 +72,19 @@
               </div>
 
               <div class="col-6 mb-4">
+                <label class="form-label">{{ __('common.image') }}</label>
+                @if ($rma['images'] && count($rma['images']) > 0)
+                  <div class="d-flex align-items-center flex-wrap">
+                    @foreach ($rma['images'] as $image)
+                      <a class="img-item wh-60 me-2 mb-2 border rounded position-relative d-flex align-items-center justify-content-center" target="_blank" href="{{ image_origin($image) }}" data-toggle="tooltip" title="{{ __('common.quick_view') }}"><img src="{{ image_resize($image, 200, 200) }}" class="img-fluid"></a>
+                    @endforeach
+                  </div>
+                @else
+                  <div>{{ __('admin/builder.text_no') }}</div>
+                @endif
+              </div>
+
+              <div class="col-6 mb-4">
                 <label class="form-label">{{ __('shop/account/rma_form.remark') }}</label>
                 <div>{{$rma['comment']}}</div>
               </div>

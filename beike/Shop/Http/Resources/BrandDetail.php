@@ -25,7 +25,7 @@ class BrandDetail extends JsonResource
             'name'       => $this->name,
             'logo'       => image_origin($this->logo),
             'sort_order' => $this->sort_order,
-            'url'        => shop_route('brands.show', $this->id),
+            'url'        => $this->url,
             'first'      => $this->first,
         ];
     }

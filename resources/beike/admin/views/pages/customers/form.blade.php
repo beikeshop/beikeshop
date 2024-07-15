@@ -18,6 +18,7 @@
               <el-form-item label="{{ __('shop/login.password') }}" prop="password">
                 <el-input v-model="form.password" placeholder="{{ __('admin/customer.password_info') }}"></el-input>
               </el-form-item>
+              @hookwrapper('admin.customer.edit.from.customer_group')
               <el-form-item label="{{ __('admin/customer_group.index') }}">
                 <el-select v-model="form.customer_group_id" placeholder="请选择">
                   <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
@@ -25,6 +26,7 @@
                   </el-option>
                 </el-select>
               </el-form-item>
+              @endhookwrapper
               <el-form-item label="{{ __('common.status') }}" prop="active">
                 <el-switch v-model="form.active" :active-value="1" :inactive-value="0"></el-switch>
               </el-form-item>

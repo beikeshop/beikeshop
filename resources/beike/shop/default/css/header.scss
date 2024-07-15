@@ -52,6 +52,8 @@ header {
 
     .dropdown {
       .dropdown-menu {
+        max-height: 80vh;
+        overflow-y: auto;
         border: none;
         left: 50%;
         visibility: hidden;

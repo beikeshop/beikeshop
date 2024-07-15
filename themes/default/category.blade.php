@@ -82,13 +82,6 @@
     $('.filter-value-wrap').removeClass('d-none')
   }
 
-  $('.child-category').each(function(index, el) {
-    if ($(this).hasClass('active')) {
-      $(this).parent('ul').addClass('show').siblings('button').removeClass('collapsed')
-      $(this).parents('li').addClass('active')
-    }
-  });
-
   $('.attr-value-check').change(function(event) {
     let [attr, val] = [$(this).data('attr'),$(this).data('attrval')];
     filterAttr[attr].values[val].selected = $(this).is(":checked");

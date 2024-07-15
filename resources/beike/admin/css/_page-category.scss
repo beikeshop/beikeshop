@@ -13,4 +13,13 @@ body.page-categories {
     height: 42px;
     border-bottom: 1px solid #f5f5f5;
   }
+
+  .el-tree-node__expand-icon {
+    color: #41454c;
+    font-size: 16px;
+
+    &.is-leaf {
+      color: transparent;
+    }
+  }
 }

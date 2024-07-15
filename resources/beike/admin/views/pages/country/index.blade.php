@@ -174,7 +174,14 @@
 
       methods: {
         loadData() {
-          $http.get(`countries?page=${this.page}`).then((res) => {
+          let filter = {}
+          Object.keys(this.filter).forEach(key => {
+            if (this.filter[key]) {
+              filter[key] = this.filter[key]
+            }
+          })
+
+          $http.get(`countries?page=${this.page}`, filter).then((res) => {
             this.country = res.data.countries;
           })
         },

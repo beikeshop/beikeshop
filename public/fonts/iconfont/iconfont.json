@@ -6,6 +6,174 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "27499609",
+      "name": "商城设置",
+      "font_class": "shangchengshezhi",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "5510334",
+      "name": "开发手册",
+      "font_class": "development-manual",
+      "unicode": "e68d",
+      "unicode_decimal": 59021
+    },
+    {
+      "icon_id": "14656249",
+      "name": "技术服务商",
+      "font_class": "jishufuwushang",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "36026749",
+      "name": "商城配置-未选中",
+      "font_class": "shangchengpeizhi-weixuanzhong",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "15847646",
+      "name": "【系统】模型插件",
+      "font_class": "xitongmoxingchajian",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "7290573",
+      "name": "星星",
+      "font_class": "xingxing",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "2674484",
+      "name": "收藏",
+      "font_class": "shoucang2",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "15872071",
+      "name": "没有数据",
+      "font_class": "meiyoushuju",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "4294057",
+      "name": "收藏",
+      "font_class": "shoucang1",
+      "unicode": "e77f",
+      "unicode_decimal": 59263
+    },
+    {
+      "icon_id": "7832286",
+      "name": "优惠券",
+      "font_class": "youhuiquan",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "19490721",
+      "name": "待付款",
+      "font_class": "daifukuan",
+      "unicode": "f12f",
+      "unicode_decimal": 61743
+    },
+    {
+      "icon_id": "19490722",
+      "name": "待发货",
+      "font_class": "daifahuo",
+      "unicode": "f130",
+      "unicode_decimal": 61744
+    },
+    {
+      "icon_id": "19490724",
+      "name": "待收货",
+      "font_class": "daishouhuo",
+      "unicode": "f131",
+      "unicode_decimal": 61745
+    },
+    {
+      "icon_id": "19490725",
+      "name": "售后",
+      "font_class": "shouhou",
+      "unicode": "f132",
+      "unicode_decimal": 61746
+    },
+    {
+      "icon_id": "19490729",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "f136",
+      "unicode_decimal": 61750
+    },
+    {
+      "icon_id": "19490732",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "f138",
+      "unicode_decimal": 61752
+    },
+    {
+      "icon_id": "19490734",
+      "name": "购物",
+      "font_class": "gouwu",
+      "unicode": "f13a",
+      "unicode_decimal": 61754
+    },
+    {
+      "icon_id": "19490738",
+      "name": "喜欢",
+      "font_class": "xihuan",
+      "unicode": "f13e",
+      "unicode_decimal": 61758
+    },
+    {
+      "icon_id": "19490741",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "f141",
+      "unicode_decimal": 61761
+    },
+    {
+      "icon_id": "19490742",
+      "name": "商品",
+      "font_class": "shangpin",
+      "unicode": "f142",
+      "unicode_decimal": 61762
+    },
+    {
+      "icon_id": "19490746",
+      "name": "礼品",
+      "font_class": "lipin",
+      "unicode": "f146",
+      "unicode_decimal": 61766
+    },
+    {
+      "icon_id": "19490748",
+      "name": "优惠券",
+      "font_class": "youhuiquan1",
+      "unicode": "f148",
+      "unicode_decimal": 61768
+    },
+    {
+      "icon_id": "19490750",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "f14a",
+      "unicode_decimal": 61770
+    },
+    {
+      "icon_id": "1253",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "14992",
       "name": "购物袋",
       "font_class": "gouwudai",

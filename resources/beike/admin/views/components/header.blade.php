@@ -69,14 +69,14 @@
         @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a href="{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
-            <i class="bi bi-wrench-adjustable-circle text-info"></i>&nbsp;@lang('admin/common.license_services')
+            <i class="bi bi-wrench-adjustable-circle fs-5 text-info"></i>&nbsp;@lang('admin/common.license_services')
           </a>
         </li>
         @endhookwrapper
 
         @hookwrapper('admin.header.marketing')
         <li class="nav-item">
-          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-gem text-primary"></i>&nbsp;@lang('admin/common.marketing')</a>
+          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-puzzle fs-5 text-info"></i>&nbsp;@lang('admin/common.marketing')</a>
         </li>
         @endhookwrapper
 

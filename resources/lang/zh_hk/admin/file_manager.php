@@ -22,7 +22,7 @@ return [
     'download'                => '下載',
     'drop_file_hint'          => '是否將<span class=\"drop-hint\"></span>個文件移動到<span class=\"drop-hint\"></span>內?',
     'drop_folder_hint'        => '是否將<span class=\"drop-hint\"></span>移動到<span class=\"drop-hint\"></span>內?',
-    'file_manager'            => '圖片管理器',
+    'file_manager'            => '文件管理器',
     'file_manager_create'     => '創建目錄/文件',
     'file_manager_delete'     => '刪除目錄/文件',
     'file_manager_show'       => '查看目錄/文件',

@@ -281,6 +281,9 @@ Route::prefix($adminName)
                 Route::middleware('can:admin_users_update')->put('admin_users/{user_id}', [Controllers\AdminUserController::class, 'update'])->name('admin_users.update');
                 Route::middleware('can:admin_users_delete')->delete('admin_users/{user_id}', [Controllers\AdminUserController::class, 'destroy'])->name('admin_users.destroy');
 
+                // help
+                Route::middleware('can:help_index')->get('help', [Controllers\HelpController::class, 'index'])->name('help.index');
+
                 // 后台用户组
                 Route::middleware('can:admin_roles_index')->get('admin_roles', [Controllers\AdminRoleController::class, 'index'])->name('admin_roles.index');
                 Route::middleware('can:admin_roles_create')->get('admin_roles/create', [Controllers\AdminRoleController::class, 'create'])->name('admin_roles.create');
