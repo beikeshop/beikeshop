@@ -139,3 +139,14 @@ $dropdown-bg :#fff;
     }
   }
 }
+
+.pagination {
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .page-item {
+      margin-bottom: 4px;
+    }
+  }
+}
