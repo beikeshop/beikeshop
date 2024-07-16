@@ -30,7 +30,7 @@ return [
     'text_free'               => '免费',
     'btn_buy'                 => '购买',
     'btn_buy_service'         => '购买技术支持',
-    'service_date_to'         => '售后到期',
+    'service_date_to'         => '服务截止',
     'days'                    => '天',
     'free_days'               => '赠送',
     'free_days_over'          => '个月售后',
