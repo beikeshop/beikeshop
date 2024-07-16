@@ -2,11 +2,6 @@
 
 @section('title', __('admin/common.account_index'))
 
-@section('page-bottom-btns')
-  <button type="button" class="btn btn-lg w-min-100 btn-primary submit-form" form="form-account">{{ __('common.save') }}</button>
-  <button class="btn btn-lg btn-default w-min-100 ms-3" onclick="bk.back()">{{ __('common.return') }}</button>
-@endsection
-
 @section('content')
 <div id="plugins-app-form" class="card h-min-600">
   <div class="card-body">
@@ -65,11 +60,12 @@
           </x-admin::form.row>
         </div>
       </div>
-      <div>
-        <x-admin::form.row title="">
-        <button type="submit" class="mt-5 btn btn-lg d-none w-min-100 btn-primary" form="form-account">{{ __('common.save') }}</button>
-        </x-admin::form.row>
-      </div>
+      <x-admin::form.row title="">
+        <div class="mt-4">
+          <button type="button" class="btn btn-lg w-min-100 btn-primary btn-submit" onclick="update()" form="form-account">{{ __('common.save') }}</button>
+          <button class="btn btn-lg btn-default w-min-100 ms-3" onclick="bk.back()">{{ __('common.return') }}</button>
+        </div>
+      </x-admin::form.row>
     </form>
   </div>
 </div>
@@ -85,8 +81,20 @@
     methods: {
       addToken() {
         this.tokens.push(bk.randomString(64));
+        setTimeout(() => {
+          update(false);
+        }, 0);
       }
     }
   });
+
+  function update(isRefresh = true) {
+    $http.post($('#form-account').attr('action'), $('#form-account').serialize()).then(res => {
+      layer.msg(res.message);
+      if (isRefresh) {
+        location.reload();
+      }
+    })
+  }
 </script>
 @endpush

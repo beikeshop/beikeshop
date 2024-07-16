@@ -35,6 +35,6 @@ class AccountController extends Controller
         $adminUserData = $request->all();
         AdminUserRepo::updateAdminUser($user->id, $adminUserData);
 
-        return response()->redirectTo('admin/account')->with('success', trans('common.updated_success'));
+        return json_success(trans('common.updated_success'));
     }
 }
