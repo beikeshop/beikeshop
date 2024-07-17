@@ -6,7 +6,7 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-<div class="d-flex align-items-center">
+<div class="d-flex">
   <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
   <div class="top-text">
     {{ __('admin/marketing.attention_2') }}
@@ -42,11 +42,11 @@
             <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-0 search-wrap">
               <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('admin/marketing.plugin_name') }}">
               <button type="button" @click="search"
-                class="btn btn-primary btn-sm">{{ __('admin/builder.text_search') }}</button>
+                class="btn btn-primary">{{ __('admin/builder.text_search') }}</button>
             </div>
             <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-0">
               {{-- <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label> --}}
-              <select v-model="filter.type" class="form-control search-category-wrap" @change="search">
+              <select v-model="filter.type" class="form-select search-category-wrap" @change="search">
                 <option value="">{{ __('common.all') }}{{ __('admin/plugin.plugin_type') }}</option>
                 @foreach ($types as $type)
                   <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
