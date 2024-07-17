@@ -32,7 +32,7 @@ $data = $plugin['data'];
           <div class="mb-3 d-flex justify-content-between align-items-center">
             <h2 class="card-title">{{ $data['name'] }}</h2>
             <div>
-              <button class="btn btn-outline-secondary btn-sm btn-back" onclick="history.go(-1);"><i class="iconfont me-1">&#xe62d;</i>{{__('common.return')}}</button>
+              <button class="btn btn-outline-secondary btn-sm btn-back" onclick="history.go(-1);"><i class="bi bi-arrow-left"></i> {{__('common.return')}}</button>
             </div>
           </div>
           <div class="plugin-item d-lg-flex align-items-center mb-3 lh-1 text-secondary">
@@ -472,8 +472,12 @@ $data = $plugin['data'];
       });
 
       if ($(window).width() > 992) {
-        const marketingRightHeight = $('.marketing-right').height() < 336 ? 336 : $('.marketing-right').height();
-        $('.plugin-icon-wrap').css('height', marketingRightHeight + 'px');
+        const marketingRightHeight = $('.marketing-right').height() < 400 ? 400 : $('.marketing-right').height();
+        $('.plugin-icon-wrap').css({
+          'height': marketingRightHeight + 'px',
+          'width': marketingRightHeight + 'px',
+          'flex': '0 0 ' + marketingRightHeight + 'px',
+        });
       }
     },
 
