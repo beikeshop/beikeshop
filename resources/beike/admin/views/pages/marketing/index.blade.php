@@ -6,9 +6,9 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-<div class="d-flex">
-  <div>{{ __('admin/marketing.attention_1') }}</div>
-  <div>
+<div class="d-flex align-items-center">
+  <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
+  <div class="top-text">
     {{ __('admin/marketing.attention_2') }}
     <br>
     {{ __('admin/marketing.attention_3') }}
@@ -39,14 +39,15 @@
       <template v-if="plugins">
         <div class="bg-light p-4 mb-4">
           <div class="row">
-            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
-              <label class="filter-title">{{ __('admin/builder.text_search') }}</label>
+            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-0 search-wrap">
               <input @keyup.enter="search" type="text" v-model="filter.keyword" class="form-control" placeholder="{{ __('admin/marketing.plugin_name') }}">
+              <button type="button" @click="search"
+                class="btn btn-primary btn-sm">{{ __('admin/builder.text_search') }}</button>
             </div>
-            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-3">
-              <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label>
-              <select v-model="filter.type" class="form-control" @change="search">
-                <option value="">{{ __('common.all') }}</option>
+            <div class="col-xxl-3 col-lg-4 col-sm-6 d-flex align-items-center mb-0">
+              {{-- <label class="filter-title">{{ __('admin/plugin.plugin_type') }}</label> --}}
+              <select v-model="filter.type" class="form-control search-category-wrap" @change="search">
+                <option value="">{{ __('common.all') }}{{ __('admin/plugin.plugin_type') }}</option>
                 @foreach ($types as $type)
                   <option value="{{ $type['value'] }}">{{ $type['label'] }}</option>
                 @endforeach
@@ -54,7 +55,7 @@
             </div>
           </div>
 
-          <div class="row">
+          {{-- <div class="row">
             <label class="filter-title"></label>
             <div class="col-auto">
               <button type="button" @click="search"
@@ -62,7 +63,7 @@
               <button type="button" @click="resetSearch"
                 class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
             </div>
-          </div>
+          </div> --}}
         </div>
         <div class="marketing-wrap" v-if="plugins.data.length">
           <div class="row">

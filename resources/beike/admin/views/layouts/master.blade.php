@@ -38,7 +38,7 @@
     <x-admin-sidebar />
     <div id="content">
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
           <h5 class="page-title">@yield('title')</h5>
           <div class="ms-4 text-danger">@yield('page-title-after')</div>
         </div>
