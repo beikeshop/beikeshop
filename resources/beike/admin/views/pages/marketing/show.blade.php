@@ -57,7 +57,7 @@ $data = $plugin['data'];
               @endif
             </div>
             @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['is_subscribe'])
-            <div class="mb-2 d-flex">
+            <div class="mb-2">
               <div class="mb-1 fw-bold">
                 {{ __('admin/marketing.subscription_price') }}：
               </div>
@@ -69,12 +69,12 @@ $data = $plugin['data'];
             </div>
             @endif
             @if ($data['service_date_to'] ?? 0)
-            <div class="mb-2 d-flex">
+            <div class="mb-2">
               <div class="mb-1 fw-bold">{{ __('admin/marketing.service_date_to') }}：</div>
               <div>{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</div>
             </div>
             @endif
-            <div class="mb-2 d-flex">
+            <div class="mb-2">
               <div class="mb-1 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
               <div>{{ $data['version'] }}</div>
             </div>
@@ -138,7 +138,7 @@ $data = $plugin['data'];
         <div class="mb-0">
           @if ($data['available'])
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe']))
-            <div class="mb-2 mt-4">
+            <div class="my-3">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
                 <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
                 <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
