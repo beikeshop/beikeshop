@@ -34,6 +34,7 @@ return [
     'days'                    => '天',
     'free_days'               => '赠送',
     'free_days_over'          => '个月售后',
+    'free_days_dy'            => '个月订阅',
     'text_pay'                => '支付金额',
     'select_pay'              => '选择支付方式',
     'wxpay'                   => '微信扫码支付!',
@@ -67,4 +68,5 @@ return [
     'lv1_developer'                  => 'LV1开发者',
     'lv2_developer'                  => 'LV2开发者',
     'lv3_developer'                  => 'LV3开发者',
+    'subscription_price'             => '订阅价格',
 ];

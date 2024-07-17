@@ -33,7 +33,7 @@ $data = $plugin['data'];
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>
-      <div class="ms-lg-5">
+      <div class="ms-lg-5 wp-600 mt-3 mt-lg-0">
         <h2 class="card-title mb-4">{{ $data['name'] }}</h2>
         <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
           <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span
@@ -56,10 +56,26 @@ $data = $plugin['data'];
                 <span></span>
               </div>
               @if ($data['free_service_months'])
-              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ __('admin/marketing.free_days_over') }} )</span>
+              <span>
+                ({{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }}{{ $data['is_subscribe'] ?  __('admin/marketing.free_days_dy') : __('admin/marketing.free_days_over') }})
+              </span>
               @endif
             </td>
           </tr>
+          @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['is_subscribe'])
+          <tr>
+            <td>
+              <div class="text-last">
+                {{ __('admin/marketing.subscription_price') }}
+              </div>
+            </td>
+            <td>
+              @foreach ($data['plugin_services'] as $item)
+              {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
+              @endforeach
+            </td>
+          </tr>
+          @endif
           <tr>
             <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div></td>
             <td><div>{{ $data['version'] }}</div></td>
@@ -119,7 +135,7 @@ $data = $plugin['data'];
 
         <div class="mb-4">
           @if ($data['available'])
-            @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && $data['id'] !== 61))
+            @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe']))
             <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
             <div class="mb-4">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
@@ -138,7 +154,7 @@ $data = $plugin['data'];
               <div>
                 <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                   __('admin/marketing.download_plugin') }}</button>
-                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                @if (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe'])
                 <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
                   __('admin/marketing.btn_buy_service') }}</button>
                 @endif
@@ -298,7 +314,7 @@ $data = $plugin['data'];
     <li class="nav-item" role="presentation">
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
-    @if ($data['id'] !== 61)
+    @if (!$data['is_subscribe'])
     <li class="nav-item" role="presentation">
       <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
     </li>
@@ -311,7 +327,7 @@ $data = $plugin['data'];
       {!! $data['description'] !!}
       @endif
     </div>
-    @if ($data['id'] !== 61)
+    @if (!$data['is_subscribe'])
     <div class="tab-pane fade" id="tab-histories">
       @if ($plugin['service_buy_histories'] ?? 0)
         <div class="table-push">
