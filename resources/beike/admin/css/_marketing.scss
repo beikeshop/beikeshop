@@ -41,9 +41,46 @@ body.page-marketing {
       white-space: nowrap;
     }
   }
+
+  .search-wrap {
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: white;
+    padding: 0;
+
+    input {
+      border: none;
+      border: 1px solid #eee;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      padding-left: 15px;
+    }
+    button {
+      white-space: nowrap;
+      border-top-right-radius: 50px;
+      border-bottom-right-radius: 50px;
+    }
+  }
+
+  .search-category-wrap {
+    border-radius: 50px;
+  }
+
+  .top-text {
+    max-width: 800px;
+  }
 }
 
 body.page-marketing-info {
+  .crumb {
+    margin-top: -42px;
+    margin-bottom: 37px !important;
+  }
+
+  .page-title-box {
+    padding-top: 55px !important;
+  }
+
   .plugin-info {
     align-items: flex-start;
 
@@ -107,7 +144,7 @@ body.page-marketing-info {
       &:before {
         background-image: linear-gradient(180deg, #c5ccd6, transparent);
       }
- 
+
       .tags {
         background-color: #878b9b;
       }
@@ -140,6 +177,20 @@ body.page-marketing-info {
       padding: 2px 4px;
       color: $primary;
     }
+
+    .response-dev {
+      border: 1px solid #707dff;
+      padding: 0 5px;
+      border-radius: 5px;
+      color: #707dff;
+    }
+
+    .response {
+      border: 1px solid #ff804a;
+      padding: 0 5px;
+      border-radius: 5px;
+      color: #ff804a;
+    }
   }
 
   &.zh_cn, &.zh_hk {
@@ -165,6 +216,10 @@ body.page-marketing-info {
       border-radius: 6%;
       position: relative;
       z-index: 1;
+      max-height: 100%;
+      @media (min-width: 992px) {
+        height: 100%;
+      }
       box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
     }
 
@@ -189,7 +244,7 @@ body.page-marketing-info {
       .el-radio__label {
         overflow: hidden;
         > img {
-          max-height: 26px;
+          max-height: 20px;
         }
       }
     }

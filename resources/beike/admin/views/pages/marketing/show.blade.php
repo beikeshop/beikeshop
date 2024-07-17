@@ -10,44 +10,41 @@
 <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
-@section('page-title-after')
-{{ __('admin/marketing.attention_2') }}
-@endsection
-
 @section('content')
 @php
 $data = $plugin['data'];
 @endphp
 
 
-<div class="card mb-4" id="app">
-  <div class="card-header">
-    <h5 class="card-title">{{ __('admin/marketing.marketing_show') }}</h5>
-  </div>
+<div class="mb-2 text-secondary crumb"><a class="text-secondary" href="{{ admin_route('home.index') }}"><i class="bi bi-house"></i> {{__('common.home')}}</a> / <a class="text-secondary" href="{{ admin_route('marketing.index') }}">{{__('admin/common.marketing')}}</a> / {{ $data['name'] }}</div>
+<div class="card mb-4" id="app" v-cloak>
   <div class="card-body">
     <div class="d-lg-flex plugin-info">
-      <div class="d-flex justify-content-between align-items-center plugin-icon-wrap w-max-400">
+      <div class="d-flex justify-content-between align-items-center plugin-icon-wrap">
         @if ($data['origin_price'])
         <div class="sale-wrap"><img src="{{ asset('image/sale-icon.png') }}" class="img-fluid"></div>
         @endif
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon">
         <img src="{{ $data['icon_big'] }}" class="img-fluid plugin-icon-shadow">
       </div>
-      <div class="ms-lg-5 wp-600 mt-3 mt-lg-0">
-        <h2 class="card-title mb-4">{{ $data['name'] }}</h2>
-        <div class="plugin-item d-lg-flex align-items-center mb-4 lh-1 text-secondary">
-          <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span
-            class="vr lh-1 bg-secondary"></span>
-          <div class="mx-3">{{ __('page_category.views') }}：{{ $data['viewed'] }}</div><span
-            class="vr lh-1 bg-secondary"></span>
-          <div class="mx-3">{{ __('admin/marketing.last_update') }}：{{ $data['updated_at'] }}</div><span
-            class="lh-1 bg-secondary"></span>
-        </div>
-
-        <table class="bg-light mb-2 table table-bordered">
-          <tr>
-            <td><div class="text-last">{{ __('product.price') }}</div></td>
-            <td>
+      <div class="ms-lg-5 wp-600 mt-3 mt-lg-0 text-box marketing-right">
+        <div>
+          <div class="mb-3 d-flex justify-content-between align-items-center">
+            <h2 class="card-title">{{ $data['name'] }}</h2>
+            <div>
+              <button class="btn btn-outline-secondary btn-sm btn-back" onclick="history.go(-1);"><i class="bi bi-arrow-left"></i> {{__('common.return')}}</button>
+            </div>
+          </div>
+          <div class="plugin-item d-lg-flex align-items-center mb-3 lh-1 text-secondary">
+            <div class="mx-3 ms-0">{{ __('admin/marketing.download_count') }}：{{ $data['downloaded'] }}</div><span
+              class="vr lh-1 bg-secondary"></span>
+            <div class="mx-3">{{ __('page_category.views') }}：{{ $data['viewed'] }}</div><span
+              class="vr lh-1 bg-secondary"></span>
+            <div class="mx-3">{{ __('admin/marketing.last_update') }}：{{ $data['updated_at'] }}</div><span
+              class="lh-1 bg-secondary"></span>
+          </div>
+          <div class="mb-2">
+            <div class="mb-2">
               <div class="fs-3 me-1 d-inline-block fw-bold" style="margin-left: -4px">
                 <span>{{ $data['price_format'] }}</span>
                 @if ($data['origin_price'])
@@ -56,88 +53,92 @@ $data = $plugin['data'];
                 <span></span>
               </div>
               @if ($data['free_service_months'])
-              <span>
-                ({{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }}{{ $data['is_subscribe'] ?  __('admin/marketing.free_days_dy') : __('admin/marketing.free_days_over') }})
-              </span>
+              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ $data['is_subscribe'] ?  __('admin/marketing.free_days_dy') : __('admin/marketing.free_days_over') }} )</span>
               @endif
-            </td>
-          </tr>
-          @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['is_subscribe'])
-          <tr>
-            <td>
-              <div class="text-last">
-                {{ __('admin/marketing.subscription_price') }}
+            </div>
+            @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['is_subscribe'])
+            <div class="mb-2">
+              <div class="mb-1 fw-bold">
+                {{ __('admin/marketing.subscription_price') }}：
               </div>
-            </td>
-            <td>
-              @foreach ($data['plugin_services'] as $item)
-              {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
-              @endforeach
-            </td>
-          </tr>
-          @endif
-          <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_version') }}</div></td>
-            <td><div>{{ $data['version'] }}</div></td>
-          </tr>
-          <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_compatibility') }}</div></td>
-            <td><div>{{ $data['version_name_format'] }}</div></td>
-          </tr>
-          <tr>
-            <td><div class="text-last">{{ __('admin/marketing.text_author') }}</div></td>
-            <td>
-                @php
-                $lvClass = '';
+              <div>
+                @foreach ($data['plugin_services'] as $item)
+                {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
+                @endforeach
+              </div>
+            </div>
+            @endif
+            @if ($data['service_date_to'] ?? 0)
+            <div class="mb-2">
+              <div class="mb-1 fw-bold">{{ __('admin/marketing.service_date_to') }}：</div>
+              <div>{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</div>
+            </div>
+            @endif
+            <div class="mb-2">
+              <div class="mb-1 fw-bold">{{ __('admin/marketing.text_version') }}：</div>
+              <div>{{ $data['version'] }}</div>
+            </div>
+            <div class="mb-2">
+              <div class="mb-1 fw-bold">{{ __('admin/marketing.text_compatibility') }}：</div>
+              <div>{{ $data['version_name_format'] }}</div>
+            </div>
+            <div class="mb-2">
+              <div class="mb-2 fw-bold">{{ __('admin/marketing.text_author') }}：</div>
+              <div>
+                  @php
+                  $lvClass = '';
 
-                if ($data['developer']['lv'] == 3) {
-                  $lvClass = 'lv3-border';
-                } elseif ($data['developer']['lv'] == 2) {
-                  $lvClass = 'lv2-border';
-                } elseif ($data['developer']['lv'] == 1) {
-                  $lvClass = 'lv1-border';
-                }
-              @endphp
-              <div class="d-inline-block">
-                <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
-                  class="d-flex align-items-center text-dark">
-                  <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white avatar-wrap {{ $lvClass }} {{ $data['developer']['is_official'] ? 'official' : '' }}" @if ($data['developer']['is_official']) title="{{ __('admin/marketing.official_developer') }}" @elseif ($data['developer']['lv'] == 3) title="{{ __('admin/marketing.lv3_developer') }}" @elseif ($data['developer']['lv'] == 2) title="{{ __('admin/marketing.lv2_developer') }}" @elseif ($data['developer']['lv'] == 1) title="{{ __('admin/marketing.lv1_developer') }}"  @endif>
-                    <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
-                    @if (!$data['developer']['is_official'])
-                      @if ($data['developer']['lv'] == 3)
-                      <div class="tags">lv3</div>
-                      @elseif ($data['developer']['lv'] == 2)
-                      <div class="tags">lv2</div>
-                      @elseif ($data['developer']['lv'] == 1)
-                      <div class="tags">lv1</div>
+                  if ($data['developer']['lv'] == 3) {
+                    $lvClass = 'lv3-border';
+                  } elseif ($data['developer']['lv'] == 2) {
+                    $lvClass = 'lv2-border';
+                  } elseif ($data['developer']['lv'] == 1) {
+                    $lvClass = 'lv1-border';
+                  }
+                @endphp
+                <div class="d-inline-block">
+                  <a href="{{ beike_api_url() }}/account/{{ $data['developer']['id'] }}" target="_blank"
+                    class="d-flex align-items-center text-dark">
+                    <div class="border wh-50 rounded-5 d-flex justify-content-between align-items-center bg-white avatar-wrap {{ $lvClass }} {{ $data['developer']['is_official'] ? 'official' : '' }}" @if ($data['developer']['is_official']) title="{{ __('admin/marketing.official_developer') }}" @elseif ($data['developer']['lv'] == 3) title="{{ __('admin/marketing.lv3_developer') }}" @elseif ($data['developer']['lv'] == 2) title="{{ __('admin/marketing.lv2_developer') }}" @elseif ($data['developer']['lv'] == 1) title="{{ __('admin/marketing.lv1_developer') }}"  @endif>
+                      <img src="{{ $data['developer']['avatar'] }}" class="img-fluid rounded-5">
+                      @if (!$data['developer']['is_official'])
+                        @if ($data['developer']['lv'] == 3)
+                        <div class="tags">lv3</div>
+                        @elseif ($data['developer']['lv'] == 2)
+                        <div class="tags">lv2</div>
+                        @elseif ($data['developer']['lv'] == 1)
+                        <div class="tags">lv1</div>
+                        @endif
+                      @else
+                      <div class="tags">V</div>
                       @endif
-                    @else
-                    <div class="tags">V</div>
-                    @endif
-                  </div>
-                  <div class="ms-2 d-flex">
-                    <div>
-                      <div class="mb-1">{{ $data['developer']['name'] }}</div>
-                      <div>{{ $data['developer']['email'] }}</div>
                     </div>
-                  </div>
-                </a>
+                    <div class="ms-2 d-flex">
+                      <div>
+                        <div class="mb-1">{{ $data['developer']['name'] }}</div>
+                        @if ($data['developer']['is_official'])
+                        <div class="mt-1 response-dev">{{ __('admin/marketing.official_developer') }}</div>
+                        @elseif ($data['developer']['lv'] == 3)
+                        <div class="mt-1 response">{{ __('admin/marketing.lv3_developer') }}</div>
+                        @elseif ($data['developer']['lv'] == 2)
+                        <div class="mt-1 response">{{ __('admin/marketing.lv2_developer') }}</div>
+                        @elseif ($data['developer']['lv'] == 1)
+                        <div class="mt-1 response">{{ __('admin/marketing.lv1_developer') }}</div>
+                        @endif
+                      </div>
+                    </div>
+                  </a>
+                </div>
               </div>
-            </td>
-          </tr>
-          @if ($data['service_date_to'] ?? 0)
-          <tr>
-            <td><div class="text-last">{{ __('admin/marketing.service_date_to') }}</div>：</td>
-            <td>{{ $data['service_date_to'] }} ( <span class="{{ $data['days_remaining'] < 7 ? 'red' : '' }}"> {{ $data['days_remaining'] }} {{ __('admin/marketing.days') }}</span> )</td>
-          </tr>
-          @endif
-        </table>
+            </div>
+          </div>
+        </div>
 
-        <div class="mb-4">
+
+        <div class="mb-0">
           @if ($data['available'])
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe']))
-            <div class="mb-2">{{ __('admin/marketing.select_pay') }}</div>
-            <div class="mb-4">
+            <div class="my-3">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
                 <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
                 <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
@@ -154,11 +155,14 @@ $data = $plugin['data'];
               <div>
                 <button class="btn btn-primary btn-lg" @click="downloadPlugin"><i class="bi bi-cloud-arrow-down-fill"></i> {{
                   __('admin/marketing.download_plugin') }}</button>
-                @if (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe'])
-                <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{
-                  __('admin/marketing.btn_buy_service') }}</button>
+                @if (isset($data['plugin_services']) && count($data['plugin_services']))
+                  @if (!$data['is_subscribe'])
+                  <button class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" @click="openService">{{ __('admin/marketing.btn_buy_service') }}</button>
+                  @else
+                    <a class="btn btn-outline-primary btn-lg w-min-100 fw-bold ms-2" href="{{ config('beike.api_url') }}/subscribe/{{ $data['code'] }}" target="_blank">{{ __('admin/marketing.buy_subscription') }}</a>
+                  @endif
                 @endif
-                @if ( $data['service_date_to'] ?? 0)
+                @if ( $data['service_date_to'] ?? 0 && !$data['is_subscribe'])
                 <a :href="toBkTicketUrl()" target="_blank" class="btn btn-outline-primary btn-lg fw-bold ms-2 {{ $data['days_remaining'] <= 0 ? 'd-none' : '' }}">{{ __('admin/marketing.plugin_ticket') }}</a>
                 @endif
               </div>
@@ -167,7 +171,7 @@ $data = $plugin['data'];
               <button class="btn btn-primary btn-lg w-min-100 fw-bold" @click="marketingBuy">{{ __('admin/marketing.btn_buy') }}</button>
             @endif
           @else
-          <div class="alert alert-warning" role="alert">
+          <div class="alert alert-warning mb-0" role="alert">
             {!! __('admin/marketing.version_compatible_text') !!}
           </div>
           @endif
@@ -297,7 +301,7 @@ $data = $plugin['data'];
       <el-radio-group v-model="serviceDialog.id" size="small" class="radio-group row d-flex">
         <div class="col-6 mb-3" v-for="item,index in serviceDialog.plugin_services">
           <el-radio class="w-100 d-flex justify-content-left align-items-center py-4 ps-2"  :label="item.id" border>
-            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price }}</span>
+            <span style="font-size: .85rem">@{{ item.months }}{{ __('admin/marketing.munths') }} / @{{ item.price_format }}</span>
           </el-radio>
         </div>
       </el-radio-group>
@@ -307,6 +311,19 @@ $data = $plugin['data'];
       </div>
     </div>
   </el-dialog>
+</div>
+
+<div class="card p-4 mb-4">
+  <div class="text-danger">
+    <div class="d-flex">
+      <div class="me-2">{{ __('admin/marketing.attention_show_1') }}</div>
+      <div>
+        {{ __('admin/marketing.attention_show_2') }}
+        <br>
+        {{ __('admin/marketing.attention_show_3') }}
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="card h-min-200 p-4">
@@ -453,6 +470,15 @@ $data = $plugin['data'];
       this.source.callingCodes.forEach(item => {
         item.region_code = item.region + '' + item.code;
       });
+
+      if ($(window).width() > 992) {
+        const marketingRightHeight = $('.marketing-right').height() < 400 ? 400 : $('.marketing-right').height();
+        $('.plugin-icon-wrap').css({
+          'height': marketingRightHeight + 'px',
+          'width': marketingRightHeight + 'px',
+          'flex': '0 0 ' + marketingRightHeight + 'px',
+        });
+      }
     },
 
     methods: {
