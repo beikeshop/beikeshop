@@ -79,4 +79,5 @@ return [
     'attention_show_1'               => '注意事项：',
     'attention_show_2'               => '每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'attention_show_3'               => '软件为特殊商品，付费购买后非软件本身问题不支持退款，请购买前请仔细阅读插件说明',
+    'domain_token_domain_error'      => '当前域名: :domain 与 Token绑定的域名: :token_domain 不一致，请确认后再购买，或者重新绑定 Token。 <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">查看教程</a>',
 ];

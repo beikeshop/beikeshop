@@ -194,12 +194,16 @@ Route::prefix($adminName)
                 Route::middleware('can:reports_view')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports_view.product');
 
                 // 插件市场
+                Route::middleware('can:marketing_index')->post('marketing/check_domain', [Controllers\MarketingController::class, 'checkDomain'])->name('marketing.check_domain');
+                Route::middleware('can:marketing_index')->get('marketing/get_token', [Controllers\MarketingController::class, 'getToken'])->name('marketing.get_token');
+
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
                 Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');
                 Route::middleware('can:marketing_buy')->post('marketing/{code}/buy', [Controllers\MarketingController::class, 'buy'])->name('marketing.buy');
                 Route::middleware('can:marketing_buy')->post('marketing/{id}/buy_service', [Controllers\MarketingController::class, 'buyService'])->name('marketing.buy_service');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
                 Route::middleware('can:marketing_show')->get('marketing/service_orders/{id}', [Controllers\MarketingController::class, 'serviceOrder'])->name('marketing.service_order');
+
 
                 // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');

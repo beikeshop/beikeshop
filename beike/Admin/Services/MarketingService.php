@@ -154,7 +154,9 @@ class MarketingService
         $datetime = date('Y-m-d');
         $url      = config('beike.api_url') . "/api/plugins/{$pluginCode}/download";
 
-        $content = $this->httpClient->get($url)->body();
+        $content = $this->httpClient->get($url, [
+            'timeout' => null,
+        ])->body();
 
         $pluginPath = "plugins/{$pluginCode}-{$datetime}.zip";
         Storage::disk('local')->put($pluginPath, $content);
@@ -162,5 +164,21 @@ class MarketingService
         $pluginZip = storage_path('app/' . $pluginPath);
         $zipFile   = (new Zip)->open($pluginZip);
         $zipFile->extract(base_path('plugins'));
+    }
+
+    // getDomain
+    public function getDomain($token)
+    {
+        $url = config('beike.api_url') . '/api/website/get_domain?token=' . $token;
+
+        return $this->httpClient->get($url)->json();
+    }
+
+    // getToken
+    public function getToken($domain)
+    {
+        $url = config('beike.api_url') . '/api/website/get_token?domain=' . $domain;
+
+        return $this->httpClient->get($url)->json();
     }
 }
