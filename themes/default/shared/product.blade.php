@@ -23,6 +23,7 @@
           {{ __('shop/products.add_to_cart') }}
         </button>
         @endhookwrapper
+        @hookwrapper('shared.product.btn.quick_view')
         <button
           class="btn btn-dark text-light btn-quick-view"
           product-id="{{ $product['sku_id'] }}"
@@ -33,6 +34,8 @@
           onclick="bk.productQuickView({{ $product['id'] }})">
           <i class="bi bi-eye"></i>
         </button>
+        @endhookwrapper
+        @hookwrapper('shared.product.btn.add_to_favorites')
         <button
           class="btn btn-dark text-light btn-wishlist"
           product-id="{{ $product['sku_id'] }}"
@@ -44,6 +47,7 @@
           onclick="bk.addWishlist('{{ $product['id'] }}', this)">
           <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }}"></i>
         </button>
+        @endhookwrapper
       </div>
     @endif
   </div>
