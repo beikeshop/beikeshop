@@ -172,6 +172,7 @@
           this.page = page * 1;
           this.loadData(true);
         });
+        this.getToken()
       },
 
       computed: {
@@ -240,6 +241,21 @@
           this.setTokenDialog.show = true;
         },
 
+        getToken() {
+          if (this.setTokenDialog.token) {
+            return;
+          }
+
+          $http.get(`{{ admin_route('marketing.get_token') }}?domain=${config.app_url}`, null, {hload: true}).then((res) => {
+            if (res.status == 'success') {
+              if (res.data.data) {
+                this.setTokenDialog.token = res.data.data;
+                $http.post('{{ admin_route('settings.store_token') }}', {developer_token: res.data.data})
+              }
+            }
+          })
+        },
+
         submitToken() {
           if (!this.setTokenDialog.token) {
             return;
@@ -253,7 +269,7 @@
 
             $http.post('{{ admin_route('settings.store_token') }}', {developer_token: this.setTokenDialog.token}).then((res) => {
               this.setTokenDialog.show = false;
-              layer.msg(res.message);
+              layer.msg(res.message)
             })
           })
         }

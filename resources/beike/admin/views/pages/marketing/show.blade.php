@@ -479,11 +479,28 @@ $data = $plugin['data'];
           'flex': '0 0 ' + marketingRightHeight + 'px',
         });
       }
+
+      this.checkDomain()
     },
 
     methods: {
       searchCode(e) {
         this.callingCodes = this.source.callingCodes.filter(item => item.region_code.toLowerCase().includes(this.codeKeyword.toLowerCase()));
+      },
+
+      // 根据 token 获取domain，然后判断返回的domain是否与当前域名一致
+      checkDomain() {
+        if (!this.setTokenDialog.token) {
+          return;
+        }
+
+        $http.post('{{ admin_route('marketing.check_domain') }}', {token: this.setTokenDialog.token, location_host: location.host}, {hload: true}).then((res) => {
+          if (res.status == 'success') {
+            if (res.message == 'fail') {
+              layer.alert(res.data, {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+            }
+          }
+        })
       },
 
       checkedCode(index) {
