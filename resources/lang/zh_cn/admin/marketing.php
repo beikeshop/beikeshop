@@ -62,7 +62,7 @@ return [
     'amount'                         => '订单金额',
     'payment_method'                 => '支付方式',
     'create_date'                    => '下单时间',
-    'over_date'                      => '到期时间',
+    'over_date'                      => '技术支持到期时间',
     'attention_1'                    => '请注意：',
     'attention_2'                    => '禁止单次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'attention_3'                    => '虚拟商品，非软件本身问题，概不退换！',
