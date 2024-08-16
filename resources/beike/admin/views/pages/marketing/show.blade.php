@@ -568,8 +568,14 @@ $data = $plugin['data'];
           return this.setTokenDialog.show = true;
         }
 
-        $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}').then((res) => {
+        $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}', null, {hmsg:true}).then((res) => {
           $('.download-help').removeClass('d-none').find('span').text(res.message);
+        }).catch((err) => {
+          if (err.response.data.message == 'Not a zip archive') {
+            layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+          } else {
+            layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
+          }
         })
       },
 

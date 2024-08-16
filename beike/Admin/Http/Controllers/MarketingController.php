@@ -133,7 +133,7 @@ class MarketingController
             $pluginCode = $request->code;
             MarketingService::getInstance()->download($pluginCode);
 
-            return json_success('下载解压成功, 请去插件列表安装');
+            return json_success(trans('admin/marketing.download_success'));
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }
