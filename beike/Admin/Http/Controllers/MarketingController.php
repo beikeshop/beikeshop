@@ -131,6 +131,12 @@ class MarketingController
     {
         try {
             $pluginCode = $request->code;
+            $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
+
+            if ($plugin['data']['status'] == 'pending') {
+                throw new \Exception("plugin_pending");
+            }
+
             MarketingService::getInstance()->download($pluginCode);
 
             return json_success(trans('admin/marketing.download_success'));

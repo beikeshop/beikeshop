@@ -77,6 +77,7 @@ return [
     'after_sales_price'              => '售后价格',
     'subscription_price'             => '订阅价格',
     'attention_show_1'               => '注意事项：',
+    'pluginstatus_pending'           => '该插件正在审核中，请稍候下载',
     'download_success'               => '下载解压成功, 请去插件列表安装',
     'attention_show_2'               => '每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'attention_show_3'               => '软件为特殊商品，付费购买后非软件本身问题不支持退款，请购买前请仔细阅读插件说明',
