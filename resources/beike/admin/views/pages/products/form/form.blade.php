@@ -295,7 +295,7 @@
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
                                 placeholder="{{ __('admin/product.model') }}"></td>
                             <td>
-                              <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
+                              <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''">
                               <span role="alert" class="invalid-feedback" v-if="sku.sku_error">{{ __('admin/product.sku_error_repeat', ['name' => 'sku']) }}</span>
                               <span role="alert" class="invalid-feedback" v-else>{{ __('common.error_required', ['name' => 'sku']) }}</span>
                               <span v-if="sku.is_default * 1" class="text-success">{{ __('admin/product.default_main_product') }}</span>
@@ -330,7 +330,7 @@
               <div v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
-                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
+                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 9))" required />
                 <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required />
                 <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any" />
                 <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any" />
@@ -1105,7 +1105,7 @@
                 variants: combo,
                 images: [],
                 model: '',
-                sku: '',
+                sku: bk.randomString(9),
                 price: null,
                 quantity: null,
                 is_default: i == 0,
