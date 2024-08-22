@@ -75,7 +75,7 @@
     const config = {
       beike_version: '{{ config('beike.version') }}',
       api_url: '{{ beike_api_url() }}',
-      app_url: '{{ config('app.url') }}',
+      app_url: '{{ get_domain() }}',
       has_license: {{ json_encode(check_license()) }},
       has_license_code: '{{ system_setting("base.license_code", "") }}',
     }

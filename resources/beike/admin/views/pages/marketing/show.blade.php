@@ -494,7 +494,7 @@ $data = $plugin['data'];
           return;
         }
 
-        $http.post('{{ admin_route('marketing.check_domain') }}', {token: this.setTokenDialog.token, location_host: location.host}, {hload: true}).then((res) => {
+        $http.post('{{ admin_route('marketing.check_domain') }}', {token: this.setTokenDialog.token, location_host: config.app_url}, {hload: true}).then((res) => {
           if (res.status == 'success') {
             if (res.message == 'fail') {
               layer.alert(res.data, {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
@@ -509,7 +509,7 @@ $data = $plugin['data'];
 
       toBkTicketUrl() {
         let code = "{{ $data['code'] }}"
-        return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+        return `${config.api_url}/account/plugin_tickets/create?domain=${config.app_url}&plugin=${code}`
       },
 
       checkedBtnLogin(form) {
