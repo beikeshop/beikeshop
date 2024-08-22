@@ -26,6 +26,7 @@ $form-select-focus-box-shadow: 0 0 11px 0 rgba($color: $primary, $alpha: .1);
 $font-size-base: 0.82rem;
 $form-check-input-width: 1.2em;
 $form-switch-width: 2.6em;
+$form-switch-focus-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#bfbfbf'/></svg>");
 $link-decoration: none;
 $link-color: #1890ff;
 $form-floating-input-padding-t: 1.325rem;
@@ -102,6 +103,15 @@ $dropdown-bg :#fff;
   .form-check-input {
     width: 3em;
     height: 1.6em;
+    &:checked {
+      background-color: $success;
+      border-color: $success;
+    }
+
+    &:focus {
+      box-shadow: none;
+      border-color: #e8e8e8;
+    }
   }
 }
 
