@@ -90,6 +90,12 @@ class ImageService
                 $canvas->insert($img, 'center');
                 $canvas->save($newImagePath);
             }
+            $data = [
+                'image' => $this->image,
+                'newImage' => $newImage
+            ];
+            $data = hook_filter('service.image.resize', $data);
+            $newImage = $data['newImage'];
 
             return asset($newImage);
         } catch (NotReadableException $e) {
