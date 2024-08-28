@@ -44,8 +44,15 @@
     flex: 1;
 
     .warning-copyright {
-      max-width: 380px;
       margin-right: 20px;
+
+      @media (max-width: 1500px) {
+        max-width: 380px;
+        html:not([lang="zh_cn"], [lang="zh_hk"]) & {
+          padding: 4px 10px;
+          line-height: 1.3;
+        }
+      }
 
       html:not([lang="zh_cn"], [lang="zh_hk"]) & {
         margin-right: 0;
@@ -361,8 +368,8 @@
           a.nav-link {
             padding: 0 16px;
 
-            html:not([lang="en"], [lang="zh_cn"], [lang="zh_hk"]) & {
-              padding: 0 6px;
+            html:not([lang="zh_cn"], [lang="zh_hk"]) & {
+              padding: 0 8px;
             }
 
             &:hover {

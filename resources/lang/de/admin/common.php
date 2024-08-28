@@ -29,7 +29,7 @@ return [
     'category'                     => 'category management',
     'common_link'                  => 'Alte verbindung.',
     'copyright_buy'                => 'Copyright-verträge kaufen.',
-    'copyright_hint_text'          => 'Bitte behalten Sie das Urheberrecht unten auf der Website bei oder gehen Sie zu <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">kaufen Lizenz</a>',
+    'copyright_hint_text' => 'Bitte behalten Sie das Urheberrecht unten bei, oder <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">kaufen Sie die Lizenz! </a>Wenn Sie gekauft haben, <a href="#" class="get-license-code">klicken Sie bitte zum Autorisieren</a>',
     'countries_index'              => 'Landesverwaltung',
     'country'                      => 'Landes',
     'currencies_index'             => 'Währungsverwaltung',

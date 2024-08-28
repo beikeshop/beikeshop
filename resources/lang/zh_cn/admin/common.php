@@ -112,6 +112,7 @@ return [
     'translate_form'         => '请输入要翻译的内容',
     'buy_copyright'          => '购买版权',
     'license_bought'         => '已授权',
-    'copyright_hint_text'    => '请保留网站底部版权，或前往 <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权</a>',
+    'copyright_hint_text'    => '请保留底部版权，或<a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权！</a>已购买请<a href="#" class="get-license-code">点击授权</a>',
+    'copyright_buy_text'     => '您还未购买，请购买授权！',
     'error_length_text'      => '字段 :key 的输入数据超出了允许的最大长度。',
 ];

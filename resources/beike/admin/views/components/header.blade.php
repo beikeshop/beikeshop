@@ -45,20 +45,16 @@
         </div>
       </div>
       <ul class="navbar navbar-right">
-        @if (!check_license())
-        <div class="alert alert-warning mb-0 warning-copyright">
+        <div class="alert alert-warning mb-0 warning-copyright {{ check_license() ? 'd-none' : '' }}">
           <i class="bi bi-exclamation-triangle-fill"></i> {!! __('admin/common.copyright_hint_text') !!}
         </div>
-        @endif
 
-        @if (check_license() && !Str::endsWith(config('app.url'), '.test'))
-        <li class="nav-item mx-2 license-ok">
+        <li class="nav-item mx-2 license-ok {{ !check_license() || Str::endsWith(config('app.url'), '.test') ? 'd-none' : '' }}">
           <div class="license-text">
             <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
             <span>{{ __('admin/common.license_bought') }}</span>
           </div>
         </li>
-        @endif
 
         @hookwrapper('admin.header.upgrade')
         <li class="nav-item update-btn me-2" style="display: none">
@@ -156,3 +152,25 @@
     <a href="https://beikeshop.com/download" target="_blank" class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
   </div>
 </div>
+@push('footer')
+<script>
+  $(document).on('click', '.get-license-code', function(e) {
+    e.preventDefault();
+    $http.get(`${config.api_url}/api/licensed`, {domain: config.app_url}).then((res) => {
+      if (res.license_code) {
+        $http.put('settings/values', {license_code: res.license_code}, {hload: true});
+        $('.license-ok').removeClass('d-none');
+        $('.warning-copyright').addClass('d-none');
+      } else {
+        layer.alert('{{ __('admin/common.copyright_buy_text') }}', {
+          icon: 2,
+          title: '{{ __('common.text_hint') }}',
+          btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+          btn2: function(index) {
+            window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain='+config.app_url)
+          }
+        })
+      }
+    })
+  });
+</script>

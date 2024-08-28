@@ -29,7 +29,7 @@ return [
     'category'                     => 'Della classificazione',
     'common_link'                  => 'Collegamenti comuni',
     'copyright_buy'                => 'Acquisto di diritti d\'autore',
-    'copyright_hint_text'          => 'Si prega di conservare i diritti d\'autore nella parte inferiore del sito Web o di andare su <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">acquisto licenza</a>',
+    'copyright_hint_text' => 'Conserva il copyright in fondo oppure <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">acquista la licenza! </a>Se hai acquistato, <a href="#" class="get-license-code">fai clic per autorizzare</a>',
     'countries_index'              => 'Statale',
     'country'                      => 'Statale',
     'currencies_index'             => 'gestione del denaro',
