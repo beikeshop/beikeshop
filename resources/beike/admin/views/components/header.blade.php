@@ -156,7 +156,7 @@
 <script>
   $(document).on('click', '.get-license-code', function(e) {
     e.preventDefault();
-    $http.get(`${config.api_url}/api/licensed`, {domain: config.app_url}).then((res) => {
+    $http.get(`${config.api_url}/api/licensed_pro`, {domain: config.app_url, from: window.location.pathname}).then((res) => {
       if (res.license_code) {
         $http.put('settings/values', {license_code: res.license_code}, {hload: true});
         $('.license-ok').removeClass('d-none');
@@ -168,7 +168,7 @@
           title: '{{ __('common.text_hint') }}',
           btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
           btn2: function(index) {
-            window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain='+config.app_url)
+            window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain=' + config.app_url)
             layer.close(index);
           }
         })
