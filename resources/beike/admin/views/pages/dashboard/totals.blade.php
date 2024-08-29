@@ -1,7 +1,7 @@
 <div class="row g-lg-4 g-2 mb-4">
   <div class="col-xl-3 col-6">
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header d-flex justify-content-between align-items-center">
         <span>{{ __('admin/dashboard.order_amount') }}</span>
         <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
       </div>
@@ -24,7 +24,7 @@
   </div>
   <div class="col-xl-3 col-6">
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header d-flex justify-content-between align-items-center">
         <span>{{ __('admin/dashboard.order_total') }}</span>
         <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
       </div>
@@ -46,7 +46,7 @@
   </div>
   <div class="col-xl-3 col-6">
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header d-flex justify-content-between align-items-center">
         <span>{{ __('admin/dashboard.customer_new') }}</span>
         <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
       </div>
@@ -68,7 +68,7 @@
   </div>
   <div class="col-xl-3 col-6">
     <div class="card">
-      <div class="card-header d-flex justify-content-between">
+      <div class="card-header d-flex justify-content-between align-items-center">
         <span>{{ __('admin/dashboard.product_total') }}</span>
         <span class="mt-n1 ms-2 badge bg-success-soft">{{ __('admin/dashboard.today') }}</span>
       </div>

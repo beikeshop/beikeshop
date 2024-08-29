@@ -90,6 +90,15 @@
     }
 
     bk.tableResponsive()
+
+    @if (!check_same_domain())
+      layer.alert('{{ __('admin/common.error_host_app_url') }}', {
+        icon: 0,
+        title: '{{__("common.text_hint")}}',
+        area: ['400px'],
+        btn: ['{{ __('common.confirm') }}']
+      })
+    @endif
   </script>
   @stack('footer')
 </body>
