@@ -173,7 +173,14 @@ $data = $plugin['data'];
             @endif
           @else
           <div class="alert alert-warning mb-0" role="alert">
+            @php
+              $version_name_format_max = max(explode(', ', str_replace('v', '', $data['version_name_format'])));
+            @endphp
+            @if (config('beike.version') > $version_name_format_max)
+            {!! __('admin/marketing.version_compatible_p_text') !!}
+            @else
             {!! __('admin/marketing.version_compatible_text') !!}
+            @endif
           </div>
           @endif
         </div>

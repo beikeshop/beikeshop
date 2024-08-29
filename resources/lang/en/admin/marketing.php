@@ -71,6 +71,7 @@ return [
     'text_version'            => 'version',
     'to_update'               => 'To Upgrade',
     'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
+    'version_compatible_p_text' => 'This plugin is not compatible with your current system version, please contact the plugin author to upgrade this plugin! ',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
     'pluginstatus_pending'    => 'This plugin is under review, please wait to download',

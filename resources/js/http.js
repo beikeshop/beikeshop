@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2024-07-23 20:52:39
+ * @LastEditTime  2024-08-29 11:28:21
  */
 
 window.axios = require('axios');

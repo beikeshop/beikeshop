@@ -161,6 +161,7 @@
         $http.put('settings/values', {license_code: res.license_code}, {hload: true});
         $('.license-ok').removeClass('d-none');
         $('.warning-copyright').addClass('d-none');
+        $('input[name="license_code"]').val(res.license_code);
       } else {
         layer.alert('{{ __('admin/common.copyright_buy_text') }}', {
           icon: 2,
@@ -168,6 +169,7 @@
           btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
           btn2: function(index) {
             window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain='+config.app_url)
+            layer.close(index);
           }
         })
       }
