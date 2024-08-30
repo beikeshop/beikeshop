@@ -143,7 +143,6 @@ $data = $plugin['data'];
                 <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
                 <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
                 <el-radio class="me-1" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
-                <el-radio class="me-1" label="lianlian" border><img src="{{ asset('image/lianlian.png') }}" class="img-fluid"></el-radio>
               </el-radio-group>
             </div>
             @endif
