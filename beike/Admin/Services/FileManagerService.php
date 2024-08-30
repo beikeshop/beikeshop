@@ -66,7 +66,9 @@ class FileManagerService
     public function getFiles($baseFolder, $keyword, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
-        $files           = array_filter(glob($currentBasePath . '/*'), 'is_file'); // 仅处理文件
+        $files = array_filter(glob($currentBasePath . '/*'), function ($file) {
+            return is_file($file) && preg_match('/\.(jpg|jpeg|png|JPG|JPEG|mp4|MP4|gif|webp)$/', $file);
+        });
 
         // 过滤文件
         if ($keyword) {
