@@ -110,7 +110,10 @@ return [
     'not_enabled'                            => 'Not Rnabled',
     'buy_copyright'                          => 'Buy Copyright',
     'translate_form'                         => 'Please enter the content to be translated',
-    'copyright_hint_text'                    => 'Please reserve the copyright, or go to <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a>',
+    'copyright_hint_text' => 'Please keep the copyright at the bottom, or <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a> If you have purchased, please <a href="#" class="get-license-code">click to authorize</a>',
+    'copyright_buy_text'     => 'You haven\'t purchased yet, please purchase authorization!',
     'help_index'                             => 'Help',
     'license_bought' => 'Authorized',
+    'error_length_text'      => 'The input data for the field :key exceeds the maximum allowed length.',
+    'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
 ];

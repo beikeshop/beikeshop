@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2023-05-29 18:56:35
+ * @LastEditTime  2024-08-29 22:54:53
  */
 
 window.axios = require('axios');
@@ -15,7 +15,7 @@ const instance = axios.create({
   headers: {'X-CSRF-TOKEN': token},
 });
 
-axios.defaults.timeout = 50000; // 请求超时
+axios.defaults.timeout = 0; // 请求超时
 // axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
 // console.log(process.env.VUE_APP_BASE_URL)
 axios.defaults.baseURL = base;

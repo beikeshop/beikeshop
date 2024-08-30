@@ -29,7 +29,13 @@ class MarketingController
             'keyword' => $request->get('keyword'),
             'page'    => $request->get('page'),
         ];
-        $plugins = MarketingService::getInstance()->getList($filters);
+
+        try {
+            $plugins = MarketingService::getInstance()->getList($filters);
+        } catch (\Exception $e) {
+            $plugins = null;
+        }
+
         $data    = [
             'plugins'     => $plugins,
             'domain'      => str_replace(['http://', 'https://'], '', config('app.url')),
@@ -125,9 +131,45 @@ class MarketingController
     {
         try {
             $pluginCode = $request->code;
+            $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
+
+            if ($plugin['data']['status'] == 'pending') {
+                throw new \Exception("plugin_pending");
+            }
+
             MarketingService::getInstance()->download($pluginCode);
 
-            return json_success('下载解压成功, 请去插件列表安装');
+            return json_success(trans('admin/marketing.download_success'));
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    // 根据传入的 token 获取域名，然后判断是否是当前域名
+    public function checkDomain(Request $request)
+    {
+        try {
+            $token = $request->token;
+            $location_host = $request->location_host;
+            $domain = MarketingService::getInstance()->getDomain($token);
+            if ($domain['data'] && ($domain['data'] !== $location_host)) {
+                return json_success('fail', trans('admin/marketing.domain_token_domain_error', ['domain' => $location_host, 'token_domain' => $domain['data']]));
+            }
+
+            return json_success('获取成功', $domain);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    // 根据传入的域名获取 token
+    public function getToken(Request $request)
+    {
+        try {
+            $domain = $request->domain;
+            $result     = MarketingService::getInstance()->getToken($domain);
+
+            return json_success('获取成功', $result);
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }

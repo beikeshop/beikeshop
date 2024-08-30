@@ -84,6 +84,7 @@ Route::prefix($adminName)
                 Route::middleware('can:customers_index')->get('customers', [Controllers\CustomerController::class, 'index'])->name('customers.index');
                 Route::middleware('can:customers_create')->post('customers', [Controllers\CustomerController::class, 'store'])->name('customers.store');
                 Route::middleware('can:customers_show')->get('customers/{id}/edit', [Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+                Route::middleware('can:customers_show')->get('customers/{id}/login', [Controllers\CustomerController::class, 'login'])->name('customers.login');
                 Route::middleware('can:customers_update')->put('customers/{id}', [Controllers\CustomerController::class, 'update'])->name('customers.update');
                 Route::middleware('can:customers_update')->put('customers/{customer}/update_active', [Controllers\CustomerController::class, 'updateActive'])->name('customers.update_active');
                 Route::middleware('can:customers_update')->put('customers/{customer}/update_status', [Controllers\CustomerController::class, 'updateStatus'])->name('customers.update_status');
@@ -166,6 +167,7 @@ Route::prefix($adminName)
                 Route::middleware('can:orders_delete')->delete('orders/{order}', [Controllers\OrderController::class, 'destroy'])->name('orders.destroy');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/status', [Controllers\OrderController::class, 'updateStatus'])->name('orders.update_status');
                 Route::middleware('can:orders_update_status')->put('orders/{order}/shipments/{shipment}', [Controllers\OrderController::class, 'updateShipment'])->name('orders.update_shipment');
+                Route::middleware('can:orders_update_status')->post('orders/{order}/shipments', [Controllers\OrderController::class, 'createShipment'])->name('orders.create_shipment');
 
                 // 插件
                 Route::middleware('can:plugins_index')->get('plugins', [Controllers\PluginController::class, 'index'])->name('plugins.index');
@@ -192,12 +194,16 @@ Route::prefix($adminName)
                 Route::middleware('can:reports_view')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports_view.product');
 
                 // 插件市场
+                Route::middleware('can:marketing_index')->post('marketing/check_domain', [Controllers\MarketingController::class, 'checkDomain'])->name('marketing.check_domain');
+                Route::middleware('can:marketing_index')->get('marketing/get_token', [Controllers\MarketingController::class, 'getToken'])->name('marketing.get_token');
+
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
                 Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');
                 Route::middleware('can:marketing_buy')->post('marketing/{code}/buy', [Controllers\MarketingController::class, 'buy'])->name('marketing.buy');
                 Route::middleware('can:marketing_buy')->post('marketing/{id}/buy_service', [Controllers\MarketingController::class, 'buyService'])->name('marketing.buy_service');
                 Route::middleware('can:marketing_download')->post('marketing/{code}/download', [Controllers\MarketingController::class, 'download'])->name('marketing.download');
                 Route::middleware('can:marketing_show')->get('marketing/service_orders/{id}', [Controllers\MarketingController::class, 'serviceOrder'])->name('marketing.service_order');
+
 
                 // 文章
                 Route::middleware('can:pages_index')->get('pages', [Controllers\PagesController::class, 'index'])->name('pages.index');

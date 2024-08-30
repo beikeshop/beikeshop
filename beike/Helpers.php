@@ -814,7 +814,7 @@ function clean_domain($domain): string
 function check_license(): bool
 {
     $configLicenceCode = system_setting('base.license_code');
-    $appDomain         = clean_domain(config('app.url'));
+    $appDomain         = clean_domain(request()->getHost());
 
     try {
         $domain         = new \Utopia\Domains\Domain($appDomain);
@@ -822,6 +822,11 @@ function check_license(): bool
     } catch (\Exception $e) {
         $registerDomain = '';
     }
+
+    if (filter_var($appDomain, FILTER_VALIDATE_IP)) {
+        $registerDomain = $appDomain;
+    }
+
     if (empty($registerDomain)) {
         return true;
     }

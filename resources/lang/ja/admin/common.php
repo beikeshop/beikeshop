@@ -29,7 +29,7 @@ return [
     'category'                     => 'カテゴリ',
     'common_link'                  => 'よく使われるリンクです',
     'copyright_buy'                => '著作権購入です',
-    'copyright_hint_text'          => 'ウェブサイトの下部にある著作権を保持するか、<a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">購入にアクセスしてくださいライセンス</a>',
+    'copyright_hint_text' => '下部にある著作権を保持するか、<a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">ライセンスを購入してください。 </a>購入済みの場合は、<a href="#" class="get-license-code">クリックして承認</a>してください',
     'countries_index'              => '国の管理',
     'country'                      => '国の管理',
     'currencies_index'             => '通貨管理',

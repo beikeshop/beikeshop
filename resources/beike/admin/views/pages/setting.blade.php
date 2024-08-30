@@ -355,26 +355,6 @@
           $('div').removeClass('active-line');
         }, 1200);
       }
-
-      $('.get-license-code').click(function (event) {
-        $http.get(`${config.api_url}/api/licensed`, {domain: config.app_url}).then((res) => {
-          if (res.license_code == '') {
-            layer.alert('{{ __('admin/setting.license_code_get_error') }}', {
-              icon: 7,
-              btn: ['{{ __('common.cancel') }}', '{{ __('admin/setting.license_Buy') }}'],
-              title: '{{__("common.text_hint")}}',
-              btn2: function(index, layero) {
-                window.open('{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license');
-                layer.close(index);
-              }
-            });
-
-            return;
-          }
-
-          $('input[name="license_code"]').val(res.license_code);
-        })
-      })
     });
 
   </script>

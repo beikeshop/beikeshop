@@ -43,10 +43,8 @@
               </td>
               <td>
                 <div v-if="plugin.installed">
-                  <span :style="!plugin.status ? 'cursor: not-allowed':''">
-                    <a v-if="plugin.type != 'theme'" :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
-                    <a v-else :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]" href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
-                  </span>
+                  <a v-if="plugin.type != 'theme'" class="btn btn-outline-secondary btn-sm" :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
+                  <span v-else :style="!plugin.status ? 'cursor: not-allowed' : ''"><a :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]"  href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a></span>
                   <a class="btn btn-outline-secondary btn-sm" target="_blank" :href="toBkTicketUrl(plugin.code)">{{ __('admin/plugin.ticket') }}</a>
                   <a class="btn btn-outline-danger btn-sm" @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
                 </div>
@@ -71,7 +69,7 @@
 
 @push('footer')
   <script>
-    new Vue({
+    let app = new Vue({
       el: '#plugins-app',
 
       data: {
@@ -86,7 +84,7 @@
         toBkTicketUrl(code) {
           return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
         },
-        
+
         pluginStatusChange(e, code, index) {
           const self = this;
 

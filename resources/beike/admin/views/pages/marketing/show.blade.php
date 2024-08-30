@@ -142,7 +142,7 @@ $data = $plugin['data'];
               <el-radio-group v-model="payCode" size="small" class="radio-group">
                 <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
                 <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
-                <el-radio class="" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
+                <el-radio class="me-1" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
               </el-radio-group>
             </div>
             @endif
@@ -172,7 +172,14 @@ $data = $plugin['data'];
             @endif
           @else
           <div class="alert alert-warning mb-0" role="alert">
+            @php
+              $version_name_format_max = max(explode(', ', str_replace('v', '', $data['version_name_format'])));
+            @endphp
+            @if (config('beike.version') > $version_name_format_max)
+            {!! __('admin/marketing.version_compatible_p_text') !!}
+            @else
             {!! __('admin/marketing.version_compatible_text') !!}
+            @endif
           </div>
           @endif
         </div>
@@ -479,11 +486,28 @@ $data = $plugin['data'];
           'flex': '0 0 ' + marketingRightHeight + 'px',
         });
       }
+
+      this.checkDomain()
     },
 
     methods: {
       searchCode(e) {
         this.callingCodes = this.source.callingCodes.filter(item => item.region_code.toLowerCase().includes(this.codeKeyword.toLowerCase()));
+      },
+
+      // 根据 token 获取domain，然后判断返回的domain是否与当前域名一致
+      checkDomain() {
+        if (!this.setTokenDialog.token) {
+          return;
+        }
+
+        $http.post('{{ admin_route('marketing.check_domain') }}', {token: this.setTokenDialog.token, location_host: config.app_url}, {hload: true}).then((res) => {
+          if (res.status == 'success') {
+            if (res.message == 'fail') {
+              layer.alert(res.data, {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+            }
+          }
+        })
       },
 
       checkedCode(index) {
@@ -492,7 +516,7 @@ $data = $plugin['data'];
 
       toBkTicketUrl() {
         let code = "{{ $data['code'] }}"
-        return `${config.api_url}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+        return `${config.api_url}/account/plugin_tickets/create?domain=${config.app_url}&plugin=${code}`
       },
 
       checkedBtnLogin(form) {
@@ -551,8 +575,16 @@ $data = $plugin['data'];
           return this.setTokenDialog.show = true;
         }
 
-        $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}').then((res) => {
+        $http.post('{{ admin_route('marketing.download', ['code' => $data['code']]) }}', null, {hmsg:true}).then((res) => {
           $('.download-help').removeClass('d-none').find('span').text(res.message);
+        }).catch((err) => {
+          if (err.response.data.message == 'plugin_pending') {
+            layer.alert('{{__('admin/marketing.pluginstatus_pending')}}', {btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+          } else if (err.response.data.message == 'Not a zip archive') {
+            layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+          } else {
+            layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
+          }
         })
       },
 
@@ -614,7 +646,7 @@ $data = $plugin['data'];
             return;
           }
 
-          if (this.payCode == 'stripe') {
+          if (this.payCode == 'stripe' || this.payCode == 'lianlian') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }

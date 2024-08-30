@@ -211,7 +211,6 @@
           if (checked) type = false;
           $http.post('products/status', {ids: [id], status: type}).then((res) => {
             layer.msg(res.message)
-            location.reload();
           })
         },
 
