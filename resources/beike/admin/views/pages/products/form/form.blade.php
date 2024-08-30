@@ -295,7 +295,7 @@
                             <td><input type="text" class="form-control" v-model="sku.model" :name="'skus[' + skuIndex + '][model]'"
                                 placeholder="{{ __('admin/product.model') }}"></td>
                             <td>
-                              <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''">
+                              <input type="text" :class="['form-control', sku.sku_error ? 'is-invalid' : '']" v-model="sku.sku" :name="'skus[' + skuIndex + '][sku]'" placeholder="sku" :style="sku.is_default ? 'margin-top: 19px;' : ''" required>
                               <span role="alert" class="invalid-feedback" v-if="sku.sku_error">{{ __('admin/product.sku_error_repeat', ['name' => 'sku']) }}</span>
                               <span role="alert" class="invalid-feedback" v-else>{{ __('common.error_required', ['name' => 'sku']) }}</span>
                               <span v-if="sku.is_default * 1" class="text-success">{{ __('admin/product.default_main_product') }}</span>
