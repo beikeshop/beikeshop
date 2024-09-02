@@ -294,7 +294,7 @@ $data = $plugin['data'];
     </div>
   </el-dialog>
 
-  <el-dialog title="{{ __('admin/marketing.btn_buy_service') }}" :close-on-click-modal="false"
+  <el-dialog title="{{ $data['name'] }}--{{ __('admin/marketing.btn_buy_service') }}" :close-on-click-modal="false"
     :visible.sync="serviceDialog.show" width="520px" @close="serviceDialogOnClose">
     <div class="service-wx-pop" v-if="service_wechatpay_price">
       <div class="text-center">
