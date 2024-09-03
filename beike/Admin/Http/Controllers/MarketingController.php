@@ -152,7 +152,7 @@ class MarketingController
             $token = $request->token;
             $location_host = $request->location_host;
             $domain = MarketingService::getInstance()->getDomain($token);
-            if ($domain['data'] && ($domain['data'] !== $location_host)) {
+            if ($domain['data'] && (get_domain($domain['data']) !== get_domain($location_host))) {
                 return json_success('fail', trans('admin/marketing.domain_token_domain_error', ['domain' => $location_host, 'token_domain' => $domain['data']]));
             }
 
