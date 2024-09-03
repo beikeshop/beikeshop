@@ -330,7 +330,10 @@
               <div v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
-                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 9))" required />
+                @php
+                  $defaul_sku = 'BKSKU-' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 4). '-' . substr(str_shuffle('0123456789'), 0, 3);
+                @endphp
+                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? $defaul_sku)" required />
                 <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required />
                 <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any" />
                 <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any" />
@@ -1040,6 +1043,29 @@
           })
         },
 
+        randomValue(len, type) {
+          len = len || 32;  // 默认长度为 32
+          var chars;
+
+          // 根据 type 选择字符集
+          switch (type) {
+            case 'number':
+              chars = '0123456789';
+              break;
+            case 'string':
+            default:
+              chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              break;
+          }
+
+          var maxPos = chars.length;
+          var value = '';
+          for (let i = 0; i < len; i++) {
+            value += chars.charAt(Math.floor(Math.random() * maxPos));
+          }
+          return value;
+        },
+
         attributeHandleSelect(item, index, type) {
           if (type == 'attribute' && item.id != this.form.attributes[index].attribute.id) {
             this.form.attributes[index].attribute_value.name = ''
@@ -1105,7 +1131,7 @@
                 variants: combo,
                 images: [],
                 model: '',
-                sku: bk.randomString(9),
+                sku: 'BKSKU-' + this.randomValue(4, 'string') + '-' + this.randomValue(3, 'number'),
                 price: null,
                 quantity: null,
                 is_default: i == 0,
