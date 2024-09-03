@@ -929,7 +929,7 @@ function check_same_domain(): bool
         $requestDomain = $host . ':' . $port;
     }
 
-    return $envDomain == $requestDomain;
+    return get_domain($envDomain) == get_domain($requestDomain);
 }
 
 /**
@@ -938,4 +938,46 @@ function check_same_domain(): bool
 function is_miniapp(): bool
 {
     return \request()->header('platform') == 'miniapp';
+}
+
+/**
+ * 返回当前域名的主域名
+ * @param null $domain
+ * @return string
+ */
+function get_domain($domain = null)
+{
+    // 如果没有传入域名参数，则使用当前浏览器的域名
+    if (!$domain) {
+        // 获取主机名并移除可能的端口号
+        $domain = parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST) ?: $_SERVER['HTTP_HOST'];
+    } else {
+        // 移除 URL 中的协议部分（如 http:// 或 https://）
+        $domain = parse_url($domain, PHP_URL_HOST) ?: $domain;
+    }
+
+    // 移除端口号
+    $domain = preg_replace('/:\d+$/', '', $domain);
+
+    // 常见的多级顶级域名列表
+    $known_tlds = array('co.uk', 'gov.uk', 'ac.uk', 'org.uk', 'com.au', 'net.au');
+
+    // 提取顶级域名部分
+    $parts = explode('.', $domain);
+    $count = count($parts);
+
+    if ($count > 2) {
+        // 处理类似 'example.co.uk' 或 'sub.example.co.uk' 的域名
+        $last_two = implode('.', array_slice($parts, -2));
+        $last_three = implode('.', array_slice($parts, -3));
+
+        if (in_array($last_two, $known_tlds)) {
+            return implode('.', array_slice($parts, -3));
+        } elseif (in_array($last_three, $known_tlds)) {
+            return implode('.', array_slice($parts, -4));
+        }
+    }
+
+    // 返回提取的主域名
+    return implode('.', array_slice($parts, -2));
 }
