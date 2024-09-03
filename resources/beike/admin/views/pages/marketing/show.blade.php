@@ -616,7 +616,7 @@ $data = $plugin['data'];
 
           this.serviceDialog.show = false
 
-          if (res.data.payment_code == 'stripe') {
+          if (res.data.payment_code == 'stripe' || res.data.payment_code == 'lianlian') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }
