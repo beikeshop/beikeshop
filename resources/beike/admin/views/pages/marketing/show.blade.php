@@ -140,9 +140,7 @@ $data = $plugin['data'];
             @if (!$data['downloadable'] || (isset($data['plugin_services']) && count($data['plugin_services']) && !$data['is_subscribe']))
             <div class="my-3">
               <el-radio-group v-model="payCode" size="small" class="radio-group">
-                <el-radio class="me-1" label="wechatpay" border><img src="{{ asset('image/wechat.png') }}"class="img-fluid"></el-radio>
-                <el-radio class="me-1" label="alipay" border><img src="{{ asset('image/alipay.png') }}" class="img-fluid"></el-radio>
-                <el-radio class="me-1" label="stripe" border><img src="{{ asset('image/stripe.png') }}" class="img-fluid"></el-radio>
+                <el-radio class="me-1" v-for="item, index in payment_methods" :key="index" :label="item" border><img :src="'image/' + item + '.png'" class="img-fluid"></el-radio>
               </el-radio-group>
             </div>
             @endif
@@ -270,6 +268,16 @@ $data = $plugin['data'];
                     </div>
                   </el-dropdown-menu>
                 </el-dropdown>
+              </el-input>
+            </el-form-item>
+
+            <el-form-item label="{{ __('admin/marketing.verification_code') }}" prop="sms_code">
+              <el-input v-model="registerForm.sms_code" :maxlength="6" class="send-code-wrap" placeholder="{{ __('admin/marketing.input_send_placeholder') }}">
+                <el-button slot="append" @click="getSmsCode" :disabled="retryCodeTime ? true : false">
+                  <span v-if="!isSendSms">{{ __('admin/marketing.btn_send_code') }}</span>
+                  <span v-else>{{ __('admin/marketing.btn_send_code_retry') }}</span>
+                  <span v-if="retryCodeTime">(@{{ retryCodeTime }})</span>
+                </el-button>
               </el-input>
             </el-form-item>
 
@@ -407,7 +415,8 @@ $data = $plugin['data'];
       service_wechatpay_price: '',
       service_id: '',
       wechatpay_price: '',
-      radio3: '1',
+      retryCodeTime: 0,
+      isSendSms: false,
       setTokenDialog: {
         show: false,
         token: @json(system_setting('base.developer_token') ?? ''),
@@ -428,6 +437,7 @@ $data = $plugin['data'];
         email: '',
         name: '',
         telephone: '',
+        sms_code: '',
         calling_code: document.documentElement.lang === 'zh_cn' ? '86' : '1',
         qq: '',
         password: '',
@@ -464,12 +474,20 @@ $data = $plugin['data'];
         password: [
           {required: true, message: '{{ __('common.error_required', ['name' => __('shop/login.password')]) }}', trigger: 'change'},
         ],
+        sms_code: [
+          {required: true, message: '{{ __('common.error_required', ['name' => __('admin/marketing.verification_code')]) }}', trigger: 'change'},
+        ],
       },
     },
 
     computed: {
       callingCode() {
         return this.source.callingCodes.find(item => item.code === this.registerForm.calling_code) || 'zh_cn';
+      },
+
+      payment_methods() {
+        const payment_methods = @json($plugin['payment_methods']);
+        return payment_methods.split(',');
       },
     },
 
@@ -520,10 +538,10 @@ $data = $plugin['data'];
       },
 
       checkedBtnLogin(form) {
-        let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}`
+        let _data = this.loginForm, url = `${config.api_url}/api/login?domain=${config.app_url}&v=1&locale={{ (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en') }}`
 
         if (form == 'registerForm') {
-          _data = this.registerForm, url = `${config.api_url}/api/register?domain=${config.app_url}`
+          _data = this.registerForm, url = `${config.api_url}/api/register?domain=${config.app_url}&v=1&locale={{ (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en') }}`
         }
 
         this.$refs['loginForm'].clearValidate();
@@ -616,7 +634,7 @@ $data = $plugin['data'];
 
           this.serviceDialog.show = false
 
-          if (res.data.payment_code == 'stripe' || res.data.payment_code == 'lianlian') {
+          if (res.data.payment_code == 'stripe') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }
@@ -660,6 +678,25 @@ $data = $plugin['data'];
             window.open(res.data.pay_url, '_blank');
             this.paySuccessAlert();
           }
+        })
+      },
+
+      getSmsCode() {
+        var phone = this.registerForm.telephone;
+        var callingCode = this.registerForm.calling_code;
+
+        $http.post(`${config.api_url}/api/send_code?locale={{ (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en') }}`, {phone: phone, calling_code: callingCode}).then((res) => {
+          layer.msg(res.message);
+          this.isSendSms = true;
+          this.retryCodeTime = 60;
+
+          var timer = setInterval(() => {
+            this.retryCodeTime--;
+            if (this.retryCodeTime <= 0) {
+              clearInterval(timer);
+              this.retryCodeTime = 0;
+            }
+          }, 1000);
         })
       },
 
@@ -796,4 +833,13 @@ $data = $plugin['data'];
     }
   })
 </script>
+<style>
+  #tab-register .el-form-item {
+    margin-bottom: 7px;
+  }
+
+  #tab-register .el-form-item__label {
+    line-height: 30px;
+  }
+</style>
 @endpush

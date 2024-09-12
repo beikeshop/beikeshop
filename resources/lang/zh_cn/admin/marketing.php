@@ -55,6 +55,12 @@ return [
     'request_error_2'               => '请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
     'request_error_text'               => '上述检查都正常，还是无法获取数据，可以给我们',
     'submit_work_order'               => '提交工单',
+    'verification_code'          => '验证码',
+    'btn_send_code'          => '获取验证码',
+    'input_send_placeholder' => '请输入短信验证码',
+    'btn_send_code_retry'    => '重新发送',
+    'error_phone_value'      => '请输入电话号码',
+    'error_send_code'        => '验证码错误或已过期',
 
     'munths'                         => '个月',
     'yuan'                           => '元',
