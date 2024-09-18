@@ -204,7 +204,7 @@
       },
 
       methods: {
-        turnOnOff() {
+        turnOnOff(event) {
           let id = event.currentTarget.getAttribute("data-id");
           let checked = event.currentTarget.getAttribute("data-active");
           let type = true;
