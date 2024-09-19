@@ -89,4 +89,7 @@ return [
     'submit_work_order'       => 'Submit the work order',
     'domain_token_domain_error' => 'The current domain name: :domain is inconsistent with the domain name bound to the Token: :token_domain. Please confirm before purchasing, or rebind the Token. <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">View the tutorial</a>',
     'not_zip_archive'          => 'Not a zip archive. Please check the .env file in the root directory of the website, BEIKE_API_URL configuration, the correct value is: BEIKE_API_URL=https://beikeshop.com',
+    'is_passing'             => 'Please hold down the slider and drag',
+    'is_passing_succee'      => 'Verification passed',
+    'error_is_passing'       => 'Please drag the button to verify!',
 ];

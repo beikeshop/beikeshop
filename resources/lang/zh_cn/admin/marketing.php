@@ -61,6 +61,9 @@ return [
     'btn_send_code_retry'    => '重新发送',
     'error_phone_value'      => '请输入电话号码',
     'error_send_code'        => '验证码错误或已过期',
+    'is_passing'             => '请按住滑块拖动',
+    'is_passing_succee'      => '验证通过',
+    'error_is_passing'       => '请拖动按钮进行验证!',
 
     'munths'                         => '个月',
     'yuan'                           => '元',

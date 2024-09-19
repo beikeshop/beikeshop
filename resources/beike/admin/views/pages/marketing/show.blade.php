@@ -271,9 +271,22 @@ $data = $plugin['data'];
               </el-input>
             </el-form-item>
 
+            <div class="drag-verify-wrap mt-2">
+              <v-drag-verify
+                ref="dragVerify"
+                :is-passing.sync="isPassing"
+                text="{{ __('admin/marketing.is_passing') }}"
+                success-text="{{ __('admin/marketing.is_passing_succee') }}"
+                @passcallback="passcallback"
+                handler-icon="bi bi-chevron-double-right"
+                success-icon="bi bi-check-circle"
+              >
+              </v-drag-verify>
+            </div>
+
             <el-form-item label="{{ __('admin/marketing.verification_code') }}" prop="sms_code">
               <el-input v-model="registerForm.sms_code" :maxlength="6" class="send-code-wrap" placeholder="{{ __('admin/marketing.input_send_placeholder') }}">
-                <el-button slot="append" @click="getSmsCode" :disabled="retryCodeTime ? true : false">
+                <el-button slot="append" @click="getSmsCode" :disabled="retryCodeTime || !isPassing ? true : false">
                   <span v-if="!isSendSms">{{ __('admin/marketing.btn_send_code') }}</span>
                   <span v-else>{{ __('admin/marketing.btn_send_code_retry') }}</span>
                   <span v-if="retryCodeTime">(@{{ retryCodeTime }})</span>
@@ -405,6 +418,7 @@ $data = $plugin['data'];
 </div>
 @endsection
 
+@include('admin::pages.marketing.drag-verify')
 @push('footer')
 <script>
   let app = new Vue({
@@ -417,6 +431,7 @@ $data = $plugin['data'];
       wechatpay_price: '',
       retryCodeTime: 0,
       isSendSms: false,
+      isPassing: false,
       setTokenDialog: {
         show: false,
         token: @json(system_setting('base.developer_token') ?? ''),
@@ -685,6 +700,11 @@ $data = $plugin['data'];
         var phone = this.registerForm.telephone;
         var callingCode = this.registerForm.calling_code;
 
+        if (!this.isPassing) {
+          layer.msg('{{ __('admin/marketing.error_is_passing') }}', ()=>{});
+          return;
+        }
+
         $http.post(`${config.api_url}/api/send_code?locale={{ (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en') }}`, {phone: phone, calling_code: callingCode}).then((res) => {
           layer.msg(res.message);
           this.isSendSms = true;
@@ -825,12 +845,16 @@ $data = $plugin['data'];
           this.setTokenDialog.show = false;
           layer.msg(res.message);
         })
-      }
+      },
+
+      passcallback() {
+        this.isPassing = true;
+      },
     },
 
     destroyed() {
       window.clearInterval(this.timer)
-    }
+    },
   })
 </script>
 <style>
