@@ -40,9 +40,9 @@ class AdminOrderPage
     ];
 
     public const Rams = [//售后详情页
-        'Check_btn'  => '#customer-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a', //列表查看按钮
+        'Check_btn'  => '#customer-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(10) > a', //列表查看按钮
         'Pull_btn'   => '#app > form > div.el-form-item.is-required > div > div > div > span > span', //状态下拉按钮
-        'Completed'  => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(5)', //状态已完成
+        'Completed'  => '.el-select-dropdown__wrap.el-scrollbar__wrap li:nth-child(5)', //状态已完成
         'Update_btn' => '#app > form > div:nth-child(4) > div > button', //更新按钮
 
     ];

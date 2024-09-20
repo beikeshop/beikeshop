@@ -28,24 +28,24 @@ class RegisterTest extends DuskTestCase
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_email'], RegisterData::False_Register['exist_email'])
                 ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+              //  ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->press(LoginPage::Register['register_btn'])
                 ->assertSee(RegisterData::False_Register['false_assert']);
         });
     }
 
-    //场景2  前后密码输入不一致
-    public function testDiffPwd()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(LoginPage::Login['login_url'])
-                ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
-                ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::False_Register['false_password'])
-                ->press(LoginPage::Register['register_btn'])
-                ->assertSee(RegisterData::False_Register['false_assert']);
-        });
-    }
+    //场景2  前后密码输入不一致  优化后没有重复输入密码
+//    public function testDiffPwd()
+//    {
+//        $this->browse(function (Browser $browser) {
+//            $browser->visit(LoginPage::Login['login_url'])
+//                ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
+//                ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
+//                ->type(LoginPage::Register['register_re_pwd'], RegisterData::False_Register['false_password'])
+//                ->press(LoginPage::Register['register_btn'])
+//                ->assertSee(RegisterData::False_Register['false_assert']);
+//        });
+//    }
 
     //场景3  邮箱格式不合法
     public function testIllegalEmail()
@@ -54,7 +54,7 @@ class RegisterTest extends DuskTestCase
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_email'], RegisterData::False_Register['illegal_email'])
                 ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+             //   ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->press(LoginPage::Register['register_btn'])
                 ->assertSee(RegisterData::False_Register['false_assert']);
         });
@@ -66,7 +66,7 @@ class RegisterTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+               // ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->press(LoginPage::Register['register_btn'])
                 ->assertSee(RegisterData::False_Register['false_assert']);
         });
@@ -78,23 +78,23 @@ class RegisterTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+            //    ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->press(LoginPage::Register['register_btn'])
                 ->assertSee(RegisterData::False_Register['false_assert']);
         });
     }
 
-    //场景6  第二次密码为空
-    public function testNoRepwd()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(LoginPage::Login['login_url'])
-                ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
-                ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->press(LoginPage::Register['register_btn'])
-                ->assertSee(RegisterData::False_Register['false_assert']);
-        });
-    }
+//    //场景6  第二次密码为空 优化后没有重复输入密码
+//    public function testNoRepwd()
+//    {
+//        $this->browse(function (Browser $browser) {
+//            $browser->visit(LoginPage::Login['login_url'])
+//                ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
+//                ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
+//                ->press(LoginPage::Register['register_btn'])
+//                ->assertSee(RegisterData::False_Register['false_assert']);
+//        });
+//    }
 
     //场景7  第二次密码为空
     public function testRegisterFul()
@@ -103,7 +103,7 @@ class RegisterTest extends DuskTestCase
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_email'], RegisterData::True_Register['email'])
                 ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+              //  ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->press(LoginPage::Register['register_btn'])
                 ->pause(6000)
                 ->assertSee(RegisterData::True_Register['assert']);

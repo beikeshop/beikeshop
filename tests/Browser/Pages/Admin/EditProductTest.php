@@ -43,13 +43,13 @@ class EditProductTest extends DuskTestCase
                 //3.点击编辑商品
                 ->press(ProductPage::Product_Top['edit_product'])
                 //4.填写商品信息
-                ->type(CreProductPage::Product_Top['ch_name'], CreProduct::Puoduct_Info['ch_name'])
-                ->type(CreProductPage::Product_Top['en_name'], CreProduct::Puoduct_Info['en_name'])
-                ->type(CreProductPage::Product_Top['sku'], CreProduct::Puoduct_Info['sku'])
-                ->type(CreProductPage::Product_Top['price'], CreProduct::Puoduct_Info['price'])
-                ->type(CreProductPage::Product_Top['origin_price'], CreProduct::Puoduct_Info['origin_price'])
-                ->type(CreProductPage::Product_Top['cost_price'], CreProduct::Puoduct_Info['cost_price'])
-                ->type(CreProductPage::Product_Top['quantity'], CreProduct::Puoduct_Info['quantity'])
+                ->type(CreProductPage::Product_Top['ch_name'], CreProduct::Alter['ch_name'])
+                ->type(CreProductPage::Product_Top['en_name'], CreProduct::Alter['en_name'])
+                ->type(CreProductPage::Product_Top['sku'], CreProduct::Alter['sku'])
+                ->type(CreProductPage::Product_Top['price'], CreProduct::Alter['price'])
+                ->type(CreProductPage::Product_Top['origin_price'], CreProduct::Alter['origin_price'])
+                ->type(CreProductPage::Product_Top['cost_price'], CreProduct::Alter['cost_price'])
+                ->type(CreProductPage::Product_Top['quantity'], CreProduct::Alter['quantity'])
                 //5.点击保存
                 ->press(CreProductPage::Product_Top['save_btn'])
                 ->pause(3000)
