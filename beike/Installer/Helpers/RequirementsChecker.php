@@ -58,6 +58,20 @@ class RequirementsChecker
         return $results;
     }
 
+    public function checkDataBase(array $requirements): array
+    {
+        $results = [];
+        foreach ($requirements as $key => $requirement) {
+            $requirement = strtolower($requirement);
+            $results[$key] = true;
+            if (! extension_loaded($requirement)) {
+                $results[$key] = false;
+            }
+        }
+
+        return $results;
+    }
+
     /**
      * Check PHP version requirement.
      *

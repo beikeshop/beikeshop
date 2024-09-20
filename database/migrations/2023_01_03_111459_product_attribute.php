@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->comment('属性表');
             $table->id();
-            $table->unsignedInteger('attribute_group_id')->comment('属性组 ID')->index('attribute_group_id');
+            $table->unsignedInteger('attribute_group_id')->comment('属性组 ID')->index('attributes_attribute_group_id');
             $table->integer('sort_order')->comment('排序');
             $table->timestamps();
         });
         Schema::create('attribute_descriptions', function (Blueprint $table) {
             $table->comment('属性描述表');
             $table->id();
-            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('attribute_id');
+            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('attribute_descriptions_attribute_id');
             $table->string('locale')->default('')->comment('语言');
             $table->string('name')->default('')->comment('名称');
             $table->index(['attribute_id', 'locale'], 'attribute_id_locale');
@@ -32,13 +32,13 @@ return new class extends Migration
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->comment('属性值表');
             $table->id();
-            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('attribute_id');
+            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('attribute_values_attribute_id');
             $table->timestamps();
         });
         Schema::create('attribute_value_descriptions', function (Blueprint $table) {
             $table->comment('属性值描述表');
             $table->id();
-            $table->unsignedInteger('attribute_value_id')->comment('属性值 ID')->index('attribute_value_id');
+            $table->unsignedInteger('attribute_value_id')->comment('属性值 ID')->index('attribute_value_descriptions_attribute_value_id');
             $table->string('locale')->default('')->comment('语言');
             $table->string('name')->default('')->comment('名称');
             $table->index(['attribute_value_id', 'locale'], 'attribute_value_id_locale');
@@ -53,7 +53,7 @@ return new class extends Migration
         Schema::create('attribute_group_descriptions', function (Blueprint $table) {
             $table->comment('属性组描述表');
             $table->id();
-            $table->unsignedInteger('attribute_group_id')->comment('属性组 ID')->index('attribute_group_id');
+            $table->unsignedInteger('attribute_group_id')->comment('属性组 ID')->index('attribute_group_descriptions_attribute_group_id');
             $table->string('locale')->default('')->comment('语言');
             $table->string('name')->default('')->comment('名称');
             $table->index(['attribute_group_id', 'locale'], 'attribute_group_id_locale');
@@ -62,9 +62,9 @@ return new class extends Migration
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->comment('产品属性关联表');
             $table->id();
-            $table->unsignedInteger('product_id')->comment('商品 ID')->index('product_id');
-            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('attribute_id');
-            $table->unsignedInteger('attribute_value_id')->comment('属性值 ID')->index('attribute_value_id');
+            $table->unsignedInteger('product_id')->comment('商品 ID')->index('product_attributes_product_id');
+            $table->unsignedInteger('attribute_id')->comment('属性 ID')->index('product_attributes_attribute_id');
+            $table->unsignedInteger('attribute_value_id')->comment('属性值 ID')->index('product_attributes_attribute_value_id');
             $table->index(['product_id', 'attribute_id'], 'product_id_attribute_id');
             $table->timestamps();
         });

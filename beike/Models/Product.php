@@ -58,7 +58,7 @@ class Product extends Base
 
     public function masterSku()
     {
-        return $this->hasOne(ProductSku::class)->where('is_default', 1);
+        return $this->hasOne(ProductSku::class)->where('is_default', getDBDriver() == 'mysql' ? 1 : true);
     }
 
     public function brand()

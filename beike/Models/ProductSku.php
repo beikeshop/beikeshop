@@ -13,6 +13,7 @@ class ProductSku extends Base
     protected $casts = [
         'variants' => 'array',
         'images'   => 'array',
+        'is_default'    => 'boolean',
     ];
 
     protected $appends = ['image'];

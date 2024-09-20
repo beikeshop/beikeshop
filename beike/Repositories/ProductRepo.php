@@ -127,8 +127,19 @@ class ProductRepo
         $productIds = $filters['product_ids'] ?? [];
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
-            $productIds = implode(',', $productIds);
-            $builder->orderByRaw("FIELD(products.id, {$productIds})");
+
+            if (getDBDriver() == 'mysql')
+            {
+                $productIds = implode(',', $productIds);
+                $builder->orderByRaw("FIELD(products.id, {$productIds})");
+            } else {
+
+                $caseWhen = collect($productIds)->map(function ($id, $index) {
+                    return "WHEN products.id = $id THEN $index";
+                })->implode(' ');
+
+                $builder->orderByRaw("CASE $caseWhen ELSE 99999999 END");
+            }
         }
 
         // attr 格式:attr=10:10,13|11:34,23|3:4
@@ -158,9 +169,9 @@ class ProductRepo
                 // price 格式:price=30-100
                 $prices = explode('-', $filters['price']);
                 if (! $prices[1]) {
-                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', 1);
+                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', getDBDriver() == 'mysql' ? 1 : true);
                 } else {
-                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', 1);
+                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', getDBDriver() == 'mysql' ? 1 : true);
                 }
             });
         }

@@ -24,7 +24,7 @@ return new class extends Migration
         Schema::create('page_category_descriptions', function (Blueprint $table) {
             $table->comment('文章分类描述');
             $table->id()->comment('ID');
-            $table->integer('page_category_id')->comment('分类 ID')->index('page_category_id');
+            $table->integer('page_category_id')->comment('分类 ID')->index('page_category_descriptions_page_category_id');
             $table->string('locale')->comment('语言');
             $table->string('title')->comment('标题');
             $table->text('summary')->comment('分类简介');
@@ -35,7 +35,7 @@ return new class extends Migration
         });
 
         Schema::table('pages', function (Blueprint $table) {
-            $table->integer('page_category_id')->comment('文章分类ID')->after('id')->index('page_category_id');
+            $table->integer('page_category_id')->comment('文章分类ID')->after('id')->index('pages_page_category_id');
             $table->string('author')->comment('作者')->after('position');
             $table->integer('views')->comment('查看数')->after('position');
         });
@@ -47,8 +47,8 @@ return new class extends Migration
         Schema::create('page_products', function (Blueprint $table) {
             $table->comment('文章产品关联');
             $table->id()->comment('ID');
-            $table->integer('page_id')->comment('文章 ID')->index('page_id');
-            $table->integer('product_id')->comment('产品 ID')->index('product_id');
+            $table->integer('page_id')->comment('文章 ID')->index('page_products_page_id');
+            $table->integer('product_id')->comment('产品 ID')->index('page_products_product_id');
             $table->timestamps();
         });
     }

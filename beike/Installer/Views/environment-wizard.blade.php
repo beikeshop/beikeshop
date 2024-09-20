@@ -40,10 +40,14 @@
           <label class="form-label">
             {{ trans($entry_key . 'db_connection_label') }}
           </label>
-          <select name="database_connection" class="form-select" aria-label="Default select example">
+          <select name="database_connection" class="form-select" aria-label="Default select example" id="sql_type">
             <option value="mysql" selected>
               {{ trans($entry_key . 'db_connection_label_mysql') }}</option>
+            <option value="pgsql">
+              {{ trans($entry_key . 'db_connection_label_pgsql') }}</option>
           </select>
+          <span class="invalid-feedback"
+                role="alert"></span>
         </div>
 
         <div class="col-sm-6">
@@ -63,7 +67,7 @@
           </label>
           <input class="form-control {{ $errors->has('database_port') ? 'is-invalid' : '' }}" name="database_port"
             value="{{ old('database_port', '3306') }}" required
-            placeholder="{{ trans($entry_key . 'db_host_placeholder') }}">
+            placeholder="{{ trans($entry_key . 'db_host_placeholder') }}" id="port">
           <span class="invalid-feedback"
             role="alert">{{ $errors->has('database_port') ? $errors->first('database_port') : __('common.error_required', ['name' => trans($entry_key . 'db_port_label')]) }}</span>
         </div>
@@ -148,6 +152,11 @@
     $(function() {
       $('input[name="admin_password"]').val(randomString(16));
 
+      $('.database-link-wrap select').on('change', function() {
+          debounce(getDatabaseStatus, 500)
+      })
+
+
       $('.database-link-wrap input').on('keyup', function() {
         if (isDatabaseInputVal()) {
           debounce(getDatabaseStatus, 500)
@@ -161,6 +170,17 @@
       if ($('.content > .alert-danger').length) {
         getDatabaseStatus()
       }
+
+     $("#sql_type").change(function(){
+       if ($(this).val() === 'pgsql'){
+          $("#port").val(5432);
+       } else {
+         $("#port").val(3306);
+       }
+     });
+
+
+
 
       // $('#submit-button').click(function() {
       //   setTimeout(() => {
@@ -216,7 +236,8 @@
 
     function getDatabaseStatus() {
       const self = this;
-      $('.database-link-wrap input').removeClass('is-invalid')
+      $('.database-link-wrap input,select').removeClass('is-invalid')
+      $('#sql_type').removeClass('is-invalid')
 
       $.ajax({
         url: 'environment/validate_db',
@@ -230,7 +251,7 @@
           $('.database-loading').addClass('d-none');
         },
         success: function(json) {
-          $('.database-link-wrap input').addClass('is-valid')
+          $('.database-link-wrap input, select').addClass('is-valid')
           $('.title-status .text-success').removeClass('d-none')
           $('.admin-data-wrap').removeClass('d-none')
         },
@@ -240,6 +261,9 @@
 
           data.forEach((e)=> {
             $('.database-link-wrap input[name="' + e + '"]').addClass('is-invalid').next('.invalid-feedback').text(json.data[e])
+            if (e === 'database_connection') {
+              $('#sql_type').addClass('is-invalid').next('.invalid-feedback').text(json.data[e])
+            }
           })
 
           if (json.data.database_version) {

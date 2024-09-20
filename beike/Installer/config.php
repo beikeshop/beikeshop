@@ -36,11 +36,16 @@ return [
             'XML',
             'ZIP',
             'GD',
-            'PDO_MYSQL',
         ],
         'apache' => [
             'mod_rewrite',
         ],
+        'db' => [
+            'mysql' => 'PDO_MYSQL',
+            'pgsql' => 'PDO_PGSQL',
+
+
+        ]
     ],
 
     /*

@@ -994,3 +994,8 @@ function get_domain($domain = null)
     // 返回提取的主域名
     return implode('.', array_slice($parts, -2));
 }
+
+function getDBDriver()
+{
+    return config('database.connections.'.config('database.default').'.driver');  //如: mysql, sqlite, postgresql, sqlsrv
+}

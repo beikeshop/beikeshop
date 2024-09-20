@@ -177,8 +177,18 @@ class BrandRepo
         }
 
         $builder = Brand::query()->whereIn('id', $ids);
-        $ids     = implode(',', $ids);
-        $builder->orderByRaw("FIELD(id, {$ids})");
+
+        if (getDBDriver() == 'mysql')
+        {
+            $ids     = implode(',', $ids);
+            $builder->orderByRaw("FIELD(id, {$ids})");
+        } else {
+            $caseWhen = collect($ids)->map(function ($id, $index) {
+                return "WHEN id = $id THEN $index";
+            })->implode(' ');
+
+            $builder->orderByRaw("CASE $caseWhen ELSE 99999999 END");
+        }
 
         return $builder->get();
     }
