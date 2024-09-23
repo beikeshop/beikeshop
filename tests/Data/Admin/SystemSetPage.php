@@ -23,13 +23,13 @@ class SystemSetPage
     ];
 
     public const System_Set = [
-        'basic_set'              => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(1)', //基础设置
-        'store_set'              => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(2)', //商店设置
-        'pay_set'                => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(3)', //结账设置
-        'images_set'             => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(4)', //图片设置
-        'express_set'            => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(5)', //快递公司
-        'advanced_filter'        => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(6)', //高级筛选
-        'email_set'              => '.nav.nav-tabs.nav-bordered.mb-5 li:nth-child(7)', //邮件设置
+        'basic_set'              => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(1)', //基础设置
+        'store_set'              => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(2)', //商店设置
+        'pay_set'                => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(3)', //结账设置
+        'images_set'             => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(4)', //图片设置
+        'express_set'            => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(5)', //快递公司
+        'advanced_filter'        => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(6)', //高级筛选
+        'email_set'              => '.nav.nav-tabs.nav-bordered.mb-3.mb-lg-5 li:nth-child(7)', //邮件设置
         'close_visitor_checkout' => '#guest_checkout-0', //游客结账  禁用
         'open_visitor_checkout'  => '#tab-checkout > div:nth-child(2) > div > div > div:nth-child(1)', //游客结账  启用
     ];
