@@ -32,7 +32,7 @@ class AdminOrderPage
         'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付
 
         'express_1'    => '.el-scrollbar__view.el-select-dropdown__list', //选择第一个快递
-        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号  #orders-app > div > div.bg-light.p-4.mb-3 > form > div:nth-child(1) > div:nth-child(1) > div > div > input
+        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号
         'submit'       => '#app > form > div:nth-child(7) > div > button', //提交按钮
         'submit_btn2'  => '#app > form > div:nth-child(5) > div > button', //提交按钮
         //#app > form > div:nth-child(5) > div > button
