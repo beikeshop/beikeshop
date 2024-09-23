@@ -29,7 +29,7 @@ class AdminOrderPage
         'alter_btn'   => '.el-button.el-button--primary', //更新状态按钮
         'Shipped'     => '.el-scrollbar__view.el-select-dropdown__list li:nth-of-type(2)', //已发货
         'express_btn' => '#app > form > div:nth-child(3) > div > div > div > span > span > i', //快递下拉按钮
-        'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付//
+        'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付
 
         'express_1'    => '.el-scrollbar__view.el-select-dropdown__list', //选择第一个快递
         'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号  #orders-app > div > div.bg-light.p-4.mb-3 > form > div:nth-child(1) > div:nth-child(1) > div > div > input
