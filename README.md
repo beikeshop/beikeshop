@@ -1,5 +1,3 @@
-#  **请移步到 https://github.com/beikeshop/beikeshop**
-
 
 <img height=70 src="https://beikeshop.com/image/beike.svg" >
 
@@ -8,8 +6,8 @@
 
 
 ## BeikeShop介绍
-BeikeShop 是基于 Laravel 开发的一款开源商城系统
-主要面向外贸，跨境行业提供的商品管理、订单管理、会员管理、支付、物流、系统管理等功能
+BeikeShop是一款基于 Laravel 框架开发的全球领先的开源商城系统，面向外贸/跨境电商行业。
+系统100%开源！系统支持前台/后台多语言、多货币、支付、物流、会员管理等实用功能，助力外贸业务轻松扩展独立站业务
 <br>
 
 
@@ -17,7 +15,7 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
     <img src="https://beikeshop.com/readme/README-1.png">
 </a>
 
-注意：请保留我公司版权信息，如要移除，需要我公司授权！
+注意：请保留我公司版权信息，如要移除，需要我公司license授权！
 
 
 ## BeikeShop系统亮点
@@ -46,12 +44,21 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 </p>
 
 
-<a href="https://demo.beikeshop.com/" target="_blank">点击立刻体验：BeikeShop演示站</a>
-
+<a href="https://demo.beikeshop.com/admin/login?admin_email=demo@beikeshop.com&admin_password=demo"
+target="_blank">点击立刻体验：BeikeShop演示站</a>
 
 
 <br>
 <br>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -78,7 +85,8 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 ![服务展示2_](https://beikeshop.com/readme/README-9.png)
 
 如果希望使用 BeikeShop 满足您的更多需求，我们还提供1对1的定制咨询服务！
-![服务展示3_](https://beikeshop.com/readme/README-10.png)
+
+[![服务展示3](https://beikeshop.com/readme/README-10.png)](https://wpa.qq.com/msgrd?v=3&uin=9358972&site=qq&menu=yes)
 
 ## 软件架构
 使用语言 PHP 8.1
@@ -108,12 +116,12 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 
 
 
-<a href="https://beikeshop.com/download">
-    <img src="https://beikeshop.com/readme/README-11.png">
-</a>
+
+[![建站流程](https://beikeshop.com/readme/README-11.png)](https://beikeshop.cn/demo)
+
 
 ## 安装教程(面向非开发者)
-1. <a href="https://beikeshop.com/download" target="_blank">下载BeikeShop</a>
+1. <a href="https://beikeshop.cn/download" target="_blank">下载BeikeShop</a>
 1. 上传到你的服务器并解压
 1. 将解压文件夹下的 public 设置为网站根目录
 1. 通过浏览器访问网站根据提示完成安装
@@ -136,11 +144,10 @@ BeikeShop 是基于 Laravel 开发的一款开源商城系统
 1. 新建 Merge Request
 
 ## 特别鸣谢
-插件开发者：撸串青年、老柳、Aegis、olives等
+插件开发者：撸串青年、老柳、Aegis、特̶仑̶叔、olives等
 PR贡献者：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo等
 感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！
 
 ## QQ交流群：
 群1: 639108380
 
-#  **请移步到 https://github.com/beikeshop/beikeshop**
