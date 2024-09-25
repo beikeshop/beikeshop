@@ -15,7 +15,7 @@ BeikeShop是一款基于 Laravel 框架开发的全球领先的开源商城系�
     <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-1.png">
 </a>
 
-注意：请保留我公司版权信息，如要移除，需要我公司license授权！
+### <font>**注意：请保留我公司版权信息，如要移除，需要我公司license授权！**</font>
 
 
 ## BeikeShop系统亮点
@@ -38,7 +38,7 @@ BeikeShop是一款基于 Laravel 框架开发的全球领先的开源商城系�
 ## BeikeShop 商城预览视频
 
 <p>
-  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;">
+  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;width: 100%">
     <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/demo.gif" style="width: 100%;">
 </a>
 </p>
