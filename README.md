@@ -12,10 +12,10 @@ BeikeShop是一款基于 Laravel 框架开发的全球领先的开源商城系�
 
 
 <a href="https://beikeshop.com/">
-    <img src="https://beikeshop.com/readme/README-1.png">
+    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-1.png">
 </a>
 
-注意：请保留我公司版权信息，如要移除，需要我公司license授权！
+<font size=5>**注意：请保留我公司版权信息，如要移除，需要我公司license授权！**</font>
 
 
 ## BeikeShop系统亮点
@@ -31,15 +31,15 @@ BeikeShop是一款基于 Laravel 框架开发的全球领先的开源商城系�
 - 严格遵循 MVC 架构：系统严格遵循 MVC 架构，提高了代码的可维护性和可扩展性
 - 操作简单易上手：BeikeShop 操作简单，易于上手，可以快速上线使用
 
-![系统亮点](https://beikeshop.com/readme/README-2.png)
+![系统亮点](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2.png)
 
 <br>
 
 ## BeikeShop 商城预览视频
 
 <p>
-  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;">
-    <img src="https://beikeshop.com/image/gif/demo.gif" style="width: 100%;">
+  <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;width: 100%">
+    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/demo.gif" style="width: 100%;">
 </a>
 </p>
 
@@ -72,21 +72,21 @@ target="_blank">点击立刻体验：BeikeShop演示站</a>
 
 ## 页面展示
 
-![页面展示1_商城DIY装修](https://beikeshop.com/readme/README-3.png)
-![页面展示2_商品列表页](https://beikeshop.com/readme/README-4.png)
-![页面展示3_商品详情页](https://beikeshop.com/readme/README-5.png)
-![页面展示4_后台商品列表](https://beikeshop.com/readme/README-6.png)
-![页面展示5_后台功能搜索](https://beikeshop.com/readme/README-7.png)
+![页面展示1_商城DIY装修](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-3.png)
+![页面展示2_商品列表页](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-4.png)
+![页面展示3_商品详情页](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-5.png)
+![页面展示4_后台商品列表](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-6.png)
+![页面展示5_后台功能搜索](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-7.png)
 
 
 ## 相关服务
 如果您没有任何技术基础，或想要快速的拥有自己的独立站，可以购买我们的托管服务！
-![服务展示1_](https://beikeshop.com/readme/README-8.png)
-![服务展示2_](https://beikeshop.com/readme/README-9.png)
+![服务展示1_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-8.png)
+![服务展示2_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-9.png)
 
 如果希望使用 BeikeShop 满足您的更多需求，我们还提供1对1的定制咨询服务！
 
-[![服务展示3](https://beikeshop.com/readme/README-10.png)](https://wpa.qq.com/msgrd?v=3&uin=9358972&site=qq&menu=yes)
+[![服务展示3](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-10.png)](https://wpa.qq.com/msgrd?v=3&uin=9358972&site=qq&menu=yes)
 
 ## 软件架构
 使用语言 PHP 8.1
