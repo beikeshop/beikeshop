@@ -52,9 +52,6 @@ $data = $plugin['data'];
                 @endif
                 <span></span>
               </div>
-              @if ($data['free_service_months'])
-              <span>( {{ __('admin/marketing.free_days') }} {{ $data['free_service_months'] ?? 0 }} {{ $data['is_subscribe'] ?  __('admin/marketing.free_days_dy') : __('admin/marketing.free_days_over') }} )</span>
-              @endif
             </div>
             @if (isset($data['plugin_services']) && count($data['plugin_services']) && $data['is_subscribe'])
             <div class="mb-2">
