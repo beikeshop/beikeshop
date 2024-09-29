@@ -104,7 +104,7 @@ class ProductRepo
                 } else {
                     $query->where('category_id', $filters['category_id']);
                 }
-                if (system_setting('category_products_with_subcategory')) {
+                if (system_setting('category_products_with_subcategory', 1)) {
                     $categoryId = $filters['category_id'];
                     $query->whereHas('paths', function ($query) use ($categoryId) {
                         $query->where('path_id', $categoryId);
