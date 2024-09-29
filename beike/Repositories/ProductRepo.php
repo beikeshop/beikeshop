@@ -108,7 +108,7 @@ class ProductRepo
                 } else {
                     $categoryId = $filters['category_id'];
                     $query->whereHas('paths', function ($query) use ($categoryId) {
-                        if ($categoryId) {
+                        if (is_array($categoryId)) {
                             $query->whereIn('path_id', $categoryId);
                         } else {
                             $query->where('path_id', $categoryId);
