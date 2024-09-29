@@ -67,7 +67,7 @@ body.page-marketing {
   }
 
   .top-tips-wrap {
-    font-size: 12px; 
+    font-size: 12px;
   }
 
   .top-text {
@@ -193,7 +193,11 @@ body.page-marketing-info {
       border: 1px solid #ff804a;
       padding: 0 5px;
       border-radius: 5px;
-      color: #ff804a;
+      color: #ffe030;
+
+      .no-lv {
+        color: #eee;
+      }
     }
   }
 

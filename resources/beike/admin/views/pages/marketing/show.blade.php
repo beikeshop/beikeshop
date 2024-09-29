@@ -112,15 +112,27 @@ $data = $plugin['data'];
                     </div>
                     <div class="ms-2 d-flex">
                       <div>
-                        <div class="mb-1">{{ $data['developer']['name'] }}</div>
+                        <div class="mb-1 text-center">{{ $data['developer']['name'] }}</div>
                         @if ($data['developer']['is_official'])
                         <div class="mt-1 response-dev">{{ __('admin/marketing.official_developer') }}</div>
                         @elseif ($data['developer']['lv'] == 3)
-                        <div class="mt-1 response">{{ __('admin/marketing.lv3_developer') }}</div>
+                        <div class="mt-1 response">
+                          <i class="iconfont">&#xe628;</i>
+                          <i class="iconfont">&#xe628;</i>
+                          <i class="iconfont">&#xe628;</i>
+                        </div>
                         @elseif ($data['developer']['lv'] == 2)
-                        <div class="mt-1 response">{{ __('admin/marketing.lv2_developer') }}</div>
+                        <div class="mt-1 response">
+                          <i class="iconfont">&#xe628;</i>
+                          <i class="iconfont">&#xe628;</i>
+                          <i class="iconfont no-lv">&#xe628;</i>
+                        </div>
                         @elseif ($data['developer']['lv'] == 1)
-                        <div class="mt-1 response">{{ __('admin/marketing.lv1_developer') }}</div>
+                        <div class="mt-1 response">
+                          <i class="iconfont">&#xe628;</i>
+                          <i class="iconfont no-lv">&#xe628;</i>
+                          <i class="iconfont no-lv">&#xe628;</i>
+                        </div>
                         @endif
                       </div>
                     </div>
