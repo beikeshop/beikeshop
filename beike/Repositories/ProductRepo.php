@@ -99,15 +99,20 @@ class ProductRepo
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
-                if (is_array($filters['category_id'])) {
-                    $query->whereIn('category_id', $filters['category_id']);
+                if (!system_setting('category_products_with_subcategory', 1)) {
+                    if (is_array($filters['category_id'])) {
+                        $query->whereIn('category_id', $filters['category_id']);
+                    } else {
+                        $query->where('category_id', $filters['category_id']);
+                    }
                 } else {
-                    $query->where('category_id', $filters['category_id']);
-                }
-                if (system_setting('category_products_with_subcategory', 1)) {
                     $categoryId = $filters['category_id'];
                     $query->whereHas('paths', function ($query) use ($categoryId) {
-                        $query->where('path_id', $categoryId);
+                        if ($categoryId) {
+                            $query->whereIn('path_id', $categoryId);
+                        } else {
+                            $query->where('path_id', $categoryId);
+                        }
                     });
                 }
 
