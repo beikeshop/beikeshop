@@ -157,9 +157,10 @@
           } else {
             $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
               if (pay.status == 'success') {
-                location = "checkout/success?order_number=" + orderNumber
+                location = "/" + "{{ session()->get('locale') }}" + "/checkout/success?order_number=" + orderNumber
               } else {
-                layer.msg(pay.message, () => {})
+                layer.msg(pay.message, () => {
+                })
               }
             })
           }

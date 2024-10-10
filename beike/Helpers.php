@@ -115,7 +115,20 @@ function admin_route($route, $params = []): string
  */
 function shop_route($route, $params = []): string
 {
-    return route('shop.' . $route, $params);
+    $langs = array_map(function ($item){
+        return '/lang/'.$item;
+    },config('app.langs'));
+
+    $host = request()->getSchemeAndHttpHost();
+    $lang = session()->get('locale');
+
+    $uri = str_replace($host,'',route('shop.' . $route, $params));
+    if (in_array($uri,$langs))
+    {
+        return  $host.$uri;
+    }
+
+    return  $host.'/'.$lang.$uri;
 }
 
 /**

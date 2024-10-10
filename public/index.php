@@ -1,7 +1,7 @@
 <?php
 
+use Beike\Libraries\Request;
 use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Http\Request;
 
 $basePath       = getcwd() . '/';
 $htaPath        = $basePath . '.htaccess';

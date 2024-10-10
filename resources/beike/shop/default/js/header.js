@@ -15,7 +15,12 @@ $(function () {
       $("#offcanvas-search-top input").keydown(function (e) {
         if (e.keyCode == 13) {
           if ($(this).val() != "") {
-            location.href = "products/search?keyword=" + $(this).val();
+            var lang = $(this).data("lang");
+            if (lang) {
+              location.href = "/" + lang + "/products/search?keyword=" + $(this).val();
+            } else {
+              location.href = "products/search?keyword=" + $(this).val();
+            }
           }
         }
       });
@@ -133,10 +138,10 @@ $(function () {
     }, {
       hload: true
     }).then((res) => {
-       if(res.status != 'success'){
+      if (res.status != 'success') {
         layer.msg(res.message)
         $(that).val(res.data.quantity);
-      }else {
+      } else {
         updateMiniCartData(res);
       }
     })

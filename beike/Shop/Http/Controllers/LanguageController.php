@@ -11,6 +11,7 @@
 
 namespace Beike\Shop\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -24,6 +25,37 @@ class LanguageController extends Controller
 
         hook_action('language.index.after', $lang);
 
-        return Redirect::back();
+        return $this->redirectUrl();
+
+    }
+
+    /**
+     *  redirect url
+     *
+     * @return RedirectResponse
+     */
+    private function redirectUrl(): RedirectResponse
+    {
+        $lang = Session::get('locale');
+        $backUrl = redirect()->back()->getTargetUrl();
+        $host = request()->getSchemeAndHttpHost();
+        $uri = str_replace($host, '', $backUrl);
+
+        if ($uri == '/')
+        {
+            $uri = $uri.$lang;
+        } else {
+            foreach (config('app.langs')  as $item)
+            {
+                $uriArr = explode('/', $uri);
+                if(count($uriArr) && in_array($item, $uriArr))
+                {
+                    $uri = str_replace($item, $lang,$uri);
+                    break;
+                }
+            }
+        }
+
+        return redirect()->to($host . $uri);
     }
 }

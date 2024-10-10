@@ -6,16 +6,17 @@
         @hookwrapper('header.top.currency')
         @if (currencies()->count() > 1)
           <div class="dropdown">
-            <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
-              aria-expanded="false">
+            <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown"
+               data-toggle="dropdown"
+               aria-expanded="false">
               @foreach (currencies() as $currency)
                 @if ($currency->code == current_currency_code())
                   @if ($currency->symbol_left)
-                  {{ $currency->symbol_left }}
+                    {{ $currency->symbol_left }}
                   @endif
                   {{ $currency->name }}
                   @if ($currency->symbol_right)
-                  {{ $currency->symbol_right }}
+                    {{ $currency->symbol_right }}
                   @endif
                 @endif
               @endforeach
@@ -24,15 +25,15 @@
             <div class="dropdown-menu" aria-labelledby="currency-dropdown">
               @foreach (currencies() as $currency)
                 <a class="dropdown-item"
-                  href="{{ shop_route('currency.switch', [$currency->code]) }}">
+                   href="{{ shop_route('currency.switch', [$currency->code]) }}">
                   @if ($currency->symbol_left)
-                  {{ $currency->symbol_left }}
+                    {{ $currency->symbol_left }}
                   @endif
                   {{ $currency->name }}
                   @if ($currency->symbol_right)
-                  {{ $currency->symbol_right }}
+                    {{ $currency->symbol_right }}
                   @endif
-                  </a>
+                </a>
               @endforeach
             </div>
           </div>
@@ -42,8 +43,9 @@
         @hookwrapper('header.top.language')
         @if (count($languages) > 1)
           <div class="dropdown">
-            <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
-              aria-expanded="false">
+            <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown"
+               data-toggle="dropdown"
+               aria-expanded="false">
               {{ current_language()->name }}
             </a>
 
@@ -89,7 +91,8 @@
         <ul class="navbar-nav flex-row">
           @hookwrapper('header.menu.icon')
           <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas"
-              aria-controls="offcanvasExample" class="nav-link"><i class="iconfont">&#xe8d6;</i></a></li>
+                                  aria-controls="offcanvasExample" class="nav-link"><i class="iconfont">&#xe8d6;</i></a>
+          </li>
           <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><i
                 class="iconfont">&#xe662;</i></a></li>
           <li class="nav-item dropdown">
@@ -103,7 +106,7 @@
                   <hr class="dropdown-divider opacity-100">
                 </li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-person me-1"></i>
-                  {{ __('shop/account.index') }}</a></li>
+                    {{ __('shop/account.index') }}</a></li>
                 <li><a href="{{ shop_route('account.order.index') }}" class="dropdown-item"><i
                       class="bi bi-clipboard-check me-1"></i> {{ __('shop/account/order.index') }}</a></li>
                 <li><a href="{{ shop_route('account.wishlist.index') }}" class="dropdown-item"><i
@@ -127,7 +130,9 @@
               <i class="iconfont">&#xe634;</i>
               <span class="cart-badge-quantity"></span>
             </a> --}}
-            <a class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}" href="javascript:void(0);" role="button">
+            <a
+              class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}"
+              href="javascript:void(0);" role="button">
               <i class="iconfont">&#xe634;</i>
               <span class="cart-badge-quantity"></span>
             </a>
@@ -141,12 +146,13 @@
     <div class="mobile-content">
       <div class="left">
         <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
-        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample">
+        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas"
+             aria-controls="offcanvasExample">
           <i class="iconfont">&#xe8d6;</i>
         </div>
       </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
-        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link mb-account-icon">
@@ -155,7 +161,8 @@
             <span></span>
           @endif
         </a>
-        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i> <span class="cart-badge-quantity"></span></a>
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i>
+          <span class="cart-badge-quantity"></span></a>
       </div>
     </div>
   </div>
@@ -169,11 +176,13 @@
     </div>
   </div>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
+       aria-labelledby="offcanvasRightLabel"></div>
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">
-      <input type="text" class="form-control input-group-lg border-0 fs-4" focus placeholder="{{ __('common.input') }}" value="{{ request('keyword') }}">
+      <input type="text" class="form-control input-group-lg border-0 fs-4" focus placeholder="{{ __('common.input') }}"
+             value="{{ request('keyword') }}" data-lang="{{session()->get('locale')}}">
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
   </div>
