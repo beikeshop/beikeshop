@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'texte enrichi',
     'module_slideshow'      => 'module diapositive',
     'module_tab_products'   => 'onglet produits',
+    'theme_index'           => 'Paramètres du modèle',
+    'design_menu_index'     => 'Paramètres de navigation',
+    'design_index'          => 'Home rénovation',
+    'design_footer_index'   => 'Rénovation de la page de queue',
+    'design_app_home_index' => 'App Home Design'
 ];

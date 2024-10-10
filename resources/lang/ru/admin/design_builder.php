@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'форматированный текст',
     'module_slideshow'      => 'модуль слайд-шоу',
     'module_tab_products'   => 'элемент вкладки',
+    'theme_index'           => 'Параметры шаблонов',
+    'design_menu_index'     => 'Настройки навигации',
+    'design_index'          => 'Главная страница Ремонт',
+    'design_footer_index'   => 'Ремонт задней страницы',
+    'design_app_home_index' => 'Дизайн первой страницы приложения'
 ];

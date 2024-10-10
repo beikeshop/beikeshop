@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'texto enriquecido',
     'module_slideshow'      => 'módulo de presentación de diapositivas',
     'module_tab_products'   => 'elemento de pestaña',
+    'theme_index'           => 'Configuración de la plantilla',
+    'design_menu_index'     => 'Configuración de navegación',
+    'design_index'          => 'Decoración de la página de inicio',
+    'design_footer_index'   => 'Decoración de la página final',
+    'design_app_home_index' => 'Diseño de la página de inicio de la aplicación'
 ];

@@ -57,7 +57,7 @@ class PermissionRepo
             ['title' => trans('admin/common.page'), 'permissions' => $this->getPagePermissions()],
             ['title' => trans('admin/common.page_category'), 'permissions' => $this->getPageCategoryPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
-
+            ['title' => trans('admin/common.design'), 'permissions' => $this->getDesignPermissions()],
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
             ['title' => trans('admin/common.report'), 'permissions' => $this->getReportPermissions()],
@@ -436,6 +436,19 @@ class PermissionRepo
         $items  = $this->getPermissionList('help', $routes);
 
         return hook_filter('role.help_permissions', $items);
+    }
+
+    /**
+     * 设计权限列表
+     *
+     * @return array
+     */
+    private function getDesignPermissions(): array
+    {
+        $routes = ['theme_index', 'design_menu_index', 'design_index', 'design_footer_index','design_app_home_index'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.design_permissions', $items);
     }
 
     /**

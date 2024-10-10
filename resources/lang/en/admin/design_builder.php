@@ -20,4 +20,9 @@ return [
     'module_icons'          => 'Icons',
     'module_rich_text'      => 'Rich Text',
     'module_page'           => 'Article module',
+    'theme_index'           => 'Template settings',
+    'design_menu_index'     => 'Navigation settings',
+    'design_index'          => 'Home Decoration',
+    'design_footer_index'   => 'Last page decoration',
+    'design_app_home_index' => 'APP homepage design'
 ];

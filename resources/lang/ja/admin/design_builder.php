@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'リッチテキスト',
     'module_slideshow'      => 'スライド モジュール',
     'module_tab_products'   => 'タブ製品',
+    'theme_index'           => 'テンプレート設定',
+    'design_menu_index'     => 'ナビゲーション設定',
+    'design_index'          => 'トップページの装飾',
+    'design_footer_index'   => '最終ページの仕上げ',
+    'design_app_home_index' => 'APPトップページのデザイン'
 ];
