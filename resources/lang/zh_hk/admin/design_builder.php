@@ -25,4 +25,3 @@ return [
     'design_footer_index'   => '尾頁裝修',
     'design_app_home_index' => 'APP首頁設計'
 ];
-q
