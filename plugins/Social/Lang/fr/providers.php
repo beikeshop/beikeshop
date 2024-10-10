@@ -28,7 +28,7 @@ return [
     'qq'          => 'QQ',
     'taobao'      => 'taobao',
     'tapd'        => 'Tapd',
-    'twitter'     => 'Twitter',
+    'twitter'     => 'X',
     'wechat'      => 'wechat',
     'wework'      => 'Wechat pour entreprises',
 ];
