@@ -92,6 +92,9 @@ class CartService
             $cart->selected = true;
             $cart->increment('quantity', $quantity);
         } else {
+            if (count(self::list(current_customer())) >= 5) {
+                throw new Exception(trans('cart.cart_quantity_max_500'));
+            }
             $cart = CartProduct::query()->create([
                 'customer_id'    => $customerId,
                 'session_id'     => get_session_id(),

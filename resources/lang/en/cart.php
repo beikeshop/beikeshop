@@ -13,4 +13,5 @@ return [
     'sku_id'    => 'SKU ID',
     'quantity'  => 'Quantity',
     'stock_out' => 'Stock Out',
+    'cart_quantity_max_500' => 'Your cart has too many items (over 500), please clear the items you don\'t need before adding them to your cart!',
 ];
