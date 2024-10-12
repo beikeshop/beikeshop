@@ -432,6 +432,7 @@ $data = $plugin['data'];
       retryCodeTime: 0,
       isSendSms: false,
       isPassing: false,
+      isSwalOpen: false,
       setTokenDialog: {
         show: false,
         token: @json(system_setting('base.developer_token') ?? ''),
@@ -779,17 +780,20 @@ $data = $plugin['data'];
         $http.get('{{ admin_route('marketing.show', ['code' => $data['code']]) }}', null, {hload: true}).then((res) => {
           if (res.plugin.data.downloadable) {
             window.clearInterval(this.timer)
-            Swal.fire({
-              title: '{{ __('admin/marketing.pay_success_title') }}',
-              text: '{{ __('admin/marketing.pay_success_text') }}',
-              icon: 'success',
-              focusConfirm: false,
-              confirmButtonColor: '#75bc4d',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              didClose: function () {
-                window.location.reload();
-              },
-            })
+            if (!this.isSwalOpen) {
+              this.isSwalOpen = true
+              Swal.fire({
+                title: '{{ __('admin/marketing.pay_success_title') }}',
+                text: '{{ __('admin/marketing.pay_success_text') }}',
+                icon: 'success',
+                focusConfirm: false,
+                confirmButtonColor: '#75bc4d',
+                confirmButtonText: '{{ __('common.confirm') }}',
+                didClose: function () {
+                  window.location.reload();
+                },
+              })
+            }
           }
         })
       },
@@ -821,17 +825,21 @@ $data = $plugin['data'];
             that.service_wechatpay_price = ''
             $('#service-info').html('')
             that.serviceDialog.show = false
-            Swal.fire({
-              title: '{{ __('admin/marketing.pay_success_title') }}',
-              text: '{{ __('admin/marketing.pay_success_text') }}',
-              icon: 'success',
-              focusConfirm: false,
-              confirmButtonColor: '#75bc4d',
-              confirmButtonText: '{{ __('common.confirm') }}',
-              didClose: function () {
-                window.location.reload();
-              },
-            })
+
+            if (!this.isSwalOpen) {
+              this.isSwalOpen = true
+              Swal.fire({
+                title: '{{ __('admin/marketing.pay_success_title') }}',
+                text: '{{ __('admin/marketing.pay_success_text') }}',
+                icon: 'success',
+                focusConfirm: false,
+                confirmButtonColor: '#75bc4d',
+                confirmButtonText: '{{ __('common.confirm') }}',
+                didClose: function () {
+                  window.location.reload();
+                },
+              })
+            }
           }
         })
       },
