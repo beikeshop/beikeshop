@@ -617,7 +617,7 @@ $data = $plugin['data'];
           } else if (err.response.data.message == 'Not a zip archive') {
             layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
           } else {
-            layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
+            layer.msg(err.response.data.message || err.message,{time: 3000}, ()=>{});
           }
         })
       },
