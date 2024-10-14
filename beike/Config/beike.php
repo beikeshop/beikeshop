@@ -11,7 +11,7 @@
 
 return [
     'api_url'         => env('BEIKE_API_URL', 'https://beikeshop.com'),
-    'version'         => '1.5.5.6',
+    'version'         => '1.5.5.7',
     'build'           => '20240509',
 
     'admin_name'      => env('ADMIN_NAME'),
