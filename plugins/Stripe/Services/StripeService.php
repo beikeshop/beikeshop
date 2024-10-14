@@ -47,34 +47,59 @@ class StripeService extends PaymentService
      */
     public function capture($creditCardData): bool
     {
-        $tokenId = $creditCardData['token'] ?? '';
-        if (empty($tokenId)) {
-            throw new \Exception('Invalid token');
-        }
-        $currency = $this->order->currency_code;
+        // web
+        if (isset($creditCardData['token'])) {
+            $tokenId = $creditCardData['token'] ?? '';
+            $currency = $this->order->currency_code;
 
-        if (! in_array($currency, self::ZERO_DECIMAL)) {
-            $total = round($this->order->total, 2) * 100;
+            if (! in_array($currency, self::ZERO_DECIMAL)) {
+                $total = round($this->order->total, 2) * 100;
+            } else {
+                $total = floor($this->order->total);
+            }
+
+            $stripeCustomer = $this->createCustomer($tokenId);
+
+            $stripeChargeParameters = [
+                'amount'   => $total,
+                'currency' => $currency,
+                'metadata' => [
+                    'order_number' => $this->order->number,
+                ],
+                'customer' => $stripeCustomer->id,
+                'shipping' => $this->getShippingAddress(),
+            ];
+
+            // $charge = \Stripe\Charge::create($stripeChargeParameters);
+            $charge = $this->stripeClient->charges->create($stripeChargeParameters);
+
+            return $charge['paid'] && $charge['captured'];
         } else {
-            $total = floor($this->order->total);
+            // app
+            // 从返回的 client_secret 中提取 payment_intent_id
+            $clientSecret = $creditCardData['paymentIntent'] ?? '';
+            if (empty($clientSecret)) {
+                throw new \Exception('Invalid paymentIntent');
+            }
+
+            // 提取 payment_intent_id (前缀到第一个 '_secret' 之前的部分)
+            $paymentIntentId = substr($clientSecret, 0, strpos($clientSecret, '_secret'));
+
+            // 检查是否成功提取 payment_intent_id
+            if (empty($paymentIntentId)) {
+                throw new \Exception('Invalid paymentIntent ID');
+            }
+
+            // 根据 PaymentIntent ID 查询支付状态
+            $paymentIntent = $this->stripeClient->paymentIntents->retrieve($paymentIntentId);
+
+            // 检查支付状态
+            if ($paymentIntent->status === 'succeeded') {
+                return true;
+            }
+
+            return false;
         }
-
-        $stripeCustomer = $this->createCustomer($tokenId);
-
-        $stripeChargeParameters = [
-            'amount'   => $total,
-            'currency' => $currency,
-            'metadata' => [
-                'order_number' => $this->order->number,
-            ],
-            'customer' => $stripeCustomer->id,
-            'shipping' => $this->getShippingAddress(),
-        ];
-
-        // $charge = \Stripe\Charge::create($stripeChargeParameters);
-        $charge = $this->stripeClient->charges->create($stripeChargeParameters);
-
-        return $charge['paid'] && $charge['captured'];
     }
 
     /**
