@@ -215,6 +215,7 @@
                                  <div class="btn-remove" @click="removeSourceVariantValue(variantIndex, value_index)"><i class="el-icon-error"></i></div>
                                  <div class="name">
                                    @{{ value.name[current_language_code] }}
+                                   @hook('admin.product.edit.source.variables.name.after')
                                  </div>
                                </div>
                             </draggable>
@@ -230,6 +231,7 @@
                       <el-button type="primary" plain size="small" @click="modalVariantOpenButtonClicked(-1, null)" class="btn btn-xs mr-1 mb-1">{{ __('admin/product.add_variable') }}</el-button>
                     </div>
 
+                    @hookwrapper('admin.product.edit.variables')
                     <div v-if="form.skus.length && form.variables.length" class="mt-3 table-push table-responsive">
                       <div class="batch-setting d-flex align-items-center mb-3 p-2 bg-body">
                         <div v-for="(variant, index) in form.variables" :key="index" class="me-2">
@@ -320,6 +322,7 @@
                         </tbody>
                       </table>
                     </div>
+                    @endhookwrapper
                   </div>
                   <input class="form-control d-none" :value="skuIsEmpty" required>
                   <div class="invalid-feedback" style="font-size: 16px"><i class="bi bi-exclamation-circle-fill"></i> {{ __('admin/product.add_variable') }}</div>
@@ -515,6 +518,7 @@
               @hook('admin.product.sku.edit.item.after')
             </el-form-item>
 
+            @hook('admin.product.sku.edit.item.btn.before')
             <el-form-item>
               <el-button type="primary" @click="dialogVariablesFormSubmit('form')">{{ __('common.save') }}</el-button>
               <el-button @click="closedialogVariablesFormDialog('form')">{{ __('common.cancel') }}</el-button>
@@ -946,6 +950,8 @@
               }
             }
 
+            @stack('admin.product.edit.vue.method.dialogVariablesFormSubmit')
+
             this.dialogVariables.show = false;
           });
         },
@@ -1007,6 +1013,7 @@
           }
 
           this.dialogVariables.form.name = JSON.parse(JSON.stringify(name));
+          @stack('admin.product.edit.vue.method.modalVariantOpenButtonClicked')
           this.dialogVariables.show = true;
         },
 
@@ -1139,6 +1146,7 @@
             }
           }
 
+          @stack('admin.product.edit.vue.method.remakeSkus')
           this.form.skus = skus;
         },
 
