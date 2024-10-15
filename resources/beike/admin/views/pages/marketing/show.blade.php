@@ -359,11 +359,11 @@ $data = $plugin['data'];
     <li class="nav-item" role="presentation">
       <a class="nav-link active" data-bs-toggle="tab" href="#tab-description">{{ __('admin/marketing.download_description') }}</a>
     </li>
-    @if (!$data['is_subscribe'])
+    {{-- @if (!$data['is_subscribe'])
     <li class="nav-item" role="presentation">
       <a class="nav-link" data-bs-toggle="tab" href="#tab-histories">{{ __('admin/marketing.service_buy_histories') }}</a>
     </li>
-    @endif
+    @endif --}}
   </ul>
 
   <div class="tab-content">
@@ -617,7 +617,7 @@ $data = $plugin['data'];
           } else if (err.response.data.message == 'Not a zip archive') {
             layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
           } else {
-            layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
+            layer.msg(err.response.data.message || err.message,{time: 3000}, ()=>{});
           }
         })
       },
@@ -650,7 +650,7 @@ $data = $plugin['data'];
 
           this.serviceDialog.show = false
 
-          if (res.data.payment_code == 'stripe') {
+          if (res.data.payment_code == 'stripe' || res.data.payment_code == 'lianlian') {
             window.open(`${res.data.pay_url}`, '_blank');
             this.paySuccessAlert();
           }
