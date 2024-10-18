@@ -33,7 +33,7 @@ class UploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'file' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240',
             'type' => 'required|alpha_dash',
         ];
     }
