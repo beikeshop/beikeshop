@@ -60,7 +60,9 @@ $data = $plugin['data'];
               </div>
               <div>
                 @foreach ($data['plugin_services'] as $item)
-                {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
+                  @if ($item['months'] == 1)
+                  {{ $item['price_format'] }}/{{ $item['months'] }}{{__('admin/marketing.munths')}} &nbsp;
+                  @endif
                 @endforeach
               </div>
             </div>
