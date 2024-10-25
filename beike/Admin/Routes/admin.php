@@ -12,6 +12,8 @@ Route::prefix($adminName)
         Route::get('login', [Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [Controllers\LoginController::class, 'store'])->name('login.store');
 
+        Route::get('get_wintopay_method', [Controllers\WintopayMethodController::class, 'index'])->name('get_wintopay_method.index');
+
         Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');

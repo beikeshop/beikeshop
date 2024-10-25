@@ -27,8 +27,12 @@ class MarketingService
     {
         $this->httpClient = Http::withOptions([
             'verify' => false,
+            'timeout' => 0,
+            'connect_timeout' => 0,
         ])->withHeaders([
             'developer-token' => system_setting('base.developer_token'),
+            'domain' => request()->getHost(),
+            'v' => 1,
         ]);
     }
 
@@ -63,10 +67,6 @@ class MarketingService
     {
         $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version') . '&locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
         $plugin = $this->httpClient->get($url)->json();
-
-        if (empty($plugin)) {
-            throw new NotFoundHttpException('该插件不存在或已下架');
-        }
 
         return $plugin;
     }

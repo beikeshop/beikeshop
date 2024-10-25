@@ -93,5 +93,5 @@ return [
     'attention_show_3'               => '2.软件为特殊商品，付费购买后非软件本身问题不支持退款，请购买前请仔细阅读插件说明',
     'domain_token_domain_error'      => '当前域名: :domain 与 Token绑定的域名: :token_domain 不一致，请确认后再购买，或者重新绑定 Token。 <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">查看教程</a>',
     'not_zip_archive'                => '没有zip文件。请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
-    'update_success'                 => '插件更新成功'
+    'i_publish'                => '我要发布',
 ];

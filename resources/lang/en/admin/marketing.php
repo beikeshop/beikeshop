@@ -92,5 +92,5 @@ return [
     'is_passing'             => 'Please hold down the slider and drag',
     'is_passing_succee'      => 'Verification passed',
     'error_is_passing'       => 'Please drag the button to verify!',
-    'update_success'         => 'Plugin update successful'
+    'i_publish'                => 'I want to publish',
 ];

@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row g-3 g-lg-4">
         @foreach ($content['images'] as $item)
-        <div class="col-12 col-md-4"><a class="image-wrap" href="{{ $item['link']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $item['image'] }}" class="img-fluid"></a></div>
+        <div class="col-4"><a class="image-wrap" href="{{ $item['link']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $item['image'] }}" class="img-fluid"></a></div>
         @endforeach
       </div>
     </div>

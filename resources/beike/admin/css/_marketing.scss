@@ -9,6 +9,14 @@
  */
 
 body.page-marketing {
+  #content {
+    overflow: hidden;
+  }
+
+  #copyright-text {
+    margin-top: .25rem !important;
+  }
+
   .marketing-item {
     box-shadow: none;
     border: 1px solid #eee;
@@ -76,13 +84,17 @@ body.page-marketing {
 }
 
 body.page-marketing-info {
+  #copyright-text {
+    margin-top: .25rem !important;
+  }
+
+  #content {
+    overflow: hidden;
+  }
+
   .crumb {
     margin-top: -42px;
     margin-bottom: 37px !important;
-  }
-
-  .page-title-box {
-    padding-top: 55px !important;
   }
 
   .plugin-info {
