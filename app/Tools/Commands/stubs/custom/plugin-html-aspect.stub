@@ -1,0 +1,48 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Closure;
+
+class $CLASS$
+{
+    /**
+     * When modifying the same file,
+     * the priority of aspect class execution is higher for smaller numbers
+     * and vice versa
+     *
+     * @var int
+     */
+    public int $priority = 1;
+
+    /**
+     * the template path you need to update
+     * @var string
+     */
+    public string $template_file = '';
+
+    /**
+     * execute relevant logic
+     *
+     * @param         $arguments
+     * @param Closure $next
+     * @return mixed
+     */
+    public function handle($arguments, Closure $next): mixed
+    {
+        /**
+         * QueryList object
+         * you can see https://querylist.cc/
+         */
+        $ql   = $arguments->ql;
+
+        /**
+         * all parameters used when use the template
+         */
+        $data = $arguments->data;
+
+        //write your code here
+
+        return $next($arguments);
+    }
+}

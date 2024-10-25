@@ -995,7 +995,30 @@ function get_domain($domain = null)
     return implode('.', array_slice($parts, -2));
 }
 
+
 function getDBDriver()
 {
-    return config('database.connections.'.config('database.default').'.driver');  //如: mysql, sqlite, postgresql, sqlsrv
+    return config('database.connections.' . config('database.default') . '.driver');  //如: mysql, sqlite, postgresql, sqlsrv
+}
+function is_associative_array($array): bool
+{
+    if (!is_array($array)) {
+        return false;
+    }
+
+    $keys = array_keys($array);
+
+    return array_keys($keys) !== $keys;
+}
+
+
+function isTwoDimensionalArray($array): bool
+{
+    if (!is_array($array)) {
+        return false;
+    }
+
+    $filtered = array_filter($array, 'is_array');
+
+    return count($filtered) > 0;
 }

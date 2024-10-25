@@ -9,7 +9,7 @@
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-  @if ($product['video'] && strpos($product['video'], '<iframe') === false)
+  @if ($has_video)
     <script src="{{ asset('vendor/video/video.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('vendor/video/video-js.min.css') }}">
   @endif
@@ -124,7 +124,7 @@
             <div class="rating-wrap d-lg-flex">
               <div class="rating">
                 @for ($i = 0; $i < 5; $i++)
-                  <i class="iconfont">&#xe628;</i>
+                  {!! $iconfont !!}
                 @endfor
               </div>
               <span class="text-muted">132 reviews</span>

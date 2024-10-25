@@ -18,6 +18,7 @@
         "geoip2/geoip2": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
+        "jaeger/querylist": "^4.4",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^10.0",
         "laravel/horizon": "^5.10",

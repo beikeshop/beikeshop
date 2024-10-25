@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
+use Beike\Admin\View\Components\Form\Checkbox;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -149,6 +150,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-textarea'     => Textarea::class,
             'form-rich-text'    => RichText::class,
             'no-data'           => NoData::class,
+            'form-checkbox'     => Checkbox::class,
         ]);
     }
 

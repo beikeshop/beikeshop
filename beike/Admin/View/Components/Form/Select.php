@@ -8,7 +8,7 @@ class Select extends Component
 {
     public string $name;
 
-    public string $value;
+    public mixed $value;
 
     public string $title;
 
@@ -20,8 +20,21 @@ class Select extends Component
 
     public string $label;
 
-    public function __construct(string $name, string $value, string $title, array $options, string $width = '400', ?string $key = 'value', ?string $label = 'label')
-    {
+    public string $class;
+
+    public string $format;
+
+    public function __construct(
+        string $name,
+        mixed $value,
+        array $options,
+        ?string $title = '',
+        string $width = '400',
+        ?string $key = 'value',
+        ?string $label = 'label',
+        ?string $class = '',
+        ?int $format = 1
+    ) {
         $this->name    = $name;
         $this->title   = $title;
         $this->value   = $value;
@@ -29,6 +42,8 @@ class Select extends Component
         $this->width   = $width;
         $this->key     = $key;
         $this->label   = $label;
+        $this->class   = $class ?: "form-select me-3 wp-".$width;
+        $this->format = $format;
     }
 
     public function render()

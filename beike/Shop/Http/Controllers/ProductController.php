@@ -22,12 +22,23 @@ class ProductController extends Controller
         $product     = ProductRepo::getProductDetail($product);
         ProductRepo::viewAdd($product);
 
+        $has_video = false;
+
+        if (data_get($product, 'video') && !str_contains($product['video'], '<iframe'))
+        {
+            $has_video = true;
+        }
         $data        = [
             'product'   => (new ProductDetail($product))->jsonSerialize(),
             'relations' => ProductRepo::getProductsByIds($relationIds)->jsonSerialize(),
+            'has_video' => $has_video,
+            'iconfont' => '<i class="iconfont">&#xe628;</i>'
         ];
 
         $data = hook_filter('product.show.data', $data);
+
+
+
 
         return view('product/product', $data);
     }

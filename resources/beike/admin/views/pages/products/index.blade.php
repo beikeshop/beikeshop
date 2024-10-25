@@ -4,11 +4,11 @@
 
 @section('content')
   @if ($errors->has('error'))
-    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4"/>
   @endif
 
   @if (session()->has('success'))
-    <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4" />
+    <x-admin-alert type="success" msg="{{ session('success') }}" class="mt-4"/>
   @endif
 
   <div id="product-app">
@@ -18,16 +18,19 @@
           <div class="row">
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.name') }}</label>
-              <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control" placeholder="{{ __('product.name') }}">
+              <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control"
+                     placeholder="{{ __('product.name') }}">
             </div>
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.sku') }}</label>
-              <input @keyup.enter="search" type="text" v-model="filter.sku" class="form-control" placeholder="{{ __('product.sku') }}">
+              <input @keyup.enter="search" type="text" v-model="filter.sku" class="form-control"
+                     placeholder="{{ __('product.sku') }}">
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
               <label class="filter-title">{{ __('product.model') }}</label>
-              <input @keyup.enter="search" type="text" v-model="filter.model" class="form-control" placeholder="{{ __('product.model') }}">
+              <input @keyup.enter="search" type="text" v-model="filter.model" class="form-control"
+                     placeholder="{{ __('product.model') }}">
             </div>
 
             <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
@@ -55,17 +58,19 @@
           <div class="row">
             <label class="filter-title"></label>
             <div class="col-auto">
-              <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
-              <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+              <button type="button" @click="search"
+                      class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+              <button type="button" @click="resetSearch"
+                      class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
             </div>
           </div>
         </div>
 
         <div class="d-flex justify-content-between my-4">
           @if ($type != 'trashed')
-          <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
-            <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
-          </a>
+            <a href="{{ admin_route('products.create') }}" class="me-1 nowrap">
+              <button class="btn btn-primary">{{ __('admin/product.products_create') }}</button>
+            </a>
           @else
             @if ($products->total())
               <button class="btn btn-primary" @click="clearRestore">{{ __('admin/product.clear_restore') }}</button>
@@ -74,11 +79,12 @@
 
           @if ($type != 'trashed' && $products->total())
             <div class="right nowrap">
-              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
-              @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
+                      @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
-              @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+                      @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
+              <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
+                      @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
             </div>
           @endif
         </div>
@@ -87,48 +93,50 @@
           <div class="table-push">
             <table class="table table-hover">
               <thead>
-                <tr>
-                  <th><input type="checkbox" v-model="allSelected" /></th>
-                  <th>{{ __('common.id') }}</th>
-                  <th>{{ __('product.image') }}</th>
-                  <th>{{ __('product.name') }}</th>
-                  <th>{{ __('product.price') }}</th>
-                  <th>
-                    <div class="d-flex align-items-center">
-                        {{ __('common.created_at') }}
-                      <div class="d-flex flex-column ml-1 order-by-wrap">
-                        <i class="el-icon-caret-top" @click="checkedOrderBy('created_at:asc')"></i>
-                        <i class="el-icon-caret-bottom" @click="checkedOrderBy('created_at:desc')"></i>
-                      </div>
+              <tr>
+                <th><input type="checkbox" v-model="allSelected"/></th>
+                <th>{{ __('common.id') }}</th>
+                <th>{{ __('product.image') }}</th>
+                <th>{{ __('product.name') }}</th>
+                <th>{{ __('product.price') }}</th>
+                <th>
+                  <div class="d-flex align-items-center">
+                    {{ __('common.created_at') }}
+                    <div class="d-flex flex-column ml-1 order-by-wrap">
+                      <i class="el-icon-caret-top" @click="checkedOrderBy('created_at:asc')"></i>
+                      <i class="el-icon-caret-bottom" @click="checkedOrderBy('created_at:desc')"></i>
                     </div>
-                  </th>
+                  </div>
+                </th>
 
-                  <th class="d-flex align-items-center">
-                    <div class="d-flex align-items-center">
-                        {{ __('common.sort_order') }}
-                      <div class="d-flex flex-column ml-1 order-by-wrap">
-                        <i class="el-icon-caret-top" @click="checkedOrderBy('position:asc')"></i>
-                        <i class="el-icon-caret-bottom" @click="checkedOrderBy('position:desc')"></i>
-                      </div>
+                <th class="d-flex align-items-center">
+                  <div class="d-flex align-items-center">
+                    {{ __('common.sort_order') }}
+                    <div class="d-flex flex-column ml-1 order-by-wrap">
+                      <i class="el-icon-caret-top" @click="checkedOrderBy('position:asc')"></i>
+                      <i class="el-icon-caret-bottom" @click="checkedOrderBy('position:desc')"></i>
                     </div>
-                  </th>
-                  @if ($type != 'trashed')
-                    <th>{{ __('common.status') }}</th>
-                  @endif
-                  @hook('admin.product.list.column')
-                  <th class="text-end">{{ __('common.action') }}</th>
-                </tr>
+                  </div>
+                </th>
+                @if ($type != 'trashed')
+                  <th>{{ __('common.status') }}</th>
+                @endif
+                @hook('admin.product.list.column')
+                <th class="text-end">{{ __('common.action') }}</th>
+              </tr>
               </thead>
               <tbody>
-                @foreach ($products_format as $product)
+              @foreach ($products_format as $product)
                 <tr>
-                  <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds" /></td>
+                  <td><input type="checkbox" :value="{{ $product['id'] }}" v-model="selectedIds"/></td>
                   <td>{{ $product['id'] }}</td>
                   <td>
-                    <div class="wh-60 border d-flex rounded-2 justify-content-center align-items-center"><img src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid max-h-100"></div>
+                    <div class="wh-60 border d-flex rounded-2 justify-content-center align-items-center"><img
+                        src="{{ $product['images'][0] ?? 'image/placeholder.png' }}" class="img-fluid max-h-100"></div>
                   </td>
                   <td>
-                    <a href="{{ $product['url'] }}" target="_blank" title="{{ $product['name'] }}" class="text-dark">{{ $product['name'] }}</a>
+                    <a href="{{ $product['url'] }}" target="_blank" title="{{ $product['name'] }}"
+                       class="text-dark">{{ $product['name'] }}</a>
                   </td>
                   <td>{{ $product['price_formatted'] }}</td>
                   <td>{{ $product['created_at'] }}</td>
@@ -136,30 +144,39 @@
                   @if ($type != 'trashed')
                     <td>
                       <div class="form-check form-switch">
-                        <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $product['active'] ? true : false }}" data-id="{{ $product['id'] }}" @change="turnOnOff($event)" {{ $product['active'] ? 'checked' : '' }}>
+                        @php
+                          $checked = $product['active'] ? 'checked' : '';
+                          $active =  $product['active'] ? true : false;
+                        @endphp
+                        <input class="form-check-input cursor-pointer" type="checkbox" role="switch"
+                               data-active="{{ $active }}" data-id="{{ $product['id'] }}"
+                               @change="turnOnOff($event)" {{ $checked }}>
                       </div>
                     </td>
                   @endif
                   @hook('admin.product.list.column_value')
                   <td class="text-end text-nowrap">
                     @if ($product['deleted_at'] == '')
-                      <a href="{{ admin_route('products.edit', [$product['id']]) }}" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
-                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm" @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
+                      <a href="{{ admin_route('products.edit', [$product['id']]) }}"
+                         class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
+                      <a href="javascript:void(0)" class="btn btn-outline-danger btn-sm"
+                         @click.prevent="deleteProduct({{ $loop->index }})">{{ __('common.delete') }}</a>
                       @hook('admin.product.list.action', $product)
                     @else
-                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
+                      <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
+                         @click.prevent="restoreProduct({{ $loop->index }})">{{ __('common.restore') }}</a>
                       @hook('admin.products.trashed.action')
                     @endif
                   </td>
                 </tr>
-                @endforeach
+              @endforeach
               </tbody>
             </table>
           </div>
 
           {{ $products->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
         @else
-          <x-admin-no-data />
+          <x-admin-no-data/>
         @endif
       </div>
     </div>
@@ -224,7 +241,8 @@
               layer.msg(res.message)
               location.reload();
             })
-          }).catch(()=>{});
+          }).catch(() => {
+          });
         },
 
         batchActive(type) {
@@ -237,7 +255,8 @@
               layer.msg(res.message)
               location.reload();
             })
-          }).catch(()=>{});
+          }).catch(() => {
+          });
         },
 
         search() {
@@ -266,7 +285,9 @@
               this.$message.success(res.message);
               location.reload();
             })
-          }).catch(()=>{});;
+          }).catch(() => {
+          });
+          ;
         },
 
         restoreProduct(index) {
@@ -278,7 +299,9 @@
             $http.put('products/restore', {id: id}).then((res) => {
               location.reload();
             })
-          }).catch(()=>{});;
+          }).catch(() => {
+          });
+          ;
         },
 
         clearRestore() {
@@ -288,7 +311,9 @@
             $http.post('products/trashed/clear').then((res) => {
               location.reload();
             })
-          }).catch(()=>{});;
+          }).catch(() => {
+          });
+          ;
         }
       }
     });

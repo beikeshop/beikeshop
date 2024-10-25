@@ -1,0 +1,34 @@
+<?php
+
+return [
+
+    //string
+    [
+        'name'      => 'xx',
+        'label_key' => 'xx',
+        'description_key' => 'xx',
+        'type'      => 'string',
+        'required'  => false,
+    ],
+
+    //select
+    [
+        'name'      => 'xx',
+        'label_key' => 'xx',
+        'description_key' => 'xx',
+        'type'      => 'select',
+        'options'   => [
+            ['value' => 'xx', 'label_key' => 'xx'],
+            ['value' => 'xx', 'label_key' => 'xx'],
+        ],
+        'required'  => true,
+    ],
+
+    //textarea
+     [
+            'name'      => 'xx',
+            'label_key' => 'xx',
+            'type'      => 'textarea',
+            'required'  => true,
+        ],
+];

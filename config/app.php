@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        App\Providers\RewriteServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -161,6 +162,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+
+        \App\Tools\LaravelModulesServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -255,6 +259,17 @@ return [
         'stripe',
         'wintopay',
         'youdao'
-    ]
+    ],
 
+    //html hook ignore dirs
+    'ignore_dirs' => [
+        '/themes/.*?/layout/',
+        '/themes/.*?/components/',
+        '/themes/.*?/errors/',
+        '/themes/.*?/design/',
+        '/resources/beike/admin/views/layouts/',
+        '/resources/beike/admin/views/components/',
+        '/resources/beike/admin/views/pages/login/',
+        '/resources/beike/admin/views/vendor/',
+    ],
 ];

@@ -173,6 +173,11 @@ class PluginController extends Controller
             $plugin = app('plugin')->getPluginOrFail($code);
             PluginRepo::installPlugin($plugin);
 
+            $aspectConfig = storage_path('aspect/config/html.config');
+            if (file_exists($aspectConfig)) {
+                @unlink($aspectConfig);
+            }
+
             return json_success(trans('common.success'));
         } catch (\Exception $e) {
             return json_fail($e->getMessage());

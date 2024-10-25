@@ -9,15 +9,17 @@
         <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="70px">
           <div>
             <el-form-item label="{{ __('customer.name') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.name" size="small" placeholder="{{ __('customer.name') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.name" size="small"
+                        placeholder="{{ __('customer.name') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('customer.email') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('customer.email') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.email" size="small"
+                        placeholder="{{ __('customer.email') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('customer.customer_group') }}">
               <el-select size="small" v-model="filter.customer_group_id" placeholder="{{ __('common.please_choose') }}">
                 <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
-                  :value="item.id + ''">
+                           :value="item.id + ''">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -36,17 +38,21 @@
         <div class="row">
           <label style="width: 70px"></label>
           <div class="col-auto">
-            <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
-            <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+            <button type="button" @click="search"
+                    class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+            <button type="button" @click="resetSearch"
+                    class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-between mb-4">
         @if ($type != 'trashed')
-          <button type="button" class="btn btn-primary" @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
+          <button type="button" class="btn btn-primary"
+                  @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
         @else
-          <button type="button" class="btn btn-primary" @click="checkedCustomerSclearRestore">{{ __('admin/product.clear_restore') }}</button>
+          <button type="button" class="btn btn-primary"
+                  @click="checkedCustomerSclearRestore">{{ __('admin/product.clear_restore') }}</button>
         @endif
       </div>
 
@@ -54,24 +60,24 @@
         <div class="table-push">
           <table class="table">
             <thead>
-              <tr>
-                <th>{{ __('common.id') }}</th>
-                <th>{{ __('customer.email') }}</th>
-                <th>{{ __('customer.name') }}</th>
-                <th>{{ __('customer.from') }}</th>
-                <th>{{ __('customer.customer_group') }}</th>
-                @if ($type != 'trashed')
+            <tr>
+              <th>{{ __('common.id') }}</th>
+              <th>{{ __('customer.email') }}</th>
+              <th>{{ __('customer.name') }}</th>
+              <th>{{ __('customer.from') }}</th>
+              <th>{{ __('customer.customer_group') }}</th>
+              @if ($type != 'trashed')
                 <th>{{ __('common.status') }}</th>
                 <th>{{ __('common.examine') }}</th>
-                @endif
-                <th>{{ __('common.created_at') }}</th>
-                @hook('admin.customer.list.column')
-                <th>{{ __('common.action') }}</th>
-              </tr>
+              @endif
+              <th>{{ __('common.created_at') }}</th>
+              @hook('admin.customer.list.column')
+              <th>{{ __('common.action') }}</th>
+            </tr>
             </thead>
             <tbody>
-              @foreach ($customers as $customer)
-              <tr data-item='@json($customer)'>
+            @foreach ($customers as $customer)
+              <tr data-item="{{ json_encode($customer) }}">
                 <td>{{ $customer['id'] }}</td>
                 <td>{{ $customer['email'] }}</td>
                 <td>
@@ -82,49 +88,66 @@
                 <td>{{ $customer['from'] }}</td>
                 <td>{{ $customer->customerGroup->description->name ?? '' }}</td>
                 @if ($type != 'trashed')
-                <td>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" data-active="{{ $customer['active'] ? 1 : 0 }}" data-id="{{ $customer['id'] }}" @change="turnOnOff($event)" {{ $customer['active'] ? 'checked' : '' }}>
-                  </div>
-                </td>
-                <td>
-                  <select class="form-select customer-status form-select-sm" data-id="{{ $customer['id'] }}" style="max-width: 100px">
-                    @foreach ($statuses as $status)
-                      <option value="{{ $status['code'] }}" {{ $status['code'] == $customer['status'] ? 'selected' : '' }}>
-                        {{ $status['label'] }}
-                      </option>
-                      @endforeach
-                  </select>
-                </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <x-admin-form-checkbox
+                        name=""
+                        class="form-check-input cursor-pointer"
+                        :value="$customer['active']"
+                        role="switch"
+                        data-active="{{ $customer['active'] ? 1 : 0 }}"
+                        data-id="{{ $customer['id'] }}"
+                        @change="turnOnOff($event)"
+                      />
+                    </div>
+                  </td>
+                  <td>
+                    <x-admin-form-select
+                      data-id="{{ $customer['id'] }}"
+                      style="max-width: 100px"
+                      title=""
+                      name=""
+                      class="form-select customer-status form-select-sm"
+                      :options="$statuses"
+                      :value="$customer['status']"
+                      key="code"
+                      label="label"
+                      format="0"
+                    />
+                  </td>
                 @endif
                 <td>{{ $customer['created_at'] }}</td>
                 @hook('admin.customer.list.column_value')
                 <td>
                   @if ($type != 'trashed')
-                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{ admin_route('customers.login', [$customer->id]) }}">{{ __('common.login') }}</a>
-                    <a class="btn btn-outline-secondary btn-sm" href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                    <a class="btn btn-outline-primary btn-sm" target="_blank"
+                       href="{{ admin_route('customers.login', [$customer->id]) }}">{{ __('common.login') }}</a>
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button"
+                            @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
                     @hook('admin.customer.list.action')
                   @else
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
-                    @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
-                    <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
+                       @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
+                    <button class="btn btn-outline-danger btn-sm ml-1" type="button"
+                            @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
                     @hook('admin.customer.trashed.action')
                   @endif
                 </td>
               </tr>
-              @endforeach
+            @endforeach
             </tbody>
           </table>
         </div>
         {{ $customers->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
       @else
-        <x-admin-no-data />
+        <x-admin-no-data/>
       @endif
     </div>
 
     <el-dialog title="{{ __('admin/customer.customers_create') }}" :visible.sync="dialogCustomers.show" width="670px"
-      @close="closeCustomersDialog('form')" :close-on-click-modal="false">
+               @close="closeCustomersDialog('form')" :close-on-click-modal="false">
       <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="120px">
         <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
           <el-input v-model="dialogCustomers.form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
@@ -138,7 +161,7 @@
         <el-form-item label="{{ __('customer.customer_group') }}">
           <el-select v-model="dialogCustomers.form.customer_group_id" placeholder="">
             <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
-              :value="item.id">
+                       :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
@@ -179,12 +202,24 @@
         },
 
         rules: {
-          name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}', trigger: 'blur'}, ],
+          name: [{
+            required: true,
+            message: '{{ __('common.error_required', ['name' => __('admin/customer.user_name')] ) }}',
+            trigger: 'blur'
+          },],
           email: [
-            {required: true, message: '{{ __('common.error_required', ['name' => __('common.email')] ) }}', trigger: 'blur'},
-            {type: 'email', message: '{{ __('admin/customer.error_email') }}' ,trigger: 'blur'},
+            {
+              required: true,
+              message: '{{ __('common.error_required', ['name' => __('common.email')] ) }}',
+              trigger: 'blur'
+            },
+            {type: 'email', message: '{{ __('admin/customer.error_email') }}', trigger: 'blur'},
           ],
-          password: [{required: true,message: '{{ __('common.error_required', ['name' => __('shop/login.password')] ) }}',trigger: 'blur'}, ],
+          password: [{
+            required: true,
+            message: '{{ __('common.error_required', ['name' => __('shop/login.password')] ) }}',
+            trigger: 'blur'
+          },],
         },
 
         url: '{{ $type == 'trashed' ? admin_route('customers.trashed') : admin_route('customers.index') }}',
@@ -232,7 +267,8 @@
               this.$message.success(res.message);
               window.location.reload();
             })
-          }).catch(()=>{})
+          }).catch(() => {
+          })
         },
 
         // 清空回收站
@@ -246,7 +282,8 @@
               this.$message.success(res.message);
               window.location.reload();
             })
-          }).catch(()=>{})
+          }).catch(() => {
+          })
         },
 
         restore(id, index) {
@@ -284,7 +321,8 @@
               self.$message.success(res.message);
               window.location.reload();
             })
-          }).catch(()=>{})
+          }).catch(() => {
+          })
         },
 
         closeCustomersDialog(form) {
@@ -303,13 +341,13 @@
       }
     })
 
-    $('.customer-status').change(function(event) {
-    const id = $(this).data('id');
-    const status = $(this).val();
-    const self = $(this);
-    $http.put(`customers/${id}/update_status`, {status: status}).then((res) => {
-      layer.msg('修改状态成功');
-    })
-  });
+    $('.customer-status').change(function (event) {
+      const id = $(this).data('id');
+      const status = $(this).val();
+      const self = $(this);
+      $http.put(`customers/${id}/update_status`, {status: status}).then((res) => {
+        layer.msg('修改状态成功');
+      })
+    });
   </script>
 @endpush

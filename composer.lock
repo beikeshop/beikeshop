@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c2863be24fab80ad86dc33a743a67f3b",
+    "content-hash": "d7b5b6235de0c6c72a1f8e18707b097b",
     "packages": [
         {
             "name": "brick/math",
@@ -1755,6 +1755,125 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+            "name": "jaeger/g-http",
+            "version": "V2.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.tencent.com/repository/composer/jaeger/g-http/V2.0.1/jaeger-g-http-V2.0.1.zip",
+                "reference": "29cb537c57f230980ca10622de190f04831e35e6",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0 || ^7.0",
+                "php": ">=8.1",
+                "symfony/cache": "^6.4 || ^7.0"
+            },
+            "require-dev": {
+                "predis/predis": "^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaeger\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaeger",
+                    "email": "JaegerCode@gmail.com"
+                }
+            ],
+            "description": "Simple Http client base on GuzzleHttp",
+            "time": "2024-06-14T08:13:32+00:00"
+        },
+        {
+            "name": "jaeger/phpquery-single",
+            "version": "1.1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.tencent.com/repository/composer/jaeger/phpquery-single/1.1.1/jaeger-phpquery-single-1.1.1.zip",
+                "reference": "39a650ade692a6b480c22220dce0c198d6a946fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "phpQuery.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobiasz Cudnik",
+                    "email": "tobiasz.cudnik@gmail.com",
+                    "homepage": "https://github.com/TobiaszCudnik",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jaeger",
+                    "role": "Packager"
+                }
+            ],
+            "description": "phpQuery单文件版本，是Querylist的依赖(http://querylist.cc/)，phpQuery项目主页:http://code.google.com/p/phpquery/",
+            "homepage": "http://code.google.com/p/phpquery/",
+            "time": "2022-03-26T15:01:16+00:00"
+        },
+        {
+            "name": "jaeger/querylist",
+            "version": "V4.4.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://mirrors.tencent.com/repository/composer/jaeger/querylist/V4.4.5/jaeger-querylist-V4.4.5.zip",
+                "reference": "87b405ecde30101ec8797c4347f05f9ee0b95eb2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "jaeger/g-http": "^2.0",
+                "jaeger/phpquery-single": "^1",
+                "php": ">=8.1",
+                "symfony/var-dumper": ">3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Collect/Support/helpers.php",
+                    "src/Collect/Support/alias.php"
+                ],
+                "psr-4": {
+                    "QL\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaeger",
+                    "email": "JaegerCode@gmail.com"
+                }
+            ],
+            "description": "Simple, elegant, extensible PHP Web Scraper (crawler/spider),Use the css3 dom selector,Based on phpQuery! 简洁、优雅、可扩展的PHP采集工具(爬虫)，基于phpQuery。",
+            "homepage": "http://querylist.cc",
+            "keywords": [
+                "QueryList",
+                "phpQuery",
+                "spider"
+            ],
+            "time": "2024-07-16T07:11:08+00:00"
+        },
+        {
             "name": "jaybizzle/crawler-detect",
             "version": "v1.2.116",
             "source": {
@@ -3432,30 +3551,19 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.8.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf"
-            },
+            "version": "2.9.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f47dcf3c70c584de14f21143c55d9939631bc6cf",
-                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "url": "https://mirrors.tencent.com/repository/composer/masterminds/html5/2.9.0/masterminds-html5-2.9.0.zip",
+                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
+                "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8"
+                "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8 || ^9"
             },
             "type": "library",
             "extra": {
@@ -3468,7 +3576,6 @@
                     "Masterminds\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3497,11 +3604,7 @@
                 "serializer",
                 "xml"
             ],
-            "support": {
-                "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
-            },
-            "time": "2023-05-10T11:58:31+00:00"
+            "time": "2024-03-31T07:05:07+00:00"
         },
         {
             "name": "maxmind-db/reader",

@@ -40,7 +40,10 @@ class Manager
     public function getPlugins(): Collection
     {
         if ($this->plugins) {
-            return $this->plugins;
+            if (!app()->runningInConsole())
+            {
+                return $this->plugins;
+            }
         }
 
         $existed = $this->getPluginsConfig();

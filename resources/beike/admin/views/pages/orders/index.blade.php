@@ -4,12 +4,13 @@
 
 @section('content')
   @if ($errors->has('error'))
-    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+    <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4"/>
   @endif
 
   @section('page-title-right')
     @if ($type != 'trashed')
-      <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
+      <button type="button" class="btn btn-outline-secondary btn-print" onclick="app.btnPrint()"><i
+          class="bi bi-printer-fill"></i> {{ __('admin/order.btn_print') }}</button>
       @hook('admin.order.list.buttons')
     @endif
   @endsection
@@ -20,14 +21,17 @@
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
           <div>
             <el-form-item label="{{ __('order.number') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.number" size="small" placeholder="{{ __('order.number') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.number" size="small"
+                        placeholder="{{ __('order.number') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('order.customer_name') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.customer_name" size="small" placeholder="{{ __('order.customer_name') }}">
+              <el-input @keyup.enter.native="search" v-model="filter.customer_name" size="small"
+                        placeholder="{{ __('order.customer_name') }}">
               </el-input>
             </el-form-item>
             <el-form-item label="{{ __('order.email') }}">
-              <el-input @keyup.enter.native="search" v-model="filter.email" size="small" placeholder="{{ __('order.email') }}"></el-input>
+              <el-input @keyup.enter.native="search" v-model="filter.email" size="small"
+                        placeholder="{{ __('order.email') }}"></el-input>
             </el-form-item>
             <el-form-item label="{{ __('common.status') }}" class="el-input--small">
               <select v-model="filter.status" class="form-select wp-100 bg-white bs-el-input-inner-sm">
@@ -41,13 +45,15 @@
           <el-form-item label="{{ __('order.created_at') }}">
             <el-form-item>
               <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(1)" v-model="filter.start" style="width: 100%;">
+                              placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(1)"
+                              v-model="filter.start" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
             <span>-</span>
             <el-form-item>
               <el-date-picker format="yyyy-MM-dd" value-format="yyyy-MM-dd" type="date" size="small"
-                placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(0)" v-model="filter.end" style="width: 100%;">
+                              placeholder="{{ __('common.pick_datetime') }}" @change="pickerDate(0)"
+                              v-model="filter.end" style="width: 100%;">
               </el-date-picker>
             </el-form-item>
           </el-form-item>
@@ -57,11 +63,11 @@
           <label class="wp-100"></label>
           <div class="col-auto">
             <button type="button" @click="search"
-              class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
+                    class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="exportOrder"
-              class="btn btn-outline-primary btn-sm ms-1">{{ __('common.export') }}</button>
+                    class="btn btn-outline-primary btn-sm ms-1">{{ __('common.export') }}</button>
             <button type="button" @click="resetSearch"
-              class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+                    class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
           </div>
         </div>
       </div>
@@ -70,60 +76,62 @@
         <div class="table-push">
           <table class="table">
             <thead>
-              <tr>
-                <th><input type="checkbox" v-model="allSelected" /></th>
-                <th>{{ __('order.id') }}</th>
-                <th>{{ __('order.number') }}</th>
-                <th>{{ __('order.customer_name') }}</th>
-                <th>{{ __('order.payment_method') }}</th>
-                <th>{{ __('order.status') }}</th>
-                <th>{{ __('order.total') }}</th>
-                <th>{{ __('order.created_at') }}</th>
-                <th>{{ __('order.updated_at') }}</th>
-                <th>{{ __('common.action') }}</th>
-              </tr>
+            <tr>
+              <th><input type="checkbox" v-model="allSelected"/></th>
+              <th>{{ __('order.id') }}</th>
+              <th>{{ __('order.number') }}</th>
+              <th>{{ __('order.customer_name') }}</th>
+              <th>{{ __('order.payment_method') }}</th>
+              <th>{{ __('order.status') }}</th>
+              <th>{{ __('order.total') }}</th>
+              <th>{{ __('order.created_at') }}</th>
+              <th>{{ __('order.updated_at') }}</th>
+              <th>{{ __('common.action') }}</th>
+            </tr>
             </thead>
             <tbody>
-              @if (count($orders))
-                @foreach ($orders as $order)
-                  <tr data-hook-id={{ $order->id }}>
-                    <td><input type="checkbox" :value="{{ $order['id'] }}" v-model="selectedIds" /></td>
-                    <td>{{ $order->id }}</td>
-                    <td>{{ $order->number }}</td>
-                    <td>{{ sub_string($order->customer_name, 14) }}</td>
-                    <td>{{ $order->payment_method_name }}</td>
-                    <td>{{ $order->status_format }}</td>
-                    <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-                    <td>{{ $order->created_at }}</td>
-                    <td>{{ $order->updated_at }}</td>
-                    <td>
-                      @if (!$order->deleted_at)
+            @if (count($orders))
+              @foreach ($orders as $order)
+                <tr data-hook-id="{{ $order->id }}">
+                  <td><input type="checkbox" :value="{{ $order['id'] }}" v-model="selectedIds"/></td>
+                  <td>{{ $order->id }}</td>
+                  <td>{{ $order->number }}</td>
+                  <td>{{ sub_string($order->customer_name, 14) }}</td>
+                  <td>{{ $order->payment_method_name }}</td>
+                  <td>{{ $order->status_format }}</td>
+                  <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+                  <td>{{ $order->created_at }}</td>
+                  <td>{{ $order->updated_at }}</td>
+                  <td>
+                    @if (!$order->deleted_at)
                       <a href="{{ admin_route('orders.show', [$order->id]) }}"
-                        class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}
+                         class="btn btn-outline-secondary btn-sm">{{ __('common.view') }}
                       </a>
-                      <button type="button" data-id="{{ $order->id }}" class="btn btn-outline-danger btn-sm delete-btn">{{ __('common.delete') }}</button>
-                      @else
-                      <button type="button" data-id="{{ $order->id }}" class="btn btn-outline-secondary btn-sm restore-btn">{{ __('common.restore') }}</button>
+                      <button type="button" data-id="{{ $order->id }}"
+                              class="btn btn-outline-danger btn-sm delete-btn">{{ __('common.delete') }}</button>
+                    @else
+                      <button type="button" data-id="{{ $order->id }}"
+                              class="btn btn-outline-secondary btn-sm restore-btn">{{ __('common.restore') }}</button>
                       @hook('admin.products.trashed.action')
-                      @endif
+                    @endif
 
-                      @hook('admin.order.list.action')
-                    </td>
-                  </tr>
-                @endforeach
-              @else
-                <tr>
-                  <td colspan="9" class="border-0">
-                    <x-admin-no-data />
+                    @hook('admin.order.list.action')
                   </td>
                 </tr>
-              @endif
+              @endforeach
+            @else
+              <tr>
+                <td colspan="9" class="border-0">
+                  <x-admin-no-data/>
+                </td>
+              </tr>
+            @endif
             </tbody>
           </table>
         </div>
         {{ $orders->withQueryString()->links('admin::vendor/pagination/bootstrap-4') }}
       @else
-        <x-admin-no-data />
+        <x-admin-no-data/>
       @endif
     </div>
   </div>
@@ -153,21 +161,21 @@
 
       watch: {
         "filter.start": {
-          handler(newVal,oldVal) {
-            if(!newVal) {
+          handler(newVal, oldVal) {
+            if (!newVal) {
               this.filter.start = ''
             }
           }
         },
         "filter.end": {
-          handler(newVal,oldVal) {
-            if(!newVal) {
+          handler(newVal, oldVal) {
+            if (!newVal) {
               this.filter.end = ''
             }
           }
         },
         "selectedIds": {
-          handler(newVal,oldVal) {
+          handler(newVal, oldVal) {
             this.btnPrintUrl = `{{ admin_route('orders.shipping.get') }}?selected=${newVal}`;
           }
         }
@@ -193,14 +201,15 @@
       methods: {
         btnPrint() {
           if (!this.selectedIds.length) {
-            return layer.msg('{{ __('admin/order.order_print_error') }}', ()=>{});
+            return layer.msg('{{ __('admin/order.order_print_error') }}', () => {
+            });
           }
           window.open(this.btnPrintUrl);
         },
 
         pickerDate(type) {
-          if(this.filter.end && this.filter.start > this.filter.end) {
-             if(type) {
+          if (this.filter.end && this.filter.start > this.filter.end) {
+            if (type) {
               this.filter.start = ''
             } else {
               this.filter.end = ''
@@ -224,30 +233,30 @@
     });
   </script>
 
-<script>
-  $('.delete-btn').click(function(event) {
-    const id = $(this).data('id');
-    const self = $(this);
+  <script>
+    $('.delete-btn').click(function (event) {
+      const id = $(this).data('id');
+      const self = $(this);
 
-    layer.confirm('{{ __('common.confirm_delete') }}', {
-      title: "{{ __('common.text_hint') }}",
-      btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
-      area: ['400px'],
-      btn2: () => {
-        $http.delete(`orders/${id}`).then((res) => {
-          layer.msg(res.message);
-          window.location.reload();
-        })
-      }
-    })
-  });
+      layer.confirm('{{ __('common.confirm_delete') }}', {
+        title: "{{ __('common.text_hint') }}",
+        btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+        area: ['400px'],
+        btn2: () => {
+          $http.delete(`orders/${id}`).then((res) => {
+            layer.msg(res.message);
+            window.location.reload();
+          })
+        }
+      })
+    });
 
-  $('.restore-btn').click(function(event) {
-    const id = $(this).data('id');
+    $('.restore-btn').click(function (event) {
+      const id = $(this).data('id');
 
-    $http.put(`orders/restore/${id}`).then((res) => {
-      window.location.reload();
-    })
-  });
-</script>
+      $http.put(`orders/restore/${id}`).then((res) => {
+        window.location.reload();
+      })
+    });
+  </script>
 @endpush
