@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/common.customer'))
+@section('title', __('admin/common.customers_index'))
 
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>

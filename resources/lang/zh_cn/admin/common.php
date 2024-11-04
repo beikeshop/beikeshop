@@ -93,7 +93,7 @@ return [
     'orders_trashed'         => '回收站',
     'rmas_index'             => '售后管理',
     'rma_reasons_index'      => '售后原因',
-    'customers_index'        => '客户列表',
+    'customers_index'        => '客户管理',
     'customer_groups_index'  => '客户组',
     'countries_index'        => '国家/地区',
     'zones_index'            => '省份管理',
