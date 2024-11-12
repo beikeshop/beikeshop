@@ -243,5 +243,18 @@ return [
 
     'langs' => [
         'de','en','es','fr','id','it','ja','ko','ru','zh_cn','zh_hk'
+    ],
+
+    'free_plugin_codes' => [
+        'bestseller',
+        'flat_shipping',
+        'latest_products',
+        'openai',
+        'paypal',
+        'social',
+        'stripe',
+        'wintopay',
+        'youdao'
     ]
+
 ];

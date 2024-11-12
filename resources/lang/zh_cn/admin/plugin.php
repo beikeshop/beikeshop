@@ -36,4 +36,5 @@ return [
     'theme'                 => '主题模板',
     'translator'            => '翻译工具',
     'ticket'                => '技术支持',
+    'update'                => '更新'
 ];

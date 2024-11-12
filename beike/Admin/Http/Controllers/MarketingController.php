@@ -131,6 +131,11 @@ class MarketingController
     {
         try {
             $pluginCode = $request->code;
+
+            if ($request->get('type') == 'update'){
+                app('plugin')->getPluginOrFail($pluginCode);
+            }
+
             $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
 
             if ($plugin['data']['status'] == 'pending') {
@@ -138,6 +143,10 @@ class MarketingController
             }
 
             MarketingService::getInstance()->download($pluginCode);
+
+            if ($request->get('type') == 'update'){
+                return json_success(trans('admin/marketing.update_success'));
+            }
 
             return json_success(trans('admin/marketing.download_success'));
         } catch (\Exception $e) {

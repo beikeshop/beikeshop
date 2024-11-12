@@ -52,6 +52,8 @@ class Plugin implements \ArrayAccess, Arrayable
 
     protected $columns;
 
+    protected $canUpdate;
+
     public function __construct(string $path, array $packageInfo)
     {
         $this->path        = $path;
@@ -355,6 +357,10 @@ class Plugin implements \ArrayAccess, Arrayable
         if ($status == 'fail') {
             SettingRepo::update('plugin', $this->code, ['status' => false]);
 
+            if (str_contains($license['message'], 'not authorized')) {
+                throw new \Exception('此插件未经授权。请在插件市场购买。');
+            }
+
             throw new \Exception($license['message'] ?? '插件授权未知错误, 请联系 beikeshop.com');
         }
 
@@ -408,5 +414,16 @@ class Plugin implements \ArrayAccess, Arrayable
     public function offsetUnset($offset): void
     {
         unset($this->packageInfo[$offset]);
+    }
+
+    public function setCanUpdate($flag): Plugin
+    {
+        $this->canUpdate = $flag;
+
+        return $this;
+    }
+
+    public function getCanUpdate(): bool{
+        return $this->canUpdate;
     }
 }

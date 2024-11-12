@@ -18,6 +18,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ZanySoft\Zip\Zip;
+use Beike\Admin\Services\MarketingService;
 
 class Manager
 {
@@ -59,6 +60,10 @@ class Manager
 
             if ($plugins->has($plugin->code)) {
                 continue;
+            }
+            $plugin->setCanUpdate(false);
+            if ($this->canUpdate($plugin->code)) {
+                $plugin->setCanUpdate(true);
             }
 
             $plugins->put($plugin->code, $plugin);
@@ -206,4 +211,19 @@ class Manager
         $zipFile = Zip::open($newFilePath);
         $zipFile->extract(base_path('plugins'));
     }
+
+    private function canUpdate(mixed $code): bool
+    {
+        if (in_array($code, config('app.free_plugin_codes'))) {
+            return false;
+        }
+
+        $plugin = \Beike\Models\Plugin::query()->where('code', $code)->count();
+        if (!$plugin) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
