@@ -63,6 +63,7 @@
             </x-admin::form.row>
 
             <x-admin-form-switch name="guide" title="{{ __('admin/guide.heading_title') }}" value="{{ old('guide', system_setting('base.guide', '1')) }}" />
+            <x-admin-form-switch name="maintenance_mode" title="{{ __('admin/maintenance.heading_title') }}" value="{{ old('maintenance_mode', system_setting('base.maintenance_mode', '0')) }}" />
             @hook('admin.setting.general.after')
           </div>
 
