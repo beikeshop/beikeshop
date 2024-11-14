@@ -1,6 +1,5 @@
 <template id="module-editor-rich-text-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_content') }}</div>
       <rich-text-i18n v-model="form.text"></rich-text-i18n>

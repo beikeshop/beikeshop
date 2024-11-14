@@ -2,15 +2,12 @@
 
 @section('title', __('admin/common.currency'))
 
-@section('page-bottom-btns')
-  <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
-@endsection
-
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+        <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
       </div>
       <div class="table-push">
         <table class="table">
@@ -31,7 +28,10 @@
           <tbody v-if="currencies.length">
             <tr v-for="language, index in currencies" :key="index">
               <td>@{{ language.id }}</td>
-              <td>@{{ language.name }}</td>
+              <td>
+                <div>@{{ language.name }}</div>
+                <span v-if="language.code == defaultCurrency" class="badge text-bg-success text-white">{{ __('admin/setting.default_currency') }}</span>
+              </td>
               <td>@{{ language.code }}</td>
               <td>@{{ language.symbol_left }}</td>
               <td>@{{ language.symbol_right }}</td>
@@ -82,8 +82,12 @@
           <el-input v-model="dialog.form.value" placeholder="{{ __('currency.value') }}"></el-input>
         </el-form-item>
 
+        <el-form-item label="{{ __('admin/setting.default_currency') }}">
+          <el-switch v-model="dialog.form.default_currency" :active-value="1" :inactive-value="0" :disabled="dialog.form.code == defaultCurrency"></el-switch>
+        </el-form-item>
+
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
+          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="dialog.form.code == defaultCurrency"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
@@ -105,6 +109,8 @@
       data: {
         currencies: @json($currencies ?? []),
 
+        defaultCurrency: @json(system_setting('base.currency')),
+
         dialog: {
           show: false,
           index: null,
@@ -116,6 +122,7 @@
             symbol_left: '',
             symbol_right: '',
             decimal_place: '',
+            default_currency: false,
             value: '',
             status: 1,
           },
@@ -136,7 +143,9 @@
           this.dialog.index = index
 
           if (type == 'edit') {
-            this.dialog.form = JSON.parse(JSON.stringify(this.currencies[index]))
+            let form = JSON.parse(JSON.stringify(this.currencies[index]));
+            form.default_currency = Number(this.currencies[index].code == this.defaultCurrency)
+            this.dialog.form = form
           }
         },
 
@@ -157,6 +166,10 @@
                 this.currencies.push(res.data)
               } else {
                 this.currencies[this.dialog.index] = res.data
+              }
+
+              if (self.dialog.form.default_currency) {
+                self.defaultCurrency = self.dialog.form.code
               }
 
               this.dialog.show = false

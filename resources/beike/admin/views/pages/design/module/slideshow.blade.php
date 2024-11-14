@@ -1,6 +1,5 @@
 <template id="module-editor-slideshow-template">
   <div>
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_full_screen') }}</div>
       <el-switch v-model="form.full"></el-switch>

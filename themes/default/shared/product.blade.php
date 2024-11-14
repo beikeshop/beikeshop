@@ -6,8 +6,8 @@
       <div class="image-old">
         <img
           data-sizes="auto"
-          data-src="{{ $product['images'][0] ?? image_resize('', 400, 400) }}"
-          src="{{ image_resize('', 400, 400) }}"
+          data-src="{{ $product['images'][0] ?? image_resize('', 500, 500) }}"
+          src="{{ image_resize('', 500, 500) }}"
           class="img-fluid lazyload">
       </div>
     </a>

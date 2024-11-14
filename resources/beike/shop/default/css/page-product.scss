@@ -325,6 +325,19 @@ body.page-product {
       .quantity-btns {
         flex: 1;
         display: flex;
+        align-items: center;
+      }
+
+      .add-cart-btns {
+        padding: 0 10px;
+        > .btn {
+          margin: 0 0 6px;
+          width: 100%;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
       }
 
       .add-cart {
@@ -335,7 +348,7 @@ body.page-product {
       }
 
       .btn-buy-now {
-        margin: 0 10px !important;
+        margin: 0 10px;
       }
 
       .add-wishlist {

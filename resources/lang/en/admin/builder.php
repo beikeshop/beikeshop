@@ -231,6 +231,13 @@ return [
     'mobile_search_fixed'              => 'Fixed at the top of the screen (default)',
     'modules_set_page'                 => 'Configuration article',
     'modules_please_pages'             => 'Please add articles',
+    'scroll_text'                      => 'Scrolling Text',
+    'scroll_text_color'                => 'color',
+    'scroll_text_bg'                   => 'Background Color',
+    'scroll_text_size'                 => 'Font Size',
+    'scroll_text_padding'              => 'Padding',
+    'header_ads'                   => 'Header Ads',
+    'header_ads_bg'                   => 'Ad background color',
 
     // Menu
     'main_menu'                        => 'Main Menu',

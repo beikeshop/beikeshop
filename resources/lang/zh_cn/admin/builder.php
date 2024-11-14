@@ -248,6 +248,14 @@ return [
     'menu'                             => '菜单',
     'add_submenu_link'                 => '添加子菜单链接',
     'type'                             => '类型',
+    'scroll_text'                      => '滚动文字',
+    'scroll_text_color'                => '颜色',
+    'scroll_text_bg'                   => '背景色',
+    'scroll_text_size'                   => '大小',
+    'scroll_text_padding'                   => '上下边距',
+    'header_ads'                   => '头部广告',
+    'header_ads_bg'                   => '广告背景色',
+    'header_ads_info'                   => '广告内容',
 
     // footer
     'footer_edit'                      => '页尾编辑器',

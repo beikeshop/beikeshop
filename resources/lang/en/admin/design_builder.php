@@ -10,19 +10,23 @@
  */
 
 return [
-    'module_brand'          => 'Brand',
-    'module_banner'         => 'Banner',
-    'module_four_image_pro' => 'For Image PRO',
-    'module_image_402'      => 'Four image Pro-2',
-    'module_slideshow'      => 'Slideshow',
-    'module_tab_products'   => 'Tab Products',
-    'module_product'        => 'Products',
-    'module_icons'          => 'Icons',
-    'module_rich_text'      => 'Rich Text',
-    'module_page'           => 'Article module',
-    'theme_index'           => 'Template settings',
-    'design_menu_index'     => 'Navigation settings',
-    'design_index'          => 'Home Decoration',
-    'design_footer_index'   => 'Last page decoration',
-    'design_app_home_index' => 'APP homepage design'
+    'module_brand'              => 'Brand',
+    'module_banner'             => 'Banner',
+    'module_four_image_pro'     => 'For Image PRO',
+    'module_image_402'          => 'Four image Pro-2',
+    'module_image_403'          => 'Four image - 3',
+    'module_slideshow'          => 'Slideshow',
+    'module_tab_products'       => 'Tab Products',
+    'module_product'            => 'Products',
+    'module_icons'              => 'Icons',
+    'module_rich_text'          => 'Rich Text',
+    'module_page'               => 'Article module',
+    'theme_index'               => 'Template settings',
+    'design_menu_index'         => 'Navigation settings',
+    'design_index'              => 'Home Decoration',
+    'design_header_index'       => 'Header decoration',
+    'design_footer_index'       => 'Last page decoration',
+    'design_app_home_index'     => 'APP homepage design',
+    'module_img_text_slideshow' => 'Graphic slides',
+    'module_img_text_banner'    => 'Graphic banner'
 ];

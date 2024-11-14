@@ -22,6 +22,7 @@ use Illuminate\View\Component;
 class Breadcrumb extends Component
 {
     public Collection $breadcrumbs;
+    public string $isFull;
 
     /**
      * Create a new component instance.
@@ -29,7 +30,7 @@ class Breadcrumb extends Component
      * @return void
      * @throws \Exception
      */
-    public function __construct($type, $value, array $text = [])
+    public function __construct($type, $value, array $text = [], bool $isFull = false)
     {
         $breadcrumbs[] = [
             'title' => trans('shop/common.home'),
@@ -55,6 +56,7 @@ class Breadcrumb extends Component
         }
 
         $this->breadcrumbs = collect($breadcrumbs);
+        $this->isFull = $isFull;
     }
 
     /**

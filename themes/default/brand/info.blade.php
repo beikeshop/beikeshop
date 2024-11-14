@@ -3,10 +3,10 @@
 @section('title', $brand->name)
 
 @section('content')
-<x-shop-breadcrumb type="brand" :value="$brand" />
-<div class="container">
+<x-shop-breadcrumb type="brand" :value="$brand" :is-full="true" />
+<div class="container-fluid">
   @if (count($products_format))
-  <div class="row">
+  <div class="row g-3 g-lg-4">
     @foreach ($products_format as $product)
     <div class="col-6 col-md-3">@include('shared.product')</div>
     @endforeach

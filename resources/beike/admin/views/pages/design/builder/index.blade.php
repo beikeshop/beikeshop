@@ -19,7 +19,7 @@
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
   <script src="{{ asset('vendor/element-ui/index.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/element-ui/index-blue.css') }}">
   @if (locale() != 'zh_cn')
     <script src="{{ asset('vendor/element-ui/language/' . locale() . '.js') }}"></script>
   @endif
@@ -42,44 +42,59 @@
 </head>
 
 <body class="page-design">
-  <div class="design-box">
-    <div :class="['sidebar-edit-wrap', !design.sidebar ? 'v-hide' : '']" id="app" v-cloak v-loading="!design.ready">
-      <div class="switch-design" :class="['hide-design', !design.sidebar ? 'v-hide' : '']" @click="design.sidebar = !design.sidebar"><i class="iconfont">@{{ design.sidebar ? '&#xe659;' : '&#xe65b;' }}</i></div>
-
-      <div class="design-head">
-        <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>{{ __('common.return') }}</div>
-        <div @click="viewHome"><i class="el-icon-switch-button"></i>{{ __('common.exit') }}</div>
-        <div @click="saveButtonClicked"><i class="el-icon-check"></i>{{ __('common.save') }}</div>
+  <div class="design-content" id="app" v-cloak v-loading="!design.ready">
+    <div class="design-head">
+      {{-- <div v-if="design.editType != 'add'" @click="showAllModuleButtonClicked"><i class="el-icon-back"></i>{{ __('common.return') }}</div> --}}
+      <div @click="viewHome">
+        <div class="btn btn-exit"><i class="el-icon-switch-button"></i>{{ __('common.exit') }}</div>
       </div>
-      <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
-        <component
-          :is="editingModuleComponent"
-          :key="design.editingModuleIndex"
-          :module="form.modules[design.editingModuleIndex].content"
-          @on-changed="moduleUpdated"
-        ></component>
+      <div class="head-centre">
+        <div class="device-wrap">
+          <div :class="device == 'pc' ? 'active' : ''" @click="device = 'pc'"><i class="el-icon-monitor"></i></div>
+          <div :class="device == 'mb' ? 'active' : ''" @click="device = 'mb'"><i class="el-icon-mobile-phone"></i></div>
+        </div>
       </div>
-
-      <div class="modules-list">
-        <div style="padding: 5px; color: #666;"><i class="el-icon-microphone"></i> {{ __('admin/builder.modules_instructions') }}</div>
-
-        <el-row v-show="design.editType == 'add'" id="module-list-wrap">
-          <el-col :span="12" v-for="(item, index) in source.modules" :key="index" class="iframe-modules-sortable-ghost">
-            <div @click="addModuleButtonClicked(item.code)" class="module-list" :data-code="item.code">
-              <div class="module-info">
-                <div class="icon">
-                  <i :style="item.style" class="iconfont" v-if="isIcon(item.icon)" v-html="item.icon"></i>
-                  <div class="img-icon" v-else><img :src="item.icon" class="img-fluid"></div>
-                </div>
-                <div class="name">@{{ item.name }}</div>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
+      <div @click="saveButtonClicked">
+        <div class="btn btn-save"><i class="el-icon-check"></i>{{ __('common.save') }}</div>
       </div>
     </div>
-    <div class="preview-iframe">
-      <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
+    <div class="design-box">
+      <div :class="['sidebar-edit-wrap', !design.sidebar ? 'v-hide' : '']">
+        <div class="switch-design" :class="['hide-design', !design.sidebar ? 'v-hide' : '']" @click="design.sidebar = !design.sidebar"><i class="iconfont">@{{ design.sidebar ? '&#xe659;' : '&#xe65b;' }}</i></div>
+        <div class="module-edit" v-if="form.modules.length > 0 && design.editType == 'module'">
+          <div class="module-editor-setting-row">
+            <span class="btn-back" @click="showAllModuleButtonClicked"><i class="el-icon-arrow-left"></i>{{ __('common.return') }}</span>
+            <span class="title">{{ __('admin/builder.text_set_up') }}</span>
+          </div>
+          <component
+            :is="editingModuleComponent"
+            :key="design.editingModuleIndex"
+            :module="form.modules[design.editingModuleIndex].content"
+            @on-changed="moduleUpdated"
+          ></component>
+        </div>
+
+        <div class="modules-list">
+          <div style="padding: 5px; color: #666;"><i class="el-icon-microphone"></i> {{ __('admin/builder.modules_instructions') }}</div>
+
+          <el-row v-show="design.editType == 'add'" id="module-list-wrap">
+            <el-col :span="12" v-for="(item, index) in source.modules" :key="index" class="iframe-modules-sortable-ghost">
+              <div @click="addModuleButtonClicked(item.code)" class="module-list" :data-code="item.code">
+                <div class="module-info">
+                  <div class="icon">
+                    <i :style="item.style" class="iconfont" v-if="isIcon(item.icon)" v-html="item.icon"></i>
+                    <div class="img-icon" v-else><img :src="item.icon" class="img-fluid"></div>
+                  </div>
+                  <div class="name">@{{ item.name }}</div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+      <div class="preview-iframe">
+        <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" :width="device == 'pc' ? '100%' : '470px'" height="100%"></iframe>
+      </div>
     </div>
   </div>
 
@@ -95,98 +110,6 @@
 
       return obj;
     }
-
-    // iframe 操作
-    var previewWindow = null;
-    $('#preview-iframe').on('load', function(event) {
-      previewWindow = document.getElementById("preview-iframe").contentWindow;
-      app.design.ready = true;
-
-      // 编辑模块
-      $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
-        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
-        const modules = app.form.modules;
-        const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
-        app.editModuleButtonClicked(editingModuleIndex);
-      });
-
-      // 删除模块
-      $(previewWindow.document).on('click', '.module-edit .delete', function(event) {
-        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
-        const editingModuleIndex = app.form.modules.findIndex(e => e.module_id == module_id);
-        app.design.editType = 'add';
-        app.design.editingModuleIndex = 0;
-        $(previewWindow.document).find('.tooltip').remove();
-        $(this).parents('.module-item').remove();
-        app.form.modules.splice(editingModuleIndex, 1);
-      });
-
-      // 模块位置改变，点击.module-edit .up或者.down
-      $(previewWindow.document).on('click', '.module-edit .up, .module-edit .down', function(event) {
-        const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
-        const modules = app.form.modules;
-        const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
-        const up = $(this).hasClass('up');
-        app.design.editType = 'add';
-        app.design.editingModuleIndex = 0;
-        if (up) {
-          if (editingModuleIndex > 0) {
-            const module = modules[editingModuleIndex];
-            modules.splice(editingModuleIndex, 1);
-            modules.splice(editingModuleIndex - 1, 0, module);
-            // dom操作
-            $(this).parents('.module-item').insertBefore($(this).parents('.module-item').prev());
-          }
-        } else {
-          if (editingModuleIndex < modules.length - 1) {
-            const module = modules[editingModuleIndex];
-            modules.splice(editingModuleIndex, 1);
-            modules.splice(editingModuleIndex + 1, 0, module);
-            // dom操作
-            $(this).parents('.module-item').insertAfter($(this).parents('.module-item').next());
-          }
-        }
-        app.form.modules = modules;
-      });
-
-      new Sortable(document.getElementById('module-list-wrap'), {
-        group: {
-          name: 'shared',
-          pull: 'clone',
-          put: false // 不允许拖拽进这个列表
-        },
-        // ghostClass: 'iframe-modules-sortable-ghost',
-        animation: 150,
-        sort: false, // 设为false，禁止sort
-        onEnd: function (evt) {
-          if (evt.to.id != 'home-modules-box') {
-            return;
-          }
-
-          // 获取 当前位置 在modules-box 是第几个
-          const index = $(previewWindow.document).find('.modules-box').children().index(evt.item);
-          const moduleCode = $(evt.item).find('.module-list').data('code');
-
-          app.addModuleButtonClicked(moduleCode, index, () => {
-            evt.item.parentNode.removeChild(evt.item);
-          });
-        }
-      });
-
-      new Sortable(previewWindow.document.getElementById('home-modules-box'), {
-        group: {
-          name: 'shared',
-          pull: 'clone',
-        },
-        animation: 150,
-        onUpdate: function (evt) {
-          const modules = app.form.modules;
-          const module = modules.splice(evt.oldIndex, 1)[0];
-          modules.splice(evt.newIndex, 0, module);
-          app.form.modules = modules;
-        }
-      });
-    });
   </script>
 
   @foreach($editors as $editor)
@@ -200,12 +123,14 @@
 
   <script>
     let register = null;
+    var previewWindow = null;
 
     let app = new Vue({
       el: '#app',
       data: {
+        device: 'pc',
         form: {
-          modules: []
+          modules: [],
         },
 
         design: {
@@ -226,7 +151,7 @@
       computed: {
         // 编辑中的模块编辑组件
         editingModuleComponent() {
-          return 'module-editor-' + this.editingModuleCode.replace('_', '-');
+          return 'module-editor-' + this.editingModuleCode.replaceAll('_', '-');
         },
 
         // 编辑中的模块 code
@@ -234,9 +159,7 @@
           return this.form.modules[this.design.editingModuleIndex].code;
         },
       },
-      // 侦听器
-      watch: {},
-      // 组件方法
+
       methods: {
         moduleUpdated: bk.debounce(function(val) {
           if (!this.design.moduleLoadCount) return this.design.moduleLoadCount = 1;
@@ -316,12 +239,107 @@
         showAllModuleButtonClicked() {
           this.design.editType = 'add';
           this.design.editingModuleIndex = 0;
+        },
+
+        previewIframeInit() {
+          $('#preview-iframe').on('load', function(event) {
+            previewWindow = document.getElementById("preview-iframe").contentWindow;
+            app.design.ready = true;
+
+            // 编辑模块
+            $(previewWindow.document).on('click', '.module-edit .edit', function(event) {
+              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+              const modules = app.form.modules;
+              const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
+              app.editModuleButtonClicked(editingModuleIndex);
+            });
+
+            // 删除模块
+            $(previewWindow.document).on('click', '.module-edit .delete', function(event) {
+              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+              const editingModuleIndex = app.form.modules.findIndex(e => e.module_id == module_id);
+              app.design.editType = 'add';
+              app.design.editingModuleIndex = 0;
+              $(previewWindow.document).find('.tooltip').remove();
+              $(this).parents('.module-item').remove();
+              app.form.modules.splice(editingModuleIndex, 1);
+            });
+
+            // 模块位置改变，点击.module-edit .up或者.down
+            $(previewWindow.document).on('click', '.module-edit .up, .module-edit .down', function(event) {
+              const module_id = $(this).parents('.module-item').prop('id').replace('module-', '');
+              const modules = app.form.modules;
+              const editingModuleIndex = modules.findIndex(e => e.module_id == module_id);
+              const up = $(this).hasClass('up');
+              app.design.editType = 'add';
+              app.design.editingModuleIndex = 0;
+              if (up) {
+                if (editingModuleIndex > 0) {
+                  const module = modules[editingModuleIndex];
+                  modules.splice(editingModuleIndex, 1);
+                  modules.splice(editingModuleIndex - 1, 0, module);
+                  // dom操作
+                  $(this).parents('.module-item').insertBefore($(this).parents('.module-item').prev());
+                }
+              } else {
+                if (editingModuleIndex < modules.length - 1) {
+                  const module = modules[editingModuleIndex];
+                  modules.splice(editingModuleIndex, 1);
+                  modules.splice(editingModuleIndex + 1, 0, module);
+                  // dom操作
+                  $(this).parents('.module-item').insertAfter($(this).parents('.module-item').next());
+                }
+              }
+              app.form.modules = modules;
+            });
+
+            new Sortable(document.getElementById('module-list-wrap'), {
+              group: {
+                name: 'shared',
+                pull: 'clone',
+                put: false // 不允许拖拽进这个列表
+              },
+              // ghostClass: 'iframe-modules-sortable-ghost',
+              animation: 150,
+              sort: false, // 设为false，禁止sort
+              onEnd: function (evt) {
+                if (evt.to.id != 'home-modules-box') {
+                  return;
+                }
+
+                // 获取 当前位置 在modules-box 是第几个
+                const index = $(previewWindow.document).find('.modules-box').children().index(evt.item);
+                const moduleCode = $(evt.item).find('.module-list').data('code');
+
+                app.addModuleButtonClicked(moduleCode, index, () => {
+                  evt.item.parentNode.removeChild(evt.item);
+                });
+              }
+            });
+
+            new Sortable(previewWindow.document.getElementById('home-modules-box'), {
+              group: {
+                name: 'shared',
+                pull: 'clone',
+              },
+              animation: 150,
+              onUpdate: function (evt) {
+                const modules = app.form.modules;
+                const module = modules.splice(evt.oldIndex, 1)[0];
+                modules.splice(evt.newIndex, 0, module);
+                app.form.modules = modules;
+              }
+            });
+          });
         }
       },
+
       created () {
         this.form = @json($design_settings ?: ['modules' => []])
       },
+
       mounted () {
+        this.previewIframeInit();
       },
     })
   </script>

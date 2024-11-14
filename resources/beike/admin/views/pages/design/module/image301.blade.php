@@ -1,6 +1,5 @@
 <template id="module-editor-image301-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
@@ -73,7 +72,7 @@ Vue.component('module-editor-image301', {
       floor: languagesFill(''),
       images: [
         {
-          image: languagesFill('https://via.placeholder.com/760x500/eeeeee'),
+          image: languagesFill('https://dummyimage.com/760x500/eeeeee'),
           show: true,
           link: {
             type: 'product',
@@ -81,7 +80,7 @@ Vue.component('module-editor-image301', {
           }
         },
         {
-          image: languagesFill('https://via.placeholder.com/760x240/eeeeee'),
+          image: languagesFill('https://dummyimage.com/760x240/eeeeee'),
           show: false,
           link: {
             type: 'product',
@@ -89,7 +88,7 @@ Vue.component('module-editor-image301', {
           }
         },
         {
-          image: languagesFill('https://via.placeholder.com/760x240/eeeeee'),
+          image: languagesFill('https://dummyimage.com/760x240/eeeeee'),
           show: false,
           link: {
             type: 'product',

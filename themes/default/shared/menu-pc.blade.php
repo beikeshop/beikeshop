@@ -14,6 +14,9 @@
               {{ $menu['badge']['name'] }}
             </span>
           @endif
+          @if (isset($menu['children_group']))
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"/></svg>
+          @endif
         </a>
         @if (isset($menu['children_group']) && $menu['children_group'])
           <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}"

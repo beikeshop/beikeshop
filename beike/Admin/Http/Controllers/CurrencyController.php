@@ -15,6 +15,8 @@ use Beike\Admin\Http\Requests\CurrencyRequest;
 use Beike\Models\Order;
 use Beike\Repositories\CurrencyRepo;
 use Illuminate\Http\Request;
+use Beike\Repositories\SettingRepo;
+use Exception;
 
 class CurrencyController extends Controller
 {
@@ -43,6 +45,15 @@ class CurrencyController extends Controller
             'value'         => (float) $request->get('value', 1),
             'status'        => (int) $request->get('status', 0),
         ];
+
+        if ($request->default_currency) {
+            if ($data['value'] != 1) {
+                throw new Exception(trans('admin/currency.default_currency_error'));
+            }
+
+            SettingRepo::storeValue('currency', $data['code']);
+        }
+
         $currency = CurrencyRepo::create($data);
         hook_action('admin.currency.store.after', $currency);
 
@@ -60,6 +71,15 @@ class CurrencyController extends Controller
             'value'         => (float) $request->get('value', 1),
             'status'        => (int) $request->get('status', 0),
         ];
+
+        if ($request->default_currency) {
+            if ($data['value'] != 1) {
+                throw new Exception(trans('admin/currency.default_currency_error'));
+            }
+
+            SettingRepo::storeValue('currency', $data['code']);
+        }
+
         $currency = CurrencyRepo::update($id, $data);
 
         return json_success(trans('common.updated_success'), $currency);

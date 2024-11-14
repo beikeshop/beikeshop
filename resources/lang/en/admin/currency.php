@@ -17,4 +17,5 @@ return [
     'currencies_update' => 'Edit',
     'currencies_delete' => 'Delete',
     'order_exist'       => 'This currency has orders in use and cannot be deleted!',
+    'default_currency_error' => 'The default currency rate must be 1',
 ];

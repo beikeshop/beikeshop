@@ -7,10 +7,10 @@
   @include('design._partial._module_tool')
 
   <div class="module-info module-pages mb-3 mb-md-4">
-    <div class="container position-relative">
-      <div class="module-title">{{ $content['title'] }}</div>
+    <div class="container-fluid position-relative">
+      <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
       @if ($content['items'])
-        <div class="row">
+        <div class="row g-3 g-lg-4">
           @foreach ($content['items'] as $item)
           <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">
@@ -31,7 +31,7 @@
         </div>
         @endif
       @elseif (!$content['items'] and $design)
-        <div class="row">
+        <div class="row g-3 g-lg-4">
           @for ($s = 0; $s < 4; $s++)
           <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">

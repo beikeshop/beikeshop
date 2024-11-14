@@ -47,7 +47,7 @@ class ProductSimple extends JsonResource
             'in_wishlist'         => $this->inCurrentWishlist->id ?? 0,
 
             'images'              => array_map(function ($item) {
-                return image_resize($item, 400, 400);
+                return image_resize($item, 560, 560);
             }, $images),
         ];
 

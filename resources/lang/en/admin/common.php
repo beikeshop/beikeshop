@@ -80,6 +80,7 @@ return [
     'currencies_index'                       => 'Currencies',
     'languages_index'                        => 'Languages',
     'design_index'                           => 'Page Builder',
+    'design_header_index'                    => 'Header Builder',
     'design_footer_index'                    => 'Footer Builder',
     'design_app_home_index'                  => 'APP Builder',
     'design_menu_index'                      => 'Menu Builder',

@@ -4,11 +4,11 @@
   @php
     $editableTabsValue = $content['editableTabsValue'] ?? 0;
   @endphp
-  <div class="module-info module-tab-product">
-    <div class="module-title">{{ $content['title'] ?? '' }}</div>
-    <div class="container">
+  <div class="module-info module-tab-product mb-4">
+    <div class="module-title">{{ $content['title'] ?? ''}} <div class="wave-line"></div></div>
+    <div class="container-fluid">
       @if ($content['tabs'] ?? false)
-        <div class="nav justify-content-center mb-lg-3 mt-n2">
+        <div class="nav justify-content-center mb-2 mb-lg-3 mt-n2">
           @foreach ($content['tabs'] as $key => $tabs)
           <a class="nav-link {{ ($design ? $editableTabsValue == $key : $loop->first) ? 'active' : '' }}" href="#tab-product-{{ $module_id }}-{{ $loop->index }}" data-bs-toggle="tab">{{ $tabs['title'] }}</a>
           @endforeach
@@ -16,7 +16,7 @@
         <div class="tab-content">
           @foreach ($content['tabs'] as $key => $products)
           <div class="tab-pane fade show {{ ($design ? $editableTabsValue == $key : $loop->first) ? 'active' : '' }}" id="tab-product-{{ $module_id }}-{{ $loop->index }}">
-            <div class="row">
+            <div class="row g-3 g-lg-4">
               @if ($products['products'])
                 @foreach ($products['products'] as $product)
                 <div class="product-grid col-6 col-md-4 col-lg-3">

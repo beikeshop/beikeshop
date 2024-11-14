@@ -165,26 +165,28 @@
                   </div>
                 </div>
                 @endhookwrapper
-                @hookwrapper('product.detail.add_to_cart')
-                <button
-                  class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
-                  :product-id="product.id"
-                  :product-price="product.price"
-                  :disabled="!product.quantity"
-                  @click="addCart(false, this)"
-                ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
-                </button>
-                @endhookwrapper
-                @hookwrapper('product.detail.buy_now')
-                <button
-                  class="btn btn-dark ms-3 btn-buy-now fw-bold"
-                  :disabled="!product.quantity"
-                  :product-id="product.id"
-                  :product-price="product.price"
-                  @click="addCart(true, this)"
-                ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
-                </button>
-                @endhookwrapper
+                <div class="{{ locale() == 'zh_cn' || locale() == 'en' ? 'd-flex flex-fill' : 'add-cart-btns' }}">
+                  @hookwrapper('product.detail.add_to_cart')
+                  <button
+                    class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
+                    :product-id="product.id"
+                    :product-price="product.price"
+                    :disabled="!product.quantity"
+                    @click="addCart(false, this)"
+                  ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
+                  </button>
+                  @endhookwrapper
+                  @hookwrapper('product.detail.buy_now')
+                  <button
+                    class="btn btn-dark ms-lg-3 btn-buy-now fw-bold"
+                    :disabled="!product.quantity"
+                    :product-id="product.id"
+                    :product-price="product.price"
+                    @click="addCart(true, this)"
+                  ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
+                  </button>
+                  @endhookwrapper
+                </div>
                 @hook('product.detail.buy.after')
               </div>
 

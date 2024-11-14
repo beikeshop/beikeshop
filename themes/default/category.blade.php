@@ -9,9 +9,9 @@
 @endpush
 
 @section('content')
-  <x-shop-breadcrumb type="category" :value="$category" />
+  <x-shop-breadcrumb type="category" :value="$category" :is-full="true" />
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12 col-lg-3 pe-lg-4 left-column d-none d-lg-block">
         <div class="x-fixed-top">@include('shared.filter_sidebar_block')</div>
@@ -44,9 +44,9 @@
               @endforeach
             </div>
           @endif
-          <div class="row {{ request('style_list') == 'list' ? 'product-list-wrap' : ''}}">
+          <div class="row g-3 g-lg-4 {{ request('style_list') == 'list' ? 'product-list-wrap' : ''}}">
             @foreach ($products_format as $product)
-              <div class="{{ !request('style_list') || request('style_list') == 'grid' ? 'product-grid col-6 col-md-4' : 'col-12'}}">
+              <div class="{{ !request('style_list') || request('style_list') == 'grid' ? 'product-grid col-6 col-md-3' : 'col-12'}}">
                 @include('shared.product')
               </div>
             @endforeach

@@ -11,13 +11,17 @@
 body.page-categories {
   .col-lg-9.right-column {
     @media (min-width: 992px) {
-      width: 78%;
+      flex: 1;
     }
   }
 
   .col-lg-3.left-column {
     @media (min-width: 992px) {
-      width: 22%;
+      max-width: 290px;
+    }
+
+    @media (min-width: 1500px) {
+      max-width: 340px;
     }
 
     .card:not(:last-of-type) {

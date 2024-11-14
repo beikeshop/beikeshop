@@ -1,5 +1,21 @@
 <header>
   @hook('header.before')
+  @if ($header_content && isset($header_content['header_ads']) && $header_content['header_ads']['active'] &&  count($header_content['header_ads']['items']))
+    <div class="header-ads" style="background-color: {{ $header_content['header_ads']['bg_color'] }}; color: {{ $header_content['header_ads']['color'] }}">
+      <div class="scrolling-ads">
+        @foreach ($header_content['header_ads']['items'] as $item)
+          <div class="text-center">
+            @if ($item['link'])
+              <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
+            @else
+            {{ $item['title'] }}
+            @endif
+          </div>
+        @endforeach
+      </div>
+    </div>
+  @endif
+
   <div class="top-wrap">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">
@@ -90,13 +106,10 @@
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
           @hookwrapper('header.menu.icon')
-          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas"
-                                  aria-controls="offcanvasExample" class="nav-link"><i class="iconfont">&#xe8d6;</i></a>
-          </li>
-          <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><i
-                class="iconfont">&#xe662;</i></a></li>
+          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample" class="nav-link"><img src="{{ asset('image/icons/search.svg') }}" class="img-fluid"></a></li>
+          <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><img src="{{ asset('image/icons/favorite.svg') }}" class="img-fluid"></a></li>
           <li class="nav-item dropdown">
-            <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
+            <a href="{{ shop_route('account.index') }}" class="nav-link"><img src="{{ asset('image/icons/account.svg') }}" class="img-fluid"></a>
             <ul class="dropdown-menu">
               @auth('web_shop')
                 <li class="dropdown-item">
@@ -124,16 +137,10 @@
           </li>
           @endhookwrapper
           <li class="nav-item">
-            {{-- <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
-              href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"
-              aria-controls="offcanvasExample">
-              <i class="iconfont">&#xe634;</i>
-              <span class="cart-badge-quantity"></span>
-            </a> --}}
             <a
               class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}"
               href="javascript:void(0);" role="button">
-              <i class="iconfont">&#xe634;</i>
+              <img src="{{ asset('image/icons/cart.svg') }}" class="img-fluid">
               <span class="cart-badge-quantity"></span>
             </a>
           </li>
@@ -145,10 +152,10 @@
   <div class="header-mobile d-lg-none">
     <div class="mobile-content">
       <div class="left">
-        <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
+        <div class="mobile-open-menu"><img src="{{ asset('image/icons/menu.svg') }}" class="img-fluid"></div>
         <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas"
              aria-controls="offcanvasExample">
-          <i class="iconfont">&#xe8d6;</i>
+             <img src="{{ asset('image/icons/search.svg') }}" class="img-fluid">
         </div>
       </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
@@ -156,12 +163,12 @@
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link mb-account-icon">
-          <i class="iconfont">&#xe619;</i>
+          <img src="{{ asset('image/icons/account.svg') }}" class="img-fluid">
           @if (strstr(current_route(), 'shop.account'))
             <span></span>
           @endif
         </a>
-        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i>
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><img src="{{ asset('image/icons/cart.svg') }}" class="img-fluid">
           <span class="cart-badge-quantity"></span></a>
       </div>
     </div>

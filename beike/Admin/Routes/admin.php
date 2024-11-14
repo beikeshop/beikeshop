@@ -125,6 +125,9 @@ Route::prefix($adminName)
                 Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
                 Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
 
+                Route::middleware('can:design_header_index')->get('design_header/builder', [Controllers\DesignHeaderController::class, 'index'])->name('design_header.index');
+                Route::middleware('can:design_header_index')->put('design_header/builder', [Controllers\DesignHeaderController::class, 'update'])->name('design_header.update');
+
                 Route::middleware('can:design_app_home_index')->get('design_app_home/builder', [Controllers\DesignAppController::class, 'index'])->name('design_app_home.index');
                 Route::middleware('can:design_app_home_index')->put('design_app_home/builder', [Controllers\DesignAppController::class, 'update'])->name('design_app_home.update');
 

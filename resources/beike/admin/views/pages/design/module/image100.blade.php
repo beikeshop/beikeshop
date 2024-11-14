@@ -1,6 +1,5 @@
 <template id="module-editor-image100-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">设置</div>
     <div class="module-edit-group">
       <div class="module-edit-title">是否全屏</div>
       <el-switch v-model="form.full"></el-switch>

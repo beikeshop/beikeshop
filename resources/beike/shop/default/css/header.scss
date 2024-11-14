@@ -11,14 +11,38 @@
 header {
   background: #fff;
 
-  .top-wrap {
+  .header-ads {
     height: 40px;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+
+    .scrolling-ads {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      > div {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+          color: inherit;
+        }
+      }
+    }
+  }
+
+  .top-wrap {
+    height: 36px;
     background: #F7F8FA;
     display: flex;
+    border-bottom: 1px solid #ddd;
 
     > .container, .container-fluid {
-      max-width: 1700px;
-
       @media (max-width:768px) {
         padding: 0 10px;
       }
@@ -101,7 +125,6 @@ header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1700px;
     }
 
     .menu-wrap {
@@ -112,11 +135,31 @@ header {
       > .navbar-nav {
         > .nav-item {
           background-color: transparent;
+          &:hover {
+            > .nav-link {
+              > svg {
+                transform: rotate(180deg);
+              }
+            }
+          }
 
           > .nav-link {
             font-size: 15px;
             padding: 1rem;
             position: relative;
+            @media (max-width: 1200px) {
+              padding: 1rem .5rem;
+            }
+
+            > svg {
+              margin-left: -3px;
+              transition: all .2s ease-in-out;
+            }
+
+            &.dropdown-toggle::after {
+              counter: '';
+              display: none;
+            }
 
             .badge {
               position: absolute;
@@ -162,6 +205,9 @@ header {
       img {
         max-width: 200px;
         max-height: 50px;
+        @media (max-width: 1200px) {
+          max-width: 160px;
+        }
       }
     }
 
@@ -171,8 +217,17 @@ header {
         padding-right: 0.7rem;
         padding-left: 0.7rem;
         position: relative;
+        @media (max-width: 1200px) {
+          padding-right: 0.3rem;
+          padding-left: 0.3rem;
+        }
+
         i {
           font-size: 1.1rem;
+        }
+
+        img {
+          width: 24px;
         }
       }
     }

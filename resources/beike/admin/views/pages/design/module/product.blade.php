@@ -1,6 +1,5 @@
 <template id="module-editor-product-template">
   <div class="module-editor-product-template">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>

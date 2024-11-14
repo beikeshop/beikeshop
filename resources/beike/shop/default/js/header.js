@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-12-23 12:52:09
+ * @LastEditTime  2024-11-14 11:40:08
  */
 
 $(function () {
@@ -208,6 +208,24 @@ $(function () {
         $('.header-content-placeholder').remove();
       }
     })
+  }());
+
+  // header-ads // 头部广告
+  (function () {
+    if ($('.scrolling-ads > div').length > 1) {
+      setInterval(function() {
+        var firstItem = $('.scrolling-ads > div').first();
+        var itemHeight = firstItem.outerHeight();
+
+        $('.scrolling-ads').animate({
+          top: -itemHeight
+        }, 1000, function() {
+          firstItem.appendTo('.scrolling-ads');
+
+          $('.scrolling-ads').css('top', 0);
+        });
+      }, 3000);
+    }
   }());
 });
 

@@ -1,6 +1,6 @@
 @unless ($breadcrumbs->isEmpty())
 <div class="breadcrumb-wrap">
-  <div class="container">
+  <div class="container{{ $isFull ? '-fluid' : '' }}">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         @foreach ($breadcrumbs as $breadcrumb)

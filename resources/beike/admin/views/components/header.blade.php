@@ -119,7 +119,7 @@
               </li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a href="{{ admin_route('logout.index') }}" class="dropdown-item py-2">
+                <a href="{{ asset(system_setting('base.admin_logo', 'image/logo.png')) }}" class="dropdown-item py-2">
                   <i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}
                 </a>
               </li>

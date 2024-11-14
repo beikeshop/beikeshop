@@ -33,6 +33,9 @@ class ThemeSeeder extends Seeder
 
         $footerSetting = $this->getFooterSetting();
         SettingRepo::update('system', 'base', ['footer_setting' => $footerSetting]);
+
+        $headerSetting = $this->getHeaderSetting();
+        SettingRepo::update('system', 'base', ['header_setting' => $headerSetting]);
     }
 
     /**
@@ -756,48 +759,7 @@ class ThemeSeeder extends Seeder
         return [
             "modules" =>[
                 [
-                    "content" => [
-                        "style" => [
-                            "background_color" =>""
-                        ],
-                        "full" =>true,
-                        "floor" => [
-                            "2" =>"",
-                            "3" =>""
-                        ],
-                        "images" =>[
-                            [
-                                "image" => [
-                                    "en" =>"catalog/demo/banner/banner-4-en.jpg",
-                                    "zh_cn" =>"catalog/demo/banner/banner-4.jpg"
-                                ],
-                                "show" =>true,
-                                "link" => [
-                                    "type" =>"category",
-                                    "value" =>100012,
-                                    "link" =>""
-                                ]
-                            ],
-                            [
-                                "image" => [
-                                    "en" =>"catalog/demo/banner/banner-3-en.jpg",
-                                    "zh_cn" =>"catalog/demo/banner/banner-3.jpg"
-                                ],
-                                "show" =>false,
-                                "link" => [
-                                    "type" =>"category",
-                                    "value" =>100008,
-                                    "link" =>""
-                                ]
-                            ]
-                        ]
-                    ],
-                    "code" =>"slideshow",
-                    "name" =>"幻灯片",
-                    "module_id" =>"b0448efb0989"
-                ],
-                [
-                    "code" =>"image402",
+                    "code" =>"img_text_slideshow",
                     "content" => [
                         "style" => [
                             "background_color" =>""
@@ -806,22 +768,89 @@ class ThemeSeeder extends Seeder
                             "zh_cn" =>"",
                             "en" =>""
                         ],
-                        "title" => [
-                            "zh_cn" =>"时尚穿搭推荐",
-                            "en" =>"Minimalist style outfit"
+                        "images" =>[
+                            [
+                                "image" =>"catalog/demo/banner/text-image-banner-1.jpg",
+                                "sub_title" => [
+                                    "zh_cn" =>"促销服装专场",
+                                    "en" =>"New Arrivals"
+                                ],
+                                "title" => [
+                                    "zh_cn" =>"全场5折限时促销，好礼不断！",
+                                    "en" =>"50% off sitewide for a limited time"
+                                ],
+                                "description" => [
+                                    "zh_cn" =>"即刻起购买者享受终身质保",
+                                    "en" =>"Immediately buyers enjoy a lifetime warranty"
+                                ],
+                                "text_position" =>"start",
+                                "show" =>false,
+                                "link" => [
+                                    "type" =>"category",
+                                    "value" =>100003,
+                                    "link" =>""
+                                ]
+                            ],
+                            [
+                                "image" =>"catalog/demo/banner/text-image-banner-2.jpg",
+                                "show" =>true,
+                                "sub_title" => [
+                                    "zh_cn" =>"促销服装专场",
+                                    "en" =>"Fashion"
+                                ],
+                                "title" => [
+                                    "zh_cn" =>"时尚，新品上市，首单立减",
+                                    "en" =>"Beauty Feast, Fashion Awards"
+                                ],
+                                "text_position" =>"start",
+                                "description" => [
+                                    "zh_cn" =>"即刻起购买者享受终身质保",
+                                    "en" =>"Immediately buyers enjoy a lifetime warranty"
+                                ],
+                                "link" => [
+                                    "link" =>"",
+                                    "type" =>"category",
+                                    "value" =>100003
+                                ]
+                            ]
                         ],
-                        "sub_title" => [
-                            "zh_cn" =>"极简风的穿搭，越简单就越高级，这一套着装打扮整体是比较休闲舒适的",
-                            "en" =>"Minimalist style, the simpler, the more advanced, this outfit is casual and comfortable"
+                        "scroll_text" => [
+                            "text" => [
+                                "zh_cn" =>"时尚盛典，全场低至2折起！",
+                                "en" =>"Fashion Gala: Up to 80% Off!"
+                            ],
+                            "bg" =>"#FFE8E1",
+                            "color" =>"#333333",
+                            "padding" =>"36",
+                            "font_size" =>"20"
+                        ]
+                    ],
+                    "module_id" =>"esccEyoWPfQldq02",
+                    "name" =>"图文幻灯片",
+                    "view_path" =>""
+                ],
+                [
+                    "code" =>"image403",
+                    "content" => [
+                        "style" => [
+                            "background_color" =>""
+                        ],
+                        "floor" => [
+                            "zh_cn" =>"",
+                            "en" =>""
                         ],
                         "images" =>[
                             [
-                                "image" =>"catalog/demo/banner/banner-402-1.jpg",
-                                "show" =>false,
-                                "title" => [
-                                    "zh_cn" =>"女上装",
-                                    "en" =>"women's tops"
+                                "image" =>"catalog/demo/banner/banner-403-1.jpg",
+                                "sub_title" => [
+                                    "zh_cn" =>"新品上市尽享时尚潮流",
+                                    "en" =>"New arrivals, trendsetting"
                                 ],
+                                "title" => [
+                                    "zh_cn" =>"限时抢购",
+                                    "en" =>"Flash Sale"
+                                ],
+                                "show" =>false,
                                 "link" => [
                                     "type" =>"product",
                                     "value" =>"",
@@ -829,12 +858,16 @@ class ThemeSeeder extends Seeder
                                 ]
                             ],
                             [
-                                "image" =>"catalog/demo/banner/banner-402-2.jpg",
-                                "show" =>false,
-                                "title" => [
-                                    "zh_cn" =>"眼镜",
-                                    "en" =>"Glasses"
+                                "image" =>"catalog/demo/banner/banner-403-2.jpg",
+                                "sub_title" => [
+                                    "zh_cn" =>"限时折扣不容错过",
+                                    "en" =>"Grab limited offers"
                                 ],
+                                "title" => [
+                                    "zh_cn" =>"全场7折",
+                                    "en" =>"30% Off All Items"
+                                ],
+                                "show" =>false,
                                 "link" => [
                                     "type" =>"product",
                                     "value" =>"",
@@ -842,12 +875,16 @@ class ThemeSeeder extends Seeder
                                 ]
                             ],
                             [
-                                "image" =>"catalog/demo/banner/banner-402-3.jpg",
-                                "show" =>false,
-                                "title" => [
-                                    "zh_cn" =>"手表",
-                                    "en" =>"watch"
+                                "image" =>"catalog/demo/banner/banner-403-3.jpg",
+                                "sub_title" => [
+                                    "zh_cn" =>"会员专享优惠来袭",
+                                    "en" =>"Exclusive member deals"
                                 ],
+                                "title" => [
+                                    "zh_cn" =>"清仓大促",
+                                    "en" =>"Clearance Sale"
+                                ],
+                                "show" =>false,
                                 "link" => [
                                     "type" =>"product",
                                     "value" =>"",
@@ -855,22 +892,34 @@ class ThemeSeeder extends Seeder
                                 ]
                             ],
                             [
-                                "image" =>"catalog/demo/banner/banner-402-4.jpg",
-                                "show" =>false,
-                                "title" => [
-                                    "zh_cn" =>"护肤品",
-                                    "en" =>"Skin care products"
+                                "image" =>"catalog/demo/banner/banner-403-4.jpg",
+                                "sub_title" => [
+                                    "zh_cn" =>"全场商品优惠大放送",
+                                    "en" =>"Amazing sale now"
                                 ],
+                                "title" => [
+                                    "zh_cn" =>"节日盛典",
+                                    "en" =>"Weekend Special"
+                                ],
+                                "show" =>true,
                                 "link" => [
                                     "type" =>"product",
                                     "value" =>"",
                                     "link" =>""
                                 ]
                             ]
+                        ],
+                        "title" => [
+                            "zh_cn" =>"换季大减价，优惠不停歇",
+                            "en" =>"Trendy new arrivals"
+                        ],
+                        "sub_title" => [
+                            "zh_cn" =>"换季大减价，优惠不停歇！抓住机会，为您的衣橱注入新鲜血液。精选服饰低至3折起，时尚与实惠并存，让您在省钱的同时，也能引领潮流。快来选购，享受这场购物盛宴，错过不再有！",
+                            "en" =>"Fresh fashion hits the shelves! Revamp your look with our latest trendy items. Keep your style sharp and on-trend with our stylish picks. Shop now!"
                         ]
                     ],
-                    "module_id" =>"00pS1Akotn8h58YZ",
-                    "name" =>"一行四图-2",
+                    "module_id" =>"g0fXCoqrEiqD4VrI",
+                    "name" =>"一行四图-3",
                     "view_path" =>""
                 ],
                 [
@@ -943,7 +992,7 @@ class ThemeSeeder extends Seeder
                     "name" =>"选项卡商品"
                 ],
                 [
-                    "code" =>"image100",
+                    "code" =>"img_text_banner",
                     "content" => [
                         "style" => [
                             "background_color" =>""
@@ -952,24 +1001,25 @@ class ThemeSeeder extends Seeder
                             "zh_cn" =>"",
                             "en" =>""
                         ],
-                        "full" =>true,
-                        "images" =>[
-                            [
-                                "image" => [
-                                    "zh_cn" =>"catalog/demo/banner/banner-2.jpg",
-                                    "en" =>"/catalog/demo/banner/banner-2.jpg"
-                                ],
-                                "show" =>true,
-                                "link" => [
-                                    "type" =>"category",
-                                    "value" =>100003,
-                                    "link" =>""
-                                ]
-                            ]
+                        "bg_color" =>"#F7F6F1",
+                        "image" =>"/catalog/demo/banner/text-image-banner-7.jpg",
+                        "title" => [
+                            "zh_cn" =>"潮流新品上市，引领时尚新风潮！",
+                            "en" =>"Spring Into Style"
+                        ],
+                        "description" => [
+                            "zh_cn" =>"我们精心挑选了最新潮流单品，从街头风到高级定制，每一件都是时尚达人的必备之选。无论是日常穿搭还是特殊场合，这些新品都能让您成为众人焦点。快来选购，让您的衣橱焕发新光彩！",
+                            "en" =>"Kick off the new season with our Spring collection! Refresh your wardrobe with vibrant colors and fresh designs. Enjoy exclusive discounts on the latest fashion trends that will have you stepping into spring with confidence and style. Hurry, these deals won't last long!"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100007,
+                            "link" =>""
                         ]
                     ],
-                    "module_id" =>"0htwy33z3xcituyx",
-                    "name" =>"单图模块"
+                    "module_id" =>"xaUi1BwJXGJBMd1M",
+                    "name" =>"图文横幅",
+                    "view_path" =>""
                 ],
                 [
                     "code" =>"brand",
@@ -1253,10 +1303,81 @@ class ThemeSeeder extends Seeder
             ],
             "bottom" => [
                 "copyright" => [
-                    "en" => "<div>Chengdu Guangda Network Technology &copy; 2023</div>",
-                    "zh_cn" => "<div>成都光大网络科技 &copy; 2023</div>"
+                    "en" => "<div>Chengdu Guangda Network Technology &copy; ".date('Y')."</div>",
+                    "zh_cn" => "<div>成都光大网络科技 &copy; ".date('Y')."</div>"
                 ],
                 "image" => "catalog/demo/banner/pay_icons.png"
+            ]
+        ];
+    }
+
+     /**
+     * 设置头部装修数据
+     */
+    private function getHeaderSetting(): array
+    {
+        return [
+            "header_ads" => [
+                "bg_color" =>"#333333",
+                "color" =>"#ffffff",
+                "active" =>true,
+                "items" =>[
+                    [
+                        "title" => [
+                            "zh_cn" =>"春日时尚焕新季 全场新品限时5折起",
+                            "en" =>"Spring Fashion Refresh Season: Limited Time 50% Off on New Arrivals"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100003,
+                            "link" =>""
+                        ]
+                    ],
+                    [
+                        "title" => [
+                            "zh_cn" =>"春季潮流新品发布 特惠5折起购",
+                            "en" =>"Spring Trend Collection Launch: Special 50% Off Offer"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100010,
+                            "link" =>""
+                        ]
+                    ],
+                    [
+                        "title" => [
+                            "zh_cn" =>"春意浓情特卖会 全场5折起狂欢",
+                            "en" =>"Spring Affection Sale Event: Up to 50% Off on All Items"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100010,
+                            "link" =>""
+                        ]
+                    ],
+                    [
+                        "title" => [
+                            "zh_cn" =>"春季新品大放价 5折起享时尚",
+                            "en" =>"Spring New Arrivals Mega Sale: Enjoy 50% Off on Fashion"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100003,
+                            "link" =>""
+                        ]
+                    ],
+                    [
+                        "title" => [
+                            "zh_cn" =>"春日风尚大促销 精选商品5折起",
+                            "en" =>"Spring Style Promotion: Select Items Starting at 50% Off"
+                        ],
+                        "link" => [
+                            "type" =>"category",
+                            "value" =>100007,
+                            "link" =>""
+                        ]
+                    ]
+                ]
             ]
         ];
     }

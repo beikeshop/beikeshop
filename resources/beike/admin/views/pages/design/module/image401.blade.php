@@ -1,6 +1,5 @@
 <template id="module-editor-image401-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
