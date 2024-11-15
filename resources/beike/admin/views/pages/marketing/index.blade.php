@@ -5,14 +5,14 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-<div class="d-flex top-tips-wrap">
-  <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
-  <div class="top-text">
-    {{ __('admin/marketing.attention_2') }}
-    <br>
-    {{ __('admin/marketing.attention_3') }}
+  <div class="d-flex top-tips-wrap">
+    <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
+    <div class="top-text">
+      {{ __('admin/marketing.attention_2') }}
+      <br>
+      {{ __('admin/marketing.attention_3') }}
+    </div>
   </div>
-</div>
 @endsection
 
 @section('page-title-right')

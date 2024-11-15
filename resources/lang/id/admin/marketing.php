@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Jumlah Pembayaran',
     'text_version'            => 'versi',
     'to_update'               => 'Pergi untuk meningkatkan',
-    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href="' . config('beike.api_url') . '/download" target="_blank">versi terbaru </a>',
+    'version_compatible_text' => 'Plugin ini tidak kompatibel dengan versi sistem saat ini, harap tingkatkan ke <a href="' . config('beike.official_website') . '/download" target="_blank">versi terbaru </a>',
     'wxpay'                   => 'Pembayaran kode pindai WeChat!',
     'yuan'                    => 'Yuan.',
 ];

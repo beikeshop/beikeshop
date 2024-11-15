@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Сумма выплаты',
     'text_version'            => 'версия',
     'to_update'               => 'Обновление.',
-    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="' . config('beike.api_url') . '/download" target="_blank">последней версии </a>',
+    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="' . config('beike.official_website') . '/download" target="_blank">последней версии </a>',
     'wxpay'                   => 'Плата за микро-код!',
     'yuan'                    => 'доллар',
 ];
