@@ -114,6 +114,7 @@ return [
     'copyright_buy_text'     => 'You haven\'t purchased yet, please purchase authorization!',
     'help_index'                             => 'Help',
     'license_bought' => 'Authorized',
+    'license_bought_s' => 'Subscribed authorization',
     'error_length_text'      => 'The input data for the field :key exceeds the maximum allowed length.',
     'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
 ];

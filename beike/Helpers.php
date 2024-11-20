@@ -824,9 +824,10 @@ function clean_domain($domain): string
  * @return bool
  * @throws Exception
  */
-function check_license(): bool
+function check_license() : bool
 {
     $configLicenceCode = system_setting('base.license_code');
+    $configLicenseExpiredAt = system_setting('base.license_expired_at');
     $appDomain         = clean_domain(request()->getHost());
 
     try {
@@ -844,7 +845,19 @@ function check_license(): bool
         return true;
     }
 
-    return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
+    // $configLicenceCode 有值 并且 $configLicenseExpiredAt 大于当前时间 返回 true
+    if (! empty($configLicenceCode)) {
+        if (! empty($configLicenseExpiredAt)) {
+            $configLicenseDate = date('Y-m-d', strtotime($configLicenseExpiredAt));
+            $todayDate = date('Y-m-d');
+
+            return $configLicenseDate >= $todayDate;
+        }
+
+        return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
+    }
+
+    return false;
 }
 
 /**

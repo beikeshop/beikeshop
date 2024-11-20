@@ -3,22 +3,20 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2024-08-29 11:28:21
+ * @LastEditTime  2024-11-22 17:22:26
  */
 
 window.axios = require('axios');
 
-const token = document.querySelector('meta[name="csrf-token"]').content;
-const base = document.querySelector('base').href;
-
 const instance = axios.create({
-  headers: {'X-CSRF-TOKEN': token},
+  baseURL: document.querySelector('base').href, // 自动设置 base
+  timeout: 0,
+  headers: {
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+    'locale': document.querySelector('html').getAttribute('lang') || 'en',
+  },
 });
 
-axios.defaults.timeout = 0; // 请求超时
-// axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
-// console.log(process.env.VUE_APP_BASE_URL)
-axios.defaults.baseURL = base;
 export default {
   /**
    * get 请求
@@ -83,7 +81,7 @@ export default {
     }
 
     return new Promise((resolve, reject) => {
-      axios({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
+      instance({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
         if (res) {
           resolve(res.data);
         } else { // 其他情况返回错误信息，根据需要处理

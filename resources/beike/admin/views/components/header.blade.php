@@ -52,7 +52,16 @@
         <li class="nav-item mx-2 license-ok {{ !check_license() || Str::endsWith(config('app.url'), '.test') ? 'd-none' : '' }}">
           <div class="license-text">
             <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
+            @if (system_setting('base.license_expired_at'))
+            <div>
+              <div>{{ __('admin/common.license_bought_s') }}</div>
+              @if (strtotime(system_setting('base.license_expired_at')) - time() <= 30 * 24 * 3600)
+              <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}：{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</div>
+              @endif
+            </div>
+            @else
             <span>{{ __('admin/common.license_bought') }}</span>
+            @endif
           </div>
         </li>
 
@@ -158,9 +167,15 @@
     e.preventDefault();
     $http.get(`${config.api_url}/api/licensed_pro`, {domain: config.app_url, from: window.location.pathname}).then((res) => {
       if (res.license_code) {
-        $http.put('settings/values', {license_code: res.license_code}, {hload: true});
-        $('.license-ok').removeClass('d-none');
-        $('.warning-copyright').addClass('d-none');
+        $http.put('settings/values', {license_code: res.license_code, license_expired_at: res.expired_at}, {hload: true});
+        if (res.has_licensed) {
+          $('.license-ok').removeClass('d-none');
+          $('.warning-copyright').addClass('d-none');
+        }
+
+        if (res.message) {
+          layer.msg(res.message);
+        }
         $('input[name="license_code"]').val(res.license_code);
       } else {
         layer.alert('{{ __('admin/common.copyright_buy_text') }}', {
