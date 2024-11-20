@@ -8,5 +8,5 @@ class CustomerGroupDescription extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['locale', 'name', 'description'];
+    protected $fillable = ['customer_group_id', 'locale', 'name', 'description'];
 }
