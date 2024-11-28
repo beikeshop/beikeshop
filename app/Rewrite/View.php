@@ -49,7 +49,14 @@ class View extends \Illuminate\View\View
      */
     public function isSubdirectory($parentDir, $childDir): bool
     {
-        if (preg_match('#' . $parentDir . '#', $childDir)) {
+        $parentDir = str_replace('\\', '/', rtrim($parentDir, '/')) . '/';
+        $childDir = str_replace('\\', '/', rtrim($childDir, '/')) . '/';
+
+        // 使用 preg_quote() 转义路径中的特殊字符
+        $escapedParentDir = preg_quote($parentDir, '#');
+
+        // 使用正则表达式匹配
+        if (preg_match('#^' . $escapedParentDir . '#', $childDir)) {
             return true;
         }
 
