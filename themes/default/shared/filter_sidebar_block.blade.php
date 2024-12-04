@@ -2,12 +2,14 @@
   <h4 class="mb-3"><span>{{ __('product.category') }}</span></h4>
   <ul class="sidebar-widget mb-0" id="category-one">
     @foreach ($all_categories as $key_a => $category_all)
+    @if (!$category_all['active']) @continue @endif
     <li class="{{ $category_all['id'] == $category->id ? 'active' : ''}}">
       <a href="{{ $category_all['url'] }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
       @if ($category_all['children'] ?? false)
         <button class="toggle-icon btn {{ $category_all['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}"><i class="bi bi-chevron-up"></i></button>
         <ul id="category-{{ $key_a }}" class="accordion-collapse collapse {{ $category_all['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-one">
           @foreach ($category_all['children'] as $key_b => $child)
+          @if (!$child['active']) @continue @endif
           <li class="{{ $child['id'] == $category->id ? 'active' : ''}} child-category">
             <a href="{{ $child['url'] }}" title="{{ $child['name'] }}" class="category-href">{{ $child['name'] }}</a>
             @if ($child['children'] ?? false)

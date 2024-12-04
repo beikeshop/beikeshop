@@ -17,11 +17,11 @@
 
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
-  <a href="{{ beike_api_url() }}/account/plugins/create" class="btn btn-outline-info" target="_blank">{{ __('admin/marketing.i_publish') }}</a>
+  <a href="{{ beike_url() }}/account/plugins/create" class="btn btn-outline-info" target="_blank">{{ __('admin/marketing.i_publish') }}</a>
 @endsection
 
 @section('content')
-  <iframe id="marketing-iframe" src="{{ config('beike.api_url') }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing" class="w-100 marketing-iframe"></iframe>
+  <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing" class="w-100 marketing-iframe"></iframe>
 
   <div id="app" v-cloak>
     <v-set-token ref="v-set-token" />
@@ -40,7 +40,7 @@
     data: {},
     created() {
       window.addEventListener('message', function (event) {
-        if (event.origin != '{{ config('beike.api_url') }}') return;
+        if (event.origin != '{{ beike_url() }}') return;
 
         if (event.data.type == 'plugin_show' && event.data.data.code) {
           location.href = '{{ admin_route('marketing.index') }}/' + event.data.data.code;

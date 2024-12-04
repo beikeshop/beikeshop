@@ -127,7 +127,7 @@ class FlattenCategoryRepo
         $height  = request('height', 300);
         $builder = Category::query()
             ->with(['description'])
-            ->select(['categories.id', 'categories.image', 'categories.parent_id']);
+            ->select(['categories.id', 'categories.image', 'categories.parent_id', 'categories.active']);
 
         $categories = $builder->get();
         $result     = [];
@@ -135,6 +135,7 @@ class FlattenCategoryRepo
             $imagePath               = $category->image;
             $item['id']              = $category->id;
             $item['url']             = $category->url;
+            $item['active']          = $category->active;
             $item['original_image']  = image_origin($imagePath);
             $item['image']           = image_resize($imagePath, $width, $height);
             $item['name']            = html_entity_decode($category->description->name);

@@ -307,7 +307,7 @@ class DesignService
             }
 
             $type                           = $link['type'] ?? '';
-            $value                          = $link['type'] == 'custom' ? $link['value'] : ((int) $link['value'] ?? 0);
+            $value                          = $link['type'] == 'custom' || $link['type'] ==  'static' ? $link['value'] : ((int) $link['value'] ?? 0);
             $images[$index]['link']['link'] = self::handleLink($type, $value);
         }
 

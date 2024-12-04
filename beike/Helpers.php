@@ -936,6 +936,20 @@ function beike_api_url(): string
 }
 
 /**
+ * @return string
+ */
+function beike_url(): string
+{
+    $url      = 'https://beikeshop.com';
+    $adminLocale = admin_locale();
+    if ($adminLocale == 'zh_cn') {
+        return str_replace('beikeshop.com', 'beikeshop.cn', $url);
+    }
+
+    return $url;
+}
+
+/**
  * 检测当前访问域名和 .env 配置域名是否一致
  *
  * @return bool

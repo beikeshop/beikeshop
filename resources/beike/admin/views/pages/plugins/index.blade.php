@@ -45,17 +45,19 @@
             </td>
             <td>
               <div v-if="plugin.installed">
-                <a v-if="plugin.type != 'theme'" class="btn btn-outline-secondary btn-sm"
-                   :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
-                <span v-else :style="!plugin.status ? 'cursor: not-allowed' : ''"><a
-                    :class="['btn btn-outline-secondary btn-sm', !plugin.status ? 'disabled' : '' ]"
-                    href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a></span>
-                <a class="btn btn-outline-secondary btn-sm" target="_blank"
-                   :href="toBkTicketUrl(plugin.code)">{{ __('admin/plugin.ticket') }}</a>
+                <div class="btn-group btn-group-sm">
+                  <a v-if="plugin.type != 'theme'" class="btn btn-outline-secondary"
+                     :href="plugin.edit_url">{{ __('admin/common.edit') }}</a>
+                  <a v-else :style="!plugin.status ? 'cursor: not-allowed' : ''"
+                      :class="['btn btn-outline-secondary', !plugin.status ? 'disabled' : '' ]"
+                      href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
+                  <a class="btn btn-outline-secondary" target="_blank"
+                     :href="toBkTicketUrl(plugin.code)">{{ __('admin/plugin.ticket') }}</a>
+                  <a v-if="plugin.can_update" class="btn btn-outline-success"
+                  @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
+                </div>
                 <a class="btn btn-outline-danger btn-sm"
-                   @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
-                <a v-if="plugin.can_update" class="btn btn-outline-danger btn-sm"
-                   @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
+                    @click="installedPlugin(plugin.code, 'uninstall', index)">{{ __('admin/common.uninstall') }}</a>
               </div>
               <div v-else>
                 <a class="btn btn-outline-success btn-sm"

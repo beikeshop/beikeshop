@@ -99,7 +99,7 @@
   </div>
 </div>
 <script>
-  $('.page-title').append('<a class="ms-3 btn btn-outline-primary btn-sm" href="{{ beike_api_url() }}/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>')
+  $('.page-title').append('<a class="ms-3 btn btn-outline-primary btn-sm" href="{{ beike_url() }}/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>')
 </script>
 @include('admin::pages.design.builder.app_component.image')
 @include('admin::pages.design.builder.app_component.slideshow')

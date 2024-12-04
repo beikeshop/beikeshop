@@ -802,11 +802,13 @@
       },
     })
 
-  $('#filemanager-wrap-app').click(function () {
-    if (!$(event.target).hasClass('keyword-popover-area') && !$(event.target).hasClass('el-icon-search')) {
-      app.filterKeywordVisible = false;
-    }
-  })
+    $('#filemanager-wrap-app').click(function () {
+      if (!$(event.target).hasClass('keyword-popover-area') && !$(event.target).hasClass('el-icon-search')) {
+        app.filterKeywordVisible = false;
+      }
+    })
   </script>
+
+  @stack('admin.file_manager.script_footer')
 </body>
 </html>
