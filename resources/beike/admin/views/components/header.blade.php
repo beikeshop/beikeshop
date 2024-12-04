@@ -55,14 +55,15 @@
           <div class="license-text">
             <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
             @if (system_setting('base.license_expired_at'))
-            <div>
-              <div>{{ __('admin/common.license_bought_s') }}</div>
-              @if (strtotime(system_setting('base.license_expired_at')) - time() <= 30 * 24 * 3600)
-              <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}：{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</div>
-              @endif
-            </div>
+              <div>
+                <div>{{ __('admin/common.license_bought_s') }}</div>
+                @if (strtotime(system_setting('base.license_expired_at')) - time() <= 30 * 24 * 3600)
+                  <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}
+                    ：{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</div>
+                @endif
+              </div>
             @else
-            <span>{{ __('admin/common.license_bought') }}</span>
+              <span>{{ __('admin/common.license_bought') }}</span>
             @endif
           </div>
         </li>
@@ -128,7 +129,7 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <a href="{{ asset(system_setting('base.admin_logo', 'image/logo.png')) }}" class="dropdown-item py-2">
+                <a href="{{ admin_route('logout.index') }}" class="dropdown-item py-2">
                   <i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}
                 </a>
               </li>
