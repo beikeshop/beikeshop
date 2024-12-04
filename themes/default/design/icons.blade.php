@@ -5,7 +5,7 @@
     @if ($content['title'])
     <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
     @endif
-    <div class="container">
+    <div class="container-fluid">
       <div class="row g-3 g-lg-4">
         @foreach ($content['images'] as $image)
         <div class="col-4 col-lg-2">

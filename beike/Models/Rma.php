@@ -14,10 +14,14 @@ namespace Beike\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Beike\Notifications\NewRmaNotification;
+use Beike\Notifications\NewRmaAlertNotification;
+use Illuminate\Notifications\Notifiable;
 
 class Rma extends Base
 {
     use HasFactory;
+    use Notifiable;
 
     protected $fillable = ['order_id', 'order_product_id', 'customer_id', 'name', 'email', 'telephone', 'product_name', 'sku', 'quantity', 'images', 'opened', 'rma_reason_id', 'type', 'status', 'comment'];
 
@@ -41,6 +45,29 @@ class Rma extends Base
     public function reason(): BelongsTo
     {
         return $this->belongsTo(RmaReason::class, 'rma_reason_id', 'id');
+    }
+
+    /**
+     * 退货通知
+     */
+    public function notifyCreateRma()
+    {
+        $useQueue = system_setting('base.use_queue', true);
+        if ($useQueue) {
+            $this->notify(new NewRmaNotification($this));
+        } else {
+            $this->notifyNow(new NewRmaNotification($this));
+        }
+    }
+
+    public function notifyAlertCreateRma()
+    {
+        $useQueue = system_setting('base.use_queue', true);
+        if ($useQueue) {
+            $this->notify(new NewRmaAlertNotification($this));
+        } else {
+            $this->notifyNow(new NewRmaAlertNotification($this));
+        }
     }
 
     public function histories(): HasMany

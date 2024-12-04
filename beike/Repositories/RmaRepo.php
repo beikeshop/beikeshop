@@ -26,9 +26,9 @@ class RmaRepo
     /**
      * 创建一个记录
      * @param $data
-     * @return Builder|Model
+     * @return Rma|Model
      */
-    public static function create($data)
+    public static function create($data) : Rma
     {
         $item           = Rma::query()->create($data);
         $data['notify'] = 0;

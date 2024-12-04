@@ -43,7 +43,9 @@ class RegistrationNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        if ($mailEngine) {
+        $mailAlert = system_setting('base.mail_customer') ?? [];
+
+        if ($mailEngine && in_array('register', $mailAlert)) {
             $drivers[] = 'mail';
         }
 
@@ -59,7 +61,8 @@ class RegistrationNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new CustomerRegistration($this->customer))
-            ->to($notifiable->email);
+            ->to($notifiable->email)
+            ->subject(__('mail.welcome_register'));
     }
 
     /**

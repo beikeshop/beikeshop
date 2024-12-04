@@ -83,11 +83,11 @@
         </el-form-item>
 
         <el-form-item label="{{ __('admin/setting.default_currency') }}">
-          <el-switch v-model="dialog.form.default_currency" :active-value="1" :inactive-value="0" :disabled="dialog.form.code == defaultCurrency"></el-switch>
+          <el-switch v-model="dialog.form.default_currency" :active-value="1" :inactive-value="0" :disabled="currencies[dialog.index].code == defaultCurrency"></el-switch>
         </el-form-item>
 
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="dialog.form.code == defaultCurrency"></el-switch>
+          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="currencies[dialog.index].code == defaultCurrency"></el-switch>
         </el-form-item>
 
         <el-form-item class="mt-5">
@@ -113,7 +113,7 @@
 
         dialog: {
           show: false,
-          index: null,
+          index: 0,
           type: 'add',
           form: {
             id: null,

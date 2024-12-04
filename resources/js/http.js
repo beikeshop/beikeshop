@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2024-11-22 17:22:26
+ * @LastEditTime  2024-12-05 00:07:57
  */
 
 window.axios = require('axios');
@@ -11,10 +11,6 @@ window.axios = require('axios');
 const instance = axios.create({
   baseURL: document.querySelector('base').href, // 自动设置 base
   timeout: 0,
-  headers: {
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-    'locale': document.querySelector('html').getAttribute('lang') || 'en',
-  },
 });
 
 export default {

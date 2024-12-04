@@ -245,8 +245,42 @@
               </x-admin-form-input>
             </div>
 
-            @hook('admin.setting.mail.after')
+            <div v-if="mail_engine != ''">
+              <x-admin::form.row :title="__('admin/setting.email_send_admin')">
+                <div class="input-group wp-400">
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-register" name="mail_alert[]" value="register" {{ in_array('register', old('mail_alert', system_setting('base.mail_alert', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-register">{{ __('admin/setting.email_type_register') }}</label>
+                  </div>
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-order" name="mail_alert[]" value="order" {{ in_array('order', old('mail_alert', system_setting('base.mail_alert', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-order">{{ __('admin/setting.email_type_order') }}</label>
+                  </div>
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-return" name="mail_alert[]" value="return" {{ in_array('return', old('mail_alert', system_setting('base.mail_alert', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-return">{{ __('admin/setting.email_type_return') }}</label>
+                  </div>
+                </div>
+              </x-admin::form.row>
+              <x-admin::form.row :title="__('admin/setting.email_send_customer')">
+                <div class="input-group wp-400">
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-customer-register" name="mail_customer[]" value="register" {{ in_array('register', old('mail_customer', system_setting('base.mail_customer', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-customer-register">{{ __('admin/setting.email_type_register') }}</label>
+                  </div>
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-customer-order" name="mail_customer[]" value="order" {{ in_array('order', old('mail_customer', system_setting('base.mail_customer', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-customer-order">{{ __('admin/setting.email_type_order') }}</label>
+                  </div>
+                  <div class="form-check mt-2 me-3">
+                    <input class="form-check-input" type="checkbox" id="check-input-customer-return" name="mail_customer[]" value="return" {{ in_array('return', old('mail_customer', system_setting('base.mail_customer', []))) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="check-input-customer-return">{{ __('admin/setting.email_type_return') }}</label>
+                  </div>
+                </div>
+              </x-admin::form.row>
+            </div>
 
+            @hook('admin.setting.mail.after')
           </div>
 
           <div class="tab-pane fade" id="tab-checkout">

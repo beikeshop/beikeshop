@@ -85,4 +85,13 @@ return [
     'translation_tools'           => 'Translation Tools',
     'use_queue'                   => 'whether to use the queue',
     'weight_unit'                 => 'Unit of weight',
+    'email_type'                  => 'Send email scenario',
+    'email_type_register'         => 'Registration',
+    'email_type_order'            => 'Order',
+    'email_type_return'           => 'Return',
+    'email_send_admin'            => 'Send to administrator',
+    'email_send_customer'         => 'Send to customer',
+    'email_type_register'         => 'Registration',
+    'email_type_order'            => 'Order',
+    'email_type_return'           => 'Return',
 ];

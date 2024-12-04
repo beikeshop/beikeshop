@@ -1,6 +1,6 @@
 <?php
 /**
- * RegistrationNotification.php
+ * UpdateOrderAlertNotification.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -11,26 +11,29 @@
 
 namespace Beike\Notifications;
 
-use Beike\Mail\CustomerNewOrder;
+use Beike\Mail\AdminUserUpdateOrder;
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class NewOrderNotification extends Notification implements ShouldQueue
+class UpdateOrderAlertNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private Order $order;
+
+    private string $fromCode;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $fromCode)
     {
-        $this->order = $order;
+        $this->order    = $order;
+        $this->fromCode = $fromCode;
     }
 
     /**
@@ -43,7 +46,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        $mailAlert = system_setting('base.mail_customer') ?? [];
+        $mailAlert = system_setting('base.mail_alert') ?? [];
 
         if ($mailEngine && in_array('order', $mailAlert)) {
             $drivers[] = 'mail';
@@ -56,13 +59,13 @@ class NewOrderNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return CustomerNewOrder
+     * @return AdminUserUpdateOrder
      */
     public function toMail($notifiable)
     {
-        return (new CustomerNewOrder($this->order))
-            ->to($notifiable->email)
-            ->subject(__('mail.order_success'));
+        return (new AdminUserUpdateOrder($this->order, $this->fromCode))
+            ->to(system_setting('base.email'))
+            ->subject(__('mail.order_update'));
     }
 
     /**

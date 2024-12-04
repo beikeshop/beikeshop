@@ -6,24 +6,19 @@
       <td style="width:3.2%;max-width:30px;"></td>
       <td style="max-width:480px;text-align:left;">
         <h1 style="font-size: 20px; line-height: 36px; margin: 0px 0px 22px;">
-          {{ __('mail.order_success') }}
+          {{ __('mail.new_order') }}
         </h1>
         <p style="font-size:14px;color:#333; line-height:24px; margin:0;">
-          {{ __('mail.customer_name', ['name' => $order->customer_name]) }}！
-        </p>
-        <p style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
-          <span style="color: rgb(51, 51, 51); font-size: 14px;">{{ __('mail.order_success') }}
-            <span style="font-weight: bold;">{{ __('mail.not_oneself') }}</span>
-          </span>
+          {{ __('mail.admin_name') }}
         </p>
         <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account/order_info.order_details') }}：</p>
         <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse;">
           <thead>
             <tr>
-              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_number') }}</td>
-              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_date') }}</td>
-              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.state') }}</td>
-              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_amount') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color:#f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_number') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color:#f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_date') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color:#f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.state') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color:#f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_amount') }}</td>
             </tr>
           </thead>
           <tbody>
@@ -71,12 +66,6 @@
             @endforeach
           </tbody>
         </table>
-
-        <p style="font-size: 14px; color: rgb(51, 51, 51); line-height: 24px; margin: 6px 0px 0px; word-wrap: break-word; word-break: break-all;">
-          <a href="{{ shop_route('orders.show', ['number' => $order->number, 'email' => $order->email]) }}" title="" style="font-size: 16px; line-height: 45px; display: block; background-color: #fd560f; color: rgb(255, 255, 255); text-align: center; text-decoration: none; margin-top: 20px; border-radius: 3px;">
-            {{ __('shop/account/order_success.view_order') }}
-          </a>
-        </p>
 
         <dl style="font-size: 14px; color: rgb(51, 51, 51); line-height: 18px;">
           <dd style="margin: 0px 0px 6px; padding: 0px; font-size: 12px; line-height: 22px;">

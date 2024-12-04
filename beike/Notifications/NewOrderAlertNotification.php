@@ -1,6 +1,6 @@
 <?php
 /**
- * RegistrationNotification.php
+ * NewOrderAlertNotification.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -11,13 +11,13 @@
 
 namespace Beike\Notifications;
 
-use Beike\Mail\CustomerNewOrder;
+use Beike\Mail\AdminUserNewOrder;
 use Beike\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class NewOrderNotification extends Notification implements ShouldQueue
+class NewOrderAlertNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -43,7 +43,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        $mailAlert = system_setting('base.mail_customer') ?? [];
+        $mailAlert = system_setting('base.mail_alert') ?? [];
 
         if ($mailEngine && in_array('order', $mailAlert)) {
             $drivers[] = 'mail';
@@ -56,13 +56,13 @@ class NewOrderNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return CustomerNewOrder
+     * @return AdminUserNewOrder
      */
     public function toMail($notifiable)
     {
-        return (new CustomerNewOrder($this->order))
-            ->to($notifiable->email)
-            ->subject(__('mail.order_success'));
+        return (new AdminUserNewOrder($this->order))
+            ->to(system_setting('base.email'))
+            ->subject(__('mail.new_order'));
     }
 
     /**

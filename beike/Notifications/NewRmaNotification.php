@@ -11,26 +11,26 @@
 
 namespace Beike\Notifications;
 
-use Beike\Mail\CustomerNewOrder;
-use Beike\Models\Order;
+use Beike\Mail\CustomerNewRma;
+use Beike\Models\Rma;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class NewOrderNotification extends Notification implements ShouldQueue
+class NewRmaNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private Order $order;
+    private Rma $rma;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Rma $rma)
     {
-        $this->order = $order;
+        $this->rma = $rma;
     }
 
     /**
@@ -45,7 +45,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
         $mailEngine = system_setting('base.mail_engine');
         $mailAlert = system_setting('base.mail_customer') ?? [];
 
-        if ($mailEngine && in_array('order', $mailAlert)) {
+        if ($mailEngine && in_array('return', $mailAlert)) {
             $drivers[] = 'mail';
         }
 
@@ -56,13 +56,13 @@ class NewOrderNotification extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return CustomerNewOrder
+     * @return CustomerNewRma
      */
     public function toMail($notifiable)
     {
-        return (new CustomerNewOrder($this->order))
+        return (new CustomerNewRma($this->rma))
             ->to($notifiable->email)
-            ->subject(__('mail.order_success'));
+            ->subject(__('mail.rma_success'));
     }
 
     /**
@@ -80,12 +80,12 @@ class NewOrderNotification extends Notification implements ShouldQueue
 
     /**
      * 保存到 DB
-     * @return Order[]
+     * @return Rma[]
      */
     public function toDatabase()
     {
         return [
-            'order' => $this->order,
+            'rma' => $this->rma,
         ];
     }
 }

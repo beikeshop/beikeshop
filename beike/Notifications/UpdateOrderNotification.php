@@ -46,7 +46,9 @@ class UpdateOrderNotification extends Notification implements ShouldQueue
     {
         $drivers[]  = 'database';
         $mailEngine = system_setting('base.mail_engine');
-        if ($mailEngine) {
+        $mailAlert = system_setting('base.mail_customer') ?? [];
+
+        if ($mailEngine && in_array('order', $mailAlert)) {
             $drivers[] = 'mail';
         }
 
@@ -62,7 +64,8 @@ class UpdateOrderNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new CustomerUpdateOrder($this->order, $this->fromCode))
-            ->to($notifiable->email);
+            ->to($notifiable->email)
+            ->subject(__('mail.order_update'));
     }
 
     /**

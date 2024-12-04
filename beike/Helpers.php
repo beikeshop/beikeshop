@@ -940,7 +940,7 @@ function beike_api_url(): string
  */
 function beike_url(): string
 {
-    $url      = 'https://beikeshop.com';
+    $url      = config('beike.official_website');
     $adminLocale = admin_locale();
     if ($adminLocale == 'zh_cn') {
         return str_replace('beikeshop.com', 'beikeshop.cn', $url);

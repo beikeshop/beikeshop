@@ -46,6 +46,11 @@ class RmaService
             'status'           => 'pending',
         ];
 
-        return RmaRepo::create($params);
+        $rma = RmaRepo::create($params);
+
+        $rma->notifyCreateRma();
+        $rma->notifyAlertCreateRma();
+
+        return $rma;
     }
 }

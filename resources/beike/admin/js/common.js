@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-22 18:32:26
- * @LastEditTime  2024-07-09 17:34:22
+ * @LastEditTime  2024-12-04 10:16:43
  */
 
 export default {
@@ -125,7 +125,7 @@ export default {
       }
     } else {
       $http.get(`${config.api_url}/api/version?version=${config.beike_version}`, null, {hload: true}).then((res) => {
-        Cookies.set('beike_version', res, { expires: 1 });
+        Cookies.set('beike_version', res, { expires: 7 });
 
         bk.versionUpdateTips();
       })
