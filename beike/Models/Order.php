@@ -162,4 +162,5 @@ class Order extends Base
             $this->notifyNow(new UpdateOrderAlertNotification($this, $fromCode));
         }
     }
+    
 }

@@ -15,6 +15,7 @@ use Beike\Models\Language;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class LanguageRepo
 {
@@ -34,7 +35,10 @@ class LanguageRepo
             'status'     => (bool) ($data['status'] ?? 1),
         ];
 
-        return Language::query()->create($languageData);
+        $result = Language::query()->create($languageData);
+        self::clearCache();
+
+        return $result;
     }
 
     /**
@@ -58,7 +62,7 @@ class LanguageRepo
             'status'     => (bool) ($data['status'] ?? 1),
         ];
         $item->update($languageData);
-
+        self::clearCache();
         return $item;
     }
 
@@ -80,6 +84,7 @@ class LanguageRepo
         $item = Language::query()->find($id);
         if ($item) {
             $item->delete();
+            self::clearCache();
         }
     }
 
@@ -89,15 +94,48 @@ class LanguageRepo
      */
     public static function all()
     {
-        return Language::query()->get();
+        if (Cache::has('language_all')) {
+            return Cache::get('language_all');
+        }
+
+        $data = Language::query()->get();
+        Cache::forever('language_all', $data);
+
+        return $data;
     }
 
     /**
      * 获取所有启用的语言
+     *
      * @return Builder[]|Collection
      */
-    public static function enabled()
+    public static function enabled(): mixed
     {
-        return Language::query()->where('status', true)->orderBy('sort_order', 'asc')->get();
+        if (Cache::has('language_cache')) {
+            return Cache::get('language_cache');
+        }
+
+        $data = Language::query()->where('status', true)->orderBy('sort_order', 'asc')->get();
+        Cache::forever('language_cache', $data);
+
+        return $data;
+    }
+
+    /**
+     *  clear cache
+     *
+     * @return void
+     */
+    public static function clearCache(): void
+    {
+        if (Cache::has('language_cache')) {
+            Cache::forget('language_cache');
+        }
+
+        if (Cache::has('language_all')) {
+            Cache::forget('language_all');
+        }
+        self::all();
+        self::enabled();
     }
 }

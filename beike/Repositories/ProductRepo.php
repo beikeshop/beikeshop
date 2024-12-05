@@ -88,6 +88,8 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
+        $driver = getDBDriver();
+
         $builder = Product::query()->with(['description', 'skus', 'masterSku', 'attributes', 'brand']);
 
         $builder->leftJoin('product_descriptions as pd', function ($build) {
@@ -95,7 +97,7 @@ class ProductRepo
                 ->where('locale', locale());
         });
 
-        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+        $builder->select(['pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
@@ -128,7 +130,7 @@ class ProductRepo
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
 
-            if (getDBDriver() == 'mysql')
+            if ($driver == 'mysql')
             {
                 $productIds = implode(',', $productIds);
                 $builder->orderByRaw("FIELD(products.id, {$productIds})");
@@ -165,13 +167,13 @@ class ProductRepo
         }
 
         if (isset($filters['price']) && $filters['price']) {
-            $builder->whereHas('skus', function ($query) use ($filters) {
+            $builder->whereHas('skus', function ($query) use ($driver, $filters) {
                 // price 格式:price=30-100
                 $prices = explode('-', $filters['price']);
                 if (! $prices[1]) {
-                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', getDBDriver() == 'mysql' ? 1 : true);
+                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', $driver == 'mysql' ? 1 : true);
                 } else {
-                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', getDBDriver() == 'mysql' ? 1 : true);
+                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', $driver == 'mysql' ? 1 : true);
                 }
             });
         }
@@ -241,6 +243,10 @@ class ProductRepo
         if (in_array($sort, ['products.created_at', 'products.updated_at', 'products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
             $builder->orderBy($sort, $order);
         }
+
+
+        //dd(to_sql($builder));
+
 
         return hook_filter('repo.product.builder', $builder);
     }

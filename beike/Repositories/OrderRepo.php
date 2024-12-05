@@ -79,7 +79,7 @@ class OrderRepo
      */
     public static function getListBuilder(array $filters = []): Builder
     {
-        $builder = Order::query()->with(['orderProducts'])->where('status', '<>', StateMachineService::CREATED);
+        $builder = Order::getList()->with(['orderProducts'])->where('status', '<>', StateMachineService::CREATED);
 
         $number = $filters['number'] ?? 0;
         if ($number) {
