@@ -8,10 +8,10 @@
       </div>
       <link-selector v-model="module.link" style="margin-bottom: 10px"></link-selector>
 
-      <div class="module-edit-title">{{ __('Fashion2::common.title_text') }}</div>
+      <div class="module-edit-title">{{ __('admin/builder.text_title') }}</div>
       <text-i18n v-model="module.title" style="margin-bottom: 10px"></text-i18n>
 
-      <div class="module-edit-title">{{ __('Fashion2::common.description') }}</div>
+      <div class="module-edit-title">{{ __('admin/builder.text_describe') }}</div>
       <text-i18n v-model="module.description" style="margin-bottom: 10px"></text-i18n>
 
       <div class="module-edit-title">{{ __('admin/builder.scroll_text_bg') }}</div>

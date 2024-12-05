@@ -260,4 +260,8 @@ return [
     'introduction'                     => 'Introduction',
     'copyright_settings'               => 'Copyright Settings',
     'social_media_icons'               => 'Social Media Icons',
+    'text_position'          => 'Text position',
+    'text_start'             => 'Left',
+    'text_center'            => 'Center',
+    'text_end'               => 'Right',
 ];

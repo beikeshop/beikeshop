@@ -256,6 +256,10 @@ return [
     'header_ads'                   => '头部广告',
     'header_ads_bg'                   => '广告背景色',
     'header_ads_info'                   => '广告内容',
+    'text_position'                => '文字位置',
+    'text_start'                   => '居左',
+    'text_center'                  => '居中',
+    'text_end'                     => '居右',
 
     // footer
     'footer_edit'                      => '页尾编辑器',
