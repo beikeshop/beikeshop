@@ -15,7 +15,7 @@ class SelectScope implements Scope
         if (class_exists($field_class)) {
             if ($columns = (new $field_class)->getColumns()) {
                // $builder->select($columns);
-                $builder->addSelect($columns);
+                //$builder->addSelect($columns);
             }
         }
     }

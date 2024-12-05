@@ -97,7 +97,7 @@ class ProductRepo
                 ->where('locale', locale());
         });
 
-        $builder->select(['pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+        $builder->select(['products.*','pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
@@ -243,10 +243,6 @@ class ProductRepo
         if (in_array($sort, ['products.created_at', 'products.updated_at', 'products.sales', 'pd.name', 'products.position', 'product_skus.price'])) {
             $builder->orderBy($sort, $order);
         }
-
-
-        //dd(to_sql($builder));
-
 
         return hook_filter('repo.product.builder', $builder);
     }
