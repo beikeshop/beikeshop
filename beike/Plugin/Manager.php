@@ -140,7 +140,10 @@ class Manager
         if (empty($plugin)) {
             throw new \Exception('无效的插件');
         }
-        $plugin->checkLicenseValid();
+
+        if (!in_array($code, config('app.free_plugin_codes'))) {
+            $plugin->checkLicenseValid();
+        }
         $plugin->handleLabel();
 
         return $plugin;
