@@ -8,8 +8,8 @@ class Customer extends Field
 {
     protected array $scene = [
         'default' => [
-            'id', 'name', 'email', 'avatar', 'from',
-            'customer_group_id', 'status', 'created_at', 'active',
+            'id', 'name', 'email', 'avatar', 'from','password',
+            'customer_group_id', 'status', 'created_at', 'active','code','address_id'
         ],
     ];
 }
