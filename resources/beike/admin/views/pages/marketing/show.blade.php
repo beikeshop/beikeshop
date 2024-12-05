@@ -28,6 +28,20 @@
       })
     }
 
+    if (event.data.type == 'marketing_buy') {
+      const params = { payment_code: event.data.data.payment_code, return_url: '{{ admin_route('marketing.show', ['code' => $plugin_code]) }}'};
+      $http.post('{{ admin_route('marketing.buy', ['code' => $plugin_code]) }}', params).then((res) => {
+        marketingIframe.contentWindow.postMessage({ type: 'marketing_buy_callback', data: res }, '{{ beike_url() }}');
+      })
+    }
+
+    if (event.data.type == 'marketing_buy_services') {
+      const params = { payment_code: event.data.data.payment_code, return_url: '{{ admin_route('marketing.show', ['code' => $plugin_code]) }}'};
+      $http.post(`marketing/${event.data.data.id}/buy_service`, params).then((res) => {
+        marketingIframe.contentWindow.postMessage({ type: 'marketing_buy_services_callback', data: res }, '{{ beike_url() }}');
+      })
+    }
+
     // 下载插件 逻辑
     if (event.data.type == 'download_plugin') {
       $http.post(`marketing/${event.data.data.code}/download`, null, {hmsg:true}).then((res) => {

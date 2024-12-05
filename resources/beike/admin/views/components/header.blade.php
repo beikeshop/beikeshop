@@ -77,7 +77,7 @@
         @hookwrapper('admin.header.license')
         <li class="nav-item">
           <a
-            href="{{ config('beike.official_website') }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license"
+            href="{{ beike_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license"
             target="_blank" class="nav-link">
             <i class="bi bi-wrench-adjustable-circle fs-5 text-info"></i>&nbsp;@lang('admin/common.license_services')
           </a>
@@ -181,9 +181,15 @@
         from: window.location.pathname
       }).then((res) => {
         if (res.data.license_code) {
-          $http.put('settings/values', {license_code: res.data.license_code}, {hload: true});
-          $('.license-ok').removeClass('d-none');
-          $('.warning-copyright').addClass('d-none');
+          $http.put('settings/values', {license_code: res.license_code, license_expired_at: res.expired_at}, {hload: true});
+          if (res.data.has_licensed) {
+            $('.license-ok').removeClass('d-none');
+            $('.warning-copyright').addClass('d-none');
+          }
+
+          if (res.message) {
+            layer.msg(res.message);
+          }
           $('input[name="license_code"]').val(res.data.license_code);
         } else {
           layer.alert('{{ __('admin/common.copyright_buy_text') }}', {

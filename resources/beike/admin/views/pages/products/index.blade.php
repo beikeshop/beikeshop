@@ -99,6 +99,7 @@
                 <th>{{ __('product.image') }}</th>
                 <th>{{ __('product.name') }}</th>
                 <th>{{ __('product.price') }}</th>
+                <th>{{ __('product.quantity') }}</th>
                 <th>
                   <div class="d-flex align-items-center">
                     {{ __('common.created_at') }}
@@ -139,6 +140,7 @@
                        class="text-dark">{{ $product['name'] }}</a>
                   </td>
                   <td>{{ $product['price_formatted'] }}</td>
+                  <td>{{ $product['quantity'] }}</td>
                   <td>{{ $product['created_at'] }}</td>
                   <td>{{ $product['position'] }}</td>
                   @if ($type != 'trashed')
