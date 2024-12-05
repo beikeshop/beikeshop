@@ -59,7 +59,7 @@
                 <div>{{ __('admin/common.license_bought_s') }}</div>
                 @if (strtotime(system_setting('base.license_expired_at')) - time() <= 30 * 24 * 3600)
                   <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}
-                    ：{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</div>
+                    ：<span class="license-expired-at">{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</span></div>
                 @endif
               </div>
             @else
@@ -181,10 +181,11 @@
         from: window.location.pathname
       }).then((res) => {
         if (res.data.license_code) {
-          $http.put('settings/values', {license_code: res.license_code, license_expired_at: res.expired_at}, {hload: true});
+          $http.put('settings/values', {license_code: res.data.license_code, license_expired_at: res.data.expired_at}, {hload: true});
           if (res.data.has_licensed) {
             $('.license-ok').removeClass('d-none');
             $('.warning-copyright').addClass('d-none');
+            $('.license-expired-at').text(res.data.expired_at.split(' ')[0]);
           }
 
           if (res.data.message) {
