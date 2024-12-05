@@ -72,6 +72,7 @@ class PermissionRepo
             ['title' => trans('admin/common.zone'), 'permissions' => $this->getZonePermissions()],
             ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
             ['title' => trans('admin/common.help_index'), 'permissions' => $this->getHelpPermissions()],
+            ['title' => trans('admin/common.account_index'), 'permissions' => $this->getAccountPermissions()],
         ];
 
         $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
@@ -436,6 +437,14 @@ class PermissionRepo
         $items  = $this->getPermissionList('help', $routes);
 
         return hook_filter('role.help_permissions', $items);
+    }
+
+    private function getAccountPermissions(): array
+    {
+        $routes = ['account_index', 'account_update'];
+        $items  = $this->getPermissionList('account', $routes);
+
+        return hook_filter('role.account_permissions', $items);
     }
 
     /**

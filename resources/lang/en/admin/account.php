@@ -12,4 +12,6 @@
 return [
     'create_token'              => 'Create Token',
     'password_text'             => 'If the password is left blank, it will not be modified',
+    'account_index'             => 'View Personal Center',
+    'account_update'             => 'Update Personal Center',
 ];

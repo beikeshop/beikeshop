@@ -12,4 +12,6 @@
 return [
     'create_token'              => '生成 Token',
     'password_text'             => '密码留空则不修改',
+    'account_index'             => '查看个人中心',
+    'account_update'            => '更新个人中心',
 ];
