@@ -46,7 +46,7 @@ return [
     'mail_log'                    => 'Description: The log engine is generally used for testing purposes! The email will not be actually sent to the recipient address, and the email content will be saved in `/storage/logs/laravel.log` in the form of a log',
     'mail_settings'               => 'mail settings',
     'mailgun_domain'              => 'domain name',
-    'mailgun_endpoint'            => 'port',
+    'mailgun_endpoint'            => 'Endpoint',
     'mailgun_secret'              => 'Key',
     'meta_description'            => 'Meta Description',
     'meta_keywords'               => 'Meta Keyword',

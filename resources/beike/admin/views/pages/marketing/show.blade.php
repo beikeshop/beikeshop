@@ -13,12 +13,13 @@
   $('.marketing-iframe').height($(window).height() - 160);
 
   const marketingIframe = document.getElementById('marketing-iframe');
+  const developerToken = @json(system_setting('base.developer_token'));
 
   window.addEventListener('message', function (event) {
     if (event.origin != '{{ beike_url() }}') return;
 
     // token 逻辑，如果官网那边传回来了 token，说明该用户在登录插件市场 这时候需要更新 token
-    if (event.data.type == 'set_token' && event.data.data.token) {
+    if (event.data.type == 'set_token' && event.data.data.token != developerToken) {
       $http.post('{{ admin_route('settings.store_token') }}', {developer_token: event.data.data.token}).then((res) => {
         // 如果有 login_plugin 说明是登录插件市场，需要刷新页面
         if (event.data.data.login_plugin) {
@@ -39,6 +40,16 @@
       const params = { payment_code: event.data.data.payment_code, return_url: '{{ admin_route('marketing.show', ['code' => $plugin_code]) }}'};
       $http.post(`marketing/${event.data.data.id}/buy_service`, params).then((res) => {
         marketingIframe.contentWindow.postMessage({ type: 'marketing_buy_services_callback', data: res }, '{{ beike_url() }}');
+      })
+    }
+
+    if (event.data.type == 'check_domain') {
+      $http.post('{{ admin_route('marketing.check_domain') }}', {token: event.data.data.token, location_host: config.app_url}, {hload: true}).then((res) => {
+        if (res.status == 'success') {
+          if (res.message == 'fail') {
+            layer.alert(res.data, {icon: 2, area: ['400px'], btn: ['{{ __('common.confirm') }}'], title: '{{__("common.text_hint")}}'});
+          }
+        }
       })
     }
 

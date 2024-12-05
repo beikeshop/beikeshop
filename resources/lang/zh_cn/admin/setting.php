@@ -36,7 +36,7 @@ return [
     'sendmail_path'               => '执行路径',
     'mailgun_domain'              => '域名',
     'mailgun_secret'              => '密钥',
-    'mailgun_endpoint'            => '端口',
+    'mailgun_endpoint'            => '端点',
     'mail_log'                    => '说明：日志引擎一般用于测试目的！邮件将不会被真实发送至收件地址，邮件内容会以日志形式保存在 `/storage/logs/laravel.log`',
     'express_code_help'           => '数字、字母、下划线',
     'show_price_after_login'      => '登录显示价格',
