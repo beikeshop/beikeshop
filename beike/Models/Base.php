@@ -22,22 +22,6 @@ class Base extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d H:i:s');
     }
 
-    public function __get($key)
-    {
-        $path = storage_path('fields/' . str_replace('\\', '-', get_class($this)) . '.log');
-        if (! file_exists($path)) {
-            file_put_contents($path, $key . PHP_EOL, 8);
-        } else {
-            $data = file_get_contents($path);
-            $data = array_unique(explode("\n", $data));
-            if (! in_array($key, $data)) {
-                file_put_contents($path, $key . PHP_EOL, 8);
-            }
-        }
-
-        return parent::__get($key);
-    }
-
     protected static function booted(): void
     {
         parent::boot();
