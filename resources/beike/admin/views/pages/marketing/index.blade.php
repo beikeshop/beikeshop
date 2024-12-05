@@ -17,7 +17,7 @@
 
 @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
-  <a href="{{ beike_url() }}/account/plugins/create" class="btn btn-outline-info" target="_blank">{{ __('admin/marketing.i_publish') }}</a>
+  <a href="{{ beike_url() }}/developer/plugins/create" class="btn btn-outline-info" target="_blank">{{ __('admin/marketing.i_publish') }}</a>
 @endsection
 
 @section('content')
