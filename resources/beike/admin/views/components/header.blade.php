@@ -187,8 +187,8 @@
             $('.warning-copyright').addClass('d-none');
           }
 
-          if (res.message) {
-            layer.msg(res.message);
+          if (res.data.message) {
+            layer.msg(res.data.message);
           }
           $('input[name="license_code"]').val(res.data.license_code);
         } else {
