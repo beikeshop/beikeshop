@@ -41,8 +41,8 @@ return [
     'text_zahlung_2'  => 'Hinweis: Die Prüfung einiger Anträge für Zahlungsschnittstellen dauert länger. Bitte bewerben Sie sich im Voraus. In China verwendete Zahlungsmethoden erfordern möglicherweise die Registrierung eines Website-Domainnamens. ',
     'text_zahlung_3'  => 'Darüber hinaus müssen Sie auch die Logistik-Liefermethode festlegen, die Kunden auswählen können. Das System bietet ein kostenloses Plug-in mit festen Versandkosten. ',
     'text_zahlung_4'  => 'Sie können auch zu BeikeShop<a href="' . admin_route('marketing.index') . '">"Plug-in Market"</a> gehen, um mehr Zahlungsmethoden und Logistik zu erfahren und herunterzuladen Methoden! ',
-    'text_mail_1'     => 'E-Mail-Benachrichtigungen können Ihre Kunden über den Bestellstatus auf dem Laufenden halten und sie können sich auch per E-Mail registrieren und Passwörter abrufen. Sie können SMTP entsprechend den tatsächlichen Geschäftsanforderungen konfigurieren und zum Versenden von E-Mails werden E-Mail-Engines wie SendCloud verwendet. ',
-    'text_mail_2'     => 'Warme Erinnerung: Häufiges Versenden von E-Mails kann dazu führen, dass Ihre E-Mails als Spam markiert werden. Wir empfehlen die Verwendung von SendCloud (kostenpflichtiger Dienst) zum Versenden von E-Mails. ',
+    'text_mail_1'     => 'E-Mail-Benachrichtigungen können Ihre Kunden über den Bestellstatus auf dem Laufenden halten und sie können sich auch per E-Mail registrieren und Passwörter abrufen. ',
+    'text_mail_2'     => 'Sie können SMTP entsprechend den tatsächlichen Geschäftsanforderungen konfigurieren und zum Versenden von E-Mails werden E-Mail-Engines wie Sendmail verwendet. ',
 
     // Taste
     'button_setting_general' => 'Grundeinstellungen der Website',

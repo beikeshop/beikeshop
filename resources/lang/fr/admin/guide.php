@@ -41,8 +41,8 @@ return [
     'text_payment_2'  => 'Remarque : L\'examen de certaines applications d\'interface de paiement prend plus de temps, veuillez postuler à l\'avance. Les méthodes de paiement utilisées en Chine peuvent nécessiter l\'enregistrement d\'un nom de domaine de site Web. ',
     'text_payment_3'  => 'De plus, vous devez également définir le mode de livraison logistique que les clients pourront choisir. Le système fournit gratuitement un plug-in de frais d’expédition fixes. ',
     'text_payment_4'  => 'Vous pouvez également accéder à BeikeShop<a href="' . admin_route('marketing.index') . '">"Plug-in Market"</a> pour découvrir et télécharger davantage de méthodes de paiement et de logistique. méthodes ! ',
-    'text_mail_1'     => 'Les notifications par e-mail peuvent tenir vos clients informés de l\'état de leur commande, et ils peuvent également s\'inscrire et récupérer des mots de passe par e-mail. Vous pouvez configurer SMTP en fonction des besoins réels de votre entreprise, et des moteurs de messagerie tels que SendCloud sont utilisés pour envoyer des e-mails. ',
-    'text_mail_2'     => 'Rappel chaleureux : l\'envoi fréquent d\'e-mails peut entraîner le marquage de vos e-mails comme spam. Nous vous recommandons d\'utiliser SendCloud (service payant) pour envoyer des e-mails. ',
+    'text_mail_1'     => 'Les notifications par e-mail peuvent tenir vos clients informés de l\'état de leur commande, et ils peuvent également s\'inscrire et récupérer des mots de passe par e-mail. ',
+    'text_mail_2'     => 'Vous pouvez configurer SMTP en fonction des besoins réels de votre entreprise, et des moteurs de messagerie tels que Sendmail sont utilisés pour envoyer des e-mails. ',
 
     // Bouton
     'button_setting_general' => 'Paramètres de base du site Web',

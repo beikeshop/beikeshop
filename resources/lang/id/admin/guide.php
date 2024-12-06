@@ -41,8 +41,8 @@ return [
     'text_Payment_2'  => 'Catatan: Beberapa aplikasi antarmuka pembayaran membutuhkan waktu lebih lama untuk ditinjau, harap ajukan permohonan terlebih dahulu. Metode pembayaran yang digunakan di Tiongkok mungkin memerlukan registrasi nama domain situs web. ',
     'text_Payment_3'  => 'Selain itu, Anda juga perlu mengatur metode pengiriman logistik yang dapat dipilih pelanggan. Sistem menyediakan plug-in biaya pengiriman tetap secara gratis. ',
     'text_Payment_4'  => 'Anda juga dapat mengunjungi BeikeShop<a href="' . admin_route('marketing.index') . '">"Plug-in Market"</a> untuk mempelajari dan mengunduh lebih banyak metode pembayaran dan logistik metode! ',
-    'text_mail_1'     => 'Pemberitahuan email dapat terus memberi tahu pelanggan Anda tentang status pesanan, dan mereka juga dapat mendaftar dan mengambil kata sandi melalui email. Anda dapat mengonfigurasi SMTP sesuai dengan kebutuhan bisnis sebenarnya, dan mesin email seperti SendCloud digunakan untuk mengirim email. ',
-    'text_mail_2'     => 'Pengingat hangat: Sering mengirim email dapat menyebabkan email Anda ditandai sebagai spam. Kami merekomendasikan penggunaan SendCloud (layanan berbayar) untuk mengirim email. ',
+    'text_mail_1'     => 'Pemberitahuan email dapat terus memberi tahu pelanggan Anda tentang status pesanan, dan mereka juga dapat mendaftar dan mengambil kata sandi melalui email. ',
+    'text_mail_2'     => 'Anda dapat mengonfigurasi SMTP sesuai dengan kebutuhan bisnis sebenarnya, dan mesin email seperti Sendmail digunakan untuk mengirim email. ',
 
     // Tombol
     'button_setting_general' => 'Pengaturan dasar situs web',
