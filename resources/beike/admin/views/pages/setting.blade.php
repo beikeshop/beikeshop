@@ -248,6 +248,7 @@
             <div v-if="mail_engine != ''">
               <x-admin::form.row :title="__('admin/setting.email_send_admin')">
                 <div class="input-group wp-400">
+                  <input name="mail_alert[]" type="hidden" value="">
                   <div class="form-check mt-2 me-3">
                     <input class="form-check-input" type="checkbox" id="check-input-register" name="mail_alert[]" value="register" {{ in_array('register', old('mail_alert', system_setting('base.mail_alert', []))) ? 'checked' : '' }}>
                     <label class="form-check-label" for="check-input-register">{{ __('admin/setting.email_type_register') }}</label>
@@ -263,6 +264,7 @@
                 </div>
               </x-admin::form.row>
               <x-admin::form.row :title="__('admin/setting.email_send_customer')">
+              <input name="mail_customer[]" type="hidden" value="">
                 <div class="input-group wp-400">
                   <div class="form-check mt-2 me-3">
                     <input class="form-check-input" type="checkbox" id="check-input-customer-register" name="mail_customer[]" value="register" {{ in_array('register', old('mail_customer', system_setting('base.mail_customer', []))) ? 'checked' : '' }}>

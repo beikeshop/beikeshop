@@ -4,7 +4,7 @@
 @section('content')
   <x-shop-breadcrumb type="static" value="products.search" />
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       @if (count($items))
         @foreach ($items as $product)

@@ -185,7 +185,11 @@
           if (res.data.has_licensed) {
             $('.license-ok').removeClass('d-none');
             $('.warning-copyright').addClass('d-none');
-            $('.license-expired-at').text(res.data.expired_at.split(' ')[0]);
+            if (res.data.expired_at) {
+              $('.license-expired-at').text(res.data.expired_at.split(' ')[0]).parent().show();
+            } else {
+              $('.license-expired-at').parent().hide();
+            }
           }
 
           if (res.data.message) {
