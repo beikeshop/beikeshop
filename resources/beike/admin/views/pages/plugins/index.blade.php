@@ -96,7 +96,7 @@
 
       methods: {
         toBkTicketUrl(code) {
-          return `{{ config('beike.official_website') }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+          return `{{ beike_url() }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
         },
 
         pluginStatusChange(e, code, index) {
