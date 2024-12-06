@@ -26,7 +26,7 @@ class ProductResource extends JsonResource
             'name'            => $this->description->name ?? '',
             'model'           => $masterSku->model ?? null,
             'quantity'        => $masterSku->quantity ?? null,
-            'price_formatted' => '11',//currency_format($masterSku->price),
+            'price_formatted' => currency_format($masterSku->price),
             'active'          => $this->active,
             'position'        => $this->position,
             'url'             => $this->url,
