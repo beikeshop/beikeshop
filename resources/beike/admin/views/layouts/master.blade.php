@@ -77,6 +77,7 @@
       api_url: '{{ beike_api_url() }}',
       app_url: '{{ request()->getHost() }}',
       has_license: {{ json_encode(check_license()) }},
+      placeholder: '{{ system_setting('base.placeholder') }}',
       has_license_code: '{{ system_setting("base.license_code", "") }}',
     }
 

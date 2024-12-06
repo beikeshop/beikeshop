@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2024-08-28 10:43:58
+ * @LastEditTime  2024-12-06 17:54:10
  */
 
 import http from "../../../js/http";
@@ -34,7 +34,7 @@ $(document).on('click', '.open-file-manager', function(event) {
 if (typeof Vue != 'undefined') {
   Vue.prototype.thumbnail = function thumbnail(image) {
     if (!image) {
-      return 'image/placeholder.png';
+      return config.placeholder;
     }
 
     if (image.indexOf('.mp4') !== -1) {
