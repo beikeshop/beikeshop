@@ -128,7 +128,7 @@ function shop_route($route, $params = []): string
         return  $host.$uri;
     }
 
-    return  $host.'/'.$lang.$uri;
+    return $host . '/' . $lang . (isset($uri[0]) && $uri[0] === '/' ? $uri : '/' . $uri);
 }
 
 /**
