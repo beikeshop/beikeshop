@@ -138,7 +138,7 @@ class FlattenCategoryRepo
             $item['active']          = $category->active;
             $item['original_image']  = image_origin($imagePath);
             $item['image']           = image_resize($imagePath, $width, $height);
-            $item['name']            = html_entity_decode($category->description->name);
+            $item['name']            = html_entity_decode($category->description->name ?? '');
             $result[$category['id']] = $item;
         }
         self::$categories = $result;
