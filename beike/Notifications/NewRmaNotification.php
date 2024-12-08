@@ -61,8 +61,7 @@ class NewRmaNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new CustomerNewRma($this->rma))
-            ->to($notifiable->email)
-            ->subject(__('mail.rma_success'));
+            ->to($notifiable->email);
     }
 
     /**

@@ -264,7 +264,7 @@
                 </div>
               </x-admin::form.row>
               <x-admin::form.row :title="__('admin/setting.email_send_customer')">
-              <input name="mail_customer[]" type="hidden" value="">
+                <input name="mail_customer[]" type="hidden" value="">
                 <div class="input-group wp-400">
                   <div class="form-check mt-2 me-3">
                     <input class="form-check-input" type="checkbox" id="check-input-customer-register" name="mail_customer[]" value="register" {{ in_array('register', old('mail_customer', system_setting('base.mail_customer', []))) ? 'checked' : '' }}>
@@ -279,6 +279,7 @@
                     <label class="form-check-label" for="check-input-customer-return">{{ __('admin/setting.email_type_return') }}</label>
                   </div>
                 </div>
+                <div class="help-text lh-base smtp-qq-hint d-none">{{ __('admin/setting.smtp_qq_hint') }}</div>
               </x-admin::form.row>
             </div>
 
@@ -400,6 +401,19 @@
           $('div').removeClass('active-line');
         }, 1200);
       }
+
+      let smtpHost = $('input[name="smtp[host]"]').val();
+      if (smtpHost.includes('smtp.qq.com')) {
+        $('.smtp-qq-hint').removeClass('d-none');
+      }
+
+      $('input[name="smtp[host]"]').on('input', function () {
+        if ($(this).val().includes('smtp.qq.com')) {
+          $('.smtp-qq-hint').removeClass('d-none');
+        } else {
+          $('.smtp-qq-hint').addClass('d-none');
+        }
+      });
     });
 
   </script>

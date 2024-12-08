@@ -61,8 +61,7 @@ class RegistrationAlertNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new AdminUserNewRegistration($this->customer))
-            ->to(system_setting('base.email'))
-            ->subject(__('mail.new_register'));
+            ->to(system_setting('base.email'));
     }
 
     /**

@@ -167,9 +167,9 @@
           <el-form-item label="{{ __('order.express_number') }}" v-if="form.status == 'shipped'" prop="express_number">
             <el-input class="w-max-500" v-model="form.express_number" size="small" v-if="form.status == 'shipped'" placeholder="{{ __('order.express_number') }}"></el-input>
           </el-form-item>
-          <el-form-item label="{{ __('admin/order.notify') }}">
+          {{-- <el-form-item label="{{ __('admin/order.notify') }}">
             <el-checkbox :true-label="1" :false-label="0" v-model="form.notify"></el-checkbox>
-          </el-form-item>
+          </el-form-item> --}}
           <el-form-item label="{{ __('order.comment') }}">
             <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
           </el-form-item>

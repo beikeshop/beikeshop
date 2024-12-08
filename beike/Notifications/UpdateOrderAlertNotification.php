@@ -64,8 +64,7 @@ class UpdateOrderAlertNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new AdminUserUpdateOrder($this->order, $this->fromCode))
-            ->to(system_setting('base.email'))
-            ->subject(__('mail.order_update'));
+            ->to(system_setting('base.email'));
     }
 
     /**

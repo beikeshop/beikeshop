@@ -94,4 +94,5 @@ return [
     'email_type_register'         => 'Registration',
     'email_type_order'            => 'Order',
     'email_type_return'           => 'Return',
+    'smtp_qq_hint'                => 'Note: It is not recommended to check the option to send to administrators and users at the same time for QQ mailbox SMTP service, otherwise the connection will time out. It is recommended to use mailboxes such as 126, 163, etc., or change the mail engine.',
 ];

@@ -61,8 +61,7 @@ class NewOrderAlertNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new AdminUserNewOrder($this->order))
-            ->to(system_setting('base.email'))
-            ->subject(__('mail.new_order'));
+            ->to(system_setting('base.email'));
     }
 
     /**

@@ -204,7 +204,7 @@ class StateMachineService
      * @param  bool       $notify
      * @throws \Exception
      */
-    public function changeStatus($status, string $comment = '', bool $notify = false)
+    public function changeStatus($status, string $comment = '', bool $notify = true)
     {
         $order         = $this->order;
         $oldStatusCode = $order->status;

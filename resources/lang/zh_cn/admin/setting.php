@@ -90,4 +90,5 @@ return [
     'email_type_register'         => '注册',
     'email_type_order'            => '订单',
     'email_type_return'           => '退货',
+    'smtp_qq_hint'                => '注意：QQ邮箱SMTP服务不建议同时勾选发给管理员和用户，否则会连接超时。建议使用 126、163 等邮箱，或者更换邮件引擎',
 ];

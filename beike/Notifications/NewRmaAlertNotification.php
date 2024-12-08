@@ -61,8 +61,7 @@ class NewRmaAlertNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new AdminUserNewRma($this->rma))
-            ->to(system_setting('base.email'))
-            ->subject(__('mail.rma_success_admin'));
+            ->to(system_setting('base.email'));
     }
 
     /**

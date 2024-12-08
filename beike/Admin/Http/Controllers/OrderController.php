@@ -117,12 +117,11 @@ class OrderController extends Controller
     {
         $status  = $request->get('status');
         $comment = $request->get('comment');
-        $notify  = $request->get('notify');
 
         $shipment = ShipmentService::handleShipment(\request('express_code'), \request('express_number'));
 
         $stateMachine = new StateMachineService($order);
-        $stateMachine->setShipment($shipment)->changeStatus($status, $comment, $notify);
+        $stateMachine->setShipment($shipment)->changeStatus($status, $comment);
 
         $orderStatusData = $request->all();
 

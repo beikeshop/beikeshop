@@ -61,8 +61,7 @@ class NewOrderNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new CustomerNewOrder($this->order))
-            ->to($notifiable->email)
-            ->subject(__('mail.order_success'));
+            ->to($notifiable->email);
     }
 
     /**

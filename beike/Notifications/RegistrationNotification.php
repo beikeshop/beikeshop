@@ -61,8 +61,7 @@ class RegistrationNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new CustomerRegistration($this->customer))
-            ->to($notifiable->email)
-            ->subject(__('mail.welcome_register'));
+            ->to($notifiable->email);
     }
 
     /**
