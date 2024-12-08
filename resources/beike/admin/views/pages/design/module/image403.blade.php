@@ -84,7 +84,7 @@ Vue.component('module-editor-image403', {
       },
       floor: languagesFill(''),
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
-      sub_title: languagesFill('{{ __('admin/builder.text_module_sub_title') }}'),
+      sub_title: languagesFill('{{ __('admin/builder.sub_title') }}'),
       images: [
         {
           image: 'catalog/demo/banner/banner-403-1.jpg',
