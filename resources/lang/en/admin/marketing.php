@@ -93,4 +93,5 @@ return [
     'is_passing_succee'      => 'Verification passed',
     'error_is_passing'       => 'Please drag the button to verify!',
     'i_publish'                => 'I want to publish',
+    'update_success'                => 'Update Success',
 ];

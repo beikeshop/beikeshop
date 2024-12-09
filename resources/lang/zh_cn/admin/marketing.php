@@ -95,4 +95,5 @@ return [
     'not_zip_archive'                => '没有zip文件。请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
     'i_publish'                => '我要发布',
     'not_zip_archive'                => '下载插件失败,请检查相关配置或联系beikeshop客服.',
+    'update_success'                => '更新成功',
 ];
