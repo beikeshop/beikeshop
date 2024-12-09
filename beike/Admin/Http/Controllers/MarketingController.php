@@ -111,7 +111,7 @@ class MarketingController
 
             $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
 
-            if ($plugin['data']['status'] == 'pending') {
+            if ($plugin && $plugin['data']['status'] == 'pending') {
                 throw new Exception('plugin_pending');
             }
 
