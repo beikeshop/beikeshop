@@ -273,8 +273,7 @@ class PluginController extends Controller
             app('plugin')->getPluginOrFail($code);
             $status = $request->get('status');
             SettingRepo::update('plugin', $code, ['status' => $status]);
-
-            return json_success(trans('common.updated_success'));
+            return json_success($status ? trans('admin/common.text_enabled') : trans('admin/common.text_closed'));
         } catch (\Exception $e) {
             return json_fail($e->getMessage());
         }

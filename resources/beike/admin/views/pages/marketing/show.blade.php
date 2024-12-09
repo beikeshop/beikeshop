@@ -6,6 +6,7 @@
 
 @section('content')
   <div class="marketing-iframe-wrap">
+    <div class="loading-am"><div class="loading-info"><img src="{{ asset('image/beike-logo.svg') }}" class="img-fluid w-100">{{ __('common.text_loading') }}</div></div>
     <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin/{{ $plugin_code }}?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&return_url={{ admin_route('marketing.show', $plugin_code) }}" class="w-100 marketing-iframe"></iframe>
   </div>
 @endsection
@@ -14,6 +15,11 @@
 <script>
   const marketingIframe = document.getElementById('marketing-iframe');
   const developerToken = @json(system_setting('base.developer_token'));
+
+  $('#marketing-iframe').on('load', function() {
+    $('.loading-am').hide();
+    $('#marketing-iframe').removeClass('d-none');
+  });
 
   window.addEventListener('message', function (event) {
     if (event.origin != '{{ beike_url() }}') return;

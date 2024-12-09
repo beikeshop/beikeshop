@@ -57,9 +57,8 @@
             @if (system_setting('base.license_expired_at'))
               <div>
                 <div>{{ __('admin/common.license_bought_s') }}</div>
-                @if (strtotime(system_setting('base.license_expired_at')) - time() <= 30 * 24 * 3600)
-                  <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}
-                    ：<span class="license-expired-at">{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</span></div>
+                @if (strtotime(system_setting('base.license_expired_at')) - time() <= 31 * 24 * 3600)
+                  <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}：<span class="license-expired-at">{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</span></div>
                 @endif
               </div>
             @else

@@ -101,4 +101,5 @@ return [
     'whether_open'         => 'Status',
     'yes'                  => 'Yes',
     'text_total'           => 'Total',
+    'text_loading'         => 'loading...',
 ];

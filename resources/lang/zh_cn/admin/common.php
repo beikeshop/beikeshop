@@ -118,4 +118,6 @@ return [
     'copyright_buy_text'     => '您还未购买，请购买授权！',
     'error_length_text'      => '字段 :key 的输入数据超出了允许的最大长度。',
     'error_host_app_url'     => '当前访问域名与 .env 文件中的 APP_URL 不一致，请检查配置。',
+    'text_closed'            => '已关闭',
+    'text_enabled'           => '已开启',
 ];
