@@ -28,10 +28,10 @@
             </div>
           </div>
           <link-selector v-model="item.link" style="margin-bottom: 10px"></link-selector>
-          <div class="module-edit-title">{{ __('Fashion2::common.title_text') }}</div>
+          <div class="module-edit-title">{{ __('admin/builder.text_title') }}</div>
           <text-i18n v-model="item.title" style="margin-bottom: 10px"></text-i18n>
 
-          <div class="module-edit-title">{{ __('Fashion2::common.sub_title') }}</div>
+          <div class="module-edit-title">{{ __('admin/builder.sub_title') }}</div>
           <text-i18n v-model="item.sub_title" style="margin-bottom: 10px"></text-i18n>
         </div>
       </div>

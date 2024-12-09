@@ -21,8 +21,9 @@
 @endsection
 
 @section('content')
-  <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&type={{ request('type') }}" class="w-100 marketing-iframe"></iframe>
-
+  <div class="marketing-iframe-wrap">
+    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&type={{ request('type') }}" class="w-100 marketing-iframe"></iframe>
+  </div>
   <div id="app" v-cloak>
     <v-set-token ref="v-set-token" />
   </div>
@@ -31,8 +32,6 @@
 
 @push('footer')
 <script>
-  $('.marketing-iframe').height($(window).height() - 160);
-
   const marketingIframe = document.getElementById('marketing-iframe');
 
   let app = new Vue({

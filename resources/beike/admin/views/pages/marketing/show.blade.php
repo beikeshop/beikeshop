@@ -5,13 +5,13 @@
 @section('body-class', 'page-marketing-info')
 
 @section('content')
-  <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin/{{ $plugin_code }}?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&return_url={{ admin_route('marketing.show', $plugin_code) }}" class="w-100 marketing-iframe"></iframe>
+  <div class="marketing-iframe-wrap">
+    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin/{{ $plugin_code }}?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&return_url={{ admin_route('marketing.show', $plugin_code) }}" class="w-100 marketing-iframe"></iframe>
+  </div>
 @endsection
 
 @push('footer')
 <script>
-  $('.marketing-iframe').height($(window).height() - 160);
-
   const marketingIframe = document.getElementById('marketing-iframe');
   const developerToken = @json(system_setting('base.developer_token'));
 

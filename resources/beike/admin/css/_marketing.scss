@@ -8,6 +8,14 @@
  * @LastEditTime  2022-09-26 16:39:34
  */
 
+.marketing-iframe-wrap {
+  height: calc(100vh - 120px);
+
+  #marketing-iframe {
+    height: 100%;
+  }
+}
+
 body.page-marketing {
   #content {
     overflow: hidden;
