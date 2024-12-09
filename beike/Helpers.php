@@ -120,9 +120,11 @@ function shop_route($route, $params = []): string
     }, config('app.langs'));
 
     $host = request()->getSchemeAndHttpHost();
-    $lang = session()->get('locale');
+
+    $lang = session()->get('locale') ?? system_setting('base.locale');
 
     $uri = str_replace($host, '', route('shop.' . $route, $params));
+
     if (in_array($uri, $langs))
     {
         return $host . $uri;
@@ -296,7 +298,7 @@ function locale(): string
 {
     if (is_admin()) {
         $locales    = collect(locales())->pluck('code');
-        $userLocale = current_user()->locale;
+        $userLocale = current_user()->locale ?? 'en';
 
         return ($locales->contains($userLocale)) ? $userLocale : 'en';
     }

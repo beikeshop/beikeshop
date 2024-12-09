@@ -92,6 +92,13 @@ $table-bg: transparent;
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap/scss/bootstrap';
 
+.col-lg-20 {
+  @include media-breakpoint-up(lg) {
+    flex: 0 0 calc(100% / 5); // 宽度为 1/5
+    max-width: calc(100% / 5); // 同时限制最大宽度
+  }
+}
+
 .btn-primary {
   color: #fff !important;
 }
