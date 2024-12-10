@@ -16,6 +16,6 @@
     <div class="col-6 col-md-3">@include('shared.product')</div>
     @endforeach
   </div>
-  {{ $products->links('shared/pagination/bootstrap-4') }}
+  {{ $products->links('shared/pagination/seo_url') }}
 </div>
 @endsection

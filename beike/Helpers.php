@@ -1050,3 +1050,16 @@ function isTwoDimensionalArray($array): bool
 
     return count($filtered) > 0;
 }
+
+function replace_url($url): string
+{
+    $urlInfo = parse_url($url);
+    $lang = (locale() === system_setting('base.locale')) ? null : session()->get('locale');
+    $path = $urlInfo['path'];
+    if ($lang) {
+
+        $path = '/' . $lang . $urlInfo['path'];
+    }
+
+    return $urlInfo['scheme'] . '://' . $urlInfo['host'] . $path . '?' . $urlInfo['query'];
+}
