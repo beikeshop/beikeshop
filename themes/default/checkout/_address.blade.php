@@ -16,12 +16,14 @@
             v-if="source.addresses.length &&( address.id == form.shipping_address_id || isAllAddress)">
             <div :class="['item', address.id == form.shipping_address_id ? 'active' : '']"
               @click="updateCheckout(address.id, 'shipping_address_id')">
+              @hookwrapper('checkout.address.shipping.login.info')
               <div class="name-wrap">
                 <span class="name">@{{ address.name }}</span>
                 <span class="phone">@{{ address.phone }}</span>
               </div>
               <div class="zipcode">@{{ address.zipcode }}</div>
               <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
+              @endhookwrapper
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success"
@@ -44,6 +46,7 @@
         <template v-else>
           <div class="col-lg-6 col-12" v-if="source.guest_shipping_address">
             <div class="item active">
+              @hookwrapper('checkout.address.shipping.no_login.info')
               <div class="name-wrap">
                 <span class="name">@{{ source.guest_shipping_address.name }}</span>
                 <span class="phone">@{{ source.guest_shipping_address.phone }}</span>
@@ -53,6 +56,7 @@
                 <span class="ms-1">@{{ source.guest_shipping_address.email }}</span>
               </div>
               <div class="address-info">@{{ source.guest_shipping_address.address_1 }} @{{ source.guest_shipping_address.address_2 }} @{{ source.guest_shipping_address.city }} @{{ source.guest_shipping_address.zone }} @{{ source.guest_shipping_address.country }}</div>
+              @endhookwrapper
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>
@@ -88,12 +92,14 @@
             v-if="source.addresses.length && (form.payment_address_id == '' || address.id == form.payment_address_id || isAllAddressPayment)">
             <div :class="['item', address.id == form.payment_address_id ? 'active' : '']"
               @click="updateCheckout(address.id, 'payment_address_id')">
+              @hookwrapper('checkout.address.payment.login.info')
               <div class="name-wrap">
                 <span class="name">@{{ address.name }}</span>
                 <span class="phone">@{{ address.phone }}</span>
               </div>
               <div class="zipcode">@{{ address.zipcode }}</div>
               <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
+              @endhookwrapper
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success"
@@ -116,12 +122,14 @@
         <template v-else>
           <div class="col-lg-6 col-12" v-if="source.guest_payment_address">
             <div class="item active">
+              @hookwrapper('checkout.address.payment.no_login.info')
               <div class="name-wrap">
                 <span class="name">@{{ source.guest_payment_address.name }}</span>
                 <span class="phone">@{{ source.guest_payment_address.phone }}</span>
               </div>
               <div class="zipcode">@{{ source.guest_payment_address.zipcode }}</div>
               <div class="address-info">@{{ source.guest_payment_address.address_1 }} @{{ source.guest_payment_address.address_2 }} @{{ source.guest_payment_address.city }} @{{ source.guest_payment_address.zone }} @{{ source.guest_payment_address.country }}</div>
+              @endhookwrapper
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success">{{ __('shop/checkout.chosen') }}</span>

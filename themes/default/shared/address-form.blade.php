@@ -1,3 +1,4 @@
+@hookwrapper('checkout.body.address')
 <template id="address-dialog">
   <div class="address-dialog">
     <el-dialog custom-class="mobileWidth" title="{{ __('address.index') }}" :visible.sync="editShow" @close="closeAddressDialog('addressForm')" :close-on-click-modal="false">
@@ -192,3 +193,4 @@
   }
 });
 </script>
+@endhookwrapper
