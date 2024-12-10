@@ -7,7 +7,7 @@
       width="500px">
       <el-input
         type="textarea"
-        :rows="3"
+        :rows="5"
         placeholder="{{ __('admin/marketing.set_token') }}"
         v-model="setTokenDialog.token">
       </el-input>
