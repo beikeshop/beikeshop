@@ -30,6 +30,12 @@ class AddressResource extends JsonResource
             'default'    => ($customer->address_id == $this->id),
         ];
 
+        $rs   = hook_filter('account.address.resource.after', [
+            'data'    => $data,
+            'address' => $this
+        ]);
+        $data = $rs['data'];
+
         return $data;
     }
 }

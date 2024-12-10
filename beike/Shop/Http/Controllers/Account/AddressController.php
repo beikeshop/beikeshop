@@ -42,7 +42,10 @@ class AddressController extends Controller
     public function store(AddressRequest $request)
     {
         $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
+        $data = hook_filter('account.address.store.create.before', $data);
         $address = AddressService::create($data);
+
+        $address = hook_filter('account.address.store.after', $address);
 
         return json_success(trans('common.created_success'), new AddressResource($address));
     }
@@ -50,7 +53,9 @@ class AddressController extends Controller
     public function update(AddressRequest $request, int $id)
     {
         $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
+        $data = hook_filter('account.address.update.update.before', $data);
         $address = AddressService::update($id, $data);
+        $address = hook_filter('account.address.update.after', $address);
 
         return json_success(trans('common.updated_success'), new AddressResource($address));
     }

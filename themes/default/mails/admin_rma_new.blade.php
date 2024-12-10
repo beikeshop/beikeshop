@@ -52,7 +52,7 @@
               <td style="border: 1px solid #eee;padding:4px; background-color: #f8f9fa;font-size:13px;padding: 7px;width: 100%">
                 <div style="display: flex; align-items: center;">
                   <div style="width: 70px; height: 70px; flex: 0 0 70px; overflow: hidden;">
-                    <img src="{{ $orderProduct->image }}"style="max-width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ image_resize($orderProduct->image, 200, 200) }}"style="max-width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <div style="margin-left: 10px;">
                     <div style="margin-bottom: 10px; font-size: 12px;">{{ $orderProduct->name }}</div>

@@ -27,12 +27,14 @@
               <div class="row" v-if="addresses.length">
                 <div class="col-md-6 col-12" v-for="address, index in addresses" :key="index">
                   <div class="item">
+                    @hookwrapper('account.address.info')
                     <div class="name-wrap">
                       <span class="name">@{{ address.name }}</span>
                       <span class="phone">@{{ address.phone }}</span>
                     </div>
                     <div class="zipcode">@{{ address.zipcode }}</div>
                     <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
+                    @endhookwrapper
                     <div class="address-bottom">
                       <div><span class="badge bg-success"
                           v-if="address.default">{{ __('shop/account/addresses.default_address') }}</span></div>
