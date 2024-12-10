@@ -377,22 +377,27 @@
 
         addCart(isBuyNow = false) {
           bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
+
+            const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
+            let path = '/' + '{{ session()->get('locale') }}' + '/checkout';
+            if(lang === "null") {
+              path = '/checkout';
+            }
+
             if (isIframe) {
               let index = parent.layer.getFrameIndex(window.name); //当前iframe层的索引
               parent.bk.getCarts();
-
               setTimeout(() => {
                 parent.layer.close(index);
-
                 if (isBuyNow) {
-                  parent.location.href = '/' + '{{ session()->get('locale') }}' + '/checkout'
+                  parent.location.href = path;
                 } else {
                   parent.$('.btn-right-cart')[0].click()
                 }
               }, 400);
             } else {
               if (isBuyNow) {
-                location.href = '/' + '{{ session()->get('locale') }}' + '/checkout'
+                location.href = path;
               }
             }
           });

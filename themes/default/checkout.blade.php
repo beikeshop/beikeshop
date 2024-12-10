@@ -202,7 +202,13 @@
         }
 
         $http.post('/checkout/confirm', data).then((res) => {
-          location = '/' + '{{ session()->get('locale') }}' + '/orders/' + res.number + '/pay?type=create'
+          const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
+          let path = '/' + '{{ session()->get('locale') }}' + '/orders/' + res.number + '/pay?type=create';
+          if(lang === "null") {
+            path = '/orders/' + res.number + '/pay?type=create';
+          }
+
+          location = path;
         })
       });
 
