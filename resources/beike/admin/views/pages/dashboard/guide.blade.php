@@ -137,5 +137,11 @@
 
       $('.dashboard-guide-section').remove();
     });
+
+    $('input[name="hide_guide"]').on('change', function() {
+      setTimeout(() => {
+        $('.guide-close').trigger('click');
+      }, 200);
+    })
   </script>
 @endpush
