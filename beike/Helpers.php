@@ -125,7 +125,7 @@ function shop_route($route, $params = []): string
 
     $uri = str_replace($host, '', route('shop.' . $route, $params));
 
-    if (in_array($uri, $langs))
+    if (in_array($uri, $langs) || (locale() === system_setting('base.locale')))
     {
         return $host . $uri;
     }

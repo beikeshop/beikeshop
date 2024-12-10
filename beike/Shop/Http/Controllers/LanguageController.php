@@ -36,23 +36,39 @@ class LanguageController extends Controller
      */
     private function redirectUrl(): RedirectResponse
     {
-        $lang = Session::get('locale');
+        $lang    = Session::get('locale');
         $backUrl = redirect()->back()->getTargetUrl();
-        $host = request()->getSchemeAndHttpHost();
-        $uri = str_replace($host, '', $backUrl);
+        $host    = request()->getSchemeAndHttpHost();
+        $uri     = str_replace($host, '', $backUrl);
 
-        if ($uri == '/')
-        {
-            $uri = $uri.$lang;
+        if ($uri == '/') {
+            $uri = $uri . $lang;
         } else {
-            foreach (config('app.langs')  as $item)
-            {
+            foreach (config('app.langs') as $item) {
                 $uriArr = explode('/', $uri);
-                if(count($uriArr) && in_array($item, $uriArr))
-                {
-                    $uri = str_replace($item, $lang,$uri);
-                    break;
+
+                if (count($uriArr) && in_array($item, $uriArr)) {
+
+                    $uri = str_replace($item, $lang, $uri);
+
+                    if (locale() === system_setting('base.locale')) {
+
+                        $uri = str_replace('/' . locale(), '', $uri);
+                    }
+
+                   break;
+
                 }
+
+                if (count($uriArr) && (isset($uriArr[1]) && ! in_array($uriArr[1], config('app.langs')))) {
+                    if (locale() !== system_setting('base.locale')) {
+                        $uri = '/' . $lang . $uri;
+
+                        break;
+                    }
+
+                }
+
             }
         }
 

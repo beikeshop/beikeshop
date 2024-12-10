@@ -22,7 +22,9 @@ class HomeController extends Controller
         $this->setLang();
         if ($originalUri === '/')
         {
-            return $this->redirect();
+            if (locale() !== system_setting('base.locale')) {
+                return $this->redirect();
+            }
         }
 
         $designSettings = system_setting('base.design_setting');
