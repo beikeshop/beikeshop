@@ -33,6 +33,7 @@
         @endforeach
       </div>
       <div class="swiper-pagination slideshow-pagination-{{ $module_id }}"></div>
+      <div class="autoplay-progress"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"></circle></svg><span></span></div>
     </div>
 
     @if ($content['scroll_text']['text'])
@@ -50,6 +51,9 @@
   </div>
 
   <script>
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+
     var moduleSwiperImgText_{{ $module_id }} = new Swiper ('.module-swiper-img-text-{{ $module_id }}', {
       loop: true,
       parallax : true,
@@ -66,6 +70,13 @@
         delay: 3000,
         disableOnInteraction: false
       },
+
+      on: {
+        autoplayTimeLeft(s, time, progress) {
+          progressCircle.style.setProperty("--progress", 1 - progress);
+          progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+        }
+      }
     })
 
     $('.module-img-text-slideshow').hover(function() {
