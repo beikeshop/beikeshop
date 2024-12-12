@@ -33,9 +33,6 @@ class ThemeSeeder extends Seeder
 
         $footerSetting = $this->getFooterSetting();
         SettingRepo::update('system', 'base', ['footer_setting' => $footerSetting]);
-
-        $headerSetting = $this->getHeaderSetting();
-        SettingRepo::update('system', 'base', ['header_setting' => $headerSetting]);
     }
 
     /**

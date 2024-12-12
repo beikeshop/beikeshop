@@ -472,16 +472,50 @@ img {
   -webkit-line-clamp: 2;
 }
 
+.breadcrumb-filter {
+  @media (max-width: 992px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f6f6f6;
+    padding-right: 10px;
+
+    .mb-filter {
+      width: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    i {
+      line-height: 1;
+    }
+  }
+
+  .mb-filter {
+    @media (min-width: 992px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 992px) {
+    margin-bottom: 10px;
+
+    .breadcrumb-wrap {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .breadcrumb-wrap {
   background-color: #f6f6f6;
   margin-bottom: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     margin-bottom: 10px;
   }
 
   .breadcrumb {
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       padding-top: .4rem;
       padding-bottom: .4rem;
     }

@@ -9,11 +9,14 @@
 @endpush
 
 @section('content')
-  <x-shop-breadcrumb type="category" :value="$category" :is-full="true" />
+  <div class="breadcrumb-filter">
+    <x-shop-breadcrumb type="category" :value="$category" :is-full="true" />
+    <div class="mb-filter"><i class="bi bi-funnel"></i></div>
+  </div>
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-lg-3 pe-lg-4 left-column d-none d-lg-block">
+      <div class="col-12 col-lg-3 pe-lg-4 left-column">
         <div class="x-fixed-top">@include('shared.filter_sidebar_block')</div>
       </div>
 
@@ -91,6 +94,18 @@
   $('.form-select, input[name="style_list"]').change(function(event) {
     filterProductData();
   });
+
+  if ($(window).width() < 992) {
+    $('.mb-filter').on('click', function() {
+      $('.left-column').fadeIn(0).find('.x-fixed-top').addClass('active');
+    });
+    $(document).on('click', '.left-column', function(e) {
+      if ( $(e.target).closest('.x-fixed-top').length === 0 ) {
+        $('.left-column .x-fixed-top').removeClass('active');
+        setTimeout("$('.left-column').fadeOut(50)", 220);
+      }
+    });
+  }
 
   function filterProductData() {
     let url = bk.removeURLParameters(window.location.href, 'attr', 'price', 'sort', 'order');

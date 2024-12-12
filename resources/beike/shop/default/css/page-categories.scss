@@ -31,6 +31,37 @@ body.page-categories {
     }
   }
 
+  .left-column {
+    @media (max-width: 992px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      cursor: pointer;
+      z-index: 999;
+      background: rgba(0, 0, 0, .4);
+
+      .x-fixed-top {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 80%;
+        padding: 20px;
+        text-align: left;
+        overflow-y: auto;
+        transform: translateX(100%);
+        background-color: #fff;
+        transition: all .3s ease-out;
+        right: 0;
+        &.active {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
+
   .children-wrap {
     @media (max-width: 992px) {
       display: none;
