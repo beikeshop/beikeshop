@@ -1,21 +1,5 @@
 <header>
   @hook('header.before')
-  @if ($header_content && isset($header_content['header_ads']) && $header_content['header_ads']['active'] &&  count($header_content['header_ads']['items']))
-    <div class="header-ads" style="background-color: {{ $header_content['header_ads']['bg_color'] }}; color: {{ $header_content['header_ads']['color'] }}">
-      <div class="scrolling-ads">
-        @foreach ($header_content['header_ads']['items'] as $item)
-          <div class="text-center">
-            @if ($item['link'])
-              <a href="{{ $item['link'] }}">{{ $item['title'] }}</a>
-            @else
-            {{ $item['title'] }}
-            @endif
-          </div>
-        @endforeach
-      </div>
-    </div>
-  @endif
-
   <div class="top-wrap">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <div class="left d-flex align-items-center">

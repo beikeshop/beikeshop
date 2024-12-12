@@ -11,31 +11,6 @@
 header {
   background: #fff;
 
-  .header-ads {
-    height: 40px;
-    position: relative;
-    overflow: hidden;
-    font-weight: bold;
-
-    .scrolling-ads {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-
-      > div {
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        a {
-          color: inherit;
-        }
-      }
-    }
-  }
-
   .top-wrap {
     height: 36px;
     background: #F7F8FA;

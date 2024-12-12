@@ -47,7 +47,6 @@ class ShareViewData
             View::share('shop_base_url', shop_route('home.index'));
             View::share('footer_content', hook_filter('footer.content', FooterRepo::handleFooterData()));
             View::share('menu_content', hook_filter('menu.content', MenuRepo::handleMenuData()));
-            View::share('header_content', hook_filter('header.content', HeaderRepo::handleHeaderData()));
         }
     }
 
