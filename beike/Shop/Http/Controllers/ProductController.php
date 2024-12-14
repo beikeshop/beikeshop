@@ -37,9 +37,6 @@ class ProductController extends Controller
 
         $data = hook_filter('product.show.data', $data);
 
-
-
-
         return view('product/product', $data);
     }
 

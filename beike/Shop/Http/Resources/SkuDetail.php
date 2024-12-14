@@ -36,6 +36,7 @@ class SkuDetail extends JsonResource
             'origin_price'        => $this->origin_price,
             'origin_price_format' => currency_format($this->origin_price),
             'quantity'            => $this->quantity,
+            'weight'              => $this->weight ?? '',
             'is_default'          => $this->is_default,
         ];
 

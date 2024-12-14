@@ -119,17 +119,11 @@
                 class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}
             </div>
             @endhookwrapper
+
+            @hookwrapper('product.detail.weight')
+            <div class="d-lg-flex" v-if="product.weight"><span class="title text-muted">{{ __('admin/product.weight_text') }}:</span> @{{ product.weight }} {{ __('product.' . $product['weight_class']) }}</div>
+            @endhookwrapper
           </div>
-          @if (0)
-            <div class="rating-wrap d-lg-flex">
-              <div class="rating">
-                @for ($i = 0; $i < 5; $i++)
-                  {!! $iconfont !!}
-                @endfor
-              </div>
-              <span class="text-muted">132 reviews</span>
-            </div>
-          @endif
           @hookwrapper('product.detail.variables')
           <div class="variables-wrap mb-md-4" v-if="source.variables.length">
             <div class="variable-group" v-for="variable, variable_index in source.variables" :key="variable_index">
@@ -296,6 +290,7 @@
           origin_price_format: "",
           position: 0,
           price: 0,
+          weight: 0,
           price_format: "",
           quantity: 0,
           sku: "",

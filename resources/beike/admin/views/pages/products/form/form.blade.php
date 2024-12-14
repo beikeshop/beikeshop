@@ -309,7 +309,9 @@
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.cost_price"
                                placeholder="{{ __('admin/product.cost_price') }}">
                         <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.quantity"
-                               placeholder="{{ __('admin/product.quantity') }}">
+                              placeholder="{{ __('admin/product.quantity') }}">
+                        <input type="number" class="form-control me-2 bg-white" v-model="variablesBatch.weight"
+                               placeholder="{{ __('admin/product.weight_text') }}">
                         @hook('admin.product.edit.variables.batch.input.after')
                         <button type="button" class="btn btn-primary text-nowrap"
                                 @click="batchSettingVariant">{{ __('common.batch_setting') }}</button>
@@ -328,6 +330,7 @@
                         <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
                         <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
                         <th style="width: 70px">{{ __('admin/product.quantity') }}</th>
+                        <th class="w-min-100">{{ __('admin/product.weight_text') }}</th>
                         @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
@@ -396,6 +399,7 @@
                           <td><input type="number" class="form-control" v-model="sku.quantity"
                                      :name="'skus[' + skuIndex + '][quantity]'"
                                      placeholder="{{ __('admin/product.quantity') }}"></td>
+                          <td><input type="number" class="form-control" v-model="sku.weight" step="any" :name="'skus[' + skuIndex + '][weight]'" placeholder="{{ __('admin/product.weight_text') }}"></td>
                           @hook('admin.product.edit.sku.variants.after')
                         </tr>
                         </tbody>
@@ -1027,6 +1031,9 @@
             if (this.variablesBatch.cost_price) {
               this.form.skus[index].cost_price = this.variablesBatch.cost_price;
             }
+            if (this.variablesBatch.weight) {
+              this.form.skus[index].weight = this.variablesBatch.weight;
+            }
             if (this.variablesBatch.quantity) {
               this.form.skus[index].quantity = this.variablesBatch.quantity;
             }
@@ -1266,6 +1273,7 @@
                 model: '',
                 sku: 'BKSKU-' + this.randomValue(4, 'string') + '-' + this.randomValue(3, 'number'),
                 price: null,
+                weight: $('input[name="weight"]').val(),
                 quantity: null,
                 is_default: i == 0,
               });

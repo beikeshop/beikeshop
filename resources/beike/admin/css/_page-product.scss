@@ -236,20 +236,5 @@ body.page-product-form {
         }
       }
     }
-
-    .table-skus {
-      input {
-        padding: 0.375rem;
-        // 去除 type="number" 的上下箭头
-        &[type="number"] {
-          -moz-appearance: textfield;
-        }
-      }
-
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
-    }
   }
 }

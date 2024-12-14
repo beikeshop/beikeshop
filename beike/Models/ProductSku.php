@@ -8,7 +8,7 @@ class ProductSku extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'quantity', 'is_default'];
+    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'weight', 'quantity', 'is_default'];
 
     protected $casts = [
         'variants' => 'array',
@@ -50,5 +50,10 @@ class ProductSku extends Base
         }
 
         return $variantLabel;
+    }
+
+    public function setWeightAttribute($value)
+    {
+        $this->attributes['weight'] = (float) ($value ?? 0);
     }
 }
