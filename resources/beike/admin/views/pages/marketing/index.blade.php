@@ -22,8 +22,8 @@
 
 @section('content')
   <div class="marketing-iframe-wrap">
-    <div class="loading-am"><div class="loading-info"><img src="{{ asset('image/beike-logo.svg') }}" class="img-fluid w-100">{{ __('common.text_loading') }}</div></div>
-    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&type={{ request('type') }}" class="w-100 marketing-iframe d-none"></iframe>
+    @include('admin::shared.loading-am')
+    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&type={{ request('type') }}" class="w-100 marketing-iframe"></iframe>
   </div>
   <div id="app" v-cloak>
     <v-set-token ref="v-set-token" />
@@ -37,7 +37,6 @@
 
   $('#marketing-iframe').on('load', function() {
     $('.loading-am').hide();
-    $('#marketing-iframe').removeClass('d-none');
   });
 
   let app = new Vue({

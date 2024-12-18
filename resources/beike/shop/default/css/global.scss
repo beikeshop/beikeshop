@@ -13,8 +13,11 @@
 }
 
 body[class^="page-account"] {
-  // background-color: #F7F8FA;
   background-color: #f4f4f4;
+
+  .breadcrumb-wrap {
+    background-color: #eeeeee;
+  }
 }
 
 body {

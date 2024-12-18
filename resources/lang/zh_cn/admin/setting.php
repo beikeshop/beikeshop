@@ -23,6 +23,7 @@ return [
     'store_settings'              => '商店设置',
     'picture_settings'            => '图片设置',
     'use_queue'                   => '是否使用队列',
+    'use_queue_text'              => '队列配置教程：',
     'mail_settings'               => '邮件设置',
     'mail_engine'                 => '邮件引擎',
     'smtp_host'                   => '主机',

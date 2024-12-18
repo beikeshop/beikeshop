@@ -84,6 +84,7 @@ return [
     'theme_default'               => 'Default Theme',
     'translation_tools'           => 'Translation Tools',
     'use_queue'                   => 'whether to use the queue',
+    'use_queue_text'              => 'Queue opening tutorial:',
     'weight_unit'                 => 'Unit of weight',
     'email_type'                  => 'Send email scenario',
     'email_type_register'         => 'Registration',

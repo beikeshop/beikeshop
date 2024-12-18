@@ -14,13 +14,30 @@
   }
 
   .nav {
+    margin-bottom: 28px;
+    margin-top: -10px;
+
     .nav-link {
       color: #6c757d;
       font-size: .9rem;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      margin: 0 5px;
+      padding: 0.3rem 1rem;
+
+      @media (max-width: 768px) {
+        padding: 0.2rem .7rem;
+        font-size: 13px;
+        margin: 0;
+      }
+      box-shadow: none;
+      &:hover {
+        border-color: #ddd;
+      }
 
       &.active {
         color: #111;
-        font-weight: bold;
+        border-color: #111;
       }
     }
   }

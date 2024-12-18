@@ -204,7 +204,7 @@
             @hook('admin.setting.mail.before')
 
             <x-admin-form-switch name="use_queue" title="{{ __('admin/setting.use_queue') }}" value="{{ old('use_queue', system_setting('base.use_queue', '0')) }}">
-              {{-- <div class="help-text font-size-12 lh-base">{{ __('admin/setting.enable_tax_info') }}</div> --}}
+              <div class="help-text font-size-12 lh-base">{{__('admin/setting.use_queue_text')}}https://docs.beikeshop.com/config/mail.html#%E9%98%9F%E5%88%97%E9%85%8D%E7%BD%AE</div>
             </x-admin-form-switch>
             <x-admin::form.row title="{{ __('admin/setting.mail_engine') }}">
               <select name="mail_engine" v-model="mail_engine" class="form-select wp-200 me-3">
@@ -403,11 +403,11 @@
       }
 
       let smtpHost = $('input[name="smtp[host]"]').val();
-      if (smtpHost.includes('smtp.qq.com')) {
+      if (smtpHost && smtpHost.includes('smtp.qq.com')) {
         $('.smtp-qq-hint').removeClass('d-none');
       }
 
-      $('input[name="smtp[host]"]').on('input', function () {
+      $(document).on('input', 'input[name="smtp[host]"]', function () {
         if ($(this).val().includes('smtp.qq.com')) {
           $('.smtp-qq-hint').removeClass('d-none');
         } else {

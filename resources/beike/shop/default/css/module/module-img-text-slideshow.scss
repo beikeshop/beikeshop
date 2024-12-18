@@ -182,11 +182,15 @@
 }
 
 .module-swiper-img-scroll-text {
-  padding: 40px 0;
-  font-size: 20px;
+  padding: 36px 0;
   width: 100%;
+  font-size: 20px;
   overflow: hidden;
   position: relative;
+  @media (max-width: 768px) {
+    font-size: 14px !important;
+    padding: 16px 0 !important;
+  }
 }
 
 .scroll-info {

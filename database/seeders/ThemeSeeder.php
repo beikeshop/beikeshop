@@ -966,7 +966,7 @@ class ThemeSeeder extends Seeder
                             [
                                 "title" => [
                                     "zh_cn" =>"最新促销",
-                                    "en" =>"Latest promotions"
+                                    "en" =>"Promotions"
                                 ],
                                 "products" =>[
                                     1,
