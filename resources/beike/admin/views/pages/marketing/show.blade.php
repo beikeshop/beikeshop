@@ -78,7 +78,7 @@
       location.href = '{{ admin_route('plugins.index') }}';
     }
 
-    if (event.data.type == 'to_plugins_index') {
+    if (event.data.type == 'to_marketing_index') {
       location.href = '{{ admin_route('marketing.index') }}';
     }
 

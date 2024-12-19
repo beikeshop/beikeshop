@@ -330,7 +330,7 @@
                         <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
                         <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
                         <th style="width: 70px">{{ __('admin/product.quantity') }}</th>
-                        <th class="w-min-100">{{ __('admin/product.weight_text') }}</th>
+                        <th style="width: 70px">{{ __('admin/product.weight_text') }}</th>
                         @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
