@@ -4,26 +4,26 @@
 
 @section('body-class', 'page-marketing')
 
-@section('page-title-after')
-  <div class="d-flex top-tips-wrap">
-    <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
-    <div class="top-text">
-      {{ __('admin/marketing.attention_2') }}
-      <br>
-      {{ __('admin/marketing.attention_3') }}
-    </div>
+{{-- @section('page-title-after')
+<div class="d-flex top-tips-wrap">
+  <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
+  <div class="top-text">
+    {{ __('admin/marketing.attention_2') }}
+    <br>
+    {{ __('admin/marketing.attention_3') }}
   </div>
-@endsection
+</div>
+@endsection --}}
 
-@section('page-title-right')
+{{-- @section('page-title-right')
   <button type="button" class="btn btn-outline-info set-token" onclick="app.setToken()">{{ __('admin/marketing.set_token') }}</button>
   <a href="{{ beike_url() }}/developer/plugins/create" class="btn btn-outline-info" target="_blank">{{ __('admin/marketing.i_publish') }}</a>
-@endsection
+@endsection --}}
 
 @section('content')
   <div class="marketing-iframe-wrap">
     @include('admin::shared.loading-am')
-    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&type={{ request('type') }}" class="w-100 marketing-iframe"></iframe>
+    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&keyword={{ request('keyword') }}&type={{ request('type') }}" class="w-100 marketing-iframe"></iframe>
   </div>
   <div id="app" v-cloak>
     <v-set-token ref="v-set-token" />
@@ -43,20 +43,20 @@
     el: '#app',
     data: {},
     created() {
+      const self = this;
+
       window.addEventListener('message', function (event) {
         if (event.origin != '{{ beike_url() }}') return;
 
         if (event.data.type == 'plugin_show' && event.data.data.code) {
           location.href = '{{ admin_route('marketing.index') }}/' + event.data.data.code;
         }
+
+        if (event.data.type == 'set_token') {
+          self.$refs['v-set-token'].setToken();
+        }
       }, false);
     },
-
-    methods: {
-      setToken() {
-        this.$refs['v-set-token'].setToken();
-      },
-    }
   })
 </script>
 @endpush

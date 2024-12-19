@@ -77,6 +77,18 @@
     if (event.data.type == 'to_plugins_index') {
       location.href = '{{ admin_route('plugins.index') }}';
     }
+
+    if (event.data.type == 'to_plugins_index') {
+      location.href = '{{ admin_route('marketing.index') }}';
+    }
+
+    if (event.data.type == 'to_plugins_type') {
+      location.href = '{{ admin_route('marketing.index') }}?type=' + event.data.data.type;
+    }
+
+    if (event.data.type == 'search_plugins') {
+      location.href = '{{ admin_route('marketing.index') }}?keyword=' + event.data.data.keyword;
+    }
   }, false);
 </script>
 @endpush

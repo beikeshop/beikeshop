@@ -18,7 +18,7 @@
 }
 
 .marketing-iframe-wrap {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 54px);
   position: relative;
 
   .loading-wrap {
@@ -35,6 +35,10 @@
 }
 
 body.page-marketing {
+  .page-title-box {
+    display: none !important;
+  }
+
   #content {
     overflow: hidden;
   }
@@ -76,30 +80,6 @@ body.page-marketing {
     }
   }
 
-  .search-wrap {
-    border-radius: 50px;
-    overflow: hidden;
-    background-color: white;
-    padding: 0;
-
-    input {
-      border: none;
-      border: 1px solid #eee;
-      border-top-left-radius: 50px;
-      border-bottom-left-radius: 50px;
-      padding-left: 15px;
-    }
-    button {
-      white-space: nowrap;
-      border-top-right-radius: 50px;
-      border-bottom-right-radius: 50px;
-    }
-  }
-
-  .search-category-wrap {
-    border-radius: 50px;
-  }
-
   .top-tips-wrap {
     font-size: 12px;
   }
@@ -110,6 +90,10 @@ body.page-marketing {
 }
 
 body.page-marketing-info {
+  .page-title-box {
+    display: none !important;
+  }
+
   #copyright-text {
     margin-top: .25rem !important;
   }
