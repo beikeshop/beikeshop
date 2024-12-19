@@ -218,7 +218,7 @@
               </x-admin-form-input>
               <x-admin-form-input name="smtp[username]" required title="{{ __('admin/setting.smtp_username') }}" value="{{ old('username', system_setting('base.smtp.username', '')) }}">
               </x-admin-form-input>
-              <x-admin-form-input name="smtp[password]" required title="{{ __('admin/setting.smtp_password') }}" value="{{ old('password', system_setting('base.smtp.password', '')) }}">
+              <x-admin-form-input name="smtp[password]" type="password" required title="{{ __('admin/setting.smtp_password') }}" value="{{ old('password', system_setting('base.smtp.password', '')) }}">
                 <div class="help-text font-size-12 lh-base">{{ __('admin/setting.smtp_password_info') }}</div>
               </x-admin-form-input>
               <x-admin-form-input name="smtp[encryption]" required title="{{ __('admin/setting.smtp_encryption') }}" value="{{ old('encryption', system_setting('base.smtp.encryption', 'TLS')) }}">

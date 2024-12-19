@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2024-12-06 17:54:10
+ * @LastEditTime  2024-12-19 22:42:24
  */
 
 import http from "../../../js/http";
@@ -139,7 +139,7 @@ const tinymceInit = () => {
                 if (e.mime == 'video/mp4') {
                   ed.insertContent(`<video src='${e.path}' controls loop muted class="img-fluid" />`);
                 } else {
-                  ed.insertContent(`<img src='${e.path}' class="img-fluid" />`);
+                  ed.insertContent(`<img src='${e.path}' class="img-fluid" data-mce-src="${e.origin_url}" />`);
                 }
               });
             }
