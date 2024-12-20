@@ -107,6 +107,19 @@
   flex: 1;
 }
 
+.input-group {
+  position: relative;
+  &.error-invalid {
+    margin-bottom: 20px;
+  }
+
+ .invalid-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
 .help-text {
   color: #999;
   margin-top: 4px;
@@ -153,7 +166,7 @@
 }
 
 input[type="number"] {
-  padding: 0.375rem;
+  padding-right: 0.75rem;
   -moz-appearance: textfield;
 }
 

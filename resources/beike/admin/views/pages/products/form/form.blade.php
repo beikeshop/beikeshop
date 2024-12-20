@@ -55,7 +55,7 @@
     <div class="card-body h-min-600">
       <form novalidate class="needs-validation"
             action="{{ $product->id ? admin_route('products.update', $product) : admin_route('products.store') }}"
-            method="POST" id="app">
+            method="POST" id="app" v-cloak>
         @csrf
         @method($product->id ? 'PUT' : 'POST')
         <input type="hidden" name="_redirect" value="{{ $_redirect }}"/>
@@ -149,7 +149,7 @@
                   name="weight_class"
                   class="form-select ms-4 bg-white"
                   :options="$weight_classes"
-                  :value="$product->weight_class"
+                  :value="$product->weight_class ?? $system_weight"
                   label="echo __('product.' . $option);"
                   format="0"
                 />
@@ -326,11 +326,11 @@
                         <th width="106px">{{ __('common.image') }}</th>
                         <th class="w-min-100">{{ __('admin/product.model') }}</th>
                         <th class="w-min-100">sku</th>
-                        <th class="w-min-100">{{ __('admin/product.price') }}</th>
-                        <th class="w-min-100">{{ __('admin/product.origin_price') }}</th>
-                        <th class="w-min-100">{{ __('admin/product.cost_price') }}</th>
+                        <th class="w-min-100">{{ __('admin/product.price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
+                        <th class="w-min-100">{{ __('admin/product.origin_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
+                        <th class="w-min-100">{{ __('admin/product.cost_price') }}<span class="font-size-12 fw-normal text-secondary">({{$system_currency}})</span></th>
                         <th style="width: 70px">{{ __('admin/product.quantity') }}</th>
-                        <th style="width: 70px">{{ __('admin/product.weight_text') }}</th>
+                        <th style="width: 70px">{{ __('admin/product.weight_text') }}<span class="font-size-12 fw-normal text-secondary variant-weight"></span></th>
                         @hook('admin.product.edit.sku.variants.title.after')
                         </thead>
                         <tbody>
@@ -425,12 +425,11 @@
                 <x-admin-form-input name="skus[0][sku]" title="sku"
                                     :value="old('skus.0.sku', $product->skus[0]->sku ?? $defaul_sku)" required/>
                 <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')"
-                                    :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required/>
+                :group-right="$system_currency" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required/>
                 <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')"
-                                    :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')"
-                                    step="any"/>
+                :group-right="$system_currency" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any"/>
                 <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')"
-                                    :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any"/>
+                :group-right="$system_currency" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any"/>
                 <x-admin-form-input name="skus[0][quantity]" type="number" :title="__('admin/product.quantity')"
                                     :value="old('skus.0.quantity', $product->skus[0]->quantity ?? '')"/>
                 <input type="hidden" name="skus[0][variants]" placeholder="variants" value="">
@@ -1342,7 +1341,7 @@
       return results;
     }
 
-    $(document).ready(function ($) {
+    $(function ($) {
       $('#brand-autocomplete').autocomplete({
         'source': function (request, response) {
           $http.get(`brands/autocomplete?name=${encodeURIComponent(request)}`, null, {hload: true}).then((res) => {
@@ -1356,6 +1355,13 @@
           $('input[name="brand_id"]').val(item['value']);
         }
       });
+
+      // variant-weight
+      $('select[name="weight_class"]').on('change', function () {
+        $('.variant-weight').text(`(${$('option:selected', this).text()})`);
+      });
+
+      $('select[name="weight_class"]').trigger('change');
 
       // skus[*][sku] 只能填写 数字、字母、中横线、下划线
       $(document).on('input', 'input[name^="skus"][name$="[sku]"]', function () {

@@ -849,8 +849,8 @@ class ThemeSeeder extends Seeder
                                 ],
                                 "show" =>false,
                                 "link" => [
-                                    "type" =>"product",
-                                    "value" =>"",
+                                    "type" =>"category",
+                                    "value" =>100007,
                                     "link" =>""
                                 ]
                             ],
@@ -866,8 +866,8 @@ class ThemeSeeder extends Seeder
                                 ],
                                 "show" =>false,
                                 "link" => [
-                                    "type" =>"product",
-                                    "value" =>"",
+                                    "type" =>"category",
+                                    "value" =>100003,
                                     "link" =>""
                                 ]
                             ],
@@ -883,8 +883,8 @@ class ThemeSeeder extends Seeder
                                 ],
                                 "show" =>false,
                                 "link" => [
-                                    "type" =>"product",
-                                    "value" =>"",
+                                    "type" =>"category",
+                                    "value" =>100018,
                                     "link" =>""
                                 ]
                             ],
@@ -900,8 +900,8 @@ class ThemeSeeder extends Seeder
                                 ],
                                 "show" =>true,
                                 "link" => [
-                                    "type" =>"product",
-                                    "value" =>"",
+                                    "type" =>"category",
+                                    "value" =>100006,
                                     "link" =>""
                                 ]
                             ]

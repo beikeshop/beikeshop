@@ -19,6 +19,7 @@ use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\ThemeRepo;
+use Beike\Libraries\Weight;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class SettingController extends Controller
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
             'languages'       => LanguageRepo::enabled()->toArray(),
+            'weight_classes'  => Weight::getWeightUnits(),
             'tax_address'     => $taxAddress,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,

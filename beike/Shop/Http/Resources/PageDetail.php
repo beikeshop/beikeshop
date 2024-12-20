@@ -35,7 +35,7 @@ class PageDetail extends JsonResource
             'views'                => $this->views,
             'title'                => $description->title ?? '',
             'title_format'         => sub_string($description->title ?? '', 64),
-            'content'              => $description->content,
+            'content'              => $description->content ?? '',
             'summary'              => $description->summary,
             'summary_format'       => sub_string($description->summary, 100),
             'meta_title'           => $description->meta_title,

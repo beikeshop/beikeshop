@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2024-07-09 20:36:53
+ * @LastEditTime  2024-12-20 16:56:01
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -20,6 +20,14 @@ $(function () {
       $(`form#${form}`).submit();
     }
   });
+
+  $(document).on('input', '.input-group input', function(event) {
+    if (!$(this).siblings('.invalid-feedback').is(':visible')) {
+      $(this).parent().removeClass('error-invalid');
+    } else {
+      $(this).parent().addClass('error-invalid');
+    }
+  })
 
   // 表单保存统一添加加载动画
   $(document).on('submit', 'form', function(event) {
@@ -65,6 +73,11 @@ $(function () {
             // 兼容使用 element ui input、autocomplete 组件，在传统提交报错ui显示
             if ($(el).siblings('div[class^="el-"]')) {
               $(el).siblings('div[class^="el-"]').find('.el-input__inner').addClass('error-invalid-input')
+            }
+
+            // invalid-feedback
+            if ($(el).parents('.input-group')) {
+              $(el).parents('.input-group').addClass('error-invalid');
             }
 
             if ($(el).parents('.tab-pane')) {

@@ -24,9 +24,13 @@ class Input extends Component
 
     public string $step;
 
+    public string $groupLeft;
+
+    public string $groupRight;
+
     public bool $required;
 
-    public function __construct(string $name, string $title, string $value, bool $required = false, string $error = '', string $width = '400', string $type = 'text', string $step = '', string $placeholder = '', string $description = '')
+    public function __construct(string $name, string $title, string $value, bool $required = false, string $error = '', string $width = '400', string $type = 'text', string $step = '', string $placeholder = '', string $description = '', string $groupLeft = '', string $groupRight = '')
     {
         $this->name        = $name;
         $this->title       = $title;
@@ -38,6 +42,8 @@ class Input extends Component
         $this->step        = $step;
         $this->required    = $required;
         $this->description = $description;
+        $this->groupLeft   = $groupLeft;
+        $this->groupRight  = $groupRight;
     }
 
     public function render()

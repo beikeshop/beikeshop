@@ -90,24 +90,18 @@
               </div>
             </x-admin::form.row>
 
-            <x-admin-form-select title="{{ __('admin/setting.default_currency') }}" name="currency" :value="old('currency', system_setting('base.currency', 'USD'))" :options="$currencies->toArray()" key="code" label="name">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_currency') }}</div>
-            </x-admin-form-select>
+            <x-admin-form-select title="{{ __('admin/setting.default_currency') }}" name="currency" :value="old('currency', system_setting('base.currency', 'USD'))" :options="$currencies->toArray()" key="code" label="name" />
 
-            <x-admin-form-select title="{{ __('admin/setting.default_language') }}" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$languages" key="code" label="name">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_language') }}</div>
-            </x-admin-form-select>
+            <x-admin-form-select title="{{ __('admin/setting.default_language') }}" name="locale" :value="old('locale', system_setting('base.locale', 'zh_cn'))" :options="$languages" key="code" label="name" />
 
             @php
-              $weights = [['code'=>'kg','name'=>'kg'], ['code'=>'g','name'=>'g'], ['code'=>'oz','name'=>'oz'], ['code'=>'lb','name'=>'lb']];
+              $weight = array_map(function ($value) {
+                return ['code' => $value, 'name' => trans('product.' . $value)];
+              }, $weight_classes);
             @endphp
-            <x-admin-form-select title="{{ __('admin/setting.weight_unit') }}" name="weight" :value="old('weight', system_setting('base.weight', 'kg'))" :options="$weights" key="code" label="name">
-              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.weight_unit') }}</div>
-            </x-admin-form-select>
+            <x-admin-form-select title="{{ __('admin/setting.weight_unit') }}"  name="weight" :options="$weight" :value="old('weight', system_setting('base.weight', 'kg'))" key="code" label="name" />
 
-            <x-admin-form-select title="{{ __('admin/setting.default_customer_group') }}" name="default_customer_group_id" :value="old('locale', system_setting('base.default_customer_group_id', ''))" :options="$customer_groups" key="id" label="name">
-                <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_customer_group') }}</div>
-            </x-admin-form-select>
+            <x-admin-form-select title="{{ __('admin/setting.default_customer_group') }}" name="default_customer_group_id" :value="old('locale', system_setting('base.default_customer_group_id', ''))" :options="$customer_groups" key="id" label="name" />
 
             <x-admin-form-input name="admin_name" title="{{ __('admin/setting.admin_name') }}" required value="{{ old('admin_name', system_setting('base.admin_name', 'admin')) }}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.admin_name_info') }}</div>
