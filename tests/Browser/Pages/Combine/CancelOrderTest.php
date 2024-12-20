@@ -65,7 +65,7 @@ class CancelOrderTest extends DuskTestCase
                 ->press(CheckoutPage::Checkout['submit'])
                 ->pause(5000);
             $elements  = $browser->elements(CheckoutPage::Checkout['order_num']);
-            $order_num = $elements[16]->getText();
+            $order_num = $elements[17]->getText();
             //打印订单号
             echo $order_num;
             //点击个人中心按钮
