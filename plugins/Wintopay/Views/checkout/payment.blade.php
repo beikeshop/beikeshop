@@ -2,7 +2,7 @@
   @csrf
   <input type="hidden" name="sid" value="">
   <div class="mb-3 radio-wrap">
-    @foreach (plugin_setting('wintopay.payment_type') ?? [] as $item)
+    @foreach (plugin_setting('wintopay.payment_type', []) as $item)
       <div class="radio">
         <label>
           <input type="radio" name="payment_type" class="d-none" value="{{ $item }}" @if ($loop->first) checked @endif>
