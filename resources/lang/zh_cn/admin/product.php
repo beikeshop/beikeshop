@@ -46,6 +46,7 @@ return [
     'weight_class'           => '重量单位',
     'category_placeholder'   => '请选择/搜索',
     'category_already'       => '分类已存在',
+    'category_disabled'      => '分类已被禁用',
 
     'confirm_batch_product'  => '确认要批量删除选中的商品吗？',
     'confirm_batch_status'   => '确认要批量修改选中的商品的状态吗？',

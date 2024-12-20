@@ -281,6 +281,7 @@ class Plugin implements \ArrayAccess, Arrayable
      */
     public function getColumns(): array
     {
+        $this->columns[] = SettingRepo::getPluginStatusColumn();
         $existValues     = SettingRepo::getPluginColumns($this->code);
         foreach ($this->columns as $index => $column) {
             $dbColumn = $existValues[$column['name']] ?? null;

@@ -867,7 +867,11 @@
 
           if (this.form.categories.find(v => v == last)) return layer.msg('{{ __('admin/product.category_already') }}');
           if (last) {
-            this.form.categories.push(last);
+            if (this.source.categories.find(v => v.id == last)) {
+              this.form.categories.push(last);
+            } else {
+              layer.msg('{{ __('admin/product.category_disabled') }}');
+            }
           }
         },
 
