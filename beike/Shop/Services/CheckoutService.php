@@ -144,7 +144,7 @@ class CheckoutService
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            $weight += Weight::getInstance()->convert($product->product['weight'] * $product['quantity'], $product->product['weight_class']);
+            $weight += Weight::getInstance()->convert(($product->sku->weight ?? $product->product['weight']) * $product['quantity'], $product->product['weight_class']);
         }
 
         return $weight;
