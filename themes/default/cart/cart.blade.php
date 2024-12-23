@@ -53,6 +53,7 @@
                     </td>
                     <td>
                       <a class="name text-truncate-2 mb-1 text-black fw-bold" :href="'products/' + product.product_id" v-text="product.name"></a>
+                      @hook('cart.product.name.after')
                       <div class="text-size-min text-muted mb-1">@{{ product.variant_labels }}</div>
                       <div class="price text-muted" v-html="product.price_format"></div>
                     </td>
@@ -191,10 +192,10 @@
           })
         },
 
-        setUpdateData(res) {  
+        setUpdateData(res) {
           if(res.status != 'success'){
             layer.msg(res.message)
-          }            
+          }
           this.products = res.data.carts
           this.amount_format = res.data.amount_format
           this.total_quantity = res.data.quantity

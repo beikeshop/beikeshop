@@ -43,6 +43,7 @@ class PluginRepo
      */
     public static function installPlugin(BPlugin $bPlugin)
     {
+        self::publishPluginFiles($bPlugin);
         self::publishThemeFiles($bPlugin);
         self::publishLangFiles($bPlugin);
         self::migrateDatabase($bPlugin);
@@ -74,6 +75,29 @@ class PluginRepo
         $staticPath = $path . '/Static';
         if (is_dir($staticPath)) {
             File::copyDirectory($staticPath, public_path('plugin/' . $code));
+        }
+    }
+
+    /**
+     * 发布插件文件
+     *
+     * @param $bPlugin
+     */
+    public static function publishPluginFiles($bPlugin): void
+    {
+        if ($bPlugin->getType() == 'theme') {
+            return;
+        }
+
+        $path = $bPlugin->getPath();
+        if (is_dir($path . '/Static/public')) {
+            $destination = public_path('plugin/' . $bPlugin->code);
+
+            if (!is_dir($destination)) {
+                File::makeDirectory($destination, 0755, true);
+            }
+
+            File::copyDirectory($path . '/Static/public', $destination);
         }
     }
 
