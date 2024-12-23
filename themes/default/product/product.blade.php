@@ -336,6 +336,7 @@
           this.updateSelectedVariantsIndex();
           this.getSelectedSku();
           this.updateSelectedVariantsStatus()
+          setTimeout(() => { swiper.update()}, 0);
         },
 
         // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
