@@ -56,7 +56,7 @@ return [
     'install'                      => 'installieren',
     'language'                     => 'Sprach',
     'languages_index'              => 'Sprachverwaltung',
-    'license_services'             => 'Urheberrecht und dienste',
+    'license_services'             => 'Einkaufsdienstleistungen',
     'marketing'                    => 'Der plugin-markt',
     'marketing_index'              => 'Der plugin-markt',
     'multi_filter_index'           => 'Moderne auswahl',

@@ -56,7 +56,7 @@ return [
     'install'                      => 'インストール',
     'language'                     => '言語管理',
     'languages_index'              => '言語管理',
-    'license_services'             => '著作権とサービスです',
+    'license_services'             => '購入サービス',
     'marketing'                    => 'プラグイン市場',
     'marketing_index'              => 'プラグイン市場です',
     'multi_filter_index'           => '高度なスクリーニングです',

@@ -847,6 +847,8 @@
             // 在 variablesBatch.variables 生成对应的 variants 的index
             this.variablesBatch.variables = variants.map((v, i) => '');
 
+            setTimeout(() => {$('select[name="weight_class"]').trigger('change')}, 200);
+
             if (this.isMove) return;
             this.remakeSkus();
           }

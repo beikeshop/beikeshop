@@ -7,15 +7,7 @@
 @push('header')
   <script src="{{ asset('vendor/chart/chart.min.js') }}"></script>
 @endpush
-@php
-function formatPrice($price) {
-  if (!is_numeric($price)) {
-      return '0.00';
-  }
 
-  return number_format((float)$price, 2, '.', '');
-}
-@endphp
 @section('content')
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -100,7 +92,7 @@ function formatPrice($price) {
                   @endif
                 </td>
                 <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link text-break">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
-                <td>{{ formatPrice($item['total_amount']) }}</td>
+                <td>{{ currency_format($item['total_amount']) }}</td>
               </tr>
             @endforeach
             </tbody>
@@ -133,7 +125,7 @@ function formatPrice($price) {
                   @endif
                 </td>
                 <td><a target="_blank" href="{{ admin_route('customers.edit', [$item['customer']['id'] ?? 0]) }}" class="text-link text-break">{{ $item['customer']['name'] ?? '' }}</a></td>
-                <td>{{ formatPrice($item['order_amount']) }}</td>
+                <td>{{ currency_format($item['order_amount']) }}</td>
               </tr>
             @endforeach
             </tbody>

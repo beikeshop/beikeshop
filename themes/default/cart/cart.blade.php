@@ -162,6 +162,10 @@
         },
 
         quantityChange(quantity, cart_id, sku_id) {
+          if (!quantity || isNaN(quantity)) {
+            return
+          }
+
           const self = this;
           $http.put(`/carts/${cart_id}`, {quantity: quantity, sku_id}, {hload: true}).then((res) => {
             this.setUpdateData(res);

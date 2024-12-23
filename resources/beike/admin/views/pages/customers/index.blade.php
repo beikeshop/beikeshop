@@ -165,8 +165,8 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="{{ __('common.status') }}" prop="status">
-          <el-switch v-model="dialogCustomers.form.status" :active-value="1" :inactive-value="0"></el-switch>
+        <el-form-item label="{{ __('common.status') }}" prop="active">
+          <el-switch v-model="dialogCustomers.form.active" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
@@ -197,7 +197,7 @@
             email: '',
             password: '',
             customer_group_id: @json($customer_groups[0]['id'] ?? ''),
-            status: 1,
+            active: 1,
           },
         },
 
