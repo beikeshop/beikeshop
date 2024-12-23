@@ -56,7 +56,7 @@ return [
     'install'                      => 'Install',
     'language'                     => 'Bahasa',
     'languages_index'              => 'Bahasa',
-    'license_services'             => 'Layanan pembelian',
+    'license_services'             => 'Layanan teknis',
     'marketing'                    => 'Pasar Pengaya',
     'marketing_index'              => 'Pasar Pengaya',
     'multi_filter_index'           => 'Penyaringan lanjutan',

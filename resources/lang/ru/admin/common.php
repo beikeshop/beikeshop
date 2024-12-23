@@ -56,7 +56,7 @@ return [
     'install'                      => 'установить',
     'language'                     => 'языком',
     'languages_index'              => 'языками',
-    'license_services'             => 'Приобретение услуг',
+    'license_services'             => 'Технические услуги',
     'marketing'                    => 'Рынок плагинов',
     'marketing_index'              => 'Рынок плагинов',
     'multi_filter_index'           => 'Высший отбор',

@@ -56,7 +56,7 @@ return [
     'install'                      => '설치',
     'language'                     => '언어관리',
     'languages_index'              => '언어 관리',
-    'license_services'             => '구매 서비스',
+    'license_services'             => '기술 서비스',
     'marketing'                    => '플러그인마켓',
     'marketing_index'              => '플러그인마켓',
     'multi_filter_index'           => '고급 선별작업',

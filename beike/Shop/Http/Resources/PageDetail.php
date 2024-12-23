@@ -1,4 +1,14 @@
 <?php
+/*
+ * @FilePath: PageDetail.php
+ *
+ * @copyright     2024 beikeshop.com - All Rights Reserved.
+ * @link: https://beikeshop.com
+ * @Author: pu shuo <pushuo@guangda.work>
+ * @Date: 2024-12-23 10:40:02
+ * @LastEditTime: 2024-12-23 11:21:33
+ */
+
 /**
  * PageDetail.php
  *
@@ -36,7 +46,7 @@ class PageDetail extends JsonResource
             'title'                => $description->title ?? '',
             'title_format'         => sub_string($description->title ?? '', 64),
             'content'              => $description->content ?? '',
-            'summary'              => $description->summary,
+            'summary'              => $description->summary ?? '',
             'summary_format'       => sub_string($description->summary, 100),
             'meta_title'           => $description->meta_title,
             'meta_description'     => $description->meta_description,

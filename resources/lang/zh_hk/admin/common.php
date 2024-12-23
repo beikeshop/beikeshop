@@ -56,7 +56,7 @@ return [
     'install'                => '安裝',
     'language'               => '語言管理',
     'languages_index'        => '語言管理',
-    'license_services'       => '購買服務',
+    'license_services'       => '技術服務',
     'marketing'              => '插件市場',
     'marketing_index'        => '插件市場',
     'multi_filter_index'     => '高級篩選',

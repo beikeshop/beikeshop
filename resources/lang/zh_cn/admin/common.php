@@ -60,7 +60,7 @@ return [
     'common_link'                  => '常用链接',
     'header_search_input'          => '搜索后台功能',
     'header_search_title'          => '搜索结果',
-    'license_services'             => '购买服务',
+    'license_services'             => '技术服务',
     'help_index'                   => '帮助',
 
     // sidebar

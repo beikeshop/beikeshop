@@ -60,7 +60,7 @@ return [
     'common_link'                      => 'Common Links',
     'header_search_input'              => 'Search Features',
     'header_search_title'              => 'Search Results',
-    'license_services'                 => 'Purchase Services',
+    'license_services'                 => 'Technical Services',
 
     // sidebar
     'account_index'                          => 'Personal Center',

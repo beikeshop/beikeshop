@@ -56,7 +56,7 @@ return [
     'install'                      => 'installa',
     'language'                     => 'gestione della lingua',
     'languages_index'              => 'gestione della lingua',
-    'license_services'             => 'Acquistare servizi',
+    'license_services'             => 'Servizi tecnici',
     'marketing'                    => 'Mercato delle unità modulari',
     'marketing_index'              => 'Mercato delle unità modulari',
     'multi_filter_index'           => 'Screening avanzato',
