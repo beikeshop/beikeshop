@@ -28,8 +28,6 @@ class MarketingController
             'same_domain' => check_same_domain(),
         ];
 
-        $data['error_message'] = $errorMessage;
-
         return view('admin::pages.marketing.index', $data);
     }
 
