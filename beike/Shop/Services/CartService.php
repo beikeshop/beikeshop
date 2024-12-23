@@ -92,7 +92,7 @@ class CartService
             $cart->selected = true;
             $cart->increment('quantity', $quantity);
         } else {
-            if (count(self::list(current_customer())) >= 5) {
+            if (count(self::list(current_customer())) >= 500) {
                 throw new Exception(trans('cart.cart_quantity_max_500'));
             }
             $cart = CartProduct::query()->create([
