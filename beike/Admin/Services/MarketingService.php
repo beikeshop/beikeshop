@@ -318,4 +318,11 @@ class MarketingService
             'dir_info'            => $dir_info,
         ];
     }
+
+    public function checkPluginVersion($pluginCodes)
+    {
+        $apiEndPoint = "/v1/plugins/version";
+        request()->merge(['fields' => $pluginCodes]);
+        return Http::sendGet($apiEndPoint);
+    }
 }

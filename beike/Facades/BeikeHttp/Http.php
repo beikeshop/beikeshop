@@ -6,6 +6,7 @@ use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Str;
 use Mockery\Exception;
+use Throwable;
 
 class Http extends PendingRequest
 {
@@ -57,7 +58,7 @@ class Http extends PendingRequest
     {
         $url = $this->getUrl($apiEndPoint);
 
-        $result = $this->get($url, $query)->{$format}();
+        $result = $this->timeout(5)->get($url, $query)->{$format}();
 
         if (isset($result['status']) && $result['status'] === 'error') {
             throw new Exception($result['message']);
@@ -95,7 +96,7 @@ class Http extends PendingRequest
             $this->withBody($body, 'application/json');
         }
 
-        $result = $this->post($url, $data)->{$format}();
+        $result = $this->timeout(5)->post($url, $data)->{$format}();
         if (isset($result['status']) && $result['status'] === 'error') {
             throw new Exception($result['message']);
         }
@@ -124,8 +125,14 @@ class Http extends PendingRequest
      */
     private function getUrl($apiEndPoint): string
     {
+        try {
+            $locale = admin_locale();
+        }catch (Throwable $e){
+            $locale = 'en';
+        }
+
         $queryArr =  [
-            'locale' => admin_locale() ?? 'en',
+            'locale' => $locale,
         ];
 
         $filter = request()->all();

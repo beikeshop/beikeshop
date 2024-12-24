@@ -12,6 +12,7 @@
 namespace Beike\Admin\Http\Controllers;
 
 use Beike\Admin\Http\Resources\PluginResource;
+use Beike\Admin\Services\MarketingService;
 use Beike\Repositories\PluginRepo;
 use Beike\Repositories\SettingRepo;
 use Exception;
@@ -29,6 +30,32 @@ class PluginController extends Controller
         $plugins         = app('plugin')->getPlugins();
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data            = hook_filter('admin.plugin.index.data', $data);
+
+        //判断版本是否可以更新
+        $freePluginCodes = config('app.free_plugin_codes');
+        $pluginCodes = \Beike\Models\Plugin::pluck('code')->toArray();
+        $pluginCodes = array_diff($pluginCodes, $freePluginCodes);
+        $pluginCodes = implode('|', $pluginCodes);
+        $pluginVersion = MarketingService::getInstance()->checkPluginVersion($pluginCodes);
+        $pluginData = data_get($pluginVersion,'data');
+        $pluginData = array_filter($pluginData, function($value) {
+            return $value !== false;
+        });
+
+        foreach ($data['plugins'] as &$item) {
+            if ($item['can_update'] && isset($pluginData[$item['code']])) {
+                $newVersion = str_replace('v', '', $pluginData[$item['code']]);
+                $currentVersion = str_replace('v', '', $item['version']);
+
+                if (version_compare($newVersion, $currentVersion) > 0) {
+                    $item['can_update'] = true;
+                } else {
+                    $item['can_update'] = false;
+                }
+            } else {
+                $item['can_update'] = false;
+            }
+        }
 
         return view('admin::pages.plugins.index', $data);
     }
