@@ -60,7 +60,7 @@ return [
     'common_link'                  => '常用链接',
     'header_search_input'          => '搜索后台功能',
     'header_search_title'          => '搜索结果',
-    'license_services'             => '技术支持',
+    'license_services'             => '技术服务',
     'help_index'                   => '帮助',
 
     // sidebar
@@ -82,6 +82,7 @@ return [
     'pages_index'            => '文章管理',
     'page_categories_index'  => '文章分类',
     'design_footer_index'    => '页尾装修',
+    'design_header_index'    => '页头装修',
     'design_menu_index'      => '导航配置',
     'design_app_home_index'  => 'APP首页设计',
     'categories_index'       => '商品分类',
@@ -93,7 +94,7 @@ return [
     'orders_trashed'         => '回收站',
     'rmas_index'             => '售后管理',
     'rma_reasons_index'      => '售后原因',
-    'customers_index'        => '客户列表',
+    'customers_index'        => '客户管理',
     'customer_groups_index'  => '客户组',
     'countries_index'        => '国家/地区',
     'zones_index'            => '省份管理',
@@ -112,8 +113,11 @@ return [
     'translate_form'         => '请输入要翻译的内容',
     'buy_copyright'          => '购买版权',
     'license_bought'         => '已授权',
-    'copyright_hint_text'    => '请保留底部版权，或<a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">购买授权！</a>已购买请<a href="#" class="get-license-code">点击授权</a>',
+    'license_bought_s'       => '已订阅授权',
+    'copyright_hint_text'    => '请保留底部版权，或<a href="' . beike_url() . '/vip/subscription?type=tab-license" target="_blank">购买授权！</a>已购买请<a href="#" class="get-license-code">点击授权</a>',
     'copyright_buy_text'     => '您还未购买，请购买授权！',
     'error_length_text'      => '字段 :key 的输入数据超出了允许的最大长度。',
     'error_host_app_url'     => '当前访问域名与 .env 文件中的 APP_URL 不一致，请检查配置。',
+    'text_closed'            => '已关闭',
+    'text_enabled'           => '已开启',
 ];

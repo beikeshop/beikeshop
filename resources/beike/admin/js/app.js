@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2024-12-24 22:31:42
+ * @LastEditTime  2024-12-25 00:04:41
  */
 
 import http from "../../../js/http";
@@ -34,7 +34,7 @@ $(document).on('click', '.open-file-manager', function(event) {
 if (typeof Vue != 'undefined') {
   Vue.prototype.thumbnail = function thumbnail(image) {
     if (!image) {
-      return 'image/placeholder.png';
+      return config.placeholder;
     }
 
     if (image.indexOf('.mp4') !== -1) {
@@ -139,7 +139,7 @@ const tinymceInit = () => {
                 if (e.mime == 'video/mp4') {
                   ed.insertContent(`<video src='${e.path}' controls loop muted class="img-fluid" />`);
                 } else {
-                  ed.insertContent(`<img src='${e.path}' class="img-fluid" />`);
+                  ed.insertContent(`<img src='${e.path}' class="img-fluid" data-mce-src="${e.origin_url}" />`);
                 }
               });
             }

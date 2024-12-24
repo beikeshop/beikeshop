@@ -9,7 +9,8 @@
       <div class="search-wrap">
         <div class="input-wrap">
           <div class="search-icon"><i class="bi bi-search"></i></div>
-          <input type="text" id="header-search-input" autocomplete="off" class="form-control" placeholder="{{ __('admin/common.header_search_input') }}">
+          <input type="text" id="header-search-input" autocomplete="off" class="form-control"
+                 placeholder="{{ __('admin/common.header_search_input') }}">
           <button class="btn close-icon" type="button"><i class="bi bi-x-lg"></i></button>
         </div>
 
@@ -49,10 +50,20 @@
           <i class="bi bi-exclamation-triangle-fill"></i> {!! __('admin/common.copyright_hint_text') !!}
         </div>
 
-        <li class="nav-item mx-2 license-ok {{ !check_license() || Str::endsWith(config('app.url'), '.test') ? 'd-none' : '' }}">
+        <li
+          class="nav-item mx-2 license-ok {{ !check_license() || Str::endsWith(config('app.url'), '.test') ? 'd-none' : '' }}">
           <div class="license-text">
             <img src="{{ asset('image/vip-icon.png') }}" class="img-fluid wh-30 me-1">
-            <span>{{ __('admin/common.license_bought') }}</span>
+            @if (system_setting('base.license_expired_at'))
+              <div>
+                <div>{{ __('admin/common.license_bought_s') }}</div>
+                @if (strtotime(system_setting('base.license_expired_at')) - time() <= 31 * 24 * 3600)
+                  <div class="font-size-12 text-danger">{{ __('admin/common.expired_at') }}：<span class="license-expired-at">{{ date('Y-m-d', strtotime(system_setting('base.license_expired_at'))) }}</span></div>
+                @endif
+              </div>
+            @else
+              <span>{{ __('admin/common.license_bought') }}</span>
+            @endif
           </div>
         </li>
 
@@ -64,7 +75,9 @@
 
         @hookwrapper('admin.header.license')
         <li class="nav-item">
-          <a href="{{ beike_api_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license" target="_blank" class="nav-link">
+          <a
+            href="{{ beike_url() }}/vip/subscription?domain={{ config('app.url') }}&developer_token={{ system_setting('base.developer_token') }}&type=tab-license"
+            target="_blank" class="nav-link">
             <i class="bi bi-wrench-adjustable-circle fs-5 text-info"></i>&nbsp;@lang('admin/common.license_services')
           </a>
         </li>
@@ -72,18 +85,21 @@
 
         @hookwrapper('admin.header.marketing')
         <li class="nav-item">
-          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-puzzle fs-5 text-info"></i>&nbsp;@lang('admin/common.marketing')</a>
+          <a href="{{ admin_route('marketing.index') }}" class="nav-link"><i class="bi bi-puzzle fs-5 text-info"></i>&nbsp;@lang('admin/common.marketing')
+          </a>
         </li>
         @endhookwrapper
 
         @hookwrapper('admin.header.language')
         <li class="nav-item">
           <div class="dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $admin_language['name'] }}</a>
+            <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+               data-bs-toggle="dropdown">{{ $admin_language['name'] }}</a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
               @foreach ($admin_languages as $language)
-              <li><a href="{{ admin_route('edit.locale', ['locale' => $language['code']]) }}" class="dropdown-item">{{ $language['name'] }}</a></li>
+                <li><a href="{{ admin_route('edit.locale', ['locale' => $language['code']]) }}"
+                       class="dropdown-item">{{ $language['name'] }}</a></li>
               @endforeach
             </ul>
           </div>
@@ -108,7 +124,9 @@
                   <i class="bi bi-person-circle me-1"></i> {{ __('admin/common.account_index') }}
                 </a>
               </li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li>
                 <a href="{{ admin_route('logout.index') }}" class="dropdown-item py-2">
                   <i class="bi bi-box-arrow-left me-1"></i> {{ __('common.sign_out') }}
@@ -149,30 +167,45 @@
 
   <div class="d-flex justify-content-center mb-3">
     <button class="btn btn-outline-secondary me-3 ">{{ __('common.cancel') }}</button>
-    <a href="https://beikeshop.com/download" target="_blank" class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
+    <a href="https://beikeshop.com/download" target="_blank"
+       class="btn btn-primary">{{ __('admin/common.update_btn') }}</a>
   </div>
 </div>
 @push('footer')
-<script>
-  $(document).on('click', '.get-license-code', function(e) {
-    e.preventDefault();
-    $http.get(`${config.api_url}/api/licensed_pro`, {domain: config.app_url, from: window.location.pathname}).then((res) => {
-      if (res.license_code) {
-        $http.put('settings/values', {license_code: res.license_code}, {hload: true});
-        $('.license-ok').removeClass('d-none');
-        $('.warning-copyright').addClass('d-none');
-        $('input[name="license_code"]').val(res.license_code);
-      } else {
-        layer.alert('{{ __('admin/common.copyright_buy_text') }}', {
-          icon: 2,
-          title: '{{ __('common.text_hint') }}',
-          btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
-          btn2: function(index) {
-            window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain=' + config.app_url)
-            layer.close(index);
+  <script>
+    $(document).on('click', '.get-license-code', function (e) {
+      e.preventDefault();
+      $http.get(`{{ admin_route('marketing.get_licensed_pro') }}`, {
+        domain: config.app_url,
+        from: window.location.pathname
+      }).then((res) => {
+        if (res.data.license_code) {
+          $http.put('settings/values', {license_code: res.data.license_code, license_expired_at: res.data.expired_at}, {hload: true});
+          if (res.data.has_licensed) {
+            $('.license-ok').removeClass('d-none');
+            $('.warning-copyright').addClass('d-none');
+            if (res.data.expired_at) {
+              $('.license-expired-at').text(res.data.expired_at.split(' ')[0]).parent().show();
+            } else {
+              $('.license-expired-at').parent().hide();
+            }
           }
-        })
-      }
-    })
-  });
-</script>
+
+          if (res.data.message) {
+            layer.msg(res.data.message);
+          }
+          $('input[name="license_code"]').val(res.data.license_code);
+        } else {
+          layer.alert('{{ __('admin/common.copyright_buy_text') }}', {
+            icon: 2,
+            title: '{{ __('common.text_hint') }}',
+            btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
+            btn2: function (index) {
+              window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain=' + config.app_url)
+              layer.close(index);
+            }
+          })
+        }
+      })
+    });
+  </script>

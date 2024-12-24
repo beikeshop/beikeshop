@@ -107,8 +107,21 @@
   flex: 1;
 }
 
+.input-group {
+  position: relative;
+  &.error-invalid {
+    margin-bottom: 20px;
+  }
+
+ .invalid-feedback {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
 .help-text {
-  color: #B2B2B2;
+  color: #999;
   margin-top: 4px;
   font-size: 12px;
 }
@@ -150,6 +163,16 @@
   &:hover {
     background-color: #f1f1f1;
   }
+}
+
+input[type="number"] {
+  padding-right: 0.75rem;
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 .main-content {

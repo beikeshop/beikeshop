@@ -196,6 +196,8 @@ Route::prefix($adminName)
                 // 插件市场
                 Route::middleware('can:marketing_index')->post('marketing/check_domain', [Controllers\MarketingController::class, 'checkDomain'])->name('marketing.check_domain');
                 Route::middleware('can:marketing_index')->get('marketing/get_token', [Controllers\MarketingController::class, 'getToken'])->name('marketing.get_token');
+                Route::middleware('can:marketing_index')->get('marketing/get_licensed_pro', [Controllers\MarketingController::class, 'getLicensedPro'])->name('marketing.get_licensed_pro');
+                Route::middleware('can:marketing_index')->get('marketing/website_check_domain', [Controllers\MarketingController::class, 'checkToken'])->name('marketing.website_check_domain');
 
                 Route::middleware('can:marketing_index')->get('marketing', [Controllers\MarketingController::class, 'index'])->name('marketing.index');
                 Route::middleware('can:marketing_show')->get('marketing/{code}', [Controllers\MarketingController::class, 'show'])->name('marketing.show');

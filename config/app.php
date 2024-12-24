@@ -182,7 +182,7 @@ return [
         Beike\Installer\Providers\InstallerServiceProvider::class,
         Beike\AdminAPI\Providers\AdminAPIServiceProvider::class,
         Beike\Hook\HookServiceProvider::class,
-
+        Beike\Facades\BeikeHttp\BeikeHttpServiceProvider::class
     ],
 
     /*
@@ -238,7 +238,7 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'Hook'         => Beike\Hook\Facades\Hook::class,
-
+        'BeikeHttp'    => Beike\Facades\BeikeHttp\Facade\Http::class
     ],
 
 ];

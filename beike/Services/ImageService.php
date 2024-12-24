@@ -11,6 +11,7 @@
 
 namespace Beike\Services;
 
+use Illuminate\Support\Str;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\Facades\Image;
 
@@ -47,7 +48,7 @@ class ImageService
 
         $this->imagePath = plugin_path("{$dirName}/Static") . $originImage;
         if (file_exists($this->imagePath)) {
-            $this->image = strtolower('plugin/' . $dirName . $originImage);
+            $this->image = Str::snake('plugin/' . $dirName . $originImage);
         } else {
             $this->image     = $this->placeholderImage;
             $this->imagePath = public_path($this->image);

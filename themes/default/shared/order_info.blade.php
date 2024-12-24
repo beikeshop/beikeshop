@@ -142,7 +142,8 @@
           <div class="left border d-flex justify-content-center align-items-center wh-80"><img src="{{ image_resize($product->image) }}" class="img-fluid"></div>
           <div class="right">
             <div class="name">
-            <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
+              <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
+              @hook('order_info.product_name.after')
             </div>
             <div class="price">
               {{ currency_format($product->price, $order->currency_code, $order->currency_value) }}

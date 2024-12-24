@@ -11,26 +11,16 @@
 
 namespace Beike\Admin\Services;
 
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
+use Exception;
+use Beike\Facades\BeikeHttp\Facade\Http;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ZanySoft\Zip\Zip;
+use ZipArchive;
 
 class MarketingService
 {
-    private PendingRequest $httpClient;
-
-    public function __construct()
-    {
-        $this->httpClient = Http::withOptions([
-            'verify' => false,
-        ])->withHeaders([
-            'developer-token' => system_setting('base.developer_token'),
-        ]);
-    }
-
-    public static function getInstance()
+    public static function getInstance(): MarketingService
     {
         return new self;
     }
@@ -43,12 +33,9 @@ class MarketingService
      */
     public function getList(array $filters = []): mixed
     {
-        $url = config('beike.api_url') . '/api/plugins?locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
-        if (! empty($filters)) {
-            $url .= '&' . http_build_query($filters);
-        }
+        $apiEndPoint = '/v1/plugins';
 
-        return $this->httpClient->get($url)->json();
+        return Http::sendGet($apiEndPoint);
     }
 
     /**
@@ -59,12 +46,11 @@ class MarketingService
      */
     public function getPlugin($pluginCode): mixed
     {
-        $url    = config('beike.api_url') . "/api/plugins/{$pluginCode}?version=" . config('beike.version') . '&locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
-        $plugin = $this->httpClient->get($url)->json();
+        $apiEndPoint    = "/v1/plugins/{$pluginCode}";
 
-        if (empty($plugin)) {
-            throw new NotFoundHttpException('该插件不存在或已下架');
-        }
+        request()->merge(['version' => config('beike.version')]);
+
+        $plugin = Http::sendGet($apiEndPoint);
 
         return $plugin;
     }
@@ -78,51 +64,49 @@ class MarketingService
      */
     public function checkLicense($pluginCode, $domain): mixed
     {
-        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/license?domain={$domain}";
+        $apiEndPoint = "/v1/plugins/{$pluginCode}/license";
 
-        return $this->httpClient->get($url)->json();
+        request()->merge(['domain' => $domain]);
+
+        return Http::sendGet($apiEndPoint);
     }
 
     /**
      * 购买插件市场单个插件
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function buy($pluginCode, $postData)
     {
-        $url = config('beike.api_url') . "/api/plugins/{$pluginCode}/buy?".'locale=' . (admin_locale() == 'zh_cn' ? 'zh_cn' : 'en');
+        $apiEndPoint = "/v1/plugins/{$pluginCode}/buy";
 
-        $content = $this->httpClient->withBody($postData, 'application/json')
-            ->post($url)
-            ->json();
+        $content = Http::sendPost($apiEndPoint, $postData);
 
         $status = $content['status'] ?? '';
         if ($status == 'success') {
             return $content['data'];
         }
 
-        throw new \Exception($content['message'] ?? '');
+        throw new Exception($content['message'] ?? '');
     }
 
     /**
      * 购买插件服务
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function buyService($pluginServiceId, $postData)
     {
-        $url = config('beike.api_url') . "/api/plugin_services/{$pluginServiceId}/buy";
+        $apiEndPoint = "/v1/plugin_services/{$pluginServiceId}/buy";
 
-        $content = $this->httpClient->withBody($postData, 'application/json')
-            ->post($url)
-            ->json();
+        $content = Http::sendPost($apiEndPoint, $postData);
 
         $status = $content['status'] ?? '';
         if ($status == 'success') {
             return $content['data'];
         }
 
-        throw new \Exception($content['message'] ?? '');
+        throw new Exception($content['message'] ?? '');
     }
 
     /**
@@ -133,8 +117,11 @@ class MarketingService
      */
     public function getPluginServiceOrder($pluginServiceOrderId): mixed
     {
-        $url    = config('beike.api_url') . "/api/plugin_services/{$pluginServiceOrderId}?version=" . config('beike.version');
-        $plugin = $this->httpClient->get($url)->json();
+        $apiEndPoint = "/v1/plugin_services/{$pluginServiceOrderId}";
+
+        request()->merge(['version' => config('beike.version')]);
+
+        $plugin      = Http::sendGet($apiEndPoint);
 
         if (empty($plugin)) {
             throw new NotFoundHttpException('该插件服务订单不存在或已下架');
@@ -146,39 +133,196 @@ class MarketingService
     /**
      * 下载插件到网站
      *
-     * @param             $pluginCode
-     * @throws \Exception
+     * @param            $pluginCode
+     * @throws Exception
      */
     public function download($pluginCode)
     {
-        $datetime = date('Y-m-d');
-        $url      = config('beike.api_url') . "/api/plugins/{$pluginCode}/download";
+        $datetime         = date('Y-m-d');
+        $apiEndPoint      = "/v1/plugins/{$pluginCode}/download";
 
-        $content = $this->httpClient->get($url, [
-            'timeout' => null,
-        ])->body();
+        $content = Http::sendGet($apiEndPoint, ['timeout' => null], 'body');
 
         $pluginPath = "plugins/{$pluginCode}-{$datetime}.zip";
         Storage::disk('local')->put($pluginPath, $content);
 
         $pluginZip = storage_path('app/' . $pluginPath);
-        $zipFile   = (new Zip)->open($pluginZip);
-        $zipFile->extract(base_path('plugins'));
+
+        $info = $this->getPluginInfo($pluginZip);
+
+        //是否beikeshop 插件
+        if ($info['is_beikeshop_plugin']) {
+
+            try {
+                $zipFile   = (new Zip)->open($pluginZip);
+
+                if ($info['is_error']) {
+                    $info2 = $info['dir_info'];
+
+                    if ($info['error_dir']) {
+
+                        //文件跟命名空间不符合的插件
+                        if (count($info2) == 2) {
+                            $dir   = $info2[1];
+                            $jydir = base_path('plugins');
+                            $zipFile->extract($jydir);
+
+                            $error_dir = base_path('plugins/' . $info['error_dir']);
+                            $ok_dir    = base_path('plugins/' . $dir);
+
+                            $result = @rename($error_dir, $ok_dir);
+                            if (! $result) {
+                                throw new Exception('重命名插件文件夹失败');
+                            }
+                        }
+                    } else {
+                        //散开的文件
+                        if (count($info2) == 2) {
+                            $dir        = $info2[1];
+                            $plugin_dir = base_path('plugins/' . $dir);
+
+                            if (! is_dir($plugin_dir)) {
+                                (new \Illuminate\Filesystem\Filesystem)->makeDirectory($plugin_dir);
+                            }
+                            $zipFile->extract($plugin_dir);
+                        }
+                    }
+
+                } else {
+                    $zipFile->extract(base_path('plugins')); //正常的beikeshop 插件
+                }
+            } catch (Exception $exception) {
+                throw new Exception($exception->getMessage());
+            }
+        } else {
+            throw new Exception('无法识别的beikeshop插件！');
+        }
+
     }
 
     // getDomain
     public function getDomain($token)
     {
-        $url = config('beike.api_url') . '/api/website/get_domain?token=' . $token;
+        $apiEndPoint = '/v1/website/get_domain';
+        request()->merge(['token' => $token]);
 
-        return $this->httpClient->get($url)->json();
+        return Http::sendGet($apiEndPoint);
     }
 
     // getToken
     public function getToken($domain)
     {
-        $url = config('beike.api_url') . '/api/website/get_token?domain=' . $domain;
+        $apiEndPoint = '/v1/website/get_token';
+        request()->merge(['domain' => $domain]);
 
-        return $this->httpClient->get($url)->json();
+        return Http::sendGet($apiEndPoint);
+    }
+
+    public function getLicensedPro($domain,$from)
+    {
+        $apiEndPoint = '/v1/licensed_pro';
+        request()->merge(['domain' => $domain, 'from' => $from]);
+
+        return Http::sendGet($apiEndPoint);
+    }
+
+    // getToken
+    public function checkToken($domain, $token)
+    {
+        $apiEndPoint = '/v1/website/check_token';
+        request()->merge(['domain' => $domain , 'token' => $token]);
+
+        return Http::sendGet($apiEndPoint);
+    }
+
+    /**
+     *  get plugin dir by preg match content
+     *
+     * @param $content
+     * @return string[]
+     */
+    public function getPluginDir($content)
+    {
+        preg_match('/namespace\s+([^\s;]+);/', $content, $matches);
+
+        return explode('\\', $matches[1]);
+    }
+
+    /**
+     *  get plugin info
+     *
+     * @throws Exception
+     */
+    public function getPluginInfo($zip_file)
+    {
+        $plugin_dir          = '';
+        $dir_info            = [];
+        $error_dir           = '';
+        $is_error            = false;
+        $is_beikeshop_plugin = false;
+
+        $zip                 = new ZipArchive;
+
+        if ($zip->open($zip_file) === true) {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $stat = $zip->statIndex($i);
+                $name = $stat['name'];
+
+                //是否为文件夹
+                if (str_ends_with($name, '/')) {
+                    $count = substr_count($name, '/');
+                    if ($count == 1) {
+                        $plugin_dir = $name;
+                    }
+
+                } else {
+                    //文件
+                    if ($name == 'Bootstrap.php') {
+                        $content  = $zip->getFromIndex($i);
+                        $dir_info = $this->getPluginDir($content);
+                        $is_error = true;
+
+                        break;
+                    }
+
+                    if ($name == $plugin_dir . 'Bootstrap.php') {
+                        $content  = $zip->getFromIndex($i);
+                        $dir_info = $this->getPluginDir($content);
+                        if (count($dir_info) == 2) {
+                            $_pluginDir = $dir_info[1];
+                            if (rtrim($plugin_dir, '/') != $_pluginDir) {
+                                $is_error  = true;
+                                $error_dir = rtrim($plugin_dir, '/');
+                            }
+                        }
+
+                        break;
+                    }
+
+                }
+            }
+
+            if (count($dir_info) == 2 && $dir_info[0] == 'Plugin') {
+                $is_beikeshop_plugin = true;
+            }
+
+            $zip->close();
+        } else {
+            throw new Exception('无法打开ZIP文件或文件不存在!');
+        }
+
+        return [
+            'is_beikeshop_plugin' => $is_beikeshop_plugin,
+            'is_error'            => $is_error,
+            'error_dir'           => $error_dir,
+            'dir_info'            => $dir_info,
+        ];
+    }
+
+    public function checkPluginVersion($pluginCodes)
+    {
+        $apiEndPoint = "/v1/plugins/version";
+        request()->merge(['fields' => $pluginCodes]);
+        return Http::sendGet($apiEndPoint);
     }
 }

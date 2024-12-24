@@ -40,7 +40,7 @@
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <h5 class="page-title">@yield('title')</h5>
-          <div class="ms-4 text-danger">@yield('page-title-after')</div>
+          <div class="ms-4">@yield('page-title-after')</div>
         </div>
         <div class="text-nowrap">@yield('page-title-right')</div>
       </div>
@@ -77,6 +77,7 @@
       api_url: '{{ beike_api_url() }}',
       app_url: '{{ request()->getHost() }}',
       has_license: {{ json_encode(check_license()) }},
+      placeholder: '{{ system_setting('base.placeholder') }}',
       has_license_code: '{{ system_setting("base.license_code", "") }}',
     }
 
@@ -92,12 +93,14 @@
     bk.tableResponsive()
 
     @if (!check_same_domain())
-      layer.alert('{{ __('admin/common.error_host_app_url') }}', {
-        icon: 0,
-        title: '{{__("common.text_hint")}}',
-        area: ['400px', '200px'],
-        btn: ['{{ __('common.confirm') }}']
-      })
+      setTimeout(() => {
+        layer.alert('{{ __('admin/common.error_host_app_url') }}', {
+          icon: 0,
+          title: '{{__("common.text_hint")}}',
+          area: ['400px', '200px'],
+          btn: ['{{ __('common.confirm') }}']
+        })
+      }, 1000);
     @endif
   </script>
   @stack('footer')

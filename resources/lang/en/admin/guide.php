@@ -41,8 +41,8 @@ return [
     'text_payment_2'  => 'Note: Some payment interface applications take longer to review, please apply in advance. Payment methods used in China may require website domain name registration. ',
     'text_payment_3'  => 'In addition, you also need to set the logistics delivery method for customers to choose. The system provides a fixed shipping fee plug-in for free. ',
     'text_payment_4'  => 'You can also go to BeikeShop<a href="' . admin_route('marketing.index') . '">"Plug-in Market"</a> to learn and download more payment methods and logistics methods ! ',
-    'text_mail_1'     => 'Email notifications can keep your customers informed of order status, and they can also register and retrieve passwords via email. You can configure SMTP according to actual business needs, and email engines such as SendCloud are used to send emails. ',
-    'text_mail_2'     => 'Warm reminder: Frequently sending emails may cause your emails to be marked as spam. We recommend using SendCloud (paid service) to send emails. ',
+    'text_mail_1'     => 'Email notifications can keep your customers informed of order status, and they can also register and retrieve passwords via email. ',
+    'text_mail_2'     => 'You can configure SMTP according to actual business needs, and email engines such as Sendmail are used to send emails. ',
 
     // Button
     'button_setting_general' => 'Website basic settings',
