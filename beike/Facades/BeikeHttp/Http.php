@@ -95,7 +95,7 @@ class Http extends PendingRequest
             ]);
             $this->withBody($body, 'application/json');
         }
-
+:quantity_format()
         $result = $this->post($url, $data)->{$format}();
         if (isset($result['status']) && $result['status'] === 'error') {
             throw new Exception($result['message']);
