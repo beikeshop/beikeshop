@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'Rich-Text',
     'module_slideshow'      => 'Folienmodul',
     'module_tab_products'   => 'Tab-Produkte',
+    'theme_index'           => 'Vorlageneinstellungen',
+    'design_menu_index'     => 'Navigationseinstellungen',
+    'design_index'          => 'Wohnkultur',
+    'design_footer_index'   => 'Dekoration der letzten Seite',
+    'design_app_home_index' => 'APP Homepage Design'
 ];

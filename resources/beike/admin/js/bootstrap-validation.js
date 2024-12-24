@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2023-10-18 17:46:11
+ * @LastEditTime  2024-07-09 20:36:53
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -33,7 +33,21 @@ $(function () {
     form.addEventListener(
       "submit",
       function (event) {
-        if (!form.checkValidity()) {
+        // 处理一组 checkbox 必选 的情况
+        let isCheckboxValid = true;
+        $(form).find('.form-checkbox.required').each(function() {
+          const checkboxes = $(this).find('input[type="checkbox"]');
+          let invalidFeedback = $(this).find('.invalid-feedback');
+
+          if (checkboxes.filter(':checked').length === 0) {
+            isCheckboxValid = false;
+            invalidFeedback.show();
+          } else {
+            invalidFeedback.hide();
+          }
+        });
+
+        if (!form.checkValidity() || !isCheckboxValid) {
           event.preventDefault();
           event.stopPropagation();
         }

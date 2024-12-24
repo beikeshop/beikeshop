@@ -66,51 +66,54 @@ class FileManagerService
     public function getFiles($baseFolder, $keyword, $sort, $order, int $page = 1, int $perPage = 20): array
     {
         $currentBasePath = rtrim($this->fileBasePath . $baseFolder, '/');
-        $files           = glob($currentBasePath . '/*');
+        $files = array_filter(glob($currentBasePath . '/*'), function ($file) {
+            return is_file($file) && preg_match('/\.(jpg|jpeg|png|JPG|JPEG|mp4|MP4|gif|webp)$/', $file);
+        });
 
+        // 过滤文件
+        if ($keyword) {
+            $files = array_filter($files, function ($file) use ($keyword) {
+                return str_contains(basename($file), $keyword);
+            });
+        }
+
+        // 获取文件信息
+        $fileData = array_map(function ($file) {
+            return [
+                'path' => $file,
+                'basename' => basename($file),
+                'mtime' => filemtime($file),
+            ];
+        }, $files);
+
+        // 排序文件
         if ($sort == 'created') {
-            if ($order == 'desc') {
-                usort($files, function ($a, $b) {
-                    return filemtime($a) - filemtime($b) < 0;
-                });
-            } else {
-                usort($files, function ($a, $b) {
-                    return filemtime($a) - filemtime($b) >= 0;
-                });
-            }
+            usort($fileData, function ($a, $b) use ($order) {
+                return $order == 'desc' ? $b['mtime'] <=> $a['mtime'] : $a['mtime'] <=> $b['mtime'];
+            });
         } else {
-            natcasesort($files);
-            if ($order == 'desc') {
-                $files = array_reverse($files);
-            }
+            usort($fileData, function ($a, $b) use ($order) {
+                return $order == 'desc' ? strcmp($b['basename'], $a['basename']) : strcmp($a['basename'], $b['basename']);
+            });
         }
 
-        $images = [];
-        foreach ($files as $file) {
-            $baseName = basename($file);
-            if ($baseName == 'index.html') {
-                continue;
-            }
-            if ($keyword && ! str_contains($baseName, $keyword)) {
-                continue;
-            }
-            $fileName = str_replace(public_path('catalog'), '', $file);
-            if (is_file($file)) {
-                $images[] = $this->handleImage($fileName, $baseName);
-            }
-        }
+        // 分页
+        $totalFiles = count($fileData);
+        $start = ($page - 1) * $perPage;
+        $fileData = array_slice($fileData, $start, $perPage);
 
-        $page            = $page > 0 ? $page : 1;
-        $imageCollection = collect($images);
-
-        $currentImages = $imageCollection->forPage($page, $perPage);
+        // 处理文件
+        $images = array_map(function ($file) {
+            return $this->handleImage(str_replace(public_path('catalog'), '', $file['path']), $file['basename']);
+        }, $fileData);
 
         return [
-            'images'      => $currentImages->values(),
-            'image_total' => $imageCollection->count(),
+            'images'      => $images,
+            'image_total' => $totalFiles,
             'image_page'  => $page,
         ];
     }
+
 
     /**
      * 创建目录

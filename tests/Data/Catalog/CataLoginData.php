@@ -14,7 +14,7 @@ class CataLoginData
         'false_email'    => 'test1@163.com',
         'illegal_email'  => 'test',
         'false_password' => '1234567',
-        'false_assert'   => 'User login and registration',
+        'false_assert'   => 'Sign In or Sign up',
         'illegal_assert' => 'Please enter a valid email address!',
 
     ];

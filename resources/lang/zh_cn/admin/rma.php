@@ -23,6 +23,7 @@ return [
     'service_type'      => '服务类型',
     'rma_details'       => '售后管理详情',
     'reasons_return'    => '退货原因',
+    'sale_price'        => '售价',
     'current_state'     => '当前状态',
     'modify_status'     => '修改状态',
     'remarks'           => '备注信息',

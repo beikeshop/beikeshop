@@ -37,6 +37,7 @@ class RmaDetail extends JsonResource
             'product_name'     => $this->product_name,
             'name'             => $this->name,
             'sku'              => $this->sku,
+            'price'            => isset($this->orderProduct->price) ? currency_format($this->orderProduct->price) : '-',
             'images'           => $this->images,
             'reason'           => $this->reason ? (json_decode($this->reason->name, true)[locale()] ?? '') : '',
             'type_text'        => $types[$this->type],

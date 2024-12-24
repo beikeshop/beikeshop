@@ -20,4 +20,9 @@ return [
     'module_icons'          => '图标模块',
     'module_rich_text'      => '富文本模块',
     'module_page'           => '文章模块',
+    'theme_index'           => '模板设置',
+    'design_menu_index'     => '导航设置',
+    'design_index'          => '首页装修',
+    'design_footer_index'   => '尾页装修',
+    'design_app_home_index' => 'APP首页设计'
 ];

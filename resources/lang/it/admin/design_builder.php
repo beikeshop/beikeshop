@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'rich text',
     'module_slideshow'      => 'modulo diapositiva',
     'module_tab_products'   => 'scheda prodotti',
+    'theme_index'           => 'Impostazioni del modello',
+    'design_menu_index'     => 'Impostazioni di navigazione',
+    'design_index'          => 'Decorazione domestica',
+    'design_footer_index'   => 'Decorazione dell\'ultima pagina',
+    'design_app_home_index' => 'Progettazione della homepage APP'
 ];

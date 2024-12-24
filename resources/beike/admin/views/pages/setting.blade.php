@@ -22,10 +22,10 @@
         @endif
         @if (session('error'))
           <div class="alert alert-danger">
-            {{ session('error') }}
+            {!! session('error') !!}
           </div>
         @endif
-        <ul class="nav nav-tabs nav-bordered mb-5" role="tablist">
+        <ul class="nav nav-tabs nav-bordered mb-3  mb-lg-5" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link active" data-bs-toggle="tab" href="#tab-general">{{ __('admin/setting.basic_settings') }}</a>
           </li>
@@ -130,12 +130,20 @@
 
             @hook('admin.setting.image.before')
 
-            <x-admin::form.row title="Logo">
+            <x-admin::form.row title="{{ __('admin/setting.shop_logo') }}">
               <div class="open-crop cursor-pointer bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative" ratio="380/100">
                 <img src="{{ image_resize(old('logo', system_setting('base.logo', ''))) }}" class="img-fluid">
               </div>
               <input type="hidden" value="{{ old('logo', system_setting('base.logo', '')) }}" name="logo">
               <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 380*100</div>
+            </x-admin::form.row>
+
+            <x-admin::form.row title="{{ __('admin/setting.admin_logo') }}">
+              <div class="open-crop cursor-pointer bg-light wh-80 border d-flex justify-content-center align-items-center me-2 mb-2 position-relative" ratio="380/100">
+                <img src="{{ image_resize(old('admin_logo', system_setting('base.admin_logo', 'image/logo.png'))) }}" class="img-fluid">
+              </div>
+              <input type="hidden" value="{{ old('admin_logo', system_setting('base.admin_logo', 'image/logo.png')) }}" name="admin_logo">
+              <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 388*73</div>
             </x-admin::form.row>
 
             <x-admin::form.row title="favicon">
@@ -434,6 +442,8 @@
       if (cropper) {
         canvas = cropper.getCroppedCanvas({
           imageSmoothingQuality: 'high',
+          width: 800, //最大宽度
+          height: 800, //最大高度
         });
         canvas.toBlob(function(blob) {
           var formData = new FormData();

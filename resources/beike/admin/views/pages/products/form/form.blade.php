@@ -256,7 +256,7 @@
                         @hook('admin.product.edit.variables.batch.after')
                       </div>
 
-                      <table class="table table-bordered table-hover table-skus">
+                      <table class="table table-bordered table-hover table-skus table-no-mb">
                         <thead>
                           <th v-for="(variant, index) in form.variables" :key="'pv-header-' + index">
                             @{{ variant.name[current_language_code] || 'No name' }}
@@ -332,7 +332,10 @@
               <div v-if="!editing.isVariable">
                 <input type="hidden" value="{{ old('skus.0.image', $product->skus[0]->image ?? '') }}" name="skus[0][image]">
                 <x-admin-form-input name="skus[0][model]" :title="__('admin/product.model')" :value="old('skus.0.model', $product->skus[0]->model ?? '')" />
-                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? '')" required />
+                @php
+                  $defaul_sku = 'BKSKU-' . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 4). '-' . substr(str_shuffle('0123456789'), 0, 3);
+                @endphp
+                <x-admin-form-input name="skus[0][sku]" title="sku" :value="old('skus.0.sku', $product->skus[0]->sku ?? $defaul_sku)" required />
                 <x-admin-form-input name="skus[0][price]" type="number" :title="__('admin/product.price')" :value="old('skus.0.price', $product->skus[0]->price ?? '')" step="any" required />
                 <x-admin-form-input name="skus[0][origin_price]" type="number" :title="__('admin/product.origin_price')" :value="old('skus.0.origin_price', $product->skus[0]->origin_price ?? '')" step="any" />
                 <x-admin-form-input name="skus[0][cost_price]" type="number" :title="__('admin/product.cost_price')" :value="old('skus.0.cost_price', $product->skus[0]->cost_price ?? '')" step="any" />
@@ -944,9 +947,9 @@
                 this.source.variables[variantIndex].name = name;
               }
             }
-            
+
             @stack('admin.product.edit.vue.method.dialogVariablesFormSubmit')
-              
+
             this.dialogVariables.show = false;
           });
         },
@@ -1008,9 +1011,7 @@
           }
 
           this.dialogVariables.form.name = JSON.parse(JSON.stringify(name));
-
           @stack('admin.product.edit.vue.method.modalVariantOpenButtonClicked')
-          
           this.dialogVariables.show = true;
         },
 
@@ -1045,6 +1046,29 @@
             res.data.push({id: 'add', name: '{{ __('admin/attribute.add_attribute') }}'})
             cb(res.data);
           })
+        },
+
+        randomValue(len, type) {
+          len = len || 32;  // 默认长度为 32
+          var chars;
+
+          // 根据 type 选择字符集
+          switch (type) {
+            case 'number':
+              chars = '0123456789';
+              break;
+            case 'string':
+            default:
+              chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+              break;
+          }
+
+          var maxPos = chars.length;
+          var value = '';
+          for (let i = 0; i < len; i++) {
+            value += chars.charAt(Math.floor(Math.random() * maxPos));
+          }
+          return value;
         },
 
         attributeHandleSelect(item, index, type) {
@@ -1112,7 +1136,7 @@
                 variants: combo,
                 images: [],
                 model: '',
-                sku: '',
+                sku: 'BKSKU-' + this.randomValue(4, 'string') + '-' + this.randomValue(3, 'number'),
                 price: null,
                 quantity: null,
                 is_default: i == 0,

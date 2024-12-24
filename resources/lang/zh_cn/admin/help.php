@@ -11,6 +11,8 @@
  */
 
 return [
+    'help_index'                => '查看帮助中心',
+
     'title_1'                   => '快速指引',
     'title_2'                   => '快捷服务',
     'btn_link'                  => '立即前往',

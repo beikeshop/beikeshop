@@ -6,7 +6,7 @@
 @section('body-class', 'page-marketing')
 
 @section('page-title-after')
-<div class="d-flex">
+<div class="d-flex top-tips-wrap">
   <div class="text-nowrap me-2">{{ __('admin/marketing.attention_1') }}</div>
   <div class="top-text">
     {{ __('admin/marketing.attention_2') }}
@@ -71,7 +71,9 @@
               <div class="card mb-4 marketing-item">
                 <div class="card-body">
                   <div class="plugin-img mb-3">
-                    <div class="sale-wrap" v-if="plugin.origin_price"><img :src="plugin.sale_icon" v-if="plugin.sale_icon" class="img-fluid"></div>
+                    <div class="sale-wrap" v-if="plugin.origin_price">
+                      <img :src="plugin.sale_icon" v-if="plugin.sale_icon" class="img-fluid">
+                    </div>
                     <a :href="'{{ system_setting('base.admin_name', 'admin') }}/marketing/' + plugin.code"><img :src="plugin.icon_big"
                         class="img-fluid"></a>
                   </div>

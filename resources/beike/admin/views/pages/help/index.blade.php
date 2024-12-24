@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 
-@section('title', __('admin/common.help'))
+@section('title', __('admin/common.help_index'))
 
 @section('body-class', 'help-page')
 

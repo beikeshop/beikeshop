@@ -91,9 +91,14 @@ class CartController extends Controller
                 ->whereRelation('product', 'active', '=', true)
                 ->findOrFail($skuId);
 
-            $cart = CartService::add($sku, $quantity, $customer);
             if ($buyNow) {
+                $cart = CartService::add($sku, $quantity, $customer);
+                if ($cart->quantity != $quantity) {
+                    CartService::updateQuantity($customer, $cart->id, $quantity);
+                }
                 CartService::select($customer, [$cart->id], true);
+            } else {
+                $cart = CartService::add($sku, $quantity, $customer);
             }
 
             $cart = hook_filter('cart.store.data', $cart);

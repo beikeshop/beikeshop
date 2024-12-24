@@ -11,6 +11,8 @@
 
 namespace Beike\Services;
 
+use Beike\Models\OrderShipment;
+
 class ShipmentService
 {
     /**
@@ -53,6 +55,22 @@ class ShipmentService
         $company = collect($expressCompanies)->where('code', $expressCode)->first();
 
         return $company ? $company['name'] ?? '' : '';
+    }
+
+    public static function addShipment($orderId, $shipment)
+    {
+        $expressCode    = $shipment['express_code']    ?? '';
+        $expressCompany = $shipment['express_company'] ?? '';
+        $expressNumber  = $shipment['express_number']  ?? '';
+        if ($expressCode && $expressCompany && $expressNumber) {
+            $orderShipment = new OrderShipment([
+                'order_id'        => $orderId,
+                'express_code'    => $expressCode,
+                'express_company' => $expressCompany,
+                'express_number'  => $expressNumber,
+            ]);
+            $orderShipment->saveOrFail();
+        }
     }
 
     /**

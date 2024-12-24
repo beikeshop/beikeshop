@@ -28,9 +28,8 @@ class LoginController extends Controller
 
     public function store(LoginRequest $loginRequest)
     {
-
         hook_action("admin.login.store.before",$loginRequest);
-        
+
         if (auth(AdminUser::AUTH_GUARD)->attempt($loginRequest->validated())) {
             return redirect(admin_route('home.index'));
         }

@@ -11,6 +11,8 @@
  */
 
 return [
+    'help_index'                => 'View Help',
+
     'title_1'                   => 'Quick Guide',
     'title_2'                   => 'Quick service',
     'btn_link'                  => 'Go now',

@@ -34,7 +34,7 @@ class CustomerPage
         //创建客户
         'cre_customer' => '#customer-app > div.card-body > div.d-flex.justify-content-between.mb-4 > button',
         //编辑客户
-        'edit_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a',
+        'edit_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a.btn.btn-outline-secondary.btn-sm',
         //删除客户
         'del_customer' => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > button',
         'get_assert'   => '#customer-app > div.card-body > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(2)',

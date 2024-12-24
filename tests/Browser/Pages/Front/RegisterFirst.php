@@ -29,7 +29,7 @@ class RegisterFirst extends DuskTestCase
             $browser->visit(LoginPage::Login['login_url'])
                 ->type(LoginPage::Register['register_email'], RegisterData::False_Register['exist_email'])
                 ->type(LoginPage::Register['register_pwd'], RegisterData::True_Register['password'])
-                ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
+              //  ->type(LoginPage::Register['register_re_pwd'], RegisterData::True_Register['password'])
                 ->pause(2000)
                 ->press(LoginPage::Register['register_btn'])
                 ->pause(6000)

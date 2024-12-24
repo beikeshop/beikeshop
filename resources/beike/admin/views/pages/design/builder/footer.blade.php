@@ -14,6 +14,7 @@
   <script src="{{ asset('vendor/layer/3.5.1/layer.js') }}"></script>
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
+  <script src="{{ asset('vendor/cookie/js.cookie.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/Sortable.min.js') }}"></script>
   <script src="{{ asset('vendor/vue/vuedraggable.js') }}"></script>
   <script src="{{ asset('vendor/tinymce/5.9.1/tinymce.min.js') }}"></script>
@@ -24,6 +25,12 @@
   <script>
     const lang = {
       file_manager: '{{ __('admin/file_manager.file_manager') }}',
+    }
+
+    const config = {
+      beike_version: '{{ config('beike.version') }}',
+      api_url: '{{ beike_api_url() }}',
+      app_url: '{{ config('app.url') }}',
     }
   </script>
 </head>
@@ -172,7 +179,7 @@
       </div>
     </div>
     <div class="preview-iframe">
-      <iframe src="{{ url('/') }}" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
+      <iframe src="{{ url('/') }}?design=1" frameborder="0" id="preview-iframe" width="100%" height="100%"></iframe>
     </div>
   </div>
 

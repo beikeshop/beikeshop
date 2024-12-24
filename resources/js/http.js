@@ -3,7 +3,7 @@
  * @link          https://beikeshop.com
  * @Author        pu shuo <pushuo@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2024-08-29 22:54:53
+ * @LastEditTime  2024-12-24 22:35:07
  */
 
 window.axios = require('axios');
@@ -93,6 +93,17 @@ export default {
       }).catch((res) => {
         reject(res);
         if (!hmsg) {
+          if (res.response.status === 404) {
+            if (res.response.data.includes('nginx')) {
+              layer.open({
+                type: 1,
+                title: false,
+                area: '350px',
+                content: `<div class="p-3">${$('.nginx-alert').html()}</div>`
+              });
+              return;
+            }
+          }
           layer.msg(res.response.data.message || res.message,{time: 3000}, ()=>{});
         }
       }).finally(() => {

@@ -33,6 +33,7 @@ return [
     'order_id'                    => '订单ID',
     'text_transaction_id'         => '交易ID',
     'text_click_view'             => '点击查看',
+    'add_express'             => '添加快递',
 
     'btn_print'              => '打印',
     'pick_list'              => '发货单',
@@ -54,4 +55,6 @@ return [
     'price'                  => '单价',
     'total'                  => '总计',
     'order_print_error'      => '请勾选要打印的订单',
+    'error_no_express_company'      => '没有快递公司，请先添加',
+    'to_add_express_company'      => '去添加',
 ];

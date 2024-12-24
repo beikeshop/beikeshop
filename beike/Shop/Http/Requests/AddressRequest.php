@@ -24,7 +24,7 @@ class AddressRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'       => 'required|min:2|max:16',
+            'name'       => 'required|min:2|max:64',
             'country_id' => 'required|exists:countries,id',
             'zone_id'    => 'required|exists:zones,id',
             'address_1'  => 'required',

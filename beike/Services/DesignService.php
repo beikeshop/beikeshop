@@ -243,6 +243,7 @@ class DesignService
         foreach ($images as $index => $image) {
             $imagePath               = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
             $images[$index]['image'] = image_origin($imagePath);
+            $images[$index]['type'] = strpos($imagePath, '.mp4') !== false ? 'video' : 'image';
 
             $link = $image['link'];
             if (empty($link)) {

@@ -57,7 +57,7 @@ class PermissionRepo
             ['title' => trans('admin/common.page'), 'permissions' => $this->getPagePermissions()],
             ['title' => trans('admin/common.page_category'), 'permissions' => $this->getPageCategoryPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
-
+            ['title' => trans('admin/common.design'), 'permissions' => $this->getDesignPermissions()],
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
             ['title' => trans('admin/common.report'), 'permissions' => $this->getReportPermissions()],
@@ -71,6 +71,7 @@ class PermissionRepo
             ['title' => trans('admin/common.file_manager'), 'permissions' => $this->getFileManagerPermissions()],
             ['title' => trans('admin/common.zone'), 'permissions' => $this->getZonePermissions()],
             ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
+            ['title' => trans('admin/common.help_index'), 'permissions' => $this->getHelpPermissions()],
         ];
 
         $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
@@ -230,7 +231,7 @@ class PermissionRepo
      */
     private function getSettingPermissions(): array
     {
-        $routes = ['settings_index', 'settings_update', 'design_index', 'design_footer_index', 'design_menu_index'];
+        $routes = ['settings_index', 'settings_update'];
         $items  = $this->getPermissionList('setting', $routes);
 
         return hook_filter('role.setting_permissions', $items);
@@ -427,6 +428,27 @@ class PermissionRepo
         $items  = $this->getPermissionList('country', $routes);
 
         return hook_filter('role.country_permissions', $items);
+    }
+
+    private function getHelpPermissions(): array
+    {
+        $routes = ['help_index'];
+        $items  = $this->getPermissionList('help', $routes);
+
+        return hook_filter('role.help_permissions', $items);
+    }
+
+    /**
+     * 设计权限列表
+     *
+     * @return array
+     */
+    private function getDesignPermissions(): array
+    {
+        $routes = ['theme_index', 'design_menu_index', 'design_index', 'design_footer_index','design_app_home_index'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.design_permissions', $items);
     }
 
     /**

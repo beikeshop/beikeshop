@@ -24,6 +24,7 @@ return [
     'name'              => 'Name',
     'origin_price'      => 'Origin Price',
     'oz'                => 'Ounce',
+    'ct'                => 'Carat',
     'price'             => 'Price',
     'quantity'          => 'Quantity',
     'sku'               => 'SKU',

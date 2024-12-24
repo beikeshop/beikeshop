@@ -25,6 +25,9 @@
 
   <div id="app" class="card h-min-600">
     <div class="card-body">
+      @if ($errors->has('error'))
+      <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
+      @endif
       <form novalidate id="form-page" class="needs-validation" action="{{ $page->id ? admin_route('pages.update', [$page->id]) : admin_route('pages.store') }}" method="POST">
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-content">

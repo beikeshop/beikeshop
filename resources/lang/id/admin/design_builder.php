@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => 'Modul Teks Kaya',
     'module_slideshow'      => 'Modul Slide',
     'module_tab_products'   => 'Tab Barang',
+    'theme_index'           => 'Pengaturan templat',
+    'design_menu_index'     => 'Pengaturan navigasi',
+    'design_index'          => 'Dekorasi Rumah',
+    'design_footer_index'   => 'Dekorasi halaman terakhir',
+    'design_app_home_index' => 'Desain halaman rumah APP'
 ];

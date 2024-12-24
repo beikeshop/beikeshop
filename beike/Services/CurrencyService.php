@@ -42,6 +42,10 @@ class CurrencyService
             return $amount;
         }
 
+        if (!isset($this->currencies[$currency])) {
+            throw (new \Exception("Currency {$currency} not exist. Please contact the administrator to create it"));
+        }
+
         $currencyRow = $this->currencies[$currency] ?? null;
         if (empty($currencyRow)) {
             return $amount;

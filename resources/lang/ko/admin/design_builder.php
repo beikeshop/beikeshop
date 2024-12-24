@@ -19,4 +19,9 @@ return [
     'module_rich_text'      => '텍스트 풍부한 모듈',
     'module_slideshow'      => '슬라이드 모듈',
     'module_tab_products'   => '탭 상품',
+    'theme_index'           => '템플릿 설정',
+    'design_menu_index'     => '탐색 설정',
+    'design_index'          => '홈 인테리어',
+    'design_footer_index'   => '뒷면 장식',
+    'design_app_home_index' => 'APP 홈 디자인'
 ];

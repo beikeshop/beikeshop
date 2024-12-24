@@ -29,10 +29,10 @@ class AdminOrderPage
         'alter_btn'   => '.el-button.el-button--primary', //更新状态按钮
         'Shipped'     => '.el-scrollbar__view.el-select-dropdown__list li:nth-of-type(2)', //已发货
         'express_btn' => '#app > form > div:nth-child(3) > div > div > div > span > span > i', //快递下拉按钮
-        'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付//
+        'Completed'   => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(1)', //已支付
 
         'express_1'    => '.el-scrollbar__view.el-select-dropdown__list', //选择第一个快递
-        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号  #orders-app > div > div.bg-light.p-4.mb-3 > form > div:nth-child(1) > div:nth-child(1) > div > div > input
+        'order_number' => '#app > form > div:nth-child(4) > div > div > input', //订单号
         'submit'       => '#app > form > div:nth-child(7) > div > button', //提交按钮
         'submit_btn2'  => '#app > form > div:nth-child(5) > div > button', //提交按钮
         //#app > form > div:nth-child(5) > div > button
@@ -40,9 +40,9 @@ class AdminOrderPage
     ];
 
     public const Rams = [//售后详情页
-        'Check_btn'  => '#customer-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(9) > a', //列表查看按钮
+        'Check_btn'  => '#customer-app > div > div.table-push > table > tbody > tr:nth-child(1) > td:nth-child(10) > a', //列表查看按钮
         'Pull_btn'   => '#app > form > div.el-form-item.is-required > div > div > div > span > span', //状态下拉按钮
-        'Completed'  => '.el-scrollbar__view.el-select-dropdown__list li:nth-child(5)', //状态已完成
+        'Completed'  => '.el-select-dropdown__wrap.el-scrollbar__wrap li:nth-child(5)', //状态已完成
         'Update_btn' => '#app > form > div:nth-child(4) > div > button', //更新按钮
 
     ];

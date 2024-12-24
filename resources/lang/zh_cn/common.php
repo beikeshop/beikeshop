@@ -9,7 +9,7 @@
  * @modified   2022-07-28 17:21:38
  */
 return [
-    'error_required'       => '请填写 :name', // 这个有用别删了，:name 是一个变量
+    'error_required'       => '请填写 :name',
     'error_input_required' => '输入框不能为空',
     'error_form'           => '请检查表单是否填写正确',
     'email'                => '邮箱',
@@ -51,6 +51,7 @@ return [
     'edit'                 => '编辑',
     'action'               => '操作',
     'add'                  => '添加',
+    'choose'               => '选择',
     'please_choose'        => '请选择',
     'recommend_size'       => '建议尺寸',
     'pick_datetime'        => '选择时间',

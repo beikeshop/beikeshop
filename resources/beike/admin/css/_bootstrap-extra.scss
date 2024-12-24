@@ -48,6 +48,10 @@ hr.horizontal.dark {
   .nav-item {
     margin-left: 0.65rem;
     margin-right: 0.65rem;
+    @media (max-width: 768px) {
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+    }
 
     &:first-child {
       margin-left: 0;
@@ -61,6 +65,10 @@ hr.horizontal.dark {
       color: #6c757d;
       border: none;
       padding: 0 1rem 0.7rem;
+
+      @media (max-width: 768px) {
+        padding: 0 0.2rem 0.3rem;
+      }
 
       &.active {
         color: $primary;

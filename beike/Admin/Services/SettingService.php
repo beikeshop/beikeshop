@@ -28,7 +28,7 @@ class SettingService
         if (isset($settings['currency'])) {
             $currency = CurrencyRepo::findByCode($settings['currency']);
             if ($currency->value != 1) {
-                throw new Exception('默认货币汇率必须为1');
+                throw new Exception('默认货币汇率必须为1 <a href="' . admin_route('currencies.index') . '">前往设置</a>');
             }
         }
         foreach ($settings as $key => $value) {

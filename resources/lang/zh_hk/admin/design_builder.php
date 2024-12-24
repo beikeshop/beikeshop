@@ -19,4 +19,9 @@ return [
     'module_product'        => '商品模塊',
     'module_rich_text'      => '富文本模塊',
     'module_page'           => '文章模組',
+    'theme_index'           => '範本設定',
+    'design_menu_index'     => '導航設定',
+    'design_index'          => '首頁裝修',
+    'design_footer_index'   => '尾頁裝修',
+    'design_app_home_index' => 'APP首頁設計'
 ];

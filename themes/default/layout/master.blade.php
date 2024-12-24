@@ -57,6 +57,10 @@
     @endif
   </script>
 
+  @if (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false)
+    <div class="nginx-alert d-none">{!! __('shop/common.nginx_alert') !!}</div>
+  @endif
+
   @stack('add-scripts')
 </body>
 <!-- BeikeShop v{{ config('beike.version') }}({{ config('beike.build') }}) -->

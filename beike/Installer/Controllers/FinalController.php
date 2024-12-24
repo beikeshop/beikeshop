@@ -24,6 +24,10 @@ class FinalController extends BaseController
         $finalStatusMessage = $fileManager->update();
         $finalEnvFile       = $environment->getEnvContent();
 
+        if (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false) {
+            $data['is_nginx'] = true;
+        }
+
         $steps = 5;
 
         $data                   = compact('finalMessages', 'finalStatusMessage', 'finalEnvFile', 'steps');
