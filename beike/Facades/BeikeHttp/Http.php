@@ -58,7 +58,7 @@ class Http extends PendingRequest
     {
         $url = $this->getUrl($apiEndPoint);
 
-        $result = $this->timeout(5)->get($url, $query)->{$format}();
+        $result = $this->get($url, $query)->{$format}();
 
         if (isset($result['status']) && $result['status'] === 'error') {
             throw new Exception($result['message']);
@@ -96,7 +96,7 @@ class Http extends PendingRequest
             $this->withBody($body, 'application/json');
         }
 
-        $result = $this->timeout(5)->post($url, $data)->{$format}();
+        $result = $this->post($url, $data)->{$format}();
         if (isset($result['status']) && $result['status'] === 'error') {
             throw new Exception($result['message']);
         }
