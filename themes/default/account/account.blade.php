@@ -10,11 +10,7 @@
       <x-shop-sidebar />
       <div class="col-12 col-md-9">
         @if (\Session::has('success'))
-          <div class="alert alert-success">
-            <ul>
-              <li>{!! \Session::get('success') !!}</li>
-            </ul>
-          </div>
+          <div class="alert alert-success">{!! \Session::get('success') !!}</div>
         @endif
 
         <div class="card account-card">
