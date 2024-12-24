@@ -38,9 +38,12 @@ class PluginController extends Controller
         $pluginCodes = implode('|', $pluginCodes);
         $pluginVersion = MarketingService::getInstance()->checkPluginVersion($pluginCodes);
         $pluginData = data_get($pluginVersion,'data');
-        $pluginData = array_filter($pluginData, function($value) {
-            return $value !== false;
-        });
+
+        if ($pluginData) {
+            $pluginData = array_filter($pluginData, function($value) {
+                return $value !== false;
+            });
+        }
 
         foreach ($data['plugins'] as &$item) {
             if ($item['can_update'] && isset($pluginData[$item['code']])) {
