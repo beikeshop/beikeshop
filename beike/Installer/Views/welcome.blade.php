@@ -23,7 +23,7 @@
 
           <ul class="dropdown-menu">
             @foreach ($languages as $key => $language)
-              <li><a class="dropdown-item" href="{{ route('installer.lang.switch', [$key]) }}">{{ $language }}</a></li>
+              <li><a class="dropdown-item" href="{{ route('installer.lang.switch', ['code'=>$key]) }}">{{ $language }}</a></li>
             @endforeach
           </ul>
         </div>

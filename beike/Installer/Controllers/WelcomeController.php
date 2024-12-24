@@ -12,6 +12,7 @@
 namespace Beike\Installer\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class WelcomeController extends BaseController
 {
@@ -30,10 +31,10 @@ class WelcomeController extends BaseController
         return view('installer::welcome', $data);
     }
 
-    public function locale($lang)
+    public function locale(Request $request)
     {
+        $lang = $request->get('code');
         setcookie('locale', $lang, 0, '/');
-
-        return Redirect::back();
+        return Redirect::to(route('installer.welcome'));
     }
 }
