@@ -29,7 +29,7 @@ return [
     'category'                     => 'категориями',
     'common_link'                  => 'Постоянная связь',
     'copyright_buy'                => 'Покупка авторских прав',
-    'copyright_hint_text' => 'Пожалуйста, сохраните авторские права внизу или <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">купите лицензию! </a>Если вы приобрели лицензию, <a href="#" class="get-license-code">нажмите для авторизации</a>',
+    'copyright_hint_text' => 'Пожалуйста, сохраните авторские права внизу или <a href="' . beike_url() . '/vip/subscription?type=tab-license" target="_blank">купите лицензию! </a>Если вы приобрели лицензию, <a href="#" class="get-license-code">нажмите для авторизации</a>',
     'countries_index'              => 'Государственное управление',
     'country'                      => 'страной',
     'currencies_index'             => 'валютой',

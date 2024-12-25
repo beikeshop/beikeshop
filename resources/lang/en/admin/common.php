@@ -111,7 +111,7 @@ return [
     'not_enabled'                            => 'Not Rnabled',
     'buy_copyright'                          => 'Buy Copyright',
     'translate_form'                         => 'Please enter the content to be translated',
-    'copyright_hint_text' => 'Please keep the copyright at the bottom, or <a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">Purchase</a> If you have purchased, please <a href="#" class="get-license-code">click to authorize</a>',
+    'copyright_hint_text' => 'Please keep the copyright at the bottom, or <a href="' . beike_url() . '/vip/subscription?type=tab-license" target="_blank">Purchase</a> If you have purchased, please <a href="#" class="get-license-code">click to authorize</a>',
     'copyright_buy_text'     => 'You haven\'t purchased yet, please purchase authorization!',
     'help_index'                             => 'Help',
     'license_bought' => 'Authorized',

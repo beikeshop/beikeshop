@@ -17,5 +17,4 @@ return [
 
     'admin_name'      => env('ADMIN_NAME'),
     'force_url_https' => env('APP_FORCE_HTTPS', false),
-
 ];

@@ -29,7 +29,7 @@ return [
     'category'               => '分類管理',
     'common_link'            => '常用鏈接',
     'copyright_buy'          => '版權購買',
-    'copyright_hint_text' => '請保留底部版權，或<a href="https://beikeshop.com/vip/subscription?type=tab-license" target="_blank">購買授權！ </a>購買請<a href="#" class="get-license-code">點選授權</a>',
+    'copyright_hint_text' => '請保留底部版權，或<a href="' . beike_url() . '/vip/subscription?type=tab-license" target="_blank">購買授權！ </a>購買請<a href="#" class="get-license-code">點選授權</a>',
     'countries_index'        => '國家管理',
     'country'                => '國家管理',
     'currencies_index'       => '貨幣管理',
