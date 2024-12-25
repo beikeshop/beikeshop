@@ -52,7 +52,7 @@ return [
     'no_choose'               => '未选择！',
     'data_request_error'               => '数据请求错误',
     'request_error_1'               => '请检查网络连接是否正常',
-    'request_error_2'               => '请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
+    'request_error_2'               => '',
     'request_error_text'               => '上述检查都正常，还是无法获取数据，可以给我们',
     'submit_work_order'               => '提交工单',
     'verification_code'          => '验证码',
@@ -92,5 +92,5 @@ return [
     'attention_show_2'               => '1.每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'attention_show_3'               => '2.软件为特殊商品，付费购买后非软件本身问题不支持退款，请购买前请仔细阅读插件说明',
     'domain_token_domain_error'      => '当前域名: :domain 与 Token绑定的域名: :token_domain 不一致，请确认后再购买，或者重新绑定 Token。 <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">查看教程</a>',
-    'not_zip_archive'                => '没有zip文件。请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
+    'not_zip_archive'                => '没有zip文件。',
 ];
