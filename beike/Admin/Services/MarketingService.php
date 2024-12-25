@@ -268,6 +268,13 @@ class MarketingService
                 $stat = $zip->statIndex($i);
                 $name = $stat['name'];
 
+                if (str_contains($name,'Bootstrap.php')) {
+                    $arr = explode('/',$name);
+                    if (count($arr) == 2) {
+                        $plugin_dir = $arr[0].'/';
+                    }
+                }
+
                 //是否为文件夹
                 if (str_ends_with($name, '/')) {
                     $count = substr_count($name, '/');
