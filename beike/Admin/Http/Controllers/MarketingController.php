@@ -112,7 +112,13 @@ class MarketingController
             $version_name_format = data_get($plugin,'data.version_name_format');
             $version_name_format_max = max(explode(', ', str_replace('v', '',$version_name_format)));
 
-            if (config('beike.version') > $version_name_format_max)
+            $version = config('beike.version');
+            $parts = explode('.', $version);
+
+            $first_three = array_slice($parts, 0, 3);
+            $bkversion = implode('.', $first_three);
+
+            if ($bkversion > $version_name_format_max)
             {
                 throw new Exception(__('admin/marketing.version_compatible_text'));
             }
