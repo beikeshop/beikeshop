@@ -84,7 +84,7 @@ return [
     'data_request_error'      => 'Data request error',
     'request_error_1'         => 'Please check whether the network connection is normal',
     'download_success'               => 'Download and decompression are successful, please go to the plugin list to install',
-    'request_error_2'         => 'Please check the .env file in the root directory of the website, BEIKE_API_URL configuration, the correct value is: BEIKE_API_URL=https://beikeshop.com',
+    'request_error_2'         => '',
     'request_error_text'      => 'The above checks are normal, but the data cannot be obtained. Can you give us',
     'submit_work_order'       => 'Submit the work order',
     'domain_token_domain_error' => 'The current domain name: :domain is inconsistent with the domain name bound to the Token: :token_domain. Please confirm before purchasing, or rebind the Token. <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">View the tutorial</a>',
