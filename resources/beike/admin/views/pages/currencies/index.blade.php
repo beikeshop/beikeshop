@@ -26,25 +26,25 @@
             </tr>
           </thead>
           <tbody v-if="currencies.length">
-            <tr v-for="language, index in currencies" :key="index">
-              <td>@{{ language.id }}</td>
+            <tr v-for="item, index in currencies" :key="index">
+              <td>@{{ item.id }}</td>
               <td>
-                <div>@{{ language.name }}</div>
-                <span v-if="language.code == defaultCurrency" class="badge text-bg-success text-white">{{ __('admin/setting.default_currency') }}</span>
+                <div>@{{ item.name }}</div>
+                <span v-if="item.code == defaultCurrency" class="badge text-bg-success text-white">{{ __('admin/setting.default_currency') }}</span>
               </td>
-              <td>@{{ language.code }}</td>
-              <td>@{{ language.symbol_left }}</td>
-              <td>@{{ language.symbol_right }}</td>
-              <td>@{{ language.decimal_place }}</td>
-              <td>@{{ language.value }}</td>
-              <td>@{{ language.latest_value }}</td>
+              <td>@{{ item.code }}</td>
+              <td>@{{ item.symbol_left }}</td>
+              <td>@{{ item.symbol_right }}</td>
+              <td>@{{ item.decimal_place }}</td>
+              <td>@{{ item.value }}</td>
+              <td>@{{ item.latest_value }}</td>
               <td>
-                <span v-if="language.status" class="text-success">{{ __('common.enable') }}</span>
+                <span v-if="item.status" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
               <td class="text-end">
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
-                <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
+                <button class="btn btn-outline-danger btn-sm ml-1" :disabled="item.code == defaultCurrency" type="button" @click="deleteCustomer(item.id, index)">{{ __('common.delete') }}</button>
               </td>
             </tr>
           </tbody>

@@ -94,6 +94,10 @@ class CurrencyController extends Controller
                 throw new \Exception(trans('admin/currency.order_exist'));
             }
 
+            if (system_setting('base.currency') == $currency->code) {
+                throw new \Exception(trans('admin/currency.default_exist'));
+            }
+
             CurrencyRepo::delete($currencyId);
             hook_action('admin.currency.destroy.after', $currencyId);
 
