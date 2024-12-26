@@ -1290,7 +1290,7 @@ class ThemeSeeder extends Seeder
                     ]
                 ],
                 "contact" => [
-                    "telephone" => "028-88888888",
+                    "telephone" => "028-xxxxxxxx",
                     "address" => [
                         "en" => "Your company address",
                         "zh_cn" => "您的公司地址"
