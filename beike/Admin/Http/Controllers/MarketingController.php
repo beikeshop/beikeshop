@@ -37,7 +37,6 @@ class MarketingController
     public function show(Request $request)
     {
         $pluginCode = $request->code;
-        MarketingService::getInstance()->getPlugin($pluginCode);
         $data       = [
             'domain'      => str_replace(['http://', 'https://'], '', config('app.url')),
             'plugin_code' => $pluginCode,
