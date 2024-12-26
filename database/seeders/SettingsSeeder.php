@@ -63,7 +63,7 @@ class SettingsSeeder extends Seeder
             ["type" => "system", "space" => "base", "name" => "meta_title", "value" => "开源好用的跨境电商系统", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "meta_description", "value" => "BeikeShop 是一款开源好用的跨境电商建站系统，基于 Laravel 开发。主要面向外贸，和跨境行业。系统提供商品管理、订单管理、会员管理、支付、物流、系统管理等丰富功能", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "meta_keywords", "value" => "开源电商,开源代码,开源电商项目,b2b独立站,dtc独立站,跨境电商网", "json" => 0],
-            ["type" => "system", "space" => "base", "name" => "telephone", "value" => "028-88888888", "json" => 0],
+            ["type" => "system", "space" => "base", "name" => "telephone", "value" => "028-xxxxxxxx", "json" => 0],
             ["type" => "system", "space" => "base", "name" => "email", "value" => "support@example.com", "json" => 0],
             ["type" => "plugin", "space" => "flat_shipping", "name" => "type", "value" => "percent", "json" => 0],
             ["type" => "plugin", "space" => "flat_shipping", "name" => "value", "value" => "10", "json" => 0],
