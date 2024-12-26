@@ -127,7 +127,7 @@ class AttributeRepo
     {
         $builder = Attribute::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
-                $query->where('name', 'like', "{$name}%");
+                $query->where('name', 'like', "%{$name}%");
             });
 
         return $builder->limit(10)->get();

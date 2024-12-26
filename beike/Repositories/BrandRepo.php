@@ -141,7 +141,7 @@ class BrandRepo
     public static function autocomplete($name, $onlyActive = 1)
     {
         $builder = Brand::query()
-            ->where('name', 'like', "$name%")
+            ->where('name', 'like', "%$name%")
             ->select('id', 'name', 'status');
         if ($onlyActive) {
             $builder->where('status', 1);

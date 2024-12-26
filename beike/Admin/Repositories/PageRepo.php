@@ -153,7 +153,7 @@ class PageRepo
     {
         $pages = Page::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
-                $query->where('title', 'like', "{$name}%");
+                $query->where('title', 'like', "%{$name}%");
             })->limit(10)->get();
         $results = [];
         foreach ($pages as $page) {

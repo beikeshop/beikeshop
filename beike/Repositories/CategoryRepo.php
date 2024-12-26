@@ -163,7 +163,7 @@ class CategoryRepo
             ->whereHas('paths', function ($query) use ($name) {
                 $query->whereHas('pathCategory', function ($query) use ($name) {
                     $query->whereHas('description', function ($query) use ($name) {
-                        $query->where('name', 'like', "{$name}%");
+                        $query->where('name', 'like', "%{$name}%");
                     });
                 });
             })
