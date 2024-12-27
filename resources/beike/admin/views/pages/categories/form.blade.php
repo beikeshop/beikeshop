@@ -35,9 +35,13 @@
           <select name="parent_id" id="" class="form-control short wp-400">
             <option value="0">--{{ __('common.please_choose') }}--</option>
             @foreach ($categories as $_category)
-              <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : '' }}>
-                {{ $_category->name }}
-              </option>
+              @if ($category->id)
+                @if ($_category->id != $category->id && $_category->parent_id != $category->id)
+                <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : '' }}>{{ $_category->name }}</option>
+                @endif
+              @else
+              <option value="{{ $_category->id }}" {{ $_parent_id == $_category->id ? 'selected' : '' }}>{{ $_category->name }}</option>
+              @endif
             @endforeach
           </select>
         </x-admin::form.row>

@@ -203,6 +203,11 @@ class CategoryRepo
         } elseif (! ($category instanceof Category)) {
             throw new \Exception('invalid category');
         }
+
+        foreach ($category->children as $child) {
+            self::delete($child);
+        }
+
         $category->descriptions()->delete();
         $category->paths()->delete();
         $category->productCategories()->delete();
