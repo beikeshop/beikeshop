@@ -13,6 +13,7 @@ namespace Beike\Admin\Services;
 
 use Exception;
 use Beike\Facades\BeikeHttp\Facade\Http;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ZanySoft\Zip\Zip;
@@ -142,12 +143,10 @@ class MarketingService
         $apiEndPoint      = "/v1/plugins/{$pluginCode}/download";
 
         $content = Http::sendGet($apiEndPoint, ['timeout' => null], 'body');
-
         $pluginPath = "plugins/{$pluginCode}-{$datetime}.zip";
         Storage::disk('local')->put($pluginPath, $content);
 
         $pluginZip = storage_path('app/' . $pluginPath);
-
         $info = $this->getPluginInfo($pluginZip);
 
         //是否beikeshop 插件
@@ -158,14 +157,13 @@ class MarketingService
 
                 if ($info['is_error']) {
                     $info2 = $info['dir_info'];
-
                     if ($info['error_dir']) {
 
                         //文件跟命名空间不符合的插件
-                        if (count($info2) == 2) {
+                        if (count($info2) > 1) {
                             $dir   = $info2[1];
-                            $jydir = base_path('plugins');
-                            $zipFile->extract($jydir);
+                            $plugin_dir = base_path('plugins');
+                            $zipFile->extract($plugin_dir);
 
                             $error_dir = base_path('plugins/' . $info['error_dir']);
                             $ok_dir    = base_path('plugins/' . $dir);
@@ -177,12 +175,12 @@ class MarketingService
                         }
                     } else {
                         //散开的文件
-                        if (count($info2) == 2) {
+                        if (count($info2) > 1) {
                             $dir        = $info2[1];
                             $plugin_dir = base_path('plugins/' . $dir);
 
                             if (! is_dir($plugin_dir)) {
-                                (new \Illuminate\Filesystem\Filesystem)->makeDirectory($plugin_dir);
+                                (new Filesystem)->makeDirectory($plugin_dir);
                             }
                             $zipFile->extract($plugin_dir);
                         }
@@ -253,10 +251,10 @@ class MarketingService
      *
      * @throws Exception
      */
-    public function getPluginInfo($zip_file)
+    public function getPluginInfo($zip_file): array
     {
-        $plugin_dir          = '';
         $dir_info            = [];
+        $configInfo          = [];
         $error_dir           = '';
         $is_error            = false;
         $is_beikeshop_plugin = false;
@@ -267,49 +265,45 @@ class MarketingService
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $stat = $zip->statIndex($i);
                 $name = $stat['name'];
-
-                if (str_contains($name,'Bootstrap.php')) {
-                    $arr = explode('/',$name);
-                    if (count($arr) == 2) {
-                        $plugin_dir = $arr[0].'/';
-                    }
-                }
-
-                //是否为文件夹
-                if (str_ends_with($name, '/')) {
-                    $count = substr_count($name, '/');
-                    if ($count == 1) {
-                        $plugin_dir = $name;
-                    }
-
-                } else {
-                    //文件
-                    if ($name == 'Bootstrap.php') {
-                        $content  = $zip->getFromIndex($i);
-                        $dir_info = $this->getPluginDir($content);
-                        $is_error = true;
-
-                        break;
-                    }
-
-                    if ($name == $plugin_dir . 'Bootstrap.php') {
-                        $content  = $zip->getFromIndex($i);
-                        $dir_info = $this->getPluginDir($content);
-                        if (count($dir_info) == 2) {
-                            $_pluginDir = $dir_info[1];
-                            if (rtrim($plugin_dir, '/') != $_pluginDir) {
-                                $is_error  = true;
-                                $error_dir = rtrim($plugin_dir, '/');
-                            }
-                        }
-
-                        break;
-                    }
-
+                $fileExtension = pathinfo($name);
+                if ($fileExtension['basename'] =='config.json') {
+                    $configInfo = $fileExtension;
+                    break;
                 }
             }
 
-            if (count($dir_info) == 2 && $dir_info[0] == 'Plugin') {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $stat = $zip->statIndex($i);
+                $name = $stat['name'];
+                $fileExtension = pathinfo($name,PATHINFO_EXTENSION);
+                if ($fileExtension == 'php') {
+                    $content  = $zip->getFromIndex($i);
+                     preg_match('/namespace\s+([^\s;]+);/', $content, $matches);
+                    if ($matches) {
+                        $dir_info = explode('\\', $matches[1]);
+                        break;
+                    }
+                }
+            }
+
+            if (isset($configInfo['dirname']))
+            {
+                $dirName = $configInfo['dirname'];
+                if ($dirName == '.') {
+                    $is_error = true;
+                } else {
+                    if (count($dir_info) > 1) {
+                        $_pluginDir = $dir_info[1];
+                        if (rtrim($dirName, '/') != $_pluginDir) {
+                            $is_error  = true;
+                            $error_dir = rtrim($dirName, '/');
+                        }
+                    }
+                }
+
+            }
+
+            if (count($dir_info) > 1 && $dir_info[0] == 'Plugin') {
                 $is_beikeshop_plugin = true;
             }
 
