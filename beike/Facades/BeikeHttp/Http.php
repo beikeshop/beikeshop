@@ -5,7 +5,7 @@ namespace Beike\Facades\BeikeHttp;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Str;
-use Mockery\Exception;
+use Exception;
 use Throwable;
 
 class Http extends PendingRequest
