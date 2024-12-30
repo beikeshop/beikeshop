@@ -169,9 +169,9 @@ class MarketingService
                             $ok_dir    = base_path('plugins/' . $dir);
 
                             $result = @rename($error_dir, $ok_dir);
-                            if (! $result) {
-                                throw new Exception('重命名插件文件夹失败');
-                            }
+//                            if (! $result) {
+//                                throw new Exception('重命名插件文件夹失败');
+//                            }
                         }
                     } else {
                         //散开的文件
