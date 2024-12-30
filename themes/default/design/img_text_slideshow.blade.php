@@ -87,12 +87,14 @@
     });
 
     $(function () {
-      if ($('.module-swiper-img-scroll-text').length > 0) {
-        scrollTextFun()
-      }
+      scrollTextFun()
 
       function scrollTextFun() {
-        var $module = $('.module-swiper-img-scroll-text');
+        var $module = $('.module-swiper-img-text-{{ $module_id }}').next('.module-swiper-img-scroll-text');
+        if (!$module.length) {
+          return;
+        }
+
         var $scrollText = $module.find('.scroll-text');
         var scrollText = $scrollText.text();
         var scrollTextWidth = $scrollText.width();
