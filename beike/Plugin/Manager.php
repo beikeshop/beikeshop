@@ -18,6 +18,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ZanySoft\Zip\Zip;
+use Beike\Facades\BeikeHttp\Facade\Http;
 use Beike\Admin\Services\MarketingService;
 
 class Manager
@@ -141,9 +142,14 @@ class Manager
             throw new \Exception('无效的插件');
         }
 
-        if (!in_array($code, config('app.free_plugin_codes'))) {
+        $apiEndPoint = "/v1/plugins/{$code}";
+
+        $content = Http::sendGet($apiEndPoint);
+
+        if (!in_array($code, config('app.free_plugin_codes')) && ($content['data']['price'] ?? 0) > 0) {
             $plugin->checkLicenseValid();
         }
+
         $plugin->handleLabel();
 
         return $plugin;
