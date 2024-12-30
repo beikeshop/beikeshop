@@ -298,6 +298,8 @@ class MarketingService
                             $is_error  = true;
                             $error_dir = rtrim($dirName, '/');
                         }
+                    } else {
+                        $is_beikeshop_plugin = true;
                     }
                 }
 
