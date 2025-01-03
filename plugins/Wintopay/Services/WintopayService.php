@@ -159,12 +159,15 @@ class WintopayService extends PaymentService
             if($result['status'] == 'paid'){
                 //支付成功
                 $redirect_url = shop_route('checkout.success', ['order_number' => $order->number]);
-                if ($order->status == StateMachineService::UNPAID) {
+                if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
                     StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment success.');
                 }
-            }elseif($result['status'] == 'pending'){
+            }elseif($result['status'] == 'pending' || $result['status'] == 'unpaid'){
                 $redirect_url = shop_route('checkout.success', ['order_number' => $order->number]);
-            }else{
+                if ($order->status == StateMachineService::UNPAID) {
+                    StateMachineService::getInstance($order)->changeStatus('paying');
+                }
+            }else{ // $result['status'] = 'failed'
                 $redirect_url = shop_route('account.order.show', ['number' => $order->number]);
             }
             header('Location: '.$redirect_url);
@@ -188,10 +191,14 @@ class WintopayService extends PaymentService
                 }
                 if ($result == 'success') {
                     $status = $data['status'];
+                    $order = Order::find($orderId);
                     if ($status == 'paid') {
-                        $order = Order::find($orderId);
                         if ($order->status == StateMachineService::UNPAID) {
-                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment success.');
+                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment failed.');
+                        }
+                    } elseif ($status == 'failed') {
+                        if ($order->status == StateMachineService::UNPAID) {
+                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $preMessage . 'Payment success.');
                         }
                     }
                     exit('[success]');

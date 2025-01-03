@@ -19,6 +19,7 @@ return [
     'log' => '日志',
     'disable' => '启用',
     'enable' => '禁用',
+    'paying' => '支付中',
 
     'card_type' => '信用卡类型',
     'payment_type' => '支付方式',

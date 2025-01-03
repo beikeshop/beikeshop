@@ -19,6 +19,7 @@ return [
     'log' => 'Log',
     'disable' => 'Disable',
     'enable' => 'Enable',
+    'paying' => 'Paying',
 
     'card_type' => 'Credit card type',
     'payment_type' => 'Payment Type',
