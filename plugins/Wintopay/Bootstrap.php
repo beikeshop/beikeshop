@@ -29,6 +29,7 @@ class Bootstrap
         add_hook_filter('service.state_machine.machines', function ($data) {
             $data['machines'][StateMachineService::UNPAID]['paying'] = ['updateStatus', 'addHistory', 'notifyUpdateOrder'];
             $data['machines']['paying'][StateMachineService::PAID] = ['updateStatus', 'addHistory', 'updateSales', 'subStock', 'notifyUpdateOrder'];
+            $data['machines']['paying'][StateMachineService::CANCELLED] = ['updateStatus', 'addHistory', 'notifyUpdateOrder'];
 
             return $data;
         });
