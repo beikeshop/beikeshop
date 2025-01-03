@@ -193,11 +193,11 @@ class WintopayService extends PaymentService
                     $status = $data['status'];
                     $order = Order::find($orderId);
                     if ($status == 'paid') {
-                        if ($order->status == StateMachineService::UNPAID) {
+                        if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
                             StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment failed.');
                         }
                     } elseif ($status == 'failed') {
-                        if ($order->status == StateMachineService::UNPAID) {
+                        if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
                             StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $preMessage . 'Payment success.');
                         }
                     }
