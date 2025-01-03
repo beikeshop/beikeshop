@@ -21,7 +21,7 @@ return [
     'enable' => '禁用',
     'paying' => '支付中',
 
-    'card_type' => '信用卡类型',
+    'card_image' => '信用卡图片',
     'payment_type' => '支付方式',
     'card_icon' => 'Card card Icon',
     'card' => 'Card card',

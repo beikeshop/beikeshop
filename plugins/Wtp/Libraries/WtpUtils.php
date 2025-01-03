@@ -1,5 +1,5 @@
 <?php
-namespace Plugin\Wintopay\Libraries;
+namespace Plugin\Wtp\Libraries;
 
 class WtpUtils
 {

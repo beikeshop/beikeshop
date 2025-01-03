@@ -21,7 +21,7 @@ return [
     'enable' => 'Enable',
     'paying' => 'Paying',
 
-    'card_type' => 'Credit card type',
+    'card_image' => 'Credit card Image',
     'payment_type' => 'Payment Type',
     'card_icon' => 'Card card Icon',
     'card' => 'Card card',

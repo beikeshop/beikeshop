@@ -1,5 +1,5 @@
 <?php
-namespace Plugin\Wintopay\Libraries;
+namespace Plugin\Wtp\Libraries;
 
 class Wintopay
 {
@@ -40,7 +40,7 @@ class Wintopay
     }
 
     /**
-     * 通过api请求wintopay获取支持的支付方式
+     * 通过api请求wtp获取支持的支付方式
      * @param $merchantId
      * @param $apiKey
      * @return mixed
