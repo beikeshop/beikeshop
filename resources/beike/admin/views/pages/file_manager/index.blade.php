@@ -124,7 +124,7 @@
             <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
             <div class="mb-3">
               <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
-              <el-radio-group v-model="filter.sort" size="small">
+              <el-radio-group v-model="filter.sort" @input="filterChange" size="small">
                 <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
                 <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
               </el-radio-group>
@@ -132,7 +132,7 @@
 
             <div class="mb-3">
               <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
-              <el-radio-group v-model="filter.order" size="small">
+              <el-radio-group v-model="filter.order" @input="filterChange" size="small">
                 <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
                 <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
               </el-radio-group>
@@ -149,7 +149,7 @@
           @click="checkedImage(index)" @dblclick="checkedImageDouble(index)">
           <div class="img">
             <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
-            <img v-else :src="file.url" draggable="false" />
+            <img v-else :src="file.url + '?v=' + randomString()" draggable="false" />
           </div>
           <div class="text">
             <span :title="file.name">@{{ file.name }}</span>
@@ -289,19 +289,12 @@
             item.selected = indexs.includes(index);
           });
         },
-
-        filter: {
-          handler(val) {
-            this.image_page = 1;
-            this.loadData()
-          },
-          deep: true
-        }
       },
 
       created() {
         const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
         const folderCurrent = sessionStorage.getItem('folderCurrent');
+        const fileManagerFilter = JSON.parse(localStorage.getItem('file_manager_filter') || '{}');
 
         if (defaultkeyarr) {
           this.defaultkeyarr = defaultkeyarr.split(',');
@@ -309,6 +302,14 @@
 
         if (folderCurrent) {
           this.folderCurrent = folderCurrent;
+        }
+
+        if (fileManagerFilter.sort) {
+          this.filter.sort = fileManagerFilter.sort;
+        }
+
+        if (fileManagerFilter.order) {
+          this.filter.order = fileManagerFilter.order;
         }
       },
 
@@ -345,6 +346,12 @@
       methods: {
         searchFile() {
           this.image_page = 1;
+          this.loadData()
+        },
+
+        filterChange() {
+          this.image_page = 1;
+          localStorage.setItem('file_manager_filter', JSON.stringify(this.filter));
           this.loadData()
         },
 
@@ -424,6 +431,10 @@
           this.copyTreeData = JSON.parse(
             JSON.stringify(this.treeData)
           );
+        },
+
+        randomString() {
+          return bk.randomString()
         },
 
         // allowDrop
