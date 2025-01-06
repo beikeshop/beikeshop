@@ -107,7 +107,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 2. Upload to your server and unzip.
 3. Set the `public` folder as the website root directory.
 4. Access the website through your browser and follow the installation prompts.
-5. <a href="https://docs.beikeshop.com/install/bt.html" target="_blank">BeikeShop Detailed Installation Guide</a>
+5. <a href="https://docs.beikeshop.com/en/install/bt.html" target="_blank">BeikeShop Detailed Installation Guide</a>
 6. If upgrading, download the latest version and overwrite on the server (make sure to keep the original `.env` file). Then, run `php artisan migrate` in the root directory.
 
 **Installation Guide (For Developers)**
