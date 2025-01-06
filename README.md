@@ -61,7 +61,7 @@ If you have no technical background or want to quickly launch your independent s
 ![服务展示1_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-8.png)
 ![服务展示2_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-9.png)
 If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customization consulting services!
-[![服务展示3](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-10.png)]
+![服务展示3](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-10.png)
 
 ---
 
