@@ -1,4 +1,4 @@
-### BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce System
+# BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce System
 
 **Introduction to BeikeShop**
 BeikeShop is a globally leading open-source e-commerce system based on the Laravel framework, designed for the international trade and cross-border e-commerce industry.
