@@ -1,7 +1,3 @@
----
-created: 2024-12-31T15:35
-updated: 2024-12-31T18:02
----
 ### BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce System
 
 **Introduction to BeikeShop**
