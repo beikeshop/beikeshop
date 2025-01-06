@@ -7,7 +7,7 @@
   @include('design._partial._module_tool')
 
   <div class="module-info module-product mb-3 mb-md-5 swiper-style-plus">
-    <div class="container-fluid position-relative">
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }} position-relative">
       <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
         @if ($content['products'])
           <div class="row g-3 g-lg-4">

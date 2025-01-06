@@ -141,6 +141,12 @@ return [
     'text_right_icon'                  => 'Pay icon on the right',
     'text_bgi'                         => 'Background image',
     'text_btn'                         => 'Button',
+    'btn_bg'                         => 'Button background color',
+    'btn_color'                         => 'Button font color',
+    'module_size'                         => 'Module size',
+    'module_size_narrow'                         => 'Narrow',
+    'module_size_wide'                         => 'Wide',
+    'module_size_full'                         => 'Full',
 
     // page
     'page_product_title_size'          => 'Product title font size',
@@ -194,6 +200,7 @@ return [
     'modules_slides_per_view'          => 'One screen display quantity',
     'modules_enter_content'            => 'Please enter content',
     'modules_full_screen'              => 'Whether to full screen',
+    'modules_fluid_screen'             => 'Whether widescreen',
     'modules_content'                  => 'Content',
     'modules_edit_content'             => 'Edit content',
     'modules_select_image'             => 'Select image',

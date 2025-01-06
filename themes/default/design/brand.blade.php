@@ -3,7 +3,7 @@
 
   <div class="module-info module-brand mb-3 mb-md-5">
     <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
-    <div class="container-fluid">
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }}">
       <div class="row g-3 g-lg-4">
         @foreach ($content['brands'] as $brand)
         <div class="col-6 col-md-4 col-lg-3">

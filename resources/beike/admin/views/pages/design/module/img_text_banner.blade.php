@@ -1,6 +1,8 @@
 <template id="module-editor-img-text-banner-template">
   <div>
     <div class="module-edit-group">
+      <module-size v-model="module.module_size"></module-size>
+
       <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <div class="pb-images-top">
         <pb-image-selector v-model="module.image" :is-language="false"></pb-image-selector>
@@ -14,8 +16,27 @@
       <div class="module-edit-title">{{ __('admin/builder.text_describe') }}</div>
       <text-i18n v-model="module.description" style="margin-bottom: 10px"></text-i18n>
 
-      <div class="module-edit-title">{{ __('admin/builder.scroll_text_bg') }}</div>
-      <el-color-picker v-model="module.bg_color" size="small" class="mb-1"></el-color-picker>
+      <div>
+        <div style="margin-right: 20px;">
+          <div class="module-edit-title">{{ __('admin/builder.scroll_text_bg') }}</div>
+          <el-color-picker v-model="module.bg_color" size="small" class="mb-1"></el-color-picker>
+        </div>
+        <div>
+          <div class="module-edit-title">{{ __('admin/builder.text_font_color') }}</div>
+          <el-color-picker v-model="module.text_color" size="small" class="mb-1"></el-color-picker>
+        </div>
+      </div>
+
+      <div>
+        <div style="margin-right: 20px;">
+          <div class="module-edit-title">{{ __('admin/builder.btn_bg') }}</div>
+          <el-color-picker v-model="module.btn_bg" size="small" class="mb-1"></el-color-picker>
+        </div>
+        <div>
+          <div class="module-edit-title">{{ __('admin/builder.btn_color') }}</div>
+          <el-color-picker v-model="module.btn_color" size="small" class="mb-1"></el-color-picker>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,7 +80,11 @@ Vue.component('module-editor-img-text-banner', {
         background_color: ''
       },
       floor: languagesFill(''),
-      bg_color: '',
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
+      bg_color: '#F7F6F1',
+      text_color: '#222222',
+      btn_bg: '#fd560f',
+      btn_color: '#ffffff',
       image: 'catalog/demo/banner/text-image-banner-1.jpg',
       title: languagesFill(''),
       description: languagesFill(''),

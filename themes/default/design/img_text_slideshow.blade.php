@@ -7,46 +7,48 @@
   @include('design._partial._module_tool')
 
   <div class="module-info mb-3 mb-md-5">
-    <div class="swiper module-swiper-img-text-{{ $module_id }} module-img-text-slideshow">
-      <div class="swiper-wrapper">
-        @foreach($content['images'] as $image)
-          <div class="swiper-slide">
-            <div class="image-wrap" style="background-image: url({{ $image['image'] }})">
-              <div class="container content-wrap {{ $image['text_position'] }}">
-                <div class="text-wrap" data-swiper-parallax-y="-100" data-swiper-parallax-duration="1000" data-swiper-parallax-opacity="0.5" >
-                  @if ($image['sub_title'])
-                    <div class="sub-title">{{ $image['sub_title'] }}</div>
-                  @endif
-                  @if ($image['title'])
-                    <h2 class="title">{{ $image['title'] }}</h2>
-                  @endif
-                  @if ($image['description'])
-                    <p class="description">{{ $image['description'] }}</p>
-                  @endif
-                  @if ($image['link']['link'])
-                    <a href="{{ $image['link']['link'] ?: 'javascript:void(0)' }}" class="btn">{{ __('shop/account.check_details') }}</a>
-                  @endif
+    <div class="{{ $content['module_size'] ?? 'w-100' }}">
+      <div class="swiper module-swiper-img-text-{{ $module_id }} module-img-text-slideshow">
+        <div class="swiper-wrapper">
+          @foreach($content['images'] as $image)
+            <div class="swiper-slide">
+              <div class="image-wrap" style="background-image: url({{ $image['image'] }})">
+                <div class="container content-wrap {{ $image['text_position'] }}">
+                  <div class="text-wrap" data-swiper-parallax-y="-100" data-swiper-parallax-duration="1000" data-swiper-parallax-opacity="0.5" >
+                    @if ($image['sub_title'])
+                      <div class="sub-title">{{ $image['sub_title'] }}</div>
+                    @endif
+                    @if ($image['title'])
+                      <h2 class="title">{{ $image['title'] }}</h2>
+                    @endif
+                    @if ($image['description'])
+                      <p class="description">{{ $image['description'] }}</p>
+                    @endif
+                    @if ($image['link']['link'])
+                      <a href="{{ $image['link']['link'] ?: 'javascript:void(0)' }}" class="btn">{{ __('shop/account.check_details') }}</a>
+                    @endif
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        @endforeach
-      </div>
-      <div class="swiper-pagination slideshow-pagination-{{ $module_id }}"></div>
-    </div>
-
-    @if ($content['scroll_text']['text'])
-      <div class="module-swiper-img-scroll-text" style="
-        background-color: {{ $content['scroll_text']['bg'] }};
-        color: {{ $content['scroll_text']['color'] }};
-        font-size: {{ $content['scroll_text']['font_size'] }}px;
-        padding: {{ $content['scroll_text']['padding'] }}px 0;
-        ">
-        <div class="scroll-info">
-          <span class="scroll-text">{{ $content['scroll_text']['text'] }}</span>
+          @endforeach
         </div>
+        <div class="swiper-pagination slideshow-pagination-{{ $module_id }}"></div>
       </div>
-    @endif
+
+      @if ($content['scroll_text']['text'])
+        <div class="module-swiper-img-scroll-text" style="
+          background-color: {{ $content['scroll_text']['bg'] }};
+          color: {{ $content['scroll_text']['color'] }};
+          font-size: {{ $content['scroll_text']['font_size'] }}px;
+          padding: {{ $content['scroll_text']['padding'] }}px 0;
+          ">
+          <div class="scroll-info">
+            <span class="scroll-text">{{ $content['scroll_text']['text'] }}</span>
+          </div>
+        </div>
+      @endif
+    </div>
   </div>
 
   <script>

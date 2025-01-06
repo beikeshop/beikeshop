@@ -1,5 +1,6 @@
 <template id="module-editor-icons-template">
   <div class="image-edit-wrapper">
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group" style="margin-bottom: 200px;">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
@@ -95,6 +96,7 @@ Vue.component('module-editor-icons', {
       style: {
         background_color: ''
       },
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
       floor: languagesFill(''),
       images: []

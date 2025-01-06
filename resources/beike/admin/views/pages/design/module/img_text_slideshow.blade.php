@@ -1,5 +1,6 @@
 <template id="module-editor-img-text-slideshow-template">
   <div>
+    <module-size v-model="module.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <draggable
@@ -130,6 +131,7 @@ Vue.component('module-editor-img-text-slideshow', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'w-100',// 窄屏、宽屏、全屏
       scroll_text: {
         text: languagesFill(''),
         bg: '#ffffff',

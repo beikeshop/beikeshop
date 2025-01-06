@@ -9,11 +9,6 @@
  */
 
 .module-image-plus {
-  .container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
   .module-image-plus-top {
     display: flex;
 
@@ -24,13 +19,6 @@
 
   .module-image-plus-bottom {
     margin-top: 24px;
-  }
-}
-
-.module-image-banner {
-  .container-fluid {
-    // padding-right: 0;
-    // padding-left: 0;
   }
 }
 

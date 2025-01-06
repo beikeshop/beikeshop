@@ -91,5 +91,7 @@ return [
     'email_type_register'         => '注册',
     'email_type_order'            => '订单',
     'email_type_return'           => '退货',
+    'image_origin_size'           => '商品图尺寸',
+    'image_origin_size_text'           => '商品图原尺寸，建议/默认 800*800，系统会根据设定的尺寸比例生成列表页缩略图',
     'smtp_qq_hint'                => '注意：QQ邮箱SMTP服务不建议同时勾选发给管理员和用户，否则会连接超时。建议使用 126、163 等邮箱，或者更换邮件引擎',
 ];

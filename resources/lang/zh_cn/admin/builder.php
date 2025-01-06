@@ -141,6 +141,12 @@ return [
     'text_right_icon'                  => '右边支付图标',
     'text_bgi'                         => '背景图',
     'text_btn'                         => '按钮',
+    'btn_bg'                         => '按钮背景色',
+    'btn_color'                         => '按钮字体色',
+    'module_size'                         => '模块宽度',
+    'module_size_narrow'                         => '窄屏',
+    'module_size_wide'                         => '宽屏',
+    'module_size_full'                         => '全屏',
 
     // page
     'page_product_title_size'          => '商品标题字号',
@@ -194,6 +200,7 @@ return [
     'modules_slides_per_view'          => '一屏显示数量',
     'modules_enter_content'            => '请输入内容',
     'modules_full_screen'              => '是否全屏',
+    'modules_fluid_screen'             => '是否宽屏',
     'modules_content'                  => '内容',
     'modules_edit_content'             => '编辑内容',
     'modules_select_image'             => '选择图片',

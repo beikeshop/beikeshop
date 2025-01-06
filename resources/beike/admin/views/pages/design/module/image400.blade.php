@@ -1,5 +1,6 @@
 <template id="module-editor-image400-template">
   <div class="image-edit-wrapper">
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
@@ -69,6 +70,7 @@ Vue.component('module-editor-image400', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       images: [
         {
           image: languagesFill('https://dummyimage.com/460x300/eeeeee'),

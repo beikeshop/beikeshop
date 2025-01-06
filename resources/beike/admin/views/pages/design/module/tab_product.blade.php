@@ -1,5 +1,7 @@
 <template id="module-editor-tab-product-template">
   <div class="module-editor-tab-product-template">
+    <module-size v-model="form.module_size"></module-size>
+
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
@@ -171,6 +173,7 @@ Vue.component('module-editor-tab-product', {
       },
       editableTabsValue: '0',
       floor: languagesFill(''),
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       tabs: [{title: languagesFill('Tab 1'), products: []}],
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
     }

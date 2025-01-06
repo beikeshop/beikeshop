@@ -70,9 +70,9 @@
           <div class="tab-pane fade" id="tab-store">
             @hook('admin.setting.store.before')
             <x-admin::form.row title="{{ __('admin/setting.default_address') }}">
-              <div class="d-lg-flex">
-                <div>
-                  <select class="form-select wp-200 me-3" name="country_id" aria-label="Default select example">
+              <div class="d-lg-flex w-max-400">
+                <div class="w-50 me-3">
+                  <select class="form-select me-3" name="country_id" aria-label="Default select example">
                     @foreach ($countries as $country)
                       <option
                         value="{{ $country->id }}"
@@ -83,8 +83,8 @@
                   </select>
                   <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_country_set') }}</div>
                 </div>
-                <div>
-                  <select class="form-select wp-200 zones-select" name="zone_id" aria-label="Default select example"></select>
+                <div class="w-50">
+                  <select class="form-select zones-select" name="zone_id" aria-label="Default select example"></select>
                   <div class="help-text font-size-12 lh-base">{{ __('admin/setting.default_zone_set') }}</div>
                 </div>
               </div>
@@ -112,6 +112,24 @@
 
             <x-admin-form-input name="cdn_url" title="{{ __('admin/setting.cdn_url') }}" value="{{ old('cdn_url', system_setting('base.cdn_url', '')) }}">
             </x-admin-form-input>
+
+            <x-admin::form.row title="{{ __('admin/setting.image_origin_size') }}">
+              <div class="d-lg-flex w-max-400">
+                <div class="w-50 me-3">
+                  <div class="input-group">
+                    <span class="input-group-text">{{ __('admin/builder.modules_width') }}</span>
+                    <input type="text" class="form-control" value="{{ old('product_image_origin_width', system_setting('base.product_image_origin_width', '800')) }}" name="product_image_origin_width">
+                  </div>
+                </div>
+                <div class="w-50">
+                  <div class="input-group">
+                    <span class="input-group-text">{{ __('admin/builder.modules_height') }}</span>
+                    <input type="text" class="form-control" value="{{ old('product_image_origin_height', system_setting('base.product_image_origin_height', '800')) }}" name="product_image_origin_height">
+                  </div>
+                </div>
+              </div>
+              <div class="help-text font-size-12 lh-base">{{ __('admin/setting.image_origin_size_text') }}</div>
+            </x-admin::form.row>
 
             <x-admin-form-textarea name="head_code" title="{{ __('admin/setting.head_code') }}" value="{!! old('head_code', system_setting('base.head_code', '')) !!}">
               <div class="help-text font-size-12 lh-base">{{ __('admin/setting.head_code_info') }}</div>

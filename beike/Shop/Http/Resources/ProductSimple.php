@@ -47,7 +47,11 @@ class ProductSimple extends JsonResource
             'in_wishlist'         => $this->inCurrentWishlist->id ?? 0,
 
             'images'              => array_map(function ($item) {
-                return image_resize($item, 560, 560);
+                $originWidth = system_setting('base.product_image_origin_width', '800');
+                $originHeight = system_setting('base.product_image_origin_height', '800');
+                $width = 560; // 列表页图片宽度以此为基
+                $height = intval($originHeight * $width / $originWidth);
+                return image_resize($item, $width, $height);
             }, $images),
         ];
 

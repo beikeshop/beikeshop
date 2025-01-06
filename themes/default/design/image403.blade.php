@@ -2,7 +2,7 @@
   @include('design._partial._module_tool')
 
   <div class="module-image-403 banner-magnify-hover module-info mb-3 mb-md-5">
-    <div class="container-fluid">
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }}">
       @if ($content['title'])
       <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
       @endif

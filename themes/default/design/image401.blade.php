@@ -2,7 +2,7 @@
   @include('design._partial._module_tool')
 
   <div class="module-image-plus banner-magnify-hover module-info mb-3 mb-md-5">
-    <div class="container">
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }}">
       <div class="row g-3 g-lg-4">
         <div class="col-md-6 col-12 mb-3 mb-md-0">
           <a class="image-wrap" href="{{ $content['images'][0]['link']['link'] ?? '' }}"><img src="{{ $content['images'][0]['image'] }}" class="img-fluid"></a>

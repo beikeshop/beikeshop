@@ -1,9 +1,6 @@
 <template id="module-editor-slideshow-template">
   <div>
-    <div class="module-edit-group">
-      <div class="module-edit-title">{{ __('admin/builder.modules_full_screen') }}</div>
-      <el-switch v-model="form.full"></el-switch>
-    </div>
+    <module-size v-model="form.module_size"></module-size>
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
@@ -101,8 +98,8 @@ Vue.component('module-editor-slideshow', {
       style: {
         background_color: ''
       },
-      full: true,
       floor: languagesFill(''),
+      module_size: 'w-100',// 窄屏、宽屏、全屏
       images: [
         {
           image: languagesFill('catalog/demo/banner/banner-4-en.jpg'),

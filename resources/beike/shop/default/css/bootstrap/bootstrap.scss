@@ -105,6 +105,9 @@ $table-bg: transparent;
 
 .container-fluid {
   @media (min-width: 992px) {
+    &:not(.w-100.px-0) {
+      max-width: 1920px;
+    }
     padding-right: 50px;
     padding-left: 50px;
   }

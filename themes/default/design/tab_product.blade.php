@@ -6,7 +6,7 @@
   @endphp
   <div class="module-info module-tab-product mb-4">
     <div class="module-title">{{ $content['title'] ?? ''}} <div class="wave-line"></div></div>
-    <div class="container-fluid">
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }}">
       @if ($content['tabs'] ?? false)
         <div class="nav justify-content-center">
           @foreach ($content['tabs'] as $key => $tabs)

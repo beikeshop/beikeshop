@@ -120,6 +120,7 @@
   @include('admin::pages.design.builder.component.link_selector')
   @include('admin::pages.design.builder.component.text_i18n')
   @include('admin::pages.design.builder.component.rich_text_i18n')
+  @include('admin::pages.design.builder.component.module_size')
 
   <script>
     let register = null;

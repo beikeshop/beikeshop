@@ -761,6 +761,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'w-100',
                         "floor" => [
                             "zh_cn" =>"",
                             "en" =>""
@@ -832,6 +833,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'container-fluid',
                         "floor" => [
                             "zh_cn" =>"",
                             "en" =>""
@@ -925,6 +927,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'container-fluid',
                         "floor" => [
                             "zh_cn" =>"",
                             "en" =>""
@@ -994,6 +997,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'container-fluid',
                         "floor" => [
                             "zh_cn" =>"",
                             "en" =>""
@@ -1024,6 +1028,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'container-fluid',
                         "floor" => [
                             "en" =>"",
                             "zh_cn" =>""
@@ -1057,6 +1062,7 @@ class ThemeSeeder extends Seeder
                         "style" => [
                             "background_color" =>""
                         ],
+                        'module_size' => 'container-fluid',
                         "floor" => [
                             "zh_cn" =>"",
                             "en" =>""

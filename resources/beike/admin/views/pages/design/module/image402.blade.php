@@ -1,5 +1,6 @@
 <template id="module-editor-image402-template">
   <div class="image-edit-wrapper">
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
@@ -78,6 +79,7 @@ Vue.component('module-editor-image402', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'container',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_set_title') }}'),
       sub_title: languagesFill('{{ __('admin/builder.text_set_subtitle') }}'),
       images: [
