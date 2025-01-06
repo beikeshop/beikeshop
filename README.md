@@ -12,7 +12,7 @@ The system is 100% open-source! It supports a wide range of practical features, 
 
 **Note**: Please retain our company’s copyright information. Removal requires our company’s license authorization!
 
-### BeikeShop System Highlights
+# BeikeShop System Highlights
 
 - **Zero Start-Up Cost**: BeikeShop is a true independent platform, 100% open-source, with 100% control over data.
 - **Built on Laravel 10**: Developed using the Laravel 10 framework, offering solid framework support.
@@ -28,7 +28,7 @@ The system is 100% open-source! It supports a wide range of practical features, 
 
 ![系统亮点](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2.png)
 
-### BeikeShop Store Preview Video
+# BeikeShop Store Preview Video
 <p>
   <a href="https://demo.beikeshop.com/" target="_blank" style="border: 1px solid #eee; display: inline-block;">
     <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/demo.gif" style="width: 100%;">
@@ -39,7 +39,7 @@ The system is 100% open-source! It supports a wide range of practical features, 
 target="_blank">Click to Experience</a>
 ---
 
-### Page Previews
+# Page Previews
 
 1. **DIY Store Customization**
 ![页面展示1_商城DIY装修](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-3.png)
@@ -54,7 +54,7 @@ target="_blank">Click to Experience</a>
 
 ---
 
-### Related Services
+# Related Services
 
 If you have no technical background or want to quickly launch your independent store, you can purchase our hosting services!
 
@@ -65,7 +65,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 
 ---
 
-### Software Architecture
+# Software Architecture
 
 - **Programming Language**: PHP 8.1
 - **Framework**: Laravel 10
@@ -73,7 +73,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 
 ---
 
-### Environment Requirements
+# Environment Requirements
 
 - **Independent Server** (Virtual hosting not supported)
 - **CentOS 7.0+** or **Ubuntu 20.04+**
@@ -99,16 +99,16 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 ---
 
 [![建站流程](https://beikeshop.com/readme/README-11.png)](https://beikeshop.com/demo)
-### Website Setup Process
+# Website Setup Process
 
 **Installation Guide (For Non-developers)**
 
-2.  <a href="https://beikeshop.cn/download" target="_blank">Download BeikeShop</a>
-3. Upload to your server and unzip.
-4. Set the `public` folder as the website root directory.
-5. Access the website through your browser and follow the installation prompts.
-7. <a href="https://docs.beikeshop.com/install/bt.html" target="_blank">BeikeShop Detailed Installation Guide</a>
-8. If upgrading, download the latest version and overwrite on the server (make sure to keep the original `.env` file). Then, run `php artisan migrate` in the root directory.
+1.  <a href="https://beikeshop.cn/download" target="_blank">Download BeikeShop</a>
+2. Upload to your server and unzip.
+3. Set the `public` folder as the website root directory.
+4. Access the website through your browser and follow the installation prompts.
+5. <a href="https://docs.beikeshop.com/install/bt.html" target="_blank">BeikeShop Detailed Installation Guide</a>
+6. If upgrading, download the latest version and overwrite on the server (make sure to keep the original `.env` file). Then, run `php artisan migrate` in the root directory.
 
 **Installation Guide (For Developers)**
 
@@ -124,7 +124,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 
 ---
 
-### Contributing
+# Contributing
 
 1. Fork this repository.
 2. Create a new `feature-xxx` branch.
@@ -133,7 +133,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 
 ---
 
-### Special Thanks
+# Special Thanks
 
 - **Plugin Developers**: Lu Chuan Youth, Lao Liu, Aegis, Te̶lon̶ Uncle, Olives, etc.
 - **PR Contributors**: nilsir, what_village_head, tanxiaoyong, Lucky, So, licy, Lao Bei, Teemo, etc.
