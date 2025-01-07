@@ -8,6 +8,7 @@
   <div class="input-group wp-{{ $width }}">
     @if ($groupLeft) <span class="input-group-text">{{ $groupLeft }}</span> @endif
     <input type="{{ $type }}" name="{{ $name }}"
+      {{ $disabled ? 'disabled' : '' }}
       class="form-control wp-{{ $width }} {{ $is_invalid }}" value="{{ $value }}"
       placeholder="{{ $placeholder }}" @if ($required) required
       @endif @if ($step) step="{{ $step }}" @endif>
@@ -16,6 +17,7 @@
   </div>
   @else
   <input type="{{ $type }}" name="{{ $name }}"
+         {{ $disabled ? 'disabled' : '' }}
          class="form-control wp-{{ $width }} {{ $is_invalid }}" value="{{ $value }}"
          placeholder="{{ $placeholder }}" @if ($required) required
          @endif @if ($step) step="{{ $step }}" @endif>

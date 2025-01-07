@@ -20,7 +20,9 @@ class InputLocale extends Component
 
     public bool $required;
 
-    public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false, string $placeholder = '')
+    public bool $disabled;
+
+    public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false, string $placeholder = '', bool $disabled = false)
     {
         $this->name        = $name;
         $this->title       = $title;
@@ -28,6 +30,7 @@ class InputLocale extends Component
         $this->placeholder = $placeholder;
         $this->value       = $value;
         $this->required    = $required;
+        $this->disabled    = $disabled;
     }
 
     public function render()

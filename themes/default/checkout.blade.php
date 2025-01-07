@@ -51,7 +51,6 @@
                     </div>
                     <div class="right ms-2">
                       <div class="title">{{ $payment['name'] }}</div>
-                      <div class="sub-title">{!! $payment['description'] !!}</div>
                     </div>
                   </div>
                 @endforeach
@@ -74,7 +73,6 @@
                         </div>
                         <div class="right ms-2">
                           <div class="title">{{ $shipping['name'] }}</div>
-                          <div class="sub-title">{!! $shipping['description'] !!}</div>
                           @if (isset($shipping['html']))
                             <div class="mt-2">{!! $shipping['html'] !!}</div>
                           @endif
@@ -251,7 +249,6 @@
           </div>
           <div class="right ms-2">
             <div class="title">${quote.name}</div>
-            <div class="sub-title">${quote.description}</div>
             <div class="mt-2 ${!quote.html ? 'd-none' : ''}">${quote.html || ''}</div>
           </div>
         </div>`;
@@ -272,7 +269,6 @@
         </div>
         <div class="right ms-2">
           <div class="title">${item.name}</div>
-          <div class="sub-title">${item.description || ''}</div>
         </div>
       </div>`;
       })

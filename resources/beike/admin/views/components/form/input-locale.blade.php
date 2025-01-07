@@ -3,7 +3,7 @@
   @foreach (locales() as $index => $locale)
     <div class="d-flex wp-{{ $width }} input-for-group">
       <span class="input-group-text wp-100 px-1" id="basic-addon1">{{ $locale['name'] }}</span>
-      <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}"
+      <input type="text" name="{{ $formatName($locale['code']) }}" value="{{ $formatValue($locale['code']) }}" {{ $disabled ? 'disabled' : '' }}
         class="form-control short input-{{ $locale['code'] }} {{ $errors->first($errorKey($locale['code'])) ? 'is-invalid' : '' }}" placeholder="{{ $placeholder ?: $locale['name'] }}" @if ($required) required @endif>
       @if (!$errors->first("descriptions.{$locale['code']}.name"))
         <span class="invalid-feedback w-auto" style="white-space:nowrap;">{{ __('common.error_required', ['name' => $title]) }}</span>
