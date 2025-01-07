@@ -140,9 +140,9 @@
         checkedCreate(type, index) {
           this.dialog.show = true
           this.dialog.type = type
-          this.dialog.index = index
 
           if (type == 'edit') {
+            this.dialog.index = index
             let form = JSON.parse(JSON.stringify(this.currencies[index]));
             form.default_currency = Number(this.currencies[index].code == this.defaultCurrency)
             this.dialog.form = form
