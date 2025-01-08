@@ -487,8 +487,6 @@
 
         rules: {
           status: [{required: true, message: '{{ __('admin/order.error_status') }}', trigger: 'blur'}, ],
-          express_code: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_company')]) }}',trigger: 'blur'}, ],
-          express_number: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_number')]) }}',trigger: 'blur'}, ],
         }
       },
 
