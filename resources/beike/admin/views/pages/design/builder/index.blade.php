@@ -138,7 +138,7 @@
           type: 'pc',
           editType: 'add',
           sidebar: true,
-          editingModuleIndex: 0,
+          editingModuleIndex: null,
           ready: false,
           moduleLoadCount: 0, // 第一次选择已配置模块时，不需要请求数据，
         },
@@ -213,6 +213,9 @@
 
         // 编辑模块
         editModuleButtonClicked(index) {
+          if (this.design.editingModuleIndex == index) {
+            return;
+          }
           this.design.moduleLoadCount = 0;
           this.design.editingModuleIndex = index;
           this.design.editType = 'module';

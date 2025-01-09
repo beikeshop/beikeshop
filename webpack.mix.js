@@ -1,6 +1,4 @@
 const mix = require('laravel-mix');
-const path = require('path');
-const fs = require('fs');
 
 // 后台 scss/js
 mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/beike/admin/css/bootstrap.css');
@@ -15,18 +13,6 @@ mix.sass('resources/beike/admin/css/design/app.scss', 'public/build/beike/admin/
 
 // filemanager
 mix.sass('resources/beike/admin/css/filemanager/app.scss', 'public/build/beike/admin/css/filemanager.css');
-
-const targetDir = path.resolve(__dirname, 'plugins/BkPod/Static/public/css');
-mix.sass(`plugins/BkPod/Static/css/admin/app.scss`, `public/plugin/bk_pod/css/admin/app.css`)
-  .then(() => {
-    fs.copyFileSync(`public/plugin/bk_pod/css/admin/app.css`, `${targetDir}/admin/app.css`);
-  }
-);
-mix.sass(`plugins/BkPod/Static/css/shop/app.scss`, `public/plugin/bk_pod/css/shop/app.css`)
-  .then(() => {
-    fs.copyFileSync(`public/plugin/bk_pod/css/shop/app.css`, `${targetDir}/shop/app.css`);
-  }
-);
 
 // 前端 default 模板
 mix.sass('resources/beike/shop/default/css/bootstrap/bootstrap.scss', 'public/build/beike/shop/default/css/bootstrap.css');
