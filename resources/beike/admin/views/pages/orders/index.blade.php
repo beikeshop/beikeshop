@@ -57,6 +57,7 @@
               </el-date-picker>
             </el-form-item>
           </el-form-item>
+          @hook('admin.order.list.filter.after')
         </el-form>
 
         <div class="row">
@@ -84,6 +85,7 @@
               <th>{{ __('order.payment_method') }}</th>
               <th>{{ __('order.status') }}</th>
               <th>{{ __('order.total') }}</th>
+              @hook('admin.order.list.item.th.total.after')
               <th>{{ __('order.created_at') }}</th>
               <th>{{ __('order.updated_at') }}</th>
               <th>{{ __('common.action') }}</th>
@@ -100,6 +102,7 @@
                   <td>{{ $order->payment_method_name }}</td>
                   <td>{{ $order->status_format }}</td>
                   <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+                  @hook('admin.order.list.item.td.total.after')
                   <td>{{ $order->created_at }}</td>
                   <td>{{ $order->updated_at }}</td>
                   <td>

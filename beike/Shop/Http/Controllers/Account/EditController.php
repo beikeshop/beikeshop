@@ -36,6 +36,8 @@ class EditController extends Controller
     {
         CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
 
+        hook_action('account.edit.update.after' , current_customer());
+
         return redirect()->to(shop_route('account.edit.index'))->with('success', trans('common.edit_success'));
     }
 }
