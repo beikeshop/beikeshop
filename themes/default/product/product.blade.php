@@ -298,6 +298,7 @@
         quantity: 1,
         source: {
           skus: @json($product['skus']),
+          weight: @json($product['weight'] ?? ''),
           variables: @json($product['variables'] ?? []),
         }
       },
@@ -322,6 +323,7 @@
         } else {
           // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
           this.product = skus[0];
+          this.product.weight = this.source.weight;
           this.images = @json($product['images'] ?? []);
         }
       },
