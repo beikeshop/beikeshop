@@ -173,6 +173,7 @@ class SettingRepo
                 'locale'                 => system_setting('base.locale'),
                 'guest_checkout'         => system_setting('base.guest_checkout'),
                 'show_price_after_login' => system_setting('base.show_price_after_login'),
+                'maintenance_mode'       => system_setting('base.maintenance_mode') ?? 0,
             ],
             'rma_statuses' => RmaRepo::getStatuses(),
             'rma_types'    => RmaRepo::getTypes(),
