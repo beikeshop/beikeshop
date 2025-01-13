@@ -58,4 +58,5 @@ return [
     'video_path_hint'        => 'Remote video must be a video address ending with .mp4',
     'iframe_code_hint'       => 'Video website Iframe embed code, such as click share below the youtube video and then click embed, copy the code inside',
     'sku_error_repeat'       => 'sku repeat',
+    'sku_hint'               => 'Note: It is recommended that the number of SKUs should not exceed 120. More SKUs may cause page freezes, longer rendering times, or truncation of submitted data due to excessive size.',
 ];

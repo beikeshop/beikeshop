@@ -14,6 +14,7 @@ namespace Beike\Admin\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Beike\Admin\Http\Requests\LoginRequest;
 use Beike\Models\AdminUser;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -31,6 +32,7 @@ class LoginController extends Controller
         hook_action("admin.login.store.before", $loginRequest);
 
         if (auth(AdminUser::AUTH_GUARD)->attempt($loginRequest->validated())) {
+            session(['first_login_action' => true]);
             return redirect(admin_route('home.index'));
         }
 

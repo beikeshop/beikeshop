@@ -15,6 +15,12 @@ class HomeController extends Controller
      */
     public function index(): mixed
     {
+        $firstLoginAction = session('first_login_action', false);
+
+        if ($firstLoginAction) {
+            session()->forget('first_login_action');
+        }
+
         $data = [
             'products'     => DashboardRepo::getProductData(),
             'orders'       => DashboardRepo::getOrderData(),
@@ -25,7 +31,10 @@ class HomeController extends Controller
                 'latest_week'  => OrderReportRepo::getLatestWeek(),
                 'latest_year'  => OrderReportRepo::getLatestYear(),
             ],
+            'firstLoginAction' => $firstLoginAction,
         ];
+
+        $data = hook_filter('admin.home.index.data', $data);
 
         return view('admin::pages.home', $data);
     }

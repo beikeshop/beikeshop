@@ -10,4 +10,6 @@
   @endif
   @include('admin::pages.dashboard.totals')
   @include('admin::pages.dashboard.orders_chart')
+
+  @hook('admin.home.index.content.footer')
 @endsection

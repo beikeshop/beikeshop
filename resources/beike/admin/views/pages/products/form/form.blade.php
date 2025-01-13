@@ -404,6 +404,7 @@
                         </tr>
                         </tbody>
                       </table>
+                      <div class="help-text font-size-12 lh-base">{{ __('admin/product.sku_hint') }}</div>
                     </div>
                     @endhookwrapper
                   </div>

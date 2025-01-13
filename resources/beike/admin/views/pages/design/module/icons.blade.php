@@ -1,6 +1,12 @@
 <template id="module-editor-icons-template">
   <div class="image-edit-wrapper">
     <module-size v-model="form.module_size"></module-size>
+
+    <div class="module-edit-group">
+      <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
+      <text-i18n v-model="form.title"></text-i18n>
+    </div>
+
     <div class="module-edit-group" style="margin-bottom: 200px;">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
