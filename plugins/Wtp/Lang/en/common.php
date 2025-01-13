@@ -10,18 +10,19 @@
  */
 
 return [
-    'merchant_id' => '商户号',
+    'merchant_id' => 'Merchant ID',
     'md5_key' => 'Md5 Key',
     'api_key' => 'API Key',
-    'api' => '环境',
-    'api_test' => '沙箱环境',
-    'api_live' => '生产环境',
-    'log' => '日志',
-    'disable' => '启用',
-    'enable' => '禁用',
+    'api' => 'Sandbox/Live',
+    'api_test' => 'Sandbox',
+    'api_live' => 'Live',
+    'log' => 'Log',
+    'disable' => 'Disable',
+    'enable' => 'Enable',
+    'paying' => 'Paying',
 
-    'card_type' => '信用卡类型',
-    'payment_type' => '支付方式',
+    'card_image' => 'Credit card Image',
+    'payment_type' => 'Payment Type',
     'card_icon' => 'Card card Icon',
     'card' => 'Card card',
     'giropay' => 'Giropay',
