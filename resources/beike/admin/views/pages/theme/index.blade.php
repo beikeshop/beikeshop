@@ -12,7 +12,7 @@
     </div>
     <div class="card-body">
       <div class="theme-wrap">
-        <div class="row">
+        <div class="row g-3">
           @foreach ($themes as $item)
           <div class="col-12 col-md-6 col-lg-4 col-xl-3">
             <div class="item">

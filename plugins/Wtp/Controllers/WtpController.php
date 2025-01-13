@@ -1,6 +1,6 @@
 <?php
 /**
- * WintopayController.php
+ * WtpController.php
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -10,22 +10,22 @@
  *
  */
 
-namespace Plugin\Wintopay\Controllers;
+namespace Plugin\Wtp\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Plugin\Wintopay\Services\WintopayService;
+use Plugin\Wtp\Services\WtpService;
 
-class WintopayController
+class WtpController
 {
     public function pay(Request $request, int $id)
     {
-        return redirect(WintopayService::getInstance($id)->getPaymentUrl($request->get('payment_type'), $request->get('sid')));
+        return redirect(WtpService::getInstance($id)->getPaymentUrl($request->get('payment_type'), $request->get('sid')));
     }
 
     public function notify(Request $request)
     {
-        $result = WintopayService::notify();
+        $result = WtpService::notify();
     }
 
 }

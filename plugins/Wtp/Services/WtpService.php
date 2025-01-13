@@ -1,6 +1,6 @@
 <?php
 /**
- * WintopayService.php
+ * WtpService.php
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -9,16 +9,17 @@
  * @modified   2024-05-13 16:09:21
  */
 
-namespace Plugin\Wintopay\Services;
+namespace Plugin\Wtp\Services;
 
 use Beike\Models\Country;
 use Beike\Models\Order;
 use Beike\Services\StateMachineService;
 use Beike\Shop\Services\PaymentService;
 use Illuminate\Support\Facades\Log;
-use Plugin\Wintopay\Libraries\Wintopay;
+use Plugin\Wtp\Libraries\Wintopay;
+use Plugin\Wtp\Libraries\Wtp;
 
-class WintopayService extends PaymentService
+class WtpService extends PaymentService
 {
     private $url = '';
     private $apiKey = '';
@@ -31,10 +32,10 @@ class WintopayService extends PaymentService
     public function __construct($order)
     {
         parent::__construct($order);
-        $this->url = plugin_setting('wintopay.api') == 'test' ? 'https://stg-gateway.wintopay.com/v3/payments' : 'https://api.cartadicreditopay.com/v3/payments';
-        $this->apiKey = plugin_setting('wintopay.api_key');
-        $this->md5Key = plugin_setting('wintopay.md5_key');
-        $this->merchantId = plugin_setting('wintopay.merchant_id');
+        $this->url = plugin_setting('wtp.api') == 'test' ? 'https://stg-gateway.wintopay.com/v3/payments' : 'https://api.cartadicreditopay.com/v3/payments';
+        $this->apiKey = plugin_setting('wtp.api_key');
+        $this->md5Key = plugin_setting('wtp.md5_key');
+        $this->merchantId = plugin_setting('wtp.merchant_id');
     }
 
     /**
@@ -75,7 +76,7 @@ class WintopayService extends PaymentService
             'merchant_reference' => $this->orderId . '-' . time(),
             'products' => $products,
             'customer_email' => $this->order->email,
-            'return_url' => shop_route('plugin.wintopay.notify'),
+            'return_url' => shop_route('plugin.wtp.notify'),
             'billing_details' => array(
                 'email'=>$this->order->email,
                 'phone'=>$this->order->payment_telephone,
@@ -137,10 +138,10 @@ class WintopayService extends PaymentService
      */
     public static function notify()
     {
-        Log::info('Wintopay notify:');
+        Log::info('Wtp notify:');
         $wtp = new Wintopay();
-        $md5key = plugin_setting('wintopay.md5_key');
-        $merchantId = plugin_setting('wintopay.merchant_id');
+        $md5key = plugin_setting('wtp.md5_key');
+        $merchantId = plugin_setting('wtp.merchant_id');
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $data = $_REQUEST;
             $result = $wtp->checkReturn($merchantId,$md5key,$data);
@@ -159,19 +160,22 @@ class WintopayService extends PaymentService
             if($result['status'] == 'paid'){
                 //支付成功
                 $redirect_url = shop_route('checkout.success', ['order_number' => $order->number]);
-                if ($order->status == StateMachineService::UNPAID) {
+                if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
                     StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment success.');
                 }
-            }elseif($result['status'] == 'pending'){
+            }elseif($result['status'] == 'pending' || $result['status'] == 'unpaid'){
                 $redirect_url = shop_route('checkout.success', ['order_number' => $order->number]);
-            }else{
+                if ($order->status == StateMachineService::UNPAID) {
+                    StateMachineService::getInstance($order)->changeStatus('paying');
+                }
+            }else{ // $result['status'] = 'failed'
                 $redirect_url = shop_route('account.order.show', ['number' => $order->number]);
             }
             header('Location: '.$redirect_url);
             exit;
         }else {
             $requestData = file_get_contents('php://input', 'r');
-            Log::info('Wintopay notify params: ' . $requestData);
+            Log::info('Wtp notify params: ' . $requestData);
             $data = json_decode($requestData, true);
             $result = $wtp->checkCallback($merchantId, $md5key, $data);
             $reqId = empty($data['request_id']) ? '' : $data['request_id'];
@@ -188,10 +192,14 @@ class WintopayService extends PaymentService
                 }
                 if ($result == 'success') {
                     $status = $data['status'];
+                    $order = Order::find($orderId);
                     if ($status == 'paid') {
-                        $order = Order::find($orderId);
-                        if ($order->status == StateMachineService::UNPAID) {
-                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment success.');
+                        if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
+                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::PAID, $preMessage . 'Payment failed.');
+                        }
+                    } elseif ($status == 'failed') {
+                        if ($order->status == StateMachineService::UNPAID || $order->status == 'paying') {
+                            StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $preMessage . 'Payment success.');
                         }
                     }
                     exit('[success]');
