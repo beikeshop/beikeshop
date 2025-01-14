@@ -207,7 +207,7 @@
               <td>
                 <div class="d-flex align-items-center">
                   <div class="wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
-                  @hook('admin.order_form.product_name.after')
+                  @hook('admin.order_form.product_name.after', $product)
                 </div>
               </td>
               <td class="">{{ $product->product_sku }}</td>

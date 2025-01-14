@@ -74,6 +74,7 @@
     </div>
   </div>
 </div>
+
 @hookwrapper('account.order_info.address_info')
 <div class="card mb-lg-4 mb-2">
   <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
@@ -131,6 +132,8 @@
   </div>
 </div>
 @endhookwrapper
+
+@hookwrapper('account.order_info.products')
 <div class="card mb-lg-4 mb-2">
   <div class="card-header">
     <h6 class="card-title">{{ __('shop/account/order_info.order_items') }}</h6>
@@ -143,7 +146,7 @@
           <div class="right">
             <div class="name">
               <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
-              @hook('order_info.product_name.after')
+              @hook('order_info.product_name.after', $product)
             </div>
             <div class="price">
               {{ currency_format($product->price, $order->currency_code, $order->currency_value) }}
@@ -160,7 +163,9 @@
     @endforeach
   </div>
 </div>
+@endhookwrapper
 
+@hookwrapper('account.order_info.totals')
 <div class="card mb-lg-4 mb-2">
   <div class="card-header">
     <h6 class="card-title">{{ __('shop/account/order_info.order_total') }}</h6>
@@ -180,8 +185,10 @@
     </table>
   </div>
 </div>
+@endhookwrapper
 
 @if ($order->comment)
+  @hookwrapper('account.order_info.comment')
   <div class="card mb-lg-4 mb-2">
     <div class="card-header">
       <h6 class="card-title">{{ __('order.comment') }}</h6>
@@ -190,6 +197,7 @@
       {{ $order->comment }}
     </div>
   </div>
+  @endhookwrapper
 @endif
 
 @foreach ($html_items as $item)
