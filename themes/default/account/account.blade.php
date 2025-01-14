@@ -16,7 +16,7 @@
             </ul>
           </div>
         @endif
-
+        @hook('account.account.card.before')
         <div class="card account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title">{{ __('shop/account.my_order') }}</h5>

@@ -43,6 +43,7 @@
                 </div>
               </div>
               <div class="row gx-4 gy-3">
+                @hookwrapper('account.edit.name')
                 <div class="col-sm-6">
                   <label class="form-label">{{ __('shop/account/edit.name') }}</label>
                   <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name"
@@ -50,6 +51,7 @@
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('name') ? $errors->first('name') : __('common.error_required', ['name' => __('shop/account/edit.name')]) }}</span>
                 </div>
+                @endhookwrapper
                 @hookwrapper('account.edit.email')
                 <div class="col-sm-6">
                   <label class="form-label">{{ __('shop/account/edit.email') }}</label>
