@@ -63,6 +63,7 @@
                 <td>{{ __('order.updated_at') }}：</td>
                 <td>{{ $order->updated_at }}</td>
               </tr>
+              @hook('admin.order.form.base.updated_at.after')
             </tbody>
           </table>
         </div>
