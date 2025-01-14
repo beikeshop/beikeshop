@@ -8,7 +8,9 @@
       <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
+            @if ($firstLoginAction)
             <img src="https://beikeshop.com/install/install-enter.jpg?version={{ config('beike.version') }}&build_date={{ config('beike.build') }}" class="d-none">
+            @endif
             <div class="fs-2 lh-1 fw-bold">{{ $order_totals['today'] }}</div>
           </div>
         </div>
