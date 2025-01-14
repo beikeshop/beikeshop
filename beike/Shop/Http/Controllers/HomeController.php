@@ -19,9 +19,7 @@ class HomeController extends Controller
     public function index(): mixed
     {
         $originalUri = session()->get('originalUri');
-        $this->setLang();
-        if ($originalUri === '/')
-        {
+        if ($originalUri === '/') {
             if (locale() !== system_setting('base.locale')) {
                 return $this->redirect();
             }
@@ -64,15 +62,6 @@ class HomeController extends Controller
         $data = hook_filter('home.index.data', $data);
 
         return view('home', $data);
-    }
-
-    private function setLang(): void
-    {
-        $originalUri = session()->get('originalUri');
-        $lang = trim($originalUri,'/');
-        if (in_array($lang, languages()->toArray())) {
-             Session::put('locale', $lang);
-         }
     }
 
     private function redirect(): RedirectResponse

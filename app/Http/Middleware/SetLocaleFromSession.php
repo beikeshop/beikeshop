@@ -17,23 +17,50 @@ class SetLocaleFromSession
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        $requestLocale = $request->header('locale');
-        if (empty($requestLocale)) {
-            $requestLocale = $request->get('locale');
-        }
-
-        $sessionLocale = session('locale');
-
-        $locale = $requestLocale ?: $sessionLocale;
-        if ($locale && in_array($locale, languages()->toArray())) {
-            App::setLocale($locale);
-            session(['locale' => $locale]);
+        // 优先从请求头中获取 'locale'
+        $localeFromHeader = $request->header('locale');
+        if ($localeFromHeader && in_array($localeFromHeader, languages()->toArray())) {
+            $locale = $localeFromHeader;
         } else {
-            $configLocale = system_setting('base.locale');
-            App::setLocale($configLocale);
-            session(['locale' => $configLocale]);
+            // 如果请求头没有语言，尝试从 URL 中提取
+            $localeFromUrl = $this->getLocaleFromUrl($request);
+            if ($localeFromUrl) {
+                $locale = $localeFromUrl;
+            } else {
+                // 如果都没有从请求头或 URL 中获取到语言，使用会话中的语言
+                $locale = session('locale');
+                if (!$locale || !in_array($locale, languages()->toArray())) {
+                    // 如果会话中没有有效语言，使用系统默认语言
+                    $locale = system_setting('base.locale');
+                }
+            }
         }
+
+        // 设置语言
+        App::setLocale($locale);
+        session(['locale' => $locale]);
 
         return $next($request);
+    }
+
+    /**
+     * 从原始请求 URL 中解析出语言代码
+     *
+     * @return string|null
+     */
+    private function getLocaleFromUrl(): ?string
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+
+        // 提取路径部分
+        $path = parse_url($uri, PHP_URL_PATH);
+        $segments = explode('/', trim($path, '/'));
+
+        // 如果路径的第一个部分是有效的语言代码，返回该语言代码
+        if (count($segments) > 0 && in_array($segments[0], languages()->toArray())) {
+            return $segments[0];
+        }
+
+        return null;
     }
 }
