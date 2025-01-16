@@ -206,7 +206,7 @@
               <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
+                  <div class="border d-flex justify-content-center align-items-center wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
                   @hook('admin.order_form.product_name.after', $product)
                 </div>
               </td>
@@ -430,7 +430,7 @@
     });
   </script>
 
-@can('orders_update_status')
+  @can('orders_update_status')
   <script>
     $('.edit-shipment').click(function() {
       $(this).siblings('.shipment-tool').removeClass('d-none');

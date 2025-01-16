@@ -63,6 +63,7 @@ class SettingController extends Controller
     public function store(Request $request): mixed
     {
         $settings = $request->all();
+        $tab = $request->get('tab');
         if (isset($settings['show_price_after_login'])) {
             if ($settings['show_price_after_login']) {
                 $settings['guest_checkout'] = false;
@@ -77,7 +78,7 @@ class SettingController extends Controller
 
         $oldAdminName = admin_name();
         $newAdminName = $settings['admin_name'] ?: 'admin';
-        $settingUrl   = str_replace($oldAdminName, $newAdminName, admin_route('settings.index'));
+        $settingUrl   = str_replace($oldAdminName, $newAdminName, admin_route('settings.index', ['tab' => $tab]));
 
         return redirect($settingUrl)->with('success', trans('common.updated_success'));
     }

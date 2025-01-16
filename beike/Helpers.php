@@ -1063,3 +1063,18 @@ function replace_url($url): string
 
     return $urlInfo['scheme'] . '://' . $urlInfo['host'] . $path . '?' . $urlInfo['query'];
 }
+
+/**
+ * 根据后台设置商品图片的原始尺寸比例，与调用处传过来的宽，计算图片的高
+ *
+ * @param $width
+ * @return int
+ */
+function calculate_height_by_ratio($width): int
+{
+    $originWidth = system_setting('base.product_image_origin_width', '800');
+    $originHeight = system_setting('base.product_image_origin_height', '800');
+    $ratio = $originHeight / $originWidth;
+
+    return round($width * $ratio);
+}

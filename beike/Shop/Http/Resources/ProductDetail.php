@@ -45,9 +45,9 @@ class ProductDetail extends JsonResource
             'weight_class'     => $this->weight_class                  ?? '',
             'images'           => array_map(function ($image) {
                 return [
-                    'preview' => image_resize($image, 500, 500),
-                    'popup'   => image_resize($image, 800, 800),
-                    'thumb'   => image_resize($image, 150, 150),
+                    'preview' => image_resize($image, 600, calculate_height_by_ratio(600)),
+                    'popup'   => image_resize($image, 800, calculate_height_by_ratio(800)),
+                    'thumb'   => image_resize($image, 150, calculate_height_by_ratio(150)),
                 ];
             }, $this->images ?? []),
             'attributes'       => $attributes,

@@ -27,7 +27,7 @@
   <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
     <div class="row mb-md-5 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-2">
-        <div class="product-image d-flex align-items-start">
+        <div class="product-image">
           @if(!is_mobile())
             <div class="left {{ $iframeClass }}" v-if="images.length">
               <div class="swiper" id="swiper">
@@ -444,6 +444,8 @@
       direction: "vertical",
       slidesPerView: 1,
       spaceBetween: 3,
+      autoHeight: true,
+      mousewheel: true,
       breakpoints: {
         375: {
           slidesPerView: 3,

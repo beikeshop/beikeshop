@@ -42,15 +42,17 @@ body.page-product {
 
   .product-image {
     position: relative;
+    display: flex;
+    align-items: stretch;
 
     #swiper {
-      height: 250px;
-      @media (min-width: 480px) {
-        height: 400px;
-      }
-      @media (min-width: 768px) {
-        height: 500px;
-      }
+      height: 100%;
+      // @media (min-width: 480px) {
+      //   height: 400px;
+      // }
+      // @media (min-width: 768px) {
+      //   height: 500px;
+      // }
 
       &:hover {
         .swiper-pager > div {
@@ -112,7 +114,7 @@ body.page-product {
         }
         .swiper-button-next {
           border: 0;
-          top: 485px;
+          top: calc(100% - 21px);
           left: 50%;
 
           height: 55px;
@@ -157,21 +159,7 @@ body.page-product {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        @media (min-width: 992px) {
-          width: 360px;
-          height: 360px;
-        }
-
-        @media (min-width: 1200px) {
-          width: 450px;
-          height: 450px;
-        }
-
-        @media (min-width: 1400px) {
-          width: 500px;
-          height: 500px;
-        }
+        max-width: 510px;
       }
     }
 

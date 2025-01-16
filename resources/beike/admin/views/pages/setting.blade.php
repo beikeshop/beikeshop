@@ -426,6 +426,12 @@
           $('.smtp-qq-hint').addClass('d-none');
         }
       });
+
+      $('.nav-tabs a').on ('click', function (e) {
+        const formAction = @json(admin_route('settings.store'));
+        const tab = $(this).attr('href').replace('#', '');
+        $('form#app').attr('action', formAction + '?tab=' + tab);
+      });
     });
 
   </script>
