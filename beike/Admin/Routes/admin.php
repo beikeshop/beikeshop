@@ -181,12 +181,12 @@ Route::prefix($adminName)
                 // 插件分组
                 Route::middleware('can:plugins_index')->get('plugins/shipping', [Controllers\PluginController::class, 'shipping'])->name('plugins.shipping');
                 Route::middleware('can:plugins_index')->get('plugins/payment', [Controllers\PluginController::class, 'payment'])->name('plugins.payment');
-                Route::middleware('can:plugins_index')->get('plugins/total', [Controllers\PluginController::class, 'total'])->name('plugins.total');
-                Route::middleware('can:plugins_index')->get('plugins/social', [Controllers\PluginController::class, 'social'])->name('plugins.social');
+                Route::middleware('can:plugins_index')->get('plugins/marketing', [Controllers\PluginController::class, 'marketing'])->name('plugins.marketing');
+                Route::middleware('can:plugins_index')->get('plugins/analysis', [Controllers\PluginController::class, 'analysis'])->name('plugins.analysis');
+                Route::middleware('can:plugins_index')->get('plugins/service', [Controllers\PluginController::class, 'service'])->name('plugins.service');
                 Route::middleware('can:plugins_index')->get('plugins/feature', [Controllers\PluginController::class, 'feature'])->name('plugins.feature');
                 Route::middleware('can:plugins_index')->get('plugins/language', [Controllers\PluginController::class, 'language'])->name('plugins.language');
                 Route::middleware('can:plugins_index')->get('plugins/theme', [Controllers\PluginController::class, 'theme'])->name('plugins.theme');
-                Route::middleware('can:plugins_index')->get('plugins/translator', [Controllers\PluginController::class, 'translator'])->name('plugins.translator');
 
                 // 报表
                 Route::middleware('can:reports_sale')->get('reports/sale', [Controllers\ReportController::class, 'sale'])->name('reports_sale.index');

@@ -31,7 +31,9 @@ return [
     'theme'                 => 'Theme',
     'ticket'                => 'Soporte técnico',
     'to_enable'             => 'To Enable',
-    'total'                 => 'Cálculo de pedidos',
+    'marketing'             => 'Promoción de marketing',
     'translator'            => 'Herramienta de traducción',
     'uninstall_hint'        => 'Desinstalar el complemento eliminará todos los datos relacionados con el complemento, ¿está seguro de que desea desinstalarlo? ',
+    'analysis'              => 'Análisis de datos',
+    'service'               => 'Servicio al cliente',
 ];

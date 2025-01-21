@@ -25,11 +25,11 @@ class Plugin implements \ArrayAccess, Arrayable
         'payment',    // 支付方式
         'shipping',   // 配送方式
         'theme',      // 主题模板
-        'feature',    // 功能模块
-        'total',      // 订单金额
-        'social',     // 社交网络
+        'analysis',   // 数据分析
+        'service',   // 客户服务
+        'marketing',      // 营销推广
         'language',   // 语言翻译
-        'translator', // 翻译工具
+        'feature',    // 其他功能
     ];
 
     protected $type;
@@ -80,9 +80,9 @@ class Plugin implements \ArrayAccess, Arrayable
      */
     public function setType(string $type): self
     {
-        if (! in_array($type, self::TYPES)) {
-            throw new \Exception('Invalid plugin type, must be one of ' . implode(',', self::TYPES));
-        }
+        // if (! in_array($type, self::TYPES)) {
+        //     throw new \Exception('Invalid plugin type, must be one of ' . implode(',', self::TYPES));
+        // }
         $this->type = $type;
 
         return $this;
