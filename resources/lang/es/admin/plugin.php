@@ -34,4 +34,6 @@ return [
     'total'                 => 'Cálculo de pedidos',
     'translator'            => 'Herramienta de traducción',
     'uninstall_hint'        => 'Desinstalar el complemento eliminará todos los datos relacionados con el complemento, ¿está seguro de que desea desinstalarlo? ',
+    'analysis'              => 'Análisis de datos',
+    'service'               => 'Servicio al cliente',
 ];

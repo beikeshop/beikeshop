@@ -34,4 +34,6 @@ return [
     'total'                 => 'Calcolo dell\'ordine',
     'translator'            => 'Strumenti di traduzione',
     'uninstall_hint'        => 'La disinstallazione del plug-in eliminerà tutti i relativi dati del plug-in, sei sicuro di voler disinstallare? ',
+    'analysis'              => 'Analisi dei dati',
+    'service'               => 'Assistenza clienti',
 ];

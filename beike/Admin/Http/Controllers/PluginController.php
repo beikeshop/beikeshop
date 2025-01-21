@@ -87,9 +87,9 @@ class PluginController extends Controller
     /**
      * @return mixed
      */
-    public function social()
+    public function analysis()
     {
-        $type            = 'social';
+        $type            = 'analysis';
         $plugins         = app('plugin')->getPlugins();
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
@@ -144,9 +144,9 @@ class PluginController extends Controller
         return view('admin::pages.plugins.index', $data);
     }
 
-    public function translator()
+    public function service()
     {
-        $type            = 'translator';
+        $type            = 'service';
         $plugins         = app('plugin')->getPlugins();
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());

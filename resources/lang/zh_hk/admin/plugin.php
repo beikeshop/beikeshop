@@ -34,4 +34,6 @@ return [
     'total'                 => '訂單計算',
     'translator'            => '翻譯工具',
     'uninstall_hint'        => '卸載插件會刪除該插件的所有相關數據，確定要卸載嗎？ ',
+    'analysis'              => '數據分析',
+    'service'               => '客戶服務',
 ];

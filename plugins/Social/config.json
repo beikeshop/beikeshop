@@ -8,7 +8,7 @@
         "zh_cn": "第三方登录(包括Facebook、Twitter、Google)",
         "en": "Social Login include Facebook、Twitter、Google"
     },
-    "type": "social",
+    "type": "feature",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
     "author": {

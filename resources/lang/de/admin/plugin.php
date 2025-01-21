@@ -34,4 +34,6 @@ return [
     'total'                 => 'Auftragsberechnung',
     'translator'            => 'Ein übersetzungswerkzeug.',
     'uninstall_hint'        => 'Das Deinstallieren des Plug-ins löscht alle zugehörigen Daten des Plug-ins, möchten Sie es wirklich deinstallieren? ',
+    'analysis'              => 'Analyse',
+    'service'               => 'Service',
 ];
