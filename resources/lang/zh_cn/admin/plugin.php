@@ -30,7 +30,7 @@ return [
     'shipping'              => '配送方式',
     'payment'               => '支付方式',
     'social'                => '社交网络',
-    'total'                 => '订单计算',
+    'total'                 => '营销推广',
     'feature'               => '功能模块',
     'language'              => '语言翻译',
     'theme'                 => '主题模板',

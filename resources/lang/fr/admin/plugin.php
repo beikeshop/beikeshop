@@ -31,7 +31,7 @@ return [
     'theme'                 => 'Theme',
     'ticket'                => 'Et support technique',
     'to_enable'             => 'To Enable',
-    'total'                 => 'Calcul de la commande',
+    'total'                 => 'Promotion marketing',
     'translator'            => 'Outil de traduction',
     'uninstall_hint'        => 'La désinstallation du plug-in supprimera toutes les données associées au plug-in, êtes-vous sûr de vouloir désinstaller ? ',
     'analysis'               => 'Analyse des données',

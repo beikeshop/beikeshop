@@ -31,7 +31,7 @@ return [
     'theme'                 => 'Template Tema',
     'ticket'                => 'Dukungan teknis',
     'to_enable'             => 'Pergi aktifkan',
-    'total'                 => 'Perhitungan pesanan',
+    'total'                 => 'Promosi Pemasaran',
     'translator'            => 'Alat terjemahan',
     'uninstall_hint'        => 'Menghapus plugin menghapus semua data yang relevan untuk plugin itu, apakah Anda yakin ingin menghapusnya?',
     'analysis'              => 'Analisis data',

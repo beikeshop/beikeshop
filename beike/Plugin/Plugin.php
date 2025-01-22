@@ -27,7 +27,7 @@ class Plugin implements \ArrayAccess, Arrayable
         'theme',      // 主题模板
         'analysis',   // 数据分析
         'service',   // 客户服务
-        'total',      // 订单金额
+        'total',      // 营销推广
         'language',   // 语言翻译
         'feature',    // 其他功能
     ];
