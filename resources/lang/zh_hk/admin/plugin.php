@@ -31,7 +31,7 @@ return [
     'theme'                 => '主题模板',
     'ticket'                => '技術支持',
     'to_enable'             => '去啟用',
-    'total'                 => '行銷推廣',
+    'marketing'             => '行銷推廣',
     'translator'            => '翻譯工具',
     'uninstall_hint'        => '卸載插件會刪除該插件的所有相關數據，確定要卸載嗎？ ',
     'analysis'              => '數據分析',

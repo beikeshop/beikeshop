@@ -31,9 +31,9 @@ return [
     'theme'                 => '테마 틀',
     'ticket'                => '기술 지원',
     'to_enable'             => '사용하기',
-    'total'                 => '마케팅 프로모션',
+    'marketing'             => '마케팅 프로모션',
     'translator'            => '번역 도구',
     'uninstall_hint'        => '플러그를 제거하면 해당 플러그인의 모든 관련 데이터가 삭제됩니다. 제거하시겠습니까?',
-    'analysis'                   => '데이터 분석',
-    'service'                  => '고객 서비스',
+    'analysis'              => '데이터 분석',
+    'service'               => '고객 서비스',
 ];

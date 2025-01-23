@@ -72,9 +72,9 @@ class PluginController extends Controller
     /**
      * @return mixed
      */
-    public function total()
+    public function marketing()
     {
-        $type            = 'total';
+        $type            = 'marketing';
         $plugins         = app('plugin')->getPlugins();
         $plugins         = $plugins->where('type', $type);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());

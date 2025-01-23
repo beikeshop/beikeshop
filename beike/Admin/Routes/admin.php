@@ -186,7 +186,7 @@ Route::prefix($adminName)
                 // 插件分组
                 Route::middleware('can:plugins_index')->get('plugins/shipping', [Controllers\PluginController::class, 'shipping'])->name('plugins.shipping');
                 Route::middleware('can:plugins_index')->get('plugins/payment', [Controllers\PluginController::class, 'payment'])->name('plugins.payment');
-                Route::middleware('can:plugins_index')->get('plugins/total', [Controllers\PluginController::class, 'total'])->name('plugins.total');
+                Route::middleware('can:plugins_index')->get('plugins/marketing', [Controllers\PluginController::class, 'marketing'])->name('plugins.marketing');
                 Route::middleware('can:plugins_index')->get('plugins/analysis', [Controllers\PluginController::class, 'analysis'])->name('plugins.analysis');
                 Route::middleware('can:plugins_index')->get('plugins/service', [Controllers\PluginController::class, 'service'])->name('plugins.service');
                 Route::middleware('can:plugins_index')->get('plugins/feature', [Controllers\PluginController::class, 'feature'])->name('plugins.feature');
