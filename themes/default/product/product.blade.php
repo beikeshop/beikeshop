@@ -3,6 +3,10 @@
 @section('title', $product['meta_title'] ?: $product['name'])
 @section('keywords', $product['meta_keywords'] ?: system_setting('base.meta_keyword'))
 @section('description', $product['meta_description'] ?: system_setting('base.meta_description'))
+@section('og_type', 'product')
+@section('og_image', $product['images'][0]['popup'] ?? '')
+@section('og_image_width', system_setting('base.product_image_origin_width'))
+@section('og_image_height', system_setting('base.product_image_origin_height'))
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>

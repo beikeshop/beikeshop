@@ -3,6 +3,10 @@
 @section('title', $page->description->meta_title ?: $page->description->title)
 @section('keywords', $page->description->meta_keywords)
 @section('description', $page->description->meta_description)
+@section('og_type', 'article')
+@section('og_image', image_origin($page->image))
+@section('og_image_width', '500')
+@section('og_image_height', '350')
 
 @push('header')
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>

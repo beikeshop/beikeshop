@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const fs = require('fs');
 
 // 后台 scss/js
 mix.sass('resources/beike/admin/css/bootstrap/bootstrap.scss', 'public/build/beike/admin/css/bootstrap.css');
@@ -34,9 +35,20 @@ if (!mix.inProduction()) {
   mix.copy(`plugins/${themeFileName}/Themes`, 'themes');
 }
 // 编译模版 scss/js 到 public/build 下
-mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/bootstrap/bootstrap.scss`, `public/build/beike/shop/${themeCode}/css/bootstrap.css`);
-mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/app.scss`, `public/build/beike/shop/${themeCode}/css/app.css`);
-mix.js(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/js/app.js`, `public/build/beike/shop/${themeCode}/js/app.js`);
+mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/bootstrap/bootstrap.scss`, `public/build/beike/shop/${themeCode}/css/bootstrap.css`)
+.then(() => {
+  fs.copyFileSync(`public/build/beike/shop/${themeCode}/css/bootstrap.css`, `plugins/${themeFileName}/Static/public/build/beike/shop/${themeCode}/css/bootstrap.css`);
+});
+
+mix.sass(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/css/app.scss`, `public/build/beike/shop/${themeCode}/css/app.css`)
+.then(() => {
+  fs.copyFileSync(`public/build/beike/shop/${themeCode}/css/app.css`, `plugins/${themeFileName}/Static/public/build/beike/shop/${themeCode}/css/app.css`);
+});
+
+mix.js(`plugins/${themeFileName}/Resources/beike/shop/${themeCode}/js/app.js`, `public/build/beike/shop/${themeCode}/js/app.js`)
+.then(() => {
+  fs.copyFileSync(`public/build/beike/shop/${themeCode}/js/app.js`, `plugins/${themeFileName}/Static/public/build/beike/shop/${themeCode}/js/app.js`);
+});
 */
 
 if (mix.inProduction()) {
