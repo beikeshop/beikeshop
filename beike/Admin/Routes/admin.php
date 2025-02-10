@@ -12,8 +12,6 @@ Route::prefix($adminName)
         Route::get('login', [Controllers\LoginController::class, 'show'])->name('login.show');
         Route::post('login', [Controllers\LoginController::class, 'store'])->name('login.store');
 
-        Route::get('get_wintopay_method', [Controllers\WintopayMethodController::class, 'index'])->name('get_wintopay_method.index');
-
         Route::get('forgotten', [ForgottenController::class, 'index'])->name('forgotten.index');
         Route::post('forgotten/send_code', [ForgottenController::class, 'sendVerifyCode'])->name('forgotten.send_code');
         Route::post('forgotten/password', [ForgottenController::class, 'changePassword'])->name('forgotten.password');
@@ -22,6 +20,7 @@ Route::prefix($adminName)
             ->group(function () {
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
                 Route::get('/menus', [Controllers\HomeController::class, 'menus'])->name('home.menus');
+                Route::post('files', [Controllers\FileController::class, 'store'])->name('file.store');
 
                 //个人中心
                 Route::middleware('can:account_index')->get('account', [Controllers\AccountController::class, 'index'])->name('account.index');

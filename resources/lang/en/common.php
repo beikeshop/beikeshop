@@ -102,5 +102,6 @@ return [
     'yes'                  => 'Yes',
     'text_total'           => 'Total',
     'text_loading'         => 'loading...',
+    'select_file'          => 'Select File',
     'pagination' => 'Show :first - :last / Total :total (Total :last_page Pages)',
 ];
