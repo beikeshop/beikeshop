@@ -175,7 +175,7 @@
       addRow() {
         let providers = this.source.providers.filter(e => !this.form.social.some(s => s.provider == e.code))
         if (providers.length) {
-          this.form.social.push({provider: providers[0].code, status: 1, key: '', secret: '', callback: `{{ shop_route('home.index') }}/social/callbacks/${this.source.providers[0].code}`, sort_order: this.form.social.length})
+          this.form.social.push({provider: providers[0].code, status: 1, key: '', secret: '', callback: `{{ shop_route('home.index') }}/social/callbacks/${providers[0].code}`, sort_order: this.form.social.length})
         }
       },
 

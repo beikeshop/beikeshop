@@ -1,27 +1,7 @@
-<form class="form-horizontal" action="{{ shop_route('plugin.wintopay.pay', $order->id) }}" method=POST>
+<form class="form-horizontal" action="{{ shop_route('plugin.wtp.pay', $order->id) }}" method=POST>
   @csrf
   <input type="hidden" name="sid" value="">
-  <div class="mb-3 radio-wrap">
-    @foreach (plugin_setting('wintopay.payment_type', []) as $item)
-      <div class="radio">
-        <label>
-          <input type="radio" name="payment_type" class="d-none" value="{{ $item }}" @if ($loop->first) checked @endif>
-          <div class="item">
-            <span class="title">{{ __('Wintopay::common.' . $item) }}</span>
-            <div class="icon-wrap">
-              @if ($item == 'card')
-                @foreach (plugin_setting('wintopay.card_type') as $card_type)
-                <img src="{{ plugin_origin('wintopay','/image/' . $card_type . '.svg') }}" class="img-fluid">
-                @endforeach
-              @else
-                <img src="{{ plugin_origin('wintopay','/image/' . $item . '.svg') }}" class="img-fluid">
-              @endif
-            </div>
-          </div>
-        </label>
-      </div>
-    @endforeach
-  </div>
+  <input type="hidden" name="payment_type" value="{{ $payment_type }}">
   <fieldset id="payment">
     <div class="buttons">
       <div class="pull-right">
@@ -32,14 +12,14 @@
   </fieldset>
 </form>
 
-@if (plugin_setting('wintopay.api') == 'test')
+@if (plugin_setting('wtp.api') == 'test')
 <script src="https://stg-gateway.wintopay.com/js/shield/v3"></script>
 @else
 <script src="https://js.cartadicreditopay.com/js/shield/v3"></script>
 @endif
 
 <script type="text/javascript">
-  const apiType = @json(plugin_setting('wintopay.api'));
+  const apiType = @json(plugin_setting('wtp.api'));
 
   $(function () {
     $('input[name=sid]').val(cartaDiCreditoPayShield.getSessionId());

@@ -1,6 +1,6 @@
 <?php
 /**
- * Wintopay 字段
+ * Wtp 字段
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
@@ -58,18 +58,10 @@ return [
         'required'    => true,
     ],
     [
-        'name'        => 'card_type',
-        'label_key'   => 'common.card_type',
-        'type'        => 'checkbox',
-        'options'     => [
-            ['value' => 'visa', 'label_key' => 'common.card_type_visa'],
-            ['value' => 'mastercard', 'label_key' => 'common.card_type_mastercard'],
-            ['value' => 'ae', 'label_key' => 'common.card_type_ae'],
-            ['value' => 'dc', 'label_key' => 'common.card_type_dc'],
-            ['value' => 'jcb', 'label_key' => 'common.card_type_jcb'],
-            ['value' => 'DClub', 'label_key' => 'common.card_type_dclub'],
-        ],
-        'required'    => true,
+        'name'        => 'card_image',
+        'label_key'   => 'common.card_image',
+        'type'        => 'image',
+        'required'    => false,
     ],
     [
         'name'        => 'log',

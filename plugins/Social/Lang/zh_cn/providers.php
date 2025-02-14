@@ -29,7 +29,7 @@ return [
     'qq'          => 'QQ',
     'taobao'      => '淘宝',
     'tapd'        => 'Tapd',
-    'twitter'     => 'Twitter',
+    'twitter'     => 'X',
     'wechat'      => '微信',
     'wework'      => '企业微信',
     'weibo'       => '微博',

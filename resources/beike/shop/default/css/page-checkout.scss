@@ -93,11 +93,10 @@ body.page-checkout {
         margin-right: 10px;
         display: flex;
         align-items: center;
-        flex: 0 0 88px;
 
         img {
-          width: 60px;
           margin-left: 10px;
+          max-height: 60px;
         }
       }
 

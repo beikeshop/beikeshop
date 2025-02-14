@@ -103,4 +103,6 @@ return [
     'show_price'           => '以查看价格',
     'continent'            => '洲',
     'text_total'           => '总计',
+    'text_loading'         => '加载中...',
+    'pagination'         => '显示 :first - :last / 合计 :total（共 :last_page 页）',
 ];
