@@ -45,7 +45,7 @@
               <a class="text-muted forgotten-link" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
             @endif
             @endhookwrapper
-
+            
             <div class="mt-4 mb-3">
               <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/login.login') }}</button>
             </div>
@@ -84,10 +84,11 @@
               @endhookwrapper
 
               @hook('account.login.new.confirm_password.bottom')
-
+              @hookwrapper('account.login.new.register')
               <div class="mt-5 mb-3">
                 <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
               </div>
+              @endhookwrapper
             </el-form>
         </div>
       </div>
