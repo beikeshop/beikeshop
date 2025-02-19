@@ -271,4 +271,6 @@ return [
     'text_start'             => 'Left',
     'text_center'            => 'Center',
     'text_end'               => 'Right',
+    'image_alt'               => 'Alt text',
+    'image_alt_info'               => 'The alt tag provides alternative text for images, improving accessibility and SEO when images can\'t be displayed',
 ];

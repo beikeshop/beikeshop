@@ -47,7 +47,7 @@
                        data-key="payment_method_code" data-value="{{ $payment['code'] }}">
                     <div class="left">
                       <span class="radio"></span>
-                      <img src="{{ $payment['icon'] }}" class="img-fluid">
+                      <img src="{{ $payment['icon'] }}" class="img-fluid" alt="{{ $payment['name'] }}">
                     </div>
                     <div class="right ms-2">
                       <div class="title">{{ $payment['name'] }}</div>
@@ -69,7 +69,7 @@
                         data-key="shipping_method_code" data-value="{{ $shipping['code'] }}">
                         <div class="left">
                           <span class="radio"></span>
-                          <img src="{{ $shipping['icon'] }}" class="img-fluid">
+                          <img src="{{ $shipping['icon'] }}" class="img-fluid" alt="{{ $shipping['name'] }}">
                         </div>
                         <div class="right ms-2">
                           <div class="title">{{ $shipping['name'] }}</div>
@@ -124,7 +124,7 @@
                   <div class="item">
                     <div class="image">
                       <div class="img border d-flex align-items-center justify-content-center wh-50 me-2">
-                        <img src="{{ image_resize($cart['image'], 100, 100) }}" class="img-fluid">
+                        <img src="{{ image_resize($cart['image'], 100, 100) }}" class="img-fluid" alt="{{ $cart['name'] }}">
                       </div>
                       <div class="name">
                         <div title="{{ $cart['name'] }}" class="text-truncate-2">{{ $cart['name'] }}</div>
@@ -245,7 +245,7 @@
           html += `<div class="radio-line-item d-flex align-items-center ${shipping_method_code == quote.code ? 'active' : ''}" data-key="shipping_method_code" data-value="${quote.code}">
           <div class="left">
             <span class="radio"></span>
-            <img src="${quote.icon}" class="img-fluid">
+            <img src="${quote.icon}" class="img-fluid" alt="${quote.name}">
           </div>
           <div class="right ms-2">
             <div class="title">${quote.name}</div>
@@ -265,7 +265,7 @@
         html += `<div class="radio-line-item d-flex align-items-center ${payment_method_code == item.code ? 'active' : ''}" data-key="payment_method_code" data-value="${item.code}">
         <div class="left">
           <span class="radio"></span>
-          <img src="${item.icon}" class="img-fluid">
+          <img src="${item.icon}" class="img-fluid" alt="${item.name}">
         </div>
         <div class="right ms-2">
           <div class="title">${item.name}</div>

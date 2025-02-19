@@ -15,7 +15,7 @@
                 <i class="el-icon-rank"></i>
               </el-tooltip>
 
-              <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+              <img :src="thumbnail(item.image.src, 40, 40)" class="img-responsive">
             </div>
 
             <div class="right">
@@ -27,7 +27,7 @@
           </div>
           <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
             <div class="pb-images-top">
-              <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
+              <pb-image-selector :is-alt="true"  v-model="item.image" :is-language="false"></pb-image-selector>
               <div class="tag">{{ __('admin/builder.text_suggested_size') }} 2100 x 1200</div>
             </div>
             <link-selector v-model="item.link" style="margin-bottom: 10px"></link-selector>
@@ -107,7 +107,10 @@ Vue.component('module-editor-img-text-slideshow', {
     addImage() {
       this.module.images.find(e => e.show = false);
       this.module.images.push({
-        image: 'catalog/demo/banner/text-image-banner-1.jpg',
+        image: {
+          src: 'catalog/demo/banner/text-image-banner-1.jpg',
+          alt: languagesFill(''),
+        },
         show: true,
         sub_title: languagesFill(''),
         title: languagesFill(''),
@@ -141,7 +144,10 @@ Vue.component('module-editor-img-text-slideshow', {
       },
       images: [
         {
-          image: 'catalog/demo/banner/text-image-banner-1.jpg',
+          image: {
+            src: 'catalog/demo/banner/text-image-banner-1.jpg',
+            alt: languagesFill(''),
+          },
           sub_title: languagesFill(''),
           title: languagesFill(''),
           description: languagesFill(''),
@@ -153,7 +159,10 @@ Vue.component('module-editor-img-text-slideshow', {
           }
         },
         {
-          image: 'catalog/demo/banner/text-image-banner-2.jpg',
+          image: {
+            src: 'catalog/demo/banner/text-image-banner-2.jpg',
+            alt: languagesFill(''),
+          },
           show: false,
           sub_title: languagesFill(''),
           title: languagesFill(''),

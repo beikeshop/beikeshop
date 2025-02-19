@@ -17,7 +17,7 @@ class AttributeValueResource extends JsonResource
         $data = [
             'id'           => $this->id,
             'attribute_id' => $this->attribute_id,
-            'name'         => $this->description->name,
+            'name'         => $this->description->name ?? '',
             'description'  => $this->description,
             'descriptions' => $this->descriptions,
             'created_at'   => time_format($this->created_at),

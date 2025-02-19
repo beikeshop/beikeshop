@@ -81,7 +81,7 @@
     <div class="container-fluid navbar-expand-lg">
       @hookwrapper('header.menu.logo')
       <div class="logo"><a href="{{ shop_route('home.index') }}">
-          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}"></a>
       </div>
       @endhookwrapper
       <div class="menu-wrap">
@@ -136,23 +136,23 @@
   <div class="header-mobile d-lg-none">
     <div class="mobile-content">
       <div class="left">
-        <div class="mobile-open-menu"><img src="{{ asset('image/icons/menu.svg') }}" class="img-fluid"></div>
+        <div class="mobile-open-menu"><img src="{{ asset('image/icons/menu.svg') }}" alt="menu" class="img-fluid"></div>
         <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas"
              aria-controls="offcanvasExample">
-             <img src="{{ asset('image/icons/search.svg') }}" class="img-fluid">
+             <img src="{{ asset('image/icons/search.svg') }}" class="img-fluid" alt="search">
         </div>
       </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
-          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}"></a>
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link mb-account-icon">
-          <img src="{{ asset('image/icons/account.svg') }}" class="img-fluid">
+          <img src="{{ asset('image/icons/account.svg') }}" class="img-fluid" alt="account">
           @if (strstr(current_route(), 'shop.account'))
             <span></span>
           @endif
         </a>
-        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><img src="{{ asset('image/icons/cart.svg') }}" class="img-fluid">
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><img src="{{ asset('image/icons/cart.svg') }}" alt="cart" class="img-fluid">
           <span class="cart-badge-quantity"></span></a>
       </div>
     </div>

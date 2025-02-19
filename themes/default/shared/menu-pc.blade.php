@@ -33,7 +33,7 @@
                         @if ($group['type'] == 'image')
                           <a
                           target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}"
-                          href="{{ $group['image']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $group['image']['image'] }}"
+                          href="{{ $group['image']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $group['image']['image'] }}" alt="{{ $group['name'] }}"
                               class="img-fluid"></a>
                         @else
                           <ul class="nav flex-column ul-children">

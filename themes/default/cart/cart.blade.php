@@ -48,7 +48,7 @@
                     <td>
                       <div class="d-flex align-items-center p-image">
                         <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-                        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" class="img-fluid"></div>
+                        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" :alt="product.name" class="img-fluid"></div>
                       </div>
                     </td>
                     <td>

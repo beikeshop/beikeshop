@@ -35,6 +35,8 @@
                     <div class="zipcode">@{{ address.zipcode }}</div>
                     <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
                     @endhookwrapper
+
+                    @hookwrapper('account.address.address')
                     <div class="address-bottom">
                       <div><span class="badge bg-success"
                           v-if="address.default">{{ __('shop/account/addresses.default_address') }}</span></div>
@@ -43,6 +45,7 @@
                         <button type="button" href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" @click.stop="editAddress(index)">{{ __('shop/account/addresses.edit') }}</button>
                       </div>
                     </div>
+                    @endhookwrapper
                   </div>
                 </div>
               </div>
@@ -58,13 +61,15 @@
     </div>
 
     <address-dialog ref="address-dialog" @change="onAddressDialogChange"></address-dialog>
+
+    @hook('account.address.footer')
   </div>
 @endsection
 
 @push('add-scripts')
   @include('shared.address-form')
   <script>
-    new Vue({
+    var app = new Vue({
       el: '#address-app',
 
       data: {
@@ -123,5 +128,7 @@
         },
       }
     })
+
+    @hook('account.address.script')
   </script>
 @endpush

@@ -34,6 +34,12 @@ class HomeController extends Controller
             $moduleId   = $module['module_id'] ?? '';
             $content    = $module['content'];
             $viewPath   = $module['view_path'] ?? '';
+            if ($viewPath) {
+                $viewPathTheme = strtolower(Str::before($viewPath, '::'));
+                if ($viewPathTheme != system_setting('base.theme')) {
+                    continue;
+                }
+            }
 
             if (empty($viewPath)) {
                 $viewPath = "design.{$code}";

@@ -15,7 +15,7 @@
             @if (($image['type'] ?? 'image') == 'video')
             <video src="{{ $image['image'] }}" class="img-fluid w-100" controls loop autoplay muted></video>
             @else
-            <img src="{{ $image['image'] }}" class="img-fluid">
+            <img src="{{ $image['image'] }}" class="img-fluid seo-img" alt="{{ $image['image_alt'] ?? '' }}">
             @endif
           </a>
         </div>

@@ -13,7 +13,7 @@
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image?.src || '', 40, 40)" class="img-responsive">
           </div>
 
           <div class="right">
@@ -23,7 +23,7 @@
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image" :is-language="false"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 200x200</div>
           </div>
           <div class="module-edit-title">{{ __('admin/builder.text_set_title') }}</div>
@@ -73,7 +73,10 @@ Vue.component('module-editor-icons', {
 
     addItems() {
       this.form.images.push({
-        image: '',
+        image: {
+          src: '',
+          alt: languagesFill('')
+        },
         link: {
           type: 'product',
           value:''

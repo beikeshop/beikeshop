@@ -38,7 +38,7 @@
                 <div class="swiper-wrapper">
                   <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images" :key="index">
                     <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
-                      <img :src="image.thumb" class="img-fluid">
+                      <img :src="image.thumb" alt="{{ $product['name'] }}" class="img-fluid seo-img">
                     </a>
                   </div>
                 </div>
@@ -51,7 +51,8 @@
             <div class="right" id="zoom">
               @include('product.product-video')
               <div class="product-img"><img
-                  :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid">
+                  alt="{{ $product['name'] }}"
+                  :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid seo-img">
               </div>
             </div>
           @else
@@ -60,7 +61,7 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide d-flex align-items-center justify-content-center"
                      v-for="image, index in images" :key="index">
-                  <img :src="image.preview" class="img-fluid">
+                  <img :src="image.preview" class="img-fluid seo-img" alt="{{ $product['name'] }}">
                 </div>
               </div>
               <div class="swiper-pagination mobile-pagination"></div>
@@ -141,7 +142,7 @@
                   data-bs-placement="top"
                   :title="value.image ? value.name : ''"
                   :class="[value.selected ? 'selected' : '', value.disabled ? 'disabled' : '', value.image ? 'is-v-image' : '']">
-                  <span class="image" v-if="value.image"><img :src="value.image" class="img-fluid"></span>
+                  <span class="image" v-if="value.image"><img :src="value.image" class="img-fluid" :alt="value.name"></span>
                   <span v-else>@{{ value.name }}</span>
                 </div>
               </div>

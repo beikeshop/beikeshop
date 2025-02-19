@@ -25,7 +25,7 @@
                 <div class="post-item">
                   @if ($page->image)
                   <a class="image" href="{{ shop_route('pages.show', [$page->id]) }}">
-                    <img src="{{ image_origin($page->image) }}" class="img-fluid">
+                    <img src="{{ image_origin($page->image) }}" class="img-fluid seo-img" alt="{{ $page->description->title }}">
                   </a>
                   @endif
                   <div class="post-info">

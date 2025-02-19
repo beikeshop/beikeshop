@@ -7,7 +7,7 @@
         @foreach ($content['images'] as $item)
         <div class="col-6 col-md-3">
           <a class="image-wrap d-flex justify-content-center" href="{{ $item['link']['link'] ?: 'javascript:void(0)' }}">
-            <img src="{{ $item['image'] }}" class="img-fluid">
+            <img src="{{ $item['image'] }}" alt="{{ $item['image_alt'] ?? '' }}" class="img-fluid seo-img">
           </a>
         </div>
         @endforeach

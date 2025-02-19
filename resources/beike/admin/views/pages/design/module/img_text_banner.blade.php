@@ -5,7 +5,7 @@
 
       <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <div class="pb-images-top">
-        <pb-image-selector v-model="module.image" :is-language="false"></pb-image-selector>
+        <pb-image-selector :is-alt="true"  v-model="module.image" :is-language="false"></pb-image-selector>
         <div class="tag">{{ __('admin/builder.text_suggested_size') }} 1000 x 600</div>
       </div>
       <link-selector v-model="module.link" style="margin-bottom: 10px"></link-selector>
@@ -85,7 +85,7 @@ Vue.component('module-editor-img-text-banner', {
       text_color: '#222222',
       btn_bg: '#fd560f',
       btn_color: '#ffffff',
-      image: 'catalog/demo/banner/text-image-banner-1.jpg',
+      image: 'https://dummyimage.com/1000x600/eeeeee',
       title: languagesFill(''),
       description: languagesFill(''),
       link: {

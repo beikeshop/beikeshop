@@ -28,9 +28,11 @@
                 <x-shop-alert type="success" msg="{{ session('success') }}" class="mt-4" />
               @endif
 
+              @hook('account.edit.before')
+
               <div class="bg-light rounded-3 p-4 mb-4" style="background: #f6f9fc;">
                 <div class="d-flex align-items-center">
-                  <img class="rounded-3" id="avatar" src="{{ image_resize($customer->avatar, 200, 200) }}"
+                  <img class="rounded-3" id="avatar" alt="{{ $customer->name }}" src="{{ image_resize($customer->avatar, 200, 200) }}"
                     width="90">
                   <div class="ps-3">
                     <label class="btn btn-light shadow-sm bg-body mb-2" data-toggle="tooltip" title="Change your avatar">
@@ -42,7 +44,10 @@
                   </div>
                 </div>
               </div>
+
               <div class="row gx-4 gy-3">
+                @hook('account.edit.form.before')
+
                 @hookwrapper('account.edit.name')
                 <div class="col-sm-6">
                   <label class="form-label">{{ __('shop/account/edit.name') }}</label>
@@ -61,10 +66,17 @@
                     role="alert">{{ $errors->has('email') ? $errors->first('email') : __('common.error_required', ['name' => __('shop/account/edit.email')]) }}</span>
                 </div>
                 @endhookwrapper
+
+                @hook('account.edit.form.after')
+
+                @hookwrapper('account.edit.submit')
                 <div class="col-12 mt-4">
                   <button class="btn btn-primary mt-sm-0" type="submit">{{ __('common.submit') }}</button>
                 </div>
+                @endhookwrapper
               </div>
+
+              @hook('account.edit.after')
             </form>
           </div>
         </div>
@@ -82,7 +94,7 @@
         </div>
         <div class="modal-body">
           <div class="img-container">
-            <img id="cropper-image" src="{{ image_resize('/') }}" class="img-fluid">
+            <img id="cropper-image" alt="{{ __('shop/account/edit.crop') }}" src="{{ image_resize('/') }}" class="img-fluid">
           </div>
         </div>
         <div class="modal-footer">

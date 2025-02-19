@@ -31,7 +31,7 @@
             <h6 class="text-uppercase text-dark intro-title">{{ __('shop/common.company_profile') }}<span class="icon-open"><i class="bi bi-plus-lg"></i></span></h6>
             <div class="intro-wrap">
               @if ($footer_content['content']['intro']['logo'] ?? false)
-                <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
+                <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}" class="img-fluid"></a></div>
               @endif
               <div class="text tinymce-format-p">{!! $footer_content['content']['intro']['text'][locale()] ?? '' !!}</div>
               <div class="social-network">

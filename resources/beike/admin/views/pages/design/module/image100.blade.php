@@ -5,7 +5,7 @@
       <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <div class="">
         <div class="pb-images-top">
-          <pb-image-selector v-model="form.images[0].image"></pb-image-selector>
+          <pb-image-selector :is-alt="true"  v-model="form.images[0].image"></pb-image-selector>
           <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 1920 x 500</div>
         </div>
         <link-selector v-model="form.images[0].link"></link-selector>
@@ -58,7 +58,10 @@ Vue.component('module-editor-image100', {
       module_size: 'container-fluid',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('https://dummyimage.com/1920x500/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/1920x500/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',

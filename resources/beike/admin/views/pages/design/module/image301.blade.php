@@ -8,14 +8,14 @@
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image?.src?.['{{ locale() }}'], 40, 40)" class="img-responsive">
           </div>
 
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
               <span v-if="!index">760 x 500</span>
               <span v-else>760 x 240</span>
@@ -75,7 +75,10 @@ Vue.component('module-editor-image301', {
       module_size: 'container',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('https://dummyimage.com/760x500/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/760x500/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',
@@ -83,7 +86,10 @@ Vue.component('module-editor-image301', {
           }
         },
         {
-          image: languagesFill('https://dummyimage.com/760x240/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/760x240/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',
@@ -91,7 +97,10 @@ Vue.component('module-editor-image301', {
           }
         },
         {
-          image: languagesFill('https://dummyimage.com/760x240/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/760x240/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',

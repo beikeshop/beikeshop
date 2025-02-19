@@ -8,7 +8,7 @@
         "zh_cn": "有道翻译插件, 可以翻译商品、分类",
         "en": "Translate product, category and page by Youdao Translator"
     },
-    "type": "feature",
+    "type": "translator",
     "version": "v1.0.0",
     "icon": "/image/logo.png",
     "author": {

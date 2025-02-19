@@ -128,6 +128,8 @@ class DesignService
             return $content;
         }
 
+        $content['image']  = is_string($content['image']) ? $content['image'] : $content['image']['src'];
+        $content['image_alt']  = $image['alt'][locale()] ?? '';
         $content['title']  = $content['title'][locale()] ?? '';
         $content['description']  = $content['description'][locale()] ?? '';
         $content['link'] = self::handleLink($content['link']['type'], $content['link']['value']);
@@ -193,11 +195,12 @@ class DesignService
         $images = [];
         foreach ($content['images'] as $image) {
             $images[] = [
-                'image'    => image_origin($image['image'] ?? ''),
-                'text'     => $image['text'][locale()]         ?? '',
-                'sub_text' => $image['sub_text'][locale()]     ?? '',
-                'link'     => $image['link'],
-                'url'      => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
+                'image'      => image_origin($image['image']['src'] ?? $image['image'] ?? ''),
+                'image_alt'  => $image['image']['alt'][locale()] ?? '',
+                'text'       => $image['text'][locale()]         ?? '',
+                'sub_text'   => $image['sub_text'][locale()]     ?? '',
+                'link'       => $image['link'],
+                'url'        => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
             ];
         }
 
@@ -289,12 +292,15 @@ class DesignService
 
         foreach ($images as $index => $image) {
             if (is_string($image['image'])) {
-                $imagePath               = $image['image'] ?? '';
-            } else {
-                $imagePath               = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
+                $imagePath = $image['image'];
+            } elseif (isset($image['image']['src'])) {
+                $imagePath = is_array($image['image']['src']) ? $image['image']['src'][locale()] ?? '' : $image['image']['src'];
+            } elseif (is_array($image['image'])) {
+                $imagePath = $image['image'][locale()] ?? '';
             }
 
-            $images[$index]['image'] = image_origin($imagePath);
+            $images[$index]['image'] = image_origin($imagePath ?? '');
+            $images[$index]['image_alt'] = $image['image']['alt'][locale()] ?? '';
             $images[$index]['type'] = strpos($imagePath, '.mp4') !== false ? 'video' : 'image';
             $images[$index]['sub_title']      = $image['sub_title'][locale()] ?? '';
             $images[$index]['title']          = $image['title'][locale()]     ?? '';

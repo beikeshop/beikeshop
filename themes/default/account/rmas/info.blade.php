@@ -22,7 +22,7 @@
             <div class="bg-light rounded-3 p-3 mb-4" style="background: #f6f9fc;">
               <div class="d-flex align-items-center">
                 <div class="left wh-70">
-                  <img src="{{ $orderProduct->image }}" class="img-fluid">
+                  <img src="{{ $orderProduct->image }}" alt="{{ $orderProduct->name }}" class="img-fluid">
                 </div>
                 <div class="right ms-3">
                   <div class="name mb-2 fw-bold fs-5">{{ $orderProduct->name }}</div>

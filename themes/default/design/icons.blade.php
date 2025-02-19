@@ -11,7 +11,7 @@
         <div class="col-4 col-lg-2">
           <a href="{{ $image['url'] ?: 'javascript:void(0)' }}" class="text-decoration-none">
             <div class="image-item d-flex justify-content-center mb-3">
-              <img src="{{ $image['image'] }}" class="img-fluid">
+              <img src="{{ $image['image'] }}" class="img-fluid seo-img" alt="{{ $image['image_alt'] ?? ''}}">
             </div>
             @if ($image['text'])
             <p class="text-center text-dark mb-2 mt-2 fs-5">{{ $image['text'] }}</p>

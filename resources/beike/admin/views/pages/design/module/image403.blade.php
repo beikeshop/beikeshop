@@ -17,14 +17,14 @@
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
-            <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image.src, 40, 40)" class="img-responsive">
           </div>
 
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image" :is-language="false"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
               <span>560 x 730</span>
             </div>
@@ -90,7 +90,10 @@ Vue.component('module-editor-image403', {
       sub_title: languagesFill('{{ __('admin/builder.sub_title') }}'),
       images: [
         {
-          image: 'catalog/demo/banner/banner-403-1.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-403-1.jpg',
+            alt: languagesFill(''),
+          },
           sub_title: languagesFill(''),
           title: languagesFill(''),
           show: true,
@@ -100,7 +103,10 @@ Vue.component('module-editor-image403', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-403-2.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-403-2.jpg',
+            alt: languagesFill(''),
+          },
           sub_title: languagesFill(''),
           title: languagesFill(''),
           show: false,
@@ -110,7 +116,10 @@ Vue.component('module-editor-image403', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-403-3.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-403-3.jpg',
+            alt: languagesFill(''),
+          },
           sub_title: languagesFill(''),
           title: languagesFill(''),
           show: false,
@@ -120,7 +129,10 @@ Vue.component('module-editor-image403', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-403-4.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-403-4.jpg',
+            alt: languagesFill(''),
+          },
           sub_title: languagesFill(''),
           title: languagesFill(''),
           show: false,

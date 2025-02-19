@@ -9,7 +9,7 @@
         <div class="col-6 col-md-4 col-lg-3">
           <a href="{{ $brand['url'] }}" class="text-decoration-none">
             <div class="brand-item">
-              <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" class="img-fluid">
+              <img src="{{ $brand['logo'] ?? asset('image/default/banner-1.png') }}" alt="{{ $brand['name'] }}" class="img-fluid seo-img">
             </div>
             <p class="text-center text-dark mb-0">{{ $brand['name'] }}</p>
           </a>

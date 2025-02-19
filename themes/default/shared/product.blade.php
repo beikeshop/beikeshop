@@ -8,6 +8,7 @@
           data-sizes="auto"
           data-src="{{ $product['images'][0] ?? image_resize('', 500, 500) }}"
           src="{{ image_resize('', 500, 500) }}"
+          alt="{{ $product['name'] }}"
           class="img-fluid lazyload">
       </div>
     </a>

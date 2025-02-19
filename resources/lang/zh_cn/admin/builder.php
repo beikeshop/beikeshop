@@ -274,4 +274,6 @@ return [
     'introduction'                     => '简介',
     'copyright_settings'               => '版权设置',
     'social_media_icons'               => '社交媒体图标',
+    'image_alt'               => '图片描述',
+    'image_alt_info'               => '图片描述也就是 alt 标签，提供了图片的替代文本描述，用于在图片无法显示时展示文字内容，增强可访问性和SEO效果。',
 ];

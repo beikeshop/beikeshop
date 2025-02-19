@@ -7,14 +7,14 @@
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image?.src?.['{{ locale() }}'], 40, 40)" class="img-responsive">
           </div>
 
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
               <span>1200 x 410</span>
             </div>
@@ -73,7 +73,10 @@ Vue.component('module-editor-image200', {
       module_size: 'container-fluid',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('https://dummyimage.com/1200x410/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/1200x410/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',
@@ -81,7 +84,10 @@ Vue.component('module-editor-image200', {
           }
         },
         {
-          image: languagesFill('https://dummyimage.com/1200x410/eeeeee'),
+          image: {
+            src: languagesFill('https://dummyimage.com/1200x410/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',

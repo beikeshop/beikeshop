@@ -95,7 +95,7 @@
             <el-collapse-item title="Logo/{{ __('admin/builder.text_introduce') }}" name="footer-content-left">
               <div class="module-edit-group">
                 <div class="module-edit-title">logo</div>
-                <pb-image-selector v-model="form.content.intro.logo" :is-language="false"></pb-image-selector>
+                <pb-image-selector :can-remove="true" v-model="form.content.intro.logo" :is-language="false"></pb-image-selector>
               </div>
               <div class="module-edit-group">
                 <div class="module-edit-title">{{ __('admin/builder.introduction') }}</div>
@@ -183,7 +183,7 @@
               </div>
               <div class="module-edit-group">
                 <div class="module-edit-title">{{ __('admin/builder.text_image') }}</div>
-                <pb-image-selector v-model="form.bottom.image" :is-language="false"></pb-image-selector>
+                <pb-image-selector v-model="form.bottom.image" :can-remove="true" :is-language="false"></pb-image-selector>
               </div>
             </el-collapse-item>
           </el-collapse>

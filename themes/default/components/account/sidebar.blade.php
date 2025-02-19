@@ -6,7 +6,7 @@
         <span class="btn-close" aria-label="Close"></span>
       </div>
       <div class="head">
-        <div class="portrait"><img src="{{ image_resize($customer->avatar, 200, 200) }}" class="img-fluid"></div>
+        <div class="portrait"><img src="{{ image_resize($customer->avatar, 200, 200) }}" alt="{{ $customer->name }}" class="img-fluid"></div>
         <div class="text-md-center">
           <div class="account-name">{{ $customer->name }}</div>
           @hookwrapper('account.sidebar.email')

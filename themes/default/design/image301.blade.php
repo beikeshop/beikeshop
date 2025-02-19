@@ -5,7 +5,7 @@
     <div class="{{ $content['module_size'] ?? 'container' }}">
       <div class="design-image-301">
         @foreach ($content['images'] as $item)
-        <a href="{{ $item['link']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
+        <a href="{{ $item['link']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $item['image'] }}" alt="{{ $item['image_alt'] ?? '' }}" class="img-fluid seo-img"></a>
         @endforeach
       </div>
     </div>

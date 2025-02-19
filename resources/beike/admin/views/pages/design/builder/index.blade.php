@@ -176,7 +176,7 @@
         }, 300),
 
         addModuleButtonClicked(code, moduleItemIndex = null, callback = null) {
-          const sourceModule = this.source.modules.find(e => e.code == code)
+          const sourceModule = JSON.parse(JSON.stringify(this.source.modules.find(e => e.code == code)));
           const module_id = bk.randomString(16)
           const _data = {
             code: code,
