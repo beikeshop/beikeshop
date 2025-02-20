@@ -98,7 +98,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 
 ---
 
-[![建站流程](https://beikeshop.com/readme/README-11.png)](https://beikeshop.com/demo)
+[![建站流程](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-11.png)](https://beikeshop.com/demo)
 # Website Setup Process
 
 **Installation Guide (For Non-developers)**
