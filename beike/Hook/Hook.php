@@ -18,9 +18,14 @@ class Hook
 
     protected bool $testing = false;
 
+    protected const HOOK = 1;
+
+    protected const HOOKWRAP = 2;
+
     /**
      * Return the hook answer.
      *
+     * @param int           $type        Hook type
      * @param string        $hook        Hook name
      * @param array         $params
      * @param callable|null $callback
@@ -28,7 +33,7 @@ class Hook
      *
      * @return null|void
      */
-    public function get(string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
+    public function get(int $type, string $hook, array $params = [], callable $callback = null, string $htmlContent = '')
     {
         $callbackObject = $this->createCallbackObject($callback, $params);
 
@@ -37,7 +42,7 @@ class Hook
             return $output;
         }
 
-        $output = $this->run($hook, $params, $callbackObject, $htmlContent);
+        $output = $this->run($type, $hook, $params, $callbackObject, $htmlContent);
 
         if (! $output) {
             $output = $callbackObject->call();
@@ -61,7 +66,7 @@ class Hook
             Debugbar::log("HOOK === @hook: {$hook}");
         }
 
-        return $this->get($hook, $params, $callback, $htmlContent);
+        return $this->get(self::HOOK, $hook, $params, $callback, $htmlContent);
     }
 
     /**
@@ -77,7 +82,7 @@ class Hook
             Debugbar::log("HOOK === @hookwrapper: {$hook}");
         }
 
-        return $this->get($hook, $params, $callback, $htmlContent);
+        return $this->get(self::HOOKWRAP, $hook, $params, $callback, $htmlContent);
     }
 
     /**
@@ -93,9 +98,9 @@ class Hook
     /**
      * Subscribe to hook.
      *
-     * @param string $hook Hook name
-     * @param $priority
-     * @param $function
+     * @param string $hook     Hook name
+     * @param        $priority
+     * @param        $function
      */
     public function listen(string $hook, $function, $priority = null)
     {
@@ -121,8 +126,8 @@ class Hook
             'function' => $function,
             'caller'   => [
                 'file'   => $caller['file'],
-                'line'  => $caller['line'],
-                'class' => Arr::get($caller, 'class'),
+                'line'   => $caller['line'],
+                'class'  => Arr::get($caller, 'class'),
             ],
         ];
 
@@ -207,6 +212,7 @@ class Hook
     /**
      * Run hook events.
      *
+     * @param int         $type     Hook type
      * @param string      $hook     Hook name
      * @param array       $params   Parameters
      * @param Callback    $callback Callback object
@@ -214,7 +220,7 @@ class Hook
      *
      * @return mixed
      */
-    protected function run(string $hook, array $params, Callback $callback, string $output = null): mixed
+    protected function run(int $type, string $hook, array $params, Callback $callback, string $output = null): mixed
     {
         array_unshift($params, $output);
         array_unshift($params, $callback);
@@ -228,7 +234,12 @@ class Hook
                         break;
                     }
 
-                    $output    = call_user_func_array($function['function'], $params);
+                    if ($type == self::HOOK) {
+                        $output    .= call_user_func_array($function['function'], $params);
+                    } else {
+                        $output    = call_user_func_array($function['function'], $params);
+                    }
+
                     $params[1] = $output;
                 }
             }
