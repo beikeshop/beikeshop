@@ -228,7 +228,7 @@ class Hook
                         break;
                     }
 
-                    $output    = call_user_func_array($function['function'], $params);
+                    $output    .= call_user_func_array($function['function'], $params);
                     $params[1] = $output;
                 }
             }
