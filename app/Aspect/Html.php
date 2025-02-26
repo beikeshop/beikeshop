@@ -68,7 +68,7 @@ class Html
 
         $config = $this->getConfig($files);
 
-        $pathKey = ltrim(str_replace(base_path(), '', $this->path), '/');
+        $pathKey = ltrim(str_replace([base_path(), '\\'], ['', '/'], $this->path), '/');
 
         $html = file_get_contents($this->path);
 
@@ -87,7 +87,7 @@ class Html
             (new Filesystem)->makeDirectory($newPath, recursive: true);
         }
 
-        $newPath = $newPath.'/'.$filename;
+        $newPath = $newPath . '/' . $filename;
 
         file_put_contents(
             $newPath,
@@ -143,8 +143,7 @@ class Html
             (new Filesystem)->makeDirectory($config, recursive: true);
         }
 
-        $config = $config.'/html.config';
-
+        $config = $config . '/html.config';
 
         if (file_exists($config) && ! config('app.debug')) {
             return json_decode(file_get_contents($config), true);
