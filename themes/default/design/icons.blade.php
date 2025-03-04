@@ -1,7 +1,7 @@
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @include('design._partial._module_tool')
 
-  <div class="module-info mb-3 mb-md-5">
+  <div class="module-info module-icons mb-3 mb-md-5">
     @if ($content['title'])
     <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
     @endif
