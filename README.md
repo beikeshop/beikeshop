@@ -1,5 +1,56 @@
 # BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce System
 
+<div style="text-align: center; max-width:600px; margin: 0 auto; vertical-align: middle;"> 
+    <div style="display: inline-block; margin-bottom: 10px">
+      <div style="display: flex;border-radius: 6px;overflow: hidden;">
+        <div style="background-color: #959494; padding: 6px;display: flex;align-items: center;">
+          <img style="display: inline-block;height: 18px;background-color: transparent;" src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo.png" alt="logo">
+        </div>
+      </div>
+    </div>
+    <div style="display: inline-block; margin-bottom: 10px;vertical-align: middle;">
+        <div style="display: flex;border-radius: 6px;overflow: hidden;">
+            <div style="background-color: #4F5B93; padding: 6px;display: flex;align-items: center;padding-right:5px">
+              <span style="display: inline-block;font-size: 12px;color:#fff;">PHP</span>
+            </div>
+            <span style="display: inline-block; color:#fff; background-color: #4F5B93; padding: 6px;font-size: 12px;padding-left:0">8.1+</span>
+        </div>
+    </div>
+    <div style="display: inline-block; margin-bottom: 10px">
+      <div style="display: flex;border-radius: 6px;overflow: hidden;">
+        <div style="background-color: #959494; padding: 6px;display: flex;align-items: center;">
+          <img style="display: inline-block;height: 18px;background-color: transparent;" src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/laravel.png" alt="logo">
+        </div>
+        <span style="display: inline-block; color:#fff; background-color: #f53003; padding: 6px;font-size: 12px;">Laravel10</span>
+      </div>
+    </div>
+    <br>
+    <div style="display: inline-block; margin-bottom: 10px">
+      <div style="display: flex;border-radius: 6px;overflow: hidden;">
+        <div style="background-color: #4b79b6; padding: 6px;display: flex;align-items: center;padding-right:5px">
+          <span style="display: inline-block;font-size: 12px;color:#fff;">release</span>
+        </div>
+        <span style="display: inline-block; color:#fff; background-color: #4b79b6; padding: 6px;font-size: 12px;padding-left:0">v1.5.6</span>
+      </div>
+    </div>
+    <div style="display: inline-block; margin-bottom: 10px">
+      <div style="display: flex;border-radius: 6px;overflow: hidden;">
+        <div style="background-color: #959494; padding: 6px;display: flex;align-items: center;">
+          <span style="display: inline-block;font-size: 12px;color:#fff;">Demo</span>
+        </div>
+        <span style="display: inline-block; color:#fff; background-color: #63b95b; padding: 6px;font-size: 12px;">Available</span>
+      </div>
+    </div>
+    <div style="display: inline-block; margin-bottom: 10px">
+      <div style="display: flex;border-radius: 6px;overflow: hidden;">
+        <div style="background-color: #F4AF69; padding: 6px;display: flex;align-items: center;">
+          <span style="display: inline-block;font-size: 12px;color:#fff;">Downloads</span>
+        </div>
+        <span style="display: inline-block; color:#fff; background-color: #ED9017; padding: 6px;font-size: 12px;">163k</span>
+      </div>
+    </div>
+</div>
+
 **Introduction to BeikeShop**
 BeikeShop is a globally leading open-source e-commerce system based on the Laravel framework, designed for the international trade and cross-border e-commerce industry.
 The system is 100% open-source! It supports a wide range of practical features, including multi-language, multi-currency, payment, logistics, and member management, making it easy for foreign trade businesses to expand their independent online stores.
