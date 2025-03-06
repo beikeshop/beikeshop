@@ -2,24 +2,7 @@
 
 <div align="center">
   <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-1.png" alt="logo">
-  </a>
-  <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-2.png?v=1122ef46" alt="logo">
-  </a>
-  <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-3.png" alt="logo">
-  </a>
-</div>
-<div align="center">
-  <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-4.png" alt="logo">
-  </a>
-  <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-5.png" alt="logo">
-  </a>
-  <a>
-    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-6.png" alt="logo">
+    <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/logo-all.png" alt="logo">
   </a>
 </div>
 
