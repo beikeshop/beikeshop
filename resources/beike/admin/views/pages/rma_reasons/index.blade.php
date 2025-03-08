@@ -3,6 +3,8 @@
 @section('title', __('admin/common.rma_reasons_index'))
 
 @section('content')
+  @hook('admin.rma_reasons.index.before')
+
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="d-flex justify-content-between mb-4">
@@ -51,6 +53,8 @@
       </el-form>
     </el-dialog>
   </div>
+
+  @hook('admin.rma_reasons.index.after')
 @endsection
 
 @push('footer')

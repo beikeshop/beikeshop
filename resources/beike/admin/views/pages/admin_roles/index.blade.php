@@ -19,6 +19,7 @@
           class="btn btn-primary">{{ __('admin/role.admin_roles_create') }}</a>
       </div>
       <div class="table-push">
+        @hook('admin.admin_roles.index.before')
         <table class="table">
           <thead>
             <tr>
@@ -26,6 +27,7 @@
               <th>{{ __('common.name') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th>{{ __('common.updated_at') }}</th>
+              @hook('admin.admin_roles.index.thead')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -37,6 +39,7 @@
                   <td>{{ $role->name }}</td>
                   <td>{{ $role->created_at }}</td>
                   <td>{{ $role->updated_at }}</td>
+                  @hook('admin.admin_roles.index.tbody')
                   <td class="text-end">
                     <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}"
                       class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
@@ -52,6 +55,7 @@
             @endif
           </tbody>
         </table>
+        @hook('admin.admin_roles.index.after')
       </div>
     </div>
   </div>

@@ -48,7 +48,7 @@ class SetLocaleFromSession
      *
      * @return string|null
      */
-    private function getLocaleFromUrl(): ?string
+    private function getLocaleFromUrl(Request $request): ?string
     {
         $uri = $_SERVER['REQUEST_URI'];
 
@@ -59,6 +59,12 @@ class SetLocaleFromSession
         // 如果路径的第一个部分是有效的语言代码，返回该语言代码
         if (count($segments) > 0 && in_array($segments[0], languages()->toArray())) {
             return $segments[0];
+        }
+
+        // 还要从url中的 locale 获取，兼容 app 那边使用 webview 访问 locale传参
+        $localeFromUrl = $request->query('locale');
+        if ($localeFromUrl && in_array($localeFromUrl, languages()->toArray())) {
+            return $localeFromUrl;
         }
 
         return null;

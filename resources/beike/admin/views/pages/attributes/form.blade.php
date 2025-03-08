@@ -17,7 +17,7 @@
                 >
                   <el-input size="mini" v-model="form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
                 </el-form-item>
-            
+
                 @hook('admin.product.attributes.edit.name.after')
 
               </el-form-item>

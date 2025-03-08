@@ -6,6 +6,7 @@
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <el-form ref="form" :rules="rules" :model="form" label-width="100px">
+        @hook('admin.admin_roles.edit.before')
         <el-form-item label="{{ __('admin/admin_roles.role_name') }}" prop="name">
           <el-input v-model="form.name" placeholder="{{ __('admin/admin_roles.role_name') }}" class="w-auto"></el-input>
         </el-form-item>
@@ -32,6 +33,8 @@
           </div>
         </el-form-item>
 
+        @hook('admin.admin_roles.edit.permission.after')
+
         <el-form-item label="{{ __('admin/admin_roles.plugin_permission') }}" prop="roles" v-if="form.plugin_permissions.length">
           <div class="roles-wrap border w-max-900">
             <div class="bg-dark p-2 text-dark bg-opacity-10 px-2">
@@ -54,10 +57,13 @@
           </div>
         </el-form-item>
 
+        @hook('admin.admin_roles.edit.plugin_permission.after')
+
         <el-form-item class="mt-5">
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
+        @hook('admin.admin_roles.edit.after')
       </el-form>
     </div>
   </div>

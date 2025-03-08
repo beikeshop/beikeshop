@@ -214,7 +214,7 @@ class OrderReportRepo
      */
     public static function getProductViews()
     {
-        $builder = Product::query()->with(['description', 'views'])
+        $builder = Product::query()->with(['description'])
             ->leftJoin('product_views', 'product_views.product_id', 'products.id')
             ->groupBy('products.id')
             ->select(['products.id'])

@@ -59,11 +59,11 @@
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
         <el-form-item label="{{ __('common.name') }}" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="code"></el-input>
+          <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
 
         <el-form-item label="{{ __('currency.code') }}" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="{{ __('currency.code') }}"></el-input>
+          <el-input v-model="dialog.form.code" :disabled="dialog.form.id != ''" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
         <el-form-item label="{{ __('currency.symbol_left') }}">
@@ -116,7 +116,7 @@
           index: 0,
           type: 'add',
           form: {
-            id: null,
+            id: '',
             name: '',
             code: '',
             symbol_left: '',
