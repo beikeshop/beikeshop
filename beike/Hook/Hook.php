@@ -238,9 +238,8 @@ class Hook
                         $output    .= call_user_func_array($function['function'], $params);
                     } else {
                         $output    = call_user_func_array($function['function'], $params);
+                        $params[1] = $output;
                     }
-
-                    $params[1] = $output;
                 }
             }
         }
