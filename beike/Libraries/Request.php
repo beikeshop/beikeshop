@@ -12,7 +12,8 @@ class Request extends \Illuminate\Http\Request
     public function getPathInfo(): string
     {
         $uri = $this->pathInfo ??= $this->preparePathInfo();
-        return  $this->replaceUri($uri);
+
+        return $this->replaceUri($uri);
     }
 
     /**
@@ -23,7 +24,8 @@ class Request extends \Illuminate\Http\Request
     public function getRequestUri(): string
     {
         $uri = $this->requestUri ??= $this->prepareRequestUri();
-        return  $this->replaceUri($uri);
+
+        return $this->replaceUri($uri);
     }
 
     /**
@@ -33,9 +35,9 @@ class Request extends \Illuminate\Http\Request
      */
     private function getLang(): array
     {
-        return array_map(function ($item){
-            return '/'.$item;
-        },config('app.langs'));
+        return array_map(function ($item) {
+            return '/' . $item;
+        }, config('app.langs'));
     }
 
     /**
@@ -48,23 +50,33 @@ class Request extends \Illuminate\Http\Request
     {
         $langs = $this->getLang();
         foreach ($langs as $lang) {
-            if (str_starts_with($uri,'/lang'.$lang))
-            {
+            if (str_starts_with($uri, '/lang' . $lang)) {
                 return $uri;
             }
         }
 
         session()->put('originalUri', $uri);
-        foreach ($langs  as $item)
-        {
+        foreach ($langs as $item) {
             $uriArr = explode('/', $uri);
-            if(count($uriArr) && in_array(trim($item,'/'), $uriArr))
-            {
-                $uri = str_replace($item, '',$uri);
+            if (count($uriArr) && in_array(trim($item, '/'), $uriArr)) {
+                $uri = str_replace($item, '', $uri);
+
                 break;
             }
         }
+
         return $uri;
     }
 
+    public function url(): string
+    {
+        $host = request()->getSchemeAndHttpHost();
+        $uri  = request()->requestUri;
+
+        if (null !== $qs = $this->getQueryString()) {
+            $qs = '?' . $qs;
+        }
+
+        return rtrim(preg_replace('/\?.*/', '', $host . $uri) . $qs, '/');
+    }
 }
