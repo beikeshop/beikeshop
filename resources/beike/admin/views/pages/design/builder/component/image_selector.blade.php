@@ -110,10 +110,12 @@
 
         if (this.isLanguage) {
           this.languages.forEach(e => {
-            if (!this.image.src?.[e.code]) {
-              if (this.isAlt) {
+            if (this.isAlt) {
+              if (!this.image.src?.[e.code]) {
                 Vue.set(this.image.src, e.code, '');
-              } else {
+              }
+            } else {
+              if (!this.image?.[e.code]) {
                 Vue.set(this.image, e.code, '');
               }
             }

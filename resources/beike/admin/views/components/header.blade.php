@@ -201,7 +201,7 @@
             title: '{{ __('common.text_hint') }}',
             btn: ['{{ __('common.cancel') }}', '{{ __('common.confirm') }}'],
             btn2: function (index) {
-              window.open('https://beikeshop.com/vip/subscription?type=tab-license&domain=' + config.app_url)
+              window.open('{{ beike_url() }}/vip/subscription?type=tab-license&domain=' + config.app_url)
               layer.close(index);
             }
           })
