@@ -136,7 +136,7 @@ If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customiz
 **Installation Guide (For Developers)**
 
 1. Open the command line and clone the repository:
-    `git clone https://gitee.com/beikeshop/beikeshop.git`
+    `git clone https://github.com/beikeshop/beikeshop.git`
 2. Enter the BeikeShop directory and run `composer install` to install third-party packages.
 3. Run `cp .env.example .env` to create the configuration file.
 4. Run `npm install` (Node version 16+ required), followed by `npm run prod` to compile frontend JS and CSS files.
