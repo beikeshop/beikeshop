@@ -8,7 +8,7 @@
             <el-input v-model="form.name" placeholder="{{ __('address.name') }}"></el-input>
           </el-form-item>
           @if (!current_customer())
-          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'" class="w-50 ms-3">
+          <el-form-item label="{{ __('common.email') }}" prop="email" class="w-50 ms-3">
             <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
           </el-form-item>
           @else
