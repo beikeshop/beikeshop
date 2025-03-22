@@ -40,7 +40,14 @@ function setting($key, $default = null)
  */
 function system_setting($key, $default = null)
 {
-    return setting("system.{$key}", $default);
+    $data = [
+        'key'     => $key,
+        'default' => $default,
+        'setting' => setting("system.{$key}", $default)
+    ];
+    $data = hook_filter('helpers.system_setting', $data);
+
+    return $data['setting'];
 }
 
 /**
