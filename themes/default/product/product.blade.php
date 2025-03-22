@@ -27,6 +27,7 @@
   <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
     <div class="row mb-md-5 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-2">
+        @hookwrapper('product.detail.images')
         <div class="product-image d-flex align-items-start">
           @if(!is_mobile())
             <div class="left {{ $iframeClass }}"  v-if="images.length">
@@ -60,6 +61,7 @@
             </div>
           @endif
         </div>
+        @endhookwrapper
       </div>
 
       <div class="col-12 col-lg-6">
