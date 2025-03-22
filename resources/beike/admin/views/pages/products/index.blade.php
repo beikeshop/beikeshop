@@ -74,6 +74,7 @@
 
           @if ($type != 'trashed' && $products->total())
             <div class="right nowrap">
+              @hook('admin.product.batch_btns.before')
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length" @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
               @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
