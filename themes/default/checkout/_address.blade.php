@@ -225,7 +225,7 @@
         }
 
         this.dialogAddress.type = type
-        this.$refs['address-dialog'].editAddress(addresses, this.dialogAddress.type)
+        this.$refs['address-dialog'].editAddress(addresses, this.dialogAddress.type, this.shippingRequired)
       },
 
       onAddressDialogChange(form) {

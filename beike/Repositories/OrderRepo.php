@@ -221,7 +221,7 @@ class OrderRepo
         } else {
             $shippingAddress = new Address($current['guest_shipping_address'] ?? []);
             $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
-            $email           = $current['guest_shipping_address']['email'] ?? '';
+            $email           = ($current['guest_shipping_address']['email'] ?? $current['guest_payment_address']['email']) ?? '';
         }
         $shippingAddress->country_name = $shippingAddress->country->name ?? '';
         $shippingAddress->country_id   = $shippingAddress->country->id   ?? 0;
