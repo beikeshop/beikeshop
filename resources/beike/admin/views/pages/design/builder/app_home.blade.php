@@ -25,6 +25,10 @@
 </style>
 @endpush
 
+@section('page-title-after')
+<a class="btn btn-outline-primary btn-sm" href="{{ beike_url() }}/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>
+@endsection
+
 @section('page-title-right')
 <button type="button" class="btn w-min-100 btn-primary save-btn">{{ __('common.save') }}</button>
 @endsection
@@ -98,9 +102,7 @@
     </div>
   </div>
 </div>
-<script>
-  $('.page-title').append('<a class="ms-3 btn btn-outline-primary btn-sm" href="{{ beike_url() }}/solution/app" target="_blank">{{ __('admin/app_builder.to_buy') }}</a>')
-</script>
+
 @include('admin::pages.design.builder.app_component.image')
 @include('admin::pages.design.builder.app_component.slideshow')
 @include('admin::pages.design.builder.app_component.icons')

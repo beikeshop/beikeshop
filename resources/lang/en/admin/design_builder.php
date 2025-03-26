@@ -28,5 +28,6 @@ return [
     'design_footer_index'       => 'Last page decoration',
     'design_app_home_index'     => 'APP homepage design',
     'module_img_text_slideshow' => 'Graphic slides',
-    'module_img_text_banner'    => 'Graphic banner'
+    'module_img_text_banner'    => 'Graphic banner',
+    'app_push_index'         => 'APP message push',
 ];

@@ -454,7 +454,7 @@ class PermissionRepo
      */
     private function getDesignPermissions(): array
     {
-        $routes = ['theme_index', 'design_menu_index', 'design_index', 'design_header_index', 'design_footer_index', 'design_app_home_index'];
+        $routes = ['theme_index', 'design_menu_index', 'design_index', 'design_header_index', 'design_footer_index', 'design_app_home_index', 'app_push_index'];
         $items  = $this->getPermissionList('design_builder', $routes);
 
         return hook_filter('role.design_permissions', $items);

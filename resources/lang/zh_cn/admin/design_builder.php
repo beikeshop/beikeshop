@@ -28,5 +28,6 @@ return [
     'design_footer_index'       => '尾页装修',
     'design_app_home_index'     => 'APP首页设计',
     'module_img_text_slideshow' => '图文幻灯片',
-    'module_img_text_banner'    => '图文横幅'
+    'module_img_text_banner'    => '图文横幅',
+    'app_push_index'         => 'APP消息推送',
 ];

@@ -63,6 +63,7 @@ return [
     'license_services'                 => 'Technical Services',
 
     // sidebar
+    'app_push_index'                         => 'APP Message Push',
     'account_index'                          => 'Personal Center',
     'multi_filter_index'                     => 'Advanced Filter',
     'theme_index'                            => 'Theme Setting',

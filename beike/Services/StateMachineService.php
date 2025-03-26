@@ -17,6 +17,8 @@ use Beike\Models\OrderShipment;
 use Beike\Models\Product;
 use Beike\Repositories\OrderPaymentRepo;
 use Throwable;
+use beike\Models\Customer;
+use Beike\Admin\Services\UniPushService;
 
 class StateMachineService
 {
@@ -230,6 +232,27 @@ class StateMachineService
         }
 
         hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
+
+        // app 推送
+        if (system_setting('base.unipush_api_url') && system_setting('base.order_auto_app_push')) {
+            $customer = Customer::find($order->customer_id);
+            $cid = $customer->cid ?? 0;
+
+            if ($cid) {
+                $message = [
+                    'push_clientid' => $cid,
+                    'customer_id' => $order->customer_id,
+                    'title' => trans('admin/app_push.order_status_update_title'),
+                    'content' => trans('admin/app_push.order_status_update_info') . trans('order.' . $status),
+                    'link' => [
+                        'type' => 'order',
+                        'value' => $order->id,
+                    ]
+                ];
+
+                UniPushService::getInstance()->pushOrderStatus($message);
+            }
+        }
 
         if (! $order->shipping_method_code && $status == self::PAID) {
             $this->changeStatus(self::COMPLETED, $comment, $notify);

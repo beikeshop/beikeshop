@@ -85,6 +85,7 @@ return [
     'design_header_index'    => '页头装修',
     'design_menu_index'      => '导航配置',
     'design_app_home_index'  => 'APP首页设计',
+    'app_push_index'         => 'APP消息推送',
     'categories_index'       => '商品分类',
     'products_index'         => '商品管理',
     'products_trashed'       => '回收站',
