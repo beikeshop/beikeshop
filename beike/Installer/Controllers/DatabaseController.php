@@ -33,23 +33,23 @@ class DatabaseController extends BaseController
     {
         $this->checkInstalled();
         $params = request()->all();
-        if ($params['database_connection'] != 'pgsql'){
-            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-            $rows     = DB::select('SHOW TABLES');
-            $database = config('database.connections.mysql.database');
-            $tables   = array_column($rows, 'Tables_in_' . $database);
-            foreach ($tables as $table) {
-                Schema::drop($table);
-            }
-            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
-        }
-
-        if ($params['database_connection'] == 'pgsql'){
-            if ($this->getTableSum() > 0)
-            {
-                return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' =>__('installer::installer_messages.environment.table_already_exists')]);
-            }
-        }
+//        if ($params['database_connection'] != 'pgsql'){
+//            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+//            $rows     = DB::select('SHOW TABLES');
+//            $database = config('database.connections.mysql.database');
+//            $tables   = array_column($rows, 'Tables_in_' . $database);
+//            foreach ($tables as $table) {
+//                Schema::drop($table);
+//            }
+//            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+//        }
+//
+//        if ($params['database_connection'] == 'pgsql'){
+//            if ($this->getTableSum() > 0)
+//            {
+//                return redirect()->route('installer.environment')->withInput($params)->withErrors(['error' =>__('installer::installer_messages.environment.table_already_exists')]);
+//            }
+//        }
 
         try {
             $response = $this->databaseManager->migrateAndSeed();
