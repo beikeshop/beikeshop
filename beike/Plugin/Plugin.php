@@ -80,9 +80,9 @@ class Plugin implements \ArrayAccess, Arrayable
      */
     public function setType(string $type): self
     {
-        if (! in_array($type, self::TYPES)) {
-            throw new \Exception('Invalid plugin type, must be one of ' . implode(',', self::TYPES));
-        }
+        // if (! in_array($type, self::TYPES)) {
+        //     throw new \Exception('Invalid plugin type, must be one of ' . implode(',', self::TYPES));
+        // }
         $this->type = $type;
 
         return $this;
