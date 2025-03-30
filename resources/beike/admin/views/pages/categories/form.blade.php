@@ -24,7 +24,7 @@
         @hook('admin.product.categories.edit.content.after')
         <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" :value="old('position', $category->position ?? 0)" />
 
-        <x-admin-form-image name="image" title="{{ __('admin/category.category_image') }}" :value="old('image', $category->image ?? '')">
+        <x-admin-form-image :is-remove="true" name="image" title="{{ __('admin/category.category_image') }}" :value="old('image', $category->image ?? '')">
           <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 300*300</div>
         </x-admin-form-image>
 
