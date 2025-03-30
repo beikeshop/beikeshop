@@ -5,6 +5,7 @@ namespace Beike\Admin\View\Components\Form;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+use Beike\Repositories\LanguageRepo;
 
 class InputLocale extends Component
 {
@@ -35,7 +36,8 @@ class InputLocale extends Component
 
     public function render()
     {
-        return view('admin::components.form.input-locale');
+        $data['languages'] = LanguageRepo::all();
+        return view('admin::components.form.input-locale', $data);
     }
 
     public function formatName(string $code)
