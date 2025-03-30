@@ -9,8 +9,14 @@
   @endhookwrapper
 @endsection
 
-@section('content')
+@section('page-title-after')
+<div class="position-relative w-min-300">
+  <div class="position-absolute top-50 start-0 translate-middle-y" style="padding-left: 14px;"><i class="bi bi-search"></i></div>
+  <input type="text" class="form-control search-plugin-input" style="padding-left: 36px;" placeholder="{{ __('admin/builder.text_search') }}">
+</div>
+@endsection
 
+@section('content')
   <div id="plugins-app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <div class="mt-4 table-push" style="">
@@ -34,8 +40,8 @@
               <div class="plugin-describe d-flex align-items-center">
                 <div class="me-2" style="flex: 0 0 50px;"><img :src="plugin.icon" class="img-fluid border"></div>
                 <div>
-                  <h6>@{{ plugin.name }}</h6>
-                  <div class="" v-html="plugin.description"></div>
+                  <h6 class="plugin-name">@{{ plugin.name }}</h6>
+                  <div class="plugin-description" v-html="plugin.description"></div>
                 </div>
               </div>
             </td>
@@ -83,11 +89,13 @@
 
 @push('footer')
   <script>
+    const plugins = @json($plugins ?? []);
+
     let app = new Vue({
       el: '#plugins-app',
 
       data: {
-        plugins: @json($plugins ?? []),
+        plugins: plugins,
       },
 
       beforeMount() {
@@ -159,5 +167,29 @@
         },
       }
     })
+
+    function debounce(fn, delay) {
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+
+    const filterPlugins = debounce(function () {
+      const keyword = $('.search-plugin-input').val().toLowerCase();
+
+      if (!keyword) {
+        app.plugins = plugins;
+        return;
+      }
+
+      app.plugins = plugins.filter(plugin =>
+        plugin.name.toLowerCase().includes(keyword) ||
+        plugin.description.toLowerCase().includes(keyword)
+      );
+    }, 300);
+
+    $('.search-plugin-input').on('input', filterPlugins);
   </script>
 @endpush
