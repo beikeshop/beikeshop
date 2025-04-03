@@ -8,7 +8,7 @@
 
 window.axios = require('axios');
 
-const instance = axios.create({
+const axiosApi = axios.create({
   baseURL: document.querySelector('base').href, // 自动设置 base
   timeout: 0,
 });
@@ -19,6 +19,8 @@ export default {
    * @param url 接口路由
    * @returns {AxiosPromise<any>}
    */
+  axiosApi,
+
   get (url, params, {hmsg, hload, base}={}) {
     return this.request('get', url, params = params, {hmsg, hload, base});
   },
@@ -77,7 +79,7 @@ export default {
     }
 
     return new Promise((resolve, reject) => {
-      instance({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
+      axiosApi({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
         if (res) {
           resolve(res.data);
         } else { // 其他情况返回错误信息，根据需要处理
