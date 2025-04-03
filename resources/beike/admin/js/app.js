@@ -22,7 +22,8 @@ $(document).on('click', '.open-file-manager', function(event) {
   bk.fileManagerIframe(images => {
     if (!$(this).find('img').length) {
       $(this).append('<img src="' + images[0].url + '" class="img-fluid">');
-      $(this).find('i').remove()
+      $(this).find('.img-components-remove').removeClass('d-none');
+      $(this).find('i.icon-plus').remove();
     } else {
       $(this).find('img').prop('src', images[0].url);
     }

@@ -9,8 +9,11 @@
 
 <div class="card" id="app">
   <div class="card-body h-min-600">
+    @hook('admin.page_categories.list.content.before')
     <div class="d-flex justify-content-between mb-4">
+      @hook('admin.page_categories.list.content.top_buttons.before')
       <a href="{{ admin_route('page_categories.create') }}" class="btn btn-primary">{{ __('common.add') }}</a>
+      @hook('admin.page_categories.list.content.top_buttons.after')
     </div>
     <div class="table-push">
       @if (count($page_categories_format))
@@ -42,6 +45,7 @@
             <td>{{ $item['updated_at'] }}</td>
             @hook('admin.page.list.column_value')
             <td class="text-end">
+              @hook('admin.page_categories.list.action.before')
               <a href="{{ admin_route('page_categories.edit',$item['id']) }}"
                 class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
               <button class="btn btn-outline-danger btn-sm delete-btn" type='button' data-id="{{ $item['id'] }}">{{
@@ -58,6 +62,7 @@
     </div>
 
     {{ $page_categories->links('admin::vendor/pagination/bootstrap-4') }}
+    @hook('admin.page_categories.list.content.footer')
   </div>
 </div>
 
@@ -66,6 +71,8 @@
 
 @push('footer')
 <script>
+  @hook('admin.page_categories.list.script.before')
+
   $('.delete-btn').click(function(event) {
     const id = $(this).data('id');
     const self = $(this);
@@ -82,5 +89,7 @@
       }
     })
   });
+
+  @hook('admin.page_categories.list.script.after')
 </script>
 @endpush

@@ -71,7 +71,9 @@
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin.admin_roles.edit.script.before')
+
+    var app = new Vue({
       el: '#app',
 
       data: {
@@ -80,22 +82,14 @@
           name: @json($role->name ?? ''),
           core_permissions: @json($core_permissions ?? []),
           plugin_permissions: @json($plugin_permissions ?? []),
-        },
-
-        source: {
-
+          @hook('admin.admin_roles.edit.vue.data')
         },
 
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/admin_roles.role_name')]) }}',trigger: 'blur'}, ],
-        }
-      },
+        },
 
-      beforeMount() {
-        // this.source.languages.forEach(e => {
-        //   this.$set(this.form.name, e.code, '')
-        //   this.$set(this.form.description, e.code, '')
-        // })
+        @hook('admin.admin_roles.edit.vue.options')
       },
 
       methods: {
@@ -132,8 +126,14 @@
             })
           });
         },
-      }
-    })
+
+        @hook('admin.admin_roles.edit.vue.methods')
+      },
+
+      @hook('admin.admin_roles.edit.vue.options')
+    });
+
+    @hook('admin.admin_roles.edit.script.after')
   </script>
 
   <style>

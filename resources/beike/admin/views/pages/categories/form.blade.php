@@ -6,6 +6,8 @@
   <div id="category-app" class="card">
     <div class="card-header">{{ __('admin/category.edit_category') }}</div>
     <div class="card-body">
+      @hook('admin.categories.form.before')
+
       <form class="needs-validation" novalidate action="{{ admin_route($category->id ? 'categories.update' : 'categories.store', $category) }}"
         method="POST">
         @csrf
@@ -24,9 +26,13 @@
         @hook('admin.product.categories.edit.content.after')
         <x-admin-form-input name="position" title="{{ __('common.sort_order') }}" :value="old('position', $category->position ?? 0)" />
 
+        @hook('admin.categories.form.name.after')
+
         <x-admin-form-image :is-remove="true" name="image" title="{{ __('admin/category.category_image') }}" :value="old('image', $category->image ?? '')">
           <div class="help-text font-size-12 lh-base">{{ __('common.recommend_size') }} 300*300</div>
         </x-admin-form-image>
+
+        @hook('admin.categories.form.image.after')
 
         <x-admin::form.row title="{{ __('admin/category.parent_category') }}">
           @php
@@ -45,6 +51,8 @@
             @endforeach
           </select>
         </x-admin::form.row>
+
+        @hook('admin.categories.form.parent.after')
 
         <x-admin::form.row title="Meta title">
           @foreach ($languages as $language)
@@ -87,11 +95,15 @@
 
         <x-admin-form-switch title="{{ __('common.status') }}" name="active" :value="old('active', $category->active ?? 1)" />
 
+        @hook('admin.categories.form.switch.after')
+
         <x-admin::form.row>
           <button type="submit" class="btn btn-primary w-min-100 btn-lg mt-3">{{ __('common.save') }}</button>
+          @hook('admin.categories.form.submit.after')
         </x-admin::form.row>
       </form>
 
+      @hook('admin.categories.form.after')
     </div>
   </div>
 @endsection

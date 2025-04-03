@@ -1,3 +1,4 @@
+@hook('components.breadcrumbs.before')
 @unless ($breadcrumbs->isEmpty())
 <div class="breadcrumb-wrap">
   <div class="container{{ $isFull ?? false ? '-fluid' : '' }}">
@@ -15,3 +16,4 @@
   </div>
 </div>
 @endunless
+@hook('components.breadcrumbs.after')

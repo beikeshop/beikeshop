@@ -47,22 +47,30 @@
       {!! system_setting('base.head_code') !!}
     @endif
 
-    @hook('layout.header.code')
+    @hook('layout.master.header.code')
 
     @stack('header')
   </head>
 <body class="@yield('body-class') {{ request('_from') }}">
   @if (!request('iframe') && request('_from') != 'app')
+    @hook('layout.master.header.before')
     @include('layout.header')
+    @hook('layout.master.header.after')
   @endif
 
+  @hook('layout.master.content.before')
   @yield('content')
+  @hook('layout.master.content.after')
 
   @if (!request('iframe') && request('_from') != 'app')
+    @hook('layout.master.footer.before')
     @include('layout.footer')
+    @hook('layout.master.footer.after')
   @endif
 
   <script>
+    @hook('layout.master.script.before')
+
     const config = {
       isLogin: !!{{ current_customer()->id ?? 'null' }},
       guestCheckout: !!{{ system_setting('base.guest_checkout', 1) }},
@@ -89,6 +97,7 @@
   @endif
 
   @stack('add-scripts')
+  @hook('layout.master.footer.code')
 </body>
 <!-- BeikeShop v{{ config('beike.version') }}({{ config('beike.build') }}) -->
 </html>

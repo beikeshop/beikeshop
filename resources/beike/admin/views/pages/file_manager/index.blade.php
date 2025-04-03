@@ -97,6 +97,7 @@
       <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
         <div class="content-head">
           <div class="left d-lg-flex">
+            @hook('admin.file_manager.content.head.btns.before')
             <el-button class="me-4 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
               :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
             <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view" @click="viewImages">{{
@@ -142,6 +143,7 @@
             </el-popover>
             <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{
               __('admin/file_manager.upload_files') }}</el-button>
+            @hook('admin.file_manager.content_head.right.after')
           </div>
         </div>
         <div v-if="images.length" class="content-center"
@@ -213,6 +215,7 @@
   @stack('admin.file_manager.footer')
 
   <script>
+    @hook('admin.file_manager.script.before')
     var callback = null;
 
     var app = new Vue({
@@ -274,6 +277,8 @@
         paneLengthValue() {
           return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
         },
+
+        @hook('admin.file_manager.vue.computed')
       },
       // 侦听器
       watch: {
@@ -291,6 +296,8 @@
             item.selected = indexs.includes(index);
           });
         },
+
+        @hook('admin.file_manager.vue.watch')
       },
 
       created() {
@@ -313,6 +320,8 @@
         if (fileManagerFilter.order) {
           this.filter.order = fileManagerFilter.order;
         }
+
+        @hook('admin.file_manager.created')
       },
 
       // 实例被挂载后调用
@@ -343,6 +352,8 @@
             }
           })
         }
+
+        @hook('admin.file_manager.mounted')
       },
 
       methods: {
@@ -813,6 +824,8 @@
         }
         @stack('admin.file_manager.vue.method')
       },
+
+      @hook('admin.file_manager.vue.options')
     })
 
     $('#filemanager-wrap-app').click(function () {

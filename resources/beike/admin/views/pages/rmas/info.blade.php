@@ -3,6 +3,7 @@
 @section('title', __('admin/rma.index'))
 
 @section('content')
+  @hook('admin.rmas.info.content.before')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/rma.rma_details') }}</h6></div>
     <div class="card-body">
@@ -10,6 +11,7 @@
         <div class="col-lg-4 col-12 order-top-info">
           <table class="table table-borderless">
             <tbody>
+              @hook('admin.rmas.info.top.table.before')
               <tr>
                 <td>ID：</td>
                 <td>{{ $rma['id'] }}</td>
@@ -30,6 +32,7 @@
                   <td>{{ __('admin/rma.order_number') }}：</td>
                   <td><a href="{{ admin_route('orders.show', ['order' => $rma['order_id']]) }}">{{ $rma['order_number'] }}</a></td>
               </tr>
+              @hook('admin.rmas.info.top.table.after')
             </tbody>
           </table>
         </div>
@@ -79,6 +82,7 @@
     <div class="card-header"><h6 class="card-title">{{ __('common.status') }}</h6></div>
     <div class="card-body" id="app">
       <el-form ref="form" :model="form" :rules="rules" label-width="140px">
+        @hook('admin.rmas.info.status.form.before')
         <el-form-item label="{{ __('admin/rma.current_state') }}">
           {{ $rma['status'] }}
         </el-form-item>
@@ -92,13 +96,10 @@
             </el-option>
           </el-select>
         </el-form-item>
-        {{-- <el-form-item label="通知客户">
-          <el-switch v-model="form.notify">
-          </el-switch>
-        </el-form-item> --}}
         <el-form-item label="{{ __('admin/rma.remarks') }}">
           <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
         </el-form-item>
+        @hook('admin.rmas.info.status.form.after')
         <el-form-item>
           <el-button type="primary" @click="submitForm('form')">{{ __('admin/rma.update_status') }}</el-button>
         </el-form-item>
@@ -115,6 +116,7 @@
             <tr>
               <th>{{ __('order.history_status') }}</th>
               <th width="60%">{{ __('order.history_comment') }}</th>
+              @hook('admin.rmas.info.history.table.headers')
               <th>{{ __('order.history_created_at') }}</th>
             </tr>
           </thead>
@@ -123,6 +125,7 @@
               <tr>
                 <td>{{ $history['status'] }}</td>
                 <td>{{ $history['comment'] }}</td>
+                @hook('admin.rmas.info.history.table.body')
                 <td>{{ $history['created_at'] }}</td>
               </tr>
             @endforeach
@@ -131,11 +134,14 @@
       </div>
     </div>
   </div>
+  @hook('admin.rmas.info.content.after')
 @endsection
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin.rmas.info.script.before')
+
+    var app = new Vue({
       el: '#app',
 
       data: {
@@ -149,7 +155,9 @@
 
         rules: {
           status: [{required: true, message: '{{ __('common.error_required', ['name' => __('common.status')] ) }}', trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.rmas.info.vue.data')
       },
 
       beforeMount() {
@@ -160,6 +168,8 @@
             label: statuses[key]
           }
         });
+
+        @hook('admin.rmas.info.vue.beforeMount')
       },
 
       methods: {
@@ -176,9 +186,15 @@
               });
             })
           });
-        }
-      }
-    })
+        },
+
+        @hook('admin.rmas.info.vue.methods')
+      },
+
+      @hook('admin.rmas.info.vue.options')
+    });
+
+    @hook('admin.rmas.info.script.after')
   </script>
 @endpush
 

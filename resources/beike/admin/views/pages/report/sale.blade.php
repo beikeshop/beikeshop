@@ -9,6 +9,7 @@
 @endpush
 
 @section('content')
+  @hook('admin.report_sale.index.content.before')
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
       <div>{{ __('admin/dashboard.order_report') }}</div>
@@ -134,6 +135,7 @@
       </div>
     </div>
   </div>
+  @hook('admin.report_sale.index.content.after')
 @endsection
 
 @push('footer')

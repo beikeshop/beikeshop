@@ -4,12 +4,14 @@
 
     <a href="{{ $product['url'] }}">
       <div class="image-old">
+        @hookwrapper('product_list.item.image')
         <img
           data-sizes="auto"
           data-src="{{ $product['images'][0] ?? image_resize('', 500, 500) }}"
           src="{{ image_resize('', 500, 500) }}"
           alt="{{ $product['name'] }}"
           class="img-fluid lazyload">
+        @endhookwrapper
       </div>
     </a>
     @if (!request('style_list') || request('style_list') == 'grid')

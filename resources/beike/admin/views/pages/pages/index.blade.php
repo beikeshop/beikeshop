@@ -71,6 +71,8 @@
 
 @push('footer')
 <script>
+  @hook('admin.pages.list.script.before')
+
   $('.delete-btn').click(function(event) {
     const id = $(this).data('id');
     const self = $(this);
@@ -87,5 +89,7 @@
       }
     })
   });
+
+  @hook('admin.pages.list.script.after')
 </script>
 @endpush

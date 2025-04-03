@@ -5,6 +5,7 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
+      @hook('admin.currency.index.content.before')
       <div class="d-flex justify-content-between mb-4">
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
         <a href="{{ admin_route('settings.index') }}?tab=tab-checkout&line=rate_api_key" class="btn w-min-100 btn-outline-info" target="_blank">{{ __('admin/setting.rate_api_key') }}</a>
@@ -22,6 +23,7 @@
               <th>{{ __('currency.value') }}</th>
               <th>{{ __('currency.latest_value') }}</th>
               <th>{{ __('common.status') }}</th>
+              @hook('admin.currency.index.table.headers')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -42,9 +44,12 @@
                 <span v-if="item.status" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
+              @hook('admin.currency.index.table.body')
               <td class="text-end">
+                @hook('admin.currency.index.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" :disabled="item.code == defaultCurrency" type="button" @click="deleteCustomer(item.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin.currency.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
@@ -58,6 +63,8 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
+        @hook('admin.currency.index.dialog.form.before')
+
         <el-form-item label="{{ __('common.name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
@@ -90,9 +97,13 @@
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="currencies[dialog.index].code == defaultCurrency"></el-switch>
         </el-form-item>
 
+        @hook('admin.currency.index.dialog.form.after')
+
         <el-form-item class="mt-5">
+          @hook('admin.currency.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="dialog.show = false">{{ __('common.cancel') }}</el-button>
+          @hook('admin.currency.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -103,7 +114,9 @@
   @include('admin::shared.vue-image')
 
   <script>
-    new Vue({
+    @hook('admin.currency.index.script.before')
+
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -133,7 +146,9 @@
           code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}', trigger: 'blur'}, ],
           value: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.value')]) }}',trigger: 'blur'}, ],
           decimal_place: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.decimal_place')]) }}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.currency.index.vue.data')
       },
 
       methods: {
@@ -200,8 +215,14 @@
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           // this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.currency.index.vue.methods')
+      },
+
+      @hook('admin.currency.index.vue.options')
     })
+
+    @hook('admin.currency.index.script.after')
   </script>
 @endpush

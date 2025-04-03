@@ -7,13 +7,17 @@
 @endsection
 
 @section('content')
+  @hook('admin.tax_rates.index.content.before')
+
   <ul class="nav-bordered nav nav-tabs mb-3">
+    @hook('admin.tax_rates.index.tabs.before')
     <li class="nav-item">
       <a class="nav-link" aria-current="page" href="{{ admin_route('tax_classes.index') }}">{{ __('admin/tax_rate.tax_classes_index') }}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" href="{{ admin_route('tax_rates.index') }}">{{ __('admin/tax_rate.index') }}</a>
     </li>
+    @hook('admin.tax_rates.index.tabs.after')
   </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
@@ -32,6 +36,7 @@
               <th>{{ __('admin/tax_rate.area') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th>{{ __('common.updated_at') }}</th>
+              @hook('admin.tax_rates.index.table.headers')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -44,9 +49,12 @@
               <td>@{{ tax.region ? tax.region.name : '' }}</td>
               <td>@{{ tax.created_at }}</td>
               <td>@{{ tax.updated_at }}</td>
+              @hook('admin.tax_rates.index.table.body')
               <td class="text-end">
+                @hook('admin.tax_rates.index.table.action.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin.tax_rates.index.table.action.after')
               </td>
             </tr>
           </tbody>
@@ -61,6 +69,7 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
+        @hook('admin.tax_rates.index.dialog.form.before')
         <el-form-item label="{{ __('admin/tax_rate.tax') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('admin/tax_rate.tax') }}"></el-input>
         </el-form-item>
@@ -82,10 +91,13 @@
             <el-option v-for="region in source.regions" :key="region.value" :label="region.name" :value="region.id"></el-option>
           </el-select>
         </el-form-item>
+        @hook('admin.tax_rates.index.dialog.form.after')
 
         <el-form-item class="mt-5">
+          @hook('admin.tax_rates.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.tax_rates.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -94,7 +106,9 @@
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin.tax_rates.index.script.before')
+
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -122,7 +136,9 @@
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax')])}}',trigger: 'blur'}, ],
           rate: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/tax_rate.tax_rate')])}}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.tax_rates.index.vue.data')
       },
 
       methods: {
@@ -192,8 +208,14 @@
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.type = 'percent';
           this.dialog.show = false
-        }
-      }
-    })
+        },
+
+        @hook('admin.tax_rates.index.vue.methods')
+      },
+
+      @hook('admin.tax_rates.index.vue.options')
+    });
+
+    @hook('admin.tax_rates.index.script.after')
   </script>
 @endpush

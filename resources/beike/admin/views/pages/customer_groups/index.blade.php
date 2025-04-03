@@ -5,8 +5,11 @@
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
+      @hook('admin.customer_group.index.content.before')
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.customer_group.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/customer_group.customer_groups_create') }}</button>
+        @hook('admin.customer_group.index.content.top_buttons.after')
       </div>
       <div class="table-push">
         <table class="table">
@@ -15,8 +18,8 @@
               <th>ID</th>
               <th>{{ __('common.name') }}</th>
               <th>{{ __('admin/region.describe') }}</th>
-              {{-- <th>{{ __('customer_group.level') }}</th> --}}
               <th>{{ __('common.created_at') }}</th>
+              @hook('admin.customer_group.index.table.headers')
               <th width="130px">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -28,24 +31,25 @@
                 <div :title="group.description?.description || ''" class="w-max-500">
                   @{{ stringLengthInte(group.description?.description || '') }}</div>
               </td>
-              {{-- <td>@{{ group.level }}</td> --}}
               <td>@{{ group.created_at }}</td>
+              @hook('admin.customer_group.index.table.body')
               <td>
+                @hook('admin.customer_group.index.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)" v-if="customer_groups.length > 1">{{ __('common.delete') }}</button>
+                @hook('admin.customer_group.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      {{-- {{ $customer_groups->links('admin::vendor/pagination/bootstrap-4') }} --}}
     </div>
 
     <el-dialog title="{{ __('admin/common.customer_groups_index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">
+        @hook('admin.customer_group.index.dialog.from.before')
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -92,10 +96,14 @@
         </el-form-item>
         @endif
 
+        @hook('admin.customer_group.index.dialog.from.after')
+
         <el-form-item>
           <div class="d-flex d-lg-block">
+            @hook('admin.customer_group.index.dialog.from.submit.before')
             <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
             <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+            @hook('admin.customer_group.index.dialog.from.submit.after')
           </div>
         </el-form-item>
       </el-form>
@@ -112,7 +120,6 @@
         customer_groups: @json($customer_groups ?? []),
 
         source: {
-          // languages: ['zh-ck','en-gb']
           languages: @json($languages ?? []),
         },
 
@@ -134,14 +141,13 @@
 
         rules: {
           // password: [{required: true,message: '请输入密码',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.customer_group.index.vue.data')
       },
 
       beforeMount() {
-        // this.source.languages.forEach(e => {
-        //   this.$set(this.dialog.form.name, e.code, '')
-        //   this.$set(this.dialog.form.description, e.code, '')
-        // })
+        @hook('admin.customer_group.index.vue.beforeMount')
       },
 
       methods: {
@@ -219,8 +225,12 @@
           this.dialog.form.description = {};
           this.dialog.show = false;
           this.dialog.form.level = 1
-        }
-      }
+        },
+
+        @hook('admin.customer_group.index.vue.methods')
+      },
+
+      @hook('admin.customer_group.index.vue.options')
     })
   </script>
 @endpush

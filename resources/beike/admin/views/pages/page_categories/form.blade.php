@@ -12,17 +12,22 @@
   <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4" />
   @endif
 
+  @hook('admin.page_category.form.top.before')
+
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+    @hook('admin.page_category.form.top-tab.before')
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-content" type="button" >{{ __('admin/product.basic_information') }}</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-data" type="button">{{ __('common.data') }}</button>
     </li>
+    @hook('admin.page_category.form.top-tab.after')
   </ul>
 
   <div id="customer-app-form" class="card">
     <div class="card-body h-min-600">
+      @hook('admin.page_category.form.content.before')
       <form novalidate class="needs-validation"
         id="form-page-categories"
         action="{{ $page_category->id ? admin_route('page_categories.update', [$page_category->id]) : admin_route('page_categories.store') }}"
@@ -45,6 +50,7 @@
                   @php
                     $error_title = $errors->first("descriptions.{$language['code']}.title");
                   @endphp
+                  @hook('admin.page_category.form.content.form.before')
                   <x-admin-form-input
                     error="{{ $error_title }}"
                     name="descriptions[{{ $language['code'] }}][title]"
@@ -62,6 +68,7 @@
                   <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_title]" title="{{ __('admin/setting.meta_title') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_title', $descriptions[$language['code']]['meta_title'] ?? '') }}" />
                   <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_description]" title="{{ __('admin/setting.meta_description') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_description', $descriptions[$language['code']]['meta_description'] ?? '') }}" />
                   <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keywords]" title="{{ __('admin/setting.meta_keywords') }}" value="{{ old('descriptions.' . $language['code'] . '.meta_keywords', $descriptions[$language['code']]['meta_keywords'] ?? '') }}" />
+                  @hook('admin.page_category.form.content.form.after')
                 </div>
               @endforeach
               @hook('admin.page_category.edit.base.after')
@@ -95,6 +102,7 @@
 
         <button type="submit" class="d-none">{{ __('common.save') }}</button>
       </form>
+      @hook('admin.page_category.form.content.after')
     </div>
   </div>
 @endsection
@@ -107,6 +115,7 @@
       data: {
         category_name: '{{ old('category_name', $page_category->parent->description->title ?? '') }}',
         category_id: '{{ old('categories_id', $page_category->parent->id ?? '') }}',
+        @hook('admin.page_category.form.vue.data')
       },
 
       methods: {
@@ -120,7 +129,11 @@
           this.category_name = item.name
           this.category_id = item.id
         },
-      }
+
+        @hook('admin.page_category.form.vue.methods')
+      },
+
+      @hook('admin.page_category.form.vue.options')
     })
   </script>
 @endpush

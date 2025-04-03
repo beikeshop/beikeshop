@@ -77,10 +77,12 @@
 
 @push('footer')
 <script>
+  @hook('admin.account.script.before')
   const tokenApp = new Vue({
     el: '#token-app',
     data: {
       tokens: @json(old('tokens', $current_user->tokens->pluck('token')->toArray() ?? [])),
+      @hook('admin.account.vue.data')
     },
     methods: {
       addToken() {
@@ -88,7 +90,8 @@
         setTimeout(() => {
           update(false);
         }, 0);
-      }
+      },
+      @hook('admin.account.vue.methods')
     }
   });
 
@@ -100,5 +103,6 @@
       }
     })
   }
+  @hook('admin.account.script.after')
 </script>
 @endpush

@@ -17,8 +17,10 @@
 
   <div id="orders-app" class="card h-min-600">
     <div class="card-body">
+      @hook('admin.order.index.content.before')
       <div class="bg-light p-4 mb-3">
         <el-form :inline="true" ref="filterForm" :model="filter" class="demo-form-inline" label-width="100px">
+          @hook('admin.order.index.content.filter.before')
           <div>
             <el-form-item label="{{ __('order.number') }}">
               <el-input @keyup.enter.native="search" v-model="filter.number" size="small"
@@ -63,12 +65,14 @@
         <div class="row">
           <label class="wp-100"></label>
           <div class="col-auto">
+            @hook('admin.order.index.content.filter_buttons.before')
             <button type="button" @click="search"
                     class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="exportOrder"
                     class="btn btn-outline-primary btn-sm ms-1">{{ __('common.export') }}</button>
             <button type="button" @click="resetSearch"
                     class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+            @hook('admin.order.index.content.filter_buttons.after')
           </div>
         </div>
       </div>
@@ -136,6 +140,8 @@
       @else
         <x-admin-no-data/>
       @endif
+
+      @hook('admin.order.index.content.after')
     </div>
   </div>
 
@@ -144,6 +150,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.orders.list.script.before')
+
     let app = new Vue({
       el: '#orders-app',
       data: {
@@ -160,6 +168,8 @@
           start: bk.getQueryString('start'),
           end: bk.getQueryString('end'),
         },
+
+        @hook('admin.order.index.vue.data')
       },
 
       watch: {
@@ -181,7 +191,9 @@
           handler(newVal, oldVal) {
             this.btnPrintUrl = `{{ admin_route('orders.shipping.get') }}?selected=${newVal}`;
           }
-        }
+        },
+
+        @hook('admin.order.index.vue.watch')
       },
 
       computed: {
@@ -194,7 +206,9 @@
             this.btnPrintUrl = `{{ admin_route('orders.shipping.get') }}?selected=${this.selectedIds}`;
             return val;
           }
-        }
+        },
+
+        @hook('admin.order.index.vue.computed')
       },
 
       created() {

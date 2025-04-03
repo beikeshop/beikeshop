@@ -1,3 +1,4 @@
+@hook('admin.dashboard.guide.before')
 <div class="card mb-4 dashboard-guide-section">
   <div class="card-header d-flex justify-content-between align-items-start">
     <h5 class="card-title">{{ __('admin/guide.heading_title') }}</h5>
@@ -5,6 +6,7 @@
   </div>
   <div class="card-body">
     <ul class="nav nav-tabs mb-3">
+      @hook('admin.dashboard.guide.before.tabs')
       <li class="nav-item">
         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#basic-tab" type="button">{{ __('admin/guide.tab_basic') }}</button>
       </li>
@@ -23,8 +25,10 @@
       <li class="nav-item">
         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#mail-tab" type="button">{{ __('admin/guide.tab_mail') }}</button>
       </li>
+      @hook('admin.dashboard.guide.after.tabs')
     </ul>
     <div class="tab-content">
+      @hook('admin.dashboard.guide.before.tab-content')
       <div class="tab-pane fade show active" id="basic-tab">
         <div class="guide-info">
           <div class="left"><span><i class="bi bi-gear"></i></span></div>
@@ -121,12 +125,14 @@
           </div>
         </div>
       </div>
+      @hook('admin.dashboard.guide.after.tab-content')
     </div>
     <div class="tab-footer">
       <label class=""><input type="checkbox" name="hide_guide"> {{ __('admin/guide.button_hide') }}</label>
     </div>
   </div>
 </div>
+@hook('admin.dashboard.guide.after')
 
 @push('footer')
   <script>

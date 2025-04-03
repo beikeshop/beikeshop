@@ -676,6 +676,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.product.edit.script.before')
+
     $('.submit-form-edit, .submit-form').on('click', function () {
       submitBeforeFormat()
       if (!app.validateSku()) {
@@ -808,7 +810,9 @@
           })
 
           return categoryFormat;
-        }
+        },
+
+        @hook('admin.product.edit.vue.computed')
       },
 
       beforeMount() {
@@ -826,7 +830,8 @@
           this.variablesBatch.variables = this.form.variables.map((v, i) => '');
         }
 
-        this.videoDataFormat()
+        this.videoDataFormat();
+        @hook('admin.product.edit.vue.beforeMount')
       },
 
       watch: {
@@ -853,7 +858,8 @@
             if (this.isMove) return;
             this.remakeSkus();
           }
-        }
+        },
+        @hook('admin.product.edit.vue.watch')
       },
 
       methods: {
@@ -1313,8 +1319,11 @@
           // this.form.video.path = '';
           // this.form.video.url = '';
         },
+
         @stack('admin.product.edit.vue.method')
-      }
+      },
+
+      @hook('admin.product.edit.vue.options')
     });
 
     function makeVariableIndexes() {
@@ -1392,5 +1401,7 @@
         return false;
       }
     });
+
+    @hook('admin.product.edit.script.after')
   </script>
 @endpush

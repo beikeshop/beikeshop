@@ -11,6 +11,8 @@
 @endsection
 
 @section('content')
+  @hook('admin.order.form.content.before')
+
   @hookwrapper('admin.order.form.base')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
@@ -340,6 +342,7 @@
     @endhookwrapper
   @endif
 
+  @hookwrapper('admin.order.form.history')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.action_history') }}</h6></div>
     <div class="card-body">
@@ -365,6 +368,9 @@
       </div>
     </div>
   </div>
+  @endhookwrapper
+
+  @hook('admin.order.form.content.after')
 @endsection
 
 @push('footer')
@@ -488,7 +494,9 @@
 
         rules: {
           status: [{required: true, message: '{{ __('admin/order.error_status') }}', trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.order.form.vue.data')
       },
 
       methods: {
@@ -504,8 +512,12 @@
               window.location.reload();
             })
           });
-        }
-      }
+        },
+
+        @hook('admin.order.form.vue.methods')
+      },
+
+      @hook('admin.order.form.vue.options')
     })
   </script>
   @endcan

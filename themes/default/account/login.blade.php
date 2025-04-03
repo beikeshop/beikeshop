@@ -139,6 +139,7 @@
       },
 
       beforeMount () {
+        @hook('shop.login.vue.beforeMount')
       },
 
       methods: {
@@ -181,7 +182,9 @@
           });
         },
         @stack('login.vue.method')
-      }
+      },
+
+      @hook('shop.login.vue.options')
     })
 
     @hook('account.login.form.js.after')

@@ -24,13 +24,17 @@
 @endphp
 
 @section('content')
+  @hook('product.detail.before')
+
   @if (!request('iframe'))
     <x-shop-breadcrumb type="product" :value="$product['id']"/>
   @endif
 
   <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
+    @hook('product.detail.content.before')
     <div class="row mb-md-5 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-2">
+        @hookwrapper('product_list.item.image')
         <div class="product-image">
           @if(!is_mobile())
             <div class="left {{ $iframeClass }}" v-if="images.length">
@@ -68,6 +72,7 @@
             </div>
           @endif
         </div>
+        @endhookwrapper
       </div>
 
       <div class="col-12 col-lg-6">
@@ -96,6 +101,8 @@
 
           @endhookwrapper
           <div class="stock-and-sku mb-lg-4 mb-2">
+            @hook('shop.product.detail.quantity.before')
+
             @hookwrapper('product.detail.quantity')
             <div class="d-lg-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
@@ -128,6 +135,8 @@
             @hookwrapper('product.detail.weight')
             <div class="d-lg-flex" v-if="product.weight"><span class="title text-muted">{{ __('admin/product.weight_text') }}:</span> @{{ product.weight }} {{ __('product.' . $product['weight_class']) }}</div>
             @endhookwrapper
+
+            @hook('shop.product.detail.weight.after')
           </div>
           @hookwrapper('product.detail.variables')
           <div class="variables-wrap mb-md-4" v-if="source.variables.length">
@@ -152,6 +161,7 @@
 
           <div class="product-btns">
             @if ($product['active'])
+              @hookwrapper('shop.product.detail.quantity_btns')
               <div class="quantity-btns">
                 @hook('product.detail.buy.before')
                 @hookwrapper('product.detail.quantity.input')
@@ -165,6 +175,8 @@
                 </div>
                 @endhookwrapper
                 <div class="{{ locale() == 'zh_cn' || locale() == 'en' ? 'd-flex flex-fill' : 'add-cart-btns' }}">
+                  @hook('shop.product.detail.btns.before')
+
                   @hookwrapper('product.detail.add_to_cart')
                   <button
                     class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
@@ -185,9 +197,12 @@
                   ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
                   </button>
                   @endhookwrapper
+
+                  @hook('shop.product.detail.btns.after')
                 </div>
                 @hook('product.detail.buy.after')
               </div>
+              @endhookwrapper
 
               @if (current_customer() || !request('iframe'))
                 @hookwrapper('product.detail.wishlist')
@@ -211,8 +226,10 @@
       </div>
     </div>
 
+    @hookwrapper('shop.product.description')
     <div class="product-description product-mb-block {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
+        @hook('shop.product.description.tabs.before')
         <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
         </a>
@@ -224,6 +241,7 @@
         @hook('product.tab.after.link')
       </div>
       <div class="tab-content">
+        @hook('shop.product.description.tabs.content.before')
         <div class="tab-pane fade show active" id="product-description" role="tabpanel">
           {!! $product['description'] !!}
         </div>
@@ -249,6 +267,8 @@
         @hook('product.tab.after.pane')
       </div>
     </div>
+    @endhookwrapper
+    @hook('product.detail.content.after')
   </div>
 
   @if ($relations && !request('iframe'))
@@ -278,6 +298,8 @@
 
 @push('add-scripts')
   <script>
+    @hook('product.detail.script.before')
+
     let swiperMobile = null;
     const isIframe = bk.getQueryString('iframe', false);
 
@@ -305,7 +327,8 @@
           skus: @json($product['skus']),
           weight: @json($product['weight'] ?? ''),
           variables: @json($product['variables'] ?? []),
-        }
+        },
+        @hook('product.detail.vue.data')
       },
 
       beforeMount() {
@@ -331,6 +354,8 @@
           this.product.weight = this.source.weight;
           this.images = @json($product['images'] ?? []);
         }
+
+        @hook('product.detail.vue.beforeMount')
       },
 
       methods: {
@@ -434,7 +459,11 @@
             })
           });
         },
-      }
+
+        @hook('product.detail.vue.methods')
+      },
+
+      @hook('product.detail.vue.hooks')
     });
 
     $(document).on("mouseover", ".product-image #swiper .swiper-slide a", function () {
@@ -522,5 +551,7 @@
     const selectedVariants = variables.map((variable, index) => {
       return variable.values[selectedVariantsIndex[index]]
     });
+
+    @hook('product.detail.script.after')
   </script>
 @endpush

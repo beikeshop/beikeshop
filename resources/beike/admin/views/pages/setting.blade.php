@@ -15,6 +15,7 @@
 @section('content')
   <div id="plugins-app-form" class="card h-min-600">
     <div class="card-body">
+      @hook('admin.setting.content.before')
       <form action="{{ admin_route('settings.store') }}" class="needs-validation" novalidate method="POST" id="app" v-cloak>
         @csrf
         @if (session('success'))
@@ -26,6 +27,7 @@
           </div>
         @endif
         <ul class="nav nav-tabs nav-bordered mb-3  mb-lg-5" role="tablist">
+          @hook('admin.setting.nav.before')
           <li class="nav-item" role="presentation">
             <a class="nav-link active" data-bs-toggle="tab" href="#tab-general">{{ __('admin/setting.basic_settings') }}</a>
           </li>
@@ -48,6 +50,7 @@
         </ul>
 
         <div class="tab-content">
+          @hook('admin.setting.tab_content.before')
           <div class="tab-pane fade show active" id="tab-general">
             @hook('admin.setting.general.before')
             <x-admin-form-input name="meta_title" title="{{ __('admin/setting.meta_title') }}" value="{{ old('meta_title', system_setting('base.meta_title', '')) }}" required />

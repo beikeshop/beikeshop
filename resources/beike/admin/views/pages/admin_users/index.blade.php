@@ -4,18 +4,23 @@
 
 @section('content')
   <ul class="nav-bordered nav nav-tabs mb-3">
+    @hook('admin_user.index.tabs.before')
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="{{ admin_route('admin_users.index') }}">{{ __('admin/common.admin_user') }}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ admin_route('admin_roles.index') }}">{{ __('admin/common.admin_role') }}</a>
     </li>
+    @hook('admin_user.index.tabs.after')
   </ul>
 
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
+      @hook('admin_user.index.content.before')
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin_user.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('admin/user.admin_users_create') }}</button>
+        @hook('admin_user.index.content.top_buttons.after')
       </div>
       <div class="table-push">
         <table class="table">
@@ -27,6 +32,7 @@
               <th>{{ __('admin/common.admin_role') }}</th>
               <th>{{ __('common.created_at') }}</th>
               <th>{{ __('common.updated_at') }}</th>
+              @hook('admin_user.index.table.headers')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -42,22 +48,26 @@
               </td>
               <td>@{{ tax.created_at }}</td>
               <td>@{{ tax.updated_at }}</td>
+              @hook('admin_user.index.table.body')
               <td class="text-end">
+                @hook('admin_user.index.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin_user.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      {{-- {{ $admin_users->links('admin::vendor/pagination/bootstrap-4') }} --}}
+      @hook('admin_user.index.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/common.admin_user') }}" :visible.sync="dialog.show" width="600px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
+        @hook('admin_user.index.dialog.before')
+
         <el-form-item label="{{ __('common.name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
@@ -87,9 +97,13 @@
           </el-checkbox-group>
         </el-form-item>
 
+        @hook('admin_user.index.dialog.after')
+
         <el-form-item class="mt-5">
+          @hook('admin_user.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin_user.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -98,7 +112,9 @@
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin_user.index.script.before')
+
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -129,7 +145,9 @@
           email: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.email')]) }}', trigger: 'blur'}, ],
           password: [{required: true,message: '{{ __('common.error_required', ['name' => __('shop/login.password')]) }}', trigger: 'blur'}, ],
           roles: [{type: 'array', required: true, message: '{{ __('admin/admin_roles.error_roles') }}', trigger: 'blur'}],
-        }
+        },
+
+        @hook('admin_user.index.vue.data')
       },
 
       methods: {
@@ -195,8 +213,14 @@
           this.dialog.form.roles = [];
           this.dialog.form.locale =  @json($admin_language['code'] ?? 'en');
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin_user.index.vue.methods')
+      },
+
+      @hook('admin_user.index.vue.options')
     })
+
+    @hook('admin_user.index.script.after')
   </script>
 @endpush

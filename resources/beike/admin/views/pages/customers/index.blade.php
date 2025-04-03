@@ -5,9 +5,11 @@
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
+      @hook('admin.customer.index.content.before')
       <div class="bg-light p-4 mb-3">
         <el-form :inline="true" :model="filter" class="demo-form-inline" label-width="70px">
           <div>
+            @hook('admin.customer.index.content.filter.before')
             <el-form-item label="{{ __('customer.name') }}">
               <el-input @keyup.enter.native="search" v-model="filter.name" size="small"
                         placeholder="{{ __('customer.name') }}"></el-input>
@@ -38,15 +40,18 @@
         <div class="row">
           <label style="width: 70px"></label>
           <div class="col-auto">
+            @hook('admin.customer.index.content.filter_buttons.before')
             <button type="button" @click="search"
                     class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="resetSearch"
                     class="btn btn-outline-secondary btn-sm ms-1">{{ __('common.reset') }}</button>
+            @hook('admin.customer.index.content.filter_buttons.after')
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.customer.index.content.top_buttons.before')
         @if ($type != 'trashed')
           <button type="button" class="btn btn-primary"
                   @click="checkedCustomersCreate">{{ __('admin/customer.customers_create') }}</button>
@@ -54,6 +59,7 @@
           <button type="button" class="btn btn-primary"
                   @click="checkedCustomerSclearRestore">{{ __('admin/product.clear_restore') }}</button>
         @endif
+        @hook('admin.customer.index.content.top_buttons.after')
       </div>
 
       @if ($customers->total())
@@ -149,6 +155,7 @@
     <el-dialog title="{{ __('admin/customer.customers_create') }}" :visible.sync="dialogCustomers.show" width="670px"
                @close="closeCustomersDialog('form')" :close-on-click-modal="false">
       <el-form ref="form" :rules="rules" :model="dialogCustomers.form" label-width="120px">
+        @hook('admin.customer.index.dialog.from.before')
         <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
           <el-input v-model="dialogCustomers.form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
         </el-form-item>
@@ -168,6 +175,7 @@
         <el-form-item label="{{ __('common.status') }}" prop="active">
           <el-switch v-model="dialogCustomers.form.active" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
+        @hook('admin.customer.index.dialog.from.after')
         <el-form-item>
           <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
@@ -181,7 +189,9 @@
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin.customer.index.script.before')
+
+    var app = new Vue({
       el: '#customer-app',
 
       data: {
@@ -233,10 +243,14 @@
         },
 
         customerIds: @json($customers->pluck('id')),
+
+        @hook('admin.customer.index.vue.data')
       },
 
       created() {
         bk.addFilterCondition(this);
+
+        @hook('admin.customer.index.vue.created')
       },
 
       methods: {
@@ -338,7 +352,11 @@
           this.filter = bk.clearObjectValue(this.filter)
           location = bk.objectToUrlParams(this.filter, this.url)
         },
-      }
+
+        @hook('admin.customer.index.vue.methods')
+      },
+
+      @hook('admin.customer.index.vue.options')
     })
 
     $('.customer-status').change(function (event) {
@@ -349,5 +367,7 @@
         layer.msg('修改状态成功');
       })
     });
+
+    @hook('admin.customer.index.script.after')
   </script>
 @endpush

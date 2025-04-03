@@ -4,16 +4,19 @@
 
 @section('content')
   <ul class="nav-bordered nav nav-tabs mb-3">
+    @hook('admin.admin_roles.index.tabs.before')
     <li class="nav-item">
       <a class="nav-link" href="{{ admin_route('admin_users.index') }}">{{ __('admin/common.admin_user') }}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" href="{{ admin_route('admin_roles.index') }}">{{ __('admin/common.admin_role') }}</a>
     </li>
+    @hook('admin.admin_roles.index.tabs.after')
   </ul>
 
   <div id="tax-classes-app" class="card">
     <div class="card-body h-min-600">
+      @hook('admin.admin_roles.index.content.before')
       <div class="d-flex justify-content-between mb-4">
         <a href="{{ admin_route('admin_roles.create') }}"
           class="btn btn-primary">{{ __('admin/role.admin_roles_create') }}</a>
@@ -41,10 +44,12 @@
                   <td>{{ $role->updated_at }}</td>
                   @hook('admin.admin_roles.index.tbody')
                   <td class="text-end">
+                    @hook('admin.admin_roles.index.tbody.actions.before')
                     <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}"
                       class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}"
                       type="button">{{ __('common.delete') }}</button>
+                    @hook('admin.admin_roles.index.tbody.actions.after')
                   </td>
                 </tr>
               @endforeach
@@ -57,6 +62,7 @@
         </table>
         @hook('admin.admin_roles.index.after')
       </div>
+      @hook('admin.admin_roles.index.content.after')
     </div>
   </div>
 @endsection

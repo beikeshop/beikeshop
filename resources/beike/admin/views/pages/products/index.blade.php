@@ -79,12 +79,14 @@
 
           @if ($type != 'trashed' && $products->total())
             <div class="right nowrap">
+              @hook('admin.product.batch_btns.before')
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
                       @click="batchDelete">{{ __('admin/product.batch_delete')  }}</button>
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
                       @click="batchActive(true)">{{ __('admin/product.batch_active') }}</button>
               <button class="btn btn-outline-secondary" :disabled="!selectedIds.length"
                       @click="batchActive(false)">{{ __('admin/product.batch_inactive') }}</button>
+              @hook('admin.product.batch_btns.after')
             </div>
           @endif
         </div>
@@ -189,6 +191,7 @@
 
 @push('footer')
   <script>
+    @hook('product.detail.script.before')
     let app = new Vue({
       el: '#product-app',
       data: {
@@ -205,6 +208,7 @@
         },
         selectedIds: [],
         productIds: @json($products->pluck('id')),
+        @hook('admin.product.list.vue.data')
       },
 
       computed: {
@@ -215,11 +219,13 @@
           set(val) {
             return val ? this.selectedIds = this.productIds : this.selectedIds = [];
           }
-        }
+        },
+        @hook('admin.product.list.vue.computed')
       },
 
       created() {
         bk.addFilterCondition(this);
+        @hook('admin.product.list.vue.created')
       },
 
       methods: {
@@ -316,8 +322,14 @@
           }).catch(() => {
           });
           ;
-        }
-      }
+        },
+
+        @hook('admin.product.list.vue.methods')
+      },
+
+      @hook('admin.product.list.vue.options')
     });
+
+    @hook('product.detail.script.after')
   </script>
 @endpush

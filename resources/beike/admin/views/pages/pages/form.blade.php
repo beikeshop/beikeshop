@@ -15,7 +15,10 @@
 @endsection
 
 @section('content')
+  @hook('admin.pages.form.top.before')
+
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+    @hook('admin.pages.form.top-tab.before')
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-content"
               type="button">{{ __('admin/product.basic_information') }}</button>
@@ -24,10 +27,13 @@
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-data"
               type="button">{{ __('common.data') }}</button>
     </li>
+    @hook('admin.pages.form.top-tab.after')
   </ul>
 
   <div id="app" class="card h-min-600">
     <div class="card-body">
+      @hook('admin.pages.form.content.before')
+
       @if ($errors->has('error'))
         <x-admin-alert type="danger" msg="{{ $errors->first('error') }}" class="mt-4"/>
       @endif
@@ -52,6 +58,7 @@
                   @php
                     $error_title = $errors->first("descriptions.{$language['code']}.title");
                   @endphp
+                  @hook('admin.pages.form.content.form.before')
                   <x-admin-form-input
                     error="{{ $error_title }}"
                     name="descriptions[{{ $language['code'] }}][title]"
@@ -100,6 +107,8 @@
                   <x-admin-form-input name="descriptions[{{ $language['code'] }}][meta_keywords]"
                                       title="{{ __('admin/setting.meta_keywords') }}"
                                       value="{{ old('descriptions.' . $language['code'] . '.meta_keywords', $descriptions[$language['code']]['meta_keywords'] ?? '') }}"/>
+
+                  @hook('admin.pages.form.content.form.after')
                 </div>
               @endforeach
               @hook('admin.page.edit.base.after')
@@ -180,6 +189,8 @@
 
         <button type="submit" class="d-none">{{ __('common.save') }}</button>
       </form>
+
+      @hook('admin.pages.form.content.after')
     </div>
   </div>
 
@@ -188,6 +199,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.pages.form.script.before')
+
     var app = new Vue({
       el: '#app',
 
@@ -199,6 +212,8 @@
         },
         page_category_name: '{{ old('category_name', $page->category->description->title ?? '') }}',
         page_category_id: '{{ old('categories_id', $page->category->id ?? '') }}',
+
+        @hook('admin.pages.form.vue.data')
       },
 
       created() {
@@ -212,6 +227,8 @@
             }
           })
         }
+
+        @hook('admin.pages.form.vue.created')
       },
 
       methods: {
@@ -234,8 +251,14 @@
         relationsRemoveProduct(index) {
           this.relations.products.splice(index, 1);
         },
-      }
+
+        @hook('admin.pages.form.vue.methods')
+      },
+
+      @hook('admin.pages.form.vue.options')
     })
+
+    @hook('admin.pages.form.script.after')
   </script>
 @endpush
 

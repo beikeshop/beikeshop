@@ -5,8 +5,11 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
+      @hook('admin.country.index.content.before')
+
       <div class="bg-light p-4 mb-2">
         <div class="row">
+          @hook('admin.country.index.filter.before')
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('product.name') }}</label>
             <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control" placeholder="{{ __('product.name') }}">
@@ -35,19 +38,25 @@
               @endforeach
             </select>
           </div>
+
+          @hook('admin.country.index.filter.after')
         </div>
 
         <div class="row">
           <label class="filter-title"></label>
           <div class="col-auto">
+            @hook('admin.country.index.filter_buttons.before')
             <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+            @hook('admin.country.index.filter_buttons.after')
           </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.country.index.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+        @hook('admin.country.index.top_buttons.after')
       </div>
       <div class="table-push">
         <table class="table">
@@ -61,6 +70,7 @@
               <th>{{ __('common.updated_at') }}</th>
               <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.status') }}</th>
+              @hook('admin.country.index.table.headers')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -77,9 +87,12 @@
                 <span v-if="country.status" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
+              @hook('admin.country.index.table.body')
               <td class="text-end">
+                @hook('admin.country.index.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(country.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin.country.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
@@ -89,12 +102,15 @@
 
       <el-pagination v-if="country.data.length" layout="total, prev, pager, next" background :page-size="country.per_page" :current-page.sync="page"
         :total="country.total"></el-pagination>
+
+      @hook('admin.country.index.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/common.country') }}" :visible.sync="dialog.show" width="600px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="130px">
+        @hook('admin.country.index.dialog.before')
         <el-form-item label="{{ __('admin/country.country_name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('admin/country.country_name') }}"></el-input>
         </el-form-item>
@@ -118,9 +134,13 @@
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
+        @hook('admin.country.index.dialog.after')
+
         <el-form-item class="mt-5">
+          @hook('admin.country.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.country.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
