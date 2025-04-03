@@ -161,7 +161,7 @@
 
           <div class="product-btns">
             @if ($product['active'])
-              @hookwrapper('shop.product.detail.quantity_btns')
+              @hook('shop.product.detail.quantity_btns.before')
               <div class="quantity-btns">
                 @hook('product.detail.buy.before')
                 @hookwrapper('product.detail.quantity.input')
@@ -202,7 +202,7 @@
                 </div>
                 @hook('product.detail.buy.after')
               </div>
-              @endhookwrapper
+              @hook('shop.product.detail.quantity_btns.after')
 
               @if (current_customer() || !request('iframe'))
                 @hookwrapper('product.detail.wishlist')
