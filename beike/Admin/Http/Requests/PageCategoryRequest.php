@@ -34,7 +34,7 @@ class PageCategoryRequest extends FormRequest
     {
         return [
             'descriptions.*.locale'  => 'required|string',
-            'descriptions.*.title'   => 'required|string|min:3|max:32',
+            'descriptions.*.title'   => 'required|string|min:3|max:255',
             'descriptions.*.summary' => 'string',
         ];
     }

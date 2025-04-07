@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_views', function (Blueprint $table) {
-            $table->id();
-            $table->integer('product_id')->nullable();
-            $table->integer('customer_id')->nullable();
-            $table->string('ip')->nullable();
-            $table->string('session_id')->nullable();
-            $table->timestamps();
+            $table->comment('商品浏览记录表');
+            $table->id()->comment('ID');
+            $table->integer('product_id')->nullable()->comment('商品 ID');
+            $table->integer('customer_id')->nullable()->comment('客户 ID');
+            $table->string('ip')->nullable()->comment('IP');
+            $table->string('session_id')->nullable()->comment('Session ID');
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
         });
     }
 
