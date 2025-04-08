@@ -64,8 +64,8 @@ class StateMachineService
             self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::PAID    => [
-            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
-            self::SHIPPED   => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder'],
+            self::CANCELLED => ['updateStatus', 'addHistory', 'notifyUpdateOrder', 'uniPushMessage'],
+            self::SHIPPED   => ['updateStatus', 'addHistory', 'addShipment', 'notifyUpdateOrder', 'uniPushMessage'],
             self::COMPLETED => ['updateStatus', 'addHistory', 'notifyUpdateOrder'],
         ],
         self::SHIPPED => [
@@ -232,27 +232,6 @@ class StateMachineService
         }
 
         hook_filter('service.state_machine.change_status.after', ['order' => $order, 'status' => $status, 'comment' => $comment, 'notify' => $notify]);
-
-        // app 推送
-        if (system_setting('base.unipush_api_url') && system_setting('base.order_auto_app_push')) {
-            $customer = Customer::find($order->customer_id);
-            $cid = $customer->cid ?? 0;
-
-            if ($cid) {
-                $message = [
-                    'push_clientid' => $cid,
-                    'customer_id' => $order->customer_id,
-                    'title' => trans('admin/app_push.order_status_update_title'),
-                    'content' => trans('admin/app_push.order_status_update_info') . trans('order.' . $status),
-                    'link' => [
-                        'type' => 'order',
-                        'value' => $order->id,
-                    ]
-                ];
-
-                UniPushService::getInstance()->pushOrderStatus($message);
-            }
-        }
 
         if (! $order->shipping_method_code && $status == self::PAID) {
             $this->changeStatus(self::COMPLETED, $comment, $notify);
@@ -423,5 +402,35 @@ class StateMachineService
     private function revertStock($oldCode, $newCode)
     {
 
+    }
+
+    /**
+     * 采用UniPush 推送消息到手机APP
+     *
+     * @param $oldCode
+     * @param $newCode
+     * @throws Exception
+     */
+    private function uniPushMessage($oldCode, $newCode)
+    {
+        if (system_setting('base.unipush_api_url') && system_setting('base.order_auto_app_push')) {
+            $customer = Customer::find($this->order->customer_id);
+            $cid = $customer->cid ?? 0;
+
+            if ($cid) {
+                $message = [
+                    'push_clientid' => $cid,
+                    'customer_id' => $this->order->customer_id,
+                    'title' => trans('admin/app_push.order_status_update_title'),
+                    'content' => trans('admin/app_push.order_status_update_info') . trans('order.' . $newCode),
+                    'link' => [
+                        'type' => 'order',
+                        'value' => $this->orderId,
+                    ]
+                ];
+
+                UniPushService::getInstance()->pushOrderStatus($message);
+            }
+        }
     }
 }
