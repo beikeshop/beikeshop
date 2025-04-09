@@ -243,7 +243,7 @@
       <div class="tab-content">
         @hook('shop.product.description.tabs.content.before')
         <div class="tab-pane fade show active" id="product-description" role="tabpanel">
-          {!! $product['description'] !!}
+          <div class="rich-text-editor-content">{!! $product['description'] !!}</div>
         </div>
         <div class="tab-pane fade" id="product-attributes" role="tabpanel">
           <table class="table table-bordered attribute-table">
