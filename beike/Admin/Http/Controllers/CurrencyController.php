@@ -74,7 +74,7 @@ class CurrencyController extends Controller
 
         if ($request->default_currency) {
             if ($data['value'] != 1) {
-                throw new Exception(trans('admin/currency.default_currency_error'));
+                return json_fail(trans('admin/currency.default_currency_error'));
             }
 
             SettingRepo::storeValue('currency', $data['code']);

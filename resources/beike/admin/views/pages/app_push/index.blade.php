@@ -88,7 +88,7 @@
       },
 
       apiUrlForm: {
-        unipush_api_url: @json(system_setting('base.unipush_api_url')),
+        unipush_api_url: @json(system_setting('base.unipush_api_url') ?? ''),
         order_auto_app_push: @json(system_setting('base.order_auto_app_push')),
       },
 
