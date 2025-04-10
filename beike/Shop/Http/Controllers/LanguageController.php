@@ -38,7 +38,7 @@ class LanguageController extends Controller
     {
         $lang    = Session::get('locale');
         $backUrl = redirect()->back()->getTargetUrl();
-        $host    = request()->getSchemeAndHttpHost();
+        $host    = get_base_url($backUrl);
         $uri     = str_replace($host, '', $backUrl);
 
         if ($uri == '/') {
