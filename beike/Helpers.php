@@ -126,11 +126,12 @@ function shop_route($route, $params = []): string
         return '/lang/'.$item;
     }, config('app.langs'));
 
-    $host = request()->getSchemeAndHttpHost();
+    $uri = route('shop.' . $route, $params);
+    $host = get_base_url($uri);
 
     $lang = session()->get('locale') ?? system_setting('base.locale');
 
-    $uri = str_replace($host, '', route('shop.' . $route, $params));
+    $uri = str_replace($host, '', $uri);
 
     if (in_array($uri, $langs) || ($lang === system_setting('base.locale')))
     {
@@ -138,6 +139,29 @@ function shop_route($route, $params = []): string
     }
 
     return $host . '/' . $lang . $uri;
+}
+
+function get_base_url($url) {
+    $parsed = parse_url($url);
+
+    // 组合协议部分（如 "https://"）
+    $scheme = isset($parsed['scheme']) ? $parsed['scheme'] . '://' : '';
+
+    // 处理用户认证（如 "user:pass@"）
+    $userPass = '';
+    if (isset($parsed['user'])) {
+        $userPass = $parsed['user'];
+        if (isset($parsed['pass'])) {
+            $userPass .= ':' . $parsed['pass'];
+        }
+        $userPass .= '@';
+    }
+
+    // 组合域名和端口（如 "example.com:8080"）
+    $host = $parsed['host'] ?? '';
+    $port = isset($parsed['port']) ? ':' . $parsed['port'] : '';
+
+    return $scheme . $userPass . $host . $port;
 }
 
 /**
