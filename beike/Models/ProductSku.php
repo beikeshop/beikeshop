@@ -54,6 +54,11 @@ class ProductSku extends Base
 
     public function setWeightAttribute($value)
     {
-        $this->attributes['weight'] = (float) ($value ?? 0);
+        $this->attributes['weight'] = is_numeric($value) ? (float) $value : 0;
+    }
+
+    public function getWeightAttribute($value)
+    {
+        return rtrim(rtrim(number_format((float) $value, 2, '.', ''), '0'), '.');
     }
 }
