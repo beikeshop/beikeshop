@@ -58,10 +58,18 @@ return [
         'required'    => true,
     ],
     [
-        'name'        => 'card_image',
-        'label_key'   => 'common.card_image',
-        'type'        => 'image',
-        'required'    => false,
+        'name'        => 'card_type',
+        'label_key'   => 'common.card_type',
+        'type'        => 'checkbox',
+        'options'     => [
+            ['value' => 'visa', 'label_key' => 'common.card_type_visa'],
+            ['value' => 'mastercard', 'label_key' => 'common.card_type_mastercard'],
+            ['value' => 'ae', 'label_key' => 'common.card_type_ae'],
+            ['value' => 'dc', 'label_key' => 'common.card_type_dc'],
+            ['value' => 'jcb', 'label_key' => 'common.card_type_jcb'],
+            ['value' => 'dclub', 'label_key' => 'common.card_type_dclub'],
+        ],
+        'required'    => true,
     ],
     [
         'name'        => 'log',

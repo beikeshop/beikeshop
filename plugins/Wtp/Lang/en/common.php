@@ -21,10 +21,20 @@ return [
     'enable' => 'Enable',
     'paying' => 'Paying',
 
+    'card_number' => 'Card Number',
+    'text_expiry' => 'Expiry',
+    'cvv' => 'CVV',
+    'expiry_year' => 'Year',
+    'expiry_month' => 'Month',
+    'expiry_year_month' => 'Month/Year',
+    'holder_name' => 'Holder Name',
+
+    'pay_submit_success'       => 'The payment request has been successfully submitted. Please check the payment result later.',
+    'paid_success'             => 'You paid succeed!',
+
     'card_image' => 'Credit card Image',
     'payment_type' => 'Payment Type',
-    'card_icon' => 'Card card Icon',
-    'card' => 'Card card',
+    'card' => 'Credit Card',
     'giropay' => 'Giropay',
     'bancontact' => 'Bancontact',
     'konbini' => 'Konbini',
@@ -33,6 +43,7 @@ return [
     'safety_pay' => 'Safety Pay',
     'bancomat_pay' => 'Bancomat Pay',
 
+    'card_type' => 'Card Type',
     'card_type_visa' => 'Visa',
     'card_type_mastercard' => 'Mastercard',
     'card_type_ae' => 'AE',

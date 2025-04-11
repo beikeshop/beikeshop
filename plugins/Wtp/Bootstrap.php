@@ -67,7 +67,7 @@ class Bootstrap
                     $names[$key] = trans('Wtp::common.' . $paymentType);
                 }
                 if ($paymentType == 'card') {
-                    $pluginCopy->icon = image_origin(plugin_setting('wtp.card_image'));
+                    $pluginCopy->icon = plugin_origin('wtp', '/image/wtp-card.png');
                 } else {
                     $pluginCopy->icon = plugin_origin('wtp', '/image/' . $paymentType . '.svg');
                 }

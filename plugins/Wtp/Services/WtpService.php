@@ -50,7 +50,7 @@ class WtpService extends PaymentService
     /**
      * 提交订单数据并跳转到绿界付款API
      */
-    public function getPaymentUrl($paymentMethod, $sid)
+    public function getPaymentUrl($paymentMethod, $sid, $paymentInformation = [])
     {
         $wtp = new Wintopay();
         $products = array();
@@ -102,6 +102,9 @@ class WtpService extends PaymentService
             'user_agent' => $userAgent,
             'sid' => $sid,
         );
+        if ($paymentInformation) {
+            $requestData['payment_information'] = $paymentInformation;
+        }
 
         $headers = array(
             'X-API-KEY'=>$this->apiKey,
@@ -112,8 +115,24 @@ class WtpService extends PaymentService
             'X-ADDON-TYPE'=>'web',
         );
         $payResult = $wtp->pay($this->url, $requestData, $headers, $userAgent);
-        if (!in_array($payResult['status'], ['pending', 'paid'])) {
+        Log::info('Wintopay pay request Start =========');
+        Log::info("url:  {$this->url}");
+        Log::info('request_data: ' . var_export($requestData, true));
+        Log::info('response: ' . var_export($payResult, true));
+
+        if ($payResult['status'] == 'unpaid') {
+            if ($payResult['redirect_url']) { // unpaid，且redirect_url有值代表为3D验证连接
+                return $payResult['redirect_url'];
+            } else { // unpaid，且redirect_url为空代表为异常交易，需要等待异步通知确定最终状态
+                return '';
+            }
+        } elseif (!in_array($payResult['status'], ['pending', 'paid'])) { // failed或canceled状态
             throw (new \Exception('Payment Error: ' . $payResult['wtp_format_fail_message']));
+        } elseif ($payResult['status'] == 'paid') {
+            StateMachineService::getInstance($this->order)->changeStatus(StateMachineService::PAID, 'WTP-RETURN: Payment success.');
+            return 'success';
+        } elseif ($payResult['status'] == 'pending') {
+            StateMachineService::getInstance($this->order)->changeStatus('paying');
         }
 
         return $payResult['redirect_url'];

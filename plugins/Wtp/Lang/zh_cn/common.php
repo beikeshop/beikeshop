@@ -21,10 +21,20 @@ return [
     'enable' => '禁用',
     'paying' => '支付中',
 
+    'card_number' => '卡号',
+    'text_expiry' => '有效期',
+    'cvv' => 'CVV',
+    'expiry_year' => '年',
+    'expiry_month' => '月',
+    'expiry_year_month' => '月/年',
+    'holder_name' => '持卡人姓名',
+
+    'pay_submit_success'       => '支付请求已成功提交，请稍后查看支付结果',
+    'paid_success'             => '您已成功支付!',
+
     'card_image' => '信用卡图片',
     'payment_type' => '支付方式',
-    'card_icon' => 'Card card Icon',
-    'card' => 'Card card',
+    'card' => '信用卡',
     'giropay' => 'Giropay',
     'bancontact' => 'Bancontact',
     'konbini' => 'Konbini',
@@ -33,6 +43,7 @@ return [
     'safety_pay' => 'Safety Pay',
     'bancomat_pay' => 'Bancomat Pay',
 
+    'card_type' => '卡类型',
     'card_type_visa' => 'Visa',
     'card_type_mastercard' => 'Mastercard',
     'card_type_ae' => 'AE',
