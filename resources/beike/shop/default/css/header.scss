@@ -374,6 +374,10 @@ header {
       }
 
       .right {
+        .name {
+          word-break: break-all;
+        }
+
         .price {
           input {
             margin-left: 10px;

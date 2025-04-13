@@ -164,8 +164,11 @@ class PluginServiceProvider extends ServiceProvider
      */
     private function loadViews($pluginCode)
     {
-        $pluginBasePath = $this->pluginBasePath;
-        $this->loadViewsFrom("{$pluginBasePath}/{$pluginCode}/Views", $pluginCode);
+        $pluginViewPath = "{$this->pluginBasePath}/{$pluginCode}/Views";
+
+        if (is_dir($pluginViewPath)) {
+            $this->loadViewsFrom($pluginViewPath, $pluginCode);
+        }
     }
 
     /**
