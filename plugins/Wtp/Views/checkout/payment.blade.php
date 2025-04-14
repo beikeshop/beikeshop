@@ -2,6 +2,7 @@
   @csrf
   <input type="hidden" name="sid" value="">
   <input type="hidden" name="payment_type" value="{{ $payment_type }}">
+  @if ($payment_type == 'card')
   <div class="mb-3">
     @foreach (plugin_setting('wtp.card_type', ['visa', 'mastercard']) as $card_type)
       <img style="height: 30px;" src="{{ plugin_origin('wtp', '/image/' . $card_type . '.svg') }}" class="img-fluid">
@@ -32,6 +33,7 @@
       <input type="text" name="payment_information[holder_name]" class="form-control d-none">
     </div>
   </div>
+  @endif
   <fieldset id="payment">
     <div class="buttons">
       <div class="pull-right">
