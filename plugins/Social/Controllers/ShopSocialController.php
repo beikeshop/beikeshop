@@ -31,7 +31,7 @@ class ShopSocialController extends Controller
             $config = [
                 'client_id'     => $providerSetting['key'],
                 'client_secret' => $providerSetting['secret'],
-                'redirect'      => shop_route('social.callback', $provider),
+                'redirect'      => shop_route('social.callback', $provider, false),
             ];
             Config::set("services.{$provider}", $config);
         }

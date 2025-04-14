@@ -120,7 +120,7 @@ function admin_route($route, $params = []): string
  * @param mixed $params
  * @return string
  */
-function shop_route($route, $params = []): string
+function shop_route($route, $params = [], $isLang = true): string
 {
     $langs = array_map(function ($item) {
         return '/lang/'.$item;
@@ -133,7 +133,7 @@ function shop_route($route, $params = []): string
 
     $uri = str_replace($host, '', $uri);
 
-    if (in_array($uri, $langs) || ($lang === system_setting('base.locale')))
+    if (in_array($uri, $langs) || ($lang === system_setting('base.locale')) || !$isLang)
     {
         return $host . $uri;
     }

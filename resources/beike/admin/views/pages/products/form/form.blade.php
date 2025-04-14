@@ -470,6 +470,7 @@
           </div>
           <div class="tab-pane fade" id="tab-attribute">
             <h6 class="border-bottom pb-3 mb-4">{{ __('admin/attribute.index') }}</h6>
+            @hookwrapper('admin.product.edit.attribute')
             <x-admin::form.row title="{{ __('admin/attribute.set_attribute') }}">
               <div class="pdf-table">
                 <table class="table table-bordered w-max-600">
@@ -525,6 +526,7 @@
                 </table>
               </div>
             </x-admin::form.row>
+            @endhookwrapper
           </div>
 
           <div class="tab-pane fade" id="tab-seo">
@@ -801,7 +803,6 @@
           const categories = JSON.parse(JSON.stringify(this.source.categories));
           const categoryIds = this.form.categories;
           const categoryFormat = [];
-
           categoryIds.forEach((categoryId, index) => {
             const category = categories.find(v => v.id == categoryId);
             if (category) {
@@ -865,7 +866,6 @@
       methods: {
         categoriesChange(e) {
           const last = e[e.length - 1];
-
           this.$nextTick(() => {
             this.$refs.refCascader.dropDownVisible = false
             // this.$refs.refCascader.$refs.panel.checkedValue = [];
