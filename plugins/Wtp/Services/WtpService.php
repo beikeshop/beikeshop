@@ -111,7 +111,7 @@ class WtpService extends PaymentService
             'X-MERCHANT-ID'=>$this->merchantId,
             'X-SITE-DOMAIN'=>$wtp->getDomain(),
             'X-ADDON-PLATFORM'=>'beikeshop',
-            'X-ADDON-VERSION'=>'4.0.0',
+            'X-ADDON-VERSION'=>'1.6.0',
             'X-ADDON-TYPE'=>'web',
         );
         $payResult = $wtp->pay($this->url, $requestData, $headers, $userAgent);
