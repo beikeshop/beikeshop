@@ -189,5 +189,15 @@
 
     @hook('account.login.form.js.after')
 
+    // 监听第三方登录成功回调的页面 postMessage 消息，关闭当前窗口
+    window.addEventListener('message', function (event) {
+      if (event.data.type == 'social_callback' && event.data.data == 'close_window') {
+        if (window.name) {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+            parent.window.location.reload()
+        }
+      }
+    }, false);
   </script>
 @endpush
