@@ -75,6 +75,9 @@ class ZipArchiverService
             return false;
         }
 
+        // 获取源目录的基本名称作为ZIP包内的顶层目录名
+        $rootDirectory = basename($this->sourcePath);
+
         $dirIterator = new RecursiveDirectoryIterator($this->sourcePath);
         $iterator    = new RecursiveIteratorIterator($dirIterator, RecursiveIteratorIterator::SELF_FIRST);
 
@@ -84,18 +87,30 @@ class ZipArchiverService
             }
 
             $filePath = $file->getPathname();
-            // 计算相对路径时，确保路径格式一致
-            $relativePath = substr($filePath, strlen($this->sourcePath) + 1);
+            // 计算原始相对路径
+            $originalRelativePath = substr($filePath, strlen($this->sourcePath) + 1);
 
-            // 检查是否应该忽略此文件/目录
-            if ($this->shouldIgnore($relativePath)) {
+            // 检查是否应该忽略此文件/目录 (使用原始相对路径)
+            if ($this->shouldIgnore($originalRelativePath)) {
                 continue;
             }
 
+            // 构建ZIP包内的完整路径（包含顶层目录）
+            // 确保即使 originalRelativePath 为空（即源目录本身），也能正确处理
+            $zipPath = $originalRelativePath ? $rootDirectory . '/' . $originalRelativePath : $rootDirectory;
+            // 确保路径分隔符统一为 /
+            $zipPath = str_replace('\\', '/', $zipPath); // 修正：处理反斜杠
+
             if ($file->isDir()) {
-                $zip->addEmptyDir($relativePath);
+                // 添加空目录，注意要使用包含顶层目录的路径
+                // 确保目录路径以 / 结尾，如果原始路径不为空
+                if ($originalRelativePath) {
+                    $zipPath = rtrim($zipPath, '/') . '/';
+                }
+                $zip->addEmptyDir($zipPath);
             } else {
-                $zip->addFile($filePath, $relativePath);
+                // 添加文件，注意要使用包含顶层目录的路径
+                $zip->addFile($filePath, $zipPath);
             }
         }
 
@@ -114,58 +129,17 @@ class ZipArchiverService
             return false;
         }
 
-        // 首先检查路径是否与任何忽略模式匹配（无论是文件还是目录）
         foreach ($this->ignorePatterns as $pattern) {
-            // 处理目录通配符模式（如 .git/* 匹配 .git 目录下所有内容）
-            if (substr($pattern, -2) === '/*') {
-                $dirPattern = substr($pattern, 0, -2);
-                if (strpos($path, $dirPattern . '/') === 0) {
-                    return true;
-                }
+            if (str_starts_with($path, $pattern)) {
+                return true;
             }
-            // 检查是否为目录匹配（不依赖于is_dir，而是根据路径结构判断）
-            else {
-                // 1. 路径完全等于模式 (如 path="node_modules", pattern="node_modules")
-                if ($path === $pattern) {
-                    return true;
-                }
 
-                // 2. 路径在模式目录内 (如 path="node_modules/package/file.js", pattern="node_modules")
-                // 检查路径是否以模式开头并紧跟斜杠
-                if (strpos($path, $pattern . '/') === 0) {
-                    return true;
-                }
-
-                // 3. 处理文件通配符匹配
-                $regexPattern = '#^' . str_replace(['*', '?'], ['.*', '.'], $pattern) . '$#';
-                if (preg_match($regexPattern, $path)) {
-                    return true;
-                }
+            $regexPattern = '#^' . str_replace(['*', '?'], ['.*', '.'], $pattern) . '$#';
+            if (preg_match($regexPattern, $path)) {
+                return true;
             }
         }
 
         return false;
     }
 }
-
-//// 使用示例
-//$projectPath = '/Applications/ServBay/www/beikeshop/plugins/Alibaba';
-//$outputPath  = '/Users/kevin/Desktop/mydemo/fanyi/Alibaba.zip';
-//
-//$zipper = new ZipArchiverService($projectPath, $outputPath);
-//$zipper->setIgnorePatterns([
-//   '*.log',           // 忽略所有日志文件
-//   '.git',          // 忽略.git目录下的所有内容
-//   'node_modules',  // 忽略node_modules目录
-//   'tmp',            // 忽略tmp目录
-//   '.idea',
-//]);
-//
-//// 也可以单独添加忽略模式
-//$zipper->addIgnorePattern('*.tmp');
-//
-//if ($zipper->create()) {
-//   echo '项目已成功打包';
-//} else {
-//   echo '打包失败';
-//}

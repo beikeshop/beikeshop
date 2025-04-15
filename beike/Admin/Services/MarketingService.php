@@ -189,13 +189,16 @@ class MarketingService
                 } else {
                     $zipFile->extract(base_path('plugins')); //正常的beikeshop 插件
                 }
+                $zipFile->close();
             } catch (Exception $exception) {
                 throw new Exception($exception->getMessage());
             }
         } else {
             throw new Exception('无法识别的beikeshop插件！');
         }
-
+        if (file_exists($pluginZip)) {
+            @unlink($pluginZip);
+        }
     }
 
     // getDomain
