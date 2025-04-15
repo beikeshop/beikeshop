@@ -59,7 +59,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerGuard();
 
         $adminName = admin_name();
-        if (! Str::startsWith($uri, "/{$adminName}")) {
+        if (! Str::startsWith($uri, "/{$adminName}") && (! $this->app->runningInConsole())) {
             return;
         }
 
