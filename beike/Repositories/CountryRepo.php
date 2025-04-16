@@ -129,7 +129,8 @@ class CountryRepo
      */
     public static function listEnabled(): Collection|array
     {
-        return Country::query()->where('status', true)->select('id', 'name')->get();
+        $countries = Country::query()->where('status', true)->select('id', 'name')->get();
+        return hook_filter('repo.country.list.enabled', $countries);
     }
 
     /**
