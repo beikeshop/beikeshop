@@ -5,6 +5,7 @@
         <h5 class="mb-title mb-0">{{ __('shop/account.index') }}</h5>
         <span class="btn-close" aria-label="Close"></span>
       </div>
+      @hook('account.sidebar.before.head')
       <div class="head">
         <div class="portrait"><img src="{{ image_resize($customer->avatar, 200, 200) }}" alt="{{ $customer->name }}" class="img-fluid"></div>
         <div class="text-md-center">
@@ -13,8 +14,10 @@
           <div class="account-email">{{ $customer->email }}</div>
           @endhookwrapper
         </div>
+        @hook('account.sidebar.after.head')
       </div>
 
+      @hook('account.sidebar.before.nav')
       <nav class="list-group account-links">
         <a class="list-group-item d-flex justify-content-between align-items-center {{ equal_route('shop.account.index') ? 'active' : '' }}"
           href="{{ shop_route('account.index') }}">
@@ -40,11 +43,11 @@
           href="{{ shop_route('account.rma.index') }}">
           <span>{{ __('shop/account/rma.index') }}</span></a>
 
-          @hook('account.sidebar.before.logout')
-
+        @hook('account.sidebar.before.logout')
         <a class="list-group-item d-flex justify-content-between align-items-center" href="{{ shop_route('logout') }}">
           <span>{{ __('common.sign_out') }}</span></a>
       </nav>
+      @hook('account.sidebar.after.nav')
     </div>
   </div>
 </div>

@@ -11,12 +11,14 @@
 
 @section('content')
   @if (!request('iframe'))
-    <x-shop-breadcrumb type="static" value="login.index" />
+    <x-shop-breadcrumb type="static" value="login.index" :is-full="true" />
   @endif
 
   <div class="{{ request('iframe') ? 'container-fluid form-iframe mt-5' : 'container' }}" id="page-login" v-cloak>
     @if (!request('iframe'))
+      @hookwrapper('account.login.heading')
       <div class="hero-content pb-3 pb-lg-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
+      @endhookwrapper
     @endif
 
     <div class="login-wrap">
@@ -193,9 +195,9 @@
     window.addEventListener('message', function (event) {
       if (event.data.type == 'social_callback' && event.data.data == 'close_window') {
         if (window.name) {
-            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-            parent.layer.close(index); //再执行关闭
-            parent.window.location.reload()
+          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          parent.layer.close(index); //再执行关闭
+          parent.window.location.reload()
         }
       }
     }, false);

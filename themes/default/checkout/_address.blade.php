@@ -5,6 +5,7 @@
         <h5 class="mb-0 me-4">{{ __('shop/checkout.address') }}</h5>
         <el-checkbox v-model="same_as_shipping_address" v-if="source.addresses.length || source.guest_shipping_address">{{ __('shop/checkout.same_as_shipping_address') }}
         </el-checkbox>
+        @hook('checkout.address.shipping.title')
       </div>
       <button class="btn btn-sm icon" v-if="isAllAddress" @click="isAllAddress = false"><i
           class="bi bi-x-lg"></i></button>
@@ -24,6 +25,7 @@
               <div class="zipcode">@{{ address.zipcode }}</div>
               <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
               @endhookwrapper
+              @hook('checkout.address.shipping.item.bottom')
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success"
@@ -81,6 +83,7 @@
     <div class="checkout-title">
       <div class="d-flex">
         <h5 class="mb-0 me-4">{{ __('shop/checkout.payment_address') }}</h5>
+        @hook('checkout.address.payment.title')
       </div>
       <button class="btn btn-sm icon" v-if="isAllAddressPayment" @click="isAllAddressPayment = false"><i
           class="bi bi-x-lg"></i></button>
@@ -100,6 +103,7 @@
               <div class="zipcode">@{{ address.zipcode }}</div>
               <div class="address-info">@{{ address.address_1 }} @{{ address.address_2 }} @{{ address.city }} @{{ address.zone }} @{{ address.country }}</div>
               @endhookwrapper
+              @hook('checkout.address.payment.item.bottom')
               <div class="address-bottom">
                 <div>
                   <span class="badge bg-success"
@@ -180,6 +184,8 @@
         index: null,
         type: 'shipping_address_id',
       },
+
+      @hook('checkout._address.vue.data')
     },
 
     computed: {
@@ -208,6 +214,8 @@
           }
         },
       },
+
+      @hook('checkout._address.vue.computed')
     },
 
     methods: {
@@ -297,7 +305,11 @@
           this.isAllAddressPayment = false
         })
       },
-    }
+
+      @hook('checkout._address.vue.methods')
+    },
+
+    @hook('admin.brand.index.vue.options')
   })
 </script>
 @endpush

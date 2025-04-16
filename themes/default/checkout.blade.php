@@ -37,7 +37,9 @@
           <div class="card-body p-lg-4">
             @hook('checkout.body.header')
 
+            @hookwrapper('checkout._address')
             @include('checkout._address')
+            @endhookwrapper
 
             <div class="checkout-black">
               <h5 class="checkout-title">{{ __('shop/checkout.payment_method') }}</h5>

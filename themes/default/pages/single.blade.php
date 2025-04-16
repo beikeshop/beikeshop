@@ -15,11 +15,11 @@
 @endpush
 
 @section('content')
-  <x-shop-breadcrumb type="page" :value="$page['id']"/>
+  <x-shop-breadcrumb type="page" :value="$page['id']" :is-full="true" />
   @php
     $className = $page->category ? "col-lg-9 col-12" : "col-12";
   @endphp
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="{{ $className }}">
         <div class="card shadow-sm page-content">

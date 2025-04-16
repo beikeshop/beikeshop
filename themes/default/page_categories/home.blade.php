@@ -8,7 +8,7 @@
 @section('content')
   {{ $breadcrumb->render() }}
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-lg-9 col-12">
         <div class="card mb-4 shadow-sm h-min-600">

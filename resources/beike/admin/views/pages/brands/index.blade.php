@@ -99,7 +99,7 @@
 @push('footer')
   @include('admin::shared.vue-image')
   <script>
-    new Vue({
+    var app = new Vue({
       el: '#customer-app',
 
       data: {

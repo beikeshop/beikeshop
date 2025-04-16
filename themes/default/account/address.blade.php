@@ -51,7 +51,7 @@
               </div>
               <div v-else class="text-center">
                 <x-shop-no-data />
-                <button class="btn btn-dark mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
+                <button class="btn btn-primary mb-3" @click="editAddress"><i class="bi bi-plus-square-dotted me-1"></i>
                   {{ __('shop/account/addresses.add_address') }}</button>
               </div>
             </div>

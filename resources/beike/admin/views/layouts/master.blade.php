@@ -24,11 +24,13 @@
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <title>BeikeShop - @yield('title')</title>
   @stack('header')
-  {{-- <x-analytics /> --}}
+
   <script>
     const $languages = @json(locales());
     const $locale = '{{ locale() }}';
   </script>
+
+  @hook('admin.master.header.code')
 </head>
 
 <body class="@yield('body-class') {{ admin_locale() }}">

@@ -9,9 +9,9 @@
 @endpush
 
 @section('content')
-  <x-shop-breadcrumb type="page_category" :value="$category['id']" />
+  <x-shop-breadcrumb type="page_category" :value="$category['id']" :is-full="true" />
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-lg-9 col-12">
         <div class="card mb-4 shadow-sm h-min-600">
