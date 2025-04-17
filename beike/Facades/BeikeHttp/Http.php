@@ -41,6 +41,8 @@ class Http extends PendingRequest
             'Nonce'           => $this->nonce,
             'Signature'       => $signature,
             'Referer'         => $host,
+            'Version'         => config('beike.version'),
+            'Admin-Name'      => system_setting('base.admin_name'),
         ]);
 
         $this->withToken($this->token);

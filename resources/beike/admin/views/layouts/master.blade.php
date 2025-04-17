@@ -24,11 +24,13 @@
   <script src="{{ mix('build/beike/admin/js/app.js') }}"></script>
   <title>BeikeShop - @yield('title')</title>
   @stack('header')
-  {{-- <x-analytics /> --}}
+
   <script>
     const $languages = @json(locales());
     const $locale = '{{ locale() }}';
   </script>
+
+  @hook('admin.master.header.code')
 </head>
 
 <body class="@yield('body-class') {{ admin_locale() }}">
@@ -37,6 +39,8 @@
   <div class="main-content">
     <x-admin-sidebar />
     <div id="content">
+      @hook('admin.master.content.before')
+
       <div class="page-title-box py-1 d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <h5 class="page-title">@yield('title')</h5>
@@ -44,8 +48,11 @@
         </div>
         <div class="text-nowrap">@yield('page-title-right')</div>
       </div>
+      @hook('admin.master.content.before.container')
       <div class="container-fluid p-0">
-        <div class="content-info">@yield('content')</div>
+        <div class="content-info">
+          @yield('content')
+        </div>
 
         <div class="page-bottom-btns">
           @yield('page-bottom-btns')
@@ -57,6 +64,8 @@
             &copy; {{ date('Y') }} All Rights Reserved</p>
 
       </div>
+
+      @hook('admin.master.content.after')
     </div>
   </div>
 
@@ -104,5 +113,7 @@
     @endif
   </script>
   @stack('footer')
+
+  @hook('admin.master.footer')
 </body>
 </html>
