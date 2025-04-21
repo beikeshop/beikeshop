@@ -71,6 +71,7 @@ class ShopSocialController extends Controller
             ];
             $customer = CustomerRepo::createCustomer($provider, $userData);
             Auth::guard(Customer::AUTH_GUARD)->login($customer);
+            session(['login_at' => now()->timestamp]);
 
             return view('Social::shop/callback');
         } catch (\Exception $e) {

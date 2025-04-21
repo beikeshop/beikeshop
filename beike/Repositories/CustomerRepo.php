@@ -72,7 +72,14 @@ class CustomerRepo
             throw new \Exception('new_password_must_keep_same');
         }
 
-        return $customer->update(['password' => bcrypt($newPassword)]);
+        $result = $customer->update(['password' => bcrypt($newPassword), 'last_password_changed_at' => now()]);
+
+        // 当前端 session 时间戳同步更新，避免被踢下线
+        if ($result) {
+            session(['login_at' => now()->timestamp]);
+        }
+
+        return $result;
     }
 
     public static function findByEmail($email)

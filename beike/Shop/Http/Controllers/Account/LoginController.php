@@ -48,6 +48,7 @@ class LoginController extends Controller
             }
 
             $customer = current_customer();
+            session(['login_at' => now()->timestamp]); // 设置当前登录时间
             if (empty($customer)) {
                 throw new NotFoundHttpException(trans('shop/login.empty_customer'));
             } elseif ($customer->active != 1) {
