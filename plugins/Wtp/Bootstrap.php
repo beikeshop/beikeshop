@@ -55,7 +55,7 @@ class Bootstrap
             });
 
             if (empty($paymentSettings['payment_type'])) {
-                throw new Exception("支付方式为空，请联系管理员");
+                $data;
             }
 
             $plugin = plugin('wtp');
