@@ -274,10 +274,42 @@ class FileManagerService
      */
     public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
+        // 1. 路径与文件名过滤
+       $savePath = $this->sanitizePath($savePath);
+       //$originName = $this->sanitizeFileName($originName);
+
+        // 2. 校验类型
+        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        $allowedMimeTypes = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+        ];
+        $extension = strtolower($file->getClientOriginalExtension());
+        $mimeType = $file->getMimeType();
+
+        if (!in_array($extension, $allowedExtensions) || !in_array($mimeType, $allowedMimeTypes)) {
+            throw new \Exception('上传失败：不允许的文件类型');
+        }
+
+        // 3. 限制大小2MB
+        if ($file->getSize() > 2 * 1024 * 1024) {
+            throw new \Exception('上传失败：文件太大');
+        }
+
         $originName = $this->getUniqueFileName($savePath, $originName);
         $filePath   = $file->storeAs($this->basePath . $savePath, $originName, 'catalog');
 
         return asset('catalog/' . $filePath);
+    }
+
+    public function sanitizeFileName($name): array|string|null
+    {
+        return preg_replace("/[^a-zA-Z0-9\._-]/", '', basename($name));
+    }
+    public function sanitizePath($path): string
+    {
+            return trim(str_replace('..', '', $path));
     }
 
     public function getUniqueFileName($savePath, $originName): string
