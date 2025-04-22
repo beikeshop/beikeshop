@@ -27,8 +27,10 @@ class FileManagerController extends Controller
     {
         $data = $this->fileManagerService->getDirectories();
         $data = hook_filter('admin.file_manager.index.data', $data);
+        $uploadMaxFilesize = ini_get('upload_max_filesize');
+        $maxSizeBytes = $this->convertToBytes($uploadMaxFilesize);
 
-        return view('admin::pages.file_manager.index', ['directories' => $data]);
+        return view('admin::pages.file_manager.index', ['directories' => $data, 'maxSizeBytes' => $maxSizeBytes]);
     }
 
     /**
@@ -218,5 +220,23 @@ class FileManagerController extends Controller
             'name' => $originName,
             'url'  => $fileUrl,
         ];
+    }
+
+    private function convertToBytes($sizeStr) {
+        $sizeStr = trim($sizeStr);
+        $last  = strtolower($sizeStr[strlen($sizeStr) - 1]);
+        $val   = substr($sizeStr, 0, -1);
+        switch ($last) {
+            case 'g':
+                $val *= 1024 * 1024 * 1024;
+                break;
+            case 'm':
+                $val *= 1024 * 1024;
+                break;
+            case 'k':
+                $val *= 1024;
+                break;
+        }
+        return $val;
     }
 }

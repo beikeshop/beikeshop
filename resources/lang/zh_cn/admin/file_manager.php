@@ -51,4 +51,9 @@ return [
     'target_dir_exist'          => '目标目录已存在',
     'rename_failed'             => '改名失败，请检查文件名是否合法或是否重名',
     'source_dir_empty'          => '源目录不能为空',
+    'upload_hint_1'             => '上传至目录',
+    'upload_hint_2'             => '单个文件最大上传大小 :max_size。',
+    'modify_size_limit'  => '如何修改大小限制？',
+    'upload_type_fail'  => '上传失败：不允许的文件类型',
+    'upload_size_fail'  => '上传失败：文件大小超过限制',
 ];

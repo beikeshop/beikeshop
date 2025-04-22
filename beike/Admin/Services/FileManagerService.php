@@ -274,27 +274,24 @@ class FileManagerService
      */
     public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
-        // 1. 路径与文件名过滤
+        // 路径与文件名过滤
        $savePath = $this->sanitizePath($savePath);
-       //$originName = $this->sanitizeFileName($originName);
 
-        // 2. 校验类型
-        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        // 校验类型
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4'];
         $allowedMimeTypes = [
             'image/jpeg',
             'image/pjpeg',
             'image/png',
+            'image/gif',
+            'image/webp',
+            'video/mp4',
         ];
         $extension = strtolower($file->getClientOriginalExtension());
         $mimeType = $file->getMimeType();
 
         if (!in_array($extension, $allowedExtensions) || !in_array($mimeType, $allowedMimeTypes)) {
-            throw new \Exception('上传失败：不允许的文件类型');
-        }
-
-        // 3. 限制大小2MB
-        if ($file->getSize() > 2 * 1024 * 1024) {
-            throw new \Exception('上传失败：文件太大');
+            throw new \Exception(trans('admin/file_manager.upload_type_fail'));
         }
 
         $originName = $this->getUniqueFileName($savePath, $originName);

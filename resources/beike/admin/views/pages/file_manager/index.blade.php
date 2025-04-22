@@ -179,8 +179,13 @@
       <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
       @endif
 
-      <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show"
-        width="500px" @close="uploadFileDialogClose" custom-class="upload-wrap">
+      <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="4vh" :visible.sync="uploadFileDialog.show"
+        width="580px" @close="uploadFileDialogClose" custom-class="upload-wrap">
+        <div class="alert alert-info mb-2">
+          {{ __('admin/file_manager.upload_hint_1') }} <@{{ folderCurrentName }}>,
+          {{ __('admin/file_manager.upload_hint_2', ['max_size' => ini_get('upload_max_filesize')]) }}
+          <a class="fw-bold" href="https://docs.beikeshop.com/config/upload_max_filesize.html" target="_blank">{{ __('admin/file_manager.modify_size_limit') }}</a>
+        </div>
         <el-upload class="photos-upload" target="photos-upload" id="photos-upload"
           element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
           element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
@@ -265,6 +270,7 @@
         defaultkeyarr: ['/'],
 
         triggerLeftOffset: 0,
+        uploadMaxFilesize: @json($maxSizeBytes),
 
         images: [],
         image_total: 0,
@@ -276,6 +282,10 @@
       computed: {
         paneLengthValue() {
           return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
+        },
+
+        folderCurrentName() {
+          return this.folderCurrent == '/' ? '{{ __('admin/file_manager.picture_space') }}' : this.folderCurrent.split('/').pop();
         },
 
         @hook('admin.file_manager.vue.computed')
@@ -461,7 +471,6 @@
 
         // 图片拖动到文件夹
         imgMove(path, name, selectImageIndex) {
-          console.log(path, selectImageIndex);
           $('.drop_file_hint').find('span:first-child').text(selectImageIndex.length).siblings('span').text(name);
           this.$confirm($('.drop_file_hint').html(),"{{ __('common.text_hint') }}", {
             dangerouslyUseHTMLString:true,
@@ -503,14 +512,20 @@
           }).catch((err) => {
             this.uploadFileDialog.images[index].status = 'fail';
             this.uploadFileDialog.images[index].progre = 80;
-            this.uploadFileDialog.images[index].fail_text = err.response.data.message;
+
+            let message = err.response.data.message;
+            if (file.file.size > this.uploadMaxFilesize) {
+              message = '{{ __('admin/file_manager.upload_size_fail') }}';
+            }
+
+            this.uploadFileDialog.images[index].fail_text = message;
           }).finally(() => {
             index += 1
           });
         },
 
         handleUploadChange(e) {
-          console.log(e);
+          // console.log(e);
           // console.log('handleUploadChange');
         },
 
