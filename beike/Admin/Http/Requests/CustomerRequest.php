@@ -11,6 +11,7 @@
 
 namespace Beike\Admin\Http\Requests;
 
+use Beike\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerRequest extends FormRequest
@@ -40,7 +41,13 @@ class CustomerRequest extends FormRequest
         if (! $this->id) {
             $rules['password'] = 'required|max:64';
         } else {
-            $rules['email'] = 'required|email:rfc|unique:customers,email,' . $this->id;
+            $rules['email'] = ['required','email:rfc',
+                function ($attribute, $value, $fail) {
+                    if (Customer::where('email', $value)->where('id', '<>', $this->id)->exists()) {
+                        $fail(trans('shop/login.email_address_error', ['email' => $this->attributes()['email']]));
+                    }
+                },
+            ];
         }
 
         return $rules;

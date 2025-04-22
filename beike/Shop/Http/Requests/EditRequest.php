@@ -2,6 +2,7 @@
 
 namespace Beike\Shop\Http\Requests;
 
+use Beike\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditRequest extends FormRequest
@@ -25,7 +26,13 @@ class EditRequest extends FormRequest
     {
         return [
             'name'  => 'required|string|min:2|max:16',
-            'email' => 'required|email:rfc|unique:customers,email,' . current_customer()->id,
+            'email'    => ['required','email:rfc',
+                function ($attribute, $value, $fail) {
+                    if (Customer::where('email', $value)->where('id', '<>', current_customer()->id)->exists()) {
+                        $fail(trans('shop/login.email_address_error', ['email' => $this->attributes()['email']]));
+                    }
+                },
+            ],
         ];
     }
 

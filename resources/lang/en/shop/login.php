@@ -40,4 +40,6 @@ return [
     'register_success'        => 'Registered successfully',
     'should_be_approved'      => 'The account must be approved by the administrator',
     'third_party_logins'      => 'Third-party Login',
+
+    'email_address_error'     => ':email is already used, please change the email address',
 ];
