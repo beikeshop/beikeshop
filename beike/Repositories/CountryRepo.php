@@ -28,8 +28,8 @@ class CountryRepo
             'name'       => $data['name']             ?? '',
             'code'       => $data['code']             ?? '',
             'continent'  => $data['continent']        ?? '',
-            'sort_order' => (int) $data['sort_order'] ?? 0,
-            'status'     => (bool) $data['status']    ?? 0,
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status']    ?? 0),
         ];
     }
 

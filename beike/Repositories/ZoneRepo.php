@@ -25,8 +25,8 @@ class ZoneRepo
             'country_id' => $data['country_id']       ?? 0,
             'name'       => $data['name']             ?? '',
             'code'       => $data['code']             ?? '',
-            'sort_order' => (int) $data['sort_order'] ?? 0,
-            'status'     => (bool) $data['status']    ?? 0,
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status']    ?? 0),
         ];
     }
 
