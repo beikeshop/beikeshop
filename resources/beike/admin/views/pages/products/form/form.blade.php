@@ -63,6 +63,7 @@
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
+            @hook('admin.product.name.before')
             <x-admin-form-input-locale
               :width="600" name="descriptions.*.name" title="{{ __('common.name') }}"
               :value="$descriptions" :required="true"/>
@@ -452,6 +453,7 @@
                             data-bs-target="#tab-descriptions-{{ $language->code }}"
                             type="button">{{ $language->name }}</button>
                   </li>
+                  @hook('admin.product.form.li.after')
                 @endforeach
               </ul>
 
@@ -575,12 +577,20 @@
                   <el-autocomplete
                     class="inline-input"
                     v-model="relations.keyword"
+                    popper-class="product-autocomplete-list"
                     value-key="name"
                     size="small"
                     :fetch-suggestions="relationsQuerySearch"
                     placeholder="{{ __('admin/builder.modules_keywords_search') }}"
                     @select="relationsHandleSelect"
-                  ></el-autocomplete>
+                  >
+                  <template slot-scope="{ item }">
+                    <div class="product-item">
+                      <div class="image"><img :src="item.image_format" class="img-fluid"></div>
+                      <div class="name" v-text="item.name"></div>
+                    </div>
+                  </template>
+                  </el-autocomplete>
 
                   <div class="item-group-wrapper" v-loading="relations.loading">
                     <template v-if="relations.products.length">
@@ -590,8 +600,12 @@
                         :options="{animation: 330}"
                       >
                         <div v-for="(item, index) in relations.products" :key="index" class="item">
-                          <div>
+                          {{-- <div>
                             <i class="el-icon-s-unfold"></i>
+                            <span>@{{ item.name }}</span>
+                          </div> --}}
+                          <div class="product-item">
+                            <div class="image"><img :src="item.image_format || (item.images && item.images[0]) || ''" class="img-fluid"></div>
                             <span>@{{ item.name }}</span>
                           </div>
                           <i class="el-icon-delete right" @click="relationsRemoveProduct(index)"></i>

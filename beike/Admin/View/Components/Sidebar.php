@@ -5,6 +5,7 @@ namespace Beike\Admin\View\Components;
 use Beike\Models\AdminUser;
 use Beike\Plugin\Plugin;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class Sidebar extends Component
 {
@@ -66,6 +67,7 @@ class Sidebar extends Component
                 'route'    => 'home.index',
                 'title'    => trans('admin/common.home'),
                 'icon'     => 'bi bi-house',
+                'blank'    => true,
                 'prefixes' => $this->getHomeSubPrefix(),
             ],
             [
@@ -168,7 +170,11 @@ class Sidebar extends Component
 
             $url = $link['url'] ?? '';
             if (empty($url)) {
-                $this->links[$index]['url'] = admin_route($link['route']);
+                if (Str::startsWith($link['route'], ['http://', 'https://'])) {
+                    $this->links[$index]['url'] = $link['route'];
+                } else {
+                    $this->links[$index]['url'] = admin_route($link['route']);
+                }
             }
 
             $title = $link['title'] ?? '';
@@ -200,7 +206,11 @@ class Sidebar extends Component
 
                     $url = $item['url'] ?? '';
                     if (empty($url)) {
-                        $this->links[$index]['children'][$key]['url'] = admin_route($item['route']);
+                        if (Str::startsWith($item['route'], ['http://', 'https://'])) {
+                            $this->links[$index]['children'][$key]['url'] = $item['route'];
+                        } else {
+                            $this->links[$index]['children'][$key]['url'] = admin_route($item['route']);
+                        }
                     }
 
                     $title = $item['title'] ?? '';

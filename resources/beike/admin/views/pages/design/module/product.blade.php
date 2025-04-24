@@ -15,6 +15,7 @@
           <div class="autocomplete-group-wrapper">
             <el-autocomplete
               class="inline-input"
+              popper-class="product-autocomplete-list"
               v-model="keyword"
               value-key="name"
               size="small"
@@ -22,7 +23,14 @@
               placeholder="{{ __('admin/builder.modules_keywords_search') }}"
               :highlight-first-item="true"
               @select="handleSelect"
-            ></el-autocomplete>
+              >
+              <template slot-scope="{ item }">
+                <div class="product-item">
+                  <div class="image"><img :src="item.image_format" class="img-fluid"></div>
+                  <div class="name" v-text="item.name"></div>
+                </div>
+              </template>
+            </el-autocomplete>
 
             <div class="item-group-wrapper" v-loading="loading">
               <template v-if="productData.length">
@@ -33,9 +41,9 @@
                   :options="{animation: 330}"
                 >
                   <div v-for="(item, index) in productData" :key="index" class="item">
-                    <div>
-                      <i class="el-icon-s-unfold"></i>
-                      <span>${item.name}</span>
+                    <div class="product-item">
+                      <div class="image"><img :src="item.image" class="img-fluid"></div>
+                      <span>@{{ item.name }}</span>
                     </div>
                     <i class="el-icon-delete right" @click="removeProduct(index)"></i>
                   </div>
@@ -52,7 +60,6 @@
 
 <script type="text/javascript">
 Vue.component('module-editor-product', {
-  delimiters: ['${', '}'],
   template: '#module-editor-product-template',
   props: ['module'],
   data: function () {

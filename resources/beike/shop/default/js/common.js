@@ -175,4 +175,44 @@ export default {
       document.head.appendChild(link);
     }
   },
+
+  // 根据后台配置的图片尺寸，按照比例调整商品列表图片尺寸
+  productImageResize() {
+    // 确保 config 存在并且配置正确
+    if (
+      !config ||
+      typeof config.productImageOriginWidth !== 'number' ||
+      typeof config.productImageOriginHeight !== 'number' ||
+      config.productImageOriginWidth <= 0 ||
+      config.productImageOriginHeight <= 0
+    ) {
+      console.warn('Invalid product image config.');
+      return;
+    }
+
+    // 判断是否存在图片包裹元素
+    const $productWrap = $('.product-wrap');
+    if ($productWrap.length === 0) {
+      return;
+    }
+
+    const productWrapWidth = $productWrap.width();
+    if (typeof productWrapWidth !== 'number' || productWrapWidth <= 0) {
+      return;
+    }
+
+    // 根据后台设置的图片尺寸比例计算列表商品图片高度
+    const ratio = config.productImageOriginWidth / config.productImageOriginHeight;
+    const height = productWrapWidth / ratio;
+
+    // 修改图片高度，确保图片元素存在
+    const $images = $('.image-old');
+    if ($images.length === 0) {
+      return;
+    }
+
+    $images.each(function () {
+      $(this).height(height);
+    });
+  },
 }

@@ -35,7 +35,7 @@
                   <div v-for="(item, index) in itemsData" :key="index" class="item">
                     <div>
                       <i class="el-icon-s-unfold"></i>
-                      <span>${item.name}</span>
+                      <span>@{{ item.name }}</span>
                     </div>
                     <i class="el-icon-delete right" @click="removeProduct(index)"></i>
                   </div>
@@ -52,7 +52,6 @@
 
 <script type="text/javascript">
 Vue.component('module-editor-page', {
-  delimiters: ['${', '}'],
   template: '#module-editor-page-template',
   props: ['module'],
   data: function () {

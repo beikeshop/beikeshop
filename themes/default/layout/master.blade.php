@@ -74,6 +74,8 @@
       isLogin: !!{{ current_customer()->id ?? 'null' }},
       guestCheckout: !!{{ system_setting('base.guest_checkout', 1) }},
       loginShowPrice: !!{{ system_setting('base.show_price_after_login', 0) }},
+      productImageOriginWidth: @json((int)system_setting('base.product_image_origin_width', 800)),
+      productImageOriginHeight: @json((int)system_setting('base.product_image_origin_height', 800)),
     }
 
     // 如果页面使用了ElementUI，且当前语言不是中文，则加载对应的语言包

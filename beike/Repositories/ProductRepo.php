@@ -348,7 +348,7 @@ class ProductRepo
         $products = Product::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
                 $query->where('name', 'like', "%{$name}%");
-            })->limit(10)->get();
+            })->orderByDesc('id')->limit(30)->get();
 
         return \Beike\Admin\Http\Resources\ProductSimple::collection($products)->jsonSerialize();
     }
@@ -414,6 +414,7 @@ class ProductRepo
             return [
                 'id'   => $product->id,
                 'name' => $product->description->name ?? '',
+                'image' => image_resize($product->image, 100, 100),
             ];
         })->toArray();
     }

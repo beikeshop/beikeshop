@@ -6,6 +6,10 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 use Illuminate\Support\Arr;
 use Throwable;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class Handler extends ExceptionHandler
 {
@@ -71,5 +75,26 @@ class Handler extends ExceptionHandler
         } else {
             (new RegisterErrorViewPaths())();
         }
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $exception
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function render($request, Throwable $exception)
+    {
+        // 捕获 CSRF Token 失效异常
+        if ($exception instanceof TokenMismatchException) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => __('auth.token_expired'),
+                ], 419);
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }

@@ -19,6 +19,7 @@
               <th>{{ __('common.id') }}</th>
               <th>{{ __('common.name') }}</th>
               <th>{{ __('admin/attribute_group.index') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.created_at') }}</th>
               @hook('admin.attribute.index.table.headers')
               <th width="150px">{{ __('common.action') }}</th>
@@ -29,6 +30,7 @@
               <td>@{{ item.id }}</td>
               <td>@{{ item.name }}</td>
               <td>@{{ item.attribute_group_name }}</td>
+              <td>@{{ item.sort_order }}</td>
               <td>@{{ item.created_at }}</td>
               @hook('admin.attribute.index.table.body')
               <td>

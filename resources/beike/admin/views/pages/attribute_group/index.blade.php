@@ -18,6 +18,7 @@
             <tr>
               <th>ID</th>
               <th>{{ __('common.name') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.created_at') }}</th>
               @hook('admin.attribute_group.table.headers')
               <th width="130px">{{ __('common.action') }}</th>
@@ -27,6 +28,7 @@
             <tr v-for="group, index in attribute_groups" :key="index">
               <td>@{{ group.id }}</td>
               <td>@{{ group.description?.name || '' }}</td>
+              <td>@{{ group.sort_order }}</td>
               <td>@{{ group.created_at }}</td>
               @hook('admin.attribute_group.table.body')
               <td>

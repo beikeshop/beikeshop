@@ -142,12 +142,12 @@ class BrandRepo
     {
         $builder = Brand::query()
             ->where('name', 'like', "%$name%")
-            ->select('id', 'name', 'status');
+            ->select('id', 'name', 'status', 'logo');
         if ($onlyActive) {
             $builder->where('status', 1);
         }
 
-        return $builder->limit(10)->get();
+        return $builder->limit(30)->get();
     }
 
     /**
@@ -162,6 +162,7 @@ class BrandRepo
             return [
                 'id'   => $brand->id,
                 'name' => $brand->name ?? '',
+                'logo' => image_resize($brand->logo, 100, 100),
             ];
         })->toArray();
     }

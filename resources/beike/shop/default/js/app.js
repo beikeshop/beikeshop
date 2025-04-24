@@ -33,6 +33,11 @@ $(document).ready(function ($) {
 
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+  bk.productImageResize()
+  window.addEventListener('resize', function () {
+    bk.productImageResize()
+  })
 });
 
 bk.getCarts(); // 页面初始加载购物车数据

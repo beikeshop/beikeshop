@@ -99,6 +99,14 @@ class BrandController extends Controller
     public function autocomplete(Request $request): JsonResponse
     {
         $brands = BrandRepo::autocomplete($request->get('name') ?? '', 0);
+        $brands = $brands->map(function ($brand) {
+            return [
+                'id'   => $brand->id,
+                'name' => $brand->name ?? '',
+                'logo' => image_resize($brand->logo, 100, 100),
+                'status' => $brand->status ?? 0,
+            ];
+        })->toArray();
 
         return json_success(trans('common.get_success'), $brands);
     }

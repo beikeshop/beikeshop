@@ -300,10 +300,6 @@ class FileManagerService
         return asset('catalog/' . $filePath);
     }
 
-    public function sanitizeFileName($name): array|string|null
-    {
-        return preg_replace("/[^a-zA-Z0-9\._-]/", '', basename($name));
-    }
     public function sanitizePath($path): string
     {
             return trim(str_replace('..', '', $path));
