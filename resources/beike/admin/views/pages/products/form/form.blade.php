@@ -43,6 +43,7 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relations" type="button">{{ __('admin/product.product_relations') }}</button>
     </li>
+    @hook('admin.product.form.li.after')
   </ul>
 
   <div class="card">
