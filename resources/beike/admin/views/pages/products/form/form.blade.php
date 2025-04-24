@@ -43,6 +43,7 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relations" type="button">{{ __('admin/product.product_relations') }}</button>
     </li>
+    @hook('admin.product.form.li.after')
   </ul>
 
   <div class="card">
@@ -56,6 +57,7 @@
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
+            @hook('admin.product.name.before')
             <x-admin-form-input-locale
               :width="600" name="descriptions.*.name" title="{{ __('common.name') }}"
               :value="$descriptions" :required="true" />
