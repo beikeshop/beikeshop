@@ -12,6 +12,7 @@
 namespace Beike\Repositories;
 
 use Beike\Models\Category;
+use Beike\Models\CategoryPath;
 use Beike\Shop\Http\Resources\CategoryDetail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
