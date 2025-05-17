@@ -196,23 +196,25 @@ export default {
       return;
     }
 
-    const productWrapWidth = $productWrap.width();
-    if (typeof productWrapWidth !== 'number' || productWrapWidth <= 0) {
-      return;
-    }
+    $productWrap.each(function () {
+      const $images = $(this).find('.image-old');
+      if ($images.length === 0) {
+        return;
+      }
 
-    // 根据后台设置的图片尺寸比例计算列表商品图片高度
-    const ratio = config.productImageOriginWidth / config.productImageOriginHeight;
-    const height = productWrapWidth / ratio;
+      const productWrapWidth = $(this).width();
+      if (typeof productWrapWidth !== 'number' || productWrapWidth <= 0) {
+        return;
+      }
 
-    // 修改图片高度，确保图片元素存在
-    const $images = $('.image-old');
-    if ($images.length === 0) {
-      return;
-    }
+      // 根据后台设置的图片尺寸比例计算列表商品图片高度
+      const ratio = config.productImageOriginWidth / config.productImageOriginHeight;
+      const height = productWrapWidth / ratio;
 
-    $images.each(function () {
-      $(this).height(height);
+      // 修改图片高度
+      $images.each(function () {
+        $(this).height(height);
+      });
     });
   },
 }

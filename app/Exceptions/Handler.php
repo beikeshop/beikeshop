@@ -86,13 +86,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        // 捕获 CSRF Token 失效异常
-        if ($exception instanceof TokenMismatchException) {
-            if ($request->expectsJson()) {
+        if ($request->expectsJson()) {
+            // CSRF Token 失效
+            if ($exception instanceof TokenMismatchException) {
                 return response()->json([
                     'message' => __('auth.token_expired'),
                 ], 419);
             }
+
+            // 其他 Ajax 异常
+            return response()->json([
+                'code' => method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500,
+                'message' => app()->isLocal()
+                    ? $exception->getMessage()
+                    : '系统繁忙，请稍后再试',
+            ], 500);
         }
 
         return parent::render($request, $exception);

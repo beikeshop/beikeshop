@@ -54,4 +54,11 @@ class Page extends Base
 
         return $filters['url'] ?? '';
     }
+
+    public function updateViewed()
+    {
+        $this->timestamps = false;
+        $this->increment('views');
+        $this->timestamps = true;
+    }
 }

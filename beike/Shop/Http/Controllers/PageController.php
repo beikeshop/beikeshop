@@ -21,7 +21,7 @@ class PageController extends Controller
     public function show(Page $page)
     {
         $page->load(['description', 'category.description', 'products.description']);
-        $page->increment('views');
+        $page->updateViewed();
 
         $data = [
             'page'                   => $page,

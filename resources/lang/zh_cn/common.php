@@ -96,7 +96,7 @@ return [
     'text_hour'            => '小时',
     'cropper_size'         => '裁剪框尺寸',
 
-    'examine'                => '审核',
+    'examine'              => '审核',
 
     'before'               => '请',
     'login'                => '登录',
@@ -104,6 +104,8 @@ return [
     'continent'            => '洲',
     'text_total'           => '总计',
     'text_loading'         => '加载中...',
-    'select_file'         => '选择文件',
-    'pagination'         => '显示 :first - :last / 合计 :total（共 :last_page 页）',
+    'select_file'          => '选择文件',
+    'api_error_format'     => '接口返回异常：格式不正确',
+    'api_error_message'    => '接口返回错误',
+    'pagination'           => '显示 :first - :last / 合计 :total（共 :last_page 页）',
 ];

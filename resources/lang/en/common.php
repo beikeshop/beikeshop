@@ -103,5 +103,7 @@ return [
     'text_total'           => 'Total',
     'text_loading'         => 'loading...',
     'select_file'          => 'Select File',
-    'pagination' => 'Show :first - :last / Total :total (Total :last_page Pages)',
+    'api_error_format'     => 'API returns abnormally: format is incorrect',
+    'api_error_message'    => 'API returns error',
+    'pagination'           => 'Show :first - :last / Total :total (Total :last_page Pages)',
 ];
