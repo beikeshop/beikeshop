@@ -43,6 +43,9 @@
             <div class="tab-content">
               @foreach (locales() as $language)
                 <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="tab-{{ $language['code'] }}">
+                  <x-admin::form.row title="{{ __('common.language') }}">
+                    @hook('admin.page.info.before')
+                  </x-admin::form.row>
                   @php
                     $error_title = $errors->first("descriptions.{$language['code']}.title");
                   @endphp

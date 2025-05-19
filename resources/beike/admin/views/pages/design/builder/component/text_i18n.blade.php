@@ -7,6 +7,7 @@
         <span slot="label" style="padding: 0 8px; font-size: 12px">@{{ item.name }}</span>
 
         <div class="i18n-inner">
+          @hook('admin.menu.before')
           <el-input :type="type" :rows="4" :placeholder="item.name" :key="index"
             :size="size" v-model="value[item.code]" @input="(val) => {valueChanged(val, item.code)}">
           </el-input>
