@@ -23,10 +23,23 @@ export default {
       area: ['1060px', '680px'],
       content: `${base}/file_manager${params}`,
       success: function(layerInstance, index) {
-        var iframeWindow = window[layerInstance.find("iframe")[0]["name"]];
-        iframeWindow.callback = function(images) {
-          callback(images);
-        }
+        var iframe = layerInstance.find("iframe")[0];
+        if (!iframe) return;
+
+        var frameId = iframe.name || iframe.id || 'fileManagerFrame';
+        iframe.name = frameId;
+
+        var checkFrame = setInterval(function() {
+          try {
+            var iframeWindow = window.frames[frameId];
+            if (iframeWindow && iframeWindow.document.readyState === 'complete') {
+              clearInterval(checkFrame);
+              iframeWindow.callback = function(images) {
+                callback(images);
+              };
+            }
+          } catch (e) {}
+        }, 100);
       }
     });
   },
