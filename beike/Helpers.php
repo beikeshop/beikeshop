@@ -1001,3 +1001,59 @@ function get_domain($domain = null)
     // 返回提取的主域名
     return implode('.', array_slice($parts, -2));
 }
+
+function getDBDriver()
+{
+    return config('database.connections.' . config('database.default') . '.driver');  //如: mysql, sqlite, postgresql, sqlsrv
+}
+
+function is_associative_array($array): bool
+{
+    if (!is_array($array)) {
+        return false;
+    }
+
+    $keys = array_keys($array);
+
+    return array_keys($keys) !== $keys;
+}
+
+
+function isTwoDimensionalArray($array): bool
+{
+    if (!is_array($array)) {
+        return false;
+    }
+
+    $filtered = array_filter($array, 'is_array');
+
+    return count($filtered) > 0;
+}
+
+function replace_url($url): string
+{
+    $urlInfo = parse_url($url);
+    $lang = (locale() === system_setting('base.locale')) ? null : session()->get('locale');
+    $path = $urlInfo['path'];
+    if ($lang) {
+
+        $path = '/' . $lang . $urlInfo['path'];
+    }
+
+    return $urlInfo['scheme'] . '://' . $urlInfo['host'] . $path . '?' . $urlInfo['query'];
+}
+
+/**
+ * 根据后台设置商品图片的原始尺寸比例，与调用处传过来的宽，计算图片的高
+ *
+ * @param $width
+ * @return int
+ */
+function calculate_height_by_ratio($width): int
+{
+    $originWidth = system_setting('base.product_image_origin_width', '800');
+    $originHeight = system_setting('base.product_image_origin_height', '800');
+    $ratio = $originHeight / $originWidth;
+
+    return round($width * $ratio);
+}

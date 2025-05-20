@@ -10,16 +10,22 @@ class Textarea extends Component
 
     public string $title;
 
+    public string $error;
+
     public string $value;
 
     public bool $required;
 
-    public function __construct(string $name, string $title, ?string $value, bool $required = false)
+    public bool $disabled;
+
+    public function __construct(string $name, string $title, ?string $value, bool $required = false, string $error = '', bool $disabled = false)
     {
         $this->name     = $name;
         $this->title    = $title;
         $this->value    = html_entity_decode($value, ENT_QUOTES);
         $this->required = $required;
+        $this->error    = $error;
+        $this->disabled = $disabled;
     }
 
     public function render()

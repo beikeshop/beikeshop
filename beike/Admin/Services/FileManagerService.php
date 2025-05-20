@@ -274,10 +274,35 @@ class FileManagerService
      */
     public function uploadFile(UploadedFile $file, $savePath, $originName): mixed
     {
+        // 路径与文件名过滤
+       $savePath = $this->sanitizePath($savePath);
+
+        // 校验类型
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4'];
+        $allowedMimeTypes = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/gif',
+            'image/webp',
+            'video/mp4',
+        ];
+        $extension = strtolower($file->getClientOriginalExtension());
+        $mimeType = $file->getMimeType();
+
+        if (!in_array($extension, $allowedExtensions) || !in_array($mimeType, $allowedMimeTypes)) {
+            throw new \Exception(trans('admin/file_manager.upload_type_fail'));
+        }
+
         $originName = $this->getUniqueFileName($savePath, $originName);
         $filePath   = $file->storeAs($this->basePath . $savePath, $originName, 'catalog');
 
         return asset('catalog/' . $filePath);
+    }
+
+    public function sanitizePath($path): string
+    {
+        return trim(str_replace('..', '', $path));
     }
 
     public function getUniqueFileName($savePath, $originName): string

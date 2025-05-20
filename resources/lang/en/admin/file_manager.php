@@ -50,4 +50,9 @@ return [
     'verify_select_image'     => 'Please select a picture',
     'rename_failed'           => 'Rename failed, please check the name',
     'verify_select_video'     => 'Please select video',
+    'upload_hint_1' => 'Upload to directory',
+    'upload_hint_2' => 'Maximum upload size of a single file :max_size.',
+    'modify_size_limit' => 'How to modify the size limit?',
+    'upload_type_fail'  => 'Upload failed: Invalid file type',
+    'upload_size_fail'  => 'Upload failed: File size exceeds limit',
 ];

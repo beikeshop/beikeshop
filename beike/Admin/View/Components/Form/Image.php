@@ -14,12 +14,15 @@ class Image extends Component
 
     public string $description;
 
-    public function __construct(string $name, ?string $title, ?string $value, ?string $description = '')
+    public bool $isRemove= false;
+
+    public function __construct(string $name, ?string $title, ?string $value, ?string $description = '', bool $isRemove = false)
     {
         $this->name  = $name;
         $this->title = $title ?? '';
         $this->value = $value ?? '';
         $this->description = $description ?? '';
+        $this->isRemove = $isRemove;
     }
 
     public function render()

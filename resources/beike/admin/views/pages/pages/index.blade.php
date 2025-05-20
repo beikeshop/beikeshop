@@ -25,6 +25,7 @@
             <th>ID</th>
             <th>{{ __('common.title') }}</th>
             <th>{{ __('common.status') }}</th>
+            <th>{{ __('page_category.views') }}</th>
             <th>{{ __('common.created_at') }}</th>
             <th>{{ __('common.updated_at') }}</th>
             @hook('admin.page.list.column')
@@ -43,6 +44,7 @@
             <td class="{{ $page['active'] ? 'text-success' : 'text-secondary' }}">
               {{ $page['active'] ? __('common.enable') : __('common.disable') }}
             </td>
+            <td>{{ $page['views'] }}</td>
             <td>{{ $page['created_at'] }}</td>
             <td>{{ $page['updated_at'] }}</td>
             @hook('admin.page.list.column_value')
@@ -71,6 +73,8 @@
 
 @push('footer')
 <script>
+  @hook('admin.pages.list.script.before')
+
   $('.delete-btn').click(function(event) {
     const id = $(this).data('id');
     const self = $(this);
@@ -87,5 +91,7 @@
       }
     })
   });
+
+  @hook('admin.pages.list.script.after')
 </script>
 @endpush

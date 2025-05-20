@@ -108,7 +108,7 @@
                       class="form-check-input"
                       name="{{ $column['name'] }}[]"
                       type="checkbox"
-                      value="{{ old($column['name'], $item['value']) }}"
+                      value="{{ $item['value'] }}"
                       {{ in_array($item['value'], old($column['name'], json_decode($column['value'] ?? '[]', true))) ? 'checked' : '' }}
                       id="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
                     <label class="form-check-label" for="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
@@ -120,6 +120,30 @@
                 </div>
                 @if (isset($column['description']))
                   <div class="help-text font-size-12 lh-base">{{ $column['description'] }}</div>
+                @endif
+              </x-admin::form.row>
+            @endif
+
+            @if ($column['type'] == 'file')
+              <x-admin::form.row :title="$column['label']" :required="$column['required'] ? true : false">
+                <div class="wp-400">
+                  @php
+                    $name = old($column['name'], $column['value'] ?? '');
+                    if ($name) {
+                      $name = explode('/', $name);
+                      $name = end($name);
+                    }
+                  @endphp
+                  <label class="btn border mb-1" data-toggle="tooltip">
+                    <i class="bi bi-file-earmark"></i> <span>{{ __('common.select_file') }}</span>
+                    <input type="file" class="d-none input-file {{ $errors->first($column['name']) ? 'is-invalid' : '' }}">
+                    <input class="d-none file-value" name="{{ $column['name'] }}" value="{{ old($column['name'], $column['value'] ?? '') }}" {{ $column['required'] ? 'required' : '' }}>
+                    <div class="invalid-feedback">{{ __('common.please_choose') }}</div>
+                  </label>
+                  <div class="file-name {{ !$name ? 'd-none' : '' }}"><a href="{{ asset(old($column['name'], $column['value'] ?? '')) }}" target="_blank">{{ $name }}</a></div>
+                </div>
+                @if ($errors->first($column['name']))
+                  <div class="invalid-feedback d-block">{{ $errors->first($column['name']) }}</div>
                 @endif
               </x-admin::form.row>
             @endif
@@ -169,6 +193,24 @@
         } else {
           $(this).parents('.form-checkbox').find('.placeholder-input').remove();
         }
+      });
+
+      $('.input-file').on('change', function () {
+        const self = $(this);
+        const file = $(this)[0].files[0];
+        var formData = new FormData();
+
+        formData.append('file', file, file.name);
+        formData.append('type', 'plugin_file');
+        $http.post('{{ admin_route('file.store') }}', formData).then(res => {
+          if (res.status == 'success') {
+            const fileName = res.data.value.split('/').pop();
+            self.next('.file-value').val(res.data.value);
+            self.parent().next('.file-name').removeClass('d-none').find('a').attr('href', res.data.url).text(fileName);
+          }
+        })
+
+        $(this).val('');
       });
     });
   </script>

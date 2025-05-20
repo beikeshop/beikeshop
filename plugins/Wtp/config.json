@@ -1,12 +1,12 @@
 {
     "code": "wtp",
     "name": {
-        "zh_cn": "赢支付",
-        "en": "Wintopay"
+        "zh_cn": "Cartadicreditopay",
+        "en": "Cartadicreditopay"
     },
     "description": {
-        "zh_cn": "Wtp <a href='https://www.wintopay.com/support/detail' target='_blank'>Wtp</a>",
-        "en": "Wtp <a href='https://www.wintopay.com/support/detail' target='_blank'>Wtp</a>"
+        "zh_cn": "WinToPay商户帐号申请： <a href='https://www.wintopay.com/support/detail' target='_blank'>WinToPay</a>",
+        "en": "Apply for a WinToPay merchant account: <a href='https://www.wintopay.com/support/detail' target='_blank'>WinToPay</a>"
     },
     "type": "payment",
     "version": "v1.0.0",

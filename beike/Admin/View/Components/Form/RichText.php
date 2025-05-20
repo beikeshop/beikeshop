@@ -14,9 +14,11 @@ class RichText extends Component
 
     public bool $required;
 
+    public string $error;
+
     public bool $multiple;
 
-    public function __construct(string $name, string $title, $value = '', bool $required = false, bool $multiple = false)
+    public function __construct(string $name, string $title, $value = '', bool $required = false, bool $multiple = false, string $error = '')
     {
         $value = html_entity_decode($value, ENT_QUOTES);
 
@@ -29,6 +31,7 @@ class RichText extends Component
         $this->value    = $value;
         $this->required = $required;
         $this->multiple = $multiple;
+        $this->error    = $error;
     }
 
     public function render()

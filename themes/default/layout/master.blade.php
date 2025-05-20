@@ -26,13 +26,19 @@
 </head>
 <body class="@yield('body-class') {{ request('_from') }}">
   @if (!request('iframe') && request('_from') != 'app')
+    @hook('layout.master.header.before')
     @include('layout.header')
+    @hook('layout.master.header.after')
   @endif
 
+  @hook('layout.master.content.before')
   @yield('content')
+  @hook('layout.master.content.after')
 
   @if (!request('iframe') && request('_from') != 'app')
+    @hook('layout.master.footer.before')
     @include('layout.footer')
+    @hook('layout.master.footer.after')
   @endif
 
   <script>
@@ -62,6 +68,7 @@
   @endif
 
   @stack('add-scripts')
+  @hook('layout.master.footer.code')
 </body>
 <!-- BeikeShop v{{ config('beike.version') }}({{ config('beike.build') }}) -->
 </html>

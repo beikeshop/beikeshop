@@ -5,6 +5,7 @@ namespace Beike\Admin\View\Components\Form;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+use Beike\Repositories\LanguageRepo;
 
 class InputLocale extends Component
 {
@@ -20,7 +21,9 @@ class InputLocale extends Component
 
     public bool $required;
 
-    public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false, string $placeholder = '')
+    public bool $disabled;
+
+    public function __construct(string $name, string $title, $value, string $width = '400', bool $required = false, string $placeholder = '', bool $disabled = false)
     {
         $this->name        = $name;
         $this->title       = $title;
@@ -28,11 +31,13 @@ class InputLocale extends Component
         $this->placeholder = $placeholder;
         $this->value       = $value;
         $this->required    = $required;
+        $this->disabled    = $disabled;
     }
 
     public function render()
     {
-        return view('admin::components.form.input-locale');
+        $data['languages'] = LanguageRepo::all();
+        return view('admin::components.form.input-locale', $data);
     }
 
     public function formatName(string $code)
