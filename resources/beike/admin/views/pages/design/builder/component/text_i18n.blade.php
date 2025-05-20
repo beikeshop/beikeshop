@@ -7,9 +7,11 @@
         <span slot="label" style="padding: 0 8px; font-size: 12px">@{{ item.name }}</span>
 
         <div class="i18n-inner">
+          @hook('admin.builder.text_i18n.tab_input.before')
           <el-input :type="type" :rows="4" :placeholder="item.name" :key="index"
             :size="size" v-model="value[item.code]" @input="(val) => {valueChanged(val, item.code)}">
           </el-input>
+          @hook('admin.builder.text_i18n.tab_input.after')
         </div>
       </el-tab-pane>
     </el-tabs>

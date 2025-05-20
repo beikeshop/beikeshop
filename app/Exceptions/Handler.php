@@ -7,9 +7,6 @@ use Illuminate\Foundation\Exceptions\RegisterErrorViewPaths;
 use Illuminate\Support\Arr;
 use Throwable;
 use Illuminate\Session\TokenMismatchException;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 
 class Handler extends ExceptionHandler
 {
