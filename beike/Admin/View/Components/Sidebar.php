@@ -67,7 +67,6 @@ class Sidebar extends Component
                 'route'    => 'home.index',
                 'title'    => trans('admin/common.home'),
                 'icon'     => 'bi bi-house',
-                'blank'    => true,
                 'prefixes' => $this->getHomeSubPrefix(),
             ],
             [

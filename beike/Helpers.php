@@ -1054,11 +1054,11 @@ function get_domain($domain = null)
     return implode('.', array_slice($parts, -2));
 }
 
-
 function getDBDriver()
 {
     return config('database.connections.' . config('database.default') . '.driver');  //如: mysql, sqlite, postgresql, sqlsrv
 }
+
 function is_associative_array($array): bool
 {
     if (!is_array($array)) {

@@ -302,7 +302,7 @@ class FileManagerService
 
     public function sanitizePath($path): string
     {
-            return trim(str_replace('..', '', $path));
+        return trim(str_replace('..', '', $path));
     }
 
     public function getUniqueFileName($savePath, $originName): string
