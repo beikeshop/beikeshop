@@ -108,7 +108,7 @@
                       class="form-check-input"
                       name="{{ $column['name'] }}[]"
                       type="checkbox"
-                      value="{{ old($column['name'], $item['value']) }}"
+                      value="{{ $item['value'] }}"
                       {{ in_array($item['value'], old($column['name'], json_decode($column['value'] ?? '[]', true))) ? 'checked' : '' }}
                       id="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
                     <label class="form-check-label" for="flexCheck-{{ $column['name'] }}-{{ $loop->index }}">
