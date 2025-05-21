@@ -10,7 +10,7 @@
  */
 
 return [
-    'plugins_index'         => '插件设置',
+    'plugins_index'         => '插件',
     'plugins_import'        => '上传插件',
     'plugins_show'          => '插件详情',
     'plugins_update'        => '插件更新',
@@ -20,7 +20,7 @@ return [
     'to_enable'             => '去启用',
     'uninstall_hint'        => '卸载插件会删除该插件的所有相关数据，确定要卸载吗？',
 
-    'plugin_list'              => '插件设置',
+    'plugin_list'              => '插件',
     'plugin_code'              => '插件代码',
     'plugin_type'              => '插件类型',
     'plugin_version'           => '版本号',
