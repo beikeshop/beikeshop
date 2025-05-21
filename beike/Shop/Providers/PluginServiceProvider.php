@@ -108,6 +108,21 @@ class PluginServiceProvider extends ServiceProvider
     {
         $this->registerAdminRoutes($pluginCode);
         $this->registerShopRoutes($pluginCode);
+        $pluginBasePath = $this->pluginBasePath;
+        $routePath = "{$pluginBasePath}/{$pluginCode}/Routes/";
+
+        if (is_dir($routePath)) {
+            // 获取$adminRoutePath目录下除了admin.php和shop.php之外的所有扩展名为".php"的文件
+            $excludeFiles = ['admin.php', 'shop.php'];
+            $files = glob($routePath. "*.php");
+            foreach ($files as $file) {
+                $fileName = basename($file);
+                if (in_array($fileName, $excludeFiles)) {
+                    continue;
+                }
+                $this->loadRoutesFrom($file);
+            }
+        }
     }
 
     /**
