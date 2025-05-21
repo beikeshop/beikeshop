@@ -12,8 +12,8 @@
 return [
     'api_url'          => env('BEIKE_API', 'https://api.beikeshop.com'),
     'official_website' => env('BEIKE_OFFICIAL_WEBSITE', 'https://beikeshop.com'),
-    'version'          => '1.6.0.4',
-    'build'            => '20250417',
+    'version'          => '1.6.0.5',
+    'build'            => '20250521',
 
     'admin_name'      => env('ADMIN_NAME'),
     'force_url_https' => env('APP_FORCE_HTTPS', false),
