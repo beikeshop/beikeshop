@@ -79,7 +79,7 @@
             <p style="font-size: 14px; line-height: 26px; word-wrap: break-word; word-break: break-all; margin-top: 32px;">
               {{ __('mail.sincerely') }}
               <br>
-              <strong>{{ config('app.name') }} {{ __('mail.team') }}</strong>
+              <strong>{{ system_setting('base.meta_title') }} {{ __('mail.team') }}</strong>
             </p>
           </dd>
         </dl>
