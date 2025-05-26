@@ -55,7 +55,7 @@ class Bootstrap
             });
 
             if (empty($paymentSettings['payment_type'])) {
-                $data;
+                return $data;
             }
 
             $plugin = plugin('wtp');
