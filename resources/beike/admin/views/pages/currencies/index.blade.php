@@ -90,11 +90,11 @@
         </el-form-item>
 
         <el-form-item label="{{ __('admin/setting.default_currency') }}">
-          <el-switch v-model="dialog.form.default_currency" :active-value="1" :inactive-value="0" :disabled="currencies[dialog.index].code == defaultCurrency"></el-switch>
+          <el-switch v-model="dialog.form.default_currency" :active-value="1" :inactive-value="0" :disabled="defaultCurrencyDisabled"></el-switch>
         </el-form-item>
 
         <el-form-item label="{{ __('common.status') }}">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="currencies[dialog.index].code == defaultCurrency"></el-switch>
+          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" :disabled="defaultCurrencyDisabled"></el-switch>
         </el-form-item>
 
         @hook('admin.currency.index.dialog.form.after')
@@ -126,7 +126,7 @@
 
         dialog: {
           show: false,
-          index: 0,
+          index: '',
           type: 'add',
           form: {
             id: '',
@@ -149,6 +149,15 @@
         },
 
         @hook('admin.currency.index.vue.data')
+      },
+
+      computed: {
+        defaultCurrencyDisabled() {
+          if (this.dialog.index == '') {
+            return false
+          }
+          return this.dialog.form.code == this.defaultCurrency
+        }
       },
 
       methods: {
@@ -213,8 +222,8 @@
 
         closeCustomersDialog(form) {
           this.$refs[form].resetFields();
+          this.dialog.index = '';
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
-          // this.dialog.show = false
         },
 
         @hook('admin.currency.index.vue.methods')

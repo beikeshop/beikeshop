@@ -226,6 +226,7 @@
       </div>
     </div>
 
+    @hook('product.tab.iframe.before')
     @hookwrapper('shop.product.description')
     <div class="product-description product-mb-block {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
