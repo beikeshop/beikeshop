@@ -6,7 +6,7 @@
       <td style="width:3.2%;max-width:30px;"></td>
       <td style="max-width:480px;text-align:left;">
         <h1 style="font-size: 20px; line-height: 36px; margin: 0px 0px 22px;">
-          {{ __('mail.welcome_register') }} {{ config('app.name') }}
+          {{ __('mail.welcome_register') }} {{ system_setting('base.meta_title') }}
         </h1>
         <p style="font-size:14px;color:#333; line-height:24px; margin:0;">
           {{ __('mail.customer_name', ['name' => $customer->name]) }}
@@ -26,7 +26,7 @@
             <p style="font-size: 14px; line-height: 26px; word-wrap: break-word; word-break: break-all; margin-top: 32px;">
               {{ __('mail.sincerely') }}
               <br>
-              <strong>{{ config('app.name') }} {{ __('mail.team') }}</strong>
+              <strong>{{ system_setting('base.meta_title') }} {{ __('mail.team') }}</strong>
             </p>
           </dd>
         </dl>
