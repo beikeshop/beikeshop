@@ -94,7 +94,7 @@ export default {
         reject(res);
         if (!hmsg) {
           if (res.response.status === 404) {
-            if (res.response.data.includes('nginx')) {
+            if (typeof res.response.data === 'string' && res.response.data.includes('nginx')) {
               layer.open({
                 type: 1,
                 title: false,

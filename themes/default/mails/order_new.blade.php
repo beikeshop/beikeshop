@@ -17,23 +17,23 @@
           </span>
         </p>
         <p style="font-size: 13px;font-weight:bold;margin-bottom:6px;color: #333;">{{ __('shop/account/order_info.order_details') }}：</p>
-        <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse; background-color:#f8f9fa">
+        <table style="width:100%;font-weight:300;margin-top:10px; margin-bottom:10px;border-collapse:collapse;">
           <thead>
             <tr>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_number') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_date') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.state') }}</td>
-              <td style="font-size:13px;padding: 7px 6px">{{ __('shop/account/order_info.order_amount') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_number') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_date') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.state') }}</td>
+              <td style="font-size:13px;padding: 7px 6px;background-color: #f8f9fa;border: 1px solid #eee;">{{ __('shop/account/order_info.order_amount') }}</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding:7px;font-size:13px;">{{ $order->number }}</td>
-              <td style="padding:7px;font-size:13px;">{{ $order->created_at }}</td>
-              <td style="padding:7px;font-size:13px;">
+              <td style="padding:7px;font-size:13px;border: 1px solid #eee;">{{ $order->number }}</td>
+              <td style="padding:7px;font-size:13px;border: 1px solid #eee;">{{ $order->created_at }}</td>
+              <td style="padding:7px;font-size:13px;border: 1px solid #eee;">
                 {{ $order->status_format }}
               </td>
-              <td style="padding:7px;font-size:13px;">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
+              <td style="padding:7px;font-size:13px;border: 1px solid #eee;">{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
             </tr>
           </tbody>
         </table>
@@ -83,7 +83,7 @@
             <p style="font-size: 14px; line-height: 26px; word-wrap: break-word; word-break: break-all; margin-top: 32px;">
               {{ __('mail.sincerely') }}
               <br>
-              <strong>{{ config('app.name') }} {{ __('mail.team') }}</strong>
+              <strong>{{ system_setting('base.meta_title') }} {{ __('mail.team') }}</strong>
             </p>
           </dd>
         </dl>
