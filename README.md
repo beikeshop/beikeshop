@@ -12,8 +12,6 @@
 </div>
 
 
-
-
 **Introduction to BeikeShop**
 BeikeShop is a globally leading open-source e-commerce Platform based on the Laravel framework, designed for the international trade and cross-border e-commerce industry.
 The System is 100% open-source! It supports a wide range of practical features, including multi-language, multi-currency, payment, logistics, and member management, making it easy for foreign trade businesses to expand their independent online stores.
@@ -27,28 +25,11 @@ The System is 100% open-source! It supports a wide range of practical features, 
 - **Frontend**: Blade Template + Vue.js
 
 ---
+# Live Demo
 
-# Environment Requirements
+Frontend Demo：[https://demo.beikeshop.com/](https://demo.beikeshop.com/)
 
-- **Independent Server** (Virtual hosting not supported)
-- **CentOS 7.0+** or **Ubuntu 20.04+**
-- **PHP 8.1+**
-- **MySQL 5.7+**
-- **Apache httpd 2.4+** or **Nginx 1.10+**
-
-**Required PHP Extensions**:
-- BCMath
-- Ctype
-- cURL
-- DOM
-- Fileinfo
-- JSON
-- Mbstring
-- OpenSSL
-- PCRE
-- PDO
-- Tokenizer
-- XML
+Backend Demo：[https://demo.beikeshop.com/admin/](https://demo.beikeshop.com/admin/login?admin_email=demo@beikeshop.com&admin_password=demo)
 
 ---
 
@@ -80,6 +61,29 @@ The System is 100% open-source! It supports a wide range of practical features, 
 4. Enter the `docker` directory and create the configuration file based on the template: `cp env.example .env`
 5. Modify the `.env` file and `docker-compose` as needed, then run the command: `docker compose up -d`
 
+---
+
+# Environment Requirements
+
+- **Independent Server** (Virtual hosting not supported)
+- **CentOS 7.0+** or **Ubuntu 20.04+**
+- **PHP 8.1+**
+- **MySQL 5.7+**
+- **Apache httpd 2.4+** or **Nginx 1.10+**
+
+**Required PHP Extensions**:
+- BCMath
+- Ctype
+- cURL
+- DOM
+- Fileinfo
+- JSON
+- Mbstring
+- OpenSSL
+- PCRE
+- PDO
+- Tokenizer
+- XML
 ---
 
 # Key Features
@@ -120,16 +124,6 @@ The System is 100% open-source! It supports a wide range of practical features, 
 ![页面展示4_后台商品列表](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-6.png)
 
 
----
-
-# Related Services
-
-If you have no technical background or want to quickly launch your independent store, you can purchase our hosting services!
-
-![服务展示1_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-8.png)
-![服务展示2_](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-9.png)
-If you want BeikeShop to meet your specific needs, we also offer 1-on-1 customization consulting services!
-![服务展示3](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-10.png)
 
 ---
 # Contributing
