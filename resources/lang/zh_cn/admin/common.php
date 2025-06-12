@@ -21,6 +21,7 @@ return [
     // errors
     'forbidden'              => '禁止访问',
     'has_no_permission'      => '您没有权限访问该页面, 请联系系统管理员。',
+    'no_permission'          => '抱歉：您没有当前操作权限',
 
     // header
     'home'                         => '首页',

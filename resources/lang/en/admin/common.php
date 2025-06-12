@@ -122,4 +122,5 @@ return [
     'text_closed'            => 'Closed',
     'text_enabled'           => 'Enabled',
     'design_app_settings'    => 'App Settings',
+    'no_permission' => 'Sorry: You do not have the current permission',
 ];
