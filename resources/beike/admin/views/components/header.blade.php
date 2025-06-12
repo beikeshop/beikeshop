@@ -1,11 +1,17 @@
 <div class="header-content d-none d-lg-block">
+  @hook('admin.header.before')
   <div class="header-wrap">
     <div class="header-left">
+      @hook('admin.header.left.before')
       <div class="logo">
         <a href=""><img src="{{ asset(system_setting('base.admin_logo', 'image/logo.png')) }}" class="img-fluid"></a>
       </div>
+      @hook('admin.header.left.after')
     </div>
     <div class="header-right">
+      @hook('admin.header.right.before')
+
+      @hookwrapper('admin.header.search')
       <div class="search-wrap">
         <div class="input-wrap">
           <div class="search-icon"><i class="bi bi-search"></i></div>
@@ -45,7 +51,11 @@
           </div>
         </div>
       </div>
+      @endhookwrapper
+
       <ul class="navbar navbar-right">
+        @hook('admin.header.navbar.before')
+
         <div class="alert alert-warning mb-0 warning-copyright {{ check_license() ? 'd-none' : '' }}">
           <i class="bi bi-exclamation-triangle-fill"></i> {!! __('admin/common.copyright_hint_text') !!}
         </div>
@@ -136,9 +146,14 @@
           </div>
         </li>
         @endhookwrapper
+
+        @hook('admin.header.navbar.after')
       </ul>
+
+      @hook('admin.header.right.after')
     </div>
   </div>
+  @hook('admin.header.after')
 </div>
 
 <div class="header-mobile d-lg-none">

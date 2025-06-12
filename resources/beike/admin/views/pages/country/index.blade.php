@@ -151,7 +151,9 @@
   @include('admin::shared.vue-image')
 
   <script>
-    new Vue({
+    @hook('admin.country.index.script.before')
+
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -183,13 +185,17 @@
 
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/country.country_name')]) }}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.country.index.vue.data')
       },
 
       watch: {
         page: function() {
           this.loadData();
         },
+
+        @hook('admin.country.index.vue.watch')
       },
 
       methods: {
@@ -271,8 +277,14 @@
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.country.index.vue.methods')
+      },
+
+      @hook('admin.country.index.vue.options')
     })
+
+    @hook('admin.country.index.script.after')
   </script>
 @endpush
