@@ -84,6 +84,7 @@ return [
     'design_footer_index'    => '页尾装修',
     'design_header_index'    => '页头装修',
     'design_menu_index'      => '导航配置',
+    'design_app_settings'    => 'APP设置',
     'design_app_home_index'  => 'APP首页设计',
     'app_push_index'         => 'APP消息推送',
     'categories_index'       => '商品分类',

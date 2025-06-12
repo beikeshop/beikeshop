@@ -121,4 +121,5 @@ return [
     'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
     'text_closed'            => 'Closed',
     'text_enabled'           => 'Enabled',
+    'design_app_settings'    => 'App Settings',
 ];

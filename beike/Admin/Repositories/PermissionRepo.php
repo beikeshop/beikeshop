@@ -57,7 +57,11 @@ class PermissionRepo
             ['title' => trans('admin/common.page'), 'permissions' => $this->getPagePermissions()],
             ['title' => trans('admin/common.page_category'), 'permissions' => $this->getPageCategoryPermissions()],
             ['title' => trans('admin/common.setting'), 'permissions' => $this->getSettingPermissions()],
-            ['title' => trans('admin/common.design'), 'permissions' => $this->getDesignPermissions()],
+            ['title' => trans('admin/common.design'), 'permissions' => $this->getThemePermissions()],
+            ['title' => trans('admin/common.design_menu_index'), 'permissions' => $this->getDesignMenuPermissions()],
+            ['title' => trans('admin/common.design_index'), 'permissions' => $this->getDesignIndexPermissions()],
+            ['title' => trans('admin/common.design_footer_index'), 'permissions' => $this->getDesignFooterPermissions()],
+            ['title' => trans('admin/common.design_app_settings'), 'permissions' => $this->getDesignAppHomePermissions()],
             ['title' => trans('admin/common.plugin'), 'permissions' => $this->getPluginPermissions()],
             ['title' => trans('admin/common.marketing'), 'permissions' => $this->getMarketingPermissions()],
             ['title' => trans('admin/common.report'), 'permissions' => $this->getReportPermissions()],
@@ -447,17 +451,44 @@ class PermissionRepo
         return hook_filter('role.account_permissions', $items);
     }
 
-    /**
-     * 设计权限列表
-     *
-     * @return array
-     */
-    private function getDesignPermissions(): array
+    private function getThemePermissions(): array
     {
-        $routes = ['theme_index', 'design_menu_index', 'design_index', 'design_header_index', 'design_footer_index', 'design_app_home_index', 'app_push_index'];
+        $routes = ['theme_index', 'theme_update'];
         $items  = $this->getPermissionList('design_builder', $routes);
 
-        return hook_filter('role.design_permissions', $items);
+        return hook_filter('role.theme_permissions', $items);
+    }
+
+    private function getDesignMenuPermissions(): array
+    {
+        $routes = ['design_menu_index', 'design_menu_update'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.menu_permissions', $items);
+    }
+
+    private function getDesignIndexPermissions(): array
+    {
+        $routes = ['design_index', 'design_update'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.design_index_permissions', $items);
+    }
+
+    private function getDesignFooterPermissions(): array
+    {
+        $routes = ['design_footer_index', 'design_footer_update'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.design_footer_permissions', $items);
+    }
+
+    private function getDesignAppHomePermissions(): array
+    {
+        $routes = ['design_app_home_index', 'design_app_home_update', 'app_push_index'];
+        $items  = $this->getPermissionList('design_builder', $routes);
+
+        return hook_filter('role.design_app_home_permissions', $items);
     }
 
     /**
