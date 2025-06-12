@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Throwable;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Handler extends ExceptionHandler
 {
@@ -85,6 +86,14 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($request->expectsJson()) {
+            // 处理权限验证异常
+            if ($exception instanceof AuthorizationException) {
+                return response()->json([
+                    'code'    => 403,
+                    'message' => trans('admin/common.no_permission'),
+                ], 403);
+            }
+
             // 处理表单验证异常
             if ($exception instanceof ValidationException) {
                 return response()->json([

@@ -70,6 +70,8 @@
   </div>
 
   <script>
+    @hook('admin.master.script.before')
+
     @if (locale() != 'zh_cn')
       ELEMENT.locale(ELEMENT.lang['{{ locale() }}'])
     @endif
@@ -111,7 +113,10 @@
         })
       }, 1000);
     @endif
+
+    @hook('admin.master.script.after')
   </script>
+
   @stack('footer')
 
   @hook('admin.master.footer')

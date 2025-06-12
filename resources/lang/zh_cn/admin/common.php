@@ -21,6 +21,7 @@ return [
     // errors
     'forbidden'              => '禁止访问',
     'has_no_permission'      => '您没有权限访问该页面, 请联系系统管理员。',
+    'no_permission'          => '抱歉：您没有当前操作权限',
 
     // header
     'home'                         => '首页',
@@ -84,6 +85,7 @@ return [
     'design_footer_index'    => '页尾装修',
     'design_header_index'    => '页头装修',
     'design_menu_index'      => '导航配置',
+    'design_app_settings'    => 'APP设置',
     'design_app_home_index'  => 'APP首页设计',
     'app_push_index'         => 'APP消息推送',
     'categories_index'       => '商品分类',

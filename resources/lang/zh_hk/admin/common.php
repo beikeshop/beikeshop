@@ -106,4 +106,5 @@ return [
     'zones_index'            => '省份管理',
     'help_index'             => '幫助',
     'license_bought'         => '已授權',
+    'design_app_settings'    => 'APP設定',
 ];
