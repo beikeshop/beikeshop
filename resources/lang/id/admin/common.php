@@ -106,4 +106,5 @@ return [
     'zones_index'                  => 'Pengelolaan Provinsi',
     'help_index'                   => 'Bantuan',
     'license_bought' => 'Resmi',
+    'design_app_settings'    => 'Pengaturan Aplikasi',
 ];

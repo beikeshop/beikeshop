@@ -116,4 +116,8 @@ return [
     'license_bought' => 'Authorized',
     'error_length_text'      => 'The input data for the field :key exceeds the maximum allowed length.',
     'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
+    'text_closed'            => 'Closed',
+    'text_enabled'           => 'Enabled',
+    'design_app_settings'    => 'App Settings',
+    'no_permission' => 'Sorry: You do not have the current permission',
 ];

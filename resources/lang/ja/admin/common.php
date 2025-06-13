@@ -106,4 +106,5 @@ return [
     'zones_index'                  => '州管理',
     'help_index'                   => 'ヘルプ',
     'license_bought' => '認可された',
+    'design_app_settings'    => 'アプリの設定',
 ];

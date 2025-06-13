@@ -116,18 +116,18 @@ Route::prefix($adminName)
 
                 // 页面装修
                 Route::middleware('can:design_index')->get('design/builder', [Controllers\DesignController::class, 'index'])->name('design.index');
-                Route::middleware('can:design_index')->put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
+                Route::middleware('can:design_update')->put('design/builder', [Controllers\DesignController::class, 'update'])->name('design.update');
                 Route::middleware('can:design_index')->post('design/builder/preview', [Controllers\DesignController::class, 'preview'])->name('design.module.preview');
 
                 Route::middleware('can:design_footer_index')->get('design_footer/builder', [Controllers\DesignFooterController::class, 'index'])->name('design_footer.index');
-                Route::middleware('can:design_footer_index')->put('design_footer/builder', [Controllers\DesignFooterController::class, 'update'])->name('design_footer.update');
+                Route::middleware('can:design_footer_update')->put('design_footer/builder', [Controllers\DesignFooterController::class, 'update'])->name('design_footer.update');
                 Route::middleware('can:design_footer_index')->post('design_footer/builder/preview', [Controllers\DesignFooterController::class, 'preview'])->name('design_footer.module.preview');
 
                 Route::middleware('can:design_menu_index')->get('design_menu/builder', [Controllers\DesignMenuController::class, 'index'])->name('design_menu.index');
-                Route::middleware('can:design_menu_index')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
+                Route::middleware('can:design_menu_update')->put('design_menu/builder', [Controllers\DesignMenuController::class, 'update'])->name('design_menu.update');
 
                 Route::middleware('can:design_app_home_index')->get('design_app_home/builder', [Controllers\DesignAppController::class, 'index'])->name('design_app_home.index');
-                Route::middleware('can:design_app_home_index')->put('design_app_home/builder', [Controllers\DesignAppController::class, 'update'])->name('design_app_home.update');
+                Route::middleware('can:design_app_home_update')->put('design_app_home/builder', [Controllers\DesignAppController::class, 'update'])->name('design_app_home.update');
 
                 // 模板主题
                 Route::middleware('can:theme_index')->get('themes', [Controllers\ThemeController::class, 'index'])->name('theme.index');
