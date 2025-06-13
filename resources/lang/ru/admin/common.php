@@ -106,4 +106,5 @@ return [
     'zones_index'                  => 'Управление провинции',
     'help_index'                   => 'помощь',
     'license_bought' => 'Авторизованный',
+    'design_app_settings'    => 'Настройки приложения',
 ];

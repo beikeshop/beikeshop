@@ -106,4 +106,5 @@ return [
     'zones_index'                  => 'Provincia',
     'help_index'                   => 'Ayuda',
     'license_bought' => 'Autorizado',
+    'design_app_settings'    => 'Configuración de la aplicación',
 ];
