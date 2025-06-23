@@ -330,6 +330,6 @@
       @hook('admin.product.list.vue.options')
     });
 
-    @hook('product.detail.script.after')
+    @hook('admin.product.list.script.after')
   </script>
 @endpush
