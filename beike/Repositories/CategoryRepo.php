@@ -78,7 +78,7 @@ class CategoryRepo
             ->when(!$includeInactive, function ($query) {
                 $query->where('categories.active', true);
             })
-            ->groupBy('cp.category_id', 'categories.parent_id', 'categories.position')
+            ->groupBy('categories.id', 'categories.parent_id', 'categories.position')
             ->orderBy('categories.position')
             ->orderBy('name')
             ->get();

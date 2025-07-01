@@ -30,6 +30,7 @@
   @endif
 
   <ul class="nav nav-tabs nav-bordered mb-3" role="tablist">
+    @hook('admin.product.form.top.tabs.before')
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-basic"
               type="button">{{ __('admin/product.basic_information') }}</button>
@@ -49,6 +50,7 @@
       <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-relations"
               type="button">{{ __('admin/product.product_relations') }}</button>
     </li>
+    @hook('admin.product.form.li.after')
   </ul>
 
   <div class="card">
@@ -61,6 +63,7 @@
         <input type="hidden" name="_redirect" value="{{ $_redirect }}"/>
 
         <div class="tab-content">
+          @hook('admin.product.form.tab_content.before')
           <div class="tab-pane fade show active" id="tab-basic">
             <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
             @hook('admin.product.name.before')
@@ -620,6 +623,7 @@
               </div>
             </x-admin::form.row>
           </div>
+          @hook('admin.product.form.tab_content.after')
         </div>
 
         <x-admin::form.row title="">
