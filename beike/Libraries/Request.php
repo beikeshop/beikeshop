@@ -67,16 +67,4 @@ class Request extends \Illuminate\Http\Request
 
         return $uri;
     }
-
-    public function url(): string
-    {
-        $host = request()->getSchemeAndHttpHost();
-        $uri  = request()->requestUri;
-
-        if (null !== $qs = $this->getQueryString()) {
-            $qs = '?' . $qs;
-        }
-
-        return rtrim(preg_replace('/\?.*/', '', $host . $uri) . $qs, '/');
-    }
 }
