@@ -56,4 +56,11 @@ return [
     'modify_size_limit'  => '如何修改大小限制？',
     'upload_type_fail'  => '上传失败：不允许的文件类型',
     'upload_size_fail'  => '上传失败：文件大小超过限制',
+    'invalid_path'              => '无效的路径参数',
+    'empty_source_path'         => '源路径不能为空',
+    'empty_dest_path'           => '目标路径不能为空',
+    'invalid_filename'          => '无效的文件名',
+    'invalid_request_data'      => '无效的请求数据',
+    'invalid_files_parameter'   => '无效的文件参数',
+    'invalid_upload_type'       => '无效的上传类型',
 ];

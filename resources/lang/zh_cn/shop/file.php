@@ -11,4 +11,6 @@
 
 return [
     'uploaded_success' => '上传成功',
+    'invalid_filename' => '无效的文件名',
+    'invalid_type'     => '无效的类型参数',
 ];
