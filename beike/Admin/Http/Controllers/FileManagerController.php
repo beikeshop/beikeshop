@@ -93,12 +93,45 @@ class FileManagerController extends Controller
     public function rename(Request $request): JsonResponse
     {
         try {
+            // 验证请求参数
+            $request->validate([
+                'origin_name' => 'required|string|max:255',
+                'new_name' => 'required|string|max:255'
+            ]);
+
             $originPath = $request->get('origin_name');
-            $newPath    = $request->get('new_name');
-            $this->fileManagerService->updateName($originPath, $newPath);
+            $newName = $request->get('new_name');
+
+            // 基本的路径验证
+            if (str_contains($originPath, '..') || str_contains($newName, '..')) {
+                throw new \Exception(trans('admin/file_manager.invalid_path'));
+            }
+
+            // 验证新文件名的安全性
+            if (!$this->isValidFileName($newName)) {
+                throw new \Exception(trans('admin/file_manager.invalid_filename'));
+            }
+
+            $this->fileManagerService->updateName($originPath, $newName);
+
+            // 记录重命名操作
+            \Log::info('File renamed', [
+                'origin_name' => $originPath,
+                'new_name' => $newName,
+                'user_id' => auth()->id(),
+                'ip' => $request->ip()
+            ]);
 
             return json_success(trans('common.updated_success'));
         } catch (Exception $e) {
+            // 记录错误日志
+            \Log::error('File rename error: ' . $e->getMessage(), [
+                'origin_name' => $request->get('origin_name'),
+                'new_name' => $request->get('new_name'),
+                'user_id' => auth()->id(),
+                'ip' => $request->ip()
+            ]);
+
             return json_fail($e->getMessage());
         }
     }
@@ -112,12 +145,56 @@ class FileManagerController extends Controller
     {
         try {
             $requestData = json_decode($request->getContent(), true);
-            $basePath    = $requestData['path']  ?? '';
-            $files       = $requestData['files'] ?? [];
+
+            // 验证请求数据
+            if (!is_array($requestData)) {
+                throw new \Exception(trans('admin/file_manager.invalid_request_data'));
+            }
+
+            $basePath = $requestData['path'] ?? '';
+            $files = $requestData['files'] ?? [];
+
+            // 验证基础路径
+            if (!is_string($basePath) || str_contains($basePath, '..')) {
+                throw new \Exception(trans('admin/file_manager.invalid_path'));
+            }
+
+            // 验证文件列表
+            if (!is_array($files)) {
+                throw new \Exception(trans('admin/file_manager.invalid_files_parameter'));
+            }
+
+            // 验证每个文件名
+            foreach ($files as $file) {
+                if (!is_string($file) || !$this->isValidFileName($file)) {
+                    throw new \Exception(trans('admin/file_manager.invalid_filename'));
+                }
+
+                // 检查路径遍历
+                if (str_contains($file, '..') || str_contains($file, '/') || str_contains($file, '\\')) {
+                    throw new \Exception(trans('admin/file_manager.invalid_filename'));
+                }
+            }
+
             $this->fileManagerService->deleteFiles($basePath, $files);
+
+            // 记录删除操作
+            \Log::info('Files deleted', [
+                'base_path' => $basePath,
+                'files' => $files,
+                'user_id' => auth()->id(),
+                'ip' => $request->ip()
+            ]);
 
             return json_success(trans('common.deleted_success'));
         } catch (Exception $e) {
+            // 记录错误日志
+            \Log::error('File deletion error: ' . $e->getMessage(), [
+                'request_data' => $request->getContent(),
+                'user_id' => auth()->id(),
+                'ip' => $request->ip()
+            ]);
+
             return json_fail($e->getMessage());
         }
     }
@@ -187,17 +264,38 @@ class FileManagerController extends Controller
     public function exportZip(Request $request)
     {
         try {
+            // 验证请求参数
+            $request->validate([
+                'path' => 'required|string|max:255'
+            ]);
+
             $imagePath = $request->get('path');
-            $zipFile   = $this->fileManagerService->zipFolder($imagePath);
+
+            // 基本的路径验证
+            if (empty($imagePath) || str_contains($imagePath, '..')) {
+                throw new \Exception(trans('admin/file_manager.invalid_path'));
+            }
+
+            $zipFile = $this->fileManagerService->zipFolder($imagePath);
+
+            // 安全的文件名处理
+            $safeFileName = preg_replace('/[^a-zA-Z0-9\-_\.]/', '', basename($zipFile));
 
             header('Content-Type: application/zip');
-            header('Content-Disposition: attachment; filename="' . basename($zipFile) . '"');
+            header('Content-Disposition: attachment; filename="' . $safeFileName . '"');
             header('Content-Length: ' . filesize($zipFile));
             readfile($zipFile);
             unlink($zipFile);
 
         } catch (Exception $e) {
-            echo $e->getMessage();
+            // 记录错误日志
+            \Log::error('File export error: ' . $e->getMessage(), [
+                'path' => $request->get('path'),
+                'user_id' => auth()->id(),
+                'ip' => $request->ip()
+            ]);
+
+            abort(400, $e->getMessage());
         }
     }
 
@@ -220,6 +318,48 @@ class FileManagerController extends Controller
             'name' => $originName,
             'url'  => $fileUrl,
         ];
+    }
+
+    /**
+     * 验证文件名是否安全
+     *
+     * @param string $fileName
+     * @return bool
+     */
+    private function isValidFileName(string $fileName): bool
+    {
+        // 检查文件名长度
+        if (strlen($fileName) > 255 || empty(trim($fileName))) {
+            return false;
+        }
+
+        // 检查危险字符
+        if (preg_match('#[<>:"|?*\x00-\x1f]#', $fileName)) {
+            return false;
+        }
+
+        // 检查路径遍历模式
+        if (str_contains($fileName, '..') || str_contains($fileName, '/') || str_contains($fileName, '\\')) {
+            return false;
+        }
+
+        // 检查保留文件名 (Windows)
+        $reservedNames = ['CON', 'PRN', 'AUX', 'NUL', 'COM1', 'COM2', 'COM3', 'COM4', 'COM5', 'COM6', 'COM7', 'COM8', 'COM9', 'LPT1', 'LPT2', 'LPT3', 'LPT4', 'LPT5', 'LPT6', 'LPT7', 'LPT8', 'LPT9'];
+        $nameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
+        if (in_array(strtoupper($nameWithoutExt), $reservedNames)) {
+            return false;
+        }
+
+        // 如果是文件（有扩展名），验证扩展名
+        $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        if (!empty($extension)) {
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+            if (!in_array(strtolower($extension), $allowedExtensions)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private function convertToBytes($sizeStr) {
