@@ -9,7 +9,12 @@ class FileController extends Controller
     public function store(UploadRequest $request)
     {
         $file = $request->file('file');
-        $type = $request->get('type');
+        $type = $request->get('type', 'default');
+
+        $type = preg_replace('/[^a-zA-Z0-9_-]/', '', $type);
+        if (empty($type)) {
+            $type = 'default';
+        }
 
         $path = $file->store($type, 'upload');
 
