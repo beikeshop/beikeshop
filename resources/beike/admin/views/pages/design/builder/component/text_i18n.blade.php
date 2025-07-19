@@ -52,16 +52,14 @@
     methods: {
       valueChanged(val, code) {
         this.internalValues[code] = val;
-        // this.$emit('input', JSON.parse(JSON.stringify(this.internalValues)));
-        this.$emit('input', this.internalValues);
+        this.$emit('input', JSON.parse(JSON.stringify(this.internalValues)));
       },
 
       initData() {
         this.languages.forEach(e => {
           Vue.set(this.internalValues, e.code, this.value[e.code] || '');
         })
-        // this.$emit('input', JSON.parse(JSON.stringify(this.internalValues)));
-        this.$emit('input', this.internalValues);
+        this.$emit('input', JSON.parse(JSON.stringify(this.internalValues)));
       }
     }
   });
