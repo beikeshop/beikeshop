@@ -81,7 +81,7 @@
               <ul class="list-group list-group-flush">
                 @foreach ($active_page_categories as $category)
                   <li class="list-group-item p-0">
-                    <a href="{{ shop_route('page_categories.show', [$category->id]) }}"
+                    <a href="{{ $category->getUrlAttribute() }}"
                        class="p-2 list-group-item-action nav-link">{{ $category->description->title }}</a>
                   </li>
                 @endforeach

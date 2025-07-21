@@ -55,4 +55,11 @@ return [
     'modify_size_limit' => 'How to modify the size limit?',
     'upload_type_fail'  => 'Upload failed: Invalid file type',
     'upload_size_fail'  => 'Upload failed: File size exceeds limit',
+    'invalid_path'              => 'Invalid path parameter',
+    'empty_source_path'         => 'Source path cannot be empty',
+    'empty_dest_path'           => 'Destination path cannot be empty',
+    'invalid_filename'          => 'Invalid filename',
+    'invalid_request_data'      => 'Invalid request data',
+    'invalid_files_parameter'   => 'Invalid files parameter',
+    'invalid_upload_type'       => 'Invalid upload type',
 ];
