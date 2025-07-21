@@ -11,4 +11,6 @@
 
 return [
     'uploaded_success' => 'Uploaded Success',
+    'invalid_filename' => 'Invalid filename',
+    'invalid_type'     => 'Invalid type parameter',
 ];
