@@ -41,6 +41,11 @@ $(function () {
     form.addEventListener(
       "submit",
       function (event) {
+        // 先把 TinyMCE 编辑器内容同步到 textarea
+        if (typeof tinymce !== 'undefined') {
+          tinymce.triggerSave();
+        }
+
         // 处理一组 checkbox 必选 的情况
         let isCheckboxValid = true;
         $(form).find('.form-checkbox.required').each(function() {
