@@ -1,16 +1,29 @@
-# BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce Platform
+<p align="center">
+  <img src="https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/banner.jpg" alt="BeikeShop - An Open Source, User-Friendly Cross-Border E-commerce Platform" style="width:100%;max-width:900px;">
+</p>
+
+<p align="center">
+  <u><a href="#quick-start">Quick start</a></u> |
+  <u><a href="#environment-requirements">Environment</a></u> |
+  <u><a href="#key-features">Key Features</a></u> |
+  <u><a href="#page-previews">Page Previews</a></u>
+</p>
 
 <div align="center">
   <a href="https://beikeshop.com/" target="_blank"><img src="https://img.shields.io/badge/BeikeShop-%23FF6F30" alt="logo"></a>
   <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.3%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
   <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2010-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
 </div>
-<div align="center">
+<p align="center">
   <a href="https://beikeshop.com/download" target="_blank"><img src="https://img.shields.io/badge/release-v1.5.6-%234B79B6?labelColor=%234B79B6" alt="logo"></a>
   <a href="https://beikeshop.com/demo" target="_blank"><img src="https://img.shields.io/badge/Demo-available-%2363B95C?labelColor=%23959494" alt="logo"></a>
   <a href="https://beikeshop.com/download" target="_blank"><img src="https://img.shields.io/badge/Downloads-163k-%23ED9017?logoColor=%23fff&labelColor=%23c57e37" alt="logo"></a>
-</div>
+</p>
 
+<p align="center">
+  <span>English</span> |
+  <u><a href="README.zh-CN.md">简体中文</a></u>
+</p>
 
 **Introduction to BeikeShop**
 BeikeShop is a globally leading open-source e-commerce Platform based on the Laravel framework, designed for the international trade and cross-border e-commerce industry.
