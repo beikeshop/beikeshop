@@ -49,7 +49,7 @@ BeikeShop 是一款全球领先的开源电商平台，基于 Laravel 框架开�
 
 # 快速开始
 
-**Ⅰ. 套餐安装**
+**Ⅰ. 快速安装**（安装包安装）
 1.  <a href="https://beikeshop.com/download" target="_blank">下载 BeikeShop</a>
 2. 上传到服务器并解压
 3. 设置 `public` 文件夹为网站根目录
@@ -101,20 +101,20 @@ BeikeShop 是一款全球领先的开源电商平台，基于 Laravel 框架开�
 
 ---
 
-# 核心特性
+# BeikeShop系统亮点
 
-- **零启动成本**：BeikeShop 真正独立，100% 开源，数据完全自有
-- **基于 Laravel 10**：采用 Laravel 10 框架开发，底层强大
-- **无佣金无年费**：无佣金、无年费、无交易手续费，极大降低建站成本
-- **微内核模块化设计**：微内核架构，模块化设计，易于维护和扩展
-- **清晰的代码结构**：分层清晰，格式规范，易读易维护
-- **事件系统钩子机制**：灵活的钩子机制，方便二次开发和扩展
-- **丰富插件市场**：官方插件市场丰富，所需功能一键获取
-- **多语言多币种支持**：支持多语言多币种，适合全球用户
-- **美观界面与可视化定制**：界面美观，支持可视化定制，用户体验佳
-- **严格 MVC 架构**：严格遵循 MVC 架构，维护性和扩展性强
-- **操作简单，快速搭建**：操作简单，上手快，快速部署
-![系统亮点](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2.png)
+- **0元起步**：BeikeShop 是真正的独立站，代码100%开源，数据信息100%自主可控
+- **基于 Laravel 10 框架**：BeikeShop 使用 Laravel 10 框架进行开发，拥有成熟的框架支持
+- **无佣金和手续费**：BeikeShop 没有佣金、年费或手续费，降低了建站成本
+- **微内核和插件化**：采用微内核架构和插件化设计，使系统易维护 & 扩展
+- **清晰的代码分层和格式规范**：系统代码采用分层清晰、格式规范的结构，提高代码的可读性和可维护性
+- **Event 机制实现 Hook 功能**：通过 Event 机制实现了灵活的 Hook 功能，方便扩展和定制化开发
+- **丰富的插件市场**：官方提供了丰富的插件市场，可以方便地购买需要的功能
+- **多语言和多货币支持**：系统支持多语言和多货币，方便面向不同地区和国家的用户
+- **界面美观和可视化装修**：系统界面设计美观，支持可视化装修，提供良好的用户体验
+- **严格遵循 MVC 架构**：系统严格遵循 MVC 架构，提高了代码的可维护性和可扩展性
+- **操作简单易上手**：BeikeShop 操作简单，易于上手，可以快速上线使用
+![系统亮点](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2-zh-CN.png)
 
 ---
 
@@ -150,10 +150,11 @@ BeikeShop 是一款全球领先的开源电商平台，基于 Laravel 框架开�
 
 # 特别感谢
 
-- **插件开发者**：陆川青年、老刘、Aegis、特伦叔、Olives 等
-- **PR 贡献者**：nilsir、what_village_head、tanxiaoyong、Lucky、So、licy、老北、Teemo 等
+**插件开发者**：撸串青年、老柳、Aegis、特̶仑̶叔、olives等
+**PR贡献者**：nilsir、what_村长、tanxiaoyong、Lucky、So、licy、老北、Teemo等 感谢你们参与到BeikeShop的开发中，共同为BeikeShop添砖加瓦！
 
 感谢所有参与 BeikeShop 开发的贡献者，让项目变得更好！
+### QQ交流群：1033903216
 
 ---
 
