@@ -22,7 +22,7 @@
 
 <p align="center">
   <span>English</span> |
-  <u><a href="README.zh-CN.md">简体中文</a></u>
+  <u><a href="README-zh-CN.md">简体中文</a></u>
 </p>
 
 **Introduction to BeikeShop**
