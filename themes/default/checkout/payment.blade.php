@@ -31,6 +31,7 @@
                     <tr>
                       <td>{{ __('shop/checkout.payment_payment_method') }}：<span class="fw-bold">{{ $order['payment_method_name'] }}</span></td>
                     </tr>
+                    @hook('checkout.payment_method_name.after')
                   </tbody>
                 </table>
               </div>
