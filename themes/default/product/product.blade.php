@@ -34,7 +34,7 @@
     @hook('product.detail.content.before')
     <div class="row mb-md-5 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-2">
-        @hookwrapper('product_list.item.image')
+        @hookwrapper('product.detail.images')
         <div class="product-image">
           @if(!is_mobile())
             <div class="left {{ $iframeClass }}" v-if="images.length">

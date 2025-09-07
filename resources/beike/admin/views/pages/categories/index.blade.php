@@ -34,6 +34,7 @@
               <div>
                 <button class="btn btn-outline-secondary btn-sm" @click.stop="toEdit(data.url_edit)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm" @click.stop="removeCategory(node, data)">{{ __('common.delete') }}</button>
+                @hook('admin.categories.delete.after')
               </div>
             </div>
           </div>
