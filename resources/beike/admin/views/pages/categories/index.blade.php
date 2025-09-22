@@ -19,6 +19,7 @@
               <div>
                 <a :href="data.url_edit" class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                 <a class="btn btn-outline-danger btn-sm" @click="removeCategory(node, data)">{{ __('common.delete') }}</a>
+                @hook('admin.categories.delete.after')
               </div>
             </div>
           </div>
