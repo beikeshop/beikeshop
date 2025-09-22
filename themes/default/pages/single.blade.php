@@ -92,6 +92,7 @@
       @endif
     </div>
   </div>
+  @hook('pages.single.footer')
 @endsection
 
 @push('add-scripts')

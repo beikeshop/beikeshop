@@ -55,6 +55,7 @@ class Breadcrumb extends Component
             $breadcrumbs = array_merge($breadcrumbs, $this->handleLinks($type, $value, $text));
         }
 
+        $breadcrumbs = hook_filter('breadcrumb.construct.after', $breadcrumbs);
         $this->breadcrumbs = collect($breadcrumbs);
         $this->isFull = $isFull;
     }
