@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2024-03-01 09:48:23
  * @modified   2024-03-01 09:48:23
  */
