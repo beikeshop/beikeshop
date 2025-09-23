@@ -5,7 +5,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-28 17:21:38
  * @modified   2022-07-28 17:21:38
  */
@@ -41,4 +41,7 @@ return [
     'should_be_approved'      => '需要后台管理员审核后才能登录',
     'customer_rejected'       => '该用户审核未通过',
     'third_party_logins'      => '第三方登录',
+
+    'email_address_error'     => ':email已经被使用，请更换邮箱地址',
+
 ];

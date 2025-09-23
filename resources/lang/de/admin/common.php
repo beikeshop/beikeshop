@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2023-12-12 08:35:21
  */
@@ -56,7 +56,7 @@ return [
     'install'                      => 'installieren',
     'language'                     => 'Sprach',
     'languages_index'              => 'Sprachverwaltung',
-    'license_services'             => 'Urheberrecht und dienste',
+    'license_services'             => 'Technische Dienstleistungen',
     'marketing'                    => 'Der plugin-markt',
     'marketing_index'              => 'Der plugin-markt',
     'multi_filter_index'           => 'Moderne auswahl',

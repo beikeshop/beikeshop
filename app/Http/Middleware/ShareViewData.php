@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-03 15:46:13
  * @modified   2022-08-03 15:46:13
  */
@@ -14,6 +14,7 @@ namespace App\Http\Middleware;
 use Beike\Repositories\FooterRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\MenuRepo;
+use Beike\Repositories\HeaderRepo;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;

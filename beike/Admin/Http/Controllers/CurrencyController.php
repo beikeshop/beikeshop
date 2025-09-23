@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-30 16:17:04
  * @modified   2022-06-30 16:17:04
  */
@@ -15,6 +15,8 @@ use Beike\Admin\Http\Requests\CurrencyRequest;
 use Beike\Models\Order;
 use Beike\Repositories\CurrencyRepo;
 use Illuminate\Http\Request;
+use Beike\Repositories\SettingRepo;
+use Exception;
 
 class CurrencyController extends Controller
 {
@@ -43,6 +45,15 @@ class CurrencyController extends Controller
             'value'         => (float) $request->get('value', 1),
             'status'        => (int) $request->get('status', 0),
         ];
+
+        if ($request->default_currency) {
+            if ($data['value'] != 1) {
+                throw new Exception(trans('admin/currency.default_currency_error'));
+            }
+
+            SettingRepo::storeValue('currency', $data['code']);
+        }
+
         $currency = CurrencyRepo::create($data);
         hook_action('admin.currency.store.after', $currency);
 
@@ -60,6 +71,15 @@ class CurrencyController extends Controller
             'value'         => (float) $request->get('value', 1),
             'status'        => (int) $request->get('status', 0),
         ];
+
+        if ($request->default_currency) {
+            if ($data['value'] != 1) {
+                return json_fail(trans('admin/currency.default_currency_error'));
+            }
+
+            SettingRepo::storeValue('currency', $data['code']);
+        }
+
         $currency = CurrencyRepo::update($id, $data);
 
         return json_success(trans('common.updated_success'), $currency);
@@ -72,6 +92,10 @@ class CurrencyController extends Controller
             $orderExist = Order::query()->where('currency_code', $currency->code)->exists();
             if ($orderExist) {
                 throw new \Exception(trans('admin/currency.order_exist'));
+            }
+
+            if (system_setting('base.currency') == $currency->code) {
+                throw new \Exception(trans('admin/currency.default_exist'));
             }
 
             CurrencyRepo::delete($currencyId);

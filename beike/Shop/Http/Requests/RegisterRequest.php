@@ -2,7 +2,9 @@
 
 namespace Beike\Shop\Http\Requests;
 
+use Beike\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends FormRequest
 {
@@ -24,7 +26,16 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'    => 'required|email:rfc|unique:customers,email',
+            'email'    => [
+                'required',
+                'email:rfc',
+                function ($attribute, $value, $fail) {
+                    if (Customer::where('email', $value)->exists()) {
+                        // 验证失败，返回错误信息
+                        $fail(trans('shop/login.email_address_error', ['email' => $this->attributes()['email']]));
+                    }
+                },
+            ],
             'password' => 'required|confirmed',
         ];
     }

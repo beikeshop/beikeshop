@@ -3,16 +3,21 @@
 @section('title', __('admin/common.rma_reasons_index'))
 
 @section('content')
-  <div id="tax-classes-app" class="card" v-cloak>
-    <div class="card-body h-min-600">
+
+<div id="tax-classes-app" class="card" v-cloak>
+  <div class="card-body h-min-600">
+      @hook('admin.rma_reasons.index.before')
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.rma_reasons.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+        @hook('admin.rma_reasons.index.content.top_buttons.after')
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>ID</th>
             <th>{{ __('common.name') }}</th>
+            @hook('admin.rma_reasons.index.table.headers')
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
@@ -20,6 +25,7 @@
           <tr v-for="language, index in rmaReasons" :key="index">
             <td>@{{ language.id }}</td>
             <td><span class="text-hidden">@{{ language.name }}</span></td>
+            @hook('admin.rma_reasons.index.table.body')
             <td class="text-end">
               <button class="btn btn-outline-secondary btn-sm mb-1 mb-sm-0" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(language.id, index)">{{ __('common.delete') }}</button>
@@ -34,6 +40,7 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
+        @hook('admin.rma_reasons.index.dialog.before')
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -43,13 +50,18 @@
             <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
         </el-form-item>
+        @hook('admin.rma_reasons.index.dialog.after')
 
         <el-form-item class="mt-5">
+          @hook('admin.rma_reasons.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.rma_reasons.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    @hook('admin.rma_reasons.index.after')
   </div>
 @endsection
 
@@ -57,7 +69,9 @@
   @include('admin::shared.vue-image')
 
   <script>
-    new Vue({
+    @hook('admin.rma_reasons.index.script.before')
+
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -80,6 +94,8 @@
         source: {
           languages: @json($languages ?? []),
         },
+
+        @hook('admin.rma_reasons.index.vue.data')
       },
 
       methods: {
@@ -151,9 +167,15 @@
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.name = {};
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.rma_reasons.index.vue.methods')
+      },
+
+      @hook('admin.rma_reasons.index.vue.options')
     })
+
+    @hook('admin.rma_reasons.index.script.after')
   </script>
 @endpush
 

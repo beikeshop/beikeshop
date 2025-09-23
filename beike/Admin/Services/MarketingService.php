@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-09-26 11:50:34
  * @modified   2022-09-26 11:50:34
  */
@@ -189,13 +189,16 @@ class MarketingService
                 } else {
                     $zipFile->extract(base_path('plugins')); //正常的beikeshop 插件
                 }
+                $zipFile->close();
             } catch (Exception $exception) {
                 throw new Exception($exception->getMessage());
             }
         } else {
             throw new Exception('无法识别的beikeshop插件！');
         }
-
+        if (file_exists($pluginZip)) {
+            @unlink($pluginZip);
+        }
     }
 
     // getDomain

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-01-05 10:12:57
  * @modified   2022-01-05 10:12:57
  */
@@ -92,6 +92,9 @@ class CartService
             $cart->selected = true;
             $cart->increment('quantity', $quantity);
         } else {
+            if (count(self::list(current_customer())) >= 500) {
+                throw new Exception(trans('cart.cart_quantity_max_500'));
+            }
             $cart = CartProduct::query()->create([
                 'customer_id'    => $customerId,
                 'session_id'     => get_session_id(),

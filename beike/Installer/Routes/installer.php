@@ -17,7 +17,7 @@ Route::prefix('installer')
         Route::get('permissions', [PermissionsController::class, 'index'])->name('permissions');
         Route::middleware(['installer'])
             ->group(function () {
-                Route::get('lang/{lang}', [WelcomeController::class, 'locale'])->name('lang.switch');
+                Route::get('lang', [WelcomeController::class, 'locale'])->name('lang.switch');
                 Route::get('environment', [EnvironmentController::class, 'index'])->name('environment');
                 Route::post('environment/save', [EnvironmentController::class, 'saveWizard'])->name('environment.save');
                 Route::post('environment/validate_db', [EnvironmentController::class, 'validateDatabase'])->name('environment.validate_db');

@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:56:20
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Montant à payer',
     'text_version'            => 'version',
     'to_update'               => 'Aller à upgrade',
-    'version_compatible_text' => 'Ce plug-in n\'est pas compatible avec la version actuelle du système, veuillez mettre à niveau vers la <a href="' . config('beike.api_url') . '/download" target="_blank">dernière version </a>',
+    'version_compatible_text' => 'Ce plug-in n\'est pas compatible avec la version actuelle du système, veuillez mettre à niveau vers la <a href="' . config('beike.official_website') . '/download" target="_blank">dernière version </a>',
     'wxpay'                   => 'Wechat balayage code de paiement!',
     'yuan'                    => 'Les métadonnées',
 ];

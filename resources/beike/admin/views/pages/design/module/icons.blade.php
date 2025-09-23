@@ -1,17 +1,19 @@
 <template id="module-editor-icons-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
+    <module-size v-model="form.module_size"></module-size>
+
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
     </div>
+
     <div class="module-edit-group" style="margin-bottom: 200px;">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
 
-            <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image?.src || '', 40, 40)" class="img-responsive">
           </div>
 
           <div class="right">
@@ -21,7 +23,7 @@
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image" :is-language="false"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image" :is-language="false"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 200x200</div>
           </div>
           <div class="module-edit-title">{{ __('admin/builder.text_set_title') }}</div>
@@ -71,7 +73,10 @@ Vue.component('module-editor-icons', {
 
     addItems() {
       this.form.images.push({
-        image: '',
+        image: {
+          src: '',
+          alt: languagesFill('')
+        },
         link: {
           type: 'product',
           value:''
@@ -100,6 +105,7 @@ Vue.component('module-editor-icons', {
       style: {
         background_color: ''
       },
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
       floor: languagesFill(''),
       images: []

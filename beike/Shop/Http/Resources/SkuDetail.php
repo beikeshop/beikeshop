@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-20 11:33:06
  * @modified   2022-07-20 11:33:06
  */
@@ -36,6 +36,7 @@ class SkuDetail extends JsonResource
             'origin_price'        => $this->origin_price,
             'origin_price_format' => currency_format($this->origin_price),
             'quantity'            => $this->quantity,
+            'weight'              => $this->weight ?? '',
             'is_default'          => $this->is_default,
         ];
 

@@ -1,0 +1,45 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Illuminate\Support\ServiceProvider;
+
+class MenuServiceProvider extends ServiceProvider
+{
+    public function boot(): void
+    {
+        add_hook_filter('admin.components.sidebar.menus', function ($data)
+        {
+            $storeMenu =    [
+                'route'    => '$LOWER_NAME$.index',
+                'title'    => trans('$LOWER_NAME$::admin/$LOWER_NAME$.$LOWER_NAME$'),
+                'icon'     => 'bi bi-clipboard-check',
+                'prefixes' => self::getStoreSubPrefix(),
+                'children' => self::getStoreSubRoutes(),
+            ];
+
+            array_splice($data, 7, 0, [$storeMenu]);
+
+            return $data;
+        });
+    }
+
+    /**
+     * 获取后台子页面路由前缀列表
+     */
+    private  static function getStoreSubPrefix(): array
+    {
+        return ['$LOWER_NAME$'];
+    }
+
+    /**
+     * 获取子页面路由
+     */
+    private static function getStoreSubRoutes(): array
+    {
+        return [
+            ['route' => '$LOWER_NAME$.index', 'prefixes' => ['$LOWER_NAME$'], 'excludes' => ['$LOWER_NAME$.trashed'],  'title'    => trans('$LOWER_NAME$::admin/$LOWER_NAME$.$LOWER_NAME$_index')],
+        ];
+    }
+}
+

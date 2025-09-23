@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-20 14:42:10
  * @modified   2022-07-20 14:42:10
  */
@@ -13,6 +13,7 @@ namespace Beike\Shop\Providers;
 
 use Beike\Models\AdminUser;
 use Beike\Plugin\Manager;
+use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -35,7 +36,7 @@ class PluginServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap Plugin Service Provider
-     * @throws \Exception
+     * @throws Exception
      */
     public function boot()
     {
@@ -64,6 +65,7 @@ class PluginServiceProvider extends ServiceProvider
             $this->registerRoutes($pluginCode);
             $this->registerMiddleware($pluginCode);
             $this->loadDesignComponents($pluginCode);
+            $this->registerCommands($plugin);
         }
     }
 
@@ -106,6 +108,21 @@ class PluginServiceProvider extends ServiceProvider
     {
         $this->registerAdminRoutes($pluginCode);
         $this->registerShopRoutes($pluginCode);
+        $pluginBasePath = $this->pluginBasePath;
+        $routePath = "{$pluginBasePath}/{$pluginCode}/Routes/";
+
+        if (is_dir($routePath)) {
+            // 获取$adminRoutePath目录下除了admin.php和shop.php之外的所有扩展名为".php"的文件
+            $excludeFiles = ['admin.php', 'shop.php'];
+            $files = glob($routePath. "*.php");
+            foreach ($files as $file) {
+                $fileName = basename($file);
+                if (in_array($fileName, $excludeFiles)) {
+                    continue;
+                }
+                $this->loadRoutesFrom($file);
+            }
+        }
     }
 
     /**
@@ -162,8 +179,11 @@ class PluginServiceProvider extends ServiceProvider
      */
     private function loadViews($pluginCode)
     {
-        $pluginBasePath = $this->pluginBasePath;
-        $this->loadViewsFrom("{$pluginBasePath}/{$pluginCode}/Views", $pluginCode);
+        $pluginViewPath = "{$this->pluginBasePath}/{$pluginCode}/Views";
+
+        if (is_dir($pluginViewPath)) {
+            $this->loadViewsFrom($pluginViewPath, $pluginCode);
+        }
     }
 
     /**
@@ -220,7 +240,7 @@ class PluginServiceProvider extends ServiceProvider
     /**
      * 加载插件内首页 page builder 相关组件
      *
-     * @throws \Exception
+     * @throws Exception
      */
     protected function loadDesignComponents($pluginCode)
     {
@@ -235,7 +255,7 @@ class PluginServiceProvider extends ServiceProvider
             $classBaseName = "\\Plugin\\{$pluginCode}\\Admin\\View\\DesignBuilders\\{$componentName}";
 
             if (! class_exists($classBaseName)) {
-                throw new \Exception("请先定义自定义模板类 {$classBaseName}");
+                throw new Exception("请先定义自定义模板类 {$classBaseName}");
             }
 
             $this->loadViewComponentsAs('editor', [
@@ -243,4 +263,27 @@ class PluginServiceProvider extends ServiceProvider
             ]);
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    private function registerCommands(mixed $plugin): void
+    {
+        if (is_dir($plugin->getPath().'/Console/')){
+            $builders = glob($plugin->getPath().'/Console/' . '*');
+            $pluginCode = $plugin->getDirname();
+            foreach ($builders as $builder) {
+                $builderName   = basename($builder, '.php');
+                $componentName = Str::studly($builderName);
+                $classBaseName = "\\Plugin\\{$pluginCode}\\Console\\{$componentName}";
+
+                if (! class_exists($classBaseName)) {
+                    throw new Exception("命令行类名不存在 {$classBaseName}");
+                }
+
+                $this->commands($classBaseName);
+            }
+        }
+    }
+
 }

@@ -1,9 +1,9 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-17 15:42:46
- * @LastEditTime  2024-12-25 00:04:59
+ * @LastEditTime  2024-12-20 16:56:01
  */
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -41,6 +41,11 @@ $(function () {
     form.addEventListener(
       "submit",
       function (event) {
+        // 先把 TinyMCE 编辑器内容同步到 textarea
+        if (typeof tinymce !== 'undefined') {
+          tinymce.triggerSave();
+        }
+
         // 处理一组 checkbox 必选 的情况
         let isCheckboxValid = true;
         $(form).find('.form-checkbox.required').each(function() {

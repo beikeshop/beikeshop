@@ -1,7 +1,5 @@
-*
-!app
-!debugbar
-!framework
-!logs
-!upload
+!cache/
+!sessions/
+!testing/
+!views/
 !.gitignore

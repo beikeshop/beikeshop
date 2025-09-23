@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-27 20:42:05
  * @modified   2022-07-27 20:42:05
  */
@@ -141,13 +141,13 @@ class BrandRepo
     public static function autocomplete($name, $onlyActive = 1)
     {
         $builder = Brand::query()
-            ->where('name', 'like', "$name%")
-            ->select('id', 'name', 'status');
+            ->where('name', 'like', "%$name%")
+            ->select('id', 'name', 'status', 'logo');
         if ($onlyActive) {
             $builder->where('status', 1);
         }
 
-        return $builder->limit(10)->get();
+        return $builder->limit(30)->get();
     }
 
     /**
@@ -162,6 +162,7 @@ class BrandRepo
             return [
                 'id'   => $brand->id,
                 'name' => $brand->name ?? '',
+                'logo' => image_resize($brand->logo, 100, 100),
             ];
         })->toArray();
     }
@@ -177,8 +178,18 @@ class BrandRepo
         }
 
         $builder = Brand::query()->whereIn('id', $ids);
-        $ids     = implode(',', $ids);
-        $builder->orderByRaw("FIELD(id, {$ids})");
+
+        if (getDBDriver() == 'mysql')
+        {
+            $ids     = implode(',', $ids);
+            $builder->orderByRaw("FIELD(id, {$ids})");
+        } else {
+            $caseWhen = collect($ids)->map(function ($id, $index) {
+                return "WHEN id = $id THEN $index";
+            })->implode(' ');
+
+            $builder->orderByRaw("CASE $caseWhen ELSE 99999999 END");
+        }
 
         return $builder->get();
     }

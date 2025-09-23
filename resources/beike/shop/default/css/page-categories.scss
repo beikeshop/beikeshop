@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
  * @LastEditTime  2022-09-16 20:56:05
  */
@@ -11,19 +11,54 @@
 body.page-categories {
   .col-lg-9.right-column {
     @media (min-width: 992px) {
-      width: 78%;
+      flex: 1;
     }
   }
 
   .col-lg-3.left-column {
     @media (min-width: 992px) {
-      width: 22%;
+      max-width: 290px;
+    }
+
+    @media (min-width: 1500px) {
+      max-width: 340px;
     }
 
     .card:not(:last-of-type) {
       border-bottom: 1px solid #E6E6E6;
       margin-bottom: 1.4rem;
       padding-bottom: 1.4rem;
+    }
+  }
+
+  .left-column {
+    @media (max-width: 992px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: none;
+      cursor: pointer;
+      z-index: 999;
+      background: rgba(0, 0, 0, .4);
+
+      .x-fixed-top {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 80%;
+        padding: 20px;
+        text-align: left;
+        overflow-y: auto;
+        transform: translateX(100%);
+        background-color: #fff;
+        transition: all .3s ease-out;
+        right: 0;
+        &.active {
+          transform: translateX(0);
+        }
+      }
     }
   }
 

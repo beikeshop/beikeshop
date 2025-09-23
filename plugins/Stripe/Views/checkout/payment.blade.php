@@ -157,9 +157,16 @@
           } else {
             $http.post(`/stripe/capture`, {token: stripeResult.token.id, order_number: orderNumber}).then((pay) => {
               if (pay.status == 'success') {
-                location = "checkout/success?order_number=" + orderNumber
+
+                const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
+                let path = "/" + "{{ session()->get('locale') }}" + "/checkout/success?order_number=" + orderNumber;
+                if(lang === "null") {
+                  path = "/checkout/success?order_number=" + orderNumber
+                }
+                location = path;
               } else {
-                layer.msg(pay.message, () => {})
+                layer.msg(pay.message, () => {
+                })
               }
             })
           }

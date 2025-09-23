@@ -1,9 +1,9 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-29 17:32:51
- * @LastEditTime  2023-11-30 10:22:18
+ * @LastEditTime: 2025-01-03 21:58:41
  */
 
 import http from "../../../../js/http";
@@ -34,9 +34,9 @@ $(document).ready(function ($) {
   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
   const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-  bk.productImageResize11()
+  bk.productImageResize()
   window.addEventListener('resize', function () {
-    bk.productImageResize11()
+    bk.productImageResize()
   })
 });
 

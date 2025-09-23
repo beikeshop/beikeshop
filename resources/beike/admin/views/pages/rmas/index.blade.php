@@ -5,6 +5,7 @@
 @section('content')
   <div id="customer-app" class="card h-min-600">
     <div class="card-body">
+      @hook('admin.rmas.index.content.before')
       <div class="mb-2">{{ __('admin/rma.rma_list_title') }}</div>
       @if (count($rmas))
         <div class="table-push">
@@ -20,6 +21,7 @@
                 <th>{{ __('admin/rma.service_type') }}</th>
                 <th>{{ __('common.status') }}</th>
                 <th>{{ __('common.created_at') }}</th>
+                @hook('admin.rmas.index.table.headers')
                 <th>{{ __('common.action') }}</th>
               </tr>
             </thead>
@@ -36,8 +38,11 @@
                     <td>{{ $rma['type_text'] }}</td>
                     <td>{{ $rma['status'] }}</td>
                     <td>{{ $rma['created_at'] }}</td>
-                    <td><a href="{{ admin_route('rmas.show', [$rma['id']]) }}"
-                        class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>
+                    @hook('admin.rmas.index.table.body')
+                    <td>
+                      @hook('admin.rmas.index.table.body.action.before')
+                      <a href="{{ admin_route('rmas.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>
+                      @hook('admin.rmas.index.table.body.action.after')
                     </td>
                   </tr>
                 @endforeach
@@ -55,6 +60,7 @@
       @else
         <x-admin-no-data />
       @endif
+      @hook('admin.rmas.index.content.after')
     </div>
   </div>
 @endsection

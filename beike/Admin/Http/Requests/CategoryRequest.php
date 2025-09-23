@@ -25,9 +25,9 @@ class CategoryRequest extends FormRequest
     {
         return [
             'descriptions.*.name'             => 'required|max:255',
-            'descriptions.*.meta_title'       => 'max:191',
-            'descriptions.*.meta_keywords'    => 'max:191',
-            'descriptions.*.meta_description' => 'max:191',
+            'descriptions.*.meta_title'       => 'max:255',
+            'descriptions.*.meta_keywords'    => 'max:255',
+            'descriptions.*.meta_description' => 'max:500',
         ];
     }
 

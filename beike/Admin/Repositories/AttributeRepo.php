@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-01-04 19:45:41
  * @modified   2023-01-04 19:45:41
  */
@@ -127,7 +127,7 @@ class AttributeRepo
     {
         $builder = Attribute::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
-                $query->where('name', 'like', "{$name}%");
+                $query->where('name', 'like', "%{$name}%");
             });
 
         return $builder->limit(10)->get();

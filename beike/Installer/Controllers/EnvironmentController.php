@@ -9,20 +9,28 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Beike\Installer\Helpers\RequirementsChecker;
 
 class EnvironmentController extends BaseController
 {
     /**
      * @var EnvironmentManager
      */
-    protected $EnvironmentManager;
+    protected EnvironmentManager $EnvironmentManager;
+
+    /**
+     * @var RequirementsChecker
+     */
+    protected RequirementsChecker $requirements;
 
     /**
      * @param EnvironmentManager $environmentManager
+     * @param RequirementsChecker $checker
      */
-    public function __construct(EnvironmentManager $environmentManager)
+    public function __construct(EnvironmentManager $environmentManager, RequirementsChecker $checker)
     {
         $this->EnvironmentManager = $environmentManager;
+        $this->requirements = $checker;
     }
 
     /**
@@ -144,13 +152,20 @@ class EnvironmentController extends BaseController
             $serverVersion = $pdo->getAttribute(\PDO::ATTR_SERVER_VERSION);
             if (version_compare($serverVersion, '5.7', '<')) {
                 $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
-
+                $this->checkDbConnection($request,$result);
                 return $result;
             }
 
             return true;
         } catch (\PDOException $e) {
+
             switch ($e->getCode()) {
+                case 7:
+                    $result['database_username'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
+                    $result['database_password'] = trans('installer::installer_messages.environment.db_connection_failed_user_password');
+                    $result['database_name'] = trans('installer::installer_messages.environment.db_connection_failed_database_name');
+
+                    break;
                 case 1115:
                     $result['database_version'] = trans('installer::installer_messages.environment.db_connection_failed_invalid_version');
 
@@ -174,6 +189,38 @@ class EnvironmentController extends BaseController
             }
         }
 
+        $this->checkDbConnection($request,$result);
+
         return $result;
+    }
+
+    private function checkDbConnection(Request $request, &$result): void
+    {
+        $dbType = $request->input('database_connection');
+        if (!$dbType)
+        {
+            return;
+        }
+
+        $dbType = $request->input('database_connection');
+        $config = config('installer.requirements.db');
+        $requirements = $this->requirements->checkDataBase(
+            $config
+        );
+
+        $hasError = data_get($requirements, $dbType);
+        $currentVersion = data_get($this->requirements->checkPHPversion(),'current');
+
+        if (($dbType == 'pgsql') && version_compare($currentVersion, '8.3', '>='))
+        {
+            $result['database_connection'] = trans('installer::installer_messages.environment.down_phpversion');
+            return;
+        }
+
+        if (!$hasError)
+        {
+            $result['database_connection'] = trans('installer::installer_messages.environment.php_extension').'('.data_get($config, $dbType).')';
+        }
+
     }
 }

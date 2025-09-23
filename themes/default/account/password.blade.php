@@ -26,19 +26,19 @@
               <div class="row gx-4 gy-3 w-50">
                 <div class="col-sm-12">
                   <label class="form-label">{{ __('shop/account/password.old_password') }}</label>
-                  <input class="form-control {{ $errors->has('old_password') ? 'is-invalid' : '' }}" type="text" name="old_password"
+                  <input class="form-control {{ $errors->has('old_password') ? 'is-invalid' : '' }}" placeholder="{{ __('shop/account/password.old_password') }}" type="text" name="old_password"
                     value="{{ old('old_password', $customer->old_password ?? '') }}" required>
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('old_password') ? $errors->first('old_password') : __('common.error_required', ['name' => __('shop/account/password.old_password')]) }}</span>
                 </div>
                 <div class="col-sm-12">
                   <label class="form-label">{{ __('shop/account/password.new_password') }}</label>
-                  <input class="form-control" type="password" name="new_password"
+                  <input class="form-control" type="password" name="new_password" placeholder="{{ __('shop/account/password.new_password') }}"
                     value="{{ old('new_password', $customer->new_password ?? '') }}" required>
                 </div>
                 <div class="col-sm-12">
                   <label class="form-label">{{ __('shop/account/password.new_password_confirmation') }}</label>
-                  <input class="form-control {{ $errors->has('new_password') ? 'is-invalid' : '' }}" type="password" name="new_password_confirmation"
+                  <input class="form-control {{ $errors->has('new_password') ? 'is-invalid' : '' }}" placeholder="{{ __('shop/account/password.new_password_confirmation') }}" type="password" name="new_password_confirmation"
                     value="{{ old('new_password_confirmation', $customer->new_password_confirmation ?? '') }}" required>
                   <span class="invalid-feedback"
                     role="alert">{{ $errors->has('new_password') ? $errors->first('new_password') : __('common.error_required', ['name' => __('shop/account/password.new_password')]) }}</span>

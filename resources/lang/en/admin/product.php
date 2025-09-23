@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-02 14:22:41
  * @modified   2022-08-02 14:22:41
  */
@@ -46,6 +46,7 @@ return [
     'weight_class'           => 'weight unit',
     'category_placeholder'   => 'Please select/search',
     'category_already'       => 'Category already exists',
+    'category_disabled'      => 'Category has been disabled',
 
     'confirm_batch_product'  => 'Are you sure you want to delete the selected products in batches? ',
     'confirm_batch_status'   => 'Confirm to modify the status of the selected products in batches? ',
@@ -57,4 +58,5 @@ return [
     'video_path_hint'        => 'Remote video must be a video address ending with .mp4',
     'iframe_code_hint'       => 'Video website Iframe embed code, such as click share below the youtube video and then click embed, copy the code inside',
     'sku_error_repeat'       => 'sku repeat',
+    'sku_hint'               => 'Note: It is recommended that the number of SKUs should not exceed 120. More SKUs may cause page freezes, longer rendering times, or truncation of submitted data due to excessive size.',
 ];

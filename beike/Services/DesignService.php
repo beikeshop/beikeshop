@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-14 20:57:37
  * @modified   2022-07-14 20:57:37
  */
@@ -52,8 +52,12 @@ class DesignService
         $content['module_code'] = $moduleCode;
         if ($moduleCode == 'slideshow') {
             return self::handleSlideShow($content);
-        } elseif (in_array($moduleCode, ['image401', 'image402', 'image100', 'image200', 'image300', 'image301'])) {
-            return self::handleImage401($content);
+        } elseif ($moduleCode == 'img_text_slideshow') {
+            return self::handleImgTextSlideShow($content);
+        } elseif ($moduleCode == 'img_text_banner') {
+            return self::handleImgTextBanner($content);
+        } elseif (in_array($moduleCode, ['image400', 'image401', 'image402', 'image403', 'image100', 'image200', 'image300', 'image301'])) {
+            return self::handleBanner($content);
         } elseif ($moduleCode == 'brand') {
             return self::handleBrand($content);
         } elseif ($moduleCode == 'tab_product') {
@@ -91,6 +95,49 @@ class DesignService
     }
 
     /**
+     * 处理 ImgTextSlideShow 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleImgTextSlideShow($content): array
+    {
+        $images = $content['images'];
+        if (empty($images)) {
+            return $content;
+        }
+
+        $content['images'] = self::handleImages($images);
+        $content['scroll_text']['text']  = $content['scroll_text']['text'][locale()] ?? '';
+
+        return $content;
+    }
+
+    /**
+     * 处理 ImgTextBanner 模块
+     *
+     * @param $content
+     * @return array
+     * @throws \Exception
+     */
+    private static function handleImgTextBanner($content): array
+    {
+        $image = $content['image'];
+        if (empty($image)) {
+            return $content;
+        }
+
+        $content['image']  = is_string($content['image']) ? $content['image'] : $content['image']['src'];
+        $content['image_alt']  = $image['alt'][locale()] ?? '';
+        $content['title']  = $content['title'][locale()] ?? '';
+        $content['description']  = $content['description'][locale()] ?? '';
+        $content['link'] = self::handleLink($content['link']['type'], $content['link']['value']);
+
+        return $content;
+    }
+
+    /**
      * 处理 brand 模块
      *
      * @param $content
@@ -115,7 +162,7 @@ class DesignService
      * @return array
      * @throws \Exception
      */
-    private static function handleImage401($content): array
+    private static function handleBanner($content): array
     {
         $images = $content['images'];
         if (empty($images)) {
@@ -124,6 +171,8 @@ class DesignService
 
         $content['images'] = self::handleImages($images);
         $content['full']   = $content['full'] ?? false;
+        $content['title']  = $content['title'][locale()] ?? '';
+        $content['sub_title']  = $content['sub_title'][locale()] ?? '';
 
         return $content;
     }
@@ -146,11 +195,12 @@ class DesignService
         $images = [];
         foreach ($content['images'] as $image) {
             $images[] = [
-                'image'    => image_origin($image['image'] ?? ''),
-                'text'     => $image['text'][locale()]         ?? '',
-                'sub_text' => $image['sub_text'][locale()]     ?? '',
-                'link'     => $image['link'],
-                'url'      => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
+                'image'      => image_origin($image['image']['src'] ?? $image['image'] ?? ''),
+                'image_alt'  => $image['image']['alt'][locale()] ?? '',
+                'text'       => $image['text'][locale()]         ?? '',
+                'sub_text'   => $image['sub_text'][locale()]     ?? '',
+                'link'       => $image['link'],
+                'url'        => self::handleLink($image['link']['type'] ?? '', $image['link']['value'] ?? ''),
             ];
         }
 
@@ -241,9 +291,21 @@ class DesignService
         }
 
         foreach ($images as $index => $image) {
-            $imagePath               = is_array($image['image']) ? $image['image'][locale()] ?? '' : $image['image'] ?? '';
-            $images[$index]['image'] = image_origin($imagePath);
+            if (is_string($image['image'])) {
+                $imagePath = $image['image'];
+            } elseif (isset($image['image']['src'])) {
+                $imagePath = is_array($image['image']['src']) ? $image['image']['src'][locale()] ?? '' : $image['image']['src'];
+            } elseif (is_array($image['image'])) {
+                $imagePath = $image['image'][locale()] ?? '';
+            }
+
+            $images[$index]['image'] = image_origin($imagePath ?? '');
+            $images[$index]['image_alt'] = $image['image']['alt'][locale()] ?? '';
             $images[$index]['type'] = strpos($imagePath, '.mp4') !== false ? 'video' : 'image';
+            $images[$index]['sub_title']      = $image['sub_title'][locale()] ?? '';
+            $images[$index]['title']          = $image['title'][locale()]     ?? '';
+            $images[$index]['description']    = nl2br($image['description'][locale()] ?? '');
+            $images[$index]['text_position']  = $image['text_position'] ?? 'start';
 
             $link = $image['link'];
             if (empty($link)) {
@@ -251,7 +313,7 @@ class DesignService
             }
 
             $type                           = $link['type'] ?? '';
-            $value                          = $link['type'] == 'custom' ? $link['value'] : ((int) $link['value'] ?? 0);
+            $value                          = $link['type'] == 'custom' || $link['type'] ==  'static' ? $link['value'] : ((int) $link['value'] ?? 0);
             $images[$index]['link']['link'] = self::handleLink($type, $value);
         }
 

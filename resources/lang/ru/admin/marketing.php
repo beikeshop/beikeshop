@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:57:04
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Сумма выплаты',
     'text_version'            => 'версия',
     'to_update'               => 'Обновление.',
-    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="' . config('beike.api_url') . '/download" target="_blank">последней версии </a>',
+    'version_compatible_text' => 'Этот плагин несовместим с текущей версией системы, обновите его до <a href="' . config('beike.official_website') . '/download" target="_blank">последней версии </a>',
     'wxpay'                   => 'Плата за микро-код!',
     'yuan'                    => 'доллар',
 ];

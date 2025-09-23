@@ -5,8 +5,11 @@
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
+      @hook('admin.brand.index.content.before')
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.brand.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('admin/brand.brands_create') }}</button>
+        @hook('admin.brand.index.content.top_buttons.after')
       </div>
       <div class="table-push">
         <table class="table">
@@ -18,6 +21,7 @@
               <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('brand.first_letter') }}</th>
               <th>{{ __('common.status') }}</th>
+              @hook('admin.brand.index.table.headers')
               <th>{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -32,9 +36,12 @@
                 <span class="text-success" v-if="brand.status">{{ __('common.enabled') }}</span>
                 <span class="text-secondary" v-else>{{ __('common.disabled') }}</span>
               </td>
+              @hook('admin.brand.index.table.body')
               <td>
+                @hook('admin.brand.index.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(brand.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin.brand.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
@@ -44,6 +51,8 @@
 
       <el-pagination v-if="brands.data.length" layout="prev, pager, next" background :page-size="brands.per_page" :current-page.sync="page"
         :total="brands.total" :current-page.sync="page"></el-pagination>
+
+      @hook('admin.brand.index.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/common.brand') }}" :visible.sync="dialog.show" width="600px"
@@ -75,8 +84,10 @@
         </el-form-item>
 
         <el-form-item>
+          @hook('admin.brand.index.dialog.submit.before')
           <el-button type="primary" @click="submit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="dialog.show = false">{{ __('common.cancel') }}</el-button>
+          @hook('admin.brand.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -88,7 +99,7 @@
 @push('footer')
   @include('admin::shared.vue-image')
   <script>
-    new Vue({
+    var app = new Vue({
       el: '#customer-app',
 
       data: {
@@ -112,17 +123,22 @@
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')])}}',trigger: 'blur'}, ],
           first: [{required: true,message: '{{ __('common.error_required', ['name' => __('brand.first_letter')])}}',trigger: 'blur'}, ],
           logo: [{required: true,message: '{{ __('admin/brand.error_upload') }}',trigger: 'change'}, ],
-        }
+        },
+
+        @hook('admin.brand.index.vue.data')
       },
 
       watch: {
         page: function() {
           this.loadData();
         },
+
+        @hook('admin.brand.index.vue.watch')
       },
 
       mounted() {
-        bk.ajaxPageReloadData(this)
+        bk.ajaxPageReloadData(this);
+        @hook('admin.brand.index.vue.mounted')
       },
 
       computed: {
@@ -135,6 +151,8 @@
 
           return url;
         },
+
+        @hook('admin.brand.index.vue.computed')
       },
 
       methods: {
@@ -200,8 +218,12 @@
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.status = 1
-        }
-      }
+        },
+
+        @hook('admin.brand.index.vue.methods')
+      },
+
+      @hook('admin.brand.index.vue.options')
     })
   </script>
 @endpush

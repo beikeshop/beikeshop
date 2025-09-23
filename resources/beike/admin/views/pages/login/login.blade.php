@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <link href="{{ mix('/build/beike/admin/css/bootstrap.css') }}" rel="stylesheet">
-  {{-- <link href="{{ mix('build/css/admin/login.css') }}" rel="stylesheet"> --}}
   <link href="{{ mix('build/beike/admin/css/app.css') }}" rel="stylesheet">
   <title>{{ __('admin/login.plugins_index') }}</title>
 </head>

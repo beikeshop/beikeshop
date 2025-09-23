@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-28 16:17:04
  * @modified   2022-06-28 16:17:04
  */
@@ -101,6 +101,8 @@ class CustomerController extends Controller
         $password    = $requestData['password'] ?? '';
         if (empty($password)) {
             unset($requestData['password']);
+        } else {
+            $requestData['last_password_changed_at'] = now();
         }
 
         hook_action('admin.customer.update.before', ['customer_id' => $customerId, 'request_data' => $requestData]);
@@ -119,6 +121,7 @@ class CustomerController extends Controller
     public function login(int $id)
     {
         Auth::guard(Customer::AUTH_GUARD)->loginUsingId($id);
+        session(['login_at' => now()->timestamp]);
 
         return redirect()->to(shop_route('account.index'));
     }

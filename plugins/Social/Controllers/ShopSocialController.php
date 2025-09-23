@@ -31,7 +31,7 @@ class ShopSocialController extends Controller
             $config = [
                 'client_id'     => $providerSetting['key'],
                 'client_secret' => $providerSetting['secret'],
-                'redirect'      => shop_route('social.callback', $provider),
+                'redirect'      => shop_route('social.callback', $provider, false),
             ];
             Config::set("services.{$provider}", $config);
         }
@@ -71,6 +71,7 @@ class ShopSocialController extends Controller
             ];
             $customer = CustomerRepo::createCustomer($provider, $userData);
             Auth::guard(Customer::AUTH_GUARD)->login($customer);
+            session(['login_at' => now()->timestamp]);
 
             return view('Social::shop/callback');
         } catch (\Exception $e) {

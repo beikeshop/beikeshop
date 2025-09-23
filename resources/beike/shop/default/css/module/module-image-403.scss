@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2024 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        guangda <service@guangda.work>
+ * @Date          2024-11-12 15:14:28
+ * @LastEditTime  2024-11-12 15:14:34
+ */
+
+.module-image-403 {
+  .image-wrap {
+    position: relative;
+    color: #fff;
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      // background-color: rgba(0, 0, 0, 0.5);
+      z-index: 8;
+      // 写一个渐变色，从上到下，透明度从0到1
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0.2) 100%);
+    }
+
+    .title {
+      position: absolute;
+      font-size: 18px;
+      font-weight: bold;
+      z-index: 9;
+      left: 10%;
+      bottom: 13%;
+      white-space: nowrap;
+
+      @media (min-width: 1200px) {
+        font-size: 28px;
+      }
+    }
+
+    .sub-title {
+      position: absolute;
+      z-index: 9;
+      left: 10%;
+      bottom: 6%;
+      white-space: nowrap;
+
+      @media (min-width: 1200px) {
+        font-size: 16px;
+      }
+    }
+  }
+}

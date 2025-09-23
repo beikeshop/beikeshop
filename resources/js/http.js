@@ -1,30 +1,26 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-02 19:19:52
- * @LastEditTime  2024-12-24 22:35:07
+ * @LastEditTime  2024-12-05 00:07:57
  */
 
 window.axios = require('axios');
 
-const token = document.querySelector('meta[name="csrf-token"]').content;
-const base = document.querySelector('base').href;
-
-const instance = axios.create({
-  headers: {'X-CSRF-TOKEN': token},
+const axiosApi = axios.create({
+  baseURL: document.querySelector('base').href, // 自动设置 base
+  timeout: 0,
 });
 
-axios.defaults.timeout = 0; // 请求超时
-// axios.defaults.baseURL = process.env.NODE_ENV == 'production' ? process.env.VUE_APP_BASE_URL + '/' : '/';
-// console.log(process.env.VUE_APP_BASE_URL)
-axios.defaults.baseURL = base;
 export default {
   /**
    * get 请求
    * @param url 接口路由
    * @returns {AxiosPromise<any>}
    */
+  axiosApi,
+
   get (url, params, {hmsg, hload, base}={}) {
     return this.request('get', url, params = params, {hmsg, hload, base});
   },
@@ -83,7 +79,7 @@ export default {
     }
 
     return new Promise((resolve, reject) => {
-      axios({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
+      axiosApi({method: method, url: url, [method == 'get' ? 'params' : 'data']: params}).then((res) => {
         if (res) {
           resolve(res.data);
         } else { // 其他情况返回错误信息，根据需要处理

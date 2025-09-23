@@ -4,6 +4,8 @@ namespace Beike\Shop\Http\Controllers;
 
 use Beike\Services\DesignService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -14,8 +16,15 @@ class HomeController extends Controller
      * @return View
      * @throws \Exception
      */
-    public function index(): View
+    public function index(): mixed
     {
+        $originalUri = session()->get('originalUri');
+        if ($originalUri === '/') {
+            if (locale() !== system_setting('base.locale')) {
+                return $this->redirect();
+            }
+        }
+
         $designSettings = system_setting('base.design_setting');
         $modules        = $designSettings['modules'] ?? [];
 
@@ -61,5 +70,12 @@ class HomeController extends Controller
         $data = hook_filter('home.index.data', $data);
 
         return view('home', $data);
+    }
+
+    private function redirect(): RedirectResponse
+    {
+        $lang = session()->get('locale');
+        $host = request()->getSchemeAndHttpHost();
+        return redirect()->to($host. '/'.$lang);
     }
 }

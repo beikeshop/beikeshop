@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-01 20:49:45
  * @modified   2022-08-01 20:49:45
  */
@@ -76,6 +76,7 @@ class PermissionRepo
             ['title' => trans('admin/common.zone'), 'permissions' => $this->getZonePermissions()],
             ['title' => trans('admin/common.country'), 'permissions' => $this->getCountryPermissions()],
             ['title' => trans('admin/common.help_index'), 'permissions' => $this->getHelpPermissions()],
+            ['title' => trans('admin/common.account_index'), 'permissions' => $this->getAccountPermissions()],
         ];
 
         $corePermissions   = hook_filter('role.permissions.all', $corePermissions);
@@ -442,6 +443,14 @@ class PermissionRepo
         return hook_filter('role.help_permissions', $items);
     }
 
+    private function getAccountPermissions(): array
+    {
+        $routes = ['account_index', 'account_update'];
+        $items  = $this->getPermissionList('account', $routes);
+
+        return hook_filter('role.account_permissions', $items);
+    }
+
     private function getThemePermissions(): array
     {
         $routes = ['theme_index', 'theme_update'];
@@ -481,6 +490,7 @@ class PermissionRepo
 
         return hook_filter('role.design_app_home_permissions', $items);
     }
+
     /**
      * 处理第三方插件权限
      *

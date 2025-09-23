@@ -8,7 +8,7 @@
             <el-input v-model="form.name" placeholder="{{ __('address.name') }}"></el-input>
           </el-form-item>
           @if (!current_customer())
-          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address'" class="w-50 ms-3">
+          <el-form-item label="{{ __('common.email') }}" prop="email" v-if="type == 'guest_shipping_address' || !shippingRequired" class="w-50 ms-3">
             <el-input v-model="form.email" placeholder="{{ __('common.email') }}"></el-input>
           </el-form-item>
           @else
@@ -80,6 +80,7 @@
       editShow: false,
       index: null,
       type: 'shipping_address_id',
+      shippingRequired: true,
       form: {
         name: '',
         email: '',
@@ -138,13 +139,14 @@
   },
 
   methods: {
-    editAddress(addresses, type) {
+    editAddress(addresses, type, shippingRequired = true) {
       this.type = type
       if (addresses) {
         this.form = addresses
       }
 
       this.countryChange(this.form.country_id);
+      this.shippingRequired = shippingRequired;
       this.editShow = true
     },
 
@@ -156,15 +158,6 @@
         }
 
         this.$emit('change', this.form)
-        // const type = this.form.id ? 'put' : 'post';
-
-        // const url = `/account/addresses${type == 'put' ? '/' + this.form.id : ''}`;
-
-        // $http[type](url, this.form).then((res) => {
-        //   this.$message.success(res.message);
-        //   this.$emit('change', res.data)
-        //   this.editShow = false
-        // })
       });
     },
 

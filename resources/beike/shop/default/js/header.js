@@ -1,9 +1,9 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-16 18:47:18
- * @LastEditTime  2023-12-23 12:52:09
+ * @LastEditTime  2024-12-12 10:52:44
  */
 
 $(function () {
@@ -15,7 +15,12 @@ $(function () {
       $("#offcanvas-search-top input").keydown(function (e) {
         if (e.keyCode == 13) {
           if ($(this).val() != "") {
-            location.href = "products/search?keyword=" + $(this).val();
+            var lang = $(this).data("lang");
+            if (lang) {
+              location.href = "/" + lang + "/products/search?keyword=" + $(this).val();
+            } else {
+              location.href = "products/search?keyword=" + $(this).val();
+            }
           }
         }
       });
@@ -133,10 +138,10 @@ $(function () {
     }, {
       hload: true
     }).then((res) => {
-       if(res.status != 'success'){
+      if (res.status != 'success') {
         layer.msg(res.message)
         $(that).val(res.data.quantity);
-      }else {
+      } else {
         updateMiniCartData(res);
       }
     })

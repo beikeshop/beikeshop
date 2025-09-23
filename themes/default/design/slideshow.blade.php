@@ -6,7 +6,7 @@
 <section class="module-item {{ $design ? 'module-item-design' : ''}}" id="module-{{ $module_id }}">
   @include('design._partial._module_tool')
 
-  <div class="module-info mb-3 mb-md-5 {{ !$content['full'] ? 'container' : '' }}">
+  <div class="module-info mb-3 mb-md-5 {{ $content['module_size'] ?? 'w-100' }}">
     <div class="swiper module-swiper-{{ $module_id }} module-slideshow">
       <div class="swiper-wrapper">
         @foreach($content['images'] as $image)
@@ -15,7 +15,7 @@
             @if (($image['type'] ?? 'image') == 'video')
             <video src="{{ $image['image'] }}" class="img-fluid w-100" controls loop autoplay muted></video>
             @else
-            <img src="{{ $image['image'] }}" class="img-fluid">
+            <img src="{{ $image['image'] }}" class="img-fluid seo-img" alt="{{ $image['image_alt'] ?? '' }}">
             @endif
           </a>
         </div>

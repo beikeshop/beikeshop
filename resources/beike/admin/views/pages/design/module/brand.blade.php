@@ -1,12 +1,11 @@
 <template id="module-editor-brand-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
     </div>
 
-    <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.modules_choose_brand') }}</div>
 
@@ -15,13 +14,20 @@
           class="inline-input"
           v-model="keyword"
           value-key="name"
+          popper-class="product-autocomplete-list"
           size="small"
           :fetch-suggestions="querySearch"
           placeholder="{{ __('admin/builder.modules_keywords_search') }}"
-          :trigger-on-focus="false"
           :highlight-first-item="true"
           @select="handleSelect"
-        ></el-autocomplete>
+        >
+          <template slot-scope="{ item }">
+            <div class="product-item">
+              <div class="image"><img :src="item.logo" class="img-fluid"></div>
+              <div class="name" v-text="item.name"></div>
+            </div>
+          </template>
+        </el-autocomplete>
 
         <div class="item-group-wrapper" v-loading="loading">
           <draggable
@@ -31,9 +37,9 @@
             :options="{animation: 330}"
           >
             <div v-for="(item, index) in brands" :key="index" class="item">
-              <div>
-                <i class="el-icon-s-unfold"></i>
-                <span>@{{ item.name }}</span>
+              <div class="product-item">
+                <div class="image"><img :src="item.logo" class="img-fluid"></div>
+                <span>@{{item.name}}</span>
               </div>
               <i class="el-icon-delete right" @click="removeProduct(index)"></i>
             </div>
@@ -81,10 +87,6 @@ Vue.component('module-editor-brand', {
 
   methods: {
     querySearch(keyword, cb) {
-      if (!keyword) {
-        return;
-      }
-
       $http.get('brands/autocomplete?name=' + encodeURIComponent(keyword), null, {hload:true}).then((res) => {
         cb(res.data);
       })
@@ -119,7 +121,7 @@ Vue.component('module-editor-brand', {
         background_color: ''
       },
       floor: languagesFill(''),
-      full: true,
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
       brands: []
     }

@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-09 14:12:25
  * @LastEditTime  2022-09-16 19:05:44
  */
@@ -101,6 +101,13 @@ body.page-product-form {
       // padding: 10px;
       border-radius: 4px;
       margin-bottom: 10px;
+    }
+
+    .table-skus {
+      input {
+        padding-left: 6px;
+        padding-right: 6px;
+      }
     }
 
     .title {
@@ -234,21 +241,6 @@ body.page-product-form {
             // margin-right: 10px;
           }
         }
-      }
-    }
-
-    .table-skus {
-      input {
-        padding: 0.375rem;
-        // 去除 type="number" 的上下箭头
-        &[type="number"] {
-          -moz-appearance: textfield;
-        }
-      }
-
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
       }
     }
   }

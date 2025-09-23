@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-28 17:21:38
  * @modified   2022-07-28 17:21:38
  */
@@ -18,4 +18,6 @@ return [
     'currencies_delete' => '删除货币',
 
     'order_exist' => '该货币有订单正在使用, 无法删除!',
+    'default_exist' => '默认货币无法删除!',
+    'default_currency_error' => '默认货币汇率必须为1',
 ];

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-30 19:37:05
  * @modified   2022-06-30 19:37:05
  */
@@ -144,7 +144,7 @@ class CheckoutService
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            $weight += Weight::getInstance()->convert($product->product['weight'] * $product['quantity'], $product->product['weight_class']);
+            $weight += Weight::getInstance()->convert(($product->sku->weight ?? $product->product['weight']) * $product['quantity'], $product->product['weight_class']);
         }
 
         return $weight;

@@ -30,7 +30,7 @@
             @endif
             <div class="accordion-collapse collapse {{ !$group['name'] ? 'd-block' : '' }}" id="children-menu-{{ $key }}-{{ $c_key }}" data-bs-parent="#flush-menu-{{ $key }}">
               @if ($group['type'] == 'image')
-              <a target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}" href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}" class="img-fluid"></a>
+              <a target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}" href="{{ $group['image']['link'] }}"><img src="{{ $group['image']['image'] }}" alt="{{ $group['name'] }}" class="img-fluid"></a>
               @else
               <ul class="nav flex-column ul-children">
                 @foreach ($group['children'] as $children)

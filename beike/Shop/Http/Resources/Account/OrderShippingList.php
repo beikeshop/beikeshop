@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-11-28 10:39:55
  * @modified   2023-11-28 10:39:55
  */

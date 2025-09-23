@@ -50,11 +50,11 @@
         <tbody>
         @foreach ($views as $item)
           <tr>
-            <td>{{ $item->description->product_id }}</td>
-            <td class="product-name">{{ $item->description->name }}</td>
+            <td>{{ $item->description->product_id ?? '' }}</td>
+            <td class="product-name">{{ $item->description->name ?? '' }}</td>
             <td>{{ $item->view_count }}</td>
-            <td>{{ $item->description->created_at }}</td>
-            <td><button type="button" class="btn btn-sm btn-outline-secondary view-product-chart" data-id="{{ $item->description->product_id }}">{{ __('admin/report.view_product_chart') }}</button></td>
+            <td>{{ $item->description->created_at ?? '' }}</td>
+            <td><button type="button" class="btn btn-sm btn-outline-secondary view-product-chart" data-id="{{ $item->description->product_id ?? '' }}">{{ __('admin/report.view_product_chart') }}</button></td>
           </tr>
         @endforeach
         </tbody>

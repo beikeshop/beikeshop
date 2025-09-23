@@ -6,9 +6,13 @@
 
 @section('content')
   <div id="customer-app" class="card h-min-600">
+    @hook('admin.theme.index.content.before')
     <div class="card-header d-flex justify-content-between align-items-start">
       <h5 class="card-title">{{ __('admin/theme.page_title') }}</h5>
-      <a href="{{ admin_route('marketing.index') }}?type=theme" class="btn btn-outline-info">{{ __('common.get_more') }}</a>
+      <div class="d-flex">
+        <a href="{{ admin_route('marketing.index') }}?type=theme" class="btn btn-outline-info">{{ __('common.get_more') }}</a>
+        @hook('admin.theme.index.content.header.right.btn')
+      </div>
     </div>
     <div class="card-body">
       <div class="theme-wrap">
@@ -18,12 +22,12 @@
             <div class="item">
               <div class="img"><img src="{{ $item['image'] }}" class="img-fluid"></div>
               <div class="theme-bottom d-flex justify-content-between align-items-center">
-                <div class="name fs-5">{{ $item['name'] }}</div>
+                <div class="name"><strong>{{ $item['name'] }}</strong></div>
                 <div class="theme-tool">
                   @if ($item['status'])
                     <div class="enabled-text">{{ __('admin/theme.enabled_text') }}</div>
                   @else
-                    <button class="btn btn-outline-success enabled-theme" data-code="{{ $item['code'] }}">{{ __('common.enabled') }}</button>
+                    <button class="btn btn-outline-success text-nowrap enabled-theme" data-code="{{ $item['code'] }}">{{ __('common.enabled') }}</button>
                   @endif
                 </div>
               </div>
@@ -33,6 +37,7 @@
         </div>
       </div>
     </div>
+    @hook('admin.theme.index.content.after')
   </div>
   <div id="theme-config" class="p-3" style="display: none">
     <div class="form-check form-check-inline mb-3">

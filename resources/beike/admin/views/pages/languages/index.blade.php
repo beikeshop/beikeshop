@@ -5,17 +5,15 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
-      {{-- <div class="d-flex justify-content-between mb-4"> --}}
-        {{-- <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">添加</button> --}}
-      {{-- </div> --}}
+      @hook('admin.languages.index.before')
       <div class="mb-3 alert alert-info">{{ __('admin/language.help_install') }}</div>
       <table class="table">
         <thead>
           <tr>
             <th>{{ __('common.name') }}</th>
             <th>{{ __('currency.code') }}</th>
-            {{-- <th>{{ __('currency.icon') }}</th> --}}
             <th>{{ __('common.sort_order') }}</th>
+            @hook('admin.languages.index.thead')
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
@@ -26,9 +24,10 @@
               <span class="badge bg-success" v-if="settingLocale == language.code">{{ __('common.default') }}</span>
             </td>
             <td>@{{ language.code }}</td>
-            {{-- <td><div v-if="language.image" class="wh-30 align-items-center justify-content-center d-flex"><img :src="thumbnail(language.image)" class="img-fluid"></div></td> --}}
             <td>@{{ language.sort_order }}</td>
+            @hook('admin.languages.index.tbody')
             <td class="text-end">
+              @hook('admin.languages.index.tbody.actions.before')
               <div v-if="language.id">
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button :disabled="settingLocale == language.code" class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(language.id, index)">{{ __('admin/common.uninstall') }}</button>
@@ -36,16 +35,21 @@
               <div v-else>
                 <button class="btn btn-outline-success btn-sm" @click="install(language.code, language.name, index)">{{ __('admin/common.install') }}</button>
               </div>
+              @hook('admin.languages.index.tbody.actions.after')
             </td>
           </tr>
         </tbody>
       </table>
+
+      @hook('admin.languages.index.after')
     </div>
 
     <el-dialog title="{{ __('admin/common.language') }}" :visible.sync="dialog.show" width="500px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="100px">
+        @hook('admin.languages.index.dialog.before')
+
         <el-form-item label="{{ __('common.name') }}">
           <el-input v-model="dialog.form.name" :disabled="true" placeholder="{{ __('common.name') }}"></el-input>
         </el-form-item>
@@ -54,17 +58,17 @@
           <el-input v-model="dialog.form.code" :disabled="true" placeholder="{{ __('currency.code') }}"></el-input>
         </el-form-item>
 
-        {{-- <el-form-item label="{{ __('currency.icon') }}">
-          <vue-image v-model="dialog.form.image"></vue-image>
-        </el-form-item> --}}
-
         <el-form-item label="{{ __('common.sort_order') }}">
           <el-input v-model="dialog.form.sort_order" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
+        @hook('admin.languages.index.dialog.after')
+
         <el-form-item class="mt-5">
+          @hook('admin.languages.index.dialog.submit.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.languages.index.dialog.submit.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -75,7 +79,7 @@
   @include('admin::shared.vue-image')
 
   <script>
-    new Vue({
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -89,16 +93,14 @@
           form: {
             name: '',
             code: '',
-            // image: '',
             sort_order: '',
           },
         },
 
         rules: {
-          // name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
-          // code: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.code')]) }}',trigger: 'blur'}, ],
-          // image: [{required: true,message: '{{ __('common.error_required', ['name' => __('currency.icon')]) }}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.languages.index.vue.data')
       },
 
       methods: {
@@ -156,8 +158,12 @@
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.languages.index.vue.methods')
+      },
+
+      @hook('admin.languages.index.vue.options')
     })
   </script>
 @endpush

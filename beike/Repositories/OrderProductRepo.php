@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-04 21:14:12
  * @modified   2022-07-04 21:14:12
  */
@@ -99,8 +99,15 @@ class OrderProductRepo
             $builder->limit($limit);
         }
 
+        if (getDBDriver() == 'mysql')
+        {
+            $expression = '`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount';
+        } else {
+            $expression = 'product_id, SUM(quantity) AS total_quantity, SUM(price * quantity) AS total_amount';
+        }
+
         $builder->groupBy(['product_id'])
-            ->selectRaw('`product_id`, SUM(`quantity`) AS total_quantity, SUM(`price` * `quantity`) AS total_amount');
+            ->selectRaw($expression);
 
         return $builder;
     }

@@ -7,14 +7,14 @@
   @include('design._partial._module_tool')
 
   <div class="module-info module-pages mb-3 mb-md-4">
-    <div class="container position-relative">
-      <div class="module-title">{{ $content['title'] }}</div>
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }} position-relative">
+      <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
       @if ($content['items'])
-        <div class="row">
+        <div class="row g-3 g-lg-4">
           @foreach ($content['items'] as $item)
           <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">
-              <div class="image"><a href="{{ (isset($item['url']) ? $item['url'] : shop_route('pages.show', [$item['id']])) }}"><img src="{{ $item['image'] }}" class="img-fluid"></a>
+              <div class="image"><a href="{{ (isset($item['url']) ? $item['url'] : shop_route('pages.show', [$item['id']])) }}"><img src="{{ $item['image'] }}" class="img-fluid seo-img" alt="{{ $item['title'] ?? '' }}"></a>
               </div>
               <div class="page-info">
                 <div class="pages-title"><a href="{{ shop_route('pages.show', [$item['id']]) }}">{{ $item['title'] ?? '' }}</a></div>
@@ -31,7 +31,7 @@
         </div>
         @endif
       @elseif (!$content['items'] and $design)
-        <div class="row">
+        <div class="row g-3 g-lg-4">
           @for ($s = 0; $s < 4; $s++)
           <div class="col-6 col-md-4 col-lg-3">
             <div class="pages-wrap">

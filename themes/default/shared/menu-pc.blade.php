@@ -14,6 +14,9 @@
               {{ $menu['badge']['name'] }}
             </span>
           @endif
+          @if (isset($menu['children_group']))
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"/></svg>
+          @endif
         </a>
         @if (isset($menu['children_group']) && $menu['children_group'])
           <div class="dropdown-menu {{ $menu['isFull'] ? 'w-100' : '' }}"
@@ -30,7 +33,7 @@
                         @if ($group['type'] == 'image')
                           <a
                           target="{{ isset($group['image']['link']['new_window']) && $group['image']['link']['new_window'] ? '_blank' : '_self' }}"
-                          href="{{ $group['image']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $group['image']['image'] }}"
+                          href="{{ $group['image']['link'] ?: 'javascript:void(0)' }}"><img src="{{ $group['image']['image'] }}" alt="{{ $group['name'] }}"
                               class="img-fluid"></a>
                         @else
                           <ul class="nav flex-column ul-children">

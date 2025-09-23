@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-09-26 11:49:34
  * @modified   2022-09-26 11:49:34
  */
@@ -107,6 +107,20 @@ class MarketingController
             }
 
             $plugin = MarketingService::getInstance()->getPlugin($pluginCode);
+
+            $version_name_format = data_get($plugin,'data.version_name_format');
+            $version_name_format_max = max(explode(', ', str_replace('v', '',$version_name_format)));
+
+            $version = config('beike.version');
+            $parts = explode('.', $version);
+
+            $first_three = array_slice($parts, 0, 3);
+            $bkversion = implode('.', $first_three);
+
+            if ($bkversion > $version_name_format_max)
+            {
+                throw new Exception(__('admin/marketing.version_compatible_text'));
+            }
 
             if ($plugin && $plugin['data']['status'] == 'pending') {
                 throw new Exception('plugin_pending');

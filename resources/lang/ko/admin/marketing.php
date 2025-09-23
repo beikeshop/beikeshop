@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:56:55
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => '지급금액',
     'text_version'            => '버전',
     'to_update'               => '업그레이드하러 가기',
-    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="' . config('beike.api_url') . '/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
+    'version_compatible_text' => '이 플러그인은 현재 시스템 버전과 호환되지 않습니다. <a href="' . config('beike.official_website') . '/download" target="_blank">최신 버전으로 업그레이드하세요. </a>',
     'wxpay'                   => '위챗 코드 스캔 결제!',
     'yuan'                    => '위안',
 ];

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-19 21:58:20
  * @modified   2022-08-19 21:58:20
  */
@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'descriptions.*.name' => 'required|string|min:3|max:191',
+            'descriptions.*.name' => 'required|string|min:3|max:255',
             'brand_id'            => 'int',
             'skus.*.sku'          => 'required|string',
             'skus.*.price'        => 'required|numeric',

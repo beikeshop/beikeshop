@@ -20,8 +20,8 @@ class DesignController extends Controller
     {
         $data = [
             'editors'         => [
-                'editor-slide_show', 'editor-image401', 'editor-image402', 'editor-tab_product', 'editor-product', 'editor-image100',
-                'editor-brand', 'editor-icons', 'editor-rich_text', 'editor-image200', 'editor-image300', 'editor-image301', 'editor-page',
+                'editor-img_text_banner', 'editor-img_text_slideshow', 'editor-slide_show', 'editor-image401', 'editor-image402', 'editor-tab_product', 'editor-product', 'editor-image100',
+                'editor-brand', 'editor-icons', 'editor-rich_text', 'editor-image200', 'editor-image300', 'editor-image301', 'editor-image400', 'editor-image403', 'editor-page',
             ],
             'design_settings' => system_setting('base.design_setting'),
         ];

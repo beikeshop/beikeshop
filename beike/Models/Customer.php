@@ -4,6 +4,7 @@ namespace Beike\Models;
 
 use Beike\Notifications\ForgottenNotification;
 use Beike\Notifications\RegistrationNotification;
+use Beike\Notifications\RegistrationAlertNotification;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,7 +27,7 @@ class Customer extends AuthUser implements JWTSubject
         'rejected',
     ];
 
-    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'active', 'from'];
+    protected $fillable = ['name', 'email', 'password', 'status', 'avatar', 'customer_group_id', 'locale', 'active', 'from', 'last_password_changed_at'];
 
     protected function serializeDate(\DateTimeInterface $date): string
     {
@@ -58,8 +59,10 @@ class Customer extends AuthUser implements JWTSubject
         $useQueue = system_setting('base.use_queue', true);
         if ($useQueue) {
             $this->notify(new RegistrationNotification($this));
+            $this->notify(new RegistrationAlertNotification($this));
         } else {
             $this->notifyNow(new RegistrationNotification($this));
+            $this->notifyNow(new RegistrationAlertNotification($this));
         }
     }
 

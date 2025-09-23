@@ -1,10 +1,6 @@
 <template id="module-editor-slideshow-template">
   <div>
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
-    <div class="module-edit-group">
-      <div class="module-edit-title">{{ __('admin/builder.modules_full_screen') }}</div>
-      <el-switch v-model="form.full"></el-switch>
-    </div>
+    <module-size v-model="form.module_size"></module-size>
 
     <div class="module-editor-row">{{ __('admin/builder.modules_content') }}</div>
     <div class="module-edit-group">
@@ -21,7 +17,7 @@
                 <i class="el-icon-rank"></i>
               </el-tooltip>
 
-              <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
+              <img :src="thumbnail(item.image?.src?.['{{ locale() }}'], 40, 40)" class="img-responsive">
             </div>
 
             <div class="right">
@@ -33,7 +29,7 @@
           </div>
           <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
             <div class="pb-images-top">
-              <pb-image-selector v-model="item.image"></pb-image-selector>
+              <pb-image-selector :is-alt="true"  v-model="item.image"></pb-image-selector>
               <div class="tag">{{ __('admin/builder.text_suggested_size') }} 1920 x 600</div>
             </div>
             <link-selector v-model="item.link"></link-selector>
@@ -102,11 +98,14 @@ Vue.component('module-editor-slideshow', {
       style: {
         background_color: ''
       },
-      full: true,
       floor: languagesFill(''),
+      module_size: 'w-100',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('catalog/demo/banner/banner-4-en.jpg'),
+          image: {
+            src: languagesFill('catalog/demo/banner/banner-4-en.jpg'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',
@@ -114,7 +113,10 @@ Vue.component('module-editor-slideshow', {
           }
         },
         {
-          image: languagesFill('catalog/demo/banner/banner-3-en.jpg'),
+          image: {
+            src: languagesFill('catalog/demo/banner/banner-3-en.jpg'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',

@@ -1,6 +1,7 @@
 <template id="module-editor-page-template">
   <div class="module-editor-page-template">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
+    <module-size v-model="form.module_size"></module-size>
+
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
@@ -34,7 +35,7 @@
                   <div v-for="(item, index) in itemsData" :key="index" class="item">
                     <div>
                       <i class="el-icon-s-unfold"></i>
-                      <span>${item.name}</span>
+                      <span>@{{ item.name }}</span>
                     </div>
                     <i class="el-icon-delete right" @click="removeProduct(index)"></i>
                   </div>
@@ -51,7 +52,6 @@
 
 <script type="text/javascript">
 Vue.component('module-editor-page', {
-  delimiters: ['${', '}'],
   template: '#module-editor-page-template',
   props: ['module'],
   data: function () {
@@ -132,6 +132,7 @@ Vue.component('module-editor-page', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       items: [],
       title: languagesFill('{{ __('admin/builder.text_module_title') }}'),
     };

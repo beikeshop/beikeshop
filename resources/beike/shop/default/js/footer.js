@@ -1,7 +1,7 @@
 /*
  * @copyright     2023 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2023-11-22 09:51:04
  * @LastEditTime  2023-11-22 11:45:21
  */

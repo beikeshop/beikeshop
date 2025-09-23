@@ -2,12 +2,14 @@
   <h4 class="mb-3"><span>{{ __('product.category') }}</span></h4>
   <ul class="sidebar-widget mb-0" id="category-one">
     @foreach ($all_categories as $key_a => $category_all)
+    @if (!$category_all['active']) @continue @endif
     <li class="{{ $category_all['id'] == $category->id ? 'active' : ''}}">
       <a href="{{ $category_all['url'] }}" title="{{ $category_all['name'] }}" class="category-href">{{ $category_all['name'] }}</a>
       @if ($category_all['children'] ?? false)
         <button class="toggle-icon btn {{ $category_all['id'] == $category->id ? '' : 'collapsed'}}" data-bs-toggle="collapse" href="#category-{{ $key_a }}"><i class="bi bi-chevron-up"></i></button>
         <ul id="category-{{ $key_a }}" class="accordion-collapse collapse {{ $category_all['id'] == $category->id ? 'show' : ''}}" data-bs-parent="#category-one">
           @foreach ($category_all['children'] as $key_b => $child)
+          @if (!$child['active']) @continue @endif
           <li class="{{ $child['id'] == $category->id ? 'active' : ''}} child-category">
             <a href="{{ $child['url'] }}" title="{{ $child['name'] }}" class="category-href">{{ $child['name'] }}</a>
             @if ($child['children'] ?? false)
@@ -45,17 +47,15 @@
         <div class="card-body p-0">
           <div id="price-slider" class="mb-2"><div class="slider-bg"></div></div>
           <div class="text-secondary price-range d-flex justify-content-between">
-            <div>
+            <div class="d-flex align-items-center wp-100">
               {{ __('common.text_form') }}
-              <span class="min">{{ currency_format($filter_data['price']['select_min'], current_currency_code()) }}</span>
+              <span class="min ms-1 input-group-sm"><input type="text" value="{{ $filter_data['price']['select_min'] }}" class="form-control price-select-min"></span>
             </div>
-            <div>
+            <div class="d-flex align-items-center wp-100">
               {{ __('common.text_to') }}
-              <span class="max">{{ currency_format($filter_data['price']['select_max'], current_currency_code()) }}</span>
+              <span class="max ms-1 input-group-sm"><input type="text" value="{{ $filter_data['price']['select_max'] }}" class="form-control price-select-max"></span>
             </div>
           </div>
-          <input value="{{ $filter_data['price']['select_min'] }}" class="price-select-min d-none">
-          <input value="{{ $filter_data['price']['select_max'] }}" class="price-select-max d-none">
           <input value="{{ $filter_data['price']['min'] }}" class="price-min d-none">
           <input value="{{ $filter_data['price']['max'] }}" class="price-max d-none">
         </div>
@@ -99,16 +99,20 @@
       max: {{ $filter_data['price']['max'] ?? 0 }},
       values: [{{ $filter_data['price']['select_min'] }}, {{ $filter_data['price']['select_max'] }}],
       change: function(event, ui) {
-        $('input.price-select-min').val(ui.values[0])
-        $('input.price-select-max').val(ui.values[1])
         filterProductData();
       },
       slide: function(event, ui) {
-        let min = $('.price-range .min').html();
-        let max = $('.price-range .max').html();
-        $('.price-range .min').html(min.replace(min.replace(/[^0-9.,]/g, ''), (ui.values[0] * currencyRate).toFixed(2)));
-        $('.price-range .max').html(max.replace(max.replace(/[^0-9.,]/g, ''), (ui.values[1] * currencyRate).toFixed(2)));
+        $('.price-select-min').val((ui.values[0] * currencyRate).toFixed(2));
+        $('.price-select-max').val((ui.values[1] * currencyRate).toFixed(2));
       }
+    });
+
+    $('.price-select-min, .price-select-max').change(function(event) {
+      filterProductData()
+    });
+
+    $('.price-select-min, .price-select-max').on('input', function() {
+      this.value = this.value.replace(/[^0-9.]/g, '');
     });
   })
 

@@ -12,10 +12,10 @@
 namespace Plugin\Social\Models;
 
 use Beike\Models\Customer;
-use Illuminate\Database\Eloquent\Model;
+use Beike\Models\Base;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CustomerSocial extends Model
+class CustomerSocial extends Base
 {
     public $table = 'customer_socials';
 

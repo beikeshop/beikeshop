@@ -1,0 +1,18 @@
+{
+    "code": "$PLUGIN_CODE$",
+    "name": {
+        "zh_cn": "$LOWER_NAME$",
+        "en": "$LOWER_NAME$"
+    },
+    "description": {
+        "zh_cn": "$LOWER_NAME$",
+        "en": "$LOWER_NAME$"
+    },
+    "type": "feature",
+    "version": "v1.0.0",
+    "icon": "/image/logo.png",
+    "author": {
+        "name": "$VENDOR$",
+        "email": "$AUTHOR_EMAIL$"
+    }
+}

@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admin_user_tokens', function (Blueprint $table) {
-            $table->id();
-            $table->integer('admin_user_id');
-            $table->string('token', 64);
-            $table->timestamps();
+            $table->comment('管理员 Token 表');
+            $table->id()->comment('ID');
+            $table->integer('admin_user_id')->comment('管理员 ID');
+            $table->string('token', 64)->comment('Token');
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
         });
     }
 

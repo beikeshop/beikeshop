@@ -1,0 +1,20 @@
+<?php
+use Beike\Models\AdminUser;
+use Illuminate\Support\Facades\Route;
+use Plugin\$STUDLY_NAME$\Models\Routes;
+$adminName = admin_name();
+$routes = Routes::getRoutes();
+Route::prefix($adminName)
+    ->middleware(['admin'])
+    ->name("{$adminName}.")
+    ->group(function () use ($routes) {
+        Route::middleware('admin_auth:' . AdminUser::AUTH_GUARD)->group(function () use ($routes) {
+                foreach ($routes as $route) {
+                    $type = $route['type'] ?? '';
+                    if ($type) {
+                        $middleware = $route['middleware'] ?? $route['name'] ?? "";
+                        Route::middleware('can:'.$middleware)->$type($route['uri'], $route['controller'])->name(str_replace('_','.', $route['name']));
+                    }
+                }
+        });
+    });

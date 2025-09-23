@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-30 15:22:05
  * @modified   2022-06-30 15:22:05
  */
@@ -28,8 +28,8 @@ class CountryRepo
             'name'       => $data['name']             ?? '',
             'code'       => $data['code']             ?? '',
             'continent'  => $data['continent']        ?? '',
-            'sort_order' => (int) $data['sort_order'] ?? 0,
-            'status'     => (bool) $data['status']    ?? 0,
+            'sort_order' => (int) ($data['sort_order'] ?? 0),
+            'status'     => (bool) ($data['status']    ?? 0),
         ];
     }
 

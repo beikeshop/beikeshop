@@ -1,6 +1,6 @@
 <template id="module-editor-image402-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_module_title') }}</div>
       <text-i18n v-model="form.title"></text-i18n>
@@ -14,13 +14,13 @@
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
-            <img :src="thumbnail(item.image, 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image.src, 40, 40)" class="img-responsive">
           </div>
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector :is-language="false" v-model="item.image"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  :is-language="false" v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
               <span v-if="index == 0 || index == 3">500 x 700</span>
               <span v-if="index == 1 || index == 2">500 x 338</span>
@@ -79,11 +79,15 @@ Vue.component('module-editor-image402', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'container',// 窄屏、宽屏、全屏
       title: languagesFill('{{ __('admin/builder.text_set_title') }}'),
       sub_title: languagesFill('{{ __('admin/builder.text_set_subtitle') }}'),
       images: [
         {
-          image: 'catalog/demo/banner/banner-402-1.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-402-1.jpg',
+            alt: languagesFill(''),
+          },
           show: true,
           title: languagesFill('{{ __('admin/builder.text_word') }}'),
           link: {
@@ -92,7 +96,10 @@ Vue.component('module-editor-image402', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-402-2.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-402-2.jpg',
+            alt: languagesFill(''),
+          },
           show: false,
           title: languagesFill('{{ __('admin/builder.text_word') }}'),
           link: {
@@ -101,7 +108,10 @@ Vue.component('module-editor-image402', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-402-3.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-402-3.jpg',
+            alt: languagesFill(''),
+          },
           show: false,
           title: languagesFill('{{ __('admin/builder.text_word') }}'),
           link: {
@@ -110,7 +120,10 @@ Vue.component('module-editor-image402', {
           }
         },
         {
-          image: 'catalog/demo/banner/banner-402-4.jpg',
+          image: {
+            src: 'catalog/demo/banner/banner-402-4.jpg',
+            alt: languagesFill(''),
+          },
           show: false,
           title: languagesFill('{{ __('admin/builder.text_word') }}'),
           link: {

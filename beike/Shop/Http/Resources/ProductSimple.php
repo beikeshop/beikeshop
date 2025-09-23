@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-23 11:33:06
  * @modified   2022-06-23 11:33:06
  */
@@ -47,7 +47,7 @@ class ProductSimple extends JsonResource
             'in_wishlist'         => $this->inCurrentWishlist->id ?? 0,
 
             'images'              => array_map(function ($item) {
-                return image_resize($item, 400, 400);
+                return image_resize($item, 560, calculate_height_by_ratio(560));
             }, $images),
         ];
 

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-08 08:08:08
  * @modified   2022-08-08 08:08:08
  */
@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\View\FileViewFinder;
+use Beike\Admin\View\Components\Form\Checkbox;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -46,39 +47,50 @@ class AdminServiceProvider extends ServiceProvider
     public function boot()
     {
         $uri = request()->getRequestUri();
+
         if (is_installer()) {
             return;
         }
 
         $this->loadCommands();
         $this->publishResources();
-
         load_settings();
         $this->loadRoutesFrom(__DIR__ . '/../Routes/admin.php');
         $this->registerGuard();
 
         $adminName = admin_name();
-        if (! Str::startsWith($uri, "/{$adminName}")) {
-            return;
+        $inConsole = $this->app->runningInConsole();
+        $isAdminRequest = Str::startsWith($uri, "/{$adminName}");
+
+        // 仅在控制台或后台请求时加载以下逻辑
+        if ($inConsole || $isAdminRequest) {
+            $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
+            $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
+            $this->loadThemeViewPath();
+
+            $this->app->booted(function () use ($inConsole) {
+                // 避免控制台模式下读取数据库
+                if (! $inConsole) {
+                    $this->loadShareViewData();
+                }
+            });
+
+            $this->loadAdminViewComponents();
+
+            Config::set('filesystems.disks.catalog', [
+                'driver' => 'local',
+                'root'   => public_path('catalog'),
+            ]);
+
+            Config::set('filesystems.disks.upload', [
+                'driver' => 'local',
+                'root'   => public_path('upload'),
+            ]);
+
+            $this->loadDesignComponents();
         }
-
-        $this->mergeConfigFrom(__DIR__ . '/../../Config/beike.php', 'beike');
-        $this->loadViewsFrom(resource_path('/beike/admin/views'), 'admin');
-        $this->loadThemeViewPath();
-
-        $this->app->booted(function () {
-            $this->loadShareViewData();
-        });
-
-        $this->loadAdminViewComponents();
-
-        Config::set('filesystems.disks.catalog', [
-            'driver' => 'local',
-            'root'   => public_path('catalog'),
-        ]);
-
-        $this->loadDesignComponents();
     }
+
 
     /**
      * 加载后台命令行脚本
@@ -149,6 +161,7 @@ class AdminServiceProvider extends ServiceProvider
             'form-textarea'     => Textarea::class,
             'form-rich-text'    => RichText::class,
             'no-data'           => NoData::class,
+            'form-checkbox'     => Checkbox::class,
         ]);
     }
 

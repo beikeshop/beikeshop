@@ -5,8 +5,12 @@
 @section('content')
   <div id="customer-app" class="card h-min-600" v-cloak>
     <div class="card-body">
+      @hook('admin.attribute_group.content.before')
+
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.attribute_group.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCustomersCreate('add', null)">{{ __('admin/attribute_group.create_at_groups') }}</button>
+        @hook('admin.attribute_group.content.top_buttons.after')
       </div>
       <div class="table-push">
         <table class="table">
@@ -14,7 +18,9 @@
             <tr>
               <th>ID</th>
               <th>{{ __('common.name') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.created_at') }}</th>
+              @hook('admin.attribute_group.table.headers')
               <th width="130px">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -22,22 +28,29 @@
             <tr v-for="group, index in attribute_groups" :key="index">
               <td>@{{ group.id }}</td>
               <td>@{{ group.description?.name || '' }}</td>
+              <td>@{{ group.sort_order }}</td>
               <td>@{{ group.created_at }}</td>
+              @hook('admin.attribute_group.table.body')
               <td>
+                @hook('admin.attribute_group.table.body.actions.before')
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCustomersCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(group.id, index)">{{ __('common.delete') }}</button>
+                @hook('admin.attribute_group.table.body.actions.after')
               </td>
             </tr>
           </tbody>
           <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
         </table>
       </div>
+
+      @hook('admin.attribute_group.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/attribute_group.index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">
+        @hook('admin.attribute_group.dialog.before')
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -46,7 +59,7 @@
           >
             <el-input size="mini" v-model="dialog.form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
           </el-form-item>
-          
+
           @hook('admin.product.attributes.group.edit.dialog.name.after')
 
         </el-form-item>
@@ -55,10 +68,14 @@
           <el-input class="mb-0" v-model="dialog.form.sort_order" type="number" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
+        @hook('admin.attribute_group.dialog.after')
+
         <el-form-item>
           <div class="d-flex d-lg-block">
+            @hook('admin.attribute_group.dialog.submit.before')
             <el-button type="primary" @click="addCustomersFormSubmit('form')">{{ __('common.save') }}</el-button>
             <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+            @hook('admin.attribute_group.dialog.submit.after')
           </div>
         </el-form-item>
       </el-form>
@@ -68,6 +85,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.attribute_group.script.data')
+
     let app = new Vue({
       el: '#customer-app',
 
@@ -91,7 +110,9 @@
 
         rules: {
           sort_order: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.sort_order')])}}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.attribute_group.vue.data')
       },
 
       methods: {
@@ -162,8 +183,14 @@
           this.dialog.form.name = {};
           this.dialog.form.description = {};
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.attribute_group.vue.methods')
+      },
+
+      @hook('admin.attribute_group.vue.options')
     })
+
+    @hook('admin.attribute_group.script.after')
   </script>
 @endpush

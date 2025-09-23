@@ -116,6 +116,7 @@
 
     @hook('admin.master.script.after')
   </script>
+
   @stack('footer')
 
   @hook('admin.master.footer')

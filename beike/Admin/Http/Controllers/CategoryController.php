@@ -99,7 +99,7 @@ class CategoryController extends Controller
 
         hook_action('admin.category.save.after', $data);
 
-        return redirect($this->getRedirect())->with('success', 'Category created successfully');
+        return redirect($this->getRedirect())->with('success', trans('common.updated_success'));
     }
 
     public function autocomplete(Request $request)

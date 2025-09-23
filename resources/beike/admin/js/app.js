@@ -1,9 +1,9 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-26 18:18:22
- * @LastEditTime  2024-12-25 00:04:41
+ * @LastEditTime  2024-12-19 22:42:24
  */
 
 import http from "../../../js/http";
