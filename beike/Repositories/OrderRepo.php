@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-04 17:22:02
  * @modified   2022-07-04 17:22:02
  */
@@ -221,7 +221,7 @@ class OrderRepo
         } else {
             $shippingAddress = new Address($current['guest_shipping_address'] ?? []);
             $paymentAddress  = new Address($current['guest_payment_address'] ?? []);
-            $email           = $current['guest_shipping_address']['email'] ?? '';
+            $email           = ($current['guest_shipping_address']['email'] ?? $current['guest_payment_address']['email']) ?? '';
         }
         $shippingAddress->country_name = $shippingAddress->country->name ?? '';
         $shippingAddress->country_id   = $shippingAddress->country->id   ?? 0;

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-23 20:22:54
  * @modified   2022-06-23 20:22:54
  */
@@ -37,7 +37,7 @@ class EditController extends Controller
         CustomerRepo::update(current_customer(), $request->only('name', 'email', 'avatar'));
 
         hook_action('account.edit.update.after' , current_customer());
-        
+
         return redirect()->to(shop_route('account.edit.index'))->with('success', trans('common.edit_success'));
     }
 }

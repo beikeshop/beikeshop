@@ -20,11 +20,11 @@ class ProductAttributeResource extends JsonResource
         $data = [
             'attribute'       => [
                 'id'   => $this->attribute_id,
-                'name' => $this->attribute->description->name,
+                'name' => $this->attribute->description->name ?? '',
             ],
             'attribute_value' => [
                 'id'   => $this->attribute_value_id,
-                'name' => $this->attributeValue->description->name,
+                'name' => $this->attributeValue->description->name ?? '',
             ],
         ];
 

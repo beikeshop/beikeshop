@@ -18,5 +18,5 @@ return [
     'throttle'       => '失败次数太多. 请 :seconds 分钟后重试.',
     'logout_success' => '退出登录成功',
     'empty_customer' => '用户为空，请先登录',
-
+    'token_expired' => '页面已过期，请刷新后重试。',
 ];

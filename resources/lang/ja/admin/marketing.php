@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:56:45
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => '支払い金額です',
     'text_version'            => 'バージョン',
     'to_update'               => '進級します',
-    'version_compatible_text' => 'このプラグインは現在のシステム バージョンと互換性がありません。<a href="' . config('beike.api_url') . '/download" target="_blank">最新バージョンにアップグレードしてください。 </a>',
+    'version_compatible_text' => 'このプラグインは現在のシステム バージョンと互換性がありません。<a href="' . config('beike.official_website') . '/download" target="_blank">最新バージョンにアップグレードしてください。 </a>',
     'wxpay'                   => '微信コード決済です!',
     'yuan'                    => '元です',
 ];

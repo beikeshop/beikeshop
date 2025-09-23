@@ -5,8 +5,10 @@
 @section('content')
   <div id="tax-classes-app" class="card" v-cloak>
     <div class="card-body h-min-600">
+      @hook('admin.zones.index.content.before')
       <div class="bg-light p-4 mb-2">
         <div class="row">
+          @hook('admin.zones.index.content.filter.before')
           <div class="col-xxl-20 col-xl-3 col-lg-4 col-md-4 d-flex align-items-center mb-3">
             <label class="filter-title">{{ __('product.name') }}</label>
             <input @keyup.enter="search" type="text" v-model="filter.name" class="form-control" placeholder="{{ __('product.name') }}">
@@ -33,13 +35,16 @@
               <option v-for="item in countries" :value="item.id">@{{ item.name }}</option>
             </select>
           </div>
+          @hook('admin.zones.index.content.filter.after')
         </div>
 
         <div class="row">
           <label class="filter-title"></label>
           <div class="col-auto">
+            @hook('admin.zones.index.content.filter.btns.before')
             <button type="button" @click="search" class="btn btn-outline-primary btn-sm">{{ __('common.filter') }}</button>
             <button type="button" @click="resetSearch" class="btn btn-outline-secondary btn-sm">{{ __('common.reset') }}</button>
+            @hook('admin.zones.index.content.filter.btns.after')
           </div>
         </div>
       </div>
@@ -58,6 +63,7 @@
               <th>{{ __('common.updated_at') }}</th>
               <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.status') }}</th>
+              @hook('admin.zones.index.content.table.head.after')
               <th class="text-end">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -74,6 +80,7 @@
                 <span v-if="zone.status" class="text-success">{{ __('common.enable') }}</span>
                 <span v-else class="text-secondary">{{ __('common.disable') }}</span>
               </td>
+              @hook('admin.zones.index.content.table.body.after')
               <td class="text-end">
                 <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{ __('common.edit') }}</button>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(zone.id, index)">{{ __('common.delete') }}</button>
@@ -92,6 +99,8 @@
       @close="closeCustomersDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="148px">
+        @hook('admin.zones.index.content.dialog.before')
+
         <el-form-item label="{{ __('admin/zone.zone_name') }}" prop="name">
           <el-input v-model="dialog.form.name" placeholder="{{ __('admin/zone.zone_name') }}"></el-input>
         </el-form-item>
@@ -120,9 +129,13 @@
           <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0"></el-switch>
         </el-form-item>
 
+        @hook('admin.zones.index.content.dialog.after')
+
         <el-form-item class="mt-5">
+          @hook('admin.zones.index.content.dialog.btns.before')
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.zones.index.content.dialog.btns.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -133,7 +146,7 @@
   @include('admin::shared.vue-image')
 
   <script>
-    new Vue({
+    var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -169,12 +182,16 @@
         },
 
         url: '{{ admin_route("zones.index") }}',
+
+        @hook('admin.zones.index.content.vue.data')
       },
 
       watch: {
         page: function() {
           this.loadData();
         },
+
+        @hook('admin.zones.index.content.vue.watch')
       },
 
       methods: {
@@ -262,8 +279,12 @@
           this.$refs[form].resetFields();
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.zones.index.content.vue.methods')
+      },
+
+      @hook('admin.zones.index.content.vue.options')
     })
   </script>
 @endpush

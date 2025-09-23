@@ -5,7 +5,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-04 15:29:49
  * @modified   2022-08-04 15:29:49
  */
@@ -141,6 +141,12 @@ return [
     'text_right_icon'                  => '右边支付图标',
     'text_bgi'                         => '背景图',
     'text_btn'                         => '按钮',
+    'btn_bg'                         => '按钮背景色',
+    'btn_color'                         => '按钮字体色',
+    'module_size'                         => '模块宽度',
+    'module_size_narrow'                         => '窄屏',
+    'module_size_wide'                         => '宽屏',
+    'module_size_full'                         => '全屏',
 
     // page
     'page_product_title_size'          => '商品标题字号',
@@ -194,6 +200,7 @@ return [
     'modules_slides_per_view'          => '一屏显示数量',
     'modules_enter_content'            => '请输入内容',
     'modules_full_screen'              => '是否全屏',
+    'modules_fluid_screen'             => '是否宽屏',
     'modules_content'                  => '内容',
     'modules_edit_content'             => '编辑内容',
     'modules_select_image'             => '选择图片',
@@ -248,6 +255,18 @@ return [
     'menu'                             => '菜单',
     'add_submenu_link'                 => '添加子菜单链接',
     'type'                             => '类型',
+    'scroll_text'                      => '滚动文字',
+    'scroll_text_color'                => '颜色',
+    'scroll_text_bg'                   => '背景色',
+    'scroll_text_size'                   => '大小',
+    'scroll_text_padding'                   => '上下边距',
+    'header_ads'                   => '头部广告',
+    'header_ads_bg'                   => '广告背景色',
+    'header_ads_info'                   => '广告内容',
+    'text_position'                => '文字位置',
+    'text_start'                   => '居左',
+    'text_center'                  => '居中',
+    'text_end'                     => '居右',
 
     // footer
     'footer_edit'                      => '页尾编辑器',
@@ -255,4 +274,6 @@ return [
     'introduction'                     => '简介',
     'copyright_settings'               => '版权设置',
     'social_media_icons'               => '社交媒体图标',
+    'image_alt'               => '图片描述',
+    'image_alt_info'               => '图片描述也就是 alt 标签，提供了图片的替代文本描述，用于在图片无法显示时展示文字内容，增强可访问性和SEO效果。',
 ];

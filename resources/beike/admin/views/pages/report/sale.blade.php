@@ -9,6 +9,7 @@
 @endpush
 
 @section('content')
+  @hook('admin.report_sale.index.content.before')
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
       <div>{{ __('admin/dashboard.order_report') }}</div>
@@ -92,7 +93,7 @@
                   @endif
                 </td>
                 <td><a target="_blank" href="{{ admin_route('products.edit', [$item['product_id']]) }}" class="text-link text-break">{{ $item['product']['description']['name'] ?? 'NONE' }}</a></td>
-                <td>{{ $item['total_amount'] }}</td>
+                <td>{{ currency_format($item['total_amount']) }}</td>
               </tr>
             @endforeach
             </tbody>
@@ -106,7 +107,6 @@
           <div>{{ __('admin/report_sale.amount_by_customers') }}</div>
         </div>
         <div class="card-body">
-          {{-- {{dd($amount_by_customers)}} --}}
           <table class="table table-hover table-ranking-list">
             <thead>
               <tr>
@@ -126,7 +126,7 @@
                   @endif
                 </td>
                 <td><a target="_blank" href="{{ admin_route('customers.edit', [$item['customer']['id'] ?? 0]) }}" class="text-link text-break">{{ $item['customer']['name'] ?? '' }}</a></td>
-                <td>{{ $item['order_amount'] }}</td>
+                <td>{{ currency_format($item['order_amount']) }}</td>
               </tr>
             @endforeach
             </tbody>
@@ -135,6 +135,7 @@
       </div>
     </div>
   </div>
+  @hook('admin.report_sale.index.content.after')
 @endsection
 
 @push('footer')

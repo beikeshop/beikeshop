@@ -1,3 +1,4 @@
+@hookwrapper('account.order.status.tab')
 <ul class="nav nav-tabs order-status-wrap">
   <li class="nav-item" role="presentation">
     <a class="nav-link {{ !request('status') ? 'active' : '' }}" href="{{ shop_route('account.order.index') }}">{{ __('order.order_all') }}</a>
@@ -15,3 +16,4 @@
     <a class="nav-link {{ request('status') == 'completed' ? 'active' : '' }}" href="{{ shop_route('account.order.index', ['status' => 'completed']) }}">{{ __('order.completed') }}</a>
   </li>
 </ul>
+@endhookwrapper

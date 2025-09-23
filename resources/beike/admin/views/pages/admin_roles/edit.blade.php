@@ -6,6 +6,7 @@
   <div id="app" class="card" v-cloak>
     <div class="card-body h-min-600">
       <el-form ref="form" :rules="rules" :model="form" label-width="100px">
+        @hook('admin.admin_roles.edit.before')
         <el-form-item label="{{ __('admin/admin_roles.role_name') }}" prop="name">
           <el-input v-model="form.name" placeholder="{{ __('admin/admin_roles.role_name') }}" class="w-auto"></el-input>
         </el-form-item>
@@ -32,6 +33,8 @@
           </div>
         </el-form-item>
 
+        @hook('admin.admin_roles.edit.permission.after')
+
         <el-form-item label="{{ __('admin/admin_roles.plugin_permission') }}" prop="roles" v-if="form.plugin_permissions.length">
           <div class="roles-wrap border w-max-900">
             <div class="bg-dark p-2 text-dark bg-opacity-10 px-2">
@@ -54,10 +57,13 @@
           </div>
         </el-form-item>
 
+        @hook('admin.admin_roles.edit.plugin_permission.after')
+
         <el-form-item class="mt-5">
           <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
           <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
         </el-form-item>
+        @hook('admin.admin_roles.edit.after')
       </el-form>
     </div>
   </div>
@@ -65,7 +71,9 @@
 
 @push('footer')
   <script>
-    new Vue({
+    @hook('admin.admin_roles.edit.script.before')
+
+    var app = new Vue({
       el: '#app',
 
       data: {
@@ -74,22 +82,14 @@
           name: @json($role->name ?? ''),
           core_permissions: @json($core_permissions ?? []),
           plugin_permissions: @json($plugin_permissions ?? []),
-        },
-
-        source: {
-
+          @hook('admin.admin_roles.edit.vue.data')
         },
 
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/admin_roles.role_name')]) }}',trigger: 'blur'}, ],
-        }
-      },
+        },
 
-      beforeMount() {
-        // this.source.languages.forEach(e => {
-        //   this.$set(this.form.name, e.code, '')
-        //   this.$set(this.form.description, e.code, '')
-        // })
+        @hook('admin.admin_roles.edit.vue.options')
       },
 
       methods: {
@@ -126,8 +126,14 @@
             })
           });
         },
-      }
-    })
+
+        @hook('admin.admin_roles.edit.vue.methods')
+      },
+
+      @hook('admin.admin_roles.edit.vue.options')
+    });
+
+    @hook('admin.admin_roles.edit.script.after')
   </script>
 
   <style>

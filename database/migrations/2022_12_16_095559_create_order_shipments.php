@@ -14,12 +14,14 @@ return new class extends Migration {
     {
         if (!Schema::hasTable('order_shipments')) {
             Schema::create('order_shipments', function (Blueprint $table) {
-                $table->id();
+                $table->comment('订单发货表');
+                $table->id()->comment('ID');
                 $table->integer('order_id')->comment('订单ID')->index('order_id');
                 $table->string('express_code')->comment('快递公司编码');
                 $table->string('express_company')->comment('快递公司名称');
                 $table->string('express_number')->comment('运单号');
-                $table->timestamps();
+                $table->timestamp('created_at')->nullable()->comment('创建时间');
+                $table->timestamp('updated_at')->nullable()->comment('更新时间');
             });
         }
 

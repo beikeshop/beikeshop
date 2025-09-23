@@ -1,9 +1,9 @@
 /*
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-09-09 19:16:39
- * @LastEditTime  2024-01-14 19:23:10
+ * @LastEditTime: 2025-01-03 21:58:50
  */
 
 export default {
@@ -176,10 +176,45 @@ export default {
     }
   },
 
-  // 处理用户采集来的商品 图片尺寸比例失衡问题，强制 1:1
-  productImageResize11() {
-    if ($('.image-old').length && $('.image-old').width() > 0) {
-      $('.image-old').height($('.image-old').width())
+  // 根据后台配置的图片尺寸，按照比例调整商品列表图片尺寸
+  productImageResize() {
+    // 确保 config 存在并且配置正确
+    if (
+      !config ||
+      typeof config.productImageOriginWidth !== 'number' ||
+      typeof config.productImageOriginHeight !== 'number' ||
+      config.productImageOriginWidth <= 0 ||
+      config.productImageOriginHeight <= 0
+    ) {
+      console.warn('Invalid product image config.');
+      return;
     }
-  }
+
+    // 判断是否存在图片包裹元素
+    const $productWrap = $('.product-wrap');
+    if ($productWrap.length === 0) {
+      return;
+    }
+
+    $productWrap.each(function () {
+      const $images = $(this).find('.image-old');
+      if ($images.length === 0) {
+        return;
+      }
+
+      const productWrapWidth = $(this).width();
+      if (typeof productWrapWidth !== 'number' || productWrapWidth <= 0) {
+        return;
+      }
+
+      // 根据后台设置的图片尺寸比例计算列表商品图片高度
+      const ratio = config.productImageOriginWidth / config.productImageOriginHeight;
+      const height = productWrapWidth / ratio;
+
+      // 修改图片高度
+      $images.each(function () {
+        $(this).height(height);
+      });
+    });
+  },
 }

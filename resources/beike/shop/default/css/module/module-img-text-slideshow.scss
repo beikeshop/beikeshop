@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2024 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        guangda <service@guangda.work>
+ * @Date          2024-11-12 10:42:54
+ * @LastEditTime  2024-11-12 10:43:15
+ */
+
+.module-img-text-slideshow {
+  --swiper-theme-color: #fff;/* 设置Swiper风格 */
+  --swiper-navigation-color: #fff;/* 单独设置按钮颜色 */
+  --swiper-pagination-bullet-width: 60px;/* 设置分页器宽度 */
+  --swiper-pagination-bullet-height: 4px;/* 设置分页器高度 */
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  overflow: hidden;
+  position: relative;
+
+  .swiper-pagination-bullet {
+    border-radius: 2px;
+    background-color: rgba($color: #fff, $alpha: 0.4);
+    // border: 1px solid #ddd;
+    position: relative;
+    overflow: hidden;
+
+    span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: #fff;
+    }
+  }
+
+  // .swiper-pagination-bullet-active {
+  // }
+
+  .swiper-pagination {
+    @media (min-width: 992px) {
+      bottom: 20px !important;
+    }
+  }
+
+  .swiper-slide-active {
+    .image-wrap {
+      transform: scale(1);
+    }
+  }
+
+  .autoplay-progress {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--swiper-theme-color);
+
+    svg {
+      --progress: 0;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      stroke-width: 4px;
+      stroke: var(--swiper-theme-color);
+      fill: none;
+      stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+      stroke-dasharray: 125.6;
+      transform: rotate(-90deg);
+    }
+  }
+
+  .content-wrap {
+    display: flex;
+    &.start {
+      justify-content: flex-start;
+    }
+
+    &.center {
+      justify-content: center;
+      text-align: center;
+
+      .text-wrap {
+        max-width: 800px;
+      }
+    }
+
+    &.end {
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+
+  .image-wrap {
+    height: 330px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transform-origin: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    transform: scale(1.1732);
+    // background-position: 1155.6664% 0.0%;
+    transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+
+    @media (min-width: 768px) {
+      height: 600px;
+    }
+
+    @media (min-width: 1200px) {
+      height: 700px;
+    }
+  }
+
+  .text-wrap {
+    max-width: 600px;
+    color: #fff;
+    @media (min-width: 992px) {
+      margin-top: 30px;
+    }
+
+    @media (max-width: 992px) {
+      padding: 30px 0;
+    }
+
+    .sub-title {
+      font-size: .8rem;
+      margin-bottom: .8rem;
+
+      @media (min-width: 992px) {
+        font-size: 2rem;
+      }
+    }
+
+    .title {
+      font-size: 1rem;
+      margin-bottom: .7rem;
+      color: #fff;
+
+      @media (min-width: 992px) {
+        font-size: 3rem;
+      }
+
+      @media (min-width: 1200px) {
+        font-size: 4rem;
+      }
+    }
+
+    .description {
+      font-size: 1rem;
+
+      @media (min-width: 992px) {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    a.btn {
+      font-size: .8rem;
+      font-weight: bold;
+      background-color: #fff;
+      border: 1px solid #222;
+      &:hover {
+        background-color: #222;
+      }
+
+      @media (min-width: 992px) {
+        padding: 1rem 2rem;
+        margin-top: 1.5rem;
+      }
+    }
+  }
+}
+
+.module-swiper-img-scroll-text {
+  padding: 36px 0;
+  width: 100%;
+  font-size: 20px;
+  overflow: hidden;
+  position: relative;
+  @media (max-width: 768px) {
+    font-size: 14px !important;
+    padding: 16px 0 !important;
+  }
+}
+
+.scroll-info {
+  white-space: nowrap;
+}
+
+.scroll-info {
+  .scroll-text {
+    padding: 0 15px;
+    font-weight: bold;
+    display: inline-block;
+    animation: marquee-animation 3s linear infinite;
+  }
+}
+
+// /* 滚动动画 */
+@keyframes marquee-animation {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-100%); /* 滚动到左侧 */
+  }
+}

@@ -11,6 +11,8 @@
 @endsection
 
 @section('content')
+  @hook('admin.order.form.content.before')
+
   @hookwrapper('admin.order.form.base')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('admin/common.order') }}</h6></div>
@@ -168,9 +170,9 @@
           <el-form-item label="{{ __('order.express_number') }}" v-if="form.status == 'shipped'" prop="express_number">
             <el-input class="w-max-500" v-model="form.express_number" size="small" v-if="form.status == 'shipped'" placeholder="{{ __('order.express_number') }}"></el-input>
           </el-form-item>
-          <el-form-item label="{{ __('admin/order.notify') }}">
+          {{-- <el-form-item label="{{ __('admin/order.notify') }}">
             <el-checkbox :true-label="1" :false-label="0" v-model="form.notify"></el-checkbox>
-          </el-form-item>
+          </el-form-item> --}}
           <el-form-item label="{{ __('order.comment') }}">
             <textarea class="form-control w-max-500" v-model="form.comment"></textarea>
           </el-form-item>
@@ -206,8 +208,8 @@
               <td>{{ $product->product_id }}</td>
               <td>
                 <div class="d-flex align-items-center">
-                  <div class="wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
-                  @hook('admin.order_form.product_name.after')
+                  <div class="border d-flex justify-content-center align-items-center wh-60 me-2"><img src="{{ image_resize($product->image) }}" class="img-fluid max-h-100"></div>{{ $product->name }}
+                  @hook('admin.order_form.product_name.after', $product)
                 </div>
               </td>
               <td class="">{{ $product->product_sku }}</td>
@@ -282,7 +284,7 @@
     @endhookwrapper
   @endif
 
-  @if ($order->orderShipments)
+  @if ($order->orderShipments->count())
     @hookwrapper('admin.order.form.shipments')
     <div class="card mb-4">
       <div class="card-header"><h6 class="card-title">{{ __('order.order_shipments') }}</h6></div>
@@ -340,6 +342,7 @@
     @endhookwrapper
   @endif
 
+  @hookwrapper('admin.order.form.history')
   <div class="card mb-4">
     <div class="card-header"><h6 class="card-title">{{ __('order.action_history') }}</h6></div>
     <div class="card-body">
@@ -365,6 +368,9 @@
       </div>
     </div>
   </div>
+  @endhookwrapper
+
+  @hook('admin.order.form.content.after')
 @endsection
 
 @push('footer')
@@ -430,7 +436,7 @@
     });
   </script>
 
-@can('orders_update_status')
+  @can('orders_update_status')
   <script>
     $('.edit-shipment').click(function() {
       $(this).siblings('.shipment-tool').removeClass('d-none');
@@ -488,9 +494,9 @@
 
         rules: {
           status: [{required: true, message: '{{ __('admin/order.error_status') }}', trigger: 'blur'}, ],
-          express_code: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_company')]) }}',trigger: 'blur'}, ],
-          express_number: [{required: true,message: '{{ __('common.error_required', ['name' => __('order.express_number')]) }}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.order.form.vue.data')
       },
 
       methods: {
@@ -506,8 +512,12 @@
               window.location.reload();
             })
           });
-        }
-      }
+        },
+
+        @hook('admin.order.form.vue.methods')
+      },
+
+      @hook('admin.order.form.vue.options')
     })
   </script>
   @endcan

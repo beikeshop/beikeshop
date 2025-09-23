@@ -1,0 +1,19 @@
+<?php
+/**
+ * Bootstrap.php
+ *
+ * @copyright  2024 beikeshop.com - All Rights Reserved
+ * @link       https://beikeshop.com
+ * @author     $AUTHOR_NAME$ <$AUTHOR_EMAIL$>
+ * @created    2024-05-14 15:15:27
+ * @modified   2024-05-14 15:15:27
+ */
+
+namespace $MODULE_NAMESPACE$\$STUDLY_NAME$;
+
+class Bootstrap
+{
+    public function boot(): void
+    {
+    }
+}

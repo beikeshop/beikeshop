@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:56:37
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Importo versato',
     'text_version'            => 'versione',
     'to_update'               => 'deaggiornamento',
-    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="' . config('beike.api_url') . '/download" target="_blank">versione più recente </a>',
+    'version_compatible_text' => 'Questo plug-in non è compatibile con la versione attuale del sistema, esegui l\'aggiornamento alla <a href="' . config('beike.official_website') . '/download" target="_blank">versione più recente </a>',
     'wxpay'                   => 'Pagare il prezzo di wechat!',
     'yuan'                    => 'yuan',
 ];

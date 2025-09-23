@@ -1,4 +1,5 @@
 <div class="row g-lg-4 g-2 mb-4">
+  @hook('admin.home.dashboard.totals.before')
   <div class="col-xl-3 col-6">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
@@ -90,4 +91,5 @@
       </div>
     </div>
   </div>
+  @hook('admin.home.dashboard.totals.after')
 </div>

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-12 20:17:04
  * @modified   2022-08-12 20:17:04
  */
@@ -12,6 +12,7 @@
 namespace Beike\Installer\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
 
 class WelcomeController extends BaseController
 {
@@ -30,10 +31,10 @@ class WelcomeController extends BaseController
         return view('installer::welcome', $data);
     }
 
-    public function locale($lang)
+    public function locale(Request $request)
     {
+        $lang = $request->get('code');
         setcookie('locale', $lang, 0, '/');
-
-        return Redirect::back();
+        return Redirect::to(route('installer.welcome'));
     }
 }

@@ -1,17 +1,12 @@
 <template id="module-editor-image100-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">设置</div>
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
-      <div class="module-edit-title">是否全屏</div>
-      <el-switch v-model="form.full"></el-switch>
-    </div>
-    <div class="module-editor-row">内容</div>
-    <div class="module-edit-group">
-      <div class="module-edit-title">选择图片</div>
+      <div class="module-edit-title">{{ __('admin/builder.modules_select_image') }}</div>
       <div class="">
         <div class="pb-images-top">
-          <pb-image-selector v-model="form.images[0].image"></pb-image-selector>
-          <div class="tag">建议尺寸: 1920 x 500</div>
+          <pb-image-selector :is-alt="true"  v-model="form.images[0].image"></pb-image-selector>
+          <div class="tag">{{ __('admin/builder.text_suggested_size') }}: 1920 x 500</div>
         </div>
         <link-selector v-model="form.images[0].link"></link-selector>
       </div>
@@ -60,10 +55,13 @@ Vue.component('module-editor-image100', {
         background_color: ''
       },
       floor: languagesFill(''),
-      full: true,
+      module_size: 'container-fluid',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('catalog/demo/banner/banner-2-en.png'),
+          image: {
+            src: languagesFill('https://dummyimage.com/1920x500/eeeeee'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',

@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-02-10 16:04:14
  * @modified   2023-02-10 16:04:14
  */
@@ -34,7 +34,7 @@ class PageCategoryRequest extends FormRequest
     {
         return [
             'descriptions.*.locale'  => 'required|string',
-            'descriptions.*.title'   => 'required|string|min:3|max:32',
+            'descriptions.*.title'   => 'required|string|min:3|max:255',
             'descriptions.*.summary' => 'string',
         ];
     }

@@ -14,7 +14,7 @@
           <i class="bi {{ $cart['selected'] ? 'bi-check-circle-fill' : 'bi-circle' }}" data-id="{{ $cart['cart_id'] }}"></i>
         </div>
         <div class="product-info d-flex align-items-center">
-          <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-center align-items-center h-100"><img src="{{ $cart['image_url'] ?: image_resize('', 160, 160) }}" class="img-fluid"></a></div>
+          <div class="left"><a href="{{ shop_route('products.show', $cart['product_id']) }}" class="d-flex justify-content-center align-items-center h-100"><img src="{{ $cart['image_url'] ?: image_resize('', 160, 160) }}" alt="{{ $cart['name'] }}" class="img-fluid"></a></div>
           <div class="right flex-grow-1">
             <a href="{{ shop_route('products.show', $cart['product_id']) }}" class="name fs-sm fw-bold mb-2 text-dark text-truncate-2" title="{{ $cart['name'] }}">{{ $cart['name'] }}</a>
             <div class="text-muted mb-1 text-size-min">{{ $cart['variant_labels'] }}</div>
@@ -50,21 +50,24 @@
   </div>
 </div>
 
-@if ($carts)
-  <div class="offcanvas-footer">
-    <div class="d-flex justify-content-between align-items-center mb-2 p-3 bg-light top-footer">
-      <div class="select-wrap all-select d-flex align-items-center">
-        <i class="bi {{ $check == count($carts) ? 'bi-check-circle-fill' : 'bi-circle' }}"></i>
-        <span class="ms-1 text-secondary">{{ __('common.select_all') }}</span>
-      </div>
-      <div>
-        <span class="text-secondary">{{ __('shop/carts.product_total') }}</span><strong>（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
-        <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
-      </div>
+
+<div class="offcanvas-footer">
+  @if ($carts)
+  <div class="d-flex justify-content-between align-items-center mb-2 p-3 bg-light top-footer">
+    <div class="select-wrap all-select d-flex align-items-center">
+      <i class="bi {{ $check == count($carts) ? 'bi-check-circle-fill' : 'bi-circle' }}"></i>
+      <span class="ms-1 text-secondary">{{ __('common.select_all') }}</span>
     </div>
-    <div class="p-4">
-      <a href="{{ shop_route('checkout.index') }}" class="btn w-100 fw-bold btn-dark to-checkout {{ !$check ? 'disabled' : '' }}">{{ __('shop/carts.to_checkout') }}</a>
-      <a href="{{ shop_route('carts.index') }}" class="btn w-100 fw-bold btn-outline-dark mt-2">{{ __('shop/carts.check_cart') }}</a>
+    <div>
+      <span class="text-secondary">{{ __('shop/carts.product_total') }}</span><strong>（<span class="offcanvas-right-cart-count">{{ $quantity }}</span>）</strong>
+      <strong class="ms-auto offcanvas-right-cart-amount">{{ $amount_format }}</strong>
     </div>
   </div>
-@endif
+  @endif
+  <div class="p-4">
+    @if ($carts)
+    <a href="{{ shop_route('checkout.index') }}" class="btn w-100 fw-bold btn-dark to-checkout {{ !$check ? 'disabled' : '' }}">{{ __('shop/carts.to_checkout') }}</a>
+    @endif
+    <a href="{{ shop_route('carts.index') }}" class="btn w-100 fw-bold btn-outline-dark mt-2">{{ __('shop/carts.check_cart') }}</a>
+  </div>
+</div>

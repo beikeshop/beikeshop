@@ -24,14 +24,17 @@
 
       <div class="tab-content">
         <div class="tab-pane fade show active" id="tab-general">
+          @hook('admin.account.general.before')
           <x-admin-form-input name="name" title="{{ __('common.name') }}" value="{{ old('name', $current_user->name) }}" />
           <x-admin-form-input name="email" title="{{ __('common.email') }}" type="email" value="{{ old('email', $current_user->email) }}" />
           <x-admin-form-input name="password" title="{{ __('shop/login.password') }}" value="{{ old('password', '') }}">
             <div class="help-text font-size-12 lh-base">{{ __('admin/account.password_text') }}</div>
           </x-admin-form-input>
           <x-admin-form-select title="{{ __('common.language') }}" name="locale" :value="old('locale', $current_user->locale)" :options="$admin_languages" key="code" label="name" />
+          @hook('admin.account.general.after')
         </div>
         <div class="tab-pane fade show" id="tab-token">
+          @hook('admin.account.token.before')
           <x-admin::form.row :title="__('admin/account.create_token')">
             <div class="col-auto wp-200-">
               <table class="table table-bordered w-max-500" id="token-app">
@@ -58,6 +61,7 @@
               </table>
             </div>
           </x-admin::form.row>
+          @hook('admin.account.token.after')
         </div>
       </div>
       <x-admin::form.row title="">
@@ -73,10 +77,12 @@
 
 @push('footer')
 <script>
+  @hook('admin.account.script.before')
   const tokenApp = new Vue({
     el: '#token-app',
     data: {
       tokens: @json(old('tokens', $current_user->tokens->pluck('token')->toArray() ?? [])),
+      @hook('admin.account.vue.data')
     },
     methods: {
       addToken() {
@@ -84,7 +90,8 @@
         setTimeout(() => {
           update(false);
         }, 0);
-      }
+      },
+      @hook('admin.account.vue.methods')
     }
   });
 
@@ -96,5 +103,6 @@
       }
     })
   }
+  @hook('admin.account.script.after')
 </script>
 @endpush

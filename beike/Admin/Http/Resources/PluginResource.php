@@ -30,6 +30,7 @@ class PluginResource extends JsonResource
             'status'      => $this->getStatus(),
             'installed'   => $this->getInstalled(),
             'edit_url'    => $this->getEditUrl(),
+            'can_update'  => $this->getCanUpdate(),
         ];
     }
 }

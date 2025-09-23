@@ -1,20 +1,18 @@
 <template id="module-editor-image401-template">
   <div class="image-edit-wrapper">
-    <div class="module-editor-row">{{ __('admin/builder.text_set_up') }}</div>
+    <module-size v-model="form.module_size"></module-size>
     <div class="module-edit-group">
       <div class="module-edit-title">{{ __('admin/builder.text_add_pictures') }}</div>
       <div class="pb-images-selector" v-for="(item, index) in form.images" :key="index">
         <div class="selector-head" @click="itemShow(index)">
           <div class="left">
-
-            <img :src="thumbnail(item.image['{{ locale() }}'], 40, 40)" class="img-responsive">
+            <img :src="thumbnail(item.image?.src?.['{{ locale() }}'] || '', 40, 40)" class="img-responsive">
           </div>
-
           <div class="right"><i :class="'el-icon-arrow-'+(item.show ? 'up' : 'down')"></i></div>
         </div>
         <div :class="'pb-images-list ' + (item.show ? 'active' : '')">
           <div class="pb-images-top">
-            <pb-image-selector v-model="item.image"></pb-image-selector>
+            <pb-image-selector :is-alt="true"  v-model="item.image"></pb-image-selector>
             <div class="tag">{{ __('admin/builder.text_suggested_size') }}:
               <span v-if="index == 0">780 x 614</span>
               <span v-if="index == 1 || index == 2">372 x 292</span>
@@ -36,7 +34,8 @@ Vue.component('module-editor-image401', {
 
   data: function () {
     return {
-      form: null
+      form: null,
+      locale: $locale
     }
   },
 
@@ -72,9 +71,13 @@ Vue.component('module-editor-image401', {
         background_color: ''
       },
       floor: languagesFill(''),
+      module_size: 'container',// 窄屏、宽屏、全屏
       images: [
         {
-          image: languagesFill('catalog/demo/image_plus_1-en.png'),
+          image: {
+            src: languagesFill('catalog/demo/image_plus_1-en.png'),
+            alt: languagesFill(''),
+          },
           show: true,
           link: {
             type: 'product',
@@ -82,7 +85,10 @@ Vue.component('module-editor-image401', {
           }
         },
         {
-          image: languagesFill('catalog/demo/image_plus_2-en.png'),
+          image: {
+            src: languagesFill('catalog/demo/image_plus_2-en.png'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',
@@ -90,7 +96,10 @@ Vue.component('module-editor-image401', {
           }
         },
         {
-          image: languagesFill('catalog/demo/image_plus_3-en.png'),
+          image: {
+            src: languagesFill('catalog/demo/image_plus_3-en.png'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',
@@ -98,7 +107,10 @@ Vue.component('module-editor-image401', {
           }
         },
         {
-          image: languagesFill('catalog/demo/image_plus_4-en.png'),
+          image: {
+            src: languagesFill('catalog/demo/image_plus_4-en.png'),
+            alt: languagesFill(''),
+          },
           show: false,
           link: {
             type: 'product',

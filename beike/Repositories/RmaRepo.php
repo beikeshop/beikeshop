@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-01 20:42:05
  * @modified   2022-08-01 20:42:05
  */
@@ -26,9 +26,9 @@ class RmaRepo
     /**
      * 创建一个记录
      * @param $data
-     * @return Builder|Model
+     * @return Rma|Model
      */
-    public static function create($data)
+    public static function create($data) : Rma
     {
         $item           = Rma::query()->create($data);
         $data['notify'] = 0;

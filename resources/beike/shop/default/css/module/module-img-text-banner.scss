@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+/**
+ * @copyright     2024 beikeshop.com - All Rights Reserved.
+ * @link          https://beikeshop.com
+ * @Author        guangda <service@guangda.work>
+ * @Date          2024-11-12 10:42:54
+ * @LastEditTime  2024-11-12 10:43:15
+ */
+
+.img-text-banner-wrap {
+  .text-wrap {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    @media (min-width: 1200px) {
+      padding: 40px 70px;
+    }
+
+    @media (max-width: 992px) {
+      align-items: center;
+    }
+
+    .title {
+      margin-bottom: 20px;
+
+      @media (min-width: 992px) {
+        font-size: 34px;
+      }
+    }
+
+    .description {
+      line-height: 1.7;
+      margin-bottom: 20px;
+
+      @media (min-width: 992px) {
+        margin-bottom: 30px;
+        font-size: 15px;
+      }
+    }
+  }
+}

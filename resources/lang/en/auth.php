@@ -18,5 +18,6 @@ return [
     'throttle'       => 'Too many login attempts. Please try again in :seconds seconds.',
     'logout_success' => 'Successfully logged out',
     'empty_customer' => 'Empty Customer, please login first.',
+    'token_expired' => 'Token expired, please refresh the page.',
 
 ];

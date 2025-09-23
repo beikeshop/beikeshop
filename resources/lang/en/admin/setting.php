@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2023-12-12 07:48:50
  */
@@ -46,7 +46,7 @@ return [
     'mail_log'                    => 'Description: The log engine is generally used for testing purposes! The email will not be actually sent to the recipient address, and the email content will be saved in `/storage/logs/laravel.log` in the form of a log',
     'mail_settings'               => 'mail settings',
     'mailgun_domain'              => 'domain name',
-    'mailgun_endpoint'            => 'port',
+    'mailgun_endpoint'            => 'Endpoint',
     'mailgun_secret'              => 'Key',
     'meta_description'            => 'Meta Description',
     'meta_keywords'               => 'Meta Keyword',
@@ -84,5 +84,18 @@ return [
     'theme_default'               => 'Default Theme',
     'translation_tools'           => 'Translation Tools',
     'use_queue'                   => 'whether to use the queue',
+    'use_queue_text'              => 'Queue opening tutorial:',
     'weight_unit'                 => 'Unit of weight',
+    'email_type'                  => 'Send email scenario',
+    'email_type_register'         => 'Registration',
+    'email_type_order'            => 'Order',
+    'email_type_return'           => 'Return',
+    'email_send_admin'            => 'Send to administrator',
+    'email_send_customer'         => 'Send to customer',
+    'email_type_register'         => 'Registration',
+    'email_type_order'            => 'Order',
+    'email_type_return'           => 'Return',
+    'smtp_qq_hint'                => 'Note: It is not recommended to check the option to send to administrators and users at the same time for QQ mailbox SMTP service, otherwise the connection will time out. It is recommended to use mailboxes such as 126, 163, etc., or change the mail engine.',
+    'image_origin_size' => 'Product image size',
+    'image_origin_size_text' => 'Product image original size, recommended/default 800*800, the system will generate a list page thumbnail according to the set size ratio',
 ];

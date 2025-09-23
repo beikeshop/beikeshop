@@ -10,12 +10,9 @@
       <x-shop-sidebar />
       <div class="col-12 col-md-9">
         @if (\Session::has('success'))
-          <div class="alert alert-success">
-            <ul>
-              <li>{!! \Session::get('success') !!}</li>
-            </ul>
-          </div>
+          <div class="alert alert-success">{!! \Session::get('success') !!}</div>
         @endif
+
         @hook('account.account.card.before')
         <div class="card account-card">
           <div class="card-header d-flex justify-content-between align-items-center">
@@ -48,7 +45,7 @@
                       <tr class="align-middle">
                         <td style="width: 62px">
                           <div class="img border wh-60 d-flex justify-content-center align-items-center">
-                            <img src="{{ $order->orderProducts[0]->image ?? '' }}" class="img-fluid">
+                            <img src="{{ $order->orderProducts[0]->image ?? '' }}" alt="{{ $order->orderProducts[0]->name ?? '' }}" class="img-fluid">
                           </div>
                         </td>
                         <td>
@@ -75,6 +72,7 @@
             </div>
           </div>
         </div>
+        @hook('account.account.card.after')
       </div>
     </div>
   </div>

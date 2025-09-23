@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-30 16:36:40
  * @modified   2022-06-30 16:36:40
  */
@@ -173,6 +173,7 @@ class SettingRepo
                 'locale'                 => system_setting('base.locale'),
                 'guest_checkout'         => system_setting('base.guest_checkout'),
                 'show_price_after_login' => system_setting('base.show_price_after_login'),
+                'maintenance_mode'       => system_setting('base.maintenance_mode') ?? 0,
             ],
             'rma_statuses' => RmaRepo::getStatuses(),
             'rma_types'    => RmaRepo::getTypes(),

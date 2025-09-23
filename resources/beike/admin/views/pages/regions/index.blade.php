@@ -5,8 +5,11 @@
 @section('content')
 <div id="tax-classes-app" class="card" v-cloak>
   <div class="card-body h-min-600">
+    @hook('admin.region.index.content.before')
     <div class="d-flex justify-content-between mb-4">
+      @hook('admin.region.index.content.top_buttons.before')
       <button type="button" class="btn btn-primary" @click="checkedCreate('add', null)">{{ __('common.add') }}</button>
+      @hook('admin.region.index.content.top_buttons.after')
     </div>
     <div class="table-push">
       <table class="table">
@@ -17,6 +20,7 @@
             <th>{{ __('admin/region.describe') }}</th>
             <th>{{ __('common.created_at') }}</th>
             <th>{{ __('common.updated_at') }}</th>
+            @hook('admin.region.index.table.headers')
             <th class="text-end">{{ __('common.action') }}</th>
           </tr>
         </thead>
@@ -27,11 +31,14 @@
             <td :title="tax.description">@{{ stringLengthInte(tax.description) }}</td>
             <td>@{{ tax.created_at }}</td>
             <td>@{{ tax.updated_at }}</td>
+            @hook('admin.region.index.table.body')
             <td class="text-end">
+              @hook('admin.region.index.table.body.actions.before')
               <button class="btn btn-outline-secondary btn-sm" @click="checkedCreate('edit', index)">{{
                 __('common.edit') }}</button>
               <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteCustomer(tax.id, index)">{{
                 __('common.delete') }}</button>
+              @hook('admin.region.index.table.body.actions.after')
             </td>
           </tr>
         </tbody>
@@ -44,12 +51,15 @@
         </tbody>
       </table>
     </div>
+    @hook('admin.region.index.content.after')
   </div>
 
   <el-dialog title="{{ __('admin/region.regions_create') }}" :visible.sync="dialog.show" width="700px"
     @close="closeCustomersDialog('form')" :close-on-click-modal="false" @open="openDialog">
 
     <el-form ref="form" :rules="rules" :model="dialog.form" label-width="120px">
+      @hook('admin.region.index.dialog.before')
+
       <el-form-item label="{{ __('common.name') }}" prop="name">
         <el-input v-model="dialog.form.name" placeholder="{{ __('common.name') }}"></el-input>
       </el-form-item>
@@ -93,9 +103,14 @@
         <el-button type="primary" icon="el-icon-plus" size="small" plain @click="addRates">{{ __('common.add') }}
         </el-button>
       </el-form-item>
+
+      @hook('admin.region.index.dialog.after')
+
       <el-form-item class="mt-5">
+        @hook('admin.region.index.dialog.submit.before')
         <el-button type="primary" @click="addFormSubmit('form')">{{ __('common.save') }}</el-button>
         <el-button @click="closeCustomersDialog('form')">{{ __('common.cancel') }}</el-button>
+        @hook('admin.region.index.dialog.submit.after')
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -104,7 +119,7 @@
 
 @push('footer')
 <script>
-  new Vue({
+  var app = new Vue({
       el: '#tax-classes-app',
 
       data: {
@@ -133,7 +148,9 @@
         rules: {
           name: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.name')]) }}',trigger: 'blur'}, ],
           description: [{required: true,message: '{{ __('common.error_required', ['name' => __('admin/region.describe')]) }}',trigger: 'blur'}, ],
-        }
+        },
+
+        @hook('admin.region.index.vue.data')
       },
 
       // 在挂载开始之前被调用:相关的 render 函数首次被调用
@@ -144,6 +161,8 @@
             ...res.data.zones
           ]
         })
+
+        @hook('admin.region.index.vue.beforeMount')
       },
 
       methods: {
@@ -238,8 +257,12 @@
           Object.keys(this.dialog.form).forEach(key => this.dialog.form[key] = '')
           this.dialog.form.region_zones = []
           this.dialog.show = false
-        }
-      }
+        },
+
+        @hook('admin.region.index.vue.methods')
+      },
+
+      @hook('admin.region.index.vue.options')
     })
 </script>
 @endpush

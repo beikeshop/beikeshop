@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-09-03 22:32:29
  * @LastEditTime  2022-09-16 20:55:12
  */
@@ -12,13 +12,12 @@ header {
   background: #fff;
 
   .top-wrap {
-    height: 40px;
+    height: 36px;
     background: #F7F8FA;
     display: flex;
+    border-bottom: 1px solid #ddd;
 
     > .container, .container-fluid {
-      max-width: 1700px;
-
       @media (max-width:768px) {
         padding: 0 10px;
       }
@@ -101,7 +100,6 @@ header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 1700px;
     }
 
     .menu-wrap {
@@ -112,16 +110,35 @@ header {
       > .navbar-nav {
         > .nav-item {
           background-color: transparent;
+          &:hover {
+            > .nav-link {
+              > svg {
+                transform: rotate(180deg);
+              }
+            }
+          }
 
           > .nav-link {
             font-size: 15px;
             padding: 1rem;
             position: relative;
+            @media (max-width: 1200px) {
+              padding: 1rem .5rem;
+            }
+
+            > svg {
+              margin-left: -3px;
+              transition: all .2s ease-in-out;
+            }
+
+            &.dropdown-toggle::after {
+              counter: '';
+              display: none;
+            }
 
             .badge {
               position: absolute;
               bottom: 80%;
-              border-radius: 0;
               padding: 2px 4px;
               font-weight: 400;
               left: calc(50% - 0px);
@@ -162,6 +179,9 @@ header {
       img {
         max-width: 200px;
         max-height: 50px;
+        @media (max-width: 1200px) {
+          max-width: 160px;
+        }
       }
     }
 
@@ -171,8 +191,17 @@ header {
         padding-right: 0.7rem;
         padding-left: 0.7rem;
         position: relative;
+        @media (max-width: 1200px) {
+          padding-right: 0.3rem;
+          padding-left: 0.3rem;
+        }
+
         i {
           font-size: 1.1rem;
+        }
+
+        img {
+          width: 24px;
         }
       }
     }
@@ -345,6 +374,10 @@ header {
       }
 
       .right {
+        .name {
+          word-break: break-all;
+        }
+
         .price {
           input {
             margin-left: 10px;

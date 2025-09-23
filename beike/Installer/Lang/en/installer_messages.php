@@ -78,7 +78,7 @@ return [
         'app_environment_label'                => 'App Environment',
         'db_connection_failed_host_port'       => 'Database host or port error!',
         'db_connection_failed_user_password'   => 'Database username or password error!',
-        'db_connection_failed_database_name'   => 'Database name not exist!',
+        'db_connection_failed_database_name'   => 'Database name not exist or error!',
         'db_connection_failed_invalid_version' => 'MySQL version must grater than 5.7!',
         'app_environment_label_local'          => 'Local',
         'app_environment_label_developement'   => 'Development',
@@ -110,6 +110,9 @@ return [
         'ajax_database_parameters'             => 'Check database parameters...',
         'ajax_database_success'                => 'Database connection succeeded',
         'error_email'                          => 'Please fill in the correct email address',
+        'table_already_exists'                 => 'Found data tables in the database, please clear or backup them before installing!',
+        'php_extension'                        => 'Please install the PHP extension',
+        'down_phpversion'                      => 'Please downgrade the PHP version to PHP 8.1 or 8.2'
     ],
 
     /*

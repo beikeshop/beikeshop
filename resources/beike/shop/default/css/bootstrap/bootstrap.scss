@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-17 19:26:53
  * @LastEditTime  2022-09-16 20:57:12
  */
@@ -12,7 +12,7 @@ $primary: #fd560f;
 $success: #71c20b;
 
 $font-size-base: 0.8rem;
-$font-family-base: "PingFang SC", "Poppins","Helvetica","Arial","sans-serif";
+$font-family-base: "Poppins","Helvetica","Arial","sans-serif";
 $border-radius: 0.275rem;
 $form-check-input-width: 1.2em;
 // $form-check-input-border-radius: 0;
@@ -92,13 +92,25 @@ $table-bg: transparent;
 @import './bootstrap-icons';
 @import 'node_modules/bootstrap/scss/bootstrap';
 
+.col-lg-20 {
+  @include media-breakpoint-up(lg) {
+    flex: 0 0 calc(100% / 5); // 宽度为 1/5
+    max-width: calc(100% / 5); // 同时限制最大宽度
+  }
+}
+
 .btn-primary {
   color: #fff !important;
 }
 
 .container-fluid {
-  padding-right: 50px;
-  padding-left: 50px;
+  @media (min-width: 992px) {
+    &:not(.w-100.px-0) {
+      max-width: 1920px;
+    }
+    padding-right: 50px;
+    padding-left: 50px;
+  }
 }
 
 .dropdown {

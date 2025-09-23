@@ -18,7 +18,7 @@ return new class extends Migration
         }
 
         Schema::table('carts', function (Blueprint $table) {
-            $table->json('extra')->nullable()->after('payment_method_code');
+            $table->json('extra')->nullable()->comment('额外信息')->after('payment_method_code');
         });
     }
 

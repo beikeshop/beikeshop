@@ -5,8 +5,12 @@
 @section('content')
   <div id="app" class="card" v-cloak>
     <div class="card-body">
+      @hook('admin.attribute.index.content.before')
+
       <div class="d-flex justify-content-between mb-4">
+        @hook('admin.attribute.index.content.top_buttons.before')
         <button type="button" class="btn btn-primary" @click="checkedCreate">{{ __('admin/attribute.create_at') }}</button>
+        @hook('admin.attribute.index.content.top_buttons.after')
       </div>
       <div class="table-push h-min-500">
         <table class="table">
@@ -15,7 +19,9 @@
               <th>{{ __('common.id') }}</th>
               <th>{{ __('common.name') }}</th>
               <th>{{ __('admin/attribute_group.index') }}</th>
+              <th>{{ __('common.sort_order') }}</th>
               <th>{{ __('common.created_at') }}</th>
+              @hook('admin.attribute.index.table.headers')
               <th width="150px">{{ __('common.action') }}</th>
             </tr>
           </thead>
@@ -24,10 +30,14 @@
               <td>@{{ item.id }}</td>
               <td>@{{ item.name }}</td>
               <td>@{{ item.attribute_group_name }}</td>
+              <td>@{{ item.sort_order }}</td>
               <td>@{{ item.created_at }}</td>
+              @hook('admin.attribute.index.table.body')
               <td>
+                @hook('admin.attribute.index.table.body.actions.before')
                 <a class="btn btn-outline-secondary btn-sm" :href="linkEdit(item.id)">{{ __('common.edit') }}</a>
                 <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteItem(item.id)">{{ __('common.delete') }}</button>
+                @hook('admin.attribute.index.table.body.actions.after')
               </td>
             </tr>
           </tbody>
@@ -37,12 +47,16 @@
 
       <el-pagination v-if="attributes.data.length" layout="prev, pager, next" background :page-size="attributes.per_page" :current-page.sync="page"
         :total="attributes.total"></el-pagination>
+
+      @hook('admin.attribute.index.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/attribute.index') }}" :visible.sync="dialog.show" width="670px"
       @close="closeDialog('form')" :close-on-click-modal="false">
 
       <el-form ref="form" :rules="rules" :model="dialog.form" label-width="155px">
+        @hook('admin.attribute.index.dialog.before')
+
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -71,10 +85,14 @@
           <el-input class="mb-0 wp-100" v-model="dialog.form.sort_order" type="number" placeholder="{{ __('common.sort_order') }}"></el-input>
         </el-form-item>
 
+        @hook('admin.attribute.index.dialog.after')
+
         <el-form-item>
           <div class="d-flex d-lg-block mt-4">
+            @hook('admin.attribute.index.dialog.submit.before')
             <el-button type="primary" @click="formSubmit('form')">{{ __('common.save') }}</el-button>
             <el-button @click="closeDialog('form')">{{ __('common.cancel') }}</el-button>
+            @hook('admin.attribute.index.dialog.submit.after')
           </div>
         </el-form-item>
       </el-form>
@@ -84,6 +102,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.attribute.index.script.data')
+
    let app = new Vue({
       el: '#app',
 
@@ -115,12 +135,16 @@
           ],
           sort_order: [{required: true,message: '{{ __('common.error_required', ['name' => __('common.sort_order')])}}',trigger: 'blur'}, ],
         },
+
+        @hook('admin.attribute.index.vue.data')
       },
 
       watch: {
         page: function() {
           this.loadData();
         },
+
+        @hook('admin.attribute.index.vue.watch')
       },
 
       methods: {
@@ -184,7 +208,13 @@
           this.$refs[form].resetFields();
           this.dialog.show = false
         },
-      }
+
+        @hook('admin.attribute.index.vue.methods')
+      },
+
+      @hook('admin.attribute.index.vue.options')
     })
+
+    @hook('admin.attribute.index.script.after')
   </script>
 @endpush

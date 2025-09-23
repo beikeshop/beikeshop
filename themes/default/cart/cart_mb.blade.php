@@ -3,7 +3,7 @@
     <div v-for="product, index in products" :key="index" :class="['mb-product-list', product.selected ? 'active' : '']">
       <div class="d-flex align-items-center product-img">
         <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url"
+        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" :alt="product.name"
             class="img-fluid"></div>
       </div>
       <div class="product-mb-info ms-2">

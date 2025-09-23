@@ -5,10 +5,13 @@
 @section('content')
   <div id="customer-app-form" class="card" v-cloak>
     <div class="card-body">
+      @hook('admin.customer.form.content.before')
       <el-form :model="form" :rules="rules" ref="form" label-width="140px">
         <el-tabs v-model="customerTab">
+          @hook('admin.customer.form.tabs.before')
           <el-tab-pane label="{{ __('admin/customer.user_info') }}" name="customer">
             <div class="form-max-w">
+              @hook('admin.customer.form.tabs.customer.before')
               <el-form-item label="{{ __('admin/customer.user_name') }}" prop="name">
                 <el-input v-model="form.name" placeholder="{{ __('admin/customer.user_name') }}"></el-input>
               </el-form-item>
@@ -18,7 +21,7 @@
               <el-form-item label="{{ __('shop/login.password') }}" prop="password">
                 <el-input v-model="form.password" placeholder="{{ __('admin/customer.password_info') }}"></el-input>
               </el-form-item>
-              @hookwrapper('admin.customer.edit.from.customer_group')
+              @hookwrapper('admin.customer.form.from.customer_group')
               <el-form-item label="{{ __('admin/customer_group.index') }}">
                 <el-select v-model="form.customer_group_id" placeholder="请选择">
                   <el-option v-for="item in source.customer_group" :key="item.id" :label="item.name"
@@ -37,8 +40,11 @@
                   </el-option>
                 </el-select>
               </el-form-item>
+              @hook('admin.customer.form.from.customer.after')
               <el-form-item>
+                @hook('admin.customer.form.from.customer.submit')
                 <el-button type="primary" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
+                @hook('admin.customer.form.from.customer.submit.after')
               </el-form-item>
             </div>
           </el-tab-pane>
@@ -52,6 +58,7 @@
                     <th>{{ __('address.name') }}</th>
                     <th>{{ __('common.phone') }}</th>
                     <th>{{ __('common.created_at') }}</th>
+                    @hook('admin.customer.form.from.addresses.headers')
                     <th>{{ __('common.action') }}</th>
                   </tr>
                 </thead>
@@ -61,30 +68,40 @@
                     <td>@{{ address.name }}</td>
                     <td>@{{ address.phone }}</td>
                     <td>@{{ address.created_at }}</td>
+                    @hook('admin.customer.form.from.addresses.body')
                     <td>
+                      @hook('admin.customer.form.from.addresses.body.after')
                       <button class="btn btn-outline-secondary btn-sm" type="button"
                         @click="editAddress(index)">{{ __('common.edit') }}</button>
                       <button class="btn btn-outline-danger btn-sm ml-1" type="button"
                         @click="deleteAddress(address.id, index)">{{ __('common.delete') }}</button>
+                      @hook('admin.customer.form.from.addresses.body.after')
                     </td>
+                  </tr>
                 </tbody>
                 <tbody v-else>
                   <tr>
                     <td colspan="6" class="text-center">
+                      @hook('admin.customer.form.from.addresses.no_data.before')
                       <span class="me-2">{{ __('admin/customer.no_address') }}</span>
                       <el-link type="primary" @click="editAddress">{{ __('admin/customer.add_address') }}</el-link>
+                      @hook('admin.customer.form.from.addresses.no_data.after')
                     </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </el-tab-pane>
+          @hook('admin.customer.form.tabs.after')
         </el-tabs>
       </el-form>
+      @hook('admin.customer.form.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/customer.edit_address') }}" :visible.sync="dialogAddress.show" width="650px"
       @close="closeAddressDialog('addressForm')">
       <el-form ref="addressForm" :rules="addressRules" :model="dialogAddress.form" label-width="100px">
+        @hook('admin.customer.form.from.addresses.dialog.before')
         <el-form-item label="{{ __('address.name') }}" prop="name">
           <el-input v-model="dialogAddress.form.name"></el-input>
         </el-form-item>
@@ -127,9 +144,12 @@
         <el-form-item label="{{ __('admin/customer.address_2') }}">
           <el-input v-model="dialogAddress.form.address_2"></el-input>
         </el-form-item>
+        @hook('admin.customer.form.from.addresses.dialog.after')
         <el-form-item>
+          @hook('admin.customer.form.from.addresses.dialog.submit_buttons.before')
           <el-button type="primary" @click="addressFormSubmit('addressForm')">{{ __('common.save') }}</el-button>
           <el-button @click="closeAddressDialog('addressForm')">{{ __('common.cancel') }}</el-button>
+          @hook('admin.customer.form.from.addresses.dialog.submit_buttons.after')
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -140,6 +160,8 @@
 
 @push('footer')
   <script>
+    @hook('admin.customer.form.script.before')
+
     let app = new Vue({
       el: '#customer-app-form',
       data: {
@@ -213,12 +235,16 @@
             message: '{{ __('common.error_required', ['name' => __('admin/customer.city')] ) }}',
             trigger: 'blur'
           }, ],
-        }
+        },
+
+        @hook('admin.customer.form.vue.data')
       },
 
       // 在挂载开始之前被调用:相关的 render 函数首次被调用
       beforeMount() {
         this.countryChange(this.dialogAddress.form.country_id);
+
+        @hook('admin.customer.form.vue.beforeMount')
       },
 
       methods: {
@@ -318,8 +344,12 @@
           $http.get(`countries/${e}/zones`).then((res) => {
             this.source.zones = res.data.zones;
           })
-        }
-      }
+        },
+
+        @hook('admin.customer.form.vue.methods')
+      },
+
+      @hook('admin.customer.form.vue.options')
     });
 
     @hook('admin.customer.form.js.after')

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-11 18:45:02
  * @modified   2022-08-11 18:45:02
  */
@@ -33,14 +33,14 @@ class PageDetail extends JsonResource
             'image_format'         => $this->image ? image_resize($this->image, 300, 210) : '',
             'author'               => $this->author,
             'views'                => $this->views,
-            'title'                => $description->title,
-            'title_format'         => sub_string($description->title, 64),
-            'content'              => $description->content,
-            'summary'              => $description->summary,
-            'summary_format'       => sub_string($description->summary, 100),
-            'meta_title'           => $description->meta_title,
-            'meta_description'     => $description->meta_description,
-            'meta_keywords'        => $description->meta_keywords,
+            'title'                => $description->title ?? '',
+            'title_format'         => sub_string($description->title ?? '', 64),
+            'content'              => $description->content ?? '',
+            'summary'              => $description->summary ?? '',
+            'summary_format'       => sub_string($description->summary ?? '', 100),
+            'meta_title'           => $description->meta_title ?? '',
+            'meta_description'     => $description->meta_description ?? '',
+            'meta_keywords'        => $description->meta_keywords ?? '',
             'created_at'           => time_format($this->created_at),
             'updated_at'           => time_format($this->updated_at),
         ];

@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-02 19:03:19
  * @modified   2022-08-02 19:03:19
  */
@@ -60,9 +60,10 @@ return [
     'common_link'                      => 'Common Links',
     'header_search_input'              => 'Search Features',
     'header_search_title'              => 'Search Results',
-    'license_services'                 => 'Technical Support',
+    'license_services'                 => 'Technical Services',
 
     // sidebar
+    'app_push_index'                         => 'APP Message Push',
     'account_index'                          => 'Personal Center',
     'multi_filter_index'                     => 'Advanced Filter',
     'theme_index'                            => 'Theme Setting',
@@ -80,6 +81,7 @@ return [
     'currencies_index'                       => 'Currencies',
     'languages_index'                        => 'Languages',
     'design_index'                           => 'Page Builder',
+    'design_header_index'                    => 'Header Builder',
     'design_footer_index'                    => 'Footer Builder',
     'design_app_home_index'                  => 'APP Builder',
     'design_menu_index'                      => 'Menu Builder',
@@ -114,6 +116,7 @@ return [
     'copyright_buy_text'     => 'You haven\'t purchased yet, please purchase authorization!',
     'help_index'                             => 'Help',
     'license_bought' => 'Authorized',
+    'license_bought_s' => 'Subscribed authorization',
     'error_length_text'      => 'The input data for the field :key exceeds the maximum allowed length.',
     'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
     'text_closed'            => 'Closed',

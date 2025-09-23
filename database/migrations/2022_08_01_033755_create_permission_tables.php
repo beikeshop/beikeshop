@@ -31,7 +31,8 @@ class CreatePermissionTables extends Migration
             $table->bigIncrements('id')->comment('ID'); // permission id
             $table->string('name')->comment('权限名称');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name')->comment('所属权限组'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
 
             $table->unique(['name', 'guard_name']);
         });
@@ -46,7 +47,8 @@ class CreatePermissionTables extends Migration
             }
             $table->string('name')->comment('角色名称');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name')->comment('所属权限组'); // For MySQL 8.0 use string('guard_name', 125);
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
             if ($teams || config('permission.testing')) {
                 $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name']);
             } else {

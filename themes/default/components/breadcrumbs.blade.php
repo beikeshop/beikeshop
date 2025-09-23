@@ -1,6 +1,7 @@
+@hook('components.breadcrumbs.before')
 @unless ($breadcrumbs->isEmpty())
 <div class="breadcrumb-wrap">
-  <div class="container">
+  <div class="container{{ $isFull ?? false ? '-fluid' : '' }}">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         @foreach ($breadcrumbs as $breadcrumb)
@@ -15,3 +16,4 @@
   </div>
 </div>
 @endunless
+@hook('components.breadcrumbs.after')

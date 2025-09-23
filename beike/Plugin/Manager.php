@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-29 19:38:30
  * @modified   2022-06-29 19:38:30
  */
@@ -19,6 +19,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ZanySoft\Zip\Zip;
 use Beike\Facades\BeikeHttp\Facade\Http;
+use Beike\Admin\Services\MarketingService;
 
 class Manager
 {
@@ -40,7 +41,10 @@ class Manager
     public function getPlugins(): Collection
     {
         if ($this->plugins) {
-            return $this->plugins;
+            if (!app()->runningInConsole())
+            {
+                return $this->plugins;
+            }
         }
 
         $existed = $this->getPluginsConfig();
@@ -60,6 +64,10 @@ class Manager
 
             if ($plugins->has($plugin->code)) {
                 continue;
+            }
+            $plugin->setCanUpdate(false);
+            if ($this->canUpdate($plugin->code)) {
+                $plugin->setCanUpdate(true);
             }
 
             $plugins->put($plugin->code, $plugin);
@@ -356,4 +364,19 @@ class Manager
 
         return str_starts_with($fullPath, $realExtractPath);
     }
+
+    private function canUpdate(mixed $code): bool
+    {
+        if (in_array($code, config('app.free_plugin_codes'))) {
+            return false;
+        }
+
+        $plugin = \Beike\Models\Plugin::query()->where('code', $code)->count();
+        if (!$plugin) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

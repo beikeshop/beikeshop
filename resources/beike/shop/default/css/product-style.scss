@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-09-03 22:32:29
  * @LastEditTime  2022-09-16 20:56:27
  */
@@ -12,7 +12,7 @@
   .col-12:not(:last-of-type) {
     .product-wrap {
       border-bottom: 1px solid #E6E6E6;
-      margin-bottom: 1.4rem;
+      // margin-bottom: 1.4rem;
       padding-bottom: 1.4rem;
 
       &:hover {
@@ -38,7 +38,7 @@
   background-color: #fff;
 
   @media (min-width: 768px) {
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
   }
 
   .product-bottom-info {
@@ -179,14 +179,14 @@
   }
 }
 
-.product-grid {
-  @media (max-width: 768px) {
-    &:nth-child(2n+1) {
-      padding-right: 5px;
-    }
+// .product-grid {
+//   @media (max-width: 768px) {
+//     &:nth-child(2n+1) {
+//       padding-right: 5px;
+//     }
 
-    &:nth-child(2n+2) {
-      padding-left: 5px;
-    }
-  }
-}
+//     &:nth-child(2n+2) {
+//       padding-left: 5px;
+//     }
+//   }
+// }

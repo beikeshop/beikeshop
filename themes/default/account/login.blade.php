@@ -11,12 +11,14 @@
 
 @section('content')
   @if (!request('iframe'))
-    <x-shop-breadcrumb type="static" value="login.index" />
+    <x-shop-breadcrumb type="static" value="login.index" :is-full="true" />
   @endif
 
   <div class="{{ request('iframe') ? 'container-fluid form-iframe mt-5' : 'container' }}" id="page-login" v-cloak>
     @if (!request('iframe'))
+      @hookwrapper('account.login.heading')
       <div class="hero-content pb-3 pb-lg-5 text-center"><h1 class="hero-heading">{{ __('shop/login.index') }}</h1></div>
+      @endhookwrapper
     @endif
 
     <div class="login-wrap">
@@ -45,10 +47,12 @@
               <a class="text-muted forgotten-link" href="{{ shop_route('forgotten.index') }}"><i class="bi bi-question-circle"></i> {{ __('shop/login.forget_password') }}</a>
             @endif
             @endhookwrapper
-            
+
+            @hookwrapper('account.login.new.login')
             <div class="mt-4 mb-3">
               <button type="button" @click="checkedBtnLogin('loginForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-box-arrow-in-right"></i> {{ __('shop/login.login') }}</button>
             </div>
+            @endhookwrapper
           </div>
         </el-form>
 
@@ -84,6 +88,7 @@
               @endhookwrapper
 
               @hook('account.login.new.confirm_password.bottom')
+
               @hookwrapper('account.login.new.register')
               <div class="mt-5 mb-3">
                 <button type="button" @click="checkedBtnLogin('registerForm')" class="btn btn-dark btn-lg w-100 fw-bold"><i class="bi bi-person"></i> {{ __('shop/login.register') }}</button>
@@ -136,6 +141,7 @@
       },
 
       beforeMount () {
+        @hook('shop.login.vue.beforeMount')
       },
 
       methods: {
@@ -178,10 +184,22 @@
           });
         },
         @stack('login.vue.method')
-      }
+      },
+
+      @hook('shop.login.vue.options')
     })
 
     @hook('account.login.form.js.after')
 
+    // 监听第三方登录成功回调的页面 postMessage 消息，关闭当前窗口
+    window.addEventListener('message', function (event) {
+      if (event.data.type == 'social_callback' && event.data.data == 'close_window') {
+        if (window.name) {
+          var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+          parent.layer.close(index); //再执行关闭
+          parent.window.location.reload()
+        }
+      }
+    }, false);
   </script>
 @endpush

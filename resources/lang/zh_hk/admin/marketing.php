@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:57:12
  */
@@ -63,7 +63,7 @@ return [
     'text_pay'                => '支付金額',
     'text_version'            => '版本',
     'to_update'               => '去升級',
-    'version_compatible_text' => '該插件不相容於當前系統版本，請升級到 <a href="' . config('beike.api_url') . '/download" target="_blank">最新版本</a>',
+    'version_compatible_text' => '該插件不相容於當前系統版本，請升級到 <a href="' . config('beike.official_website') . '/download" target="_blank">最新版本</a>',
     'wxpay'                   => '微信掃碼支付!',
     'yuan'                    => '元',
 ];

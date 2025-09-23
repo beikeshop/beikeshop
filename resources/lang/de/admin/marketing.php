@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:55:58
  */
@@ -64,7 +64,7 @@ return [
     'text_pay'                => 'Was genau zu zahlen ist.',
     'text_version'            => 'Version',
     'to_update'               => 'Wir rüsten sie auf.',
-    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="' . config('beike.api_url') . '/download" target="_blank">neueste Version </a>',
+    'version_compatible_text' => 'Dieses Plug-in ist nicht mit der aktuellen Systemversion kompatibel, bitte aktualisieren Sie auf die <a href="' . config('beike.official_website') . '/download" target="_blank">neueste Version </a>',
     'wxpay'                   => 'Wechat übernimmt die rechnung.',
     'yuan'                    => 'dollar',
 ];

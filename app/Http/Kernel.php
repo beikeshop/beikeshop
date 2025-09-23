@@ -36,8 +36,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetLocaleFromSession::class,
             \App\Http\Middleware\ShareViewData::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\MaintenanceMode::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CheckCustomerSessionValid::class,
         ],
         'admin'     => [
             \App\Http\Middleware\EncryptCookies::class,

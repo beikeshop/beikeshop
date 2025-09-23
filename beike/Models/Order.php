@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-04 17:24:42
  * @modified   2022-07-04 17:24:42
  */
@@ -13,6 +13,8 @@ namespace Beike\Models;
 
 use Beike\Notifications\NewOrderNotification;
 use Beike\Notifications\UpdateOrderNotification;
+use Beike\Notifications\UpdateOrderAlertNotification;
+use Beike\Notifications\NewOrderAlertNotification;
 use Beike\Services\StateMachineService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -139,8 +141,10 @@ class Order extends Base
         $useQueue = system_setting('base.use_queue', true);
         if ($useQueue) {
             $this->notify(new NewOrderNotification($this));
+            $this->notify(new NewOrderAlertNotification($this));
         } else {
             $this->notifyNow(new NewOrderNotification($this));
+            $this->notifyNow(new NewOrderAlertNotification($this));
         }
     }
 
@@ -152,8 +156,11 @@ class Order extends Base
         $useQueue = system_setting('base.use_queue', true);
         if ($useQueue) {
             $this->notify(new UpdateOrderNotification($this, $fromCode));
+            $this->notify(new UpdateOrderAlertNotification($this, $fromCode));
         } else {
             $this->notifyNow(new UpdateOrderNotification($this, $fromCode));
+            $this->notifyNow(new UpdateOrderAlertNotification($this, $fromCode));
         }
     }
+
 }

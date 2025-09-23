@@ -7,10 +7,10 @@
   @include('design._partial._module_tool')
 
   <div class="module-info module-product mb-3 mb-md-5 swiper-style-plus">
-    <div class="container position-relative">
-      <div class="module-title">{{ $content['title'] }}</div>
+    <div class="{{ $content['module_size'] ?? 'container-fluid' }} position-relative">
+      <div class="module-title">{{ $content['title'] }} <div class="wave-line"></div></div>
         @if ($content['products'])
-          <div class="row">
+          <div class="row g-3 g-lg-4">
             @foreach ($content['products'] as $product)
             <div class="product-grid col-6 col-md-4 col-lg-3">
               @include('shared.product')
@@ -18,7 +18,7 @@
             @endforeach
           </div>
         @elseif (!$content['products'] and $design)
-          <div class="row">
+          <div class="row g-3 g-lg-4">
             @for ($s = 0; $s < 4; $s++)
             <div class="col-6 col-md-4 col-lg-3">
               <div class="product-wrap">

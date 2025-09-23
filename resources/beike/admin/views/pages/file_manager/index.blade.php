@@ -44,173 +44,183 @@
 </head>
 
 <body class="page-filemanager">
-  <div class="filemanager-wrap" id="filemanager-wrap-app" v-cloak ref="splitPane">
-    <div class="select-tip"></div>
-    @if (!is_mobile())
-    <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
-      <el-tree
-        :props="defaultProps"
-        node-key="path"
-        :data="treeData"
-        :current-node-key="folderCurrent"
-        :default-expanded-keys="defaultkeyarr"
-        :expand-on-click-node="false"
-        highlight-current ref="tree"
-        draggable
-        :allow-drop="allowDrop"
-        @node-drag-start="handleDragStart"
-        @node-drop="handleDrop"
-        @node-click="handleNodeClick"
-        @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
-        @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
-        <div class="custom-tree-node" slot-scope="{ node, data }" :path="data.path" :name="data.name">
-          <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
-          {{-- v-if="node.isCurrent" --}}
-          <div class="right">
-            <el-tooltip class="item file-download" effect="dark" content="{{ __('admin/file_manager.download') }}"
-            placement="top">
-            <span @click.stop="() => {openInputBox('download', node, data)}"><i
-              class="el-icon-download"></i></span>
-            </el-tooltip>
-
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
+  <div id="filemanager-wrap-app" v-cloak>
+    <div class="filemanager-wrap" ref="splitPane">
+      <div class="select-tip"></div>
+      @if (!is_mobile())
+      <div class="filemanager-navbar" :style="'width:' + paneLengthValue">
+        <el-tree
+          :props="defaultProps"
+          node-key="path"
+          :data="treeData"
+          :current-node-key="folderCurrent"
+          :default-expanded-keys="defaultkeyarr"
+          :expand-on-click-node="false"
+          highlight-current ref="tree"
+          draggable
+          :allow-drop="allowDrop"
+          @node-drag-start="handleDragStart"
+          @node-drop="handleDrop"
+          @node-click="handleNodeClick"
+          @node-expand="(node) => {updateDefaultExpandedKeys(node, 'expand')}"
+          @node-collapse="(node) => {updateDefaultExpandedKeys(node, 'collapse')}" class="tree-wrap">
+          <div class="custom-tree-node" slot-scope="{ node, data }" :path="data.path" :name="data.name">
+            <div class="folder-name" :path="data.path" :name="data.name">@{{ node.label }}</div>
+            {{-- v-if="node.isCurrent" --}}
+            <div class="right">
+              <el-tooltip class="item file-download" effect="dark" content="{{ __('admin/file_manager.download') }}"
               placement="top">
-              <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
-                  class="el-icon-circle-plus-outline"></i></span>
-            </el-tooltip>
+              <span @click.stop="() => {openInputBox('download', node, data)}"><i
+                class="el-icon-download"></i></span>
+              </el-tooltip>
 
-            <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
-                  class="el-icon-edit"></i></span>
-            </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.create_folder') }}"
+                placement="top">
+                <span @click.stop="() => {openInputBox('addFolder', node, data)}"><i
+                    class="el-icon-circle-plus-outline"></i></span>
+              </el-tooltip>
 
-            <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
-              <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
-                  class="el-icon-delete"></i></span>
-            </el-tooltip>
+              <el-tooltip class="item" effect="dark" content="{{ __('admin/file_manager.rename') }}" placement="top">
+                <span v-if="node.level != 1" @click.stop="() => {openInputBox('renameFolder', node, data)}"><i
+                    class="el-icon-edit"></i></span>
+              </el-tooltip>
+
+              <el-tooltip class="item" effect="dark" content="{{ __('common.delete') }}" placement="top">
+                <span v-if="node.level != 1" @click.stop="() => {deleteFolder(node, data)}"><i
+                    class="el-icon-delete"></i></span>
+              </el-tooltip>
+            </div>
+          </div>
+        </el-tree>
+      </div>
+      <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
+      <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
+        <div class="content-head">
+          <div class="left d-lg-flex">
+            @hook('admin.file_manager.content.head.btns.before')
+            <el-button class="me-4 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
+              :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view" @click="viewImages">{{
+              __('common.view') }}</el-link>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-document-copy" @click="copyLink">{{
+              __('admin/file_manager.copy_link') }}</el-link>
+            <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile" icon="el-icon-delete">
+              {{ __('common.delete') }}</el-link>
+            <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
+              @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
+            <el-link v-if="isMultiple" :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()"
+              icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
+            @hook('admin.file_manager.content.head.btns.after')
+          </div>
+          <div class="right">
+            @hook('admin.file_manager.content_head.right')
+            <el-popover placement="bottom" width="360" class="me-1" trigger="manual" v-model="filterKeywordVisible" ref="keyword-popover">
+              <div class="d-flex keyword-popover-area">
+                <el-input placeholder="{{ __('common.input') }}" v-model="filterKeyword" class="input-with-select" @keyup.enter.native="searchFile">
+                  <el-button slot="append" icon="el-icon-search" @click="searchFile"></el-button>
+                </el-input>
+              </div>
+              <el-button slot="reference" size="mini" plain type="primary" class="keyword-popover-area" icon="el-icon-search" @click="filterKeywordVisible = !filterKeywordVisible"></el-button>
+            </el-popover>
+            <el-popover placement="bottom" width="260" class="me-1" trigger="click">
+              <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
+              <div class="mb-3">
+                <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
+                <el-radio-group v-model="filter.sort" @input="filterChange" size="small">
+                  <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
+                  <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
+                </el-radio-group>
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
+                <el-radio-group v-model="filter.order" @input="filterChange" size="small">
+                  <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
+                  <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
+                </el-radio-group>
+              </div>
+              <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
+            </el-popover>
+            <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{
+              __('admin/file_manager.upload_files') }}</el-button>
+            @hook('admin.file_manager.content_head.right.after')
           </div>
         </div>
-      </el-tree>
+        <div v-if="images.length" class="content-center"
+          v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus, imgMove: imgMove }">
+          <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index"
+            @click="checkedImage(index)" @dblclick="checkedImageDouble(index)">
+            <div class="img">
+              <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
+              <img v-else :src="file.url + '?v=' + randomString()" draggable="false" />
+            </div>
+            <div class="text">
+              <span :title="file.name">@{{ file.name }}</span>
+              <i v-if="file.selected" class="el-icon-check"></i>
+            </div>
+          </div>
+        </div>
+        <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
+        <div class="content-footer">
+          <div class="right"></div>
+          <div class="pagination-wrap">
+            <el-pagination @size-change="pageSizeChange" @current-change="pageCurrentChange" :current-page="image_page"
+              :page-sizes="[20, 40, 60, 80, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper"
+              :total="image_total">
+            </el-pagination>
+
+          </div>
+          <div class="right">
+
+          </div>
+        </div>
+      </div>
+      @else
+      <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
+      @endif
+
+      <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="4vh" :visible.sync="uploadFileDialog.show"
+        width="580px" @close="uploadFileDialogClose" custom-class="upload-wrap">
+        <div class="alert alert-info mb-2">
+          {{ __('admin/file_manager.upload_hint_1') }} <@{{ folderCurrentName }}>,
+          {{ __('admin/file_manager.upload_hint_2', ['max_size' => ini_get('upload_max_filesize')]) }}
+          <a class="fw-bold" href="https://docs.beikeshop.com/config/upload_max_filesize.html" target="_blank">{{ __('admin/file_manager.modify_size_limit') }}</a>
+        </div>
+        <el-upload class="photos-upload" target="photos-upload" id="photos-upload"
+          element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
+          element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
+          accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp"
+          :on-change="handleUploadChange" :http-request="uploadFile" :multiple="true">
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">{{ __('admin/file_manager.click_upload') }}</div>
+        </el-upload>
+        <div class="upload-image">
+          <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
+            <div class="info">
+              <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
+              <div class="status">
+                <span v-if="image.status == 'complete'" class="text-success">{{ __('admin/file_manager.finish') }}</span>
+                <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail')
+                  }}</span>
+                <span v-else>{{ __('admin/file_manager.uploading') }}</span>
+              </div>
+            </div>
+            <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'"
+              :show-text="false" :stroke-width="4"></el-progress>
+            <div v-if="image.fail_text" class="mt-1 text-danger" v-text="image.fail_text"></div>
+          </div>
+        </div>
+      </el-dialog>
+
+      <div class="drop_file_hint d-none">{!! __('admin/file_manager.drop_file_hint') !!}</div>
+      <div class="drop_folder_hint d-none">{!! __('admin/file_manager.drop_folder_hint') !!}</div>
     </div>
-    <div class="filemanager-divider" @mousedown="handleMouseDown"></div>
-    <div class="filemanager-content" v-loading="loading" element-loading-background="rgba(255, 255, 255, 0.5)">
-      <div class="content-head">
-        <div class="left d-lg-flex">
-          <el-button class="me-4 mb-1 mb-lg-0" size="small" icon="el-icon-check" type="primary" @click="fileChecked"
-            :disabled="!!!selectImageIndex.length">{{ __('admin/builder.modules_choose') }}</el-button>
-          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-view" @click="viewImages">{{
-            __('common.view') }}</el-link>
-          <el-link :underline="false" :disabled="!!!selectImageIndex.length" icon="el-icon-document-copy" @click="copyLink">{{
-            __('admin/file_manager.copy_link') }}</el-link>
-          <el-link :underline="false" :disabled="!!!selectImageIndex.length" @click="deleteFile" icon="el-icon-delete">
-            {{ __('common.delete') }}</el-link>
-          <el-link :underline="false" :disabled="selectImageIndex.length == 1 ? false : true"
-            @click="openInputBox('image')" icon="el-icon-edit">{{ __('admin/file_manager.rename') }}</el-link>
-          <el-link v-if="isMultiple" :underline="false" :disabled="!!!images.length && !!!selectImageIndex.length" @click="selectAll()"
-            icon="el-icon-finished">{{ __('common.select_all') }}</el-link>
-          @hook('admin.file_manager.content.head.btns.after')
-        </div>
-        <div class="right">
-          @hook('admin.file_manager.content_head.right')
-          <el-popover placement="bottom" width="360" class="me-1" trigger="manual" v-model="filterKeywordVisible" ref="keyword-popover">
-            <div class="d-flex keyword-popover-area">
-              <el-input placeholder="{{ __('common.input') }}" v-model="filterKeyword" class="input-with-select" @keyup.enter.native="searchFile">
-                <el-button slot="append" icon="el-icon-search" @click="searchFile"></el-button>
-              </el-input>
-            </div>
-            <el-button slot="reference" size="mini" plain type="primary" class="keyword-popover-area" icon="el-icon-search" @click="filterKeywordVisible = !filterKeywordVisible"></el-button>
-          </el-popover>
-          <el-popover placement="bottom" width="260" class="me-1" trigger="click">
-            <div class="text-center mb-3 fw-bold">{{ __('admin/file_manager.file_sorting') }}</div>
-            <div class="mb-3">
-              <div class="mb-2">{{ __('admin/file_manager.text_type') }}</div>
-              <el-radio-group v-model="filter.sort" size="small">
-                <el-radio-button label="created">{{ __('admin/file_manager.text_created') }}</el-radio-button>
-                <el-radio-button label="name">{{ __('admin/file_manager.file_name') }}</el-radio-button>
-              </el-radio-group>
-            </div>
-
-            <div class="mb-3">
-              <div class="mb-2">{{ __('admin/file_manager.to_sort') }}</div>
-              <el-radio-group v-model="filter.order" size="small">
-                <el-radio-button label="desc">{{ __('admin/file_manager.text_desc') }}</el-radio-button>
-                <el-radio-button label="asc">{{ __('admin/file_manager.text_asc') }}</el-radio-button>
-              </el-radio-group>
-            </div>
-            <el-button slot="reference" size="small" plain type="primary" icon="el-icon-s-operation"></el-button>
-          </el-popover>
-          <el-button size="small" plain type="primary" @click="openUploadFile" icon="el-icon-upload2">{{
-            __('admin/file_manager.upload_files') }}</el-button>
-        </div>
-      </div>
-      <div v-if="images.length" class="content-center"
-        v-batch-select="{ className: '.image-list', selectImageIndex, setSelectStatus: updateSelectStatus, imgMove: imgMove }">
-        <div :class="['image-list', file.selected ? 'active' : '']" v-for="file, index in images" :key="index"
-          @click="checkedImage(index)" @dblclick="checkedImageDouble(index)">
-          <div class="img">
-            <i class="el-icon-video-play" v-if="file.mime == 'video/mp4'"></i>
-            <img v-else :src="file.url" draggable="false" />
-          </div>
-          <div class="text">
-            <span :title="file.name">@{{ file.name }}</span>
-            <i v-if="file.selected" class="el-icon-check"></i>
-          </div>
-        </div>
-      </div>
-      <el-empty v-else description="{{ __('admin/file_manager.no_file') }}"></el-empty>
-      <div class="content-footer">
-        <div class="right"></div>
-        <div class="pagination-wrap">
-          <el-pagination @size-change="pageSizeChange" @current-change="pageCurrentChange" :current-page="image_page"
-            :page-sizes="[20, 40, 60, 80, 100]" :page-size="20" layout="total, sizes, prev, pager, next, jumper"
-            :total="image_total">
-          </el-pagination>
-
-        </div>
-        <div class="right">
-
-        </div>
-      </div>
-    </div>
-    @else
-    <div class="text-center mt-5 w-100 fs-4">{{ __('admin/file_manager.show_pc') }}</div>
-    @endif
-
-    <el-dialog title="{{ __('admin/file_manager.upload_files') }}" top="12vh" :visible.sync="uploadFileDialog.show"
-      width="500px" @close="uploadFileDialogClose" custom-class="upload-wrap">
-      <el-upload class="photos-upload" target="photos-upload" id="photos-upload"
-        element-loading-text="{{ __('admin/file_manager.image_uploading') }}..."
-        element-loading-background="rgba(0, 0, 0, 0.6)" drag action="" :show-file-list="false"
-        accept=".jpg,.jpeg,.png,.JPG,.JPEG,.PNG,.mp4,.MP4,.gif,.webp"
-        :on-change="handleUploadChange" :http-request="uploadFile" :multiple="true">
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">{{ __('admin/file_manager.click_upload') }}</div>
-      </el-upload>
-      <div class="upload-image">
-        <div v-for="image, index in uploadFileDialog.images" :key="index" class="list">
-          <div class="info">
-            <div class="name">@{{ index + 1 }}. @{{ image.name }}</div>
-            <div class="status">
-              <span v-if="image.status == 'complete'" class="text-success">{{ __('admin/file_manager.finish') }}</span>
-              <span v-else-if="image.status == 'fail'" class="text-danger">{{ __('admin/file_manager.upload_fail')
-                }}</span>
-              <span v-else>{{ __('admin/file_manager.uploading') }}</span>
-            </div>
-          </div>
-          <el-progress :percentage="image.progre" :status="image.status == 'fail' ? 'exception' : 'success'"
-            :show-text="false" :stroke-width="4"></el-progress>
-          <div v-if="image.fail_text" class="mt-1 text-danger" v-text="image.fail_text"></div>
-        </div>
-      </div>
-    </el-dialog>
-
-    <div class="drop_file_hint d-none">{!! __('admin/file_manager.drop_file_hint') !!}</div>
-    <div class="drop_folder_hint d-none">{!! __('admin/file_manager.drop_folder_hint') !!}</div>
   </div>
 
   @stack('admin.file_manager.footer')
 
   <script>
+    @hook('admin.file_manager.script.before')
     var callback = null;
 
     var app = new Vue({
@@ -260,6 +270,7 @@
         defaultkeyarr: ['/'],
 
         triggerLeftOffset: 0,
+        uploadMaxFilesize: @json($maxSizeBytes),
 
         images: [],
         image_total: 0,
@@ -272,6 +283,12 @@
         paneLengthValue() {
           return `calc(${this.paneLengthPercent}% - ${this.triggerLength / 2 + 'px'})`
         },
+
+        folderCurrentName() {
+          return this.folderCurrent == '/' ? '{{ __('admin/file_manager.picture_space') }}' : this.folderCurrent.split('/').pop();
+        },
+
+        @hook('admin.file_manager.vue.computed')
       },
       // 侦听器
       watch: {
@@ -290,18 +307,13 @@
           });
         },
 
-        filter: {
-          handler(val) {
-            this.image_page = 1;
-            this.loadData()
-          },
-          deep: true
-        }
+        @hook('admin.file_manager.vue.watch')
       },
 
       created() {
         const defaultkeyarr = sessionStorage.getItem('defaultkeyarr');
         const folderCurrent = sessionStorage.getItem('folderCurrent');
+        const fileManagerFilter = JSON.parse(localStorage.getItem('file_manager_filter') || '{}');
 
         if (defaultkeyarr) {
           this.defaultkeyarr = defaultkeyarr.split(',');
@@ -310,6 +322,16 @@
         if (folderCurrent) {
           this.folderCurrent = folderCurrent;
         }
+
+        if (fileManagerFilter.sort) {
+          this.filter.sort = fileManagerFilter.sort;
+        }
+
+        if (fileManagerFilter.order) {
+          this.filter.order = fileManagerFilter.order;
+        }
+
+        @hook('admin.file_manager.created')
       },
 
       // 实例被挂载后调用
@@ -340,11 +362,19 @@
             }
           })
         }
+
+        @hook('admin.file_manager.mounted')
       },
 
       methods: {
         searchFile() {
           this.image_page = 1;
+          this.loadData()
+        },
+
+        filterChange() {
+          this.image_page = 1;
+          localStorage.setItem('file_manager_filter', JSON.stringify(this.filter));
           this.loadData()
         },
 
@@ -426,6 +456,10 @@
           );
         },
 
+        randomString() {
+          return bk.randomString()
+        },
+
         // allowDrop
         allowDrop(draggingNode, dropNode, type) {
           if (type == 'prev' || type == 'next') {
@@ -437,7 +471,6 @@
 
         // 图片拖动到文件夹
         imgMove(path, name, selectImageIndex) {
-          console.log(path, selectImageIndex);
           $('.drop_file_hint').find('span:first-child').text(selectImageIndex.length).siblings('span').text(name);
           this.$confirm($('.drop_file_hint').html(),"{{ __('common.text_hint') }}", {
             dangerouslyUseHTMLString:true,
@@ -479,14 +512,20 @@
           }).catch((err) => {
             this.uploadFileDialog.images[index].status = 'fail';
             this.uploadFileDialog.images[index].progre = 80;
-            this.uploadFileDialog.images[index].fail_text = err.response.data.message;
+
+            let message = err.response.data.message;
+            if (file.file.size > this.uploadMaxFilesize) {
+              message = '{{ __('admin/file_manager.upload_size_fail') }}';
+            }
+
+            this.uploadFileDialog.images[index].fail_text = message;
           }).finally(() => {
             index += 1
           });
         },
 
         handleUploadChange(e) {
-          console.log(e);
+          // console.log(e);
           // console.log('handleUploadChange');
         },
 
@@ -800,13 +839,17 @@
         }
         @stack('admin.file_manager.vue.method')
       },
+
+      @hook('admin.file_manager.vue.options')
     })
 
-  $('#filemanager-wrap-app').click(function () {
-    if (!$(event.target).hasClass('keyword-popover-area') && !$(event.target).hasClass('el-icon-search')) {
-      app.filterKeywordVisible = false;
-    }
-  })
+    $('#filemanager-wrap-app').click(function () {
+      if (!$(event.target).hasClass('keyword-popover-area') && !$(event.target).hasClass('el-icon-search')) {
+        app.filterKeywordVisible = false;
+      }
+    })
   </script>
+
+  @stack('admin.file_manager.script_footer')
 </body>
 </html>

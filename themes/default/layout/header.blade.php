@@ -6,16 +6,17 @@
         @hookwrapper('header.top.currency')
         @if (currencies()->count() > 1)
           <div class="dropdown">
-            <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown" data-toggle="dropdown"
-              aria-expanded="false">
+            <a class="btn dropdown-toggle ps-0" href="javascript:void(0)" role="button" id="currency-dropdown"
+               data-toggle="dropdown"
+               aria-expanded="false">
               @foreach (currencies() as $currency)
                 @if ($currency->code == current_currency_code())
                   @if ($currency->symbol_left)
-                  {{ $currency->symbol_left }}
+                    {{ $currency->symbol_left }}
                   @endif
                   {{ $currency->name }}
                   @if ($currency->symbol_right)
-                  {{ $currency->symbol_right }}
+                    {{ $currency->symbol_right }}
                   @endif
                 @endif
               @endforeach
@@ -24,15 +25,15 @@
             <div class="dropdown-menu" aria-labelledby="currency-dropdown">
               @foreach (currencies() as $currency)
                 <a class="dropdown-item"
-                  href="{{ shop_route('currency.switch', [$currency->code]) }}">
+                   href="{{ shop_route('currency.switch', [$currency->code]) }}">
                   @if ($currency->symbol_left)
-                  {{ $currency->symbol_left }}
+                    {{ $currency->symbol_left }}
                   @endif
                   {{ $currency->name }}
                   @if ($currency->symbol_right)
-                  {{ $currency->symbol_right }}
+                    {{ $currency->symbol_right }}
                   @endif
-                  </a>
+                </a>
               @endforeach
             </div>
           </div>
@@ -42,8 +43,9 @@
         @hookwrapper('header.top.language')
         @if (count($languages) > 1)
           <div class="dropdown">
-            <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown" data-toggle="dropdown"
-              aria-expanded="false">
+            <a class="btn dropdown-toggle" href="javascript:void(0)" role="button" id="language-dropdown"
+               data-toggle="dropdown"
+               aria-expanded="false">
               {{ current_language()->name }}
             </a>
 
@@ -79,7 +81,7 @@
     <div class="container-fluid navbar-expand-lg">
       @hookwrapper('header.menu.logo')
       <div class="logo"><a href="{{ shop_route('home.index') }}">
-          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}"></a>
       </div>
       @endhookwrapper
       <div class="menu-wrap">
@@ -88,12 +90,10 @@
       <div class="right-btn">
         <ul class="navbar-nav flex-row">
           @hookwrapper('header.menu.icon')
-          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas"
-              aria-controls="offcanvasExample" class="nav-link"><i class="iconfont">&#xe8d6;</i></a></li>
-          <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><i
-                class="iconfont">&#xe662;</i></a></li>
+          <li class="nav-item"><a href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample" class="nav-link"><img src="{{ asset('image/icons/search.svg') }}" class="img-fluid"></a></li>
+          <li class="nav-item"><a href="{{ shop_route('account.wishlist.index') }}" class="nav-link"><img src="{{ asset('image/icons/favorite.svg') }}" class="img-fluid"></a></li>
           <li class="nav-item dropdown">
-            <a href="{{ shop_route('account.index') }}" class="nav-link"><i class="iconfont">&#xe619;</i></a>
+            <a href="{{ shop_route('account.index') }}" class="nav-link"><img src="{{ asset('image/icons/account.svg') }}" class="img-fluid"></a>
             <ul class="dropdown-menu">
               @auth('web_shop')
                 <li class="dropdown-item">
@@ -103,7 +103,7 @@
                   <hr class="dropdown-divider opacity-100">
                 </li>
                 <li><a href="{{ shop_route('account.index') }}" class="dropdown-item"><i class="bi bi-person me-1"></i>
-                  {{ __('shop/account.index') }}</a></li>
+                    {{ __('shop/account.index') }}</a></li>
                 <li><a href="{{ shop_route('account.order.index') }}" class="dropdown-item"><i
                       class="bi bi-clipboard-check me-1"></i> {{ __('shop/account/order.index') }}</a></li>
                 <li><a href="{{ shop_route('account.wishlist.index') }}" class="dropdown-item"><i
@@ -121,14 +121,10 @@
           </li>
           @endhookwrapper
           <li class="nav-item">
-            {{-- <a class="nav-link position-relative" {{ !equal_route('shop.carts.index') ? 'data-bs-toggle=offcanvas' : '' }}
-              href="{{ !equal_route('shop.carts.index') ? '#offcanvas-right-cart' : 'javascript:void(0);' }}" role="button"
-              aria-controls="offcanvasExample">
-              <i class="iconfont">&#xe634;</i>
-              <span class="cart-badge-quantity"></span>
-            </a> --}}
-            <a class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}" href="javascript:void(0);" role="button">
-              <i class="iconfont">&#xe634;</i>
+            <a
+              class="nav-link position-relative btn-right-cart {{ equal_route('shop.carts.index') ? 'page-cart' : '' }}"
+              href="javascript:void(0);" role="button">
+              <img src="{{ asset('image/icons/cart.svg') }}" class="img-fluid">
               <span class="cart-badge-quantity"></span>
             </a>
           </li>
@@ -140,22 +136,24 @@
   <div class="header-mobile d-lg-none">
     <div class="mobile-content">
       <div class="left">
-        <div class="mobile-open-menu"><i class="bi bi-list"></i></div>
-        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas" aria-controls="offcanvasExample">
-          <i class="iconfont">&#xe8d6;</i>
+        <div class="mobile-open-menu"><img src="{{ asset('image/icons/menu.svg') }}" alt="menu" class="img-fluid"></div>
+        <div class="mobile-open-search" href="#offcanvas-search-top" data-bs-toggle="offcanvas"
+             aria-controls="offcanvasExample">
+             <img src="{{ asset('image/icons/search.svg') }}" class="img-fluid" alt="search">
         </div>
       </div>
       <div class="center"><a href="{{ shop_route('home.index') }}">
-        <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid"></a>
+          <img src="{{ image_origin(system_setting('base.logo')) }}" class="img-fluid" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}"></a>
       </div>
       <div class="right">
         <a href="{{ shop_route('account.index') }}" class="nav-link mb-account-icon">
-          <i class="iconfont">&#xe619;</i>
+          <img src="{{ asset('image/icons/account.svg') }}" class="img-fluid" alt="account">
           @if (strstr(current_route(), 'shop.account'))
             <span></span>
           @endif
         </a>
-        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><i class="iconfont">&#xe634;</i> <span class="cart-badge-quantity"></span></a>
+        <a href="{{ shop_route('carts.index') }}" class="nav-link ms-3 m-cart position-relative"><img src="{{ asset('image/icons/cart.svg') }}" alt="cart" class="img-fluid">
+          <span class="cart-badge-quantity"></span></a>
       </div>
     </div>
   </div>
@@ -169,11 +167,13 @@
     </div>
   </div>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart" aria-labelledby="offcanvasRightLabel"></div>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas-right-cart"
+       aria-labelledby="offcanvasRightLabel"></div>
 
   <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvas-search-top" aria-labelledby="offcanvasTopLabel">
     <div class="offcanvas-header">
-      <input type="text" class="form-control input-group-lg border-0 fs-4" focus placeholder="{{ __('common.input') }}" value="{{ request('keyword') }}">
+      <input type="text" class="form-control input-group-lg border-0 fs-4" focus placeholder="{{ __('common.input') }}"
+             value="{{ request('keyword') }}" data-lang="{{ locale() === system_setting('base.locale') ? '' : session()->get('locale') }}">
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
   </div>

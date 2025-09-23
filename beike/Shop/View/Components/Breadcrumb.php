@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-17 22:45:42
  * @modified   2022-08-17 22:45:42
  */
@@ -22,6 +22,7 @@ use Illuminate\View\Component;
 class Breadcrumb extends Component
 {
     public Collection $breadcrumbs;
+    public string $isFull;
 
     /**
      * Create a new component instance.
@@ -29,7 +30,7 @@ class Breadcrumb extends Component
      * @return void
      * @throws \Exception
      */
-    public function __construct($type, $value, array $text = [])
+    public function __construct($type, $value, array $text = [], bool $isFull = false)
     {
         $breadcrumbs[] = [
             'title' => trans('shop/common.home'),
@@ -53,9 +54,10 @@ class Breadcrumb extends Component
         } else {
             $breadcrumbs = array_merge($breadcrumbs, $this->handleLinks($type, $value, $text));
         }
-        
+
         $breadcrumbs = hook_filter('breadcrumb.construct.after', $breadcrumbs);
         $this->breadcrumbs = collect($breadcrumbs);
+        $this->isFull = $isFull;
     }
 
     /**

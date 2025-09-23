@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-03 18:16:53
  * @modified   2022-08-03 18:16:53
  */
@@ -14,6 +14,7 @@ namespace Beike\Admin\Repositories;
 use Beike\Repositories\CustomerRepo;
 use Beike\Repositories\OrderRepo;
 use Beike\Repositories\ProductRepo;
+use Beike\Services\StateMachineService;
 
 class DashboardRepo
 {
@@ -75,8 +76,8 @@ class DashboardRepo
      */
     public static function getOrderData(): array
     {
-        $today      = OrderRepo::getListBuilder(['start' => today()->startOfDay(), 'end' => today()->endOfDay()])->count();
-        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->count();
+        $today      = OrderRepo::getListBuilder(['statuses' => StateMachineService::getValidStatuses(), 'start' => today()->startOfDay(), 'end' => today()->endOfDay()])->count();
+        $yesterday  = OrderRepo::getListBuilder(['statuses' => StateMachineService::getValidStatuses(), 'start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->count();
         $difference = $today - $yesterday;
         if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);
@@ -125,8 +126,8 @@ class DashboardRepo
      */
     public static function getTotalData(): array
     {
-        $today      = OrderRepo::getListBuilder(['start' => today()->startOfDay(), 'end' => today()->endOfDay()])->sum('total');
-        $yesterday  = OrderRepo::getListBuilder(['start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->sum('total');
+        $today      = OrderRepo::getListBuilder(['statuses' => StateMachineService::getValidStatuses(), 'start' => today()->startOfDay(), 'end' => today()->endOfDay()])->sum('total');
+        $yesterday  = OrderRepo::getListBuilder(['statuses' => StateMachineService::getValidStatuses(), 'start' => today()->subDay()->startOfDay(), 'end' => today()->subDay()->endOfDay()])->sum('total');
         $difference = $today - $yesterday;
         if ($yesterday) {
             $percentage = round(($difference / $yesterday) * 100);

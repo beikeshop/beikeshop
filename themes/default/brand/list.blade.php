@@ -5,6 +5,7 @@
 <x-shop-breadcrumb type="static" value="brands.index" />
 
 <div class="container">
+  @hook('brand.list.before')
   <p class="fw-bold fs-3 d-flex justify-content-center mb-4">{{ __('shop/brands.index') }}</p>
 
   <ul class="list-group list-group-horizontal mb-5 curser-list">
@@ -36,6 +37,7 @@
     </li>
     @endforeach
   </ul>
+  @hook('brand.list.after')
 </div>
 
 @endsection

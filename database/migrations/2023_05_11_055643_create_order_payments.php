@@ -17,14 +17,16 @@ return new class extends Migration {
         }
 
         Schema::create('order_payments', function (Blueprint $table) {
-            $table->id();
-            $table->integer('order_id');
-            $table->string('transaction_id')->nullable();
-            $table->text('request')->nullable();
-            $table->text('response')->nullable();
-            $table->text('callback')->nullable();
-            $table->text('receipt')->nullable();
-            $table->timestamps();
+            $table->comment('订单支付表');
+            $table->id()->comment('ID');
+            $table->integer('order_id')->comment('订单 ID');
+            $table->string('transaction_id')->nullable()->comment('交易 ID');
+            $table->text('request')->nullable()->comment('请求数据');
+            $table->text('response')->nullable()->comment('响应数据');
+            $table->text('callback')->nullable()->comment('回调数据');
+            $table->text('receipt')->nullable()->comment('收据');
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
         });
     }
 

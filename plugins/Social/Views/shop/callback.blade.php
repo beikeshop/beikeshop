@@ -3,7 +3,10 @@
     if (window.opener === null) {
         window.location.href = url;
     } else {
-        window.opener.location = url;
-        window.close();
+        window.opener.postMessage({ type: 'social_callback', data: 'close_window' }, '*');
+        setTimeout(() => {
+            window.opener.location = url;
+            window.close();
+        }, 200);
     }
 </script>

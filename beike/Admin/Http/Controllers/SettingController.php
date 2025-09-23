@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-29 16:02:15
  * @modified   2022-06-29 16:02:15
  */
@@ -19,6 +19,7 @@ use Beike\Repositories\CustomerGroupRepo;
 use Beike\Repositories\LanguageRepo;
 use Beike\Repositories\SettingRepo;
 use Beike\Repositories\ThemeRepo;
+use Beike\Libraries\Weight;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class SettingController extends Controller
             'countries'       => CountryRepo::listEnabled(),
             'currencies'      => CurrencyRepo::listEnabled(),
             'languages'       => LanguageRepo::enabled()->toArray(),
+            'weight_classes'  => Weight::getWeightUnits(),
             'tax_address'     => $taxAddress,
             'customer_groups' => CustomerGroupDetail::collection(CustomerGroupRepo::list())->jsonSerialize(),
             'themes'          => $themes,
@@ -61,6 +63,7 @@ class SettingController extends Controller
     public function store(Request $request): mixed
     {
         $settings = $request->all();
+        $tab = $request->get('tab');
         if (isset($settings['show_price_after_login'])) {
             if ($settings['show_price_after_login']) {
                 $settings['guest_checkout'] = false;
@@ -75,7 +78,7 @@ class SettingController extends Controller
 
         $oldAdminName = admin_name();
         $newAdminName = $settings['admin_name'] ?: 'admin';
-        $settingUrl   = str_replace($oldAdminName, $newAdminName, admin_route('settings.index'));
+        $settingUrl   = str_replace($oldAdminName, $newAdminName, admin_route('settings.index', ['tab' => $tab]));
 
         return redirect($settingUrl)->with('success', trans('common.updated_success'));
     }

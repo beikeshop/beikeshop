@@ -177,6 +177,8 @@ class ProductController extends Controller
             'relations'             => ProductResource::collection($product->relations)->resource,
             'languages'             => LanguageRepo::all(),
             'tax_classes'           => $taxClasses,
+            'system_currency'           => system_setting('base.currency', 'USD'),
+            'system_weight'           => system_setting('base.weight', 'kg'),
             'weight_classes'        => Weight::getWeightUnits(),
             'source'                => [
                 'flatten_categories' => FlattenCategoryRepo::getCategoryList(),

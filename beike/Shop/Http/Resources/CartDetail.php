@@ -36,6 +36,7 @@ class CartDetail extends JsonResource
             'name_format'     => sub_string($productName),
             'image'           => $image,
             'image_url'       => image_resize($image),
+            'weight'          => $this->sku->weight ?? $this->product->weight,
             'quantity'        => $this->quantity,
             'selected'        => $this->selected,
             'price'           => $price,

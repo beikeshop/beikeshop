@@ -5,6 +5,7 @@
 @section('content')
 <div class="card">
   <div class="card-body h-min-600">
+    @hook('admin.multi_filter.index.content.before')
     <form action="{{ admin_route('multi_filter.store') }}" class="needs-validation" novalidate method="POST" id="app">
       @csrf
       @if (session('success'))
@@ -12,6 +13,7 @@
       @endif
       <h6 class="border-bottom pb-3 mb-4">{{ __('common.data') }}</h6>
 
+      @hook('admin.multi_filter.index.form.before')
       <x-admin::form.row :title="__('admin/setting.filter_attribute')">
         <div class="module-edit-group wp-600">
           <div class="autocomplete-group-wrapper">
@@ -38,10 +40,15 @@
 
       <x-admin-form-switch name="multi_filter[price_filter]" :title="__('admin/multi_filter.price_filter')" :value="old('price_filter', $multi_filter['price_filter'] ?? 1)" />
 
+      @hook('admin.multi_filter.index.form.after')
+
       <x-admin::form.row title="">
+        @hook('admin.multi_filter.index.submit.before')
         <button class="btn btn-lg btn-primary mt-5">{{ __('common.save') }}</button>
+        @hook('admin.multi_filter.index.submit.after')
       </x-admin::form.row>
     </form>
+    @hook('admin.multi_filter.index.content.after')
   </div>
 </div>
 @endsection
@@ -66,6 +73,8 @@
             {name: 'Log', code: 'log'},
           ]
         },
+
+        @hook('admin.multi_filter.index.vue.data')
       },
       methods: {
         attributesQuerySearch(keyword, cb, url) {
@@ -89,7 +98,11 @@
             this.multi_filter.keyword = ""
           }
         },
-      }
+
+        @hook('admin.multi_filter.index.vue.methods')
+      },
+
+      @hook('admin.multi_filter.index.vue.options')
     });
   </script>
 @endpush

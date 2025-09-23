@@ -8,11 +8,12 @@ class ProductSku extends Base
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'quantity', 'is_default'];
+    protected $fillable = ['product_id', 'variants', 'position', 'images', 'model', 'sku', 'price', 'origin_price', 'cost_price', 'weight', 'quantity', 'is_default'];
 
     protected $casts = [
         'variants' => 'array',
         'images'   => 'array',
+        'is_default'    => 'boolean',
     ];
 
     protected $appends = ['image'];
@@ -49,5 +50,15 @@ class ProductSku extends Base
         }
 
         return $variantLabel;
+    }
+
+    public function setWeightAttribute($value)
+    {
+        $this->attributes['weight'] = is_numeric($value) ? (float) $value : 0;
+    }
+
+    public function getWeightAttribute($value)
+    {
+        return rtrim(rtrim(number_format((float) $value, 2, '.', ''), '0'), '.');
     }
 }

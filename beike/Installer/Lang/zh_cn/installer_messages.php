@@ -74,7 +74,7 @@ return [
         'db_connection_label'                  => '数据库类型',
         'db_connection_failed_host_port'       => '数据库主机或端口错误！',
         'db_connection_failed_user_password'   => '数据库账号或密码错误！',
-        'db_connection_failed_database_name'   => '数据库名不存在！',
+        'db_connection_failed_database_name'   => '数据库名不存在或者错误！',
         'db_connection_failed_invalid_version' => '数据库版本必须大于5.7！',
         'db_connection_label_mysql'            => 'MySQL',
         'db_connection_label_sqlite'           => 'SQLite',
@@ -96,6 +96,9 @@ return [
         'ajax_database_parameters'             => '检测数据库参数...',
         'ajax_database_success'                => '数据库连接成功',
         'error_email'                          => '请填写正确的邮箱地址',
+        'table_already_exists'                 => '发现数据库中存在数据表，请先清空或者备份再安装!',
+        'php_extension'                        => '请安装相应的PHP扩展',
+        'down_phpversion'                      => '请将php版本降到php8.1或者8.2'
     ],
 
     /*

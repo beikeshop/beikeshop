@@ -3,7 +3,7 @@
 /**
  * @copyright     2022 beikeshop.com - All Rights Reserved.
  * @link          https://beikeshop.com
- * @Author        pu shuo <pushuo@guangda.work>
+ * @Author        guangda <service@guangda.work>
  * @Date          2022-08-24 17:24:33
  * @LastEditTime  2022-09-16 20:56:21
  */
@@ -42,15 +42,17 @@ body.page-product {
 
   .product-image {
     position: relative;
+    display: flex;
+    align-items: stretch;
 
     #swiper {
-      height: 250px;
-      @media (min-width: 480px) {
-        height: 400px;
-      }
-      @media (min-width: 768px) {
-        height: 500px;
-      }
+      height: 100%;
+      // @media (min-width: 480px) {
+      //   height: 400px;
+      // }
+      // @media (min-width: 768px) {
+      //   height: 500px;
+      // }
 
       &:hover {
         .swiper-pager > div {
@@ -84,7 +86,7 @@ body.page-product {
         border: 1px solid #eee;
         margin-bottom: 10px;
         width: 80px;
-        // height: 80px !important;
+        min-height: 80px;
         padding: 2px;
         cursor: pointer;
 
@@ -112,7 +114,7 @@ body.page-product {
         }
         .swiper-button-next {
           border: 0;
-          top: 485px;
+          top: calc(100% - 21px);
           left: 50%;
 
           height: 55px;
@@ -157,21 +159,7 @@ body.page-product {
         display: flex;
         align-items: center;
         justify-content: center;
-
-        @media (min-width: 992px) {
-          width: 360px;
-          height: 360px;
-        }
-
-        @media (min-width: 1200px) {
-          width: 450px;
-          height: 450px;
-        }
-
-        @media (min-width: 1400px) {
-          width: 500px;
-          height: 500px;
-        }
+        max-width: 510px;
       }
     }
 
@@ -325,6 +313,19 @@ body.page-product {
       .quantity-btns {
         flex: 1;
         display: flex;
+        align-items: center;
+      }
+
+      .add-cart-btns {
+        padding: 0 10px;
+        > .btn {
+          margin: 0 0 6px;
+          width: 100%;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
       }
 
       .add-cart {
@@ -335,7 +336,7 @@ body.page-product {
       }
 
       .btn-buy-now {
-        margin: 0 10px !important;
+        margin: 0 10px;
       }
 
       .add-wishlist {

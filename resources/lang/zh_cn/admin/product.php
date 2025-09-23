@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-02 14:22:41
  * @modified   2022-08-02 14:22:41
  */
@@ -46,6 +46,7 @@ return [
     'weight_class'           => '重量单位',
     'category_placeholder'   => '请选择/搜索',
     'category_already'       => '分类已存在',
+    'category_disabled'      => '分类已被禁用',
 
     'confirm_batch_product'  => '确认要批量删除选中的商品吗？',
     'confirm_batch_status'   => '确认要批量修改选中的商品的状态吗？',
@@ -57,4 +58,5 @@ return [
     'video_path_hint'        => '远程视频，必须是以 .mp4 结尾的视频地址',
     'iframe_code_hint'       => '视频网站 Iframe 嵌入代码，如youtube视频下方点击分享再点击嵌入，复制里面的代码',
     'sku_error_repeat'       => 'sku 重复',
+    'sku_hint'               => '注意：多规格建议不超过120个，更多可能会导致页面卡顿、渲染时间变长、提交数据过大被截断的问题',
 ];

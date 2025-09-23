@@ -29,7 +29,7 @@
                   @foreach ($wishlist as $item)
                     <tr data-id="{{ $item['id'] }}" data-productid="{{ $item['product_id'] }}">
                       <td>
-                        <div class="wh-70 border d-flex justify-content-between align-items-center"><img src="{{ $item['image'] }}" class="img-fluid"></div>
+                        <div class="wh-70 border d-flex justify-content-between align-items-center"><img src="{{ $item['image'] }}" alt="{{ $item['product_name'] }}" class="img-fluid"></div>
                       </td>
                       <td>{{ $item['product_name'] }}</td>
                       <td>{{ $item['price'] }}</td>

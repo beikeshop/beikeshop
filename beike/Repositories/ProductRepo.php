@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-23 11:19:23
  * @modified   2022-06-23 11:19:23
  */
@@ -88,6 +88,8 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
+        $driver = getDBDriver();
+
         $builder = Product::query()->with(['description', 'skus', 'masterSku', 'attributes', 'brand']);
 
         $builder->leftJoin('product_descriptions as pd', function ($build) {
@@ -95,19 +97,24 @@ class ProductRepo
                 ->where('locale', locale());
         });
 
-        $builder->select(['products.*', 'pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
+        $builder->select(['products.*','pd.name', 'pd.content', 'pd.meta_title', 'pd.meta_description', 'pd.meta_keywords', 'pd.name']);
 
         if (isset($filters['category_id'])) {
             $builder->whereHas('categories', function ($query) use ($filters) {
-                if (is_array($filters['category_id'])) {
-                    $query->whereIn('category_id', $filters['category_id']);
+                if (!system_setting('category_products_with_subcategory', 1)) {
+                    if (is_array($filters['category_id'])) {
+                        $query->whereIn('category_id', $filters['category_id']);
+                    } else {
+                        $query->where('category_id', $filters['category_id']);
+                    }
                 } else {
-                    $query->where('category_id', $filters['category_id']);
-                }
-                if (system_setting('category_products_with_subcategory')) {
                     $categoryId = $filters['category_id'];
                     $query->whereHas('paths', function ($query) use ($categoryId) {
-                        $query->where('path_id', $categoryId);
+                        if (is_array($categoryId)) {
+                            $query->whereIn('path_id', $categoryId);
+                        } else {
+                            $query->where('path_id', $categoryId);
+                        }
                     });
                 }
 
@@ -122,8 +129,19 @@ class ProductRepo
         $productIds = $filters['product_ids'] ?? [];
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
-            $productIds = implode(',', $productIds);
-            $builder->orderByRaw("FIELD(products.id, {$productIds})");
+
+            if ($driver == 'mysql')
+            {
+                $productIds = implode(',', $productIds);
+                $builder->orderByRaw("FIELD(products.id, {$productIds})");
+            } else {
+
+                $caseWhen = collect($productIds)->map(function ($id, $index) {
+                    return "WHEN products.id = $id THEN $index";
+                })->implode(' ');
+
+                $builder->orderByRaw("CASE $caseWhen ELSE 99999999 END");
+            }
         }
 
         // attr 格式:attr=10:10,13|11:34,23|3:4
@@ -149,13 +167,13 @@ class ProductRepo
         }
 
         if (isset($filters['price']) && $filters['price']) {
-            $builder->whereHas('skus', function ($query) use ($filters) {
+            $builder->whereHas('skus', function ($query) use ($driver, $filters) {
                 // price 格式:price=30-100
                 $prices = explode('-', $filters['price']);
                 if (! $prices[1]) {
-                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', 1);
+                    $query->where('price', '>', $prices[0] ?: 0)->where('is_default', $driver == 'mysql' ? 1 : true);
                 } else {
-                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', 1);
+                    $query->whereBetween('price', [$prices[0] ?? 0, $prices[1]])->where('is_default', $driver == 'mysql' ? 1 : true);
                 }
             });
         }
@@ -330,7 +348,7 @@ class ProductRepo
         $products = Product::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
                 $query->where('name', 'like', "%{$name}%");
-            })->limit(10)->get();
+            })->orderByDesc('id')->limit(30)->get();
 
         return \Beike\Admin\Http\Resources\ProductSimple::collection($products)->jsonSerialize();
     }
@@ -396,6 +414,7 @@ class ProductRepo
             return [
                 'id'   => $product->id,
                 'name' => $product->description->name ?? '',
+                'image' => image_resize($product->image, 100, 100),
             ];
         })->toArray();
     }

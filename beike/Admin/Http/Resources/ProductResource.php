@@ -24,8 +24,8 @@ class ProductResource extends JsonResource
                 return image_resize($image);
             }, $this->images ?? []),
             'name'            => $this->description->name ?? '',
-            'model'           => $masterSku->model,
-            'quantity'        => $masterSku->quantity,
+            'model'           => $masterSku->model ?? null,
+            'quantity'        => $masterSku->quantity ?? null,
             'price_formatted' => currency_format($masterSku->price),
             'active'          => $this->active,
             'position'        => $this->position,

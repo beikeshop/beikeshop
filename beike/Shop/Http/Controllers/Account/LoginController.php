@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-22 20:22:54
  * @modified   2022-06-22 20:22:54
  */
@@ -48,6 +48,7 @@ class LoginController extends Controller
             }
 
             $customer = current_customer();
+            session(['login_at' => now()->timestamp]); // 设置当前登录时间
             if (empty($customer)) {
                 throw new NotFoundHttpException(trans('shop/login.empty_customer'));
             } elseif ($customer->active != 1) {

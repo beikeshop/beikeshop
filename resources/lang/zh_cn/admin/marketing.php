@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-02 19:03:19
  * @modified   2022-08-02 19:03:19
  */
@@ -44,7 +44,7 @@ return [
     'ali_pay_success'         => '已完成支付？',
     'ali_pay_text'            => '已完成支付，请刷新页面',
     'to_update'               => '去升级',
-    'version_compatible_text' => '该插件不兼容当前系统版本，请升级到 <a href="' . config('beike.api_url') . '/download" target="_blank">最新版本</a>',
+    'version_compatible_text' => '该插件不兼容当前系统版本，请升级到 <a href="' . config('beike.official_website') . '/download" target="_blank">最新版本</a>',
     'version_compatible_p_text' => '该插件不兼容您当前的系统版本，请联系插件作者升级本插件！',
     'bk_register_hint'        => '用 <a href="' . beike_url() . '/account" target="_blank">beikeshop.com</a> 上注册新账号',
     'bk_login_hint'           => '用 <a href="' . beike_url() . '/account" target="_blank">beikeshop.com</a> 账号登录',
@@ -92,5 +92,8 @@ return [
     'attention_show_2'               => '1.每次插件购买，只授权在对应购买域名中使用！禁止一次购买在多个域名中使用，任何违规行为将被追究法律责任！',
     'attention_show_3'               => '2.软件为特殊商品，付费购买后非软件本身问题不支持退款，请购买前请仔细阅读插件说明',
     'domain_token_domain_error'      => '当前域名: :domain 与 Token绑定的域名: :token_domain 不一致，请确认后再购买，或者重新绑定 Token。 <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">查看教程</a>',
-    'not_zip_archive'                => '没有zip文件。',
+    'not_zip_archive'                => '没有zip文件。请检查网站根目录下 .env文件，BEIKE_API_URL 配置，正确值是：BEIKE_API_URL=https://beikeshop.com',
+    'i_publish'                => '我要发布',
+    'not_zip_archive'                => '下载插件失败,请检查相关配置或联系beikeshop客服.',
+    'update_success'                => '更新成功',
 ];

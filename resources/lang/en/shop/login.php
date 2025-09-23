@@ -4,7 +4,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2023-12-07 07:15:40
  */
@@ -40,4 +40,6 @@ return [
     'register_success'        => 'Registered successfully',
     'should_be_approved'      => 'The account must be approved by the administrator',
     'third_party_logins'      => 'Third-party Login',
+
+    'email_address_error'     => ':email is already used, please change the email address',
 ];

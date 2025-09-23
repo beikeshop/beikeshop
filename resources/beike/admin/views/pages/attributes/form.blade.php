@@ -5,10 +5,14 @@
 @section('content')
   <div id="customer-app-form" class="card" v-cloak>
     <div class="card-body h-min-600">
+      @hook('admin.attribute.form.content.before')
+
       <el-form :model="form" :rules="rules" ref="form" label-width="140px">
         <el-tabs v-model="customerTab">
+          @hook('admin.attribute.form.tabs.before')
           <el-tab-pane label="{{ __('admin/attribute.attribute_info') }}" name="customer">
             <div class="form-max-w">
+              @hook('admin.attribute.form.tabs.customer.before')
               <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
                 <el-form-item :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
                   :rules="[
@@ -17,7 +21,7 @@
                 >
                   <el-input size="mini" v-model="form.name[lang.code]" placeholder="{{ __('common.name') }}"><template slot="prepend">@{{lang.name}}</template></el-input>
                 </el-form-item>
-            
+
                 @hook('admin.product.attributes.edit.name.after')
 
               </el-form-item>
@@ -36,12 +40,20 @@
               <el-form-item label="{{ __('common.sort_order') }}" prop="sort_order">
                 <el-input v-model="form.sort_order" style="width: 189px;" placeholder="{{ __('common.sort_order') }}"></el-input>
               </el-form-item>
+
+              @hook('admin.attribute.form.tabs.customer.after')
+
               <el-form-item>
+                @hook('admin.attribute.form.tabs.customer.submit.before')
                 <el-button type="primary" class="mt-5" @click="submitForm('form')">{{ __('common.submit') }}</el-button>
+                @hook('admin.attribute.form.tabs.customer.submit.after')
               </el-form-item>
+
+              @hook('admin.attribute.form.tabs.customer.after')
             </div>
           </el-tab-pane>
           <el-tab-pane label="{{ __('admin/attribute.attribute_value') }}" name="address" v-if="form.id">
+            @hook('admin.attribute.form.tabs.address.before')
             <button class="btn btn-primary mb-3" type="button" @click="editAddress">{{ __('common.add') }}</button>
             <div class="table-push">
               <table class="table">
@@ -49,7 +61,7 @@
                   <tr>
                     <th>ID</th>
                     <th>{{ __('admin/attribute.attribute_value') }}</th>
-                    {{-- <th>排序</th> --}}
+                    @hook('admin.attribute.form.tabs.address.table.headers')
                     <th width="160px">{{ __('common.action') }}</th>
                   </tr>
                 </thead>
@@ -57,25 +69,31 @@
                   <tr v-for="item, index in source.attributeValues" :key="index">
                     <td>@{{ item.id }}</td>
                     <td>@{{ item.description?.name || '' }}</td>
+                    @hook('admin.attribute.form.tabs.address.table.body')
                     <td>
-                      <button class="btn btn-outline-secondary btn-sm" type="button"
-                        @click="editAddress(index)">{{ __('common.edit') }}</button>
-                      <button class="btn btn-outline-danger btn-sm ml-1" type="button"
-                        @click="deleteAddress(item.id, index)">{{ __('common.delete') }}</button>
+                      @hook('admin.attribute.form.tabs.address.table.body.after')
+                      <button class="btn btn-outline-secondary btn-sm" type="button" @click="editAddress(index)">{{ __('common.edit') }}</button>
+                      <button class="btn btn-outline-danger btn-sm ml-1" type="button" @click="deleteAddress(item.id, index)">{{ __('common.delete') }}</button>
+                      @hook('admin.attribute.form.tabs.address.table.body.after')
                     </td>
                 </tbody>
                 <tbody v-else><tr><td colspan="9" class="border-0"><x-admin-no-data /></td></tr></tbody>
               </table>
             </div>
+            @hook('admin.attribute.form.tabs.address.after')
           </el-tab-pane>
+          @hook('admin.attribute.form.tabs.after')
         </el-tabs>
       </el-form>
+
+      @hook('admin.attribute.form.content.after')
     </div>
 
     <el-dialog title="{{ __('admin/attribute.attribute_value') }}" :visible.sync="dialog.show" width="670px"
       @close="closeDialog('valuesform')" :close-on-click-modal="false">
 
       <el-form ref="valuesform" :rules="attributeRules" :model="dialog.form" label-width="155px">
+        @hook('admin.attribute.form.dialog.before')
         <el-form-item label="{{ __('common.name') }}" required class="language-inputs">
           <el-form-item  :prop="'name.' + lang.code" :inline-message="true"  v-for="lang, lang_i in source.languages" :key="lang_i"
             :rules="[
@@ -88,11 +106,13 @@
           @hook('admin.product.attributes.values.edit.dialog.name.after')
 
         </el-form-item>
-
+        @hook('admin.attribute.form.dialog.after')
         <el-form-item>
           <div class="d-flex d-lg-block mt-4">
+            @hook('admin.attribute.form.dialog.submit.before')
             <el-button type="primary" @click="formSubmit('valuesform')">{{ __('common.save') }}</el-button>
             <el-button @click="closeDialog('valuesform')">{{ __('common.cancel') }}</el-button>
+            @hook('admin.attribute.form.dialog.submit.after')
           </div>
         </el-form-item>
       </el-form>
@@ -140,13 +160,17 @@
 
         attributeRules: {
 
-        }
+        },
+
+        @hook('admin.attribute.form.vue.data')
       },
 
       mounted() {
         this.source.languages.forEach((item) => {
           this.$set(this.form.name, item.code, this.source.descriptions.find(e => e.locale == item.code)?.name || '')
-        })
+        });
+
+        @hook('admin.attribute.form.vue.mounted')
       },
 
       methods: {
@@ -223,7 +247,11 @@
           this.dialog.form.name = {}
           this.dialog.show = false
         },
-      }
+
+        @hook('admin.attribute.form.vue.methods')
+      },
+
+      @hook('admin.attribute.form.vue.options')
     });
   </script>
 @endpush

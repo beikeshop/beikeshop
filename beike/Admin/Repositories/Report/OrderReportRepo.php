@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-05 14:33:49
  * @modified   2022-08-05 14:33:49
  */
@@ -108,9 +108,18 @@ class OrderReportRepo
      */
     public static function getLatestYear($statuses = [])
     {
+        if (getDBDriver() == 'mysql')
+        {
+            $sql   = DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total');
+            $sql_2 = DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, sum(total) as amount');
+        }else {
+            $sql   = DB::raw('EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month, count(*) as total');
+            $sql_2 = DB::raw('EXTRACT(YEAR FROM created_at) AS year, EXTRACT(MONTH FROM created_at) AS month, sum(total) as amount');
+        }
+
         $statuses    = $statuses ?: StateMachineService::getValidStatuses();
         $orderTotals = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today(), 'statuses' => $statuses])
-            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as total'))
+            ->select($sql)
             ->groupBy(['year', 'month'])
             ->get();
         $orderMonthTotals = [];
@@ -120,7 +129,7 @@ class OrderReportRepo
         }
 
         $orderAmounts = OrderRepo::getListBuilder(['start' => today()->subYear(), 'end' => today(), 'statuses' => $statuses])
-            ->select(DB::raw('YEAR(created_at) as year, MONTH(created_at) as month, sum(total) as amount'))
+            ->select($sql_2)
             ->groupBy(['year', 'month'])
             ->get();
         $orderMonthAmounts = [];
@@ -187,8 +196,15 @@ class OrderReportRepo
             $builder->limit($limit);
         }
 
+        if (getDBDriver() == 'mysql')
+        {
+            $expression = '`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount';
+        } else {
+            $expression = 'customer_id, COUNT(*) AS order_count, SUM(total) AS order_amount';
+        }
+
         return $builder->groupBy('customer_id')
-            ->selectRaw('`customer_id`, COUNT(*) AS order_count, SUM(`total`) AS order_amount')
+            ->selectRaw($expression)
             ->get();
     }
 
@@ -198,7 +214,7 @@ class OrderReportRepo
      */
     public static function getProductViews()
     {
-        $builder = Product::query()->with(['description', 'views'])
+        $builder = Product::query()->with(['description'])
             ->leftJoin('product_views', 'product_views.product_id', 'products.id')
             ->groupBy('products.id')
             ->select(['products.id'])
@@ -285,9 +301,16 @@ class OrderReportRepo
      */
     public static function getViewsLatestYear($productId = 0): array
     {
+        if (getDBDriver() == 'mysql')
+        {
+            $sql = DB::raw('CONCAT(YEAR(created_at), \'-\', MONTH(created_at)) AS ym, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals');
+        }else {
+            $sql = DB::raw('CONCAT(EXTRACT(YEAR FROM created_at), \'-\', EXTRACT(MONTH FROM created_at)) AS ym, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals');
+        }
+
         $builder = ProductView::query()->where('created_at', '>=', today()->subYear())
             ->where('created_at', '<', today()->addDay())
-            ->select(DB::raw('CONCAT(YEAR(created_at), \'-\', MONTH(created_at)) AS ym, count(*) as pv_totals, COUNT(DISTINCT session_id) AS uv_totals'))
+            ->select($sql)
             ->groupBy(['ym']);
         if ($productId) {
             $builder->where('product_id', $productId);

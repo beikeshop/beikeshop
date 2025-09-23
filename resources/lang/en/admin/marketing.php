@@ -4,7 +4,7 @@
  *
  * @copyright  2024 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2024-04-25 10:56:05
  */
@@ -70,7 +70,7 @@ return [
     'text_pay'                => 'Payment Amount',
     'text_version'            => 'version',
     'to_update'               => 'To Upgrade',
-    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.api_url') . '/download" target="_blank">latest version</a>',
+    'version_compatible_text' => 'This plug-in is not compatible with the current system version, please upgrade to <a href="' . config('beike.official_website') . '/download" target="_blank">latest version</a>',
     'version_compatible_p_text' => 'This plugin is not compatible with your current system version, please contact the plugin author to upgrade this plugin! ',
     'wxpay'                   => 'WeChat scan code payment!',
     'yuan'                    => 'yuan',
@@ -88,8 +88,10 @@ return [
     'request_error_text'      => 'The above checks are normal, but the data cannot be obtained. Can you give us',
     'submit_work_order'       => 'Submit the work order',
     'domain_token_domain_error' => 'The current domain name: :domain is inconsistent with the domain name bound to the Token: :token_domain. Please confirm before purchasing, or rebind the Token. <a href="https://docs.beikeshop.com/config/plugin_token.html?lang=' . locale() . '" target="_blank">View the tutorial</a>',
-    'not_zip_archive'          => 'Not a zip archive. ',
+    'not_zip_archive'          => 'Download plugin failed, please check the relevant configuration or contact beikeshop customer service.',
     'is_passing'             => 'Please hold down the slider and drag',
     'is_passing_succee'      => 'Verification passed',
     'error_is_passing'       => 'Please drag the button to verify!',
+    'i_publish'                => 'I want to publish',
+    'update_success'                => 'Update Success',
 ];

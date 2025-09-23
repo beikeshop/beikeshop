@@ -32,6 +32,7 @@ class ProductService
 
         try {
             DB::beginTransaction();
+            hook_action('admin.service.product.create_or_update.before', ['product' => $product, 'data' => $data]);
 
             $data['brand_id']  = (int) ($data['brand_id'] ?? 0);
             $data['position']  = (int) ($data['position'] ?? 0);

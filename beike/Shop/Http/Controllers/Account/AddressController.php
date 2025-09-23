@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     TL <mengwb@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-28 20:17:04
  * @modified   2022-06-28 20:17:04
  */
@@ -44,8 +44,9 @@ class AddressController extends Controller
         $data    = $request->only(['name', 'phone', 'country_id', 'zone_id', 'city_id', 'city', 'zipcode', 'address_1', 'address_2', 'default']);
         $data = hook_filter('account.address.store.create.before', $data);
         $address = AddressService::create($data);
+
         $address = hook_filter('account.address.store.after', $address);
-        
+
         return json_success(trans('common.created_success'), new AddressResource($address));
     }
 

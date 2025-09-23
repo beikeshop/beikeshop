@@ -19,27 +19,32 @@
     </div>
   </div>
   <div class="card-body">
+    @hookwrapper('account.order_info.order_details.before')
     <div class="bg-light p-2 table-responsive">
       @if (!is_mobile())
         <table class="table table-borderless mb-0">
           <thead>
             <tr>
+              @hook('account.order_info.order_details.table.head.before')
               <th class="nowrap">{{ __('shop/account/order_info.order_number') }}</th>
               <th class="nowrap">{{ __('shop/account/order_info.order_date') }}</th>
               <th class="nowrap">{{ __('shop/account/order_info.state') }}</th>
               <th class="nowrap">{{ __('shop/account/order_info.order_amount') }}</th>
               <th class="nowrap">{{ __('shop/checkout.payment_method') }}</th>
               <th class="nowrap">{{ __('shop/checkout.delivery_method') }}</th>
+              @hook('account.order_info.table.head.after')
             </tr>
           </thead>
           <tbody>
             <tr>
+              @hook('account.order_info.order_details.table.body.before')
               <td>{{ $order->number }}</td>
               <td class="nowrap">{{ $order->created_at }}</td>
               <td class="nowrap">{{$order->status_format}}</td>
               <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
               <td>{{ $order->payment_method_name }}</td>
               <td>{{ $order->shipping_method_name }}</td>
+              @hook('account.order_info.table.body.after')
             </tr>
           </tbody>
         </table>
@@ -72,8 +77,10 @@
         </div>
       @endif
     </div>
+    @endhookwrapper
   </div>
 </div>
+
 @hookwrapper('account.order_info.address_info')
 <div class="card mb-lg-4 mb-2">
   <div class="card-header"><h6 class="card-title">{{ __('order.address_info') }}</h6></div>
@@ -141,7 +148,7 @@
     @foreach ($order->orderProducts as $product)
       <div class="product-list">
         <div class="d-flex">
-          <div class="left border d-flex justify-content-center align-items-center wh-80"><img src="{{ image_resize($product->image) }}" class="img-fluid"></div>
+          <div class="left border d-flex justify-content-center align-items-center wh-80"><img src="{{ image_resize($product->image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
           <div class="right">
             <div class="name">
               <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>

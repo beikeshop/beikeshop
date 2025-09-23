@@ -11,6 +11,7 @@
 
 @section('content')
   <x-shop-breadcrumb type="static" value="carts.index" />
+  @hook('shop.cart.content.before')
 
   <div class="container" id="app-cart" v-cloak>
     @if ($errors->has('error'))
@@ -40,6 +41,7 @@
                     <th width="40%">{{ __('shop/carts.commodity') }}</th>
                     <th width="170">{{ __('shop/carts.quantity') }}</th>
                     <th width="170">{{ __('shop/carts.subtotal') }}</th>
+                    @hook('shop.cart.index.table.headers')
                     <th width="100" class="text-end">{{ __('common.action') }}</th>
                   </tr>
                 </thead>
@@ -48,7 +50,7 @@
                     <td>
                       <div class="d-flex align-items-center p-image">
                         <input class="form-check-input" type="checkbox" @change="checkedCartTr(index)" v-model="product.selected">
-                        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" class="img-fluid"></div>
+                        <div class="border d-flex align-items-center justify-content-center wh-80 ms-3"><img :src="product.image_url" :alt="product.name" class="img-fluid"></div>
                       </div>
                     </td>
                     <td>
@@ -67,10 +69,13 @@
                       </div>
                     </td>
                     <td><div class="sub-total" v-html="product.subtotal_format"></div></td>
+                    @hook('shop.cart.index.table.body')
                     <td class="text-end">
+                      @hook('shop.cart.index.table.action.before')
                       <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
                         <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
                       </button>
+                      @hook('shop.cart.index.table.action.after')
                     </td>
                   </tr>
                 </tbody>
@@ -87,9 +92,11 @@
               <div class="p-lg-0"><h4 class="mb-3">{{ __('shop/carts.product_total') }}</h4></div>
               <div class="card-body p-lg-0">
                 <ul class="list-group list-group-flush">
+                  @hook('shop.cart.index.total.before')
                   <li class="list-group-item"><span>{{ __('shop/carts.all') }}</span><span>@{{ allProduct }}</span></li>
                   <li class="list-group-item"><span>{{ __('shop/carts.selected') }}</span><span>@{{ total_quantity }}</span></li>
                   <li class="list-group-item border-bottom-0"><span>{{ __('shop/carts.product_total') }}</span><span class="total-price">@{{ amount_format }}</span></li>
+                  @hook('shop.cart.index.total.after')
                   <li class="list-group-item d-grid gap-2 mt-3 border-bottom-0">
                     @hookwrapper('cart.confirm')
                     <button type="button" class="btn btn-primary fs-5 fw-bold" @click="checkedBtnToCheckout">{{ __('shop/carts.to_checkout') }}</button>
@@ -133,6 +140,8 @@
         total_quantity: @json($quantity),
         amount: @json($amount),
         amount_format: @json($amount_format),
+
+        @hook('shop.cart.index.vue.data')
       },
 
       computed: {
@@ -149,6 +158,8 @@
         allProduct() {
           return this.products.map(e => e.quantity).reduce((n,m) => n + m);
         },
+
+        @hook('shop.cart.index.vue.computed')
       },
 
       methods: {
@@ -162,6 +173,10 @@
         },
 
         quantityChange(quantity, cart_id, sku_id) {
+          if (!quantity || isNaN(quantity)) {
+            return
+          }
+
           const self = this;
           $http.put(`/carts/${cart_id}`, {quantity: quantity, sku_id}, {hload: true}).then((res) => {
             this.setUpdateData(res);
@@ -200,8 +215,12 @@
           this.amount_format = res.data.amount_format
           this.total_quantity = res.data.quantity
           bk.getCarts()
-        }
+        },
+
+        @hook('shop.cart.index.vue.methods')
       },
+
+      @hook('shop.cart.index.vue.options')
     })
   </script>
 @endpush

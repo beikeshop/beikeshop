@@ -3,15 +3,19 @@
 @section('title', $product['meta_title'] ?: $product['name'])
 @section('keywords', $product['meta_keywords'] ?: system_setting('base.meta_keyword'))
 @section('description', $product['meta_description'] ?: system_setting('base.meta_description'))
+@section('og_type', 'product')
+@section('og_image', $product['images'][0]['popup'] ?? '')
+@section('og_image_width', system_setting('base.product_image_origin_width'))
+@section('og_image_height', system_setting('base.product_image_origin_height'))
 
 @push('header')
   <script src="{{ asset('vendor/vue/2.7/vue' . (!config('app.debug') ? '.min' : '') . '.js') }}"></script>
   <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/zoom/jquery.zoom.min.js') }}"></script>
   <link rel="stylesheet" href="{{ asset('vendor/swiper/swiper-bundle.min.css') }}">
-  @if ($product['video'] && strpos($product['video'], '<iframe') === false)
-  <script src="{{ asset('vendor/video/video.min.js') }}"></script>
-  <link rel="stylesheet" href="{{ asset('vendor/video/video-js.min.css') }}">
+  @if ($has_video)
+    <script src="{{ asset('vendor/video/video.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('vendor/video/video-js.min.css') }}">
   @endif
 @endpush
 
@@ -20,41 +24,48 @@
 @endphp
 
 @section('content')
+  @hook('product.detail.before')
+
   @if (!request('iframe'))
-    <x-shop-breadcrumb type="product" :value="$product['id']" />
+    <x-shop-breadcrumb type="product" :value="$product['id']"/>
   @endif
 
   <div class="container {{ request('iframe') ? 'pt-4' : '' }}" id="product-app" v-cloak>
+    @hook('product.detail.content.before')
     <div class="row mb-md-5 mt-md-0" id="product-top">
       <div class="col-12 col-lg-6 mb-2">
         @hookwrapper('product.detail.images')
-        <div class="product-image d-flex align-items-start">
+        <div class="product-image">
           @if(!is_mobile())
-            <div class="left {{ $iframeClass }}"  v-if="images.length">
+            <div class="left {{ $iframeClass }}" v-if="images.length">
               <div class="swiper" id="swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide" :class="!index ? 'active' : ''" v-for="image, index in images" :key="index">
                     <a href="javascript:;" :data-image="image.preview" :data-zoom-image="image.popup">
-                      <img :src="image.thumb" class="img-fluid">
+                      <img :src="image.thumb" alt="{{ $product['name'] }}" class="img-fluid seo-img">
                     </a>
                   </div>
                 </div>
                 <div class="swiper-pager">
-                    <div class="swiper-button-next new-feature-slideshow-next"></div>
-                    <div class="swiper-button-prev new-feature-slideshow-prev"></div>
+                  <div class="swiper-button-next new-feature-slideshow-next"></div>
+                  <div class="swiper-button-prev new-feature-slideshow-prev"></div>
                 </div>
               </div>
             </div>
             <div class="right" id="zoom">
               @include('product.product-video')
-              <div class="product-img"><img :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid"></div>
+              <div class="product-img"><img
+                  alt="{{ $product['name'] }}"
+                  :src="images.length ? images[0].preview : '{{ asset('image/placeholder.png') }}'" class="img-fluid seo-img">
+              </div>
             </div>
           @else
             @include('product.product-video')
             <div class="swiper" id="swiper-mobile">
               <div class="swiper-wrapper">
-                <div class="swiper-slide d-flex align-items-center justify-content-center" v-for="image, index in images" :key="index">
-                  <img :src="image.preview" class="img-fluid">
+                <div class="swiper-slide d-flex align-items-center justify-content-center"
+                     v-for="image, index in images" :key="index">
+                  <img :src="image.preview" class="img-fluid seo-img" alt="{{ $product['name'] }}">
                 </div>
               </div>
               <div class="swiper-pagination mobile-pagination"></div>
@@ -71,22 +82,27 @@
           @endhookwrapper
           @hookwrapper('product.detail.price')
           @if ((system_setting('base.show_price_after_login') and current_customer()) or !system_setting('base.show_price_after_login'))
-          <div class="price-wrap d-flex align-items-end">
-            <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
-            <div class="old-price text-muted text-decoration-line-through" v-if="product.price != product.origin_price && product.origin_price !== 0">
-              @{{ product.origin_price_format }}
+            <div class="price-wrap d-flex align-items-end">
+              <div class="new-price fs-1 lh-1 fw-bold me-2">@{{ product.price_format }}</div>
+              <div class="old-price text-muted text-decoration-line-through"
+                   v-if="product.price != product.origin_price && product.origin_price !== 0">
+                @{{ product.origin_price_format }}
+              </div>
             </div>
-          </div>
           @else
-          <div class="product-price">
-            <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price" href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}</div>
-          </div>
+            <div class="product-price">
+              <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price"
+                                                                       href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}
+              </div>
+            </div>
           @endif
 
           @hook('product.detail.price.after')
 
           @endhookwrapper
           <div class="stock-and-sku mb-lg-4 mb-2">
+            @hook('shop.product.detail.quantity.before')
+
             @hookwrapper('product.detail.quantity')
             <div class="d-lg-flex">
               <span class="title text-muted">{{ __('product.quantity') }}:</span>
@@ -98,12 +114,12 @@
             @endhookwrapper
 
             @if ($product['brand_id'])
-            @hookwrapper('product.detail.brand')
-            <div class="d-lg-flex">
-              <span class="title text-muted">{{ __('product.brand') }}:</span>
-              <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
-            </div>
-            @endhookwrapper
+              @hookwrapper('product.detail.brand')
+              <div class="d-lg-flex">
+                <span class="title text-muted">{{ __('product.brand') }}:</span>
+                <a href="{{ shop_route('brands.show', $product['brand_id']) }}">{{ $product['brand_name'] }}</a>
+              </div>
+              @endhookwrapper
             @endif
 
             @hookwrapper('product.detail.sku')
@@ -111,19 +127,17 @@
             @endhookwrapper
 
             @hookwrapper('product.detail.model')
-            <div class="d-lg-flex" v-if="product.model"><span class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}</div>
-            @endhookwrapper
-          </div>
-          @if (0)
-          <div class="rating-wrap d-lg-flex">
-            <div class="rating">
-              @for ($i = 0; $i < 5; $i++)
-              <i class="iconfont">&#xe628;</i>
-              @endfor
+            <div class="d-lg-flex" v-if="product.model"><span
+                class="title text-muted">{{ __('shop/products.model') }}:</span> @{{ product.model }}
             </div>
-            <span class="text-muted">132 reviews</span>
+            @endhookwrapper
+
+            @hookwrapper('product.detail.weight')
+            <div class="d-lg-flex" v-if="product.weight"><span class="title text-muted">{{ __('admin/product.weight_text') }}:</span> @{{ product.weight }} {{ __('product.' . $product['weight_class']) }}</div>
+            @endhookwrapper
+
+            @hook('shop.product.detail.weight.after')
           </div>
-          @endif
           @hookwrapper('product.detail.variables')
           <div class="variables-wrap mb-md-4" v-if="source.variables.length">
             <div class="variable-group" v-for="variable, variable_index in source.variables" :key="variable_index">
@@ -137,7 +151,7 @@
                   data-bs-placement="top"
                   :title="value.image ? value.name : ''"
                   :class="[value.selected ? 'selected' : '', value.disabled ? 'disabled' : '', value.image ? 'is-v-image' : '']">
-                  <span class="image" v-if="value.image"><img :src="value.image" class="img-fluid"></span>
+                  <span class="image" v-if="value.image"><img :src="value.image" class="img-fluid" :alt="value.name"></span>
                   <span v-else>@{{ value.name }}</span>
                 </div>
               </div>
@@ -147,51 +161,63 @@
 
           <div class="product-btns">
             @if ($product['active'])
+              @hook('shop.product.detail.quantity_btns.before')
               <div class="quantity-btns">
                 @hook('product.detail.buy.before')
                 @hookwrapper('product.detail.quantity.input')
                 <div class="quantity-wrap">
-                  <input type="text" class="form-control" :disabled="!product.quantity" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
+                  <input type="text" class="form-control" :disabled="!product.quantity"
+                         onkeyup="this.value=this.value.replace(/\D/g,'')" v-model="quantity" name="quantity">
                   <div class="right">
                     <i class="bi bi-chevron-up"></i>
                     <i class="bi bi-chevron-down"></i>
                   </div>
                 </div>
                 @endhookwrapper
-                @hookwrapper('product.detail.add_to_cart')
-                <button
-                  class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
-                  :product-id="product.id"
-                  :product-price="product.price"
-                  :disabled="!product.quantity"
-                  @click="addCart(false, this)"
+                <div class="{{ locale() == 'zh_cn' || locale() == 'en' ? 'd-flex flex-fill' : 'add-cart-btns' }}">
+                  @hook('shop.product.detail.btns.before')
+
+                  @hookwrapper('product.detail.add_to_cart')
+                  <button
+                    class="btn btn-outline-dark ms-md-3 add-cart fw-bold"
+                    :product-id="product.id"
+                    :product-price="product.price"
+                    :disabled="!product.quantity"
+                    @click="addCart(false, this)"
                   ><i class="bi bi-cart-fill me-1"></i>{{ __('shop/products.add_to_cart') }}
-                </button>
-                @endhookwrapper
-                @hookwrapper('product.detail.buy_now')
-                <button
-                  class="btn btn-dark ms-3 btn-buy-now fw-bold"
-                  :disabled="!product.quantity"
-                  :product-id="product.id"
-                  :product-price="product.price"
-                  @click="addCart(true, this)"
+                  </button>
+                  @endhookwrapper
+                  @hookwrapper('product.detail.buy_now')
+                  <button
+                    class="btn btn-dark ms-lg-3 btn-buy-now fw-bold"
+                    :disabled="!product.quantity"
+                    :product-id="product.id"
+                    :product-price="product.price"
+                    @click="addCart(true, this)"
                   ><i class="bi bi-bag-fill me-1"></i>{{ __('shop/products.buy_now') }}
-                </button>
-                @endhookwrapper
+                  </button>
+                  @endhookwrapper
+
+                  @hook('shop.product.detail.btns.after')
+                </div>
                 @hook('product.detail.buy.after')
               </div>
+              @hook('shop.product.detail.quantity_btns.after')
 
               @if (current_customer() || !request('iframe'))
                 @hookwrapper('product.detail.wishlist')
                 <div class="add-wishlist">
-                  <button class="btn btn-link ps-md-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}" onclick="bk.addWishlist('{{ $product['id'] }}', this)">
-                    <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i> <span>{{ __('shop/products.add_to_favorites') }}</span>
+                  <button class="btn btn-link ps-md-0 text-secondary" data-in-wishlist="{{ $product['in_wishlist'] }}"
+                          onclick="bk.addWishlist('{{ $product['id'] }}', this)">
+                    <i class="bi bi-heart{{ $product['in_wishlist'] ? '-fill' : '' }} me-1"></i>
+                    <span>{{ __('shop/products.add_to_favorites') }}</span>
                   </button>
                 </div>
                 @endhookwrapper
               @endif
             @else
-              <div class="text-danger"><i class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
+              <div class="text-danger"><i
+                  class="bi bi-exclamation-circle-fill"></i> {{ __('product.has_been_inactive') }}</div>
             @endif
           </div>
 
@@ -199,36 +225,42 @@
         </div>
       </div>
     </div>
+
     @hook('product.tab.iframe.before')
+    @hookwrapper('shop.product.description')
     <div class="product-description product-mb-block {{ $iframeClass }}">
       <div class="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom mb-3">
+        @hook('shop.product.description.tabs.before')
         <a class="nav-link fw-bold active fs-5" data-bs-toggle="tab" href="#product-description">
           {{ __('shop/products.product_details') }}
         </a>
         @if ($product['attributes'])
-        <a class="nav-link fw-bold fs-5" data-bs-toggle="tab" href="#product-attributes">
-          {{ __('admin/attribute.index') }}
-        </a>
+          <a class="nav-link fw-bold fs-5" data-bs-toggle="tab" href="#product-attributes">
+            {{ __('admin/attribute.index') }}
+          </a>
         @endif
         @hook('product.tab.after.link')
       </div>
       <div class="tab-content">
+        @hook('shop.product.description.tabs.content.before')
         <div class="tab-pane fade show active" id="product-description" role="tabpanel">
-          {!! $product['description'] !!}
+          <div class="rich-text-editor-content">{!! $product['description'] !!}</div>
         </div>
         <div class="tab-pane fade" id="product-attributes" role="tabpanel">
           <table class="table table-bordered attribute-table">
             @foreach ($product['attributes'] as $group)
               <thead class="table-light">
-                <tr><td colspan="2"><strong>{{ $group['attribute_group_name'] }}</strong></td></tr>
+              <tr>
+                <td colspan="2"><strong>{{ $group['attribute_group_name'] }}</strong></td>
+              </tr>
               </thead>
               <tbody>
-                @foreach ($group['attributes'] as $item)
+              @foreach ($group['attributes'] as $item)
                 <tr>
                   <td>{{ $item['attribute'] }}</td>
                   <td>{{ $item['attribute_value'] }}</td>
                 </tr>
-                @endforeach
+              @endforeach
               </tbody>
             @endforeach
           </table>
@@ -236,6 +268,8 @@
         @hook('product.tab.after.pane')
       </div>
     </div>
+    @endhookwrapper
+    @hook('product.detail.content.after')
   </div>
 
   @if ($relations && !request('iframe'))
@@ -246,9 +280,9 @@
           <div class="swiper relations-swiper">
             <div class="swiper-wrapper">
               @foreach ($relations as $item)
-              <div class="swiper-slide">
-                @include('shared.product', ['product' => $item])
-              </div>
+                <div class="swiper-slide">
+                  @include('shared.product', ['product' => $item])
+                </div>
               @endforeach
             </div>
           </div>
@@ -265,6 +299,8 @@
 
 @push('add-scripts')
   <script>
+    @hook('product.detail.script.before')
+
     let swiperMobile = null;
     const isIframe = bk.getQueryString('iframe', false);
 
@@ -282,6 +318,7 @@
           origin_price_format: "",
           position: 0,
           price: 0,
+          weight: 0,
           price_format: "",
           quantity: 0,
           sku: "",
@@ -289,11 +326,13 @@
         quantity: 1,
         source: {
           skus: @json($product['skus']),
+          weight: @json($product['weight'] ?? ''),
           variables: @json($product['variables'] ?? []),
-        }
+        },
+        @hook('product.detail.vue.data')
       },
 
-      beforeMount () {
+      beforeMount() {
         const skus = JSON.parse(JSON.stringify(this.source.skus));
         const skuDefault = skus.find(e => e.is_default)
         this.selectedVariantsIndex = skuDefault.variants
@@ -313,8 +352,11 @@
         } else {
           // 如果没有默认的sku，则取第一个sku的第一个变量的第一个值
           this.product = skus[0];
+          this.product.weight = this.source.weight;
           this.images = @json($product['images'] ?? []);
         }
+
+        @hook('product.detail.vue.beforeMount')
       },
 
       methods: {
@@ -327,6 +369,7 @@
           this.updateSelectedVariantsIndex();
           this.getSelectedSku();
           this.updateSelectedVariantsStatus()
+          setTimeout(() => { swiper.update()}, 0);
         },
 
         // 把对应 selectedVariantsIndex 下标选中 variables -> values 的 selected 字段为 true
@@ -339,7 +382,8 @@
         getSelectedSku(reload = true) {
           // 通过 selectedVariantsIndex 的值比对 skus 的 variables
           const sku = this.source.skus.find(sku => sku.variants.toString() == this.selectedVariantsIndex.toString())
-          this.images = @json($product['images'] ?? [])
+          this.images =
+          @json($product['images'] ?? [])
 
           if (reload) {
             this.images.unshift(...sku.images)
@@ -362,22 +406,27 @@
 
         addCart(isBuyNow = false) {
           bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
+
+            const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
+            let path = '/' + '{{ session()->get('locale') }}' + '/checkout';
+            if(lang === "null") {
+              path = '/checkout';
+            }
+
             if (isIframe) {
               let index = parent.layer.getFrameIndex(window.name); //当前iframe层的索引
               parent.bk.getCarts();
-
               setTimeout(() => {
                 parent.layer.close(index);
-
                 if (isBuyNow) {
-                  parent.location.href = 'checkout'
+                  parent.location.href = path;
                 } else {
                   parent.$('.btn-right-cart')[0].click()
                 }
               }, 400);
             } else {
               if (isBuyNow) {
-                location.href = 'checkout'
+                location.href = path;
               }
             }
           });
@@ -411,10 +460,14 @@
             })
           });
         },
-      }
+
+        @hook('product.detail.vue.methods')
+      },
+
+      @hook('product.detail.vue.hooks')
     });
 
-    $(document).on("mouseover", ".product-image #swiper .swiper-slide a", function() {
+    $(document).on("mouseover", ".product-image #swiper .swiper-slide a", function () {
       $(this).parent().addClass('active').siblings().removeClass('active');
       $('#zoom').trigger('zoom.destroy');
       $('#zoom img').attr('src', $(this).attr('data-image'));
@@ -425,19 +478,21 @@
     var swiper = new Swiper("#swiper", {
       direction: "vertical",
       slidesPerView: 1,
-      spaceBetween:3,
-      breakpoints:{
-        375:{
+      spaceBetween: 3,
+      autoHeight: true,
+      mousewheel: true,
+      breakpoints: {
+        375: {
           slidesPerView: 3,
-          spaceBetween:3,
+          spaceBetween: 3,
         },
-        480:{
+        480: {
           slidesPerView: 4,
-          spaceBetween:27,
+          spaceBetween: 27,
         },
-        768:{
+        768: {
           slidesPerView: 6,
-          spaceBetween:3,
+          spaceBetween: 3,
         },
       },
       navigation: {
@@ -448,10 +503,10 @@
       observeParents: true
     });
 
-    var relationsSwiper = new Swiper ('.relations-swiper', {
+    var relationsSwiper = new Swiper('.relations-swiper', {
       watchSlidesProgress: true,
       autoHeight: true,
-      breakpoints:{
+      breakpoints: {
         320: {
           slidesPerView: 2,
           spaceBetween: 10,
@@ -477,13 +532,13 @@
 
     @if (is_mobile())
       swiperMobile = new Swiper("#swiper-mobile", {
-        slidesPerView: 1,
-        pagination: {
-          el: ".mobile-pagination",
-        },
-        observer: true,
-        observeParents: true
-      });
+      slidesPerView: 1,
+      pagination: {
+        el: ".mobile-pagination",
+      },
+      observer: true,
+      observeParents: true
+    });
     @endif
 
     $(document).ready(function () {
@@ -497,5 +552,7 @@
     const selectedVariants = variables.map((variable, index) => {
       return variable.values[selectedVariantsIndex[index]]
     });
+
+    @hook('product.detail.script.after')
   </script>
 @endpush

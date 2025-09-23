@@ -4,7 +4,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-07-26 21:08:07
  * @modified   2022-07-26 21:08:07
  */
@@ -153,7 +153,7 @@ class PageRepo
     {
         $pages = Page::query()->with('description')
             ->whereHas('description', function ($query) use ($name) {
-                $query->where('title', 'like', "{$name}%");
+                $query->where('title', 'like', "%{$name}%");
             })->limit(10)->get();
         $results = [];
         foreach ($pages as $page) {

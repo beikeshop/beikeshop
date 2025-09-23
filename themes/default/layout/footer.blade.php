@@ -1,7 +1,7 @@
 <footer>
   @hook('footer.before')
 
-  <div class="container">
+  <div class="container-fluid">
     @hook('footer.services.before')
 
     @if ($footer_content['services']['enable'])
@@ -31,7 +31,7 @@
             <h6 class="text-uppercase text-dark intro-title">{{ __('shop/common.company_profile') }}<span class="icon-open"><i class="bi bi-plus-lg"></i></span></h6>
             <div class="intro-wrap">
               @if ($footer_content['content']['intro']['logo'] ?? false)
-                <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" class="img-fluid"></a></div>
+                <div class="logo"><a href="{{ shop_route('home.index') }}"><img src="{{ image_origin($footer_content['content']['intro']['logo']) }}" alt="{{ system_setting('base.meta_title', 'BeikeShop开源好用的跨境电商系统') }}" class="img-fluid"></a></div>
               @endif
               <div class="text tinymce-format-p">{!! $footer_content['content']['intro']['text'][locale()] ?? '' !!}</div>
               <div class="social-network">
@@ -88,19 +88,17 @@
 
   @hookwrapper('footer.copyright')
   <div class="footer-bottom">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col">
-          <div class="d-flex flex-wrap">
-            <!-- 删除版权信息, 请先购买授权 https://beikeshop.com/vip/subscription -->
-            @if(!check_license())
-              Powered By&nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a>&nbsp;-&nbsp;
-            @endif
-            {!! $footer_content['bottom']['copyright'][locale()] ?? '' !!}
-          </div>
+    <div class="container-fluid">
+      <div class="d-lg-flex align-items-center">
+        <div class="text-center d-lg-flex justify-content-center">
+          <!-- 删除版权信息, 请先购买授权 https://beikeshop.com/service -->
+          @if(!check_license())
+          Powered By&nbsp;<a href="https://beikeshop.com/" target="_blank" rel="noopener">BeikeShop</a>&nbsp;-&nbsp;
+          @endif
+          {!! $footer_content['bottom']['copyright'][locale()] ?? '' !!}
         </div>
         @if (isset($footer_content['bottom']['image']) && $footer_content['bottom']['image'])
-          <div class="col-auto right-img py-md-2">
+          <div class="ms-auto right-img py-md-2 text-center">
             <img src="{{ image_origin($footer_content['bottom']['image']) }}" class="img-fluid">
           </div>
         @endif

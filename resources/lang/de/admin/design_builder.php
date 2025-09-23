@@ -5,7 +5,7 @@
  *
  * @copyright  2023 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2023-09-09 09:09:09
  * @modified   2023-12-12 07:37:57
  */
@@ -23,6 +23,7 @@ return [
     'design_index'           => 'Wohnkultur',
     'design_footer_index'    => 'Dekoration der letzten Seite',
     'design_app_home_index'  => 'APP Homepage Design',
+    'theme_index'            => 'Template list',
     'theme_index'            => 'Vorlagenliste',
     'theme_update'           => 'Vorlagenaktualisierung',
     'design_menu_index'      => 'Navigationsliste',

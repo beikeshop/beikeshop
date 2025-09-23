@@ -120,9 +120,48 @@ function admin_route($route, $params = []): string
  * @param mixed $params
  * @return string
  */
-function shop_route($route, $params = []): string
+function shop_route($route, $params = [], $isLang = true): string
 {
-    return route('shop.' . $route, $params);
+    $langs = array_map(function ($item) {
+        return '/lang/'.$item;
+    }, config('app.langs'));
+
+    $uri = route('shop.' . $route, $params);
+    $host = get_base_url($uri);
+
+    $lang = session()->get('locale') ?? system_setting('base.locale');
+
+    $uri = str_replace($host, '', $uri);
+
+    if (in_array($uri, $langs) || ($lang === system_setting('base.locale')) || !$isLang)
+    {
+        return $host . $uri;
+    }
+
+    return $host . '/' . $lang . $uri;
+}
+
+function get_base_url($url) {
+    $parsed = parse_url($url);
+
+    // 组合协议部分（如 "https://"）
+    $scheme = isset($parsed['scheme']) ? $parsed['scheme'] . '://' : '';
+
+    // 处理用户认证（如 "user:pass@"）
+    $userPass = '';
+    if (isset($parsed['user'])) {
+        $userPass = $parsed['user'];
+        if (isset($parsed['pass'])) {
+            $userPass .= ':' . $parsed['pass'];
+        }
+        $userPass .= '@';
+    }
+
+    // 组合域名和端口（如 "example.com:8080"）
+    $host = $parsed['host'] ?? '';
+    $port = isset($parsed['port']) ? ':' . $parsed['port'] : '';
+
+    return $scheme . $userPass . $host . $port;
 }
 
 /**
@@ -290,7 +329,7 @@ function locale(): string
 {
     if (is_admin()) {
         $locales    = collect(locales())->pluck('code');
-        $userLocale = current_user()->locale;
+        $userLocale = current_user()->locale ?? 'en';
 
         return ($locales->contains($userLocale)) ? $userLocale : 'en';
     }
@@ -818,9 +857,10 @@ function clean_domain($domain): string
  * @return bool
  * @throws Exception
  */
-function check_license(): bool
+function check_license() : bool
 {
     $configLicenceCode = system_setting('base.license_code');
+    $configLicenseExpiredAt = system_setting('base.license_expired_at');
     $appDomain         = clean_domain(request()->getHost());
 
     try {
@@ -838,7 +878,19 @@ function check_license(): bool
         return true;
     }
 
-    return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
+    // $configLicenceCode 有值 并且 $configLicenseExpiredAt 大于当前时间 返回 true
+    if (! empty($configLicenceCode)) {
+        if (! empty($configLicenseExpiredAt)) {
+            $configLicenseDate = date('Y-m-d', strtotime($configLicenseExpiredAt));
+            $todayDate = date('Y-m-d');
+
+            return $configLicenseDate >= $todayDate;
+        }
+
+        return $configLicenceCode == md5(mb_substr(md5($registerDomain), 2, 8));
+    }
+
+    return false;
 }
 
 /**

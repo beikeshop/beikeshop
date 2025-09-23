@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_relations', function (Blueprint $table) {
             $table->comment('相关商品表');
-            $table->id();
+            $table->id()->comment('ID');
             $table->unsignedInteger('product_id')->comment('商品 ID')->index('product_id');
             $table->unsignedInteger('relation_id')->comment('关联商品 ID')->index('relation_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('updated_at')->nullable()->comment('更新时间');
         });
     }
 

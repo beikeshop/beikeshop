@@ -5,7 +5,7 @@
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-04 15:29:49
  * @modified   2022-08-04 15:29:49
  */
@@ -141,6 +141,12 @@ return [
     'text_right_icon'                  => 'Pay icon on the right',
     'text_bgi'                         => 'Background image',
     'text_btn'                         => 'Button',
+    'btn_bg'                         => 'Button background color',
+    'btn_color'                         => 'Button font color',
+    'module_size'                         => 'Module size',
+    'module_size_narrow'                         => 'Narrow',
+    'module_size_wide'                         => 'Wide',
+    'module_size_full'                         => 'Full',
 
     // page
     'page_product_title_size'          => 'Product title font size',
@@ -194,6 +200,7 @@ return [
     'modules_slides_per_view'          => 'One screen display quantity',
     'modules_enter_content'            => 'Please enter content',
     'modules_full_screen'              => 'Whether to full screen',
+    'modules_fluid_screen'             => 'Whether widescreen',
     'modules_content'                  => 'Content',
     'modules_edit_content'             => 'Edit content',
     'modules_select_image'             => 'Select image',
@@ -231,6 +238,13 @@ return [
     'mobile_search_fixed'              => 'Fixed at the top of the screen (default)',
     'modules_set_page'                 => 'Configuration article',
     'modules_please_pages'             => 'Please add articles',
+    'scroll_text'                      => 'Scrolling Text',
+    'scroll_text_color'                => 'color',
+    'scroll_text_bg'                   => 'Background Color',
+    'scroll_text_size'                 => 'Font Size',
+    'scroll_text_padding'              => 'Padding',
+    'header_ads'                   => 'Header Ads',
+    'header_ads_bg'                   => 'Ad background color',
 
     // Menu
     'main_menu'                        => 'Main Menu',
@@ -253,4 +267,10 @@ return [
     'introduction'                     => 'Introduction',
     'copyright_settings'               => 'Copyright Settings',
     'social_media_icons'               => 'Social Media Icons',
+    'text_position'          => 'Text position',
+    'text_start'             => 'Left',
+    'text_center'            => 'Center',
+    'text_end'               => 'Right',
+    'image_alt'               => 'Alt text',
+    'image_alt_info'               => 'The alt tag provides alternative text for images, improving accessibility and SEO when images can\'t be displayed',
 ];
