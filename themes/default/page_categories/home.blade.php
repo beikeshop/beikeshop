@@ -54,6 +54,7 @@
                 @endforeach
               </ul>
             </div>
+            @hook('page_categories.home.active_page_categories.after')
           </div>
         </div>
       @endif
