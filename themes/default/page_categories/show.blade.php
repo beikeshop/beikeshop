@@ -70,6 +70,7 @@
                 @endforeach
               </ul>
             </div>
+            @hook('page_categories.show.active_page_categories.after')
           </div>
         </div>
       @endif
