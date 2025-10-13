@@ -58,14 +58,14 @@
     @hook('product_list.item.name.before')
     <div class="product-name">{{ $product['name_format'] }}</div>
     @if ((system_setting('base.show_price_after_login') and current_customer()) or !system_setting('base.show_price_after_login'))
-      <div class="product-price">
+      <div class="product-price" product-id="{{ $product['sku_id'] }}">
         <span class="price-new">{{ $product['price_format'] }}</span>
         @if ($product['price'] != $product['origin_price'] && $product['origin_price'] > 0)
           <span class="price-old">{{ $product['origin_price_format'] }}</span>
         @endif
       </div>
     @else
-      <div class="product-price">
+      <div class="product-price" product-id="{{ $product['sku_id'] }}">
         <div class="text-dark fs-6">{{ __('common.before') }} <a class="price-new fs-6 login-before-show-price" href="javascript:void(0);">{{ __('common.login') }}</a> {{ __('common.show_price') }}</div>
       </div>
     @endif
