@@ -41,6 +41,9 @@ class Http extends PendingRequest
             'Nonce'           => $this->nonce,
             'Signature'       => $signature,
             'Referer'         => $host,
+            'Source-Url'      => request()->fullUrl(),
+            'Source-Route'    => current_route(),
+            'Locale'          => locale(),
             'Version'         => config('beike.version'),
             'Admin-Name'      => system_setting('base.admin_name'),
         ]);
@@ -62,7 +65,14 @@ class Http extends PendingRequest
 
         $result = $this->get($url, $query)->{$format}();
 
-        if (isset($result['status']) && $result['status'] === 'error') {
+        if (!is_array($result) && is_string($result)) {
+            $decoded = json_decode($result, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $result = $decoded;
+            }
+        }
+
+        if (is_array($result) && isset($result['status']) && in_array($result['status'], ['error', 'fail'])) {
             throw new Exception($result['message']);
         }
 
@@ -99,7 +109,14 @@ class Http extends PendingRequest
         }
 
         $result = $this->post($url, $data)->{$format}();
-        if (isset($result['status']) && $result['status'] === 'error') {
+        if (!is_array($result) && is_string($result)) {
+            $decoded = json_decode($result, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $result = $decoded;
+            }
+        }
+
+        if (is_array($result) && isset($result['status']) && in_array($result['status'], ['error', 'fail'])) {
             throw new Exception($result['message']);
         }
 
@@ -137,7 +154,8 @@ class Http extends PendingRequest
             'locale' => $locale,
         ];
 
-        $filter = request()->all();
+        $filter = request()->query();
+
         if ($filter) {
             $queryArr = array_merge($queryArr, $filter);
         }

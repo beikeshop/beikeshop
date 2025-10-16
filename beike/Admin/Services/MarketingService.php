@@ -49,7 +49,7 @@ class MarketingService
     {
         $apiEndPoint    = "/v1/plugins/{$pluginCode}";
 
-        request()->merge(['version' => config('beike.version')]);
+        request()->query->add(['version' => config('beike.version')]);
 
         $plugin = Http::sendGet($apiEndPoint);
 
@@ -67,7 +67,7 @@ class MarketingService
     {
         $apiEndPoint = "/v1/plugins/{$pluginCode}/license";
 
-        request()->merge(['domain' => $domain]);
+        request()->query->add(['domain' => $domain]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -120,7 +120,7 @@ class MarketingService
     {
         $apiEndPoint = "/v1/plugin_services/{$pluginServiceOrderId}";
 
-        request()->merge(['version' => config('beike.version')]);
+        request()->query->add(['version' => config('beike.version')]);
 
         $plugin      = Http::sendGet($apiEndPoint);
 
@@ -205,7 +205,7 @@ class MarketingService
     public function getDomain($token)
     {
         $apiEndPoint = '/v1/website/get_domain';
-        request()->merge(['token' => $token]);
+        request()->query->add(['token' => $token]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -214,7 +214,7 @@ class MarketingService
     public function getToken($domain)
     {
         $apiEndPoint = '/v1/website/get_token';
-        request()->merge(['domain' => $domain]);
+        request()->query->add(['domain' => $domain]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -222,7 +222,7 @@ class MarketingService
     public function getLicensedPro($domain,$from)
     {
         $apiEndPoint = '/v1/licensed_pro';
-        request()->merge(['domain' => $domain, 'from' => $from]);
+        request()->query->add(['domain' => $domain, 'from' => $from]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -231,7 +231,7 @@ class MarketingService
     public function checkToken($domain, $token)
     {
         $apiEndPoint = '/v1/website/check_token';
-        request()->merge(['domain' => $domain , 'token' => $token]);
+        request()->query->add(['domain' => $domain , 'token' => $token]);
 
         return Http::sendGet($apiEndPoint);
     }
@@ -328,7 +328,7 @@ class MarketingService
     public function checkPluginVersion($pluginCodes)
     {
         $apiEndPoint = "/v1/plugins/version";
-        request()->merge(['fields' => $pluginCodes]);
+        request()->query->add(['fields' => $pluginCodes]);
         return Http::sendGet($apiEndPoint);
     }
 }
