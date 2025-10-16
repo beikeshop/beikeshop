@@ -87,6 +87,7 @@
                 @endforeach
               </ul>
             </div>
+            @hook('pages.single.category.after')
           </div>
         </div>
       @endif
