@@ -37,9 +37,9 @@
                             <div class="product-info">
                               <div class="img border d-flex justify-content-center align-items-center wh-60"><img src="{{ image_resize($product->image) }}" alt="{{ $product->name }}" class="img-fluid"></div>
                               <div class="name w-max-600">
-                                <a class="text-dark"
-                                  href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
+                                <a class="text-dark" href="{{ shop_route('products.show', ['product' => $product->product_id]) }}">{{ $product->name }}</a>
                                 <div class="quantity mt-1 text-secondary">x {{ $product->quantity }}</div>
+                                @hook('account.order.list.name.after', $product)
                               </div>
                             </div>
                           </td>

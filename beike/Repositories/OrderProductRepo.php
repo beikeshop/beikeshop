@@ -29,14 +29,14 @@ class OrderProductRepo
      */
     public static function createOrderProducts(Order $order, $cartProducts)
     {
-        $orderProducts = [];
         foreach ($cartProducts as $cartProduct) {
             $productName   = $cartProduct['name'];
             $variantLabels = $cartProduct['variant_labels'] ?? '';
             if ($variantLabels) {
                 $productName .= " - {$variantLabels}";
             }
-            $orderProducts[] = [
+            $orderProduct = [
+                'order_id'     => $order->id,
                 'product_id'   => $cartProduct['product_id'],
                 'order_number' => $order->number,
                 'product_sku'  => $cartProduct['product_sku'],
@@ -45,8 +45,10 @@ class OrderProductRepo
                 'quantity'     => $cartProduct['quantity'],
                 'price'        => $cartProduct['price'],
             ];
+
+            $orderProduct = OrderProduct::create($orderProduct);
+            hook_filter('repository.order_product.create.after', ['order_product' => $orderProduct, 'cart_product' => $cartProduct]);
         }
-        $order->orderProducts()->createMany($orderProducts);
     }
 
     /**

@@ -38,11 +38,11 @@
                     <td>{{ $rma['type_text'] }}</td>
                     <td>{{ $rma['status'] }}</td>
                     <td>{{ $rma['created_at'] }}</td>
-                    @hook('admin.rmas.index.table.body')
+                    @hook('admin.rmas.index.table.body', $rma)
                     <td>
-                      @hook('admin.rmas.index.table.body.action.before')
+                      @hook('admin.rmas.index.table.body.action.before', $rma)
                       <a href="{{ admin_route('rmas.show', [$rma['id']]) }}" class="btn btn-outline-secondary btn-sm text-nowrap">{{ __('common.view') }}</a>
-                      @hook('admin.rmas.index.table.body.action.after')
+                      @hook('admin.rmas.index.table.body.action.after', $rma)
                     </td>
                   </tr>
                 @endforeach

@@ -123,7 +123,7 @@
                   </td>
                 @endif
                 <td>{{ $customer['created_at'] }}</td>
-                @hook('admin.customer.list.column_value')
+                @hook('admin.customer.list.column_value', $customer)
                 <td>
                   @if ($type != 'trashed')
                     <a class="btn btn-outline-primary btn-sm" target="_blank"
@@ -132,13 +132,13 @@
                        href="{{ admin_route('customers.edit', [$customer->id]) }}">{{ __('common.edit') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button"
                             @click="deleteCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
-                    @hook('admin.customer.list.action')
+                    @hook('admin.customer.list.action', $customer)
                   @else
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm"
                        @click.prevent="restore({{ $customer['id'] }})">{{ __('common.restore') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1" type="button"
                             @click="deleteTrashedCustomer({{ $customer['id'] }})">{{ __('common.delete') }}</button>
-                    @hook('admin.customer.trashed.action')
+                    @hook('admin.customer.trashed.action', $customer)
                   @endif
                 </td>
               </tr>

@@ -106,7 +106,7 @@
                   <td>{{ $order->payment_method_name }}</td>
                   <td>{{ $order->status_format }}</td>
                   <td>{{ currency_format($order->total, $order->currency_code, $order->currency_value) }}</td>
-                  @hook('admin.order.list.item.td.total.after')
+                  @hook('admin.order.list.item.td.total.after', $order)
                   <td>{{ $order->created_at }}</td>
                   <td>{{ $order->updated_at }}</td>
                   <td>
@@ -119,10 +119,10 @@
                     @else
                       <button type="button" data-id="{{ $order->id }}"
                               class="btn btn-outline-secondary btn-sm restore-btn">{{ __('common.restore') }}</button>
-                      @hook('admin.products.trashed.action')
+                      @hook('admin.products.trashed.action', $order)
                     @endif
 
-                    @hook('admin.order.list.action')
+                    @hook('admin.order.list.action', $order)
                   </td>
                 </tr>
               @endforeach
