@@ -8,6 +8,23 @@
 
 export default {
   /**
+   * @description: 获取购物车数据
+   * @return {*}
+   */
+  getCarts() {
+    $(document).ready(() => {
+      $http.get('carts/mini', null, {hload: true}).then((res) => {
+        $('#offcanvas-right-cart').html(res.data.html);
+        if (!res.data.quantity_all) {
+          $('.cart-badge-quantity').hide();
+        } else {
+          $('.cart-badge-quantity').show().html(res.data.quantity_all > 99 ? '99+' : res.data.quantity_all);
+        }
+      })
+    })
+  },
+
+  /**
    * @description: 加入购物车
    * @param {*} params  参数
    * @param {*} event  事件
@@ -41,37 +58,6 @@ export default {
     };
 
     $http.post('/carts', postData, {hload: !!event}).then((res) => {
-      this.getCarts();
-      if (!isBuyNow) {
-        layer.msg(res.message)
-      }
-
-      if (callback) {
-        callback(res)
-      }
-    }).finally(() => {$btn.html(btnHtml).prop('disabled', false)})
-  },
-
-  /**
-   * @description: 加入购物车
-   * @param {*} sku_id  商品id
-   * @param {*} quantity  商品数量
-   * @param {*} isBuyNow  是否立即购买
-   * @return {*}  返回Promise
-   */
-  addCart({sku_id, quantity = 1, isBuyNow = false}, event, callback) {
-    if (!config.isLogin && !config.guestCheckout) {
-      this.openLogin()
-      return;
-    }
-
-    const $btn = $(event);
-    const btnHtml = $btn.html();
-    const loadHtml = '<span class="spinner-border spinner-border-sm"></span>';
-    $btn.html(loadHtml).prop('disabled', true);
-    $(document).find('.tooltip').remove();
-
-    $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
       this.getCarts();
       if (!isBuyNow) {
         layer.msg(res.message)
