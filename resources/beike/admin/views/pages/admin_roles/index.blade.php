@@ -42,14 +42,14 @@
                   <td>{{ $role->name }}</td>
                   <td>{{ $role->created_at }}</td>
                   <td>{{ $role->updated_at }}</td>
-                  @hook('admin.admin_roles.index.tbody')
+                  @hook('admin.admin_roles.index.tbody', $role)
                   <td class="text-end">
-                    @hook('admin.admin_roles.index.tbody.actions.before')
+                    @hook('admin.admin_roles.index.tbody.actions.before', $role)
                     <a href="{{ admin_route('admin_roles.edit', [$role->id]) }}"
                       class="btn btn-outline-secondary btn-sm">{{ __('common.edit') }}</a>
                     <button class="btn btn-outline-danger btn-sm ml-1 delete-role" data-id="{{ $role->id }}"
                       type="button">{{ __('common.delete') }}</button>
-                    @hook('admin.admin_roles.index.tbody.actions.after')
+                    @hook('admin.admin_roles.index.tbody.actions.after', $role)
                   </td>
                 </tr>
               @endforeach

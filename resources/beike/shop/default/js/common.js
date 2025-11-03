@@ -26,16 +26,23 @@ export default {
 
   /**
    * @description: 加入购物车
-   * @param {*} sku_id  商品id
-   * @param {*} quantity  商品数量
-   * @param {*} isBuyNow  是否立即购买
+   * @param {*} params  参数
+   * @param {*} event  事件
+   * @param {*} callback  回调函数
    * @return {*}  返回Promise
    */
-  addCart({sku_id, quantity = 1, isBuyNow = false}, event, callback) {
+  addCart(params = {}, event, callback) {
     if (!config.isLogin && !config.guestCheckout) {
       this.openLogin()
       return;
     }
+
+    const {
+      sku_id,
+      quantity = 1,
+      isBuyNow = false,
+      ...extraParams
+    } = params;
 
     const $btn = $(event);
     const btnHtml = $btn.html();
@@ -43,7 +50,14 @@ export default {
     $btn.html(loadHtml).prop('disabled', true);
     $(document).find('.tooltip').remove();
 
-    $http.post('/carts', {sku_id, quantity, buy_now: isBuyNow}, {hload: !!event}).then((res) => {
+    const postData = {
+      sku_id,
+      quantity,
+      buy_now: isBuyNow,
+      ...extraParams
+    };
+
+    $http.post('/carts', postData, {hload: !!event}).then((res) => {
       this.getCarts();
       if (!isBuyNow) {
         layer.msg(res.message)

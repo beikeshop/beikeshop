@@ -17,6 +17,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Base extends Model
 {
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $hookKey = 'model.fillable:' . static::class;
+
+        $extraFillable = hook_filter($hookKey, []);
+
+        if (!is_array($extraFillable)) {
+            $extraFillable = [];
+        }
+
+        $this->fillable = array_values(array_unique(array_merge($this->fillable, $extraFillable)));
+    }
+
     protected function serializeDate(\DateTimeInterface $date): string
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d H:i:s');

@@ -329,6 +329,7 @@
           weight: @json($product['weight'] ?? ''),
           variables: @json($product['variables'] ?? []),
         },
+        extraCartParams: {},
         @hook('product.detail.vue.data')
       },
 
@@ -405,8 +406,22 @@
         },
 
         addCart(isBuyNow = false) {
-          bk.addCart({sku_id: this.product.id, quantity: this.quantity, isBuyNow}, null, () => {
+          let params = {
+            sku_id: this.product.id,
+            quantity: this.quantity,
+            isBuyNow,
+            ...this.extraCartParams // 插件扩展参数
+          };
 
+          // 插件扩展方法
+          if (typeof this.beforeAddCartHooks === 'function') {
+            const beforeAddCartHooks = this.beforeAddCartHooks(params);
+            if (beforeAddCartHooks === false) {
+              return;
+            }
+          }
+
+          bk.addCart(params, null, () => {
             const lang = "{{ locale() === system_setting('base.locale') ? "null": session()->get('locale') }}";
             let path = '/' + '{{ session()->get('locale') }}' + '/checkout';
             if(lang === "null") {

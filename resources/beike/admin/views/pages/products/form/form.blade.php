@@ -456,7 +456,6 @@
                             data-bs-target="#tab-descriptions-{{ $language->code }}"
                             type="button">{{ $language->name }}</button>
                   </li>
-                  @hook('admin.product.form.li.after')
                 @endforeach
               </ul>
 

@@ -125,7 +125,7 @@
               <tr>
                 <td>{{ $history['status'] }}</td>
                 <td>{{ $history['comment'] }}</td>
-                @hook('admin.rmas.info.history.table.body')
+                @hook('admin.rmas.info.history.table.body', $history)
                 <td>{{ $history['created_at'] }}</td>
               </tr>
             @endforeach
