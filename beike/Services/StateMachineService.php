@@ -350,7 +350,7 @@ class StateMachineService
                 continue;
             }
             $productSku->decrement('quantity', $orderProduct->quantity);
-            hook_action('service.state_machine.sub_stock.after', ['sku' => $orderProduct->productSku, 'quantity' => -$orderProduct->quantity, 'order_number' => $this->order->number]);
+            hook_action('service.state_machine.sub_stock.after', ['order_product' => $orderProduct, 'order_number' => $this->order->number]);
         }
     }
 
