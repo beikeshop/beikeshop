@@ -41,6 +41,24 @@ class Base extends Model
     {
         parent::boot();
         static::addGlobalScope(new SelectScope());
+
+        /**
+         * 动态扩展模型关系（Relation）
+         * Hook Key：model.relations:{模型类名}
+         * 插件可通过 return ['relationName' => function ($model) { return $model->xxx(...); }];
+         */
+        $hookKey = 'model.relations:' . static::class;
+        $relations = hook_filter($hookKey, []);
+
+        if (is_array($relations)) {
+            foreach ($relations as $name => $callback) {
+                if (is_string($name) && is_callable($callback)) {
+                    static::resolveRelationUsing($name, function ($model) use ($callback) {
+                        return $callback($model);
+                    });
+                }
+            }
+        }
     }
 
     public function getColumns($scene = 'default')
