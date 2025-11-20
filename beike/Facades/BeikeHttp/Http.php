@@ -26,6 +26,7 @@ class Http extends PendingRequest
 
         $this->withOptions([
             'verify' => false,
+            'timeout' => 600,
         ]);
         $host      = request()->getHost();
         $signature = $this->createSignature(
