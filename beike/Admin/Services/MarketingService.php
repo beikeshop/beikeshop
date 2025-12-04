@@ -328,7 +328,21 @@ class MarketingService
     public function checkPluginVersion($pluginCodes)
     {
         $apiEndPoint = "/v1/plugins/version";
-        request()->query->add(['fields' => $pluginCodes]);
+        request()->query->add(['fields' => $pluginCodes, 'throwException' => false]);
+        return Http::sendGet($apiEndPoint);
+    }
+
+    public function toolSearch($search, $domain)
+    {
+        $apiEndPoint = "/v1/tool/search";
+        request()->query->add(['search' => $search, 'domain' => $domain, 'timeout' => 5, 'throwException' => false]);
+        return Http::sendGet($apiEndPoint);
+    }
+
+    public function checkPluginTicketExpired($pluginCode)
+    {
+        $apiEndPoint = "/v1/plugins/ticket_expired";
+        request()->query->add(['plugin_code' => $pluginCode]);
         return Http::sendGet($apiEndPoint);
     }
 }

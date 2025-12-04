@@ -121,7 +121,7 @@ class PluginController extends Controller
     {
         $type            = 'language';
         $plugins         = app('plugin')->getPlugins();
-        $plugins         = $plugins->where('type', $type);
+        $plugins         = $plugins->whereIn('type', [$type, 'translator']);
         $data['plugins'] = array_values(PluginResource::collection($plugins)->jsonSerialize());
         $data['type']    = $type;
         $data            = hook_filter('admin.plugin.index.data', $data);
@@ -314,6 +314,16 @@ class PluginController extends Controller
             } else {
                 $item['can_update'] = false;
             }
+        }
+    }
+
+    public function pluginTicketExpired(Request $request)
+    {
+        try {
+            $pluginCode = $request->get('plugin_code');
+            return MarketingService::getInstance()->checkPluginTicketExpired($pluginCode);
+        } catch (\Exception $e) {
+            return json_fail($e->getMessage());
         }
     }
 }

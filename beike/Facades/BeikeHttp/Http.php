@@ -62,6 +62,15 @@ class Http extends PendingRequest
      */
     public function sendGet(string $apiEndPoint, array|string $query = null, $format = 'json'): mixed
     {
+        $timeout = request()->query('timeout');
+        $throwException = request()->query('throwException') ?? true;
+
+        if ($timeout) {
+            $this->withOptions([
+                'timeout' => $timeout,
+            ]);
+        }
+
         $url = $this->getUrl($apiEndPoint);
 
         $result = $this->get($url, $query)->{$format}();
@@ -74,7 +83,10 @@ class Http extends PendingRequest
         }
 
         if (is_array($result) && isset($result['status']) && in_array($result['status'], ['error', 'fail'])) {
-            throw new Exception($result['message']);
+            if ($throwException) {
+                throw new Exception($result['message']);
+            }
+            return $result;
         }
 
         return $result;

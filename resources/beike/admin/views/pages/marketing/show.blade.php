@@ -7,7 +7,7 @@
 @section('content')
   <div class="marketing-iframe-wrap">
     @include('admin::shared.loading-am')
-    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin/{{ $plugin_code }}?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&return_url={{ admin_route('marketing.show', $plugin_code) }}" class="w-100 marketing-iframe"></iframe>
+    <iframe id="marketing-iframe" src="{{ beike_url() }}/plugin/{{ $plugin_code }}?iframe=1&domain={{ request()->getSchemeAndHttpHost() }}&token={{ system_setting('base.developer_token') }}&system_version={{ config('beike.version') }}&locale={{ admin_locale() == 'zh_cn' ? 'zh_cn' : 'en' }}&feature=iframe_marketing&return_url={{ admin_route('marketing.show', $plugin_code) }}{{ request()->get('buy_service') ? '&buy_service=1' : '' }}" class="w-100 marketing-iframe"></iframe>
   </div>
 @endsection
 
@@ -46,6 +46,10 @@
       $http.post(`marketing/${event.data.data.id}/buy_service`, params).then((res) => {
         marketingIframe.contentWindow.postMessage({ type: 'marketing_buy_services_callback', data: res }, '{{ beike_url() }}');
       })
+    }
+
+    if (event.data.type == 'marketing_buy_services_close_pop') {
+      window.parent.postMessage({type: 'marketing_buy_services_close_pop'});
     }
 
     if (event.data.type == 'check_domain') {
@@ -91,4 +95,16 @@
     }
   }, false);
 </script>
+@endpush
+
+@push('header')
+  @if (request()->get('buy_service'))
+  <style>
+    body {overflow: hidden;}
+    .sidebar-box, .header-mobile {display: none}
+    .marketing-iframe-wrap {height: 100vh;}
+    .main-content>#content {padding: 0;}
+    .main-content {overflow: hidden;height: 100%;}
+  </style>
+  @endif
 @endpush
