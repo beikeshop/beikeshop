@@ -17,6 +17,9 @@ use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Beike\Admin\Services\MarketingService;
+use Illuminate\Support\Facades\Cache;
+use Beike\Repositories\SettingRepo;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -43,6 +46,16 @@ class PluginServiceProvider extends ServiceProvider
         if (! installed()) {
             return;
         }
+
+        // 如果是 artisan migrate 命令行操作，则跳过
+        if (app()->runningInConsole()) {
+            $argv = $_SERVER['argv'] ?? [];
+            $migrateCommands = ['migrate', 'migrate:fresh', 'migrate:refresh', 'migrate:rollback'];
+            if (isset($argv[1]) && in_array($argv[1], $migrateCommands)) {
+                return;
+            }
+        }
+
         $manager              = app('plugin');
         $this->pluginBasePath = base_path('plugins');
 
@@ -56,6 +69,7 @@ class PluginServiceProvider extends ServiceProvider
 
         $enabledPlugins = $manager->getEnabledPlugins();
         $currentTheme   = system_setting('base.theme');
+
         foreach ($enabledPlugins as $plugin) {
             if ($plugin->type == 'theme' && $plugin->code != $currentTheme) {
                 continue;
@@ -67,6 +81,87 @@ class PluginServiceProvider extends ServiceProvider
             $this->loadDesignComponents($pluginCode);
             $this->registerCommands($plugin);
         }
+
+        $appDomain = request()->getHost();
+        try {
+            $domainObj      = new \Utopia\Domains\Domain($appDomain);
+            $registerDomain = $domainObj->getRegisterable();
+        } catch (\Exception $e) {
+            $registerDomain = '';
+        }
+
+        if ($registerDomain) {
+            $this->handleToolSearch($enabledPlugins);
+        }
+    }
+
+    private function handleToolSearch($enabledPlugins)
+    {
+        $enabledCodes       = $enabledPlugins->pluck('code')->toArray();
+        $enabledCodesJson   = json_encode($enabledCodes);
+
+        $cacheKey = 'tool_data_' . request()->getHost();
+        $cached   = Cache::get($cacheKey);
+
+        if (!$cached) {
+            $result = MarketingService::getInstance()->toolSearch($enabledCodesJson, request()->getHost());
+
+            if (!empty($result['data'])) {
+                $cached = $result['data'];
+                Cache::put($cacheKey, $cached, now()->addDays(7));
+            }
+        }
+
+        $this->processToolData($cached, $enabledPlugins, $cacheKey);
+    }
+
+    private function processToolData($data, $enabledPlugins, $cacheKey)
+    {
+        $enabledCodes = $enabledPlugins->pluck('code')->toArray();
+        $data         = $this->formatTool($data);
+
+        if (!$data) {
+            return;
+        }
+
+        $enabledCodesJson = json_encode($enabledCodes ?? []);
+        $pluginsJson      = json_encode(array_keys($data['plugins'] ?? []));
+        if ($enabledCodesJson !== $pluginsJson) {
+            Cache::forget($cacheKey);
+            $this->handleToolSearch($enabledPlugins);
+            return;
+        }
+
+        if ($data['token'] !== system_setting('base.developer_token')) {
+            Cache::forget($cacheKey);
+            $this->handleToolSearch($enabledPlugins);
+            return;
+        }
+
+        foreach ($data['plugins'] as $code => $isValid) {
+            if (!$isValid) {
+                SettingRepo::update('plugin', $code, ['status' => false]);
+            }
+        }
+    }
+
+    private function formatTool($data)
+    {
+        $key = base64_decode(config('beike.website_key'));
+
+        $raw    = base64_decode($data);
+        $iv     = substr($raw, 0, 16);
+        $cipher = substr($raw, 16);
+
+        $json = openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+
+        if (!$json) {
+            return null;
+        }
+
+        $data = json_decode($json, true);
+
+        return is_array($data) ? $data : null;
     }
 
     /**

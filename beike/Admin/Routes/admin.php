@@ -21,6 +21,7 @@ Route::prefix($adminName)
                 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home.index');
                 Route::get('/menus', [Controllers\HomeController::class, 'menus'])->name('home.menus');
                 Route::post('files', [Controllers\FileController::class, 'store'])->name('file.store');
+                Route::get('plugins/ticket_expired', [Controllers\PluginController::class, 'pluginTicketExpired'])->name('plugins.ticket_expired');
 
                 //个人中心
                 Route::middleware('can:account_index')->get('account', [Controllers\AccountController::class, 'index'])->name('account.index');

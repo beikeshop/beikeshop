@@ -38,7 +38,7 @@
             <td>@{{ plugin.type_format }}</td>
             <td>
               <div class="plugin-describe d-flex align-items-center">
-                <div class="me-2" style="flex: 0 0 50px;"><img :src="plugin.icon" class="img-fluid border"></div>
+                <div class="me-2 cursor-pointer" style="flex: 0 0 50px;" @click.prevent="showPluginDetail(plugin.code)"><img :src="plugin.icon" class="img-fluid border"></div>
                 <div>
                   <h6 class="plugin-name">@{{ plugin.name }}</h6>
                   <div class="plugin-description" v-html="plugin.description"></div>
@@ -57,8 +57,7 @@
                   <a v-else :style="!plugin.status ? 'cursor: not-allowed' : ''"
                       :class="['btn btn-outline-secondary', !plugin.status ? 'disabled' : '' ]"
                       href="{{ admin_route('theme.index') }}">{{ __('admin/plugin.to_enable') }}</a>
-                  <a class="btn btn-outline-secondary" target="_blank"
-                     :href="toBkTicketUrl(plugin.code)">{{ __('admin/plugin.ticket') }}</a>
+                  <button type="button" v-if="!free_plugin_codes.includes(plugin.code)" class="btn btn-sm btn-outline-secondary" target="_blank" href="javascript:void(0)" @click="toBkTicket(plugin.code)">{{ __('admin/plugin.ticket') }}</button>
                   <a v-if="plugin.can_update" class="btn btn-outline-success"
                   @click="updatePlugin(plugin.code, 'install', index)">{{ __('admin/plugin.update') }}</a>
                 </div>
@@ -96,6 +95,7 @@
 
       data: {
         plugins: plugins,
+        free_plugin_codes: @json(config('app.free_plugin_codes')),
       },
 
       beforeMount() {
@@ -103,8 +103,10 @@
       },
 
       methods: {
-        toBkTicketUrl(code) {
-          return `{{ beike_url() }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`
+        toBkTicket(code) {
+          this.pluginServiceExpired(code).then(() => {
+            window.open(`{{ beike_url() }}/account/plugin_tickets/create?domain=${location.host}&plugin=${code}`);
+          })
         },
 
         pluginStatusChange(e, code, index) {
@@ -141,30 +143,55 @@
         },
 
         updatePlugin(code) {
-          $http.post(`marketing/${code}/download?type=update`, null, {hmsg: true}).then((res) => {
-            layer.msg(res.message);
-            if (res.status == 'success') {
-              location.reload(true);
-            }
-          }).catch((err) => {
-            if (err.response.data.message == 'plugin_pending') {
-              layer.alert('{{__('admin/marketing.pluginstatus_pending')}}', {
-                btn: ['{{ __('common.confirm') }}'],
-                title: '{{__("common.text_hint")}}'
-              });
-            } else if (err.response.data.message == 'Not a zip archive') {
-              layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {
-                icon: 2,
-                area: ['400px'],
-                btn: ['{{ __('common.confirm') }}'],
-                title: '{{__("common.text_hint")}}'
-              });
-            } else {
-              layer.msg(err.response.data.message || err.message, {time: 3000}, () => {
-              });
-            }
+          this.pluginServiceExpired(code).then(() => {
+            $http.post(`marketing/${code}/download?type=update`, null).then((res) => {
+              layer.msg(res.message);
+              if (res.status == 'success') {
+                location.reload(true);
+              }
+            }).catch((err) => {
+              if (err.response.data.message == 'plugin_pending') {
+                layer.alert('{{__('admin/marketing.pluginstatus_pending')}}', {
+                  btn: ['{{ __('common.confirm') }}'],
+                  title: '{{__("common.text_hint")}}'
+                });
+              } else if (err.response.data.message == 'Not a zip archive') {
+                layer.alert('{{ __('admin/marketing.not_zip_archive') }}', {
+                  icon: 2,
+                  area: ['400px'],
+                  btn: ['{{ __('common.confirm') }}'],
+                  title: '{{__("common.text_hint")}}'
+                });
+              } else {
+                layer.msg(err.response.data.message || err.message, {time: 3000}, () => {
+                });
+              }
+            })
           })
         },
+
+        showPluginDetail(code) {
+          if (!this.free_plugin_codes.includes(code)) {
+            location.href = `{{ admin_route('marketing.index') }}/${code}`;
+          }
+        },
+
+        pluginServiceExpired(code) {
+          return new Promise((resolve, reject) => {
+            $http.get('{{ admin_route('plugins.ticket_expired') }}', { plugin_code: code }).then(res => {
+              if (res.data.expired) {
+                layer.open({
+                  type: 2,
+                  title: '{{ __('admin/plugin.ticket') }}',
+                  area: ['600px', '520px'],
+                  content: '{{ admin_route('marketing.index') }}/' + code + '?buy_service=1',
+                });
+              } else {
+                resolve(res.data);
+              }
+            })
+          });
+        }
       }
     })
 

@@ -242,7 +242,10 @@ function is_installer(): bool
  */
 function current_route(): string
 {
-    return Route::getCurrentRoute()->getName();
+    if (Route::getCurrentRoute()) {
+        return Route::getCurrentRoute()->getName();
+    }
+    return '';
 }
 
 /**

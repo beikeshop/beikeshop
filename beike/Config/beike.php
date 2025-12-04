@@ -14,6 +14,7 @@ return [
     'official_website' => env('BEIKE_OFFICIAL_WEBSITE', 'https://beikeshop.com'),
     'version'          => '1.6.0.10',
     'build'            => '20250701',
+    'website_key'      => 'OR5DOG3vnhM5A9iFz4WePCyjiDmglEbeFK8xiypjxvM=',
 
     'admin_name'      => env('ADMIN_NAME'),
     'force_url_https' => env('APP_FORCE_HTTPS', false),
