@@ -61,10 +61,10 @@
                     </td>
                     <td>
                       <div class="quantity-wrap">
-                        <input type="text" class="form-control" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
+                        <input type="text" class="form-control" :data-id="product.sku_id" @input="quantityChange(product.quantity, product.cart_id, product.sku_id)" onkeyup="this.value=this.value.replace(/\D/g,'')" v-model.number="product.quantity" name="quantity" minimum="1">
                         <div class="right">
-                          <i class="bi bi-chevron-up"></i>
-                          <i class="bi bi-chevron-down"></i>
+                          <i :data-id="product.sku_id" class="bi bi-chevron-up"></i>
+                          <i :data-id="product.sku_id" class="bi bi-chevron-down"></i>
                         </div>
                       </div>
                     </td>
@@ -72,8 +72,8 @@
                     @hook('shop.cart.index.table.body')
                     <td class="text-end">
                       @hook('shop.cart.index.table.action.before')
-                      <button type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
-                        <i class="bi bi-x-lg"></i> {{ __('common.delete') }}
+                      <button :data-id="product.sku_id" type="button" class="btn text-danger btn-sm px-0" @click.stop="checkedBtnDelete(product.cart_id)">
+                        <i :data-id="product.sku_id" class="bi bi-x-lg"></i> {{ __('common.delete') }}
                       </button>
                       @hook('shop.cart.index.table.action.after')
                     </td>
