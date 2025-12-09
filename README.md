@@ -33,7 +33,7 @@ The System is 100% open-source! It supports a wide range of practical features, 
 
 # Framework
 
-- **Programming Language**: PHP 8.3
+- **Programming Language**: PHP 8.1
 - **Framework**: Laravel 10
 - **Frontend**: Blade Template + Vue.js
 
