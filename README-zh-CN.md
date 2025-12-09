@@ -11,7 +11,7 @@
 
 <div align="center">
   <a href="https://beikeshop.com/" target="_blank"><img src="https://img.shields.io/badge/BeikeShop-%23FF6F30" alt="logo"></a>
-  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.3%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
+  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.1%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
   <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2010-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
 </div>
 <p align="center">
@@ -33,7 +33,7 @@ BeikeShop 是一款全球领先的开源电商平台，基于 Laravel 框架开�
 
 # 框架
 
-- **开发语言**：PHP 8.3
+- **开发语言**：PHP 8.1
 - **框架**：Laravel 10
 - **前端**：Blade 模板 + Vue.js
 
@@ -81,7 +81,7 @@ BeikeShop 是一款全球领先的开源电商平台，基于 Laravel 框架开�
 
 - **独立服务器**（不支持虚拟主机）
 - **CentOS 7.0+** 或 **Ubuntu 20.04+**
-- **PHP 8.3+**
+- **PHP 8.1+**
 - **MySQL 5.7+**
 - **Apache httpd 2.4+** 或 **Nginx 1.10+**
 

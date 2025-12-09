@@ -11,7 +11,7 @@
 
 <div align="center">
   <a href="https://beikeshop.com/" target="_blank"><img src="https://img.shields.io/badge/BeikeShop-%23FF6F30" alt="logo"></a>
-  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.3%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
+  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.1%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
   <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2010-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
 </div>
 <p align="center">
@@ -80,7 +80,7 @@ Backend Demo：[https://demo.beikeshop.com/admin/](https://demo.beikeshop.com/ad
 
 - **Independent Server** (Virtual hosting not supported)
 - **CentOS 7.0+** or **Ubuntu 20.04+**
-- **PHP 8.3+**
+- **PHP 8.1+**
 - **MySQL 5.7+**
 - **Apache httpd 2.4+** or **Nginx 1.10+**
 
