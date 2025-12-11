@@ -97,14 +97,34 @@ class PluginServiceProvider extends ServiceProvider
 
     private function handleToolSearch($enabledPlugins)
     {
-        $enabledCodes       = $enabledPlugins->pluck('code')->toArray();
-        $enabledCodesJson   = json_encode($enabledCodes);
+        $enabledCodes     = $enabledPlugins->pluck('code')->toArray();
+        $enabledCodesJson = json_encode($enabledCodes);
 
-        $cacheKey = 'tool_data_' . request()->getHost();
-        $cached   = Cache::get($cacheKey);
+        $domain      = request()->getHost();
+        $cacheKey    = 'tool_data_' . $domain;
+
+        $debounceKey = 'tool_data_debounce_' . $domain;
+        $lastExec = Cache::get($debounceKey);
+
+        if ($lastExec && time() - $lastExec < 10) {
+            return;
+        }
+
+        Cache::put($debounceKey, time(), 10);
+
+        $limitKey = 'tool_data_limit_' . $domain;
+        $count = Cache::get($limitKey, 0);
+
+        if ($count >= 3) {
+            return;
+        }
+
+        Cache::put($limitKey, $count + 1, now()->addMinutes(60));
+
+        $cached = Cache::get($cacheKey);
 
         if (!$cached) {
-            $result = MarketingService::getInstance()->toolSearch($enabledCodesJson, request()->getHost());
+            $result = MarketingService::getInstance()->toolSearch($enabledCodesJson, $domain);
 
             if (!empty($result['data'])) {
                 $cached = $result['data'];

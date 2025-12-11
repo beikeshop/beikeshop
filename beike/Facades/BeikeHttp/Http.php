@@ -20,7 +20,7 @@ class Http extends PendingRequest
     {
         parent::__construct($factory, $middleware);
 
-        $this->token     = system_setting('base.developer_token');
+        $this->token     = system_setting('base.developer_token') ?? '';
         $this->timestamp = time();
         $this->nonce     = Str::random(40);
 
