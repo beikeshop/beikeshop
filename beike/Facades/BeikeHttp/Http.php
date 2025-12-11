@@ -74,7 +74,20 @@ class Http extends PendingRequest
 
         $url = $this->getUrl($apiEndPoint);
 
-        $result = $this->get($url, $query)->{$format}();
+        try {
+            $response = $this->get($url, $query);
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            if (!$throwException) {
+                return [
+                    'status' => 'fail',
+                    'message' => $e->getMessage(),
+                ];
+            }
+
+            throw $e;
+        }
+
+        $result = $response->{$format}();
 
         if (!is_array($result) && is_string($result)) {
             $decoded = json_decode($result, true);
