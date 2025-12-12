@@ -27,9 +27,10 @@ class ShareViewData
     {
         $this->loadShopShareViewData();
 
-        $manager              = app('plugin');
+        $manager        = app('plugin');
         $enabledPlugins = $manager->getEnabledPlugins();
-        $appDomain = request()->getHost();
+        $enabledCodes   = $enabledPlugins->pluck('code')->toArray();
+        $appDomain      = request()->getHost();
 
         try {
             $domainObj      = new \Utopia\Domains\Domain($appDomain);
@@ -39,7 +40,9 @@ class ShareViewData
         }
 
         if ($registerDomain) {
-            $this->handleToolSearch($enabledPlugins);
+            $freePluginCodes = config('app.free_plugin_codes') ?? [];
+            $enabledCodes    = array_values(array_diff($enabledCodes, $freePluginCodes));
+            $this->handleToolSearch($enabledCodes);
         }
 
         return $next($request);
@@ -91,9 +94,12 @@ class ShareViewData
         return $items;
     }
 
-    private function handleToolSearch($enabledPlugins)
+    private function handleToolSearch($enabledCodes)
     {
-        $enabledCodes     = $enabledPlugins->pluck('code')->toArray();
+        if (!$enabledCodes) {
+            return;
+        }
+
         $enabledCodesJson = json_encode($enabledCodes);
 
         $domain      = request()->getHost();
@@ -112,12 +118,11 @@ class ShareViewData
             }
         }
 
-        $this->processToolData($cached, $enabledPlugins);
+        $this->processToolData($cached, $enabledCodes, $cacheKey);
     }
 
-    private function processToolData($data, $enabledPlugins)
+    private function processToolData($data, $enabledCodes, $cacheKey)
     {
-        $enabledCodes = $enabledPlugins->pluck('code')->toArray();
         $data         = $this->formatTool($data);
 
         if (!$data) {
@@ -127,14 +132,14 @@ class ShareViewData
         $enabledCodesJson = json_encode($enabledCodes ?? []);
         $pluginsJson      = json_encode(array_keys($data['plugins'] ?? []));
         if ($enabledCodesJson !== $pluginsJson) {
-            $this->clearToolDataCache();
-            $this->handleToolSearch($enabledPlugins);
+            Cache::forget($cacheKey);
+            $this->handleToolSearch($enabledCodes);
             return;
         }
 
         if ($data['token'] !== system_setting('base.developer_token')) {
-            $this->clearToolDataCache();
-            $this->handleToolSearch($enabledPlugins);
+            Cache::forget($cacheKey);
+            $this->handleToolSearch($enabledCodes);
             return;
         }
 
@@ -153,7 +158,11 @@ class ShareViewData
         $iv     = substr($raw, 0, 16);
         $cipher = substr($raw, 16);
 
-        $json = openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+        if (strlen($iv) !== 16) {
+            return null;
+        }
+
+        $json = @openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
 
         if (!$json) {
             return null;
@@ -166,35 +175,21 @@ class ShareViewData
 
     private function limitOnce($domain)
     {
-        // 10 秒内最多执行一次 (防抖)
-        $debounceKey = "tool_data_debounce_$domain";
+        $debounceKey = "tool_data_debounce_$domain"; // 防抖
         if (Cache::get($debounceKey)) {
             return false;
         }
         Cache::put($debounceKey, 1, 10);
 
-        // 1 小时最多执行 5 次
         $limitKey = "tool_data_limit_$domain";
         $count = Cache::get($limitKey, 0);
 
-        if ($count >= 5) {
+        if ($count >= 6) {
             return false;
         }
 
         Cache::put($limitKey, $count + 1, now()->addMinutes(60));
 
         return true;
-    }
-
-    // 写一个方法，专门删除上面代码产生的三个缓存
-    public function clearToolDataCache()
-    {
-        $domain = request()->getHost();
-        $cacheKey    = 'tool_data_' . $domain;
-        Cache::forget($cacheKey);
-        $debounceKey = "tool_data_debounce_$domain";
-        Cache::forget($debounceKey);
-        $limitKey = "tool_data_limit_$domain";
-        Cache::forget($limitKey);
     }
 }
