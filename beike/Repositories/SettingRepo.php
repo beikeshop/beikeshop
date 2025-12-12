@@ -14,6 +14,7 @@ namespace Beike\Repositories;
 use Beike\Admin\Http\Resources\RmaReasonDetail;
 use Beike\Models\Setting;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 
 class SettingRepo
 {
@@ -118,6 +119,7 @@ class SettingRepo
             ];
         }
         Setting::query()->insert($rows);
+        self::clearCache();
     }
 
     /**
@@ -155,6 +157,7 @@ class SettingRepo
         } else {
             $setting->update($settingData);
         }
+        self::clearCache();
     }
 
     public static function getMobileSetting()
@@ -185,6 +188,9 @@ class SettingRepo
      */
     public static function clearCache()
     {
-        //
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        Artisan::call('optimize:clear');
     }
 }

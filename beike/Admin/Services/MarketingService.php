@@ -334,7 +334,7 @@ class MarketingService
 
     public function toolSearch($search, $domain)
     {
-        $apiEndPoint = "/v1/tool/search";
+        $apiEndPoint = "/v1/tool/plugin_search";
         request()->query->add(['search' => $search, 'domain' => $domain, 'timeout' => 5, 'throwException' => false]);
         return Http::sendGet($apiEndPoint);
     }
