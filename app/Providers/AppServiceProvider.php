@@ -27,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_FORCE_HTTPS', false)) {
             URL::forceScheme('https');
         }
+
+        // Define CURL_SSLVERSION_TLSv1_2 constant if not exists to prevent errors in older cURL versions
+        if (!defined('CURL_SSLVERSION_TLSv1_2')) {
+            define('CURL_SSLVERSION_TLSv1_2', 6);
+        }
     }
 }
