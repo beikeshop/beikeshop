@@ -26,7 +26,7 @@
 </p>
 
 **Introduction to BeikeShop**
-BeikeShop is a globally leading open-source e-commerce Platform based on the Laravel framework, designed for the international trade and cross-border e-commerce industry.
+BeikeShop is a globally leading open-source eCommerce Platform based on the Laravel framework, designed for the international trade and cross-border eCommerce industry.
 The System is 100% open-source! It supports a wide range of practical features, including multi-language, multi-currency, payment, logistics, and member management, making it easy for foreign trade businesses to expand their independent online stores.
 
 ---
