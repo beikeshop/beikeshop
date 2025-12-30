@@ -52,12 +52,11 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 ## 🎯 Use Cases
 
 - PHP / Laravel ecommerce projects
-- Custom online stores
+-  Custom online stores
 - International ecommerce
 - Open‑source ecommerce learning and development
 
 ---
-
 ## 🌟 Why BeikeShop?
 
 - **100% Open-Source:** Full ownership of code and data.
@@ -66,7 +65,7 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 
 - **Low Maintenance:** Stable, production-ready, and cost-effective.
 
-- **Developer-First:** Modular architecture for fast customization.
+- **Developer-Friendly:** Modular architecture for fast customization.
 
 - **Lightweight:** Agile alternative to bloated ecommerce platforms.
 
@@ -180,7 +179,9 @@ BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenize
 
 ## 🌟 Key Features
 
-- **Open Source & Easy to Use:** 100% open-source with full ownership. Designed for rapid deployment to go live in minutes.
+- **Open Source:** 100% open-source with full ownership of source code and data.
+
+- **Easy to Use:** Designed for rapid deployment, allowing you to go from installation to a live store in minutes.
 
 - **Laravel Framework:** Built on Laravel 10+, adhering to standard MVC architecture and industry best practices.
 
