@@ -11,7 +11,7 @@
 
 <div align="center">
   <a href="https://beikeshop.com/" target="_blank"><img src="https://img.shields.io/badge/BeikeShop-%23FF6F30" alt="logo"></a>
-  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.1%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
+  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.3%2B-%234F5B93?logoColor=%234F5B93&labelColor=%234F5B93" alt="logo"></a>
   <a href="https://laravel.com/" target="_blank"><img src="https://img.shields.io/badge/-Laravel%2010-%23FF2D20?logo=laravel&logoColor=%23fff&labelColor=%23FF7467" alt="logo"></a>
 </div>
 <p align="center">
@@ -25,94 +25,182 @@
   <u><a href="README-zh-CN.md">简体中文</a></u>
 </p>
 
-**Introduction to BeikeShop**
-BeikeShop is a globally leading open-source eCommerce Platform based on the Laravel framework, designed for the international trade and cross-border eCommerce industry.
-The System is 100% open-source! It supports a wide range of practical features, including multi-language, multi-currency, payment, logistics, and member management, making it easy for foreign trade businesses to expand their independent online stores.
+## BeikeShop — Open Source PHP & Laravel Ecommerce Platform
+
+BeikeShop is an open-source ecommerce platform built on PHP and Laravel, designed for developers and businesses to launch **self-hosted** online stores with lightning-fast deployment and full control over code, data, and infrastructure. It offers a highly intuitive, **out-of-the-box** solution that enables users to move from installation to a fully functional store with ease and efficiency.
+
+The platform provides a comprehensive ecommerce foundation—including product management, shopping cart, checkout, payments, shipping, multi-language, multi-currency support, and **REST APIs**—making it the ideal choice for global independent online stores.
+
+Engineered for seamless secondary development, BeikeShop follows a **modular, event-driven architecture**. By utilizing a robust **Hook and Event-based system**, developers can extend features, build plugins, and integrate third-party services through **non-intrusive customization**, ensuring the core code remains untouched for easy maintainability and upgrades.
+
 
 ---
 
-# Framework
+## Tech Stack
 
-- **Programming Language**: PHP 8.1
+- **Language**: PHP 8.1+
 - **Framework**: Laravel 10
-- **Frontend**: Blade Template + Vue.js
+- **Frontend**: Blade Templates, Vue.js
+- **Architecture**: MVC, Modular, Event-driven
+- **Security & Logic**:Middleware, Webhook Engine
+- **Frontend:** Blade / vue / jQuery / sass / Bootstrap
+- **Database**: MySQL, PostgreSQL
+- **Deployment:** Docker
 
----
-# Live Demo
+* * *
 
-Frontend Demo：[https://demo.beikeshop.com/](https://demo.beikeshop.com/)
+## 🎯 Use Cases
 
-Backend Demo：[https://demo.beikeshop.com/admin/](https://demo.beikeshop.com/admin/login?admin_email=demo@beikeshop.com&admin_password=demo)
-
----
-
-# Quick start
-
-**Ⅰ. Package Installation**
-1.  <a href="https://beikeshop.com/download" target="_blank">Download BeikeShop</a>
-2. Upload to your server and unzip.
-3. Set the `public` folder as the website root directory.
-4. Access the website through your browser and follow the installation prompts.
-5. <a href="https://docs.beikeshop.com/en/install/bt.html" target="_blank">BeikeShop Detailed Installation Guide</a>
-6. If upgrading, download the latest version and overwrite on the server (make sure to keep the original `.env` file). Then, run `php artisan migrate` in the root directory.
-
-**Ⅱ. Source Code Installation**
-1. Open the command line and clone the repository:
-    `git clone https://github.com/beikeshop/beikeshop.git`
-2. Enter the BeikeShop directory and run `composer install` to install third-party packages.
-3. Run `cp .env.example .env` to create the configuration file.
-4. Run `npm install` (Node version 16+ required), followed by `npm run prod` to compile frontend JS and CSS files.
-5. Set the `public` folder as the website root directory.
-6. Access the website through your browser and follow the installation prompts.
-7. For upgrades, run:
-    `git pull && composer install && php artisan migrate` in the root directory.
-
-**Ⅲ. Docker Installation**
-1. Install Docker and Compose locally or on the server, refer to the installation guide here: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
-2. Execute the command: `git clone git@gitee.com:beikeshop/docker.git`
-3. Create a new directory named `www` as the website directory: `mkdir www`（See details: [https://docs.beikeshop.com/en/install/docker.html](https://docs.beikeshop.com/en/install/docker.html)）
-4. Enter the `docker` directory and create the configuration file based on the template: `cp env.example .env`
-5. Modify the `.env` file and `docker-compose` as needed, then run the command: `docker compose up -d`
+- PHP / Laravel ecommerce projects
+- Custom online stores
+- International ecommerce
+- Open‑source ecommerce learning and development
 
 ---
 
-# Environment Requirements
+## 🌟 Why BeikeShop?
 
-- **Independent Server** (Virtual hosting not supported)
-- **CentOS 7.0+** or **Ubuntu 20.04+**
-- **PHP 8.1+**
-- **MySQL 5.7+**
-- **Apache httpd 2.4+** or **Nginx 1.10+**
+- **100% Open-Source:** Full ownership of code and data.
 
-**Required PHP Extensions**:
-- BCMath
-- Ctype
-- cURL
-- DOM
-- Fileinfo
-- JSON
-- Mbstring
-- OpenSSL
-- PCRE
-- PDO
-- Tokenizer
-- XML
+- **Laravel-Based:** Standardized for performance and security.
+
+- **Low Maintenance:** Stable, production-ready, and cost-effective.
+
+- **Developer-First:** Modular architecture for fast customization.
+
+- **Lightweight:** Agile alternative to bloated ecommerce platforms.
+
+---
+## Live Demo
+
+- **Frontend Demo**: https://demo.beikeshop.com/
+- **Admin Demo**: https://demo.beikeshop.com/admin/
+- Email: demo@beikeshop.com
+- Password: demo
+
 ---
 
-# Key Features
+## Quick Start
 
-- **Zero Start-Up Cost**: BeikeShop is a true independent platform, 100% open-source, with 100% control over data.
-- **Built on Laravel 10**: Developed using the Laravel 10 framework, offering solid framework support.
-- **No Commission or Fees**: BeikeShop has no commissions, annual fees, or transaction fees, reducing the cost of setting up a website.
-- **Microkernel & Modular Design**: With a microkernel architecture and modular design, BeikeShop is easy to maintain and extend.
-- **Clear Code Structure & Format**: The system adopts a clear layered code structure with standardized formatting, improving readability and maintainability.
-- **Event System for Hook Functionality**: Flexible hook functionality is achieved through the event system, making customization and extension easier.
-- **Rich Plugin Marketplace**: A wide range of plugins are available in the official marketplace, allowing easy acquisition of required features.
-- **Multi-language and Multi-currency Support**: The system supports multiple languages and currencies, making it ideal for users across different regions and countries.
-- **Attractive Interface & Visual Customization**: BeikeShop features an attractive design with visual customization options, ensuring an excellent user experience.
-- **Strict MVC Architecture**: The system strictly follows the MVC architecture, enhancing maintainability and scalability.
-- **Easy Operation & Quick Setup**: BeikeShop is easy to operate and set up, allowing rapid deployment.
-![系统亮点](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2.png)
+BeikeShop can be installed via **package distribution**, **source code**, or **Docker**.
+
+### I. Package Installation
+
+1. Download BeikeShop: https://beikeshop.com/download
+
+2. Upload and unzip the package on your server.
+
+3. Set the `public` directory as the web root.
+
+4. Visit the site in your browser and follow the installation wizard.
+
+5. Installation guide: https://docs.beikeshop.com/en/install/bt.html
+
+6. For upgrades, overwrite files (keep `.env`) and run:
+
+   ```bash
+   php artisan migrate
+   ```
+
+### II. Source Code Installation
+
+```bash
+git clone https://github.com/beikeshop/beikeshop.git
+cd beikeshop
+composer install
+cp .env.example .env
+npm install
+npm run prod
+```
+
+Set the `public` directory as the web root and complete installation via browser.
+
+For upgrades:
+
+```bash
+git pull
+composer install
+php artisan migrate
+```
+
+### III. Docker Installation
+
+1. Install Docker & Docker Compose
+    [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
+
+2. Clone Docker environment:
+
+   ```bash
+   git clone git@gitee.com:beikeshop/docker.git
+   ```
+
+3. Create website directory:
+
+   ```bash
+   mkdir www
+   ```
+
+4. Configure environment:
+
+   ```bash
+   cp env.example .env
+   docker compose up -d
+   ```
+
+Detailed guide: [https://docs.beikeshop.com/en/install/docker.html](https://docs.beikeshop.com/en/install/docker.html)
+
+---
+
+## 📖 Documentation
+
+* Official Website: [https://www.beikeshop.com](https://www.beikeshop.com)
+
+* Documentation: [https://docs.beikeshop.com/en/](https://docs.beikeshop.com/en/)
+
+
+---
+## Environment Requirements
+
+- **Independent Server** (shared hosting not supported)
+
+- **OS**: Ubuntu 22+ / CentOS 8.5
+
+- **PHP**: 8.2
+
+- **Database**: MySQL 5.7+
+
+- **Web Server**: Nginx 1.10+ / Apache 2.4+
+
+### Required PHP Extensions
+
+BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenizer, XML
+
+---
+
+
+## 🌟 Key Features
+
+- **Open Source & Easy to Use:** 100% open-source with full ownership. Designed for rapid deployment to go live in minutes.
+
+- **Laravel Framework:** Built on Laravel 10+, adhering to standard MVC architecture and industry best practices.
+
+- **Modern UI:** Clean, high-conversion storefront and an intuitive admin dashboard for a seamless user experience.
+
+- **Complete Workflow:** Out-of-the-box support for products, cart, checkout, payments, shipping, and customer management.
+
+- **Global Commerce:** Native multi-language and multi-currency support, ideal for international online stores.
+
+- **Modular Architecture:** Decoupled design allowing functional expansion via plugins without modifying the core.
+
+- **Events & Webhooks:** Flexible event-driven customization through Webhooks and Listeners for seamless integration.
+
+- **Secure & Reliable:** Robust security with role-based access control (RBAC) and strict data validation.
+
+- **Developer-Friendly & REST APIs:** Clean codebase with comprehensive REST APIs for headless commerce and mobile apps.
+
+- **ERP & Integration Ready:** Easy connection with global payment gateways, logistics, and mainstream ERP systems.
+
+![System Overview](https://raw.githubusercontent.com/beikeshop/beikeshop-resource/refs/heads/master/img/README-2.png)
 
 
 ---
@@ -139,20 +227,37 @@ Backend Demo：[https://demo.beikeshop.com/admin/](https://demo.beikeshop.com/ad
 
 
 ---
-# Contributing
+## Contributing
 
 1. Fork this repository.
-2. Create a new `feature-xxx` branch.
-3. Submit your code changes.
-4. Create a Merge Request.
----
 
-# Special Thanks
+2. Create a new feature branch.
 
-- **Plugin Developers**: Lu Chuan Youth, Lao Liu, Aegis, Te̶lon̶ Uncle, Olives, etc.
-- **PR Contributors**: nilsir, what_village_head, tanxiaoyong, Lucky, So, licy, Lao Bei, Teemo, etc.
+3. Commit your changes.
 
-We thank all contributors who participated in the development of BeikeShop, helping to make it better!
+4. Submit a Pull Request.
+
 
 ---
-**Note！** Please retain our company’s copyright information. Removal requires our company’s license authorization!
+## 📄 License
+
+BeikeShop is open‑source software licensed under the [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-blue.svg)](https://opensource.org/licenses/OSL-3.0)
+
+
+---
+
+## Special Thanks
+
+- **Plugin Developers**: Lu Chuan Youth, Lao Liu, Aegis, Telon Uncle, Olives, and others.
+
+- **Contributors**: nilsir, what_village_head, tanxiaoyong, Lucky, So, licy, Lao Bei, Teemo, and more.
+
+Thank you to everyone who contributes to making BeikeShop better.
+
+---
+
+**Note**
+Please retain the original copyright notice.
+Removal requires official authorization.
+
+⭐ If you find BeikeShop useful, please consider giving it a star on GitHub!
