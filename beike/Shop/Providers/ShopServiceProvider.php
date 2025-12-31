@@ -130,10 +130,29 @@ class ShopServiceProvider extends ServiceProvider
      */
     protected function registerCDNUrl(): void
     {
-        $appAssetUrl = config('app.asset_url');
-        $cdnUrl      = system_setting('base.cdn_url');
-        if (empty($appAssetUrl) && $cdnUrl && ! is_admin()) {
-            Config::set('app.asset_url', $cdnUrl);
+        if ($this->app->runningInConsole()) {
+            return;
+        }
+
+        $cdnUrl = system_setting('base.cdn_url');
+
+        if (! $cdnUrl || is_admin()) {
+            return;
+        }
+
+        config(['app.asset_url' => $cdnUrl]);
+
+        if ($this->app->resolved('url')) {
+            $this->app->extend('url', function ($url, $app) {
+                $newUrl = new \Illuminate\Routing\UrlGenerator(
+                    $app['router']->getRoutes(),
+                    $app['request']
+                );
+
+                $newUrl->forceRootUrl($app['config']['app.asset_url']);
+
+                return $newUrl;
+            });
         }
     }
 
