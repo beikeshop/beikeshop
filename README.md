@@ -6,7 +6,8 @@
   <u><a href="#quick-start">Quick start</a></u> |
   <u><a href="#environment-requirements">Environment</a></u> |
   <u><a href="#key-features">Key Features</a></u> |
-  <u><a href="#page-previews">Page Previews</a></u>
+  <u><a href="#page-previews">Page Previews</a></u> |
+  <u><a href="#live-demo">Demo</a></u>
 </p>
 
 <div align="center">
@@ -49,7 +50,7 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 
 * * *
 
-## 🎯 Use Cases
+## Use Cases
 
 - PHP / Laravel ecommerce projects
 -  Custom online stores
@@ -57,7 +58,7 @@ Engineered for seamless secondary development, BeikeShop follows a **modular, ev
 - Open‑source ecommerce learning and development
 
 ---
-## 🌟 Why BeikeShop?
+## Why BeikeShop?
 
 - **100% Open-Source:** Full ownership of code and data.
 
@@ -150,7 +151,7 @@ Detailed guide: [https://docs.beikeshop.com/en/install/docker.html](https://docs
 
 ---
 
-## 📖 Documentation
+## Documentation
 
 * Official Website: [https://www.beikeshop.com](https://www.beikeshop.com)
 
@@ -240,7 +241,7 @@ BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenize
 
 
 ---
-## 📄 License
+## License
 
 BeikeShop is open‑source software licensed under the [![License: OSL-3.0](https://img.shields.io/badge/License-OSL--3.0-blue.svg)](https://opensource.org/licenses/OSL-3.0)
 
