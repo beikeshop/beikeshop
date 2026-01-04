@@ -177,7 +177,7 @@ BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenize
 ---
 
 
-## 🌟 Key Features
+## Key Features
 
 - **Open Source:** 100% open-source with full ownership of source code and data.
 
