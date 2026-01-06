@@ -88,6 +88,7 @@
                    v-if="product.price != product.origin_price && product.origin_price !== 0">
                 @{{ product.origin_price_format }}
               </div>
+              @hook('product.detail.origin_price.after')
             </div>
           @else
             <div class="product-price">
