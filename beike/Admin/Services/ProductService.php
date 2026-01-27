@@ -76,6 +76,9 @@ class ProductService
             $product->categories()->sync($data['categories'] ?? []);
             $product->relations()->sync($data['relations'] ?? []);
 
+            $product->refresh();
+            hook_action('admin.service.product.create_or_update.after', ['product' => $product, 'data' => $data]);
+
             DB::commit();
 
             return $product;
