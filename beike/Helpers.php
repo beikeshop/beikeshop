@@ -1112,3 +1112,52 @@ function calculate_height_by_ratio($width): int
 
     return round($width * $ratio);
 }
+
+/**
+ * 安全获取用户访问的 Host
+ * 优先使用 SERVER_NAME/SERVER_ADDR 等服务端可信变量，避免直接信任客户端传入的 Host 请求头
+ *
+ * @return string
+ */
+function get_safe_host(): string
+{
+    // 1. 先从服务端变量取
+    $serverName = $_SERVER['SERVER_NAME'] ?? null;
+    $serverAddr = $_SERVER['SERVER_ADDR'] ?? null;
+
+    // 2. 允许的 Host 白名单（从配置文件读取）
+    $allowedHosts = config('beike.allowed_hosts', []);
+    $allowedHostsLower = array_map('strtolower', $allowedHosts);
+
+    // 3. 优先使用 SERVER_NAME（服务端配置的主机名）
+    if (!empty($serverName)) {
+        $nameLower = strtolower($serverName);
+        if (empty($allowedHosts) || in_array($nameLower, $allowedHostsLower, true)) {
+            return $serverName;
+        }
+    }
+
+    // 4. 再退回 SERVER_ADDR（服务端 IP）
+    if (!empty($serverAddr)) {
+        // 一般只要是你机器 IP 就可以认为是可信，不强制在白名单
+        return $serverAddr;
+    }
+
+    // 5. 如果配置了白名单，可以在严格校验后使用 HTTP_HOST 兜底
+    $httpHost = $_SERVER['HTTP_HOST'] ?? null;
+    if (!empty($httpHost) && !empty($allowedHosts)) {
+        // 去掉端口，只比对域名部分
+        $hostWithoutPort = strtolower(explode(':', $httpHost)[0]);
+        if (in_array($hostWithoutPort, $allowedHostsLower, true)) {
+            return $hostWithoutPort;
+        }
+    }
+
+    // 6. 最后一层兜底：返回配置中的第一个允许 host
+    if (!empty($allowedHosts)) {
+        return $allowedHosts[0];
+    }
+
+    // 再不行就返回空字符串
+    return '';
+}

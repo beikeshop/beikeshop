@@ -5,8 +5,8 @@ namespace Beike\Facades\BeikeHttp\Facade;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static mixed sendGet(string $apiEndPoint, array|string $query = null,$format = 'json')
- * @method static mixed sendPost(string $apiEndPoint, string $body = '', array $data = [],$format = 'json')
+ * @method static mixed sendGet(string $apiEndPoint, array|string $query = null, string $format = 'json')
+ * @method static mixed sendPost(string $apiEndPoint, string $body = '', array $data = [], string $format = 'json')
  */
 class Http extends Facade
 {

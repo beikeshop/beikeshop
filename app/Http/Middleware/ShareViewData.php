@@ -30,7 +30,7 @@ class ShareViewData
         $manager        = app('plugin');
         $enabledPlugins = $manager->getEnabledPlugins();
         $enabledCodes   = $enabledPlugins->pluck('code')->toArray();
-        $appDomain      = request()->getHost();
+        $appDomain      = get_safe_host();
 
         try {
             $domainObj      = new \Utopia\Domains\Domain($appDomain);
@@ -39,11 +39,14 @@ class ShareViewData
             $registerDomain = '';
         }
 
-        if ($registerDomain) {
+        $host = strtolower($request->getHost());
+        $serverName = strtolower($request->server('SERVER_NAME'));
+
+        // if ($registerDomain && $host === $serverName) {
             $freePluginCodes = config('app.free_plugin_codes') ?? [];
             $enabledCodes    = array_values(array_diff($enabledCodes, $freePluginCodes));
             $this->handleToolSearch($enabledCodes);
-        }
+        // }
 
         return $next($request);
     }
@@ -102,7 +105,7 @@ class ShareViewData
 
         $enabledCodesJson = json_encode($enabledCodes);
 
-        $domain      = request()->getHost();
+        $domain      = get_safe_host();
         $cacheKey    = 'tool_data_' . $domain;
         $cached = Cache::get($cacheKey);
 
@@ -179,12 +182,12 @@ class ShareViewData
         if (Cache::get($debounceKey)) {
             return false;
         }
-        Cache::put($debounceKey, 1, 10);
+        Cache::put($debounceKey, 1, 30);
 
         $limitKey = "tool_data_limit_$domain";
         $count = Cache::get($limitKey, 0);
 
-        if ($count >= 6) {
+        if ($count >= 10) {
             return false;
         }
 
