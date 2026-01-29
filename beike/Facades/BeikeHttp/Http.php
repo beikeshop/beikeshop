@@ -23,7 +23,6 @@ class Http extends PendingRequest
      * Parameters that should not be forwarded to remote API.
      */
     private const FILTERED_QUERY_PARAMS = [
-        'token',
         'password',
         'secret',
         'key',
