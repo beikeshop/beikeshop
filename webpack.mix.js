@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+mix.disableNotifications();
 const fs = require('fs');
 
 // 后台 scss/js
