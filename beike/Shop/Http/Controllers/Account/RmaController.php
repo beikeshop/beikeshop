@@ -42,7 +42,11 @@ class RmaController extends Controller
      */
     public function show(int $id)
     {
-        $rma         = RmaRepo::find($id);
+        $rma = RmaRepo::find($id);
+        if (!$rma || $rma->customer_id != current_customer()->id) {
+            return abort(404);
+        }
+
         $data        = [
             'rma'          => (new RmaDetail($rma))->jsonSerialize(),
             'orderProduct' => OrderProductRepo::find($rma->order_product_id),
@@ -53,8 +57,13 @@ class RmaController extends Controller
 
     public function create(int $orderProductId)
     {
+        $orderProduct = OrderProductRepo::find($orderProductId);
+        if (!$orderProduct || $orderProduct->order->customer_id != current_customer()->id) {
+            return abort(404);
+        }
+
         $data = [
-            'orderProduct' => OrderProductRepo::find($orderProductId),
+            'orderProduct' => $orderProduct,
             'statuses'     => RmaRepo::getStatuses(),
             'reasons'      => RmaReasonDetail::collection(RmaReasonRepo::list())->jsonSerialize(),
             'types'        => RmaRepo::getTypes(),

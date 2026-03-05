@@ -35,6 +35,9 @@ class AddressController extends Controller
     public function show(Request $request, $id)
     {
         $address = AddressRepo::find($id);
+        if (!$address || $address->customer_id != current_customer()->id) {
+            abort(404);
+        }
 
         return json_success(trans('common.get_success'), new AddressResource($address));
     }
@@ -62,6 +65,11 @@ class AddressController extends Controller
 
     public function destroy(Request $request, int $id)
     {
+        $address = AddressRepo::find($id);
+        if (!$address || $address->customer_id != current_customer()->id) {
+            abort(404);
+        }
+
         AddressRepo::delete($id);
 
         return json_success(trans('common.deleted_success'));
