@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'trust_hosts_enabled' => env('TRUST_HOSTS_ENABLED', true),
+    'trust_hosts_enabled' => env('TRUST_HOSTS_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
