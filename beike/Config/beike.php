@@ -23,7 +23,7 @@ return [
     'allowed_hosts' => array_filter(explode(',', env('ALLOWED_HOSTS', ''))),
 
     // HTTP 客户端请求时是否验证 SSL 证书，生产环境建议开启
-    'http_verify_ssl' => env('HTTP_VERIFY_SSL', true),
+    'http_verify_ssl' => env('HTTP_VERIFY_SSL', false),
 
     // HTTP 客户端默认超时时间（秒），0 表示无限等待
     'http_timeout' => env('HTTP_TIMEOUT', 0),
