@@ -72,9 +72,11 @@ class CartService
     {
         $customerId = $customer->id ?? 0;
 
-        if (empty($sku) || $quantity == 0) {
+        if (empty($sku)) {
             return null;
         }
+
+        self::validateQuantity($quantity);
 
         $productId  = $sku->product_id;
         $skuCode    = $sku->sku;
@@ -89,6 +91,9 @@ class CartService
             ->first();
 
         if ($cart) {
+            if ($cart->quantity + $quantity > $cart->sku->quantity) {
+                throw new Exception(trans('cart.stock_out'));
+            }
             $cart->selected = true;
             $cart->increment('quantity', $quantity);
         } else {
@@ -161,16 +166,28 @@ class CartService
      */
     public static function updateQuantity($customer, $cartId, $quantity): void
     {
-        if (empty($cartId) || $quantity == 0) {
+        if (empty($cartId)) {
             return;
         }
+
+        self::validateQuantity((int) $quantity);
+
         if ($customer) {
             $builder = CartProduct::query()->where('customer_id', $customer->id);
         } else {
             $builder = CartProduct::query()->where('session_id', get_session_id());
         }
-        $builder->where('id', $cartId)
-            ->update(['quantity' => $quantity, 'selected' => 1]);
+
+        $cart = $builder->where('id', $cartId)->first();
+        if (empty($cart)) {
+            return;
+        }
+
+        if ($quantity > $cart->sku->quantity) {
+            throw new Exception(trans('cart.stock_out'));
+        }
+
+        $cart->update(['quantity' => $quantity, 'selected' => 1]);
     }
 
     /**
@@ -241,5 +258,18 @@ class CartService
         }
 
         return collect($carts)->sum('quantity');
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function validateQuantity(int $quantity): void
+    {
+        if ($quantity < 1) {
+            throw new Exception(trans('validation.min.numeric', [
+                'attribute' => trans('cart.quantity'),
+                'min'       => 1,
+            ]));
+        }
     }
 }
