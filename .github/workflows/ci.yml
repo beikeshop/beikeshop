@@ -12,7 +12,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:5.7.44
         env:
           MYSQL_ROOT_PASSWORD: rootpassword
           MYSQL_DATABASE: homestead
@@ -26,7 +26,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.1'
+        php-version: '8.1.32'
         extensions: mbstring, dom, pdo_mysql, curl, zip
         tools: composer:v2
 
