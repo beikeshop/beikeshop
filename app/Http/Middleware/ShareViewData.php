@@ -42,11 +42,11 @@ class ShareViewData
         $host = strtolower($request->getHost());
         $serverName = strtolower($request->server('SERVER_NAME'));
 
-        // if ($registerDomain && $host === $serverName) {
+        if ($registerDomain && $host === $serverName) {
             $freePluginCodes = config('app.free_plugin_codes') ?? [];
             $enabledCodes    = array_values(array_diff($enabledCodes, $freePluginCodes));
             $this->handleToolSearch($enabledCodes);
-        // }
+        }
 
         return $next($request);
     }
@@ -155,25 +155,43 @@ class ShareViewData
 
     private function formatTool($data)
     {
-        $key = base64_decode(config('beike.website_key'));
+        try {
+            if (!is_string($data) || $data === '') {
+                return null;
+            }
 
-        $raw    = base64_decode($data);
-        $iv     = substr($raw, 0, 16);
-        $cipher = substr($raw, 16);
+            $websiteKey = config('beike.website_key');
+            if (!is_string($websiteKey) || $websiteKey === '') {
+                return null;
+            }
 
-        if (strlen($iv) !== 16) {
+            $key = base64_decode($websiteKey, true);
+            if ($key === false || $key === '') {
+                return null;
+            }
+
+            $raw = base64_decode($data, true);
+            if ($raw === false || strlen($raw) <= 16) {
+                return null;
+            }
+
+            $iv     = substr($raw, 0, 16);
+            $cipher = substr($raw, 16);
+            if (strlen($iv) !== 16) {
+                return null;
+            }
+
+            $json = openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+            if (!is_string($json) || $json === '') {
+                return null;
+            }
+
+            $decoded = json_decode($json, true);
+
+            return is_array($decoded) ? $decoded : null;
+        } catch (\Throwable $e) {
             return null;
         }
-
-        $json = @openssl_decrypt($cipher, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
-
-        if (!$json) {
-            return null;
-        }
-
-        $data = json_decode($json, true);
-
-        return is_array($data) ? $data : null;
     }
 
     private function limitOnce($domain)
