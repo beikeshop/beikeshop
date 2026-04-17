@@ -28,6 +28,8 @@ class MarketingController
             'same_domain' => check_same_domain(),
         ];
 
+        $data['error_message'] = '';
+
         return view('admin::pages.marketing.index', $data);
     }
 
@@ -145,11 +147,53 @@ class MarketingController
             $token         = $request->token;
             $location_host = $request->location_host;
             $domain        = MarketingService::getInstance()->getDomain($token);
-            if ($domain['data'] && (get_domain($domain['data']) !== get_domain($location_host))) {
-                return json_success('fail', trans('admin/marketing.domain_token_domain_error', ['domain' => $location_host, 'token_domain' => $domain['data']]));
+            $tokenDomain   = $this->extractTokenDomain(data_get($domain, 'data'));
+
+            if ($tokenDomain && (get_domain($tokenDomain) !== get_domain($location_host))) {
+                return json_success('fail', trans('admin/marketing.domain_token_domain_error', ['domain' => $location_host, 'token_domain' => $tokenDomain]));
             }
 
             return json_success('获取成功', $domain);
+        } catch (Exception $e) {
+            return json_fail($e->getMessage());
+        }
+    }
+
+    private function extractTokenDomain(mixed $domainData): ?string
+    {
+        if (is_array($domainData)) {
+            $domain = data_get($domainData, 'domain');
+
+            return is_string($domain) && trim($domain) !== '' ? trim($domain) : null;
+        }
+
+        if (!is_string($domainData)) {
+            return null;
+        }
+
+        $domainData = trim($domainData);
+        if ($domainData === '') {
+            return null;
+        }
+
+        $decoded = json_decode($domainData, true);
+        if (is_array($decoded)) {
+            $decodedDomain = data_get($decoded, 'domain');
+            if (is_string($decodedDomain) && trim($decodedDomain) !== '') {
+                return trim($decodedDomain);
+            }
+        }
+
+        return $domainData;
+    }
+
+    public function versionCheck(Request $request)
+    {
+        try {
+            $version = $request->get('version', config('beike.version'));
+            $result  = MarketingService::getInstance()->getVersionInfo($version);
+
+            return json_success('获取成功', $result);
         } catch (Exception $e) {
             return json_fail($e->getMessage());
         }

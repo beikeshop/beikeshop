@@ -169,7 +169,7 @@ class OrderController extends Controller
         $id = $request->id ?? 0;
         Order::withTrashed()->find($id)->restore();
 
-        hook_action('admin.product.restore.after', $id);
+        hook_action('admin.order.restore.after', $id);
 
         return ['success' => true];
     }

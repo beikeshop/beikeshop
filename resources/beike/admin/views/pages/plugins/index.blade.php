@@ -3,10 +3,25 @@
 @section('title', __('admin/plugin.plugin_list'))
 
 @section('page-title-right')
-  @hookwrapper('admin.plugin.marketing')
-  <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"
-     class="btn btn-outline-info">{{ __('common.get_more') }}</a>
-  @endhookwrapper
+  <div class="d-flex align-items-center gap-2">
+    <!-- 签名密钥按钮 -->
+    <div id="signature-secret-app" v-cloak style="display: none;">
+      <el-button 
+        v-if="!signatureStatus.has_secret"
+        size="small" 
+        type="warning"
+        :loading="fetchingSecret"
+        @click="fetchSignatureSecret">
+        <i class="bi bi-key me-1"></i>
+        @{{ getSecretRetryButtonText() }}
+      </el-button>
+    </div>
+    
+    @hookwrapper('admin.plugin.marketing')
+    <a href="{{ admin_route('marketing.index', isset($type) ? ['type' => $type]: '') }}"
+       class="btn btn-outline-info">{{ __('common.get_more') }}</a>
+    @endhookwrapper
+  </div>
 @endsection
 
 @section('page-title-after')
@@ -90,12 +105,61 @@
   <script>
     const plugins = @json($plugins ?? []);
 
+    // 签名密钥状态管理
+    let signatureSecretApp = new Vue({
+      el: '#signature-secret-app',
+      data: {
+        signatureStatus: {
+          has_secret: false,
+          secret_length: 0,
+          secret_preview: '',
+        },
+        fetchingSecret: false,
+      },
+      mounted() {
+        this.loadSignatureSecretStatus();
+      },
+      methods: {
+        loadSignatureSecretStatus() {
+          $http.get('{{ admin_route('settings.signature_secret_status') }}').then((res) => {
+            if (res.data) {
+              this.signatureStatus = res.data;
+            }
+          }).catch((err) => {
+            console.error('加载签名密钥状态失败:', err);
+          });
+        },
+        fetchSignatureSecret() {
+          this.fetchingSecret = true;
+          $http.post('{{ admin_route('settings.fetch_signature_secret') }}').then((res) => {
+            this.fetchingSecret = false;
+            if (res.data) {
+              layer.msg(res.message || '签名密钥获取成功');
+              this.loadSignatureSecretStatus();
+            }
+          }).catch((err) => {
+            this.fetchingSecret = false;
+            const message = err.response?.data?.message || err.message || '获取签名密钥失败';
+            layer.msg(message, () => {});
+          });
+        },
+        getSecretRetryButtonText() {
+          if (this.fetchingSecret) {
+            return '重试中...';
+          }
+          return '重试获取签名密钥（高级）';
+        }
+      }
+    });
+
     let app = new Vue({
       el: '#plugins-app',
 
       data: {
         plugins: plugins,
         free_plugin_codes: @json(config('app.free_plugin_codes')),
+        statusLoading: {},
+        statusRollbackGuard: {},
       },
 
       beforeMount() {
@@ -110,13 +174,44 @@
         },
 
         pluginStatusChange(e, code, index) {
-          const self = this;
+          if (this.statusRollbackGuard[code]) {
+            this.$delete(this.statusRollbackGuard, code);
+            return;
+          }
+
+          if (this.statusLoading[code]) {
+            return;
+          }
+
+          this.$set(this.statusLoading, code, true);
 
           $http.put(`plugins/${code}/status`, {status: e * 1}).then((res) => {
-            layer.msg(res.message)
-          }).catch((res) => {
-            this.plugins[index].status = !this.plugins[index].status;
+            layer.msg(res.message || '{{ __("common.updated_success") }}');
+          }).catch((err) => {
+            this.$set(this.statusRollbackGuard, code, true);
+
+            if (this.plugins[index]) {
+              this.plugins[index].status = Number(!e);
+            }
+
+            layer.msg(this.resolveApiErrorMessage(err, code));
+          }).finally(() => {
+            this.$set(this.statusLoading, code, false);
           });
+        },
+
+        resolveApiErrorMessage(err, code) {
+          const message = err?.response?.data?.message || err?.message || '';
+
+          if (!message || message.includes('系统开小差了')) {
+            return `插件“${code}”状态更新失败：插件市场服务异常，请稍后重试。`;
+          }
+
+          if (message.includes('No query results for model')) {
+            return `插件“${code}”在插件市场不存在或未激活，请先在 API 端检查插件记录。`;
+          }
+
+          return message;
         },
 
         installedPlugin(code, type, index) {

@@ -98,4 +98,5 @@ return [
     'smtp_qq_hint'                => 'Note: It is not recommended to check the option to send to administrators and users at the same time for QQ mailbox SMTP service, otherwise the connection will time out. It is recommended to use mailboxes such as 126, 163, etc., or change the mail engine.',
     'image_origin_size' => 'Product image size',
     'image_origin_size_text' => 'Product image original size, recommended/default 800*800, the system will generate a list page thumbnail according to the set size ratio',
+    'developer_token_check_failed' => 'Developer token verification failed, please confirm the token is correct',
 ];

@@ -86,6 +86,7 @@
     const config = {
       beike_version: '{{ config('beike.version') }}',
       api_url: '{{ beike_api_url() }}',
+      version_check_url: '{{ admin_route('marketing.version_check') }}',
       app_url: '{{ request()->getHost() }}',
       has_license: {{ json_encode(check_license()) }},
       placeholder: '{{ system_setting('base.placeholder') }}',
@@ -101,7 +102,9 @@
       return obj;
     }
 
-    bk.tableResponsive()
+    if (window.bk && typeof bk.tableResponsive === 'function') {
+      bk.tableResponsive()
+    }
 
     @if (!check_same_domain())
       setTimeout(() => {

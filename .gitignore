@@ -25,3 +25,4 @@ mix-manifest.json
 package-lock.json
 dist
 /beike/ShopAPI
+/.claude/

@@ -137,8 +137,14 @@ export default {
         $('.update-btn').hide();
       }
     } else {
-      $http.get(`${config.api_url}/api/version?version=${config.beike_version}`, null, {hload: true}).then((res) => {
-        Cookies.set('beike_version', res, { expires: 7 });
+      $http.get(config.version_check_url, {version: config.beike_version}, {hload: true}).then((res) => {
+        const payload = res && res.data && res.data.data ? res.data.data : (res && res.data ? res.data : res);
+        const versionInfo = payload && payload.data ? payload.data : payload;
+        if (!versionInfo) {
+          return;
+        }
+
+        Cookies.set('beike_version', versionInfo, { expires: 7 });
 
         bk.versionUpdateTips();
       })

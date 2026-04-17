@@ -236,6 +236,14 @@ class MarketingService
         return Http::sendGet($apiEndPoint);
     }
 
+    public function getVersionInfo($version)
+    {
+        $apiEndPoint = '/version';
+        request()->query->add(['version' => $version]);
+
+        return Http::sendGet($apiEndPoint);
+    }
+
     /**
      *  get plugin dir by preg match content
      *

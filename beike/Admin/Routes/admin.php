@@ -199,6 +199,7 @@ Route::prefix($adminName)
                 Route::middleware('can:reports_view')->get('reports/product_view/{product_id}', [Controllers\ReportController::class, 'productView'])->name('reports_view.product');
 
                 // 插件市场
+                Route::get('marketing/version_check', [Controllers\MarketingController::class, 'versionCheck'])->name('marketing.version_check');
                 Route::middleware('can:marketing_index')->post('marketing/check_domain', [Controllers\MarketingController::class, 'checkDomain'])->name('marketing.check_domain');
                 Route::middleware('can:marketing_index')->get('marketing/get_token', [Controllers\MarketingController::class, 'getToken'])->name('marketing.get_token');
                 Route::middleware('can:marketing_index')->get('marketing/get_licensed_pro', [Controllers\MarketingController::class, 'getLicensedPro'])->name('marketing.get_licensed_pro');
@@ -275,6 +276,8 @@ Route::prefix($adminName)
                 Route::middleware('can:settings_update')->post('settings', [Controllers\SettingController::class, 'store'])->name('settings.store');
                 Route::middleware('can:settings_update')->put('settings/values', [Controllers\SettingController::class, 'updateValues'])->name('settings.update_values');
                 Route::middleware('can:settings_update')->post('settings/store_token', [Controllers\SettingController::class, 'storeDeveloperToken'])->name('settings.store_token');
+                Route::middleware('can:settings_update')->post('settings/fetch_signature_secret', [Controllers\SettingController::class, 'fetchSignatureSecret'])->name('settings.fetch_signature_secret');
+                Route::middleware('can:settings_update')->get('settings/signature_secret_status', [Controllers\SettingController::class, 'getSignatureSecretStatus'])->name('settings.signature_secret_status');
 
                 // 税类
                 Route::middleware('can:tax_classes_index')->get('tax_classes', [Controllers\TaxClassController::class, 'index'])->name('tax_classes.index');

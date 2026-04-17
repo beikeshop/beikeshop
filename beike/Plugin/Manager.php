@@ -142,12 +142,15 @@ class Manager
             throw new \Exception('无效的插件');
         }
 
-        $apiEndPoint = "/v1/plugins/{$code}";
+        $freePluginCodes = config('app.free_plugin_codes') ?? [];
 
-        $content = Http::sendGet($apiEndPoint);
+        if (!in_array($code, $freePluginCodes)) {
+            $apiEndPoint = "/v1/plugins/{$code}";
+            $content = Http::sendGet($apiEndPoint);
 
-        if (!in_array($code, config('app.free_plugin_codes')) && ($content['data']['price'] ?? 0) > 0) {
-            $plugin->checkLicenseValid();
+            if (($content['data']['price'] ?? 0) > 0) {
+                $plugin->checkLicenseValid();
+            }
         }
 
         $plugin->handleLabel();
