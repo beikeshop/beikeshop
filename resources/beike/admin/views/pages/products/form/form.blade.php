@@ -457,6 +457,7 @@
                             type="button">{{ $language->name }}</button>
                   </li>
                 @endforeach
+                @hook('admin.product.content.li.after')
               </ul>
 
               <div class="tab-content">
