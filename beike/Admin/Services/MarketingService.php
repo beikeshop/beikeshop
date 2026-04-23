@@ -238,7 +238,7 @@ class MarketingService
 
     public function getVersionInfo($version)
     {
-        $apiEndPoint = '/version';
+        $apiEndPoint = '/v1/version';
         request()->query->add(['version' => $version]);
 
         return Http::sendGet($apiEndPoint);

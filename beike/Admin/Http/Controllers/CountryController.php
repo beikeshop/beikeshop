@@ -48,7 +48,7 @@ class CountryController extends Controller
     {
         $country = CountryRepo::update($id, $request->all());
 
-        hook_action('admin.country.store.after', $country);
+        hook_action('admin.country.update.after', $country);
 
         return json_success(trans('common.updated_success'), $country);
     }

@@ -19,7 +19,21 @@ class Http extends PendingRequest
         '/api/v1/website/get_token',
         '/api/v1/website/get_domain',
         '/api/v1/website/check_token',
-        '/api/v1/token/bootstrap',
+        '/api/v1/token/bootstrap'
+    ];
+
+    /**
+     * 灵活签名接口配置：
+     * - 无 developer_token：免签
+     * - 有 developer_token：走签名
+     *
+     * 支持配置多个通配符路径（匹配 buildRequestUrl 生成后的 /api/... 路径）
+     */
+    private const FLEXIBLE_SIGNATURE_PATHS = [
+        '/api/v1/plugins/*',
+        '/api/v1/version',
+        '/api/v1/tool/plugin_search',
+        '/api/v1/plugins/ticket_expired'
     ];
 
     private const FILTERED_QUERY_PARAMS = [
@@ -100,7 +114,6 @@ class Http extends PendingRequest
                 return $this->handleSignatureError($e, (bool) $throwException);
             }
         }
-
         try {
             $response = $this->get($url);
         } catch (ConnectionException $e) {
@@ -592,7 +605,35 @@ class Http extends PendingRequest
 
     private function shouldSkipSignature(string $path): bool
     {
-        return in_array($path, self::UNSIGNED_API_PATHS, true);
+        if (in_array($path, self::UNSIGNED_API_PATHS, true)) {
+            return true;
+        }
+
+        if ($this->isFlexibleSignaturePath($path)) {
+            return ! $this->hasDeveloperToken();
+        }
+
+        return false;
+    }
+
+    private function isFlexibleSignaturePath(string $path): bool
+    {
+        foreach (self::FLEXIBLE_SIGNATURE_PATHS as $configuredPath) {
+            if (! is_string($configuredPath) || $configuredPath === '') {
+                continue;
+            }
+
+            if (Str::is($configuredPath, $path)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasDeveloperToken(): bool
+    {
+        return $this->getDeveloperTokenHeaderValue() !== '';
     }
 
     /**
