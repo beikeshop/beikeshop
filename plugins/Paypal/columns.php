@@ -15,7 +15,6 @@ return [
         'label'       => 'Sandbox Client ID',
         'type'        => 'string',
         'required'    => true,
-        'rules'       => 'required|size:80',
         'description' => '沙盒模式 Client ID',
     ],
     [
@@ -23,7 +22,6 @@ return [
         'label'       => 'Sandbox Secret',
         'type'        => 'string',
         'required'    => true,
-        'rules'       => 'required|size:80',
         'description' => '沙盒模式 Secret',
     ],
     [
@@ -31,7 +29,6 @@ return [
         'label'       => 'Live Client ID',
         'type'        => 'string',
         'required'    => true,
-        'rules'       => 'required|size:80',
         'description' => '正式环境 Client ID',
     ],
     [
@@ -39,7 +36,6 @@ return [
         'label'       => 'Live Secret',
         'type'        => 'string',
         'required'    => true,
-        'rules'       => 'required|size:80',
         'description' => '正式环境 Secret',
     ],
     [
