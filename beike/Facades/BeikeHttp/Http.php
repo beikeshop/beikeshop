@@ -22,13 +22,6 @@ class Http extends PendingRequest
         '/api/v1/token/bootstrap'
     ];
 
-    /**
-     * 灵活签名接口配置：
-     * - 无 developer_token：免签
-     * - 有 developer_token：走签名
-     *
-     * 支持配置多个通配符路径（匹配 buildRequestUrl 生成后的 /api/... 路径）
-     */
     private const FLEXIBLE_SIGNATURE_PATHS = [
         '/api/v1/plugins/*',
         '/api/v1/version',

@@ -145,11 +145,16 @@ class Manager
         $freePluginCodes = config('app.free_plugin_codes') ?? [];
 
         if (!in_array($code, $freePluginCodes)) {
-            $apiEndPoint = "/v1/plugins/{$code}";
-            $content = Http::sendGet($apiEndPoint);
-
-            if (($content['data']['price'] ?? 0) > 0) {
-                $plugin->checkLicenseValid();
+            try {
+                $apiEndPoint = "/v1/plugins/{$code}";
+                $content = Http::sendGet($apiEndPoint);
+                if (($content['data']['price'] ?? 0) > 0) {
+                    $plugin->checkLicenseValid();
+                }
+            } catch (\Exception $e) {
+                if($e->getMessage() !== 'plugin404'){
+                    throw new \Exception($e->getMessage());
+                }
             }
         }
 
