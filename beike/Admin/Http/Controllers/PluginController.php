@@ -157,17 +157,6 @@ class PluginController extends Controller
     }
 
     /**
-     * 上传插件
-     */
-    public function import(Request $request): JsonResponse
-    {
-        $zipFile = $request->file('file');
-        app('plugin')->import($zipFile);
-
-        return json_success(trans('common.success'));
-    }
-
-    /**
      * @param Request $request
      * @param         $code
      * @return JsonResponse
