@@ -19,12 +19,12 @@ class Http extends PendingRequest
         '/api/v1/website/get_token',
         '/api/v1/website/get_domain',
         '/api/v1/website/check_token',
-        '/api/v1/token/bootstrap'
+        '/api/v1/token/bootstrap',
+        '/api/v1/version',
     ];
 
     private const FLEXIBLE_SIGNATURE_PATHS = [
         '/api/v1/plugins/*',
-        '/api/v1/version',
         '/api/v1/tool/plugin_search',
         '/api/v1/plugins/ticket_expired'
     ];
