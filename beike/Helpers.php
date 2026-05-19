@@ -988,23 +988,47 @@ function beike_url(): string
 /**
  * 检测当前访问域名和 .env 配置域名是否一致
  *
+ * @return array
+ */
+function get_domain_compare_info(): array
+{
+    $request = request();
+    $appUrl = (string) env('APP_URL');
+    $envDomainRaw = clean_domain($appUrl);
+    $envRootDomain = get_domain($envDomainRaw);
+
+    $host = strtolower((string) $request->getHost());
+    $port = (int) $request->getPort();
+
+    if (in_array($port, [80, 443], true)) {
+        $requestDomainRaw = clean_domain($host);
+    } else {
+        $requestDomainRaw = $host . ':' . $port;
+    }
+
+    $requestRootDomain = get_domain($requestDomainRaw);
+    $isConfigured = $envDomainRaw !== '' && $envDomainRaw !== 'localhost';
+    $isSameDomain = $isConfigured && $envRootDomain === $requestRootDomain;
+
+    return [
+        'same_domain'         => $isSameDomain,
+        'app_url'             => $appUrl,
+        'app_url_domain'      => $envDomainRaw,
+        'app_url_root_domain' => $envRootDomain,
+        'current_domain'      => $requestDomainRaw,
+        'current_root_domain' => $requestRootDomain,
+        'is_app_url_configured' => $isConfigured,
+    ];
+}
+
+/**
+ * 检测当前访问域名和 .env 配置域名是否一致
+ *
  * @return bool
  */
 function check_same_domain(): bool
 {
-    $request       = request();
-    $envDomain     = clean_domain(env('APP_URL'));
-
-    $host = $request->getHost();
-    $port = $request->getPort();
-
-    if (in_array($port, [80, 443])) {
-        $requestDomain = clean_domain($host);
-    } else {
-        $requestDomain = $host . ':' . $port;
-    }
-
-    return get_domain($envDomain) == get_domain($requestDomain);
+    return (bool) data_get(get_domain_compare_info(), 'same_domain', false);
 }
 
 /**

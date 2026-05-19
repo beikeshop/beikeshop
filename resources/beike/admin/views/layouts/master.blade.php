@@ -106,12 +106,23 @@
       bk.tableResponsive()
     }
 
-    @if (!check_same_domain())
+    @php($domainCompareInfo = get_domain_compare_info())
+    @php(
+      $domainMismatchMessage = data_get($domainCompareInfo, 'is_app_url_configured')
+        ? __('admin/common.error_host_app_url_detail', [
+            'current_domain' => data_get($domainCompareInfo, 'current_domain'),
+            'app_url_domain' => data_get($domainCompareInfo, 'app_url_domain') ?: data_get($domainCompareInfo, 'app_url'),
+          ])
+        : __('admin/common.error_host_app_url_empty', [
+            'current_domain' => data_get($domainCompareInfo, 'current_domain'),
+          ])
+    )
+    @if (!data_get($domainCompareInfo, 'same_domain'))
       setTimeout(() => {
-        layer.alert('{{ __('admin/common.error_host_app_url') }}', {
+        layer.alert(@json($domainMismatchMessage), {
           icon: 0,
           title: '{{__("common.text_hint")}}',
-          area: ['400px', '200px'],
+          area: ['480px'],
           btn: ['{{ __('common.confirm') }}']
         })
       }, 1000);

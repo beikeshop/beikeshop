@@ -119,6 +119,8 @@ return [
     'license_bought_s' => 'Subscribed authorization',
     'error_length_text'      => 'The input data for the field :key exceeds the maximum allowed length.',
     'error_host_app_url' => 'The current access domain name is inconsistent with the APP_URL in the .env file, please check the configuration.',
+    'error_host_app_url_detail' => 'The current access domain is inconsistent with APP_URL in the .env file. Please check the configuration.<br>Current access domain: <strong>:current_domain</strong><br>.env APP_URL domain: <strong>:app_url_domain</strong>',
+    'error_host_app_url_empty' => 'The current access domain is :current_domain, but APP_URL is not set in the .env file. Please configure APP_URL first.',
     'text_closed'            => 'Closed',
     'text_enabled'           => 'Enabled',
     'design_app_settings'    => 'App Settings',

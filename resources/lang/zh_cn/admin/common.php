@@ -121,6 +121,8 @@ return [
     'copyright_buy_text'     => '您还未购买，请购买授权！',
     'error_length_text'      => '字段 :key 的输入数据超出了允许的最大长度。',
     'error_host_app_url'     => '当前访问域名与 .env 文件中的 APP_URL 不一致，请检查配置。',
+    'error_host_app_url_detail' => '当前访问域名与 .env 文件中的 APP_URL 不一致，请检查配置。<br>当前访问域名：<strong>:current_domain</strong><br>.env APP_URL 域名：<strong>:app_url_domain</strong>',
+    'error_host_app_url_empty' => '当前访问域名为 :current_domain，但 .env 文件中的 APP_URL 未配置，请先在 .env 中设置 APP_URL。',
     'text_closed'            => '已关闭',
     'text_enabled'           => '已开启',
 ];

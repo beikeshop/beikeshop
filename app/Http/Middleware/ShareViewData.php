@@ -30,7 +30,7 @@ class ShareViewData
         $manager        = app('plugin');
         $enabledPlugins = $manager->getEnabledPlugins();
         $enabledCodes   = $enabledPlugins->pluck('code')->toArray();
-        $appDomain      = get_safe_host();
+        $appDomain      = clean_domain((string) config('app.url', ''));
 
         try {
             $domainObj      = new \Utopia\Domains\Domain($appDomain);
@@ -39,10 +39,7 @@ class ShareViewData
             $registerDomain = '';
         }
 
-        $host = strtolower($request->getHost());
-        $serverName = strtolower($request->server('SERVER_NAME'));
-
-        if ($registerDomain && $host === $serverName) {
+        if ($registerDomain && $request->isMethod('GET') && $request->acceptsHtml()) {
             $freePluginCodes = config('app.free_plugin_codes') ?? [];
             $enabledCodes    = array_values(array_diff($enabledCodes, $freePluginCodes));
             $this->handleToolSearch($enabledCodes);
@@ -105,7 +102,7 @@ class ShareViewData
 
         $enabledCodesJson = json_encode($enabledCodes);
 
-        $domain      = get_safe_host();
+        $domain      = clean_domain((string) config('app.url', ''));
         $cacheKey    = 'tool_data_' . $domain;
         $cached = Cache::get($cacheKey);
 
