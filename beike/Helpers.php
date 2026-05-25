@@ -1139,21 +1139,37 @@ function calculate_height_by_ratio($width): int
 
 /**
  * 安全获取用户访问的 Host
- * 优先使用 SERVER_NAME/SERVER_ADDR 等服务端可信变量，避免直接信任客户端传入的 Host 请求头
+ * 优先使用 app.url 配置，再使用 SERVER_NAME/SERVER_ADDR 等服务端可信变量，避免直接信任客户端传入的 Host 请求头
  *
  * @return string
  */
 function get_safe_host(): string
 {
-    // 1. 先从服务端变量取
-    $serverName = $_SERVER['SERVER_NAME'] ?? null;
-    $serverAddr = $_SERVER['SERVER_ADDR'] ?? null;
-
-    // 2. 允许的 Host 白名单（从配置文件读取）
+    // 允许的 Host 白名单（从配置文件读取）
     $allowedHosts = config('beike.allowed_hosts', []);
     $allowedHostsLower = array_map('strtolower', $allowedHosts);
 
-    // 3. 优先使用 SERVER_NAME（服务端配置的主机名）
+    // 1. 优先使用 app.url 配置（应用 canonical URL，支持多域名场景）
+    $appUrl = (string) config('app.url', '');
+    if ($appUrl !== '') {
+        $appHost = parse_url($appUrl, PHP_URL_HOST);
+        if (empty($appHost)) {
+            $appHost = explode('/', clean_domain($appUrl))[0] ?? '';
+            $appHost = explode(':', $appHost)[0];
+        }
+        if (!empty($appHost)) {
+            $hostLower = strtolower($appHost);
+            if (empty($allowedHosts) || in_array($hostLower, $allowedHostsLower, true)) {
+                return $appHost;
+            }
+        }
+    }
+
+    // 2. 再从服务端变量取
+    $serverName = $_SERVER['SERVER_NAME'] ?? null;
+    $serverAddr = $_SERVER['SERVER_ADDR'] ?? null;
+
+    // 3. 使用 SERVER_NAME（服务端配置的主机名）
     if (!empty($serverName)) {
         $nameLower = strtolower($serverName);
         if (empty($allowedHosts) || in_array($nameLower, $allowedHostsLower, true)) {
