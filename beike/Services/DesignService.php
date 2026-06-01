@@ -104,9 +104,6 @@ class DesignService
     private static function handleImgTextSlideShow($content): array
     {
         $images = $content['images'];
-        if (empty($images)) {
-            return $content;
-        }
 
         $content['images'] = self::handleImages($images);
         $content['scroll_text']['text']  = $content['scroll_text']['text'][locale()] ?? '';
