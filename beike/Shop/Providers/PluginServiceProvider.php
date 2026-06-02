@@ -265,6 +265,10 @@ class PluginServiceProvider extends ServiceProvider
             $componentName = Str::studly($builderName);
             $classBaseName = "\\Plugin\\{$pluginCode}\\Admin\\View\\DesignBuilders\\{$componentName}";
 
+            if (method_exists($classBaseName, 'registerDesignBuilder') && $classBaseName::registerDesignBuilder() === false) {
+                continue;
+            }
+
             if (! class_exists($classBaseName)) {
                 throw new Exception("请先定义自定义模板类 {$classBaseName}");
             }
