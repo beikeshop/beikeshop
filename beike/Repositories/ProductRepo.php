@@ -126,7 +126,10 @@ class ProductRepo
             $builder->where('brand_id', $brandId);
         }
 
-        $productIds = $filters['product_ids'] ?? [];
+        $productIds = array_values(array_filter(array_map('intval', (array) ($filters['product_ids'] ?? [])), function ($id) {
+            return $id > 0;
+        }));
+
         if ($productIds) {
             $builder->whereIn('products.id', $productIds);
 

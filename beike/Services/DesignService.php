@@ -37,6 +37,8 @@ class DesignService
                 $moduleData['view_path'] = '';
             }
 
+            $moduleData = self::sanitizeModuleData($moduleData);
+
             $modulesData[$index] = $moduleData;
         }
 
@@ -328,5 +330,36 @@ class DesignService
     private static function handleLink($type, $value): string
     {
         return type_route($type, $value);
+    }
+
+    private static function sanitizeModuleData(array $moduleData): array
+    {
+        $code    = $moduleData['code'] ?? '';
+        $content = $moduleData['content'] ?? [];
+
+        if (! is_array($content)) {
+            return $moduleData;
+        }
+
+        if ($code == 'brand') {
+            $content['brands'] = self::sanitizeIds($content['brands'] ?? []);
+        } elseif ($code == 'product') {
+            $content['products'] = self::sanitizeIds($content['products'] ?? []);
+        }
+
+        $moduleData['content'] = $content;
+
+        return $moduleData;
+    }
+
+    private static function sanitizeIds($ids): array
+    {
+        if (! is_array($ids)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('intval', $ids), function ($id) {
+            return $id > 0;
+        }));
     }
 }

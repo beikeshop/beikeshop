@@ -173,6 +173,10 @@ class BrandRepo
      */
     public static function getListByIds($ids)
     {
+        $ids = array_values(array_filter(array_map('intval', (array) $ids), function ($id) {
+            return $id > 0;
+        }));
+
         if (empty($ids)) {
             return [];
         }
