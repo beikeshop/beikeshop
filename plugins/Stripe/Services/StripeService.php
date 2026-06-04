@@ -1,10 +1,11 @@
 <?php
+
 /**
  * StripeService.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-08 16:09:21
  * @modified   2022-08-08 16:09:21
  */
@@ -49,7 +50,7 @@ class StripeService extends PaymentService
     {
         // web
         if (isset($creditCardData['token'])) {
-            $tokenId = $creditCardData['token'] ?? '';
+            $tokenId  = $creditCardData['token'] ?? '';
             $currency = $this->order->currency_code;
 
             if (! in_array($currency, self::ZERO_DECIMAL)) {
@@ -74,32 +75,32 @@ class StripeService extends PaymentService
             $charge = $this->stripeClient->charges->create($stripeChargeParameters);
 
             return $charge['paid'] && $charge['captured'];
-        } else {
-            // app
-            // 从返回的 client_secret 中提取 payment_intent_id
-            $clientSecret = $creditCardData['paymentIntent'] ?? '';
-            if (empty($clientSecret)) {
-                throw new \Exception('Invalid paymentIntent');
-            }
-
-            // 提取 payment_intent_id (前缀到第一个 '_secret' 之前的部分)
-            $paymentIntentId = substr($clientSecret, 0, strpos($clientSecret, '_secret'));
-
-            // 检查是否成功提取 payment_intent_id
-            if (empty($paymentIntentId)) {
-                throw new \Exception('Invalid paymentIntent ID');
-            }
-
-            // 根据 PaymentIntent ID 查询支付状态
-            $paymentIntent = $this->stripeClient->paymentIntents->retrieve($paymentIntentId);
-
-            // 检查支付状态
-            if ($paymentIntent->status === 'succeeded') {
-                return true;
-            }
-
-            return false;
         }
+        // app
+        // 从返回的 client_secret 中提取 payment_intent_id
+        $clientSecret = $creditCardData['paymentIntent'] ?? '';
+        if (empty($clientSecret)) {
+            throw new \Exception('Invalid paymentIntent');
+        }
+
+        // 提取 payment_intent_id (前缀到第一个 '_secret' 之前的部分)
+        $paymentIntentId = substr($clientSecret, 0, strpos($clientSecret, '_secret'));
+
+        // 检查是否成功提取 payment_intent_id
+        if (empty($paymentIntentId)) {
+            throw new \Exception('Invalid paymentIntent ID');
+        }
+
+        // 根据 PaymentIntent ID 查询支付状态
+        $paymentIntent = $this->stripeClient->paymentIntents->retrieve($paymentIntentId);
+
+        // 检查支付状态
+        if ($paymentIntent->status === 'succeeded') {
+            return true;
+        }
+
+        return false;
+
     }
 
     /**

@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Stripe 字段
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-06-29 21:16:23
  * @modified   2022-06-29 21:16:23
  */
@@ -25,6 +26,14 @@ return [
         'required'    => true,
         'rules'       => 'required|min:32',
         'description' => '密钥(Secret key)',
+    ],
+    [
+        'name'        => 'webhook_secret',
+        'label_key'   => 'common.webhook_secret',
+        'type'        => 'string',
+        'required'    => true,
+        'rules'       => 'required|min:32',
+        'description_key' => 'common.webhook_secret_desc',
     ],
     [
         'name'        => 'test_mode',

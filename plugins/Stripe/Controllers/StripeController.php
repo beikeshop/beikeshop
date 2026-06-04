@@ -1,10 +1,11 @@
 <?php
+
 /**
  * StripeController.php
  *
  * @copyright  2022 beikeshop.com - All Rights Reserved
  * @link       https://beikeshop.com
- * @author     Edward Yang <yangjin@guangda.work>
+ * @author     guangda <service@guangda.work>
  * @created    2022-08-08 15:58:36
  * @modified   2022-08-08 15:58:36
  */
@@ -19,6 +20,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Plugin\Stripe\Services\StripeService;
+use Stripe\Exception\SignatureVerificationException;
+use Stripe\Webhook;
 
 class StripeController extends Controller
 {
@@ -65,11 +68,27 @@ class StripeController extends Controller
         Log::info('====== Start Stripe Callback ======');
 
         try {
-            $requestData = $request->all();
+            $webhookSecret = plugin_setting('stripe.webhook_secret');
+            if (empty($webhookSecret)) {
+                Log::warning('Stripe webhook secret is not configured');
+
+                return json_fail('Stripe webhook secret is not configured', [], 500);
+            }
+
+            $payload   = $request->getContent();
+            $signature = $request->header('Stripe-Signature', '');
+            if (empty($signature)) {
+                Log::warning('Stripe callback missing signature header');
+
+                return json_fail('Invalid Stripe signature', [], 400);
+            }
+
+            $event       = Webhook::constructEvent($payload, $signature, $webhookSecret);
+            $requestData = $event->toArray();
             Log::info('Request data: ' . json_encode($requestData));
 
-            $type        = $requestData['type'];
-            $orderNumber = $request['data']['object']['metadata']['order_number'] ?? '';
+            $type        = $requestData['type'] ?? '';
+            $orderNumber = $requestData['data']['object']['metadata']['order_number'] ?? '';
             $order       = OrderRepo::getOrderByNumber($orderNumber);
 
             Log::info('Request type: ' . $type);
@@ -83,10 +102,14 @@ class StripeController extends Controller
 
             return json_success(trans('Stripe::common.capture_fail'));
 
+        } catch (SignatureVerificationException|\UnexpectedValueException $e) {
+            Log::warning('Stripe signature verification failed: ' . $e->getMessage());
+
+            return json_fail('Invalid Stripe signature', [], 400);
         } catch (\Exception $e) {
             Log::info('Stripe error: ' . $e->getMessage());
 
-            return json_success($e->getMessage());
+            return json_fail($e->getMessage(), [], 500);
         }
     }
 }
