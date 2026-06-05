@@ -15,4 +15,7 @@ use Plugin\Paypal\Controllers\PaypalController;
 Route::group(['prefix' => 'paypal'], function () {
     Route::post('/create', [PaypalController::class, 'create']);
     Route::post('/capture', [PaypalController::class, 'capture']);
+    Route::match(['get', 'post'], '/nvp/return', [PaypalController::class, 'nvpReturn'])->name('paypal.nvp.return');
+    Route::match(['get', 'post'], '/nvp/cancel', [PaypalController::class, 'nvpCancel'])->name('paypal.nvp.cancel');
+    Route::post('/nvp/notify', [PaypalController::class, 'nvpNotify'])->name('paypal.nvp.notify');
 });

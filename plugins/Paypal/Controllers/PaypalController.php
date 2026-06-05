@@ -22,7 +22,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 use Plugin\Paypal\Services\PaypalService;
 
 class PaypalController
@@ -200,14 +199,7 @@ class PaypalController
 
     private function getCallbackUrl(string $action, string $orderNumber): string
     {
-        $routeName  = 'paypal.nvp.' . $action;
-        $parameters = ['orderNumber' => $orderNumber];
-
-        if (Route::has($routeName)) {
-            return route($routeName, $parameters);
-        }
-
-        return url('/paypal/nvp/' . $action) . '?' . http_build_query($parameters);
+        return shop_route('paypal.nvp.' . $action, ['order_number' => $orderNumber]);
     }
 
     private function getOrderNumberFromData(array $data, Request $request): string
@@ -232,23 +224,16 @@ class PaypalController
 
     private function getSuccessRedirectUrl(string $orderNumber): string
     {
-        return $this->buildRedirectUrl('/checkout/success', $orderNumber);
+        return shop_route('checkout.success', ['order_number' => $orderNumber]);
     }
 
     private function getFailureRedirectUrl(string $orderNumber): string
     {
-        return $this->buildRedirectUrl('/checkout/payment', $orderNumber);
-    }
-
-    private function buildRedirectUrl(string $path, string $orderNumber): string
-    {
-        $url = url($path);
-
         if ($orderNumber !== '') {
-            $url .= '?' . http_build_query(['orderNumber' => $orderNumber]);
+            return shop_route('orders.pay', ['number' => $orderNumber]);
         }
 
-        return $url;
+        return shop_route('checkout.index');
     }
 
     private function redirectWithMessage(Request $request, string $url, string $key, string $message): RedirectResponse

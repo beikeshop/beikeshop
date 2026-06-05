@@ -12,7 +12,6 @@
 namespace Plugin\Paypal\Services;
 
 use Beike\Shop\Services\PaymentService;
-use Illuminate\Support\Facades\Route;
 use Srmklive\PayPal\Services\PayPal;
 
 class PaypalService extends PaymentService
@@ -104,7 +103,7 @@ class PaypalService extends PaymentService
         return [
             'apiMode'     => self::API_MODE_REST,
             'clientId'    => $clientId,
-            'currency'    => $this->order->currency_code,
+            'currency'    => $this->getRestCurrency(),
             'environment' => $mode,
             'orderId'     => $paypalOrder['id'],
             'userAction'  => 'paynow',  //'paynow/continue'
@@ -133,7 +132,7 @@ class PaypalService extends PaymentService
             'purchase_units' => [
                 [
                     'amount' => [
-                        'currency_code' => $this->getOrderCurrency(),
+                        'currency_code' => $this->getRestCurrency(),
                         'value'         => $total,
                     ],
                     'description' => $this->getOrderDescription(),
@@ -394,13 +393,22 @@ class PaypalService extends PaymentService
 
     private function buildCallbackUrl(string $routeName, string $path, string $orderNumber): string
     {
-        $parameters = ['orderNumber' => $orderNumber];
+        $parameters = ['order_number' => $orderNumber];
 
-        if (Route::has($routeName)) {
-            return route($routeName, $parameters);
+        if (function_exists('shop_route')) {
+            return shop_route($routeName, $parameters);
+        }
+
+        if (app('router')->has('shop.' . $routeName)) {
+            return route('shop.' . $routeName, $parameters);
         }
 
         return url($path) . '?' . http_build_query($parameters);
+    }
+
+    private function getRestCurrency(): string
+    {
+        return strtoupper((string) system_setting('base.currency'));
     }
 
     private function getOrderCurrency(): string

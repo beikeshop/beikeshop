@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Plugin\Paypal\Controllers\PaypalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +17,3 @@ use Plugin\Paypal\Controllers\PaypalController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::match(['get', 'post'], '/paypal/nvp/return', [PaypalController::class, 'nvpReturn'])->name('paypal.nvp.return');
-Route::match(['get', 'post'], '/paypal/nvp/cancel', [PaypalController::class, 'nvpCancel'])->name('paypal.nvp.cancel');
-Route::post('/paypal/nvp/notify', [PaypalController::class, 'nvpNotify'])->name('paypal.nvp.notify');
