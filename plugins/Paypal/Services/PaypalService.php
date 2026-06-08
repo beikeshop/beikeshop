@@ -17,6 +17,7 @@ use Srmklive\PayPal\Services\PayPal;
 class PaypalService extends PaymentService
 {
     private const API_MODE_REST = 'rest';
+
     private const API_MODE_NVP = 'nvp';
 
     public ?PayPal $paypalClient = null;
@@ -49,11 +50,11 @@ class PaypalService extends PaymentService
             'mode'    => $mode,
             'sandbox' => [
                 'client_id'     => $paypalSetting['sandbox_client_id'] ?? '',
-                'client_secret' => $paypalSetting['sandbox_secret'] ?? '',
+                'client_secret' => $paypalSetting['sandbox_secret']    ?? '',
             ],
             'live' => [
                 'client_id'     => $paypalSetting['live_client_id'] ?? '',
-                'client_secret' => $paypalSetting['live_secret'] ?? '',
+                'client_secret' => $paypalSetting['live_secret']    ?? '',
             ],
             'payment_action' => 'Sale',
             'currency'       => system_setting('base.currency'),
@@ -85,8 +86,8 @@ class PaypalService extends PaymentService
                 'clientId'    => '',
                 'currency'    => $this->getOrderCurrency(),
                 'environment' => $mode,
-                'orderId'     => $paypalOrder['id'] ?? null,
-                'token'       => $paypalOrder['token'] ?? null,
+                'orderId'     => $paypalOrder['id']           ?? null,
+                'token'       => $paypalOrder['token']        ?? null,
                 'approvalUrl' => $paypalOrder['approval_url'] ?? null,
                 'userAction'  => 'paynow',
             ];
@@ -103,7 +104,7 @@ class PaypalService extends PaymentService
         return [
             'apiMode'     => self::API_MODE_REST,
             'clientId'    => $clientId,
-            'currency'    => $this->getRestCurrency(),
+            'currency'    => $this->getOrderCurrency(),
             'environment' => $mode,
             'orderId'     => $paypalOrder['id'],
             'userAction'  => 'paynow',  //'paynow/continue'
@@ -132,7 +133,7 @@ class PaypalService extends PaymentService
             'purchase_units' => [
                 [
                     'amount' => [
-                        'currency_code' => $this->getRestCurrency(),
+                        'currency_code' => $this->getOrderCurrency(),
                         'value'         => $total,
                     ],
                     'description' => $this->getOrderDescription(),
@@ -358,9 +359,11 @@ class PaypalService extends PaymentService
         return is_array($paypalSetting) ? $paypalSetting : [];
     }
 
-    private function getPaypalEnvironment(?array $paypalSetting = null): string
+    private function getPaypalEnvironment(array $paypalSetting = []): string
     {
-        $paypalSetting = $paypalSetting ?? $this->getPaypalSetting();
+        if ($paypalSetting === []) {
+            $paypalSetting = $this->getPaypalSetting();
+        }
 
         return ! empty($paypalSetting['sandbox_mode']) ? 'sandbox' : 'live';
     }
@@ -404,11 +407,6 @@ class PaypalService extends PaymentService
         }
 
         return url($path) . '?' . http_build_query($parameters);
-    }
-
-    private function getRestCurrency(): string
-    {
-        return strtoupper((string) system_setting('base.currency'));
     }
 
     private function getOrderCurrency(): string
