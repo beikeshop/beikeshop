@@ -11,6 +11,18 @@
 
 return [
     [
+        'name'        => 'api_mode',
+        'label_key'   => 'setting.api_mode',
+        'type'        => 'select',
+        'value'       => 'rest',
+        'options'     => [
+            ['value' => 'rest', 'label_key' => 'setting.api_mode_rest'],
+            ['value' => 'nvp', 'label_key' => 'setting.api_mode_nvp'],
+        ],
+        'required'    => true,
+        'description_key' => 'setting.api_mode_desc',
+    ],
+    [
         'name'        => 'sandbox_client_id',
         'label'       => 'Sandbox Client ID',
         'type'        => 'string',
@@ -48,5 +60,47 @@ return [
         ],
         'required'    => true,
         'description' => '',
+    ],
+    [
+        'name'        => 'sandbox_api_username',
+        'label_key'   => 'setting.sandbox_api_username',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
+    ],
+    [
+        'name'        => 'sandbox_api_password',
+        'label_key'   => 'setting.sandbox_api_password',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
+    ],
+    [
+        'name'        => 'sandbox_api_signature',
+        'label_key'   => 'setting.sandbox_api_signature',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
+    ],
+    [
+        'name'        => 'live_api_username',
+        'label_key'   => 'setting.live_api_username',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
+    ],
+    [
+        'name'        => 'live_api_password',
+        'label_key'   => 'setting.live_api_password',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
+    ],
+    [
+        'name'        => 'live_api_signature',
+        'label_key'   => 'setting.live_api_signature',
+        'type'        => 'string',
+        'required'    => false,
+        'description_key' => 'setting.nvp_credentials_desc',
     ],
 ];

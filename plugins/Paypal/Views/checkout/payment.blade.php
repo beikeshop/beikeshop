@@ -1,6 +1,34 @@
 <!-- Set up a container element for the button -->
 <div id="paypal-button-container" class="mt-4"></div>
 
+@if(($payment_setting['api_mode'] ?? 'rest') == 'nvp')
+<script>
+    const token = $('meta[name="csrf-token"]').attr('content')
+    fetch('/paypal/create', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-Token': token
+        },
+        body: JSON.stringify({
+            orderNumber: "{{$order->number}}",
+        })
+    }).then(function (res) {
+        return res.json();
+    }).then(function (orderData) {
+        if (orderData.approval_url) {
+            location = orderData.approval_url;
+            return;
+        }
+
+        layer.alert(orderData.message || 'PayPal payment failed.', {
+            title: '{{ __('common.text_hint') }}',
+            closeBtn: 0,
+            area: ['400px', 'auto'],
+            btn: ['{{ __('common.confirm') }}']
+        });
+    });
+</script>
+@else
 <!-- Include the PayPal JavaScript SDK -->
 @if($payment_setting['sandbox_mode'])
     <script src="https://www.paypal.com/sdk/js?client-id={{ plugin_setting('paypal.sandbox_client_id') }}&currency={{ system_setting('base.currency') }}"></script>
@@ -67,3 +95,4 @@
         }
     }).render('#paypal-button-container');
 </script>
+@endif
