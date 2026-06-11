@@ -21,8 +21,6 @@
   });
 
   window.addEventListener('message', function (event) {
-    if (event.origin != '{{ beike_url() }}') return;
-
     // token 逻辑，如果官网那边传回来了 token，说明该用户在登录插件市场 这时候需要更新 token
     if (event.data.type == 'set_token' && event.data.data.token != developerToken) {
       $http.post('{{ admin_route('settings.store_token') }}', {developer_token: event.data.data.token}).then((res) => {

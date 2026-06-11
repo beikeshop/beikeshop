@@ -30,8 +30,6 @@
       const self = this;
 
       window.addEventListener('message', function (event) {
-        if (event.origin != '{{ beike_url() }}') return;
-
         if (event.data.type == 'plugin_show' && event.data.data.code) {
           location.href = '{{ admin_route('marketing.index') }}/' + event.data.data.code;
         }
