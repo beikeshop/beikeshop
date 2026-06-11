@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CheckoutService.php
  *
@@ -144,7 +145,7 @@ class CheckoutService
         $weight           = 0;
         $selectedProducts = $this->selectedProducts;
         foreach ($selectedProducts as $product) {
-            $weight += Weight::getInstance()->convert(($product->sku->weight ?? $product->product['weight']) * $product['quantity'], $product->product['weight_class']);
+            $weight += Weight::getInstance()->convert(($product->sku->weight ?: $product->product['weight']) * $product['quantity'], $product->product['weight_class']);
         }
 
         return $weight;
@@ -160,13 +161,15 @@ class CheckoutService
         if ($this->customer) {
             if ($this->shippingRequired()) {
                 $shippingAddressId = $current['shipping_address_id'];
-                if (empty(Address::query()->find($shippingAddressId))) {
+                $shippingAddress = Address::query()->find($shippingAddressId);
+                if (empty($shippingAddress) || $shippingAddress->customer_id != $this->customer->id) {
                     throw new \Exception(trans('shop/carts.invalid_shipping_address'));
                 }
             }
 
             $paymentAddressId = $current['payment_address_id'];
-            if (empty(Address::query()->find($paymentAddressId))) {
+            $paymentAddress = Address::query()->find($paymentAddressId);
+            if (empty($paymentAddress) || $paymentAddress->customer_id != $this->customer->id) {
                 throw new \Exception(trans('shop/carts.invalid_payment_address'));
             }
         } else {
@@ -196,12 +199,24 @@ class CheckoutService
 
     private function updateShippingAddressId($shippingAddressId)
     {
+        if ($this->customer) {
+            $shippingAddress = Address::query()->find($shippingAddressId);
+            if (empty($shippingAddress) || $shippingAddress->customer_id != $this->customer->id) {
+                throw new \Exception(trans('shop/carts.invalid_shipping_address'));
+            }
+        }
         $this->cart->update(['shipping_address_id' => $shippingAddressId]);
         $this->cart->load('shippingAddress');
     }
 
     private function updatePaymentAddressId($paymentAddressId)
     {
+        if ($this->customer) {
+            $paymentAddress = Address::query()->find($paymentAddressId);
+            if (empty($paymentAddress) || $paymentAddress->customer_id != $this->customer->id) {
+                throw new \Exception(trans('shop/carts.invalid_payment_address'));
+            }
+        }
         $this->cart->update(['payment_address_id' => $paymentAddressId]);
         $this->cart->load('paymentAddress');
     }
