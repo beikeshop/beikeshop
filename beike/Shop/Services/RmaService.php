@@ -26,7 +26,11 @@ class RmaService
      */
     public static function createFromShop($data): Model|Builder
     {
-        $orderProduct = OrderProductRepo::find($data['order_product_id']);
+        $orderProduct = self::findCustomerOrderProduct($data['order_product_id']);
+        if (!$orderProduct) {
+            abort(404);
+        }
+
         $customer     = current_customer();
         $params       = [
             'order_id'         => $orderProduct->order->id,
@@ -52,5 +56,17 @@ class RmaService
         $rma->notifyAlertCreateRma();
 
         return $rma;
+    }
+
+    public static function findCustomerOrderProduct($orderProductId)
+    {
+        $orderProduct = OrderProductRepo::find($orderProductId);
+        $customer     = current_customer();
+
+        if (!$orderProduct || !$customer || $orderProduct->order->customer_id != $customer->id) {
+            return null;
+        }
+
+        return $orderProduct;
     }
 }

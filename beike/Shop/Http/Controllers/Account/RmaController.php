@@ -74,6 +74,11 @@ class RmaController extends Controller
 
     public function store(RmaRequest $request)
     {
+        $orderProduct = RmaService::findCustomerOrderProduct($request->input('order_product_id'));
+        if (!$orderProduct) {
+            return abort(404);
+        }
+
         $rma = RmaService::createFromShop($request->all());
 
         return redirect()->to(shop_route('account.rma.index'))->with('success', trans('common.success'));
