@@ -431,6 +431,9 @@ class ProductRepo
         if (empty($productIds)) {
             return [];
         }
+
+        $productIds = array_map('intval', $productIds);
+
         $products = Product::query()
             ->with(['description'])
             ->whereIn('id', $productIds)
