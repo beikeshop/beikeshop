@@ -58,6 +58,9 @@ class CheckoutController extends Controller
     {
         try {
             $data = (new CheckoutService)->confirm();
+            if (! current_customer()) {
+                session()->push('guest_order_numbers', $data->number);
+            }
 
             return hook_filter('checkout.confirm.data', $data);
         } catch (\Exception $e) {
@@ -71,6 +74,10 @@ class CheckoutController extends Controller
 
         $customer = current_customer();
         $order    = OrderRepo::getOrderByNumber($order_number, $customer);
+        if (empty($customer) && ! in_array((string) $order_number, array_map('strval', session('guest_order_numbers', [])), true)) {
+            abort(404);
+        }
+
         $data     = hook_filter('account.order.show.data', ['order' => $order, 'html_items' => []]);
 
         return view('checkout/success', $data);

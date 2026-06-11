@@ -9,7 +9,7 @@
     <h6 class="card-title">{{ __('shop/account/order_info.order_details') }}</h6>
     <div>
       @if ($order->status == 'unpaid')
-        <a href="{{ shop_route('orders.pay', $order->number) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account/order_info.to_pay') }}</a>
+        <a href="{{ shop_route('orders.pay', ['number' => $order->number, 'email' => request('email')]) }}" class="btn btn-primary btn-sm nowrap">{{ __('shop/account/order_info.to_pay') }}</a>
         <button class="btn btn-outline-secondary btn-sm cancel-order" type="button">{{ __('shop/account/order_info.cancel') }}</button>
       @endif
       @if ($order->status == 'shipped')
@@ -273,14 +273,14 @@
 @push('add-scripts')
   <script>
     $('.shipped-ed').click(function(event) {
-      $http.post('orders/{{ $order->number }}/complete').then((res) => {
+      $http.post('orders/{{ $order->number }}/complete', {email: @json(request('email'))}).then((res) => {
         layer.msg(res.message)
         window.location.reload()
       })
     });
 
     $('.cancel-order').click(function(event) {
-      $http.post('orders/{{ $order->number }}/cancel').then((res) => {
+      $http.post('orders/{{ $order->number }}/cancel', {email: @json(request('email'))}).then((res) => {
         layer.msg(res.message)
         window.location.reload()
       })

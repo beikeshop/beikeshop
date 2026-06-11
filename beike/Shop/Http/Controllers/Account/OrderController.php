@@ -70,6 +70,10 @@ class OrderController extends Controller
         try {
             $customer = current_customer();
             $order    = OrderRepo::getOrderByNumber($number, $customer);
+            if (empty($customer) && ! $this->isGuestOrderAuthorized($order, $number, $request->get('email'))) {
+                throw new \Exception(trans('shop/order.invalid_order'));
+            }
+
             hook_action('account.order.pay.before', ['order' => $order]);
 
             return (new PaymentService($order))->pay();
@@ -90,6 +94,9 @@ class OrderController extends Controller
     {
         $customer = current_customer();
         $order    = OrderRepo::getOrderByNumber($number, $customer);
+        if (empty($customer) && ! $this->isGuestOrderAuthorized($order, $number, $request->get('email'))) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
         if (empty($order)) {
             throw new \Exception(trans('shop/order.invalid_order'));
         }
@@ -111,6 +118,9 @@ class OrderController extends Controller
     {
         $customer = current_customer();
         $order    = OrderRepo::getOrderByNumber($number, $customer);
+        if (empty($customer) && ! $this->isGuestOrderAuthorized($order, $number, $request->get('email'))) {
+            throw new \Exception(trans('shop/order.invalid_order'));
+        }
         if (empty($order)) {
             throw new \Exception(trans('shop/order.invalid_order'));
         }
@@ -118,5 +128,18 @@ class OrderController extends Controller
         StateMachineService::getInstance($order)->changeStatus(StateMachineService::CANCELLED, $comment);
 
         return json_success(trans('shop/account/order.cancelled'));
+    }
+
+    private function isGuestOrderAuthorized($order, $number, $email = ''): bool
+    {
+        if (empty($order) || $order->customer_id) {
+            return false;
+        }
+
+        if (in_array((string) $number, array_map('strval', session('guest_order_numbers', [])), true)) {
+            return true;
+        }
+
+        return $email && $order->email === trim((string) $email);
     }
 }
