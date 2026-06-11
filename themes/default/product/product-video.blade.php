@@ -54,7 +54,7 @@
     </script>
   @else
     <script>
-      const ytVideoIframe = '{!! $product['video'] !!}';
+      const ytVideoIframe = @json($product['video']);
       $('.open-video').removeClass('d-none');
       $('#product-video').html(ytVideoIframe)
 
