@@ -21,6 +21,7 @@ class Http extends PendingRequest
         '/api/v1/website/check_token',
         '/api/v1/token/bootstrap',
         '/api/v1/version',
+        '/api/v1/licensed_pro',
     ];
 
     private const FLEXIBLE_SIGNATURE_PATHS = [
