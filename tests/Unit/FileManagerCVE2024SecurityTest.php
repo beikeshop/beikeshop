@@ -144,6 +144,29 @@ class FileManagerCVE2024SecurityTest extends TestCase
     }
 
     /**
+     * 测试 FileManager 操作必须限制在 catalog 目录内
+     */
+    public function test_file_manager_operations_are_confined_to_catalog()
+    {
+        $cases = [
+            fn () => $this->fileManagerService->moveFiles(['../private-canary.txt'], '/'),
+            fn () => $this->fileManagerService->moveDirectory('../outside', '/'),
+            fn () => $this->fileManagerService->createDirectory('../outside'),
+            fn () => $this->fileManagerService->deleteDirectoryOrFile('../../delete-canary.txt'),
+            fn () => $this->fileManagerService->zipFolder('../outside'),
+        ];
+
+        foreach ($cases as $case) {
+            try {
+                $case();
+                $this->fail('Expected exception for path outside catalog');
+            } catch (\Exception $e) {
+                $this->assertStringContainsString('Invalid path', $e->getMessage());
+            }
+        }
+    }
+
+    /**
      * 测试空字节注入防护
      */
     public function test_null_byte_injection_protection()
