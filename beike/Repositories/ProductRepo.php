@@ -30,6 +30,11 @@ class ProductRepo
 {
     private static $allProductsWithName;
 
+    private static function getLikeOperator(): string
+    {
+        return getDBDriver() === 'pgsql' ? 'ilike' : 'like';
+    }
+
     /**
      * 获取商品详情
      */
@@ -88,7 +93,8 @@ class ProductRepo
      */
     public static function getBuilder(array $filters = []): Builder
     {
-        $driver = getDBDriver();
+        $driver       = getDBDriver();
+        $likeOperator = self::getLikeOperator();
 
         $builder = Product::query()->with(['description', 'skus', 'masterSku', 'attributes', 'brand']);
 
@@ -159,12 +165,12 @@ class ProductRepo
         }
 
         if (isset($filters['sku']) || isset($filters['model'])) {
-            $builder->whereHas('skus', function ($query) use ($filters) {
+            $builder->whereHas('skus', function ($query) use ($filters, $likeOperator) {
                 if (isset($filters['sku'])) {
-                    $query->where('sku', 'like', "%{$filters['sku']}%");
+                    $query->where('sku', $likeOperator, "%{$filters['sku']}%");
                 }
                 if (isset($filters['model'])) {
-                    $query->where('model', 'like', "%{$filters['model']}%");
+                    $query->where('model', $likeOperator, "%{$filters['model']}%");
                 }
             });
         }
@@ -182,7 +188,7 @@ class ProductRepo
         }
 
         if (isset($filters['name'])) {
-            $builder->where('pd.name', 'like', "%{$filters['name']}%");
+            $builder->where('pd.name', $likeOperator, "%{$filters['name']}%");
         }
 
         $keyword = trim($filters['keyword'] ?? '');
@@ -190,19 +196,19 @@ class ProductRepo
             $keywords = explode(' ', $keyword);
             $keywords = array_unique($keywords);
             $keywords = array_diff($keywords, ['']);
-            $builder->where(function (Builder $query) use ($keywords) {
-                $query->whereHas('skus', function (Builder $query) use ($keywords) {
+            $builder->where(function (Builder $query) use ($keywords, $likeOperator) {
+                $query->whereHas('skus', function (Builder $query) use ($keywords, $likeOperator) {
                     $keywordFirst = array_shift($keywords);
-                    $query->where('sku', 'like', "%{$keywordFirst}%")
-                        ->orWhere('model', 'like', "%{$keywordFirst}%");
+                    $query->where('sku', $likeOperator, "%{$keywordFirst}%")
+                        ->orWhere('model', $likeOperator, "%{$keywordFirst}%");
 
                     foreach ($keywords as $keyword) {
-                        $query->orWhere('sku', 'like', "%{$keyword}%")
-                            ->orWhere('model', 'like', "%{$keyword}%");
+                        $query->orWhere('sku', $likeOperator, "%{$keyword}%")
+                            ->orWhere('model', $likeOperator, "%{$keyword}%");
                     }
                 });
                 foreach ($keywords as $keyword) {
-                    $query->orWhere('pd.name', 'like', "%{$keyword}%");
+                    $query->orWhere('pd.name', $likeOperator, "%{$keyword}%");
                 }
             });
         }
@@ -348,9 +354,10 @@ class ProductRepo
 
     public static function autocomplete($name)
     {
+        $likeOperator = self::getLikeOperator();
         $products = Product::query()->with('description')
-            ->whereHas('description', function ($query) use ($name) {
-                $query->where('name', 'like', "%{$name}%");
+            ->whereHas('description', function ($query) use ($name, $likeOperator) {
+                $query->where('name', $likeOperator, "%{$name}%");
             })->orderByDesc('id')->limit(30)->get();
 
         return \Beike\Admin\Http\Resources\ProductSimple::collection($products)->jsonSerialize();
