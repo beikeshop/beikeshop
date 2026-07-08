@@ -1,16 +1,38 @@
 {
-    "php_ext":"opcache,ioncube",
-    "chmod":[
-        {"mode":755,"path":"/storage"},
-        {"mode":755,"path":"/bootstrap/cache"},
-        {"mode":755,"path":"/public/cache"}
+    "php_version": "8.2",
+    "mysql_version": "8.0",
+    "nginx_version": "1.24",
+    "php_ext": "opcache,fileinfo,bcmath,ctype,curl,dom,json,mbstring,openssl,pdo,pdo_mysql,tokenizer,xml",
+    "enable_functions": ["putenv", "proc_open", "popen", "shell_exec", "exec", "system", "passthru", "symlink"],
+    "chmod": [
+        {
+            "mode": 755,
+            "path": "/storage"
+        },
+        {
+            "mode": 755,
+            "path": "/bootstrap/cache"
+        },
+        {
+            "mode": 755,
+            "path": "/public/cache"
+        },
+        {
+            "mode": 755,
+            "path": "/public/plugin"
+        }
     ],
-    "success_url":"/index.php",
-    "php_versions":"80,81,82",
-    "db_config":"",
-    "admin_username":"",
-    "admin_password":"",
-    "run_path":"/public",
-    "remove_file":["/.user.ini"],
-    "enable_functions":["putenv"]
+    "remove_file": ["/.user.ini"],
+    "run_path": "/public",
+    "rewrite_type": "laravel",
+    "success_url": "/index.php",
+    "admin_email": "admin@{{DOMAIN}}",
+    "admin_password": "{{AUTO}}",
+    "admin_locale": "zh_cn",
+    "app_timezone": "PRC",
+    "app_force_https": false,
+    "trust_hosts_enabled": true,
+    "queue_connection": "database",
+    "cache_driver": "file",
+    "session_driver": "file"
 }
