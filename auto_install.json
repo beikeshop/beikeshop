@@ -2,8 +2,8 @@
     "php_version": "8.2",
     "mysql_version": "8.0",
     "nginx_version": "1.24",
-    "php_ext": "opcache,fileinfo,bcmath,ctype,curl,dom,json,mbstring,openssl,pdo,pdo_mysql,tokenizer,xml",
-    "enable_functions": ["putenv", "proc_open", "popen", "shell_exec", "exec", "system", "passthru", "symlink"],
+    "php_ext": "fileinfo,bcmath,ctype,curl,dom,json,mbstring,openssl,pdo,pdo_mysql,tokenizer,xml",
+    "enable_functions": ["proc_open"],
     "chmod": [
         {
             "mode": 755,
