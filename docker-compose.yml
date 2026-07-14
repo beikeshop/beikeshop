@@ -1,0 +1,63 @@
+services:
+  # Nginx + PHP-FPM (默认 Web 服务器)
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME:-beikeshop}-nginx
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ${APP_CODE_PATH:-./beikeshop}:/var/www/html
+      - ./docker/nginx/nginx-site.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - mysql
+    networks:
+      - beikeshop-network
+    profiles:
+      - nginx
+
+  # Apache + mod_php (可选 Web 服务器)
+  apache:
+    build:
+      context: ./docker/apache
+      dockerfile: Dockerfile
+    container_name: ${PROJECT_NAME:-beikeshop}-apache
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+    volumes:
+      - ${APP_CODE_PATH:-./beikeshop}:/var/www/html
+      - ./docker/apache/beikeshop.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - mysql
+    networks:
+      - beikeshop-network
+    profiles:
+      - apache
+
+  # MySQL 数据库
+  mysql:
+    image: ${MYSQL_IMAGE:-mysql:8.0}
+    container_name: ${PROJECT_NAME:-beikeshop}-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-beikeshop}
+      MYSQL_USER: ${DB_USER:-beikeshop}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-beikeshop}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - beikeshop-network
+    command: --default-authentication-plugin=mysql_native_password
+
+networks:
+  beikeshop-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

@@ -24,6 +24,7 @@ use Beike\Admin\View\Components\Header;
 use Beike\Admin\View\Components\NoData;
 use Beike\Admin\View\Components\Sidebar;
 use Beike\Console\Commands\AddCountryContinent;
+use Beike\Console\Commands\BeikeShopInstall;
 use Beike\Console\Commands\ChangeRootPassword;
 use Beike\Console\Commands\FetchCurrencyRate;
 use Beike\Console\Commands\GenerateDatabaseDict;
@@ -100,6 +101,7 @@ class AdminServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 AddCountryContinent::class,
+                BeikeShopInstall::class,
                 ChangeRootPassword::class,
                 FetchCurrencyRate::class,
                 GenerateDatabaseDict::class,
