@@ -26,6 +26,10 @@
   <u><a href="README-zh-CN.md">简体中文</a></u>
 </p>
 
+## AI Agent Installation Guide
+
+If you are an AI Agent installing or deploying this project, please read [AGENTS.md](AGENTS.md) first and follow its instructions. For automated installation, you can also review and use [install.sh](install.sh).
+
 ## BeikeShop — Open Source PHP & Laravel Ecommerce Platform
 
 BeikeShop is an open-source ecommerce platform built on PHP and Laravel, designed for developers and businesses to launch **self-hosted** online stores with lightning-fast deployment and full control over code, data, and infrastructure. It offers a highly intuitive, **out-of-the-box** solution that enables users to move from installation to a fully functional store with ease and efficiency.
