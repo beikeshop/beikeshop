@@ -76,7 +76,7 @@ detect_bt_php_runtime() {
     local php_bin="${BT_PHP_BIN:-/www/server/php/82/bin/php}"
 
     if [ ! -x "$php_bin" ]; then
-        php_bin=$(find /www/server/php -maxdepth 2 -path '*/bin/php' 2>/dev/null | sort -V | tail -1)
+        php_bin=$(find /www/server/php -maxdepth 3 -path '*/bin/php' 2>/dev/null | sort -V | tail -1)
     fi
 
     if [ -z "$php_bin" ] || [ ! -x "$php_bin" ]; then
